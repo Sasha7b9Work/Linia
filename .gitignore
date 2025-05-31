@@ -1,0 +1,5 @@
+archive.zip
+
+sources/generated/*
+sources/installer/win/files/*
+sources/ThirdParty/wxWidgets/generated/*
