@@ -3,26 +3,6 @@
 #include "Settings/Value.h"
 
 
-struct Password
-{
-    uint64   value;
-    pchar    key;               // Для сохранения в файле
-    wxString ToString() const;
-};
-
-
-struct Key128
-{
-    BitSet128 bitset;
-};
-
-
-struct BaudRateOSDP
-{
-    static uint FromIndexCombobox(int index);
-};
-
-
 // Настройки прибора
 namespace SET
 {
@@ -139,22 +119,3 @@ namespace SET
     }
 
 };
-
-
-struct Settings
-{
-    // Карта
-    Password password_card;     // Текущий пароль карты
-
-    // Пароль
-    Password password_master;   // Пароль к мастер-карте            старый
-    Password password_current;  // Действующий пароль системы       новый
-
-//    Password key_crypto_OSDP;   // Пароль на шифрование OSDP
-
-    Key128 keysSL0[5];  // 9001...90004
-};
-
-
-extern Settings gset;
-extern const Password password_factory;  // Пароль к мастер-карте - Заводской пароль

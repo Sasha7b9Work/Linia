@@ -7,10 +7,6 @@
 #pragma warning(pop)
 
 
-class Notebook;
-class CommonPanel;
-
-
 class MainWindow : public wxFrame
 {
 public:
@@ -33,9 +29,6 @@ public:
 private:
 
     wxToolBar *toolBar = nullptr;
-    Notebook *notebook = nullptr;                 // There will be pages for working with files
-
-    CommonPanel *panel = nullptr;
 
     void OnEventKeyHook(wxKeyEvent &);
 

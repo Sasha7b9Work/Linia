@@ -2,42 +2,6 @@
 #include "defines.h"
 #include "Settings/Settings.h"
 #include "Utils/Configurator.h"
-#include "Panels/Notebook/PageUser/PageUser.h"
-#include "Panels/Notebook/PageMaster/PageMaster.h"
-#include "Panels/Notebook/PageMaster/OfflineModeDialog.h"
-#include "Panels/Notebook/PageMaster/OSDPModeDialog.h"
-#include "Panels/Notebook/PageMaster/AntiBreakDialog.h"
-#include "Panels/Notebook/PageMaster/ExtendedSettingsDialog.h"
-#include "Panels/Notebook/PageMaster/WiegandDialog.h"
-#include "Panels/Dialogs/PasswordExtraDialog.h"
-#include "Panels/Dialogs/SettingsSerialPort.h"
-#include "Panels/Notebook/PageMaster/ModeEKODialog.h"
-#include "Panels/Notebook/PageMaster/ChooseSoundsDialog.h"
-
-
-namespace SS
-{
-    static void LoadSave(bool load, bool save);
-}
-
-
-uint BaudRateOSDP::FromIndexCombobox(int index)
-{
-    if (index == 0)
-    {
-        return 9600;
-    }
-    else if (index == 1)
-    {
-        return 19200;
-    }
-    else if (index == 2)
-    {
-        return 38400;
-    }
-
-    return 9600;
-}
 
 
 namespace SET
@@ -185,86 +149,20 @@ namespace SET
     {
         Config::SetFile(file_path);
 
-        SS::LoadSave(true, false);
-
-        mode_eco.LoadToControl(ModeEKODialog::self, ID_CHECKBUTTON_MODE_EKO);
-
-        GUI::serial_port_auto_find.LoadToControl(SettingsSerialPort::self, ID_CHECKBUTTON_COMPORT_AUTOFIND);
-
-        MASTER::color_green.Load(PageMaster::self->buttonGREEN);
-        MASTER::color_red.Load(PageMaster::self->buttonRED);
-
-        WIEGAND::full_guid.LoadToControl(WiegandDialog::self, ID_CHECKBOX_WIEGAND_FULL_GUID);
-        WIEGAND::control_bits.LoadToControl(WiegandDialog::self, ID_CHECKBOX_WIEGAND_CONTROL_BITS);
-        WIEGAND::inverse_control_bits.LoadToControl(WiegandDialog::self, ID_CHECKBOX_WIEGAND_INVERSE_CONTROL_BITS);
-        WIEGAND::reverse_order_bits.LoadToControl(WiegandDialog::self, ID_CHECKBOX_WIEGAND_REVERSE_ORDER_BITS);
-        WIEGAND::nuid_discard_LSB.LoadToControl(WiegandDialog::self, ID_CHECKBOX_WIEGAND_NUID_DISCARD_LSB);
-        WIEGAND::value.LoadToControl(WiegandDialog::self, ID_TEXTCNTRL_WIEGAND_VALUE);
-
-        // Конфигурация
-        for (int i = 0; i < 3; i++)
-        {
-            MASTER::melody[i].LoadToControl(ChooseSoundsDialog::self, ID_COMBOBOX_MELODY + i);
-            MASTER::volume[i].LoadToControl(ChooseSoundsDialog::self, ID_SPINCNTRL_VOLUME + i);
-        }
-
-        // Запись на мастер-карту
-        MASTER::write_config.LoadToControl(PageMaster::self, ID_CHECKBOX_WRITE_MASTER_CONFIG);
-
-        // Дополнительно - Автономный режим
-        OFFLINE::enabled.LoadToControl(OfflineModeDialog::self, ID_CHECKBUTTON_OFFLINE_ENABLED);
-        OFFLINE::security_mode.LoadToControl(OfflineModeDialog::self, ID_CHECKBOX_OFFLINE_SECURITY_MODE);
-        OFFLINE::time_lock.LoadToControl(OfflineModeDialog::self, ID_TEXTCNTRL_OFFLINE_TIME_LOCK);
-        OFFLINE::time_alarm.LoadToControl(OfflineModeDialog::self, ID_TEXTCNTRL_OFFLINE_TIME_ALARM);
-        OFFLINE::file_cards.Load();
         if (!wxFileExists(wxGetCwd() + "/" + OFFLINE::file_cards.Get()))
         {
             OFFLINE::file_cards.Set("");
         }
 
-        // Дополнительно - режим OSDP
-        OSDP::address.LoadToControl(OSDPModeDialog::self, ID_TEXTCNTRL_OSDP_ADDRESS);
-        OSDP::baudrate.LoadToControl(OSDPModeDialog::self, ID_COMBOBOX_OSDP_BAUDRATE);
-        OSDP::enabled.LoadToControl(OSDPModeDialog::self, ID_CHECKBUTTON_OSDP_ENABLED);
-        OSDP::crypto_enabled.LoadToControl(OSDPModeDialog::self, ID_CHECKBOX_OSDP_ENCRYPTION);
-
-        // Дополнительно - Датчик отрыва
-        ANTIBREAK::enabled.LoadToControl(AntiBreakDialog::self, ID_CHECKBUTTON_ANTIBREAK_ENABLED);
-        ANTIBREAK::number.LoadToControl(AntiBreakDialog::self, ID_TEXTCNTRL_ANTIBREAK_NUMBER);
-        ANTIBREAK::sens.LoadToControl(AntiBreakDialog::self, ID_COMBOBOX_ANTIBREAK_SENS);
-
-        // Расширенные настройки
-        EXT::mode_read_card.LoadToControl(ExtendedSettingsDialog::self, ID_COMBOBOX_EXT_MODE_READ_CARD);
-        EXT::period_autorepeat.LoadToControl(ExtendedSettingsDialog::self, ID_TEXTCNTRL_EXT_PERIOD_AUTOREPEAT);
-        EXT::parity.LoadToControl(ExtendedSettingsDialog::self, ID_CHECKBOX_EXT_PARITY);
-        EXT::inverse_code.LoadToControl(ExtendedSettingsDialog::self, ID_CHECKBOX_EXT_INVERSION_CODE);
-        EXT::control_bit.LoadToControl(ExtendedSettingsDialog::self, ID_CHECKBOX_EXT_CONTROL_BIT);
-        EXT::enabled.LoadToControl(ExtendedSettingsDialog::self, ID_CHECKBUTTON_EXT_SET_ENABLE);
-        EXT::enabled.SendEventToGUI(ExtendedSettingsDialog::self, ID_CHECKBUTTON_EXT_SET_ENABLE);
-
-        MISC::disable_less_SL3.LoadToControl(PasswordExtraDialog::self, ID_CHECKBOX_DISABLE_BELOW_LEVEL_SL3);
-
         ////////////////////////////////////////////////// Карты доступа
 
-        // Генерация номера карты
-        USER::number_first.LoadToControl(PageUser::self, ID_TEXTCNTRL_NUMBER_FIRST);
-        USER::number_last.LoadToControl(PageUser::self, ID_TEXTCNTRL_NUMBER_LAST);
-        USER::number_next.LoadToControl(PageUser::self, ID_TEXTCNTRL_NUMBER_NEXT);
-        USER::enabled_range_generation.LoadToControl(PageUser::self, ID_CHECKBOX_RANGE);
-        USER::enabled_range_generation.ApplyToGUI(PageUser::self, ID_CHECKBOX_RANGE);
-        USER::file_cards.Load();
+
         if (!wxFileExists(wxGetCwd() + "/" + USER::file_cards.Get()))
         {
             USER::file_cards.Set("base.cards");
         }
 
-
-        // Запись на карту
-        USER::write_client_number.LoadToControl(PageUser::self, ID_CHECKBOX_WRITE_CLIENT_NEW_NUMBER);
-
         Config::SetFile("");
-
-        SS::LoadSave(false, true);
     }
 
 
@@ -275,11 +173,7 @@ namespace SET
         OSDP::enabled.Set(false);
         ANTIBREAK::enabled.Set(false);
 
-        SS::LoadSave(true, false);
-
         Config::SetFile(file_path);
-
-        SS::LoadSave(false, true);
 
         MASTER::color_green.Save();
         MASTER::color_red.Save();
@@ -357,44 +251,4 @@ void SET::GUI::Load()
     maximized_console.Load();
     current_page_notebook.Load();
     serial_port_num.Load();
-
-    serial_port_auto_find.LoadToControl(SettingsSerialPort::self, ID_CHECKBUTTON_MODE_EKO);
-}
-
-
-
-const Password password_factory{ 0, "" };
-
-Settings gset
-{
-    { 0, "/password_card" },       // password_card     Текущий пароль карты
-    { 0, "/password_master" },     // password_master   Пароль к мастер-карте
-    { 0, "/password_current" },    // password_current  Действующий пароль системы
-    { { { 0x0101010101010101, 0x0101010101010101 } },
-    {   { 0x0202020202020202, 0x0202020202020202 } },
-    {   { 0x0303030303030303, 0x0303030303030303 } },
-    {   { 0x0404040404040404, 0x0404040404040404 } },
-    {   { 0x0505050505050505, 0x0505050505050505 } } }
-};
-
-
-void SS::LoadSave(bool load, bool save)
-{
-    if (load)
-    {
-        gset.password_master.value = Config::ReadUInt64(gset.password_master.key);
-        gset.password_current.value = Config::ReadUInt64(gset.password_current.key);
-    }
-
-    if(save)
-    {
-        Config::WriteUInt64(gset.password_master.key, gset.password_master.value);
-        Config::WriteUInt64(gset.password_current.key, gset.password_current.value);
-    }
-}
-
-
-wxString Password::ToString() const
-{
-    return wxString::Format("%llu", value);
 }

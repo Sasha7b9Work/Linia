@@ -1,9 +1,7 @@
 ﻿// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Utils/String.h"
-#include "Panels/Notebook/Notebook.h"
 #include "Communicator/ComPort.h"
-#include "Reader/Reader.h"
 #include "Panels/ConsoleRS232.h"
 #include "Utils/Configurator.h"
 #include "Settings/Settings.h"
@@ -31,8 +29,6 @@ ConsoleRS232::ConsoleRS232(wxFrame *parent) : wxFrame(parent, wxID_ANY, _L("Ус
 
 ConsoleRS232::~ConsoleRS232()
 {
-    Reader::Send("#MODE UART");
-
     self = nullptr;
 }
 
@@ -80,7 +76,6 @@ void ConsoleRS232::OnEnterKey(wxCommandEvent &)
 
     if (command[0] == '#')
     {
-        Reader::Send(command.c_str());
     }
     else
     {

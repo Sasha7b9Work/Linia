@@ -15,31 +15,6 @@ protected:
 };
 
 
-// Ввод hex-битного значения до 128 бит длиной
-class TextCtrlKeyHex128 : public wxTextCtrl
-{
-public:
-
-    TextCtrlKeyHex128(wxWindow *parent, int id, const Key128 &, const wxPoint &position);
-
-    Key128 key;                     // Здесь хранится текущее значение
-    const Key128 start_key;         // Здесь хранится значение, переданное в конструкторе, чтобы можно было восстановить
-
-    // true, если поле ввода полностью заполнено (32 символа)
-    bool IsFieldCompletelyFilled() const;
-
-    // Рассчитывает новое значение key (после нажатия клавиши)
-    void CalculateKey();
-
-protected:
-
-    void OnEventChar(wxKeyEvent &);
-
-    void SetKey128(const Key128 &);
-};
-
-
-
 class TextCtrlNumbersLimits : public TextCtrlNumbers
 {
 public:

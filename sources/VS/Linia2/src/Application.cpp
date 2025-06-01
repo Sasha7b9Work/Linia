@@ -1,17 +1,12 @@
 ﻿// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Application.h"
-#include "Device.h"
 #include "Utils/Configurator.h"
 #include "Communicator/ComPort.h"
 #include "Panels/ConsoleRS232.h"
-#include "DataBase/DataBasePasswords.h"
 #include "Settings/Settings.h"
 #include "Utils/Timer.h"
-#include "Panels/ListPasswords.h"
-#include "DataBase/DataBaseCards.h"
 #include "MainWindow.h"
-#include "DataBase/Server/Server.h"
 
 
 wxIMPLEMENT_APP(Application);
@@ -47,14 +42,10 @@ bool Application::OnInit()
     // we use a PNG image in our HTML page
     wxImage::AddHandler(new wxPNGHandler);
 
-    PasswDB::Init();
-
-    gset.password_card.value = PasswDB::GetPassword(0);
-
     ConsoleRS232::Create();
 
     // create and show the main application window
-    MainWindow *frame = new MainWindow("Card Issuing Center - CIC");
+    MainWindow *frame = new MainWindow(_("Линия 2"));
 
     frame->Show();
 
@@ -65,10 +56,6 @@ bool Application::OnInit()
     timer.SetOwner(this, ID_TIMER);
 
     timer.Start(10);
-
-    Server::Create();
-
-    CardsDB::LoadDataBase();
 
     return true;
 }
@@ -88,10 +75,6 @@ void Application::OnTimer(wxTimerEvent &)
 
     if (mutex.try_lock())
     {
-        Server::Update();
-
-        Device::Update();
-
         ComPort::Update();
 
         mutex.unlock();
@@ -103,17 +86,11 @@ int Application::OnExit()
 {
     LOG_WRITE("Application::OnExit()");
 
-    PasswDB::DeInit();
-
     wxConfigBase::Get(false)->Flush();
 
     wxConfigBase::Set(nullptr);
 
     SAFE_DELETE(g_file_config);
-
-    CardsDB::SaveDataBase();
-
-    Server::Destroy();
 
     return wxApp::OnExit();
 }

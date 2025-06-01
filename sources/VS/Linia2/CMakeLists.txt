@@ -1,7 +1,7 @@
 ﻿# 2023/07/04 15:47:47 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (Linia2)
 
-#set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD OFF)
 
 if(WIN32)
 
@@ -69,14 +69,7 @@ file(GLOB DOC                           doc/*.*)
 file(GLOB SRC                           src/*.*)
 file(GLOB COMMUNICATOR                  src/Communicator/*.*)
 file(GLOB CONTROLS                      src/Controls/*.*)
-file(GLOB DATABASE                      src/DataBase/*.*)
-file(GLOB DATABASE_SERVER               src/DataBase/Server/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
-file(GLOB PANELS_DIALOGS                src/Panels/Dialogs/*.*)
-file(GLOB PANELS_NOTEBOOK               src/Panels/Notebook/*.*)
-file(GLOB PANELS_NOTEBOOK_PAGEMASTER    src/Panels/Notebook/PageMaster/*.*)
-file(GLOB PANELS_NOTEBOOK_PAGEUSER      src/Panels/Notebook/PageUser/*.*)
-file(GLOB READER                        src/Reader/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB UTILS                         src/Utils/*.*)
 file(GLOB THIRDPARTY_LIBMPG123          src/ThirdParty/libmpg123/src/libmpg123/libmpg123.c
@@ -108,14 +101,7 @@ source_group(Resources                  FILES ${RESOURCES})
 source_group(src                        FILES ${SRC})
 source_group(Communicator               FILES ${COMMUNICATOR})
 source_group(Controls                   FILES ${CONTROLS})
-source_group(DataBase                   FILES ${DATABASE})
-source_group(DataBase/Server            FILES ${DATABASE_SERVER})
 source_group(Panels                     FILES ${PANELS})
-source_group(Panels/Dialogs             FILES ${PANELS_DIALOGS})
-source_group(Panels/Notebook            FILES ${PANELS_NOTEBOOK})
-source_group(Panels/Notebook/PageMaster FILES ${PANELS_NOTEBOOK_PAGEMASTER})
-source_group(Panels/Notebook/PageUser   FILES ${PANELS_NOTEBOOK_PAGEUSER})
-source_group(Reader                     FILES ${READER})
 source_group(Settings                   FILES ${SETTINGS})
 source_group(Utils                      FILES ${UTILS})
 source_group(ThirdParty/libmpg123       FILES ${THIRDPARTY_LIBMPG123})
@@ -126,14 +112,7 @@ add_executable(${PROJECT_NAME}
     ${SRC}
     ${COMMUNICATOR}
     ${CONTROLS}
-    ${DATABASE}
-    ${DATABASE_SERVER}
     ${PANELS}
-    ${PANELS_DIALOGS}
-    ${PANELS_NOTEBOOK}
-    ${PANELS_NOTEBOOK_PAGEMASTER}
-    ${PANELS_NOTEBOOK_PAGEUSER}
-    ${READER}
     ${SETTINGS}
     ${UTILS}
     ${THIRDPARTY_LIBMPG123}

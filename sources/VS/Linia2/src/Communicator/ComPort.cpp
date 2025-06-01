@@ -4,8 +4,6 @@
 #include "Communicator/rs232.h"
 #include "Utils/String.h"
 #include "Panels/ConsoleRS232.h"
-#include "Reader/Reader.h"
-#include "Reader/Indicator.h"
 #include "Utils/StringUtils.h"
 #include "Settings/Settings.h"
 #include <cstring>
@@ -22,7 +20,7 @@ namespace ComPort
 
     static String lastAnswer;
 
-    static void (*callbackOnReceive)(pchar) = Reader::UpdateOnReceive;
+    static void (*callbackOnReceive)(pchar) = nullptr;
 
     static wxString ExtractMessage(char *);
 
@@ -81,21 +79,11 @@ bool ComPort::TryConnect()
             {
                 connected_port = i;
 
-                Reader::Send("#MODE WRITE");
-
                 milliseconds end = duration_cast<milliseconds>(system_clock::now().time_since_epoch()) + 1000ms;
 
                 do
                 {
                     UpdateConnected();
-
-                    if (Reader::IsConnected())
-                    {
-                        Indicator::On();
-
-                        return true;
-                    }
-
                 } while (duration_cast<milliseconds>(system_clock::now().time_since_epoch()) < end);
 
                 connected_port = -1;
@@ -307,5 +295,4 @@ void ComPort::CallbackOnReceive::Set(void (*callback)(pchar))
 
 void ComPort::CallbackOnReceive::Reset()
 {
-    callbackOnReceive = Reader::UpdateOnReceive;
 }

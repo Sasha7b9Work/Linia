@@ -1,14 +1,10 @@
 // 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Application.h"
-#include "Panels/Notebook/Notebook.h"
-#include "Panels/CommonPanel.h"
 #include "Panels/ConsoleRS232.h"
 #include "Utils/Configurator.h"
-#include "Panels/ListPasswords.h"
 #include "Settings/Settings.h"
 #include "Utils/Configurator.h"
-#include "Utils/EventsLog.h"
 #include "MainWindow.h"
 
 
@@ -30,24 +26,13 @@ MainWindow::MainWindow(const wxString &title)
     Bind(wxEVT_CLOSE_WINDOW, &MainWindow::OnEventCloseWindow, this);
     TuneFont();
 
-    notebook = new Notebook(this);
-
-    panel = new CommonPanel(this);
-
     SET::Init();
 
-    notebook->Preprocess();
-
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
-
-    sizer->Add(panel, 1, wxEXPAND);
-    sizer->Add(notebook, 1, wxEXPAND);
 
     SetSizer(sizer);
 
     wxWindow::SetPosition(SET::GUI::position.Get());
-
-    ListPasswords::Create();
 
 	Bind(wxEVT_CHAR_HOOK, &MainWindow::OnEventKeyHook, this);
 
@@ -76,7 +61,6 @@ MainWindow::MainWindow(const wxString &title)
 
 void MainWindow::Preprocess()
 {
-    Notebook::self->Preprocess();
 }
 
 
@@ -197,18 +181,6 @@ void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
         SET::GUI::maximized_console.Set(ConsoleRS232::self->IsMaximized());
 
         ConsoleRS232::self->Destroy();
-    }
-
-    if (ListPasswords::self)
-    {
-        SET::GUI::pos_list.Set(ListPasswords::self->GetPosition());
-
-        wxSize size = ListPasswords::self->GetSize();
-        SET::GUI::size_list.Set({ size.x, size.y });
-
-        SET::GUI::maximized_list.Set(ListPasswords::self->IsMaximized());
-
-        ListPasswords::self->Destroy();
     }
 
     SET::GUI::position.Set(wxWindow::GetPosition());
