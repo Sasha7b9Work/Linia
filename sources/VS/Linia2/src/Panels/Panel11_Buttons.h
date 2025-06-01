@@ -10,4 +10,17 @@ public:
     static const int HEIGHT = 60;
 
     PanelButtons(wxWindow *parent);
+
+private:
+
+    static const int NUM_BUTTONS = 8;
+
+    wxButton *btnFile = nullptr;
+    wxButton *btnTest = nullptr;
+    wxButton *btnSettings = nullptr;
+    wxButton *btnArchive = nullptr;
+    wxButton *btnGraph = nullptr;
+    wxButton *btnTable = nullptr;
+    wxButton *btnReport = nullptr;
+    wxButton *btnMeasure = nullptr;
 };
