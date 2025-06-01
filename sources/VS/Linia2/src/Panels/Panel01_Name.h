@@ -6,5 +6,16 @@
 class PanelName : public Panel
 {
 public:
-	PanelName(wxWindow *parent);
+    PanelName(wxWindow *parent);
+
+private:
+
+    wxStaticText *textDate = nullptr;
+    wxStaticText *textTime = nullptr;
+
+    wxTimer timer;
+
+    void OnTimer(wxTimerEvent &);
+
+    void WriteDateTime();
 };
