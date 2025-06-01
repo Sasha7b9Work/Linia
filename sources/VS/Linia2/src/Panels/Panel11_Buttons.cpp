@@ -52,6 +52,34 @@ void PanelButtons::OnEventButton(wxCommandEvent &event)
 
     if (id == ID_BUTTON_FILE)
     {
-        int i = 0;
+
+    }
+    else if (id == ID_BUTTON_TEST)
+    {
+
+    }
+    else if (id == ID_BUTTON_SETTINGS)
+    {
+
+    }
+    else if (id == ID_BUTTON_ARCHIVE)
+    {
+
+    }
+    else if (id == ID_BUTTON_GRAPH)
+    {
+
+    }
+    else if (id == ID_BUTTON_TABLE)
+    {
+
+    }
+    else if (id == ID_BUTTON_REPORT)
+    {
+
+    }
+    else if (id == ID_BUTTON_MEASURE)
+    {
+
     }
 }
