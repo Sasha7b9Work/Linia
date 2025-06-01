@@ -39,6 +39,19 @@ PanelButtons::PanelButtons(wxWindow* parent) :
 
     for (int i = 0; i < NUM_BUTTONS; i++)
     {
-        new wxButton(this, ID_BUTTON_FILE + 1, labels[i], { i * delta, 0 }, { delta - 3, GetSize().y - 3 });
+        new wxButton(this, ID_BUTTON_FILE + i, labels[i], { i * delta, 0 }, { delta - 3, GetSize().y - 3 });
+    }
+
+    Bind(wxEVT_BUTTON, &PanelButtons::OnEventButton, this);
+}
+
+
+void PanelButtons::OnEventButton(wxCommandEvent &event)
+{
+    int id = event.GetId();
+
+    if (id == ID_BUTTON_FILE)
+    {
+        int i = 0;
     }
 }

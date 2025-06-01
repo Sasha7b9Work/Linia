@@ -10,4 +10,8 @@ public:
     static const int HEIGHT = 35;
 
     PanelButtons(wxWindow *parent);
+
+private:
+
+    void OnEventButton(wxCommandEvent &);
 };
