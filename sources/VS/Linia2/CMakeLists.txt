@@ -29,21 +29,6 @@ if(WIN32)
         /wd5027    # move assignment operator was implicitly defined as deleted
         /wd5045    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
         /wd5039    # pointer or reference to potentially throwing function passed to extern C function under -EHc. Undefined behavior may occur if this function throws an exception
-
-        /wd4100
-        /wd4002
-        /wd4061
-        /wd4068
-        /wd4127
-        /wd4141
-        /wd4244
-        /wd4255
-        /wd4431
-        /wd4456
-        /wd4459
-        /wd4701
-        /wd4777
-        /wd4996
     )
 
 else()
