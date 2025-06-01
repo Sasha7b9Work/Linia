@@ -20,22 +20,18 @@ enum
 PanelButtons::PanelButtons(wxWindow* parent) :
     Panel(parent, 0, MainWindow::HEIGHT - HEIGHT, MainWindow::WIDTH1 + MainWindow::WIDTH2, HEIGHT)
 {
-    struct StructButton
-    {
-        wxButton *btn;
-        wxString label;
-    };
+    static const int NUM_BUTTONS = 8;
 
-    StructButton buttons[NUM_BUTTONS] =
+    wxString labels[NUM_BUTTONS] =
     {
-        { btnFile, _("Файл") },
-        { btnTest, _("Тест") },
-        { btnSettings, _("Настройка") },
-        { btnArchive, _("Архив") },
-        { btnGraph, _("График") },
-        { btnTable, _("Таблица") },
-        { btnReport, _("Отчёт") },
-        { btnMeasure, _("Измерение") }
+        _("Файл"),
+        _("Тест"),
+        _("Настройка"),
+        _("Архив"),
+        _("График"),
+        _("Таблица"),
+        _("Отчёт"),
+        _("Измерение")
     };
 
 
@@ -43,6 +39,6 @@ PanelButtons::PanelButtons(wxWindow* parent) :
 
     for (int i = 0; i < NUM_BUTTONS; i++)
     {
-        buttons[i].btn = new wxButton(this, ID_BUTTON_FILE + 1, buttons[i].label, {i * delta, 0}, {delta, GetSize().y});
+        new wxButton(this, ID_BUTTON_FILE + 1, labels[i], { i * delta, 0 }, { delta - 3, GetSize().y - 3 });
     }
 }
