@@ -8,72 +8,6 @@ namespace SET
 {
     ValueCheckButton mode_eco("mode_eco", false);
 
-    namespace MASTER
-    {
-        ValueComboBox melody[3] =
-        {
-            ValueComboBox("melody0", 0),
-            ValueComboBox("melody1", 1),
-            ValueComboBox("melody2", 2)
-        };
-
-        ValueSpinCtrl volume[3] =
-        {
-            ValueSpinCtrl("volume0", 3),
-            ValueSpinCtrl("volume1", 3),
-            ValueSpinCtrl("volume2", 3)
-        };
-
-        ValueColor      color_green("color_green", Color(0, 255, 0, 255));
-        ValueColor      color_red("color_red", Color(255, 0, 0, 255));
-
-        // Запись на мастер-карту
-        ValueCheckBox   write_config("master_write_config", true);
-    }
-
-    // Дополнительно - Режим OSDP
-    namespace OSDP
-    {
-        ValueCheckButton enabled("osdp_enabled", false);
-        ValueTextCtrl    address("osdp_address", 1);
-        ValueComboBox    baudrate("osdp_baudrate", 0);
-        ValueCheckBox    crypto_enabled("osdp_crypto_enabled", false);
-    }
-
-    // Дополнительно - Датчик отрыва
-    namespace ANTIBREAK
-    {
-        ValueCheckButton enabled("antibreak_enabled", false);
-        ValueTextCtrl    number("antibreak_number", 0);
-        ValueComboBox    sens("antibreak_sens", 0);
-
-        uint8 GetRAW()
-        {
-            if (!enabled.Get())
-            {
-                return 0;
-            }
-
-            return (uint8)(sens.GetIndex() + 1);
-        }
-    }
-
-    // Расширенные настройки
-    namespace EXT
-    {
-        ValueCheckButton enabled("ext_master_enable_adv_settings", false);
-        ValueComboBox    mode_read_card("ext_mode_read_card", 0);
-        ValueTextCtrl    period_autorepeat("ext_period_autorepeat", 5000);
-        ValueCheckBox    parity("ext_parity", false);
-        ValueCheckBox    inverse_code("ext_inverse_code", false);
-        ValueCheckBox    control_bit("ext_control_bit", false);
-    }
-
-    namespace MISC
-    {
-        ValueCheckBox disable_less_SL3{ "disable_less_SL3", false };
-    }
-
     namespace USER
     {
         ValueTextCtrl   number_first("user_number_first", 1);
@@ -122,45 +56,8 @@ namespace SET
     void Save(const wxString &file_path)
     {
         mode_eco.Set(false);
-        OSDP::enabled.Set(false);
-        ANTIBREAK::enabled.Set(false);
 
         Config::SetFile(file_path);
-
-        MASTER::color_green.Save();
-        MASTER::color_red.Save();
-
-        // Конфигурация
-        for (ValueComboBox &value : MASTER::melody)
-        {
-            value.Save();
-        }
-        for (ValueSpinCtrl &value : MASTER::volume)
-        {
-            value.Save();
-        }
-
-        // Запись на мастер-карту
-        MASTER::write_config.Save();
-
-        // Дополнительно - режим OSDP
-        OSDP::address.Save();
-        OSDP::baudrate.Save();
-        OSDP::crypto_enabled.Save();
-
-        // Дополнительно - Датчик отрыва
-        ANTIBREAK::number.Save();
-        ANTIBREAK::sens.Save();
-
-        // Расширенные настройки
-        EXT::mode_read_card.Save();
-        EXT::period_autorepeat.Save();
-        EXT::parity.Save();
-        EXT::inverse_code.Save();
-        EXT::control_bit.Save();
-        EXT::enabled.Save();
-
-        MISC::disable_less_SL3.Save();
 
         ////////////////////////////////////////////////// Карты доступа
 

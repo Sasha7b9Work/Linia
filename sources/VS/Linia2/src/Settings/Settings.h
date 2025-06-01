@@ -12,55 +12,6 @@ namespace SET
 
     extern ValueCheckButton mode_eco;
 
-    namespace MASTER
-    {
-        extern ValueColor color_red;
-        extern ValueColor color_green;
-
-        // Конфигурация
-        extern ValueComboBox melody[3];                 // Звуки - Тип
-        extern ValueSpinCtrl volume[3];                 // Звуки - Громкость
-
-        // Запись на мастер-карту
-        extern ValueCheckBox write_config;              // Конфигураций
-    }
-
-    // Дополнительно - Режим OSDP
-    namespace OSDP
-    {
-        extern ValueCheckButton  enabled;               // Вкл/выкл
-        extern ValueTextCtrl     address;               // Адрес
-        extern ValueComboBox     baudrate;              // Скорость
-        extern ValueCheckBox     crypto_enabled;        // Включение шифрование
-    }
-
-    // Дополнительно - Датчик отрыва
-    namespace ANTIBREAK
-    {
-        extern ValueCheckButton  enabled;               // Вкл/Откл
-        extern ValueTextCtrl     number;                // Номер
-        extern ValueComboBox     sens;                  // Чувствительность
-
-        uint8 GetRAW();                                 // Возвращает значение для записи в мастер карту
-                                                        // Фактически чем больше это число, тем меньше чувствительность. 0 - отключено
-    }
-
-    // Расширенные настройки
-    namespace EXT
-    {
-        extern ValueCheckButton  enabled;               // Вкл/Выкл
-        extern ValueCheckBox     parity;                // Паритет
-        extern ValueCheckBox     inverse_code;          // Инверсия выдачи кода
-        extern ValueCheckBox     control_bit;           // Контрольный бит
-        extern ValueTextCtrl     period_autorepeat;     // Период автоповтора
-        extern ValueComboBox     mode_read_card;        // Режим чтения карты
-    }
-
-    namespace MISC
-    {
-        extern ValueCheckBox    disable_less_SL3;       // Отключить карты ниже SL3
-    }
-
     ////////////////////////////////////////////////// Карты доступа
 
     namespace USER
