@@ -20,7 +20,4 @@ private:
     virtual int OnExit() wxOVERRIDE;
 
     void OnTimer(wxTimerEvent &);
-
-    // Установить рабочий каталог - в нём будут логи и всякие другие файлы
-    void SetWorkingDirectory();
 };

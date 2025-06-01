@@ -25,8 +25,6 @@ bool Application::OnInit()
         return false;
     }
 
-    SetWorkingDirectory();
-
     file_name_config = wxGetCwd() + "/CIC.conf";
 
     Log::Init();
@@ -93,14 +91,4 @@ int Application::OnExit()
     SAFE_DELETE(g_file_config);
 
     return wxApp::OnExit();
-}
-
-
-void Application::SetWorkingDirectory()
-{
-#ifdef WIN32
-    // В Windows рабочий каталог - тот, в котором находится исполняемый файл.
-#else
-    wxSetWorkingDirectory("/var/lib/cic");
-#endif
 }
