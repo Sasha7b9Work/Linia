@@ -8,6 +8,8 @@
 #include "MainWindow.h"
 #include "Panels/Panel01_Name.h"
 #include "Panels/Panel02_ModeUpper.h"
+#include "Panels/Panel03_Config.h"
+#include "Panels/Panel11_Buttons.h"
 
 
 /*
@@ -96,6 +98,10 @@ MainWindow::MainWindow(const wxString &title)
     new PanelName(this);
 
     new PanelModeUpper(this);
+
+    new PanelConfig(this);
+
+    new PanelButtons(this);
 }
 
 
