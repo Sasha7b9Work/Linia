@@ -9,6 +9,11 @@
 #include "Panels/Panel01_Name.h"
 #include "Panels/Panel02_ModeUpper.h"
 #include "Panels/Panel03_Config.h"
+#include "Panels/Panel04_Model.h"
+#include "Panels/Panel05_Graph.h"
+#include "Panels/Panel06_Percents.h"
+#include "Panels/Panel08_ModeLower.h"
+#include "Panels/Panel09_Table.h"
 #include "Panels/Panel11_Buttons.h"
 
 
@@ -40,7 +45,7 @@
     6. Дискета с процентами
     7. Индикация выходного напряжения
     8. Режим
-    9. Таблица точек\
+    9. Таблица точек
     10. Шкала, ошибки
     11. Кнопки
 */
@@ -100,6 +105,16 @@ MainWindow::MainWindow(const wxString &title)
     new PanelModeUpper(this);
 
     new PanelConfig(this);
+
+    new PanelModel(this);
+
+    new PanelGraph(this);
+
+    new PanelPercents(this);
+
+    new PanelModeLower(this);
+
+    new PanelTable(this);
 
     new PanelButtons(this);
 }
