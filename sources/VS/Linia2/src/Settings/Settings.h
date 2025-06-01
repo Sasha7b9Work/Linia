@@ -14,19 +14,6 @@ namespace SET
 
     ////////////////////////////////////////////////// Карты доступа
 
-    namespace USER
-    {
-        // Генерация номера карты
-        extern ValueTextCtrl    number_first;               // первый
-        extern ValueTextCtrl    number_last;                // последний
-        extern ValueTextCtrl    number_next;                // Номер следующей карты
-        extern ValueCheckBox    enabled_range_generation;   // Вкл/вылк
-        extern Value<wxString>  file_cards;                 // Список карт неавтономного режима
-
-        // Запись на карту
-        extern ValueCheckBox write_client_number;           // Нового номера карты
-    }
-
     // Настройки ГУИ
     namespace GUI
     {

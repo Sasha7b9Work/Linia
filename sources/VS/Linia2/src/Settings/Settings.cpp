@@ -8,15 +8,6 @@ namespace SET
 {
     ValueCheckButton mode_eco("mode_eco", false);
 
-    namespace USER
-    {
-        ValueTextCtrl   number_first("user_number_first", 1);
-        ValueTextCtrl   number_last("user_number_last", 100);
-        ValueTextCtrl   number_next("user_number_next", 1);
-        ValueCheckBox   enabled_range_generation("user_enabled_range_generation", false);
-        ValueCheckBox   write_client_number("user_write_client_number", true);
-        Value<wxString> file_cards("gui_file_cards_normal", "base.cards");
-    }
 
     namespace GUI
     {
@@ -41,14 +32,6 @@ namespace SET
     {
         Config::SetFile(file_path);
 
-        ////////////////////////////////////////////////// Карты доступа
-
-
-        if (!wxFileExists(wxGetCwd() + "/" + USER::file_cards.Get()))
-        {
-            USER::file_cards.Set("base.cards");
-        }
-
         Config::SetFile("");
     }
 
@@ -58,18 +41,6 @@ namespace SET
         mode_eco.Set(false);
 
         Config::SetFile(file_path);
-
-        ////////////////////////////////////////////////// Карты доступа
-
-        // Генерация номера карты
-        USER::number_first.Save();
-        USER::number_last.Save();
-        USER::number_next.Save();
-        USER::enabled_range_generation.Save();
-        USER::file_cards.Save();
-
-        // Запись на карту
-        USER::write_client_number.Save();
 
         Config::SetFile("");
     }
