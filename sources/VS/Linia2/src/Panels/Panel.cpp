@@ -3,7 +3,8 @@
 #include "Panels/Panel.h"
 
 
-Panel::Panel(wxWindow* parent, int w, int h) : wxPanel(parent, wxID_ANY, wxDefaultPosition, { w, h })
+Panel::Panel(wxWindow* parent, int w, int h) :
+    wxPanel(parent, wxID_ANY, wxDefaultPosition, { w, h }, wxTAB_TRAVERSAL | wxSUNKEN_BORDER)
 {
 
 }
