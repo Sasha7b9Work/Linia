@@ -1,0 +1,242 @@
+// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#include "defines.h"
+#include "Application.h"
+#include "Panels/Notebook/Notebook.h"
+#include "Panels/CommonPanel.h"
+#include "Panels/ConsoleRS232.h"
+#include "Utils/Configurator.h"
+#include "Panels/ListPasswords.h"
+#include "Settings/Settings.h"
+#include "Utils/Configurator.h"
+#include "Utils/EventsLog.h"
+#include "MainWindow.h"
+
+
+MainWindow *MainWindow::self = nullptr;
+
+
+MainWindow::MainWindow(const wxString &title)
+    : wxFrame((wxFrame *)NULL, wxID_ANY, title, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE & ~wxMAXIMIZE_BOX)
+{
+    self = this;
+
+#ifdef WIN32
+    SetIcon(wxICON(MAIN_ICON));
+#endif
+
+    Bind(wxEVT_MENU, &MainWindow::OnAbout, this, wxID_ABOUT);
+    Bind(wxEVT_MENU, &MainWindow::OnQuit, this, wxID_EXIT);
+    Bind(wxEVT_SIZE, &MainWindow::OnEventSize, this);
+
+    Bind(wxEVT_CLOSE_WINDOW, &MainWindow::OnEventCloseWindow, this);
+    TuneFont();
+
+    notebook = new Notebook(this);
+
+    panel = new CommonPanel(this);
+
+    SET::Init();
+
+    notebook->Preprocess();
+
+    wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
+
+    sizer->Add(panel, 1, wxEXPAND);
+    sizer->Add(notebook, 1, wxEXPAND);
+
+    SetSizerAndFit(sizer);
+
+    wxWindow::SetPosition(SET::GUI::position.Get());
+
+    ListPasswords::Create();
+
+    const wxSize size(600 + BUTTON_WIDTH_BIG - BUTTON_WIDTH, 480);
+    wxWindow::SetMinClientSize(size);
+    wxWindow::SetMaxClientSize({ 760 + BUTTON_WIDTH_BIG - BUTTON_WIDTH, 480 });
+    wxWindow::SetClientSize(size);
+
+    Bind(wxEVT_CHAR_HOOK, &MainWindow::OnEventKeyHook, this);
+
+//    ConsoleRS232::SwitchVisibility();
+}
+
+
+void MainWindow::Preprocess()
+{
+    Notebook::self->Preprocess();
+}
+
+
+void MainWindow::OnEventKeyHook(wxKeyEvent &event)
+{
+    if (event.GetKeyCode() == 'K')
+    {
+        if (event.ControlDown())
+        {
+            ConsoleRS232::self->Show(!ConsoleRS232::self->IsShown());
+        }
+    }
+
+    event.Skip();
+}
+
+
+void MainWindow::TuneFont()
+{
+    wxFont font = GetFont();
+
+    //------------------------------------------------------------
+
+    wxFontFamily family = wxFONTFAMILY_DEFAULT;
+
+    ReadFontParameter("font_family", (int &)family);
+
+    font.SetFamily(family);
+
+    //------------------------------------------------------------
+
+    wxString face_name = "Segoe UI";
+
+    ReadFontParameter("font_face_name", face_name);
+
+    font.SetFaceName(face_name);
+
+    //------------------------------------------------------------
+
+    wxFontStyle style = wxFONTSTYLE_NORMAL;
+
+    ReadFontParameter("font_style", (int &)style);
+
+    font.SetStyle(style);
+
+    //------------------------------------------------------------
+
+    int point_size = 9;
+
+    ReadFontParameter("font_point_size", point_size);
+
+    font.SetPointSize(point_size);
+
+    //------------------------------------------------------------
+
+    wxSize pixel_size = font.GetPixelSize();
+
+    ReadFontParameter("font_pixel_size_x", pixel_size.x);
+    ReadFontParameter("font_pixel_size_y", pixel_size.y);
+
+    font.SetPixelSize(pixel_size);
+
+    //------------------------------------------------------------
+
+    font.SetUnderlined(false);
+
+    font.SetStrikethrough(false);
+
+    //------------------------------------------------------------
+
+    wxFontWeight weigth = wxFONTWEIGHT_NORMAL;
+
+    ReadFontParameter("font_weigth", (int &)weigth);
+
+    font.SetWeight(weigth);
+
+    //------------------------------------------------------------
+
+    wxWindow::SetFont(font);
+}
+
+
+template <class T>
+void MainWindow::ReadFontParameter(const wxString &key, T &parameter)
+{
+    if (g_config->Exists(key))
+    {
+        g_config->Read(key, &parameter);
+    }
+    else
+    {
+        g_config->Write(key, parameter);
+    }
+}
+
+
+void MainWindow::OnQuit(wxCommandEvent &WXUNUSED(event))
+{
+    LOG_WRITE("Frame::OnQuit()");
+
+    self = nullptr;
+
+    Close(true);
+}
+
+
+void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
+{
+    SET::Save("");
+
+    if (ConsoleRS232::self)
+    {
+        SET::GUI::pos_console.Set(ConsoleRS232::self->GetPosition());
+
+        wxSize size = ConsoleRS232::self->GetSize();
+        SET::GUI::size_console.Set({ size.x, size.y });
+
+        SET::GUI::maximized_console.Set(ConsoleRS232::self->IsMaximized());
+
+        ConsoleRS232::self->Destroy();
+    }
+
+    if (ListPasswords::self)
+    {
+        SET::GUI::pos_list.Set(ListPasswords::self->GetPosition());
+
+        wxSize size = ListPasswords::self->GetSize();
+        SET::GUI::size_list.Set({ size.x, size.y });
+
+        SET::GUI::maximized_list.Set(ListPasswords::self->IsMaximized());
+
+        ListPasswords::self->Destroy();
+    }
+
+    SET::GUI::position.Set(wxWindow::GetPosition());
+
+    self = nullptr;
+
+    Application::self->Disable();
+
+    event.Skip();
+}
+
+
+void MainWindow::OnAbout(wxCommandEvent &WXUNUSED(event))
+{
+    wxBoxSizer *topsizer;
+    wxDialog dlg(this, wxID_ANY, wxString(_("About")));
+
+    topsizer = new wxBoxSizer(wxVERTICAL);
+
+#if wxUSE_STATLINE
+    topsizer->Add(new wxStaticLine(&dlg, wxID_ANY), 0, wxEXPAND | wxLEFT | wxRIGHT, 10);
+#endif // wxUSE_STATLINE
+
+    wxButton *bu1 = new wxButton(&dlg, wxID_OK, _("OK"));
+    bu1->SetDefault();
+
+    topsizer->Add(bu1, 0, wxALL | wxALIGN_RIGHT, 15);
+
+    dlg.SetSizer(topsizer);
+    topsizer->Fit(&dlg);
+
+    dlg.ShowModal();
+}
+
+
+void MainWindow::OnEventSize(wxSizeEvent &event)
+{
+    event.Skip();
+
+    if (Notebook::self)
+    {
+        Notebook::self->CallbackOnEventSize(event.GetSize());
+    }
+}

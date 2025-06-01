@@ -1,3 +1,3 @@
 @echo on
 
-start ..\..\generated\Win32\RD3303-GUI.sln
+start ..\..\generated\Win32\Linia2-GUI.sln
