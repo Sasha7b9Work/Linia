@@ -5,5 +5,5 @@
 class Panel : public wxPanel
 {
 public:
-	Panel(wxWindow *parent, int w, int h);
+	Panel(wxWindow *parent, int x, int y, int w, int h);
 };

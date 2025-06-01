@@ -18,6 +18,8 @@ public:
     static const int WIDTH2 = 400;                      // Ширина второго столбика с панелями
     static const int WIDTH3 = WIDTH - WIDTH1 - WIDTH2;  // Ширина последнего, третьего, столбика с панелями
 
+    static const int HEIGTH1 = 100;
+
 
     MainWindow(const wxString &title);
 

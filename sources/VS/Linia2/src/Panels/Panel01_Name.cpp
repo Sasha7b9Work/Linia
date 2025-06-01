@@ -4,7 +4,8 @@
 #include "MainWindow.h"
 
 
-PanelName::PanelName(wxWindow *parent) : Panel(parent, MainWindow::WIDTH1, 100)
+PanelName::PanelName(wxWindow *parent) :
+    Panel(parent, 0, 0, MainWindow::WIDTH1, MainWindow::HEIGTH1)
 {
 
 }

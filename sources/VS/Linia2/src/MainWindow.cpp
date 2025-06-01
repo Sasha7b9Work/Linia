@@ -7,6 +7,7 @@
 #include "Windows/ConsoleRS232.h"
 #include "MainWindow.h"
 #include "Panels/Panel01_Name.h"
+#include "Panels/Panel02_ModeUpper.h"
 
 
 /*
@@ -92,8 +93,9 @@ MainWindow::MainWindow(const wxString &title)
         }
     }
 
-    PanelName pName = new PanelName(this);
-    pName.SetPosition({ 0, 0 });
+    new PanelName(this);
+
+    new PanelModeUpper(this);
 }
 
 
