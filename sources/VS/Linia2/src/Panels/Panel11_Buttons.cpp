@@ -37,4 +37,6 @@ PanelButtons::PanelButtons(wxWindow* parent) :
     {
         buttons[i] = new wxButton(this, ID_BUTTON_FILE + 1, "", { i * delta, 0 }, { delta, GetSize().y });
     }
+
+    buttons[0] = buttons[0];
 }
