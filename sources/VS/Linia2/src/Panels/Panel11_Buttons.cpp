@@ -24,7 +24,7 @@ PanelButtons::PanelButtons(wxWindow* parent) :
 
     wxString labels[NUM_BUTTONS] =
     {
-        _("Файл"),
+        "Файл",
         _("Тест"),
         _("Настройка"),
         _("Архив"),
