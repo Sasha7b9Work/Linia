@@ -1,4 +1,4 @@
-// 2025/6/1 16:45:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+Ôªø// 2025/6/1 16:45:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/Panel01_Name.h"
 #include "MainWindow.h"
@@ -7,7 +7,7 @@
 PanelName::PanelName(wxWindow *parent) :
     Panel(parent, 0, 0, MainWindow::WIDTH1, MainWindow::HEIGTH1)
 {
-    new wxStaticText(this, wxID_ANY, _L("»œœœ 4"), { 0, 10 }, { GetSize().x, 20 }, wxALIGN_CENTRE_HORIZONTAL);
+    new wxStaticText(this, wxID_ANY, _L("–ò–ü–ü–ü 4"), { 0, 10 }, { GetSize().x, 20 }, wxALIGN_CENTRE_HORIZONTAL);
 
     textDate = new wxStaticText(this, wxID_ANY, "", {0, 30}, {GetSize().x, 20}, wxALIGN_CENTRE_HORIZONTAL);
 
