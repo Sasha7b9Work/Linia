@@ -20,7 +20,7 @@ enum
 PanelButtons::PanelButtons(wxWindow* parent) :
     Panel(parent, 0, MainWindow::HEIGHT - HEIGHT, MainWindow::WIDTH1 + MainWindow::WIDTH2, HEIGHT)
 {
-    wxButton *buttons[NUM_BUTTONS];
+    volatile wxButton *buttons[NUM_BUTTONS];
 
     buttons[0] = btnFile;
     buttons[1] = btnTest;
