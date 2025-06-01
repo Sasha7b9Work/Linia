@@ -65,12 +65,6 @@ bool Notebook::ShowAppendPages()
 }
 
 
-void Notebook::CallbackOnEventSize(const wxSize &size)
-{
-    PageUser::self->CallbackOnSizeEvent(size);
-}
-
-
 void Notebook::OnEventNotebookPageChanged(wxBookCtrlEvent &event)
 {
     int page = event.GetSelection();

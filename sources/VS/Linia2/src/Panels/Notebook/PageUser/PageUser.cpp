@@ -91,34 +91,6 @@ PageUser::PageUser(wxNotebook *parent) : Page(parent, _L("Карты досту�
 }
 
 
-void PageUser::CallbackOnSizeEvent(const wxSize &_size)
-{
-    wxSize size = ListCards::self->GetSize();
-
-    size.x = _size.x - 431;
-
-    FindWindow(ID_STATICBOX_NUMBERS_CARDS)->SetSize(size);
-
-    size.x -= 2;
-
-    ListCards::self->SetSize(size);
-
-    int width0 = ListCards::self->GetSize().x / 3;
-    int width1 = width0;
-    int width2 = ListCards::self->GetSize().x - width0 - width1;
-
-    ListCards::self->SetWidthColumn(0, width0);
-    ListCards::self->SetWidthColumn(1, width1);
-    ListCards::self->SetWidthColumn(2, width2);
-
-    size = GetClientSize();
-
-    size.x = _size.x;
-
-    SetMinClientSize(size);
-}
-
-
 void PageUser::OnEventButton(wxCommandEvent &event)
 {
     int id = event.GetId();

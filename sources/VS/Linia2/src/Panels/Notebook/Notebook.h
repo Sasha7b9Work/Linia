@@ -21,8 +21,6 @@ public:
 
     bool ShowAppendPages();
 
-    void CallbackOnEventSize(const wxSize &);
-
 private:
 
     PageUser *pageUser = nullptr;

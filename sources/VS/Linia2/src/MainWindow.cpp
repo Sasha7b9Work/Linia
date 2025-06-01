@@ -26,7 +26,6 @@ MainWindow::MainWindow(const wxString &title)
 
     Bind(wxEVT_MENU, &MainWindow::OnAbout, this, wxID_ABOUT);
     Bind(wxEVT_MENU, &MainWindow::OnQuit, this, wxID_EXIT);
-    Bind(wxEVT_SIZE, &MainWindow::OnEventSize, this);
 
     Bind(wxEVT_CLOSE_WINDOW, &MainWindow::OnEventCloseWindow, this);
     TuneFont();
@@ -50,14 +49,26 @@ MainWindow::MainWindow(const wxString &title)
 
     ListPasswords::Create();
 
-    const wxSize size(600 + BUTTON_WIDTH_BIG - BUTTON_WIDTH, 480);
-    wxWindow::SetMinClientSize(size);
-    wxWindow::SetMaxClientSize({ 760 + BUTTON_WIDTH_BIG - BUTTON_WIDTH, 480 });
-    wxWindow::SetClientSize(size);
+	Bind(wxEVT_CHAR_HOOK, &MainWindow::OnEventKeyHook, this);
 
-    Bind(wxEVT_CHAR_HOOK, &MainWindow::OnEventKeyHook, this);
+    {
+		const wxSize size(FULL_WIDTH, FULL_HEIGHT);
+        
+        wxSize screenSize = wxGetDisplaySize(); // Получить общее разрешение экрана
+		int width = screenSize.GetWidth();
+		int height = screenSize.GetHeight();
 
-//    ConsoleRS232::SwitchVisibility();
+        if (width == FULL_WIDTH && height == FULL_HEIGHT)
+        {
+			SetSize(size);
+
+            ShowFullScreen(true);
+        }
+        else
+        {
+            SetClientSize(size);
+        }
+    }
 }
 
 
@@ -228,15 +239,4 @@ void MainWindow::OnAbout(wxCommandEvent &WXUNUSED(event))
     topsizer->Fit(&dlg);
 
     dlg.ShowModal();
-}
-
-
-void MainWindow::OnEventSize(wxSizeEvent &event)
-{
-    event.Skip();
-
-    if (Notebook::self)
-    {
-        Notebook::self->CallbackOnEventSize(event.GetSize());
-    }
 }

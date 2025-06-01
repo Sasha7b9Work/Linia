@@ -8,6 +8,7 @@
 #include <wx/config.h>
 #include <wx/wx.h>
 #include <wx/spinctrl.h>
+#include <wx/display.h>
 #include <wx/tglbtn.h>
 #include <wx/fileconf.h>
 #include <wx/notebook.h>

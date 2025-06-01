@@ -31,8 +31,6 @@ public:
 
     static PageUser *self;
 
-    void CallbackOnSizeEvent(const wxSize &);
-
     void SetNextCardNumber();
 
     void OnEventCheckBox(wxCommandEvent &);

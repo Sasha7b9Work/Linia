@@ -14,6 +14,10 @@ class CommonPanel;
 class MainWindow : public wxFrame
 {
 public:
+
+    static const int FULL_WIDTH = 1024;     // Полная ширина - соотвествует разрешению экрана
+    static const int FULL_HEIGHT = 768;     // Полная высота - соотвествует разрешению экрана
+
     MainWindow(const wxString &title);
 
     // Вызвать после загрузки настроек
@@ -34,8 +38,6 @@ private:
     CommonPanel *panel = nullptr;
 
     void OnEventKeyHook(wxKeyEvent &);
-
-    void OnEventSize(wxSizeEvent &);
 
     // Настроить шрифт
     void TuneFont();

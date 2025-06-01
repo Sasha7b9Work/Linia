@@ -22,7 +22,6 @@
 #include "Panels/Notebook/PageMaster/ModeEKODialog.h"
 #include "Panels/Notebook/PageMaster/ChooseSoundsDialog.h"
 #include "Panels/Notebook/PageMaster/WiegandDialog.h"
-#include "Utils/ConverterMP3.h"
 
 
 PageMaster *PageMaster::self = nullptr;
@@ -287,14 +286,6 @@ void PageMaster::OnEventButton(wxCommandEvent &event)
 
             std::vector<int> samples;
 
-            if (ConverterMP3::ReadFromFile(file_name, "samples.out"))
-            {
-                LOG_WRITE("Converting MP3 is OK");
-            }
-            else
-            {
-                LOG_ERROR("Converting MP3 is FAIL");
-            }
         }
     }
 
