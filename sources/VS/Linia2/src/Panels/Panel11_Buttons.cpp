@@ -20,23 +20,29 @@ enum
 PanelButtons::PanelButtons(wxWindow* parent) :
     Panel(parent, 0, MainWindow::HEIGHT - HEIGHT, MainWindow::WIDTH1 + MainWindow::WIDTH2, HEIGHT)
 {
-    volatile wxButton *buttons[NUM_BUTTONS];
+    struct StructButton
+    {
+        wxButton *btn;
+        wxString label;
+    };
 
-    buttons[0] = btnFile;
-    buttons[1] = btnTest;
-    buttons[2] = btnSettings;
-    buttons[3] = btnArchive;
-    buttons[4] = btnGraph;
-    buttons[5] = btnTable;
-    buttons[6] = btnReport;
-    buttons[7] = btnMeasure;
+    StructButton buttons[NUM_BUTTONS] =
+    {
+        { btnFile, _("Файл") },
+        { btnTest, _("Тест") },
+        { btnSettings, _("Настройка") },
+        { btnArchive, _("Архив") },
+        { btnGraph, _("График") },
+        { btnTable, _("Таблица") },
+        { btnReport, _("Отчёт") },
+        { btnMeasure, _("Измерение") }
+    };
+
 
     int delta = GetSize().x / NUM_BUTTONS;
 
     for (int i = 0; i < NUM_BUTTONS; i++)
     {
-        buttons[i] = new wxButton(this, ID_BUTTON_FILE + 1, "", { i * delta, 0 }, { delta, GetSize().y });
+        buttons[i].btn = new wxButton(this, ID_BUTTON_FILE + 1, buttons[i].label, {i * delta, 0}, {delta, GetSize().y});
     }
-
-    buttons[0] = buttons[0];
 }

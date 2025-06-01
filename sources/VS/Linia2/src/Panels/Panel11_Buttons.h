@@ -7,7 +7,7 @@ class PanelButtons : public Panel
 {
 public:
 
-    static const int HEIGHT = 60;
+    static const int HEIGHT = 35;
 
     PanelButtons(wxWindow *parent);
 
