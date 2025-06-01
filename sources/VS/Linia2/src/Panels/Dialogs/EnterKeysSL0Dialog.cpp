@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Panels/Dialogs/EnterKeysSL0Dialog.h"
 #include "Controls/ControlFunctions.h"
+#include <cstring>
 
 
 EnterKeysSL0Dialog *EnterKeysSL0Dialog::self = nullptr;
