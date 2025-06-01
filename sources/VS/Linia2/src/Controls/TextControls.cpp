@@ -49,11 +49,6 @@ TextCtrlNumbersLimits::TextCtrlNumbersLimits(wxWindow *parent, int id, int value
 
 int TextCtrlNumbersLimits::Max() const
 {
-    if (SET::OFFLINE::enabled.Get())
-    {
-        return 600;
-    }
-
     return max;
 }
 

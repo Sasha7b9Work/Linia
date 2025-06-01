@@ -31,48 +31,6 @@ namespace SET
         ValueCheckBox   write_config("master_write_config", true);
     }
 
-    // Дополнительно - Автономный режим
-    namespace OFFLINE
-    {
-        ValueCheckButton enabled("offline_mode_enabled", false);
-        ValueCheckBox    security_mode("offline_security_mode", false);
-        ValueTextCtrl    time_lock("offline_time_lock", 5);
-        ValueTextCtrl    time_alarm("offline_time_alarm", 30);
-        Value<wxString>  file_cards("gui_file_offline_cards", "");
-    }
-
-    namespace WIEGAND
-    {
-        ValueTextCtrl   value{ "wiegand_value", 26 };
-        ValueCheckBox   full_guid{ "wiegand_full_guild", false };
-        ValueCheckBox   control_bits{ "wiegand_control_bits", true };
-        ValueCheckBox   inverse_control_bits{ "wiegand_inverse_control_bits", false };
-        ValueCheckBox   reverse_order_bits{ "wiegand_reverse_order_bits", false };
-        ValueCheckBox   nuid_discard_LSB{ "wiegand_nuid_discard_lsb", false };
-
-        //   CBA9876543210
-        // 0b0000011111111
-        //   |||||||||||||
-        //   |||||++++++++--- 8 бит значения
-        //   ||||+----------- full guid             Если 1, то передаём максимально возможное количество бит, отбрасывая те, которые не влазят. Иначе - передаём 3 байта NUID
-        //   |||+------------ control bits          Если 1, то передаём два контрольных бита
-        //   ||+------------- inverse control bits  Если 1, то меняются местами расчёт чётного и нечётного битов
-        //   |+-------------- reverse order bits    Если 1, то биты передаются в обратном порядке
-        //   +--------------- nuid discard LSB      Если 1, то из четырёхбайтного NUID отбрасывается 
-        uint GetFullValue()
-        {
-            uint result = (uint)value.Get();
-
-            if (full_guid.Get())            _SET_BIT(result, 8);
-            if (control_bits.Get())         _SET_BIT(result, 9);
-            if (inverse_control_bits.Get()) _SET_BIT(result, 10);
-            if (reverse_order_bits.Get())   _SET_BIT(result, 11);
-            if (nuid_discard_LSB.Get())     _SET_BIT(result, 12);
-
-            return result;
-        }
-    }
-
     // Дополнительно - Режим OSDP
     namespace OSDP
     {
@@ -149,11 +107,6 @@ namespace SET
     {
         Config::SetFile(file_path);
 
-        if (!wxFileExists(wxGetCwd() + "/" + OFFLINE::file_cards.Get()))
-        {
-            OFFLINE::file_cards.Set("");
-        }
-
         ////////////////////////////////////////////////// Карты доступа
 
 
@@ -169,7 +122,6 @@ namespace SET
     void Save(const wxString &file_path)
     {
         mode_eco.Set(false);
-        OFFLINE::enabled.Set(false);
         OSDP::enabled.Set(false);
         ANTIBREAK::enabled.Set(false);
 
@@ -177,13 +129,6 @@ namespace SET
 
         MASTER::color_green.Save();
         MASTER::color_red.Save();
-
-        WIEGAND::value.Save();
-        WIEGAND::full_guid.Save();
-        WIEGAND::control_bits.Save();
-        WIEGAND::inverse_control_bits.Save();
-        WIEGAND::reverse_order_bits.Save();
-        WIEGAND::nuid_discard_LSB.Save();
 
         // Конфигурация
         for (ValueComboBox &value : MASTER::melody)
@@ -197,12 +142,6 @@ namespace SET
 
         // Запись на мастер-карту
         MASTER::write_config.Save();
-
-        // Дополнительно - Автономный режим
-        OFFLINE::security_mode.Save();
-        OFFLINE::time_lock.Save();
-        OFFLINE::time_alarm.Save();
-        OFFLINE::file_cards.Save();
 
         // Дополнительно - режим OSDP
         OSDP::address.Save();

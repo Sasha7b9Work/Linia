@@ -25,32 +25,6 @@ namespace SET
         extern ValueCheckBox write_config;              // Конфигураций
     }
 
-    // Дополнительно - Автономный режим
-    namespace OFFLINE
-    {
-        extern ValueCheckButton  enabled;               // Вкл/выкл
-        extern ValueCheckBox     security_mode;         // Режим охраны
-        extern ValueTextCtrl     time_lock;             // Время замка
-        extern ValueTextCtrl     time_alarm;            // Время тревоги
-        extern Value<wxString>   file_cards;            // Список карт автономного режима
-    }
-
-    namespace WIEGAND
-    {
-        static const int        value_min = 26;
-        static const int        value_max = 64;
-        extern ValueTextCtrl    value;                  // Wiegand
-        extern ValueCheckBox    full_guid;              // Передавать ли полный GUID
-        extern ValueCheckBox    control_bits;           // Считать ли контрольные биты
-        extern ValueCheckBox    inverse_control_bits;   // Обратный порядок расчёта контрольных бит - чёт/нечет поменян местами
-        extern ValueCheckBox    reverse_order_bits;     // Обратный порядок бит
-        extern ValueCheckBox    nuid_discard_LSB;       // Отрасывать в NUID младший значащий бит
-
-        // Возвращает полное значение для передачи для записи мастер-карты
-        // b0 - value, b1 - control_bits, b2 - inverse
-        uint GetFullValue();
-    }
-
     // Дополнительно - Режим OSDP
     namespace OSDP
     {
