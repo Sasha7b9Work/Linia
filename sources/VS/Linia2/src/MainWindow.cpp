@@ -12,8 +12,10 @@
 #include "Panels/Panel04_Model.h"
 #include "Panels/Panel05_Graph.h"
 #include "Panels/Panel06_Percents.h"
+#include "Panels/Panel07_Indicator.h"
 #include "Panels/Panel08_ModeLower.h"
 #include "Panels/Panel09_Table.h"
+#include "Panels/Panel10_Scale.h"
 #include "Panels/Panel11_Buttons.h"
 
 
@@ -112,9 +114,13 @@ MainWindow::MainWindow(const wxString &title)
 
     new PanelPercents(this);
 
+    new PanelIndicator(this);
+
     new PanelModeLower(this);
 
     new PanelTable(this);
+
+    new PanelScale(this);
 
     new PanelButtons(this);
 }
