@@ -43,7 +43,7 @@ MainWindow::MainWindow(const wxString &title)
     sizer->Add(panel, 1, wxEXPAND);
     sizer->Add(notebook, 1, wxEXPAND);
 
-    SetSizerAndFit(sizer);
+    SetSizer(sizer);
 
     wxWindow::SetPosition(SET::GUI::position.Get());
 
@@ -67,6 +67,8 @@ MainWindow::MainWindow(const wxString &title)
         else
         {
             SetClientSize(size);
+
+            SetWindowStyle(GetWindowStyle() & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX));
         }
     }
 }
