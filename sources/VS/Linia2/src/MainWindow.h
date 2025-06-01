@@ -11,8 +11,13 @@ class MainWindow : public wxFrame
 {
 public:
 
-    static const int FULL_WIDTH = 1024;     // Полная ширина - соотвествует разрешению экрана
-    static const int FULL_HEIGHT = 768;     // Полная высота - соотвествует разрешению экрана
+    static const int WIDTH = 1024;     // Полная ширина - соотвествует разрешению экрана
+    static const int HEIGHT = 768;     // Полная высота - соотвествует разрешению экрана
+
+	static const int WIDTH1 = 100;                      // Ширина первого столбика с панелями
+    static const int WIDTH2 = 400;                      // Ширина второго столбика с панелями
+    static const int WIDTH3 = WIDTH - WIDTH1 - WIDTH2;  // Ширина последнего, третьего, столбика с панелями
+
 
     MainWindow(const wxString &title);
 

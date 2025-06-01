@@ -6,6 +6,7 @@
 #include "Utils/Configurator.h"
 #include "Windows/ConsoleRS232.h"
 #include "MainWindow.h"
+#include "Panels/Panel01_Name.h"
 
 
 /*
@@ -68,18 +69,18 @@ MainWindow::MainWindow(const wxString &title)
 
     wxWindow::SetPosition(SET::GUI::position.Get());
 
-	Bind(wxEVT_CHAR_HOOK, &MainWindow::OnEventKeyHook, this);
+    Bind(wxEVT_CHAR_HOOK, &MainWindow::OnEventKeyHook, this);
 
     {
-		const wxSize size(FULL_WIDTH, FULL_HEIGHT);
-        
-        wxSize screenSize = wxGetDisplaySize(); // Получить общее разрешение экрана
-		int width = screenSize.GetWidth();
-		int height = screenSize.GetHeight();
+        const wxSize size(WIDTH, HEIGHT);
 
-        if (width == FULL_WIDTH && height == FULL_HEIGHT)
+        wxSize screenSize = wxGetDisplaySize(); // Получить общее разрешение экрана
+        int width = screenSize.GetWidth();
+        int height = screenSize.GetHeight();
+
+        if (width == WIDTH && height == HEIGHT)
         {
-			SetSize(size);
+            SetSize(size);
 
             ShowFullScreen(true);
         }
@@ -90,6 +91,9 @@ MainWindow::MainWindow(const wxString &title)
             SetWindowStyle(GetWindowStyle() & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX));
         }
     }
+
+    PanelName pName = new PanelName(this);
+    pName.SetPosition({ 0, 0 });
 }
 
 
