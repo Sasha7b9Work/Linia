@@ -2,9 +2,9 @@
 #include "defines.h"
 #include "Utils/String.h"
 #include "Communicator/ComPort.h"
-#include "Panels/ConsoleRS232.h"
 #include "Utils/Configurator.h"
 #include "Settings/Settings.h"
+#include "Windows/ConsoleRS232.h"
 
 
 ConsoleRS232 *ConsoleRS232::self = nullptr;

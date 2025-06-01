@@ -3,10 +3,10 @@
 #include "Application.h"
 #include "Utils/Configurator.h"
 #include "Communicator/ComPort.h"
-#include "Panels/ConsoleRS232.h"
 #include "Settings/Settings.h"
 #include "Utils/Timer.h"
 #include "MainWindow.h"
+#include "Windows/ConsoleRS232.h"
 
 
 wxIMPLEMENT_APP(Application);

@@ -1,8 +1,8 @@
 ﻿// 2023/08/31 13:22:41 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Utils/Log.h"
-#include "Panels/ConsoleRS232.h"
 #include "Utils/StringUtils.h"
+#include "Windows/ConsoleRS232.h"
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>

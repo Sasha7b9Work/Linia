@@ -72,29 +72,7 @@ file(GLOB CONTROLS                      src/Controls/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB UTILS                         src/Utils/*.*)
-file(GLOB THIRDPARTY_LIBMPG123          src/ThirdParty/libmpg123/src/libmpg123/libmpg123.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/compat.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/dct64.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/equalizer.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/format.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/frame.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/icy.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/icy2utf8.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/index.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/id3.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/layer1.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/layer2.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/layer3.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/optimize.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/ntom.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/parse.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/readers.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/stringbuf.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/synth.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/synth_8bit.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/synth_real.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/synth_s32.c
-                                        src/ThirdParty/libmpg123/src/libmpg123/tabinit.c)
+file(GLOB WINDOWS                       src/Windows/*.*)
 
 source_group(doc                        FILES ${DOC})
 source_group(Resources                  FILES ${RESOURCES})
@@ -104,7 +82,7 @@ source_group(Controls                   FILES ${CONTROLS})
 source_group(Panels                     FILES ${PANELS})
 source_group(Settings                   FILES ${SETTINGS})
 source_group(Utils                      FILES ${UTILS})
-source_group(ThirdParty/libmpg123       FILES ${THIRDPARTY_LIBMPG123})
+source_group(Windows                    FILES ${WINDOWS})
 
 add_executable(${PROJECT_NAME}
     ${DOC}
@@ -115,7 +93,7 @@ add_executable(${PROJECT_NAME}
     ${PANELS}
     ${SETTINGS}
     ${UTILS}
-    ${THIRDPARTY_LIBMPG123}
+    ${WINDOWS}
 )
 
 

@@ -3,9 +3,9 @@
 #include "Communicator/ComPort.h"
 #include "Communicator/rs232.h"
 #include "Utils/String.h"
-#include "Panels/ConsoleRS232.h"
 #include "Utils/StringUtils.h"
 #include "Settings/Settings.h"
+#include "Windows/ConsoleRS232.h"
 #include <cstring>
 #include <chrono>
 #include <thread>
