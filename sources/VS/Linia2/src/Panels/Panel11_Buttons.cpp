@@ -1,4 +1,4 @@
-// 2025/6/1 17:32:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/6/1 17:32:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/Panel11_Buttons.h"
 #include "MainWindow.h"
@@ -24,14 +24,14 @@ PanelButtons::PanelButtons(wxWindow* parent) :
 
     wxString labels[NUM_BUTTONS] =
     {
-        "Файл",
-        _("Тест"),
-        _("Настройка"),
-        _("Архив"),
-        _("График"),
-        _("Таблица"),
-        _("Отчёт"),
-        _("Измерение")
+        "Р¤Р°Р№Р»",
+        _("РўРµСЃС‚"),
+        _("РќР°СЃС‚СЂРѕР№РєР°"),
+        _("РђСЂС…РёРІ"),
+        _("Р“СЂР°С„РёРє"),
+        _("РўР°Р±Р»РёС†Р°"),
+        _("РћС‚С‡С‘С‚"),
+        _("РР·РјРµСЂРµРЅРёРµ")
     };
 
 
