@@ -19,5 +19,7 @@ PanelDebug::PanelDebug(wxWindow *parent) :
 
     sizer->Add(NotebookChips::self, 1, wxEXPAND);
 
-    SetSizerAndFit(sizer);
+    SetSizer(sizer);
+
+    wxPanel::Layout();
 }

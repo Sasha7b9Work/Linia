@@ -302,4 +302,6 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
     PanelButtons::self->Show(mode != ModeMainWindow::Debug);
 
     PanelDebug::self->Show(mode == ModeMainWindow::Debug);
+
+    wxFrame::Layout();
 }
