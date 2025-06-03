@@ -17,6 +17,7 @@
 #include "Panels/Panel09_Table.h"
 #include "Panels/Panel10_Scale.h"
 #include "Panels/Panel11_Buttons.h"
+#include "Panels/Panel12_Debug.h"
 
 
 /*
@@ -123,6 +124,9 @@ MainWindow::MainWindow(const wxString &title)
     new PanelScale(this);
 
     new PanelButtons(this);
+
+    new PanelDebug(this);
+    PanelDebug::self->Hide();
 }
 
 
@@ -285,15 +289,17 @@ void MainWindow::OnAbout(wxCommandEvent &WXUNUSED(event))
 
 void MainWindow::SetMode(ModeMainWindow::E mode)
 {
-    PanelName::self->Hide();
-    PanelModeUpper::self->Hide();
-    PanelConfig::self->Hide();
-    PanelModel::self->Hide();
-    PanelGraph::self->Hide();
-    PanelPercents::self->Hide();
-    PanelIndicator::self->Hide();
-    PanelModeLower::self->Hide();
-    PanelTable::self->Hide();
-    PanelScale::self->Hide();
-    PanelButtons::self->Hide();
+    PanelName::self->Show(mode != ModeMainWindow::Debug);
+    PanelModeUpper::self->Show(mode != ModeMainWindow::Debug);
+    PanelConfig::self->Show(mode != ModeMainWindow::Debug);
+    PanelModel::self->Show(mode != ModeMainWindow::Debug);
+    PanelGraph::self->Show(mode != ModeMainWindow::Debug);
+    PanelPercents::self->Show(mode != ModeMainWindow::Debug);
+    PanelIndicator::self->Show(mode != ModeMainWindow::Debug);
+    PanelModeLower::self->Show(mode != ModeMainWindow::Debug);
+    PanelTable::self->Show(mode != ModeMainWindow::Debug);
+    PanelScale::self->Show(mode != ModeMainWindow::Debug);
+    PanelButtons::self->Show(mode != ModeMainWindow::Debug);
+
+    PanelDebug::self->Show(mode == ModeMainWindow::Debug);
 }
