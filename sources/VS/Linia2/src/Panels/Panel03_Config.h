@@ -10,4 +10,6 @@ public:
     static const int HEIGHT = 500;
 
     PanelConfig(wxWindow *parent);
+
+    static PanelConfig *self;
 };

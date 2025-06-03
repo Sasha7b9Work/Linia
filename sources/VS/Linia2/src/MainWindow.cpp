@@ -281,3 +281,19 @@ void MainWindow::OnAbout(wxCommandEvent &WXUNUSED(event))
 
     dlg.ShowModal();
 }
+
+
+void MainWindow::SetMode(ModeMainWindow::E mode)
+{
+    PanelName::self->Hide();
+    PanelModeUpper::self->Hide();
+    PanelConfig::self->Hide();
+    PanelModel::self->Hide();
+    PanelGraph::self->Hide();
+    PanelPercents::self->Hide();
+    PanelIndicator::self->Hide();
+    PanelModeLower::self->Hide();
+    PanelTable::self->Hide();
+    PanelScale::self->Hide();
+    PanelButtons::self->Hide();
+}

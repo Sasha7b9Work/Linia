@@ -10,4 +10,6 @@ public:
     static const int HEIGHT = 20;
 
     PanelPercents(wxWindow *parent);
+
+    static PanelPercents *self;
 };

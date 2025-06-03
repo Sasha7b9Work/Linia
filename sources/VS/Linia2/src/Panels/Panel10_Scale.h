@@ -8,4 +8,6 @@ class PanelScale : public Panel
 public:
 
     PanelScale(wxWindow *parent);
+
+    static PanelScale *self;
 };

@@ -7,4 +7,6 @@ class PanelModeUpper : public Panel
 {
 public:
     PanelModeUpper(wxWindow* parent);
+
+    static PanelModeUpper *self;
 };

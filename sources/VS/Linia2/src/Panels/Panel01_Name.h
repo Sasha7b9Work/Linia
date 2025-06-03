@@ -8,6 +8,8 @@ class PanelName : public Panel
 public:
     PanelName(wxWindow *parent);
 
+    static PanelName *self;
+
 private:
 
     wxStaticText *textDate = nullptr;

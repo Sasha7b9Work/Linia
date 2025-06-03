@@ -8,4 +8,6 @@ class PanelTable : public Panel
 public:
 
     PanelTable(wxWindow *parent);
+
+    static PanelTable *self;
 };

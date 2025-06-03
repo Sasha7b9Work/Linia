@@ -10,4 +10,6 @@ public:
     static const int HEIGHT = 25;
 
     PanelIndicator(wxWindow *parent);
+
+    static PanelIndicator *self;
 };

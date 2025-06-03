@@ -7,6 +7,17 @@
 #pragma warning(pop)
 
 
+struct ModeMainWindow
+{
+    enum E
+    {
+        Standard,
+        Debug,
+        Count
+    };
+};
+
+
 class MainWindow : public wxFrame
 {
 public:
@@ -32,6 +43,8 @@ public:
     static MainWindow *self;
 
     void OnEventCloseWindow(wxCloseEvent &);
+
+    void SetMode(ModeMainWindow::E);
 
 private:
 

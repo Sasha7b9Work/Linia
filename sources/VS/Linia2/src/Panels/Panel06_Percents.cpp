@@ -5,8 +5,11 @@
 #include "MainWindow.h"
 
 
+PanelPercents *PanelPercents::self = nullptr;
+
+
 PanelPercents::PanelPercents(wxWindow* parent) :
     Panel(parent, 0, MainWindow::HEIGTH1 + PanelModel::HEIGHT, MainWindow::WIDTH1, HEIGHT)
 {
-
+    self = this;
 }

@@ -10,4 +10,6 @@ public:
     static const int HEIGHT = 500;
 
     PanelGraph(wxWindow *parent);
+
+    static PanelGraph *self;
 };

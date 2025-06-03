@@ -5,6 +5,9 @@
 #include "Settings/Settings.h"
 
 
+PanelButtons *PanelButtons::self = nullptr;
+
+
 enum
 {
     ID_BUTTON_FILE = ID_DEFINES_COUNT + 1,
@@ -22,6 +25,8 @@ enum
 PanelButtons::PanelButtons(wxWindow* parent) :
     Panel(parent, 0, MainWindow::HEIGHT - HEIGHT, MainWindow::WIDTH1 + MainWindow::WIDTH2, HEIGHT)
 {
+    self = this;
+
     wxString labels[100] =
     {
         _L("Файл"),
@@ -85,7 +90,7 @@ void PanelButtons::OnEventButton(wxCommandEvent &event)
     }
     else if (id == ID_BUTTON_DEBUG)
     {
-
+        MainWindow::self->SetMode(ModeMainWindow::Debug);
     }
 }
 

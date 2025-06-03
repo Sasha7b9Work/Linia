@@ -7,9 +7,12 @@
 #include "MainWindow.h"
 
 
+PanelScale *PanelScale::self = nullptr;
+
+
 PanelScale::PanelScale(wxWindow* parent) :
     Panel(parent, MainWindow::WIDTH1 + MainWindow::WIDTH2, PanelConfig::HEIGHT + PanelIndicator::HEIGHT,
         MainWindow::WIDTH3, MainWindow::HEIGHT - PanelConfig::HEIGHT - PanelIndicator::HEIGHT)
 {
-
+    self = this;
 }

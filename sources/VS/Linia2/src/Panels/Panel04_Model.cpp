@@ -4,8 +4,11 @@
 #include "MainWindow.h"
 
 
+PanelModel *PanelModel::self = nullptr;
+
+
 PanelModel::PanelModel(wxWindow* parent) :
     Panel(parent, 0, MainWindow::HEIGTH1, MainWindow::WIDTH1, HEIGHT)
 {
-
+    self = this;
 }

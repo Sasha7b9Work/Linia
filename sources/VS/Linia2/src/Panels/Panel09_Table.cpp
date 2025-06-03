@@ -6,9 +6,12 @@
 #include "MainWindow.h"
 
 
+PanelTable *PanelTable::self = nullptr;
+
+
 PanelTable::PanelTable(wxWindow* parent) :
     Panel(parent, MainWindow::WIDTH1, MainWindow::HEIGTH1 + PanelGraph::HEIGHT,
         MainWindow::WIDTH2, MainWindow::HEIGHT - MainWindow::HEIGTH1 - PanelGraph::HEIGHT - PanelButtons::HEIGHT)
 {
-
+    self = this;
 }

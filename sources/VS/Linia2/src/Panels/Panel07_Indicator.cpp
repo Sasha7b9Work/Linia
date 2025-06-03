@@ -5,9 +5,12 @@
 #include "MainWindow.h"
 
 
+PanelIndicator *PanelIndicator::self = nullptr;
+
+
 PanelIndicator::PanelIndicator(wxWindow* parent) :
     Panel(parent, MainWindow::WIDTH1 + MainWindow::WIDTH2, PanelConfig::HEIGHT,
         MainWindow::WIDTH3, HEIGHT)
 {
-
+    self = this;
 }

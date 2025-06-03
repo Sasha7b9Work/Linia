@@ -11,6 +11,8 @@ public:
 
     PanelButtons(wxWindow *parent);
 
+    static PanelButtons *self;
+
 private:
 
     void OnEventButton(wxCommandEvent &);

@@ -7,9 +7,12 @@
 #include "MainWindow.h"
 
 
+PanelModeLower *PanelModeLower::self = nullptr;
+
+
 PanelModeLower::PanelModeLower(wxWindow *parent) :
     Panel(parent, 0, MainWindow::HEIGTH1 + PanelModel::HEIGHT + PanelPercents::HEIGHT,
         MainWindow::WIDTH1, MainWindow::HEIGHT - MainWindow::HEIGTH1 - PanelModel::HEIGHT - PanelPercents::HEIGHT - PanelButtons::HEIGHT)
 {
-
+    self = this;
 }

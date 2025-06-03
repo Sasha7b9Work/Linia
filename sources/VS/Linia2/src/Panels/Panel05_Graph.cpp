@@ -4,8 +4,11 @@
 #include "MainWindow.h"
 
 
+PanelGraph *PanelGraph::self = nullptr;
+
+
 PanelGraph::PanelGraph(wxWindow* parent) :
     Panel(parent, MainWindow::WIDTH1, MainWindow::HEIGTH1, MainWindow::WIDTH2, HEIGHT)
 {
-
+    self = this;
 }

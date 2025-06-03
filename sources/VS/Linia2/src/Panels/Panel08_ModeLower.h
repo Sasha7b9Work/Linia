@@ -8,4 +8,6 @@ class PanelModeLower : public Panel
 public:
 
     PanelModeLower(wxWindow *parent);
+
+    static PanelModeLower *self;
 };

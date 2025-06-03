@@ -10,4 +10,6 @@ public:
     static const int HEIGHT = 400;
 
     PanelModel(wxWindow *parent);
+
+    static PanelModel *self;
 };

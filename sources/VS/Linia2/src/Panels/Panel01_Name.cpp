@@ -4,9 +4,14 @@
 #include "MainWindow.h"
 
 
+PanelName *PanelName::self = nullptr;
+
+
 PanelName::PanelName(wxWindow *parent) :
     Panel(parent, 0, 0, MainWindow::WIDTH1, MainWindow::HEIGTH1)
 {
+    self = this;
+
     new wxStaticText(this, wxID_ANY, _L("ИППП 4"), { 0, 10 }, { GetSize().x, 20 }, wxALIGN_CENTRE_HORIZONTAL);
 
     textDate = new wxStaticText(this, wxID_ANY, "", {0, 30}, {GetSize().x, 20}, wxALIGN_CENTRE_HORIZONTAL);
