@@ -55,6 +55,7 @@ file(GLOB SRC                           src/*.*)
 file(GLOB COMMUNICATOR                  src/Communicator/*.*)
 file(GLOB CONTROLS                      src/Controls/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
+file(GLOB PANELS_DEBUG                  src/Panels/Debug/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB UTILS                         src/Utils/*.*)
 file(GLOB WINDOWS                       src/Windows/*.*)
@@ -65,6 +66,7 @@ source_group(src                        FILES ${SRC})
 source_group(Communicator               FILES ${COMMUNICATOR})
 source_group(Controls                   FILES ${CONTROLS})
 source_group(Panels                     FILES ${PANELS})
+source_group(Panels/Debug               FILES ${PANELS_DEBUG})
 source_group(Settings                   FILES ${SETTINGS})
 source_group(Utils                      FILES ${UTILS})
 source_group(Windows                    FILES ${WINDOWS})
@@ -76,6 +78,7 @@ add_executable(${PROJECT_NAME}
     ${COMMUNICATOR}
     ${CONTROLS}
     ${PANELS}
+    ${PANELS_DEBUG}
     ${SETTINGS}
     ${UTILS}
     ${WINDOWS}
