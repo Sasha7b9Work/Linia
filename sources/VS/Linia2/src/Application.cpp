@@ -64,6 +64,8 @@ void Application::Disable()
     LOG_WRITE("Application::Disable()");
 
     timer.Stop();
+
+    SET::GUI::Save();
 }
 
 

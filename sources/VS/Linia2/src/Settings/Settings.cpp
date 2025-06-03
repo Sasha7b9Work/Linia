@@ -6,9 +6,6 @@
 
 namespace SET
 {
-    ValueCheckButton mode_eco("mode_eco", false);
-
-
     namespace GUI
     {
         Value<wxPoint>   position("gui_position", { 100, 100 });
@@ -21,6 +18,7 @@ namespace SET
         Value<int>       current_page_notebook("gui_current_page_notebook", 0);
         ValueCheckButton serial_port_auto_find("serial_port_auto_find", true);
         Value<int>       serial_port_num("serial_port_num", 0);
+        Value<bool>      debug_mode("debug_mode", false);
     }
 
     void Init()
@@ -38,8 +36,6 @@ namespace SET
 
     void Save(const wxString &file_path)
     {
-        mode_eco.Set(false);
-
         Config::SetFile(file_path);
 
         Config::SetFile("");
@@ -55,7 +51,14 @@ void SET::GUI::Load()
     pos_list.Load();
     size_list.Load();
     maximized_list.Load();
+    debug_mode.Load();
     maximized_console.Load();
     current_page_notebook.Load();
     serial_port_num.Load();
+}
+
+
+void SET::GUI::Save()
+{
+    debug_mode.Save();
 }

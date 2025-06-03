@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Panels/Panel11_Buttons.h"
 #include "MainWindow.h"
+#include "Settings/Settings.h"
 
 
 enum
@@ -13,16 +14,15 @@ enum
     ID_BUTTON_GRAPH,
     ID_BUTTON_TABLE,
     ID_BUTTON_REPORT,
-    ID_BUTTON_MEASURE
+    ID_BUTTON_MEASURE,
+    ID_BUTTON_DEBUG
 };
 
 
 PanelButtons::PanelButtons(wxWindow* parent) :
     Panel(parent, 0, MainWindow::HEIGHT - HEIGHT, MainWindow::WIDTH1 + MainWindow::WIDTH2, HEIGHT)
 {
-    static const int NUM_BUTTONS = 8;
-
-    wxString labels[NUM_BUTTONS] =
+    wxString labels[100] =
     {
         _L("Файл"),
         _L("Тест"),
@@ -31,13 +31,14 @@ PanelButtons::PanelButtons(wxWindow* parent) :
         _L("График"),
         _L("Таблица"),
         _L("Отчёт"),
-        _L("Измерение")
+        _L("Измерение"),
+        _L("Отладка")
     };
 
 
-    int delta = GetSize().x / NUM_BUTTONS;
+    const int delta = GetSize().x / NumButtons();
 
-    for (int i = 0; i < NUM_BUTTONS; i++)
+    for (int i = 0; i < NumButtons(); i++)
     {
         new wxButton(this, ID_BUTTON_FILE + i, labels[i], {i * delta, 0}, {delta - 3, GetSize().y - 3});
     }
@@ -82,4 +83,14 @@ void PanelButtons::OnEventButton(wxCommandEvent &event)
     {
 
     }
+    else if (id == ID_BUTTON_DEBUG)
+    {
+
+    }
+}
+
+
+int PanelButtons::NumButtons() const
+{
+    return SET::GUI::debug_mode.Get() ? 9 : 8;
 }
