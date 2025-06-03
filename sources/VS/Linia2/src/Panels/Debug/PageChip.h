@@ -4,4 +4,8 @@
 
 // Это панель для засылки данных в регистры микросхем типа AD
 
-
+class PageChip : public wxPanel
+{
+public:
+    PageChip(wxNotebook *parent, const wxString &title);
+};
