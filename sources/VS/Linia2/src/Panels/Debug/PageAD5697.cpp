@@ -11,5 +11,5 @@ PageAD5697::PageAD5697(wxNotebook *parent) : PageChip(parent, "AD5697")
 {
     self = this;
 
-    new PanelRegister(this, "AD5697", 10);
+    new PanelRegister(this, "Input Register", 32);
 }
