@@ -4,20 +4,14 @@
 #include "Settings/Color.h"
 
 
-Painter::Painter(wxWindow *parent, wxPoint position, wxSize size, TypePainter::E _type) :
-    wxPanel(parent, wxID_ANY, position, size),
-    type(_type)
+Painter::Painter(wxWindow *parent, wxPoint position, wxSize size) :
+    wxPanel(parent, wxID_ANY, position, size)
 {
     wxPanel::SetSize(size);
     wxPanel::SetDoubleBuffered(true);
     Bind(wxEVT_PAINT, &Painter::OnPaint, this);
 
-    color = (type == 0) ? wxColour(255U, 0, 0) : wxColour(0, 255U, 0);
-
-    if (type == TypePainter::Eye)
-    {
-        color = wxColour(255, 255, 255);
-    }
+    color = wxColour(255U, 0, 0);
 }
 
 

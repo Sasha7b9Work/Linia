@@ -5,23 +5,10 @@
 struct Color;
 
 
-struct TypePainter
-{
-    enum E
-    {
-        Red,        // Рисует квадратик цвета "Red"
-        Green,      // Рисует квадратик цвета "Green"
-        Eye,
-        Color_,     // Поле в диалоге выбора цвета
-        Count
-    };
-};
-
-
 class Painter : public wxPanel
 {
 public:
-    Painter(wxWindow *parent, wxPoint position, wxSize size, TypePainter::E _type);
+    Painter(wxWindow *parent, wxPoint position, wxSize size);
 
     virtual void OnPaint(wxPaintEvent &);
 
@@ -31,6 +18,5 @@ public:
 
 private:
 
-    TypePainter::E type;
     wxColour color;
 };

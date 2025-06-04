@@ -27,7 +27,7 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
         const int x0 = 50;
         const int y0 = 90;
 
-        Painter *painter = new Painter(this, { x0 - 5, y0 - 5 }, { 150, 150 }, TypePainter::Red);
+        Painter *painter = new Painter(this, { x0 - 5, y0 - 5 }, { 150, 150 } );
 
         wxSize size(20, 20);
 
