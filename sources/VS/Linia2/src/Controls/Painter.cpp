@@ -4,7 +4,7 @@
 #include "Settings/Color.h"
 
 
-Painter::Painter(wxWindow *parent, wxPoint position, wxSize size) :
+Painter::Painter(wxWindow *parent, const wxPoint &position, const wxSize &size) :
     wxPanel(parent, wxID_ANY, position, size)
 {
     wxPanel::SetSize(size);

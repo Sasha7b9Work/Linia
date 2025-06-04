@@ -8,7 +8,7 @@ struct Color;
 class Painter : public wxPanel
 {
 public:
-    Painter(wxWindow *parent, wxPoint position, wxSize size);
+    Painter(wxWindow *parent, const wxPoint &position, const wxSize &size);
 
     virtual void OnPaint(wxPaintEvent &);
 
