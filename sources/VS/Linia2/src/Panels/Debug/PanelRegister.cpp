@@ -4,7 +4,7 @@
 
 
 PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_depth) :
-    wxPanel(parent, wxID_ANY, wxDefaultPosition, { 500, 200 }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
+    wxPanel(parent, wxID_ANY, wxDefaultPosition, { 700, 200 }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
     bit_depth(_bit_depth)
 {
     new wxStaticText(this, wxID_ANY, title, { 10, 10 });
@@ -12,7 +12,7 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
     int x = 10;
     int y = 35;
 
-    wxSize size(13, 13);
+    wxSize size(20, 20);
 
     for (int i = 0; i < bit_depth; i++)
     {
