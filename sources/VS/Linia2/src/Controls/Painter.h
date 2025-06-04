@@ -33,6 +33,4 @@ private:
 
     TypePainter::E type;
     wxColour color;
-
-    void OnEventMouseLeft(wxMouseEvent &);
 };

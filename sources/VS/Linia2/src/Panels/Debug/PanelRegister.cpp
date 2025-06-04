@@ -1,6 +1,7 @@
 ﻿// 2025/6/4 10:27:32 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/Debug/PanelRegister.h"
+#include "Controls/Painter.h"
 
 
 PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_depth, bool _reverse_bits) :
@@ -25,6 +26,8 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
     {
         const int x0 = 50;
         const int y0 = 90;
+
+        new Painter(this, { x0 - 5, y0 - 5 }, { 150, 150 }, TypePainter::Red);
 
         wxSize size(20, 20);
 

@@ -18,8 +18,6 @@ Painter::Painter(wxWindow *parent, wxPoint position, wxSize size, TypePainter::E
     {
         color = wxColour(255, 255, 255);
     }
-
-    Bind(wxEVT_LEFT_UP, &Painter::OnEventMouseLeft, this);
 }
 
 
@@ -48,14 +46,4 @@ void Painter::SetColor(const Color &_color)
     );
 
     Refresh(true);
-}
-
-
-void Painter::OnEventMouseLeft(wxMouseEvent &event)
-{
-    if (event.IsButton())
-    {
-        GetParent()->ProcessWindowEvent(event);
-        GetParent()->SetFocus();
-    }
 }
