@@ -23,7 +23,8 @@ public:
     static const int HEIGHT = 250;
 
     // Если reverse_bits, то биты идут в обратном порядке - первый на экране нулевой
-    PanelRegister(wxWindow *parent, const wxString &title, int bit_depth, bool reverse_bits);
+    // Если additional_modes, то добавляется строка дополнительных режимов
+    PanelRegister(wxWindow *parent, const wxString &title, int bit_depth, bool reverse_bits, bool additional_modes);
 
     void SetNamesBits(const wxArrayString &);
 
@@ -33,6 +34,7 @@ private:
 
     int bit_depth = 0;
     int reverse_bits = 0;
+    bool additional_modes = false;
 
     wxArrayString names_bits;                   // Названия битов
 

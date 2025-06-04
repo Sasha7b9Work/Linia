@@ -4,13 +4,15 @@
 #include "Panels/Debug/PainterRegister.h"
 
 
-PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_depth, bool _reverse_bits) :
+PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_depth, bool _reverse_bits, bool _additional_modes) :
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
     bit_depth(_bit_depth),
-    reverse_bits(_reverse_bits)
+    reverse_bits(_reverse_bits),
+    additional_modes(_additional_modes)
 {
     new wxStaticText(this, wxID_ANY, title, { 10, 10 });
 
+    if(additional_modes)
     {
         int x = 10;
         int y = 50;

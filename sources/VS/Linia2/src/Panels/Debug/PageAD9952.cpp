@@ -46,7 +46,14 @@ PageAD9952::PageAD9952(wxNotebook *parent) : PageChip(parent, "AD9952")
             names.push_back("X");
         }
 
-        PanelRegister *regCFR1 = new PanelRegister(this, "Control Function Register CFR1", 32, false);
+        names.clear();
+
+        for (int i = 0; i < 32; i++)
+        {
+            names.push_back(wxString::Format("D%d", i));
+        }
+
+        PanelRegister *regCFR1 = new PanelRegister(this, "Control Function Register CFR1", 32, false, false);
 
         regCFR1->SetNamesBits(names);
 
@@ -61,7 +68,7 @@ PageAD9952::PageAD9952(wxNotebook *parent) : PageChip(parent, "AD9952")
             names.push_back(wxString::Format("D%d", i));
         }
 
-        PanelRegister *regCFR2 = new PanelRegister(this, "Control Function Register CFR2", 24, false);
+        PanelRegister *regCFR2 = new PanelRegister(this, "Control Function Register CFR2", 24, false, false);
 
         regCFR2->SetNamesBits(names);
 
@@ -76,7 +83,7 @@ PageAD9952::PageAD9952(wxNotebook *parent) : PageChip(parent, "AD9952")
             names.push_back(wxString::Format("D%d", i));
         }
 
-        PanelRegister *regASF = new PanelRegister(this, "Amplitude Scale Factor ASF", 16, false);
+        PanelRegister *regASF = new PanelRegister(this, "Amplitude Scale Factor ASF", 16, false, false);
 
         regASF->SetNamesBits(names);
 
