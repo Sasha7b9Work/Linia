@@ -16,6 +16,7 @@
 #include <wx/statline.h>
 #include <wx/textfile.h>
 #include <wx/tokenzr.h>
+#include <wx/graphics.h>
 #include <map>
 #include <queue>
 #include <mutex>

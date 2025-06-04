@@ -24,10 +24,10 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
     }
 
     {
-        const int x0 = 40;
-        const int y0 = 10;
+        const int x0 = 40;      // / Отсюда начинаются
+        const int y0 = 60;      // / галочки битов
 
-        PainterRegister *painter = new PainterRegister(this, { 10, 85 }, { 800, 100 } );
+        PainterRegister *painter = new PainterRegister(this, this, { 10, 85 }, { 750, 100 } );
 
         wxSize size(20, 20);
 

@@ -3,8 +3,18 @@
 #include "Controls/Painter.h"
 
 
+class PanelRegister;
+
+
 class PainterRegister : public Painter
 {
 public:
-    PainterRegister(wxWindow *parent, const wxPoint &position, const wxSize &size);
+
+    PainterRegister(wxWindow *parent, PanelRegister *panel, const wxPoint &position, const wxSize &size);
+
+    virtual void OnPaint(wxPaintEvent &) override;
+
+private:
+
+    PanelRegister *panel = nullptr;
 };
