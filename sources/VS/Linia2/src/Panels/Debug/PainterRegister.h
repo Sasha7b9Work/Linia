@@ -13,7 +13,7 @@ public:
     // Ширина бита
     static const int W_B = 20;
 
-    PainterRegister(wxWindow *parent, PanelRegister *panel, const wxPoint &position, const wxSize &size);
+    PainterRegister(wxWindow *parent, PanelRegister *panel, const wxPoint &position);
 
     virtual void OnPaint(wxPaintEvent &) override;
 

@@ -4,8 +4,8 @@
 #include "Panels/Debug/PanelRegister.h"
 
 
-PainterRegister::PainterRegister(wxWindow *parent, PanelRegister *_panel, const wxPoint &position, const wxSize &size) :
-    Painter::Painter(parent, position, size),
+PainterRegister::PainterRegister(wxWindow *parent, PanelRegister *_panel, const wxPoint &position) :
+    Painter::Painter(parent, position, { 750, 150 }),
     panel(_panel)
 {
 
