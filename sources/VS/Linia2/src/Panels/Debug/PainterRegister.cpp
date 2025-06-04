@@ -31,7 +31,9 @@ void PainterRegister::OnPaint(wxPaintEvent &)
     {
         if ((i % 8) == 0)
         {
-            gc->SetBrush(pen_is_white ? *wxGREY_BRUSH : *wxWHITE_BRUSH);
+            wxBrush brush(wxColor(0xD0, 0xD0, 0xD0));
+
+            gc->SetBrush(pen_is_white ? brush : *wxWHITE_BRUSH);
             pen_is_white = !pen_is_white;
         }
 
@@ -75,7 +77,7 @@ void PainterRegister::DrawDescriptions(int index, wxGraphicsContext *gc)
 
         wxPoint coord = CoordBit(d.first_bit);
 
-        gc->DrawRectangle(coord.x - (d.num_bits - 1) * W_B, coord.y + 42 + index * W_B, W_B * d.num_bits, W_B);
+        gc->DrawRectangle(coord.x - (d.num_bits - 1) * W_B, coord.y + 41 + index * W_B, W_B * d.num_bits, W_B);
     }
 }
 
