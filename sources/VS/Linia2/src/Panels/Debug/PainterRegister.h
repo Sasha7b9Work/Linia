@@ -29,4 +29,7 @@ private:
     void DrawTitleBit(int num_bit, const wxString &title, wxGraphicsContext *);
 
     void DrawDescriptions(int index, wxGraphicsContext *);
+
+    // Если нельзя вписать текст в данную ширину, то размер шрифта будет уменьшаться, пока не впишется
+    void DrawTextInCenter(int x, int y, int width, const wxString &, int size, wxGraphicsContext *);
 };

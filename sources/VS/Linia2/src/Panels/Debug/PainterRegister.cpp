@@ -99,30 +99,33 @@ wxFont PainterRegister::GetDefaultFont(int size)
 
 void PainterRegister::DrawTitleBit(int num_bit, const wxString &title, wxGraphicsContext *gc)
 {
-    gc->SetFont(GetDefaultFont(), *wxBLACK);
-
     wxPoint coord = CoordBit(num_bit);
 
-    int d = (num_bit % 2) ? 2 : 7;
+    int d = (num_bit % 2) ? 2 : 6;
 
-    // Получаем размеры текста
-    wxDouble textWidth, textHeight;
-    gc->GetTextExtent(title, &textWidth, &textHeight);
+    DrawTextInCenter(coord.x, coord.y + d, W_B, title, 8, gc);
+}
 
-    if (textWidth > W_B)
+
+void PainterRegister::DrawTextInCenter(int x, int y, int width, const wxString &text, int size, wxGraphicsContext *gc)
+{
+    gc->SetFont(GetDefaultFont(size), *wxBLACK);
+
+    wxDouble textWidth = 10000;
+    wxDouble textHeight = 0;
+
+    while (textWidth > width)
     {
-        gc->SetFont(GetDefaultFont(5), *wxBLACK);
+        gc->GetTextExtent(text, &textWidth, &textHeight);
 
-        // Рассчитываем позицию для центрирования
-        wxDouble x = coord.x + 15 - textWidth / 2;
+        if (textWidth < width)
+        {
+            break;
+        }
 
-        gc->DrawText(title, x, coord.y + d);
+        size--;
+        gc->SetFont(GetDefaultFont(size), *wxBLACK);
     }
-    else
-    {
-        // Рассчитываем позицию для центрирования
-        wxDouble x = coord.x + 11 - textWidth / 2;
 
-        gc->DrawText(title, x, coord.y + d);
-    }
+    gc->DrawText(text, x + width / 2 - textWidth / 2, y);
 }
