@@ -13,41 +13,6 @@ PageAD9952::PageAD9952(wxNotebook *parent) : PageChip(parent, "AD9952")
     wxArrayString names;
 
     {
-        names.push_back("X");
-        names.push_back("SYNC_CLK Out Disable");
-        names.push_back("X");
-        names.push_back("External Power-Down Mode");
-        names.push_back("Clock Input Power-Down");
-        names.push_back("DAC Power-Down");
-        names.push_back("Comparator Power-Down");
-        names.push_back("Digital Power-Down");
-
-        names.push_back("LSB First");
-        names.push_back("SDIO Input Only");
-        names.push_back("Clear Phase Accum.");
-        names.push_back("X");
-        names.push_back("Enable SINE Output");
-        names.push_back("AutoClr Phase Accum.");
-        names.push_back("X");
-        names.push_back("X");
-
-        for (int i = 0; i < 6; i++)
-        {
-            names.push_back("X");
-        }
-        names.push_back("Software Manual Sync");
-        names.push_back("Automatic Sync Enable");
-
-        names.push_back("Auto OSK Keying");
-        names.push_back("OSK Enable");
-        names.push_back("Load ARR I/O UD");
-        for (int i = 0; i < 5; i++)
-        {
-            names.push_back("X");
-        }
-
-        names.clear();
-
         for (int i = 0; i < 32; i++)
         {
             names.push_back(wxString::Format("D%d", i));
@@ -56,6 +21,37 @@ PageAD9952::PageAD9952(wxNotebook *parent) : PageChip(parent, "AD9952")
         PanelRegister *regCFR1 = new PanelRegister(this, "Control Function Register CFR1", 32, false, false);
 
         regCFR1->SetNamesBits(names);
+
+        std::vector<StructDescription> desc0;
+
+        desc0.push_back({ 0, 1, "Not Used" });
+        desc0.push_back({ 1, 1, "SYNC_CLK Out Disable" });
+        desc0.push_back({ 2, 1, "X" });
+        desc0.push_back({ 3, 1, "External Power-Down Mode" });
+        desc0.push_back({ 4, 1, "Clock Input Power-Down" });
+        desc0.push_back({ 5, 1, "DAC Power-Down" });
+        desc0.push_back({ 6, 1, "Comparator Power-Down" });
+        desc0.push_back({ 7, 1, "Digital Power-Down" });
+
+        desc0.push_back({ 8, 1, "LSB First" });
+        desc0.push_back({ 9, 1, "SDIO Input Only" });
+        desc0.push_back({ 10, 1, "Clear Phase Accum." });
+        desc0.push_back({ 11, 1, "X" });
+        desc0.push_back({ 12, 1, "Enable SINE Output" });
+        desc0.push_back({ 13, 1, "AutoClr Phase Accum." });
+        desc0.push_back({ 14, 1, "X" });
+        desc0.push_back({ 15, 1, "X" });
+
+        desc0.push_back({ 16, 6, "Not Used" });
+        desc0.push_back({ 22, 1, "Software Manual Sync" });
+        desc0.push_back({ 23, 1, "Automatic Sync Enable" });
+
+        desc0.push_back({ 24, 1, "Auto OSK Keying" });
+        desc0.push_back({ 25, 1, "OSK Enable" });
+        desc0.push_back({ 26, 1, "Load ARR I/O UD" });
+        desc0.push_back({ 27, 5, "Not Used" });
+
+        regCFR1->SetDescriptionBits(0, desc0);
 
         AppendRegister(regCFR1);
     }

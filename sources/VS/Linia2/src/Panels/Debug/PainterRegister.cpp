@@ -79,6 +79,8 @@ void PainterRegister::OnPaint(wxPaintEvent &)
         DrawTitleBit(i, panel->names_bits[(uint)i], gc);
     }
 
+    gc->SetBrush(*wxWHITE_BRUSH);
+
     for (int i = 0; i < 2; i++)
     {
         DrawDescriptions(i, gc);
