@@ -17,4 +17,9 @@ public:
 private:
 
     PanelRegister *panel = nullptr;
+
+    // Возвращает координаты верхнего левого угла отображения бита
+    wxPoint CoordBit(int num_bit);
+
+    void DrawTitleBit(int num_bit, const wxString &title, wxGraphicsContext *);
 };

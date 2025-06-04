@@ -19,8 +19,6 @@ void PainterRegister::OnPaint(wxPaintEvent &)
     wxGraphicsContext *gc = wxGraphicsContext::Create(_dc);
 
     gc->SetPen(*wxBLACK_PEN);
-    gc->SetBrush(wxBrush(*wxWHITE));
-    gc->DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
 
     int num_bits = panel->bit_depth;
 
@@ -29,10 +27,49 @@ void PainterRegister::OnPaint(wxPaintEvent &)
     int w = 20;
     int h = w;
 
+    bool pen_is_white = false;           // Признак того, что заполнение идёт белым
+
     for (int i = 0; i < num_bits; i++)
     {
-        gc->DrawRectangle(x0 + i * w, y0, w, h);
+        if ((i % 8) == 0)
+        {
+            gc->SetBrush(pen_is_white ? *wxGREY_BRUSH : *wxWHITE_BRUSH);
+            pen_is_white = !pen_is_white;
+        }
+
+        wxPoint coord = CoordBit(i);
+
+        gc->DrawRectangle(coord.x, coord.y, w, h);
+
+        DrawTitleBit(i, "D30", gc);
     }
 
     delete gc;
+}
+
+
+wxPoint PainterRegister::CoordBit(int num_bit)
+{
+    if (!panel->reverse_bits)
+    {
+        num_bit = panel->bit_depth - num_bit - 1;
+    }
+
+    return { 36 + num_bit * 20, 39 };
+}
+
+
+void PainterRegister::DrawTitleBit(int num_bit, const wxString &title, wxGraphicsContext *gc)
+{
+    wxFont font(7, wxFONTFAMILY_DEFAULT,
+        wxFONTSTYLE_NORMAL,
+        wxFONTWEIGHT_BOLD);
+
+    gc->SetFont(font, *wxBLACK);
+
+    wxPoint coord = CoordBit(num_bit);
+
+    int d = (num_bit % 2) ? 2 : 7;
+
+    gc->DrawText(title, coord.x + 1, coord.y + d);
 }

@@ -18,4 +18,6 @@ private:
 
     int bit_depth = 0;
     int reverse_bits = 0;
+
+    wxArrayString names_bits;       // Названия битов
 };
