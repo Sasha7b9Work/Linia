@@ -22,8 +22,6 @@ void PainterRegister::OnPaint(wxPaintEvent &)
 
     int num_bits = panel->bit_depth;
 
-    int x0 = 36;
-    int y0 = 40;
     int w = 20;
     int h = w;
 
