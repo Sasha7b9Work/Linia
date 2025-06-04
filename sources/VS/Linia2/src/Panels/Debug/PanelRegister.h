@@ -19,6 +19,9 @@ class PanelRegister : public wxPanel
 
 public:
 
+    static const int WIDTH = 800;
+    static const int HEIGHT = 250;
+
     // Если reverse_bits, то биты идут в обратном порядке - первый на экране нулевой
     PanelRegister(wxWindow *parent, const wxString &title, int bit_depth, bool reverse_bits);
 

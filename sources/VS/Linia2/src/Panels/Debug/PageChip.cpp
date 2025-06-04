@@ -10,3 +10,11 @@ PageChip::PageChip(wxNotebook *parent, const wxString &title) :
 
     wxPanel::SetBackgroundColour(parent->GetThemeBackgroundColour());
 }
+
+
+void PageChip::AppendRegister(PanelRegister *reg)
+{
+    reg->SetPosition({ 0, (int)registers.size() * PanelRegister::HEIGHT });
+
+    registers.push_back(reg);
+}

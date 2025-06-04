@@ -77,7 +77,11 @@ void PainterRegister::DrawDescriptions(int index, wxGraphicsContext *gc)
 
         wxPoint coord = CoordBit(d.first_bit);
 
-        int x = coord.x - (d.num_bits - 1) * W_B;
+        int x = coord.x;
+        if (!panel->reverse_bits)
+        {
+            x -= (d.num_bits - 1) * W_B;
+        }
         int y = coord.y + 41 + index * W_B;
         int w = W_B * d.num_bits;
         int h = W_B;

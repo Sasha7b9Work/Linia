@@ -5,7 +5,7 @@
 
 
 PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_depth, bool _reverse_bits) :
-    wxPanel(parent, wxID_ANY, wxDefaultPosition, { 800, 250 }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
+    wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
     bit_depth(_bit_depth),
     reverse_bits(_reverse_bits)
 {
