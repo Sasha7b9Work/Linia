@@ -77,7 +77,14 @@ void PainterRegister::DrawDescriptions(int index, wxGraphicsContext *gc)
 
         wxPoint coord = CoordBit(d.first_bit);
 
-        gc->DrawRectangle(coord.x - (d.num_bits - 1) * W_B, coord.y + 41 + index * W_B, W_B * d.num_bits, W_B);
+        int x = coord.x - (d.num_bits - 1) * W_B;
+        int y = coord.y + 41 + index * W_B;
+        int w = W_B * d.num_bits;
+        int h = W_B;
+
+        gc->DrawRectangle(x, y, w, h);
+
+        DrawTextInCenter(x, y + 4, w, d.desc, 8, gc);
     }
 }
 
@@ -114,11 +121,11 @@ void PainterRegister::DrawTextInCenter(int x, int y, int width, const wxString &
     wxDouble textWidth = 10000;
     wxDouble textHeight = 0;
 
-    while (textWidth > width)
+    while (textWidth >= width)
     {
         gc->GetTextExtent(text, &textWidth, &textHeight);
 
-        if (textWidth < width)
+        if (textWidth < width - 2)
         {
             break;
         }
@@ -127,5 +134,5 @@ void PainterRegister::DrawTextInCenter(int x, int y, int width, const wxString &
         gc->SetFont(GetDefaultFont(size), *wxBLACK);
     }
 
-    gc->DrawText(text, x + width / 2 - textWidth / 2, y);
+    gc->DrawText(text, x + width / 2 - textWidth / 2 + 1, y);
 }
