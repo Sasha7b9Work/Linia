@@ -10,24 +10,38 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
 {
     new wxStaticText(this, wxID_ANY, title, { 10, 10 });
 
-    const int x0 = 50;
-    const int y0 = 50;
-
-    wxSize size(20, 20);
-
-    for (int i = 0; i < bit_depth; i++)
     {
-        new wxCheckBox(this, wxID_ANY, "", { x0 + i * size.x, y0 }, size);
+        int x = 10;
+        int y = 50;
+
+        new wxStaticText(this, wxID_ANY, _L("Режим"), { x, y });
+
+        wxArrayString choices;
+        choices.Add(_L("Нижний уровень"));
+
+        new wxComboBox(this, wxID_ANY, choices[0], { x + 50, y - 2 }, { 150, 20 }, choices, wxCB_READONLY);
     }
 
-    if (reverse_bits)
     {
-        new wxStaticText(this, wxID_ANY, "DB0", { x0 - 35, y0 + 2 });
-        new wxStaticText(this, wxID_ANY, wxString::Format("DB%d", bit_depth - 1), { x0 + size.x * bit_depth + 3, y0 + 2 });
-    }
-    else
-    {
-        new wxStaticText(this, wxID_ANY, wxString::Format("DB%d", bit_depth - 1), { x0 - 35, y0 + 2 });
-        new wxStaticText(this, wxID_ANY, "DB0", { x0 + size.x * bit_depth + 3, y0 + 2 });
+        const int x0 = 50;
+        const int y0 = 90;
+
+        wxSize size(20, 20);
+
+        for (int i = 0; i < bit_depth; i++)
+        {
+            new wxCheckBox(this, wxID_ANY, "", { x0 + i * size.x, y0 }, size);
+        }
+
+        if (reverse_bits)
+        {
+            new wxStaticText(this, wxID_ANY, "DB0", { x0 - 35, y0 + 2 });
+            new wxStaticText(this, wxID_ANY, wxString::Format("DB%d", bit_depth - 1), { x0 + size.x * bit_depth + 3, y0 + 2 });
+        }
+        else
+        {
+            new wxStaticText(this, wxID_ANY, wxString::Format("DB%d", bit_depth - 1), { x0 - 35, y0 + 2 });
+            new wxStaticText(this, wxID_ANY, "DB0", { x0 + size.x * bit_depth + 3, y0 + 2 });
+        }
     }
 }
