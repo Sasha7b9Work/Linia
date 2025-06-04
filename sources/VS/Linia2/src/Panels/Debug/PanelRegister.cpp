@@ -24,10 +24,10 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
     }
 
     {
-        const int x0 = 50;
-        const int y0 = 90;
+        const int x0 = 40;
+        const int y0 = 10;
 
-        Painter *painter = new Painter(this, { x0 - 5, y0 - 5 }, { 150, 150 } );
+        Painter *painter = new Painter(this, { 10, 85 }, { 800, 100 } );
 
         wxSize size(20, 20);
 
@@ -38,13 +38,13 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
 
         if (reverse_bits)
         {
-            new wxStaticText(this, wxID_ANY, "DB0", { x0 - 35, y0 + 2 });
-            new wxStaticText(this, wxID_ANY, wxString::Format("DB%d", bit_depth - 1), { x0 + size.x * bit_depth + 3, y0 + 2 });
+            new wxStaticText(painter, wxID_ANY, "DB0", { x0 - 35, y0 + 2 });
+            new wxStaticText(painter, wxID_ANY, wxString::Format("DB%d", bit_depth - 1), { x0 + size.x * bit_depth + 3, y0 + 2 });
         }
         else
         {
-            new wxStaticText(this, wxID_ANY, wxString::Format("DB%d", bit_depth - 1), { x0 - 35, y0 + 2 });
-            new wxStaticText(this, wxID_ANY, "DB0", { x0 + size.x * bit_depth + 3, y0 + 2 });
+            new wxStaticText(painter, wxID_ANY, wxString::Format("DB%d", bit_depth - 1), { x0 - 35, y0 + 2 });
+            new wxStaticText(painter, wxID_ANY, "DB0", { x0 + size.x * bit_depth + 3, y0 + 2 });
         }
     }
 }
