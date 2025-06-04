@@ -14,6 +14,8 @@ public:
     // Если reverse_bits, то биты идут в обратном порядке - первый на экране нулевой
     PanelRegister(wxWindow *parent, const wxString &title, int bit_depth, bool reverse_bits);
 
+    void SetNamesBits(const wxArrayString &);
+
 private:
 
     int bit_depth = 0;

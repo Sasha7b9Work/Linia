@@ -38,8 +38,11 @@ void PainterRegister::OnPaint(wxPaintEvent &)
         wxPoint coord = CoordBit(i);
 
         gc->DrawRectangle(coord.x, coord.y, w, h);
+    }
 
-        DrawTitleBit(i, "D30", gc);
+    for (int i = 0; i < num_bits; i++)
+    {
+        DrawTitleBit(i, panel->names_bits[(uint)i], gc);
     }
 
     delete gc;
@@ -69,5 +72,28 @@ void PainterRegister::DrawTitleBit(int num_bit, const wxString &title, wxGraphic
 
     int d = (num_bit % 2) ? 2 : 7;
 
-    gc->DrawText(title, coord.x + 1, coord.y + d);
+    // Получаем размеры текста
+    wxDouble textWidth, textHeight;
+    gc->GetTextExtent(title, &textWidth, &textHeight);
+
+    if (textWidth > 20)
+    {
+        wxFont f(5, wxFONTFAMILY_DEFAULT,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_BOLD);
+
+        gc->SetFont(f, *wxBLACK);
+
+        // Рассчитываем позицию для центрирования
+        wxDouble x = coord.x + 15 - textWidth / 2;
+
+        gc->DrawText(title, x, coord.y + d);
+    }
+    else
+    {
+        // Рассчитываем позицию для центрирования
+        wxDouble x = coord.x + 11 - textWidth / 2;
+
+        gc->DrawText(title, x, coord.y + d);
+    }
 }

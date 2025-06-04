@@ -11,5 +11,25 @@ PageAD5697::PageAD5697(wxNotebook *parent) : PageChip(parent, "AD5697")
 {
     self = this;
 
-    new PanelRegister(this, "Input Register", 32, false);
+    wxArrayString names;
+    for (int i = 0; i < 4; i++)
+    {
+        names.push_back("X");
+    }
+    for (int i = 0; i < 12; i++)
+    {
+        names.push_back(wxString::Format("D%d", i));
+    }
+    names.push_back("DAC A");
+    names.push_back("0");
+    names.push_back("0");
+    names.push_back("DAC B");
+    for (int i = 0; i < 4; i++)
+    {
+        names.push_back(wxString::Format("C%d", i));
+    }
+
+    PanelRegister *panel = new PanelRegister(this, "Input Register", 24, true);
+
+    panel->SetNamesBits(names);
 }

@@ -48,3 +48,9 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
         }
     }
 }
+
+
+void PanelRegister::SetNamesBits(const wxArrayString &_names)
+{
+    names_bits = _names;
+}
