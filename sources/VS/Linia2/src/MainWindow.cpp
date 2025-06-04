@@ -126,7 +126,8 @@ MainWindow::MainWindow(const wxString &title)
     new PanelButtons(this);
 
     new PanelDebug(this);
-    PanelDebug::self->Hide();
+
+    SetMode(ModeMainWindow::Debug);
 }
 
 

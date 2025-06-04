@@ -8,9 +8,11 @@
 class PanelRegister : public wxPanel
 {
 public:
-    PanelRegister(wxWindow *parent, const wxString &title, int bit_depth);
+    // Если reverse_bits, то биты идут в обратном порядке - первый на экране нулевой
+    PanelRegister(wxWindow *parent, const wxString &title, int bit_depth, bool reverse_bits);
 
 private:
 
     int bit_depth = 0;
+    int reverse_bits = 0;
 };
