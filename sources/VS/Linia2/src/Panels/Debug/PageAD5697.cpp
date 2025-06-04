@@ -29,7 +29,7 @@ PageAD5697::PageAD5697(wxNotebook *parent) : PageChip(parent, "AD5697")
         names.push_back(wxString::Format("C%d", i));
     }
 
-    PanelRegister *panel = new PanelRegister(this, "Input Register", 24, true);
+    PanelRegister *panel = new PanelRegister(this, "Input Register", 24, false);
 
     panel->SetNamesBits(names);
 }
