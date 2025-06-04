@@ -56,6 +56,30 @@ PageAD9952::PageAD9952(wxNotebook *parent) : PageChip(parent, "AD9952")
     {
         names.clear();
 
-//        names.push_back("Charge")
+        for (int i = 0; i < 24; i++)
+        {
+            names.push_back(wxString::Format("D%d", i));
+        }
+
+        PanelRegister *regCFR2 = new PanelRegister(this, "Control Function Register CFR2", 24, false);
+
+        regCFR2->SetNamesBits(names);
+
+        AppendRegister(regCFR2);
+    }
+
+    {
+        names.clear();
+
+        for (int i = 0; i < 16; i++)
+        {
+            names.push_back(wxString::Format("D%d", i));
+        }
+
+        PanelRegister *regASF = new PanelRegister(this, "Amplitude Scale Factor ASF", 16, false);
+
+        regASF->SetNamesBits(names);
+
+        AppendRegister(regASF);
     }
 }
