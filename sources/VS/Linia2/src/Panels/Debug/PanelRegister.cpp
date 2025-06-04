@@ -27,13 +27,13 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
         const int x0 = 50;
         const int y0 = 90;
 
-        new Painter(this, { x0 - 5, y0 - 5 }, { 150, 150 }, TypePainter::Red);
+        Painter *painter = new Painter(this, { x0 - 5, y0 - 5 }, { 150, 150 }, TypePainter::Red);
 
         wxSize size(20, 20);
 
         for (int i = 0; i < bit_depth; i++)
         {
-            new wxCheckBox(this, wxID_ANY, "", { x0 + i * size.x, y0 }, size);
+            new wxCheckBox(painter, wxID_ANY, "", { x0 + i * size.x, y0 }, size);
         }
 
         if (reverse_bits)
