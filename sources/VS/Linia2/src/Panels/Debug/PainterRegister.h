@@ -38,4 +38,6 @@ private:
     void DrawTextInCenter(int x, int y, int width, const wxString &, int size, wxGraphicsContext *);
 
     void SetHintCheckBox(int num_bit);
+
+    wxString GetDescription(int index_desc, int num_bit);
 };

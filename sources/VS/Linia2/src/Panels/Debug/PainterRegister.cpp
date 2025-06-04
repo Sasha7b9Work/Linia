@@ -107,6 +107,24 @@ void PainterRegister::SetHintCheckBox(int num_bit)
 {
     wxString hint = wxString("Name : ") + panel->names_bits[(uint)num_bit];
 
+    wxString desc0 = GetDescription(0, num_bit);
+
+    if (!desc0.empty())
+    {
+        hint += "\n";
+        hint += "Descriptin 1 : ";
+        hint += desc0;
+    }
+
+    wxString desc1 = GetDescription(1, num_bit);
+
+    if (!desc1.empty())
+    {
+        hint += "\n";
+        hint += "Descriptin 2 : ";
+        hint += desc1;
+    }
+
     chbox[(uint)num_bit]->SetToolTip(hint);
 }
 
@@ -194,4 +212,28 @@ void PainterRegister::DrawTextInCenter(int x, int y, int width, const wxString &
     }
 
     gc->DrawText(text, x + width / 2 - textWidth / 2 + 1, y);
+}
+
+
+wxString PainterRegister::GetDescription(int index_desc, int num_bit)
+{
+    if (panel->desc[index_desc].empty())
+    {
+        return "";
+    }
+
+    std::vector<StructDescription> &desc = panel->desc[index_desc];
+
+    for (uint i = 0; i < desc.size(); i++)
+    {
+        if (num_bit >= desc[i].first_bit)
+        {
+            if (num_bit < desc[i].first_bit + desc[i].num_bits)
+            {
+                return desc[i].desc;
+            }
+        }
+    }
+
+    return "";
 }
