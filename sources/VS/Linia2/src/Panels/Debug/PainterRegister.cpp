@@ -8,7 +8,12 @@ PainterRegister::PainterRegister(wxWindow *parent, PanelRegister *_panel, const 
     Painter::Painter(parent, position, { 750, 150 }),
     panel(_panel)
 {
+    wxSize size(20, 20);
 
+    for (int i = 0; i < panel->bit_depth; i++)
+    {
+        new wxCheckBox(this, wxID_ANY, "", { 40 + i * size.x, W_B + 1 }, size);
+    }
 }
 
 
@@ -17,6 +22,12 @@ void PainterRegister::OnPaint(wxPaintEvent &)
     wxPaintDC _dc(this);
 
     wxGraphicsContext *gc = wxGraphicsContext::Create(_dc);
+
+    gc->SetPen(*wxGREEN_PEN);
+
+    gc->SetBrush(*wxWHITE_BRUSH);
+
+    gc->DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
 
     gc->SetPen(*wxBLACK_PEN);
 
@@ -52,6 +63,21 @@ void PainterRegister::OnPaint(wxPaintEvent &)
         DrawDescriptions(i, gc);
     }
 
+    gc->SetFont(GetDefaultFont(8), *wxBLACK);
+
+    if (panel->reverse_bits)
+    {
+        int y = 24;
+        gc->DrawText("DB0", 5, y);
+        gc->DrawText(wxString::Format("DB%d", panel->bit_depth - 1), W_B * panel->bit_depth + 45, y);
+    }
+    else
+    {
+        int y = 24;
+        gc->DrawText("DB0", W_B * panel->bit_depth + 45, y);
+        gc->DrawText(wxString::Format("DB%d", panel->bit_depth - 1), 5, y);
+    }
+
     delete gc;
 }
 
@@ -63,7 +89,7 @@ wxPoint PainterRegister::CoordBit(int num_bit)
         num_bit = panel->bit_depth - num_bit - 1;
     }
 
-    return { 36 + num_bit * 20, 39 };
+    return { 36 + num_bit * 20, 0 };
 }
 
 

@@ -40,29 +40,11 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
 
         new wxComboBox(this, wxID_ANY, choices[0], { x0 + 360, y0 - 2 }, { 170, 20 }, choices, wxCB_READONLY);
 
-        y0 += 20;
+        y0 += 30;
     }
 
     {
-        PainterRegister *painter = new PainterRegister(this, this, { 10, y0  } );
-
-        wxSize size(20, 20);
-
-        for (int i = 0; i < bit_depth; i++)
-        {
-            new wxCheckBox(painter, wxID_ANY, "", { x0 + 30 + i * size.x, y0 }, size);
-        }
-
-        if (reverse_bits)
-        {
-            new wxStaticText(painter, wxID_ANY, "DB0", { x0 - 35, y0 + 2 });
-            new wxStaticText(painter, wxID_ANY, wxString::Format("DB%d", bit_depth - 1), { x0 + size.x * bit_depth + 3, y0 + 2 });
-        }
-        else
-        {
-            new wxStaticText(painter, wxID_ANY, wxString::Format("DB%d", bit_depth - 1), { x0 - 35, y0 + 2 });
-            new wxStaticText(painter, wxID_ANY, "DB0", { x0 + size.x * bit_depth + 3, y0 + 2 });
-        }
+        new PainterRegister(this, this, { 10, y0  } );
     }
 }
 
