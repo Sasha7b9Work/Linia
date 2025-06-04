@@ -5,6 +5,14 @@
 // Визуальное представление регистра
 
 
+struct StructDescription
+{
+    int      first_byte;
+    int      num_bytes;
+    wxString desc;
+};
+
+
 class PanelRegister : public wxPanel
 {
     friend class PainterRegister;
@@ -16,10 +24,14 @@ public:
 
     void SetNamesBits(const wxArrayString &);
 
+    void SetDescriptionBits(int index, const std::vector<StructDescription> &);
+
 private:
 
     int bit_depth = 0;
     int reverse_bits = 0;
 
-    wxArrayString names_bits;       // Названия битов
+    wxArrayString names_bits;                   // Названия битов
+
+    std::vector<StructDescription> desc[2];     // Описания групп битов
 };

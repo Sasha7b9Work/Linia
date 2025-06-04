@@ -70,3 +70,9 @@ void PanelRegister::SetNamesBits(const wxArrayString &_names)
 {
     names_bits = _names;
 }
+
+
+void PanelRegister::SetDescriptionBits(int index, const std::vector<StructDescription> &_desc)
+{
+    desc[index] = _desc;
+}
