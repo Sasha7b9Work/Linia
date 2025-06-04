@@ -10,15 +10,36 @@ PainterRegister::PainterRegister(wxWindow *parent, PanelRegister *_panel, const 
 {
     wxSize size(20, 20);
 
+    chbox.resize((uint)panel->bit_depth);
+
     for (int i = 0; i < panel->bit_depth; i++)
     {
-        new wxCheckBox(this, wxID_ANY, "", { 40 + i * size.x, W_B + 1 }, size);
+        wxCheckBox *chb = new wxCheckBox(this, wxID_ANY, "", { 40 + i * size.x, W_B + 1 }, size);
+
+        if (panel->reverse_bits)
+        {
+            chbox[(uint)i] = chb;
+        }
+        else
+        {
+            chbox[(uint)(panel->bit_depth - i - 1)] = chb;
+        }
     }
 }
 
 
 void PainterRegister::OnPaint(wxPaintEvent &)
 {
+    if (first_paint)
+    {
+        first_paint = false;
+
+        for (int i = 0; i < panel->bit_depth; i++)
+        {
+            SetHintCheckBox(i);
+        }
+    }
+
     wxPaintDC _dc(this);
 
     wxGraphicsContext *gc = wxGraphicsContext::Create(_dc);
@@ -79,6 +100,14 @@ void PainterRegister::OnPaint(wxPaintEvent &)
     }
 
     delete gc;
+}
+
+
+void PainterRegister::SetHintCheckBox(int num_bit)
+{
+    wxString hint = wxString("Name : ") + panel->names_bits[(uint)num_bit];
+
+    chbox[(uint)num_bit]->SetToolTip(hint);
 }
 
 

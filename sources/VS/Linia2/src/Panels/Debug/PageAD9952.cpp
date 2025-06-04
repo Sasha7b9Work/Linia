@@ -65,12 +65,24 @@ PageAD9952::PageAD9952(wxNotebook *parent) : PageChip(parent, "AD9952")
 
         for (int i = 0; i < 24; i++)
         {
-            names.push_back(wxString::Format("D%d", i));
+            names.push_back(wxString::Format("B%d", i));
         }
 
         PanelRegister *regCFR2 = new PanelRegister(this, "Control Function Register CFR2", 24, false, false);
 
         regCFR2->SetNamesBits(names);
+
+        std::vector<StructDescription> desc0;
+        desc0.push_back({ 0, 2, "Charge Pump Current" });
+        desc0.push_back({ 2, 1, "VCO Rang" });
+        desc0.push_back({ 3, 5, "REFCLK Multiplier" });
+        desc0.push_back({ 8, 1, "X" });
+        desc0.push_back({ 9, 1, "CRYSTAL OUT Pin Active" });
+        desc0.push_back({ 10, 1, "Hardware Manual Sync Enable" });
+        desc0.push_back({ 11, 1, "High Speed Sync Enable" });
+        desc0.push_back({ 12, 12, "Not Used" });
+
+        regCFR2->SetDescriptionBits(0, desc0);
 
         AppendRegister(regCFR2);
     }

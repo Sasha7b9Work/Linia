@@ -12,6 +12,14 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
 {
     new wxStaticText(this, wxID_ANY, title, { 10, 10 });
 
+    wxSize size_button{ 100, 30 };
+
+    int x = 580;
+
+    new wxButton(this, wxID_ANY, _L("Предустановки"), { x, 0 }, size_button);
+
+    new wxButton(this, wxID_ANY, _L("Записать"), { x + 100, 0 }, size_button);
+
     int x0 = 10;
     int y0 = 40;
 

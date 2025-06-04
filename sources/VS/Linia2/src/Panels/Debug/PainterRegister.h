@@ -21,7 +21,11 @@ public:
 
 private:
 
+    bool first_paint = true;
+
     PanelRegister *panel = nullptr;
+
+    std::vector<wxCheckBox *> chbox;
 
     // Возвращает координаты верхнего левого угла отображения бита
     wxPoint CoordBit(int num_bit);
@@ -32,4 +36,6 @@ private:
 
     // Если нельзя вписать текст в данную ширину, то размер шрифта будет уменьшаться, пока не впишется
     void DrawTextInCenter(int x, int y, int width, const wxString &, int size, wxGraphicsContext *);
+
+    void SetHintCheckBox(int num_bit);
 };
