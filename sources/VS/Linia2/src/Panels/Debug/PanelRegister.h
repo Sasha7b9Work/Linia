@@ -7,8 +7,8 @@
 
 struct StructDescription
 {
-    int      first_byte;
-    int      num_bytes;
+    int      first_bit;
+    int      num_bits;
     wxString desc;
 };
 

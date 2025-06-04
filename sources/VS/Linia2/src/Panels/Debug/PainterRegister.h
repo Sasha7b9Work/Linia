@@ -10,9 +10,14 @@ class PainterRegister : public Painter
 {
 public:
 
+    // Ширина бита
+    static const int W_B = 20;
+
     PainterRegister(wxWindow *parent, PanelRegister *panel, const wxPoint &position, const wxSize &size);
 
     virtual void OnPaint(wxPaintEvent &) override;
+
+    wxFont GetDefaultFont(int size = -1);
 
 private:
 
@@ -22,4 +27,6 @@ private:
     wxPoint CoordBit(int num_bit);
 
     void DrawTitleBit(int num_bit, const wxString &title, wxGraphicsContext *);
+
+    void DrawDescriptions(int index, wxGraphicsContext *);
 };
