@@ -46,6 +46,9 @@ public:
 
     void SetMode(ModeMainWindow::E);
 
+    // true, если запущено на плате встраиваемого ПК
+    bool IsBoardPCM() const;
+
 private:
 
     wxToolBar *toolBar = nullptr;

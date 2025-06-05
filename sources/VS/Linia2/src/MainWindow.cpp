@@ -85,11 +85,7 @@ MainWindow::MainWindow(const wxString &title)
     {
         const wxSize size(WIDTH, HEIGHT);
 
-        wxSize screenSize = wxGetDisplaySize(); // Получить общее разрешение экрана
-        int width = screenSize.GetWidth();
-        int height = screenSize.GetHeight();
-
-        if (width == WIDTH && height == HEIGHT)
+        if (IsBoardPCM())
         {
             SetSize(size);
 
@@ -128,6 +124,18 @@ MainWindow::MainWindow(const wxString &title)
     new PanelDebug(this);
 
     SetMode(ModeMainWindow::Debug);
+}
+
+
+bool MainWindow::IsBoardPCM() const
+{
+    const wxSize size(WIDTH, HEIGHT);
+
+    wxSize screenSize = wxGetDisplaySize(); // Получить общее разрешение экрана
+    int width = screenSize.GetWidth();
+    int height = screenSize.GetHeight();
+
+    return (width == WIDTH) && (height == HEIGHT);
 }
 
 
