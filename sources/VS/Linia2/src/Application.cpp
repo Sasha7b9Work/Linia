@@ -49,8 +49,6 @@ bool Application::OnInit()
 
     Bind(wxEVT_TIMER, &Application::OnTimer, this, ID_TIMER);
 
-    MainWindow::self->Preprocess();
-
     timer.SetOwner(this, ID_TIMER);
 
     timer.Start(10);

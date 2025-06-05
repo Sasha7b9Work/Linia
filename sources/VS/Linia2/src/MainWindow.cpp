@@ -139,11 +139,6 @@ bool MainWindow::IsBoardPCM() const
 }
 
 
-void MainWindow::Preprocess()
-{
-}
-
-
 void MainWindow::OnEventKeyHook(wxKeyEvent &event)
 {
     if (event.GetKeyCode() == 'K')

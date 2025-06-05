@@ -34,9 +34,6 @@ public:
 
     MainWindow(const wxString &title);
 
-    // Вызвать после загрузки настроек
-    void Preprocess();
-
     void OnQuit(wxCommandEvent &event);
     void OnAbout(wxCommandEvent &event);
 
