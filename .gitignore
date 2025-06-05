@@ -6,3 +6,9 @@ archive.zip
 sources/generated/*
 sources/installer/win/files/*
 sources/ThirdParty/wxWidgets/generated/*
+
+sources/Device/DebugConfig/*
+sources/Device/Listings/*
+sources/Device/Listings-Debug/*
+sources/Device/Objects/*
+sources/Device/Objects-Debug/*

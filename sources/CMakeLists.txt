@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 
-project (IntelAvto)
+project (Linia)
 
 set (TARGET_NAME IntelAvto)
 
@@ -11,5 +11,3 @@ if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
 endif()
 
 add_subdirectory(Device)
-add_subdirectory(Panel)
-add_subdirectory(PLoader)
