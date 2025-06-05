@@ -1,0 +1,16 @@
+#pragma once
+
+int     strcpy_s(char *dest, unsigned int dest_size, const char *src);
+
+namespace std
+{
+    char   *strcpy(void *dest, const char *src);
+    int     strcmp(const void *, const void *);
+    void    memcpy(void *dest, const void *src, unsigned int);
+    int     memcmp(void *dest, void *src, unsigned int);
+    void   *memset(void *dest, int ch, unsigned int count);
+    char   *strcat(char *, char *);
+    char   *strcat(char *destination, const char *source);
+    void   *memmove(void *dest, const void *src, unsigned int count);
+    unsigned int  strlen(const char *);
+}

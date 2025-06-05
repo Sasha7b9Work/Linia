@@ -1,4 +1,7 @@
 archive.zip
+*.out
+*.uvgui*.*
+~*
 
 sources/generated/*
 sources/installer/win/files/*
