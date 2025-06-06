@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Application.h"
 #include "Utils/Configurator.h"
-#include "Communicator/ComPort.h"
+#include "Communicator/RS232/ComPort.h"
 #include "Settings/Settings.h"
 #include "Utils/Timer.h"
 #include "MainWindow.h"

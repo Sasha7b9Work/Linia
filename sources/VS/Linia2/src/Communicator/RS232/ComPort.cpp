@@ -1,7 +1,7 @@
 ﻿// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Communicator/ComPort.h"
-#include "Communicator/rs232.h"
+#include "Communicator/RS232/ComPort.h"
+#include "Communicator/RS232/rs232.h"
 #include "Utils/String.h"
 #include "Utils/StringUtils.h"
 #include "Settings/Settings.h"

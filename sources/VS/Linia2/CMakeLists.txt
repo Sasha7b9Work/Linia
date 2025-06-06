@@ -3,6 +3,7 @@ project (Linia2)
 
 #set(CMAKE_UNITY_BUILD OFF)
 
+
 if(WIN32)
 
     include_directories(
@@ -52,7 +53,7 @@ add_definitions(-DOPT_GENERIC)
 file(GLOB RESOURCES                     resources/*.*)
 file(GLOB DOC                           doc/*.*)
 file(GLOB SRC                           src/*.*)
-file(GLOB COMMUNICATOR                  src/Communicator/*.*)
+file(GLOB COMMUNICATOR_RS232            src/Communicator/RS232/*.*)
 file(GLOB CONTROLS                      src/Controls/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
 file(GLOB PANELS_DEBUG                  src/Panels/Debug/*.*)
@@ -63,7 +64,7 @@ file(GLOB WINDOWS                       src/Windows/*.*)
 source_group(doc                        FILES ${DOC})
 source_group(Resources                  FILES ${RESOURCES})
 source_group(src                        FILES ${SRC})
-source_group(Communicator               FILES ${COMMUNICATOR})
+source_group(Communicator/RS232         FILES ${COMMUNICATOR_RS232})
 source_group(Controls                   FILES ${CONTROLS})
 source_group(Panels                     FILES ${PANELS})
 source_group(Panels/Debug               FILES ${PANELS_DEBUG})
@@ -75,7 +76,7 @@ add_executable(${PROJECT_NAME}
     ${DOC}
     ${RESOURCES}
     ${SRC}
-    ${COMMUNICATOR}
+    ${COMMUNICATOR_RS232}
     ${CONTROLS}
     ${PANELS}
     ${PANELS_DEBUG}
