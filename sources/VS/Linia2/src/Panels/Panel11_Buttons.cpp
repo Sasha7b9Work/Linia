@@ -97,5 +97,6 @@ void PanelButtons::OnEventButton(wxCommandEvent &event)
 
 int PanelButtons::NumButtons() const
 {
-    return SET::GUI::debug_mode.Get() ? 9 : 8;
+//    return SET::GUI::debug_mode.Get() ? 9 : 8;
+    return 9;
 }

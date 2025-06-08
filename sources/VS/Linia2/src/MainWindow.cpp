@@ -123,7 +123,7 @@ MainWindow::MainWindow(const wxString &title)
 
     new PanelDebug(this);
 
-    SetMode(ModeMainWindow::Debug);
+    SetMode(SET::GUI::debug_mode.Get() ? ModeMainWindow::Debug : ModeMainWindow::Standard);
 }
 
 
