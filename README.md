@@ -1,0 +1,48 @@
+# Измеритель параметров полупроводниковых приборов
+
+** Tools
+
+Windows:
+	Visual Studio 2022
+
+Linux:
+	Ubuntu 24.04.2 LTS
+	gcc version 13.3.0
+
+*** Сборка под Linux.
+
+1. Установить Linux.
+
+2. Зайти под root :
+    sudo su
+
+3. Обновиться :
+    apt-get update
+	apt-get upgrade -y
+
+4. Установить git и файловый менеджер mc:
+    apt install git
+	apt install mc
+
+5. Клонировать репозиторий :
+    git clone github.com/Sasha7b9Work/Linia
+
+6. Установить инструменты сборки:
+   cd Linia/sources/scripts/cb_lin
+   ./install_soft.sh
+
+7. Установить зависимости для wxWidgets :
+   cd ../../ThirdParty/linux
+   ./install_software.sh
+
+   8. Собрать wxWidgets :
+  ./full_build.sh
+
+9. Собрать проект :
+    cd ../../scripts/cb_lin
+	./full_build.sh
+
+10. Скопировать файл files/CIC.loc в каталог sources/genereated/Linia2
+
+11. Запустить файл sources/generated/Linia2/Linia2 :
+    ./Linia2
