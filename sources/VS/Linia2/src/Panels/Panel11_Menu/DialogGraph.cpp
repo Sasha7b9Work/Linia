@@ -4,6 +4,7 @@
 
 
 DialogGraph *DialogGraph::self = nullptr;
+DialogGraphColor *DialogGraphColor::self = nullptr;
 
 
 DialogGraph::DialogGraph() :
@@ -35,7 +36,7 @@ void DialogGraph::OnButtonStyleCurve()
 
 void DialogGraph::OnButtonColor()
 {
-
+    DialogGraphColor().ShowModal();
 }
 
 
@@ -61,3 +62,54 @@ void DialogGraph::OnButtonReset()
 {
 
 }
+
+
+DialogGraphColor::DialogGraphColor() :
+    MenuDialog(_L("Цвет"), 125,
+        _L("Фона"), ID_BTN_MENU_GRAPH_COLOR_BACKGROUND, OnButtonBackground,
+        _L("Сетки"), ID_BTN_MENU_GRAPH_COLOR_GRID, OnButtonGrid,
+        _L("Шрифта"), ID_BTN_MENU_GRAPH_COLOR_FONT, OnButtonFont,
+        _L("Кривой"), ID_BTN_MENU_GRAPH_COLOR_CURVE, OnButtonCurve,
+        _L("Ссылки"), ID_BTN_MENU_GRAPH_COLOR_LINK, OnButtonLink,
+        _L("Секущей"), ID_BTN_MENU_GRAPH_COLOR_SECANT, OnButtonSecant
+    )
+{
+    self = this;
+}
+
+
+void DialogGraphColor::OnButtonBackground()
+{
+
+}
+
+
+void DialogGraphColor::OnButtonGrid()
+{
+
+}
+
+
+void DialogGraphColor::OnButtonFont()
+{
+
+}
+
+
+void DialogGraphColor::OnButtonCurve()
+{
+
+}
+
+
+void DialogGraphColor::OnButtonLink()
+{
+
+}
+
+
+void DialogGraphColor::OnButtonSecant()
+{
+
+}
+

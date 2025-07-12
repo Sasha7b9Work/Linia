@@ -21,3 +21,22 @@ private:
     static void OnButtonSave();
     static void OnButtonReset();
 };
+
+
+class DialogGraphColor : public MenuDialog
+{
+public:
+
+    DialogGraphColor();
+
+    static DialogGraphColor *self;
+
+private:
+
+    static void OnButtonBackground();
+    static void OnButtonGrid();
+    static void OnButtonFont();
+    static void OnButtonCurve();
+    static void OnButtonLink();
+    static void OnButtonSecant();   // Секущая
+};
