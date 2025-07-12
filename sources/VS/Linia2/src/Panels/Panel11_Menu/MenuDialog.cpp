@@ -32,5 +32,19 @@ MenuDialog::MenuDialog(const wxString &title,
     {
         new wxButton(this, buttons[i].id, buttons[i].label, { 5, 5 + ((int)i * (SIZE_BUTTON.y + 5)) }, SIZE_BUTTON);
     }
+
+    Bind(wxEVT_BUTTON, &MenuDialog::OnEventButton, this);
 }
 
+
+void MenuDialog::OnEventButton(wxCommandEvent &event)
+{
+    for (auto &btn : buttons)
+    {
+        if (btn.id == event.GetId())
+        {
+            btn.func();
+            break;
+        }
+    }
+}

@@ -3,6 +3,10 @@
 #include "Panels/Panel11_Menu/DialogFile.h"
 
 
+
+DialogFile *DialogFile::self = nullptr;
+
+
 DialogFile::DialogFile() :
     MenuDialog(_L("Файл"),
         _L("Новый..."), ID_BTN_MENU_FILE_NEW, OnButtonNew,
@@ -13,7 +17,7 @@ DialogFile::DialogFile() :
         _L("Удалить"), ID_BTN_MENU_FILE_DELETE, OnButtonDelete
     )
 {
-
+    self = this;
 }
 
 
@@ -25,7 +29,16 @@ void DialogFile::OnButtonNew()
 
 void DialogFile::OnButtonOpen()
 {
+    wxFileDialog dialog(self, _L("Открыть файл модели измерения"), wxEmptyString, wxEmptyString, "*.mod", wxFD_OPEN);
 
+    if (dialog.ShowModal() == wxID_OK)
+    {
+
+    }
+    else
+    {
+
+    }
 }
 
 

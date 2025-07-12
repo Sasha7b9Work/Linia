@@ -32,8 +32,10 @@ private:
     {
         int      id;
         wxString label;
-        void     (*func1)();
+        void     (*func)();
     };
 
     std::vector<ButtonStruct> buttons;
+
+    void OnEventButton(wxCommandEvent &);
 };

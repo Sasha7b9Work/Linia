@@ -9,6 +9,8 @@ public:
 
     DialogFile();
 
+    static DialogFile *self;
+
 private:
 
     static void OnButtonNew();
