@@ -3,7 +3,7 @@
 #include "Panels/Panel11_Menu/MenuDialog.h"
 
 
-const wxSize MenuDialog::SIZE_BUTTON { 120, 30 };
+const wxSize MenuDialog::SIZE_BUTTON { 150, 30 };
 
 
 MenuDialog::MenuDialog(const wxString &title,
@@ -12,7 +12,10 @@ MenuDialog::MenuDialog(const wxString &title,
     const wxString &btn3, int id3, void (*func3)(),
     const wxString &btn4, int id4, void (*func4)(),
     const wxString &btn5, int id5, void (*func5)(),
-    const wxString &btn6, int id6, void (*func6)()) :
+    const wxString &btn6, int id6, void (*func6)(),
+    const wxString &btn7, int id7, void (*func7)(),
+    const wxString &btn8, int id8, void (*func8)(),
+    const wxString &btn9, int id9, void (*func9)()) :
     wxDialog(nullptr, wxID_ANY, title)
 {
     {
@@ -22,6 +25,9 @@ MenuDialog::MenuDialog(const wxString &title,
         if (func4) buttons.push_back({ id4, btn4, func4 });
         if (func5) buttons.push_back({ id5, btn5, func5 });
         if (func6) buttons.push_back({ id6, btn6, func6 });
+        if (func7) buttons.push_back({ id7, btn7, func7 });
+        if (func8) buttons.push_back({ id8, btn8, func8 });
+        if (func9) buttons.push_back({ id9, btn9, func9 });
     }
 
     wxSize client_size{ SIZE_BUTTON.x + 10, (SIZE_BUTTON.y + 5) * (int)buttons.size() + 10 };
