@@ -23,7 +23,7 @@ DialogFile::DialogFile() :
 
 void DialogFile::OnButtonNew()
 {
-    wxFileDialog dialog(self, _L("Создать файл модели измерения"), wxEmptyString, wxEmptyString, "*.mod", wxFD_SAVE);
+    wxFileDialog dialog(self, _L("Новый файл модели измерения"), wxEmptyString, wxEmptyString, "*.mod", wxFD_SAVE);
 
     if (dialog.ShowModal() == wxID_OK)
     {
@@ -59,13 +59,22 @@ void DialogFile::OnButtonClose()
 
 void DialogFile::OnButtonSave()
 {
-
+    DialogFile::self->Close(true);
 }
 
 
 void DialogFile::OnButtonSaveAs()
 {
+    wxFileDialog dialog(self, _L("Сохранить файл модели измерения"), wxEmptyString, wxEmptyString, "*.mod", wxFD_SAVE);
 
+    if (dialog.ShowModal() == wxID_OK)
+    {
+
+    }
+    else
+    {
+
+    }
 }
 
 
