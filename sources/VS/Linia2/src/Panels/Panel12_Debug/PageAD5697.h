@@ -1,6 +1,6 @@
 ﻿// 2025/6/3 22:47:35 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Panels/Debug/PageChip.h"
+#include "Panels/Panel12_Debug/PageChip.h"
 
 
 class PageAD5697 : public PageChip

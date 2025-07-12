@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Panels/Panel05_Graph.h"
 #include "Panels/Panel09_Table.h"
-#include "Panels/Panel11_Buttons.h"
+#include "Panels/Panel11_Menu/Panel11_Menu.h"
 #include "MainWindow.h"
 
 

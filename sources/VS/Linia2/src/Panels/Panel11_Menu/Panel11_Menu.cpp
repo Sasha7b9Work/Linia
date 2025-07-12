@@ -1,6 +1,6 @@
 ﻿// 2025/6/1 17:32:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel11_Buttons.h"
+#include "Panels/Panel11_Menu/Panel11_Menu.h"
 #include "MainWindow.h"
 #include "Settings/Settings.h"
 

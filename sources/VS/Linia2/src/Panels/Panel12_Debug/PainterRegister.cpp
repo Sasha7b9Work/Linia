@@ -1,7 +1,7 @@
 ﻿// 2025/6/4 15:50:26 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Debug/PainterRegister.h"
-#include "Panels/Debug/PanelRegister.h"
+#include "Panels/Panel12_Debug/PainterRegister.h"
+#include "Panels/Panel12_Debug/PanelRegister.h"
 
 
 PainterRegister::PainterRegister(wxWindow *parent, PanelRegister *_panel, const wxPoint &position) :

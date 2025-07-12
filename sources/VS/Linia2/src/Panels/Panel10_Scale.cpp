@@ -3,7 +3,7 @@
 #include "Panels/Panel03_Config.h"
 #include "Panels/Panel07_Indicator.h"
 #include "Panels/Panel10_Scale.h"
-#include "Panels/Panel11_Buttons.h"
+#include "Panels/Panel11_Menu/Panel11_Menu.h"
 #include "MainWindow.h"
 
 

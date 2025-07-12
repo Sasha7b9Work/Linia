@@ -3,7 +3,6 @@ project (Linia2)
 
 #set(CMAKE_UNITY_BUILD OFF)
 
-
 if(WIN32)
 
     include_directories(
@@ -58,7 +57,8 @@ file(GLOB COMMUNICATOR_COMPORT          src/Communicator/ComPort/*.*)
 file(GLOB COMMUNICATOR_SPI              src/Communicator/SPI/*.*)
 file(GLOB CONTROLS                      src/Controls/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
-file(GLOB PANELS_DEBUG                  src/Panels/Debug/*.*)
+file(GLOB PANELS_PANEL11                src/Panels/Panel11_Menu/*.*)
+file(GLOB PANELS_PANEL12                src/Panels/Panel12_Debug/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB UTILS                         src/Utils/*.*)
 file(GLOB WINDOWS                       src/Windows/*.*)
@@ -71,7 +71,8 @@ source_group(Communicator/ComPort       FILES ${COMMUNICATOR_COMPORT})
 source_group(Communicator/SPI           FILES ${COMMUNICATOR_SPI})
 source_group(Controls                   FILES ${CONTROLS})
 source_group(Panels                     FILES ${PANELS})
-source_group(Panels/Debug               FILES ${PANELS_DEBUG})
+source_group(Panels/Panel11_Menu        FILES ${PANELS_PANEL11})
+source_group(Panels/Panel12_Debug       FILES ${PANELS_PANEL12})
 source_group(Settings                   FILES ${SETTINGS})
 source_group(Utils                      FILES ${UTILS})
 source_group(Windows                    FILES ${WINDOWS})
@@ -85,7 +86,8 @@ add_executable(${PROJECT_NAME}
     ${COMMUNICATOR_SPI}
     ${CONTROLS}
     ${PANELS}
-    ${PANELS_DEBUG}
+    ${PANELS_PANEL11}
+    ${PANELS_PANEL12}
     ${SETTINGS}
     ${UTILS}
     ${WINDOWS}

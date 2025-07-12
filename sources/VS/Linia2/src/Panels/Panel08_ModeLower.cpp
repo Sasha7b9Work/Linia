@@ -3,7 +3,7 @@
 #include "Panels/Panel04_Model.h"
 #include "Panels/Panel06_Percents.h"
 #include "Panels/Panel08_ModeLower.h"
-#include "Panels/Panel11_Buttons.h"
+#include "Panels/Panel11_Menu/Panel11_Menu.h"
 #include "MainWindow.h"
 
 
