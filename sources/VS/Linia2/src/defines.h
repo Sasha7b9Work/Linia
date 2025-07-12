@@ -158,3 +158,14 @@ static pString DIRECT_PROMT = "<- ";
 
 
 #define SAFE_DELETE(ptr)  do { delete ptr; ptr = nullptr; } while(0)
+
+
+enum
+{
+    ID_BTN_MENU_FILE_NEW = wxID_HIGHEST,
+    ID_BTN_MENU_FILE_OPEN,
+    ID_BTN_MENU_FILE_CLOSE,
+    ID_BTN_MENU_FILE_SAVE,
+    ID_BTN_MENU_FILE_SAVE_AS,
+    ID_BTN_MENU_FILE_DELETE
+};

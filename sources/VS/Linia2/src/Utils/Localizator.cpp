@@ -8,7 +8,7 @@ wxString LL::ID(const wxString &id)
 {
     wxString key = wxString::Format(id.c_str());
 
-    Config::SetFile(wxGetCwd() + "/CIC.loc");
+    Config::SetFile(wxGetCwd() + "/Linia.loc");
 
     wxString result = Config::ReadString(key);
 

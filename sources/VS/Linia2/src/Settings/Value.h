@@ -9,7 +9,7 @@ template<class T>
 class Value
 {
 public:
-    Value(const wxString &_key, const T &_default_value, wxWindow *_window = nullptr, int _id = 0, bool _serialiazed = true) :
+    Value(const wxString &_key, const T &_default_value, wxWindow *_window = nullptr, int _id = 0, bool _serialiazed = true) : //-V730
         window(_window),
         id(_id),
         key(_key),
