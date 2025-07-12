@@ -1,4 +1,4 @@
-// 2023/08/10 19:21:10 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2023/08/10 19:21:10 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/Buttons.h"
 
@@ -13,7 +13,7 @@
 
 namespace GF
 {
-    // ������������ text ������������ border
+    // Центрировать text относительно border
     void HorizontalAlignCenter(wxStaticText *label, wxWindow *border);
 
     wxStaticText *FindStaticText(wxWindow *, int id);
@@ -39,4 +39,10 @@ namespace GF
     void IntToTextCtrl(wxWindow *, int id, int value);
 
     void ShowModalInfo(wxWindow *, const wxString &);
+
+    // В эту позицию нужно переместить окно с размерами { width, height }, чтобы оно оказалось в центре экрана
+    wxPoint GetCoordCenter(const wxSize &);
+
+    // true, если запущено на плате встраиваемого ПК
+    bool IsBoardPCM();
 }

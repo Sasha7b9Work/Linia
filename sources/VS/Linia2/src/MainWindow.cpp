@@ -1,4 +1,4 @@
-// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Application.h"
 #include "Utils/Configurator.h"
@@ -40,17 +40,17 @@
     |               11                          |                  |
     +-------------------------------------------+------------------+
 
-    1. Название ПО и дата сборки
-    2. Текущий режим работы
-    3. Текущая аппаратная конфигурация - каналы, схема включения, расчёт
-    4. Файл модели
-    5. Графики
-    6. Дискета с процентами
-    7. Индикация выходного напряжения
-    8. Режим
-    9. Таблица точек
-    10. Шкала, ошибки
-    11. Кнопки
+    1. РќР°Р·РІР°РЅРёРµ РџРћ Рё РґР°С‚Р° СЃР±РѕСЂРєРё
+    2. РўРµРєСѓС‰РёР№ СЂРµР¶РёРј СЂР°Р±РѕС‚С‹
+    3. РўРµРєСѓС‰Р°СЏ Р°РїРїР°СЂР°С‚РЅР°СЏ РєРѕРЅС„РёРіСѓСЂР°С†РёСЏ - РєР°РЅР°Р»С‹, СЃС…РµРјР° РІРєР»СЋС‡РµРЅРёСЏ, СЂР°СЃС‡С‘С‚
+    4. Р¤Р°Р№Р» РјРѕРґРµР»Рё
+    5. Р“СЂР°С„РёРєРё
+    6. Р”РёСЃРєРµС‚Р° СЃ РїСЂРѕС†РµРЅС‚Р°РјРё
+    7. РРЅРґРёРєР°С†РёСЏ РІС‹С…РѕРґРЅРѕРіРѕ РЅР°РїСЂСЏР¶РµРЅРёСЏ
+    8. Р РµР¶РёРј
+    9. РўР°Р±Р»РёС†Р° С‚РѕС‡РµРє
+    10. РЁРєР°Р»Р°, РѕС€РёР±РєРё
+    11. РљРЅРѕРїРєРё
 */
 
 
@@ -85,7 +85,7 @@ MainWindow::MainWindow(const wxString &title)
     {
         const wxSize size(WIDTH, HEIGHT);
 
-        if (IsBoardPCM())
+        if (GF::IsBoardPCM())
         {
             SetSize(size);
 
@@ -124,18 +124,6 @@ MainWindow::MainWindow(const wxString &title)
     new PanelDebug(this);
 
     SetMode(SET::GUI::debug_mode.Get() ? ModeMainWindow::Debug : ModeMainWindow::Standard);
-}
-
-
-bool MainWindow::IsBoardPCM() const
-{
-    const wxSize size(WIDTH, HEIGHT);
-
-    wxSize screenSize = wxGetDisplaySize(); // Получить общее разрешение экрана
-    int width = screenSize.GetWidth();
-    int height = screenSize.GetHeight();
-
-    return (width == WIDTH) && (height == HEIGHT);
 }
 
 

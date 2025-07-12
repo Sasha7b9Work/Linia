@@ -1,4 +1,4 @@
-// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
 #pragma warning(push, 0)
@@ -42,9 +42,6 @@ public:
     void OnEventCloseWindow(wxCloseEvent &);
 
     void SetMode(ModeMainWindow::E);
-
-    // true, если запущено на плате встраиваемого ПК
-    bool IsBoardPCM() const;
 
 private:
 
