@@ -3,6 +3,7 @@
 #include "Panels/Panel11_Menu/Panel11_Menu.h"
 #include "MainWindow.h"
 #include "Settings/Settings.h"
+#include "Panels/Panel11_Menu/DialogFile.h"
 
 
 PanelButtons *PanelButtons::self = nullptr;
@@ -58,7 +59,7 @@ void PanelButtons::OnEventButton(wxCommandEvent &event)
 
     if (id == ID_BUTTON_FILE)
     {
-
+        DialogFile().ShowModal();
     }
     else if (id == ID_BUTTON_TEST)
     {
