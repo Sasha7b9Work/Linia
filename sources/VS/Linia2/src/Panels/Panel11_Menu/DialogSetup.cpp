@@ -15,7 +15,7 @@ DialogSetup::DialogSetup() :
         _L("Калибровка"), ID_BTN_MENU_SETUP_CALIBRATION, OnButtonCalibration,
         _L("Таблица смещений и коэффициентов"), ID_BTN_MENU_SETUP_TABLE, OnButtonTable,
         _L("Изменить пароль"), ID_BTN_MENU_SETUP_PASSWORD, OnButtonPassword,
-           "IP-адрес", ID_BTN_MENU_SETUP_ADDRESS_IP, OnButtonAddressIP,
+        _L("IP-адрес"), ID_BTN_MENU_SETUP_ADDRESS_IP, OnButtonAddressIP,
         _L("Мой компьютер"), ID_BTN_MENU_SETUP_MY_COMPUTER, OnButtonMyComputer
     )
 {
