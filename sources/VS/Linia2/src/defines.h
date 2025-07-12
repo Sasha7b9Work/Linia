@@ -15,6 +15,7 @@
 #include <wx/textfile.h>
 #include <wx/tokenzr.h>
 #include <wx/graphics.h>
+#include <wx/colordlg.h>
 #include <map>
 #include <queue>
 #include <mutex>

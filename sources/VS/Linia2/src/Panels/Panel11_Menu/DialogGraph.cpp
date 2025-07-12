@@ -80,7 +80,15 @@ DialogGraphColor::DialogGraphColor() :
 
 void DialogGraphColor::OnButtonBackground()
 {
+    wxColourData colourData;
+    colourData.SetChooseFull(true);
 
+    wxColourDialog dialog(DialogGraphColor::self, &colourData);
+
+    if (dialog.ShowModal() == wxID_OK)
+    {
+
+    }
 }
 
 
