@@ -8,6 +8,7 @@
 #include "Panels/Panel11_Menu/DialogSetup.h"
 #include "Panels/Panel11_Menu/DialogArchive.h"
 #include "Panels/Panel11_Menu/DialogGraph.h"
+#include "Panels/Panel11_Menu/DialogTable.h"
 
 
 PanelButtons *PanelButtons::self = nullptr;
@@ -83,7 +84,7 @@ void PanelButtons::OnEventButton(wxCommandEvent &event)
     }
     else if (id == ID_BUTTON_TABLE)
     {
-
+        DialogTable().ShowModal();
     }
     else if (id == ID_BUTTON_REPORT)
     {
