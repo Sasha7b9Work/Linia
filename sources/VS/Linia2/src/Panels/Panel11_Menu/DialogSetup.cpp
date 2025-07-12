@@ -7,7 +7,7 @@ DialogSetup *DialogSetup::self = nullptr;
 
 
 DialogSetup::DialogSetup() :
-    MenuDialog(_L("Настройка"), 250,
+    MenuDialog(_L("Настройка"), 275,
         _L("Настройки пользователя"), ID_BTN_MENU_SETUP_USER, OnButtonUser,
         _L("Запуск"), ID_BTN_MENU_SETUP_START, OnButtonStart,
         _L("Автосохранение"), ID_BTN_MENU_SETUP_AUTOSAVE, OnButtonAutoSave,

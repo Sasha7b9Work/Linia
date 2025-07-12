@@ -7,7 +7,7 @@ DialogTest *DialogTest::self = nullptr;
 
 
 DialogTest::DialogTest() :
-    MenuDialog(_L("Тест"), 150,
+    MenuDialog(_L("Тест"), 175,
         _L("Добавить"), ID_BTN_MENU_TEST_APPEND, OnButtonAppend,
         _L("Сохранить параметры"), ID_BTN_MENU_TEST_SAVE_PARAMETERS, OnButtonSaveParameters,
         _L("Удалить"), ID_BTN_MENU_TEST_DELETE, OnButtonDelete ,
