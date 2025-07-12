@@ -11,7 +11,6 @@ public:
 
     static DialogTable *self;
 
-
 private:
 
     static void OnButtonSave();
