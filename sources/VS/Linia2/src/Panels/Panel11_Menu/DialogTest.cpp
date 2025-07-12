@@ -14,7 +14,7 @@ DialogTest::DialogTest() :
         _L("Удалить все"), ID_BTN_MENU_TEST_DELETE_ALL, OnButtonDeleteAll,
         _L("Копировать"), ID_BTN_MENU_TEST_COPY, OnButtonCopy,
         _L("Вставить"), ID_BTN_MENU_TEST_INSERT, OnButtonInsert,
-        _L("Переименовать..."), ID_BTN_MENU_TEST_RENAME, OnButtonRename,
+        _L("Переименовать"), ID_BTN_MENU_TEST_RENAME, OnButtonRename,
         _L("Библиотека тестов"), ID_BTN_MENU_TEST_LIBRARY_TESTS, OnButtonLibraryTests,
         _L("Сохранить в библиотеке"), ID_BTN_MENU_TEST_SAVE_TO_LIBRARY, OnButtonSaveToLibrary
         )

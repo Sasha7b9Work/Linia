@@ -6,6 +6,7 @@
 #include "Panels/Panel11_Menu/DialogFile.h"
 #include "Panels/Panel11_Menu/DialogTest.h"
 #include "Panels/Panel11_Menu/DialogSetup.h"
+#include "Panels/Panel11_Menu/DialogArchive.h"
 
 
 PanelButtons *PanelButtons::self = nullptr;
@@ -73,7 +74,7 @@ void PanelButtons::OnEventButton(wxCommandEvent &event)
     }
     else if (id == ID_BUTTON_ARCHIVE)
     {
-
+        DialogArchive().ShowModal();
     }
     else if (id == ID_BUTTON_GRAPH)
     {

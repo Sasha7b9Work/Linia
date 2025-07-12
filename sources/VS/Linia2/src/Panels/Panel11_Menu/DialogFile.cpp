@@ -9,8 +9,8 @@ DialogFile *DialogFile::self = nullptr;
 
 DialogFile::DialogFile() :
     MenuDialog(_L("Файл"), 125,
-        _L("Новый..."), ID_BTN_MENU_FILE_NEW, OnButtonNew,
-        _L("Открыть..."), ID_BTN_MENU_FILE_OPEN, OnButtonOpen,
+        _L("Новый"), ID_BTN_MENU_FILE_NEW, OnButtonNew,
+        _L("Открыть"), ID_BTN_MENU_FILE_OPEN, OnButtonOpen,
         _L("Закрыть"), ID_BTN_MENU_FILE_CLOSE, OnButtonClose,
         _L("Cохранить"), ID_BTN_MENU_FILE_SAVE, OnButtonSave,
         _L("Сохранить как..."), ID_BTN_MENU_FILE_SAVE_AS, OnButtonSaveAs,
