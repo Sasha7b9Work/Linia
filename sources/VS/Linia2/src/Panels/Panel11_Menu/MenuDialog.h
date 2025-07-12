@@ -7,9 +7,7 @@ class MenuDialog : public wxDialog
 {
 public:
 
-    static const wxSize SIZE_BUTTON;
-
-    MenuDialog(const wxString &title,
+    MenuDialog(const wxString &title, int width_button,
         const wxString &btn1, int id1, void (*func1)(),
         const wxString &btn2 = "", int id2 = 0, void (*func2)() = nullptr,
         const wxString &btn3 = "", int id3 = 0, void (*func3)() = nullptr,

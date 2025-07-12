@@ -3,10 +3,7 @@
 #include "Panels/Panel11_Menu/MenuDialog.h"
 
 
-const wxSize MenuDialog::SIZE_BUTTON { 150, 30 };
-
-
-MenuDialog::MenuDialog(const wxString &title,
+MenuDialog::MenuDialog(const wxString &title, int width_button,
     const wxString &btn1, int id1, void (*func1)(),
     const wxString &btn2, int id2, void (*func2)(),
     const wxString &btn3, int id3, void (*func3)(),
@@ -30,13 +27,13 @@ MenuDialog::MenuDialog(const wxString &title,
         if (func9) buttons.push_back({ id9, btn9, func9 });
     }
 
-    wxSize client_size{ SIZE_BUTTON.x + 10, (SIZE_BUTTON.y + 5) * (int)buttons.size() + 10 };
+    wxSize client_size{ width_button + 10, (BUTTON_HEIGHT + 5) * (int)buttons.size() + 10 };
 
     wxDialog::SetClientSize(client_size);
 
     for (uint i = 0; i < buttons.size(); i++)
     {
-        new wxButton(this, buttons[i].id, buttons[i].label, { 5, 5 + ((int)i * (SIZE_BUTTON.y + 5)) }, SIZE_BUTTON);
+        new wxButton(this, buttons[i].id, buttons[i].label, { 5, 5 + ((int)i * (BUTTON_HEIGHT + 5)) }, { width_button, BUTTON_HEIGHT });
     }
 
     Bind(wxEVT_BUTTON, &MenuDialog::OnEventButton, this);
