@@ -23,3 +23,18 @@ private:
     static void OnButtonLibraryTests();
     static void OnButtonSaveToLibrary();
 };
+
+
+class DialogTestAppend : public MenuDialog
+{
+public:
+
+    DialogTestAppend();
+
+    static DialogTestAppend *self;
+
+private:
+
+    static void OnButtonActive();
+    static void OnButtonFromLibrary();
+};

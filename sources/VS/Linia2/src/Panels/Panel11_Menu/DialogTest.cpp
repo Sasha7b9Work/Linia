@@ -4,6 +4,7 @@
 
 
 DialogTest *DialogTest::self = nullptr;
+DialogTestAppend *DialogTestAppend::self = nullptr;
 
 
 DialogTest::DialogTest() :
@@ -25,7 +26,7 @@ DialogTest::DialogTest() :
 
 void DialogTest::OnButtonAppend()
 {
-
+    DialogTestAppend().ShowModal();
 }
 
 
@@ -72,6 +73,28 @@ void DialogTest::OnButtonLibraryTests()
 
 
 void DialogTest::OnButtonSaveToLibrary()
+{
+
+}
+
+
+DialogTestAppend::DialogTestAppend() :
+    MenuDialog(_L("Добавить"), 150,
+        _L("Активный"), ID_BTN_MENU_TEST_APPEND_ACTIVE, OnButtonActive,
+        _L("Из библиотеки"), ID_BTN_MENU_TEST_APPEND_FROM_LIBRARY, OnButtonFromLibrary
+    )
+{
+    self = this;
+}
+
+
+void DialogTestAppend::OnButtonActive()
+{
+
+}
+
+
+void DialogTestAppend::OnButtonFromLibrary()
 {
 
 }
