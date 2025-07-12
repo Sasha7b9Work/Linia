@@ -39,4 +39,6 @@ private:
     static void OnButtonCurve();
     static void OnButtonLink();
     static void OnButtonSecant();   // Секущая
+
+    static bool SelectColor(const wxString &title, wxColour &);
 };

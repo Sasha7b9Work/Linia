@@ -78,14 +78,31 @@ DialogGraphColor::DialogGraphColor() :
 }
 
 
-void DialogGraphColor::OnButtonBackground()
+bool DialogGraphColor::SelectColor(const wxString &title, wxColour &color)
 {
     wxColourData colourData;
     colourData.SetChooseFull(true);
 
     wxColourDialog dialog(DialogGraphColor::self, &colourData);
 
+    dialog.SetTitle(_L("Цвет") + " " + title);
+
     if (dialog.ShowModal() == wxID_OK)
+    {
+        color = dialog.GetColourData().GetColour();
+
+        return true;
+    }
+
+    return false;
+}
+
+
+void DialogGraphColor::OnButtonBackground()
+{
+    wxColour color;
+
+    if (SelectColor(_L("фона"), color))
     {
 
     }
@@ -94,30 +111,55 @@ void DialogGraphColor::OnButtonBackground()
 
 void DialogGraphColor::OnButtonGrid()
 {
+    wxColour color;
 
+    if (SelectColor(_L("сетки"), color))
+    {
+
+    }
 }
 
 
 void DialogGraphColor::OnButtonFont()
 {
+    wxColour color;
 
+    if (SelectColor(_L("шрифта"), color))
+    {
+
+    }
 }
 
 
 void DialogGraphColor::OnButtonCurve()
 {
+    wxColour color;
 
+    if (SelectColor(_L("кривой"), color))
+    {
+
+    }
 }
 
 
 void DialogGraphColor::OnButtonLink()
 {
+    wxColour color;
 
+    if (SelectColor(_L("ссылки"), color))
+    {
+
+    }
 }
 
 
 void DialogGraphColor::OnButtonSecant()
 {
+    wxColour color;
 
+    if (SelectColor(_L("секущей"), color))
+    {
+
+    }
 }
 
