@@ -1,12 +1,14 @@
 ﻿// 2022/10/28 23:17:02 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Panels/Panel.h"
+#include "MainWindow.h"
 
 
 class PanelGraph : public Panel
 {
 public:
 
+    static const int WIDTH = MainWindow::WIDTH2;
     static const int HEIGHT = 500;
 
     PanelGraph(wxWindow *parent);

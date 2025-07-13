@@ -7,7 +7,7 @@
 #include <algorithm>
 
 
-wxBitmap PanelGraph::bitmap(MainWindow::WIDTH2, HEIGHT);
+wxBitmap PanelGraph::bitmap(WIDTH, HEIGHT);
 
 
 PanelGraph *PanelGraph::self = nullptr;
@@ -22,7 +22,7 @@ static const int height_wave = 196;
 
 
 PanelGraph::PanelGraph(wxWindow *parent) :
-    Panel(parent, MainWindow::WIDTH1, MainWindow::HEIGTH1, MainWindow::WIDTH2, HEIGHT)
+    Panel(parent, MainWindow::WIDTH1, MainWindow::HEIGTH1, WIDTH, HEIGHT)
 {
     self = this;
 
