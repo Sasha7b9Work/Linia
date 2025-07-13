@@ -12,4 +12,8 @@ public:
     PanelConfig(wxWindow *parent);
 
     static PanelConfig *self;
+
+private:
+
+    wxPanel *CreatePanel(wxAuiNotebook *);
 };

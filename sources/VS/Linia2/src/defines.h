@@ -16,6 +16,7 @@
 #include <wx/tokenzr.h>
 #include <wx/graphics.h>
 #include <wx/colordlg.h>
+#include <wx/aui/aui.h>
 #include <map>
 #include <queue>
 #include <mutex>
@@ -136,5 +137,11 @@ enum
     ID_BTN_MENU_REPORT_DELETE,
     ID_BTN_MENU_REPORT_EXPAND,
     ID_BTN_MENU_REPORT_COLLAPSE,
-    ID_BTN_MENU_REPORT_CLOSE
+    ID_BTN_MENU_REPORT_CLOSE,
+
+    ID_PAN3_BTN_CHANNEL_C,
+    ID_PAN3_BTN_CHANNEL_B,
+    ID_PAN3_BTN_CHANNEL_S,
+    ID_PAN3_BTN_SHCEME,
+    ID_PAN3_BTN_CALCULATION
 };
