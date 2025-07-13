@@ -11,6 +11,8 @@
 #define FIND_SPINCTRL(id)     GF::FindSpinCtrl(this, (id))
 
 
+
+
 namespace GF
 {
     // Центрировать text относительно border

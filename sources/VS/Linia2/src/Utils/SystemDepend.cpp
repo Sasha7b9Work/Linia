@@ -111,3 +111,13 @@ wxSize SD::D::ColorDialog::Size()
     return { 500, 450 };
 #endif
 }
+
+
+int SD::Y_SB(int y)
+{
+#ifdef WIN32
+    return y;
+#else
+    return y - 10;
+#endif
+}

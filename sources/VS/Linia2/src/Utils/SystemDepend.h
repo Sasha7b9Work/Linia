@@ -29,6 +29,9 @@
 
 namespace SD
 {
+    //  Static Box
+    int Y_SB(int);
+
     // Размеры - dimensions
     namespace D
     {
