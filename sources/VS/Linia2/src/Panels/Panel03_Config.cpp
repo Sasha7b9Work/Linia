@@ -17,45 +17,54 @@ PanelConfig::PanelConfig(wxWindow* parent) :
 
     wxSize sizeChan = { 67, h };
 
-    tab_buttons.push_back(new wxToggleButton(this, ID_PAN3_BTN_CHANNEL_C, _L("Канал C"), { 0, 0 }, sizeChan));
+    wxToggleButton *button = new wxToggleButton(this, ID_PAN3_BTN_CHANNEL_C, _L("Канал C"), { 0, 0 }, sizeChan);
+    str_panels.push_back({ button, CreatePanel(button) });
 
-    tab_buttons.push_back(new wxToggleButton(this, ID_PAN3_BTN_CHANNEL_B, _L("Канал B"), { sizeChan.x, 0 }, sizeChan));
+    button = new wxToggleButton(this, ID_PAN3_BTN_CHANNEL_B, _L("Канал B"), { sizeChan.x, 0 }, sizeChan);
+    str_panels.push_back({ button, CreatePanel(button) });
 
-    tab_buttons.push_back(new wxToggleButton(this, ID_PAN3_BTN_CHANNEL_S, _L("Канал S"), { sizeChan.x * 2, 0 }, sizeChan));
+    button = new wxToggleButton(this, ID_PAN3_BTN_CHANNEL_S, _L("Канал S"), { sizeChan.x * 2, 0 }, sizeChan);
+    str_panels.push_back({ button, CreatePanel(button) });
 
     wxSize sizeScheme = { 120, h };
-    tab_buttons.push_back(new wxToggleButton(this, ID_PAN3_BTN_SHCEME, _L("Схема включения"), { 0, h }, sizeScheme));
+    new wxToggleButton(this, ID_PAN3_BTN_SCHEME, _L("Схема включения"), { 0, h }, sizeScheme);
+    str_panels.push_back({ button, CreatePanel(button) });
 
-    tab_buttons.push_back(new wxToggleButton(this, ID_PAN3_BTN_CALCULATION, _L("Расчёт"), { sizeScheme.x, h }, { MainWindow::WIDTH3 - sizeScheme.x - 3, h }));
+    new wxToggleButton(this, ID_PAN3_BTN_CALCULATION, _L("Расчёт"), { sizeScheme.x, h }, { MainWindow::WIDTH3 - sizeScheme.x - 3, h });
+    str_panels.push_back({ button, CreatePanel(button) });
 
     Bind(wxEVT_TOGGLEBUTTON, &PanelConfig::OnEventButton, this);
 
-    /*
-    wxAuiNotebook *notebook = new wxAuiNotebook(this, wxID_ANY);
-
-    notebook->SetArtProvider(new wxAuiDefaultTabArt);
-    notebook->SetWindowStyleFlag(wxAUI_NB_TAB_SPLIT | wxAUI_NB_SCROLL_BUTTONS);
-
-    notebook->SetSize(MainWindow::WIDTH3, HEIGHT);
-
-    notebook->AddPage(CreatePanel(notebook), "Канал C");
-    notebook->AddPage(CreatePanel(notebook), "Канал B");
-    notebook->AddPage(CreatePanel(notebook), "Канал S");
-    notebook->AddPage(CreatePanel(notebook), "Схема включения");
-    notebook->AddPage(CreatePanel(notebook), "Расчёт");
-
-    wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
-    sizer->Add(notebook, 1, wxEXPAND);
-    SetSizer(sizer);
-
-    SetSize(MainWindow::WIDTH3, HEIGHT);
-    */
+    GF::FindToggleButton(this, ID_PAN3_BTN_CHANNEL_C)->SetValue(true);
 }
 
 
-wxPanel *PanelConfig::CreatePanel(wxAuiNotebook *notebook)
+wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
 {
-    wxPanel *panel = new wxPanel(notebook);
+    wxPanel *panel = new wxPanel(self);
+
+    int id = button->GetId();
+
+    if (id == ID_PAN3_BTN_CHANNEL_C)
+    {
+
+    }
+    else if (id == ID_PAN3_BTN_CHANNEL_B)
+    {
+
+    }
+    else if (id == ID_PAN3_BTN_CHANNEL_S)
+    {
+
+    }
+    else if (id == ID_PAN3_BTN_SCHEME)
+    {
+
+    }
+    else if (id == ID_PAN3_BTN_CALCULATION)
+    {
+
+    }
 
     return panel;
 }
@@ -76,11 +85,11 @@ void PanelConfig::OnEventButton(wxCommandEvent &event)
 
 void PanelConfig::UnсheckAllAcross(int id)
 {
-    for (auto button : tab_buttons)
+    for (auto &str : str_panels)
     {
-        if (button->GetId() != id)
+        if (str.button->GetId() != id)
         {
-            button->SetValue(false);
+            str.button->SetValue(false);
         }
     }
 }

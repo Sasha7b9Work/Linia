@@ -15,9 +15,15 @@ public:
 
 private:
 
-    std::vector<wxToggleButton *> tab_buttons;
+    struct StructPanel
+    {
+        wxToggleButton *button;
+        wxPanel *panel;
+    };
 
-    wxPanel *CreatePanel(wxAuiNotebook *);
+    std::vector<StructPanel> str_panels;
+
+    wxPanel *CreatePanel(wxToggleButton *);
 
     void OnEventButton(wxCommandEvent &);
 
