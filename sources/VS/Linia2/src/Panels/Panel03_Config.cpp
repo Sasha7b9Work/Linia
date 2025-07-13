@@ -67,16 +67,16 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
         {
             wxSize size_rb{ 50, 15 };
 
-            new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_1, "1", { 10, 20 }, size_rb);
-            new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_2, "2", { 70, 20 }, size_rb);
+            new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_1, "1", { 10, SD::Y_SB(20) }, size_rb);
+            new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_2, "2", { 70, SD::Y_SB(20) }, size_rb);
 
-            new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_3, "3", { 10, 50 }, size_rb);
-            new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_4, "4", { 70, 50 }, size_rb);
+            new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_3, "3", { 10, SD::Y_SB(50) }, size_rb);
+            new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_4, "4", { 70, SD::Y_SB(50) }, size_rb);
 
-            new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_5, "5", { 10, 80 }, size_rb);
-            new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_6, "6", { 70, 80 }, size_rb);
+            new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_5, "5", { 10, SD::Y_SB(80) }, size_rb);
+            new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_6, "6", { 70, SD::Y_SB(80) }, size_rb);
 
-            new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_7, "7", { 130, 20 }, size_rb);
+            new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_7, "7", { 130, SD::Y_SB(20) }, size_rb);
 
             {
                 wxCommandEvent evt(wxEVT_RADIOBUTTON, ID_PAN3_CHAN_C_RB_SCAN_1);

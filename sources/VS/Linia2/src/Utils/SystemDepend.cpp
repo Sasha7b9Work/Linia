@@ -118,6 +118,6 @@ int SD::Y_SB(int y)
 #ifdef WIN32
     return y;
 #else
-    return y;
+    return y - 20;
 #endif
 }
