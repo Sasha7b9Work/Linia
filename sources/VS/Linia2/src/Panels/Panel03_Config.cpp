@@ -90,7 +90,7 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
                 new wxStaticText(boxImpulse, wxID_ANY, "0.2 ms", { 10, SD::Y_SB(20) });
             }
 
-            new wxCheckBox(boxScan, ID_PAN3_CHAN_C_CHECKBOX_DUTY_CYCLE, _L("Скважн. x 2"), { 100, 120 }, { 100, 20 });
+            new wxCheckBox(boxScan, ID_PAN3_CHAN_C_CHECKBOX_DUTY_CYCLE, _L("Скважн. x 2"), { 100, SD::Y_SB(120) }, { 100, 20 });
         }
 
         wxStaticBox *boxMeter = new wxStaticBox(panel, wxID_ANY, _L("Измеритель"), { x, boxScan->GetSize().y + x }, { w, 50 } );
@@ -99,8 +99,8 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
             int y = 20;
             int dY = 5;
 
-            new wxStaticText(boxMeter, wxID_ANY, "Uc", { 10, y + dY });
-            new wxStaticText(boxMeter, wxID_ANY, "Ic", { 100, y + dY });
+            new wxStaticText(boxMeter, wxID_ANY, "Uc", { 10, SD::Y_SB(y + dY) });
+            new wxStaticText(boxMeter, wxID_ANY, "Ic", { 100, SD::Y_SB(y + dY) });
 
             wxArrayString choices;
             choices.Add("100V");
