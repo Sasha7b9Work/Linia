@@ -41,4 +41,6 @@ private:
     void EnablePanel(int button_id);
 
     void CreatePanelChannelC(wxPanel *, int x, int w);
+
+    void CreatePanelChannelB(wxPanel *, int x, int w);
 };
