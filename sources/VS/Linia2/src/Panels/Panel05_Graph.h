@@ -1,4 +1,4 @@
-// 2025/6/1 17:45:46 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2022/10/28 23:17:02 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Panels/Panel.h"
 
@@ -12,4 +12,22 @@ public:
     PanelGraph(wxWindow *parent);
 
     static PanelGraph *self;
+
+    void Init();
+
+    void FillRectangle(int x, int y, int width, int height, const wxColor &);
+
+    void DrawLine(int x1, int y1, int x2, int y2, const wxColor &);
+
+    void DrawString(int x, int y, int font, const wxColor &, pchar text);
+
+private:
+
+    static wxBitmap bitmap;
+
+    void OnPaint(wxPaintEvent &);
+
+    void OnMouseDown(wxMouseEvent &);
+
+    void OnMouseUp(wxMouseEvent &);
 };
