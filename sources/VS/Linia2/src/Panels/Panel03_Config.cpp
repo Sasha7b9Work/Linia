@@ -53,11 +53,18 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
     panel->SetSize({ MainWindow::WIDTH3, HEIGHT - 40 });
     panel->SetPosition({ 0, 40 });
 
+    int x = 4;
+    int w = MainWindow::WIDTH3 - 2 * x - 1;
+
     int id = button->GetId();
 
     if (id == ID_PAN3_BTN_CHANNEL_C)
     {
-        new wxStaticText(panel, wxID_ANY, "Test");
+        wxStaticBox *boxScan = new wxStaticBox(panel, wxID_ANY, _L("Развёртка"), { x, 0 }, { w, 100 });
+
+        wxStaticBox *boxMeter = new wxStaticBox(panel, wxID_ANY, _L("Измеритель"), { x, boxScan->GetSize().y + x }, { w, 50 } );
+
+        wxStaticBox *boxSource = new wxStaticBox(panel, wxID_ANY, _L("Источник U"), { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + x }, { w, 50 });
     }
     else if (id == ID_PAN3_BTN_CHANNEL_B)
     {
