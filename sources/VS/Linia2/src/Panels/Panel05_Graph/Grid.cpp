@@ -31,18 +31,22 @@ void Grid::Draw()
         PanelGraph::self->DrawLine(x, y, x, y + num_cells * size_cell);
     }
 
+    int d = 8 * scale;
+
     for (int i = 0; i < 3; i++)
     {
-        DrawVPointLine(x_left + i + 1, y_top, 8, length);
-        DrawHPointLine(x_left, y_top + num_cells * size_cell - i - 1, 8, length);
+        DrawVPointLine(x_left + i + 1, y_top, d, length);
+        DrawHPointLine(x_left, y_top + num_cells * size_cell - i - 1, d, length);
     }
+
+    d = 4 * scale;
 
     for (int i = 0; i < 4; i++)
     {
-        DrawVPointLine(x_left + (i + 1) * size_cell, y_top, 4, length);
-        DrawVPointLine(center.x + (i + 1) * size_cell, y_top, 4, length);
-        DrawHPointLine(x_left, y_top + (i + 1) * size_cell, 4, length);
-        DrawHPointLine(x_left, center.y + (i + 1) * size_cell, 4, length);
+        DrawVPointLine(x_left + (i + 1) * size_cell, y_top, d, length);
+        DrawVPointLine(center.x + (i + 1) * size_cell, y_top, d, length);
+        DrawHPointLine(x_left, y_top + (i + 1) * size_cell, d, length);
+        DrawHPointLine(x_left, center.y + (i + 1) * size_cell, d, length);
     }
 }
 
@@ -59,24 +63,21 @@ int Grid::SizeCell() const
 }
 
 
-void Grid::ScaleOn(int delta)
+void Grid::ScaleOn(const wxPoint &pos, int delta)
 {
-    if (delta > 0)
+    wxPoint delta_center = center - pos;
+
+    if (delta > 0 && scale < 2)
     {
         scale++;
+
+        center += delta_center;
     }
-    else if (delta < 0)
+    else if (delta < 0 && scale > 1)
     {
         scale--;
-    }
 
-    if (scale < 1)
-    {
-        scale = 1;
-    }
-    else if (scale > 5)
-    {
-        scale = 5;
+        center -= delta_center / 2;
     }
 }
 

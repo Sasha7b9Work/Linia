@@ -12,7 +12,7 @@ public:
 
     void MoveOn(const wxPoint &);
 
-    void ScaleOn(int);
+    void ScaleOn(const wxPoint &, int);
 
 private:
 
