@@ -29,4 +29,6 @@ private:
 
     // Отщёлкнуть все, кроме id
     void UnсheckAllAcross(int id);
+
+    void EnablePanel(int button_id);
 };

@@ -47,19 +47,18 @@ PanelConfig::PanelConfig(wxWindow* parent) :
     }
 }
 
-
 wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
 {
     wxPanel *panel = new wxPanel(self);
 
-    panel->SetSize({ MainWindow::WIDTH3, HEIGHT });
+    panel->SetSize({ MainWindow::WIDTH3, HEIGHT - 40 });
     panel->SetPosition({ 0, 40 });
 
     int id = button->GetId();
 
     if (id == ID_PAN3_BTN_CHANNEL_C)
     {
-
+        new wxStaticText(panel, wxID_ANY, "Test");
     }
     else if (id == ID_PAN3_BTN_CHANNEL_B)
     {
@@ -91,6 +90,8 @@ void PanelConfig::OnEventButton(wxCommandEvent &event)
     else
     {
         UnсheckAllAcross(event.GetId());
+
+        EnablePanel(event.GetId());
     }
 }
 
@@ -99,9 +100,15 @@ void PanelConfig::UnсheckAllAcross(int id)
 {
     for (auto &str : str_panels)
     {
-        if (str.button->GetId() != id)
-        {
-            str.button->SetValue(false);
-        }
+        str.button->SetValue(str.button->GetId() == id);
+    }
+}
+
+
+void PanelConfig::EnablePanel(int button_id)
+{
+    for (auto &str : str_panels)
+    {
+        str.panel->Show(str.button->GetId() == button_id);
     }
 }
