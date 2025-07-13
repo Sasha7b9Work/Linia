@@ -27,10 +27,10 @@ PanelConfig::PanelConfig(wxWindow* parent) :
     str_panels.push_back({ button, CreatePanel(button) });
 
     wxSize sizeScheme = { 120, h };
-    new wxToggleButton(this, ID_PAN3_BTN_SCHEME, _L("Схема включения"), { 0, h }, sizeScheme);
+    button = new wxToggleButton(this, ID_PAN3_BTN_SCHEME, _L("Схема включения"), { 0, h }, sizeScheme);
     str_panels.push_back({ button, CreatePanel(button) });
 
-    new wxToggleButton(this, ID_PAN3_BTN_CALCULATION, _L("Расчёт"), { sizeScheme.x, h }, { MainWindow::WIDTH3 - sizeScheme.x - 3, h });
+    button = new wxToggleButton(this, ID_PAN3_BTN_CALCULATION, _L("Расчёт"), { sizeScheme.x, h }, { MainWindow::WIDTH3 - sizeScheme.x - 3, h });
     str_panels.push_back({ button, CreatePanel(button) });
 
     Bind(wxEVT_TOGGLEBUTTON, &PanelConfig::OnEventButton, this);
