@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Panels/Panel03_Config.h"
 #include "MainWindow.h"
+#include "Utils/GlobalFunctions.h"
 
 
 PanelConfig *PanelConfig::self = nullptr;
@@ -16,16 +17,18 @@ PanelConfig::PanelConfig(wxWindow* parent) :
 
     wxSize sizeChan = { 67, h };
 
-    new wxToggleButton(this, ID_PAN3_BTN_CHANNEL_C, _L("Канал C"), { 0, 0 }, sizeChan);
+    tab_buttons.push_back(new wxToggleButton(this, ID_PAN3_BTN_CHANNEL_C, _L("Канал C"), { 0, 0 }, sizeChan));
 
-    new wxButton(this, ID_PAN3_BTN_CHANNEL_B, _L("Канал B"), { sizeChan.x, 0 }, sizeChan);
+    tab_buttons.push_back(new wxToggleButton(this, ID_PAN3_BTN_CHANNEL_B, _L("Канал B"), { sizeChan.x, 0 }, sizeChan));
 
-    new wxButton(this, ID_PAN3_BTN_CHANNEL_S, _L("Канал S"), { sizeChan.x * 2, 0 }, sizeChan);
+    tab_buttons.push_back(new wxToggleButton(this, ID_PAN3_BTN_CHANNEL_S, _L("Канал S"), { sizeChan.x * 2, 0 }, sizeChan));
 
     wxSize sizeScheme = { 120, h };
-    new wxButton(this, ID_PAN3_BTN_SHCEME, _L("Схема включения"), { 0, h }, sizeScheme);
+    tab_buttons.push_back(new wxToggleButton(this, ID_PAN3_BTN_SHCEME, _L("Схема включения"), { 0, h }, sizeScheme));
 
-    new wxButton(this, ID_PAN3_BTN_CALCULATION, _L("Расчёт"), { sizeScheme.x, h }, { MainWindow::WIDTH3 - sizeScheme.x - 3, h });
+    tab_buttons.push_back(new wxToggleButton(this, ID_PAN3_BTN_CALCULATION, _L("Расчёт"), { sizeScheme.x, h }, { MainWindow::WIDTH3 - sizeScheme.x - 3, h }));
+
+    Bind(wxEVT_TOGGLEBUTTON, &PanelConfig::OnEventButton, this);
 
     /*
     wxAuiNotebook *notebook = new wxAuiNotebook(this, wxID_ANY);
@@ -55,4 +58,29 @@ wxPanel *PanelConfig::CreatePanel(wxAuiNotebook *notebook)
     wxPanel *panel = new wxPanel(notebook);
 
     return panel;
+}
+
+
+void PanelConfig::OnEventButton(wxCommandEvent &event)
+{
+    if (!event.IsChecked())
+    {
+        GF::FindToggleButton(self, event.GetId())->SetValue(true);
+    }
+    else
+    {
+        UnсheckAllAcross(event.GetId());
+    }
+}
+
+
+void PanelConfig::UnсheckAllAcross(int id)
+{
+    for (auto button : tab_buttons)
+    {
+        if (button->GetId() != id)
+        {
+            button->SetValue(false);
+        }
+    }
 }

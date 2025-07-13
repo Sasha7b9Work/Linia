@@ -15,5 +15,12 @@ public:
 
 private:
 
+    std::vector<wxToggleButton *> tab_buttons;
+
     wxPanel *CreatePanel(wxAuiNotebook *);
+
+    void OnEventButton(wxCommandEvent &);
+
+    // Отщёлкнуть все, кроме id
+    void UnсheckAllAcross(int id);
 };
