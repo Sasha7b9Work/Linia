@@ -40,10 +40,14 @@ PanelConfig::PanelConfig(wxWindow* parent) :
 
         int id = ID_PAN3_BTN_CHANNEL_C;
 
-        wxCommandEvent event(wxEVT_TOGGLEBUTTON, id);
-        event.SetEventObject(GF::FindToggleButton(this, id));
-        event.SetInt(1);
-        GF::FindToggleButton(this, id)->ProcessCommand(event);
+//        wxCommandEvent event(wxEVT_TOGGLEBUTTON, id);
+//        event.SetEventObject(GF::FindToggleButton(this, id));
+//        event.SetInt(1);
+//        GF::FindToggleButton(this, id)->ProcessCommand(event);
+
+        wxCommandEvent evt(wxEVT_TOGGLEBUTTON, id);
+        evt.SetInt(1);
+        this->ProcessWindowEvent(evt);
     }
 }
 
