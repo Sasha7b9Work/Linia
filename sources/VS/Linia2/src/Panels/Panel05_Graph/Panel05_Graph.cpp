@@ -30,6 +30,7 @@ PanelGraph::PanelGraph(wxWindow *parent) :
     Bind(wxEVT_PAINT, &PanelGraph::OnPaint, this);
     Bind(wxEVT_LEFT_DOWN, &PanelGraph::OnMouseDown, this);
     Bind(wxEVT_LEFT_UP, &PanelGraph::OnMouseUp, this);
+    Bind(wxEVT_MOTION, &PanelGraph::OnMouseMove, this);
 
     Draw();
 }
@@ -43,13 +44,36 @@ void PanelGraph::OnPaint(wxPaintEvent &)
 }
 
 
-void PanelGraph::OnMouseDown(wxMouseEvent &) //-V2009
+void PanelGraph::OnMouseDown(wxMouseEvent &event)
 {
+    pos_mouse_down = event.GetPosition();
+
+    mouse_is_pressed = true;
 }
 
 
 void PanelGraph::OnMouseUp(wxMouseEvent &)
 {
+    mouse_is_pressed = false;
+}
+
+
+void PanelGraph::OnMouseMove(wxMouseEvent &event)
+{
+    if (!mouse_is_pressed)
+    {
+        return;
+    }
+
+    wxPoint position = event.GetPosition();
+
+    wxPoint delta = position - pos_mouse_down;
+
+    grid.MoveOn(delta);
+
+    pos_mouse_down = position;
+
+    Draw();
 }
 
 
@@ -58,6 +82,8 @@ void PanelGraph::Draw()
     FillRectangle(0, 0, WIDTH, HEIGHT, *wxWHITE);
 
     grid.Draw();
+
+    Refresh();
 }
 
 
@@ -69,7 +95,6 @@ void PanelGraph::FillRectangle(int x, int y, int width, int height, const wxColo
     dc.SetPen(color);
     dc.DrawRectangle({ x, y, width, height });
     dc.SelectObject(wxNullBitmap);
-    Refresh();
 }
 
 
@@ -88,7 +113,6 @@ void PanelGraph::DrawLine(int x1, int y1, int x2, int y2)
     dc.SelectObject(bitmap);
     dc.DrawLine(x1, y1, x2, y2);
     dc.SelectObject(wxNullBitmap);
-    Refresh();
 }
 
 
@@ -99,7 +123,6 @@ void PanelGraph::DrawLine(int x1, int y1, int x2, int y2, const wxColor &color)
     dc.SetPen(color);
     dc.DrawLine(x1, y1, x2, y2);
     dc.SelectObject(wxNullBitmap);
-    Refresh();
 }
 
 
@@ -111,5 +134,4 @@ void PanelGraph::DrawString(int x, int y, int /*num_font*/, const wxColor &color
 //    dc.SetFont(FontGUI::Get(num_font));
     dc.DrawText(text, x + 5, y + 5);
     dc.SelectObject(wxNullBitmap);
-    Refresh();
 }

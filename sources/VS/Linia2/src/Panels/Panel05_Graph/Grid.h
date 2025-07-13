@@ -10,6 +10,8 @@ public:
 
     void Draw();
 
+    void MoveOn(const wxPoint &);
+
 private:
 
     wxPoint center;

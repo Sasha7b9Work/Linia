@@ -45,6 +45,12 @@ void Grid::Draw()
 }
 
 
+void Grid::MoveOn(const wxPoint &delta)
+{
+    center += delta;
+}
+
+
 void Grid::DrawVPointLine(int x, int y, int d, int height)
 {
     for (int i = y; i < y + height; i += d)
