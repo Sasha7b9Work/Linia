@@ -85,7 +85,7 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
             }
 
             {
-                wxStaticBox *boxImpulse = new wxStaticBox(panel, wxID_ANY, _L("Импульс"), { 10, SD::Y_SB(110) }, { 75, 40 });
+                wxStaticBox *boxImpulse = new wxStaticBox(boxScan, wxID_ANY, _L("Импульс"), { 10, SD::Y_SB(110) }, { 75, 40 });
 
                 new wxStaticText(boxImpulse, wxID_ANY, "0.2 ms", { 10, SD::Y_SB(20) });
             }
