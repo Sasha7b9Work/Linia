@@ -35,13 +35,25 @@ PanelConfig::PanelConfig(wxWindow* parent) :
 
     Bind(wxEVT_TOGGLEBUTTON, &PanelConfig::OnEventButton, this);
 
-    GF::FindToggleButton(this, ID_PAN3_BTN_CHANNEL_C)->SetValue(true);
+    {
+        // Включаем панель
+
+        int id = ID_PAN3_BTN_CHANNEL_C;
+
+        wxCommandEvent event(wxEVT_TOGGLEBUTTON, id);
+        event.SetEventObject(GF::FindToggleButton(this, id));
+        event.SetInt(1);
+        GF::FindToggleButton(this, id)->ProcessCommand(event);
+    }
 }
 
 
 wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
 {
     wxPanel *panel = new wxPanel(self);
+
+    panel->SetSize({ MainWindow::WIDTH3, HEIGHT });
+    panel->SetPosition({ 0, 40 });
 
     int id = button->GetId();
 
