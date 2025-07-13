@@ -21,12 +21,6 @@ static const int width_wave = 390;
 static const int height_wave = 196;
 
 
-struct FontGUI
-{
-    static wxFont Get(int num_font);
-};
-
-
 PanelGraph::PanelGraph(wxWindow *parent) :
     Panel(parent, MainWindow::WIDTH1, MainWindow::HEIGTH1, MainWindow::WIDTH2, HEIGHT)
 {
@@ -85,19 +79,13 @@ void PanelGraph::DrawLine(int x1, int y1, int x2, int y2, const wxColor &color)
 }
 
 
-void PanelGraph::DrawString(int x, int y, int num_font, const wxColor &color, pchar text)
+void PanelGraph::DrawString(int x, int y, int /*num_font*/, const wxColor &color, pchar text)
 {
     wxMemoryDC dc;
     dc.SelectObject(bitmap);
     dc.SetTextForeground(color);
-    dc.SetFont(FontGUI::Get(num_font));
+//    dc.SetFont(FontGUI::Get(num_font));
     dc.DrawText(text, x + 5, y + 5);
     dc.SelectObject(wxNullBitmap);
     Refresh();
-}
-
-
-wxFont FontGUI::Get(int /*num_font*/)
-{
-    return wxFont(10, wxFONTFAMILY_ROMAN, wxNORMAL, wxNORMAL);
 }
