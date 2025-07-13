@@ -39,4 +39,6 @@ private:
     void UnсheckAllAcross(int id);
 
     void EnablePanel(int button_id);
+
+    void CreatePanelChannelC(wxPanel *, int x, int w);
 };
