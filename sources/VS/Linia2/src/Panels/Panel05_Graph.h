@@ -15,14 +15,6 @@ public:
 
     static PanelGraph *self;
 
-    void Init();
-
-    void FillRectangle(int x, int y, int width, int height, const wxColor &);
-
-    void DrawLine(int x1, int y1, int x2, int y2, const wxColor &);
-
-    void DrawString(int x, int y, int font, const wxColor &, pchar text);
-
 private:
 
     static wxBitmap bitmap;
@@ -32,4 +24,12 @@ private:
     void OnMouseDown(wxMouseEvent &);
 
     void OnMouseUp(wxMouseEvent &);
+
+    void Init();
+
+    void FillRectangle(int x, int y, int width, int height, const wxColor &);
+
+    void DrawLine(int x1, int y1, int x2, int y2, const wxColor &);
+
+    void DrawString(int x, int y, int font, const wxColor &, pchar text);
 };

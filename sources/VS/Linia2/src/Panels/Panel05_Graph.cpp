@@ -30,6 +30,8 @@ PanelGraph::PanelGraph(wxWindow *parent) :
     Bind(wxEVT_PAINT, &PanelGraph::OnPaint, this);
     Bind(wxEVT_LEFT_DOWN, &PanelGraph::OnMouseDown, this);
     Bind(wxEVT_LEFT_UP, &PanelGraph::OnMouseUp, this);
+
+    Init();
 }
 
 
@@ -53,6 +55,7 @@ void PanelGraph::OnMouseUp(wxMouseEvent &)
 
 void PanelGraph::Init()
 {
+    FillRectangle(0, 0, WIDTH, HEIGHT, *wxWHITE);
 }
 
 
