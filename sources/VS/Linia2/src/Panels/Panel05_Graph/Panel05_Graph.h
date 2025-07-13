@@ -29,9 +29,15 @@ private:
 
     static wxBitmap bitmap;
 
+    wxMemoryDC dc;
+
     // Координаты мыши при нажатии кнопки
     wxPoint pos_mouse_down;
     bool mouse_is_pressed = false;
+
+    void BeginPaint();
+
+    void EndPaint();
 
     void OnPaint(wxPaintEvent &);
 

@@ -38,9 +38,9 @@ PanelGraph::PanelGraph(wxWindow *parent) :
 
 void PanelGraph::OnPaint(wxPaintEvent &)
 {
-    wxPaintDC dc(this);
+    wxPaintDC paint_dc(this);
 
-    dc.DrawBitmap(bitmap, 0, 0);
+    paint_dc.DrawBitmap(bitmap, 0, 0);
 }
 
 
@@ -79,59 +79,60 @@ void PanelGraph::OnMouseMove(wxMouseEvent &event)
 
 void PanelGraph::Draw()
 {
+    BeginPaint();
+
     FillRectangle(0, 0, WIDTH, HEIGHT, *wxWHITE);
 
     grid.Draw();
+
+    EndPaint();
 
     Refresh();
 }
 
 
+void PanelGraph::BeginPaint()
+{
+    dc.SelectObject(bitmap);
+}
+
+
+void PanelGraph::EndPaint()
+{
+    dc.SelectObject(wxNullBitmap);
+}
+
+
 void PanelGraph::FillRectangle(int x, int y, int width, int height, const wxColor &color)
 {
-    wxMemoryDC dc;
-    dc.SelectObject(bitmap);
     dc.SetBrush(color);
     dc.SetPen(color);
     dc.DrawRectangle({ x, y, width, height });
-    dc.SelectObject(wxNullBitmap);
+    
 }
 
 
 void Point::Draw(int x, int y)
 {
-    wxMemoryDC dc;
-    dc.SelectObject(PanelGraph::bitmap);
-    dc.DrawPoint(x, y);
-    dc.SelectObject(wxNullBitmap);
+    PanelGraph::self->dc.DrawPoint(x, y);
 }
 
 
 void PanelGraph::DrawLine(int x1, int y1, int x2, int y2)
 {
-    wxMemoryDC dc;
-    dc.SelectObject(bitmap);
     dc.DrawLine(x1, y1, x2, y2);
-    dc.SelectObject(wxNullBitmap);
 }
 
 
 void PanelGraph::DrawLine(int x1, int y1, int x2, int y2, const wxColor &color)
 {
-    wxMemoryDC dc;
-    dc.SelectObject(bitmap);
     dc.SetPen(color);
     dc.DrawLine(x1, y1, x2, y2);
-    dc.SelectObject(wxNullBitmap);
 }
 
 
 void PanelGraph::DrawString(int x, int y, int /*num_font*/, const wxColor &color, pchar text)
 {
-    wxMemoryDC dc;
-    dc.SelectObject(bitmap);
     dc.SetTextForeground(color);
-//    dc.SetFont(FontGUI::Get(num_font));
     dc.DrawText(text, x + 5, y + 5);
-    dc.SelectObject(wxNullBitmap);
 }
