@@ -31,6 +31,7 @@ PanelGraph::PanelGraph(wxWindow *parent) :
     Bind(wxEVT_LEFT_DOWN, &PanelGraph::OnMouseDown, this);
     Bind(wxEVT_LEFT_UP, &PanelGraph::OnMouseUp, this);
     Bind(wxEVT_MOTION, &PanelGraph::OnMouseMove, this);
+    Bind(wxEVT_MOUSEWHEEL, &PanelGraph::OnMouseWheel, this);
 
     Draw();
 }
@@ -72,6 +73,14 @@ void PanelGraph::OnMouseMove(wxMouseEvent &event)
     grid.MoveOn(delta);
 
     pos_mouse_down = position;
+
+    Draw();
+}
+
+
+void PanelGraph::OnMouseWheel(wxMouseEvent &event)
+{
+    grid.ScaleOn(event.GetWheelRotation());
 
     Draw();
 }

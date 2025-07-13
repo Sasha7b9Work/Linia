@@ -12,6 +12,8 @@ Grid::Grid()
 
 void Grid::Draw()
 {
+    const int size_cell = SizeCell();
+
     const int x_left = center.x - size_cell * num_cells / 2;
     const int y_top = center.y - size_cell * num_cells / 2;
 
@@ -48,6 +50,34 @@ void Grid::Draw()
 void Grid::MoveOn(const wxPoint &delta)
 {
     center += delta;
+}
+
+
+int Grid::SizeCell() const
+{
+    return 40 * scale;
+}
+
+
+void Grid::ScaleOn(int delta)
+{
+    if (delta > 0)
+    {
+        scale++;
+    }
+    else if (delta < 0)
+    {
+        scale--;
+    }
+
+    if (scale < 1)
+    {
+        scale = 1;
+    }
+    else if (scale > 5)
+    {
+        scale = 5;
+    }
 }
 
 

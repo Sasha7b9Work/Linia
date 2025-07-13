@@ -12,13 +12,17 @@ public:
 
     void MoveOn(const wxPoint &);
 
+    void ScaleOn(int);
+
 private:
 
     wxPoint center;
+    int scale = 1;      // 2 - увеличено в два раза, 3 - увелично в три и так далее
 
-    int size_cell = 40;
     int num_cells = 10;
 
     void DrawVPointLine(int x, int y, int d, int height);
     void DrawHPointLine(int x, int y, int d, int width);
+
+    int SizeCell() const;
 };

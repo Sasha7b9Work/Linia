@@ -47,6 +47,8 @@ private:
 
     void OnMouseUp(wxMouseEvent &);
 
+    void OnMouseWheel(wxMouseEvent &);
+
     void FillRectangle(int x, int y, int width, int height, const wxColor &);
 
     void DrawString(int x, int y, int font, const wxColor &, pchar text);
