@@ -186,5 +186,20 @@ enum
     ID_PAN3_CHAN_S_GEN_OFFSET_COMBO_POLARITY,
     // Ограничение
     ID_PAN3_CHAN_S_LIM_COMBO_RANGE,
-    ID_PAN3_CHAN_S_LIM_SLIDER
+    ID_PAN3_CHAN_S_LIM_SLIDER,
+
+    // Расчёт
+    // График
+    ID_PAN5_GRAPH_LINE_X,
+    ID_PAN5_GRAPH_LINE_Y,
+    // Параметр
+    ID_PAN5_PAR_LINE_FIND,
+    ID_PAN5_PAR_LINE_FOR,
+    ID_PAN5_PAR_LINE_VALUE_1,
+    ID_PAN5_PAR_LINE_VALUE_2,
+    ID_PAN5_PAR_RB_DY_DX,
+    ID_PAN5_PAR_RB_DX_DY,
+    // Пороговые значения
+    ID_PAN5_BORDER_MIN,
+    ID_PAN5_BORDER_MAX
 };
