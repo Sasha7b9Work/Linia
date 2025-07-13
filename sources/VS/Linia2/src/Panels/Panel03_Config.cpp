@@ -40,7 +40,7 @@ PanelConfig::PanelConfig(wxWindow* parent) :
     {
         // Включаем панель
 
-        int id = ID_PAN3_BTN_CHANNEL_B;
+        int id = ID_PAN3_BTN_CHANNEL_S;
 
         wxCommandEvent evt(wxEVT_TOGGLEBUTTON, id);
         evt.SetInt(1);
@@ -70,7 +70,7 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
     }
     else if (id == ID_PAN3_BTN_CHANNEL_S)
     {
-
+        CreatePanelChannelS(panel, x, w);
     }
     else if (id == ID_PAN3_BTN_SCHEME)
     {
@@ -251,6 +251,97 @@ void PanelConfig::CreatePanelChannelB(wxPanel *panel, int x, int w)
         y += 25;
 
         new wxSlider(boxLimitation, ID_PAN3_CHAN_B_LIM_SLIDER, 5, 0, 20, { 10, SD::Y_SB(y) }, { 120, TEXTCNTRL_HEIGHT });
+    }
+}
+
+
+void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
+{
+    wxStaticBox *boxGenerator = new wxStaticBox(panel, wxID_ANY, _L("Генератор ступенек"), { x, 0 }, { w, 300 });
+
+    {
+        int y = 25;
+        new wxStaticText(boxGenerator, wxID_ANY, _L("Тип"), { 10, SD::Y_SB(y) });
+
+        wxArrayString choices;
+        choices.Add("U");
+        choices.Add("I");
+
+        new wxComboBox(boxGenerator, ID_PAN3_CHAN_S_GEN_COMBO_TYPE, choices[0], { 70, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+
+        y += 25;
+
+        new wxStaticText(boxGenerator, wxID_ANY, _L("Импульс"), { 10, SD::Y_SB(y) });
+
+        choices.Clear();
+        choices.Add(_L("Вкл"));
+        choices.Add(_L("Выкл"));
+
+        new wxComboBox(boxGenerator, ID_PAN3_CHAN_S_GEN_COMBO_IMPULSE, choices[0], { 70, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+
+        y += 25;
+
+        choices.Clear();
+        choices.Add("2V");
+
+        new wxStaticText(boxGenerator, wxID_ANY, _L("Амплитуда ступени"), { 10, SD::Y_SB(y) });
+
+        new wxComboBox(boxGenerator, ID_PAN3_CHAN_S_GEN_COMBO_AMPLITUDE, choices[0], { 130, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+
+        y += 25;
+
+        y += 25;
+
+        new wxStaticText(boxGenerator, wxID_ANY, _L("Число ступенек"), { 10, SD::Y_SB(y + 3) });
+
+        new wxSpinCtrl(boxGenerator, ID_PAN3_CHAN_S_GEN_SPIN_NUMBER_STEPS, "5", { 120, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
+
+        y += 25;
+
+        choices.Clear();
+        choices.Add(_L("прямая"));
+        choices.Add(_L("обратная"));
+
+        new wxStaticText(boxGenerator, wxID_ANY, _L("Полярность"), { 10, SD::Y_SB(y + 3) });
+
+        new wxComboBox(boxGenerator, ID_PAN3_CHAN_S_GEN_COMBO_POLARITY, choices[0], { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+
+        y += 25;
+
+        wxStaticBox *boxOffset = new wxStaticBox(boxGenerator, wxID_ANY, _L("Смещение"), { x, y }, { w - 10, 100 });
+
+        {
+            y = 20;
+
+            new wxSlider(boxOffset, ID_PAN3_CHAN_S_GEN_OFFSET_SLIDER, 5, 0, 20, { 10, SD::Y_SB(y) }, { 120, TEXTCNTRL_HEIGHT });
+
+            y += 25;
+
+            choices.Clear();
+            choices.Add(_L("прямая"));
+            choices.Add(_L("обратная"));
+
+            new wxStaticText(boxOffset, wxID_ANY, _L("Полярность"), { 10, SD::Y_SB(y + 3) });
+
+            new wxComboBox(boxOffset, ID_PAN3_CHAN_S_GEN_OFFSET_COMBO_POLARITY, choices[0], { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        }
+    }
+
+    wxStaticBox *boxLimitation = new wxStaticBox(panel, wxID_ANY, _L("Ограничение"), { x, boxGenerator->GetSize().y + x }, { w, 100 });
+
+    {
+        int y = 20;
+
+        new wxStaticText(boxLimitation, wxID_ANY, _L("Диапазон"), { 10, SD::Y_SB(y) });
+
+        wxArrayString choices;
+        choices.Add("10 mA");
+
+        new wxComboBox(boxLimitation, ID_PAN3_CHAN_S_LIM_COMBO_RANGE, choices[0], { 100, SD::Y_SB(y - 3) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+
+        y += 25;
+
+        new wxSlider(boxLimitation, ID_PAN3_CHAN_S_LIM_SLIDER, 5, 0, 20, { 10, SD::Y_SB(y) }, { 120, TEXTCNTRL_HEIGHT });
     }
 }
 
