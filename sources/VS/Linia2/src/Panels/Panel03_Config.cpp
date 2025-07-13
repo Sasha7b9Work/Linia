@@ -97,7 +97,7 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
 
         {
             int y = 20;
-            int dY = 5;
+            int dY = 3;
 
             new wxStaticText(boxMeter, wxID_ANY, "Uc", { 10, SD::Y_SB(y + dY) });
             new wxStaticText(boxMeter, wxID_ANY, "Ic", { 100, SD::Y_SB(y + dY) });
@@ -113,7 +113,27 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
             new wxComboBox(boxMeter, ID_PAN3_CHAN_C_COMBOBOX_Ic, choices[0], { 120, SD::Y_SB(y) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
         }
 
-        new wxStaticBox(panel, wxID_ANY, _L("Источник U"), { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + x }, { w, 50 });
+        wxStaticBox *boxSource = new wxStaticBox(panel, wxID_ANY, _L("Источник U"), { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + x }, { w, 200 });
+
+        {
+            new wxStaticText(boxSource, wxID_ANY, _L("Диапазон Uc"), { 10, SD::Y_SB(30) });
+
+            wxArrayString choices;
+            choices.Add("20V");
+
+            new wxComboBox(boxSource, ID_PAN3_CHAN_C_COMBOBOX_SOURCE, choices[0], { 100, SD::Y_SB(27) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+
+            new wxStaticText(boxSource, wxID_ANY, _L("Ограничение Uc, %%"), { 40, SD::Y_SB(55) });
+
+            int y = 80;
+            int dy = 3;
+
+            new wxStaticText(boxSource, wxID_ANY, _L("Старт"), { 10, SD::Y_SB(y + dy) });
+            new wxStaticText(boxSource, wxID_ANY, _L("Стоп"), { 10, SD::Y_SB(y + 30 + dy) });
+
+            new wxSpinCtrl(boxSource, ID_PAN3_CHAN_C_SPIN_START, "0", { 80, SD::Y_SB(y) }, { 100, TEXTCNTRL_HEIGHT });
+            new wxSpinCtrl(boxSource, ID_PAN3_CHAN_C_SPIN_STOP, "100", { 80, SD::Y_SB(y + 30) }, { 100, TEXTCNTRL_HEIGHT });
+        }
     }
     else if (id == ID_PAN3_BTN_CHANNEL_B)
     {
