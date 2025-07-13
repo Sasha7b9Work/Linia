@@ -10,7 +10,7 @@
 #include "Panels/Panel02_ModeUpper.h"
 #include "Panels/Panel03_Config.h"
 #include "Panels/Panel04_Model.h"
-#include "Panels/Panel05_Graph.h"
+#include "Panels/Panel05_Graph/Panel05_Graph.h"
 #include "Panels/Panel06_Percents.h"
 #include "Panels/Panel07_Indicator.h"
 #include "Panels/Panel08_ModeLower.h"

@@ -1,6 +1,6 @@
 ﻿// 2022/10/28 23:17:06 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel05_Graph.h"
+#include "Panels/Panel05_Graph/Panel05_Graph.h"
 #include "MainWindow.h"
 #include <string>
 #include <map>
@@ -31,7 +31,7 @@ PanelGraph::PanelGraph(wxWindow *parent) :
     Bind(wxEVT_LEFT_DOWN, &PanelGraph::OnMouseDown, this);
     Bind(wxEVT_LEFT_UP, &PanelGraph::OnMouseUp, this);
 
-    Init();
+    Draw();
 }
 
 
@@ -53,9 +53,11 @@ void PanelGraph::OnMouseUp(wxMouseEvent &)
 }
 
 
-void PanelGraph::Init()
+void PanelGraph::Draw()
 {
     FillRectangle(0, 0, WIDTH, HEIGHT, *wxWHITE);
+
+    grid.Draw();
 }
 
 
@@ -66,6 +68,16 @@ void PanelGraph::FillRectangle(int x, int y, int width, int height, const wxColo
     dc.SetBrush(color);
     dc.SetPen(color);
     dc.DrawRectangle({ x, y, width, height });
+    dc.SelectObject(wxNullBitmap);
+    Refresh();
+}
+
+
+void PanelGraph::DrawLine(int x1, int y1, int x2, int y2)
+{
+    wxMemoryDC dc;
+    dc.SelectObject(bitmap);
+    dc.DrawLine(x1, y1, x2, y2);
     dc.SelectObject(wxNullBitmap);
     Refresh();
 }

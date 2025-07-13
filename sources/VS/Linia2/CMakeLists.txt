@@ -57,6 +57,7 @@ file(GLOB COMMUNICATOR_COMPORT          src/Communicator/ComPort/*.*)
 file(GLOB COMMUNICATOR_SPI              src/Communicator/SPI/*.*)
 file(GLOB CONTROLS                      src/Controls/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
+file(GLOB PANELS_PANEL5                 src/Panels/Panel05_Graph/*.*)
 file(GLOB PANELS_PANEL11                src/Panels/Panel11_Menu/*.*)
 file(GLOB PANELS_PANEL12                src/Panels/Panel12_Debug/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
@@ -71,6 +72,7 @@ source_group(Communicator/ComPort       FILES ${COMMUNICATOR_COMPORT})
 source_group(Communicator/SPI           FILES ${COMMUNICATOR_SPI})
 source_group(Controls                   FILES ${CONTROLS})
 source_group(Panels                     FILES ${PANELS})
+source_group(Panels/Panel05_Graph       FILES ${PANELS_PANEL5})
 source_group(Panels/Panel11_Menu        FILES ${PANELS_PANEL11})
 source_group(Panels/Panel12_Debug       FILES ${PANELS_PANEL12})
 source_group(Settings                   FILES ${SETTINGS})
@@ -86,6 +88,7 @@ add_executable(${PROJECT_NAME}
     ${COMMUNICATOR_SPI}
     ${CONTROLS}
     ${PANELS}
+    ${PANELS_PANEL5}
     ${PANELS_PANEL11}
     ${PANELS_PANEL12}
     ${SETTINGS}
