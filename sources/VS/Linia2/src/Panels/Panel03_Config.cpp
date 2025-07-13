@@ -90,7 +90,7 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
                 new wxStaticText(boxImpulse, wxID_ANY, "0.2 ms", { 10, SD::Y_SB(20) });
             }
 
-            new wxCheckBox(panel, ID_PAN3_CHAN_C_CHECKBOX_DUTY_CYCLE, _L("Скважн. x 2"), { 100, 120 }, { 100, 20 });
+            new wxCheckBox(boxScan, ID_PAN3_CHAN_C_CHECKBOX_DUTY_CYCLE, _L("Скважн. x 2"), { 100, 120 }, { 100, 20 });
         }
 
         wxStaticBox *boxMeter = new wxStaticBox(panel, wxID_ANY, _L("Измеритель"), { x, boxScan->GetSize().y + x }, { w, 50 } );
