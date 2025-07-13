@@ -73,6 +73,15 @@ void PanelGraph::FillRectangle(int x, int y, int width, int height, const wxColo
 }
 
 
+void Point::Draw(int x, int y)
+{
+    wxMemoryDC dc;
+    dc.SelectObject(PanelGraph::bitmap);
+    dc.DrawPoint(x, y);
+    dc.SelectObject(wxNullBitmap);
+}
+
+
 void PanelGraph::DrawLine(int x1, int y1, int x2, int y2)
 {
     wxMemoryDC dc;

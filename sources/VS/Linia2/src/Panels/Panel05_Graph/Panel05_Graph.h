@@ -7,6 +7,8 @@
 
 class PanelGraph : public Panel
 {
+    friend class Point;
+
 public:
 
     static const int WIDTH = MainWindow::WIDTH2;
@@ -36,4 +38,12 @@ private:
     void FillRectangle(int x, int y, int width, int height, const wxColor &);
 
     void DrawString(int x, int y, int font, const wxColor &, pchar text);
+};
+
+
+class Point
+{
+public:
+
+    void Draw(int x, int y);
 };
