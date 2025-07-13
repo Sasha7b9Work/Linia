@@ -64,7 +64,7 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
 
         wxStaticBox *boxMeter = new wxStaticBox(panel, wxID_ANY, _L("Измеритель"), { x, boxScan->GetSize().y + x }, { w, 50 } );
 
-        volatile wxStaticBox *boxSource = new wxStaticBox(panel, wxID_ANY, _L("Источник U"), { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + x }, { w, 50 });
+        new wxStaticBox(panel, wxID_ANY, _L("Источник U"), { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + x }, { w, 50 });
     }
     else if (id == ID_PAN3_BTN_CHANNEL_B)
     {
