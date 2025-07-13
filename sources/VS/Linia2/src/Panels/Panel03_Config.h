@@ -15,10 +15,17 @@ public:
 
 private:
 
+    // Структура хранит кнопку и панель, которую та включает
     struct StructPanel
     {
         wxToggleButton *button;
         wxPanel *panel;
+    };
+
+    // Здесь хранятся элементы панели "Канал C"
+    struct ChannelC
+    {
+        std::vector<wxRadioButton *> rbs;
     };
 
     std::vector<StructPanel> str_panels;
@@ -26,6 +33,7 @@ private:
     wxPanel *CreatePanel(wxToggleButton *);
 
     void OnEventButton(wxCommandEvent &);
+    void OnEventRadioButton(wxCommandEvent &);
 
     // Отщёлкнуть все, кроме id
     void UnсheckAllAcross(int id);

@@ -44,6 +44,12 @@ wxToggleButton *GF::FindToggleButton(wxWindow *w, int id)
 }
 
 
+wxRadioButton *GF::FindRadioButton(wxWindow *w, int id)
+{
+    return (wxRadioButton *)w->FindWindow(id);
+}
+
+
 wxCheckBox *GF::FindCheckBox(wxWindow *window, int id)
 {
     return (wxCheckBox *)window->FindWindow(id);

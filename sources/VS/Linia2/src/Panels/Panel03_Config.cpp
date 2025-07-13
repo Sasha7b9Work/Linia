@@ -13,6 +13,9 @@ PanelConfig::PanelConfig(wxWindow* parent) :
 {
     self = this;
 
+    Bind(wxEVT_TOGGLEBUTTON, &PanelConfig::OnEventButton, this);
+    Bind(wxEVT_RADIOBUTTON, &PanelConfig::OnEventRadioButton, this);
+
     const int h = 20;
 
     wxSize sizeChan = { 67, h };
@@ -32,8 +35,6 @@ PanelConfig::PanelConfig(wxWindow* parent) :
 
     button = new wxToggleButton(this, ID_PAN3_BTN_CALCULATION, _L("Расчёт"), { sizeScheme.x, h }, { MainWindow::WIDTH3 - sizeScheme.x - 3, h });
     str_panels.push_back({ button, CreatePanel(button) });
-
-    Bind(wxEVT_TOGGLEBUTTON, &PanelConfig::OnEventButton, this);
 
     {
         // Включаем панель
@@ -60,7 +61,36 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
 
     if (id == ID_PAN3_BTN_CHANNEL_C)
     {
-        wxStaticBox *boxScan = new wxStaticBox(panel, wxID_ANY, _L("Развёртка"), { x, 0 }, { w, 100 });
+        wxStaticBox *boxScan = new wxStaticBox(panel, wxID_ANY, _L("Развёртка"), { x, 0 }, { w, 160 });
+
+        {
+            wxSize size_rb{ 50, 15 };
+
+            new wxRadioButton(panel, ID_PAN3_CHAN_C_RB_SCAN_1, "1", { 10, 20 }, size_rb);
+            new wxRadioButton(panel, ID_PAN3_CHAN_C_RB_SCAN_2, "2", { 70, 20 }, size_rb);
+
+            new wxRadioButton(panel, ID_PAN3_CHAN_C_RB_SCAN_3, "3", { 10, 50 }, size_rb);
+            new wxRadioButton(panel, ID_PAN3_CHAN_C_RB_SCAN_4, "4", { 70, 50 }, size_rb);
+
+            new wxRadioButton(panel, ID_PAN3_CHAN_C_RB_SCAN_5, "5", { 10, 80 }, size_rb);
+            new wxRadioButton(panel, ID_PAN3_CHAN_C_RB_SCAN_6, "6", { 70, 80 }, size_rb);
+
+            new wxRadioButton(panel, ID_PAN3_CHAN_C_RB_SCAN_7, "7", { 130, 20 }, size_rb);
+
+            {
+                wxCommandEvent evt(wxEVT_RADIOBUTTON, ID_PAN3_CHAN_C_RB_SCAN_1);
+                evt.SetInt(1);
+                panel->ProcessWindowEvent(evt);
+            }
+
+            {
+                wxStaticBox *boxImpulse = new wxStaticBox(boxScan, wxID_ANY, _L("Импульс"), { 10, 110 }, { 75, 40 });
+
+                new wxStaticText(boxImpulse, wxID_ANY, "0.2 ms", { 10, 20 });
+            }
+
+            new wxCheckBox(panel, ID_PAN3_CHAN_C_CHECKBOX_DUTY_CYCLE, _L("Скважн. x 2"), { 100, 120 }, { 100, 20 });
+        }
 
         wxStaticBox *boxMeter = new wxStaticBox(panel, wxID_ANY, _L("Измеритель"), { x, boxScan->GetSize().y + x }, { w, 50 } );
 
@@ -99,6 +129,14 @@ void PanelConfig::OnEventButton(wxCommandEvent &event)
 
         EnablePanel(event.GetId());
     }
+}
+
+
+void PanelConfig::OnEventRadioButton(wxCommandEvent &event)
+{
+    GF::FindRadioButton(self, event.GetId())->SetValue(true);
+
+    event.Skip();
 }
 
 
