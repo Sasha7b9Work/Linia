@@ -1,4 +1,4 @@
-// 2025/6/1 17:20:45 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+ï»¿// 2025/6/1 17:20:45 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/Panel03_Config.h"
 #include "MainWindow.h"
@@ -16,16 +16,16 @@ PanelConfig::PanelConfig(wxWindow* parent) :
 
     wxSize sizeChan = { 67, h };
 
-    new wxButton(this, ID_PAN3_BTN_CHANNEL_C, _L("Êàíàë C"), { 0, 0 }, sizeChan);
+    new wxToggleButton(this, ID_PAN3_BTN_CHANNEL_C, _L("ÐšÐ°Ð½Ð°Ð» C"), { 0, 0 }, sizeChan);
 
-    new wxButton(this, ID_PAN3_BTN_CHANNEL_B, _L("Êàíàë B"), { sizeChan.x, 0 }, sizeChan);
+    new wxButton(this, ID_PAN3_BTN_CHANNEL_B, _L("ÐšÐ°Ð½Ð°Ð» B"), { sizeChan.x, 0 }, sizeChan);
 
-    new wxButton(this, ID_PAN3_BTN_CHANNEL_S, _L("Êàíàë S"), { sizeChan.x * 2, 0 }, sizeChan);
+    new wxButton(this, ID_PAN3_BTN_CHANNEL_S, _L("ÐšÐ°Ð½Ð°Ð» S"), { sizeChan.x * 2, 0 }, sizeChan);
 
     wxSize sizeScheme = { 120, h };
-    new wxButton(this, ID_PAN3_BTN_SHCEME, _L("Ñõåìà âêëþ÷åíèÿ"), { 0, h }, sizeScheme);
+    new wxButton(this, ID_PAN3_BTN_SHCEME, _L("Ð¡Ñ…ÐµÐ¼Ð° Ð²ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ñ"), { 0, h }, sizeScheme);
 
-    new wxButton(this, ID_PAN3_BTN_CALCULATION, _L("Ðàñ÷¸ò"), { sizeScheme.x, h }, { MainWindow::WIDTH3 - sizeScheme.x - 3, h });
+    new wxButton(this, ID_PAN3_BTN_CALCULATION, _L("Ð Ð°ÑÑ‡Ñ‘Ñ‚"), { sizeScheme.x, h }, { MainWindow::WIDTH3 - sizeScheme.x - 3, h });
 
     /*
     wxAuiNotebook *notebook = new wxAuiNotebook(this, wxID_ANY);
@@ -35,11 +35,11 @@ PanelConfig::PanelConfig(wxWindow* parent) :
 
     notebook->SetSize(MainWindow::WIDTH3, HEIGHT);
 
-    notebook->AddPage(CreatePanel(notebook), "Êàíàë C");
-    notebook->AddPage(CreatePanel(notebook), "Êàíàë B");
-    notebook->AddPage(CreatePanel(notebook), "Êàíàë S");
-    notebook->AddPage(CreatePanel(notebook), "Ñõåìà âêëþ÷åíèÿ");
-    notebook->AddPage(CreatePanel(notebook), "Ðàñ÷¸ò");
+    notebook->AddPage(CreatePanel(notebook), "ÐšÐ°Ð½Ð°Ð» C");
+    notebook->AddPage(CreatePanel(notebook), "ÐšÐ°Ð½Ð°Ð» B");
+    notebook->AddPage(CreatePanel(notebook), "ÐšÐ°Ð½Ð°Ð» S");
+    notebook->AddPage(CreatePanel(notebook), "Ð¡Ñ…ÐµÐ¼Ð° Ð²ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ñ");
+    notebook->AddPage(CreatePanel(notebook), "Ð Ð°ÑÑ‡Ñ‘Ñ‚");
 
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
     sizer->Add(notebook, 1, wxEXPAND);

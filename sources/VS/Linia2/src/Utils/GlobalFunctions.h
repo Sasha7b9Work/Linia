@@ -20,6 +20,8 @@ namespace GF
 
     wxAnyButton *FindAnyButton(wxWindow *, int id);
 
+    wxToggleButton *FindToggleButton(wxWindow *, int id);
+
     wxCheckBox *FindCheckBox(wxWindow *, int id);
 
     CheckButton *FindCheckButton(const wxWindow *, int id);

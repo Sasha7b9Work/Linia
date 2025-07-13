@@ -38,6 +38,12 @@ wxAnyButton *GF::FindAnyButton(wxWindow *window, int id)
 }
 
 
+wxToggleButton *GF::FindToggleButton(wxWindow *w, int id)
+{
+    return (wxToggleButton *)w->FindWindow(id);
+}
+
+
 wxCheckBox *GF::FindCheckBox(wxWindow *window, int id)
 {
     return (wxCheckBox *)window->FindWindow(id);
