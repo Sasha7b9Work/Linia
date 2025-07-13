@@ -105,12 +105,12 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
             wxArrayString choices;
             choices.Add("100V");
 
-            new wxComboBox(boxMeter, ID_PAN3_CHAN_C_COMBOBOX_Uc, choices[0], { 30, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+            new wxComboBox(boxMeter, ID_PAN3_CHAN_C_COMBOBOX_Uc, choices[0], { 30, SD::Y_SB(y) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
             choices.Clear();
             choices.Add("10A");
 
-            new wxComboBox(boxMeter, ID_PAN3_CHAN_C_COMBOBOX_Ic, choices[0], { 120, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+            new wxComboBox(boxMeter, ID_PAN3_CHAN_C_COMBOBOX_Ic, choices[0], { 120, SD::Y_SB(y) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
         }
 
         new wxStaticBox(panel, wxID_ANY, _L("Источник U"), { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + x }, { w, 50 });
