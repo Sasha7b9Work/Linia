@@ -29,7 +29,8 @@ private:
 
     static wxBitmap bitmap;
 
-    wxMemoryDC dc;
+    wxMemoryDC m_dc;
+    wxGraphicsContext *gc = nullptr;
 
     // Координаты мыши при нажатии кнопки
     wxPoint pos_mouse_down;

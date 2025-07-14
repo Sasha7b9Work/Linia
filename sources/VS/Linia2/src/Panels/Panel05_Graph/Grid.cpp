@@ -67,7 +67,7 @@ void Grid::ScaleOn(const wxPoint &pos, int delta)
 {
     wxPoint delta_center = center - pos;
 
-    if (delta > 0 && scale < 2)
+    if (delta > 0 && scale < 5)
     {
         scale++;
 

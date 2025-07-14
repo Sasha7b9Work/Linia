@@ -102,46 +102,47 @@ void PanelGraph::Draw()
 
 void PanelGraph::BeginPaint()
 {
-    dc.SelectObject(bitmap);
+    m_dc.SelectObject(bitmap);
+    gc = wxGraphicsContext::Create(m_dc);
 }
 
 
 void PanelGraph::EndPaint()
 {
-    dc.SelectObject(wxNullBitmap);
+    m_dc.SelectObject(wxNullBitmap);
 }
 
 
 void PanelGraph::FillRectangle(int x, int y, int width, int height, const wxColor &color)
 {
-    dc.SetBrush(color);
-    dc.SetPen(color);
-    dc.DrawRectangle({ x, y, width, height });
-    
+    gc->SetBrush(color);
+    gc->SetPen(color);
+    gc->DrawRectangle( x, y, width, height );
 }
 
 
 void Point::Draw(int x, int y)
 {
-    PanelGraph::self->dc.DrawPoint(x, y);
+    PanelGraph::self->gc->StrokeLine(x, y, x + 0.5, y);
 }
 
 
 void PanelGraph::DrawLine(int x1, int y1, int x2, int y2)
 {
-    dc.DrawLine(x1, y1, x2, y2);
+    gc->StrokeLine(x1, y1, x2, y2);
 }
 
 
 void PanelGraph::DrawLine(int x1, int y1, int x2, int y2, const wxColor &color)
 {
-    dc.SetPen(color);
-    dc.DrawLine(x1, y1, x2, y2);
+    gc->SetPen(color);
+    gc->StrokeLine(x1, y1, x2, y2);
 }
 
 
 void PanelGraph::DrawString(int x, int y, int /*num_font*/, const wxColor &color, pchar text)
 {
-    dc.SetTextForeground(color);
-    dc.DrawText(text, x + 5, y + 5);
+//    gc->SetTextForeground(color);
+ 
+    gc->DrawText(text, x + 5, y + 5);
 }
