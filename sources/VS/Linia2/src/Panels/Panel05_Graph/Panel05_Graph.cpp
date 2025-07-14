@@ -125,17 +125,17 @@ void Point::Draw(int x, int y) const
 }
 
 
-void PanelGraph::DrawLine(int x1, int y1, int x2, int y2)
+void Line::Draw() const
 {
-    gc->StrokeLine(x1, y1, x2, y2);
+    PanelGraph::self->gc->StrokeLine(x1, y1, x2, y2);
 }
 
 
-void PanelGraph::DrawLine(int x1, int y1, int x2, int y2, const wxColor &_color)
+void Line::Draw(const wxColor &color) const
 {
-    color = _color;
-    gc->SetPen(color);
-    gc->StrokeLine(x1, y1, x2, y2);
+    PanelGraph::self->SetColor(color);
+    PanelGraph::self->gc->SetPen(color);
+    PanelGraph::self->gc->StrokeLine(x1, y1, x2, y2);
 }
 
 

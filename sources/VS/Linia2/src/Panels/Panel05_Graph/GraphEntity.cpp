@@ -9,7 +9,7 @@ void GraphLine::Draw(const Grid *grid) const
     wxPoint start = grid->CoordCanvas(x1, y1);
     wxPoint end = grid->CoordCanvas(x2, y2);
 
-    PanelGraph::self->DrawLine(start.x, start.y, end.x, end.y, color);
+    Line(start.x, start.y, end.x, end.y).Draw(color);
 }
 
 

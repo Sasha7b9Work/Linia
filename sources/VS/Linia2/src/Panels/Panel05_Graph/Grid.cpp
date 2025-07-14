@@ -53,12 +53,12 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
     {
         int x = center.x - size_cell * num_cells / 2;
         int y = center.y + (i - 1) * (num_cells / 2 * size_cell);
-        PanelGraph::self->DrawLine(x, y, x + num_cells * size_cell, y, *wxBLACK);
+        Line(x, y, x + num_cells * size_cell, y).Draw(*wxBLACK);
 
         x = center.x + (i - 1) * (num_cells / 2 * size_cell);
         y = center.y - size_cell * num_cells / 2;
 
-        PanelGraph::self->DrawLine(x, y, x, y + num_cells * size_cell);
+        Line(x, y, x, y + num_cells * size_cell).Draw();
     }
 
     int d = 8 * scale;
@@ -321,11 +321,11 @@ void Grid::DrawMouseMarkers() const
 
     if (PanelGraph::self->track_y)
     {
-        PanelGraph::self->DrawLine(LeftX(), pos_mouse.y, RightX(), pos_mouse.y, *wxBLACK);
+        Line(LeftX(), pos_mouse.y, RightX(), pos_mouse.y).Draw(*wxBLACK);
     }
 
     if (PanelGraph::self->track_x)
     {
-        PanelGraph::self->DrawLine(pos_mouse.x, TopY(), pos_mouse.x, BottomY(), *wxBLACK);
+        Line(pos_mouse.x, TopY(), pos_mouse.x, BottomY()).Draw(*wxBLACK);
     }
 }

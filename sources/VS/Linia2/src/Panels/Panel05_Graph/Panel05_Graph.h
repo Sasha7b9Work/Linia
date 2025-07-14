@@ -11,6 +11,7 @@ class PanelGraph : public Panel
     friend class Point;
     friend class Text;
     friend class Spline;
+    friend class Line;
 
 public:
 
@@ -22,9 +23,6 @@ public:
     static PanelGraph *self;
 
     void Draw();
-
-    void DrawLine(int x1, int y1, int x2, int y2);
-    void DrawLine(int x1, int y1, int x2, int y2, const wxColor &);
 
     void SetColor(const wxColor &_color)
     {
@@ -84,6 +82,21 @@ class Point
 public:
 
     void Draw(int x, int y) const;
+};
+
+
+class Line
+{
+public:
+
+    Line(int _x1, int _y1, int _x2, int _y2) :
+        x1(_x1), y1(_y1), x2(_x2), y2(_y2) { }
+
+    void Draw() const;
+    void Draw(const wxColor &) const;
+
+private:
+    int x1, y1, x2, y2;
 };
 
 
