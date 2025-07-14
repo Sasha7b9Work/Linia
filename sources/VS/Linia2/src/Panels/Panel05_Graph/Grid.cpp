@@ -88,14 +88,26 @@ void Grid::DrawLabelsOnAxis() const
 
     int d = 2;
 
-    Text(FullTitleX()).DrawAboutCenterDown(RightX() + 40, BottomY() + d);
-    Text(titleY).DrawAboutCenterLeft(LeftX() - d, center.y);
-
-    for (int i = -5; i < 6; i++)
     {
-        wxPoint coord = GetCoordPointAxisX(i);
+        Text(FullTitleX()).DrawAboutCenterDown(center.x, BottomY() + 25);
 
-        Text(GetValuePointAxisX(i)).DrawAboutCenterDown(coord.x, coord.y + d);
+        for (int i = -5; i < 6; i++)
+        {
+            wxPoint coord = GetCoordPointAxisX(i);
+
+            Text(GetValuePointAxisX(i)).DrawAboutCenterDown(coord.x, coord.y + d);
+        }
+    }
+
+    {
+        Text(titleY).DrawAboutCenterLeft(LeftX() - 30, center.y);
+
+        for (int i = -5; i < 6; i++)
+        {
+            wxPoint coord = GetCoordPointAxisY(-i);
+
+            Text(GetValuePointAxisY(i)).DrawAboutCenterLeft(coord.x - d, coord.y);
+        }
     }
 }
 
@@ -117,6 +129,35 @@ wxString Grid::GetValuePointAxisX(int num) const
         step *= 1e3;
     }
     else if (rangeX >= 1e-6)
+    {
+        step *= 1e6;
+    }
+    else
+    {
+        step *= 1e9;
+    }
+
+    return wxString::Format("%.1f", step * num);
+}
+
+
+wxString Grid::GetValuePointAxisY(int num) const
+{
+    double step = rangeY / 5.0;
+
+    if (rangeY >= 1e3)
+    {
+        step /= 1e3;
+    }
+    else if (rangeY >= 1)
+    {
+
+    }
+    else if (rangeY >= 1e-3)
+    {
+        step *= 1e3;
+    }
+    else if (rangeY >= 1e-6)
     {
         step *= 1e6;
     }
@@ -161,6 +202,12 @@ wxString Grid::FullTitleX() const
 wxPoint Grid::GetCoordPointAxisX(int num) const
 {
     return { center.x + SizeCell() * num, BottomY() };
+}
+
+
+wxPoint Grid::GetCoordPointAxisY(int num) const
+{
+    return { LeftX(), center.y + SizeCell() * num };
 }
 
 
