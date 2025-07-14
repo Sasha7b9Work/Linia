@@ -40,7 +40,7 @@ PanelConfig::PanelConfig(wxWindow* parent) :
     {
         // Включаем панель
 
-        int id = ID_PAN3_BTN_CALCULATION;
+        int id = ID_PAN3_BTN_CHANNEL_C;
 
         wxCommandEvent evt(wxEVT_TOGGLEBUTTON, id);
         evt.SetInt(1);

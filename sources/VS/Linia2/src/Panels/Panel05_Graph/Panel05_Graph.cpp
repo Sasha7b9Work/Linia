@@ -33,6 +33,8 @@ PanelGraph::PanelGraph(wxWindow *parent) :
     Bind(wxEVT_MOTION, &PanelGraph::OnMouseMove, this);
     Bind(wxEVT_MOUSEWHEEL, &PanelGraph::OnMouseWheel, this);
 
+    Bind(wxEVT_RIGHT_DOWN, &PanelGraph::OnRightClick, this);
+
     CreateEntities();
 
     Draw();
@@ -286,4 +288,56 @@ void Spline::Draw(bool smooth, bool draw_points) const
 
         PanelGraph::self->gc->FillPath(path_circle);
     }
+}
+
+
+void PanelGraph::OnRightClick(wxMouseEvent &)
+{
+    wxMenu menu;
+
+    // Добавляем пункты меню
+    menu.Append(ID_MENU_GRAPH_RESET, _L("Сброс"));
+
+    menu.AppendSeparator();
+
+    // Привязываем обработчики для пунктов меню
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuReset, this, ID_MENU_GRAPH_RESET);
+
+    wxMenu *subMenu = new wxMenu();
+    subMenu->Append(ID_MENU_GRAPH_TRACK_X, "X");
+    subMenu->Append(ID_MENU_GRAPH_TRACK_Y, "Y");
+    subMenu->Append(ID_MENU_GRAPH_TRACK_NONE, _L("Ничего"));
+
+    menu.AppendSubMenu(subMenu, _L("Отслеживать"));
+
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackX, this, ID_MENU_GRAPH_TRACK_X);
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackY, this, ID_MENU_GRAPH_TRACK_Y);
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackNone, this, ID_MENU_GRAPH_TRACK_NONE);
+
+    // Показываем меню в позиции клика
+    PopupMenu(&menu);
+}
+
+
+void PanelGraph::OnMenuReset(wxCommandEvent &)
+{
+
+}
+
+
+void PanelGraph::OnMenuTrackX(wxCommandEvent &)
+{
+
+}
+
+
+void PanelGraph::OnMenuTrackY(wxCommandEvent &)
+{
+
+}
+
+
+void PanelGraph::OnMenuTrackNone(wxCommandEvent &)
+{
+
 }

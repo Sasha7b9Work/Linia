@@ -50,6 +50,8 @@ private:
 
     void EndPaint();
 
+    void OnRightClick(wxMouseEvent &);
+
     void OnPaint(wxPaintEvent &);
 
     void OnMouseDown(wxMouseEvent &);
@@ -59,6 +61,11 @@ private:
     void OnMouseUp(wxMouseEvent &);
 
     void OnMouseWheel(wxMouseEvent &);
+
+    void OnMenuReset(wxCommandEvent &);
+    void OnMenuTrackX(wxCommandEvent &);
+    void OnMenuTrackY(wxCommandEvent &);
+    void OnMenuTrackNone(wxCommandEvent &);
 
     void FillRectangle(int x, int y, int width, int height, const wxColor &);
 
