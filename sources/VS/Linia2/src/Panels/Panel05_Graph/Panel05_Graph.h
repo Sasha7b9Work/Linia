@@ -24,10 +24,8 @@ public:
 
     void Draw();
 
-    void SetColor(const wxColor &_color)
-    {
-        color = _color;
-    }
+    void SetColor(const wxColor &);
+    void LoadColor();
 
     bool track_x = false;           // Отслеживать координату x
     bool track_y = false;           // Отслеживать координату y
@@ -117,6 +115,9 @@ public:
 
     // Рисует снизу по центру
     void DrawAboutCenterDown(int x, int y, bool fillBackground = false, const wxColor & = *wxWHITE) const;
+
+    void DrawAboutCenterUp(int x, int y, bool fillBackground = false, const wxColor & = *wxWHITE, bool bound = false) const;
+    void DrawAboutRightUp(int x, int y, bool fillBackground = false, const wxColor & = *wxWHITE, bool bound = false) const;
 
 private:
 

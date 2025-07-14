@@ -134,7 +134,6 @@ void Line::Draw() const
 void Line::Draw(const wxColor &color) const
 {
     PanelGraph::self->SetColor(color);
-    PanelGraph::self->gc->SetPen(color);
     PanelGraph::self->gc->StrokeLine(x1, y1, x2, y2);
 }
 
@@ -199,6 +198,65 @@ void Text::DrawAboutCenterDown(int x, int y, bool fillBackground, const wxColor 
 }
 
 
+void Text::DrawAboutCenterUp(int x, int y, bool fillBackground, const wxColor &background, bool bound) const
+{
+    double width, height, descent, externalLeading;
+    PanelGraph::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+
+    y -= (int)(height);
+    x -= (int)(width / 2);
+
+    if (fillBackground)
+    {
+        PanelGraph::self->gc->SetBrush(background);
+        PanelGraph::self->gc->SetPen(background);
+        PanelGraph::self->gc->DrawRectangle(x, y, width, height);
+
+        PanelGraph::self->LoadColor();
+    }
+
+    PanelGraph::self->gc->DrawText(text, x, y);
+
+    if (bound)
+    {
+        PanelGraph::self->gc->SetBrush(*wxTRANSPARENT_BRUSH);
+
+        PanelGraph::self->gc->DrawRectangle(x - 1, y - 1, width + 2, height + 2);
+
+        PanelGraph::self->LoadColor();
+    }
+}
+
+
+void Text::DrawAboutRightUp(int x, int y, bool fillBackground, const wxColor &background, bool bound) const
+{
+    double width, height, descent, externalLeading;
+    PanelGraph::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+
+    y -= (int)(height);
+
+    if (fillBackground)
+    {
+        PanelGraph::self->gc->SetBrush(background);
+        PanelGraph::self->gc->SetPen(background);
+        PanelGraph::self->gc->DrawRectangle(x, y, width, height);
+
+        PanelGraph::self->LoadColor();
+    }
+
+    PanelGraph::self->gc->DrawText(text, x, y);
+
+    if (bound)
+    {
+        PanelGraph::self->gc->SetBrush(*wxTRANSPARENT_BRUSH);
+
+        PanelGraph::self->gc->DrawRectangle(x - 1, y - 1, width + 2, height + 2);
+
+        PanelGraph::self->LoadColor();
+    }
+}
+
+
 void Text::DrawAboutCenterRigth(int x, int y, bool fillBackground, const wxColor &background) const
 {
     double width, height, descent, externalLeading;
@@ -212,8 +270,7 @@ void Text::DrawAboutCenterRigth(int x, int y, bool fillBackground, const wxColor
         PanelGraph::self->gc->SetPen(background);
         PanelGraph::self->gc->DrawRectangle(x, y, width, height);
 
-        PanelGraph::self->gc->SetBrush(PanelGraph::self->color);
-        PanelGraph::self->gc->SetPen(PanelGraph::self->color);
+        PanelGraph::self->LoadColor();
     }
 
     PanelGraph::self->gc->DrawText(text, x, y);
@@ -253,6 +310,8 @@ void Spline::AppendPoint(const wxPoint2DDouble &point)
 void Spline::Draw(bool smooth, bool draw_points) const
 {
     wxGraphicsPath path = PanelGraph::self->gc->CreatePath();
+
+    PanelGraph::self->SetColor(PanelGraph::self->color);
 
     path.MoveToPoint(points[0].m_x, points[0].m_y);
 
@@ -371,4 +430,19 @@ void PanelGraph::OnMenuTrackNone(wxCommandEvent &event)
         track_y = false;
         track_none = true;
     }
+}
+
+
+void PanelGraph::SetColor(const wxColor &_color)
+{
+    color = _color;
+
+    LoadColor();
+}
+
+
+void PanelGraph::LoadColor()
+{
+    PanelGraph::self->gc->SetPen(color);
+    PanelGraph::self->gc->SetBrush(color);
 }

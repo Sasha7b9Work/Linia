@@ -84,9 +84,9 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         entity->Draw(this);
     }
 
-    DrawMouseMarkers();
-
     DrawLabelsOnAxis();
+
+    DrawMouseMarkers();
 }
 
 
@@ -286,15 +286,30 @@ void Grid::DrawHPointLine(int x, int y, int d, int width)
 
 wxPoint Grid::ValuesToCoord(double x, double y) const
 {
-    double scaleX = rangeX / 5.0;
+    double cells_in_x = x / rangeX * 5.0;
 
-    double cells_in_x = x / scaleX;
-
-    double scaleY = rangeY / 5.0;
-
-    double cells_in_y = y / scaleY;
+    double cells_in_y = y / rangeY * 5.0;
 
     return { (int)(center.x + cells_in_x * SizeCell() + 0.5), (int)(center.y - cells_in_y * SizeCell() + 0.5) };
+}
+
+
+wxPoint2DDouble Grid::CoordToValues(const wxPoint &coord) const
+{
+//    double x = 1.0;
+
+//    int coord_x = center.x + x / rangeX * 5.0 * SizeCell();
+
+    /*
+        coord_x - center.x = x / rangeX * 5 * SizeCell()
+        (coord_x - center.x) / (5 * SizeCell()) = x / rangeX
+        x = rangeX * (coord_x - center.x) / (5 * SizeCell())
+    */
+
+    return {
+        rangeX * (coord.x - center.x) / (5.0 * SizeCell()),
+        rangeY * (coord.y - center.y) / (5.0 * SizeCell())
+    };
 }
 
 
@@ -318,6 +333,14 @@ void Grid::DrawMouseMarkers() const
     {
         return;
     }
+
+    Text::SetFont();
+
+    PanelGraph::self->SetColor(*wxBLACK);
+
+    wxPoint2DDouble value = CoordToValues(pos_mouse);
+
+    Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(pos_mouse.x + 5, pos_mouse.y - 5, true, *wxWHITE, true);
 
     if (PanelGraph::self->track_y)
     {

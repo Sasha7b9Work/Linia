@@ -19,8 +19,10 @@ public:
 
     void ScaleOn(const wxPoint &, int);
 
-    // Возвращает координаты точки {x, y} на холсте
+    // Преобразует точку графика в координаты на холсте
     wxPoint ValuesToCoord(double x, double y) const;
+
+    wxPoint2DDouble CoordToValues(const wxPoint &) const;
 
 private:
 
