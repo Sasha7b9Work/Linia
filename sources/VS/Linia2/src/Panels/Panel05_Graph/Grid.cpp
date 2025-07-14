@@ -40,7 +40,7 @@ int Grid::RightX() const
 }
 
 
-void Grid::Draw()
+void Grid::Draw(const std::vector<GraphEntity *> &entities)
 {
     const int size_cell = SizeCell();
     const int length = LengthAxis();
@@ -76,6 +76,11 @@ void Grid::Draw()
         DrawVPointLine(center.x + (i + 1) * size_cell, y_top, d, length);
         DrawHPointLine(x_left, y_top + (i + 1) * size_cell, d, length);
         DrawHPointLine(x_left, center.y + (i + 1) * size_cell, d, length);
+    }
+
+    for (auto *entity : entities)
+    {
+        entity->Draw(this);
     }
 
     DrawLabelsOnAxis();

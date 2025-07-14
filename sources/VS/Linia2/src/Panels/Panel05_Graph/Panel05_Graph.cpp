@@ -33,6 +33,8 @@ PanelGraph::PanelGraph(wxWindow *parent) :
     Bind(wxEVT_MOTION, &PanelGraph::OnMouseMove, this);
     Bind(wxEVT_MOUSEWHEEL, &PanelGraph::OnMouseWheel, this);
 
+    CreateEntities();
+
     Draw();
 }
 
@@ -92,7 +94,7 @@ void PanelGraph::Draw()
 
     FillRectangle(0, 0, WIDTH, HEIGHT, *wxWHITE);
 
-    grid.Draw();
+    grid.Draw(entities);
 
     EndPaint();
 
@@ -211,4 +213,10 @@ void Text::DrawAboutCenterRigth(int x, int y, bool fillBackground, const wxColor
     }
 
     PanelGraph::self->gc->DrawText(text, x, y);
+}
+
+
+void PanelGraph::CreateEntities()
+{
+    entities.push_back(new GraphLine(-1.0, -1.0, 1.0, 1.0));
 }

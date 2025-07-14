@@ -2,13 +2,16 @@
 #pragma once
 
 
+class GraphEntity;
+
+
 class Grid
 {
 public:
 
     Grid();
 
-    void Draw();
+    void Draw(const std::vector<GraphEntity *> &);
 
     void MoveOn(const wxPoint &);
 

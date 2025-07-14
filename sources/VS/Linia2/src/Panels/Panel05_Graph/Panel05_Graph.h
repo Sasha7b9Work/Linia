@@ -3,6 +3,7 @@
 #include "Panels/Panel.h"
 #include "MainWindow.h"
 #include "Panels/Panel05_Graph/Grid.h"
+#include "Panels/Panel05_Graph/GraphEntity.h"
 
 
 class PanelGraph : public Panel
@@ -26,11 +27,13 @@ public:
 
 private:
 
-    Grid grid;
+    Grid grid;                              // Координатная сетка
+
+    std::vector<GraphEntity *> entities;    // Сущности для отрисовки
 
     static wxBitmap bitmap;
-    wxGraphicsContext *gc = nullptr;    // Используется для рисования
-    wxMemoryDC dc;                      // А здесь хранится то, что нарисовано, пока не будет вызвано событие wxEVT_PAINT
+    wxGraphicsContext *gc = nullptr;        // Используется для рисования
+    wxMemoryDC dc;                          // А здесь хранится то, что нарисовано, пока не будет вызвано событие wxEVT_PAINT
     wxColor color;
 
     // Координаты мыши при нажатии кнопки
@@ -52,6 +55,8 @@ private:
     void OnMouseWheel(wxMouseEvent &);
 
     void FillRectangle(int x, int y, int width, int height, const wxColor &);
+
+    void CreateEntities();
 };
 
 
