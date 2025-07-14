@@ -46,6 +46,10 @@ private:
     wxPoint pos_mouse_down;
     bool mouse_is_pressed = false;
 
+    bool track_x = false;
+    bool track_y = false;
+    bool track_none = true;
+
     void BeginPaint();
 
     void EndPaint();

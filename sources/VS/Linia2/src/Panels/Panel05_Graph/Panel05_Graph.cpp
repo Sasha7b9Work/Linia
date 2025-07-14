@@ -304,9 +304,13 @@ void PanelGraph::OnRightClick(wxMouseEvent &)
     Bind(wxEVT_MENU, &PanelGraph::OnMenuReset, this, ID_MENU_GRAPH_RESET);
 
     wxMenu *subMenu = new wxMenu();
-    subMenu->Append(ID_MENU_GRAPH_TRACK_X, "X");
-    subMenu->Append(ID_MENU_GRAPH_TRACK_Y, "Y");
-    subMenu->Append(ID_MENU_GRAPH_TRACK_NONE, _L("Ничего"));
+    subMenu->AppendCheckItem(ID_MENU_GRAPH_TRACK_X, "X");
+    subMenu->AppendCheckItem(ID_MENU_GRAPH_TRACK_Y, "Y");
+    subMenu->AppendCheckItem(ID_MENU_GRAPH_TRACK_NONE, _L("Ничего"));
+
+    subMenu->Check(ID_MENU_GRAPH_TRACK_X, track_x);
+    subMenu->Check(ID_MENU_GRAPH_TRACK_Y, track_y);
+    subMenu->Check(ID_MENU_GRAPH_TRACK_NONE, track_none);
 
     menu.AppendSubMenu(subMenu, _L("Отслеживать"));
 
@@ -325,19 +329,34 @@ void PanelGraph::OnMenuReset(wxCommandEvent &)
 }
 
 
-void PanelGraph::OnMenuTrackX(wxCommandEvent &)
+void PanelGraph::OnMenuTrackX(wxCommandEvent &event)
 {
-
+    if (event.IsChecked())
+    {
+        track_x = true;
+        track_y = false;
+        track_none = false;
+    }
 }
 
 
-void PanelGraph::OnMenuTrackY(wxCommandEvent &)
+void PanelGraph::OnMenuTrackY(wxCommandEvent &event)
 {
-
+    if (event.IsChecked())
+    {
+        track_x = false;
+        track_y = true;
+        track_none = false;
+    }
 }
 
 
-void PanelGraph::OnMenuTrackNone(wxCommandEvent &)
+void PanelGraph::OnMenuTrackNone(wxCommandEvent &event)
 {
-
+    if (event.IsChecked())
+    {
+        track_x = false;
+        track_y = false;
+        track_none = true;
+    }
 }
