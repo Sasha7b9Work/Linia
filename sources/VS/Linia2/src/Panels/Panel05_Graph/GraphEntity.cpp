@@ -32,5 +32,5 @@ void GraphMeasures::Draw(const Grid *grid) const
         spline.AppendPoint({ (double)point.x, (double)point.y });
     }
 
-    spline.Draw();
+    spline.Draw(true, true);
 }

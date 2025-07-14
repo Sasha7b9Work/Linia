@@ -32,8 +32,8 @@ private:
     wxString unitsX{ "V" };
     wxString unitsY{ "A" };
 
-    double rangeX = 10.0;        // Размах в одну сторону от нуля
-    double rangeY = 10.0;        // Размах в одну сторону от нуля
+    double rangeX = 20.0;        // Размах в одну сторону от нуля
+    double rangeY = 5.0;        // Размах в одну сторону от нуля
 
     void DrawVPointLine(int x, int y, int d, int height);
     void DrawHPointLine(int x, int y, int d, int width);

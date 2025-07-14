@@ -104,7 +104,8 @@ public:
 
     void AppendPoint(const wxPoint2DDouble &);
 
-    void Draw() const;
+    // smooth - сглаживание
+    void Draw(bool smooth, bool draw_points) const;
 
 private:
 

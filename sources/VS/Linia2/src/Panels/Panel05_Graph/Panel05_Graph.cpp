@@ -222,11 +222,16 @@ void PanelGraph::CreateEntities()
 
     GraphMeasures *meas = new GraphMeasures(*wxGREEN);
 
-    for (int i = 0; i < 10; i++)
-    {
-        wxPoint2DDouble point{ std::rand() % 100 / 10.0, std::rand() % 100 / 10.0 };
-        meas->AppendPoint(point);
-    }
+    meas->AppendPoint({ 0.0, 0.0 });
+    meas->AppendPoint({ 0.3, 0.5 });
+    meas->AppendPoint({ 0.7, 1.0 });
+    meas->AppendPoint({ 1.1, 1.5 });
+    meas->AppendPoint({ 1.6, 2.0 });
+    meas->AppendPoint({ 2.0, 2.5 });
+    meas->AppendPoint({ 2.5, 3.0 });
+    meas->AppendPoint({ 3.0, 3.4 });
+    meas->AppendPoint({ 4.0, 4.0 });
+    meas->AppendPoint({ 6.0, 4.3 });
 
     entities.push_back(meas);
 }
@@ -238,20 +243,44 @@ void Spline::AppendPoint(const wxPoint2DDouble &point)
 }
 
 
-void Spline::Draw() const
+void Spline::Draw(bool smooth, bool draw_points) const
 {
     wxGraphicsPath path = PanelGraph::self->gc->CreatePath();
 
     path.MoveToPoint(points[0].m_x, points[0].m_y);
 
-    for (uint i = 1; i < points.size(); i += 3)
+    if (smooth)
     {
-        path.AddCurveToPoint(
-            points[i].m_x, points[i].m_y,
-            points[i + 1].m_x, points[i + 1].m_y,
-            points[i + 2].m_x, points[i + 2].m_y
-        );
+        for (uint i = 1; i < points.size(); i += 3)
+        {
+            path.AddCurveToPoint(
+                points[i].m_x, points[i].m_y,
+                points[i + 1].m_x, points[i + 1].m_y,
+                points[i + 2].m_x, points[i + 2].m_y
+            );
+        }
+    }
+    else
+    {
+        for (uint i = 1; i < points.size(); i++)
+        {
+            path.AddLineToPoint(points[i].m_x, points[i].m_y);
+        }
     }
 
     PanelGraph::self->gc->StrokePath(path);
+
+    if (draw_points)
+    {
+        wxGraphicsPath path_circle = PanelGraph::self->gc->CreatePath();
+
+        PanelGraph::self->gc->SetBrush(*wxRED_BRUSH);
+
+        for (const auto &pt : points)
+        {
+            path_circle.AddCircle(pt.m_x, pt.m_y, 3);
+        }
+
+        PanelGraph::self->gc->FillPath(path_circle);
+    }
 }
