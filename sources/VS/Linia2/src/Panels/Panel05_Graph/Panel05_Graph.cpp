@@ -299,11 +299,15 @@ void PanelGraph::OnRightClick(wxMouseEvent &)
 
     // Добавляем пункты меню
     menu.Append(ID_MENU_GRAPH_RESET, _L("Сброс"));
+    menu.AppendCheckItem(ID_MENU_GRAPH_FULL_SCREEN, _L("Полный экран"));
 
     menu.AppendSeparator();
 
     // Привязываем обработчики для пунктов меню
     Bind(wxEVT_MENU, &PanelGraph::OnMenuReset, this, ID_MENU_GRAPH_RESET);
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuFullScreen, this, ID_MENU_GRAPH_FULL_SCREEN);
+
+    menu.Check(ID_MENU_GRAPH_FULL_SCREEN, full_screen);
 
     wxMenu *subMenu = new wxMenu();
     subMenu->AppendCheckItem(ID_MENU_GRAPH_TRACK_X, "X");
@@ -326,6 +330,12 @@ void PanelGraph::OnRightClick(wxMouseEvent &)
 
 
 void PanelGraph::OnMenuReset(wxCommandEvent &)
+{
+
+}
+
+
+void PanelGraph::OnMenuFullScreen(wxCommandEvent &)
 {
 
 }

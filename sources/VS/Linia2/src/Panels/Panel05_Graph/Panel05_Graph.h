@@ -35,6 +35,7 @@ public:
     bool track_y = false;           // Отслеживать координату y
     bool track_none = true;         // Не отслеживать координаты
     bool mouse_is_pressed = false;
+    bool full_screen = false;       // График рисуется на полный экран
 
 private:
 
@@ -67,6 +68,7 @@ private:
     void OnMouseWheel(wxMouseEvent &);
 
     void OnMenuReset(wxCommandEvent &);
+    void OnMenuFullScreen(wxCommandEvent &);
     void OnMenuTrackX(wxCommandEvent &);
     void OnMenuTrackY(wxCommandEvent &);
     void OnMenuTrackNone(wxCommandEvent &);
