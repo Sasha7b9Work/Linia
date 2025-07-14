@@ -177,7 +177,7 @@ void Text::DrawAboutCenterDown(int x, int y) const
     double width, height, descent, externalLeading;
     PanelGraph::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
 
-    x -= (int)(height / 2.0 + 0.5);
+    x -= (int)(width / 2.0 + 0.5);
 
     PanelGraph::self->gc->DrawText(text, x, y);
 }

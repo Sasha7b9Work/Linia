@@ -20,8 +20,11 @@ private:
     int scale = 1;      // 2 - увеличено в два раза, 3 - увелично в три и так далее
     int num_cells = 10;
 
-    wxString unitsX{ "Uc" };
-    wxString unitsY{ "Ic" };
+    wxString titleX{ "Uc" };
+    wxString titleY{ "Ic" };
+
+    wxString unitsX{ "V" };
+    wxString unitsY{ "A" };
 
     double rangeX = 5.0;        // Размах в одну сторону от нуля
     double rangeY = 1.0;        // Размах в одну сторону от нуля
@@ -32,15 +35,21 @@ private:
     int SizeCell() const;
 
     // Координаты точки оси x для подписи значения
-    wxPoint GetPointAxisX(int) const;
+    wxPoint GetCoordPointAxisX(int) const;
+
+    wxString GetValuePointAxisX(int) const;
 
     int BottomY() const;
 
     int LeftX() const;
+
+    int RightX() const;
 
     int TopY() const;
 
     int LengthAxis() const;
 
     void DrawLabelsOnAxis() const;
+
+    wxString FullTitleX() const;
 };

@@ -34,6 +34,12 @@ int Grid::LeftX() const
 }
 
 
+int Grid::RightX() const
+{
+    return LeftX() + LengthAxis();
+}
+
+
 void Grid::Draw()
 {
     const int size_cell = SizeCell();
@@ -80,22 +86,79 @@ void Grid::DrawLabelsOnAxis() const
 {
     Text::SetFont();
 
-    Text(unitsX).DrawAboutCenterDown(center.x, BottomY());
-    Text(unitsY).DrawAboutCenterLeft(LeftX(), center.y);
+    int d = 2;
+
+    Text(FullTitleX()).DrawAboutCenterDown(RightX() + 40, BottomY() + d);
+    Text(titleY).DrawAboutCenterLeft(LeftX() - d, center.y);
 
     for (int i = -5; i < 6; i++)
     {
-        if (i != 0)
-        {
-            wxPoint coord = GetPointAxisX(i);
+        wxPoint coord = GetCoordPointAxisX(i);
 
-            Text("0").DrawAboutCenterDown(coord.x, coord.y);
-        }
+        Text(GetValuePointAxisX(i)).DrawAboutCenterDown(coord.x, coord.y + d);
     }
 }
 
 
-wxPoint Grid::GetPointAxisX(int num) const
+wxString Grid::GetValuePointAxisX(int num) const
+{
+    double step = rangeX / 5.0;
+
+    if (rangeX >= 1e3)
+    {
+        step /= 1e3;
+    }
+    else if (rangeX >= 1)
+    {
+
+    }
+    else if (rangeX >= 1e-3)
+    {
+        step *= 1e3;
+    }
+    else if (rangeX >= 1e-6)
+    {
+        step *= 1e6;
+    }
+    else
+    {
+        step *= 1e9;
+    }
+
+    return wxString::Format("%.1f", step * num);
+}
+
+
+wxString Grid::FullTitleX() const
+{
+    wxString prefix;
+
+    if (rangeX >= 1e3)
+    {
+        prefix = "k";
+    }
+    else if (rangeX >= 1.0)
+    {
+
+    }
+    else if (rangeX >= 1e-3)
+    {
+        prefix ="m";
+    }
+    else if (rangeX >= 1e-6)
+    {
+        prefix = "u";
+    }
+    else if (rangeX >= 1e-9)
+    {
+        prefix = "n";
+    }
+
+    return titleX + "," + prefix + unitsX;
+}
+
+
+wxPoint Grid::GetCoordPointAxisX(int num) const
 {
     return { center.x + SizeCell() * num, BottomY() };
 }
