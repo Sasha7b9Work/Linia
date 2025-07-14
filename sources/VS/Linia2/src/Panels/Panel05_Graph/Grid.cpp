@@ -13,11 +13,11 @@ Grid::Grid()
 void Grid::Draw()
 {
     const int size_cell = SizeCell();
+    const int length = size_cell * num_cells;
 
     const int x_left = center.x - size_cell * num_cells / 2;
     const int y_top = center.y - size_cell * num_cells / 2;
-
-    int length = size_cell * num_cells;
+    const int y_bottom = y_top + length;
 
     for (int i = 0; i < 3; i++)
     {
@@ -48,6 +48,11 @@ void Grid::Draw()
         DrawHPointLine(x_left, y_top + (i + 1) * size_cell, d, length);
         DrawHPointLine(x_left, center.y + (i + 1) * size_cell, d, length);
     }
+
+    Text::SetFont();
+
+    Text(unitsX).DrawAboutCenterDown(center.x, y_bottom);
+    Text(unitsY).DrawAboutCenterLeft(x_left, center.y);
 }
 
 

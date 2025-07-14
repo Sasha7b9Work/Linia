@@ -8,6 +8,7 @@
 class PanelGraph : public Panel
 {
     friend class Point;
+    friend class Text;
 
 public:
 
@@ -28,9 +29,9 @@ private:
     Grid grid;
 
     static wxBitmap bitmap;
-
-    wxMemoryDC m_dc;
-    wxGraphicsContext *gc = nullptr;
+    wxGraphicsContext *gc = nullptr;    // Используется для рисования
+    wxMemoryDC dc;                      // А здесь хранится то, что нарисовано, пока не будет вызвано событие wxEVT_PAINT
+    wxColor color;
 
     // Координаты мыши при нажатии кнопки
     wxPoint pos_mouse_down;
@@ -51,8 +52,6 @@ private:
     void OnMouseWheel(wxMouseEvent &);
 
     void FillRectangle(int x, int y, int width, int height, const wxColor &);
-
-    void DrawString(int x, int y, int font, const wxColor &, pchar text);
 };
 
 
@@ -60,5 +59,27 @@ class Point
 {
 public:
 
-    void Draw(int x, int y);
+    void Draw(int x, int y) const;
+};
+
+
+class Text
+{
+public:
+
+    Text(const wxString &);
+
+    static void SetFont();
+
+    void Draw(int x, int y) const;
+
+    // Рисует слева от точки по центру
+    void DrawAboutCenterLeft(int x, int y) const;
+
+    // Рисует снизу по центру
+    void DrawAboutCenterDown(int x, int y) const;
+
+private:
+
+    wxString text;
 };

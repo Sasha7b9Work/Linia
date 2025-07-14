@@ -102,28 +102,29 @@ void PanelGraph::Draw()
 
 void PanelGraph::BeginPaint()
 {
-    m_dc.SelectObject(bitmap);
-    gc = wxGraphicsContext::Create(m_dc);
+    dc.SelectObject(bitmap);
+    gc = wxGraphicsContext::Create(dc);
 }
 
 
 void PanelGraph::EndPaint()
 {
-    m_dc.SelectObject(wxNullBitmap);
+    dc.SelectObject(wxNullBitmap);
 }
 
 
-void PanelGraph::FillRectangle(int x, int y, int width, int height, const wxColor &color)
+void PanelGraph::FillRectangle(int x, int y, int width, int height, const wxColor &_color)
 {
+    color = _color;
     gc->SetBrush(color);
     gc->SetPen(color);
     gc->DrawRectangle( x, y, width, height );
 }
 
 
-void Point::Draw(int x, int y)
+void Point::Draw(int x, int y) const
 {
-    PanelGraph::self->gc->StrokeLine(x, y, x + 0.5, y);
+    PanelGraph::self->gc->StrokeLine(x, y, x + 0.01, y);
 }
 
 
@@ -133,16 +134,50 @@ void PanelGraph::DrawLine(int x1, int y1, int x2, int y2)
 }
 
 
-void PanelGraph::DrawLine(int x1, int y1, int x2, int y2, const wxColor &color)
+void PanelGraph::DrawLine(int x1, int y1, int x2, int y2, const wxColor &_color)
 {
+    color = _color;
     gc->SetPen(color);
     gc->StrokeLine(x1, y1, x2, y2);
 }
 
 
-void PanelGraph::DrawString(int x, int y, int /*num_font*/, const wxColor &color, pchar text)
+Text::Text(const wxString &_text) : text(_text)
 {
-//    gc->SetTextForeground(color);
- 
-    gc->DrawText(text, x + 5, y + 5);
+
+}
+
+
+void Text::SetFont()
+{
+    PanelGraph::self->gc->SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL), PanelGraph::self->color);
+}
+
+
+void Text::Draw(int x, int y) const
+{
+    PanelGraph::self->gc->DrawText(text, x, y);
+}
+
+
+void Text::DrawAboutCenterLeft(int x, int y) const
+{
+    double width, height, descent, externalLeading;
+    PanelGraph::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+
+    x -= (int)(height + 0.5);
+    y -= (int)(width / 2.0 + 0.5);
+
+    PanelGraph::self->gc->DrawText(text, x, y);
+}
+
+
+void Text::DrawAboutCenterDown(int x, int y) const
+{
+    double width, height, descent, externalLeading;
+    PanelGraph::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+
+    x -= (int)(height / 2.0 + 0.5);
+
+    PanelGraph::self->gc->DrawText(text, x, y);
 }
