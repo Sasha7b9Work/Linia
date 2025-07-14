@@ -28,14 +28,19 @@ int Grid::LengthAxis() const
 }
 
 
+int Grid::LeftX() const
+{
+    return center.x - SizeCell() * num_cells / 2;
+}
+
+
 void Grid::Draw()
 {
     const int size_cell = SizeCell();
     const int length = LengthAxis();
 
-    const int x_left = center.x - size_cell * num_cells / 2;
+    const int x_left = LeftX();
     const int y_top = TopY();
-    const int y_bottom = BottomY();
 
     for (int i = 0; i < 3; i++)
     {
@@ -67,27 +72,32 @@ void Grid::Draw()
         DrawHPointLine(x_left, center.y + (i + 1) * size_cell, d, length);
     }
 
+    DrawLabelsOnAxis();
+}
+
+
+void Grid::DrawLabelsOnAxis() const
+{
     Text::SetFont();
 
-    Text(unitsX).DrawAboutCenterDown(center.x, y_bottom);
-    Text(unitsY).DrawAboutCenterLeft(x_left, center.y);
+    Text(unitsX).DrawAboutCenterDown(center.x, BottomY());
+    Text(unitsY).DrawAboutCenterLeft(LeftX(), center.y);
 
     for (int i = -5; i < 6; i++)
     {
-        wxPoint coord = GetPointAxisX(i);
+        if (i != 0)
+        {
+            wxPoint coord = GetPointAxisX(i);
 
-        Text("0").DrawAboutCenterDown(coord.x, coord.y);
+            Text("0").DrawAboutCenterDown(coord.x, coord.y);
+        }
     }
 }
 
 
-wxPoint Grid::GetPointAxisX(int num)
+wxPoint Grid::GetPointAxisX(int num) const
 {
-    wxPoint coord { center.x, BottomY() };
-
-    coord.x += SizeCell() * num;
-
-    return coord;
+    return { center.x + SizeCell() * num, BottomY() };
 }
 
 

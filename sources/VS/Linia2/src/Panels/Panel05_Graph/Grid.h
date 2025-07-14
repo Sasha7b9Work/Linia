@@ -32,11 +32,15 @@ private:
     int SizeCell() const;
 
     // Координаты точки оси x для подписи значения
-    wxPoint GetPointAxisX(int);
+    wxPoint GetPointAxisX(int) const;
 
     int BottomY() const;
+
+    int LeftX() const;
 
     int TopY() const;
 
     int LengthAxis() const;
+
+    void DrawLabelsOnAxis() const;
 };
