@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Panels/Panel05_Graph/Grid.h"
 #include "Panels/Panel05_Graph/Panel05_Graph.h"
+#include <algorithm>
 
 
 Grid::Grid()
@@ -310,13 +311,21 @@ void Grid::DrawMouseMarkers() const
         return;
     }
 
+    if (pos_mouse.y < TopY() ||
+        pos_mouse.y > BottomY() ||
+        pos_mouse.x < LeftX() ||
+        pos_mouse.x > RightX())
+    {
+        return;
+    }
+
     if (PanelGraph::self->track_y)
     {
-        PanelGraph::self->DrawLine(0, pos_mouse.y, PanelGraph::self->WIDTH, pos_mouse.y, *wxBLACK);
+        PanelGraph::self->DrawLine(LeftX(), pos_mouse.y, RightX(), pos_mouse.y, *wxBLACK);
     }
 
     if (PanelGraph::self->track_x)
     {
-        PanelGraph::self->DrawLine(pos_mouse.x, 0, pos_mouse.x, PanelGraph::self->HEIGHT, *wxBLACK);
+        PanelGraph::self->DrawLine(pos_mouse.x, TopY(), pos_mouse.x, BottomY(), *wxBLACK);
     }
 }
