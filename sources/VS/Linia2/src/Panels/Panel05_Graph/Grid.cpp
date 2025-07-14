@@ -284,7 +284,7 @@ void Grid::DrawHPointLine(int x, int y, int d, int width)
 }
 
 
-wxPoint Grid::CoordCanvas(double x, double y) const
+wxPoint Grid::ValuesToCoord(double x, double y) const
 {
     double scaleX = rangeX / 5.0;
 

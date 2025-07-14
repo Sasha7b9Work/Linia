@@ -20,7 +20,7 @@ public:
     void ScaleOn(const wxPoint &, int);
 
     // Возвращает координаты точки {x, y} на холсте
-    wxPoint CoordCanvas(double x, double y) const;
+    wxPoint ValuesToCoord(double x, double y) const;
 
 private:
 

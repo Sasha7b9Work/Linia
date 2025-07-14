@@ -6,8 +6,8 @@
 
 void GraphLine::Draw(const Grid *grid) const
 {
-    wxPoint start = grid->CoordCanvas(x1, y1);
-    wxPoint end = grid->CoordCanvas(x2, y2);
+    wxPoint start = grid->ValuesToCoord(x1, y1);
+    wxPoint end = grid->ValuesToCoord(x2, y2);
 
     Line(start.x, start.y, end.x, end.y).Draw(color);
 }
@@ -27,7 +27,7 @@ void GraphMeasures::Draw(const Grid *grid) const
 
     for (auto &coord : points)
     {
-        wxPoint point = grid->CoordCanvas(coord.m_x, coord.m_y);
+        wxPoint point = grid->ValuesToCoord(coord.m_x, coord.m_y);
 
         spline.AppendPoint({ (double)point.x, (double)point.y });
     }
