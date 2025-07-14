@@ -91,22 +91,36 @@ void Grid::DrawLabelsOnAxis() const
     {
         Text(FullTitleX()).DrawAboutCenterDown(center.x, BottomY() + 25);
 
-        for (int i = -5; i < 6; i++)
+        for (int i = -4; i < 6; i++)
         {
             wxPoint coord = GetCoordPointAxisX(i);
 
-            Text(GetValuePointAxisX(i)).DrawAboutCenterDown(coord.x, coord.y + d);
+            if (BottomY() < PanelGraph::HEIGHT)
+            {
+                Text(GetValuePointAxisX(i)).DrawAboutCenterDown(coord.x, coord.y + d);
+            }
+            else
+            {
+                Text(GetValuePointAxisX(i)).DrawAboutCenterDown(coord.x, PanelGraph::HEIGHT - 25, true, *wxWHITE);
+            }
         }
     }
 
     {
         Text(titleY).DrawAboutCenterLeft(LeftX() - 30, center.y);
 
-        for (int i = -5; i < 6; i++)
+        for (int i = -4; i < 6; i++)
         {
             wxPoint coord = GetCoordPointAxisY(-i);
 
-            Text(GetValuePointAxisY(i)).DrawAboutCenterLeft(coord.x - d, coord.y);
+            if (LeftX() > 0)
+            {
+                Text(GetValuePointAxisY(i)).DrawAboutCenterLeft(coord.x - d, coord.y);
+            }
+            else
+            {
+                Text(GetValuePointAxisY(i)).DrawAboutCenterRigth(0 + d, coord.y, true, *wxWHITE);
+            }
         }
     }
 }

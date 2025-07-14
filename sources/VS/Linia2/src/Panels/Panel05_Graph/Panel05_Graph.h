@@ -76,8 +76,10 @@ public:
     // Рисует слева от точки по центру
     void DrawAboutCenterLeft(int x, int y) const;
 
+    void DrawAboutCenterRigth(int x, int y, bool fillBackground = false, const wxColor & = *wxWHITE) const;
+
     // Рисует снизу по центру
-    void DrawAboutCenterDown(int x, int y) const;
+    void DrawAboutCenterDown(int x, int y, bool fillBackground = false, const wxColor & = *wxWHITE) const;
 
 private:
 

@@ -113,15 +113,6 @@ void PanelGraph::EndPaint()
 }
 
 
-void PanelGraph::FillRectangle(int x, int y, int width, int height, const wxColor &_color)
-{
-    color = _color;
-    gc->SetBrush(color);
-    gc->SetPen(color);
-    gc->DrawRectangle( x, y, width, height );
-}
-
-
 void Point::Draw(int x, int y) const
 {
     PanelGraph::self->gc->StrokeLine(x, y, x + 0.01, y);
@@ -172,12 +163,52 @@ void Text::DrawAboutCenterLeft(int x, int y) const
 }
 
 
-void Text::DrawAboutCenterDown(int x, int y) const
+void PanelGraph::FillRectangle(int x, int y, int width, int height, const wxColor &_color)
+{
+    color = _color;
+    gc->SetBrush(color);
+    gc->SetPen(color);
+    gc->DrawRectangle(x, y, width, height);
+}
+
+
+void Text::DrawAboutCenterDown(int x, int y, bool fillBackground, const wxColor &background) const
 {
     double width, height, descent, externalLeading;
     PanelGraph::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
 
     x -= (int)(width / 2.0 + 0.5);
+
+    if (fillBackground)
+    {
+        PanelGraph::self->gc->SetBrush(background);
+        PanelGraph::self->gc->SetPen(background);
+        PanelGraph::self->gc->DrawRectangle(x, y, width, height);
+
+        PanelGraph::self->gc->SetBrush(PanelGraph::self->color);
+        PanelGraph::self->gc->SetPen(PanelGraph::self->color);
+    }
+
+    PanelGraph::self->gc->DrawText(text, x, y);
+}
+
+
+void Text::DrawAboutCenterRigth(int x, int y, bool fillBackground, const wxColor &background) const
+{
+    double width, height, descent, externalLeading;
+    PanelGraph::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+
+    y -= (int)(height / 2.0 + 0.5);
+
+    if (fillBackground)
+    {
+        PanelGraph::self->gc->SetBrush(background);
+        PanelGraph::self->gc->SetPen(background);
+        PanelGraph::self->gc->DrawRectangle(x, y, width, height);
+
+        PanelGraph::self->gc->SetBrush(PanelGraph::self->color);
+        PanelGraph::self->gc->SetPen(PanelGraph::self->color);
+    }
 
     PanelGraph::self->gc->DrawText(text, x, y);
 }
