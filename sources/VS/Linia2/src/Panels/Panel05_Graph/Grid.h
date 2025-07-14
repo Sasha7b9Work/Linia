@@ -30,4 +30,13 @@ private:
     void DrawHPointLine(int x, int y, int d, int width);
 
     int SizeCell() const;
+
+    // Координаты точки оси x для подписи значения
+    wxPoint GetPointAxisX(int);
+
+    int BottomY() const;
+
+    int TopY() const;
+
+    int LengthAxis() const;
 };

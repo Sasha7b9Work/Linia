@@ -10,14 +10,32 @@ Grid::Grid()
 }
 
 
+int Grid::BottomY() const
+{
+    return TopY() + LengthAxis();
+}
+
+
+int Grid::TopY() const
+{
+    return center.y - SizeCell() * num_cells / 2;
+}
+
+
+int Grid::LengthAxis() const
+{
+    return SizeCell() * num_cells;
+}
+
+
 void Grid::Draw()
 {
     const int size_cell = SizeCell();
-    const int length = size_cell * num_cells;
+    const int length = LengthAxis();
 
     const int x_left = center.x - size_cell * num_cells / 2;
-    const int y_top = center.y - size_cell * num_cells / 2;
-    const int y_bottom = y_top + length;
+    const int y_top = TopY();
+    const int y_bottom = BottomY();
 
     for (int i = 0; i < 3; i++)
     {
@@ -53,6 +71,23 @@ void Grid::Draw()
 
     Text(unitsX).DrawAboutCenterDown(center.x, y_bottom);
     Text(unitsY).DrawAboutCenterLeft(x_left, center.y);
+
+    for (int i = -5; i < 6; i++)
+    {
+        wxPoint coord = GetPointAxisX(i);
+
+        Text("0").DrawAboutCenterDown(coord.x, coord.y);
+    }
+}
+
+
+wxPoint Grid::GetPointAxisX(int num)
+{
+    wxPoint coord { center.x, BottomY() };
+
+    coord.x += SizeCell() * num;
+
+    return coord;
 }
 
 
