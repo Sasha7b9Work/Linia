@@ -17,6 +17,9 @@ public:
 
     void ScaleOn(const wxPoint &, int);
 
+    // Возвращает координаты точки {x, y} на холсте
+    wxPoint CoordCanvas(double x, double y) const;
+
 private:
 
     wxPoint center;
@@ -35,6 +38,7 @@ private:
     void DrawVPointLine(int x, int y, int d, int height);
     void DrawHPointLine(int x, int y, int d, int width);
 
+    // Размер клетки в пикселях
     int SizeCell() const;
 
     // Координаты точки оси x для подписи значения

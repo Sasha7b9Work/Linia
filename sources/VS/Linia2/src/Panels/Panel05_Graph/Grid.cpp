@@ -277,3 +277,17 @@ void Grid::DrawHPointLine(int x, int y, int d, int width)
         Point().Draw(i, y);
     }
 }
+
+
+wxPoint Grid::CoordCanvas(double x, double y) const
+{
+    double scaleX = rangeX / 5.0;
+
+    double cells_in_x = x / scaleX;
+
+    double scaleY = rangeY / 5.0;
+
+    double cells_in_y = y / scaleY;
+
+    return { (int)(center.x + cells_in_x * SizeCell() + 0.5), (int)(center.y - cells_in_y * SizeCell() + 0.5) };
+}

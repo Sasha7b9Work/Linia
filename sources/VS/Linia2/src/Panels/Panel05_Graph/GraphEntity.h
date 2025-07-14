@@ -10,11 +10,15 @@ class GraphEntity
 {
 public:
 
+    GraphEntity(const wxColor &_color = *wxBLACK) : color(_color) { }
+
     virtual void Draw(const Grid *) const = 0;
 
 protected:
 
     virtual ~GraphEntity() { }
+
+    wxColor color;
 };
 
 
@@ -22,7 +26,8 @@ class GraphLine : public GraphEntity
 {
 public:
 
-    GraphLine(double _x1, double _y1, double _x2, double _y2) :
+    GraphLine(double _x1, double _y1, double _x2, double _y2, const wxColor &_color = *wxBLACK) :
+        GraphEntity(_color),
         x1(_x1), y1(_y1), x2(_x2), y2(_y2)
     {
     }
