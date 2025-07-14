@@ -15,6 +15,8 @@ public:
 
     void MoveOn(const wxPoint &);
 
+    void OnMouseMove(const wxPoint &);
+
     void ScaleOn(const wxPoint &, int);
 
     // Возвращает координаты точки {x, y} на холсте
@@ -31,6 +33,8 @@ private:
 
     wxString unitsX{ "V" };
     wxString unitsY{ "A" };
+
+    wxPoint pos_mouse;
 
     double rangeX = 20.0;        // Размах в одну сторону от нуля
     double rangeY = 5.0;        // Размах в одну сторону от нуля
@@ -58,4 +62,6 @@ private:
     void DrawLabelsOnAxis() const;
 
     wxString FullTitleX() const;
+
+    void DrawMouseMarkers() const;
 };

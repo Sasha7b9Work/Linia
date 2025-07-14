@@ -65,18 +65,20 @@ void PanelGraph::OnMouseUp(wxMouseEvent &)
 
 void PanelGraph::OnMouseMove(wxMouseEvent &event)
 {
-    if (!mouse_is_pressed)
-    {
-        return;
-    }
-
     wxPoint position = event.GetPosition();
 
-    wxPoint delta = position - pos_mouse_down;
+    if (mouse_is_pressed)                            // Перемещение графика
+    {
+        wxPoint delta = position - pos_mouse_down;
 
-    grid.MoveOn(delta);
+        grid.MoveOn(delta);
 
-    pos_mouse_down = position;
+        pos_mouse_down = position;
+    }
+    else                                            // Отслеживание координат
+    {
+        grid.OnMouseMove(position);
+    }
 
     Draw();
 }

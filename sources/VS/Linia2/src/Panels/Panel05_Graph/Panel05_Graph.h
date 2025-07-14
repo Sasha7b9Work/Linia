@@ -31,6 +31,11 @@ public:
         color = _color;
     }
 
+    bool track_x = false;           // Отслеживать координату x
+    bool track_y = false;           // Отслеживать координату y
+    bool track_none = true;         // Не отслеживать координаты
+    bool mouse_is_pressed = false;
+
 private:
 
     Grid grid;                              // Координатная сетка
@@ -44,11 +49,6 @@ private:
 
     // Координаты мыши при нажатии кнопки
     wxPoint pos_mouse_down;
-    bool mouse_is_pressed = false;
-
-    bool track_x = false;
-    bool track_y = false;
-    bool track_none = true;
 
     void BeginPaint();
 

@@ -83,6 +83,8 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         entity->Draw(this);
     }
 
+    DrawMouseMarkers();
+
     DrawLabelsOnAxis();
 }
 
@@ -292,4 +294,29 @@ wxPoint Grid::CoordCanvas(double x, double y) const
     double cells_in_y = y / scaleY;
 
     return { (int)(center.x + cells_in_x * SizeCell() + 0.5), (int)(center.y - cells_in_y * SizeCell() + 0.5) };
+}
+
+
+void Grid::OnMouseMove(const wxPoint &position)
+{
+    pos_mouse = position;
+}
+
+
+void Grid::DrawMouseMarkers() const
+{
+    if (PanelGraph::self->mouse_is_pressed)
+    {
+        return;
+    }
+
+    if (PanelGraph::self->track_y)
+    {
+        PanelGraph::self->DrawLine(0, pos_mouse.y, PanelGraph::self->WIDTH, pos_mouse.y, *wxBLACK);
+    }
+
+    if (PanelGraph::self->track_x)
+    {
+        PanelGraph::self->DrawLine(pos_mouse.x, 0, pos_mouse.x, PanelGraph::self->HEIGHT, *wxBLACK);
+    }
 }
