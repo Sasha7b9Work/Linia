@@ -218,5 +218,40 @@ void Text::DrawAboutCenterRigth(int x, int y, bool fillBackground, const wxColor
 
 void PanelGraph::CreateEntities()
 {
-    entities.push_back(new GraphLine(-1.0, -1.0, 1.0, 1.0));
+    entities.push_back(new GraphLine(-1.0, -1.0, 1.0, 1.0, *wxBLUE));
+
+    GraphMeasures *meas = new GraphMeasures(*wxGREEN);
+
+    for (int i = 0; i < 10; i++)
+    {
+        wxPoint2DDouble point{ std::rand() % 100 / 10.0, std::rand() % 100 / 10.0 };
+        meas->AppendPoint(point);
+    }
+
+    entities.push_back(meas);
+}
+
+
+void Spline::AppendPoint(const wxPoint2DDouble &point)
+{
+    points.push_back(point);
+}
+
+
+void Spline::Draw() const
+{
+    wxGraphicsPath path = PanelGraph::self->gc->CreatePath();
+
+    path.MoveToPoint(points[0].m_x, points[0].m_y);
+
+    for (uint i = 1; i < points.size(); i += 3)
+    {
+        path.AddCurveToPoint(
+            points[i].m_x, points[i].m_y,
+            points[i + 1].m_x, points[i + 1].m_y,
+            points[i + 2].m_x, points[i + 2].m_y
+        );
+    }
+
+    PanelGraph::self->gc->StrokePath(path);
 }

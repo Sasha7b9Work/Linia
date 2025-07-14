@@ -89,6 +89,8 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
 void Grid::DrawLabelsOnAxis() const
 {
+    PanelGraph::self->SetColor(*wxBLACK);
+
     Text::SetFont();
 
     int d = 2;

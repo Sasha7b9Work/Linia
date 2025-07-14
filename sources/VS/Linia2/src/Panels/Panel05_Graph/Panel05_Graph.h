@@ -10,6 +10,7 @@ class PanelGraph : public Panel
 {
     friend class Point;
     friend class Text;
+    friend class Spline;
 
 public:
 
@@ -24,6 +25,11 @@ public:
 
     void DrawLine(int x1, int y1, int x2, int y2);
     void DrawLine(int x1, int y1, int x2, int y2, const wxColor &);
+
+    void SetColor(const wxColor &_color)
+    {
+        color = _color;
+    }
 
 private:
 
@@ -89,4 +95,18 @@ public:
 private:
 
     wxString text;
+};
+
+
+class Spline
+{
+public:
+
+    void AppendPoint(const wxPoint2DDouble &);
+
+    void Draw() const;
+
+private:
+
+    std::vector<wxPoint2DDouble> points;
 };

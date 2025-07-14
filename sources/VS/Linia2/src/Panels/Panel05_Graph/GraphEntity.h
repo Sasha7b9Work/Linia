@@ -32,7 +32,6 @@ public:
     {
     }
 
-
     virtual void Draw(const Grid *) const;
 
 private:
@@ -40,4 +39,20 @@ private:
     double x1, y1, x2, y2;
 
     virtual ~GraphLine() {}
+};
+
+
+class GraphMeasures : public GraphEntity
+{
+public:
+
+    GraphMeasures(const wxColor &_color) : GraphEntity(_color) { }
+
+    void AppendPoint(const wxPoint2DDouble &);
+
+    virtual void Draw(const Grid *) const;
+
+private:
+
+    std::vector<wxPoint2DDouble> points;
 };
