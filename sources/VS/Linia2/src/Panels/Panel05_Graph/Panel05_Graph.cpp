@@ -232,6 +232,9 @@ void PanelGraph::CreateEntities()
     meas->AppendPoint({ 3.0, 3.4 });
     meas->AppendPoint({ 4.0, 4.0 });
     meas->AppendPoint({ 6.0, 4.3 });
+    meas->AppendPoint({ 8.0, 4.35 });
+    meas->AppendPoint({ 10.0, 4.38 });
+    meas->AppendPoint({ 12.0, 4.4 });
 
     entities.push_back(meas);
 }
