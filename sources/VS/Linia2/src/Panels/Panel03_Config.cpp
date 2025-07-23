@@ -4,6 +4,7 @@
 #include "MainWindow.h"
 #include "Utils/GlobalFunctions.h"
 #include "Utils/SystemDepend.h"
+#include "Controls/SpinBox.h"
 
 
 PanelConfig *PanelConfig::self = nullptr;
@@ -156,8 +157,8 @@ void PanelConfig::CreatePanelChannelC(wxPanel *panel, int x, int w)
         new wxStaticText(boxSource, wxID_ANY, _L("Старт"), { 10, SD::Y_SB(y + dy) });
         new wxStaticText(boxSource, wxID_ANY, _L("Стоп"), { 10, SD::Y_SB(y + 30 + dy) });
 
-        new wxSpinCtrl(boxSource, ID_PAN3_CHAN_C_SPIN_START, "0", { 80, SD::Y_SB(y) }, { 100, TEXTCNTRL_HEIGHT });
-        new wxSpinCtrl(boxSource, ID_PAN3_CHAN_C_SPIN_STOP, "100", { 80, SD::Y_SB(y + 30) }, { 100, TEXTCNTRL_HEIGHT });
+        new SpinBox(boxSource, ID_PAN3_CHAN_C_SPIN_START, "0", { 80, SD::Y_SB(y) }, { 100, TEXTCNTRL_HEIGHT });
+        new SpinBox(boxSource, ID_PAN3_CHAN_C_SPIN_STOP, "100", { 80, SD::Y_SB(y + 30) }, { 100, TEXTCNTRL_HEIGHT });
     }
 }
 
@@ -203,7 +204,7 @@ void PanelConfig::CreatePanelChannelB(wxPanel *panel, int x, int w)
 
         new wxStaticText(boxGenerator, wxID_ANY, _L("Число ступенек"), { 10, SD::Y_SB(y + 3) });
 
-        new wxSpinCtrl(boxGenerator, ID_PAN3_CHAN_B_GEN_SPIN_NUMBER_STEPS, "5", { 120, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
+        new SpinBox(boxGenerator, ID_PAN3_CHAN_B_GEN_SPIN_NUMBER_STEPS, "5", { 120, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
 
         y += 25;
 
@@ -294,7 +295,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
 
         new wxStaticText(boxGenerator, wxID_ANY, _L("Число ступенек"), { 10, SD::Y_SB(y + 3) });
 
-        new wxSpinCtrl(boxGenerator, ID_PAN3_CHAN_S_GEN_SPIN_NUMBER_STEPS, "5", { 120, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
+        new SpinBox(boxGenerator, ID_PAN3_CHAN_S_GEN_SPIN_NUMBER_STEPS, "5", { 120, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
 
         y += 25;
 
