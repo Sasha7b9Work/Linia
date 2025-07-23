@@ -157,7 +157,7 @@ void PanelConfig::CreatePanelChannelC(wxPanel *panel, int x, int w)
         new wxStaticText(boxSource, wxID_ANY, _L("Старт"), { 10, SD::Y_SB(y + dy) });
         new wxStaticText(boxSource, wxID_ANY, _L("Стоп"), { 10, SD::Y_SB(y + 30 + dy) });
 
-        new SpinBox(boxSource, ID_PAN3_CHAN_C_SPIN_START, "0", { 80, SD::Y_SB(y) }, { 100, TEXTCNTRL_HEIGHT });
+        new wxSpinCtrl(boxSource, ID_PAN3_CHAN_C_SPIN_START, "0", { 80, SD::Y_SB(y) }, { 100, TEXTCNTRL_HEIGHT });
         new SpinBox(boxSource, ID_PAN3_CHAN_C_SPIN_STOP, "100", { 80, SD::Y_SB(y + 30) }, { 100, TEXTCNTRL_HEIGHT });
     }
 }
