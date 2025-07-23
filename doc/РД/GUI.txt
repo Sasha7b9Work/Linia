@@ -1,0 +1,2 @@
+1. Установить xfce
+2. Установить Chicago95   https://github.com/grassmunk/Chicago95
