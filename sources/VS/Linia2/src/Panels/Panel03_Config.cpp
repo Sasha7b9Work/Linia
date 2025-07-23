@@ -350,6 +350,8 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
 void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int w)
 {
     wxStaticBox *boxCategory = new wxStaticBox(panel, wxID_ANY, _L("Категория"), { x, 0 }, { 30, 75 });
+
+    (void)boxCategory;
 }
 
 
