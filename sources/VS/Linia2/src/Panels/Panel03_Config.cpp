@@ -41,7 +41,7 @@ PanelConfig::PanelConfig(wxWindow* parent) :
     {
         // Включаем панель
 
-        int id = ID_PAN3_BTN_CHANNEL_C;
+        int id = ID_PAN3_BTN_SCHEME;
 
         wxCommandEvent evt(wxEVT_TOGGLEBUTTON, id);
         evt.SetInt(1);
@@ -75,7 +75,7 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
     }
     else if (id == ID_PAN3_BTN_SCHEME)
     {
-
+        CreatePanelScheme(panel, x, w);
     }
     else if (id == ID_PAN3_BTN_CALCULATION)
     {
@@ -344,6 +344,12 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
 
         new wxSlider(boxLimitation, ID_PAN3_CHAN_S_LIM_SLIDER, 5, 0, 20, { 10, SD::Y_SB(y) }, { 120, TEXTCNTRL_HEIGHT });
     }
+}
+
+
+void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int w)
+{
+    wxStaticBox *boxCategory = new wxStaticBox(panel, wxID_ANY, _L("Категория"), { x, 0 }, { 30, 75 });
 }
 
 

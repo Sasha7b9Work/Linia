@@ -47,4 +47,6 @@ private:
     void CreatePanelChannelS(wxPanel *, int x, int w);
 
     void CreatePanelCalculate(wxPanel *, int x, int w);
+
+    void CreatePanelScheme(wxPanel *, int x, int w);
 };
