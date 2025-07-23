@@ -349,11 +349,25 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
 
 void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int w)
 {
+    const int width_category = 70;
+
     wxStaticBox *boxCommutation = new wxStaticBox(panel, wxID_ANY, wxString("                           ") + _L("Коммутация"), { x, 100 }, { MainWindow::WIDTH3 - 10, 300 });
 
-    (void)boxCommutation;
+    {
+        wxArrayString choices;
+        choices.Add(_L("внутренняя"));
+        choices.Add(_L("внешняя"));
 
-    int width_category = 70;
+        new wxComboBox(boxCommutation, ID_PAN3_COMM_COMBO_TYPE, choices[0], { x + width_category, SD::Y_SB(20) }, { 110, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+
+        choices.clear();
+        choices.Add(_L("канал") + " C");
+        choices.Add(_L("канал") + " B");
+
+        new wxComboBox(boxCommutation, ID_PAN3_COMM_COMBO_CHAN_C, choices[0], { x + width_category + 30, SD::Y_SB(50) }, { 110 - 30, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+
+        new wxComboBox(boxCommutation, ID_PAN3_COMM_COMBO_CHAN_B, choices[1], { x + width_category + 30, SD::Y_SB(80) }, { 110 - 30, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+    }
 
     wxStaticBox *boxCategory = new wxStaticBox(panel, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 250 });
 
@@ -365,7 +379,7 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int w)
         wxArrayString choices;
         choices.Add("IdVd");
 
-        new wxComboBox(boxTest, ID_PAN3_TEST_COMBOBOX, choices[0], { 5, SD::Y_SB(20) }, { 110, TEXTCNTRL_HEIGHT });
+        new wxComboBox(boxTest, ID_PAN3_TEST_COMBOBOX, choices[0], { 5, SD::Y_SB(20) }, { 110, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
     }
 }
 
