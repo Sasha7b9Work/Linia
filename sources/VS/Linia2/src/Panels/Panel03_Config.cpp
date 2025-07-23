@@ -349,17 +349,17 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
 
 void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int w)
 {
-    wxStaticBox *boxCommutation = new wxStaticBox(panel, wxID_ANY, wxString("                           ") + _L("Коммутация"), { x, SD::Y_SB(100) }, { MainWindow::WIDTH3 - 10, 300 });
+    wxStaticBox *boxCommutation = new wxStaticBox(panel, wxID_ANY, wxString("                           ") + _L("Коммутация"), { x, 100 }, { MainWindow::WIDTH3 - 10, 300 });
 
     (void)boxCommutation;
 
     int width_category = 70;
 
-    wxStaticBox *boxCategory = new wxStaticBox(panel, wxID_ANY, _L("Категория"), { x, SD::Y_SB(0) }, { width_category, 250 });
+    wxStaticBox *boxCategory = new wxStaticBox(panel, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 250 });
 
     (void)boxCategory;
 
-    wxStaticBox *boxTest = new wxStaticBox(panel, wxID_ANY, _L("Тест"), { x + width_category + 5, SD::Y_SB(0) }, { MainWindow::WIDTH3 - width_category - 15, 100 });
+    wxStaticBox *boxTest = new wxStaticBox(panel, wxID_ANY, _L("Тест"), { x + width_category + 5, 0 }, { MainWindow::WIDTH3 - width_category - 15, 100 });
 
     {
         wxArrayString choices;
@@ -423,8 +423,8 @@ void PanelConfig::CreatePanelCalculate(wxPanel *panel, int x, int w)
         {
             y = 25;
 
-            new wxRadioButton(boxCalculate, ID_PAN5_PAR_RB_DY_DX, "dY/dX", { 10, y });
-            new wxRadioButton(boxCalculate, ID_PAN5_PAR_RB_DX_DY, "dX/dY", { 100, y });
+            new wxRadioButton(boxCalculate, ID_PAN5_PAR_RB_DY_DX, "dY/dX", { 10, SD::Y_SB(y) });
+            new wxRadioButton(boxCalculate, ID_PAN5_PAR_RB_DX_DY, "dX/dY", { 100, SD::Y_SB(y) });
         }
     }
 
