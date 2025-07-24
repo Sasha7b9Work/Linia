@@ -45,14 +45,14 @@ void PanelScale::OnEventButton(wxCommandEvent &event)
     }
     else
     {
-        UnñheckAllAcross(event.GetId());
+        UncheckAllAcross(event.GetId());
 
         EnablePanel(event.GetId());
     }
 }
 
 
-void PanelScale::UnñheckAllAcross(int id)
+void PanelScale::UncheckAllAcross(int id)
 {
     for (auto &str : str_panels)
     {

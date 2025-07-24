@@ -16,7 +16,7 @@ private:
     void OnEventButton(wxCommandEvent &);
 
     // Отщёлкнуть все, кроме id
-    void UnсheckAllAcross(int id);
+    void UncheckAllAcross(int id);
 
     void EnablePanel(int button_id);
 
