@@ -367,6 +367,21 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
         new wxComboBox(boxCommutation, ID_PAN3_COMM_COMBO_CHAN_C, choices[0], { x + width_category + 30, SD::Y_SB(50) }, { 110 - 30, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
         new wxComboBox(boxCommutation, ID_PAN3_COMM_COMBO_CHAN_B, choices[1], { x + width_category + 30, SD::Y_SB(80) }, { 110 - 30, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+
+        choices.clear();
+        choices.Add("C");
+        choices.Add("B");
+        choices.Add("E");
+
+        int w = 30;
+
+        new wxComboBox(boxCommutation, ID_PAN3_COMM_COMBO_C, choices[0], { 100, 170 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new wxComboBox(boxCommutation, ID_PAN3_COMM_COMBO_B, choices[1], { 40, 210 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_DROPDOWN);
+        new wxComboBox(boxCommutation, ID_PAN3_COMM_COMBO_E, choices[2], { 100, 250 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+
+        GF::FindComboBox(this, ID_PAN3_COMM_COMBO_C)->Enable(false);
+        GF::FindComboBox(this, ID_PAN3_COMM_COMBO_B)->Enable(false);
+        GF::FindComboBox(this, ID_PAN3_COMM_COMBO_E)->Enable(false);
     }
 
     wxStaticBox *boxCategory = new wxStaticBox(panel, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 250 });
