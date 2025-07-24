@@ -10,4 +10,22 @@ public:
     PanelScale(wxWindow *parent);
 
     static PanelScale *self;
+
+private:
+
+    void OnEventButton(wxCommandEvent &);
+
+    // Отщёлкнуть все, кроме id
+    void UnсheckAllAcross(int id);
+
+    void EnablePanel(int button_id);
+
+    // Структура хранит кнопку и панель, которую та включает
+    struct StructPanel
+    {
+        wxToggleButton *button;
+        wxPanel *panel;
+    };
+
+    std::vector<StructPanel> str_panels;
 };
