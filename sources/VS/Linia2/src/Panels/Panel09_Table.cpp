@@ -30,4 +30,8 @@ PanelTable::PanelTable(wxWindow* parent) :
     SetSize(WIDTH, HEIGHT);
 
     grid->SetMinSize(GetClientSize());
+    grid->SetSize(GetClientSize());
+    grid->Fit();
+    grid->SetMinSize(grid->GetSize());
+
 }
