@@ -18,7 +18,7 @@ PanelModel::PanelModel(wxWindow* parent) :
 
     new wxStaticText(panel_name, ID_PAN4_TEXT_NAME, "", { 0, 0 }, { WIDTH, height_name }, wxALIGN_CENTER);
 
-    SetName(_L("Файл модели"));
+    Panel::SetName(_L("Файл модели"));
 
     panel_graph = new wxPanel(this, wxID_ANY, { 0, height_name }, { WIDTH, HEIGHT - height_name }, wxTAB_TRAVERSAL | wxSUNKEN_BORDER);
 

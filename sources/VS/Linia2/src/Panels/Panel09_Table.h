@@ -21,7 +21,24 @@ private:
 
     wxArrayString titles_columns;
 
+    struct Line
+    {
+        int p1;
+        int p2;
+        int p3;
+
+        float Uc;
+        float Ic;
+        float Ib;
+    };
+
+    wxVector <Line> lines;
+
     void SetTitlesColumn();
 
     void SetAutoSizeColumns();
+
+    void UpdateLines();
+
+    void InsertValue(int row, int col, float value);
 };

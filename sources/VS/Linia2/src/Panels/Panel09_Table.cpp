@@ -26,7 +26,7 @@ PanelTable::PanelTable(wxWindow* parent) :
 
     grid->SetRowLabelSize(0);
 
-    grid->CreateGrid(50, 5);
+    grid->CreateGrid(0, 5);
 
     SetTitlesColumn();
 
@@ -39,9 +39,17 @@ PanelTable::PanelTable(wxWindow* parent) :
     sizer->Add(grid, 1, wxEXPAND | wxALL, 5);
     SetSizer(sizer);
 
-    Layout();
+    Panel::Layout();
 
     SetAutoSizeColumns();
+
+    {
+        lines.push_back({ 1, 1, 1, 0.0f, 0.0f, 0.0f });
+        lines.push_back({ 2, 1, 2, 0.0f, 0.0f, 0.0f });
+        lines.push_back({ 3, 1, 3, 0.0f, 0.0f, 0.1f });
+    }
+
+    UpdateLines();
 }
 
 
@@ -63,5 +71,40 @@ void PanelTable::SetAutoSizeColumns()
     for (int col = 0; col < colsCount; ++col)
     {
         grid->SetColSize(col, colWidth);
+    }
+}
+
+
+void PanelTable::UpdateLines()
+{
+    if (grid->GetNumberRows() < (int)lines.size())
+    {
+        grid->AppendRows((int)lines.size() - grid->GetNumberRows());
+    }
+
+    for (uint i = 0; i < lines.size(); i++)
+    {
+        const Line &l = lines[i];
+
+        grid->SetCellValue((int)i, 0, wxString::Format("%d/%d/%d", l.p1, l.p2, l.p3));
+
+        InsertValue((int)i, 1, l.Uc);
+
+        InsertValue((int)i, 2, l.Ic);
+
+        InsertValue((int)i, 3, l.Ib);
+    }
+}
+
+
+void PanelTable::InsertValue(int row, int col, float value)
+{
+    if (value == 0.0f)
+    {
+        grid->SetCellValue(row, col, "0");
+    }
+    else
+    {
+        grid->SetCellValue(row, col, wxString::Format("%.3f", value));  
     }
 }

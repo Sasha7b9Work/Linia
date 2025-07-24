@@ -445,8 +445,6 @@ void PanelConfig::CreatePanelCalculate(wxPanel *panel, int x, int w)
     wxStaticBox *boxBorder = new wxStaticBox(panel, wxID_ANY, _L("Пороговые значения"), { x, boxParameter->GetPosition().y + boxParameter->GetSize().y + x }, { w, 80 });
 
     {
-        y = 25;
-
         new wxStaticText(boxBorder, wxID_ANY, "MIN", { 10, SD::Y_SB(y + dy) });
         new wxTextCtrl(boxBorder, ID_PAN5_BORDER_MIN, "3", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT });
 

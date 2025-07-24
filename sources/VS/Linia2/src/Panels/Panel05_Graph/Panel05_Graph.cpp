@@ -26,7 +26,7 @@ PanelGraph::PanelGraph(wxWindow *parent) :
 {
     self = this;
 
-    SetDoubleBuffered(true);
+    Panel::SetDoubleBuffered(true);
     Bind(wxEVT_PAINT, &PanelGraph::OnPaint, this);
     Bind(wxEVT_LEFT_DOWN, &PanelGraph::OnMouseDown, this);
     Bind(wxEVT_LEFT_UP, &PanelGraph::OnMouseUp, this);
