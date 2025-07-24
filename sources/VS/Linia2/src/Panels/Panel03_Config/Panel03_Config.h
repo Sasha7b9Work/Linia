@@ -33,7 +33,9 @@ private:
     wxPanel *CreatePanel(wxToggleButton *);
 
     void OnEventButton(wxCommandEvent &);
+    void OnEventToggleButton(wxCommandEvent &);
     void OnEventRadioButton(wxCommandEvent &);
+    void OnEventComboBox(wxCommandEvent &);
 
     // Отщёлкнуть все, кроме id
     void UnсheckAllAcross(int id);

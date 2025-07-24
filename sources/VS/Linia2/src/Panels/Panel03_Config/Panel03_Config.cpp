@@ -1,10 +1,11 @@
 ﻿// 2025/6/1 17:20:45 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel03_Config.h"
+#include "Panels/Panel03_Config/Panel03_Config.h"
 #include "MainWindow.h"
 #include "Utils/GlobalFunctions.h"
 #include "Utils/SystemDepend.h"
 #include "Controls/SpinBox.h"
+#include "Panels/Panel03_Config/WindowLibraryTests.h"
 
 
 PanelConfig *PanelConfig::self = nullptr;
@@ -15,8 +16,10 @@ PanelConfig::PanelConfig(wxWindow* parent) :
 {
     self = this;
 
-    Bind(wxEVT_TOGGLEBUTTON, &PanelConfig::OnEventButton, this);
+    Bind(wxEVT_BUTTON, &PanelConfig::OnEventButton, this);
+    Bind(wxEVT_TOGGLEBUTTON, &PanelConfig::OnEventToggleButton, this);
     Bind(wxEVT_RADIOBUTTON, &PanelConfig::OnEventRadioButton, this);
+    Bind(wxEVT_COMBOBOX, &PanelConfig::OnEventComboBox, this);
 
     const int h = 20;
 
@@ -393,8 +396,13 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
     {
         wxArrayString choices;
         choices.Add("IdVd");
+        choices.Add("_USER");
 
         new wxComboBox(boxTest, ID_PAN3_TEST_COMBOBOX, choices[0], { 5, SD::Y_SB(20) }, { 110, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+
+        new wxButton(boxTest, ID_PAN3_TEST_BUTTON, _L("Загрузить"), { 5, SD::Y_SB(50) }, { 110, 30 });
+
+        GF::FindAnyButton(this, ID_PAN3_TEST_BUTTON)->Hide();
     }
 }
 
@@ -473,6 +481,17 @@ void PanelConfig::CreatePanelCalculate(wxPanel *panel, int x, int w)
 
 void PanelConfig::OnEventButton(wxCommandEvent &event)
 {
+    int id = event.GetId();
+
+    if (id == ID_PAN3_TEST_BUTTON)
+    {
+        WindowLibraryTests().ShowModal();
+    }
+}
+
+
+void PanelConfig::OnEventToggleButton(wxCommandEvent &event)
+{
     if (!event.IsChecked())
     {
         GF::FindToggleButton(self, event.GetId())->SetValue(true);
@@ -491,6 +510,19 @@ void PanelConfig::OnEventRadioButton(wxCommandEvent &event)
     GF::FindRadioButton(self, event.GetId())->SetValue(true);
 
     event.Skip();
+}
+
+
+void PanelConfig::OnEventComboBox(wxCommandEvent &event)
+{
+    int id = event.GetId();
+
+    if (id == ID_PAN3_TEST_COMBOBOX)
+    {
+        int selection = GF::FindComboBox(this, id)->GetSelection();
+
+        GF::FindAnyButton(this, ID_PAN3_TEST_BUTTON)->Show(GF::FindComboBox(this, id)->GetString((uint)selection) == "_USER");
+    }
 }
 
 

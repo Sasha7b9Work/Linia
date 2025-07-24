@@ -1,6 +1,6 @@
 // 2025/6/1 18:25:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel03_Config.h"
+#include "Panels/Panel03_Config/Panel03_Config.h"
 #include "Panels/Panel07_Indicator.h"
 #include "MainWindow.h"
 
