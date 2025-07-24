@@ -212,6 +212,8 @@ enum
     // Файл модели
     ID_PAN4_TEXT_NAME,
 
+    ID_PAN8_COMBO,
+
     ID_MENU_GRAPH_RESET,
     ID_MENU_GRAPH_FULL_SCREEN,
     ID_MENU_GRAPH_TRACK_X,
