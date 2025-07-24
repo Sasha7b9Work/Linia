@@ -32,6 +32,9 @@ WindowLibraryTests::WindowLibraryTests() :
     Fill();
 
     grid->SetSelectionMode(wxGrid::wxGridSelectNone);
+
+    grid->SetCellHighlightPenWidth(0);
+    grid->SetCellHighlightROPenWidth(0);
 }
 
 

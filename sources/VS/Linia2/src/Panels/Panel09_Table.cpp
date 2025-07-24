@@ -57,6 +57,9 @@ PanelTable::PanelTable(wxWindow* parent) :
     UpdateLines();
 
     grid->SetSelectionMode(wxGrid::wxGridSelectNone);
+
+    grid->SetCellHighlightPenWidth(0);
+    grid->SetCellHighlightROPenWidth(0);
 }
 
 
