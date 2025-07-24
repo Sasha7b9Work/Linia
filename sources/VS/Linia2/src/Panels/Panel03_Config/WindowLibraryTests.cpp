@@ -8,6 +8,8 @@ WindowLibraryTests::WindowLibraryTests() :
 {
     grid = new wxGrid(this, wxID_ANY);
 
+    grid->EnableEditing(false);
+
     grid->SetRowLabelSize(0);
 
     grid->CreateGrid(0, 3);

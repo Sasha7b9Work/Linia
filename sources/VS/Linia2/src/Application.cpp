@@ -20,6 +20,12 @@ Application *Application::self = nullptr;
 
 bool Application::OnInit()
 {
+//#include <locale>
+
+    // В начале функции OnInit() вашего wxApp:
+    std::locale::global(std::locale(""));  // Установка системной локали
+    setlocale(LC_ALL, "");
+
     if (!wxApp::OnInit())
     {
         return false;
