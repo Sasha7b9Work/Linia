@@ -18,4 +18,8 @@ private:
     void SetTitlesColumn();
 
     void SetAutoSizeColumns();
+
+    void Fill();
+
+    void AppendLine(const wxString &, const wxString &, const wxString &);
 };

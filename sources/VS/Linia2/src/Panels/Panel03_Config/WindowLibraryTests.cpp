@@ -23,9 +23,11 @@ WindowLibraryTests::WindowLibraryTests() :
     sizer->Add(grid, 1, wxEXPAND | wxALL, 5);
     SetSizer(sizer);
 
-    Layout();
+    wxTopLevelWindowBase::Layout();
 
     SetAutoSizeColumns();
+
+    Fill();
 }
 
 
@@ -47,4 +49,22 @@ void WindowLibraryTests::SetAutoSizeColumns()
     {
         grid->SetColSize(col, colWidth);
     }
+}
+
+
+void WindowLibraryTests::Fill()
+{
+    AppendLine("1", "IdVd_IRF840.tst", "Выходная характеристика");
+}
+
+
+void WindowLibraryTests::AppendLine(const wxString &c0, const wxString &c1, const wxString &c2)
+{
+    grid->AppendRows(1);
+
+    int row = grid->GetNumberRows() - 1;
+
+    grid->SetCellValue(row, 0, c0);
+    grid->SetCellValue(row, 1, c1);
+    grid->SetCellValue(row, 2, c2);
 }
