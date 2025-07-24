@@ -14,9 +14,21 @@ PanelTable::PanelTable(wxWindow* parent) :
 {
     self = this;
 
+    {
+        titles_columns.Add(_L("Точка"));
+        titles_columns.Add("Uc, V");
+        titles_columns.Add("Ic, A");
+        titles_columns.Add("Ib, A");
+        titles_columns.Add(" ");
+    }
+
     grid = new wxGrid(this, wxID_ANY);
 
-    grid->CreateGrid(50, 10);
+    grid->SetRowLabelSize(0);
+
+    grid->CreateGrid(50, 5);
+
+    SetTitlesColumn();
 
     grid->SetScrollRate(10, 10);
 
@@ -28,4 +40,28 @@ PanelTable::PanelTable(wxWindow* parent) :
     SetSizer(sizer);
 
     Layout();
+
+    SetAutoSizeColumns();
+}
+
+
+void PanelTable::SetTitlesColumn()
+{
+    for (uint i = 0; i < 5; i++)
+    {
+        grid->SetColLabelValue((int)i, titles_columns[i]);
+    }
+}
+
+
+void PanelTable::SetAutoSizeColumns()
+{
+    int gridWidth = grid->GetClientSize().GetWidth();
+    int colsCount = grid->GetNumberCols();
+    int colWidth = (gridWidth - grid->GetRowLabelSize()) / colsCount;
+
+    for (int col = 0; col < colsCount; ++col)
+    {
+        grid->SetColSize(col, colWidth);
+    }
 }

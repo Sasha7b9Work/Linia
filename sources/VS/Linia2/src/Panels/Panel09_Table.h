@@ -18,4 +18,10 @@ public:
 private:
 
     wxGrid *grid;
+
+    wxArrayString titles_columns;
+
+    void SetTitlesColumn();
+
+    void SetAutoSizeColumns();
 };
