@@ -110,7 +110,7 @@ void PanelScale::CreatePanelScale(wxPanel *panel, int x, int /*w*/)
 
     x += 5;
 
-    int y = 10;
+    int y = 20;
     int dy = 30;
 
     new wxToggleButton(panel, ID_PAN10_BTN_1, "", { x, SD::Y_SB(y) }, size);
