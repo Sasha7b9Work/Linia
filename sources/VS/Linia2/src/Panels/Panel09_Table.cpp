@@ -1,4 +1,4 @@
-// 2025/6/1 18:08:43 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+ï»¿// 2025/6/1 18:08:43 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/Panel05_Graph/Panel05_Graph.h"
 #include "Panels/Panel09_Table.h"
@@ -15,7 +15,7 @@ PanelTable::PanelTable(wxWindow* parent) :
     self = this;
 
     {
-        titles_columns.Add(_L("Òî÷êà"));
+        titles_columns.Add(_L("Ð¢Ð¾Ñ‡ÐºÐ°"));
         titles_columns.Add("Uc, V");
         titles_columns.Add("Ic, A");
         titles_columns.Add("Ib, A");
@@ -34,7 +34,7 @@ PanelTable::PanelTable(wxWindow* parent) :
 
     grid->AutoSizeColumns();
 
-    // Ðàçìåùàåì grid â sizer äëÿ ïðàâèëüíîãî ìàñøòàáèðîâàíèÿ
+    // Ð Ð°Ð·Ð¼ÐµÑ‰Ð°ÐµÐ¼ grid Ð² sizer Ð´Ð»Ñ Ð¿Ñ€Ð°Ð²Ð¸Ð»ÑŒÐ½Ð¾Ð³Ð¾ Ð¼Ð°ÑÑˆÑ‚Ð°Ð±Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
     sizer->Add(grid, 1, wxEXPAND | wxALL, 5);
     SetSizer(sizer);
