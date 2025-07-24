@@ -1,4 +1,4 @@
-// 2025/6/1 18:17:45 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/6/1 18:17:45 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Panels/Panel.h"
 
@@ -15,12 +15,12 @@ private:
 
     void OnEventButton(wxCommandEvent &);
 
-    // Отщёлкнуть все, кроме id
+    // РћС‚С‰С‘Р»РєРЅСѓС‚СЊ РІСЃРµ, РєСЂРѕРјРµ id
     void UncheckAllAcross(int id);
 
     void EnablePanel(int button_id);
 
-    // Структура хранит кнопку и панель, которую та включает
+    // РЎС‚СЂСѓРєС‚СѓСЂР° С…СЂР°РЅРёС‚ РєРЅРѕРїРєСѓ Рё РїР°РЅРµР»СЊ, РєРѕС‚РѕСЂСѓСЋ С‚Р° РІРєР»СЋС‡Р°РµС‚
     struct StructPanel
     {
         wxToggleButton *button;

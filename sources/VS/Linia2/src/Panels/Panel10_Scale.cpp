@@ -1,4 +1,4 @@
-// 2025/6/1 18:18:16 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/6/1 18:18:16 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/Panel03_Config.h"
 #include "Panels/Panel07_Indicator.h"
@@ -19,14 +19,14 @@ PanelScale::PanelScale(wxWindow* parent) :
 
     Bind(wxEVT_TOGGLEBUTTON, &PanelScale::OnEventButton, this);
 
-    wxToggleButton *button = new wxToggleButton(this, ID_PAN10_BTN_SCALE, _L("Шкала"), { 0, 0 }, { 60, 20 });
+    wxToggleButton *button = new wxToggleButton(this, ID_PAN10_BTN_SCALE, _L("РЁРєР°Р»Р°"), { 0, 0 }, { 60, 20 });
     str_panels.push_back({ button, nullptr });
 
-    button = new wxToggleButton(this, ID_PAN10_BTN_ERRORS, _L("Ошибки"), { 60, 0 }, { 60, 20 });
+    button = new wxToggleButton(this, ID_PAN10_BTN_ERRORS, _L("РћС€РёР±РєРё"), { 60, 0 }, { 60, 20 });
     str_panels.push_back({ button, nullptr });
 
     {
-        // Включаем панель
+        // Р’РєР»СЋС‡Р°РµРј РїР°РЅРµР»СЊ
 
         int id = ID_PAN10_BTN_SCALE;
 
