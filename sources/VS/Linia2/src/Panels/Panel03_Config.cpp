@@ -347,7 +347,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
 }
 
 
-void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int w)
+void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
 {
     const int width_category = 70;
 

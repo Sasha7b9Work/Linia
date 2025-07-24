@@ -17,6 +17,7 @@
 #include <wx/graphics.h>
 #include <wx/colordlg.h>
 #include <wx/aui/aui.h>
+#include <wx/grid.h>
 #include <map>
 #include <queue>
 #include <mutex>

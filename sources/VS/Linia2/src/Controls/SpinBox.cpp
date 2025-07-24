@@ -3,7 +3,7 @@
 #include "Controls/SpinBox.h"
 
 
-SpinBox::SpinBox(wxWindow *parent, int id, pchar text, const wxPoint &position, const wxSize &size) :
+SpinBox::SpinBox(wxWindow *parent, int /*id*/, pchar text, const wxPoint &position, const wxSize &size) :
     wxPanel(parent, wxID_ANY, position, size)
 {
     const int width_btn = 10;

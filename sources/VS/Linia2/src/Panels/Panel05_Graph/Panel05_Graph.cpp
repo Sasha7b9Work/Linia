@@ -12,13 +12,13 @@ wxBitmap PanelGraph::bitmap(WIDTH, HEIGHT);
 
 PanelGraph *PanelGraph::self = nullptr;
 
-static const int width_button = 130;
-static const int height_button = 72;
-static const int y_button = 405;
-static const int x_wave = 9;
-static const int y_wave = 10;
-static const int width_wave = 390;
-static const int height_wave = 196;
+//static const int width_button = 130;
+//static const int height_button = 72;
+//static const int y_button = 405;
+//static const int x_wave = 9;
+//static const int y_wave = 10;
+//static const int width_wave = 390;
+//static const int height_wave = 196;
 
 
 PanelGraph::PanelGraph(wxWindow *parent) :
