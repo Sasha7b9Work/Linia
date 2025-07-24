@@ -7,6 +7,9 @@ class PanelScale : public Panel
 {
 public:
 
+    static const int WIDTH = MainWindow::WIDTH3;
+    static const int HEIGTH = MainWindow::HEIGHT - PanelConfig::HEIGHT - PanelIndicator::HEIGHT;
+
     PanelScale(wxWindow *parent);
 
     static PanelScale *self;
@@ -28,4 +31,10 @@ private:
     };
 
     std::vector<StructPanel> str_panels;
+
+    wxPanel *CreatePanel(wxToggleButton *);
+
+    void CreatePanelScale(wxPanel *, int x, int w);
+
+    void CreatePanelErrors(wxPanel *, int x, int w);
 };
