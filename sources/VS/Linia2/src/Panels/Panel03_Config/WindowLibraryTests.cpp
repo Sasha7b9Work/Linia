@@ -6,7 +6,17 @@
 WindowLibraryTests::WindowLibraryTests() :
     wxDialog(nullptr, wxID_ANY, _L("Библиотека пользовательских тестов"), wxDefaultPosition, {WIDTH, HEIGHT})
 {
-    grid = new wxGrid(this, wxID_ANY);
+    Layout();
+
+    wxSize size = GetClientSize();
+
+    wxPanel *panel = new wxPanel(this, wxID_ANY, { 0, 0 }, { size.x - 50, size.y });
+
+    panel->Layout();
+
+    size = panel->GetSize();
+
+    grid = new wxGrid(panel, wxID_ANY);
 
     grid->EnableEditing(false);
 
@@ -23,11 +33,15 @@ WindowLibraryTests::WindowLibraryTests() :
     // Размещаем grid в sizer для правильного масштабирования
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
     sizer->Add(grid, 1, wxEXPAND | wxALL, 5);
-    SetSizer(sizer);
+    panel->SetSizer(sizer);
 
     wxTopLevelWindowBase::Layout();
 
     SetAutoSizeColumns();
+
+    size = panel->GetSize();
+
+    wxSize s = grid->GetSize();
 
     Fill();
 
