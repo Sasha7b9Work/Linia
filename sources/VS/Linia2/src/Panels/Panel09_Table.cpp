@@ -24,6 +24,11 @@ PanelTable::PanelTable(wxWindow* parent) :
 
     grid = new wxGrid(this, wxID_ANY);
 
+    grid->EnableEditing(false);
+    grid->EnableGridLines(false);
+    grid->EnableDragCell(false);
+    grid->EnableCellEditControl(false);
+
     grid->SetRowLabelSize(0);
 
     grid->CreateGrid(0, 5);
@@ -50,6 +55,8 @@ PanelTable::PanelTable(wxWindow* parent) :
     }
 
     UpdateLines();
+
+    grid->SetSelectionMode(wxGrid::wxGridSelectNone);
 }
 
 

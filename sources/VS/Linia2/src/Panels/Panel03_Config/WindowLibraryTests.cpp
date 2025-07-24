@@ -30,6 +30,8 @@ WindowLibraryTests::WindowLibraryTests() :
     SetAutoSizeColumns();
 
     Fill();
+
+    grid->SetSelectionMode(wxGrid::wxGridSelectNone);
 }
 
 
