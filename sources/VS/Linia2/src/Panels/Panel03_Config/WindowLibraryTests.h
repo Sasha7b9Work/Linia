@@ -6,12 +6,16 @@ class WindowLibraryTests : public wxDialog
 {
 public:
 
-    static const int WIDTH = 00;
+    static const int WIDTH = 600;
     static const int HEIGHT = 450;
 
     WindowLibraryTests();
 
 private:
 
+    wxGrid *grid = nullptr;
+
     void SetTitlesColumn();
+
+    void SetAutoSizeColumns();
 };
