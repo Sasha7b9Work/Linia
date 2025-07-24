@@ -27,11 +27,5 @@ PanelTable::PanelTable(wxWindow* parent) :
     sizer->Add(grid, 1, wxEXPAND | wxALL, 5);
     SetSizer(sizer);
 
-    SetSize(WIDTH, HEIGHT);
-
-    grid->SetMinSize(GetClientSize());
-    grid->SetSize(GetClientSize());
-    grid->Fit();
-    grid->SetMinSize(grid->GetSize());
-
+    Layout();
 }
