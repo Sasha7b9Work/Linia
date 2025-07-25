@@ -66,11 +66,11 @@ void PanelGraph::OnMouseMove(wxMouseEvent &event)
 
         if (event.GetModifiers() == wxMOD_CONTROL)
         {
-            grid.MoveMeasuresOn(delta);
+            grid.MoveGridOn(delta);
         }
         else
         {
-            grid.MoveGridOn(delta);
+            grid.MoveMeasuresOn(delta);
         }
 
         pos_mouse_down = position;

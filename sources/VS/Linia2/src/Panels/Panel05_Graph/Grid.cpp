@@ -264,15 +264,17 @@ void Grid::MoveMeasuresOn(const wxPoint &delta)
 {
     double units_on_pixel = UnitsInCellX() / SizeCell();
 
-    double delta_x = delta.x * units_on_pixel;
+    double delta_x = -delta.x * units_on_pixel;
 
     WindowScale::rangeX += delta_x;
 
     units_on_pixel = UnitsInCellY() / SizeCell();
 
-    double delta_y = -delta.y * units_on_pixel;
+    double delta_y = delta.y * units_on_pixel;
 
     WindowScale::rangeY += delta_y;
+
+    center += delta;
 }
 
 
