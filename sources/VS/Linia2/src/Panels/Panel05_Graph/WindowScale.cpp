@@ -130,7 +130,7 @@ wxString WindowScale::FullTitleX()
 }
 
 
-wxString WindowScale::GetValuePointAxisX(int num)
+wxString WindowScale::Range::GetValuePointAxis(int num) const
 {
     double step = rangeX.Amplitude() / 10.0;   // По горизонтали всегда 10 клеток
 
@@ -147,35 +147,6 @@ wxString WindowScale::GetValuePointAxisX(int num)
         step *= 1e3;
     }
     else if (rangeX.MaxAbs() >= 1e-6)
-    {
-        step *= 1e6;
-    }
-    else
-    {
-        step *= 1e9;
-    }
-
-    return wxString::Format("%.1f", step * num);
-}
-
-
-wxString WindowScale::GetValuePointAxisY(int num)
-{
-    double step = rangeY.Amplitude() / 10.0;
-
-    if (rangeY.MaxAbs() >= 1e3)
-    {
-        step /= 1e3;
-    }
-    else if (rangeY.MaxAbs() >= 1)
-    {
-
-    }
-    else if (rangeY.MaxAbs() >= 1e-3)
-    {
-        step *= 1e3;
-    }
-    else if (rangeY.MaxAbs() >= 1e-6)
     {
         step *= 1e6;
     }

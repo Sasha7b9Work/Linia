@@ -22,6 +22,8 @@ public:
 
         // Разница между максимальным и минимальным значениями - амплитуда
         double Amplitude() const;
+
+        wxString GetValuePointAxis(int) const;
     };
 
     static Range rangeX;
@@ -31,10 +33,6 @@ public:
     static wxString unitsX;
 
     static wxString FullTitleX();
-
-    static wxString GetValuePointAxisX(int);
-
-    static wxString GetValuePointAxisY(int);
 
 private:
 

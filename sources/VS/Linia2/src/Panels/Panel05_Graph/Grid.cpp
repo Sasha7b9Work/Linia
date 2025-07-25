@@ -108,11 +108,11 @@ void Grid::DrawLabelsOnAxis() const
 
             if (BottomY() < PanelGraph::HEIGHT)
             {
-                Text(WindowScale::GetValuePointAxisX(i)).DrawAboutCenterDown(coord.x, coord.y + d);
+                Text(WindowScale::rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, coord.y + d);
             }
             else
             {
-                Text(WindowScale::GetValuePointAxisX(i)).DrawAboutCenterDown(coord.x, PanelGraph::HEIGHT - 25, true, *wxWHITE);
+                Text(WindowScale::rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, PanelGraph::HEIGHT - 25, true, *wxWHITE);
             }
         }
     }
@@ -126,11 +126,11 @@ void Grid::DrawLabelsOnAxis() const
 
             if (LeftX() > 0)
             {
-                Text(WindowScale::GetValuePointAxisY(i)).DrawAboutCenterLeft(coord.x - d, coord.y);
+                Text(WindowScale::rangeY.GetValuePointAxis(i)).DrawAboutCenterLeft(coord.x - d, coord.y);
             }
             else
             {
-                Text(WindowScale::GetValuePointAxisY(i)).DrawAboutCenterRigth(0 + d, coord.y, true, *wxWHITE);
+                Text(WindowScale::rangeY.GetValuePointAxis(i)).DrawAboutCenterRigth(0 + d, coord.y, true, *wxWHITE);
             }
         }
     }
