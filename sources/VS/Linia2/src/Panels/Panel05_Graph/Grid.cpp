@@ -118,7 +118,7 @@ void Grid::DrawLabelsOnAxis() const
     }
 
     {
-        Text(titleY).DrawAboutCenterLeft(LeftX() - 30, center.y);
+        Text(WindowScale::rangeY.FullTitle()).DrawAboutCenterLeft(LeftX() - 30, center.y);
 
         for (int i = -4; i < 6; i++)
         {

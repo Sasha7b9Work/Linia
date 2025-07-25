@@ -30,9 +30,6 @@ private:
     int scale = 1;      // 2 - увеличено в два раза, 3 - увелично в три и так далее
     int num_cells = 10;
 
-    wxString titleY{ "Ic" };
-    wxString unitsY{ "A" };
-
     wxPoint pos_mouse;
 
     void DrawVPointLine(int x, int y, int d, int height);
