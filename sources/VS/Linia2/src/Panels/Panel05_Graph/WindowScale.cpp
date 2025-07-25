@@ -128,21 +128,21 @@ wxString WindowScale::Range::FullTitle() const
 
 wxString WindowScale::Range::GetValuePointAxis(int num) const
 {
-    double step = rangeX.Amplitude() / 10.0;   // По горизонтали всегда 10 клеток
+    double step = Amplitude() / 10.0;   // По горизонтали всегда 10 клеток
 
-    if (rangeX.MaxAbs() >= 1e3)
+    if (MaxAbs() >= 1e3)
     {
         step /= 1e3;
     }
-    else if (rangeX.MaxAbs() >= 1)
+    else if (MaxAbs() >= 1)
     {
 
     }
-    else if (rangeX.MaxAbs() >= 1e-3)
+    else if (MaxAbs() >= 1e-3)
     {
         step *= 1e3;
     }
-    else if (rangeX.MaxAbs() >= 1e-6)
+    else if (MaxAbs() >= 1e-6)
     {
         step *= 1e6;
     }
