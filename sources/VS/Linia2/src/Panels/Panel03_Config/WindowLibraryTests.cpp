@@ -1,6 +1,7 @@
 ﻿// 2025/7/24 22:48:16 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/Panel03_Config/WindowLibraryTests.h"
+#include "Utils/SystemDepend.h"
 
 
 WindowLibraryTests::WindowLibraryTests() :
@@ -39,9 +40,26 @@ WindowLibraryTests::WindowLibraryTests() :
 
         wxPanel *rightPanel = new wxPanel(this, wxID_ANY, { WIDTH - dw, 0 }, size, wxTAB_TRAVERSAL | wxSUNKEN_BORDER);
 
-        new wxButton(rightPanel, wxID_ANY, "Кнопка 1", { 10, 10 });
-        new wxButton(rightPanel, wxID_ANY, "Кнопка 2", { 10, 50 });
-        new wxButton(rightPanel, wxID_ANY, "Кнопка 3", { 10, 90 });
+        wxStaticBox *box1 = new wxStaticBox(rightPanel, wxID_ANY, _L("Категория"), { 0, 0 }, {size.x, 100});
+
+        {
+            wxArrayString choices;
+            choices.Add("NMOS");
+
+            new wxComboBox(box1, ID_LUT_COMBO, choices[0], { 10, SD::Y_SB(20) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        }
+
+        wxStaticBox *box2 = new wxStaticBox(rightPanel, wxID_ANY, _L("Тест"), { 0, 150 }, { size.x, 300 });
+
+        {
+            int y0 = 20;
+
+            int dy = 40;
+
+            new wxButton(box2, ID_LUT_BTN_LOAD, "Кнопка 1", { 10, SD::Y_SB(y0) });
+            new wxButton(box2, ID_LUT_BTN_DELETE, "Кнопка 2", { 10, SD::Y_SB(y0 + dy) });
+            new wxButton(box2, LD_LUT_BTN_DELETE_ALL, "Кнопка 3", { 10, SD::Y_SB(y0 + dy * 2) });
+        }
     }
 
     // Устанавливаем минимальный размер окна
