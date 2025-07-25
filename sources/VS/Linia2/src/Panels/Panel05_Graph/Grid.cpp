@@ -100,7 +100,7 @@ void Grid::DrawLabelsOnAxis() const
     int d = 2;
 
     {
-        Text(WindowScale::FullTitleX()).DrawAboutCenterDown(center.x, BottomY() + 25);
+        Text(WindowScale::rangeX.FullTitle()).DrawAboutCenterDown(center.x, BottomY() + 25);
 
         for (int i = -4; i < 6; i++)
         {

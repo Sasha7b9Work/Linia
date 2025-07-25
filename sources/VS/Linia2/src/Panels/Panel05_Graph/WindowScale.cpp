@@ -4,12 +4,8 @@
 #include "Panels/Panel05_Graph/WindowScale.h"
 
 
-WindowScale::Range WindowScale::rangeX{ -20.0, 20.0 };
-WindowScale::Range WindowScale::rangeY{ -5.0, 5.0 };
-
-
-wxString WindowScale::titleX{ "Uc" };
-wxString WindowScale::unitsX{ "V" };
+WindowScale::Range WindowScale::rangeX{ -20.0, 20.0, "Uc", "V"};
+WindowScale::Range WindowScale::rangeY{ -5.0, 5.0, "Ic", "A"};
 
 
 WindowScale::WindowScale() :
@@ -101,32 +97,32 @@ double WindowScale::Range::Amplitude() const
 }
 
 
-wxString WindowScale::FullTitleX()
+wxString WindowScale::Range::FullTitle() const
 {
     wxString prefix;
 
-    if (rangeX.MaxAbs() >= 1e3)
+    if (MaxAbs() >= 1e3)
     {
         prefix = "k";
     }
-    else if (rangeX.MaxAbs() >= 1.0)
+    else if (MaxAbs() >= 1.0)
     {
 
     }
-    else if (rangeX.MaxAbs() >= 1e-3)
+    else if (MaxAbs() >= 1e-3)
     {
         prefix = "m";
     }
-    else if (rangeX.MaxAbs() >= 1e-6)
+    else if (MaxAbs() >= 1e-6)
     {
         prefix = "u";
     }
-    else if (rangeX.MaxAbs() >= 1e-9)
+    else if (MaxAbs() >= 1e-9)
     {
         prefix = "n";
     }
 
-    return titleX + "," + prefix + unitsX;
+    return title + "," + prefix + units;
 }
 
 

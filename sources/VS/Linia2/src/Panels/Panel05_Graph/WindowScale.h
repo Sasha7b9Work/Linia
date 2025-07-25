@@ -17,6 +17,9 @@ public:
         double min;
         double max;
 
+        wxString title;
+        wxString units;
+
         // Возвращает максимальное отклонение от нуля в минимальную или максимальную сторону
         double MaxAbs() const;
 
@@ -24,15 +27,12 @@ public:
         double Amplitude() const;
 
         wxString GetValuePointAxis(int) const;
+
+        wxString FullTitle() const;
     };
 
     static Range rangeX;
     static Range rangeY;
-
-    static wxString titleX;
-    static wxString unitsX;
-
-    static wxString FullTitleX();
 
 private:
 
