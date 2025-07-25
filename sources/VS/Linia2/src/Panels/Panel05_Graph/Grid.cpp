@@ -3,6 +3,7 @@
 #include "Panels/Panel05_Graph/Grid.h"
 #include "Panels/Panel05_Graph/Panel05_Graph.h"
 #include "Panels/Panel05_Graph/WindowScale.h"
+#include "Utils/Math.h"
 #include <algorithm>
 
 
@@ -114,17 +115,23 @@ void Grid::DrawLabelsOnAxis() const
     {
         Text(WindowScale::rangeX.FullTitle()).DrawAboutCenterDown(center.x, BottomY() + 25);
 
-        for (int i = -4; i < 6; i++)
+        for (int i = -100; i < 100; i++)
         {
             wxPoint coord = GetCoordPointAxisX(i);
 
             if (BottomY() < PanelGraph::HEIGHT)
             {
-                Text(WindowScale::rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, coord.y + d);
+                if (Math::InRange(coord.x, LeftX() + 1, RightX()))
+                {
+                    Text(WindowScale::rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, coord.y + d);
+                }
             }
             else
             {
-                Text(WindowScale::rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, PanelGraph::HEIGHT - 25, true, *wxWHITE);
+                if (Math::InRange(coord.x, LeftX() + 1, RightX()))
+                {
+                    Text(WindowScale::rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, PanelGraph::HEIGHT - 25, true, *wxWHITE);
+                }
             }
         }
     }
@@ -132,17 +139,23 @@ void Grid::DrawLabelsOnAxis() const
     {
         Text(WindowScale::rangeY.FullTitle()).DrawAboutCenterLeft(LeftX() - 30, center.y);
 
-        for (int i = -4; i < 6; i++)
+        for (int i = -100; i < 100; i++)
         {
             wxPoint coord = GetCoordPointAxisY(-i);
 
             if (LeftX() > 0)
             {
-                Text(WindowScale::rangeY.GetValuePointAxis(i)).DrawAboutCenterLeft(coord.x - d, coord.y);
+                if (Math::InRange(coord.y, TopY(), BottomY() - 1))
+                {
+                    Text(WindowScale::rangeY.GetValuePointAxis(i)).DrawAboutCenterLeft(coord.x - d, coord.y);
+                }
             }
             else
             {
-                Text(WindowScale::rangeY.GetValuePointAxis(i)).DrawAboutCenterRigth(0 + d, coord.y, true, *wxWHITE);
+                if (Math::InRange(coord.y, TopY(), BottomY() - 1))
+                {
+                    Text(WindowScale::rangeY.GetValuePointAxis(i)).DrawAboutCenterRigth(0 + d, coord.y, true, *wxWHITE);
+                }
             }
         }
     }
