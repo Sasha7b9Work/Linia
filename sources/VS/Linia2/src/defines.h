@@ -17,6 +17,7 @@
 #include <wx/graphics.h>
 #include <wx/colordlg.h>
 #include <wx/aui/aui.h>
+#include <wx/msgdlg.h>
 #include <wx/grid.h>
 #include <map>
 #include <queue>
@@ -252,5 +253,7 @@ enum
     ID_SCALE_SPIN_ACCURACY,
     ID_SCALE_COMBO,
     ID_SCALE_BTN_APPLY,
-    ID_SCALE_BTN_CAN
+    ID_SCALE_BTN_CAN,
+
+    ID_GRID_BUTTON
 };

@@ -278,7 +278,7 @@ void Grid::MoveMeasuresOn(const wxPoint &delta)
 }
 
 
-void Grid::ScaleMeasuresOn(const wxPoint &pos, int delta)
+void Grid::ScaleMeasuresOn(const wxPoint &, int delta)
 {
     if (delta < 0)
     {

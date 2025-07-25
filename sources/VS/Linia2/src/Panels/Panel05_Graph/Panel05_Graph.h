@@ -62,6 +62,7 @@ private:
     void OnMouseUp(wxMouseEvent &);
 
     void OnMouseWheel(wxMouseEvent &);
+    void OnEventButton(wxCommandEvent &);
 
     void OnMenuReset(wxCommandEvent &);
     void OnMenuFullScreen(wxCommandEvent &);

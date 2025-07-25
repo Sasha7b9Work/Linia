@@ -3,6 +3,7 @@
 #include "Panels/Panel05_Graph/Panel05_Graph.h"
 #include "MainWindow.h"
 #include "Panels/Panel05_Graph/WindowScale.h"
+#include "Utils/SystemDepend.h"
 #include <string>
 #include <map>
 #include <algorithm>
@@ -25,8 +26,10 @@ PanelGraph::PanelGraph(wxWindow *parent) :
     Bind(wxEVT_LEFT_UP, &PanelGraph::OnMouseUp, this);
     Bind(wxEVT_MOTION, &PanelGraph::OnMouseMove, this);
     Bind(wxEVT_MOUSEWHEEL, &PanelGraph::OnMouseWheel, this);
-
     Bind(wxEVT_RIGHT_DOWN, &PanelGraph::OnRightClick, this);
+    Bind(wxEVT_BUTTON, &PanelGraph::OnEventButton, this);
+
+    new wxButton(this, ID_GRID_BUTTON, "?", { 10, SD::Y_SB(10) }, { 30, 30 });
 
     CreateEntities();
 
@@ -96,6 +99,16 @@ void PanelGraph::OnMouseWheel(wxMouseEvent &event)
     }
 
     Draw();
+}
+
+
+void PanelGraph::OnEventButton(wxCommandEvent &event)
+{
+    if (event.GetId() == ID_GRID_BUTTON)
+    {
+        wxMessageBox("Левая Кнопка Мыши - перемещение графика.\nКолёсико - масштаб графика.\n"
+            "ЛКМ+Ctrl - перемещение сетки.\nКолёсико+Ctrl - масштаб сетки.", " ");
+    }
 }
 
 
