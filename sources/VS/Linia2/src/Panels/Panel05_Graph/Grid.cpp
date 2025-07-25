@@ -30,7 +30,7 @@ int Grid::BottomY() const
 
 int Grid::TopY() const
 {
-    return center.y - SizeCell() * num_cells / 2;
+    return center.y - (int)(WindowScale::rangeY.max / UnitsInCellY() * SizeCell());
 }
 
 
@@ -42,7 +42,7 @@ int Grid::LengthAxis() const
 
 int Grid::LeftX() const
 {
-    return center.x - SizeCell() * num_cells / 2;
+    return center.x + (int)(WindowScale::rangeX.min / UnitsInCellX() * SizeCell());
 }
 
 
@@ -60,34 +60,36 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
     const int x_left = LeftX();
     const int y_top = TopY();
 
-    for (int i = 0; i < 3; i++)
     {
-        int x = center.x - size_cell * num_cells / 2;
-        int y = center.y + (i - 1) * (num_cells / 2 * size_cell);
-        Line(x, y, x + num_cells * size_cell, y).Draw(*wxBLACK);
+        // Горизонтальные линии
+        Line(x_left, y_top, RightX(), y_top).Draw(*wxBLACK);
 
-        x = center.x + (i - 1) * (num_cells / 2 * size_cell);
-        y = center.y - size_cell * num_cells / 2;
+        Line(x_left, center.y, RightX(), center.y).Draw();
 
-        Line(x, y, x, y + num_cells * size_cell).Draw();
+        Line(x_left, BottomY(), RightX(), BottomY()).Draw();
+
+        // Вертикальные линии
+        Line(x_left, y_top, x_left, BottomY()).Draw();
+
+        Line(center.x, y_top, center.x, BottomY()).Draw();
+
+        Line(RightX(), y_top, RightX(), BottomY()).Draw();
     }
 
-    int d = 8 * scale;
+    int d = 4 * scale;
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 1; i < 10; i++)
     {
-        DrawVPointLine(x_left + i + 1, y_top, d, length);
-        DrawHPointLine(x_left, y_top + num_cells * size_cell - i - 1, d, length);
+        DrawVPointLine(x_left + i * size_cell, y_top, d, length);
+        DrawHPointLine(x_left, y_top + i * size_cell, d, length);
     }
 
-    d = 4 * scale;
+    d = 8 * scale;
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 1; i < 3; i++)
     {
-        DrawVPointLine(x_left + (i + 1) * size_cell, y_top, d, length);
-        DrawVPointLine(center.x + (i + 1) * size_cell, y_top, d, length);
-        DrawHPointLine(x_left, y_top + (i + 1) * size_cell, d, length);
-        DrawHPointLine(x_left, center.y + (i + 1) * size_cell, d, length);
+        DrawVPointLine(x_left + i, y_top, d, length);
+        DrawHPointLine(x_left, BottomY() - i, d, length);
     }
 
     for (auto *entity : entities)
