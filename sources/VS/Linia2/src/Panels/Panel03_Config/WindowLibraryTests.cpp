@@ -38,7 +38,7 @@ WindowLibraryTests::WindowLibraryTests() :
         grid->EnableGridLines(false);
         grid->EnableDragCell(false);
         grid->EnableCellEditControl(false);
-        grid->SetSelectionMode(wxGrid::wxGridSelectNone);
+        grid->SetSelectionMode(wxGrid::wxGridSelectRows);
         grid->SetCellHighlightPenWidth(0);
         grid->SetCellHighlightROPenWidth(0);
     }
