@@ -20,7 +20,7 @@ WindowScale::WindowScale() :
 
     new wxStaticText(this, wxID_ANY, _L("Точность"), { d, y });
 
-    new wxSpinButton(this, wxID_ANY, { 100, y });
+    new wxSpinButton(this, wxID_ANY, { 100, y }, wxDefaultSize, wxSP_VERTICAL);
 }
 
 
