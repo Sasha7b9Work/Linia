@@ -29,7 +29,7 @@ PanelGraph::PanelGraph(wxWindow *parent) :
     Bind(wxEVT_RIGHT_DOWN, &PanelGraph::OnRightClick, this);
     Bind(wxEVT_BUTTON, &PanelGraph::OnEventButton, this);
 
-    new wxButton(this, ID_GRID_BUTTON, "?", { 10, SD::Y_SB(10) }, { 30, 30 });
+    new wxButton(this, ID_GRID_BUTTON, "?", { 10, 10 }, { 30, 30 });
 
     CreateEntities();
 
