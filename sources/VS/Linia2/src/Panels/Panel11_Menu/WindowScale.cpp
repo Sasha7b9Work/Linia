@@ -20,7 +20,17 @@ WindowScale::WindowScale() :
 
     new wxStaticText(this, wxID_ANY, _L("Точность"), { d, y });
 
-    new wxSpinButton(this, wxID_ANY, { 100, y }, wxDefaultSize, wxSP_WRAP);
+    new wxSpinCtrl(this, wxID_ANY, "", { 100, y }, { 70, TEXTCNTRL_HEIGHT});
+
+    y += 50;
+
+    new wxStaticText(this, wxID_ANY, _L("Число точек 1-ой очереди"), { d, y });
+
+    wxArrayString choices;
+    choices.Add("20");
+    choices.Add("50");
+
+    new wxComboBox(this, ID_SCALE_COMBO, choices[0], { 200, y }, { 70, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 }
 
 
