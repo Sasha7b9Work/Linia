@@ -278,13 +278,28 @@ void Grid::MoveMeasuresOn(const wxPoint &delta)
 }
 
 
+void Grid::ScaleMeasuresOn(const wxPoint &pos, int delta)
+{
+    if (delta < 0)
+    {
+        WindowScale::rangeX *= 1.5;
+        WindowScale::rangeY *= 1.5;
+    }
+    else
+    {
+        WindowScale::rangeX *= 1 / 1.5;
+        WindowScale::rangeY *= 1 / 1.5;
+    }
+}
+
+
 int Grid::SizeCell() const
 {
     return 40 * scale;
 }
 
 
-void Grid::ScaleOn(const wxPoint &pos, int delta)
+void Grid::ScaleGridOn(const wxPoint &pos, int delta)
 {
     wxPoint delta_center = center - pos;
 

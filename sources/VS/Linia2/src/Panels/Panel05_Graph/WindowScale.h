@@ -31,6 +31,7 @@ public:
         wxString FullTitle() const;
 
         void operator+=(double &);
+        void operator*=(const double &);
     };
 
     static Range rangeX;

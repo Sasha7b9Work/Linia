@@ -104,6 +104,13 @@ void WindowScale::Range::operator+=(double &delta)
 }
 
 
+void WindowScale::Range::operator*=(const double &delta)
+{
+    min *= delta;
+    max *= delta;
+}
+
+
 wxString WindowScale::Range::FullTitle() const
 {
     wxString prefix;

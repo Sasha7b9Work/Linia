@@ -21,7 +21,8 @@ public:
 
     void OnMouseMove(const wxPoint &);
 
-    void ScaleOn(const wxPoint &, int);
+    void ScaleGridOn(const wxPoint &, int);
+    void ScaleMeasuresOn(const wxPoint &, int);
 
     // Преобразует точку графика в координаты на холсте
     wxPoint ValuesToCoord(double x, double y) const;

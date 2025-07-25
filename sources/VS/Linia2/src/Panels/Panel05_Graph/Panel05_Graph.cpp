@@ -86,7 +86,14 @@ void PanelGraph::OnMouseMove(wxMouseEvent &event)
 
 void PanelGraph::OnMouseWheel(wxMouseEvent &event)
 {
-    grid.ScaleOn(event.GetPosition(), event.GetWheelRotation());
+    if (event.GetModifiers() == wxMOD_CONTROL)
+    {
+        grid.ScaleGridOn(event.GetPosition(), event.GetWheelRotation());
+    }
+    else
+    {
+        grid.ScaleMeasuresOn(event.GetPosition(), event.GetWheelRotation());
+    }
 
     Draw();
 }
