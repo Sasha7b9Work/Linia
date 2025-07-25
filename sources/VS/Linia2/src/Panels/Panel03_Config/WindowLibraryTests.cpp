@@ -10,11 +10,13 @@ WindowLibraryTests::WindowLibraryTests() :
     int dw = 200;
 
     {
-        wxSize size{ WIDTH - dw, HEIGHT };
+        int width = WIDTH - dw;
+
+        wxSize size{ width, HEIGHT };
 
         wxPanel *leftPanel = new wxPanel(this, wxID_ANY, { 0, 0 }, size, wxTAB_TRAVERSAL | wxSUNKEN_BORDER);
 
-        int width = WIDTH - dw;
+        leftPanel->SetSizeHints(width, HEIGHT, width, HEIGHT);
 
         grid = new wxGrid(leftPanel, wxID_ANY);
         grid->SetRowLabelSize(0);
@@ -29,7 +31,7 @@ WindowLibraryTests::WindowLibraryTests() :
         sizer->Add(grid, 1, wxEXPAND | wxALL, 5);
         leftPanel->SetSizer(sizer);
 
-        leftPanel->SetSizeHints(width, HEIGHT, width, HEIGHT);
+        leftPanel->Layout();
     }
 
     {
