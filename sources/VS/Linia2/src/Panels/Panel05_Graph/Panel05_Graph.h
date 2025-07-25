@@ -68,6 +68,7 @@ private:
     void OnMenuTrackX(wxCommandEvent &);
     void OnMenuTrackY(wxCommandEvent &);
     void OnMenuTrackNone(wxCommandEvent &);
+    void OnMenuScale(wxCommandEvent &);
 
     void FillRectangle(int x, int y, int width, int height, const wxColor &);
 

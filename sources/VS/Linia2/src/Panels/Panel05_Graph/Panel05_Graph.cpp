@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Panels/Panel05_Graph/Panel05_Graph.h"
 #include "MainWindow.h"
+#include "Panels/Panel11_Menu/WindowScale.h"
 #include <string>
 #include <map>
 #include <algorithm>
@@ -358,7 +359,7 @@ void PanelGraph::OnRightClick(wxMouseEvent &)
 
     // Добавляем пункты меню
     menu.Append(ID_MENU_GRAPH_RESET, _L("Сброс"));
-    menu.AppendCheckItem(ID_MENU_GRAPH_FULL_SCREEN, _L("Полный экран"));
+    menu.AppendCheckItem(ID_MENU_GRAPH_FULL_SCREEN, _L("Развернуть"));
 
     menu.AppendSeparator();
 
@@ -379,9 +380,12 @@ void PanelGraph::OnRightClick(wxMouseEvent &)
 
     menu.AppendSubMenu(subMenu, _L("Отслеживать"));
 
+    menu.AppendCheckItem(ID_MENU_GRAPH_SCALE, _L("Шкала"));
+
     Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackX, this, ID_MENU_GRAPH_TRACK_X);
     Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackY, this, ID_MENU_GRAPH_TRACK_Y);
     Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackNone, this, ID_MENU_GRAPH_TRACK_NONE);
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuScale, this, ID_MENU_GRAPH_SCALE);
 
     // Показываем меню в позиции клика
     PopupMenu(&menu);
@@ -430,6 +434,12 @@ void PanelGraph::OnMenuTrackNone(wxCommandEvent &event)
         track_y = false;
         track_none = true;
     }
+}
+
+
+void PanelGraph::OnMenuScale(wxCommandEvent &)
+{
+    WindowScale().ShowModal();
 }
 
 

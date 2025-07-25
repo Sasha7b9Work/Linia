@@ -43,9 +43,10 @@ typedef signed char        int8;
 
 extern wxConfigBase *g_config;
 extern wxFileConfig *g_file_config;
+
+static const int BUTTON_WIDTH = 165;
 static const int BUTTON_HEIGHT = 25;
 static const int TEXTCNTRL_HEIGHT = 21;
-static const int BUTTON_WIDTH = 165;
 
 union BitSet128
 {
@@ -235,6 +236,7 @@ enum
     ID_MENU_GRAPH_TRACK_X,
     ID_MENU_GRAPH_TRACK_Y,
     ID_MENU_GRAPH_TRACK_NONE,
+    ID_MENU_GRAPH_SCALE,
 
     // Библиотека пользовательсих тестов
     ID_LUT_COMBO,

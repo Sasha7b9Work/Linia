@@ -31,6 +31,14 @@ WindowScale::WindowScale() :
     choices.Add("50");
 
     new wxComboBox(this, ID_SCALE_COMBO, choices[0], { 200, y }, { 70, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+
+    y += 50;
+
+    wxSize size_button{ 100, BUTTON_HEIGHT };
+
+    new wxButton(this, ID_SCALE_BTN_APPLY, _L("Применить"), { 50, y }, size_button);
+
+    new wxButton(this, ID_SCALE_BTN_CAN, _L("Отмена"), { 150, y }, size_button);
 }
 
 
