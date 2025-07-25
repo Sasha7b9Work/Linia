@@ -4,7 +4,7 @@
 #include "Panels/Panel05_Graph/WindowScale.h"
 
 
-WindowScale::Range WindowScale::rangeX{ -20.0, 20.0, "Uc", "V"};
+WindowScale::Range WindowScale::rangeX{ -10.0, 30.0, "Uc", "V"};
 WindowScale::Range WindowScale::rangeY{ -5.0, 5.0, "Ic", "A"};
 
 

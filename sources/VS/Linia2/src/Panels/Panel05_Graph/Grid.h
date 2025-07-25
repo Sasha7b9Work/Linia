@@ -24,21 +24,28 @@ public:
 
     wxPoint2DDouble CoordToValues(const wxPoint &) const;
 
+    void CalculateCenter();
+
 private:
 
     wxPoint center;
     int scale = 1;      // 2 - увеличено в два раза, 3 - увелично в три и так далее
-    int num_cells = 10;
 
     wxPoint pos_mouse;
 
     void DrawVPointLine(int x, int y, int d, int height);
     void DrawHPointLine(int x, int y, int d, int width);
 
+    double UnitsInCellX() const;
+    double UnitsInCellY() const;
+
+    // Количество клеток в осях X и Y
+    int num_cells = 10;
+
     // Размер клетки в пикселях
     int SizeCell() const;
 
-    // Координаты точки оси x для подписи значения
+    // Координаты точки оси для подписи значения
     wxPoint GetCoordPointAxisX(int) const;
     wxPoint GetCoordPointAxisY(int) const;
 
@@ -47,6 +54,7 @@ private:
     int LeftX() const;
     int RightX() const;
 
+    // Длина оси в пикселях
     int LengthAxis() const;
 
     void DrawLabelsOnAxis() const;

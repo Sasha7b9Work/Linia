@@ -8,7 +8,17 @@
 
 Grid::Grid()
 {
-    center = { PanelGraph::WIDTH / 2, PanelGraph::HEIGHT / 2 };
+    CalculateCenter();
+}
+
+
+void Grid::CalculateCenter()
+{
+    center.x = PanelGraph::WIDTH / 2 + SizeCell() * 5                              // Перемещаемся к правой границе сетки
+        - (int)(WindowScale::rangeX.max / UnitsInCellX() * (double)SizeCell());     // И отсчитываем назад - влево
+
+    center.y = PanelGraph::HEIGHT / 2 - SizeCell() * 5
+        +(int)(WindowScale::rangeY.max / UnitsInCellY() * (double)SizeCell());
 }
 
 
@@ -195,6 +205,18 @@ void Grid::DrawHPointLine(int x, int y, int d, int width)
     {
         Point().Draw(i, y);
     }
+}
+
+
+double Grid::UnitsInCellX() const
+{
+    return WindowScale::rangeX.Amplitude() / num_cells;
+}
+
+
+double Grid::UnitsInCellY() const
+{
+    return WindowScale::rangeY.Amplitude() / num_cells;
 }
 
 
