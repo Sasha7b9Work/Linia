@@ -59,7 +59,9 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
     const int length = LengthAxis();
 
     const int x_left = LeftX();
+    const int x_right = RightX();
     const int y_top = TopY();
+    const int y_bottom = BottomY();
 
     {
         // Горизонтальные линии
@@ -79,10 +81,64 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
     int d = 4 * scale;
 
-    for (int i = 1; i < 10; i++)
+    // Рисуем вертикальные линии справа от нуля
+    for (int i = 1; i < 100; i++)
     {
-        DrawVPointLine(x_left + i * size_cell, y_top, d, length);
-        DrawHPointLine(x_left, y_top + i * size_cell, d, length);
+        int x = center.x + i * size_cell;
+
+        if (x < x_right)
+        {
+            DrawVPointLine(x, y_top, d, length);
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    // Рисуем вертикальные линии слева от нуля
+    for (int i = 1; i < 100; i++)
+    {
+        int x = center.x - i * size_cell;
+
+        if (x > x_left)
+        {
+            DrawVPointLine(x, y_top, d, length);
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    // Рисуем горизонтальные линии сверху от нуля
+    for (int i = 1; i < 100; i++)
+    {
+        int y = center.y - i * size_cell;
+
+        if (y > y_top)
+        {
+            DrawHPointLine(x_left, y, d, length);
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    // Рисуем горизонтальные линии снизу от нуля
+    for (int i = 1; i < 100; i++)
+    {
+        int y = center.y + i * size_cell;
+
+        if (y < y_bottom)
+        {
+            DrawHPointLine(x_left, y, d, length);
+        }
+        else
+        {
+            break;
+        }
     }
 
     d = 8 * scale;
