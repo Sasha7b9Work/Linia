@@ -12,9 +12,9 @@ WindowScale::WindowScale() :
 
     int d = 10;
 
-    wxStaticBox *boxScaleX = CreateBox(d, d, width, height, "X", "Ud, V", ID_SCALE_LINE_X_MIN, ID_SCALE_LINE_X_MAX);
+    CreateBox(d, d, width, height, "X", "Ud, V", ID_SCALE_LINE_X_MIN, ID_SCALE_LINE_X_MAX);
 
-    wxStaticBox *boxSclaeY = CreateBox(width + d * 2, d, width, height, "Y", "Id, mA", ID_SCALE_LINE_Y_MIN, ID_SCALE_LINE_Y_MAX);
+    CreateBox(width + d * 2, d, width, height, "Y", "Id, mA", ID_SCALE_LINE_Y_MIN, ID_SCALE_LINE_Y_MAX);
 }
 
 
