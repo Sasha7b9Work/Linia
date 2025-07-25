@@ -15,6 +15,12 @@ WindowScale::WindowScale() :
     CreateBox(d, d, width, height, "X", "Ud, V", ID_SCALE_LINE_X_MIN, ID_SCALE_LINE_X_MAX);
 
     CreateBox(width + d * 2, d, width, height, "Y", "Id, mA", ID_SCALE_LINE_Y_MIN, ID_SCALE_LINE_Y_MAX);
+
+    int y = height + d * 3;
+
+    new wxStaticText(this, wxID_ANY, _L("Точность"), { d, y });
+
+    new wxSpinButton(this, wxID_ANY, { 100, y });
 }
 
 
