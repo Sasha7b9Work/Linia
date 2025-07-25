@@ -31,7 +31,6 @@ private:
     int num_cells = 10;
 
     wxString titleY{ "Ic" };
-
     wxString unitsY{ "A" };
 
     wxPoint pos_mouse;
