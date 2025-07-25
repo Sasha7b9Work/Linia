@@ -4,9 +4,10 @@
 #include "Panels/Panel05_Graph/WindowScale.h"
 
 
-double WindowScale::minX = -10.0;
-double WindowScale::maxX = 30.0;
-double WindowScale::rangeY = 5.0;        // Размах в одну сторону от нуля
+double WindowScale::minX = -20.0;
+double WindowScale::maxX = 20.0;
+double WindowScale::minY = -5.0;
+double WindowScale::maxY = 5.0;
 
 
 wxString WindowScale::titleX{ "Uc" };
@@ -96,9 +97,24 @@ double WindowScale::MaxAbsX()
 }
 
 
+double WindowScale::MaxAbsY()
+{
+    double min = std::fabs(minY);
+    double max = std::fabs(maxY);
+
+    return (min > max) ? min : max;
+}
+
+
 double WindowScale::AmplitudeX()
 {
     return maxX - minX;
+}
+
+
+double WindowScale::AmplitudeY()
+{
+    return maxY - minY;
 }
 
 
@@ -162,21 +178,21 @@ wxString WindowScale::GetValuePointAxisX(int num)
 
 wxString WindowScale::GetValuePointAxisY(int num)
 {
-    double step = rangeY / 5.0;
+    double step = AmplitudeY() / 10.0;
 
-    if (rangeY >= 1e3)
+    if (MaxAbsY() >= 1e3)
     {
         step /= 1e3;
     }
-    else if (rangeY >= 1)
+    else if (MaxAbsY() >= 1)
     {
 
     }
-    else if (rangeY >= 1e-3)
+    else if (MaxAbsY() >= 1e-3)
     {
         step *= 1e3;
     }
-    else if (rangeY >= 1e-6)
+    else if (MaxAbsY() >= 1e-6)
     {
         step *= 1e6;
     }

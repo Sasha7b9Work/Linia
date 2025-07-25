@@ -14,16 +14,19 @@ public:
 
     static double minX;
     static double maxX;
-    static double rangeY;        // Размах в одну сторону от нуля
+    static double minY;
+    static double maxY;
 
     static wxString titleX;
     static wxString unitsX;
 
     // Возвращает максимальное отклонение от нуля в минимальную или максимальную сторону
     static double MaxAbsX();
+    static double MaxAbsY();
 
     // Разница между максимальным и минимальным значениями - амплитуда
     static double AmplitudeX();
+    static double AmplitudeY();
 
     static wxString FullTitleX();
 
