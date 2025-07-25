@@ -1,9 +1,9 @@
 ﻿// 2025/7/12 10:56:27 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Utils/GlobalFunctions.h"
+#include "Controls/Dialog.h"
 
 
-class MenuDialog : public wxDialog
+class MenuDialog : public Dialog
 {
 public:
 
@@ -18,15 +18,6 @@ public:
         const wxString &btn8 = "", int id8 = 0, void (*func8)() = nullptr,
         const wxString &btn9 = "", int id9 = 0, void (*func9)() = nullptr
     );
-
-    virtual int ShowModal() override
-    {
-        wxPoint pos = GF::GetCoordCenter(GetSize());
-
-        SetPosition(pos);
-
-        return wxDialog::ShowModal();
-    }
 
 private:
 

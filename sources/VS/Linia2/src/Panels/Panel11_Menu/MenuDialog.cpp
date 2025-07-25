@@ -13,7 +13,7 @@ MenuDialog::MenuDialog(const wxString &title, int width_button,
     const wxString &btn7, int id7, void (*func7)(),
     const wxString &btn8, int id8, void (*func8)(),
     const wxString &btn9, int id9, void (*func9)()) :
-    wxDialog(nullptr, wxID_ANY, title)
+    Dialog(nullptr, wxID_ANY, title)
 {
     {
         if (func1) buttons.push_back({ id1, btn1, func1 });
@@ -29,7 +29,7 @@ MenuDialog::MenuDialog(const wxString &title, int width_button,
 
     wxSize client_size{ width_button + 10, (BUTTON_HEIGHT + 5) * (int)buttons.size() + 10 };
 
-    wxDialog::SetClientSize(client_size);
+    Dialog::SetClientSize(client_size);
 
     for (uint i = 0; i < buttons.size(); i++)
     {

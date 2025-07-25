@@ -1,8 +1,9 @@
 ﻿// 2025/7/24 22:47:03 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Controls/Dialog.h"
 
 
-class WindowLibraryTests : public wxDialog
+class WindowLibraryTests : public Dialog
 {
 public:
 

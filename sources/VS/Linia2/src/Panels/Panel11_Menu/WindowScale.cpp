@@ -5,7 +5,7 @@
 
 
 WindowScale::WindowScale() :
-    wxDialog(nullptr, wxID_ANY, _L("Шкала"), wxDefaultPosition, { WIDTH, HEIGHT })
+    Dialog(nullptr, wxID_ANY, _L("Шкала"), wxDefaultPosition, { WIDTH, HEIGHT })
 {
     int width = 200;
     int height = 200;
@@ -36,13 +36,15 @@ wxStaticBox *WindowScale::CreateBox(int x, int y, int w, int h, pchar axe, pchar
 
     int s = 50;
 
-    new wxTextCtrl(box, wxID_ANY, "", { d + s, SD::Y_SB(y) });
+    wxSize size_text{ 50, TEXTCNTRL_HEIGHT };
+
+    new wxTextCtrl(box, id_min, "", { d + s, SD::Y_SB(y) }, size_text);
 
     y += dy;
 
     new wxStaticText(box, wxID_ANY, "X max", { d, SD::Y_SB(y) });
 
-    new wxTextCtrl(box, wxID_ANY, "", { d + s, SD::Y_SB(y) });
+    new wxTextCtrl(box, id_max, "", { d + s, SD::Y_SB(y) }, size_text);
 
     y += dy * 3 / 2;
 

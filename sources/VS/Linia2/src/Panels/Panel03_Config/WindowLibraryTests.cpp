@@ -2,10 +2,11 @@
 #include "defines.h"
 #include "Panels/Panel03_Config/WindowLibraryTests.h"
 #include "Utils/SystemDepend.h"
+#include "Controls/Dialog.h"
 
 
 WindowLibraryTests::WindowLibraryTests() :
-    wxDialog(nullptr, wxID_ANY, _L("Библиотека пользовательских тестов"), wxDefaultPosition, {WIDTH, HEIGHT})
+    Dialog(nullptr, wxID_ANY, _L("Библиотека пользовательских тестов"), wxDefaultPosition, {WIDTH, HEIGHT})
 {
 
     int dw = 150;

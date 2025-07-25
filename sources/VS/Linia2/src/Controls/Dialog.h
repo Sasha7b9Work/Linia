@@ -1,0 +1,23 @@
+﻿// 2025/7/25 12:23:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#pragma once
+#include "Utils/GlobalFunctions.h"
+
+
+class Dialog : public wxDialog
+{
+public:
+
+    Dialog(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &pos = wxDefaultPosition, const wxSize &size = wxDefaultSize) :
+        wxDialog(parent, id, title, pos, size)
+    {
+    }
+
+    virtual int ShowModal() override
+    {
+        wxPoint pos = GF::GetCoordCenter(GetSize());
+
+        SetPosition(pos);
+
+        return wxDialog::ShowModal();
+    }
+};

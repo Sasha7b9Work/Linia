@@ -18,6 +18,7 @@
 #include "Panels/Panel10_Scale.h"
 #include "Panels/Panel11_Menu/Panel11_Menu.h"
 #include "Panels/Panel12_Debug/Panel12_Debug.h"
+#include "Controls/Dialog.h"
 
 
 /*
@@ -259,7 +260,7 @@ void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 void MainWindow::OnAbout(wxCommandEvent &WXUNUSED(event))
 {
     wxBoxSizer *topsizer;
-    wxDialog dlg(this, wxID_ANY, wxString(_("About")));
+    Dialog dlg(this, wxID_ANY, wxString(_("About")));
 
     topsizer = new wxBoxSizer(wxVERTICAL);
 
