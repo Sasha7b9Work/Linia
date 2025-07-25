@@ -6,15 +6,16 @@
 WindowLibraryTests::WindowLibraryTests() :
     wxDialog(nullptr, wxID_ANY, _L("Библиотека пользовательских тестов"), wxDefaultPosition, {WIDTH, HEIGHT})
 {
-    // Создаем основной sizer для диалога
-    wxBoxSizer *mainSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    // Левая панель с wxGrid
-    wxPanel *leftPanel = new wxPanel(this, wxID_ANY);
-
-    wxBoxSizer *leftSizer = new wxBoxSizer(wxVERTICAL);
+    int dw = 200;
 
     {
+        wxSize size{ WIDTH - dw, HEIGHT };
+
+        wxPanel *leftPanel = new wxPanel(this, wxID_ANY, { 0, 0 }, size, wxTAB_TRAVERSAL | wxSUNKEN_BORDER);
+
+        int width = WIDTH - dw;
+
         grid = new wxGrid(leftPanel, wxID_ANY);
         grid->SetRowLabelSize(0);
         grid->CreateGrid(0, 3);
@@ -24,32 +25,22 @@ WindowLibraryTests::WindowLibraryTests() :
 
         grid->AutoSizeColumns();
 
-        leftSizer->Add(grid, 1, wxEXPAND | wxALL, 5);
-        leftPanel->SetSizer(leftSizer);
-    }
+        wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
+        sizer->Add(grid, 1, wxEXPAND | wxALL, 5);
+        leftPanel->SetSizer(sizer);
 
-    // Правая панель с кнопками
-    wxPanel *rightPanel = new wxPanel(this, wxID_ANY);
-    wxBoxSizer *rightSizer = new wxBoxSizer(wxVERTICAL);
+        leftPanel->SetSizeHints(width, HEIGHT, width, HEIGHT);
+    }
 
     {
-        wxButton *button1 = new wxButton(rightPanel, wxID_ANY, "Кнопка 1");
-        wxButton *button2 = new wxButton(rightPanel, wxID_ANY, "Кнопка 2");
-        wxButton *button3 = new wxButton(rightPanel, wxID_ANY, "Кнопка 3");
+        wxSize size{ dw, HEIGHT };
 
-        rightSizer->Add(button1, 0, wxEXPAND | wxALL, 5);
-        rightSizer->Add(button2, 0, wxEXPAND | wxALL, 5);
-        rightSizer->Add(button3, 0, wxEXPAND | wxALL, 5);
-        rightSizer->AddStretchSpacer();
+        wxPanel *rightPanel = new wxPanel(this, wxID_ANY, { WIDTH - dw, 0 }, size, wxTAB_TRAVERSAL | wxSUNKEN_BORDER);
 
-        rightPanel->SetSizer(rightSizer);
+        new wxButton(rightPanel, wxID_ANY, "Кнопка 1", { 10, 10 });
+        new wxButton(rightPanel, wxID_ANY, "Кнопка 2", { 10, 50 });
+        new wxButton(rightPanel, wxID_ANY, "Кнопка 3", { 10, 90 });
     }
-
-    // Добавляем панели в основной sizer
-    mainSizer->Add(leftPanel, 1, wxEXPAND | wxALL, 5);
-    mainSizer->Add(rightPanel, 0, wxEXPAND | wxALL, 5);
-
-    SetSizer(mainSizer);
 
     // Устанавливаем минимальный размер окна
     SetMinSize(wxSize(WIDTH, HEIGHT));
@@ -59,6 +50,8 @@ WindowLibraryTests::WindowLibraryTests() :
     Layout();
 
     SetAutoSizeColumns();
+
+    Fill();
 }
 
 
