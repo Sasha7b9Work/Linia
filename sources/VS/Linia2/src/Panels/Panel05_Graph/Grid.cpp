@@ -202,7 +202,7 @@ wxPoint Grid::ValuesToCoord(double x, double y) const
 {
     double cells_in_x = x / WindowScale::rangeX.Amplitude() * 10.0;
 
-    double cells_in_y = y / WindowScale::AmplitudeY() * 10.0;
+    double cells_in_y = y / WindowScale::rangeY.Amplitude() * 10.0;
 
     return { (int)(center.x + cells_in_x * SizeCell() + 0.5), (int)(center.y - cells_in_y * SizeCell() + 0.5) };
 }
@@ -212,7 +212,7 @@ wxPoint2DDouble Grid::CoordToValues(const wxPoint &coord) const
 {
     return {
         WindowScale::rangeX.Amplitude() * (coord.x - center.x) / (10.0 * SizeCell()),
-        WindowScale::AmplitudeY() * (coord.y - center.y) / (10.0 * SizeCell())
+        WindowScale::rangeY.Amplitude() * (coord.y - center.y) / (10.0 * SizeCell())
     };
 }
 

@@ -5,9 +5,7 @@
 
 
 WindowScale::Range WindowScale::rangeX{ -20.0, 20.0 };
-
-double WindowScale::minY = -5.0;
-double WindowScale::maxY = 5.0;
+WindowScale::Range WindowScale::rangeY{ -5.0, 5.0 };
 
 
 wxString WindowScale::titleX{ "Uc" };
@@ -97,24 +95,9 @@ double WindowScale::Range::MaxAbs() const
 }
 
 
-double WindowScale::MaxAbsY()
-{
-    double min = std::fabs(minY);
-    double max = std::fabs(maxY);
-
-    return (min > max) ? min : max;
-}
-
-
 double WindowScale::Range::Amplitude() const
 {
     return max - min;
-}
-
-
-double WindowScale::AmplitudeY()
-{
-    return maxY - minY;
 }
 
 
@@ -178,21 +161,21 @@ wxString WindowScale::GetValuePointAxisX(int num)
 
 wxString WindowScale::GetValuePointAxisY(int num)
 {
-    double step = AmplitudeY() / 10.0;
+    double step = rangeY.Amplitude() / 10.0;
 
-    if (MaxAbsY() >= 1e3)
+    if (rangeY.MaxAbs() >= 1e3)
     {
         step /= 1e3;
     }
-    else if (MaxAbsY() >= 1)
+    else if (rangeY.MaxAbs() >= 1)
     {
 
     }
-    else if (MaxAbsY() >= 1e-3)
+    else if (rangeY.MaxAbs() >= 1e-3)
     {
         step *= 1e3;
     }
-    else if (MaxAbsY() >= 1e-6)
+    else if (rangeY.MaxAbs() >= 1e-6)
     {
         step *= 1e6;
     }

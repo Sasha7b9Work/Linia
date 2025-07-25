@@ -25,18 +25,10 @@ public:
     };
 
     static Range rangeX;
-
-    static double minY;
-    static double maxY;
+    static Range rangeY;
 
     static wxString titleX;
     static wxString unitsX;
-
-    // Возвращает максимальное отклонение от нуля в минимальную или максимальную сторону
-    static double MaxAbsY();
-
-    // Разница между максимальным и минимальным значениями - амплитуда
-    static double AmplitudeY();
 
     static wxString FullTitleX();
 
