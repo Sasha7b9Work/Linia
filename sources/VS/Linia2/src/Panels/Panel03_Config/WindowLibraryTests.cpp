@@ -6,49 +6,59 @@
 WindowLibraryTests::WindowLibraryTests() :
     wxDialog(nullptr, wxID_ANY, _L("Библиотека пользовательских тестов"), wxDefaultPosition, {WIDTH, HEIGHT})
 {
+    // Создаем основной sizer для диалога
+    wxBoxSizer *mainSizer = new wxBoxSizer(wxHORIZONTAL);
+
+    // Левая панель с wxGrid
+    wxPanel *leftPanel = new wxPanel(this, wxID_ANY);
+
+    wxBoxSizer *leftSizer = new wxBoxSizer(wxVERTICAL);
+
+    {
+        grid = new wxGrid(leftPanel, wxID_ANY);
+        grid->SetRowLabelSize(0);
+        grid->CreateGrid(0, 3);
+        SetTitlesColumn();
+        grid->EnableEditing(true);
+        grid->SetScrollRate(10, 10);
+
+        grid->AutoSizeColumns();
+
+        leftSizer->Add(grid, 1, wxEXPAND | wxALL, 5);
+        leftPanel->SetSizer(leftSizer);
+    }
+
+    // Правая панель с кнопками
+    wxPanel *rightPanel = new wxPanel(this, wxID_ANY);
+    wxBoxSizer *rightSizer = new wxBoxSizer(wxVERTICAL);
+
+    {
+        wxButton *button1 = new wxButton(rightPanel, wxID_ANY, "Кнопка 1");
+        wxButton *button2 = new wxButton(rightPanel, wxID_ANY, "Кнопка 2");
+        wxButton *button3 = new wxButton(rightPanel, wxID_ANY, "Кнопка 3");
+
+        rightSizer->Add(button1, 0, wxEXPAND | wxALL, 5);
+        rightSizer->Add(button2, 0, wxEXPAND | wxALL, 5);
+        rightSizer->Add(button3, 0, wxEXPAND | wxALL, 5);
+        rightSizer->AddStretchSpacer();
+
+        rightPanel->SetSizer(rightSizer);
+    }
+
+    // Добавляем панели в основной sizer
+    mainSizer->Add(leftPanel, 1, wxEXPAND | wxALL, 5);
+    mainSizer->Add(rightPanel, 0, wxEXPAND | wxALL, 5);
+
+    SetSizer(mainSizer);
+
+    // Устанавливаем минимальный размер окна
+    SetMinSize(wxSize(WIDTH, HEIGHT));
+
+    SetSizeHints(WIDTH, HEIGHT, WIDTH, HEIGHT);
+
     Layout();
 
-    wxSize size = GetClientSize();
-
-    wxPanel *panel = new wxPanel(this, wxID_ANY, { 0, 0 }, { size.x - 50, size.y });
-
-    panel->Layout();
-
-    size = panel->GetSize();
-
-    grid = new wxGrid(panel, wxID_ANY);
-
-    grid->EnableEditing(false);
-
-    grid->SetRowLabelSize(0);
-
-    grid->CreateGrid(0, 3);
-
-    SetTitlesColumn();
-
-    grid->SetScrollRate(10, 10);
-
-    grid->AutoSizeColumns();
-
-    // Размещаем grid в sizer для правильного масштабирования
-    wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
-    sizer->Add(grid, 1, wxEXPAND | wxALL, 5);
-    panel->SetSizer(sizer);
-
-    wxTopLevelWindowBase::Layout();
-
     SetAutoSizeColumns();
-
-    size = panel->GetSize();
-
-    wxSize s = grid->GetSize();
-
-    Fill();
-
-    grid->SetSelectionMode(wxGrid::wxGridSelectNone);
-
-    grid->SetCellHighlightPenWidth(0);
-    grid->SetCellHighlightROPenWidth(0);
 }
 
 
