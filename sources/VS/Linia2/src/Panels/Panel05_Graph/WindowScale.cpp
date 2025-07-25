@@ -4,8 +4,8 @@
 #include "Panels/Panel05_Graph/WindowScale.h"
 
 
-double WindowScale::minX = -20.0;
-double WindowScale::maxX = 20.0;
+WindowScale::Range WindowScale::rangeX{ -20.0, 20.0 };
+
 double WindowScale::minY = -5.0;
 double WindowScale::maxY = 5.0;
 
@@ -88,12 +88,12 @@ wxStaticBox *WindowScale::CreateBox(int x, int y, int w, int h, pchar axe, pchar
 }
 
 
-double WindowScale::MaxAbsX()
+double WindowScale::Range::MaxAbs() const
 {
-    double min = std::fabs(minX);
-    double max = std::fabs(maxX);
+    double _min = std::fabs(min);
+    double _max = std::fabs(max);
 
-    return (min > max) ? min : max;
+    return (_min > _max) ? _min : _max;
 }
 
 
@@ -106,9 +106,9 @@ double WindowScale::MaxAbsY()
 }
 
 
-double WindowScale::AmplitudeX()
+double WindowScale::Range::Amplitude() const
 {
-    return maxX - minX;
+    return max - min;
 }
 
 
@@ -122,23 +122,23 @@ wxString WindowScale::FullTitleX()
 {
     wxString prefix;
 
-    if (MaxAbsX() >= 1e3)
+    if (rangeX.MaxAbs() >= 1e3)
     {
         prefix = "k";
     }
-    else if (MaxAbsX() >= 1.0)
+    else if (rangeX.MaxAbs() >= 1.0)
     {
 
     }
-    else if (MaxAbsX() >= 1e-3)
+    else if (rangeX.MaxAbs() >= 1e-3)
     {
         prefix = "m";
     }
-    else if (MaxAbsX() >= 1e-6)
+    else if (rangeX.MaxAbs() >= 1e-6)
     {
         prefix = "u";
     }
-    else if (MaxAbsX() >= 1e-9)
+    else if (rangeX.MaxAbs() >= 1e-9)
     {
         prefix = "n";
     }
@@ -149,21 +149,21 @@ wxString WindowScale::FullTitleX()
 
 wxString WindowScale::GetValuePointAxisX(int num)
 {
-    double step = AmplitudeX() / 10.0;   // По горизонтали всегда 10 клеток
+    double step = rangeX.Amplitude() / 10.0;   // По горизонтали всегда 10 клеток
 
-    if (MaxAbsX() >= 1e3)
+    if (rangeX.MaxAbs() >= 1e3)
     {
         step /= 1e3;
     }
-    else if (MaxAbsX() >= 1)
+    else if (rangeX.MaxAbs() >= 1)
     {
 
     }
-    else if (MaxAbsX() >= 1e-3)
+    else if (rangeX.MaxAbs() >= 1e-3)
     {
         step *= 1e3;
     }
-    else if (MaxAbsX() >= 1e-6)
+    else if (rangeX.MaxAbs() >= 1e-6)
     {
         step *= 1e6;
     }

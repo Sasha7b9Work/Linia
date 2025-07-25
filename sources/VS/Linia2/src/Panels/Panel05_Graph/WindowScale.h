@@ -12,8 +12,20 @@ public:
 
     WindowScale();
 
-    static double minX;
-    static double maxX;
+    struct Range
+    {
+        double min;
+        double max;
+
+        // Возвращает максимальное отклонение от нуля в минимальную или максимальную сторону
+        double MaxAbs() const;
+
+        // Разница между максимальным и минимальным значениями - амплитуда
+        double Amplitude() const;
+    };
+
+    static Range rangeX;
+
     static double minY;
     static double maxY;
 
@@ -21,11 +33,9 @@ public:
     static wxString unitsX;
 
     // Возвращает максимальное отклонение от нуля в минимальную или максимальную сторону
-    static double MaxAbsX();
     static double MaxAbsY();
 
     // Разница между максимальным и минимальным значениями - амплитуда
-    static double AmplitudeX();
     static double AmplitudeY();
 
     static wxString FullTitleX();

@@ -200,7 +200,7 @@ void Grid::DrawHPointLine(int x, int y, int d, int width)
 
 wxPoint Grid::ValuesToCoord(double x, double y) const
 {
-    double cells_in_x = x / WindowScale::AmplitudeX() * 10.0;
+    double cells_in_x = x / WindowScale::rangeX.Amplitude() * 10.0;
 
     double cells_in_y = y / WindowScale::AmplitudeY() * 10.0;
 
@@ -211,7 +211,7 @@ wxPoint Grid::ValuesToCoord(double x, double y) const
 wxPoint2DDouble Grid::CoordToValues(const wxPoint &coord) const
 {
     return {
-        WindowScale::AmplitudeX() * (coord.x - center.x) / (10.0 * SizeCell()),
+        WindowScale::rangeX.Amplitude() * (coord.x - center.x) / (10.0 * SizeCell()),
         WindowScale::AmplitudeY() * (coord.y - center.y) / (10.0 * SizeCell())
     };
 }
