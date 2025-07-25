@@ -8,14 +8,14 @@ WindowLibraryTests::WindowLibraryTests() :
     wxDialog(nullptr, wxID_ANY, _L("Библиотека пользовательских тестов"), wxDefaultPosition, {WIDTH, HEIGHT})
 {
 
-    int dw = 200;
+    int dw = 150;
 
     {
         int width = WIDTH - dw;
 
         wxSize size{ width, HEIGHT };
 
-        wxPanel *leftPanel = new wxPanel(this, wxID_ANY, { 0, 0 }, size, wxTAB_TRAVERSAL | wxSUNKEN_BORDER);
+        wxPanel *leftPanel = new wxPanel(this, wxID_ANY, { 0, 0 }, size);
 
         leftPanel->SetSizeHints(width, HEIGHT, width, HEIGHT);
 
@@ -33,32 +33,40 @@ WindowLibraryTests::WindowLibraryTests() :
         leftPanel->SetSizer(sizer);
 
         leftPanel->Layout();
+
+        grid->EnableEditing(false);
+        grid->EnableGridLines(false);
+        grid->EnableDragCell(false);
+        grid->EnableCellEditControl(false);
+        grid->SetSelectionMode(wxGrid::wxGridSelectNone);
+        grid->SetCellHighlightPenWidth(0);
+        grid->SetCellHighlightROPenWidth(0);
     }
 
     {
         wxSize size{ dw, HEIGHT };
 
-        wxPanel *rightPanel = new wxPanel(this, wxID_ANY, { WIDTH - dw, 0 }, size, wxTAB_TRAVERSAL | wxSUNKEN_BORDER);
+        wxPanel *rightPanel = new wxPanel(this, wxID_ANY, { WIDTH - dw, 0 }, size);
 
-        wxStaticBox *box1 = new wxStaticBox(rightPanel, wxID_ANY, _L("Категория"), { 0, 0 }, {size.x, 100});
+        wxStaticBox *box1 = new wxStaticBox(rightPanel, wxID_ANY, _L("Категория"), { 0, 0 }, {size.x - 20, 60});
 
         {
             wxArrayString choices;
             choices.Add("NMOS");
 
-            new wxComboBox(box1, ID_LUT_COMBO, choices[0], { 10, SD::Y_SB(20) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+            new wxComboBox(box1, ID_LUT_COMBO, choices[0], { 10, SD::Y_SB(25) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
         }
 
-        wxStaticBox *box2 = new wxStaticBox(rightPanel, wxID_ANY, _L("Тест"), { 0, 150 }, { size.x, 300 });
+        wxStaticBox *box2 = new wxStaticBox(rightPanel, wxID_ANY, _L("Тест"), { 0, box1->GetPosition().y + box1->GetSize().y + 5 }, { size.x - 20, 145 });
 
         {
-            int y0 = 20;
+            int y0 = 25;
 
             int dy = 40;
 
-            new wxButton(box2, ID_LUT_BTN_LOAD, "Кнопка 1", { 10, SD::Y_SB(y0) });
-            new wxButton(box2, ID_LUT_BTN_DELETE, "Кнопка 2", { 10, SD::Y_SB(y0 + dy) });
-            new wxButton(box2, LD_LUT_BTN_DELETE_ALL, "Кнопка 3", { 10, SD::Y_SB(y0 + dy * 2) });
+            new wxButton(box2, ID_LUT_BTN_LOAD, _L("Загрузить"), { 10, SD::Y_SB(y0) }, { 100, BUTTON_HEIGHT });
+            new wxButton(box2, ID_LUT_BTN_DELETE, _L("Удалить"), { 10, SD::Y_SB(y0 + dy) }, { 100, BUTTON_HEIGHT });
+            new wxButton(box2, LD_LUT_BTN_DELETE_ALL, _L("Удалить все"), { 10, SD::Y_SB(y0 + dy * 2) }, { 100, BUTTON_HEIGHT });
         }
     }
 

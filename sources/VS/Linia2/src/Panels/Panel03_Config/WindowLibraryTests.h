@@ -6,8 +6,8 @@ class WindowLibraryTests : public wxDialog
 {
 public:
 
-    static const int WIDTH = 600;
-    static const int HEIGHT = 450;
+    static const int WIDTH = 700;
+    static const int HEIGHT = 255;
 
     WindowLibraryTests();
 
