@@ -402,7 +402,7 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
 
         new wxButton(boxTest, ID_PAN3_TEST_BUTTON, _L("Загрузить"), { 5, SD::Y_SB(50) }, { 110, 30 });
 
-//        GF::FindAnyButton(this, ID_PAN3_TEST_BUTTON)->Hide();
+        GF::FindAnyButton(this, ID_PAN3_TEST_BUTTON)->Hide();
     }
 }
 
