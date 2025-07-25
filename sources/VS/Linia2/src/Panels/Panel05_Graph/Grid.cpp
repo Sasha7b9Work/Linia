@@ -126,11 +126,11 @@ void Grid::DrawLabelsOnAxis() const
 
             if (LeftX() > 0)
             {
-                Text(GetValuePointAxisY(i)).DrawAboutCenterLeft(coord.x - d, coord.y);
+                Text(WindowScale::GetValuePointAxisY(i)).DrawAboutCenterLeft(coord.x - d, coord.y);
             }
             else
             {
-                Text(GetValuePointAxisY(i)).DrawAboutCenterRigth(0 + d, coord.y, true, *wxWHITE);
+                Text(WindowScale::GetValuePointAxisY(i)).DrawAboutCenterRigth(0 + d, coord.y, true, *wxWHITE);
             }
         }
     }
@@ -210,23 +210,23 @@ wxString WindowScale::GetValuePointAxisX(int num)
 }
 
 
-wxString Grid::GetValuePointAxisY(int num) const
+wxString WindowScale::GetValuePointAxisY(int num)
 {
-    double step = WindowScale::rangeY / 5.0;
+    double step = rangeY / 5.0;
 
-    if (WindowScale::rangeY >= 1e3)
+    if (rangeY >= 1e3)
     {
         step /= 1e3;
     }
-    else if (WindowScale::rangeY >= 1)
+    else if (rangeY >= 1)
     {
 
     }
-    else if (WindowScale::rangeY >= 1e-3)
+    else if (rangeY >= 1e-3)
     {
         step *= 1e3;
     }
-    else if (WindowScale::rangeY >= 1e-6)
+    else if (rangeY >= 1e-6)
     {
         step *= 1e6;
     }

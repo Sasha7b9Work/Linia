@@ -29,6 +29,8 @@ public:
 
     static wxString GetValuePointAxisX(int);
 
+    static wxString GetValuePointAxisY(int);
+
 private:
 
     wxStaticBox *CreateBox(int x, int y, int w, int h, pchar axe, pchar units, int id_min, int id_max);
