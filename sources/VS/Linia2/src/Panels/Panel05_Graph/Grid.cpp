@@ -67,14 +67,20 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         // Горизонтальные линии
         Line(x_left, y_top, RightX(), y_top).Draw(*wxBLACK);
 
-        Line(x_left, center.y, RightX(), center.y).Draw();
+        if (Math::InRange(center.y, y_top, y_bottom))
+        {
+            Line(x_left, center.y, RightX(), center.y).Draw();
+        }
 
         Line(x_left, BottomY(), RightX(), BottomY()).Draw();
 
         // Вертикальные линии
         Line(x_left, y_top, x_left, BottomY()).Draw();
 
-        Line(center.x, y_top, center.x, BottomY()).Draw();
+        if (Math::InRange(center.x, x_left, x_right))
+        {
+            Line(center.x, y_top, center.x, BottomY()).Draw();
+        }
 
         Line(RightX(), y_top, RightX(), BottomY()).Draw();
     }
@@ -88,7 +94,10 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
         if (x < x_right)
         {
-            DrawVPointLine(x, y_top, d, length);
+            if (x > x_left)
+            {
+                DrawVPointLine(x, y_top, d, length);
+            }
         }
         else
         {
@@ -103,7 +112,10 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
         if (x > x_left)
         {
-            DrawVPointLine(x, y_top, d, length);
+            if (x < x_right)
+            {
+                DrawVPointLine(x, y_top, d, length);
+            }
         }
         else
         {
@@ -118,7 +130,10 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
         if (y > y_top)
         {
-            DrawHPointLine(x_left, y, d, length);
+            if (y < y_bottom)
+            {
+                DrawHPointLine(x_left, y, d, length);
+            }
         }
         else
         {
@@ -133,7 +148,10 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
         if (y < y_bottom)
         {
-            DrawHPointLine(x_left, y, d, length);
+            if (y > y_top)
+            {
+                DrawHPointLine(x_left, y, d, length);
+            }
         }
         else
         {
@@ -169,7 +187,10 @@ void Grid::DrawLabelsOnAxis() const
     int d = 2;
 
     {
-        Text(WindowScale::rangeX.FullTitle()).DrawAboutCenterDown(center.x, BottomY() + 25);
+        if (Math::InRange(center.x, LeftX(), RightX()))
+        {
+            Text(WindowScale::rangeX.FullTitle()).DrawAboutCenterDown(center.x, BottomY() + 25);
+        }
 
         for (int i = -100; i < 100; i++)
         {
@@ -193,7 +214,10 @@ void Grid::DrawLabelsOnAxis() const
     }
 
     {
-        Text(WindowScale::rangeY.FullTitle()).DrawAboutCenterLeft(LeftX() - 30, center.y);
+        if (Math::InRange(center.y, TopY(), BottomY()))
+        {
+            Text(WindowScale::rangeY.FullTitle()).DrawAboutCenterLeft(LeftX() - 30, center.y);
+        }
 
         for (int i = -100; i < 100; i++)
         {
