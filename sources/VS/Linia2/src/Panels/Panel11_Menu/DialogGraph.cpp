@@ -1,8 +1,7 @@
 ﻿// 2025/7/12 17:26:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/Panel11_Menu/DialogGraph.h"
-#include "Panels/Panel11_Menu/WindowScale.h"
-
+#include "Panels/Panel05_Graph/WindowScale.h"
 
 DialogGraph *DialogGraph::self = nullptr;
 DialogGraphColor *DialogGraphColor::self = nullptr;

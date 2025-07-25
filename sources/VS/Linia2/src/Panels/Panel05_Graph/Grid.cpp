@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Panels/Panel05_Graph/Grid.h"
 #include "Panels/Panel05_Graph/Panel05_Graph.h"
+#include "Panels/Panel05_Graph/WindowScale.h"
 #include <algorithm>
 
 
@@ -99,7 +100,7 @@ void Grid::DrawLabelsOnAxis() const
     int d = 2;
 
     {
-        Text(FullTitleX()).DrawAboutCenterDown(center.x, BottomY() + 25);
+        Text(WindowScale::FullTitleX()).DrawAboutCenterDown(center.x, BottomY() + 25);
 
         for (int i = -4; i < 6; i++)
         {
@@ -136,23 +137,67 @@ void Grid::DrawLabelsOnAxis() const
 }
 
 
+double WindowScale::MaxAbsX()
+{
+    double min = std::fabs(minX);
+    double max = std::fabs(maxX);
+
+    return (min > max) ? min : max;
+}
+
+
+double WindowScale::AmplitudeX()
+{
+    return maxX - minX;
+}
+
+
+wxString WindowScale::FullTitleX()
+{
+    wxString prefix;
+
+    if (MaxAbsX() >= 1e3)
+    {
+        prefix = "k";
+    }
+    else if (MaxAbsX() >= 1.0)
+    {
+
+    }
+    else if (MaxAbsX() >= 1e-3)
+    {
+        prefix = "m";
+    }
+    else if (MaxAbsX() >= 1e-6)
+    {
+        prefix = "u";
+    }
+    else if (MaxAbsX() >= 1e-9)
+    {
+        prefix = "n";
+    }
+
+    return titleX + "," + prefix + unitsX;
+}
+
+
 wxString Grid::GetValuePointAxisX(int num) const
 {
-    double step = rangeX / 5.0;
+    double step = (WindowScale::maxX - WindowScale::minX) / 10.0;   // По горизонтали всегда 10 клеток
 
-    if (rangeX >= 1e3)
+    if (WindowScale::MaxAbsX() >= 1e3)
     {
         step /= 1e3;
     }
-    else if (rangeX >= 1)
+    else if (WindowScale::MaxAbsX() >= 1)
     {
 
     }
-    else if (rangeX >= 1e-3)
+    else if (WindowScale::MaxAbsX() >= 1e-3)
     {
         step *= 1e3;
     }
-    else if (rangeX >= 1e-6)
+    else if (WindowScale::MaxAbsX() >= 1e-6)
     {
         step *= 1e6;
     }
@@ -167,21 +212,21 @@ wxString Grid::GetValuePointAxisX(int num) const
 
 wxString Grid::GetValuePointAxisY(int num) const
 {
-    double step = rangeY / 5.0;
+    double step = WindowScale::rangeY / 5.0;
 
-    if (rangeY >= 1e3)
+    if (WindowScale::rangeY >= 1e3)
     {
         step /= 1e3;
     }
-    else if (rangeY >= 1)
+    else if (WindowScale::rangeY >= 1)
     {
 
     }
-    else if (rangeY >= 1e-3)
+    else if (WindowScale::rangeY >= 1e-3)
     {
         step *= 1e3;
     }
-    else if (rangeY >= 1e-6)
+    else if (WindowScale::rangeY >= 1e-6)
     {
         step *= 1e6;
     }
@@ -191,35 +236,6 @@ wxString Grid::GetValuePointAxisY(int num) const
     }
 
     return wxString::Format("%.1f", step * num);
-}
-
-
-wxString Grid::FullTitleX() const
-{
-    wxString prefix;
-
-    if (rangeX >= 1e3)
-    {
-        prefix = "k";
-    }
-    else if (rangeX >= 1.0)
-    {
-
-    }
-    else if (rangeX >= 1e-3)
-    {
-        prefix ="m";
-    }
-    else if (rangeX >= 1e-6)
-    {
-        prefix = "u";
-    }
-    else if (rangeX >= 1e-9)
-    {
-        prefix = "n";
-    }
-
-    return titleX + "," + prefix + unitsX;
 }
 
 
@@ -286,9 +302,9 @@ void Grid::DrawHPointLine(int x, int y, int d, int width)
 
 wxPoint Grid::ValuesToCoord(double x, double y) const
 {
-    double cells_in_x = x / rangeX * 5.0;
+    double cells_in_x = x / WindowScale::AmplitudeX() * 10.0;
 
-    double cells_in_y = y / rangeY * 5.0;
+    double cells_in_y = y / WindowScale::rangeY * 5.0;
 
     return { (int)(center.x + cells_in_x * SizeCell() + 0.5), (int)(center.y - cells_in_y * SizeCell() + 0.5) };
 }
@@ -296,19 +312,9 @@ wxPoint Grid::ValuesToCoord(double x, double y) const
 
 wxPoint2DDouble Grid::CoordToValues(const wxPoint &coord) const
 {
-//    double x = 1.0;
-
-//    int coord_x = center.x + x / rangeX * 5.0 * SizeCell();
-
-    /*
-        coord_x - center.x = x / rangeX * 5 * SizeCell()
-        (coord_x - center.x) / (5 * SizeCell()) = x / rangeX
-        x = rangeX * (coord_x - center.x) / (5 * SizeCell())
-    */
-
     return {
-        rangeX * (coord.x - center.x) / (5.0 * SizeCell()),
-        rangeY * (coord.y - center.y) / (5.0 * SizeCell())
+        WindowScale::AmplitudeX() * (coord.x - center.x) / (10.0 * SizeCell()),
+        WindowScale::rangeY * (coord.y - center.y) / (5.0 * SizeCell())
     };
 }
 

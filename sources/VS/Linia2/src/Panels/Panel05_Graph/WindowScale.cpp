@@ -1,7 +1,16 @@
 ﻿// 2025/7/25 10:02:07 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel11_Menu/WindowScale.h"
 #include "Utils/SystemDepend.h"
+#include "Panels/Panel05_Graph/WindowScale.h"
+
+
+double WindowScale::minX = -10.0;
+double WindowScale::maxX = 30.0;
+double WindowScale::rangeY = 5.0;        // Размах в одну сторону от нуля
+
+
+wxString WindowScale::titleX{ "Uc" };
+wxString WindowScale::unitsX{ "V" };
 
 
 WindowScale::WindowScale() :

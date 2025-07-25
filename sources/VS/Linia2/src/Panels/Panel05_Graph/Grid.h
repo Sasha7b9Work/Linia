@@ -30,16 +30,11 @@ private:
     int scale = 1;      // 2 - увеличено в два раза, 3 - увелично в три и так далее
     int num_cells = 10;
 
-    wxString titleX{ "Uc" };
     wxString titleY{ "Ic" };
 
-    wxString unitsX{ "V" };
     wxString unitsY{ "A" };
 
     wxPoint pos_mouse;
-
-    double rangeX = 20.0;        // Размах в одну сторону от нуля
-    double rangeY = 5.0;        // Размах в одну сторону от нуля
 
     void DrawVPointLine(int x, int y, int d, int height);
     void DrawHPointLine(int x, int y, int d, int width);
@@ -62,8 +57,6 @@ private:
     int LengthAxis() const;
 
     void DrawLabelsOnAxis() const;
-
-    wxString FullTitleX() const;
 
     void DrawMouseMarkers() const;
 };
