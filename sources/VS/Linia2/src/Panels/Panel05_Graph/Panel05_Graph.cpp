@@ -13,14 +13,6 @@ wxBitmap PanelGraph::bitmap(WIDTH, HEIGHT);
 
 PanelGraph *PanelGraph::self = nullptr;
 
-//static const int width_button = 130;
-//static const int height_button = 72;
-//static const int y_button = 405;
-//static const int x_wave = 9;
-//static const int y_wave = 10;
-//static const int width_wave = 390;
-//static const int height_wave = 196;
-
 
 PanelGraph::PanelGraph(wxWindow *parent) :
     Panel(parent, MainWindow::WIDTH1, MainWindow::HEIGTH1, WIDTH, HEIGHT)
@@ -70,9 +62,16 @@ void PanelGraph::OnMouseMove(wxMouseEvent &event)
 
     if (mouse_is_pressed)                            // Перемещение графика
     {
-        wxPoint delta = position - pos_mouse_down;
+        if (event.GetModifiers() == wxMOD_CONTROL)
+        {
 
-        grid.MoveOn(delta);
+        }
+        else
+        {
+            wxPoint delta = position - pos_mouse_down;
+
+            grid.MoveOn(delta);
+        }
 
         pos_mouse_down = position;
     }
