@@ -13,7 +13,11 @@ public:
 
     void Draw(const std::vector<GraphEntity *> &);
 
-    void MoveOn(const wxPoint &);
+    // Переместить сетку целиком
+    void MoveGridOn(const wxPoint &);
+
+    // Переместить графики внутри сетки
+    void MoveMeasuresOn(const wxPoint &);
 
     void OnMouseMove(const wxPoint &);
 

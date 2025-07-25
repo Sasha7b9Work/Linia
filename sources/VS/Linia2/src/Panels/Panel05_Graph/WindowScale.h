@@ -29,6 +29,8 @@ public:
         wxString GetValuePointAxis(int) const;
 
         wxString FullTitle() const;
+
+        void operator+=(double &);
     };
 
     static Range rangeX;

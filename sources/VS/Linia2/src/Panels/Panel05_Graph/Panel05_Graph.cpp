@@ -62,15 +62,15 @@ void PanelGraph::OnMouseMove(wxMouseEvent &event)
 
     if (mouse_is_pressed)                            // Перемещение графика
     {
+        wxPoint delta = position - pos_mouse_down;
+
         if (event.GetModifiers() == wxMOD_CONTROL)
         {
-
+            grid.MoveMeasuresOn(delta);
         }
         else
         {
-            wxPoint delta = position - pos_mouse_down;
-
-            grid.MoveOn(delta);
+            grid.MoveGridOn(delta);
         }
 
         pos_mouse_down = position;
