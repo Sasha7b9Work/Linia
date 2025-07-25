@@ -108,11 +108,11 @@ void Grid::DrawLabelsOnAxis() const
 
             if (BottomY() < PanelGraph::HEIGHT)
             {
-                Text(GetValuePointAxisX(i)).DrawAboutCenterDown(coord.x, coord.y + d);
+                Text(WindowScale::GetValuePointAxisX(i)).DrawAboutCenterDown(coord.x, coord.y + d);
             }
             else
             {
-                Text(GetValuePointAxisX(i)).DrawAboutCenterDown(coord.x, PanelGraph::HEIGHT - 25, true, *wxWHITE);
+                Text(WindowScale::GetValuePointAxisX(i)).DrawAboutCenterDown(coord.x, PanelGraph::HEIGHT - 25, true, *wxWHITE);
             }
         }
     }
@@ -181,23 +181,23 @@ wxString WindowScale::FullTitleX()
 }
 
 
-wxString Grid::GetValuePointAxisX(int num) const
+wxString WindowScale::GetValuePointAxisX(int num)
 {
-    double step = (WindowScale::maxX - WindowScale::minX) / 10.0;   // По горизонтали всегда 10 клеток
+    double step = AmplitudeX() / 10.0;   // По горизонтали всегда 10 клеток
 
-    if (WindowScale::MaxAbsX() >= 1e3)
+    if (MaxAbsX() >= 1e3)
     {
         step /= 1e3;
     }
-    else if (WindowScale::MaxAbsX() >= 1)
+    else if (MaxAbsX() >= 1)
     {
 
     }
-    else if (WindowScale::MaxAbsX() >= 1e-3)
+    else if (MaxAbsX() >= 1e-3)
     {
         step *= 1e3;
     }
-    else if (WindowScale::MaxAbsX() >= 1e-6)
+    else if (MaxAbsX() >= 1e-6)
     {
         step *= 1e6;
     }

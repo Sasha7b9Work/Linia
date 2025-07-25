@@ -46,7 +46,6 @@ private:
     wxPoint GetCoordPointAxisX(int) const;
     wxPoint GetCoordPointAxisY(int) const;
 
-    wxString GetValuePointAxisX(int) const;
     wxString GetValuePointAxisY(int) const;
 
     int BottomY() const;
