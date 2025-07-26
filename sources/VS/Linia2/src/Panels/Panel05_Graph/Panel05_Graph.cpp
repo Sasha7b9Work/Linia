@@ -29,7 +29,19 @@ PanelGraph::PanelGraph(wxWindow *parent) :
     Bind(wxEVT_RIGHT_DOWN, &PanelGraph::OnRightClick, this);
     Bind(wxEVT_BUTTON, &PanelGraph::OnEventButton, this);
 
-    new wxButton(this, ID_GRID_BUTTON, "?", { 10, 10 }, { 30, 30 });
+    int w = 25;
+
+    wxSize size{ w, w };
+
+    int d = 10;
+    int x0 = d;
+    int y0 = HEIGHT - d - w;
+
+    new wxButton(this, ID_GRID_BUTTON_HELP, "?", { x0, y0 }, size);
+    new wxButton(this, ID_GRID_BUTTON_X_LESS, "X-", { x0 + w + d, y0 }, size);
+    new wxButton(this, ID_GRID_BUTTON_X_MORE, "X+", { x0 + 2 * (w + d), y0 }, size);
+    new wxButton(this, ID_GRID_BUTTON_Y_LESS, "Y-", { x0, y0 - w - d }, size);
+    new wxButton(this, ID_GRID_BUTTON_Y_MORE, "Y+", { x0, y0 - 2 * (w + d) }, size);
 
     CreateEntities();
 
@@ -104,7 +116,7 @@ void PanelGraph::OnMouseWheel(wxMouseEvent &event)
 
 void PanelGraph::OnEventButton(wxCommandEvent &event)
 {
-    if (event.GetId() == ID_GRID_BUTTON)
+    if (event.GetId() == ID_GRID_BUTTON_HELP)
     {
         wxMessageBox("Левая Кнопка Мыши - перемещение графика.\nКолёсико - масштаб графика.\n"
             "ЛКМ+Ctrl - перемещение сетки.\nКолёсико+Ctrl - масштаб сетки.", " ");
