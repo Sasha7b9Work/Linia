@@ -291,6 +291,8 @@ void Grid::ScaleMeasuresOn(const wxPoint &, int delta)
         WindowScale::rangeY *= 1 / 1.5;
     }
 
+    CalculateCenter();
+
     PanelGraph::self->Draw();
 }
 
