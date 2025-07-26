@@ -116,12 +116,31 @@ void PanelGraph::OnMouseWheel(wxMouseEvent &event)
 
 void PanelGraph::OnEventButton(wxCommandEvent &event)
 {
-    if (event.GetId() == ID_GRID_BUTTON_HELP)
+    int id = event.GetId();
+
+    if (id == ID_GRID_BUTTON_HELP)
     {
         wxMessageBox("Левая Кнопка Мыши - перемещение графика.\nКолёсико - масштаб графика.\n"
             "ЛКМ+Ctrl - перемещение сетки.\nКолёсико+Ctrl - масштаб сетки.", " ");
     }
+    else if (id == ID_GRID_BUTTON_X_LESS)
+    {
+        grid.ScaleMeasuresOnX(-1);
+    }
+    else if (id == ID_GRID_BUTTON_X_MORE)
+    {
+        grid.ScaleMeasuresOnX(+1);
+    }
+    else if (id == ID_GRID_BUTTON_Y_LESS)
+    {
+        grid.ScaleMeasuresOnY(-1);
+    }
+    else if (id == ID_GRID_BUTTON_Y_MORE)
+    {
+        grid.ScaleMeasuresOnY(+1);
+    }
 }
+
 
 
 void PanelGraph::Draw()

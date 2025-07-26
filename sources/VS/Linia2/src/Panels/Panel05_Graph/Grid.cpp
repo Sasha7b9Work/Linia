@@ -290,6 +290,38 @@ void Grid::ScaleMeasuresOn(const wxPoint &, int delta)
         WindowScale::rangeX *= 1 / 1.5;
         WindowScale::rangeY *= 1 / 1.5;
     }
+
+    PanelGraph::self->Draw();
+}
+
+
+void Grid::ScaleMeasuresOnX(int delta)
+{
+    if (delta < 0)
+    {
+        WindowScale::rangeX *= 1.5;
+    }
+    else
+    {
+        WindowScale::rangeX *= 1 / 1.5;
+    }
+
+    PanelGraph::self->Draw();
+}
+
+
+void Grid::ScaleMeasuresOnY(int delta)
+{
+    if (delta < 0)
+    {
+        WindowScale::rangeY *= 1.5;
+    }
+    else
+    {
+        WindowScale::rangeY *= 1 / 1.5;
+    }
+
+    PanelGraph::self->Draw();
 }
 
 

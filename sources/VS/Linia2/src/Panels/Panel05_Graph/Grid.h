@@ -23,6 +23,8 @@ public:
 
     void ScaleGridOn(const wxPoint &, int);
     void ScaleMeasuresOn(const wxPoint &, int);
+    void ScaleMeasuresOnX(int);
+    void ScaleMeasuresOnY(int);
 
     // Преобразует точку графика в координаты на холсте
     wxPoint ValuesToCoord(double x, double y) const;

@@ -106,8 +106,14 @@ void WindowScale::Range::operator+=(double &delta)
 
 void WindowScale::Range::operator*=(const double &delta)
 {
-    min *= delta;
-    max *= delta;
+    double center = (max - min) / 2.0;
+
+    double amplitude = Amplitude();
+
+    amplitude *= delta;
+
+    min = center - amplitude / 2.0;
+    max = center + amplitude / 2.0;
 }
 
 
