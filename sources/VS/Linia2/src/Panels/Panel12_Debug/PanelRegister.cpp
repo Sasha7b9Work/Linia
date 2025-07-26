@@ -54,6 +54,11 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
     {
         new PainterRegister(this, this, { 10, y0  } );
     }
+
+    Bind(wxEVT_RIGHT_DOWN, [](wxMouseEvent &event)
+        {
+            event.Skip(); // Пропустить событие дальше (родителю)
+        });
 }
 
 

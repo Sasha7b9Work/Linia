@@ -16,4 +16,10 @@ public:
 private:
 
     std::vector<PanelRegister *> registers;
+
+    void OnRightClick(wxMouseEvent &);
+
+    void OnMenuEvent(wxCommandEvent &);
+
+    void OnEventButton(wxCommandEvent &);
 };
