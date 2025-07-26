@@ -11,8 +11,9 @@ struct ModeMainWindow
 {
     enum E
     {
-        Standard,
-        Debug,
+        Standard,           // Стартовый вид окна
+        ReferenceGraphs,    // Архив эталонных графиков на весь экран
+        Debug,              // Отладочный режим - засылка в регисты
         Count
     };
 };

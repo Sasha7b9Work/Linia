@@ -282,19 +282,28 @@ void MainWindow::OnAbout(wxCommandEvent &WXUNUSED(event))
 
 void MainWindow::SetMode(ModeMainWindow::E mode)
 {
-    PanelName::self->Show(mode != ModeMainWindow::Debug);
-    PanelModeUpper::self->Show(mode != ModeMainWindow::Debug);
-    PanelConfig::self->Show(mode != ModeMainWindow::Debug);
-    PanelModel::self->Show(mode != ModeMainWindow::Debug);
-    PanelGraph::self->Show(mode != ModeMainWindow::Debug);
-    PanelPercents::self->Show(mode != ModeMainWindow::Debug);
-    PanelIndicator::self->Show(mode != ModeMainWindow::Debug);
-    PanelModeLower::self->Show(mode != ModeMainWindow::Debug);
-    PanelTable::self->Show(mode != ModeMainWindow::Debug);
-    PanelScale::self->Show(mode != ModeMainWindow::Debug);
-    PanelButtons::self->Show(mode != ModeMainWindow::Debug);
+    PanelName::self->Show(mode == ModeMainWindow::Standard);
+    PanelModeUpper::self->Show(mode == ModeMainWindow::Standard);
+    PanelConfig::self->Show(mode == ModeMainWindow::Standard);
+    PanelModel::self->Show(mode == ModeMainWindow::Standard);
+    PanelGraph::self->Show(mode == ModeMainWindow::Standard);
+    PanelPercents::self->Show(mode == ModeMainWindow::Standard);
+    PanelIndicator::self->Show(mode == ModeMainWindow::Standard);
+    PanelModeLower::self->Show(mode == ModeMainWindow::Standard);
+    PanelTable::self->Show(mode == ModeMainWindow::Standard);
+    PanelScale::self->Show(mode == ModeMainWindow::Standard);
+    PanelButtons::self->Show(mode == ModeMainWindow::Standard);
 
     PanelDebug::self->Show(mode == ModeMainWindow::Debug);
+
+    if (mode == ModeMainWindow::Standard)
+    {
+
+    }
+    else if (mode == ModeMainWindow::ReferenceGraphs)
+    {
+
+    }
 
     wxFrame::Layout();
 }
