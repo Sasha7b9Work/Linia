@@ -15,7 +15,7 @@ Grid::Grid()
 
 void Grid::CalculateCenter()
 {
-    center.x = PanelGraph::WIDTH / 2 + SizeCell() * 5                              // Перемещаемся к правой границе сетки
+    center.x = PanelGraph::WIDTH / 2 + SizeCell() * 5                               // Перемещаемся к правой границе сетки
         - (int)(WindowScale::rangeX.max / UnitsInCellX() * (double)SizeCell());     // И отсчитываем назад - влево
 
     center.y = PanelGraph::HEIGHT / 2 - SizeCell() * 5
@@ -306,6 +306,8 @@ void Grid::ScaleMeasuresOnX(int delta)
         WindowScale::rangeX *= 1 / 1.5;
     }
 
+    CalculateCenter();
+
     PanelGraph::self->Draw();
 }
 
@@ -320,6 +322,8 @@ void Grid::ScaleMeasuresOnY(int delta)
     {
         WindowScale::rangeY *= 1 / 1.5;
     }
+
+    CalculateCenter();
 
     PanelGraph::self->Draw();
 }
