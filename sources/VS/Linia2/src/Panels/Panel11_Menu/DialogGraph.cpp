@@ -17,7 +17,6 @@ enum
     ID_MENU_COLOR_SECANT,
     ID_MENU_MARKERS,
     ID_MENU_SCALE,
-    ID_MENU_SAVE,
     ID_MENU_RESET
 };
 

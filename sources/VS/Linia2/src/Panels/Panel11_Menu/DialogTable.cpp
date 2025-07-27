@@ -5,8 +5,7 @@
 
 enum
 {
-    ID_MENU_SAVE = wxID_HIGHEST + 1,
-    ID_MENU_DELETE,
+    ID_MENU_DELETE = wxID_HIGHEST + 1,
     ID_MENU_EXPAND,
     ID_MENU_COLLAPSE
 };

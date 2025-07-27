@@ -3,17 +3,27 @@
 #include "Panels/Panel11_Menu/DialogReport.h"
 
 
+enum
+{
+    ID_MENU_NEW = wxID_HIGHEST + 1,
+    ID_MENU_DELETE,
+    ID_MENU_EXPAND,
+    ID_MENU_COLLAPSE,
+    ID_MENU_CLOSE
+};
+
+
 DialogReport *DialogReport::self = nullptr;
 
 
 DialogReport::DialogReport() :
     MenuDialog(_("Отчёт"), 100,
-        _L("Новый"), ID_BTN_MENU_REPORT_NEW, OnButtonNew,
-        _L("Сохранить"), ID_BTN_MENU_REPORT_SAVE, OnButtonSave,
-        _L("Удалить"), ID_BTN_MENU_REPORT_DELETE, OnButtonDelete,
-        _L("Развернуть"), ID_BTN_MENU_REPORT_EXPAND, OnButtonExpand,
-        _L("Свернуть"), ID_BTN_MENU_REPORT_COLLAPSE, OnButtonCollapse,
-        _L("Закрыть"), ID_BTN_MENU_REPORT_CLOSE, OnButtonClose
+        _L("Новый"), ID_MENU_NEW, OnButtonNew,
+        _L("Сохранить"), ID_MENU_SAVE, OnButtonSave,
+        _L("Удалить"), ID_MENU_DELETE, OnButtonDelete,
+        _L("Развернуть"), ID_MENU_EXPAND, OnButtonExpand,
+        _L("Свернуть"), ID_MENU_COLLAPSE, OnButtonCollapse,
+        _L("Закрыть"), ID_MENU_CLOSE, OnButtonClose
     )
 {
     self = this;
