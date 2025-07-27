@@ -4,19 +4,6 @@
 #include "Panels/Panel11_Menu/WindowCorrectionZero.h"
 
 
-enum
-{
-    ID_BTN_USER = wxID_HIGHEST + 1,
-    ID_BTN_AUTOSAVE,
-    ID_BTN_CORRECTION_ZERO,
-    ID_BTN_CALIBRATION,
-    ID_BTN_TABLE,
-    ID_BTN_PASSWORD,
-    ID_BTN_ADDRESS_IP,
-    ID_BTN_MY_COMPUTER
-};
-
-
 DialogSetup *DialogSetup::self = nullptr;
 
 
@@ -25,7 +12,8 @@ DialogSetup::DialogSetup() :
         _L("Настройки пользователя"), ID_BTN_USER, [](){},
         _L("Запуск"), ID_BTN_START, []() {},
         _L("Автосохранение"), ID_BTN_AUTOSAVE, []() {},
-        _L("Коррекция смещения нуля"), ID_BTN_CORRECTION_ZERO, [](){
+        _L("Коррекция смещения нуля"), ID_BTN_CORRECTION_ZERO, []()
+        {
             WindowCorretionZero().ShowModal();
         },
         _L("Калибровка"), ID_BTN_CALIBRATION, []() {},

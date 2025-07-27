@@ -79,5 +79,28 @@ enum
 {
     ID_BTN_RETURN_TO_MAIN_PAGE = wxID_HIGHEST + 1,
     ID_MENU_SCALE,
-    ID_BTN_START
+    ID_BTN_START,
+
+    // Настройки
+    ID_BTN_USER,
+    ID_BTN_AUTOSAVE,
+    ID_BTN_CORRECTION_ZERO,
+    ID_BTN_CALIBRATION,
+    ID_BTN_TABLE,
+    ID_BTN_PASSWORD,
+    ID_BTN_ADDRESS_IP,
+    ID_BTN_MY_COMPUTER,
+
+    // Настройки - установка коррекции нуля
+    ID_RB_CHAN_C_MEAS_I,
+    ID_RB_CHAN_C_MEAS_U,
+    ID_RB_CHAN_B_MEAS_I,
+    ID_RB_CHAN_B_MEAS_U,
+    ID_RB_CHAN_B_SOURCE_I,
+    ID_RB_CHAN_B_SOURCE_U,
+    ID_RB_CHAN_S_MEAS_I,
+    ID_RB_CHAN_S_MEAS_U,
+    ID_RB_CHAN_S_SOURCE_I,
+    ID_RB_CHAN_S_SOURCE_U,
+    ID_BTN_CANCEL
 };
