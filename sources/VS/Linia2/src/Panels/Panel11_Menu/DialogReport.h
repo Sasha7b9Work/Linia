@@ -10,13 +10,4 @@ public:
     DialogReport();
 
     static DialogReport *self;
-
-private:
-
-    static void OnButtonNew();
-    static void OnButtonSave();
-    static void OnButtonDelete();
-    static void OnButtonExpand();
-    static void OnButtonCollapse();
-    static void OnButtonClose();
 };

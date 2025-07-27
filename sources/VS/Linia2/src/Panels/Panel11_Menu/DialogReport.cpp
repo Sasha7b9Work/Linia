@@ -18,49 +18,13 @@ DialogReport *DialogReport::self = nullptr;
 
 DialogReport::DialogReport() :
     MenuDialog(_("Отчёт"), 100,
-        _L("Новый"), ID_MENU_NEW, OnButtonNew,
-        _L("Сохранить"), wxID_SAVE, OnButtonSave,
-        _L("Удалить"), ID_MENU_DELETE, OnButtonDelete,
-        _L("Развернуть"), ID_MENU_EXPAND, OnButtonExpand,
-        _L("Свернуть"), ID_MENU_COLLAPSE, OnButtonCollapse,
-        _L("Закрыть"), ID_MENU_CLOSE, OnButtonClose
+        _L("Новый"), ID_MENU_NEW, [](){},
+        _L("Сохранить"), wxID_SAVE, []() {},
+        _L("Удалить"), ID_MENU_DELETE, []() {},
+        _L("Развернуть"), ID_MENU_EXPAND, []() {},
+        _L("Свернуть"), ID_MENU_COLLAPSE, []() {},
+        _L("Закрыть"), ID_MENU_CLOSE, []() {}
     )
 {
     self = this;
-}
-
-
-void DialogReport::OnButtonNew()
-{
-
-}
-
-
-void DialogReport::OnButtonSave()
-{
-
-}
-
-
-void DialogReport::OnButtonDelete()
-{
-
-}
-
-
-void DialogReport::OnButtonExpand()
-{
-
-}
-
-
-void DialogReport::OnButtonCollapse()
-{
-
-}
-
-
-void DialogReport::OnButtonClose()
-{
-
 }
