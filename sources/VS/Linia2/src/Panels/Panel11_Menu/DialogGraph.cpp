@@ -3,19 +3,38 @@
 #include "Panels/Panel11_Menu/DialogGraph.h"
 #include "Panels/Panel05_Graph/WindowScale.h"
 
+
+enum
+{
+    ID_MENU_SIZE_POINT = wxID_HIGHEST + 1,
+    ID_MENU_STYLE_CURVE,
+    ID_MENU_COLOR,
+    ID_MENU_COLOR_BACKGROUND,
+    ID_MENU_COLOR_GRID,
+    ID_MENU_COLOR_FONT,
+    ID_MENU_COLOR_CURVE,
+    ID_MENU_COLOR_LINK,
+    ID_MENU_COLOR_SECANT,
+    ID_MENU_MARKERS,
+    ID_MENU_SCALE,
+    ID_MENU_SAVE,
+    ID_MENU_RESET
+};
+
+
 DialogGraph *DialogGraph::self = nullptr;
 DialogGraphColor *DialogGraphColor::self = nullptr;
 
 
 DialogGraph::DialogGraph() :
     MenuDialog(_L("График"), 200,
-        _L("Размер точки"), ID_BTN_MENU_GRAPH_SIZE_POINT, OnButtonSizePoint,
-        _L("Стиль кривой"), ID_BTN_MENU_GRAPH_STYLE_CURVE, OnButtonStyleCurve,
-        _L("Цвет"), ID_BTN_MENU_GRAPH_COLOR, OnButtonColor,
-        _L("Маркеры"), ID_BTN_MENU_GRAPH_MARKERS, OnButtonMarkers,
-        _L("Шкала"), ID_BTN_MENU_GRAPH_SCALE, OnButtonScale,
-        _L("Сохранить график в архиве"), ID_BTN_MENU_GRAPH_SAVE, OnButtonSave,
-        _L("Сброс графика Ref"), ID_BTN_MENU_GRAPH_RESET, OnButtonReset
+        _L("Размер точки"), ID_MENU_SIZE_POINT, OnButtonSizePoint,
+        _L("Стиль кривой"), ID_MENU_STYLE_CURVE, OnButtonStyleCurve,
+        _L("Цвет"), ID_MENU_COLOR, OnButtonColor,
+        _L("Маркеры"), ID_MENU_MARKERS, OnButtonMarkers,
+        _L("Шкала"), ID_MENU_SCALE, OnButtonScale,
+        _L("Сохранить график в архиве"), ID_MENU_SAVE, OnButtonSave,
+        _L("Сброс графика Ref"), ID_MENU_RESET, OnButtonReset
     )
 {
     self = this;
@@ -66,12 +85,12 @@ void DialogGraph::OnButtonReset()
 
 DialogGraphColor::DialogGraphColor() :
     MenuDialog(_L("Цвет"), 125,
-        _L("Фона"), ID_BTN_MENU_GRAPH_COLOR_BACKGROUND, OnButtonBackground,
-        _L("Сетки"), ID_BTN_MENU_GRAPH_COLOR_GRID, OnButtonGrid,
-        _L("Шрифта"), ID_BTN_MENU_GRAPH_COLOR_FONT, OnButtonFont,
-        _L("Кривой"), ID_BTN_MENU_GRAPH_COLOR_CURVE, OnButtonCurve,
-        _L("Ссылки"), ID_BTN_MENU_GRAPH_COLOR_LINK, OnButtonLink,
-        _L("Секущей"), ID_BTN_MENU_GRAPH_COLOR_SECANT, OnButtonSecant
+        _L("Фона"), ID_MENU_COLOR_BACKGROUND, OnButtonBackground,
+        _L("Сетки"), ID_MENU_COLOR_GRID, OnButtonGrid,
+        _L("Шрифта"), ID_MENU_COLOR_FONT, OnButtonFont,
+        _L("Кривой"), ID_MENU_COLOR_CURVE, OnButtonCurve,
+        _L("Ссылки"), ID_MENU_COLOR_LINK, OnButtonLink,
+        _L("Секущей"), ID_MENU_COLOR_SECANT, OnButtonSecant
     )
 {
     self = this;
