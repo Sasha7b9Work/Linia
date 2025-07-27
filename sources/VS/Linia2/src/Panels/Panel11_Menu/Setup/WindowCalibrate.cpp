@@ -33,7 +33,7 @@ WindowCalibrate::WindowCalibrate() :
         wxArrayString choices;
         choices.push_back("50A");
 
-        new wxComboBox(box, ID_CALIB_RB_COMBO, choices[0], { d + 75, y }, { 75, TEXTCNTRL_HEIGHT }, choices, wxCB_DROPDOWN | wxCB_READONLY);
+        new wxComboBox(box, ID_CALIB_RB_COMBO, choices[0], { d + 75, y }, { 75, TEXTCNTRL_HEIGHT }, choices, wxCB_SIMPLE | wxCB_DROPDOWN | wxCB_READONLY);
 
         y += d;
 
