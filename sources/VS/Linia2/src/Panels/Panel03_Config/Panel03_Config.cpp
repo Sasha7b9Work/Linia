@@ -142,7 +142,7 @@ void PanelConfig::CreatePanelChannelC(wxPanel *panel, int x, int w)
         new wxComboBox(boxMeter, ID_CHAN_C_COMBO_Ic, choices[0], { 120, SD::Y_SB(y) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
     }
 
-    wxStaticBox *boxSource = new wxStaticBox(panel, wxID_ANY, _L("Источник U"), { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + x }, { w, 200 });
+    wxStaticBox *boxSource = new wxStaticBox(panel, wxID_ANY, _L("Источник") + " U", {x, boxMeter->GetPosition().y + boxMeter->GetSize().y + x}, {w, 200});
 
     {
         new wxStaticText(boxSource, wxID_ANY, _L("Диапазон Uc"), { 10, SD::Y_SB(30) });
