@@ -4,6 +4,12 @@
 #include "MainWindow.h"
 
 
+enum
+{
+    ID_TIMER_TIME = wxID_HIGHEST + 1
+};
+
+
 PanelName *PanelName::self = nullptr;
 
 
@@ -18,9 +24,9 @@ PanelName::PanelName(wxWindow *parent) :
 
     textTime = new wxStaticText(this, wxID_ANY, "", {0, 50}, {GetSize().x, 20}, wxALIGN_CENTRE_HORIZONTAL);
 
-    Bind(wxEVT_TIMER, &PanelName::OnTimer, this, ID_TIMER);
+    Bind(wxEVT_TIMER, &PanelName::OnTimer, this, ID_TIMER_TIME);
 
-    timer.SetOwner(this, ID_TIMER);
+    timer.SetOwner(this, ID_TIMER_TIME);
 
     timer.Start(100);
 }
@@ -38,7 +44,7 @@ void PanelName::WriteDateTime()
 
 void PanelName::OnTimer(wxTimerEvent &event)
 {
-    if (event.GetId() == ID_TIMER)
+    if (event.GetId() == ID_TIMER_TIME)
     {
         WriteDateTime();
     }

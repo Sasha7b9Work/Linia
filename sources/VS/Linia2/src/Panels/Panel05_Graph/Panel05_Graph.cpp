@@ -422,13 +422,13 @@ void PanelGraph::OnEventRightClick(wxMouseEvent &)
     wxMenu menu;
 
     // Добавляем пункты меню
-    menu.Append(ID_MENU_RESET, _L("Сброс"));
+    menu.Append(wxID_RESET, _L("Сброс"));
     menu.AppendCheckItem(ID_MENU_FULL_SCREEN, _L("Развернуть"));
 
     menu.AppendSeparator();
 
     // Привязываем обработчики для пунктов меню
-    Bind(wxEVT_MENU, &PanelGraph::OnMenuReset, this, ID_MENU_RESET);
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuReset, this, wxID_RESET);
     Bind(wxEVT_MENU, &PanelGraph::OnMenuFullScreen, this, ID_MENU_FULL_SCREEN);
 
     menu.Check(ID_MENU_FULL_SCREEN, full_screen);

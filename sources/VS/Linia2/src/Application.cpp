@@ -9,6 +9,12 @@
 #include "Windows/ConsoleRS232.h"
 
 
+enum
+{
+    ID_TIMER_APP = wxID_HIGHEST + 1
+};
+
+
 wxIMPLEMENT_APP(Application);
 
 
@@ -50,9 +56,9 @@ bool Application::OnInit()
 
     frame->Show();
 
-    Bind(wxEVT_TIMER, &Application::OnTimer, this, ID_TIMER);
+    Bind(wxEVT_TIMER, &Application::OnTimer, this, ID_TIMER_APP);
 
-    timer.SetOwner(this, ID_TIMER);
+    timer.SetOwner(this, ID_TIMER_APP);
 
     timer.Start(10);
 

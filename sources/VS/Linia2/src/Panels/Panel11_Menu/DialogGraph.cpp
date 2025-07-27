@@ -30,8 +30,8 @@ DialogGraph::DialogGraph() :
         _L("Цвет"), ID_MENU_COLOR, OnButtonColor,
         _L("Маркеры"), ID_MENU_MARKERS, OnButtonMarkers,
         _L("Шкала"), ID_MENU_SCALE, OnButtonScale,
-        _L("Сохранить график в архиве"), ID_MENU_SAVE, OnButtonSave,
-        _L("Сброс графика Ref"), ID_MENU_RESET, OnButtonReset
+        _L("Сохранить график в архиве"), wxID_SAVE, OnButtonSave,
+        _L("Сброс графика Ref"), wxID_RESET, OnButtonReset
     )
 {
     self = this;

@@ -77,10 +77,6 @@ static pString DIRECT_PROMT = "<- ";
 
 enum
 {
-    ID_TIMER = wxID_HIGHEST + 1,
-
-    ID_BTN_RETURN_TO_MAIN_PAGE,
-    ID_MENU_SAVE,
-    ID_MENU_SCALE,
-    ID_MENU_RESET
+    ID_BTN_RETURN_TO_MAIN_PAGE = wxID_HIGHEST + 1,
+    ID_MENU_SCALE
 };

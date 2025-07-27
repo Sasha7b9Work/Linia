@@ -19,7 +19,7 @@ DialogReport *DialogReport::self = nullptr;
 DialogReport::DialogReport() :
     MenuDialog(_("Отчёт"), 100,
         _L("Новый"), ID_MENU_NEW, OnButtonNew,
-        _L("Сохранить"), ID_MENU_SAVE, OnButtonSave,
+        _L("Сохранить"), wxID_SAVE, OnButtonSave,
         _L("Удалить"), ID_MENU_DELETE, OnButtonDelete,
         _L("Развернуть"), ID_MENU_EXPAND, OnButtonExpand,
         _L("Свернуть"), ID_MENU_COLLAPSE, OnButtonCollapse,
