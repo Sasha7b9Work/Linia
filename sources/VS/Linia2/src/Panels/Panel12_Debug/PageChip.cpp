@@ -12,7 +12,7 @@ PageChip::PageChip(wxNotebook *parent, const wxString &title) :
     wxPanel::SetBackgroundColour(parent->GetThemeBackgroundColour());
 
     wxSize size_button{ 75, BUTTON_HEIGHT };
-    new wxButton(this, ID_MENU_DEBUG_CLOSE, _L("Закрыть"), { MainWindow::WIDTH - size_button.x - 5, 0 }, size_button);
+    new wxButton(this, ID_BTN_RETURN_TO_MAIN_PAGE, _L("Закрыть"), { MainWindow::WIDTH - size_button.x - 5, 0 }, size_button);
 
     Bind(wxEVT_RIGHT_DOWN, &PageChip::OnRightClick, this);
     Bind(wxEVT_BUTTON, &PageChip::OnEventButton, this);
@@ -38,7 +38,7 @@ void PageChip::OnRightClick(wxMouseEvent &event)
 {
     wxMenu menu;
 
-    menu.Append(ID_MENU_DEBUG_CLOSE, _L("Закрыть"));
+    menu.Append(ID_BTN_RETURN_TO_MAIN_PAGE, _L("Закрыть"));
 
     Bind(wxEVT_MENU, &PageChip::OnMenuEvent, this);
 
@@ -52,7 +52,7 @@ void PageChip::OnMenuEvent(wxCommandEvent &event)
 {
     int id = event.GetId();
 
-    if (id == ID_MENU_DEBUG_CLOSE)
+    if (id == ID_BTN_RETURN_TO_MAIN_PAGE)
     {
         MainWindow::self->SetMode(ModeMainWindow::Standard);
     }
@@ -63,7 +63,7 @@ void PageChip::OnEventButton(wxCommandEvent &event)
 {
     int id = event.GetId();
 
-    if (id == ID_MENU_DEBUG_CLOSE)
+    if (id == ID_BTN_RETURN_TO_MAIN_PAGE)
     {
         MainWindow::self->SetMode(ModeMainWindow::Standard);
     }

@@ -1,6 +1,7 @@
 ﻿// 2025/7/12 16:56:22 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/Panel11_Menu/DialogArchive.h"
+#include "MainWindow.h"
 
 
 DialogArchive *DialogArchive::self = nullptr;
@@ -39,7 +40,9 @@ void DialogArchive::OnButtonLoadFrom()
 
 void DialogArchive::OnButtonOpen()
 {
+    MainWindow::self->SetMode(ModeMainWindow::ReferenceGraphs);
 
+    self->EndModal(0);
 }
 
 

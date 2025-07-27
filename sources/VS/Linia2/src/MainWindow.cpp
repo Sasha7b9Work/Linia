@@ -18,6 +18,7 @@
 #include "Panels/Panel10_Scale.h"
 #include "Panels/Panel11_Menu/Panel11_Menu.h"
 #include "Panels/Panel12_Debug/Panel12_Debug.h"
+#include "Panels/Panel13_ReferenceGraphs.h"
 #include "Controls/Dialog.h"
 
 
@@ -123,6 +124,8 @@ MainWindow::MainWindow(const wxString &title)
     new PanelButtons(this);
 
     new PanelDebug(this);
+
+    new PanelReferenceGraph(this);
 
     SetMode(SET::GUI::debug_mode.Get() ? ModeMainWindow::Debug : ModeMainWindow::Standard);
 }
@@ -296,14 +299,7 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
 
     PanelDebug::self->Show(mode == ModeMainWindow::Debug);
 
-    if (mode == ModeMainWindow::Standard)
-    {
-
-    }
-    else if (mode == ModeMainWindow::ReferenceGraphs)
-    {
-
-    }
+    PanelReferenceGraph::self->Show(mode == ModeMainWindow::ReferenceGraphs);
 
     wxFrame::Layout();
 }
