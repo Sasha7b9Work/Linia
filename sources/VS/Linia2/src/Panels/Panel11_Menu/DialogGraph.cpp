@@ -4,21 +4,6 @@
 #include "Panels/Panel05_Graph/WindowScale.h"
 
 
-enum
-{
-    ID_MENU_SIZE_POINT = wxID_HIGHEST + 1,
-    ID_MENU_STYLE_CURVE,
-    ID_MENU_COLOR,
-    ID_MENU_COLOR_BACKGROUND,
-    ID_MENU_COLOR_GRID,
-    ID_MENU_COLOR_FONT,
-    ID_MENU_COLOR_CURVE,
-    ID_MENU_COLOR_LINK,
-    ID_MENU_COLOR_SECANT,
-    ID_MENU_MARKERS
-};
-
-
 DialogGraph *DialogGraph::self = nullptr;
 DialogGraphColor *DialogGraphColor::self = nullptr;
 
