@@ -4,19 +4,6 @@
 #include "Panels/Panel05_Graph/WindowScale.h"
 
 
-enum
-{
-    ID_LINE_X_MIN = wxID_HIGHEST + 1,
-    ID_LINE_X_MAX,
-    ID_LINE_Y_MIN,
-    ID_LINE_Y_MAX,
-    ID_SPIN_ACCURACY,
-    ID_COMBO_NUMBER,
-    ID_BTN_APPLY,
-    ID_BTN_CAN
-};
-
-
 WindowScale::Range WindowScale::rangeX{ -12, 28, "Uc", "V"};
 WindowScale::Range WindowScale::rangeY{ -2.5, 7.5, "Ic", "A"};
 
