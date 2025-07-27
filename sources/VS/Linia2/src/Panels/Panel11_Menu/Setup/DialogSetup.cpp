@@ -3,6 +3,7 @@
 #include "Panels/Panel11_Menu/Setup/DialogSetup.h"
 #include "Panels/Panel11_Menu/Setup/WindowCorrectionZero.h"
 #include "Panels/Panel11_Menu/Setup/WindowCalibrate.h"
+#include "Panels/Panel11_Menu/Setup/WindowTableOffsets.h"
 
 
 DialogSetup *DialogSetup::self = nullptr;
@@ -21,7 +22,10 @@ DialogSetup::DialogSetup() :
         {
             WindowCalibrate().ShowModal();
         },
-        _L("Таблица смещений и коэффициентов"), ID_BTN_TABLE, []() {},
+        _L("Таблица смещений и коэффициентов"), ID_BTN_TABLE, []()
+        {
+            WindowTableOffsets().ShowModal();
+        },
         _L("Изменить пароль"), ID_BTN_PASSWORD, []() {},
         _L("IP-адрес"), ID_BTN_ADDRESS_IP, []() {},
         _L("Мой компьютер"), ID_BTN_MY_COMPUTER, []() {}
