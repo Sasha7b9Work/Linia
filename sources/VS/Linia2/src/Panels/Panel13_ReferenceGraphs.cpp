@@ -103,6 +103,9 @@ void PanelReferenceGraph::OnEventRightClick(wxMouseEvent &event)
     menu.Append(ID_MENU_ARCHIVE_CLEAR, _L("Очистить архив"));
     menu.AppendSeparator();
     menu.Append(ID_MENU_ARCHIVE_DELETE_FROM, _L("Удалить из архива"));
+    menu.Append(ID_MENU_ARCHIVE_LOAD_FROM, _L("Загрузить из архива"));
+    menu.AppendSeparator();
+    menu.Append(ID_BTN_RETURN_TO_MAIN_PAGE, _("Закрыть архив"));
 
     Bind(wxEVT_MENU, &PanelReferenceGraph::OnEventMenu, this);
 
