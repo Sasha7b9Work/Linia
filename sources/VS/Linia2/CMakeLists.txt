@@ -56,6 +56,7 @@ file(GLOB COMMUNICATOR                  src/Communicator/*.*)
 file(GLOB COMMUNICATOR_COMPORT          src/Communicator/ComPort/*.*)
 file(GLOB COMMUNICATOR_SPI              src/Communicator/SPI/*.*)
 file(GLOB CONTROLS                      src/Controls/*.*)
+file(GLOB DEVICE                        src/Device/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
 file(GLOB PANELS_PANEL3                 src/Panels/Panel03_Config/*.*)
 file(GLOB PANELS_PANEL5                 src/Panels/Panel05_Graph/*.*)
@@ -73,6 +74,7 @@ source_group(Communicator               FILES ${COMMUNICATOR})
 source_group(Communicator/ComPort       FILES ${COMMUNICATOR_COMPORT})
 source_group(Communicator/SPI           FILES ${COMMUNICATOR_SPI})
 source_group(Controls                   FILES ${CONTROLS})
+source_group(Device                     FILES ${DEVICE})
 source_group(Panels                     FILES ${PANELS})
 source_group(Panels/Panel03_Config      FILES ${PANELS_PANEL3})
 source_group(Panels/Panel05_Graph       FILES ${PANELS_PANEL5})
@@ -91,6 +93,7 @@ add_executable(${PROJECT_NAME}
     ${COMMUNICATOR_COMPORT}
     ${COMMUNICATOR_SPI}
     ${CONTROLS}
+    ${DEVICE}
     ${PANELS}
     ${PANELS_PANEL3}
     ${PANELS_PANEL5}
@@ -142,4 +145,5 @@ else()
         dl 
         )
 endif()
+
 

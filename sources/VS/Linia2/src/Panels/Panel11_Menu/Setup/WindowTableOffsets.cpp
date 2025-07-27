@@ -6,5 +6,11 @@
 WindowTableOffsets::WindowTableOffsets() :
     Dialog(nullptr, wxID_ANY, _L("Таблица смещений и коэффициентов"), wxDefaultPosition, { WIDTH, HEIGHT })
 {
+    table = new TableValues(this);
+}
 
+
+void WindowTableOffsets::FillTable()
+{
+    wxVector <TableStruct> values;
 }
