@@ -9,20 +9,6 @@
 #include <algorithm>
 
 
-enum
-{
-    ID_MENU_FULL_SCREEN = wxID_HIGHEST + 1,
-    ID_MENU_TRACK_X,
-    ID_MENU_TRACK_Y,
-    ID_MENU_TRACK_NONE,
-    ID_BUTTON_HELP,
-    ID_BUTTON_X_LESS,
-    ID_BUTTON_X_MORE,
-    ID_BUTTON_Y_LESS,
-    ID_BUTTON_Y_MORE
-};
-
-
 wxBitmap PanelGraph::bitmap(WIDTH, HEIGHT);
 
 

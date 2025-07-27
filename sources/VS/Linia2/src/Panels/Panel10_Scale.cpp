@@ -8,21 +8,6 @@
 #include "Utils/SystemDepend.h"
 
 
-enum
-{
-    ID_BTN_SCALE = wxID_HIGHEST + 1,
-    ID_BTN_ERRORS,
-    ID_BTN_1,
-    ID_BTN_2,
-    ID_BTN_3,
-    ID_CHBOX_1,
-    ID_CHBOX_2,
-    ID_CHBOX_3,
-    ID_CHBOX_4,
-    ID_CHBOX_5
-};
-
-
 PanelScale *PanelScale::self = nullptr;
 
 

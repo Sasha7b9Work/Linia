@@ -161,8 +161,31 @@ enum
     /////////////////////////////////////////////////////////////////////////////////// Панель 4
     ID_PAN4_TEXT_NAME,
 
+    /////////////////////////////////////////////////////////////////////////////////// Панель 5
+    ID_MENU_FULL_SCREEN,
+    ID_MENU_TRACK_X,
+    ID_MENU_TRACK_Y,
+    ID_MENU_TRACK_NONE,
+    ID_BUTTON_HELP,
+    ID_BUTTON_X_LESS,
+    ID_BUTTON_X_MORE,
+    ID_BUTTON_Y_LESS,
+    ID_BUTTON_Y_MORE,
+
     /////////////////////////////////////////////////////////////////////////////////// Панель 8
     ID_PAN8_COMBO,
+
+    /////////////////////////////////////////////////////////////////////////////////// Панель 10
+    ID_BTN_SCALE,
+    ID_BTN_ERRORS,
+    ID_BTN_1,
+    ID_BTN_2,
+    ID_BTN_3,
+    ID_CHBOX_1,
+    ID_CHBOX_2,
+    ID_CHBOX_3,
+    ID_CHBOX_4,
+    ID_CHBOX_5,
 
     // Настройки
     ID_BTN_USER,
