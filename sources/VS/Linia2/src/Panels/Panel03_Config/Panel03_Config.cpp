@@ -33,12 +33,12 @@ enum
     // Схема включения
     ID_PAN3_TEST_COMBOBOX,
     ID_PAN3_TEST_BUTTON,
-    ID_PAN3_COMM_COMBO_TYPE,
-    ID_PAN3_COMM_COMBO_CHAN_C,
-    ID_PAN3_COMM_COMBO_CHAN_B,
-    ID_PAN3_COMM_COMBO_C,
-    ID_PAN3_COMM_COMBO_B,
-    ID_PAN3_COMM_COMBO_E,
+    ID_COMM_COMBO_TYPE,
+    ID_COMM_COMBO_CHAN_C,
+    ID_COMM_COMBO_CHAN_B,
+    ID_COMM_COMBO_C,
+    ID_COMM_COMBO_B,
+    ID_COMM_COMBO_E,
 
     // Канал B
     // Генератор ступенек
@@ -424,15 +424,15 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
         choices.Add(_L("внутренняя"));
         choices.Add(_L("внешняя"));
 
-        new wxComboBox(boxCommutation, ID_PAN3_COMM_COMBO_TYPE, choices[0], { x + width_category, SD::Y_SB(20) }, { 110, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new wxComboBox(boxCommutation, ID_COMM_COMBO_TYPE, choices[0], { x + width_category, SD::Y_SB(20) }, { 110, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
         choices.clear();
         choices.Add(_L("канал") + " C");
         choices.Add(_L("канал") + " B");
 
-        new wxComboBox(boxCommutation, ID_PAN3_COMM_COMBO_CHAN_C, choices[0], { x + width_category + 30, SD::Y_SB(50) }, { 110 - 30, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new wxComboBox(boxCommutation, ID_COMM_COMBO_CHAN_C, choices[0], { x + width_category + 30, SD::Y_SB(50) }, { 110 - 30, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
-        new wxComboBox(boxCommutation, ID_PAN3_COMM_COMBO_CHAN_B, choices[1], { x + width_category + 30, SD::Y_SB(80) }, { 110 - 30, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new wxComboBox(boxCommutation, ID_COMM_COMBO_CHAN_B, choices[1], { x + width_category + 30, SD::Y_SB(80) }, { 110 - 30, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
         choices.clear();
         choices.Add("C");
@@ -441,13 +441,13 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
 
         int w = 30;
 
-        new wxComboBox(boxCommutation, ID_PAN3_COMM_COMBO_C, choices[0], { 100, 170 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-        new wxComboBox(boxCommutation, ID_PAN3_COMM_COMBO_B, choices[1], { 40, 210 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_DROPDOWN);
-        new wxComboBox(boxCommutation, ID_PAN3_COMM_COMBO_E, choices[2], { 100, 250 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new wxComboBox(boxCommutation, ID_COMM_COMBO_C, choices[0], { 100, 170 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new wxComboBox(boxCommutation, ID_COMM_COMBO_B, choices[1], { 40, 210 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_DROPDOWN);
+        new wxComboBox(boxCommutation, ID_COMM_COMBO_E, choices[2], { 100, 250 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
-        GF::FindComboBox(this, ID_PAN3_COMM_COMBO_C)->Enable(false);
-        GF::FindComboBox(this, ID_PAN3_COMM_COMBO_B)->Enable(false);
-        GF::FindComboBox(this, ID_PAN3_COMM_COMBO_E)->Enable(false);
+        GF::FindComboBox(this, ID_COMM_COMBO_C)->Enable(false);
+        GF::FindComboBox(this, ID_COMM_COMBO_B)->Enable(false);
+        GF::FindComboBox(this, ID_COMM_COMBO_E)->Enable(false);
     }
 
     wxStaticBox *boxCategory = new wxStaticBox(panel, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 250 });
