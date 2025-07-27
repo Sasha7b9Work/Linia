@@ -100,10 +100,30 @@ void PanelReferenceGraph::OnEventRightClick(wxMouseEvent &event)
 {
     wxMenu menu;
 
-    menu.Append(ID_MENU_ARCHIVE_CLEAR, _L("Очистить архив"));
+    wxMenuItem *item = menu.Append(ID_MENU_ARCHIVE_CLEAR, _L("Очистить архив"));
+
+    if (grid->GetNumberRows() == 0)
+    {
+        item->Enable(false);
+    }
+
     menu.AppendSeparator();
-    menu.Append(ID_MENU_ARCHIVE_DELETE_FROM, _L("Удалить из архива"));
-    menu.Append(ID_MENU_ARCHIVE_LOAD_FROM, _L("Загрузить из архива"));
+    item = menu.Append(ID_MENU_ARCHIVE_DELETE_FROM, _L("Удалить из архива"));
+
+    wxArrayInt selected = grid->GetSelectedRows();
+
+    if (selected.IsEmpty())
+    {
+        item->Enable(false);
+    }
+
+    item = menu.Append(ID_MENU_ARCHIVE_LOAD_FROM, _L("Загрузить из архива"));
+
+    if (selected.IsEmpty())
+    {
+        item->Enable(false);
+    }
+
     menu.AppendSeparator();
     menu.Append(ID_BTN_RETURN_TO_MAIN_PAGE, _("Закрыть архив"));
 
@@ -115,9 +135,14 @@ void PanelReferenceGraph::OnEventRightClick(wxMouseEvent &event)
 }
 
 
-void PanelReferenceGraph::OnEventMenu(wxCommandEvent &)
+void PanelReferenceGraph::OnEventMenu(wxCommandEvent &event)
 {
+    int id = event.GetId();
 
+    if (id == ID_BTN_RETURN_TO_MAIN_PAGE)
+    {
+        MainWindow::self->SetMode(ModeMainWindow::Standard);
+    }
 }
 
 
