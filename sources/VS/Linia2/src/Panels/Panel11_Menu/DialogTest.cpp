@@ -3,6 +3,22 @@
 #include "Panels/Panel11_Menu/DialogTest.h"
 
 
+enum
+{
+    ID_BTN_MENU_TEST_APPEND = wxID_HIGHEST + 1,
+    ID_BTN_MENU_TEST_APPEND_ACTIVE,
+    ID_BTN_MENU_TEST_APPEND_FROM_LIBRARY,
+    ID_BTN_MENU_TEST_SAVE_PARAMETERS,
+    ID_BTN_MENU_TEST_DELETE,
+    ID_BTN_MENU_TEST_DELETE_ALL,
+    ID_BTN_MENU_TEST_COPY,
+    ID_BTN_MENU_TEST_INSERT,
+    ID_BTN_MENU_TEST_RENAME,
+    ID_BTN_MENU_TEST_LIBRARY_TESTS,
+    ID_BTN_MENU_TEST_SAVE_TO_LIBRARY
+};
+
+
 DialogTest *DialogTest::self = nullptr;
 DialogTestAppend *DialogTestAppend::self = nullptr;
 

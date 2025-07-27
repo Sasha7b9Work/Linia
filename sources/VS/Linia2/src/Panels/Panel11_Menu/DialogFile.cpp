@@ -3,10 +3,6 @@
 #include "Panels/Panel11_Menu/DialogFile.h"
 
 
-
-DialogFile *DialogFile::self = nullptr;
-
-
 enum
 {
     ID_BTN_MENU_FILE_NEW = wxID_HIGHEST + 1,
@@ -16,6 +12,9 @@ enum
     ID_BTN_MENU_FILE_SAVE_AS,
     ID_BTN_MENU_FILE_DELETE
 };
+
+
+DialogFile *DialogFile::self = nullptr;
 
 
 DialogFile::DialogFile() :
