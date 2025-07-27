@@ -7,14 +7,14 @@ class WindowCorretionZero : public Dialog
 {
 public:
 
-    static const int WIDTH = 300;
+    static const int WIDTH = 350;
     static const int HEIGHT = 500;
 
     WindowCorretionZero();
 
 private:
 
+    wxVector <wxRadioButton *> buttons;
+
     void OnEventRadioButton(wxCommandEvent &);
-
-
 };

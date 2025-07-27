@@ -12,15 +12,15 @@ WindowCorretionZero::WindowCorretionZero() :
 
     int d = 10;
 
-    int w = WIDTH / 2 - 3 * d;
+    const int w = WIDTH / 2 - 3 * d;
 
     int h = 80;
 
     wxStaticBox *box = new wxStaticBox(this, wxID_ANY, _L("Канал") + " C", { d, d }, { w, h });
 
     {
-        new wxRadioButton(box, ID_RB_CHAN_C_MEAS_I, _L("Измеритель") + " I", { d, SD::Y_SB(x_rb) }, wxDefaultSize, wxRB_GROUP);
-        new wxRadioButton(box, ID_RB_CHAN_C_MEAS_U, _L("Измеритель") + " U", { d ,SD::Y_SB(x_rb + drb) });
+        buttons.push_back(new wxRadioButton(box, ID_RB_CHAN_C_MEAS_I, _L("Измеритель") + " I", { d, SD::Y_SB(x_rb) }, wxDefaultSize, wxRB_GROUP));
+        buttons.push_back(new wxRadioButton(box, ID_RB_CHAN_C_MEAS_U, _L("Измеритель") + " U", { d ,SD::Y_SB(x_rb + drb) }));
     }
 
     int h2 = 130;
@@ -28,10 +28,10 @@ WindowCorretionZero::WindowCorretionZero() :
     box = new wxStaticBox(this, wxID_ANY, _L("Канал") + " B", { d, d * 2 + h }, { w, h2 });
 
     {
-        new wxRadioButton(box, ID_RB_CHAN_B_MEAS_I, _L("Измеритель") + " I", { d, SD::Y_SB(x_rb) });
-        new wxRadioButton(box, ID_RB_CHAN_B_MEAS_U, _L("Измеритель") + " U", { d, SD::Y_SB(x_rb + drb) });
-        new wxRadioButton(box, ID_RB_CHAN_B_SOURCE_I, _L("Источник") + " I", { d, SD::Y_SB(x_rb + 2 * drb) });
-        new wxRadioButton(box, ID_RB_CHAN_B_SOURCE_U, _L("Источник") + " U", { d, SD::Y_SB(x_rb + 3 * drb) });
+        buttons.push_back(new wxRadioButton(box, ID_RB_CHAN_B_MEAS_I, _L("Измеритель") + " I", { d, SD::Y_SB(x_rb) }));
+        buttons.push_back(new wxRadioButton(box, ID_RB_CHAN_B_MEAS_U, _L("Измеритель") + " U", { d, SD::Y_SB(x_rb + drb) }));
+        buttons.push_back(new wxRadioButton(box, ID_RB_CHAN_B_SOURCE_I, _L("Источник") + " I", { d, SD::Y_SB(x_rb + 2 * drb) }));
+        buttons.push_back(new wxRadioButton(box, ID_RB_CHAN_B_SOURCE_U, _L("Источник") + " U", { d, SD::Y_SB(x_rb + 3 * drb) }));
     }
 
     h += d + h2;
@@ -39,17 +39,31 @@ WindowCorretionZero::WindowCorretionZero() :
     box = new wxStaticBox(this, wxID_ANY, _L("Канал") + " S", { d, d * 2 + h }, { w, h2 });
 
     {
-        new wxRadioButton(box, ID_RB_CHAN_S_MEAS_I, _L("Измеритель") + " I", { d, SD::Y_SB(x_rb) });
-        new wxRadioButton(box, ID_RB_CHAN_S_MEAS_U, _L("Измеритель") + " U", { d, SD::Y_SB(x_rb + drb) });
-        new wxRadioButton(box, ID_RB_CHAN_S_SOURCE_I, _L("Источник") + " I", { d, SD::Y_SB(x_rb + 2 * drb) });
-        new wxRadioButton(box, ID_RB_CHAN_S_SOURCE_U, _L("Источник") + " U", { d, SD::Y_SB(x_rb + 3 * drb) });
+        buttons.push_back(new wxRadioButton(box, ID_RB_CHAN_S_MEAS_I, _L("Измеритель") + " I", { d, SD::Y_SB(x_rb) }));
+        buttons.push_back(new wxRadioButton(box, ID_RB_CHAN_S_MEAS_U, _L("Измеритель") + " U", { d, SD::Y_SB(x_rb + drb) }));
+        buttons.push_back(new wxRadioButton(box, ID_RB_CHAN_S_SOURCE_I, _L("Источник") + " I", { d, SD::Y_SB(x_rb + 2 * drb) }));
+        buttons.push_back(new wxRadioButton(box, ID_RB_CHAN_S_SOURCE_U, _L("Источник") + " U", { d, SD::Y_SB(x_rb + 3 * drb) }));
     }
+
+    box = new wxStaticBox(this, wxID_ANY, _L("Внимание") + " !", {d + w + d, d}, {w, 200});
+
+    new wxStaticText(box, wxID_ANY,
+        "Подключите контактирующее устройство и соедините гнёзда с помощью перемычек согласно схеме",
+        { d, 50 }, { w - 20, 150 });
 
     Bind(wxEVT_RADIOBUTTON, &WindowCorretionZero::OnEventRadioButton, this);
 }
 
 
-void WindowCorretionZero::OnEventRadioButton(wxCommandEvent &)
+void WindowCorretionZero::OnEventRadioButton(wxCommandEvent &event)
 {
+    int id = event.GetId();
 
+    for (auto btn : buttons)
+    {
+        if (btn->GetId() != id)
+        {
+            btn->SetValue(false);
+        }
+    }
 }
