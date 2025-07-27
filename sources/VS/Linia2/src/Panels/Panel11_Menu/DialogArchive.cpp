@@ -12,8 +12,7 @@ DialogArchive::DialogArchive() :
         _L("Очистить архив"), ID_BTN_MENU_ARCHIVE_CLEAR, OnButtonClear,
         _L("Удалить из архива"), ID_BTN_MENU_ARCHIVE_DELETE_FROM, OnButtonDeleteFrom,
         _L("Загрузить из архива"), ID_BTN_MENU_ARCHIVE_LOAD_FROM, OnButtonLoadFrom,
-        _L("Открыть архив"), ID_BTN_MENU_ARCHIVE_OPEN, OnButtonOpen,
-        _L("Закрыть архив"), ID_BTN_MENU_ARCHIVE_CLOSE, OnButtonClose
+        _L("Открыть архив"), ID_BTN_MENU_ARCHIVE_OPEN, OnButtonOpen
     )
 {
     self = this;
@@ -43,10 +42,4 @@ void DialogArchive::OnButtonOpen()
     MainWindow::self->SetMode(ModeMainWindow::ReferenceGraphs);
 
     self->EndModal(0);
-}
-
-
-void DialogArchive::OnButtonClose()
-{
-
 }

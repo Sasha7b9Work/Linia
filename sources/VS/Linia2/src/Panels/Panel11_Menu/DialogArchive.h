@@ -17,5 +17,4 @@ private:
     static void OnButtonDeleteFrom();
     static void OnButtonLoadFrom();
     static void OnButtonOpen();
-    static void OnButtonClose();
 };
