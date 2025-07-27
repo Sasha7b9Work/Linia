@@ -14,7 +14,21 @@ enum
     ID_BTN_CHANNEL_B,
     ID_BTN_CHANNEL_S,
     ID_BTN_SCHEME,
-    ID_BTN_CALCULATION
+    ID_BTN_CALCULATION,
+
+    ID_CHAN_C_RB_SCAN_1,
+    ID_CHAN_C_RB_SCAN_2,
+    ID_CHAN_C_RB_SCAN_3,
+    ID_CHAN_C_RB_SCAN_4,
+    ID_CHAN_C_RB_SCAN_5,
+    ID_CHAN_C_RB_SCAN_6,
+    ID_CHAN_C_RB_SCAN_7,
+    ID_CHAN_C_CHECK_DUTY_CYCLE,
+    ID_CHAN_C_COMBO_Uc,
+    ID_CHAN_C_COMBO_Ic,
+    ID_CHAN_C_COMBO_SOURCE,
+    ID_CHAN_C_SPIN_START,
+    ID_CHAN_C_SPIN_STOP
 };
 
 
@@ -106,19 +120,19 @@ void PanelConfig::CreatePanelChannelC(wxPanel *panel, int x, int w)
     {
         wxSize size_rb{ 50, 15 };
 
-        new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_1, "1", { 10, SD::Y_SB(20) }, size_rb);
-        new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_2, "2", { 70, SD::Y_SB(20) }, size_rb);
+        new wxRadioButton(boxScan, ID_CHAN_C_RB_SCAN_1, "1", { 10, SD::Y_SB(20) }, size_rb);
+        new wxRadioButton(boxScan, ID_CHAN_C_RB_SCAN_2, "2", { 70, SD::Y_SB(20) }, size_rb);
 
-        new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_3, "3", { 10, SD::Y_SB(50) }, size_rb);
-        new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_4, "4", { 70, SD::Y_SB(50) }, size_rb);
+        new wxRadioButton(boxScan, ID_CHAN_C_RB_SCAN_3, "3", { 10, SD::Y_SB(50) }, size_rb);
+        new wxRadioButton(boxScan, ID_CHAN_C_RB_SCAN_4, "4", { 70, SD::Y_SB(50) }, size_rb);
 
-        new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_5, "5", { 10, SD::Y_SB(80) }, size_rb);
-        new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_6, "6", { 70, SD::Y_SB(80) }, size_rb);
+        new wxRadioButton(boxScan, ID_CHAN_C_RB_SCAN_5, "5", { 10, SD::Y_SB(80) }, size_rb);
+        new wxRadioButton(boxScan, ID_CHAN_C_RB_SCAN_6, "6", { 70, SD::Y_SB(80) }, size_rb);
 
-        new wxRadioButton(boxScan, ID_PAN3_CHAN_C_RB_SCAN_7, "7", { 130, SD::Y_SB(20) }, size_rb);
+        new wxRadioButton(boxScan, ID_CHAN_C_RB_SCAN_7, "7", { 130, SD::Y_SB(20) }, size_rb);
 
         {
-            wxCommandEvent evt(wxEVT_RADIOBUTTON, ID_PAN3_CHAN_C_RB_SCAN_1);
+            wxCommandEvent evt(wxEVT_RADIOBUTTON, ID_CHAN_C_RB_SCAN_1);
             evt.SetInt(1);
             boxScan->ProcessWindowEvent(evt);
         }
@@ -129,7 +143,7 @@ void PanelConfig::CreatePanelChannelC(wxPanel *panel, int x, int w)
             new wxStaticText(boxImpulse, wxID_ANY, "0.2 ms", { 10, SD::Y_SB(20) });
         }
 
-        new wxCheckBox(boxScan, ID_PAN3_CHAN_C_CHECK_DUTY_CYCLE, _L("Скважн. x 2"), { 100, SD::Y_SB(120) }, { 100, 20 });
+        new wxCheckBox(boxScan, ID_CHAN_C_CHECK_DUTY_CYCLE, _L("Скважн. x 2"), { 100, SD::Y_SB(120) }, { 100, 20 });
     }
 
     wxStaticBox *boxMeter = new wxStaticBox(panel, wxID_ANY, _L("Измеритель"), { x, boxScan->GetSize().y + x }, { w, 50 });
@@ -144,12 +158,12 @@ void PanelConfig::CreatePanelChannelC(wxPanel *panel, int x, int w)
         wxArrayString choices;
         choices.Add("100V");
 
-        new wxComboBox(boxMeter, ID_PAN3_CHAN_C_COMBO_Uc, choices[0], { 30, SD::Y_SB(y) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new wxComboBox(boxMeter, ID_CHAN_C_COMBO_Uc, choices[0], { 30, SD::Y_SB(y) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
         choices.Clear();
         choices.Add("10A");
 
-        new wxComboBox(boxMeter, ID_PAN3_CHAN_C_COMBO_Ic, choices[0], { 120, SD::Y_SB(y) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new wxComboBox(boxMeter, ID_CHAN_C_COMBO_Ic, choices[0], { 120, SD::Y_SB(y) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
     }
 
     wxStaticBox *boxSource = new wxStaticBox(panel, wxID_ANY, _L("Источник U"), { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + x }, { w, 200 });
@@ -160,7 +174,7 @@ void PanelConfig::CreatePanelChannelC(wxPanel *panel, int x, int w)
         wxArrayString choices;
         choices.Add("20V");
 
-        new wxComboBox(boxSource, ID_PAN3_CHAN_C_COMBO_SOURCE, choices[0], { 100, SD::Y_SB(27) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new wxComboBox(boxSource, ID_CHAN_C_COMBO_SOURCE, choices[0], { 100, SD::Y_SB(27) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
         new wxStaticText(boxSource, wxID_ANY, _L("Ограничение Uc, %%"), { 40, SD::Y_SB(55) });
 
@@ -170,8 +184,8 @@ void PanelConfig::CreatePanelChannelC(wxPanel *panel, int x, int w)
         new wxStaticText(boxSource, wxID_ANY, _L("Старт"), { 10, SD::Y_SB(y + dy) });
         new wxStaticText(boxSource, wxID_ANY, _L("Стоп"), { 10, SD::Y_SB(y + 30 + dy) });
 
-        new wxSpinCtrl(boxSource, ID_PAN3_CHAN_C_SPIN_START, "0", { 80, SD::Y_SB(y) }, { 100, TEXTCNTRL_HEIGHT });
-        new SpinBox(boxSource, ID_PAN3_CHAN_C_SPIN_STOP, "100", { 80, SD::Y_SB(y + 30) }, { 100, TEXTCNTRL_HEIGHT });
+        new wxSpinCtrl(boxSource, ID_CHAN_C_SPIN_START, "0", { 80, SD::Y_SB(y) }, { 100, TEXTCNTRL_HEIGHT });
+        new SpinBox(boxSource, ID_CHAN_C_SPIN_STOP, "100", { 80, SD::Y_SB(y + 30) }, { 100, TEXTCNTRL_HEIGHT });
     }
 }
 
