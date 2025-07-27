@@ -14,7 +14,12 @@ enum
     ID_MENU_FULL_SCREEN = wxID_HIGHEST + 1,
     ID_MENU_TRACK_X,
     ID_MENU_TRACK_Y,
-    ID_MENU_TRACK_NONE
+    ID_MENU_TRACK_NONE,
+    ID_BUTTON_HELP,
+    ID_BUTTON_X_LESS,
+    ID_BUTTON_X_MORE,
+    ID_BUTTON_Y_LESS,
+    ID_BUTTON_Y_MORE
 };
 
 
@@ -46,11 +51,11 @@ PanelGraph::PanelGraph(wxWindow *parent) :
     int x0 = d;
     int y0 = HEIGHT - d - w;
 
-    new wxButton(this, ID_GRID_BUTTON_HELP, "?", { x0, y0 }, size);
-    new wxButton(this, ID_GRID_BUTTON_X_LESS, "X-", { x0 + w + d, y0 }, size);
-    new wxButton(this, ID_GRID_BUTTON_X_MORE, "X+", { x0 + 2 * (w + d), y0 }, size);
-    new wxButton(this, ID_GRID_BUTTON_Y_LESS, "Y-", { x0, y0 - w - d }, size);
-    new wxButton(this, ID_GRID_BUTTON_Y_MORE, "Y+", { x0, y0 - 2 * (w + d) }, size);
+    new wxButton(this, ID_BUTTON_HELP, "?", { x0, y0 }, size);
+    new wxButton(this, ID_BUTTON_X_LESS, "X-", { x0 + w + d, y0 }, size);
+    new wxButton(this, ID_BUTTON_X_MORE, "X+", { x0 + 2 * (w + d), y0 }, size);
+    new wxButton(this, ID_BUTTON_Y_LESS, "Y-", { x0, y0 - w - d }, size);
+    new wxButton(this, ID_BUTTON_Y_MORE, "Y+", { x0, y0 - 2 * (w + d) }, size);
 
     CreateEntities();
 
@@ -127,24 +132,24 @@ void PanelGraph::OnEventButton(wxCommandEvent &event)
 {
     int id = event.GetId();
 
-    if (id == ID_GRID_BUTTON_HELP)
+    if (id == ID_BUTTON_HELP)
     {
         wxMessageBox("Левая Кнопка Мыши - перемещение графика.\nКолёсико - масштаб графика.\n"
             "ЛКМ+Ctrl - перемещение сетки.\nКолёсико+Ctrl - масштаб сетки.", " ");
     }
-    else if (id == ID_GRID_BUTTON_X_LESS)
+    else if (id == ID_BUTTON_X_LESS)
     {
         grid.ScaleMeasuresOnX(-1);
     }
-    else if (id == ID_GRID_BUTTON_X_MORE)
+    else if (id == ID_BUTTON_X_MORE)
     {
         grid.ScaleMeasuresOnX(+1);
     }
-    else if (id == ID_GRID_BUTTON_Y_LESS)
+    else if (id == ID_BUTTON_Y_LESS)
     {
         grid.ScaleMeasuresOnY(-1);
     }
-    else if (id == ID_GRID_BUTTON_Y_MORE)
+    else if (id == ID_BUTTON_Y_MORE)
     {
         grid.ScaleMeasuresOnY(+1);
     }
