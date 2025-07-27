@@ -1,7 +1,8 @@
 ﻿// 2025/7/12 16:18:43 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel11_Menu/DialogSetup.h"
-#include "Panels/Panel11_Menu/WindowCorrectionZero.h"
+#include "Panels/Panel11_Menu/Setup/DialogSetup.h"
+#include "Panels/Panel11_Menu/Setup/WindowCorrectionZero.h"
+#include "Panels/Panel11_Menu/Setup/WindowCalibrate.h"
 
 
 DialogSetup *DialogSetup::self = nullptr;
@@ -16,7 +17,10 @@ DialogSetup::DialogSetup() :
         {
             WindowCorretionZero().ShowModal();
         },
-        _L("Калибровка"), ID_BTN_CALIBRATION, []() {},
+        _L("Калибровка"), ID_BTN_CALIBRATION, []()
+        {
+            WindowCalibrate().ShowModal();
+        },
         _L("Таблица смещений и коэффициентов"), ID_BTN_TABLE, []() {},
         _L("Изменить пароль"), ID_BTN_PASSWORD, []() {},
         _L("IP-адрес"), ID_BTN_ADDRESS_IP, []() {},

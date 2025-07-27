@@ -60,6 +60,7 @@ file(GLOB PANELS                        src/Panels/*.*)
 file(GLOB PANELS_PANEL3                 src/Panels/Panel03_Config/*.*)
 file(GLOB PANELS_PANEL5                 src/Panels/Panel05_Graph/*.*)
 file(GLOB PANELS_PANEL11                src/Panels/Panel11_Menu/*.*)
+file(GLOB PANELS_PANEL11_SETUP          src/Panels/Panel11_Menu/Setup/*.*)
 file(GLOB PANELS_PANEL12                src/Panels/Panel12_Debug/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB UTILS                         src/Utils/*.*)
@@ -76,6 +77,7 @@ source_group(Panels                     FILES ${PANELS})
 source_group(Panels/Panel03_Config      FILES ${PANELS_PANEL3})
 source_group(Panels/Panel05_Graph       FILES ${PANELS_PANEL5})
 source_group(Panels/Panel11_Menu        FILES ${PANELS_PANEL11})
+source_group(Panels/Panel11_Menu/Setup  FILES ${PANELS_PANEL11_SETUP})
 source_group(Panels/Panel12_Debug       FILES ${PANELS_PANEL12})
 source_group(Settings                   FILES ${SETTINGS})
 source_group(Utils                      FILES ${UTILS})
@@ -93,6 +95,7 @@ add_executable(${PROJECT_NAME}
     ${PANELS_PANEL3}
     ${PANELS_PANEL5}
     ${PANELS_PANEL11}
+    ${PANELS_PANEL11_SETUP}
     ${PANELS_PANEL12}
     ${SETTINGS}
     ${UTILS}
@@ -139,6 +142,3 @@ else()
         dl 
         )
 endif()
-
-
-
