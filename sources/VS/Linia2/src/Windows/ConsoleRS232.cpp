@@ -10,6 +10,12 @@
 ConsoleRS232 *ConsoleRS232::self = nullptr;
 
 
+enum
+{
+    ID_LINE = wxID_HIGHEST + 1
+};
+
+
 ConsoleRS232::ConsoleRS232(wxFrame *parent) : wxFrame(parent, wxID_ANY, _L("Устройство программирования карт NTAG213"))
 {
     text = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, { 600, 300 }, wxTE_MULTILINE | wxTE_READONLY);

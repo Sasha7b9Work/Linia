@@ -1,6 +1,7 @@
 ﻿// 2025/7/12 16:18:43 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/Panel11_Menu/DialogSetup.h"
+#include "Panels/Panel11_Menu/WindowCorrectionZero.h"
 
 
 DialogSetup *DialogSetup::self = nullptr;
@@ -43,7 +44,7 @@ void DialogSetup::OnButtonAutoSave()
 
 void DialogSetup::OnButtonCorrectionZero()
 {
-
+    WindowCorretionZero().ShowModal();
 }
 
 

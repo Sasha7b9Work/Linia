@@ -16,10 +16,10 @@ PanelButtons *PanelButtons::self = nullptr;
 
 enum
 {
-    ID_BUTTON_FILE = ID_DEFINES_COUNT + 1,
+    ID_BUTTON_FILE = wxID_HIGHEST + 1,
     ID_BUTTON_TEST,
     ID_BUTTON_SETTINGS,
-    ID_BUTTON_ARCHIVE,
+    ID_BUTTON_ARCHIVE, 
     ID_BUTTON_GRAPH,
     ID_BUTTON_TABLE,
     ID_BUTTON_REPORT,
