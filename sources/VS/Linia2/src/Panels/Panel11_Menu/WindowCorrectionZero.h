@@ -17,4 +17,8 @@ private:
     wxVector <wxRadioButton *> buttons;
 
     void OnEventRadioButton(wxCommandEvent &);
+
+    int CreateRadioButton(int x, int y, int id, const wxString &);
+
+    int CreateLabelGroup(int x, int y, const wxString &);
 };
