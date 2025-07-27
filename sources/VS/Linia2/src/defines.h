@@ -83,7 +83,7 @@ enum
     ID_TIMER_APP,
     ID_TIMER_TIME,
 
-    // Панель 3 - Конфигурация
+    /////////////////////////////////////////////////////////////////////////////////// Панель 3 - Конфигурация
     ID_BTN_CHANNEL_C,
     ID_BTN_CHANNEL_B,
     ID_BTN_CHANNEL_S,
@@ -158,6 +158,9 @@ enum
     ID_BORDER_MIN,
     ID_BORDER_MAX,
 
+    /////////////////////////////////////////////////////////////////////////////////// Панель 8
+    ID_PAN8_COMBO,
+
     // Настройки
     ID_BTN_USER,
     ID_BTN_AUTOSAVE,
@@ -179,5 +182,11 @@ enum
     ID_RB_CHAN_S_MEAS_U,
     ID_RB_CHAN_S_SOURCE_I,
     ID_RB_CHAN_S_SOURCE_U,
-    ID_BTN_CANCEL
+    ID_BTN_CANCEL,
+
+    // Библиотека пользовательских тестов
+    ID_COMBO,
+    ID_BTN_LOAD,
+    ID_BTN_DELETE,
+    LD_BTN_DELETE_ALL
 };

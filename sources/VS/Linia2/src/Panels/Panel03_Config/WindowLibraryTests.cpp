@@ -5,15 +5,6 @@
 #include "Controls/Dialog.h"
 
 
-enum
-{
-    ID_COMBO = wxID_HIGHEST + 1,
-    ID_BTN_LOAD,
-    ID_BTN_DELETE,
-    LD_BTN_DELETE_ALL
-};
-
-
 WindowLibraryTests::WindowLibraryTests() :
     Dialog(nullptr, wxID_ANY, _L("Библиотека пользовательских тестов"), wxDefaultPosition, {WIDTH, HEIGHT})
 {

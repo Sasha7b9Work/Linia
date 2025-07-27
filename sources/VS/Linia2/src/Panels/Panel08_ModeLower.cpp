@@ -6,12 +6,6 @@
 #include "Utils/SystemDepend.h"
 
 
-enum
-{
-    ID_COMBO = wxID_HIGHEST + 1
-};
-
-
 PanelModeLower *PanelModeLower::self = nullptr;
 
 
