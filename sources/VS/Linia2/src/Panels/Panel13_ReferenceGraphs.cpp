@@ -4,6 +4,16 @@
 #include "MainWindow.h"
 
 
+enum
+{
+    ID_MENU_CLEAR = wxID_HIGHEST + 1,
+    ID_MENU_DELETE_FROM,
+    ID_MENU_LOAD_FROM,
+    ID_MENU_OPEN,
+    ID_MENU_CLOSE
+};
+
+
 PanelReferenceGraph *PanelReferenceGraph::self = nullptr;
 
 
@@ -100,7 +110,7 @@ void PanelReferenceGraph::OnEventRightClick(wxMouseEvent &event)
 {
     wxMenu menu;
 
-    wxMenuItem *item = menu.Append(ID_MENU_ARCHIVE_CLEAR, _L("Очистить архив"));
+    wxMenuItem *item = menu.Append(ID_MENU_CLEAR, _L("Очистить архив"));
 
     if (grid->GetNumberRows() == 0)
     {
@@ -108,7 +118,7 @@ void PanelReferenceGraph::OnEventRightClick(wxMouseEvent &event)
     }
 
     menu.AppendSeparator();
-    item = menu.Append(ID_MENU_ARCHIVE_DELETE_FROM, _L("Удалить из архива"));
+    item = menu.Append(ID_MENU_DELETE_FROM, _L("Удалить из архива"));
 
     wxArrayInt selected = grid->GetSelectedRows();
 
@@ -117,7 +127,7 @@ void PanelReferenceGraph::OnEventRightClick(wxMouseEvent &event)
         item->Enable(false);
     }
 
-    item = menu.Append(ID_MENU_ARCHIVE_LOAD_FROM, _L("Загрузить из архива"));
+    item = menu.Append(ID_MENU_LOAD_FROM, _L("Загрузить из архива"));
 
     if (selected.IsEmpty())
     {
