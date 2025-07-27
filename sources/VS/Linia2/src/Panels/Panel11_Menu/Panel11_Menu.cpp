@@ -6,7 +6,6 @@
 #include "Panels/Panel11_Menu/DialogFile.h"
 #include "Panels/Panel11_Menu/DialogTest.h"
 #include "Panels/Panel11_Menu/DialogSetup.h"
-#include "Panels/Panel11_Menu/DialogArchive.h"
 #include "Panels/Panel11_Menu/DialogGraph.h"
 #include "Panels/Panel11_Menu/DialogTable.h"
 #include "Panels/Panel11_Menu/DialogReport.h"
@@ -77,7 +76,7 @@ void PanelButtons::OnEventButton(wxCommandEvent &event)
     }
     else if (id == ID_BUTTON_ARCHIVE)
     {
-        DialogArchive().ShowModal();
+        MainWindow::self->SetMode(ModeMainWindow::ReferenceGraphs);
     }
     else if (id == ID_BUTTON_GRAPH)
     {

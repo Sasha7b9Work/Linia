@@ -51,17 +51,12 @@ private:
 
     void EndPaint();
 
-    void OnRightClick(wxMouseEvent &);
-
-    void OnPaint(wxPaintEvent &);
-
-    void OnMouseDown(wxMouseEvent &);
-
-    void OnMouseMove(wxMouseEvent &);
-
-    void OnMouseUp(wxMouseEvent &);
-
-    void OnMouseWheel(wxMouseEvent &);
+    void OnEventRightClick(wxMouseEvent &);
+    void OnEventPaint(wxPaintEvent &);
+    void OnEventMouseDown(wxMouseEvent &);
+    void OnEventMouseMove(wxMouseEvent &);
+    void OnEventMouseUp(wxMouseEvent &);
+    void OnEventMouseWheel(wxMouseEvent &);
     void OnEventButton(wxCommandEvent &);
 
     void OnMenuReset(wxCommandEvent &);

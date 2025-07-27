@@ -21,12 +21,12 @@ PanelGraph::PanelGraph(wxWindow *parent) :
     self = this;
 
     Panel::SetDoubleBuffered(true);
-    Bind(wxEVT_PAINT, &PanelGraph::OnPaint, this);
-    Bind(wxEVT_LEFT_DOWN, &PanelGraph::OnMouseDown, this);
-    Bind(wxEVT_LEFT_UP, &PanelGraph::OnMouseUp, this);
-    Bind(wxEVT_MOTION, &PanelGraph::OnMouseMove, this);
-    Bind(wxEVT_MOUSEWHEEL, &PanelGraph::OnMouseWheel, this);
-    Bind(wxEVT_RIGHT_DOWN, &PanelGraph::OnRightClick, this);
+    Bind(wxEVT_PAINT, &PanelGraph::OnEventPaint, this);
+    Bind(wxEVT_LEFT_DOWN, &PanelGraph::OnEventMouseDown, this);
+    Bind(wxEVT_LEFT_UP, &PanelGraph::OnEventMouseUp, this);
+    Bind(wxEVT_MOTION, &PanelGraph::OnEventMouseMove, this);
+    Bind(wxEVT_MOUSEWHEEL, &PanelGraph::OnEventMouseWheel, this);
+    Bind(wxEVT_RIGHT_DOWN, &PanelGraph::OnEventRightClick, this);
     Bind(wxEVT_BUTTON, &PanelGraph::OnEventButton, this);
 
     int w = 25;
@@ -49,7 +49,7 @@ PanelGraph::PanelGraph(wxWindow *parent) :
 }
 
 
-void PanelGraph::OnPaint(wxPaintEvent &)
+void PanelGraph::OnEventPaint(wxPaintEvent &)
 {
     wxPaintDC paint_dc(this);
 
@@ -57,7 +57,7 @@ void PanelGraph::OnPaint(wxPaintEvent &)
 }
 
 
-void PanelGraph::OnMouseDown(wxMouseEvent &event)
+void PanelGraph::OnEventMouseDown(wxMouseEvent &event)
 {
     pos_mouse_down = event.GetPosition();
 
@@ -65,13 +65,13 @@ void PanelGraph::OnMouseDown(wxMouseEvent &event)
 }
 
 
-void PanelGraph::OnMouseUp(wxMouseEvent &)
+void PanelGraph::OnEventMouseUp(wxMouseEvent &)
 {
     mouse_is_pressed = false;
 }
 
 
-void PanelGraph::OnMouseMove(wxMouseEvent &event)
+void PanelGraph::OnEventMouseMove(wxMouseEvent &event)
 {
     wxPoint position = event.GetPosition();
 
@@ -99,7 +99,7 @@ void PanelGraph::OnMouseMove(wxMouseEvent &event)
 }
 
 
-void PanelGraph::OnMouseWheel(wxMouseEvent &event)
+void PanelGraph::OnEventMouseWheel(wxMouseEvent &event)
 {
     if (event.GetModifiers() == wxMOD_CONTROL)
     {
@@ -403,7 +403,7 @@ void Spline::Draw(bool smooth, bool draw_points) const
 }
 
 
-void PanelGraph::OnRightClick(wxMouseEvent &)
+void PanelGraph::OnEventRightClick(wxMouseEvent &)
 {
     wxMenu menu;
 
