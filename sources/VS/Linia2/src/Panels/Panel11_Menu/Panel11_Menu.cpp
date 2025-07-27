@@ -14,20 +14,6 @@
 PanelButtons *PanelButtons::self = nullptr;
 
 
-enum
-{
-    ID_BUTTON_FILE = wxID_HIGHEST + 1,
-    ID_BUTTON_TEST,
-    ID_BUTTON_SETTINGS,
-    ID_BUTTON_ARCHIVE, 
-    ID_BUTTON_GRAPH,
-    ID_BUTTON_TABLE,
-    ID_BUTTON_REPORT,
-    ID_BUTTON_MEASURE,
-    ID_BUTTON_DEBUG
-};
-
-
 PanelButtons::PanelButtons(wxWindow* parent) :
     Panel(parent, 0, MainWindow::HEIGHT - HEIGHT, MainWindow::WIDTH1 + MainWindow::WIDTH2, HEIGHT)
 {
@@ -51,7 +37,7 @@ PanelButtons::PanelButtons(wxWindow* parent) :
 
     for (int i = 0; i < NumButtons(); i++)
     {
-        new wxButton(this, ID_BUTTON_FILE + i, labels[i], {i * delta, 0}, {delta - 3, GetSize().y - 3});
+        new wxButton(this, ID_PAN11_BUTTON_FILE + i, labels[i], {i * delta, 0}, {delta - 3, GetSize().y - 3});
     }
 
     Bind(wxEVT_BUTTON, &PanelButtons::OnEventButton, this);
@@ -62,39 +48,39 @@ void PanelButtons::OnEventButton(wxCommandEvent &event)
 {
     int id = event.GetId();
 
-    if (id == ID_BUTTON_FILE)
+    if (id == ID_PAN11_BUTTON_FILE)
     {
         DialogFile().ShowModal();
     }
-    else if (id == ID_BUTTON_TEST)
+    else if (id == ID_PAN11_BUTTON_TEST)
     {
         DialogTest().ShowModal();
     }
-    else if (id == ID_BUTTON_SETTINGS)
+    else if (id == ID_PAN11_BUTTON_SETTINGS)
     {
         DialogSetup().ShowModal();
     }
-    else if (id == ID_BUTTON_ARCHIVE)
+    else if (id == ID_PAN11_BUTTON_ARCHIVE)
     {
         MainWindow::self->SetMode(ModeMainWindow::ReferenceGraphs);
     }
-    else if (id == ID_BUTTON_GRAPH)
+    else if (id == ID_PAN11_BUTTON_GRAPH)
     {
         DialogGraph().ShowModal();
     }
-    else if (id == ID_BUTTON_TABLE)
+    else if (id == ID_PAN11_BUTTON_TABLE)
     {
         DialogTable().ShowModal();
     }
-    else if (id == ID_BUTTON_REPORT)
+    else if (id == ID_PAN11_BUTTON_REPORT)
     {
         DialogReport().ShowModal();
     }
-    else if (id == ID_BUTTON_MEASURE)
+    else if (id == ID_PAN11_BUTTON_MEASURE)
     {
 
     }
-    else if (id == ID_BUTTON_DEBUG)
+    else if (id == ID_PAN11_BUTTON_DEBUG)
     {
         MainWindow::self->SetMode(ModeMainWindow::Debug);
     }
