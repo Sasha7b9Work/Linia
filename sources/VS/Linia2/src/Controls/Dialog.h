@@ -23,7 +23,7 @@ public:
 
 protected:
 
-    int CreateRadioButton(int x, int y, int id, const wxString &);
+    int CreateRadioButton(wxWindow *, int x, int y, int id, const wxString &);
 
-    int CreateLabelGroup(int x, int y, const wxString &);
+    int CreateLabelGroup(wxWindow *, int x, int y, const wxString &);
 };

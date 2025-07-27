@@ -8,7 +8,7 @@ class WindowCalibrate : public Dialog
 public:
 
     static const int WIDTH = 450;
-    static const int HEIGHT = 500;
+    static const int HEIGHT = 600;
 
     WindowCalibrate();
 

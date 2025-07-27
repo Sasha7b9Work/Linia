@@ -11,25 +11,21 @@ WindowCorretionZero::WindowCorretionZero() :
     const int w = WIDTH / 2 - 3 * d;
     int y = d;
 
-    y = CreateLabelGroup(d, y, _L("Канал") + " C");
-    y = CreateRadioButton(d, y, ID_RB_CHAN_C_MEAS_I, _L("Измеритель") + " I");
-    y = CreateRadioButton(d, y, ID_RB_CHAN_C_MEAS_U, _L("Измеритель") + " U");
+    y = CreateLabelGroup(this, d, y, _L("Канал") + " C");
+    y = CreateRadioButton(this, d, y, ID_RB_CHAN_C_MEAS_I, _L("Измеритель") + " I");
+    y = CreateRadioButton(this, d, y, ID_RB_CHAN_C_MEAS_U, _L("Измеритель") + " U");
 
-    y += 30;
+    y = CreateLabelGroup(this, d, y, _L("Канал") + " B");
+    y = CreateRadioButton(this, d, y, ID_RB_CHAN_B_MEAS_I, _L("Измеритель") + " I");
+    y = CreateRadioButton(this, d, y, ID_RB_CHAN_B_MEAS_U, _L("Измеритель") + " U");
+    y = CreateRadioButton(this, d, y, ID_RB_CHAN_B_SOURCE_I, _L("Источник") + " I");
+    y = CreateRadioButton(this, d, y, ID_RB_CHAN_B_SOURCE_U, _L("Источник") + " U");
 
-    y = CreateLabelGroup(d, y, _L("Канал") + " B");
-    y = CreateRadioButton(d, y, ID_RB_CHAN_B_MEAS_I, _L("Измеритель") + " I");
-    y = CreateRadioButton(d, y, ID_RB_CHAN_B_MEAS_U, _L("Измеритель") + " U");
-    y = CreateRadioButton(d, y, ID_RB_CHAN_B_SOURCE_I, _L("Источник") + " I");
-    y = CreateRadioButton(d, y, ID_RB_CHAN_B_SOURCE_U, _L("Источник") + " U");
-
-    y += 30;
-
-    y = CreateLabelGroup(d, y, _L("Канал") + " S");
-    y = CreateRadioButton(d, y, ID_RB_CHAN_S_MEAS_I, _L("Измеритель") + " I");
-    y = CreateRadioButton(d, y, ID_RB_CHAN_S_MEAS_U, _L("Измеритель") + " U");
-    y = CreateRadioButton(d, y, ID_RB_CHAN_S_SOURCE_I, _L("Источник") + " I");
-    y = CreateRadioButton(d, y, ID_RB_CHAN_S_SOURCE_U, _L("Источник") + " U");
+    y = CreateLabelGroup(this, d, y, _L("Канал") + " S");
+    y = CreateRadioButton(this, d, y, ID_RB_CHAN_S_MEAS_I, _L("Измеритель") + " I");
+    y = CreateRadioButton(this, d, y, ID_RB_CHAN_S_MEAS_U, _L("Измеритель") + " U");
+    y = CreateRadioButton(this, d, y, ID_RB_CHAN_S_SOURCE_I, _L("Источник") + " I");
+    y = CreateRadioButton(this, d, y, ID_RB_CHAN_S_SOURCE_U, _L("Источник") + " U");
 
     wxStaticBox *box = new wxStaticBox(this, wxID_ANY, _L("Внимание") + " !", { d + w + d, d }, { w, 200 });
 
