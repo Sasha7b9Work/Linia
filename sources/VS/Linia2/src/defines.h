@@ -82,36 +82,10 @@ enum
     ID_BTN_RETURN_TO_MAIN_PAGE,
     ID_MENU_SAVE,
 
-    // Расчёт
-    // График
-    ID_PAN5_GRAPH_LINE_X,
-    ID_PAN5_GRAPH_LINE_Y,
-    // Параметр
-    ID_PAN5_PAR_LINE_FIND,
-    ID_PAN5_PAR_LINE_FOR,
-    ID_PAN5_PAR_LINE_VALUE_1,
-    ID_PAN5_PAR_LINE_VALUE_2,
-    ID_PAN5_PAR_RB_DY_DX,
-    ID_PAN5_PAR_RB_DX_DY,
-    // Пороговые значения
-    ID_PAN5_BORDER_MIN,
-    ID_PAN5_BORDER_MAX,
-
     // Файл модели
     ID_PAN4_TEXT_NAME,
 
     ID_PAN8_COMBO,
-
-    ID_PAN10_BTN_SCALE,
-    ID_PAN10_BTN_ERRORS,
-    ID_PAN10_BTN_1,
-    ID_PAN10_BTN_2,
-    ID_PAN10_BTN_3,
-    ID_PAN10_CHBOX_1,
-    ID_PAN10_CHBOX_2,
-    ID_PAN10_CHBOX_3,
-    ID_PAN10_CHBOX_4,
-    ID_PAN10_CHBOX_5,
 
     ID_MENU_GRAPH_RESET,
     ID_MENU_GRAPH_FULL_SCREEN,
