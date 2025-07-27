@@ -8,7 +8,7 @@ class WindowCalibrate : public Dialog
 public:
 
     static const int WIDTH = 450;
-    static const int HEIGHT = 600;
+    static const int HEIGHT = 650;
 
     WindowCalibrate();
 
@@ -16,4 +16,6 @@ private:
 
     wxStaticText *textSerialNumber = nullptr;
     wxStaticText *textDateTime = nullptr;
+
+    void OnEventButton(wxCommandEvent &);
 };

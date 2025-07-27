@@ -26,7 +26,7 @@ WindowCalibrate::WindowCalibrate() :
     wxStaticBox *box = new wxStaticBox(this, wxID_ANY, "Параметры режима калибровки", { d, y + 30 }, { 270, 330 });
 
     {
-        int y = d + 10;
+        y = d + 10;
 
         new wxStaticText(box, wxID_ANY, "Диапазон", { d, y } );
 
@@ -50,4 +50,27 @@ WindowCalibrate::WindowCalibrate() :
         y = CreateRadioButton(box, d, y, ID_CALIB_RB_CHAN_S_MEAS_I, "Источник I / Измеритель I");
         y = CreateRadioButton(box, d, y, ID_CALIB_RB_CHAN_S_MEAS_U, "Источник U / Измеритель U");
     }
+
+    y = 430;
+
+    box = new wxStaticBox(this, wxID_ANY, "Внимание!", { d, y }, { 300, 100 });
+
+    new wxStaticText(box, wxID_ANY, "Соберите схему для определения основной погрешности измерения "
+        "тока по каналу C на диапазонах от 5 A до 50 A (рис. В.8 РЭ) и установите резистор Rn",
+        { d, d }, { 260, 75 });
+
+    y += box->GetSize().y;
+
+    wxSize size{ 70, BUTTON_HEIGHT };
+
+    new wxButton(this, ID_CALIB_BTN_START, _L("Пуск"), { 50, y + 30 }, size);
+    new wxButton(this, ID_CALIB_BTN_CANCEL, _L("Отмена"), { 200, y + 30 }, size);
+
+    Bind(wxEVT_BUTTON, &WindowCalibrate::OnEventButton, this);
+}
+
+
+void WindowCalibrate::OnEventButton(wxCommandEvent &)
+{
+
 }
