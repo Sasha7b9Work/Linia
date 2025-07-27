@@ -9,12 +9,6 @@
 #include "Windows/ConsoleRS232.h"
 
 
-enum
-{
-    ID_TIMER_APP = wxID_HIGHEST + 1
-};
-
-
 wxIMPLEMENT_APP(Application);
 
 

@@ -4,12 +4,6 @@
 #include "MainWindow.h"
 
 
-enum
-{
-    ID_TIMER_TIME = wxID_HIGHEST + 1
-};
-
-
 PanelName *PanelName::self = nullptr;
 
 

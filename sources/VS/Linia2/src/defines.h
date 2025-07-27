@@ -80,6 +80,8 @@ enum
     ID_BTN_RETURN_TO_MAIN_PAGE = wxID_HIGHEST + 1,
     ID_MENU_SCALE,
     ID_BTN_START,
+    ID_TIMER_APP,
+    ID_TIMER_TIME,
 
     // Настройки
     ID_BTN_USER,
