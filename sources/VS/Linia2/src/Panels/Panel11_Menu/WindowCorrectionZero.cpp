@@ -43,11 +43,11 @@ WindowCorretionZero::WindowCorretionZero() :
 
 int WindowCorretionZero::CreateLabelGroup(int x, int y, const wxString &label)
 {
-    new wxStaticLine(this, wxID_ANY, { x, y }, { 100, -1 }, wxLI_HORIZONTAL);
+    new wxStaticLine(this, wxID_ANY, { x, SD::Y_SB(y) }, { 100, -1 }, wxLI_HORIZONTAL);
 
     y += 7;
 
-    new wxStaticText(this, wxID_ANY, label, { 20, y });
+    new wxStaticText(this, wxID_ANY, label, { 20, SD::Y_SB(y) });
 
     return y + 25;
 }
