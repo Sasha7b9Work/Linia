@@ -8,6 +8,16 @@
 #include "Panels/Panel03_Config/WindowLibraryTests.h"
 
 
+enum
+{
+    ID_BTN_CHANNEL_C = wxID_HIGHEST + 1,
+    ID_BTN_CHANNEL_B,
+    ID_BTN_CHANNEL_S,
+    ID_BTN_SCHEME,
+    ID_BTN_CALCULATION
+};
+
+
 PanelConfig *PanelConfig::self = nullptr;
 
 
@@ -25,26 +35,26 @@ PanelConfig::PanelConfig(wxWindow* parent) :
 
     wxSize sizeChan = { 67, h };
 
-    wxToggleButton *button = new wxToggleButton(this, ID_PAN3_BTN_CHANNEL_C, _L("Канал C"), { 0, 0 }, sizeChan);
+    wxToggleButton *button = new wxToggleButton(this, ID_BTN_CHANNEL_C, _L("Канал C"), { 0, 0 }, sizeChan);
     str_panels.push_back({ button, CreatePanel(button) });
 
-    button = new wxToggleButton(this, ID_PAN3_BTN_CHANNEL_B, _L("Канал B"), { sizeChan.x, 0 }, sizeChan);
+    button = new wxToggleButton(this, ID_BTN_CHANNEL_B, _L("Канал B"), { sizeChan.x, 0 }, sizeChan);
     str_panels.push_back({ button, CreatePanel(button) });
 
-    button = new wxToggleButton(this, ID_PAN3_BTN_CHANNEL_S, _L("Канал S"), { sizeChan.x * 2, 0 }, sizeChan);
+    button = new wxToggleButton(this, ID_BTN_CHANNEL_S, _L("Канал S"), { sizeChan.x * 2, 0 }, sizeChan);
     str_panels.push_back({ button, CreatePanel(button) });
 
     wxSize sizeScheme = { 120, h };
-    button = new wxToggleButton(this, ID_PAN3_BTN_SCHEME, _L("Схема включения"), { 0, h }, sizeScheme);
+    button = new wxToggleButton(this, ID_BTN_SCHEME, _L("Схема включения"), { 0, h }, sizeScheme);
     str_panels.push_back({ button, CreatePanel(button) });
 
-    button = new wxToggleButton(this, ID_PAN3_BTN_CALCULATION, _L("Расчёт"), { sizeScheme.x, h }, { MainWindow::WIDTH3 - sizeScheme.x - 3, h });
+    button = new wxToggleButton(this, ID_BTN_CALCULATION, _L("Расчёт"), { sizeScheme.x, h }, { MainWindow::WIDTH3 - sizeScheme.x - 3, h });
     str_panels.push_back({ button, CreatePanel(button) });
 
     {
         // Включаем панель
 
-        int id = ID_PAN3_BTN_SCHEME;
+        int id = ID_BTN_SCHEME;
 
         wxCommandEvent evt(wxEVT_TOGGLEBUTTON, id);
         evt.SetInt(1);
@@ -64,23 +74,23 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
 
     int id = button->GetId();
 
-    if (id == ID_PAN3_BTN_CHANNEL_C)
+    if (id == ID_BTN_CHANNEL_C)
     {
         CreatePanelChannelC(panel, x, w);
     }
-    else if (id == ID_PAN3_BTN_CHANNEL_B)
+    else if (id == ID_BTN_CHANNEL_B)
     {
         CreatePanelChannelB(panel, x, w);
     }
-    else if (id == ID_PAN3_BTN_CHANNEL_S)
+    else if (id == ID_BTN_CHANNEL_S)
     {
         CreatePanelChannelS(panel, x, w);
     }
-    else if (id == ID_PAN3_BTN_SCHEME)
+    else if (id == ID_BTN_SCHEME)
     {
         CreatePanelScheme(panel, x, w);
     }
-    else if (id == ID_PAN3_BTN_CALCULATION)
+    else if (id == ID_BTN_CALCULATION)
     {
         CreatePanelCalculate(panel, x, w);
     }
