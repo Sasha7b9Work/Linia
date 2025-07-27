@@ -3,23 +3,15 @@
 #include "Panels/Panel11_Menu/DialogTable.h"
 
 
-enum
-{
-    ID_MENU_DELETE = wxID_HIGHEST + 1,
-    ID_MENU_EXPAND,
-    ID_MENU_COLLAPSE
-};
-
-
 DialogTable *DialogTable::self = nullptr;
 
 
 DialogTable::DialogTable() :
     MenuDialog(_L("Таблица"), 100,
-        _L("Сохранить"), wxID_SAVE, [](){},
-        _L("Удалить"), ID_MENU_DELETE, []() {},
-        _L("Развернуть"), ID_MENU_EXPAND, []() {},
-        _L("Свернуть"), ID_MENU_COLLAPSE, []() {}
+        _L("Сохранить"), ID_TABLE_MENU_SAVE, [](){},
+        _L("Удалить"), ID_TABLE_MENU_DELETE, []() {},
+        _L("Развернуть"), ID_TABLE_MENU_EXPAND, []() {},
+        _L("Свернуть"), ID_TABLE_MENU_COLLAPSE, []() {}
     )
 {
     self = this;
