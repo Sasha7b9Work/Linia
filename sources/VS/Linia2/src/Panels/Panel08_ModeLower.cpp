@@ -6,6 +6,12 @@
 #include "Utils/SystemDepend.h"
 
 
+enum
+{
+    ID_COMBO = wxID_HIGHEST + 1
+};
+
+
 PanelModeLower *PanelModeLower::self = nullptr;
 
 
@@ -26,6 +32,6 @@ PanelModeLower::PanelModeLower(wxWindow *parent) :
         wxArrayString choices;
         choices.Add(_L("Канал") + " C");
 
-        new wxComboBox(boxCategory, ID_PAN8_COMBO, choices[0], { 5, 120 }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new wxComboBox(boxCategory, ID_COMBO, choices[0], { 5, 120 }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
     }
 }
