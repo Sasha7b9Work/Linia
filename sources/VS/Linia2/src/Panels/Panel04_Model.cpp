@@ -4,12 +4,6 @@
 #include "Utils/GlobalFunctions.h"
 
 
-enum
-{
-    ID_PAN4_TEXT_NAME = wxID_HIGHEST + 1
-};
-
-
 PanelModel *PanelModel::self = nullptr;
 
 
