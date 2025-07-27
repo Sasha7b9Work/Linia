@@ -22,70 +22,19 @@ DialogSetup *DialogSetup::self = nullptr;
 
 DialogSetup::DialogSetup() :
     MenuDialog(_L("Настройка"), 275,
-        _L("Настройки пользователя"), ID_BTN_USER, OnButtonUser,
-        _L("Запуск"), ID_BTN_START, OnButtonStart,
-        _L("Автосохранение"), ID_BTN_AUTOSAVE, OnButtonAutoSave,
-        _L("Коррекция смещения нуля"), ID_BTN_CORRECTION_ZERO, OnButtonCorrectionZero,
-        _L("Калибровка"), ID_BTN_CALIBRATION, OnButtonCalibration,
-        _L("Таблица смещений и коэффициентов"), ID_BTN_TABLE, OnButtonTable,
-        _L("Изменить пароль"), ID_BTN_PASSWORD, OnButtonPassword,
-        _L("IP-адрес"), ID_BTN_ADDRESS_IP, OnButtonAddressIP,
-        _L("Мой компьютер"), ID_BTN_MY_COMPUTER, OnButtonMyComputer
+        _L("Настройки пользователя"), ID_BTN_USER, [](){},
+        _L("Запуск"), ID_BTN_START, []() {},
+        _L("Автосохранение"), ID_BTN_AUTOSAVE, []() {},
+        _L("Коррекция смещения нуля"), ID_BTN_CORRECTION_ZERO, [](){
+            WindowCorretionZero().ShowModal();
+        },
+        _L("Калибровка"), ID_BTN_CALIBRATION, []() {},
+        _L("Таблица смещений и коэффициентов"), ID_BTN_TABLE, []() {},
+        _L("Изменить пароль"), ID_BTN_PASSWORD, []() {},
+        _L("IP-адрес"), ID_BTN_ADDRESS_IP, []() {},
+        _L("Мой компьютер"), ID_BTN_MY_COMPUTER, []() {}
     )
 {
     self = this;
 }
 
-
-void DialogSetup::OnButtonUser()
-{
-
-}
-
-
-void DialogSetup::OnButtonStart()
-{
-
-}
-
-
-void DialogSetup::OnButtonAutoSave()
-{
-
-}
-
-
-void DialogSetup::OnButtonCorrectionZero()
-{
-    WindowCorretionZero().ShowModal();
-}
-
-
-void DialogSetup::OnButtonCalibration()
-{
-
-}
-
-
-void DialogSetup::OnButtonTable()
-{
-
-}
-
-
-void DialogSetup::OnButtonPassword()
-{
-
-}
-
-
-void DialogSetup::OnButtonAddressIP()
-{
-
-}
-
-
-void DialogSetup::OnButtonMyComputer()
-{
-
-}

@@ -10,16 +10,4 @@ public:
     DialogSetup();
 
     static DialogSetup *self;
-
-private:
-
-    static void OnButtonUser();
-    static void OnButtonStart();
-    static void OnButtonAutoSave();
-    static void OnButtonCorrectionZero();
-    static void OnButtonCalibration();
-    static void OnButtonTable();
-    static void OnButtonPassword();
-    static void OnButtonAddressIP();
-    static void OnButtonMyComputer();
 };
