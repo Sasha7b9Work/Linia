@@ -84,12 +84,6 @@ enum
     ID_MENU_SCALE,
     ID_MENU_RESET,
 
-    // Библиотека пользовательсих тестов
-    ID_LUT_COMBO,
-    ID_LUT_BTN_LOAD,
-    ID_LUT_BTN_DELETE,
-    LD_LUT_BTN_DELETE_ALL,
-
     // Шкала
     ID_SCALE_LINE_X_MIN,
     ID_SCALE_LINE_X_MAX,
