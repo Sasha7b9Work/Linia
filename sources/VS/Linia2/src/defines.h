@@ -1,4 +1,4 @@
-// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
 #define WIN32_LEAN_AND_MEAN
@@ -83,7 +83,7 @@ enum
     ID_TIMER_APP,
     ID_TIMER_TIME,
 
-    /////////////////////////////////////////////////////////////////////////////////// Панель 3 - Конфигурация
+    /////////////////////////////////////////////////////////////////////////////////// РџР°РЅРµР»СЊ 3 - РљРѕРЅС„РёРіСѓСЂР°С†РёСЏ
     ID_BTN_CHANNEL_C,
     ID_BTN_CHANNEL_B,
     ID_BTN_CHANNEL_S,
@@ -104,7 +104,7 @@ enum
     ID_CHAN_C_SPIN_START,
     ID_CHAN_C_SPIN_STOP,
 
-        // Схема включения
+        // РЎС…РµРјР° РІРєР»СЋС‡РµРЅРёСЏ
     ID_PAN3_TEST_COMBOBOX,
     ID_PAN3_TEST_BUTTON,
     ID_COMM_COMBO_TYPE,
@@ -114,54 +114,54 @@ enum
     ID_COMM_COMBO_B,
     ID_COMM_COMBO_E,
 
-        // Канал B
-        // Генератор ступенек
+        // РљР°РЅР°Р» B
+        // Р“РµРЅРµСЂР°С‚РѕСЂ СЃС‚СѓРїРµРЅРµРє
     ID_CHAN_B_GEN_COMBO_TYPE,
     ID_CHAN_B_GEN_COMBO_IMPULSE,
     ID_CHAN_B_GEN_COMBO_AMPLITUDE,
     ID_CHAN_B_GEN_CHECK_SMALL,
     ID_CHAN_B_GEN_SPIN_NUMBER_STEPS,
     ID_CHAN_B_GEN_COMBO_POLARITY,
-        // Смещение
+        // РЎРјРµС‰РµРЅРёРµ
     ID_CHAN_B_GEN_OFFSET_SLIDER,
     ID_CHAN_B_GEN_OFFSET_COMBO_POLARITY,
-        // Ограничение
+        // РћРіСЂР°РЅРёС‡РµРЅРёРµ
     ID_CHAN_B_LIM_COMBO_RANGE,
     ID_CHAN_B_LIM_SLIDER,
 
-        // Канал S
-        // Генератор ступенек
+        // РљР°РЅР°Р» S
+        // Р“РµРЅРµСЂР°С‚РѕСЂ СЃС‚СѓРїРµРЅРµРє
     ID_CHAN_S_GEN_COMBO_TYPE,
     ID_CHAN_S_GEN_COMBO_IMPULSE,
     ID_CHAN_S_GEN_COMBO_AMPLITUDE,
     ID_CHAN_S_GEN_SPIN_NUMBER_STEPS,
     ID_CHAN_S_GEN_COMBO_POLARITY,
-        // Смещение
+        // РЎРјРµС‰РµРЅРёРµ
     ID_CHAN_S_GEN_OFFSET_SLIDER,
     ID_CHAN_S_GEN_OFFSET_COMBO_POLARITY,
-        // Ограничение
+        // РћРіСЂР°РЅРёС‡РµРЅРёРµ
     ID_CHAN_S_LIM_COMBO_RANGE,
     ID_CHAN_S_LIM_SLIDER,
 
-        // Расчёт
-        // График
+        // Р Р°СЃС‡С‘С‚
+        // Р“СЂР°С„РёРє
     ID_GRAPH_LINE_X,
     ID_GRAPH_LINE_Y,
-        // Параметр
+        // РџР°СЂР°РјРµС‚СЂ
     ID_PAR_LINE_FIND,
     ID_PAR_LINE_FOR,
     ID_PAR_LINE_VALUE_1,
     ID_PAR_LINE_VALUE_2,
     ID_PAR_RB_DY_DX,
     ID_PAR_RB_DX_DY,
-        // Пороговые значения
+        // РџРѕСЂРѕРіРѕРІС‹Рµ Р·РЅР°С‡РµРЅРёСЏ
     ID_BORDER_MIN,
     ID_BORDER_MAX,
 
-    /////////////////////////////////////////////////////////////////////////////////// Панель 4
+    /////////////////////////////////////////////////////////////////////////////////// РџР°РЅРµР»СЊ 4
     ID_PAN4_TEXT_NAME,
 
-    /////////////////////////////////////////////////////////////////////////////////// Панель 5
+    /////////////////////////////////////////////////////////////////////////////////// РџР°РЅРµР»СЊ 5
     ID_MENU_FULL_SCREEN,
     ID_MENU_TRACK_X,
     ID_MENU_TRACK_Y,
@@ -172,10 +172,10 @@ enum
     ID_BUTTON_Y_LESS,
     ID_BUTTON_Y_MORE,
 
-    /////////////////////////////////////////////////////////////////////////////////// Панель 8
+    /////////////////////////////////////////////////////////////////////////////////// РџР°РЅРµР»СЊ 8
     ID_PAN8_COMBO,
 
-    /////////////////////////////////////////////////////////////////////////////////// Панель 10
+    /////////////////////////////////////////////////////////////////////////////////// РџР°РЅРµР»СЊ 10
     ID_BTN_SCALE,
     ID_BTN_ERRORS,
     ID_BTN_1,
@@ -187,7 +187,7 @@ enum
     ID_CHBOX_4,
     ID_CHBOX_5,
 
-    /////////////////////////////////////////////////////////////////////////////////// Панель 11
+    /////////////////////////////////////////////////////////////////////////////////// РџР°РЅРµР»СЊ 11
     ID_PAN11_BUTTON_FILE,
     ID_PAN11_BUTTON_TEST,
     ID_PAN11_BUTTON_SETTINGS,
@@ -198,14 +198,14 @@ enum
     ID_PAN11_BUTTON_MEASURE,
     ID_PAN11_BUTTON_DEBUG,
 
-    /////////////////////////////////////////////////////////////////////////////////// Панель 13
+    /////////////////////////////////////////////////////////////////////////////////// РџР°РЅРµР»СЊ 13
     ID_MENU_CLEAR,
     ID_MENU_DELETE_FROM,
     ID_MENU_LOAD_FROM,
     ID_MENU_OPEN,
     ID_MENU_CLOSE,
 
-    // Настройки
+    // РќР°СЃС‚СЂРѕР№РєРё
     ID_BTN_USER,
     ID_BTN_AUTOSAVE,
     ID_BTN_CORRECTION_ZERO,
@@ -215,7 +215,7 @@ enum
     ID_BTN_ADDRESS_IP,
     ID_BTN_MY_COMPUTER,
 
-    // Настройки - установка коррекции нуля
+    // РќР°СЃС‚СЂРѕР№РєРё - СѓСЃС‚Р°РЅРѕРІРєР° РєРѕСЂСЂРµРєС†РёРё РЅСѓР»СЏ
     ID_RB_CHAN_C_MEAS_I,
     ID_RB_CHAN_C_MEAS_U,
     ID_RB_CHAN_B_MEAS_I,
@@ -226,15 +226,16 @@ enum
     ID_RB_CHAN_S_MEAS_U,
     ID_RB_CHAN_S_SOURCE_I,
     ID_RB_CHAN_S_SOURCE_U,
-    ID_BTN_CANCEL,
+    ID_ZERO_BTN_START,
+    ID_ZERO_BTN_CANCEL,
 
-    // Библиотека пользовательских тестов
+    // Р‘РёР±Р»РёРѕС‚РµРєР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРёС… С‚РµСЃС‚РѕРІ
     ID_COMBO,
     ID_BTN_LOAD,
     ID_BTN_DELETE,
     LD_BTN_DELETE_ALL,
 
-    // Отчёт
+    // РћС‚С‡С‘С‚
     ID_REPORT_MENU_NEW,
     ID_REPORT_MENU_DELETE,
     ID_REPORT_MENU_EXPAND,
@@ -242,7 +243,7 @@ enum
     ID_REPORT_MENU_CLOSE,
     ID_REPORT_MENU_SAVE,
 
-    // Шкала
+    // РЁРєР°Р»Р°
     ID_LINE_X_MIN,
     ID_LINE_X_MAX,
     ID_LINE_Y_MIN,
@@ -252,7 +253,7 @@ enum
     ID_BTN_APPLY,
     ID_BTN_CAN,
 
-    // Файл
+    // Р¤Р°Р№Р»
     ID_BTN_MENU_FILE_NEW,
     ID_BTN_MENU_FILE_OPEN,
     ID_BTN_MENU_FILE_CLOSE,
@@ -260,7 +261,7 @@ enum
     ID_BTN_MENU_FILE_SAVE_AS,
     ID_BTN_MENU_FILE_DELETE,
 
-    // График
+    // Р“СЂР°С„РёРє
     ID_MENU_SIZE_POINT,
     ID_MENU_STYLE_CURVE,
     ID_MENU_COLOR,
@@ -272,13 +273,13 @@ enum
     ID_MENU_COLOR_SECANT,
     ID_MENU_MARKERS,
 
-    // Таблица
+    // РўР°Р±Р»РёС†Р°
     ID_TABLE_MENU_DELETE,
     ID_TABLE_MENU_EXPAND,
     ID_TABLE_MENU_COLLAPSE,
     ID_TABLE_MENU_SAVE,
 
-    // Тест
+    // РўРµСЃС‚
     ID_BTN_MENU_TEST_APPEND,
     ID_BTN_MENU_TEST_APPEND_ACTIVE,
     ID_BTN_MENU_TEST_APPEND_FROM_LIBRARY,

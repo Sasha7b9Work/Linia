@@ -31,13 +31,19 @@ WindowCorretionZero::WindowCorretionZero() :
     y = CreateRadioButton(d, y, ID_RB_CHAN_S_SOURCE_I, _L("Источник") + " I");
     y = CreateRadioButton(d, y, ID_RB_CHAN_S_SOURCE_U, _L("Источник") + " U");
 
-    wxStaticBox *box = new wxStaticBox(this, wxID_ANY, _L("Внимание") + " !", {d + w + d, d}, {w, 200});
+    wxStaticBox *box = new wxStaticBox(this, wxID_ANY, _L("Внимание") + " !", { d + w + d, d }, { w, 200 });
 
     new wxStaticText(box, wxID_ANY,
         "Подключите контактирующее устройство и соедините гнёзда с помощью перемычек согласно схеме",
         { d, 50 }, { w - 20, 150 });
 
+    wxSize size{ 70, BUTTON_HEIGHT };
+
+    new wxButton(this, ID_ZERO_BTN_START, _L("Пуск"), { 50, y + 30 }, size);
+    new wxButton(this, ID_ZERO_BTN_CANCEL, _L("Отмена"), { 200, y + 30 }, size);
+
     Bind(wxEVT_RADIOBUTTON, &WindowCorretionZero::OnEventRadioButton, this);
+    Bind(wxEVT_BUTTON, &WindowCorretionZero::OnEventButton, this);
 }
 
 
@@ -72,4 +78,10 @@ void WindowCorretionZero::OnEventRadioButton(wxCommandEvent &event)
             btn->SetValue(false);
         }
     }
+}
+
+
+void WindowCorretionZero::OnEventButton(wxCommandEvent &)
+{
+
 }
