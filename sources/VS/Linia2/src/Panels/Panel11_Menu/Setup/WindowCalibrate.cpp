@@ -29,7 +29,7 @@ WindowCalibrate::WindowCalibrate() :
     {
         y = d + 10;
 
-        new wxStaticText(box, wxID_ANY, "Диапазон", { d, y } );
+        new wxStaticText(box, wxID_ANY, "Диапазон", { d, SD::Y_SB(y) } );
 
         wxArrayString choices;
         choices.push_back("50A");
