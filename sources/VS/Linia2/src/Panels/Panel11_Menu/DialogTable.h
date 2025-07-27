@@ -10,11 +10,4 @@ public:
     DialogTable();
 
     static DialogTable *self;
-
-private:
-
-    static void OnButtonSave();
-    static void OnButtonDelete();
-    static void OnButtonExpand();
-    static void OnButtonCollapse();
 };

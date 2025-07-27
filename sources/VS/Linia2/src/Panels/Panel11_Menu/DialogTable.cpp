@@ -16,35 +16,11 @@ DialogTable *DialogTable::self = nullptr;
 
 DialogTable::DialogTable() :
     MenuDialog(_L("Таблица"), 100,
-        _L("Сохранить"), wxID_SAVE, OnButtonSave,
-        _L("Удалить"), ID_MENU_DELETE, OnButtonDelete,
-        _L("Развернуть"), ID_MENU_EXPAND, OnButtonExpand,
-        _L("Свернуть"), ID_MENU_COLLAPSE, OnButtonCollapse
+        _L("Сохранить"), wxID_SAVE, [](){},
+        _L("Удалить"), ID_MENU_DELETE, []() {},
+        _L("Развернуть"), ID_MENU_EXPAND, []() {},
+        _L("Свернуть"), ID_MENU_COLLAPSE, []() {}
     )
 {
     self = this;
-}
-
-
-void DialogTable::OnButtonSave()
-{
-
-}
-
-
-void DialogTable::OnButtonDelete()
-{
-
-}
-
-
-void DialogTable::OnButtonExpand()
-{
-
-}
-
-
-void DialogTable::OnButtonCollapse()
-{
-
 }
