@@ -10,13 +10,4 @@ public:
     DialogFile();
 
     static DialogFile *self;
-
-private:
-
-    static void OnButtonNew();
-    static void OnButtonOpen();
-    static void OnButtonClose();
-    static void OnButtonSave();
-    static void OnButtonSaveAs();
-    static void OnButtonDelete();
 };
