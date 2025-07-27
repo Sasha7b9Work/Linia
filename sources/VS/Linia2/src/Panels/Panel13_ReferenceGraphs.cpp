@@ -4,16 +4,6 @@
 #include "MainWindow.h"
 
 
-enum
-{
-    ID_MENU_CLEAR = wxID_HIGHEST + 1,
-    ID_MENU_DELETE_FROM,
-    ID_MENU_LOAD_FROM,
-    ID_MENU_OPEN,
-    ID_MENU_CLOSE
-};
-
-
 PanelReferenceGraph *PanelReferenceGraph::self = nullptr;
 
 

@@ -187,6 +187,13 @@ enum
     ID_CHBOX_4,
     ID_CHBOX_5,
 
+    /////////////////////////////////////////////////////////////////////////////////// Панель 13
+    ID_MENU_CLEAR,
+    ID_MENU_DELETE_FROM,
+    ID_MENU_LOAD_FROM,
+    ID_MENU_OPEN,
+    ID_MENU_CLOSE,
+
     // Настройки
     ID_BTN_USER,
     ID_BTN_AUTOSAVE,
@@ -214,5 +221,13 @@ enum
     ID_COMBO,
     ID_BTN_LOAD,
     ID_BTN_DELETE,
-    LD_BTN_DELETE_ALL
+    LD_BTN_DELETE_ALL,
+
+    // Отчёт
+    ID_REPORT_MENU_NEW,
+    ID_REPORT_MENU_DELETE,
+    ID_REPORT_MENU_EXPAND,
+    ID_REPORT_MENU_COLLAPSE,
+    ID_REPORT_MENU_CLOSE,
+    ID_REPORT_MENU_SAVE
 };
