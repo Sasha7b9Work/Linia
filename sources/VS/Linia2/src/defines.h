@@ -215,7 +215,7 @@ enum
     ID_BTN_ADDRESS_IP,
     ID_BTN_MY_COMPUTER,
 
-    // Настройки - установка коррекции нуля
+    // Настройки - Установка коррекции нуля
     ID_RB_CHAN_C_MEAS_I,
     ID_RB_CHAN_C_MEAS_U,
     ID_RB_CHAN_B_MEAS_I,
@@ -228,6 +228,18 @@ enum
     ID_RB_CHAN_S_SOURCE_U,
     ID_ZERO_BTN_START,
     ID_ZERO_BTN_CANCEL,
+
+    // Настройки - Калибровка
+    ID_CALIB_RB_CHAN_C_MEAS_I,
+    ID_CALIB_RB_CHAN_C_MEAS_U,
+    ID_CALIB_RB_CHAN_B_MEAS_I,
+    ID_CALIB_RB_CHAN_B_MEAS_U,
+    ID_CALIB_RB_CHAN_S_MEAS_I,
+    ID_CALIB_RB_CHAN_S_MEAS_U,
+    ID_CALIB_RB_COMBO,
+    ID_CALIB_BTN_START,
+    ID_CALIB_BTN_CANCEL,
+    ID_CALIB_BTN_SAVE,
 
     // Библиотека пользовательских тестов
     ID_COMBO,

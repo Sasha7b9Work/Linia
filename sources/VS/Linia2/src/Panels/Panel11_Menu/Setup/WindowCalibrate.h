@@ -7,10 +7,13 @@ class WindowCalibrate : public Dialog
 {
 public:
 
-    static const int WIDTH = 350;
+    static const int WIDTH = 450;
     static const int HEIGHT = 500;
 
     WindowCalibrate();
 
 private:
+
+    wxStaticText *textSerialNumber = nullptr;
+    wxStaticText *textDateTime = nullptr;
 };

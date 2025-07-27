@@ -42,42 +42,7 @@ WindowCorretionZero::WindowCorretionZero() :
     new wxButton(this, ID_ZERO_BTN_START, _L("Пуск"), { 50, y + 30 }, size);
     new wxButton(this, ID_ZERO_BTN_CANCEL, _L("Отмена"), { 200, y + 30 }, size);
 
-    Bind(wxEVT_RADIOBUTTON, &WindowCorretionZero::OnEventRadioButton, this);
     Bind(wxEVT_BUTTON, &WindowCorretionZero::OnEventButton, this);
-}
-
-
-int WindowCorretionZero::CreateLabelGroup(int x, int y, const wxString &label)
-{
-    new wxStaticLine(this, wxID_ANY, { x, SD::Y_SB(y) }, { 100, -1 }, wxLI_HORIZONTAL);
-
-    y += 7;
-
-    new wxStaticText(this, wxID_ANY, label, { 20, SD::Y_SB(y) });
-
-    return y + 25;
-}
-
-
-int WindowCorretionZero::CreateRadioButton(int x, int y, int id, const wxString &label)
-{
-    buttons.push_back(new wxRadioButton(this, id, label, { x, SD::Y_SB(y) }));
-
-    return y + 20;
-}
-
-
-void WindowCorretionZero::OnEventRadioButton(wxCommandEvent &event)
-{
-    int id = event.GetId();
-
-    for (auto btn : buttons)
-    {
-        if (btn->GetId() != id)
-        {
-            btn->SetValue(false);
-        }
-    }
 }
 
 
