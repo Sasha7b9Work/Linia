@@ -4,6 +4,19 @@
 #include "Panels/Panel05_Graph/WindowScale.h"
 
 
+enum
+{
+    ID_LINE_X_MIN = wxID_HIGHEST + 1,
+    ID_LINE_X_MAX,
+    ID_LINE_Y_MIN,
+    ID_LINE_Y_MAX,
+    ID_SPIN_ACCURACY,
+    ID_COMBO_NUMBER,
+    ID_BTN_APPLY,
+    ID_BTN_CAN
+};
+
+
 WindowScale::Range WindowScale::rangeX{ -12, 28, "Uc", "V"};
 WindowScale::Range WindowScale::rangeY{ -2.5, 7.5, "Ic", "A"};
 
@@ -16,9 +29,9 @@ WindowScale::WindowScale() :
 
     int d = 10;
 
-    CreateBox(d, d, width, height, "X", "Ud, V", ID_SCALE_LINE_X_MIN, ID_SCALE_LINE_X_MAX);
+    CreateBox(d, d, width, height, "X", "Ud, V", ID_LINE_X_MIN, ID_LINE_X_MAX);
 
-    CreateBox(width + d * 2, d, width, height, "Y", "Id, mA", ID_SCALE_LINE_Y_MIN, ID_SCALE_LINE_Y_MAX);
+    CreateBox(width + d * 2, d, width, height, "Y", "Id, mA", ID_LINE_Y_MIN, ID_LINE_Y_MAX);
 
     int y = height + d * 3;
 
@@ -34,15 +47,15 @@ WindowScale::WindowScale() :
     choices.Add("20");
     choices.Add("50");
 
-    new wxComboBox(this, ID_SCALE_COMBO, choices[0], { 200, y }, { 70, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+    new wxComboBox(this, ID_COMBO_NUMBER, choices[0], { 200, y }, { 70, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
     y += 50;
 
     wxSize size_button{ 100, BUTTON_HEIGHT };
 
-    new wxButton(this, ID_SCALE_BTN_APPLY, _L("Применить"), { 50, y }, size_button);
+    new wxButton(this, ID_BTN_APPLY, _L("Применить"), { 50, y }, size_button);
 
-    new wxButton(this, ID_SCALE_BTN_CAN, _L("Отмена"), { 150, y }, size_button);
+    new wxButton(this, ID_BTN_CAN, _L("Отмена"), { 150, y }, size_button);
 }
 
 
