@@ -10,16 +10,6 @@ public:
     DialogGraph();
 
     static DialogGraph *self;
-
-private:
-
-    static void OnButtonSizePoint();
-    static void OnButtonStyleCurve();
-    static void OnButtonColor();
-    static void OnButtonMarkers();
-    static void OnButtonScale();
-    static void OnButtonSave();
-    static void OnButtonReset();
 };
 
 
@@ -30,15 +20,6 @@ public:
     DialogGraphColor();
 
     static DialogGraphColor *self;
-
-private:
-
-    static void OnButtonBackground();
-    static void OnButtonGrid();
-    static void OnButtonFont();
-    static void OnButtonCurve();
-    static void OnButtonLink();
-    static void OnButtonSecant();   // Секущая
 
     static bool SelectColor(const wxString &title, wxColour &);
 };

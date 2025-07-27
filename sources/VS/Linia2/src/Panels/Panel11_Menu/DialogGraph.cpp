@@ -25,69 +25,81 @@ DialogGraphColor *DialogGraphColor::self = nullptr;
 
 DialogGraph::DialogGraph() :
     MenuDialog(_L("График"), 200,
-        _L("Размер точки"), ID_MENU_SIZE_POINT, OnButtonSizePoint,
-        _L("Стиль кривой"), ID_MENU_STYLE_CURVE, OnButtonStyleCurve,
-        _L("Цвет"), ID_MENU_COLOR, OnButtonColor,
-        _L("Маркеры"), ID_MENU_MARKERS, OnButtonMarkers,
-        _L("Шкала"), ID_MENU_SCALE, OnButtonScale,
-        _L("Сохранить график в архиве"), wxID_SAVE, OnButtonSave,
-        _L("Сброс графика Ref"), wxID_RESET, OnButtonReset
+        _L("Размер точки"), ID_MENU_SIZE_POINT, [](){},
+        _L("Стиль кривой"), ID_MENU_STYLE_CURVE, []() {},
+        _L("Цвет"), ID_MENU_COLOR, []()
+        {
+            DialogGraphColor().ShowModal();
+        },
+        _L("Маркеры"), ID_MENU_MARKERS, []() {},
+        _L("Шкала"), ID_MENU_SCALE, []()
+        {
+            WindowScale().ShowModal();
+        },
+        _L("Сохранить график в архиве"), wxID_SAVE, []() {},
+        _L("Сброс графика Ref"), wxID_RESET, []() {}
     )
 {
     self = this;
 }
 
 
-void DialogGraph::OnButtonSizePoint()
-{
-
-}
-
-
-void DialogGraph::OnButtonStyleCurve()
-{
-
-}
-
-
-void DialogGraph::OnButtonColor()
-{
-    DialogGraphColor().ShowModal();
-}
-
-
-void DialogGraph::OnButtonMarkers()
-{
-
-}
-
-
-void DialogGraph::OnButtonScale()
-{
-    WindowScale().ShowModal();
-}
-
-
-void DialogGraph::OnButtonSave()
-{
-
-}
-
-
-void DialogGraph::OnButtonReset()
-{
-
-}
-
-
 DialogGraphColor::DialogGraphColor() :
     MenuDialog(_L("Цвет"), 125,
-        _L("Фона"), ID_MENU_COLOR_BACKGROUND, OnButtonBackground,
-        _L("Сетки"), ID_MENU_COLOR_GRID, OnButtonGrid,
-        _L("Шрифта"), ID_MENU_COLOR_FONT, OnButtonFont,
-        _L("Кривой"), ID_MENU_COLOR_CURVE, OnButtonCurve,
-        _L("Ссылки"), ID_MENU_COLOR_LINK, OnButtonLink,
-        _L("Секущей"), ID_MENU_COLOR_SECANT, OnButtonSecant
+        _L("Фона"), ID_MENU_COLOR_BACKGROUND, []()
+        {
+            wxColour color;
+
+            if (SelectColor(_L("фона"), color))
+            {
+
+            }
+        },
+        _L("Сетки"), ID_MENU_COLOR_GRID, []()
+        {
+            wxColour color;
+
+            if (SelectColor(_L("сетки"), color))
+            {
+
+            }
+        },
+        _L("Шрифта"), ID_MENU_COLOR_FONT, []()
+        {
+            wxColour color;
+
+            if (SelectColor(_L("шрифта"), color))
+            {
+
+            }
+        },
+        _L("Кривой"), ID_MENU_COLOR_CURVE, []()
+        {
+            wxColour color;
+
+            if (SelectColor(_L("кривой"), color))
+            {
+
+            }
+        },
+        _L("Ссылки"), ID_MENU_COLOR_LINK, []()
+        {
+            wxColour color;
+
+            if (SelectColor(_L("ссылки"), color))
+            {
+
+            }
+        },
+        _L("Секущей"), ID_MENU_COLOR_SECANT, []()
+        {
+            wxColour color;
+
+            if (SelectColor(_L("секущей"), color))
+            {
+
+            }
+        }
     )
 {
     self = this;
@@ -112,70 +124,3 @@ bool DialogGraphColor::SelectColor(const wxString &title, wxColour &color)
 
     return false;
 }
-
-
-void DialogGraphColor::OnButtonBackground()
-{
-    wxColour color;
-
-    if (SelectColor(_L("фона"), color))
-    {
-
-    }
-}
-
-
-void DialogGraphColor::OnButtonGrid()
-{
-    wxColour color;
-
-    if (SelectColor(_L("сетки"), color))
-    {
-
-    }
-}
-
-
-void DialogGraphColor::OnButtonFont()
-{
-    wxColour color;
-
-    if (SelectColor(_L("шрифта"), color))
-    {
-
-    }
-}
-
-
-void DialogGraphColor::OnButtonCurve()
-{
-    wxColour color;
-
-    if (SelectColor(_L("кривой"), color))
-    {
-
-    }
-}
-
-
-void DialogGraphColor::OnButtonLink()
-{
-    wxColour color;
-
-    if (SelectColor(_L("ссылки"), color))
-    {
-
-    }
-}
-
-
-void DialogGraphColor::OnButtonSecant()
-{
-    wxColour color;
-
-    if (SelectColor(_L("секущей"), color))
-    {
-
-    }
-}
-
