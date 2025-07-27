@@ -58,7 +58,7 @@ WindowCalibrate::WindowCalibrate() :
 
     new wxStaticText(box, wxID_ANY, "Соберите схему для определения основной погрешности измерения "
         "тока по каналу C на диапазонах от 5 A до 50 A (рис. В.8 РЭ) и установите резистор Rn",
-        { d, d }, { 260, 75 });
+        { d, SD::Y_SB(d) }, { 260, 75 });
 
     y += box->GetSize().y;
 
