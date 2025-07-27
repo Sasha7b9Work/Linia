@@ -9,6 +9,15 @@
 #include <algorithm>
 
 
+enum
+{
+    ID_MENU_FULL_SCREEN = wxID_HIGHEST + 1,
+    ID_MENU_TRACK_X,
+    ID_MENU_TRACK_Y,
+    ID_MENU_TRACK_NONE
+};
+
+
 wxBitmap PanelGraph::bitmap(WIDTH, HEIGHT);
 
 
@@ -408,34 +417,34 @@ void PanelGraph::OnEventRightClick(wxMouseEvent &)
     wxMenu menu;
 
     // Добавляем пункты меню
-    menu.Append(ID_MENU_GRAPH_RESET, _L("Сброс"));
-    menu.AppendCheckItem(ID_MENU_GRAPH_FULL_SCREEN, _L("Развернуть"));
+    menu.Append(ID_MENU_RESET, _L("Сброс"));
+    menu.AppendCheckItem(ID_MENU_FULL_SCREEN, _L("Развернуть"));
 
     menu.AppendSeparator();
 
     // Привязываем обработчики для пунктов меню
-    Bind(wxEVT_MENU, &PanelGraph::OnMenuReset, this, ID_MENU_GRAPH_RESET);
-    Bind(wxEVT_MENU, &PanelGraph::OnMenuFullScreen, this, ID_MENU_GRAPH_FULL_SCREEN);
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuReset, this, ID_MENU_RESET);
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuFullScreen, this, ID_MENU_FULL_SCREEN);
 
-    menu.Check(ID_MENU_GRAPH_FULL_SCREEN, full_screen);
+    menu.Check(ID_MENU_FULL_SCREEN, full_screen);
 
     wxMenu *subMenu = new wxMenu();
-    subMenu->AppendCheckItem(ID_MENU_GRAPH_TRACK_X, "X");
-    subMenu->AppendCheckItem(ID_MENU_GRAPH_TRACK_Y, "Y");
-    subMenu->AppendCheckItem(ID_MENU_GRAPH_TRACK_NONE, _L("Ничего"));
+    subMenu->AppendCheckItem(ID_MENU_TRACK_X, "X");
+    subMenu->AppendCheckItem(ID_MENU_TRACK_Y, "Y");
+    subMenu->AppendCheckItem(ID_MENU_TRACK_NONE, _L("Ничего"));
 
-    subMenu->Check(ID_MENU_GRAPH_TRACK_X, track_x);
-    subMenu->Check(ID_MENU_GRAPH_TRACK_Y, track_y);
-    subMenu->Check(ID_MENU_GRAPH_TRACK_NONE, track_none);
+    subMenu->Check(ID_MENU_TRACK_X, track_x);
+    subMenu->Check(ID_MENU_TRACK_Y, track_y);
+    subMenu->Check(ID_MENU_TRACK_NONE, track_none);
 
     menu.AppendSubMenu(subMenu, _L("Отслеживать"));
 
-    menu.AppendCheckItem(ID_MENU_GRAPH_SCALE, _L("Шкала"));
+    menu.AppendCheckItem(ID_MENU_SCALE, _L("Шкала"));
 
-    Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackX, this, ID_MENU_GRAPH_TRACK_X);
-    Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackY, this, ID_MENU_GRAPH_TRACK_Y);
-    Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackNone, this, ID_MENU_GRAPH_TRACK_NONE);
-    Bind(wxEVT_MENU, &PanelGraph::OnMenuScale, this, ID_MENU_GRAPH_SCALE);
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackX, this, ID_MENU_TRACK_X);
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackY, this, ID_MENU_TRACK_Y);
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackNone, this, ID_MENU_TRACK_NONE);
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuScale, this, ID_MENU_SCALE);
 
     // Показываем меню в позиции клика
     PopupMenu(&menu);

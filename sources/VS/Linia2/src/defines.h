@@ -81,13 +81,8 @@ enum
 
     ID_BTN_RETURN_TO_MAIN_PAGE,
     ID_MENU_SAVE,
-
-    ID_MENU_GRAPH_RESET,
-    ID_MENU_GRAPH_FULL_SCREEN,
-    ID_MENU_GRAPH_TRACK_X,
-    ID_MENU_GRAPH_TRACK_Y,
-    ID_MENU_GRAPH_TRACK_NONE,
-    ID_MENU_GRAPH_SCALE,
+    ID_MENU_SCALE,
+    ID_MENU_RESET,
 
     // Библиотека пользовательсих тестов
     ID_LUT_COMBO,
