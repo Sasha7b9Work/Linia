@@ -4,9 +4,9 @@
 
 
 TableValues::TableValues(wxWindow *parent) :
-    wxPanel(parent, wxID_ANY, wxDefaultPosition, {450, 399})
+    wxPanel(parent, wxID_ANY, wxDefaultPosition, {450, 418})
 {
-    SetSizeHints({ 450, 399 });
+//    SetSizeHints({ 450, 399 });
 }
 
 
@@ -19,7 +19,9 @@ void TableValues::SetAll(wxVector<TableStruct> &_values)
     wxSize size1{ 90, TEXTCNTRL_HEIGHT };
     wxSize size2{ 130, TEXTCNTRL_HEIGHT };
 
-    wxSize size{ (size1.x + size2.x) * 2 + d, size1.y * ((int)(values.size() + 1) / 2 + 1) };
+    int dh = 1;
+
+    wxSize size{ (size1.x + size2.x) * 2 + d, (size1.y + dh) * ((int)(values.size() + 1) / 2 + 1) };
 
     SetSizeHints(size);
 
@@ -41,7 +43,7 @@ void TableValues::SetAll(wxVector<TableStruct> &_values)
             if (it != values.end())
             {
                 int x = col * (size1.x + size2.x + d);
-                int y = size1.y + row * size1.y;
+                int y = size1.y + row * (size1.y + dh);
 
                 new wxStaticText(this, wxID_ANY, it->name, { x, y }, size1, wxALIGN_CENTER);
 
