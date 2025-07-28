@@ -47,3 +47,52 @@ pchar RangeI::Name() const
 
     return names[value];
 }
+
+
+
+pchar RangeU::Name() const
+{
+    static const pchar names[Count] =
+    {
+        "1nV",
+        "2nV",
+        "5nV",
+        "10nV",
+        "20nV",
+        "50nV",
+        "100nV",
+        "200nV",
+        "500nV",
+        "1uV",
+        "2uV",
+        "5uV",
+        "10uV",
+        "20uV",
+        "50uV",
+        "100uV",
+        "200uV",
+        "500uV",
+        "1mV",
+        "2mV",
+        "5mV",
+        "10mV",
+        "20mV",
+        "50mV",
+        "100mV",
+        "200mV",
+        "500mV",
+        "1V",
+        "2V",
+        "5V",
+        "10V",
+        "20V",
+        "50V",
+        "100V",
+        "200V",
+        "50VA"
+    };
+
+    return names[value];
+}
+
+

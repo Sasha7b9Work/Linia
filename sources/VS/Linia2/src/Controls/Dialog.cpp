@@ -12,7 +12,7 @@ int Dialog::CreateLabelGroup(wxWindow *parent, int x, int y, const wxString &lab
 
     y += 7;
 
-    new wxStaticText(parent, wxID_ANY, label, { 20, SD::Y_SB(y) });
+    new wxStaticText(parent, wxID_ANY, label, { 20, SD::Y_SB(y) } );
 
     return y + 25;
 }

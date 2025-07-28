@@ -8,8 +8,8 @@ class WindowTableOffsets : public Dialog
 {
 public:
 
-    static const int WIDTH = 500;
-    static const int HEIGHT = 500;
+    static const int WIDTH = 660;
+    static const int HEIGHT = 550;
 
     WindowTableOffsets();
 
@@ -17,7 +17,7 @@ private:
 
     TableValues *table = nullptr;
 
-    void FillTable();   
+    void FillTable();
 
     void OnEventButton(wxCommandEvent &);
     void OnEventRadioButton(wxCommandEvent &);

@@ -4,9 +4,9 @@
 
 
 TableValues::TableValues(wxWindow *parent) :
-    wxPanel(parent)
+    wxPanel(parent, wxID_ANY, wxDefaultPosition, {450, 399})
 {
-
+    SetSizeHints({ 450, 399 });
 }
 
 

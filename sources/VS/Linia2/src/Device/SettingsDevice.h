@@ -57,6 +57,29 @@ struct RangeU
 {
     enum E
     {
+        _1nV,
+        _2nV,
+        _5nV,
+        _10nV,
+        _20nV,
+        _50nV,
+        _100nV,
+        _200nV,
+        _500nV,
+        _1uV,
+        _2uV,
+        _5uV,
+        _10uV,
+        _20uV,
+        _50uV,
+        _100uV,
+        _200uV,
+        _500uV,
+        _1mV,
+        _2mV,
+        _5mV,
+        _10mV,
+        _20mV,
         _50mV,
         _100mV,
         _200mV,
@@ -70,10 +93,6 @@ struct RangeU
         _100V,
         _200V,
         _500V,
-        _1kV,
-        _2kV,
-        _5kV,
-        _10kV,
         Count
     };
 
