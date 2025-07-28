@@ -10,6 +10,30 @@ struct DSettings
 };
 
 
+CalK DSet::Get(Type::E type, RangeI::E range)
+{
+    return dset.calI[type][range];
+}
+
+
+CalK DSet::Get(Type::E type, RangeU::E range)
+{
+    return dset.calU[type][range];
+}
+
+
+void DSet::Set(Type::E type, RangeI::E range, const CalK &cal)
+{
+    dset.calI[type][range] = cal;
+}
+
+
+void DSet::Set(Type::E type, RangeU::E range, const CalK &cal)
+{
+    dset.calU[type][range] = cal;
+}
+
+
 pchar RangeI::Name() const
 {
     static const pchar names[Count] =
@@ -642,27 +666,3 @@ static DSettings dset =
         }
     }
 };
-
-
-CalK DSet::Get(Type::E type, RangeI::E range)
-{
-    return dset.calI[type][range];
-}
-
-
-CalK DSet::Get(Type::E type, RangeU::E range)
-{
-    return dset.calU[type][range];
-}
-
-
-void DSet::Set(Type::E type, RangeI::E range, const CalK &cal)
-{
-    dset.calI[type][range] = cal;
-}
-
-
-void DSet::Set(Type::E type, RangeU::E range, const CalK &cal)
-{
-    dset.calU[type][range] = cal;
-}
