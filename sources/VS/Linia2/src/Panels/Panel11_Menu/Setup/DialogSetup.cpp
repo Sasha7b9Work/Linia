@@ -4,6 +4,7 @@
 #include "Panels/Panel11_Menu/Setup/WindowCorrectionZero.h"
 #include "Panels/Panel11_Menu/Setup/WindowCalibrate.h"
 #include "Panels/Panel11_Menu/Setup/WindowTableOffsets.h"
+#include "Panels/Panel11_Menu/Setup/WindowMyComputer.h"
 
 
 DialogSetup *DialogSetup::self = nullptr;
@@ -28,7 +29,10 @@ DialogSetup::DialogSetup() :
         },
         _L("Изменить пароль"), ID_BTN_PASSWORD, []() {},
         _L("IP-адрес"), ID_BTN_ADDRESS_IP, []() {},
-        _L("Мой компьютер"), ID_BTN_MY_COMPUTER, []() {}
+        _L("Мой компьютер"), ID_BTN_MY_COMPUTER, []()
+        {
+            WindowMyComputer().ShowModal();
+        }
     )
 {
     self = this;

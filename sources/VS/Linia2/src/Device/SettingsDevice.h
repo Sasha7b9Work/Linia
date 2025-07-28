@@ -102,3 +102,35 @@ struct RangeU
 
     pchar Name() const;
 };
+
+
+struct CalK
+{
+    double offset;  // Смещение
+    double k;       // Коэффициент
+};
+
+
+namespace DSet
+{
+    struct Type
+    {
+        enum E
+        {
+            ChanC_Meas,
+            ChanB_Meas,
+            ChanB_Source,
+            ChanB_Limit,
+            ChanS_Meas,
+            ChanS_Source,
+            ChanS_Limit,
+            Count
+        };
+    };
+
+    CalK Get(Type::E, RangeI::E);
+    CalK Get(Type::E, RangeU::E);
+
+    void Set(Type::E, RangeI::E, const CalK &);
+    void Set(Type::E, RangeU::E, const CalK &);
+}
