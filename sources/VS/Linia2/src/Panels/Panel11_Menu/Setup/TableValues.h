@@ -15,7 +15,9 @@ public:
 
     TableValues(wxWindow *);
 
-    void SetAll(const wxString &title1, const wxString &title2, wxVector<TableStruct> &);
+    void SetAll(wxVector<TableStruct> &);
 
 private:
+
+    wxVector<TableStruct> values;
 };
