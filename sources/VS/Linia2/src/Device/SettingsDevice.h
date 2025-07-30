@@ -42,7 +42,11 @@ struct RangeI
         _100A,
         _200A,
         _500A,
-        Count
+        Count,
+
+        // Дипазон выходных токов по каналу C
+        ChanC_OUT_MIN = _10nA,
+        ChanC_OUT_MAX = _50A
     };
 
     E value;
@@ -93,7 +97,15 @@ struct RangeU
         _100V,
         _200V,
         _500V,
-        Count
+        _1kV,
+        _2kV,
+        _5kV,
+        _10kV,
+        Count,
+
+        // Диапазон выходных напряжений по каналу C
+        ChanC_OUT_MIN = _500mV,
+        ChanC_OUT_MAX = _2kV
     };
 
     E value;
