@@ -44,7 +44,7 @@ wxToggleButton *GF::FindToggleButton(wxWindow *w, int id)
 }
 
 
-wxRadioButton *GF::FindRadioButton(wxWindow *w, int id)
+wxRadioButton *GF::FindRadioButton(const wxWindow *w, int id)
 {
     return (wxRadioButton *)w->FindWindow(id);
 }

@@ -54,6 +54,11 @@ struct RangeI
     RangeI(E v) : value(v) { }
 
     pchar Name() const;
+
+    void operator++(int)
+    {
+        value = (E)(value + 1);
+    }
 };
 
 

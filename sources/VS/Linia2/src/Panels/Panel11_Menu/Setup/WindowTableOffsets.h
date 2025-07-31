@@ -19,11 +19,11 @@ private:
     struct Field
     {
         wxStaticText *name;
-        wxTextCtrl *value;
+        wxTextCtrl   *value;
     };
 
-    wxVector<Field> fields_u;
-    wxVector<Field> fields_i;
+    wxVector<Field> fields_I;
+    wxVector<Field> fields_U;
 
     void CreateFields();
     void CreateFields_U(wxPanel *);
@@ -31,4 +31,18 @@ private:
 
     void OnEventButton(wxCommandEvent &);
     void OnEventRadioButton(wxCommandEvent &);
+    void OnEventCombobox(wxCommandEvent &);
+
+    // Включить поля смещений
+    void FillOffsets();
+
+    // Включить поля коэффициентов
+    void FillK();
+
+    // Заполнить поля в соответствии с текущими установками
+    void FillFields();
+
+    bool IsChecked(int id_radiobutton) const;
+
+    void ShowFields(wxVector<Field> &, bool);
 };
