@@ -8,7 +8,7 @@
 WindowTableOffsets::WindowTableOffsets() :
     Dialog(nullptr, wxID_ANY, _L("Таблица смещений и коэффициентов"), wxDefaultPosition, { WIDTH, HEIGHT })
 {
-    table = new TableValues(this);
+    CreateFields();
 
     int x = 500;
     int y = 20;
@@ -45,3 +45,65 @@ WindowTableOffsets::WindowTableOffsets() :
     new wxButton(this, ID_OFFSET_BTN_CANCEL, "Применить", { 50, HEIGHT - 100 }, { BUTTON_WIDTH, BUTTON_HEIGHT });
     new wxButton(this, ID_OFFSET_BTN_APPLY, "Отменить", { 250, HEIGHT - 100 }, { BUTTON_WIDTH, BUTTON_HEIGHT });
 }
+
+
+void WindowTableOffsets::CreateFields()
+{
+    wxPanel *panel = new wxPanel(this, wxID_ANY, { 10, 20 }, { 450, 460 });
+
+    CreateFields_U(panel);
+    CreateFields_I(panel);
+}
+
+
+void WindowTableOffsets::CreateFields_U(wxPanel *panel)
+{
+    const int d = 10;
+
+    wxSize size1{ 90, TEXTCNTRL_HEIGHT };
+    wxSize size2{ 130, TEXTCNTRL_HEIGHT };
+
+    int dh = 1;
+
+    wxSize size{ (size1.x + size2.x) * 2 + d, (size1.y + dh) * ((int)(RangeU::Count + 1) / 2 + 1) };
+
+    SetSizeHints(size);
+
+    new wxStaticText(panel, wxID_ANY, "Диапазон", { 0, 0 }, size1, wxALIGN_CENTER);
+    new wxStaticText(panel, wxID_ANY, "Значение", { size1.x, 0 }, size2, wxALIGN_CENTER);
+    new wxStaticText(panel, wxID_ANY, "Диапазон", { size1.x + size2.x + d, 0 }, size1, wxALIGN_CENTER);
+    new wxStaticText(panel, wxID_ANY, "Значение", { d + (size1.x * 2) + size2.x, 0 }, size2, wxALIGN_CENTER);
+
+    const int num_rows = (int)(RangeU::Count + 1) / 2;
+
+    const int num_cols = 2;
+
+    RangeU range = RangeU((RangeU::E)0);
+
+    for (int col = 0; col < num_cols; col++)
+    {
+        for (int row = 0; row < num_rows; row++)
+        {
+            if (range.value < RangeU::Count)
+            {
+                int x = col * (size1.x + size2.x + d);
+                int y = size1.y + row * (size1.y + dh);
+
+                new wxStaticText(panel, wxID_ANY, range.Name(), { x, y }, size1, wxALIGN_CENTER);
+
+                x += size1.x;
+
+                new wxTextCtrl(panel, wxID_ANY, wxString::Format("%.15f", 0.0), { x, y }, size2);
+
+                range++;
+            }
+        }
+    }
+}
+
+
+void WindowTableOffsets::CreateFields_I(wxPanel *)
+{
+
+}
+
