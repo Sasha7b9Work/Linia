@@ -42,8 +42,6 @@ WindowTableOffsets::WindowTableOffsets() :
     y = CreateRadioButton(this, x, y, ID_OFFSET_RB_CHAN_S_LIMIT_I, "Ограничение I");
     y = CreateRadioButton(this, x, y, ID_OFFSET_RB_CHAN_S_LIMIT_U, "Ограничение U");
 
-    y = 450;
-
-    new wxButton(this, ID_OFFSET_BTN_CANCEL, "Применить", { 50, y }, { BUTTON_WIDTH, BUTTON_HEIGHT });
-    new wxButton(this, ID_OFFSET_BTN_APPLY, "Отменить", { 250, y }, { BUTTON_WIDTH, BUTTON_HEIGHT });
+    new wxButton(this, ID_OFFSET_BTN_CANCEL, "Применить", { 50, HEIGHT - 100 }, { BUTTON_WIDTH, BUTTON_HEIGHT });
+    new wxButton(this, ID_OFFSET_BTN_APPLY, "Отменить", { 250, HEIGHT - 100 }, { BUTTON_WIDTH, BUTTON_HEIGHT });
 }

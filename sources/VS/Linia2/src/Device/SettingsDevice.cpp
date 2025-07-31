@@ -96,7 +96,11 @@ pchar RangeU::Name() const
         "50V",
         "100V",
         "200V",
-        "50VA"
+        "500V",
+        "1kV",
+        "2kV",
+        "5kV",
+        "10kV"
     };
 
     return names[value];

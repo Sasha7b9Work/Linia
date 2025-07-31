@@ -12,7 +12,7 @@ class WindowTableOffsets : public Dialog
 public:
 
     static const int WIDTH = 660;
-    static const int HEIGHT = 550;
+    static const int HEIGHT = 600;
 
     WindowTableOffsets();
 

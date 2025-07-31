@@ -5,7 +5,7 @@
 
 
 TableValues::TableValues(wxWindow *parent) :
-    wxPanel(parent, wxID_ANY, wxDefaultPosition, {450, 418})
+    wxPanel(parent, wxID_ANY, wxDefaultPosition, {450, 460})
 {
     CreateFields();
 }
