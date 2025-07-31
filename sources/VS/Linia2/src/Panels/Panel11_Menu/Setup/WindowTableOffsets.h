@@ -1,6 +1,7 @@
 ﻿// 2025/7/27 21:36:39 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/Dialog.h"
+#include "Device/SettingsDevice.h"
 
 // Таблица смещений и коэффициентов
 
@@ -34,10 +35,10 @@ private:
     void OnEventCombobox(wxCommandEvent &);
 
     // Включить поля смещений
-    void FillOffsets();
+    void FillOffsets(DSet::Type::E, bool show_I);
 
     // Включить поля коэффициентов
-    void FillK();
+    void FillK(DSet::Type::E, bool show_I);
 
     // Заполнить поля в соответствии с текущими установками
     void FillFields();
@@ -45,4 +46,8 @@ private:
     bool IsChecked(int id_radiobutton) const;
 
     void ShowFields(wxVector<Field> &, bool);
+
+    DSet::Type::E GetTypeMeasure() const;
+
+    wxString GetStringValue(double) const;
 };

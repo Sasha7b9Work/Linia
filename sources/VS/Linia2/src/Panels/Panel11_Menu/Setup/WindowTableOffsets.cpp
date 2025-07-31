@@ -214,11 +214,11 @@ void WindowTableOffsets::FillFields()
 
     if (index == 0)
     {
-        FillOffsets();
+        FillOffsets(GetTypeMeasure(), show_I);
     }
     else if (index == 1)
     {
-        FillK();
+        FillK(GetTypeMeasure(), show_I);
     }
     else
     {
@@ -233,15 +233,82 @@ bool WindowTableOffsets::IsChecked(int id_radiobutton) const
 }
 
 
-void WindowTableOffsets::FillOffsets()
+void WindowTableOffsets::FillOffsets(DSet::Type::E type, bool show_I)
 {
+    if (show_I)
+    {
+        for (uint i = 0; i < RangeI::Count; i++)
+        {
+            const CalK &cal = DSet::Get(type, (RangeI::E)i);
 
+            fields_I[i].value->SetValue(GetStringValue(cal.offset));
+        }
+    }
+    else
+    {
+        for (uint i = 0; i < RangeU::Count; i++)
+        {
+            const CalK &cal = DSet::Get(type, (RangeU::E)i);
+
+            fields_U[i].value->SetValue(GetStringValue(cal.offset));
+        }
+    }
 }
 
 
-void WindowTableOffsets::FillK()
+void WindowTableOffsets::FillK(DSet::Type::E type, bool show_I)
 {
+    if (show_I)
+    {
+        for (uint i = 0; i < RangeI::Count; i++)
+        {
+            const CalK &cal = DSet::Get(type, (RangeI::E)i);
 
+            fields_I[i].value->SetValue(GetStringValue(cal.k));
+        }
+    }
+    else
+    {
+        for (uint i = 0; i < RangeU::Count; i++)
+        {
+            const CalK &cal = DSet::Get(GetTypeMeasure(), (RangeU::E)i);
+
+            fields_U[i].value->SetValue(GetStringValue(cal.k));
+        }
+    }
+}
+
+
+wxString WindowTableOffsets::GetStringValue(double value) const
+{
+    return wxString::Format("%.15f", value);
+}
+
+
+DSet::Type::E WindowTableOffsets::GetTypeMeasure() const
+{
+    static const int id[DSet::Type::Count][2] =
+    {
+        { ID_OFFSET_RB_CHAN_C_MEAS_I,   ID_OFFSET_RB_CHAN_C_MEAS_U },
+        { ID_OFFSET_RB_CHAN_B_MEAS_I,   ID_OFFSET_RB_CHAN_B_MEAS_U },
+        { ID_OFFSET_RB_CHAN_B_SOURCE_I, ID_OFFSET_RB_CHAN_B_SOURCE_U },
+        { ID_OFFSET_RB_CHAN_B_LIMIT_I,  ID_OFFSET_RB_CHAN_B_LIMIT_U },
+        { ID_OFFSET_RB_CHAN_S_MEAS_I,   ID_OFFSET_RB_CHAN_S_MEAS_U },
+        { ID_OFFSET_RB_CHAN_S_SOURCE_I, ID_OFFSET_RB_CHAN_S_SOURCE_U },
+        { ID_OFFSET_RB_CHAN_S_LIMIT_I,  ID_OFFSET_RB_CHAN_S_LIMIT_U }
+    };
+
+    for (int i = 0; i < DSet::Type::Count; i++)
+    {
+        if (IsChecked(id[i][0]) || IsChecked(id[i][1]))
+        {
+            return (DSet::Type::E)i;
+        }
+    }
+
+    LOG_ERROR("Can not find type measure");
+
+    return DSet::Type::Count;
 }
 
 
