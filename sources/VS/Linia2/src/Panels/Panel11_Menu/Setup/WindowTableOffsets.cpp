@@ -10,8 +10,6 @@ WindowTableOffsets::WindowTableOffsets() :
 {
     table = new TableValues(this);
 
-    FillTable();
-
     int x = 500;
     int y = 20;
 
@@ -49,19 +47,3 @@ WindowTableOffsets::WindowTableOffsets() :
     new wxButton(this, ID_OFFSET_BTN_CANCEL, "Применить", { 50, y }, { BUTTON_WIDTH, BUTTON_HEIGHT });
     new wxButton(this, ID_OFFSET_BTN_APPLY, "Отменить", { 250, y }, { BUTTON_WIDTH, BUTTON_HEIGHT });
 }
-
-
-void WindowTableOffsets::FillTable()
-{
-    wxVector <TableStruct> values;
-
-    for (int i = RangeI::Count - 1; i >= 0; i--)
-    {
-        values.push_back({ RangeI((RangeI::E)i).Name(), 0.0 });
-    }
-
-    table->SetAll(values);
-
-    table->SetPosition({ 10, SD::Y_SB(20) });
-}
-

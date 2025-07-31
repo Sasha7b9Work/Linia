@@ -1,19 +1,25 @@
 ﻿// 2025/7/27 22:01:47 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/Panel11_Menu/Setup/TableValues.h"
+#include "Device/SettingsDevice.h"
 
 
 TableValues::TableValues(wxWindow *parent) :
     wxPanel(parent, wxID_ANY, wxDefaultPosition, {450, 418})
 {
-//    SetSizeHints({ 450, 399 });
+    CreateFields();
 }
 
 
-void TableValues::SetAll(wxVector<TableStruct> &_values)
+void TableValues::CreateFields()
 {
-    values = _values;
+    CreateFields_U();
+    CreateFields_I();
+}
 
+
+void TableValues::CreateFields_U()
+{
     const int d = 10;
 
     wxSize size1{ 90, TEXTCNTRL_HEIGHT };
@@ -21,7 +27,7 @@ void TableValues::SetAll(wxVector<TableStruct> &_values)
 
     int dh = 1;
 
-    wxSize size{ (size1.x + size2.x) * 2 + d, (size1.y + dh) * ((int)(values.size() + 1) / 2 + 1) };
+    wxSize size{ (size1.x + size2.x) * 2 + d, (size1.y + dh) * ((int)(RangeU::Count + 1) / 2 + 1) };
 
     SetSizeHints(size);
 
@@ -30,29 +36,35 @@ void TableValues::SetAll(wxVector<TableStruct> &_values)
     new wxStaticText(this, wxID_ANY, "Диапазон", { size1.x + size2.x + d, 0 }, size1, wxALIGN_CENTER);
     new wxStaticText(this, wxID_ANY, "Значение", { d + (size1.x * 2) + size2.x, 0}, size2, wxALIGN_CENTER);
 
-    const int num_rows = (int)(values.size() + 1) / 2;
+    const int num_rows = (int)(RangeU::Count + 1) / 2;
 
     const int num_cols = 2;
 
-    auto it = values.begin();
+    RangeU range = RangeU((RangeU::E)0);
 
     for (int col = 0; col < num_cols; col++)
     {
         for (int row = 0; row < num_rows; row++)
         {
-            if (it != values.end())
+            if (range.value < RangeU::Count)
             {
                 int x = col * (size1.x + size2.x + d);
                 int y = size1.y + row * (size1.y + dh);
 
-                new wxStaticText(this, wxID_ANY, it->name, { x, y }, size1, wxALIGN_CENTER);
+                new wxStaticText(this, wxID_ANY, range.Name(), { x, y }, size1, wxALIGN_CENTER);
 
                 x += size1.x;
 
-                new wxTextCtrl(this, wxID_ANY, wxString::Format("%.15f", it->value), { x, y }, size2);
+                new wxTextCtrl(this, wxID_ANY, wxString::Format("%.15f", 0.0), { x, y }, size2);
 
-                it++;
+                range++;
             }
         }
     }
+}
+
+
+void TableValues::CreateFields_I()
+{
+
 }

@@ -3,6 +3,9 @@
 #include "Controls/Dialog.h"
 
 
+// Настройка - Калибровка
+
+
 class WindowCalibrate : public Dialog
 {
 public:

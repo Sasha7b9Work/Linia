@@ -644,13 +644,13 @@ static DSettings dset =
 };
 
 
-CalK DSet::Get(Type::E type, RangeI::E range)
+const CalK &DSet::Get(Type::E type, RangeI::E range)
 {
     return dset.calI[type][range];
 }
 
 
-CalK DSet::Get(Type::E type, RangeU::E range)
+const CalK &DSet::Get(Type::E type, RangeU::E range)
 {
     return dset.calU[type][range];
 }

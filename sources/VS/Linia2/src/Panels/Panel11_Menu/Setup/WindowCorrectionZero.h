@@ -3,6 +3,9 @@
 #include "Controls/Dialog.h"
 
 
+// Настройка - Коррекция смещения нуля
+
+
 class WindowCorretionZero : public Dialog
 {
 public:

@@ -2,22 +2,24 @@
 #pragma once
 
 
-struct TableStruct
-{
-    wxString name;
-    double value;
-};
-
-
 class TableValues : public wxPanel
 {
 public:
 
     TableValues(wxWindow *);
 
-    void SetAll(wxVector<TableStruct> &);
-
 private:
 
-    wxVector<TableStruct> values;
+    struct Field
+    {
+        wxStaticText *name;
+        wxTextCtrl   *value;
+    };
+
+    std::vector<Field> fields_u;
+    std::vector<Field> fields_i;
+
+    void CreateFields();
+    void CreateFields_U();
+    void CreateFields_I();
 };

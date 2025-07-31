@@ -4,6 +4,9 @@
 #include "Panels/Panel11_Menu/Setup/TableValues.h"
 
 
+// Таблица смещений и коэффициентов
+
+
 class WindowTableOffsets : public Dialog
 {
 public:
@@ -16,8 +19,6 @@ public:
 private:
 
     TableValues *table = nullptr;
-
-    void FillTable();
 
     void OnEventButton(wxCommandEvent &);
     void OnEventRadioButton(wxCommandEvent &);

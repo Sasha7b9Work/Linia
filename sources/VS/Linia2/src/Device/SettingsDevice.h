@@ -113,6 +113,11 @@ struct RangeU
     RangeU(E v) : value(v) { }
 
     pchar Name() const;
+
+    void operator++(int)
+    {
+        value = (E)(value + 1);
+    }
 };
 
 
@@ -140,8 +145,8 @@ namespace DSet
         };
     };
 
-    CalK Get(Type::E, RangeI::E);
-    CalK Get(Type::E, RangeU::E);
+    const CalK &Get(Type::E, RangeI::E);
+    const CalK &Get(Type::E, RangeU::E);
 
     void Set(Type::E, RangeI::E, const CalK &);
     void Set(Type::E, RangeU::E, const CalK &);
