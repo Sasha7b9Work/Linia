@@ -133,7 +133,7 @@ void WindowTableOffsets::CreateFields_I(wxPanel *panel)
 
     int dh = 1;
 
-    wxSize size{ (size1.x + size2.x) * 2 + d, (size1.y + dh) * ((int)(RangeI125::Count + 1) / 2 + 1) };
+    wxSize size{ (size1.x + size2.x) * 2 + d, (size1.y + dh) * ((int)(RangeI::Count + 1) / 2 + 1) };
 
     SetSizeHints(size);
 
@@ -142,17 +142,17 @@ void WindowTableOffsets::CreateFields_I(wxPanel *panel)
     new wxStaticText(panel, wxID_ANY, "Диапазон", { size1.x + size2.x + d, 0 }, size1, wxALIGN_CENTER);
     new wxStaticText(panel, wxID_ANY, "Значение", { d + (size1.x * 2) + size2.x, 0 }, size2, wxALIGN_CENTER);
 
-    const int num_rows = (int)(RangeI125::Count + 1) / 2;
+    const int num_rows = (int)(RangeI::Count + 1) / 2;
 
     const int num_cols = 2;
 
-    RangeI125 range = RangeI125((RangeI125::E)0);
+    RangeI range = RangeI((RangeI::E)0);
 
     for (int col = 0; col < num_cols; col++)
     {
         for (int row = 0; row < num_rows; row++)
         {
-            if (range.value < RangeI125::Count)
+            if (range.value < RangeI::Count)
             {
                 int x = col * (size1.x + size2.x + d);
                 int y = size1.y + row * (size1.y + dh);
@@ -242,9 +242,9 @@ void WindowTableOffsets::FillOffsets(DSet::Type::E type, bool show_I)
 {
     if (show_I)
     {
-        for (uint i = 0; i < RangeI125::Count; i++)
+        for (uint i = 0; i < RangeI::Count; i++)
         {
-            const CalK &cal = DSet::Get(type, (RangeI125::E)i);
+            const CalK &cal = DSet::Get(type, (RangeI::E)i);
 
             fields_I[i].value->SetValue(GetStringValue(cal.offset));
         }
@@ -265,9 +265,9 @@ void WindowTableOffsets::FillK(DSet::Type::E type, bool show_I)
 {
     if (show_I)
     {
-        for (uint i = 0; i < RangeI125::Count; i++)
+        for (uint i = 0; i < RangeI::Count; i++)
         {
-            const CalK &cal = DSet::Get(type, (RangeI125::E)i);
+            const CalK &cal = DSet::Get(type, (RangeI::E)i);
 
             fields_I[i].value->SetValue(GetStringValue(cal.k));
         }
@@ -330,7 +330,7 @@ void WindowTableOffsets::ShowFieldsI(bool show)
 
         if (show)
         {
-            bool condition = InRange<int>(field.range, RangeI125::Min(type), RangeI125::Max(type));
+            bool condition = InRange<int>(field.range, RangeI::Min(type), RangeI::Max(type));
 
             if (!condition)
             {

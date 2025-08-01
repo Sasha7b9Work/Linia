@@ -25,7 +25,7 @@ namespace DSet
 }
 
 
-struct RangeI125
+struct RangeI
 {
     enum E
     {
@@ -70,7 +70,7 @@ struct RangeI125
 
     E value;
 
-    RangeI125(E v) : value(v) { }
+    RangeI(E v) : value(v) { }
 
     pchar Name() const;
 
@@ -90,43 +90,43 @@ struct RangeU
     {
         _1nV,
         _2nV,
-        _5nV,
+        _4_5nV,
         _10nV,
         _20nV,
-        _50nV,
+        _40_50nV,
         _100nV,
         _200nV,
-        _500nV,
+        _400_500nV,
         _1uV,
         _2uV,
-        _5uV,
+        _4_5uV,
         _10uV,
         _20uV,
-        _50uV,
+        _40_50uV,
         _100uV,
         _200uV,
-        _500uV,
+        _400_500uV,
         _1mV,
         _2mV,
-        _5mV,
+        _4_5mV,
         _10mV,
         _20mV,
-        _50mV,
+        _40_50mV,
         _100mV,
         _200mV,
-        _500mV,
+        _400_500mV,
         _1V,
         _2V,
-        _5V,
+        _4_5V,
         _10V,
         _20V,
-        _50V,
+        _40_50V,
         _100V,
         _200V,
-        _500V,
+        _400_500V,
         _1kV,
         _2kV,
-        _5kV,
+        _4_5kV,
         _10kV,
         Count
     };
@@ -156,9 +156,9 @@ struct CalK
 
 namespace DSet
 {
-    const CalK &Get(Type::E, RangeI125::E);
+    const CalK &Get(Type::E, RangeI::E);
     const CalK &Get(Type::E, RangeU::E);
 
-    void Set(Type::E, RangeI125::E, const CalK &);
+    void Set(Type::E, RangeI::E, const CalK &);
     void Set(Type::E, RangeU::E, const CalK &);
 }
