@@ -159,7 +159,7 @@ void WindowTableOffsets::CreateFields_I(wxPanel *panel)
 
                 Field field;
 
-                field.name = new wxStaticText(panel, wxID_ANY, range.Name(RowI::_125), { x, y }, size1, wxALIGN_CENTER);
+                field.name = new wxStaticText(panel, wxID_ANY, "", {x, y}, size1, wxALIGN_CENTER);
 
                 x += size1.x;
 
@@ -330,6 +330,8 @@ void WindowTableOffsets::ShowFieldsI(bool show)
 
         if (show)
         {
+            field.name->SetLabel(RangeI((RangeI::E)field.range).Name(GetTypeMeasure() == DSet::Type::ChanC_Meas ? RowI::_125 : RowI::_124));
+
             bool condition = InRange<int>(field.range, RangeI::Min(type), RangeI::Max(type));
 
             if (!condition)

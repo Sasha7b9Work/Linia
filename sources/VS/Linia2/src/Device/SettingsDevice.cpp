@@ -49,7 +49,7 @@ pchar RangeI::Name(RowI::E row) const
         { "40A",   "50A" },
         { "100A",  "100A" },
         { "200A",  "200A" },
-        { "400A"   "500A" }
+        { "400A",  "500A" }
     };
 
     return names[value][row];
