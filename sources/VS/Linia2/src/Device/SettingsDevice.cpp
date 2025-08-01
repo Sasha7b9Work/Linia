@@ -10,49 +10,49 @@ struct DSettings
 };
 
 
-pchar RangeI::Name() const
+pchar RangeI::Name(RowI::E row) const
 {
-    static const pchar names[Count] =
+    static const pchar names[Count][RowI::Count] =
     {
-        "1nA",
-        "2nA",
-        "5nA",
-        "10nA",
-        "20nA",
-        "50na",
-        "100nA",
-        "200nA",
-        "500nA",
-        "1uA",
-        "2uA",
-        "5uA",
-        "10uA",
-        "20uA",
-        "50uA",
-        "100uA",
-        "200uA",
-        "500uA",
-        "1mA",
-        "2mA",
-        "5mA",
-        "10mA",
-        "20mA",
-        "50mA",
-        "100mA",
-        "200mA",
-        "500mA",
-        "1A",
-        "2A",
-        "5A",
-        "10A",
-        "20A",
-        "50A",
-        "100A",
-        "200A",
-        "500A"
+        { "1nA",   "1nA" },
+        { "2nA",   "2nA" },
+        { "4nA",   "5nA" },
+        { "10nA",  "10nA" },
+        { "20nA",  "20nA" },
+        { "40na",  "50na" },
+        { "100nA", "100nA" },
+        { "200nA", "200nA" },
+        { "400nA", "500nA" },
+        { "1uA",   "1uA" },
+        { "2uA",   "2uA" },
+        { "4uA",   "5uA" },
+        { "10uA",  "10uA" },
+        { "20uA",  "20uA" },
+        { "40uA",  "50uA" },
+        { "100uA", "100uA" },
+        { "200uA", "200uA" },
+        { "400uA", "500uA" },
+        { "1mA",   "1mA" },
+        { "2mA",   "2mA" },
+        { "4mA",   "5mA" },
+        { "10mA",  "10mA" },
+        { "20mA",  "20mA" },
+        { "40mA",  "50mA" },
+        { "100mA", "100mA" },
+        { "200mA", "200mA" },
+        { "400mA", "500mA" },
+        { "1A",    "1A" },
+        { "2A",    "2A" },
+        { "4A",    "5A" },
+        { "10A",   "10A" },
+        { "20A",   "20A" },
+        { "40A",   "50A" },
+        { "100A",  "100A" },
+        { "200A",  "200A" },
+        { "400A"   "500A" }
     };
 
-    return names[value];
+    return names[value][row];
 }
 
 

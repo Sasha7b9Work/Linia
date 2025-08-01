@@ -159,7 +159,7 @@ void WindowTableOffsets::CreateFields_I(wxPanel *panel)
 
                 Field field;
 
-                field.name = new wxStaticText(panel, wxID_ANY, range.Name(), { x, y }, size1, wxALIGN_CENTER);
+                field.name = new wxStaticText(panel, wxID_ANY, range.Name(RowI::_125), { x, y }, size1, wxALIGN_CENTER);
 
                 x += size1.x;
 

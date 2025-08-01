@@ -25,6 +25,17 @@ namespace DSet
 }
 
 
+struct RowI
+{
+    enum E
+    {
+        _124,
+        _125,
+        Count
+    };
+};
+
+
 struct RangeI
 {
     enum E
@@ -72,7 +83,7 @@ struct RangeI
 
     RangeI(E v) : value(v) { }
 
-    pchar Name() const;
+    pchar Name(RowI::E) const;
 
     void operator++(int)
     {
