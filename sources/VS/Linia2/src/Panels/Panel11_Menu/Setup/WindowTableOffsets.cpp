@@ -366,6 +366,7 @@ void WindowTableOffsets::ShowFieldsU(bool show)
             if (!condition)
             {
                 field.value->SetLabelText("");
+                field.value->SetValue("");
             }
 
             field.name->Enable(condition);
