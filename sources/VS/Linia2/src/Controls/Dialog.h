@@ -34,7 +34,8 @@ private:
     {
         if (event.GetKeyCode() == WXK_ESCAPE)
         {
-            Close(); // или EndModal(wxID_CANCEL);
+            // Close();
+            EndModal(wxID_CANCEL);
         }
         else
         {
