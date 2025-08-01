@@ -721,7 +721,7 @@ RangeI::E RangeI::Max(DSet::Type::E type)
 {
     static const RangeI::E max[DSet::Type::Count] =
     {
-        _20A,
+        _40_50A,
         _10A,
         _10A,
         _10A,
@@ -738,13 +738,13 @@ RangeU::E RangeU::Min(DSet::Type::E type)
 {
     static const RangeU::E min[DSet::Type::Count] =
     {
-        _500mV,
-        _1nV,
-        _1nV,
-        _1nV,
-        _1nV,
-        _1nV,
-        _1nV
+        _400_500mV,
+        _1V,
+        _1V,
+        _1V,
+        _1V,
+        _1V,
+        _1V
     };
 
     return min[type];
@@ -756,12 +756,12 @@ RangeU::E RangeU::Max(DSet::Type::E type)
     static const RangeU::E max[DSet::Type::Count] =
     {
         _2kV,
-        _10kV,
-        _10kV,
-        _10kV,
-        _10kV,
-        _10kV,
-        _5kV
+        _40_50V,
+        _40_50V,
+        _40_50V,
+        _40_50V,
+        _40_50V,
+        _40_50V
     };
 
     return max[type];
