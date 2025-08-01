@@ -6,6 +6,7 @@
 #include "Panels/Panel11_Menu/Setup/WindowTableOffsets.h"
 #include "Panels/Panel11_Menu/Setup/WindowMyComputer.h"
 #include "Panels/Panel11_Menu/Setup/WindowUser.h"
+#include "Panels/Panel11_Menu/Setup/WindowLaunch.h"
 
 
 DialogSetup *DialogSetup::self = nullptr;
@@ -17,7 +18,10 @@ DialogSetup::DialogSetup() :
         {
             WindowUser().ShowModal();
         },
-        _L("Запуск"), ID_BTN_START, []() {},
+        _L("Запуск"), ID_BTN_LAUNCH, []()
+        {
+            WindowLaunch().ShowModal();
+        },
         _L("Автосохранение"), ID_BTN_AUTOSAVE, []() {},
         _L("Коррекция смещения нуля"), ID_BTN_CORRECTION_ZERO, []()
         {

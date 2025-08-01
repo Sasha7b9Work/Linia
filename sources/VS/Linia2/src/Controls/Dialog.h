@@ -10,6 +10,7 @@ public:
     Dialog(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &pos = wxDefaultPosition, const wxSize &size = wxDefaultSize) :
         wxDialog(parent, id, title, pos, size)
     {
+        Bind(wxEVT_CHAR_HOOK, &Dialog::OnKeyDown, this);
     }
 
     virtual int ShowModal() override
@@ -26,4 +27,18 @@ protected:
     int CreateRadioButton(wxWindow *, int x, int y, int id, const wxString &);
 
     int CreateLabelGroup(wxWindow *, int x, int y, const wxString &);
+
+private:
+
+    void OnKeyDown(wxKeyEvent &event)
+    {
+        if (event.GetKeyCode() == WXK_ESCAPE)
+        {
+            Close(); // или EndModal(wxID_CANCEL);
+        }
+        else
+        {
+            event.Skip();
+        }
+    }
 };
