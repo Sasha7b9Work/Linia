@@ -82,6 +82,8 @@ enum
     ID_BTN_START,
     ID_TIMER_APP,
     ID_TIMER_TIME,
+    ID_BUTTON_MEASURE,
+    ID_STATICTEXT_MEASURE,
 
     /////////////////////////////////////////////////////////////////////////////////// Панель 3 - Конфигурация
     ID_BTN_CHANNEL_C,

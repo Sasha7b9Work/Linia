@@ -3,6 +3,7 @@
 #include "Panels/Panel03_Config/Panel03_Config.h"
 #include "Panels/Panel07_Indicator.h"
 #include "MainWindow.h"
+#include "Utils/SystemDepend.h"
 
 
 PanelIndicator *PanelIndicator::self = nullptr;
@@ -13,4 +14,15 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
         MainWindow::WIDTH3, HEIGHT)
 {
     self = this;
+
+    new wxButton(this, ID_BUTTON_MEASURE, "ÈÇÌÅÐÅÍÈÅ", { 10, SD::Y_SB(10) }, { 90, BUTTON_HEIGHT });
+
+    wxStaticText *text = new wxStaticText(this, ID_STATICTEXT_MEASURE, "0 %", { 120, SD::Y_SB(5) }, { 25, 25});
+
+    text->SetForegroundColour(wxColour(255, 0, 0));
+
+    wxFont font = text->GetFont();
+    font.SetPointSize(font.GetPointSize() + 7);
+    font.SetWeight(wxFONTWEIGHT_BOLD);
+    text->SetFont(font);
 }
