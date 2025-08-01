@@ -15,9 +15,9 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
 {
     self = this;
 
-    new wxButton(this, ID_BUTTON_MEASURE, "ИЗМЕРЕНИЕ", { 10, 10 }, { 90, BUTTON_HEIGHT });
+    new wxToggleButton(this, ID_BUTTON_MEASURE, "ИЗМЕРЕНИЕ", { 5, 10 }, { 90, BUTTON_HEIGHT });
 
-    wxStaticText *text = new wxStaticText(this, ID_STATICTEXT_MEASURE, "0 %", { 120, 5 }, { 25, 25});
+    wxStaticText *text = new wxStaticText(this, ID_STATICTEXT_MEASURE, "Uc 100 %", { 105, 5 }, { 25, 25});
 
     text->SetForegroundColour(wxColour(255, 0, 0));
 
