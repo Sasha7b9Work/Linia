@@ -9,6 +9,7 @@
 #include "Panels/Panel11_Menu/Setup/WindowLaunch.h"
 #include "Panels/Panel11_Menu/Setup/WindowAutoSave.h"
 #include "Panels/Panel11_Menu/Setup/WindowPassword.h"
+#include "Panels/Panel11_Menu/Setup/WindowAddressIP.h"
 
 
 DialogSetup *DialogSetup::self = nullptr;
@@ -44,7 +45,10 @@ DialogSetup::DialogSetup() :
         {
             WindowPassword().ShowModal();
         },
-        _L("IP-адрес"), ID_BTN_ADDRESS_IP, []() {},
+        _L("IP-адрес"), ID_BTN_ADDRESS_IP, []()
+        {
+            WindowAddressIP().ShowModal();
+        },
         _L("Мой компьютер"), ID_BTN_MY_COMPUTER, []()
         {
             WindowMyComputer().ShowModal();
