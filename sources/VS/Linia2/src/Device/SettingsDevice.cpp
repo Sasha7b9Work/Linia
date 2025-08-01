@@ -19,7 +19,7 @@ pchar RangeI::Name(RowI::E row) const
         { "4nA",   "5nA" },
         { "10nA",  "10nA" },
         { "20nA",  "20nA" },
-        { "40na",  "50na" },
+        { "40nА",  "50nА" },
         { "100nA", "100nA" },
         { "200nA", "200nA" },
         { "400nA", "500nA" },
@@ -705,12 +705,12 @@ RangeI::E RangeI::Min(DSet::Type::E type)
     static const RangeI::E min[DSet::Type::Count] =
     {
         _1nA,
-        _1nA,
-        _1nA,
-        _1nA,
-        _1nA,
-        _1nA,
-        _1nA
+        _40_50nA,
+        _40_50nA,
+        _40_50nA,
+        _40_50nA,
+        _40_50nA,
+        _40_50nA
     };
 
     return min[type];
@@ -722,12 +722,12 @@ RangeI::E RangeI::Max(DSet::Type::E type)
     static const RangeI::E max[DSet::Type::Count] =
     {
         _20A,
-        _500A,
-        _500A,
-        _500A,
-        _500A,
-        _500A,
-        _500A
+        _10A,
+        _10A,
+        _10A,
+        _10mA,
+        _10mA,
+        _10mA
     };
 
     return max[type];
@@ -738,7 +738,7 @@ RangeU::E RangeU::Min(DSet::Type::E type)
 {
     static const RangeU::E min[DSet::Type::Count] =
     {
-        _400_500mV,
+        _500mV,
         _1nV,
         _1nV,
         _1nV,
@@ -761,7 +761,7 @@ RangeU::E RangeU::Max(DSet::Type::E type)
         _10kV,
         _10kV,
         _10kV,
-        _4_5kV
+        _5kV
     };
 
     return max[type];
