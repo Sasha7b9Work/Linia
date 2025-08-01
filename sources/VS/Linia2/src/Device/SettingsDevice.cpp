@@ -10,10 +10,11 @@ struct DSettings
 };
 
 
-pchar RangeI::Name(RowI::E row) const
+pchar RangeI::Name(RowRange::E row) const
 {
-    static const pchar names[Count][RowI::Count] =
+    static const pchar names[Count][RowRange::Count] =
     {
+        { "400pA", "500pA" },
         { "1nA",   "1nA" },
         { "2nA",   "2nA" },
         { "4nA",   "5nA" },
@@ -48,8 +49,7 @@ pchar RangeI::Name(RowI::E row) const
         { "20A",   "20A" },
         { "40A",   "50A" },
         { "100A",  "100A" },
-        { "200A",  "200A" },
-        { "400A",  "500A" }
+        { "200A",  "200A" }
     };
 
     return names[value][row];
@@ -57,53 +57,53 @@ pchar RangeI::Name(RowI::E row) const
 
 
 
-pchar RangeU::Name() const
+pchar RangeU::Name(RowRange::E row) const
 {
-    static const pchar names[Count] =
+    static const pchar names[Count][RowRange::Count] =
     {
-        "1nV",
-        "2nV",
-        "5nV",
-        "10nV",
-        "20nV",
-        "50nV",
-        "100nV",
-        "200nV",
-        "500nV",
-        "1uV",
-        "2uV",
-        "5uV",
-        "10uV",
-        "20uV",
-        "50uV",
-        "100uV",
-        "200uV",
-        "500uV",
-        "1mV",
-        "2mV",
-        "5mV",
-        "10mV",
-        "20mV",
-        "50mV",
-        "100mV",
-        "200mV",
-        "500mV",
-        "1V",
-        "2V",
-        "5V",
-        "10V",
-        "20V",
-        "50V",
-        "100V",
-        "200V",
-        "500V",
-        "1kV",
-        "2kV",
-        "5kV",
-        "10kV"
+        { "1nV",   "1nV" },
+        { "2nV",   "2nV" },
+        { "4nV",   "5nV" },
+        { "10nV",  "10nV" },
+        { "20nV",  "20nV" },
+        { "40nV",  "50nV" },
+        { "100nV", "100nV" },
+        { "200nV", "200nV" },
+        { "400nV", "500nV" },
+        { "1uV",   "1uV" },
+        { "2uV",   "2uV" },
+        { "4uV",   "5uV" },
+        { "10uV",  "10uV" },
+        { "20uV",  "20uV" },
+        { "40uV",  "50uV" },
+        { "100uV", "100uV" },
+        { "200uV", "200uV" },
+        { "400uV", "500uV" },
+        { "1mV",   "1mV" },
+        { "2mV",   "2mV" },
+        { "4mV",   "5mV" },
+        { "10mV",  "10mV" },
+        { "20mV",  "20mV" },
+        { "40mV",  "50mV" },
+        { "100mV", "100mV" },
+        { "200mV", "200mV" },
+        { "400mV", "500mV" },
+        { "1V",    "1V" },
+        { "2V",    "2V" },
+        { "4V",    "5V" },
+        { "10V",   "10V" },
+        { "20V",   "20V" },
+        { "40V",   "50V" },
+        { "100V",  "100V" },
+        { "200V",  "200V" },
+        { "400V",  "500V" },
+        { "1kV",   "1kV" },
+        { "2kV",   "2kV" },
+        { "4kV",   "5kV" },
+        { "10kV"   "10kV" }
     };
 
-    return names[value];
+    return names[value][row];
 }
 
 

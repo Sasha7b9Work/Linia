@@ -25,7 +25,7 @@ namespace DSet
 }
 
 
-struct RowI
+struct RowRange
 {
     enum E
     {
@@ -40,6 +40,7 @@ struct RangeI
 {
     enum E
     {
+        _500pA,
         _1nA,
         _2nA,
         _4_5nA,
@@ -75,7 +76,6 @@ struct RangeI
         _40_50A,
         _100A,
         _200A,
-        _400_500A,
         Count
     };
 
@@ -83,7 +83,7 @@ struct RangeI
 
     RangeI(E v) : value(v) { }
 
-    pchar Name(RowI::E) const;
+    pchar Name(RowRange::E) const;
 
     void operator++(int)
     {
@@ -146,7 +146,7 @@ struct RangeU
 
     RangeU(E v) : value(v) { }
 
-    pchar Name() const;
+    pchar Name(RowRange::E) const;
 
     void operator++(int)
     {
