@@ -5,12 +5,12 @@
 
 struct DSettings
 {
-    CalK calI[DSet::Type::Count][RangeI::Count];
+    CalK calI[DSet::Type::Count][RangeI125::Count];
     CalK calU[DSet::Type::Count][RangeU::Count];
 };
 
 
-pchar RangeI::Name() const
+pchar RangeI125::Name() const
 {
     static const pchar names[Count] =
     {
@@ -676,7 +676,7 @@ static DSettings dset =
 };
 
 
-const CalK &DSet::Get(Type::E type, RangeI::E range)
+const CalK &DSet::Get(Type::E type, RangeI125::E range)
 {
     return dset.calI[type][range];
 }
@@ -688,7 +688,7 @@ const CalK &DSet::Get(Type::E type, RangeU::E range)
 }
 
 
-void DSet::Set(Type::E type, RangeI::E range, const CalK &cal)
+void DSet::Set(Type::E type, RangeI125::E range, const CalK &cal)
 {
     dset.calI[type][range] = cal;
 }
@@ -700,9 +700,9 @@ void DSet::Set(Type::E type, RangeU::E range, const CalK &cal)
 }
 
 
-RangeI::E RangeI::Min(DSet::Type::E type)
+RangeI125::E RangeI125::Min(DSet::Type::E type)
 {
-    static const RangeI::E min[DSet::Type::Count] =
+    static const RangeI125::E min[DSet::Type::Count] =
     {
         _1nA,
         _1nA,
@@ -717,11 +717,11 @@ RangeI::E RangeI::Min(DSet::Type::E type)
 }
 
 
-RangeI::E RangeI::Max(DSet::Type::E type)
+RangeI125::E RangeI125::Max(DSet::Type::E type)
 {
-    static const RangeI::E max[DSet::Type::Count] =
+    static const RangeI125::E max[DSet::Type::Count] =
     {
-        _500A,
+        _20A,
         _500A,
         _500A,
         _500A,
@@ -738,7 +738,7 @@ RangeU::E RangeU::Min(DSet::Type::E type)
 {
     static const RangeU::E min[DSet::Type::Count] =
     {
-        _1nV,
+        _500mV,
         _1nV,
         _1nV,
         _1nV,
@@ -755,7 +755,7 @@ RangeU::E RangeU::Max(DSet::Type::E type)
 {
     static const RangeU::E max[DSet::Type::Count] =
     {
-        _10kV,
+        _2kV,
         _10kV,
         _10kV,
         _10kV,
