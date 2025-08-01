@@ -4,6 +4,7 @@
 #include "Utils/SystemDepend.h"
 #include "Device/SettingsDevice.h"
 #include "Utils/GlobalFunctions.h"
+#include "Utils/Math.h"
 
 
 WindowTableOffsets::WindowTableOffsets() :
@@ -112,6 +113,8 @@ void WindowTableOffsets::CreateFields_U(wxPanel *panel)
 
                 field.value = new wxTextCtrl(panel, wxID_ANY, "", {x, y}, size2);
 
+                field.range = range.value;
+
                 fields_U.push_back(field);
 
                 range++;
@@ -162,6 +165,8 @@ void WindowTableOffsets::CreateFields_I(wxPanel *panel)
 
                 field.value = new wxTextCtrl(panel, wxID_ANY, "", { x, y }, size2);
 
+                field.range = range.value;
+
                 fields_I.push_back(field);
 
                 range++;
@@ -199,17 +204,6 @@ void WindowTableOffsets::FillFields()
         IsChecked(ID_OFFSET_RB_CHAN_S_SOURCE_I) ||
         IsChecked(ID_OFFSET_RB_CHAN_S_LIMIT_I);
 
-    if (show_I)
-    {
-        ShowFields(fields_I, true);
-        ShowFields(fields_U, false);
-    }
-    else
-    {
-        ShowFields(fields_U, true);
-        ShowFields(fields_I, false);
-    }
-
     int index = GF::FindComboBox(this, ID_OFFSET_COMBO_TYPE)->GetCurrentSelection();
 
     if (index == 0)
@@ -223,6 +217,17 @@ void WindowTableOffsets::FillFields()
     else
     {
         LOG_ERROR("Bad index");
+    }
+
+    if (show_I)
+    {
+        ShowFieldsI(true);
+        ShowFieldsU(false);
+    }
+    else
+    {
+        ShowFieldsU(true);
+        ShowFieldsI(false);
     }
 }
 
@@ -312,11 +317,55 @@ DSet::Type::E WindowTableOffsets::GetTypeMeasure() const
 }
 
 
-void WindowTableOffsets::ShowFields(wxVector<Field> &fields, bool show)
+void WindowTableOffsets::ShowFieldsI(bool show)
 {
-    for (auto &field : fields)
+    using namespace Math;
+
+    DSet::Type::E type = GetTypeMeasure();
+
+    for (auto &field : fields_I)
     {
         field.name->Show(show);
         field.value->Show(show);
+
+        if (show)
+        {
+            bool condition = InRange<int>(field.range, RangeI::Min(type), RangeI::Max(type));
+
+            if (!condition)
+            {
+                field.value->SetLabelText("");
+            }
+
+            field.name->Enable(condition);
+            field.value->Enable(condition);
+        }
+    }
+}
+
+
+void WindowTableOffsets::ShowFieldsU(bool show)
+{
+    using namespace Math;
+
+    DSet::Type::E type = GetTypeMeasure();
+
+    for (auto &field : fields_U)
+    {
+        field.name->Show(show);
+        field.value->Show(show);
+
+        if (show)
+        {
+            bool condition = InRange<int>(field.range, RangeU::Min(type), RangeU::Max(type));
+
+            if (!condition)
+            {
+                field.value->SetLabelText("");
+            }
+
+            field.name->Enable(condition);
+            field.value->Enable(condition);
+        }
     }
 }

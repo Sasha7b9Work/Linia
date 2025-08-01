@@ -21,6 +21,7 @@ private:
     {
         wxStaticText *name;
         wxTextCtrl   *value;
+        int           range;
     };
 
     wxVector<Field> fields_I;
@@ -45,7 +46,8 @@ private:
 
     bool IsChecked(int id_radiobutton) const;
 
-    void ShowFields(wxVector<Field> &, bool);
+    void ShowFieldsI(bool);
+    void ShowFieldsU(bool);
 
     DSet::Type::E GetTypeMeasure() const;
 
