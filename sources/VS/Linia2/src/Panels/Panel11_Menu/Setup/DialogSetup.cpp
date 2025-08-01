@@ -7,6 +7,8 @@
 #include "Panels/Panel11_Menu/Setup/WindowMyComputer.h"
 #include "Panels/Panel11_Menu/Setup/WindowUser.h"
 #include "Panels/Panel11_Menu/Setup/WindowLaunch.h"
+#include "Panels/Panel11_Menu/Setup/WindowAutoSave.h"
+#include "Panels/Panel11_Menu/Setup/WindowPassword.h"
 
 
 DialogSetup *DialogSetup::self = nullptr;
@@ -22,7 +24,10 @@ DialogSetup::DialogSetup() :
         {
             WindowLaunch().ShowModal();
         },
-        _L("Автосохранение"), ID_BTN_AUTOSAVE, []() {},
+        _L("Автосохранение"), ID_BTN_AUTOSAVE, []()
+        {
+            WindowAutoSave().ShowModal();
+        },
         _L("Коррекция смещения нуля"), ID_BTN_CORRECTION_ZERO, []()
         {
             WindowCorretionZero().ShowModal();
@@ -35,7 +40,10 @@ DialogSetup::DialogSetup() :
         {
             WindowTableOffsets().ShowModal();
         },
-        _L("Изменить пароль"), ID_BTN_PASSWORD, []() {},
+        _L("Изменить пароль"), ID_BTN_PASSWORD, []()
+        {
+            WindowPassword().ShowModal();
+        },
         _L("IP-адрес"), ID_BTN_ADDRESS_IP, []() {},
         _L("Мой компьютер"), ID_BTN_MY_COMPUTER, []()
         {
