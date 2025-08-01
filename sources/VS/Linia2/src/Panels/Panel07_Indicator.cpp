@@ -1,4 +1,4 @@
-// 2025/6/1 18:25:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+Ôªø// 2025/6/1 18:25:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/Panel03_Config/Panel03_Config.h"
 #include "Panels/Panel07_Indicator.h"
@@ -15,7 +15,7 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
 {
     self = this;
 
-    new wxButton(this, ID_BUTTON_MEASURE, "»«Ã≈–≈Õ»≈", { 10, 10 }, { 119, BUTTON_HEIGHT + 10 });
+    new wxButton(this, ID_BUTTON_MEASURE, "–ò–ó–ú–ï–†–ï–ù–ò–ï", { 10, 10 }, { 90, BUTTON_HEIGHT });
 
     wxStaticText *text = new wxStaticText(this, ID_STATICTEXT_MEASURE, "0 %", { 120, 5 }, { 25, 25});
 
