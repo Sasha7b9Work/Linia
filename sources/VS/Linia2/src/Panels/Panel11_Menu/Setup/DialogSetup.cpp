@@ -5,6 +5,7 @@
 #include "Panels/Panel11_Menu/Setup/WindowCalibrate.h"
 #include "Panels/Panel11_Menu/Setup/WindowTableOffsets.h"
 #include "Panels/Panel11_Menu/Setup/WindowMyComputer.h"
+#include "Panels/Panel11_Menu/Setup/WindowUser.h"
 
 
 DialogSetup *DialogSetup::self = nullptr;
@@ -12,7 +13,10 @@ DialogSetup *DialogSetup::self = nullptr;
 
 DialogSetup::DialogSetup() :
     MenuDialog(_L("Настройка"), 275,
-        _L("Настройки пользователя"), ID_BTN_USER, [](){},
+        _L("Настройки пользователя"), ID_BTN_USER, []()
+        {
+            WindowUser().ShowModal();
+        },
         _L("Запуск"), ID_BTN_START, []() {},
         _L("Автосохранение"), ID_BTN_AUTOSAVE, []() {},
         _L("Коррекция смещения нуля"), ID_BTN_CORRECTION_ZERO, []()

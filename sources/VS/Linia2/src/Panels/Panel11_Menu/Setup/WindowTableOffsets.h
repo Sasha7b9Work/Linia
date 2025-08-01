@@ -3,7 +3,8 @@
 #include "Controls/Dialog.h"
 #include "Device/SettingsDevice.h"
 
-// Таблица смещений и коэффициентов
+
+// Настройки - Таблица смещений и коэффициентов
 
 
 class WindowTableOffsets : public Dialog
