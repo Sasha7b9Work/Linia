@@ -670,3 +670,71 @@ void DSet::Set(Type::E type, RangeU::E range, const CalK &cal)
 {
     dset.calU[type][range] = cal;
 }
+
+
+RangeI::E RangeI::Min(DSet::Type::E type)
+{
+    static const RangeI::E min[DSet::Type::Count] =
+    {
+        _1nA,
+        _1nA,
+        _1nA,
+        _1nA,
+        _1nA,
+        _1nA,
+        _1nA
+    };
+
+    return min[type];
+}
+
+
+RangeI::E RangeI::Max(DSet::Type::E type)
+{
+    static const RangeI::E max[DSet::Type::Count] =
+    {
+        _500A,
+        _500A,
+        _500A,
+        _500A,
+        _500A,
+        _500A,
+        _500A
+    };
+
+    return max[type];
+}
+
+
+RangeU::E RangeU::Min(DSet::Type::E type)
+{
+    static const RangeU::E min[DSet::Type::Count] =
+    {
+        _1nV,
+        _1nV,
+        _1nV,
+        _1nV,
+        _1nV,
+        _1nV,
+        _1nV
+    };
+
+    return min[type];
+}
+
+
+RangeU::E RangeU::Max(DSet::Type::E type)
+{
+    static const RangeU::E max[DSet::Type::Count] =
+    {
+        _10kV,
+        _10kV,
+        _10kV,
+        _10kV,
+        _10kV,
+        _10kV,
+        _10kV
+    };
+
+    return max[type];
+}

@@ -2,6 +2,29 @@
 #pragma once
 
 
+namespace DSet
+{
+    struct Type
+    {
+        enum E
+        {
+            ChanC_Meas,
+            ChanB_Meas,
+            ChanB_Source,
+            ChanB_Limit,
+            ChanS_Meas,
+            ChanS_Source,
+            ChanS_Limit,
+            Count
+        };
+
+        E value;
+
+        Type(E v) : value(v) {}
+    };
+}
+
+
 struct RangeI
 {
     enum E
@@ -42,11 +65,7 @@ struct RangeI
         _100A,
         _200A,
         _500A,
-        Count,
-
-        // Дипазон выходных токов по каналу C
-        ChanC_OUT_MIN = _10nA,
-        ChanC_OUT_MAX = _50A
+        Count
     };
 
     E value;
@@ -59,6 +78,9 @@ struct RangeI
     {
         value = (E)(value + 1);
     }
+
+    static E Min(DSet::Type::E);
+    static E Max(DSet::Type::E);
 };
 
 
@@ -106,11 +128,7 @@ struct RangeU
         _2kV,
         _5kV,
         _10kV,
-        Count,
-
-        // Диапазон выходных напряжений по каналу C
-        ChanC_OUT_MIN = _500mV,
-        ChanC_OUT_MAX = _2kV
+        Count
     };
 
     E value;
@@ -123,6 +141,9 @@ struct RangeU
     {
         value = (E)(value + 1);
     }
+
+    static E Min(DSet::Type::E);
+    static E Max(DSet::Type::E);
 };
 
 
@@ -135,21 +156,6 @@ struct CalK
 
 namespace DSet
 {
-    struct Type
-    {
-        enum E
-        {
-            ChanC_Meas,
-            ChanB_Meas,
-            ChanB_Source,
-            ChanB_Limit,
-            ChanS_Meas,
-            ChanS_Source,
-            ChanS_Limit,
-            Count
-        };
-    };
-
     const CalK &Get(Type::E, RangeI::E);
     const CalK &Get(Type::E, RangeU::E);
 
