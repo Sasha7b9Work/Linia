@@ -15,7 +15,7 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
 {
     self = this;
 
-    new wxButton(this, ID_BUTTON_MEASURE, "»«Ã≈–≈Õ»≈", { 10, 10 }, { 90, BUTTON_HEIGHT });
+    new wxButton(this, ID_BUTTON_MEASURE, "»«Ã≈–≈Õ»≈", { 10, 10 }, { 119, BUTTON_HEIGHT + 10 });
 
     wxStaticText *text = new wxStaticText(this, ID_STATICTEXT_MEASURE, "0 %", { 120, 5 }, { 25, 25});
 
