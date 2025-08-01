@@ -15,9 +15,9 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
 {
     self = this;
 
-    new wxButton(this, ID_BUTTON_MEASURE, "ÈÇÌÅÐÅÍÈÅ", { 10, SD::Y_SB(10) }, { 90, BUTTON_HEIGHT });
+    new wxButton(this, ID_BUTTON_MEASURE, "ÈÇÌÅÐÅÍÈÅ", { 10, 10 }, { 90, BUTTON_HEIGHT });
 
-    wxStaticText *text = new wxStaticText(this, ID_STATICTEXT_MEASURE, "0 %", { 120, SD::Y_SB(5) }, { 25, 25});
+    wxStaticText *text = new wxStaticText(this, ID_STATICTEXT_MEASURE, "0 %", { 120, 5 }, { 25, 25});
 
     text->SetForegroundColour(wxColour(255, 0, 0));
 
