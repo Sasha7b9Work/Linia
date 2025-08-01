@@ -100,7 +100,7 @@ pchar RangeU::Name(RowRange::E row) const
         { "1kV",   "1kV" },
         { "2kV",   "2kV" },
         { "4kV",   "5kV" },
-        { "10kV"   "10kV" }
+        { "10kV",  "10kV" }
     };
 
     return names[value][row];
@@ -704,7 +704,7 @@ RangeI::E RangeI::Min(DSet::Type::E type)
 {
     static const RangeI::E min[DSet::Type::Count] =
     {
-        _1nA,
+        _10nA,
         _40_50nA,
         _40_50nA,
         _40_50nA,
