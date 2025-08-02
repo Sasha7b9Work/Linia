@@ -151,11 +151,6 @@ enum
     ID_ZERO_BTN_START,
     ID_ZERO_BTN_CANCEL,
 
-    // Настройки - Калибровка
-    ID_CALIB_BTN_START,
-    ID_CALIB_BTN_CANCEL,
-    ID_CALIB_BTN_SAVE,
-
     // Настройки - таблица смещений
     ID_OFFSET_BTN_APPLY,
     ID_OFFSET_BTN_CANCEL,

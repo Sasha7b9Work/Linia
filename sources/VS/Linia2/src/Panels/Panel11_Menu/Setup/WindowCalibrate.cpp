@@ -22,7 +22,7 @@ WindowCalibrate::WindowCalibrate() :
 
     textDateTime->SetLabel(wxDateTime::Now().Format("%d.%m.%Y"));
 
-    new wxButton(this, ID_CALIB_BTN_SAVE, "Сохранить", { 300, 30 }, { 75, BUTTON_HEIGHT });
+    new wxButton(this, wxID_ANY, "Сохранить", { 300, 30 }, { 75, BUTTON_HEIGHT });
 
     wxStaticBox *box = new wxStaticBox(this, wxID_ANY, "Параметры режима калибровки", { d, y + 30 }, { 270, 330 });
 
@@ -64,8 +64,8 @@ WindowCalibrate::WindowCalibrate() :
 
     wxSize size{ 70, BUTTON_HEIGHT };
 
-    new wxButton(this, ID_CALIB_BTN_START, _L("Пуск"), { 50, y + 30 }, size);
-    new wxButton(this, ID_CALIB_BTN_CANCEL, _L("Отмена"), { 200, y + 30 }, size);
+    new wxButton(this, wxID_ANY, _L("Пуск"), { 50, y + 30 }, size);
+    new wxButton(this, wxID_ANY, _L("Отмена"), { 200, y + 30 }, size);
 
     Bind(wxEVT_BUTTON, &WindowCalibrate::OnEventButton, this);
 }
