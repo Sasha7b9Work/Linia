@@ -60,8 +60,6 @@ private:
     // Заполнить поля в соответствии с текущими установками
     void FillFields();
 
-    bool IsChecked(int id_radiobutton) const;
-
     void ShowFieldsI(bool);
     void ShowFieldsU(bool);
 

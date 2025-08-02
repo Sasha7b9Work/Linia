@@ -26,7 +26,7 @@ WindowTableOffsets::WindowTableOffsets() :
     y = CreateLabelGroup(this, x, y + 20, "Канал С");
     y = CreateRadioButton(this, x, y, &rbChanC_MeasI, "Измеритель I");
     y = CreateRadioButton(this, x, y, &rbChanC_MeasU, "Измеритель U");
-    GF::FindRadioButton(this, ID_OFFSET_RB_CHAN_C_MEAS_I)->SetFocus();
+    GF::FindRadioButton(this, rbChanC_MeasI->GetId())->SetFocus();
 
     y = CreateLabelGroup(this, x, y, "Канал B");
     y = CreateRadioButton(this, x, y, &rbChanB_MeasI, "Измеритель I");
@@ -196,13 +196,13 @@ void WindowTableOffsets::OnEventCombobox(wxCommandEvent &)
 
 void WindowTableOffsets::FillFields()
 {
-    bool show_I = IsChecked(ID_OFFSET_RB_CHAN_C_MEAS_I) ||
-        IsChecked(ID_OFFSET_RB_CHAN_B_MEAS_I) ||
-        IsChecked(ID_OFFSET_RB_CHAN_B_SOURCE_I) ||
-        IsChecked(ID_OFFSET_RB_CHAN_B_LIMIT_I) ||
-        IsChecked(ID_OFFSET_RB_CHAN_S_MEAS_I) ||
-        IsChecked(ID_OFFSET_RB_CHAN_S_SOURCE_I) ||
-        IsChecked(ID_OFFSET_RB_CHAN_S_LIMIT_I);
+    bool show_I = rbChanC_MeasI->GetValue() ||
+        rbChanB_MeasI->GetValue() ||
+        rbChanB_SourceI->GetValue() ||
+        rbChanB_LimitI->GetValue() ||
+        rbChanS_MeasI->GetValue() ||
+        rbChanS_SourceI->GetValue() ||
+        rbChanS_LimitI->GetValue();
 
     int index = GF::FindComboBox(this, ID_OFFSET_COMBO_TYPE)->GetCurrentSelection();
 
@@ -229,12 +229,6 @@ void WindowTableOffsets::FillFields()
         ShowFieldsU(true);
         ShowFieldsI(false);
     }
-}
-
-
-bool WindowTableOffsets::IsChecked(int id_radiobutton) const
-{
-    return GF::FindRadioButton(this, id_radiobutton)->GetValue();
 }
 
 
@@ -292,20 +286,20 @@ wxString WindowTableOffsets::GetStringValue(double value) const
 
 DSet::Type::E WindowTableOffsets::GetTypeMeasure() const
 {
-    static const int id[DSet::Type::Count][2] =
+    static const wxRadioButton *buttons[DSet::Type::Count][2] =
     {
-        { ID_OFFSET_RB_CHAN_C_MEAS_I,   ID_OFFSET_RB_CHAN_C_MEAS_U },
-        { ID_OFFSET_RB_CHAN_B_MEAS_I,   ID_OFFSET_RB_CHAN_B_MEAS_U },
-        { ID_OFFSET_RB_CHAN_B_SOURCE_I, ID_OFFSET_RB_CHAN_B_SOURCE_U },
-        { ID_OFFSET_RB_CHAN_B_LIMIT_I,  ID_OFFSET_RB_CHAN_B_LIMIT_U },
-        { ID_OFFSET_RB_CHAN_S_MEAS_I,   ID_OFFSET_RB_CHAN_S_MEAS_U },
-        { ID_OFFSET_RB_CHAN_S_SOURCE_I, ID_OFFSET_RB_CHAN_S_SOURCE_U },
-        { ID_OFFSET_RB_CHAN_S_LIMIT_I,  ID_OFFSET_RB_CHAN_S_LIMIT_U }
+        { rbChanC_MeasI,   rbChanC_MeasU },
+        { rbChanB_MeasI,   rbChanB_MeasU },
+        { rbChanB_SourceI, rbChanB_SourceU },
+        { rbChanB_LimitI,  rbChanB_LimitU },
+        { rbChanS_MeasI,   rbChanS_MeasU  },
+        { rbChanS_SourceI, rbChanS_SourceU  },
+        { rbChanS_LimitI,  rbChanS_LimitU }
     };
 
     for (int i = 0; i < DSet::Type::Count; i++)
     {
-        if (IsChecked(id[i][0]) || IsChecked(id[i][1]))
+        if (buttons[i][0]->GetValue() || buttons[i][1]->GetValue())
         {
             return (DSet::Type::E)i;
         }
