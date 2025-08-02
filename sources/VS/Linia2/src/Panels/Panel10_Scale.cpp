@@ -18,16 +18,16 @@ PanelScale::PanelScale(wxWindow* parent) :
 
     Bind(wxEVT_TOGGLEBUTTON, &PanelScale::OnEventButton, this);
 
-    wxToggleButton *button = new wxToggleButton(this, ID_BTN_SCALE, _L("Шкала"), { 0, 0 }, { 60, 20 });
-    str_panels.push_back({ button, CreatePanel(button)});
+    btnScale = new wxToggleButton(this, wxID_ANY, _L("Шкала"), { 0, 0 }, { 60, 20 });
+    str_panels.push_back({ btnScale, CreatePanel(btnScale)});
 
-    button = new wxToggleButton(this, ID_BTN_ERRORS, _L("Ошибки"), { 60, 0 }, { 60, 20 });
-    str_panels.push_back({ button, CreatePanel(button)});
+    btnErrors = new wxToggleButton(this, wxID_ANY, _L("Ошибки"), { 60, 0 }, { 60, 20 });
+    str_panels.push_back({ btnErrors, CreatePanel(btnErrors)});
 
     {
         // Включаем панель
 
-        int id = ID_BTN_SCALE;
+        int id = btnScale->GetId();
 
         wxCommandEvent evt(wxEVT_TOGGLEBUTTON, id);
         evt.SetInt(1);
@@ -40,7 +40,7 @@ void PanelScale::OnEventButton(wxCommandEvent &event)
 {
     int id = event.GetId();
 
-    if(id == ID_BTN_SCALE || id == ID_BTN_ERRORS)
+    if(id == btnScale->GetId() || id == btnErrors->GetId())
     {
         if (!event.IsChecked())
         {
@@ -90,11 +90,11 @@ wxPanel *PanelScale::CreatePanel(wxToggleButton *button)
 
     int id = button->GetId();
 
-    if (id == ID_BTN_SCALE)
+    if (id == btnScale->GetId())
     {
         CreatePanelScale(panel, x, w);
     }
-    else if (id == ID_BTN_ERRORS)
+    else if (id == btnErrors->GetId())
     {
         CreatePanelErrors(panel, x, w);
     }
@@ -112,27 +112,27 @@ void PanelScale::CreatePanelScale(wxPanel *panel, int x, int /*w*/)
     int y = 20;
     int dy = 30;
 
-    new wxToggleButton(panel, ID_BTN_1, "", { x, SD::Y_SB(y) }, size);
+    btn1 = new wxToggleButton(panel, wxID_ANY, "", { x, SD::Y_SB(y) }, size);
 
-    new wxToggleButton(panel, ID_BTN_2, "", { x, SD::Y_SB(y + dy) }, size);
+    btn2 = new wxToggleButton(panel, wxID_ANY, "", { x, SD::Y_SB(y + dy) }, size);
 
-    new wxToggleButton(panel, ID_BTN_3, "", { x, SD::Y_SB(y + dy * 2) }, size);
+    btn3 = new wxToggleButton(panel, wxID_ANY, "", { x, SD::Y_SB(y + dy * 2) }, size);
 
     int dx = 65;
 
     x += dx;
 
-    new wxCheckBox(panel, ID_CHBOX_1, "", { x, SD::Y_SB(y) });
+    chb1 = new wxCheckBox(panel, wxID_ANY, "", { x, SD::Y_SB(y) });
 
-    new wxCheckBox(panel, ID_CHBOX_2, "", { x, SD::Y_SB(y + dy) });
+    chb2 = new wxCheckBox(panel, wxID_ANY, "", { x, SD::Y_SB(y + dy) });
 
-    new wxCheckBox(panel, ID_CHBOX_3, "", { x, SD::Y_SB(y + dy * 2) });
+    chb3 = new wxCheckBox(panel, wxID_ANY, "", { x, SD::Y_SB(y + dy * 2) });
 
     x += dx;
 
-    new wxCheckBox(panel, ID_CHBOX_4, "", { x, SD::Y_SB(y) });
+    chb4 = new wxCheckBox(panel, wxID_ANY, "", { x, SD::Y_SB(y) });
 
-    new wxCheckBox(panel, ID_CHBOX_5, "", { x, SD::Y_SB(y + dy) });
+    chb5 = new wxCheckBox(panel, wxID_ANY, "", { x, SD::Y_SB(y + dy) });
 }
 
 

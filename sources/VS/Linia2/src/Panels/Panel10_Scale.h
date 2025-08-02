@@ -17,6 +17,18 @@ public:
 
 private:
 
+    wxToggleButton *btnScale = nullptr,
+        *btnErrors = nullptr,
+        *btn1 = nullptr,
+        *btn2 = nullptr,
+        *btn3 = nullptr;
+
+    wxCheckBox *chb1 = nullptr,
+        *chb2 = nullptr,
+        *chb3 = nullptr,
+        *chb4 = nullptr,
+        *chb5 = nullptr;
+
     void OnEventButton(wxCommandEvent &);
 
     // Отщёлкнуть все, кроме id
