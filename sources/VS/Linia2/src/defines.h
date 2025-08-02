@@ -106,7 +106,6 @@ enum
     ID_CHAN_C_SPIN_STOP,
 
         // Схема включения
-    ID_PAN3_TEST_BUTTON,
     ID_COMM_COMBO_TYPE,
     ID_COMM_COMBO_CHAN_C,
     ID_COMM_COMBO_CHAN_B,

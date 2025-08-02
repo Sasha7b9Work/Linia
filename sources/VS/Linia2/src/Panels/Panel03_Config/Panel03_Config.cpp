@@ -400,9 +400,9 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
 
         comboTest = new wxComboBox(boxTest, wxID_ANY, choices[0], { 5, SD::Y_SB(20) }, { 110, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
-        new wxButton(boxTest, ID_PAN3_TEST_BUTTON, _L("Загрузить"), { 5, SD::Y_SB(50) }, { 110, 30 });
+        btnLoad = new wxButton(boxTest, wxID_ANY, _L("Загрузить"), { 5, SD::Y_SB(50) }, { 110, 30 });
 
-        GF::FindAnyButton(this, ID_PAN3_TEST_BUTTON)->Hide();
+        btnLoad->Hide();
     }
 }
 
@@ -483,7 +483,7 @@ void PanelConfig::OnEventButton(wxCommandEvent &event)
 {
     int id = event.GetId();
 
-    if (id == ID_PAN3_TEST_BUTTON)
+    if (id == btnLoad->GetId())
     {
         WindowLibraryTests().ShowModal();
     }
@@ -521,7 +521,7 @@ void PanelConfig::OnEventComboBox(wxCommandEvent &event)
     {
         int selection = comboTest->GetSelection();
 
-        GF::FindAnyButton(this, ID_PAN3_TEST_BUTTON)->Show(comboTest->GetString((uint)selection) == "_USER");
+        btnLoad->Show(comboTest->GetString((uint)selection) == "_USER");
     }
 }
 

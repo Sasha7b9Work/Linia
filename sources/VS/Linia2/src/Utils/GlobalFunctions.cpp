@@ -32,7 +32,7 @@ wxStaticText *GF::_FindStaticText(wxWindow *window, int id)
 }
 
 
-wxAnyButton *GF::FindAnyButton(wxWindow *window, int id)
+wxAnyButton *GF::_FindAnyButton(wxWindow *window, int id)
 {
     return (wxAnyButton *)window->FindWindow(id);
 }

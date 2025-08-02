@@ -20,7 +20,7 @@ namespace GF
 
     wxStaticText *_FindStaticText(wxWindow *, int id);
 
-    wxAnyButton *FindAnyButton(wxWindow *, int id);
+    wxAnyButton *_FindAnyButton(wxWindow *, int id);
 
     wxToggleButton *FindToggleButton(wxWindow *, int id);
 

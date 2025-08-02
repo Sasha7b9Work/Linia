@@ -20,6 +20,8 @@ private:
         *comboE = nullptr,
         *comboTest = nullptr;
 
+    wxButton *btnLoad = nullptr;
+
     // Структура хранит кнопку и панель, которую та включает
     struct StructPanel
     {
