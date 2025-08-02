@@ -108,8 +108,10 @@ void PanelConfig::CreatePanelChannelC(wxPanel *panel, int x, int w)
         rbChanC_Scan7 = new wxRadioButton(boxScan, wxID_ANY, "7", { 130, SD::Y_SB(20) }, size_rb);
 
         {
-            wxCommandEvent evt(wxEVT_RADIOBUTTON, rbChanC_Scan1->GetId());
+            wxRadioButton *object = rbChanC_Scan1;
+            wxCommandEvent evt(wxEVT_RADIOBUTTON, object->GetId());
             evt.SetInt(1);
+            evt.SetEventObject(object);
             boxScan->ProcessWindowEvent(evt);
         }
 

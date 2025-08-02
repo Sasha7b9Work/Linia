@@ -18,9 +18,9 @@ PanelName::PanelName(wxWindow *parent) :
 
     textTime = new wxStaticText(this, wxID_ANY, "", {0, 50}, {GetSize().x, 20}, wxALIGN_CENTRE_HORIZONTAL);
 
-    Bind(wxEVT_TIMER, &PanelName::OnTimer, this, ID_TIMER_TIME);
+    Bind(wxEVT_TIMER, &PanelName::OnTimer, this, timer.GetId());
 
-    timer.SetOwner(this, ID_TIMER_TIME);
+    timer.SetOwner(this, timer.GetId());
 
     timer.Start(100);
 }
@@ -38,7 +38,7 @@ void PanelName::WriteDateTime()
 
 void PanelName::OnTimer(wxTimerEvent &event)
 {
-    if (event.GetId() == ID_TIMER_TIME)
+    if (event.GetId() == timer.GetId())
     {
         WriteDateTime();
     }
