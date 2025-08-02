@@ -103,21 +103,6 @@ enum
     ID_COMM_COMBO_CHAN_C,
     ID_COMM_COMBO_CHAN_B,
 
-        // Канал B
-        // Генератор ступенек
-    ID_CHAN_B_GEN_COMBO_TYPE,
-    ID_CHAN_B_GEN_COMBO_IMPULSE,
-    ID_CHAN_B_GEN_COMBO_AMPLITUDE,
-    ID_CHAN_B_GEN_CHECK_SMALL,
-    ID_CHAN_B_GEN_SPIN_NUMBER_STEPS,
-    ID_CHAN_B_GEN_COMBO_POLARITY,
-        // Смещение
-    ID_CHAN_B_GEN_OFFSET_SLIDER,
-    ID_CHAN_B_GEN_OFFSET_COMBO_POLARITY,
-        // Ограничение
-    ID_CHAN_B_LIM_COMBO_RANGE,
-    ID_CHAN_B_LIM_SLIDER,
-
     // Библиотека пользовательских тестов
     ID_COMBO,
     ID_BTN_LOAD,
