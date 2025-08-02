@@ -18,7 +18,7 @@ namespace GF
     // Центрировать text относительно border
     void HorizontalAlignCenter(wxStaticText *label, wxWindow *border);
 
-    wxStaticText *FindStaticText(wxWindow *, int id);
+    wxStaticText *_FindStaticText(wxWindow *, int id);
 
     wxAnyButton *FindAnyButton(wxWindow *, int id);
 

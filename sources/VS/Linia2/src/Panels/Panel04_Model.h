@@ -18,6 +18,7 @@ public:
 private:
 
     wxPanel *panel_graph = nullptr;
+    wxStaticText *txtName = nullptr;
 
     void SetName(const wxString &);
 };

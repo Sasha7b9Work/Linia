@@ -26,7 +26,7 @@ void GF::HorizontalAlignCenter(wxStaticText *label , wxWindow *border)
 }
 
 
-wxStaticText *GF::FindStaticText(wxWindow *window, int id)
+wxStaticText *GF::_FindStaticText(wxWindow *window, int id)
 {
     return (wxStaticText *)window->FindWindow(id);
 }

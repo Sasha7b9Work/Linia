@@ -16,7 +16,7 @@ PanelModel::PanelModel(wxWindow* parent) :
 
     wxPanel *panel_name = new wxPanel(this, wxID_ANY, { 0, 0 }, { WIDTH, height_name }, wxTAB_TRAVERSAL | wxSUNKEN_BORDER);
 
-    new wxStaticText(panel_name, ID_PAN4_TEXT_NAME, "", { 0, 0 }, { WIDTH, height_name }, wxALIGN_CENTER);
+    txtName = new wxStaticText(panel_name, wxID_ANY, "", { 0, 0 }, { WIDTH, height_name }, wxALIGN_CENTER);
 
     Panel::SetName(_L("Файл модели"));
 
@@ -28,5 +28,5 @@ PanelModel::PanelModel(wxWindow* parent) :
 
 void PanelModel::SetName(const wxString &name)
 {
-    GF::FindStaticText(this, ID_PAN4_TEXT_NAME)->SetLabel(name);
+    txtName->SetLabel(name);
 }
