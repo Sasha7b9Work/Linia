@@ -15,7 +15,7 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
 {
     self = this;
 
-    new wxToggleButton(this, ID_BUTTON_MEASURE, "ИЗМЕРЕНИЕ", { 5, 10 }, { 90, BUTTON_HEIGHT });
+    new wxToggleButton(this, wxID_ANY, "ИЗМЕРЕНИЕ", { 5, 10 }, { 90, BUTTON_HEIGHT });
 
     wxStaticText *text = new wxStaticText(this, wxID_ANY, "Uc 100 %", { 105, 5 }, { 25, 25});
 

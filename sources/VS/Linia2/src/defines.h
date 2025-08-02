@@ -81,7 +81,6 @@ enum
     ID_MENU_SCALE,
     ID_TIMER_APP,
     ID_TIMER_TIME,
-    ID_BUTTON_MEASURE,
 
     // Библиотека пользовательских тестов
     LD_BTN_DELETE_ALL
