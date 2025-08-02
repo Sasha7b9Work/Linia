@@ -173,17 +173,6 @@ enum
     ID_CHBOX_4,
     ID_CHBOX_5,
 
-    /////////////////////////////////////////////////////////////////////////////////// Панель 11
-    ID_PAN11_BUTTON_FILE,
-    ID_PAN11_BUTTON_TEST,
-    ID_PAN11_BUTTON_SETTINGS,
-    ID_PAN11_BUTTON_ARCHIVE,
-    ID_PAN11_BUTTON_GRAPH,
-    ID_PAN11_BUTTON_TABLE,
-    ID_PAN11_BUTTON_REPORT,
-    ID_PAN11_BUTTON_MEASURE,
-    ID_PAN11_BUTTON_DEBUG,
-
     /////////////////////////////////////////////////////////////////////////////////// Панель 13
     ID_MENU_CLEAR,
     ID_MENU_DELETE_FROM,

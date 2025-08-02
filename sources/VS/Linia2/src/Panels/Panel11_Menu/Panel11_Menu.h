@@ -15,6 +15,16 @@ public:
 
 private:
 
+    wxButton *btnFile = nullptr,
+        *btnTest = nullptr,
+        *btnSetup = nullptr,
+        *btnArchiv = nullptr,
+        *btnGraph = nullptr,
+        *btnTable = nullptr,
+        *btnReport = nullptr,
+        *btnMeasure = nullptr,
+        *btnDebug = nullptr;
+
     void OnEventButton(wxCommandEvent &);
 
     int NumButtons() const;

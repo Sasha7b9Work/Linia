@@ -19,25 +19,30 @@ PanelButtons::PanelButtons(wxWindow* parent) :
 {
     self = this;
 
-    wxString labels[100] =
+    struct Struct
     {
-        _L("Файл"),
-        _L("Тест"),
-        _L("Настройка"),
-        _L("Архив"),
-        _L("График"),
-        _L("Таблица"),
-        _L("Отчёт"),
-        _L("Измерение"),
-        _L("Отладка")
+        wxString label;
+        wxButton *button;
     };
 
+    Struct structs[100] =
+    {
+        { _L("Файл"),      btnFile },
+        { _L("Тест"),      btnTest },
+        { _L("Настройка"), btnSetup },
+        { _L("Архив"),     btnArchiv },
+        { _L("График"),    btnGraph },
+        { _L("Таблица"),   btnTable },
+        { _L("Отчёт"),     btnReport },
+        { _L("Измерение"), btnMeasure },
+        { _L("Отладка"),   btnDebug }
+    };
 
     const int delta = GetSize().x / NumButtons();
 
     for (int i = 0; i < NumButtons(); i++)
     {
-        new wxButton(this, ID_PAN11_BUTTON_FILE + i, labels[i], {i * delta, 0}, {delta - 3, GetSize().y - 3});
+        structs[i].button = new wxButton(this, wxID_ANY, structs[i].label, {i * delta, 0}, {delta - 3, GetSize().y - 3});
     }
 
     Bind(wxEVT_BUTTON, &PanelButtons::OnEventButton, this);
@@ -48,39 +53,39 @@ void PanelButtons::OnEventButton(wxCommandEvent &event)
 {
     int id = event.GetId();
 
-    if (id == ID_PAN11_BUTTON_FILE)
+    if (id == btnFile->GetId())
     {
         DialogFile().ShowModal();
     }
-    else if (id == ID_PAN11_BUTTON_TEST)
+    else if (id == btnTest->GetId())
     {
         DialogTest().ShowModal();
     }
-    else if (id == ID_PAN11_BUTTON_SETTINGS)
+    else if (id == btnSetup->GetId())
     {
         DialogSetup().ShowModal();
     }
-    else if (id == ID_PAN11_BUTTON_ARCHIVE)
+    else if (id == btnArchiv->GetId())
     {
         MainWindow::self->SetMode(ModeMainWindow::ReferenceGraphs);
     }
-    else if (id == ID_PAN11_BUTTON_GRAPH)
+    else if (id == btnGraph->GetId())
     {
         DialogGraph().ShowModal();
     }
-    else if (id == ID_PAN11_BUTTON_TABLE)
+    else if (id == btnTable->GetId())
     {
         DialogTable().ShowModal();
     }
-    else if (id == ID_PAN11_BUTTON_REPORT)
+    else if (id == btnReport->GetId())
     {
         DialogReport().ShowModal();
     }
-    else if (id == ID_PAN11_BUTTON_MEASURE)
+    else if (id == btnMeasure->GetId())
     {
 
     }
-    else if (id == ID_PAN11_BUTTON_DEBUG)
+    else if (id == btnDebug->GetId())
     {
         MainWindow::self->SetMode(ModeMainWindow::Debug);
     }
