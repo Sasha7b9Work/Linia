@@ -430,12 +430,12 @@ void PanelGraph::OnEventRightClick(wxMouseEvent &)
 
     menu.AppendSubMenu(subMenu, _L("Отслеживать"));
 
-    menu.AppendCheckItem(ID_MENU_SCALE, _L("Шкала"));
+    itemScale = menu.AppendCheckItem(wxID_ANY, _L("Шкала"));
 
     Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackX, this, itemTrackX->GetId());
     Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackY, this, itemTrackY->GetId());
     Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackNone, this, itemTrackNone->GetId());
-    Bind(wxEVT_MENU, &PanelGraph::OnMenuScale, this, ID_MENU_SCALE);
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuScale, this, itemScale->GetId());
 
     // Показываем меню в позиции клика
     PopupMenu(&menu);

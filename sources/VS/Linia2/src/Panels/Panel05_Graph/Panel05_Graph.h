@@ -44,7 +44,8 @@ private:
     wxMenuItem *itemFullscreen = nullptr,
         *itemTrackX = nullptr,
         *itemTrackY = nullptr,
-        *itemTrackNone = nullptr;
+        *itemTrackNone = nullptr,
+        *itemScale = nullptr;
 
     Grid grid;                              // Координатная сетка
 
