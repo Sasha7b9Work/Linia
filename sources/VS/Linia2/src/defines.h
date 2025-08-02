@@ -132,21 +132,6 @@ enum
     ID_CHAN_S_LIM_COMBO_RANGE,
     ID_CHAN_S_LIM_SLIDER,
 
-        // Расчёт
-        // График
-    ID_GRAPH_LINE_X,
-    ID_GRAPH_LINE_Y,
-        // Параметр
-    ID_PAR_LINE_FIND,
-    ID_PAR_LINE_FOR,
-    ID_PAR_LINE_VALUE_1,
-    ID_PAR_LINE_VALUE_2,
-    ID_PAR_RB_DY_DX,
-    ID_PAR_RB_DX_DY,
-        // Пороговые значения
-    ID_BORDER_MIN,
-    ID_BORDER_MAX,
-
     // Библиотека пользовательских тестов
     ID_COMBO,
     ID_BTN_LOAD,
