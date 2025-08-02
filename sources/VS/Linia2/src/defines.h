@@ -147,13 +147,6 @@ enum
     ID_BORDER_MIN,
     ID_BORDER_MAX,
 
-    /////////////////////////////////////////////////////////////////////////////////// Панель 13
-    ID_MENU_CLEAR,
-    ID_MENU_DELETE_FROM,
-    ID_MENU_LOAD_FROM,
-    ID_MENU_OPEN,
-    ID_MENU_CLOSE,
-
     // Настройки - Установка коррекции нуля
     ID_ZERO_BTN_START,
     ID_ZERO_BTN_CANCEL,

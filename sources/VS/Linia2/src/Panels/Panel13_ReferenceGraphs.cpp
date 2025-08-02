@@ -100,28 +100,28 @@ void PanelReferenceGraph::OnEventRightClick(wxMouseEvent &event)
 {
     wxMenu menu;
 
-    wxMenuItem *item = menu.Append(ID_MENU_CLEAR, _L("Очистить архив"));
+    itemClear = menu.Append(wxID_ANY, _L("Очистить архив"));
 
     if (grid->GetNumberRows() == 0)
     {
-        item->Enable(false);
+        itemClear->Enable(false);
     }
 
     menu.AppendSeparator();
-    item = menu.Append(ID_MENU_DELETE_FROM, _L("Удалить из архива"));
+    itemDeleteFrom = menu.Append(wxID_ANY, _L("Удалить из архива"));
 
     wxArrayInt selected = grid->GetSelectedRows();
 
     if (selected.IsEmpty())
     {
-        item->Enable(false);
+        itemDeleteFrom->Enable(false);
     }
 
-    item = menu.Append(ID_MENU_LOAD_FROM, _L("Загрузить из архива"));
+    itemLoadFrom = menu.Append(wxID_ANY, _L("Загрузить из архива"));
 
     if (selected.IsEmpty())
     {
-        item->Enable(false);
+        itemLoadFrom->Enable(false);
     }
 
     menu.AppendSeparator();

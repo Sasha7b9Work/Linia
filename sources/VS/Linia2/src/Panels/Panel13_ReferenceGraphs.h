@@ -23,6 +23,10 @@ public:
 
 private:
 
+    wxMenuItem *itemClear = nullptr,
+        *itemDeleteFrom = nullptr,
+        *itemLoadFrom = nullptr;
+
     MyGrid *grid = nullptr;
 
     struct Line
