@@ -258,10 +258,5 @@ enum
     LD_BTN_DELETE_ALL,
 
     // Шкала
-    ID_LINE_X_MIN,
-    ID_LINE_X_MAX,
-    ID_LINE_Y_MIN,
-    ID_LINE_Y_MAX,
-    ID_SPIN_ACCURACY,
-    ID_COMBO_NUMBER
+    ID_SPIN_ACCURACY
 };

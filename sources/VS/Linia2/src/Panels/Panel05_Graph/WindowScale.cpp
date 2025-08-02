@@ -16,9 +16,9 @@ WindowScale::WindowScale() :
 
     int d = 10;
 
-    CreateBox(d, d, width, height, "X", "Ud, V", ID_LINE_X_MIN, ID_LINE_X_MAX);
+    CreateBox(d, d, width, height, "X", "Ud, V", &textMinX, &textMaxX);
 
-    CreateBox(width + d * 2, d, width, height, "Y", "Id, mA", ID_LINE_Y_MIN, ID_LINE_Y_MAX);
+    CreateBox(width + d * 2, d, width, height, "Y", "Id, mA", &textMinY, &textMaxY);
 
     int y = height + d * 3;
 
@@ -34,7 +34,7 @@ WindowScale::WindowScale() :
     choices.Add("20");
     choices.Add("50");
 
-    new wxComboBox(this, ID_COMBO_NUMBER, choices[0], { 200, y }, { 70, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+    comboNumber = new wxComboBox(this, wxID_ANY, choices[0], { 200, y }, { 70, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
     y += 50;
 
@@ -46,7 +46,7 @@ WindowScale::WindowScale() :
 }
 
 
-wxStaticBox *WindowScale::CreateBox(int x, int y, int w, int h, pchar axe, pchar units, int id_min, int id_max)
+wxStaticBox *WindowScale::CreateBox(int x, int y, int w, int h, pchar axe, pchar units, wxTextCtrl **min, wxTextCtrl **max)
 {
     wxStaticBox *box = new wxStaticBox(this, wxID_ANY, _L("Шкала по оси") + " " + axe, {x, y}, {w, h});
 
@@ -66,13 +66,13 @@ wxStaticBox *WindowScale::CreateBox(int x, int y, int w, int h, pchar axe, pchar
 
     wxSize size_text{ 50, TEXTCNTRL_HEIGHT };
 
-    new wxTextCtrl(box, id_min, "", { d + s, SD::Y_SB(y) }, size_text);
+    *min = new wxTextCtrl(box, wxID_ANY, "", { d + s, SD::Y_SB(y) }, size_text);
 
     y += dy;
 
     new wxStaticText(box, wxID_ANY, "X max", { d, SD::Y_SB(y) });
 
-    new wxTextCtrl(box, id_max, "", { d + s, SD::Y_SB(y) }, size_text);
+    *max = new wxTextCtrl(box, wxID_ANY, "", { d + s, SD::Y_SB(y) }, size_text);
 
     y += dy * 3 / 2;
 

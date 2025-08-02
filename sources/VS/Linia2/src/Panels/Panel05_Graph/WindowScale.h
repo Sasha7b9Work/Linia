@@ -39,8 +39,13 @@ public:
 
 private:
 
+    wxTextCtrl *textMinX = nullptr;
+    wxTextCtrl *textMaxX = nullptr;
+    wxTextCtrl *textMinY = nullptr;
+    wxTextCtrl *textMaxY = nullptr;
+    wxComboBox *comboNumber = nullptr;
     wxButton *btnApply = nullptr;
     wxButton *btnCancel = nullptr;
 
-    wxStaticBox *CreateBox(int x, int y, int w, int h, pchar axe, pchar units, int id_min, int id_max);
+    wxStaticBox *CreateBox(int x, int y, int w, int h, pchar axe, pchar units, wxTextCtrl **min, wxTextCtrl **max);
 };
