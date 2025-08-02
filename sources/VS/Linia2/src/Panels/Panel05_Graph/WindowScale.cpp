@@ -40,9 +40,9 @@ WindowScale::WindowScale() :
 
     wxSize size_button{ 100, BUTTON_HEIGHT };
 
-    new wxButton(this, ID_BTN_APPLY, _L("Применить"), { 50, y }, size_button);
+    btnApply = new wxButton(this, wxID_ANY, _L("Применить"), { 50, y }, size_button);
 
-    new wxButton(this, ID_BTN_CAN, _L("Отмена"), { 150, y }, size_button);
+    btnCancel = new wxButton(this, wxID_ANY, _L("Отмена"), { 150, y }, size_button);
 }
 
 
