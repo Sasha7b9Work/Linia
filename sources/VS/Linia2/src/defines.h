@@ -91,13 +91,6 @@ enum
     ID_BTN_SCHEME,
     ID_BTN_CALCULATION,
 
-    ID_CHAN_C_CHECK_DUTY_CYCLE,
-    ID_CHAN_C_COMBO_Uc,
-    ID_CHAN_C_COMBO_Ic,
-    ID_CHAN_C_COMBO_SOURCE,
-    ID_CHAN_C_SPIN_START,
-    ID_CHAN_C_SPIN_STOP,
-
     // Библиотека пользовательских тестов
     ID_COMBO,
     ID_BTN_LOAD,
