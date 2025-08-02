@@ -378,13 +378,13 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
 
         int w = 30;
 
-        new wxComboBox(boxCommutation, ID_COMM_COMBO_C, choices[0], { 100, 170 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-        new wxComboBox(boxCommutation, ID_COMM_COMBO_B, choices[1], { 40, 210 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_DROPDOWN);
-        new wxComboBox(boxCommutation, ID_COMM_COMBO_E, choices[2], { 100, 250 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        comboC = new wxComboBox(boxCommutation, wxID_ANY, choices[0], { 100, 170 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        comboB = new wxComboBox(boxCommutation, wxID_ANY, choices[1], { 40, 210 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_DROPDOWN);
+        comboE = new wxComboBox(boxCommutation, wxID_ANY, choices[2], { 100, 250 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
-        GF::FindComboBox(this, ID_COMM_COMBO_C)->Enable(false);
-        GF::FindComboBox(this, ID_COMM_COMBO_B)->Enable(false);
-        GF::FindComboBox(this, ID_COMM_COMBO_E)->Enable(false);
+        comboC->Enable(false);
+        comboB->Enable(false);
+        comboE->Enable(false);
     }
 
     wxStaticBox *boxCategory = new wxStaticBox(panel, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 250 });
@@ -398,7 +398,7 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
         choices.Add("IdVd");
         choices.Add("_USER");
 
-        new wxComboBox(boxTest, ID_PAN3_TEST_COMBOBOX, choices[0], { 5, SD::Y_SB(20) }, { 110, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        comboTest = new wxComboBox(boxTest, wxID_ANY, choices[0], { 5, SD::Y_SB(20) }, { 110, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
         new wxButton(boxTest, ID_PAN3_TEST_BUTTON, _L("Загрузить"), { 5, SD::Y_SB(50) }, { 110, 30 });
 
@@ -517,11 +517,11 @@ void PanelConfig::OnEventComboBox(wxCommandEvent &event)
 {
     int id = event.GetId();
 
-    if (id == ID_PAN3_TEST_COMBOBOX)
+    if (id == comboTest->GetId())
     {
-        int selection = GF::FindComboBox(this, id)->GetSelection();
+        int selection = comboTest->GetSelection();
 
-        GF::FindAnyButton(this, ID_PAN3_TEST_BUTTON)->Show(GF::FindComboBox(this, id)->GetString((uint)selection) == "_USER");
+        GF::FindAnyButton(this, ID_PAN3_TEST_BUTTON)->Show(comboTest->GetString((uint)selection) == "_USER");
     }
 }
 

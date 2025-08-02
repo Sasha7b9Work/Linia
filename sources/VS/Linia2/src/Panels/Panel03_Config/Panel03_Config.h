@@ -15,6 +15,11 @@ public:
 
 private:
 
+    wxComboBox *comboC = nullptr,
+        *comboB = nullptr,
+        *comboE = nullptr,
+        *comboTest = nullptr;
+
     // Структура хранит кнопку и панель, которую та включает
     struct StructPanel
     {

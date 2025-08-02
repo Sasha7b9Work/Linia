@@ -30,7 +30,7 @@ namespace GF
 
     CheckButton *FindCheckButton(const wxWindow *, int id);
 
-    wxComboBox *FindComboBox(const wxWindow *, int id);
+    wxComboBox *_FindComboBox(const wxWindow *, int id);
 
     wxTextCtrl *FindTextCtrl(wxWindow *, int id);
 

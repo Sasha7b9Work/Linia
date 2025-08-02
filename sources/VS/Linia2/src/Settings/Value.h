@@ -153,7 +153,7 @@ public:
     // Установить значение из элемента управления
     virtual void SetFromControl() override
     {
-        Value<int>::Set(GF::FindComboBox(window, id)->GetSelection());
+        Value<int>::Set(GF::_FindComboBox(window, id)->GetSelection());
     }
     int GetDefaultIndex() const
     {
@@ -166,7 +166,7 @@ protected:
     {
         if (window)
         {
-            GF::FindComboBox(window, id)->SetSelection(GetIndex());
+            GF::_FindComboBox(window, id)->SetSelection(GetIndex());
         }
     }
 
