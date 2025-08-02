@@ -18,6 +18,21 @@ public:
 
 private:
 
+    wxRadioButton *rbChanC_MeasI = nullptr,
+        *rbChanC_MeasU = nullptr,
+        *rbChanB_MeasI = nullptr,
+        *rbChanB_MeasU = nullptr,
+        *rbChanB_SourceI = nullptr,
+        *rbChanB_SourceU = nullptr,
+        *rbChanB_LimitI = nullptr,
+        *rbChanB_LimitU = nullptr,
+        *rbChanS_MeasI = nullptr,
+        *rbChanS_MeasU = nullptr,
+        *rbChanS_SourceI = nullptr,
+        *rbChanS_SourceU = nullptr,
+        *rbChanS_LimitI = nullptr,
+        *rbChanS_LimitU = nullptr;
+
     struct Field
     {
         wxStaticText *name;

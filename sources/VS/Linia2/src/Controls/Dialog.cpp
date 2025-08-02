@@ -18,9 +18,9 @@ int Dialog::CreateLabelGroup(wxWindow *parent, int x, int y, const wxString &lab
 }
 
 
-int Dialog::CreateRadioButton(wxWindow *parent, int x, int y, int id, const wxString &label)
+int Dialog::CreateRadioButton(wxWindow *parent, int x, int y, wxRadioButton **rb, const wxString &label)
 {
-    new wxRadioButton(parent, id, label, { x, SD::Y_SB(y) });
+    *rb = new wxRadioButton(parent, wxID_ANY, label, { x, SD::Y_SB(y) });
 
     return y + 20;
 }

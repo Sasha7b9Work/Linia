@@ -17,8 +17,17 @@ public:
 
 private:
 
-    wxStaticText *textSerialNumber = nullptr;
-    wxStaticText *textDateTime = nullptr;
+    wxComboBox *comboRange = nullptr;
+
+    wxStaticText *textSerialNumber = nullptr,
+        *textDateTime = nullptr;
+
+    wxRadioButton *rbChanC_MeasI = nullptr,
+        *rbChanC_MeasU = nullptr,
+        *rbChanB_MeasI = nullptr,
+        *rbChanB_MeasU = nullptr,
+        *rbChanS_MeasI = nullptr,
+        *rbChanS_MeasU = nullptr;
 
     void OnEventButton(wxCommandEvent &);
 };

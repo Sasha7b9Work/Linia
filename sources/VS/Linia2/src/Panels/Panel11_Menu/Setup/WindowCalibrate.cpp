@@ -34,22 +34,22 @@ WindowCalibrate::WindowCalibrate() :
         wxArrayString choices;
         choices.push_back("50A");
 
-        new wxComboBox(box, ID_CALIB_RB_COMBO, choices[0], { d + 75, SD::Y_SB(y) }, { 75, TEXTCNTRL_HEIGHT }, choices, wxCB_SIMPLE | wxCB_DROPDOWN | wxCB_READONLY);
+        comboRange = new wxComboBox(box, wxID_ANY, choices[0], { d + 75, SD::Y_SB(y) }, { 75, TEXTCNTRL_HEIGHT }, choices, wxCB_SIMPLE | wxCB_DROPDOWN | wxCB_READONLY);
 
         y += d;
 
         y = CreateLabelGroup(box, d, y, "Канал C");
-        y = CreateRadioButton(box, d, y, ID_CALIB_RB_CHAN_C_MEAS_I, "Измеритель I");
-        GF::FindRadioButton(this, ID_CALIB_RB_CHAN_C_MEAS_I)->SetFocus();
-        y = CreateRadioButton(box, d, y, ID_CALIB_RB_CHAN_C_MEAS_U, "Измеритель U");
+        y = CreateRadioButton(box, d, y,  &rbChanC_MeasI, "Измеритель I");
+        GF::FindRadioButton(this, rbChanC_MeasI->GetId())->SetFocus();
+        y = CreateRadioButton(box, d, y, &rbChanC_MeasU, "Измеритель U");
 
         y = CreateLabelGroup(box, d, y, "Канал B");
-        y = CreateRadioButton(box, d, y, ID_CALIB_RB_CHAN_B_MEAS_I, "Источник I / Измеритель I");
-        y = CreateRadioButton(box, d, y, ID_CALIB_RB_CHAN_B_MEAS_U, "Источник U / Измеритель U");
+        y = CreateRadioButton(box, d, y, &rbChanB_MeasI, "Источник I / Измеритель I");
+        y = CreateRadioButton(box, d, y, &rbChanB_MeasU, "Источник U / Измеритель U");
 
         y = CreateLabelGroup(box, d, y, "Канал S");
-        y = CreateRadioButton(box, d, y, ID_CALIB_RB_CHAN_S_MEAS_I, "Источник I / Измеритель I");
-        y = CreateRadioButton(box, d, y, ID_CALIB_RB_CHAN_S_MEAS_U, "Источник U / Измеритель U");
+        y = CreateRadioButton(box, d, y, &rbChanS_MeasI, "Источник I / Измеритель I");
+        y = CreateRadioButton(box, d, y, &rbChanS_MeasU, "Источник U / Измеритель U");
     }
 
     y = 430;

@@ -24,25 +24,25 @@ WindowTableOffsets::WindowTableOffsets() :
     new wxComboBox(this, ID_OFFSET_COMBO_TYPE, choices[0], { x + 40, SD::Y_SB(y - 3) }, { 90, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
     y = CreateLabelGroup(this, x, y + 20, "Канал С");
-    y = CreateRadioButton(this, x, y, ID_OFFSET_RB_CHAN_C_MEAS_I, "Измеритель I");
-    y = CreateRadioButton(this, x, y, ID_OFFSET_RB_CHAN_C_MEAS_U, "Измеритель U");
+    y = CreateRadioButton(this, x, y, &rbChanC_MeasI, "Измеритель I");
+    y = CreateRadioButton(this, x, y, &rbChanC_MeasU, "Измеритель U");
     GF::FindRadioButton(this, ID_OFFSET_RB_CHAN_C_MEAS_I)->SetFocus();
 
     y = CreateLabelGroup(this, x, y, "Канал B");
-    y = CreateRadioButton(this, x, y, ID_OFFSET_RB_CHAN_B_MEAS_I, "Измеритель I");
-    y = CreateRadioButton(this, x, y, ID_OFFSET_RB_CHAN_B_MEAS_U, "Измеритель U");
-    y = CreateRadioButton(this, x, y, ID_OFFSET_RB_CHAN_B_SOURCE_I, "Источник I");
-    y = CreateRadioButton(this, x, y, ID_OFFSET_RB_CHAN_B_SOURCE_U, "Источник U");
-    y = CreateRadioButton(this, x, y, ID_OFFSET_RB_CHAN_B_LIMIT_I, "Ограничение I");
-    y = CreateRadioButton(this, x, y, ID_OFFSET_RB_CHAN_B_LIMIT_U, "Ограничение U");
+    y = CreateRadioButton(this, x, y, &rbChanB_MeasI, "Измеритель I");
+    y = CreateRadioButton(this, x, y, &rbChanB_MeasU, "Измеритель U");
+    y = CreateRadioButton(this, x, y, &rbChanB_SourceI, "Источник I");
+    y = CreateRadioButton(this, x, y, &rbChanB_SourceU, "Источник U");
+    y = CreateRadioButton(this, x, y, &rbChanB_LimitI, "Ограничение I");
+    y = CreateRadioButton(this, x, y, &rbChanB_LimitU, "Ограничение U");
 
     y = CreateLabelGroup(this, x, y, "Канал S");
-    y = CreateRadioButton(this, x, y, ID_OFFSET_RB_CHAN_S_MEAS_I, "Измеритель I");
-    y = CreateRadioButton(this, x, y, ID_OFFSET_RB_CHAN_S_MEAS_U, "Измеритель U");
-    y = CreateRadioButton(this, x, y, ID_OFFSET_RB_CHAN_S_SOURCE_I, "Источник I");
-    y = CreateRadioButton(this, x, y, ID_OFFSET_RB_CHAN_S_SOURCE_U, "Источник U");
-    y = CreateRadioButton(this, x, y, ID_OFFSET_RB_CHAN_S_LIMIT_I, "Ограничение I");
-    y = CreateRadioButton(this, x, y, ID_OFFSET_RB_CHAN_S_LIMIT_U, "Ограничение U");
+    y = CreateRadioButton(this, x, y, &rbChanS_MeasI, "Измеритель I");
+    y = CreateRadioButton(this, x, y, &rbChanS_MeasU, "Измеритель U");
+    y = CreateRadioButton(this, x, y, &rbChanS_SourceI, "Источник I");
+    y = CreateRadioButton(this, x, y, &rbChanS_SourceU, "Источник U");
+    y = CreateRadioButton(this, x, y, &rbChanS_LimitI, "Ограничение I");
+    y = CreateRadioButton(this, x, y, &rbChanS_LimitU, "Ограничение U");
 
     new wxButton(this, ID_OFFSET_BTN_CANCEL, "Применить", { 50, HEIGHT - 100 }, { BUTTON_WIDTH, BUTTON_HEIGHT });
     new wxButton(this, ID_OFFSET_BTN_APPLY, "Отменить", { 250, HEIGHT - 100 }, { BUTTON_WIDTH, BUTTON_HEIGHT });

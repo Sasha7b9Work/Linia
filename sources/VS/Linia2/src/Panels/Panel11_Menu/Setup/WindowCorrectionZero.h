@@ -17,5 +17,16 @@ public:
 
 private:
 
+    wxRadioButton *rbChanC_MeasI = nullptr,
+        *rbChanC_MeasU = nullptr,
+        *rbChanB_MeasI = nullptr,
+        *rbChanB_MeasU = nullptr,
+        *rbChanB_SourceI = nullptr,
+        *rbChanB_SourceU = nullptr,
+        *rbChanS_MeasI = nullptr,
+        *rbChanS_MeasU = nullptr,
+        *rbChanS_SourceI = nullptr,
+        *rbChanS_SourceU = nullptr;
+
     void OnEventButton(wxCommandEvent &);
 };

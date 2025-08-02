@@ -207,27 +207,10 @@ enum
     ID_MENU_CLOSE,
 
     // Настройки - Установка коррекции нуля
-    ID_RB_CHAN_C_MEAS_I,
-    ID_RB_CHAN_C_MEAS_U,
-    ID_RB_CHAN_B_MEAS_I,
-    ID_RB_CHAN_B_MEAS_U,
-    ID_RB_CHAN_B_SOURCE_I,
-    ID_RB_CHAN_B_SOURCE_U,
-    ID_RB_CHAN_S_MEAS_I,
-    ID_RB_CHAN_S_MEAS_U,
-    ID_RB_CHAN_S_SOURCE_I,
-    ID_RB_CHAN_S_SOURCE_U,
     ID_ZERO_BTN_START,
     ID_ZERO_BTN_CANCEL,
 
     // Настройки - Калибровка
-    ID_CALIB_RB_CHAN_C_MEAS_I,
-    ID_CALIB_RB_CHAN_C_MEAS_U,
-    ID_CALIB_RB_CHAN_B_MEAS_I,
-    ID_CALIB_RB_CHAN_B_MEAS_U,
-    ID_CALIB_RB_CHAN_S_MEAS_I,
-    ID_CALIB_RB_CHAN_S_MEAS_U,
-    ID_CALIB_RB_COMBO,
     ID_CALIB_BTN_START,
     ID_CALIB_BTN_CANCEL,
     ID_CALIB_BTN_SAVE,
@@ -255,8 +238,5 @@ enum
     ID_COMBO,
     ID_BTN_LOAD,
     ID_BTN_DELETE,
-    LD_BTN_DELETE_ALL,
-
-    // Шкала
-    ID_SPIN_ACCURACY
+    LD_BTN_DELETE_ALL
 };
