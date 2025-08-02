@@ -56,7 +56,7 @@ wxCheckBox *GF::_FindCheckBox(wxWindow *window, int id)
 }
 
 
-CheckButton *GF::FindCheckButton(const wxWindow *window, int id)
+CheckButton *GF::_FindCheckButton(const wxWindow *window, int id)
 {
     return (CheckButton *)window->FindWindow(id);
 }

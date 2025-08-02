@@ -222,7 +222,7 @@ public:
     }
     virtual void SetFromControl() override
     {
-        Value<bool>::Set(GF::FindCheckButton(window, id)->GetValue());
+        Value<bool>::Set(GF::_FindCheckButton(window, id)->GetValue());
     }
     // Посылает событие данного контрола на всё ГУИ
     void SendEventToGUI(wxWindow *parent = nullptr, int _id = 0)
@@ -250,7 +250,7 @@ protected:
     {
         if (window)
         {
-            GF::FindCheckButton(window, id)->SetValue(Get());
+            GF::_FindCheckButton(window, id)->SetValue(Get());
         }
     }
 };
