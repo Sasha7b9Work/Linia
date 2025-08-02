@@ -147,10 +147,6 @@ enum
     ID_BORDER_MIN,
     ID_BORDER_MAX,
 
-    // Настройки - Установка коррекции нуля
-    ID_ZERO_BTN_START,
-    ID_ZERO_BTN_CANCEL,
-
     // Библиотека пользовательских тестов
     ID_COMBO,
     ID_BTN_LOAD,

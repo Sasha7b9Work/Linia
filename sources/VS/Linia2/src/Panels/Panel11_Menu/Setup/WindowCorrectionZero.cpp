@@ -35,8 +35,8 @@ WindowCorretionZero::WindowCorretionZero() :
 
     wxSize size{ 70, BUTTON_HEIGHT };
 
-    new wxButton(this, ID_ZERO_BTN_START, _L("Пуск"), { 50, y + 30 }, size);
-    new wxButton(this, ID_ZERO_BTN_CANCEL, _L("Отмена"), { 200, y + 30 }, size);
+    new wxButton(this, wxID_ANY, _L("Пуск"), { 50, y + 30 }, size);
+    new wxButton(this, wxID_ANY, _L("Отмена"), { 200, y + 30 }, size);
 
     Bind(wxEVT_BUTTON, &WindowCorretionZero::OnEventButton, this);
 }
