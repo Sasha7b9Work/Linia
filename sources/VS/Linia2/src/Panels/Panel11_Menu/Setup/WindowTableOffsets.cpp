@@ -26,7 +26,7 @@ WindowTableOffsets::WindowTableOffsets() :
     y = CreateLabelGroup(this, x, y + 20, "Канал С");
     y = CreateRadioButton(this, x, y, &rbChanC_MeasI, "Измеритель I");
     y = CreateRadioButton(this, x, y, &rbChanC_MeasU, "Измеритель U");
-    GF::FindRadioButton(this, rbChanC_MeasI->GetId())->SetFocus();
+    rbChanC_MeasI->SetFocus();
 
     y = CreateLabelGroup(this, x, y, "Канал B");
     y = CreateRadioButton(this, x, y, &rbChanB_MeasI, "Измеритель I");

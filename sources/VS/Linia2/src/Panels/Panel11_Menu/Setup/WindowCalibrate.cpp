@@ -40,7 +40,7 @@ WindowCalibrate::WindowCalibrate() :
 
         y = CreateLabelGroup(box, d, y, "Канал C");
         y = CreateRadioButton(box, d, y,  &rbChanC_MeasI, "Измеритель I");
-        GF::FindRadioButton(this, rbChanC_MeasI->GetId())->SetFocus();
+        rbChanC_MeasI->SetFocus();
         y = CreateRadioButton(box, d, y, &rbChanC_MeasU, "Измеритель U");
 
         y = CreateLabelGroup(box, d, y, "Канал B");

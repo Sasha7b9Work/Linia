@@ -507,7 +507,7 @@ void PanelConfig::OnEventToggleButton(wxCommandEvent &event)
 
 void PanelConfig::OnEventRadioButton(wxCommandEvent &event)
 {
-    GF::FindRadioButton(self, event.GetId())->SetValue(true);
+    ((wxRadioButton *)event.GetEventObject())->SetValue(true);
 
     event.Skip();
 }
