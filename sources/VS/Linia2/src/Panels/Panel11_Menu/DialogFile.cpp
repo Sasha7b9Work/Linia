@@ -8,7 +8,7 @@ DialogFile *DialogFile::self = nullptr;
 
 DialogFile::DialogFile() :
     MenuDialog(_L("Файл"), 125,
-        _L("Новый"), ID_BTN_MENU_FILE_NEW, []()
+        _L("Новый"), []()
         {
             wxFileDialog dialog(self, _L("Новый файл модели измерения"), wxEmptyString, wxEmptyString, "*.mod", wxFD_SAVE);
 
@@ -21,7 +21,7 @@ DialogFile::DialogFile() :
 
             }
         },
-        _L("Открыть"), ID_BTN_MENU_FILE_OPEN, []()
+        _L("Открыть"), []()
         {
             wxFileDialog dialog(self, _L("Открыть файл модели измерения"), wxEmptyString, wxEmptyString, "*.mod", wxFD_OPEN);
 
@@ -34,15 +34,15 @@ DialogFile::DialogFile() :
 
             }
         },
-        _L("Закрыть"), ID_BTN_MENU_FILE_CLOSE, []()
+        _L("Закрыть"), []()
         {
             DialogFile::self->Close(true);
         },
-        _L("Cохранить"), ID_BTN_MENU_FILE_SAVE, []()
+        _L("Cохранить"), []()
         {
             DialogFile::self->Close(true);
         },
-        _L("Сохранить как..."), ID_BTN_MENU_FILE_SAVE_AS, []()
+        _L("Сохранить как..."), []()
         {
             wxFileDialog dialog(self, _L("Сохранить файл модели измерения"), wxEmptyString, wxEmptyString, "*.mod", wxFD_SAVE);
 
@@ -55,7 +55,7 @@ DialogFile::DialogFile() :
 
             }
         },
-        _L("Удалить"), ID_BTN_MENU_FILE_DELETE, []()
+        _L("Удалить"), []()
         {
 
         }

@@ -9,18 +9,18 @@ DialogTestAppend *DialogTestAppend::self = nullptr;
 
 DialogTest::DialogTest() :
     MenuDialog(_L("Тест"), 175,
-        _L("Добавить"), ID_BTN_MENU_TEST_APPEND, []()
+        _L("Добавить"), []()
         {
             DialogTestAppend().ShowModal();
         },
-        _L("Сохранить параметры"), ID_BTN_MENU_TEST_SAVE_PARAMETERS, []() {},
-        _L("Удалить"), ID_BTN_MENU_TEST_DELETE, []() {},
-        _L("Удалить все"), ID_BTN_MENU_TEST_DELETE_ALL, []() {},
-        _L("Копировать"), ID_BTN_MENU_TEST_COPY, []() {},
-        _L("Вставить"), ID_BTN_MENU_TEST_INSERT, []() {},
-        _L("Переименовать"), ID_BTN_MENU_TEST_RENAME, []() {},
-        _L("Библиотека тестов"), ID_BTN_MENU_TEST_LIBRARY_TESTS, []() {},
-        _L("Сохранить в библиотеке"), ID_BTN_MENU_TEST_SAVE_TO_LIBRARY, []() {}
+        _L("Сохранить параметры"), []() {},
+        _L("Удалить"), []() {},
+        _L("Удалить все"), []() {},
+        _L("Копировать"), []() {},
+        _L("Вставить"), []() {},
+        _L("Переименовать"), []() {},
+        _L("Библиотека тестов"), []() {},
+        _L("Сохранить в библиотеке"), []() {}
     )
 {
     self = this;
@@ -29,8 +29,8 @@ DialogTest::DialogTest() :
 
 DialogTestAppend::DialogTestAppend() :
     MenuDialog(_L("Добавить"), 150,
-        _L("Активный"), ID_BTN_MENU_TEST_APPEND_ACTIVE, []() {},
-        _L("Из библиотеки"), ID_BTN_MENU_TEST_APPEND_FROM_LIBRARY, []() {}
+        _L("Активный"), []() {},
+        _L("Из библиотеки"), []() {}
     )
 {
     self = this;

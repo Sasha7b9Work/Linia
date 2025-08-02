@@ -17,39 +17,39 @@ DialogSetup *DialogSetup::self = nullptr;
 
 DialogSetup::DialogSetup() :
     MenuDialog(_L("Настройка"), 275,
-        _L("Настройки пользователя"), ID_BTN_USER, []()
+        _L("Настройки пользователя"), []()
         {
             WindowUser().ShowModal();
         },
-        _L("Запуск"), ID_BTN_LAUNCH, []()
+        _L("Запуск"), []()
         {
             WindowLaunch().ShowModal();
         },
-        _L("Автосохранение"), ID_BTN_AUTOSAVE, []()
+        _L("Автосохранение"), []()
         {
             WindowAutoSave().ShowModal();
         },
-        _L("Коррекция смещения нуля"), ID_BTN_CORRECTION_ZERO, []()
+        _L("Коррекция смещения нуля"), []()
         {
             WindowCorretionZero().ShowModal();
         },
-        _L("Калибровка"), ID_BTN_CALIBRATION, []()
+        _L("Калибровка"), []()
         {
             WindowCalibrate().ShowModal();
         },
-        _L("Таблица смещений и коэффициентов"), ID_BTN_TABLE, []()
+        _L("Таблица смещений и коэффициентов"), []()
         {
             WindowTableOffsets().ShowModal();
         },
-        _L("Изменить пароль"), ID_BTN_PASSWORD, []()
+        _L("Изменить пароль"), []()
         {
             WindowPassword().ShowModal();
         },
-        _L("IP-адрес"), ID_BTN_ADDRESS_IP, []()
+        _L("IP-адрес"), []()
         {
             WindowAddressIP().ShowModal();
         },
-        _L("Мой компьютер"), ID_BTN_MY_COMPUTER, []()
+        _L("Мой компьютер"), []()
         {
             WindowMyComputer().ShowModal();
         }

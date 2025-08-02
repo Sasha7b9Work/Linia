@@ -8,12 +8,12 @@ DialogReport *DialogReport::self = nullptr;
 
 DialogReport::DialogReport() :
     MenuDialog(_("Отчёт"), 100,
-        _L("Новый"), ID_REPORT_MENU_NEW, [](){},
-        _L("Сохранить"), ID_REPORT_MENU_SAVE, []() {},
-        _L("Удалить"), ID_REPORT_MENU_DELETE, []() {},
-        _L("Развернуть"), ID_REPORT_MENU_EXPAND, []() {},
-        _L("Свернуть"), ID_REPORT_MENU_COLLAPSE, []() {},
-        _L("Закрыть"), ID_REPORT_MENU_CLOSE, []() {}
+        _L("Новый"), [](){},
+        _L("Сохранить"), []() {},
+        _L("Удалить"), []() {},
+        _L("Развернуть"), []() {},
+        _L("Свернуть"), []() {},
+        _L("Закрыть"), []() {}
     )
 {
     self = this;
