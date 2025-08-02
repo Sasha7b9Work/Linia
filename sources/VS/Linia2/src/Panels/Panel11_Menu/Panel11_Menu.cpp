@@ -22,27 +22,27 @@ PanelButtons::PanelButtons(wxWindow* parent) :
     struct Struct
     {
         wxString label;
-        wxButton *button;
+        wxButton **button;
     };
 
     Struct structs[100] =
     {
-        { _L("Файл"),      btnFile },
-        { _L("Тест"),      btnTest },
-        { _L("Настройка"), btnSetup },
-        { _L("Архив"),     btnArchiv },
-        { _L("График"),    btnGraph },
-        { _L("Таблица"),   btnTable },
-        { _L("Отчёт"),     btnReport },
-        { _L("Измерение"), btnMeasure },
-        { _L("Отладка"),   btnDebug }
+        { _L("Файл"),      &btnFile },
+        { _L("Тест"),      &btnTest },
+        { _L("Настройка"), &btnSetup },
+        { _L("Архив"),     &btnArchiv },
+        { _L("График"),    &btnGraph },
+        { _L("Таблица"),   &btnTable },
+        { _L("Отчёт"),     &btnReport },
+        { _L("Измерение"), &btnMeasure },
+        { _L("Отладка"),   &btnDebug }
     };
 
     const int delta = GetSize().x / NumButtons();
 
     for (int i = 0; i < NumButtons(); i++)
     {
-        structs[i].button = new wxButton(this, wxID_ANY, structs[i].label, {i * delta, 0}, {delta - 3, GetSize().y - 3});
+        *structs[i].button = new wxButton(this, wxID_ANY, structs[i].label, {i * delta, 0}, {delta - 3, GetSize().y - 3});
     }
 
     Bind(wxEVT_BUTTON, &PanelButtons::OnEventButton, this);

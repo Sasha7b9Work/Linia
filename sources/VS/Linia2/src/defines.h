@@ -73,9 +73,3 @@ static pString REVERSE_PROMT = "-> ";
 static pString DIRECT_PROMT = "<- ";
 
 #define SAFE_DELETE(ptr)  do { delete ptr; ptr = nullptr; } while(0)
-
-
-enum
-{
-    ID_BTN_RETURN_TO_MAIN_PAGE = wxID_HIGHEST + 1
-};

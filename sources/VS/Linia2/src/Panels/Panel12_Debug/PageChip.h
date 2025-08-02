@@ -15,6 +15,10 @@ public:
 
 private:
 
+    wxMenuItem *itemReturn = nullptr;
+
+    wxButton *btnReturn = nullptr;
+
     std::vector<PanelRegister *> registers;
 
     void OnRightClick(wxMouseEvent &);

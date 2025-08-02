@@ -33,7 +33,7 @@ PanelReferenceGraph::PanelReferenceGraph(wxWindow *parent) :
         wxPanel *panel = new wxPanel(this, wxID_ANY, { 0, 0 }, { MainWindow::WIDTH, height_title });
 
         wxSize size_button{ 75, BUTTON_HEIGHT };
-        new wxButton(panel, ID_BTN_RETURN_TO_MAIN_PAGE, _L("Закрыть"), { MainWindow::WIDTH - size_button.x - 5, 0 }, size_button);
+        btnReturn = new wxButton(panel, wxID_ANY, _L("Закрыть"), { MainWindow::WIDTH - size_button.x - 5, 0 }, size_button);
 
         new wxStaticText(panel, wxID_ANY, _L("Архив эталонных графиков"), { 0, 0 }, { MainWindow::WIDTH - size_button.x - 5, height_title }, wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL);
     }
@@ -89,7 +89,7 @@ void PanelReferenceGraph::OnEventButton(wxCommandEvent &event)
 {
     int id = event.GetId();
 
-    if (id == ID_BTN_RETURN_TO_MAIN_PAGE)
+    if (id == btnReturn->GetId())
     {
         MainWindow::self->SetMode(ModeMainWindow::Standard);
     }
@@ -125,7 +125,7 @@ void PanelReferenceGraph::OnEventRightClick(wxMouseEvent &event)
     }
 
     menu.AppendSeparator();
-    menu.Append(ID_BTN_RETURN_TO_MAIN_PAGE, _("Закрыть архив"));
+    itemReturn = menu.Append(wxID_ANY, _("Закрыть архив"));
 
     Bind(wxEVT_MENU, &PanelReferenceGraph::OnEventMenu, this);
 
@@ -139,7 +139,7 @@ void PanelReferenceGraph::OnEventMenu(wxCommandEvent &event)
 {
     int id = event.GetId();
 
-    if (id == ID_BTN_RETURN_TO_MAIN_PAGE)
+    if (id == itemReturn->GetId())
     {
         MainWindow::self->SetMode(ModeMainWindow::Standard);
     }

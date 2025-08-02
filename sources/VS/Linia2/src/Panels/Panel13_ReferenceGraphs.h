@@ -25,7 +25,10 @@ private:
 
     wxMenuItem *itemClear = nullptr,
         *itemDeleteFrom = nullptr,
-        *itemLoadFrom = nullptr;
+        *itemLoadFrom = nullptr,
+        *itemReturn = nullptr;
+
+    wxButton *btnReturn = nullptr;
 
     MyGrid *grid = nullptr;
 
