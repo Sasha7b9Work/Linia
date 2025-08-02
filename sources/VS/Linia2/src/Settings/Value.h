@@ -269,14 +269,14 @@ public:
     }
     virtual void SetFromControl() override
     {
-        Set(wxAtoi(GF::FindTextCtrl(window, id)->GetValue()));
+        Set(wxAtoi(GF::_FindTextCtrl(window, id)->GetValue()));
     }
 protected:
     virtual void LoadToWindow() override
     {
         if (window)
         {
-            GF::FindTextCtrl(window, id)->SetValue(ToString());
+            GF::_FindTextCtrl(window, id)->SetValue(ToString());
         }
     }
 };

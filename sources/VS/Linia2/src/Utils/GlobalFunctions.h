@@ -32,7 +32,7 @@ namespace GF
 
     wxComboBox *_FindComboBox(const wxWindow *, int id);
 
-    wxTextCtrl *FindTextCtrl(wxWindow *, int id);
+    wxTextCtrl *_FindTextCtrl(wxWindow *, int id);
 
     wxSpinCtrl *FindSpinCtrl(wxWindow *, int id);
 

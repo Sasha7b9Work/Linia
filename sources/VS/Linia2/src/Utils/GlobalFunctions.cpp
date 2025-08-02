@@ -68,7 +68,7 @@ wxComboBox *GF::_FindComboBox(const wxWindow *window, int id)
 }
 
 
-wxTextCtrl *GF::FindTextCtrl(wxWindow *window, int id)
+wxTextCtrl *GF::_FindTextCtrl(wxWindow *window, int id)
 {
     return (wxTextCtrl *)window->FindWindow(id);
 }
@@ -82,7 +82,7 @@ wxSpinCtrl *GF::FindSpinCtrl(wxWindow *window, int id)
 
 int GF::IntFromTextCtrl(wxWindow *window, int id)
 {
-    wxTextCtrl *control = FindTextCtrl(window, id);
+    wxTextCtrl *control = _FindTextCtrl(window, id);
 
     wxString value = control->GetValue();
 
@@ -96,7 +96,7 @@ int GF::IntFromTextCtrl(wxWindow *window, int id)
 
 uint64 GF::UInt64FromTextCtrl(wxWindow *window, int id)
 {
-    wxTextCtrl *control = FindTextCtrl(window, id);
+    wxTextCtrl *control = _FindTextCtrl(window, id);
 
     wxString value = control->GetValue();
 
@@ -110,7 +110,7 @@ uint64 GF::UInt64FromTextCtrl(wxWindow *window, int id)
 
 void GF::IntToTextCtrl(wxWindow *window, int id, int value)
 {
-    FindTextCtrl(window, id)->SetValue(wxString::Format("%d", value));
+    _FindTextCtrl(window, id)->SetValue(wxString::Format("%d", value));
 }
 
 
