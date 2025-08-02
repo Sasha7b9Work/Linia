@@ -50,9 +50,9 @@ bool Application::OnInit()
 
     frame->Show();
 
-    Bind(wxEVT_TIMER, &Application::OnTimer, this, ID_TIMER_APP);
+    Bind(wxEVT_TIMER, &Application::OnTimer, this, timer.GetId());
 
-    timer.SetOwner(this, ID_TIMER_APP);
+    timer.SetOwner(this, timer.GetId());
 
     timer.Start(10);
 
