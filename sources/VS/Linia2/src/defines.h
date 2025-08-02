@@ -98,11 +98,6 @@ enum
     ID_CHAN_C_SPIN_START,
     ID_CHAN_C_SPIN_STOP,
 
-        // Схема включения
-    ID_COMM_COMBO_TYPE,
-    ID_COMM_COMBO_CHAN_C,
-    ID_COMM_COMBO_CHAN_B,
-
     // Библиотека пользовательских тестов
     ID_COMBO,
     ID_BTN_LOAD,
