@@ -55,7 +55,7 @@ WindowLibraryTests::WindowLibraryTests() :
             wxArrayString choices;
             choices.Add("NMOS");
 
-            new wxComboBox(box1, ID_COMBO, choices[0], { 10, SD::Y_SB(25) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+            new wxComboBox(box1, wxID_ANY, choices[0], { 10, SD::Y_SB(25) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
         }
 
         wxStaticBox *box2 = new wxStaticBox(rightPanel, wxID_ANY, _L("Тест"), { 0, box1->GetPosition().y + box1->GetSize().y + 5 }, { size.x - 20, 145 });
@@ -65,8 +65,8 @@ WindowLibraryTests::WindowLibraryTests() :
 
             int dy = 40;
 
-            new wxButton(box2, ID_BTN_LOAD, _L("Загрузить"), { 10, SD::Y_SB(y0) }, { 100, BUTTON_HEIGHT });
-            new wxButton(box2, ID_BTN_DELETE, _L("Удалить"), { 10, SD::Y_SB(y0 + dy) }, { 100, BUTTON_HEIGHT });
+            new wxButton(box2, wxID_ANY, _L("Загрузить"), { 10, SD::Y_SB(y0) }, { 100, BUTTON_HEIGHT });
+            new wxButton(box2, wxID_ANY, _L("Удалить"), { 10, SD::Y_SB(y0 + dy) }, { 100, BUTTON_HEIGHT });
             new wxButton(box2, LD_BTN_DELETE_ALL, _L("Удалить все"), { 10, SD::Y_SB(y0 + dy * 2) }, { 100, BUTTON_HEIGHT });
         }
     }

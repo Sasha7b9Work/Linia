@@ -85,8 +85,5 @@ enum
     ID_STATICTEXT_MEASURE,
 
     // Библиотека пользовательских тестов
-    ID_COMBO,
-    ID_BTN_LOAD,
-    ID_BTN_DELETE,
     LD_BTN_DELETE_ALL
 };
