@@ -67,7 +67,7 @@ WindowLibraryTests::WindowLibraryTests() :
 
             new wxButton(box2, wxID_ANY, _L("Загрузить"), { 10, SD::Y_SB(y0) }, { 100, BUTTON_HEIGHT });
             new wxButton(box2, wxID_ANY, _L("Удалить"), { 10, SD::Y_SB(y0 + dy) }, { 100, BUTTON_HEIGHT });
-            new wxButton(box2, LD_BTN_DELETE_ALL, _L("Удалить все"), { 10, SD::Y_SB(y0 + dy * 2) }, { 100, BUTTON_HEIGHT });
+            new wxButton(box2, wxID_ANY, _L("Удалить все"), { 10, SD::Y_SB(y0 + dy * 2) }, { 100, BUTTON_HEIGHT });
         }
     }
 
