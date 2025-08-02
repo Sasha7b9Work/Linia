@@ -271,7 +271,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
         choices.Add("U");
         choices.Add("I");
 
-        new wxComboBox(boxGenerator, ID_CHAN_S_GEN_COMBO_TYPE, choices[0], { 70, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 70, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
         y += 25;
 
@@ -281,7 +281,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
         choices.Add(_L("Вкл"));
         choices.Add(_L("Выкл"));
 
-        new wxComboBox(boxGenerator, ID_CHAN_S_GEN_COMBO_IMPULSE, choices[0], { 70, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 70, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
         y += 25;
 
@@ -290,7 +290,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
 
         new wxStaticText(boxGenerator, wxID_ANY, _L("Амплитуда ступени"), { 10, SD::Y_SB(y) });
 
-        new wxComboBox(boxGenerator, ID_CHAN_S_GEN_COMBO_AMPLITUDE, choices[0], { 130, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 130, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
         y += 25;
 
@@ -298,7 +298,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
 
         new wxStaticText(boxGenerator, wxID_ANY, _L("Число ступенек"), { 10, SD::Y_SB(y + 3) });
 
-        new SpinBox(boxGenerator, ID_CHAN_S_GEN_SPIN_NUMBER_STEPS, "5", { 120, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
+        new SpinBox(boxGenerator, wxID_ANY, "5", { 120, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
 
         y += 25;
 
@@ -308,7 +308,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
 
         new wxStaticText(boxGenerator, wxID_ANY, _L("Полярность"), { 10, SD::Y_SB(y + 3) });
 
-        new wxComboBox(boxGenerator, ID_CHAN_S_GEN_COMBO_POLARITY, choices[0], { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
         y += 25;
 
@@ -317,7 +317,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
         {
             y = 20;
 
-            new wxSlider(boxOffset, ID_CHAN_S_GEN_OFFSET_SLIDER, 5, 0, 20, { 10, SD::Y_SB(y) }, { 120, TEXTCNTRL_HEIGHT });
+            new wxSlider(boxOffset, wxID_ANY, 5, 0, 20, { 10, SD::Y_SB(y) }, { 120, TEXTCNTRL_HEIGHT });
 
             y += 25;
 
@@ -327,7 +327,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
 
             new wxStaticText(boxOffset, wxID_ANY, _L("Полярность"), { 10, SD::Y_SB(y + 3) });
 
-            new wxComboBox(boxOffset, ID_CHAN_S_GEN_OFFSET_COMBO_POLARITY, choices[0], { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+            new wxComboBox(boxOffset, wxID_ANY, choices[0], { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
         }
     }
 
@@ -341,11 +341,11 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
         wxArrayString choices;
         choices.Add("10 mA");
 
-        new wxComboBox(boxLimitation, ID_CHAN_S_LIM_COMBO_RANGE, choices[0], { 100, SD::Y_SB(y - 3) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new wxComboBox(boxLimitation, wxID_ANY, choices[0], { 100, SD::Y_SB(y - 3) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
         y += 25;
 
-        new wxSlider(boxLimitation, ID_CHAN_S_LIM_SLIDER, 5, 0, 20, { 10, SD::Y_SB(y) }, { 120, TEXTCNTRL_HEIGHT });
+        new wxSlider(boxLimitation, wxID_ANY, 5, 0, 20, { 10, SD::Y_SB(y) }, { 120, TEXTCNTRL_HEIGHT });
     }
 }
 
