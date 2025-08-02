@@ -50,7 +50,7 @@ wxRadioButton *GF::_FindRadioButton(const wxWindow *w, int id)
 }
 
 
-wxCheckBox *GF::FindCheckBox(wxWindow *window, int id)
+wxCheckBox *GF::_FindCheckBox(wxWindow *window, int id)
 {
     return (wxCheckBox *)window->FindWindow(id);
 }

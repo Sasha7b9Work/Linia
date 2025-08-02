@@ -191,12 +191,12 @@ public:
 
         if (parent)
         {
-            GF::FindCheckBox(parent, _id)->SetValue(Get());
+            GF::_FindCheckBox(parent, _id)->SetValue(Get());
         }
     }
     virtual void SetFromControl() override
     {
-        Value<bool>::Set(GF::FindCheckBox(window, id)->GetValue());
+        Value<bool>::Set(GF::_FindCheckBox(window, id)->GetValue());
     }
     void ApplyToGUI(wxWindow *parent, int _id)
     {
@@ -207,7 +207,7 @@ protected:
     {
         if (window)
         {
-            GF::FindCheckBox(window, id)->SetValue(Get());
+            GF::_FindCheckBox(window, id)->SetValue(Get());
         }
     }
 private:

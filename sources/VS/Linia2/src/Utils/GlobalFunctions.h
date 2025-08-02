@@ -26,7 +26,7 @@ namespace GF
 
     wxRadioButton *_FindRadioButton(const wxWindow *, int id);
 
-    wxCheckBox *FindCheckBox(wxWindow *, int id);
+    wxCheckBox *_FindCheckBox(wxWindow *, int id);
 
     CheckButton *FindCheckButton(const wxWindow *, int id);
 
