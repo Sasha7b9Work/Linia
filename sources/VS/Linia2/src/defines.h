@@ -84,13 +84,6 @@ enum
     ID_BUTTON_MEASURE,
     ID_STATICTEXT_MEASURE,
 
-    /////////////////////////////////////////////////////////////////////////////////// Панель 3 - Конфигурация
-    ID_BTN_CHANNEL_C,
-    ID_BTN_CHANNEL_B,
-    ID_BTN_CHANNEL_S,
-    ID_BTN_SCHEME,
-    ID_BTN_CALCULATION,
-
     // Библиотека пользовательских тестов
     ID_COMBO,
     ID_BTN_LOAD,

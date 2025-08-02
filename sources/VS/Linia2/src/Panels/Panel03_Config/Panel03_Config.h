@@ -30,6 +30,12 @@ private:
         *rbChanC_Scan6 = nullptr,
         *rbChanC_Scan7 = nullptr;
 
+    wxToggleButton *btnScheme = nullptr,
+        *btnChannelC = nullptr,
+        *btnChannelB = nullptr,
+        *btnChannelS = nullptr,
+        *btnCalculate = nullptr;
+
     // Структура хранит кнопку и панель, которую та включает
     struct StructPanel
     {
