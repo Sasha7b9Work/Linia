@@ -34,7 +34,7 @@ namespace GF
 
     wxTextCtrl *_FindTextCtrl(wxWindow *, int id);
 
-    wxSpinCtrl *FindSpinCtrl(wxWindow *, int id);
+    wxSpinCtrl *_FindSpinCtrl(wxWindow *, int id);
 
     void SendCommandEvent(wxWindow *, int type_event, int id, int int_value = 0);
 

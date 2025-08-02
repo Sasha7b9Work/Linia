@@ -302,7 +302,7 @@ public:
     }
     virtual void SetFromControl() override
     {
-        Set(GF::FindSpinCtrl(window, id)->GetValue());
+        Set(GF::_FindSpinCtrl(window, id)->GetValue());
     }
     int GetDefaultValue() const
     {
@@ -313,7 +313,7 @@ protected:
     {
         if (window)
         {
-            GF::FindSpinCtrl(window, id)->SetValue(Get());
+            GF::_FindSpinCtrl(window, id)->SetValue(Get());
         }
     }
 };

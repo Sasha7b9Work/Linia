@@ -74,7 +74,7 @@ wxTextCtrl *GF::_FindTextCtrl(wxWindow *window, int id)
 }
 
 
-wxSpinCtrl *GF::FindSpinCtrl(wxWindow *window, int id)
+wxSpinCtrl *GF::_FindSpinCtrl(wxWindow *window, int id)
 {
     return (wxSpinCtrl *)window->FindWindow(id);
 }
