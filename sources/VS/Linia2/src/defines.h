@@ -151,10 +151,6 @@ enum
     ID_ZERO_BTN_START,
     ID_ZERO_BTN_CANCEL,
 
-    // Настройки - таблица смещений
-    ID_OFFSET_BTN_APPLY,
-    ID_OFFSET_BTN_CANCEL,
-
     // Библиотека пользовательских тестов
     ID_COMBO,
     ID_BTN_LOAD,
