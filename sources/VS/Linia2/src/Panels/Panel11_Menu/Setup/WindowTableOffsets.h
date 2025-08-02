@@ -33,6 +33,8 @@ private:
         *rbChanS_LimitI = nullptr,
         *rbChanS_LimitU = nullptr;
 
+    wxComboBox *comboType = nullptr;
+
     struct Field
     {
         wxStaticText *name;

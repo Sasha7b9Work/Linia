@@ -21,7 +21,7 @@ WindowTableOffsets::WindowTableOffsets() :
     choices.Add("смещений");
     choices.Add("коэффициентов");
 
-    new wxComboBox(this, ID_OFFSET_COMBO_TYPE, choices[0], { x + 40, SD::Y_SB(y - 3) }, { 90, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+    comboType = new wxComboBox(this, wxID_ANY, choices[0], { x + 40, SD::Y_SB(y - 3) }, { 90, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
     y = CreateLabelGroup(this, x, y + 20, "Канал С");
     y = CreateRadioButton(this, x, y, &rbChanC_MeasI, "Измеритель I");
@@ -54,10 +54,10 @@ WindowTableOffsets::WindowTableOffsets() :
     {
         // Включаем соотвествующие поля
 
-        int id = ID_OFFSET_COMBO_TYPE;
+        int id = comboType->GetId();
 
         wxCommandEvent evt(wxEVT_COMBOBOX, id);
-        evt.SetInt(GF::FindComboBox(this, ID_OFFSET_COMBO_TYPE)->GetCurrentSelection());
+        evt.SetInt(comboType->GetCurrentSelection());
         this->ProcessWindowEvent(evt);
     }
 }
@@ -204,7 +204,7 @@ void WindowTableOffsets::FillFields()
         rbChanS_SourceI->GetValue() ||
         rbChanS_LimitI->GetValue();
 
-    int index = GF::FindComboBox(this, ID_OFFSET_COMBO_TYPE)->GetCurrentSelection();
+    int index = comboType->GetCurrentSelection();
 
     if (index == 0)
     {

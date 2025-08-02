@@ -216,7 +216,6 @@ enum
     ID_CALIB_BTN_SAVE,
 
     // Настройки - таблица смещений
-    ID_OFFSET_COMBO_TYPE,
     ID_OFFSET_BTN_APPLY,
     ID_OFFSET_BTN_CANCEL,
 
