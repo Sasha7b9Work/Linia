@@ -44,7 +44,7 @@ void PanelScale::OnEventButton(wxCommandEvent &event)
     {
         if (!event.IsChecked())
         {
-            GF::FindToggleButton(self, event.GetId())->SetValue(true);
+            ((wxToggleButton *)event.GetEventObject())->SetValue(true);
         }
         else
         {
