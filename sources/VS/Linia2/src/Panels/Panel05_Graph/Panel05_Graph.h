@@ -35,6 +35,17 @@ public:
 
 private:
 
+    wxButton *btnHelp = nullptr,
+        *btnLessX = nullptr,
+        *btnMoreX = nullptr,
+        *btnLessY = nullptr,
+        *btnMoreY = nullptr;
+
+    wxMenuItem *itemFullscreen = nullptr,
+        *itemTrackX = nullptr,
+        *itemTrackY = nullptr,
+        *itemTrackNone = nullptr;
+
     Grid grid;                              // Координатная сетка
 
     std::vector<GraphEntity *> entities;    // Сущности для отрисовки

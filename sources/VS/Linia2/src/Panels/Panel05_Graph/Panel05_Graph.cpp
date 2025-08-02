@@ -37,11 +37,11 @@ PanelGraph::PanelGraph(wxWindow *parent) :
     int x0 = d;
     int y0 = HEIGHT - d - w;
 
-    new wxButton(this, ID_BUTTON_HELP, "?", { x0, y0 }, size);
-    new wxButton(this, ID_BUTTON_X_LESS, "X-", { x0 + w + d, y0 }, size);
-    new wxButton(this, ID_BUTTON_X_MORE, "X+", { x0 + 2 * (w + d), y0 }, size);
-    new wxButton(this, ID_BUTTON_Y_LESS, "Y-", { x0, y0 - w - d }, size);
-    new wxButton(this, ID_BUTTON_Y_MORE, "Y+", { x0, y0 - 2 * (w + d) }, size);
+    btnHelp = new wxButton(this, wxID_ANY, "?", { x0, y0 }, size);
+    btnLessX = new wxButton(this, wxID_ANY, "X-", { x0 + w + d, y0 }, size);
+    btnMoreX = new wxButton(this, wxID_ANY, "X+", { x0 + 2 * (w + d), y0 }, size);
+    btnLessY = new wxButton(this, wxID_ANY, "Y-", { x0, y0 - w - d }, size);
+    btnMoreY = new wxButton(this, wxID_ANY, "Y+", { x0, y0 - 2 * (w + d) }, size);
 
     CreateEntities();
 
@@ -118,24 +118,24 @@ void PanelGraph::OnEventButton(wxCommandEvent &event)
 {
     int id = event.GetId();
 
-    if (id == ID_BUTTON_HELP)
+    if (id == btnHelp->GetId())
     {
         wxMessageBox("Левая Кнопка Мыши - перемещение графика.\nКолёсико - масштаб графика.\n"
             "ЛКМ+Ctrl - перемещение сетки.\nКолёсико+Ctrl - масштаб сетки.", " ");
     }
-    else if (id == ID_BUTTON_X_LESS)
+    else if (id == btnLessX->GetId())
     {
         grid.ScaleMeasuresOnX(-1);
     }
-    else if (id == ID_BUTTON_X_MORE)
+    else if (id == btnMoreX->GetId())
     {
         grid.ScaleMeasuresOnX(+1);
     }
-    else if (id == ID_BUTTON_Y_LESS)
+    else if (id == btnLessY->GetId())
     {
         grid.ScaleMeasuresOnY(-1);
     }
-    else if (id == ID_BUTTON_Y_MORE)
+    else if (id == btnMoreY->GetId())
     {
         grid.ScaleMeasuresOnY(+1);
     }
@@ -409,32 +409,32 @@ void PanelGraph::OnEventRightClick(wxMouseEvent &)
 
     // Добавляем пункты меню
     menu.Append(wxID_RESET, _L("Сброс"));
-    menu.AppendCheckItem(ID_MENU_FULL_SCREEN, _L("Развернуть"));
+    itemFullscreen = menu.AppendCheckItem(wxID_ANY, _L("Развернуть"));
 
     menu.AppendSeparator();
 
     // Привязываем обработчики для пунктов меню
     Bind(wxEVT_MENU, &PanelGraph::OnMenuReset, this, wxID_RESET);
-    Bind(wxEVT_MENU, &PanelGraph::OnMenuFullScreen, this, ID_MENU_FULL_SCREEN);
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuFullScreen, this, itemFullscreen->GetId());
 
-    menu.Check(ID_MENU_FULL_SCREEN, full_screen);
+    menu.Check(itemFullscreen->GetId(), full_screen);
 
     wxMenu *subMenu = new wxMenu();
-    subMenu->AppendCheckItem(ID_MENU_TRACK_X, "X");
-    subMenu->AppendCheckItem(ID_MENU_TRACK_Y, "Y");
-    subMenu->AppendCheckItem(ID_MENU_TRACK_NONE, _L("Ничего"));
+    itemTrackX = subMenu->AppendCheckItem(wxID_ANY, "X");
+    itemTrackY = subMenu->AppendCheckItem(wxID_ANY, "Y");
+    itemTrackNone = subMenu->AppendCheckItem(wxID_ANY, _L("Ничего"));
 
-    subMenu->Check(ID_MENU_TRACK_X, track_x);
-    subMenu->Check(ID_MENU_TRACK_Y, track_y);
-    subMenu->Check(ID_MENU_TRACK_NONE, track_none);
+    subMenu->Check(itemTrackX->GetId(), track_x);
+    subMenu->Check(itemTrackY->GetId(), track_y);
+    subMenu->Check(itemTrackNone->GetId(), track_none);
 
     menu.AppendSubMenu(subMenu, _L("Отслеживать"));
 
     menu.AppendCheckItem(ID_MENU_SCALE, _L("Шкала"));
 
-    Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackX, this, ID_MENU_TRACK_X);
-    Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackY, this, ID_MENU_TRACK_Y);
-    Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackNone, this, ID_MENU_TRACK_NONE);
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackX, this, itemTrackX->GetId());
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackY, this, itemTrackY->GetId());
+    Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackNone, this, itemTrackNone->GetId());
     Bind(wxEVT_MENU, &PanelGraph::OnMenuScale, this, ID_MENU_SCALE);
 
     // Показываем меню в позиции клика

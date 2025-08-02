@@ -147,17 +147,6 @@ enum
     ID_BORDER_MIN,
     ID_BORDER_MAX,
 
-    /////////////////////////////////////////////////////////////////////////////////// Панель 5
-    ID_MENU_FULL_SCREEN,
-    ID_MENU_TRACK_X,
-    ID_MENU_TRACK_Y,
-    ID_MENU_TRACK_NONE,
-    ID_BUTTON_HELP,
-    ID_BUTTON_X_LESS,
-    ID_BUTTON_X_MORE,
-    ID_BUTTON_Y_LESS,
-    ID_BUTTON_Y_MORE,
-
     /////////////////////////////////////////////////////////////////////////////////// Панель 8
     ID_PAN8_COMBO,
 
