@@ -22,6 +22,14 @@ private:
 
     wxButton *btnLoad = nullptr;
 
+    wxRadioButton *rbChanC_Scan1 = nullptr,
+        *rbChanC_Scan2 = nullptr,
+        *rbChanC_Scan3 = nullptr,
+        *rbChanC_Scan4 = nullptr,
+        *rbChanC_Scan5 = nullptr,
+        *rbChanC_Scan6 = nullptr,
+        *rbChanC_Scan7 = nullptr;
+
     // Структура хранит кнопку и панель, которую та включает
     struct StructPanel
     {

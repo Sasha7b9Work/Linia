@@ -96,19 +96,19 @@ void PanelConfig::CreatePanelChannelC(wxPanel *panel, int x, int w)
     {
         wxSize size_rb{ 50, 15 };
 
-        new wxRadioButton(boxScan, ID_CHAN_C_RB_SCAN_1, "1", { 10, SD::Y_SB(20) }, size_rb);
-        new wxRadioButton(boxScan, ID_CHAN_C_RB_SCAN_2, "2", { 70, SD::Y_SB(20) }, size_rb);
+        rbChanC_Scan1 = new wxRadioButton(boxScan, wxID_ANY, "1", { 10, SD::Y_SB(20) }, size_rb);
+        rbChanC_Scan2 = new wxRadioButton(boxScan, wxID_ANY, "2", { 70, SD::Y_SB(20) }, size_rb);
 
-        new wxRadioButton(boxScan, ID_CHAN_C_RB_SCAN_3, "3", { 10, SD::Y_SB(50) }, size_rb);
-        new wxRadioButton(boxScan, ID_CHAN_C_RB_SCAN_4, "4", { 70, SD::Y_SB(50) }, size_rb);
+        rbChanC_Scan3 = new wxRadioButton(boxScan, wxID_ANY, "3", { 10, SD::Y_SB(50) }, size_rb);
+        rbChanC_Scan4 = new wxRadioButton(boxScan, wxID_ANY, "4", { 70, SD::Y_SB(50) }, size_rb);
 
-        new wxRadioButton(boxScan, ID_CHAN_C_RB_SCAN_5, "5", { 10, SD::Y_SB(80) }, size_rb);
-        new wxRadioButton(boxScan, ID_CHAN_C_RB_SCAN_6, "6", { 70, SD::Y_SB(80) }, size_rb);
+        rbChanC_Scan5 = new wxRadioButton(boxScan, wxID_ANY, "5", { 10, SD::Y_SB(80) }, size_rb);
+        rbChanC_Scan6 = new wxRadioButton(boxScan, wxID_ANY, "6", { 70, SD::Y_SB(80) }, size_rb);
 
-        new wxRadioButton(boxScan, ID_CHAN_C_RB_SCAN_7, "7", { 130, SD::Y_SB(20) }, size_rb);
+        rbChanC_Scan7 = new wxRadioButton(boxScan, wxID_ANY, "7", { 130, SD::Y_SB(20) }, size_rb);
 
         {
-            wxCommandEvent evt(wxEVT_RADIOBUTTON, ID_CHAN_C_RB_SCAN_1);
+            wxCommandEvent evt(wxEVT_RADIOBUTTON, rbChanC_Scan1->GetId());
             evt.SetInt(1);
             boxScan->ProcessWindowEvent(evt);
         }
