@@ -3,6 +3,7 @@ archive.zip
 *.uvgui*.*
 ~*
 
+old/*
 sources/generated/*
 sources/installer/win/files/*
 sources/ThirdParty/wxWidgets/generated/*
