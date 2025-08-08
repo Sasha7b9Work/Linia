@@ -147,46 +147,17 @@ static UINT aNoSignalMemoryFull[]={IDC_STATIC_MEMORY};
 
 //Вид экрана
 //==========
-//установка параметров теста
-//static UINT aVid1[]={IDC_TABCTRLPARAM,
-//					 IDC_STATICEDINFO,IDC_STATICEDDATE};//,IDC_EDMODEL,IDC_EDDATE,IDC_EDTIME
-//static UINT aVid1[]={IDC_STATICEDINFO};
 static UINT aVid1[]={IDC_LIST_RESULT};//IDC_STATICEDINFO};//,IDC_TABCTRLPARAM};
 
 //отoбражение параметров теста
 static UINT aVid1_OFF[]={IDC_STATICNOMIGSIGNAL,IDC_STATICMIGSIGNAL,IDC_STATICZONATEXT};
-/*
-static UINT aVid2[]={IDC_EDITDISPLAYMEAS,
-					 //IDC_STATICEDTIME,//IDC_STATICHIGHU,IDC_STATICNOHIGHU,
-						IDC_MARKER1,IDC_MARKER2,IDC_TANGENT,//IDC_EDNSTEP,
-//						IDC_STATIC_MARKER1,IDC_STATIC_MARKER2,
-//						IDC_STATIC_TEXT_MARKER1,IDC_STATIC_TEXT_MARKER2,
-//						IDC_STATIC_BUTTON_TANGENT,IDC_STATIC_TEXT_TANGENT
-					 //,IDC_STATICSTATUS,IDC_TEXTMEAS,
-					 //IDC_STATICSTATUSKOLMEAS,IDC_EDITSTATUSKOLMEAS,
-					 //IDC_STATICSTATUSBAZAMEAS,IDC_EDITSTATUSBAZAMEAS,
-					 //IDC_STATICSTATUSDOPMEAS,IDC_EDITSTATUSDOPMEAS,
-					 //IDC_STATICSTATUSRESULTMEAS,IDC_EDITSTATUSRESULTMEAS
-					};
-*/
-//static UINT aVid2[]={IDC_MARKER1,IDC_MARKER2,IDC_TANGENT};
 static UINT aVid2[]={IDC_MARKER1,IDC_MARKER2,IDC_TANGENT,//IDC_EDITDISPLAYMEAS,//IDC_EDITDISPLAYREF,
 					 IDC_STATIC_MARKER1,IDC_STATIC_NAME_MARKER1,//	
 					  IDC_STATIC_MARKER2,IDC_STATIC_NAME_MARKER2,//IDC_EDNSTEP,
 					  IDC_BUTTON_MARKER_RESET,//IDC_BUTTON_LEFT,IDC_BUTTON_RIGHT,
 					  IDC_STATIC_BUTTON_TANGENT,IDC_STATIC_BUTTON_TANGENT_ON,
 						IDC_STATIC_MARKER1_ON,IDC_STATIC_MARKER2_ON};
-/*
-//установка параметров дисплея
-static UINT aVid3[]={IDC_TABCTRLTUNING,IDC_STATICNOMIGSIGNAL,IDC_STATICZONATEXT};
 
-//отoбражение параметров ссылки
-static UINT aVid4[]={IDC_EDITDISPLAYREF//IDC_STATICIDC_LISTREF,
-					 //,IDC_STATICSTATUSREF,IDC_TEXTREF,
-					 //IDC_STATICZONASTATUSREF,IDC_EDITSTATUSREF,
-					 //IDC_STATICZONARESULTREF,IDC_EDITRESULTREF
-					};
-*/
 static UINT aVid5[]={IDC_EDITOTCHT};
 static UINT aVid6[]={IDC_LISTREF};
 
@@ -201,7 +172,6 @@ static UINT aPage0[]={IDC_STATIC_ELEMENT,IDC_COMBO_KOMMUTATOR,IDC_STATIC_VKL,//I
 					  IDC_STATICGNEZDO_C,IDC_STATICGNEZDO_B,IDC_STATICGNEZDO_S,IDC_STATICGNEZDO_E,	
 					  IDC_COMBO_GNEZDO_C,IDC_COMBO_GNEZDO_B,IDC_STATIC_GNEZDO_S,IDC_COMBO_GNEZDO_E,	
 					  IDC_STATICKNOT,
-//					  IDC_EDITKNOTKOL,IDC_EDITKNOTBAZA,IDC_EDITKNOTDOP,IDC_EDITKNOTEM,
 					  IDC_COMBOCHECKKOL,IDC_COMBOCHECKBAZA,IDC_COMBOCHECKDOP,//IDC_TEXTCOMBOCHECKEM,
 					  IDC_STATICMOD,IDC_COMBOMOD//,IDC_BUTTON_LOADTST
 					};
@@ -212,18 +182,10 @@ static UINT aElement_OFF[]={IDC_STATICBITMAP_DIOD,IDC_STATICBITMAP_RES,
 							IDC_STATICBITMAP_NPN4,IDC_STATICBITMAP_PNP4,
 							IDC_STATICBITMAP_NMOS4,IDC_STATICBITMAP_PMOS4};
 
-/*static UINT aElement_ON[]={IDC_STATICBITMAP_DIOD_ON,IDC_STATICBITMAP_RES_ON,
-							IDC_STATICBITMAP_NPN_ON,IDC_STATICBITMAP_PNP_ON,
-							IDC_STATICBITMAP_NMOS_ON,IDC_STATICBITMAP_PMOS_ON,							
-							IDC_STATICBITMAP_NPN4_ON,IDC_STATICBITMAP_PNP4_ON,
-							IDC_STATICBITMAP_NMOS4_ON,IDC_STATICBITMAP_PMOS4_ON};
-*/
 //недоступны для двухполюсников:
-//static UINT aPage0_bipolar2[]={IDC_EDITKNOTBAZA,IDC_EDITKNOTDOP,IDC_COMBOCHECKBAZA,IDC_COMBOCHECKDOP};
 static UINT aPage0_bipolar2[]={IDC_STATICGNEZDO_B,IDC_STATICGNEZDO_S,IDC_COMBOCHECKBAZA,IDC_COMBOCHECKDOP,
 								IDC_COMBO_GNEZDO_B,IDC_STATIC_GNEZDO_S};
 //недоступны для трёхполюсников:
-//static UINT aPage0_bipolar3[]={IDC_EDITKNOTDOP,IDC_COMBOCHECKDOP};
 static UINT aPage0_bipolar3[]={IDC_STATICGNEZDO_S,IDC_COMBOCHECKDOP,IDC_STATIC_GNEZDO_S};
 //недоступны если загрузка теста из дерева :
 static UINT aPage0_loadtst[]={IDC_BUTTON_LOADTST};//,IDC_STATICMOD,IDC_COMBOMOD
@@ -246,14 +208,6 @@ static UINT aPage1[]={IDC_STATICRAZV,IDC_STATICIMPPOSITIVE,IDC_STATICAC,IDC_STAT
 					  IDC_EDSLIDERKOLU,IDC_SLIDERKOLU,IDC_STATICICONDCPOS,IDC_STATICICONDCNEGATIVE,
 					  IDC_TEXTRANGMINKOLU,IDC_EDITLIMITKOLU,//,IDC_CHECKKOLREJHIGH,IDC_TEXTRANGMAXKOLU
 					  IDC_STATICSTOP,IDC_STATICSTART};//IDC_COMBONAKOPLENIE,
-//static UINT aImpTip[]={IDC_STATICIMPPOSITIVE,IDC_STATICIMPNEGATIVE};
-//static UINT aImpTip1[]={IDC_STATICIMP1POS,IDC_STATICIMP1NEG};
-//static UINT aImpPos[]={IDC_STATICTIPIMP,IDC_STATICTIPIMP1};
-//static UINT aImpNeg[]={IDC_STATICTIPIMPNEG,IDC_STATICTIPIMP1NEG};
-//доступны только для импульсных развёрток (TIP_IMP):
-//static UINT aImpuls[]={IDC_CHECKPAUZA,IDC_EDITDLITIMP};//IDC_STATICDLITPAUZA,,IDC_STATICIMP
-//static UINT aSynus[]={IDC_CHECKPAUZA};//IDC_STATICDLITPAUZA,
-//static UINT aRadioImp[]={IDC_RADIOTIPIMP,IDC_RADIOTIPIMP1};
 
 //закладка "База"
 //===========================
@@ -311,17 +265,6 @@ static UINT aTuningPage0[]  ={IDC_STATIC_NULL_LEFT,IDC_RADIO_LEFT,//IDC_STATIC_B
 							  IDC_CHECK_FAMILY,IDC_STATIC_ICON_FAMILY,
 							  IDC_CHECKKOLREJHIGH,IDC_STATIC_ICON_LUPA,
 								IDC_BUTTON_MARKER_RESET};//,
-/*							  IDC_STATIC_MARKER1,IDC_STATIC_TEXT_MARKER1,//
-							  IDC_STATIC_MARKER2,IDC_STATIC_TEXT_MARKER2,//IDC_EDNSTEP,
-							  IDC_BUTTON_MARKER_RESET,IDC_BUTTON_LEFT,IDC_BUTTON_RIGHT,
-							  IDC_STATIC_BUTTON_TANGENT,IDC_STATIC_TEXT_TANGENT//
-							};
-*/
-//static UINT aNULL_OFF[]     ={IDC_STATIC_BUT_OFF_LEFT,IDC_STATIC_BUT_OFF_CENTER,IDC_STATIC_BUT_OFF_RIGHT};
-//static UINT aNULL_ON[]      ={IDC_STATIC_BUT_ON_LEFT,IDC_STATIC_BUT_ON_CENTER,IDC_STATIC_BUT_ON_RIGHT};
-
-//static UINT aInversion_OFF[]={IDC_STATIC_BUT_INVERS_OFF,IDC_STATIC_INVERSY_OFF};
-//static UINT aInversion_ON[] ={IDC_STATIC_BUT_INVERS_ON,IDC_STATIC_INVERSY_ON};
 
 static UINT aMarker_OFF[]   ={IDC_STATIC,IDC_STATIC_MARKER1,IDC_STATIC_MARKER2};//
 static UINT aMarker_ON[]    ={IDC_STATIC,IDC_STATIC_MARKER1_ON,IDC_STATIC_MARKER2_ON};//
@@ -331,10 +274,6 @@ static UINT aTangent_ON[] ={IDC_STATIC_BUTTON_TANGENT_ON};
 
 //закладка "Маркеры"
 static UINT aTuningPage1[]={IDC_STATIC,
-							  //IDC_STATIC_MARKER1,IDC_STATIC_NAME_MARKER1,//
-//							  IDC_STATIC_MARKER2,IDC_STATIC_NAME_MARKER2,//IDC_EDNSTEP,
-//							  IDC_BUTTON_MARKER_RESET,IDC_BUTTON_LEFT,IDC_BUTTON_RIGHT,
-//							  IDC_STATIC_BUTTON_TANGENT,
 							  IDC_STATIC_FON//IDC_STATIC_TEXT_TANGENT,/
 							};
 
@@ -364,23 +303,8 @@ static UINT bmpEl[11]={IDC_STATICBITELEMENT_DIOD, IDC_STATICBITELEMENT_RES,
 					   IDC_STATICBITELEMENT_NMOS4,IDC_STATICBITELEMENT_PMOS4,
 					   IDC_STATICBITELEMENT_RES
 						};
-/*
-//Битмапы узлов (bmpKnot[элемент][узел])
-//--------------------------------------
-static UINT bmpKnot[10][4]={IDC_STATICBITKNOT_A, IDC_STATICBITKNOT_OFF, IDC_STATICBITKNOT_OFF, IDC_STATICBITKNOT_K,
-							IDC_STATICBITKNOT_A, IDC_STATICBITKNOT_OFF, IDC_STATICBITKNOT_OFF, IDC_STATICBITKNOT_B,
-							IDC_STATICBITKNOT_C, IDC_STATICBITKNOT_B,	IDC_STATICBITKNOT_OFF, IDC_STATICBITKNOT_E,
-							IDC_STATICBITKNOT_C, IDC_STATICBITKNOT_B,   IDC_STATICBITKNOT_OFF, IDC_STATICBITKNOT_E,
-						    IDC_STATICBITKNOT_D, IDC_STATICBITKNOT_G,   IDC_STATICBITKNOT_OFF, IDC_STATICBITKNOT_S,
-						    IDC_STATICBITKNOT_D, IDC_STATICBITKNOT_G,   IDC_STATICBITKNOT_OFF, IDC_STATICBITKNOT_S,
-							IDC_STATICBITKNOT_C, IDC_STATICBITKNOT_B,   IDC_STATICBITKNOT_S,   IDC_STATICBITKNOT_E,
-							IDC_STATICBITKNOT_C, IDC_STATICBITKNOT_B,   IDC_STATICBITKNOT_S,   IDC_STATICBITKNOT_E,
-							IDC_STATICBITKNOT_D, IDC_STATICBITKNOT_G,   IDC_STATICBITKNOT_B,   IDC_STATICBITKNOT_S,
-							IDC_STATICBITKNOT_D, IDC_STATICBITKNOT_G,   IDC_STATICBITKNOT_B,   IDC_STATICBITKNOT_S};
-*/
 //Битмапы режимов узлов(bmpRejKnot[узел][режим])
 //----------------------------------------------
-//static UINT bmpRejKnot[5][7]={IDC_STATICBIT_OFF, IDC_STATUS_KOL_OFF, IDC_STATUS_KOL_ON,  IDC_STATUS_KOL_BAZA, IDC_STATICBIT_OFF,      IDC_STATICBIT_OFF,	IDC_STATICBIT_OFF,
 static UINT bmpRejKnot[5][7]={IDC_STATICBIT_OFF, IDC_STATUS_KOL_OFF, IDC_STATUS_KOL_ON,  IDC_STATUS_KOL_BAZA, IDC_STATUS_KOL_OFF_BAZA,IDC_STATICBIT_OFF,	IDC_STATICBIT_OFF,
 							  IDC_STATICBIT_OFF, IDC_STATUS_BAZA_OFF,IDC_STATUS_BAZA_ON, IDC_STATUS_BAZA_KOL, IDC_STATUS_BAZA_EM,     IDC_STATUS_BAZA_EM,	IDC_STATICBIT_OFF,
 							  IDC_STATICBIT_OFF, IDC_STATUS_DOP_OFF, IDC_STATUS_DOP_ON,  IDC_STATUS_DOP_EM,   IDC_STATICBIT_OFF,      IDC_STATICBIT_OFF,	IDC_STATICBIT_OFF,
@@ -404,23 +328,18 @@ static UINT aIconRejimChanelC[]={
 //Битмапы схемы включения
 //-----------------------
 static UINT aBmpCircuit_Off[]={
-//					   IDC_STATICBITKNOT_OFF,IDC_STATICBIT_OFF,
 					   IDC_STATICBIT_OFF,IDC_STATICBIT_OFF,
 					   IDC_STATICBITELEMENT_DIOD, IDC_STATICBITELEMENT_RES,
 					   IDC_STATICBITELEMENT_NPN,  IDC_STATICBITELEMENT_PNP,
 					   IDC_STATICBITELEMENT_NMOS, IDC_STATICBITELEMENT_PMOS,
 					   IDC_STATICBITELEMENT_NPN4, IDC_STATICBITELEMENT_PNP4,
 					   IDC_STATICBITELEMENT_NMOS4,IDC_STATICBITELEMENT_PMOS4,
-//					   IDC_STATICBITKNOT_A,IDC_STATICBITKNOT_B,IDC_STATICBITKNOT_C,IDC_STATICBITKNOT_D,
 					   IDC_STATICBITKNOT_E,//IDC_STATICBITEM_COMMON,
-//					   IDC_STATICBITKNOT_G,IDC_STATICBITKNOT_K,IDC_STATICBITKNOT_S,
 					   IDC_STATUS_KOL_OFF,IDC_STATUS_KOL_ON,IDC_STATUS_KOL_BAZA,IDC_STATUS_KOL_OFF_BAZA,
 					   IDC_STATUS_BAZA_OFF,IDC_STATUS_BAZA_ON,IDC_STATUS_BAZA_KOL,IDC_STATUS_BAZA_EM,
 					   IDC_STATUS_DOP_OFF,IDC_STATUS_DOP_ON,IDC_STATUS_DOP_EM,IDC_STATUS_EM_OFF, 
 					   IDC_STATUS_EM_ON,IDC_STATUS_EM_BAZA,IDC_STATUS_EM_DOP,IDC_STATUS_EM_BAZA_DOP,IDC_STATUS_EM1KOM_BAZA,IDC_STATUS_BAZA_EM1KOM_DOP,
 					   IDC_STATUS_GATE_EM,IDC_STATUS_GATE_OFF,IDC_STATUS_GATE_ON, IDC_STATUS_GATE_KOL};//,
-//					   IDC_STATICBIT_B_K,IDC_STATICBIT_B_E,IDC_STATICBIT_B_E1KOM,IDC_STATICBIT_D_E};//IDC_STATICBITMAPCIRCUIT,
-//static UINT aBmpCircuit_On[]={IDB_BITMAPCIRCUIT};
 //Массив значений диапазонов измерителя U (коллектор)
 //----------------------------------------------------
 CString mas_rangeKolMeasU[]={_T("5.0kV"),_T("2.0kV"),_T("1.0kV"),
@@ -435,7 +354,6 @@ double mas_d_rangeKolMeasU[]={5000.0,2000.0,1000.0,
 //Массив значений диапазонов измерителя I (коллектор)
 //----------------------------------------------------
 
-//CString mas_rangeKolMeasI[]={_T("200A"), _T("100A"),  _T("50A"),  _T("20A"),    
 CString mas_rangeKolMeasI[]={_T("50A"),  _T("20A"),   _T("10A"),  _T("5A"),    
 							 _T("50A"),  _T("20A"),   _T("10A"),  _T("5A"),    _T("2A"),   _T("1A"),   _T("500mA"),
 							 _T("200mA"),_T("100mA"), _T("50mA"), _T("20mA"),  _T("10mA"), _T("5mA"),
@@ -444,7 +362,6 @@ CString mas_rangeKolMeasI[]={_T("50A"),  _T("20A"),   _T("10A"),  _T("5A"),
 							 _T("200nA"),_T("100nA"), _T("50nA"), _T("20nA"),  _T("10nA")};//, _T("5nA"),
 							 //_T("2nA"),  _T("1nA")};
 
-//double mas_d_rangeKolMeasI[]={200.000000000,100.000000000,50.000000000,20.000000000,
 double mas_d_rangeKolMeasI[]={ 50.000000000, 20.000000000,10.000000000, 5.000000000,
 							   50.000000000, 20.000000000,10.000000000, 5.000000000, 2.000000000, 1.000000000, 0.500000000,
 							    0.200000000,  0.100000000, 0.050000000, 0.020000000, 0.010000000, 0.005000000,
@@ -452,27 +369,7 @@ double mas_d_rangeKolMeasI[]={ 50.000000000, 20.000000000,10.000000000, 5.000000
 							    0.000020000,  0.000010000, 0.000005000, 0.000002000, 0.000001000, 0.000000500,
 							    0.000000200,  0.000000100, 0.000000050, 0.000000020, 0.000000010, 0.000000005,
 							    0.000000002,  0.000000001};
-/*
-//Массив конечных значений диапазонов измерителя I (коллектор)
-//-----------------------------------------------------------
-double  mas_rangeMaxKolMeasI[]={220.000000000,110.000000000,55.000000000,22.000000000,
-							   55.000000000, 22.000000000,11.000000000, 5.500000000, 2.200000000, 1.100000000, 0.550000000,
-							    0.220000000,  0.110000000, 0.055000000, 0.022000000, 0.011000000, 0.005500000,
-							    0.002200000,  0.001100000, 0.000550000, 0.000220000, 0.000110000, 0.000055000,
-							    0.000022000,  0.000011000, 0.000005500, 0.000002200, 0.000001100, 0.000000550,
-							    0.000000220,  0.000000110, 0.000000055, 0.000000022, 0.000000011, 0.0000000055,
-							    0.0000000022,  0.0000000011};
 
-//Массив максимумов диапазонов измерителя I (коллектор)
-//-----------------------------------------------------------
-CString mas_RangMaxKolMeasI[]={_T("220A"), _T("110A"),  _T("55A"),  _T("22A"),    
-							   _T("55A"),  _T("22A"),   _T("11A"),  _T("5.5A"), _T("2.2A"), _T("1.1A"), _T("550mA"),
-							   _T("220mA"),_T("110mA"), _T("55mA"), _T("22mA"), _T("11mA"), _T("5.5mA"),
-							   _T("2.2mA"),_T("1.1mA"), _T("550uA"),_T("220uA"),_T("110uA"),_T("55uA"),
-							   _T("22uA"), _T("11uA"),  _T("5.5uA"),_T("2.2uA"),_T("1.1uA"),_T("550nA"),
-							   _T("220nA"),_T("110nA"), _T("55nA"), _T("22nA"), _T("11nA"), _T("5.5nA"),
-							   _T("2.2nA"),_T("1.1nA")};
-*/
 //Массив значений диапазонов источника U (коллектор)
 //----------------------------------------------------
 CString mas_rangeKolSourceU[]={_T("5V"),_T("20V"),_T("100V"),_T("500V"),_T("2000V")};//_T("3000V")};
@@ -483,28 +380,22 @@ double mas_d_rangeKolSourceU[]={5.0,20.0,100.0,500.0,2000.0};//3000.0};
 //---------------------------------------------------------
 CString  mas_range_ampl_bazadop_U[]={_T("  2 V"),_T("  1 V "),_T("500 mV"),//_T("0.5 V"),
 									 _T("200 mV"),_T("100 mV"), _T("50 mV")};//_T("0.2 V"),_T("0.1 V"),
-//									 _T("20 mV"),_T("10 mV"), _T(" 5 mV")};
 double mas_d_range_ampl_bazadop_U[]={2.000000000,1.000000000,0.500000000,
 									 0.200000000,0.100000000,0.050000000};//,
-//									 0.020000000,0.010000000,0.005000000};
 //Массив значений смещения ступеньки источника U (база, доп. канал)
 //---------------------------------------------------------
 CString  mas_range_bias_bazadop_U[]={_T("  20 V"),_T("  10 V"),_T("   5 V"),
 									 _T("   2 V"),_T("   1 V"),_T(" 0.5 V")};//,
-//									 _T("200 mV"),_T("100 mV"),_T(" 50 mV")};
 double mas_d_range_bias_bazadop_U[]={20.00000000,10.00000000,5.000000000,
 									 2.000000000,1.000000000,0.500000000};//,
-//									 0.200000000,0.100000000,0.050000000};
 
 //Массив значений диапазонов измерителя U (база, доп. канал)
 //---------------------------------------------------------
 CString  mas_range_meas_bazadop_U[]  ={_T(" 40 V"),_T(" 20 V"),_T(" 10 V"),
 									   _T("  4 V"),_T("  2 V"),_T("  1 V")};//,
-//									   _T("400 mV"),_T("200 mV"),_T("100 mV")};
 
 double mas_d_range_meas_bazadop_U[]  ={40.00000000,20.00000000,10.00000000,
 										4.000000000,2.000000000,1.000000000};//,
-//									   0.400000000,0.200000000,0.100000000};
 
 //Массив значений диапазонов источника/измерителя I (база, доп. канал)
 //---------------------------------------------------------------------
@@ -578,20 +469,7 @@ double koef_kol_U[]  = {0.223,
 						0.00892,0.00446,0.00223,
 						0.000892,0.000446,0.000223,
 						0.0000892,0.0000446,0.0000223};
-/*
-double koef_kol_I[]  = {0.00180,0.00072,0.00036,0.00018,
-						0.00180,0.00072,0.00036,0.00018,
-						0.000072,0.000036,0.000018,
-						0.0000072,0.0000036,0.0000018,
-						0.00000072,0.00000036,0.00000018,
-						0.000000072,0.000000036,0.000000018,
-						0.0000000072,0.0000000036,0.0000000018,
-						0.00000000072,0.00000000036,0.00000000018,
-						0.000000000072,0.000000000036,0.000000000018,
-						0.0000000000072,0.0000000000036,0.0000000000018,
-						0.00000000000072,0.00000000000036,0.00000000000018,
-						1.0,1.0};
-*/
+
 double koef_kol_I[]  = {0.00220,0.00088,0.00044,0.00022,
 						0.00220,0.00088,0.00044,0.00022,
 						0.000088,0.000044,0.000022,
@@ -651,8 +529,6 @@ int		n_Switch		= 0;				//0 - переключатель в положении 2000V
 											//2 - переключатель в положении -5V
 											//3 - переключатель в нейтральном положении
 											//4 - переключатель неисправлен
-//int		Switch_temp     = 0;
-//int		Switch_old      = 0;
 
 UINT	m_udlitpauza;				//0 - скважность х 2 выкл, 1 - вкл.
 int     m_iKnotBaza=1;				//0 - узел элемента не подключен (внешняя коммутация)
@@ -672,9 +548,6 @@ int		n_IPPP			= 1;    			//модификация ИППП:
 											//1 - с переключателем (макс.ток 200А) (Характериограф и ИППП-3/1)
 BYTE	nominal			= 184;				//номинальное значение кода сети (1 байт) 
 											//общее для всех диапазонов
-//int	    V_[]			= {4090,4090,4090,4090,4090};	  //максимальный код ЦАПа Da 
-													      //для каждого диапазона (5 диапазонов)
-//int	    V_[]		= {3700,3774,3774,3800,3885,3885};//максимальный код ЦАПа Da 
 														  //в зависимости от длит.импульса 
 BYTE	Nz_max			= 180;//130;//145;	//максимальный код ЦАПа Dz (1 байт)
 BYTE	Nz_min			= 4;				//минимальный код ЦАПа Dz (1 байт)
@@ -682,19 +555,15 @@ BYTE	mas_Nz_max[]    = {180,90,90,90,90,90,180};//массив максимальных кодов ЦАПа
 											       //в зависимости от длит.импульса 
 
 CString	mas_dlit_imp[]  = {_T("10 ms"),_T("2 ms"),_T("1 ms"),_T("0.5 ms"),_T("0.2 ms"),_T("0.2 ms"),_T("10 ms")};//ИППП-3
-//CString mas_dlit_imp[]= {_T(""),_T("2 ms"),_T("1 ms"),_T("0.5 ms"),_T("0.2 ms"),_T("0.1 ms"),_T("0.05 ms")};//Характериограф
 
 //число точек результата (в зависимости от длительности импульса)
 int		mas_n_points[]  = {200,28,14,8,5,5,200}; //ИППП-3										
-//int	mas_n_points[]  = {200,28,14,8,5,3,2}; //Характериограф										
 
 UINT	n_Mas = 1;					//число массивов (импульсов) на одном цикле измерения
 int     n_t = 1;					//№ точки в конце импульса, которую берём в расчёт (1=>последнюю)
 
 //Массив длительностей скважности (mas_dlit_pauza[индекс длительности импульса])
 //------------------------------------------------------------------------------
-//UINT      mas_dlit_pauza[]={400,200,80,40,7};
-//int		mas_n_nakoplenie[] = {1,4,16}; //число накоплений в DC - однократном
 
 //Калибровочные коэффициенты Коллектор (U - 13 диапазонов, I - 34 диапазонa)
 //===========================================================================
@@ -814,7 +683,6 @@ double KMDI[]=  {1.0,1.0,
 				 1.0,1.0,1.0,
 				 1.0,1.0,1.0};//,1.0,1.0,1.0};  
 
-//mas_cifra_axes[m_iButNull][m_iS];
 CString mas_cifra_axes_X[3][3]={_T(" 0.0       0.1       0.2       0.3       0.4     0.5      0.6       0.7       0.8       0.9       1.0  "),
 								_T(" 0.0       0.25     0.5      0.75     1.0      1.25     1.5      1.75      2.0       2.25      2.5    "),
 								_T(" 0.0       0.5      1.0      1.5       2.0      2.5      3.0       3.5       4.0       4.5       5.0   "),
@@ -845,19 +713,7 @@ double  cifra_axes[3][3][2]={0.0,1.0,
 							-2.0,0.0,
 							-5.0,0.0};
 
-/*double  cifra_axes[3][3][2]={0.0,1.0,
-							 0.0,2.5,
-							 0.0,5.0,
-							-1.0,1.0,
-							-2.5,2.5,
-							-5.0,5.0,
-							-1.0,0.0,
-							-2.5,0.0,
-							-5.0,0.0};
-*/
   double  big_tick[3][3] = {0.1,0.2,0.5,0.2,0.4,1.0,0.1,0.2,0.5};
-//double  big_tick[3][3] = {0.1,0.25,0.5,0.2,0.5,1.0,0.1,0.25,0.5};
-//int   small_tick[3][3] = {4,4,4,0.2,0.5,1.0,0.1,0.25,0.5};
 
 double  X_axis[NREZ];			//массив координат по Х (if по X - не Uc)
 double  Y_axis[NREZ];			//массив координат по Y (if по Y - не Ic и не Uc)
@@ -886,7 +742,6 @@ CRect	RectInfoTest;		//зона-info
 CRect	RectEdDate;
 CRect   RectEdTime;	
 CRect	RectEdFile;
-//CRect	RectEdModel;
 CRect	RectEdInfo;
 CRect	RectMigSignal;
 CRect	RectEdInfoMeas;
@@ -968,10 +823,6 @@ CRect   RectBitKol;
 CRect   RectBitBaza;
 CRect   RectBitDop;
 CRect   RectBitEm;
-//CRect   RectBitBazaKol;
-//CRect   RectBitBazaEm;
-//CRect   RectBitEmCommon;
-//CRect	RectBitAng;
 							//закладка "Коллектор"
 CRect	RectRazv;			//Развёртка
 CRect	RectRazvRadImpPos;
@@ -991,7 +842,6 @@ CRect	RectIconImpNeg;
 CRect   RectStatImp;		//Импульс
 CRect   RectStatDlitPauza;
 CRect	RectDlitImp;
-//CRect	RectDlitPauza;
 CRect	RectPeriod;
 CRect	RectNakoplenie;
 CRect   RectKolMeas;		//Измеритель
@@ -1005,7 +855,6 @@ CRect	RectKolSourU;
 CRect	RectLimit;			//Ограничение
 CRect   RectTextSliderKolU;
 CRect	RectSliderKolU;
-//CRect	RectTextRangMinKolU;
 CRect   RectTextStop;
 CRect   RectTextStart;
 CRect	RectTextRangMaxKolU;
@@ -1017,8 +866,6 @@ CRect	RectTextRangMaxKolI;
 CRect   RectEditSliderKolI;
 CRect	RectKolRejHigh;		//Высокое разрешение по коллектору
 CRect   RectIconLupa;
-//CRect	RectTipImp;
-//CRect	RectTipImp1;
 CRect	RectIconTipImp;
 CRect	RectIconTipImp1;
 							//закладка "База"
@@ -1037,7 +884,6 @@ CRect	RectBazaRejHigh;
 CRect	RectTextPolarityStep;
 CRect	RectComboPolarityStep;
 CRect	RectTextBazaBias;
-//CRect	RectTextRangBazaBias;
 CRect	RectRangBazaBias;
 CRect	RectSliderBazaBias;
 CRect	RectMinBazaBias;
@@ -1046,8 +892,6 @@ CRect	RectEditBazaBias;
 CRect	RectTextPolarityBias;
 CRect	RectComboPolarityBazaBias;
 CRect	RectEditMeasBaza;
-//CRect	RectRadioMeasBazaU;
-//CRect	RectRadioMeasBazaI;
 CRect	RectTextLimitBaza;
 CRect	RectTextRangLimitBaza;
 CRect	RectComboBazaSourceUI;
@@ -1068,7 +912,6 @@ CRect	RectSpinStepDop;
 CRect	RectTextPolarityStepDop;
 CRect	RectComboPolarityStepDop;
 CRect	RectTextDopBias;
-//CRect	RectTextRangDopBias;
 CRect	RectRangDopBias;
 CRect	RectSliderDopBias;
 CRect	RectMinDopBias;
@@ -1077,8 +920,6 @@ CRect	RectEditDopBias;
 CRect	RectTextPolarityBiasDop;
 CRect	RectComboPolarityDopBias;
 CRect	RectEditMeasDop;
-//CRect	RectRadioMeasDopU;
-//CRect	RectRadioMeasDopI;
 CRect	RectTextLimitDop;
 CRect	RectTextRangLimitDop;
 CRect	RectComboDopSourceUI;
@@ -1128,17 +969,12 @@ CRect	RectTabTuning;		//зона управления дисплеем и памятью
 CRect	RectButtonLeft;		//координата (0,0)
 CRect	RectButtonCenter;
 CRect	RectButtonRight;
-//CRgn	RgnButtonLeft;
-//CRgn	RgnButtonCenter;
-//CRgn	RgnButtonRight;
 CRect	RectIconLeft;
 CRect	RectIconCenter;
 CRect	RectIconRight;
 CRect	RectButtonInversion;
-//CRgn	RgnButtonInversion;
 CRect	RectIconInversion;
 CRect	RectButtonInversionY;
-//CRgn	RgnButtonInversionY;
 CRect	RectIconInversionY;
 CRect	RectDisplayRef;
 CRect	RectFon;
@@ -1155,7 +991,6 @@ CRect	RectButtonMarker2;
 CRect	RectTextMarker1;
 CRect	RectTextMarker2;
 CRect	RectButtonTangent;
-//CRect	RectTextTangent;
 CRgn	RgnButtonMarker1;
 CRgn	RgnButtonMarker2;
 CRgn	RgnButtonTangent;
@@ -1165,8 +1000,6 @@ CRect	RectTangent;
 
 CRgn	RgnExit;
 CRect	RectExit;
-
-//CRect	RectNStep;
 
 CRect	RectListRef;		//Архив		
 CRect	RectProgressProcess;	
@@ -1183,7 +1016,6 @@ BOOL	nCheckOtcht    = 0;			//0-окно отчёта отсутствует на экране, 1-отобразить о
 BOOL    bStateOtcht    = stateMin;	//0-окно отчёта минимизировано, 1-развёрнут;
 BOOL	bStateListRef  = false;		//0-окно архива эталонных файлов графиков отсутствует на экране
 BOOL	nCheckParam	   = 0;			//0-маркеры не активны, 1-маркеры активны
-//BOOL	nCheckRef      = 0;			//0-панель управления дисплеем, 1-панель отображения параметров ссылки
 
 BOOL	res_gotov	   = false;		//1-в режиме DC многократный произошла смена ступеньки в первой очереди 
 									//(пришла команда  5 от Pic-a)
@@ -1206,8 +1038,6 @@ CString	strPassTstStandart = _T("\\Hard Disk\\Tst_standart\\");	//файлы *.tst ст
 CString	strPassOtch		= _T("\\Hard Disk\\Txt\\");			//Файлы отчетов
 CString nameXLS         = _T("\\Hard Disk\\FTPRoot\\Xls\\Untitled.xls");	//Файл таблиц результатов при автосохранении
 CString nameOtch        = _T("\\Hard Disk\\FTPRoot\\Txt\\Untitled.txt");	//Файл отчета при автосохранении
-//CString nameXLS         = _T("\\Hard Disk\\Cosmos\\Xls\\Untitled.xls");	//Файл таблиц результатов при автосохранении
-//CString	nameOtch        = _T("\\Hard Disk\\Cosmos\\Txt\\Untitled.txt");	//Файл отчета при автосохранении
 
 CString		  strDateCurrent;
 
@@ -1227,7 +1057,6 @@ UINT	    i_TIP=0;					//тип проводимости (канала) (D или R_C, NPN или PNP, NMOS 
 UINT		i_VID=0;					//вид элемента (2-хполюсные: D или R, 3-х,4-xполюсные: биполярный или полевой (МОП и т.п.)
 UINT    	uPrecigion = 1;				//разрешение
 UINT		uNpointsLupa = 20;//50;//			//число точек на графике в режиме IMP и DC (м. б. 20 или 50)
-//UINT		uNpointsLupaOld = 50;//20;		//число точек на графике в режиме IMP и DC (м. б. 20 или 50)
 UINT		uNpointsLupaDC = 20;//50;//20;		//число точек на графике в режиме IMP и DC (м. б. 20 или 50)
 
 UINT		uFileNumber = 0;			//номер файла для автоматического сохранения таблицы результатов (*_n.xls)
@@ -1284,19 +1113,12 @@ BYTE K19[2] = {19,0};					// Команда "Режим источника в доп.канале"
 BYTE K20[2] = {20,4};					// Команда "Диапазон амплитуды ступени в доп.канале"
 BYTE K21[2] = {21,0};					// Команда "Число ступеней в доп.канале"
 BYTE K22[3] = {22,0x00,0x00};			// Команда "Значение амплитуды ступени в доп.канале"
-//BYTE K23[2] = {23,0x00};				// Резерв
 BYTE K24[3] = {24,0x00,0x00};			// Команда "Смещение в доп.канале"
 BYTE K25[2] = {25,1};					// Команда "Режим измерителя в доп.канале"
 BYTE K26[2] = {26,0};					// Команда "Диапазон измерителя доп.канала"
 BYTE K27[2] = {27,22};					// Команда "Диапазон ограничения в доп.канале"
 BYTE K28[3] = {28,0x00,0x00};			// Команда "Порог ограничения измерителя в доп.канале"
 BYTE K29[13] = {29,0x00,0x00};			// Команда "Данные настройки"
-//				 ,0x00,0x00,
-//				  0x00,0x00,
-//				  0x00,0x00,
-//				  0x00,0x00,
-//				  0x00,0x00};//,
-//				  0x00,0x00};			// 3 байта	//пока 13 байт	//15
 
 BYTE K30[2] = {30,50};					// Команда "Число снимаемых точек (массивов рез.-тов в DC и IMP)"
 BYTE K31[1] = {31};//,0};				// Команда "Вкл. режим автоустановки нуля" или "режим Калибровки"
@@ -1314,8 +1136,6 @@ BYTE K39[2] = {39,0};					// резерв (пока)
 BYTE K40[2] = {40,0};					// Биполярный тр-р + импульс (генератор ступенек - I) (0 - нет, 1-да)
 BYTE K41[1] = {41};						// Команда "Измерить"
 
-//int nK[41] = {4,3,2,2,2,2,2,2,2,2,2,3,2,3,2,2,2,3,2,2,2,3,2,3,2,2,2,3,15,2,2,2,2,3,2,2,2,1,2,2,1};
-//int nK[41] =   {4,3,3,2,2,2,2,2,2,2,2,3,1,3,2,2,2,3,2,2,2,3,2,3,2,2,2,3,13,2,1,2,2,3,2,2,2,1,2,2,1};
 int nK[41] =   {4,3,3,2,2,2,2,2,2,2,2,3,1,3,2,2,2,3,2,2,2,3,2,3,2,2,2,3,3,2,1,2,2,3,2,2,2,1,2,2,1};
 
 //команды для калибровки
@@ -1344,10 +1164,7 @@ BYTE mas_KalibrIc_5A[]    = {31,35,1,34,0,0,1,1,1,0,2,1,0,3,0,0,	//условие 2
 BYTE mas_KalibrIc_50A[]   = {//31,35,1,34,0,0,1,1,0,0,2,0,1,3,4,0,	//условие 3
 							   31,35,1,34,0,0,1,1,0,0,2,0,0,3,4,0,	//условие 3
 							   30,20,37,0,40,0,36,180};
-/*BYTE mas_KalibrIc_200A[]  = {//31,35,1,34,0,0,1,1,0,0,2,0,1,3,4,0,	//условие 4
-							   31,35,1,34,0,0,1,1,0,0,2,0,0,3,4,0,	//условие 4
-							   30,20,37,0,36,180};
-*/
+
 //массив значений диапазонов Uc (по табл. 5.3 ТУ) в зависимости от калибруемого диапазона Ic 
 int  mas_range_meas_Uc[]  = {9,10,11,9,	//50A, 20A, 10A, 5A на 5V
 							 12,10,11,9};	//50A, 20A, 10A, 5A на 2000V 
@@ -1375,12 +1192,6 @@ BYTE mas_ControlAutoSetupIcm[] ={//31,35,1,34,0,0,1,1,0,0,2,0,1,3,4,0,	//IMP
 BYTE mas_ControlAutoSetupIcm_[] ={//31,35,1,34,0,0,1,1,0,0,2,4,1,3,4,0,	//-IMP
 								    31,35,1,34,0,0,1,1,0,0,2,6,0,3,4,0,	//-IMP
 									30,20,37,0,36,90,40,0};
-/*
-BYTE mas_ControlAutoSetupIcm_10nA[] ={31,35,1,34,0,0,1,1,0,0,2,1,0,3,4,0,	//DC
-									30,20,37,0,36,180};
-BYTE mas_ControlAutoSetupIcm_10nA_[] ={31,35,1,34,0,0,1,1,0,0,2,5,0,3,4,0,	//-DC
-									30,20,37,0,36,180};
-*/
 BYTE mas_AutoSetupIcm_200A[]   ={//31,35,1,34,0,0,1,1,0,0,2,0,1,3,4,0,	//IMP,  
 								   31,35,1,34,0,0,1,1,0,0,2,0,0,3,4,0,	//IMP,  
 								   30,20,37,0,36,180};
@@ -1519,7 +1330,6 @@ double pY[2000];
 CLineDlg::CLineDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CLineDlg::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CLineDlg)
 	m_sInfoMeas = _T("");
 	m_sInfoSignal = _T("");
 	m_sKnotKol = _T("");
@@ -1588,7 +1398,7 @@ CLineDlg::CLineDlg(CWnd* pParent /*=NULL*/)
 	m_sStupN = _T("на ступеньке № 0");
 	m_nelement = 2;//-1;
 	m_iQue1 = COLLECTOR;
-	//}}AFX_DATA_INIT
+
 	// Note that LoadIcon does not require a subsequent DestroyIcon in Win32
 	m_pSaveOtchDlg = NULL;
 
@@ -1614,7 +1424,6 @@ CLineDlg::CLineDlg(CWnd* pParent /*=NULL*/)
 					//ступеньки и m_uTp = 1 (одна ветка, соответствующая уровню последней ступеньки)
 	
 		
-//	m_ColorTable=(BYTE*)HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,100);
 	m_colorFon		  = RGB(240,240,240);
 	m_colorBMP  	  = RGB(255,255,0);
 	m_colorSetka      = RGB(0,0,0);//150,150,150);
@@ -1623,9 +1432,6 @@ CLineDlg::CLineDlg(CWnd* pParent /*=NULL*/)
 	m_colorCurve	  = RGB(0,0,255);
 	m_colorRef   	  = RGB(255,0,0);
 
-//	pX =(double*)HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,2200);
-//	pY =(double*)HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,2200);
-	
 	array_error.RemoveAll();
 	array_otcht.RemoveAll();
 	array_ref.RemoveAll();
@@ -1648,8 +1454,6 @@ CLineDlg::CLineDlg(CWnd* pParent /*=NULL*/)
  
 	pModSelected = NULL;
     pModBuf      = new CMod;//NULL;
-
-//	m_pTreeDlg = NULL;
 
 	HICON hIcon[3];
 	int n;
@@ -1677,13 +1481,11 @@ CLineDlg::CLineDlg(CWnd* pParent /*=NULL*/)
 	m_nCountMas   = 0;      // счётчик числа принятых массивов результатов
 	m_nMas		  = 2;      // число массивов, которое необходимо принять (зависит от вида развёртки)
 							// =2 - для AC, =1 - для остальных
-//	m_uBitQ18     = 0;		// состояние бита Q18 
 	index		  = 1;		// индекс выбранного теста в предлагаемом списке тестов
 	i_SelUrov     = 0;		// выделенный уровень:0-нет,1-элемент,2-тест
     i_EL	      = 0;		// текущий номер тестового элемента
     i_MOD		  = 0;		// текущий номер теста
 	m_idlitimp    = 0;
-//	m_irejimp  =0;			// режим 1 или 2 выбора Dz max
 	m_udlitpauza = 0;
 
 	m_EL		  = _T("NPN");
@@ -1843,9 +1645,6 @@ CLineDlg::CLineDlg(CWnd* pParent /*=NULL*/)
 	ClearResults();
 	ResetResults();
 	FlagOLClear();
-//	for (i=0; i<NREF; i++)
-//		m_pDataFileRef[i] = new ITEMDATA;
-
 }
 
 void CLineDlg::DoDataExchange(CDataExchange* pDX)
@@ -2097,8 +1896,6 @@ BEGIN_MESSAGE_MAP(CLineDlg, CDialog)
 	ON_EN_KILLFOCUS(IDC_EDITMAX, OnKillfocusEditmax)
 	ON_COMMAND(ID_DIFFERENCE_VAX, OnDifferenceVax)
 	ON_EN_KILLFOCUS(IDC_EDITSTEPBAZA, OnKillfocusEditstepbaza)
-	//}}AFX_MSG_MAP
-//	ON_COMMAND(IDC_TREE1,OnSelchangedTree)
 	ON_COMMAND(ID_ENDLABELEDIT,OnEndLabelEdit)
 	ON_MESSAGE(WM_BUTTON, OnButton)
 	ON_MESSAGE(WM_RESPONSE, OnResponse)
@@ -2122,10 +1919,6 @@ BOOL CLineDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 	
 	CenterWindow(GetDesktopWindow());	// center to the hpc screen
-
-	// TODO: Add extra initialization here
- 
-//	_outp(0x378+2,0x23);	//D5<-1 , D0<-1, D2<-0, D3<-1 программный сброс D3<-1//@@@
 
 	BOOL b = GetPassWordLine();
 	b = GetKoefPsw();
@@ -2162,13 +1955,8 @@ BOOL CLineDlg::OnInitDialog()
 //Cоздание образа виртуального окна графика
 //=========================================
 	CClientDC dc(this);	
-/*	MemDC.CreateCompatibleDC(&dc);
-	m_bmpWndGraf.CreateCompatibleBitmap(&dc,Width,Height);
-	MemDC.SelectObject(&m_bmpWndGraf);
-	MemDC.FillRect(m_RectWndGraf,&brFon);	
-*/
+
 	brFon.CreateSolidBrush(m_colorFon);
-//	SetVidMemDC();
 
 	m_penSetka_DASH.CreatePen(PS_DASH,1,m_colorSetka);  
 	m_penSetka_SOLID.CreatePen(PS_SOLID,1,m_colorSetka);   
@@ -2178,7 +1966,7 @@ BOOL CLineDlg::OnInitDialog()
 	m_penRef.CreatePen(PS_SOLID,1,m_colorRef);
 
 	//Панель "Виртуальные кнопки"
-//============================
+    //============================
 	RectButtons.left=RectWnd.left;
 	RectButtons.top=RectWnd.bottom-dh;//+3;
 	RectButtons.right=RectWnd.right-dw-3;//13;
@@ -2411,7 +2199,6 @@ BOOL CLineDlg::OnInitDialog()
 	RectPicFreeMemory.top=RectTree.bottom+12;//10;//+8;
 	RectPicFreeMemory.right=RectPicFreeMemory.left+22;
 	RectPicFreeMemory.bottom=RectPicFreeMemory.top+22;
-//	ScreenToClient(&RectProgressFreeMemory);
 	ScreenToClient(&RectPicFreeMemory);
     pSt = (CStatic*)GetDlgItem(IDC_STATIC_MEMORY);
 	pSt->MoveWindow(&RectPicFreeMemory);
@@ -2437,18 +2224,6 @@ BOOL CLineDlg::OnInitDialog()
     pSt = (CStatic*)GetDlgItem(IDC_ST_FREEMEMORY);
 	pSt->MoveWindow(&RectTextFreeMemory);
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2
-/*
-	return true;
-	}
-	CLineDlg::InitDialog()
-	{
-int m=5;
-int l=95;
-int dh=44;
-int dw= 256;
-	CStatic* pSt;
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-*/	
 	m_progress_flash.SetRange(0,100);//100-free_space);
 	m_progress_flash.SetPos(0);//100-free_space);
 
@@ -2463,7 +2238,6 @@ int dw= 256;
 	RectPanel.bottom=RectPanel.top+3*(RectWnd.bottom/4);
 	//"окнo текущей информации"
 	//=========================
-//	GetDlgItem(IDC_STATICINFOTEST)->GetWindowRect(&RectInfoTest);
 	RectInfoTest.left=RectWnd.left;//+2;
 	RectInfoTest.top=RectWnd.top+1;//+2;
 	RectInfoTest.right=RectPanel.left;//+1;//RectWnd.right-2;
@@ -2561,8 +2335,7 @@ int dw= 256;
 	RectBitmapDiod.bottom=RectBitmapDiod.top+41;//35;//25;
 	RgnDiod.CreateRectRgnIndirect(&RectBitmapDiod);
 
-/*	GetDlgItem(IDC_BUTTON_DIOD)->GetWindowRect(&RectRadioDiod);
-*/	RectRadioDiod.left=RectBitmapDiod.left;//-2;//+6;//-t/2;//-2;//;
+	RectRadioDiod.left=RectBitmapDiod.left;//-2;//+6;//-t/2;//-2;//;
 	RectRadioDiod.top=RectBitmapDiod.bottom+4;//5;//9;
 	RectRadioDiod.right=RectRadioDiod.left+32;
 	RectRadioDiod.bottom=RectRadioDiod.top+7;//-4;
@@ -2574,22 +2347,19 @@ int dw= 256;
 	RectBitmapRes.bottom=RectBitmapRes.top+41;//35;
 	RgnRes.CreateRectRgnIndirect(&RectBitmapRes);
 
-/*	GetDlgItem(IDC_BUTTON_RES)->GetWindowRect(&RectRadioRes);
-*/	RectRadioRes.left=RectBitmapRes.left;//-2;//+6;//-t/2;//-2;//-3;
+	RectRadioRes.left=RectBitmapRes.left;//-2;//+6;//-t/2;//-2;//-3;
 	RectRadioRes.top=RectBitmapRes.bottom+4;//5;//9;
 	RectRadioRes.right=RectRadioRes.left+32;
 	RectRadioRes.bottom=RectRadioRes.top+7;//-4;
 
 	GetDlgItem(IDC_STATICBITMAP_NPN)->GetWindowRect(&RectBitmapNpn);
 	RectBitmapNpn.left=RectBitmapDiod.left;
-//	RectBitmapNpn.top=RectRadioDiod.bottom+h/6-2;//14;//6;//18;//20;//18;
 	RectBitmapNpn.top=RectBitmapDiod.bottom+h/6+6;//-2;//14;//6;//18;//20;//18;
 	RectBitmapNpn.right=RectBitmapNpn.left+32;//25;
 	RectBitmapNpn.bottom=RectBitmapNpn.top+41;//35;
 	RgnNpn.CreateRectRgnIndirect(&RectBitmapNpn);
 
-/*	GetDlgItem(IDC_BUTTON_NPN)->GetWindowRect(&RectRadioNpn);
-*/	RectRadioNpn.left=RectBitmapNpn.left;//-2;//+6;//-t/2;//-2;//-3;
+	RectRadioNpn.left=RectBitmapNpn.left;//-2;//+6;//-t/2;//-2;//-3;
 	RectRadioNpn.top=RectBitmapNpn.bottom+4;//5;//9;
 	RectRadioNpn.right=RectRadioNpn.left+32;//t*3;
 	RectRadioNpn.bottom=RectRadioNpn.top+7;//h/3-10;//-4;
@@ -2601,22 +2371,19 @@ int dw= 256;
 	RectBitmapPnp.bottom=RectBitmapPnp.top+41;//35;
 	RgnPnp.CreateRectRgnIndirect(&RectBitmapPnp);
 
-/*	GetDlgItem(IDC_BUTTON_PNP)->GetWindowRect(&RectRadioPnp);
-*/	RectRadioPnp.left=RectBitmapPnp.left;//-2;//+6;//-t/2;//-1;//-3;
+	RectRadioPnp.left=RectBitmapPnp.left;//-2;//+6;//-t/2;//-1;//-3;
 	RectRadioPnp.top=RectBitmapPnp.bottom+4;//5;//9;
 	RectRadioPnp.right=RectRadioPnp.left+32;
 	RectRadioPnp.bottom=RectRadioPnp.top+7;//-4;
 
 	GetDlgItem(IDC_STATICBITMAP_NMOS)->GetWindowRect(&RectBitmapNmos);
 	RectBitmapNmos.left=RectBitmapDiod.left;
-//	RectBitmapNmos.top=RectRadioNpn.bottom+h/6-2;//+14;//6;//18;//20;//18;
 	RectBitmapNmos.top=RectBitmapNpn.bottom+h/6+6;//-2;//+14;//6;//18;//20;//18;
 	RectBitmapNmos.right=RectBitmapNmos.left+32;//25;
 	RectBitmapNmos.bottom=RectBitmapNmos.top+41;//35;
 	RgnNmos.CreateRectRgnIndirect(&RectBitmapNmos);
 
-/*	GetDlgItem(IDC_BUTTON_NMOS)->GetWindowRect(&RectRadioNmos);
-*/	RectRadioNmos.left=RectBitmapNmos.left;//-2;//+6;//-t/2;//-2;//-3;
+	RectRadioNmos.left=RectBitmapNmos.left;//-2;//+6;//-t/2;//-2;//-3;
 	RectRadioNmos.top=RectBitmapNmos.bottom+4;//5;//9;
 	RectRadioNmos.right=RectRadioNmos.left+32;
 	RectRadioNmos.bottom=RectRadioNmos.top+7;//-4;
@@ -2628,22 +2395,19 @@ int dw= 256;
 	RectBitmapPmos.bottom=RectBitmapPmos.top+41;//35;
 	RgnPmos.CreateRectRgnIndirect(&RectBitmapPmos);
 
-/*	GetDlgItem(IDC_BUTTON_PMOS)->GetWindowRect(&RectRadioPmos);
-*/	RectRadioPmos.left=RectBitmapPmos.left;//-2;//+6;//-t/2;//-1;//-3;
+	RectRadioPmos.left=RectBitmapPmos.left;//-2;//+6;//-t/2;//-1;//-3;
 	RectRadioPmos.top=RectBitmapPmos.bottom+4;//5;//9;
 	RectRadioPmos.right=RectRadioPmos.left+32;
 	RectRadioPmos.bottom=RectRadioPmos.top+7;//-4;
 
 	GetDlgItem(IDC_STATICBITMAP_NPN4)->GetWindowRect(&RectBitmapNpn4);
 	RectBitmapNpn4.left=RectBitmapDiod.left;
-//	RectBitmapNpn4.top=RectRadioNmos.bottom+h/6-2;//+14;//6;//18;//20;//18;
 	RectBitmapNpn4.top=RectBitmapNmos.bottom+h/6+6;//-2;//+8;//+14;//6;//18;//20;//18;
 	RectBitmapNpn4.right=RectBitmapNpn4.left+32;//26;
 	RectBitmapNpn4.bottom=RectBitmapNpn4.top+41;//35;
 	RgnNpn4.CreateRectRgnIndirect(&RectBitmapNpn4);
 
-/*	GetDlgItem(IDC_BUTTON_NPN4)->GetWindowRect(&RectRadioNpn4);
-*/	RectRadioNpn4.left=RectBitmapNpn4.left;//-2;//+6;//-t/2;//-2;//-3;
+	RectRadioNpn4.left=RectBitmapNpn4.left;//-2;//+6;//-t/2;//-2;//-3;
 	RectRadioNpn4.top=RectBitmapNpn4.bottom+4;//5;//9;
 	RectRadioNpn4.right=RectRadioNpn4.left+32;
 	RectRadioNpn4.bottom=RectRadioNpn4.top+7;//-4;
@@ -2655,22 +2419,19 @@ int dw= 256;
 	RectBitmapPnp4.bottom=RectBitmapPnp4.top+41;//35;
 	RgnPnp4.CreateRectRgnIndirect(&RectBitmapPnp4);
 
-/*	GetDlgItem(IDC_BUTTON_PNP4)->GetWindowRect(&RectRadioPnp4);
-*/	RectRadioPnp4.left=RectBitmapPnp4.left;//-2;//+6;//-t/2;//-1;//-3;
+	RectRadioPnp4.left=RectBitmapPnp4.left;//-2;//+6;//-t/2;//-1;//-3;
 	RectRadioPnp4.top=RectBitmapPnp4.bottom+4;//5;//9;
 	RectRadioPnp4.right=RectRadioPnp4.left+32;
 	RectRadioPnp4.bottom=RectRadioPnp4.top+7;//-4;//;
 
 	GetDlgItem(IDC_STATICBITMAP_NMOS4)->GetWindowRect(&RectBitmapNmos4);
 	RectBitmapNmos4.left=RectBitmapDiod.left;
-//	RectBitmapNmos4.top=RectRadioNpn4.bottom+h/6-2;//+14;//6;//18;//20;//18;
 	RectBitmapNmos4.top=RectBitmapNpn4.bottom+h/6+6;//-2;//+14;//6;//18;//20;//18;
 	RectBitmapNmos4.right=RectBitmapNmos4.left+32;//26;
 	RectBitmapNmos4.bottom=RectBitmapNmos4.top+41;//35;
 	RgnNmos4.CreateRectRgnIndirect(&RectBitmapNmos4);
 
-/*	GetDlgItem(IDC_BUTTON_NMOS4)->GetWindowRect(&RectRadioNmos4);
-*/	RectRadioNmos4.left=RectBitmapNmos4.left;//-2;//+6;//-t/2;//-2;//-3;
+	RectRadioNmos4.left=RectBitmapNmos4.left;//-2;//+6;//-t/2;//-2;//-3;
 	RectRadioNmos4.top=RectBitmapNmos4.bottom+4;//5;//9;
 	RectRadioNmos4.right=RectRadioNmos4.left+32;
 	RectRadioNmos4.bottom=RectRadioNmos4.top+7;//-4;
@@ -2682,8 +2443,7 @@ int dw= 256;
 	RectBitmapPmos4.bottom=RectBitmapPmos4.top+41;//35;
 	RgnPmos4.CreateRectRgnIndirect(&RectBitmapPmos4);
 
-/*	GetDlgItem(IDC_BUTTON_PMOS4)->GetWindowRect(&RectRadioPmos4);
-*/	RectRadioPmos4.left=RectBitmapPmos4.left;//-2;//+6;//-t/2;//-1;//-3;
+	RectRadioPmos4.left=RectBitmapPmos4.left;//-2;//+6;//-t/2;//-1;//-3;
 	RectRadioPmos4.top=RectBitmapPmos4.bottom+4;//5;//9;
 	RectRadioPmos4.right=RectRadioPmos4.left+32;
 	RectRadioPmos4.bottom=RectRadioPmos4.top+7;//-4;
@@ -2911,7 +2671,6 @@ int dw= 256;
 
 	GetDlgItem(IDC_RADIO_RAZVAC)->GetWindowRect(&RectRazvRadAc);
 	RectRazvRadAc.left=RectIconSynNeg.right+t+10;//RectRazvRadImpPos.left;
-//	RectRazvRadAc.top=RectRazvRadSynPos.top;//RectRazvRadImpPos.top;//RectRazvRadSynPos.top+h/2;//-2;
 	RectRazvRadAc.top=RectRazvRadImpPos.top;//RectRazvRadSynPos.top;//RectRazvRadSynPos.top+h/2;//-2;
 	RectRazvRadAc.right=RectRazvRadAc.left+t*2;//RectRazvRadImpPos.right;
 	RectRazvRadAc.bottom=RectRazvRadAc.top+(h*3)/7;//h/3-8;//+(h*3)/7;
@@ -2925,20 +2684,10 @@ int dw= 256;
 	//импульс
 	GetDlgItem(IDC_STATICIMP)->GetWindowRect(&RectStatImp);
 	RectStatImp.left=RectRazv.left+t;//RectRazv.right+t/2-2;
-//	RectStatImp.top=RectRazv.bottom+6;//top;//-4;//RectPage12.top+h/4;
 	RectStatImp.top=RectIconSynNeg.bottom+5;//10;//top;//-4;//RectPage12.top+h/4;
-//	RectStatImp.right=RectRazv.right-4;//RectPage12.right-t+4;
 	RectStatImp.right=RectRazvRadSynNeg.left-2;
 	RectStatImp.bottom=RectStatImp.top+h-15;//8;//+46;//RectRazv.bottom;//RectStatImp.top+h*2-2;//-h/4;//4-2;//
-/*
-	GetDlgItem(IDC_STATICIMP)->GetWindowRect(&RectStatImp);
-	RectStatImp.left=RectIconImpNeg.right+t;//*2-2;///2;//RectRazv.left+4;//RectRazv.right+t/2-2;
-	RectStatImp.top=RectRazv.top+16;//top;//-4;//RectPage12.top+h/4;
-//	RectStatImp.top=RectIconAc.bottom+12;//top;//-4;//RectPage12.top+h/4;
-	RectStatImp.right=RectRazv.right-8;//RectPage12.right-t+4;
-//	RectStatImp.right=RectRazv.right-4;//RadSynNeg.left-8;
-	RectStatImp.bottom=RectStatImp.top+h-12;//8;//+46;//RectRazv.bottom;//RectStatImp.top+h*2-2;//-h/4;//4-2;//
-*/
+
 	//длительность импульса
 	GetDlgItem(IDC_EDITDLITIMP)->GetWindowRect(&RectDlitImp);
 	RectDlitImp.left=RectStatImp.left+t+4;//*4;
@@ -2946,28 +2695,13 @@ int dw= 256;
 	RectDlitImp.right=RectStatImp.right-t/2;//+2;//RectDlitImp.left+t*4;
 	RectDlitImp.bottom=RectDlitImp.top+h/3;
 
-/*	GetDlgItem(IDC_STATICDLITPAUZA)->GetWindowRect(&RectStatDlitPauza);
-	RectStatDlitPauza.left=RectRazv.left+t*2-4;//RectStatImp.left+t+10;
-	RectStatDlitPauza.top=RectIconAc.bottom+18;//RectDlitImp.bottom+10;//RectTipImp1.bottom+h/2+6;//20;/////3+4;//2+6;//4+2;
-	RectStatDlitPauza.right=RectStatImp.left-t;///2;//RectStatDlitPauza.left+60;//
-	RectStatDlitPauza.bottom=RectStatDlitPauza.top+(h*3)/7-4;
-*/
-
 	GetDlgItem(IDC_CHECKPAUZA)->GetWindowRect(&RectPeriod);
-//	RectPeriod.left=RectRazv.left+t*8;//RectStatDlitPauza.left+5;//right-1;//RectStatImp.left+t*2;//3-4;//RectIconTipImp.left;//RectDlitImp.left;
 	RectPeriod.left=RectStatImp.right+t*2;//RectStatDlitPauza.left+5;//right-1;//RectStatImp.left+t*2;//3-4;//RectIconTipImp.left;//RectDlitImp.left;
-//	RectPeriod.top=RectIconAc.bottom+18;//RectStatDlitPauza.top;//bottom;//-1;//RectDlitImp.bottom+8;////RectIconTipImp1.bottom+h;////RectDlitImp.bottom+8;
 	RectPeriod.top=RectIconSynNeg.bottom+18;//RectStatDlitPauza.top;//bottom;//-1;//RectDlitImp.bottom+8;////RectIconTipImp1.bottom+h;////RectDlitImp.bottom+8;
 	RectPeriod.right=RectRazv.right-t*2;//RectStatImp.right-t/2;//*2-2;//t*4+24;
 	RectPeriod.bottom=RectPeriod.top+h/3+2;//+8;
 
 	//измеритель I (коллектор)
-/*	GetDlgItem(IDC_STATICKOLLECTORSOURCE)->GetWindowRect(&RectKolSource);
-	RectKolSource.left=RectStatImp.left;//+t/2+2;
-	RectKolSource.top=RectRazv.bottom+6;//RectStatImp.bottom+6;//RectKolMeas.top;
-	RectKolSource.right=RectStatImp.right;
-	RectKolSource.bottom=RectKolSource.top+h+5;//RectKolMeas.bottom;
-*/
 	GetDlgItem(IDC_STATICKOLLECTORSOURCE)->GetWindowRect(&RectKolSource);
 	RectKolSource.left=RectRazv.left;//+t/2+2;
 	RectKolSource.top=RectRazv.bottom+6;//RectStatImp.bottom+6;//RectKolMeas.top;
@@ -2987,12 +2721,6 @@ int dw= 256;
 	RectKI.bottom=RectKI.top+h/3;
 
 	//измеритель U(коллектор)
-/*	GetDlgItem(IDC_STATICKOLMEAS)->GetWindowRect(&RectKolMeas);
-	RectKolMeas.left=RectStatImp.left;//RectRazv.right-t/2-2;//RectPage12.left+t/2;//+2;
-	RectKolMeas.top=RectKolSource.bottom+3;//RectStatImp.bottom+4;//RectRazv.bottom+4;
-	RectKolMeas.right=RectPage12.right-t+4;//RectRazv.right;//RectStatImp.right;
-	RectKolMeas.bottom=RectKolMeas.top+h+12;//7;//*2-h/3-4;
-*/
 	GetDlgItem(IDC_EDKOLMEASU)->GetWindowRect(&RectU);
 	RectU.left=RectKolSource.left+t/2;//+2;///2+4;//+t/2;//-2;//+2;//;
 	RectU.top=RectI.top;//+h/2+14;//-2;
@@ -3031,12 +2759,6 @@ int dw= 256;
 	RectSliderKolU.right=RectSliderKolU.left+w+t*2+10;
 	RectSliderKolU.bottom=RectSliderKolU.top+h/2+2;
 
-/*	GetDlgItem(IDC_TEXTRANGMINKOLU)->GetWindowRect(&RectTextRangMinKolU);
-	RectTextRangMinKolU.left=RectSliderKolU.left+8;//-8;
-	RectTextRangMinKolU.top=RectSliderKolU.top-h/3+4;//RectSliderKolU.bottom+1+2;
-	RectTextRangMinKolU.right=RectSliderKolU.right+t*3;//RectSliderKolU.left+t*3;
-	RectTextRangMinKolU.bottom=RectSliderKolU.top;//+2;//RectTextRangMinKolU.top+h/3+2;
-*/
 	GetDlgItem(IDC_EDITLIMITKOLU)->GetWindowRect(&RectEditSliderKolU);
 	RectEditSliderKolU.left=RectSliderKolU.right+12;
 	RectEditSliderKolU.top=RectSliderKolU.top+6;//+2;
@@ -3154,32 +2876,10 @@ int dw= 256;
     pSt = (CStatic*)GetDlgItem(IDC_RADIO_SYNNEGATIVE);
 	pSt->MoveWindow(&RectRazvRadSynNeg);
 
-/*	ScreenToClient(&RectIconTipImp);
-    pSt = (CStatic*)GetDlgItem(IDC_STATICTIPIMP);
-	pSt->MoveWindow(&RectIconTipImp);
-    pSt = (CStatic*)GetDlgItem(IDC_STATICTIPIMPNEG);
-	pSt->MoveWindow(&RectIconTipImp);
-
-	ScreenToClient(&RectIconTipImp1);
-    pSt = (CStatic*)GetDlgItem(IDC_STATICTIPIMP1);
-	pSt->MoveWindow(&RectIconTipImp1);
-    pSt = (CStatic*)GetDlgItem(IDC_STATICTIPIMP1NEG);
-	pSt->MoveWindow(&RectIconTipImp1);
-*/
-/*	ScreenToClient(&RectStatDlitPauza);
-    pSt = (CStatic*)GetDlgItem(IDC_STATICDLITPAUZA);
-	pSt->MoveWindow(&RectStatDlitPauza);
-*/	
 	ScreenToClient(&RectPeriod);
     pSt = (CStatic*)GetDlgItem(IDC_CHECKPAUZA);
 	pSt->MoveWindow(&RectPeriod);
-//    pSt = (CStatic*)GetDlgItem(IDC_COMBONAKOPLENIE);
-//	pSt->MoveWindow(&RectPeriod);
 
-/*	ScreenToClient(&RectKolMeas);
-    pSt = (CStatic*)GetDlgItem(IDC_STATICKOLMEAS);
-	pSt->MoveWindow(&RectKolMeas);
-*/
 	ScreenToClient(&RectU);
     pSt = (CStatic*)GetDlgItem(IDC_EDKOLMEASU);
 	pSt->MoveWindow(&RectU);
@@ -3232,10 +2932,6 @@ int dw= 256;
     pSt = (CStatic*)GetDlgItem(IDC_SLIDERKOLU);
 	pSt->MoveWindow(&RectSliderKolU);
 
-/*	ScreenToClient(&RectTextRangMinKolU);
-    pSt = (CStatic*)GetDlgItem(IDC_TEXTRANGMINKOLU);
-	pSt->MoveWindow(&RectTextRangMinKolU);
-*/
 	ScreenToClient(&RectEditSliderKolU);
     pSt = (CStatic*)GetDlgItem(IDC_EDITLIMITKOLU);
 	pSt->MoveWindow(&RectEditSliderKolU);
@@ -3871,12 +3567,6 @@ int dw= 256;
 	
 	//№ ступеньки
 
-/*	GetDlgItem(IDC_TEXTPOINT)->GetWindowRect(&RectTextPoint);
-	RectTextPoint.left=RectTextFind.left+t*4;
-	RectTextPoint.top=RectTextUr2.bottom+14;//RectEditUr2.bottom;
-	RectTextPoint.right=RectTextPoint.left+w-t;//+w/4;
-	RectTextPoint.bottom=RectTextPoint.top+h/3;
-*/
 	GetDlgItem(IDC_EDITPOINT)->GetWindowRect(&RectEditPoint);
 	RectEditPoint.left=RectTextUr1.left;//RectEditUr1.right-t*4;
 	RectEditPoint.top=RectTextUr2.bottom+12;//RectTextPoint.top-2;
@@ -4004,10 +3694,6 @@ int dw= 256;
 	pSt = (CStatic*)GetDlgItem(IDC_EDITUR2);
 	pSt->MoveWindow(&RectEditUr2);
 
-//	ScreenToClient(&RectTextPoint);
-//	pSt = (CStatic*)GetDlgItem(IDC_TEXTPOINT);
-//	pSt->MoveWindow(&RectTextPoint);
-
 	ScreenToClient(&RectEditPoint);
 	pSt = (CStatic*)GetDlgItem(IDC_EDITPOINT);
 	pSt->MoveWindow(&RectEditPoint);
@@ -4060,7 +3746,6 @@ int dw= 256;
 	RectZona.right=RectParam.right-2;
 	RectZona.bottom=RectParam.bottom+h-2;//-8;//-1;//
 	RectEditRukoyatka.left=RectParam.left+w-t-2;//RectKolSourU.left;
-//	RectEditRukoyatka.top=RectZonaText.top+2;//2;//bottom;//RectParam.bottom+h/2-8;//RectStatImp.bottom;//RectKI.top;
 	RectEditRukoyatka.top=RectZona.top;//+2;//2;//bottom;//RectParam.bottom+h/2-8;//RectStatImp.bottom;//RectKI.top;
 	RectEditRukoyatka.right=RectParam.right-t*2;//RectKolSourU.right;
 	RectEditRukoyatka.bottom=RectEditRukoyatka.top+h/2+5;//RectStatImp.bottom+22;//RectKI.bottom;
@@ -4112,8 +3797,6 @@ int dw= 256;
 	m_iPosTekOld = m_iPosTek;
    ::ReleaseMutex(hMutexRukoyatka);
 	
-//  	DrawStatusRukoyatka();
-
 	ScreenToClient(&RectParam);
 	m_TabCtrlParam.MoveWindow(&RectParam);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	m_TabCtrlParam.InsertItem(0,_T("Cхема включения"));		//Page0
@@ -4121,17 +3804,7 @@ int dw= 256;
 	m_TabCtrlParam.InsertItem(2,_T("Канал  C"));			//Page2 - Коллектор
 	m_TabCtrlParam.InsertItem(3,_T("Канал  B"));			//Page3 - База
 	m_TabCtrlParam.InsertItem(4,_T("Канал  S"));			//Page4 - Подложка (Доп. канал)
-/*	m_TabCtrlParam.InsertItem(0,_T("Cхема включения"));		//Page0
-	m_TabCtrlParam.InsertItem(1,_T("Канал  C"));			//Page1 - Коллектор
-	m_TabCtrlParam.InsertItem(2,_T("Канал  B"));			//Page2 - База
-	m_TabCtrlParam.InsertItem(3,_T("Канал  S"));			//Page3 - Подложка (Доп. канал)
-	m_TabCtrlParam.InsertItem(4,_T("Расчёт"));				//Page4
-*/
-/*	CSize s;
-	s.cx=RectParam.right-RectParam.left;
-	s.cy=RectWnd.bottom/38;
-	m_TabCtrlParam.SetItemSize(s);
-*/	m_TabCtrlParam.SetCurSel(0);
+	m_TabCtrlParam.SetCurSel(0);
 
 	ScreenToClient(&RectPage12);
 	ScreenToClient(&RectPage34);
@@ -4139,28 +3812,14 @@ int dw= 256;
 	ScreenToClient(&RectBitmapDiod);
     pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_DIOD);
 	pSt->MoveWindow(&RectBitmapDiod);
-//    pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_DIOD_ON);
-//	pSt->MoveWindow(&RectBitmapDiod);
 
-/*	ScreenToClient(&RectRadioDiod);
-    pSt = (CStatic*)GetDlgItem(IDC_BUTTON_DIOD);
-	pSt->MoveWindow(&RectRadioDiod);
-*/
 	ScreenToClient(&RectBitmapRes);
     pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_RES);
 	pSt->MoveWindow(&RectBitmapRes);
-//    pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_RES_ON);
-//	pSt->MoveWindow(&RectBitmapRes);
 
-/*	ScreenToClient(&RectRadioRes);
-    pSt = (CStatic*)GetDlgItem(IDC_BUTTON_RES);
-	pSt->MoveWindow(&RectRadioRes);
-*/
 	ScreenToClient(&RectBitmapNpn);
     pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_NPN);
 	pSt->MoveWindow(&RectBitmapNpn);
-//    pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_NPN_ON);
-//	pSt->MoveWindow(&RectBitmapNpn);
 
 	ScreenToClient(&RectRadioNpn);
     pSt = (CStatic*)GetDlgItem(IDC_STATIC_VKL);
@@ -4169,71 +3828,31 @@ int dw= 256;
 	ScreenToClient(&RectBitmapPnp);
     pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_PNP);
 	pSt->MoveWindow(&RectBitmapPnp);
-//    pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_PNP_ON);
-//	pSt->MoveWindow(&RectBitmapPnp);
 
-/*	ScreenToClient(&RectRadioPnp);
-    pSt = (CStatic*)GetDlgItem(IDC_BUTTON_PNP);
-	pSt->MoveWindow(&RectRadioPnp);
-*/
 	ScreenToClient(&RectBitmapNmos);
     pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_NMOS);
 	pSt->MoveWindow(&RectBitmapNmos);
-//    pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_NMOS_ON);
-//	pSt->MoveWindow(&RectBitmapNmos);
 
-/*	ScreenToClient(&RectRadioNmos);
-    pSt = (CStatic*)GetDlgItem(IDC_BUTTON_NMOS);
-	pSt->MoveWindow(&RectRadioNmos);
-*/
 	ScreenToClient(&RectBitmapPmos);
     pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_PMOS);
 	pSt->MoveWindow(&RectBitmapPmos);
-//    pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_PMOS_ON);
-//	pSt->MoveWindow(&RectBitmapPmos);
 
-/*	ScreenToClient(&RectRadioPmos);
-    pSt = (CStatic*)GetDlgItem(IDC_BUTTON_PMOS);
-	pSt->MoveWindow(&RectRadioPmos);
-*/
 	ScreenToClient(&RectBitmapNpn4);
     pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_NPN4);
 	pSt->MoveWindow(&RectBitmapNpn4);
-//    pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_NPN4_ON);
-//	pSt->MoveWindow(&RectBitmapNpn4);
 
-/*	ScreenToClient(&RectRadioNpn4);
-    pSt = (CStatic*)GetDlgItem(IDC_BUTTON_NPN4);
-	pSt->MoveWindow(&RectRadioNpn4);
-*/
 	ScreenToClient(&RectBitmapPnp4);
     pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_PNP4);
 	pSt->MoveWindow(&RectBitmapPnp4);
-//    pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_PNP4_ON);
-//	pSt->MoveWindow(&RectBitmapPnp4);
 
-/*	ScreenToClient(&RectRadioPnp4);
-    pSt = (CStatic*)GetDlgItem(IDC_BUTTON_PNP4);
-	pSt->MoveWindow(&RectRadioPnp4);
-*/
 	ScreenToClient(&RectBitmapNmos4);
     pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_NMOS4);
 	pSt->MoveWindow(&RectBitmapNmos4);
-//    pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_NMOS4_ON);
-//	pSt->MoveWindow(&RectBitmapNmos4);
 
-/*	ScreenToClient(&RectRadioNmos4);
-    pSt = (CStatic*)GetDlgItem(IDC_BUTTON_NMOS4);
-	pSt->MoveWindow(&RectRadioNmos4);
-*/
 	ScreenToClient(&RectBitmapPmos4);
     pSt = (CStatic*)GetDlgItem(IDC_STATICBITMAP_PMOS4);
 	pSt->MoveWindow(&RectBitmapPmos4);
 
-/*	ScreenToClient(&RectRadioPmos4);
-    pSt = (CStatic*)GetDlgItem(IDC_BUTTON_PMOS4);
-	pSt->MoveWindow(&RectRadioPmos4);
-*/
 	ScreenToClient(&RectCategoria);
     pSt = (CStatic*)GetDlgItem(IDC_STATIC_ELEMENT);
 	pSt->MoveWindow(&RectCategoria);
@@ -4278,10 +3897,6 @@ int dw= 256;
 	pSt = (CStatic*)GetDlgItem(IDC_COMBO_GNEZDO_E);
 	pSt->MoveWindow(&RectBitKnotEm);
 
-//	ScreenToClient(&RectBitEmCommon);
-//	pSt = (CStatic*)GetDlgItem(IDC_STATICBITEM_COMMON);
-//	pSt->MoveWindow(&RectBitEmCommon);
-
 	ScreenToClient(&RectStatusKol);
 	pSt = (CStatic*)GetDlgItem(IDC_COMBOCHECKKOL);
 	pSt->MoveWindow(&RectStatusKol);
@@ -4294,10 +3909,6 @@ int dw= 256;
 	pSt = (CStatic*)GetDlgItem(IDC_COMBOCHECKDOP);
 	pSt->MoveWindow(&RectStatusDop);
 
-/*	ScreenToClient(&RectStatusEm);
-	pSt = (CStatic*)GetDlgItem(IDC_TEXTCOMBOCHECKEM);
-	pSt->MoveWindow(&RectStatusEm);
-*/
 	ScreenToClient(&RectTest);
     pSt = (CStatic*)GetDlgItem(IDC_STATICMOD);
 	pSt->MoveWindow(&RectTest);
@@ -4321,25 +3932,6 @@ int dw= 256;
 	RectTabTuning.right=RectParam.right;
 	RectTabTuning.bottom=RectWnd.bottom;//-2;
 
-/*	//Отображение параметров теста
-	GetDlgItem(IDC_EDITDISPLAYMEAS)->GetWindowRect(&RectDisplayMeas);
-	RectDisplayMeas.left=RectParam.left+7;
-	RectDisplayMeas.top=RectParam.top+4;
-	RectDisplayMeas.right=RectParam.right-6;
-	RectDisplayMeas.bottom=RectBitmapCircuit.top-32;//RectZona.top;//RectTabTuning.top;
-	//Отображение параметров ссылки
-	GetDlgItem(IDC_EDITDISPLAYREF)->GetWindowRect(&RectDisplayRef);
-	RectDisplayRef.left=RectDisplayMeas.left;
-	RectDisplayRef.top=RectTabTuning.top-72;//RectDisplayMeas.bottom+1;
-	RectDisplayRef.right=RectDisplayMeas.right;
-	RectDisplayRef.bottom=RectTabTuning.top-2;//RectWnd.bottom;
-	ScreenToClient(&RectDisplayMeas);
-    pSt = (CStatic*)GetDlgItem(IDC_EDITDISPLAYMEAS);
-	pSt->MoveWindow(&RectDisplayMeas);
-	ScreenToClient(&RectDisplayRef);
-    pSt = (CStatic*)GetDlgItem(IDC_EDITDISPLAYREF);
-	pSt->MoveWindow(&RectDisplayRef);
-*/
 	GetDlgItem(IDC_STATIC_FON)->GetWindowRect(&RectFon);
 	RectFon.left=RectTabTuning.left+6;
 	RectFon.top=RectTabTuning.top+h/2-2;//+2;//-4;//-10;//h/2;//+2;//5;//8;//-4;
@@ -4349,29 +3941,23 @@ int dw= 256;
     pSt = (CStatic*)GetDlgItem(IDC_STATIC_FON);
 	pSt->MoveWindow(&RectFon);
 
-//	GetDlgItem(IDC_STATIC_BUT_OFF_LEFT)->GetWindowRect(&RectButtonLeft);
 	GetDlgItem(IDC_RADIO_LEFT)->GetWindowRect(&RectButtonLeft);
 	RectButtonLeft.left=RectTabTuning.left+t*2-4;//25;//18;//t*3-8;//RectRadioDiod.left;//RectTabTuning.left+t+t/2+2;
 	RectButtonLeft.top=RectTabTuning.top+h-2;//+2;//h/2;//+2;//5;//8;//-4;
 	RectButtonLeft.right=RectButtonLeft.left+t*3;//22;//32;//31;//25;
 	RectButtonLeft.bottom=RectButtonLeft.top+h/3-8;//4;//21;//20;//14;
-//	RgnButtonLeft.CreateRectRgnIndirect(&RectButtonLeft);
 
-//	GetDlgItem(IDC_STATIC_BUT_OFF_CENTER)->GetWindowRect(&RectButtonCenter);
 	GetDlgItem(IDC_RADIO_CENTER)->GetWindowRect(&RectButtonCenter);
 	RectButtonCenter.left=RectButtonLeft.left;
 	RectButtonCenter.top=RectButtonLeft.bottom+20;
 	RectButtonCenter.right=RectButtonCenter.left+t*3;//22;//32;//31;//25;
 	RectButtonCenter.bottom=RectButtonCenter.top+h/3-8;//4;//21;//20;//14;
-//	RgnButtonCenter.CreateRectRgnIndirect(&RectButtonCenter);
 
-//	GetDlgItem(IDC_STATIC_BUT_OFF_RIGHT)->GetWindowRect(&RectButtonRight);
 	GetDlgItem(IDC_RADIO_RIGHT)->GetWindowRect(&RectButtonRight);
 	RectButtonRight.left=RectButtonLeft.left;
 	RectButtonRight.top=RectButtonCenter.bottom+20;
 	RectButtonRight.right=RectButtonRight.left+t*3;//22;//32;//31;//25;
 	RectButtonRight.bottom=RectButtonRight.top+h/3-8;//4;//21;//20;//14;
-//	RgnButtonRight.CreateRectRgnIndirect(&RectButtonRight);
 
 	GetDlgItem(IDC_STATIC_NULL_LEFT)->GetWindowRect(&RectIconLeft);
 	RectIconLeft.left=RectButtonLeft.right+2;//-4;//+t/2;//+2;//8;//+t/2-3;
@@ -4391,13 +3977,11 @@ int dw= 256;
 	RectIconRight.right=RectIconRight.left+32;//23;
 	RectIconRight.bottom=RectIconRight.top+32;//23;
  
-//	GetDlgItem(IDC_STATIC_BUT_INVERS_OFF)->GetWindowRect(&RectButtonInversion);
 	GetDlgItem(IDC_CHECK_INVERS_X)->GetWindowRect(&RectButtonInversion);
 	RectButtonInversion.left=RectIconLeft.right+t*2;//2-2;//3-4;//3-4;//RectButtonLeft.left;
 	RectButtonInversion.top=RectButtonLeft.top-4;//bottom-10;//RectButtonCenter.top;//RectButtonLeft.top;//RectButtonRight.bottom+7;//19;
 	RectButtonInversion.right=RectButtonInversion.left+t*2-4;//3;//20;//RectFon.right-t*3+10;//RectButtonInversion.left+32;//31;//25;
 	RectButtonInversion.bottom=RectButtonInversion.top+h/3-3;//28;//14;
-//	RgnButtonInversion.CreateRectRgnIndirect(&RectButtonInversion);
 
 	GetDlgItem(IDC_STATIC_ICON_INVERS)->GetWindowRect(&RectIconInversion);
 	RectIconInversion.left=RectButtonInversion.right+8;//+6;//7;//+t-2;//-5;
@@ -4410,7 +3994,6 @@ int dw= 256;
 	RectButtonInversionY.top=RectButtonInversion.top;//RectButtonInversion.bottom+8;//17;//RectButtonInversion.top;
 	RectButtonInversionY.right=RectButtonInversionY.left+t*2-4;//3;//20;//RectFon.right-t*3+10;//RectButtonInversionY.left+32;//31;//25;
 	RectButtonInversionY.bottom=RectButtonInversionY.top+h/3-3;//28;//14;
-//	RgnButtonInversionY.CreateRectRgnIndirect(&RectButtonInversionY);
 
 	GetDlgItem(IDC_STATIC_TEXT_INVERSY)->GetWindowRect(&RectIconInversionY);
 	RectIconInversionY.left=RectButtonInversionY.right+6;//+6;//7;//-5;
@@ -4469,33 +4052,10 @@ int dw= 256;
 	pSt=(CStatic*)GetDlgItem(IDC_STATIC_ICON_LUPA);
 	pSt->MoveWindow(&RectIconLupa);
 
-/*
-	RectButtonMarkerLeft.left=RectIconRight.right+t+12;//22;//12;//24;
-	RectButtonMarkerLeft.top=RectButtonMarker1.bottom-7;//RectButtonMarker1.top-2;//-2;//4;//
-	RectButtonMarkerLeft.right=RectButtonMarkerLeft.left+36;
-	RectButtonMarkerLeft.bottom=RectButtonMarkerLeft.top+23;
-
-	RectButtonMarkerReset.left=RectButtonMarkerLeft.right+6;//t/2;
-	RectButtonMarkerReset.top=RectButtonMarkerLeft.top;
-	RectButtonMarkerReset.right=RectButtonMarkerReset.left+42;
-	RectButtonMarkerReset.bottom=RectButtonMarkerReset.top+23;
-
-	RectButtonMarkerRight.left=RectButtonMarkerReset.right+6;//t/2;
-	RectButtonMarkerRight.top=RectButtonMarkerLeft.top;
-	RectButtonMarkerRight.right=RectButtonMarkerRight.left+36;
-	RectButtonMarkerRight.bottom=RectButtonMarkerRight.top+23;
-*/
 	RectButtonMarkerReset.left=RectIconLupa.right+t*2+4;//RectButtonMarkerLeft.right+6;//t/2;
 	RectButtonMarkerReset.top=RectIconFamily.bottom+2;//RectButtonMarkerLeft.top;
 	RectButtonMarkerReset.right=RectButtonMarkerReset.left+42;
 	RectButtonMarkerReset.bottom=RectButtonMarkerReset.top+23;
-
-/*	GetDlgItem(IDC_MARKER1)->GetWindowRect(&RectMarker1);
-	RectMarker1.left=m_RectWndGraf.left+3;//+t;//*2;
-	RectMarker1.top=RectWnd.top+3;
-	RectMarker1.right=RectPanel.left-50;//3;//-t+5;
-	RectMarker1.bottom=RectMarker1.top+h/3;//+2;
-*/
 
 	GetDlgItem(IDC_MARKER1)->GetWindowRect(&RectMarker1);
 	RectMarker1.left=RectTablRes.left+3;//m_RectWndGraf.left+3;//+t;//*2;
@@ -4549,21 +4109,8 @@ int dw= 256;
 	RectButtonTangent.bottom=RectButtonTangent.top+18;//20;//14;
 	RgnButtonTangent.CreateRectRgnIndirect(&RectButtonTangent);
 
-/*	GetDlgItem(IDC_STATIC_TEXT_TANGENT)->GetWindowRect(&RectTextTangent);
-	RectTextTangent.left=RectButtonTangent.right;//+t/2+5;//RectTextMarker1.right+5;
-	RectTextTangent.top=RectButtonTangent.top-1;//RectButtonTangent.bottom+1;
-	RectTextTangent.right=RectWnd.right-t;//RectPanel.left-t;//RectTabTuning.right-t+1;
-	RectTextTangent.bottom=RectTextTangent.top+h/3;
-*/
-
 	//Закладка "Память"
 	//=================
-/*	GetDlgItem(IDC_LISTREF)->GetWindowRect(&RectListRef);
-	RectListRef.left=RectTabTuning.left+t-4;//-2;///2;
-	RectListRef.top=RectTabTuning.top+h/2-2;//+2;//3+h/10;
-	RectListRef.right=RectTabTuning.right-t+4;//+2;///2;
-	RectListRef.bottom=RectTabTuning.bottom-5;//h/2-7;
-*/
 	//Архив
 	//=====
 	GetDlgItem(IDC_LISTREF)->GetWindowRect(&RectListRef);
@@ -4577,9 +4124,6 @@ int dw= 256;
 	pSt->MoveWindow(&RectListRef);
 	//...
 	m_listRef.SetExtendedStyle(m_listRef.GetExtendedStyle()|LVS_EX_GRIDLINES|LVS_EX_FULLROWSELECT);
-//	m_listRef.InsertColumn(0,_T("Тест"),LVCFMT_LEFT,(RectListRef.Width()-2)/3);
-//	m_listRef.InsertColumn(1,_T("Дата"),LVCFMT_LEFT,(RectListRef.Width()-2)/3);
-//	m_listRef.InsertColumn(2,_T("Время"),LVCFMT_LEFT,(RectListRef.Width()-2)/3);
 
 	//Закладка "Ошибки"
 	//=================
@@ -4597,7 +4141,6 @@ int dw= 256;
 	ScreenToClient(&RectTabTuning);
 	m_TabCtrlTuning.MoveWindow(&RectTabTuning);
 	m_TabCtrlTuning.InsertItem(0,_T("  Шкала  "));//Дисплей  "));
-//	m_TabCtrlTuning.InsertItem(1,_T(" Маркеры "));//Память  "));
 	m_TabCtrlTuning.InsertItem(2,_T(" Ошибки "));
 
 	ScreenToClient(&RectButtonLeft);
@@ -4627,8 +4170,6 @@ int dw= 256;
 	ScreenToClient(&RectButtonInversion);
     pSt = (CStatic*)GetDlgItem(IDC_CHECK_INVERS_X);
 	pSt->MoveWindow(&RectButtonInversion);
-//    pSt = (CStatic*)GetDlgItem(IDC_STATIC_BUT_INVERS_ON);
-//	pSt->MoveWindow(&RectButtonInversion);
 
 	ScreenToClient(&RectIconInversion);
     pSt = (CStatic*)GetDlgItem(IDC_STATIC_ICON_INVERS);
@@ -4637,8 +4178,6 @@ int dw= 256;
 	ScreenToClient(&RectButtonInversionY);
     pSt = (CStatic*)GetDlgItem(IDC_CHECK_INVERS_Y);
 	pSt->MoveWindow(&RectButtonInversionY);
-//    pSt = (CStatic*)GetDlgItem(IDC_STATIC_INVERSY_ON);
-//	pSt->MoveWindow(&RectButtonInversionY);
 
 	ScreenToClient(&RectIconInversionY);
     pSt = (CStatic*)GetDlgItem(IDC_STATIC_TEXT_INVERSY);
@@ -4683,20 +4222,12 @@ int dw= 256;
     pSt = (CStatic*)GetDlgItem(IDC_STATIC_NAME_MARKER2);
 	pSt->MoveWindow(&RectTextMarker2);
 
-/*	ScreenToClient(&RectNStep);
-    pSt = (CStatic*)GetDlgItem(IDC_EDNSTEP);
-	pSt->MoveWindow(&RectNStep);
-*/
 	ScreenToClient(&RectButtonTangent);
     pSt = (CStatic*)GetDlgItem(IDC_STATIC_BUTTON_TANGENT);
 	pSt->MoveWindow(&RectButtonTangent);
     pSt = (CStatic*)GetDlgItem(IDC_STATIC_BUTTON_TANGENT_ON);
 	pSt->MoveWindow(&RectButtonTangent);
 
-/*	ScreenToClient(&RectTextTangent);
-    pSt = (CStatic*)GetDlgItem(IDC_STATIC_TEXT_TANGENT);
-	pSt->MoveWindow(&RectTextTangent);
-*/
 	ScreenToClient(&RectMarker1);
     pSt = (CStatic*)GetDlgItem(IDC_MARKER1);
 	pSt->MoveWindow(&RectMarker1);
@@ -4712,7 +4243,6 @@ int dw= 256;
 	//Начальная установка
 	//===================
 	//**************************
-//    SetTimer(1,1000,NULL);	//индикация текущего времени
     SetTimer(6,1000,NULL);	//индикация текущего времени
     SetTimer(3,250,NULL);	//сигнал "Высокое напряжение"
 	//программирование ползунка ограничения по U (коллектор)
@@ -4723,8 +4253,6 @@ int dw= 256;
 	//программирование ползунка ограничения по I (коллектор)
 	//******************************************************
     pSl = (CSliderCtrl*)GetDlgItem(IDC_SLIDERKOLI);
-//	pSl -> SetRange(0,110);
-//	pSl -> SetTicFreq(10);	
 	pSl -> SetRange(0,100);
 	pSl -> SetTicFreq(5);	
 	//программирование наборного счётчика числа ступенек (база)
@@ -4740,7 +4268,6 @@ int dw= 256;
 	//программирование ползунка ограничения (база)
 	//********************************************
 	pSl = (CSliderCtrl*)GetDlgItem(IDC_SLIDERLIMITBAZA);
-//	pSl -> SetRange(0,110);
 	pSl -> SetRange(10,110);
 	pSl -> SetTicFreq(5);
 
@@ -4757,7 +4284,6 @@ int dw= 256;
 	//программирование ползунка ограничения (доп.канал)
 	//********************************************
 	pSl = (CSliderCtrl*)GetDlgItem(IDC_SLIDERLIMITDOP);
-//	pSl -> SetRange(0,110);
 	pSl -> SetRange(10,110);
 	pSl -> SetTicFreq(5);
 	//индикатор процесса
@@ -4766,14 +4292,11 @@ int dw= 256;
 	m_ProgPos=0;
  
 
-//	if (n_IPPP==1) InitNewSwitch();//пока нет сигнала от переключателя. Потом убрать.
-
 	InitStatusKnot();	//инициализация состояния узлов (в зависимости от типа элемента)
 	InitGnezdo();
 	
 	//наименования узлов, характеристик (коллектор, база, доп. источник, эмиттер)
 	//***************************************************************************
-//	SetStringsSourceMeas();
 	//начальная установка диапазонов измерителя и ограничения по U и I
 	//****************************************************************
 			InitIconImp();
@@ -4785,25 +4308,18 @@ int dw= 256;
 	InitDiapazonKol();		//инициализация диапазонов коллектора (в зависимости от вида развёртки)
 	InitDiapazonBaza();		//инициализация диапазонов базы
 	InitDiapazonDop();		//инициализация диапазонов доп.канала
-//	SetDiapazonKol();
-//	SetDiapazonBaza();
-//	SetDiapazonDop();
 	//индикация начального состояния панели
 	//*************************************
 	int  nTab = 0;
 	m_TabCtrlParam.SetCurSel(nTab);
 	InitPage(nTab);	
-//	InitPage(0);
-//  	DrawStatusRukoyatka();
 	m_TabCtrlTuning.SetCurSel(nTab);
-//	InitPage(nTab);	
 	InitPageTuning(nTab);
  	  CComboBox *pcb = (CComboBox*) GetDlgItem(IDC_COMBOMOD);
 	  index=pcb->FindStringExact(0,m_MOD);
 
 	//начальная установка схемы включения
 	//***********************************
-//	SetCircuit();
 	//начальная установка списка файлов эталонных графиков в архиве
 	//*************************************************************
 	m_listRef.InsertColumn(0,_T("№"),LVCFMT_LEFT,(RectListRef.Width()-2)/20);
@@ -4831,7 +4347,6 @@ int dw= 256;
     hEventStop=::CreateEvent(NULL,FALSE,FALSE,NULL);
 
 	hMutexO =::CreateMutex(NULL,FALSE,NULL);
-//	hMutexI_1 =::CreateMutex(NULL,FALSE,NULL);
 	hMutexI =::CreateMutex(NULL,FALSE,NULL);
 	hMutexEpp =::CreateMutex(NULL,FALSE,NULL);
     hMutexStop=::CreateMutex(NULL,FALSE,NULL);
@@ -4860,8 +4375,6 @@ int dw= 256;
 //============================
 	SetKoefPswToPic();
 	
-//	SetZapuskToPic();
-
 	TRACE(_T("=============OnInitDialog()================\n"));
 //	График
 //==========
@@ -4869,35 +4382,8 @@ int dw= 256;
 	UINT nID = 3223;
 	int i=0;
 	int j=0;
-	//this->SetWindowPos(NULL,5,5, 605,505,NULL);
 //пример упорядочивания массива по возрастанию
 //=============================================
-/* 
- pM1[0]= 3;
- pM1[1]= 5;
- pM1[2]= 2;
- pM1[3]= 1;
- pM1[4]= 0;
- pM1[5]= 7;
- pM1[6]= 8;
- pM1[7]= 4;
- pM1[8]= 6;
- pM1[9]= 9;
-  double amin;// = pM1[0];
-  double temp;
-  int j;
-  for (i=0;i<10;i++)
-  { 
-	for (j=i+1;j<10;j++)
-	{ amin = pM1[i];
-      if (pM1[j] < amin) { amin = pM1[j];
-						   temp = pM1[i];
-						   pM1[i] = pM1[j];
-						   pM1[j] = temp;
-						}
-	}
-  }
-  */
 //===========================================================
 
 	CRect rect(m_RectWndGraf.left,m_RectWndGraf.top,m_RectWndGraf.right,m_RectWndGraf.bottom);//(5,5,500,400);
@@ -4921,8 +4407,6 @@ n_Mas  =1;
 	  case STYLE_POINT:	    pGraph = m_Chart.AddSerie(CChartSerie::stPoints); break;
 	  case STYLE_LINEPOINT:	pGraph = m_Chart.AddSerie(CChartSerie::stMixed); break;
 	}
-//	double* pX = new double[NPOINT*n_Mas];
-//	double* pY = new double[NPOINT*n_Mas];
 	
 	for (UINT m=0;m<n_Mas;m++)
 	{
@@ -4943,24 +4427,15 @@ n_Mas  =1;
 		  case 2: pY[i] = pM4[m][i+NPOINT*j] / pow(10.0,expo_Y-po_Y);
 				  break;
 		}
-//	  refX[m][i+NPOINT*j] = pX[i];
-//	  refY[m][i+NPOINT*j] = pY[i];
 		}
 	}//end of m
 
 	pGraph->SetColor(m_colorCurve);							//цвет кривой
 	pGraph->SetPoints(pX,pY,NPOINT*n_Mas);
-//	pGraph->SetName("j-ая кривая");
-//	delete[] pX;
-//	delete[] pY;
   }//end of семейство кривых
 	CChartSerieFamily* pFamily = m_Chart.AddFamily();
 	pFamily->SetColor(m_colorCurve);
 	pFamily->SetName("Meas");
-
-//m_Chart.m_pAxisBottom->SetFont(80,"Arial");//Microsoft Sans Serif");
-//m_Chart.m_pAxisLeft->SetFont(80,"Arial");//Microsoft Sans Serif");
-//m_Chart.m_pChartLegend->SetFont(80,"Arial");//Microsoft Sans Serif");
 
 	  po_X = SubGetStrRazmer(rej_X,expo_X,m_sAxisX);
 	  m_Chart.m_pAxisBottom->SetLabelText(strRazmer);
@@ -4994,10 +4469,6 @@ n_Mas  =1;
 
 	m_Chart.DisableRefresh(false);
 
-//  _outp(0x378+2,0x21);	//D5<-1 , D0<-1, D2<-0, D3<-0 конец программного сброса //@@@
-
-//	if(m_bFileOpen) FileClose();
-//	else FileNew();
 	strDateMeas = strDateCurrent;
     strTimeMeas = strTimeCurrent;
 
@@ -5024,10 +4495,6 @@ void CLineDlg::SetMassivNpoint(BOOL bInversion)
 	int j=0;
 	int n_point=NPOINT;
 	if (m_bLooping) n_point = NPOINT100;
-//	if (m_itipimp==TIP_IMP){ n_point = 1;}
-//	if (m_irazv==IMP_POS || m_irazv==IMP_NEG) n_point = 1;
-//	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_SINGLE) n_point = uNpointsLupa;//n_Result;
-//	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_MULTIPLE) n_point = n_Result;
 	if (m_iQue1==COLLECTOR)
 	{
 	if (m_irazv==IMP_POS || m_irazv==IMP_NEG) n_point = 1;
@@ -5038,71 +4505,17 @@ void CLineDlg::SetMassivNpoint(BOOL bInversion)
 	if (m_iQue1==BAZA)
 	{
 		if (m_irazv==IMP_POS || m_irazv==IMP_NEG) {n_point = 1; n_Mas=m_uStepBaza*10;}
-//		if (m_irazv==IMP_POS || m_irazv==IMP_NEG) {n_point = m_uStepBaza*10; n_Mas=1;}//m_uStepBaza*10;}
 	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_SINGLE) n_point = m_uStepBaza*10;//uNpointsLupa;//n_Result;
 	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_MULTIPLE) n_point = n_Result;
 	}
 
-
-////	static BOOL flag_inversion=false;
-//	CChartSerieFamily* pFamily;
-//	CChartSerieFamily* pFamily = m_Chart.GetFamily(0);
-
-	m_Chart.DisableRefresh(true);
-/*
-//	if (bStatusMeas && stup==0 && n_Step==1)
-//	{
-		int b = m_Chart.GetSeriesCount();
-		TRACE(L"SetMassivNpoint: до удаления GetSeriesCount = %d\n",b);
-//		for(j=0;j<n_Step;j++)
-		for(j=0;j<b;j++)
-		m_Chart.DeleteSerie(0);
-
-		b = m_Chart.GetSeriesCount();
-		TRACE(L"SetMassivNpoint: после удаления GetSeriesCount = %d\n",b);
-
-		b = m_Chart.GetFamiliesCount();
-		TRACE(L"SetMassivNpoint: до удаления GetFamiliesCount = %d\n",b);
-		for(j=0;j<b;j++)
-	    m_Chart.DeleteFamily(0);
-		b = m_Chart.GetFamiliesCount();
-		TRACE(L"SetMassivNpoint: после удаления GetFamiliesCount = %d\n",b);
-		bStatusMeas = false;
-//	 }
-*/
-/*
- if (bStatusCalc)
- {
-int	b = m_Chart.GetSeriesCount();
-	for(j=0;j<b;j++)
-	m_Chart.DeleteSerie(0);
-    m_Chart.DeleteFamily(CALC);
-	bStatusCalc = false;
- }
-*/	CChartSerie*  pGraph;
+    m_Chart.DisableRefresh(true);
+	CChartSerie*  pGraph;
 	
  for (j=0;j<n_Step;j++)
  { 	
-//	 double* pX = new double[n_point*n_Mas];
-//   double* pY = new double[n_point*n_Mas];
-/*    switch(m_iStyleCurve)
-	{ case STYLE_LINE:	    pGraph = m_Chart.AddSerie(CChartSerie::stLine); break;
-	  case STYLE_POINT:	    pGraph = m_Chart.AddSerie(CChartSerie::stPoints); break;
-	  case STYLE_LINEPOINT:	pGraph = m_Chart.AddSerie(CChartSerie::stMixed); break;
-	}
-*/
 	pGraph = m_Chart.GetSerie(j);
 
-//	if (m_itipimp!=TIP_IMP) pGraph->SetSortPoints(false);
-//	if (m_irazv!=IMP_POS && m_irazv!=IMP_NEG) pGraph->SetSortPoints(false);
-//	if ((m_irazv!=IMP_POS && m_irazv!=IMP_NEG)||
-//		m_nelement==TS) pGraph->SetSortPoints(false);
-//	if ((m_irazv!=IMP_POS && m_irazv!=IMP_NEG && m_irazv!=DC_POS && m_irazv!=DC_NEG)||
-//		m_nelement==TS) pGraph->SetSortPoints(false);
-
-//	if (m_nelement==TS) 
-//		pGraph->SetSortPoints(false);
-//        else  pGraph->SetSortPoints(true);
  
 	if (((m_irazv==SYN_POS || m_irazv==SYN_NEG) && !m_bLooping) ||
 		(m_irazv==AC && !m_bLooping) ||
@@ -5118,21 +4531,12 @@ int	b = m_Chart.GetSeriesCount();
 					  if (m_bKolX==false) pX[i+n_point*m] = pM1[m][i+NPOINT*j] / pow(10.0,expo_X-po_X);
 								     else pX[i+n_point*m] = pM2[m][i+NPOINT*j] / pow(10.0,expo_X-po_X);
 					  break;
-//			  case 1: 
-//			  case 2: pX[i+n_point*m] = X_axis[i] / pow(10.0,expo_X-po_X); 
-//			          break;
-//			  case 1: pX[i+n_point*m] = pM3[m][i+NPOINT*j] / pow(10.0,expo_X-po_X); 
-//			 		  break;
-//			  case 2: pX[i+n_point*m] = pM4[m][i+NPOINT*j] / pow(10.0,expo_X-po_X);
-//					  break;
 			  case 1: if(iX == iY)
-//						  pX[i+n_point*m] = X_axis[i] / pow(10.0,expo_X-po_X); 
 						  pX[i+n_point*m] = X_axis[i+n_point*m] / pow(10.0,expo_X-po_X); 
 					  else	
 						  pX[i+n_point*m] = pM3[m][i+NPOINT*j] / pow(10.0,expo_X-po_X); 
 			 		  break;
 			  case 2: if(iX == iY)
-//						  pX[i+n_point*m] = X_axis[i] / pow(10.0,expo_X-po_X); 
 						  pX[i+n_point*m] = X_axis[i+n_point*m] / pow(10.0,expo_X-po_X); 
 					  else
 						  pX[i+n_point*m] = pM4[m][i+NPOINT*j] / pow(10.0,expo_X-po_X);
@@ -5151,29 +4555,11 @@ int	b = m_Chart.GetSeriesCount();
 		}
 
   }//end of m
-//	pGraph->SetColor(m_colorCurve);							//цвет кривой
 	pGraph->SetPoints(pX,pY,n_point*n_Mas);
-/*	if (bInversion) 
-	{
-	 TRACE(L"inverted\n");
-	 pGraph->SetXYInverted(true);
-	}
-//	delete[] pX;
-*/
-//	delete[] pY;
 }//end of j
 
-// if (stup==0  && n_Step==1)
-// {
-/*	pFamily = m_Chart.AddFamily();
-	pFamily->SetColor(m_colorCurve);
-	pFamily->SetName("Meas");
-// }
-*/	bStatusMeas = true;
+	bStatusMeas = true;
 	m_Chart.DisableRefresh(false);
-
-//	tick = ::GetTickCount() - tick;
-//	TRACE(L"SetMassivNpoint()!!!  time: %d ms\n",tick);
 }
 
 void CLineDlg::SetMassiv(BOOL bInversion) 
@@ -5190,23 +4576,14 @@ void CLineDlg::SetMassiv(BOOL bInversion)
 
       r1=0.0;
 	  r2=0.0;
-//      double c=0.0000000000001;	// эпсилон
 	  double x  = 0.0;	//искомое значение аргумента при значении 1 или 2 параметра
 	  double y  = 0.0;	//искомое значение функции при значении 1 или 2 параметра
-//	  double x1 = 0.0;	//координаты 1-ой точки аппроксимации
-//	  double y1 = 0.0;
-//	  double x2 = 0.0;	//координаты 2-ой точки аппроксимации
-//	  double y2 = 0.0;
-
 
 	int i=0;
 	int j=0;
 	int n_step=n_Step;
 	int n_point=NPOINT;
 	if (m_bLooping) n_point = NPOINT100;
-//	if (m_irazv==IMP_POS || m_irazv==IMP_NEG)&& n_point = 1; //Только if (m_iQue1==COLLECTOR)
-//	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_SINGLE) n_point = uNpointsLupa;//n_Result;
-//	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_MULTIPLE) n_point = n_Result;
 	if (m_iQue1==COLLECTOR)
 	{
 	if (m_irazv==IMP_POS || m_irazv==IMP_NEG) n_point = 1;
@@ -5217,55 +4594,17 @@ void CLineDlg::SetMassiv(BOOL bInversion)
 	if (m_iQue1==BAZA)
 	{
 		if (m_irazv==IMP_POS || m_irazv==IMP_NEG) {n_point = 1; n_Mas=m_uStepBaza*10;}
-//		if (m_irazv==IMP_POS || m_irazv==IMP_NEG) {n_point = m_uStepBaza*10; n_Mas=1;}//m_uStepBaza*10;
 	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_SINGLE) n_point = m_uStepBaza*10;//uNpointsLupa;//n_Result;
 	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_MULTIPLE) n_point = n_Result;
 	}
 
-
-////	static BOOL flag_inversion=false;
-//	CChartSerieFamily* pFamily;
-//	CChartSerieFamily* pFamily = m_Chart.GetFamily(0);
-
 	m_Chart.DisableRefresh(true);
-//	for(j=0;j<n_Step;j++)
-/*		int b = m_Chart.GetSeriesCount();
-		TRACE(L"SetMassiv: до удаления GetSeriesCount = %d\n",b);
-//		for(j=0;j<n_Step;j++)
-		for(j=0;j<b;j++)
-	m_Chart.DeleteSerie(0);
-		b = m_Chart.GetSeriesCount();
-		TRACE(L"SetMassiv: после удаления GetSeriesCount = %d\n",b);
-
-		b = m_Chart.GetFamiliesCount();
-		TRACE(L"SetMassiv: до удаления GetFamiliesCount = %d\n",b);
-    m_Chart.DeleteFamily(MEAS);
-		b = m_Chart.GetFamiliesCount();
-		TRACE(L"SetMassiv: после удаления GetFamiliesCount = %d\n",b);
-	bStatusMeas = false;
-*/
-		CChartSerie*  pGraph;
+	CChartSerie*  pGraph;
 
  for(j=0;j<n_step;j++)
  {  
-//    double* pX = new double[n_point*n_Mas];
-//    double* pY = new double[n_point*n_Mas];
-/*	switch(m_iStyleCurve)
-	{ case STYLE_LINE:	    pGraph = m_Chart.AddSerie(CChartSerie::stLine); break;
-	  case STYLE_POINT:	    pGraph = m_Chart.AddSerie(CChartSerie::stPoints); break;
-	  case STYLE_LINEPOINT:	pGraph = m_Chart.AddSerie(CChartSerie::stMixed); break;
-	}
-*/
 	pGraph = m_Chart.GetSerie(j);
-//	if (m_itipimp!=TIP_IMP) pGraph->SetSortPoints(false);
-//	if (m_irazv!=IMP_POS && m_irazv!=IMP_NEG) pGraph->SetSortPoints(false);
-//	if ((m_irazv!=IMP_POS && m_irazv!=IMP_NEG)||(m_irazv!=DC_POS && m_irazv!=DC_NEG)||
-//		m_nelement==TS) pGraph->SetSortPoints(false);
 
-//	if (m_nelement==TS) 
-//		pGraph->SetSortPoints(false);
-//        else  pGraph->SetSortPoints(true);
-	
 	if (((m_irazv==SYN_POS || m_irazv==SYN_NEG) && !m_bLooping) ||
 		(m_irazv==AC && !m_bLooping) ||
 		(m_nelement==TS))	pGraph->SetSortPoints(false);
@@ -5280,17 +4619,12 @@ void CLineDlg::SetMassiv(BOOL bInversion)
 		  { case 0: if (m_bKolX==false) pX[i+n_point*m] = pM1[m][i+NPOINT*j] / pow(10.0,expo_X-po_X);
 								   else pX[i+n_point*m] = pM2[m][i+NPOINT*j] / pow(10.0,expo_X-po_X);
 					break;
-//			case 1: 
-//			case 2: pX[i+n_point*m] = X_axis[i] / pow(10.0,expo_X-po_X); 
-//				    break;
 			  case 1: if(iX == iY)
-//						  pX[i+n_point*m] = X_axis[i] / pow(10.0,expo_X-po_X); 
 						  pX[i+n_point*m] = X_axis[i+n_point*m] / pow(10.0,expo_X-po_X); 
 					  else
 						  pX[i+n_point*m] = pM3[m][i+NPOINT*j] / pow(10.0,expo_X-po_X); 
 			 		  break;
 			  case 2: if(iX == iY)
-//						  pX[i+n_point*m] = X_axis[i] / pow(10.0,expo_X-po_X); 
 						  pX[i+n_point*m] = X_axis[i+n_point*m] / pow(10.0,expo_X-po_X); 
 					  else
 						  pX[i+n_point*m] = pM4[m][i+NPOINT*j] / pow(10.0,expo_X-po_X);
@@ -5320,14 +4654,6 @@ void CLineDlg::SetMassiv(BOOL bInversion)
 	}//end of m
 	pGraph->SetColor(m_colorCurve);							//цвет кривой
 	pGraph->SetPoints(pX,pY,n_point*n_Mas);
-/*	if (bInversion) 
-	{
-	 TRACE(L"inverted\n");
-	 pGraph->SetXYInverted(true);
-	}
-*/
-//	delete[] pX;
-//	delete[] pY;
 }//end of for j
 
 	bStatusMeas = true;
@@ -5338,8 +4664,6 @@ void CLineDlg::SetMassiv(BOOL bInversion)
   if (!bMeasDiff && !bStatusDiff)	
   {
 	if (!m_sPar.IsEmpty() && m_uFunc<2)
-//	if ((!m_sPar.IsEmpty() && m_uTp >0 && (m_uTp-1) == j && m_uFunc!=2)||
-//		(!m_sPar.IsEmpty() && m_uTp ==0 && m_uTp == j && m_uFunc!=2))
 	{ 
 		//расчет параметра 1
 	  // из уравнения прямой по 2-м точкам (x1,y1) (x2,y2): 
@@ -5410,17 +4734,7 @@ void CLineDlg::SetMassiv(BOOL bInversion)
   }//end of if (!bMeasDiff && !bStatusDiff)	
 
 	 //-------------------------
-//	delete[] pX;
-//	delete[] pY;
-//}//end of for j
 
-/*	pFamily = m_Chart.AddFamily();
-	pFamily->SetColor(m_colorCurve);
-	pFamily->SetName("Meas");
-*/
-//	bStatusMeas = true;
-//	m_Chart.DisableRefresh(false);
-	
 	TRACE(L"SetMassiv()!!!\n");
 }
 
@@ -5432,10 +4746,6 @@ double CLineDlg::GetXbyY(double Ur_y, int index_j)
 	int n_point=NPOINT;
 	if (m_bLooping) n_point = NPOINT100;
 	if (m_irazv==IMP_POS || m_irazv==IMP_NEG) n_point = 1;
-//	if (m_itipimp==TIP_IMP) {n_point = 1;}
-//	if (m_irazv==DC_POS || m_irazv==DC_NEG) {n_point = n_Result;}//n_step=1;}
-//	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_SINGLE) n_point = uNpointsLupa;//n_Result;
-//	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_MULTIPLE) n_point = n_Result;
 	if (m_iQue1==COLLECTOR)
 	{
 	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_SINGLE) n_point = uNpointsLupa;//n_Result;
@@ -5451,17 +4761,14 @@ double CLineDlg::GetXbyY(double Ur_y, int index_j)
 	int    index_m,m;
 	int    index,i;
 
-//for(j=0;j<n_step;j++)
  for (m=0;m<n_Mas;m++)
   for(i=0;i<n_point;i++)
 	 if (fabs(refY[m][i+n_point*index_j]- Ur_y)<=delta_min) 
 	 { delta_min = fabs(refY[m][i+n_point*index_j]-Ur_y);
-//	   index_j = j;
 	   index_m = m;
 	   index = i;
 	 }
 	 else continue;
-//if (index<=n_Result) Ur_x = refX[index_m][index+n_point*index_j];
 if (index<=n_point) Ur_x = refX[index_m][index+n_point*index_j];
 
 return Ur_x;
@@ -5477,10 +4784,6 @@ double CLineDlg::GetYbyX(double Ur_x, int index_j)
 	int n_point=NPOINT;
 	if (m_bLooping) n_point = NPOINT100;
 	if (m_irazv==IMP_POS || m_irazv==IMP_NEG) n_point = 1;
-//	if (m_itipimp==TIP_IMP) {n_point = 1;}
-//	if (m_irazv==DC_POS || m_irazv==DC_NEG) {n_point = n_Result;}//n_step=1;}
-//	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_SINGLE) n_point = uNpointsLupa;//n_Result;
-//	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_MULTIPLE) n_point = n_Result;
 	if (m_iQue1==COLLECTOR)
 	{
 	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_SINGLE) n_point = uNpointsLupa;//n_Result;
@@ -5496,17 +4799,14 @@ double CLineDlg::GetYbyX(double Ur_x, int index_j)
 
 	delta_min = fabs(refX[0][0+n_point*index_j]- Ur_x);
 
-//for(j=0;j<n_step;j++)
  for (m=0;m<n_Mas;m++)
   for(i=0;i<n_point;i++)
 	 if (fabs(refX[m][i+n_point*index_j]- Ur_x)<=delta_min) 
 	 { delta_min = fabs(refX[m][i+n_point*index_j]-Ur_x);
-//	   index_j = j;
 	   index_m = m;
 	   index = i;
 	 }
 	 else continue;
-//if (index<=n_Result) Ur_y = refY[index_m][index+n_point*index_j];
 if (index<=n_point) Ur_y = refY[index_m][index+n_point*index_j];
 
 return Ur_y;
@@ -5519,7 +4819,6 @@ void CLineDlg::InitAxis()
 
 	m_Chart.DisableRefresh(true);
 	
-//	rej_Y = rej_Y_Meas;
 	CChartSerieFamily* pFamily = m_Chart.GetFamily(0);
 			pFamily->SetName("Meas");
 
@@ -5566,63 +4865,6 @@ void CLineDlg::InitAxis()
 }
 
 
-/*
-void CLineDlg::InitAxis() 
-{
-	TRACE (L"InitAxis();\n");
-
-	m_Chart.DisableRefresh(true);
-	
-//	rej_Y = rej_Y_Meas;
-	CChartSerieFamily* pFamily = m_Chart.GetFamily(0);
-			pFamily->SetName("Meas");
-
-			CChartAxis* pAxisLeft =  m_Chart.GetLeftAxis();
-			CChartAxis* pAxisBottom =  m_Chart.GetBottomAxis();
-
-  if(!m_bCheckKolRejHigh)
-  {
-	 pAxisBottom->SetAutomatic(false);
-	 pAxisLeft->SetAutomatic(false);
-
-	uPrecigion = 1;
-	if ((m_iX==1 || m_iY==1) && (m_iButNull==LEFT || m_iButNull==RIGHT)) uPrecigion = 2;
-	
-	  po_X = SubGetStrRazmer(rej_X,expo_X,m_sAxisX);
-	  pAxisBottom->SetLabelText(strRazmer);
-	  ScaleX = strRazmer;
-	  TRACE(L"%f, %f\n",cifra_axes[m_iButNull][m_iX][0],cifra_axes[m_iButNull][m_iX][1]);
-      pAxisBottom->SetMinMax(cifra_axes[m_iButNull][m_iX][0] * pow(10.0,po_X),
-		                               cifra_axes[m_iButNull][m_iX][1] * pow(10.0,po_X));
-	  MinX = cifra_axes[m_iButNull][m_iX][0] * pow(10.0,po_X);
-	  MaxX = cifra_axes[m_iButNull][m_iX][1] * pow(10.0,po_X);
-      pAxisBottom->SetBigTickIncrement(big_tick[m_iButNull][m_iX] * pow(10.0,po_X));
-	  StepX = big_tick[m_iButNull][m_iX] * pow(10.0,po_X);
-
-	  po_Y = SubGetStrRazmer(rej_Y,expo_Y,m_sAxisY);
-	  m_pAxisLeft->SetLabelText(strRazmer);
-	  ScaleY = strRazmer;
-	  pAxisLeft->SetMinMax(cifra_axes[m_iButNull][m_iY][0] * pow(10.0,po_Y),
-		                             cifra_axes[m_iButNull][m_iY][1] * pow(10.0,po_Y));
-	  MinY = cifra_axes[m_iButNull][m_iY][0] * pow(10.0,po_Y);
-	  MaxY = cifra_axes[m_iButNull][m_iY][1] * pow(10.0,po_Y);
-	  pAxisLeft->SetBigTickIncrement(big_tick[m_iButNull][m_iY] * pow(10.0,po_Y));
-	  StepY = big_tick[m_iButNull][m_iY] * pow(10.0,po_Y);
-
-  }
-  if(m_bCheckKolRejHigh)
-  {
-      pAxisBottom->SetMinMax(MinX,MaxX);
-      pAxisBottom->SetBigTickIncrement(StepX);
-	  pAxisLeft->SetMinMax(MinY,MaxY);
-	  pAxisLeft->SetBigTickIncrement(StepY);
-	  AxisBottom->SetAutomatic(true);
-	  pAxisLeft->SetAutomatic(true);
-  }
-	m_Chart.DisableRefresh(false);
-}
-*/
-
 void CLineDlg::InitStatusKol()
 {  
 	UpdateData();
@@ -5639,8 +4881,6 @@ void CLineDlg::InitStatusKol()
 				   m_nelement==PMOS ||m_nelement==PMOS4) m_irazv = DC_NEG;
 			     m_idlitimp = 0;
 			   }
-//			   if (n_Switch==1) { m_idlitimp=5;m_irazv=IMP_POS;}
-//			   if (n_Switch==2) { m_idlitimp=5;m_irazv=IMP_NEG;}
 			   break;
 	  case 1:  //вкл.
 				if (m_iQue1==COLLECTOR)
@@ -5668,11 +4908,8 @@ void CLineDlg::InitStatusKol()
 void CLineDlg::InitStatusBaza()
 {
 	UpdateData();
-//	if (m_iCircuitBaza==1)
 	if (m_iCircuitBaza==1 && m_iKnotBaza==1)
 	{ //база
-//	  m_iBazaSource = 1;	
-//	  m_iBazaMeas = 0;
 	  m_bBaza= false;
 	  m_bBazaVkl = false;
 	  m_uStepBaza = 0;
@@ -5704,9 +4941,7 @@ void CLineDlg::InitStatusBaza()
 	}
 	else
 	{ 
-/*		m_iBazaSource = -1;
-	  m_iBazaMeas = -1;
-*/	  m_bBazaVkl = false;
+	  m_bBazaVkl = false;
 	  m_bBaza= false;
 	  m_uStepBaza = 0;
 	  m_bFamilyVkl = false;
@@ -5720,13 +4955,11 @@ void CLineDlg::InitStatusBaza()
 void CLineDlg::InitStatusDop()
 {
 	UpdateData();
-//	if (m_iCircuitDop==1)
 	if (m_iCircuitDop==1 && m_iKnotDop==1)
 	{ //база
 	  m_iDopSource = 0;	
 	  m_iDopMeas = 0;//1;
 	  m_bDop = false;
-//	  m_bDopVkl = false;
 	  m_uStepDop = 0;
 	  m_bFamilyVkl = false;
 	  m_iFamilyVkl = 0;
@@ -5735,9 +4968,6 @@ void CLineDlg::InitStatusDop()
 	}
 	else
 	{
-//		m_iDopSource = -1;
-//	  m_iDopMeas = -1;
-//	  m_bDopVkl = false;
 	  m_bDop = false;
 	  m_uStepDop = 0;
 	  m_bFamilyVkl = false;
@@ -5747,272 +4977,6 @@ void CLineDlg::InitStatusDop()
 	}
 	UpdateData(FALSE);
 }
-/*
-void CLineDlg::SetStringsSourceMeas()
-{ CWnd* pwnd;
-  //наименоания узлов и измеряемых и генерируемых величин
-  //======================================================
-  TRACE(_T("SetStringsSourceMeas()\n"));
-
-	CString uzel_C =_T("");
-	CString uzel_B =_T("");
-	CString uzel_S =_T("");
-	CString uzel_E =_T("");
-	
-	UpdateData();
-
-//    m_bBaza = false; m_iBazaMeas =! m_iBazaSource;
-//	m_bDop  = false; m_iDopMeas =! m_iDopSource;
-  if (m_nelement!=-1)
-  {
-	if (m_iKommutator==0)
-	{//внутренняя коммутация=> прямое подключение электродов
-		uzel_C = strKnot[m_nelement][COLLECTOR]; m_iKnotKol=1;
-		uzel_B = strKnot[m_nelement][BAZA];      m_iKnotBaza=1;
-		uzel_S = strKnot[m_nelement][DOP];       m_iKnotDop=1;
-		uzel_E = strKnot[m_nelement][EMITTER];   m_iKnotEm=1;
-	}
-	else
-	{//внешняя коммутация => возможно обратное подключение электродов
-	   //всё стереть
-       ShowControls(bmpRejKnotExtern,SIZEOF_ARRAY(bmpRejKnotExtern),FALSE);	
-
-//		if (m_nelement==DIOD)
-		if (m_nelement==DIOD || m_nelement==RES)
-		{ uzel_C = _T("a");
-					pwnd=GetDlgItem(IDC_STATUS_KOL_ON);
-				    if (pwnd){ pwnd->MoveWindow(&RectBitKol);
-							   pwnd->ShowWindow(SW_SHOW);}
-		  uzel_E = _T("k");
-		}
-//		if (m_nelement==RES)
-//		{ uzel_C = _T("a");
-//		  uzel_E = _T("b");
-//		}
-		if ((m_nelement==NPN) || (m_nelement==PNP) || (m_nelement==NPN4) || (m_nelement==PNP4)) 
-		{	
-//		  pwnd=GetDlgItem(IDC_STATUS_KOL_OFF);
-//		  pwnd->ShowWindow(SW_HIDE);
-		  switch(m_iGnezdoC)
-		  { case 0: uzel_C = _T("c"); 
-					pwnd=GetDlgItem(IDC_STATUS_KOL_ON);
-				    if (pwnd){ pwnd->MoveWindow(&RectBitKol);
-							   pwnd->ShowWindow(SW_SHOW);}
-				    break;
-		    case 1: uzel_B = _T("c"); 
-					pwnd=GetDlgItem(IDC_STATUS_KOL_ON);
-				    if (pwnd){ pwnd->MoveWindow(&RectBitKol);
-							   pwnd->ShowWindow(SW_SHOW);}
-				    break;
-		    case 2: uzel_E = _T("c"); 
-					pwnd=GetDlgItem(IDC_STATUS_KOL_ON);
-				    if (pwnd){ pwnd->MoveWindow(&RectBitKol);
-							   pwnd->ShowWindow(SW_SHOW);}
-				    break;
-			case 3: 
-				    pwnd=GetDlgItem(IDC_STATUS_KOL_OFF);
-				    if (pwnd){ pwnd->MoveWindow(&RectBitKol);
-							   pwnd->ShowWindow(SW_SHOW);}
-				    break;
-
-		  }
-		  switch(m_iGnezdoB)
-		  { case 0: uzel_C = _T("b");
-		  			pwnd=GetDlgItem(IDC_STATUS_BAZA_ON);
-				    if (pwnd){ pwnd->MoveWindow(&RectBitBaza);
-							   pwnd->ShowWindow(SW_SHOW);}
-					break;
-		    case 1: uzel_B = _T("b"); 
-		  			pwnd=GetDlgItem(IDC_STATUS_BAZA_ON);
-				    if (pwnd){ pwnd->MoveWindow(&RectBitBaza);
-							   pwnd->ShowWindow(SW_SHOW);}
-				    break;
-		    case 2: uzel_E = _T("b");
-		  			pwnd=GetDlgItem(IDC_STATUS_BAZA_ON);
-				    if (pwnd){ pwnd->MoveWindow(&RectBitBaza);
-							   pwnd->ShowWindow(SW_SHOW);}
-				    break;
-			case 3: pwnd=GetDlgItem(IDC_STATUS_BAZA_OFF);
-				    if (pwnd){ pwnd->MoveWindow(&RectBitBaza);
-							   pwnd->ShowWindow(SW_SHOW);}
-					break;
-		  }
-		  switch(m_iGnezdoE)
-		  { case 0: uzel_C = _T("e"); 
-					pwnd=GetDlgItem(IDC_STATUS_EM_ON);
-				    if (pwnd){ pwnd->MoveWindow(&RectBitEm);
-							   pwnd->ShowWindow(SW_SHOW);}
-					break;
-		    case 1: uzel_B = _T("e"); 
-				    pwnd=GetDlgItem(IDC_STATUS_EM_ON);
-				    if (pwnd){ pwnd->MoveWindow(&RectBitEm);
-							   pwnd->ShowWindow(SW_SHOW);}
-					break;
-		    case 2: uzel_E = _T("e"); 
-				    pwnd=GetDlgItem(IDC_STATUS_EM_ON);
-				    if (pwnd){ pwnd->MoveWindow(&RectBitEm);
-							   pwnd->ShowWindow(SW_SHOW);}
-					break;
-			case 3: pwnd=GetDlgItem(IDC_STATUS_EM_OFF);
-				    if (pwnd){ pwnd->MoveWindow(&RectBitEm);
-							   pwnd->ShowWindow(SW_SHOW);}
-					break;
-		  }
-		}
-		if ((m_nelement==NMOS) || (m_nelement==PMOS) || (m_nelement==NMOS4) || (m_nelement==PMOS4)) 
-		{	
-					pwnd=GetDlgItem(IDC_STATUS_KOL_ON);
-				    if (pwnd){ pwnd->MoveWindow(&RectBitKol);
-							   pwnd->ShowWindow(SW_SHOW);}
-		  switch(m_iGnezdoC)
-		  { case 0: uzel_C = _T("d"); break;
-		    case 1: uzel_B = _T("d"); break;
-		    case 2: uzel_E = _T("d"); break;
-		  }
-		  switch(m_iGnezdoB)
-		  { case 0: uzel_C = _T("g"); break;
-		    case 1: uzel_B = _T("g"); break;
-		    case 2: uzel_E = _T("g"); break;
-		  }
-		  switch(m_iGnezdoE)
-		  { case 0: uzel_C = _T("s"); break;
-		    case 1: uzel_B = _T("s"); break;
-		    case 2: uzel_E = _T("s"); break;
-		  }
-		}
-		if (m_nelement==TS)
-		{	
-					pwnd=GetDlgItem(IDC_STATUS_KOL_ON);
-				    if (pwnd){ pwnd->MoveWindow(&RectBitKol);
-							   pwnd->ShowWindow(SW_SHOW);}
-		  switch(m_iGnezdoC)
-		  { case 0: uzel_C = _T("a"); break;
-		    case 1: uzel_B = _T("a"); break;
-		    case 2: uzel_E = _T("a"); break;
-		  }
-		  switch(m_iGnezdoB)
-		  { case 0: uzel_C = _T("g"); break;
-		    case 1: uzel_B = _T("g"); break;
-		    case 2: uzel_E = _T("g"); break;
-		  }
-		  switch(m_iGnezdoE)
-		  { case 0: uzel_C = _T("k"); break;
-		    case 1: uzel_B = _T("k"); break;
-		    case 2: uzel_E = _T("k"); break;
-		  }
-		}
-
-		if ((m_nelement==NPN4) || (m_nelement==PNP4)|| (m_nelement==TS)) uzel_S = _T("s");
-		if ((m_nelement==NMOS4) || (m_nelement==PMOS4)) uzel_S = _T("b");
-	
-
-	}
-	if (((m_nelement==DIOD || m_nelement==RES)&&(m_iGnezdoC==m_iGnezdoE))||
-		((m_nelement!=DIOD) && (m_nelement!=RES))&&
-		((m_iGnezdoC==m_iGnezdoB && m_iGnezdoC!=3) || 
-		 (m_iGnezdoC==m_iGnezdoE && m_iGnezdoC!=3) ||
-		 (m_iGnezdoB==m_iGnezdoE && m_iGnezdoB!=3)))// && m_iKommutator==0)
-	{ SetTextInfo(_T("ПРОВЕРЬТЕ СХЕМУ ВКЛЮЧЕНИЯ!"));
-	}
-	else
-	{//OK'
-	  if (uzel_C==_T("")) m_iKnotKol=0; else m_iKnotKol=1;
-	  if (uzel_B==_T("")) m_iKnotBaza=0; else m_iKnotBaza=1;
-	  if (uzel_S==_T("")) m_iKnotDop=0; else m_iKnotDop=1;
-	  if (uzel_E==_T("")) m_iKnotEm=0; else m_iKnotEm=1;
-		
-	  strTestName = m_EL + _T(" \\ ") + m_MOD;
-//	  SetTextInfo(_T("ПРОВЕРЬТЕ ПАРАМЕТРЫ И ПРОВЕДИТЕ ИЗМЕРЕНИЕ") + strTestName);
-	  SetTextInfo(_T("TEST: ") + strTestName);
-	// коллектор
-	//**********
-	m_sKnotKol = uzel_C;
-    switch (m_iCircuitKol)
-	{ case -1: case 0: case 1:
-			    m_sKolMeasU   = _T("U") + uzel_C;	
-			    m_sKolMeasI   = _T("I") + uzel_C;	
-			    m_sSliderKolU = m_sKolMeasU;
-				break;
-	}
-
-	// база 
-	//******
-	m_sKnotBaza   = uzel_B;//strKnot[m_nelement][BAZA];
-	if (m_iCircuitBaza==1)
-//	if (m_iCircuitBaza==1 && m_iKnotBaza==1)
-	{	
-	switch(m_iBazaSource)
-	{ case -1:  m_sBazaSource=_T(""); break;
-	  case 0:	//источник U
-		        m_sBazaSource=_T("U") + uzel_B; 
-				m_sBazaMeasLimit=_T("I") + uzel_B; break;
-	  case 1:   //источник I
-		        m_sBazaSource=_T("I") + uzel_B; 
-				m_sBazaMeasLimit=_T("U") + uzel_B; break;
-	}
-
-    if (m_sAxisY==m_sBazaMeasLimit)  
-	{ m_bBaza = true;
-	  m_iBazaMeas=!m_iBazaSource;
-	}
-	else
-	{ m_bBaza = false;
-	  m_iBazaMeas=m_iBazaSource;
-	}
-
-	switch(m_iBazaMeas)
-	{ case -1:  m_sBazaMeas=_T("");	break;
-	  case 0:	//измеритель U
-				m_sBazaMeas=_T("U") + uzel_B; break;
-	  case 1:   //измеритель I
-				m_sBazaMeas=_T("I") + uzel_B; break;
-	}
-	}
-	// доп. канал 
-	//***********
-	if (m_iCircuitDop==1)
-//	if (m_iCircuitDop==1 && m_iKnotDop==1)
-	{
-	m_sKnotDop    = uzel_S;//strKnot[m_nelement][DOP];
-	switch(m_iDopSource)
-	{ case -1:  m_sDopSource=_T(""); break;
-	  case 0:	//источник U
-		        m_sDopSource=_T("U") + uzel_S; 
-				m_sDopMeasLimit=_T("I") + uzel_S; break;
-	  case 1:   //источник I
-		        m_sDopSource=_T("I") + uzel_S; 
-				m_sDopMeasLimit=_T("U") + uzel_S; break;
-	}
-
-    if (m_sAxisY==m_sDopMeasLimit)  
-	{ m_bDop = true;
-	  m_iDopMeas=!m_iDopSource;
-	}
-	else
-	{ m_bDop = false;
-	  m_iDopMeas=m_iDopSource;
-	}
-
-	switch(m_iDopMeas)
-	{ case -1:  m_sDopMeas=_T("");	break;
-	  case 0:	//измеритель U
-				m_sDopMeas=_T("U") + uzel_S; break;
-	  case 1:   //измеритель I
-				m_sDopMeas=_T("I") + uzel_S; break;
-	}
-	}
-	// эмиттер
-	//********
-	m_sKnotEm     = uzel_E;//strKnot[m_nelement][EMITTER];
-//	ClearResults();
-	InitTablRes();
-	m_sRangMaxKolI = _T("О г р а н и ч е н и е  ")+ m_sSliderKolU+_T(", %");
-	UpdateData(FALSE);
-
-	}//end of OK'
-}  
-}
-*/
 
 void CLineDlg::SetStringsSourceMeas()
 { CWnd* pwnd;
@@ -6027,10 +4991,6 @@ void CLineDlg::SetStringsSourceMeas()
 	n_obryv = 0;	//количество обрывов при внешней коммутации
 	b_InitAxis=true;
 
-//	UpdateData();
-
-//    m_bBaza = false; m_iBazaMeas =! m_iBazaSource;
-//	m_bDop  = false; m_iDopMeas =! m_iDopSource;
   if (m_nelement!=-1)
   {
 	if (m_iKommutator==0)
@@ -6062,8 +5022,6 @@ void CLineDlg::SetStringsSourceMeas()
 
 		if ((m_nelement==NPN) || (m_nelement==PNP) || (m_nelement==NPN4) || (m_nelement==PNP4)) 
 		{	
-//		  pwnd=GetDlgItem(IDC_STATUS_KOL_OFF);
-//		  pwnd->ShowWindow(SW_HIDE);
 		  switch(m_iGnezdoC)
 		  { case 0: uzel_C = _T("c"); 
 					pwnd=GetDlgItem(IDC_STATUS_KOL_ON);
@@ -6134,9 +5092,6 @@ void CLineDlg::SetStringsSourceMeas()
 		}
 		if ((m_nelement==NMOS) || (m_nelement==PMOS) || (m_nelement==NMOS4) || (m_nelement==PMOS4)) 
 		{	
-//					pwnd=GetDlgItem(IDC_STATUS_KOL_ON);
-//				    if (pwnd){ pwnd->MoveWindow(&RectBitKol);
-//							   pwnd->ShowWindow(SW_SHOW);}
 		  switch(m_iGnezdoC)
 		  { case 0: uzel_C = _T("d"); 
 					pwnd=GetDlgItem(IDC_STATUS_KOL_ON);
@@ -6208,9 +5163,6 @@ void CLineDlg::SetStringsSourceMeas()
 		}
 		if (m_nelement==TS)
 		{	
-//					pwnd=GetDlgItem(IDC_STATUS_KOL_ON);
-//				    if (pwnd){ pwnd->MoveWindow(&RectBitKol);
-//							   pwnd->ShowWindow(SW_SHOW);}
 		  switch(m_iGnezdoC)
 		  { case 0: uzel_C = _T("a"); 
 					pwnd=GetDlgItem(IDC_STATUS_KOL_ON);
@@ -6285,14 +5237,6 @@ void CLineDlg::SetStringsSourceMeas()
 	
 
 	}
-/*	if (((m_nelement==DIOD || m_nelement==RES)&&(m_iGnezdoC==m_iGnezdoE))||
-		((m_nelement!=DIOD) && (m_nelement!=RES))&&
-		((m_iGnezdoC==m_iGnezdoB && m_iGnezdoC!=3) || 
-		 (m_iGnezdoC==m_iGnezdoE && m_iGnezdoC!=3) ||
-		 (m_iGnezdoB==m_iGnezdoE && m_iGnezdoB!=3)))
-		 ((m_nelement==NPN || m_nelement==PNP || m_nelement==NMOS || m_nelement==PMOS) && n_obryv>1)) ||
-		  ((m_nelement==NMOS4 || m_nelement==PMOS4 || m_nelement==NPN4 || m_nelement==PNP4) && n_obryv>2)))
-*/
 	  if (uzel_C==_T("")) m_iKnotKol=0; else m_iKnotKol=1;
 	  if (uzel_B==_T("")) m_iKnotBaza=0; else m_iKnotBaza=1;
 	  if (uzel_S==_T("")) m_iKnotDop=0; else m_iKnotDop=1;// m_iKnotDop=0;
@@ -6303,7 +5247,6 @@ void CLineDlg::SetStringsSourceMeas()
 		 (m_iGnezdoB==m_iGnezdoE && m_iGnezdoB!=3) ||
 		 (m_nelement>PMOS && n_obryv>2) ||
  		 (m_nelement>RES && m_nelement<NPN4 && n_obryv>1) ||
-//		 (uzel_C==_T("")))
 		  (uzel_C==_T("") && m_iQue1==COLLECTOR) ||
 		  (uzel_B==_T("") && m_iQue1==BAZA))
 
@@ -6311,13 +5254,7 @@ void CLineDlg::SetStringsSourceMeas()
 	}
 	else
 	{//OK'
-/*	  if (uzel_C==_T("")) m_iKnotKol=0; else m_iKnotKol=1;
-	  if (uzel_B==_T("")) m_iKnotBaza=0; else m_iKnotBaza=1;
-	  if (uzel_S==_T("")) m_iKnotDop=0; else m_iKnotDop=1;
-	  if (uzel_E==_T("")) m_iKnotEm=0; else m_iKnotEm=1;
-*/		
 	  strTestName = m_EL + _T(" \\ ") + m_MOD;
-//	  SetTextInfo(_T("ПРОВЕРЬТЕ ПАРАМЕТРЫ И ПРОВЕДИТЕ ИЗМЕРЕНИЕ") + strTestName);
 	  SetTextInfo(_T("TEST: ") + strTestName);
 	// коллектор
 	//**********
@@ -6334,7 +5271,6 @@ void CLineDlg::SetStringsSourceMeas()
 	//******
    	  m_sKnotBaza   = uzel_B;//strKnot[m_nelement][BAZA];
       if (m_iCircuitBaza==1)
-//	if (m_iCircuitBaza==1 && m_iKnotBaza==1)
 	  {	
 		switch(m_iBazaSource)
 		{ case -1:  m_sBazaSource=_T(""); break;
@@ -6366,7 +5302,6 @@ void CLineDlg::SetStringsSourceMeas()
 	// доп. канал 
 	//***********
 	if (m_iCircuitDop==1)
-//	if (m_iCircuitDop==1 && m_iKnotDop==1)
 	{
 	m_sKnotDop    = uzel_S;//strKnot[m_nelement][DOP];
 	switch(m_iDopSource)
@@ -6413,17 +5348,14 @@ void CLineDlg::SetStringsSourceMeas()
 						else m_bS = false;
 //<=					
 	InitTablRes();
-//	UpdateData(FALSE);	//убрала 29.11.17
 
 	}//end of OK'
-
 }  
 }
 
 
 void CLineDlg::InitPage(int nPage)
 {
-//	UpdateData();	//убрала 29.11.17
 	switch(nPage)
 	{ 
 	  case 0: //Схема включения
@@ -6433,29 +5365,17 @@ void CLineDlg::InitPage(int nPage)
 			      ShowControls(aPage0_loadtst,SIZEOF_ARRAY(aPage0_loadtst),FALSE);
 			  else
 			      ShowControls(aPage0_loadtst,SIZEOF_ARRAY(aPage0_loadtst),TRUE);
-/*			  if (m_nelement>=0)
-			  {	CWnd* pwnd=GetDlgItem(aElement_OFF[m_nelement]);
-				if (pwnd) pwnd->ShowWindow(SW_HIDE);
-//				pwnd=GetDlgItem(aElement_ON[m_nelement]);
-//				if (pwnd) pwnd->ShowWindow(SW_SHOW);
-			  }
-*/			  ShowControls(aPage1,SIZEOF_ARRAY(aPage1),FALSE);
+			  ShowControls(aPage1,SIZEOF_ARRAY(aPage1),FALSE);
 			  ShowControls(aPage2,SIZEOF_ARRAY(aPage2),FALSE);
 			  ShowControls(aPage3,SIZEOF_ARRAY(aPage3),FALSE);
 			  ShowControls(aPage4,SIZEOF_ARRAY(aPage4),FALSE);
 			  if (m_nelement==DIOD || m_nelement==RES)	//двухполюсник
 			      ShowControls(aPage0_bipolar2,SIZEOF_ARRAY(aPage0_bipolar2),FALSE);
-//			      DisableControls(aPage0_bipolar2,SIZEOF_ARRAY(aPage0_bipolar2),FALSE);
 			  if (m_nelement>RES && m_nelement < NPN4)	//трёхполюсник
-//			  if (m_nelement>1 && m_nelement < 6)	//трёхполюсник
 			      ShowControls(aPage0_bipolar3,SIZEOF_ARRAY(aPage0_bipolar3),FALSE);
-//			      DisableControls(aPage0_bipolar3,SIZEOF_ARRAY(aPage0_bipolar3),FALSE);
-//@			  SetStringsSourceMeas();
 			  SetListTest();
 			  BuildCircuit();
 			
-
-//			  ShowRejimChanel(); //7.12.17
 			  ShowQue1(); 
 
 		 	  ShowGnezdoKommutator();
@@ -6466,37 +5386,26 @@ void CLineDlg::InitPage(int nPage)
 			  ShowControls(aPage0,SIZEOF_ARRAY(aPage0),FALSE);
 			      ShowControls(aPage0_loadtst,SIZEOF_ARRAY(aPage0_loadtst),FALSE);
 			  ShowControls(aElement_OFF,SIZEOF_ARRAY(aElement_OFF),FALSE);
-//			  ShowControls(aElement_ON,SIZEOF_ARRAY(aElement_ON),FALSE);
 			  ShowControls(aBmpCircuit_Off,SIZEOF_ARRAY(aBmpCircuit_Off),FALSE);	
 			  ShowControls(aPage1,SIZEOF_ARRAY(aPage1),TRUE);
 			  ShowControls(aPage2,SIZEOF_ARRAY(aPage2),FALSE);
 			  ShowControls(aPage3,SIZEOF_ARRAY(aPage3),FALSE);
 			  ShowControls(aPage4,SIZEOF_ARRAY(aPage4),FALSE);
-//			  if (m_irazv!=0 && m_irazv!=4)		//не IMP
-//			      ShowControls(aImpuls_OFF,SIZEOF_ARRAY(aImpuls_OFF),FALSE);	
-//			      DisableControls(aImpuls_OFF,SIZEOF_ARRAY(aImpuls_OFF),FALSE);	
 			  if (m_iCircuitKol==0)				//коллектор в обрыве
 			      DisableControls(aPage1_break,SIZEOF_ARRAY(aPage1_break),FALSE);
-////			      ShowControls(aPage1,SIZEOF_ARRAY(aPage1),FALSE);
 			  InitIconImp();			 
 			  break;
 	  case 3:	//case 2: //База
 			  ShowControls(aPage0,SIZEOF_ARRAY(aPage0),FALSE);
 			      ShowControls(aPage0_loadtst,SIZEOF_ARRAY(aPage0_loadtst),FALSE);
 			  ShowControls(aElement_OFF,SIZEOF_ARRAY(aElement_OFF),FALSE);
-//			  ShowControls(aElement_ON,SIZEOF_ARRAY(aElement_ON),FALSE);
 			  ShowControls(aBmpCircuit_Off,SIZEOF_ARRAY(aBmpCircuit_Off),FALSE);	
 			  ShowControls(aPage1,SIZEOF_ARRAY(aPage1),FALSE);
-//			  if (m_iCircuitBaza==1) ShowControls(aPage2,SIZEOF_ARRAY(aPage2),TRUE);
 	if (m_iCircuitBaza==1 && m_iKnotBaza==1)
 				  ShowControls(aPage2,SIZEOF_ARRAY(aPage2),TRUE);
 
 			  ShowControls(aPage3,SIZEOF_ARRAY(aPage3),FALSE);
 			  ShowControls(aPage4,SIZEOF_ARRAY(aPage4),FALSE);
-//			  if (m_iCircuitBaza!=1)			//база в обрыве (-коллектор,-эмиттер или -эмиттер, 1kOm)
-//			      DisableControls(aPage2,SIZEOF_ARRAY(aPage2),FALSE);
-//			  if ((m_irazv==0 || m_irazv==4))	//---!
-//			  if (m_irazv==IMP_POS || m_irazv==IMP_NEG || m_irazv==SYN_POS || m_irazv==SYN_NEG)	//---!
 			  if (m_irazv==SYN_POS || m_irazv==SYN_NEG)	//---!
 			  { if  (m_nelement<2)  GetDlgItem(IDC_CHECK_BAZA_VKL)->ShowWindow(SW_HIDE);//двухполюсники
 			    if  (m_nelement>=2 && m_iCircuitBaza == 1 && m_iKnotBaza==1) 
@@ -6510,29 +5419,22 @@ void CLineDlg::InitPage(int nPage)
 			  ShowControls(aPage0,SIZEOF_ARRAY(aPage0),FALSE);
 			      ShowControls(aPage0_loadtst,SIZEOF_ARRAY(aPage0_loadtst),FALSE);
 			  ShowControls(aElement_OFF,SIZEOF_ARRAY(aElement_OFF),FALSE);
-//			  ShowControls(aElement_ON,SIZEOF_ARRAY(aElement_ON),FALSE);
 			  ShowControls(aBmpCircuit_Off,SIZEOF_ARRAY(aBmpCircuit_Off),FALSE);	
 			  ShowControls(aPage1,SIZEOF_ARRAY(aPage1),FALSE);
 			  ShowControls(aPage2,SIZEOF_ARRAY(aPage2),FALSE);
-//			  if (m_iCircuitDop==1) 
 	if (m_iCircuitDop==1 && m_iKnotDop==1)
 				  ShowControls(aPage3,SIZEOF_ARRAY(aPage3),TRUE);
 			  ShowControls(aPage4,SIZEOF_ARRAY(aPage4),FALSE);
-//			  if (m_iCircuitDop!=1)				//доп.кан. в обрыве или -эмиттер
-//			      DisableControls(aPage3,SIZEOF_ARRAY(aPage3),FALSE);	
 			  break;
 	  case 1:	//case 4: //Расчёт
 			  ShowControls(aPage0,SIZEOF_ARRAY(aPage0),FALSE);
 			      ShowControls(aPage0_loadtst,SIZEOF_ARRAY(aPage0_loadtst),FALSE);
 			  ShowControls(aElement_OFF,SIZEOF_ARRAY(aElement_OFF),FALSE);
-//			  ShowControls(aElement_ON,SIZEOF_ARRAY(aElement_ON),FALSE);
 			  ShowControls(aBmpCircuit_Off,SIZEOF_ARRAY(aBmpCircuit_Off),FALSE);	
 			  ShowControls(aPage1,SIZEOF_ARRAY(aPage1),FALSE);
 			  ShowControls(aPage2,SIZEOF_ARRAY(aPage2),FALSE);
 			  ShowControls(aPage3,SIZEOF_ARRAY(aPage3),FALSE);
 			  ShowControls(aPage4,SIZEOF_ARRAY(aPage4),TRUE);
-//			  if (m_uStepBaza==0 && m_uStepDop==0)
-//			      DisableControls(aPoint_OFF,SIZEOF_ARRAY(aPoint_OFF),FALSE);	
 			  if (m_sUr1.IsEmpty() || m_sUr2.IsEmpty())
 			  { DisableControls(aFormula_OFF,SIZEOF_ARRAY(aFormula_OFF),FALSE);	
 			    m_iForm = -1;
@@ -6552,14 +5454,11 @@ void CLineDlg::InitPage(int nPage)
 			  }
 		      break;
 	}
-//	UpdateData(FALSE);	//убрала 29.11.17
-
 }
 
 void CLineDlg::ShowQue1() 
 {	
     CString str;
-//    UpdateData();	//убрала 29.11.17
 	CComboBox *pCb = (CComboBox*) GetDlgItem(IDC_COMBO_QUE1);
     pCb->ResetContent();
 	str=_T(" Канал С");
@@ -6569,411 +5468,8 @@ void CLineDlg::ShowQue1()
 	  str=_T(" Канал B");
 	  pCb->AddString(str);
 	}
-//	m_iQue1 = 0;	//только канал С
 	pCb->SetCurSel(m_iQue1);
-//	UpdateData(false);			//убрала 29.11.17
 }
-/*
-void CLineDlg::ShowRejimChanel() 
-{	
-	CWnd* pwnd;
-    CString str;
-	TRACE(_T("ShowRejimChanel()\n"));
- if (m_iQue1==COLLECTOR)
- {
-	//всё стереть
-    ShowControls(aIconRejimChanelC,SIZEOF_ARRAY(aIconRejimChanelC),FALSE);
-	
-	switch(m_nelement)
-	{//1 
-	  case DIOD: case RES:  //канал С
-							GetDlgItem(IDC_STATICCHANELC)->ShowWindow(SW_SHOW);
-							pwnd=GetDlgItem(aIconRejimChanelC[m_irazv]);
-							if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelC);
-										  pwnd->ShowWindow(SW_SHOW);
-										}
-							//канал В
-							GetDlgItem(IDC_STATICCHANELB)->ShowWindow(SW_HIDE);
-							break;
-	  case NPN: case PNP: case NMOS: case PMOS:
-	  case NPN4: case PNP4: case NMOS4: case PMOS4: 
-							//канал С
-//							if (m_iCircuitKol==1 && m_iGnezdoC!=4)
-//							if (m_iGnezdoC!=4)
-							if (m_iCircuitKol==1 && m_iKnotKol==1)
-							{//2
-							  GetDlgItem(IDC_STATICCHANELC)->ShowWindow(SW_SHOW);
-							  switch(m_irazv)
-							  { case IMP_POS: //GetDlgItem(IDC_STATICTIPDCPOS)->ShowWindow(SW_SHOW);
-											  pwnd=GetDlgItem(IDC_STATICTIPDCPOS);
-							                  if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelC);
-									                      pwnd->ShowWindow(SW_SHOW);
-														}
-
-											  break;
-							    case IMP_NEG: //GetDlgItem(IDC_STATICTIPDCNEG)->ShowWindow(SW_SHOW);
-											  pwnd=GetDlgItem(IDC_STATICTIPDCNEG);
-							                  if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelC);
-									                      pwnd->ShowWindow(SW_SHOW);
-														}
-									          break;
-								case DC_POS: case SYN_POS: case AC:
-								case DC_NEG: case SYN_NEG:
-											  pwnd=GetDlgItem(aIconRejimChanelC[m_irazv]);
-							                  if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelC);
-										                  pwnd->ShowWindow(SW_SHOW);
-														}
-											  break;
-
-							  }
-							}//2
-							//канал В
-//							if (m_iCircuitBaza==1 && m_iGnezdoB!=3)
-							if (m_iCircuitBaza==1 && m_iKnotBaza==1)
-							{//2
-							   GetDlgItem(IDC_STATICCHANELB)->ShowWindow(SW_SHOW);
-							  switch(m_irazv)
-							  { //3
-							    case IMP_POS: 
-												if (m_bFamilyVkl)
-												{
-												if (m_iPolarityStepBaza==0) 
-												{ pwnd=GetDlgItem(IDC_STATICTIPIMP1);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-											    else
-												{ pwnd=GetDlgItem(IDC_STATICTIPIMP1NEG);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-												}
-												else
-												{
-												if (m_iPolarityStepBaza==0) 
-												{ pwnd=GetDlgItem(IDC_STATICTIPIMP2);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-											    else
-												{ pwnd=GetDlgItem(IDC_STATICTIPIMP2NEG);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-												}
-											  break;
-							    case IMP_NEG: 
-												if (m_bFamilyVkl)
-												{
-												if (m_iPolarityStepBaza==0) 
-												{ pwnd=GetDlgItem(IDC_STATICTIPIMP1NEG);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-											    else
-												{ pwnd=GetDlgItem(IDC_STATICTIPIMP1);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-												}
-												else
-												{
-												if (m_iPolarityStepBaza==0) 
-												{ pwnd=GetDlgItem(IDC_STATICTIPIMP2NEG);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-											    else
-												{ pwnd=GetDlgItem(IDC_STATICTIPIMP2);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-												}
-											  break;
-								case DC_POS:  
-												if (m_bFamilyVkl)
-												{
-												if (m_iPolarityStepBaza==0) 
-												{ pwnd=GetDlgItem(IDC_STATICTIPDCPOS);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelCB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-											    else
-												{ pwnd=GetDlgItem(IDC_STATICTIPDCNEG);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelCB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-												}
-												else
-												{
-												if (m_iPolarityStepBaza==0) 
-												{ pwnd=GetDlgItem(IDC_STATICTIPCONSTPOS);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-											    else
-												{ pwnd=GetDlgItem(IDC_STATICTIPCONSTNEG);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-												}
-											  break;
-								 case DC_NEG: 
-												if (m_bFamilyVkl)
-												{
-												if (m_iPolarityStepBaza==0) 
-												{ pwnd=GetDlgItem(IDC_STATICTIPDCNEG);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelCB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-											    else
-												{ pwnd=GetDlgItem(IDC_STATICTIPDCPOS);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelCB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-												}
-												else
-												{
-												if (m_iPolarityStepBaza==0) 
-												{ pwnd=GetDlgItem(IDC_STATICTIPCONSTNEG);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-											    else
-												{ pwnd=GetDlgItem(IDC_STATICTIPCONSTPOS);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-												}
-											  break;
-								
-								case SYN_POS: if (m_bBazaVkl)
-											  { //4
-												if (m_bFamilyVkl)
-												{
-												//импульс включен, семейстово включено => в базе IMP
-												if (m_iPolarityStepBaza==0) 
-												{ pwnd=GetDlgItem(IDC_STATICTIPIMP1);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-											    else
-												{ pwnd=GetDlgItem(IDC_STATICTIPIMP1NEG);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-												}
-												else
-												{
-												//импульс включен, семейстово выключено => в базе IMP2
-												if (m_iPolarityStepBaza==0) 
-												{ pwnd=GetDlgItem(IDC_STATICTIPIMP2);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-											    else
-												{ pwnd=GetDlgItem(IDC_STATICTIPIMP2NEG);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-												}
-											  }//4
-											  else
-											  {//4
-												if (m_bFamilyVkl)
-												{
-												  //импульс выключен, семейстово включено => в базе DC
-												if (m_iPolarityStepBaza==0) 
-												{ pwnd=GetDlgItem(IDC_STATICTIPDCPOS);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-											    else
-												{ pwnd=GetDlgItem(IDC_STATICTIPDCNEG);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-												}
-												else
-												{//5
-												  //импульс выключен, семейстово выключено => в базе СONST
-												if (m_iPolarityStepBaza==0) 
-												{ pwnd=GetDlgItem(IDC_STATICTIPCONSTPOS);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-											    else
-												{ pwnd=GetDlgItem(IDC_STATICTIPCONSTNEG);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-												}//5
-											  }//4
-											  break;
-								case SYN_NEG: if (m_bBazaVkl)
-											  { //4
-												 //импульс включен => в базе IMP
-												if (m_iPolarityStepBaza==0) 
-												{ pwnd=GetDlgItem(IDC_STATICTIPIMP1NEG);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-											    else
-												{ pwnd=GetDlgItem(IDC_STATICTIPIMP1);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-											  }//4
-											  else
-											  { //4
-												if (m_bFamilyVkl)
-												{
-												  //импульс выключен => в базе DC
-												if (m_iPolarityStepBaza==0) 
-												{ pwnd=GetDlgItem(IDC_STATICTIPDCNEG);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-											    else
-												{ pwnd=GetDlgItem(IDC_STATICTIPDCPOS);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-												}
-												else
-												{
-												  //импульс выключен => в базе DC
-												if (m_iPolarityStepBaza==0) 
-												{ pwnd=GetDlgItem(IDC_STATICTIPCONSTNEG);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-											    else
-												{ pwnd=GetDlgItem(IDC_STATICTIPCONSTPOS);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-												}
-											  }//4
-												
-											  break;
-								case AC:      
-												if (m_iPolarityStepBaza==0) 
-												{ pwnd=GetDlgItem(IDC_STATICTIPCONSTPOS);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-											    else
-												{ pwnd=GetDlgItem(IDC_STATICTIPCONSTNEG);
-							                      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-										                      pwnd->ShowWindow(SW_SHOW);
-															}
-												}
-												break;
-							
-							}//3
-			}//2 end of if (m_iCircuitBaza==1 && m_iGnezdoB!=4)
-			break;
-	}//1
-	}//end if (m_iQue1==COLLECTOR)
-	
-	if (m_iQue1==BAZA)
-	{
-	//всё стереть
-    ShowControls(aIconRejimChanelC,SIZEOF_ARRAY(aIconRejimChanelC),FALSE);
-		//канал С
-		GetDlgItem(IDC_STATICCHANELC)->ShowWindow(SW_SHOW);
-	   if (m_irazv<SYN_POS)
-	   { pwnd=GetDlgItem(IDC_STATICTIPCONSTPOS);
-	     if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelC);
-				      pwnd->ShowWindow(SW_SHOW);
-					}
-	   }
-	   if (m_irazv>SYN_NEG)
-	   { pwnd=GetDlgItem(IDC_STATICTIPCONSTNEG);
-	     if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelC);
-		              pwnd->ShowWindow(SW_SHOW);
-					}
-		}
-		//канал В
-		GetDlgItem(IDC_STATICCHANELB)->ShowWindow(SW_SHOW);
-	    switch(m_irazv)
-		{//1
-			case IMP_NEG:	if (m_iPolarityStepBaza==0) 
-							{ pwnd=GetDlgItem(IDC_STATICTIPIMP1NEG);
-						      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-						                  pwnd->ShowWindow(SW_SHOW);
-										}		
-							}
-							else
-							{ pwnd=GetDlgItem(IDC_STATICTIPIMP1);
-						      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-						                  pwnd->ShowWindow(SW_SHOW);
-										}
-							}
-							break;
-			case IMP_POS:	if (m_iPolarityStepBaza==0) 
-							{ pwnd=GetDlgItem(IDC_STATICTIPIMP1);
-						      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-						                  pwnd->ShowWindow(SW_SHOW);
-										}		
-							}
-							else
-							{ pwnd=GetDlgItem(IDC_STATICTIPIMP1NEG);
-						      if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-						                  pwnd->ShowWindow(SW_SHOW);
-										}
-							}
-							break;
-			case DC_NEG:	if (m_iPolarityStepBaza==0) pwnd=GetDlgItem(IDC_STATICTIPDCNEG);
-									else	pwnd=GetDlgItem(IDC_STATICTIPDCPOS);
-						    if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-						                  pwnd->ShowWindow(SW_SHOW);
-										}		
-							break;
-			case DC_POS:	if (m_iPolarityStepBaza==0) pwnd=GetDlgItem(IDC_STATICTIPDCPOS);
-									else	pwnd=GetDlgItem(IDC_STATICTIPDCNEG);
-						    if (pwnd)	{ pwnd->MoveWindow(&RectRejimChanelB);
-						                  pwnd->ShowWindow(SW_SHOW);
-										}		
-							break;
-		}//1
-
-	}//end if (m_iQue1==BAZA)
-}
-*/
-
 
 void CLineDlg::ShowRejimChanel() 
 {	
@@ -6998,8 +5494,6 @@ void CLineDlg::ShowRejimChanel()
 	  case NPN: case PNP: case NMOS: case PMOS:
 	  case NPN4: case PNP4: case NMOS4: case PMOS4: case TS:
 							//канал С
-//							if (m_iCircuitKol==1 && m_iGnezdoC!=4)
-//							if (m_iGnezdoC!=4)
 							if (m_iCircuitKol==1 && m_iKnotKol==1)
 							{//2
 							  GetDlgItem(IDC_STATICCHANELC)->ShowWindow(SW_SHOW);
@@ -7471,7 +5965,6 @@ void CLineDlg::InitIconImp()
 
 
 	//длительность импульса
-//    m_sDlitImp = mas_dlit_imp[m_irejimp][m_idlitimp];
     m_sDlitImp = mas_dlit_imp[m_idlitimp];
 
 	//Скважность x 2 
@@ -7531,23 +6024,7 @@ void CLineDlg::BuildCircuit()
 
     //узпы
 	//=====
-/*	pwnd=GetDlgItem(bmpKnot[m_nelement][COLLECTOR]);
-	if (pwnd)	{ pwnd->MoveWindow(&RectBitKnotKol);
-		          pwnd->ShowWindow(SW_SHOW);
-				}
-	pwnd=GetDlgItem(bmpKnot[m_nelement][BAZA]);
-	if (pwnd)	{ pwnd->MoveWindow(&RectBitKnotBaza);
-		          pwnd->ShowWindow(SW_SHOW);
-				}
-	pwnd=GetDlgItem(bmpKnot[m_nelement][DOP]);
-	if (pwnd)	{ pwnd->MoveWindow(&RectBitKnotDop);
-				  pwnd->ShowWindow(SW_SHOW);
-				}
-	pwnd=GetDlgItem(bmpKnot[m_nelement][EMITTER]);
-	if (pwnd)	{ pwnd->MoveWindow(&RectBitKnotEm);
-				  pwnd->ShowWindow(SW_SHOW);
-				}
-*/ 	//элемент
+ 	//элемент
 	//=======
 	pwnd=GetDlgItem(bmpEl[m_nelement]);
 	if (pwnd)	{ pwnd->MoveWindow(&RectBitElement);
@@ -7602,11 +6079,7 @@ void CLineDlg::BuildCircuit()
 				  pwnd->ShowWindow(SW_SHOW);
 				}
 
-/*	pwnd=GetDlgItem(IDC_STATICBITEM_COMMON);	//земля
-	if (pwnd)	{ //pwnd->MoveWindow(&RectBitEmCommon);
-//				  pwnd->ShowWindow(SW_SHOW);
-				}
-*/	}
+	}
 	//уточнение схемы
 	//===============
 	switch (m_iCircuitBaza)
@@ -7630,21 +6103,13 @@ void CLineDlg::BuildCircuit()
 						      pwnd->ShowWindow(SW_SHOW);
 							}
 				}
-/*				pwnd=GetDlgItem(IDC_STATICBIT_B_K);	//угол база-коллектор
-				if (pwnd)	{ pwnd->MoveWindow(&RectBitBazaKol);
-							  pwnd->ShowWindow(SW_SHOW);
-							}
-*/				if (m_iCircuitDop==2)
+				if (m_iCircuitDop==2)
 							{ //(база-) + (доп.-эмиттер)
 							  pwnd=GetDlgItem(bmpRejKnot[EMITTER][3]);//3
 							  if (pwnd)	{ pwnd->MoveWindow(&RectBitEm);
 										  pwnd->ShowWindow(SW_SHOW);
 										}
-/*							  pwnd=GetDlgItem(IDC_STATICBIT_D_E);	//угол доп.-эмиттер
-							  if (pwnd)	{ pwnd->MoveWindow(&RectBitDopEm);
-										  pwnd->ShowWindow(SW_SHOW);
-										}
-*/							}
+							}
 				break;
 	  case 3:	//(база-эмиттер)
 				//изменить режим эмиттера
@@ -7652,21 +6117,13 @@ void CLineDlg::BuildCircuit()
 				if (pwnd)	{ //pwnd->MoveWindow(&RectBitEm);
 							  pwnd->ShowWindow(SW_HIDE);
 							}
-/*				pwnd=GetDlgItem(IDC_STATICBIT_B_E);	//угол база-эмиттер
-				if (pwnd)	{ pwnd->MoveWindow(&RectBitBazaEm);
-							  pwnd->ShowWindow(SW_SHOW);
-							}
-*/				if (m_iCircuitDop==2)
+				if (m_iCircuitDop==2)
 							{ //(база-эмиттер) + (доп.-эмиттер)
 							  pwnd=GetDlgItem(bmpRejKnot[EMITTER][3+1]);
 							  if (pwnd)	{ pwnd->MoveWindow(&RectBitEm);
 										  pwnd->ShowWindow(SW_SHOW);
 										}
-/*							  pwnd=GetDlgItem(IDC_STATICBIT_D_E);	//угол доп.-эмиттер
-							  if (pwnd)	{ pwnd->MoveWindow(&RectBitDopEm);
-										  pwnd->ShowWindow(SW_SHOW);
-										}
-*/							}
+							}
 				else		{ pwnd=GetDlgItem(bmpRejKnot[EMITTER][1+1]);
 							  if (pwnd)	{ pwnd->MoveWindow(&RectBitEm);
 										  pwnd->ShowWindow(SW_SHOW);
@@ -7679,21 +6136,13 @@ void CLineDlg::BuildCircuit()
 				if (pwnd)	{ //pwnd->MoveWindow(&RectBitEm);
 							  pwnd->ShowWindow(SW_HIDE);
 							}
-/*				pwnd=GetDlgItem(IDC_STATICBIT_B_E1KOM);	//угол база-эмиттер
-				if (pwnd)	{ pwnd->MoveWindow(&RectBitBazaEm);
-							  pwnd->ShowWindow(SW_SHOW);
-							}
-*/				if (m_iCircuitDop==2)
+				if (m_iCircuitDop==2)
 							{ //(база-эмиттер) + (доп.-эмиттер)
 							  pwnd=GetDlgItem(bmpRejKnot[EMITTER][5+1]);
 							  if (pwnd)	{ pwnd->MoveWindow(&RectBitEm);
 										  pwnd->ShowWindow(SW_SHOW);
 										}
-/*							  pwnd=GetDlgItem(IDC_STATICBIT_D_E);	//угол доп.-эмиттер
-							  if (pwnd)	{ pwnd->MoveWindow(&RectBitDopEm);
-										  pwnd->ShowWindow(SW_SHOW);
-										}
-*/							}
+							}
 				else		{ pwnd=GetDlgItem(bmpRejKnot[EMITTER][4+1]);
 							  if (pwnd)	{ pwnd->MoveWindow(&RectBitEm);
 										  pwnd->ShowWindow(SW_SHOW);
@@ -7712,11 +6161,7 @@ void CLineDlg::BuildCircuit()
 				if (pwnd)	{ //pwnd->MoveWindow(&RectBitEm);
 							  pwnd->ShowWindow(SW_HIDE);
 							}
-/*			  pwnd=GetDlgItem(IDC_STATICBIT_D_E);	//угол доп.-эмиттер
-			  if (pwnd)	{ pwnd->MoveWindow(&RectBitDopEm);
-						  pwnd->ShowWindow(SW_SHOW);
-						}
-*/			  switch (m_iCircuitBaza)
+			  switch (m_iCircuitBaza)
 			  { case 0: case 1: case 2:
 						pwnd=GetDlgItem(bmpRejKnot[EMITTER][3]);//2+1
 						if (pwnd)	{ pwnd->MoveWindow(&RectBitEm);
@@ -7737,8 +6182,6 @@ void CLineDlg::BuildCircuit()
 		      break;
 	}
 	UpdateWindow();
-//	InitTablRes();
-
  }
  else
 	SetTextInfo(_T("Выберите элемент и уточните способ подсоединения узлов!"));
@@ -7788,7 +6231,6 @@ void CLineDlg::InitStatusKnot()
 void CLineDlg::SetListTest() 
 {//построение списка стандартных тестов
  //************************************
-//	UpdateData();		//убрала 29.11.17
     CComboBox *pct = (CComboBox*) GetDlgItem(IDC_COMBOMOD);
 	pct->ResetContent();
 
@@ -7812,32 +6254,6 @@ void CLineDlg::SetListTest()
 //  UpdateData(FALSE);	//убрала 29.11.17
 }
 
-
-/*
-void CLineDlg::SetListTest() 
-{//построение списка стандартных тестов
- //************************************
-	UpdateData();
-	BuildArrayTstStandart();
-    CComboBox *pct = (CComboBox*) GetDlgItem(IDC_COMBOMOD);
-	pct->ResetContent();
-	int ind = -1;
-    int n_tst = array_tst_standart.GetSize();
-  if(m_nelement==-1) pct -> SetCurSel(ind);
-  else
-  {
-	pct->AddString(_T("_USER"));
-	for(int i=0;i<n_tst;i++)
-	{ CString str = array_tst_standart.GetAt(i);		  
-	  pct->AddString(str);
-	}
-    ind = pct->FindStringExact(0,m_MOD);
-	if (ind>=0) pct -> SetCurSel(ind);
-  }
-  UpdateData(FALSE);
-}
-
-*/
 
 void CLineDlg::SetTextInfo(LPCTSTR strMessage)//,LPCTSTR strFile,LPCTSTR strTest)
 { 
@@ -7929,197 +6345,6 @@ void CLineDlg::SubGetAxes(const double& Min_data,const double& Max_data,int* m_i
 
 void CLineDlg::DrawSetka()
 {	//сетка
-/*    COLORREF rgb1,rgb2;
-	rgb2=MemDC.GetBkColor(); 
-	rgb1=MemDC.GetTextColor();
-	CFont* pOldFont  = MemDC.SelectObject(&m_fontMin);
-    MemDC.SetTextColor(m_colorText);
-	MemDC.SetBkColor(m_colorFon);
-	CPen* pOldPen   = MemDC.SelectObject(&m_penSetka_SOLID);
-    CBrush* pOldBrush = MemDC.SelectObject(&brFon);
-
-	   MemDC.FillRect(m_RectWndGraf,&brFon);	
-	//прямоугольник - зона окна графика
-	//---------------------------------
-	MemDC.Rectangle(m_RectWndGraf);
-
-	int i=0;
-	int j=0;
-	CString str;
-//	int er = 0;
-//    er = Argument();
-//if (!er)
-//{ er = Function();
-//  if (!er)
-//  {
-  if (m_iRejX==0 && m_iRejY==0) 
-	{ //ось X - LIN, ось Y - LIN
-	  //------------------------
-//	SubGetAxes(X_min,X_max,&m_iX);
-//	SubGetAxes(Y_min,Y_max,&m_iY);
-
-	double major_x=(m_RectGraf.right-m_RectGraf.left)/10;
-	double minor_x=major_x/5;
-	double major_y=(m_RectGraf.bottom-m_RectGraf.top)/10;
-	double minor_y=major_y/5;
-    //сетка
-	//------
-	MemDC.SelectObject(&m_penSetka_DASH);
-	CSize   ox;
-	CSize   null;
-	ox.cx = m_RectGraf.left;
-	ox.cy = m_RectGraf.bottom;
-	for (i=0;i<10;i++)
-	{ MemDC.SelectObject(&m_penSetka_SOLID);
-	  MemDC.MoveTo(ox.cx,ox.cy);
-	  MemDC.LineTo(ox.cx+5,ox.cy);
-	  for (j=1;j<5;j++)
-	  { ox.cy = (int)(ox.cy - minor_y);
-        MemDC.MoveTo(ox.cx,ox.cy);
-	    MemDC.LineTo(ox.cx+5,ox.cy);
-	  }
-	  ox.cy=(int)(ox.cy-minor_y);
-	  MemDC.SelectObject(&m_penSetka_DASH);
-	  MemDC.MoveTo(ox.cx,ox.cy);
-	  MemDC.LineTo(m_RectGraf.right,ox.cy);
-	  if (i==4) null.cy = ox.cy;
-	}
-	m_RectGraf.top = ox.cy;
-	ox.cx = m_RectGraf.left;
-	ox.cy = m_RectGraf.bottom;
-
-	for (i=0;i<10;i++)
-	{ MemDC.SelectObject(&m_penSetka_SOLID);
-	  MemDC.MoveTo(ox.cx,ox.cy);
-	  MemDC.LineTo(ox.cx,ox.cy-5);
-	  for (j=1;j<5;j++)
-	  { ox.cx = (int)(ox.cx + minor_x);
-        MemDC.MoveTo(ox.cx,ox.cy);
-	    MemDC.LineTo(ox.cx,ox.cy-5);
-	  }
-	  ox.cx=(int)(ox.cx+minor_x);
-	  MemDC.SelectObject(&m_penSetka_DASH);
-	  MemDC.MoveTo(ox.cx,ox.cy);
-	  MemDC.LineTo(ox.cx,m_RectGraf.top);
-	  if (i==4) null.cx = ox.cx;
-	}
-	m_RectGraf.right = ox.cx;
-
-	//прямоугольник - зона графика
-	//----------------------------
-	MemDC.SelectObject(&m_penSetka_SOLID);
-	MemDC.MoveTo(m_RectGraf.left,m_RectGraf.top);
-	MemDC.LineTo(m_RectGraf.right,m_RectGraf.top);
-	MemDC.MoveTo(m_RectGraf.left,m_RectGraf.top);
-	MemDC.LineTo(m_RectGraf.left,m_RectGraf.bottom);
-	MemDC.MoveTo(m_RectGraf.left,m_RectGraf.bottom);
-	MemDC.LineTo(m_RectGraf.right,m_RectGraf.bottom);
-	MemDC.MoveTo(m_RectGraf.right,m_RectGraf.top);
-	MemDC.LineTo(m_RectGraf.right,m_RectGraf.bottom);
-
-	//риски слева и сверху
-	//--------------------
-	ox.cx = m_RectGraf.right;
-	ox.cy = m_RectGraf.bottom;
-	for (i=0;i<10;i++)
-	{ for (j=1;j<5;j++)
-	  { ox.cy = (int)(ox.cy - minor_y);
-        MemDC.MoveTo(ox.cx,ox.cy);
-	    MemDC.LineTo(ox.cx-5,ox.cy);
-	  }
-	  ox.cy=(int)(ox.cy-minor_y);
-	  MemDC.MoveTo(ox.cx,ox.cy);
-	  MemDC.LineTo(ox.cx-5,ox.cy);
-	}
-	ox.cx = m_RectGraf.left;
-	ox.cy = m_RectGraf.top;
-
-	for (i=0;i<10;i++)
-	{ for (j=1;j<5;j++)
-		{ ox.cx = (int)(ox.cx + minor_x);
-          MemDC.MoveTo(ox.cx,ox.cy);
-	      MemDC.LineTo(ox.cx,ox.cy+5);
-		}
-	  ox.cx=(int)(ox.cx+minor_x);
-	  MemDC.MoveTo(ox.cx,ox.cy);
-	  MemDC.LineTo(ox.cx,ox.cy+5);
-	}
-	switch(m_iButNull)
-	{ case 0: //слева внизу
-	          null.cx = m_RectGraf.left;
-			  null.cy = m_RectGraf.bottom;
-			  break;
-	  case 1: //риски на оси Х в центре
-		      ox.cx = null.cx;
-			  ox.cy = m_RectGraf.top;
-              MemDC.MoveTo(ox.cx,ox.cy);
-			  MemDC.LineTo(ox.cx,m_RectGraf.bottom);
-			  ox.cy = null.cy;
-			  ox.cx = m_RectGraf.left;
-              MemDC.MoveTo(ox.cx,ox.cy);
-			  MemDC.LineTo(m_RectGraf.right,ox.cy);
-			  //риски
-			  ox.cx = m_RectGraf.left;
-			  ox.cy = null.cy;
-			  for (i=0;i<10;i++)
-			  { for(j=0;j<5;j++)
-				{ ox.cx = (int)(ox.cx + minor_x);
-                  MemDC.MoveTo(ox.cx,ox.cy-3);
-                  MemDC.LineTo(ox.cx,ox.cy+3);
-				}
-			  }
-			  ox.cx = null.cx;
-			  ox.cy = m_RectGraf.bottom;
-			  for (i=0;i<10;i++)
-			  { for(j=0;j<5;j++)
-				{ ox.cy = (int)(ox.cy - minor_y);
-                  MemDC.MoveTo(ox.cx-3,ox.cy);
-                  MemDC.LineTo(ox.cx+3,ox.cy);
-				}
-			  }
-			  break;
-	  case 2: //справа вверху
-	          null.cx = m_RectGraf.right;
-			  null.cy = m_RectGraf.top;
-			  break;
-	}
-	//оцифровка оси Х
-	str = mas_cifra_axes_X[m_iButNull][m_iX];
-	CRect rect=m_RectStr_X;
-	MemDC.ExtTextOut(rect.left,rect.top,ETO_OPAQUE,&rect,(LPCTSTR)str,NULL);
-	SubGetStrRazmer(rej_X,expo_X,m_sAxisX);
-	rect = m_RectRazmer_X;
-	MemDC.ExtTextOut(rect.left,rect.top,ETO_OPAQUE,&rect,(LPCTSTR)strRazmer,NULL);
-	//оцифровка оси Y
-	str = mas_cifra_axes_Y[m_iButNull][m_iY];
-
-	CFont font;
-    LOGFONT lf={12,0,0,0,FW_NORMAL,
-                0,0,0,RUSSIAN_CHARSET,
-			    OUT_DEFAULT_PRECIS,
-				CLIP_DEFAULT_PRECIS,
-				DEFAULT_QUALITY,DEFAULT_PITCH|FF_DONTCARE,
-				_T("Arial")};
-    lf.lfEscapement=900;
-    lf.lfOrientation=900;
-    font.CreateFontIndirect(&lf);
-	rect = m_RectStr_Y;
-	MemDC.SelectObject(&font);
-	MemDC.ExtTextOut(rect.left,rect.bottom,ETO_OPAQUE,&rect,(LPCTSTR)str,NULL);
-	SubGetStrRazmer(rej_Y,expo_Y,m_sAxisY);
-	rect = m_RectRazmer_Y;
-	MemDC.ExtTextOut(rect.left,rect.bottom,ETO_OPAQUE,&rect,(LPCTSTR)strRazmer,NULL);
-    font.DeleteObject();
-
-}//end of X-LIN && Y-LIN
-//}
-//}
-	MemDC.SelectObject(pOldBrush);
-    MemDC.SelectObject(pOldFont);
-	MemDC.SelectObject(pOldPen);
-	MemDC.SetTextColor(rgb1);
-	MemDC.SetBkColor(rgb2);
-*/
 }
 
 int CLineDlg::SubGetStrRazmer(int xy,int expo,const CString& sStr)
@@ -8187,193 +6412,7 @@ int CLineDlg::SubGetStrRazmer(int xy,int expo,const CString& sStr)
   return p;
 }
 
-/*
-void CLineDlg::SubGetStrRazmer(int xy,int expo,const CString& sStr)
-{ //в expo - показатель степени
-  int poradok = expo % 3;
-  strRazmer   = _T("");
 
-  if (expo==0)
-   switch(xy)
-	{ case 0: strRazmer.Format(_T("%s, V"),sStr);break;
-	  case 1: strRazmer.Format(_T("%s, A"),sStr);break;
-	  case 2: strRazmer=_T("R, Ом");break;
-//	  case 3: default:
-//		      if (m_bBeta==1) strRazmer="Beta";
-//				  else if (m_bBetai==1) strRazmer="Betai";
-//				       else strRazmer="";
-//			  break;
-	  case 4: strRazmer=_T("time, s");break;
-	}
-  if (expo>0)
-  { 
-	if (expo<3) 
-	 switch(xy)
-		{ case 0: strRazmer.Format(_T("%s, V [E %+03d]"),sStr,expo);break;
-		  case 1: strRazmer.Format(_T("%s, A [E %+03d]"),sStr,expo);break;
-		  case 2: strRazmer.Format(_T("R, Ом [E %+03d]"),expo);break;
-//	      case 3: default:
-//		          if (m_bBeta==1) strRazmer.Format("Beta [E %+03d]",expo);
-//				  else if (m_bBetai==1) strRazmer.Format("Betai [E %+03d]",expo);
-//				       else strRazmer.Format("[E %+03d]",expo);
-//				  break;
-		  case 4: strRazmer.Format(_T("time, s [E %+03d]"),expo);break;
-		}
-	else if (expo<6) 
-				{ if (poradok) 
-					switch(xy)
-					{ case 0: strRazmer.Format(_T("%s, kV [E %+03d]"),sStr,poradok);break;
-                      case 1: strRazmer.Format(_T("%s, kA [E %+03d]"),sStr,poradok);break;
-	                  case 2: strRazmer.Format(_T("R, kОм [E %+03d]"),poradok);break;
-		              case 4: strRazmer.Format(_T("time, ks [E %+03d]"),poradok);break;
-					}
-				  else
-					switch(xy)
-					{ case 0: strRazmer.Format(_T("%s, kV"),sStr);break;
-					  case 1: strRazmer.Format(_T("%s, kA"),sStr);break;
-					  case 2: strRazmer=_T("R, kОм");break;
-	                  case 4: strRazmer=_T("time, ks");break;
-					}
-				}
-		 else if (expo<9)
- 				{ if (poradok)
-				   switch(xy)
-					{ case 0: strRazmer.Format(_T("%s, MV [E %+03d]"),sStr,poradok);break;
-					  case 1: strRazmer.Format(_T("%s, MA [E %+03d]"),sStr,poradok);break;
-					  case 2: strRazmer.Format(_T("R, MОм [E %+03d]"),poradok);break;
-		              case 4: strRazmer.Format(_T("time, Ms [E %+03d]"),poradok);break;
-					}
-				  else
-				   switch(xy)
-				  { case 0: strRazmer.Format(_T("%s, MV"),sStr);break;
-                    case 1: strRazmer.Format(_T("%s, MA"),sStr);break;
-					case 2: strRazmer=_T("R, MОм");break;
-					case 4: strRazmer=_T("time, Ms");break;
-				  }
-				}
-			else if (expo<12)
-				{ if (poradok)
-					switch(xy)
-					{ case 0: strRazmer.Format(_T("%s, GV [E %+03d]"),sStr,poradok);break;
-					  case 1: strRazmer.Format(_T("%s, GA [E %+03d]"),sStr,poradok);break;
-					  case 2: strRazmer.Format(_T("R, GОм [E %+03d]"),poradok);break;
-		              case 4: strRazmer.Format(_T("time, Gs [E %+03d]"),poradok);break;
-					}
-				   else
-					switch(xy)
-				   { case 0:  strRazmer.Format(_T("%s, GV"),sStr);break;
-                     case 1:  strRazmer.Format(_T("%s, GA"),sStr);break;
-                     case 2:  strRazmer=_T("R, GОм");break;
-					 case 4:  strRazmer=_T("time, Gs");break;
-				   }
-				}
-			else if (expo<15)
-				{ if (poradok)
-					switch(xy)
-					{ case 0: strRazmer.Format(_T("%s, TV [E %+03d]"),sStr,poradok);break;
-					  case 1: strRazmer.Format(_T("%s, TA [E %+03d]"),sStr,poradok);break;
-					  case 2: strRazmer.Format(_T("R, TОм [E %+03d]"),poradok);break;
-		              case 4: strRazmer.Format(_T("time, Ts [E %+03d]"),poradok);break;
-					}
-				   else
-					switch(xy)
-				   { case 0:  strRazmer.Format(_T("%s, TV"),sStr);break;
-                     case 1:  strRazmer.Format(_T("%s, TA"),sStr);break;
-                     case 2:  strRazmer=_T("R, TОм");break;
-	                 case 4:  strRazmer=_T("time, Ts");break;
-				   }
-				}
-			else{ if (poradok)
-					switch(xy)
-					{ case 0: strRazmer.Format(_T("%s, PV [E %+03d]"),sStr,poradok);break;
-					  case 1: strRazmer.Format(_T("%s, PA [E %+03d]"),sStr,poradok);break;
-					  case 2: strRazmer.Format(_T("R, PОм [E %+03d]"),poradok);break;
-		              case 4: strRazmer.Format(_T("time, Ps [E %+03d]"),poradok);break;
-					}
-				   else
-					switch(xy)
-				   { case 0:  strRazmer.Format(_T("%s, PV"),sStr);break;
-                     case 1:  strRazmer.Format(_T("%s, PA"),sStr);break;
-                     case 2:  strRazmer=_T("R, PОм");break;
-	                 case 4:  strRazmer=_T("time, Ps");break;
-				   }
-				}
-  }
-  if (expo<0)
-  { 
-	if ((abs(expo))<3) 
-				switch(xy)
-				{ case 0: strRazmer.Format(_T("%s, V [E %+03d]"),sStr,expo);break;
-				  case 1: strRazmer.Format(_T("%s, A [E %+03d]"),sStr,expo);break;
-				  case 2: strRazmer.Format(_T("R, Ом [E %+03d]"),expo);break;
-		          case 4: strRazmer.Format(_T("time, s [E %+03d]"),expo);break;
-				}
-	else if ((abs(expo))<6) 
-				{ if (poradok)
-					switch(xy)
-					{ case 0: strRazmer.Format(_T("%s, mV [E %+03d]"),sStr,poradok);break;
-					  case 1: strRazmer.Format(_T("%s, mA [E %+03d]"),sStr,poradok);break;
-					  case 2: strRazmer.Format(_T("R, mОм [E %+03d]"),poradok);break;
-		              case 4: strRazmer.Format(_T("time, ms [E %+03d]"),poradok);break;
-					} 
-				  else
-					switch(xy)
-					{ case 0: strRazmer.Format(_T("%s, mV"),sStr);break;
-					  case 1: strRazmer.Format(_T("%s, mA"),sStr);break;
-					  case 2: strRazmer=_T("R, mОм");break;
-	                  case 4: strRazmer=_T("time, ms");break;
-					} 
-				}
-		 else if ((abs(expo))<9)
- 				{ if (poradok) 
-					switch(xy)
-					{ case 0: strRazmer.Format(_T("%s, uV [E %+03d]"),sStr,poradok);break;
-					  case 1: strRazmer.Format(_T("%s, uA [E %+03d]"),sStr,poradok);break;
-					  case 2: strRazmer.Format(_T("R, uОм [E %+03d]"),poradok);break;
-		              case 4: strRazmer.Format(_T("time, us [E %+03d]"),poradok);break;
-					} 
-				  else
-					switch(xy)
-					{ case 0: strRazmer.Format(_T("%s, uV"),sStr);break;
-					  case 1: strRazmer.Format(_T("%s, uA"),sStr);break;
-					  case 2: strRazmer=_T("R, uОм");break;
-	                  case 4: strRazmer=_T("time, us");break;
-					} 
-				}
-		   else if ((abs(expo))<12)
-				{ if (poradok)
-					switch(xy)
-					{ case 0: strRazmer.Format(_T("%s, nV [E %+03d]"),sStr,poradok);break;
-					  case 1: strRazmer.Format(_T("%s, nA [E %+03d]"),sStr,poradok);break;
-					  case 2: strRazmer.Format(_T("R, nОм [E %+03d]"),poradok);break;
-		              case 4: strRazmer.Format(_T("time, ns [E %+03d]"),poradok);break;
-					} 
-				  else
-					switch(xy)
-					{ case 0: strRazmer.Format(_T("%s, nV"),sStr);break;
-					  case 1: strRazmer.Format(_T("%s, nA"),sStr);break;
-					  case 2: strRazmer=_T("R, nОм");break;
-	                  case 4: strRazmer=_T("time, ns");break;
-					} 
-				}	   
-		   else { if (poradok)
-					switch(xy)
-					{ case 0: strRazmer.Format(_T("%s, pV [E %+03d]"),sStr,poradok);break;
-					  case 1: strRazmer.Format(_T("%s, pA [E %+03d]"),sStr,poradok);break;
-					  case 2: strRazmer.Format(_T("R, pОм [E %+03d]"),poradok);break;
-		              case 4: strRazmer.Format(_T("time, ps [E %+03d]"),poradok);break;
-					} 
-				  else
-					switch(xy)
-					{ case 0: strRazmer.Format(_T("%s, pV"),sStr);break;
-					  case 1: strRazmer.Format(_T("%s, pA"),sStr);break;
-					  case 2: strRazmer=_T("R, pОм");break;
-	                  case 4: strRazmer=_T("time, ps");break;
-					} 
-				}	   
-  }
-}
-*/
 void CLineDlg::PostNcDestroy() 
 {
 	// TODO: Add your specialized code here and/or call the base class
@@ -8485,113 +6524,8 @@ void CLineDlg::DrawGraph()
 //	pM3[] - измеритель базы				(ACP3)
 //	pM4[] - измеритель доп. канала		(ACP4)
 //	pM5[] - расчётный массив			(ACP5)
-	
-/*	double* pX = NULL;	//указатель на значение по оси Х
-	double* pY = NULL;	//указатель на значение по оси Y
-	double  X_k  = 0.0;	//масштабный множитель по Х
-	double  Y_k = 0.0;	//масштабный множитель по Y
-	UINT n = 0;
-	int j = 0;
-	int     kx = 0;		//(kx,ky)- координата очередной точки
-	int     ky = 0;
-	BOOL    fl1 = FALSE;
-	BOOL    fl2 = FALSE;
-    double value = 1.0;
-
-	if (!m_bButInversion)
-	{ //значение по оси Х
-	  if (iX==COLLECTOR) pX = &pM1[0];		
-					else pX = &X_axis[0];
-	  //значение по оси Y
-	  switch (iY)
-	  { default:
-	    case COLLECTOR: pY = &pM2[0];break;
-	    case BAZA:      pY = &pM3[0];break;
-	    case DOP:		pY = &pM4[0];break;
-		case COUNT:		pY = &pM5[0];break;
-	  }
-	}//end of (!m_bButInversion)
-	else
-	{ //значение по оси Х
-	  switch (iX)
-	  { default:
-	    case COLLECTOR: pX = &pM2[0];break;
-	    case BAZA:      pX = &pM3[0];break;
-	    case DOP:		pX = &pM4[0];break;
-		case COUNT:		pX = &pM5[0];break;
-	  }
-	  //значение по оси Y
-	  if (iY==COLLECTOR) pY = &pM1[0];		
-					else pY = &X_axis[0];
-	}
-	
-	if (m_iRejX==0) mashtab_X = (m_RectGraf.right - m_RectGraf.left) / (X_max - X_min);
-			   else mashtab_X = (m_RectGraf.right - m_RectGraf.left) / log10(fabs(X_max / X_min));
-	if (m_iRejY==0) mashtab_Y = (m_RectGraf.bottom - m_RectGraf.top) / (Y_max - Y_min);
-			   else mashtab_Y = (m_RectGraf.bottom - m_RectGraf.top) / log10(fabs(Y_max / Y_min));
-
-	CPen* OldPen = MemDC.SelectObject(&m_penCurve);
-    
-	if (n_Step==0) n_Step = 1;
-
-	for (n=0;n<(n_Result/n_Step);n++)
-	{//рисование кривой
-		for (j=0;j<NPOINT;j++)
-		{ fl1 = 0; fl2 = 0;
-		  if (m_iX==0) kx = (int)((*pX -X_min)*mashtab_X)+ m_RectGraf.left;
-		       else {  if (X_min != 0.0) value = fabs(*pX / X_min);
-			                       else  value = fabs(*pX / EPSILON);
-				       kx = (int)(fabs(log10(value))*mashtab_X+m_RectGraf.left);
-					}
-		  if (m_iY==0) ky =  m_RectGraf.bottom - (int)((*pY - Y_min) * mashtab_Y);
-			   else 
-			   if (*pY != 0.0)
-				{ if (Y_min != 0.0) value = fabs(*pY / Y_min);
-			                  else  value = fabs(*pY / EPSILON);
-				  ky =  m_RectGraf.bottom - (int)fabs(log10(value) * mashtab_Y);
-				}
-				else fl1=1;
-		  if (!fl1) 
-		  { if (kx>=m_RectGraf.left && kx<=m_RectGraf.right &&
-				ky>=m_RectGraf.top && ky<=m_RectGraf.bottom)
-			{
-			  MemDC.MoveTo(kx,ky);
-		      if (m_iStyleCurve>0) MemDC.Rectangle(kx,ky,kx+1,ky+1);
-			}
-		    else fl1 = 1;
-		  }
-		  pX++;
-		  pY++;
-		  if (m_iX==0) kx = (int)((*pX - X_min)*mashtab_X)+ m_RectGraf.left;
-		       else {  if (X_min != 0.0) value = fabs(*pX / X_min);
-			                       else  value = fabs(*pX / EPSILON);
-				       kx = (int)(fabs(log10(value))*mashtab_X+m_RectGraf.left);
-					}
-		  if (m_iY==0) ky =  m_RectGraf.bottom - (int)((*pY - Y_min) * mashtab_Y);
-			   else 
-			   if (*pY != 0.0)
-				{ if (Y_min != 0.0) value = fabs(*pY / Y_min);
-			                  else  value = fabs(*pY / EPSILON);
-				  ky =  m_RectGraf.bottom - (int)fabs(log10(value) * mashtab_Y);
-				}
-				else fl2=1;
-	
-		  if (!fl1 && !fl2 &&
-			  kx>=m_RectGraf.left && kx<=m_RectGraf.right &&
-			  ky>=m_RectGraf.top && ky<=m_RectGraf.bottom) 
-		  { if (m_iStyleCurve!=STYLE_POINT) MemDC.LineTo(kx,ky);
-		  }
-	
-	
-		}//end for of j
-	}//end for of n
-
-
-
-
-	MemDC.SelectObject(OldPen);
-*/
 }
+
 
 void CLineDlg::OnTimer(UINT nIDEvent) 
 {
@@ -8705,36 +6639,6 @@ void CLineDlg::OnTimer(UINT nIDEvent)
 		}
 	}
   }
-/*    if (nIDEvent==5)//Ожидание готовности
-	{
-int	    ens = _inp(0x79);		//запретить подачу сигнала на объект исследования
-		ens = ens & 0xfd;
- 		_outp(0x79,ens);	         //D1<-0 (ENB_PCM <- 0)
-    TRACE(_T("OnMassiv (ENB_PCM <- 0)\n"));
-	ens = _inp(0x79);		
-	ens = ens | 0x02;
-	_outp(0x79,ens);			//D1<-1 (ENB_PCM <- 1)
-    TRACE(_T("ThreadEppIn (ENB_PCM <- 1)\n"));
-//	    KillTimer(5);
-//		if (bPusk && hEventEppIn) SetEvent(hEventStop);
-//		else KillTimer(5);
-
-/*	
-		CString str;
-
-		if (bPusk) 	str = _T("ИЗМЕРЕНИЕ ПРЕРВАНО!");//произощла рассинхронизация с Рic-ом
-		if (bKalibr) 	str = _T("КАЛИБРОВКА ПРЕРВАНА!");//произощла рассинхронизация с Рic-ом
-		if (bAutoSetNull) 	str = _T("КОРРЕКЦИЯ НУЛЯ ПРЕРВАНА!");//произощла рассинхронизация с Рic-ом
-		SetTextInfo(str);
-		Flag_sboy = true;
-		Stop();
-//	bPusk = false;
-//	bStop = true;
-		ready = 0;
-		CButton* pbut = (CButton*)GetDlgItem(IDC_BUTTON_MEAS);
-		pbut -> SetWindowText(L"Измерение");
-*/
-//	}
 
   CDialog::OnTimer(nIDEvent);
 }
@@ -11533,34 +9437,6 @@ if (!n_er)
 	    n_er++;
 	  }
 
-/*
-	if ((m_iQue1==BAZA && m_sPar==_T("Betai") && 
-		 m_sAxisX==_T("Ie") && m_sAxisY==_T("Ib") && m_sBazaSource== _T("Ib") && m_sArg==m_sAxisX &&
-		(m_irazv == IMP_POS || m_irazv==IMP_NEG  || m_irazv == DC_POS || m_irazv==DC_NEG)))
-	{ m_bBetai = true; m_uFunc = 2;}//---!
-	if (m_iQue1==COLLECTOR && m_sPar==_T("Betai") && //(
-		 m_sAxisX==_T("Ie") && m_sAxisY==_T("Ib") && m_sBazaSource== _T("Ib") && m_sArg==m_sAxisX &&
-		(m_irazv == IMP_POS || m_irazv==IMP_NEG  || m_irazv == DC_POS || m_irazv==DC_NEG)) //||
-	{ m_bBetai = true; m_uFunc = 2;}//---!
-		if (m_iQue1==BAZA && m_sPar==_T("Betai") && 
-		 m_sAxisX!=_T("Ib") && m_sAxisY!=_T("Ie"))
-	  { str=_T("ERROR 129: Неверно задан режим осей для расчета Betai\r\n");
-	    array_error.SetAtGrow(n_er,str); 
-	    n_er++;
-	  }
-	  if (m_sPar==_T("Betai") && m_sBazaSource != _T("Ib"))
-	  { str=_T("ERROR 130: Неверно задан режим генератора ступенек по каналу B для расчета Betai\r\n");
-	    array_error.SetAtGrow(n_er,str); 
-	    n_er++;
-	  }
-	  if (m_sPar==_T("Betai") && (m_irazv != IMP_POS && m_irazv!=IMP_NEG && m_irazv != DC_POS && m_irazv!=DC_NEG))//---!
-	  { str=_T("ERROR 131: Неверно задан вид развертки для расчета Betai\r\n");
-	    array_error.SetAtGrow(n_er,str); 
-	    n_er++;
-	  }
-*/
-
-	  
 	if (!m_sPar.IsEmpty() && m_sPar==_T("R") && // m_iQue1==COLLECTOR &&
 		(m_sAxisX!=m_sKolMeasU || m_sAxisY!=m_sKolMeasI) )
 	{
@@ -11629,18 +9505,6 @@ if (!n_er)
 	{ // нахождение n_Step и определение признака генерации ступенек
 		if (m_iQue1==COLLECTOR)
 		{
-/*		if (m_uStepBaza==0 && m_uStepDop==0) {n_Step = 1; bGenerationStup = false;}
-		else if (m_uStepBaza>0 && m_uStepDop==0)
-				{ n_Step = m_uStepBaza;
-		if (m_irazv==DC_POS || m_irazv==DC_NEG) {n_Step = 1; bGenerationStup = false;}//m_bBazaVkl;
-				  else bGenerationStup = true;
-				}
-		     else if (m_uStepBaza==0 && m_uStepDop>0)
-					{ n_Step = m_uStepDop;
-			 if (m_irazv==DC_POS || m_irazv==DC_NEG) {n_Step = 1; bGenerationStup = false;}//m_bDopVkl;
-					  else bGenerationStup = true;
-					}
-*/
 		if (m_uStepBaza==0 && m_uStepDop==0 && m_bFamilyVkl==true)
 		{ str=_T("ERROR 112: Не заданы ступеньки по каналу В или S\r\n");
 		  array_error.SetAtGrow(n_er,str); 
@@ -11791,37 +9655,7 @@ if (!n_er)
 		      n_er++;
 			}
 
-/*		    if (m_iRangLimitBaza>=2 &&  valueLimitBaza>8.0 && k > 0.110)//if диапазон ограничения < 20 V 
-			{ str=_T("ERROR 120: Недопустимый уровень ограничения напряжения в канале В\r\n");
-		      array_error.SetAtGrow(n_er,str); 
-		      n_er++;
-			}
-		    if ( m_iRangLimitBaza<2  && k > 0.110)//if диапазон ограничения 20 V и 40 V
-			{ str=_T("ERROR 120: Недопустимый уровень ограничения напряжения в канале В\r\n");
-		      array_error.SetAtGrow(n_er,str); 
-		      n_er++;
-			}
-//		    if ((valueLimitBaza<=4.4 && k > 2.75) && (m_itipimp!=TIP_IMP))
-		    if ((valueLimitBaza<=4.4 && k > 2.75) && (m_irazv != IMP_POS && m_irazv!=IMP_NEG))
-			{ str=_T("ERROR 121: Недопустимый уровень тока в канале В\r\n");
-		      array_error.SetAtGrow(n_er,str); 
-		      n_er++;
-			}
-		    if ((valueLimitBaza<=4.4 && k > 11.0) && 
-//				((m_itipimp==TIP_IMP) && ((m_iKolSourceU + bias_KolSourceU)<=2)))// && //5V, 20V, 100V
-				((m_irazv == IMP_POS || m_irazv==IMP_NEG ) && ((m_iKolSourceU + bias_KolSourceU)<=2)))// && //5V, 20V, 100V
-			{ str=_T("ERROR 121: Недопустимый уровень тока в канале В при установленном диапазоне источника канала С\r\n");
-		      array_error.SetAtGrow(n_er,str); 
-		      n_er++;
-			}
-		    if ((valueLimitBaza<=4.4 && k > 2.75) && 
-//				((m_itipimp==TIP_IMP) && ((m_iKolSourceU + bias_KolSourceU)>2)))// && //500V,3000V
-				((m_irazv == IMP_POS || m_irazv==IMP_NEG ) && ((m_iKolSourceU + bias_KolSourceU)>2)))// && //500V,2000V
-			{ str=_T("ERROR 121: Недопустимый уровень тока в канале В при установленном диапазоне источника канала С\r\n");
-		      array_error.SetAtGrow(n_er,str); 
-		      n_er++;
-			}
-*/
+
 		}//end of I
 		if (m_iBazaSource==0)
 		{ //источник U
@@ -11830,33 +9664,6 @@ if (!n_er)
 		    array_error.SetAtGrow(n_er,str); 
 		    n_er++;
 		  }
-/*
-		  if (valueLimitBaza>0.110 && k > 4.4)
-		  { str=_T("ERROR 122: Недопустимый уровень ограничения тока в канале В\r\n");
-		    array_error.SetAtGrow(n_er,str); 
-		    n_er++;
-		  }
-//		  if ((valueLimitBaza> 2.75 && k <=4.4) && (m_itipimp!=TIP_IMP))
-		  if ((valueLimitBaza> 2.75 && k <=4.4) && (m_irazv != IMP_POS && m_irazv!=IMP_NEG))
-		  { str=_T("ERROR 122: Недопустимый уровень ограничения тока в канале В\r\n");
-		    array_error.SetAtGrow(n_er,str); 
-		    n_er++;
-		  }
-		    if ((valueLimitBaza > 11.0 && k <=4.4) && 
-//				((m_itipimp==TIP_IMP) && ((m_iKolSourceU + bias_KolSourceU)<=2)))//&& //5V, 20V, 100V
-				((m_irazv == IMP_POS || m_irazv==IMP_NEG) && ((m_iKolSourceU + bias_KolSourceU)<=2)))//&& //5V, 20V, 100V
-			{ str=_T("ERROR 122: Недопустимый уровень ограничения тока в канале В при установленном диапазоне источника канала С\r\n");
-		      array_error.SetAtGrow(n_er,str); 
-		      n_er++;
-			}
-		  if ((valueLimitBaza>2.75 && k <= 4.4) && 
-//			  ((m_itipimp==TIP_IMP) && ((m_iKolSourceU + bias_KolSourceU)>2)))// && //500V, 2000V
-			  ((m_irazv == IMP_POS || m_irazv==IMP_NEG) && ((m_iKolSourceU + bias_KolSourceU)>2)))// && //500V, 2000V
-		  { str=_T("ERROR 122: Недопустимый уровень ограничения тока в канале В при установленном диапазоне источника канала С\r\n");
-		    array_error.SetAtGrow(n_er,str); 
-		    n_er++;
-		  }
-*/
 		}//end of U
 //		m_uBitQ18 = 0;
 //	    if (!n_er && m_itipimp==TIP_IMP) m_uBitQ18 = 1;
@@ -13468,69 +11275,6 @@ void CLineDlg::InitGnezdo()
 }
 
 
-/*
-void CLineDlg::SetGnezdo() 
-{//установить текущее состояние гнезд
-
-  CComboBox *ptr = (CComboBox*) GetDlgItem(IDC_COMBO_KOMMUTATOR);
-  ptr->SetCurSel(m_iKommutator);
-  
-  ptr = (CComboBox*) GetDlgItem(IDC_COMBOCHECKKOL);
-  ptr->SetCurSel(m_iCircuitKol);
-
-
-  CComboBox *cbptr = (CComboBox*) GetDlgItem(IDC_COMBO_GNEZDO_C);
-  cbptr->ResetContent();
-  CComboBox *cbptrb = (CComboBox*) GetDlgItem(IDC_COMBO_GNEZDO_B);
-  cbptrb->ResetContent();
-  CComboBox *cbptre = (CComboBox*) GetDlgItem(IDC_COMBO_GNEZDO_E);
-  cbptre->ResetContent();
-	if (m_nelement==DIOD || m_nelement==RES)
-	{ cbptr->AddString(_T("C"));
-	  cbptre->AddString(_T("E"));
-	  cbptr->SetCurSel(m_iGnezdoC);
-	  cbptre->SetCurSel(m_iGnezdoE);
-	}
-	else 
-	{ cbptr->AddString(_T("C"));
-	  cbptr->AddString(_T("B"));
-	  cbptr->AddString(_T("E"));
-	  cbptrb->AddString(_T("C"));
-	  cbptrb->AddString(_T("B"));
-	  cbptrb->AddString(_T("E"));
-	  cbptre->AddString(_T("C"));
-	  cbptre->AddString(_T("B"));
-	  cbptre->AddString(_T("E"));
-	  if (m_nelement==NPN || m_nelement==PNP)
-	  {
-	    cbptr->AddString(_T("обрыв"));
-	    cbptre->AddString(_T("обрыв"));
-	  }
-	  if (m_nelement==NPN4 || m_nelement==PNP4)
-	  {
-	    cbptr->AddString(_T("обрыв"));
-	    cbptrb->AddString(_T("обрыв"));
-	    cbptre->AddString(_T("обрыв"));
-	  }
-	  cbptr->SetCurSel(m_iGnezdoC);
-	  cbptrb->SetCurSel(m_iGnezdoB);
-	  cbptre->SetCurSel(m_iGnezdoE);
-
-	  ptr = (CComboBox*) GetDlgItem(IDC_COMBOCHECKBAZA);
-      ptr->SetCurSel(m_iCircuitBaza);
-
-	  if (m_nelement>PMOS)
-	  {
-	    ptr = (CComboBox*) GetDlgItem(IDC_COMBOCHECKDOP);
-        ptr->SetCurSel(m_iCircuitDop);
-	  }
-
-	  
-	}
-
-	UpdateData(FALSE);
-}
-*/
 void CLineDlg::SetGnezdo() 
 {//установить текущее состояние гнезд
 
@@ -15908,30 +13652,6 @@ void CLineDlg::SetDiapazonKol()
 //	m_iKolI = pCb->GetCurSel();//11.12.17 не понятно
 	pSl -> SetPos(m_iLimitKolI);
 
-/*	int ind=bias_KolMeasI + m_iKolI;//*2;
-	m_dLimitKolI = mas_rangeMaxKolMeasI[ind];
-	m_sRangMaxKolI = mas_RangMaxKolMeasI[ind];
-	switch(m_irazv)
-	{ case IMP_POS: case DC_POS: 
-	          valueLimitKolI=(m_dLimitKolI/110)*m_iLimitKolI;
-//			  m_sLimitKolI.Format(_T("%.2eA"),valueLimitKolI);
-	          ValueToString(1,valueLimitKolI,m_sLimitKolI);
-			  break;
-	  case AC: valueLimitKolI=(m_dLimitKolI/110)*m_iLimitKolI;
-//	          m_sLimitKolI.Format(_T("±%.2eA"),valueLimitKolI);
-	          ValueToString(1,valueLimitKolI,m_sLimitKolI);
-			  m_sLimitKolI=_T("±")+m_sLimitKolI;
-			  break;	
-	  case DC_NEG: case IMP_NEG:
-			  str = _T("-") + m_sRangMaxKolI;
-			  m_sRangMaxKolI = 	str;
-	          m_dLimitKolI*=(-1.0);
-			  valueLimitKolI=(m_dLimitKolI/110)*m_iLimitKolI;
-//	          m_sLimitKolI.Format(_T("%.2eA"),valueLimitKolI);
-	          ValueToString(1,valueLimitKolI,m_sLimitKolI);
-		      break;
-	}
-*/
 	m_sLimitKolI.Format(_T(" %3d"),pSl->GetPos());
 	m_sLimitKolI+=_T(" %");
 //	UpdateData(FALSE);	//убоала 29.11.17
@@ -16092,37 +13812,6 @@ void CLineDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 	CSliderCtrl* pSld = (CSliderCtrl*)GetDlgItem(IDC_SLIDERKOLI);
 	switch(pScrollBar->GetDlgCtrlID())
 	{
-/*	case IDC_SLIDERKOLU: //max ограничение по U (коллектор) - Стоп
-						   m_iLimitKolU = pSl->GetPos();
-						   m_sLimitKolU.Format(_T(" %3d"),pSl->GetPos());
-						   m_sLimitKolU+=_T(" % ");
-						   //DrawStatusRukoyatka();// <- для отладки!!!!!!!!!!!
-						   if (m_iQue1==COLLECTOR && (m_irazv==DC_POS || m_irazv==DC_NEG) && (m_iLimitKolU==0 ||iLimitKolU_old ==0))//(m_iLimitKolU==0)
-						   { ChangeDiapazonKol();
-///						     SetDiapazonKol();
-						   }
-						   if (m_iQue1==BAZA)
-						   { ChangeDiapazonKol();
-						   }
-						   break;
-	  case IDC_SLIDERKOLI: //min ограничение по U (коллектор) - Старт
-//						   if (m_itipimp==TIP_IMP || m_irazv==DC_POS || m_irazv==DC_NEG)
-						   if (m_iQue1==COLLECTOR)
-						   { 
-						   if (m_irazv==IMP_POS || m_irazv==IMP_NEG || m_irazv==DC_POS || m_irazv==DC_NEG)
-						   { m_iLimitKolI = pSl->GetPos();}
-						   else 
-						   { m_iLimitKolI = 0; pSl -> SetPos(m_iLimitKolI);}
-						     m_sLimitKolI.Format(_T(" %3d"),m_iLimitKolI);//pSl->GetPos());
-						     m_sLimitKolI+=_T(" % ");
-						     m_iPosTek = m_iLimitKolI;
-						     DrawStatusRukoyatka();	//индикация Старта по Uc
-						   }
-						   if (m_iQue1==BAZA)
-						   { ChangeDiapazonKol();
-						   }
-						   break;
-*/
       case IDC_SLIDERKOLU: //max ограничение по U (коллектор) - Стоп
 						   m_iLimitKolU = pSl->GetPos();
 						   m_sLimitKolU.Format(_T(" %3d"),pSl->GetPos());
@@ -16264,48 +13953,6 @@ void CLineDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 
 void CLineDlg::DrawStatusRukoyatka()
 {
-/*	CClientDC dc(this);	
-    COLORREF rgb1,rgb2;
-	rgb2=InfoRukoyatkaDC.GetBkColor(); 
-	rgb1=InfoRukoyatkaDC.GetTextColor();
-	
-	strValueRukoyatka.Format(_T("%d"),(short)(m_iPosTek));	
-    strValueRukoyatka+=_T(" %");
-	InfoRukoyatkaDC.SetTextColor(RGB(255,0,0));
-    InfoRukoyatkaDC.SetBkColor(RGB(210,210,200));
-	CPoint p(0,0);
-      InfoRukoyatkaDC.DPtoLP(&p);		
-      dc.BitBlt(rect.left,rect.top,
-	              rect.Width(),rect.Height(),&InfoRukoyatkaDC,p.x,p.y,SRCCOPY);	
-    CFont* pOldFont= InfoRukoyatkaDC.SelectObject(&fontRukoyatka);
-	CRect rect=RectEditRukoyatka;
-	InfoRukoyatkaDC.ExtTextOut(rect.left,rect.top,ETO_CLIPPED,NULL,(LPCTSTR)strValueRukoyatka,NULL);
-
-	InfoRukoyatkaDC.SelectObject(pOldFont);
-	InfoRukoyatkaDC.SetTextColor(rgb1);
-	InfoRukoyatkaDC.SetBkColor(rgb2);
-
-*/
-/*	rgb2=dc.GetBkColor(); 
-	rgb1=dc.GetTextColor();
-	dc.FillRect(RectZona,&brFonInfoRukoyatka);
-   ::WaitForSingleObject(hMutexRukoyatka,INFINITE);
-	//=>для отладки!!!!!!!!!!!!!
-	strValueRukoyatka=m_sLimitKolU;//<= для отладки!!!!!!!!!!!!!
-//	strValueRukoyatka.Format(_T(" %3d"),(short)(m_iPosTek));	
-   ::ReleaseMutex(hMutexRukoyatka);
-    strValueRukoyatka+=_T(" % ");
-	dc.SetTextColor(RGB(255,0,0));
-    dc.SetBkColor(RGB(0,0,0));
-    CFont* pOldFont= dc.SelectObject(&fontRukoyatka);
-	CRect rect=RectEditRukoyatka;
-	ClientToScreen(&rect);
-	dc.ExtTextOut(rect.left,rect.top,ETO_OPAQUE,&rect,(LPCTSTR)strValueRukoyatka,NULL);
-
-	dc.SelectObject(pOldFont);
-	dc.SetTextColor(rgb1);
-	dc.SetBkColor(rgb2);
-*/
    ((CStatic*)GetDlgItem(IDC_STATICZONATEXT))->SetFont(&fontRukoyatka);
    ::WaitForSingleObject(hMutexRukoyatka,INFINITE);
 	//=>для отладки!!!!!!!!!!!!!
@@ -16440,7 +14087,6 @@ void CLineDlg::ChangeDiapazonKol()
   int m=0;
   CString str=_T("");
 
-//    UpdateData();
     CComboBox *cbptrI = (CComboBox*) GetDlgItem(IDC_COMBOKOLI);	//измеритель I
     cbptrI->ResetContent();
 	CComboBox *pCb = (CComboBox*) GetDlgItem(IDC_COMBOKOLSOURU);
@@ -16451,16 +14097,12 @@ void CLineDlg::ChangeDiapazonKol()
 		{ switch(m_irazv)
 			{ case IMP_POS: case IMP_NEG: 
 				            bias_KolMeasI = 5;//4;				
-//							if (m_itipimp==TIP_SYN) k = 22;	//21
-//										else 
 											k = 18;		//17
 							m = 13;//14;							//13
 							break;
  			  case SYN_POS: case SYN_NEG: 
 				            bias_KolMeasI = 5;//4;				
-//							if (m_itipimp==TIP_SYN) 
 								k = 22;	//21
-//										else  k = 18;		//17
 							m = 13;//14;							//13
 							break;
 
@@ -16488,50 +14130,20 @@ void CLineDlg::ChangeDiapazonKol()
     if (n_IPPP==1 && n_Switch==1)
 		{ switch(m_irazv)
 			{ case IMP_POS:  
-//							if (m_itipimp==TIP_SYN)
-//							{bias_KolMeasI = 0; k = 3; m = 2;}	//3;
-//							else
 							{bias_KolMeasI = 0; k = 3; m = 3;}	
 							break;
 			  case SYN_POS: 
-//							if (m_itipimp==TIP_SYN)
 							{bias_KolMeasI = 0; k = 3; m = 3;}	//3;
-//							else
-//							{bias_KolMeasI = 0; k = 3; m = 2;}	
 							break;
-/*			  case AC:		
-			  case DC_POS:  case DC_NEG:
-							if (m_itipimp==TIP_SYN)
-							{bias_KolMeasI = 3; k = 3; m = 3;}	
-							else
-							{bias_KolMeasI = 0; k = 3; m = 3;}	
-				            break;
-*/			}
-//	      m=0;
 		}  
     if (n_IPPP==1 && n_Switch==2)
 		{ switch(m_irazv)
 			{  case IMP_NEG:
-//							if (m_itipimp==TIP_SYN)
-//							{bias_KolMeasI = 0; k = 3; m = 2;}	//3;
-//							else
 							{bias_KolMeasI = 0; k = 3; m = 3;}	
 							break;
 			   case SYN_NEG:
-//							if (m_itipimp==TIP_SYN)
 							{bias_KolMeasI = 0; k = 3; m = 3;}	//3;
-//							else
-//							{bias_KolMeasI = 0; k = 3; m = 2;}	
 							break;
-/*			  case AC:		
-			  case DC_POS:  case DC_NEG:
-							if (m_itipimp==TIP_SYN)
-							{bias_KolMeasI = 3; k = 3; m = 3;}	
-							else
-							{bias_KolMeasI = 0; k = 3; m = 3;}	
-				            break;
-*/			}
-//	      m=0;
 		}  
   }
 	if (m_iKolSourceU==1)//100V
@@ -16675,54 +14287,7 @@ void CLineDlg::ChangeDiapazonKol()
 	UpdateData(false);
 }
 
-/*
-void CLineDlg::OnSelchangeCombodlitimp() 
-{
-	// TODO: Add your control notification handler code here
-	int i;
-	UpdateData();
-    CComboBox *cbptrsU = (CComboBox*) GetDlgItem(IDC_COMBOKOLSOURU);	//источник U
-    cbptrsU->ResetContent();
-	CComboBox *cbp  = (CComboBox*) GetDlgItem(IDC_COMBO_PERIOD);
-	cbp->ResetContent();
-	CComboBox *pCb = (CComboBox*) GetDlgItem(IDC_COMBODLITIMP);
-	m_idlitimp = pCb->GetCurSel();
-    m_iKolSourceU = 0;		//10 V
-	m_iperiodimp = 0;
-	if (m_idlitimp==0)
-	{
-	  cbp->AddString(_T(" 40 ms"));
-	  for(i=0;i<5;i++)
-	  cbptrsU->AddString(mas_rangeKolSourceU[i]);
-	}
-	else
-	{
-	  cbp->AddString(_T(" 40 ms"));
-	  cbp->AddString(_T(" 60 ms"));
-	  cbp->AddString(_T(" 80 ms"));
-	  cbp->AddString(_T("100 ms"));
-	  cbp->AddString(_T("120 ms"));
-	  cbp->AddString(_T("140 ms"));
-	  cbp->AddString(_T("160 ms"));
-	  cbp->AddString(_T("180 ms"));
-	  cbp->AddString(_T("200 ms"));
-	  cbp->AddString(_T("220 ms"));
-	  cbp->AddString(_T("240 ms"));
-	  cbp->AddString(_T("260 ms"));
-	  cbp->AddString(_T("280 ms"));
-	  cbp->AddString(_T("300 ms"));
-	  cbp->AddString(_T("320 ms"));
-	  cbp->SetCurSel(m_iperiodimp);
-	  for(i=0;i<3;i++)
-	  cbptrsU->AddString(mas_rangeKolSourceU[i]);
-	}
-//	m_udlitpauza = mas_dlit_pauza[m_idlitimp];
-	m_udlitpauza = m_iperiodimp+1;
-	UpdateData(FALSE);
-	int er = ControlParam();//^^^^^^^^^^^^^^^^^^^^
-	
-}
-*/
+
 void CLineDlg::OnRadiobazasourceu() 
 {
 	// TODO: Add your control notification handler code here
@@ -16926,39 +14491,6 @@ void CLineDlg::InitPageTuning(int nPage)
 			             else  GetDlgItem(IDC_BUTTON_MARKER_RESET)->ShowWindow(SW_HIDE);
 			  ShowButtonLoopingCompensation();
 			  break;
-/*	  case 1: //Маркер//Память
-			  ShowControls(aTuningPage0,SIZEOF_ARRAY(aTuningPage0),FALSE);
-			  ShowControls(aTuningPage2,SIZEOF_ARRAY(aTuningPage2),FALSE);
-			  ShowControls(aTuningPage1,SIZEOF_ARRAY(aTuningPage1),TRUE);
-			  ShowControls(aMarker_OFF,SIZEOF_ARRAY(aMarker_OFF),true);
-			  switch(m_iMarker)
-			  { case MARKER0: 
-							  ShowControls(aMarker_ON,SIZEOF_ARRAY(aMarker_ON),FALSE);
-							  ShowControls(aMarker_OFF,SIZEOF_ARRAY(aMarker_OFF),TRUE);
-							  break;
-			    case MARKER1: case MARKER2:
-							  GetDlgItem(aMarker_OFF[m_iMarker])->ShowWindow(SW_HIDE);
-							  GetDlgItem(aMarker_OFF[m_iMarker])->EnableWindow(false);
-							  GetDlgItem(aMarker_ON[m_iMarker])->ShowWindow(SW_SHOW);
-							  GetDlgItem(aMarker_ON[m_iMarker])->EnableWindow(true);
-							  break;
-			  }
-			  switch(m_bTangent)
-			  { case 0: GetDlgItem(IDC_STATIC_BUTTON_TANGENT_ON)->ShowWindow(SW_HIDE);
-						GetDlgItem(IDC_STATIC_BUTTON_TANGENT_ON)->EnableWindow(false);
-				        GetDlgItem(IDC_STATIC_BUTTON_TANGENT)->ShowWindow(SW_SHOW);
-						GetDlgItem(IDC_STATIC_BUTTON_TANGENT)->EnableWindow(true);
-						break;
-			    case 1: GetDlgItem(IDC_STATIC_BUTTON_TANGENT)->ShowWindow(SW_HIDE);
-						GetDlgItem(IDC_STATIC_BUTTON_TANGENT)->EnableWindow(false);
-				        GetDlgItem(IDC_STATIC_BUTTON_TANGENT_ON)->ShowWindow(SW_SHOW);
-						GetDlgItem(IDC_STATIC_BUTTON_TANGENT_ON)->EnableWindow(true);
-						break;
-			  }
-			  break;
-
-	case 2: //Ошибки
-*/	
 	case 1: //Ошибки
 			  ShowControls(aTuningPage0,SIZEOF_ARRAY(aTuningPage0),FALSE);
 			  ShowControls(aTuningPage1,SIZEOF_ARRAY(aTuningPage1),FALSE);
@@ -17124,25 +14656,6 @@ void CLineDlg::ResetMarkers()
 			  m_Chart.m_pMarkersList[1]->SetPosition(0.0, 0.0);
 			  m_Chart.m_pMarkersList[0]->SetFillColor(RGB(255,0,0));//цвет заливки маркера
 			  m_Chart.m_pMarkersList[0]->SetPosition(0.0, 0.0);
-/*			  if (m_bTangent) 
-			  {
-			    m_Chart.DrawSecant(true);
-				if (!nCheckRef)
-				{
-				(CWnd*)GetDlgItem(IDC_STATIC_BUTTON_TANGENT)->ShowWindow(SW_HIDE);
-				(CWnd*)GetDlgItem(IDC_STATIC_BUTTON_TANGENT_ON)->ShowWindow(SW_SHOW);
-				}
-			  }
-			  else
-			  { 
-			    m_Chart.DrawSecant(false);
-				if (!nCheckRef)
-				{
-				(CWnd*)GetDlgItem(IDC_STATIC_BUTTON_TANGENT)->ShowWindow(SW_SHOW);
-				(CWnd*)GetDlgItem(IDC_STATIC_BUTTON_TANGENT_ON)->ShowWindow(SW_HIDE);
-				}
-			  }
-*/
 				(CWnd*)GetDlgItem(IDC_STATIC_BUTTON_TANGENT_ON)->ShowWindow(SW_HIDE);
 				(CWnd*)GetDlgItem(IDC_STATIC_BUTTON_TANGENT)->ShowWindow(SW_SHOW);
 			    m_Chart.DrawSecant(false);
@@ -17161,82 +14674,6 @@ void CLineDlg::ResetMarkers()
 void CLineDlg::SetVidMemDC()
 {// установить текущий контект экрана
  // в зависимости от nCheckParam и nCheckRef
-/*	TRACE(_T("SetVidMemDC();\n"));
-	CClientDC dc(this);	
-	if (MemDC) { MemDC.DeleteDC();
-				 m_bmpWndGraf.DeleteObject();
-				}
-
-	int dh = RectWnd.bottom/20 +6;//3;
-	int dw = RectWnd.right/4;
-
-	m_RectWndGraf.left   = RectWnd.left;
-//	m_RectWndGraf.top    = RectWnd.top+30;
-	m_RectWndGraf.bottom = RectWnd.bottom - dh;
-
-	if (nCheckParam==0 && nCheckRef==0)
-	{//график не на весь экран (вид по включению: с отображением панели "Параметры" и панели "Дисплей")
-		m_RectWndGraf.right  = RectWnd.right - dw - 13;;
-	m_RectWndGraf.top    = RectWnd.top+51;
-	    m_RectGraf.left   = m_RectWndGraf.left+(m_RectWndGraf.right-m_RectWndGraf.left)/8;
-//	    m_RectGraf.right  = m_RectWndGraf.right-(m_RectWndGraf.right-m_RectWndGraf.left)/8;
-	}
-	if (nCheckParam==1 && nCheckRef==1)
-	{//график на весь экран (с отображением состояния текущих параметров и параметров ссылки)
-		m_RectWndGraf.right  = RectWnd.right;
-	m_RectWndGraf.top    = RectWnd.top;
-		m_RectGraf.left   = m_RectWndGraf.left+(RectWnd.right - dw - 13 - m_RectWndGraf.left)/8;
-//		m_RectGraf.right  = RectWnd.right - dw - 13-(RectWnd.right - dw - 13 - m_RectWndGraf.left)/8;
-	}
-	if (nCheckParam==1 && nCheckRef==0)
-	{//график не на весь экран (с отображением состояния текущих параметров и панели "Дисплей")
-		m_RectWndGraf.right  = RectWnd.right;
-	m_RectWndGraf.top    = RectWnd.top+51;
-		m_RectGraf.left   = m_RectWndGraf.left+(RectWnd.right - dw - 13 - m_RectWndGraf.left)/8;
-//		m_RectGraf.right  = RectWnd.right - dw - 13-(RectWnd.right - dw - 13 - m_RectWndGraf.left)/8;
-	}
-	if (nCheckParam==0 && nCheckRef==1)
-	{//график не на весь экран (с отображением панели "Параметры" и состояния параметров ссылки)
-		m_RectWndGraf.right  = RectWnd.right;
-	m_RectWndGraf.top    = RectWnd.top+51;
-		m_RectGraf.left   = m_RectWndGraf.left+(RectWnd.right - dw - 13 - m_RectWndGraf.left)/8;
-//		m_RectGraf.right  = RectWnd.right - dw - 13-(RectWnd.right - dw - 13 - m_RectWndGraf.left)/8;
-	}
-
-	m_RectGraf.top    = m_RectWndGraf.top+(m_RectWndGraf.bottom-m_RectWndGraf.top)/8;
-	m_RectGraf.right  = m_RectGraf.left + 10*(RectWnd.right/18);
-	m_RectGraf.bottom = m_RectGraf.top + 10*(RectWnd.bottom/14);
-//	m_RectGraf.bottom = m_RectWndGraf.bottom-(m_RectWndGraf.bottom-m_RectWndGraf.top)/8;
-
-    m_RectStr_X.left  = m_RectGraf.left-10;
-    m_RectStr_X.top   = m_RectGraf.bottom+5;
-    m_RectStr_X.right = m_RectGraf.right+20;
-    m_RectStr_X.bottom= m_RectGraf.bottom+20;
-
-    m_RectStr_Y.left  = m_RectGraf.left-15;
-    m_RectStr_Y.top   = m_RectGraf.top-20;
-    m_RectStr_Y.right = m_RectStr_Y.left+12;
-    m_RectStr_Y.bottom= m_RectGraf.bottom+5;
-
-	m_RectRazmer_X.left = (m_RectStr_X.right - m_RectStr_X.left)/2 + m_RectStr_X.left/2;
-	m_RectRazmer_X.top  = m_RectStr_X.bottom + 3;
-	m_RectRazmer_X.right= m_RectRazmer_X.left+ 80;
-	m_RectRazmer_X.bottom = m_RectRazmer_X.top + 15;
-
-	m_RectRazmer_Y.left = m_RectGraf.left-40;
-	m_RectRazmer_Y.top  = m_RectGraf.top+(m_RectGraf.bottom-m_RectGraf.top)/2-20;
-	m_RectRazmer_Y.right= m_RectRazmer_Y.left+ 12;
-	m_RectRazmer_Y.bottom = m_RectRazmer_Y.top + 80;
-
-	Width  = m_RectWndGraf.right-m_RectWndGraf.left;
-	Height = m_RectWndGraf.bottom-m_RectWndGraf.top;
-	//создание образа виртуального окна
-	   MemDC.CreateCompatibleDC(&dc);
-	   m_bmpWndGraf.CreateCompatibleBitmap(&dc,Width,Height);
-	   MemDC.SelectObject(&m_bmpWndGraf);
-	   MemDC.FillRect(m_RectWndGraf,&brFon);	
-	Invalidate();//Rect(&m_RectWndGraf,FALSE);
-*/
 }
 
 void CLineDlg::DisplayMarker() 
@@ -17344,51 +14781,6 @@ void CLineDlg::DisplaySecant()
 
 void CLineDlg::DisplayParam() 
 {//отображение параметров текущего теста
-/*	TEXTMETRIC tm;
-	CSize	   sizeText;
-	COLORREF   rgb1,rgb2;
-	CRect	   rect;
-	CString    str=_T("");
-	POINT	   point;
-
-	rgb2=MemDC.GetBkColor(); 
-	rgb1=MemDC.GetTextColor();
-	CFont* pOldFont=MemDC.SelectObject(&m_fontMin);
-	MemDC.SetBkColor(m_colorFon);
-	MemDC.GetTextMetrics(&tm);
-	//надпись сверху (MEAS: наименование текущего теста)
-    MemDC.SetTextColor(m_colorCurve);
-	point.x = Width-Width/4-Width/20;//-sizeText.cx/2;
-	point.y = 3;
-	str = _T("MEAS:  ") + m_EL + _T(" \\ ") + m_MOD;
-	MemDC.ExtTextOut(point.x,point.y,ETO_OPAQUE,NULL,(LPCTSTR)str,NULL);//&rect
-	//дата.время
-	MemDC.SetTextColor(m_colorText);
-	point.x = Width-Width/10;//point.x+Width/20;
-	strDateMeas = _T("21.03.2007");//
-	strTimeMeas = _T("10:42:15");//
-	MemDC.ExtTextOut(point.x,point.y,ETO_OPAQUE,NULL,(LPCTSTR)strDateMeas,NULL);//&rect
-	point.y = point.y+tm.tmHeight+tm.tmExternalLeading;
-	MemDC.ExtTextOut(point.x,point.y,ETO_OPAQUE,NULL,(LPCTSTR)strTimeMeas,NULL);//&rect
-	//параметры
-
-//======	//надпись снизу
-	sizeText=MemDC.GetTextExtent(m_sNameDown);
-	MemDC.TextOut(Width/2-sizeText.cx/2,Height/2+Height/4+Height/10+Height/16,m_sNameDown);     
-	//Эрли
-	if (m_bErli)
-	{ CString str;
-//	  str.Format("Vearly = %d V",(int)Erli);
-	  str.Format("Касательная: y1 = 0.0   x = % .2e   tg A = % .2e",Erli,TgA);
-	  sizeText=MemDC.GetTextExtent(str);
-//	  MemDC.TextOut(Width/2-sizeText.cx/2,Height/2+Height/4+Height/10+Height/16+Height/18,str);     
-	  MemDC.TextOut(Width/6,Height/2+Height/4+Height/10+Height/16+Height/18,str);     
-	}
-//================
-    MemDC.SelectObject(pOldFont);
-	MemDC.SetTextColor(rgb1);
-	MemDC.SetBkColor(rgb2);
-*/
 	CString stre;
 	CString str1;
 	CStringArray array_MEAS;	//
@@ -17551,54 +14943,6 @@ void CLineDlg::DisplayParam()
 
 void CLineDlg::DisplayRef()
 { //отображение параметров ссылки
-/*	TEXTMETRIC tm;
-	CSize	   sizeText;
-	COLORREF   rgb1,rgb2;
-	CRect	   rect;
-	CString    str=_T("");
-	POINT	   point;
-    CMod*	pRef = new CMod;
-
-	rgb2=MemDC.GetBkColor(); 
-	rgb1=MemDC.GetTextColor();
-	CFont* pOldFont=MemDC.SelectObject(&m_fontMin);
-	MemDC.SetBkColor(m_colorFon);
-	MemDC.GetTextMetrics(&tm);
-	//надпись сверху (MEAS: наименование текущего теста)
-    MemDC.SetTextColor(m_colorRef);
-	point.x = Width-Width/4-Width/20;//-sizeText.cx/2;
-	point.y = Height - Height/3;
-	str = _T("REF:  ") + pRef->m_EL + _T(" \\ ") + pRef->m_MOD;
-	MemDC.ExtTextOut(point.x,point.y,ETO_OPAQUE,NULL,(LPCTSTR)str,NULL);//&rect
-	//дата.время
-	MemDC.SetTextColor(m_colorText);
-	point.x = Width-Width/10;//point.x+Width/20;
-	pRef->strDateMeas = _T("21.03.2007");//
-	pRef->strTimeMeas = _T("09:12:45");//
-	MemDC.ExtTextOut(point.x,point.y,ETO_OPAQUE,NULL,(LPCTSTR)(pRef->strDateMeas),NULL);//&rect
-	point.y = point.y+tm.tmHeight+tm.tmExternalLeading;
-	MemDC.ExtTextOut(point.x,point.y,ETO_OPAQUE,NULL,(LPCTSTR)(pRef->strTimeMeas),NULL);//&rect
-	//параметры
-
-//=============	//надпись снизу
-	sizeText=MemDC.GetTextExtent(m_sNameDown);
-	MemDC.TextOut(Width/2-sizeText.cx/2,Height/2+Height/4+Height/10+Height/16,m_sNameDown);     
-	//Эрли
-	if (m_bErli)
-	{ CString str;
-//	  str.Format("Vearly = %d V",(int)Erli);
-	  str.Format("Касательная: y1 = 0.0   x = % .2e   tg A = % .2e",Erli,TgA);
-	  sizeText=MemDC.GetTextExtent(str);
-//	  MemDC.TextOut(Width/2-sizeText.cx/2,Height/2+Height/4+Height/10+Height/16+Height/18,str);     
-	  MemDC.TextOut(Width/6,Height/2+Height/4+Height/10+Height/16+Height/18,str);     
-	}
-//==============
-    MemDC.SelectObject(pOldFont);
-	MemDC.SetTextColor(rgb1);
-	MemDC.SetBkColor(rgb2);
-	*/
-
-
     CString str,stre;
 //	CString strNameRef;
 	((CStatic*)GetDlgItem(IDC_EDITDISPLAYREF))->SetFont(&fontParam);
@@ -17893,16 +15237,6 @@ if (m_uFunc>1)
 void CLineDlg::ExtractResultsCalculate()
 { //выборка результатов расчета
 //  pModSelected = FindTest(m_masStrEl[i_EL],m_masStrMod[i_EL][i_MOD]);//???_???
-/*
-	if (pModSelected)
-	{
-	Beta_max     = pModSelected->Beta_max;
-	Betai_max    = pModSelected->Betai_max;
-	Ib_Beta_max  = pModSelected->Ib_Beta_max;
-	Ib_Betai_max = pModSelected->Ib_Betai_max;
-	Par          = pModSelected->Par;
-	}
-*/
 }
 
 void CLineDlg::OnPart() 
@@ -19143,56 +16477,7 @@ void CLineDlg::BuildCommand()
  // K32
 	K32[1] = m_bCheckBazaRejHigh;
  // K37 "Состояние бита Q18"
-/*	m_uBitQ18 = 0;
-	    if ((m_irazv==0 || m_irazv==4))// && m_itipimp==TIP_IMP)
-		{ m_uBitQ18 = 1;
 
-///*		  switch (m_iBazaSource)
-		  { case 0://источник U
-//					if (m_iRangLimitBaza<10) 
-					m_uBitQ18 = 0;
-					break;
-		    case 1://источник I
-//					if (m_iAmplitudeStepBaza<10) 
-						m_uBitQ18 = 1;
-			        break;
-		  }
-//*/
-//		}
-/*
-	m_uBitQ18 = 0;	//"Состояние бита Q18"
-	K40[1] = 0;		
-//    if (m_irazv==0 || m_irazv==4)
-	if( m_irazv==IMP_POS || m_irazv==IMP_NEG || m_irazv==SYN_POS || m_irazv==SYN_NEG)
-	{
-		if (m_bBazaVkl) m_uBitQ18 = 1;	
-				  else  m_uBitQ18 = 0;
-//        if (m_itipimp==TIP_IMP)	//биполярный тр-р + импульс
-        if ( m_irazv==IMP_POS || m_irazv==IMP_NEG)	//биполярный тр-р + импульс
-		switch(m_nelement)
-		{ case 2: case 3: 
-		  case 6: case 7: //биполярные (NPN,PNP,NPN4,PNP4)
-						  m_uBitQ18 = 1; //для биполярных всегда 1
-	                      if (m_iBazaSource==1)//источник I
-						  K40[1] = 1;
-	                      break; 
-		  case 4: case 5:
-		  case 8: case 9: //МОП
-	                      if (m_iBazaSource==1)//источник I
-						  K40[1] = 1;
-						  break;
-		}
-	}
-	K37[1] = m_uBitQ18;
-*/
-/*
-// K37 "Состояние бита Q18"
-	if (m_bBazaVkl) K37[1] = 1;	//импульс в канале В
-			  else  K37[1] = 0; //нет имульса в канале В
-// K40 "Трехполюсник?"
-    if (m_nelement<= RES) K40[1]=0;	//двухполюсники
-					else  K40[1]=1; //трех- четырехполюсники
-*/
 // K36
 	if (m_idlitimp==-1) m_idlitimp=0;
 //	Nz_max = mas_Nz_max[m_irejimp][m_idlitimp];
@@ -19439,185 +16724,18 @@ UINT ThreadComIn(LPVOID pParam)
 	  ::SendMessage((HWND)pParam,WM_BUTTON,0,0);	//код кнопки в bufIn2[1]	
 	  }
 	  } while (dwRead2==2);
-
-/*	  	  ::ReadFile(hCom2,bufComIn2,2,&dwRead2,NULL);
-	  if (dwRead2>=2)
-	  {
-	  TRACE(_T("***********ThreadComIn dwRead2 = %d %d %d %d %d ***********\n"),dwRead2,bufComIn2[0],bufComIn2[1],bufComIn2[2],bufComIn2[3]);
-	  ::WaitForSingleObject(hMutexI,INFINITE);
-	  bufIn2[0]=(BYTE)dwRead2;						//кол-во
-	  memcpy(&bufIn2[1],&bufComIn2[0],dwRead2);		//данные
-	  ::ReleaseMutex(hMutexI);
-//	  TRACE(_T("***********ThreadComIn  %d %d ***********\n"),bufIn2[1],bufIn2[2]);
-	  ::PostMessage((HWND)pParam,WM_BUTTON,0,0);	//код кнопки в bufIn2[1]	
-	  }
-*/
-	 
-/*	  ::ReadFile(hCom2,bufComIn2,4,&dwRead2,NULL);
-	  if (dwRead2>=2)
-	  { for (i=0;i<(int)(dwRead2/2);i++)
-		{  ::WaitForSingleObject(hMutexI,INFINITE);
-			bufIn2[0]=2;							//кол-во
-			memcpy(&bufIn2[1],&bufComIn2[i*2],2);		//данные
-			::ReleaseMutex(hMutexI);
-			TRACE(_T("***********ThreadComIn  %d %d ***********\n"),bufIn2[1],bufIn2[2]);
-			if (dwRead2>2)
-				::SendMessage((HWND)pParam,WM_BUTTON,0,0);	//код кнопки в bufIn2[1]	
-			else 
-	    		::PostMessage((HWND)pParam,WM_BUTTON,0,0);	//код кнопки в bufIn2[1]	
-		}
-	  }
-*/
-
 	}
-
-/*    if (dwEvtMask & EV_RLSD)//Превышение порога по току в канале С
-	{
-	   if (bPusk && !bStop)
-	   {
-	     TRACE(_T("===EV_DCD===Превышение порога по току в канале С\n"));
-         ::WaitForSingleObject(hMutexI,INFINITE);
-         bufIn2[0]=2;					
-	     bufIn2[1]='F';							
-	     bufIn2[2]=1;							
-	     ::ReleaseMutex(hMutexI);
-	     ::PostMessage((HWND)pParam,WM_BUTTON,0,0);
-	   }
-	}
-	if (dwEvtMask & EV_RING)//Блокировка крышки нарушена
-	{
-	   if (bPusk && !bStop)
-	   {
-	     TRACE(_T("====EV_RI===Блокировка крышки нарушена\n"));
-         ::WaitForSingleObject(hMutexI,INFINITE);
-         bufIn2[0]=2;					
-	     bufIn2[1]='F';							
-	     bufIn2[2]=2;							
-	     ::ReleaseMutex(hMutexI);
-	     ::PostMessage((HWND)pParam,WM_BUTTON,0,0);
-	   }
-	}
-  if (n_IPPP==1)
-  {//  if (n_IPPP==1)
-	if (dwEvtMask & EV_DSR)//Переключатель +5В
-	{
-	 if (!bPusk && bStop)
-	 { 
-	  TRACE(_T("===EV_DSR===Переключатель +5В\n"));
-	  Switch_temp = 1;
-      if (Switch_temp!=Switch_old)
-	  { Switch_old = Switch_temp;
-	    ::WaitForSingleObject(hMutexI,INFINITE);
-        bufIn2[0]=2;					
-	    bufIn2[1]='P';							
-	    bufIn2[2]=Switch_temp;							
-	    ::ReleaseMutex(hMutexI);
-	    ::PostMessage((HWND)pParam,WM_BUTTON,0,0);
-	  }
-	 }
-	}
-	if (dwEvtMask & EV_CTS)//Переключатель -5В
-	{
-	 if (!bPusk && bStop)
-	 { 
-	  TRACE(_T("===EV_CTS===Переключатель -5В\n"));
-	  Switch_temp = 2;
-      if (Switch_temp!=Switch_old)
-	  { Switch_old = Switch_temp;
-        ::WaitForSingleObject(hMutexI,INFINITE);
-        bufIn2[0]=2;					
-	    bufIn2[1]='P';							
-	    bufIn2[2]=Switch_temp;							
-	    ::ReleaseMutex(hMutexI);
-	    ::PostMessage((HWND)pParam,WM_BUTTON,0,0);
-	  }
-	 }
-	}
-	if (Switch_temp==0 && Switch_temp!=Switch_old)//Переключатель +-2000B
-	{
-	 if (!bPusk && bStop)
-	 { 
-	    TRACE(_T("===Переключатель +-2000В===\n"));
-	    Switch_temp = 0;
-	    Switch_old = Switch_temp;
-        ::WaitForSingleObject(hMutexI,INFINITE);
-        bufIn2[0]=2;					
-	    bufIn2[1]='P';							
-	    bufIn2[2]=Switch_temp;							
-	    ::ReleaseMutex(hMutexI);
-	    ::PostMessage((HWND)pParam,WM_BUTTON,0,0);
-	 }
-	}
-  }//end jf   if (n_IPPP==1)
-*/
-
   }//end of for(;;)
 
 return(0);
 }
 
-/*
-UINT ThreadComIn(LPVOID pParam)
-{  // Ожидание нажатия физической кнопки или рукоятки (по СОМ2)
-  for (;;)
-  { 
-		  if (!::ReadFile(hCom2,bufComIn2,2,&dwRead2,NULL))
-		  { if (dwRead2!=0)
-			{ // ошибка чтения кода физической кнопки
-		     ::WaitForSingleObject(hMutexI,INFINITE);
-			 TRACE(_T("***Error  ThreadComIn dwRead2 = %d %d %d ***\n"),dwRead2,bufComIn2[0],bufComIn2[1]);
-		     bufIn2[0]=1;					
-		     bufIn2[1]='F';							    //ERROR 1: ошибка при чтении кода физ.кнопки
-		     ::ReleaseMutex(hMutexI);
-		     ::PostMessage((HWND)pParam,WM_BUTTON,0,0);
-		     PurgeComm(hCom2,PURGE_RXCLEAR);
-			}
-		  }
-		  else
-		  { if (dwRead2==2)// || dwRead2==3)
-			{
-			::WaitForSingleObject(hMutexI,INFINITE);
-			TRACE(_T("dwRead2=%d\n"),dwRead2);
-			bufIn2[0]=(BYTE)dwRead2;						//кол-во
-			memcpy(&bufIn2[1],&bufComIn2[0],dwRead2);		//данные
-			::ReleaseMutex(hMutexI);
-//			 TRACE(_T("***********ThreadComIn  %d %d %d***********\n"),bufIn2[1],bufIn2[2],bufIn2[3]);
-			 TRACE(_T("***********ThreadComIn  %d %d ***********\n"),bufIn2[1],bufIn2[2]);
-			::PostMessage((HWND)pParam,WM_BUTTON,0,0);	//код кнопки в bufIn2[1]	
-			}
-		  }
-
-  }//end of for(;;)
-
-return(0);
-}
-*/
 
 UINT ThreadComOut(LPVOID pParam)
 {  // Передача команд Pic-контроллеру (по порту СОМ2)
 
 	CString str;
   
-/*
-//тест
-//===================================================	
-	::WaitForSingleObject(hEventComOut,INFINITE);
-
- for(;;)
- {	
-	::WaitForSingleObject(hMutexO,INFINITE);
-
-	// послать команды в Pic
-	//======================
-//	if(!
-		::WriteFile(hCom2,bufOut,1,&dwWrite,NULL);
-		  ::ReleaseMutex(hMutexO);////!!!!!!!!!!!!
-//		)	//+1 байт, т.к. с кол-вом байт для передачи
-		  Sleep(10);
- }//!!!!!!!!!!!!!!!!!!
-//конец теста=========================================
-*/
-
  for(;;)
  {	
 	::WaitForSingleObject(hEventComOut,INFINITE);
@@ -19665,38 +16783,6 @@ UINT ThreadComOut(LPVOID pParam)
 
 //<==================это
 //вместо следующего =>
-/*	    //принять отклик
-		//==============
-	    if (!::ReadFile(hCom2,bufComIn,1,&dwRead,NULL))
-		{ 
-		  PurgeComm(hCom2,PURGE_TXCLEAR|PURGE_RXCLEAR);
-		  ::WaitForSingleObject(hMutexRes,INFINITE);
-          bufRes[0]=1;	                
-          bufRes[1]='Y';	         // ошибка тайм-аута при чтении отклика по СОМ1-порту
-	      ::ReleaseMutex(hMutexRes);
-	      ::PostMessage((HWND)pParam,WM_RESPONSE,0,0);
-		}
-		else
-		{ if (dwRead==0)
-			{ 
-			  PurgeComm(hCom2,PURGE_TXCLEAR|PURGE_RXCLEAR);
-		      ::WaitForSingleObject(hMutexRes,INFINITE);
-              bufRes[0]=1;	                
-              bufRes[1]='N';	     // ошибка: нет отклика по порту СОМ1
-	          ::ReleaseMutex(hMutexRes);
-	          ::PostMessage((HWND)pParam,WM_RESPONSE,0,0);
-			}
-			else
-			{ // отклик получен
-		      ::WaitForSingleObject(hMutexRes,INFINITE);
-              bufRes[0]=(BYTE)dwRead;	                //количество
-              memcpy(&bufRes[1],&bufComIn[0],dwRead);	//данные
-	          ::ReleaseMutex(hMutexRes);
-	          //"отклик" получен
-	          ::PostMessage((HWND)pParam,WM_RESPONSE,0,0);
-			}
-		}
-*/
 //<======== это не надо
 	  }
 	}
@@ -19808,200 +16894,6 @@ UINT ThreadEppIn(LPVOID pParam)
 
 return (0);
 }
-
-/*
-UINT ThreadEppIn(LPVOID pParam)
-{ // Ожидание "готовности" и приём массива результатов из Pic-контроллера
-  // через порт 0x78
-
-//test
-//=======================================
-//    CCriticalSection MycriticalSection;
-  CRITICAL_SECTION csMyCriticalSection;
-  InitializeCriticalSection (&csMyCriticalSection);
-  BYTE g = 0;
-  int  i = 0;
-  DWORD dwStop;
-  int	ens;
-  int   strobe;
-
-  for(;;)	
-  {//for  
-	//разрешить чтение массива данных (установить сигнал ENB_PCM <- 1)
-
-	::WaitForSingleObject(hEventEppIn,INFINITE);
-    TRACE(_T("ThreadEppIn\n"));
-	
-	__try
-	{
-		EnterCriticalSection (&csMyCriticalSection);//MyCriticalSection.Lock();
-//		Sleep(10);
-
-	//разрешить чтение массива данных (установить сигнал ENB_PCM <- 1)
-	ens = _inp(0x79);		
-	ens = ens | 0x02;
-	_outp(0x79,ens);			//D1<-1 (ENB_PCM <- 1)
-    TRACE(_T("ThreadEppIn (ENB_PCM <- 1)\n"));
-	//ожидание готовности 
-	do
-	{ g =_inp(0x79);
-	  g = g & 0x40;									
-	  dwStop = ::WaitForSingleObject(hEventStop,0);//0
-	} while (g == 0x00 && dwStop != WAIT_OBJECT_0);		//D6 0->1
-    TRACE(_T("ThreadEppIn (0->1)\n"));
-	do
-	{ g =_inp(0x79);
-	  g = g & 0x40;
-	  dwStop = ::WaitForSingleObject(hEventStop,0);//0
-	} while (g == 0x40 && dwStop != WAIT_OBJECT_0);		//D6 1->0
-    TRACE(_T("ThreadEppIn (1->0)\n"));
-
-	if (dwStop == WAIT_OBJECT_0)
-	{ //"готовности" нет (экстренный стоп)
-
-//			::WaitForSingleObject(hMutexEpp,INFINITE);
-//			  bufIn_Epp[0]='S';				//error
-//			  bufIn_Epp[1]='T';				//
-//			ens = _inp(0x378+2);			//запретить установку сигнала ENS
-//			ens = ens | 0x08;
-// 			_outp(0x378+2,ens);	         //D3<-1 (ENS<-1)
-//			::ReleaseMutex(hMutexEpp);
-//     ::PostMessage((HWND)pParam,WM_MASSIV,0,0);
-
-	}
-	else
-	{ //"готовность принята" => принять массив данных
-
-			// Your code to access the shared resource goes here.
-			::WaitForSingleObject(hMutexEpp,INFINITE);
-			for(i=0;i<NumI;i++)
-			{ //STROBE <- 0
-				strobe = _inp(0x79);		
-				strobe = strobe & 0xfe;
-				_outp(0x79,strobe);			//D0<-0
-
-			  //чтение байта данных
-	   			bufEppIn[i] = _inp(0x78);
-
-			  //STROBE <- 1
-				strobe = _inp(0x79);		
-				strobe = strobe | 0x01;
-				_outp(0x79,strobe);			//D0<-1
-				strobe = _inp(0x79);					//задержка 10us
-				strobe = strobe | 0x01;
-				_outp(0x79,strobe);			//D0<-1
-				strobe = _inp(0x79);		
-				strobe = strobe | 0x01;
-				_outp(0x79,strobe);			//D0<-1
-				
-			}
-
-			::ReleaseMutex(hMutexEpp);
-			::PostMessage((HWND)pParam,WM_MASSIV,0,0);	
-	}
-
-	}
-	__finally
-	{
-		// Release ownership of the critical section
-		LeaveCriticalSection (&csMyCriticalSection);//MyCriticalSection.Unlock();
-	}
-
-
-  }//end for 
-
-return (0);
-}
-*/
-/*
-UINT ThreadEppIn(LPVOID pParam)
-{ // Ожидание "готовности" и приём массива результатов из Pic-контроллера
-  // через EPP-порт
-
-//test
-//=======================================
-//    CCriticalSection MycriticalSection;
-  CRITICAL_SECTION csMyCriticalSection;
-  InitializeCriticalSection (&csMyCriticalSection);
-  BYTE g = 0;
-  int  i = 0;
-  DWORD dwStop;
-  int	ens;
-  for(;;)	
-  {//for  
-	::WaitForSingleObject(hEventEppIn,INFINITE);
-    TRACE(_T("ThreadEppIn\n"));
-	
-	__try
-	{
-		EnterCriticalSection (&csMyCriticalSection);//MyCriticalSection.Lock();
-//		Sleep(10);
-
-	//разрешить установку сигнала ENS
-	ens = _inp(0x378+2);		
-	ens = ens & 0x0f7;
- 	_outp(0x378+2,ens);			//D3<-0 (ENS<-0)
-	//принять "готовность" (ожидание перехода D5 1->0 (ENS))	//D5 0->1(LINE) )
-	do
-	{ g =_inp(0x378+1);
-	  g = g & 0x20;									
-	  dwStop = ::WaitForSingleObject(hEventStop,0);
-	} while (g == 0x00 && dwStop != WAIT_OBJECT_0);		//D5 0->1
-	do
-	{ g =_inp(0x378+1);
-	  g = g & 0x20;
-	  dwStop = ::WaitForSingleObject(hEventStop,0);
-	} while (g == 0x20 && dwStop != WAIT_OBJECT_0);		//D5 1->0
-
-	if (dwStop == WAIT_OBJECT_0)
-	{ //"готовности" нет (экстренный стоп)
-
-//			::WaitForSingleObject(hMutexEpp,INFINITE);
-//			  bufIn_Epp[0]='S';				//error
-//			  bufIn_Epp[1]='T';				//
-//			ens = _inp(0x378+2);			//запретить установку сигнала ENS
-//			ens = ens | 0x08;
-// 			_outp(0x378+2,ens);	         //D3<-1 (ENS<-1)
-//			::ReleaseMutex(hMutexEpp);
-//     ::PostMessage((HWND)pParam,WM_MASSIV,0,0);
-
-	}
-	else
-	{ 
-	//"готовность принята" => принять массив данных
-//		__try
-//		{
-//			EnterCriticalSection (&csMyCriticalSection);//MyCriticalSection.Lock();
-			// Your code to access the shared resource goes here.
-			::WaitForSingleObject(hMutexEpp,INFINITE);
-			for(i=0;i<NumI;i++)
-			{ 
-	   			bufEppIn[i] = _inp(0x378+4);
-			}
-			::ReleaseMutex(hMutexEpp);
-			::PostMessage((HWND)pParam,WM_MASSIV,0,0);	
-//		}
-//		__finally
-//		{
-			// Release ownership of the critical section
-//			LeaveCriticalSection (&csMyCriticalSection);//MyCriticalSection.Unlock();
-//		}
-	}
-
-	}
-	__finally
-	{
-		// Release ownership of the critical section
-		LeaveCriticalSection (&csMyCriticalSection);//MyCriticalSection.Unlock();
-	}
-
-
-  }//end for 
-
-return (0);
-}
-
-*/
 
 
 void CLineDlg::Pusk()
@@ -20222,130 +17114,9 @@ void CLineDlg::Stop()
 }
 
 
-/*
-BOOL CLineDlg::ControlLimit(int vid)
-{ 
-  CString str=_T("");
-  BYTE condition = 0;
-  BOOL b = false;
-
-  int limit = _inp(0x3fd);
-  limit = limit & 0xc0;			//D7,D6
-  
-  switch (vid)
-  { case 0: //контроль крышки по Пуску
-			if (limit==0)
-			{ SetTimer(5,500,NULL);	//Крышка закрыта: запускаем таймер, включаем измерение
-			  b = false;
-			}
-			else
-			{ str = _T("ОТКРЫТА КРЫШКА!!!");//Крышка не закрыта
-			  b = true; condition = 1;
-			}
-            break;
-	case 1: //контоль крышки и превышения порога по току в канале С  при измерении
-			if (limit==0)
-			{ //Крышка закрыта: продолжаем измерение
-			  b = false;
-			}
-			else
-			{ 
-			  if (limit==0x40)
-				{ str = _T("ОТКРЫТА КРЫШКА!!!");//Крышка не закрыта
-			      b = true; condition = 1;
-				}
-			  else
-			  { if (limit==0x80)
-				{ str = _T("ПРЕВЫШЕН ПОРОГ ПО ТОКУ В КАНАЛЕ С!!!");
-			      b = true; condition = 2;
-				}
-			  }
-			}
-		    break;
-	case 2://контроль превышения порога по току в канале С
-			if (limit==0)
-			{ //продолжаем измерение
-			  b = false;
-			}
-			else
-			{ if (limit==0x40)
-				{ str = _T("ОТКРЫТА КРЫШКА!!!");//Крышка не закрыта
-			      b = true; condition = 1;
-				}
-			  else
-			  { if (limit==0x80)
-				{ str = _T("ПРЕВЫШЕН ПОРОГ ПО ТОКУ В КАНАЛЕ С!!!");
-			      b = true; condition = 2;
-				}
-			  }
-			}
-		    break;
-  }
-  if (b) ExtraStop(condition,str);	//послать Picу команду: "Прервать измерение!"
-  return b;
-}
-*/
-/*
 void CLineDlg::ExtraStop(BYTE condition,LPCTSTR strMessage)
 { //экстренный останов измерения по условию  
-    TRACE(_T("ExtraStop(cause = %d)\n"),condition);
-
-//	K38[1] = condition;
-	SetTextInfo(strMessage);
-	//остановить измерение
-	switch(condition)
-	{ case 1: //остановить измерение 
-			  ::WaitForSingleObject(hMutexO,INFINITE);
-			  bufOut[0]=3;				//кол-во байт для передачи + 1 байт с количеством
-			  bufOut[1]=K38[0];			//команда "Прервать измерение!"
-			  bufOut[2]='\0';				//конец передачи
-			  NumO = 2;
-			  ::ReleaseMutex(hMutexO);
-			  PurgeComm(hCom2,PURGE_TXCLEAR|PURGE_RXCLEAR);
-			  ::WriteFile(hCom2,bufOut,(DWORD)NumO+1,&dwWrite,NULL);
-			
-			  ::WaitForSingleObject(hMutexStop,INFINITE);
-			  bStop = TRUE;
-				  //bPusk = FALSE;
-//				  Flag  = FALSE;
-//				  Flag_All = FALSE;
-//				  m_nCountMas = m_nMas - 1;
-//				  m_uCountTest  = n_Test-1;
-//				  stup = n_Step-1;
-			  ::ReleaseMutex(hMutexStop);
-				break;
-	  case 2: //дойти до конца полного цикла и прервать измерение
-		      //аналогично нажатию кнопки "Стоп"
-				::WaitForSingleObject(hMutexStop,INFINITE);
-				 bStop = TRUE;
-				 //bPusk = FALSE;
-			    ::ReleaseMutex(hMutexStop);
-				break;
-	}
-}
-*/
-void CLineDlg::ExtraStop(BYTE condition,LPCTSTR strMessage)
-{ //экстренный останов измерения по условию  
-/*    TRACE(_T("ExtraStop(cause = %d)\n"),condition);
-
-    Flag_sboy  = TRUE;
-
-//	K38[1] = condition;
-	SetTextInfo(strMessage);
-	//остановить измерение
-	::WaitForSingleObject(hMutexO,INFINITE);
-	bufOut[0]=3;				//кол-во байт для передачи + 1 байт с количеством
-	bufOut[1]=K38[0];			//команда "Прервать измерение!"
-	bufOut[2]='\0';				//конец передачи
-	NumO = 2;
-	::ReleaseMutex(hMutexO);
-//	PurgeComm(hCom2,PURGE_TXCLEAR|PURGE_RXCLEAR);
-//	::WriteFile(hCom2,bufOut,(DWORD)NumO+1,&dwWrite,NULL);
-	SetEvent(hEventComOut);			
-	::WaitForSingleObject(hMutexStop,INFINITE);
-	bStop = TRUE;
-	::ReleaseMutex(hMutexStop);
-*/	MyMessageBeep(MB_ICONASTERISK);
+	MyMessageBeep(MB_ICONASTERISK);
 }
 
 
@@ -20497,25 +17268,7 @@ LONG CLineDlg::OnButton(WPARAM wParam,LPARAM lParam)
 				  ::WaitForSingleObject(hMutexRukoyatka,INFINITE);
 				  m_iPosTek = My_buf_But[1];
 				  if (m_iPosTek<m_iLimitKolI)m_iPosTek=m_iLimitKolI+m_iPosTek;
-/*			      if (m_irazv==IMP_POS || m_irazv==IMP_NEG)
-				  { //					m_nMas=m_iPosTek/5;
-					if ((m_iLimitKolU - m_iLimitKolI)!=0)
-					     m_nMas = (int)((m_iPosTek - m_iLimitKolI)*uNpointsLupa/(m_iLimitKolU - m_iLimitKolI));
-					else m_nMas = 1;
-					if (m_nMas==0){ m_nMas=1; //stup=0;		//лучше 0% не слать???
-									//???bStop = true;//режим импульсный - рукоятка ушла в ноль
-									}
-					if (m_bBeta || m_bBetai || m_bS) m_nMas=1;	//одно значение на каждой ступеньке при Uc = 5V
-					if (m_nMas < n_Mas) flag_ruk= 1;///
-					 n_Mas = m_nMas;
-///				     m_nCountMas = 0;
-//					 stup = 0;
-//					 if (m_nCountMas !=0)
-//					 flag_ruk= 1;
-					 
-					// ready=0;
-				  }
-*/	
+	
 				  ::ReleaseMutex(hMutexRukoyatka);
 				  DrawStatusRukoyatka();//
 				}
@@ -20767,8 +17520,6 @@ LONG CLineDlg::OnButton(WPARAM wParam,LPARAM lParam)
 								Stop();
 								}
 								break;
-//				    case 0x35: //xx1101x1
-//				    case 0x31: //xx1100x1
 					case 0x34: //xx1101x0
 								TRACE(_T("COVER CLOSE!\n"));
 								if (!bPusk && m_bKrishka)// && (bias_KolSourceU+m_iKolSourceU)>=2) //&& !Flag_sboy 
@@ -20789,10 +17540,7 @@ LONG CLineDlg::OnButton(WPARAM wParam,LPARAM lParam)
 								Stop();
 								}
 								break;
-//					case 0x28: //xx1010x0
 					case 0x2c: //xx1011x0
-//					case 0x2d: //xx1011x1
-//					case 0x29: //xx1010x1
 								TRACE(_T("COVER CLOSE!\n"));
 								if (!bPusk && m_bKrishka)// && (bias_KolSourceU+m_iKolSourceU)>=2)//&& Flag_sboy  
 								{ 
@@ -20984,39 +17732,7 @@ LONG CLineDlg::OnButton(WPARAM wParam,LPARAM lParam)
 
 return 0L;
 }
-/*
-void CLineDlg::InitNewSwitch()
-{ CString str;
-	UpdateData();
 
-    int nTab = 2;			//отобразить закладку "Канал С"
-	m_TabCtrlParam.SetCurSel(nTab);
-	InitPage(nTab);
-
-	if (n_IPPP && n_Switch==1)
-	{ str=_T("ПЕРЕКЛЮЧАТЕЛЬ В ПОЛОЖЕНИИ +5V");
-		m_irazv = IMP_POS;
-//		m_itipimp = TIP_IMP;
-	}
-	if (n_IPPP && n_Switch==2)
-	{ str=_T("ПЕРЕКЛЮЧАТЕЛЬ В ПОЛОЖЕНИИ -5V");
-		m_irazv = IMP_NEG;
-//		m_itipimp = TIP_IMP;
-	}
-	if (n_IPPP && n_Switch==0)
-	{ str=_T("ПЕРЕКЛЮЧАТЕЛЬ В ПОЛОЖЕНИИ ±3000V");
-//		m_irazv = IMP_POS;
-//		m_itipimp = TIP_SYN;
-		m_irazv = SYN_POS;
-	}
-	SetTextInfo(str);
-	UpdateData(false);
-	InitIconImp();
-	ChangeDiapazonKolSourceU();
-	ChangeDiapazonKolMeasU();
-	ChangeDiapazonKol();
-}
-*/
 
 void CLineDlg::InitNewSwitch()
 { CString str;
@@ -21099,15 +17815,7 @@ if(pModSelected==NULL)
 	
 	SetDiapazonKol();
 }
-/* 
-if (pModSelected)
-{   ExtractParam();
-	 m_MOD  = pModSelected->m_MOD;
-	UpdateData(false);
-	InitDiapazonKol();
-	SetDiapazonKol();
-}
-*/
+
 //			InitIconImp();
 /*
 	int nTab = 2;			//отобразить закладку "Канал С"
@@ -21130,57 +17838,12 @@ if (pModSelected)
 }
 
 
-/*
-LONG CLineDlg::OnError(WPARAM wParam,LPARAM lParam)
-{ CString str;
-  CClientDC dc(this);
-  CRect rect;
-
- ::WaitForSingleObject(hMutexStop,INFINITE);
-
-  if (!bStop)
-  {
-    ::ReleaseMutex(hMutexStop);
-	//переписать данные из буфера bufIn
-	::WaitForSingleObject(hMutexI,INFINITE);
-	  memcpy(&My_buf_Err[0],&bufIn2[1],bufIn2[0]);	//данные
-	::ReleaseMutex(hMutexI);
-
-
-	switch(My_buf_Err[0])
-	{ case 'F':
-	  default:  // Ошибка при чтении кода физической кнопки из Сом-порта
-				str = _T("ERROR 0");
-				break;
-	  case 'T':	// Ошибка тайм-аута при чтении кода физической кнопки из СОМ-порта
-				str = _T("ERROR 1");
-				break;
-	}				
-	SetTextInfo(str);
-	//команда "Экстренный останов"
-    ::WaitForSingleObject(hMutexStop,INFINITE);
-	//bPusk = FALSE;
-	//bStop = TRUE;
-	Stop();
-    ::ReleaseMutex(hMutexStop);
-//	i_Error++;
-  }
-  else ::ReleaseMutex(hMutexStop);
-
-return 0L;
-}
-*/
-
 LONG CLineDlg::OnResponse(WPARAM wParam,LPARAM lParam)
 {	
   CString str;
   CClientDC dc(this);
   CRect rect;
 
-//  ::WaitForSingleObject(hMutexStop,INFINITE);
-//  if (!bStop)
-//  {	
-//    ::ReleaseMutex(hMutexStop);
 	//переписать данные из буфера bufInRes
 	::WaitForSingleObject(hMutexRes,INFINITE);
 	  memcpy(&My_buf_Res[0],&bufRes[1],bufRes[0]);	//данные
@@ -21311,25 +17974,7 @@ LONG CLineDlg::OnMassiv(WPARAM wParam,LPARAM lParam)
   int k = 0;	//k - № байта в принятом массиве
   BYTE   mask[] =  {0xc0,0x30,0x0c,0x03};
   int n=0;
-/*  
-////  KillTimer(5);
-if (wParam==1L && lParam==1L)
-{//	KillTimer(5);
-		if (bPusk) 	str = _T("ИЗМЕРЕНИЕ ПРЕРВАНО!");//произошла рассинхронизация с Рic-ом
-		if (bKalibr) 	str = _T("КАЛИБРОВКА ПРЕРВАНА!");//произошла рассинхронизация с Рic-ом
-		if (bAutoSetNull) 	str = _T("КОРРЕКЦИЯ НУЛЯ ПРЕРВАНА!");//произошла рассинхронизация с Рic-ом
-		SetTextInfo(str);
-		Flag_sboy = true;
-		Stop();
-//	bPusk = false;
-//	bStop = true;
-		ready = 0;
-		pbut -> SetWindowText(L"Измерение");
-		return 0L;
-}
-else
-{
-*/
+
   TRACE(_T("OnMassiv!!!\n"));
 if (bPusk)
 {//ИЗМЕРЕНИЕ
@@ -22724,67 +19369,6 @@ if (bKalibr)
 
   if (m_ir==0)//калибровка
   {//Импульсная развёртка 
-/*	//20 раз читаем результат из 5-ти точек, берем n_t-ю точку с конца
-	//первые 4 измерения пропускаем, остальные 16 усредняем по 16-ти
-		 if (nCountPointDC < 4)
-		 {//пропустить 4 результата измерения
-			nCountPointDC++;
-			m_nCountMas=0;
-			    // поместить в bufOut управляющие команды
-			    ::WaitForSingleObject(hMutexO,INFINITE);
-			    bufOut[0]=3;		//кол-во байт для передачи + 1 байт с количеством
-			    bufOut[1]=K41[0];	//команда "Cледующая ступенька"
-			    bufOut[2]='\0';		//конец передачи
-			    NumO = 2;
-			    ::ReleaseMutex(hMutexO);
-// 			    nK41=nK41+1;
-			    TRACE(_T("K41 nK41=%d\n"),nK41);
-		        PurgeComm(hCom2,PURGE_TXCLEAR);//|PURGE_RXCLEAR);
-			    SetEvent(hEventComOut);//+++++++++++++++++++++
-
-// 				SetEvent(hEventEppIn);//`````````````````````
-			return 0L;
-		 }
-		 else
-		 {
-			if (nCountPointDC < 19)//(4-пропущено + 16-усредняем = 20)
-			{
-			  aM1[0] =  aM1[0] + pM1[m_nCountMas-1][NPOINT-n_t];
-			  aM2[0] =  aM2[0] + pM2[m_nCountMas-1][NPOINT-n_t];
-			  aM3[0] =  aM3[0] + pM3[m_nCountMas-1][NPOINT-n_t];
-			  aM4[0] =  aM4[0] + pM4[m_nCountMas-1][NPOINT-n_t];
-			  nCountPointDC++;
-			  m_nCountMas=0;
-			    // поместить в bufOut управляющие команды
-			    ::WaitForSingleObject(hMutexO,INFINITE);
-			    bufOut[0]=3;		//кол-во байт для передачи + 1 байт с количеством
-			    bufOut[1]=K41[0];	//команда "Cледующая ступенька"
-			    bufOut[2]='\0';		//конец передачи
-			    NumO = 2;
-			    ::ReleaseMutex(hMutexO);
-// 			    nK41=nK41+1;
-			    TRACE(_T("K41 nK41=%d\n"),nK41);
-		        PurgeComm(hCom2,PURGE_TXCLEAR);//|PURGE_RXCLEAR);
-			    SetEvent(hEventComOut);//+++++++++++++++++++++
-
-//				SetEvent(hEventEppIn);//`````````````````````
-			    return 0L;
-			}
-			else
-			{
-			  aM1[0] =  aM1[0] + pM1[m_nCountMas-1][NPOINT-n_t];
-			  aM2[0] =  aM2[0] + pM2[m_nCountMas-1][NPOINT-n_t];
-			  aM3[0] =  aM3[0] + pM3[m_nCountMas-1][NPOINT-n_t];
-			  aM4[0] =  aM4[0] + pM4[m_nCountMas-1][NPOINT-n_t];
-			  aM1[0] =  aM1[0] / 16;
-			  aM2[0] =  aM2[0] / 16;
-			  aM3[0] =  aM3[0] / 16;
-			  aM4[0] =  aM4[0] / 16;//результат в aM1[0],aM2[0],aM3[0],aM4[0]
-			  nCountPointDC=0;
-			  m_nCountMas=0;
-			}
-		  }
-*/
 //Импульсная развёртка 
 		UINT m=0;
  	if (m_nCountMas < m_nMas)
@@ -23259,85 +19843,7 @@ int CLineDlg::AutoSetupNullIc_10nA(int m_iRange)
 
 			  switch(m_iNproxod)
 			  {
-/*			  case 0: //t1 - точка 1
-						t1 = aM2[0];
-						m_iLstart= 20;//100;	//ограничение Uc min
-						m_iLstop= 20;//100;	//ограничение Uc max
-						memcpy(&My_buf_Out[k],&mas_ControlAutoSetupIcm_10nA[0],SIZEOF_ARRAY(mas_ControlAutoSetupIcm_10nA));
-						k = k + SIZEOF_ARRAY(mas_ControlAutoSetupIcm_10nA);
-						k = CommandKol(k);
-						ready = 0;
-						m_iNproxod=1;
-TRACE(_T("AutoSetupNullIc_10nA();m_iNproxod=1;\n"));
-						break;
-				case 1: //t2 - точка 2
-						t2 = aM2[0];
-						m_iLstart= 20;//100;	//ограничение Uc min
-						m_iLstop= 20;//100;	//ограничение Uc max
-						memcpy(&My_buf_Out[k],&mas_ControlAutoSetupIcm_10nA_[0],SIZEOF_ARRAY(mas_ControlAutoSetupIcm_10nA_));
-						k = k + SIZEOF_ARRAY(mas_ControlAutoSetupIcm_10nA_);
-						k = CommandKol(k);
-						ready = 0;
-						m_iNproxod=2;
-TRACE(_T("AutoSetupNullIc_10nA();m_iNproxod=2;\n"));
-						break;
-				case 2: //t3 - точка 3
-						t3 = aM2[0];
-						//контроль
-//						if ((fabs(t1-t2)>0.0000002) || (fabs(t1-t3)>0.0000002))
-						if ((fabs(t1-t2)>0.008) || (fabs(t1-t3)>0.008))
-						{ //KillTimer(2);
-						  m_iNproxod=0;
-						  bAutoSetNull=false;
-							//0.команда К13 "Bыкл. автоустановку нуля"
-						    k = 0;
-							memcpy(&My_buf_Out[k],&K13[0],nK[12]);
-							k = k + nK[12];
-							ready = 1;
-						  MessageBox(_T("Обеспечьте соединение гнезда С с гнездом Е (см. РЭ ч.2 \"Коррекция смещения нуля\")!"),NULL,MB_OK|MB_ICONEXCLAMATION);
-						  str = _T("TEST: ") + m_EL + _T("\\") + m_MOD;
-						  SetTextInfo(str);
-						}
-						else
-						{//OK'
-						 //начинаем измерение поправок BMCI для диапазона m_iRange
-						 //устанавливаем начальный № диапазона в зависимости от модификации прибора
-						   if (n_IPPP==1 && n_Switch!=0)
-						   { 
-povt0:					     MessageBox(_T("Установите переключатель в положение ±2000V!"),_T("  Внимание!"),MB_OK|MB_ICONEXCLAMATION);
-						     if (n_Switch!=0) goto povt0; 
-						   }
-						   m_ir = 1;//DC
-						   nCountPointDC = 0;
-						   m_nCountMas=0;		
-							 bias_Uc = 0;
-						     m_iUc = 7;		//20V измеритель
-						     bias_Ic = 26;
-						     m_iIc = m_iRange;		
-							 bias_Ucs = 1;
-							 m_iUcs = 0;
-							  NPOINT = NPOINTS;	//массив из 200 точек
-							  NumI = NPOINT*8;	//NPOINT точек по 8 байт
-									  	   m_iLstart= 0;	//ограничение Uc min
-										   m_iLstop= 0;	//ограничение Uc max
-										   m_iBs = 0;	//ист. Ub
-										   m_iBm = 0;	//изм. Ub
-										   m_iAb = mas_Ab_Ic[bias_Ic+m_iIc];//диапазон амплитуды ступени базы по U, соответсв. диапазону Ic
-									       m_uSb = 0;
-										   m_iBb = 0; //в нуле
-										   sign_Ab = 0;
-										   sign_Bb = 0;	//полярность прямая
-										   m_iRb = 9;//20mA	- диапазон ограничения 
-										   m_iLb = 100;	//ограничение - 100%
-											memcpy(&My_buf_Out[k],&mas_AutoSetupIcm_10nA[0],SIZEOF_ARRAY(mas_AutoSetupIcm_10nA));
-									      k = k + SIZEOF_ARRAY(mas_AutoSetupIcm_10nA);
-									      k = CommandKol(k);
-										  k = CommandBazaUbsUbm(k);
-										  m_iNproxod=3;
-										  ready = 0;
-						}
-						break;
-*/				case 0:	//диапазоны 2uA - 10 nA
+				case 0:	//диапазоны 2uA - 10 nA
 						BMCI[bias_Ic+m_iIc] = BMCI[bias_Ic+m_iIc] +  aM2[0];
 						 //конец автоустановки нуля Ic
 //					    MessageBox(_T("Отсоедините перемычку \".027\", замыкающую гнезда Uc и E'!"),_T("  Внимание!"),MB_OK|MB_ICONEXCLAMATION);
@@ -23542,36 +20048,6 @@ povt:					   MessageBox(_T("Установите переключатель в положение ±2000V!"),_T(" 
 						   m_iNproxod=0;
 						}
 						break;
-/*				case 5:	//диапазоны 50uA - 10 nA
-						BMCI[bias_Ic+m_iIc] = BMCI[bias_Ic+m_iIc] +  aM2[0];
-						m_iIc++;
-						if ((bias_Ic+m_iIc)<MAXRANGEIKOL)	// 34
-						{ m_iAb = mas_Ab_Ic[bias_Ic+m_iIc];//диапазон амплитуды ступени базы по U, соответсв. диапазону Ic
-						  memcpy(&My_buf_Out[k],&mas_AutoSetupIcm_50uA[0],SIZEOF_ARRAY(mas_AutoSetupIcm_50uA));
-						  k = k + SIZEOF_ARRAY(mas_AutoSetupIcm_50uA);
-						  k = CommandKol(k);
-						  k = CommandBazaUbsUbm(k);
-						  ready = 0;
-						}
-						else
-						{ //конец автоустановки нуля Ic
-								  //KillTimer(2);
-								   //команда К13 "Bыкл. автоустановку нуля"
-								   k = 0;
-									memcpy(&My_buf_Out[k],&K13[0],nK[12]);
-									k = k + nK[12];
-						           ready = 1;
-								   bAutoSetNull=false;
-//								   str = _T("TEST: ") + m_EL + _T("\\") + m_MOD;
-								   str = _T("КОРРЕКЦИЯ ЗАКОНЧЕНА!");
-								   SetTextInfo(str);
-//								   MessageBox(_T("Коррекция смещения нуля измерителя I канала С закончена!"),NULL,MB_OK|MB_ICONEXCLAMATION);
-								   m_iNproxod=0;
-						}
-//							}
-//						}
-						break;
-*/
 			  }//end of switch (m_iNproxod)
 //	   SetTextInfo(str);
 
@@ -23865,7 +20341,6 @@ int CLineDlg::AutoSetupNullUbm()
 				{ //установка нуля Ub закончена
 				  //KillTimer(2);
 				   bAutoSetNull=false;
-//				   str = _T("TEST: ") + m_EL + _T("\\") + m_MOD;
 				   str = _T("КОРРЕКЦИЯ ЗАКОНЧЕНА!\n");
 				   SetTextInfo(str);
 				   //команда К13 "Bыкл. автоустановку нуля"
@@ -24491,409 +20966,11 @@ int  CLineDlg::AutoSetupNullUss()
 return(k);
 }
 
-//#######################################################
-
-//########################################################
-
-/*
-LONG CLineDlg::OnErrorEpp(WPARAM wParam,LPARAM lParam)
-{ 
-  CString str;
-  CClientDC dc(this);
-  CRect rect;
-  if (!bStop)
-  {	// переписать данные из буфера bufIn_Epp
-	::WaitForSingleObject(hMutexEpp,INFINITE);
-	memcpy(&My_buf_Err_Epp[0],&bufIn_Epp[1],bufIn_Epp[0]);	//данные
-	::ReleaseMutex(hMutexEpp);
-
-	bPusk = FALSE;
-	bStop = TRUE;
-//	i_Error++;
-
-	// анализ ошибки
-	switch(My_buf_Err_Epp[0])
-	{ case 'M': // Ошибка при чтении массива
-				str = _T("ERROR 8");
-				break;
-	  case 'X': // Ошибка: нет "готовности" PiC-контроллера при чтении массива
-				str = _T("ERROR 9");
-				break;
-	  case 'H': // Ошибка: принят не весь массив
-				str = _T("ERROR 10");
-				break;	  
-	}
-	SetTextInfo(str);
-	if (bMeas == MEAS_MULTIPLE) 
-	{ m_iPosTek= 0;
-	  DrawStatusRukoyatka(); //обнулить состояние рукоятки
-	}
-  }//end if (!bStop)
-return 0L;
-}
-*/
-/*
-void CLineDlg::CalculatePar()
-{ //расчет параметра
-	  // из уравнения прямой по 2-м точкам (x1,y1) (x2,y2): 
-	  // (y-y1)/(y2-y1)=(x-x1)/(x2-x1) получаем: 
-	  // y = (y2-y1)*(x-x1)/(x2-x1)+y1;
-	  // x = ((y-y1)*(x2-x1))/(y2-y1)+x1;
-
-  int    i  = 0;
-  int    j  = 0;
-  double x  = 0.0;	//искомое значение аргумента при значении 1 параметра
-  double xx = 0.0;	//искомое значение аргумента при значении 2 параметра
-  double y  = 0.0;	//искомое значение функции при значении 1 параметра
-  double yy = 0.0;	//искомое значение функции при значении 2 параметра
-  double x1 = 0.0;	//координаты 1-ой точки аппроксимации
-  double y1 = 0.0;
-  double x2 = 0.0;	//координаты 2-ой точки аппроксимации
-  double y2 = 0.0;
-  double* pX;		//указатель на массив значений аргумента
-  double* pY;		//указатель на массив значений функции
-//  int    k  = 0;	//признак: 0 - ось Y LIN. 1 - ось Y LOG
-//  int    n_d = 0;	//число декад по Y, если ось Y - LOG
-
-
-    Par = 0.0;     //искомые значения
-	for (i=0;i<10;i++)
-	{ Zn1p1[i]= 0.0;		
-	  Zn2p1[i]= 0.0;
-	  index_x[i] = 0;
-	}
-	int n_point=NPOINT/2;
-	if (m_itipimp==TIP_IMP) n_point = 1;
-	if (m_irazv==DC_POS || m_irazv==DC_NEG) n_point = n_Result/2;
-
-	if ( m_uTp>0) j = m_uTp-1;// поиск параметра на ступеньке c № m_uTp = j-ой кривой
-	else j = 0;
-
-	pM[0]=&pM1[0][n_point*j];
-	pM[1]=&pM2[0][n_point*j];
-	pM[2]=&pM3[0][n_point*j];
-	pM[3]=&pM4[0][n_point*j];
-	pM[4]=&pM5[0][n_point*j];
-
-	//pX - указатель на массив X
-	//pY - указатель на массив Y
-			switch(iX)
-			{ case 0: pX = pM[0];
-				      break;
-			  case 1: 
-			  case 2: pX = &X_axis[0]; 
-					    break;
-			}
-			switch(iY)
-			{ case 0: pY = pM[1]; 
-						break;
-			  case 1: pY = pM[2]; 
-						break;
-			  case 2: pY = pM[3];
-						break;
-			}
-  if (m_iFunc1==0)
-  { //найти значение функции по значению аргумента
-	if (!m_sUr1.IsEmpty())
-	{ //значение Х в Ur1, найти уровень 1
-	   // массив X_asis возрастает
-		for (i=0;i<n_point;i++)
-		{ 
-			  //if (Ur1p1==X_asis[i])
-			   if (fabs(Ur1 - *pX)<=0.0000000000001)
-				{ //x2= X_asis[i];
-				  y = *pY;
-			      break;
-				}
-	           if (Ur1<*pX)
-			   { x2=*pX; pX--; x1=*pX; pX++;
-		         y2=*pY;
-			     pY--;
-			     y1=*pY;
-				 pY++;
-	 	         y = (y2-y1)*(Ur1-x1)/(x2-x1)+y1;
-		         break;
-			   }
-		       pY++;
-			   pX++;
-		}//end for i
-		Zn1p1 = y;
-		for (i=i;i<n_point;i++) {pY++;pX++;} //доходим до конца 100 (.)-k
-
-		// массив X_asis убывает
-	    for (i=0;i<n_point;i++)
-		{ //if (Ur1p1==X_asis[i])
-      	   if (fabs(Ur1 - *pX)<=0.0000000000001)
-		   { //x2=X_asis[i];
-		      y =*pY;
-			  break;
-			}
-	      if (Ur1>*pX)
-		  { x1=*pX;pX--;x2=*pX; pX++;
-		    y1=*pY;
-			pY--;
-			y2=*pY;
-			pY++;
-	 	    y = (y2-y1)*(Ur1-x1)/(x2-x1)+y1;
-		    break;
-		  }
-		  pY++;
-		  pX++;
-		}//end for i
-		Zn1p1 = (Zn1p1+y)/2;
-		for (i=i;i<n_point;i++) {pY++;pX++;} //доходим до конца очереди
-	}//end of m_sUr1p1
-	
-	//pX - указатель на массив X
-	//pY - указатель на массив Y
-			switch(iX)
-			{ case 0: pX = pM[0];
-				      break;
-			  case 1: 
-			  case 2: pX = &X_axis[0]; 
-					    break;
-			}
-			switch(iY)
-			{ case 0: pY = pM[1]; 
-						break;
-			  case 1: pY = pM[2]; 
-						break;
-			  case 2: pY = pM[3];
-						break;
-			}
-	if (!m_sUr2.IsEmpty())
-	{ //значение Х в Ur2, найти уровень 2
-	   // массив X_asis возрастает
-		for (i=0;i<n_point;i++)
-		{ 
-			  //if (Ur1p1==X_asis[i])
-			   if (fabs(Ur2 - *pX)<=0.0000000000001)
-				{ //x2= X_asis[i];
-				  y = *pY;
-			      break;
-				}
-	           if (Ur2<*pX)
-			   { x2=*pX; pX--; x1=*pX; pX++;
-		         y2=*pY;
-			     pY--;
-			     y1=*pY;
-				 pY++;
-	 	         y = (y2-y1)*(Ur2-x1)/(x2-x1)+y1;
-		         break;
-			   }
-		       pY++;
-			   pX++;
-		}//end for i
-		Zn2p1 = y;
-		for (i=i;i<n_point;i++) {pY++;pX++;} //доходим до конца 100 (.)-k
-
-		// массив X_asis убывает
-	    for (i=0;i<n_point;i++)
-		{ //if (Ur1p1==X_asis[i])
-      	   if (fabs(Ur2 - *pX)<=0.0000000000001)
-		   { //x2=X_asis[i];
-		      y =*pY;
-			  break;
-			}
-	      if (Ur2>*pX)
-		  { x1=*pX;pX--;x2=*pX; pX++;
-		    y1=*pY;
-			pY--;
-			y2=*pY;
-			pY++;
-	 	    y = (y2-y1)*(Ur2-x1)/(x2-x1)+y1;
-		    break;
-		  }
-		  pY++;
-		  pX++;
-		}//end for i
-		Zn2p1 = (Zn2p1+y)/2;
-		for (i=i;i<n_point;i++) {pY++;pX++;} //доходим до конца очереди
-
-	}//end of m_sUr2p1
-
-
-	if (m_bErli) CalculateErli();	//расчет U Эрли
-
-	if (m_uTp1==0) i=0;				 //2-ая очередь отсутствует
-		      else i=m_uTp1-1;       //номер точки 2-ой очереди
-
-	if (!m_sUr1.IsEmpty() && (!m_sUr2.IsEmpty()))
-	{ //расчет крутизны
-		switch(m_iForm1)
-		{ case 0: default: //(yy - y)/(Ur2p1-Ur1p1)
-	              if ((Ur2p1-Ur1p1)!=0.0)
-				   Par = (Zn2p1 - Zn1p1) / (Ur2-Ur1);
-				  else Par = 0.0;
-	              break;
-		  case 1: //(Ur2p1-Ur1p1)/(yy - y)
-				  if ((Zn2p1 - Zn1p1)!=0.0) 
-				   Par = (Ur2-Ur1) / (Zn2p1 - Zn1p1);
-				  else Par = 0.0;
-			      break;
-		}
-	}
-	else Par = Zn1p1;
-  
-  }//end of m_iFunc1==0
-//----------------------------
-  if (m_iFunc1==1)
-  { //найти значение аргумента по значению функции
-	if (!m_sUr1p1.IsEmpty())
-	{//значение Y в Ur1p1, найти значение 1 по X
-	  if (X_sh>0 || (X_sh==0 && X_asis[1]>X_asis[0]))
-	  { // if массив X_asis возрастает=>массив Y тоже возрастает
-		for (j=0;j<n_Result/(int)X_nsh;j++)
-		{ 
-			for (i=0;i<(int)X_nsh;i++)
-			{  if (Ur1p1==*pY)
-				{ //y2= *pY;
-				  x = X_asis[i];
-			      break;
-				}
-	           if (Ur1p1<*pY)
-			   { x2=X_asis[i];x1=X_asis[i-1];
-		         y2=*pY;
-			     pY--;
-			     y1=*pY;
-				 pY++;
-	             x = ((Ur1p1-y1)*(x2-x1))/(y2-y1)+x1;
-		         break;
-			   }
-		       pY++;
-			}//end for i
-			Zn1p1[j] = x;
-			for (i=i;i<(int)X_nsh;i++) pY++; //доходим до конца очереди
-		}//end for j
-	  }
-	  if (X_sh<0 || (X_sh==0 && X_asis[1]<X_asis[0]))
-	  { // массив X_asis убывает=>массив Y тоже убывает
-	   for (j=0;j<n_Result/(int)X_nsh;j++)
-	   {
-	    for (i=0;i<(int)X_nsh;i++)
-		{ if (Ur1p1==*pY)
-			{ x=X_asis[i];
-		      //y =*pY;
-			  break;
-			}
-	      if (Ur1p1>*pY)
-		  { x1=X_asis[i];x2=X_asis[i-1];
-		    y1=*pY;
-			pY--;
-			y2=*pY;
-			pY++;
-	        x = ((Ur1p1-y1)*(x2-x1))/(y2-y1)+x1;
-		    break;
-		  }
-		  pY++;
-		}//end for i
-		Zn1p1[j] = x;
-		for (i=i;i<(int)X_nsh;i++) pY++; //доходим до конца очереди
-	   }//end for j
-	  }
-	}//end of !m_sUr1p1.IsEmpty()
-
-	switch(m_iAxes1) //pY - указатель на массив Y
-	{ case 0: pY=pM[mas_nMi_Y1[m_iLine1]-1];break;
-	  case 1: pY=pM[mas_nMi_Y2[m_iLine1]-1];break;
-	}
-
-	if (!m_sUr2p1.IsEmpty())
-	{//значение Y в Ur2p1, найти значение 2 по X 
-	  if (X_sh>0 || (X_sh==0 && X_asis[1]>X_asis[0]))
-	  { // if массив X_asis возрастает=>массив Y тоже возрастает
-		for (j=0;j<n_Result/(int)X_nsh;j++)
-		{ 
-			for (i=0;i<(int)X_nsh;i++)
-			{  if (Ur2p1==*pY)
-				{ //y2= *pY;
-				  xx = X_asis[i];
-			      break;
-				}
-	           if (Ur2p1<*pY)
-			   { x2=X_asis[i];x1=X_asis[i-1];
-		         y2=*pY;
-			     pY--;
-			     y1=*pY;
-				 pY++;
-	             xx = ((Ur2p1-y1)*(x2-x1))/(y2-y1)+x1;
-		         break;
-			   }
-		       pY++;
-			}//end for i
-			Zn2p1[j] = xx;
-			for (i=i;i<(int)X_nsh;i++) pY++; //доходим до конца очереди
-		}//end for j
-	  }
-	  if (X_sh<0 || (X_sh==0 && X_asis[1]<X_asis[0]))
-	  { // массив X_asis убывает=>массив Y тоже убывает
-	   for (j=0;j<n_Result/(int)X_nsh;j++)
-	   {
-	    for (i=0;i<(int)X_nsh;i++)
-		{ if (Ur2p1==*pY)
-			{ xx=X_asis[i];
-		      //y =*pY;
-			  break;
-			}
-	      if (Ur2p1>*pY)
-		  { x1=X_asis[i];x2=X_asis[i-1];
-		    y1=*pY;
-			pY--;
-			y2=*pY;
-			pY++;
-	        xx = ((Ur1p1-y1)*(x2-x1))/(y2-y1)+x1;
-		    break;
-		  }
-		  pY++;
-		}//end for i
-		Zn2p1[j] = xx;
-		for (i=i;i<(int)X_nsh;i++) pY++; //доходим до конца очереди
-	   }//end for j
-	  }
-	}//end of !m_sUr2p1.IsEmpty()
-
-	if (m_uTp1==0) i=0;				 //2-ая очередь отсутствует
-		      else i=m_uTp1-1;       //номер точки 2-ой очереди
-	if (!m_sUr1p1.IsEmpty() && (!m_sUr2p1.IsEmpty()))
-	{ //расчет крутизны
-		switch(m_iForm1)
-		{ case 0: default: //(Ur2p1-Ur1p1)/(xx-x)
-	              if ((Zn2p1[i]-Zn1p1[i])!=0.0)
-				  { if (k==0) Par1 = (Ur2p1-Ur1p1)/(Zn2p1[i]-Zn1p1[i]);
-				    if (k==1)   {//считаем число декад по Y
-								  n_d=NDekad(fabs(Ur2p1),fabs(Ur1p1));
-								  Par1 = n_d/(Zn2p1[i]-Zn1p1[i]); //декадa/mV
-								}
-				  }
-				  else Par1 = 0.0;
-	              break;
-		  case 1: //(xx-x)/(Ur2p1-Ur1p1)
-				  if ((Ur2p1-Ur1p1)!=0.0)
-				  { if (k==0) Par1 = (Zn2p1[i]-Zn1p1[i])/(Ur2p1-Ur1p1);
-				    if (k==1)   {//считаем число декад по Y
-								  n_d=NDekad(fabs(Ur2p1),fabs(Ur1p1));
-								  Par1 = (Zn2p1[i]-Zn1p1[i])/n_d; //mV/декаду
-								}
-				  }
-				  else Par1 = 0.0;
-			      break;
-		}
-	}
-	else Par1 = Zn1p1[i];
-
-  }//end of m_iFunc1==1
-  ControlPar1();
-}
-
-*/
-
 
 void CLineDlg::Calculate()
 {	int m=0;
 	int i=0;
 	int j=0;
-//	double* ppar1;
-//	double* ppar2;
     double c=0.001;//0.00000000000001;	// эпсилон
 	double r1=0.0;
 	double r2=0.0;
@@ -24901,11 +20978,7 @@ void CLineDlg::Calculate()
 
 	int n_point=NPOINT;
 	if (m_bLooping) n_point = NPOINT100;
-//	if (m_itipimp==TIP_IMP) n_point = 1;
 	if (m_irazv==IMP_POS || m_irazv==IMP_NEG) n_point = 1;
-//	if (m_irazv==DC_POS || m_irazv==DC_NEG) n_point = n_Result;
-//	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_SINGLE) n_point = uNpointsLupa;//n_Result;
-//	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_MULTIPLE) n_point = n_Result;
 	if (m_iQue1==COLLECTOR)
 	{
 	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_SINGLE) n_point = uNpointsLupa;//n_Result;
@@ -24925,49 +20998,20 @@ void CLineDlg::Calculate()
 
   if (m_uFunc >1)
   {//
-/*   if (m_bR)	{ ppar1 = pM[0];	// Ua	R = Ua/Ia
-				  ppar2 = pM[1];	// Ia
-				  rej_Y = 2;		// R
-				}
-    if (m_bBeta){ ppar1 = pM[1];	// Ic	Beta = Ic/Ib
-				  ppar2 = &X_axis[0];	//Ib	// ppar2 = pM[2];
-				  rej_Y = 3;		// Beta
-				}
-	if (m_bBetai){ppar1 = pM[1];	// Ie	Betai = Ie/Ib	//?????????????
-				  ppar2 = &X_axis[0];	//Ib	// ppar2 = pM[2];
-				  rej_Y = 4;		// Betai
-				}
-*/
   //расчёт рассчитываемого массива
  if (m_bS)	
  { 
-//	 rej_Y = 5;		// S = delta(Id) / delta(Ug);
-    
 	for (j=0;j<n_Step;j++)
 	{
 	  for (m=0;m<n_Mas;m++)
 	  {
 	    for (i=0;i<n_point;i++)
 		{
-/*			if (m_iQue1==COLLECTOR)
-			{
-				if (fabs(pM3[m][i+NPOINT*(j+1)] - pM3[m][i+NPOINT*j])<c*mas_d_range_meas_bazadop_I[m_iRangLimitBaza]) 
-				pM5[m][i+NPOINT*(j+1)] = (pM2[m][i+NPOINT*(j+1)] - pM2[m][i+NPOINT*j])/(c*mas_d_range_meas_bazadop_I[m_iRangLimitBaza]);
-
-//			if (pM3[m][i+NPOINT*j] == pM3[m][i+NPOINT*(j-1)]) pM5[m][i+NPOINT*j] = (pM2[m][i+NPOINT*j] - pM2[m][i+NPOINT*(j-1)]);
-//			if (fabs(pM3[m][i+NPOINT*j] - pM3[m][i+NPOINT*(j-1)])<c) pM5[m][i+NPOINT*j] = (pM2[m][i+NPOINT*j] - pM2[m][i+NPOINT*(j-1)])/c;
-			else
-			pM5[m][i+NPOINT*(j+1)] = fabs(pM2[m][i+NPOINT*(j+1)] - pM2[m][i+NPOINT*j]) / fabs(pM3[m][i+NPOINT*(j+1)]-pM3[m][i+NPOINT*j]);
-//			pM5[m][j] = (pM2[m][j] - pM2[m][j-1]) / (pM3[m][j]-pM3[m][j-1]);
-			}
-			if (m_iQue1==BAZA)
-			{
-*/				if (fabs(pM3[m][i+1+NPOINT*j] - pM3[m][i+NPOINT*j])<c*mas_d_range_meas_bazadop_I[m_iRangLimitBaza]) 
+				if (fabs(pM3[m][i+1+NPOINT*j] - pM3[m][i+NPOINT*j])<c*mas_d_range_meas_bazadop_I[m_iRangLimitBaza]) 
 				pM5[m][i+1+NPOINT*j] = (pM2[m][i+1+NPOINT*j] - pM2[m][i+NPOINT*j])/(c*mas_d_range_meas_bazadop_I[m_iRangLimitBaza]);
 
 			else
 			pM5[m][i+1+NPOINT*j] = fabs(pM2[m][i+1+NPOINT*j] - pM2[m][i+NPOINT*j]) / fabs(pM3[m][i+1+NPOINT*j]-pM3[m][i+NPOINT*j]);
-//			}
 		}//end for i
 	  }//end for j
 	}//end for m
@@ -24996,76 +21040,6 @@ void CLineDlg::Calculate()
 	}//end for m
  }//end of  if (m_bR && m_iQue1==COLLECTOR)
 
-/*
- if (m_bR && m_iQue1==COLLECTOR)
- {
- //  rej_Y = 2;		// R
-	for (j=0;j<n_Step;j++)
-	{
-	  for (m=0;m<n_Mas;m++)
-	  {
-	    for (i=0;i<n_point;i++)
-		{
-			if (fabs(pM2[m][i+NPOINT*j])< c*mas_d_rangeKolMeasI[bias_KolMeasI+m_iKolI])
-			{ 
-			pM5[m][i+NPOINT*j] = pM1[m][i+NPOINT*j] / (c*mas_d_rangeKolMeasI[bias_KolMeasI+m_iKolI]);
-			}
-			else
-			{
-			pM5[m][i+NPOINT*j] = pM1[m][i+NPOINT*j] / pM2[m][i+NPOINT*j];
-			}
-		}//end for i
-	  }//end for j
-	}//end for m
- }//end of  if (m_bR && m_iQue1==COLLECTOR)
-
-  if (m_bR && m_iQue1==BAZA)
- {
- //   rej_Y = 2;		// R
-  if (m_iBazaSource==1)// && m_iY==0)//по Х:Ib, по Y:Ub Ib - источник Ub- измеритель
-   {
-	for (j=0;j<n_Step;j++)
-	{
-	  for (m=0;m<n_Mas;m++)
-	  {
-	    for (i=0;i<n_point;i++)
-		{
-			if (fabs(X_axis[i+NPOINT*j])< c*mas_d_rangeKolMeasI[bias_KolMeasI+m_iKolI])
-			{ 
-			pM5[m][i+NPOINT*j] = pM3[m][i+NPOINT*j] / (c*mas_d_rangeKolMeasI[bias_KolMeasI+m_iKolI]);
-			}
-			else
-			{
-			pM5[m][i+NPOINT*j] = pM3[m][i+NPOINT*j] / X_axis[i+NPOINT*j];
-			}
-		}//end for i
-	  }//end for m
-	}//end for j
-   }
-   if (m_iBazaSource==0)// && m_iY==2)//по Х:Ug, по Y:Ig Ug - источник Ig- измеритель
-   {
-	for (j=0;j<n_Step;j++)
-	{
-	  for (m=0;m<n_Mas;m++)
-	  {
-	    for (i=0;i<n_point;i++)
-		{
-			if (fabs(pM3[m][i+NPOINT*j])< c*mas_d_rangeKolMeasI[bias_KolMeasI+m_iKolI])
-			{ 
-			pM5[m][i+NPOINT*j] = X_axis[i+NPOINT*j] / (c*mas_d_rangeKolMeasI[bias_KolMeasI+m_iKolI]);
-			}
-			else
-			{
-			pM5[m][i+NPOINT*j] = X_axis[i+NPOINT*j] / pM3[m][i+NPOINT*j];
-			}
-		}//end for i
-	  }//end for m
-	}//end for j
-   }
-
- }//end of   if (m_bR && m_iQue1==BAZA)
-*/
-
   if (m_bBeta || m_bBetai)
  {
 	for (j=0;j<n_Step;j++)
@@ -25074,8 +21048,6 @@ void CLineDlg::Calculate()
 	  {
 	    for (i=0;i<n_point;i++)
 		{
-//			if (pM3[m][i+NPOINT*j]==0.0) pM5[m][i+NPOINT*j] = 0.0;
-//			if (fabs(pM3[m][i+NPOINT*j])<c) pM5[m][i+NPOINT*j] = pM2[m][i+NPOINT*j] / c;
 			if (fabs(pM3[m][i+NPOINT*j])<c*mas_d_range_meas_bazadop_I[m_iAmplitudeStepBaza])
 			pM5[m][i+NPOINT*j] = pM2[m][i+NPOINT*j] / (c*mas_d_range_meas_bazadop_I[m_iAmplitudeStepBaza]);
 			else
@@ -25102,9 +21074,7 @@ void CLineDlg::CalculateBetaMax()
 	int m=0;
 	int n_point=NPOINT;
 	if (m_bLooping) n_point = NPOINT100;
-//	if (m_itipimp==TIP_IMP) n_point = 1;
 	if (m_irazv==IMP_POS || m_irazv==IMP_NEG) n_point = 1;
-//	if (m_irazv==DC_POS || m_irazv==DC_NEG) n_point = n_Result;
 	if (m_iQue1==COLLECTOR)
 	{
 	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_SINGLE) n_point = uNpointsLupa;//n_Result;
@@ -25142,9 +21112,7 @@ void CLineDlg::CalculateBetaiMax()
 	int j=0;
 	int n_point=NPOINT;
 	if (m_bLooping) n_point = NPOINT100;
-//	if (m_itipimp==TIP_IMP) n_point = 1;
 	if (m_irazv==IMP_POS || m_irazv==IMP_NEG) n_point = 1;
-//	if (m_irazv==DC_POS || m_irazv==DC_NEG) n_point = n_Result;
 	if (m_iQue1==COLLECTOR)
 	{
 	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_SINGLE) n_point = uNpointsLupa;//n_Result;
@@ -25183,11 +21151,7 @@ void CLineDlg::CalculatePar()
 	int n_point=NPOINT;
 	if (m_bLooping) n_point = NPOINT100;
 	int t_0 = 2;//0;//выводим расчетный массив, начиная с 20-ой (.)-ки
-//	if (m_itipimp==TIP_IMP) {n_point = 1; t_0 = 0;}
 	if (m_irazv==IMP_POS || m_irazv==IMP_NEG) {n_point = 1; t_0 = 0;}
-//	if (m_irazv==DC_POS || m_irazv==DC_NEG) { n_point = uNpointsLupa; t_0 = 0;}
-//	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_SINGLE){n_point = uNpointsLupa;t_0 = 1;n_Result=uNpointsLupa;}//n_Result;
-//	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_MULTIPLE) {n_point = n_Result;t_0 = 1;}
 	int t_s = 0;
 	if (m_iQue1==COLLECTOR)
 	{
@@ -25238,41 +21202,6 @@ if ((m_bR || m_bBeta || m_bBetai || m_bS) && m_uFunc==2)
 		 else continue;
 }
 
-/*
-if (m_bR && m_uFunc==3)
-{// по Х:Ib, по Y:Ub Ib - источник Ub- измеритель
- // по Х:Ug, по Y:Ig Ug - источник Ig- измеритель 
-  if (m_sArg==m_sAxisY)
-  {//поиск по измеренному массиву
-	delta_min = fabs(pM3[0][0]- Ur1);
-	for (j=0;j<n_Step;j++)
-	  for (m=0;m<n_Mas;m++)
-	    for (i=0;i<n_point;i++)
-		 if (fabs(pM3[m][i+NPOINT*j]- Ur1)<=delta_min) 
-			{ delta_min = fabs(pM3[m][i+NPOINT*j]-Ur1);
-			  index_j = j;
-			  index_m = m;
-			  index = i;
-			}
-		 else continue;
-  }
-  if (m_sArg==m_sAxisX)
-  {//поиск по генерируемосу массиву
-	delta_min = fabs(X_axis[0]- Ur1);
-	for (j=0;j<n_Step;j++)
-	  for (m=0;m<n_Mas;m++)
-	    for (i=0;i<n_point;i++)
-		 if (fabs(X_axis[i+NPOINT*j]- Ur1)<=delta_min) 
-			{ delta_min = fabs(X_axis[i+NPOINT*j]-Ur1);
-			  index_j = j;
-			  index_m = m;
-			  index = i;
-			}
-		 else continue;
-  }
-
-}
-*/
 
 if ((m_bBeta || m_bBetai || m_bS) && m_uFunc==3)
 {
@@ -25409,56 +21338,8 @@ if(!m_sPar.IsEmpty() && !m_sArg.IsEmpty())
   }
 }
 }
-/*
-void CLineDlg::SaveResultsCalculate()
-{ //сохранение результатов расчета
-//  pModSelected = FindTest(m_masStrEl[i_EL],m_masStrMod[i_EL][i_MOD]);//???_???
-if (pModSelected)
-	{
-	for (UINT m=0;m<n_Mas;m++)
-	for (UINT i=0;i<n_Result;i++)
-	  pModSelected->pM5[m][i]=pM5[m][i];
 
-	pModSelected->Beta_max     = Beta_max;
-	pModSelected->Betai_max    = Betai_max;
-	pModSelected->Ib_Beta_max  = Ib_Beta_max;
-	pModSelected->Ib_Betai_max = Ib_Betai_max;
-	pModSelected->Par          = Par;
 
-	SetModifiedFlag();
-	}
-
-}
-*/
-/*
-void	CLineDlg::InitAxisCalc()
-{
-	TRACE (L"InitAxisCalc();\n");
-//	DWORD tick = ::GetTickCount();
-	m_Chart.DisableRefresh(true);
-	
-	uPrecigion = 1;
-	if ((m_iX==1 || m_iY==1) && (m_iButNull==LEFT || m_iButNull==RIGHT)) uPrecigion = 2;
-	
-	  po_X = SubGetStrRazmer(rej_X,expo_X,m_sAxisX);
-	  m_Chart.m_pAxisBottom->SetLabelText(strRazmer);
-      m_Chart.m_pAxisBottom->SetMinMax(cifra_axes[m_iButNull][m_iX][0] * pow(10.0,po_X),
-										cifra_axes[m_iButNull][m_iX][1] * pow(10.0,po_X));
-      m_Chart.m_pAxisBottom->SetBigTickIncrement(big_tick[m_iButNull][m_iX] * pow(10.0,po_X));
-//	  m_Chart.m_pAxisBottom->SetSmallTickCount(5);
-	  
-	  SubGetAxes(Y_min,Y_max,&m_iY,&expo_Y);
-	  po_Y = SubGetStrRazmer(rej_Y,expo_Y,m_sPar);
-	  m_Chart.m_pAxisLeft->SetLabelText(strRazmer);
-	  m_Chart.m_pAxisLeft->SetMinMax(cifra_axes[m_iButNull][m_iY][0] * pow(10.0,po_Y),
-									cifra_axes[m_iButNull][m_iY][1] * pow(10.0,po_Y));
-	  m_Chart.m_pAxisLeft->SetBigTickIncrement(big_tick[m_iButNull][m_iY] * pow(10.0,po_Y));
-//	  m_Chart.m_pAxisLeft->SetSmallTickCount(5);
-	
-//	tick = ::GetTickCount() - tick;
-	m_Chart.DisableRefresh(false);
-}
-*/
 void	CLineDlg::InitAxisCalc()
 {
 	TRACE (L"InitAxisCalc();\n");
@@ -25524,209 +21405,7 @@ void	CLineDlg::InitAxisCalc()
 	m_Chart.DisableRefresh(false);
 }
 
-/*
-void	CLineDlg::SetMassivCalcNpoints()
-{//отобразить рассчётный массив
-  //iX - канал, с которого берётся результат по оси Х 
-  //(он же - источник 1-ой очереди): 0-коллектор, 1-база, 2-доп.канал
-  //if iX = 0 - массив результатов измерения напряжения на коллекторе,
-  //if 1 или 2 - массив X_axis
-  //pM5[t] - рассчётный массив, с которого берётся результат для оси Y 
-  // pM1[t] - АЦП1 - Uc
-  // pM2[t] - АЦП2 - Ic
-  // pM3[t] - АЦП3 - Baza
-  // pM4[t] - АЦП4 - Dop
-      r1=0.0;
-	  r2=0.0;
-      double c=0.1;//0.0000000000001;	// эпсилон
-	  double x  = 0.0;	//искомое значение аргумента при значении 1 или 2 параметра
-	  double y  = 0.0;	//искомое значение функции при значении 1 или 2 параметра
-	  double x1 = 0.0;	//координаты 1-ой точки аппроксимации
-	  double y1 = 0.0;
-	  double x2 = 0.0;	//координаты 2-ой точки аппроксимации
-	  double y2 = 0.0;
 
-	int i=0;
-	int j=0;
-	UINT m=0;
-	int b =0;
-	static BOOL flag_inversion=false;
-	int n_point=NPOINT;
-	if (m_bLooping) n_point = NPOINT100;
-	int t_0 = 20;//выводим расчетный массив, начиная с 20-ой (.)-ки
-	if (m_itipimp==TIP_IMP) {n_point = 1; t_0 = 0;}
-	if (m_irazv==DC_POS || m_irazv==DC_NEG) { n_point = n_Result; t_0 = 0;}
-	int t_s = 0;
-	if (m_bS==1) t_s = 1;
-	m_Chart.DisableRefresh(true);
-	BOOL pr=0;
- if (bStatusMeas)
- {
-	b = m_Chart.GetSeriesCount();
-	for(j=0;j<b;j++)
-	m_Chart.DeleteSerie(0);
-
-    m_Chart.DeleteFamily(MEAS);
-    
-	bStatusMeas = false;
- }
- if (bStatusRef)
- { b = m_Chart.GetSeriesCount();
-	for(j=0;j<b;j++)
-	m_Chart.DeleteSerie(0);
-
-    m_Chart.DeleteFamily(REF);
-    
-	bStatusMeas = false;
- }
-    double* pX = new double[n_point*n_Step*n_Mas];
-    double* pY = new double[n_point*n_Step*n_Mas];
-
-	switch(m_iStyleCurve)
-	{ case STYLE_LINE:	    pGraph = m_Chart.AddSerie(CChartSerie::stLine); break;
-	  case STYLE_POINT:	    pGraph = m_Chart.AddSerie(CChartSerie::stPoints); break;
-	  case STYLE_LINEPOINT:	pGraph = m_Chart.AddSerie(CChartSerie::stMixed); break;
-	}
-	if (m_itipimp!=TIP_IMP) pGraph->SetSortPoints(false);
-
- for(j=0+t_s;j<n_Step;j++)
- {  
-    double* pX = new double[n_point*n_Step*n_Mas];
-    double* pY = new double[n_point*n_Step*n_Mas];
-
-	switch(m_iStyleCurve)
-	{ case STYLE_LINE:	    pGraph = m_Chart.AddSerie(CChartSerie::stLine); break;
-	  case STYLE_POINT:	    pGraph = m_Chart.AddSerie(CChartSerie::stPoints); break;
-	  case STYLE_LINEPOINT:	pGraph = m_Chart.AddSerie(CChartSerie::stMixed); break;
-	}
-	if (m_itipimp!=TIP_IMP) pGraph->SetSortPoints(false);
-	for (m=0;m<n_Mas;m++)
-	{
-	for(i=0;i<n_point-t_0;i++)
-	{
-	  switch(iX)
-	  { case 0: //pX[i+n_point*m] = pM1[m][i+NPOINT*j+t_0] / pow(10.0,expo_X-po_X);
-				if (m_bKolX==false) pX[i+n_point*m+j] = pM1[m][i+NPOINT*j+t_0] / pow(10.0,expo_X-po_X);
-						     else   pX[i+n_point*m+j] = pM2[m][i+NPOINT*j+t_0] / pow(10.0,expo_X-po_X);
-				break;
-		case 1: 
-		case 2: pX[i+n_point*m+j] = X_axis[i+t_0+t_s] / pow(10.0,expo_X-po_X); 
-			    break;
-	  }
-	  pY[i+n_point*m+j] = pM5[m][i+NPOINT*j+t_0] / pow(10.0,expo_Y-po_Y); 
-				
-	}
-	}
-	pGraph->SetColor(m_colorCurve);							//цвет кривой
-	pGraph->SetPoints(pX,pY,(n_point-t_0)*n_Mas);
-//	if (bInversion) 
-//	{
-//	 TRACE(L"inverted\n");
-//	 pGraph->SetXYInverted(true);
-//	}
-
-	pGraph->SetName("j-ая кривая");
-
-	// поиск параметра на ступеньке c № m_uTp = j-ой кривой
-	//--------------------------------------------------------
-	if ((!m_sPar.IsEmpty() && m_uTp >0 && (m_uTp-1) == j && m_uFunc==2) ||
-		(!m_sPar.IsEmpty() && m_uTp ==0 && m_uTp == j-t_s && m_uFunc==2))
-//	if ((!m_sPar.IsEmpty() && m_uTp >0 && (m_uTp-1) == j && m_uFunc==2) ||
-//		(!m_sPar.IsEmpty() && m_bBeta && m_uTp ==0 && m_uFunc==2 && m==n_Mas-1))
-	{ 
-	  // найти значение функции по значению аргумента 
-		 if (!m_sUr1.IsEmpty())// && pr==0)
-			{ 
-		      Ur1 = Ur1 / pow(10.0,expo_X-po_X);
-//			  for(i=1;i<(n_point-t_0)*n_Mas;i++)
-//			  for(i=n_Mas-1;i<(n_point-t_0)*n_Mas;i++)
-			  for(i=0;i<(n_point-t_0)*n_Mas;i++)
-			  {
-//	           if (Ur1==pX[i])
-			   if (fabs(Ur1 - pX[i+j])<=c)//0.0000000000001)
-				{ y = pY[i+j];
-			      break;
-				}
-			  if (Ur1<pX[i+j])
-			  { 
-				x2=pX[i+j];
-			    x1=pX[i-1+j];
-			    y2=pY[i+j];
-				y1=pY[i-1+j];
-			    y = (y2-y1)*(Ur1-x1)/(x2-x1)+y1;
-			    break;
-			  }
-			  }
-			  Ur1 = Ur1 * pow(10.0,expo_X-po_X);
-			  r1 = y * pow(10.0,expo_Y-po_Y);
-			}//end of if (!m_sUr1.IsEmpty())
-
-		 if (!m_sUr2.IsEmpty())
-			{
-			  Ur2 = Ur2 / pow(10.0,expo_X-po_X);
-			  for(i=0;i<(n_point-t_0)*n_Mas;i++)
-			  {
-//	           if (Ur2==pX[i])
-			   if (fabs(Ur2 - pX[i])<=c)//0.0000000000001)
-				{ y = pY[i];
-			      break;
-				}
-			  if (Ur2<pX[i])
-			  { x2=pX[i];
-			    x1=pX[i-1];
-			    y2=pY[i];
-			    y1=pY[i-1];
- 	            y = (y2-y1)*(Ur2-x1)/(x2-x1)+y1;
-			    break;
-			  }
-			  }
-			  Ur2 = Ur2 * pow(10.0,expo_X-po_X);
-			  r2 = y * pow(10.0,expo_Y-po_Y);
-			}// end of if (!m_sUr2.IsEmpty())
-
-		  if (!m_sUr1.IsEmpty() && !m_sUr2.IsEmpty()) 
-		  { switch(m_iForm)
-			{ case 0: if ((Ur2-Ur1)!= 0.0) Par = (r2-r1)/(Ur2-Ur1);
-					  break;
-			  case 1: if ((r2-r1)!=0.0) Par = (Ur2-Ur1)/(r2-r1);
-					  break;
-			}
-		  }
-	      else Par = r1;
-
-	}//end of поиск параметра
-	 //-------------------------
-
-//	delete[] pX;
-//	delete[] pY;
- }//end of for j
-	pGraph->SetColor(m_colorCurve);							//цвет кривой
-	pGraph->SetPoints(pX,pY,(n_point-t_0)*n_Mas*j);
-//	if (bInversion) 
-//	{
-//	 TRACE(L"inverted\n");
-//	 pGraph->SetXYInverted(true);
-//	}
-
-	pGraph->SetName("j-ая кривая");
-			  y=pGraph->GetYByX(Ur1);
-
-		      Ur1 = Ur1 / pow(10.0,expo_X-po_X);
-			  y=pGraph->GetYByX(Ur1);
-			  r1 = y * pow(10.0,expo_Y-po_Y);
-			  Par = r1;
-	delete[] pX;
-	delete[] pY;
-	CChartSerieFamily* pFamily = m_Chart.AddFamily();
-	pFamily->SetColor(m_colorCurve);
-	pFamily->SetName("Calc");
-	bStatusCalc = true;
-	bStatusMeas = true;
-	m_Chart.DisableRefresh(false);
-
-//	m_Chart.RefreshCtrl();
-}
-*/
 void	CLineDlg::SetMassivCalcNpoints()
 {//отобразить рассчётный массив
   //iX - канал, с которого берётся результат по оси Х 
@@ -25908,91 +21587,7 @@ void CLineDlg::OnKillfocusCombomod()
 	
 }
 
-/*
-void CLineDlg::OnSelendokCombomod() 
-{
-	// TODO: Add your control notification handler code here
-	CString str;
-	UpdateData(TRUE);
-	if (!m_MOD.IsEmpty())
-	{
- 	  CComboBox *pcb = (CComboBox*) GetDlgItem(IDC_COMBOMOD);
-	  index=pcb->FindStringExact(0,m_MOD);
-	  if (index==-1)
-	  { //наименование теста не совпадает ни с одним из предлагаемого списка => 
-		str_EL = m_EL;
-	    str_MOD = m_MOD;
-	    strTestName = str_EL + _T(" \\ ")+str_MOD;
-	    SetTextInfo(_T("TEST:  ") + strTestName);
-        if (MessageBox(_T("Обнаружено новое наименование теста.\nСбросить параметры?"),NULL,MB_YESNO|MB_ICONQUESTION)==IDYES)
-		{ SetParamDefault();
-	      UpdateData(FALSE);
-		}
-	  }
 
-	  if (index==0)
-	  { //выбран пользовательский тест
-		//добавить тест с пользовательскими данными из
-		//каталога Tst_user
-		nameTst=_T("DiskC\\Tst\\Tst_user\\");
-		CFileDialog dl(TRUE);
-	    CString strd(_T("Файлы пользовательских тестов (*.tst)")); strd+=(TCHAR)NULL;
-	    strd+=_T("*.tst"); strd+=(TCHAR)NULL;
-	    dl.m_ofn.lpstrFilter=strd;
-	    dl.m_ofn.nFilterIndex=1;
-	    TCHAR strName[_MAX_PATH];
-	    strName[0]='*';
-	    strName[1]='.';
-	    strName[2]='t';
-	    strName[3]='s';
-	    strName[4]='t';
-	    strName[5]=(TCHAR)NULL;
-	    dl.m_ofn.lpstrFile=strName;
-	    dl.m_ofn.lpstrTitle=_T("Укажите файл для экстракции параметров");
-
-	    if (dl.DoModal()==IDOK)
-		{ nameTst = dl.GetPathName();
-		  //получение имени польз.теста из полного пути
-		  str=dl.GetFileTitle();
-		  m_MOD=str;
-		  str_EL = m_EL;
-	      str_MOD = m_MOD;
-	      strTestName = str_EL + _T("\\ ") + str_MOD;
-		  str = _T("TEST:  ") + strTestName;
-	      SetTextInfo(str);
-	      UpdateData(FALSE);
- 	      ExtractParamFromTst();
-		}//end of IDOK
-		else
-		{ m_MOD=_T("");
-		  m_EL=_T("");
-		  str_EL = m_EL;
-	      str_MOD = m_MOD;
-		  strTestName = _T("");
-	      SetTextInfo(_T("Введите наименование теста!"));
-	      UpdateData(FALSE);
-		}
-	  }//end of index==0
-	  if (index>=1)
-	  { //выбран стандартный тест
-		//добавить тест со стандартными данными из
-		//каталога Tst_standart
-		CString rStrTest;
-		pcb->GetLBText(index,rStrTest);
-		nameTst=_T("\\DiskC\\Tst\\Tst_standart\\")+rStrTest+_T(".tst");
-		  m_EL=_T("");
-		  str_EL = m_EL;
-	      str_MOD = m_MOD;
-	    strTestName = m_MOD;
-	    SetTextInfo(_T("TEST: ") + nameTst);
- 	    ExtractParamFromTst();
-	  }
-	}//end of (!m_MOD.IsEmpty())
-	
-	
-}
-
-*/
 void CLineDlg::PolaritySingBaza() 
 {
 	sign_ampl_baza = 0;	// -
@@ -26175,43 +21770,7 @@ void CLineDlg::OnTestRename()
 void CLineDlg::OnButtonReset() 
 {
 	// TODO: Add your control notification handler code here
-/*	
-//Эмуляция	
-	bMeas = MEAS_MULTIPLE;
-//	SetEvent(hEventEppIn);	
-	BuildCommand();
-	BuildTest();
-				  ::WaitForSingleObject(hMutexO,INFINITE);
-				  bufOut[0]=(BYTE)NumO+1;							//кол-во байт для передачи
-	              memcpy(&bufOut[1],&My_buf_Out[0],NumO);			//данные
-	              ::ReleaseMutex(hMutexO);
-				  SetEvent(hEventComOut);//+++++++++++++++++++++
-*/
-/*	BYTE b=1;
-//Эмуляция	
-//	_outp(0x378+2,0x20);
-	for (;;)
-	{ //b=!b;
-	   for (int n=0;n<250;n++)
-	   { //принять готовность
-		::ReadFile(hEpp,bufEppIn,1,&dwReadEpp,NULL);
-		bufIn_Epp[0]=(BYTE)dwReadEpp;                    //количество принятых байт
-        memcpy(&bufIn_Epp[1],&bufEppIn[0],dwReadEpp);    //данные
-	     TRACE(_T("n= %d	bufIn_Epp[0] = %d	bufIn_Epp[1] = %d\n"),n,bufIn_Epp[0],bufIn_Epp[1]);
 
-		bufIn_Epp[n] = _inp(PORT_EPP);
-//		bufIn_Epp[0]= n;       
-//	    TRACE(_T("n= %d		bufIn_Epp[0] = %d	bufIn_Epp[1] = %d\n"),n,bufIn_Epp[0],bufIn_Epp[1]);
-	   }
-	}
-*/
-/*	
-//Эмуляция	
-	ResetRef();
-	ResetMeas();
-	ClearResults();
-	ResetResults();
-*/
 	// Кнопка "Таблица"
 	//================
 //	OpenTabl();
@@ -26337,28 +21896,6 @@ BOOL CLineDlg::GetPassWordLine()
 		   p2=strFile.Find(L'\n',p1);
 		   m_sPoint = strFile.Mid(p1+1,p2-p1-2);
 
-/*		   //bZapusk
-		   p1=strFile.Find(L'=',p2);
-		   p2=strFile.Find(L'\n',p1);
-		   str=strFile.Mid(p1+1,p2-p1-2);
-		   iStrLen = str.GetLength();
-		   cc = new char[iStrLen];
-		   WideCharToMultiByte(CP_ACP,NULL,str.GetBuffer(iStrLen),iStrLen,cc,iStrLen,NULL,NULL);
-		   bZapusk = atoi(cc);
-		   delete[] cc;
-		   str.ReleaseBuffer();
-
-		   //bSound
-		   p1=strFile.Find(L'=',p2);
-		   p2=strFile.Find(L'\n',p1);
-		   str=strFile.Mid(p1+1,p2-p1-2);
-		   iStrLen = str.GetLength();
-		   cc = new char[iStrLen];
-		   WideCharToMultiByte(CP_ACP,NULL,str.GetBuffer(iStrLen),iStrLen,cc,iStrLen,NULL,NULL);
-		   bSound = atoi(cc);
-		   delete[] cc;
-		   str.ReleaseBuffer();
-*/
 		   //m_colorFon,m_colorSetka,m_colorText,m_colorTangent,m_colorCurve,m_colorRef;
 
 		   p1=strFile.Find(L'=',p2);
@@ -26420,19 +21957,6 @@ BOOL CLineDlg::GetPassWordLine()
 		   m_colorRef = atoi(cc);
 		   delete[] cc;
 		   str.ReleaseBuffer();
-
-
-
-/*!!!!!!!!!!!!!!!!!!!!++++++++++++++++++
-//
-		   iStrLen = str.GetLength();
-		   char* cc = new char[iStrLen];
-		   WideCharToMultiByte(CP_ACP,NULL,str.GetBuffer(iStrLen),iStrLen,cc,iStrLen,NULL,NULL);
-		   m_colorFon = atoi(cc);
-		   delete[] cc;
-		   str.ReleaseBuffer();
-//+++++++++++++++++!!!!!!!!!!!!!!!!!!!!
-*/		   
 	 }
 	 else 
 	 { m_sparol = _T("admin");
@@ -26456,21 +21980,6 @@ BOOL CLineDlg::GetPassWordLine()
 	   l = str.GetLength();
 	   file.Write((LPCTSTR)str,l*2);
 
-/*	   n_Switch = 0;
-	   str.Format(_T("n_Switch=%d\r\n"),n_Switch);
-	   l = str.GetLength();
-	   file.Write((LPCTSTR)str,l*2);
-*/
-/*	   bZapusk = 0;
-	   str.Format(_T("bZapusk=%d\r\n"),bZapusk);
-	   l = str.GetLength();
-	   file.Write((LPCTSTR)str,l*2);
-
-	   bSound = 0;
-	   str.Format(_T("bSound=%d\r\n"),bSound);
-	   l = str.GetLength();
-	   file.Write((LPCTSTR)str,l*2);
-*/
 	   //m_colorFon,m_colorSetka,m_colorText,m_colorTangent,m_colorCurve,m_colorRef;
 	   str.Format(_T("m_colorFon=%d\r\n"),m_colorFon);
 	   l = str.GetLength();
@@ -26558,38 +22067,8 @@ BOOL CLineDlg::GetKoefPsw()
 		   delete[] cc;
 		   str.ReleaseBuffer();
 	  //максимальный код ЦАПа Da для каждого диапазона (5 диапазонов) 
-/*		   for (i=0;i<5;i++)
-		   { p1=strFile.Find('=',p2);
-             p2=strFile.Find(';',p1);
-             str=strFile.Mid(p1+1,p2-p1-1);
-		     iStrLen = str.GetLength();
-		     cc = new char[iStrLen];
-		     WideCharToMultiByte(CP_ACP,NULL,str.GetBuffer(iStrLen),iStrLen,cc,iStrLen,NULL,NULL);
-			 V_[i]=atoi(cc);
-		     delete[] cc;
-		     str.ReleaseBuffer();
-		   }
-*/	  //максимальный код ЦАПа Dz (1 байт) 
-/*		   p1=strFile.Find(L'=',p2);
-		   p2=strFile.Find(L';',p1);
-		   str=strFile.Mid(p1+1,p2-p1-1);
-		   iStrLen = str.GetLength();
-		   cc = new char[iStrLen];
-		   WideCharToMultiByte(CP_ACP,NULL,str.GetBuffer(iStrLen),iStrLen,cc,iStrLen,NULL,NULL);
-		   Nz_max = (BYTE)atoi(cc);
-		   delete cc;
-		   str.ReleaseBuffer();
-	  //минимальный код ЦАПа Dz (1 байт) 
-		   p1=strFile.Find(L'=',p2);
-		   p2=strFile.Find(L';',p1);
-		   str=strFile.Mid(p1+1,p2-p1-1);
-		   iStrLen = str.GetLength();
-		   cc = new char[iStrLen];
-		   WideCharToMultiByte(CP_ACP,NULL,str.GetBuffer(iStrLen),iStrLen,cc,iStrLen,NULL,NULL);
-		   Nz_min = (BYTE)atoi(cc);
-		   delete cc;
-		   str.ReleaseBuffer();
-*/	  //калибровочные коэффициенты
+	  //максимальный код ЦАПа Dz (1 байт) 
+	  //калибровочные коэффициенты
 		   //КОЛЛЕКТОР
 		   for (i=0;i<13;i++)
 		   { p1=strFile.Find('=',p2);
@@ -26956,25 +22435,7 @@ BOOL CLineDlg::GetKoefPsw()
 	   str.Format(_T("nominal=%d;\r\n"),nominal);
 	   l = str.GetLength();
 	   file.Write((LPCTSTR)str,l*2);
-/*	   //максимальный код ЦАПа Da для каждого диапазона (5 диапазонов) 
-	   for (i=0;i<5;i++)
-	   { str.Format(_T("V_[%d]=%d;\r\n"),i,V_[i]);
-	     l = str.GetLength();
-	     file.Write((LPCTSTR)str,l*2);
-	   }
-*/
-/*	  //максимальный код ЦАПа Dz (1 байт) 
-	   str.Format(_T("Nz_max=%d;\r\n"),Nz_max);
-	   l = str.GetLength();
-	   file.Write((LPCTSTR)str,l*2);
-	  //минимальный код ЦАПа Dz (1 байт) 
-	   str.Format(_T("Nz_min=%d;\r\n"),Nz_min);
-	   l = str.GetLength();
-	   file.Write((LPCTSTR)str,l*2);
-*/	   //...
    
-//		WriteKoefToPsw(); //вызывать после калибровки для сохранения калибровочных коэффициентов
-
 	 //калибровочные коэффициенты
 	   //КОЛЛЕКТОР
 	   str=_T("[COLLECTOR]\r\n[MEASURE U][BIAS]\r\n");
@@ -27254,22 +22715,7 @@ BOOL CLineDlg::WriteKoefToPsw()
 	   str.Format(_T("nominal=%d;\r\n"),nominal);
 	   l = str.GetLength();
 	   file.Write((LPCTSTR)str,l*2);
-/*	   //максимальный код ЦАПа Da для каждого диапазона (5 диапазонов) 
-	   for (i=0;i<5;i++)
-	   { str.Format(_T("V_[%d]=%d;\r\n"),i,V_[i]);
-	     l = str.GetLength();
-	     file.Write((LPCTSTR)str,l*2);
-	   }
-*/
-/*	  //максимальный код ЦАПа Dz (1 байт) 
-	   str.Format(_T("Nz_max=%d;\r\n"),Nz_max);
-	   l = str.GetLength();
-	   file.Write((LPCTSTR)str,l*2);
-	  //минимальный код ЦАПа Dz (1 байт) 
-	   str.Format(_T("Nz_min=%d;\r\n"),Nz_min);
-	   l = str.GetLength();
-	   file.Write((LPCTSTR)str,l*2);
-*/	 //калибровочные коэффициенты
+	 //калибровочные коэффициенты
 	   //КОЛЛЕКТОР
 	   str=_T("[COLLECTOR]\r\n[MEASURE U][BIAS]\r\n");
 	   l = str.GetLength();
@@ -27537,23 +22983,6 @@ void CLineDlg::SetKoefPswToPic()
 	j++;
 	K29[j]= nominal;	//номинальное значение кода сети (1 байт) - общее для всех диапазонов
 	j++;
-/*	for (i=0;i<5;i++)	//максимальный код ЦАПа Da (2 байта) для каждого диапазона источника Uc(5 диапазонов) 
-	{ p = V_[i] & 0xff;
-	  K29[j] = p;
-	  j++;
-	  p = V_[i] & 0xff00;
-	  p = p >> 8;
-	  K29[j] = p;
-	  j++;
-	}
-*/
-/*
-	K29[j]= Nz_max;		 //максимальный код ЦАПа Dz (1 байт) 
-	j++;
-	K29[j]= Nz_min;		 //минимальный код ЦАПа Dz (1 байт) 
-	j++;
-*/
-	//...
 //-------------------------------
 	memcpy(&My_buf_Out[k],&K29[0],nK[28]);//пока 13 байт//15
 	k = nK[28];
@@ -27601,18 +23030,6 @@ BOOL CLineDlg::SetPassWordLine()
 	   l = str.GetLength();
 	   file.Write((LPCTSTR)str,l*2);
 
-/*	   str.Format(_T("n_Switch=%d\r\n"),n_Switch);
-	   l = str.GetLength();
-	   file.Write((LPCTSTR)str,l*2);
-*/
-/*	   str.Format(_T("bZapusk=%d\r\n"),bZapusk);
-	   l = str.GetLength();
-	   file.Write((LPCTSTR)str,l*2);
-
-	   str.Format(_T("bSound=%d\r\n"),bSound);
-	   l = str.GetLength();
-	   file.Write((LPCTSTR)str,l*2);
-*/
 	   str.Format(_T("m_colorFon=%d\r\n"),m_colorFon);
 	   l = str.GetLength();
 	   file.Write((LPCTSTR)str,l*2);
@@ -27868,12 +23285,6 @@ void CLineDlg::OnColorFon()
 	  m_Chart.DisableRefresh(true); 
 	  m_Chart.SetBackColor(m_colorFon);
 	  m_Chart.DisableRefresh(false); 
-//	  brFon.DeleteObject();
-//	  brFon.CreateSolidBrush(m_colorFon);
-//    CBrush* pOldBrush = MemDC.SelectObject(&brFon);
-//	  MemDC.FillRect(m_RectWndGraf,&brFon);
-//	  MemDC.SelectObject(pOldBrush);
-//    InvalidateRect(m_RectWndGraf,FALSE);
 	}	
 	
 }
@@ -27980,12 +23391,8 @@ void CLineDlg::OnColorRef()
 	  m_Chart.DeleteMarker(m_uN);
 	  m_iMarker = MARKER0;
 	}
-//	if (m_bButInversion) SetMassivRefNpoint(true);
-//					else SetMassivRefNpoint(false);
 	if (nCheckParam) 
 	{ ResetMarkers();
-//	  DisplayMarker();
-//	  DisplaySecant();
 	}
 	}	
  }
@@ -28035,22 +23442,6 @@ void CLineDlg::OnColorTangent()
 
 LRESULT CLineDlg::OnRefresh(WPARAM wParam,LPARAM lParam)
 {
-/*
-	CString text;
-	double XValue, YValue, RValue;
-	m_Chart.m_pMarkersList[m_Chart.m_iActiveMarkerIndex]->GetValues(XValue, YValue);
-	XValue = XValue * pow(10.0,expo_X);
-	YValue = YValue * pow(10.0,expo_Y);
-	if (rej_X==0 && rej_Y==1) RValue = XValue / YValue;
-	else if (rej_Y==0 && rej_X==1) RValue = YValue / XValue;
-		 else RValue = 0.0;
-	int iMarker = m_Chart.m_iActiveMarkerIndex + 1; 
-	text.Format(_T("X = % .3e,   Y = % .3e,  R%d = % .3e Om"),XValue,YValue,iMarker,RValue);
-	if(m_Chart.m_iActiveMarkerIndex==0)
-		((CStatic*)GetDlgItem(IDC_MARKER1))->SetWindowText(text);
-	else
-		((CStatic*)GetDlgItem(IDC_MARKER2))->SetWindowText(text);
-*/
 	    	    m_Chart.DisableRefresh(true);
 		  int NearestSerieIndex = m_Chart.m_pMarkersList[m_Chart.m_iActiveMarkerIndex]->GetRelatedSerieIndex();
 	DisplayMarker();
@@ -28273,15 +23664,6 @@ BOOL CLineDlg::SaveRef()
 		str.Format(_T("nPointRef=%d;\r\n"),nPointRef);		//число точек
 		stre = stre + str;
 
-/*		for (UINT m=0;m<nMasRef;m++)
-		for (i=0;i<nResultRef;i++)				//точки
-		{  str.Format(_T("refX[%d]=%f;\r\n"),i,refX[m][i]);
-		   stre = stre + str;
-	       
-		   str.Format(_T("refY[%d]=%f;\r\n"),i,refY[m][i]);
-	       stre = stre + str;
-		}
-*/
 		for (j=0;j<nStepRef;j++)
 		for (UINT m=0;m<nMasRef;m++)
 		for (i=0;i<nPointRef;i++)				//точки
@@ -28364,32 +23746,8 @@ void CLineDlg::BuildArrayTstUser()
 	}
 
 }
-/*
-void CLineDlg::BuildArrayTstStandart() 
-{
-	HANDLE hFileTst;
-	WIN32_FIND_DATA fd;
-	CString str_name_tst;
 
-	array_tst_standart.RemoveAll();
-    int n_tst = array_tst_standart.GetSize();
-	
-	hFileTst=::FindFirstFile(strFileTstStandart,&fd);	//
-	
-	if (hFileTst != INVALID_HANDLE_VALUE)
-	{ BOOL b = true;
-	  while (b)
-	  { //массив имён файлов 
-		str_name_tst.Format(L"%s",fd.cFileName);
-		array_tst_standart.SetAtGrow(n_tst,str_name_tst);		  
-		n_tst++;
-	    //поиск всех файлов *.tst
-		b=FindNextFile(hFileTst,&fd);
-	  }	//while (b)
-	}
 
-}
-*/
 void CLineDlg::BuildArrayTstStandart() 
 {
 	HANDLE hFileTst;
@@ -28700,32 +24058,7 @@ void CLineDlg::OnExtractRef()
 		    m_iPointRef = atoi(cc);
 		    delete[] cc;
 		    str.ReleaseBuffer();
-/*
-			for (int m=0;m<m_iMasRef;m++)
-//			for(int i=0;i<m_iResultRef;i++)
-			for(int i=0;i<m_iStepRef*m_iPointRef;i++)
-			{//3
-		      p1=strFile.Find(L'=',p2);
-		      p2=strFile.Find(L';',p1);
-		      str=strFile.Mid(p1+1,p2-p1-1);
-		      iStrLen = str.GetLength();
-		      cc = new char[iStrLen];
-		      WideCharToMultiByte(CP_ACP,NULL,str.GetBuffer(iStrLen),iStrLen,cc,iStrLen,NULL,NULL);
-		      refX[m][i] = atof(cc);
-		      delete[] cc;
-		      str.ReleaseBuffer();
 
-		      p1=strFile.Find(L'=',p2);
-		      p2=strFile.Find(L';',p1);
-		      str=strFile.Mid(p1+1,p2-p1-1);
-		      iStrLen = str.GetLength();
-		      cc = new char[iStrLen];
-		      WideCharToMultiByte(CP_ACP,NULL,str.GetBuffer(iStrLen),iStrLen,cc,iStrLen,NULL,NULL);
-		      refY[m][i] = atof(cc);
-		      delete[] cc;
-		      str.ReleaseBuffer();
-			}//3 end of for i
-*/
 			for (int j=0;j<m_iStepRef;j++)
 			for (int m=0;m<m_iMasRef;m++)
 			for(int i=0;i<m_iPointRef;i++)
@@ -28783,23 +24116,11 @@ void CLineDlg::SetMassivRefNpoint(BOOL bInversion)
  }
  for(j=0;j<nStepRef;j++)
  {  
-//    double* pX = new double[NPOINT*nMasRef];
-//    double* pY = new double[NPOINT*nMasRef];
-
 	switch(m_iStyleCurveRef)
 	{ case STYLE_LINE:	    pGraphRef = m_Chart.AddSerie(CChartSerie::stLine); break;
 	  case STYLE_POINT:	    pGraphRef = m_Chart.AddSerie(CChartSerie::stPoints); break;
 	  case STYLE_LINEPOINT:	pGraphRef = m_Chart.AddSerie(CChartSerie::stMixed); break;
 	}
-
-//	if (m_itipimp!=TIP_IMP) pGraphRef->SetSortPoints(false);
-//	if (m_irazv!=IMP_POS && m_irazv!=IMP_NEG) pGraphRef->SetSortPoints(false);
-//	if ((m_irazv!=IMP_POS && m_irazv!=IMP_NEG)||
-//		m_nelement==TS) pGraphRef->SetSortPoints(false);
-
-//	if (m_nelement==TS)
-//	pGraphRef->SetSortPoints(false);
-//        else  pGraphRef->SetSortPoints(true);
 
 	if (((m_irazv==SYN_POS || m_irazv==SYN_NEG) && !m_bLooping) ||
 		(m_irazv==AC && !m_bLooping) ||
@@ -28808,28 +24129,15 @@ void CLineDlg::SetMassivRefNpoint(BOOL bInversion)
 
    for (UINT m=0;m<nMasRef;m++)
    {
-//	for(i=0;i<NPOINT;i++)
 	for(i=0;i<nPointRef;i++)
 	{
-//	  pX[i] = refX[m][i+NPOINT*j];
-//	  pY[i] = refY[m][i+NPOINT*j];
 	  pX[i+nPointRef*m] = refX[m][i+nPointRef*j];
 	  pY[i+nPointRef*m] = refY[m][i+nPointRef*j];
 	}
    }
 	pGraphRef->SetColor(m_colorRef);							//цвет кривой
-//	pGraphRef->SetPoints(pX,pY,NPOINT);
 	pGraphRef->SetPoints(pX,pY,nPointRef*nMasRef);
-/*	if (bInversion) 
-	{
-	 TRACE(L"inverted\n");
-	 pGraphRef->SetXYInverted(true);
-	}
-*/
 	pGraphRef->SetName("j-ая кривая");
-
-//	delete[] pX;
-//	delete[] pY;
  }
 	CChartSerieFamily* pFamilyRef = m_Chart.AddFamily();
 	pFamilyRef->SetColor(m_colorRef);
@@ -28843,7 +24151,6 @@ void CLineDlg::SetMassivDiffNpoints()
 {
       r1=0.0;
 	  r2=0.0;
-//      double c=0.0000000000001;	// эпсилон
 	  double x  = 0.0;	//искомое значение аргумента при значении 1 или 2 параметра
 	  double y  = 0.0;	//искомое значение функции при значении 1 или 2 параметра
 	int i=0;
@@ -29030,13 +24337,6 @@ void CLineDlg::SetMassivDiffNpoints()
 }
 
 
-/*
-void CLineDlg::OnResetRef() 
-{
-	// TODO: Add your command handler code here
-	ResetRef();
-}
-*/
 void CLineDlg::ResetRef() 
 {
 	int j;
@@ -29154,19 +24454,6 @@ void CLineDlg::OnClearMemory()
 
 void CLineDlg::OnOtchtMail() 
 {
-	// TODO: Add your command handler code here
-/*	nCheckOtcht=!nCheckOtcht;
-	switch(nCheckOtcht)
-	{ case 0: //убрать окно отчёта с экрана
-			    ShowControls(aVid5,SIZEOF_ARRAY(aVid5),FALSE);
-				SetTextInfo(_T("TEST:  ") + strTestName);
-				break;
-	  case 1: //отобразить окно отчёта на экране
-			    ShowControls(aVid5,SIZEOF_ARRAY(aVid5),TRUE);
-				DisplayOtcht();
-				break;
-	}
-*/
 			    ShowControls(aVid5,SIZEOF_ARRAY(aVid5),FALSE);
 				SetTextInfo(_T("TEST:  ") + strTestName);
 					nCheckOtcht= 0;	
@@ -29174,7 +24461,6 @@ void CLineDlg::OnOtchtMail()
 
 void CLineDlg::OnListrefOpen() 
 {
-	// TODO: Add your command handler code here
 	ShowControls(aVid6,SIZEOF_ARRAY(aVid6),TRUE);
 	bStateListRef=true;
 	SetTextInfo(_T("\nАрхив эталонных графиков\n"));
@@ -29182,7 +24468,6 @@ void CLineDlg::OnListrefOpen()
 
 void CLineDlg::OnListrefClose() 
 {
-	// TODO: Add your command handler code here
 	ShowControls(aVid6,SIZEOF_ARRAY(aVid6),false);
 	bStateListRef=false;
 
@@ -29191,44 +24476,7 @@ void CLineDlg::OnListrefClose()
 	SetTextInfo(str);//_T("Проведите измерение или выберите другую модель!"));
 }
 
-//отображение заполненности Hard Disk и удаление старых файлов
-/*
-void CLineDlg::OnFreememory() 
-{
-	// TODO: Add your command handler code here
-	int free_space;
-	CString strFreeSpace;
-	ULARGE_INTEGER  ulTotalSpace;
-    ULARGE_INTEGER  ulUserSpace;
-    ULARGE_INTEGER  ulFreeSpace;
-	BOOL b=TRUE;
-	CFreeMemoryDlg fdlg;
-	    LPCWSTR   lpDirectoryName =_T("\\Disk");
-		if (!GetDiskFreeSpaceEx(lpDirectoryName, &ulUserSpace, &ulTotalSpace, &ulFreeSpace))
-			//flash-disk отсутствует	
-			{
-//			IsDiskA=FALSE;
-			DWORD d_error=GetLastError();
-			if (d_error==ERROR_PATH_NOT_FOUND)
-				{
-///				m_st_flash.SetWindowText(_T("Нет"));
-				fdlg.m_progress_flash.ShowWindow(SW_HIDE);
-				}
-			}
-		//_int64 d_total=ulFreeSpace.QuadPart;
-		else
-			{
-///			IsDiskA=TRUE;
-			free_space=(int)((ulFreeSpace.QuadPart*100)/ulTotalSpace.QuadPart);
-			
-			fdlg.free_space = free_space;
-		UpdateData(false);
-		fdlg.DoModal();
-		UpdateData();
-			}
-///	}	//if (!IsDiskA) else 
-}
-*/
+
 void CLineDlg::WhatFreeMemory() 
 {
 	// TODO: Add your command handler code here
@@ -29240,9 +24488,7 @@ void CLineDlg::WhatFreeMemory()
 	CFreeMemoryDlg fdlg;
 	    LPCWSTR   lpDirectoryName =_T("\\Hard Disk");
 		if (!GetDiskFreeSpaceEx(lpDirectoryName, &ulUserSpace, &ulTotalSpace, &ulFreeSpace))
-			//flash-disk отсутствует	
 			{
-//			IsDiskA=FALSE;
 			DWORD d_error=GetLastError();
 			if (d_error==ERROR_PATH_NOT_FOUND)
 				{
@@ -29250,18 +24496,9 @@ void CLineDlg::WhatFreeMemory()
 				m_progress_flash.ShowWindow(SW_HIDE);
 				}
 			}
-		//_int64 d_total=ulFreeSpace.QuadPart;
 		else
 			{
-///			IsDiskA=TRUE;
 			free_space=(int)((ulFreeSpace.QuadPart*100)/ulTotalSpace.QuadPart);
-			/*while (ulFreeSpace.QuadPart<5000)
-			{
-			if (!DeleteOldFiles())	{b=FALSE; break;}
-				GetDiskFreeSpaceEx(lpDirectoryName, &ulUserSpace, &ulTotalSpace, &ulFreeSpace);
-				free_space=(int)((ulFreeSpace.QuadPart*100)/ulTotalSpace.QuadPart);
-			}
-			*/
 			
 			if ((!b)||(free_space==0)) strFreeSpace.Format(_T("0%%"));//100%% "));
 			else strFreeSpace.Format(_T("%u%%  "),100-free_space);//100-free_space);
@@ -29270,7 +24507,6 @@ void CLineDlg::WhatFreeMemory()
 
 		UpdateData(false);
 			}
-///	}	//if (!IsDiskA) else 
 }
 
 void CLineDlg::OnRefReset() 
@@ -29325,25 +24561,13 @@ void CLineDlg::OpenTabl()
 	tabdlg.strPrim = str_PRIM;
 	tabdlg.m_itipimp = m_itipimp;
 
-/*
-    if (pModSelected)
-		tabdlg.m_sInfoTest.Format(_T("%s %s\nФайл: %s  Элемент: %s  Тест: %s\n%s"),
-			strDateMeas,strTimeMeas,strFileName,str_EL,str_MOD,str_PRIM);
-	else
-		tabdlg.m_sInfoTest.Format(_T("%s %s\nЭлемент: %s  Тест: %s\n%s"),
-			strDateMeas,strTimeMeas,str,strTestName,str_PRIM);
-	int i = array_otcht.GetSize();
-	if (i) tabdlg.strOtcht = array_otcht.GetAt(i-1);	//строка из отчёта
-	tabdlg.m_sInfoTest=tabdlg.m_sInfoTest+tabdlg.strOtcht;
-*/	UpdateData(FALSE);
+	UpdateData(FALSE);
 	tabdlg.DoModal();
  }
 }
 
 void CLineDlg::OnOpentabl() 
 {
-	// TODO: Add your command handler code here
-//	OpenTabl();
 	bStatusTablRes = stateMax;
 	ClientToScreen(&RectTablRes);
 	RectTablRes.top=RectInfoTest.bottom;
@@ -29352,21 +24576,10 @@ void CLineDlg::OnOpentabl()
 	pSt->MoveWindow(&RectTablRes);
 	InitTablRes();
 }
-/*
-void CLineDlg::OnSelchangeComboPeriod() 
-{
-	// TODO: Add your control notification handler code here
-	UpdateData(TRUE);
-	CComboBox *cbp  = (CComboBox*) GetDlgItem(IDC_COMBO_PERIOD);
-	m_iperiodimp = cbp->GetCurSel();
-	m_udlitpauza = m_iperiodimp+1;
-	UpdateData(FALSE);
-	
-}
-*/
+
+
 void CLineDlg::OnRadioLeft() 
 {
-	// TODO: Add your control notification handler code here
 	//(0,0) слева
 	m_iButNull=LEFT;
 	InitPageTuning(0);
@@ -29376,7 +24589,6 @@ void CLineDlg::OnRadioLeft()
 
 void CLineDlg::OnRadioCenter() 
 {
-	// TODO: Add your control notification handler code here
 	//(0,0) в центре
 	m_iButNull=CENTER;
 	InitPageTuning(0);
@@ -29386,7 +24598,6 @@ void CLineDlg::OnRadioCenter()
 
 void CLineDlg::OnRadioRight() 
 {
-	// TODO: Add your control notification handler code here
 	//(0,0) справа
 	m_iButNull=RIGHT;
 	InitPageTuning(0);
@@ -29444,32 +24655,7 @@ void CLineDlg::OnRadiodopi()
 	ControlParam();
 }
 
-/*
-void CLineDlg::OnRadiotipimp() 
-{
-	// TODO: Add your control notification handler code here
-	UpdateData();
-//	i_tipimp = m_itipimp;
-	InitIconImp();
-	ChangeDiapazonKol();
-	ShowButtonLoopingCompensation();
-	UpdateData(FALSE);
-	ControlParam();
-}
 
-void CLineDlg::OnRadiotipimp1() 
-{
-	// TODO: Add your control notification handler code here
-	UpdateData();
-//	i_tipimp = m_itipimp;
-	InitIconImp();
-	ChangeDiapazonKol();
-	ShowButtonLoopingCompensation();
-	UpdateData(FALSE);
-	ControlParam();
-	
-}
-*/
 void CLineDlg::OnCheckpauza() 
 {
 	// TODO: Add your control notification handler code here
@@ -29664,63 +24850,27 @@ void CLineDlg::ClearTablRes()
 	  //данные Uc
 	  //=========
 	  str.Format(_T("%7.4e"),pM1[s][i+NPOINT*j]);
-/*	  p = (bias_KolMeasU+m_iKolU) % 3;//
-	  if (p==2) str.Format(_T("%7.4e"),pM1[s][i+NPOINT*j]);
-		   else str.Format(_T("%7.3e"),pM1[s][i+NPOINT*j]);
-*/	  strData[s][i+n_point*j][k]=str;
+	  strData[s][i+n_point*j][k]=str;
 	  k++;
 	  //данные Ic
 	  //=========
 	  str.Format(_T("%7.4e"),pM2[s][i+NPOINT*j]);
-/*	  p = (bias_KolMeasI+m_iKolI) % 3;//
-	  if (n_IPPP==0 || (n_IPPP==1 && n_Switch==0))
-	  { if (p==0) str.Format(_T("%7.5e"),pM2[s][i+NPOINT*j]);
-			else  str.Format(_T("%7.4e"),pM2[s][i+NPOINT*j]);
-	  }
-	  else
-	  {if (p==1) str.Format(_T("%7.5e"),pM2[s][i+NPOINT*j]);
-		   else  str.Format(_T("%7.4e"),pM2[s][i+NPOINT*j]);
-	  }
-*/	  strData[s][i+n_point*j][k]=str;
+	  strData[s][i+n_point*j][k]=str;
 	  k++;
 	  
-//	  if (m_iCircuitBaza==1)
 	if (m_iCircuitBaza==1 && m_iKnotBaza==1)
 	  {//данные по базе
 	   //==============
 	     str.Format(_T("%7.4e"),pM3[s][i+NPOINT*j]);
-/*		 p = m_iRangMeasBaza % 3;
-		 if (m_iBazaMeas==1)
-		 {//I
-		   if (p==2) str.Format(_T("%7.4e"),pM3[s][i+NPOINT*j]);
-		   else      str.Format(_T("%7.5e"),pM3[s][i+NPOINT*j]);
-		 }
-		 else
-		 {//U
-		   if (p==2) str.Format(_T("%7.5e"),pM3[s][i+NPOINT*j]);
-		   else      str.Format(_T("%7.4e"),pM3[s][i+NPOINT*j]);
-		 }
-*/	     strData[s][i+n_point*j][k]=str;
+	     strData[s][i+n_point*j][k]=str;
 	  k++;
 	  }
 	  
 	if (m_iCircuitDop==1 && m_iKnotDop==1)
-//	  if (m_iCircuitDop==1)
 	  {//данные по доп.каналу
 	   //====================
 	     str.Format(_T("%7.4e"),pM4[s][i+NPOINT*j]);
-/*		 p = m_iRangMeasDop % 3;
-		 if (m_iDopMeas==1)
-		 {//I
-		   if (p==2) str.Format(_T("%7.4e"),pM4[s][i+NPOINT*j]);
-		   else      str.Format(_T("%7.5e"),pM4[s][i+NPOINT*j]);
-		 }
-		 else
-		 {//U
-		   if (p==2) str.Format(_T("%7.5e"),pM4[s][i+NPOINT*j]);
-		   else      str.Format(_T("%7.4e"),pM4[s][i+NPOINT*j]);
-		 }
-*/	     strData[s][i+n_point*j][k]=str;
+	     strData[s][i+n_point*j][k]=str;
 	  k++;
 	  }
 
@@ -29760,31 +24910,10 @@ void CLineDlg::InitTablRes()
 	UINT j=0,s=0;
 	CRect rect;
  
-//	pM[4]= &pM5[0][0];
-
 		rect.left = RectTablRes.left;
 		rect.top = RectTablRes.top;
 		rect.right = RectTablRes.right;
 		rect.bottom  = RectTablRes.bottom;
-/*
-		int n_t0=0;
-	int n_step = n_Step;
-	int n_point = NPOINT;
-//	if (m_bR || m_bBeta || m_bBetai) n_t0=20;
-	if (m_bLooping) n_point = NPOINT100;
-//	if (m_itipimp==TIP_IMP) n_point = 1;
-	if (m_irazv==IMP_POS || m_irazv==IMP_NEG) n_point = 1;
-	if (m_irazv==DC_POS || m_irazv==DC_NEG) 
-		{ if (n_Result==0) n_Result=1;///
-//	      if ((bMeas == MEAS_MULTIPLE || bMeas == MEAS_MULTIPLE )&& n_Result>1) n_t0=1;///нулевая точка
-//		  n_point = uNpointsLupa;
-	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_SINGLE) n_point = uNpointsLupa;//n_Result;
-	if ((m_irazv==DC_POS || m_irazv==DC_NEG) && bMeas == MEAS_MULTIPLE) n_point = n_Result;
-		}//n_Result;}//n_step=1;}
-	UINT n_mas = 1;
-//	if (m_itipimp==TIP_IMP) n_mas = n_Mas;
-	if (m_irazv==IMP_POS || m_irazv==IMP_NEG) n_mas = n_Mas;
-*/
 	int n_t0 = 0;
 	int n_step = n_Step;
 	int n_point = NPOINT;
@@ -29853,15 +24982,6 @@ void CLineDlg::InitTablRes()
 	if (m_iCircuitDop==1 && m_iKnotDop==1)
 //	if (m_iCircuitDop==1)
 	{ 
-/*		if (m_bDop)
-		{ if (m_iDopSource)  str = m_sDopSource+_T(", A");
-				 else str = m_sDopSource+_T(", V");
-		}
-		else
-		{ if (m_iDopMeas)  str = m_sDopMeas+_T(", A");
-				else  str = m_sDopMeas+_T(", V");
-		}
-*/
 		if (!m_bDop)
 		{ if (m_iDopSource)  str = m_sDopSource+_T(", A");
 				 else str = m_sDopSource+_T(", V");
@@ -29872,21 +24992,18 @@ void CLineDlg::InitTablRes()
 		}
 		pListCtrl->InsertColumn(k,str,LVCFMT_LEFT,rect.Width()/5);
 	  strNameColumn=strNameColumn+str+_T("\t");
-//	  strNameColumn=strNameColumn+_T("\t")+str;
 	  k++;
 	}
 	if (m_bR)
 	{ str = _T("R, Om");
 	  pListCtrl->InsertColumn(k,str,LVCFMT_LEFT,rect.Width()/5);
 	  strNameColumn=strNameColumn+str+_T("\t");
-//	  strNameColumn=strNameColumn+_T("\t")+str;
 	  k++;
 	}
 	if (m_bS)
 	{ str = _T("S, A/V");
 	  pListCtrl->InsertColumn(k,str,LVCFMT_LEFT,rect.Width()/5);
 	  strNameColumn=strNameColumn+str+_T("\t");
-//	  strNameColumn=strNameColumn+_T("\t")+str;
 	  k++;
 	}
 
@@ -29933,43 +25050,19 @@ void CLineDlg::InitTablRes()
 	  //данные Uc
 	  //=========
 	  str.Format(_T("%7.4e"),pM1[s][i+NPOINT*j]);
-/*	  p = (bias_KolMeasU+m_iKolU) % 3;//
-	  if (p==2) str.Format(_T("%7.4e"),pM1[s][i+NPOINT*j]);
-		   else str.Format(_T("%7.3e"),pM1[s][i+NPOINT*j]);
-*/	  strData[s][i+n_point*j][k]=str;
+	  strData[s][i+n_point*j][k]=str;
 	  k++;
 	  //данные Ic
 	  //=========
 	  str.Format(_T("%7.4e"),pM2[s][i+NPOINT*j]);
-/*	  p = (bias_KolMeasI+m_iKolI) % 3;//
-	  if (n_IPPP==0 || (n_IPPP==1 && n_Switch==0))
-	  { if (p==0) str.Format(_T("%7.5e"),pM2[s][i+NPOINT*j]);
-			else  str.Format(_T("%7.4e"),pM2[s][i+NPOINT*j]);
-	  }
-	  else
-	  {if (p==1) str.Format(_T("%7.5e"),pM2[s][i+NPOINT*j]);
-		   else  str.Format(_T("%7.4e"),pM2[s][i+NPOINT*j]);
-	  }
-*/	  strData[s][i+n_point*j][k]=str;
+	  strData[s][i+n_point*j][k]=str;
 	  k++;
 	  
-//	  if (m_iCircuitBaza==1)
 	if (m_iCircuitBaza==1 && m_iKnotBaza==1)
 	  {//данные по базе
 	   //==============
 	     str.Format(_T("%7.4e"),pM3[s][i+NPOINT*j]);
-/*		 p = m_iRangMeasBaza % 3;
-		 if (m_iBazaMeas==1)
-		 {//I
-		   if (p==2) str.Format(_T("%7.4e"),pM3[s][i+NPOINT*j]);
-		   else      str.Format(_T("%7.5e"),pM3[s][i+NPOINT*j]);
-		 }
-		 else
-		 {//U
-		   if (p==2) str.Format(_T("%7.5e"),pM3[s][i+NPOINT*j]);
-		   else      str.Format(_T("%7.4e"),pM3[s][i+NPOINT*j]);
-		 }
-*/	     strData[s][i+n_point*j][k]=str;
+	     strData[s][i+n_point*j][k]=str;
 	  k++;
 	  }
 	  
@@ -30019,24 +25112,6 @@ void CLineDlg::InitTablRes()
 		pListCtrl->SetItemData(k, (LPARAM)m_pData[k]);
 		k++;
 	}
-	
-/*
-	for (j=0; j<n_step;j++)
-	for (s=0; s<n_mas;s++)
-//	for (i=0; i<n_point; i++)
-	for (i=n_t0; i<n_point; i++)
-	{   m=0;//№ колонки
-		pListCtrl->InsertItem(k, strData[s][i+n_point*j][m]);m++;
-		pListCtrl->SetItemText(k, m, strData[s][i+n_point*j][m]);m++;
-		pListCtrl->SetItemText(k, m, strData[s][i+n_point*j][m]);m++;
-		if (m_iCircuitBaza>0) {pListCtrl->SetItemText(k, m, strData[s][i+n_point*j][m]);m++;}
-		if (m_iCircuitDop>0)  {pListCtrl->SetItemText(k, m, strData[s][i+n_point*j][m]);m++;}
-		if (m_bR || m_bBeta || m_bBetai) {pListCtrl->SetItemText(k, m, strData[s][i+n_point*j][m]);m++;}
-//		pListCtrl->SetItemText(k, 6, strData[s][i+n_point*j][6]);
-		pListCtrl->SetItemData(k, (LPARAM)m_pData[k]);
-		k++;
-	} 
-*/
 }
 
 
@@ -30085,30 +25160,6 @@ void CLineDlg::OnSelchangedTreeTest(NMHDR* pNMHDR, LRESULT* pResult)
 		 {  
 		  if (!ControlSwitch())
 		  {
-/*		   if (m_nelement != pModSelected->m_nelement)
-		   {
-			  m_nelement = pModSelected->m_nelement;
-			  SetStringsSourceMeas();
-			  InitTest();
-		   }
-			ExtractParam();		//экстракция параметров
-			UpdateData(FALSE);		//отобразить параметры в окошках
-
-			str_EL   = pModSelected->m_EL;
-			str_MOD  = pModSelected->m_MOD;
-			str_PRIM = pModSelected->m_PRIM;
-			strTestName = str_EL+_T(" \\ ")+str_MOD;	//_T(" Тест:  ")+текущая модель измерения (выбранный тест)
-			SetTextInfo(_T(" TEST:  ")+strTestName);//отобразить выбранный тест в информационном окне
-			UpdateData(FALSE);		//отобразить параметры в окошках
-			InitDiapazonKol();	//инициализация диапазонов коллектора (в зависимости от вида развёртки)
-			InitDiapazonBaza();	//инициализация диапазонов базы
-			InitDiapazonDop();	//инициализация диапазонов доп.канала
-
-//			InitGnezdo();
-//			InitIconImp();
-
-			  SetTest();
-*/
 //==========
 			ExtractParam();		//экстракция параметров
 //			UpdateData(FALSE);		//отобразить параметры в окошках
@@ -30133,14 +25184,7 @@ void CLineDlg::OnSelchangedTreeTest(NMHDR* pNMHDR, LRESULT* pResult)
 
 			 b_InitAxis=true;
 			 int error = ControlParam();
-/*			 if (error) 
-			 {  //str.Format(_T("Входные параметры теста %s заданы неверно.\n\nОбнаружено ошибок: %d."),str_EL+_T("\\")+str_MOD,error);
-				//MessageBox(str,NULL,MB_ICONERROR);
-				int  nTabTuning = 1;//Error//0
-				m_TabCtrlTuning.SetCurSel(nTabTuning);
-				InitPageTuning(nTabTuning);	// отобразить панель "Дисплей"
-			 }
-*/		  }
+		  }
 		  else 
 		  { pModSelected = NULL;
 		  }
@@ -30257,19 +25301,7 @@ void CLineDlg::SaveTablResult()
 			str=strNameColumn;//+_T("\r\n");		//строка с наименованиями колонок
 			stre = stre +str;
 			//4) измеренные данные
-/*			for (s=0;s<n_mas;s++)
-			{
-			for (i=0;i<n_Step*n_point;i++)
-			{ for (j=0;j<7;j++)
-				{ str=strData[s][i][j]+_T("\t");	//данные
-				  str.Replace('.', ',');
-				  stre = stre +str;
-				}
-			  str=_T("\r\n");					//переход к следующей строке
-			  stre = stre + str;
-			}
-			}
-*/
+
 			for (j=0;j<n_Step;j++)
 			for (s=0;s<n_mas;s++)
 			for (i=0;i<n_point;i++)
@@ -30311,71 +25343,6 @@ int CLineDlg::FromUnicodeToAscii(BYTE* c_ascii,CString strUnicode)
 		c_ascii[i]='\0';
 		return i+1;
 }
-/*
-void CLineDlg::AutoSaveTablResult()
-{
-	UINT s,i;
-	int j;
-	CString str,strDate,strMonth,strYear;
-
-	int n_point = NPOINT;
-	if (m_bLooping) n_point = NPOINT100;
-//	if (m_itipimp==TIP_IMP) n_point = 1;
-	if (m_irazv==IMP_POS || m_irazv==IMP_NEG) n_point=1;
-//	if (m_irazv==DC_POS || m_irazv==DC_NEG) n_point = n_Result;
-	if (m_irazv==DC_POS || m_irazv==DC_NEG) 
-	{ if (n_Result==0) n_Result=1;
-	  if ( bMeas == MEAS_SINGLE) n_point = uNpointsLupa;
-							else n_point = n_Result;
-	  if (m_iLimitKolU==0) n_point=1;//для вывода в таблицу только одной точки
-	}
-	UINT n_mas = 1;
-//	if (m_itipimp==TIP_IMP) n_mas = n_Mas;
-	if (m_irazv==IMP_POS || m_irazv==IMP_NEG) n_mas = n_Mas;
-
-	UpdateData();
-	strDate=strDateMeas.Mid(0,2);
-	strMonth=strDateMeas.Mid(3,2);
-	strYear=strDateMeas.Mid(8,2);
-
-	str.Format(_T("%s_%s_%s_%s%s%s.xls"),m_sProduct,m_sPart,m_sPlast,strDate,strMonth,strYear);//strDateMeas);
-//	str.Format(_T("%s_%s_%s_%s.xls"),m_sProduct,m_sPart,m_sPlast,strDateMeas);
-	CString name = _T("\\Hard Disk\\Xls\\")+str;
-	CString stre=_T("");
-	CFile file;
-	int l;
-	file.Open((LPCTSTR)name,CFile::modeCreate|CFile::modeNoTruncate|CFile::modeWrite);
-	file.SeekToEnd();
-	//формирование данных
-	//1) дата проведения измерения 
-	str.Format(_T("%s\\%s\t%s\t%s\t%s\r\n"),m_EL,m_MOD,strDateMeas,strTimeMeas,m_sPoint);
-	stre=stre+str;
-	//2) наименование колонок 
-	str=strNameColumn;//+_T("\r\n");		//строка с наименованиями колонок
-	stre = stre +str;
-	//3) измеренные данные
-	for (j=0;j<n_Step;j++)
-	for (s=0;s<n_mas;s++)
-	for (i=0;i<n_point;i++)
-	{  str =  strData[s][i+n_point*j][0]+_T("\t")+	
-	   strData[s][i+n_point*j][1]+_T("\t")+
-	   strData[s][i+n_point*j][2]+_T("\t")+
-	   strData[s][i+n_point*j][3]+_T("\t")+
-	   strData[s][i+n_point*j][4]+_T("\t")+
-	   strData[s][i+n_point*j][5]+_T("\r\n");	//данные + переход к следующей строке
-	   str.Replace('.', ',');
-	   stre = stre +str;
-	}
-	l=stre.GetLength();
-	BYTE* buf_byte = new BYTE[l];
-	FromUnicodeToAscii(buf_byte,stre);
-	file.Write(buf_byte,l);
-	file.Close();
-	delete[] buf_byte;
-    SetModifiedMemory();
-
-}
-*/
 
 void CLineDlg::AutoSaveTablResult()
 {
@@ -30609,47 +25576,24 @@ void CLineDlg::OnDelTstUser()
 	        str_MOD = m_MOD;
 	        strTestName = str_EL + _T(" \\ ") + str_MOD;//str_MOD;
 	        SetTextInfo(_T(" TEST:  ") + strTestName);
-// 	      BOOL b = ExtractParamFromTst();
-//		  if (b)
-//		  { 
-//	        SetTextInfo(_T("TEST:  ") + strTestName);
-//			ControlParam();
-///*			InitStatusKnot();
-//			InitGnezdo();		//Добавила 28.11.17
 			InitDiapazonKol();	//инициализация диапазонов коллектора (в зависимости от вида развёртки)
 			InitDiapazonBaza();	//инициализация диапазонов базы
 			InitDiapazonDop();	//инициализация диапазонов доп.канала
 
-//			InitIconImp();
-			
-//*/
 			int  nTab = 0;
 			m_TabCtrlParam.SetCurSel(nTab);
 			InitPage(nTab);	
-//		    InitPage(0);
 			b_InitAxis=true;
 			ControlParam();
 		  }
 		  else
 		  {//файл отсутствует 
-//            m_MOD=_T("");
-//		    str_EL = m_EL;
-//	        str_MOD = m_MOD;
-//		    strTestName = _T("");
-//	        SetTextInfo(_T("Введите наименование теста!"));
 			str_EL		= _T("");
 			str_MOD		= _T("");
 			strTestName   = _T("");
 			str_PRIM = _T("");
 			SetTextInfo(_T("Выберите тест для измерения!"));
-//	        UpdateData(FALSE);
 		  }
-//	   }
-//	   else 
-//	   { 
-//	        SetTextInfo(_T("Категория загружаемого теста не соответствует выбранной!"));
-//	        UpdateData(FALSE);
-//	   }
 	}
 	else SetModifiedMemory();
 	
@@ -30747,36 +25691,6 @@ void CLineDlg::OnDelTstStandart()
 	else SetModifiedMemory();
 }
 
-/*
-void CLineDlg::OnScaleX() 
-{
-	// TODO: Add your command handler code here
-	CScalDlg csd;
-	csd.m_bInversion = m_bButInversion;
-	csd.m_iXY = 0;
-	UpdateData(false);
-	if (csd.DoModal()==IDOK)
-	{ UpdateData();
-	  m_bButInversion = csd.m_bInversion;
-	}
-	
-}
-
-void CLineDlg::OnScaleY() 
-{
-	// TODO: Add your command handler code here
-	CScalDlg csd;
-	csd.m_bInversion = m_bButInversionY;
-	csd.m_iXY = 1;
-	UpdateData(false);
-	if (csd.DoModal()==IDOK)
-	{ UpdateData();
-	  m_bButInversionY = csd.m_bInversion;
-	}
-
-	
-}
-*/
 
 void CLineDlg::OnFileDelete() 
 {
@@ -30978,67 +25892,7 @@ void CLineDlg::OnCheckLooping()
 	UpdateData(false);
 	
 }
-/*
-void CLineDlg::ShowButtonLoopingCompensation()
-{
-	TRACE(_T("ShowButtonLoopingCompensation()\n"));
-	UpdateData();
-//  if ((m_itipimp==TIP_IMP) || (m_irazv==DC_POS || m_irazv==DC_NEG))
-	if (m_irazv==IMP_POS || m_irazv==IMP_NEG || m_irazv==DC_POS || m_irazv==DC_NEG)
-  { GetDlgItem(IDC_CHECK_LOOPING)->EnableWindow(false);//ShowWindow(SW_HIDE);//компенсация "петли" не доступна
-//	GetDlgItem(IDC_STATIC_LOOPING)->EnableWindow(false);
-//	GetDlgItem(IDC_STATIC_LOOPING)->ShowWindow(SW_HIDE);
-	GetDlgItem(IDC_CHECKKOLREJHIGH)->EnableWindow(true);//ShowWindow(SW_SHOW);//"Экранная лупа" доступна
-//	GetDlgItem(IDC_STATIC_ICON_LUPA)->ShowWindow(SW_SHOW);
-    m_bLoopingOld = m_bLooping;
-	m_bLooping = false;
-    if (m_bCheckKolRejHigh)
-	{
-	  GetDlgItem(IDC_RADIO_LEFT)->EnableWindow(false);
-	  GetDlgItem(IDC_RADIO_CENTER)->EnableWindow(false);
-	  GetDlgItem(IDC_RADIO_RIGHT)->EnableWindow(false);
-	}
-	else
-	{
-	  GetDlgItem(IDC_RADIO_LEFT)->EnableWindow(true);
-	  GetDlgItem(IDC_RADIO_CENTER)->EnableWindow(true);
-	  GetDlgItem(IDC_RADIO_RIGHT)->EnableWindow(true);
-	}
-  }
-  else
-  {
-	int nTab = m_TabCtrlTuning.GetCurSel();
-	if (nTab==0)
-	{
-	GetDlgItem(IDC_CHECK_LOOPING)->EnableWindow(true);//ShowWindow(SW_SHOW);//компенсация "петли" доступна
-//	GetDlgItem(IDC_STATIC_LOOPING)->EnableWindow(true);
-//	GetDlgItem(IDC_STATIC_LOOPING)->ShowWindow(SW_SHOW);
-	GetDlgItem(IDC_CHECKKOLREJHIGH)->EnableWindow(false);//ShowWindow(SW_HIDE);//"Экранная лупа" не доступна
-//	GetDlgItem(IDC_STATIC_ICON_LUPA)->ShowWindow(SW_HIDE);
-	}
-	m_bLooping = m_bLoopingOld;
-	m_bCheckKolRejHigh = false;
-	  GetDlgItem(IDC_RADIO_LEFT)->EnableWindow(true);
-	  GetDlgItem(IDC_RADIO_CENTER)->EnableWindow(true);
-	  GetDlgItem(IDC_RADIO_RIGHT)->EnableWindow(true);
-  }
-  if (m_irazv == AC || m_iQue1==BAZA) 
-  {//генерация ступенек не доступна
-	  GetDlgItem(IDC_CHECK_FAMILY)->EnableWindow(false);
-	  m_bFamilyVklOld = m_bFamilyVkl;
-	  m_bFamilyVkl = false;
-	  m_iFamilyVkl = 0;
-  }
-  else
-  {//генерация ступенек доступна
-	  GetDlgItem(IDC_CHECK_FAMILY)->EnableWindow(true);
-	  m_bFamilyVkl = m_bFamilyVklOld;
-	  if (m_bFamilyVkl) m_iFamilyVkl=1;
-				  else  m_iFamilyVkl=0;
-  }
-  UpdateData(false);
-}
-*/
+
 
 void CLineDlg::ShowButtonLoopingCompensation()
 {
@@ -32740,29 +27594,6 @@ void CLineDlg::OnSelchangeComboKommutator()
 {
 	// TODO: Add your control notification handler code here
 	UpdateData();
-/*	BOOL fl=false;
-	if (m_iQue1==BAZA)
-	{ if (m_iKommutator==1) fl=true;
-		m_iQue1=COLLECTOR;
-		UpdateData(FALSE);
-	}
-*/
-/*	switch(m_iQue1)
-	{
-	case COLLECTOR:	if (n_IPPP==1 && n_Switch==2 && m_irazv != IMP_NEG) m_irazv = IMP_NEG;
-						if (n_IPPP==1 && n_Switch==1 && m_irazv != IMP_POS) m_irazv = IMP_POS;
-						if (n_Switch==0 && m_irazv != DC_POS && 
-							m_irazv != IMP_POS && m_irazv != IMP_NEG)  m_irazv = DC_POS;
-						break;
-     case BAZA:		if (n_IPPP==1 && n_Switch==2 && m_irazv != IMP_NEG) m_irazv = IMP_NEG;
-						if (n_IPPP==1 && n_Switch==1 && m_irazv != IMP_POS) m_irazv = IMP_POS;
-						if (n_Switch==0 && m_irazv != DC_POS && 
-							m_irazv != IMP_POS && m_irazv != IMP_NEG)  m_irazv = DC_POS;
-						break;
-	}
-		UpdateData(FALSE);
-
-*/ 						
 						
 	InitTest();
 	SetStringsSourceMeas();
@@ -33548,7 +28379,6 @@ void CLineDlg::ShowTaskBar(BOOL flagShow)
 {
 	CRect rectWorkArea=CRect(0,0,0,0);
 	CRect rectTaskBar=CRect(0,0,0,0);
-//	HWND hWnd=FindWindow(_T("HHTaskBar"),_T(""));
 	CWnd* hWnd=FindWindow(_T("HHTaskBar"),_T(""));
 
 	if (flagShow)
@@ -33557,11 +28387,9 @@ void CLineDlg::ShowTaskBar(BOOL flagShow)
 		SystemParametersInfo(SPI_GETWORKAREA,0,(LPVOID)&rectWorkArea,0);
 		if (hWnd)
 		{
-//			GetWindowRect(hWnd,&rectTaskBar);
 			hWnd->GetWindowRect(&rectTaskBar);
 			rectWorkArea.bottom = RectWnd.bottom - rectTaskBar.Height();
 			SystemParametersInfo(SPI_SETWORKAREA,0,(LPVOID)&rectWorkArea,0);
-//			ShowWindow(hWnd,SW_SHOW);
 			hWnd->ShowWindow(SW_SHOW);
 		}
 	}
@@ -33571,11 +28399,9 @@ void CLineDlg::ShowTaskBar(BOOL flagShow)
 		SystemParametersInfo(SPI_GETWORKAREA,0,(LPVOID)&rectWorkArea,0);
 		if (hWnd)
 		{
-//			GetWindowRect(hWnd,&rectTaskBar);
 			hWnd->GetWindowRect(&rectTaskBar);
 			rectWorkArea.bottom = RectWnd.bottom;
 			SystemParametersInfo(SPI_SETWORKAREA,0,(LPVOID)&rectWorkArea,0);
-//			ShowWindow(hWnd,SW_HIDE);
 			hWnd->ShowWindow(SW_HIDE);
 		}
 	}
