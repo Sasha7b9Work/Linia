@@ -15,3 +15,8 @@ goto Exit
 @echo %TIME%   Complete
 
 :Exit
+
+copy ..\..\..\files\Linia.loc ..\..\generated\Win32\Linia2 /Y
+rmdir ..\..\generated\Win32\Linia2\resources /S /Q
+mkdir ..\..\generated\Win32\Linia2\resources
+robocopy ..\..\..\files\resources ..\..\generated\Win32\Linia2\resources /E /MT:16
