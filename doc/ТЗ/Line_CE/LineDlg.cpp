@@ -25498,8 +25498,6 @@ void CLineDlg::MarkerNoakt()
 { 
 // int nTab = m_TabCtrlParam.GetCurSel();
   
-//  ShowControls(aVid2,SIZEOF_ARRAY(aVid2),FALSE);
-//  ShowControls(aVid1,SIZEOF_ARRAY(aVid1),TRUE);
   if (m_bTangent)
   { m_bTangent=false;
     m_Chart.DrawSecant(false);
@@ -25512,11 +25510,7 @@ void CLineDlg::MarkerNoakt()
 
 void CLineDlg::MarkerAkt() 
 {
-//	ShowControls(aVid1,SIZEOF_ARRAY(aVid1),FALSE);
-//	ShowControls(aVid2,SIZEOF_ARRAY(aVid2),TRUE);
 	ResetMarkers();
-//	DisplayParam();
-//	DisplayRef();
 }
 
 void CLineDlg::OnMarkerNoakt() 
@@ -25534,7 +25528,6 @@ void CLineDlg::OnMarkerNoakt()
 
 void CLineDlg::OnDelTstUser() 
 {//загрузить тест из библиотеки пользовательских тестов
-	// TODO: Add your command handler code here
 	CDelTstDlg dlg;
 	dlg.what_directory = TST_USER;
 	dlg.m_nelement = m_nelement;
@@ -25543,14 +25536,7 @@ void CLineDlg::OnDelTstUser()
 	if (dlg.DoModal()==IDOK)
 	{
 		  UpdateData();
-//	   if (m_nelement == dlg.m_nelement)
-//	  {
-/*	   if (m_nelement != dlg.m_nelement)
-	   {
-		  m_nelement = dlg.m_nelement;
-		  InitTest();
-	   }
-*/		//загрузить тест
+		//загрузить тест
 		  CString str = dlg.m_sname_tst;
 		  nameTst = strPassTstUser + str;
 		  int l=str.GetLength();
@@ -25601,7 +25587,6 @@ void CLineDlg::OnDelTstUser()
 
 void CLineDlg::OnDelTstStandart() 
 {//загрузить тест из библиотеки стандартных тестов
-	// TODO: Add your command handler code here
 	CDelTstDlg dlg;
 	dlg.what_directory = TST_STANDART;
 	dlg.m_nelement = m_nelement;
@@ -25610,14 +25595,7 @@ void CLineDlg::OnDelTstStandart()
 	if (dlg.DoModal()==IDOK)
 	{
 	   UpdateData();
-//	   if (m_nelement == dlg.m_nelement)
-//	  {
-/*	   if (m_nelement != dlg.m_nelement)
-	   {
-		  m_nelement = dlg.m_nelement;
-		  InitTest();
-	   }
-*/		//загрузить тест
+		//загрузить тест
 		  CString str = dlg.m_sname_tst;
 		  nameTst = strPassTstStandart + str;
 		  int l=str.GetLength();
@@ -25645,48 +25623,24 @@ void CLineDlg::OnDelTstStandart()
 	        strTestName = str_EL + _T(" \\ ") + str_MOD;//str_MOD;
 	        SetTextInfo(_T(" TEST:  ") + strTestName);
 
-// 	      BOOL b = ExtractParamFromTst();
-//		  if (b)
-//		  { 
-//	        SetTextInfo(_T("TEST:  ") + strTestName);
-//			ControlParam();
-///*			InitStatusKnot();
-//			InitGnezdo();		//Добавила 28.11.17
 			InitDiapazonKol();	//инициализация диапазонов коллектора (в зависимости от вида развёртки)
 			InitDiapazonBaza();	//инициализация диапазонов базы
 			InitDiapazonDop();	//инициализация диапазонов доп.канала
 
-//			SetGnezdo();
-//			InitIconImp();
-//*/			
 	        int  nTab = 0;
         	m_TabCtrlParam.SetCurSel(nTab);
 	        InitPage(nTab);	
-//		    InitPage(0);
 			b_InitAxis=true;
 			ControlParam();
 		  }
 		  else
 		  {//файл отсутствует 
-//            m_MOD=_T("");
-//		    str_EL = m_EL;
-//	        str_MOD = m_MOD;
-//		    strTestName = _T("");
-//	        SetTextInfo(_T("Введите наименование теста!"));
 			str_EL		= _T("");
 			str_MOD		= _T("");
 			strTestName   = _T("");
 			str_PRIM = _T("");
 			SetTextInfo(_T("Выберите тест для измерения!"));
-//	        UpdateData(FALSE);
 		  }
-//	   }
-//	   else 
-//	   { 
-//	        SetTextInfo(_T("Категория загружаемого теста не соответствует выбранной!"));
-//	        UpdateData(FALSE);
-//	   }
-
 	}
 	else SetModifiedMemory();
 }
@@ -25694,7 +25648,6 @@ void CLineDlg::OnDelTstStandart()
 
 void CLineDlg::OnFileDelete() 
 {
-	// TODO: Add your command handler code here
 	CParolDlg dlgp;
 	dlgp.what_save = FILE_MOD;
 	UpdateData(false);
