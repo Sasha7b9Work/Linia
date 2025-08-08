@@ -59,7 +59,6 @@ private:
     void OnEventToggleButton(wxCommandEvent &);
     void OnEventRadioButton(wxCommandEvent &);
     void OnEventComboBox(wxCommandEvent &);
-    void OnEventPaint(wxPaintEvent &);
 
     // Отщёлкнуть все, кроме id
     void UnсheckAllAcross(int id);

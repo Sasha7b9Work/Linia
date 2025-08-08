@@ -6,6 +6,7 @@
 #include "Utils/SystemDepend.h"
 #include "Controls/SpinBox.h"
 #include "Panels/Panel03_Config/WindowLibraryTests.h"
+#include "Controls/PainterBMP.h"
 
 
 PanelConfig *PanelConfig::self = nullptr;
@@ -20,7 +21,6 @@ PanelConfig::PanelConfig(wxWindow* parent) :
     Bind(wxEVT_TOGGLEBUTTON, &PanelConfig::OnEventToggleButton, this);
     Bind(wxEVT_RADIOBUTTON, &PanelConfig::OnEventRadioButton, this);
     Bind(wxEVT_COMBOBOX, &PanelConfig::OnEventComboBox, this);
-    Bind(wxEVT_PAINT, &PanelConfig::OnEventPaint, this);
 
     const int h = 20;
 
@@ -393,10 +393,7 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
     wxStaticBox *boxCategory = new wxStaticBox(panel, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 250 });
 
     {
-        if (!bmpCat1.LoadFile("resources/sch/cat1.bmp", wxBITMAP_TYPE_BMP))
-        {
-            LOG_ERROR("Не удалось загрузить файл изображения");
-        }
+        new PainterBMP(boxCategory, { 0, 0 }, { 32, 41 }, "resources/sch/cat1.bmp");
     }
 
     (void)boxCategory;
@@ -550,16 +547,5 @@ void PanelConfig::EnablePanel(int button_id)
     for (auto &str : str_panels)
     {
         str.panel->Show(str.button->GetId() == button_id);
-    }
-}
-
-
-void PanelConfig::OnEventPaint(wxPaintEvent &)
-{
-    wxPaintDC dc(this);
-
-    if (bmpCat1.IsOk())
-    {
-       dc.DrawBitmap(bmpCat1, 10, 200, true);
     }
 }
