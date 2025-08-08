@@ -393,7 +393,7 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
     wxStaticBox *boxCategory = new wxStaticBox(panel, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 250 });
 
     {
-        new PainterBMP(boxCategory, { 0, 0 }, { 32, 41 }, "resources/sch/cat1.bmp");
+        new PainterBMP(boxCategory, { 0, 0 }, { 32, 41 }, "BMP_CAT1");
     }
 
     (void)boxCategory;

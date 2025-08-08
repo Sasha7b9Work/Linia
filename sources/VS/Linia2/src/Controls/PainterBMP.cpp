@@ -6,7 +6,7 @@
 PainterBMP::PainterBMP(wxWindow *parent, const wxPoint &position, const wxSize &size, const wxString &file_name) :
     wxPanel(parent, wxID_ANY, position, size)
 {
-    if (!bitmap.LoadFile(file_name, wxBITMAP_TYPE_BMP))
+    if (!bitmap.LoadFile(file_name, wxBITMAP_TYPE_BMP_RESOURCE))
     {
         LOG_ERROR("Не удалось загрузить файл изображения %s", file_name.c_str().AsChar());
     }
