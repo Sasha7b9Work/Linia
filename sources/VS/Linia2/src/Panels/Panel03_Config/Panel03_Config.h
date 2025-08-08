@@ -1,6 +1,7 @@
 ﻿// 2025/6/1 17:20:51 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Panels/Panel.h"
+#include "Controls/PainterBMP.h"
 
 
 class PanelConfig : public Panel
@@ -15,7 +16,7 @@ public:
 
 private:
 
-    wxBitmap bmpCat1;
+    PainterBMP *bmpCategory[10];                // Схема категории
 
     wxComboBox *comboC = nullptr,
         *comboB = nullptr,
@@ -59,6 +60,7 @@ private:
     void OnEventToggleButton(wxCommandEvent &);
     void OnEventRadioButton(wxCommandEvent &);
     void OnEventComboBox(wxCommandEvent &);
+    void OnEventCategoryBmpClick(wxMouseEvent &);
 
     // Отщёлкнуть все, кроме id
     void UnсheckAllAcross(int id);

@@ -6,7 +6,6 @@
 #include "Utils/SystemDepend.h"
 #include "Controls/SpinBox.h"
 #include "Panels/Panel03_Config/WindowLibraryTests.h"
-#include "Controls/PainterBMP.h"
 
 
 PanelConfig *PanelConfig::self = nullptr;
@@ -403,9 +402,17 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
         {
             for (int col = 0; col < 2; col++)
             {
-                new PainterBMP(boxCategory, { x0 + col * (w + d), y0 + row * (h + d) }, { w, h }, wxString::Format("BMP_CAT%d", row * 2 + col + 1));
+                int num_category = row * 2 + col;
+
+                bmpCategory[num_category] = new PainterBMP(boxCategory, { x0 + col * (w + d), y0 + row * (h + d) }, { w, h }, wxString::Format("BMP_CAT%d", num_category + 1));
+
+                bmpCategory[num_category]->SetEnabled(false);
+
+                bmpCategory[num_category]->Bind(wxEVT_LEFT_DOWN, &PanelConfig::OnEventCategoryBmpClick, this);
             }
         }
+
+        bmpCategory[0]->SetEnabled(true);
     }
 
     (void)boxCategory;
@@ -559,5 +566,16 @@ void PanelConfig::EnablePanel(int button_id)
     for (auto &str : str_panels)
     {
         str.panel->Show(str.button->GetId() == button_id);
+    }
+}
+
+
+void PanelConfig::OnEventCategoryBmpClick(wxMouseEvent &event)
+{
+    wxPanel *clickedPanel = dynamic_cast<wxPanel *>(event.GetEventObject());
+
+    for (int i = 0; i < 10; i++)
+    {
+        bmpCategory[i]->SetEnabled(clickedPanel == bmpCategory[i]);
     }
 }
