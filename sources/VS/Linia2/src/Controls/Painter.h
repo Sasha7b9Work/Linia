@@ -1,8 +1,11 @@
-// 2023/09/02 18:48:55 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2023/09/02 18:48:55 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
 
 struct Color;
+
+
+// Тупо заливает на себе прямоугольник
 
 
 class Painter : public wxPanel
