@@ -355,7 +355,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
 
 void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
 {
-    const int width_category = 70;
+    const int width_category = 77;
 
     wxStaticBox *boxCommutation = new wxStaticBox(panel, wxID_ANY, wxString("                           ") + _L("Коммутация"), { x, 100 }, { MainWindow::WIDTH3 - 10, 300 });
 
@@ -393,7 +393,19 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
     wxStaticBox *boxCategory = new wxStaticBox(panel, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 250 });
 
     {
-        new PainterBMP(boxCategory, { 0, 0 }, { 32, 41 }, "BMP_CAT1");
+        int w = 32;
+        int h = 41;
+        int x0 = 5;
+        int y0 = 20;
+        int d = 3;
+
+        for (int row = 0; row < 5; row++)
+        {
+            for (int col = 0; col < 2; col++)
+            {
+                new PainterBMP(boxCategory, { x0 + col * (w + d), y0 + row * (h + d) }, { w, h }, wxString::Format("BMP_CAT%d", row * 2 + col + 1));
+            }
+        }
     }
 
     (void)boxCategory;

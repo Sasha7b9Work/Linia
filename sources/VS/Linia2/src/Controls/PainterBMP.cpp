@@ -21,6 +21,31 @@ void PainterBMP::OnEventPaint(wxPaintEvent &)
 
     if (bitmap.IsOk())
     {
-        dc.DrawBitmap(bitmap, 0, 0, true);
+        if (enabled)
+        {
+            dc.DrawBitmap(bitmap, 0, 0, false);
+        }
+        else
+        {
+            wxImage image = bitmap.ConvertToImage();
+
+            const wxColour white = *wxWHITE;
+            const wxColour grey(220, 220, 220);
+
+            image.Replace(white.Red(), white.Green(), white.Blue(),
+                grey.Red(), grey.Green(), grey.Blue());
+
+            wxBitmap modified(image);
+
+            dc.DrawBitmap(modified, 0, 0, false);
+        }
     }
+}
+
+
+void PainterBMP::SetEnabled(bool en)
+{
+    enabled = en;
+
+    Refresh();
 }

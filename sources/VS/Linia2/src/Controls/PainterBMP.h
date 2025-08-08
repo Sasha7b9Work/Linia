@@ -11,9 +11,13 @@ public:
 
     PainterBMP(wxWindow *, const wxPoint &, const wxSize &, const wxString &file_name);
 
+    void SetEnabled(bool);
+
 private:
 
     wxBitmap bitmap;
 
     void OnEventPaint(wxPaintEvent &);
+
+    bool enabled = true;
 };
