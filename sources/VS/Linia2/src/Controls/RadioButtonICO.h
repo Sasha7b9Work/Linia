@@ -18,4 +18,6 @@ private:
 
     void OnEventRadioButton(wxCommandEvent &);
     void OnEventMouseDown(wxMouseEvent &);
+
+    void SendEvent();
 };

@@ -26,22 +26,22 @@ void RadioButtonICO::OnEventRadioButton(wxCommandEvent &event)
 {
     if (event.GetId() == button->GetId())
     {
-        RadioButtonICO *object = this;
-        wxCommandEvent evt(wxEVT_RADIOBUTTON, object->GetId());
-        evt.SetInt(1);
-        evt.SetEventObject(object);
-
-        GetParent()->ProcessWindowEvent(evt);
+        SendEvent();
     }
 }
 
 
 void RadioButtonICO::OnEventMouseDown(wxMouseEvent &)
 {
+    SendEvent();
+}
+
+
+void RadioButtonICO::SendEvent()
+{
     RadioButtonICO *object = this;
     wxCommandEvent evt(wxEVT_RADIOBUTTON, object->GetId());
     evt.SetInt(1);
     evt.SetEventObject(object);
-
     GetParent()->ProcessWindowEvent(evt);
 }
