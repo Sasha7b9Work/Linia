@@ -94,25 +94,21 @@ void PanelConfig::CreatePanelChannelC(wxPanel *panel, int x, int w)
     wxStaticBox *boxScan = new wxStaticBox(panel, wxID_ANY, _L("Развёртка"), { x, 0 }, { w, 160 });
 
     {
-        wxSize size_rb{ 60, 15 };
+        const wxSize size_rb{ 60, 15 };
 
-        int x0 = 20;
+        rbScan[0] = new RadioButtonICO(boxScan, { 10, SD::Y_SB(20) }, size_rb, "icons/graphs/imp_up.ico");
+        rbScan[1] = new RadioButtonICO(boxScan, { 70, SD::Y_SB(20) }, size_rb, "icons/graphs/imp_down.ico");
 
-        rbScan[0] = new wxRadioButton(boxScan, wxID_ANY, "", {10, SD::Y_SB(20)}, size_rb);
-        bmpScan[0] = new PainterBMP(rbScan[0], {x0, SD::Y_SB(0)}, {32, 32}, "icons/graphs/imp_up.ico");
+        rbScan[2] = new RadioButtonICO(boxScan, { 10, SD::Y_SB(50) }, size_rb, "icons/graphs/triang_up.ico");
+        rbScan[3] = new RadioButtonICO(boxScan, { 70, SD::Y_SB(50) }, size_rb, "icons/graphs/triang_down.ico");
 
-        rbScan[1] = new wxRadioButton(boxScan, wxID_ANY, "", { 70, SD::Y_SB(20) }, size_rb);
+        rbScan[4] = new RadioButtonICO(boxScan, { 10, SD::Y_SB(80) }, size_rb, "icons/graphs/sin_hi.ico");
+        rbScan[5] = new RadioButtonICO(boxScan, { 70, SD::Y_SB(80) }, size_rb, "icons/graphs/sin_lo.ico");
 
-        rbScan[2] = new wxRadioButton(boxScan, wxID_ANY, "", { 10, SD::Y_SB(50) }, size_rb);
-        rbScan[3] = new wxRadioButton(boxScan, wxID_ANY, "", { 70, SD::Y_SB(50) }, size_rb);
-
-        rbScan[4] = new wxRadioButton(boxScan, wxID_ANY, "", { 10, SD::Y_SB(80) }, size_rb);
-        rbScan[5] = new wxRadioButton(boxScan, wxID_ANY, "", { 70, SD::Y_SB(80) }, size_rb);
-
-        rbScan[6] = new wxRadioButton(boxScan, wxID_ANY, "", { 130, SD::Y_SB(20) }, size_rb);
+        rbScan[6] = new RadioButtonICO(boxScan, { 130, SD::Y_SB(20) }, size_rb, "icons/graphs/sin.ico");
 
         {
-            wxRadioButton *object = rbScan[0];
+            RadioButtonICO *object = rbScan[0];
             wxCommandEvent evt(wxEVT_RADIOBUTTON, object->GetId());
             evt.SetInt(1);
             evt.SetEventObject(object);
@@ -539,7 +535,11 @@ void PanelConfig::OnEventToggleButton(wxCommandEvent &event)
 
 void PanelConfig::OnEventRadioButton(wxCommandEvent &event)
 {
-    ((wxRadioButton *)event.GetEventObject())->SetValue(true);
+    for (int i = 0; i < 7; i++)
+    {
+        bool value = ((RadioButtonICO *)event.GetEventObject()) == rbScan[i];
+        rbScan[i]->SetValue(value);
+    }
 
     event.Skip();
 }

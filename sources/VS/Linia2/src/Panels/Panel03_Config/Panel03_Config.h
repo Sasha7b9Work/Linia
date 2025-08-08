@@ -2,6 +2,7 @@
 #pragma once
 #include "Panels/Panel.h"
 #include "Controls/PainterBMP.h"
+#include "Controls/RadioButtonICO.h"
 
 
 class PanelConfig : public Panel
@@ -17,8 +18,7 @@ public:
 private:
 
     // Канал C
-    wxRadioButton *rbScan[7];                   // Развёртка
-    PainterBMP *bmpScan[7];                     // Развёртка
+    RadioButtonICO *rbScan[7];                   // Развёртка
 
     // Схема включения
     PainterBMP *bmpCategory[10];                // Категория
