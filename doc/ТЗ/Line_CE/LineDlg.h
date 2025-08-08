@@ -593,7 +593,7 @@ BOOL	InitDialog();
 	CString	m_MOD;
 	CString	m_sKolMeasU;
 	CString	m_sKolMeasI;
-	int		m_irazv;
+	int		m_irazv;                // Канал С - развёртка
 	CString	m_sSliderKolU;
 	int		m_iKolU;
 	int		m_iKolI;

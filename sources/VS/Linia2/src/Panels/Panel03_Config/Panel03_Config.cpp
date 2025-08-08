@@ -96,16 +96,16 @@ void PanelConfig::CreatePanelChannelC(wxPanel *panel, int x, int w)
     {
         const wxSize size_rb{ 50, 30 };
 
-        rbScan[0] = new RadioButtonICO(boxScan, { 10, SD::Y_SB(20) }, size_rb, "icons/graphs/imp_up.ico");
-        rbScan[1] = new RadioButtonICO(boxScan, { 70, SD::Y_SB(20) }, size_rb, "icons/graphs/imp_down.ico");
+        rbScan[0] = new RadioButtonICO(boxScan, { 10, SD::Y_SB(20) }, size_rb, "icons/graphs/imp_up.ico");      // IMP_POS  IDC_RADIO_RAZVIMPPOSITIVE   OnRadioRazvimppositive
+        rbScan[1] = new RadioButtonICO(boxScan, { 70, SD::Y_SB(20) }, size_rb, "icons/graphs/imp_down.ico");    // IMP_NEG  IDC_RADIO_RAZVIMPNEGATIVE
 
-        rbScan[2] = new RadioButtonICO(boxScan, { 10, SD::Y_SB(50) }, size_rb, "icons/graphs/triang_up.ico");
-        rbScan[3] = new RadioButtonICO(boxScan, { 70, SD::Y_SB(50) }, size_rb, "icons/graphs/triang_down.ico");
+        rbScan[2] = new RadioButtonICO(boxScan, { 10, SD::Y_SB(50) }, size_rb, "icons/graphs/triang_up.ico");   // DC_POS   IDC_RADIO_RAZVDCPOSITIVE
+        rbScan[3] = new RadioButtonICO(boxScan, { 70, SD::Y_SB(50) }, size_rb, "icons/graphs/triang_down.ico"); // DC_NEG   IDC_RADIO_RAZVDCNEGATIVE
 
-        rbScan[4] = new RadioButtonICO(boxScan, { 10, SD::Y_SB(80) }, size_rb, "icons/graphs/sin_hi.ico");
-        rbScan[5] = new RadioButtonICO(boxScan, { 70, SD::Y_SB(80) }, size_rb, "icons/graphs/sin_lo.ico");
+        rbScan[4] = new RadioButtonICO(boxScan, { 10, SD::Y_SB(80) }, size_rb, "icons/graphs/sin_hi.ico");      // SYN_POS  IDC_RADIO_SYNPOSITIVE
+        rbScan[5] = new RadioButtonICO(boxScan, { 70, SD::Y_SB(80) }, size_rb, "icons/graphs/sin_lo.ico");      // SYN_NEG  IDC_RADIO_SYNNEGATIVE
 
-        rbScan[6] = new RadioButtonICO(boxScan, { 130, SD::Y_SB(20) }, size_rb, "icons/graphs/sin.ico");
+        rbScan[6] = new RadioButtonICO(boxScan, { 130, SD::Y_SB(20) }, size_rb, "icons/graphs/sin.ico");        // AC       IDC_RADIO_RAZVAC
 
         {
             RadioButtonICO *object = rbScan[0];
@@ -535,10 +535,30 @@ void PanelConfig::OnEventToggleButton(wxCommandEvent &event)
 
 void PanelConfig::OnEventRadioButton(wxCommandEvent &event)
 {
+    RadioButtonICO *object = ((RadioButtonICO *)event.GetEventObject());
+
     for (int i = 0; i < 7; i++)
     {
-        bool value = ((RadioButtonICO *)event.GetEventObject()) == rbScan[i];
+        bool value = (object == rbScan[i]);
         rbScan[i]->SetValue(value);
+    }
+
+    if (object == rbScan[0])        // IDC_RADIO_RAZVIMPPOSITIVE OnRadioRazvimppositive()
+    {
+        /*
+        int irazv_old = m_irazv;
+        if (n_IPPP == 1 && n_Switch == 2)
+        {
+            m_irazv = IMP_NEG;
+        }
+        InitIconImp();
+        ChangeDiapazonKol();
+        ChangeDiapazonKolMeasU();
+        ShowRejimChanel();
+        ShowButtonLoopingCompensation();
+        if (iX == COLLECTOR && iY == COLLECTOR) ResetDisplay(LEFT);
+        int er = ControlParam();
+        */
     }
 }
 
