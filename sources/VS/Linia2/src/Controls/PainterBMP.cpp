@@ -12,6 +12,8 @@ PainterBMP::PainterBMP(wxWindow *parent, const wxPoint &position, const wxSize &
     }
 
     Bind(wxEVT_PAINT, &PainterBMP::OnEventPaint, this);
+
+    Refresh();
 }
 
 
@@ -30,9 +32,20 @@ void PainterBMP::OnEventPaint(wxPaintEvent &)
             wxImage image = bitmap.ConvertToImage();
 
             const wxColour white = *wxWHITE;
-            const wxColour grey(220, 220, 220);
+            wxColour grey(220, 220, 220);
 
             image.Replace(white.Red(), white.Green(), white.Blue(),
+                grey.Red(), grey.Green(), grey.Blue());
+
+            wxColour black(4, 4, 4);            // Линии
+            grey = { 100, 100, 100 };
+
+            image.Replace(black.Red(), black.Green(), black.Blue(),
+                grey.Red(), grey.Green(), grey.Blue());
+
+            black = { 165, 0, 33 };             // Надписи
+
+            image.Replace(black.Red(), black.Green(), black.Blue(),
                 grey.Red(), grey.Green(), grey.Blue());
 
             wxBitmap modified(image);
@@ -45,7 +58,10 @@ void PainterBMP::OnEventPaint(wxPaintEvent &)
 
 void PainterBMP::SetEnabled(bool en)
 {
-    enabled = en;
+    if (en != enabled)
+    {
+        enabled = en;
 
-    Refresh();
+        Refresh();
+    }
 }
