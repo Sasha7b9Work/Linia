@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-# Функция для конвертации файлов в C-массивы
-convert_files_to_c_arrays() {
+# Функция для конвертации всех изображений в один .h-файл
+convert_images_to_single_h() {
     local target_dir="$1"
+    local output_file="${2:-images.h}"  # По умолчанию: images.h
     
     # Проверка существования каталога
     if [[ ! -d "$target_dir" ]]; then
@@ -10,33 +11,34 @@ convert_files_to_c_arrays() {
         return 1
     fi
 
-    # Рекурсивная обработка файлов
-    find "$target_dir" -type f | while read -r file; do
-        # Пропускаем .h-файлы и бинарники
-        if [[ "$file" == *.h || "$file" == *.rc ]]; then
-            continue
-        fi
+    # Создаем или очищаем выходной файл
+    echo "// Автоматически сгенерированный файл с изображениями" > "$output_file"
+    echo "#pragma once" >> "$output_file"
+    echo "" >> "$output_file"
 
-        # Генерируем имя массива (заменяем /, . и - на _)
-        local array_name=$(basename "$file" | sed 's/[.-]/_/g')
-        local output_file="${file}.h"
-
-        echo "Конвертируем: $file -> $output_file"
-        xxd -i "$file" > "$output_file"
+    # Рекурсивно обрабатываем изображения (BMP/PNG/JPG)
+    find "$target_dir" -type f \( -iname "*.bmp" -o -iname "*.png" -o -iname "*.jpg" \) | while read -r file; do
+        # Генерируем имя массива (уникальное, с путем)
+        local array_name=$(echo "$file" | sed -e "s|^$target_dir/||" -e 's/[^a-zA-Z0-9]/_/g')
+        
+        echo "// Изображение: $file" >> "$output_file"
+        xxd -i "$file" | sed "s/unsigned char .*\[/unsigned char ${array_name}_img[/" >> "$output_file"
+        echo "" >> "$output_file"
+        
+        echo "Добавлено: $file -> $array_name"
     done
+
+    echo "Готово! Все изображения сохранены в $output_file"
 }
+
+# Пример вызова:
+convert_images_to_single_h "assets" "all_images.h"
+
 
 dir=$PWD
 
 cd ../../VS/Linia2/resources
 
-# Пример вызова функции для разных каталогов
-convert_files_to_c_arrays "."
-convert_files_to_c_arrays "buttons"
-convert_files_to_c_arrays "grid"
-convert_files_to_c_arrays "icons"
-convert_files_to_c_arrays "pics"
-convert_files_to_c_arrays "sch"
-convert_files_to_c_arrays "sch/lines"
+convert_images_to_single_h "." "images.h"
 
 cd $dir
