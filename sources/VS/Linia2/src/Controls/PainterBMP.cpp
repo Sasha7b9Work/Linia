@@ -1,32 +1,19 @@
 ﻿// 2025/08/08 13:57:34 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Controls/PainterBMP.h"
-#ifdef WIN32
-    #pragma warning(push, 0)
-#endif
-#include "../resources/images.h"
-#ifdef WIN32
-    #pragma warning(pop)
-#endif
-
-
-/*
-wxMemoryInputStream memStream(image_bmp, image_bmp_len);
-wxBitmap bitmap;
-if (bitmap.LoadFile(memStream, wxBITMAP_TYPE_BMP))
-{
-    // Успешно загружено!
-}
-*/
 
 
 PainterBMP::PainterBMP(wxWindow *parent, const wxPoint &position, const wxSize &size, const wxString &file_name) :
     wxPanel(parent, wxID_ANY, position, size)
 {
-    if (!bitmap.LoadFile(file_name, wxBITMAP_TYPE_BMP_RESOURCE))
+    wxImage image;
+
+    if (!image.LoadFile(file_name, wxBITMAP_TYPE_BMP))
     {
         LOG_ERROR("Не удалось загрузить файл изображения %s", file_name.c_str().AsChar());
     }
+
+    bitmap = wxBitmap(image);
 
     Bind(wxEVT_PAINT, &PainterBMP::OnEventPaint, this);
 

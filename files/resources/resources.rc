@@ -45,6 +45,17 @@ CSQUERY                 BITMAP                  "wx/msw/csquery.bmp"
 
 WXBITMAP_STD_COLOURS    BITMAP                  "wx/msw/colours.bmp"
 
+BMP_CAT1                BITMAP  "sch/cat1.bmp"
+BMP_CAT2                BITMAP  "sch/cat2.bmp"
+BMP_CAT3                BITMAP  "sch/cat3.bmp"
+BMP_CAT4                BITMAP  "sch/cat4.bmp"
+BMP_CAT5                BITMAP  "sch/cat5.bmp"
+BMP_CAT6                BITMAP  "sch/cat6.bmp"
+BMP_CAT7                BITMAP  "sch/cat7.bmp"
+BMP_CAT8                BITMAP  "sch/cat8.bmp"
+BMP_CAT9                BITMAP  "sch/cat9.bmp"
+BMP_CAT10               BITMAP  "sch/cat10.bmp"
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Menu

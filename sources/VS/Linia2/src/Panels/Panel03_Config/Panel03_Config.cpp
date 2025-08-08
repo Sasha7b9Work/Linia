@@ -404,7 +404,7 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
             {
                 int num_category = row * 2 + col;
 
-                bmpCategory[num_category] = new PainterBMP(boxCategory, { x0 + col * (w + d), y0 + row * (h + d) }, { w, h }, wxString::Format("BMP_CAT%d", num_category + 1));
+                bmpCategory[num_category] = new PainterBMP(boxCategory, { x0 + col * (w + d), y0 + row * (h + d) }, { w, h }, wxString::Format("resources/sch/cat%d.bmp", num_category + 1));
 
                 bmpCategory[num_category]->SetEnabled(false);
 
