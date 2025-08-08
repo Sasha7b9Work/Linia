@@ -17,4 +17,5 @@ private:
     PainterBMP *bmp = nullptr;
 
     void OnEventRadioButton(wxCommandEvent &);
+    void OnEventMouseDown(wxMouseEvent &);
 };

@@ -8,9 +8,10 @@ RadioButtonICO::RadioButtonICO(wxWindow *parent, const wxPoint &position, const 
     wxPanel(parent, wxID_ANY, position, size)
 {
     button = new wxRadioButton(this, wxID_ANY, "", { 0, 0 }, size);
-    bmp = new PainterBMP(button, { 20, 0 }, { 32, 32 }, name_ico);
+    bmp = new PainterBMP(button, { 15, 8 }, { 32, 32 }, name_ico);
 
     button->Bind(wxEVT_RADIOBUTTON, &RadioButtonICO::OnEventRadioButton, this);
+    bmp->Bind(wxEVT_LEFT_DOWN, &RadioButtonICO::OnEventMouseDown, this);
 }
 
 
@@ -32,4 +33,15 @@ void RadioButtonICO::OnEventRadioButton(wxCommandEvent &event)
 
         GetParent()->ProcessWindowEvent(evt);
     }
+}
+
+
+void RadioButtonICO::OnEventMouseDown(wxMouseEvent &)
+{
+    RadioButtonICO *object = this;
+    wxCommandEvent evt(wxEVT_RADIOBUTTON, object->GetId());
+    evt.SetInt(1);
+    evt.SetEventObject(object);
+
+    GetParent()->ProcessWindowEvent(evt);
 }

@@ -94,7 +94,7 @@ void PanelConfig::CreatePanelChannelC(wxPanel *panel, int x, int w)
     wxStaticBox *boxScan = new wxStaticBox(panel, wxID_ANY, _L("Развёртка"), { x, 0 }, { w, 160 });
 
     {
-        const wxSize size_rb{ 60, 15 };
+        const wxSize size_rb{ 50, 30 };
 
         rbScan[0] = new RadioButtonICO(boxScan, { 10, SD::Y_SB(20) }, size_rb, "icons/graphs/imp_up.ico");
         rbScan[1] = new RadioButtonICO(boxScan, { 70, SD::Y_SB(20) }, size_rb, "icons/graphs/imp_down.ico");
@@ -540,8 +540,6 @@ void PanelConfig::OnEventRadioButton(wxCommandEvent &event)
         bool value = ((RadioButtonICO *)event.GetEventObject()) == rbScan[i];
         rbScan[i]->SetValue(value);
     }
-
-    event.Skip();
 }
 
 
