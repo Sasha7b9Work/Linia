@@ -11182,49 +11182,8 @@ void CLineDlg::OnModify()
 //  else MessageBox(_T("Выберите тест для изменения!"),NULL,MB_OK|MB_ICONERROR);//???_???
 	
 }//0
-/*
-void CLineDlg::InitGnezdo() 
-{
-  CComboBox *cbptr = (CComboBox*) GetDlgItem(IDC_COMBO_GNEZDO_C);
-  cbptr->ResetContent();
-  CComboBox *cbptrb = (CComboBox*) GetDlgItem(IDC_COMBO_GNEZDO_B);
-  cbptrb->ResetContent();
-  CComboBox *cbptre = (CComboBox*) GetDlgItem(IDC_COMBO_GNEZDO_E);
-  cbptre->ResetContent();
-	if (m_nelement==DIOD || m_nelement==RES)
-	{ cbptr->AddString(_T("C"));
-	  cbptre->AddString(_T("E"));
-	  m_iGnezdoC=0;
-	  m_iGnezdoE=0;
-	}
-	else 
-	{ cbptr->AddString(_T("C"));
-	  cbptr->AddString(_T("B"));
-	  cbptr->AddString(_T("E"));
-	  cbptrb->AddString(_T("C"));
-	  cbptrb->AddString(_T("B"));
-	  cbptrb->AddString(_T("E"));
-	  cbptre->AddString(_T("C"));
-	  cbptre->AddString(_T("B"));
-	  cbptre->AddString(_T("E"));
-	  if (m_nelement==NPN || m_nelement==PNP)
-	  {
-	    cbptr->AddString(_T("обрыв"));
-	    cbptre->AddString(_T("обрыв"));
-	  }
-	  if (m_nelement==NPN4 || m_nelement==PNP4)
-	  {
-	    cbptr->AddString(_T("обрыв"));
-	    cbptrb->AddString(_T("обрыв"));
-	    cbptre->AddString(_T("обрыв"));
-	  }
-	  m_iGnezdoC=0;
-	  m_iGnezdoB=1;
-	  m_iGnezdoE=2;
-	}
-	UpdateData(FALSE);
-}
-*/
+
+
 void CLineDlg::InitGnezdo() 
 {
   CComboBox *cbptr = (CComboBox*) GetDlgItem(IDC_COMBO_GNEZDO_C);
@@ -11254,19 +11213,6 @@ void CLineDlg::InitGnezdo()
 	  cbptre->AddString(_T("B"));
 	  cbptre->AddString(_T("E"));
  	  cbptre->AddString(_T("обрыв"));
-/*
-	  if (m_nelement==NPN || m_nelement==PNP)
-	  {
-	    cbptr->AddString(_T("обрыв"));
-	    cbptre->AddString(_T("обрыв"));
-	  }
-	  if (m_nelement==NPN4 || m_nelement==PNP4)
-	  {
-	    cbptr->AddString(_T("обрыв"));
-	    cbptrb->AddString(_T("обрыв"));
-	    cbptre->AddString(_T("обрыв"));
-	  }
-*/
 	  m_iGnezdoC=0;
 	  m_iGnezdoB=1;
 	  m_iGnezdoE=2;
@@ -11312,18 +11258,6 @@ void CLineDlg::SetGnezdo()
 	  cbptre->AddString(_T("B"));
 	  cbptre->AddString(_T("E"));
 	  cbptre->AddString(_T("обрыв"));
-/*	  if (m_nelement==NPN || m_nelement==PNP)
-	  {
-	    cbptr->AddString(_T("обрыв"));
-	    cbptre->AddString(_T("обрыв"));
-	  }
-	  if (m_nelement==NPN4 || m_nelement==PNP4)
-	  {
-	    cbptr->AddString(_T("обрыв"));
-	    cbptrb->AddString(_T("обрыв"));
-	    cbptre->AddString(_T("обрыв"));
-	  }
-*/
 	  cbptr->SetCurSel(m_iGnezdoC);
 	  cbptrb->SetCurSel(m_iGnezdoB);
 	  cbptre->SetCurSel(m_iGnezdoE);
@@ -11339,8 +11273,6 @@ void CLineDlg::SetGnezdo()
 
 	  
 	}
-
-//	UpdateData(FALSE);	//убрала 29.11.17
 }
 
 

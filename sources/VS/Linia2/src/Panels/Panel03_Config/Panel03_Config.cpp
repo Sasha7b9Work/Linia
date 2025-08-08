@@ -363,6 +363,7 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
         choices.Add(_L("внутренняя"));
         choices.Add(_L("внешняя"));
 
+        // IDC_COMBO_KOMMUTATOR
         new wxComboBox(boxCommutation, wxID_ANY, choices[0], { x + width_category, SD::Y_SB(20) }, { 110, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
         choices.clear();
@@ -398,6 +399,20 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
         int y0 = 20;
         int d = 3;
 
+        wxString tooltips[10] =
+        {
+            "Диод",
+            "Тиристор",
+            "Биполярный NPN-транзистор (трёхполюсный)",
+            "Биполярный PNP-транзистор (трёхполюсный)",
+            "Полевой или МОП транзистор NMOS(трёхполюсный)",
+            "Полевой или МОП транзистор PMOS(трёхполюсный)",
+            "Биполярный NPN-транзистор (четырёхполюсный)",
+            "Биполярный PNP-транзистор (четырёхполюсный)",
+            "Полевой или МОП транзистор NMOS(четырёхполюсный)",
+            "Полевой или МОП транзистор PMOS(четырёхполюсный)"
+        };
+
         for (int row = 0; row < 5; row++)
         {
             for (int col = 0; col < 2; col++)
@@ -409,6 +424,8 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
                 bmpCategory[num_category]->SetEnabled(false);
 
                 bmpCategory[num_category]->Bind(wxEVT_LEFT_DOWN, &PanelConfig::OnEventCategoryBmpClick, this);
+
+                bmpCategory[num_category]->SetToolTip(tooltips[num_category]);
             }
         }
 
