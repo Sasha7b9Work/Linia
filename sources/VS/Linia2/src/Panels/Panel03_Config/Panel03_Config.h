@@ -15,6 +15,8 @@ public:
 
 private:
 
+    wxBitmap bmpCat1;
+
     wxComboBox *comboC = nullptr,
         *comboB = nullptr,
         *comboE = nullptr,
@@ -57,6 +59,7 @@ private:
     void OnEventToggleButton(wxCommandEvent &);
     void OnEventRadioButton(wxCommandEvent &);
     void OnEventComboBox(wxCommandEvent &);
+    void OnEventPaint(wxPaintEvent &);
 
     // Отщёлкнуть все, кроме id
     void UnсheckAllAcross(int id);
@@ -64,12 +67,8 @@ private:
     void EnablePanel(int button_id);
 
     void CreatePanelChannelC(wxPanel *, int x, int w);
-
     void CreatePanelChannelB(wxPanel *, int x, int w);
-
     void CreatePanelChannelS(wxPanel *, int x, int w);
-
     void CreatePanelCalculate(wxPanel *, int x, int w);
-
     void CreatePanelScheme(wxPanel *, int x, int w);
 };

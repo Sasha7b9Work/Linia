@@ -45,6 +45,8 @@ CSQUERY                 BITMAP                  "wx/msw/csquery.bmp"
 
 WXBITMAP_STD_COLOURS    BITMAP                  "wx/msw/colours.bmp"
 
+BMP_CAT1                BITMAP  "sch/cat1.bmp"
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Menu

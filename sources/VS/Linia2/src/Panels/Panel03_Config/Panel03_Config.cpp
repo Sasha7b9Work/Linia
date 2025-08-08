@@ -20,6 +20,7 @@ PanelConfig::PanelConfig(wxWindow* parent) :
     Bind(wxEVT_TOGGLEBUTTON, &PanelConfig::OnEventToggleButton, this);
     Bind(wxEVT_RADIOBUTTON, &PanelConfig::OnEventRadioButton, this);
     Bind(wxEVT_COMBOBOX, &PanelConfig::OnEventComboBox, this);
+    Bind(wxEVT_PAINT, &PanelConfig::OnEventPaint, this);
 
     const int h = 20;
 
@@ -391,6 +392,13 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
 
     wxStaticBox *boxCategory = new wxStaticBox(panel, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 250 });
 
+    {
+        if (!bmpCat1.LoadFile("resources/sch/cat1.bmp", wxBITMAP_TYPE_BMP))
+        {
+            LOG_ERROR("Не удалось загрузить файл изображения");
+        }
+    }
+
     (void)boxCategory;
 
     wxStaticBox *boxTest = new wxStaticBox(panel, wxID_ANY, _L("Тест"), { x + width_category + 5, 0 }, { MainWindow::WIDTH3 - width_category - 15, 100 });
@@ -542,5 +550,16 @@ void PanelConfig::EnablePanel(int button_id)
     for (auto &str : str_panels)
     {
         str.panel->Show(str.button->GetId() == button_id);
+    }
+}
+
+
+void PanelConfig::OnEventPaint(wxPaintEvent &)
+{
+    wxPaintDC dc(this);
+
+    if (bmpCat1.IsOk())
+    {
+       dc.DrawBitmap(bmpCat1, 10, 200, true);
     }
 }
