@@ -45,11 +45,6 @@ CSQUERY                 BITMAP                  "wx/msw/csquery.bmp"
 
 WXBITMAP_STD_COLOURS    BITMAP                  "wx/msw/colours.bmp"
 
-BITMAP_EYE_VISIBLE      BITMAP                  "eye-visible.bmp"
-
-BITMAP_EYE_NOT_VISIBLE  BITMAP                  "eye-not-visible.bmp"
-
-
 /////////////////////////////////////////////////////////////////////////////
 //
 // Menu
