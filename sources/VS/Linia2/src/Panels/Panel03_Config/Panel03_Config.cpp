@@ -44,7 +44,7 @@ PanelConfig::PanelConfig(wxWindow* parent) :
     {
         // Включаем панель
 
-        int id = btnScheme->GetId();
+        int id = btnChannelC->GetId();
 
         wxCommandEvent evt(wxEVT_TOGGLEBUTTON, id);
         evt.SetInt(1);
@@ -94,21 +94,25 @@ void PanelConfig::CreatePanelChannelC(wxPanel *panel, int x, int w)
     wxStaticBox *boxScan = new wxStaticBox(panel, wxID_ANY, _L("Развёртка"), { x, 0 }, { w, 160 });
 
     {
-        wxSize size_rb{ 50, 15 };
+        wxSize size_rb{ 60, 15 };
 
-        rbChanC_Scan1 = new wxRadioButton(boxScan, wxID_ANY, "1", { 10, SD::Y_SB(20) }, size_rb);
-        rbChanC_Scan2 = new wxRadioButton(boxScan, wxID_ANY, "2", { 70, SD::Y_SB(20) }, size_rb);
+        int x0 = 20;
 
-        rbChanC_Scan3 = new wxRadioButton(boxScan, wxID_ANY, "3", { 10, SD::Y_SB(50) }, size_rb);
-        rbChanC_Scan4 = new wxRadioButton(boxScan, wxID_ANY, "4", { 70, SD::Y_SB(50) }, size_rb);
+        rbScan[0] = new wxRadioButton(boxScan, wxID_ANY, "", {10, SD::Y_SB(20)}, size_rb);
+        bmpScan[0] = new PainterBMP(rbScan[0], {x0, SD::Y_SB(0)}, {32, 32}, "icons/graphs/imp_up.ico");
 
-        rbChanC_Scan5 = new wxRadioButton(boxScan, wxID_ANY, "5", { 10, SD::Y_SB(80) }, size_rb);
-        rbChanC_Scan6 = new wxRadioButton(boxScan, wxID_ANY, "6", { 70, SD::Y_SB(80) }, size_rb);
+        rbScan[1] = new wxRadioButton(boxScan, wxID_ANY, "", { 70, SD::Y_SB(20) }, size_rb);
 
-        rbChanC_Scan7 = new wxRadioButton(boxScan, wxID_ANY, "7", { 130, SD::Y_SB(20) }, size_rb);
+        rbScan[2] = new wxRadioButton(boxScan, wxID_ANY, "", { 10, SD::Y_SB(50) }, size_rb);
+        rbScan[3] = new wxRadioButton(boxScan, wxID_ANY, "", { 70, SD::Y_SB(50) }, size_rb);
+
+        rbScan[4] = new wxRadioButton(boxScan, wxID_ANY, "", { 10, SD::Y_SB(80) }, size_rb);
+        rbScan[5] = new wxRadioButton(boxScan, wxID_ANY, "", { 70, SD::Y_SB(80) }, size_rb);
+
+        rbScan[6] = new wxRadioButton(boxScan, wxID_ANY, "", { 130, SD::Y_SB(20) }, size_rb);
 
         {
-            wxRadioButton *object = rbChanC_Scan1;
+            wxRadioButton *object = rbScan[0];
             wxCommandEvent evt(wxEVT_RADIOBUTTON, object->GetId());
             evt.SetInt(1);
             evt.SetEventObject(object);
@@ -404,7 +408,7 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
             {
                 int num_category = row * 2 + col;
 
-                bmpCategory[num_category] = new PainterBMP(boxCategory, { x0 + col * (w + d), SD::Y_SB(y0 + row * (h + d)) }, { w, h }, wxString::Format("resources/sch/cat%d.bmp", num_category + 1));
+                bmpCategory[num_category] = new PainterBMP(boxCategory, { x0 + col * (w + d), SD::Y_SB(y0 + row * (h + d)) }, { w, h }, wxString::Format("sch/cat%d.bmp", num_category + 1));
 
                 bmpCategory[num_category]->SetEnabled(false);
 
@@ -424,6 +428,8 @@ void PanelConfig::CreatePanelScheme(wxPanel *panel, int x, int /*w*/)
         choices.Add("IdVd");
         choices.Add("_USER");
 
+        // IDC_COMBOMOD
+        // IDC_BUTTON_LOADTST
         comboTest = new wxComboBox(boxTest, wxID_ANY, choices[0], { 5, SD::Y_SB(20) }, { 110, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
         btnLoad = new wxButton(boxTest, wxID_ANY, _L("Загрузить"), { 5, SD::Y_SB(50) }, { 110, 30 });

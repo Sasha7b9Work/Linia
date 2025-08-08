@@ -16,7 +16,12 @@ public:
 
 private:
 
-    PainterBMP *bmpCategory[10];                // Схема категории
+    // Канал C
+    wxRadioButton *rbScan[7];                   // Развёртка
+    PainterBMP *bmpScan[7];                     // Развёртка
+
+    // Схема включения
+    PainterBMP *bmpCategory[10];                // Категория
 
     wxComboBox *comboC = nullptr,
         *comboB = nullptr,
@@ -24,14 +29,6 @@ private:
         *comboTest = nullptr;
 
     wxButton *btnLoad = nullptr;
-
-    wxRadioButton *rbChanC_Scan1 = nullptr,
-        *rbChanC_Scan2 = nullptr,
-        *rbChanC_Scan3 = nullptr,
-        *rbChanC_Scan4 = nullptr,
-        *rbChanC_Scan5 = nullptr,
-        *rbChanC_Scan6 = nullptr,
-        *rbChanC_Scan7 = nullptr;
 
     wxToggleButton *btnScheme = nullptr,
         *btnChannelC = nullptr,

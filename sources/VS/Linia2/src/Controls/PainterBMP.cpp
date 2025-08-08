@@ -6,14 +6,30 @@
 PainterBMP::PainterBMP(wxWindow *parent, const wxPoint &position, const wxSize &size, const wxString &file_name) :
     wxPanel(parent, wxID_ANY, position, size)
 {
-    wxImage image;
+    wxString path = wxString("resources/") + file_name;
 
-    if (!image.LoadFile(file_name, wxBITMAP_TYPE_BMP))
+    if (file_name[file_name.size() - 1] == 'p')
     {
-        LOG_ERROR("Не удалось загрузить файл изображения %s", file_name.c_str().AsChar());
-    }
+        wxImage image;
 
-    bitmap = wxBitmap(image);
+        if (!image.LoadFile(path, wxBITMAP_TYPE_BMP))
+        {
+            LOG_ERROR("Не удалось загрузить файл изображения %s", file_name.c_str().AsChar());
+        }
+
+        bitmap = wxBitmap(image);
+    }
+    else
+    {
+        wxIcon icon;
+
+        if (!icon.LoadFile(path, wxBITMAP_TYPE_ICO))
+        {
+            LOG_ERROR("Не удалось загрузить файл изображения %s", file_name.c_str().AsChar());
+        }
+
+        bitmap.CopyFromIcon(icon);
+    }
 
     Bind(wxEVT_PAINT, &PainterBMP::OnEventPaint, this);
 
@@ -29,7 +45,7 @@ void PainterBMP::OnEventPaint(wxPaintEvent &)
     {
         if (enabled)
         {
-            dc.DrawBitmap(bitmap, 0, 0, false);
+            dc.DrawBitmap(bitmap, 0, 0, true);
         }
         else
         {
