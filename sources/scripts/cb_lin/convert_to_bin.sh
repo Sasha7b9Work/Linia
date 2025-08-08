@@ -31,10 +31,6 @@ convert_images_to_single_h() {
     echo "Готово! Все изображения сохранены в $output_file"
 }
 
-# Пример вызова:
-convert_images_to_single_h "assets" "all_images.h"
-
-
 dir=$PWD
 
 cd ../../VS/Linia2/resources
