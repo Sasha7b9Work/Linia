@@ -1,21 +1,21 @@
 ﻿// 2023/09/02 18:49:09 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Controls/Painter.h"
+#include "Controls/PainterRect.h"
 #include "Settings/Color.h"
 
 
-Painter::Painter(wxWindow *parent, const wxPoint &position, const wxSize &size) :
+PainterRect::PainterRect(wxWindow *parent, const wxPoint &position, const wxSize &size) :
     wxPanel(parent, wxID_ANY, position, size)
 {
     wxPanel::SetSize(size);
     wxPanel::SetDoubleBuffered(true);
-    Bind(wxEVT_PAINT, &Painter::OnPaint, this);
+    Bind(wxEVT_PAINT, &PainterRect::OnPaint, this);
 
     color = wxColour(255U, 0, 0);
 }
 
 
-void Painter::OnPaint(wxPaintEvent &)
+void PainterRect::OnPaint(wxPaintEvent &)
 {
     wxPaintDC dc(this);
 
@@ -25,7 +25,7 @@ void Painter::OnPaint(wxPaintEvent &)
 }
 
 
-void Painter::SetColor(const Color &_color)
+void PainterRect::SetColor(const Color &_color)
 {
     float k = _color.GetBrightnessF();
 

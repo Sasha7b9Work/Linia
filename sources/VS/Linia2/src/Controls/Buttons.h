@@ -1,6 +1,6 @@
 // 2023/09/02 11:37:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Controls/Painter.h"
+#include "Controls/PainterRect.h"
 
 
 struct Color;
@@ -10,7 +10,7 @@ class ButtonColor : public wxButton
 {
 public:
 
-    ButtonColor(wxWindow *, int, const wxString &, wxPoint, wxSize, Painter *);
+    ButtonColor(wxWindow *, int, const wxString &, wxPoint, wxSize, PainterRect *);
 
     void SetColor(const Color &);
 
@@ -21,7 +21,7 @@ public:
 
 private:
 
-    Painter *m_painter = nullptr;
+    PainterRect *m_painter = nullptr;
 
     void OnMouseEvent(wxMouseEvent &);
 };

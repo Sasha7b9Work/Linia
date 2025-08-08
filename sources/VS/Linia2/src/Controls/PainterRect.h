@@ -8,10 +8,10 @@ struct Color;
 // Тупо заливает на себе прямоугольник
 
 
-class Painter : public wxPanel
+class PainterRect : public wxPanel
 {
 public:
-    Painter(wxWindow *parent, const wxPoint &position, const wxSize &size);
+    PainterRect(wxWindow *parent, const wxPoint &position, const wxSize &size);
 
     virtual void OnPaint(wxPaintEvent &);
 

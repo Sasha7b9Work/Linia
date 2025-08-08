@@ -5,7 +5,7 @@
 
 
 PainterRegister::PainterRegister(wxWindow *parent, PanelRegister *_panel, const wxPoint &position) :
-    Painter::Painter(parent, position, { 750, 150 }),
+    PainterRect(parent, position, { 750, 150 }),
     panel(_panel)
 {
     wxSize size(20, 20);

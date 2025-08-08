@@ -1,16 +1,14 @@
 // 2023/09/02 11:37:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Controls/Buttons.h"
-#include "Controls/Painter.h"
+#include "Controls/PainterRect.h"
 #include "Utils/GlobalFunctions.h"
 
 
-ButtonColor::ButtonColor(wxWindow *parent, int id, const wxString &title, wxPoint position, wxSize size, Painter *painter) :
+ButtonColor::ButtonColor(wxWindow *parent, int id, const wxString &title, wxPoint position, wxSize size, PainterRect *painter) :
     wxButton(parent, id, title, position, size),
     m_painter(painter)
 {
-//    painter = new Painter(this, { 144, 5 }, { 16, 16 }, type);
-
     m_painter->Bind(wxEVT_LEFT_UP, &ButtonColor::OnMouseEvent, this);
 }
 
