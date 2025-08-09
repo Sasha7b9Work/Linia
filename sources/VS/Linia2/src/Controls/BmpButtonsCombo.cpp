@@ -1,6 +1,33 @@
-// 2025/8/9 11:41:08 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+ï»¿// 2025/8/9 11:41:08 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Controls/BmpButtonsCombo.h"
+
+
+class ButtonPopup : public wxPopupTransientWindow
+{
+public:
+    ButtonPopup(wxWindow *parent) : wxPopupTransientWindow(parent)
+    {
+        wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
+
+        for (int i = 1; i <= 3; ++i)
+        {
+            wxButton *btn = new wxButton(this, wxID_ANY, wxString::Format("Option %d", i));
+            btn->Bind(wxEVT_BUTTON, &ButtonPopup::OnButtonClick, this);
+            sizer->Add(btn, 0, wxEXPAND | wxALL, 5);
+        }
+
+        SetSizer(sizer);
+        Fit();
+    }
+
+private:
+    void OnButtonClick(wxCommandEvent &event)
+    {
+        wxMessageBox("Ð’Ñ‹Ð±Ñ€Ð°Ð½Ð¾: " + ((wxButton *)event.GetEventObject())->GetLabel());
+        Dismiss();
+    }
+};
 
 
 BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString &file_bitmap) :
@@ -16,7 +43,7 @@ BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxPoint &pos, const wxS
 
         if (!image.LoadFile(path, wxBITMAP_TYPE_BMP))
         {
-            LOG_ERROR("Íå óäàëîñü çàãðóçèòü ôàéë èçîáðàæåíèÿ %s", file_bitmap.c_str().AsChar());
+            LOG_ERROR("ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð·Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ Ñ„Ð°Ð¹Ð» Ð¸Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ %s", file_bitmap.c_str().AsChar());
         }
 
         bitmap = wxBitmap(image);
@@ -27,7 +54,7 @@ BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxPoint &pos, const wxS
 
         if (!icon.LoadFile(path, wxBITMAP_TYPE_ICO))
         {
-            LOG_ERROR("Íå óäàëîñü çàãðóçèòü ôàéë èçîáðàæåíèÿ %s", file_bitmap.c_str().AsChar());
+            LOG_ERROR("ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð·Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ Ñ„Ð°Ð¹Ð» Ð¸Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ %s", file_bitmap.c_str().AsChar());
         }
 
         bitmap.CopyFromIcon(icon);
@@ -46,5 +73,8 @@ BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxPoint &pos, const wxS
 
 void BmpButtonsCombo::OnButtonClicked(wxCommandEvent &event)
 {
-    event.Skip();
+    ButtonPopup *popup = new ButtonPopup(this);
+    wxPoint pos = ClientToScreen(wxPoint(-50, -50));
+    popup->Position(pos, wxSize(0, 0));
+    popup->Popup();
 }

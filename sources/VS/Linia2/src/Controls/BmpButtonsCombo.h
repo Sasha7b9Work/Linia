@@ -1,7 +1,7 @@
-// 2025/8/9 11:41:23 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/8/9 11:41:23 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
-// Кнопка с рисунком, по нажатию на которую открывается окно с другими выборами
+// РљРЅРѕРїРєР° СЃ СЂРёСЃСѓРЅРєРѕРј, РїРѕ РЅР°Р¶Р°С‚РёСЋ РЅР° РєРѕС‚РѕСЂСѓСЋ РѕС‚РєСЂС‹РІР°РµС‚СЃСЏ РѕРєРЅРѕ СЃ РґСЂСѓРіРёРјРё РІС‹Р±РѕСЂР°РјРё
 
 
 class BmpButtonsCombo : public wxBitmapButton
