@@ -90,6 +90,20 @@ void CheckButton::SetToolTip(const wxString &tool_tip)
 ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString &file_bitmap) :
     wxBitmapButton(parent, wxID_ANY, wxNullBitmap, pos)
 {
+    CreateBitmap(_bitmap, file_bitmap);
+
+    SetBitmap(_bitmap);
+
+    SetClientSize(((size == wxDefaultSize) ? _bitmap.GetSize() : size ) + wxSize(10, 10));
+
+    Update();
+
+    Refresh();
+}
+
+
+void ButtonBitmap::CreateBitmap(wxBitmap &bmap, const wxString &file_bitmap)
+{
     wxString path = wxString("resources/") + file_bitmap;
 
     if (file_bitmap[file_bitmap.size() - 1] == 'p')
@@ -101,7 +115,7 @@ ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &s
             LOG_ERROR("Не удалось загрузить файл изображения %s", file_bitmap.c_str().AsChar());
         }
 
-        bitmap = wxBitmap(image);
+        bmap = wxBitmap(image);
     }
     else
     {
@@ -112,16 +126,8 @@ ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &s
             LOG_ERROR("Не удалось загрузить файл изображения %s", file_bitmap.c_str().AsChar());
         }
 
-        bitmap.CopyFromIcon(icon);
+        bmap.CopyFromIcon(icon);
     }
 
-    bitmap.SetMask(new wxMask(bitmap, *wxWHITE));
-
-    SetBitmap(bitmap);
-
-    SetClientSize(((size == wxDefaultSize) ? bitmap.GetSize() : size ) + wxSize(10, 10));
-
-    Update();
-
-    Refresh();
+    bmap.SetMask(new wxMask(bmap, *wxWHITE));
 }

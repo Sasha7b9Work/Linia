@@ -49,7 +49,14 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
         comboB->Enable(false);
         comboE->Enable(false);
 
-        new BmpButtonsCombo(boxCommutation, { 10, 160 }, { 32, 42 }, "sch/cat2.bmp");
+        wxArrayString files;
+
+        for (int i = 0; i < 10; i++)
+        {
+            files.push_back(wxString::Format("sch/cat%d.bmp", i + 1));
+        }
+
+        new BmpButtonsCombo(boxCommutation, { 10, 160 }, { 32, 42 }, files, 0, 3);
     }
 
     wxStaticBox *boxCategory = new wxStaticBox(this, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 250 });
