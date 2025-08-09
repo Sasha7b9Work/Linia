@@ -17,9 +17,6 @@ public:
 
 private:
 
-    // Канал C
-    RadioButtonICO *rbScan[7];                   // Развёртка
-
     wxToggleButton *btnScheme = nullptr,
         *btnChannelC = nullptr,
         *btnChannelB = nullptr,
@@ -44,14 +41,12 @@ private:
     wxPanel *CreatePanel(wxToggleButton *);
 
     void OnEventToggleButton(wxCommandEvent &);
-    void OnEventRadioButton(wxCommandEvent &);
 
     // Отщёлкнуть все, кроме id
     void UnсheckAllAcross(int id);
 
     void EnablePanel(int button_id);
 
-    void CreatePanelChannelC(wxPanel *, int x, int w);
     void CreatePanelChannelB(wxPanel *, int x, int w);
     void CreatePanelChannelS(wxPanel *, int x, int w);
     void CreatePanelCalculate(wxPanel *, int x, int w);
