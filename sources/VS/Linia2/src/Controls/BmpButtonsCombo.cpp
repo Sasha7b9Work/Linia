@@ -33,6 +33,7 @@ public:
         for (uint i = 0; i < files.size(); ++i)
         {
             ButtonBitmap *btn = new ButtonBitmap(mainPanel, wxDefaultPosition, wxDefaultSize, files[i]);
+            btn->SetLabel(wxString::Format("%d", i));
             btn->SetToolTip(tooltips[i]);
             btn->Bind(wxEVT_BUTTON, &ButtonPopup::OnButtonClick, this);
             gridSizer->Add(btn, 0, wxEXPAND | wxALL, 2); // 2px отступы у кнопок
@@ -53,8 +54,19 @@ public:
     }
 
 private:
-    void OnButtonClick(wxCommandEvent &)
+
+    void OnButtonClick(wxCommandEvent &event)
     {
+        wxString label = ((ButtonBitmap *)event.GetEventObject())->GetLabel();
+
+        BmpButtonsCombo *combo = (BmpButtonsCombo *)GetParent();
+
+        int choice = -1;
+
+        label.ToInt(&choice);
+
+        combo->SetCurrentChoice(choice);
+
         Dismiss();
     }
 };
@@ -84,4 +96,10 @@ void BmpButtonsCombo::OnButtonClicked(wxCommandEvent &)
 
     popup->Position(pos, wxSize(0, 0));
     popup->Popup();
+}
+
+
+void BmpButtonsCombo::SetCurrentChoice(int choice)
+{
+    SetFileBitmap(files[(uint)choice]);
 }

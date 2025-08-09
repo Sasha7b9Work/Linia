@@ -15,6 +15,8 @@ public:
         int num_file,                           // Эта изображение будет на главной кнопке
         int buttons_in_row);                    // В каждом ряду будет расположено столько кнопок
 
+    void SetCurrentChoice(int);
+
 private:
 
     wxString title;

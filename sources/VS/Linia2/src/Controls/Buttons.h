@@ -58,6 +58,8 @@ public:
 
     ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &, const wxString &file_bimap);
 
+    void SetFileBitmap(const wxString &file_bitmap);
+
 protected:
 
     void CreateBitmap(wxBitmap &, const wxString &file_bitmap);
