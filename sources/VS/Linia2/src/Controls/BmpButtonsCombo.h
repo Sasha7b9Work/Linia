@@ -16,7 +16,8 @@ public:
 
 private:
 
-    wxVector<wxBitmap *> bitmaps;
+    wxArrayString files;
+    int buttons_in_row;
 
     void OnButtonClicked(wxCommandEvent &);
 };

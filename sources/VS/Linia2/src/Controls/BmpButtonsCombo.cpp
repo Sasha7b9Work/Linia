@@ -6,7 +6,7 @@
 class ButtonPopup : public wxPopupTransientWindow
 {
 public:
-    ButtonPopup(wxWindow *parent) : wxPopupTransientWindow(parent)
+    ButtonPopup(wxWindow *parent, const wxArrayString &files, int buttons_in_row) : wxPopupTransientWindow(parent)
     {
         wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -30,16 +30,19 @@ private:
 };
 
 
-BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxPoint &pos, const wxSize &, const wxArrayString &files, int num_file, int buttons_in_row) :
+BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxPoint &pos, const wxSize &, const wxArrayString &_files, int num_file, int _buttons_in_row) :
     ButtonBitmap(parent, pos, wxDefaultSize, files[(size_t)num_file])
 {
     Bind(wxEVT_BUTTON, &BmpButtonsCombo::OnButtonClicked, this);
+
+    files = _files;
+    buttons_in_row = _buttons_in_row;
 }
 
 
 void BmpButtonsCombo::OnButtonClicked(wxCommandEvent &)
 {
-    ButtonPopup *popup = new ButtonPopup(this);
+    ButtonPopup *popup = new ButtonPopup(this, files, buttons_in_row);
     wxPoint pos = ClientToScreen(wxPoint(-50, -50));
     popup->Position(pos, wxSize(0, 0));
     popup->Popup();
