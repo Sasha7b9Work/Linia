@@ -79,11 +79,17 @@ private:
             }
 
             Position(pos, wxSize(0, 0));
-            Show();
             Popup(); // Активируем режим popup
         }
 
     private:
+
+//        void OnPopup() override
+//        {
+//            wxWindow *focus = FindFocus();
+//            if (focus) m_prevFocus = focus;
+//            SetFocus();
+//        }
 
         virtual void OnDismiss() override
         {
@@ -97,6 +103,8 @@ private:
         {
             Hide();
         }
+
+        wxWindow *m_prevFocus = nullptr;
 
         // Отключаем копирование
         ButtonPopup(const ButtonPopup &) = delete;
