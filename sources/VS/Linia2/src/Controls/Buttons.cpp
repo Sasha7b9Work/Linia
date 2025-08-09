@@ -85,3 +85,11 @@ void CheckButton::SetToolTip(const wxString &tool_tip)
     button->SetToolTip(tool_tip);
     ch_box->SetToolTip(tool_tip);
 }
+
+
+ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString & /*file_bimap*/) :
+    wxButton(parent, wxID_ANY, "", pos)
+{
+    SetClientSize(size + wxSize(20, 20));
+    Update();
+}

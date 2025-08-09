@@ -50,3 +50,13 @@ private:
 
     void OnEventToggleButton(wxCommandEvent &);
 };
+
+
+class ButtonBitmap : public wxButton
+{
+public:
+
+    ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &, const wxString &file_bimap);
+
+private:
+};

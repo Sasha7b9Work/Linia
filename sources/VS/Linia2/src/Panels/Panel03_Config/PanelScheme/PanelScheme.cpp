@@ -5,6 +5,7 @@
 #include "Panels/Panel03_Config/Panel03_Config.h"
 #include "Utils/SystemDepend.h"
 #include "Panels/Panel03_Config/PanelScheme/WindowLibraryTests.h"
+#include "Controls/BmpButtonsCombo.h"
 
 
 PanelScheme::PanelScheme(wxPanel *parent, int x) :
@@ -47,6 +48,8 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
         comboC->Enable(false);
         comboB->Enable(false);
         comboE->Enable(false);
+
+        new BmpButtonsCombo(boxCommutation, { 10, 160 }, { 32, 42 }, "sch/cat2.bmp");
     }
 
     wxStaticBox *boxCategory = new wxStaticBox(this, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 250 });
