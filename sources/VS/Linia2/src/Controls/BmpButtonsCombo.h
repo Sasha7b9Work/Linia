@@ -69,6 +69,13 @@ private:
         // Новая функция для показа
         void ShowPopup(const wxPoint &pos)
         {
+            if (IsShown())
+            {
+                Hide();
+                // Явно сбрасываем обработчики
+                GetEventHandler()->SetNextHandler(nullptr);
+            }
+
             Position(pos, wxSize(0, 0));
             Show();
             Popup(); // Активируем режим popup
