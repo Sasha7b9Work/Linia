@@ -86,12 +86,19 @@ private:
         virtual void OnDismiss() override
         {
             Hide();
+
+            // Важно: отвязываем все дополнительные обработчики
+            GetEventHandler()->SetNextHandler(nullptr);
         }
 
         void OnButtonClick(wxCommandEvent &)
         {
             Hide();
         }
+
+        // Отключаем копирование
+        ButtonPopup(const ButtonPopup &) = delete;
+        ButtonPopup &operator=(const ButtonPopup &) = delete;
     };
 
     ButtonPopup *popup = nullptr;
