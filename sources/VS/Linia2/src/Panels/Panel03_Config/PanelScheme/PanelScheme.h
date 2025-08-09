@@ -18,9 +18,6 @@ private:
 
     wxButton *btnLoad = nullptr;
 
-    PainterBMP *bmpCategory[10];                // Категория
-
-    void OnEventCategoryBmpClick(wxMouseEvent &);
     void OnEventButton(wxCommandEvent &);
     void OnEventComboBox(wxCommandEvent &);
 };

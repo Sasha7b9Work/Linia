@@ -16,7 +16,7 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
 
     const int width_category = 77;
 
-    wxStaticBox *boxCommutation = new wxStaticBox(this, wxID_ANY, wxString("                           ") + _L("Коммутация"), { x, 100 }, { MainWindow::WIDTH3 - 10, 300 });
+    wxStaticBox *boxCommutation = new wxStaticBox(this, wxID_ANY, _L("Коммутация"), { x, 100 }, { MainWindow::WIDTH3 - 10, 300 });
 
     {
         wxArrayString choices;
@@ -48,7 +48,11 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
         comboC->Enable(false);
         comboB->Enable(false);
         comboE->Enable(false);
+    }
 
+    wxStaticBox *boxCategory = new wxStaticBox(this, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 100 });
+
+    {
         wxArrayString files;
 
         for (int i = 0; i < 10; i++)
@@ -56,19 +60,7 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
             files.push_back(wxString::Format("sch/cat%d.bmp", i + 1));
         }
 
-        new BmpButtonsCombo(boxCommutation, { 10, 160 }, { 32, 42 }, files, 0, 3);
-    }
-
-    wxStaticBox *boxCategory = new wxStaticBox(this, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 250 });
-
-    {
-        int w = 32;
-        int h = 41;
-        int x0 = 5;
-        int y0 = 20;
-        int d = 3;
-
-        wxString tooltips[10] =
+        wxArrayString tooltips =
         {
             "Диод",
             "Тиристор",
@@ -82,23 +74,7 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
             "Полевой или МОП транзистор PMOS(четырёхполюсный)"
         };
 
-        for (int row = 0; row < 5; row++)
-        {
-            for (int col = 0; col < 2; col++)
-            {
-                int num_category = row * 2 + col;
-
-                bmpCategory[num_category] = new PainterBMP(boxCategory, { x0 + col * (w + d), SD::Y_SB(y0 + row * (h + d)) }, { w, h }, wxString::Format("sch/cat%d.bmp", num_category + 1));
-
-                bmpCategory[num_category]->SetEnabled(false);
-
-                bmpCategory[num_category]->Bind(wxEVT_LEFT_DOWN, &PanelScheme::OnEventCategoryBmpClick, this);
-
-                bmpCategory[num_category]->SetToolTip(tooltips[num_category]);
-            }
-        }
-
-        bmpCategory[0]->SetEnabled(true);
+        new BmpButtonsCombo(boxCategory, { 18, SD::Y_SB(25) }, { 32, 42 }, files, tooltips, 0, 3);
     }
 
     (void)boxCategory;
@@ -144,16 +120,5 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
         int selection = comboTest->GetSelection();
 
         btnLoad->Show(comboTest->GetString((uint)selection) == "_USER");
-    }
-}
-
-
-void PanelScheme::OnEventCategoryBmpClick(wxMouseEvent &event)
-{
-    wxPanel *clickedPanel = dynamic_cast<wxPanel *>(event.GetEventObject());
-
-    for (int i = 0; i < 10; i++)
-    {
-        bmpCategory[i]->SetEnabled(clickedPanel == bmpCategory[i]);
     }
 }
