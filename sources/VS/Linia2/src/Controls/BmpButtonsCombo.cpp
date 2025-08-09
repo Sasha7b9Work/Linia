@@ -15,7 +15,7 @@ public:
 
         int num_rows = (int)(files.size() / buttons_in_row);
 
-        if (files.size() % num_rows)
+        if (num_rows * buttons_in_row < (int)files.size())
         {
             num_rows++;
         }
@@ -72,7 +72,11 @@ BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxPoint &pos, const wxS
 void BmpButtonsCombo::OnButtonClicked(wxCommandEvent &)
 {
     ButtonPopup *popup = new ButtonPopup(this, files, buttons_in_row);
-    wxPoint pos = ClientToScreen(wxPoint(-50, -50));
+
+    wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
+    pos.x -= popup->GetSize().x / 2;
+    pos.y -= popup->GetSize().y / 2;
+
     popup->Position(pos, wxSize(0, 0));
     popup->Popup();
 }
