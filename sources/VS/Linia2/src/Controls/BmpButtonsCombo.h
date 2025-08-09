@@ -17,7 +17,11 @@ public:
 
     void SetCurrentChoice(int);
 
+    int GetCurrentChoice() const;
+
 private:
+
+    int current_choice = -1;
 
     wxString title;
     wxArrayString files;

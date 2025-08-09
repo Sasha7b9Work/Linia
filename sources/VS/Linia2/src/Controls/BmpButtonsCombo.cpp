@@ -73,7 +73,8 @@ private:
 
 
 BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos, const wxSize &, const wxArrayString &_files, const wxArrayString &_tooltips, int num_file, int _buttons_in_row) :
-    ButtonBitmap(parent, pos, wxDefaultSize, _files[(size_t)num_file])
+    ButtonBitmap(parent, pos, wxDefaultSize, _files[(size_t)num_file]),
+    current_choice(num_file)
 {
     Bind(wxEVT_BUTTON, &BmpButtonsCombo::OnButtonClicked, this);
 
@@ -101,5 +102,13 @@ void BmpButtonsCombo::OnButtonClicked(wxCommandEvent &)
 
 void BmpButtonsCombo::SetCurrentChoice(int choice)
 {
-    SetFileBitmap(files[(uint)choice]);
+    current_choice = choice;
+
+    SetFileBitmap(files[(uint)current_choice]);
+}
+
+
+int BmpButtonsCombo::GetCurrentChoice() const
+{
+    return current_choice;
 }
