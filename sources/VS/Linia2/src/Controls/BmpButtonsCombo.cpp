@@ -71,7 +71,7 @@ BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxPoint &pos, const wxS
 }
 
 
-void BmpButtonsCombo::OnButtonClicked(wxCommandEvent &event)
+void BmpButtonsCombo::OnButtonClicked(wxCommandEvent &)
 {
     ButtonPopup *popup = new ButtonPopup(this);
     wxPoint pos = ClientToScreen(wxPoint(-50, -50));

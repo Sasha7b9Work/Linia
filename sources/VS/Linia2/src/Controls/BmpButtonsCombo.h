@@ -14,7 +14,5 @@ private:
 
     wxBitmap bitmap;
 
-    bool left_is_down = false;
-
     void OnButtonClicked(wxCommandEvent &);
 };
