@@ -6,44 +6,32 @@
 class ButtonPopup : public wxPopupTransientWindow
 {
 public:
-    ButtonPopup(wxWindow *parent, const wxArrayString &files, int buttons_in_row) : wxPopupTransientWindow(parent)
+    ButtonPopup(wxWindow *parent, const wxArrayString &files, int buttons_in_row) : wxPopupTransientWindow(parent, wxBORDER_SUNKEN)
     {
-        // Создаем основной sizer с горизонтальным расположением столбцов
-        wxBoxSizer *mainSizer = new wxBoxSizer(wxHORIZONTAL);
+        const int BUTTONS_COUNT = 10;
+        const int COLUMNS_COUNT = 3;
 
-        // Создаем 3 вертикальных sizer'а для столбцов
-        wxBoxSizer *column1 = new wxBoxSizer(wxVERTICAL);
-        wxBoxSizer *column2 = new wxBoxSizer(wxVERTICAL);
-        wxBoxSizer *column3 = new wxBoxSizer(wxVERTICAL);
+        // Рассчитываем количество строк
+        int rows = (BUTTONS_COUNT + COLUMNS_COUNT - 1) / COLUMNS_COUNT;
 
-        // Создаем 10 кнопок и распределяем по столбцам
-        for (int i = 1; i <= 10; ++i)
+        wxGridSizer *gridSizer = new wxGridSizer(rows, COLUMNS_COUNT, 5, 5);
+
+        // Добавляем кнопки по строкам
+        for (int i = 1; i <= BUTTONS_COUNT; ++i)
         {
             wxButton *btn = new wxButton(this, wxID_ANY, wxString::Format("Button %d", i));
             btn->Bind(wxEVT_BUTTON, &ButtonPopup::OnButtonClick, this);
-
-            // Распределяем кнопки по столбцам: 4-3-3
-            if (i <= 4)
-            {
-                column1->Add(btn, 0, wxEXPAND | wxALL, 5);
-            }
-            else if (i <= 7)
-            {
-                column2->Add(btn, 0, wxEXPAND | wxALL, 5);
-            }
-            else
-            {
-                column3->Add(btn, 0, wxEXPAND | wxALL, 5);
-            }
+            gridSizer->Add(btn, 0, wxEXPAND);
         }
 
-        // Добавляем столбцы в основной sizer с отступами
-        mainSizer->Add(column1, 0, wxEXPAND | wxALL, 5);
-        mainSizer->Add(column2, 0, wxEXPAND | wxALL, 5);
-        mainSizer->Add(column3, 0, wxEXPAND | wxALL, 5);
+        // Добавляем пустые места, если нужно
+        for (int i = BUTTONS_COUNT + 1; i <= rows * COLUMNS_COUNT; ++i)
+        {
+            gridSizer->AddStretchSpacer();
+        }
 
-        SetSizer(mainSizer);
-        Fit(); // Автоматически подгоняем размер
+        SetSizer(gridSizer);
+        Fit();
     }
 
 private:
