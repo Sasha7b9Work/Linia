@@ -13,11 +13,23 @@ public:
         wxPanel *mainPanel = new wxPanel(this, wxID_ANY);
         mainPanel->SetBackgroundColour(*wxWHITE);
 
-        // Сетка для кнопок 4x3 (4 строки, 3 столбца)
-        wxGridSizer *gridSizer = new wxGridSizer(4, 3, 5, 5); // 5px промежутки
+        int num_rows = (int)(files.size() / buttons_in_row);
 
-        // Добавляем 10 кнопок
-        for (int i = 1; i <= 10; ++i)
+        if (files.size() % num_rows)
+        {
+            num_rows++;
+        }
+
+        int num_cols = (int)(files.size() / num_rows);
+
+        if (num_rows * num_cols < (int)files.size())
+        {
+            num_cols++;
+        }
+
+        wxGridSizer *gridSizer = new wxGridSizer(num_rows, num_cols, 5, 5); // 5px промежутки
+
+        for (uint i = 1; i <= files.size(); ++i)
         {
             wxButton *btn = new wxButton(mainPanel, wxID_ANY, wxString::Format("Button %d", i));
             btn->Bind(wxEVT_BUTTON, &ButtonPopup::OnButtonClick, this);
@@ -25,8 +37,8 @@ public:
         }
 
         // Добавляем рамку вокруг сетки кнопок
-        wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, "Options");
-        boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 10); // 10px отступ внутри рамки
+        wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, "Категория");
+        boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 0); // 10px отступ внутри рамки
 
         // Основная панель
         mainPanel->SetSizer(boxSizer);
