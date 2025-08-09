@@ -52,11 +52,13 @@ private:
 };
 
 
-class ButtonBitmap : public wxButton
+class ButtonBitmap : public wxBitmapButton
 {
 public:
 
     ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &, const wxString &file_bimap);
 
 private:
+
+    wxBitmap bitmap;
 };

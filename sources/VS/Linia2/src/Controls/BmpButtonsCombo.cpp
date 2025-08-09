@@ -31,7 +31,7 @@ private:
 
 
 BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString &file_bitmap) :
-    wxBitmapButton(parent, wxID_ANY, wxNullBitmap, pos)
+    ButtonBitmap(parent, pos, size, file_bitmap)
 {
     Bind(wxEVT_BUTTON, &BmpButtonsCombo::OnButtonClicked, this);
 

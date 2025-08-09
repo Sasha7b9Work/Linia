@@ -87,9 +87,40 @@ void CheckButton::SetToolTip(const wxString &tool_tip)
 }
 
 
-ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString & /*file_bimap*/) :
-    wxButton(parent, wxID_ANY, "", pos)
+ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString &file_bitmap) :
+    wxBitmapButton(parent, wxID_ANY, wxNullBitmap, pos)
 {
-    SetClientSize(size + wxSize(20, 20));
+    wxString path = wxString("resources/") + file_bitmap;
+
+    if (file_bitmap[file_bitmap.size() - 1] == 'p')
+    {
+        wxImage image;
+
+        if (!image.LoadFile(path, wxBITMAP_TYPE_BMP))
+        {
+            LOG_ERROR("Не удалось загрузить файл изображения %s", file_bitmap.c_str().AsChar());
+        }
+
+        bitmap = wxBitmap(image);
+    }
+    else
+    {
+        wxIcon icon;
+
+        if (!icon.LoadFile(path, wxBITMAP_TYPE_ICO))
+        {
+            LOG_ERROR("Не удалось загрузить файл изображения %s", file_bitmap.c_str().AsChar());
+        }
+
+        bitmap.CopyFromIcon(icon);
+    }
+
+    bitmap.SetMask(new wxMask(bitmap, *wxWHITE));
+
+    SetBitmap(bitmap);
+
+    SetClientSize(size + wxSize(2, 2));
     Update();
+
+    Refresh();
 }

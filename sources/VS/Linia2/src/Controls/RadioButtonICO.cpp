@@ -4,7 +4,7 @@
 #include "Application.h"
 
 
-RadioButtonICO::RadioButtonICO(wxWindow *parent, const wxPoint &position, const wxSize &size, const wxString &name_ico) :
+RadioButtonICO::RadioButtonICO(wxWindow *parent, const wxPoint &position, const wxSize &size, const wxString & /*name_ico*/) :
     wxPanel(parent, wxID_ANY, position, size)
 {
     button = new wxRadioButton(this, wxID_ANY, "", { 0, 0 }, size);
