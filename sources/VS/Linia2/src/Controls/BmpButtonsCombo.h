@@ -4,7 +4,7 @@
 //  нопка с рисунком, по нажатию на которую открываетс€ окно с другими выборами
 
 
-class BmpButtonsCombo : public wxButton
+class BmpButtonsCombo : public wxBitmapButton
 {
 public:
 
@@ -16,8 +16,5 @@ private:
 
     bool left_is_down = false;
 
-    void OnEventPaint(wxPaintEvent &);
-    void OnLeftDown(wxMouseEvent &);
-    void OnLeftUp(wxMouseEvent &);
-    void OnLeaveWindow(wxMouseEvent &);
+    void OnButtonClicked(wxCommandEvent &);
 };

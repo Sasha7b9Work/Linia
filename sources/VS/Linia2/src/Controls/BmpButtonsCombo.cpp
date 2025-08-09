@@ -4,12 +4,9 @@
 
 
 BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString &file_bitmap) :
-    wxButton(parent, wxID_ANY, "", pos)
+    wxBitmapButton(parent, wxID_ANY, wxNullBitmap, pos)
 {
-    Bind(wxEVT_PAINT, &BmpButtonsCombo::OnEventPaint, this);
-    Bind(wxEVT_LEFT_DOWN, &BmpButtonsCombo::OnLeftDown, this);
-    Bind(wxEVT_LEFT_UP, &BmpButtonsCombo::OnLeftUp, this);
-    Bind(wxEVT_LEAVE_WINDOW, &BmpButtonsCombo::OnLeaveWindow, this);
+    Bind(wxEVT_BUTTON, &BmpButtonsCombo::OnButtonClicked, this);
 
     wxString path = wxString("resources/") + file_bitmap;
 
@@ -36,6 +33,10 @@ BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxPoint &pos, const wxS
         bitmap.CopyFromIcon(icon);
     }
 
+    bitmap.SetMask(new wxMask(bitmap, *wxWHITE));
+
+    SetBitmap(bitmap);
+
     SetClientSize(size + wxSize(20, 20));
     Update();
 
@@ -43,58 +44,7 @@ BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxPoint &pos, const wxS
 }
 
 
-void BmpButtonsCombo::OnEventPaint(wxPaintEvent &event)
+void BmpButtonsCombo::OnButtonClicked(wxCommandEvent &event)
 {
-    wxPaintDC dc(this);
-
-    int flags = 0;
-    if (left_is_down) flags |= wxCONTROL_PRESSED;
-    if (!IsEnabled()) flags |= wxCONTROL_DISABLED;
-
-    // 1. Рисуем стандартный фон кнопки
-    wxRendererNative::Get().DrawPushButton(this, dc, GetClientRect(), flags);
-
-    // 2. Центрируем и рисуем битмап
-    if (bitmap.IsOk())
-    {
-        wxSize btnSize = GetClientSize();
-        wxSize bmpSize = bitmap.GetSize();
-
-        int x = (btnSize.x - bmpSize.x) / 2;
-        int y = (btnSize.y - bmpSize.y) / 2;
-
-        dc.DrawBitmap(bitmap, x, y, true);
-    }
-
-//    event.Skip(false); // Важно для корректной работы
-}
-
-
-void BmpButtonsCombo::OnLeftDown(wxMouseEvent &event)
-{
-    left_is_down = true;
-
-    Refresh();
-
-    event.Skip();
-}
-
-
-void BmpButtonsCombo::OnLeftUp(wxMouseEvent &event)
-{
-    left_is_down = true;
-
-    Refresh();
-
-    event.Skip();
-}
-
-
-void BmpButtonsCombo::OnLeaveWindow(wxMouseEvent &event)
-{
-    left_is_down = false;
-
-    Refresh();
-
     event.Skip();
 }
