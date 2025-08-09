@@ -37,7 +37,7 @@ BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxPoint &pos, const wxS
 
     SetBitmap(bitmap);
 
-    SetClientSize(size + wxSize(20, 20));
+    SetClientSize(size + wxSize(2, 2));
     Update();
 
     Refresh();
