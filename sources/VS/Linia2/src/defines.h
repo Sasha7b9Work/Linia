@@ -19,6 +19,9 @@
 #include <wx/aui/aui.h>
 #include <wx/msgdlg.h>
 #include <wx/grid.h>
+#include <wx/popupwin.h>
+#include <wx/scrolwin.h>
+#include <wx/combo.h>
 #include <map>
 #include <queue>
 #include <mutex>

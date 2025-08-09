@@ -5,6 +5,7 @@
 #include "Controls/SpinBox.h"
 #include "MainWindow.h"
 #include "Panels/Panel03_Config/Panel03_Config.h"
+#include "Controls/CustomComboBox.h"
 
 
 PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
@@ -88,6 +89,9 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
 
         new wxSpinCtrl(boxSource, wxID_ANY, "0", { 80, SD::Y_SB(y) }, { 100, TEXTCNTRL_HEIGHT });
         new SpinBox(boxSource, wxID_ANY, "100", { 80, SD::Y_SB(y + 30) }, { 100, TEXTCNTRL_HEIGHT });
+
+        CustomComboBox *combo = new CustomComboBox(boxSource, wxID_ANY);
+        combo->SetPosition({ 10, 160 });
     }
 }
 
