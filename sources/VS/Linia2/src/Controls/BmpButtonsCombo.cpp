@@ -8,17 +8,42 @@ class ButtonPopup : public wxPopupTransientWindow
 public:
     ButtonPopup(wxWindow *parent, const wxArrayString &files, int buttons_in_row) : wxPopupTransientWindow(parent)
     {
-        wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
+        // Создаем основной sizer с горизонтальным расположением столбцов
+        wxBoxSizer *mainSizer = new wxBoxSizer(wxHORIZONTAL);
 
-        for (int i = 1; i <= 3; ++i)
+        // Создаем 3 вертикальных sizer'а для столбцов
+        wxBoxSizer *column1 = new wxBoxSizer(wxVERTICAL);
+        wxBoxSizer *column2 = new wxBoxSizer(wxVERTICAL);
+        wxBoxSizer *column3 = new wxBoxSizer(wxVERTICAL);
+
+        // Создаем 10 кнопок и распределяем по столбцам
+        for (int i = 1; i <= 10; ++i)
         {
-            wxButton *btn = new wxButton(this, wxID_ANY, wxString::Format("Option %d", i));
+            wxButton *btn = new wxButton(this, wxID_ANY, wxString::Format("Button %d", i));
             btn->Bind(wxEVT_BUTTON, &ButtonPopup::OnButtonClick, this);
-            sizer->Add(btn, 0, wxEXPAND | wxALL, 5);
+
+            // Распределяем кнопки по столбцам: 4-3-3
+            if (i <= 4)
+            {
+                column1->Add(btn, 0, wxEXPAND | wxALL, 5);
+            }
+            else if (i <= 7)
+            {
+                column2->Add(btn, 0, wxEXPAND | wxALL, 5);
+            }
+            else
+            {
+                column3->Add(btn, 0, wxEXPAND | wxALL, 5);
+            }
         }
 
-        SetSizer(sizer);
-        Fit();
+        // Добавляем столбцы в основной sizer с отступами
+        mainSizer->Add(column1, 0, wxEXPAND | wxALL, 5);
+        mainSizer->Add(column2, 0, wxEXPAND | wxALL, 5);
+        mainSizer->Add(column3, 0, wxEXPAND | wxALL, 5);
+
+        SetSizer(mainSizer);
+        Fit(); // Автоматически подгоняем размер
     }
 
 private:
