@@ -34,40 +34,6 @@ BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxPoint &pos, const wxS
     ButtonBitmap(parent, pos, size, file_bitmap)
 {
     Bind(wxEVT_BUTTON, &BmpButtonsCombo::OnButtonClicked, this);
-
-    wxString path = wxString("resources/") + file_bitmap;
-
-    if (file_bitmap[file_bitmap.size() - 1] == 'p')
-    {
-        wxImage image;
-
-        if (!image.LoadFile(path, wxBITMAP_TYPE_BMP))
-        {
-            LOG_ERROR("Не удалось загрузить файл изображения %s", file_bitmap.c_str().AsChar());
-        }
-
-        bitmap = wxBitmap(image);
-    }
-    else
-    {
-        wxIcon icon;
-
-        if (!icon.LoadFile(path, wxBITMAP_TYPE_ICO))
-        {
-            LOG_ERROR("Не удалось загрузить файл изображения %s", file_bitmap.c_str().AsChar());
-        }
-
-        bitmap.CopyFromIcon(icon);
-    }
-
-    bitmap.SetMask(new wxMask(bitmap, *wxWHITE));
-
-    SetBitmap(bitmap);
-
-    SetClientSize(size + wxSize(2, 2));
-    Update();
-
-    Refresh();
 }
 
 

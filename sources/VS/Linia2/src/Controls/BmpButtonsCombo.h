@@ -13,7 +13,5 @@ public:
 
 private:
 
-    wxBitmap bitmap;
-
     void OnButtonClicked(wxCommandEvent &);
 };
