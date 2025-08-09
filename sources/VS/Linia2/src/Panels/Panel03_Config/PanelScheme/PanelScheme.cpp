@@ -74,7 +74,7 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
             "Полевой или МОП транзистор PMOS(четырёхполюсный)"
         };
 
-        new BmpButtonsCombo(boxCategory, { 18, SD::Y_SB(25) }, { 32, 42 }, files, tooltips, 0, 3);
+        new BmpButtonsCombo(boxCategory, "Категория", { 18, SD::Y_SB(25) }, {32, 42}, files, tooltips, 0, 3);
     }
 
     (void)boxCategory;

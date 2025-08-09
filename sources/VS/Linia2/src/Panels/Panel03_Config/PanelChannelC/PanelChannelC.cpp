@@ -40,7 +40,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
             ""
         };
 
-        new BmpButtonsCombo(boxScan, { 18, SD::Y_SB(25) }, { 32, 42 }, files, tooltips, 0, 3);
+        new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::Y_SB(25) }, {32, 42}, files, tooltips, 0, 3);
 
         {
             wxStaticBox *boxImpulse = new wxStaticBox(boxScan, wxID_ANY, _L("Импульс"), { 10, SD::Y_SB(110) }, { 75, 40 });

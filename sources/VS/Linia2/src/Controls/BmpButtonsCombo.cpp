@@ -6,7 +6,8 @@
 class ButtonPopup : public wxPopupTransientWindow
 {
 public:
-    ButtonPopup(wxWindow *parent, const wxArrayString &files, const wxArrayString &tooltips, int buttons_in_row) : wxPopupTransientWindow(parent, wxBORDER_SUNKEN)
+    ButtonPopup(wxWindow *parent, const wxString &title, const wxArrayString &files, const wxArrayString &tooltips, int buttons_in_row) :
+        wxPopupTransientWindow(parent, wxBORDER_SUNKEN)
     {
         // Основной контейнер с отступами по краям
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
@@ -38,7 +39,7 @@ public:
         }
 
         // Добавляем рамку вокруг сетки кнопок
-        wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, "Категория");
+        wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, title);
         boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 0); // 10px отступ внутри рамки
 
         // Основная панель
@@ -59,13 +60,14 @@ private:
 };
 
 
-BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxPoint &pos, const wxSize &, const wxArrayString &_files, const wxArrayString &_tooltips, int num_file, int _buttons_in_row) :
+BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos, const wxSize &, const wxArrayString &_files, const wxArrayString &_tooltips, int num_file, int _buttons_in_row) :
     ButtonBitmap(parent, pos, wxDefaultSize, _files[(size_t)num_file])
 {
     Bind(wxEVT_BUTTON, &BmpButtonsCombo::OnButtonClicked, this);
 
     SetToolTip(_tooltips[(size_t)num_file]);
 
+    title = _title;
     files = _files;
     tooltips = _tooltips;
     buttons_in_row = _buttons_in_row;
@@ -74,7 +76,7 @@ BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxPoint &pos, const wxS
 
 void BmpButtonsCombo::OnButtonClicked(wxCommandEvent &)
 {
-    ButtonPopup *popup = new ButtonPopup(this, files, tooltips, buttons_in_row);
+    ButtonPopup *popup = new ButtonPopup(this, title, files, tooltips, buttons_in_row);
 
     wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
     pos.x -= popup->GetSize().x / 2;

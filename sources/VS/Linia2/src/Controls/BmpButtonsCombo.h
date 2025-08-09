@@ -9,7 +9,7 @@ class BmpButtonsCombo : public ButtonBitmap
 {
 public:
 
-    BmpButtonsCombo(wxWindow *parent, const wxPoint &pos, const wxSize &,
+    BmpButtonsCombo(wxWindow *parent, const wxString &title, const wxPoint &pos, const wxSize &,
         const wxArrayString &files,             // Эти изображения будут на кнопках
         const wxArrayString &tooltips,
         int num_file,                           // Эта изображение будет на главной кнопке
@@ -17,6 +17,7 @@ public:
 
 private:
 
+    wxString title;
     wxArrayString files;
     wxArrayString tooltips;
     int buttons_in_row;
