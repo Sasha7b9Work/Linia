@@ -20,16 +20,6 @@ private:
     // Канал C
     RadioButtonICO *rbScan[7];                   // Развёртка
 
-    // Схема включения
-    PainterBMP *bmpCategory[10];                // Категория
-
-    wxComboBox *comboC = nullptr,
-        *comboB = nullptr,
-        *comboE = nullptr,
-        *comboTest = nullptr;
-
-    wxButton *btnLoad = nullptr;
-
     wxToggleButton *btnScheme = nullptr,
         *btnChannelC = nullptr,
         *btnChannelB = nullptr,
@@ -40,7 +30,7 @@ private:
     struct StructPanel
     {
         wxToggleButton *button;
-        wxPanel *panel;
+        wxPanel        *panel;
     };
 
     // Здесь хранятся элементы панели "Канал C"
@@ -53,11 +43,8 @@ private:
 
     wxPanel *CreatePanel(wxToggleButton *);
 
-    void OnEventButton(wxCommandEvent &);
     void OnEventToggleButton(wxCommandEvent &);
     void OnEventRadioButton(wxCommandEvent &);
-    void OnEventComboBox(wxCommandEvent &);
-    void OnEventCategoryBmpClick(wxMouseEvent &);
 
     // Отщёлкнуть все, кроме id
     void UnсheckAllAcross(int id);
@@ -68,5 +55,4 @@ private:
     void CreatePanelChannelB(wxPanel *, int x, int w);
     void CreatePanelChannelS(wxPanel *, int x, int w);
     void CreatePanelCalculate(wxPanel *, int x, int w);
-    void CreatePanelScheme(wxPanel *, int x, int w);
 };
