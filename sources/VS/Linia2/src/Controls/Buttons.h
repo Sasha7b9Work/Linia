@@ -64,5 +64,5 @@ protected:
 
 private:
 
-    wxBitmap _bitmap;
+    wxBitmap bitmap;
 };
