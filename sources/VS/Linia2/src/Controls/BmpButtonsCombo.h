@@ -25,6 +25,8 @@ private:
         {
             SetWindowStyle(wxBORDER_SIMPLE | wxPU_CONTAINS_CONTROLS);
 
+            Bind(wxEVT_SHOW, &ButtonPopup::OnShow, this);
+
             // Основной контейнер с отступами по краям
             wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
             wxPanel *mainPanel = new wxPanel(this, wxID_ANY);
@@ -84,19 +86,34 @@ private:
 
     private:
 
-//        void OnPopup() override
-//        {
-//            wxWindow *focus = FindFocus();
-//            if (focus) m_prevFocus = focus;
-//            SetFocus();
-//        }
-
+        void OnShow(wxShowEvent &event)
+        {
+            if (event.IsShown())
+            {
+                // Сохраняем предыдущий фокус при показе
+                m_prevFocus = FindFocus();
+                SetFocus(); // Устанавливаем фокус на popup
+            }
+            else
+            {
+                // Восстанавливаем фокус при скрытии
+                if (m_prevFocus)
+                {
+                    m_prevFocus->SetFocus();
+                    m_prevFocus = nullptr;
+                }
+            }
+            event.Skip();
+        }
         virtual void OnDismiss() override
         {
             Hide();
 
-            // Важно: отвязываем все дополнительные обработчики
-            GetEventHandler()->SetNextHandler(nullptr);
+            if (GetEventHandler())
+            {
+                // Важно: отвязываем все дополнительные обработчики
+//                GetEventHandler()->SetNextHandler(nullptr);
+            }
         }
 
         void OnButtonClick(wxCommandEvent &)
