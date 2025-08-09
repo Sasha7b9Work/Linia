@@ -116,6 +116,8 @@ void ButtonBitmap::CreateBitmap(wxBitmap &bmap, const wxString &file_bitmap)
         }
 
         bmap = wxBitmap(image);
+
+        bmap.SetMask(new wxMask(bmap, *wxWHITE));
     }
     else
     {
@@ -128,6 +130,4 @@ void ButtonBitmap::CreateBitmap(wxBitmap &bmap, const wxString &file_bitmap)
 
         bmap.CopyFromIcon(icon);
     }
-
-    bmap.SetMask(new wxMask(bmap, *wxWHITE));
 }

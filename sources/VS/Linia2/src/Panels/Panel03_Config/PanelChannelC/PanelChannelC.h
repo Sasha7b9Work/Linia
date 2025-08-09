@@ -8,10 +8,4 @@ class PanelChannelC : public wxPanel
 public:
 
     PanelChannelC(wxPanel *parent, int x, int w);
-
-private:
-
-    RadioButtonICO *rbScan[7];                   // Развёртка
-
-    void OnEventRadioButton(wxCommandEvent &);
 };

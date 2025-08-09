@@ -6,6 +6,7 @@
 #include "MainWindow.h"
 #include "Panels/Panel03_Config/Panel03_Config.h"
 #include "Controls/CustomComboBox.h"
+#include "Controls/BmpButtonsCombo.h"
 
 
 PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
@@ -14,31 +15,32 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    Bind(wxEVT_RADIOBUTTON, &PanelChannelC::OnEventRadioButton, this);
-
     wxStaticBox *boxScan = new wxStaticBox(this, wxID_ANY, _L("Развёртка"), { x, 0 }, { w, 160 });
 
     {
-        const wxSize size_rb{ 50, 30 };
-
-        rbScan[0] = new RadioButtonICO(boxScan, { 10, SD::Y_SB(20) }, size_rb, "icons/graphs/imp_up.ico");      // IMP_POS  IDC_RADIO_RAZVIMPPOSITIVE   OnRadioRazvimppositive
-        rbScan[1] = new RadioButtonICO(boxScan, { 70, SD::Y_SB(20) }, size_rb, "icons/graphs/imp_down.ico");    // IMP_NEG  IDC_RADIO_RAZVIMPNEGATIVE
-
-        rbScan[2] = new RadioButtonICO(boxScan, { 10, SD::Y_SB(50) }, size_rb, "icons/graphs/triang_up.ico");   // DC_POS   IDC_RADIO_RAZVDCPOSITIVE
-        rbScan[3] = new RadioButtonICO(boxScan, { 70, SD::Y_SB(50) }, size_rb, "icons/graphs/triang_down.ico"); // DC_NEG   IDC_RADIO_RAZVDCNEGATIVE
-
-        rbScan[4] = new RadioButtonICO(boxScan, { 10, SD::Y_SB(80) }, size_rb, "icons/graphs/sin_hi.ico");      // SYN_POS  IDC_RADIO_SYNPOSITIVE
-        rbScan[5] = new RadioButtonICO(boxScan, { 70, SD::Y_SB(80) }, size_rb, "icons/graphs/sin_lo.ico");      // SYN_NEG  IDC_RADIO_SYNNEGATIVE
-
-        rbScan[6] = new RadioButtonICO(boxScan, { 130, SD::Y_SB(20) }, size_rb, "icons/graphs/sin.ico");        // AC       IDC_RADIO_RAZVAC
-
+        wxArrayString files =
         {
-            RadioButtonICO *object = rbScan[0];
-            wxCommandEvent evt(wxEVT_RADIOBUTTON, object->GetId());
-            evt.SetInt(1);
-            evt.SetEventObject(object);
-            boxScan->ProcessWindowEvent(evt);
-        }
+            "icons/graphs/imp_up.ico",      // IMP_POS  IDC_RADIO_RAZVIMPPOSITIVE   OnRadioRazvimppositive
+            "icons/graphs/imp_down.ico",    // IMP_NEG  IDC_RADIO_RAZVIMPNEGATIVE
+            "icons/graphs/triang_up.ico",   // DC_POS   IDC_RADIO_RAZVDCPOSITIVE
+            "icons/graphs/triang_down.ico", // DC_NEG   IDC_RADIO_RAZVDCNEGATIVE
+            "icons/graphs/sin_hi.ico",      // SYN_POS  IDC_RADIO_SYNPOSITIVE
+            "icons/graphs/sin_lo.ico",      // SYN_NEG  IDC_RADIO_SYNNEGATIVE
+            "icons/graphs/sin.ico"          // AC       IDC_RADIO_RAZVAC
+        };
+
+        wxArrayString tooltips =
+        {
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        };
+
+        new BmpButtonsCombo(boxScan, { 18, SD::Y_SB(25) }, { 32, 42 }, files, tooltips, 0, 3);
 
         {
             wxStaticBox *boxImpulse = new wxStaticBox(boxScan, wxID_ANY, _L("Импульс"), { 10, SD::Y_SB(110) }, { 75, 40 });
@@ -92,35 +94,5 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
 
         CustomComboBox *combo = new CustomComboBox(boxSource, wxID_ANY);
         combo->SetPosition({ 10, 160 });
-    }
-}
-
-
-void PanelChannelC::OnEventRadioButton(wxCommandEvent &event)
-{
-    RadioButtonICO *object = ((RadioButtonICO *)event.GetEventObject());
-
-    for (int i = 0; i < 7; i++)
-    {
-        bool value = (object == rbScan[i]);
-        rbScan[i]->SetValue(value);
-    }
-
-    if (object == rbScan[0])        // IDC_RADIO_RAZVIMPPOSITIVE OnRadioRazvimppositive()
-    {
-        /*
-        int irazv_old = m_irazv;
-        if (n_IPPP == 1 && n_Switch == 2)
-        {
-            m_irazv = IMP_NEG;
-        }
-        InitIconImp();
-        ChangeDiapazonKol();
-        ChangeDiapazonKolMeasU();
-        ShowRejimChanel();
-        ShowButtonLoopingCompensation();
-        if (iX == COLLECTOR && iY == COLLECTOR) ResetDisplay(LEFT);
-        int er = ControlParam();
-        */
     }
 }
