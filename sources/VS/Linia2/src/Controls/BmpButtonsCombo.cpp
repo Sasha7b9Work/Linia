@@ -29,9 +29,9 @@ public:
 
         wxGridSizer *gridSizer = new wxGridSizer(num_rows, num_cols, 5, 5); // 5px промежутки
 
-        for (uint i = 1; i <= files.size(); ++i)
+        for (uint i = 0; i < files.size(); ++i)
         {
-            wxButton *btn = new wxButton(mainPanel, wxID_ANY, wxString::Format("Button %d", i));
+            ButtonBitmap *btn = new ButtonBitmap(mainPanel, wxDefaultPosition, wxDefaultSize, files[i]);
             btn->Bind(wxEVT_BUTTON, &ButtonPopup::OnButtonClick, this);
             gridSizer->Add(btn, 0, wxEXPAND | wxALL, 2); // 2px отступы у кнопок
         }
@@ -51,9 +51,8 @@ public:
     }
 
 private:
-    void OnButtonClick(wxCommandEvent &event)
+    void OnButtonClick(wxCommandEvent &)
     {
-        wxMessageBox("Выбрано: " + ((wxButton *)event.GetEventObject())->GetLabel());
         Dismiss();
     }
 };
