@@ -12,8 +12,6 @@ public:
 
     static Bitmap Get(const wxString &file_name);
 
-    wxSize GetSize() const;
-
     wxBitmap &GetBitmap();
 
 private:
