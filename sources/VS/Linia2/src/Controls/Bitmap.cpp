@@ -37,7 +37,7 @@ Bitmap::Bitmap(const wxString &file_bitmap)
 }
 
 
-Bitmap Bitmap::Get(const wxString &file_name)
+Bitmap &Bitmap::Get(const wxString &file_name)
 {
     if (bitmaps.find(file_name) == bitmaps.end())
     {

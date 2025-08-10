@@ -10,7 +10,7 @@ public:
 
     Bitmap(const wxString &file_name);
 
-    static Bitmap Get(const wxString &file_name);
+    static Bitmap &Get(const wxString &file_name);
 
     wxBitmap &GetBitmap();
 
