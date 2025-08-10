@@ -15,7 +15,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    wxStaticBox *boxScan = new wxStaticBox(this, wxID_ANY, _L("Развёртка"), { x, 0 }, { w, 160 });
+    wxStaticBox *boxScan = new wxStaticBox(this, wxID_ANY, _L("Развёртка"), { x, 0 }, { w, 130 });
 
     {
         wxArrayString files =
@@ -43,12 +43,12 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
         new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::Y_SB(25) }, {32, 42}, files, tooltips, 0, 3);
 
         {
-            wxStaticBox *boxImpulse = new wxStaticBox(boxScan, wxID_ANY, _L("Импульс"), { 10, SD::Y_SB(110) }, { 75, 40 });
+            wxStaticBox *boxImpulse = new wxStaticBox(boxScan, wxID_ANY, _L("Импульс"), { 100, SD::Y_SB(25) }, { 75, 40 });
 
             new wxStaticText(boxImpulse, wxID_ANY, "0.2 ms", { 10, SD::Y_SB(20) });
         }
 
-        new wxCheckBox(boxScan, wxID_ANY, _L("Скважн. x 2"), { 100, SD::Y_SB(120) }, { 100, 20 });
+        new wxCheckBox(boxScan, wxID_ANY, _L("Скважн. x 2"), { 20, SD::Y_SB(90) }, { 100, 20 });
     }
 
     wxStaticBox *boxMeter = new wxStaticBox(this, wxID_ANY, _L("Измеритель"), { x, boxScan->GetSize().y + x }, { w, 50 });
