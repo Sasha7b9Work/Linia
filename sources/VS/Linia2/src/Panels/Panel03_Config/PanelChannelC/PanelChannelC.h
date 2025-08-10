@@ -17,8 +17,9 @@ public:
 
 private:
 
-    BmpButtonsCombo *comboScan = nullptr;
-    wxStaticBox *boxImpulse = nullptr;
+    BmpButtonsCombo *comboScan = nullptr;   // Развёртка
+    wxStaticBox *boxImpulse = nullptr;      // Развёртка - Импульс
+    wxCheckBox *chbDutyCycle = nullptr;     // Развёртка - Скважность
 
     void Tune();
 };

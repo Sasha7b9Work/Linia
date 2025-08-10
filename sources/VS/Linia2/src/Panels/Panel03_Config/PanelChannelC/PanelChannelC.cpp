@@ -60,7 +60,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
             new wxStaticText(boxImpulse, wxID_ANY, "0.2 ms", { 10, SD::Y_SB(20) });                                                 // IDC_EDITDLITIMP
         }
 
-        new wxCheckBox(boxScan, wxID_ANY, _L("Скважн. x 2"), { 20, SD::Y_SB(90) }, { 100, 20 });
+        chbDutyCycle = new wxCheckBox(boxScan, wxID_ANY, _L("Скважн. x 2"), { 20, SD::Y_SB(90) }, { 100, 20 });
     }
 
     wxStaticBox *boxMeter = new wxStaticBox(this, wxID_ANY, _L("Измеритель"), { x, boxScan->GetSize().y + x }, { w, 50 });
@@ -120,4 +120,11 @@ void PanelChannelC::OnEventChangeComboScan()
     int scan = comboScan->GetCurrentChoice();
 
     boxImpulse->Show(scan < 2);
+
+    static const bool duty[7] =
+    {
+        true, true, false, false, true, true, true
+    };
+
+    chbDutyCycle->Show(duty[scan]);
 }
