@@ -6,7 +6,7 @@
 #include "MainWindow.h"
 #include "Panels/Panel03_Config/Panel03_Config.h"
 #include "Controls/CustomComboBox.h"
-#include "Controls/BmpButtonsCombo.h"
+
 
 /*
     Не найдено
@@ -16,9 +16,14 @@
 */
 
 
+PanelChannelC *PanelChannelC::self = nullptr;
+
+
 PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
     wxPanel(parent)
 {
+    self = this;
+
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
@@ -47,10 +52,10 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
             "Синусоидальное"
         };
 
-        new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::Y_SB(25) }, {32, 42}, files, tooltips, 0, 3);
+        comboScan = new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::Y_SB(25) }, {32, 42}, files, tooltips, 0, 3);
 
         {
-            wxStaticBox *boxImpulse = new wxStaticBox(boxScan, wxID_ANY, _L("Импульс"), { 100, SD::Y_SB(25) }, { 75, 40 });         // IDC_STATICIMP
+            boxImpulse = new wxStaticBox(boxScan, wxID_ANY, _L("Импульс"), { 100, SD::Y_SB(25) }, { 75, 40 });         // IDC_STATICIMP
 
             new wxStaticText(boxImpulse, wxID_ANY, "0.2 ms", { 10, SD::Y_SB(20) });                                                 // IDC_EDITDLITIMP
         }
@@ -99,4 +104,20 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
         new wxSpinCtrl(boxSource, wxID_ANY, "0", { 80, SD::Y_SB(y) }, { 100, TEXTCNTRL_HEIGHT });
         new SpinBox(boxSource, wxID_ANY, "100", { 80, SD::Y_SB(y + 30) }, { 100, TEXTCNTRL_HEIGHT });
     }
+
+    Tune();
+}
+
+
+void PanelChannelC::Tune()
+{
+    comboScan->SetCurrentChoice(1);
+}
+
+
+void PanelChannelC::OnEventChangeComboScan()
+{
+    int scan = comboScan->GetCurrentChoice();
+
+    boxImpulse->Show(scan < 2);
 }

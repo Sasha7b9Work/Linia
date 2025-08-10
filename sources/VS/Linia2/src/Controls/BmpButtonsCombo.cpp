@@ -1,6 +1,7 @@
 ﻿// 2025/8/9 11:41:08 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Controls/BmpButtonsCombo.h"
+#include "Panels/Panel03_Config/PanelChannelC/PanelChannelC.h"
 
 
 class ButtonPopup : public wxPopupTransientWindow
@@ -105,6 +106,8 @@ void BmpButtonsCombo::SetCurrentChoice(int choice)
     current_choice = choice;
 
     SetFileBitmap(files[(uint)current_choice]);
+
+    PanelChannelC::self->OnEventChangeComboScan();
 }
 
 
