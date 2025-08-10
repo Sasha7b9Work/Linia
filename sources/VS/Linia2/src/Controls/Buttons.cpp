@@ -101,15 +101,9 @@ ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &s
 }
 
 
-void ButtonBitmap::CreateBitmap(Bitmap &bmap, const wxString &file_bitmap)
-{
-    bmap = Bitmap::Get(file_bitmap);
-}
-
-
 void ButtonBitmap::SetFileBitmap(const wxString &file_bitmap)
 {
-    CreateBitmap(bitmap, file_bitmap);
+    bitmap = Bitmap::Get(file_bitmap);
 
     SetBitmap(bitmap.GetBitmap());
 }

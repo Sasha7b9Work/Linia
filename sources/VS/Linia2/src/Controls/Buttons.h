@@ -61,10 +61,6 @@ public:
 
     void SetFileBitmap(const wxString &file_bitmap);
 
-protected:
-
-    void CreateBitmap(Bitmap &, const wxString &file_bitmap);
-
 private:
 
     Bitmap bitmap;
