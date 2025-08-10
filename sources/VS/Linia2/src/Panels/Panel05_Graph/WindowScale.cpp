@@ -34,8 +34,6 @@ WindowScale::WindowScale() :
     choices.Add("20");
     choices.Add("50");
 
-    comboNumber = new wxComboBox(this, wxID_ANY, choices[0], { 200, y }, { 70, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-
     y += 50;
 
     wxSize size_button{ 100, BUTTON_HEIGHT };

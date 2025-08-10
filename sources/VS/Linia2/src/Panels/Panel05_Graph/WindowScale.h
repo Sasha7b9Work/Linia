@@ -43,7 +43,6 @@ private:
     wxTextCtrl *textMaxX = nullptr;
     wxTextCtrl *textMinY = nullptr;
     wxTextCtrl *textMaxY = nullptr;
-    wxComboBox *comboNumber = nullptr;
     wxButton *btnApply = nullptr;
     wxButton *btnCancel = nullptr;
 

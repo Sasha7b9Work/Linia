@@ -27,7 +27,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    wxStaticBox *boxScan = new wxStaticBox(this, wxID_ANY, _L("Развёртка"), { x, 0 }, { w, 130 });          // IDC_STATICRAZV
+    wxStaticBox *boxScan = new wxStaticBox(this, wxID_ANY, _L("Развёртка"), { x, 0 }, { w, 140 });          // IDC_STATICRAZV
 
     {
         wxArrayString files =
@@ -52,15 +52,16 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
             "Синусоидальное"
         };
 
-        comboScan = new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::Y_SB(25) }, {32, 42}, files, tooltips, 0, 3);
+        comboScan = new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::Y_SB(25) }, { 32, 42 }, files, tooltips, 0, 3);
 
-        {
-            boxImpulse = new wxStaticBox(boxScan, wxID_ANY, _L("Импульс"), { 100, SD::Y_SB(25) }, { 75, 40 });         // IDC_STATICIMP
+        chbDutyCycle = new wxCheckBox(boxScan, wxID_ANY, _L("Скважн. x 2"), { 90, SD::Y_SB(35) }, { 100, 20 });
 
-            new wxStaticText(boxImpulse, wxID_ANY, "0.2 ms", { 10, SD::Y_SB(20) });                                                 // IDC_EDITDLITIMP
-        }
+        new wxStaticText(boxScan, wxID_ANY, "Число импульсов", { 10, SD::Y_SB(80) });
 
-        chbDutyCycle = new wxCheckBox(boxScan, wxID_ANY, _L("Скважн. x 2"), { 20, SD::Y_SB(90) }, { 100, 20 });
+        comboNumberImpulses = new wxComboBox(boxScan, wxID_ANY, "", {120, SD::Y_SB(80)}, {70, TEXTCNTRL_HEIGHT});
+
+        textLabelImpulse = new wxStaticText(boxScan, wxID_ANY, "Длина импульса", { 10, SD::Y_SB(110) });                                    // IDC_STATICIMP
+        textValueImpulse = new wxStaticText(boxScan, wxID_ANY, "0.2 ms",         { 120, SD::Y_SB(110) });                                   // IDC_EDITDLITIMP
     }
 
     wxStaticBox *boxMeter = new wxStaticBox(this, wxID_ANY, _L("Измеритель"), { x, boxScan->GetSize().y + x }, { w, 50 });
@@ -119,7 +120,10 @@ void PanelChannelC::OnEventChangeComboScan()
 {
     int scan = comboScan->GetCurrentChoice();
 
-    boxImpulse->Show(scan < 2);
+    bool show = scan < 2;
+
+    textLabelImpulse->Show(show);
+    textValueImpulse->Show(show);
 
     static const bool duty[7] =
     {
