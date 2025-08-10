@@ -19,7 +19,7 @@ private:
 
     BmpButtonsCombo *comboScan = nullptr;       // Развёртка
     wxCheckBox *chbDutyCycle = nullptr;         // Развёртка - Скважность
-    wxComboBox *comboNumberImpulses = nullptr;  // Развёртка - Число импульсов
+    wxComboBox *comboNumberPoints = nullptr;    // Развёртка - Число точек
     wxStaticText *textLabelImpulse = nullptr;   // Развёртка - Длина импульса
     wxStaticText *textValueImpulse = nullptr;   // Развёртка - Длина импульса (значение)
 

@@ -56,9 +56,11 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
 
         chbDutyCycle = new wxCheckBox(boxScan, wxID_ANY, _L("Скважн. x 2"), { 90, SD::Y_SB(35) }, { 100, 20 });
 
-        new wxStaticText(boxScan, wxID_ANY, "Число импульсов", { 10, SD::Y_SB(80) });
+        new wxStaticText(boxScan, wxID_ANY, "Число точек", { 10, SD::Y_SB(80) });
 
-        comboNumberImpulses = new wxComboBox(boxScan, wxID_ANY, "", {120, SD::Y_SB(80)}, {70, TEXTCNTRL_HEIGHT});
+        wxArrayString choices;
+
+        comboNumberPoints = new wxComboBox(boxScan, wxID_ANY, "", {120, SD::Y_SB(80)}, {70, TEXTCNTRL_HEIGHT}, choices, wxCB_READONLY);
 
         textLabelImpulse = new wxStaticText(boxScan, wxID_ANY, "Длина импульса", { 10, SD::Y_SB(110) });                                    // IDC_STATICIMP
         textValueImpulse = new wxStaticText(boxScan, wxID_ANY, "0.2 ms",         { 120, SD::Y_SB(110) });                                   // IDC_EDITDLITIMP
@@ -131,4 +133,23 @@ void PanelChannelC::OnEventChangeComboScan()
     };
 
     chbDutyCycle->Show(duty[scan]);
+
+    {
+        wxArrayString choices;
+
+        if (scan < 4)
+        {
+            choices.push_back("20");
+            choices.push_back("50");
+            comboNumberPoints->Enable(true);
+        }
+        else
+        {
+            choices.push_back("200");
+            comboNumberPoints->Enable(false);
+        }
+
+        comboNumberPoints->Set(choices);
+        comboNumberPoints->SetSelection(0);
+    }
 }
