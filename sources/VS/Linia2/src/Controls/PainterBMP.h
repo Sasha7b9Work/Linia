@@ -1,5 +1,6 @@
 ﻿// 2025/08/08 13:57:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Controls/Bitmap.h"
 
 
 // Отображает BMP
@@ -15,7 +16,7 @@ public:
 
 private:
 
-    wxBitmap bitmap;
+    Bitmap bitmap;
 
     void OnEventPaint(wxPaintEvent &);
 
