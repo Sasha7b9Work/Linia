@@ -27,4 +27,6 @@ private:
     wxStaticText *textValueImpulse = nullptr;   // Развёртка - Длина импульса (значение)
 
     void Tune();
+
+    void OnEventComboBox(wxCommandEvent &);
 };

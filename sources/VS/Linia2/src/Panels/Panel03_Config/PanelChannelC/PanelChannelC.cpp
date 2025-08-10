@@ -110,6 +110,8 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
         new SpinBox(boxSource, wxID_ANY, "100", { 80, SD::Y_SB(y + 30) }, { 100, TEXTCNTRL_HEIGHT });
     }
 
+    Bind(wxEVT_COMBOBOX, &PanelChannelC::OnEventComboBox, this);
+
     Tune();
 }
 
@@ -186,4 +188,24 @@ void PanelChannelC::OnEventChangeComboScan()
     }
 
     LOG_WRITE("then");
+}
+
+
+void PanelChannelC::OnEventComboBox(wxCommandEvent &event)
+{
+    int id = event.GetId();
+
+    if (id == comboRange->GetId())
+    {
+        static const pchar values[5] =
+        {
+            "0.2 ms",
+            "0.2 ms",
+            "0.5 ms",
+            "1.0 ms",
+            "2.0 ms"
+        };
+
+        textValueImpulse->SetLabel(values[comboRange->GetSelection()]);
+    }
 }
