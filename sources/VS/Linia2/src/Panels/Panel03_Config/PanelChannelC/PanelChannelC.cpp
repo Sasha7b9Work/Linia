@@ -8,6 +8,13 @@
 #include "Controls/CustomComboBox.h"
 #include "Controls/BmpButtonsCombo.h"
 
+/*
+    Не найдено
+    IDC_STATICIMP1POS
+    IDC_STATICIMP1NEG
+    IDC_CHECKPAUZA
+*/
+
 
 PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
     wxPanel(parent)
@@ -15,18 +22,18 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    wxStaticBox *boxScan = new wxStaticBox(this, wxID_ANY, _L("Развёртка"), { x, 0 }, { w, 130 });
+    wxStaticBox *boxScan = new wxStaticBox(this, wxID_ANY, _L("Развёртка"), { x, 0 }, { w, 130 });          // IDC_STATICRAZV
 
     {
         wxArrayString files =
         {
-            "icons/graphs/imp_up.ico",      // IMP_POS  IDC_RADIO_RAZVIMPPOSITIVE   OnRadioRazvimppositive
-            "icons/graphs/imp_down.ico",    // IMP_NEG  IDC_RADIO_RAZVIMPNEGATIVE
+            "icons/graphs/imp_up.ico",      // IMP_POS  IDC_RADIO_RAZVIMPPOSITIVE   IDC_STATICIMPPOSITIVE   OnRadioRazvimppositive
+            "icons/graphs/imp_down.ico",    // IMP_NEG  IDC_RADIO_RAZVIMPNEGATIVE   IDC_STATICIMPNEGATIVE
             "icons/graphs/triang_up.ico",   // DC_POS   IDC_RADIO_RAZVDCPOSITIVE
             "icons/graphs/triang_down.ico", // DC_NEG   IDC_RADIO_RAZVDCNEGATIVE
             "icons/graphs/sin_hi.ico",      // SYN_POS  IDC_RADIO_SYNPOSITIVE
             "icons/graphs/sin_lo.ico",      // SYN_NEG  IDC_RADIO_SYNNEGATIVE
-            "icons/graphs/sin.ico"          // AC       IDC_RADIO_RAZVAC
+            "icons/graphs/sin.ico"          // AC       IDC_RADIO_RAZVAC            IDC_STATICAC
         };
 
         wxArrayString tooltips =
@@ -43,9 +50,9 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
         new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::Y_SB(25) }, {32, 42}, files, tooltips, 0, 3);
 
         {
-            wxStaticBox *boxImpulse = new wxStaticBox(boxScan, wxID_ANY, _L("Импульс"), { 100, SD::Y_SB(25) }, { 75, 40 });
+            wxStaticBox *boxImpulse = new wxStaticBox(boxScan, wxID_ANY, _L("Импульс"), { 100, SD::Y_SB(25) }, { 75, 40 });         // IDC_STATICIMP
 
-            new wxStaticText(boxImpulse, wxID_ANY, "0.2 ms", { 10, SD::Y_SB(20) });
+            new wxStaticText(boxImpulse, wxID_ANY, "0.2 ms", { 10, SD::Y_SB(20) });                                                 // IDC_EDITDLITIMP
         }
 
         new wxCheckBox(boxScan, wxID_ANY, _L("Скважн. x 2"), { 20, SD::Y_SB(90) }, { 100, 20 });
@@ -91,8 +98,5 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
 
         new wxSpinCtrl(boxSource, wxID_ANY, "0", { 80, SD::Y_SB(y) }, { 100, TEXTCNTRL_HEIGHT });
         new SpinBox(boxSource, wxID_ANY, "100", { 80, SD::Y_SB(y + 30) }, { 100, TEXTCNTRL_HEIGHT });
-
-        CustomComboBox *combo = new CustomComboBox(boxSource, wxID_ANY);
-        combo->SetPosition({ 10, 160 });
     }
 }
