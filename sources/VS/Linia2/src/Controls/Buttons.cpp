@@ -146,3 +146,9 @@ void ButtonBitmapChoice::SetCurrentValue(int value)
         LOG_ERROR("Bad index");
     }
 }
+
+
+int ButtonBitmapChoice::GetCurrentValue() const
+{
+    return choice;
+}
