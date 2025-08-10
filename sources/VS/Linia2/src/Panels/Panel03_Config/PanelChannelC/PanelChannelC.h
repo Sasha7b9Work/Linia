@@ -17,6 +17,9 @@ public:
 
 private:
 
+    wxComboBox *comboVoltage = nullptr;         // Измеритель U
+    wxComboBox *comboCurrent = nullptr;         // Измеритель I
+    wxComboBox *comboRange = nullptr;           // Источник U - Диапазон
     BmpButtonsCombo *comboScan = nullptr;       // Развёртка
     wxCheckBox *chbDutyCycle = nullptr;         // Развёртка - Скважность
     wxComboBox *comboNumberPoints = nullptr;    // Развёртка - Число точек

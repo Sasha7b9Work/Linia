@@ -28,8 +28,6 @@ WindowScale::WindowScale() :
 
     y += 50;
 
-    new wxStaticText(this, wxID_ANY, _L("Число точек 1-ой очереди"), { d, y });
-
     wxArrayString choices;
     choices.Add("20");
     choices.Add("50");

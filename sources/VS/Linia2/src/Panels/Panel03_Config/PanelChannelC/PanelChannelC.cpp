@@ -78,23 +78,29 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
         wxArrayString choices;
         choices.Add("100V");
 
-        new wxComboBox(boxMeter, wxID_ANY, choices[0], { 30, SD::Y_SB(y) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        comboVoltage =new wxComboBox(boxMeter, wxID_ANY, choices[0], { 30, SD::Y_SB(y) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
         choices.Clear();
         choices.Add("10A");
 
-        new wxComboBox(boxMeter, wxID_ANY, choices[0], { 120, SD::Y_SB(y) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        comboCurrent = new wxComboBox(boxMeter, wxID_ANY, choices[0], { 120, SD::Y_SB(y) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
     }
 
-    wxStaticBox *boxSource = new wxStaticBox(this, wxID_ANY, _L("Источник") + " U", { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + x }, { w, 200 });
+    wxStaticBox *boxSource = new wxStaticBox(this, wxID_ANY, "Источник U", { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + x }, { w, 200 });
 
     {
-        new wxStaticText(boxSource, wxID_ANY, _L("Диапазон Uc"), { 10, SD::Y_SB(30) });
+        new wxStaticText(boxSource, wxID_ANY, "Диапазон Ud", { 10, SD::Y_SB(30) });
 
-        wxArrayString choices;
-        choices.Add("20V");
+        wxArrayString choices
+        {
+            "5 V",
+            "20 V",
+            "100 V",
+            "500 V",
+            "2000 V"
+        };
 
-        new wxComboBox(boxSource, wxID_ANY, choices[0], { 100, SD::Y_SB(27) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        comboRange = new wxComboBox(boxSource, wxID_ANY, choices[0], { 100, SD::Y_SB(27) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
 
         new wxStaticText(boxSource, wxID_ANY, _L("Ограничение Uc, %%"), { 40, SD::Y_SB(55) });
 

@@ -10,7 +10,7 @@ wxString LL::ID(const wxString &id)
 
     Config::SetFile(wxGetCwd() + "/Linia.loc");
 
-    wxString result = Config::ReadString(key);
+    wxString result = Config::ReadString(key, id);
 
     Config::SetFile("");
 
