@@ -6,6 +6,7 @@
 #include "MainWindow.h"
 #include "Panels/Panel03_Config/Panel03_Config.h"
 #include "Controls/CustomComboBox.h"
+#include "Device/SettingsDevice.h"
 
 
 /*
@@ -76,14 +77,9 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
         new wxStaticText(boxMeter, wxID_ANY, "Ic", { 100, SD::Y_SB(y + dY) });
 
         wxArrayString choices;
-        choices.Add("100V");
+        comboVoltage =new wxComboBox(boxMeter, wxID_ANY, "", {30, SD::Y_SB(y)}, {60, TEXTCNTRL_HEIGHT}, choices, wxCB_READONLY);
 
-        comboVoltage =new wxComboBox(boxMeter, wxID_ANY, choices[0], { 30, SD::Y_SB(y) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-
-        choices.Clear();
-        choices.Add("10A");
-
-        comboCurrent = new wxComboBox(boxMeter, wxID_ANY, choices[0], { 120, SD::Y_SB(y) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        comboCurrent = new wxComboBox(boxMeter, wxID_ANY, "", {120, SD::Y_SB(y)}, {60, TEXTCNTRL_HEIGHT}, choices, wxCB_READONLY);
     }
 
     wxStaticBox *boxSource = new wxStaticBox(this, wxID_ANY, "Источник U", { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + x }, { w, 200 });
@@ -120,6 +116,36 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
 
 void PanelChannelC::Tune()
 {
+    wxArrayString choices;
+
+    {
+        RangeI::E min = RangeI::Min(DSet::Type::ChanC_Meas);
+        RangeI::E max = RangeI::Max(DSet::Type::ChanC_Meas);
+
+        for (int i = min; i <= max; i++)
+        {
+            choices.push_back(RangeI((RangeI::E)i).Name(RowRange::_125));
+        }
+
+        comboCurrent->Set(choices);
+        comboCurrent->SetSelection(0);
+    }
+
+    {
+        choices.clear();
+
+        RangeU::E min = RangeU::Min(DSet::Type::ChanC_Meas);
+        RangeU::E max = RangeU::Max(DSet::Type::ChanC_Meas);
+
+        for (int i = min; i <= max; i++)
+        {
+            choices.push_back(RangeU((RangeU::E)i).Name(RowRange::_125));
+        }
+
+        comboVoltage->Set(choices);
+        comboVoltage->SetSelection(0);
+    }
+
     comboScan->SetCurrentChoice(1);
 }
 
