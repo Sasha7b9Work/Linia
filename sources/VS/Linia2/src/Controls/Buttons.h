@@ -1,6 +1,7 @@
 // 2023/09/02 11:37:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/PainterRect.h"
+#include "Controls/Bitmap.h"
 
 
 struct Color;
@@ -62,9 +63,9 @@ public:
 
 protected:
 
-    void CreateBitmap(wxBitmap &, const wxString &file_bitmap);
+    void CreateBitmap(Bitmap &, const wxString &file_bitmap);
 
 private:
 
-    wxBitmap bitmap;
+    Bitmap bitmap;
 };

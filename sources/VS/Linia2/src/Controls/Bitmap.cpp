@@ -46,3 +46,15 @@ Bitmap Bitmap::Get(const wxString &file_name)
 
     return bitmaps[file_name];
 }
+
+
+wxSize Bitmap::GetSize() const
+{
+    return bitmap.GetSize();
+}
+
+
+wxBitmap &Bitmap::GetBitmap()
+{
+    return bitmap;
+}

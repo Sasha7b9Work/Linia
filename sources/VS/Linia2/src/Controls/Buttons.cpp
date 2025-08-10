@@ -3,6 +3,7 @@
 #include "Controls/Buttons.h"
 #include "Controls/PainterRect.h"
 #include "Utils/GlobalFunctions.h"
+#include "Controls/Bitmap.h"
 
 
 ButtonColor::ButtonColor(wxWindow *parent, int id, const wxString &title, wxPoint position, wxSize size, PainterRect *painter) :
@@ -100,34 +101,9 @@ ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &s
 }
 
 
-void ButtonBitmap::CreateBitmap(wxBitmap &bmap, const wxString &file_bitmap)
+void ButtonBitmap::CreateBitmap(Bitmap &bmap, const wxString &file_bitmap)
 {
-    wxString path = wxString("resources/") + file_bitmap;
-
-    if (file_bitmap[file_bitmap.size() - 1] == 'p')
-    {
-        wxImage image;
-
-        if (!image.LoadFile(path, wxBITMAP_TYPE_BMP))
-        {
-            LOG_ERROR("Не удалось загрузить файл изображения %s", file_bitmap.c_str().AsChar());
-        }
-
-        bmap = wxBitmap(image);
-
-        bmap.SetMask(new wxMask(bmap, *wxWHITE));
-    }
-    else
-    {
-        wxIcon icon;
-
-        if (!icon.LoadFile(path, wxBITMAP_TYPE_ICO))
-        {
-            LOG_ERROR("Не удалось загрузить файл изображения %s", file_bitmap.c_str().AsChar());
-        }
-
-        bmap.CopyFromIcon(icon);
-    }
+    bmap = Bitmap::Get(file_bitmap);
 }
 
 
@@ -135,5 +111,5 @@ void ButtonBitmap::SetFileBitmap(const wxString &file_bitmap)
 {
     CreateBitmap(bitmap, file_bitmap);
 
-    SetBitmap(bitmap);
+    SetBitmap(bitmap.GetBitmap());
 }
