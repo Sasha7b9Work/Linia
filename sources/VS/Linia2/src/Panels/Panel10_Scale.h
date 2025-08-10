@@ -18,10 +18,7 @@ public:
 private:
 
     wxToggleButton *btnScale = nullptr,
-        *btnErrors = nullptr,
-        *btn1 = nullptr,
-        *btn2 = nullptr,
-        *btn3 = nullptr;
+        *btnErrors = nullptr;
 
     wxCheckBox *chb1 = nullptr,
         *chb2 = nullptr,

@@ -6,6 +6,7 @@
 #include "Panels/Panel11_Menu/Panel11_Menu.h"
 #include "Utils/GlobalFunctions.h"
 #include "Utils/SystemDepend.h"
+#include "Controls/Buttons.h"
 
 
 PanelScale *PanelScale::self = nullptr;
@@ -112,11 +113,14 @@ void PanelScale::CreatePanelScale(wxPanel *panel, int x, int /*w*/)
     int y = 20;
     int dy = 30;
 
-    btn1 = new wxToggleButton(panel, wxID_ANY, "", { x, SD::Y_SB(y) }, size);
+    wxArrayString choices =
+    {
+        "grid/grid.bmp",
+        "grid/bmp00076.bmp",
+        "grid/bmp00075.bmp"
+    };
 
-    btn2 = new wxToggleButton(panel, wxID_ANY, "", { x, SD::Y_SB(y + dy) }, size);
-
-    btn3 = new wxToggleButton(panel, wxID_ANY, "", { x, SD::Y_SB(y + dy * 2) }, size);
+    new ButtonBitmapChoice(panel, { 10, SD::Y_SB(25) }, wxDefaultSize, choices);
 
     int dx = 65;
 

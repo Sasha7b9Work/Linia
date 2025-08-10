@@ -107,3 +107,42 @@ void ButtonBitmap::SetFileBitmap(const wxString &file_bitmap)
 
     SetBitmap(bitmap.GetBitmap());
 }
+
+
+ButtonBitmapChoice::ButtonBitmapChoice(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxArrayString &_files) :
+    ButtonBitmap(parent, pos, size, _files[0]),
+    files(_files)
+{
+    Bind(wxEVT_BUTTON, &ButtonBitmapChoice::OnEventButton, this);
+}
+
+
+void ButtonBitmapChoice::OnEventButton(wxCommandEvent &event)
+{
+    if (event.GetId() == GetId())
+    {
+        choice++;
+
+        if (choice >= (int)files.GetCount())
+        {
+            choice = 0;
+        }
+
+        SetCurrentValue(choice);
+    }
+}
+
+
+void ButtonBitmapChoice::SetCurrentValue(int value)
+{
+    if (value < (int)files.GetCount())
+    {
+        choice = value;
+
+        SetFileBitmap(files[(size_t)choice]);
+    }
+    else
+    {
+        LOG_ERROR("Bad index");
+    }
+}

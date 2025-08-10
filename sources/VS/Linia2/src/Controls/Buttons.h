@@ -65,3 +65,24 @@ private:
 
     Bitmap bitmap;
 };
+
+
+// На кнопке при нажатиях переключаются картинки
+class ButtonBitmapChoice : public ButtonBitmap
+{
+public:
+
+    ButtonBitmapChoice(wxWindow *parent, const wxPoint &pos, const wxSize &, const wxArrayString &files);
+
+    void SetCurrentValue(int);
+
+    int GetCurrentValue() const;
+
+private:
+
+    wxArrayString files;
+
+    int choice = 0;
+
+    void OnEventButton(wxCommandEvent &);
+};
