@@ -152,4 +152,6 @@ void PanelChannelC::OnEventChangeComboScan()
         comboNumberPoints->Set(choices);
         comboNumberPoints->SetSelection(0);
     }
+
+    LOG_WRITE("then");
 }
