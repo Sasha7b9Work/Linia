@@ -6,6 +6,4 @@ class Panel : public wxPanel
 {
 public:
     Panel(wxWindow *parent, int x, int y, int w, int h);
-    
-    virtual void Update() {} // Базовая реализация - ничего не делает
 };

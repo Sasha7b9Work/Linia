@@ -7,7 +7,6 @@
 #include "Utils/Timer.h"
 #include "MainWindow.h"
 #include "Windows/ConsoleRS232.h"
-#include "Panels/Panel_STM32_Status.h"
 
 
 wxIMPLEMENT_APP(Application);
@@ -78,12 +77,6 @@ void Application::OnTimer(wxTimerEvent &)
     if (mutex.try_lock())
     {
         ComPort::Update();
-        
-        // Обновляем панель управления STM32
-        if (Panel_STM32_Status::self)
-        {
-            Panel_STM32_Status::self->Update();
-        }
 
         mutex.unlock();
     };

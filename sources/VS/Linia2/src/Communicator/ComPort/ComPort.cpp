@@ -254,7 +254,7 @@ wxString ComPort::ExtractMessage(char *buffer)
                 return wxString(buffer);
             }
 
-            if (buffer[i] == '\0' || (signed char)buffer[i] == -1)
+            if (buffer[i] == -1)
             {
                 return "";
             }
