@@ -23,8 +23,26 @@ sudo apt-get install libgtk-3-dev -y
 sudo apt-get install curl cmake -y
 sudo apt install libcurl4-openssl-dev -y
 sudo apt-get install libsecret-1-dev -y
-# Добавляем GSpell для проверки орфографии
+
+# Библиотеки для проверки орфографии и архивов
 sudo apt-get install libgspell-1-dev -y
+sudo apt-get install libmspack-dev -y
+
+# Дополнительные системные библиотеки
+sudo apt-get install libxkbcommon-dev -y
+sudo apt-get install libpng-dev -y
+sudo apt-get install libjpeg-dev -y
+sudo apt-get install libtiff-dev -y
+sudo apt-get install libexpat1-dev -y
+sudo apt-get install zlib1g-dev -y
+
+# GNOME VFS (если доступно)
+if apt-cache show libgnomevfs2-dev >/dev/null 2>&1; then
+    echo "Устанавливаем libgnomevfs2-dev..."
+    sudo apt-get install libgnomevfs2-dev -y
+else
+    echo "libgnomevfs2-dev недоступно в данной версии Ubuntu"
+fi
 
 # Установка WebKit с проверкой версии (Ubuntu 24.04 использует 4.1)
 echo "Попытка установки WebKit2GTK..."

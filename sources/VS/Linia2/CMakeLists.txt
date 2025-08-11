@@ -57,6 +57,8 @@ file(GLOB COMMUNICATOR_COMPORT          src/Communicator/ComPort/*.*)
 file(GLOB COMMUNICATOR_SPI              src/Communicator/SPI/*.*)
 file(GLOB CONTROLS                      src/Controls/*.*)
 file(GLOB DEVICE                        src/Device/*.*)
+file(GLOB DEVICE_COMMUNICATION          src/Device/Communication/*.*)
+file(GLOB DEVICE_LOGGING                src/Device/Logging/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
 file(GLOB PANELS_PANEL3                 src/Panels/Panel03_Config/*.*)
 file(GLOB PANELS_PANEL3_CHAN_C          src/Panels/Panel03_Config/PanelChannelC/*.*)
@@ -65,10 +67,33 @@ file(GLOB PANELS_PANEL5                 src/Panels/Panel05_Graph/*.*)
 file(GLOB PANELS_PANEL11                src/Panels/Panel11_Menu/*.*)
 file(GLOB PANELS_PANEL11_SETUP          src/Panels/Panel11_Menu/Setup/*.*)
 file(GLOB PANELS_PANEL12                src/Panels/Panel12_Debug/*.*)
+file(GLOB PANELS_STM32_STATUS           src/Panels/STM32_Status/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB UTILS                         src/Utils/*.*)
 file(GLOB WINDOWS                       src/Windows/*.*)
 
+<<<<<<< HEAD
+source_group(doc                        FILES ${DOC})
+source_group(Resources                  FILES ${RESOURCES})
+source_group(src                        FILES ${SRC})
+source_group(Communicator               FILES ${COMMUNICATOR})
+source_group(Communicator/ComPort       FILES ${COMMUNICATOR_COMPORT})
+source_group(Communicator/SPI           FILES ${COMMUNICATOR_SPI})
+source_group(Controls                   FILES ${CONTROLS})
+source_group(Device                     FILES ${DEVICE})
+source_group(Device/Communication       FILES ${DEVICE_COMMUNICATION})
+source_group(Device/Logging             FILES ${DEVICE_LOGGING})
+source_group(Panels                     FILES ${PANELS})
+source_group(Panels/Panel03_Config      FILES ${PANELS_PANEL3})
+source_group(Panels/Panel05_Graph       FILES ${PANELS_PANEL5})
+source_group(Panels/Panel11_Menu        FILES ${PANELS_PANEL11})
+source_group(Panels/Panel11_Menu/Setup  FILES ${PANELS_PANEL11_SETUP})
+source_group(Panels/Panel12_Debug       FILES ${PANELS_PANEL12})
+source_group(Panels/STM32_Status        FILES ${PANELS_STM32_STATUS})
+source_group(Settings                   FILES ${SETTINGS})
+source_group(Utils                      FILES ${UTILS})
+source_group(Windows                    FILES ${WINDOWS})
+=======
 source_group(doc                                 FILES ${DOC})
 source_group(Resources                           FILES ${RESOURCES})
 source_group(src                                 FILES ${SRC})
@@ -88,6 +113,7 @@ source_group(Panels/Panel12_Debug                FILES ${PANELS_PANEL12})
 source_group(Settings                            FILES ${SETTINGS})
 source_group(Utils                               FILES ${UTILS})
 source_group(Windows                             FILES ${WINDOWS})
+>>>>>>> 35bae0f1a5860154ea5599d2f31aeaec06a77d26
 
 add_executable(${PROJECT_NAME}
     ${DOC}
@@ -98,6 +124,8 @@ add_executable(${PROJECT_NAME}
     ${COMMUNICATOR_SPI}
     ${CONTROLS}
     ${DEVICE}
+    ${DEVICE_COMMUNICATION}
+    ${DEVICE_LOGGING}
     ${PANELS}
     ${PANELS_PANEL3}
     ${PANELS_PANEL3_CHAN_C}
@@ -106,6 +134,7 @@ add_executable(${PROJECT_NAME}
     ${PANELS_PANEL11}
     ${PANELS_PANEL11_SETUP}
     ${PANELS_PANEL12}
+    ${PANELS_STM32_STATUS}
     ${SETTINGS}
     ${UTILS}
     ${WINDOWS}
@@ -132,23 +161,63 @@ if(WIN32)
     # Копируем в рабочий каталог
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy $(OutputPath)\\$(PROJECT_NAME) . /Y)
 else()
+    find_package(PkgConfig REQUIRED)
+    
+    pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
+    pkg_check_modules(GDK3 REQUIRED gdk-3.0)
+    pkg_check_modules(PANGO REQUIRED pango)
+    pkg_check_modules(PANGOCAIRO REQUIRED pangocairo)
+    pkg_check_modules(CAIRO REQUIRED cairo)
+    pkg_check_modules(GDK_PIXBUF REQUIRED gdk-pixbuf-2.0)
+    pkg_check_modules(GIO REQUIRED gio-2.0)
+    pkg_check_modules(GOBJECT REQUIRED gobject-2.0)
+    pkg_check_modules(GLIB REQUIRED glib-2.0)
+    
+    find_package(X11 REQUIRED)
+    find_package(PNG REQUIRED)
+    
+    pkg_check_modules(XKBCOMMON REQUIRED xkbcommon)
+    pkg_check_modules(GSPELL REQUIRED gspell-1)
+    
+    find_package(Threads REQUIRED)
+    
     target_link_libraries(${PROJECT_NAME}
         wx_gtk3u_core-3.2
-        gtk-3
-        gdk-3
-        pangocairo-1.0
-        pango-1.0
-        pthread
-        cairo
-        /usr/lib/x86_64-linux-gnu/libX11.so
-        /usr/lib/x86_64-linux-gnu/libxkbcommon.so
-        /usr/lib/x86_64-linux-gnu/libpng.so
-        gdk_pixbuf-2.0
         wx_baseu-3.2
-        gio-2.0
-        gobject-2.0
-        glib-2.0
-        dl 
+        
+        ${GTK3_LIBRARIES}
+        ${GDK3_LIBRARIES}
+        ${PANGO_LIBRARIES}
+        ${PANGOCAIRO_LIBRARIES}
+        ${CAIRO_LIBRARIES}
+        ${GDK_PIXBUF_LIBRARIES}
+        ${GIO_LIBRARIES}
+        ${GOBJECT_LIBRARIES}
+        ${GLIB_LIBRARIES}
+        
+        ${X11_LIBRARIES}
+        ${PNG_LIBRARIES}
+        ${XKBCOMMON_LIBRARIES}
+        ${GSPELL_LIBRARIES}
+        
+        Threads::Threads
+        dl
+        )
+    
+    target_include_directories(${PROJECT_NAME} PRIVATE
+        ${GTK3_INCLUDE_DIRS}
+        ${GDK3_INCLUDE_DIRS}
+        ${PANGO_INCLUDE_DIRS}
+        ${PANGOCAIRO_INCLUDE_DIRS}
+        ${CAIRO_INCLUDE_DIRS}
+        ${GDK_PIXBUF_INCLUDE_DIRS}
+        ${GIO_INCLUDE_DIRS}
+        ${GOBJECT_INCLUDE_DIRS}
+        ${GLIB_INCLUDE_DIRS}
+        ${X11_INCLUDE_DIRS}
+        ${PNG_INCLUDE_DIRS}
+        ${XKBCOMMON_INCLUDE_DIRS}
+        ${GSPELL_INCLUDE_DIRS}
         )
 endif()
 

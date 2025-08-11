@@ -8,28 +8,70 @@
 #include "Connector/Device/Interface_d.h"
 #include "Connector/Device/Value_.h"
 #include "Generator/FPGA.h"
+#include "Device/Device.h"
+#include "Communication/SPICommunicator.h"
+#include "Utils/CallbackManager.h"
 
 
 #ifndef WIN32
     #if __ARMCC_VERSION != 6210000
-        // На других версиях компиляторов не проверялось
-        // Но на 6.23 из Keil 5.42a не запускается из-за new, malloc
+        // пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // пїЅпїЅ пїЅпїЅ 6.23 пїЅпїЅ Keil 5.42a пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ-пїЅпїЅ new, malloc
         #error "Requires ARM Compiler V6.21 from uVision 5.39"
     #endif
 #endif
+
+// Р“Р»РѕР±Р°Р»СЊРЅС‹Рµ РѕР±СЉРµРєС‚С‹
+Device device;
+SPICommunicator spi_communicator;
+
+// Callback С„СѓРЅРєС†РёРё
+void OnModeChanged(DeviceEvent event, void* data)
+{
+    DeviceMode* mode = static_cast<DeviceMode*>(data);
+    // РћР±СЂР°Р±РѕС‚РєР° СЃРјРµРЅС‹ СЂРµР¶РёРјР°
+}
+
+void OnErrorOccurred(DeviceEvent event, void* data)
+{
+    char* error_msg = static_cast<char*>(data);
+    // РћР±СЂР°Р±РѕС‚РєР° РѕС€РёР±РєРё
+}
+
+void OnDataReceived(DeviceEvent event, void* data)
+{
+    uint8_t* buffer = static_cast<uint8_t*>(data);
+    // РћР±СЂР°Р±РѕС‚РєР° РїРѕР»СѓС‡РµРЅРЅС‹С… РґР°РЅРЅС‹С…
+}
 
 
 int main()
 {
     HAL::Init();
-    HAL_TIM::DelayMS(500);             // Задержка нужна для того, чтобы AD9952 успел пройти внутреннюю инициализацию
+    HAL_TIM::DelayMS(500);             // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ AD9952 пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
     Generator::Stop();
 
     FPGA::Init();
+    
+    // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РЅРѕРІРѕР№ Р°СЂС…РёС‚РµРєС‚СѓСЂС‹
+    device.Initialize();
+    device.SetCommunicator(&spi_communicator);
+    
+    // Р РµРіРёСЃС‚СЂР°С†РёСЏ callbacks
+    CallbackManager::RegisterCallback(DeviceEvent::MODE_CHANGED, OnModeChanged);
+    CallbackManager::RegisterCallback(DeviceEvent::ERROR_OCCURRED, OnErrorOccurred);
+    CallbackManager::RegisterCallback(DeviceEvent::DATA_RECEIVED, OnDataReceived);
+    
+    // РЈСЃС‚Р°РЅРѕРІРєР° РЅР°С‡Р°Р»СЊРЅРѕРіРѕ СЂРµР¶РёРјР°
+    device.SetModeIdle();
 
     while (1)
     {
+        // РћР±СЂР°Р±РѕС‚РєР° РІС…РѕРґСЏС‰РёС… РґР°РЅРЅС‹С… С‡РµСЂРµР· РЅРѕРІСѓСЋ Р°СЂС…РёС‚РµРєС‚СѓСЂСѓ
+        device.ProcessIncomingData();
+        
+        // РЎРѕС…СЂР°РЅСЏРµРј СЃРѕРІРјРµСЃС‚РёРјРѕСЃС‚СЊ СЃ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРј РєРѕРґРѕРј
         DInterface::Update();
 
 //        FPGA::WritePeriod(TypeSignal::_1_12V, Value(1000));

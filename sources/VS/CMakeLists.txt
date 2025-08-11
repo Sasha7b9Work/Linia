@@ -75,6 +75,7 @@ else()
         -pthread
         -Wno-unknown-pragmas
         -Wno-write-strings
+        -Wno-type-limits            # Игнорируем предупреждения о сравнении с ограниченными типами данных
         -g                       # Без этого Code Blocks не останавливается на точках останова
         -O0
     )

@@ -19,6 +19,7 @@
 #include "Panels/Panel11_Menu/Panel11_Menu.h"
 #include "Panels/Panel12_Debug/Panel12_Debug.h"
 #include "Panels/Panel13_ReferenceGraphs.h"
+#include "Panels/Panel_STM32_Status.h"
 #include "Controls/Dialog.h"
 
 
@@ -102,6 +103,8 @@ MainWindow::MainWindow(const wxString &title)
     }
 
     new PanelName(this);
+
+    new Panel_STM32_Status(this);
 
     new PanelModeUpper(this);
 

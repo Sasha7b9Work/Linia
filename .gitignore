@@ -13,3 +13,7 @@ sources/Device/Listings/*
 sources/Device/Listings-Debug/*
 sources/Device/Objects/*
 sources/Device/Objects-Debug/*
+
+ALGORITM.md
+sources/VS/Linia2/src/Device/DeviceAPI_Documentation.md
+sources/VS/Linia2/STM32_INTEGRATION_README.md

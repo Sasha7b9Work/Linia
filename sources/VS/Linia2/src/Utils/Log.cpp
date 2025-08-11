@@ -3,6 +3,8 @@
 #include "Utils/Log.h"
 #include "Utils/StringUtils.h"
 #include "Windows/ConsoleRS232.h"
+#include <wx/stdpaths.h>
+#include <wx/filename.h>
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -32,7 +34,18 @@ void Log::Init()
     mutex.lock();
 
     {
-        file_name = wxGetCwd() + "/CIC.log";
+        // Получаем путь к исполняемому файлу и создаем лог рядом с ним
+        wxString app_path = wxStandardPaths::Get().GetExecutablePath();
+        wxFileName exe_dir(app_path);
+        exe_dir.SetFullName("");  // Убираем имя файла, оставляем только каталог
+        
+        file_name = exe_dir.GetPath() + "/CIC.log";
+
+        // Убеждаемся что каталог существует
+        if (!exe_dir.DirExists())
+        {
+            exe_dir.Mkdir(wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
+        }
 
         if (wxFile::Exists(file_name))
         {
@@ -58,7 +71,22 @@ void Log::WriteLine(pchar line)
 
     CutSize();
 
-    log_file.Write();
+    // Проверяем и создаем каталог перед записью если нужно
+    wxFileName log_path(file_name);
+    if (!log_path.DirExists())
+    {
+        log_path.Mkdir(wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
+    }
+
+    if (!log_file.Write())
+    {
+        // Попытка записи не удалась, попробуем пересоздать файл
+        if (log_file.Create(file_name))
+        {
+            log_file.AddLine(line);
+            log_file.Write();
+        }
+    }
 }
 
 

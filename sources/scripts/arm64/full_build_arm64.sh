@@ -19,11 +19,23 @@ rm -R -f ../../ThirdParty/wxWidgets/generated
 # Сборка wxWidgets для ARM64
 echo "Сборка wxWidgets для ARM64..."
 cd ../../ThirdParty/wxWidgets
-cmake CMakeLists.txt -Bgenerated -G "CodeBlocks - Unix Makefiles" \
+
+# Флаги для подавления предупреждений wxWidgets
+WXWIDGETS_CXXFLAGS="-O2 -march=armv8-a"
+WXWIDGETS_CXXFLAGS="$WXWIDGETS_CXXFLAGS -Wno-array-bounds"           # Подавляем array bounds warnings
+WXWIDGETS_CXXFLAGS="$WXWIDGETS_CXXFLAGS -Wno-maybe-uninitialized"   # Подавляем uninitialized warnings  
+WXWIDGETS_CXXFLAGS="$WXWIDGETS_CXXFLAGS -Wno-nonnull"               # Подавляем null pointer warnings
+WXWIDGETS_CXXFLAGS="$WXWIDGETS_CXXFLAGS -Wno-unused-variable"       # Подавляем unused variable warnings
+WXWIDGETS_CXXFLAGS="$WXWIDGETS_CXXFLAGS -Wno-unused-const-variable" # Подавляем unused const warnings
+WXWIDGETS_CXXFLAGS="$WXWIDGETS_CXXFLAGS -Wno-array-parameter"       # Подавляем array parameter warnings
+
+cmake CMakeLists.txt -Bgenerated \
     -DwxBUILD_SAMPLES=ALL \
     -DwxBUILD_SHARED=OFF \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_FLAGS="-O2 -march=armv8-a"
+    -DCMAKE_CXX_FLAGS="$WXWIDGETS_CXXFLAGS" \
+    -DwxUSE_LIBMSPACK=OFF \
+    -DwxUSE_LIBLZMA=ON
 
 cd generated
 cmake --build . -- -j$(nproc)
@@ -31,9 +43,16 @@ cd ../../../scripts/arm64
 
 # Сборка основного проекта
 echo "Сборка основного проекта..."
-cmake ../../VS/CMakeLists.txt -B../../generated -G "CodeBlocks - Unix Makefiles" \
+
+# Флаги для основного проекта (более строгие, но без проблемных предупреждений wxWidgets)
+PROJECT_CXXFLAGS="-O2 -march=armv8-a"
+PROJECT_CXXFLAGS="$PROJECT_CXXFLAGS -Wall -Wextra"                  # Включаем большинство предупреждений
+PROJECT_CXXFLAGS="$PROJECT_CXXFLAGS -Wno-unused-parameter"          # Отключаем для совместимости с wxWidgets
+PROJECT_CXXFLAGS="$PROJECT_CXXFLAGS -Wno-deprecated-declarations"   # Отключаем предупреждения об устаревших функциях
+
+cmake ../../VS/CMakeLists.txt -B../../generated \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_FLAGS="-O2 -march=armv8-a"
+    -DCMAKE_CXX_FLAGS="$PROJECT_CXXFLAGS"
 
 cd ../../generated
 
@@ -50,7 +69,7 @@ else
     echo "2. Проблемы с линковкой - запустите: ./fix_build_arm64.sh"
     echo ""
     echo "Для получения подробной информации об ошибке, посмотрите вывод выше"
-    cd ../scripts/orange_pi
+    cd ../scripts/arm64
     exit 1
 fi
 

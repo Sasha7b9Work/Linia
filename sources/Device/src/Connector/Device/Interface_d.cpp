@@ -7,13 +7,13 @@
 #include "Generator/MAX532.h"
 #include "Generator/MCP4811.h"
 #include "Connector/Device/Interface_d.h"
-#include "Connector/Device/Messages_.h"
+#include "Connector/Device/Messages_d.h"
 #include <cstdlib>
 
 
 namespace DInterface
 {
-    // Очередь сообщений, ожидающих отправки
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     static Queue outbox;
 
     static BaseMessage *CreateMessage(uint8 *data, int size);
@@ -132,8 +132,8 @@ BaseMessage *DInterface::CreateMessage(uint8 *data, int size)
         }
         else if (command == Command::START_1_12V)
         {
-            Value Us = Value((uint)(*pointer++));       // Амплитуда
-            Value t1 = Value((uint)(*pointer++));       // Период повторения
+            Value Us = Value((uint)(*pointer++));       // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            Value t1 = Value((uint)(*pointer++));       // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
             return new Message::Start1_12V(Us, t1);
         }

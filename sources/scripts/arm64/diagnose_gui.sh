@@ -1,53 +1,88 @@
 #!/bin/bash
 
-# Диагностический скрипт для проверки GUI окружения
+# Расширенная диагностика для Orange Pi 5 Plus (ARM64)
 
-echo "=== Диагностика GUI окружения ==="
+echo "=== ДИАГНОСТИКА СИСТЕМЫ СБОРКИ ==="
+echo "Дата: $(date)"
+echo "Архитектура: $(uname -m)"
+echo "Система: $(cat /etc/os-release | grep PRETTY_NAME | cut -d'"' -f2 2>/dev/null || uname -a)"
+echo
 
-# Проверяем архитектуру
-echo "🖥️  Архитектура системы: $(uname -m)"
-echo "🐧 Операционная система: $(cat /etc/os-release | grep PRETTY_NAME | cut -d'"' -f2)"
-
-# Проверяем пользователя
-echo "👤 Текущий пользователь: $(whoami)"
-
-# Проверяем переменную DISPLAY
-if [ -z "$DISPLAY" ]; then
-    echo "❌ DISPLAY не установлен"
-    
-    # Ищем активные X сессии
-    echo "🔍 Поиск активных X сессий:"
-    ps aux | grep -E "(Xorg|X)" | grep -v grep
-    
-    # Проверяем systemd services
-    echo "🔍 Проверка графических служб:"
-    systemctl is-active display-manager 2>/dev/null || echo "Display manager не активен"
-    systemctl is-active gdm 2>/dev/null || echo "GDM не активен"
-    systemctl is-active lightdm 2>/dev/null || echo "LightDM не активен"
-    systemctl is-active sddm 2>/dev/null || echo "SDDM не активен"
-    
+echo "=== ПРОВЕРКА CMAKE ==="
+if command -v cmake >/dev/null 2>&1; then
+    echo "CMake версия: $(cmake --version | head -n1)"
 else
-    echo "✅ DISPLAY установлен: $DISPLAY"
-    
-    # Проверяем доступность X сервера
-    if command -v xset &> /dev/null; then
-        if xset q &>/dev/null; then
-            echo "✅ X сервер доступен"
-            xset q | head -5
-        else
-            echo "❌ X сервер недоступен"
-        fi
-    else
-        echo "❌ Утилита xset не найдена. Установите: sudo apt install x11-utils"
-    fi
+    echo "❌ CMake не установлен"
+fi
+echo
+
+echo "=== ПРОВЕРКА КОМПИЛЯТОРА ==="
+if command -v gcc >/dev/null 2>&1; then
+    echo "GCC версия: $(gcc --version | head -n1)"
+else
+    echo "❌ GCC не установлен"
 fi
 
-# Проверяем SSH соединение и X11 forwarding
-if [ ! -z "$SSH_CLIENT" ] || [ ! -z "$SSH_TTY" ]; then
-    echo "🔗 Обнаружено SSH соединение"
-    if [ ! -z "$DISPLAY" ]; then
-        echo "✅ X11 forwarding активен"
+if command -v g++ >/dev/null 2>&1; then
+    echo "G++ версия: $(g++ --version | head -n1)"
+else
+    echo "❌ G++ не установлен"
+fi
+echo
+
+echo "=== ПРОВЕРКА PKG-CONFIG ==="
+if command -v pkg-config >/dev/null 2>&1; then
+    echo "pkg-config версия: $(pkg-config --version)"
+    echo
+    
+    echo "Проверка основных библиотек:"
+    for lib in gtk+-3.0 gdk-3.0 x11 xkbcommon gspell-1 libpng; do
+        if pkg-config --exists "$lib" 2>/dev/null; then
+            version=$(pkg-config --modversion "$lib" 2>/dev/null || echo "неизвестно")
+            echo "✅ $lib (версия: $version)"
+        else
+            echo "❌ $lib не найдена"
+        fi
+    done
+else
+    echo "❌ pkg-config не установлен"
+fi
+echo
+
+echo "=== ПРОВЕРКА БИБЛИОТЕК ARM64 ==="
+echo "Путь к ARM64 библиотекам: /usr/lib/aarch64-linux-gnu/"
+if [ -d "/usr/lib/aarch64-linux-gnu/" ]; then
+    echo "✅ Каталог ARM64 библиотек существует"
+    
+    echo "Проверка ключевых библиотек:"
+    for lib in libX11.so libxkbcommon.so libpng16.so libgtk-3.so; do
+        if [ -f "/usr/lib/aarch64-linux-gnu/$lib" ]; then
+            echo "✅ $lib найдена"
+        else
+            echo "❌ $lib не найдена"
+        fi
+    done
+else
+    echo "❌ Каталог ARM64 библиотек не найден"
+fi
+echo
+
+echo "=== ПРОВЕРКА WXWIDGETS ==="
+wxwidgets_path="../../ThirdParty/wxWidgets/generated"
+if [ -d "$wxwidgets_path" ]; then
+    echo "✅ Каталог wxWidgets найден: $wxwidgets_path"
+    
+    if [ -f "$wxwidgets_path/lib/libwx_gtk3u_core-3.2.a" ]; then
+        echo "✅ wxWidgets библиотека собрана"
+        lib_size=$(stat -f%z "$wxwidgets_path/lib/libwx_gtk3u_core-3.2.a" 2>/dev/null || stat -c%s "$wxwidgets_path/lib/libwx_gtk3u_core-3.2.a" 2>/dev/null || echo "неизвестно")
+        echo "   Размер библиотеки: $lib_size байт"
     else
+        echo "❌ wxWidgets библиотека не собрана"
+    fi
+else
+    echo "❌ Каталог wxWidgets не найден"
+fi
+echo
         echo "❌ X11 forwarding не активен. Используйте: ssh -X или ssh -Y"
     fi
 fi
