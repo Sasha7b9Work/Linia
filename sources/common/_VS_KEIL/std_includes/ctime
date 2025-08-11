@@ -1,6 +1,0 @@
-#pragma once
-
-namespace std
-{
-    unsigned int clock();
-}
