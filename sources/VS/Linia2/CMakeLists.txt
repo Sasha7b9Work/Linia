@@ -72,7 +72,6 @@ file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB UTILS                         src/Utils/*.*)
 file(GLOB WINDOWS                       src/Windows/*.*)
 
-<<<<<<< HEAD
 source_group(doc                        FILES ${DOC})
 source_group(Resources                  FILES ${RESOURCES})
 source_group(src                        FILES ${SRC})
@@ -93,7 +92,6 @@ source_group(Panels/STM32_Status        FILES ${PANELS_STM32_STATUS})
 source_group(Settings                   FILES ${SETTINGS})
 source_group(Utils                      FILES ${UTILS})
 source_group(Windows                    FILES ${WINDOWS})
-=======
 source_group(doc                                 FILES ${DOC})
 source_group(Resources                           FILES ${RESOURCES})
 source_group(src                                 FILES ${SRC})
@@ -113,7 +111,6 @@ source_group(Panels/Panel12_Debug                FILES ${PANELS_PANEL12})
 source_group(Settings                            FILES ${SETTINGS})
 source_group(Utils                               FILES ${UTILS})
 source_group(Windows                             FILES ${WINDOWS})
->>>>>>> 35bae0f1a5860154ea5599d2f31aeaec06a77d26
 
 add_executable(${PROJECT_NAME}
     ${DOC}
