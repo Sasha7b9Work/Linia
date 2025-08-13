@@ -29,13 +29,13 @@ public:
             num_cols++;
         }
 
-        wxGridSizer *gridSizer = new wxGridSizer(num_rows, num_cols, 5, 5); // 5px промежутки
+        wxGridSizer *gridSizer = new wxGridSizer(num_rows, num_cols, 2, 2); // 5px промежутки
 
         for (uint i = 0; i < names.size(); ++i)
         {
             wxButton *btn = new wxButton(mainPanel, wxID_ANY, names[i]);
             btn->Bind(wxEVT_BUTTON, &ButtonPopup::OnButtonClick, this);
-            gridSizer->Add(btn, 0, wxEXPAND | wxALL, 2); // 2px отступы у кнопок
+            gridSizer->Add(btn, 0, wxEXPAND | wxALL, 0); // 2px отступы у кнопок
         }
 
         // Добавляем рамку вокруг сетки кнопок
@@ -109,6 +109,13 @@ void ButtonsCombo::SetCurrentChoice(int choice)
     current_choice = choice;
 
     SetLabel(title + ": " + names[(uint)current_choice]);
+
+    {
+        wxCommandEvent event(wxEVT_COMBOBOX, GetId());
+        event.SetEventObject(this);
+        event.SetInt(GetCurrentChoice());
+        wxPostEvent(GetEventHandler(), event);
+    }
 }
 
 

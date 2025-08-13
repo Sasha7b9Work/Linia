@@ -71,9 +71,6 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
 
     {
         int y = 20;
-        int dY = 3;
-
-        new wxStaticText(boxMeter, wxID_ANY, "Ic", { 100, SD::Y_SB(y + dY) });
 
         wxArrayString names;
         for (int i = RangeU::Min(DSet::Type::ChanC_Meas); i <= RangeU::Max(DSet::Type::ChanC_Meas); i++)
@@ -81,27 +78,30 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
             names.push_back(RangeU((RangeU::E)i).Name(RowRange::_125));
         }
 
-        comboVoltage = new ButtonsCombo(boxMeter, "Uc", {10, SD::Y_SB(y)}, {80, TEXTCNTRL_HEIGHT + 5}, names, 0, 3);
+        comboVoltage = new ButtonsCombo(boxMeter, "Uc", {10, SD::Y_SB(y)}, {80, TEXTCNTRL_HEIGHT + 3}, names, 0, 3);
 
-        wxArrayString choices;
-        comboCurrent = new wxComboBox(boxMeter, wxID_ANY, "", {120, SD::Y_SB(y)}, {60, TEXTCNTRL_HEIGHT}, choices, wxCB_READONLY);
+        names.clear();
+        for (int i = RangeI::Min(DSet::Type::ChanC_Meas); i <= RangeI::Max(DSet::Type::ChanC_Meas); i++)
+        {
+            names.push_back(RangeI((RangeI::E)i).Name(RowRange::_125));
+        }
+
+        comboCurrent = new ButtonsCombo(boxMeter, "Ic", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT + 3 }, names, 0, 3);;
     }
 
     wxStaticBox *boxSource = new wxStaticBox(this, wxID_ANY, "Источник U", { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + x }, { w, 200 });
 
     {
-        new wxStaticText(boxSource, wxID_ANY, "Диапазон Ud", { 10, SD::Y_SB(30) });
-
-        wxArrayString choices
+        wxArrayString names
         {
             "5 V",
             "20 V",
             "100 V",
             "500 V",
-            "2000 V"
+            "2 kV"
         };
 
-        comboRange = new wxComboBox(boxSource, wxID_ANY, choices[0], { 100, SD::Y_SB(27) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", {10, SD::Y_SB(27)}, {150, TEXTCNTRL_HEIGHT + 3}, names, 0, 3);
 
         new wxStaticText(boxSource, wxID_ANY, _L("Ограничение Uc, %%"), { 40, SD::Y_SB(55) });
 
@@ -123,21 +123,6 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
 
 void PanelChannelC::Tune()
 {
-    wxArrayString choices;
-
-    {
-        RangeI::E min = RangeI::Min(DSet::Type::ChanC_Meas);
-        RangeI::E max = RangeI::Max(DSet::Type::ChanC_Meas);
-
-        for (int i = min; i <= max; i++)
-        {
-            choices.push_back(RangeI((RangeI::E)i).Name(RowRange::_125));
-        }
-
-        comboCurrent->Set(choices);
-        comboCurrent->SetSelection(0);
-    }
-
     comboScan->SetCurrentChoice(1);
 }
 
@@ -196,6 +181,6 @@ void PanelChannelC::OnEventComboBox(wxCommandEvent &event)
             "2.0 ms"
         };
 
-        textValueImpulse->SetLabel(values[comboRange->GetSelection()]);
+        textValueImpulse->SetLabel(values[comboRange->GetCurrentChoice()]);
     }
 }
