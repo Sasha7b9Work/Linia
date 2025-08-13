@@ -16,10 +16,13 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
 {
     self = this;
 
-    new wxBitmapToggleButton(this, wxID_ANY,
-        wxBitmapBundle::FromBitmaps(Bitmap::Get("buttons/start_off.bmp").GetBitmap(),
-            Bitmap::Get("buttons/start_on.bmp").GetBitmap()),
-        { 0, 0 }, { 70, 70 });
+    wxArrayString images =
+    {
+        "buttons/start_off.bmp",
+        "buttons/start_on.bmp"
+    };
+
+    button_start = new ButtonBitmapChoice(this, { 0, 0 }, wxDefaultSize, images);
 
     wxStaticText *text = new wxStaticText(this, wxID_ANY, "Uc 100 %", { 105, 5 }, { 25, 25});
 
