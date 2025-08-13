@@ -120,13 +120,13 @@ void ButtonsCombo::SetCurrentSelection(int choice)
     {
         wxCommandEvent event(wxEVT_COMBOBOX, GetId());
         event.SetEventObject(this);
-        event.SetInt(GetCurrentChoice());
+        event.SetInt(GetCurrentSelection());
         wxPostEvent(GetEventHandler(), event);
     }
 }
 
 
-int ButtonsCombo::GetCurrentChoice() const
+int ButtonsCombo::GetCurrentSelection() const
 {
     return current_choice;
 }
@@ -134,7 +134,7 @@ int ButtonsCombo::GetCurrentChoice() const
 
 wxString ButtonsCombo::GetCurrentString() const
 {
-    return names[(size_t)GetCurrentChoice()];
+    return names[(size_t)GetCurrentSelection()];
 }
 
 

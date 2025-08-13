@@ -152,7 +152,7 @@ void PanelChannelC::OnEventComboBox(wxCommandEvent &event)
             "2.0 ms"
         };
 
-        textValueImpulse->SetLabel(values[comboRange->GetCurrentChoice()]);
+        textValueImpulse->SetLabel(values[comboRange->GetCurrentSelection()]);
     }
     else if (id == comboScan->GetId())
     {

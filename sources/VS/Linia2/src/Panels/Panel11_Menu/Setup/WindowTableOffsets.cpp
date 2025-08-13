@@ -55,7 +55,7 @@ WindowTableOffsets::WindowTableOffsets() :
         int id = comboType->GetId();
 
         wxCommandEvent evt(wxEVT_COMBOBOX, id);
-        evt.SetInt(comboType->GetCurrentChoice());
+        evt.SetInt(comboType->GetCurrentSelection());
         this->ProcessWindowEvent(evt);
     }
 }
@@ -202,7 +202,7 @@ void WindowTableOffsets::FillFields()
         rbChanS_SourceI->GetValue() ||
         rbChanS_LimitI->GetValue();
 
-    int index = comboType->GetCurrentChoice();
+    int index = comboType->GetCurrentSelection();
 
     if (index == 0)
     {
