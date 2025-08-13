@@ -104,13 +104,11 @@ void PanelConfig::CreatePanelChannelB(wxPanel *panel, int x, int w)
 
         y += 25;
 
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Импульс"), { 10, SD::Y_SB(y) });
-
         choices.Clear();
         choices.Add(_L("Вкл"));
         choices.Add(_L("Выкл"));
 
-        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 70, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new ButtonsCombo(boxGenerator, "Импульс", {70, SD::Y_SB(y - 3)}, 100, choices, 0, 1);
 
         y += 25;
 
