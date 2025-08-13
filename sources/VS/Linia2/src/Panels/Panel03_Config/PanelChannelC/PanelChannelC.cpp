@@ -127,45 +127,6 @@ void PanelChannelC::Tune()
 }
 
 
-void PanelChannelC::OnEventChangeComboScan()
-{
-    int scan = comboScan->GetCurrentChoice();
-
-    bool show = scan < 2;
-
-    textLabelImpulse->Show(show);
-    textValueImpulse->Show(show);
-
-    static const bool duty[7] =
-    {
-        true, true, false, false, true, true, true
-    };
-
-    chbDutyCycle->Show(duty[scan]);
-
-    {
-        wxArrayString choices;
-
-        if (scan < 4)
-        {
-            choices.push_back("20");
-            choices.push_back("50");
-            comboNumberPoints->Enable(true);
-        }
-        else
-        {
-            choices.push_back("200");
-            comboNumberPoints->Enable(false);
-        }
-
-        comboNumberPoints->Set(choices);
-        comboNumberPoints->SetSelection(0);
-    }
-
-    LOG_WRITE("then");
-}
-
-
 void PanelChannelC::OnEventComboBox(wxCommandEvent &event)
 {
     int id = event.GetId();
@@ -182,5 +143,40 @@ void PanelChannelC::OnEventComboBox(wxCommandEvent &event)
         };
 
         textValueImpulse->SetLabel(values[comboRange->GetCurrentChoice()]);
+    }
+    else if (id == comboScan->GetId())
+    {
+        int scan = comboScan->GetCurrentChoice();
+
+        bool show = scan < 2;
+
+        textLabelImpulse->Show(show);
+        textValueImpulse->Show(show);
+
+        static const bool duty[7] =
+        {
+            true, true, false, false, true, true, true
+        };
+
+        chbDutyCycle->Show(duty[scan]);
+
+        {
+            wxArrayString choices;
+
+            if (scan < 4)
+            {
+                choices.push_back("20");
+                choices.push_back("50");
+                comboNumberPoints->Enable(true);
+            }
+            else
+            {
+                choices.push_back("200");
+                comboNumberPoints->Enable(false);
+            }
+
+            comboNumberPoints->Set(choices);
+            comboNumberPoints->SetSelection(0);
+        }
     }
 }

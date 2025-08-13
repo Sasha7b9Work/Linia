@@ -13,9 +13,6 @@ public:
 
     static PanelChannelC *self;
 
-    // Вызывается комбобоксом выбора развёртки
-    void OnEventChangeComboScan();
-
 private:
 
     ButtonsCombo    *comboVoltage = nullptr;        // Измеритель U

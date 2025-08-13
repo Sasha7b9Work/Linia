@@ -105,6 +105,13 @@ void BmpButtonsCombo::SetCurrentChoice(int choice)
     current_choice = choice;
 
     SetFileBitmap(files[(uint)current_choice]);
+
+    {
+        wxCommandEvent event(wxEVT_COMBOBOX, GetId());
+        event.SetEventObject(this);
+        event.SetInt(GetCurrentChoice());
+        wxPostEvent(GetEventHandler(), event);
+    }
 }
 
 
