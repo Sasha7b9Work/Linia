@@ -20,12 +20,6 @@ Application *Application::self = nullptr;
 
 bool Application::OnInit()
 {
-#if defined(__WXGTK__)
-    // Уменьшаем внутренние отступы GTK
-    wxSystemOptions::SetOption("msw.buttons.no-native-theme", 1);
-    wxSystemOptions::SetOption("gtk.button.content-padding", 0);
-#endif
-
     std::locale::global(std::locale(""));  // Установка системной локали
     setlocale(LC_ALL, "");
 
