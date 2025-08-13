@@ -4,7 +4,84 @@
 
 
 Slider::Slider(wxWindow *parent, const wxPoint &position, int width) :
-    wxPanel(parent, wxID_ANY, position, { width, TEXTCNTRL_HEIGHT + 5 }, wxBORDER_SIMPLE)
+    wxPanel(parent, wxID_ANY, position, { width, TEXTCNTRL_HEIGHT + 5 + 10 }, wxBORDER_SIMPLE)
 {
-    new wxSlider(this, wxID_ANY, 0, 0, 100, { 0, 0 }, { width - 5, TEXTCNTRL_HEIGHT });
+    int w1 = 20;
+    int w2 = 17;
+
+    slider = new wxSlider(this, wxID_ANY, 0, 0, 100, { w1, 0 }, { width - w1 - w2, TEXTCNTRL_HEIGHT + 10 } );
+
+    textValue = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT });
+
+    wxSize size_button{ 15, 12 };
+
+    int x = w1 + slider->GetSize().x;
+
+    btnMore = new wxButton(this, wxID_ANY, "", { x, 0 }, size_button);
+    btnLess = new wxButton(this, wxID_ANY, "", { x, size_button.y }, size_button);
+
+    Bind(wxEVT_SLIDER, &Slider::OnEventSlider, this);
+    btnMore->Bind(wxEVT_LEFT_DOWN, &Slider::OnEventMouseDown, this);
+    btnLess->Bind(wxEVT_LEFT_DOWN, &Slider::OnEventMouseDown, this);
+    btnMore->Bind(wxEVT_LEFT_UP, &Slider::OnEventMouseUp, this);
+    btnLess->Bind(wxEVT_LEFT_UP, &Slider::OnEventMouseUp, this);
+
+    timer_less.Bind(wxEVT_TIMER, &Slider::OnEventTimer, this);
+    timer_more.Bind(wxEVT_TIMER, &Slider::OnEventTimer, this);
+}
+
+
+void Slider::OnEventSlider(wxCommandEvent &event)
+{
+    if (event.GetId() == slider->GetId())
+    {
+        textValue->SetLabel(wxString::Format("%d", event.GetInt()));
+    }
+}
+
+
+void Slider::OnEventMouseDown(wxMouseEvent &event)
+{
+    if (event.GetId() == btnMore->GetId())
+    {
+        slider->SetValue(slider->GetValue() + 1);
+        timer_more.Start(400);
+    }
+    else if (event.GetId() == btnLess->GetId())
+    {
+        slider->SetValue(slider->GetValue() - 1);
+        timer_less.Start(400);
+    }
+
+    wxCommandEvent evt(wxEVT_SLIDER, slider->GetId());
+    evt.SetEventObject(slider);
+    evt.SetInt(slider->GetValue());
+    wxPostEvent(slider, evt);
+
+    event.Skip();
+}
+
+
+void Slider::OnEventMouseUp(wxMouseEvent &event)
+{
+    timer_more.Stop();
+    timer_less.Stop();
+
+    event.Skip();
+}
+
+
+void Slider::OnEventTimer(wxTimerEvent &event)
+{
+    if (event.GetId() == timer_more.GetId())
+    {
+        slider->SetValue(slider->GetValue() + 1);
+
+        wxCommandEvent evt(wxEVT_SLIDER, slider->GetId());
+        evt.SetEventObject(slider);
+        evt.SetInt(slider->GetValue());
+        wxPostEvent(slider, evt);
+    }
+
+    event.Skip();
 }

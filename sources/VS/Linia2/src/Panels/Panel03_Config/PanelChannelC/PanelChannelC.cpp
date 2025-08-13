@@ -106,13 +106,14 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
         new wxStaticText(boxSource, wxID_ANY, _L("Ограничение Uc, %%"), { 40, SD::Y_SB(55) });
 
         int y = 80;
-        int dy = 3;
+//        int dy = 3;
 
-        new wxStaticText(boxSource, wxID_ANY, _L("Старт"), { 10, SD::Y_SB(y + dy) });
-        new wxStaticText(boxSource, wxID_ANY, _L("Стоп"), { 10, SD::Y_SB(y + 30 + dy) });
+//        new wxStaticText(boxSource, wxID_ANY, _L("Старт"), { 10, SD::Y_SB(y + dy) });
+//        new wxStaticText(boxSource, wxID_ANY, _L("Стоп"), { 10, SD::Y_SB(y + 30 + dy) });
 
-        spinStart = new Slider(boxSource, { 50, SD::Y_SB(y) }, 140);
-        spinStart = new Slider(boxSource, { 50, SD::Y_SB(y + 30) }, 140);
+        int width = 180;
+        spinStart = new Slider(boxSource, { 10, SD::Y_SB(y) }, width);
+        spinStart = new Slider(boxSource, { 10, SD::Y_SB(y + 50) }, width);
     }
 
     Bind(wxEVT_COMBOBOX, &PanelChannelC::OnEventComboBox, this);
