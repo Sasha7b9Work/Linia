@@ -89,7 +89,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
         comboCurrent = new ButtonsCombo(boxMeter, "Ic", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT + 3 }, names, 0, 3);;
     }
 
-    wxStaticBox *boxSource = new wxStaticBox(this, wxID_ANY, "Источник U", { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + x }, { w, 200 });
+    wxStaticBox *boxSource = new wxStaticBox(this, wxID_ANY, "Источник U", { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + x }, { w, 210 });
 
     {
         wxArrayString names
@@ -103,17 +103,24 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
 
         comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", {10, SD::Y_SB(27)}, {150, TEXTCNTRL_HEIGHT + 3}, names, 0, 3);
 
-        new wxStaticText(boxSource, wxID_ANY, _L("Ограничение Uc, %%"), { 40, SD::Y_SB(55) });
+        new wxStaticText(boxSource, wxID_ANY, _L("Ограничение Uc, %%"), { 40, SD::Y_SB(60) });
 
-        int y = 80;
-//        int dy = 3;
+        int y = 90;
 
-//        new wxStaticText(boxSource, wxID_ANY, _L("Старт"), { 10, SD::Y_SB(y + dy) });
-//        new wxStaticText(boxSource, wxID_ANY, _L("Стоп"), { 10, SD::Y_SB(y + 30 + dy) });
+        new wxStaticText(boxSource, wxID_ANY, _L("Старт"), { 10, SD::Y_SB(y) });
+
+        y += 20;
 
         int width = 180;
         spinStart = new Slider(boxSource, { 10, SD::Y_SB(y) }, width);
-        spinStart = new Slider(boxSource, { 10, SD::Y_SB(y + 50) }, width);
+
+        y += 40;
+
+        new wxStaticText(boxSource, wxID_ANY, _L("Стоп"), { 10, SD::Y_SB(y) });
+
+        y += 20;
+
+        spinStart = new Slider(boxSource, { 10, SD::Y_SB(y) }, width);
     }
 
     Bind(wxEVT_COMBOBOX, &PanelChannelC::OnEventComboBox, this);

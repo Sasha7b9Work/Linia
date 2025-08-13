@@ -4,7 +4,7 @@
 
 
 Slider::Slider(wxWindow *parent, const wxPoint &position, int width) :
-    wxPanel(parent, wxID_ANY, position, { width, TEXTCNTRL_HEIGHT + 5 + 5 }, wxBORDER_SIMPLE)
+    wxPanel(parent, wxID_ANY, position, { width, TEXTCNTRL_HEIGHT + 5 + 5 })
 {
     int w1 = 20;
     int w2 = 17;
@@ -73,15 +73,13 @@ void Slider::OnEventMouseUp(wxMouseEvent &event)
 
 void Slider::OnEventTimer(wxTimerEvent &event)
 {
-    if (event.GetId() == timer_more.GetId())
-    {
-        slider->SetValue(slider->GetValue() + 1);
+    int delta = (event.GetId() == timer_more.GetId()) ? 1 : -1;
 
-        wxCommandEvent evt(wxEVT_SLIDER, slider->GetId());
-        evt.SetEventObject(slider);
-        evt.SetInt(slider->GetValue());
-        wxPostEvent(slider, evt);
-    }
+    slider->SetValue(slider->GetValue() + delta);
+    wxCommandEvent evt(wxEVT_SLIDER, slider->GetId());
+    evt.SetEventObject(slider);
+    evt.SetInt(slider->GetValue());
+    wxPostEvent(slider, evt);
 
     event.Skip();
 }
