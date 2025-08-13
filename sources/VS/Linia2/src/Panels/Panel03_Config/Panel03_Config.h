@@ -3,6 +3,7 @@
 #include "Panels/Panel.h"
 #include "Controls/PainterBMP.h"
 #include "Controls/RadioButtonICO.h"
+#include "Controls/ButtonsCombo.h"
 
 
 class PanelConfig : public Panel
