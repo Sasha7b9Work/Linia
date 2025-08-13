@@ -92,10 +92,8 @@ private:
         {
             Dismiss();
         }
-        else
-        {
-            event.Skip();
-        }
+
+        event.Skip();
     }
 };
 

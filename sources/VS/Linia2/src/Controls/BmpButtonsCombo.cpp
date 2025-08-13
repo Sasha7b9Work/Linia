@@ -51,6 +51,8 @@ public:
         SetSizer(outerSizer);
 
         Fit(); // Автоподбор размера
+
+        GetParent()->Bind(wxEVT_KEY_DOWN, &BmpButtonPopup::OnKeyDown, this);
     }
 
 private:
@@ -68,6 +70,16 @@ private:
         combo->SetCurrentChoice(choice);
 
         Dismiss();
+    }
+
+    void OnKeyDown(wxKeyEvent &event)
+    {
+        if (event.GetKeyCode() == WXK_ESCAPE)
+        {
+            Dismiss();
+        }
+
+        event.Skip();
     }
 };
 
