@@ -88,7 +88,7 @@ private:
 
     void OnKeyDown(wxKeyEvent &event)
     {
-        if (event.GetKeyCode() == WXK_ESCAPE)
+        if (event.GetKeyCode() != WXK_SPACE)
         {
             Dismiss();
         }
