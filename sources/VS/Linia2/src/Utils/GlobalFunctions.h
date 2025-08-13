@@ -1,6 +1,7 @@
 ﻿// 2023/08/10 19:21:10 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/Buttons.h"
+#include "Controls/ButtonsCombo.h"
 
 
 #define FIND_CHECKBUTTON(id)  GF::FindCheckButton(this, (id))
@@ -30,7 +31,7 @@ namespace GF
 
     CheckButton *_FindCheckButton(const wxWindow *, int id);
 
-    wxComboBox *_FindComboBox(const wxWindow *, int id);
+    ButtonsCombo *_FindComboBox(const wxWindow *, int id);
 
     wxTextCtrl *_FindTextCtrl(wxWindow *, int id);
 
