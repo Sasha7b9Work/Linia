@@ -177,25 +177,24 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
 {
     wxStaticBox *boxGenerator = new wxStaticBox(panel, wxID_ANY, _L("Генератор ступенек"), { x, 0 }, { w, 300 });
 
+    int width = 150;
+
     {
         int y = 25;
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Тип"), { 10, SD::Y_SB(y) });
 
         wxArrayString choices;
         choices.Add("U");
         choices.Add("I");
 
-        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 70, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new ButtonsCombo(boxGenerator, "Тип", { 10, SD::Y_SB(y - 3) }, width, choices, 0, 1);
 
         y += 25;
-
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Импульс"), { 10, SD::Y_SB(y) });
 
         choices.Clear();
         choices.Add(_L("Вкл"));
         choices.Add(_L("Выкл"));
 
-        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 70, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new ButtonsCombo(boxGenerator, "Импульс", { 10, SD::Y_SB(y - 3) }, width, choices, 0, 1);
 
         y += 25;
 
