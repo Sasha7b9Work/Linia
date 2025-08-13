@@ -29,12 +29,10 @@ WindowCalibrate::WindowCalibrate() :
     {
         y = d + 10;
 
-        new wxStaticText(box, wxID_ANY, "Диапазон", { d, SD::Y_SB(y) } );
-
         wxArrayString choices;
         choices.push_back("50A");
 
-        comboRange = new wxComboBox(box, wxID_ANY, choices[0], { d + 75, SD::Y_SB(y) }, { 75, TEXTCNTRL_HEIGHT }, choices, wxCB_SIMPLE | wxCB_DROPDOWN | wxCB_READONLY);
+        comboRange = new ButtonsCombo(box, "Диапазон", { 0, SD::Y_SB(y) }, 150, choices, 0, 1);
 
         y += d;
 

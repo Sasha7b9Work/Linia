@@ -1,6 +1,7 @@
 // 2025/7/27 19:54:59 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/Dialog.h"
+#include "Controls/ButtonsCombo.h"
 
 
 // Настройка - Калибровка
@@ -17,7 +18,7 @@ public:
 
 private:
 
-    wxComboBox *comboRange = nullptr;
+    ButtonsCombo *comboRange = nullptr;
 
     wxStaticText *textSerialNumber = nullptr,
         *textDateTime = nullptr;
