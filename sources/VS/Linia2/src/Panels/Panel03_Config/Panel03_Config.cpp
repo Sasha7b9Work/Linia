@@ -201,9 +201,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
         choices.Clear();
         choices.Add("2V");
 
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Амплитуда ступени"), { 10, SD::Y_SB(y) });
-
-        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 130, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new ButtonsCombo(boxGenerator, "Амплитуда ступени", { 10, SD::Y_SB(y - 3) }, width, choices, 0, 1);
 
         y += 25;
 
@@ -219,9 +217,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
         choices.Add(_L("прямая"));
         choices.Add(_L("обратная"));
 
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Полярность"), { 10, SD::Y_SB(y + 3) });
-
-        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new ButtonsCombo(boxGenerator, "Полярность", { 10, SD::Y_SB(y) }, width, choices, 0, 1);
 
         y += 25;
 
