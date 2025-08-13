@@ -81,7 +81,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
             names.push_back(RangeU((RangeU::E)i).Name(RowRange::_125));
         }
 
-        comboVoltage = new ButtonsCombo(boxMeter, "", {30, SD::Y_SB(y)}, {60, TEXTCNTRL_HEIGHT}, names, 0, 3);
+        comboVoltage = new ButtonsCombo(boxMeter, "Uc", {10, SD::Y_SB(y)}, {80, TEXTCNTRL_HEIGHT + 5}, names, 0, 3);
 
         wxArrayString choices;
         comboCurrent = new wxComboBox(boxMeter, wxID_ANY, "", {120, SD::Y_SB(y)}, {60, TEXTCNTRL_HEIGHT}, choices, wxCB_READONLY);

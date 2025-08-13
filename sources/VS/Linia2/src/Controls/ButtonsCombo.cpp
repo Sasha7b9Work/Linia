@@ -77,8 +77,8 @@ private:
 };
 
 
-ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos, const wxSize &, const wxArrayString &_names, int num_name, int _buttons_in_row) :
-    wxButton(parent, wxID_ANY, _names[(size_t)num_name], pos),
+ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos, const wxSize &size, const wxArrayString &_names, int num_name, int _buttons_in_row) :
+    wxButton(parent, wxID_ANY, _names[(size_t)num_name], pos, size),
     current_choice(num_name)
 {
     Bind(wxEVT_BUTTON, &ButtonsCombo::OnButtonClicked, this);
@@ -86,6 +86,8 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoi
     title = _title;
     names = _names;
     buttons_in_row = _buttons_in_row;
+
+    SetCurrentChoice(num_name);
 }
 
 
@@ -106,7 +108,7 @@ void ButtonsCombo::SetCurrentChoice(int choice)
 {
     current_choice = choice;
 
-    SetLabel(names[(uint)current_choice]);
+    SetLabel(title + ": " + names[(uint)current_choice]);
 }
 
 
