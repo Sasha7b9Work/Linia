@@ -7,7 +7,7 @@ class PanelIndicator : public Panel
 {
 public:
 
-    static const int HEIGHT = 45;
+    static const int HEIGHT = 70;
 
     PanelIndicator(wxWindow *parent);
 
