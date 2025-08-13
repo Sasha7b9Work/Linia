@@ -184,7 +184,7 @@ void PanelChannelC::OnEventComboBox(wxCommandEvent &event)
             }
 
             comboNumberPoints->SetChoices(choices);
-            comboNumberPoints->SetCurrentChoice(0);
+            comboNumberPoints->SetCurrentSelection(0);
         }
     }
 }

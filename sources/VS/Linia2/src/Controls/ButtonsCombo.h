@@ -14,7 +14,7 @@ public:
         int num_file,                           // Эта изображение будет на главной кнопке
         int buttons_in_row);                    // В каждом ряду будет расположено столько кнопок
 
-    void SetCurrentChoice(int);
+    void SetCurrentSelection(int);
 
     void SetChoices(const wxArrayString &);
 

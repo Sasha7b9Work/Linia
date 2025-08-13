@@ -66,7 +66,7 @@ private:
             {
                 ButtonsCombo *combo = (ButtonsCombo *)GetParent();
 
-                combo->SetCurrentChoice((int)i);
+                combo->SetCurrentSelection((int)i);
 
                 Dismiss();
 
@@ -87,7 +87,7 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoi
     names = _names;
     buttons_in_row = _buttons_in_row;
 
-    SetCurrentChoice(num_name);
+    SetCurrentSelection(num_name);
 }
 
 
@@ -104,7 +104,7 @@ void ButtonsCombo::OnButtonClicked(wxCommandEvent &)
 }
 
 
-void ButtonsCombo::SetCurrentChoice(int choice)
+void ButtonsCombo::SetCurrentSelection(int choice)
 {
     current_choice = choice;
 
