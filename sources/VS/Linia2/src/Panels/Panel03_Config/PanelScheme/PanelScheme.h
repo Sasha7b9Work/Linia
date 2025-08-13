@@ -11,7 +11,7 @@ public:
 
 private:
 
-    wxComboBox *comboC = nullptr,
+    ButtonsCombo *comboC = nullptr,
         *comboB = nullptr,
         *comboE = nullptr,
         *comboTest = nullptr;

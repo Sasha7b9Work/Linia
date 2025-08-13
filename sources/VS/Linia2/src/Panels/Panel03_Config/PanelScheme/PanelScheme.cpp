@@ -43,13 +43,9 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
 
         int w = 30;
 
-        comboC = new wxComboBox(boxCommutation, wxID_ANY, choices[0], { 100, 170 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-        comboB = new wxComboBox(boxCommutation, wxID_ANY, choices[1], { 40, 210 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_DROPDOWN);
-        comboE = new wxComboBox(boxCommutation, wxID_ANY, choices[2], { 100, 250 }, { w, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-
-        comboC->Enable(false);
-        comboB->Enable(false);
-        comboE->Enable(false);
+        comboC = new ButtonsCombo(boxCommutation, "", { 100, 170 }, w, choices, 0, 1);
+        comboB = new ButtonsCombo(boxCommutation, "", { 40, 210 }, w, choices, 0, 1);
+        comboE = new ButtonsCombo(boxCommutation, "", { 100, 250 }, w, choices, 0, 1);
     }
 
     wxStaticBox *boxCategory = new wxStaticBox(this, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 100 });
@@ -93,7 +89,7 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
 
         // IDC_COMBOMOD
         // IDC_BUTTON_LOADTST
-        comboTest = new wxComboBox(boxTest, wxID_ANY, choices[0], { 5, SD::Y_SB(20) }, { 110, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        comboTest = new ButtonsCombo(boxTest, "", { 5, SD::Y_SB(20) }, 110, choices, 0, 1);
 
         btnLoad = new wxButton(boxTest, wxID_ANY, _L("Загрузить"), { 5, SD::Y_SB(50) }, { 110, 30 });
 
@@ -119,8 +115,6 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
 
     if (id == comboTest->GetId())
     {
-        int selection = comboTest->GetSelection();
-
-        btnLoad->Show(comboTest->GetString((uint)selection) == "_USER");
+        btnLoad->Show(comboTest->GetCurrentString() == "_USER");
     }
 }

@@ -20,6 +20,8 @@ public:
 
     int GetCurrentChoice() const;
 
+    wxString GetCurrentString() const;
+
 private:
 
     int current_choice = -1;

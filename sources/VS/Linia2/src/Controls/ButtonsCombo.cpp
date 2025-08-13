@@ -108,7 +108,14 @@ void ButtonsCombo::SetCurrentChoice(int choice)
 {
     current_choice = choice;
 
-    SetLabel(title + ": " + names[(uint)current_choice]);
+    wxString label;
+
+    if (title[0])
+    {
+        label += title + " : ";
+    }
+
+    SetLabel(label + names[(uint)current_choice]);
 
     {
         wxCommandEvent event(wxEVT_COMBOBOX, GetId());
@@ -122,6 +129,12 @@ void ButtonsCombo::SetCurrentChoice(int choice)
 int ButtonsCombo::GetCurrentChoice() const
 {
     return current_choice;
+}
+
+
+wxString ButtonsCombo::GetCurrentString() const
+{
+    return names[(size_t)GetCurrentChoice()];
 }
 
 
