@@ -55,7 +55,7 @@ WindowLibraryTests::WindowLibraryTests() :
             wxArrayString choices;
             choices.Add("NMOS");
 
-            new wxComboBox(box1, wxID_ANY, choices[0], { 10, SD::Y_SB(25) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+            new ButtonsCombo(box1, "", { 10, SD::Y_SB(25) }, 60, choices, 0, 1);
         }
 
         wxStaticBox *box2 = new wxStaticBox(rightPanel, wxID_ANY, _L("Тест"), { 0, box1->GetPosition().y + box1->GetSize().y + 5 }, { size.x - 20, 145 });
