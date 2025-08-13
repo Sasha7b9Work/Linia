@@ -1,6 +1,7 @@
 ﻿// 2025/8/9 11:41:08 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Controls/ButtonsCombo.h"
+#include "MainWindow.h"
 
 
 class ButtonPopup : public wxPopupTransientWindow
@@ -107,6 +108,7 @@ void ButtonsCombo::OnButtonClicked(wxCommandEvent &)
     ButtonPopup *popup = new ButtonPopup(this, title, names, buttons_in_row);
 
     wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
+
     pos.x -= popup->GetSize().x / 2;
     pos.y -= popup->GetSize().y / 2;
 
@@ -201,15 +203,11 @@ void ButtonsCombo::SetExtendedLabel(const wxString &start, const wxString &end)
 
     while (true)
     {
-        wxString label{ start };
-        label.Append(' ', (size_t)num_spaces);
-        label.Append(end);
-
-        SetLabel(label);
+        SetExtendedLabel(start, num_spaces, end);
 
         wxSize size = GetTextExtent(GetLabel());
 
-        if (size.x >= GetSize().x - 13)
+        if (size.x >= GetClientSize().x - 12)
         {
             if (num_spaces > 0)
             {
@@ -222,9 +220,14 @@ void ButtonsCombo::SetExtendedLabel(const wxString &start, const wxString &end)
         num_spaces++;
     }
 
+    SetExtendedLabel(start, num_spaces, end);
+}
+
+
+void ButtonsCombo::SetExtendedLabel(const wxString &start, int num_spaces, const wxString &end)
+{
     wxString label{ start };
     label.Append(' ', (size_t)num_spaces);
-    label.append(end);
-
+    label.Append(end);
     SetLabel(label);
 }

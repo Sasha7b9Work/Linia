@@ -40,4 +40,5 @@ private:
 
     // Между строками будут пробелы таким образом, что строки будут по краям кнопки
     void SetExtendedLabel(const wxString &, const wxString &);
+    void SetExtendedLabel(const wxString &, int num_spaces, const wxString &);
 };
