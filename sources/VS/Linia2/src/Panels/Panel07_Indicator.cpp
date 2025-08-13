@@ -32,4 +32,18 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
     font.SetPointSize(font.GetPointSize() + 7);
     font.SetWeight(wxFONTWEIGHT_BOLD);
     text->SetFont(font);
+
+    button_start->Bind(wxEVT_BUTTON, &PanelIndicator::OnEventButton, this);
+}
+
+
+void PanelIndicator::OnEventButton(wxCommandEvent &event)
+{
+    int id = event.GetId();
+
+    if (id == button_start->GetId())
+    {
+    }
+
+    event.Skip();
 }

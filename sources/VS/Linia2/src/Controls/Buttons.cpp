@@ -130,6 +130,8 @@ void ButtonBitmapChoice::OnEventButton(wxCommandEvent &event)
 
         SetCurrentValue(choice);
     }
+
+    event.Skip();
 }
 
 

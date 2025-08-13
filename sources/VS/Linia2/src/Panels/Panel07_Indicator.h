@@ -17,4 +17,6 @@ public:
 private:
 
     ButtonBitmapChoice *button_start = nullptr;
+
+    void OnEventButton(wxCommandEvent &);
 };
