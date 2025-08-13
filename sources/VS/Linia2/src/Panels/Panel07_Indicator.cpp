@@ -22,7 +22,7 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
         "buttons/start_on.bmp"
     };
 
-    button_start = new ButtonBitmapChoice(this, { 0, 0 }, wxDefaultSize, images);
+    button_start = new ButtonBitmapChoice(this, { 0, 0 }, { 64 - 10, 60 - 10 }, images);
 
     wxStaticText *text = new wxStaticText(this, wxID_ANY, "Uc 100 %", { 105, 5 }, { 25, 25});
 
