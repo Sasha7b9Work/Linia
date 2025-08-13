@@ -135,9 +135,7 @@ void PanelConfig::CreatePanelChannelB(wxPanel *panel, int x, int w)
         choices.Add(_L("прямая"));
         choices.Add(_L("обратная"));
 
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Полярность"), { 10, SD::Y_SB(y + 3) });
-
-        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new ButtonsCombo(boxGenerator, "Полярность", { 10, SD::Y_SB(y) }, width, choices, 0, 1);
 
         y += 25;
 
@@ -146,17 +144,15 @@ void PanelConfig::CreatePanelChannelB(wxPanel *panel, int x, int w)
         {
             y = 20;
 
-            new wxSlider(boxOffset, wxID_ANY, 5, 0, 20, { 10, SD::Y_SB(y) }, { 120, TEXTCNTRL_HEIGHT });
+            new Slider(boxOffset, { 10, SD::Y_SB(y) }, width);
 
-            y += 25;
+            y += 30;
 
             choices.Clear();
             choices.Add(_L("прямая"));
             choices.Add(_L("обратная"));
 
-            new wxStaticText(boxOffset, wxID_ANY, _L("Полярность"), { 10, SD::Y_SB(y + 3) });
-
-            new wxComboBox(boxOffset, wxID_ANY, choices[0], { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+            new ButtonsCombo(boxOffset, "Полярность", { 10, SD::Y_SB(y) }, width, choices, 0, 1);
         }
     }
 
