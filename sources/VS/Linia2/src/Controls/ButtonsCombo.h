@@ -9,7 +9,7 @@ class ButtonsCombo : public wxButton
 {
 public:
 
-    ButtonsCombo(wxWindow *parent, const wxString &title, const wxPoint &pos, const wxSize &,
+    ButtonsCombo(wxWindow *parent, const wxString &title, const wxPoint &pos, int width,
         const wxArrayString &names,             // Эти изображения будут на кнопках
         int num_file,                           // Эта изображение будет на главной кнопке
         int buttons_in_row);                    // В каждом ряду будет расположено столько кнопок

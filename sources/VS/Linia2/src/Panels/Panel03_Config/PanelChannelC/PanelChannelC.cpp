@@ -63,7 +63,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
             "50"
         };
 
-        comboNumberPoints = new ButtonsCombo(boxScan, "Число точек", { 10, SD::Y_SB(80) }, { 150, TEXTCNTRL_HEIGHT + 3}, names, 0, 1);
+        comboNumberPoints = new ButtonsCombo(boxScan, "Число точек", { 10, SD::Y_SB(80) }, 150, names, 0, 1);
 
         textLabelImpulse = new wxStaticText(boxScan, wxID_ANY, "Длина импульса", { 10, SD::Y_SB(110) });                                    // IDC_STATICIMP
         textValueImpulse = new wxStaticText(boxScan, wxID_ANY, "0.2 ms",         { 120, SD::Y_SB(110) });                                   // IDC_EDITDLITIMP
@@ -80,7 +80,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
             names.push_back(RangeU((RangeU::E)i).Name(RowRange::_125));
         }
 
-        comboVoltage = new ButtonsCombo(boxMeter, "Uc", {10, SD::Y_SB(y)}, {80, TEXTCNTRL_HEIGHT + 3}, names, 0, 3);
+        comboVoltage = new ButtonsCombo(boxMeter, "Uc", {10, SD::Y_SB(y)}, 80, names, 0, 3);
 
         names.clear();
         for (int i = RangeI::Min(DSet::Type::ChanC_Meas); i <= RangeI::Max(DSet::Type::ChanC_Meas); i++)
@@ -88,7 +88,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
             names.push_back(RangeI((RangeI::E)i).Name(RowRange::_125));
         }
 
-        comboCurrent = new ButtonsCombo(boxMeter, "Ic", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT + 3 }, names, 0, 3);;
+        comboCurrent = new ButtonsCombo(boxMeter, "Ic", { 100, SD::Y_SB(y) }, 80, names, 0, 3);;
     }
 
     wxStaticBox *boxSource = new wxStaticBox(this, wxID_ANY, "Источник U", { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + x }, { w, 210 });
@@ -103,7 +103,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
             "2 kV"
         };
 
-        comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", {10, SD::Y_SB(27)}, {150, TEXTCNTRL_HEIGHT + 3}, names, 0, 3);
+        comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", {10, SD::Y_SB(27)}, 150, names, 0, 3);
 
         new wxStaticText(boxSource, wxID_ANY, _L("Ограничение Uc, %%"), { 40, SD::Y_SB(60) });
 
