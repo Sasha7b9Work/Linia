@@ -111,8 +111,8 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
         new wxStaticText(boxSource, wxID_ANY, _L("Старт"), { 10, SD::Y_SB(y + dy) });
         new wxStaticText(boxSource, wxID_ANY, _L("Стоп"), { 10, SD::Y_SB(y + 30 + dy) });
 
-        new wxSpinCtrl(boxSource, wxID_ANY, "0", { 80, SD::Y_SB(y) }, { 100, TEXTCNTRL_HEIGHT });
-        new SpinBox(boxSource, wxID_ANY, "100", { 80, SD::Y_SB(y + 30) }, { 100, TEXTCNTRL_HEIGHT });
+        spinStart = new Slider(boxSource, { 50, SD::Y_SB(y) }, 140);
+        spinStart = new Slider(boxSource, { 50, SD::Y_SB(y + 30) }, 140);
     }
 
     Bind(wxEVT_COMBOBOX, &PanelChannelC::OnEventComboBox, this);

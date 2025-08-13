@@ -5,5 +5,8 @@
 class Slider : public wxPanel
 {
 public:
+
+    Slider(wxWindow *parent, const wxPoint &positioni, int width);
+
 private:
 };

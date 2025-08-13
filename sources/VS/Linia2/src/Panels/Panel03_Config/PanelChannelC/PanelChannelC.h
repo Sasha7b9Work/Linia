@@ -3,6 +3,7 @@
 #include "Controls/RadioButtonICO.h"
 #include "Controls/BmpButtonsCombo.h"
 #include "Controls/ButtonsCombo.h"
+#include "Controls/Slider.h"
 
 
 class PanelChannelC : public wxPanel
@@ -23,6 +24,8 @@ private:
     wxComboBox      *comboNumberPoints = nullptr;   // Развёртка - Число точек
     wxStaticText    *textLabelImpulse = nullptr;    // Развёртка - Длина импульса
     wxStaticText    *textValueImpulse = nullptr;    // Развёртка - Длина импульса (значение)
+    Slider          *spinStart = nullptr;           // Измеритель - Ограничение - Старт
+    Slider          *spinStop = nullptr;            // Измеритель - Ограничение - Стоп
 
     void Tune();
 
