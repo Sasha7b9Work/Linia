@@ -21,7 +21,7 @@ private:
     ButtonsCombo    *comboRange = nullptr;          // Источник U - Диапазон
     BmpButtonsCombo *comboScan = nullptr;           // Развёртка
     wxCheckBox      *chbDutyCycle = nullptr;        // Развёртка - Скважность
-    wxComboBox      *comboNumberPoints = nullptr;   // Развёртка - Число точек
+    ButtonsCombo    *comboNumberPoints = nullptr;   // Развёртка - Число точек
     wxStaticText    *textLabelImpulse = nullptr;    // Развёртка - Длина импульса
     wxStaticText    *textValueImpulse = nullptr;    // Развёртка - Длина импульса (значение)
     Slider          *spinStart = nullptr;           // Измеритель - Ограничение - Старт

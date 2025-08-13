@@ -16,6 +16,8 @@ public:
 
     void SetCurrentChoice(int);
 
+    void SetChoices(const wxArrayString &);
+
     int GetCurrentChoice() const;
 
 private:

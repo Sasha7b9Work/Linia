@@ -7,7 +7,7 @@ class ButtonPopup : public wxPopupTransientWindow
 {
 public:
     ButtonPopup(wxWindow *parent, const wxString &title, const wxArrayString &_names, int buttons_in_row) :
-        wxPopupTransientWindow(parent, wxBORDER_SUNKEN),
+        wxPopupTransientWindow(parent, wxBORDER_SIMPLE),
         names(_names)
     {
         // Основной контейнер с отступами по краям
@@ -122,4 +122,10 @@ void ButtonsCombo::SetCurrentChoice(int choice)
 int ButtonsCombo::GetCurrentChoice() const
 {
     return current_choice;
+}
+
+
+void ButtonsCombo::SetChoices(const wxArrayString &choices)
+{
+    names = choices;
 }
