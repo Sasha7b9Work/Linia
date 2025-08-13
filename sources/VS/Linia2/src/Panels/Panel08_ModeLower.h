@@ -3,6 +3,7 @@
 #include "Panels/Panel.h"
 #include "MainWindow.h"
 #include "Panels/Panel11_Menu/Panel11_Menu.h"
+#include "Controls/ButtonsCombo.h"
 
 
 class PanelModeLower : public Panel
