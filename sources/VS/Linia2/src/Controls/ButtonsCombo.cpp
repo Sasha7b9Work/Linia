@@ -126,7 +126,7 @@ void ButtonsCombo::SetCurrentSelection(int choice)
         label += title + " : ";
     }
 
-    SetLabel(label + names[(uint)current_choice + NumEmptyes()]);
+    SetExtendedLabel(label, names[(uint)current_choice + NumEmptyes()]);
 
     {
         wxCommandEvent event(wxEVT_COMBOBOX, GetId());
@@ -192,4 +192,39 @@ int ButtonsCombo::NumEmptyes() const
     }
 
     return counter;
+}
+
+
+void ButtonsCombo::SetExtendedLabel(const wxString &start, const wxString &end)
+{
+    int num_spaces = 0;
+
+    while (true)
+    {
+        wxString label{ start };
+        label.Append(' ', (size_t)num_spaces);
+        label.Append(end);
+
+        SetLabel(label);
+
+        wxSize size = GetTextExtent(GetLabel());
+
+        if (size.x >= GetSize().x - 13)
+        {
+            if (num_spaces > 0)
+            {
+                num_spaces--;
+            }
+
+            break;
+        }
+
+        num_spaces++;
+    }
+
+    wxString label{ start };
+    label.Append(' ', (size_t)num_spaces);
+    label.append(end);
+
+    SetLabel(label);
 }

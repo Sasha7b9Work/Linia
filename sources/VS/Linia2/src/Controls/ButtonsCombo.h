@@ -37,4 +37,7 @@ private:
 
     // Возвращает количество начальных пустых элементов
     int NumEmptyes() const;
+
+    // Между строками будут пробелы таким образом, что строки будут по краям кнопки
+    void SetExtendedLabel(const wxString &, const wxString &);
 };
