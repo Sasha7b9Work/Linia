@@ -73,12 +73,17 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
         int y = 20;
         int dY = 3;
 
-        new wxStaticText(boxMeter, wxID_ANY, "Uc", { 10, SD::Y_SB(y + dY) });
         new wxStaticText(boxMeter, wxID_ANY, "Ic", { 100, SD::Y_SB(y + dY) });
 
-        wxArrayString choices;
-        comboVoltage =new wxComboBox(boxMeter, wxID_ANY, "", {30, SD::Y_SB(y)}, {60, TEXTCNTRL_HEIGHT}, choices, wxCB_READONLY);
+        wxArrayString names;
+        for (int i = RangeU::Min(DSet::Type::ChanC_Meas); i <= RangeU::Max(DSet::Type::ChanC_Meas); i++)
+        {
+            names.push_back(RangeU((RangeU::E)i).Name(RowRange::_125));
+        }
 
+        comboVoltage = new ButtonsCombo(boxMeter, "", {30, SD::Y_SB(y)}, {60, TEXTCNTRL_HEIGHT}, names, 0, 3);
+
+        wxArrayString choices;
         comboCurrent = new wxComboBox(boxMeter, wxID_ANY, "", {120, SD::Y_SB(y)}, {60, TEXTCNTRL_HEIGHT}, choices, wxCB_READONLY);
     }
 
@@ -131,21 +136,6 @@ void PanelChannelC::Tune()
 
         comboCurrent->Set(choices);
         comboCurrent->SetSelection(0);
-    }
-
-    {
-        choices.clear();
-
-        RangeU::E min = RangeU::Min(DSet::Type::ChanC_Meas);
-        RangeU::E max = RangeU::Max(DSet::Type::ChanC_Meas);
-
-        for (int i = min; i <= max; i++)
-        {
-            choices.push_back(RangeU((RangeU::E)i).Name(RowRange::_125));
-        }
-
-        comboVoltage->Set(choices);
-        comboVoltage->SetSelection(0);
     }
 
     comboScan->SetCurrentChoice(1);

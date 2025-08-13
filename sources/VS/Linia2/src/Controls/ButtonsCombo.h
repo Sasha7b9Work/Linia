@@ -11,7 +11,6 @@ public:
 
     ButtonsCombo(wxWindow *parent, const wxString &title, const wxPoint &pos, const wxSize &,
         const wxArrayString &names,             // Эти изображения будут на кнопках
-        const wxArrayString &tooltips,
         int num_file,                           // Эта изображение будет на главной кнопке
         int buttons_in_row);                    // В каждом ряду будет расположено столько кнопок
 
@@ -25,7 +24,6 @@ private:
 
     wxString title;
     wxArrayString names;
-    wxArrayString tooltips;
     int buttons_in_row;
 
     void OnButtonClicked(wxCommandEvent &);

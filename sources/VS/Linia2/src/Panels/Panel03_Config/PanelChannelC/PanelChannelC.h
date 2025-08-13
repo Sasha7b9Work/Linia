@@ -2,6 +2,7 @@
 #pragma once
 #include "Controls/RadioButtonICO.h"
 #include "Controls/BmpButtonsCombo.h"
+#include "Controls/ButtonsCombo.h"
 
 
 class PanelChannelC : public wxPanel
@@ -17,14 +18,14 @@ public:
 
 private:
 
-    wxComboBox *comboVoltage = nullptr;         // Измеритель U
-    wxComboBox *comboCurrent = nullptr;         // Измеритель I
-    wxComboBox *comboRange = nullptr;           // Источник U - Диапазон
-    BmpButtonsCombo *comboScan = nullptr;       // Развёртка
-    wxCheckBox *chbDutyCycle = nullptr;         // Развёртка - Скважность
-    wxComboBox *comboNumberPoints = nullptr;    // Развёртка - Число точек
-    wxStaticText *textLabelImpulse = nullptr;   // Развёртка - Длина импульса
-    wxStaticText *textValueImpulse = nullptr;   // Развёртка - Длина импульса (значение)
+    ButtonsCombo    *comboVoltage = nullptr;        // Измеритель U
+    wxComboBox      *comboCurrent = nullptr;        // Измеритель I
+    wxComboBox      *comboRange = nullptr;          // Источник U - Диапазон
+    BmpButtonsCombo *comboScan = nullptr;           // Развёртка
+    wxCheckBox      *chbDutyCycle = nullptr;        // Развёртка - Скважность
+    wxComboBox      *comboNumberPoints = nullptr;   // Развёртка - Число точек
+    wxStaticText    *textLabelImpulse = nullptr;    // Развёртка - Длина импульса
+    wxStaticText    *textValueImpulse = nullptr;    // Развёртка - Длина импульса (значение)
 
     void Tune();
 
