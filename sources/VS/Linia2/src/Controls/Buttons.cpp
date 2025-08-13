@@ -89,7 +89,7 @@ void CheckButton::SetToolTip(const wxString &tool_tip)
 
 
 ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString &file_bitmap) :
-    wxBitmapButton(parent, wxID_ANY, wxNullBitmap, pos)
+    wxBitmapButton(parent, wxID_ANY, wxNullBitmap, pos, size, wxBU_EXACTFIT)
 {
     SetFileBitmap(file_bitmap);
 
