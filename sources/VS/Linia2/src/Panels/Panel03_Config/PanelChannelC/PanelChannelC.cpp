@@ -80,7 +80,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
             names.push_back(RangeU((RangeU::E)i).Name(RowRange::_125));
         }
 
-        comboVoltage = new ButtonsCombo(boxMeter, "Uc", {10, SD::Y_SB(y)}, 80, names, 0, 3);
+        comboVoltage = new ButtonsCombo(boxMeter, "Uc", {10, SD::Y_SB(y)}, 80, names, 0, 3, true);
 
         names.clear();
         for (int i = RangeI::Min(DSet::Type::ChanC_Meas); i <= RangeI::Max(DSet::Type::ChanC_Meas); i++)

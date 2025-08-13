@@ -7,12 +7,15 @@
 
 class ButtonsCombo : public wxButton
 {
+    friend class ButtonPopup;
+
 public:
 
     ButtonsCombo(wxWindow *parent, const wxString &title, const wxPoint &pos, int width,
         const wxArrayString &names,             // Эти изображения будут на кнопках
         int num_file,                           // Эта изображение будет на главной кнопке
-        int buttons_in_row);                    // В каждом ряду будет расположено столько кнопок
+        int buttons_in_row,                     // В каждом ряду будет расположено столько кнопок
+        bool insert_empty = false);                     
 
     void SetCurrentSelection(int);
 
@@ -25,10 +28,13 @@ public:
 private:
 
     int current_choice = -1;
-
+    bool insert_empty = false;          // true, если перед первым элементом нужно вставлять пустые элементы (для диапазонов, чтобы они согласованно располагались по столбцам)
     wxString title;
     wxArrayString names;
     int buttons_in_row;
 
     void OnButtonClicked(wxCommandEvent &);
+
+    // Возвращает количество начальных пустых элементов
+    int NumEmptyes() const;
 };

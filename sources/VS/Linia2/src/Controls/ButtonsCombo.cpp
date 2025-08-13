@@ -33,9 +33,17 @@ public:
 
         for (uint i = 0; i < names.size(); ++i)
         {
-            wxButton *btn = new wxButton(mainPanel, wxID_ANY, names[i]);
-            btn->Bind(wxEVT_BUTTON, &ButtonPopup::OnButtonClick, this);
-            gridSizer->Add(btn, 0, wxEXPAND | wxALL, 0); // 2px отступы у кнопок
+            if (names[i][0])
+            {
+                wxButton *btn = new wxButton(mainPanel, wxID_ANY, names[i]);
+                btn->Bind(wxEVT_BUTTON, &ButtonPopup::OnButtonClick, this);
+                gridSizer->Add(btn, 0, wxEXPAND | wxALL, 0); // 2px отступы у кнопок
+            }
+            else
+            {
+                wxPanel *panel = new wxPanel(mainPanel);
+                gridSizer->Add(panel, 0, wxEXPAND | wxALL, 0);
+            }
         }
 
         // Добавляем рамку вокруг сетки кнопок
@@ -66,7 +74,7 @@ private:
             {
                 ButtonsCombo *combo = (ButtonsCombo *)GetParent();
 
-                combo->SetCurrentSelection((int)i);
+                combo->SetCurrentSelection((int)i - combo->NumEmptyes());
 
                 Dismiss();
 
@@ -77,14 +85,17 @@ private:
 };
 
 
-ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos, int width, const wxArrayString &_names, int num_name, int _buttons_in_row) :
+ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos, int width, const wxArrayString &_names, int num_name, int _buttons_in_row, bool _insert_empty) :
     wxButton(parent, wxID_ANY, _names[(size_t)num_name], pos, { width, TEXTCNTRL_HEIGHT + 3 }),
-    current_choice(num_name)
+    current_choice(num_name),
+    insert_empty(_insert_empty)
 {
     Bind(wxEVT_BUTTON, &ButtonsCombo::OnButtonClicked, this);
 
     title = _title;
-    names = _names;
+
+    SetChoices(_names);
+
     buttons_in_row = _buttons_in_row;
 
     SetCurrentSelection(num_name);
@@ -115,7 +126,7 @@ void ButtonsCombo::SetCurrentSelection(int choice)
         label += title + " : ";
     }
 
-    SetLabel(label + names[(uint)current_choice]);
+    SetLabel(label + names[(uint)current_choice + NumEmptyes()]);
 
     {
         wxCommandEvent event(wxEVT_COMBOBOX, GetId());
@@ -128,7 +139,7 @@ void ButtonsCombo::SetCurrentSelection(int choice)
 
 int ButtonsCombo::GetCurrentSelection() const
 {
-    return current_choice;
+    return current_choice - NumEmptyes();
 }
 
 
@@ -140,5 +151,45 @@ wxString ButtonsCombo::GetCurrentString() const
 
 void ButtonsCombo::SetChoices(const wxArrayString &choices)
 {
-    names = choices;
+    names.clear();
+
+    if (insert_empty)
+    {
+        if (choices[0][0] == '2')
+        {
+            names.push_back("");
+        }
+        else if (choices[0][0] == '4' || choices[0][0] == '5')
+        {
+            names.push_back("");
+            names.push_back("");
+        }
+    }
+
+    for (auto &elem : choices)
+    {
+        names.push_back(elem);
+    }
+
+    SetCurrentSelection(0);
+}
+
+
+int ButtonsCombo::NumEmptyes() const
+{
+    int counter = 0;
+
+    for (auto &elem : names)
+    {
+        if (elem[0] == '\0')
+        {
+            counter++;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    return counter;
 }
