@@ -2,6 +2,7 @@
 #pragma once
 #include "Controls/Dialog.h"
 #include "Device/SettingsDevice.h"
+#include "Controls/ButtonsCombo.h"
 
 
 // Настройки - Таблица смещений и коэффициентов
@@ -33,7 +34,7 @@ private:
         *rbChanS_LimitI = nullptr,
         *rbChanS_LimitU = nullptr;
 
-    wxComboBox *comboType = nullptr;
+    ButtonsCombo *comboType = nullptr;
 
     struct Field
     {
