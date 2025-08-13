@@ -32,9 +32,9 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
         choices.Add(_L("канал") + " C");
         choices.Add(_L("канал") + " B");
 
-        new wxComboBox(boxCommutation, wxID_ANY, choices[0], { x + width_category + 30, SD::Y_SB(50) }, { 110 - 30, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new ButtonsCombo(boxCommutation, "", { 10, SD::Y_SB(50) }, width, choices, 0, 1);
 
-        new wxComboBox(boxCommutation, wxID_ANY, choices[1], { x + width_category + 30, SD::Y_SB(80) }, { 110 - 30, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new ButtonsCombo(boxCommutation, "", { 10, SD::Y_SB(80) }, width, choices, 0, 1);
 
         choices.clear();
         choices.Add("C");
