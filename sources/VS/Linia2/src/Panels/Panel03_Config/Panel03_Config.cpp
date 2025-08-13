@@ -243,16 +243,14 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
     {
         int y = 20;
 
-        new wxStaticText(boxLimitation, wxID_ANY, _L("Диапазон"), { 10, SD::Y_SB(y) });
-
         wxArrayString choices;
         choices.Add("10 mA");
 
-        new wxComboBox(boxLimitation, wxID_ANY, choices[0], { 100, SD::Y_SB(y - 3) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new ButtonsCombo(boxLimitation, "Диапазон", { 10, SD::Y_SB(y - 3) }, width, choices, 0, 1);
 
         y += 25;
 
-        new wxSlider(boxLimitation, wxID_ANY, 5, 0, 20, { 10, SD::Y_SB(y) }, { 120, TEXTCNTRL_HEIGHT });
+        new Slider(boxLimitation, { 10, SD::Y_SB(y) }, width);
     }
 }
 
