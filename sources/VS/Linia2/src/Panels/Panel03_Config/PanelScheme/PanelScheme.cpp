@@ -18,13 +18,15 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
 
     wxStaticBox *boxCommutation = new wxStaticBox(this, wxID_ANY, _L("Коммутация"), { x, 100 }, { MainWindow::WIDTH3 - 10, 300 });
 
+    int width = 150;
+
     {
         wxArrayString choices;
         choices.Add(_L("внутренняя"));
         choices.Add(_L("внешняя"));
 
         // IDC_COMBO_KOMMUTATOR
-        new wxComboBox(boxCommutation, wxID_ANY, choices[0], { x + width_category, SD::Y_SB(20) }, { 110, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new ButtonsCombo(boxCommutation, "Тип", { 10, SD::Y_SB(20)}, width, choices, 0, 1);
 
         choices.clear();
         choices.Add(_L("канал") + " C");
