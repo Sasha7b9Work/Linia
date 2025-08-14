@@ -86,14 +86,14 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
     wxStaticBox *boxLimitation = new wxStaticBox(this, wxID_ANY, _L("Ограничение"), { x, boxGenerator->GetSize().y + x }, { w, 100 });
 
     {
-        int y = 20;
+        int y = 30;
 
         wxArrayString choices;
         choices.Add("-");
 
         comboLimitRange = new ButtonsCombo(boxLimitation, "Диапазон", { 10, SD::Y_SB(y - 3) }, width, choices, choices, 3, true);
 
-        y += 25;
+        y += 40;
 
         new SliderInt(boxLimitation, { 10, SD::Y_SB(y) }, width, 0, 100);
     }
@@ -107,6 +107,10 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
 void PanelChannelB::Tune()
 {
     comboTypeGenerator->SetCurrentSelection(1);
+
+    wxArrayString ranges;
+    RangeI::FillArrayStrings(ranges, DSet::Type::ChanB_Limit, false);
+    comboLimitRange->SetChoices(ranges, ranges);
 }
 
 
@@ -116,9 +120,10 @@ void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
 
     if (combo == comboTypeGenerator)
     {
+        wxArrayString ranges;
+
         if (combo->GetCurrentSelection() == 0)              // Напряжение
         {
-            wxArrayString ranges;
             RangeU::FillArrayStrings(ranges, DSet::Type::ChanB_Source, true);
 
             wxArrayString tooltips;
@@ -130,13 +135,9 @@ void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
             }
 
             comboStep->SetChoices(ranges, tooltips);
-
-            RangeU::FillArrayStrings(ranges, DSet::Type::ChanB_Limit, false);
-            comboLimitRange->SetChoices(ranges, ranges);
         }
         else if (combo->GetCurrentSelection() == 1)         // Ток
         {
-            wxArrayString ranges;
             RangeI::FillArrayStrings(ranges, DSet::Type::ChanB_Source, true);
 
             wxArrayString tooltips;
@@ -148,9 +149,6 @@ void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
             }
 
             comboStep->SetChoices(ranges, tooltips);
-
-            RangeI::FillArrayStrings(ranges, DSet::Type::ChanB_Limit, false);
-            comboLimitRange->SetChoices(ranges, ranges);
         }
     }
 
