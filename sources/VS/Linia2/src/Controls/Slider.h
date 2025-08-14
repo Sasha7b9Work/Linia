@@ -55,4 +55,7 @@ private:
     void OnEventMouseDown(wxMouseEvent &);
     void OnEventMouseUp(wxMouseEvent &);
     void OnEventTimer(wxTimerEvent &);
+
+    // Рассчитать и показать новое значение
+    void CalculateValue();
 };

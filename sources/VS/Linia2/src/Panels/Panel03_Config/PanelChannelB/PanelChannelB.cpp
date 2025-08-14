@@ -113,7 +113,14 @@ void PanelChannelB::Tune()
     RangeI::FillArrayStrings(ranges, DSet::Type::ChanB_Limit, false);
     comboLimitRange->SetChoices(ranges, ranges);
 
-    comboStep->SetLastSelection();
+    {
+        comboStep->SetLastSelection();
+
+        wxCommandEvent event(wxEVT_COMBOBOX, comboStep->GetId());
+        event.SetEventObject(comboStep);
+        event.SetInt(comboStep->GetCurrentSelection());
+        wxPostEvent(GetEventHandler(), event);
+    }
 }
 
 
@@ -160,7 +167,7 @@ void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
         {
             wxString str_range = comboStep->GetCurrentString();
 
-            double max = SU::StringToDouble(str_range) * 10.0;
+            double max = SU::StringToDouble(str_range.BeforeFirst(' ')) * 10.0;
 
             sliderOffset->SetRange(0.0, max);
         }

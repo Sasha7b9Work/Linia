@@ -125,6 +125,16 @@ void SliderFloat::SetRange(double _min, double _max)
     max = _max;
 
     step = (max - min) / num_steps;
+
+    CalculateValue();
+}
+
+
+void SliderFloat::CalculateValue()
+{
+    double value = (max - min) * slider->GetValue() / num_steps;
+
+    textValue->SetLabel(wxString::Format("%.2f", value));
 }
 
 
