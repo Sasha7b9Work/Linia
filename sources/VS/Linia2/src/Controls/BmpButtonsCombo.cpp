@@ -116,7 +116,11 @@ void BmpButtonsCombo::SetCurrentChoice(int choice)
 {
     current_choice = choice;
 
-    SetFileBitmap(files[(uint)current_choice]);
+    uint index = (uint)current_choice;
+
+    SetFileBitmap(files[index]);
+
+    SetToolTip(tooltips[index]);
 
     {
         wxCommandEvent event(wxEVT_COMBOBOX, GetId());
