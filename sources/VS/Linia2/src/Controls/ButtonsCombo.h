@@ -13,12 +13,13 @@ public:
 
     explicit ButtonsCombo(wxWindow *parent, const wxString &title, const wxPoint &pos, int width,
         const wxArrayString &labels,
+        const wxArrayString &tooltips,
         int buttons_in_row,                     // В каждом ряду будет расположено столько кнопок
         bool insert_empty);
 
     void SetCurrentSelection(int);
 
-    void SetChoices(const wxArrayString &);
+    void SetChoices(const wxArrayString &labels, const wxArrayString &tooltips);
 
     int GetCurrentSelection() const;
 
@@ -30,6 +31,7 @@ private:
     bool insert_empty = false;          // true, если перед первым элементом нужно вставлять пустые элементы (для диапазонов, чтобы они согласованно располагались по столбцам)
     wxString title;
     wxArrayString labels;
+    wxArrayString tooltips;
     int buttons_in_row;
 
     void OnButtonClicked(wxCommandEvent &);

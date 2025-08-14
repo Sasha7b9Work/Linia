@@ -98,8 +98,9 @@ private:
 };
 
 
-ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos, int width, const wxArrayString &_names, int _buttons_in_row, bool _insert_empty) :
-    wxButton(parent, wxID_ANY, _names[0], pos, { width, TEXTCNTRL_HEIGHT + 3 }),
+ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos, int width,
+    const wxArrayString &_labels, const wxArrayString &_tooltips, int _buttons_in_row, bool _insert_empty) :
+    wxButton(parent, wxID_ANY, _labels[0], pos, { width, TEXTCNTRL_HEIGHT + 3 }),
     current_choice(0),
     insert_empty(_insert_empty)
 {
@@ -107,7 +108,7 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoi
 
     title = _title;
 
-    SetChoices(_names);
+    SetChoices(_labels, _tooltips);
 
     buttons_in_row = _buttons_in_row;
 }
@@ -140,7 +141,11 @@ void ButtonsCombo::SetCurrentSelection(int choice)
         label += title + " : ";
     }
 
-    SetExtendedLabel(label, labels[(uint)current_choice + NumEmptyes()]);
+    uint index = (uint)current_choice + NumEmptyes();
+
+    SetExtendedLabel(label, labels[index]);
+
+    SetToolTip(tooltips[index]);
 
     if(need_event)
     {
@@ -164,26 +169,35 @@ wxString ButtonsCombo::GetCurrentString() const
 }
 
 
-void ButtonsCombo::SetChoices(const wxArrayString &choices)
+void ButtonsCombo::SetChoices(const wxArrayString &choices, const wxArrayString &_tooltips)
 {
     labels.clear();
+    tooltips.clear();
 
     if (insert_empty)
     {
         if (choices[0][0] == '2')
         {
             labels.push_back("");
+            tooltips.push_back("");
         }
         else if (choices[0][0] == '4' || choices[0][0] == '5')
         {
             labels.push_back("");
             labels.push_back("");
+            tooltips.push_back("");
+            tooltips.push_back("");
         }
     }
 
     for (auto &elem : choices)
     {
         labels.push_back(elem);
+    }
+
+    for (auto &elem : _tooltips)
+    {
+        tooltips.push_back(elem);
     }
 
     SetCurrentSelection(0);

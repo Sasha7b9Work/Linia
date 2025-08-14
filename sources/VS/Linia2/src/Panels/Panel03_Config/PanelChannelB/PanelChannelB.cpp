@@ -29,7 +29,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
         choices.Add("U");
         choices.Add("I");
 
-        comboTypeGenerator = new ButtonsCombo(boxGenerator, "Тип", { 10, SD::Y_SB(y - 3) }, width, choices, 1, false);
+        comboTypeGenerator = new ButtonsCombo(boxGenerator, "Тип", { 10, SD::Y_SB(y - 3) }, width, choices, choices, 1, false);
 
         y += 25;
 
@@ -37,14 +37,14 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
         choices.Add(_L("Вкл"));
         choices.Add(_L("Выкл"));
 
-        new ButtonsCombo(boxGenerator, "Импульс", { 10, SD::Y_SB(y - 3) }, width, choices, 1, false);
+        new ButtonsCombo(boxGenerator, "Импульс", { 10, SD::Y_SB(y - 3) }, width, choices, choices, 1, false);
 
         y += 25;
 
         choices.Clear();
         choices.Add("-");
 
-        comboStep = new ButtonsCombo(boxGenerator, "Амплитуда ступени", { 10, SD::Y_SB(y - 3) }, width, choices, 3, true);
+        comboStep = new ButtonsCombo(boxGenerator, "Амплитуда ступени", { 10, SD::Y_SB(y - 3) }, width, choices, choices, 3, true);
 
         y += 25;
 
@@ -62,7 +62,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
         choices.Add(_L("прямая"));
         choices.Add(_L("обратная"));
 
-        new ButtonsCombo(boxGenerator, "Полярность", { 10, SD::Y_SB(y) }, width, choices, 1, false);
+        new ButtonsCombo(boxGenerator, "Полярность", { 10, SD::Y_SB(y) }, width, choices, choices, 1, false);
 
         y += 25;
 
@@ -79,7 +79,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
             choices.Add(_L("прямая"));
             choices.Add(_L("обратная"));
 
-            new ButtonsCombo(boxOffset, "Полярность", { 10, SD::Y_SB(y) }, width, choices, 1, false);
+            new ButtonsCombo(boxOffset, "Полярность", { 10, SD::Y_SB(y) }, width, choices, choices, 1, false);
         }
     }
 
@@ -91,7 +91,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
         wxArrayString choices;
         choices.Add("-");
 
-        comboLimitRange = new ButtonsCombo(boxLimitation, "Диапазон", { 10, SD::Y_SB(y - 3) }, width, choices, 3, true);
+        comboLimitRange = new ButtonsCombo(boxLimitation, "Диапазон", { 10, SD::Y_SB(y - 3) }, width, choices, choices, 3, true);
 
         y += 25;
 
@@ -120,19 +120,19 @@ void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
         {
             wxArrayString ranges;
             RangeU::FillArrayStrings(ranges, DSet::Type::ChanB_Source, true);
-            comboStep->SetChoices(ranges);
+            comboStep->SetChoices(ranges, ranges);
 
             RangeU::FillArrayStrings(ranges, DSet::Type::ChanB_Limit, false);
-            comboLimitRange->SetChoices(ranges);
+            comboLimitRange->SetChoices(ranges, ranges);
         }
         else if (combo->GetCurrentSelection() == 1)         // Ток
         {
             wxArrayString ranges;
             RangeI::FillArrayStrings(ranges, DSet::Type::ChanB_Source, true);
-            comboStep->SetChoices(ranges);
+            comboStep->SetChoices(ranges, ranges);
 
             RangeI::FillArrayStrings(ranges, DSet::Type::ChanB_Limit, false);
-            comboLimitRange->SetChoices(ranges);
+            comboLimitRange->SetChoices(ranges, ranges);
         }
     }
 
