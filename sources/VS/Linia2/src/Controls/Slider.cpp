@@ -85,3 +85,57 @@ void SliderInt::OnEventTimer(wxTimerEvent &event)
 
     event.Skip();
 }
+
+
+SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width, double _min, double _max) :
+    wxPanel(parent, wxID_ANY, position, { width, TEXTCNTRL_HEIGHT + 5 + 5 }),
+    min(_min),
+    max(_max)
+{
+    int w1 = 20;
+    int w2 = 17;
+
+    slider = new wxSlider(this, wxID_ANY, 0, 0, 100, { w1, 0 }, { width - w1 - w2, TEXTCNTRL_HEIGHT + 5 });
+
+    textValue = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT });
+
+    wxSize size_button{ 15, 12 };
+
+    int x = w1 + slider->GetSize().x;
+
+    btnMore = new wxButton(this, wxID_ANY, "", { x, 0 }, size_button);
+    btnLess = new wxButton(this, wxID_ANY, "", { x, size_button.y }, size_button);
+
+    Bind(wxEVT_SLIDER, &SliderFloat::OnEventSlider, this);
+    btnMore->Bind(wxEVT_LEFT_DOWN, &SliderFloat::OnEventMouseDown, this);
+    btnLess->Bind(wxEVT_LEFT_DOWN, &SliderFloat::OnEventMouseDown, this);
+    btnMore->Bind(wxEVT_LEFT_UP, &SliderFloat::OnEventMouseUp, this);
+    btnLess->Bind(wxEVT_LEFT_UP, &SliderFloat::OnEventMouseUp, this);
+
+    timer_less.Bind(wxEVT_TIMER, &SliderFloat::OnEventTimer, this);
+    timer_more.Bind(wxEVT_TIMER, &SliderFloat::OnEventTimer, this);
+}
+
+
+void SliderFloat::OnEventSlider(wxCommandEvent &event)
+{
+    event.Skip();
+}
+
+
+void SliderFloat::OnEventMouseDown(wxMouseEvent &event)
+{
+    event.Skip();
+}
+
+
+void SliderFloat::OnEventMouseUp(wxMouseEvent &event)
+{
+    event.Skip();
+}
+
+
+void SliderFloat::OnEventTimer(wxTimerEvent &event)
+{
+    event.Skip();
+}

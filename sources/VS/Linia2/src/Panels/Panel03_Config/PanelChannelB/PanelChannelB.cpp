@@ -71,7 +71,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
         {
             y = 25;
 
-            new SliderInt(boxOffset, { 10, SD::Y_SB(y) }, width - 10, 0, 100);
+            sliderOffset = new SliderFloat(boxOffset, { 10, SD::Y_SB(y) }, width - 10, 0.0f, 0.0f);
 
             y += 40;
 
@@ -149,6 +149,13 @@ void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
             }
 
             comboStep->SetChoices(ranges, tooltips);
+        }
+    }
+    else if (combo == comboStep)
+    {
+        if (comboTypeGenerator->GetCurrentSelection() == 0)     // Напряжение
+        {
+
         }
     }
 
