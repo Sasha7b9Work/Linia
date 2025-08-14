@@ -32,9 +32,9 @@ class SliderFloat : public wxPanel
 {
 public:
 
-    SliderFloat(wxWindow *parent, const wxPoint &position, int width, double min, double max);
+    SliderFloat(wxWindow *parent, const wxPoint &position, int width, double min, double max, char units);
 
-    void SetRange(double min, double max);
+    void SetRange(double min, double max, char units);
 
 private:
 
@@ -46,6 +46,7 @@ private:
     wxTimer timer_less;
     wxTimer timer_more;
 
+    char units = '\0';
     double min = 0.0;
     double max = 0.0;
     double step = 0.0f;

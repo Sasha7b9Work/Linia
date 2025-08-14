@@ -72,7 +72,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
         {
             y = 25;
 
-            sliderOffset = new SliderFloat(boxOffset, { 10, SD::Y_SB(y) }, width - 10, 0.0f, 0.0f);
+            sliderOffset = new SliderFloat(boxOffset, { 10, SD::Y_SB(y) }, width - 10, 0.0f, 0.0f, 'U');
 
             y += 40;
 
@@ -167,9 +167,9 @@ void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
         {
             wxString str_range = comboStep->GetCurrentString();
 
-            double max = SU::StringToDouble(str_range.BeforeFirst(' ')) * 10.0;
+            double max = SU::StringToDouble(str_range) * 10.0;
 
-            sliderOffset->SetRange(0.0, max);
+            sliderOffset->SetRange(0.0, max, 'A');
         }
     }
 

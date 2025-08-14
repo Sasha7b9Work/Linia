@@ -89,19 +89,19 @@ void SliderInt::OnEventTimer(wxTimerEvent &event)
 }
 
 
-SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width, double _min, double _max) :
+SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width, double _min, double _max, char _units) :
     wxPanel(parent, wxID_ANY, position, { width, TEXTCNTRL_HEIGHT + 5 + 5 }),
     min(_min),
     max(_max)
 {
-    int w1 = 30;
+    int w1 = 50;
     int w2 = 17;
 
     slider = new wxSlider(this, wxID_ANY, num_steps / 2, 0, num_steps, { w1, 0 }, { width - w1 - w2, TEXTCNTRL_HEIGHT + 5 });
 
     text = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT });
 
-    SetRange(min, max);
+    SetRange(min, max, _units);
 
     wxSize size_button{ 15, 12 };
 
@@ -121,8 +121,9 @@ SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width, d
 }
 
 
-void SliderFloat::SetRange(double _min, double _max)
+void SliderFloat::SetRange(double _min, double _max, char _units)
 {
+    units = _units;
     min = _min;
     max = _max;
 
@@ -136,7 +137,35 @@ void SliderFloat::CalculateValue()
 {
     double value = (max - min) * slider->GetValue() / num_steps;
 
-    text->SetLabel(wxString::Format("%.2f", value));
+    wxString suffix;
+
+    if (value < 1.0)
+    {
+        if (value >= 1e-3)
+        {
+            value *= 1e3;
+            suffix.Append('m');
+        }
+        else if (value >= 1e-6)
+        {
+            value *= 1e6;
+            suffix.Append('u');
+        }
+        else if (value >= 1e-9)
+        {
+            value *= 1e9;
+            suffix.Append('n');
+        }
+        else if (value >= 1e-12)
+        {
+            value *= 1e12;
+            suffix.Append('p');
+        }
+    }
+
+    suffix.Append(units);
+
+    text->SetLabel(wxString::Format("%.1f %s", value, suffix.c_str().AsChar()));
 }
 
 
