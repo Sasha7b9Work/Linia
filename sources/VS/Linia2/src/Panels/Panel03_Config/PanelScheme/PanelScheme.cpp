@@ -23,15 +23,17 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
         choices.Add(_L("внутренняя"));
         choices.Add(_L("внешняя"));
 
-        // IDC_COMBO_KOMMUTATOR
+        // IDC_COMBO_KOMMUTATOR         m_iKommutator           OnSelchangeComboKommutator
         new ButtonsCombo(boxCommutation, "Тип", { 10, SD::Y_SB(20)}, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
         choices.clear();
         choices.Add(_L("канал") + " C");
         choices.Add(_L("канал") + " B");
 
+        // IDC_COMBO_GNEZDO_C           m_iGnezdoC              
         new ButtonsCombo(boxCommutation, "", { 10, SD::Y_SB(50) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
+        // IDC_COMBO_GNEZDO_B
         new ButtonsCombo(boxCommutation, "", { 10, SD::Y_SB(80) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
         choices.clear();
@@ -41,8 +43,13 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
 
         int w = 30;
 
+        // IDC_COMBOCHECKKOL
         comboC = new ButtonsCombo(boxCommutation, "", { 100, 170 }, w, choices, choices, 1);
+
+        // IDC_COMBOCHECKBAZA
         comboB = new ButtonsCombo(boxCommutation, "", { 40, 210 }, w, choices, choices, 1);
+
+        // IDC_COMBOCHECKDOP
         comboE = new ButtonsCombo(boxCommutation, "", { 100, 250 }, w, choices, choices, 1);
     }
 
