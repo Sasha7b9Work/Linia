@@ -59,7 +59,7 @@ protected:
     void OnEventTimer(wxTimerEvent &);
 
     // Рассчитать и показать новое значение
-    void CalculateValue();
+    virtual void CalculateValue();
 };
 
 
@@ -80,10 +80,13 @@ class SliderFloatLimit : public SliderFloat
 {
 public:
 
-    SliderFloatLimit(wxWindow *parent, const wxPoint &position, int width) :
-        SliderFloat(parent, position, width)
-    {
-    }
+    SliderFloatLimit(wxWindow *parent, const wxPoint &position, int width);
 
     void CalculateAndSetRange(const wxString &range);
+
+    virtual void CalculateValue() override;
+
+private:
+
+    wxStaticText *textPercents = nullptr;
 };

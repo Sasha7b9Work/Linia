@@ -97,7 +97,7 @@ SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width) :
 
     slider = new wxSlider(this, wxID_ANY, num_steps / 2, 0, num_steps, { w1, 0 }, { width - w1 - w2, TEXTCNTRL_HEIGHT + 5 });
 
-    text = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT });
+    text = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT - 5 });
 
     wxSize size_button{ 15, 12 };
 
@@ -212,6 +212,18 @@ void SliderFloatLimit::CalculateAndSetRange(const wxString &range)
 }
 
 
+void SliderFloatLimit::CalculateValue()
+{
+    SliderFloat::CalculateValue();
+
+    double value = min + (max - min) * slider->GetValue() / num_steps;
+
+    value = 110.0 / max * value;
+
+    textPercents->SetLabel(wxString::Format("%.0f %%", value));
+}
+
+
 void SliderFloat::CalculateValue()
 {
     double value = min + (max - min) * slider->GetValue() / num_steps;
@@ -275,3 +287,13 @@ void SliderFloat::OnEventTimer(wxTimerEvent &event)
 
     event.Skip();
 }
+
+
+SliderFloatLimit::SliderFloatLimit(wxWindow *parent, const wxPoint &position, int width) :
+    SliderFloat(parent, position, width)
+{
+    text->SetPosition({0, 0});
+
+    textPercents = new wxStaticText(this, wxID_ANY, "0", { 0, 15 }, { 50, TEXTCNTRL_HEIGHT - 5 });
+}
+
