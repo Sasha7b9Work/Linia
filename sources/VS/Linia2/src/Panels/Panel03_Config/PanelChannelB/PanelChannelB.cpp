@@ -69,17 +69,17 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
         wxStaticBox *boxOffset = new wxStaticBox(boxGenerator, wxID_ANY, _L("Смещение"), { x, y }, { w - 10, 100 });
 
         {
-            y = 20;
+            y = 25;
 
             new Slider(boxOffset, { 10, SD::Y_SB(y) }, width - 10, 0, 100);
 
-            y += 30;
+            y += 40;
 
             choices.Clear();
             choices.Add(_L("прямая"));
             choices.Add(_L("обратная"));
 
-            new ButtonsCombo(boxOffset, "Полярность", { 10, SD::Y_SB(y) }, width, choices, choices, 1, false);
+            new ButtonsCombo(boxOffset, "Полярность", { 10, SD::Y_SB(y) }, width - 10, choices, choices, 1, false);
         }
     }
 
