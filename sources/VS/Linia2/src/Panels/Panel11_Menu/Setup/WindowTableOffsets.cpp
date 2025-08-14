@@ -19,7 +19,7 @@ WindowTableOffsets::WindowTableOffsets() :
     choices.Add("смещений");
     choices.Add("коэффициентов");
 
-    comboType = new ButtonsCombo(this, "Таблица", { x, SD::Y_SB(y - 3) }, 130, choices, choices, 1, false);
+    comboType = new ButtonsCombo(this, "Таблица", { x, SD::Y_SB(y - 3) }, 130, choices, choices, 1);
 
     y = CreateLabelGroup(this, x, y + 20, "Канал С");
     y = CreateRadioButton(this, x, y, &rbChanC_MeasI, "Измеритель I");

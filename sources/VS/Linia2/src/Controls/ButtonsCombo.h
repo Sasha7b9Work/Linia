@@ -14,8 +14,7 @@ public:
     explicit ButtonsCombo(wxWindow *parent, const wxString &title, const wxPoint &pos, int width,
         const wxArrayString &labels,
         const wxArrayString &tooltips,
-        int buttons_in_row,                     // В каждом ряду будет расположено столько кнопок
-        bool insert_empty);
+        int buttons_in_row);                    // В каждом ряду будет расположено столько кнопок
 
     void SetCurrentSelection(int);
 
@@ -27,10 +26,13 @@ public:
 
     wxString GetCurrentString() const;
 
+protected:
+
+    bool insert_empty = false;          // true, если перед первым элементом нужно вставлять пустые элементы (для диапазонов, чтобы они согласованно располагались по столбцам)
+
 private:
 
     int current_choice = -1;
-    bool insert_empty = false;          // true, если перед первым элементом нужно вставлять пустые элементы (для диапазонов, чтобы они согласованно располагались по столбцам)
     wxString title;
     wxArrayString labels;
     wxArrayString tooltips;
@@ -44,4 +46,16 @@ private:
     // Между строками будут пробелы таким образом, что строки будут по краям кнопки
     void SetExtendedLabel(const wxString &, const wxString &);
     void SetExtendedLabel(const wxString &, int num_spaces, const wxString &);
+};
+
+
+class ButtonsComboRange : public ButtonsCombo
+{
+public:
+
+    ButtonsComboRange(wxWindow *parent, const wxString &title, const wxPoint &pos, int width,
+        const wxArrayString &labels,
+        const wxArrayString &tooltips);
+
+private:
 };

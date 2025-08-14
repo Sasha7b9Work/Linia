@@ -107,10 +107,9 @@ private:
 
 
 ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos, int width,
-    const wxArrayString &_labels, const wxArrayString &_tooltips, int _buttons_in_row, bool _insert_empty) :
+    const wxArrayString &_labels, const wxArrayString &_tooltips, int _buttons_in_row) :
     wxButton(parent, wxID_ANY, _labels[0], pos, { width, TEXTCNTRL_HEIGHT + 3 }),
-    current_choice(0),
-    insert_empty(_insert_empty)
+    current_choice(0)
 {
     Bind(wxEVT_BUTTON, &ButtonsCombo::OnButtonClicked, this);
 
@@ -271,4 +270,13 @@ void ButtonsCombo::SetExtendedLabel(const wxString &start, int num_spaces, const
     label.Append(' ', (size_t)num_spaces);
     label.Append(end);
     SetLabel(label);
+}
+
+
+ButtonsComboRange::ButtonsComboRange(wxWindow *parent, const wxString &title, const wxPoint &pos, int width, const wxArrayString &labels, const wxArrayString &tooltips) :
+    ButtonsCombo(parent, title, pos, width, labels, tooltips, 3)
+{
+    ButtonsCombo::insert_empty = true;
+
+    SetChoices(labels, tooltips);
 }

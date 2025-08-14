@@ -29,7 +29,7 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
         choices.Add(_L("Нижний уровень"));
         choices.Add(_L("Команда"));
 
-        new ButtonsCombo(this, "Режим", { x0, y0 - 2 }, 150, choices, choices, 1, false);
+        new ButtonsCombo(this, "Режим", { x0, y0 - 2 }, 150, choices, choices, 1);
 
         choices.clear();
 
@@ -42,7 +42,7 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
         choices.Add("0110 Software reset (power-on reset)");
         choices.Add("0111 Internal reference setup register");
 
-        new ButtonsCombo(this, "Команда", { x0 + 170, y0 - 2 }, 400, choices, choices, 1, false);
+        new ButtonsCombo(this, "Команда", { x0 + 170, y0 - 2 }, 400, choices, choices, 1);
 
         y0 += 30;
     }

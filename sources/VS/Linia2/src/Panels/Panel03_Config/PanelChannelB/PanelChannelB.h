@@ -15,10 +15,10 @@ public:
 
 private:
 
-    ButtonsCombo *comboTypeGenerator = nullptr;     // Тип генерации - напряжение или ток
-    ButtonsCombo *comboStep = nullptr;              // Амплитуда ступени
-    ButtonsCombo *comboLimitRange = nullptr;        // Ограничение - Диапазон
-    SliderFloat  *sliderOffset = nullptr;           // Смещение
+    ButtonsCombo      *comboTypeGenerator = nullptr;     // Тип генерации - напряжение или ток
+    ButtonsComboRange *comboStep = nullptr;              // Амплитуда ступени
+    ButtonsComboRange *comboLimitRange = nullptr;        // Ограничение - Диапазон
+    SliderFloat       *sliderOffset = nullptr;           // Смещение
 
     void Tune();
 

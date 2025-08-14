@@ -16,16 +16,16 @@ public:
 
 private:
 
-    ButtonsCombo    *comboVoltage = nullptr;        // Измеритель U
-    ButtonsCombo    *comboCurrent = nullptr;        // Измеритель I
-    ButtonsCombo    *comboRange = nullptr;          // Источник U - Диапазон
-    BmpButtonsCombo *comboScan = nullptr;           // Развёртка
-    wxCheckBox      *chbDutyCycle = nullptr;        // Развёртка - Скважность
-    ButtonsCombo    *comboNumberPoints = nullptr;   // Развёртка - Число точек
-    wxStaticText    *textLabelImpulse = nullptr;    // Развёртка - Длина импульса
-    wxStaticText    *textValueImpulse = nullptr;    // Развёртка - Длина импульса (значение)
-    SliderInt       *spinStart = nullptr;           // Измеритель - Ограничение - Старт
-    SliderInt       *spinStop = nullptr;            // Измеритель - Ограничение - Стоп
+    ButtonsComboRange *comboVoltage = nullptr;        // Измеритель U
+    ButtonsComboRange *comboCurrent = nullptr;        // Измеритель I
+    ButtonsCombo      *comboRange = nullptr;          // Источник U - Диапазон
+    BmpButtonsCombo   *comboScan = nullptr;           // Развёртка
+    wxCheckBox        *chbDutyCycle = nullptr;        // Развёртка - Скважность
+    ButtonsCombo      *comboNumberPoints = nullptr;   // Развёртка - Число точек
+    wxStaticText      *textLabelImpulse = nullptr;    // Развёртка - Длина импульса
+    wxStaticText      *textValueImpulse = nullptr;    // Развёртка - Длина импульса (значение)
+    SliderInt         *spinStart = nullptr;           // Измеритель - Ограничение - Старт
+    SliderInt         *spinStop = nullptr;            // Измеритель - Ограничение - Стоп
 
     void Tune();
 
