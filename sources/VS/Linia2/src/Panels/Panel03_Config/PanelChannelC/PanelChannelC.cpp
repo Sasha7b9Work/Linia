@@ -63,7 +63,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
             "50"
         };
 
-        comboNumberPoints = new ButtonsCombo(boxScan, "Число точек", { 10, SD::Y_SB(80) }, 150, names, names, 1);
+        comboNumberPoints = new ButtonsCombo(boxScan, "Число точек", { 10, SD::Y_SB(80) }, PanelConfig::WIDTH_COMBO, names, names, 1);
 
         textLabelImpulse = new wxStaticText(boxScan, wxID_ANY, "Длина импульса", { 10, SD::Y_SB(110) });                                    // IDC_STATICIMP
         textValueImpulse = new wxStaticText(boxScan, wxID_ANY, "0.2 ms",         { 120, SD::Y_SB(110) });                                   // IDC_EDITDLITIMP
@@ -95,7 +95,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
             "2 kV"
         };
 
-        comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", {10, SD::Y_SB(27)}, 150, names, names, 3);
+        comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", {10, SD::Y_SB(27)}, PanelConfig::WIDTH_COMBO, names, names, 3);
 
         new wxStaticText(boxSource, wxID_ANY, _L("Ограничение Uc, %%"), { 40, SD::Y_SB(60) });
 

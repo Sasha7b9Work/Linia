@@ -18,23 +18,21 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
 
     wxStaticBox *boxCommutation = new wxStaticBox(this, wxID_ANY, _L("Коммутация"), { x, 100 }, { MainWindow::WIDTH3 - 10, 300 });
 
-    int width = 150;
-
     {
         wxArrayString choices;
         choices.Add(_L("внутренняя"));
         choices.Add(_L("внешняя"));
 
         // IDC_COMBO_KOMMUTATOR
-        new ButtonsCombo(boxCommutation, "Тип", { 10, SD::Y_SB(20)}, width, choices, choices, 1);
+        new ButtonsCombo(boxCommutation, "Тип", { 10, SD::Y_SB(20)}, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
         choices.clear();
         choices.Add(_L("канал") + " C");
         choices.Add(_L("канал") + " B");
 
-        new ButtonsCombo(boxCommutation, "", { 10, SD::Y_SB(50) }, width, choices, choices, 1);
+        new ButtonsCombo(boxCommutation, "", { 10, SD::Y_SB(50) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
-        new ButtonsCombo(boxCommutation, "", { 10, SD::Y_SB(80) }, width, choices, choices, 1);
+        new ButtonsCombo(boxCommutation, "", { 10, SD::Y_SB(80) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
         choices.clear();
         choices.Add("C");
@@ -89,9 +87,9 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
 
         // IDC_COMBOMOD
         // IDC_BUTTON_LOADTST
-        comboTest = new ButtonsCombo(boxTest, "", { 5, SD::Y_SB(20) }, 110, choices, choices, 1);
+        comboTest = new ButtonsCombo(boxTest, "", { 5, SD::Y_SB(20) }, 100, choices, choices, 1);
 
-        btnLoad = new wxButton(boxTest, wxID_ANY, _L("Загрузить"), { 5, SD::Y_SB(50) }, { 110, 30 });
+        btnLoad = new wxButton(boxTest, wxID_ANY, _L("Загрузить"), { 5, SD::Y_SB(50) }, { 100, 30 });
 
         btnLoad->Hide();
     }

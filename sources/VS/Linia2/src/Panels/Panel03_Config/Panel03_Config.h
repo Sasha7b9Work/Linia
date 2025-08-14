@@ -11,6 +11,7 @@ class PanelConfig : public Panel
 public:
 
     static const int HEIGHT = 500;
+    static const int WIDTH_COMBO = 180;
 
     PanelConfig(wxWindow *parent);
 

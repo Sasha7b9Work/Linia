@@ -218,7 +218,7 @@ void SliderFloatPercents::CalculateValue()
 
     double value = min + (max - min) * slider->GetValue() / num_steps;
 
-    value = 110.0 / max * value;
+    value = (double)max_percents / max * value;
 
     textPercents->SetLabel(wxString::Format("%.0f %%", value));
 }
@@ -289,8 +289,10 @@ void SliderFloat::OnEventTimer(wxTimerEvent &event)
 }
 
 
-SliderFloatPercents::SliderFloatPercents(wxWindow *parent, const wxPoint &position, int width) :
-    SliderFloat(parent, position, width)
+SliderFloatPercents::SliderFloatPercents(wxWindow *parent, const wxPoint &position, int width, int _min_percents, int _max_percents) :
+    SliderFloat(parent, position, width),
+    min_percents(_min_percents),
+    max_percents(_max_percents)
 {
     text->SetPosition({0, 0});
 

@@ -67,9 +67,14 @@ class SliderFloatPercents : public SliderFloat
 {
 public:
 
-    SliderFloatPercents(wxWindow *parent, const wxPoint &position, int width);
+    SliderFloatPercents(wxWindow *parent, const wxPoint &position, int width, int min_percents, int max_percents);
 
     virtual void CalculateValue() override;
+
+protected:
+
+    int min_percents = 0;
+    int max_percents = 0;
 
 private:
 
@@ -82,7 +87,7 @@ class SliderFloatOffset : public SliderFloatPercents
 public:
 
     SliderFloatOffset(wxWindow *parent, const wxPoint &position, int width) :
-        SliderFloatPercents(parent, position, width) { }
+        SliderFloatPercents(parent, position, width, 0, 100) { }
 
     void CalculateAndSetRange(const wxString &range, double multiplier);
 };
@@ -93,7 +98,7 @@ class SliderFloatLimit : public SliderFloatPercents
 public:
 
     SliderFloatLimit(wxWindow *parent, const wxPoint &position, int width) :
-        SliderFloatPercents(parent, position, width) { }
+        SliderFloatPercents(parent, position, width, 10, 110) { }
 
     void CalculateAndSetRange(const wxString &range);
 };
