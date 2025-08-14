@@ -120,7 +120,16 @@ void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
         {
             wxArrayString ranges;
             RangeU::FillArrayStrings(ranges, DSet::Type::ChanB_Source, true);
-            comboStep->SetChoices(ranges, ranges);
+
+            wxArrayString tooltips;
+            RangeU::FillArrayStrings(tooltips, DSet::Type::ChanB_Source, false);
+
+            for (auto &elem : tooltips)
+            {
+                elem = wxString("Диапазон : " + elem);
+            }
+
+            comboStep->SetChoices(ranges, tooltips);
 
             RangeU::FillArrayStrings(ranges, DSet::Type::ChanB_Limit, false);
             comboLimitRange->SetChoices(ranges, ranges);
@@ -129,7 +138,16 @@ void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
         {
             wxArrayString ranges;
             RangeI::FillArrayStrings(ranges, DSet::Type::ChanB_Source, true);
-            comboStep->SetChoices(ranges, ranges);
+
+            wxArrayString tooltips;
+            RangeI::FillArrayStrings(tooltips, DSet::Type::ChanB_Source, false);
+
+            for (auto &elem : tooltips)
+            {
+                elem = wxString("Диапазон : ") + elem;
+            }
+
+            comboStep->SetChoices(ranges, tooltips);
 
             RangeI::FillArrayStrings(ranges, DSet::Type::ChanB_Limit, false);
             comboLimitRange->SetChoices(ranges, ranges);

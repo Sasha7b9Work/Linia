@@ -7,38 +7,42 @@
 class ButtonPopup : public wxPopupTransientWindow
 {
 public:
-    ButtonPopup(wxWindow *parent, const wxString &title, const wxArrayString &_names, int buttons_in_row) :
+    ButtonPopup(wxWindow *parent, const wxString &title, const wxArrayString &_labels, const wxArrayString &tooltips, int buttons_in_row) :
         wxPopupTransientWindow(parent, wxBORDER_SIMPLE),
-        names(_names)
+        labels(_labels)
     {
         // Основной контейнер с отступами по краям
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
         wxPanel *mainPanel = new wxPanel(this, wxID_ANY);
         mainPanel->SetBackgroundColour(*wxWHITE);
 
-        int num_rows = (int)(names.size() / buttons_in_row);
+        int num_rows = (int)(labels.size() / buttons_in_row);
 
-        if (num_rows * buttons_in_row < (int)names.size())
+        if (num_rows * buttons_in_row < (int)labels.size())
         {
             num_rows++;
         }
 
-        int num_cols = (int)(names.size() / num_rows);
+        int num_cols = (int)(labels.size() / num_rows);
 
-        if (num_rows * num_cols < (int)names.size())
+        if (num_rows * num_cols < (int)labels.size())
         {
             num_cols++;
         }
 
-        wxGridSizer *gridSizer = new wxGridSizer(num_rows, num_cols, 2, 2); // 5px промежутки
+        wxGridSizer *gridSizer = new wxGridSizer(num_rows, num_cols, 2, 2);
 
-        for (uint i = 0; i < names.size(); ++i)
+        for (uint i = 0; i < labels.size(); ++i)
         {
-            if (names[i][0])
+            if (labels[i][0])                                                           // Признак того, что надо вставлять кнопку, а не заглушку
             {
-                wxButton *btn = new wxButton(mainPanel, wxID_ANY, names[i]);
+                wxButton *btn = new wxButton(mainPanel, wxID_ANY, labels[i]);
+                if (labels[i] != tooltips[i])
+                {
+                    btn->SetToolTip(tooltips[i]);
+                }
                 btn->Bind(wxEVT_BUTTON, &ButtonPopup::OnButtonClick, this);
-                gridSizer->Add(btn, 0, wxEXPAND | wxALL, 0); // 2px отступы у кнопок
+                gridSizer->Add(btn, 0, wxEXPAND | wxALL, 0);
             }
             else
             {
@@ -65,15 +69,15 @@ public:
 
 private:
 
-    wxArrayString names;
+    wxArrayString labels;
 
     void OnButtonClick(wxCommandEvent &event)
     {
         wxString label = ((ButtonBitmap *)event.GetEventObject())->GetLabel();
 
-        for (size_t i = 0; i < names.size(); i++)
+        for (size_t i = 0; i < labels.size(); i++)
         {
-            if (label == names[i])
+            if (label == labels[i])
             {
                 ButtonsCombo *combo = (ButtonsCombo *)GetParent();
 
@@ -116,7 +120,7 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoi
 
 void ButtonsCombo::OnButtonClicked(wxCommandEvent &)
 {
-    ButtonPopup *popup = new ButtonPopup(this, title, labels, buttons_in_row);
+    ButtonPopup *popup = new ButtonPopup(this, title, labels, tooltips, buttons_in_row);
 
     wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
 
@@ -145,7 +149,7 @@ void ButtonsCombo::SetCurrentSelection(int choice)
 
     SetExtendedLabel(label, labels[index]);
 
-    SetToolTip(tooltips[index]);
+    SetToolTip((tooltips[index] != labels[index]) ? (tooltips[index]) : wxString(""));
 
     if(need_event)
     {
