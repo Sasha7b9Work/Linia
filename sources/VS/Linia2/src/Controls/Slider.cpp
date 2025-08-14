@@ -171,9 +171,50 @@ void SliderFloatOffset::CalculateAndSetRange(const wxString &range, double multi
 }
 
 
+void SliderFloatLimit::CalculateAndSetRange(const wxString &range)
+{
+    wxString value = range.BeforeFirst(' ');
+
+    units = range.AfterFirst(' ');
+
+    int int_value = 0;
+    value.ToInt(&int_value);
+
+    double double_value = (double)int_value;
+
+    int digits = 0;
+
+    if (double_value <= 1000)
+    {
+        if (double_value <= 50)
+        {
+            digits = 1;
+        }
+        else
+        {
+            digits = 0;
+        }
+    }
+    else
+    {
+        double_value *= 1e-3;
+
+        if (units[0] == 'A' || units[0] == 'V') units = 'k' + units;
+        else if (units[0] == 'm')               units = units[1];
+        else if (units[0] == 'u')               units[0] = 'm';
+        else if (units[0] == 'n')               units[0] = 'u';
+        else if (units[0] == 'p')               units[0] = 'n';
+
+        digits = 2;
+    }
+
+    SetRange(double_value / 10.0, double_value * 1.1, units, digits);
+}
+
+
 void SliderFloat::CalculateValue()
 {
-    double value = (max - min) * slider->GetValue() / num_steps;
+    double value = min + (max - min) * slider->GetValue() / num_steps;
 
     char format_string[32];
     std::sprintf(format_string, "%%.%df %%s", digitts_after_points);

@@ -96,7 +96,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
 
         y += 40;
 
-        new SliderInt(boxLimitation, { 10, SD::Y_SB(y) }, width, 0, 100);
+        sliderLimit = new SliderFloatLimit(boxLimitation, { 10, SD::Y_SB(y) }, width );
     }
 
     Bind(wxEVT_COMBOBOX, &PanelChannelB::OnEventComboBox, this);
@@ -119,6 +119,15 @@ void PanelChannelB::Tune()
         wxCommandEvent event(wxEVT_COMBOBOX, comboStep->GetId());
         event.SetEventObject(comboStep);
         event.SetInt(comboStep->GetCurrentSelection());
+        wxPostEvent(GetEventHandler(), event);
+    }
+
+    {
+        comboLimitRange->SetLastSelection();
+
+        wxCommandEvent event(wxEVT_COMBOBOX, comboLimitRange ->GetId());
+        event.SetEventObject(comboLimitRange);
+        event.SetInt(comboLimitRange->GetCurrentSelection());
         wxPostEvent(GetEventHandler(), event);
     }
 }
@@ -160,6 +169,10 @@ void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
 
             comboStep->SetChoices(ranges, tooltips);
         }
+    }
+    else if (combo == comboLimitRange)
+    {
+        sliderLimit->CalculateAndSetRange(comboLimitRange->GetCurrentString());
     }
 
     if (comboTypeGenerator->GetCurrentSelection() == 0)             // Напряжение

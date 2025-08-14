@@ -74,3 +74,16 @@ public:
 
     void CalculateAndSetRange(const wxString &range, double multiplier);
 };
+
+
+class SliderFloatLimit : public SliderFloat
+{
+public:
+
+    SliderFloatLimit(wxWindow *parent, const wxPoint &position, int width) :
+        SliderFloat(parent, position, width)
+    {
+    }
+
+    void CalculateAndSetRange(const wxString &range);
+};
