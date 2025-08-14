@@ -30,7 +30,7 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
         choices.Add(_L("канал") + " C");
         choices.Add(_L("канал") + " B");
 
-        // IDC_COMBO_GNEZDO_C           m_iGnezdoC              
+        // IDC_COMBO_GNEZDO_C           m_iGnezdoC              OnSelchangeComboGnezdoC
         new ButtonsCombo(boxCommutation, "", { 10, SD::Y_SB(50) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
         // IDC_COMBO_GNEZDO_B
