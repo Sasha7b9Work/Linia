@@ -12,7 +12,7 @@ class ButtonsCombo : public wxButton
 public:
 
     explicit ButtonsCombo(wxWindow *parent, const wxString &title, const wxPoint &pos, int width,
-        const wxArrayString &names,             // Эти изображения будут на кнопках
+        const wxArrayString &labels,
         int buttons_in_row,                     // В каждом ряду будет расположено столько кнопок
         bool insert_empty);
 
@@ -29,7 +29,7 @@ private:
     int current_choice = -1;
     bool insert_empty = false;          // true, если перед первым элементом нужно вставлять пустые элементы (для диапазонов, чтобы они согласованно располагались по столбцам)
     wxString title;
-    wxArrayString names;
+    wxArrayString labels;
     int buttons_in_row;
 
     void OnButtonClicked(wxCommandEvent &);

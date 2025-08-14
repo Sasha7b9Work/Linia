@@ -115,7 +115,7 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoi
 
 void ButtonsCombo::OnButtonClicked(wxCommandEvent &)
 {
-    ButtonPopup *popup = new ButtonPopup(this, title, names, buttons_in_row);
+    ButtonPopup *popup = new ButtonPopup(this, title, labels, buttons_in_row);
 
     wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
 
@@ -140,7 +140,7 @@ void ButtonsCombo::SetCurrentSelection(int choice)
         label += title + " : ";
     }
 
-    SetExtendedLabel(label, names[(uint)current_choice + NumEmptyes()]);
+    SetExtendedLabel(label, labels[(uint)current_choice + NumEmptyes()]);
 
     if(need_event)
     {
@@ -160,30 +160,30 @@ int ButtonsCombo::GetCurrentSelection() const
 
 wxString ButtonsCombo::GetCurrentString() const
 {
-    return names[(size_t)GetCurrentSelection()];
+    return labels[(size_t)GetCurrentSelection()];
 }
 
 
 void ButtonsCombo::SetChoices(const wxArrayString &choices)
 {
-    names.clear();
+    labels.clear();
 
     if (insert_empty)
     {
         if (choices[0][0] == '2')
         {
-            names.push_back("");
+            labels.push_back("");
         }
         else if (choices[0][0] == '4' || choices[0][0] == '5')
         {
-            names.push_back("");
-            names.push_back("");
+            labels.push_back("");
+            labels.push_back("");
         }
     }
 
     for (auto &elem : choices)
     {
-        names.push_back(elem);
+        labels.push_back(elem);
     }
 
     SetCurrentSelection(0);
@@ -194,7 +194,7 @@ int ButtonsCombo::NumEmptyes() const
 {
     int counter = 0;
 
-    for (auto &elem : names)
+    for (auto &elem : labels)
     {
         if (elem[0] == '\0')
         {
