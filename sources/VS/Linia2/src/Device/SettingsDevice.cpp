@@ -90,6 +90,41 @@ wxString RangeI::NameStep(RowRange::E row) const
 }
 
 
+wxString RangeU::NameStep(RowRange::E row) const
+{
+    wxString name = Name(row);
+
+    wxString val = name.BeforeFirst(' ');
+
+    wxString units = name.AfterFirst(' ');
+
+    int int_value = 0;
+
+    val.ToInt(&int_value);
+
+    if (int_value == 50)
+    {
+        val = "2.5";
+    }
+    else if (int_value >= 20)
+    {
+        val = wxString::Format("%d", int_value / 20);
+    }
+    else
+    {
+        val = wxString::Format("%d", int_value * 100 / 2);
+
+        if (units[0] == 'V')        units = 'm' + units;
+        else if (units[0] == 'k')   units = "V";
+        else if (units[0] == 'm')   units = "uV";
+        else if (units[0] == 'u')   units = "nV";
+        else if (units[0] == 'n')   units = "pV";
+    }
+
+    return val + " " + units;
+}
+
+
 pchar RangeU::Name(RowRange::E row) const
 {
     static const pchar names[Count][RowRange::Count] =
@@ -818,13 +853,20 @@ void RangeI::FillArrayStrings(wxArrayString &arr, DSet::Type::E type, bool steps
 }
 
 
-void RangeU::FillArrayStrings(wxArrayString &arr, DSet::Type::E type)
+void RangeU::FillArrayStrings(wxArrayString &arr, DSet::Type::E type, bool steps)
 {
     arr.clear();
 
     for (int i = RangeU::Min(type); i <= RangeU::Max(type); i++)
     {
-        arr.push_back(RangeU((RangeU::E)i).Name(RowRange::ForType(type)));
+        if (steps)
+        {
+            arr.push_back(RangeU((RangeU::E)i).NameStep(RowRange::ForType(type)));
+        }
+        else
+        {
+            arr.push_back(RangeU((RangeU::E)i).Name(RowRange::ForType(type)));
+        }
     }
 }
 

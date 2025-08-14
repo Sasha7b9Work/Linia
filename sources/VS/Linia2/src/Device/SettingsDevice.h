@@ -152,6 +152,7 @@ struct RangeU
     RangeU(E v) : value(v) { }
 
     pchar Name(RowRange::E) const;
+    wxString NameStep(RowRange::E) const;
 
     void operator++(int)
     {
@@ -161,7 +162,7 @@ struct RangeU
     static E Min(DSet::Type::E);
     static E Max(DSet::Type::E);
 
-    static void FillArrayStrings(wxArrayString &, DSet::Type::E);
+    static void FillArrayStrings(wxArrayString &, DSet::Type::E, bool step);
 };
 
 

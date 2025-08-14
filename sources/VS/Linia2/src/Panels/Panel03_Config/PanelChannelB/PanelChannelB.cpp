@@ -119,10 +119,10 @@ void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
         if (combo->GetCurrentSelection() == 0)              // Напряжение
         {
             wxArrayString ranges;
-            RangeU::FillArrayStrings(ranges, DSet::Type::ChanB_Source);
+            RangeU::FillArrayStrings(ranges, DSet::Type::ChanB_Source, true);
             comboStep->SetChoices(ranges);
 
-            RangeU::FillArrayStrings(ranges, DSet::Type::ChanB_Limit);
+            RangeU::FillArrayStrings(ranges, DSet::Type::ChanB_Limit, false);
             comboLimitRange->SetChoices(ranges);
         }
         else if (combo->GetCurrentSelection() == 1)         // Ток
