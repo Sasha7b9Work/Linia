@@ -33,6 +33,8 @@ struct RowRange
         _125,
         Count
     };
+
+    static E ForType(DSet::Type::E);
 };
 
 

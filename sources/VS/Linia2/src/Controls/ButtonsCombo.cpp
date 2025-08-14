@@ -98,9 +98,9 @@ private:
 };
 
 
-ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos, int width, const wxArrayString &_names, int num_name, int _buttons_in_row, bool _insert_empty) :
-    wxButton(parent, wxID_ANY, _names[(size_t)num_name], pos, { width, TEXTCNTRL_HEIGHT + 3 }),
-    current_choice(num_name),
+ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos, int width, const wxArrayString &_names, int _buttons_in_row, bool _insert_empty) :
+    wxButton(parent, wxID_ANY, _names[0], pos, { width, TEXTCNTRL_HEIGHT + 3 }),
+    current_choice(0),
     insert_empty(_insert_empty)
 {
     Bind(wxEVT_BUTTON, &ButtonsCombo::OnButtonClicked, this);
@@ -110,8 +110,6 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoi
     SetChoices(_names);
 
     buttons_in_row = _buttons_in_row;
-
-    SetCurrentSelection(num_name);
 }
 
 
@@ -131,6 +129,8 @@ void ButtonsCombo::OnButtonClicked(wxCommandEvent &)
 
 void ButtonsCombo::SetCurrentSelection(int choice)
 {
+    bool need_event = (choice != current_choice);
+
     current_choice = choice;
 
     wxString label;
@@ -142,6 +142,7 @@ void ButtonsCombo::SetCurrentSelection(int choice)
 
     SetExtendedLabel(label, names[(uint)current_choice + NumEmptyes()]);
 
+    if(need_event)
     {
         wxCommandEvent event(wxEVT_COMBOBOX, GetId());
         event.SetEventObject(this);

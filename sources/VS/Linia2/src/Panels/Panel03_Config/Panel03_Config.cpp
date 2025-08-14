@@ -103,7 +103,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
         choices.Add("U");
         choices.Add("I");
 
-        new ButtonsCombo(boxGenerator, "Тип", { 10, SD::Y_SB(y - 3) }, width, choices, 0, 1);
+        new ButtonsCombo(boxGenerator, "Тип", { 10, SD::Y_SB(y - 3) }, width, choices, 1, false);
 
         y += 25;
 
@@ -111,14 +111,14 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
         choices.Add(_L("Вкл"));
         choices.Add(_L("Выкл"));
 
-        new ButtonsCombo(boxGenerator, "Импульс", { 10, SD::Y_SB(y - 3) }, width, choices, 0, 1);
+        new ButtonsCombo(boxGenerator, "Импульс", { 10, SD::Y_SB(y - 3) }, width, choices, 1, false);
 
         y += 25;
 
         choices.Clear();
         choices.Add("2V");
 
-        new ButtonsCombo(boxGenerator, "Амплитуда ступени", { 10, SD::Y_SB(y - 3) }, width, choices, 0, 1);
+        new ButtonsCombo(boxGenerator, "Амплитуда ступени", { 10, SD::Y_SB(y - 3) }, width, choices, 1, false);
 
         y += 25;
 
@@ -134,7 +134,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
         choices.Add(_L("прямая"));
         choices.Add(_L("обратная"));
 
-        new ButtonsCombo(boxGenerator, "Полярность", { 10, SD::Y_SB(y) }, width, choices, 0, 1);
+        new ButtonsCombo(boxGenerator, "Полярность", { 10, SD::Y_SB(y) }, width, choices, 1, false);
 
         y += 25;
 
@@ -151,7 +151,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
             choices.Add(_L("прямая"));
             choices.Add(_L("обратная"));
 
-            new ButtonsCombo(boxOffset, "Полярность", { 10, SD::Y_SB(y) }, width, choices, 0, 1);
+            new ButtonsCombo(boxOffset, "Полярность", { 10, SD::Y_SB(y) }, width, choices, 1, false);
         }
     }
 
@@ -163,7 +163,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
         wxArrayString choices;
         choices.Add("10 mA");
 
-        new ButtonsCombo(boxLimitation, "Диапазон", { 10, SD::Y_SB(y - 3) }, width, choices, 0, 1);
+        new ButtonsCombo(boxLimitation, "Диапазон", { 10, SD::Y_SB(y - 3) }, width, choices, 1, false);
 
         y += 25;
 

@@ -773,7 +773,7 @@ void RangeI::FillArrayStrings(wxArrayString &arr, DSet::Type::E type)
     arr.clear();
     for (int i = RangeI::Min(type); i <= RangeI::Max(type); i++)
     {
-        arr.push_back(RangeI((RangeI::E)i).Name(RowRange::_125));
+        arr.push_back(RangeI((RangeI::E)i).Name(RowRange::ForType(type)));
     }
 }
 
@@ -784,6 +784,23 @@ void RangeU::FillArrayStrings(wxArrayString &arr, DSet::Type::E type)
 
     for (int i = RangeU::Min(type); i <= RangeU::Max(type); i++)
     {
-        arr.push_back(RangeU((RangeU::E)i).Name(RowRange::_125));
+        arr.push_back(RangeU((RangeU::E)i).Name(RowRange::ForType(type)));
     }
+}
+
+
+RowRange::E RowRange::ForType(DSet::Type::E type)
+{
+    static const E row[DSet::Type::Count] =
+    {
+        _125,
+        _125,
+        _124,
+        _124,
+        _124,
+        _124,
+        _124
+    };
+
+    return row[type];
 }

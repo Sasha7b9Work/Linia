@@ -26,15 +26,15 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
         choices.Add(_L("внешняя"));
 
         // IDC_COMBO_KOMMUTATOR
-        new ButtonsCombo(boxCommutation, "Тип", { 10, SD::Y_SB(20)}, width, choices, 0, 1);
+        new ButtonsCombo(boxCommutation, "Тип", { 10, SD::Y_SB(20)}, width, choices, 1, false);
 
         choices.clear();
         choices.Add(_L("канал") + " C");
         choices.Add(_L("канал") + " B");
 
-        new ButtonsCombo(boxCommutation, "", { 10, SD::Y_SB(50) }, width, choices, 0, 1);
+        new ButtonsCombo(boxCommutation, "", { 10, SD::Y_SB(50) }, width, choices, 1, false);
 
-        new ButtonsCombo(boxCommutation, "", { 10, SD::Y_SB(80) }, width, choices, 0, 1);
+        new ButtonsCombo(boxCommutation, "", { 10, SD::Y_SB(80) }, width, choices, 1, false);
 
         choices.clear();
         choices.Add("C");
@@ -43,9 +43,9 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
 
         int w = 30;
 
-        comboC = new ButtonsCombo(boxCommutation, "", { 100, 170 }, w, choices, 0, 1);
-        comboB = new ButtonsCombo(boxCommutation, "", { 40, 210 }, w, choices, 0, 1);
-        comboE = new ButtonsCombo(boxCommutation, "", { 100, 250 }, w, choices, 0, 1);
+        comboC = new ButtonsCombo(boxCommutation, "", { 100, 170 }, w, choices, 1, false);
+        comboB = new ButtonsCombo(boxCommutation, "", { 40, 210 }, w, choices, 1, false);
+        comboE = new ButtonsCombo(boxCommutation, "", { 100, 250 }, w, choices, 1, false);
     }
 
     wxStaticBox *boxCategory = new wxStaticBox(this, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 100 });
@@ -89,7 +89,7 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
 
         // IDC_COMBOMOD
         // IDC_BUTTON_LOADTST
-        comboTest = new ButtonsCombo(boxTest, "", { 5, SD::Y_SB(20) }, 110, choices, 0, 1);
+        comboTest = new ButtonsCombo(boxTest, "", { 5, SD::Y_SB(20) }, 110, choices, 1, false);
 
         btnLoad = new wxButton(boxTest, wxID_ANY, _L("Загрузить"), { 5, SD::Y_SB(50) }, { 110, 30 });
 

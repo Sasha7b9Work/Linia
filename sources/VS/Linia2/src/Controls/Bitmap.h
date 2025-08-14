@@ -6,7 +6,7 @@ class Bitmap
 {
 public:
 
-    Bitmap() { }
+    Bitmap() = default;
 
     Bitmap(const wxString &file_name);
 

@@ -16,6 +16,9 @@ public:
 private:
 
     ButtonsCombo *comboTypeGenerator = nullptr;     // Тип генерации - напряжение или ток
+    ButtonsCombo *comboStep = nullptr;              // Амплитуда ступени
+
+    void Tune();
 
     void OnEventComboBox(wxCommandEvent &);
 };

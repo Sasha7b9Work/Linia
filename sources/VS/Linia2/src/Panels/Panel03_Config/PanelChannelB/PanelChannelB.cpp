@@ -4,6 +4,7 @@
 #include "Utils/SystemDepend.h"
 #include "MainWindow.h"
 #include "Panels/Panel03_Config/Panel03_Config.h"
+#include "Device/SettingsDevice.h"
 
 
 PanelChannelB *PanelChannelB::self = nullptr;
@@ -19,7 +20,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
 
     wxStaticBox *boxGenerator = new wxStaticBox(this, wxID_ANY, _L("Генератор ступенек"), { x, 0 }, { w, 300 });
 
-    int width = 150;
+    int width = 180;
 
     {
         int y = 25;
@@ -28,7 +29,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
         choices.Add("U");
         choices.Add("I");
 
-        comboTypeGenerator = new ButtonsCombo(boxGenerator, "Тип", { 10, SD::Y_SB(y - 3) }, width, choices, 0, 1);
+        comboTypeGenerator = new ButtonsCombo(boxGenerator, "Тип", { 10, SD::Y_SB(y - 3) }, width, choices, 1, false);
 
         y += 25;
 
@@ -36,14 +37,14 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
         choices.Add(_L("Вкл"));
         choices.Add(_L("Выкл"));
 
-        new ButtonsCombo(boxGenerator, "Импульс", { 10, SD::Y_SB(y - 3) }, width, choices, 0, 1);
+        new ButtonsCombo(boxGenerator, "Импульс", { 10, SD::Y_SB(y - 3) }, width, choices, 1, false);
 
         y += 25;
 
         choices.Clear();
-        choices.Add("2V");
+        choices.Add("-");
 
-        new ButtonsCombo(boxGenerator, "Амплитуда ступени", { 10, SD::Y_SB(y - 3) }, width, choices, 0, 1);
+        comboStep = new ButtonsCombo(boxGenerator, "Амплитуда ступени", { 10, SD::Y_SB(y - 3) }, width, choices, 3, true);
 
         y += 25;
 
@@ -61,7 +62,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
         choices.Add(_L("прямая"));
         choices.Add(_L("обратная"));
 
-        new ButtonsCombo(boxGenerator, "Полярность", { 10, SD::Y_SB(y) }, width, choices, 0, 1);
+        new ButtonsCombo(boxGenerator, "Полярность", { 10, SD::Y_SB(y) }, width, choices, 1, false);
 
         y += 25;
 
@@ -78,7 +79,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
             choices.Add(_L("прямая"));
             choices.Add(_L("обратная"));
 
-            new ButtonsCombo(boxOffset, "Полярность", { 10, SD::Y_SB(y) }, width, choices, 0, 1);
+            new ButtonsCombo(boxOffset, "Полярность", { 10, SD::Y_SB(y) }, width, choices, 1, false);
         }
     }
 
@@ -90,7 +91,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
         wxArrayString choices;
         choices.Add("10 mA");
 
-        new ButtonsCombo(boxLimitation, "Диапазон", { 10, SD::Y_SB(y - 3) }, width, choices, 0, 1);
+        new ButtonsCombo(boxLimitation, "Диапазон", { 10, SD::Y_SB(y - 3) }, width, choices, 1, false);
 
         y += 25;
 
@@ -98,6 +99,14 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
     }
 
     Bind(wxEVT_COMBOBOX, &PanelChannelB::OnEventComboBox, this);
+
+    Tune();
+}
+
+
+void PanelChannelB::Tune()
+{
+    comboTypeGenerator->SetCurrentSelection(1);
 }
 
 
@@ -109,9 +118,17 @@ void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
     {
         if (combo->GetCurrentSelection() == 0)              // Напряжение
         {
+            wxArrayString ranges;
+            RangeU::FillArrayStrings(ranges, DSet::Type::ChanB_Source);
+            comboStep->SetChoices(ranges);
         }
         else if (combo->GetCurrentSelection() == 1)         // Ток
         {
+            wxArrayString ranges;
+            RangeI::FillArrayStrings(ranges, DSet::Type::ChanB_Source);
+            comboStep->SetChoices(ranges);
         }
     }
+
+    event.Skip();
 }
