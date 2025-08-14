@@ -7,7 +7,7 @@
 class ButtonPopup : public wxPopupTransientWindow
 {
 public:
-    ButtonPopup(wxWindow *parent, const wxString &title, const wxArrayString &_labels, const wxArrayString &tooltips) :
+    ButtonPopup(wxWindow *parent, const wxString &title, const wxArrayString &_labels) :
         wxPopupTransientWindow(parent, wxBORDER_SIMPLE),
         labels(_labels)
     {
@@ -37,9 +37,9 @@ public:
             if (labels[i][0])                                                           // Признак того, что надо вставлять кнопку, а не заглушку
             {
                 wxButton *btn = new wxButton(mainPanel, wxID_ANY, labels[i]);
-                if (labels[i] != tooltips[i])
+                if (labels[i] != GetCombo()->tooltips[i])
                 {
-                    btn->SetToolTip(tooltips[i]);
+                    btn->SetToolTip(GetCombo()->tooltips[i]);
                 }
                 btn->Bind(wxEVT_BUTTON, &ButtonPopup::OnButtonClick, this);
                 gridSizer->Add(btn, 0, wxEXPAND | wxALL, 0);
@@ -125,7 +125,7 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoi
 
 void ButtonsCombo::OnButtonClicked(wxCommandEvent &)
 {
-    ButtonPopup *popup = new ButtonPopup(this, title, labels, tooltips);
+    ButtonPopup *popup = new ButtonPopup(this, title, labels);
 
     wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
 
