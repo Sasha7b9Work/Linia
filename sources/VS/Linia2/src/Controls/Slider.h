@@ -63,30 +63,37 @@ protected:
 };
 
 
-class SliderFloatOffset : public SliderFloat
+class SliderFloatPercents : public SliderFloat
 {
 public:
 
-    SliderFloatOffset(wxWindow *parent, const wxPoint &position, int width) :
-        SliderFloat(parent, position, width)
-    {
-    }
-
-    void CalculateAndSetRange(const wxString &range, double multiplier);
-};
-
-
-class SliderFloatLimit : public SliderFloat
-{
-public:
-
-    SliderFloatLimit(wxWindow *parent, const wxPoint &position, int width);
-
-    void CalculateAndSetRange(const wxString &range);
+    SliderFloatPercents(wxWindow *parent, const wxPoint &position, int width);
 
     virtual void CalculateValue() override;
 
 private:
 
     wxStaticText *textPercents = nullptr;
+};
+
+
+class SliderFloatOffset : public SliderFloatPercents
+{
+public:
+
+    SliderFloatOffset(wxWindow *parent, const wxPoint &position, int width) :
+        SliderFloatPercents(parent, position, width) { }
+
+    void CalculateAndSetRange(const wxString &range, double multiplier);
+};
+
+
+class SliderFloatLimit : public SliderFloatPercents
+{
+public:
+
+    SliderFloatLimit(wxWindow *parent, const wxPoint &position, int width) :
+        SliderFloatPercents(parent, position, width) { }
+
+    void CalculateAndSetRange(const wxString &range);
 };

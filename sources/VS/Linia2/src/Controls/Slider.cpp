@@ -212,7 +212,7 @@ void SliderFloatLimit::CalculateAndSetRange(const wxString &range)
 }
 
 
-void SliderFloatLimit::CalculateValue()
+void SliderFloatPercents::CalculateValue()
 {
     SliderFloat::CalculateValue();
 
@@ -289,11 +289,10 @@ void SliderFloat::OnEventTimer(wxTimerEvent &event)
 }
 
 
-SliderFloatLimit::SliderFloatLimit(wxWindow *parent, const wxPoint &position, int width) :
+SliderFloatPercents::SliderFloatPercents(wxWindow *parent, const wxPoint &position, int width) :
     SliderFloat(parent, position, width)
 {
     text->SetPosition({0, 0});
 
     textPercents = new wxStaticText(this, wxID_ANY, "0", { 0, 15 }, { 50, TEXTCNTRL_HEIGHT - 5 });
 }
-
