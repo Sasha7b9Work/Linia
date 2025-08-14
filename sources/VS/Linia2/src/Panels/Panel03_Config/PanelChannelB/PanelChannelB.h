@@ -12,4 +12,10 @@ public:
     PanelChannelB(wxPanel *parent, int x, int w);
 
     static PanelChannelB *self;
+
+private:
+
+    ButtonsCombo *comboTypeGenerator = nullptr;     // Тип генерации - напряжение или ток
+
+    void OnEventComboBox(wxCommandEvent &);
 };

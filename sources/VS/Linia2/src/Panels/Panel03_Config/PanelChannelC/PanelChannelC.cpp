@@ -75,19 +75,11 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
         int y = 20;
 
         wxArrayString names;
-        for (int i = RangeU::Min(DSet::Type::ChanC_Meas); i <= RangeU::Max(DSet::Type::ChanC_Meas); i++)
-        {
-            names.push_back(RangeU((RangeU::E)i).Name(RowRange::_125));
-        }
 
+        RangeU::FillArrayStrings(names, DSet::Type::ChanC_Meas);
         comboVoltage = new ButtonsCombo(boxMeter, "Uc", {10, SD::Y_SB(y)}, 80, names, 0, 3, true);
 
-        names.clear();
-        for (int i = RangeI::Min(DSet::Type::ChanC_Meas); i <= RangeI::Max(DSet::Type::ChanC_Meas); i++)
-        {
-            names.push_back(RangeI((RangeI::E)i).Name(RowRange::_125));
-        }
-
+        RangeI::FillArrayStrings(names, DSet::Type::ChanC_Meas);
         comboCurrent = new ButtonsCombo(boxMeter, "Ic", { 100, SD::Y_SB(y) }, 80, names, 0, 3);;
     }
 

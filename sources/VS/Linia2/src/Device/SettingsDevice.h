@@ -92,6 +92,8 @@ struct RangeI
 
     static E Min(DSet::Type::E);
     static E Max(DSet::Type::E);
+
+    static void FillArrayStrings(wxArrayString &, DSet::Type::E);
 };
 
 
@@ -155,6 +157,8 @@ struct RangeU
 
     static E Min(DSet::Type::E);
     static E Max(DSet::Type::E);
+
+    static void FillArrayStrings(wxArrayString &, DSet::Type::E);
 };
 
 

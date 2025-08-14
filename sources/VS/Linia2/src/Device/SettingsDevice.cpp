@@ -766,3 +766,24 @@ RangeU::E RangeU::Max(DSet::Type::E type)
 
     return max[type];
 }
+
+
+void RangeI::FillArrayStrings(wxArrayString &arr, DSet::Type::E type)
+{
+    arr.clear();
+    for (int i = RangeI::Min(type); i <= RangeI::Max(type); i++)
+    {
+        arr.push_back(RangeI((RangeI::E)i).Name(RowRange::_125));
+    }
+}
+
+
+void RangeU::FillArrayStrings(wxArrayString &arr, DSet::Type::E type)
+{
+    arr.clear();
+
+    for (int i = RangeU::Min(type); i <= RangeU::Max(type); i++)
+    {
+        arr.push_back(RangeU((RangeU::E)i).Name(RowRange::_125));
+    }
+}

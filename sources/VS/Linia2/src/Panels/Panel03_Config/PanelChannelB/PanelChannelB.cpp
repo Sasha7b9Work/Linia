@@ -28,7 +28,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
         choices.Add("U");
         choices.Add("I");
 
-        new ButtonsCombo(boxGenerator, "Тип", { 10, SD::Y_SB(y - 3) }, width, choices, 0, 1);
+        comboTypeGenerator = new ButtonsCombo(boxGenerator, "Тип", { 10, SD::Y_SB(y - 3) }, width, choices, 0, 1);
 
         y += 25;
 
@@ -95,5 +95,23 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
         y += 25;
 
         new Slider(boxLimitation, { 10, SD::Y_SB(y) }, width);
+    }
+
+    Bind(wxEVT_COMBOBOX, &PanelChannelB::OnEventComboBox, this);
+}
+
+
+void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
+{
+    ButtonsCombo *combo = (ButtonsCombo *)event.GetEventObject();
+
+    if (combo == comboTypeGenerator)
+    {
+        if (combo->GetCurrentSelection() == 0)              // Напряжение
+        {
+        }
+        else if (combo->GetCurrentSelection() == 1)         // Ток
+        {
+        }
     }
 }
