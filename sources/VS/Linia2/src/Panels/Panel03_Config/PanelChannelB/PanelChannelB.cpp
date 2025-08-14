@@ -57,7 +57,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
 
         new SpinBox(boxGenerator, { 120, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT }, 5, 10);
 
-        y += 25;
+        y += 28;
 
         choices.Clear();
         choices.Add(_L("прямая"));
@@ -65,7 +65,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
 
         new ButtonsCombo(boxGenerator, "Полярность", { 10, SD::Y_SB(y) }, width, choices, choices, 1, false);
 
-        y += 25;
+        y += 30;
 
         wxStaticBox *boxOffset = new wxStaticBox(boxGenerator, wxID_ANY, _L("Смещение"), { x, y }, { w - 10, 100 });
 
@@ -161,12 +161,14 @@ void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
             comboStep->SetChoices(ranges, tooltips);
         }
     }
-    else if (combo == comboStep)
+
+    if (comboTypeGenerator->GetCurrentSelection() == 0)             // Напряжение
     {
-        if (comboTypeGenerator->GetCurrentSelection() == 1)     // Ток
-        {
-            sliderOffset->CalculateAndSetRangeForRange(comboStep->GetCurrentString(), 10.0);
-        }
+        sliderOffset->CalculateAndSetRangeForRange(comboStep->GetCurrentString(), 10.0);
+    }
+    else if (comboTypeGenerator->GetCurrentSelection() == 1)        // Ток
+    {
+        sliderOffset->CalculateAndSetRangeForRange(comboStep->GetCurrentString(), 10.0);
     }
 
     event.Skip();
