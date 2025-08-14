@@ -80,22 +80,10 @@ wxString RangeI::NameStep(RowRange::E row) const
     {
         val = wxString::Format("%d", int_value * 100 / 2);
 
-        if (units[0] == 'A')
-        {
-            units = 'm' + units;
-        }
-        else if (units[0] == 'm')
-        {
-            units = "uA";
-        }
-        else if (units[0] == 'u')
-        {
-            units = "nA";
-        }
-        else if (units[0] == 'n')
-        {
-            units = "pA";
-        }
+        if (units[0] == 'A')        units = 'm' + units;
+        else if (units[0] == 'm')   units = "uA";
+        else if (units[0] == 'u')   units = "nA";
+        else if (units[0] == 'n')   units = "pA";
     }
 
     return val + " " + units;
