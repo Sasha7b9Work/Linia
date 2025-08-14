@@ -3,15 +3,21 @@
 #include "Controls/SpinBox.h"
 
 
-SpinBox::SpinBox(wxWindow *parent, int /*id*/, pchar text, const wxPoint &position, const wxSize &size) :
-    wxPanel(parent, wxID_ANY, position, size)
+SpinBox::SpinBox(wxWindow *parent, const wxPoint &position, const wxSize &size, int _min, int _max) :
+    wxPanel(parent, wxID_ANY, position, size),
+    min(_min),
+    max(_max)
 {
     const int width_btn = 10;
 
     wxSize size_text = size;
     size_text.x -= width_btn;
 
-    new wxTextCtrl(this, wxID_ANY, text, { 0, 0 }, size_text);
+    text = new wxTextCtrl(this, wxID_ANY, "", { 0, 0 }, size_text);
+
+    text->SetEditable(false);
+
+    text->SetValue(wxString::Format("%d", min));
 
     wxSize size_btn = { width_btn, size.y / 2 };
 

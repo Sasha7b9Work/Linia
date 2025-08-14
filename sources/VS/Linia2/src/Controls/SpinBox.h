@@ -11,7 +11,12 @@ class SpinBox : public wxPanel
 {
 public:
 
-    SpinBox(wxWindow *parent, int id, pchar, const wxPoint &, const wxSize &);
+    SpinBox(wxWindow *parent, const wxPoint &, const wxSize &, int min, int max);
 
 private:
+
+    int min = 0;
+    int max = 0;
+
+    wxTextCtrl *text = nullptr;
 };
