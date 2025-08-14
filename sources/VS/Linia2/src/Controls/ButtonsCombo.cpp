@@ -165,6 +165,12 @@ void ButtonsCombo::SetCurrentSelection(int choice)
 }
 
 
+void ButtonsCombo::SetLastSelection()
+{
+    SetCurrentSelection((int)labels.GetCount() - NumEmptyes() - 1);
+}
+
+
 int ButtonsCombo::GetCurrentSelection() const
 {
     return current_choice - NumEmptyes();
@@ -173,7 +179,7 @@ int ButtonsCombo::GetCurrentSelection() const
 
 wxString ButtonsCombo::GetCurrentString() const
 {
-    return labels[(size_t)GetCurrentSelection()];
+    return labels[(uint)(current_choice + NumEmptyes())];
 }
 
 

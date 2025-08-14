@@ -95,9 +95,11 @@ SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width, d
     int w1 = 20;
     int w2 = 17;
 
-    slider = new wxSlider(this, wxID_ANY, 0, 0, 100, { w1, 0 }, { width - w1 - w2, TEXTCNTRL_HEIGHT + 5 });
+    slider = new wxSlider(this, wxID_ANY, num_steps / 2, 0, num_steps, { w1, 0 }, { width - w1 - w2, TEXTCNTRL_HEIGHT + 5 });
 
     textValue = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT });
+
+    SetRange(min, max);
 
     wxSize size_button{ 15, 12 };
 
@@ -114,6 +116,15 @@ SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width, d
 
     timer_less.Bind(wxEVT_TIMER, &SliderFloat::OnEventTimer, this);
     timer_more.Bind(wxEVT_TIMER, &SliderFloat::OnEventTimer, this);
+}
+
+
+void SliderFloat::SetRange(double _min, double _max)
+{
+    min = _min;
+    max = _max;
+
+    step = (max - min) / num_steps;
 }
 
 

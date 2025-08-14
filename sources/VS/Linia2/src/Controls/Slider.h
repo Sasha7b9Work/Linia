@@ -34,7 +34,7 @@ public:
 
     SliderFloat(wxWindow *parent, const wxPoint &position, int width, double min, double max);
 
-    void SetRange(float min, float max);
+    void SetRange(double min, double max);
 
 private:
 
@@ -48,6 +48,8 @@ private:
 
     double min = 0.0;
     double max = 0.0;
+    double step = 0.0f;
+    const int num_steps = 100;
 
     void OnEventSlider(wxCommandEvent &);
     void OnEventMouseDown(wxMouseEvent &);

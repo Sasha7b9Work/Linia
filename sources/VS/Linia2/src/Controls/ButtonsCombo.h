@@ -19,6 +19,8 @@ public:
 
     void SetCurrentSelection(int);
 
+    void SetLastSelection();
+
     void SetChoices(const wxArrayString &labels, const wxArrayString &tooltips);
 
     int GetCurrentSelection() const;

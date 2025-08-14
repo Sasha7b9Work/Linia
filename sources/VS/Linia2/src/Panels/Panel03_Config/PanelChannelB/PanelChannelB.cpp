@@ -5,6 +5,7 @@
 #include "MainWindow.h"
 #include "Panels/Panel03_Config/Panel03_Config.h"
 #include "Device/SettingsDevice.h"
+#include "Utils/StringUtils.h"
 
 
 PanelChannelB *PanelChannelB::self = nullptr;
@@ -111,6 +112,8 @@ void PanelChannelB::Tune()
     wxArrayString ranges;
     RangeI::FillArrayStrings(ranges, DSet::Type::ChanB_Limit, false);
     comboLimitRange->SetChoices(ranges, ranges);
+
+    comboStep->SetLastSelection();
 }
 
 
@@ -153,9 +156,13 @@ void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
     }
     else if (combo == comboStep)
     {
-        if (comboTypeGenerator->GetCurrentSelection() == 0)     // Напряжение
+        if (comboTypeGenerator->GetCurrentSelection() == 1)     // Ток
         {
+            wxString str_range = comboStep->GetCurrentString();
 
+            double max = SU::StringToDouble(str_range) * 10.0;
+
+            sliderOffset->SetRange(0.0, max);
         }
     }
 
