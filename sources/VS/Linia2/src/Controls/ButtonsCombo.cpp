@@ -7,7 +7,7 @@
 class ButtonPopup : public wxPopupTransientWindow
 {
 public:
-    ButtonPopup(wxWindow *parent, const wxString &title, const wxArrayString &_labels, const wxArrayString &tooltips, int buttons_in_row) :
+    ButtonPopup(wxWindow *parent, const wxString &title, const wxArrayString &_labels, const wxArrayString &tooltips) :
         wxPopupTransientWindow(parent, wxBORDER_SIMPLE),
         labels(_labels)
     {
@@ -16,9 +16,9 @@ public:
         wxPanel *mainPanel = new wxPanel(this, wxID_ANY);
         mainPanel->SetBackgroundColour(*wxWHITE);
 
-        int num_rows = (int)(labels.size() / buttons_in_row);
+        int num_rows = (int)(labels.size() / GetCombo()->buttons_in_row);
 
-        if (num_rows * buttons_in_row < (int)labels.size())
+        if (num_rows * GetCombo()->buttons_in_row < (int)labels.size())
         {
             num_rows++;
         }
@@ -68,6 +68,11 @@ public:
     }
 
 private:
+
+    ButtonsCombo *GetCombo()
+    {
+        return (ButtonsCombo *)GetParent();
+    }
 
     wxArrayString labels;
 
@@ -120,7 +125,7 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoi
 
 void ButtonsCombo::OnButtonClicked(wxCommandEvent &)
 {
-    ButtonPopup *popup = new ButtonPopup(this, title, labels, tooltips, buttons_in_row);
+    ButtonPopup *popup = new ButtonPopup(this, title, labels, tooltips);
 
     wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
 
