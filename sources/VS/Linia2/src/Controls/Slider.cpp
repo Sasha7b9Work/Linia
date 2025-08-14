@@ -3,13 +3,15 @@
 #include "Controls/Slider.h"
 
 
-Slider::Slider(wxWindow *parent, const wxPoint &position, int width) :
-    wxPanel(parent, wxID_ANY, position, { width, TEXTCNTRL_HEIGHT + 5 + 5 })
+Slider::Slider(wxWindow *parent, const wxPoint &position, int width, int _min, int _max) :
+    wxPanel(parent, wxID_ANY, position, { width, TEXTCNTRL_HEIGHT + 5 + 5 }),
+    min(_min),
+    max(_max)
 {
     int w1 = 20;
     int w2 = 17;
 
-    slider = new wxSlider(this, wxID_ANY, 0, 0, 100, { w1, 0 }, { width - w1 - w2, TEXTCNTRL_HEIGHT + 5 } );
+    slider = new wxSlider(this, wxID_ANY, min, min, max, { w1, 0 }, { width - w1 - w2, TEXTCNTRL_HEIGHT + 5 } );
 
     textValue = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT });
 

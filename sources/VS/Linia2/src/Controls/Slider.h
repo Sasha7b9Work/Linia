@@ -6,9 +6,12 @@ class Slider : public wxPanel
 {
 public:
 
-    Slider(wxWindow *parent, const wxPoint &positioni, int width);
+    Slider(wxWindow *parent, const wxPoint &positioni, int width, int min, int max);
 
 private:
+
+    int min = 0;
+    int max = 0;
 
     wxStaticText *textValue = nullptr;
     wxSlider *slider = nullptr;
