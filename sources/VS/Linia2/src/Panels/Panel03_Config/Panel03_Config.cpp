@@ -58,25 +58,23 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
     int x = 4;
     int w = MainWindow::WIDTH3 - 2 * x - 1;
 
-    int id = button->GetId();
-
-    if (btnChannelB && id == btnChannelB->GetId())
+    if (button == btnChannelB)
     {
         return new PanelChannelB(self, x, w);
     }
-    else if (btnChannelS && id == btnChannelS->GetId())
+    else if (button == btnChannelS)
     {
         return new PanelChannelS(self, x, w);
     }
-    else if (btnChannelC && id == btnChannelC->GetId())
+    else if (button == btnChannelC)
     {
         return new PanelChannelC(self, x, w);
     }
-    else if (btnScheme && id == btnScheme->GetId())
+    else if (button == btnScheme)
     {
         return new PanelScheme(self, x);
     }
-    else if (btnCalculate && id == btnCalculate->GetId())
+    else if (button == btnCalculate)
     {
         return new PanelCalculate(self, x, w);
     }
