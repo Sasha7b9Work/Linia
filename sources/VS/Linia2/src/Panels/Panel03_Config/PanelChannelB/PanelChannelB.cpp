@@ -89,9 +89,9 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
         int y = 20;
 
         wxArrayString choices;
-        choices.Add("10 mA");
+        choices.Add("-");
 
-        new ButtonsCombo(boxLimitation, "Диапазон", { 10, SD::Y_SB(y - 3) }, width, choices, 1, false);
+        comboLimitRange = new ButtonsCombo(boxLimitation, "Диапазон", { 10, SD::Y_SB(y - 3) }, width, choices, 3, true);
 
         y += 25;
 
@@ -121,12 +121,18 @@ void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
             wxArrayString ranges;
             RangeU::FillArrayStrings(ranges, DSet::Type::ChanB_Source);
             comboStep->SetChoices(ranges);
+
+            RangeU::FillArrayStrings(ranges, DSet::Type::ChanB_Limit);
+            comboLimitRange->SetChoices(ranges);
         }
         else if (combo->GetCurrentSelection() == 1)         // Ток
         {
             wxArrayString ranges;
             RangeI::FillArrayStrings(ranges, DSet::Type::ChanB_Source);
             comboStep->SetChoices(ranges);
+
+            RangeI::FillArrayStrings(ranges, DSet::Type::ChanB_Limit);
+            comboLimitRange->SetChoices(ranges);
         }
     }
 
