@@ -128,10 +128,10 @@ void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
         else if (combo->GetCurrentSelection() == 1)         // Ток
         {
             wxArrayString ranges;
-            RangeI::FillArrayStrings(ranges, DSet::Type::ChanB_Source);
+            RangeI::FillArrayStrings(ranges, DSet::Type::ChanB_Source, true);
             comboStep->SetChoices(ranges);
 
-            RangeI::FillArrayStrings(ranges, DSet::Type::ChanB_Limit);
+            RangeI::FillArrayStrings(ranges, DSet::Type::ChanB_Limit, false);
             comboLimitRange->SetChoices(ranges);
         }
     }

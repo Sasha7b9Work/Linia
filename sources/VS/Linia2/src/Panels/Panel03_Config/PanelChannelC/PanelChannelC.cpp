@@ -79,7 +79,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
         RangeU::FillArrayStrings(names, DSet::Type::ChanC_Meas);
         comboVoltage = new ButtonsCombo(boxMeter, "Uc", {10, SD::Y_SB(y)}, 80, names, 3, false);
 
-        RangeI::FillArrayStrings(names, DSet::Type::ChanC_Meas);
+        RangeI::FillArrayStrings(names, DSet::Type::ChanC_Meas, false);
         comboCurrent = new ButtonsCombo(boxMeter, "Ic", { 100, SD::Y_SB(y) }, 80, names, 3, true);
     }
 
