@@ -352,3 +352,23 @@ const wxString &Words::First() const
     static const wxString null;
     return null;
 }
+
+
+double SU::StringToDouble(const wxString &str)
+{
+    wxString value = str.BeforeFirst(' ');
+    wxString units = str.AfterFirst(' ');
+
+    int int_value = 0;
+    value.ToInt(&int_value);
+
+    double multiplier = 1.0;
+
+    if (units[0] == 'm')        multiplier = 1e-3;
+    else if (units[0] == 'u')   multiplier = 1e-6;
+    else if (units[0] == 'n')   multiplier = 1e-9;
+    else if (units[0] == 'p')   multiplier = 1e-12;
+    else if (units[0] == 'k')   multiplier = 1e3;
+
+    return int_value * multiplier;
+}

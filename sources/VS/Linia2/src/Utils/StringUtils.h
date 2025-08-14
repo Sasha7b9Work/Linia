@@ -61,6 +61,9 @@ private:
 
 namespace SU
 {
+    // Переводит в double строки типа "20 nA", "2 kV"
+    double StringToDouble(const wxString &);
+
     // Возвращает указатель на первое вхождение sub_word в word. nullptr, если не обнаружено
     pchar Consist(pchar word, pchar sub_word);
 
