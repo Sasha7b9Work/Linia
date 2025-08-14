@@ -1,4 +1,4 @@
-// 2025/08/14 20:09:49 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+ï»¿// 2025/08/14 20:09:49 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/Panel03_Config/PanelCalculate.h"
 #include "MainWindow.h"
@@ -17,53 +17,53 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w) :
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    wxStaticBox *boxGraph = new wxStaticBox(this, wxID_ANY, _L("Ãðàôèê"), { x, 0 }, { w, 75 });
+    wxStaticBox *boxGraph = new wxStaticBox(this, wxID_ANY, _L("Ð“Ñ€Ð°Ñ„Ð¸Ðº"), { x, 0 }, { w, 75 });
 
     int y = 20;
     const int dy = 3;
 
     {
-        new wxStaticText(boxGraph, wxID_ANY, _L("Îñü X"), { 10, SD::Y_SB(y + dy) });
+        new wxStaticText(boxGraph, wxID_ANY, _L("ÐžÑÑŒ X"), { 10, SD::Y_SB(y + dy) });
 
         new wxTextCtrl(boxGraph, wxID_ANY, "Ud", { 100, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
 
         y += 25;
 
-        new wxStaticText(boxGraph, wxID_ANY, _L("Îñü Y"), { 10, SD::Y_SB(y + dy) });
+        new wxStaticText(boxGraph, wxID_ANY, _L("ÐžÑÑŒ Y"), { 10, SD::Y_SB(y + dy) });
 
         new wxTextCtrl(boxGraph, wxID_ANY, "Id", { 100, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
     }
 
-    wxStaticBox *boxParameter = new wxStaticBox(this, wxID_ANY, _L("Ïàðàìåòð"), { x, boxGraph->GetSize().y + x }, { w, 200 });
+    wxStaticBox *boxParameter = new wxStaticBox(this, wxID_ANY, _L("ÐŸÐ°Ñ€Ð°Ð¼ÐµÑ‚Ñ€"), { x, boxGraph->GetSize().y + x }, { w, 200 });
 
     {
         y = 20;
 
-        new wxStaticText(boxParameter, wxID_ANY, _L("Íàéòè"), { 10, SD::Y_SB(y + dy) });
-        new wxStaticText(boxParameter, wxID_ANY, _L("ïðè"), { 100, SD::Y_SB(y + dy) });
+        new wxStaticText(boxParameter, wxID_ANY, _L("ÐÐ°Ð¹Ñ‚Ð¸"), { 10, SD::Y_SB(y + dy) });
+        new wxStaticText(boxParameter, wxID_ANY, _L("Ð¿Ñ€Ð¸"), { 100, SD::Y_SB(y + dy) });
 
         new wxTextCtrl(boxParameter, wxID_ANY, "Id", { 50, SD::Y_SB(y) }, { 40, TEXTCNTRL_HEIGHT });
         new wxTextCtrl(boxParameter, wxID_ANY, "Ud", { 140, SD::Y_SB(y) }, { 40, TEXTCNTRL_HEIGHT });
 
         y += 30;
 
-        new wxStaticText(boxParameter, wxID_ANY, _L("ðàâíîì"), { 10, SD::Y_SB(y) });
+        new wxStaticText(boxParameter, wxID_ANY, _L("Ñ€Ð°Ð²Ð½Ð¾Ð¼"), { 10, SD::Y_SB(y) });
 
         y += 20;
 
-        new wxStaticText(boxParameter, wxID_ANY, _L("çíà÷åíèþ") + " 1", { 10, SD::Y_SB(y + dy) });
+        new wxStaticText(boxParameter, wxID_ANY, _L("Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸ÑŽ") + " 1", { 10, SD::Y_SB(y + dy) });
         new wxTextCtrl(boxParameter, wxID_ANY, "6", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT });
 
         y += 25;
 
-        new wxStaticText(boxParameter, wxID_ANY, _L("çíà÷åíèþ") + " 2", { 10, SD::Y_SB(y + dy) });
+        new wxStaticText(boxParameter, wxID_ANY, _L("Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸ÑŽ") + " 2", { 10, SD::Y_SB(y + dy) });
         new wxTextCtrl(boxParameter, wxID_ANY, "6", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT });
 
         y += 25;
 
-        new wxStaticText(boxParameter, wxID_ANY, _L("íà ñòóïåíüêå") + " ¹ 5", { 10, SD::Y_SB(y + dy) });
+        new wxStaticText(boxParameter, wxID_ANY, _L("Ð½Ð° ÑÑ‚ÑƒÐ¿ÐµÐ½ÑŒÐºÐµ") + " â„– 5", { 10, SD::Y_SB(y + dy) });
 
-        wxStaticBox *boxCalculate = new wxStaticBox(boxParameter, wxID_ANY, _L("Ðàññ÷èòàòü"), { x, y }, { w - 10, 60 });
+        wxStaticBox *boxCalculate = new wxStaticBox(boxParameter, wxID_ANY, _L("Ð Ð°ÑÑÑ‡Ð¸Ñ‚Ð°Ñ‚ÑŒ"), { x, y }, { w - 10, 60 });
 
         {
             y = 25;
@@ -73,7 +73,7 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w) :
         }
     }
 
-    wxStaticBox *boxBorder = new wxStaticBox(this, wxID_ANY, _L("Ïîðîãîâûå çíà÷åíèÿ"), { x, boxParameter->GetPosition().y + boxParameter->GetSize().y + x }, { w, 80 });
+    wxStaticBox *boxBorder = new wxStaticBox(this, wxID_ANY, _L("ÐŸÐ¾Ñ€Ð¾Ð³Ð¾Ð²Ñ‹Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ"), { x, boxParameter->GetPosition().y + boxParameter->GetSize().y + x }, { w, 80 });
 
     {
         new wxStaticText(boxBorder, wxID_ANY, "MIN", { 10, SD::Y_SB(y + dy) });
