@@ -89,7 +89,4 @@ namespace SU
     pchar LeaveTheLastOnes(pchar in, int number);
 
     uint CalculateCRC32(const void *buffer, int size);
-
-    // Заменить все символы from на to
-    void ReplaceSymbols(char *, char from, char to);
 };

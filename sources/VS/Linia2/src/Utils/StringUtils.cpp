@@ -302,21 +302,6 @@ bool Words::Consist(const wxString &word) const
 }
 
 
-void SU::ReplaceSymbols(char *str, char from, char to)
-{
-    char *pointer = str;
-
-    while (*pointer)
-    {
-        if (*pointer == from)
-        {
-            *pointer = to;
-        }
-        pointer++;
-    }
-}
-
-
 std::string Words::At(int i) const
 {
     if (i < Size())
