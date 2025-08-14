@@ -143,7 +143,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
         {
             y = 20;
 
-            new Slider(boxOffset, { 10, SD::Y_SB(y) }, width, 0, 100);
+            new SliderInt(boxOffset, { 10, SD::Y_SB(y) }, width, 0, 100);
 
             y += 40;
 
@@ -167,7 +167,7 @@ void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
 
         y += 25;
 
-        new Slider(boxLimitation, { 10, SD::Y_SB(y) }, width, 0, 100);
+        new SliderInt(boxLimitation, { 10, SD::Y_SB(y) }, width, 0, 100);
     }
 }
 

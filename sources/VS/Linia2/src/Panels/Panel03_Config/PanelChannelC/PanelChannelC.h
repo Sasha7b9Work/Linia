@@ -24,8 +24,8 @@ private:
     ButtonsCombo    *comboNumberPoints = nullptr;   // Развёртка - Число точек
     wxStaticText    *textLabelImpulse = nullptr;    // Развёртка - Длина импульса
     wxStaticText    *textValueImpulse = nullptr;    // Развёртка - Длина импульса (значение)
-    Slider          *spinStart = nullptr;           // Измеритель - Ограничение - Старт
-    Slider          *spinStop = nullptr;            // Измеритель - Ограничение - Стоп
+    SliderInt       *spinStart = nullptr;           // Измеритель - Ограничение - Старт
+    SliderInt       *spinStop = nullptr;            // Измеритель - Ограничение - Стоп
 
     void Tune();
 

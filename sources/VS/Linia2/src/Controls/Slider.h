@@ -2,11 +2,11 @@
 #pragma once
 
 
-class Slider : public wxPanel
+class SliderInt : public wxPanel
 {
 public:
 
-    Slider(wxWindow *parent, const wxPoint &positioni, int width, int min, int max);
+    SliderInt(wxWindow *parent, const wxPoint &positioni, int width, int min, int max);
 
 private:
 
@@ -14,9 +14,9 @@ private:
     int max = 0;
 
     wxStaticText *textValue = nullptr;
-    wxSlider *slider = nullptr;
-    wxButton *btnMore = nullptr;
-    wxButton *btnLess = nullptr;
+    wxSlider     *slider = nullptr;
+    wxButton     *btnMore = nullptr;
+    wxButton     *btnLess = nullptr;
 
     wxTimer timer_less;
     wxTimer timer_more;

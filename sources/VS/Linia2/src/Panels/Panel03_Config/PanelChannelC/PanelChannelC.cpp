@@ -106,7 +106,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
         y += 20;
 
         int width = 180;
-        spinStart = new Slider(boxSource, { 10, SD::Y_SB(y) }, width, 0, 100);
+        spinStart = new SliderInt(boxSource, { 10, SD::Y_SB(y) }, width, 0, 100);
 
         y += 40;
 
@@ -114,7 +114,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
 
         y += 20;
 
-        spinStart = new Slider(boxSource, { 10, SD::Y_SB(y) }, width, 0, 100);
+        spinStart = new SliderInt(boxSource, { 10, SD::Y_SB(y) }, width, 0, 100);
     }
 
     Bind(wxEVT_COMBOBOX, &PanelChannelC::OnEventComboBox, this);

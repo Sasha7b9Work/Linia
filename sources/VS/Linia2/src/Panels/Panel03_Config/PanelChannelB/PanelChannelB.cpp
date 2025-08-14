@@ -71,7 +71,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
         {
             y = 25;
 
-            new Slider(boxOffset, { 10, SD::Y_SB(y) }, width - 10, 0, 100);
+            new SliderInt(boxOffset, { 10, SD::Y_SB(y) }, width - 10, 0, 100);
 
             y += 40;
 
@@ -95,7 +95,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
 
         y += 25;
 
-        new Slider(boxLimitation, { 10, SD::Y_SB(y) }, width, 0, 100);
+        new SliderInt(boxLimitation, { 10, SD::Y_SB(y) }, width, 0, 100);
     }
 
     Bind(wxEVT_COMBOBOX, &PanelChannelB::OnEventComboBox, this);

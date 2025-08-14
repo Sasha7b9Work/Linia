@@ -3,7 +3,7 @@
 #include "Controls/Slider.h"
 
 
-Slider::Slider(wxWindow *parent, const wxPoint &position, int width, int _min, int _max) :
+SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _min, int _max) :
     wxPanel(parent, wxID_ANY, position, { width, TEXTCNTRL_HEIGHT + 5 + 5 }),
     min(_min),
     max(_max)
@@ -22,18 +22,18 @@ Slider::Slider(wxWindow *parent, const wxPoint &position, int width, int _min, i
     btnMore = new wxButton(this, wxID_ANY, "", { x, 0 }, size_button);
     btnLess = new wxButton(this, wxID_ANY, "", { x, size_button.y }, size_button);
 
-    Bind(wxEVT_SLIDER, &Slider::OnEventSlider, this);
-    btnMore->Bind(wxEVT_LEFT_DOWN, &Slider::OnEventMouseDown, this);
-    btnLess->Bind(wxEVT_LEFT_DOWN, &Slider::OnEventMouseDown, this);
-    btnMore->Bind(wxEVT_LEFT_UP, &Slider::OnEventMouseUp, this);
-    btnLess->Bind(wxEVT_LEFT_UP, &Slider::OnEventMouseUp, this);
+    Bind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
+    btnMore->Bind(wxEVT_LEFT_DOWN, &SliderInt::OnEventMouseDown, this);
+    btnLess->Bind(wxEVT_LEFT_DOWN, &SliderInt::OnEventMouseDown, this);
+    btnMore->Bind(wxEVT_LEFT_UP, &SliderInt::OnEventMouseUp, this);
+    btnLess->Bind(wxEVT_LEFT_UP, &SliderInt::OnEventMouseUp, this);
 
-    timer_less.Bind(wxEVT_TIMER, &Slider::OnEventTimer, this);
-    timer_more.Bind(wxEVT_TIMER, &Slider::OnEventTimer, this);
+    timer_less.Bind(wxEVT_TIMER, &SliderInt::OnEventTimer, this);
+    timer_more.Bind(wxEVT_TIMER, &SliderInt::OnEventTimer, this);
 }
 
 
-void Slider::OnEventSlider(wxCommandEvent &event)
+void SliderInt::OnEventSlider(wxCommandEvent &event)
 {
     if (event.GetId() == slider->GetId())
     {
@@ -42,7 +42,7 @@ void Slider::OnEventSlider(wxCommandEvent &event)
 }
 
 
-void Slider::OnEventMouseDown(wxMouseEvent &event)
+void SliderInt::OnEventMouseDown(wxMouseEvent &event)
 {
     if (event.GetId() == btnMore->GetId())
     {
@@ -64,7 +64,7 @@ void Slider::OnEventMouseDown(wxMouseEvent &event)
 }
 
 
-void Slider::OnEventMouseUp(wxMouseEvent &event)
+void SliderInt::OnEventMouseUp(wxMouseEvent &event)
 {
     timer_more.Stop();
     timer_less.Stop();
@@ -73,7 +73,7 @@ void Slider::OnEventMouseUp(wxMouseEvent &event)
 }
 
 
-void Slider::OnEventTimer(wxTimerEvent &event)
+void SliderInt::OnEventTimer(wxTimerEvent &event)
 {
     int delta = (event.GetId() == timer_more.GetId()) ? 1 : -1;
 
