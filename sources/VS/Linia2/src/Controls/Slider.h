@@ -36,10 +36,7 @@ public:
 
     void SetRange(double min, double max, const wxString &units, int digits_after_point);
 
-    // Рассчитывает и устанавливает значения для данного range
-    void CalculateAndSetRangeForRange(const wxString &range, double multiplier);
-
-private:
+protected:
 
     wxStaticText *text = nullptr;
     wxSlider     *slider = nullptr;
@@ -63,4 +60,17 @@ private:
 
     // Рассчитать и показать новое значение
     void CalculateValue();
+};
+
+
+class SliderFloatOffset : public SliderFloat
+{
+public:
+
+    SliderFloatOffset(wxWindow *parent, const wxPoint &position, int width) :
+        SliderFloat(parent, position, width)
+    {
+    }
+
+    void CalculateAndSetRange(const wxString &range, double multiplier);
 };

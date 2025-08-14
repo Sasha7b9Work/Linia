@@ -130,7 +130,7 @@ void SliderFloat::SetRange(double _min, double _max, const wxString &_units, int
 }
 
 
-void SliderFloat::CalculateAndSetRangeForRange(const wxString &range, double multiplier)
+void SliderFloatOffset::CalculateAndSetRange(const wxString &range, double multiplier)
 {
     wxString value = range.BeforeFirst(' ');
 

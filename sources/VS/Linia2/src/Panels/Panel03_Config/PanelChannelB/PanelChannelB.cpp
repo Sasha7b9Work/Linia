@@ -72,7 +72,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
         {
             y = 25;
 
-            sliderOffset = new SliderFloat(boxOffset, { 10, SD::Y_SB(y) }, width - 10);
+            sliderOffset = new SliderFloatOffset(boxOffset, { 10, SD::Y_SB(y) }, width - 10);
 
             y += 40;
 
@@ -164,11 +164,11 @@ void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
 
     if (comboTypeGenerator->GetCurrentSelection() == 0)             // Напряжение
     {
-        sliderOffset->CalculateAndSetRangeForRange(comboStep->GetCurrentString(), 10.0);
+        sliderOffset->CalculateAndSetRange(comboStep->GetCurrentString(), 10.0);
     }
     else if (comboTypeGenerator->GetCurrentSelection() == 1)        // Ток
     {
-        sliderOffset->CalculateAndSetRangeForRange(comboStep->GetCurrentString(), 10.0);
+        sliderOffset->CalculateAndSetRange(comboStep->GetCurrentString(), 10.0);
     }
 
     event.Skip();
