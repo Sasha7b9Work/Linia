@@ -5,15 +5,14 @@
 #include "Controls/Slider.h"
 
 
-class PanelChannelB : public wxPanel
+class PanelChannelBS : public wxPanel
 {
-public:
-
-    PanelChannelB(wxPanel *parent, int x, int w);
-
-    static PanelChannelB *self;
+    friend class PanelChannelB;
+    friend class PanelChannelS;
 
 private:
+
+    PanelChannelBS(wxPanel *parent, int x, int w);
 
     ButtonsCombo      *comboTypeGenerator = nullptr;    // Тип генерации - напряжение или ток
     ButtonsComboRange *comboStep = nullptr;             // Амплитуда ступени
@@ -25,3 +24,32 @@ private:
 
     void OnEventComboBox(wxCommandEvent &);
 };
+
+
+class PanelChannelB : public PanelChannelBS
+{
+public:
+
+    PanelChannelB(wxPanel *parent, int x, int w) :
+        PanelChannelBS(parent, x, w)
+    {
+        self = this;
+    }
+
+    static PanelChannelB *self;
+};
+
+
+class PanelChannelS : public PanelChannelBS
+{
+public:
+
+    PanelChannelS(wxPanel *parent, int x, int w) :
+        PanelChannelBS(parent, x, w)
+    {
+        self = this;
+    }
+
+    static PanelChannelS *self;
+};
+

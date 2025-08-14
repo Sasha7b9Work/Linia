@@ -1,6 +1,6 @@
 ﻿// 2025/08/14 11:24:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel03_Config/PanelChannelB/PanelChannelB.h"
+#include "Panels/Panel03_Config/PanelChannelBS/PanelChannelBS.h"
 #include "Utils/SystemDepend.h"
 #include "MainWindow.h"
 #include "Panels/Panel03_Config/Panel03_Config.h"
@@ -9,13 +9,12 @@
 
 
 PanelChannelB *PanelChannelB::self = nullptr;
+PanelChannelS *PanelChannelS::self = nullptr;
 
 
-PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
+PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w) :
     wxPanel(parent)
 {
-    self = this;
-
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
@@ -105,7 +104,7 @@ PanelChannelB::PanelChannelB(wxPanel *parent, int x, int w) :
 }
 
 
-void PanelChannelB::Tune()
+void PanelChannelBS::Tune()
 {
     comboTypeGenerator->SetCurrentSelection(1);
 
@@ -133,7 +132,7 @@ void PanelChannelB::Tune()
 }
 
 
-void PanelChannelB::OnEventComboBox(wxCommandEvent &event)
+void PanelChannelBS::OnEventComboBox(wxCommandEvent &event)
 {
     ButtonsCombo *combo = (ButtonsCombo *)event.GetEventObject();
 

@@ -7,7 +7,7 @@
 #include "Controls/SpinBox.h"
 #include "Panels/Panel03_Config/PanelScheme/WindowLibraryTests.h"
 #include "Panels/Panel03_Config/PanelScheme/PanelScheme.h"
-#include "Panels/Panel03_Config/PanelChannelB/PanelChannelB.h"
+#include "Panels/Panel03_Config/PanelChannelBS/PanelChannelBS.h"
 #include "Panels/Panel03_Config/PanelChannelC/PanelChannelC.h"
 
 
@@ -63,6 +63,10 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
     {
         return new PanelChannelB(self, x, w);
     }
+    else if (btnChannelS && id == btnChannelS->GetId())
+    {
+        return new PanelChannelS(self, x, w);
+    }
     else if (btnChannelC && id == btnChannelC->GetId())
     {
         return new PanelChannelC(self, x, w);
@@ -77,11 +81,7 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
     panel->SetSize({ MainWindow::WIDTH3, HEIGHT - 40 });
     panel->SetPosition({ 0, 40 });
 
-    if (id == btnChannelS->GetId())
-    {
-        CreatePanelChannelS(panel, x, w);
-    }
-    else if (id == btnCalculate->GetId())
+    if (id == btnCalculate->GetId())
     {
         CreatePanelCalculate(panel, x, w);
     }
