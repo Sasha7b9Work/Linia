@@ -39,6 +39,8 @@ void SliderInt::OnEventSlider(wxCommandEvent &event)
     {
         text->SetLabel(wxString::Format("%d", event.GetInt()));
     }
+
+    event.Skip();
 }
 
 
@@ -92,7 +94,7 @@ SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width, d
     min(_min),
     max(_max)
 {
-    int w1 = 20;
+    int w1 = 30;
     int w2 = 17;
 
     slider = new wxSlider(this, wxID_ANY, num_steps / 2, 0, num_steps, { w1, 0 }, { width - w1 - w2, TEXTCNTRL_HEIGHT + 5 });
@@ -140,23 +142,53 @@ void SliderFloat::CalculateValue()
 
 void SliderFloat::OnEventSlider(wxCommandEvent &event)
 {
+    CalculateValue();
+
     event.Skip();
 }
 
 
 void SliderFloat::OnEventMouseDown(wxMouseEvent &event)
 {
+
+    if (event.GetId() == btnMore->GetId())
+    {
+        slider->SetValue(slider->GetValue() + 1);
+        timer_more.Start(400);
+    }
+    else if (event.GetId() == btnLess->GetId())
+    {
+        slider->SetValue(slider->GetValue() - 1);
+        timer_less.Start(400);
+    }
+
+    wxCommandEvent evt(wxEVT_SLIDER, slider->GetId());
+    evt.SetEventObject(slider);
+    evt.SetInt(slider->GetValue());
+    wxPostEvent(slider, evt);
+
     event.Skip();
 }
 
 
 void SliderFloat::OnEventMouseUp(wxMouseEvent &event)
 {
+    timer_more.Stop();
+    timer_less.Stop();
+
     event.Skip();
 }
 
 
 void SliderFloat::OnEventTimer(wxTimerEvent &event)
 {
+    int delta = (event.GetId() == timer_more.GetId()) ? 1 : -1;
+
+    slider->SetValue(slider->GetValue() + delta);
+    wxCommandEvent evt(wxEVT_SLIDER, slider->GetId());
+    evt.SetEventObject(slider);
+    evt.SetInt(slider->GetValue());
+    wxPostEvent(slider, evt);
+
     event.Skip();
 }
