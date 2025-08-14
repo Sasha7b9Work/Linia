@@ -1,6 +1,7 @@
 ﻿// 2025/8/9 09:54:32 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/PainterBMP.h"
+#include "Controls/ButtonsCombo.h"
 
 
 class PanelScheme : public wxPanel

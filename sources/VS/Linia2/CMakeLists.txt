@@ -1,7 +1,7 @@
 ﻿# 2023/07/04 15:47:47 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (Linia2)
 
-#set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD OFF)
 
 if(WIN32)
 
@@ -59,6 +59,7 @@ file(GLOB CONTROLS                      src/Controls/*.*)
 file(GLOB DEVICE                        src/Device/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
 file(GLOB PANELS_PANEL3                 src/Panels/Panel03_Config/*.*)
+file(GLOB PANELS_PANEL3_CHAN_B          src/Panels/Panel03_Config/PanelChannelB/*.*)
 file(GLOB PANELS_PANEL3_CHAN_C          src/Panels/Panel03_Config/PanelChannelC/*.*)
 file(GLOB PANELS_PANEL3_SHCEME          src/Panels/Panel03_Config/PanelScheme/*.*)
 file(GLOB PANELS_PANEL5                 src/Panels/Panel05_Graph/*.*)
@@ -79,6 +80,7 @@ source_group(Controls                            FILES ${CONTROLS})
 source_group(Device                              FILES ${DEVICE})
 source_group(Panels                              FILES ${PANELS})
 source_group(Panels/Panel03_Config               FILES ${PANELS_PANEL3})
+source_group(Panels/Panel03_Config/PanelChannelB FILES ${PANELS_PANEL3_CHAN_B})
 source_group(Panels/Panel03_Config/PanelChannelC FILES ${PANELS_PANEL3_CHAN_C})
 source_group(Panels/Panel03_Config/PanelScheme   FILES ${PANELS_PANEL3_SHCEME})
 source_group(Panels/Panel05_Graph                FILES ${PANELS_PANEL5})
@@ -100,6 +102,7 @@ add_executable(${PROJECT_NAME}
     ${DEVICE}
     ${PANELS}
     ${PANELS_PANEL3}
+    ${PANELS_PANEL3_CHAN_B}
     ${PANELS_PANEL3_CHAN_C}
     ${PANELS_PANEL3_SHCEME}
     ${PANELS_PANEL5}

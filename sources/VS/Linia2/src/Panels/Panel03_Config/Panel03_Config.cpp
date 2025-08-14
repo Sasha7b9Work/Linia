@@ -7,6 +7,7 @@
 #include "Controls/SpinBox.h"
 #include "Panels/Panel03_Config/PanelScheme/WindowLibraryTests.h"
 #include "Panels/Panel03_Config/PanelScheme/PanelScheme.h"
+#include "Panels/Panel03_Config/PanelChannelB/PanelChannelB.h"
 #include "Panels/Panel03_Config/PanelChannelC/PanelChannelC.h"
 
 
@@ -43,7 +44,7 @@ PanelConfig::PanelConfig(wxWindow* parent) :
     {
         // Включаем панель
 
-        int id = btnChannelC->GetId();
+        int id = btnChannelB->GetId();
 
         wxCommandEvent evt(wxEVT_TOGGLEBUTTON, id);
         evt.SetInt(1);
@@ -58,7 +59,11 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
 
     int id = button->GetId();
 
-    if (btnChannelC && id == btnChannelC->GetId())
+    if (btnChannelB && id == btnChannelB->GetId())
+    {
+        return new PanelChannelB(self, x, w);
+    }
+    else if (btnChannelC && id == btnChannelC->GetId())
     {
         return new PanelChannelC(self, x, w);
     }
@@ -72,11 +77,7 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
     panel->SetSize({ MainWindow::WIDTH3, HEIGHT - 40 });
     panel->SetPosition({ 0, 40 });
 
-    if (id == btnChannelB->GetId())
-    {
-        CreatePanelChannelB(panel, x, w);
-    }
-    else if (id == btnChannelS->GetId())
+    if (id == btnChannelS->GetId())
     {
         CreatePanelChannelS(panel, x, w);
     }
@@ -86,90 +87,6 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
     }
 
     return panel;
-}
-
-
-void PanelConfig::CreatePanelChannelB(wxPanel *panel, int x, int w)
-{
-    wxStaticBox *boxGenerator = new wxStaticBox(panel, wxID_ANY, _L("Генератор ступенек"), { x, 0 }, { w, 300 });
-
-    int width = 150;
-
-    {
-        int y = 25;
-
-        wxArrayString choices;
-        choices.Add("U");
-        choices.Add("I");
-
-        new ButtonsCombo(boxGenerator, "Тип", { 10, SD::Y_SB(y - 3) }, width, choices, 0, 1);
-
-        y += 25;
-
-        choices.Clear();
-        choices.Add(_L("Вкл"));
-        choices.Add(_L("Выкл"));
-
-        new ButtonsCombo(boxGenerator, "Импульс", {10, SD::Y_SB(y - 3)}, width, choices, 0, 1);
-
-        y += 25;
-
-        choices.Clear();
-        choices.Add("2V");
-
-        new ButtonsCombo(boxGenerator, "Амплитуда ступени", { 10, SD::Y_SB(y - 3) }, width, choices, 0, 1);
-
-        y += 25;
-
-        new wxCheckBox(boxGenerator, wxID_ANY, "x 0.1", { 10, SD::Y_SB(y) }, { 60, TEXTCNTRL_HEIGHT });
-
-        y += 25;
-
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Число ступенек"), { 10, SD::Y_SB(y + 3) });
-
-        new SpinBox(boxGenerator, wxID_ANY, "5", { 120, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
-
-        y += 25;
-
-        choices.Clear();
-        choices.Add(_L("прямая"));
-        choices.Add(_L("обратная"));
-
-        new ButtonsCombo(boxGenerator, "Полярность", { 10, SD::Y_SB(y) }, width, choices, 0, 1);
-
-        y += 25;
-
-        wxStaticBox *boxOffset = new wxStaticBox(boxGenerator, wxID_ANY, _L("Смещение"), { x, y }, { w - 10, 100 });
-
-        {
-            y = 20;
-
-            new Slider(boxOffset, { 10, SD::Y_SB(y) }, width);
-
-            y += 30;
-
-            choices.Clear();
-            choices.Add(_L("прямая"));
-            choices.Add(_L("обратная"));
-
-            new ButtonsCombo(boxOffset, "Полярность", { 10, SD::Y_SB(y) }, width, choices, 0, 1);
-        }
-    }
-
-    wxStaticBox *boxLimitation = new wxStaticBox(panel, wxID_ANY, _L("Ограничение"), { x, boxGenerator->GetSize().y + x }, { w, 100 });
-
-    {
-        int y = 20;
-
-        wxArrayString choices;
-        choices.Add("10 mA");
-
-        new ButtonsCombo(boxLimitation, "Диапазон", { 10, SD::Y_SB(y - 3) }, width, choices, 0, 1);
-
-        y += 25;
-
-        new Slider(boxLimitation, { 10, SD::Y_SB(y) }, width);
-    }
 }
 
 
