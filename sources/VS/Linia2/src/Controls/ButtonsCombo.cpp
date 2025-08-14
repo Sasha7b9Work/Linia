@@ -7,7 +7,7 @@
 class ButtonPopup : public wxPopupTransientWindow
 {
 public:
-    ButtonPopup(wxWindow *parent, const wxString &title, const wxArrayString &_labels) :
+    ButtonPopup(wxWindow *parent, const wxArrayString &_labels) :
         wxPopupTransientWindow(parent, wxBORDER_SIMPLE),
         labels(_labels)
     {
@@ -52,7 +52,7 @@ public:
         }
 
         // Добавляем рамку вокруг сетки кнопок
-        wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, title);
+        wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, GetCombo()->title);
         boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 5); // 10px отступ внутри рамки
 
         // Основная панель
@@ -125,7 +125,7 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoi
 
 void ButtonsCombo::OnButtonClicked(wxCommandEvent &)
 {
-    ButtonPopup *popup = new ButtonPopup(this, title, labels);
+    ButtonPopup *popup = new ButtonPopup(this, labels);
 
     wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
 
