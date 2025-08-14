@@ -8,7 +8,7 @@ SpinBox::SpinBox(wxWindow *parent, const wxPoint &position, const wxSize &size, 
     min(_min),
     max(_max)
 {
-    const int width_btn = 10;
+    const int width_btn = 15;
 
     wxSize size_text = size;
     size_text.x -= width_btn;
@@ -17,11 +17,54 @@ SpinBox::SpinBox(wxWindow *parent, const wxPoint &position, const wxSize &size, 
 
     text->SetEditable(false);
 
-    text->SetValue(wxString::Format("%d", min));
+    SetValue(min);
 
-    wxSize size_btn = { width_btn, size.y / 2 };
+    wxSize size_button{ width_btn, 11 };
 
-    new wxButton(this, wxID_ANY, ".", { size_text.x, 0 }, size_btn);
+    btnMore = new wxButton(this, wxID_ANY, ".", { size_text.x, 0 }, size_button);
 
-    new wxButton(this, wxID_ANY, ".", { size_text.x, size_btn.y }, size_btn);
+    btnLess = new wxButton(this, wxID_ANY, ".", { size_text.x, size_button.y }, size_button);
+
+    Bind(wxEVT_BUTTON, &SpinBox::OnEventButton, this);
+}
+
+
+void SpinBox::OnEventButton(wxCommandEvent &event)
+{
+    int id = event.GetId();
+
+    int value = GetValue();
+
+    if (id == btnMore->GetId())
+    {
+        if (value < max)
+        {
+            SetValue(value + 1);
+        }
+    }
+    else if (id == btnLess->GetId())
+    {
+        if (value > min)
+        {
+            SetValue(value - 1);
+        }
+    }
+
+    event.Skip();
+}
+
+
+int SpinBox::GetValue() const
+{
+    int result = 0;
+
+    text->GetValue().ToInt(&result);
+
+    return result;
+}
+
+
+void SpinBox::SetValue(int value)
+{
+    text->SetValue(wxString::Format("%d", value));
 }
