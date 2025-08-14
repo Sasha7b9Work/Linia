@@ -13,7 +13,7 @@ private:
     int min = 0;
     int max = 0;
 
-    wxStaticText *textValue = nullptr;
+    wxStaticText *text = nullptr;
     wxSlider     *slider = nullptr;
     wxButton     *btnMore = nullptr;
     wxButton     *btnLess = nullptr;
@@ -38,7 +38,7 @@ public:
 
 private:
 
-    wxStaticText *textValue = nullptr;
+    wxStaticText *text = nullptr;
     wxSlider     *slider = nullptr;
     wxButton     *btnMore = nullptr;
     wxButton     *btnLess = nullptr;

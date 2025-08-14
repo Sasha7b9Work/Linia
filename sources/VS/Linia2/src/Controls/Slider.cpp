@@ -13,7 +13,7 @@ SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _
 
     slider = new wxSlider(this, wxID_ANY, min, min, max, { w1, 0 }, { width - w1 - w2, TEXTCNTRL_HEIGHT + 5 } );
 
-    textValue = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT });
+    text = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT });
 
     wxSize size_button{ 15, 12 };
 
@@ -37,7 +37,7 @@ void SliderInt::OnEventSlider(wxCommandEvent &event)
 {
     if (event.GetId() == slider->GetId())
     {
-        textValue->SetLabel(wxString::Format("%d", event.GetInt()));
+        text->SetLabel(wxString::Format("%d", event.GetInt()));
     }
 }
 
@@ -97,7 +97,7 @@ SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width, d
 
     slider = new wxSlider(this, wxID_ANY, num_steps / 2, 0, num_steps, { w1, 0 }, { width - w1 - w2, TEXTCNTRL_HEIGHT + 5 });
 
-    textValue = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT });
+    text = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT });
 
     SetRange(min, max);
 
@@ -134,7 +134,7 @@ void SliderFloat::CalculateValue()
 {
     double value = (max - min) * slider->GetValue() / num_steps;
 
-    textValue->SetLabel(wxString::Format("%.2f", value));
+    text->SetLabel(wxString::Format("%.2f", value));
 }
 
 
