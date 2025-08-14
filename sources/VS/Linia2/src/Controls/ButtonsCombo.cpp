@@ -7,10 +7,11 @@
 class ButtonPopup : public wxPopupTransientWindow
 {
 public:
-    ButtonPopup(wxWindow *parent, const wxArrayString &_labels) :
-        wxPopupTransientWindow(parent, wxBORDER_SIMPLE),
-        labels(_labels)
+    ButtonPopup(wxWindow *parent) :
+        wxPopupTransientWindow(parent, wxBORDER_SIMPLE)
     {
+        wxArrayString &labels = GetCombo()->labels;
+
         // Основной контейнер с отступами по краям
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
         wxPanel *mainPanel = new wxPanel(this, wxID_ANY);
@@ -74,15 +75,13 @@ private:
         return (ButtonsCombo *)GetParent();
     }
 
-    wxArrayString labels;
-
     void OnButtonClick(wxCommandEvent &event)
     {
         wxString label = ((ButtonBitmap *)event.GetEventObject())->GetLabel();
 
-        for (size_t i = 0; i < labels.size(); i++)
+        for (size_t i = 0; i < GetCombo()->labels.size(); i++)
         {
-            if (label == labels[i])
+            if (label == GetCombo()->labels[i])
             {
                 ButtonsCombo *combo = (ButtonsCombo *)GetParent();
 
@@ -125,7 +124,7 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoi
 
 void ButtonsCombo::OnButtonClicked(wxCommandEvent &)
 {
-    ButtonPopup *popup = new ButtonPopup(this, labels);
+    ButtonPopup *popup = new ButtonPopup(this);
 
     wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
 
