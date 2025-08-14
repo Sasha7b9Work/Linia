@@ -89,10 +89,8 @@ void SliderInt::OnEventTimer(wxTimerEvent &event)
 }
 
 
-SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width, double _min, double _max, char _units) :
-    wxPanel(parent, wxID_ANY, position, { width, TEXTCNTRL_HEIGHT + 5 + 5 }),
-    min(_min),
-    max(_max)
+SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width) :
+    wxPanel(parent, wxID_ANY, position, { width, TEXTCNTRL_HEIGHT + 5 + 5 })
 {
     int w1 = 50;
     int w2 = 17;
@@ -100,8 +98,6 @@ SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width, d
     slider = new wxSlider(this, wxID_ANY, num_steps / 2, 0, num_steps, { w1, 0 }, { width - w1 - w2, TEXTCNTRL_HEIGHT + 5 });
 
     text = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT });
-
-    SetRange(min, max, _units);
 
     wxSize size_button{ 15, 12 };
 
@@ -121,8 +117,9 @@ SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width, d
 }
 
 
-void SliderFloat::SetRange(double _min, double _max, char _units)
+void SliderFloat::SetRange(double _min, double _max, const wxString &_units, int _digits_after_point)
 {
+    digitts_after_points = _digits_after_point;
     units = _units;
     min = _min;
     max = _max;
@@ -133,39 +130,55 @@ void SliderFloat::SetRange(double _min, double _max, char _units)
 }
 
 
+void SliderFloat::CalculateAndSetRangeForRange(const wxString &range, double multiplier)
+{
+    wxString value = range.BeforeFirst(' ');
+
+    units = range.AfterFirst(' ');
+
+    int int_value = 0;
+    value.ToInt(&int_value);
+
+    double double_value = int_value * multiplier;
+
+    int digits = 0;
+
+    if (double_value <= 1000)
+    {
+        if (double_value <= 50)
+        {
+            digits = 1;
+        }
+        else
+        {
+            digits = 0;
+        }
+    }
+    else
+    {
+        double_value *= 1e-3;
+
+        if (units[0] == 'A' || units[0] == 'V') units = 'k' + units;
+        else if (units[0] == 'm')               units = units[1];
+        else if (units[0] == 'u')               units[0] = 'm';
+        else if (units[0] == 'n')               units[0] = 'u';
+        else if (units[0] == 'p')               units[0] = 'n';
+
+        digits = 2;
+    }
+
+    SetRange(0.0, double_value, units, digits);
+}
+
+
 void SliderFloat::CalculateValue()
 {
     double value = (max - min) * slider->GetValue() / num_steps;
 
-    wxString suffix;
+    char format_string[32];
+    std::sprintf(format_string, "%%.%df %%s", digitts_after_points);
 
-    if (value < 1.0)
-    {
-        if (value >= 1e-3)
-        {
-            value *= 1e3;
-            suffix.Append('m');
-        }
-        else if (value >= 1e-6)
-        {
-            value *= 1e6;
-            suffix.Append('u');
-        }
-        else if (value >= 1e-9)
-        {
-            value *= 1e9;
-            suffix.Append('n');
-        }
-        else if (value >= 1e-12)
-        {
-            value *= 1e12;
-            suffix.Append('p');
-        }
-    }
-
-    suffix.Append(units);
-
-    text->SetLabel(wxString::Format("%.1f %s", value, suffix.c_str().AsChar()));
+    text->SetLabel(wxString::Format(format_string, value, units.c_str().AsChar()));
 }
 
 
