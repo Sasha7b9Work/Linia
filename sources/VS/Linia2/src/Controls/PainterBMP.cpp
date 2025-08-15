@@ -8,6 +8,11 @@ PainterBMP::PainterBMP(wxWindow *parent, const wxPoint &position, const wxSize &
 {
     bitmap = Bitmap::Get(file_name);
 
+    wxColour transparenColor(241, 241, 241);
+    wxBitmap bmp = bitmap.GetBitmap();
+    bmp.SetMask(new wxMask(bitmap.GetBitmap(), transparenColor));
+    bitmap.GetBitmap() = bmp;
+
     if (size == wxDefaultSize)
     {
         SetSize(bitmap.GetBitmap().GetSize());
@@ -27,12 +32,7 @@ void PainterBMP::OnEventPaint(wxPaintEvent &)
     {
         if (enabled)
         {
-            wxColour transparenColor(241, 241, 241);
-            wxBitmap bmp = bitmap.GetBitmap();
-
-            bmp.SetMask(new wxMask(bitmap.GetBitmap(), transparenColor));
-
-            dc.DrawBitmap(bmp, 0, 0, true);
+            dc.DrawBitmap(bitmap.GetBitmap(), 0, 0, true);
         }
         else
         {
