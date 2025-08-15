@@ -4,6 +4,7 @@
 #include "Controls/PainterRect.h"
 #include "Utils/GlobalFunctions.h"
 #include "Controls/Bitmap.h"
+#include "Utils/SystemDepend.h"
 
 
 ButtonColor::ButtonColor(wxWindow *parent, int id, const wxString &title, wxPoint position, wxSize size, PainterRect *painter) :
@@ -37,9 +38,9 @@ CheckButton::CheckButton(wxWindow *parent, const wxString &title, const wxPoint 
     wxSize size{ width, TEXTCNTRL_HEIGHT + 3 };
     SetSize(size);
 
-    button = new wxToggleButton(this, wxID_ANY, ' ' + title, {0, 0}, {size.x - 20, size.y}, wxBU_LEFT);
+    button = new wxToggleButton(this, wxID_ANY, ' ' + title, { 0, 0 }, {size.x - 20, size.y}, wxBU_LEFT);
 
-    ch_box = new wxCheckBox(this, wxID_ANY, "", { size.x - 20 + 5, 4 });
+    ch_box = new wxCheckBox(this, wxID_ANY, "", { size.x - 20 + 5, SD::Y_SB(4) });
 
     Bind(wxEVT_CHECKBOX, &CheckButton::OnEventCheckBox, this);
     Bind(wxEVT_TOGGLEBUTTON, &CheckButton::OnEventToggleButton, this);
