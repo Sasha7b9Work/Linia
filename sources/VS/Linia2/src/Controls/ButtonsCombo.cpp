@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Controls/ButtonsCombo.h"
 #include "MainWindow.h"
+#include "Utils/GlobalFunctions.h"
 
 
 DrawingButton::DrawingButton(wxWindow *parent, int id, const wxString &label, const wxPoint &position, const wxSize &size, const wxString &_name_file) :
@@ -179,10 +180,7 @@ void ButtonsCombo::SetCurrentSelection(int choice)
 
     if(need_event)
     {
-        wxCommandEvent event(wxEVT_COMBOBOX, GetId());
-        event.SetEventObject(this);
-        event.SetInt(GetCurrentSelection());
-        wxPostEvent(GetEventHandler(), event);
+        GF::SendCommandEvent(this, wxEVT_COMBOBOX, GetCurrentSelection());
     }
 }
 
