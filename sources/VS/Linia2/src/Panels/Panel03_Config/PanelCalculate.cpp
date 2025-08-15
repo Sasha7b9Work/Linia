@@ -34,7 +34,9 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
         new wxTextCtrl(boxGraph, wxID_ANY, "Id", { 100, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
     }
 
-    wxStaticBox *boxParameter = new wxStaticBox(this, wxID_ANY, _L("Параметр"), { x, boxGraph->GetSize().y + x }, { w, 200 });
+    wxStaticBox *boxParameter = new wxStaticBox(this, wxID_ANY, _L("Параметр"),
+        { x, boxGraph->GetPosition().y + boxGraph->GetSize().y },
+        { w, 200 });
 
     {
         y = 20;
@@ -73,7 +75,9 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
         }
     }
 
-    wxStaticBox *boxBorder = new wxStaticBox(this, wxID_ANY, _L("Пороговые значения"), { x, boxParameter->GetPosition().y + boxParameter->GetSize().y + x }, { w, 80 });
+    wxStaticBox *boxBorder = new wxStaticBox(this, wxID_ANY, _L("Пороговые значения"),
+        { x, boxParameter->GetPosition().y + boxParameter->GetSize().y },
+        { w, h - boxParameter->GetPosition().y - boxParameter->GetSize().y });
 
     {
         new wxStaticText(boxBorder, wxID_ANY, "MIN", { 10, SD::Y_SB(y + dy) });

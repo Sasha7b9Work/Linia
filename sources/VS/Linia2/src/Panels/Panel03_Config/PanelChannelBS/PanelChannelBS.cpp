@@ -81,7 +81,9 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
         }
     }
 
-    wxStaticBox *boxLimitation = new wxStaticBox(this, wxID_ANY, _L("Ограничение"), { x, boxGenerator->GetSize().y + x }, { w, 120 });
+    wxStaticBox *boxLimitation = new wxStaticBox(this, wxID_ANY, _L("Ограничение"),
+        { x, boxGenerator->GetPosition().y + boxGenerator->GetSize().y },
+        { w, h - boxGenerator->GetPosition().y - boxGenerator->GetSize().y });
 
     {
         int y = 30;

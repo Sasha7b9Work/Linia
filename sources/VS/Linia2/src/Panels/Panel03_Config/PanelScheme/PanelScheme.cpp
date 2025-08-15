@@ -17,7 +17,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int /*w*/, int h) :
 
     const int width_category = 77;
 
-    wxStaticBox *boxCategory = new wxStaticBox(this, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 100 });
+    wxStaticBox *boxCategory = new wxStaticBox(this, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 90 });
 
     {
         wxArrayString files;
@@ -46,7 +46,8 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int /*w*/, int h) :
 
     (void)boxCategory;
 
-    wxStaticBox *boxTest = new wxStaticBox(this, wxID_ANY, _L("Тест"), { x + width_category + 5, 0 }, { MainWindow::WIDTH3 - width_category - 15, 100 });
+    wxStaticBox *boxTest = new wxStaticBox(this, wxID_ANY, _L("Тест"), { x + width_category + 5, 0 },
+        { MainWindow::WIDTH3 - width_category - 15, boxCategory->GetSize().y });
 
     Bind(wxEVT_BUTTON, &PanelScheme::OnEventButton, this);
     Bind(wxEVT_COMBOBOX, &PanelScheme::OnEventComboBox, this);
