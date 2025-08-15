@@ -52,11 +52,7 @@ WindowTableOffsets::WindowTableOffsets() :
     {
         // Включаем соотвествующие поля
 
-        int id = comboType->GetId();
-
-        wxCommandEvent evt(wxEVT_COMBOBOX, id);
-        evt.SetInt(comboType->GetCurrentSelection());
-        this->ProcessWindowEvent(evt);
+        GF::SendCommandEvent(comboType, wxEVT_COMBOBOX, comboType->GetCurrentSelection());
     }
 }
 
