@@ -45,7 +45,7 @@ PanelConfig::PanelConfig(wxWindow* parent) :
     {
         // Включаем панель
 
-        GF::_SendCommandEvent(this, btnChannelC->GetId(), wxEVT_TOGGLEBUTTON, 1);
+        GF::SendCommandEvent(btnScheme, wxEVT_TOGGLEBUTTON, 1);
     }
 }
 

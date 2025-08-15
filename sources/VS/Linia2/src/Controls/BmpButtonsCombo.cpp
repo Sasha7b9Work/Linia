@@ -123,7 +123,7 @@ void BmpButtonsCombo::SetCurrentChoice(int choice)
 
     SetToolTip(tooltips[index]);
 
-    GF::_SendCommandEvent(this, wxEVT_COMBOBOX, GetCurrentChoice());
+    GF::SendCommandEvent(this, wxEVT_COMBOBOX, GetCurrentChoice());
 }
 
 

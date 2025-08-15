@@ -120,11 +120,11 @@ void GF::ShowModalInfo(wxWindow *windows, const wxString &text)
 }
 
 
-void GF::_SendCommandEvent(wxWindow *window, int id, int type_event, int int_value)
+void GF::SendCommandEvent(wxWindow *window, int id, int type_event, int int_value)
 {
     wxCommandEvent evt(type_event, id);
     evt.SetInt(int_value);
-    window->ProcessWindowEvent(evt);
+    wxPostEvent(window->GetEventHandler(), evt);
 }
 
 

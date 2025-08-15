@@ -200,7 +200,7 @@ public:
     }
     void ApplyToGUI(wxWindow *parent, int _id)
     {
-        GF::_SendCommandEvent(parent, _id, wxEVT_CHECKBOX, Get());
+        GF::SendCommandEvent(parent, _id, wxEVT_CHECKBOX, Get());
     }
 protected:
     virtual void LoadToWindow() override
@@ -233,7 +233,7 @@ public:
             _id = id;
         }
 
-        GF::_SendCommandEvent(parent, _id, wxEVT_TOGGLEBUTTON, Get());
+        GF::SendCommandEvent(parent, _id, wxEVT_TOGGLEBUTTON, Get());
     }
     void Set(const bool &val)
     {
