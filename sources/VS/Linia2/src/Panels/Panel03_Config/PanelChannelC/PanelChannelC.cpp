@@ -98,7 +98,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
             "2 kV"
         };
 
-        comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", {10, SD::Y_SB(27)}, PanelConfig::WIDTH_COMBO, names, names, 3);
+        comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", {10, SD::Y_SB(27)}, PanelConfig::WIDTH_COMBO, names, names, 1);
 
         new wxStaticText(boxSource, wxID_ANY, _L("Ограничение Uc, %%"), { 40, SD::Y_SB(60) });
 
@@ -179,7 +179,6 @@ void PanelChannelC::OnEventComboBox(wxCommandEvent &event)
             }
 
             comboNumberPoints->SetChoices(choices, choices);
-            comboNumberPoints->SetCurrentSelection(0);
         }
     }
 }

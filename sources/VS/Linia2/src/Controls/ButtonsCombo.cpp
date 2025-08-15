@@ -143,15 +143,18 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoi
 
 void ButtonsCombo::OnButtonClicked(wxCommandEvent &)
 {
-    ButtonPopup *popup = new ButtonPopup(this);
+    if (labels.size() > 1)
+    {
+        ButtonPopup *popup = new ButtonPopup(this);
 
-    wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
+        wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
 
-    pos.x -= popup->GetSize().x / 2;
-    pos.y -= popup->GetSize().y / 2;
+        pos.x -= popup->GetSize().x / 2;
+        pos.y -= popup->GetSize().y / 2;
 
-    popup->Position(pos, wxSize(0, 0));
-    popup->Popup();
+        popup->Position(pos, wxSize(0, 0));
+        popup->Popup();
+    }
 }
 
 
