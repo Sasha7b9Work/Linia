@@ -8,6 +8,11 @@ PainterBMP::PainterBMP(wxWindow *parent, const wxPoint &position, const wxSize &
 {
     bitmap = Bitmap::Get(file_name);
 
+    if (size == wxDefaultSize)
+    {
+        SetSize(bitmap.GetBitmap().GetSize());
+    }
+
     Bind(wxEVT_PAINT, &PainterBMP::OnEventPaint, this);
 
     Refresh();

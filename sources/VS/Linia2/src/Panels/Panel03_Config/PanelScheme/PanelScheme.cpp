@@ -6,6 +6,7 @@
 #include "Utils/SystemDepend.h"
 #include "Panels/Panel03_Config/PanelScheme/WindowLibraryTests.h"
 #include "Controls/BmpButtonsCombo.h"
+#include "Controls/Bitmap.h"
 
 
 PanelScheme::PanelScheme(wxPanel *parent, int x) :
@@ -30,11 +31,21 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
         choices.Add(_L("канал") + " C");
         choices.Add(_L("канал") + " B");
 
+        int delta = 60;
+
+        int y = 50;
+
         // IDC_COMBO_GNEZDO_C           m_iGnezdoC              OnSelchangeComboGnezdoC
-        new ButtonsCombo(boxCommutation, "", { 10, SD::Y_SB(50) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
+        new ButtonsCombo(boxCommutation, "", { 10 + delta, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - delta, choices, choices, 1);
+
+        painterNecC = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_C.bmp");
+
+        y += 30;
 
         // IDC_COMBO_GNEZDO_B
-        new ButtonsCombo(boxCommutation, "", { 10, SD::Y_SB(80) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
+        new ButtonsCombo(boxCommutation, "", { 10 + delta, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - delta, choices, choices, 1);
+
+        painterNecB = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_B.bmp");
 
         choices.clear();
         choices.Add("C");

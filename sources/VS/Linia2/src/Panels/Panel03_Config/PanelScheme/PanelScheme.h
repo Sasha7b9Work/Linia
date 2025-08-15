@@ -19,6 +19,9 @@ private:
 
     wxButton *btnLoad = nullptr;
 
+    PainterBMP *painterNecB = nullptr;
+    PainterBMP *painterNecC = nullptr;
+
     void OnEventButton(wxCommandEvent &);
     void OnEventComboBox(wxCommandEvent &);
 };
