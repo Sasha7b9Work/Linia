@@ -55,18 +55,21 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
 
         comboScan = new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::Y_SB(25) }, { 32, 42 }, files, tooltips, 0, 3);
 
-        chbDutyCycle = new wxCheckBox(boxScan, wxID_ANY, _L("Скважн. x 2"), { 90, SD::Y_SB(35) }, { 100, 20 });
+        int y = 25;
+        int x0 = 80;
 
-        wxArrayString names =
-        {
-            "20",
-            "50"
-        };
+        textLabelImpulse = new wxStaticText(boxScan, wxID_ANY, "Длина импульса", { x0, SD::Y_SB(y) });                  // IDC_STATICIMP
+        textValueImpulse = new wxStaticText(boxScan, wxID_ANY, "0.2 ms", { x0 + 30, SD::Y_SB(y + 15) });                // IDC_EDITDLITIMP
 
-        comboNumberPoints = new ButtonsCombo(boxScan, "Число точек", { 10, SD::Y_SB(80) }, PanelConfig::WIDTH_COMBO, names, names, 1);
+        y = 80;
 
-        textLabelImpulse = new wxStaticText(boxScan, wxID_ANY, "Длина импульса", { 10, SD::Y_SB(110) });                                    // IDC_STATICIMP
-        textValueImpulse = new wxStaticText(boxScan, wxID_ANY, "0.2 ms",         { 120, SD::Y_SB(110) });                                   // IDC_EDITDLITIMP
+        wxArrayString names = { "20", "50" };
+
+        comboNumberPoints = new ButtonsCombo(boxScan, "Число точек", { 10, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, names, names, 1);
+
+        y += 25;
+
+        chbDutyCycleIncrease = new CheckButton(boxScan, _L("Скважн. x 2"), { 10, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO);
     }
 
     wxStaticBox *boxMeter = new wxStaticBox(this, wxID_ANY, _L("Измеритель"), { x, boxScan->GetPosition().y + boxScan->GetSize().y }, { w, 50 });
@@ -160,7 +163,7 @@ void PanelChannelC::OnEventComboBox(wxCommandEvent &event)
             true, true, false, false, true, true, true
         };
 
-        chbDutyCycle->Show(duty[scan]);
+        chbDutyCycleIncrease->Show(duty[scan]);
 
         {
             wxArrayString choices;

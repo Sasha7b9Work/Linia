@@ -37,7 +37,7 @@ CheckButton::CheckButton(wxWindow *parent, const wxString &title, const wxPoint 
     wxSize size{ width, TEXTCNTRL_HEIGHT + 3 };
     SetSize(size);
 
-    button = new wxToggleButton(this, wxID_ANY, title, { 0, 0 }, { size.x - 20, size.y });
+    button = new wxToggleButton(this, wxID_ANY, ' ' + title, {0, 0}, {size.x - 20, size.y}, wxBU_LEFT);
 
     ch_box = new wxCheckBox(this, wxID_ANY, "", { size.x - 20 + 5, 4 });
 
