@@ -25,7 +25,7 @@ void ButtonColor::OnMouseEvent(wxMouseEvent &event)
 {
     if (event.IsButton())
     {
-        GF::SendCommandEvent(GetParent(), wxEVT_BUTTON, GetId());
+        GF::_SendCommandEvent(GetParent(), GetId(), wxEVT_BUTTON);
     }
 
     event.Skip();
@@ -81,7 +81,7 @@ void CheckButton::OnEventToggleButton(wxCommandEvent &event)
 
 void CheckButton::SendEvent()
 {
-    GF::SendCommandEvent(this, wxEVT_TOGGLEBUTTON, GetId(), button->GetValue() ? 1 : 0);
+    GF::_SendCommandEvent(this, GetId(), wxEVT_TOGGLEBUTTON, button->GetValue() ? 1 : 0);
 }
 
 
