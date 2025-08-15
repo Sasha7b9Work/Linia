@@ -13,9 +13,6 @@ PainterBMP::PainterBMP(wxWindow *parent, const wxPoint &position, const wxSize &
         SetSize(bitmap.GetBitmap().GetSize());
     }
 
-    wxColour transparenColor(241, 241, 241);
-    bitmap.GetBitmap().SetMask(new wxMask(bitmap.GetBitmap(), transparenColor));
-
     Bind(wxEVT_PAINT, &PainterBMP::OnEventPaint, this);
 
     Refresh();
@@ -30,7 +27,12 @@ void PainterBMP::OnEventPaint(wxPaintEvent &)
     {
         if (enabled)
         {
-            dc.DrawBitmap(bitmap.GetBitmap(), 0, 0, true);
+            wxColour transparenColor(241, 241, 241);
+            wxBitmap bmp = bitmap.GetBitmap();
+
+            bmp.SetMask(new wxMask(bitmap.GetBitmap(), transparenColor));
+
+            dc.DrawBitmap(bmp, 0, 0, true);
         }
         else
         {
