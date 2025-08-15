@@ -248,10 +248,7 @@ void SliderFloat::OnEventMouseDown(wxMouseEvent &event)
         timer_less.Start(400);
     }
 
-    wxCommandEvent evt(wxEVT_SLIDER, slider->GetId());
-    evt.SetEventObject(slider);
-    evt.SetInt(slider->GetValue());
-    wxPostEvent(slider, evt);
+    GF::SendCommandEvent(slider, wxEVT_SLIDER, slider->GetValue());
 
     event.Skip();
 }
@@ -271,10 +268,8 @@ void SliderFloat::OnEventTimer(wxTimerEvent &event)
     int delta = (event.GetId() == timer_more.GetId()) ? 1 : -1;
 
     slider->SetValue(slider->GetValue() + delta);
-    wxCommandEvent evt(wxEVT_SLIDER, slider->GetId());
-    evt.SetEventObject(slider);
-    evt.SetInt(slider->GetValue());
-    wxPostEvent(slider, evt);
+
+    GF::SendCommandEvent(slider, wxEVT_SLIDER, slider->GetValue());
 
     event.Skip();
 }
