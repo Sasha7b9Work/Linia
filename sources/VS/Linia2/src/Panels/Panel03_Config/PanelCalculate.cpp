@@ -36,7 +36,7 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
 
     wxStaticBox *boxParameter = new wxStaticBox(this, wxID_ANY, _L("Параметр"),
         { x, boxGraph->GetPosition().y + boxGraph->GetSize().y },
-        { w, 200 });
+        { w, 250 });
 
     {
         y = 20;
@@ -73,6 +73,10 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
             new wxRadioButton(boxCalculate, wxID_ANY, "dY/dX", { 10, SD::Y_SB(y) });
             new wxRadioButton(boxCalculate, wxID_ANY, "dX/dY", { 100, SD::Y_SB(y) });
         }
+
+        wxPoint pos = boxCalculate->GetPosition();
+        pos.y = SD::Y_SB(boxParameter->GetSize().y - boxCalculate->GetSize().y - 8);
+        boxCalculate->SetPosition(pos);
     }
 
     wxStaticBox *boxBorder = new wxStaticBox(this, wxID_ANY, _L("Пороговые значения"),
