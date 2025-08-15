@@ -24,6 +24,8 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
         choices.Add(_L("внутренняя"));
         choices.Add(_L("внешняя"));
 
+        int y = 20;
+
         // IDC_COMBO_KOMMUTATOR         m_iKommutator           OnSelchangeComboKommutator
         new ButtonsCombo(boxCommutation, "Тип", { 10, SD::Y_SB(20)}, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
@@ -33,14 +35,14 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
 
         int delta = 60;
 
-        int y = 50;
+        y += 40;
 
         // IDC_COMBO_GNEZDO_C           m_iGnezdoC              OnSelchangeComboGnezdoC
         new ButtonsCombo(boxCommutation, "", { 10 + delta, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - delta, choices, choices, 1);
 
         painterNecC = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_C.bmp");
 
-        y += 30;
+        y += 40;
 
         // IDC_COMBO_GNEZDO_B
         new ButtonsCombo(boxCommutation, "", { 10 + delta, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - delta, choices, choices, 1);

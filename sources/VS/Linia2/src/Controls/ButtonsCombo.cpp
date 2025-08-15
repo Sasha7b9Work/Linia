@@ -258,28 +258,35 @@ int ButtonsCombo::NumEmptyes() const
 
 void ButtonsCombo::SetExtendedLabel(const wxString &start, const wxString &end)
 {
-    int num_spaces = 0;
-
-    while (true)
+    if (start.IsEmpty())
     {
-        SetExtendedLabel(start, num_spaces, end);
+        SetLabel(end);
+    }
+    else
+    {
+        int num_spaces = 0;
 
-        wxSize size = GetTextExtent(GetLabel());
-
-        if (size.x >= GetClientSize().x - 12)
+        while (true)
         {
-            if (num_spaces > 0)
+            SetExtendedLabel(start, num_spaces, end);
+
+            wxSize size = GetTextExtent(GetLabel());
+
+            if (size.x >= GetClientSize().x - 12)
             {
-                num_spaces--;
+                if (num_spaces > 0)
+                {
+                    num_spaces--;
+                }
+
+                break;
             }
 
-            break;
+            num_spaces++;
         }
 
-        num_spaces++;
+        SetExtendedLabel(start, num_spaces, end);
     }
-
-    SetExtendedLabel(start, num_spaces, end);
 }
 
 
