@@ -186,14 +186,9 @@ void SliderFloatLimit::CalculateAndSetRange(const wxString &range)
 
     if (double_value <= 1000)
     {
-        if (double_value <= 50)
-        {
-            digits = 1;
-        }
-        else
-        {
-            digits = 0;
-        }
+        if (double_value <= 5)          digits = 2;
+        else if (double_value <= 50)    digits = 1;
+        else                            digits = 0;
     }
     else
     {
