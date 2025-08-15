@@ -13,13 +13,9 @@ public:
     // Если transparentColour != nullptr, то пиксели данного цвета будут прозрачными
     PainterBMP(wxWindow *, const wxPoint &, const wxSize &, const wxString &file_name, wxColour *transparentColour = nullptr);
 
-    void SetEnabled(bool);
-
 private:
 
     Bitmap bitmap;
 
     void OnEventPaint(wxPaintEvent &);
-
-    bool enabled = true;
 };
