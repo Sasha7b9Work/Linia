@@ -32,7 +32,7 @@ class CheckButton : public wxPanel
 {
 public:
 
-    CheckButton(wxWindow *, int, const wxString &, const wxPoint &, const wxSize &);
+    CheckButton(wxWindow *, const wxString &, const wxPoint &, int width);
 
     bool GetValue() const;
 

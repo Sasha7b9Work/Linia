@@ -3,6 +3,7 @@
 #include "Controls/ButtonsCombo.h"
 #include "Controls/SpinBox.h"
 #include "Controls/Slider.h"
+#include "Controls/Buttons.h"
 
 
 class PanelChannelBS : public wxPanel
@@ -19,6 +20,7 @@ private:
     ButtonsComboRange *comboLimitRange = nullptr;       // Ограничение - Диапазон
     SliderFloatOffset *sliderOffset = nullptr;          // Смещение
     SliderFloatLimit  *sliderLimit = nullptr;           // Ограничение
+    CheckButton       *btnAmpitudeDecrease = nullptr;   // Амплитуда / 10
 
     void Tune();
 

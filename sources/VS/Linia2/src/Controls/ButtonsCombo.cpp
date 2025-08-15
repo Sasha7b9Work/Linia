@@ -125,6 +125,7 @@ private:
 };
 
 
+
 ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos, int width,
     const wxArrayString &_labels, const wxArrayString &_tooltips, int _buttons_in_row, Type::E type) :
     DrawingButton(parent, wxID_ANY, _labels[0], pos, { width, TEXTCNTRL_HEIGHT + 3 }, (type == Type::Bitmap) ? _title : wxString("")),

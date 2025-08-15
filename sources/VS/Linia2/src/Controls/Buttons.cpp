@@ -31,12 +31,15 @@ void ButtonColor::OnMouseEvent(wxMouseEvent &event)
 }
 
 
-CheckButton::CheckButton(wxWindow *parent, int id, const wxString &title, const wxPoint &pos, const wxSize &size) :
-    wxPanel(parent, id, pos, size)
+CheckButton::CheckButton(wxWindow *parent, const wxString &title, const wxPoint &pos, int width) :
+    wxPanel(parent, wxID_ANY, pos)
 {
-    button = new wxToggleButton(this, id + delta_id, title, { 0, 0 }, { size.x - 20, size.y });
+    wxSize size{ width, TEXTCNTRL_HEIGHT + 3 };
+    SetSize(size);
 
-    ch_box = new wxCheckBox(this, id + delta_id + 1, "", { size.x - 20 + 5, 4 });
+    button = new wxToggleButton(this, wxID_ANY, title, { 0, 0 }, { size.x - 20, size.y });
+
+    ch_box = new wxCheckBox(this, wxID_ANY, "", { size.x - 20 + 5, 4 });
 
     Bind(wxEVT_CHECKBOX, &CheckButton::OnEventCheckBox, this);
     Bind(wxEVT_TOGGLEBUTTON, &CheckButton::OnEventToggleButton, this);
@@ -51,6 +54,10 @@ void CheckButton::OnEventCheckBox(wxCommandEvent &event)
 
         GF::SendCommandEvent(GetParent(), wxEVT_TOGGLEBUTTON, button->GetId(), button->GetValue() ? 1 : 0);
 
+//        event.Skip();
+    }
+    else
+    {
         event.Skip();
     }
 }
@@ -62,6 +69,10 @@ void CheckButton::OnEventToggleButton(wxCommandEvent &event)
     {
         ch_box->SetValue(button->GetValue());
 
+//        event.Skip();
+    }
+    else
+    {
         event.Skip();
     }
 }

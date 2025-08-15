@@ -21,13 +21,13 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
     wxStaticBox *boxGenerator = new wxStaticBox(this, wxID_ANY, _L("Генератор ступенек"), { x, 0 }, { w, 300 });
 
     {
-        int y = 25;
+        int y = 22;
 
         wxArrayString choices;
         choices.Add("U");
         choices.Add("I");
 
-        comboTypeGenerator = new ButtonsCombo(boxGenerator, "Тип", { 10, SD::Y_SB(y - 3) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
+        comboTypeGenerator = new ButtonsCombo(boxGenerator, "Тип", { 10, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
         y += 25;
 
@@ -35,20 +35,20 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
         choices.Add(_L("Вкл"));
         choices.Add(_L("Выкл"));
 
-        new ButtonsCombo(boxGenerator, "Импульс", { 10, SD::Y_SB(y - 3) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
+        new ButtonsCombo(boxGenerator, "Импульс", { 10, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
         y += 25;
 
         choices.Clear();
         choices.Add("-");
 
-        comboStep = new ButtonsComboRange(boxGenerator, "Амплитуда ступени", { 10, SD::Y_SB(y - 3) }, PanelConfig::WIDTH_COMBO, choices, choices);
+        comboStep = new ButtonsComboRange(boxGenerator, "Амплитуда ступени", { 10, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, choices, choices);
 
         y += 25;
 
-        new wxCheckBox(boxGenerator, wxID_ANY, "x 0.1", { 10, SD::Y_SB(y) }, { 60, TEXTCNTRL_HEIGHT });
+        btnAmpitudeDecrease = new CheckButton(boxGenerator, "Амплитуда / 10", { 10, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO);
 
-        y += 25;
+        y += 28;
 
         new wxStaticText(boxGenerator, wxID_ANY, _L("Число ступенек"), { 10, SD::Y_SB(y + 3) });
 
