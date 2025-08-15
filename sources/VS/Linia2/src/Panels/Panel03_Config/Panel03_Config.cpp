@@ -45,11 +45,7 @@ PanelConfig::PanelConfig(wxWindow* parent) :
     {
         // Включаем панель
 
-        int id = btnScheme->GetId();
-
-        wxCommandEvent evt(wxEVT_TOGGLEBUTTON, id);
-        evt.SetInt(1);
-        this->ProcessWindowEvent(evt);
+        GF::SendCommandEvent(this, wxEVT_TOGGLEBUTTON, btnChannelC->GetId(), 1);
     }
 }
 
@@ -86,16 +82,27 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
 
 void PanelConfig::OnEventToggleButton(wxCommandEvent &event)
 {
-    if (!event.IsChecked())
-    {
-        ((wxToggleButton *)event.GetEventObject())->SetValue(true);
-    }
-    else
-    {
-        UnсheckAllAcross(event.GetId());
+    wxObject *object = event.GetEventObject();
 
-        EnablePanel(event.GetId());
+//    if (object == btnChannelC ||
+//        object == btnChannelB ||
+//        object == btnChannelS ||
+//        object == btnScheme ||
+//        object == btnCalculate)
+    {
+        if (!event.IsChecked())
+        {
+            ((wxToggleButton *)event.GetEventObject())->SetValue(true);
+        }
+        else
+        {
+            UnсheckAllAcross(event.GetId());
+
+            EnablePanel(event.GetId());
+        }
     }
+
+    event.Skip();
 }
 
 

@@ -48,8 +48,10 @@ private:
     static const int delta_id = 0;
 
     void OnEventCheckBox(wxCommandEvent &);
-
     void OnEventToggleButton(wxCommandEvent &);
+
+    // Послать событие переключения кнопки
+    void SendEvent();
 };
 
 

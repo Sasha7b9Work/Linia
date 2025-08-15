@@ -58,11 +58,11 @@ void CheckButton::OnEventCheckBox(wxCommandEvent &event)
     if (event.GetId() == ch_box->GetId())
     {
         button->SetValue(event.GetInt() != 0);
+
+        SendEvent();
     }
-    else
-    {
-        event.Skip();
-    }
+
+    event.Skip();
 }
 
 
@@ -71,11 +71,17 @@ void CheckButton::OnEventToggleButton(wxCommandEvent &event)
     if (event.GetId() == button->GetId())
     {
         ch_box->SetValue(button->GetValue());
+
+        SendEvent();
     }
-    else
-    {
-        event.Skip();
-    }
+
+    event.Skip();
+}
+
+
+void CheckButton::SendEvent()
+{
+    GF::SendCommandEvent(this, wxEVT_TOGGLEBUTTON, GetId(), button->GetValue() ? 1 : 0);
 }
 
 
