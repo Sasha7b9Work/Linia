@@ -9,7 +9,7 @@
 #include "Controls/Bitmap.h"
 
 
-PanelScheme::PanelScheme(wxPanel *parent, int x) :
+PanelScheme::PanelScheme(wxPanel *parent, const int x) :
     wxPanel(parent)
 {
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
@@ -17,7 +17,7 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
 
     const int width_category = 77;
 
-    wxStaticBox *boxCommutation = new wxStaticBox(this, wxID_ANY, _L("Коммутация"), { x, 100 }, { MainWindow::WIDTH3 - 10, 300 });
+    wxStaticBox *boxCommutation = new wxStaticBox(this, wxID_ANY, _L("Коммутация"), { x, 100 }, { MainWindow::WIDTH3 - 10, 350 });
 
     {
         wxArrayString choices;
@@ -40,14 +40,22 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
         // IDC_COMBO_GNEZDO_C           m_iGnezdoC              OnSelchangeComboGnezdoC
         new ButtonsCombo(boxCommutation, "", { 10 + delta, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - delta, choices, choices, 1);
 
-        painterNecC = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_C.bmp", new wxColour(241, 241, 241));
+        painterJackC = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_C.bmp", new wxColour(241, 241, 241));
 
         y += 40;
 
         // IDC_COMBO_GNEZDO_B
         new ButtonsCombo(boxCommutation, "", { 10 + delta, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - delta, choices, choices, 1);
 
-        painterNecB = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_B.bmp", new wxColour(241, 241, 241));
+        painterJackB = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_B.bmp", new wxColour(241, 241, 241));
+
+        y += 40;
+
+        painterJackS = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_S.bmp", new wxColour(241, 241, 241));
+
+        y += 40;
+
+        painterJackE = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_E.bmp", new wxColour(241, 241, 241));
 
         choices.clear();
         choices.Add("C");
@@ -56,14 +64,19 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
 
         int w = 30;
 
+        y =  260;
+        int dy = 50;
+        int x0 = 60;
+        int dx = 70;
+
         // IDC_COMBOCHECKKOL
-        comboC = new ButtonsCombo(boxCommutation, "", { 100, 170 }, w, choices, choices, 1);
+        comboC = new ButtonsCombo(boxCommutation, "", { x0 + dx, y - dy }, w, choices, choices, 1);
 
         // IDC_COMBOCHECKBAZA
-        comboB = new ButtonsCombo(boxCommutation, "", { 40, 210 }, w, choices, choices, 1);
+        comboB = new ButtonsCombo(boxCommutation, "", { x0, y }, w, choices, choices, 1);
 
         // IDC_COMBOCHECKDOP
-        comboE = new ButtonsCombo(boxCommutation, "", { 100, 250 }, w, choices, choices, 1);
+        comboE = new ButtonsCombo(boxCommutation, "", { x0 + dx, y + dy }, w, choices, choices, 1);
     }
 
     wxStaticBox *boxCategory = new wxStaticBox(this, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 100 });

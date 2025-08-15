@@ -8,7 +8,7 @@ class PanelScheme : public wxPanel
 {
 public:
 
-    PanelScheme(wxPanel *parent, int x);
+    PanelScheme(wxPanel *parent, const int x);
 
 private:
 
@@ -19,8 +19,10 @@ private:
 
     wxButton *btnLoad = nullptr;
 
-    PainterBMP *painterNecB = nullptr;
-    PainterBMP *painterNecC = nullptr;
+    PainterBMP *painterJackB = nullptr;
+    PainterBMP *painterJackC = nullptr;
+    PainterBMP *painterJackS = nullptr;
+    PainterBMP *painterJackE = nullptr;
 
     void OnEventButton(wxCommandEvent &);
     void OnEventComboBox(wxCommandEvent &);
