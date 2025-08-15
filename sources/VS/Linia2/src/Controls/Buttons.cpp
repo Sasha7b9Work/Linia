@@ -40,7 +40,13 @@ CheckButton::CheckButton(wxWindow *parent, const wxString &title, const wxPoint 
 
     button = new wxToggleButton(this, wxID_ANY, ' ' + title, { 0, 0 }, {size.x - 20, size.y}, wxBU_LEFT);
 
-    ch_box = new wxCheckBox(this, wxID_ANY, "", { size.x - 20 + 5, SD::Y_SB(4) });
+#ifdef WIN32
+    int y = 4;
+#else
+    int y = 2;
+#endif
+
+    ch_box = new wxCheckBox(this, wxID_ANY, "", { size.x - 20 + 5, y });
 
     Bind(wxEVT_CHECKBOX, &CheckButton::OnEventCheckBox, this);
     Bind(wxEVT_TOGGLEBUTTON, &CheckButton::OnEventToggleButton, this);
