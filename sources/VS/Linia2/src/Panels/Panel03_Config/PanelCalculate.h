@@ -6,7 +6,7 @@ class PanelCalculate : public wxPanel
 {
 public:
 
-    PanelCalculate(wxPanel *parent, int x, int w);
+    PanelCalculate(wxPanel *parent, int x, int w, int h);
 
     static PanelCalculate *self;
 };

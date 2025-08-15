@@ -10,7 +10,7 @@ class PanelChannelC : public wxPanel
 {
 public:
 
-    PanelChannelC(wxPanel *parent, int x, int w);
+    PanelChannelC(wxPanel *parent, int x, int w, int h);
 
     static PanelChannelC *self;
 

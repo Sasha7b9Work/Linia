@@ -12,7 +12,7 @@ PanelChannelB *PanelChannelB::self = nullptr;
 PanelChannelS *PanelChannelS::self = nullptr;
 
 
-PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w) :
+PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
     wxPanel(parent)
 {
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });

@@ -20,7 +20,7 @@
 PanelChannelC *PanelChannelC::self = nullptr;
 
 
-PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
+PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
     wxPanel(parent)
 {
     self = this;
@@ -69,7 +69,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
         textValueImpulse = new wxStaticText(boxScan, wxID_ANY, "0.2 ms",         { 120, SD::Y_SB(110) });                                   // IDC_EDITDLITIMP
     }
 
-    wxStaticBox *boxMeter = new wxStaticBox(this, wxID_ANY, _L("Измеритель"), { x, boxScan->GetSize().y + x }, { w, 50 });
+    wxStaticBox *boxMeter = new wxStaticBox(this, wxID_ANY, _L("Измеритель"), { x, boxScan->GetPosition().y + boxScan->GetSize().y }, { w, 50 });
 
     {
         int y = 20;
@@ -83,7 +83,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w) :
         comboCurrent = new ButtonsComboRange(boxMeter, "Ic", { 100, SD::Y_SB(y) }, 80, names, names);
     }
 
-    wxStaticBox *boxSource = new wxStaticBox(this, wxID_ANY, "Источник U", { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + x }, { w, 210 });
+    wxStaticBox *boxSource = new wxStaticBox(this, wxID_ANY, "Источник U", { x, boxMeter->GetPosition().y + boxMeter->GetSize().y }, { w, h - boxMeter->GetPosition().y - boxMeter->GetSize().y });
 
     {
         wxArrayString names

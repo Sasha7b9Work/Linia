@@ -9,7 +9,7 @@
 PanelCalculate *PanelCalculate::self = nullptr;
 
 
-PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w) :
+PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
     wxPanel(parent)
 {
     self = this;

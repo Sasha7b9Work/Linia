@@ -57,19 +57,19 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
 {
     int x = 4;
     int w = MainWindow::WIDTH3 - 2 * x - 1;
-    int h = HEIGHT - 45;
+    int h = HEIGHT - 47;
 
     if (button == btnChannelB)
     {
-        return new PanelChannelB(self, x, w);
+        return new PanelChannelB(self, x, w, h);
     }
     else if (button == btnChannelS)
     {
-        return new PanelChannelS(self, x, w);
+        return new PanelChannelS(self, x, w, h);
     }
     else if (button == btnChannelC)
     {
-        return new PanelChannelC(self, x, w);
+        return new PanelChannelC(self, x, w, h);
     }
     else if (button == btnScheme)
     {
@@ -77,7 +77,7 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
     }
     else if (button == btnCalculate)
     {
-        return new PanelCalculate(self, x, w);
+        return new PanelCalculate(self, x, w, h);
     }
 
     return nullptr;
