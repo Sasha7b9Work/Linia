@@ -12,6 +12,7 @@ public:
 
     static const int HEIGHT = 500;
     static const int WIDTH_COMBO = 180;
+    static const int DYC = 26;              // Расстояние между комбобоксами по вертикали
 
     PanelConfig(wxWindow *parent);
 

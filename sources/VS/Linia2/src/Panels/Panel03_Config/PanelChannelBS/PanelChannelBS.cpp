@@ -29,7 +29,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
 
         comboTypeGenerator = new ButtonsCombo(boxGenerator, "Тип", { 10, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
-        y += 25;
+        y += PanelConfig::DYC;
 
         choices.Clear();
         choices.Add(_L("Вкл"));
@@ -37,14 +37,14 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
 
         new ButtonsCombo(boxGenerator, "Импульс", { 10, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
-        y += 25;
+        y += PanelConfig::DYC;
 
         choices.Clear();
         choices.Add("-");
 
         comboStep = new ButtonsComboRange(boxGenerator, "Амплитуда ступени", { 10, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, choices, choices);
 
-        y += 25;
+        y += PanelConfig::DYC;
 
         btnAmpitudeDecrease = new CheckButton(boxGenerator, "Амплитуда / 10", { 10, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO);
 

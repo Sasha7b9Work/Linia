@@ -67,7 +67,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
 
         comboNumberPoints = new ButtonsCombo(boxScan, "Число точек", { 10, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, names, names, 1);
 
-        y += 25;
+        y += PanelConfig::DYC;
 
         chbDutyCycleIncrease = new CheckButton(boxScan, _L("Скважн. x 2"), { 10, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO);
     }
