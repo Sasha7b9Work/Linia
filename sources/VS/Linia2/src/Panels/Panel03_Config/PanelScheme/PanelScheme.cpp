@@ -17,6 +17,54 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x) :
 
     const int width_category = 77;
 
+    wxStaticBox *boxCategory = new wxStaticBox(this, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 100 });
+
+    {
+        wxArrayString files;
+
+        for (int i = 0; i < 10; i++)
+        {
+            files.push_back(wxString::Format("sch/cat%d.bmp", i + 1));
+        }
+
+        wxArrayString tooltips =
+        {
+            "Диод",
+            "Тиристор",
+            "Биполярный NPN-транзистор (трёхполюсный)",
+            "Биполярный PNP-транзистор (трёхполюсный)",
+            "Полевой или МОП транзистор NMOS(трёхполюсный)",
+            "Полевой или МОП транзистор PMOS(трёхполюсный)",
+            "Биполярный NPN-транзистор (четырёхполюсный)",
+            "Биполярный PNP-транзистор (четырёхполюсный)",
+            "Полевой или МОП транзистор NMOS(четырёхполюсный)",
+            "Полевой или МОП транзистор PMOS(четырёхполюсный)"
+        };
+
+        new BmpButtonsCombo(boxCategory, "Категория", { 18, SD::Y_SB(25) }, { 32, 42 }, files, tooltips, 0, 4);
+    }
+
+    (void)boxCategory;
+
+    wxStaticBox *boxTest = new wxStaticBox(this, wxID_ANY, _L("Тест"), { x + width_category + 5, 0 }, { MainWindow::WIDTH3 - width_category - 15, 100 });
+
+    Bind(wxEVT_BUTTON, &PanelScheme::OnEventButton, this);
+    Bind(wxEVT_COMBOBOX, &PanelScheme::OnEventComboBox, this);
+
+    {
+        wxArrayString choices;
+        choices.Add("IdVd");
+        choices.Add("_USER");
+
+        // IDC_COMBOMOD
+        // IDC_BUTTON_LOADTST
+        comboTest = new ButtonsCombo(boxTest, "", { 5, SD::Y_SB(20) }, 100, choices, choices, 1);
+
+        btnLoad = new wxButton(boxTest, wxID_ANY, _L("Загрузить"), { 5, SD::Y_SB(50) }, { 100, 30 });
+
+        btnLoad->Hide();
+    }
+
     wxStaticBox *boxCommutation = new wxStaticBox(this, wxID_ANY, _L("Коммутация"), { x, 100 }, { MainWindow::WIDTH3 - 10, 350 });
 
     {
@@ -77,54 +125,6 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x) :
 
         // IDC_COMBOCHECKDOP
         comboE = new ButtonsCombo(boxCommutation, "", { x0 + dx, y + dy }, w, choices, choices, 1);
-    }
-
-    wxStaticBox *boxCategory = new wxStaticBox(this, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 100 });
-
-    {
-        wxArrayString files;
-
-        for (int i = 0; i < 10; i++)
-        {
-            files.push_back(wxString::Format("sch/cat%d.bmp", i + 1));
-        }
-
-        wxArrayString tooltips =
-        {
-            "Диод",
-            "Тиристор",
-            "Биполярный NPN-транзистор (трёхполюсный)",
-            "Биполярный PNP-транзистор (трёхполюсный)",
-            "Полевой или МОП транзистор NMOS(трёхполюсный)",
-            "Полевой или МОП транзистор PMOS(трёхполюсный)",
-            "Биполярный NPN-транзистор (четырёхполюсный)",
-            "Биполярный PNP-транзистор (четырёхполюсный)",
-            "Полевой или МОП транзистор NMOS(четырёхполюсный)",
-            "Полевой или МОП транзистор PMOS(четырёхполюсный)"
-        };
-
-        new BmpButtonsCombo(boxCategory, "Категория", { 18, SD::Y_SB(25) }, {32, 42}, files, tooltips, 0, 4);
-    }
-
-    (void)boxCategory;
-
-    wxStaticBox *boxTest = new wxStaticBox(this, wxID_ANY, _L("Тест"), { x + width_category + 5, 0 }, { MainWindow::WIDTH3 - width_category - 15, 100 });
-
-    Bind(wxEVT_BUTTON, &PanelScheme::OnEventButton, this);
-    Bind(wxEVT_COMBOBOX, &PanelScheme::OnEventComboBox, this);
-
-    {
-        wxArrayString choices;
-        choices.Add("IdVd");
-        choices.Add("_USER");
-
-        // IDC_COMBOMOD
-        // IDC_BUTTON_LOADTST
-        comboTest = new ButtonsCombo(boxTest, "", { 5, SD::Y_SB(20) }, 100, choices, choices, 1);
-
-        btnLoad = new wxButton(boxTest, wxID_ANY, _L("Загрузить"), { 5, SD::Y_SB(50) }, { 100, 30 });
-
-        btnLoad->Hide();
     }
 }
 
