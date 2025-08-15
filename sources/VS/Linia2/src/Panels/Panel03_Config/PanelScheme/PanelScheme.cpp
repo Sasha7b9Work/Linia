@@ -9,7 +9,7 @@
 #include "Controls/Bitmap.h"
 
 
-PanelScheme::PanelScheme(wxPanel *parent, const int x, int /*w*/, int h) :
+PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
     wxPanel(parent)
 {
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
@@ -47,7 +47,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int /*w*/, int h) :
     (void)boxCategory;
 
     wxStaticBox *boxTest = new wxStaticBox(this, wxID_ANY, _L("Тест"), { x + width_category + 5, 0 },
-        { MainWindow::WIDTH3 - width_category - 15, boxCategory->GetSize().y });
+        { w - width_category - 5, boxCategory->GetSize().y });
 
     Bind(wxEVT_BUTTON, &PanelScheme::OnEventButton, this);
     Bind(wxEVT_COMBOBOX, &PanelScheme::OnEventComboBox, this);
@@ -68,7 +68,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int /*w*/, int h) :
 
     wxStaticBox *boxCommutation = new wxStaticBox(this, wxID_ANY, _L("Коммутация"),
         { x, boxCategory->GetPosition().y + boxCategory->GetSize().y },
-        { MainWindow::WIDTH3 - 10, h - boxCategory->GetPosition().y - boxCategory->GetSize().y });
+        { w, h - boxCategory->GetPosition().y - boxCategory->GetSize().y });
 
     {
         wxArrayString choices;
