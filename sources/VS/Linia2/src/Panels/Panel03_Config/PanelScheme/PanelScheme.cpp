@@ -9,7 +9,7 @@
 #include "Controls/Bitmap.h"
 
 
-PanelScheme::PanelScheme(wxPanel *parent, const int x) :
+PanelScheme::PanelScheme(wxPanel *parent, const int x, int /*w*/, int h) :
     wxPanel(parent)
 {
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
@@ -65,7 +65,9 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x) :
         btnLoad->Hide();
     }
 
-    wxStaticBox *boxCommutation = new wxStaticBox(this, wxID_ANY, _L("Коммутация"), { x, 100 }, { MainWindow::WIDTH3 - 10, 350 });
+    wxStaticBox *boxCommutation = new wxStaticBox(this, wxID_ANY, _L("Коммутация"),
+        { x, boxCategory->GetPosition().y + boxCategory->GetSize().y },
+        { MainWindow::WIDTH3 - 10, h - boxCategory->GetPosition().y - boxCategory->GetSize().y });
 
     {
         wxArrayString choices;
@@ -110,7 +112,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x) :
         choices.Add("B");
         choices.Add("E");
 
-        int w = 30;
+        int width = 30;
 
         y =  260;
         int dy = 50;
@@ -118,13 +120,13 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x) :
         int dx = 70;
 
         // IDC_COMBOCHECKKOL
-        comboC = new ButtonsCombo(boxCommutation, "", { x0 + dx, y - dy }, w, choices, choices, 1);
+        comboC = new ButtonsCombo(boxCommutation, "", { x0 + dx, y - dy }, width, choices, choices, 1);
 
         // IDC_COMBOCHECKBAZA
-        comboB = new ButtonsCombo(boxCommutation, "", { x0, y }, w, choices, choices, 1);
+        comboB = new ButtonsCombo(boxCommutation, "", { x0, y }, width, choices, choices, 1);
 
         // IDC_COMBOCHECKDOP
-        comboE = new ButtonsCombo(boxCommutation, "", { x0 + dx, y + dy }, w, choices, choices, 1);
+        comboE = new ButtonsCombo(boxCommutation, "", { x0 + dx, y + dy }, width, choices, choices, 1);
     }
 }
 

@@ -8,7 +8,7 @@ class PanelScheme : public wxPanel
 {
 public:
 
-    PanelScheme(wxPanel *parent, const int x);
+    PanelScheme(wxPanel *parent, const int x, int w, int h);
 
 private:
 
