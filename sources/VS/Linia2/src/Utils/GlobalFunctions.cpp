@@ -128,6 +128,15 @@ void GF::_SendCommandEvent(wxWindow *window, int id, int type_event, int int_val
 }
 
 
+void GF::SendCommandEvent(wxWindow *object, int type_event, int int_value)
+{
+    wxCommandEvent event(type_event, object->GetId());
+    event.SetEventObject(object);
+    event.SetInt(int_value);
+    wxPostEvent(object->GetEventHandler(), event);
+}
+
+
 bool GF::IsBoardPCM()
 {
     const wxSize size(MainWindow::WIDTH, MainWindow::HEIGHT);

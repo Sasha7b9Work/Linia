@@ -1,6 +1,7 @@
 ﻿// 2025/8/9 11:41:08 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Controls/BmpButtonsCombo.h"
+#include "Utils/GlobalFunctions.h"
 
 
 class BmpButtonPopup : public wxPopupTransientWindow
@@ -122,12 +123,7 @@ void BmpButtonsCombo::SetCurrentChoice(int choice)
 
     SetToolTip(tooltips[index]);
 
-    {
-        wxCommandEvent event(wxEVT_COMBOBOX, GetId());
-        event.SetEventObject(this);
-        event.SetInt(GetCurrentChoice());
-        wxPostEvent(GetEventHandler(), event);
-    }
+    GF::_SendCommandEvent(this, wxEVT_COMBOBOX, GetCurrentChoice());
 }
 
 

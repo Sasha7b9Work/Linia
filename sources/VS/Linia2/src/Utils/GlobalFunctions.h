@@ -38,6 +38,7 @@ namespace GF
     wxSpinCtrl *_FindSpinCtrl(wxWindow *, int id);
 
     void _SendCommandEvent(wxWindow *, int id, int type_event, int int_value = 0);
+    void SendCommandEvent(wxWindow *object, int type_event, int int_value = 0);
 
     int IntFromTextCtrl(wxWindow *, int id);
 
