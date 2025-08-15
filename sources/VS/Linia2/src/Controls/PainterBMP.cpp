@@ -8,12 +8,13 @@ PainterBMP::PainterBMP(wxWindow *parent, const wxPoint &position, const wxSize &
 {
     bitmap = Bitmap::Get(file_name);
 
-    bitmap.GetBitmap().UseAlpha(true);
-
     if (size == wxDefaultSize)
     {
         SetSize(bitmap.GetBitmap().GetSize());
     }
+
+    wxColour transparenColor(241, 241, 241);
+    bitmap.GetBitmap().SetMask(new wxMask(bitmap.GetBitmap(), transparenColor));
 
     Bind(wxEVT_PAINT, &PainterBMP::OnEventPaint, this);
 
