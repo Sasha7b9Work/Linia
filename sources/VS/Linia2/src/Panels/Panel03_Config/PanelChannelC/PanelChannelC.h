@@ -1,6 +1,5 @@
 ﻿// 2025/8/9 10:39:59 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Controls/RadioButtonICO.h"
 #include "Controls/BmpButtonsCombo.h"
 #include "Controls/ButtonsCombo.h"
 #include "Controls/Slider.h"
