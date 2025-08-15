@@ -1,6 +1,7 @@
 ﻿// 2025/08/13 14:19:26 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Controls/Slider.h"
+#include "Utils/GlobalFunctions.h"
 
 
 SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _min, int _max) :
@@ -57,10 +58,7 @@ void SliderInt::OnEventMouseDown(wxMouseEvent &event)
         timer_less.Start(400);
     }
 
-    wxCommandEvent evt(wxEVT_SLIDER, slider->GetId());
-    evt.SetEventObject(slider);
-    evt.SetInt(slider->GetValue());
-    wxPostEvent(slider, evt);
+    GF::SendCommandEvent(slider, wxEVT_SLIDER, slider->GetValue());
 
     event.Skip();
 }
@@ -80,10 +78,8 @@ void SliderInt::OnEventTimer(wxTimerEvent &event)
     int delta = (event.GetId() == timer_more.GetId()) ? 1 : -1;
 
     slider->SetValue(slider->GetValue() + delta);
-    wxCommandEvent evt(wxEVT_SLIDER, slider->GetId());
-    evt.SetEventObject(slider);
-    evt.SetInt(slider->GetValue());
-    wxPostEvent(slider, evt);
+
+    GF::SendCommandEvent(slider, wxEVT_SLIDER, slider->GetValue());
 
     event.Skip();
 }
