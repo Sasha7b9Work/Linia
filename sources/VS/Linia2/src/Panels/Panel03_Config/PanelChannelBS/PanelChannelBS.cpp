@@ -81,7 +81,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
         }
 
         wxPoint pos = boxOffset->GetPosition();
-        pos.y = boxGenerator->GetSize().y - boxOffset->GetSize().y - 8;
+        pos.y = SD::Y_SB(boxGenerator->GetSize().y - boxOffset->GetSize().y - 8);
         boxOffset->SetPosition(pos);
     }
 
