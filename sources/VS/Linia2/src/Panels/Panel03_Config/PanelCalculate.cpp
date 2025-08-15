@@ -23,13 +23,13 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
     const int dy = 3;
 
     {
-        new wxStaticText(boxGraph, wxID_ANY, _L("Ось X"), { 10, SD::Y_SB(y + dy) });
+        new wxStaticText(boxGraph, wxID_ANY, _L("Ось X"), { PanelConfig::X, SD::Y_SB(y + dy) });
 
         new wxTextCtrl(boxGraph, wxID_ANY, "Ud", { 100, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
 
         y += 25;
 
-        new wxStaticText(boxGraph, wxID_ANY, _L("Ось Y"), { 10, SD::Y_SB(y + dy) });
+        new wxStaticText(boxGraph, wxID_ANY, _L("Ось Y"), { PanelConfig::X, SD::Y_SB(y + dy) });
 
         new wxTextCtrl(boxGraph, wxID_ANY, "Id", { 100, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
     }
@@ -41,7 +41,7 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
     {
         y = 20;
 
-        new wxStaticText(boxParameter, wxID_ANY, _L("Найти"), { 10, SD::Y_SB(y + dy) });
+        new wxStaticText(boxParameter, wxID_ANY, _L("Найти"), { PanelConfig::X, SD::Y_SB(y + dy) });
         new wxStaticText(boxParameter, wxID_ANY, _L("при"), { 100, SD::Y_SB(y + dy) });
 
         new wxTextCtrl(boxParameter, wxID_ANY, "Id", { 50, SD::Y_SB(y) }, { 40, TEXTCNTRL_HEIGHT });
@@ -49,28 +49,28 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
 
         y += 30;
 
-        new wxStaticText(boxParameter, wxID_ANY, _L("равном"), { 10, SD::Y_SB(y) });
+        new wxStaticText(boxParameter, wxID_ANY, _L("равном"), { PanelConfig::X, SD::Y_SB(y) });
 
         y += 20;
 
-        new wxStaticText(boxParameter, wxID_ANY, _L("значению") + " 1", { 10, SD::Y_SB(y + dy) });
+        new wxStaticText(boxParameter, wxID_ANY, _L("значению") + " 1", { PanelConfig::X, SD::Y_SB(y + dy) });
         new wxTextCtrl(boxParameter, wxID_ANY, "6", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT });
 
         y += 25;
 
-        new wxStaticText(boxParameter, wxID_ANY, _L("значению") + " 2", { 10, SD::Y_SB(y + dy) });
+        new wxStaticText(boxParameter, wxID_ANY, _L("значению") + " 2", { PanelConfig::X, SD::Y_SB(y + dy) });
         new wxTextCtrl(boxParameter, wxID_ANY, "6", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT });
 
         y += 25;
 
-        new wxStaticText(boxParameter, wxID_ANY, _L("на ступеньке") + " № 5", { 10, SD::Y_SB(y + dy) });
+        new wxStaticText(boxParameter, wxID_ANY, _L("на ступеньке") + " № 5", { PanelConfig::X, SD::Y_SB(y + dy) });
 
         wxStaticBox *boxCalculate = new wxStaticBox(boxParameter, wxID_ANY, _L("Рассчитать"), { x, y }, { w - 10, 60 });
 
         {
             y = 25;
 
-            new wxRadioButton(boxCalculate, wxID_ANY, "dY/dX", { 10, SD::Y_SB(y) });
+            new wxRadioButton(boxCalculate, wxID_ANY, "dY/dX", { PanelConfig::X, SD::Y_SB(y) });
             new wxRadioButton(boxCalculate, wxID_ANY, "dX/dY", { 100, SD::Y_SB(y) });
         }
 
@@ -84,12 +84,12 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
         { w, h - boxParameter->GetPosition().y - boxParameter->GetSize().y });
 
     {
-        new wxStaticText(boxBorder, wxID_ANY, "MIN", { 10, SD::Y_SB(y + dy) });
+        new wxStaticText(boxBorder, wxID_ANY, "MIN", { PanelConfig::X, SD::Y_SB(y + dy) });
         new wxTextCtrl(boxBorder, wxID_ANY, "3", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT });
 
         y += 25;
 
-        new wxStaticText(boxBorder, wxID_ANY, "MAX", { 10, SD::Y_SB(y + dy) });
+        new wxStaticText(boxBorder, wxID_ANY, "MAX", { PanelConfig::X, SD::Y_SB(y + dy) });
         new wxTextCtrl(boxBorder, wxID_ANY, "4", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT });
     }
 }

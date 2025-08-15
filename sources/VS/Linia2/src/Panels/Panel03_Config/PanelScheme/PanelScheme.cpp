@@ -59,9 +59,9 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int /*w*/, int h) :
 
         // IDC_COMBOMOD
         // IDC_BUTTON_LOADTST
-        comboTest = new ButtonsCombo(boxTest, "", { 5, SD::Y_SB(20) }, 100, choices, choices, 1);
+        comboTest = new ButtonsCombo(boxTest, "", { PanelConfig::X, SD::Y_SB(20) }, 100, choices, choices, 1);
 
-        btnLoad = new wxButton(boxTest, wxID_ANY, _L("Загрузить"), { 5, SD::Y_SB(50) }, { 100, 30 });
+        btnLoad = new wxButton(boxTest, wxID_ANY, _L("Загрузить"), { PanelConfig::X, SD::Y_SB(50) }, { 100, 30 });
 
         btnLoad->Hide();
     }
@@ -78,7 +78,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int /*w*/, int h) :
         int y = 20;
 
         // IDC_COMBO_KOMMUTATOR         m_iKommutator           OnSelchangeComboKommutator
-        new ButtonsCombo(boxCommutation, "Тип", { 10, SD::Y_SB(20)}, PanelConfig::WIDTH_COMBO, choices, choices, 1);
+        new ButtonsCombo(boxCommutation, "Тип", { PanelConfig::X, SD::Y_SB(20)}, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
         choices.clear();
         choices.Add(_L("канал") + " C");
