@@ -28,11 +28,7 @@ PanelScale::PanelScale(wxWindow* parent) :
     {
         // Включаем панель
 
-        int id = btnScale->GetId();
-
-        wxCommandEvent evt(wxEVT_TOGGLEBUTTON, id);
-        evt.SetInt(1);
-        this->ProcessWindowEvent(evt);
+        GF::SendCommandEvent(btnScale, wxEVT_TOGGLEBUTTON, 1);
     }
 }
 

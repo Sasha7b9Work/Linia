@@ -6,6 +6,7 @@
 #include "Panels/Panel03_Config/Panel03_Config.h"
 #include "Device/SettingsDevice.h"
 #include "Utils/StringUtils.h"
+#include "Utils/GlobalFunctions.h"
 
 
 PanelChannelB *PanelChannelB::self = nullptr;
@@ -119,19 +120,13 @@ void PanelChannelBS::Tune()
     {
         comboStep->SetLastSelection();
 
-        wxCommandEvent event(wxEVT_COMBOBOX, comboStep->GetId());
-        event.SetEventObject(comboStep);
-        event.SetInt(comboStep->GetCurrentSelection());
-        wxPostEvent(GetEventHandler(), event);
+        GF::SendCommandEvent(comboStep, wxEVT_COMBOBOX, comboStep->GetCurrentSelection());
     }
 
     {
         comboLimitRange->SetLastSelection();
 
-        wxCommandEvent event(wxEVT_COMBOBOX, comboLimitRange ->GetId());
-        event.SetEventObject(comboLimitRange);
-        event.SetInt(comboLimitRange->GetCurrentSelection());
-        wxPostEvent(GetEventHandler(), event);
+        GF::SendCommandEvent(comboLimitRange, wxEVT_COMBOBOX, comboLimitRange->GetCurrentSelection());
     }
 }
 
