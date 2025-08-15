@@ -79,6 +79,10 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
 
             new ButtonsCombo(boxOffset, "Полярность", { 10, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - 10, choices, choices, 1);
         }
+
+        wxPoint pos = boxOffset->GetPosition();
+        pos.y = boxGenerator->GetSize().y - boxOffset->GetSize().y - 8;
+        boxOffset->SetPosition(pos);
     }
 
     wxStaticBox *boxLimitation = new wxStaticBox(this, wxID_ANY, _L("Ограничение"),
