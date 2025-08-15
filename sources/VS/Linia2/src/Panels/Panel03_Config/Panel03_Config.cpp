@@ -82,13 +82,13 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
 
 void PanelConfig::OnEventToggleButton(wxCommandEvent &event)
 {
-    wxObject *object = event.GetEventObject();
+    int id = event.GetId();
 
-//    if (object == btnChannelC ||
-//        object == btnChannelB ||
-//        object == btnChannelS ||
-//        object == btnScheme ||
-//        object == btnCalculate)
+    if (id == btnChannelC->GetId() ||
+        id == btnChannelB->GetId() ||
+        id == btnChannelS->GetId() ||
+        id == btnScheme->GetId() ||
+        id == btnCalculate->GetId())
     {
         if (!event.IsChecked())
         {
