@@ -47,7 +47,7 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
         // IDC_COMBO_GNEZDO_B
         new ButtonsCombo(boxCommutation, "", { 10 + delta, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - delta, choices, choices, 1);
 
-        painterNecB = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_B.bmp");
+        painterNecB = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_B.bmp", new wxColour(241, 241, 241));
 
         choices.clear();
         choices.Add("C");
