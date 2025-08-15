@@ -2,19 +2,43 @@
 #pragma once
 #include "Controls/Buttons.h"
 
+
 // Кнопка с рисунком, по нажатию на которую открывается окно с другими выборами
 
 
-class ButtonsCombo : public wxButton
+class DrawingButton : public wxButton
+{
+public:
+    DrawingButton(wxWindow *parent, int id, const wxString &, const wxPoint &, const wxSize &, const wxString &name_file = "");
+
+private:
+
+    wxString file_name;
+
+    void OnPaint(wxPaintEvent &);
+};
+
+
+class ButtonsCombo : public DrawingButton
 {
     friend class ButtonPopup;
 
 public:
 
+    struct Type
+    {
+        enum E
+        {
+            Text,
+            Bitmap
+        };
+    };
+
     explicit ButtonsCombo(wxWindow *parent, const wxString &title, const wxPoint &pos, int width,
         const wxArrayString &labels,
         const wxArrayString &tooltips,
-        int buttons_in_row);                    // В каждом ряду будет расположено столько кнопок
+        int buttons_in_row,                     // В каждом ряду будет расположено столько кнопок
+        Type::E type = Type::Text);
 
     void SetCurrentSelection(int);
 

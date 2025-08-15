@@ -4,6 +4,25 @@
 #include "MainWindow.h"
 
 
+DrawingButton::DrawingButton(wxWindow *parent, int id, const wxString &label, const wxPoint &position, const wxSize &size, const wxString &_name_file) :
+    wxButton(parent, id, label, position, size),
+    file_name(_name_file)
+{
+    SetBackgroundStyle(wxBG_STYLE_PAINT); // Для избежания мерцания
+
+    Bind(wxEVT_PAINT, &DrawingButton::OnPaint, this);
+}
+
+
+void DrawingButton::OnPaint(wxPaintEvent &)
+{
+    if (file_name[0])
+    {
+
+    }
+}
+
+
 class ButtonPopup : public wxPopupTransientWindow
 {
 public:
@@ -107,13 +126,13 @@ private:
 
 
 ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos, int width,
-    const wxArrayString &_labels, const wxArrayString &_tooltips, int _buttons_in_row) :
-    wxButton(parent, wxID_ANY, _labels[0], pos, { width, TEXTCNTRL_HEIGHT + 3 }),
+    const wxArrayString &_labels, const wxArrayString &_tooltips, int _buttons_in_row, Type::E type) :
+    DrawingButton(parent, wxID_ANY, _labels[0], pos, { width, TEXTCNTRL_HEIGHT + 3 }, (type == Type::Bitmap) ? _title : wxString("")),
     current_choice(0)
 {
     Bind(wxEVT_BUTTON, &ButtonsCombo::OnButtonClicked, this);
 
-    title = _title;
+    title = (type == Type::Text) ? _title : wxString("");
 
     SetChoices(_labels, _tooltips);
 
