@@ -3,15 +3,18 @@
 #include "Controls/PainterBMP.h"
 
 
-PainterBMP::PainterBMP(wxWindow *parent, const wxPoint &position, const wxSize &size, const wxString &file_name) :
+PainterBMP::PainterBMP(wxWindow *parent, const wxPoint &position, const wxSize &size, const wxString &file_name, wxColour *transparent) :
     wxPanel(parent, wxID_ANY, position, size)
 {
     bitmap = Bitmap::Get(file_name);
 
-    wxColour transparenColor(241, 241, 241);
-    wxBitmap bmp = bitmap.GetBitmap();
-    bmp.SetMask(new wxMask(bitmap.GetBitmap(), transparenColor));
-    bitmap.GetBitmap() = bmp;
+    if (transparent)
+    {
+        wxBitmap bmp = bitmap.GetBitmap();
+        bmp.SetMask(new wxMask(bitmap.GetBitmap(), *transparent));
+        bitmap.GetBitmap() = bmp;
+        delete transparent;
+    }
 
     if (size == wxDefaultSize)
     {

@@ -10,7 +10,8 @@ class PainterBMP : public wxPanel
 {
 public:
 
-    PainterBMP(wxWindow *, const wxPoint &, const wxSize &, const wxString &file_name);
+    // Если transparentColour != nullptr, то пиксели данного цвета будут прозрачными
+    PainterBMP(wxWindow *, const wxPoint &, const wxSize &, const wxString &file_name, wxColour *transparentColour = nullptr);
 
     void SetEnabled(bool);
 

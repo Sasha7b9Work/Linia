@@ -40,7 +40,7 @@ PanelScheme::PanelScheme(wxPanel *parent, int x) :
         // IDC_COMBO_GNEZDO_C           m_iGnezdoC              OnSelchangeComboGnezdoC
         new ButtonsCombo(boxCommutation, "", { 10 + delta, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - delta, choices, choices, 1);
 
-        painterNecC = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_C.bmp");
+        painterNecC = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_C.bmp", new wxColour(241, 241, 241));
 
         y += 40;
 
