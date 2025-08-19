@@ -141,15 +141,15 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         painter = new PainterScheme(boxCommutation, { 25, SD::Y_SB(220) }, { 150, 130 });
 
         // IDC_COMBOCHECKKOL
-        comboC = new ComboJack(Channel::_C, painter, "", { x0 + dx, y - dy }, width, choices);
+        combo[ChC] = new ComboJack(Channel::_C, painter, "", {x0 + dx, y - dy}, width, choices);
 
         // IDC_COMBOCHECKBAZA
-        comboB = new ComboJack(Channel::_B, painter, "", { x0, y }, width, choices);
+        combo[ChB] = new ComboJack(Channel::_B, painter, "", {x0, y}, width, choices);
 
         // IDC_COMBOCHECKDOP
-        comboE = new ComboJack(Channel::_E, painter, "", { x0 + dx, y + dy }, width, choices);
+        combo[ChE] = new ComboJack(Channel::_E, painter, "", {x0 + dx, y + dy}, width, choices);
 
-        comboS = new ComboJack(Channel::_S, painter, "", { x0 + 2 * dx, y }, width, choices);
+        combo[ChS] = new ComboJack(Channel::_S, painter, "", {x0 + 2 * dx, y}, width, choices);
     }
 
     BuildPanel();
@@ -195,10 +195,10 @@ void PanelScheme::BuildPanel()
         _jack->SetVisibility();
     }
 
-    comboC->SetVisibility();
-    comboB->SetVisibility();
-    comboS->SetVisibility();
-    comboE->SetVisibility();
+    for (auto _combo : combo)
+    {
+        _combo->SetVisibility();
+    }
 
     painter->Build();
 }

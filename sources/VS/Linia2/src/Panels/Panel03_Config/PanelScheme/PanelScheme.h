@@ -47,11 +47,7 @@ private:
 
     ButtonsCombo *comboTest = nullptr;
 
-    ComboJack *comboC = nullptr,        //  /
-        *comboB = nullptr,              //  | Комбобоксы на месте для отрисовки
-        *comboE = nullptr,              //  |
-        *comboS = nullptr;              //  /
-
+    ComboJack *combo[Channel::Count];     // Комбобоксы на месте для отрисовки
     Jack *jack[Channel::Count];
 
     BmpButtonsCombo *comboCategory = nullptr;
