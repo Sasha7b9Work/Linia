@@ -115,14 +115,12 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         int width = 30;
 
-        y =  52;
-        int dy = 50;
-        int x0 = 20;
-        int dx = 70;
+        y = 53;
+        int dy = 52;
+        int x0 = 3;
+        int dx = 57;
 
         painter = new PainterScheme(boxCommutation, { 25, SD::Y_SB(220) }, { 150, 130 });
-
-        painter->Build();
 
         // IDC_COMBOCHECKKOL
         comboC = new ButtonsCombo(painter, "", { x0 + dx, y - dy }, width, choices, choices, 1);
@@ -132,7 +130,11 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         // IDC_COMBOCHECKDOP
         comboE = new ButtonsCombo(painter, "", { x0 + dx, y + dy }, width, choices, choices, 1);
+
+        comboS = new ButtonsCombo(painter, "", { x0 + 2 * dx, y }, width, choices, choices, 1);
     }
+
+    BuildPainter();
 }
 
 
@@ -155,4 +157,10 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
     {
         btnLoad->Show(comboTest->GetCurrentString() == "_USER");
     }
+}
+
+
+void PanelScheme::BuildPainter()
+{
+    painter->Build();
 }

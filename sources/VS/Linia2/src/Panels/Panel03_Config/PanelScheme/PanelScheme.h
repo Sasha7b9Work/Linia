@@ -15,6 +15,7 @@ private:
     ButtonsCombo *comboC = nullptr,
         *comboB = nullptr,
         *comboE = nullptr,
+        *comboS = nullptr,
         *comboTest = nullptr;
 
     wxButton *btnLoad = nullptr;
@@ -28,4 +29,7 @@ private:
 
     void OnEventButton(wxCommandEvent &);
     void OnEventComboBox(wxCommandEvent &);
+
+    // Нарисовать схему в соответствии с установками
+    void BuildPainter();
 };
