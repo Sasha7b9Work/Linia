@@ -213,7 +213,9 @@ void Jack::SetVisibility()
     {
         if (cat == Category::Diod ||
             cat == Category::BCE_N ||
-            cat == Category::BCE_P)
+            cat == Category::BCE_P ||
+            cat == Category::GDS_N ||
+            cat == Category::GDS_P)
         {
             visibility = false;
         }

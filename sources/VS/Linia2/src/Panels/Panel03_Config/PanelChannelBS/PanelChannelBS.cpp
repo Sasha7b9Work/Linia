@@ -200,12 +200,17 @@ bool PanelChannelB::IsEnabled() const
 
 bool PanelChannelS::IsEnabled() const
 {
-    if (Category::Current() == Category::Diod)
+    Category::E cat = Category::Current();
+
+    if (cat == Category::Diod)
     {
         return false;
     }
 
-    if (Category::Current() == Category::BCE_N || Category::Current() == Category::BCE_P)
+    if (cat == Category::BCE_N ||
+        cat == Category::BCE_P ||
+        cat == Category::GDS_N ||
+        cat == Category::GDS_P)
     {
         return false;
     }
