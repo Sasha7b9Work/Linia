@@ -120,7 +120,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         int x0 = 20;
         int dx = 70;
 
-        painter = new Painter(boxCommutation, { 25, 220 }, { 150, 130 });
+        painter = new Painter(boxCommutation, { 25, SD::Y_SB(220) }, { 150, 130 });
 
         // IDC_COMBOCHECKKOL
         comboC = new ButtonsCombo(painter, "", { x0 + dx, y - dy }, width, choices, choices, 1);
