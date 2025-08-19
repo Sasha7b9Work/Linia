@@ -69,7 +69,7 @@ void Painter::DrawBitmap(int x, int y, const wxBitmap &_bmp, const wxColor &alph
 
     if (alpha != wxNullColour)
     {
-        bmp.SetMask(new wxMask(bmp, alpha));
+        bmp.SetMask(new wxMask(_bmp, alpha));
     }
 
     gc->DrawBitmap(bmp, x, y, bmp.GetSize().x, bmp.GetSize().y);

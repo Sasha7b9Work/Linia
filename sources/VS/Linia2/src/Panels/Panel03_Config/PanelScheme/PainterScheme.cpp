@@ -20,5 +20,5 @@ void PainterScheme::Build()
 
 void PainterScheme::DrawDiode()
 {
-    DrawBitmap(10, 10, Bitmap::Get("sch/diod2.bmp").GetBitmap(), { 241, 241, 214 });
+    DrawBitmap(10, 10, Bitmap::Get("sch/diod2.bmp").GetBitmap(), { 241, 241, 241 });
 }
