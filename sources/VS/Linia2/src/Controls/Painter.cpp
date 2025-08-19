@@ -149,17 +149,16 @@ void PainterRect::SetColor(const Color &_color)
 }
 
 
-PainterBMP::PainterBMP(wxWindow *parent, const wxPoint &position, const wxSize &size, const wxString &file_name, wxColour *transparent) :
+PainterBMP::PainterBMP(wxWindow *parent, const wxPoint &position, const wxSize &size, const wxString &file_name, const wxColour &alpha) :
     wxPanel(parent, wxID_ANY, position, size)
 {
     bitmap = Bitmap::Get(file_name);
 
-    if (transparent)
+    if (alpha != wxNullColour)
     {
         wxBitmap bmp = bitmap.GetBitmap();
-        bmp.SetMask(new wxMask(bitmap.GetBitmap(), *transparent));
+        bmp.SetMask(new wxMask(bitmap.GetBitmap(), alpha));
         bitmap.GetBitmap() = bmp;
-        delete transparent;
     }
 
     if (size == wxDefaultSize)

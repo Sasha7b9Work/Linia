@@ -14,7 +14,7 @@ PanelScheme *PanelScheme::self = nullptr;
 Jack::Jack(wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString &choices) :
     wxPanel(parent, wxID_ANY, position, { 180, 50 })
 {
-    painterBMP = new PainterBMP(this, { 10, 0 }, wxDefaultSize, file_jack_bmp, new wxColour(241, 241, 241));
+    painterBMP = new PainterBMP(this, { 10, 0 }, wxDefaultSize, file_jack_bmp, { 241, 241, 241 });
 
     combo = new ButtonsCombo(this, "", { 60, 0 }, PanelConfig::WIDTH_COMBO - 60, choices, choices, 1);
 }
