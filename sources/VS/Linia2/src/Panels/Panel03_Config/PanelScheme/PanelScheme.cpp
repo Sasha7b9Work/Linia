@@ -110,7 +110,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         y += dy;
 
-        painterJackE = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_E.bmp", new wxColour(241, 241, 241));
+        jackE = new Jack(boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_E.bmp", choices);
 
         choices.clear();
         choices.Add("C");

@@ -39,7 +39,7 @@ private:
     Jack *jackB = nullptr;
     Jack *jackC = nullptr;
     Jack *jackS = nullptr;
-    PainterBMP *painterJackE = nullptr;
+    Jack *jackE = nullptr;
 
     BmpButtonsCombo *comboCategory = nullptr;
 
