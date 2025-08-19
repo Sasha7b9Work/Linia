@@ -2,3 +2,8 @@
 #include "defines.h"
 #include "Device/Tests/Tests.h"
 
+
+void Test::Load(pchar /*file_name*/)
+{
+    // CLineDlg::ExtractParamFromTst()
+}
