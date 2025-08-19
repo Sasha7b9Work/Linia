@@ -17,13 +17,13 @@ Painter::Painter(wxWindow *parent, const wxPoint &position, const wxSize &_size)
 }
 
 
-void Painter::BeginPaint()
+void Painter::BeginPaint(const wxColor &background)
 {
     dc.SelectObject(*bitmap);
 
     gc = wxGraphicsContext::Create(dc);
 
-    FillRectangle(0, 0, size.x, size.y, GetBackgroundColour());
+    FillRectangle(0, 0, size.x, size.y, background == wxNullColour ? GetBackgroundColour() : background);
 
 //    DrawRectangle(0, 0, size.x - 1, size.y - 1, *wxBLACK);
 }

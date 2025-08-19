@@ -135,7 +135,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         int x0 = 3;
         int dx = 57;
 
-        painter = new PainterScheme(boxCommutation, { 15, SD::Y_SB(220) }, { 170, 130 });
+        painter = new PainterScheme(boxCommutation, { 15, SD::Y_SB(220) }, { 170, 130 }, boxCommutation->GetBackgroundColour());
 
         int width = 45;
 

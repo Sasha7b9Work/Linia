@@ -7,7 +7,7 @@
 
 void PainterScheme::Build()
 {
-    BeginPaint();
+    BeginPaint(colorBackground);
 
     DrawElement();
 
