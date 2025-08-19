@@ -158,7 +158,6 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
     }
     else if (id == comboCategory->GetId())
     {
-        int i = 0;
     }
 }
 
