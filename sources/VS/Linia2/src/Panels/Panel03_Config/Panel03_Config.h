@@ -1,7 +1,6 @@
 ﻿// 2025/6/1 17:20:51 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Panels/Panel.h"
-#include "Controls/PainterBMP.h"
 #include "Controls/ButtonsCombo.h"
 
 

@@ -1,13 +1,12 @@
 ﻿// 2023/09/02 18:48:55 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Controls/Bitmap.h"
 
 
 struct Color;
 
 
 // Тупо заливает на себе прямоугольник
-
-
 class PainterRect : public wxPanel
 {
 public:
@@ -22,4 +21,21 @@ public:
 private:
 
     wxColour color;
+};
+
+
+
+// Отображает BMP
+class PainterBMP : public wxPanel
+{
+public:
+
+    // Если transparentColour != nullptr, то пиксели данного цвета будут прозрачными
+    PainterBMP(wxWindow *, const wxPoint &, const wxSize &, const wxString &file_name, wxColour *transparentColour = nullptr);
+
+private:
+
+    Bitmap bitmap;
+
+    void OnEventPaint(wxPaintEvent &);
 };

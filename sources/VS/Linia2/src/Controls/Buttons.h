@@ -1,6 +1,6 @@
 // 2023/09/02 11:37:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Controls/PainterRect.h"
+#include "Controls/Painter.h"
 #include "Controls/Bitmap.h"
 
 

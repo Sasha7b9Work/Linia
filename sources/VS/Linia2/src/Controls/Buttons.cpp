@@ -1,7 +1,7 @@
 // 2023/09/02 11:37:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Controls/Buttons.h"
-#include "Controls/PainterRect.h"
+#include "Controls/Painter.h"
 #include "Utils/GlobalFunctions.h"
 #include "Controls/Bitmap.h"
 #include "Utils/SystemDepend.h"
