@@ -10,6 +10,8 @@ class ComboJack : public ButtonsCombo
 {
 public:
     ComboJack(Channel::E, wxWindow *parent, const wxString &title, const wxPoint &pos, int width, const wxArrayString &labels);
+    // Установить видимость или невидимость в зависимости от текущих установок
+    void SetVisibility();
 private:
     Channel::E channel;
 };

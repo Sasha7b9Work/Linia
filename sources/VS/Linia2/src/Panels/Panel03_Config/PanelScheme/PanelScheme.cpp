@@ -195,45 +195,22 @@ void PanelScheme::BuildPanel()
     jackS->SetVisibility();
     jackE->SetVisibility();
 
+    comboC->SetVisibility();
+    comboB->SetVisibility();
+    comboS->SetVisibility();
+    comboE->SetVisibility();
+
     painter->Build();
 }
 
 
 void Jack::SetVisibility()
 {
-    bool visibility = true;
+    Show(Channel(channel).IsVisible());
+}
 
-    Category::E cat = Category::Current();
 
-    if (channel == Channel::_C)
-    {
-
-    }
-
-    if (channel == Channel::_B)
-    {
-        if (cat == Category::Diod)
-        {
-            visibility = false;
-        }
-    }
-
-    if (channel == Channel::_S)
-    {
-        if (cat == Category::Diod ||
-            cat == Category::BCE_N ||
-            cat == Category::BCE_P ||
-            cat == Category::GDS_N ||
-            cat == Category::GDS_P)
-        {
-            visibility = false;
-        }
-    }
-
-    if (channel == Channel::_E)
-    {
-
-    }
-
-    Show(visibility);
+void ComboJack::SetVisibility()
+{
+    Show(Channel(channel).IsVisible());
 }

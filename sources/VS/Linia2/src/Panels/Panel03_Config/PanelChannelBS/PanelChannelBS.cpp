@@ -189,31 +189,11 @@ void PanelChannelBS::OnEventComboBox(wxCommandEvent &event)
 
 bool PanelChannelB::IsEnabled() const
 {
-    if (Category::Current() == Category::Diod)
-    {
-        return false;
-    }
-
-    return true;
+    return Channel(Channel::_B).IsVisible();
 }
 
 
 bool PanelChannelS::IsEnabled() const
 {
-    Category::E cat = Category::Current();
-
-    if (cat == Category::Diod)
-    {
-        return false;
-    }
-
-    if (cat == Category::BCE_N ||
-        cat == Category::BCE_P ||
-        cat == Category::GDS_N ||
-        cat == Category::GDS_P)
-    {
-        return false;
-    }
-
-    return true;
+    return Channel(Channel::_S).IsVisible();
 }

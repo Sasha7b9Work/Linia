@@ -10,8 +10,38 @@ Category::E Category::Current()
 }
 
 
+bool Channel::IsVisible() const
+{
+    Category::E cat = Category::Current();
+
+    if (value == Channel::_B)
+    {
+        if (cat == Category::Diod)
+        {
+            return false;
+        }
+    }
+
+    if (value == Channel::_S)
+    {
+        if (cat == Category::Diod ||
+            cat == Category::BCE_N ||
+            cat == Category::BCE_P ||
+            cat == Category::GDS_N ||
+            cat == Category::GDS_P)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
 void Test::Load(pchar /*file_name*/)
 {
     // CLineDlg::ExtractParamFromTst()
     // CLineDlg::SaveParamToTst(int where) 
 }
+
+

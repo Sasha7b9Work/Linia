@@ -34,6 +34,12 @@ struct Channel
         _E,      // Эмиттер - общий
         Count
     };
+
+    Channel(E v) : value(v) { }
+
+    E value;
+
+    bool IsVisible() const;
 };
 
 
