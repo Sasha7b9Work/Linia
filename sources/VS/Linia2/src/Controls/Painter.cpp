@@ -21,25 +21,15 @@ void Painter::Draw()
 {
     BeginPaint();
 
-    SetColor(GetBackgroundColour());
+    FillRectangle(0, 0, size.x, size.y, GetBackgroundColour());
 
-    FillRectangle(0, 0, size.x, size.y);
+    DrawRectangle(0, 0, size.x - 1, size.y - 1, *wxBLACK);
 
-    SetColor(*wxBLACK);
+    FillRectangle(10, 10, 50, 50, *wxWHITE);
 
-    DrawRectangle(0, 0, size.x - 1, size.y - 1);
+    FillCircle(50, 50, 50, *wxYELLOW);
 
-    SetColor(*wxWHITE);
-
-    FillRectangle(10, 10, 50, 50);
-
-    SetColor(*wxYELLOW);
-
-    FillCircle(50, 50, 50);
-
-    SetColor(*wxRED);
-
-    DrawCircle(50, 100, 27);
+    DrawCircle(50, 100, 27, *wxRED);
 
     EndPaint();
 
@@ -61,38 +51,52 @@ void Painter::EndPaint()
 }
 
 
-void Painter::SetColor(const wxColor &_color)
+void Painter::FillRectangle(int x, int y, int w, int h, const wxColor &_color)
 {
-    color = _color;
-}
+    if (_color != wxNullColour)
+    {
+        color = _color;
+    }
 
-
-void Painter::FillRectangle(int x, int y, int w, int h)
-{
     gc->SetBrush(color);
     gc->SetPen(color);
     gc->DrawRectangle(x, y, w, h);
 }
 
 
-void Painter::DrawRectangle(int x, int y, int w, int h)
+void Painter::DrawRectangle(int x, int y, int w, int h, const wxColor &_color)
 {
+    if (_color != wxNullColour)
+    {
+        color = _color;
+    }
+
     gc->SetPen(color);
     gc->SetBrush(wxNullBrush);
     gc->DrawRectangle(x, y, w, h);
 }
 
 
-void Painter::FillCircle(int x, int y, int r)
+void Painter::FillCircle(int x, int y, int r, const wxColor &_color)
 {
+    if (_color != wxNullColour)
+    {
+        color = _color;
+    }
+
     gc->SetBrush(color);
     gc->SetPen(color);
     gc->DrawEllipse(x, y, r, r);
 }
 
 
-void Painter::DrawCircle(int x, int y, int r)
+void Painter::DrawCircle(int x, int y, int r, const wxColor &_color)
 {
+    if (_color != wxNullColour)
+    {
+        color = _color;
+    }
+
     gc->SetBrush(wxNullBrush);
     gc->SetPen(color);
     gc->DrawEllipse(x, y, r, r);
