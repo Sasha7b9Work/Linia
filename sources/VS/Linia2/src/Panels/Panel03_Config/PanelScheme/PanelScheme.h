@@ -11,10 +11,12 @@ class ComboJack : public ButtonsCombo
 {
 public:
     ComboJack(Channel::E, wxWindow *parent, const wxString &title, const wxPoint &pos, int width, const wxArrayString &labels);
-    // Установить видимость или невидимость в зависимости от текущих установок
-    void SetVisibility();
+    // Настроить текущее состояние в зависимости от текущих установок
+    void TuneState();
 private:
     Channel::E channel;
+    // Установить видимость или невидимость в зависимости от текущих установок
+    void SetVisibility();
 };
 
 
@@ -41,6 +43,7 @@ private:
 class PanelScheme : public wxPanel
 {
     friend struct Category;
+    friend struct TypeCommutation;
 
 public:
 
@@ -52,10 +55,11 @@ private:
 
     wxButton *btnLoad = nullptr;
 
-    ButtonsCombo *comboTest = nullptr;
+    ButtonsCombo *comboTest = nullptr,
+        *comboCommutation = nullptr;        // IDC_COMBO_KOMMUTATOR         m_iKommutator           OnSelchangeComboKommutator
 
-    ComboJack *combo[Channel::Count];     // Комбобоксы на месте для отрисовки
-    Jack *jack[Channel::Count];
+    ComboJack *combo[Channel::Count];       // Комбобоксы на схеме. Активны при внешней коммутации  IDC_COMBO_GNEZDO_C
+    Jack *jack[Channel::Count];             // Активны при внутренней коммутации                    IDC_COMBOCHECKKOL
 
     BmpButtonsCombo *comboCategory = nullptr;
 

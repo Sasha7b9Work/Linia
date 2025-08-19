@@ -101,8 +101,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         int y = 20;
 
-        // IDC_COMBO_KOMMUTATOR         m_iKommutator           OnSelchangeComboKommutator
-        new ButtonsCombo(boxCommutation, "Тип", { PanelConfig::X, SD::Y_SB(20)}, PanelConfig::WIDTH_COMBO, choices, choices, 1);
+        comboCommutation = new ButtonsCombo(boxCommutation, "Тип", { PanelConfig::X, SD::Y_SB(20)}, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
         choices.clear();
         choices.Add(_L("канал") + " C");
@@ -178,7 +177,8 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
     {
         btnLoad->Show(comboTest->GetCurrentString() == "_USER");
     }
-    else if (id == comboCategory->GetId())
+    else if (id == comboCategory->GetId() ||
+        id == comboCommutation->GetId())
     {
         BuildPanel();
     }
@@ -197,10 +197,18 @@ void PanelScheme::BuildPanel()
 
     for (auto _combo : combo)
     {
-        _combo->SetVisibility();
+        _combo->TuneState();
     }
 
     painter->Build();
+}
+
+
+void ComboJack::TuneState()
+{
+    SetVisibility();
+
+    Enable(!TypeCommutation::IsInternal());
 }
 
 
@@ -209,6 +217,11 @@ void Jack::TuneState()
     SetChoices();
 
     SetVisibility();
+
+    if (combo)
+    {
+        combo->Enable(TypeCommutation::IsInternal());
+    }
 }
 
 

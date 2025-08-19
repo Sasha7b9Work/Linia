@@ -63,6 +63,12 @@ wxString StateJack::Name(E v)
 }
 
 
+bool TypeCommutation::IsInternal()
+{
+    return PanelScheme::self->comboCommutation->GetCurrentSelection() == 0;
+}
+
+
 void Test::Load(pchar /*file_name*/)
 {
     // CLineDlg::ExtractParamFromTst()

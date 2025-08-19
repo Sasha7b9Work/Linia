@@ -69,15 +69,17 @@ struct StateJack
 };
 
 
-// Тип коммутации
+// Тип коммутации       CLineDlg::ShowGnezdoKommutator()
 struct TypeCommutation
 {
     enum E
     {
-        Ext,            // Внешняя
         Int,            // Внутренняя
+        Ext,            // Внешняя
         Count
     };
+
+    static bool IsInternal();
 };
 
 
