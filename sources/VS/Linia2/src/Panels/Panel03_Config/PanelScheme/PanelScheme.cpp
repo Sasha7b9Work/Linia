@@ -94,14 +94,9 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         choices.Add(_L("канал") + " C");
         choices.Add(_L("канал") + " B");
 
-        int delta = 60;
-
         y += 40;
 
-        // IDC_COMBO_GNEZDO_C           m_iGnezdoC              OnSelchangeComboGnezdoC
-        new ButtonsCombo(boxCommutation, "", { 10 + delta, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - delta, choices, choices, 1);
-
-        painterJackC = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_C.bmp", new wxColour(241, 241, 241));
+        jackC = new Jack(boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_C.bmp", choices);
 
         y += 40;
 

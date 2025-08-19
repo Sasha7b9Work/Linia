@@ -28,16 +28,16 @@ public:
 
 private:
 
-    ButtonsCombo *comboC = nullptr,
-        *comboB = nullptr,
-        *comboE = nullptr,
-        *comboS = nullptr,
+    ButtonsCombo *comboC = nullptr,     //  /
+        *comboB = nullptr,              //  | Комбобоксы на месте для отрисовки
+        *comboE = nullptr,              //  |
+        *comboS = nullptr,              //  /
         *comboTest = nullptr;
 
     wxButton *btnLoad = nullptr;
 
     Jack *jackB = nullptr;
-    PainterBMP *painterJackC = nullptr;
+    Jack *jackC = nullptr;
     PainterBMP *painterJackS = nullptr;
     PainterBMP *painterJackE = nullptr;
 
