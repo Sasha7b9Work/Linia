@@ -29,6 +29,7 @@ struct Category
 #define ChS Channel::_S
 #define ChE Channel::_E
 
+
 struct Channel
 {
     enum E
@@ -65,6 +66,18 @@ struct StateJack
     static void PrepareArray(wxArrayString &, E, E);
 
     static wxString Name(E);
+};
+
+
+// Тип коммутации
+struct TypeCommutation
+{
+    enum E
+    {
+        Ext,            // Внешняя
+        Int,            // Внутренняя
+        Count
+    };
 };
 
 
