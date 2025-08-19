@@ -38,11 +38,19 @@ bool Channel::IsVisible() const
 }
 
 
-void StateJack::PrepareArray(wxArrayString &arr, E v1, E v2)
+void StateJack::PrepareArray(wxArrayString &arr, E v1, E v2, E v3, E v4)
 {
     arr.Clear();
     arr.push_back(Name(v1));
     arr.push_back(Name(v2));
+    if (v3 != Count)
+    {
+        arr.push_back(Name(v3));
+    }
+    if (v4 != Count)
+    {
+        arr.push_back(Name(v4));
+    }
 }
 
 

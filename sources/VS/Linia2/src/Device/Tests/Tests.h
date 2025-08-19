@@ -63,7 +63,7 @@ struct StateJack
         Count
     };
 
-    static void PrepareArray(wxArrayString &, E, E);
+    static void PrepareArray(wxArrayString &, E, E, E = Count, E = Count);
 
     static wxString Name(E);
 };

@@ -231,10 +231,17 @@ void ComboJack::SetChoices()
 {
     Category::E cat = Category::Current();
 
+    wxArrayString choices;
+
     if (cat == Category::Diod)
     {
-        wxArrayString choices;
         StateJack::PrepareArray(choices, StateJack::_C, StateJack::_E);
+        ButtonsCombo::SetChoices(choices, choices);
+        SetChoice(StateJack::_C);
+    }
+    else
+    {
+        StateJack::PrepareArray(choices, StateJack::_C, StateJack::_B, StateJack::_E, StateJack::Break);
         ButtonsCombo::SetChoices(choices, choices);
         SetChoice(StateJack::_C);
     }
