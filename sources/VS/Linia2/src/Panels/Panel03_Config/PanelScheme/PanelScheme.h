@@ -31,6 +31,8 @@ private:
     Channel::E channel = Channel::Count;
     // Установить видимость или невидимость в зависимости от текущих установок
     void SetVisibility();
+
+    void SetChoices();
 };
 
 

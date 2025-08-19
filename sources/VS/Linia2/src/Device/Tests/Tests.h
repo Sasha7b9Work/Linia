@@ -48,6 +48,26 @@ struct Channel
 };
 
 
+struct StateJack
+{
+    enum E
+    {
+        _C,
+        _B,
+        _S,
+        _E,
+        General,        // Общий
+        General_1k,     // Общий 1к
+        Break,          // Обрыв
+        Count
+    };
+
+    static void PrepareArray(wxArrayString &, E, E);
+
+    static wxString Name(E);
+};
+
+
 class Test
 {
     void Load(pchar file_name);

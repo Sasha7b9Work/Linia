@@ -206,7 +206,25 @@ void PanelScheme::BuildPanel()
 
 void Jack::TuneState()
 {
+    SetChoices();
+
     SetVisibility();
+}
+
+
+void Jack::SetChoices()
+{
+    Category::E cat = Category::Current();
+
+    if (channel == Channel::_C)
+    {
+        if (cat == Category::Diod)
+        {
+            wxArrayString choices;
+            StateJack::PrepareArray(choices, StateJack::General, StateJack::_C);
+            combo->SetChoices(choices, choices);
+        }
+    }
 }
 
 

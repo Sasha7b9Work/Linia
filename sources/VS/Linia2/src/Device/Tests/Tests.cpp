@@ -38,6 +38,31 @@ bool Channel::IsVisible() const
 }
 
 
+void StateJack::PrepareArray(wxArrayString &arr, E v1, E v2)
+{
+    arr.Clear();
+    arr.push_back(Name(v1));
+    arr.push_back(Name(v2));
+}
+
+
+wxString StateJack::Name(E v)
+{
+    static const pchar names[Count] =
+    {
+        "C",
+        "B",
+        "S",
+        "E",
+        "общий",
+        "общий 1к",
+        "обрыв"
+    };
+
+    return names[v];
+}
+
+
 void Test::Load(pchar /*file_name*/)
 {
     // CLineDlg::ExtractParamFromTst()
