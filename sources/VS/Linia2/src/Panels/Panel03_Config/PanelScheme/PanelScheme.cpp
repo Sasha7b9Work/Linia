@@ -221,7 +221,7 @@ void Jack::SetChoices()
         if (cat == Category::Diod)
         {
             wxArrayString choices;
-            StateJack::PrepareArray(choices, StateJack::General, StateJack::_C);
+            StateJack::PrepareArray(choices, StateJack::Break, StateJack::_C);
             combo->SetChoices(choices, choices);
             SetChoice(StateJack::_C);
         }
