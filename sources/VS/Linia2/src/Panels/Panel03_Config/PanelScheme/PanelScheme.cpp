@@ -5,7 +5,6 @@
 #include "Panels/Panel03_Config/Panel03_Config.h"
 #include "Utils/SystemDepend.h"
 #include "Panels/Panel03_Config/PanelScheme/WindowLibraryTests.h"
-#include "Controls/BmpButtonsCombo.h"
 #include "Controls/Bitmap.h"
 
 
@@ -41,16 +40,13 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
             "Полевой или МОП транзистор PMOS(четырёхполюсный)"
         };
 
-        new BmpButtonsCombo(boxCategory, "Категория", { 18, SD::Y_SB(25) }, { 32, 42 }, files, tooltips, 0, 4);
+        comboCategory = new BmpButtonsCombo(boxCategory, "Категория", { 18, SD::Y_SB(25) }, { 32, 42 }, files, tooltips, 0, 4);
     }
 
     (void)boxCategory;
 
     wxStaticBox *boxTest = new wxStaticBox(this, wxID_ANY, _L("Тест"), { x + width_category + 5, 0 },
         { w - width_category - 5, boxCategory->GetSize().y });
-
-    Bind(wxEVT_BUTTON, &PanelScheme::OnEventButton, this);
-    Bind(wxEVT_COMBOBOX, &PanelScheme::OnEventComboBox, this);
 
     {
         wxArrayString choices;
@@ -135,6 +131,9 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
     }
 
     BuildPainter();
+
+    Bind(wxEVT_BUTTON, &PanelScheme::OnEventButton, this);
+    Bind(wxEVT_COMBOBOX, &PanelScheme::OnEventComboBox, this);
 }
 
 
@@ -156,6 +155,10 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
     if (id == comboTest->GetId())
     {
         btnLoad->Show(comboTest->GetCurrentString() == "_USER");
+    }
+    else if (id == comboCategory->GetId())
+    {
+        int i = 0;
     }
 }
 

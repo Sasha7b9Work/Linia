@@ -2,6 +2,7 @@
 #pragma once
 #include "Controls/ButtonsCombo.h"
 #include "Panels/Panel03_Config/PanelScheme/PainterScheme.h"
+#include "Controls/BmpButtonsCombo.h"
 
 
 class PanelScheme : public wxPanel
@@ -24,6 +25,8 @@ private:
     PainterBMP *painterJackC = nullptr;
     PainterBMP *painterJackS = nullptr;
     PainterBMP *painterJackE = nullptr;
+
+    BmpButtonsCombo *comboCategory = nullptr;
 
     PainterScheme *painter = nullptr;                 // Здесь будет нарисована схема
 
