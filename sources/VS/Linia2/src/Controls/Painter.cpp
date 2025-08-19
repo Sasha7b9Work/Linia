@@ -17,31 +17,15 @@ Painter::Painter(wxWindow *parent, const wxPoint &position, const wxSize &_size)
 }
 
 
-void Painter::Draw()
-{
-    BeginPaint();
-
-    FillRectangle(0, 0, size.x, size.y, GetBackgroundColour());
-
-    DrawRectangle(0, 0, size.x - 1, size.y - 1, *wxBLACK);
-
-    FillRectangle(10, 10, 50, 50, *wxWHITE);
-
-    FillCircle(50, 50, 50, *wxYELLOW);
-
-    DrawCircle(50, 100, 27, *wxRED);
-
-    EndPaint();
-
-    Refresh();
-}
-
-
 void Painter::BeginPaint()
 {
     dc.SelectObject(*bitmap);
 
     gc = wxGraphicsContext::Create(dc);
+
+    FillRectangle(0, 0, size.x, size.y, GetBackgroundColour());
+
+    DrawRectangle(0, 0, size.x - 1, size.y - 1, *wxBLACK);
 }
 
 

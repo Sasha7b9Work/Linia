@@ -14,8 +14,6 @@ public:
 
     virtual void OnPaint(wxPaintEvent &);
 
-    void Draw();
-
     void BeginPaint();
     void EndPaint();
     void FillCircle(int x, int y, int r, const wxColor & = wxNullColour);
