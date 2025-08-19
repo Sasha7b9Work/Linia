@@ -63,8 +63,15 @@ void Painter::DrawRectangle(int x, int y, int w, int h, const wxColor &_color)
 }
 
 
-void Painter::DrawBitmap(int x, int y, const wxBitmap &bmp)
+void Painter::DrawBitmap(int x, int y, const wxBitmap &_bmp, const wxColor &alpha)
 {
+    wxBitmap bmp = _bmp;
+
+    if (alpha != wxNullColour)
+    {
+        bmp.SetMask(new wxMask(bmp, alpha));
+    }
+
     gc->DrawBitmap(bmp, x, y, bmp.GetSize().x, bmp.GetSize().y);
 }
 
