@@ -110,21 +110,21 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         y += 40;
 
-        jackC = new Jack(Channel::_C, boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_C.bmp", &choices);
+        jack[ChC] = new Jack(Channel::_C, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_C.bmp", &choices);
 
         int dy = 35;
 
         y += dy;
 
-        jackB = new Jack(Channel::_B, boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_B.bmp", &choices);
+        jack[ChB] = new Jack(Channel::_B, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_B.bmp", &choices);
 
         y += dy;
 
-        jackS = new Jack(Channel::_S, boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_S.bmp", &choices);
+        jack[ChS] = new Jack(Channel::_S, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_S.bmp", &choices);
 
         y += dy;
 
-        jackE = new Jack(Channel::_E, boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_E.bmp");
+        jack[ChE] = new Jack(Channel::_E, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_E.bmp");
 
         choices.clear();
         choices.Add("C");
@@ -190,10 +190,10 @@ void PanelScheme::BuildPanel()
     PanelConfig::self->btnChannelB->Enable(PanelChannelB::self->IsEnabled());
     PanelConfig::self->btnChannelS->Enable(PanelChannelS::self->IsEnabled());
 
-    jackC->SetVisibility();
-    jackB->SetVisibility();
-    jackS->SetVisibility();
-    jackE->SetVisibility();
+    for (auto _jack : jack)
+    {
+        _jack->SetVisibility();
+    }
 
     comboC->SetVisibility();
     comboB->SetVisibility();

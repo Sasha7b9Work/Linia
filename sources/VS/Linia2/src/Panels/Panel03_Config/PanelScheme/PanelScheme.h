@@ -52,10 +52,7 @@ private:
         *comboE = nullptr,              //  |
         *comboS = nullptr;              //  /
 
-    Jack *jackB = nullptr,
-        *jackC = nullptr,
-        *jackS = nullptr,
-        *jackE = nullptr;
+    Jack *jack[Channel::Count];
 
     BmpButtonsCombo *comboCategory = nullptr;
 

@@ -24,6 +24,11 @@ struct Category
 };
 
 
+#define ChC Channel::_C
+#define ChB Channel::_B
+#define ChS Channel::_S
+#define ChE Channel::_E
+
 struct Channel
 {
     enum E
