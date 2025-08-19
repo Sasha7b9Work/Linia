@@ -31,5 +31,5 @@ void PainterScheme::DrawElement()
         "sch/GDBS_P.bmp"
     };
 
-    DrawBitmap(40, 30, Bitmap::Get(files[Category::Current()]).GetBitmap(), {241, 241, 241});
+    DrawBitmap(50, 33, Bitmap::Get(files[Category::Current()]).GetBitmap(), {241, 241, 241});
 }

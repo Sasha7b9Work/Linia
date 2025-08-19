@@ -22,7 +22,7 @@ ComboJack::ComboJack(Channel::E ch, wxWindow *parent, const wxString &title, con
 
 
 FullJack::FullJack(Channel::E ch, wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString *choices) :
-    wxPanel(parent, wxID_ANY, position, { 180, 50 }),
+    wxPanel(parent, wxID_ANY, position, { 180, 30 }),
     channel(ch)
 {
     painterBMP = new PainterBMP(this, { 10, 0 }, wxDefaultSize, file_jack_bmp, { 241, 241, 241 });
@@ -130,14 +130,14 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         choices.Add("B");
         choices.Add("E");
 
-        int width = 30;
-
         y = 53;
         dy = 52;
         int x0 = 3;
         int dx = 57;
 
-        painter = new PainterScheme(boxCommutation, { 25, SD::Y_SB(220) }, { 150, 130 });
+        painter = new PainterScheme(boxCommutation, { 15, SD::Y_SB(220) }, { 170, 130 });
+
+        int width = 45;
 
         // IDC_COMBOCHECKKOL
         combo[ChC] = new ComboJack(Channel::_C, painter, "", {x0 + dx, y - dy}, width, choices);
