@@ -7,6 +7,15 @@
 #include "Panels/Panel03_Config/PanelScheme/WindowLibraryTests.h"
 #include "Controls/BmpButtonsCombo.h"
 #include "Controls/Bitmap.h"
+#include "Controls/Painter.h"
+
+
+class PainterScheme : public Painter
+{
+public:
+    PainterScheme(wxWindow *parent, const wxPoint &pos, const wxSize &size) :
+        Painter(parent, pos, size) { }
+};
 
 
 PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
@@ -120,7 +129,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         int x0 = 20;
         int dx = 70;
 
-        painter = new Painter(boxCommutation, { 25, SD::Y_SB(220) }, { 150, 130 });
+        painter = new PainterScheme(boxCommutation, { 25, SD::Y_SB(220) }, { 150, 130 });
 
         painter->Draw();
 
