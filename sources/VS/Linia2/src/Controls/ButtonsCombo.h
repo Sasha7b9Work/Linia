@@ -46,6 +46,8 @@ public:
 
     void SetChoices(const wxArrayString &labels, const wxArrayString &tooltips);
 
+    void SetChoice(const wxString &);
+
     int GetCurrentSelection() const;
 
     wxString GetCurrentString() const;

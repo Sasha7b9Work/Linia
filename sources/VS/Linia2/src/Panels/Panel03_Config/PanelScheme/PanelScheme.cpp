@@ -223,8 +223,15 @@ void Jack::SetChoices()
             wxArrayString choices;
             StateJack::PrepareArray(choices, StateJack::General, StateJack::_C);
             combo->SetChoices(choices, choices);
+            SetChoice(StateJack::_C);
         }
     }
+}
+
+
+void Jack::SetChoice(StateJack::E state)
+{
+    combo->SetChoice(StateJack::Name(state));
 }
 
 

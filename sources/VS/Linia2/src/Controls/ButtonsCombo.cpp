@@ -238,6 +238,19 @@ void ButtonsCombo::SetChoices(const wxArrayString &choices, const wxArrayString 
 }
 
 
+void ButtonsCombo::SetChoice(const wxString &choice)
+{
+    for (uint i = 0; i < labels.size(); i++)
+    {
+        if (labels[i] == choice)
+        {
+            SetCurrentSelection((int)i);
+            break;
+        }
+    }
+}
+
+
 int ButtonsCombo::NumEmptyes() const
 {
     int counter = 0;

@@ -33,6 +33,8 @@ private:
     void SetVisibility();
 
     void SetChoices();
+
+    void SetChoice(StateJack::E);
 };
 
 
