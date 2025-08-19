@@ -38,5 +38,5 @@ private:
     void OnEventComboBox(wxCommandEvent &);
 
     // Нарисовать схему в соответствии с установками
-    void BuildPainter();
+    void BuildPanel();
 };

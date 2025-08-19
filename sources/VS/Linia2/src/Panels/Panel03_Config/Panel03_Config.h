@@ -6,6 +6,8 @@
 
 class PanelConfig : public Panel
 {
+    friend class PanelScheme;
+
 public:
 
     static const int HEIGHT = 500;

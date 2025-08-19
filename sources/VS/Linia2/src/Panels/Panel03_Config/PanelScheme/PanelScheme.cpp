@@ -6,6 +6,7 @@
 #include "Utils/SystemDepend.h"
 #include "Panels/Panel03_Config/PanelScheme/WindowLibraryTests.h"
 #include "Controls/Bitmap.h"
+#include "Device/Tests/Tests.h"
 
 
 PanelScheme *PanelScheme::self = nullptr;
@@ -37,12 +38,12 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
             "Тиристор",
             "Биполярный NPN-транзистор (трёхполюсный)",
             "Биполярный PNP-транзистор (трёхполюсный)",
-            "Полевой или МОП транзистор NMOS(трёхполюсный)",
-            "Полевой или МОП транзистор PMOS(трёхполюсный)",
+            "Полевой или МОП транзистор NMOS (трёхполюсный)",
+            "Полевой или МОП транзистор PMOS (трёхполюсный)",
             "Биполярный NPN-транзистор (четырёхполюсный)",
             "Биполярный PNP-транзистор (четырёхполюсный)",
-            "Полевой или МОП транзистор NMOS(четырёхполюсный)",
-            "Полевой или МОП транзистор PMOS(четырёхполюсный)"
+            "Полевой или МОП транзистор NMOS (четырёхполюсный)",
+            "Полевой или МОП транзистор PMOS (четырёхполюсный)"
         };
 
         comboCategory = new BmpButtonsCombo(boxCategory, "Категория", { 18, SD::Y_SB(25) }, { 32, 42 }, files, tooltips, 0, 4);
@@ -135,7 +136,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         comboS = new ButtonsCombo(painter, "", { x0 + 2 * dx, y }, width, choices, choices, 1);
     }
 
-    BuildPainter();
+    BuildPanel();
 
     Bind(wxEVT_BUTTON, &PanelScheme::OnEventButton, this);
     Bind(wxEVT_COMBOBOX, &PanelScheme::OnEventComboBox, this);
@@ -163,12 +164,15 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
     }
     else if (id == comboCategory->GetId())
     {
-        BuildPainter();
+        BuildPanel();
     }
 }
 
 
-void PanelScheme::BuildPainter()
+void PanelScheme::BuildPanel()
 {
+    PanelConfig::self->btnChannelB->Enable(Category::Current() != Category::Diod);
+    PanelConfig::self->btnChannelS->Enable(Category::Current() != Category::Diod);
+
     painter->Build();
 }
