@@ -19,6 +19,8 @@ struct Category
         GDBS_P,         // Полевой PMOS-транзистор четырёхполюсный
         Count
     };
+
+    static E Current();
 };
 
 
@@ -42,32 +44,32 @@ private:
                                         // m_iKolU              // Индекс напряжения канала С
                                         // m_iKolI              // Индекс тока канала С
                                         // m_iKolSourceU = 0    // 
-                                        // m_iLimitKolU = 50
-                                        // m_iLimitKolI = 0
-                                        // m_itipimp = 1
-                                        // m_iBazaSource = 1
+                                        // m_iLimitKolU = 50            текущее значение слайдера ограничения U коллектора (в %)
+                                        // m_iLimitKolI = 0             текущее значение слайдера ограничения I коллектора
+                                        // m_itipimp = 1                тип импульса TIP_SYN или TIP_IMP
+                                        // m_iBazaSource = 1            0 - ист. U, 1 - ист. I
                                         // m_iAmplitudeStepBaza = 15
                                         // m_uStepBaza = 10
                                         // m_iPolarityStepBaza = 0
                                         // m_iRangBiasBaza = -1
-                                        // m_iBiasBaza = 0
+                                        // m_iBiasBaza = 0              текущее значение слайдера смещения базы
                                         // m_iPolarityBiasBaza = 0
                                         // m_iBazaMeas = 1
                                         // m_iRangLimitBaza = 5
-                                        // m_iLimitBaza = 1 0 0
+                                        // m_iLimitBaza = 1 0 0         текущее значение слайдера ограничения базы
                                         // m_iDopSource = -1
-                                        // m_iAmplitudeStepDop = -1
+    int basa_step_alt = 0;              // m_iAmplitudeStepDop = -1     Индекс массива значений амплитуды ступеньки источника U (база, доп. канал)
                                         // m_uStepDop = 0
                                         // m_iPolarityStepDop = 0
                                         // m_iRangBiasDop = -1
-                                        // m_iBiasDop = 0
+                                        // m_iBiasDop = 0               текущее значение слайдера смещения доп.канала
                                         // m_iPolarityBiasDop = 0
                                         // m_iDopMeas = 0
                                         // m_iRangLimitDop = -1
-                                        // m_iLimitDop = 100
-                                        // m_sAxisY = Ib
-                                        // m_sAxisX = Ic
-                                        // m_sPar= Beta
+                                        // m_iLimitDop = 100            текущее значение слайдера ограничения доп.канала
+    wxString name_axis_Y = "Ib";        // m_sAxisY = Ib
+    wxString name_axis_X = "Ic";        // m_sAxisX = Ic
+    wxString s_par;                     // m_sPar= Beta                 Beta, Betai, R, S
                                         // m_sArg = Ic
                                         // m_uTp= 0
                                         // m_sUr1 = 20E-3

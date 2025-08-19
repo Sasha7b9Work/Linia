@@ -8,9 +8,14 @@
 #include "Controls/Bitmap.h"
 
 
+PanelScheme *PanelScheme::self = nullptr;
+
+
 PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
     wxPanel(parent)
 {
+    self = this;
+
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
@@ -158,6 +163,7 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
     }
     else if (id == comboCategory->GetId())
     {
+        BuildPainter();
     }
 }
 

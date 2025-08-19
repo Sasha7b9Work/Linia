@@ -32,6 +32,8 @@ void Painter::BeginPaint()
 void Painter::EndPaint()
 {
     dc.SelectObject(wxNullBitmap);
+
+    Refresh();
 }
 
 
@@ -58,6 +60,12 @@ void Painter::DrawRectangle(int x, int y, int w, int h, const wxColor &_color)
     gc->SetPen(color);
     gc->SetBrush(wxNullBrush);
     gc->DrawRectangle(x, y, w, h);
+}
+
+
+void Painter::DrawBitmap(int x, int y, const wxBitmap &bmp)
+{
+    gc->DrawBitmap(bmp, x, y, bmp.GetSize().x, bmp.GetSize().y);
 }
 
 
