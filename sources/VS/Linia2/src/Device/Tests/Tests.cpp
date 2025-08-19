@@ -6,4 +6,5 @@
 void Test::Load(pchar /*file_name*/)
 {
     // CLineDlg::ExtractParamFromTst()
+    // CLineDlg::SaveParamToTst(int where) 
 }
