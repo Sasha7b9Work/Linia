@@ -122,6 +122,8 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         painter = new Painter(boxCommutation, { 25, SD::Y_SB(220) }, { 150, 130 });
 
+        painter->Draw();
+
         // IDC_COMBOCHECKKOL
         comboC = new ButtonsCombo(painter, "", { x0 + dx, y - dy }, width, choices, choices, 1);
 

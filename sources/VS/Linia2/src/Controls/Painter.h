@@ -15,6 +15,22 @@ public:
     virtual void OnPaint(wxPaintEvent &);
 
     void Draw();
+
+    void BeginPaint();
+    void EndPaint();
+    void SetColor(const wxColor &);
+    void FillCircle(int x, int y, int r);
+    void DrawCircle(int x, int y, int r);
+    void FillRectangle(int x, int y, int w, int h);
+    void DrawRectangle(int x, int y, int w, int h);
+
+private:
+
+    wxBitmap *bitmap = nullptr;
+    wxGraphicsContext *gc = nullptr;
+    wxMemoryDC dc;
+    wxColor color;
+    wxSize size;
 };
 
 
