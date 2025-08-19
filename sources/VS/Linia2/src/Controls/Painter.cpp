@@ -25,7 +25,7 @@ void Painter::BeginPaint()
 
     FillRectangle(0, 0, size.x, size.y, GetBackgroundColour());
 
-    DrawRectangle(0, 0, size.x - 1, size.y - 1, *wxBLACK);
+//    DrawRectangle(0, 0, size.x - 1, size.y - 1, *wxBLACK);
 }
 
 
