@@ -39,6 +39,8 @@ public:
     }
 
     static PanelChannelB *self;
+
+    bool IsEnabled() const;
 };
 
 
@@ -53,5 +55,7 @@ public:
     }
 
     static PanelChannelS *self;
+
+    bool IsEnabled() const;
 };
 

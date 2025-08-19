@@ -7,6 +7,7 @@
 #include "Device/SettingsDevice.h"
 #include "Utils/StringUtils.h"
 #include "Utils/GlobalFunctions.h"
+#include "Device/Tests/Tests.h"
 
 
 PanelChannelB *PanelChannelB::self = nullptr;
@@ -183,4 +184,26 @@ void PanelChannelBS::OnEventComboBox(wxCommandEvent &event)
     }
 
     event.Skip();
+}
+
+
+bool PanelChannelB::IsEnabled() const
+{
+    if (Category::Current() == Category::Diod)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+
+bool PanelChannelS::IsEnabled() const
+{
+    if (Category::Current() == Category::Diod)
+    {
+        return false;
+    }
+
+    return true;
 }

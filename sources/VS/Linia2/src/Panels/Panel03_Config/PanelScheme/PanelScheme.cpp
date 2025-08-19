@@ -171,8 +171,8 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
 
 void PanelScheme::BuildPanel()
 {
-    PanelConfig::self->btnChannelB->Enable(Category::Current() != Category::Diod);
-    PanelConfig::self->btnChannelS->Enable(Category::Current() != Category::Diod);
+    PanelConfig::self->btnChannelB->Enable(PanelChannelB::self->IsEnabled());
+    PanelConfig::self->btnChannelS->Enable(PanelChannelS::self->IsEnabled());
 
     painter->Build();
 }
