@@ -9,16 +9,27 @@ void PainterScheme::Build()
 {
     BeginPaint();
 
-    if (Category::Current() == Category::Diod)
-    {
-        DrawDiode();
-    }
+    DrawElement();
 
     EndPaint();
 }
 
 
-void PainterScheme::DrawDiode()
+void PainterScheme::DrawElement()
 {
-    DrawBitmap(10, 10, Bitmap::Get("sch/diod2.bmp").GetBitmap(), { 241, 241, 241 });
+    static const pchar files[Category::Count] =
+    {
+        "sch/diod2.bmp",
+        "sch/GASK.bmp",
+        "sch/BCE_N.bmp",
+        "sch/BCE_P.bmp",
+        "sch/GDS_N.bmp",
+        "sch/GDS_P.bmp",
+        "sch/BCSE_N.bmp",
+        "sch/BCSE_P.bmp",
+        "sch/GDBS_N.bmp",
+        "sch/GDBS_P.bmp"
+    };
+
+    DrawBitmap(40, 30, Bitmap::Get(files[Category::Current()]).GetBitmap(), {241, 241, 241});
 }

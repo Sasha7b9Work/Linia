@@ -16,5 +16,5 @@ public:
 
 private:
 
-    void DrawDiode();
+    void DrawElement();
 };
