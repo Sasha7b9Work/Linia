@@ -9,7 +9,7 @@
 class Jack : public wxPanel
 {
 public:
-    Jack(wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString &);
+    Jack(wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString * = nullptr);
 private:
     ButtonsCombo *combo = nullptr;
     PainterBMP *painterBMP = nullptr;
