@@ -12,6 +12,15 @@
 
 PanelScheme *PanelScheme::self = nullptr;
 
+
+ComboJack::ComboJack(Channel::E ch, wxWindow *parent, const wxString &title, const wxPoint &pos, int width, const wxArrayString &labels) :
+    ButtonsCombo(parent, title, pos, width, labels, labels, 1),
+    channel(ch)
+{
+
+}
+
+
 Jack::Jack(Channel::E ch, wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString *choices) :
     wxPanel(parent, wxID_ANY, position, { 180, 50 }),
     channel(ch)
@@ -132,15 +141,15 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         painter = new PainterScheme(boxCommutation, { 25, SD::Y_SB(220) }, { 150, 130 });
 
         // IDC_COMBOCHECKKOL
-        comboC = new ButtonsCombo(painter, "", { x0 + dx, y - dy }, width, choices, choices, 1);
+        comboC = new ComboJack(Channel::_C, painter, "", { x0 + dx, y - dy }, width, choices);
 
         // IDC_COMBOCHECKBAZA
-        comboB = new ButtonsCombo(painter, "", { x0, y }, width, choices, choices, 1);
+        comboB = new ComboJack(Channel::_B, painter, "", { x0, y }, width, choices);
 
         // IDC_COMBOCHECKDOP
-        comboE = new ButtonsCombo(painter, "", { x0 + dx, y + dy }, width, choices, choices, 1);
+        comboE = new ComboJack(Channel::_E, painter, "", { x0 + dx, y + dy }, width, choices);
 
-        comboS = new ButtonsCombo(painter, "", { x0 + 2 * dx, y }, width, choices, choices, 1);
+        comboS = new ComboJack(Channel::_S, painter, "", { x0 + 2 * dx, y }, width, choices);
     }
 
     BuildPanel();

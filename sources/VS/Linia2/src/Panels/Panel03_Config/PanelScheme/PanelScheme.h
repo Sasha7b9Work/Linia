@@ -6,6 +6,15 @@
 #include "Device/Tests/Tests.h"
 
 
+class ComboJack : public ButtonsCombo
+{
+public:
+    ComboJack(Channel::E, wxWindow *parent, const wxString &title, const wxPoint &pos, int width, const wxArrayString &labels);
+private:
+    Channel::E channel;
+};
+
+
 // На панели "Коммутация" объединяет изображение гнезда и комбобокса с вариантами
 class Jack : public wxPanel
 {
@@ -32,18 +41,19 @@ public:
 
 private:
 
-    ButtonsCombo *comboC = nullptr,     //  /
-        *comboB = nullptr,              //  | Комбобоксы на месте для отрисовки
-        *comboE = nullptr,              //  |
-        *comboS = nullptr,              //  /
-        *comboTest = nullptr;
-
     wxButton *btnLoad = nullptr;
 
-    Jack *jackB = nullptr;
-    Jack *jackC = nullptr;
-    Jack *jackS = nullptr;
-    Jack *jackE = nullptr;
+    ButtonsCombo *comboTest = nullptr;
+
+    ComboJack *comboC = nullptr,        //  /
+        *comboB = nullptr,              //  | Комбобоксы на месте для отрисовки
+        *comboE = nullptr,              //  |
+        *comboS = nullptr;              //  /
+
+    Jack *jackB = nullptr,
+        *jackC = nullptr,
+        *jackS = nullptr,
+        *jackE = nullptr;
 
     BmpButtonsCombo *comboCategory = nullptr;
 
