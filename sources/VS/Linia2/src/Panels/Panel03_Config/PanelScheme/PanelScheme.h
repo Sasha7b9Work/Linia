@@ -5,6 +5,17 @@
 #include "Controls/BmpButtonsCombo.h"
 
 
+// На панели "Коммутация" объединяет изображение гнезда и комбобокса с вариантами
+class Jack : public wxPanel
+{
+public:
+    Jack(wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString &);
+private:
+    ButtonsCombo *combo = nullptr;
+    PainterBMP *painterBMP = nullptr;
+};
+
+
 class PanelScheme : public wxPanel
 {
     friend struct Category;
@@ -25,7 +36,7 @@ private:
 
     wxButton *btnLoad = nullptr;
 
-    PainterBMP *painterJackB = nullptr;
+    Jack *jackB = nullptr;
     PainterBMP *painterJackC = nullptr;
     PainterBMP *painterJackS = nullptr;
     PainterBMP *painterJackE = nullptr;

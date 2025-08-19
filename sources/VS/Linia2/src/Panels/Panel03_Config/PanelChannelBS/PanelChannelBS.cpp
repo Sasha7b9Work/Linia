@@ -205,5 +205,10 @@ bool PanelChannelS::IsEnabled() const
         return false;
     }
 
+    if (Category::Current() == Category::BCE_N || Category::Current() == Category::BCE_P)
+    {
+        return false;
+    }
+
     return true;
 }

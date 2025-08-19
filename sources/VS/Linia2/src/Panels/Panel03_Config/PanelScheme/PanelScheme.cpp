@@ -11,6 +11,14 @@
 
 PanelScheme *PanelScheme::self = nullptr;
 
+Jack::Jack(wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString &choices) :
+    wxPanel(parent, wxID_ANY, position, { 180, 50 })
+{
+    painterBMP = new PainterBMP(this, { 10, 0 }, wxDefaultSize, file_jack_bmp, new wxColour(241, 241, 241));
+
+    combo = new ButtonsCombo(this, "", { 60, 0 }, PanelConfig::WIDTH_COMBO - 60, choices, choices, 1);
+}
+
 
 PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
     wxPanel(parent)
@@ -97,10 +105,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         y += 40;
 
-        // IDC_COMBO_GNEZDO_B
-        new ButtonsCombo(boxCommutation, "", { 10 + delta, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - delta, choices, choices, 1);
-
-        painterJackB = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_B.bmp", new wxColour(241, 241, 241));
+        jackB = new Jack(boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_B.bmp", choices);
 
         y += 40;
 
