@@ -192,7 +192,7 @@ void PanelScheme::BuildPanel()
 
     for (auto _jack : jack)
     {
-        _jack->SetVisibility();
+        _jack->TuneState();
     }
 
     for (auto _combo : combo)
@@ -201,6 +201,12 @@ void PanelScheme::BuildPanel()
     }
 
     painter->Build();
+}
+
+
+void Jack::TuneState()
+{
+    SetVisibility();
 }
 
 

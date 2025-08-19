@@ -6,6 +6,7 @@
 #include "Device/Tests/Tests.h"
 
 
+// Отображается на отрисованной схеме
 class ComboJack : public ButtonsCombo
 {
 public:
@@ -22,12 +23,14 @@ class Jack : public wxPanel
 {
 public:
     Jack(Channel::E, wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString * = nullptr);
-    // Установить видимость или невидимость в зависимости от текущих установок
-    void SetVisibility();
+    // Настроить текущее состояние в зависимости от текущих установок
+    void TuneState();
 private:
     ButtonsCombo *combo = nullptr;
     PainterBMP *painterBMP = nullptr;
     Channel::E channel = Channel::Count;
+    // Установить видимость или невидимость в зависимости от текущих установок
+    void SetVisibility();
 };
 
 
