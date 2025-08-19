@@ -17,14 +17,18 @@ private:
     Channel::E channel;
     // Установить видимость или невидимость в зависимости от текущих установок
     void SetVisibility();
+
+    void SetChoices();
+
+    void SetChoice(StateJack::E);
 };
 
 
 // На панели "Коммутация" объединяет изображение гнезда и комбобокса с вариантами
-class Jack : public wxPanel
+class FullJack : public wxPanel
 {
 public:
-    Jack(Channel::E, wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString * = nullptr);
+    FullJack(Channel::E, wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString * = nullptr);
     // Настроить текущее состояние в зависимости от текущих установок
     void TuneState();
 private:
@@ -59,7 +63,7 @@ private:
         *comboCommutation = nullptr;        // IDC_COMBO_KOMMUTATOR         m_iKommutator           OnSelchangeComboKommutator
 
     ComboJack *combo[Channel::Count];       // Комбобоксы на схеме. Активны при внешней коммутации  IDC_COMBO_GNEZDO_C
-    Jack *jack[Channel::Count];             // Активны при внутренней коммутации                    IDC_COMBOCHECKKOL
+    FullJack *jack[Channel::Count];         // Активны при внутренней коммутации                    IDC_COMBOCHECKKOL
 
     BmpButtonsCombo *comboCategory = nullptr;
 

@@ -21,7 +21,7 @@ ComboJack::ComboJack(Channel::E ch, wxWindow *parent, const wxString &title, con
 }
 
 
-Jack::Jack(Channel::E ch, wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString *choices) :
+FullJack::FullJack(Channel::E ch, wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString *choices) :
     wxPanel(parent, wxID_ANY, position, { 180, 50 }),
     channel(ch)
 {
@@ -109,21 +109,21 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         y += 40;
 
-        jack[ChC] = new Jack(Channel::_C, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_C.bmp", &choices);
+        jack[ChC] = new FullJack(Channel::_C, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_C.bmp", &choices);
 
         int dy = 35;
 
         y += dy;
 
-        jack[ChB] = new Jack(Channel::_B, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_B.bmp", &choices);
+        jack[ChB] = new FullJack(Channel::_B, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_B.bmp", &choices);
 
         y += dy;
 
-        jack[ChS] = new Jack(Channel::_S, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_S.bmp", &choices);
+        jack[ChS] = new FullJack(Channel::_S, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_S.bmp", &choices);
 
         y += dy;
 
-        jack[ChE] = new Jack(Channel::_E, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_E.bmp");
+        jack[ChE] = new FullJack(Channel::_E, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_E.bmp");
 
         choices.clear();
         choices.Add("C");
@@ -206,13 +206,15 @@ void PanelScheme::BuildPanel()
 
 void ComboJack::TuneState()
 {
+    SetChoices();
+
     SetVisibility();
 
     Enable(!TypeCommutation::IsInternal());
 }
 
 
-void Jack::TuneState()
+void FullJack::TuneState()
 {
     SetChoices();
 
@@ -225,7 +227,21 @@ void Jack::TuneState()
 }
 
 
-void Jack::SetChoices()
+void ComboJack::SetChoices()
+{
+    Category::E cat = Category::Current();
+
+    if (cat == Category::Diod)
+    {
+        wxArrayString choices;
+        StateJack::PrepareArray(choices, StateJack::_C, StateJack::_E);
+        ButtonsCombo::SetChoices(choices, choices);
+        SetChoice(StateJack::_C);
+    }
+}
+
+
+void FullJack::SetChoices()
 {
     Category::E cat = Category::Current();
 
@@ -242,13 +258,19 @@ void Jack::SetChoices()
 }
 
 
-void Jack::SetChoice(StateJack::E state)
+void FullJack::SetChoice(StateJack::E state)
 {
     combo->SetChoice(StateJack::Name(state));
 }
 
 
-void Jack::SetVisibility()
+void ComboJack::SetChoice(StateJack::E state)
+{
+    ButtonsCombo::SetChoice(StateJack::Name(state));
+}
+
+
+void FullJack::SetVisibility()
 {
     Show(Channel(channel).IsVisible());
 }
