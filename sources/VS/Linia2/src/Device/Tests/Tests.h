@@ -24,6 +24,19 @@ struct Category
 };
 
 
+struct Channel
+{
+    enum E
+    {
+        _C,      // Коллектор
+        _B,      // База
+        _S,      // Подложка
+        _E,      // Эмиттер - общий
+        Count
+    };
+};
+
+
 class Test
 {
     void Load(pchar file_name);

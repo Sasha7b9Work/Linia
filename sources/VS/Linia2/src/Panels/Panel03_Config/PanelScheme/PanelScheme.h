@@ -3,16 +3,20 @@
 #include "Controls/ButtonsCombo.h"
 #include "Panels/Panel03_Config/PanelScheme/PainterScheme.h"
 #include "Controls/BmpButtonsCombo.h"
+#include "Device/Tests/Tests.h"
 
 
 // На панели "Коммутация" объединяет изображение гнезда и комбобокса с вариантами
 class Jack : public wxPanel
 {
 public:
-    Jack(wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString * = nullptr);
+    Jack(Channel::E, wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString * = nullptr);
+    // Установить видимость или невидимость в зависимости от текущих установок
+    void SetVisibility();
 private:
     ButtonsCombo *combo = nullptr;
     PainterBMP *painterBMP = nullptr;
+    Channel::E channel = Channel::Count;
 };
 
 

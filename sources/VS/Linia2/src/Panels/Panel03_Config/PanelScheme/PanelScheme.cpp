@@ -5,14 +5,16 @@
 #include "Panels/Panel03_Config/Panel03_Config.h"
 #include "Utils/SystemDepend.h"
 #include "Panels/Panel03_Config/PanelScheme/WindowLibraryTests.h"
+#include "Panels/Panel03_Config/PanelChannelBS/PanelChannelBS.h"
 #include "Controls/Bitmap.h"
 #include "Device/Tests/Tests.h"
 
 
 PanelScheme *PanelScheme::self = nullptr;
 
-Jack::Jack(wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString *choices) :
-    wxPanel(parent, wxID_ANY, position, { 180, 50 })
+Jack::Jack(Channel::E ch, wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString *choices) :
+    wxPanel(parent, wxID_ANY, position, { 180, 50 }),
+    channel(ch)
 {
     painterBMP = new PainterBMP(this, { 10, 0 }, wxDefaultSize, file_jack_bmp, { 241, 241, 241 });
 
@@ -99,21 +101,21 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         y += 40;
 
-        jackC = new Jack(boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_C.bmp", &choices);
+        jackC = new Jack(Channel::_C, boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_C.bmp", &choices);
 
         int dy = 35;
 
         y += dy;
 
-        jackB = new Jack(boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_B.bmp", &choices);
+        jackB = new Jack(Channel::_B, boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_B.bmp", &choices);
 
         y += dy;
 
-        jackS = new Jack(boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_S.bmp", &choices);
+        jackS = new Jack(Channel::_S, boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_S.bmp", &choices);
 
         y += dy;
 
-        jackE = new Jack(boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_E.bmp");
+        jackE = new Jack(Channel::_E, boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_E.bmp");
 
         choices.clear();
         choices.Add("C");
@@ -179,5 +181,48 @@ void PanelScheme::BuildPanel()
     PanelConfig::self->btnChannelB->Enable(PanelChannelB::self->IsEnabled());
     PanelConfig::self->btnChannelS->Enable(PanelChannelS::self->IsEnabled());
 
+    jackC->SetVisibility();
+    jackB->SetVisibility();
+    jackS->SetVisibility();
+    jackE->SetVisibility();
+
     painter->Build();
+}
+
+
+void Jack::SetVisibility()
+{
+    bool visibility = true;
+
+    Category::E cat = Category::Current();
+
+    if (channel == Channel::_C)
+    {
+
+    }
+
+    if (channel == Channel::_B)
+    {
+        if (cat == Category::Diod)
+        {
+            visibility = false;
+        }
+    }
+
+    if (channel == Channel::_S)
+    {
+        if (cat == Category::Diod ||
+            cat == Category::BCE_N ||
+            cat == Category::BCE_P)
+        {
+            visibility = false;
+        }
+    }
+
+    if (channel == Channel::_E)
+    {
+
+    }
+
+    Show(visibility);
 }
