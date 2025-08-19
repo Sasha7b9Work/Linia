@@ -4,6 +4,26 @@
 #include "Settings/Color.h"
 
 
+Painter::Painter(wxWindow *parent, const wxPoint &position, const wxSize &size) :
+    wxPanel(parent, wxID_ANY, position, size)
+{
+    wxPanel::SetSize(size);
+    wxPanel::SetDoubleBuffered(true);
+
+    Bind(wxEVT_PAINT, &Painter::OnPaint, this);
+}
+
+
+void Painter::OnPaint(wxPaintEvent &)
+{
+    wxPaintDC dc(this);
+
+    dc.SetPen(*wxBLACK_PEN);
+    dc.SetBrush(wxBrush(GetBackgroundColour()));
+    dc.DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
+}
+
+
 PainterRect::PainterRect(wxWindow *parent, const wxPoint &position, const wxSize &size) :
     wxPanel(parent, wxID_ANY, position, size)
 {

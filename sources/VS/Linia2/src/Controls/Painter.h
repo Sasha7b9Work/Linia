@@ -6,10 +6,23 @@
 struct Color;
 
 
+class Painter : public wxPanel
+{
+public:
+
+    Painter(wxWindow *parent, const wxPoint &position, const wxSize &size);
+
+    virtual void OnPaint(wxPaintEvent &);
+
+    void Draw();
+};
+
+
 // Тупо заливает на себе прямоугольник
 class PainterRect : public wxPanel
 {
 public:
+
     PainterRect(wxWindow *parent, const wxPoint &position, const wxSize &size);
 
     virtual void OnPaint(wxPaintEvent &);

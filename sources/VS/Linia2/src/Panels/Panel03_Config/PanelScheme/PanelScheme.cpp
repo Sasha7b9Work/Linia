@@ -115,19 +115,21 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         int width = 30;
 
-        y =  260;
+        y =  52;
         int dy = 50;
-        int x0 = 60;
+        int x0 = 20;
         int dx = 70;
 
+        painter = new Painter(boxCommutation, { 25, 220 }, { 150, 130 });
+
         // IDC_COMBOCHECKKOL
-        comboC = new ButtonsCombo(boxCommutation, "", { x0 + dx, y - dy }, width, choices, choices, 1);
+        comboC = new ButtonsCombo(painter, "", { x0 + dx, y - dy }, width, choices, choices, 1);
 
         // IDC_COMBOCHECKBAZA
-        comboB = new ButtonsCombo(boxCommutation, "", { x0, y }, width, choices, choices, 1);
+        comboB = new ButtonsCombo(painter, "", { x0, y }, width, choices, choices, 1);
 
         // IDC_COMBOCHECKDOP
-        comboE = new ButtonsCombo(boxCommutation, "", { x0 + dx, y + dy }, width, choices, choices, 1);
+        comboE = new ButtonsCombo(painter, "", { x0 + dx, y + dy }, width, choices, choices, 1);
     }
 }
 

@@ -24,6 +24,8 @@ private:
     PainterBMP *painterJackS = nullptr;
     PainterBMP *painterJackE = nullptr;
 
+    Painter *painter = nullptr;                 // Здесь будет нарисована схема
+
     void OnEventButton(wxCommandEvent &);
     void OnEventComboBox(wxCommandEvent &);
 };
