@@ -98,15 +98,17 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         jackC = new Jack(boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_C.bmp", choices);
 
-        y += 40;
+        int dy = 35;
+
+        y += dy;
 
         jackB = new Jack(boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_B.bmp", choices);
 
-        y += 40;
+        y += dy;
 
-        painterJackS = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_S.bmp", new wxColour(241, 241, 241));
+        jackS = new Jack(boxCommutation, { 10, SD::Y_SB(y) }, "sch/jacks/jack_S.bmp", choices);
 
-        y += 40;
+        y += dy;
 
         painterJackE = new PainterBMP(boxCommutation, { 20, SD::Y_SB(y) }, wxDefaultSize, "sch/jacks/jack_E.bmp", new wxColour(241, 241, 241));
 
@@ -118,7 +120,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         int width = 30;
 
         y = 53;
-        int dy = 52;
+        dy = 52;
         int x0 = 3;
         int dx = 57;
 
