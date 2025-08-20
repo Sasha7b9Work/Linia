@@ -37,7 +37,7 @@ private:
     struct StructPanel
     {
         wxToggleButton *button;
-        wxPanel *panel;
+        wxPanel        *panel;
     };
 
     std::vector<StructPanel> str_panels;
