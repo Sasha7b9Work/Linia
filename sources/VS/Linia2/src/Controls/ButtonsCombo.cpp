@@ -12,6 +12,8 @@ DrawingButton::DrawingButton(wxWindow *parent, int id, const wxString &label, co
     SetBackgroundStyle(wxBG_STYLE_PAINT); // Для избежания мерцания
 
     Bind(wxEVT_PAINT, &DrawingButton::OnPaint, this);
+
+    SetBackgroundColour(GetBackgroundColour().ChangeLightness(LIGHTNESS));
 }
 
 
