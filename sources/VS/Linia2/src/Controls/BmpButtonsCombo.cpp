@@ -53,6 +53,8 @@ public:
         Fit(); // Автоподбор размера
 
         GetParent()->Bind(wxEVT_KEY_DOWN, &BmpButtonPopup::OnKeyDown, this);
+
+        SetBackgroundColour(*wxWHITE);
     }
 
 private:
