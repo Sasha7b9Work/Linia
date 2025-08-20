@@ -76,7 +76,7 @@ public:
         boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 5); // 10px отступ внутри рамки
 
         // Основная панель
-        mainPanel->SetSizer(gridSizer);
+        mainPanel->SetSizer(boxSizer);
 
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
         // Внешние отступы 15px
