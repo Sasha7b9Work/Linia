@@ -127,3 +127,9 @@ wxPoint SD::XY0()
 {
     return { 5, Y_SB(25) };
 }
+
+
+int SD::DSBY()
+{
+    return 5;
+}
