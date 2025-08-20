@@ -10,6 +10,9 @@ public:
     BmpButtonPopup(wxWindow *parent, const wxString &title, const wxArrayString &files, const wxArrayString &tooltips, int buttons_in_row) :
         wxPopupTransientWindow(parent)
     {
+        wxToolTip::SetAutoPop(5000); // Увеличиваем время показа
+        wxToolTip::SetDelay(100);
+
         // Основной контейнер с отступами по краям
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
         wxPanel *mainPanel = new wxPanel(this, wxID_ANY);
@@ -40,6 +43,7 @@ public:
             btn->SetLabel(wxString::Format("%d", i));
             btn->SetToolTip(tooltips[i]);
             btn->Bind(wxEVT_BUTTON, &BmpButtonPopup::OnButtonClick, this);
+            btn->GetToolTip()->SetAutoPop(5000);
             gridSizer->Add(btn, 0, wxEXPAND | wxALL, 2); // 2px отступы у кнопок
         }
 
