@@ -79,12 +79,13 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
 
     {
         wxArrayString names;
+        int width = 80;
 
         RangeU::FillArrayStrings(names, DSet::Type::ChanC_Meas, false);
-        comboVoltage = new ButtonsComboRange(boxMeter, "Uc", SD::XY0(), 80, names, names);
+        comboVoltage = new ButtonsComboRange(boxMeter, "Uc", SD::XY0(), width, names, names);
 
         RangeI::FillArrayStrings(names, DSet::Type::ChanC_Meas, false);
-        comboCurrent = new ButtonsComboRange(boxMeter, "Ic", { 100, SD::XY0().y }, 80, names, names);
+        comboCurrent = new ButtonsComboRange(boxMeter, "Ic", { SD::XY0().x + PanelConfig::WIDTH_COMBO - width, SD::XY0().y }, width, names, names);
     }
 
     boxMeter->SetFont(StaticBox::TitleFont());
