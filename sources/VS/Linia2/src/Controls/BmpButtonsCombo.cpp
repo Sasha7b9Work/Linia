@@ -55,6 +55,14 @@ public:
         GetParent()->Bind(wxEVT_KEY_DOWN, &BmpButtonPopup::OnKeyDown, this);
 
         SetBackgroundColour(GetBackgroundColour().ChangeLightness(80));
+
+        // Отключаем изменение фона для всех детей
+        for (auto child : GetChildren())
+        {
+            child->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
+            child->SetBackgroundStyle(wxBG_STYLE_ERASE);
+            child->Refresh(); // Обновляем внешний вид
+        }
     }
 
 private:
