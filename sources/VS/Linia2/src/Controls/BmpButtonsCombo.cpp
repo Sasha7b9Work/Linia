@@ -7,8 +7,8 @@
 class BmpButtonPopup : public wxPopupTransientWindow
 {
 public:
-    BmpButtonPopup(wxWindow *parent, const wxString &title, const wxArrayString &files, const wxArrayString &tooltips, int buttons_in_row) :
-        wxPopupTransientWindow(parent, wxBORDER_SUNKEN)
+    BmpButtonPopup(wxWindow *parent, const wxString & /*title*/, const wxArrayString &files, const wxArrayString &tooltips, int buttons_in_row) :
+        wxPopupTransientWindow(parent, wxBORDER_SIMPLE | wxPU_CONTAINS_CONTROLS)
     {
         // Основной контейнер с отступами по краям
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
@@ -41,11 +41,11 @@ public:
         }
 
         // Добавляем рамку вокруг сетки кнопок
-        wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, title);
-        boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 0); // 10px отступ внутри рамки
+//        wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, title);
+//        boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 0); // 10px отступ внутри рамки
 
         // Основная панель
-        mainPanel->SetSizer(boxSizer);
+        mainPanel->SetSizer(gridSizer);
 
         // Внешние отступы 15px
         outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 5);
