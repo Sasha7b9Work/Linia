@@ -7,9 +7,6 @@
 #include "Utils/Timer.h"
 #include "MainWindow.h"
 #include "Windows/ConsoleRS232.h"
-#ifndef WIN32
-//#include <gtk/gtk.h>
-#endif
 
 
 wxIMPLEMENT_APP(Application);
@@ -21,31 +18,8 @@ wxString Application::file_name_config;
 Application *Application::self = nullptr;
 
 
-#ifndef WIN32
-void g_log_set_handler(const gchar *log_domain, GLogLevelFlags log_levels,
-    GLogFunc log_func, gpointer user_data);
-
-static void suppress_gtk_warnings(const gchar *log_domain,
-    GLogLevelFlags log_levels,
-    const gchar *message,
-    gpointer user_data)
-{
-    if (g_strrstr(message, "smaller than min-size") != nullptr)
-        return; // Игнорируем это конкретное предупреждение
-
-    // Для других сообщений используем стандартный обработчик
-    g_log_default_handler(log_domain, log_levels, message, user_data);
-}
-#endif
-
-
 bool Application::OnInit()
 {
-#ifndef WIN32
-    g_log_set_handler("Gtk", G_LOG_LEVEL_WARNING,
-        suppress_gtk_warnings, NULL);
-#endif
-
     std::locale::global(std::locale(""));  // Установка системной локали
     setlocale(LC_ALL, "");
 
