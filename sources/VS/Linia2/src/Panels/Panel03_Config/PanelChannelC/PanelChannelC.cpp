@@ -73,7 +73,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
         chbDutyCycleIncrease = new CheckButton(boxScan, _L("Скважн. x 2"), { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO);
     }
 
-    StaticBox *boxMeter = new StaticBox(this, _L("Измеритель"), { x, boxScan->GetPosition().y + boxScan->GetSize().y }, { w, 50 });
+    StaticBox *boxMeter = new StaticBox(this, _L("Измеритель"), { x, boxScan->GetPosition().y + boxScan->GetSize().y + SD::DSBY() }, { w, 50 });
 
     {
         int y = 20;
@@ -87,7 +87,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
         comboCurrent = new ButtonsComboRange(boxMeter, "Ic", { 100, SD::Y_SB(y) }, 80, names, names);
     }
 
-    StaticBox *boxSource = new StaticBox(this, "Источник U", { x, boxMeter->GetPosition().y + boxMeter->GetSize().y }, { w, h - boxMeter->GetPosition().y - boxMeter->GetSize().y });
+    StaticBox *boxSource = new StaticBox(this, "Источник U", { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + SD::DSBY() }, { w, h - boxMeter->GetPosition().y - boxMeter->GetSize().y - SD::DSBY() });
 
     {
         wxArrayString names
