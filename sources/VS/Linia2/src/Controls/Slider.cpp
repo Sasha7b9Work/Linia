@@ -14,6 +14,8 @@ SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _
 
     slider = new wxSlider(this, wxID_ANY, min, min, max, { w1, 0 }, { width - w1 - w2, TEXTCNTRL_HEIGHT + 5 } );
 
+    slider->SetBackgroundColour(slider->GetBackgroundColour().ChangeLightness(LIGHTNESS));
+
     text = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT });
 
     wxSize size_button{ 15, 12 };
