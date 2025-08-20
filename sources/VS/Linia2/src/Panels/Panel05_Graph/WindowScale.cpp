@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Utils/SystemDepend.h"
 #include "Panels/Panel05_Graph/WindowScale.h"
+#include "Controls/StaticBox.h"
 
 
 WindowScale::Range WindowScale::rangeX{ -12, 28, "Uc", "V"};
@@ -44,7 +45,7 @@ WindowScale::WindowScale() :
 
 wxStaticBox *WindowScale::CreateBox(int x, int y, int w, int h, pchar axe, pchar units, wxTextCtrl **min, wxTextCtrl **max)
 {
-    wxStaticBox *box = new wxStaticBox(this, wxID_ANY, _L("Шкала по оси") + " " + axe, {x, y}, {w, h});
+    StaticBox *box = new StaticBox(this, _L("Шкала по оси") + " " + axe, {x, y}, {w, h});
 
     y = 25;
 

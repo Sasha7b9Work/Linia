@@ -49,7 +49,7 @@ WindowLibraryTests::WindowLibraryTests() :
 
         wxPanel *rightPanel = new wxPanel(this, wxID_ANY, { WIDTH - dw, 0 }, size);
 
-        wxStaticBox *box1 = new wxStaticBox(rightPanel, wxID_ANY, _L("Категория"), { 0, 0 }, {size.x - 20, 60});
+        StaticBox *box1 = new StaticBox(rightPanel, _L("Категория"), { 0, 0 }, {size.x - 20, 60});
 
         {
             wxArrayString choices;
@@ -58,7 +58,7 @@ WindowLibraryTests::WindowLibraryTests() :
             new ButtonsCombo(box1, "", { 10, SD::Y_SB(25) }, 60, choices, choices, 1);
         }
 
-        wxStaticBox *box2 = new wxStaticBox(rightPanel, wxID_ANY, _L("Тест"), { 0, box1->GetPosition().y + box1->GetSize().y + 5 }, { size.x - 20, 145 });
+        StaticBox *box2 = new StaticBox(rightPanel, _L("Тест"), { 0, box1->GetPosition().y + box1->GetSize().y + 5 }, { size.x - 20, 145 });
 
         {
             int y0 = 25;

@@ -27,7 +27,7 @@ WindowCorretionZero::WindowCorretionZero() :
     y = CreateRadioButton(this, d, y, &rbChanS_SourceI, _L("Источник") + " I");
     y = CreateRadioButton(this, d, y, &rbChanS_SourceU, _L("Источник") + " U");
 
-    wxStaticBox *box = new wxStaticBox(this, wxID_ANY, _L("Внимание") + " !", { d + w + d, d }, { w, 200 });
+    StaticBox *box = new StaticBox(this, _L("Внимание") + " !", { d + w + d, d }, { w, 200 });
 
     new wxStaticText(box, wxID_ANY,
         "Подключите контактирующее устройство и соедините гнёзда с помощью перемычек согласно схеме",

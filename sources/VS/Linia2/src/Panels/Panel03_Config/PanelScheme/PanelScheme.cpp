@@ -44,7 +44,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
     const int width_category = 77;
 
-    wxStaticBox *boxCategory = new wxStaticBox(this, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 90 });
+    StaticBox *boxCategory = new StaticBox(this, _L("Категория"), { x, 0 }, { width_category, 90 });
 
     {
         wxArrayString files;
@@ -73,7 +73,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
     (void)boxCategory;
 
-    wxStaticBox *boxTest = new wxStaticBox(this, wxID_ANY, _L("Тест"), { x + width_category + 5, 0 },
+    StaticBox *boxTest = new StaticBox(this, _L("Тест"), { x + width_category + 5, 0 },
         { w - width_category - 5, boxCategory->GetSize().y });
 
     {
@@ -90,7 +90,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         btnLoad->Hide();
     }
 
-    wxStaticBox *boxCommutation = new wxStaticBox(this, wxID_ANY, _L("Коммутация"),
+    StaticBox *boxCommutation = new StaticBox(this, _L("Коммутация"),
         { x, boxCategory->GetPosition().y + boxCategory->GetSize().y },
         { w, h - boxCategory->GetPosition().y - boxCategory->GetSize().y });
 
