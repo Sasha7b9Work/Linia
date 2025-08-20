@@ -96,7 +96,7 @@ public:
         Refresh();
         Update();
 
-        SetBackgroundColour(GetBackgroundColour().ChangeLightness(80));
+        SetBackgroundColour(GetBackgroundColour().ChangeLightness(70));
 
         // Отключаем изменение фона для всех детей
         for (auto child : GetChildren())
