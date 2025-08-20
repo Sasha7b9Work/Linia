@@ -13,7 +13,7 @@ public:
         // Основной контейнер с отступами по краям
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
         wxPanel *mainPanel = new wxPanel(this, wxID_ANY);
-        mainPanel->SetBackgroundColour(*wxWHITE);
+//        mainPanel->SetBackgroundColour(*wxWHITE);
 
         int num_rows = (int)(files.size() / buttons_in_row);
 

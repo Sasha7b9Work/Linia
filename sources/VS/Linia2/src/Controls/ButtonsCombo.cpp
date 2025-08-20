@@ -34,7 +34,7 @@ public:
 
         // Основной контейнер с отступами по краям
         wxPanel *mainPanel = new wxPanel(this, wxID_ANY);
-        mainPanel->SetBackgroundColour(*wxWHITE);
+//        mainPanel->SetBackgroundColour(*wxWHITE);
 
         int num_rows = (int)(labels.size() / GetCombo()->buttons_in_row);
 
