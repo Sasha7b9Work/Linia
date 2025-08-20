@@ -93,6 +93,7 @@ public:
         Update();
 
         SetBackgroundColour(GetBackgroundColour().ChangeLightness(80));
+        SetBackgroundStyle(wxBG_STYLE_PAINT);
     }
 
 private:
