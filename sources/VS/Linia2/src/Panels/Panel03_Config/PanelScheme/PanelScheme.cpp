@@ -101,7 +101,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         int y = 20;
 
-        comboCommutation = new ButtonsCombo(boxCommutation, "Тип", { PanelConfig::X, SD::Y_SB(20)}, PanelConfig::WIDTH_COMBO, choices, choices, 1);
+        comboCommutation = new ButtonsCombo(boxCommutation, "Тип", { SD::XY0() }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
         choices.clear();
         choices.Add(_L("канал") + " C");
