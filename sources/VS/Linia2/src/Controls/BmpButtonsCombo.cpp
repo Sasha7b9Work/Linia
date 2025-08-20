@@ -37,7 +37,7 @@ public:
         for (uint i = 0; i < files.size(); ++i)
         {
             ButtonBitmap *btn = new ButtonBitmap(mainPanel, wxDefaultPosition, wxDefaultSize, files[i]);
-            btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(110));
+            btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(120));
             btn->SetLabel(wxString::Format("%d", i));
             btn->SetToolTip(tooltips[i]);
             btn->Bind(wxEVT_BUTTON, &BmpButtonPopup::OnButtonClick, this);

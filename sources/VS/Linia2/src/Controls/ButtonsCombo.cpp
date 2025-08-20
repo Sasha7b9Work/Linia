@@ -60,7 +60,7 @@ public:
             if (labels[i][0])                                                           // Признак того, что надо вставлять кнопку, а не заглушку
             {
                 wxButton *btn = new wxButton(mainPanel, wxID_ANY, labels[i]);
-                btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(110));
+                btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(120));
                 btn->SetMaxSize(wxSize(-1, 20));
                 if (labels[i] != GetCombo()->tooltips[i])
                 {
