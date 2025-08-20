@@ -71,6 +71,8 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         comboCategory = new BmpButtonsCombo(boxCategory, "Категория", { 18, SD::XY0().y }, { 32, 42 }, files, tooltips, 0, 4);
     }
 
+    boxCategory->SetFont(StaticBox::TitleFont());
+
     (void)boxCategory;
 
     StaticBox *boxTest = new StaticBox(this, _L("Тест"), { x + width_category + 5, SD::DSBY() },
@@ -89,6 +91,8 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         btnLoad->Hide();
     }
+
+    boxTest->SetFont(StaticBox::TitleFont());
 
     StaticBox *boxCommutation = new StaticBox(this, _L("Коммутация"),
         { x, boxCategory->GetPosition().y + boxCategory->GetSize().y + SD::DSBY() },
@@ -150,6 +154,8 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         combo[ChS] = new ComboJack(Channel::_S, painter, "", {x0 + 2 * dx, y}, width, choices);
     }
+
+    boxCommutation->SetFont(StaticBox::TitleFont());
 
     BuildPanel();
 

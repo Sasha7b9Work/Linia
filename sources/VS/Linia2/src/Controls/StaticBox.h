@@ -8,8 +8,21 @@ public:
     StaticBox(wxWindow *parent, const wxString &title, const wxPoint &pos, const wxSize &size) :
         wxStaticBox(parent, wxID_ANY, title, pos, size, wxBORDER_NONE)
     {
-
+        if (font == wxNullFont)
+        {
+            font = GetFont();
+            font.SetWeight(wxFONTWEIGHT_BOLD);
+        }
     }
+
+    static wxFont &TitleFont()
+    {
+        return font;
+    }
+
+private:
+
+    static wxFont font;
 };
 
 

@@ -84,10 +84,14 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
             new ButtonsCombo(boxOffset, "Полярность", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - 10, choices, choices, 1);
         }
 
+        boxOffset->SetFont(StaticBox::TitleFont());
+
         wxPoint pos = boxOffset->GetPosition();
         pos.y = SD::Y_SB(boxGenerator->GetSize().y - boxOffset->GetSize().y - 8);
         boxOffset->SetPosition(pos);
     }
+
+    boxGenerator->SetFont(StaticBox::TitleFont());
 
     StaticBox *boxLimitation = new StaticBox(this, _L("Ограничение"),
         { x, boxGenerator->GetPosition().y + boxGenerator->GetSize().y + SD::DSBY() },
@@ -105,6 +109,8 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
 
         sliderLimit = new SliderFloatLimit(boxLimitation, { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO );
     }
+
+    boxLimitation->SetFont(StaticBox::TitleFont());
 
     Bind(wxEVT_COMBOBOX, &PanelChannelB::OnEventComboBox, this);
 

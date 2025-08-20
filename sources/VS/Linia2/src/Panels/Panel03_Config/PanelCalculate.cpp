@@ -35,6 +35,8 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
         new wxTextCtrl(boxGraph, wxID_ANY, "Id", { 100, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
     }
 
+    boxGraph->SetFont(StaticBox::TitleFont());
+
     StaticBox *boxParameter = new StaticBox(this, _L("Параметр"),
         { x, boxGraph->GetPosition().y + boxGraph->GetSize().y + SD::DSBY() },
         { w, 250 });
@@ -75,10 +77,14 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
             new wxRadioButton(boxCalculate, wxID_ANY, "dX/dY", { 100, SD::Y_SB(y) });
         }
 
+        boxCalculate->SetFont(StaticBox::TitleFont());
+
         wxPoint pos = boxCalculate->GetPosition();
         pos.y = SD::Y_SB(boxParameter->GetSize().y - boxCalculate->GetSize().y - 8);
         boxCalculate->SetPosition(pos);
     }
+
+    boxParameter->SetFont(StaticBox::TitleFont());
 
     StaticBox *boxBorder = new StaticBox(this, _L("Пороговые значения"),
         { x, boxParameter->GetPosition().y + boxParameter->GetSize().y + SD::DSBY() },
@@ -93,4 +99,6 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
         new wxStaticText(boxBorder, wxID_ANY, "MAX", { PanelConfig::X, SD::Y_SB(y + dy) });
         new wxTextCtrl(boxBorder, wxID_ANY, "4", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT });
     }
+
+    boxBorder->SetFont(StaticBox::TitleFont());
 }
