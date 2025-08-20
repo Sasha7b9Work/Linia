@@ -8,7 +8,7 @@
 #include "MainWindow.h"
 #include "Windows/ConsoleRS232.h"
 #ifndef WIN32
-#include <gtk/gtk.h>
+//#include <gtk/gtk.h>
 #endif
 
 
