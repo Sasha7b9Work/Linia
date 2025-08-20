@@ -40,7 +40,6 @@ public:
             btn->SetLabel(wxString::Format("%d", i));
             btn->SetToolTip(tooltips[i]);
             btn->Bind(wxEVT_BUTTON, &BmpButtonPopup::OnButtonClick, this);
-            btn->GetToolTip()->SetAutoPop(5000);
             gridSizer->Add(btn, 0, wxEXPAND | wxALL, 2); // 2px отступы у кнопок
         }
 
