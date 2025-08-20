@@ -15,5 +15,9 @@ sources/Device/Objects/*
 sources/Device/Objects-Debug/*
 
 ALGORITM.md
-sources/VS/Linia2/src/Device/DeviceAPI_Documentation.md
-sources/VS/Linia2/STM32_INTEGRATION_README.md
+BUILD_ARM64.md
+ПЕРЕЧЕНЬ_КОМАНД_ОТ_PIC_КОНТРОЛЛЕРА.md
+ПЕРЕЧЕНЬ_КОМАНД_PIC_КОНТРОЛЛЕРУ.md
+
+.vs/*
+test/*

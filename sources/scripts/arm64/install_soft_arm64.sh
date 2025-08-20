@@ -48,6 +48,41 @@ sudo apt-get install libsdl2-dev -y
 # Системные уведомления
 sudo apt-get install libnotify-dev -y
 
+# GPIO библиотека для SPI управления
+echo "Установка libgpiod для GPIO управления..."
+sudo apt-get install libgpiod-dev gpiod -y
+
+# Проверяем установку libgpiod
+echo "Проверка установки libgpiod..."
+if pkg-config --exists libgpiod; then
+    echo "✅ libgpiod успешно установлена"
+    echo "Версия: $(pkg-config --modversion libgpiod)"
+    echo "Флаги компиляции: $(pkg-config --cflags libgpiod)"
+    echo "Флаги линковки: $(pkg-config --libs libgpiod)"
+else
+    echo "❌ Ошибка: libgpiod не найдена"
+fi
+
+# Проверяем доступность GPIO устройств
+echo "Проверка GPIO устройств..."
+if ls /dev/gpiochip* > /dev/null 2>&1; then
+    echo "✅ GPIO устройства найдены:"
+    ls -la /dev/gpiochip*
+else
+    echo "⚠️  GPIO устройства не найдены"
+    echo "Возможно, нужно загрузить драйвер GPIO или включить его в настройках ядра"
+fi
+
+# Проверяем утилиты GPIO
+echo "Проверка утилит GPIO..."
+if command -v gpiodetect > /dev/null 2>&1; then
+    echo "✅ Утилиты GPIO доступны"
+    echo "Доступные GPIO чипы:"
+    gpiodetect
+else
+    echo "❌ Утилиты GPIO не найдены"
+fi
+
 # OpenGL
 sudo apt install libglu1-mesa-dev freeglut3-dev -y
 

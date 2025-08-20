@@ -132,24 +132,57 @@ if(WIN32)
     # Копируем в рабочий каталог
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy $(OutputPath)\\$(PROJECT_NAME) . /Y)
 else()
+    # Поиск необходимых библиотек для Linux
+    find_package(PkgConfig REQUIRED)
+    
+    # Поиск GTK3
+    pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
+    
+    # Поиск GSpell (для проверки орфографии в wxWidgets)
+    pkg_check_modules(GSPELL gspell-1)
+    
+    # Поиск других библиотек
+    find_library(X11_LIBRARY X11 REQUIRED)
+    find_library(XKBCOMMON_LIBRARY xkbcommon REQUIRED)
+    find_library(PNG_LIBRARY png REQUIRED)
+    find_library(DL_LIBRARY dl REQUIRED)
+    
+    # Поиск libgpiod если доступна
+    find_library(GPIOD_LIBRARY gpiod PATHS /usr/local/lib /usr/lib)
+    
     target_link_libraries(${PROJECT_NAME}
         wx_gtk3u_core-3.2
-        gtk-3
-        gdk-3
-        pangocairo-1.0
-        pango-1.0
+        ${GTK3_LIBRARIES}
         pthread
-        cairo
-        /usr/lib/x86_64-linux-gnu/libX11.so
-        /usr/lib/x86_64-linux-gnu/libxkbcommon.so
-        /usr/lib/x86_64-linux-gnu/libpng.so
-        gdk_pixbuf-2.0
+        ${X11_LIBRARY}
+        ${XKBCOMMON_LIBRARY}
+        ${PNG_LIBRARY}
         wx_baseu-3.2
-        gio-2.0
-        gobject-2.0
-        glib-2.0
-        dl 
-        )
+        ${DL_LIBRARY}
+    )
+    
+    # Добавляем GSpell если найдена
+    if(GSPELL_FOUND)
+        target_link_libraries(${PROJECT_NAME} ${GSPELL_LIBRARIES})
+        target_include_directories(${PROJECT_NAME} PRIVATE ${GSPELL_INCLUDE_DIRS})
+        target_compile_options(${PROJECT_NAME} PRIVATE ${GSPELL_CFLAGS_OTHER})
+        message(STATUS "GSpell library found: ${GSPELL_LIBRARIES}")
+    else()
+        message(WARNING "GSpell library not found - spell checking may not work")
+    endif()
+    
+    # Добавляем libgpiod если найдена
+    if(GPIOD_LIBRARY)
+        target_link_libraries(${PROJECT_NAME} ${GPIOD_LIBRARY})
+        target_compile_definitions(${PROJECT_NAME} PRIVATE HAVE_LIBGPIOD)
+        message(STATUS "libgpiod library found: ${GPIOD_LIBRARY}")
+    else()
+        message(WARNING "libgpiod library not found - SPI functionality will work without GPIO control")
+    endif()
+    
+    # Добавляем include директории GTK3
+    target_include_directories(${PROJECT_NAME} PRIVATE ${GTK3_INCLUDE_DIRS})
+    target_compile_options(${PROJECT_NAME} PRIVATE ${GTK3_CFLAGS_OTHER})
 endif()
 
 
