@@ -81,5 +81,5 @@ static pString DIRECT_PROMT = "<- ";
 #ifdef WIN32
     #define LIGHTNESS 75
 #else
-    #define LIGHTNESS 150
+    #define LIGHTNESS 125
 #endif
