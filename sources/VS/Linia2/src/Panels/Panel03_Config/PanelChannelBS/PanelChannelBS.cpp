@@ -29,7 +29,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
         choices.Add("U");
         choices.Add("I");
 
-        comboTypeGenerator = new ButtonsCombo(boxGenerator, "Тип", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
+        comboTypeGenerator = new ButtonsCombo(boxGenerator, "Тип", SD::XY0(), PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
         y += PanelConfig::DYC;
 
@@ -97,7 +97,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
         wxArrayString choices;
         choices.Add("-");
 
-        comboLimitRange = new ButtonsComboRange(boxLimitation, "Диапазон", { PanelConfig::X, SD::Y_SB(y - 3) }, PanelConfig::WIDTH_COMBO, choices, choices);
+        comboLimitRange = new ButtonsComboRange(boxLimitation, "Диапазон", SD::XY0(), PanelConfig::WIDTH_COMBO, choices, choices);
 
         y += 40;
 

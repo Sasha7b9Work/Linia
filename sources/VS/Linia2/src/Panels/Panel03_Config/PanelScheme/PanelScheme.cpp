@@ -68,7 +68,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
             "Полевой или МОП транзистор PMOS (четырёхполюсный)"
         };
 
-        comboCategory = new BmpButtonsCombo(boxCategory, "Категория", { 18, SD::Y_SB(25) }, { 32, 42 }, files, tooltips, 0, 4);
+        comboCategory = new BmpButtonsCombo(boxCategory, "Категория", { 18, SD::Y0() }, { 32, 42 }, files, tooltips, 0, 4);
     }
 
     (void)boxCategory;
@@ -83,7 +83,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         // IDC_COMBOMOD
         // IDC_BUTTON_LOADTST
-        comboTest = new ButtonsCombo(boxTest, "", { PanelConfig::X, SD::Y_SB(20) }, 100, choices, choices, 1);
+        comboTest = new ButtonsCombo(boxTest, "", SD::XY0(), 100, choices, choices, 1);
 
         btnLoad = new wxButton(boxTest, wxID_ANY, _L("Загрузить"), { PanelConfig::X, SD::Y_SB(50) }, { 100, 30 });
 
