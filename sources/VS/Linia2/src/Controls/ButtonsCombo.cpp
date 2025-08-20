@@ -160,6 +160,8 @@ void ButtonsCombo::OnButtonClicked(wxCommandEvent &)
 
         popup->Position(pos, wxSize(0, 0));
         popup->Popup();
+        popup->Refresh();
+        popup->Update();
     }
 }
 
