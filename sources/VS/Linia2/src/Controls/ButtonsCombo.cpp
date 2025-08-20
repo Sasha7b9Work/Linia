@@ -28,7 +28,7 @@ class ButtonPopup : public wxPopupTransientWindow
 {
 public:
     ButtonPopup(wxWindow *parent) :
-        wxPopupTransientWindow(parent, wxBORDER_SIMPLE)
+        wxPopupTransientWindow(parent, wxBORDER_SIMPLE | wxPU_CONTAINS_CONTROLS)
     {
         wxArrayString &labels = GetCombo()->labels;
 
@@ -83,9 +83,14 @@ public:
         outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 10);
         SetSizer(outerSizer);
 
+        Layout();
+
         Fit(); // Автоподбор размера
 
         GetParent()->Bind(wxEVT_KEY_DOWN, &ButtonPopup::OnKeyDown, this);
+
+        Refresh();
+        Update();
     }
 
 private:
