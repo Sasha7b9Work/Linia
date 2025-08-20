@@ -63,6 +63,8 @@ public:
             child->SetBackgroundStyle(wxBG_STYLE_ERASE);
             child->Refresh(); // Обновляем внешний вид
         }
+
+        SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
     }
 
 private:
