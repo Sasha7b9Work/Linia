@@ -12,6 +12,7 @@ public:
         {
             font = GetFont();
             font.SetWeight(wxFONTWEIGHT_BOLD);
+            font.SetPointSize(font.GetPointSize() + 1);
         }
     }
 
