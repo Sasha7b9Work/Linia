@@ -5,8 +5,6 @@
 namespace SD
 {
     // Координаты первого элемента в комбобоксе
-    int X0();
-    int Y0();
     wxPoint XY0();
 
     //  Static Box
