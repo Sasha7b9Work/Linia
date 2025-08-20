@@ -10,9 +10,6 @@ public:
     BmpButtonPopup(wxWindow *parent, const wxString &title, const wxArrayString &files, const wxArrayString &tooltips, int buttons_in_row) :
         wxPopupTransientWindow(parent)
     {
-//        wxToolTip::SetAutoPop(5000); // Увеличиваем время показа
-        wxToolTip::SetDelay(100);
-
         // Основной контейнер с отступами по краям
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
         wxPanel *mainPanel = new wxPanel(this, wxID_ANY);
