@@ -7,6 +7,7 @@
 #include "Panels/Panel03_Config/Panel03_Config.h"
 #include "Controls/CustomComboBox.h"
 #include "Device/SettingsDevice.h"
+#include "Controls/StaticBox.h"
 
 
 /*
@@ -28,7 +29,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    wxStaticBox *boxScan = new wxStaticBox(this, wxID_ANY, _L("Развёртка"), { x, 0 }, { w, 140 }, wxBORDER_NONE);          // IDC_STATICRAZV
+    StaticBox *boxScan = new StaticBox(this, _L("Развёртка"), { x, 0 }, { w, 140 });          // IDC_STATICRAZV
 
     {
         wxArrayString files =
@@ -72,7 +73,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
         chbDutyCycleIncrease = new CheckButton(boxScan, _L("Скважн. x 2"), { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO);
     }
 
-    wxStaticBox *boxMeter = new wxStaticBox(this, wxID_ANY, _L("Измеритель"), { x, boxScan->GetPosition().y + boxScan->GetSize().y }, { w, 50 });
+    StaticBox *boxMeter = new StaticBox(this, _L("Измеритель"), { x, boxScan->GetPosition().y + boxScan->GetSize().y }, { w, 50 });
 
     {
         int y = 20;
@@ -86,7 +87,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
         comboCurrent = new ButtonsComboRange(boxMeter, "Ic", { 100, SD::Y_SB(y) }, 80, names, names);
     }
 
-    wxStaticBox *boxSource = new wxStaticBox(this, wxID_ANY, "Источник U", { x, boxMeter->GetPosition().y + boxMeter->GetSize().y }, { w, h - boxMeter->GetPosition().y - boxMeter->GetSize().y });
+    StaticBox *boxSource = new StaticBox(this, "Источник U", { x, boxMeter->GetPosition().y + boxMeter->GetSize().y }, { w, h - boxMeter->GetPosition().y - boxMeter->GetSize().y });
 
     {
         wxArrayString names
