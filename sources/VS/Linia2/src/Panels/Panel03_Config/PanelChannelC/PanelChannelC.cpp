@@ -73,6 +73,10 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
         chbDutyCycleIncrease = new CheckButton(boxScan, _L("Скважн. x 2"), { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO);
     }
 
+    wxFont font = boxScan->GetFont();
+    font.SetWeight(wxFONTWEIGHT_BOLD);
+    boxScan->SetFont(font);
+
     StaticBox *boxMeter = new StaticBox(this, _L("Измеритель"), { x, boxScan->GetPosition().y + boxScan->GetSize().y + SD::DSBY() }, { w, 50 });
 
     {
@@ -84,6 +88,8 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
         RangeI::FillArrayStrings(names, DSet::Type::ChanC_Meas, false);
         comboCurrent = new ButtonsComboRange(boxMeter, "Ic", { 100, SD::XY0().y }, 80, names, names);
     }
+
+    boxMeter->SetFont(font);
 
     StaticBox *boxSource = new StaticBox(this, "Источник U", { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + SD::DSBY() }, { w, h - boxMeter->GetPosition().y - boxMeter->GetSize().y - SD::DSBY() });
 
@@ -118,6 +124,8 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
 
         spinStart = new SliderInt(boxSource, { 10, SD::Y_SB(y) }, width, 0, 100);
     }
+
+    boxSource->SetFont(font);
 
     Bind(wxEVT_COMBOBOX, &PanelChannelC::OnEventComboBox, this);
 
