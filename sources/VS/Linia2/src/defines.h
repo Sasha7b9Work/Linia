@@ -79,7 +79,7 @@ static pString DIRECT_PROMT = "<- ";
 
 // Яркость элементов управления
 #ifdef WIN32
-    #define LIGHTNESS 75
+    #define LIGHTNESS 300
 #else
     #define LIGHTNESS 140
 #endif
