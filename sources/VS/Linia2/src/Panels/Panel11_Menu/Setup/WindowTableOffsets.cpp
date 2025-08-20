@@ -15,13 +15,11 @@ WindowTableOffsets::WindowTableOffsets() :
     int x = 500;
     int y = 20;
 
-    new wxStaticText(this, wxID_ANY, "Tаблица", { x - 20, SD::Y_SB(y) });
-
     wxArrayString choices;
     choices.Add("смещений");
     choices.Add("коэффициентов");
 
-    comboType = new wxComboBox(this, wxID_ANY, choices[0], { x + 40, SD::Y_SB(y - 3) }, { 90, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+    comboType = new ButtonsCombo(this, "Таблица", { x, SD::Y_SB(y - 3) }, 130, choices, choices, 1);
 
     y = CreateLabelGroup(this, x, y + 20, "Канал С");
     y = CreateRadioButton(this, x, y, &rbChanC_MeasI, "Измеритель I");
@@ -54,11 +52,7 @@ WindowTableOffsets::WindowTableOffsets() :
     {
         // Включаем соотвествующие поля
 
-        int id = comboType->GetId();
-
-        wxCommandEvent evt(wxEVT_COMBOBOX, id);
-        evt.SetInt(comboType->GetCurrentSelection());
-        this->ProcessWindowEvent(evt);
+        GF::SendCommandEvent(comboType, wxEVT_COMBOBOX, comboType->GetCurrentSelection());
     }
 }
 

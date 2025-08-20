@@ -2,31 +2,86 @@
 #pragma once
 #include "Controls/Buttons.h"
 
+
 // Кнопка с рисунком, по нажатию на которую открывается окно с другими выборами
 
 
-class ButtonsCombo : public wxButton
+class DrawingButton : public wxButton
 {
 public:
+    DrawingButton(wxWindow *parent, int id, const wxString &, const wxPoint &, const wxSize &, const wxString &name_file = "");
 
-    ButtonsCombo(wxWindow *parent, const wxString &title, const wxPoint &pos, const wxSize &,
-        const wxArrayString &names,             // Эти изображения будут на кнопках
+private:
+
+    wxString file_name;
+
+    void OnPaint(wxPaintEvent &);
+};
+
+
+class ButtonsCombo : public DrawingButton
+{
+    friend class ButtonPopup;
+
+public:
+
+    struct Type
+    {
+        enum E
+        {
+            Text,
+            Bitmap
+        };
+    };
+
+    explicit ButtonsCombo(wxWindow *parent, const wxString &title, const wxPoint &pos, int width,
+        const wxArrayString &labels,
         const wxArrayString &tooltips,
-        int num_file,                           // Эта изображение будет на главной кнопке
-        int buttons_in_row);                    // В каждом ряду будет расположено столько кнопок
+        int buttons_in_row,                     // В каждом ряду будет расположено столько кнопок
+        Type::E type = Type::Text);
 
-    void SetCurrentChoice(int);
+    void SetCurrentSelection(int);
 
-    int GetCurrentChoice() const;
+    void SetLastSelection();
+
+    void SetChoices(const wxArrayString &labels, const wxArrayString &tooltips);
+
+    void SetChoice(const wxString &);
+
+    int GetCurrentSelection() const;
+
+    wxString GetCurrentString() const;
+
+protected:
+
+    bool insert_empty = false;          // true, если перед первым элементом нужно вставлять пустые элементы (для диапазонов, чтобы они согласованно располагались по столбцам)
 
 private:
 
     int current_choice = -1;
-
     wxString title;
-    wxArrayString names;
+    wxArrayString labels;
     wxArrayString tooltips;
     int buttons_in_row;
 
     void OnButtonClicked(wxCommandEvent &);
+
+    // Возвращает количество начальных пустых элементов
+    int NumEmptyes() const;
+
+    // Между строками будут пробелы таким образом, что строки будут по краям кнопки
+    void SetExtendedLabel(const wxString &, const wxString &);
+    void SetExtendedLabel(const wxString &, int num_spaces, const wxString &);
+};
+
+
+class ButtonsComboRange : public ButtonsCombo
+{
+public:
+
+    ButtonsComboRange(wxWindow *parent, const wxString &title, const wxPoint &pos, int width,
+        const wxArrayString &labels,
+        const wxArrayString &tooltips);
+
+private:
 };

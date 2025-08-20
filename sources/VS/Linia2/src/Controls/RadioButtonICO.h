@@ -1,6 +1,6 @@
 ﻿// 2025/08/08 21:54:40 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Controls/PainterBMP.h"
+#include "Controls/Painter.h"
 
 
 class RadioButtonICO : public wxPanel

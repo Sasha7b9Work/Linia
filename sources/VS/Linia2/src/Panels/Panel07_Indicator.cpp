@@ -4,6 +4,7 @@
 #include "Panels/Panel07_Indicator.h"
 #include "MainWindow.h"
 #include "Utils/SystemDepend.h"
+#include "Controls/Bitmap.h"
 
 
 PanelIndicator *PanelIndicator::self = nullptr;
@@ -15,7 +16,13 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
 {
     self = this;
 
-    new wxToggleButton(this, wxID_ANY, "ИЗМЕРЕНИЕ", { 5, 10 }, { 90, BUTTON_HEIGHT });
+    wxArrayString images =
+    {
+        "buttons/start_off.bmp",
+        "buttons/start_on.bmp"
+    };
+
+    button_start = new ButtonBitmapChoice(this, { 0, 0 }, { 64 - 10, 60 - 10 }, images);
 
     wxStaticText *text = new wxStaticText(this, wxID_ANY, "Uc 100 %", { 105, 5 }, { 25, 25});
 
@@ -25,4 +32,18 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
     font.SetPointSize(font.GetPointSize() + 7);
     font.SetWeight(wxFONTWEIGHT_BOLD);
     text->SetFont(font);
+
+    button_start->Bind(wxEVT_BUTTON, &PanelIndicator::OnEventButton, this);
+}
+
+
+void PanelIndicator::OnEventButton(wxCommandEvent &event)
+{
+    int id = event.GetId();
+
+    if (id == button_start->GetId())
+    {
+    }
+
+    event.Skip();
 }

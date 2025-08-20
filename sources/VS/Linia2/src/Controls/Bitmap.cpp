@@ -44,7 +44,14 @@ Bitmap &Bitmap::Get(const wxString &file_name)
         bitmaps[file_name] = Bitmap(file_name);
     }
 
-    return bitmaps[file_name];
+    Bitmap &result = bitmaps[file_name];
+
+    if (!result.GetBitmap().IsOk())
+    {
+        LOG_ERROR("Can not load image %s", file_name.c_str().AsChar());
+    }
+
+    return result;
 }
 
 

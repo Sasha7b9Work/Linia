@@ -9234,7 +9234,6 @@ if (!n_er)
 		(m_nelement== NPN || m_nelement== PNP|| m_nelement== NPN4 || m_nelement== PNP4)&&
 		m_sArg==_T(""))	{ m_bBetai = true; m_uFunc = 5;}////m_uFunc>1--!
 
-//	if (m_iQue1==COLLECTOR && m_sPar==_T("S"))
 	if (m_iQue1==COLLECTOR && m_sPar==_T("S") &&
 		(m_nelement== NMOS || m_nelement== PMOS|| m_nelement== NMOS4 || m_nelement== PMOS4))
 	{
@@ -9248,14 +9247,8 @@ if (!n_er)
 		(m_irazv == IMP_POS || m_irazv==IMP_NEG || m_irazv == DC_POS || m_irazv==DC_NEG))
 		{ m_bS = true; m_uFunc = 3;}////---!
 
-/*		if (m_sAxisX!=m_sKolMeasI || m_sAxisY!=m_sBazaSource)//if (m_sAxisX!=_T("Id") && m_sAxisY!=_T("Ug"))  
-		{ str=_T("ERROR 129: Ќеверно задан режим осей дл€ расчета S\r\n");
-		  array_error.SetAtGrow(n_er,str); 
-		  n_er++;
-		}
-*/	}
+	}
 
-//	if (m_iQue1==BAZA && m_sPar==_T("S"))
 	if (m_iQue1==BAZA && m_sPar==_T("S")&&
 		(m_nelement== NMOS || m_nelement== PMOS|| m_nelement== NMOS4 || m_nelement== PMOS4))
 	{ 
@@ -9289,40 +9282,6 @@ if (!n_er)
 	    n_er++;
 	  }
 
-/*
-	  if ((m_iQue1==BAZA && m_sPar==_T("Beta") && 
-		 m_sAxisX==_T("Ib") && m_sAxisY==_T("Ic") && m_sBazaSource== _T("Ib") && m_sArg==m_sAxisX &&
-		(m_irazv == IMP_POS || m_irazv==IMP_NEG  || m_irazv == DC_POS || m_irazv==DC_NEG)))
-	  { m_bBeta = true; m_uFunc = 3;}//---!
-	  if ((m_iQue1==BAZA && m_sPar==_T("Beta") && 
-		 m_sAxisX==_T("Ib") && m_sAxisY==_T("Ic") && m_sBazaSource== _T("Ib") && m_sArg==m_sAxisY &&
-		(m_irazv == IMP_POS || m_irazv==IMP_NEG  || m_irazv == DC_POS || m_irazv==DC_NEG)))
-	  { m_bBeta = true; m_uFunc = 2;}//---!
-	  if (m_iQue1==COLLECTOR && m_sPar==_T("Beta") && //(
-		 m_sAxisX==_T("Ic") && m_sAxisY==_T("Ib") && m_sBazaSource== _T("Ib") && m_sArg==m_sAxisX &&
-		(m_irazv == IMP_POS || m_irazv==IMP_NEG  || m_irazv == DC_POS || m_irazv==DC_NEG)) //||
-	  { m_bBeta = true; m_uFunc = 2;}//---!
-	  if (m_iQue1==COLLECTOR && m_sPar==_T("Beta") && //(
-		 m_sAxisX==_T("Ic") && m_sAxisY==_T("Ib") && m_sBazaSource== _T("Ib") && m_sArg==m_sAxisY &&
-		(m_irazv == IMP_POS || m_irazv==IMP_NEG  || m_irazv == DC_POS || m_irazv==DC_NEG)) //||
-	  { m_bBeta = true; m_uFunc = 3;}//---!
-	  if (m_iQue1==BAZA && m_sPar==_T("Beta") && 
-		 m_sAxisX!=_T("Ib") && m_sAxisY!=_T("Ic"))
-	  { str=_T("ERROR 129: Ќеверно задан режим осей дл€ расчета Beta\r\n");
-	    array_error.SetAtGrow(n_er,str); 
-	    n_er++;
-	  }
-      if (m_sPar==_T("Beta") && m_sBazaSource != _T("Ib"))
-	  { str=_T("ERROR 130: Ќеверно задан режим генератора ступенек по каналу B дл€ расчета Beta\r\n");
-	    array_error.SetAtGrow(n_er,str); 
-	    n_er++;
-	  }
-	  if (m_sPar==_T("Beta") && (m_irazv != IMP_POS && m_irazv!=IMP_NEG && m_irazv != DC_POS && m_irazv!=DC_NEG))//---!
-	  { str=_T("ERROR 131: Ќеверно задан вид развертки дл€ расчета Beta\r\n");
-	    array_error.SetAtGrow(n_er,str); 
-	    n_er++;
-	  }
-*/
 	  if (m_iQue1==COLLECTOR && m_sPar==_T("Beta") && //(
 		(m_nelement== NPN || m_nelement== PNP|| m_nelement== NPN4 || m_nelement== PNP4) &&
 		 m_sAxisX==m_sKolMeasI && m_sAxisY==m_sBazaSource && m_iBazaSource==1 && m_sArg==m_sAxisX &&
@@ -9333,24 +9292,7 @@ if (!n_er)
 		 m_sAxisX==m_sKolMeasI && m_sAxisY==m_sBazaSource && m_iBazaSource==1 && m_sArg==m_sAxisY &&
 		(m_irazv == IMP_POS || m_irazv==IMP_NEG  || m_irazv == DC_POS || m_irazv==DC_NEG)) //||
 	  { m_bBeta = true; m_uFunc = 3;}//---!
-/*	  if ((m_iQue1==BAZA && m_sPar==_T("Beta") && 
-		(m_nelement== NPN || m_nelement== PNP|| m_nelement== NPN4 || m_nelement== PNP4) &&
-		 m_sAxisX==m_sBazaSource && m_sAxisY==m_sKolMeasI && m_iBazaSource==1 && m_sArg==m_sAxisX &&
-		(m_irazv == IMP_POS || m_irazv==IMP_NEG  || m_irazv == DC_POS || m_irazv==DC_NEG)))
-	  { m_bBeta = true; m_uFunc = 3;}//---!
-	  if ((m_iQue1==BAZA && m_sPar==_T("Beta") && 
-		(m_nelement== NPN || m_nelement== PNP|| m_nelement== NPN4 || m_nelement== PNP4) &&
-		 m_sAxisX==m_sBazaSource && m_sAxisY==m_sKolMeasI && m_iBazaSource==1 && m_sArg==m_sAxisY &&
-		(m_irazv == IMP_POS || m_irazv==IMP_NEG  || m_irazv == DC_POS || m_irazv==DC_NEG)))
-	  { m_bBeta = true; m_uFunc = 2;}//---!
-	  if (m_iQue1==BAZA && m_sPar==_T("Beta") && 
-		(m_nelement== NPN || m_nelement== PNP|| m_nelement== NPN4 || m_nelement== PNP4) &&
-		 (m_sAxisX!=m_sBazaSource|| m_sAxisY!=m_sKolMeasI))
-	  { str=_T("ERROR 129: Ќеверно задан режим осей дл€ расчета Beta\r\n");
-	    array_error.SetAtGrow(n_er,str); 
-	    n_er++;
-	  }
-*/
+
 	  if ((m_iQue1==BAZA && m_sPar==_T("Beta") && 
 		(m_nelement== NPN || m_nelement== PNP|| m_nelement== NPN4 || m_nelement== PNP4) &&
 		 m_sAxisX==m_sKolMeasI && m_sAxisY==m_sBazaSource && m_iBazaSource==1 && m_sArg==m_sAxisX &&
@@ -9390,24 +9332,7 @@ if (!n_er)
 		 m_sAxisX==m_sKolMeasI && m_sAxisY==m_sBazaSource && m_iBazaSource==1 && m_sArg==m_sAxisY &&
 		(m_irazv == IMP_POS || m_irazv==IMP_NEG  || m_irazv == DC_POS || m_irazv==DC_NEG)) //||
 	  { m_bBetai = true; m_uFunc = 3;}//---!
-/*	  if ((m_iQue1==BAZA && m_sPar==_T("Betai") && 
-		(m_nelement== NPN || m_nelement== PNP|| m_nelement== NPN4 || m_nelement== PNP4) &&
-		 m_sAxisX==m_sBazaSource && m_sAxisY==m_sKolMeasI && m_iBazaSource==1 && m_sArg==m_sAxisX &&
-		(m_irazv == IMP_POS || m_irazv==IMP_NEG  || m_irazv == DC_POS || m_irazv==DC_NEG)))
-	  { m_bBetai = true; m_uFunc = 3;}//---!
-	  if ((m_iQue1==BAZA && m_sPar==_T("Betai") && 
-		(m_nelement== NPN || m_nelement== PNP|| m_nelement== NPN4 || m_nelement== PNP4) &&
-		 m_sAxisX==m_sBazaSource && m_sAxisY==m_sKolMeasI && m_iBazaSource==1 && m_sArg==m_sAxisY &&
-		(m_irazv == IMP_POS || m_irazv==IMP_NEG  || m_irazv == DC_POS || m_irazv==DC_NEG)))
-	  { m_bBetai = true; m_uFunc = 2;}//---!
-	  if (m_iQue1==BAZA && m_sPar==_T("Betai") && 
-		(m_nelement== NPN || m_nelement== PNP|| m_nelement== NPN4 || m_nelement== PNP4) &&
-		 (m_sAxisX!=m_sBazaSource || m_sAxisY!=m_sKolMeasI))
-	  { str=_T("ERROR 129: Ќеверно задан режим осей дл€ расчета Betai\r\n");
-	    array_error.SetAtGrow(n_er,str); 
-	    n_er++;
-	  }
-*/
+
 	  if ((m_iQue1==BAZA && m_sPar==_T("Betai") && 
 		(m_nelement== NPN || m_nelement== PNP|| m_nelement== NPN4 || m_nelement== PNP4) &&
 		 m_sAxisX==m_sKolMeasI && m_sAxisY==m_sBazaSource && m_iBazaSource==1 && m_sArg==m_sAxisX &&
@@ -9444,35 +9369,15 @@ if (!n_er)
 	    array_error.SetAtGrow(n_er,str); 
 	    n_er++;	
 	}
-/*	if  (!m_sPar.IsEmpty() && m_sPar==_T("R") &&  m_iQue1==BAZA &&
-		(m_sAxisX!=m_sBazaSource || m_sAxisY!=m_sBazaMeasLimit))
-	{
-		str=_T("ERROR 129: Ќеверно задан режим осей дл€ расчета R\r\n");
-	    array_error.SetAtGrow(n_er,str); 
-	    n_er++;	
-	}
-*/
+
 	if (!m_sPar.IsEmpty() && m_sPar==_T("R")&& // m_iQue1==COLLECTOR &&
 		m_sAxisX==m_sKolMeasU && m_sAxisY==m_sKolMeasI && 
 		m_sArg==m_sAxisX) {m_bR = TRUE; m_uFunc = 4;}//R от pM1
 	if (!m_sPar.IsEmpty() && m_sPar==_T("R")&&  //m_iQue1==COLLECTOR &&
 		m_sAxisX==m_sKolMeasU && m_sAxisY==m_sKolMeasI && 
 		m_sArg==m_sAxisY) {m_bR = TRUE; m_uFunc = 2;}//R от pM2
-/*
-	if (!m_sPar.IsEmpty() && m_sPar==_T("R")&&  m_iQue1==BAZA && 
-		 m_sAxisX==m_sBazaSource && m_sAxisY==m_sBazaMeasLimit &&// m_iBazaSource==1 &&
-		  m_sArg==m_sAxisX)// m_sBazaSource!= m_sBazaMeas &&
-		{m_bR = TRUE; m_uFunc = 3;}//R от X_axis
-	
-//	if (!m_sPar.IsEmpty() && m_sPar==_T("R")&&  m_iQue1==BAZA &&
-//		m_sAxisX==_T("Ib") && m_sAxisY==_T("Ub") && m_sBazaSource== _T("Ib")
-//		&& m_sArg==m_sAxisY) {m_bR = TRUE; m_uFunc = 3;}//R от pM3
-	if (!m_sPar.IsEmpty() && m_sPar==_T("R")&&  m_iQue1==BAZA &&
-		m_sAxisX==m_sBazaSource && m_sAxisY==m_sBazaMeasLimit && //m_iBazaSource==1 &&
-	    m_sArg==m_sAxisY)//m_sBazaSource!= m_sBazaMeas &&
-		{m_bR = TRUE; m_uFunc = 3;}//R от pM3
-*/
-	if (!m_sPar.IsEmpty() && m_sPar==_T("R")&&  m_sArg.IsEmpty()) {m_bR = TRUE; m_uFunc = 5;}// не считать параметр
+
+		if (!m_sPar.IsEmpty() && m_sPar==_T("R")&&  m_sArg.IsEmpty()) {m_bR = TRUE; m_uFunc = 5;}// не считать параметр
 	if (!m_sPar.IsEmpty() && m_sPar==m_sAxisY && m_sArg==m_sAxisX) m_uFunc = 0;//найти значение функции по значению аргумента
 	if (!m_sPar.IsEmpty() && m_sPar==m_sAxisX &&  m_sArg==m_sAxisY) m_uFunc = 1;  //найти значение аргумента по значению функции
 
@@ -9544,28 +9449,6 @@ if (!n_er)
 	}
 
 
-/*	if (!m_sUr1.IsEmpty() && !StringToValue(m_sUr1,&Ur1))
-	{ str=_T("ERROR 114: Ќеверно задано значение 1 дл€ расчета параметра.\r\n");
-	  array_error.SetAtGrow(n_er,str);
-	  n_er++;
-	}
-	if (!m_sUr2.IsEmpty() && !StringToValue(m_sUr2,&Ur2))
-	{ str=_T("ERROR 115: Ќеверно задано значение 2 дл€ расчета параметра.\r\n");
-	  array_error.SetAtGrow(n_er,str);
-	  n_er++;
-	}
-	if (!m_sMin.IsEmpty() && !StringToValue(m_sMin,&Porog_min))
-	{ str=_T("ERROR 116: Ќеверно задан MIN дл€ расчета параметра.\r\n");
-	  array_error.SetAtGrow(n_er,str);
-	  n_er++;
-	}
-	if (!m_sMax.IsEmpty() && !StringToValue(m_sMax,&Porog_max))
-	{ str=_T("ERROR 117: Ќеверно задан MAX дл€ расчета параметра.\r\n");
-	  array_error.SetAtGrow(n_er,str);
-	  n_er++;
-	}
-*/
-
 	Ur1 = GetNumberFromString(m_sUr1);
 	Ur2 = GetNumberFromString(m_sUr2);
 	Porog_min = GetNumberFromString(m_sMin);
@@ -9627,8 +9510,6 @@ if (!n_er)
 		if (m_iBazaSource==1) a=mas_d_range_ampl_bazadop_I[m_iAmplitudeStepBaza];//valueAmplBaza;
 		else a=mas_d_range_ampl_bazadop_U[m_iAmplitudeStepBaza];//valueAmplBaza;
 		b=valueBiasBaza;
-//		if (sign_ampl_baza==1) a=a*(-1.0);
-//		if (sign_bias_baza==1) b=b*(-1.0);
 		if (sign_ampl_baza==1) {a=a*(-1.0); b=b*(-1.0);}
 		if (m_bCheckBazaRejHigh) 
 		{ if (m_iQue1==COLLECTOR)  k = fabs(a*m_uStepBaza*0.1+b);
@@ -9665,29 +9546,20 @@ if (!n_er)
 		    n_er++;
 		  }
 		}//end of U
-//		m_uBitQ18 = 0;
-//	    if (!n_er && m_itipimp==TIP_IMP) m_uBitQ18 = 1;
 	  }//end of база
 
 	if (m_iCircuitDop==1 && m_iKnotDop==1)
-//	  if (m_iCircuitDop==1)
 	  { //доп.канал
 		  if (m_iDopSource==1)a=mas_d_range_ampl_bazadop_I[m_iAmplitudeStepDop];//valueAmplBaza;
 		  else a=mas_d_range_ampl_bazadop_U[m_iAmplitudeStepDop]; 
 		  b=valueBiasDop;
-//		if (sign_ampl_dop==1) a=a*(-1.0);
-//		if (sign_bias_dop==1) b=b*(-1.0);
-		if (sign_ampl_dop==1) {a=a*(-1.0); b=b*(-1.0);}
+
+		  if (sign_ampl_dop==1) {a=a*(-1.0); b=b*(-1.0);}
 		k = fabs(a*m_uStepDop+b);//fabs(valueAmplDop*m_uStepDop+valueBiasDop);
 		if (m_iDopSource==0)
 		{ //источник U
-/*		  if (fabs(valueLimitDop)>0.011)
-		  { str=_T("ERROR 123: Ќедопустимый уровень ограничени€ тока в канале S\r\n");
-		    array_error.SetAtGrow(n_er,str); 
-		    n_er++;
-		  }
-*/
-		  if (valueLimitDop>0.012)
+
+	if (valueLimitDop>0.012)
 		  { str=_T("ERROR 123: Ќедопустимый уровень ограничени€ тока в канале S\r\n");
 		    array_error.SetAtGrow(n_er,str); 
 		    n_er++;

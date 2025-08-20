@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Controls/RadioButtonICO.h"
 #include "Application.h"
+#include "Utils/GlobalFunctions.h"
 
 
 RadioButtonICO::RadioButtonICO(wxWindow *parent, const wxPoint &position, const wxSize &size, const wxString & /*name_ico*/) :
@@ -39,9 +40,5 @@ void RadioButtonICO::OnEventMouseDown(wxMouseEvent &)
 
 void RadioButtonICO::SendEvent()
 {
-    RadioButtonICO *object = this;
-    wxCommandEvent evt(wxEVT_RADIOBUTTON, object->GetId());
-    evt.SetInt(1);
-    evt.SetEventObject(object);
-    GetParent()->ProcessWindowEvent(evt);
+    GF::SendCommandEvent(this, wxEVT_RADIOBUTTON, 1);
 }

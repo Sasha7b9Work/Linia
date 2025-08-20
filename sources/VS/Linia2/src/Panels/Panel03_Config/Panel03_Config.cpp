@@ -7,7 +7,9 @@
 #include "Controls/SpinBox.h"
 #include "Panels/Panel03_Config/PanelScheme/WindowLibraryTests.h"
 #include "Panels/Panel03_Config/PanelScheme/PanelScheme.h"
+#include "Panels/Panel03_Config/PanelChannelBS/PanelChannelBS.h"
 #include "Panels/Panel03_Config/PanelChannelC/PanelChannelC.h"
+#include "Panels/Panel03_Config/PanelCalculate.h"
 
 
 PanelConfig *PanelConfig::self = nullptr;
@@ -43,11 +45,7 @@ PanelConfig::PanelConfig(wxWindow* parent) :
     {
         // Включаем панель
 
-        int id = btnChannelC->GetId();
-
-        wxCommandEvent evt(wxEVT_TOGGLEBUTTON, id);
-        evt.SetInt(1);
-        this->ProcessWindowEvent(evt);
+        GF::SendCommandEvent(btnScheme, wxEVT_TOGGLEBUTTON, 1);
     }
 }
 
@@ -55,308 +53,56 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
 {
     int x = 4;
     int w = MainWindow::WIDTH3 - 2 * x - 1;
+    int h = HEIGHT - 47;
 
-    int id = button->GetId();
-
-    if (btnChannelC && id == btnChannelC->GetId())
+    if (button == btnChannelB)
     {
-        return new PanelChannelC(self, x, w);
+        return new PanelChannelB(self, x, w, h);
     }
-    else if (btnScheme && id == btnScheme->GetId())
+    else if (button == btnChannelS)
     {
-        return new PanelScheme(self, x);
+        return new PanelChannelS(self, x, w, h);
     }
-
-    wxPanel *panel = new wxPanel(self);
-
-    panel->SetSize({ MainWindow::WIDTH3, HEIGHT - 40 });
-    panel->SetPosition({ 0, 40 });
-
-    if (id == btnChannelB->GetId())
+    else if (button == btnChannelC)
     {
-        CreatePanelChannelB(panel, x, w);
+        return new PanelChannelC(self, x, w, h);
     }
-    else if (id == btnChannelS->GetId())
+    else if (button == btnScheme)
     {
-        CreatePanelChannelS(panel, x, w);
+        return new PanelScheme(self, x, w, h);
     }
-    else if (id == btnCalculate->GetId())
+    else if (button == btnCalculate)
     {
-        CreatePanelCalculate(panel, x, w);
+        return new PanelCalculate(self, x, w, h);
     }
 
-    return panel;
-}
-
-
-void PanelConfig::CreatePanelChannelB(wxPanel *panel, int x, int w)
-{
-    wxStaticBox *boxGenerator = new wxStaticBox(panel, wxID_ANY, _L("Генератор ступенек"), { x, 0 }, { w, 300 });
-
-    {
-        int y = 25;
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Тип"), { 10, SD::Y_SB(y) });
-
-        wxArrayString choices;
-        choices.Add("U");
-        choices.Add("I");
-
-        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 70, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-
-        y += 25;
-
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Импульс"), { 10, SD::Y_SB(y) });
-
-        choices.Clear();
-        choices.Add(_L("Вкл"));
-        choices.Add(_L("Выкл"));
-
-        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 70, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-
-        y += 25;
-
-        choices.Clear();
-        choices.Add("2V");
-
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Амплитуда ступени"), { 10, SD::Y_SB(y) });
-
-        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 130, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-
-        y += 25;
-
-        new wxCheckBox(boxGenerator, wxID_ANY, "x 0.1", { 10, SD::Y_SB(y) }, { 60, TEXTCNTRL_HEIGHT });
-
-        y += 25;
-
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Число ступенек"), { 10, SD::Y_SB(y + 3) });
-
-        new SpinBox(boxGenerator, wxID_ANY, "5", { 120, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
-
-        y += 25;
-
-        choices.Clear();
-        choices.Add(_L("прямая"));
-        choices.Add(_L("обратная"));
-
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Полярность"), { 10, SD::Y_SB(y + 3) });
-
-        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-
-        y += 25;
-
-        wxStaticBox *boxOffset = new wxStaticBox(boxGenerator, wxID_ANY, _L("Смещение"), { x, y }, { w - 10, 100 });
-
-        {
-            y = 20;
-
-            new wxSlider(boxOffset, wxID_ANY, 5, 0, 20, { 10, SD::Y_SB(y) }, { 120, TEXTCNTRL_HEIGHT });
-
-            y += 25;
-
-            choices.Clear();
-            choices.Add(_L("прямая"));
-            choices.Add(_L("обратная"));
-
-            new wxStaticText(boxOffset, wxID_ANY, _L("Полярность"), { 10, SD::Y_SB(y + 3) });
-
-            new wxComboBox(boxOffset, wxID_ANY, choices[0], { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-        }
-    }
-
-    wxStaticBox *boxLimitation = new wxStaticBox(panel, wxID_ANY, _L("Ограничение"), { x, boxGenerator->GetSize().y + x }, { w, 100 });
-
-    {
-        int y = 20;
-
-        new wxStaticText(boxLimitation, wxID_ANY, _L("Диапазон"), { 10, SD::Y_SB(y) });
-
-        wxArrayString choices;
-        choices.Add("10 mA");
-
-        new wxComboBox(boxLimitation, wxID_ANY, choices[0], { 100, SD::Y_SB(y - 3) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-
-        y += 25;
-
-        new wxSlider(boxLimitation, wxID_ANY, 5, 0, 20, { 10, SD::Y_SB(y) }, { 120, TEXTCNTRL_HEIGHT });
-    }
-}
-
-
-void PanelConfig::CreatePanelChannelS(wxPanel *panel, int x, int w)
-{
-    wxStaticBox *boxGenerator = new wxStaticBox(panel, wxID_ANY, _L("Генератор ступенек"), { x, 0 }, { w, 300 });
-
-    {
-        int y = 25;
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Тип"), { 10, SD::Y_SB(y) });
-
-        wxArrayString choices;
-        choices.Add("U");
-        choices.Add("I");
-
-        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 70, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-
-        y += 25;
-
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Импульс"), { 10, SD::Y_SB(y) });
-
-        choices.Clear();
-        choices.Add(_L("Вкл"));
-        choices.Add(_L("Выкл"));
-
-        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 70, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-
-        y += 25;
-
-        choices.Clear();
-        choices.Add("2V");
-
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Амплитуда ступени"), { 10, SD::Y_SB(y) });
-
-        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 130, SD::Y_SB(y - 3) }, { 60, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-
-        y += 25;
-
-        y += 25;
-
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Число ступенек"), { 10, SD::Y_SB(y + 3) });
-
-        new SpinBox(boxGenerator, wxID_ANY, "5", { 120, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
-
-        y += 25;
-
-        choices.Clear();
-        choices.Add(_L("прямая"));
-        choices.Add(_L("обратная"));
-
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Полярность"), { 10, SD::Y_SB(y + 3) });
-
-        new wxComboBox(boxGenerator, wxID_ANY, choices[0], { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-
-        y += 25;
-
-        wxStaticBox *boxOffset = new wxStaticBox(boxGenerator, wxID_ANY, _L("Смещение"), { x, y }, { w - 10, 100 });
-
-        {
-            y = 20;
-
-            new wxSlider(boxOffset, wxID_ANY, 5, 0, 20, { 10, SD::Y_SB(y) }, { 120, TEXTCNTRL_HEIGHT });
-
-            y += 25;
-
-            choices.Clear();
-            choices.Add(_L("прямая"));
-            choices.Add(_L("обратная"));
-
-            new wxStaticText(boxOffset, wxID_ANY, _L("Полярность"), { 10, SD::Y_SB(y + 3) });
-
-            new wxComboBox(boxOffset, wxID_ANY, choices[0], { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-        }
-    }
-
-    wxStaticBox *boxLimitation = new wxStaticBox(panel, wxID_ANY, _L("Ограничение"), { x, boxGenerator->GetSize().y + x }, { w, 100 });
-
-    {
-        int y = 20;
-
-        new wxStaticText(boxLimitation, wxID_ANY, _L("Диапазон"), { 10, SD::Y_SB(y) });
-
-        wxArrayString choices;
-        choices.Add("10 mA");
-
-        new wxComboBox(boxLimitation, wxID_ANY, choices[0], { 100, SD::Y_SB(y - 3) }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
-
-        y += 25;
-
-        new wxSlider(boxLimitation, wxID_ANY, 5, 0, 20, { 10, SD::Y_SB(y) }, { 120, TEXTCNTRL_HEIGHT });
-    }
-}
-
-
-void PanelConfig::CreatePanelCalculate(wxPanel *panel, int x, int w)
-{
-    wxStaticBox *boxGraph = new wxStaticBox(panel, wxID_ANY, _L("График"), { x, 0 }, { w, 75 });
-
-    int y = 20;
-    const int dy = 3;
-
-    {
-        new wxStaticText(boxGraph, wxID_ANY, _L("Ось X"), { 10, SD::Y_SB(y + dy) });
-
-        new wxTextCtrl(boxGraph, wxID_ANY, "Ud", { 100, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
-
-        y += 25;
-
-        new wxStaticText(boxGraph, wxID_ANY, _L("Ось Y"), { 10, SD::Y_SB(y + dy) });
-
-        new wxTextCtrl(boxGraph, wxID_ANY, "Id", { 100, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
-    }
-
-    wxStaticBox *boxParameter = new wxStaticBox(panel, wxID_ANY, _L("Параметр"), { x, boxGraph->GetSize().y + x }, { w, 200 });
-
-    {
-        y = 20;
-
-        new wxStaticText(boxParameter, wxID_ANY, _L("Найти"), { 10, SD::Y_SB(y + dy) });
-        new wxStaticText(boxParameter, wxID_ANY, _L("при"), { 100, SD::Y_SB(y + dy) });
-
-        new wxTextCtrl(boxParameter, wxID_ANY, "Id", { 50, SD::Y_SB(y) }, { 40, TEXTCNTRL_HEIGHT });
-        new wxTextCtrl(boxParameter, wxID_ANY, "Ud", { 140, SD::Y_SB(y) }, { 40, TEXTCNTRL_HEIGHT });
-
-        y += 30;
-
-        new wxStaticText(boxParameter, wxID_ANY, _L("равном"), { 10, SD::Y_SB(y) });
-
-        y += 20;
-
-        new wxStaticText(boxParameter, wxID_ANY, _L("значению") + " 1", { 10, SD::Y_SB(y + dy) });
-        new wxTextCtrl(boxParameter, wxID_ANY, "6", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT });
-
-        y += 25;
-
-        new wxStaticText(boxParameter, wxID_ANY, _L("значению") + " 2", { 10, SD::Y_SB(y + dy) });
-        new wxTextCtrl(boxParameter, wxID_ANY, "6", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT });
-
-        y += 25;
-
-        new wxStaticText(boxParameter, wxID_ANY, _L("на ступеньке") + " № 5", { 10, SD::Y_SB(y + dy) });
-
-        wxStaticBox *boxCalculate = new wxStaticBox(boxParameter, wxID_ANY, _L("Рассчитать"), { x, y }, { w - 10, 60 });
-
-        {
-            y = 25;
-
-            new wxRadioButton(boxCalculate, wxID_ANY, "dY/dX", { 10, SD::Y_SB(y) });
-            new wxRadioButton(boxCalculate, wxID_ANY, "dX/dY", { 100, SD::Y_SB(y) });
-        }
-    }
-
-    wxStaticBox *boxBorder = new wxStaticBox(panel, wxID_ANY, _L("Пороговые значения"), { x, boxParameter->GetPosition().y + boxParameter->GetSize().y + x }, { w, 80 });
-
-    {
-        new wxStaticText(boxBorder, wxID_ANY, "MIN", { 10, SD::Y_SB(y + dy) });
-        new wxTextCtrl(boxBorder, wxID_ANY, "3", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT });
-
-        y += 25;
-
-        new wxStaticText(boxBorder, wxID_ANY, "MAX", { 10, SD::Y_SB(y + dy) });
-        new wxTextCtrl(boxBorder, wxID_ANY, "4", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT });
-    }
+    return nullptr;
 }
 
 
 void PanelConfig::OnEventToggleButton(wxCommandEvent &event)
 {
-    if (!event.IsChecked())
-    {
-        ((wxToggleButton *)event.GetEventObject())->SetValue(true);
-    }
-    else
-    {
-        UnсheckAllAcross(event.GetId());
+    int id = event.GetId();
 
-        EnablePanel(event.GetId());
+    if (id == btnChannelC->GetId() ||
+        id == btnChannelB->GetId() ||
+        id == btnChannelS->GetId() ||
+        id == btnScheme->GetId() ||
+        id == btnCalculate->GetId())
+    {
+        if (!event.IsChecked())
+        {
+            ((wxToggleButton *)event.GetEventObject())->SetValue(true);
+        }
+        else
+        {
+            UnсheckAllAcross(event.GetId());
+
+            EnablePanel(event.GetId());
+        }
     }
+
+    event.Skip();
 }
 
 

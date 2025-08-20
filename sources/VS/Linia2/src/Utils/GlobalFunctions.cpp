@@ -62,9 +62,9 @@ CheckButton *GF::_FindCheckButton(const wxWindow *window, int id)
 }
 
 
-wxComboBox *GF::_FindComboBox(const wxWindow *window, int id)
+ButtonsCombo *GF::_FindComboBox(const wxWindow *window, int id)
 {
-    return (wxComboBox *)window->FindWindow(id);
+    return (ButtonsCombo *)window->FindWindow(id);
 }
 
 
@@ -120,11 +120,20 @@ void GF::ShowModalInfo(wxWindow *windows, const wxString &text)
 }
 
 
-void GF::SendCommandEvent(wxWindow *window, int type_event, int id, int int_value)
+void GF::SendCommandEvent(wxWindow *window, int id, int type_event, int int_value)
 {
     wxCommandEvent evt(type_event, id);
     evt.SetInt(int_value);
-    window->ProcessWindowEvent(evt);
+    wxPostEvent(window->GetEventHandler(), evt);
+}
+
+
+void GF::SendCommandEvent(wxWindow *object, int type_event, int int_value)
+{
+    wxCommandEvent event(type_event, object->GetId());
+    event.SetEventObject(object);
+    event.SetInt(int_value);
+    wxPostEvent(object->GetEventHandler(), event);
 }
 
 

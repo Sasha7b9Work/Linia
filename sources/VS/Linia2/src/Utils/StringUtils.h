@@ -61,6 +61,9 @@ private:
 
 namespace SU
 {
+    // Переводит в double строки типа "20 nA", "2 kV"
+    double StringToDouble(const wxString &);
+
     // Возвращает указатель на первое вхождение sub_word в word. nullptr, если не обнаружено
     pchar Consist(pchar word, pchar sub_word);
 
@@ -85,8 +88,5 @@ namespace SU
     // Оставить number последних символов от in. Если строка меньше, то в начале добавить пробелы
     pchar LeaveTheLastOnes(pchar in, int number);
 
-    uint CalculateCRC32(const void *buffer, int size);
-
-    // Заменить все символы from на to
-    void ReplaceSymbols(char *, char from, char to);
+//    uint CalculateCRC32(const void *buffer, int size);
 };

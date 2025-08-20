@@ -1,5 +1,6 @@
 ﻿// 2025/6/4 10:25:39 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Controls/ButtonsCombo.h"
 
 
 // Визуальное представление регистра

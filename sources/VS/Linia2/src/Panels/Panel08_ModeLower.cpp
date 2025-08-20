@@ -21,11 +21,9 @@ PanelModeLower::PanelModeLower(wxWindow *parent) :
 
         new wxStaticText(boxCategory, wxID_ANY, _L("Канал") + " B:", { 10, SD::Y_SB(60) });
 
-        new wxStaticText(boxCategory, wxID_ANY, wxString("1 ") + _L("очередь"), { 5, SD::Y_SB(100) });
-
         wxArrayString choices;
-        choices.Add(_L("Канал") + " C");
+        choices.Add("C");
 
-        new wxComboBox(boxCategory, wxID_ANY, choices[0], { 5, 120 }, { 80, TEXTCNTRL_HEIGHT }, choices, wxCB_READONLY);
+        new ButtonsCombo(boxCategory, "1 очередь", { 5, 120 }, 100, choices, choices, 1);
     }
 }

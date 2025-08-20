@@ -1,6 +1,6 @@
 // 2023/09/02 11:37:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Controls/PainterRect.h"
+#include "Controls/Painter.h"
 #include "Controls/Bitmap.h"
 
 
@@ -32,7 +32,7 @@ class CheckButton : public wxPanel
 {
 public:
 
-    CheckButton(wxWindow *, int, const wxString &, const wxPoint &, const wxSize &);
+    CheckButton(wxWindow *, const wxString &, const wxPoint &, int width);
 
     bool GetValue() const;
 
@@ -48,8 +48,10 @@ private:
     static const int delta_id = 0;
 
     void OnEventCheckBox(wxCommandEvent &);
-
     void OnEventToggleButton(wxCommandEvent &);
+
+    // Послать событие переключения кнопки
+    void SendEvent();
 };
 
 

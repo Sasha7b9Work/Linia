@@ -1,15 +1,19 @@
 ﻿// 2025/6/1 17:20:51 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Panels/Panel.h"
-#include "Controls/PainterBMP.h"
-#include "Controls/RadioButtonICO.h"
+#include "Controls/ButtonsCombo.h"
 
 
 class PanelConfig : public Panel
 {
+    friend class PanelScheme;
+
 public:
 
     static const int HEIGHT = 500;
+    static const int WIDTH_COMBO = 180;
+    static const int DYC = 26;              // Расстояние между комбобоксами по вертикали
+    static const int X = 6;
 
     PanelConfig(wxWindow *parent);
 
@@ -46,8 +50,4 @@ private:
     void UnсheckAllAcross(int id);
 
     void EnablePanel(int button_id);
-
-    void CreatePanelChannelB(wxPanel *, int x, int w);
-    void CreatePanelChannelS(wxPanel *, int x, int w);
-    void CreatePanelCalculate(wxPanel *, int x, int w);
 };

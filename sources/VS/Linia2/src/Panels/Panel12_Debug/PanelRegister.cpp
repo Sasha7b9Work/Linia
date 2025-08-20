@@ -25,15 +25,11 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
 
     if(additional_modes)
     {
-        new wxStaticText(this, wxID_ANY, _L("Режим"), { x0, y0 });
-
         wxArrayString choices;
         choices.Add(_L("Нижний уровень"));
         choices.Add(_L("Команда"));
 
-        new wxComboBox(this, wxID_ANY, choices[0], { x0 + 50, y0 - 2 }, { 150, 20 }, choices, wxCB_READONLY);
-
-        new wxStaticText(this, wxID_ANY, _L("Команда"), { x0 + 300, y0 });
+        new ButtonsCombo(this, "Режим", { x0, y0 - 2 }, 150, choices, choices, 1);
 
         choices.clear();
 
@@ -46,7 +42,7 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
         choices.Add("0110 Software reset (power-on reset)");
         choices.Add("0111 Internal reference setup register");
 
-        new wxComboBox(this, wxID_ANY, choices[0], { x0 + 360, y0 - 2 }, { 170, 20 }, choices, wxCB_READONLY);
+        new ButtonsCombo(this, "Команда", { x0 + 170, y0 - 2 }, 400, choices, choices, 1);
 
         y0 += 30;
     }

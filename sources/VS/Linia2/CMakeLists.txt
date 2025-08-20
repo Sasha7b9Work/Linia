@@ -57,8 +57,10 @@ file(GLOB COMMUNICATOR_COMPORT          src/Communicator/ComPort/*.*)
 file(GLOB COMMUNICATOR_SPI              src/Communicator/SPI/*.*)
 file(GLOB CONTROLS                      src/Controls/*.*)
 file(GLOB DEVICE                        src/Device/*.*)
+file(GLOB DEVICE_TESTS                  src/Device/Tests/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
 file(GLOB PANELS_PANEL3                 src/Panels/Panel03_Config/*.*)
+file(GLOB PANELS_PANEL3_CHAN_BS         src/Panels/Panel03_Config/PanelChannelBS/*.*)
 file(GLOB PANELS_PANEL3_CHAN_C          src/Panels/Panel03_Config/PanelChannelC/*.*)
 file(GLOB PANELS_PANEL3_SHCEME          src/Panels/Panel03_Config/PanelScheme/*.*)
 file(GLOB PANELS_PANEL5                 src/Panels/Panel05_Graph/*.*)
@@ -69,25 +71,27 @@ file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB UTILS                         src/Utils/*.*)
 file(GLOB WINDOWS                       src/Windows/*.*)
 
-source_group(doc                                 FILES ${DOC})
-source_group(Resources                           FILES ${RESOURCES})
-source_group(src                                 FILES ${SRC})
-source_group(Communicator                        FILES ${COMMUNICATOR})
-source_group(Communicator/ComPort                FILES ${COMMUNICATOR_COMPORT})
-source_group(Communicator/SPI                    FILES ${COMMUNICATOR_SPI})
-source_group(Controls                            FILES ${CONTROLS})
-source_group(Device                              FILES ${DEVICE})
-source_group(Panels                              FILES ${PANELS})
-source_group(Panels/Panel03_Config               FILES ${PANELS_PANEL3})
-source_group(Panels/Panel03_Config/PanelChannelC FILES ${PANELS_PANEL3_CHAN_C})
-source_group(Panels/Panel03_Config/PanelScheme   FILES ${PANELS_PANEL3_SHCEME})
-source_group(Panels/Panel05_Graph                FILES ${PANELS_PANEL5})
-source_group(Panels/Panel11_Menu                 FILES ${PANELS_PANEL11})
-source_group(Panels/Panel11_Menu/Setup           FILES ${PANELS_PANEL11_SETUP})
-source_group(Panels/Panel12_Debug                FILES ${PANELS_PANEL12})
-source_group(Settings                            FILES ${SETTINGS})
-source_group(Utils                               FILES ${UTILS})
-source_group(Windows                             FILES ${WINDOWS})
+source_group(doc                                  FILES ${DOC})
+source_group(Resources                            FILES ${RESOURCES})
+source_group(src                                  FILES ${SRC})
+source_group(Communicator                         FILES ${COMMUNICATOR})
+source_group(Communicator/ComPort                 FILES ${COMMUNICATOR_COMPORT})
+source_group(Communicator/SPI                     FILES ${COMMUNICATOR_SPI})
+source_group(Controls                             FILES ${CONTROLS})
+source_group(Device                               FILES ${DEVICE})
+source_group(Device/Tests                         FILES ${DEVICE_TESTS})
+source_group(Panels                               FILES ${PANELS})
+source_group(Panels/Panel03_Config                FILES ${PANELS_PANEL3})
+source_group(Panels/Panel03_Config/PanelChannelBS FILES ${PANELS_PANEL3_CHAN_BS})
+source_group(Panels/Panel03_Config/PanelChannelC  FILES ${PANELS_PANEL3_CHAN_C})
+source_group(Panels/Panel03_Config/PanelScheme    FILES ${PANELS_PANEL3_SHCEME})
+source_group(Panels/Panel05_Graph                 FILES ${PANELS_PANEL5})
+source_group(Panels/Panel11_Menu                  FILES ${PANELS_PANEL11})
+source_group(Panels/Panel11_Menu/Setup            FILES ${PANELS_PANEL11_SETUP})
+source_group(Panels/Panel12_Debug                 FILES ${PANELS_PANEL12})
+source_group(Settings                             FILES ${SETTINGS})
+source_group(Utils                                FILES ${UTILS})
+source_group(Windows                              FILES ${WINDOWS})
 
 add_executable(${PROJECT_NAME}
     ${DOC}
@@ -98,8 +102,10 @@ add_executable(${PROJECT_NAME}
     ${COMMUNICATOR_SPI}
     ${CONTROLS}
     ${DEVICE}
+    ${DEVICE_TESTS}
     ${PANELS}
     ${PANELS_PANEL3}
+    ${PANELS_PANEL3_CHAN_BS}
     ${PANELS_PANEL3_CHAN_C}
     ${PANELS_PANEL3_SHCEME}
     ${PANELS_PANEL5}
@@ -184,7 +190,3 @@ else()
     target_include_directories(${PROJECT_NAME} PRIVATE ${GTK3_INCLUDE_DIRS})
     target_compile_options(${PROJECT_NAME} PRIVATE ${GTK3_CFLAGS_OTHER})
 endif()
-
-
-
-

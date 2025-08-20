@@ -1,9 +1,10 @@
 // 2023/09/02 11:37:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Controls/Buttons.h"
-#include "Controls/PainterRect.h"
+#include "Controls/Painter.h"
 #include "Utils/GlobalFunctions.h"
 #include "Controls/Bitmap.h"
+#include "Utils/SystemDepend.h"
 
 
 ButtonColor::ButtonColor(wxWindow *parent, int id, const wxString &title, wxPoint position, wxSize size, PainterRect *painter) :
@@ -24,19 +25,28 @@ void ButtonColor::OnMouseEvent(wxMouseEvent &event)
 {
     if (event.IsButton())
     {
-        GF::SendCommandEvent(GetParent(), wxEVT_BUTTON, GetId());
+        GF::SendCommandEvent(this, wxEVT_BUTTON, 0);
     }
 
     event.Skip();
 }
 
 
-CheckButton::CheckButton(wxWindow *parent, int id, const wxString &title, const wxPoint &pos, const wxSize &size) :
-    wxPanel(parent, id, pos, size)
+CheckButton::CheckButton(wxWindow *parent, const wxString &title, const wxPoint &pos, int width) :
+    wxPanel(parent, wxID_ANY, pos)
 {
-    button = new wxToggleButton(this, id + delta_id, title, { 0, 0 }, { size.x - 20, size.y });
+    wxSize size{ width, TEXTCNTRL_HEIGHT + 3 };
+    SetSize(size);
 
-    ch_box = new wxCheckBox(this, id + delta_id + 1, "", { size.x - 20 + 5, 4 });
+    button = new wxToggleButton(this, wxID_ANY, ' ' + title, { 0, 0 }, {size.x - 20, size.y}, wxBU_LEFT);
+
+#ifdef WIN32
+    int y = 4;
+#else
+    int y = 2;
+#endif
+
+    ch_box = new wxCheckBox(this, wxID_ANY, "", { size.x - 20 + 5, y });
 
     Bind(wxEVT_CHECKBOX, &CheckButton::OnEventCheckBox, this);
     Bind(wxEVT_TOGGLEBUTTON, &CheckButton::OnEventToggleButton, this);
@@ -49,10 +59,10 @@ void CheckButton::OnEventCheckBox(wxCommandEvent &event)
     {
         button->SetValue(event.GetInt() != 0);
 
-        GF::SendCommandEvent(GetParent(), wxEVT_TOGGLEBUTTON, button->GetId(), button->GetValue() ? 1 : 0);
-
-        event.Skip();
+        SendEvent();
     }
+
+    event.Skip();
 }
 
 
@@ -62,8 +72,16 @@ void CheckButton::OnEventToggleButton(wxCommandEvent &event)
     {
         ch_box->SetValue(button->GetValue());
 
-        event.Skip();
+        SendEvent();
     }
+
+    event.Skip();
+}
+
+
+void CheckButton::SendEvent()
+{
+    GF::SendCommandEvent(this, wxEVT_TOGGLEBUTTON, button->GetValue() ? 1 : 0);
 }
 
 
@@ -89,7 +107,7 @@ void CheckButton::SetToolTip(const wxString &tool_tip)
 
 
 ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString &file_bitmap) :
-    wxBitmapButton(parent, wxID_ANY, wxNullBitmap, pos)
+    wxBitmapButton(parent, wxID_ANY, wxNullBitmap, pos, size, wxBU_EXACTFIT)
 {
     SetFileBitmap(file_bitmap);
 
@@ -130,6 +148,8 @@ void ButtonBitmapChoice::OnEventButton(wxCommandEvent &event)
 
         SetCurrentValue(choice);
     }
+
+    event.Skip();
 }
 
 

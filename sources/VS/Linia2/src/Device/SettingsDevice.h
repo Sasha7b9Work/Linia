@@ -33,6 +33,8 @@ struct RowRange
         _125,
         Count
     };
+
+    static E ForType(DSet::Type::E);
 };
 
 
@@ -84,6 +86,7 @@ struct RangeI
     RangeI(E v) : value(v) { }
 
     pchar Name(RowRange::E) const;
+    wxString NameStep(RowRange::E) const;
 
     void operator++(int)
     {
@@ -92,6 +95,8 @@ struct RangeI
 
     static E Min(DSet::Type::E);
     static E Max(DSet::Type::E);
+
+    static void FillArrayStrings(wxArrayString &, DSet::Type::E, bool step);
 };
 
 
@@ -147,6 +152,7 @@ struct RangeU
     RangeU(E v) : value(v) { }
 
     pchar Name(RowRange::E) const;
+    wxString NameStep(RowRange::E) const;
 
     void operator++(int)
     {
@@ -155,6 +161,8 @@ struct RangeU
 
     static E Min(DSet::Type::E);
     static E Max(DSet::Type::E);
+
+    static void FillArrayStrings(wxArrayString &, DSet::Type::E, bool step);
 };
 
 
