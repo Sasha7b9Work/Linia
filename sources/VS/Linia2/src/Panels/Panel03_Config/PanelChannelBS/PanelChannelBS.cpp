@@ -54,7 +54,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
 
         y += 28;
 
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Число ступенек"), { PanelConfig::X, SD::Y_SB(y + 3) });
+        new wxStaticText(boxGenerator, wxID_ANY, _L("Число ступенек"), { PanelConfig::X, y });
 
         new SpinBox(boxGenerator, { 120, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT }, 5, 10);
 
