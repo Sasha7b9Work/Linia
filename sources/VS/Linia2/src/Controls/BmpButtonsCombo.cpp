@@ -54,7 +54,7 @@ public:
 
         GetParent()->Bind(wxEVT_KEY_DOWN, &BmpButtonPopup::OnKeyDown, this);
 
-        SetBackgroundColour(*wxWHITE);
+        SetBackgroundColour({0x80, 0x80, 0x80});
     }
 
 private:

@@ -90,6 +90,8 @@ public:
 
         Refresh();
         Update();
+
+        SetBackgroundColour({ 0x80, 0x80, 0x80 });
     }
 
 private:
