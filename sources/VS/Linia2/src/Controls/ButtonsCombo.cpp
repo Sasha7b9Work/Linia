@@ -72,11 +72,11 @@ public:
         }
 
         // Добавляем рамку вокруг сетки кнопок
-        wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, GetCombo()->title);
-        boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 5); // 10px отступ внутри рамки
+//        wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, GetCombo()->title);
+//        boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 5); // 10px отступ внутри рамки
 
         // Основная панель
-        mainPanel->SetSizer(boxSizer);
+        mainPanel->SetSizer(gridSizer);
 
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
         // Внешние отступы 15px
