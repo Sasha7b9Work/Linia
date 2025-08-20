@@ -53,7 +53,7 @@ public:
 
         // Добавляем рамку вокруг сетки кнопок
         wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, GetCombo()->title);
-        boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 5); // 10px отступ внутри рамки
+        boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 0); // 10px отступ внутри рамки
 
         for (uint i = 0; i < labels.size(); ++i)
         {
@@ -65,12 +65,12 @@ public:
                     btn->SetToolTip(GetCombo()->tooltips[i]);
                 }
                 btn->Bind(wxEVT_BUTTON, &ButtonPopup::OnButtonClick, this);
-                gridSizer->Add(btn, 0, wxEXPAND | wxALL, 0);
+                gridSizer->Add(btn, 0, wxEXPAND | wxALL, 2);
             }
             else
             {
                 wxPanel *panel = new wxPanel(mainPanel);
-                gridSizer->Add(panel, 0, wxEXPAND | wxALL, 0);
+                gridSizer->Add(panel, 0, wxEXPAND | wxALL, 2);
             }
         }
 
@@ -79,7 +79,7 @@ public:
 
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
         // Внешние отступы 15px
-        outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 5);
+        outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 3);
         SetSizer(outerSizer);
 
         Layout();
@@ -91,7 +91,7 @@ public:
         Refresh();
         Update();
 
-        SetBackgroundColour(GetBackgroundColour().ChangeLightness(75));
+        SetBackgroundColour(GetBackgroundColour().ChangeLightness(80));
     }
 
 private:

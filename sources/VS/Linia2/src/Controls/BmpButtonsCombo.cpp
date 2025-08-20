@@ -28,7 +28,7 @@ public:
             num_cols++;
         }
 
-        wxGridSizer *gridSizer = new wxGridSizer(num_rows, num_cols, 5, 5); // 5px промежутки
+        wxGridSizer *gridSizer = new wxGridSizer(num_rows, num_cols, 2, 2); // 5px промежутки
 
         // Добавляем рамку вокруг сетки кнопок
         wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, title);
@@ -47,14 +47,14 @@ public:
         mainPanel->SetSizer(boxSizer);
 
         // Внешние отступы 15px
-        outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 5);
+        outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 3);
         SetSizer(outerSizer);
 
         Fit(); // Автоподбор размера
 
         GetParent()->Bind(wxEVT_KEY_DOWN, &BmpButtonPopup::OnKeyDown, this);
 
-        SetBackgroundColour(GetBackgroundColour().ChangeLightness(50));
+        SetBackgroundColour(GetBackgroundColour().ChangeLightness(80));
     }
 
 private:
