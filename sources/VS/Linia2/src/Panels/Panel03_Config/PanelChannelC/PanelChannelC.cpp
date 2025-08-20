@@ -81,7 +81,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
         wxArrayString names;
 
         RangeU::FillArrayStrings(names, DSet::Type::ChanC_Meas, false);
-        comboVoltage = new ButtonsComboRange(boxMeter, "Uc", { PanelConfig::X, SD::Y_SB(y) }, 80, names, names);
+        comboVoltage = new ButtonsComboRange(boxMeter, "Uc", SD::XY0(), 80, names, names);
 
         RangeI::FillArrayStrings(names, DSet::Type::ChanC_Meas, false);
         comboCurrent = new ButtonsComboRange(boxMeter, "Ic", { 100, SD::Y_SB(y) }, 80, names, names);
@@ -99,7 +99,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
             "2 kV"
         };
 
-        comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", { PanelConfig::X, SD::Y_SB(27) }, PanelConfig::WIDTH_COMBO, names, names, 1);
+        comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", SD::XY0(), PanelConfig::WIDTH_COMBO, names, names, 1);
 
         new wxStaticText(boxSource, wxID_ANY, _L("Ограничение Uc, %%"), { 40, SD::Y_SB(60) });
 

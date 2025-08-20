@@ -121,3 +121,21 @@ int SD::Y_SB(int y)
     return y - 20;
 #endif
 }
+
+
+wxPoint SD::XY0()
+{
+    return { X0(), Y0() };
+}
+
+
+int SD::X0()
+{
+    return 5;
+}
+
+
+int SD::Y0()
+{
+    return Y_SB(5);
+}
