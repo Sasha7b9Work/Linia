@@ -12,7 +12,9 @@ SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _
     int w1 = 20;
     int w2 = 17;
 
-    slider = new wxSlider(this, wxID_ANY, min, min, max, { w1, 0 }, { width - w1 - w2, TEXTCNTRL_HEIGHT + 5 } );
+    wxSize s{ width - w1 - w2, TEXTCNTRL_HEIGHT + 5 };
+
+    slider = new wxSlider(this, wxID_ANY, min, min, max, { w1, 0 }, s );
 
     slider->SetMinSize(wxSize(100, 30));
 

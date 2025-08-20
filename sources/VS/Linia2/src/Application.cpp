@@ -45,6 +45,21 @@ bool Application::OnInit()
 
     ConsoleRS232::Create();
 
+#if defined(__WXGTK__)
+    // Отключаем специфичные предупреждения GTK
+    g_log_set_handler("Gtk", G_LOG_LEVEL_WARNING,
+        [](const gchar *log_domain, GLogLevelFlags log_level,
+            const gchar *message, gpointer user_data)
+        {
+            // Игнорируем конкретное предупреждение
+            if (strstr(message, "for_size smaller than min-size") == nullptr)
+            {
+                // Выводим другие предупреждения
+                g_log_default_handler(log_domain, log_level, message, user_data);
+            }
+        }, nullptr);
+#endif
+
     // create and show the main application window
     MainWindow *frame = new MainWindow(_L("ИППП 4"));
 
