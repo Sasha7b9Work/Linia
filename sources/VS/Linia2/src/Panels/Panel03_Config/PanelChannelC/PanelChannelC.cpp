@@ -76,15 +76,13 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
     StaticBox *boxMeter = new StaticBox(this, _L("Измеритель"), { x, boxScan->GetPosition().y + boxScan->GetSize().y + SD::DSBY() }, { w, 50 });
 
     {
-        int y = 20;
-
         wxArrayString names;
 
         RangeU::FillArrayStrings(names, DSet::Type::ChanC_Meas, false);
         comboVoltage = new ButtonsComboRange(boxMeter, "Uc", SD::XY0(), 80, names, names);
 
         RangeI::FillArrayStrings(names, DSet::Type::ChanC_Meas, false);
-        comboCurrent = new ButtonsComboRange(boxMeter, "Ic", { 100, SD::Y_SB(y) }, 80, names, names);
+        comboCurrent = new ButtonsComboRange(boxMeter, "Ic", { 100, SD::XY0().y }, 80, names, names);
     }
 
     StaticBox *boxSource = new StaticBox(this, "Источник U", { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + SD::DSBY() }, { w, h - boxMeter->GetPosition().y - boxMeter->GetSize().y - SD::DSBY() });

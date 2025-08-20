@@ -125,7 +125,7 @@ int SD::Y_SB(int y)
 
 wxPoint SD::XY0()
 {
-    return { 5, Y_SB(25) };
+    return { 5, Y_SB(20) };
 }
 
 
