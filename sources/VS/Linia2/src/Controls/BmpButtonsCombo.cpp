@@ -54,7 +54,7 @@ public:
 
         GetParent()->Bind(wxEVT_KEY_DOWN, &BmpButtonPopup::OnKeyDown, this);
 
-        SetBackgroundColour({0x80, 0x80, 0x80});
+        SetBackgroundColour(GetBackgroundColour().ChangeLightness(50));
     }
 
 private:

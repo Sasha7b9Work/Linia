@@ -79,7 +79,7 @@ public:
 
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
         // Внешние отступы 15px
-        outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 10);
+        outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 5);
         SetSizer(outerSizer);
 
         Layout();
@@ -91,7 +91,7 @@ public:
         Refresh();
         Update();
 
-        SetBackgroundColour({ 0x80, 0x80, 0x80 });
+        SetBackgroundColour(GetBackgroundColour().ChangeLightness(75));
     }
 
 private:
