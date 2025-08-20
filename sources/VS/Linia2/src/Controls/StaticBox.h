@@ -19,6 +19,6 @@ public:
     StaticBoxSizer(int type, wxWindow *parent, const wxString &title) :
         wxStaticBoxSizer(type, parent, title)
     {
-        m_staticBox->SetWindowStyle(wxBORDER_NONE);
+        m_staticBox->SetWindowStyle(wxBORDER_RAISED);
     }
 };
