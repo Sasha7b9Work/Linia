@@ -28,12 +28,12 @@ class ButtonPopup : public wxPopupTransientWindow
 {
 public:
     ButtonPopup(wxWindow *parent) :
-        wxPopupTransientWindow(parent, wxBORDER_DOUBLE)
+        wxPopupTransientWindow(parent, wxBORDER_SUNKEN)
     {
         wxArrayString &labels = GetCombo()->labels;
 
         // Основной контейнер с отступами по краям
-        wxPanel *mainPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBORDER_RAISED);
+        wxPanel *mainPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
 
         int num_rows = (int)(labels.size() / GetCombo()->buttons_in_row);
 
@@ -161,6 +161,7 @@ void ButtonsCombo::OnButtonClicked(wxCommandEvent &)
         popup->Popup();
         popup->Refresh();
         popup->Update();
+        popup->SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY);
     }
 }
 
