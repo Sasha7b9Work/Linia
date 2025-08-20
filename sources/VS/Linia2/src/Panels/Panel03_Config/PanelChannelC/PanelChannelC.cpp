@@ -99,7 +99,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
 
         comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", SD::XY0(), PanelConfig::WIDTH_COMBO, names, names, 1);
 
-        new wxStaticText(boxSource, wxID_ANY, _L("Ограничение Uc, %%"), { 40, SD::Y_SB(60) });
+        new wxStaticText(boxSource, wxID_ANY, _L("Ограничение Uc, %%"), { 40, SD::Y_SB(65) });
 
         int y = 90;
 

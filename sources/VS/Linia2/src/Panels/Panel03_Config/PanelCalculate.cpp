@@ -18,7 +18,7 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    StaticBox *boxGraph = new StaticBox(this, _L("График"), { x, 0 }, { w, 75 });
+    StaticBox *boxGraph = new StaticBox(this, _L("График"), { x, SD::DSBY() }, { w, 75 });
 
     int y = 20;
     const int dy = 3;
@@ -36,7 +36,7 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
     }
 
     StaticBox *boxParameter = new StaticBox(this, _L("Параметр"),
-        { x, boxGraph->GetPosition().y + boxGraph->GetSize().y },
+        { x, boxGraph->GetPosition().y + boxGraph->GetSize().y + SD::DSBY() },
         { w, 250 });
 
     {
@@ -81,8 +81,8 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
     }
 
     StaticBox *boxBorder = new StaticBox(this, _L("Пороговые значения"),
-        { x, boxParameter->GetPosition().y + boxParameter->GetSize().y },
-        { w, h - boxParameter->GetPosition().y - boxParameter->GetSize().y });
+        { x, boxParameter->GetPosition().y + boxParameter->GetSize().y + SD::DSBY() },
+        { w, h - boxParameter->GetPosition().y - boxParameter->GetSize().y - SD::DSBY() });
 
     {
         new wxStaticText(boxBorder, wxID_ANY, "MIN", { PanelConfig::X, SD::Y_SB(y + dy) });

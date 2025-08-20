@@ -20,7 +20,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    StaticBox *boxGenerator = new StaticBox(this, _L("Генератор ступенек"), { x, 0 }, { w, 300 });
+    StaticBox *boxGenerator = new StaticBox(this, _L("Генератор ступенек"), { x, SD::DSBY() }, { w, 300 });
 
     {
         int y = 22;
@@ -88,8 +88,8 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
     }
 
     StaticBox *boxLimitation = new StaticBox(this, _L("Ограничение"),
-        { x, boxGenerator->GetPosition().y + boxGenerator->GetSize().y },
-        { w, h - boxGenerator->GetPosition().y - boxGenerator->GetSize().y });
+        { x, boxGenerator->GetPosition().y + boxGenerator->GetSize().y + SD::DSBY() },
+        { w, h - boxGenerator->GetPosition().y - boxGenerator->GetSize().y - SD::DSBY() });
 
     {
         int y = 30;
