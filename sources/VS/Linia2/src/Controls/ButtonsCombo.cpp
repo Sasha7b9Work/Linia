@@ -35,7 +35,7 @@ public:
         wxArrayString &labels = GetCombo()->labels;
 
         // Основной контейнер с отступами по краям
-        wxPanel *mainPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
+        wxPanel *mainPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE);
 
         int num_rows = (int)(labels.size() / GetCombo()->buttons_in_row);
 
