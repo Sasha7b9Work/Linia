@@ -28,7 +28,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    wxStaticBox *boxScan = new wxStaticBox(this, wxID_ANY, _L("Развёртка"), { x, 0 }, { w, 140 });          // IDC_STATICRAZV
+    wxStaticBox *boxScan = new wxStaticBox(this, wxID_ANY, _L("Развёртка"), { x, 0 }, { w, 140 }, wxBORDER_NONE);          // IDC_STATICRAZV
 
     {
         wxArrayString files =
