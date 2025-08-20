@@ -79,7 +79,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
 
     {
         wxArrayString names;
-        int width = 80;
+        int width = 85;
 
         RangeU::FillArrayStrings(names, DSet::Type::ChanC_Meas, false);
         comboVoltage = new ButtonsComboRange(boxMeter, "Uc", SD::XY0(), width, names, names);
