@@ -52,13 +52,13 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
 
         btnAmpitudeDecrease = new CheckButton(boxGenerator, "Амплитуда / 10", { PanelConfig::X, y }, PanelConfig::WIDTH_COMBO);
 
-        y += 28;
+        y += PanelConfig::DYC;
 
         new wxStaticText(boxGenerator, wxID_ANY, _L("Число ступенек"), { PanelConfig::X, y });
 
-        new SpinBox(boxGenerator, { 120, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT }, 5, 10);
+        new SpinBox(boxGenerator, { 120, y }, { 50, TEXTCNTRL_HEIGHT }, 5, 10);
 
-        y += 28;
+        y += PanelConfig::DYC;
 
         choices.Clear();
         choices.Add(_L("прямая"));
