@@ -28,7 +28,7 @@ class ButtonPopup : public wxPopupTransientWindow
 {
 public:
     ButtonPopup(wxWindow *parent) :
-        wxPopupTransientWindow(parent, wxBORDER_RAISED)
+        wxPopupTransientWindow(parent, wxBORDER_SUNKEN)
     {
         wxArrayString &labels = GetCombo()->labels;
 
