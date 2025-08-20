@@ -6,7 +6,7 @@ class StaticBox : public wxStaticBox
 {
 public:
     StaticBox(wxWindow *parent, const wxString &title, const wxPoint &pos, const wxSize &size) :
-        wxStaticBox(parent, wxID_ANY, title, pos, size, wxBORDER_SUNKEN)
+        wxStaticBox(parent, wxID_ANY, title, pos, size, wxBORDER_DOUBLE)
     {
 
     }
