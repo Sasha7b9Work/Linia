@@ -116,6 +116,8 @@ ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &s
     Update();
 
     Refresh();
+
+    SetBackgroundColour(GetBackgroundColour().ChangeLightness(LIGHTNESS));
 }
 
 
