@@ -52,6 +52,10 @@ public:
 
         wxGridSizer *gridSizer = new wxGridSizer(num_rows, num_cols, 2, 2);
 
+        // Добавляем рамку вокруг сетки кнопок
+        wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, GetCombo()->title);
+        boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 5); // 10px отступ внутри рамки
+
         for (uint i = 0; i < labels.size(); ++i)
         {
             if (labels[i][0])                                                           // Признак того, что надо вставлять кнопку, а не заглушку
@@ -70,10 +74,6 @@ public:
                 gridSizer->Add(panel, 0, wxEXPAND | wxALL, 0);
             }
         }
-
-        // Добавляем рамку вокруг сетки кнопок
-        wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, GetCombo()->title);
-        boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 5); // 10px отступ внутри рамки
 
         // Основная панель
         mainPanel->SetSizer(boxSizer);
