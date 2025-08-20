@@ -28,7 +28,7 @@ class ButtonPopup : public wxPopupTransientWindow
 {
 public:
     ButtonPopup(wxWindow *parent) :
-        wxPopupTransientWindow(parent, wxBORDER_SUNKEN)
+        wxPopupTransientWindow(parent)
     {
         wxArrayString &labels = GetCombo()->labels;
 
@@ -93,7 +93,6 @@ public:
         Update();
 
         SetBackgroundColour(GetBackgroundColour().ChangeLightness(80));
-        SetBackgroundStyle(wxBG_STYLE_PAINT);
     }
 
 private:

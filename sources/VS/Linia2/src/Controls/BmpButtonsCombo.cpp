@@ -8,7 +8,7 @@ class BmpButtonPopup : public wxPopupTransientWindow
 {
 public:
     BmpButtonPopup(wxWindow *parent, const wxString &title, const wxArrayString &files, const wxArrayString &tooltips, int buttons_in_row) :
-        wxPopupTransientWindow(parent, wxBORDER_RAISED)
+        wxPopupTransientWindow(parent)
     {
         // Основной контейнер с отступами по краям
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
@@ -55,7 +55,6 @@ public:
         GetParent()->Bind(wxEVT_KEY_DOWN, &BmpButtonPopup::OnKeyDown, this);
 
         SetBackgroundColour(GetBackgroundColour().ChangeLightness(80));
-        SetBackgroundStyle(wxBG_STYLE_PAINT);
     }
 
 private:
