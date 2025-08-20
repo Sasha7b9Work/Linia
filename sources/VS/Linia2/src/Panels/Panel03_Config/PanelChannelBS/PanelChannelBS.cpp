@@ -31,24 +31,26 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
 
         comboTypeGenerator = new ButtonsCombo(boxGenerator, "Тип", SD::XY0(), PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
+        y = SD::XY0().y;
+
         y += PanelConfig::DYC;
 
         choices.Clear();
         choices.Add(_L("Вкл"));
         choices.Add(_L("Выкл"));
 
-        new ButtonsCombo(boxGenerator, "Импульс", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
+        new ButtonsCombo(boxGenerator, "Импульс", { SD::XY0().x, y }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
         y += PanelConfig::DYC;
 
         choices.Clear();
         choices.Add("-");
 
-        comboStep = new ButtonsComboRange(boxGenerator, "Амплитуда ступени", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, choices, choices);
+        comboStep = new ButtonsComboRange(boxGenerator, "Амплитуда ступени", { PanelConfig::X, y }, PanelConfig::WIDTH_COMBO, choices, choices);
 
         y += PanelConfig::DYC;
 
-        btnAmpitudeDecrease = new CheckButton(boxGenerator, "Амплитуда / 10", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO);
+        btnAmpitudeDecrease = new CheckButton(boxGenerator, "Амплитуда / 10", { PanelConfig::X, y }, PanelConfig::WIDTH_COMBO);
 
         y += 28;
 
