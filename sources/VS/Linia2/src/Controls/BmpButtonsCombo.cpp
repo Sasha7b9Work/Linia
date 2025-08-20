@@ -8,7 +8,7 @@ class BmpButtonPopup : public wxPopupTransientWindow
 {
 public:
     BmpButtonPopup(wxWindow *parent, const wxString &title, const wxArrayString &files, const wxArrayString &tooltips, int buttons_in_row) :
-        wxPopupTransientWindow(parent, wxBORDER_STATIC)
+        wxPopupTransientWindow(parent, wxBORDER_RAISED)
     {
         // Основной контейнер с отступами по краям
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
