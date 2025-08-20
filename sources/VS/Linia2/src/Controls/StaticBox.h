@@ -11,3 +11,14 @@ public:
 
     }
 };
+
+
+class StaticBoxSizer : public wxStaticBoxSizer
+{
+public:
+    StaticBoxSizer(int type, wxWindow *parent, const wxString &title) :
+        wxStaticBoxSizer(type, parent, title)
+    {
+        m_staticBox->SetWindowStyle(wxBORDER_NONE);
+    }
+};

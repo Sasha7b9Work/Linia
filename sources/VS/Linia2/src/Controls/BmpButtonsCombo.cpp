@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Controls/BmpButtonsCombo.h"
 #include "Utils/GlobalFunctions.h"
+#include "Controls/StaticBox.h"
 
 
 class BmpButtonPopup : public wxPopupTransientWindow
@@ -31,7 +32,7 @@ public:
         wxGridSizer *gridSizer = new wxGridSizer(num_rows, num_cols, 2, 2); // 5px промежутки
 
         // Добавляем рамку вокруг сетки кнопок
-        wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, title);
+        StaticBoxSizer *boxSizer = new StaticBoxSizer(wxVERTICAL, mainPanel, title);
         boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 0); // 10px отступ внутри рамки
 
         for (uint i = 0; i < files.size(); ++i)

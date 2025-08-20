@@ -3,6 +3,7 @@
 #include "Controls/ButtonsCombo.h"
 #include "MainWindow.h"
 #include "Utils/GlobalFunctions.h"
+#include "Controls/StaticBox.h"
 
 
 DrawingButton::DrawingButton(wxWindow *parent, int id, const wxString &label, const wxPoint &position, const wxSize &size, const wxString &_name_file) :
@@ -35,7 +36,7 @@ public:
         wxArrayString &labels = GetCombo()->labels;
 
         // Основной контейнер с отступами по краям
-        wxPanel *mainPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE);
+        wxPanel *mainPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
 
         int num_rows = (int)(labels.size() / GetCombo()->buttons_in_row);
 
@@ -54,7 +55,7 @@ public:
         wxGridSizer *gridSizer = new wxGridSizer(num_rows, num_cols, 2, 2);
 
         // Добавляем рамку вокруг сетки кнопок
-        wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, GetCombo()->title);
+        StaticBoxSizer *boxSizer = new StaticBoxSizer(wxVERTICAL, mainPanel, GetCombo()->title);
         boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 0); // 10px отступ внутри рамки
 
         for (uint i = 0; i < labels.size(); ++i)
