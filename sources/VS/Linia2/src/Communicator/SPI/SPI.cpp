@@ -1,8 +1,10 @@
-﻿#include "SPI_defines.h"
+﻿// 2025/6/11 18:47:55 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#include "SPI_defines.h"
 #include "Communicator/SPI/SPI.h"
 
 namespace
 {
+#ifndef WIN32
     // Внутренние переменные модуля
     int g_spi_fd = -1;
     uint32_t g_speed = 1000000;
@@ -178,10 +180,12 @@ namespace
         
         return true;
     }
+#endif
 }
 
 void SPI::Init()
 {
+#ifndef WIN32
     const char* device = "/dev/spidev1.0";
     
     // Открываем SPI устройство
@@ -228,10 +232,12 @@ void SPI::Init()
     }
     
     std::cout << "SPI initialized successfully on " << device << std::endl;
+#endif
 }
 
 void SPI::DeInit()
 {
+#ifndef WIN32
     if (g_spi_fd >= 0)
     {
         // Отключаем все CS
@@ -245,10 +251,15 @@ void SPI::DeInit()
     
     // Освобождаем GPIO ресурсы
     DeInitGPIO();
+#endif
 }
 
 bool SPI::WriteDynamicDAC1(uint16_t value)
 {
+#ifdef WIN32
+    // Заглушка для Windows
+    return true;
+#else
     if (!IsReady())
     {
         std::cerr << "Error: SPI not ready" << std::endl;
@@ -276,10 +287,15 @@ bool SPI::WriteDynamicDAC1(uint16_t value)
     SetCS(1, false);
     
     return result;
+#endif
 }
 
 bool SPI::WriteDynamicDAC2(uint16_t value)
 {
+#ifdef WIN32
+    // Заглушка для Windows
+    return true;
+#else
     if (!IsReady())
     {
         std::cerr << "Error: SPI not ready" << std::endl;
@@ -307,10 +323,14 @@ bool SPI::WriteDynamicDAC2(uint16_t value)
     SetCS(2, false);
     
     return result;
+#endif
 }
 
 bool SPI::SetSpeed(uint32_t speedHz)
 {
+#ifdef WIN32
+    return true;
+#else
     g_speed = speedHz;
     
     if (IsReady())
@@ -324,10 +344,14 @@ bool SPI::SetSpeed(uint32_t speedHz)
     }
     
     return true;
+#endif
 }
 
 bool SPI::SetMode(uint8_t mode)
 {
+#ifdef WIN32
+    return true;
+#else
     g_mode = mode;
     
     if (IsReady())
@@ -341,25 +365,41 @@ bool SPI::SetMode(uint8_t mode)
     }
     
     return true;
+#endif
 }
 
 bool SPI::IsReady()
 {
+#ifdef WIN32
+    return true;
+#else
     return g_spi_fd >= 0 && g_gpio_initialized;
+#endif
 }
 
 uint32_t SPI::GetSpeed()
 {
+#ifdef WIN32
+    return 1000000;
+#else
     return g_speed;
+#endif
 }
 
 uint8_t SPI::GetMode()
 {
+#ifdef WIN32
+    return 0;
+#else
     return g_mode;
+#endif
 }
 
 void SPI::TestGPIO()
 {
+#ifdef WIN32
+    std::cout << "GPIO тестирование недоступно на Windows" << std::endl;
+#else
     std::cout << "\n=== Тестирование GPIO для SPI ===" << std::endl;
     
     if (!g_gpio_initialized)
@@ -431,10 +471,14 @@ void SPI::TestGPIO()
 #endif
     
     std::cout << "=== Тестирование GPIO завершено ===" << std::endl;
+#endif
 }
 
 void SPI::DiagnoseSPI()
 {
+#ifdef WIN32
+    std::cout << "SPI диагностика недоступна на Windows" << std::endl;
+#else
     std::cout << "\n=== Диагностика SPI ===" << std::endl;
     
     // Проверяем состояние SPI
@@ -487,10 +531,14 @@ void SPI::DiagnoseSPI()
     }
     
     std::cout << "=== Диагностика SPI завершена ===" << std::endl;
+#endif
 }
 
 bool SPI::CheckSPIDevice(const char* device_path)
 {
+#ifdef WIN32
+    return false;
+#else
     int fd = ::open(device_path, O_RDWR);
     if (fd >= 0)
     {
@@ -498,10 +546,14 @@ bool SPI::CheckSPIDevice(const char* device_path)
         return true;
     }
     return false;
+#endif
 }
 
 void SPI::PrintSystemInfo()
 {
+#ifdef WIN32
+    std::cout << "Системная информация недоступна на Windows" << std::endl;
+#else
     std::cout << "\n=== Системная информация ===" << std::endl;
     
     // Информация о системе
@@ -533,4 +585,5 @@ void SPI::PrintSystemInfo()
     system("gpiodetect 2>/dev/null || echo 'Утилита gpiodetect не найдена'");
     
     std::cout << "=== Конец системной информации ===" << std::endl;
+#endif
 }
