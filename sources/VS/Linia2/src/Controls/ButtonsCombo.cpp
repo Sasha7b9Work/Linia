@@ -37,6 +37,7 @@ public:
 
         // Основной контейнер с отступами по краям
         wxPanel *mainPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
+//        mainPanel->SetBackgroundColour(mainPanel->GetBackgroundColour().ChangeLightness(LIGHTNESS * 2));
 
         int num_rows = (int)(labels.size() / GetCombo()->buttons_in_row);
 
@@ -64,6 +65,7 @@ public:
             {
                 wxButton *btn = new wxButton(mainPanel, wxID_ANY, labels[i]);
                 btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(LIGHTNESS));
+                btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(170));
                 btn->SetMaxSize(wxSize(-1, 20));
                 if (labels[i] != GetCombo()->tooltips[i])
                 {
@@ -96,7 +98,7 @@ public:
         Refresh();
         Update();
 
-        SetBackgroundColour(GetBackgroundColour().ChangeLightness(70));
+        SetBackgroundColour(GetBackgroundColour().ChangeLightness(50));
 
         // Отключаем изменение фона для всех детей
         for (auto child : GetChildren())
