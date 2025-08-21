@@ -65,7 +65,7 @@ public:
             {
                 wxButton *btn = new wxButton(mainPanel, wxID_ANY, labels[i]);
                 btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(LIGHTNESS));
-                btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(150));
+                btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(170));
                 btn->SetMaxSize(wxSize(-1, 20));
                 if (labels[i] != GetCombo()->tooltips[i])
                 {
