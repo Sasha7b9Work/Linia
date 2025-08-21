@@ -2,18 +2,18 @@
 #include "defines.h"
 #include "Controls/BmpButtonsCombo.h"
 #include "Utils/GlobalFunctions.h"
+#include "Controls/StaticBox.h"
 
 
 class BmpButtonPopup : public wxPopupTransientWindow
 {
 public:
     BmpButtonPopup(wxWindow *parent, const wxString &title, const wxArrayString &files, const wxArrayString &tooltips, int buttons_in_row) :
-        wxPopupTransientWindow(parent, wxBORDER_SIMPLE | wxPU_CONTAINS_CONTROLS)
+        wxPopupTransientWindow(parent)
     {
         // Основной контейнер с отступами по краям
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
         wxPanel *mainPanel = new wxPanel(this, wxID_ANY);
-        mainPanel->SetBackgroundColour(*wxWHITE);
 
         int num_rows = (int)(files.size() / buttons_in_row);
 
@@ -29,10 +29,10 @@ public:
             num_cols++;
         }
 
-        wxGridSizer *gridSizer = new wxGridSizer(num_rows, num_cols, 5, 5); // 5px промежутки
+        wxGridSizer *gridSizer = new wxGridSizer(num_rows, num_cols, 2, 2); // 5px промежутки
 
         // Добавляем рамку вокруг сетки кнопок
-        wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, title);
+        StaticBoxSizer *boxSizer = new StaticBoxSizer(wxVERTICAL, mainPanel, title);
         boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 0); // 10px отступ внутри рамки
 
         for (uint i = 0; i < files.size(); ++i)
@@ -48,12 +48,24 @@ public:
         mainPanel->SetSizer(boxSizer);
 
         // Внешние отступы 15px
-        outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 5);
+        outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 3);
         SetSizer(outerSizer);
 
         Fit(); // Автоподбор размера
 
         GetParent()->Bind(wxEVT_KEY_DOWN, &BmpButtonPopup::OnKeyDown, this);
+
+        SetBackgroundColour(GetBackgroundColour().ChangeLightness(70));
+
+        // Отключаем изменение фона для всех детей
+        for (auto child : GetChildren())
+        {
+            child->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
+            child->SetBackgroundStyle(wxBG_STYLE_ERASE);
+            child->Refresh(); // Обновляем внешний вид
+        }
+
+        SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
     }
 
 private:
@@ -110,6 +122,7 @@ void BmpButtonsCombo::OnButtonClicked(wxCommandEvent &)
 
     popup->Position(pos, wxSize(0, 0));
     popup->Popup();
+    popup->SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY);
 }
 
 

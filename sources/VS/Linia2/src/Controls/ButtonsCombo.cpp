@@ -3,6 +3,7 @@
 #include "Controls/ButtonsCombo.h"
 #include "MainWindow.h"
 #include "Utils/GlobalFunctions.h"
+#include "Controls/StaticBox.h"
 
 
 DrawingButton::DrawingButton(wxWindow *parent, int id, const wxString &label, const wxPoint &position, const wxSize &size, const wxString &_name_file) :
@@ -12,6 +13,8 @@ DrawingButton::DrawingButton(wxWindow *parent, int id, const wxString &label, co
     SetBackgroundStyle(wxBG_STYLE_PAINT); // Для избежания мерцания
 
     Bind(wxEVT_PAINT, &DrawingButton::OnPaint, this);
+
+    SetBackgroundColour(GetBackgroundColour().ChangeLightness(LIGHTNESS));
 }
 
 
@@ -28,13 +31,12 @@ class ButtonPopup : public wxPopupTransientWindow
 {
 public:
     ButtonPopup(wxWindow *parent) :
-        wxPopupTransientWindow(parent, wxBORDER_SIMPLE | wxPU_CONTAINS_CONTROLS)
+        wxPopupTransientWindow(parent)
     {
         wxArrayString &labels = GetCombo()->labels;
 
         // Основной контейнер с отступами по краям
-        wxPanel *mainPanel = new wxPanel(this, wxID_ANY);
-        mainPanel->SetBackgroundColour(*wxWHITE);
+        wxPanel *mainPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
 
         int num_rows = (int)(labels.size() / GetCombo()->buttons_in_row);
 
@@ -53,25 +55,27 @@ public:
         wxGridSizer *gridSizer = new wxGridSizer(num_rows, num_cols, 2, 2);
 
         // Добавляем рамку вокруг сетки кнопок
-        wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(wxVERTICAL, mainPanel, GetCombo()->title);
-        boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 5); // 10px отступ внутри рамки
+        StaticBoxSizer *boxSizer = new StaticBoxSizer(wxVERTICAL, mainPanel, GetCombo()->title);
+        boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 0); // 10px отступ внутри рамки
 
         for (uint i = 0; i < labels.size(); ++i)
         {
             if (labels[i][0])                                                           // Признак того, что надо вставлять кнопку, а не заглушку
             {
                 wxButton *btn = new wxButton(mainPanel, wxID_ANY, labels[i]);
+                btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(LIGHTNESS));
+                btn->SetMaxSize(wxSize(-1, 20));
                 if (labels[i] != GetCombo()->tooltips[i])
                 {
                     btn->SetToolTip(GetCombo()->tooltips[i]);
                 }
                 btn->Bind(wxEVT_BUTTON, &ButtonPopup::OnButtonClick, this);
-                gridSizer->Add(btn, 0, wxEXPAND | wxALL, 0);
+                gridSizer->Add(btn, 0, wxEXPAND | wxALL, 2);
             }
             else
             {
                 wxPanel *panel = new wxPanel(mainPanel);
-                gridSizer->Add(panel, 0, wxEXPAND | wxALL, 0);
+                gridSizer->Add(panel, 0, wxEXPAND | wxALL, 2);
             }
         }
 
@@ -80,7 +84,7 @@ public:
 
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
         // Внешние отступы 15px
-        outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 10);
+        outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 3);
         SetSizer(outerSizer);
 
         Layout();
@@ -91,6 +95,18 @@ public:
 
         Refresh();
         Update();
+
+        SetBackgroundColour(GetBackgroundColour().ChangeLightness(70));
+
+        // Отключаем изменение фона для всех детей
+        for (auto child : GetChildren())
+        {
+            child->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
+            child->SetBackgroundStyle(wxBG_STYLE_ERASE);
+            child->Refresh(); // Обновляем внешний вид
+        }
+
+        SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
     }
 
 private:
@@ -162,6 +178,7 @@ void ButtonsCombo::OnButtonClicked(wxCommandEvent &)
         popup->Popup();
         popup->Refresh();
         popup->Update();
+        popup->SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY);
     }
 }
 

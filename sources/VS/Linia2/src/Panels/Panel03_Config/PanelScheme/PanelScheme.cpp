@@ -44,7 +44,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
     const int width_category = 77;
 
-    wxStaticBox *boxCategory = new wxStaticBox(this, wxID_ANY, _L("Категория"), { x, 0 }, { width_category, 90 });
+    StaticBox *boxCategory = new StaticBox(this, _L("Категория"), { x, SD::DSBY() }, { width_category, 90 });
 
     {
         wxArrayString files;
@@ -68,12 +68,14 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
             "Полевой или МОП транзистор PMOS (четырёхполюсный)"
         };
 
-        comboCategory = new BmpButtonsCombo(boxCategory, "Категория", { 18, SD::Y_SB(25) }, { 32, 42 }, files, tooltips, 0, 4);
+        comboCategory = new BmpButtonsCombo(boxCategory, "Категория", { 18, SD::XY0().y }, { 32, 42 }, files, tooltips, 0, 4);
     }
+
+    boxCategory->SetFont(StaticBox::TitleFont());
 
     (void)boxCategory;
 
-    wxStaticBox *boxTest = new wxStaticBox(this, wxID_ANY, _L("Тест"), { x + width_category + 5, 0 },
+    StaticBox *boxTest = new StaticBox(this, _L("Тест"), { x + width_category + 5, SD::DSBY() },
         { w - width_category - 5, boxCategory->GetSize().y });
 
     {
@@ -83,16 +85,18 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         // IDC_COMBOMOD
         // IDC_BUTTON_LOADTST
-        comboTest = new ButtonsCombo(boxTest, "", { PanelConfig::X, SD::Y_SB(20) }, 100, choices, choices, 1);
+        comboTest = new ButtonsCombo(boxTest, "", SD::XY0(), 100, choices, choices, 1);
 
         btnLoad = new wxButton(boxTest, wxID_ANY, _L("Загрузить"), { PanelConfig::X, SD::Y_SB(50) }, { 100, 30 });
 
         btnLoad->Hide();
     }
 
-    wxStaticBox *boxCommutation = new wxStaticBox(this, wxID_ANY, _L("Коммутация"),
-        { x, boxCategory->GetPosition().y + boxCategory->GetSize().y },
-        { w, h - boxCategory->GetPosition().y - boxCategory->GetSize().y });
+    boxTest->SetFont(StaticBox::TitleFont());
+
+    StaticBox *boxCommutation = new StaticBox(this, _L("Коммутация"),
+        { x, boxCategory->GetPosition().y + boxCategory->GetSize().y + SD::DSBY() },
+        { w, h - boxCategory->GetPosition().y - boxCategory->GetSize().y - SD::DSBY() });
 
     {
         wxArrayString choices;
@@ -101,7 +105,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         int y = 20;
 
-        comboCommutation = new ButtonsCombo(boxCommutation, "Тип", { PanelConfig::X, SD::Y_SB(20)}, PanelConfig::WIDTH_COMBO, choices, choices, 1);
+        comboCommutation = new ButtonsCombo(boxCommutation, "Тип", { SD::XY0() }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
         choices.clear();
         choices.Add(_L("канал") + " C");
@@ -150,6 +154,8 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         combo[ChS] = new ComboJack(Channel::_S, painter, "", {x0 + 2 * dx, y}, width, choices);
     }
+
+    boxCommutation->SetFont(StaticBox::TitleFont());
 
     BuildPanel();
 

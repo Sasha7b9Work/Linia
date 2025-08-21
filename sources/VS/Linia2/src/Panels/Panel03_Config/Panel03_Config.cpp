@@ -110,7 +110,12 @@ void PanelConfig::UnсheckAllAcross(int id)
 {
     for (auto &str : str_panels)
     {
-        str.button->SetValue(str.button->GetId() == id);
+        bool value = str.button->GetId() == id;
+        str.button->SetValue(value);
+
+        wxFont font = str.button->GetFont();
+        font.SetWeight(value ? wxFONTWEIGHT_BOLD : wxFONTWEIGHT_NORMAL);
+        str.button->SetFont(font);
     }
 }
 

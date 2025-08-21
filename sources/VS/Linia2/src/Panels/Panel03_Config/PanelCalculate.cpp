@@ -4,6 +4,7 @@
 #include "MainWindow.h"
 #include "Panels/Panel03_Config/Panel03_Config.h"
 #include "Utils/SystemDepend.h"
+#include "Controls/StaticBox.h"
 
 
 PanelCalculate *PanelCalculate::self = nullptr;
@@ -17,7 +18,7 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    wxStaticBox *boxGraph = new wxStaticBox(this, wxID_ANY, _L("График"), { x, 0 }, { w, 75 });
+    StaticBox *boxGraph = new StaticBox(this, _L("График"), { x, SD::DSBY() }, { w, 75 });
 
     int y = 20;
     const int dy = 3;
@@ -34,8 +35,10 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
         new wxTextCtrl(boxGraph, wxID_ANY, "Id", { 100, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
     }
 
-    wxStaticBox *boxParameter = new wxStaticBox(this, wxID_ANY, _L("Параметр"),
-        { x, boxGraph->GetPosition().y + boxGraph->GetSize().y },
+    boxGraph->SetFont(StaticBox::TitleFont());
+
+    StaticBox *boxParameter = new StaticBox(this, _L("Параметр"),
+        { x, boxGraph->GetPosition().y + boxGraph->GetSize().y + SD::DSBY() },
         { w, 250 });
 
     {
@@ -65,7 +68,7 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
 
         new wxStaticText(boxParameter, wxID_ANY, _L("на ступеньке") + " № 5", { PanelConfig::X, SD::Y_SB(y + dy) });
 
-        wxStaticBox *boxCalculate = new wxStaticBox(boxParameter, wxID_ANY, _L("Рассчитать"), { x, y }, { w - 10, 60 });
+        StaticBox *boxCalculate = new StaticBox(boxParameter, _L("Рассчитать"), { x, y }, { w - 10, 60 });
 
         {
             y = 25;
@@ -74,14 +77,18 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
             new wxRadioButton(boxCalculate, wxID_ANY, "dX/dY", { 100, SD::Y_SB(y) });
         }
 
+        boxCalculate->SetFont(StaticBox::TitleFont());
+
         wxPoint pos = boxCalculate->GetPosition();
         pos.y = SD::Y_SB(boxParameter->GetSize().y - boxCalculate->GetSize().y - 8);
         boxCalculate->SetPosition(pos);
     }
 
-    wxStaticBox *boxBorder = new wxStaticBox(this, wxID_ANY, _L("Пороговые значения"),
-        { x, boxParameter->GetPosition().y + boxParameter->GetSize().y },
-        { w, h - boxParameter->GetPosition().y - boxParameter->GetSize().y });
+    boxParameter->SetFont(StaticBox::TitleFont());
+
+    StaticBox *boxBorder = new StaticBox(this, _L("Пороговые значения"),
+        { x, boxParameter->GetPosition().y + boxParameter->GetSize().y + SD::DSBY() },
+        { w, h - boxParameter->GetPosition().y - boxParameter->GetSize().y - SD::DSBY() });
 
     {
         new wxStaticText(boxBorder, wxID_ANY, "MIN", { PanelConfig::X, SD::Y_SB(y + dy) });
@@ -92,4 +99,6 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
         new wxStaticText(boxBorder, wxID_ANY, "MAX", { PanelConfig::X, SD::Y_SB(y + dy) });
         new wxTextCtrl(boxBorder, wxID_ANY, "4", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT });
     }
+
+    boxBorder->SetFont(StaticBox::TitleFont());
 }

@@ -3,6 +3,7 @@
 #include "Panels/Panel11_Menu/Setup/WindowCalibrate.h"
 #include "Utils/GlobalFunctions.h"
 #include "Utils/SystemDepend.h"
+#include "Controls/StaticBox.h"
 
 
 WindowCalibrate::WindowCalibrate() :
@@ -24,7 +25,7 @@ WindowCalibrate::WindowCalibrate() :
 
     new wxButton(this, wxID_ANY, "Сохранить", { 300, 30 }, { 75, BUTTON_HEIGHT });
 
-    wxStaticBox *box = new wxStaticBox(this, wxID_ANY, "Параметры режима калибровки", { d, y + 30 }, { 270, 330 });
+    StaticBox *box = new StaticBox(this, "Параметры режима калибровки", { d, y + 30 }, { 270, 330 });
 
     {
         y = d + 10;
@@ -52,7 +53,7 @@ WindowCalibrate::WindowCalibrate() :
 
     y = 430;
 
-    box = new wxStaticBox(this, wxID_ANY, "Внимание!", { d, y }, { 300, 100 });
+    box = new StaticBox(this, "Внимание!", { d, y }, { 300, 100 });
 
     new wxStaticText(box, wxID_ANY, "Соберите схему для определения основной погрешности измерения "
         "тока по каналу C на диапазонах от 5 A до 50 A (рис. В.8 РЭ) и установите резистор Rn",

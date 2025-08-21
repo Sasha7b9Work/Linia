@@ -7,6 +7,7 @@
 #include "Panels/Panel03_Config/Panel03_Config.h"
 #include "Controls/CustomComboBox.h"
 #include "Device/SettingsDevice.h"
+#include "Controls/StaticBox.h"
 
 
 /*
@@ -28,7 +29,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    wxStaticBox *boxScan = new wxStaticBox(this, wxID_ANY, _L("Развёртка"), { x, 0 }, { w, 140 });          // IDC_STATICRAZV
+    StaticBox *boxScan = new StaticBox(this, _L("Развёртка"), { x, SD::DSBY() }, { w, 140 });          // IDC_STATICRAZV
 
     {
         wxArrayString files =
@@ -53,7 +54,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
             "Синусоидальное"
         };
 
-        comboScan = new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::Y_SB(25) }, { 32, 42 }, files, tooltips, 0, 3);
+        comboScan = new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::XY0().y }, { 32, 42 }, files, tooltips, 0, 3);
 
         int y = 25;
         int x0 = 80;
@@ -72,21 +73,24 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
         chbDutyCycleIncrease = new CheckButton(boxScan, _L("Скважн. x 2"), { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO);
     }
 
-    wxStaticBox *boxMeter = new wxStaticBox(this, wxID_ANY, _L("Измеритель"), { x, boxScan->GetPosition().y + boxScan->GetSize().y }, { w, 50 });
+    boxScan->SetFont(StaticBox::TitleFont());
+
+    StaticBox *boxMeter = new StaticBox(this, _L("Измеритель"), { x, boxScan->GetPosition().y + boxScan->GetSize().y + SD::DSBY() }, { w, 50 });
 
     {
-        int y = 20;
-
         wxArrayString names;
+        int width = 85;
 
         RangeU::FillArrayStrings(names, DSet::Type::ChanC_Meas, false);
-        comboVoltage = new ButtonsComboRange(boxMeter, "Uc", { PanelConfig::X, SD::Y_SB(y) }, 80, names, names);
+        comboVoltage = new ButtonsComboRange(boxMeter, "Uc", SD::XY0(), width, names, names);
 
         RangeI::FillArrayStrings(names, DSet::Type::ChanC_Meas, false);
-        comboCurrent = new ButtonsComboRange(boxMeter, "Ic", { 100, SD::Y_SB(y) }, 80, names, names);
+        comboCurrent = new ButtonsComboRange(boxMeter, "Ic", { SD::XY0().x + PanelConfig::WIDTH_COMBO - width, SD::XY0().y }, width, names, names);
     }
 
-    wxStaticBox *boxSource = new wxStaticBox(this, wxID_ANY, "Источник U", { x, boxMeter->GetPosition().y + boxMeter->GetSize().y }, { w, h - boxMeter->GetPosition().y - boxMeter->GetSize().y });
+    boxMeter->SetFont(StaticBox::TitleFont());
+
+    StaticBox *boxSource = new StaticBox(this, "Источник U", { x, boxMeter->GetPosition().y + boxMeter->GetSize().y + SD::DSBY() }, { w, h - boxMeter->GetPosition().y - boxMeter->GetSize().y - SD::DSBY() });
 
     {
         wxArrayString names
@@ -98,9 +102,9 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
             "2 kV"
         };
 
-        comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", { PanelConfig::X, SD::Y_SB(27) }, PanelConfig::WIDTH_COMBO, names, names, 1);
+        comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", SD::XY0(), PanelConfig::WIDTH_COMBO, names, names, 1);
 
-        new wxStaticText(boxSource, wxID_ANY, _L("Ограничение Uc, %%"), { 40, SD::Y_SB(60) });
+        new wxStaticText(boxSource, wxID_ANY, _L("Ограничение Uc, %%"), { 40, SD::Y_SB(65) });
 
         int y = 90;
 
@@ -119,6 +123,8 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
 
         spinStart = new SliderInt(boxSource, { 10, SD::Y_SB(y) }, width, 0, 100);
     }
+
+    boxSource->SetFont(StaticBox::TitleFont());
 
     Bind(wxEVT_COMBOBOX, &PanelChannelC::OnEventComboBox, this);
 

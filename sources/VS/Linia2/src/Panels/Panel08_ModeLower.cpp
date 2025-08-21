@@ -4,6 +4,7 @@
 #include "Panels/Panel06_Percents.h"
 #include "Panels/Panel08_ModeLower.h"
 #include "Utils/SystemDepend.h"
+#include "Controls/StaticBox.h"
 
 
 PanelModeLower *PanelModeLower::self = nullptr;
@@ -14,7 +15,7 @@ PanelModeLower::PanelModeLower(wxWindow *parent) :
 {
     self = this;
 
-    wxStaticBox *boxCategory = new wxStaticBox(this, wxID_ANY, _L("Режим"), { 5, 0 }, { WIDTH - 13, HEIGHT - 8});
+    StaticBox *boxCategory = new StaticBox(this, _L("Режим"), { 5, 0 }, { WIDTH - 13, HEIGHT - 8});
 
     {
         new wxStaticText(boxCategory, wxID_ANY, _L("Канал") + " C:", { 10, SD::Y_SB(30) });

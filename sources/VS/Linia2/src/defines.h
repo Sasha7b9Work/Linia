@@ -76,3 +76,10 @@ static pString REVERSE_PROMT = "-> ";
 static pString DIRECT_PROMT = "<- ";
 
 #define SAFE_DELETE(ptr)  do { delete ptr; ptr = nullptr; } while(0)
+
+// Яркость элементов управления
+#ifdef WIN32
+    #define LIGHTNESS 300
+#else
+    #define LIGHTNESS 140
+#endif

@@ -121,3 +121,19 @@ int SD::Y_SB(int y)
     return y - 20;
 #endif
 }
+
+
+wxPoint SD::XY0()
+{
+#ifdef WIN32
+    return { 5, 20 };
+#else
+    return { 5 ,5 };
+#endif
+}
+
+
+int SD::DSBY()
+{
+    return 5;
+}

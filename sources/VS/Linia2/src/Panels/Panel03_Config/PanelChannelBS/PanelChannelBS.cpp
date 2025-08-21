@@ -20,7 +20,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    wxStaticBox *boxGenerator = new wxStaticBox(this, wxID_ANY, _L("Генератор ступенек"), { x, 0 }, { w, 300 });
+    StaticBox *boxGenerator = new StaticBox(this, _L("Генератор ступенек"), { x, SD::DSBY() }, { w, 300 });
 
     {
         int y = 22;
@@ -29,7 +29,9 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
         choices.Add("U");
         choices.Add("I");
 
-        comboTypeGenerator = new ButtonsCombo(boxGenerator, "Тип", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
+        comboTypeGenerator = new ButtonsCombo(boxGenerator, "Тип", SD::XY0(), PanelConfig::WIDTH_COMBO, choices, choices, 1);
+
+        y = SD::XY0().y;
 
         y += PanelConfig::DYC;
 
@@ -37,41 +39,41 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
         choices.Add(_L("Вкл"));
         choices.Add(_L("Выкл"));
 
-        new ButtonsCombo(boxGenerator, "Импульс", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
+        new ButtonsCombo(boxGenerator, "Импульс", { SD::XY0().x, y }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
         y += PanelConfig::DYC;
 
         choices.Clear();
         choices.Add("-");
 
-        comboStep = new ButtonsComboRange(boxGenerator, "Амплитуда ступени", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, choices, choices);
+        comboStep = new ButtonsComboRange(boxGenerator, "Амплитуда ступени", { SD::XY0().x, y }, PanelConfig::WIDTH_COMBO, choices, choices);
 
         y += PanelConfig::DYC;
 
-        btnAmpitudeDecrease = new CheckButton(boxGenerator, "Амплитуда / 10", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO);
+        btnAmpitudeDecrease = new CheckButton(boxGenerator, "Амплитуда / 10", { SD::XY0().x, y }, PanelConfig::WIDTH_COMBO);
 
-        y += 28;
+        y += PanelConfig::DYC;
 
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Число ступенек"), { PanelConfig::X, SD::Y_SB(y + 3) });
+        new wxStaticText(boxGenerator, wxID_ANY, _L("Число ступенек"), { SD::XY0().x + 2, y + 3 });
 
-        new SpinBox(boxGenerator, { 120, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT }, 5, 10);
+        new SpinBox(boxGenerator, { 120, y }, { 50, TEXTCNTRL_HEIGHT }, 5, 10);
 
-        y += 28;
+        y += PanelConfig::DYC;
 
         choices.Clear();
         choices.Add(_L("прямая"));
         choices.Add(_L("обратная"));
 
-        new ButtonsCombo(boxGenerator, "Полярность", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
+        new ButtonsCombo(boxGenerator, "Полярность", { SD::XY0().x, y }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
         y += 30;
 
-        wxStaticBox *boxOffset = new wxStaticBox(boxGenerator, wxID_ANY, _L("Смещение"), { x, y }, { w - 10, 100 });
+        StaticBox *boxOffset = new StaticBox(boxGenerator, _L("Смещение"), { x, y }, { w - 10, 100 });
 
         {
             y = 25;
 
-            sliderOffset = new SliderFloatOffset(boxOffset, { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - 10);
+            sliderOffset = new SliderFloatOffset(boxOffset, { SD::XY0().x, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - 10);
 
             y += 40;
 
@@ -82,14 +84,18 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
             new ButtonsCombo(boxOffset, "Полярность", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - 10, choices, choices, 1);
         }
 
+        boxOffset->SetFont(StaticBox::TitleFont());
+
         wxPoint pos = boxOffset->GetPosition();
         pos.y = SD::Y_SB(boxGenerator->GetSize().y - boxOffset->GetSize().y - 8);
         boxOffset->SetPosition(pos);
     }
 
-    wxStaticBox *boxLimitation = new wxStaticBox(this, wxID_ANY, _L("Ограничение"),
-        { x, boxGenerator->GetPosition().y + boxGenerator->GetSize().y },
-        { w, h - boxGenerator->GetPosition().y - boxGenerator->GetSize().y });
+    boxGenerator->SetFont(StaticBox::TitleFont());
+
+    StaticBox *boxLimitation = new StaticBox(this, _L("Ограничение"),
+        { x, boxGenerator->GetPosition().y + boxGenerator->GetSize().y + SD::DSBY() },
+        { w, h - boxGenerator->GetPosition().y - boxGenerator->GetSize().y - SD::DSBY() });
 
     {
         int y = 30;
@@ -97,12 +103,14 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
         wxArrayString choices;
         choices.Add("-");
 
-        comboLimitRange = new ButtonsComboRange(boxLimitation, "Диапазон", { PanelConfig::X, SD::Y_SB(y - 3) }, PanelConfig::WIDTH_COMBO, choices, choices);
+        comboLimitRange = new ButtonsComboRange(boxLimitation, "Диапазон", SD::XY0(), PanelConfig::WIDTH_COMBO, choices, choices);
 
         y += 40;
 
         sliderLimit = new SliderFloatLimit(boxLimitation, { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO );
     }
+
+    boxLimitation->SetFont(StaticBox::TitleFont());
 
     Bind(wxEVT_COMBOBOX, &PanelChannelB::OnEventComboBox, this);
 
