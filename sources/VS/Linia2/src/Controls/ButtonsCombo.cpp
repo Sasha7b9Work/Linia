@@ -85,6 +85,7 @@ public:
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
         // Внешние отступы 15px
         outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 3);
+//        mainPanel->SetBackgroundColour(mainPanel->GetBackgroundColour().ChangeLightness(300));
         SetSizer(outerSizer);
 
         Layout();
@@ -96,7 +97,7 @@ public:
         Refresh();
         Update();
 
-        SetBackgroundColour(GetBackgroundColour().ChangeLightness(70));
+        SetBackgroundColour(GetBackgroundColour().ChangeLightness(10));
 
         // Отключаем изменение фона для всех детей
         for (auto child : GetChildren())
