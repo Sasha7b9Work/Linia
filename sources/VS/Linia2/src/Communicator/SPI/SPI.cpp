@@ -2,7 +2,7 @@
 #include "SPI_defines.h"
 #include "Communicator/SPI/SPI.h"
 
-namespace
+namespace SPI
 {
 #ifndef WIN32
     // Внутренние переменные модуля
