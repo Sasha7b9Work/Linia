@@ -1,6 +1,3 @@
-#!/usr/bin/env bash
-# Полная сборка для Orange Pi 5 Plus (ARM64)
-
 set -e
 
 echo "Сборка проекта Linia для Orange Pi 5 Plus (ARM64)"
@@ -14,20 +11,6 @@ fi
 # Очистка предыдущих сборок
 echo "Очистка предыдущих сборок..."
 rm -R -f ../../generated
-rm -R -f ../../ThirdParty/wxWidgets/generated
-
-# Сборка wxWidgets для ARM64
-echo "Сборка wxWidgets для ARM64..."
-cd ../../ThirdParty/wxWidgets
-cmake CMakeLists.txt -Bgenerated -G "CodeBlocks - Unix Makefiles" \
-    -DwxBUILD_SAMPLES=ALL \
-    -DwxBUILD_SHARED=OFF \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_FLAGS="-O2 -march=armv8-a"
-
-cd generated
-cmake --build . -- -j$(nproc)
-cd ../../../scripts/arm64
 
 # Сборка основного проекта
 echo "Сборка основного проекта..."

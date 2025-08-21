@@ -26,6 +26,23 @@ sudo apt-get install libsecret-1-dev -y
 # Добавляем GSpell для проверки орфографии
 sudo apt-get install libgspell-1-dev -y
 
+# Дополнительные пакеты для корректного GUI отображения на ARM64
+echo "Установка дополнительных GUI библиотек для ARM64..."
+sudo apt-get install -y libcairo2-dev libpango1.0-dev libatk1.0-dev libgdk-pixbuf2.0-dev
+sudo apt-get install -y libxinerama-dev libxcursor-dev libxi-dev libxcomposite-dev
+sudo apt-get install -y libjpeg-dev libpng-dev libtiff-dev libsm-dev
+sudo apt-get install -y libexpat1-dev zlib1g-dev libpcre2-dev
+
+# Cairo для векторной графики
+sudo apt-get install -y libcairo-gobject2 libcairo-script-interpreter2
+
+# Fonts для корректного отображения текста
+sudo apt-get install -y fonts-liberation fonts-dejavu-core fonts-noto-core
+sudo apt-get install -y fontconfig libfontconfig1-dev
+
+# Wayland поддержка (если используется)
+sudo apt-get install -y libwayland-dev libwayland-egl1-mesa libxkbcommon-dev
+
 # Установка WebKit с проверкой версии (Ubuntu 24.04 использует 4.1)
 echo "Попытка установки WebKit2GTK..."
 if apt-cache show libwebkit2gtk-4.1-dev >/dev/null 2>&1; then
@@ -94,6 +111,25 @@ echo "Проверка ARM64 библиотек..."
 ls -la /usr/lib/aarch64-linux-gnu/libX11* || echo "Предупреждение: libX11 не найдена в стандартном ARM64 пути"
 ls -la /usr/lib/aarch64-linux-gnu/libxkbcommon* || echo "Предупреждение: libxkbcommon не найдена в стандартном ARM64 пути"
 ls -la /usr/lib/aarch64-linux-gnu/libpng* || echo "Предупреждение: libpng не найдена в стандартном ARM64 пути"
+
+# Проверка GUI библиотек
+echo "Проверка GUI библиотек для ARM64..."
+pkg-config --exists gtk+-3.0 && echo "✅ GTK3 найден: $(pkg-config --modversion gtk+-3.0)" || echo "❌ GTK3 не найден"
+pkg-config --exists cairo && echo "✅ Cairo найден: $(pkg-config --modversion cairo)" || echo "❌ Cairo не найден"
+pkg-config --exists x11 && echo "✅ X11 найден: $(pkg-config --modversion x11)" || echo "❌ X11 не найден"
+
+# Проверка дисплея
+echo "Проверка графического окружения..."
+echo "DISPLAY: ${DISPLAY:-не установлен}"
+echo "WAYLAND_DISPLAY: ${WAYLAND_DISPLAY:-не установлен}"
+
+# Тест простого GUI приложения
+if command -v xeyes >/dev/null 2>&1; then
+    echo "✅ xeyes доступен для тестирования GUI"
+else
+    echo "Установка xeyes для тестирования GUI..."
+    sudo apt-get install -y x11-apps
+fi
 
 echo "Установка завершена для архитектуры: $(uname -m)"
 echo "Теперь можно запустить сборку wxWidgets и основного проекта"
