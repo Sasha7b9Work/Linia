@@ -37,7 +37,7 @@ public:
 
         // Основной контейнер с отступами по краям
         wxPanel *mainPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
-        mainPanel->SetBackgroundColour(mainPanel->GetBackgroundColour().ChangeLightness(LIGHTNESS * 2));
+//        mainPanel->SetBackgroundColour(mainPanel->GetBackgroundColour().ChangeLightness(LIGHTNESS * 2));
 
         int num_rows = (int)(labels.size() / GetCombo()->buttons_in_row);
 
