@@ -37,6 +37,7 @@ public:
 
         // Основной контейнер с отступами по краям
         wxPanel *mainPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
+        mainPanel->SetBackgroundColour(mainPanel->GetBackgroundColour().ChangeLightness(LIGHTNESS * 2));
 
         int num_rows = (int)(labels.size() / GetCombo()->buttons_in_row);
 
@@ -85,7 +86,6 @@ public:
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
         // Внешние отступы 15px
         outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 3);
-//        mainPanel->SetBackgroundColour(mainPanel->GetBackgroundColour().ChangeLightness(300));
         SetSizer(outerSizer);
 
         Layout();
@@ -97,7 +97,7 @@ public:
         Refresh();
         Update();
 
-        SetBackgroundColour(GetBackgroundColour().ChangeLightness(10));
+        SetBackgroundColour(GetBackgroundColour().ChangeLightness(50));
 
         // Отключаем изменение фона для всех детей
         for (auto child : GetChildren())
