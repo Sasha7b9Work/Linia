@@ -27,7 +27,9 @@ SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _
     int x = w1 + slider->GetSize().x;
 
     btnMore = new wxButton(this, wxID_ANY, "", { x, 0 }, size_button);
+    btnMore->SetBackgroundColour(btnMore->GetBackgroundColour().ChangeLightness(LIGHTNESS));
     btnLess = new wxButton(this, wxID_ANY, "", { x, size_button.y }, size_button);
+    btnLess->SetBackgroundColour(btnLess->GetBackgroundColour().ChangeLightness(LIGHTNESS));
 
     Bind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
     btnMore->Bind(wxEVT_LEFT_DOWN, &SliderInt::OnEventMouseDown, this);
@@ -99,6 +101,8 @@ SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width) :
 
     slider = new wxSlider(this, wxID_ANY, num_steps / 2, 0, num_steps, { w1, 0 }, { width - w1 - w2, TEXTCNTRL_HEIGHT + 5 });
 
+    slider->SetBackgroundColour(slider->GetBackgroundColour().ChangeLightness(LIGHTNESS));
+
     text = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT - 5 });
 
     wxSize size_button{ 15, 12 };
@@ -106,7 +110,9 @@ SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width) :
     int x = w1 + slider->GetSize().x;
 
     btnMore = new wxButton(this, wxID_ANY, "", { x, 0 }, size_button);
+    btnMore->SetBackgroundColour(btnMore->GetBackgroundColour().ChangeLightness(LIGHTNESS));
     btnLess = new wxButton(this, wxID_ANY, "", { x, size_button.y }, size_button);
+    btnLess->SetBackgroundColour(btnLess->GetBackgroundColour().ChangeLightness(LIGHTNESS));
 
     Bind(wxEVT_SLIDER, &SliderFloat::OnEventSlider, this);
     btnMore->Bind(wxEVT_LEFT_DOWN, &SliderFloat::OnEventMouseDown, this);
