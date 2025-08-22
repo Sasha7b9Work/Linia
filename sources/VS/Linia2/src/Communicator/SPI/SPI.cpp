@@ -496,8 +496,6 @@ bool SPI::InitGPIO()
 void SPI::DeInitGPIO()
 {
 #ifdef HAVE_LIBGPIOD
-
-    // \error Ощибка. Дублирование кода
     if (g_dda1_line)
     {
         gpiod_line_release(g_dda1_line);
@@ -508,8 +506,6 @@ void SPI::DeInitGPIO()
         gpiod_line_release(g_dda2_line);
         g_dda2_line = nullptr;
     }
-
-
     if (g_gpio_chip)
     {
         gpiod_chip_close(g_gpio_chip);

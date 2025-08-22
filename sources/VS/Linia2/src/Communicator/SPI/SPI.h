@@ -8,7 +8,7 @@ namespace SPI
     
     // Основные функции для динамических DAC
     // \todo Переделать реализации. Функции не должны быть одинаковыми, а должны вызывать третью функцию с параметром.
-    // Лучше переделать к виду WriteDynamicDAC1(number_DAC, uint16_t value)
+    // Ещё лучше переделать к виду WriteDynamicDAC1(number_DAC, uint16_t value) - так уменьшается перегрузка интерфейса *.h-файла
     bool WriteDynamicDAC1(uint16_t value);
     bool WriteDynamicDAC2(uint16_t value);
     
