@@ -28,7 +28,7 @@ bool Application::OnInit()
         return false;
     }
 
-    file_name_config = wxGetCwd() + "/CIC.conf";
+    file_name_config = wxGetCwd() + "/Linia.conf";
 
     Log::Init();
 
