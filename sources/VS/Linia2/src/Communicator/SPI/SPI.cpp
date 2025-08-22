@@ -423,6 +423,8 @@ void SPI::PrintSystemInfo()
 }
 
 
+#ifdef HAVE_LIBGPIOD
+
 unsigned int SPI::PhysicalToGPIO(unsigned int physical_pin)
 {
     // Маппинг физических пинов на GPIO для Raspberry Pi
@@ -434,6 +436,8 @@ unsigned int SPI::PhysicalToGPIO(unsigned int physical_pin)
     default: return physical_pin; // Fallback
     }
 }
+
+#endif
 
 
 bool SPI::InitGPIO()
