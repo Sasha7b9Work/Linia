@@ -32,7 +32,7 @@ void Log::Init()
     mutex.lock();
 
     {
-        file_name = wxGetCwd() + "/CIC.log";
+        file_name = wxGetCwd() + "/Linia.log";
 
         if (wxFile::Exists(file_name))
         {

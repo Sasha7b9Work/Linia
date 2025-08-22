@@ -1,187 +1,54 @@
 ﻿// 2025/6/11 18:47:55 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "SPI_defines.h"
 #include "Communicator/SPI/SPI.h"
 
 #ifndef WIN32
 
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <linux/spi/spidev.h>
+#include <iostream>
+#include <cstring>
+
+#ifdef HAVE_LIBGPIOD
+#include <gpiod.h>
+#endif
+
 namespace SPI
 {
     // Внутренние переменные модуля
-    int g_spi_fd = -1;
-    uint32_t g_speed = 1000000;
-    uint8_t g_mode = 0; // SPI_MODE_0
-    uint8_t g_bits_per_word = 8;
-    
+    static int g_spi_fd = -1;
+    static uint32_t g_speed = 1000000;
+    static uint8_t g_mode = 0; // SPI_MODE_0
+    static uint8_t g_bits_per_word = 8;
+
+    // \error Ссылка на файл, которого нет в проекте
     // GPIO пины согласно ALGORITM.MD (физические номера пинов)
-    const unsigned int EN_DDA1_PIN = 31;  // GPIO6
-    const unsigned int EN_DDA2_PIN = 35;  // GPIO19
-    
+    static const unsigned int EN_DDA1_PIN = 31;  // GPIO6
+    static const unsigned int EN_DDA2_PIN = 35;  // GPIO19
+
     // libgpiod объекты
 #ifdef HAVE_LIBGPIOD
-    struct gpiod_chip* g_gpio_chip = nullptr;
-    struct gpiod_line* g_dda1_line = nullptr;
-    struct gpiod_line* g_dda2_line = nullptr;
+    struct gpiod_chip *g_gpio_chip = nullptr;
+
+    // \todo Эти два значения дожны быть в массиве, чтобы выбирать не через if(), а через индекс
+    struct gpiod_line *g_dda1_line = nullptr;
+    struct gpiod_line *g_dda2_line = nullptr;
+
 #endif
-    bool g_gpio_initialized = false;
-    
+    static bool g_gpio_initialized = false;
+
     // Преобразование физического номера пина в номер GPIO
-    unsigned int PhysicalToGPIO(unsigned int physical_pin)
-    {
-        // Маппинг физических пинов на GPIO для Raspberry Pi
-        switch (physical_pin)
-        {
-            case 31: return 6;   // Physical pin 31 -> GPIO6
-            case 35: return 19;  // Physical pin 35 -> GPIO19
-            default: return physical_pin; // Fallback
-        }
-    }
-    
-    bool InitGPIO()
-    {
-        if (g_gpio_initialized)
-            return true;
-            
-        // Проверяем доступность GPIO библиотеки
-#ifndef HAVE_LIBGPIOD
-        std::cout << "Warning: GPIO library (libgpiod) not available - GPIO control disabled" << std::endl;
-        g_gpio_initialized = true;  // Отмечаем как инициализированный, но без GPIO
-        return true;
-#else
-        // Открываем GPIO chip (обычно gpiochip0 для Raspberry Pi)
-        g_gpio_chip = gpiod_chip_open_by_name("gpiochip0");
-        if (!g_gpio_chip)
-        {
-            std::cerr << "Error: Cannot open GPIO chip" << std::endl;
-            return false;
-        }
-        
-        // Получаем GPIO линии
-        unsigned int dda1_gpio = PhysicalToGPIO(EN_DDA1_PIN);
-        unsigned int dda2_gpio = PhysicalToGPIO(EN_DDA2_PIN);
-        
-        g_dda1_line = gpiod_chip_get_line(g_gpio_chip, dda1_gpio);
-        g_dda2_line = gpiod_chip_get_line(g_gpio_chip, dda2_gpio);
-        
-        if (!g_dda1_line || !g_dda2_line)
-        {
-            std::cerr << "Error: Cannot get GPIO lines" << std::endl;
-            if (g_gpio_chip)
-            {
-                gpiod_chip_close(g_gpio_chip);
-                g_gpio_chip = nullptr;
-            }
-            return false;
-        }
-        
-        // Настраиваем линии как выходы с начальным значением LOW
-        int ret1 = gpiod_line_request_output(g_dda1_line, "SPI_EN_DDA1", 0);
-        int ret2 = gpiod_line_request_output(g_dda2_line, "SPI_EN_DDA2", 0);
-        
-        if (ret1 < 0 || ret2 < 0)
-        {
-            std::cerr << "Error: Cannot request GPIO lines as outputs" << std::endl;
-            if (g_gpio_chip)
-            {
-                gpiod_chip_close(g_gpio_chip);
-                g_gpio_chip = nullptr;
-            }
-            return false;
-        }
-        
-        g_gpio_initialized = true;
-        std::cout << "GPIO initialized successfully using libgpiod" << std::endl;
-        return true;
-#endif
-    }
-    
-    void DeInitGPIO()
-    {
-#ifdef HAVE_LIBGPIOD
-        if (g_dda1_line)
-        {
-            gpiod_line_release(g_dda1_line);
-            g_dda1_line = nullptr;
-        }
-        if (g_dda2_line)
-        {
-            gpiod_line_release(g_dda2_line);
-            g_dda2_line = nullptr;
-        }
-        if (g_gpio_chip)
-        {
-            gpiod_chip_close(g_gpio_chip);
-            g_gpio_chip = nullptr;
-        }
-#endif
-        g_gpio_initialized = false;
-    }
-    
-    void SetCS(int dac_number, bool enable)
-    {
-        if (!g_gpio_initialized)
-            return;
-            
-#ifdef HAVE_LIBGPIOD
-        int value = enable ? 1 : 0;
-        
-        switch (dac_number)
-        {
-            case 1:
-                if (g_dda1_line)
-                {
-                    gpiod_line_set_value(g_dda1_line, value);
-                }
-                break;
-            case 2:
-                if (g_dda2_line)
-                {
-                    gpiod_line_set_value(g_dda2_line, value);
-                }
-                break;
-            default:
-                std::cerr << "Error: Invalid DAC number: " << dac_number << std::endl;
-                break;
-        }
-#else
-        // Заглушка - ничего не делаем без libgpiod
-        (void)dac_number;
-        (void)enable;
-#endif
-    }
-    
-    bool Write(uint8_t* data, size_t length)
-    {
-        if (g_spi_fd < 0)
-        {
-            std::cerr << "Error: SPI not initialized" << std::endl;
-            return false;
-        }
-        
-        if (data == nullptr || length == 0)
-        {
-            std::cerr << "Error: Invalid data or length" << std::endl;
-            return false;
-        }
-        
-        struct spi_ioc_transfer transfer = {};
-        transfer.tx_buf = (unsigned long)data;
-        transfer.rx_buf = 0;
-        transfer.len = length;
-        transfer.speed_hz = g_speed;
-        transfer.delay_usecs = 0;
-        transfer.bits_per_word = g_bits_per_word;
-        transfer.cs_change = 0;
-        
-        int result = ioctl(g_spi_fd, SPI_IOC_MESSAGE(1), &transfer);
-        if (result < 0)
-        {
-            std::cerr << "Error: SPI transfer failed" << std::endl;
-            return false;
-        }
-        
-        return true;
-    }
+    static unsigned int PhysicalToGPIO(unsigned int physical_pin);
+
+    static bool InitGPIO();
+
+    static void DeInitGPIO();
+
+    static void SetCS(int dac_number, bool enable);
+
+    static bool Write(uint8_t *data, size_t length);
 }
 
 
@@ -253,6 +120,7 @@ void SPI::DeInit()
 }
 
 
+// \error Дублирование кода
 bool SPI::WriteDynamicDAC1(uint16_t value)
 {
     if (!IsReady())
@@ -285,6 +153,7 @@ bool SPI::WriteDynamicDAC1(uint16_t value)
 }
 
 
+// \error Дублирование кода
 bool SPI::WriteDynamicDAC2(uint16_t value)
 {
     if (!IsReady())
@@ -549,6 +418,175 @@ void SPI::PrintSystemInfo()
     system("gpiodetect 2>/dev/null || echo 'Утилита gpiodetect не найдена'");
 
     std::cout << "=== Конец системной информации ===" << std::endl;
+}
+
+
+unsigned int SPI::PhysicalToGPIO(unsigned int physical_pin)
+{
+    // Маппинг физических пинов на GPIO для Raspberry Pi
+    switch (physical_pin)
+    {
+    // \error Магические числа
+    case 31: return 6;   // Physical pin 31 -> GPIO6
+    case 35: return 19;  // Physical pin 35 -> GPIO19
+    default: return physical_pin; // Fallback
+    }
+}
+
+
+bool SPI::InitGPIO()
+{
+    if (g_gpio_initialized)
+        return true;
+
+    // Проверяем доступность GPIO библиотеки
+#ifndef HAVE_LIBGPIOD
+    std::cout << "Warning: GPIO library (libgpiod) not available - GPIO control disabled" << std::endl;
+    g_gpio_initialized = true;  // Отмечаем как инициализированный, но без GPIO
+    return true;
+#else
+        // Открываем GPIO chip (обычно gpiochip0 для Raspberry Pi)
+    g_gpio_chip = gpiod_chip_open_by_name("gpiochip0");
+    if (!g_gpio_chip)
+    {
+        std::cerr << "Error: Cannot open GPIO chip" << std::endl;
+        return false;
+    }
+
+    // Получаем GPIO линии
+    unsigned int dda1_gpio = PhysicalToGPIO(EN_DDA1_PIN);
+    unsigned int dda2_gpio = PhysicalToGPIO(EN_DDA2_PIN);
+
+    g_dda1_line = gpiod_chip_get_line(g_gpio_chip, dda1_gpio);
+    g_dda2_line = gpiod_chip_get_line(g_gpio_chip, dda2_gpio);
+
+    if (!g_dda1_line || !g_dda2_line)
+    {
+        std::cerr << "Error: Cannot get GPIO lines" << std::endl;
+        if (g_gpio_chip)
+        {
+            gpiod_chip_close(g_gpio_chip);
+            g_gpio_chip = nullptr;
+        }
+        return false;
+    }
+
+    // Настраиваем линии как выходы с начальным значением LOW
+    int ret1 = gpiod_line_request_output(g_dda1_line, "SPI_EN_DDA1", 0);
+    int ret2 = gpiod_line_request_output(g_dda2_line, "SPI_EN_DDA2", 0);
+
+    if (ret1 < 0 || ret2 < 0)
+    {
+        std::cerr << "Error: Cannot request GPIO lines as outputs" << std::endl;
+        if (g_gpio_chip)
+        {
+            gpiod_chip_close(g_gpio_chip);
+            g_gpio_chip = nullptr;
+        }
+        return false;
+    }
+
+    g_gpio_initialized = true;
+    std::cout << "GPIO initialized successfully using libgpiod" << std::endl;
+    return true;
+#endif
+}
+
+
+void SPI::DeInitGPIO()
+{
+#ifdef HAVE_LIBGPIOD
+
+    // \error Ощибка. Дублирование кода
+    if (g_dda1_line)
+    {
+        gpiod_line_release(g_dda1_line);
+        g_dda1_line = nullptr;
+    }
+    if (g_dda2_line)
+    {
+        gpiod_line_release(g_dda2_line);
+        g_dda2_line = nullptr;
+    }
+
+
+    if (g_gpio_chip)
+    {
+        gpiod_chip_close(g_gpio_chip);
+        g_gpio_chip = nullptr;
+    }
+#endif
+    g_gpio_initialized = false;
+}
+
+
+void SPI::SetCS(int dac_number, bool enable)
+{
+    if (!g_gpio_initialized)
+        return;
+
+#ifdef HAVE_LIBGPIOD
+    int value = enable ? 1 : 0;
+
+    switch (dac_number)
+    {
+
+    // \error Ошибка. Дублирование кода
+    case 1:
+        if (g_dda1_line)
+        {
+            gpiod_line_set_value(g_dda1_line, value);
+        }
+        break;
+    case 2:
+        if (g_dda2_line)
+        {
+            gpiod_line_set_value(g_dda2_line, value);
+        }
+        break;
+    default:
+        std::cerr << "Error: Invalid DAC number: " << dac_number << std::endl;
+        break;
+    }
+#else
+    // Заглушка - ничего не делаем без libgpiod
+    (void)dac_number;
+    (void)enable;
+#endif
+}
+
+
+bool SPI::Write(uint8_t *data, size_t length)
+{
+    if (g_spi_fd < 0)
+    {
+        std::cerr << "Error: SPI not initialized" << std::endl;
+        return false;
+    }
+
+    if (data == nullptr || length == 0)
+    {
+        std::cerr << "Error: Invalid data or length" << std::endl;
+        return false;
+    }
+
+    struct spi_ioc_transfer transfer = {};
+    transfer.tx_buf = (unsigned long)data;
+    transfer.rx_buf = 0;
+    transfer.len = length;
+    transfer.speed_hz = g_speed;
+    transfer.delay_usecs = 0;
+    transfer.bits_per_word = g_bits_per_word;
+    transfer.cs_change = 0;
+
+    int result = ioctl(g_spi_fd, SPI_IOC_MESSAGE(1), &transfer);
+    if (result < 0)
+    {
+        std::cerr << "Error: SPI transfer failed" << std::endl;
+        return false;
+    }
+
+    return true;
 }
 
 

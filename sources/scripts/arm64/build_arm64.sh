@@ -8,10 +8,6 @@ if [ "$(uname -m)" != "aarch64" ]; then
     echo "Предупреждение: Скрипт предназначен для ARM64 (aarch64), текущая архитектура: $(uname -m)"
 fi
 
-# Очистка предыдущих сборок
-echo "Очистка предыдущих сборок..."
-rm -R -f ../../generated
-
 # Сборка основного проекта
 echo "Сборка основного проекта..."
 cmake ../../VS/CMakeLists.txt -B../../generated -G "CodeBlocks - Unix Makefiles" \
@@ -40,7 +36,7 @@ fi
 echo "Сборка завершена!"
 echo "Исполняемый файл: ../../generated/Linia2/Linia2"
 
-# Копирование ресурсов и конфигурационного файла
+# Копирование ресурсов
 echo "Копирование ресурсов..."
 if [ -d "../../../files/resources" ]; then
     cp -r ../../../files/resources ../../generated/Linia2/
@@ -50,9 +46,8 @@ else
 fi
 
 if [ -f "../../../files/Linia.loc" ]; then
-    echo "Копирование и переименование конфигурационного файла..."
-    cp ../../../files/Linia.loc ../../generated/Linia2/CIC.loc
-    echo "✅ Файл Linia.loc скопирован как CIC.loc"
+    echo "Копирование файла локализации..."
+    cp ../../../files/Linia.loc ../../generated/Linia2/Linia.loc
 else
     echo "⚠️ Предупреждение: Файл конфигурации files/Linia.loc не найден"
 fi
@@ -61,7 +56,7 @@ echo "Для запуска выполните:"
 echo "cd ../../generated/Linia2 && ./Linia2"
 echo ""
 echo "📋 Важно для GUI приложения:"
-echo "   • Приложение требует графическое окружение (X11/Wayland)"
+echo "   • Приложение требует графическое окружение (X11/Wayland) + xfce-4 + Chicago95"
 echo "   • Для SSH подключения используйте: ssh -X пользователь@orangepi"
 echo "   • Для диагностики GUI: ./diagnose_gui.sh"
 echo "   • Для автоматического запуска с настройкой дисплея: ./run_with_display.sh"
