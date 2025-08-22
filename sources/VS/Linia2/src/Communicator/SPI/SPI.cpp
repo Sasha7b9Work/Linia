@@ -30,17 +30,19 @@ namespace SPI
 
     // libgpiod объекты
 #ifdef HAVE_LIBGPIOD
+
     struct gpiod_chip *g_gpio_chip = nullptr;
 
     // \todo Эти два значения дожны быть в массиве, чтобы выбирать не через if(), а через индекс
     struct gpiod_line *g_dda1_line = nullptr;
     struct gpiod_line *g_dda2_line = nullptr;
 
-#endif
-    static bool g_gpio_initialized = false;
-
     // Преобразование физического номера пина в номер GPIO
     static unsigned int PhysicalToGPIO(unsigned int physical_pin);
+
+#endif
+
+    static bool g_gpio_initialized = false;
 
     static bool InitGPIO();
 
