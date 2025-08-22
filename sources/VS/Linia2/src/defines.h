@@ -29,6 +29,9 @@
 #pragma warning(pop)
 
 
+#include <cstdint>
+
+
 #include "Utils/Localizator.h"
 #include "Utils/Log.h"
 

@@ -1,4 +1,5 @@
 ﻿// 2025/6/11 18:47:55 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#include "defines.h"
 #include "SPI_defines.h"
 #include "Communicator/SPI/SPI.h"
 
