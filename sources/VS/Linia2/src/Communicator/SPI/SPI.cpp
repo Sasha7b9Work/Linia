@@ -18,13 +18,12 @@
 namespace SPI
 {
     // Внутренние переменные модуля
-    static int g_spi_fd = -1;
+    static int g_spi_fd = -1;  
     static uint32_t g_speed = 1000000;
     static uint8_t g_mode = 0; // SPI_MODE_0
     static uint8_t g_bits_per_word = 8;
 
-    // \error Ссылка на файл, которого нет в проекте
-    // GPIO пины согласно ALGORITM.MD (физические номера пинов)
+    // GPIO пины (физические номера пинов)
     static const unsigned int EN_DDA1_PIN = 31;  // GPIO6
     static const unsigned int EN_DDA2_PIN = 35;  // GPIO19
 
@@ -33,10 +32,32 @@ namespace SPI
 
     struct gpiod_chip *g_gpio_chip = nullptr;
 
-    // \todo Эти два значения дожны быть в массиве, чтобы выбирать не через if(), а через индекс
-    struct gpiod_line *g_dda1_line = nullptr;
-    struct gpiod_line *g_dda2_line = nullptr;
+    // Массив GPIO линий для DAC (индекс 0 = DAC1, индекс 1 = DAC2)
+    const int MAX_DAC_COUNT = 2;
+    struct gpiod_line *g_dac_lines[MAX_DAC_COUNT] = {nullptr, nullptr};
 
+    // Массив физических пинов для каждого DAC
+    const unsigned int DAC_PINS[MAX_DAC_COUNT] = {
+        EN_DDA1_PIN,  // DAC1 -> физический пин 31 (GPIO6)
+        EN_DDA2_PIN   // DAC2 -> физический пин 35 (GPIO19)
+    };
+
+    // Массив имен для GPIO линий
+    const char* DAC_NAMES[MAX_DAC_COUNT] = {
+        "SPI_EN_DDA1",
+        "SPI_EN_DDA2"
+    };
+
+    // Преобразование физического номера пина в номер GPIO
+    static unsigned int PhysicalToGPIO(unsigned int physical_pin);
+
+#else
+
+    // Константы для Windows (заглушки)
+    const int MAX_DAC_COUNT = 2;
+    const unsigned int DAC_PINS[MAX_DAC_COUNT] = {31, 35}; // Заглушки
+    const char* DAC_NAMES[MAX_DAC_COUNT] = {"SPI_EN_DDA1", "SPI_EN_DDA2"};
+    
     // Преобразование физического номера пина в номер GPIO
     static unsigned int PhysicalToGPIO(unsigned int physical_pin);
 
@@ -53,10 +74,9 @@ namespace SPI
     static bool Write(uint8_t *data, size_t length);
 }
 
-
 void SPI::Init()
 {
-    const char *device = "/dev/spidev1.0";
+    const char *device = "/dev/spidev0.0";
 
     // Открываем SPI устройство
     g_spi_fd = ::open(device, O_RDWR);
@@ -108,9 +128,11 @@ void SPI::DeInit()
 {
     if (g_spi_fd >= 0)
     {
-        // Отключаем все CS
-        SetCS(1, false);
-        SetCS(2, false);
+        // Отключаем все CS используя цикл
+        for (int i = 1; i <= MAX_DAC_COUNT; i++)
+        {
+            SetCS(i, false);
+        }
 
         ::close(g_spi_fd);
         g_spi_fd = -1;
@@ -121,13 +143,19 @@ void SPI::DeInit()
     DeInitGPIO();
 }
 
-
-// \error Дублирование кода
-bool SPI::WriteDynamicDAC1(uint16_t value)
+// Функция для записи в динамический DAC
+bool SPI::WriteDynamicDAC(int number_DAC, uint16_t value)
 {
     if (!IsReady())
     {
         std::cerr << "Error: SPI not ready" << std::endl;
+        return false;
+    }
+
+    // Проверка корректности номера DAC
+    if (number_DAC < 1 || number_DAC > 2)
+    {
+        std::cerr << "Error: Invalid DAC number: " << number_DAC << ". Valid range: 1-2" << std::endl;
         return false;
     }
 
@@ -136,8 +164,8 @@ bool SPI::WriteDynamicDAC1(uint16_t value)
     data[0] = static_cast<uint8_t>((value >> 8) & 0xFF);
     data[1] = static_cast<uint8_t>(value & 0xFF);
 
-    // Активируем CS для первого DAC
-    SetCS(1, true);
+    // Активируем CS для указанного DAC
+    SetCS(number_DAC, true);
     usleep(1);
 
     // Передаем данные
@@ -145,48 +173,14 @@ bool SPI::WriteDynamicDAC1(uint16_t value)
 
     if (result)
     {
-        std::cout << "DAC1 written: 0x" << std::hex << value << std::dec << std::endl;
+        std::cout << "DAC" << number_DAC << " written: 0x" << std::hex << value << std::dec << std::endl;
     }
 
     usleep(1);
-    SetCS(1, false);
+    SetCS(number_DAC, false);
 
     return result;
 }
-
-
-// \error Дублирование кода
-bool SPI::WriteDynamicDAC2(uint16_t value)
-{
-    if (!IsReady())
-    {
-        std::cerr << "Error: SPI not ready" << std::endl;
-        return false;
-    }
-
-    // Подготовка данных (MSB первым)
-    uint8_t data[2];
-    data[0] = static_cast<uint8_t>((value >> 8) & 0xFF);
-    data[1] = static_cast<uint8_t>(value & 0xFF);
-
-    // Активируем CS для второго DAC
-    SetCS(2, true);
-    usleep(1);
-
-    // Передаем данные
-    bool result = Write(data, 2);
-
-    if (result)
-    {
-        std::cout << "DAC2 written: 0x" << std::hex << value << std::dec << std::endl;
-    }
-
-    usleep(1);
-    SetCS(2, false);
-
-    return result;
-}
-
 
 bool SPI::SetSpeed(uint32_t speedHz)
 {
@@ -241,193 +235,11 @@ uint8_t SPI::GetMode()
     return g_mode;
 }
 
-
-void SPI::TestGPIO()
-{
-    std::cout << "\n=== Тестирование GPIO для SPI ===" << std::endl;
-
-    if (!g_gpio_initialized)
-    {
-        std::cout << "❌ GPIO не инициализирован" << std::endl;
-        return;
-    }
-
-#ifdef HAVE_LIBGPIOD
-    std::cout << "🔧 Тестирование EN_DDA1 (GPIO6, физический пин 31)..." << std::endl;
-    if (g_dda1_line)
-    {
-        // Включаем
-        if (gpiod_line_set_value(g_dda1_line, 1) == 0)
-        {
-            std::cout << "✅ EN_DDA1 установлен в HIGH" << std::endl;
-            usleep(500000); // 0.5 сек
-
-            // Выключаем
-            if (gpiod_line_set_value(g_dda1_line, 0) == 0)
-            {
-                std::cout << "✅ EN_DDA1 установлен в LOW" << std::endl;
-            }
-            else
-            {
-                std::cout << "❌ Ошибка установки EN_DDA1 в LOW" << std::endl;
-            }
-        }
-        else
-        {
-            std::cout << "❌ Ошибка установки EN_DDA1 в HIGH" << std::endl;
-        }
-    }
-    else
-    {
-        std::cout << "❌ GPIO линия EN_DDA1 недоступна" << std::endl;
-    }
-
-    std::cout << "🔧 Тестирование EN_DDA2 (GPIO19, физический пин 35)..." << std::endl;
-    if (g_dda2_line)
-    {
-        // Включаем
-        if (gpiod_line_set_value(g_dda2_line, 1) == 0)
-        {
-            std::cout << "✅ EN_DDA2 установлен в HIGH" << std::endl;
-            usleep(500000); // 0.5 сек
-
-            // Выключаем
-            if (gpiod_line_set_value(g_dda2_line, 0) == 0)
-            {
-                std::cout << "✅ EN_DDA2 установлен в LOW" << std::endl;
-            }
-            else
-            {
-                std::cout << "❌ Ошибка установки EN_DDA2 в LOW" << std::endl;
-            }
-        }
-        else
-        {
-            std::cout << "❌ Ошибка установки EN_DDA2 в HIGH" << std::endl;
-        }
-    }
-    else
-    {
-        std::cout << "❌ GPIO линия EN_DDA2 недоступна" << std::endl;
-    }
-#else
-    std::cout << "⚠️  libgpiod не скомпилирована - GPIO тестирование недоступно" << std::endl;
-#endif
-
-    std::cout << "=== Тестирование GPIO завершено ===" << std::endl;
-}
-
-
-void SPI::DiagnoseSPI()
-{
-    std::cout << "\n=== Диагностика SPI ===" << std::endl;
-
-    // Проверяем состояние SPI
-    std::cout << "SPI готов: " << (IsReady() ? "✅ ДА" : "❌ НЕТ") << std::endl;
-    std::cout << "Текущая скорость: " << GetSpeed() << " Hz" << std::endl;
-    std::cout << "Текущий режим: " << static_cast<int>(GetMode()) << std::endl;
-
-    // Проверяем доступность SPI устройства
-    if (CheckSPIDevice("/dev/spidev1.0"))
-    {
-        std::cout << "SPI устройство: ✅ /dev/spidev1.0 доступно" << std::endl;
-    }
-    else
-    {
-        std::cout << "SPI устройство: ❌ /dev/spidev1.0 недоступно" << std::endl;
-
-        // Проверяем альтернативные устройства
-        if (CheckSPIDevice("/dev/spidev0.0"))
-        {
-            std::cout << "Альтернатива: ✅ /dev/spidev0.0 доступно" << std::endl;
-        }
-        else if (CheckSPIDevice("/dev/spidev2.0"))
-        {
-            std::cout << "Альтернатива: ✅ /dev/spidev2.0 доступно" << std::endl;
-        }
-        else
-        {
-            std::cout << "❌ Нет доступных SPI устройств" << std::endl;
-        }
-    }
-
-    // Тестируем GPIO
-    TestGPIO();
-
-    // Тестируем запись тестовых значений
-    std::cout << "\n🔧 Тестирование записи в DAC..." << std::endl;
-    if (IsReady())
-    {
-        std::cout << "Запись тестового значения 0x123 в DAC1..." << std::endl;
-        bool result1 = WriteDynamicDAC1(0x123);
-        std::cout << "Результат DAC1: " << (result1 ? "✅ Успешно" : "❌ Ошибка") << std::endl;
-
-        std::cout << "Запись тестового значения 0x456 в DAC2..." << std::endl;
-        bool result2 = WriteDynamicDAC2(0x456);
-        std::cout << "Результат DAC2: " << (result2 ? "✅ Успешно" : "❌ Ошибка") << std::endl;
-    }
-    else
-    {
-        std::cout << "⚠️  SPI не готов - пропуск тестирования записи" << std::endl;
-    }
-
-    std::cout << "=== Диагностика SPI завершена ===" << std::endl;
-}
-
-
-bool SPI::CheckSPIDevice(const char *device_path)
-{
-    int fd = ::open(device_path, O_RDWR);
-    if (fd >= 0)
-    {
-        ::close(fd);
-        return true;
-    }
-    return false;
-}
-
-
-void SPI::PrintSystemInfo()
-{
-    std::cout << "\n=== Системная информация ===" << std::endl;
-
-    // Информация о системе
-    std::cout << "Операционная система: ";
-    system("uname -a");
-
-    // Информация о GPIO
-    std::cout << "\nGPIO устройства:" << std::endl;
-    system("ls -la /dev/gpiochip* 2>/dev/null || echo 'GPIO устройства не найдены'");
-
-    // Информация о SPI
-    std::cout << "\nSPI устройства:" << std::endl;
-    system("ls -la /dev/spi* 2>/dev/null || echo 'SPI устройства не найдены'");
-
-    // Проверка модулей ядра
-    std::cout << "\nМодули SPI в ядре:" << std::endl;
-    system("lsmod | grep spi || echo 'Модули SPI не загружены'");
-
-    // Информация о libgpiod
-    std::cout << "\nВерсия libgpiod:" << std::endl;
-#ifdef HAVE_LIBGPIOD
-    system("pkg-config --modversion libgpiod 2>/dev/null || echo 'libgpiod не найдена'");
-#else
-    std::cout << "libgpiod не скомпилирована" << std::endl;
-#endif
-
-    // GPIO информация через libgpiod утилиты
-    std::cout << "\nДоступные GPIO чипы:" << std::endl;
-    system("gpiodetect 2>/dev/null || echo 'Утилита gpiodetect не найдена'");
-
-    std::cout << "=== Конец системной информации ===" << std::endl;
-}
-
-
 #ifdef HAVE_LIBGPIOD
 
 unsigned int SPI::PhysicalToGPIO(unsigned int physical_pin)
 {
-    // Маппинг физических пинов на GPIO для Raspberry Pi
+    // Маппинг физических пинов на GPIO для Orange Pi
     switch (physical_pin)
     {
     // \error Магические числа
@@ -437,8 +249,14 @@ unsigned int SPI::PhysicalToGPIO(unsigned int physical_pin)
     }
 }
 
-#endif
+#else
 
+unsigned int SPI::PhysicalToGPIO(unsigned int physical_pin)
+{
+    return physical_pin; // Fallback для Windows
+}
+
+#endif
 
 bool SPI::InitGPIO()
 {
@@ -451,7 +269,7 @@ bool SPI::InitGPIO()
     g_gpio_initialized = true;  // Отмечаем как инициализированный, но без GPIO
     return true;
 #else
-        // Открываем GPIO chip (обычно gpiochip0 для Raspberry Pi)
+    // Открываем GPIO chip (обычно gpiochip0 для Orange Pi)
     g_gpio_chip = gpiod_chip_open_by_name("gpiochip0");
     if (!g_gpio_chip)
     {
@@ -459,37 +277,46 @@ bool SPI::InitGPIO()
         return false;
     }
 
-    // Получаем GPIO линии
-    unsigned int dda1_gpio = PhysicalToGPIO(EN_DDA1_PIN);
-    unsigned int dda2_gpio = PhysicalToGPIO(EN_DDA2_PIN);
-
-    g_dda1_line = gpiod_chip_get_line(g_gpio_chip, dda1_gpio);
-    g_dda2_line = gpiod_chip_get_line(g_gpio_chip, dda2_gpio);
-
-    if (!g_dda1_line || !g_dda2_line)
+    // Инициализируем все DAC линии
+    for (int i = 0; i < MAX_DAC_COUNT; i++)
     {
-        std::cerr << "Error: Cannot get GPIO lines" << std::endl;
-        if (g_gpio_chip)
+        unsigned int gpio_num = PhysicalToGPIO(DAC_PINS[i]);
+        
+        g_dac_lines[i] = gpiod_chip_get_line(g_gpio_chip, gpio_num);
+        if (!g_dac_lines[i])
         {
+            std::cerr << "Error: Cannot get GPIO line for DAC" << (i + 1) << std::endl;
+            // Очищаем уже инициализированные линии
+            for (int j = 0; j < i; j++)
+            {
+                if (g_dac_lines[j])
+                {
+                    gpiod_line_release(g_dac_lines[j]);
+                    g_dac_lines[j] = nullptr;
+                }
+            }
             gpiod_chip_close(g_gpio_chip);
             g_gpio_chip = nullptr;
+            return false;
         }
-        return false;
-    }
 
-    // Настраиваем линии как выходы с начальным значением LOW
-    int ret1 = gpiod_line_request_output(g_dda1_line, "SPI_EN_DDA1", 0);
-    int ret2 = gpiod_line_request_output(g_dda2_line, "SPI_EN_DDA2", 0);
-
-    if (ret1 < 0 || ret2 < 0)
-    {
-        std::cerr << "Error: Cannot request GPIO lines as outputs" << std::endl;
-        if (g_gpio_chip)
+        // Настраиваем линию как выход с начальным значением LOW
+        if (gpiod_line_request_output(g_dac_lines[i], DAC_NAMES[i], 0) < 0)
         {
+            std::cerr << "Error: Cannot request GPIO line " << DAC_NAMES[i] << " as output" << std::endl;
+            // Очищаем все линии
+            for (int j = 0; j <= i; j++)
+            {
+                if (g_dac_lines[j])
+                {
+                    gpiod_line_release(g_dac_lines[j]);
+                    g_dac_lines[j] = nullptr;
+                }
+            }
             gpiod_chip_close(g_gpio_chip);
             g_gpio_chip = nullptr;
+            return false;
         }
-        return false;
     }
 
     g_gpio_initialized = true;
@@ -502,16 +329,16 @@ bool SPI::InitGPIO()
 void SPI::DeInitGPIO()
 {
 #ifdef HAVE_LIBGPIOD
-    if (g_dda1_line)
+    // Освобождаем все GPIO линии
+    for (int i = 0; i < MAX_DAC_COUNT; i++)
     {
-        gpiod_line_release(g_dda1_line);
-        g_dda1_line = nullptr;
+        if (g_dac_lines[i])
+        {
+            gpiod_line_release(g_dac_lines[i]);
+            g_dac_lines[i] = nullptr;
+        }
     }
-    if (g_dda2_line)
-    {
-        gpiod_line_release(g_dda2_line);
-        g_dda2_line = nullptr;
-    }
+    
     if (g_gpio_chip)
     {
         gpiod_chip_close(g_gpio_chip);
@@ -528,27 +355,23 @@ void SPI::SetCS(int dac_number, bool enable)
         return;
 
 #ifdef HAVE_LIBGPIOD
+    // Проверяем корректность номера DAC и преобразуем в индекс массива
+    if (dac_number < 1 || dac_number > MAX_DAC_COUNT)
+    {
+        std::cerr << "Error: Invalid DAC number: " << dac_number << std::endl;
+        return;
+    }
+
+    int dac_index = dac_number - 1;  // Преобразуем номер DAC (1,2) в индекс массива (0,1)
     int value = enable ? 1 : 0;
 
-    switch (dac_number)
+    if (g_dac_lines[dac_index])
     {
-
-    // \error Ошибка. Дублирование кода
-    case 1:
-        if (g_dda1_line)
-        {
-            gpiod_line_set_value(g_dda1_line, value);
-        }
-        break;
-    case 2:
-        if (g_dda2_line)
-        {
-            gpiod_line_set_value(g_dda2_line, value);
-        }
-        break;
-    default:
-        std::cerr << "Error: Invalid DAC number: " << dac_number << std::endl;
-        break;
+        gpiod_line_set_value(g_dac_lines[dac_index], value);
+    }
+    else
+    {
+        std::cerr << "Error: GPIO line for DAC" << dac_number << " not initialized" << std::endl;
     }
 #else
     // Заглушка - ничего не делаем без libgpiod
@@ -556,7 +379,6 @@ void SPI::SetCS(int dac_number, bool enable)
     (void)enable;
 #endif
 }
-
 
 bool SPI::Write(uint8_t *data, size_t length)
 {
