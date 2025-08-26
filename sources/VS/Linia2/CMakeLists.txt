@@ -153,8 +153,22 @@ else()
     find_library(PNG_LIBRARY png REQUIRED)
     find_library(DL_LIBRARY dl REQUIRED)
     
-    # Поиск libgpiod если доступна
-    find_library(GPIOD_LIBRARY gpiod PATHS /usr/local/lib /usr/lib)
+    if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
+        message(STATUS "ARM64 platform detected - libgpiod is required")
+        pkg_check_modules(GPIOD REQUIRED libgpiod)
+        
+        if(NOT GPIOD_FOUND)
+            message(FATAL_ERROR "libgpiod is required for ARM64 builds but was not found! Install with: sudo apt-get install libgpiod-dev")
+        endif()
+        
+        target_compile_definitions(${PROJECT_NAME} PRIVATE ARM64)
+        target_link_libraries(${PROJECT_NAME} ${GPIOD_LIBRARIES})
+        target_include_directories(${PROJECT_NAME} PRIVATE ${GPIOD_INCLUDE_DIRS})
+        target_compile_options(${PROJECT_NAME} PRIVATE ${GPIOD_CFLAGS_OTHER})
+        message(STATUS "libgpiod library configured for ARM64: ${GPIOD_LIBRARIES}")
+    else()
+        message(STATUS "Non-ARM64 platform detected (${CMAKE_SYSTEM_PROCESSOR}) - skipping libgpiod search")
+    endif()
     
     target_link_libraries(${PROJECT_NAME}
         wx_gtk3u_core-3.2
@@ -175,15 +189,6 @@ else()
         message(STATUS "GSpell library found: ${GSPELL_LIBRARIES}")
     else()
         message(WARNING "GSpell library not found - spell checking may not work")
-    endif()
-    
-    # Добавляем libgpiod если найдена
-    if(GPIOD_LIBRARY)
-        target_link_libraries(${PROJECT_NAME} ${GPIOD_LIBRARY})
-        target_compile_definitions(${PROJECT_NAME} PRIVATE HAVE_LIBGPIOD)
-        message(STATUS "libgpiod library found: ${GPIOD_LIBRARY}")
-    else()
-        message(WARNING "libgpiod library not found - SPI functionality will work without GPIO control")
     endif()
     
     # Добавляем include директории GTK3
