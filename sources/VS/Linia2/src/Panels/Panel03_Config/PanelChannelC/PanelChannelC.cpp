@@ -70,7 +70,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
 
         y += PanelConfig::DYC;
 
-        names = { "x 1", "x 10" };
+        names = { "x 1", "x 2" };
 
         comboDutyCycleIncrease = new ButtonsCombo(boxScan, "Скважность", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, names, names, 1);
     }
