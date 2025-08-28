@@ -69,7 +69,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
             "Полевой или МОП транзистор PMOS (четырёхполюсный)"
         };
 
-        comboCategory = new BmpButtonsCombo(boxCategory, "Категория", { 18, SD::XY0().y }, { 32, 42 }, files, tooltips, 0, 4);
+        comboCategory = new BmpButtonsCombo(boxCategory, "Категория", { 18, SD::XY0().y }, { 32, 42 }, files, tooltips, 0, 4, "PanelSchemeCategory");
     }
 
     boxCategory->SetFont(StaticBox::TitleFont());

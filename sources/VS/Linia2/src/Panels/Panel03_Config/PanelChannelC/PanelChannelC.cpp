@@ -54,7 +54,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
             "Синусоидальное"
         };
 
-        comboScan = new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::XY0().y }, { 32, 42 }, files, tooltips, 0, 3);
+        comboScan = new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::XY0().y }, { 32, 42 }, files, tooltips, 0, 3, "ChannelC_Scan");
 
         int y = 25;
         int x0 = 80;

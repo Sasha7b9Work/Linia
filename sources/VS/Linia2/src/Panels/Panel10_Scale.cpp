@@ -121,7 +121,7 @@ void PanelScale::CreatePanelScale(wxPanel *panel, int x, int /*w*/)
         "grid/bmp00075.bmp"
     };
 
-    new ButtonBitmapChoice(panel, { 10, SD::Y_SB(25) }, wxDefaultSize, choices);
+    new ButtonBitmapChoice(panel, {10, SD::Y_SB(25)}, wxDefaultSize, choices, "ScaleZeroPoint");
 
     int dx = 65;
 

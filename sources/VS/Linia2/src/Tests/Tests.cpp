@@ -77,10 +77,11 @@ bool TypeCommutation::IsInternal()
 }
 
 
-void Test::Load(pchar /*file_name*/)
+void Test::Save(pchar /*file_name*/)
 {
-    // CLineDlg::ExtractParamFromTst()
-    // CLineDlg::SaveParamToTst(int where) 
+    // Канал C
+
+
 }
 
 

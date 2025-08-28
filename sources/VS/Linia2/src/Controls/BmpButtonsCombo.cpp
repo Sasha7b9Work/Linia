@@ -37,7 +37,7 @@ public:
 
         for (uint i = 0; i < files.size(); ++i)
         {
-            ButtonBitmap *btn = new ButtonBitmap(mainPanel, wxDefaultPosition, wxDefaultSize, files[i]);
+            ButtonBitmap *btn = new ButtonBitmap(mainPanel, wxDefaultPosition, wxDefaultSize, files[i], "");
             btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(170));
             btn->SetLabel(wxString::Format("%d", i));
             btn->SetToolTip(tooltips[i]);
@@ -98,8 +98,8 @@ private:
 };
 
 
-BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos, const wxSize &, const wxArrayString &_files, const wxArrayString &_tooltips, int num_file, int _buttons_in_row) :
-    ButtonBitmap(parent, pos, wxDefaultSize, _files[(size_t)num_file]),
+BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos, const wxSize &, const wxArrayString &_files, const wxArrayString &_tooltips, int num_file, int _buttons_in_row, const wxString &_name) :
+    ButtonBitmap(parent, pos, wxDefaultSize, _files[(size_t)num_file], _name),
     current_choice(num_file)
 {
     Bind(wxEVT_BUTTON, &BmpButtonsCombo::OnButtonClicked, this);

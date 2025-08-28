@@ -2,6 +2,7 @@
 #pragma once
 #include "Controls/Painter.h"
 #include "Controls/Bitmap.h"
+#include "Controls/Controls.h"
 
 
 struct Color;
@@ -55,11 +56,11 @@ private:
 };
 
 
-class ButtonBitmap : public wxBitmapButton
+class ButtonBitmap : public wxBitmapButton, public Serializer
 {
 public:
 
-    ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &, const wxString &file_bimap);
+    ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &, const wxString &file_bimap, const wxString &name);
 
     void SetFileBitmap(const wxString &file_bitmap);
 
@@ -74,7 +75,7 @@ class ButtonBitmapChoice : public ButtonBitmap
 {
 public:
 
-    ButtonBitmapChoice(wxWindow *parent, const wxPoint &pos, const wxSize &, const wxArrayString &files);
+    ButtonBitmapChoice(wxWindow *parent, const wxPoint &pos, const wxSize &, const wxArrayString &files, const wxString &name);
 
     void SetCurrentValue(int);
 

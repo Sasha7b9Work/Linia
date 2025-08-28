@@ -83,12 +83,7 @@ struct TypeCommutation
 };
 
 
-class Test
+namespace Test
 {
-    void Load(pchar file_name);
-
-private:
-
-    Category::E category;
-    wxString remark;                    // Комментарии (краткое описание теста)
+    void Save(pchar file_name);
 };

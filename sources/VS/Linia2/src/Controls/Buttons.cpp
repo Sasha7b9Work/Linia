@@ -108,8 +108,9 @@ void CheckButton::SetToolTip(const wxString &tool_tip)
 }
 
 
-ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString &file_bitmap) :
-    wxBitmapButton(parent, wxID_ANY, wxNullBitmap, pos, size, wxBU_EXACTFIT)
+ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString &file_bitmap, const wxString &_name) :
+    wxBitmapButton(parent, wxID_ANY, wxNullBitmap, pos, size, wxBU_EXACTFIT),
+    Serializer(_name)
 {
     SetFileBitmap(file_bitmap);
 
@@ -131,8 +132,8 @@ void ButtonBitmap::SetFileBitmap(const wxString &file_bitmap)
 }
 
 
-ButtonBitmapChoice::ButtonBitmapChoice(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxArrayString &_files) :
-    ButtonBitmap(parent, pos, size, _files[0]),
+ButtonBitmapChoice::ButtonBitmapChoice(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxArrayString &_files, const wxString &_name) :
+    ButtonBitmap(parent, pos, size, _files[0], _name),
     files(_files)
 {
     Bind(wxEVT_BUTTON, &ButtonBitmapChoice::OnEventButton, this);
