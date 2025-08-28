@@ -7,7 +7,8 @@
 #include "Device/SettingsDevice.h"
 #include "Utils/StringUtils.h"
 #include "Utils/GlobalFunctions.h"
-#include "Device/Tests/Tests.h"
+#include "Tests/Tests.h"
+#include "Controls/StaticBox.h"
 
 
 PanelChannelB *PanelChannelB::self = nullptr;

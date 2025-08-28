@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Panels/Panel11_Menu/Setup/WindowCorrectionZero.h"
 #include "Utils/SystemDepend.h"
+#include "Controls/StaticBox.h"
 
 
 WindowCorretionZero::WindowCorretionZero() :

@@ -3,6 +3,7 @@
 #include "Panels/Panel03_Config/PanelScheme/WindowLibraryTests.h"
 #include "Utils/SystemDepend.h"
 #include "Controls/Dialog.h"
+#include "Controls/StaticBox.h"
 
 
 WindowLibraryTests::WindowLibraryTests() :

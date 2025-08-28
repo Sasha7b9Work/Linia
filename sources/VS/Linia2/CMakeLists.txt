@@ -57,7 +57,6 @@ file(GLOB COMMUNICATOR_COMPORT          src/Communicator/ComPort/*.*)
 file(GLOB COMMUNICATOR_SPI              src/Communicator/SPI/*.*)
 file(GLOB CONTROLS                      src/Controls/*.*)
 file(GLOB DEVICE                        src/Device/*.*)
-file(GLOB DEVICE_TESTS                  src/Device/Tests/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
 file(GLOB PANELS_PANEL3                 src/Panels/Panel03_Config/*.*)
 file(GLOB PANELS_PANEL3_CHAN_BS         src/Panels/Panel03_Config/PanelChannelBS/*.*)
@@ -68,6 +67,7 @@ file(GLOB PANELS_PANEL11                src/Panels/Panel11_Menu/*.*)
 file(GLOB PANELS_PANEL11_SETUP          src/Panels/Panel11_Menu/Setup/*.*)
 file(GLOB PANELS_PANEL12                src/Panels/Panel12_Debug/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
+file(GLOB TESTS                         src/Tests/*.*)
 file(GLOB UTILS                         src/Utils/*.*)
 file(GLOB WINDOWS                       src/Windows/*.*)
 
@@ -79,7 +79,6 @@ source_group(Communicator/ComPort                 FILES ${COMMUNICATOR_COMPORT})
 source_group(Communicator/SPI                     FILES ${COMMUNICATOR_SPI})
 source_group(Controls                             FILES ${CONTROLS})
 source_group(Device                               FILES ${DEVICE})
-source_group(Device/Tests                         FILES ${DEVICE_TESTS})
 source_group(Panels                               FILES ${PANELS})
 source_group(Panels/Panel03_Config                FILES ${PANELS_PANEL3})
 source_group(Panels/Panel03_Config/PanelChannelBS FILES ${PANELS_PANEL3_CHAN_BS})
@@ -90,6 +89,7 @@ source_group(Panels/Panel11_Menu                  FILES ${PANELS_PANEL11})
 source_group(Panels/Panel11_Menu/Setup            FILES ${PANELS_PANEL11_SETUP})
 source_group(Panels/Panel12_Debug                 FILES ${PANELS_PANEL12})
 source_group(Settings                             FILES ${SETTINGS})
+source_group(Tests                                FILES ${TESTS})
 source_group(Utils                                FILES ${UTILS})
 source_group(Windows                              FILES ${WINDOWS})
 
@@ -102,7 +102,6 @@ add_executable(${PROJECT_NAME}
     ${COMMUNICATOR_SPI}
     ${CONTROLS}
     ${DEVICE}
-    ${DEVICE_TESTS}
     ${PANELS}
     ${PANELS_PANEL3}
     ${PANELS_PANEL3_CHAN_BS}
@@ -113,6 +112,7 @@ add_executable(${PROJECT_NAME}
     ${PANELS_PANEL11_SETUP}
     ${PANELS_PANEL12}
     ${SETTINGS}
+    ${TESTS}
     ${UTILS}
     ${WINDOWS}
 )
