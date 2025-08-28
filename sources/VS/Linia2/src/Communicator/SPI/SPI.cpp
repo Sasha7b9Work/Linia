@@ -8,17 +8,17 @@ namespace SPI
     
     void DeInit() {}
     
-    bool WriteDynamicDAC(int number_DAC, uint16_t value) 
+    bool WriteDynamicDAC(int /*number_DAC*/, uint16_t /*value*/) 
     { 
         return false; 
     }
     
-    bool SetSpeed(uint32_t speedHz) 
+    bool SetSpeed(uint32_t /*speedHz*/) 
     { 
         return false; 
     }
     
-    bool SetMode(uint8_t mode) 
+    bool SetMode(uint8_t /*mode*/) 
     { 
         return false; 
     }
