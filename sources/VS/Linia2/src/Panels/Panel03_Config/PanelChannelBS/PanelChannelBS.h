@@ -20,7 +20,7 @@ private:
     ButtonsComboRange *comboLimitRange = nullptr;       // Ограничение - Диапазон
     SliderFloatOffset *sliderOffset = nullptr;          // Смещение
     SliderFloatLimit  *sliderLimit = nullptr;           // Ограничение
-    CheckButton       *btnAmpitudeDecrease = nullptr;   // Амплитуда / 10
+    ButtonsCombo      *comboAmpitudeDecrease = nullptr; // Амплитуда / 10
 
     void Tune();
 

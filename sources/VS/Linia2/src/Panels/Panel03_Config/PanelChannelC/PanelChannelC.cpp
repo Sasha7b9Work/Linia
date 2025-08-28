@@ -70,7 +70,9 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
 
         y += PanelConfig::DYC;
 
-        chbDutyCycleIncrease = new CheckButton(boxScan, _L("Скважн. x 2"), { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO);
+        names = { "x 1", "x 10" };
+
+        comboDutyCycleIncrease = new ButtonsCombo(boxScan, "Скважность", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, names, names, 1);
     }
 
     boxScan->SetFont(StaticBox::TitleFont());
@@ -169,7 +171,7 @@ void PanelChannelC::OnEventComboBox(wxCommandEvent &event)
             true, true, false, false, true, true, true
         };
 
-        chbDutyCycleIncrease->Show(duty[scan]);
+        comboDutyCycleIncrease->Show(duty[scan]);
 
         {
             wxArrayString choices;

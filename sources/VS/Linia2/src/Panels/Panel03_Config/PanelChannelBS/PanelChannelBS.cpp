@@ -50,13 +50,20 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, int x, int w, int h) :
 
         y += PanelConfig::DYC;
 
-        btnAmpitudeDecrease = new CheckButton(boxGenerator, "Амплитуда / 10", { SD::XY0().x, y }, PanelConfig::WIDTH_COMBO);
+        choices = { "x 1", "x 0.1" };
+
+        comboAmpitudeDecrease = new ButtonsCombo(boxGenerator, "Амплитуда", { SD::XY0().x, y }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
 
         y += PanelConfig::DYC;
 
-        new wxStaticText(boxGenerator, wxID_ANY, _L("Число ступенек"), { SD::XY0().x + 2, y + 3 });
+        choices.Clear();
 
-        new SpinBox(boxGenerator, { 120, y }, { 50, TEXTCNTRL_HEIGHT }, 5, 10);
+        for (int i = 0; i <= 10; i++)
+        {
+            choices.push_back(wxString::Format("%d", i));
+        }
+
+        new ButtonsCombo(boxGenerator, "Число ступенек", { SD::XY0().x, y }, PanelConfig::WIDTH_COMBO, choices, choices, 3);
 
         y += PanelConfig::DYC;
 
