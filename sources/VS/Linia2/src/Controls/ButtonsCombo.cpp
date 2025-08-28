@@ -156,6 +156,7 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoi
     current_choice(0)
 {
     Bind(wxEVT_BUTTON, &ButtonsCombo::OnButtonClicked, this);
+    Bind(wxEVT_LEFT_DOWN, &ButtonsCombo::OnMouseDown, this);
 
     title = (type == Type::Text) ? _title : wxString("");
 
@@ -165,23 +166,47 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoi
 }
 
 
-void ButtonsCombo::OnButtonClicked(wxCommandEvent &)
+void ButtonsCombo::OnButtonClicked(wxCommandEvent &event)
 {
     if (labels.size() > 1)
     {
-        ButtonPopup *popup = new ButtonPopup(this);
+        if (left_part_clicked)
+        {
+            int choice = current_choice + 1;
 
-        wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
+            if ((uint)choice >= labels.size() - NumEmptyes())
+            {
+                choice = 0;
+            }
 
-        pos.x -= popup->GetSize().x / 2;
-        pos.y -= popup->GetSize().y / 2;
+            SetCurrentSelection(choice);
+        }
+        else
+        {
+            ButtonPopup *popup = new ButtonPopup(this);
 
-        popup->Position(pos, wxSize(0, 0));
-        popup->Popup();
-        popup->Refresh();
-        popup->Update();
-        popup->SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY);
+            wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
+
+            pos.x -= popup->GetSize().x / 2;
+            pos.y -= popup->GetSize().y / 2;
+
+            popup->Position(pos, wxSize(0, 0));
+            popup->Popup();
+            popup->Refresh();
+            popup->Update();
+            popup->SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY);
+        }
     }
+
+    event.Skip();
+}
+
+
+void ButtonsCombo::OnMouseDown(wxMouseEvent &event)
+{
+    left_part_clicked = event.GetPosition().x < GetSize().x / 2;
+
+    event.Skip();
 }
 
 

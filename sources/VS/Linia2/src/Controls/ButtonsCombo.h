@@ -63,8 +63,10 @@ private:
     wxArrayString labels;
     wxArrayString tooltips;
     int buttons_in_row;
+    bool left_part_clicked = true;      // Если true, то кликнули мышкой в левой части кнопки
 
     void OnButtonClicked(wxCommandEvent &);
+    void OnMouseDown(wxMouseEvent &);
 
     // Возвращает количество начальных пустых элементов
     int NumEmptyes() const;
