@@ -280,7 +280,7 @@ wxString WindowTableOffsets::GetStringValue(double value) const
 
 DSet::Type::E WindowTableOffsets::GetTypeMeasure() const
 {
-    static const wxRadioButton *buttons[DSet::Type::Count][2] =
+    const wxRadioButton *buttons[DSet::Type::Count][2] =
     {
         { rbChanC_MeasI,   rbChanC_MeasU },
         { rbChanB_MeasI,   rbChanB_MeasU },
@@ -293,7 +293,11 @@ DSet::Type::E WindowTableOffsets::GetTypeMeasure() const
 
     for (int i = 0; i < DSet::Type::Count; i++)
     {
-        if (buttons[i][0]->GetValue() || buttons[i][1]->GetValue())
+        const wxRadioButton *rb0 = buttons[i][0];
+        const wxRadioButton *rb1 = buttons[i][1];
+
+        if (rb0->GetValue() ||
+            rb1->GetValue())
         {
             return (DSet::Type::E)i;
         }
