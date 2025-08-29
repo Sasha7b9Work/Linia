@@ -15,10 +15,10 @@ PanelChannelB *PanelChannelB::self = nullptr;
 PanelChannelS *PanelChannelS::self = nullptr;
 
 
-PanelChannelBS::PanelChannelBS(wxPanel *parent, Channel::E ch, int x, int w, int h) :
+PanelChannelBS::PanelChannelBS(wxPanel *parent, Chan::E ch, int x, int w, int h) :
     wxPanel(parent)
 {
-    SetName(wxString("PanelChannel") + ((ch == Channel::_B) ? "B" : "S"));
+    SetName(wxString("PanelChannel") + ((ch == Chan::_B) ? "B" : "S"));
 
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
@@ -207,13 +207,13 @@ void PanelChannelBS::OnEventComboBox(wxCommandEvent &event)
 
 bool PanelChannelB::IsEnabled() const
 {
-    return Channel(Channel::_B).IsVisible();
+    return Chan(Chan::_B).IsVisible();
 }
 
 
 bool PanelChannelS::IsEnabled() const
 {
-    return Channel(Channel::_S).IsVisible();
+    return Chan(Chan::_S).IsVisible();
 }
 
 

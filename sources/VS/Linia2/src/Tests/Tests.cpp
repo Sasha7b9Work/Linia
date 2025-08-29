@@ -12,11 +12,11 @@ Category::E Category::Current()
 }
 
 
-bool Channel::IsVisible() const
+bool Chan::IsVisible() const
 {
     Category::E cat = Category::Current();
 
-    if (value == Channel::_B)
+    if (value == Chan::_B)
     {
         if (cat == Category::Diod)
         {
@@ -24,7 +24,7 @@ bool Channel::IsVisible() const
         }
     }
 
-    if (value == Channel::_S)
+    if (value == Chan::_S)
     {
         if (cat == Category::Diod ||
             cat == Category::BCE_N ||

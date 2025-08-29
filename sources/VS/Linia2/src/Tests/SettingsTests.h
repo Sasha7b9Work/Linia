@@ -24,13 +24,13 @@ struct Category
 };
 
 
-#define ChC Channel::_C
-#define ChB Channel::_B
-#define ChS Channel::_S
-#define ChE Channel::_E
+#define ChC Chan::_C
+#define ChB Chan::_B
+#define ChS Chan::_S
+#define ChE Chan::_E
 
 
-struct Channel
+struct Chan
 {
     enum E
     {
@@ -41,7 +41,7 @@ struct Channel
         Count
     };
 
-    Channel(E v) : value(v)
+    Chan(E v) : value(v)
     {
     }
 

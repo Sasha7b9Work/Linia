@@ -19,7 +19,7 @@ public:
 
 private:
 
-    PanelChannelBS(wxPanel *parent, Channel::E ch, int x, int w, int h);
+    PanelChannelBS(wxPanel *parent, Chan::E ch, int x, int w, int h);
 
     ButtonsCombo      *comboTypeGenerator = nullptr;    // Тип генерации - напряжение или ток
     ButtonsCombo      *comboImpulse = nullptr;          // Импульс
@@ -43,7 +43,7 @@ class PanelChannelB : public PanelChannelBS
 public:
 
     PanelChannelB(wxPanel *parent, int x, int w, int h) :
-        PanelChannelBS(parent, Channel::_B, x, w, h)
+        PanelChannelBS(parent, Chan::_B, x, w, h)
     {
         self = this;
     }
@@ -59,7 +59,7 @@ class PanelChannelS : public PanelChannelBS
 public:
 
     PanelChannelS(wxPanel *parent, int x, int w, int h) :
-        PanelChannelBS(parent, Channel::_S, x, w, h)
+        PanelChannelBS(parent, Chan::_S, x, w, h)
     {
         self = this;
     }

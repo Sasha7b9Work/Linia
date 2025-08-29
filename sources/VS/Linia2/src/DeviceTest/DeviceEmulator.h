@@ -28,26 +28,26 @@ public:
 
     //------------------------------------------------------------------------------------------------------------
 
-    virtual void ChannelBS_ModeSource(Channel::E, ModeSource::E);
+    virtual void ChannelBS_ModeSource(Chan::E, ModeSource::E);
 
-    virtual void ChannelBS_RangeStep(Channel::E, RangeU::E);
-    virtual void ChannelBS_RangeStep(Channel::E, RangeI::E);
+    virtual void ChannelBS_RangeStep(Chan::E, RangeU::E);
+    virtual void ChannelBS_RangeStep(Chan::E, RangeI::E);
 
-    virtual void ChannelBS_NumberSteps(Channel::E, int);
+    virtual void ChannelBS_NumberSteps(Chan::E, int);
 
-    virtual void ChannelBS_AmplitudeStep(Channel::E, int16);
+    virtual void ChannelBS_AmplitudeStep(Chan::E, int16);
 
-    virtual void ChannelBS_Offset(Channel::E, int16);
+    virtual void ChannelBS_Offset(Chan::E, int16);
 
-    virtual void ChannelBS_ModeMeas(Channel::E, ModeMeas::E);
+    virtual void ChannelBS_ModeMeas(Chan::E, ModeMeas::E);
 
-    virtual void ChannelBS_RangeMeas(Channel::E, RangeU::E);
-    virtual void ChannelBS_RangeMeas(Channel::E, RangeI::E);
+    virtual void ChannelBS_RangeMeas(Chan::E, RangeU::E);
+    virtual void ChannelBS_RangeMeas(Chan::E, RangeI::E);
 
-    virtual void ChannelBS_RangeLimit(Channel::E, RangeU::E);
-    virtual void ChannelBS_RangeLimit(Channel::E, RangeI::E);
+    virtual void ChannelBS_RangeLimit(Chan::E, RangeU::E);
+    virtual void ChannelBS_RangeLimit(Chan::E, RangeI::E);
 
-    virtual void ChannelBS_ThresholdLimit(Channel::E, int16);
+    virtual void ChannelBS_ThresholdLimit(Chan::E, int16);
 
     //------------------------------------------------------------------------------------------------------------
 

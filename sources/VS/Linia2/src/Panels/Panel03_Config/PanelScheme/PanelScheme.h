@@ -10,11 +10,11 @@
 class ComboJack : public ButtonsCombo
 {
 public:
-    ComboJack(Channel::E, wxWindow *parent, const wxString &title, const wxPoint &pos, int width, const wxArrayString &labels);
+    ComboJack(Chan::E, wxWindow *parent, const wxString &title, const wxPoint &pos, int width, const wxArrayString &labels);
     // Настроить текущее состояние в зависимости от текущих установок
     void TuneState();
 private:
-    Channel::E channel;
+    Chan::E channel;
     // Установить видимость или невидимость в зависимости от текущих установок
     void SetVisibility();
 
@@ -28,7 +28,7 @@ private:
 class FullJack : public wxPanel
 {
 public:
-    FullJack(Channel::E, wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString * = nullptr);
+    FullJack(Chan::E, wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString * = nullptr);
     // Настроить текущее состояние в зависимости от текущих установок
     void TuneState();
 
@@ -37,7 +37,7 @@ public:
 private:
     ButtonsCombo *combo = nullptr;
     PainterBMP *painterBMP = nullptr;
-    Channel::E channel = Channel::Count;
+    Chan::E channel = Chan::Count;
     // Установить видимость или невидимость в зависимости от текущих установок
     void SetVisibility();
 
@@ -68,8 +68,8 @@ private:
     ButtonsCombo *comboTest = nullptr,
         *comboCommutation = nullptr;        // IDC_COMBO_KOMMUTATOR         m_iKommutator           OnSelchangeComboKommutator
 
-    ComboJack *combo[Channel::Count];       // Комбобоксы на схеме. Активны при внешней коммутации  IDC_COMBO_GNEZDO_C
-    FullJack *jack[Channel::Count];         // Активны при внутренней коммутации                    IDC_COMBOCHECKKOL
+    ComboJack *combo[Chan::Count];       // Комбобоксы на схеме. Активны при внешней коммутации  IDC_COMBO_GNEZDO_C
+    FullJack *jack[Chan::Count];         // Активны при внутренней коммутации                    IDC_COMBOCHECKKOL
 
     BmpButtonsCombo *comboCategory = nullptr;
 

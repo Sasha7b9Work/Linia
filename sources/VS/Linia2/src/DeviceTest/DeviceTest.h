@@ -32,34 +32,34 @@ public:
     //------------------------------------------------------------------------------------------------------------
 
     // Режим источника в каналах B, S
-    virtual void ChannelBS_ModeSource(Channel::E, ModeSource::E) = 0;   // 9    19
+    virtual void ChannelBS_ModeSource(Chan::E, ModeSource::E) = 0;   // 9    19
 
     // Диапазон амплитуды ступени в каналах B, S
-    virtual void ChannelBS_RangeStep(Channel::E, RangeU::E) = 0;        // 10   20
-    virtual void ChannelBS_RangeStep(Channel::E, RangeI::E) = 0;
+    virtual void ChannelBS_RangeStep(Chan::E, RangeU::E) = 0;        // 10   20
+    virtual void ChannelBS_RangeStep(Chan::E, RangeI::E) = 0;
 
     // Число ступеней в каналах B, S
-    virtual void ChannelBS_NumberSteps(Channel::E, int) = 0;            // 11   21
+    virtual void ChannelBS_NumberSteps(Chan::E, int) = 0;            // 11   21
 
     // Значение амплитуды ступени в каналах B, S
-    virtual void ChannelBS_AmplitudeStep(Channel::E, int16) = 0;        // 12   22
+    virtual void ChannelBS_AmplitudeStep(Chan::E, int16) = 0;        // 12   22
 
     // Смещение в каналах B, S
-    virtual void ChannelBS_Offset(Channel::E, int16) = 0;               // 14   24
+    virtual void ChannelBS_Offset(Chan::E, int16) = 0;               // 14   24
 
     // Режим измерителя в каналах B, S
-    virtual void ChannelBS_ModeMeas(Channel::E, ModeMeas::E) = 0;       // 15   25
+    virtual void ChannelBS_ModeMeas(Chan::E, ModeMeas::E) = 0;       // 15   25
 
     // Диапазон измерителя
-    virtual void ChannelBS_RangeMeas(Channel::E, RangeU::E) = 0;        // 16   26
-    virtual void ChannelBS_RangeMeas(Channel::E, RangeI::E) = 0;
+    virtual void ChannelBS_RangeMeas(Chan::E, RangeU::E) = 0;        // 16   26
+    virtual void ChannelBS_RangeMeas(Chan::E, RangeI::E) = 0;
 
     // Диапазон ограничение в каналах B, S
-    virtual void ChannelBS_RangeLimit(Channel::E, RangeU::E) = 0;       // 17   27
-    virtual void ChannelBS_RangeLimit(Channel::E, RangeI::E) = 0;
+    virtual void ChannelBS_RangeLimit(Chan::E, RangeU::E) = 0;       // 17   27
+    virtual void ChannelBS_RangeLimit(Chan::E, RangeI::E) = 0;
 
     // Порог ограничения измерителя в каналах B, S
-    virtual void ChannelBS_ThresholdLimit(Channel::E, int16) = 0;       // 18   28
+    virtual void ChannelBS_ThresholdLimit(Chan::E, int16) = 0;       // 18   28
 
     //------------------------------------------------------------------------------------------------------------
 

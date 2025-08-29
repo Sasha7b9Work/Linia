@@ -60,31 +60,31 @@ void DeviceEmulator::ChannelC_LimitSourceU(int /*min*/, int /*max*/)
 }
 
 
-void DeviceEmulator::ChannelBS_ModeSource(Channel::E, ModeSource::E)
+void DeviceEmulator::ChannelBS_ModeSource(Chan::E, ModeSource::E)
 {
 
 }
 
 
-void DeviceEmulator::ChannelBS_RangeStep(Channel::E, RangeU::E)
+void DeviceEmulator::ChannelBS_RangeStep(Chan::E, RangeU::E)
 {
 
 }
 
 
-void DeviceEmulator::ChannelBS_RangeStep(Channel::E, RangeI::E)
+void DeviceEmulator::ChannelBS_RangeStep(Chan::E, RangeI::E)
 {
 
 }
 
 
-void DeviceEmulator::ChannelBS_NumberSteps(Channel::E, int)
+void DeviceEmulator::ChannelBS_NumberSteps(Chan::E, int)
 {
 
 }
 
 
-void DeviceEmulator::ChannelBS_AmplitudeStep(Channel::E, int16)
+void DeviceEmulator::ChannelBS_AmplitudeStep(Chan::E, int16)
 {
 
 }
@@ -96,43 +96,43 @@ void DeviceEmulator::AutoSetZero(bool)
 }
 
 
-void DeviceEmulator::ChannelBS_Offset(Channel::E, int16)
+void DeviceEmulator::ChannelBS_Offset(Chan::E, int16)
 {
 
 }
 
 
-void DeviceEmulator::ChannelBS_ModeMeas(Channel::E, ModeMeas::E)
+void DeviceEmulator::ChannelBS_ModeMeas(Chan::E, ModeMeas::E)
 {
 
 }
 
 
-void DeviceEmulator::ChannelBS_RangeMeas(Channel::E, RangeU::E)
+void DeviceEmulator::ChannelBS_RangeMeas(Chan::E, RangeU::E)
 {
 
 }
 
 
-void DeviceEmulator::ChannelBS_RangeMeas(Channel::E, RangeI::E)
+void DeviceEmulator::ChannelBS_RangeMeas(Chan::E, RangeI::E)
 {
 
 }
 
 
-void DeviceEmulator::ChannelBS_RangeLimit(Channel::E, RangeU::E)
+void DeviceEmulator::ChannelBS_RangeLimit(Chan::E, RangeU::E)
 {
 
 }
 
 
-void DeviceEmulator::ChannelBS_RangeLimit(Channel::E, RangeI::E)
+void DeviceEmulator::ChannelBS_RangeLimit(Chan::E, RangeI::E)
 {
 
 }
 
 
-void DeviceEmulator::ChannelBS_ThresholdLimit(Channel::E, int16)
+void DeviceEmulator::ChannelBS_ThresholdLimit(Chan::E, int16)
 {
 
 }

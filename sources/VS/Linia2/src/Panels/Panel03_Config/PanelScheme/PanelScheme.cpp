@@ -15,7 +15,7 @@
 PanelScheme *PanelScheme::self = nullptr;
 
 
-ComboJack::ComboJack(Channel::E ch, wxWindow *parent, const wxString &title, const wxPoint &pos, int width, const wxArrayString &labels) :
+ComboJack::ComboJack(Chan::E ch, wxWindow *parent, const wxString &title, const wxPoint &pos, int width, const wxArrayString &labels) :
     ButtonsCombo(parent, title, pos, width, labels, labels, 1, parent->GetName() + wxString::Format("_comboJack%d", (int)ch)),
     channel(ch)
 {
@@ -23,7 +23,7 @@ ComboJack::ComboJack(Channel::E ch, wxWindow *parent, const wxString &title, con
 }
 
 
-FullJack::FullJack(Channel::E ch, wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString *choices) :
+FullJack::FullJack(Chan::E ch, wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString *choices) :
     wxPanel(parent, wxID_ANY, position, { 180, 30 }),
     channel(ch)
 {
@@ -119,21 +119,21 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         y += 40;
 
-        jack[ChC] = new FullJack(Channel::_C, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_C.bmp", &choices);
+        jack[ChC] = new FullJack(Chan::_C, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_C.bmp", &choices);
 
         int dy = 35;
 
         y += dy;
 
-        jack[ChB] = new FullJack(Channel::_B, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_B.bmp", &choices);
+        jack[ChB] = new FullJack(Chan::_B, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_B.bmp", &choices);
 
         y += dy;
 
-        jack[ChS] = new FullJack(Channel::_S, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_S.bmp", &choices);
+        jack[ChS] = new FullJack(Chan::_S, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_S.bmp", &choices);
 
         y += dy;
 
-        jack[ChE] = new FullJack(Channel::_E, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_E.bmp");
+        jack[ChE] = new FullJack(Chan::_E, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_E.bmp");
 
         choices.clear();
         choices.Add("C");
@@ -150,15 +150,15 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         int width = 45;
 
         // IDC_COMBOCHECKKOL
-        combo[ChC] = new ComboJack(Channel::_C, painter, "", {x0 + dx, y - dy}, width, choices);
+        combo[ChC] = new ComboJack(Chan::_C, painter, "", {x0 + dx, y - dy}, width, choices);
 
         // IDC_COMBOCHECKBAZA
-        combo[ChB] = new ComboJack(Channel::_B, painter, "", {x0, y}, width, choices);
+        combo[ChB] = new ComboJack(Chan::_B, painter, "", {x0, y}, width, choices);
 
         // IDC_COMBOCHECKDOP
-        combo[ChE] = new ComboJack(Channel::_E, painter, "", {x0 + dx, y + dy}, width, choices);
+        combo[ChE] = new ComboJack(Chan::_E, painter, "", {x0 + dx, y + dy}, width, choices);
 
-        combo[ChS] = new ComboJack(Channel::_S, painter, "", {x0 + 2 * dx, y}, width, choices);
+        combo[ChS] = new ComboJack(Chan::_S, painter, "", {x0 + 2 * dx, y}, width, choices);
     }
 
     boxCommutation->SetFont(StaticBox::TitleFont());
@@ -264,7 +264,7 @@ void FullJack::SetChoices()
 {
     Category::E cat = Category::Current();
 
-    if (channel == Channel::_C)
+    if (channel == Chan::_C)
     {
         if (cat == Category::Diod)
         {
@@ -309,13 +309,13 @@ void ComboJack::SetChoice(StateJack::E state)
 
 void FullJack::SetVisibility()
 {
-    Show(Channel(channel).IsVisible());
+    Show(Chan(channel).IsVisible());
 }
 
 
 void ComboJack::SetVisibility()
 {
-    Show(Channel(channel).IsVisible());
+    Show(Chan(channel).IsVisible());
 }
 
 
@@ -323,7 +323,7 @@ void PanelScheme::Pack()
 {
     comboCategory->Pack();
     comboCommutation->Pack();
-    for (int i = 0; i < Channel::Count; i++)
+    for (int i = 0; i < Chan::Count; i++)
     {
         combo[i]->Pack();
         jack[i]->Pack();
@@ -337,7 +337,7 @@ void PanelScheme::Unpack()
     wxYield();
     comboCommutation->Unpack();
     wxYield();
-    for (int i = 0; i < Channel::Count; i++)
+    for (int i = 0; i < Chan::Count; i++)
     {
         combo[i]->Unpack();
         jack[i]->Unpack();
