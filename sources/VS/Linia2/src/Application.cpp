@@ -60,6 +60,8 @@ bool Application::OnInit()
 
     devicet = new DeviceEmulator();
 
+    devicet->Init();
+
     timer.Start(10);
 
     return true;

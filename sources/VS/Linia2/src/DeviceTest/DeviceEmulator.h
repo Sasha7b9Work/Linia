@@ -13,6 +13,10 @@ public:
 
     virtual void Stop() override;
 
+    virtual void SetCallbackReadData(void (*func)(int16));
+
+    virtual void WriteSchemeInclusion(StateJack::E chC, StateJack::E chB, StateJack::E chS);
+
 private:
     virtual ~DeviceEmulator() { }
 };

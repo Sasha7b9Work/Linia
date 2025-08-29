@@ -19,3 +19,15 @@ void DeviceEmulator::Stop()
 {
 
 }
+
+
+void DeviceEmulator::SetCallbackReadData(void (* /*func*/)(int16))
+{
+
+}
+
+
+void DeviceEmulator::WriteSchemeInclusion(StateJack::E /*chC*/, StateJack::E /*chB*/, StateJack::E /*chS*/)
+{
+
+}
