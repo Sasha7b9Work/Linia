@@ -49,13 +49,13 @@ bool Application::OnInit()
     // create and show the main application window
     MainWindow *frame = new MainWindow(_L("ИППП 4"));
 
-    frame->Show();
-
     Bind(wxEVT_TIMER, &Application::OnTimer, this, timer.GetId());
 
     timer.SetOwner(this, timer.GetId());
 
     Test::Load("example.tst");
+
+    frame->Show();
 
     timer.Start(10);
 
