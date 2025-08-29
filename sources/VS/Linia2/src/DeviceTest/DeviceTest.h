@@ -20,14 +20,14 @@ public:
     //------------------------------------------------------------------------------------------------------------
 
     // Диапазон источника U в канале C
-    virtual void ChannelC_RangeSourceU(RangeU::E) = 0;                  // 5
+    virtual void ChannelC_RangeSourceU(RangeU::E) = 0;                  // 4
 
     // Диапазон измерителя в канале C
-    virtual void ChannelC_RangeMeas(RangeU::E) = 0;                     // 6    7
-    virtual void ChannelC_RangeMeas(RangeI::E) = 0;
+    virtual void ChannelC_RangeMeas(RangeU::E) = 0;                     // 5
+    virtual void ChannelC_RangeMeas(RangeI::E) = 0;                     // 6
 
     // Ограничение источника U от 0 до 100%
-    virtual void ChannelC_LimitSourceU(int min, int max) = 0;           // 8
+    virtual void ChannelC_LimitSourceU(int min, int max) = 0;           // 7, 8
 
     //------------------------------------------------------------------------------------------------------------
 
