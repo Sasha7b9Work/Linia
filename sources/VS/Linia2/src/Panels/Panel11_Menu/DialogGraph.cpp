@@ -9,7 +9,7 @@ DialogGraphColor *DialogGraphColor::self = nullptr;
 
 
 DialogGraph::DialogGraph() :
-    MenuDialog(_L("График"), 200,
+    MenuDialog(_L("График"), 200, { },
         _L("Размер точки"), [](){},
         _L("Стиль кривой"), []() {},
         _L("Цвет"), []()
@@ -30,7 +30,7 @@ DialogGraph::DialogGraph() :
 
 
 DialogGraphColor::DialogGraphColor() :
-    MenuDialog(_L("Цвет"), 125,
+    MenuDialog(_L("Цвет"), 125, { },
         _L("Фона"), []()
         {
             wxColour color;

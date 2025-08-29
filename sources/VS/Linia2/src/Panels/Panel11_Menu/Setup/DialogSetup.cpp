@@ -16,7 +16,7 @@ DialogSetup *DialogSetup::self = nullptr;
 
 
 DialogSetup::DialogSetup() :
-    MenuDialog(_L("Настройка"), 275,
+    MenuDialog(_L("Настройка"), 275, { 2, 5 },
         _L("Настройки пользователя"), []()
         {
             WindowUser().ShowModal();

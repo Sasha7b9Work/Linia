@@ -8,7 +8,7 @@ DialogTestAppend *DialogTestAppend::self = nullptr;
 
 
 DialogTest::DialogTest() :
-    MenuDialog(_L("Тест"), 175,
+    MenuDialog(_L("Тест"), 175, { 0, 1, 3, 6, 7 },
         _L("Добавить"), []()
         {
             DialogTestAppend().ShowModal();
@@ -28,7 +28,7 @@ DialogTest::DialogTest() :
 
 
 DialogTestAppend::DialogTestAppend() :
-    MenuDialog(_L("Добавить"), 150,
+    MenuDialog(_L("Добавить"), 150, { },
         _L("Активный"), []() {},
         _L("Из библиотеки"), []() {}
     )

@@ -2,4 +2,8 @@
 #pragma once
 
 
-
+namespace Model
+{
+    // Модель загружена и с ней идёт работа
+    bool IsLoaded();
+}

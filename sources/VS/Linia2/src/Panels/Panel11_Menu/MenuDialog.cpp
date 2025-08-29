@@ -1,9 +1,10 @@
 ﻿// 2025/7/12 10:56:03 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/Panel11_Menu/MenuDialog.h"
+#include "Utils/GlobalFunctions.h"
 
 
-MenuDialog::MenuDialog(const wxString &title, int width_button,
+MenuDialog::MenuDialog(const wxString &title, int width_button, const wxArrayInt &delimit,
     const wxString &btn1, void (*func1)(),
     const wxString &btn2, void (*func2)(),
     const wxString &btn3, void (*func3)(),
@@ -27,13 +28,22 @@ MenuDialog::MenuDialog(const wxString &title, int width_button,
         if (func9) buttons.push_back({ wxID_ANY, btn9, func9 });
     }
 
-    wxSize client_size{ width_button + 10, (BUTTON_HEIGHT + 5) * (int)buttons.size() + 10 };
+    int height_delim = 10;
+
+    wxSize client_size{ width_button + 10, (BUTTON_HEIGHT + 5) * (int)buttons.size() + 10 + height_delim * (int)delimit.GetCount() };
 
     Dialog::SetClientSize(client_size);
 
+    int y = 5;
+
     for (uint i = 0; i < buttons.size(); i++)
     {
-        wxButton *btn = new wxButton(this, buttons[i].id, buttons[i].label, { 5, 5 + ((int)i * (BUTTON_HEIGHT + 5)) }, { width_button, BUTTON_HEIGHT });
+        wxButton *btn = new wxButton(this, buttons[i].id, buttons[i].label, { 5, y }, { width_button, BUTTON_HEIGHT });
+        y += BUTTON_HEIGHT + 5;
+        if (ConsistIndex(delimit, (int)i))
+        {
+            y += height_delim;
+        }
         buttons[i].id = btn->GetId();
     }
 
@@ -51,4 +61,34 @@ void MenuDialog::OnEventButton(wxCommandEvent &event)
             break;
         }
     }
+}
+
+
+bool MenuDialog::ConsistIndex(const wxArrayInt &array, int index)
+{
+    for (int elem : array)
+    {
+        if (elem == index)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+wxButton *MenuDialog::FindButton(const wxString &label)
+{
+    for (auto &btn : buttons)
+    {
+        wxAnyButton *button = GF::_FindAnyButton(this, btn.id);
+
+        if (button->GetLabel() == label)
+        {
+            return (wxButton *)button;
+        }
+    }
+
+    return nullptr;
 }

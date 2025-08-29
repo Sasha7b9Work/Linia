@@ -7,7 +7,7 @@ DialogReport *DialogReport::self = nullptr;
 
 
 DialogReport::DialogReport() :
-    MenuDialog(_("Отчёт"), 100,
+    MenuDialog(_("Отчёт"), 100, { },
         _L("Новый"), [](){},
         _L("Сохранить"), []() {},
         _L("Удалить"), []() {},

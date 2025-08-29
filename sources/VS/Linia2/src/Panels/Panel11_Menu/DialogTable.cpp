@@ -7,7 +7,7 @@ DialogTable *DialogTable::self = nullptr;
 
 
 DialogTable::DialogTable() :
-    MenuDialog(_L("Таблица"), 100,
+    MenuDialog(_L("Таблица"), 100, { },
         _L("Сохранить"), [](){},
         _L("Удалить"), []() {},
         _L("Развернуть"), []() {},
