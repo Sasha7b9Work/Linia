@@ -58,3 +58,27 @@ void DeviceEmulator::ChannelC_LimitSourceU(int /*min*/, int /*max*/)
 {
 
 }
+
+
+void DeviceEmulator::ChannelB_ModeSource(ModeSource::E)
+{
+
+}
+
+
+void DeviceEmulator::ChannelB_AmplitudeStep(RangeU::E)
+{
+
+}
+
+
+void DeviceEmulator::ChannelB_AmplitudeStep(RangeI::E)
+{
+
+}
+
+
+void DeviceEmulator::ChannelB_NumberSteps(int)
+{
+
+}

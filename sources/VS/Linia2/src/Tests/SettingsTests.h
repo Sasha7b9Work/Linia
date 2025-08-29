@@ -83,3 +83,15 @@ struct TypeCommutation
 
     static bool IsInternal();
 };
+
+
+// Режим источника
+struct ModeSource
+{
+    enum E
+    {
+        U,
+        I,
+        Count
+    };
+};

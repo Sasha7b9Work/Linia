@@ -31,6 +31,16 @@ public:
     // Ограничение источника U от 0 до 100%
     virtual void ChannelC_LimitSourceU(int min, int max) = 0;
 
+    // Режим источника в канале B
+    virtual void ChannelB_ModeSource(ModeSource::E) = 0;
+
+    // Диапазон амплитуды ступени в канале B
+    virtual void ChannelB_AmplitudeStep(RangeU::E) = 0;
+    virtual void ChannelB_AmplitudeStep(RangeI::E) = 0;
+
+    // Число ступеней в канале B
+    virtual void ChannelB_NumberSteps(int) = 0;
+
     virtual ~IDeviceTest() { }
 };
 

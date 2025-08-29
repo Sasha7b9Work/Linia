@@ -27,6 +27,14 @@ public:
 
     virtual void ChannelC_LimitSourceU(int min, int max);
 
+    virtual void ChannelB_ModeSource(ModeSource::E);
+
+    virtual void ChannelB_AmplitudeStep(RangeU::E);
+
+    virtual void ChannelB_AmplitudeStep(RangeI::E);
+
+    virtual void ChannelB_NumberSteps(int);
+
 private:
     virtual ~DeviceEmulator() { }
 };
