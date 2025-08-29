@@ -23,7 +23,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, Channel::E ch, int x, int w, int
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    StaticBox *boxGenerator = new StaticBox(this, _L("Генератор ступенек"), { x, SD::DSBY() }, { w, 300 });
+    StaticBox *boxGenerator = new StaticBox(this, _L("Генератор ступенек"), { x, SD::DSBY() }, { w, 320 });
 
     {
         int y = 22;
@@ -97,7 +97,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, Channel::E ch, int x, int w, int
         boxOffset->SetFont(StaticBox::TitleFont());
 
         wxPoint pos = boxOffset->GetPosition();
-        pos.y = SD::Y_SB(boxGenerator->GetSize().y - boxOffset->GetSize().y - 8);
+        pos.y = SD::Y_SB(boxGenerator->GetSize().y - boxOffset->GetSize().y - 28);
         boxOffset->SetPosition(pos);
     }
 

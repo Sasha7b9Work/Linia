@@ -31,7 +31,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    StaticBox *boxScan = new StaticBox(this, _L("Развёртка"), { x, SD::DSBY() }, { w, 140 });          // IDC_STATICRAZV
+    StaticBox *boxScan = new StaticBox(this, _L("Развёртка"), { x, SD::DSBY() }, { w, 160 });          // IDC_STATICRAZV
 
     {
         wxArrayString files =
@@ -79,7 +79,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
 
     boxScan->SetFont(StaticBox::TitleFont());
 
-    StaticBox *boxMeter = new StaticBox(this, _L("Измеритель"), { x, boxScan->GetPosition().y + boxScan->GetSize().y + SD::DSBY() }, { w, 50 });
+    StaticBox *boxMeter = new StaticBox(this, _L("Измеритель"), { x, boxScan->GetPosition().y + boxScan->GetSize().y + SD::DSBY() }, { w, 70 });
 
     {
         wxArrayString names;
