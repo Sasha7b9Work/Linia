@@ -8,6 +8,7 @@
 #include "MainWindow.h"
 #include "Windows/ConsoleRS232.h"
 #include "Tests/Tests.h"
+#include "DeviceTest/DeviceEmulator.h"
 
 
 wxIMPLEMENT_APP(Application);
@@ -56,6 +57,8 @@ bool Application::OnInit()
     Test::Load("example.tst");
 
     frame->Show();
+
+    devicet = new DeviceEmulator();
 
     timer.Start(10);
 

@@ -58,6 +58,7 @@ file(GLOB COMMUNICATOR_COMPORT          src/Communicator/ComPort/*.*)
 file(GLOB COMMUNICATOR_SPI              src/Communicator/SPI/*.*)
 file(GLOB CONTROLS                      src/Controls/*.*)
 file(GLOB DEVICE                        src/Device/*.*)
+file(GLOB DEVICETEST                    src/DeviceTest/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
 file(GLOB PANELS_PANEL3                 src/Panels/Panel03_Config/*.*)
 file(GLOB PANELS_PANEL3_CHAN_BS         src/Panels/Panel03_Config/PanelChannelBS/*.*)
@@ -80,6 +81,7 @@ source_group(Communicator/ComPort                 FILES ${COMMUNICATOR_COMPORT})
 source_group(Communicator/SPI                     FILES ${COMMUNICATOR_SPI})
 source_group(Controls                             FILES ${CONTROLS})
 source_group(Device                               FILES ${DEVICE})
+source_group(DeviceTest                           FILES ${DEVICETEST})
 source_group(Panels                               FILES ${PANELS})
 source_group(Panels/Panel03_Config                FILES ${PANELS_PANEL3})
 source_group(Panels/Panel03_Config/PanelChannelBS FILES ${PANELS_PANEL3_CHAN_BS})
@@ -103,6 +105,7 @@ add_executable(${PROJECT_NAME}
     ${COMMUNICATOR_SPI}
     ${CONTROLS}
     ${DEVICE}
+    ${DEVICETEST}
     ${PANELS}
     ${PANELS_PANEL3}
     ${PANELS_PANEL3_CHAN_BS}
@@ -196,4 +199,3 @@ else()
     target_include_directories(${PROJECT_NAME} PRIVATE ${GTK3_INCLUDE_DIRS})
     target_compile_options(${PROJECT_NAME} PRIVATE ${GTK3_CFLAGS_OTHER})
 endif()
-
