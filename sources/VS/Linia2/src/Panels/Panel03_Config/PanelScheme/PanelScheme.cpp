@@ -9,6 +9,7 @@
 #include "Controls/Bitmap.h"
 #include "Tests/Tests.h"
 #include "Controls/StaticBox.h"
+#include "Utils/Configurator.h"
 
 
 PanelScheme *PanelScheme::self = nullptr;
@@ -26,11 +27,13 @@ FullJack::FullJack(Channel::E ch, wxWindow *parent, const wxPoint &position, pch
     wxPanel(parent, wxID_ANY, position, { 180, 30 }),
     channel(ch)
 {
+    SetName(parent->GetName() + wxString::Format("_fullJack%d", (int)ch));
+
     painterBMP = new PainterBMP(this, { 10, 0 }, wxDefaultSize, file_jack_bmp, { 241, 241, 241 });
 
     if (choices)
     {
-        combo = new ButtonsCombo(this, "", { 60, 0 }, PanelConfig::WIDTH_COMBO - 60, *choices, *choices, 1, parent->GetName() + wxString::Format("_fullJack%d", (int)ch));
+        combo = new ButtonsCombo(this, "", { 60, 0 }, PanelConfig::WIDTH_COMBO - 60, *choices, *choices, 1, "");
     }
 }
 
@@ -274,6 +277,24 @@ void FullJack::SetChoices()
 }
 
 
+void FullJack::Pack()
+{
+    if (combo)
+    {
+        Config::Write(GetName(), combo->GetCurrentString());
+    }
+}
+
+
+void FullJack::Unpack()
+{
+    if (combo)
+    {
+        combo->SetCurrentString(Config::ReadString(GetName()));
+    }
+}
+
+
 void FullJack::SetChoice(StateJack::E state)
 {
     combo->SetCurrentString(StateJack::Name(state));
@@ -302,6 +323,11 @@ void PanelScheme::Pack()
 {
     comboCategory->Pack();
     comboCommutation->Pack();
+    for (int i = 0; i < Channel::Count; i++)
+    {
+        combo[i]->Pack();
+        jack[i]->Pack();
+    }
 }
 
 
@@ -311,4 +337,9 @@ void PanelScheme::Unpack()
     wxYield();
     comboCommutation->Unpack();
     wxYield();
+    for (int i = 0; i < Channel::Count; i++)
+    {
+        combo[i]->Unpack();
+        jack[i]->Unpack();
+    }
 }

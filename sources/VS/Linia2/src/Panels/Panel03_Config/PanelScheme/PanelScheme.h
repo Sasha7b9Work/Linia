@@ -25,12 +25,15 @@ private:
 
 
 // На панели "Коммутация" объединяет изображение гнезда и комбобокса с вариантами
-class FullJack : public wxPanel
+class FullJack : public wxPanel, public Serializer
 {
 public:
     FullJack(Channel::E, wxWindow *parent, const wxPoint &position, pchar file_jack_bmp, const wxArrayString * = nullptr);
     // Настроить текущее состояние в зависимости от текущих установок
     void TuneState();
+
+    virtual void Pack() override;
+    virtual void Unpack() override;
 private:
     ButtonsCombo *combo = nullptr;
     PainterBMP *painterBMP = nullptr;
