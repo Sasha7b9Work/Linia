@@ -1,7 +1,7 @@
 ﻿// 2025/7/27 21:36:39 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/Dialog.h"
-#include "Device/SettingsDevice.h"
+#include "Tests/Ranges.h"
 #include "Controls/ButtonsCombo.h"
 
 

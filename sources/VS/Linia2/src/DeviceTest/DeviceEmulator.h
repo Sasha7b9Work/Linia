@@ -17,6 +17,8 @@ public:
 
     virtual void WriteSchemeInclusion(StateJack::E chC, StateJack::E chB, StateJack::E chS);
 
+    //------------------------------------------------------------------------------------------------------------
+
 private:
     virtual ~DeviceEmulator() { }
 };

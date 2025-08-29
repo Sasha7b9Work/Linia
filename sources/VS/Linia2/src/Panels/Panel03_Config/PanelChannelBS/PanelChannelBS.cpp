@@ -4,7 +4,7 @@
 #include "Utils/SystemDepend.h"
 #include "MainWindow.h"
 #include "Panels/Panel03_Config/Panel03_Config.h"
-#include "Device/SettingsDevice.h"
+#include "Tests/Ranges.h"
 #include "Utils/StringUtils.h"
 #include "Utils/GlobalFunctions.h"
 #include "Tests/Tests.h"
