@@ -63,18 +63,16 @@ protected:
 
 private:
 
-    int current_choice = -1;
+    int current_choice = -1;            // Номер реального выбора
     wxString title;
-    wxArrayString labels;
+    wxArrayString labels;               // Здесь впереди добавлено
     wxArrayString tooltips;
     int buttons_in_row;
     bool left_part_clicked = true;      // Если true, то кликнули мышкой в левой части кнопки
+    int num_empties = 0;                // Столько добавлено пустых полей перед первым вариантом, чтобы выровнять столбцы по значениям
 
     void OnButtonClicked(wxCommandEvent &);
     void OnMouseDown(wxMouseEvent &);
-
-    // Возвращает количество начальных пустых элементов
-    int NumEmptyes() const;
 
     // Между строками будут пробелы таким образом, что строки будут по краям кнопки
     void SetExtendedLabel(const wxString &, const wxString &);

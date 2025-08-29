@@ -38,18 +38,19 @@ public:
 
         // Основной контейнер с отступами по краям
         wxPanel *mainPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
-//        mainPanel->SetBackgroundColour(mainPanel->GetBackgroundColour().ChangeLightness(LIGHTNESS * 2));
 
-        int num_rows = (int)(labels.size() / GetCombo()->buttons_in_row);
+        int num_cells = (int)labels.size() + GetCombo()->num_empties;                // Ячеек может быть больше, чем вариантов выбора - если нам нужно выравниивание по столбцам
 
-        if (num_rows * GetCombo()->buttons_in_row < (int)labels.size())
+        int num_rows = (int)(num_cells / GetCombo()->buttons_in_row);
+
+        if (num_rows * GetCombo()->buttons_in_row < num_cells)
         {
             num_rows++;
         }
 
-        int num_cols = (int)(labels.size() / num_rows);
+        int num_cols = num_cells / num_rows;
 
-        if (num_rows * num_cols < (int)labels.size())
+        if (num_rows * num_cols < num_cells)
         {
             num_cols++;
         }
@@ -60,26 +61,24 @@ public:
         StaticBoxSizer *boxSizer = new StaticBoxSizer(wxVERTICAL, mainPanel, GetCombo()->title);
         boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 0); // 10px отступ внутри рамки
 
+        for (int i = 0; i < GetCombo()->num_empties; i++)
+        {
+            wxPanel *panel = new wxPanel(mainPanel);
+            gridSizer->Add(panel, 0, wxEXPAND | wxALL, 2);
+        }
+
         for (uint i = 0; i < labels.size(); ++i)
         {
-            if (labels[i][0])                                                           // Признак того, что надо вставлять кнопку, а не заглушку
+            wxButton *btn = new wxButton(mainPanel, wxID_ANY, labels[i]);
+            btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(LIGHTNESS));
+            btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(170));
+            btn->SetMaxSize(wxSize(-1, 20));
+            if (labels[i] != GetCombo()->tooltips[i])
             {
-                wxButton *btn = new wxButton(mainPanel, wxID_ANY, labels[i]);
-                btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(LIGHTNESS));
-                btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(170));
-                btn->SetMaxSize(wxSize(-1, 20));
-                if (labels[i] != GetCombo()->tooltips[i])
-                {
-                    btn->SetToolTip(GetCombo()->tooltips[i]);
-                }
-                btn->Bind(wxEVT_BUTTON, &ButtonPopup::OnButtonClick, this);
-                gridSizer->Add(btn, 0, wxEXPAND | wxALL, 2);
+                btn->SetToolTip(GetCombo()->tooltips[i]);
             }
-            else
-            {
-                wxPanel *panel = new wxPanel(mainPanel);
-                gridSizer->Add(panel, 0, wxEXPAND | wxALL, 2);
-            }
+            btn->Bind(wxEVT_BUTTON, &ButtonPopup::OnButtonClick, this);
+            gridSizer->Add(btn, 0, wxEXPAND | wxALL, 2);
         }
 
         // Основная панель
@@ -129,7 +128,7 @@ private:
             {
                 ButtonsCombo *combo = (ButtonsCombo *)GetParent();
 
-                combo->SetCurrentSelection((int)i - combo->NumEmptyes());
+                combo->SetCurrentSelection((int)i);
 
                 Dismiss();
 
@@ -179,7 +178,7 @@ void ButtonsCombo::OnButtonClicked(wxCommandEvent &event)
         {
             int choice = current_choice + 1;
 
-            if ((uint)choice >= labels.size() - NumEmptyes())
+            if ((uint)choice >= labels.size())
             {
                 choice = 0;
             }
@@ -228,7 +227,7 @@ void ButtonsCombo::SetCurrentSelection(int choice)
         label += title + " : ";
     }
 
-    uint index = (uint)current_choice + NumEmptyes();
+    uint index = (uint)current_choice;
 
     SetExtendedLabel(label, labels[index]);
 
@@ -243,19 +242,19 @@ void ButtonsCombo::SetCurrentSelection(int choice)
 
 void ButtonsCombo::SetLastSelection()
 {
-    SetCurrentSelection((int)labels.GetCount() - NumEmptyes() - 1);
+    SetCurrentSelection((int)labels.GetCount() - 1);
 }
 
 
 int ButtonsCombo::GetCurrentSelection() const
 {
-    return current_choice - NumEmptyes();
+    return current_choice;
 }
 
 
 wxString ButtonsCombo::GetCurrentString() const
 {
-    return labels[(uint)(current_choice + NumEmptyes())];
+    return labels[(uint)(current_choice)];
 }
 
 
@@ -267,7 +266,7 @@ void ButtonsCombo::Pack()
 
 void ButtonsCombo::Unpack()
 {
-    int selection = Config::ReadInt(GetName(), 0);
+    int selection = wxClip<int>(Config::ReadInt(GetName(), 0), 0, (int)labels.GetCount() - 1);
 
     SetCurrentSelection(selection);
 }
@@ -275,33 +274,19 @@ void ButtonsCombo::Unpack()
 
 void ButtonsCombo::SetChoices(const wxArrayString &choices, const wxArrayString &_tooltips)
 {
-    labels.clear();
-    tooltips.clear();
+    labels = choices;
+    tooltips = _tooltips;
 
     if (insert_empty)
     {
         if (choices[0][0] == '2')
         {
-            labels.push_back("");
-            tooltips.push_back("");
+            num_empties = 1;
         }
         else if (choices[0][0] == '4' || choices[0][0] == '5')
         {
-            labels.push_back("");
-            labels.push_back("");
-            tooltips.push_back("");
-            tooltips.push_back("");
+            num_empties = 2;
         }
-    }
-
-    for (auto &elem : choices)
-    {
-        labels.push_back(elem);
-    }
-
-    for (auto &elem : _tooltips)
-    {
-        tooltips.push_back(elem);
     }
 
     SetCurrentSelection(0);
@@ -318,26 +303,6 @@ void ButtonsCombo::SetChoice(const wxString &choice)
             break;
         }
     }
-}
-
-
-int ButtonsCombo::NumEmptyes() const
-{
-    int counter = 0;
-
-    for (auto &elem : labels)
-    {
-        if (elem[0] == '\0')
-        {
-            counter++;
-        }
-        else
-        {
-            break;
-        }
-    }
-
-    return counter;
 }
 
 

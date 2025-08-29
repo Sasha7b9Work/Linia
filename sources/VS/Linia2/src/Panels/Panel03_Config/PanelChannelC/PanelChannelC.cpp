@@ -198,6 +198,9 @@ void PanelChannelC::Pack()
 {
     comboScan->Pack();
     comboNumberPoints->Pack();
+    comboDutyCycleIncrease->Pack();
+    comboVoltage->Pack();
+    comboCurrent->Pack();
 }
 
 
@@ -206,4 +209,7 @@ void PanelChannelC::Unpack()
     comboScan->Unpack();
     wxYield();                      // Немедленно обрабатываем все события
     comboNumberPoints->Unpack();
+    comboDutyCycleIncrease->Unpack();
+    comboVoltage->Unpack();
+    comboCurrent->Unpack();
 }
