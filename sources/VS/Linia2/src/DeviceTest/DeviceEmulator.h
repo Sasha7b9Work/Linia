@@ -13,7 +13,7 @@ public:
 
     virtual void Stop() override;
 
-    virtual void SetCallbackReadData(void (*func)(int16));
+    virtual void SetCallbackReadData(void (*)(int16));
 
     virtual void SchemeInclusion(StateJack::E chC, StateJack::E chB, StateJack::E chS);
 
