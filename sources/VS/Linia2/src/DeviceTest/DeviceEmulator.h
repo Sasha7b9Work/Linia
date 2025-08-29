@@ -21,9 +21,8 @@ public:
 
     virtual void ChannelC_RangeSourceU(RangeU::E);
 
-    virtual void ChannelC_RangeMeasU(RangeU::E);
-
-    virtual void ChannelC_RangeMeasI(RangeI::E);
+    virtual void ChannelC_RangeMeas(RangeU::E);
+    virtual void ChannelC_RangeMeas(RangeI::E);
 
     virtual void ChannelC_LimitSourceU(int min, int max);
 

@@ -42,13 +42,13 @@ void DeviceEmulator::ChannelC_RangeSourceU(RangeU::E)
 }
 
 
-void DeviceEmulator::ChannelC_RangeMeasU(RangeU::E)
+void DeviceEmulator::ChannelC_RangeMeas(RangeU::E)
 {
 
 }
 
 
-void DeviceEmulator::ChannelC_RangeMeasI(RangeI::E)
+void DeviceEmulator::ChannelC_RangeMeas(RangeI::E)
 {
 
 }
