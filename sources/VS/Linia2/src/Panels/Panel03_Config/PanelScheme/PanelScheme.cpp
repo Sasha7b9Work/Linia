@@ -5,7 +5,7 @@
 #include "Panels/Panel03_Config/Panel03_Config.h"
 #include "Utils/SystemDepend.h"
 #include "Panels/Panel03_Config/PanelScheme/WindowLibraryTests.h"
-#include "Panels/Panel03_Config/PanelChannelBS/PanelChannelBS.h"
+#include "Panels/Panel03_Config/PanelChannelBS.h"
 #include "Controls/Bitmap.h"
 #include "Tests/Tests.h"
 #include "Controls/StaticBox.h"

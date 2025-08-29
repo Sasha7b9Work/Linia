@@ -61,8 +61,6 @@ file(GLOB DEVICE                        src/Device/*.*)
 file(GLOB DEVICETEST                    src/DeviceTest/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
 file(GLOB PANELS_PANEL3                 src/Panels/Panel03_Config/*.*)
-file(GLOB PANELS_PANEL3_CHAN_BS         src/Panels/Panel03_Config/PanelChannelBS/*.*)
-file(GLOB PANELS_PANEL3_CHAN_C          src/Panels/Panel03_Config/PanelChannelC/*.*)
 file(GLOB PANELS_PANEL3_SHCEME          src/Panels/Panel03_Config/PanelScheme/*.*)
 file(GLOB PANELS_PANEL5                 src/Panels/Panel05_Graph/*.*)
 file(GLOB PANELS_PANEL11                src/Panels/Panel11_Menu/*.*)
@@ -84,8 +82,6 @@ source_group(Device                               FILES ${DEVICE})
 source_group(DeviceTest                           FILES ${DEVICETEST})
 source_group(Panels                               FILES ${PANELS})
 source_group(Panels/Panel03_Config                FILES ${PANELS_PANEL3})
-source_group(Panels/Panel03_Config/PanelChannelBS FILES ${PANELS_PANEL3_CHAN_BS})
-source_group(Panels/Panel03_Config/PanelChannelC  FILES ${PANELS_PANEL3_CHAN_C})
 source_group(Panels/Panel03_Config/PanelScheme    FILES ${PANELS_PANEL3_SHCEME})
 source_group(Panels/Panel05_Graph                 FILES ${PANELS_PANEL5})
 source_group(Panels/Panel11_Menu                  FILES ${PANELS_PANEL11})
@@ -108,8 +104,6 @@ add_executable(${PROJECT_NAME}
     ${DEVICETEST}
     ${PANELS}
     ${PANELS_PANEL3}
-    ${PANELS_PANEL3_CHAN_BS}
-    ${PANELS_PANEL3_CHAN_C}
     ${PANELS_PANEL3_SHCEME}
     ${PANELS_PANEL5}
     ${PANELS_PANEL11}

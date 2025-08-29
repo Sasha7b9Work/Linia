@@ -1,6 +1,6 @@
 ﻿// 2025/8/9 10:40:15 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel03_Config/PanelChannelC/PanelChannelC.h"
+#include "Panels/Panel03_Config/PanelChannelC.h"
 #include "Utils/SystemDepend.h"
 #include "Controls/SpinBox.h"
 #include "MainWindow.h"

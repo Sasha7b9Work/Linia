@@ -7,8 +7,8 @@
 #include "Controls/SpinBox.h"
 #include "Panels/Panel03_Config/PanelScheme/WindowLibraryTests.h"
 #include "Panels/Panel03_Config/PanelScheme/PanelScheme.h"
-#include "Panels/Panel03_Config/PanelChannelBS/PanelChannelBS.h"
-#include "Panels/Panel03_Config/PanelChannelC/PanelChannelC.h"
+#include "Panels/Panel03_Config/PanelChannelBS.h"
+#include "Panels/Panel03_Config/PanelChannelC.h"
 #include "Panels/Panel03_Config/PanelCalculate.h"
 #include "Utils/Configurator.h"
 
