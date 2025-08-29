@@ -50,7 +50,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
     const int width_category = 77;
 
-    StaticBox *boxCategory = new StaticBox(this, _L("Категория"), { x, SD::DSBY() }, { width_category, 90 });
+    StaticBox *boxCategory = new StaticBox(this, "Категория", { x, SD::DSBY() }, { width_category, 90 });
 
     {
         wxArrayString files;
@@ -81,7 +81,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
     (void)boxCategory;
 
-    StaticBox *boxTest = new StaticBox(this, _L("Тест"), { x + width_category + 5, SD::DSBY() },
+    StaticBox *boxTest = new StaticBox(this, "Тест", { x + width_category + 5, SD::DSBY() },
         { w - width_category - 5, boxCategory->GetSize().y });
 
     {
@@ -93,29 +93,29 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         // IDC_BUTTON_LOADTST
         comboTest = new ButtonsCombo(boxTest, "", SD::XY0(), 100, choices, choices, 1, "comboTest");
 
-        btnLoad = new wxButton(boxTest, wxID_ANY, _L("Загрузить"), { PanelConfig::X, SD::Y_SB(50) }, { 100, 30 });
+        btnLoad = new wxButton(boxTest, wxID_ANY, "Загрузить", { PanelConfig::X, SD::Y_SB(50) }, { 100, 30 });
 
         btnLoad->Hide();
     }
 
     boxTest->SetFont(StaticBox::TitleFont());
 
-    StaticBox *boxCommutation = new StaticBox(this, _L("Коммутация"),
+    StaticBox *boxCommutation = new StaticBox(this, "Коммутация",
         { x, boxCategory->GetPosition().y + boxCategory->GetSize().y + SD::DSBY() },
         { w, h - boxCategory->GetPosition().y - boxCategory->GetSize().y - SD::DSBY() });
 
     {
         wxArrayString choices;
-        choices.Add(_L("внутренняя"));
-        choices.Add(_L("внешняя"));
+        choices.Add("внутренняя");
+        choices.Add("внешняя");
 
         int y = 20;
 
         comboCommutation = new ButtonsCombo(boxCommutation, "Тип", { SD::XY0() }, PanelConfig::WIDTH_COMBO, choices, choices, 1, "comboCommutation");
 
         choices.clear();
-        choices.Add(_L("канал") + " C");
-        choices.Add(_L("канал") + " B");
+        choices.Add("канал C");
+        choices.Add("канал B");
 
         y += 40;
 

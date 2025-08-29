@@ -20,57 +20,57 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    StaticBox *boxGraph = new StaticBox(this, _L("График"), { x, SD::DSBY() }, { w, 95 });
+    StaticBox *boxGraph = new StaticBox(this, "График", { x, SD::DSBY() }, { w, 95 });
 
     int y = 20;
     const int dy = 3;
 
     {
-        new wxStaticText(boxGraph, wxID_ANY, _L("Ось X"), { PanelConfig::X, SD::Y_SB(y + dy) });
+        new wxStaticText(boxGraph, wxID_ANY, "Ось X", { PanelConfig::X, SD::Y_SB(y + dy) });
 
         new wxTextCtrl(boxGraph, wxID_ANY, "Ud", { 100, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
 
         y += 25;
 
-        new wxStaticText(boxGraph, wxID_ANY, _L("Ось Y"), { PanelConfig::X, SD::Y_SB(y + dy) });
+        new wxStaticText(boxGraph, wxID_ANY, "Ось Y", { PanelConfig::X, SD::Y_SB(y + dy) });
 
         new wxTextCtrl(boxGraph, wxID_ANY, "Id", { 100, SD::Y_SB(y) }, { 50, TEXTCNTRL_HEIGHT });
     }
 
     boxGraph->SetFont(StaticBox::TitleFont());
 
-    StaticBox *boxParameter = new StaticBox(this, _L("Параметр"),
+    StaticBox *boxParameter = new StaticBox(this, "Параметр",
         { x, boxGraph->GetPosition().y + boxGraph->GetSize().y + SD::DSBY() },
         { w, 250 });
 
     {
         y = 20;
 
-        new wxStaticText(boxParameter, wxID_ANY, _L("Найти"), { PanelConfig::X, SD::Y_SB(y + dy) });
-        new wxStaticText(boxParameter, wxID_ANY, _L("при"), { 100, SD::Y_SB(y + dy) });
+        new wxStaticText(boxParameter, wxID_ANY, "Найти", { PanelConfig::X, SD::Y_SB(y + dy) });
+        new wxStaticText(boxParameter, wxID_ANY, "при", { 100, SD::Y_SB(y + dy) });
 
         new wxTextCtrl(boxParameter, wxID_ANY, "Id", { 50, SD::Y_SB(y) }, { 40, TEXTCNTRL_HEIGHT });
         new wxTextCtrl(boxParameter, wxID_ANY, "Ud", { 140, SD::Y_SB(y) }, { 40, TEXTCNTRL_HEIGHT });
 
         y += 30;
 
-        new wxStaticText(boxParameter, wxID_ANY, _L("равном"), { PanelConfig::X, SD::Y_SB(y) });
+        new wxStaticText(boxParameter, wxID_ANY, "равном", { PanelConfig::X, SD::Y_SB(y) });
 
         y += 20;
 
-        new wxStaticText(boxParameter, wxID_ANY, _L("значению") + " 1", { PanelConfig::X, SD::Y_SB(y + dy) });
+        new wxStaticText(boxParameter, wxID_ANY, "значению 1", { PanelConfig::X, SD::Y_SB(y + dy) });
         new wxTextCtrl(boxParameter, wxID_ANY, "6", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT });
 
         y += 25;
 
-        new wxStaticText(boxParameter, wxID_ANY, _L("значению") + " 2", { PanelConfig::X, SD::Y_SB(y + dy) });
+        new wxStaticText(boxParameter, wxID_ANY, "значению 2", { PanelConfig::X, SD::Y_SB(y + dy) });
         new wxTextCtrl(boxParameter, wxID_ANY, "6", { 100, SD::Y_SB(y) }, { 80, TEXTCNTRL_HEIGHT });
 
         y += 25;
 
-        new wxStaticText(boxParameter, wxID_ANY, _L("на ступеньке") + " № 5", { PanelConfig::X, SD::Y_SB(y + dy) });
+        new wxStaticText(boxParameter, wxID_ANY, "на ступеньке № 5", { PanelConfig::X, SD::Y_SB(y + dy) });
 
-        StaticBox *boxCalculate = new StaticBox(boxParameter, _L("Рассчитать"), { x, y }, { w - 10, 60 });
+        StaticBox *boxCalculate = new StaticBox(boxParameter, "Рассчитать", { x, y }, { w - 10, 60 });
 
         {
             y = 25;
@@ -88,7 +88,7 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
 
     boxParameter->SetFont(StaticBox::TitleFont());
 
-    StaticBox *boxBorder = new StaticBox(this, _L("Пороговые значения"),
+    StaticBox *boxBorder = new StaticBox(this, "Пороговые значения",
         { x, boxParameter->GetPosition().y + boxParameter->GetSize().y + SD::DSBY() },
         { w, h - boxParameter->GetPosition().y - boxParameter->GetSize().y - SD::DSBY() });
 

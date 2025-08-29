@@ -4,7 +4,7 @@
 
 
 WindowUser::WindowUser() :
-    Dialog(nullptr, wxID_ANY, _L("Настройки пользователя"), wxDefaultPosition, { WIDTH, HEIGHT })
+    Dialog(nullptr, wxID_ANY, "Настройки пользователя", wxDefaultPosition, { WIDTH, HEIGHT })
 {
 
 }

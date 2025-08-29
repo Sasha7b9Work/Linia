@@ -31,7 +31,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    StaticBox *boxScan = new StaticBox(this, _L("Развёртка"), { x, SD::DSBY() }, { w, 160 });          // IDC_STATICRAZV
+    StaticBox *boxScan = new StaticBox(this, "Развёртка", { x, SD::DSBY() }, { w, 160 });          // IDC_STATICRAZV
 
     {
         wxArrayString files =
@@ -79,7 +79,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
 
     boxScan->SetFont(StaticBox::TitleFont());
 
-    StaticBox *boxMeter = new StaticBox(this, _L("Измеритель"), { x, boxScan->GetPosition().y + boxScan->GetSize().y + SD::DSBY() }, { w, 70 });
+    StaticBox *boxMeter = new StaticBox(this, "Измеритель", { x, boxScan->GetPosition().y + boxScan->GetSize().y + SD::DSBY() }, { w, 70 });
 
     {
         wxArrayString names;
@@ -108,11 +108,11 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
 
         comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", SD::XY0(), PanelConfig::WIDTH_COMBO, names, names, 1, "comboRange");
 
-        new wxStaticText(boxSource, wxID_ANY, _L("Ограничение Uc, %%"), { 40, SD::Y_SB(65) });
+        new wxStaticText(boxSource, wxID_ANY, "Ограничение Uc, %%", { 40, SD::Y_SB(65) });
 
         int y = 90;
 
-        new wxStaticText(boxSource, wxID_ANY, _L("Старт"), { 10, SD::Y_SB(y) });
+        new wxStaticText(boxSource, wxID_ANY, "Старт", { 10, SD::Y_SB(y) });
 
         y += 20;
 
@@ -121,7 +121,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
 
         y += 40;
 
-        new wxStaticText(boxSource, wxID_ANY, _L("Стоп"), { 10, SD::Y_SB(y) });
+        new wxStaticText(boxSource, wxID_ANY, "Стоп", { 10, SD::Y_SB(y) });
 
         y += 20;
 

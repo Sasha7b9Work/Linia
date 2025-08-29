@@ -16,40 +16,40 @@ DialogSetup *DialogSetup::self = nullptr;
 
 
 DialogSetup::DialogSetup() :
-    MenuDialog(_L("Настройка"), 275, { 2, 5 },
-        _L("Настройки пользователя"), []()
+    MenuDialog("Настройка", 275, { 2, 5 },
+        "Настройки пользователя", []()
         {
             WindowUser().ShowModal();
         },
-        _L("Запуск"), []()
+        "Запуск", []()
         {
             WindowLaunch().ShowModal();
         },
-        _L("Автосохранение"), []()
+        "Автосохранение", []()
         {
             WindowAutoSave().ShowModal();
         },
-        _L("Коррекция смещения нуля"), []()
+        "Коррекция смещения нуля", []()
         {
             WindowCorretionZero().ShowModal();
         },
-        _L("Калибровка"), []()
+        "Калибровка", []()
         {
             WindowCalibrate().ShowModal();
         },
-        _L("Таблица смещений и коэффициентов"), []()
+        "Таблица смещений и коэффициентов", []()
         {
             WindowTableOffsets().ShowModal();
         },
-        _L("Изменить пароль"), []()
+        "Изменить пароль", []()
         {
             WindowPassword().ShowModal();
         },
-        _L("IP-адрес"), []()
+        "IP-адрес", []()
         {
             WindowAddressIP().ShowModal();
         },
-        _L("Мой компьютер"), []()
+        "Мой компьютер", []()
         {
             WindowMyComputer().ShowModal();
         }

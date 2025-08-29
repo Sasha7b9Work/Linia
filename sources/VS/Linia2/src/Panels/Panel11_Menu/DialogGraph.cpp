@@ -9,20 +9,20 @@ DialogGraphColor *DialogGraphColor::self = nullptr;
 
 
 DialogGraph::DialogGraph() :
-    MenuDialog(_L("График"), 200, { },
-        _L("Размер точки"), [](){},
-        _L("Стиль кривой"), []() {},
-        _L("Цвет"), []()
+    MenuDialog("График", 200, { },
+        "Размер точки", [](){},
+        "Стиль кривой", []() {},
+        "Цвет", []()
         {
             DialogGraphColor().ShowModal();
         },
-        _L("Маркеры"), []() {},
-        _L("Шкала"), []()
+        "Маркеры", []() {},
+        "Шкала", []()
         {
             WindowScale().ShowModal();
         },
-        _L("Сохранить график в архиве"), []() {},
-        _L("Сброс графика Ref"), []() {}
+        "Сохранить график в архиве", []() {},
+        "Сброс графика Ref", []() {}
     )
 {
     self = this;
@@ -30,57 +30,57 @@ DialogGraph::DialogGraph() :
 
 
 DialogGraphColor::DialogGraphColor() :
-    MenuDialog(_L("Цвет"), 125, { },
-        _L("Фона"), []()
+    MenuDialog("Цвет", 125, { },
+        "Фона", []()
         {
             wxColour color;
 
-            if (SelectColor(_L("фона"), color))
+            if (SelectColor("фона", color))
             {
 
             }
         },
-        _L("Сетки"), []()
+        "Сетки", []()
         {
             wxColour color;
 
-            if (SelectColor(_L("сетки"), color))
+            if (SelectColor("сетки", color))
             {
 
             }
         },
-        _L("Шрифта"), []()
+        "Шрифта", []()
         {
             wxColour color;
 
-            if (SelectColor(_L("шрифта"), color))
+            if (SelectColor("шрифта", color))
             {
 
             }
         },
-        _L("Кривой"), []()
+        "Кривой", []()
         {
             wxColour color;
 
-            if (SelectColor(_L("кривой"), color))
+            if (SelectColor("кривой", color))
             {
 
             }
         },
-        _L("Ссылки"), []()
+        "Ссылки", []()
         {
             wxColour color;
 
-            if (SelectColor(_L("ссылки"), color))
+            if (SelectColor("ссылки", color))
             {
 
             }
         },
-        _L("Секущей"), []()
+        "Секущей", []()
         {
             wxColour color;
 
-            if (SelectColor(_L("секущей"), color))
+            if (SelectColor("секущей", color))
             {
 
             }
@@ -98,7 +98,7 @@ bool DialogGraphColor::SelectColor(const wxString &title, wxColour &color)
 
     wxColourDialog dialog(DialogGraphColor::self, &colourData);
 
-    dialog.SetTitle(_L("Цвет") + " " + title);
+    dialog.SetTitle(wxString("Цвет ") + title);
 
     if (dialog.ShowModal() == wxID_OK)
     {

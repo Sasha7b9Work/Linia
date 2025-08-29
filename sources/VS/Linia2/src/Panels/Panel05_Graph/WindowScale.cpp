@@ -10,7 +10,7 @@ WindowScale::Range WindowScale::rangeY{ -2.5, 7.5, "Ic", "A"};
 
 
 WindowScale::WindowScale() :
-    Dialog(nullptr, wxID_ANY, _L("Шкала"), wxDefaultPosition, { WIDTH, HEIGHT })
+    Dialog(nullptr, wxID_ANY, "Шкала", wxDefaultPosition, { WIDTH, HEIGHT })
 {
     int width = 200;
     int height = 200;
@@ -23,7 +23,7 @@ WindowScale::WindowScale() :
 
     int y = height + d * 3;
 
-    new wxStaticText(this, wxID_ANY, _L("Точность"), { d, y });
+    new wxStaticText(this, wxID_ANY, "Точность", { d, y });
 
     new wxSpinCtrl(this, wxID_ANY, "", { 100, y }, { 70, TEXTCNTRL_HEIGHT});
 
@@ -37,15 +37,15 @@ WindowScale::WindowScale() :
 
     wxSize size_button{ 100, BUTTON_HEIGHT };
 
-    btnApply = new wxButton(this, wxID_ANY, _L("Применить"), { 50, y }, size_button);
+    btnApply = new wxButton(this, wxID_ANY, "Применить", { 50, y }, size_button);
 
-    btnCancel = new wxButton(this, wxID_ANY, _L("Отмена"), { 150, y }, size_button);
+    btnCancel = new wxButton(this, wxID_ANY, "Отмена", { 150, y }, size_button);
 }
 
 
 wxStaticBox *WindowScale::CreateBox(int x, int y, int w, int h, pchar axe, pchar units, wxTextCtrl **min, wxTextCtrl **max)
 {
-    StaticBox *box = new StaticBox(this, _L("Шкала по оси") + " " + axe, {x, y}, {w, h});
+    StaticBox *box = new StaticBox(this, wxString("Шкала по оси ") + axe, {x, y}, {w, h});
 
     y = 25;
 
@@ -73,7 +73,7 @@ wxStaticBox *WindowScale::CreateBox(int x, int y, int w, int h, pchar axe, pchar
 
     y += dy * 3 / 2;
 
-    new wxStaticText(box, wxID_ANY, _L("Шаг"), { 10, SD::Y_SB(y) });
+    new wxStaticText(box, wxID_ANY, "Шаг", { 10, SD::Y_SB(y) });
 
     return box;
 }

@@ -33,9 +33,9 @@ PanelReferenceGraph::PanelReferenceGraph(wxWindow *parent) :
         wxPanel *panel = new wxPanel(this, wxID_ANY, { 0, 0 }, { MainWindow::WIDTH, height_title });
 
         wxSize size_button{ 75, BUTTON_HEIGHT };
-        btnReturn = new wxButton(panel, wxID_ANY, _L("Закрыть"), { MainWindow::WIDTH - size_button.x - 5, 0 }, size_button);
+        btnReturn = new wxButton(panel, wxID_ANY, "Закрыть", { MainWindow::WIDTH - size_button.x - 5, 0 }, size_button);
 
-        new wxStaticText(panel, wxID_ANY, _L("Архив эталонных графиков"), { 0, 0 }, { MainWindow::WIDTH - size_button.x - 5, height_title }, wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL);
+        new wxStaticText(panel, wxID_ANY, "Архив эталонных графиков", { 0, 0 }, { MainWindow::WIDTH - size_button.x - 5, height_title }, wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL);
     }
 
     {
@@ -100,7 +100,7 @@ void PanelReferenceGraph::OnEventRightClick(wxMouseEvent &event)
 {
     wxMenu menu;
 
-    itemClear = menu.Append(wxID_ANY, _L("Очистить архив"));
+    itemClear = menu.Append(wxID_ANY, "Очистить архив");
 
     if (grid->GetNumberRows() == 0)
     {
@@ -108,7 +108,7 @@ void PanelReferenceGraph::OnEventRightClick(wxMouseEvent &event)
     }
 
     menu.AppendSeparator();
-    itemDeleteFrom = menu.Append(wxID_ANY, _L("Удалить из архива"));
+    itemDeleteFrom = menu.Append(wxID_ANY, "Удалить из архива");
 
     wxArrayInt selected = grid->GetSelectedRows();
 
@@ -117,7 +117,7 @@ void PanelReferenceGraph::OnEventRightClick(wxMouseEvent &event)
         itemDeleteFrom->Enable(false);
     }
 
-    itemLoadFrom = menu.Append(wxID_ANY, _L("Загрузить из архива"));
+    itemLoadFrom = menu.Append(wxID_ANY, "Загрузить из архива");
 
     if (selected.IsEmpty())
     {
@@ -157,10 +157,10 @@ void PanelReferenceGraph::OnEventGridClick(wxGridEvent &event)
 void PanelReferenceGraph::SetTitlesColumn()
 {
     titles_columns.Add("№");
-    titles_columns.Add(_L("График"));
-    titles_columns.Add(_L("Дата"));
-    titles_columns.Add(_L("Время"));
-    titles_columns.Add(_L("Комментарий"));
+    titles_columns.Add("График");
+    titles_columns.Add("Дата");
+    titles_columns.Add("Время");
+    titles_columns.Add("Комментарий");
 
     for (uint i = 0; i < 5; i++)
     {

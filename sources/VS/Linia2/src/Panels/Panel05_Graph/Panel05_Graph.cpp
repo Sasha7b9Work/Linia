@@ -408,8 +408,8 @@ void PanelGraph::OnEventRightClick(wxMouseEvent &)
     wxMenu menu;
 
     // Добавляем пункты меню
-    menu.Append(wxID_RESET, _L("Сброс"));
-    itemFullscreen = menu.AppendCheckItem(wxID_ANY, _L("Развернуть"));
+    menu.Append(wxID_RESET, "Сброс");
+    itemFullscreen = menu.AppendCheckItem(wxID_ANY, "Развернуть");
 
     menu.AppendSeparator();
 
@@ -422,15 +422,15 @@ void PanelGraph::OnEventRightClick(wxMouseEvent &)
     wxMenu *subMenu = new wxMenu();
     itemTrackX = subMenu->AppendCheckItem(wxID_ANY, "X");
     itemTrackY = subMenu->AppendCheckItem(wxID_ANY, "Y");
-    itemTrackNone = subMenu->AppendCheckItem(wxID_ANY, _L("Ничего"));
+    itemTrackNone = subMenu->AppendCheckItem(wxID_ANY, "Ничего");
 
     subMenu->Check(itemTrackX->GetId(), track_x);
     subMenu->Check(itemTrackY->GetId(), track_y);
     subMenu->Check(itemTrackNone->GetId(), track_none);
 
-    menu.AppendSubMenu(subMenu, _L("Отслеживать"));
+    menu.AppendSubMenu(subMenu, "Отслеживать");
 
-    itemScale = menu.AppendCheckItem(wxID_ANY, _L("Шкала"));
+    itemScale = menu.AppendCheckItem(wxID_ANY, "Шкала");
 
     Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackX, this, itemTrackX->GetId());
     Bind(wxEVT_MENU, &PanelGraph::OnMenuTrackY, this, itemTrackY->GetId());

@@ -27,20 +27,20 @@ PanelConfig::PanelConfig(wxWindow* parent) :
 
     wxSize sizeChan = { 67, h };
 
-    btnChannelC = new wxToggleButton(this, wxID_ANY, _L("Канал C"), { 0, 0 }, sizeChan);
+    btnChannelC = new wxToggleButton(this, wxID_ANY, "Канал C", { 0, 0 }, sizeChan);
     str_panels.push_back({ btnChannelC, CreatePanel(btnChannelC) });
 
-    btnChannelB = new wxToggleButton(this, wxID_ANY, _L("Канал B"), { sizeChan.x, 0 }, sizeChan);
+    btnChannelB = new wxToggleButton(this, wxID_ANY, "Канал B", { sizeChan.x, 0 }, sizeChan);
     str_panels.push_back({ btnChannelB, CreatePanel(btnChannelB) });
 
-    btnChannelS = new wxToggleButton(this, wxID_ANY, _L("Канал S"), { sizeChan.x * 2, 0 }, sizeChan);
+    btnChannelS = new wxToggleButton(this, wxID_ANY, "Канал S", { sizeChan.x * 2, 0 }, sizeChan);
     str_panels.push_back({ btnChannelS, CreatePanel(btnChannelS) });
 
     wxSize sizeScheme = { 120, h };
-    btnScheme = new wxToggleButton(this, wxID_ANY, _L("Схема включения"), { 0, h }, sizeScheme);
+    btnScheme = new wxToggleButton(this, wxID_ANY, "Схема включения", { 0, h }, sizeScheme);
     str_panels.push_back({ btnScheme, CreatePanel(btnScheme) });
 
-    btnCalculate = new wxToggleButton(this, wxID_ANY, _L("Расчёт"), { sizeScheme.x, h }, { MainWindow::WIDTH3 - sizeScheme.x - 3, h });
+    btnCalculate = new wxToggleButton(this, wxID_ANY, "Расчёт", { sizeScheme.x, h }, { MainWindow::WIDTH3 - sizeScheme.x - 3, h });
     str_panels.push_back({ btnCalculate, CreatePanel(btnCalculate) });
 
     {

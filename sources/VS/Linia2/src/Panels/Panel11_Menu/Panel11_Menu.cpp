@@ -27,15 +27,15 @@ PanelButtons::PanelButtons(wxWindow* parent) :
 
     Struct structs[100] =
     {
-        { _L("Файл"),      &btnFile },
-        { _L("Тест"),      &btnTest },
-        { _L("Настройка"), &btnSetup },
-        { _L("Архив"),     &btnArchiv },
-        { _L("График"),    &btnGraph },
-        { _L("Таблица"),   &btnTable },
-        { _L("Отчёт"),     &btnReport },
-        { _L("Измерение"), &btnMeasure },
-        { _L("Отладка"),   &btnDebug }
+        { "Файл",      &btnFile },
+        { "Тест",      &btnTest },
+        { "Настройка", &btnSetup },
+        { "Архив",     &btnArchiv },
+        { "График",    &btnGraph },
+        { "Таблица",   &btnTable },
+        { "Отчёт",     &btnReport },
+        { "Измерение", &btnMeasure },
+        { "Отладка",   &btnDebug }
     };
 
     const int delta = GetSize().x / NumButtons();

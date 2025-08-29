@@ -4,6 +4,7 @@
 #include "Controls/SpinBox.h"
 #include "Controls/Slider.h"
 #include "Controls/Buttons.h"
+#include "Tests/Tests.h"
 
 
 class PanelChannelBS : public wxPanel

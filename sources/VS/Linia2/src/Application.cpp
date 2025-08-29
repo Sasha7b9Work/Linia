@@ -47,7 +47,7 @@ bool Application::OnInit()
     ConsoleRS232::Create();
 
     // create and show the main application window
-    MainWindow *frame = new MainWindow(_L("ИППП 4"));
+    MainWindow *frame = new MainWindow("ИППП 4");
 
     Bind(wxEVT_TIMER, &Application::OnTimer, this, timer.GetId());
 

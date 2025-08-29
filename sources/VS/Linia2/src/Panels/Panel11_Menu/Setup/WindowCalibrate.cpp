@@ -7,7 +7,7 @@
 
 
 WindowCalibrate::WindowCalibrate() :
-    Dialog(nullptr, wxID_ANY, _L("Калибровка"), wxDefaultPosition, {WIDTH, HEIGHT})
+    Dialog(nullptr, wxID_ANY, "Калибровка", wxDefaultPosition, {WIDTH, HEIGHT})
 {
     int d = 20;
 
@@ -63,8 +63,8 @@ WindowCalibrate::WindowCalibrate() :
 
     wxSize size{ 70, BUTTON_HEIGHT };
 
-    new wxButton(this, wxID_ANY, _L("Пуск"), { 50, y + 30 }, size);
-    new wxButton(this, wxID_ANY, _L("Отмена"), { 200, y + 30 }, size);
+    new wxButton(this, wxID_ANY, "Пуск", { 50, y + 30 }, size);
+    new wxButton(this, wxID_ANY, "Отмена", { 200, y + 30 }, size);
 
     Bind(wxEVT_BUTTON, &WindowCalibrate::OnEventButton, this);
 }

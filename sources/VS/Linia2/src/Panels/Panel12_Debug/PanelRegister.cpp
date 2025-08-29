@@ -18,9 +18,9 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
 
     int x = 580;
 
-    new wxButton(this, wxID_ANY, _L("Предустановки"), { x, 0 }, size_button);
+    new wxButton(this, wxID_ANY, "Предустановки", { x, 0 }, size_button);
 
-    new wxButton(this, wxID_ANY, _L("Записать"), { x + 100, 0 }, size_button);
+    new wxButton(this, wxID_ANY, "Записать", { x + 100, 0 }, size_button);
 
     int x0 = 10;
     int y0 = 40;
@@ -28,8 +28,8 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
     if(additional_modes)
     {
         wxArrayString choices;
-        choices.Add(_L("Нижний уровень"));
-        choices.Add(_L("Команда"));
+        choices.Add("Нижний уровень");
+        choices.Add("Команда");
 
         new ButtonsCombo(this, "Режим", { x0, y0 - 2 }, 150, choices, choices, 1, "comboMode");
 

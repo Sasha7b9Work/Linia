@@ -23,7 +23,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, Channel::E ch, int x, int w, int
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    StaticBox *boxGenerator = new StaticBox(this, _L("Генератор ступенек"), { x, SD::DSBY() }, { w, 320 });
+    StaticBox *boxGenerator = new StaticBox(this, "Генератор ступенек", { x, SD::DSBY() }, { w, 320 });
 
     {
         int y = 22;
@@ -39,8 +39,8 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, Channel::E ch, int x, int w, int
         y += PanelConfig::DYC;
 
         choices.Clear();
-        choices.Add(_L("Вкл"));
-        choices.Add(_L("Выкл"));
+        choices.Add("Вкл");
+        choices.Add("Выкл");
 
         comboImpulse = new ButtonsCombo(boxGenerator, "Импульс", { SD::XY0().x, y }, PanelConfig::WIDTH_COMBO, choices, choices, 1, "comboImpulse");
 
@@ -71,14 +71,14 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, Channel::E ch, int x, int w, int
         y += PanelConfig::DYC;
 
         choices.Clear();
-        choices.Add(_L("прямая"));
-        choices.Add(_L("обратная"));
+        choices.Add("прямая");
+        choices.Add("обратная");
 
         comboPolarity = new ButtonsCombo(boxGenerator, "Полярность", { SD::XY0().x, y }, PanelConfig::WIDTH_COMBO, choices, choices, 1, "comboPolarity");
 
         y += 30;
 
-        StaticBox *boxOffset = new StaticBox(boxGenerator, _L("Смещение"), { x, y }, { w - 10, 100 });
+        StaticBox *boxOffset = new StaticBox(boxGenerator, "Смещение", { x, y }, { w - 10, 100 });
 
         {
             y = 25;
@@ -88,8 +88,8 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, Channel::E ch, int x, int w, int
             y += 40;
 
             choices.Clear();
-            choices.Add(_L("прямая"));
-            choices.Add(_L("обратная"));
+            choices.Add("прямая");
+            choices.Add("обратная");
 
             comboOffsetPolarity = new ButtonsCombo(boxOffset, "Полярность", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - 10, choices, choices, 1, "comboOffsetPolarity");
         }
@@ -103,7 +103,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, Channel::E ch, int x, int w, int
 
     boxGenerator->SetFont(StaticBox::TitleFont());
 
-    StaticBox *boxLimitation = new StaticBox(this, _L("Ограничение"),
+    StaticBox *boxLimitation = new StaticBox(this, "Ограничение",
         { x, boxGenerator->GetPosition().y + boxGenerator->GetSize().y + SD::DSBY() },
         { w, h - boxGenerator->GetPosition().y - boxGenerator->GetSize().y - SD::DSBY() });
 

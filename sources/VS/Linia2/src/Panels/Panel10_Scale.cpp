@@ -19,10 +19,10 @@ PanelScale::PanelScale(wxWindow* parent) :
 
     Bind(wxEVT_TOGGLEBUTTON, &PanelScale::OnEventButton, this);
 
-    btnScale = new wxToggleButton(this, wxID_ANY, _L("Шкала"), { 0, 0 }, { 60, 20 });
+    btnScale = new wxToggleButton(this, wxID_ANY, "Шкала", { 0, 0 }, { 60, 20 });
     str_panels.push_back({ btnScale, CreatePanel(btnScale)});
 
-    btnErrors = new wxToggleButton(this, wxID_ANY, _L("Ошибки"), { 60, 0 }, { 60, 20 });
+    btnErrors = new wxToggleButton(this, wxID_ANY, "Ошибки", { 60, 0 }, { 60, 20 });
     str_panels.push_back({ btnErrors, CreatePanel(btnErrors)});
 
     {

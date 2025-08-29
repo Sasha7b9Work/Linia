@@ -4,7 +4,7 @@
 
 
 WindowMyComputer::WindowMyComputer() :
-    Dialog(nullptr, wxID_ANY, _L("Мой компьютер"), wxDefaultPosition, { WIDTH, HEIGHT })
+    Dialog(nullptr, wxID_ANY, "Мой компьютер", wxDefaultPosition, { WIDTH, HEIGHT })
 {
 
 }

@@ -7,7 +7,7 @@
 
 
 WindowLibraryTests::WindowLibraryTests() :
-    Dialog(nullptr, wxID_ANY, _L("Библиотека пользовательских тестов"), wxDefaultPosition, {WIDTH, HEIGHT})
+    Dialog(nullptr, wxID_ANY, "Библиотека пользовательских тестов", wxDefaultPosition, {WIDTH, HEIGHT})
 {
 
     int dw = 150;
@@ -50,7 +50,7 @@ WindowLibraryTests::WindowLibraryTests() :
 
         wxPanel *rightPanel = new wxPanel(this, wxID_ANY, { WIDTH - dw, 0 }, size);
 
-        StaticBox *box1 = new StaticBox(rightPanel, _L("Категория"), { 0, 0 }, {size.x - 20, 60});
+        StaticBox *box1 = new StaticBox(rightPanel, "Категория", { 0, 0 }, {size.x - 20, 60});
 
         {
             wxArrayString choices;
@@ -59,16 +59,16 @@ WindowLibraryTests::WindowLibraryTests() :
             new ButtonsCombo(box1, "", { 10, SD::Y_SB(25) }, 60, choices, choices, 1, "");
         }
 
-        StaticBox *box2 = new StaticBox(rightPanel, _L("Тест"), { 0, box1->GetPosition().y + box1->GetSize().y + 5 }, { size.x - 20, 145 });
+        StaticBox *box2 = new StaticBox(rightPanel, "Тест", { 0, box1->GetPosition().y + box1->GetSize().y + 5 }, { size.x - 20, 145 });
 
         {
             int y0 = 25;
 
             int dy = 40;
 
-            new wxButton(box2, wxID_ANY, _L("Загрузить"), { 10, SD::Y_SB(y0) }, { 100, BUTTON_HEIGHT });
-            new wxButton(box2, wxID_ANY, _L("Удалить"), { 10, SD::Y_SB(y0 + dy) }, { 100, BUTTON_HEIGHT });
-            new wxButton(box2, wxID_ANY, _L("Удалить все"), { 10, SD::Y_SB(y0 + dy * 2) }, { 100, BUTTON_HEIGHT });
+            new wxButton(box2, wxID_ANY, "Загрузить", { 10, SD::Y_SB(y0) }, { 100, BUTTON_HEIGHT });
+            new wxButton(box2, wxID_ANY, "Удалить", { 10, SD::Y_SB(y0 + dy) }, { 100, BUTTON_HEIGHT });
+            new wxButton(box2, wxID_ANY, "Удалить все", { 10, SD::Y_SB(y0 + dy * 2) }, { 100, BUTTON_HEIGHT });
         }
     }
 
@@ -88,8 +88,8 @@ WindowLibraryTests::WindowLibraryTests() :
 void WindowLibraryTests::SetTitlesColumn()
 {
     grid->SetColLabelValue(0, "#");
-    grid->SetColLabelValue(1, _L("Наименование файла"));
-    grid->SetColLabelValue(2, _L("Комментарий"));
+    grid->SetColLabelValue(1, "Наименование файла");
+    grid->SetColLabelValue(2, "Комментарий");
 }
 
 
