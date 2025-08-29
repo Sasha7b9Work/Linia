@@ -260,15 +260,15 @@ wxString ButtonsCombo::GetCurrentString() const
 
 void ButtonsCombo::Pack()
 {
-    Config::WriteInt(GetName(), GetCurrentSelection());
+    Config::WriteString(GetName(), GetCurrentString());
 }
 
 
 void ButtonsCombo::Unpack()
 {
-    int selection = wxClip<int>(Config::ReadInt(GetName(), 0), 0, (int)labels.GetCount() - 1);
+    wxString selection = Config::ReadString(GetName());
 
-    SetCurrentSelection(selection);
+    SetCurrentString(selection);
 }
 
 
@@ -293,7 +293,7 @@ void ButtonsCombo::SetChoices(const wxArrayString &choices, const wxArrayString 
 }
 
 
-void ButtonsCombo::SetChoice(const wxString &choice)
+void ButtonsCombo::SetCurrentString(const wxString &choice)
 {
     for (uint i = 0; i < labels.size(); i++)
     {
@@ -349,7 +349,8 @@ void ButtonsCombo::SetExtendedLabel(const wxString &start, int num_spaces, const
 }
 
 
-ButtonsComboRange::ButtonsComboRange(wxWindow *parent, const wxString &title, const wxPoint &pos, int width, const wxArrayString &labels, const wxArrayString &tooltips, const wxString &name) :
+ButtonsComboRange::ButtonsComboRange(wxWindow *parent, const wxString &title, const wxPoint &pos, int width, const wxArrayString &labels,
+    const wxArrayString &tooltips, const wxString &name) :
     ButtonsCombo(parent, title, pos, width, labels, tooltips, 3, name, ButtonsCombo::Type::Text)
 {
     ButtonsCombo::insert_empty = true;

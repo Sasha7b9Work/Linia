@@ -43,16 +43,15 @@ public:
         Type::E type = Type::Text);
 
     void SetCurrentSelection(int);
+    int GetCurrentSelection() const;
+
+    void SetCurrentString(const wxString &);
+    wxString GetCurrentString() const;
 
     void SetLastSelection();
 
     void SetChoices(const wxArrayString &labels, const wxArrayString &tooltips);
 
-    void SetChoice(const wxString &);
-
-    int GetCurrentSelection() const;
-
-    wxString GetCurrentString() const;
 
     virtual void Pack() override;
     virtual void Unpack() override;

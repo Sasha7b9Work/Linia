@@ -13,6 +13,8 @@ PanelCalculate *PanelCalculate::self = nullptr;
 PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
     wxPanel(parent)
 {
+    SetName("PanelCalculate");
+
     self = this;
 
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
