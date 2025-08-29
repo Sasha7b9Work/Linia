@@ -59,12 +59,12 @@ public:
     virtual void ChannelBS_RangeMeas(Channel::E, RangeU::E) = 0;        // 16   26
     virtual void ChannelBS_RangeMeas(Channel::E, RangeI::E) = 0;
 
-    // Диапазон ограничение в канале B
-    virtual void ChannelB_RangeLimit(RangeU::E) = 0;                    // 17
-    virtual void ChannelB_RangeLimit(RangeI::E) = 0;
+    // Диапазон ограничение в каналах B, S
+    virtual void ChannelBS_RangeLimit(Channel::E, RangeU::E) = 0;       // 17   27
+    virtual void ChannelBS_RangeLimit(Channel::E, RangeI::E) = 0;
 
-    // Порог ограничения измерителя в канале B
-    virtual void ChannelB_ThresholdLimit(int16) = 0;                    // 18
+    // Порог ограничения измерителя в каналах B, S
+    virtual void ChannelBS_ThresholdLimit(Channel::E, int16) = 0;       // 18   28
 
     //------------------------------------------------------------------------------------------------------------
 

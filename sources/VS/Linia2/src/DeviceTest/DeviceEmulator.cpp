@@ -120,19 +120,19 @@ void DeviceEmulator::ChannelBS_RangeMeas(Channel::E, RangeI::E)
 }
 
 
-void DeviceEmulator::ChannelB_RangeLimit(RangeU::E)
+void DeviceEmulator::ChannelBS_RangeLimit(Channel::E, RangeU::E)
 {
 
 }
 
 
-void DeviceEmulator::ChannelB_RangeLimit(RangeI::E)
+void DeviceEmulator::ChannelBS_RangeLimit(Channel::E, RangeI::E)
 {
 
 }
 
 
-void DeviceEmulator::ChannelB_ThresholdLimit(int16)
+void DeviceEmulator::ChannelBS_ThresholdLimit(Channel::E, int16)
 {
 
 }

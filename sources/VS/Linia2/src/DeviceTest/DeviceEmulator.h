@@ -47,10 +47,10 @@ public:
     virtual void ChannelBS_RangeMeas(Channel::E, RangeU::E);
     virtual void ChannelBS_RangeMeas(Channel::E, RangeI::E);
 
-    virtual void ChannelB_RangeLimit(RangeU::E);
-    virtual void ChannelB_RangeLimit(RangeI::E);
+    virtual void ChannelBS_RangeLimit(Channel::E, RangeU::E);
+    virtual void ChannelBS_RangeLimit(Channel::E, RangeI::E);
 
-    virtual void ChannelB_ThresholdLimit(int16);
+    virtual void ChannelBS_ThresholdLimit(Channel::E, int16);
 
     //------------------------------------------------------------------------------------------------------------
 
