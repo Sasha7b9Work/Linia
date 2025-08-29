@@ -8,8 +8,8 @@ class IDeviceTest
 {
 public:
     virtual void Init() = 0;
-    virtual void Start() = 0;
-    virtual void Stop() = 0;
+    virtual void Start() = 0;                                           // 41
+    virtual void Stop() = 0;                                            // 38
 
     // Функция, которая будет передавать принятые данные
     virtual void SetCallbackReadData(void (*func)(int16)) = 0;
@@ -33,6 +33,11 @@ public:
 
     //------------------------------------------------------------------------------------------------------------
 
+    // Включение/выключение автоустановки нуля (или калибровки)
+    virtual void AutoSetZero(bool) = 0;                                 // 13   31
+
+    //------------------------------------------------------------------------------------------------------------
+
     // Режим источника в каналах B, S
     virtual void ChannelBS_ModeSource(Channel::E, ModeSource::E) = 0;   // 9    19
 
@@ -45,9 +50,6 @@ public:
 
     // Значение амплитуды ступени в каналах B, S
     virtual void ChannelBS_AmplitudeStep(Channel::E, int16) = 0;        // 12   22
-
-    // Включение/выключение автоустановки нуля (или калибровки)
-    virtual void ChannelB_AutoSetZero(bool) = 0;                        // 13
 
     // Смещение в каналах B, S
     virtual void ChannelBS_Offset(Channel::E, int16) = 0;               // 14   24
@@ -67,6 +69,9 @@ public:
     virtual void ChannelBS_ThresholdLimit(Channel::E, int16) = 0;       // 18   28
 
     //------------------------------------------------------------------------------------------------------------
+
+    // Число точек в режиме DC или импульсном. Может быть 20 или 50
+    virtual void NumberPoints(int) = 0;                                 // 30
 
     virtual ~IDeviceTest() { }
 };

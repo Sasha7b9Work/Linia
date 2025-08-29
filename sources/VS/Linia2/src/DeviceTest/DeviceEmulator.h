@@ -38,7 +38,7 @@ public:
 
     virtual void ChannelBS_AmplitudeStep(Channel::E, int16);
 
-    virtual void ChannelB_AutoSetZero(bool);
+    virtual void AutoSetZero(bool);
 
     virtual void ChannelBS_Offset(Channel::E, int16);
 
@@ -53,6 +53,8 @@ public:
     virtual void ChannelBS_ThresholdLimit(Channel::E, int16);
 
     //------------------------------------------------------------------------------------------------------------
+
+    virtual void NumberPoints(int);
 
 private:
     virtual ~DeviceEmulator() { }

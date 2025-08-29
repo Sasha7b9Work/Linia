@@ -90,7 +90,7 @@ void DeviceEmulator::ChannelBS_AmplitudeStep(Channel::E, int16)
 }
 
 
-void DeviceEmulator::ChannelB_AutoSetZero(bool)
+void DeviceEmulator::AutoSetZero(bool)
 {
 
 }
@@ -133,6 +133,12 @@ void DeviceEmulator::ChannelBS_RangeLimit(Channel::E, RangeI::E)
 
 
 void DeviceEmulator::ChannelBS_ThresholdLimit(Channel::E, int16)
+{
+
+}
+
+
+void DeviceEmulator::NumberPoints(int)
 {
 
 }
