@@ -300,11 +300,11 @@ void ComboJack::SetVisibility()
 
 void PanelScheme::Pack()
 {
-
+    comboCategory->Pack();
 }
 
 
 void PanelScheme::Unpack()
 {
-
+    comboCategory->Unpack();
 }
