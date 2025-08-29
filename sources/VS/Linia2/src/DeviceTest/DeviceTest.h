@@ -40,24 +40,24 @@ public:
     virtual void ChannelBS_RangeStep(Channel::E, RangeU::E) = 0;        // 10   20
     virtual void ChannelBS_RangeStep(Channel::E, RangeI::E) = 0;
 
-    // Число ступеней в канале B
-    virtual void ChannelB_NumberSteps(int) = 0;                         // 11
+    // Число ступеней в каналах B, S
+    virtual void ChannelBS_NumberSteps(Channel::E, int) = 0;            // 11   21
 
-    // Значение амплитуды ступени в канале B
-    virtual void ChannelB_AmplitudeStep(int16) = 0;                     // 12
+    // Значение амплитуды ступени в каналах B, S
+    virtual void ChannelBS_AmplitudeStep(Channel::E, int16) = 0;        // 12   22
 
     // Включение/выключение автоустановки нуля (или калибровки)
     virtual void ChannelB_AutoSetZero(bool) = 0;                        // 13
 
-    // Смещение в канале B
-    virtual void ChannelB_Offset(int16) = 0;                            // 14
+    // Смещение в каналах B, S
+    virtual void ChannelBS_Offset(Channel::E, int16) = 0;               // 14   24
 
-    // Режим измерителя в канале B
-    virtual void ChannelB_ModeMeas(ModeMeas::E) = 0;                    // 15
+    // Режим измерителя в каналах B, S
+    virtual void ChannelBS_ModeMeas(Channel::E, ModeMeas::E) = 0;       // 15   25
 
     // Диапазон измерителя
-    virtual void ChannelB_RangeMeas(RangeU::E) = 0;                     // 16
-    virtual void ChannelB_RangeMeas(RangeI::E) = 0;
+    virtual void ChannelBS_RangeMeas(Channel::E, RangeU::E) = 0;        // 16   26
+    virtual void ChannelBS_RangeMeas(Channel::E, RangeI::E) = 0;
 
     // Диапазон ограничение в канале B
     virtual void ChannelB_RangeLimit(RangeU::E) = 0;                    // 17
@@ -67,22 +67,6 @@ public:
     virtual void ChannelB_ThresholdLimit(int16) = 0;                    // 18
 
     //------------------------------------------------------------------------------------------------------------
-
-    // Число ступеней в канале S
-    virtual void ChannelS_NumberSteps(int) = 0;                         // 21
-
-    // Значение амплитуды ступени в канале S
-    virtual void ChannelS_AmplitudeStep(int16) = 0;                     // 22
-
-    // Смещение в канале S
-    virtual void ChannelS_Offset(int16) = 0;                            // 24
-
-    // Режим измерителя в канале S
-    virtual void ChannelS_ModeMeas(ModeMeas::E) = 0;                    // 25
-
-    // Диапазон измерителя в канале S
-    virtual void ChannelS_RangeMeas(RangeU::E) = 0;                     // 26
-    virtual void ChannelS_RangeMeas(RangeI::E) = 0;
 
     virtual ~IDeviceTest() { }
 };
