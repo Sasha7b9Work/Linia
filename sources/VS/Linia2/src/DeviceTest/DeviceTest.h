@@ -36,9 +36,9 @@ public:
     // Режим источника в каналах B, S
     virtual void ChannelBS_ModeSource(Channel::E, ModeSource::E) = 0;   // 9    19
 
-    // Диапазон амплитуды ступени в канале B
-    virtual void ChannelB_RangeStep(RangeU::E) = 0;                     // 10
-    virtual void ChannelB_RangeStep(RangeI::E) = 0;
+    // Диапазон амплитуды ступени в каналах B, S
+    virtual void ChannelBS_RangeStep(Channel::E, RangeU::E) = 0;        // 10   20
+    virtual void ChannelBS_RangeStep(Channel::E, RangeI::E) = 0;
 
     // Число ступеней в канале B
     virtual void ChannelB_NumberSteps(int) = 0;                         // 11
@@ -67,10 +67,6 @@ public:
     virtual void ChannelB_ThresholdLimit(int16) = 0;                    // 18
 
     //------------------------------------------------------------------------------------------------------------
-
-    // Диапазон амплитуды ступени в канале S
-    virtual void ChannelS_RangeStep(RangeU::E) = 0;                     // 20
-    virtual void ChannelS_RangeStep(RangeI::E) = 0;
 
     // Число ступеней в канале S
     virtual void ChannelS_NumberSteps(int) = 0;                         // 21

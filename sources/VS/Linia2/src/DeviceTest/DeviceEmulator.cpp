@@ -66,13 +66,13 @@ void DeviceEmulator::ChannelBS_ModeSource(Channel::E, ModeSource::E)
 }
 
 
-void DeviceEmulator::ChannelB_RangeStep(RangeU::E)
+void DeviceEmulator::ChannelBS_RangeStep(Channel::E, RangeU::E)
 {
 
 }
 
 
-void DeviceEmulator::ChannelB_RangeStep(RangeI::E)
+void DeviceEmulator::ChannelBS_RangeStep(Channel::E, RangeI::E)
 {
 
 }
@@ -133,18 +133,6 @@ void DeviceEmulator::ChannelB_RangeLimit(RangeI::E)
 
 
 void DeviceEmulator::ChannelB_ThresholdLimit(int16)
-{
-
-}
-
-
-void DeviceEmulator::ChannelS_RangeStep(RangeU::E)
-{
-
-}
-
-
-void DeviceEmulator::ChannelS_RangeStep(RangeI::E)
 {
 
 }
