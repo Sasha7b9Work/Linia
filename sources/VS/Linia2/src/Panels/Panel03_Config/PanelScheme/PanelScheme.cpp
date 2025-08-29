@@ -15,7 +15,7 @@ PanelScheme *PanelScheme::self = nullptr;
 
 
 ComboJack::ComboJack(Channel::E ch, wxWindow *parent, const wxString &title, const wxPoint &pos, int width, const wxArrayString &labels) :
-    ButtonsCombo(parent, title, pos, width, labels, labels, 1, "", ButtonsCombo::Type::Text),
+    ButtonsCombo(parent, title, pos, width, labels, labels, 1, parent->GetName() + wxString::Format("_comboJack%d", (int)ch)),
     channel(ch)
 {
 
@@ -30,7 +30,7 @@ FullJack::FullJack(Channel::E ch, wxWindow *parent, const wxPoint &position, pch
 
     if (choices)
     {
-        combo = new ButtonsCombo(this, "", { 60, 0 }, PanelConfig::WIDTH_COMBO - 60, *choices, *choices, 1, parent->GetName() + wxString::Format("_comboJack%d", (int)ch));
+        combo = new ButtonsCombo(this, "", { 60, 0 }, PanelConfig::WIDTH_COMBO - 60, *choices, *choices, 1, parent->GetName() + wxString::Format("_fullJack%d", (int)ch));
     }
 }
 
