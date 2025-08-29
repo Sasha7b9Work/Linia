@@ -215,3 +215,27 @@ bool PanelChannelS::IsEnabled() const
 {
     return Channel(Channel::_S).IsVisible();
 }
+
+
+void PanelChannelB::Pack()
+{
+
+}
+
+
+void PanelChannelB::Unpack()
+{
+
+}
+
+
+void PanelChannelS::Pack()
+{
+
+}
+
+
+void PanelChannelS::Unpack()
+{
+
+}

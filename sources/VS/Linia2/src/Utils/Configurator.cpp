@@ -28,7 +28,7 @@ void Config::SetFile(const wxString &file_path)
     }
     else
     {
-        config = new wxFileConfig("", "", file_path);
+        config = new wxFileConfig("IPPP", "MNIPI", file_path);
 
         wxConfigBase::Set(config);
         g_config = wxConfigBase::Get(false);

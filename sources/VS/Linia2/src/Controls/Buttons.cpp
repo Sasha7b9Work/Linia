@@ -135,6 +135,18 @@ void ButtonBitmap::SetFileBitmap(const wxString &file_bitmap)
 }
 
 
+void ButtonBitmap::Pack()
+{
+
+}
+
+
+void ButtonBitmap::Unpack()
+{
+
+}
+
+
 ButtonBitmapChoice::ButtonBitmapChoice(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxArrayString &_files, const wxString &_name) :
     ButtonBitmap(parent, pos, size, _files[0], _name),
     files(_files)

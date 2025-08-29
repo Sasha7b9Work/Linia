@@ -2,6 +2,8 @@
 #include "defines.h"
 #include "Tests/Tests.h"
 #include "Panels/Panel03_Config/PanelScheme/PanelScheme.h"
+#include "Utils/Configurator.h"
+#include "Panels/Panel03_Config/Panel03_Config.h"
 
 
 Category::E Category::Current()
@@ -77,11 +79,23 @@ bool TypeCommutation::IsInternal()
 }
 
 
-void Test::Save(pchar /*file_name*/)
+void Test::Load(pchar file_name)
 {
-    // Канал C
+    Config::SetFile(file_name);
+
+    PanelConfig::self->Unpack();
+
+    Config::SetFile("");
+}
 
 
+void Test::Save(pchar file_name)
+{
+    Config::SetFile(file_name);
+
+    PanelConfig::self->Pack();
+
+    Config::SetFile("");
 }
 
 

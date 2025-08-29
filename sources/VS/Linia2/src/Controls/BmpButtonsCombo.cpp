@@ -3,6 +3,7 @@
 #include "Controls/BmpButtonsCombo.h"
 #include "Utils/GlobalFunctions.h"
 #include "Controls/StaticBox.h"
+#include "Utils/Configurator.h"
 
 
 class BmpButtonPopup : public wxPopupTransientWindow
@@ -144,4 +145,18 @@ void BmpButtonsCombo::SetCurrentChoice(int choice)
 int BmpButtonsCombo::GetCurrentChoice() const
 {
     return current_choice;
+}
+
+
+void BmpButtonsCombo::Pack()
+{
+    Config::WriteInt(GetName(), GetCurrentChoice());
+}
+
+
+void BmpButtonsCombo::Unpack()
+{
+    int choice = Config::ReadInt(GetName(), 0);
+
+    SetCurrentChoice(choice);
 }

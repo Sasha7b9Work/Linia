@@ -85,5 +85,6 @@ struct TypeCommutation
 
 namespace Test
 {
+    void Load(pchar file_name);
     void Save(pchar file_name);
 };

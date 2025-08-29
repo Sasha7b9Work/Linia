@@ -296,3 +296,15 @@ void ComboJack::SetVisibility()
 {
     Show(Channel(channel).IsVisible());
 }
+
+
+void PanelScheme::Pack()
+{
+
+}
+
+
+void PanelScheme::Unpack()
+{
+
+}

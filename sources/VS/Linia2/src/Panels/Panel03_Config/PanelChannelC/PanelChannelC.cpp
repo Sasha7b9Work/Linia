@@ -192,3 +192,15 @@ void PanelChannelC::OnEventComboBox(wxCommandEvent &event)
         }
     }
 }
+
+
+void PanelChannelC::Pack()
+{
+
+}
+
+
+void PanelChannelC::Unpack()
+{
+
+}

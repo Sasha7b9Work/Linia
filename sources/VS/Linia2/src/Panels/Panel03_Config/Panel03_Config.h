@@ -19,6 +19,10 @@ public:
 
     static PanelConfig *self;
 
+    void Pack();
+
+    void Unpack();
+
 private:
 
     wxToggleButton *btnScheme = nullptr,

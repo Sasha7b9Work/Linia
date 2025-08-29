@@ -127,3 +127,21 @@ void PanelConfig::EnablePanel(int button_id)
         str.panel->Show(str.button->GetId() == button_id);
     }
 }
+
+
+void PanelConfig::Pack()
+{
+    PanelChannelC::self->Pack();
+    PanelChannelB::self->Pack();
+    PanelChannelS::self->Pack();
+    PanelScheme::self->Pack();
+}
+
+
+void PanelConfig::Unpack()
+{
+    PanelChannelC::self->Unpack();
+    PanelChannelB::self->Unpack();
+    PanelChannelS::self->Unpack();
+    PanelScheme::self->Unpack();
+}

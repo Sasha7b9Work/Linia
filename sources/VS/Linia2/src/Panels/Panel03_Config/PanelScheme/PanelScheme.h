@@ -55,6 +55,9 @@ public:
 
     static PanelScheme *self;
 
+    void Pack();
+    void Unpack();
+
 private:
 
     wxButton *btnLoad = nullptr;

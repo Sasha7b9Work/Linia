@@ -7,6 +7,7 @@
 #include "Utils/Timer.h"
 #include "MainWindow.h"
 #include "Windows/ConsoleRS232.h"
+#include "Tests/Tests.h"
 
 
 wxIMPLEMENT_APP(Application);
@@ -54,6 +55,8 @@ bool Application::OnInit()
 
     timer.SetOwner(this, timer.GetId());
 
+    Test::Load("example.tst");
+
     timer.Start(10);
 
     return true;
@@ -85,6 +88,8 @@ void Application::OnTimer(wxTimerEvent &)
 
 int Application::OnExit()
 {
+    Test::Save("example.tst");
+
     LOG_WRITE("Application::OnExit()");
 
     wxConfigBase::Get(false)->Flush();

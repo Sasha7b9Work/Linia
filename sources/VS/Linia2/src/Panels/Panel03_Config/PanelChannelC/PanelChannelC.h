@@ -14,6 +14,9 @@ public:
 
     static PanelChannelC *self;
 
+    void Pack();
+    void Unpack();
+
 private:
 
     ButtonsComboRange *comboVoltage = nullptr;              // Измеритель U
