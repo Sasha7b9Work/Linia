@@ -13,6 +13,8 @@ PanelModeLower *PanelModeLower::self = nullptr;
 PanelModeLower::PanelModeLower(wxWindow *parent) :
     Panel(parent, 0, MainWindow::HEIGTH1 + PanelModel::HEIGHT + PanelPercents::HEIGHT, WIDTH, HEIGHT)
 {
+    SetName("PanelModeLower");
+
     self = this;
 
     StaticBox *boxCategory = new StaticBox(this, _L("Режим"), { 5, 0 }, { WIDTH - 13, HEIGHT - 8});
@@ -25,6 +27,6 @@ PanelModeLower::PanelModeLower(wxWindow *parent) :
         wxArrayString choices;
         choices.Add("C");
 
-        new ButtonsCombo(boxCategory, "1 очередь", { 5, 120 }, 100, choices, choices, 1, ButtonsCombo::Type::Text, "");
+        new ButtonsCombo(boxCategory, "1 очередь", { 5, 120 }, 100, choices, choices, 1, "comboFirst");
     }
 }

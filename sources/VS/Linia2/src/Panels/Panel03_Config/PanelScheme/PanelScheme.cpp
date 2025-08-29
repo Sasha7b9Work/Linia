@@ -15,7 +15,7 @@ PanelScheme *PanelScheme::self = nullptr;
 
 
 ComboJack::ComboJack(Channel::E ch, wxWindow *parent, const wxString &title, const wxPoint &pos, int width, const wxArrayString &labels) :
-    ButtonsCombo(parent, title, pos, width, labels, labels, 1, ButtonsCombo::Type::Text, ""),
+    ButtonsCombo(parent, title, pos, width, labels, labels, 1, "", ButtonsCombo::Type::Text),
     channel(ch)
 {
 
@@ -30,7 +30,7 @@ FullJack::FullJack(Channel::E ch, wxWindow *parent, const wxPoint &position, pch
 
     if (choices)
     {
-        combo = new ButtonsCombo(this, "", { 60, 0 }, PanelConfig::WIDTH_COMBO - 60, *choices, *choices, 1);
+        combo = new ButtonsCombo(this, "", { 60, 0 }, PanelConfig::WIDTH_COMBO - 60, *choices, *choices, 1, parent->GetName() + wxString::Format("_comboJack%d", (int)ch));
     }
 }
 
@@ -88,7 +88,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         // IDC_COMBOMOD
         // IDC_BUTTON_LOADTST
-        comboTest = new ButtonsCombo(boxTest, "", SD::XY0(), 100, choices, choices, 1);
+        comboTest = new ButtonsCombo(boxTest, "", SD::XY0(), 100, choices, choices, 1, "comboTest");
 
         btnLoad = new wxButton(boxTest, wxID_ANY, _L("Загрузить"), { PanelConfig::X, SD::Y_SB(50) }, { 100, 30 });
 
@@ -108,7 +108,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         int y = 20;
 
-        comboCommutation = new ButtonsCombo(boxCommutation, "Тип", { SD::XY0() }, PanelConfig::WIDTH_COMBO, choices, choices, 1);
+        comboCommutation = new ButtonsCombo(boxCommutation, "Тип", { SD::XY0() }, PanelConfig::WIDTH_COMBO, choices, choices, 1, "comboCommutation");
 
         choices.clear();
         choices.Add(_L("канал") + " C");

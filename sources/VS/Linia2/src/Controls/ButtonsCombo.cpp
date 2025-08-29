@@ -151,7 +151,7 @@ private:
 
 
 ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos, int width,
-    const wxArrayString &_labels, const wxArrayString &_tooltips, int _buttons_in_row, Type::E type, const wxString &name) :
+    const wxArrayString &_labels, const wxArrayString &_tooltips, int _buttons_in_row, const wxString &name, Type::E type) :
     DrawingButton(parent, wxID_ANY, _labels[0], pos, { width, TEXTCNTRL_HEIGHT + 3 }, (type == Type::Bitmap) ? _title : wxString("")),
     current_choice(0)
 {
@@ -370,7 +370,7 @@ void ButtonsCombo::SetExtendedLabel(const wxString &start, int num_spaces, const
 
 
 ButtonsComboRange::ButtonsComboRange(wxWindow *parent, const wxString &title, const wxPoint &pos, int width, const wxArrayString &labels, const wxArrayString &tooltips, const wxString &name) :
-    ButtonsCombo(parent, title, pos, width, labels, tooltips, 3, ButtonsCombo::Type::Text, name)
+    ButtonsCombo(parent, title, pos, width, labels, tooltips, 3, name, ButtonsCombo::Type::Text)
 {
     ButtonsCombo::insert_empty = true;
 

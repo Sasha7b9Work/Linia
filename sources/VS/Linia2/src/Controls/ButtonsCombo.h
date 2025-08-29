@@ -38,8 +38,8 @@ public:
         const wxArrayString &labels,
         const wxArrayString &tooltips,
         int buttons_in_row,                     // В каждом ряду будет расположено столько кнопок
-        Type::E type = Type::Text,
-        const wxString &name = "");
+        const wxString &name,
+        Type::E type = Type::Text);
 
     void SetCurrentSelection(int);
 
@@ -85,7 +85,7 @@ public:
     ButtonsComboRange(wxWindow *parent, const wxString &title, const wxPoint &pos, int width,
         const wxArrayString &labels,
         const wxArrayString &tooltips,
-        const wxString &name = "");
+        const wxString &name);
 
 private:
 };

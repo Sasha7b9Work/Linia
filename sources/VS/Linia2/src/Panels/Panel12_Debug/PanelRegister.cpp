@@ -10,6 +10,8 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
     reverse_bits(_reverse_bits),
     additional_modes(_additional_modes)
 {
+    SetName("PanelRegister");
+
     new wxStaticText(this, wxID_ANY, title, { 10, 10 });
 
     wxSize size_button{ 100, 30 };
@@ -29,7 +31,7 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
         choices.Add(_L("Нижний уровень"));
         choices.Add(_L("Команда"));
 
-        new ButtonsCombo(this, "Режим", { x0, y0 - 2 }, 150, choices, choices, 1, ButtonsCombo::Type::Text, "");
+        new ButtonsCombo(this, "Режим", { x0, y0 - 2 }, 150, choices, choices, 1, "comboMode");
 
         choices.clear();
 
@@ -42,7 +44,7 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
         choices.Add("0110 Software reset (power-on reset)");
         choices.Add("0111 Internal reference setup register");
 
-        new ButtonsCombo(this, "Команда", { x0 + 170, y0 - 2 }, 400, choices, choices, 1, ButtonsCombo::Type::Text, "");
+        new ButtonsCombo(this, "Команда", { x0 + 170, y0 - 2 }, 400, choices, choices, 1, "comboCommand");
 
         y0 += 30;
     }
