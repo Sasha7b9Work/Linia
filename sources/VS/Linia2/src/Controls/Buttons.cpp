@@ -108,9 +108,8 @@ void CheckButton::SetToolTip(const wxString &tool_tip)
 }
 
 
-ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString &file_bitmap, const wxString &_name) :
-    wxBitmapButton(parent, wxID_ANY, wxNullBitmap, pos, size, wxBU_EXACTFIT),
-    Serializer(_name)
+ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString &file_bitmap, const wxString & /*_name*/) :
+    wxBitmapButton(parent, wxID_ANY, wxNullBitmap, pos, size, wxBU_EXACTFIT)
 {
     SetFileBitmap(file_bitmap);
 

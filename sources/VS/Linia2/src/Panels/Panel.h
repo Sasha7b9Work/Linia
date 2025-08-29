@@ -5,5 +5,8 @@
 class Panel : public wxPanel
 {
 public:
-    Panel(wxWindow *parent, int x, int y, int w, int h);
+    Panel(wxWindow *parent, int x, int y, int w, int h) :
+        wxPanel(parent, wxID_ANY, { x, y }, { w, h }, wxTAB_TRAVERSAL | wxSUNKEN_BORDER)
+    {
+    }
 };

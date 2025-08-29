@@ -26,7 +26,7 @@ PanelModel::PanelModel(wxWindow* parent) :
 }
 
 
-void PanelModel::SetName(const wxString &name)
+void PanelModel::SetName(const wxString &_name)
 {
-    txtName->SetLabel(name);
+    txtName->SetLabel(_name);
 }

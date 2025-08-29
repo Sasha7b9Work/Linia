@@ -2,7 +2,6 @@
 #pragma once
 #include "Controls/Painter.h"
 #include "Controls/Bitmap.h"
-#include "Controls/Controls.h"
 
 
 struct Color;
@@ -56,7 +55,7 @@ private:
 };
 
 
-class ButtonBitmap : public wxBitmapButton, public Serializer
+class ButtonBitmap : public wxBitmapButton
 {
 public:
 

@@ -21,6 +21,7 @@ if(WIN32)
         /wd4265    # class has virtual functions, but its non-trivial destructor is not virtual
         /wd4514    # unreferenced inline function has been removed
         /wd4625    # copy constructor was implicitly defined as deleted
+        /wd4623    # default constructor was implicitly defined as deleted
         /wd4626    # assignment operator was implicitly defined as deleted
         /wd4710    # function not inlined
         /wd4711    # function xxx selected for automatic inline expansion
