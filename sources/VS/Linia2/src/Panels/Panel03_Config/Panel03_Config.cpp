@@ -10,6 +10,7 @@
 #include "Panels/Panel03_Config/PanelChannelBS/PanelChannelBS.h"
 #include "Panels/Panel03_Config/PanelChannelC/PanelChannelC.h"
 #include "Panels/Panel03_Config/PanelCalculate.h"
+#include "Utils/Configurator.h"
 
 
 PanelConfig *PanelConfig::self = nullptr;
@@ -106,6 +107,19 @@ void PanelConfig::OnEventToggleButton(wxCommandEvent &event)
 }
 
 
+void PanelConfig::SetCurrentPanel(const wxString &name)
+{
+    for (auto &str : str_panels)
+    {
+        if (str.panel->GetName() == name)
+        {
+            UnсheckAllAcross(str.button->GetId());
+            EnablePanel(str.button->GetId());
+        }
+    }
+}
+
+
 void PanelConfig::UnсheckAllAcross(int id)
 {
     for (auto &str : str_panels)
@@ -129,12 +143,28 @@ void PanelConfig::EnablePanel(int button_id)
 }
 
 
+wxPanel *PanelConfig::GetCurrentPanel()
+{
+    for (auto &str : str_panels)
+    {
+        if (str.panel->IsShown())
+        {
+            return str.panel;
+        }
+    }
+
+    return str_panels[0].panel;
+}
+
+
 void PanelConfig::Pack()
 {
     PanelChannelC::self->Pack();
     PanelChannelB::self->Pack();
     PanelChannelS::self->Pack();
     PanelScheme::self->Pack();
+
+    Config::WriteString("CurrentPanel", GetCurrentPanel()->GetName());
 }
 
 
@@ -144,4 +174,6 @@ void PanelConfig::Unpack()
     PanelChannelB::self->Unpack();
     PanelChannelS::self->Unpack();
     PanelScheme::self->Unpack();
+
+    SetCurrentPanel(Config::ReadString("CurrentPanel"));
 }

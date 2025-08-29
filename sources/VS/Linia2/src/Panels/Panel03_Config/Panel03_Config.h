@@ -54,4 +54,8 @@ private:
     void UnсheckAllAcross(int id);
 
     void EnablePanel(int button_id);
+
+    wxPanel *GetCurrentPanel();
+
+    void SetCurrentPanel(const wxString &name);
 };
