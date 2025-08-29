@@ -38,8 +38,6 @@ public:
 
     virtual void ChannelBS_AmplitudeStep(Channel::E, int16);
 
-    virtual void AutoSetZero(bool);
-
     virtual void ChannelBS_Offset(Channel::E, int16);
 
     virtual void ChannelBS_ModeMeas(Channel::E, ModeMeas::E);
@@ -55,6 +53,8 @@ public:
     //------------------------------------------------------------------------------------------------------------
 
     virtual void NumberPoints(int);
+
+    virtual void AutoSetZero(bool);
 
 private:
     virtual ~DeviceEmulator() { }
