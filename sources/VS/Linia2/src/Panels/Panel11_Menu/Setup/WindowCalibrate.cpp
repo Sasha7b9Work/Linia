@@ -33,7 +33,7 @@ WindowCalibrate::WindowCalibrate() :
         wxArrayString choices;
         choices.push_back("50A");
 
-        comboRange = new ButtonsComboRange(box, "Диапазон", { 0, SD::Y_SB(y) }, 150, choices, choices);
+        comboRange = new ButtonsComboRange(box, "Диапазон", { 0, SD::Y_SB(y) }, 150, choices, choices, "comboRange");
 
         y += d;
 

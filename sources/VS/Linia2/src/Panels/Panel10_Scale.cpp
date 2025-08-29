@@ -107,6 +107,8 @@ wxPanel *PanelScale::CreatePanel(wxToggleButton *button)
 
 void PanelScale::CreatePanelScale(wxPanel *panel, int x, int /*w*/)
 {
+    panel->SetName("PanelScale");
+
     wxSize size{ 30, 15 };
 
     x += 5;
@@ -121,7 +123,7 @@ void PanelScale::CreatePanelScale(wxPanel *panel, int x, int /*w*/)
         "grid/bmp00075.bmp"
     };
 
-    new ButtonBitmapChoice(panel, {10, SD::Y_SB(25)}, wxDefaultSize, choices, "ScaleZeroPoint");
+    new ButtonBitmapChoice(panel, {10, SD::Y_SB(25)}, wxDefaultSize, choices, "btnZero");
 
     int dx = 65;
 

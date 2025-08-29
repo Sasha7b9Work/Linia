@@ -25,6 +25,6 @@ PanelModeLower::PanelModeLower(wxWindow *parent) :
         wxArrayString choices;
         choices.Add("C");
 
-        new ButtonsCombo(boxCategory, "1 очередь", { 5, 120 }, 100, choices, choices, 1);
+        new ButtonsCombo(boxCategory, "1 очередь", { 5, 120 }, 100, choices, choices, 1, ButtonsCombo::Type::Text, "");
     }
 }

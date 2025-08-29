@@ -14,6 +14,8 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
     Panel(parent, MainWindow::WIDTH1 + MainWindow::WIDTH2, PanelConfig::HEIGHT,
         MainWindow::WIDTH3, HEIGHT)
 {
+    SetName("PanelIndicator");
+
     self = this;
 
     wxArrayString images =
@@ -22,7 +24,7 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
         "buttons/start_on.bmp"
     };
 
-    button_start = new ButtonBitmapChoice(this, {0, 0}, {64 - 10, 60 - 10}, images, "IndicatorButtonStart");
+    button_start = new ButtonBitmapChoice(this, {0, 0}, {64 - 10, 60 - 10}, images, "button_start");
 
     wxStaticText *text = new wxStaticText(this, wxID_ANY, "Uc 100 %", { 105, 5 }, { 25, 25});
 

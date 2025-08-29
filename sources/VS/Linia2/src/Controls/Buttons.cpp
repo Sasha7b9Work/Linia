@@ -108,9 +108,13 @@ void CheckButton::SetToolTip(const wxString &tool_tip)
 }
 
 
-ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString &file_bitmap, const wxString & /*_name*/) :
+ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString &file_bitmap, const wxString &name) :
     wxBitmapButton(parent, wxID_ANY, wxNullBitmap, pos, size, wxBU_EXACTFIT)
 {
+    SetName(parent->GetName() + "_" + name);
+
+    LOG_WRITE(GetName().ToStdString().c_str());
+
     SetFileBitmap(file_bitmap);
 
     SetClientSize(((size == wxDefaultSize) ? bitmap.GetBitmap().GetSize() : size ) + wxSize(10, 10));

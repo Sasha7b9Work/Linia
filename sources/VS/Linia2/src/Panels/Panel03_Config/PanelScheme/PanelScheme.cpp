@@ -15,7 +15,7 @@ PanelScheme *PanelScheme::self = nullptr;
 
 
 ComboJack::ComboJack(Channel::E ch, wxWindow *parent, const wxString &title, const wxPoint &pos, int width, const wxArrayString &labels) :
-    ButtonsCombo(parent, title, pos, width, labels, labels, 1),
+    ButtonsCombo(parent, title, pos, width, labels, labels, 1, ButtonsCombo::Type::Text, ""),
     channel(ch)
 {
 
@@ -38,6 +38,8 @@ FullJack::FullJack(Channel::E ch, wxWindow *parent, const wxPoint &position, pch
 PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
     wxPanel(parent)
 {
+    SetName("PanelScheme");
+
     self = this;
 
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
@@ -69,7 +71,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
             "Полевой или МОП транзистор PMOS (четырёхполюсный)"
         };
 
-        comboCategory = new BmpButtonsCombo(boxCategory, "Категория", { 18, SD::XY0().y }, { 32, 42 }, files, tooltips, 0, 4, "PanelSchemeCategory");
+        comboCategory = new BmpButtonsCombo(boxCategory, "Категория", { 18, SD::XY0().y }, { 32, 42 }, files, tooltips, 0, 4, "comboCategory");
     }
 
     boxCategory->SetFont(StaticBox::TitleFont());

@@ -24,6 +24,8 @@ PanelChannelC *PanelChannelC::self = nullptr;
 PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
     wxPanel(parent)
 {
+    SetName("PanelChannelC");
+
     self = this;
 
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
@@ -54,7 +56,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
             "Синусоидальное"
         };
 
-        comboScan = new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::XY0().y }, { 32, 42 }, files, tooltips, 0, 3, "ChannelC_Scan");
+        comboScan = new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::XY0().y }, { 32, 42 }, files, tooltips, 0, 3, "comboScan");
 
         int y = 25;
         int x0 = 80;
@@ -66,13 +68,13 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
 
         wxArrayString names = { "20", "50" };
 
-        comboNumberPoints = new ButtonsCombo(boxScan, "Число точек", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, names, names, 1);
+        comboNumberPoints = new ButtonsCombo(boxScan, "Число точек", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, names, names, 1, ButtonsCombo::Type::Text, "comboNumberPoints");
 
         y += PanelConfig::DYC;
 
         names = { "x 1", "x 2" };
 
-        comboDutyCycleIncrease = new ButtonsCombo(boxScan, "Скважность", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, names, names, 1);
+        comboDutyCycleIncrease = new ButtonsCombo(boxScan, "Скважность", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, names, names, 1, ButtonsCombo::Type::Text, "comboDutyCycleIncrease");
     }
 
     boxScan->SetFont(StaticBox::TitleFont());
@@ -84,10 +86,10 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
         int width = 85;
 
         RangeU::FillArrayStrings(names, DSet::Type::ChanC_Meas, false);
-        comboVoltage = new ButtonsComboRange(boxMeter, "Uc", SD::XY0(), width, names, names);
+        comboVoltage = new ButtonsComboRange(boxMeter, "Uc", SD::XY0(), width, names, names, "comboVoltage");
 
         RangeI::FillArrayStrings(names, DSet::Type::ChanC_Meas, false);
-        comboCurrent = new ButtonsComboRange(boxMeter, "Ic", { SD::XY0().x + PanelConfig::WIDTH_COMBO - width, SD::XY0().y }, width, names, names);
+        comboCurrent = new ButtonsComboRange(boxMeter, "Ic", { SD::XY0().x + PanelConfig::WIDTH_COMBO - width, SD::XY0().y }, width, names, names, "comboCurrent");
     }
 
     boxMeter->SetFont(StaticBox::TitleFont());
@@ -104,7 +106,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
             "2 kV"
         };
 
-        comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", SD::XY0(), PanelConfig::WIDTH_COMBO, names, names, 1);
+        comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", SD::XY0(), PanelConfig::WIDTH_COMBO, names, names, 1, ButtonsCombo::Type::Text, "comboRange");
 
         new wxStaticText(boxSource, wxID_ANY, _L("Ограничение Uc, %%"), { 40, SD::Y_SB(65) });
 
