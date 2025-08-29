@@ -4,6 +4,7 @@
 #include "MainWindow.h"
 #include "Utils/GlobalFunctions.h"
 #include "Controls/StaticBox.h"
+#include "Utils/Configurator.h"
 
 
 DrawingButton::DrawingButton(wxWindow *parent, int id, const wxString &label, const wxPoint &position, const wxSize &size, const wxString &_name_file) :
@@ -255,6 +256,20 @@ int ButtonsCombo::GetCurrentSelection() const
 wxString ButtonsCombo::GetCurrentString() const
 {
     return labels[(uint)(current_choice + NumEmptyes())];
+}
+
+
+void ButtonsCombo::Pack()
+{
+    Config::WriteInt(GetName(), GetCurrentSelection());
+}
+
+
+void ButtonsCombo::Unpack()
+{
+    int selection = Config::ReadInt(GetName(), 0);
+
+    SetCurrentSelection(selection);
 }
 
 

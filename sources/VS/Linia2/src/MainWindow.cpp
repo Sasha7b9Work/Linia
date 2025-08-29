@@ -20,6 +20,7 @@
 #include "Panels/Panel12_Debug/Panel12_Debug.h"
 #include "Panels/Panel13_ReferenceGraphs.h"
 #include "Controls/Dialog.h"
+#include "Tests/Tests.h"
 
 
 /*
@@ -236,6 +237,8 @@ void MainWindow::OnQuit(wxCommandEvent &WXUNUSED(event))
 
 void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 {
+    Test::Save("example.tst");
+
     SET::Save("");
 
     if (ConsoleRS232::self)

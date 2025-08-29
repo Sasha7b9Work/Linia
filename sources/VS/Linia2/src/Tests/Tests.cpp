@@ -81,7 +81,7 @@ bool TypeCommutation::IsInternal()
 
 void Test::Load(pchar file_name)
 {
-    Config::SetFile(file_name);
+    Config::SetFile(wxGetCwd() + "/" + file_name);
 
     PanelConfig::self->Unpack();
 
@@ -91,7 +91,7 @@ void Test::Load(pchar file_name)
 
 void Test::Save(pchar file_name)
 {
-    Config::SetFile(file_name);
+    Config::SetFile(wxGetCwd() + "/" + file_name);
 
     PanelConfig::self->Pack();
 

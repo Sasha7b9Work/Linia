@@ -88,8 +88,6 @@ void Application::OnTimer(wxTimerEvent &)
 
 int Application::OnExit()
 {
-    Test::Save("example.tst");
-
     LOG_WRITE("Application::OnExit()");
 
     wxConfigBase::Get(false)->Flush();

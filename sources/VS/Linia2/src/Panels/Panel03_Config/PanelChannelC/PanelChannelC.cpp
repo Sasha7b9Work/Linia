@@ -196,11 +196,14 @@ void PanelChannelC::OnEventComboBox(wxCommandEvent &event)
 
 void PanelChannelC::Pack()
 {
-
+    comboScan->Pack();
+    comboNumberPoints->Pack();
 }
 
 
 void PanelChannelC::Unpack()
 {
-
+    comboScan->Unpack();
+    wxYield();                      // Немедленно обрабатываем все события
+    comboNumberPoints->Unpack();
 }
