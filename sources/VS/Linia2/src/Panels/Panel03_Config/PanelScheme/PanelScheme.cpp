@@ -301,10 +301,14 @@ void ComboJack::SetVisibility()
 void PanelScheme::Pack()
 {
     comboCategory->Pack();
+    comboCommutation->Pack();
 }
 
 
 void PanelScheme::Unpack()
 {
     comboCategory->Unpack();
+    wxYield();
+    comboCommutation->Unpack();
+    wxYield();
 }
