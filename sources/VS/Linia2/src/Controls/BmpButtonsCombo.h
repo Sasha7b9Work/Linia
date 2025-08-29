@@ -22,8 +22,8 @@ public:
 
     int GetCurrentChoice() const;
 
-    virtual void Pack() override;
-    virtual void Unpack() override;
+    void Pack();
+    void Unpack();
 
 private:
 

@@ -42,7 +42,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, Channel::E ch, int x, int w, int
         choices.Add(_L("Вкл"));
         choices.Add(_L("Выкл"));
 
-        new ButtonsCombo(boxGenerator, "Импульс", { SD::XY0().x, y }, PanelConfig::WIDTH_COMBO, choices, choices, 1, "comboImpulse");
+        comboImpulse = new ButtonsCombo(boxGenerator, "Импульс", { SD::XY0().x, y }, PanelConfig::WIDTH_COMBO, choices, choices, 1, "comboImpulse");
 
         y += PanelConfig::DYC;
 
@@ -66,7 +66,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, Channel::E ch, int x, int w, int
             choices.push_back(wxString::Format("%d", i));
         }
 
-        new ButtonsCombo(boxGenerator, "Число ступенек", { SD::XY0().x, y }, PanelConfig::WIDTH_COMBO, choices, choices, 3, "comboNumberSteps");
+        comboNumberSteps = new ButtonsCombo(boxGenerator, "Число ступенек", { SD::XY0().x, y }, PanelConfig::WIDTH_COMBO, choices, choices, 3, "comboNumberSteps");
 
         y += PanelConfig::DYC;
 
@@ -74,7 +74,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, Channel::E ch, int x, int w, int
         choices.Add(_L("прямая"));
         choices.Add(_L("обратная"));
 
-        new ButtonsCombo(boxGenerator, "Полярность", { SD::XY0().x, y }, PanelConfig::WIDTH_COMBO, choices, choices, 1, "comboPolarity");
+        comboPolarity = new ButtonsCombo(boxGenerator, "Полярность", { SD::XY0().x, y }, PanelConfig::WIDTH_COMBO, choices, choices, 1, "comboPolarity");
 
         y += 30;
 
@@ -91,7 +91,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, Channel::E ch, int x, int w, int
             choices.Add(_L("прямая"));
             choices.Add(_L("обратная"));
 
-            new ButtonsCombo(boxOffset, "Полярность", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - 10, choices, choices, 1, "comboOffsetPolarity");
+            comboOffsetPolarity = new ButtonsCombo(boxOffset, "Полярность", { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - 10, choices, choices, 1, "comboOffsetPolarity");
         }
 
         boxOffset->SetFont(StaticBox::TitleFont());
@@ -217,25 +217,34 @@ bool PanelChannelS::IsEnabled() const
 }
 
 
-void PanelChannelB::Pack()
+void PanelChannelBS::Pack()
 {
+    comboTypeGenerator->Pack();
+    comboImpulse->Pack();
+    comboStep->Pack();
+    comboAmpitudeDecrease->Pack();
+    comboNumberSteps->Pack();
+    comboPolarity->Pack();
+    comboOffsetPolarity->Pack();
+    comboLimitRange->Pack();
 
+    sliderLimit->Pack();
+    sliderOffset->Pack();
 }
 
 
-void PanelChannelB::Unpack()
+void PanelChannelBS::Unpack()
 {
+    comboTypeGenerator->Unpack();
+    wxYield();
+    comboImpulse->Unpack();
+    comboStep->Unpack();
+    comboAmpitudeDecrease->Unpack();
+    comboNumberSteps->Unpack();
+    comboPolarity->Unpack();
+    comboOffsetPolarity->Unpack();
+    comboLimitRange->Unpack();
 
-}
-
-
-void PanelChannelS::Pack()
-{
-
-}
-
-
-void PanelChannelS::Unpack()
-{
-
+    sliderLimit->Unpack();
+    sliderOffset->Unpack();
 }

@@ -56,7 +56,7 @@ private:
 };
 
 
-class ButtonBitmap : public wxBitmapButton, public Serializer
+class ButtonBitmap : public wxBitmapButton
 {
 public:
 
@@ -64,8 +64,8 @@ public:
 
     void SetFileBitmap(const wxString &file_bitmap);
 
-    virtual void Pack() override;
-    virtual void Unpack() override;
+    void Pack();
+    void Unpack();
 
 private:
 

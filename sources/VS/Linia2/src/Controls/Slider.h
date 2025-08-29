@@ -3,14 +3,14 @@
 #include "Controls/Controls.h"
 
 
-class SliderInt : public wxPanel, public Serializer
+class SliderInt : public wxPanel
 {
 public:
 
     SliderInt(wxWindow *parent, const wxPoint &position, int width, int min, int max, const wxString &name);
 
-    virtual void Pack() override;
-    virtual void Unpack() override;
+    void Pack();
+    void Unpack();
 
     int GetValue() const;
     void SetValue(int);
@@ -42,6 +42,9 @@ public:
     SliderFloat(wxWindow *parent, const wxPoint &position, int width);
 
     void SetRange(double min, double max, const wxString &units, int digits_after_point);
+
+    void Pack();
+    void Unpack();
 
 protected:
 

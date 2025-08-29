@@ -20,7 +20,7 @@ private:
 };
 
 
-class ButtonsCombo : public DrawingButton, public Serializer
+class ButtonsCombo : public DrawingButton
 {
     friend class ButtonPopup;
 
@@ -53,8 +53,8 @@ public:
     void SetChoices(const wxArrayString &labels, const wxArrayString &tooltips);
 
 
-    virtual void Pack() override;
-    virtual void Unpack() override;
+    void Pack();
+    void Unpack();
 
 protected:
 

@@ -11,16 +11,25 @@ class PanelChannelBS : public wxPanel
     friend class PanelChannelB;
     friend class PanelChannelS;
 
+public:
+
+    void Pack();
+    void Unpack();
+
 private:
 
     PanelChannelBS(wxPanel *parent, Channel::E ch, int x, int w, int h);
 
     ButtonsCombo      *comboTypeGenerator = nullptr;    // Тип генерации - напряжение или ток
+    ButtonsCombo      *comboImpulse = nullptr;          // Импульс
     ButtonsComboRange *comboStep = nullptr;             // Амплитуда ступени
     ButtonsComboRange *comboLimitRange = nullptr;       // Ограничение - Диапазон
     SliderFloatOffset *sliderOffset = nullptr;          // Смещение
     SliderFloatLimit  *sliderLimit = nullptr;           // Ограничение
     ButtonsCombo      *comboAmpitudeDecrease = nullptr; // Амплитуда / 10
+    ButtonsCombo      *comboNumberSteps = nullptr;      // Число ступенек
+    ButtonsCombo      *comboPolarity = nullptr;         // Полярность
+    ButtonsCombo      *comboOffsetPolarity = nullptr;   // Смещение - Полярность
 
     void Tune();
 
@@ -41,9 +50,6 @@ public:
     static PanelChannelB *self;
 
     bool IsEnabled() const;
-
-    void Pack();
-    void Unpack();
 };
 
 
@@ -60,8 +66,5 @@ public:
     static PanelChannelS *self;
 
     bool IsEnabled() const;
-
-    void Pack();
-    void Unpack();
 };
 

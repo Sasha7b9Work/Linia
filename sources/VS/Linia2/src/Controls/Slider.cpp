@@ -116,6 +116,19 @@ void SliderInt::Unpack()
     SetValue(value);
 }
 
+
+void SliderFloat::Pack()
+{
+
+}
+
+
+void SliderFloat::Unpack()
+{
+
+}
+
+
 int SliderInt::GetValue() const
 {
     return slider->GetValue();
