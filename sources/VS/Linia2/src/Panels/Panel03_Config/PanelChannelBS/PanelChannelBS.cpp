@@ -83,7 +83,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, Channel::E ch, int x, int w, int
         {
             y = 25;
 
-            sliderOffset = new SliderFloatOffset(boxOffset, { SD::XY0().x, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - 10);
+            sliderOffset = new SliderFloatOffset(boxOffset, { SD::XY0().x, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO - 10, "sliderOffset");
 
             y += 40;
 
@@ -117,7 +117,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, Channel::E ch, int x, int w, int
 
         y += 40;
 
-        sliderLimit = new SliderFloatLimit(boxLimitation, { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO );
+        sliderLimit = new SliderFloatLimit(boxLimitation, { PanelConfig::X, SD::Y_SB(y) }, PanelConfig::WIDTH_COMBO, "sliderLimit");
     }
 
     boxLimitation->SetFont(StaticBox::TitleFont());

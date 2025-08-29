@@ -45,24 +45,6 @@ SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _
 }
 
 
-void SliderInt::OnEventSlider(wxCommandEvent &event)
-{
-    if (event.GetId() == slider->GetId())
-    {
-        int value = event.GetInt();
-
-        text->SetLabel(wxString::Format("%d", value));
-
-        if (slider->GetValue() != value)
-        {
-            slider->SetValue(value);
-        }
-    }
-
-    event.Skip();
-}
-
-
 void SliderInt::OnEventMouseDown(wxMouseEvent &event)
 {
     if (event.GetId() == btnMore->GetId())
@@ -119,17 +101,25 @@ void SliderInt::Unpack()
 
 void SliderFloat::Pack()
 {
-
+    Config::WriteInt(GetName(), GetIntValue());
 }
 
 
 void SliderFloat::Unpack()
 {
+    int value = wxClip<int>(Config::ReadInt(GetName()), slider->GetMin(), slider->GetMin());
 
+    SetIntValue(value);
 }
 
 
 int SliderInt::GetValue() const
+{
+    return slider->GetValue();
+}
+
+
+int SliderFloat::GetIntValue() const
 {
     return slider->GetValue();
 }
@@ -141,9 +131,17 @@ void SliderInt::SetValue(int value)
 }
 
 
-SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width) :
+void SliderFloat::SetIntValue(int value)
+{
+    GF::SendCommandEvent(slider, wxEVT_SLIDER, value);
+}
+
+
+SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width, const wxString &name) :
     wxPanel(parent, wxID_ANY, position, { width, TEXTCNTRL_HEIGHT + 5 + 5 })
 {
+    SetName(parent->GetName() + "_" + name);
+
     int w1 = 50;
     int w2 = 17;
 
@@ -288,7 +286,32 @@ void SliderFloat::CalculateValue()
 
 void SliderFloat::OnEventSlider(wxCommandEvent &event)
 {
+    int value = event.GetInt();
+
+    if (slider->GetValue() != value)
+    {
+        slider->SetValue(value);
+    }
+
     CalculateValue();
+
+    event.Skip();
+}
+
+
+void SliderInt::OnEventSlider(wxCommandEvent &event)
+{
+    if (event.GetId() == slider->GetId())
+    {
+        int value = event.GetInt();
+
+        text->SetLabel(wxString::Format("%d", value));
+
+        if (slider->GetValue() != value)
+        {
+            slider->SetValue(value);
+        }
+    }
 
     event.Skip();
 }
@@ -335,8 +358,8 @@ void SliderFloat::OnEventTimer(wxTimerEvent &event)
 }
 
 
-SliderFloatPercents::SliderFloatPercents(wxWindow *parent, const wxPoint &position, int width, int _min_percents, int _max_percents) :
-    SliderFloat(parent, position, width),
+SliderFloatPercents::SliderFloatPercents(wxWindow *parent, const wxPoint &position, int width, int _min_percents, int _max_percents, const wxString &name) :
+    SliderFloat(parent, position, width, name),
     min_percents(_min_percents),
     max_percents(_max_percents)
 {
