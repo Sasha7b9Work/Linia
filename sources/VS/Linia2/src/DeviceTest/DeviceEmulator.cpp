@@ -27,7 +27,34 @@ void DeviceEmulator::SetCallbackReadData(void (* /*func*/)(int16))
 }
 
 
-void DeviceEmulator::WriteSchemeInclusion(StateJack::E /*chC*/, StateJack::E /*chB*/, StateJack::E /*chS*/)
+void DeviceEmulator::SchemeInclusion(StateJack::E /*chC*/, StateJack::E /*chB*/, StateJack::E /*chS*/)
+{
+
+}
+
+
+//------------------------------------------------------------------------------------------------------------
+
+
+void DeviceEmulator::ChannelC_RangeSourceU(RangeU::E)
+{
+
+}
+
+
+void DeviceEmulator::ChannelC_RangeMeasU(RangeU::E)
+{
+
+}
+
+
+void DeviceEmulator::ChannelC_RangeMeasI(RangeI::E)
+{
+
+}
+
+
+void DeviceEmulator::ChannelC_LimitSourceU(int /*min*/, int /*max*/)
 {
 
 }

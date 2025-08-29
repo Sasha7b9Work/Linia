@@ -15,9 +15,17 @@ public:
 
     virtual void SetCallbackReadData(void (*func)(int16));
 
-    virtual void WriteSchemeInclusion(StateJack::E chC, StateJack::E chB, StateJack::E chS);
+    virtual void SchemeInclusion(StateJack::E chC, StateJack::E chB, StateJack::E chS);
 
     //------------------------------------------------------------------------------------------------------------
+
+    virtual void ChannelC_RangeSourceU(RangeU::E);
+
+    virtual void ChannelC_RangeMeasU(RangeU::E);
+
+    virtual void ChannelC_RangeMeasI(RangeI::E);
+
+    virtual void ChannelC_LimitSourceU(int min, int max);
 
 private:
     virtual ~DeviceEmulator() { }
