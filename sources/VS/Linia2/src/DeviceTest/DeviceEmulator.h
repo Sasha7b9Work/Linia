@@ -27,7 +27,9 @@ public:
 
     virtual void ChannelC_LimitSourceU(int min, int max);
 
-    virtual void ChannelB_ModeSource(ModeSource::E);
+    //------------------------------------------------------------------------------------------------------------
+
+    virtual void ChannelBS_ModeSource(Channel::E, ModeSource::E);
 
     virtual void ChannelB_RangeStep(RangeU::E);
     virtual void ChannelB_RangeStep(RangeI::E);
@@ -50,7 +52,7 @@ public:
 
     virtual void ChannelB_ThresholdLimit(int16);
 
-    virtual void ChannelS_ModeSource(ModeSource::E);
+    //------------------------------------------------------------------------------------------------------------
 
     virtual void ChannelS_RangeStep(RangeU::E);
     virtual void ChannelS_RangeStep(RangeI::E);

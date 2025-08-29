@@ -60,7 +60,7 @@ void DeviceEmulator::ChannelC_LimitSourceU(int /*min*/, int /*max*/)
 }
 
 
-void DeviceEmulator::ChannelB_ModeSource(ModeSource::E)
+void DeviceEmulator::ChannelBS_ModeSource(Channel::E, ModeSource::E)
 {
 
 }
@@ -133,12 +133,6 @@ void DeviceEmulator::ChannelB_RangeLimit(RangeI::E)
 
 
 void DeviceEmulator::ChannelB_ThresholdLimit(int16)
-{
-
-}
-
-
-void DeviceEmulator::ChannelS_ModeSource(ModeSource::E)
 {
 
 }
