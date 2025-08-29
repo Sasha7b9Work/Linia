@@ -66,19 +66,43 @@ void DeviceEmulator::ChannelB_ModeSource(ModeSource::E)
 }
 
 
-void DeviceEmulator::ChannelB_AmplitudeStep(RangeU::E)
+void DeviceEmulator::ChannelB_RangeStep(RangeU::E)
 {
 
 }
 
 
-void DeviceEmulator::ChannelB_AmplitudeStep(RangeI::E)
+void DeviceEmulator::ChannelB_RangeStep(RangeI::E)
 {
 
 }
 
 
 void DeviceEmulator::ChannelB_NumberSteps(int)
+{
+
+}
+
+
+void DeviceEmulator::ChannelB_AmplitudeStep(int16)
+{
+
+}
+
+
+void DeviceEmulator::ChannelB_AutoSetZero(bool)
+{
+
+}
+
+
+void DeviceEmulator::ChannelB_Offset(int16)
+{
+
+}
+
+
+void DeviceEmulator::ChannelB_ModeMeas(ModeMeas::E)
 {
 
 }

@@ -29,11 +29,19 @@ public:
 
     virtual void ChannelB_ModeSource(ModeSource::E);
 
-    virtual void ChannelB_AmplitudeStep(RangeU::E);
+    virtual void ChannelB_RangeStep(RangeU::E);
 
-    virtual void ChannelB_AmplitudeStep(RangeI::E);
+    virtual void ChannelB_RangeStep(RangeI::E);
 
     virtual void ChannelB_NumberSteps(int);
+
+    virtual void ChannelB_AmplitudeStep(int16);
+
+    virtual void ChannelB_AutoSetZero(bool);
+
+    virtual void ChannelB_Offset(int16);
+
+    virtual void ChannelB_ModeMeas(ModeMeas::E);
 
 private:
     virtual ~DeviceEmulator() { }

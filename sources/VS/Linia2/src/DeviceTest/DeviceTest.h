@@ -15,31 +15,43 @@ public:
     virtual void SetCallbackReadData(void (*func)(int16)) = 0;
 
     // Схема включения всех каналов
-    virtual void SchemeInclusion(StateJack::E chC, StateJack::E chB, StateJack::E chS) = 0;
+    virtual void SchemeInclusion(StateJack::E chC, StateJack::E chB, StateJack::E chS) = 0;     // 1
 
     //------------------------------------------------------------------------------------------------------------
 
     // Диапазон источника U в канале C
-    virtual void ChannelC_RangeSourceU(RangeU::E) = 0;
+    virtual void ChannelC_RangeSourceU(RangeU::E) = 0;                  // 5
 
     // Диапазон измерителя U в канале C
-    virtual void ChannelC_RangeMeasU(RangeU::E) = 0;
+    virtual void ChannelC_RangeMeasU(RangeU::E) = 0;                    // 6
 
     // Диапазон измерителя I в канале C
-    virtual void ChannelC_RangeMeasI(RangeI::E) = 0;
+    virtual void ChannelC_RangeMeasI(RangeI::E) = 0;                    // 7
 
     // Ограничение источника U от 0 до 100%
-    virtual void ChannelC_LimitSourceU(int min, int max) = 0;
+    virtual void ChannelC_LimitSourceU(int min, int max) = 0;           // 8
 
     // Режим источника в канале B
-    virtual void ChannelB_ModeSource(ModeSource::E) = 0;
+    virtual void ChannelB_ModeSource(ModeSource::E) = 0;                // 9
 
     // Диапазон амплитуды ступени в канале B
-    virtual void ChannelB_AmplitudeStep(RangeU::E) = 0;
-    virtual void ChannelB_AmplitudeStep(RangeI::E) = 0;
+    virtual void ChannelB_RangeStep(RangeU::E) = 0;                     // 10
+    virtual void ChannelB_RangeStep(RangeI::E) = 0;
 
     // Число ступеней в канале B
-    virtual void ChannelB_NumberSteps(int) = 0;
+    virtual void ChannelB_NumberSteps(int) = 0;                         // 11
+
+    // Значение амплитуды ступени в канале B
+    virtual void ChannelB_AmplitudeStep(int16) = 0;                     // 12
+
+    // Включение/выключение автоустановки нуля (или калибровки)
+    virtual void ChannelB_AutoSetZero(bool) = 0;                        // 13
+
+    // Смещение в канале B
+    virtual void ChannelB_Offset(int16) = 0;                            // 14
+
+    // Режим измерителя в канале B
+    virtual void ChannelB_ModeMeas(ModeMeas::E) = 0;                    // 15
 
     virtual ~IDeviceTest() { }
 };

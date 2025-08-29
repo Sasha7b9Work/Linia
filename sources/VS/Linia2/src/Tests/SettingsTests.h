@@ -95,3 +95,15 @@ struct ModeSource
         Count
     };
 };
+
+
+// Режим измерителя
+struct ModeMeas
+{
+    enum E
+    {
+        U,
+        I,
+        Count
+    };
+};
