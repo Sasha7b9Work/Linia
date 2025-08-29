@@ -107,7 +107,7 @@ void SliderFloat::Pack()
 
 void SliderFloat::Unpack()
 {
-    int value = wxClip<int>(Config::ReadInt(GetName()), slider->GetMin(), slider->GetMin());
+    int value = wxClip<int>(Config::ReadInt(GetName()), slider->GetMin(), slider->GetMax());
 
     SetIntValue(value);
 }
