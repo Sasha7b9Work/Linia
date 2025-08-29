@@ -30,7 +30,6 @@ public:
     virtual void ChannelB_ModeSource(ModeSource::E);
 
     virtual void ChannelB_RangeStep(RangeU::E);
-
     virtual void ChannelB_RangeStep(RangeI::E);
 
     virtual void ChannelB_NumberSteps(int);
@@ -42,6 +41,30 @@ public:
     virtual void ChannelB_Offset(int16);
 
     virtual void ChannelB_ModeMeas(ModeMeas::E);
+
+    virtual void ChannelB_RangeMeas(RangeU::E);
+    virtual void ChannelB_RangeMeas(RangeI::E);
+
+    virtual void ChannelB_RangeLimit(RangeU::E);
+    virtual void ChannelB_RangeLimit(RangeI::E);
+
+    virtual void ChannelB_ThresholdLimit(int16);
+
+    virtual void ChannelS_ModeSource(ModeSource::E);
+
+    virtual void ChannelS_RangeStep(RangeU::E);
+    virtual void ChannelS_RangeStep(RangeI::E);
+
+    virtual void ChannelS_NumberSteps(int);
+
+    virtual void ChannelS_AmplitudeStep(int16);
+
+    virtual void ChannelS_Offset(int16);
+
+    virtual void ChannelS_ModeMeas(ModeMeas::E);
+
+    virtual void ChannelS_RangeMeas(RangeU::E);
+    virtual void ChannelS_RangeMeas(RangeI::E);
 
 private:
     virtual ~DeviceEmulator() { }
