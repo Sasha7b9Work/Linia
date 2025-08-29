@@ -15,6 +15,9 @@ public:
 
     static PanelModel *self;
 
+    // Вызывается после загрузки/выгрузки модели
+    void Init();
+
 private:
 
     wxPanel *panel_graph = nullptr;

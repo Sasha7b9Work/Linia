@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Panels/Panel04_Model.h"
 #include "Utils/GlobalFunctions.h"
+#include "Tests/Model.h"
 
 
 PanelModel *PanelModel::self = nullptr;
@@ -23,10 +24,21 @@ PanelModel::PanelModel(wxWindow* parent) :
     panel_graph = new wxPanel(this, wxID_ANY, { 0, height_name }, { WIDTH, HEIGHT - height_name }, wxTAB_TRAVERSAL | wxSUNKEN_BORDER);
 
     panel_graph->SetBackgroundColour(*wxWHITE);
+
+    Init();
 }
 
 
 void PanelModel::SetName(const wxString &_name)
 {
     txtName->SetLabel(_name);
+}
+
+
+void PanelModel::Init()
+{
+    if (!Model::IsLoaded())
+    {
+        SetName("Файл модели");
+    }
 }

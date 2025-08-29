@@ -5,5 +5,5 @@
 
 bool Model::IsLoaded()
 {
-    return true;
+    return false;
 }
