@@ -2,13 +2,16 @@
 #include "defines.h"
 #include "Controls/Slider.h"
 #include "Utils/GlobalFunctions.h"
+#include "Utils/Configurator.h"
 
 
-SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _min, int _max) :
+SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _min, int _max, const wxString &_name) :
     wxPanel(parent, wxID_ANY, position, { width + 5, TEXTCNTRL_HEIGHT + 5 + 5 + 5 }),
     min(_min),
     max(_max)
 {
+    SetName(parent->GetName() + "_" + _name);
+
     int w1 = 20;
     int w2 = 17;
 
@@ -46,7 +49,14 @@ void SliderInt::OnEventSlider(wxCommandEvent &event)
 {
     if (event.GetId() == slider->GetId())
     {
-        text->SetLabel(wxString::Format("%d", event.GetInt()));
+        int value = event.GetInt();
+
+        text->SetLabel(wxString::Format("%d", value));
+
+        if (slider->GetValue() != value)
+        {
+            slider->SetValue(value);
+        }
     }
 
     event.Skip();
@@ -90,6 +100,31 @@ void SliderInt::OnEventTimer(wxTimerEvent &event)
     GF::SendCommandEvent(slider, wxEVT_SLIDER, slider->GetValue());
 
     event.Skip();
+}
+
+
+void SliderInt::Pack()
+{
+    Config::WriteInt(GetName(), GetValue());
+}
+
+
+void SliderInt::Unpack()
+{
+    int value = wxClip<int>(Config::ReadInt(GetName(), 0), min, max);
+
+    SetValue(value);
+}
+
+int SliderInt::GetValue() const
+{
+    return slider->GetValue();
+}
+
+
+void SliderInt::SetValue(int value)
+{
+    GF::SendCommandEvent(slider, wxEVT_SLIDER, value);
 }
 
 

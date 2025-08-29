@@ -1,12 +1,19 @@
 ﻿// 2025/08/13 14:18:41 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Controls/Controls.h"
 
 
-class SliderInt : public wxPanel
+class SliderInt : public wxPanel, public Serializer
 {
 public:
 
-    SliderInt(wxWindow *parent, const wxPoint &position, int width, int min, int max);
+    SliderInt(wxWindow *parent, const wxPoint &position, int width, int min, int max, const wxString &name);
+
+    virtual void Pack() override;
+    virtual void Unpack() override;
+
+    int GetValue() const;
+    void SetValue(int);
 
 private:
 

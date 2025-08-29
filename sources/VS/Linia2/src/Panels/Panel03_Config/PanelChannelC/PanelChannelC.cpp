@@ -117,7 +117,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
         y += 20;
 
         int width = 180;
-        spinStart = new SliderInt(boxSource, { 10, SD::Y_SB(y) }, width, 0, 100);
+        spinStart = new SliderInt(boxSource, { 10, SD::Y_SB(y) }, width, 0, 100, "spinStart");
 
         y += 40;
 
@@ -125,7 +125,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
 
         y += 20;
 
-        spinStart = new SliderInt(boxSource, { 10, SD::Y_SB(y) }, width, 0, 100);
+        spinStop = new SliderInt(boxSource, { 10, SD::Y_SB(y) }, width, 0, 100, "spinStop");
     }
 
     boxSource->SetFont(StaticBox::TitleFont());
@@ -201,6 +201,9 @@ void PanelChannelC::Pack()
     comboDutyCycleIncrease->Pack();
     comboVoltage->Pack();
     comboCurrent->Pack();
+    spinStart->Pack();
+    spinStop->Pack();
+    comboRange->Pack();
 }
 
 
@@ -212,4 +215,7 @@ void PanelChannelC::Unpack()
     comboDutyCycleIncrease->Unpack();
     comboVoltage->Unpack();
     comboCurrent->Unpack();
+    spinStart->Unpack();
+    spinStop->Unpack();
+    comboRange->Unpack();
 }
