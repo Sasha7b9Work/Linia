@@ -78,6 +78,8 @@ void PanelRegister::SetDescriptionBits(int index, const std::vector<StructDescri
                 }
 
                 elem.field.combo = new CommandsCombo(painter, elem.desc, { x, (PainterRegister::W_B + 1) * 3 }, PainterRegister::W_B * elem.num_bits, names, "PanelRegister");
+
+                elem.field.combo->left_align = true;
             }
         }
     }
