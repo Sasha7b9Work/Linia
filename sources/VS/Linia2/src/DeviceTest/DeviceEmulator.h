@@ -7,11 +7,11 @@ class DeviceEmulator : public IDeviceTest
 {
 public:
 
-    virtual void Init() override;
+    virtual void Init();
 
-    virtual void Start() override;
+    virtual void Start();
 
-    virtual void Stop() override;
+    virtual void Stop();
 
     virtual void SetCallbackReadData(void (*)(int16));
 
