@@ -28,8 +28,6 @@ private:
 
     PanelRegister *panel = nullptr;
 
-    std::vector<wxCheckBox *> chbox;
-
     // Возвращает координаты верхнего левого угла отображения бита
     wxPoint CoordBit(int num_bit);
 

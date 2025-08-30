@@ -51,6 +51,11 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
 
     {
         painter = new PainterRegister(this, this, { 10, y0  } );
+
+        for (auto box : chbox)
+        {
+            box->Bind(wxEVT_CHECKBOX, &PanelRegister::OnEventCheckBox, this);
+        }
     }
 
     Bind(wxEVT_RIGHT_DOWN, [](wxMouseEvent &event)
@@ -81,7 +86,48 @@ void PanelRegister::SetDescriptionBits(int index, const std::vector<StructDescri
                 int x = painter->BitX(num_bit, bit_depth) - 4;
 
                 elem.field.text_ctrl = new TextCtrlNumber(painter, wxID_ANY, "", { x, (PainterRegister::W_B + 1) * 3 }, { PainterRegister::W_B * elem.num_bits, 20 }, 0, (1 << elem.num_bits) - 1);
+
+                elem.field.text_ctrl->Bind(wxEVT_TEXT, &PanelRegister::OnEventTextCtrl, this);
             }
         }
     }
+}
+
+
+void PanelRegister::OnEventTextCtrl(wxCommandEvent &event)
+{
+    int id = event.GetId();
+
+    for (auto &d : desc[0])
+    {
+        if (d.field.exist)
+        {
+            if (id == d.field.text_ctrl->GetId())
+            {
+                wxString str = d.field.text_ctrl->GetValue();
+
+                long value = 0;
+                str.ToLong(&value);
+
+                int index = d.first_bit;        // Индекс первого бита (младшего)
+
+                for (int i = 0; i < d.num_bits; i++)
+                {
+                    bool bit = value & 1;
+
+                    chbox[(uint)index++]->SetValue(bit);
+
+                    value >>= 1;
+                }
+
+                return;
+            }
+        }
+    }
+}
+
+
+void PanelRegister::OnEventCheckBox(wxCommandEvent &)
+{
+
 }

@@ -49,4 +49,9 @@ private:
     wxArrayString names_bits;                   // Названия битов
 
     std::vector<StructDescription> desc[2];     // Описания групп битов
+
+    std::vector<wxCheckBox *> chbox;
+
+    void OnEventTextCtrl(wxCommandEvent &);
+    void OnEventCheckBox(wxCommandEvent &);
 };

@@ -8,11 +8,11 @@ PainterRegister::PainterRegister(wxWindow *parent, PanelRegister *_panel, const 
     PainterRect(parent, position, { 750, 150 }),
     panel(_panel)
 {
-    chbox.resize((uint)panel->bit_depth );
+    panel->chbox.resize((uint)panel->bit_depth );
 
     for (int i = 0; i < panel->bit_depth; i++)
     {
-        chbox[(uint)i] = new wxCheckBox(this, wxID_ANY, "", { BitX(i, panel->bit_depth), W_B + 1 }, { W_B, W_B });
+        panel->chbox[(uint)i] = new wxCheckBox(this, wxID_ANY, "", { BitX(i, panel->bit_depth), W_B + 1 }, { W_B, W_B });
     }
 }
 
@@ -115,7 +115,7 @@ void PainterRegister::SetHintCheckBox(int num_bit)
         hint += desc1;
     }
 
-    chbox[(uint)num_bit]->SetToolTip(hint);
+    panel->chbox[(uint)num_bit]->SetToolTip(hint);
 }
 
 
