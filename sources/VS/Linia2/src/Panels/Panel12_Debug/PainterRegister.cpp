@@ -14,14 +14,7 @@ PainterRegister::PainterRegister(wxWindow *parent, PanelRegister *_panel, const 
     {
         wxCheckBox *chb = new wxCheckBox(this, wxID_ANY, "", { 40 + i * W_B, W_B + 1 }, { W_B, W_B });
 
-        if (panel->reverse_bits)
-        {
-            chbox[(uint)i] = chb;
-        }
-        else
-        {
-            chbox[(uint)(panel->bit_depth - i - 1)] = chb;
-        }
+        chbox[(uint)(panel->bit_depth - i - 1)] = chb;
     }
 }
 
@@ -86,18 +79,9 @@ void PainterRegister::OnPaint(wxPaintEvent &)
 
     gc->SetFont(GetDefaultFont(8), *wxBLACK);
 
-    if (panel->reverse_bits)
-    {
-        int y = 24;
-        gc->DrawText("DB0", 5, y);
-        gc->DrawText(wxString::Format("DB%d", panel->bit_depth - 1), W_B * panel->bit_depth + 45, y);
-    }
-    else
-    {
-        int y = 24;
-        gc->DrawText("DB0", W_B * panel->bit_depth + 45, y);
-        gc->DrawText(wxString::Format("DB%d", panel->bit_depth - 1), 5, y);
-    }
+    int y = 24;
+    gc->DrawText("DB0", W_B * panel->bit_depth + 45, y);
+    gc->DrawText(wxString::Format("DB%d", panel->bit_depth - 1), 5, y);
 
     delete gc;
 }
@@ -131,10 +115,7 @@ void PainterRegister::SetHintCheckBox(int num_bit)
 
 wxPoint PainterRegister::CoordBit(int num_bit)
 {
-    if (!panel->reverse_bits)
-    {
-        num_bit = panel->bit_depth - num_bit - 1;
-    }
+    num_bit = panel->bit_depth - num_bit - 1;
 
     return { 36 + num_bit * 20, 0 };
 }
@@ -151,10 +132,7 @@ void PainterRegister::DrawDescriptions(int index, wxGraphicsContext *gc)
         wxPoint coord = CoordBit(d.first_bit);
 
         int x = coord.x;
-        if (!panel->reverse_bits)
-        {
-            x -= (d.num_bits - 1) * W_B;
-        }
+        x -= (d.num_bits - 1) * W_B;
         int y = coord.y + 41 + index * W_B;
         int w = W_B * d.num_bits;
         int h = W_B;

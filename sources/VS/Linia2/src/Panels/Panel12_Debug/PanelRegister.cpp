@@ -5,10 +5,9 @@
 #include "Controls/TextControls.h"
 
 
-PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_depth, bool _reverse_bits, bool _additional_modes) :
+PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_depth, bool _additional_modes) :
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
     bit_depth(_bit_depth),
-    reverse_bits(_reverse_bits),
     additional_modes(_additional_modes)
 {
     SetName("PanelRegister");

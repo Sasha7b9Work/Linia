@@ -26,7 +26,7 @@ PageAD5300::PageAD5300(wxNotebook *parent) : PageChip(parent, "AD5300")
         names.push_back("X");
     }
 
-    PanelRegister *regInput = new PanelRegister(this, "Input Register", 16, false, false);
+    PanelRegister *regInput = new PanelRegister(this, "Input Register", 16, false);
 
     regInput->SetNamesBits(names);
 
