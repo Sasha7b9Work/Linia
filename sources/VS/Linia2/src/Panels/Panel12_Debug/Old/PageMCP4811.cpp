@@ -28,7 +28,7 @@ PageMCP4811::PageMCP4811(wxNotebook *parent) : PageChip(parent, "MCP4811")
         names.push_back("-");
         names.push_back("0");
 
-        PanelRegister *reg5_2 = new PanelRegister(this, "Register 5-2", 16, false);
+        PanelRegister *reg5_2 = new PanelRegister(this, "Register 5-2", 16);
 
         reg5_2->SetNamesBits(names);
 
