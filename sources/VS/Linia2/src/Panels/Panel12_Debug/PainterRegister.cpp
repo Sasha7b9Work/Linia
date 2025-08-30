@@ -5,7 +5,7 @@
 
 
 PainterRegister::PainterRegister(wxWindow *parent, PanelRegister *_panel, const wxPoint &position) :
-    PainterRect(parent, position, { 750, 150 }),
+    PainterRect(parent, position, { 750, 100 }),
     panel(_panel)
 {
     panel->chbox.resize((uint)panel->bit_depth );
@@ -95,14 +95,13 @@ void PainterRegister::OnPaint(wxPaintEvent &)
 
 void PainterRegister::SetHintCheckBox(int num_bit)
 {
-    wxString hint = wxString("Name : ") + panel->names_bits[(uint)num_bit];
+    wxString hint = panel->names_bits[(uint)num_bit];
 
     wxString desc0 = GetDescription(0, num_bit);
 
     if (!desc0.empty())
     {
         hint += "\n";
-        hint += "Descriptin 1 : ";
         hint += desc0;
     }
 

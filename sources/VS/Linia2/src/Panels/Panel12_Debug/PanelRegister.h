@@ -39,7 +39,7 @@ class PanelRegister : public wxPanel
 public:
 
     static const int WIDTH = 800;
-    static const int HEIGHT = 250;
+    static const int HEIGHT = 150;
 
     PanelRegister(wxWindow *parent, const wxString &title, int bit_depth);
 
