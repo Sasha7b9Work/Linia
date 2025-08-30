@@ -6,7 +6,8 @@
 class PageAD9952 : public PageChip
 {
 public:
-    PageAD9952(wxNotebook *parent);
+
+    PageAD9952(wxNotebook *);
 
     static PageAD9952 *self;
 };
