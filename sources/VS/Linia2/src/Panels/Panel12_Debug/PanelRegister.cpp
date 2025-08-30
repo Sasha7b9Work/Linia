@@ -74,12 +74,14 @@ void PanelRegister::SetDescriptionBits(int index, const std::vector<StructDescri
                 wxArrayString names;
                 for (auto &com : elem.field.commands)
                 {
-                    names.push_back(SU::BinToString(com.value, elem.num_bits) + " - " + com.desc);
+                    names.push_back(com.CreateFullLine(elem));
                 }
 
                 elem.field.combo = new CommandsCombo(painter, elem.desc, { x, (PainterRegister::W_B + 1) * 3 }, PainterRegister::W_B * elem.num_bits, names, "PanelRegister");
 
                 elem.field.combo->left_align = true;
+
+                elem.field.combo->Bind(wxEVT_COMBOBOX, &PanelRegister::OnEventCombo, this);
             }
         }
     }
@@ -112,10 +114,14 @@ void PanelRegister::OnEventTextCtrl(wxCommandEvent &event)
                     value >>= 1;
                 }
 
+                event.Skip();
+
                 return;
             }
         }
     }
+
+    event.Skip();
 }
 
 
@@ -149,6 +155,8 @@ void PanelRegister::OnEventCheckBox(wxCommandEvent &event)
 
                         d.field.text_ctrl->SetValue(wxString::Format("%d", value));
 
+                        event.Skip();
+
                         return;
                     }
                 }
@@ -156,4 +164,39 @@ void PanelRegister::OnEventCheckBox(wxCommandEvent &event)
             }
         }
     }
+
+    event.Skip();
+}
+
+
+wxString StructDescription::CommandStruct::CreateFullLine(StructDescription &d) const
+{
+    return SU::BinToString(value, d.num_bits) + " - " + desc;
+}
+
+
+void PanelRegister::OnEventCombo(wxCommandEvent &event)
+{
+    int id = event.GetId();
+
+    for (auto &d : desc[0])
+    {
+        if (d.field.need_commands)
+        {
+            if (d.field.combo->GetId() == id)
+            {
+                int num_bit = d.first_bit;
+                uint16 value = d.field.commands[(uint)event.GetInt()].value;
+
+                for (int i = 0; i < d.num_bits; i++)
+                {
+                    chbox[(uint)num_bit++]->SetValue((value & (1 << i)) != 0);
+                }
+
+                break;
+            }
+        }
+    }
+
+    event.Skip();
 }

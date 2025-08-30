@@ -13,8 +13,9 @@ struct StructDescription
 {
     struct CommandStruct
     {
-        uint8       value;  // Значение
-        wxString    desc;   // Описание данного значения
+        uint16   value;  // Значение
+        wxString desc;   // Описание данного значения
+        wxString CreateFullLine(StructDescription &) const;
     };
     int      first_bit;
     int      num_bits;
@@ -60,4 +61,5 @@ private:
 
     void OnEventTextCtrl(wxCommandEvent &);
     void OnEventCheckBox(wxCommandEvent &);
+    void OnEventCombo(wxCommandEvent &);
 };
