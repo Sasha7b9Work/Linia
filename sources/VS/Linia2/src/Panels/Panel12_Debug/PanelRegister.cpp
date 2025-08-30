@@ -76,7 +76,11 @@ void PanelRegister::SetDescriptionBits(int index, const std::vector<StructDescri
         {
             if (elem.field.exist)
             {
-                new TextCtrlNumber(painter, wxID_ANY, "", { 70, (PainterRegister::W_B + 1) * 3 }, { PainterRegister::W_B * elem.num_bits, 20 }, 0, (1 << elem.num_bits) - 1);
+                int num_bit = elem.first_bit + elem.num_bits - 1;
+
+                int x = painter->BitX(num_bit, bit_depth) - 4;
+
+                elem.field.text_ctrl = new TextCtrlNumber(painter, wxID_ANY, "", { x, (PainterRegister::W_B + 1) * 3 }, { PainterRegister::W_B * elem.num_bits, 20 }, 0, (1 << elem.num_bits) - 1);
             }
         }
     }

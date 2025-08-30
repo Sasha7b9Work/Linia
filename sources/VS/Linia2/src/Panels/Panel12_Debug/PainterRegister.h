@@ -19,7 +19,8 @@ public:
 
     wxFont GetDefaultFont(int size = -1);
 
-    int BitX(int) const;
+    // Возвращает координату X бита num_bit
+    int BitX(int num_bit, int all_bits) const;
 
 private:
 

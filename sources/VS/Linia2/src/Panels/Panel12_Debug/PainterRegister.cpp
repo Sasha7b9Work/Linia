@@ -8,14 +8,20 @@ PainterRegister::PainterRegister(wxWindow *parent, PanelRegister *_panel, const 
     PainterRect(parent, position, { 750, 150 }),
     panel(_panel)
 {
-    chbox.resize((uint)panel->bit_depth);
+    chbox.resize((uint)panel->bit_depth );
 
     for (int i = 0; i < panel->bit_depth; i++)
     {
-        wxCheckBox *chb = new wxCheckBox(this, wxID_ANY, "", { 40 + i * W_B, W_B + 1 }, { W_B, W_B });
-
-        chbox[(uint)(panel->bit_depth - i - 1)] = chb;
+        chbox[(uint)i] = new wxCheckBox(this, wxID_ANY, "", { BitX(i, panel->bit_depth), W_B + 1 }, { W_B, W_B });
     }
+}
+
+
+int PainterRegister::BitX(int num_bit, int all_bits) const
+{
+    int rigth = 40 + all_bits * W_B;
+
+    return rigth - (num_bit + 1) * W_B;
 }
 
 
