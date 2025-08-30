@@ -43,3 +43,18 @@ public:
 
     void SetUInt64(uint64);
 };
+
+
+class TextCtrlNumber : public wxTextCtrl
+{
+public:
+
+    TextCtrlNumber(wxWindow *, int, const wxString &, const wxPoint &, const wxSize &, int min, int max);
+
+private:
+
+    void OnEventChar(wxKeyEvent &);
+
+    int min;
+    int max;
+};

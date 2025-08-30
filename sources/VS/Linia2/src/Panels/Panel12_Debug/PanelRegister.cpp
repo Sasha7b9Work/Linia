@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Panels/Panel12_Debug/PanelRegister.h"
 #include "Panels/Panel12_Debug/PainterRegister.h"
+#include "Controls/TextControls.h"
 
 
 PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_depth, bool _reverse_bits, bool _additional_modes) :
@@ -76,7 +77,11 @@ void PanelRegister::SetDescriptionBits(int index, const std::vector<StructDescri
         {
             if (elem.value_field)
             {
-                new wxTextCtrl(painter, wxID_ANY, "0", { 70, 70 }, { 100, 20 });
+                wxIntegerValidator<int> validator;
+                validator.SetStyle(wxNUM_VAL_DEFAULT);
+                validator.SetRange(0, 200);
+
+                new TextCtrlNumber(painter, wxID_ANY, "", { 70, 70 }, { 100, 20 }, 0, (1 << elem.num_bits) - 1);
             }
         }
     }

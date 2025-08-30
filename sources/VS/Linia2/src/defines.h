@@ -22,6 +22,7 @@
 #include <wx/popupwin.h>
 #include <wx/scrolwin.h>
 #include <wx/combo.h>
+#include <wx/valnum.h>
 #include <map>
 #include <queue>
 #include <mutex>
