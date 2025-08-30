@@ -2,8 +2,7 @@
 #include "defines.h"
 #include "Panels/Panel12_Debug/NotebookChips.h"
 #include "Panels/Panel12_Debug/Old/PageAD5697.h"
-#include "Panels/Panel12_Debug/Old/PageAD9952.h"
-#include "Panels/Panel12_Debug/Old/PageMCP4811.h"
+#include "Panels/Panel12_Debug/PageAD5300.h"
 
 
 NotebookChips *NotebookChips::self = nullptr;
@@ -14,13 +13,11 @@ NotebookChips::NotebookChips(wxWindow *parent) :
 {
     self = this;
 
+    new PageAD5300(this);
     new PageAD5697(this);
-//    new PageAD9952(this);
-//    new PageMCP4811(this);
 
+    wxNotebook::AddPage(PageAD5300::self, PageAD5300::self->GetName());
     wxNotebook::AddPage(PageAD5697::self, PageAD5697::self->GetName());
-//    wxNotebook::AddPage(PageAD9952::self, PageAD9952::self->GetName());
-//    wxNotebook::AddPage(PageMCP4811::self, PageMCP4811::self->GetName());
 
     wxWindowBase::Layout();
 }
