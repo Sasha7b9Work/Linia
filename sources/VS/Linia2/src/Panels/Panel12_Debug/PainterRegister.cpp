@@ -63,7 +63,7 @@ void PainterRegister::OnPaint(wxPaintEvent &)
     {
         if ((i % 8) == 0)
         {
-            wxBrush brush(wxColor(0xD0, 0xD0, 0xD0));
+            wxBrush brush(wxColor(0xF0, 0xF0, 0xF0));
 
             gc->SetBrush(pen_is_white ? brush : *wxWHITE_BRUSH);
             pen_is_white = !pen_is_white;
