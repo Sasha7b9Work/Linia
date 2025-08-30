@@ -25,7 +25,7 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
     int x0 = 10;
     int y0 = 40;
 
-    if(additional_modes)
+    if (additional_modes)
     {
         wxArrayString choices;
         choices.Add("Нижний уровень");
@@ -50,7 +50,7 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
     }
 
     {
-        painter = new PainterRegister(this, this, { 10, y0  } );
+        painter = new PainterRegister(this, this, { 10, y0 });
 
         for (auto box : chbox)
         {
@@ -133,13 +133,13 @@ void PanelRegister::OnEventCheckBox(wxCommandEvent &event)
 
     for (int i = 0; i < (int)chbox.size(); i++)
     {
-        if (chbox[(uint)i]->GetId() == id)                              // Нашли данный бит
+        if (chbox[(uint)i]->GetId() == id)                                  // Нашли данный бит
         {
             for (auto &d : desc[0])
             {
-                if (i >= d.first_bit && i < d.first_bit + d.num_bits)   // Нашли описатель поля, в которое входи данный бит
+                if (d.field.exist)
                 {
-                    if (d.field.exist)
+                    if (i >= d.first_bit && i < d.first_bit + d.num_bits)   // Нашли описатель поля, в которое входит данный бит
                     {
                         int value = 0;
 
