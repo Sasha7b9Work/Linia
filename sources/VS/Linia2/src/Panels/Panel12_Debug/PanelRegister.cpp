@@ -75,13 +75,9 @@ void PanelRegister::SetDescriptionBits(int index, const std::vector<StructDescri
     {
         for (auto &elem : desc[0])
         {
-            if (elem.value_field)
+            if (elem.field.exist)
             {
-                wxIntegerValidator<int> validator;
-                validator.SetStyle(wxNUM_VAL_DEFAULT);
-                validator.SetRange(0, 200);
-
-                new TextCtrlNumber(painter, wxID_ANY, "", { 70, 70 }, { 100, 20 }, 0, (1 << elem.num_bits) - 1);
+                new TextCtrlNumber(painter, wxID_ANY, "", { 70, (PainterRegister::W_B + 1) * 3 }, { PainterRegister::W_B * elem.num_bits, 20 }, 0, (1 << elem.num_bits) - 1);
             }
         }
     }

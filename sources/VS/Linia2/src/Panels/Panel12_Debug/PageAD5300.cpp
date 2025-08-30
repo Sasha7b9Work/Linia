@@ -32,7 +32,7 @@ PageAD5300::PageAD5300(wxNotebook *parent) : PageChip(parent, "AD5300")
 
     std::vector<StructDescription> desc0;
     desc0.push_back({ 0, 4, "not used" });
-    desc0.push_back({ 4, 8, "DATA BITS", true });
+    desc0.push_back({ 4, 8, "DATA BITS", { true } });
     desc0.push_back({ 12, 2, "POWER-DOWN MODES:\n"
         "00 - Normal operation\n"
         "01 - 1 kOhm to GNC\n"

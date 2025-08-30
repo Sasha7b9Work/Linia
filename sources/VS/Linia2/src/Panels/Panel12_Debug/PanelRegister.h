@@ -2,6 +2,7 @@
 #pragma once
 #include "Controls/ButtonsCombo.h"
 #include "Panels/Panel12_Debug/PainterRegister.h"
+#include "Controls/TextControls.h"
 
 
 // Визуальное представление регистра
@@ -12,7 +13,12 @@ struct StructDescription
     int      first_bit;
     int      num_bits;
     wxString desc;
-    bool     value_field = false;   // если true, то есть возможность вводить десятичное значение
+    struct DecField
+    {
+        bool exist = false; // если true, то есть возможность вводить десятичное значение
+        TextCtrlNumber *text_ctrl;
+    };
+    DecField field;
 };
 
 

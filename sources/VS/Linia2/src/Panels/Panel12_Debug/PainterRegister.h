@@ -19,6 +19,8 @@ public:
 
     wxFont GetDefaultFont(int size = -1);
 
+    int BitX(int) const;
+
 private:
 
     bool first_paint = true;
