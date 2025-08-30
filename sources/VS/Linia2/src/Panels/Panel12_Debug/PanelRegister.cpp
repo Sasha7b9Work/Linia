@@ -3,6 +3,7 @@
 #include "Panels/Panel12_Debug/PanelRegister.h"
 #include "Panels/Panel12_Debug/PainterRegister.h"
 #include "Controls/TextControls.h"
+#include "Utils/StringUtils.h"
 
 
 PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_depth) :
@@ -62,6 +63,21 @@ void PanelRegister::SetDescriptionBits(int index, const std::vector<StructDescri
                 elem.field.text_ctrl = new TextCtrlNumber(painter, wxID_ANY, "", { x, (PainterRegister::W_B + 1) * 3 }, { PainterRegister::W_B * elem.num_bits, 20 }, 0, (1 << elem.num_bits) - 1);
 
                 elem.field.text_ctrl->Bind(wxEVT_TEXT, &PanelRegister::OnEventTextCtrl, this);
+            }
+
+            if (elem.field.need_commands)
+            {
+                int num_bit = elem.first_bit + elem.num_bits - 1;
+
+                int x = painter->BitX(num_bit, bit_depth) - 4;
+
+                wxArrayString names;
+                for (auto &com : elem.field.commands)
+                {
+                    names.push_back(SU::BinToString(com.value, elem.num_bits) + " - " + com.desc);
+                }
+
+                elem.field.combo = new CommandsCombo(painter, elem.desc, { x, (PainterRegister::W_B + 1) * 3 }, PainterRegister::W_B * elem.num_bits, names, "PanelRegister");
             }
         }
     }

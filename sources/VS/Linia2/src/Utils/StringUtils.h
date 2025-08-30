@@ -61,6 +61,8 @@ private:
 
 namespace SU
 {
+    wxString BinToString(uint value, int bit_deth);
+
     // Переводит в double строки типа "20 nA", "2 kV"
     double StringToDouble(const wxString &);
 
@@ -87,6 +89,4 @@ namespace SU
 
     // Оставить number последних символов от in. Если строка меньше, то в начале добавить пробелы
     pchar LeaveTheLastOnes(pchar in, int number);
-
-//    uint CalculateCRC32(const void *buffer, int size);
 };

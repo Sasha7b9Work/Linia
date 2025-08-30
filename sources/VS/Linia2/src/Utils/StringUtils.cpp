@@ -295,3 +295,18 @@ double SU::StringToDouble(const wxString &str)
 
     return int_value * multiplier;
 }
+
+
+wxString SU::BinToString(uint value, int bit_deth)
+{
+    wxString result;
+
+    for (int i = 0; i < bit_deth; i++)
+    {
+        int bit = (int)(value & (1 << i));
+
+        result.Prepend(bit == 0 ? '0' : '1');
+    }
+
+    return result;
+}
