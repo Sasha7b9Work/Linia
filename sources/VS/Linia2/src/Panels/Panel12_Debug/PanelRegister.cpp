@@ -50,7 +50,7 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
     }
 
     {
-        new PainterRegister(this, this, { 10, y0  } );
+        painter = new PainterRegister(this, this, { 10, y0  } );
     }
 
     Bind(wxEVT_RIGHT_DOWN, [](wxMouseEvent &event)
@@ -69,4 +69,15 @@ void PanelRegister::SetNamesBits(const wxArrayString &_names)
 void PanelRegister::SetDescriptionBits(int index, const std::vector<StructDescription> &_desc)
 {
     desc[index] = _desc;
+
+    if (index == 0)
+    {
+        for (auto &elem : desc[0])
+        {
+            if (elem.value_field)
+            {
+                new wxTextCtrl(painter, wxID_ANY, "0", { 70, 70 }, { 100, 20 });
+            }
+        }
+    }
 }

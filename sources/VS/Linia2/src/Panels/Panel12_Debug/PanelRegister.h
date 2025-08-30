@@ -11,6 +11,7 @@ struct StructDescription
     int      first_bit;
     int      num_bits;
     wxString desc;
+    bool     value_field = false;   // если true, то есть возможность вводить десятичное значение
 };
 
 
@@ -36,6 +37,8 @@ private:
     int bit_depth = 0;
     int reverse_bits = 0;
     bool additional_modes = false;
+
+    PainterRegister *painter = nullptr;
 
     wxArrayString names_bits;                   // Названия битов
 
