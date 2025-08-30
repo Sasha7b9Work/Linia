@@ -127,7 +127,40 @@ void PanelRegister::OnEventTextCtrl(wxCommandEvent &event)
 }
 
 
-void PanelRegister::OnEventCheckBox(wxCommandEvent &)
+void PanelRegister::OnEventCheckBox(wxCommandEvent &event)
 {
+    int id = event.GetId();
 
+    for (int i = 0; i < (int)chbox.size(); i++)
+    {
+        if (chbox[(uint)i]->GetId() == id)                              // Нашли данный бит
+        {
+            for (auto &d : desc[0])
+            {
+                if (i >= d.first_bit && i < d.first_bit + d.num_bits)   // Нашли описатель поля, в которое входи данный бит
+                {
+                    if (d.field.exist)
+                    {
+                        int value = 0;
+
+                        int counter = 0;
+
+                        for (int bit = d.first_bit; bit < d.first_bit + d.num_bits; bit++)
+                        {
+                            if (chbox[(uint)bit]->IsChecked())
+                            {
+                                value |= (1 << counter);
+                            }
+
+                            counter++;
+                        }
+
+                        d.field.text_ctrl->SetValue(wxString::Format("%d", value));
+
+                        return;
+                    }
+                }
+            }
+        }
+    }
 }
