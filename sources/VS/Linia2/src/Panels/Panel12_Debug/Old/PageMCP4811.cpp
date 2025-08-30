@@ -1,6 +1,6 @@
 ﻿// 2025/6/3 22:32:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel12_Debug/PageMCP4811.h"
+#include "Panels/Panel12_Debug/Old/PageMCP4811.h"
 
 
 PageMCP4811 *PageMCP4811::self = nullptr;

@@ -1,9 +1,9 @@
 ﻿// 2025/6/3 14:06:23 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/Panel12_Debug/NotebookChips.h"
-#include "Panels/Panel12_Debug/PageAD5697.h"
-#include "Panels/Panel12_Debug/PageAD9952.h"
-#include "Panels/Panel12_Debug/PageMCP4811.h"
+#include "Panels/Panel12_Debug/Old/PageAD5697.h"
+#include "Panels/Panel12_Debug/Old/PageAD9952.h"
+#include "Panels/Panel12_Debug/Old/PageMCP4811.h"
 
 
 NotebookChips *NotebookChips::self = nullptr;

@@ -1,6 +1,6 @@
 ﻿// 2025/6/3 22:47:09 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel12_Debug/PageAD5697.h"
+#include "Panels/Panel12_Debug/Old/PageAD5697.h"
 #include "Panels/Panel12_Debug/PanelRegister.h"
 
 
