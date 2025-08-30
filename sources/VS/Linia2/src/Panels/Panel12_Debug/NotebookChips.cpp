@@ -15,12 +15,12 @@ NotebookChips::NotebookChips(wxWindow *parent) :
     self = this;
 
     new PageAD5697(this);
-    new PageAD9952(this);
-    new PageMCP4811(this);
+//    new PageAD9952(this);
+//    new PageMCP4811(this);
 
     wxNotebook::AddPage(PageAD5697::self, PageAD5697::self->GetName());
-    wxNotebook::AddPage(PageAD9952::self, PageAD9952::self->GetName());
-    wxNotebook::AddPage(PageMCP4811::self, PageMCP4811::self->GetName());
+//    wxNotebook::AddPage(PageAD9952::self, PageAD9952::self->GetName());
+//    wxNotebook::AddPage(PageMCP4811::self, PageMCP4811::self->GetName());
 
     wxWindowBase::Layout();
 }
