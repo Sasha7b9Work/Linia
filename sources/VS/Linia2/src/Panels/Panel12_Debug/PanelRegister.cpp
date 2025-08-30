@@ -53,7 +53,7 @@ void PanelRegister::SetDescriptionBits(int index, const std::vector<StructDescri
     {
         for (auto &elem : desc[0])
         {
-            if (elem.field.exist)
+            if (elem.field.need_text_ctrl)
             {
                 int num_bit = elem.first_bit + elem.num_bits - 1;
 
@@ -74,7 +74,7 @@ void PanelRegister::OnEventTextCtrl(wxCommandEvent &event)
 
     for (auto &d : desc[0])
     {
-        if (d.field.exist)
+        if (d.field.need_text_ctrl)
         {
             if (id == d.field.text_ctrl->GetId())
             {
@@ -111,7 +111,7 @@ void PanelRegister::OnEventCheckBox(wxCommandEvent &event)
         {
             for (auto &d : desc[0])
             {
-                if (d.field.exist)
+                if (d.field.need_text_ctrl)
                 {
                     if (i >= d.first_bit && i < d.first_bit + d.num_bits)   // Нашли описатель поля, в которое входит данный бит
                     {
@@ -134,6 +134,7 @@ void PanelRegister::OnEventCheckBox(wxCommandEvent &event)
                         return;
                     }
                 }
+
             }
         }
     }

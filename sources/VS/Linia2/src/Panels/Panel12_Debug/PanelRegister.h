@@ -3,6 +3,7 @@
 #include "Controls/ButtonsCombo.h"
 #include "Panels/Panel12_Debug/PainterRegister.h"
 #include "Controls/TextControls.h"
+#include "Panels/Panel12_Debug/CommandsCombo.h"
 
 
 // Визуальное представление регистра
@@ -10,13 +11,21 @@
 
 struct StructDescription
 {
+    struct CommandStruct
+    {
+        uint8       value;  // Значение
+        wxString    desc;   // Описание данного значения
+    };
     int      first_bit;
     int      num_bits;
     wxString desc;
     struct DecField
     {
-        bool exist = false; // если true, то есть возможность вводить десятичное значение
-        TextCtrlNumber *text_ctrl;
+        bool need_text_ctrl = false;            // если true, то есть возможность вводить десятичное значение
+        bool need_commands = false;             // если true, то есть возможность выбирать команды
+        std::vector<CommandStruct> commands;     // Сюда ложим нужные команды, чтобы потом создать combo
+        TextCtrlNumber *text_ctrl = nullptr;
+        CommandsCombo *combo = nullptr;
     };
     DecField field;
 };
