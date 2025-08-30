@@ -4,6 +4,7 @@
 #include "Panels/Panel12_Debug/PainterRegister.h"
 #include "Controls/TextControls.h"
 #include "Utils/StringUtils.h"
+#include "Panels/Panel12_Debug/CommandsCombo.h"
 
 
 PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_depth) :
