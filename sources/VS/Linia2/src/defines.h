@@ -1,6 +1,11 @@
 ﻿// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
+
+#define VERSION_BUILD 2
+#define DATE_BUILD "2025-08-31 20:19:37"
+
+
 #define WIN32_LEAN_AND_MEAN
 #pragma warning (push, 0)
 #include <wx/config.h>
