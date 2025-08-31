@@ -64,9 +64,6 @@ public:
 
     void SetFileBitmap(const wxString &file_bitmap);
 
-    void Pack();
-    void Unpack();
-
 private:
 
     Bitmap bitmap;
@@ -92,3 +89,20 @@ private:
 
     void OnEventButton(wxCommandEvent &);
 };
+
+
+class ButtonBitmapChoiceEvent : public wxCommandEvent
+{
+public:
+    ButtonBitmapChoiceEvent(wxEventType eventType, int id) : wxCommandEvent(eventType, id) { }
+    ButtonBitmapChoiceEvent(const ButtonBitmapChoiceEvent &other) : wxCommandEvent(other) { }
+
+    virtual wxEvent *Clone() const
+    {
+        return new ButtonBitmapChoiceEvent(*this);
+    }
+};
+
+
+wxDECLARE_EVENT(EVT_BUTTON_BITMAP_CHOICE, ButtonBitmapChoiceEvent);
+

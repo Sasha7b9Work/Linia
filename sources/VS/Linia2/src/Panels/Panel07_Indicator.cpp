@@ -5,6 +5,7 @@
 #include "MainWindow.h"
 #include "Utils/SystemDepend.h"
 #include "Controls/Bitmap.h"
+#include "DeviceTest/DeviceTest.h"
 
 
 PanelIndicator *PanelIndicator::self = nullptr;
@@ -35,16 +36,24 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
     font.SetWeight(wxFONTWEIGHT_BOLD);
     text->SetFont(font);
 
-    button_start->Bind(wxEVT_BUTTON, &PanelIndicator::OnEventButton, this);
+    button_start->Bind(EVT_BUTTON_BITMAP_CHOICE, &PanelIndicator::OnEventButton, this);
 }
 
 
-void PanelIndicator::OnEventButton(wxCommandEvent &event)
+void PanelIndicator::OnEventButton(ButtonBitmapChoiceEvent &event)
 {
     int id = event.GetId();
 
     if (id == button_start->GetId())
     {
+        if (event.GetInt() == 0)
+        {
+            devicet->Stop();
+        }
+        else if (event.GetInt() == 1)
+        {
+            devicet->Start();
+        }
     }
 
     event.Skip();

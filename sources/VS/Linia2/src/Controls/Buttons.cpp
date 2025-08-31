@@ -5,6 +5,11 @@
 #include "Utils/GlobalFunctions.h"
 #include "Controls/Bitmap.h"
 #include "Utils/SystemDepend.h"
+#include "Application.h"
+
+wxDEFINE_EVENT(EVT_BUTTON_BITMAP_CHOICE, ButtonBitmapChoiceEvent);
+
+
 
 
 ButtonColor::ButtonColor(wxWindow *parent, int id, const wxString &title, wxPoint position, wxSize size, PainterRect *painter) :
@@ -135,18 +140,6 @@ void ButtonBitmap::SetFileBitmap(const wxString &file_bitmap)
 }
 
 
-void ButtonBitmap::Pack()
-{
-
-}
-
-
-void ButtonBitmap::Unpack()
-{
-
-}
-
-
 ButtonBitmapChoice::ButtonBitmapChoice(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxArrayString &_files, const wxString &_name) :
     ButtonBitmap(parent, pos, size, _files[0], _name),
     files(_files)
@@ -167,6 +160,8 @@ void ButtonBitmapChoice::OnEventButton(wxCommandEvent &event)
         }
 
         SetCurrentValue(choice);
+
+        GF::SendCommandEvent(this, EVT_BUTTON_BITMAP_CHOICE, choice);
     }
 
     event.Skip();
