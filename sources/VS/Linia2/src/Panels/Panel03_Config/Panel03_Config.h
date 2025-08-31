@@ -23,6 +23,8 @@ public:
 
     void Unpack();
 
+    void EnableSubPanels(bool);
+
 private:
 
     wxToggleButton *btnScheme = nullptr,

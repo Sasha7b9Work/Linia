@@ -2,8 +2,8 @@
 #pragma once
 
 
-#define VERSION_BUILD 4
-#define DATE_BUILD "2025-08-31 20:32:56"
+#define VERSION_BUILD 5
+#define DATE_BUILD "2025-08-31 20:50:24"
 
 
 #define WIN32_LEAN_AND_MEAN
@@ -28,6 +28,7 @@
 #include <wx/scrolwin.h>
 #include <wx/combo.h>
 #include <wx/valnum.h>
+#include <wx/datetime.h>
 #include <map>
 #include <queue>
 #include <mutex>

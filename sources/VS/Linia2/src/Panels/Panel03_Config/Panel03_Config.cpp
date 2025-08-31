@@ -177,3 +177,12 @@ void PanelConfig::Unpack()
 
     SetCurrentPanel(Config::ReadString("CurrentPanel"));
 }
+
+
+void PanelConfig::EnableSubPanels(bool enable)
+{
+    for (auto &pan : str_panels)
+    {
+        pan.panel->Enable(enable);
+    }
+}

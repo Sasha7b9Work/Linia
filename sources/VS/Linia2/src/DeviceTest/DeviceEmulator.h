@@ -56,5 +56,23 @@ public:
     virtual void AutoSetZero(bool);
 
 private:
+
     virtual ~DeviceEmulator() { }
+
+    void (*callback_read_data)(int16) = nullptr;
+    StateJack::E jackC;
+    StateJack::E jackB;
+    StateJack::E jackS;
+
+    // Диапазон источника напряжения
+    RangeU::E range_source[Chan::Count];
+
+    // Диапазон измерителя напряжения
+    RangeU::E range_measU[Chan::Count];
+
+    // Диапазон измерителя тока
+    RangeI::E range_measI[Chan::Count];
+
+    // Ограничение источника U в канале C в процентах
+    wxRange limit_sourceC;
 };
