@@ -43,14 +43,15 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
 void PanelIndicator::OnEventButton(ButtonBitmapChoiceEvent &event)
 {
     int id = event.GetId();
+    int value = event.GetInt();
 
     if (id == button_start->GetId())
     {
-        if (event.GetInt() == 0)
+        if (value == 0)
         {
             devicet->Stop();
         }
-        else if (event.GetInt() == 1)
+        else if (value == 1)
         {
             devicet->Start();
         }

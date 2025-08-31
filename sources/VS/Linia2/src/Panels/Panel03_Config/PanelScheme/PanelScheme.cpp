@@ -50,32 +50,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
     const int width_category = 77;
 
-    StaticBox *boxCategory = new StaticBox(this, "Категория", { x, SD::DSBY() }, { width_category, 90 });
-
-    {
-        wxArrayString files;
-
-        for (int i = 0; i < 10; i++)
-        {
-            files.push_back(wxString::Format("sch/cat%d.bmp", i + 1));
-        }
-
-        wxArrayString tooltips =
-        {
-            "Диод",
-            "Тиристор",
-            "Биполярный NPN-транзистор (трёхполюсный)",
-            "Биполярный PNP-транзистор (трёхполюсный)",
-            "Полевой или МОП транзистор NMOS (трёхполюсный)",
-            "Полевой или МОП транзистор PMOS (трёхполюсный)",
-            "Биполярный NPN-транзистор (четырёхполюсный)",
-            "Биполярный PNP-транзистор (четырёхполюсный)",
-            "Полевой или МОП транзистор NMOS (четырёхполюсный)",
-            "Полевой или МОП транзистор PMOS (четырёхполюсный)"
-        };
-
-        comboCategory = new BmpButtonsCombo(boxCategory, "Категория", { 18, SD::XY0().y }, { 32, 42 }, files, tooltips, 0, 4, "comboCategory");
-    }
+    StaticBox *boxCategory = new StaticBox(this, "", { x, SD::DSBY() }, { width_category, 90 });
 
     boxCategory->SetFont(StaticBox::TitleFont());
 
@@ -147,6 +122,36 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         painter = new PainterScheme(boxCommutation, { 15, SD::Y_SB(220) }, { 170, 130 }, boxCommutation->GetBackgroundColour());
 
+        {
+            wxArrayString files;
+
+            for (int i = 0; i < 10; i++)
+            {
+                files.push_back(wxString::Format("sch/cat%d.bmp", i + 1));
+            }
+
+            wxArrayString tooltips =
+            {
+                "Диод",
+                "Тиристор",
+                "Биполярный NPN-транзистор (трёхполюсный)",
+                "Биполярный PNP-транзистор (трёхполюсный)",
+                "Полевой или МОП транзистор NMOS (трёхполюсный)",
+                "Полевой или МОП транзистор PMOS (трёхполюсный)",
+                "Биполярный NPN-транзистор (четырёхполюсный)",
+                "Биполярный PNP-транзистор (четырёхполюсный)",
+                "Полевой или МОП транзистор NMOS (четырёхполюсный)",
+                "Полевой или МОП транзистор PMOS (четырёхполюсный)"
+            };
+
+            comboCategory = new BmpButtonsCombo(painter, "Категория", { 50, 30 }, { 55, 60 }, files, tooltips, 0, 4, "comboCategory");
+            comboCategory->Hide();
+        }
+
+        painter->Bind(wxEVT_ENTER_WINDOW, &PanelScheme::OnMouseEnter, this);
+        painter->Bind(wxEVT_LEAVE_WINDOW, &PanelScheme::OnMouseLeave, this);
+        painter->Bind(wxEVT_MOTION, &PanelScheme::OnMouseMove, this);
+
         int width = 45;
 
         // IDC_COMBOCHECKKOL
@@ -167,6 +172,43 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
     Bind(wxEVT_BUTTON, &PanelScheme::OnEventButton, this);
     Bind(wxEVT_COMBOBOX, &PanelScheme::OnEventComboBox, this);
+}
+
+
+void PanelScheme::OnMouseEnter(wxMouseEvent &event)
+{
+    event.Skip();
+}
+
+
+void PanelScheme::OnMouseLeave(wxMouseEvent &event)
+{
+    event.Skip();
+}
+
+
+void PanelScheme::OnMouseMove(wxMouseEvent &event)
+{
+    wxPoint pos = event.GetPosition();
+
+    wxRect rect = comboCategory->GetRect();
+
+    if (rect.Contains(pos))
+    {
+        if (!comboCategory->IsShown())
+        {
+            comboCategory->Show();
+        }
+    }
+    else
+    {
+        if (comboCategory->IsShown())
+        {
+            comboCategory->Hide();
+        }
+    }
+
+    event.Skip();
 }
 
 
