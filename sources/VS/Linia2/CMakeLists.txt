@@ -68,6 +68,7 @@ file(GLOB PANELS_PANEL11_SETUP          src/Panels/Panel11_Menu/Setup/*.*)
 file(GLOB PANELS_PANEL12                src/Panels/Panel12_Debug/*.*)
 file(GLOB PANELS_PANEL12_OLD            src/Panels/Panel12_Debug/Old/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
+file(GLOB STORAGE                       src/Storage/*.*)
 file(GLOB TESTS                         src/Tests/*.*)
 file(GLOB UTILS                         src/Utils/*.*)
 file(GLOB WINDOWS                       src/Windows/*.*)
@@ -90,6 +91,7 @@ source_group(Panels/Panel11_Menu/Setup            FILES ${PANELS_PANEL11_SETUP})
 source_group(Panels/Panel12_Debug                 FILES ${PANELS_PANEL12})
 source_group(Panels/Panel12_Debug/Old             FILES ${PANELS_PANEL12_OLD})
 source_group(Settings                             FILES ${SETTINGS})
+source_group(Storage                              FILES ${STORAGE})
 source_group(Tests                                FILES ${TESTS})
 source_group(Utils                                FILES ${UTILS})
 source_group(Windows                              FILES ${WINDOWS})
@@ -113,6 +115,7 @@ add_executable(${PROJECT_NAME}
     ${PANELS_PANEL12}
     ${PANELS_PANEL12_OLD}
     ${SETTINGS}
+    ${STORAGE}
     ${TESTS}
     ${UTILS}
     ${WINDOWS}
