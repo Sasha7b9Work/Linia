@@ -80,8 +80,4 @@ private:
 
     // Нарисовать схему в соответствии с установками
     void BuildPanel();
-
-    void OnMouseEnter(wxMouseEvent &);
-    void OnMouseLeave(wxMouseEvent &);
-    void OnMouseMove(wxMouseEvent &);
 };
