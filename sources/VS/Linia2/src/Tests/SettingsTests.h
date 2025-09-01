@@ -24,12 +24,6 @@ struct Category
 };
 
 
-#define ChC Chan::_C
-#define ChB Chan::_B
-#define ChS Chan::_S
-#define ChE Chan::_E
-
-
 struct Chan
 {
     enum E

@@ -85,21 +85,21 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         y += 40;
 
-        jack[ChC] = new FullJack(Chan::_C, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_C.bmp", &choices);
+        jack[Chan::_C] = new FullJack(Chan::_C, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_C.bmp", &choices);
 
         int dy = 35;
 
         y += dy;
 
-        jack[ChB] = new FullJack(Chan::_B, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_B.bmp", &choices);
+        jack[Chan::_B] = new FullJack(Chan::_B, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_B.bmp", &choices);
 
         y += dy;
 
-        jack[ChS] = new FullJack(Chan::_S, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_S.bmp", &choices);
+        jack[Chan::_S] = new FullJack(Chan::_S, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_S.bmp", &choices);
 
         y += dy;
 
-        jack[ChE] = new FullJack(Chan::_E, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_E.bmp");
+        jack[Chan::_E] = new FullJack(Chan::_E, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_E.bmp");
 
         choices.clear();
         choices.Add("C");
@@ -147,15 +147,15 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         int width = 45;
 
         // IDC_COMBOCHECKKOL
-        combo[ChC] = new ComboJack(Chan::_C, painter, "", {x0 + dx, y - dy}, width, choices);
+        combo[Chan::_C] = new ComboJack(Chan::_C, painter, "", {x0 + dx, y - dy}, width, choices);
 
         // IDC_COMBOCHECKBAZA
-        combo[ChB] = new ComboJack(Chan::_B, painter, "", {x0, y}, width, choices);
+        combo[Chan::_B] = new ComboJack(Chan::_B, painter, "", {x0, y}, width, choices);
 
         // IDC_COMBOCHECKDOP
-        combo[ChE] = new ComboJack(Chan::_E, painter, "", {x0 + dx, y + dy}, width, choices);
+        combo[Chan::_E] = new ComboJack(Chan::_E, painter, "", {x0 + dx, y + dy}, width, choices);
 
-        combo[ChS] = new ComboJack(Chan::_S, painter, "", {x0 + 2 * dx, y}, width, choices);
+        combo[Chan::_S] = new ComboJack(Chan::_S, painter, "", {x0 + 2 * dx, y}, width, choices);
     }
 
     boxCommutation->SetFont(StaticBox::TitleFont());
