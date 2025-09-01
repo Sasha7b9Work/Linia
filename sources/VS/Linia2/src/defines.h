@@ -2,8 +2,8 @@
 #pragma once
 
 
-#define VERSION_BUILD 13
-#define DATE_BUILD "2025-09-01 12:25:11"
+#define VERSION_BUILD 14
+#define DATE_BUILD "2025-09-01 12:33:45"
 
 
 #define WIN32_LEAN_AND_MEAN
@@ -29,6 +29,8 @@
 #include <wx/combo.h>
 #include <wx/valnum.h>
 #include <wx/datetime.h>
+#include <wx/dirctrl.h>
+#include <wx/dir.h>
 #include <map>
 #include <queue>
 #include <mutex>

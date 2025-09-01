@@ -3,6 +3,7 @@
 #include "Panels/Panel11_Menu/DialogFile.h"
 #include "Tests/Model.h"
 #include "Panels/Panel04_Model.h"
+#include "Controls/RestrictedFileDialog.h"
 
 
 DialogFile *DialogFile::self = nullptr;
