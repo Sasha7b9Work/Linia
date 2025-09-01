@@ -16,6 +16,5 @@
 #include <queue>
 #include <cstring>
 
-namespace Device {
 
-}
+IDevice *g_device = nullptr;
