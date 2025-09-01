@@ -77,7 +77,11 @@ private:
 
     void OnEventButton(wxCommandEvent &);
     void OnEventComboBox(wxCommandEvent &);
+    void OnEventMouseEnter(wxMouseEvent &);
+    void OnEventMouseLeave(wxMouseEvent &);
+    void OnEventMouseMove(wxMouseEvent &);
 
     // Нарисовать схему в соответствии с установками
     void BuildPanel();
 };
+ 
