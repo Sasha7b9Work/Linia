@@ -48,16 +48,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
-    const int width_category = 77;
-
-    StaticBox *boxCategory = new StaticBox(this, "Категория", { x, SD::DSBY() }, { width_category, 90 });
-
-    boxCategory->SetFont(StaticBox::TitleFont());
-
-    (void)boxCategory;
-
-    StaticBox *boxTest = new StaticBox(this, "Тест", { x + width_category + 5, SD::DSBY() },
-        { w - width_category - 5, boxCategory->GetSize().y });
+    StaticBox *boxTest = new StaticBox(this, "Тест", { x, SD::DSBY() }, { w, 90 });
 
     {
         wxArrayString choices;
@@ -76,8 +67,8 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
     boxTest->SetFont(StaticBox::TitleFont());
 
     StaticBox *boxCommutation = new StaticBox(this, "Коммутация",
-        { x, boxCategory->GetPosition().y + boxCategory->GetSize().y + SD::DSBY() },
-        { w, h - boxCategory->GetPosition().y - boxCategory->GetSize().y - SD::DSBY() });
+        { x, boxTest->GetPosition().y + boxTest->GetSize().y + SD::DSBY() },
+        { w, h - boxTest->GetPosition().y - boxTest->GetSize().y - SD::DSBY() });
 
     {
         wxArrayString choices;
