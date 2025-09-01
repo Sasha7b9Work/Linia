@@ -107,3 +107,44 @@ struct ModeMeas
         Count
     };
 };
+
+
+// Тип развёртки
+struct TypeScan
+{
+    enum E
+    {
+        ImpulsePos,
+        ImpulseNeg,
+        DCPos,
+        DCNeg,
+        SYNPos,
+        SYNNeg,
+        AC,
+        Count
+    };
+};
+
+
+// Первая очередь
+struct FirstQueue
+{
+    enum E
+    {
+        ChannelC,
+        ChannelB,
+        Count
+    };
+};
+
+
+// Семейство кривых
+struct GenerationStup
+{
+    enum E
+    {
+        Disable,
+        Enable,
+        Count
+    };
+};

@@ -17,6 +17,10 @@ public:
 
     virtual void SchemeInclusion(StateJack::E chC, StateJack::E chB, StateJack::E chS);
 
+    virtual void WriteTypeScan(TypeScan::E, FirstQueue::E);
+
+    virtual void WriteDurationImpulseUS(uint durationUS, GenerationStup::E);
+
     //------------------------------------------------------------------------------------------------------------
 
     virtual void ChannelC_RangeSourceU(RangeU::E);

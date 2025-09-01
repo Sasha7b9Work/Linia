@@ -17,6 +17,12 @@ public:
     // Схема включения всех каналов
     virtual void SchemeInclusion(StateJack::E chC, StateJack::E chB, StateJack::E chS) = 0;     // 1
 
+    // Вид развёртки
+    virtual void WriteTypeScan(TypeScan::E, FirstQueue::E) = 0;
+
+    // Длительность импульса
+    virtual void WriteDurationImpulseUS(uint durationUS, GenerationStup::E) = 0;
+
     //------------------------------------------------------------------------------------------------------------
 
     // Диапазон источника U в канале C

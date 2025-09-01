@@ -33,6 +33,18 @@ void DeviceEmulator::SchemeInclusion(StateJack::E /*chC*/, StateJack::E /*chB*/,
 }
 
 
+void DeviceEmulator::WriteTypeScan(TypeScan::E, FirstQueue::E)
+{
+
+}
+
+
+void DeviceEmulator::WriteDurationImpulseUS(uint /*durationUS*/, GenerationStup::E)
+{
+
+}
+
+
 //------------------------------------------------------------------------------------------------------------
 
 
