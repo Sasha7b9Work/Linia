@@ -32,8 +32,8 @@ public:
     virtual void SetChannelC_SourceRange(RangeU::E) = 0;
 
     // Диапазон измерителя
-    virtual void SetChannelC_Meas_Range(RangeU::E) = 0;
-    virtual void SetChannelC_Meas_Range(RangeI::E) = 0;
+    virtual void SetChannelC_MeasRange(RangeU::E) = 0;
+    virtual void SetChannelC_MeasRange(RangeI::E) = 0;
 
     // Ограничение источника U от 0 до 100%
     virtual void SetChannelC_LimitSourceU(int min, int max) = 0;
