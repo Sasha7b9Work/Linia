@@ -153,7 +153,7 @@ public:
     // Установить значение из элемента управления
     virtual void SetFromControl() override
     {
-        Value<int>::Set(GF::_FindComboBox(window, id)->GetCurrentSelection());
+        Value<int>::Set(GF::FindComboBox(window, id)->GetCurrentSelection());
     }
     int GetDefaultIndex() const
     {
@@ -166,7 +166,7 @@ protected:
     {
         if (window)
         {
-            GF::_FindComboBox(window, id)->SetCurrentSelection(GetIndex());
+            GF::FindComboBox(window, id)->SetCurrentSelection(GetIndex());
         }
     }
 
@@ -191,12 +191,12 @@ public:
 
         if (parent)
         {
-            GF::_FindCheckBox(parent, _id)->SetValue(Get());
+            GF::FindCheckBox(parent, _id)->SetValue(Get());
         }
     }
     virtual void SetFromControl() override
     {
-        Value<bool>::Set(GF::_FindCheckBox(window, id)->GetValue());
+        Value<bool>::Set(GF::FindCheckBox(window, id)->GetValue());
     }
     void ApplyToGUI(wxWindow *parent, int _id)
     {
@@ -207,7 +207,7 @@ protected:
     {
         if (window)
         {
-            GF::_FindCheckBox(window, id)->SetValue(Get());
+            GF::FindCheckBox(window, id)->SetValue(Get());
         }
     }
 private:
@@ -222,7 +222,7 @@ public:
     }
     virtual void SetFromControl() override
     {
-        Value<bool>::Set(GF::_FindCheckButton(window, id)->GetValue());
+        Value<bool>::Set(GF::FindCheckButton(window, id)->GetValue());
     }
     // Посылает событие данного контрола на всё ГУИ
     void SendEventToGUI(wxWindow *parent = nullptr, int _id = 0)
@@ -250,7 +250,7 @@ protected:
     {
         if (window)
         {
-            GF::_FindCheckButton(window, id)->SetValue(Get());
+            GF::FindCheckButton(window, id)->SetValue(Get());
         }
     }
 };
@@ -269,14 +269,14 @@ public:
     }
     virtual void SetFromControl() override
     {
-        Set(wxAtoi(GF::_FindTextCtrl(window, id)->GetValue()));
+        Set(wxAtoi(GF::FindTextCtrl(window, id)->GetValue()));
     }
 protected:
     virtual void LoadToWindow() override
     {
         if (window)
         {
-            GF::_FindTextCtrl(window, id)->SetValue(ToString());
+            GF::FindTextCtrl(window, id)->SetValue(ToString());
         }
     }
 };
@@ -302,7 +302,7 @@ public:
     }
     virtual void SetFromControl() override
     {
-        Set(GF::_FindSpinCtrl(window, id)->GetValue());
+        Set(GF::FindSpinCtrl(window, id)->GetValue());
     }
     int GetDefaultValue() const
     {
@@ -313,7 +313,7 @@ protected:
     {
         if (window)
         {
-            GF::_FindSpinCtrl(window, id)->SetValue(Get());
+            GF::FindSpinCtrl(window, id)->SetValue(Get());
         }
     }
 };

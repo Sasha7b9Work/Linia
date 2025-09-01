@@ -82,7 +82,7 @@ wxButton *MenuDialog::FindButton(const wxString &label)
 {
     for (auto &btn : buttons)
     {
-        wxAnyButton *button = GF::_FindAnyButton(this, btn.id);
+        wxAnyButton *button = GF::FindAnyButton(this, btn.id);
 
         if (button->GetLabel() == label)
         {

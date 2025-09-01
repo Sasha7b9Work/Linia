@@ -26,55 +26,55 @@ void GF::HorizontalAlignCenter(wxStaticText *label , wxWindow *border)
 }
 
 
-wxStaticText *GF::_FindStaticText(wxWindow *window, int id)
+wxStaticText *GF::FindStaticText(wxWindow *window, int id)
 {
     return (wxStaticText *)window->FindWindow(id);
 }
 
 
-wxAnyButton *GF::_FindAnyButton(wxWindow *window, int id)
+wxAnyButton *GF::FindAnyButton(wxWindow *window, int id)
 {
     return (wxAnyButton *)window->FindWindow(id);
 }
 
 
-wxToggleButton *GF::_FindToggleButton(wxWindow *w, int id)
+wxToggleButton *GF::FindToggleButton(wxWindow *w, int id)
 {
     return (wxToggleButton *)w->FindWindow(id);
 }
 
 
-wxRadioButton *GF::_FindRadioButton(const wxWindow *w, int id)
+wxRadioButton *GF::FindRadioButton(const wxWindow *w, int id)
 {
     return (wxRadioButton *)w->FindWindow(id);
 }
 
 
-wxCheckBox *GF::_FindCheckBox(wxWindow *window, int id)
+wxCheckBox *GF::FindCheckBox(wxWindow *window, int id)
 {
     return (wxCheckBox *)window->FindWindow(id);
 }
 
 
-CheckButton *GF::_FindCheckButton(const wxWindow *window, int id)
+CheckButton *GF::FindCheckButton(const wxWindow *window, int id)
 {
     return (CheckButton *)window->FindWindow(id);
 }
 
 
-ButtonsCombo *GF::_FindComboBox(const wxWindow *window, int id)
+ButtonsCombo *GF::FindComboBox(const wxWindow *window, int id)
 {
     return (ButtonsCombo *)window->FindWindow(id);
 }
 
 
-wxTextCtrl *GF::_FindTextCtrl(wxWindow *window, int id)
+wxTextCtrl *GF::FindTextCtrl(wxWindow *window, int id)
 {
     return (wxTextCtrl *)window->FindWindow(id);
 }
 
 
-wxSpinCtrl *GF::_FindSpinCtrl(wxWindow *window, int id)
+wxSpinCtrl *GF::FindSpinCtrl(wxWindow *window, int id)
 {
     return (wxSpinCtrl *)window->FindWindow(id);
 }
@@ -82,7 +82,7 @@ wxSpinCtrl *GF::_FindSpinCtrl(wxWindow *window, int id)
 
 int GF::IntFromTextCtrl(wxWindow *window, int id)
 {
-    wxTextCtrl *control = _FindTextCtrl(window, id);
+    wxTextCtrl *control = FindTextCtrl(window, id);
 
     wxString value = control->GetValue();
 
@@ -96,7 +96,7 @@ int GF::IntFromTextCtrl(wxWindow *window, int id)
 
 uint64 GF::UInt64FromTextCtrl(wxWindow *window, int id)
 {
-    wxTextCtrl *control = _FindTextCtrl(window, id);
+    wxTextCtrl *control = FindTextCtrl(window, id);
 
     wxString value = control->GetValue();
 
@@ -110,7 +110,7 @@ uint64 GF::UInt64FromTextCtrl(wxWindow *window, int id)
 
 void GF::IntToTextCtrl(wxWindow *window, int id, int value)
 {
-    _FindTextCtrl(window, id)->SetValue(wxString::Format("%d", value));
+    FindTextCtrl(window, id)->SetValue(wxString::Format("%d", value));
 }
 
 

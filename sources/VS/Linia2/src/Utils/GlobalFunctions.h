@@ -17,23 +17,23 @@ namespace GF
     // Центрировать text относительно border
     void HorizontalAlignCenter(wxStaticText *label, wxWindow *border);
 
-    wxStaticText *_FindStaticText(wxWindow *, int id);
+    wxStaticText *FindStaticText(wxWindow *, int id);
 
-    wxAnyButton *_FindAnyButton(wxWindow *, int id);
+    wxAnyButton *FindAnyButton(wxWindow *, int id);
 
-    wxToggleButton *_FindToggleButton(wxWindow *, int id);
+    wxToggleButton *FindToggleButton(wxWindow *, int id);
 
-    wxRadioButton *_FindRadioButton(const wxWindow *, int id);
+    wxRadioButton *FindRadioButton(const wxWindow *, int id);
 
-    wxCheckBox *_FindCheckBox(wxWindow *, int id);
+    wxCheckBox *FindCheckBox(wxWindow *, int id);
 
-    CheckButton *_FindCheckButton(const wxWindow *, int id);
+    CheckButton *FindCheckButton(const wxWindow *, int id);
 
-    ButtonsCombo *_FindComboBox(const wxWindow *, int id);
+    ButtonsCombo *FindComboBox(const wxWindow *, int id);
 
-    wxTextCtrl *_FindTextCtrl(wxWindow *, int id);
+    wxTextCtrl *FindTextCtrl(wxWindow *, int id);
 
-    wxSpinCtrl *_FindSpinCtrl(wxWindow *, int id);
+    wxSpinCtrl *FindSpinCtrl(wxWindow *, int id);
 
     void SendCommandEvent(wxWindow *, int id, int type_event, int int_value);
     void SendCommandEvent(wxWindow *object, int type_event, int int_value);
