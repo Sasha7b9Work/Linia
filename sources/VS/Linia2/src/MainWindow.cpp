@@ -14,7 +14,6 @@
 #include "Panels/Panel07_Indicator.h"
 #include "Panels/Panel08_ModeLower.h"
 #include "Panels/Panel09_Table.h"
-#include "Panels/Panel10_Scale.h"
 #include "Panels/Panel11_Menu/Panel11_Menu.h"
 #include "Panels/Panel12_Debug/Panel12_Debug.h"
 #include "Panels/Panel13_ReferenceGraphs.h"
@@ -35,9 +34,9 @@
     |         |                                 |                  |
     |         |                                 +------------------|
     |         |                                 |        7         |
-    +---------+                                 +------------------+
+    |         |                                 +------------------+
     |         +---------------------------------+                  |
-    |    8    |             9                   |        10        |
+    |         |             9                   |        8         |
     +---------+---------------------------------+                  |
     |               11                          |                  |
     +-------------------------------------------+------------------+
@@ -47,11 +46,9 @@
     3. Текущая аппаратная конфигурация - каналы, схема включения, расчёт
     4. Файл модели
     5. Графики
-    6. Дискета с процентами
     7. Индикация выходного напряжения
     8. Режим
     9. Таблица точек
-    10. Шкала, ошибки
     11. Кнопки
 */
 
@@ -116,8 +113,6 @@ MainWindow::MainWindow(const wxString &title)
     new PanelModeLower(this);
 
     new PanelTable(this);
-
-    new PanelScale(this);
 
     new PanelButtons(this);
 
@@ -293,7 +288,6 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
     PanelIndicator::self->Show(mode == ModeMainWindow::Standard);
     PanelModeLower::self->Show(mode == ModeMainWindow::Standard);
     PanelTable::self->Show(mode == ModeMainWindow::Standard);
-    PanelScale::self->Show(mode == ModeMainWindow::Standard);
     PanelButtons::self->Show(mode == ModeMainWindow::Standard);
 
     PanelDebug::self->Show(mode == ModeMainWindow::Debug);

@@ -28,7 +28,7 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
 
     button_start = new ButtonBitmapChoice(this, {0, 0}, {64 - 10, 60 - 10}, images, "button_start");
 
-    wxStaticText *text = new wxStaticText(this, wxID_ANY, "Uc 100 %", { 105, 5 }, { 25, 25});
+    wxStaticText *text = new wxStaticText(this, wxID_ANY, "Uc 100 %", { 90, 15 }, { 25, 25});
 
     text->SetForegroundColour(wxColour(255, 0, 0));
 

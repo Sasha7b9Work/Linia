@@ -4,13 +4,15 @@
 #include "Panels/Panel08_ModeLower.h"
 #include "Utils/SystemDepend.h"
 #include "Controls/StaticBox.h"
+#include "Panels/Panel03_Config/Panel03_Config.h"
+#include "Panels/Panel07_Indicator.h"
 
 
 PanelModeLower *PanelModeLower::self = nullptr;
 
 
 PanelModeLower::PanelModeLower(wxWindow *parent) :
-    Panel(parent, 0, MainWindow::HEIGTH1 + PanelModel::HEIGHT, WIDTH, HEIGHT)
+    Panel(parent, MainWindow::WIDTH1 + MainWindow::WIDTH2, PanelConfig::HEIGHT + PanelIndicator::HEIGHT, WIDTH, HEIGHT)
 {
     SetName("PanelModeLower");
 
