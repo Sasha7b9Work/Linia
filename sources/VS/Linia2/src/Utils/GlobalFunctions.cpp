@@ -166,10 +166,12 @@ wxString GF::DirForModFiles()
 {
     wxString path = wxGetCwd() + wxT("/mod");
 
+    wxString normalizedPath = wxFileName::DirName(path).GetFullPath();
+
     if (!wxDirExists(path))
     {
-        wxMkDir(path);
+        wxFileName::Mkdir(normalizedPath, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
     }
 
-    return path;
+    return normalizedPath;
 }
