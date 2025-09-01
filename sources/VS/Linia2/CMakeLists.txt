@@ -55,6 +55,7 @@ file(GLOB DOC                           doc/*.*)
 file(GLOB SRC                           src/*.*)
 file(GLOB COMMUNICATOR                  src/Communicator/*.*)
 file(GLOB COMMUNICATOR_COMPORT          src/Communicator/ComPort/*.*)
+file(GLOB COMMUNICATOR_GPIO             src/Communicator/GPIO/*.*)
 file(GLOB COMMUNICATOR_SPI              src/Communicator/SPI/*.*)
 file(GLOB COMMUNICATOR_UART             src/Communicator/UART/*.*)
 file(GLOB CONTROLS                      src/Controls/*.*)
@@ -79,6 +80,7 @@ source_group(Resources                            FILES ${RESOURCES})
 source_group(src                                  FILES ${SRC})
 source_group(Communicator                         FILES ${COMMUNICATOR})
 source_group(Communicator/ComPort                 FILES ${COMMUNICATOR_COMPORT})
+source_group(Communicator/GPIO                    FILES ${COMMUNICATOR_GPIO})
 source_group(Communicator/SPI                     FILES ${COMMUNICATOR_SPI})
 source_group(Communicator/UART                    FILES ${COMMUNICATOR_UART})
 source_group(Controls                             FILES ${CONTROLS})
@@ -104,6 +106,7 @@ add_executable(${PROJECT_NAME}
     ${SRC}
     ${COMMUNICATOR}
     ${COMMUNICATOR_COMPORT}
+    ${COMMUNICATOR_GPIO}
     ${COMMUNICATOR_SPI}
     ${COMMUNICATOR_UART}
     ${CONTROLS}
