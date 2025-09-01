@@ -18,59 +18,60 @@ public:
     //    virtual void SetDataCallback(DataCallback callback) = 0;
 
     // Схема включения всех каналов
-    virtual void SetCircuitConnection(StateJack::E channelC, StateJack::E channelB, StateJack::E channelS) = 0;
+    virtual void SetCircuitConnection(Chan::E, StateJack::E) = 0;               // :C:CONNECTION <C,B,S,E,GEN,1K,BREAK>
 
     // Вид развёртки
-    virtual void SetSweepType(TypeScan::E, FirstQueue::E) = 0;
+    virtual void SetSweepType(TypeScan::E) = 0;                                 // :TYPESCAN
+
+    // Первая очередь
+    virtual void SetFirstQueue(FirstQueue::E) = 0;                              // :FIRSTQUEUE <B,C>
 
     // Длительность импульса
-    virtual void SetPulseDuration(uint durationUS, GenerationStup::E) = 0;
+    virtual void SetPulseDuration(uint durationUS, GenerationStup::E) = 0;      // :PULSE:DURATION 200
+                                                                                // :GENERATIONSTUP 1
 
     //------------------------------------------------------------------------------------------------------------
 
     // Диапазон источника
-    virtual void SetChannelC_SourceRange(RangeU::E) = 0;
+    virtual void SetChannelC_SourceRange(RangeU::E) = 0;                        // :C:RANGE:SOURCE 50mV
 
     // Диапазон измерителя
-    virtual void SetChannelC_MeasRange(RangeU::E) = 0;
-    virtual void SetChannelC_MeasRange(RangeI::E) = 0;
+    virtual void SetChannelC_MeasRange(RangeU::E) = 0;                          // :C:RANGE:MEAS 10V
+    virtual void SetChannelC_MeasRange(RangeI::E) = 0;                          // :C:RANGE:MEAS 50uA
 
     // Ограничение источника U от 0 до 100%
-    virtual void SetChannelC_LimitSourceU(int min, int max) = 0;
+    virtual void SetChannelC_LimitSourceU(int min, int max) = 0;                // :C:LIMIT 10V
 
     //------------------------------------------------------------------------------------------------------------
 
     // Режим источника в канале B
-    virtual void SetChannelB_SourceMode(ModeSource::E) = 0;
+    virtual void SetChannelB_SourceMode(ModeSource::E) = 0;                     // S:MODE:SOURCE U
 
     virtual void SetChannelB_AmplitudeRange(uint8_t range) = 0;
 
     // Число ступеней
-    virtual void SetChannelB_StepCount(int) = 0;
+    virtual void SetChannelB_StepCount(int) = 0;                                // :B:STEP:COUNT 8
 
     virtual void SetChannelB_AmplitudeValue(int16_t) = 0;
 
     // Смещение
-    virtual void SetChannelB_Bias(int16_t) = 0;
+    virtual void SetChannelB_Bias(pchar) = 0;                                   // :S:BIAS 10.2mV
 
     // Режим измерителя
-    virtual void SetChannelB_MeasMode(ModeMeas::E) = 0;
+    virtual void SetChannelB_MeasMode(ModeMeas::E) = 0;                         // :B:MODE:MEAS I
 
     // Диапазон измерителя
-    virtual void SetChannelB_MeasRange(RangeU::E) = 0;
-    virtual void SetChannelB_MeasRange(RangeI::E) = 0;
+    virtual void SetChannelB_MeasRange(RangeU::E) = 0;                          // :B:RANGE:MEAS 10V
+    virtual void SetChannelB_MeasRange(RangeI::E) = 0;                          // :B:RANGE:MEAS 1pA
 
     // Диапазон ограничения
-    virtual void SetChannelB_LimitRange(RangeU::E) = 0;
-    virtual void SetChannelB_LimitRange(RangeI::E) = 0;
+    virtual void SetChannelB_LimitRange(RangeU::E) = 0;                         // :S:RANGE:LIMIT 10V
+    virtual void SetChannelB_LimitRange(RangeI::E) = 0;                         // :B:RANGE:LIMIT 40A
 
     // Порог ограничения измерителя
     virtual void SetChannelB_LimitThreshold(int16_t) = 0;
 
     virtual void SetChannelB_HighResolution(bool) = 0;
-
-    // Режим источника
-    virtual void SetChannelB_SourceType(ModeSource::E) = 0;
 
     //------------------------------------------------------------------------------------------------------------
 
