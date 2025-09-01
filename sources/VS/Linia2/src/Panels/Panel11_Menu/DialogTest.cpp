@@ -5,6 +5,7 @@
 
 DialogTest *DialogTest::self = nullptr;
 DialogTestAppend *DialogTestAppend::self = nullptr;
+DialogTestLibrary *DialogTestLibrary::self = nullptr;
 
 
 const pchar DialogTest::BTN_APPEND = "Добавить";
@@ -19,6 +20,9 @@ const pchar DialogTest::BTN_SAVE_TO_LIBRARY = "Сохранить в библи�
 
 const pchar DialogTestAppend::BTN_ACTIVE = "Активный";
 const pchar DialogTestAppend::BTN_FROM_LIBRARY = "Из библиотеки";
+
+const pchar DialogTestLibrary::BTN_STANDARD = "Стандартных";
+const pchar DialogTestLibrary::BTN_USER = "Пользовательских";
 
 
 DialogTest::DialogTest() :
@@ -47,6 +51,7 @@ DialogTest::DialogTest() :
         },
         BTN_LIBRARY, []()
         {
+            DialogTestLibrary().ShowModal();
         },
         BTN_SAVE_TO_LIBRARY, []()
         {
@@ -73,7 +78,7 @@ void DialogTest::Update()
 
 
 DialogTestAppend::DialogTestAppend() :
-    MenuDialog("Добавить", 150, { },
+    MenuDialog(DialogTest::BTN_APPEND, 150, { },
         BTN_ACTIVE, []()
         {
         },
@@ -83,6 +88,18 @@ DialogTestAppend::DialogTestAppend() :
     )
 {
     self = this;
+}
 
-//    FindButton()
+
+DialogTestLibrary::DialogTestLibrary() :
+    MenuDialog(DialogTest::BTN_LIBRARY, 150, { },
+        BTN_STANDARD, []()
+        {
+        },
+        BTN_USER, []()
+        {
+        }
+    )
+{
+    self = this;
 }

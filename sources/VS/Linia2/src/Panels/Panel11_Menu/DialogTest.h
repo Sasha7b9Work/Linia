@@ -13,16 +13,17 @@ public:
 
     virtual void Update() override;
 
+    static const pchar BTN_APPEND;
+    static const pchar BTN_LIBRARY;
+
 private:
 
-    static const pchar BTN_APPEND;
     static const pchar BTN_SAVE_PARAMETERS;
     static const pchar BTN_DELETE;
     static const pchar BTN_DELETE_ALL;
     static const pchar BTN_COPY;
     static const pchar BTN_INSERT;
     static const pchar BTN_RENAME;
-    static const pchar BTN_LIBRARY;
     static const pchar BTN_SAVE_TO_LIBRARY;
 };
 
@@ -39,4 +40,19 @@ private:
 
     static const pchar BTN_ACTIVE;
     static const pchar BTN_FROM_LIBRARY;
+};
+
+
+class DialogTestLibrary : public MenuDialog
+{
+public:
+
+    DialogTestLibrary();
+
+    static DialogTestLibrary *self;
+
+private:
+
+    static const pchar BTN_STANDARD;
+    static const pchar BTN_USER;
 };
