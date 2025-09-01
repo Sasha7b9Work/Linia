@@ -13,15 +13,15 @@ public:
 
 private:
 
-    const pchar BTN_APPEND = "Добавить";
-    const pchar BTN_SAVE_PARAMETERS = "Сохранить параметры";
-    const pchar BTN_DELETE = "Удалить";
-    const pchar BTN_DELETE_ALL = "Удалить все";
-    const pchar BTN_COPY = "Копировать";
-    const pchar BTN_INSERT = "Вставить";
-    const pchar BTN_RENAME = "Переименовать";
-    const pchar BTN_LIBRARY = "Библиотека тестов";
-    const pchar BTN_SAVE_TO_LIBRARY = "Сохранить в библиотеке";
+    static const pchar BTN_APPEND;
+    static const pchar BTN_SAVE_PARAMETERS;
+    static const pchar BTN_DELETE;
+    static const pchar BTN_DELETE_ALL;
+    static const pchar BTN_COPY;
+    static const pchar BTN_INSERT;
+    static const pchar BTN_RENAME;
+    static const pchar BTN_LIBRARY;
+    static const pchar BTN_SAVE_TO_LIBRARY;
 };
 
 
@@ -35,6 +35,6 @@ public:
 
 private:
 
-    const pchar BTN_ACTIVE = "Активный";
-    const pchar BTN_FROM_LIBRARY = "Из библиотеки";
+    static const pchar BTN_ACTIVE;
+    static const pchar BTN_FROM_LIBRARY;
 };

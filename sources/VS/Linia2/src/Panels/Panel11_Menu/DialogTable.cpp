@@ -6,6 +6,12 @@
 DialogTable *DialogTable::self = nullptr;
 
 
+const pchar DialogTable::BTN_SAVE = "Сохранить";
+const pchar DialogTable::BTN_DELETE = "Удалить";
+const pchar DialogTable::BTN_EXPAND = "Развернуть";
+const pchar DialogTable::BTN_COLLAPSE = "Свернуть";
+
+
 DialogTable::DialogTable() :
     MenuDialog("Таблица", 100, { },
         BTN_SAVE, []()

@@ -9,6 +9,14 @@
 DialogFile *DialogFile::self = nullptr;
 
 
+const pchar DialogFile::BTN_NEW = "Новый";
+const pchar DialogFile::BTN_OPEN = "Открыть";
+const pchar DialogFile::BTN_CLOSE = "Закрыть";
+const pchar DialogFile::BTN_SAVE = "Cохранить";
+const pchar DialogFile::BTN_SAVE_AS = "Сохранить как...";
+const pchar DialogFile::BTN_DELETE = "Удалить";
+
+
 DialogFile::DialogFile() :
     MenuDialog("Файл", 125, { 2, 4 },
         BTN_NEW, []()

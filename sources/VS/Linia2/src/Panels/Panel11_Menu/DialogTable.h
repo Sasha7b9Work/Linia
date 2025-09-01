@@ -13,8 +13,8 @@ public:
 
 private:
 
-    const pchar BTN_SAVE = "Сохранить";
-    const pchar BTN_DELETE = "Удалить";
-    const pchar BTN_EXPAND = "Развернуть";
-    const pchar BTN_COLLAPSE = "Свернуть";
+    static const pchar BTN_SAVE;
+    static const pchar BTN_DELETE;
+    static const pchar BTN_EXPAND;
+    static const pchar BTN_COLLAPSE;
 };

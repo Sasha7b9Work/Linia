@@ -6,6 +6,14 @@
 DialogReport *DialogReport::self = nullptr;
 
 
+const pchar DialogReport::BTN_NEW = "Новый";
+const pchar DialogReport::BTN_SAVE = "Сохранить";
+const pchar DialogReport::BTN_DELETE = "Удалить";
+const pchar DialogReport::BTN_EXPAND = "Развернуть";
+const pchar DialogReport::BTN_COLLAPSE = "Свернуть";
+const pchar DialogReport::BTN_CLOSE = "Закрыть";
+
+
 DialogReport::DialogReport() :
     MenuDialog("Отчёт", 100, { },
         BTN_NEW, []()

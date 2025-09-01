@@ -13,10 +13,10 @@ public:
 
 private:
 
-    const pchar BTN_NEW = "Новый";
-    const pchar BTN_SAVE = "Сохранить";
-    const pchar BTN_DELETE = "Удалить";
-    const pchar BTN_EXPAND = "Развернуть";
-    const pchar BTN_COLLAPSE = "Свернуть";
-    const pchar BTN_CLOSE = "Закрыть";
+    static const pchar BTN_NEW;
+    static const pchar BTN_SAVE;
+    static const pchar BTN_DELETE;
+    static const pchar BTN_EXPAND;
+    static const pchar BTN_COLLAPSE;
+    static const pchar BTN_CLOSE;
 };

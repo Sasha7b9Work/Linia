@@ -8,6 +8,22 @@ DialogGraph *DialogGraph::self = nullptr;
 DialogGraphColor *DialogGraphColor::self = nullptr;
 
 
+const pchar DialogGraph::BTN_SIZE_POINT = "Размер точки";
+const pchar DialogGraph::BTN_STYLE_CURVE = "Стиль кривой";
+const pchar DialogGraph::BTN_COLOR = "Цвет";
+const pchar DialogGraph::BTN_MARKERS = "Маркеры";
+const pchar DialogGraph::BTN_SCALE = "Шкала";
+const pchar DialogGraph::BTN_SAVE = "Сохранить график в архиве";
+const pchar DialogGraph::BTN_RESET = "Сброс графика Ref";
+
+const pchar DialogGraphColor::BTN_BACKGROUND = "Фона";
+const pchar DialogGraphColor::BTN_GRID = "Сетки";
+const pchar DialogGraphColor::BTN_FONT = "Шрифта";
+const pchar DialogGraphColor::BTN_CURVE = "Кривой";
+const pchar DialogGraphColor::BTN_LINK = "Ссылки";
+const pchar DialogGraphColor::BTN_SECANT = "Секущей";
+
+
 DialogGraph::DialogGraph() :
     MenuDialog("График", 200, { },
         BTN_SIZE_POINT, []()

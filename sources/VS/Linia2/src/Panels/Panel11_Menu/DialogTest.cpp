@@ -7,6 +7,20 @@ DialogTest *DialogTest::self = nullptr;
 DialogTestAppend *DialogTestAppend::self = nullptr;
 
 
+const pchar DialogTest::BTN_APPEND = "Добавить";
+const pchar DialogTest::BTN_SAVE_PARAMETERS = "Сохранить параметры";
+const pchar DialogTest::BTN_DELETE = "Удалить";
+const pchar DialogTest::BTN_DELETE_ALL = "Удалить все";
+const pchar DialogTest::BTN_COPY = "Копировать";
+const pchar DialogTest::BTN_INSERT = "Вставить";
+const pchar DialogTest::BTN_RENAME = "Переименовать";
+const pchar DialogTest::BTN_LIBRARY = "Библиотека тестов";
+const pchar DialogTest::BTN_SAVE_TO_LIBRARY = "Сохранить в библиотеке";
+
+const pchar DialogTestAppend::BTN_ACTIVE = "Активный";
+const pchar DialogTestAppend::BTN_FROM_LIBRARY = "Из библиотеки";
+
+
 DialogTest::DialogTest() :
     MenuDialog("Тест", 175, { 0, 1, 3, 6, 7 },
         BTN_APPEND, []()
@@ -41,7 +55,7 @@ DialogTest::DialogTest() :
 {
     self = this;
 
-//    FindButton()
+//    FindButton(BTN_SAVE_PARAMETERS)->Enable(false);
 }
 
 
