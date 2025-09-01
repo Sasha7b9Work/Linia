@@ -1,5 +1,4 @@
-﻿#include "defines.h"
-#include "Communicator/SPI/SPI.h"
+﻿#include "Communicator/SPI/SPI.h"
 
 #ifdef WIN32
 namespace SPI
@@ -54,37 +53,41 @@ namespace SPI
 
 namespace SPI
 {
-    static int g_spi_fd = -1;  
-    static uint32_t g_speed = 115000;
-    static uint8_t g_mode = 0;
-    static uint8_t g_bits_per_word = 8;
-    static bool g_gpio_initialized = false;
+    static int g_spi_fd = -1;                     
+    static uint32_t g_speed = 100000;             
+    static uint8_t g_mode = 0;                    
+    static uint8_t g_bits_per_word = 8;           
+    static bool g_gpio_initialized = false;       
 
-    const int MAX_DAC_COUNT = 2;
+    const char *device = "/dev/spidev0.0"; // Путь к SPI устройству
+
+    const int MAX_DAC_COUNT = 2;                  
 
 #ifdef ARM64
-    struct gpiod_chip *g_gpio_chip = nullptr;
-    struct gpiod_line *g_dac_lines[MAX_DAC_COUNT] = {nullptr, nullptr};
+    const char *gpio_chip_name = "gpiochip3";                        // Имя GPIO чипа для ARM64
+    struct gpiod_chip *g_gpio_chip = nullptr;                        // Дескриптор GPIO чипа
+    struct gpiod_line *g_dac_lines[MAX_DAC_COUNT] = {nullptr, nullptr}; // Линии GPIO для каждого DAC
 
     const unsigned int DAC_GPIO_NUMS[MAX_DAC_COUNT] = {
-        0,
-        2
+        0,  // GPIO пин для DAC (pin. 31)
+        2   // GPIO пин для DAC #2 (pin. 35)
     };
 
+    // Имена GPIO линий для отладки
     const char* DAC_NAMES[MAX_DAC_COUNT] = {
-        "SPI_EN_DDA1",
-        "SPI_EN_DDA2"
+        "SPI_EN_DDA1",  // Включение DAC #1
+        "SPI_EN_DDA2"   // Включение DAC #2
     };
 #endif
 
-    static bool InitGPIO();
-    static void DeInitGPIO();
-    static void SetCS(int dac_number, bool enable);
-    static bool Write(uint8_t *data, size_t length);
+    static bool InitGPIO();                           
+    static void DeInitGPIO();                         
+    static void SetCS(int dac_number, bool enable);   // Управление CS (Chip Select) для конкретного DAC
+    static bool Write(uint8_t *data, size_t length);  
 
     void Init()
     {
-        const char *device = "/dev/spidev0.0";
+        
 
         g_spi_fd = ::open(device, O_RDWR);
         if (g_spi_fd < 0)
@@ -144,6 +147,10 @@ namespace SPI
         DeInitGPIO();
     }
 
+    // Запись 16-битного значения в динамический DAC через SPI
+    // number_DAC: номер DAC (1 или 2)
+    // value: 16-битное значение для записи (0x0000-0xFFFF)
+    // Возвращает: true если запись успешна, false при ошибке
     bool WriteDynamicDAC(int number_DAC, uint16_t value)
     {
         if (!IsReady())
@@ -178,6 +185,7 @@ namespace SPI
         return result;
     }
 
+    // Установка скорости SPI интерфейса
     bool SetSpeed(uint32_t speedHz)
     {
         g_speed = speedHz;
@@ -195,6 +203,9 @@ namespace SPI
         return true;
     }
 
+    // Установка режима SPI (полярность и фаза тактового сигнала)
+    // mode: режим SPI (0-3: 0=CPOL=0,CPHA=0; 1=CPOL=0,CPHA=1; 2=CPOL=1,CPHA=0; 3=CPOL=1,CPHA=1)
+    // Возвращает: true если режим установлен успешно, false при ошибке
     bool SetMode(uint8_t mode)
     {
         g_mode = mode;
@@ -212,16 +223,22 @@ namespace SPI
         return true;
     }
 
+    // Проверка готовности SPI к работе
+    // Возвращает: true если SPI устройство открыто и готово к работе, false если закрыто
     bool IsReady()
     {
         return g_spi_fd >= 0 && g_gpio_initialized;
     }
 
+    // Получение текущей скорости SPI
+    // Возвращает: скорость в Герцах
     uint32_t GetSpeed()
     {
         return g_speed;
     }
 
+    // Получение текущего режима SPI
+    // Возвращает: режим SPI (0-3)
     uint8_t GetMode()
     {
         return g_mode;
@@ -233,14 +250,14 @@ namespace SPI
         if (g_gpio_initialized)
             return true;
 
-        g_gpio_chip = gpiod_chip_open_by_name("gpiochip3");
+        g_gpio_chip = gpiod_chip_open_by_name(gpio_chip_name);
         if (!g_gpio_chip)
         {
-            std::cerr << "Error: Cannot open gpiochip3" << std::endl;
+            std::cerr << "Error: Cannot open " << gpio_chip_name << std::endl;
             return false;
         }
         
-        std::cout << "Opened gpiochip3 for GPIO3_A0 and GPIO3_A2" << std::endl;
+        std::cout << "Opened " << gpio_chip_name << " for GPIO3_A0 and GPIO3_A2" << std::endl;
 
         for (int i = 0; i < MAX_DAC_COUNT; i++)
         {
@@ -309,6 +326,9 @@ namespace SPI
         g_gpio_initialized = false;
     }
 
+    // Внутренняя функция: управление CS (Chip Select) для конкретного DAC
+    // dac_number: номер DAC (1 или 2)
+    // enable: true = активировать CS (LOW), false = деактивировать CS (HIGH)
     void SetCS(int dac_number, bool enable)
     {
         if (!g_gpio_initialized)
