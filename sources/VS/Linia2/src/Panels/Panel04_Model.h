@@ -9,7 +9,7 @@ class PanelModel : public Panel
 public:
 
     static const int WIDTH = MainWindow::WIDTH1;
-    static const int HEIGHT = 400;
+    static const int HEIGHT = 420;
 
     PanelModel(wxWindow *parent);
 

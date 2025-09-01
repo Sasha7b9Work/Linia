@@ -56,7 +56,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
             "Синусоидальное"
         };
 
-        comboScan = new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::XY0().y }, { 32, 42 }, files, tooltips, 0, 3, "comboScan");
+        comboScan = new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::XY0().y }, { 32, 32 }, files, tooltips, 0, 3, "comboScan");
 
         int y = 25;
         int x0 = 80;
@@ -108,7 +108,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
 
         comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", SD::XY0(), PanelConfig::WIDTH_COMBO, names, names, 1, "comboRange");
 
-        new wxStaticText(boxSource, wxID_ANY, "Ограничение Uc, %%", { 40, SD::Y_SB(65) });
+        new wxStaticText(boxSource, wxID_ANY, "Ограничение Uc, %", { 40, SD::Y_SB(65) });
 
         int y = 90;
 

@@ -11,7 +11,7 @@ class PanelModeLower : public Panel
 public:
 
     static const int WIDTH = MainWindow::WIDTH1;
-    static const int HEIGHT = MainWindow::HEIGHT - MainWindow::HEIGTH1 - PanelModel::HEIGHT - PanelPercents::HEIGHT - PanelButtons::HEIGHT;
+    static const int HEIGHT = MainWindow::HEIGHT - MainWindow::HEIGTH1 - PanelModel::HEIGHT - PanelButtons::HEIGHT;
 
     PanelModeLower(wxWindow *parent);
 

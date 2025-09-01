@@ -11,7 +11,6 @@
 #include "Panels/Panel03_Config/Panel03_Config.h"
 #include "Panels/Panel04_Model.h"
 #include "Panels/Panel05_Graph/Panel05_Graph.h"
-#include "Panels/Panel06_Percents.h"
 #include "Panels/Panel07_Indicator.h"
 #include "Panels/Panel08_ModeLower.h"
 #include "Panels/Panel09_Table.h"
@@ -34,8 +33,8 @@
     |    4    |            5                    |                  |
     |         |                                 |                  |
     |         |                                 |                  |
-    +---------+                                 +------------------|
-    |    6    |                                 |        7         |
+    |         |                                 +------------------|
+    |         |                                 |        7         |
     +---------+                                 +------------------+
     |         +---------------------------------+                  |
     |    8    |             9                   |        10        |
@@ -111,8 +110,6 @@ MainWindow::MainWindow(const wxString &title)
     new PanelModel(this);
 
     new PanelGraph(this);
-
-    new PanelPercents(this);
 
     new PanelIndicator(this);
 
@@ -293,7 +290,6 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
     PanelConfig::self->Show(mode == ModeMainWindow::Standard);
     PanelModel::self->Show(mode == ModeMainWindow::Standard);
     PanelGraph::self->Show(mode == ModeMainWindow::Standard);
-    PanelPercents::self->Show(mode == ModeMainWindow::Standard);
     PanelIndicator::self->Show(mode == ModeMainWindow::Standard);
     PanelModeLower::self->Show(mode == ModeMainWindow::Standard);
     PanelTable::self->Show(mode == ModeMainWindow::Standard);

@@ -17,8 +17,8 @@ public:
 
     //    virtual void SetDataCallback(DataCallback callback) = 0;
 
-    // Схема включения всех каналов
-    virtual void SetCircuitConnection(Chan::E, StateJack::E) = 0;               // :C:CONNECTION <C,B,S,E,GEN,1K,BREAK>
+    // Схема включения канала
+    virtual void SetCircuitConnection(Chan::E, StateJack::E) = 0;               // :S:CONNECTION <C,B,S,E,GEN,1K,BREAK>
 
     // Вид развёртки
     virtual void SetSweepType(TypeScan::E) = 0;                                 // :TYPESCAN
@@ -40,12 +40,12 @@ public:
     virtual void SetChannelC_MeasRange(RangeI::E) = 0;                          // :C:RANGE:MEAS 50uA
 
     // Ограничение источника U от 0 до 100%
-    virtual void SetChannelC_LimitSourceU(int min, int max) = 0;                // :C:LIMIT 10V
+    virtual void SetChannelC_LimitSourceU(int min, int max) = 0;                // :C:LIMIT 10 20
 
     //------------------------------------------------------------------------------------------------------------
 
     // Режим источника в канале B
-    virtual void SetChannelB_SourceMode(ModeSource::E) = 0;                     // S:MODE:SOURCE U
+    virtual void SetChannelB_SourceMode(ModeSource::E) = 0;                     // :S:MODE:SOURCE U
 
     virtual void SetChannelB_AmplitudeRange(uint8_t range) = 0;
 
