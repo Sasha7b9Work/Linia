@@ -14,6 +14,9 @@
 
 namespace GF
 {
+    // Возвращает каталог, где хранятся файлы *.mod и создаёт его, если таковой не существует
+    wxString DirForModFiles();
+
     // Центрировать text относительно border
     void HorizontalAlignCenter(wxStaticText *label, wxWindow *border);
 

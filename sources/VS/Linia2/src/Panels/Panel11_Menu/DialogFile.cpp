@@ -37,7 +37,7 @@ DialogFile::DialogFile() :
 
                 if (dialog.ShowModal() == wxID_YES)
                 {
-                    wxFileDialog dialog_save(self, "Сохранить файл модели измерения", wxEmptyString, wxEmptyString, "*.mod", wxFD_SAVE);
+                    wxFileDialog dialog_save(self, "Сохранить файл модели измерения", GF::DirForModFiles(), wxEmptyString, "*.mod", wxFD_SAVE);
 
                     if (dialog_save.ShowModal() == wxID_OK)
                     {

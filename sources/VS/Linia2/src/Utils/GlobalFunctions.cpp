@@ -160,3 +160,16 @@ wxPoint GF::GetCoordCenter(const wxSize &size)
 
     return pos_win;
 }
+
+
+wxString GF::DirForModFiles()
+{
+    wxString path = wxGetCwd() + wxT("/mod");
+
+    if (!wxDirExists(path))
+    {
+        wxMkDir(path);
+    }
+
+    return path;
+}
