@@ -8,10 +8,18 @@ DialogTable *DialogTable::self = nullptr;
 
 DialogTable::DialogTable() :
     MenuDialog("Таблица", 100, { },
-        "Сохранить", [](){},
-        "Удалить", []() {},
-        "Развернуть", []() {},
-        "Свернуть", []() {}
+        BTN_SAVE, []()
+        {
+        },
+        BTN_DELETE, []()
+        {
+        },
+        BTN_EXPAND, []()
+        {
+        },
+        BTN_COLLAPSE, []()
+        {
+        }
     )
 {
     self = this;

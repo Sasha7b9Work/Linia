@@ -9,29 +9,53 @@ DialogTestAppend *DialogTestAppend::self = nullptr;
 
 DialogTest::DialogTest() :
     MenuDialog("Тест", 175, { 0, 1, 3, 6, 7 },
-        "Добавить", []()
+        BTN_APPEND, []()
         {
             DialogTestAppend().ShowModal();
         },
-        "Сохранить параметры", []() {},
-        "Удалить", []() {},
-        "Удалить все", []() {},
-        "Копировать", []() {},
-        "Вставить", []() {},
-        "Переименовать", []() {},
-        "Библиотека тестов", []() {},
-        "Сохранить в библиотеке", []() {}
+        BTN_SAVE_PARAMETERS, []()
+        {
+        },
+        BTN_DELETE, []()
+        {
+        },
+        BTN_DELETE_ALL, []()
+        {
+        },
+        BTN_COPY, []()
+        {
+        },
+        BTN_INSERT, []()
+        {
+        },
+        BTN_RENAME, []()
+        {
+        },
+        BTN_LIBRARY, []()
+        {
+        },
+        BTN_SAVE_TO_LIBRARY, []()
+        {
+        }
     )
 {
     self = this;
+
+//    FindButton()
 }
 
 
 DialogTestAppend::DialogTestAppend() :
     MenuDialog("Добавить", 150, { },
-        "Активный", []() {},
-        "Из библиотеки", []() {}
+        BTN_ACTIVE, []()
+        {
+        },
+        BTN_FROM_LIBRARY, []()
+        {
+        }
     )
 {
     self = this;
+
+//    FindButton()
 }

@@ -10,4 +10,13 @@ public:
     DialogFile();
 
     static DialogFile *self;
+
+private:
+
+    const pchar BTN_NEW = "Новый";
+    const pchar BTN_OPEN = "Открыть";
+    const pchar BTN_CLOSE = "Закрыть";
+    const pchar BTN_SAVE = "Cохранить";
+    const pchar BTN_SAVE_AS = "Сохранить как...";
+    const pchar BTN_DELETE = "Удалить";
 };

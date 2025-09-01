@@ -11,13 +11,13 @@ DialogFile *DialogFile::self = nullptr;
 
 DialogFile::DialogFile() :
     MenuDialog("Файл", 125, { 2, 4 },
-        "Новый", []()
+        BTN_NEW, []()
         {
             Model::CreateNew("Untitled");
             PanelModel::self->Update();
             DialogFile::self->Close(true);
         },
-        "Открыть", []()
+        BTN_OPEN, []()
         {
             wxFileDialog dialog(self, "Открыть файл модели измерения", wxEmptyString, wxEmptyString, "*.mod", wxFD_OPEN);
 
@@ -30,7 +30,7 @@ DialogFile::DialogFile() :
 
             }
         },
-        "Закрыть", []()
+        BTN_CLOSE, []()
         {
             if (Model::IsModified())
             {
@@ -38,35 +38,41 @@ DialogFile::DialogFile() :
 
                 if (dialog.ShowModal() == wxID_YES)
                 {
-                    wxFileDialog dialog_save(self, "Сохранить файл модели измерения", GF::DirForModFiles(), wxEmptyString, "*.mod", wxFD_SAVE);
+                    wxFileDialog dialog_save(self, "Сохранить файл модели измерения", GF::DirForModFiles(), Model::GetName() + ".mod", "*.mod", wxFD_SAVE);
 
                     if (dialog_save.ShowModal() == wxID_OK)
                     {
 
                     }
                 }
+                else
+                {
+                    Model::Delete();
+                    PanelModel::self->Update();
+                }
             }
 
             DialogFile::self->Close(true);
         },
-        "Cохранить", []()
+        BTN_SAVE, []()
         {
             DialogFile::self->Close(true);
         },
-        "Сохранить как...", []()
+        BTN_SAVE_AS, []()
         {
-            wxFileDialog dialog(self, "Сохранить файл модели измерения", wxEmptyString, wxEmptyString, "*.mod", wxFD_SAVE);
+            wxFileDialog dialog(self, "Сохранить файл модели измерения", GF::DirForModFiles(), Model::GetName() + ".mod", "*.mod", wxFD_SAVE);
 
             if (dialog.ShowModal() == wxID_OK)
             {
-
+                Model::Delete();
+                PanelModel::self->Update();
             }
             else
             {
 
             }
         },
-        "Удалить", []()
+        BTN_DELETE, []()
         {
 
         }
@@ -76,9 +82,9 @@ DialogFile::DialogFile() :
 
     bool empty = Model::IsEmpty();
 
-    FindButton("Новый")->Enable(empty);
-    FindButton("Открыть")->Enable(empty);
-    FindButton("Закрыть")->Enable(!empty);
-    FindButton("Cохранить")->Enable(!empty);
-    FindButton("Сохранить как...")->Enable(!empty);
+    FindButton(BTN_NEW)->Enable(empty);
+    FindButton(BTN_OPEN)->Enable(empty);
+    FindButton(BTN_CLOSE)->Enable(!empty);
+    FindButton(BTN_SAVE)->Enable(!empty);
+    FindButton(BTN_SAVE_AS)->Enable(!empty);
 }

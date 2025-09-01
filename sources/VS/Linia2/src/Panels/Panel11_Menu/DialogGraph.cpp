@@ -10,19 +10,29 @@ DialogGraphColor *DialogGraphColor::self = nullptr;
 
 DialogGraph::DialogGraph() :
     MenuDialog("График", 200, { },
-        "Размер точки", [](){},
-        "Стиль кривой", []() {},
-        "Цвет", []()
+        BTN_SIZE_POINT, []()
+        {
+        },
+        BTN_STYLE_CURVE, []()
+        {
+        },
+        BTN_COLOR, []()
         {
             DialogGraphColor().ShowModal();
         },
-        "Маркеры", []() {},
-        "Шкала", []()
+        BTN_MARKERS, []()
+        {
+        },
+        BTN_SCALE, []()
         {
             WindowScale().ShowModal();
         },
-        "Сохранить график в архиве", []() {},
-        "Сброс графика Ref", []() {}
+        BTN_SAVE, []()
+        {
+        },
+        BTN_RESET, []()
+        {
+        }
     )
 {
     self = this;
@@ -31,7 +41,7 @@ DialogGraph::DialogGraph() :
 
 DialogGraphColor::DialogGraphColor() :
     MenuDialog("Цвет", 125, { },
-        "Фона", []()
+        BTN_BACKGROUND, []()
         {
             wxColour color;
 
@@ -40,7 +50,7 @@ DialogGraphColor::DialogGraphColor() :
 
             }
         },
-        "Сетки", []()
+        BTN_GRID, []()
         {
             wxColour color;
 
@@ -49,7 +59,7 @@ DialogGraphColor::DialogGraphColor() :
 
             }
         },
-        "Шрифта", []()
+        BTN_FONT, []()
         {
             wxColour color;
 
@@ -58,7 +68,7 @@ DialogGraphColor::DialogGraphColor() :
 
             }
         },
-        "Кривой", []()
+        BTN_CURVE, []()
         {
             wxColour color;
 
@@ -67,7 +77,7 @@ DialogGraphColor::DialogGraphColor() :
 
             }
         },
-        "Ссылки", []()
+        BTN_LINK, []()
         {
             wxColour color;
 
@@ -76,7 +86,7 @@ DialogGraphColor::DialogGraphColor() :
 
             }
         },
-        "Секущей", []()
+        BTN_SECANT, []()
         {
             wxColour color;
 

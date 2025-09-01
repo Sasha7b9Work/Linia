@@ -9,6 +9,8 @@ namespace Model
 
     void CreateNew(const wxString &name);
 
+    void Delete();
+
     wxString GetName();
 
     bool IsModified();

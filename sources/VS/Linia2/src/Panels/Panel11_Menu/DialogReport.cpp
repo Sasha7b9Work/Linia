@@ -8,12 +8,24 @@ DialogReport *DialogReport::self = nullptr;
 
 DialogReport::DialogReport() :
     MenuDialog("Отчёт", 100, { },
-        "Новый", [](){},
-        "Сохранить", []() {},
-        "Удалить", []() {},
-        "Развернуть", []() {},
-        "Свернуть", []() {},
-        "Закрыть", []() {}
+        BTN_NEW, []()
+        {
+        },
+        BTN_SAVE, []()
+        {
+        },
+        BTN_DELETE, []()
+        {
+        },
+        BTN_EXPAND, []()
+        {
+        },
+        BTN_COLLAPSE, []()
+        {
+        },
+        BTN_CLOSE, []()
+        {
+        }
     )
 {
     self = this;

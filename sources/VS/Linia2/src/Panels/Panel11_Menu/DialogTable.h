@@ -10,4 +10,11 @@ public:
     DialogTable();
 
     static DialogTable *self;
+
+private:
+
+    const pchar BTN_SAVE = "Сохранить";
+    const pchar BTN_DELETE = "Удалить";
+    const pchar BTN_EXPAND = "Развернуть";
+    const pchar BTN_COLLAPSE = "Свернуть";
 };
