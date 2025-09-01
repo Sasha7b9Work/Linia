@@ -8,7 +8,7 @@ extern Device::IDevice* g_device;
 
 namespace Device {
 
-enum class ChannelMode : uint8_t {
+enum class ChannelMode : uint8 {
     OPEN         = 0,  // обрыв
     CHANNEL      = 1,  // канал
     COMMON       = 2,  // общий  
@@ -82,9 +82,9 @@ public:
     virtual void Shutdown() = 0;
     virtual bool IsConnected() const = 0;
     
-    virtual void SetButtonCallback(ButtonCallback callback) = 0;
-    virtual void SetStatusCallback(StatusCallback callback) = 0;
-    virtual void SetDataCallback(DataCallback callback) = 0;
+//    virtual void SetButtonCallback(ButtonCallback callback) = 0;
+//    virtual void SetStatusCallback(StatusCallback callback) = 0;
+//    virtual void SetDataCallback(DataCallback callback) = 0;
 
     virtual void SetCircuitConnection(ChannelMode channelC, ChannelMode channelB, ChannelMode channelS) = 0;
     

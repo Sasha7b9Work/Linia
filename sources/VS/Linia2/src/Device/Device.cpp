@@ -1,3 +1,4 @@
+#include "defines.h"
 #include "Device.h"
 
 #ifdef _WIN32
