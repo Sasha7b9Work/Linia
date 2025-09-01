@@ -6,5 +6,5 @@
 WindowUser::WindowUser() :
     Dialog(nullptr, wxID_ANY, "Настройки пользователя", wxDefaultPosition, { WIDTH, HEIGHT })
 {
-
+    new wxStaticText(this, wxID_ANY, "Изделие", { 20, 20 });
 }
