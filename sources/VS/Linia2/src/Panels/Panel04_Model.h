@@ -1,4 +1,4 @@
-// 2025/6/1 17:41:14 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/6/1 17:41:14 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Panels/Panel.h"
 #include "MainWindow.h"
@@ -15,8 +15,7 @@ public:
 
     static PanelModel *self;
 
-    // Вызывается после загрузки/выгрузки модели
-    void Init();
+    virtual void Update() override;
 
 private:
 

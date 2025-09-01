@@ -4,6 +4,10 @@
 
 namespace Model
 {
-    // Модель загружена и с ней идёт работа
-    bool IsLoaded();
+    // Нет модели
+    bool IsEmpty();
+
+    void CreateNew(const wxString &name);
+
+    wxString GetName();
 }

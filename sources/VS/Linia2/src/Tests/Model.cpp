@@ -3,7 +3,27 @@
 #include "Tests/Model.h"
 
 
-bool Model::IsLoaded()
+namespace Model
 {
-    return false;
+    static bool empty = true;
+    static wxString name = "";
+}
+
+
+bool Model::IsEmpty()
+{
+    return empty;
+}
+
+
+void Model::CreateNew(const wxString &_name)
+{
+    empty = false;
+    name = _name;
+}
+
+
+wxString Model::GetName()
+{
+    return name;
 }

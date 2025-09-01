@@ -25,7 +25,7 @@ PanelModel::PanelModel(wxWindow* parent) :
 
     panel_graph->SetBackgroundColour(*wxWHITE);
 
-    Init();
+    Update();
 }
 
 
@@ -35,10 +35,16 @@ void PanelModel::SetName(const wxString &_name)
 }
 
 
-void PanelModel::Init()
+void PanelModel::Update()
 {
-    if (!Model::IsLoaded())
+    Panel::Update();
+
+    if (Model::IsEmpty())
     {
         SetName("Файл модели");
+    }
+    else
+    {
+        SetName(Model::GetName());
     }
 }
