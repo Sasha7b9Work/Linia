@@ -11,6 +11,8 @@ public:
 
     static DialogFile *self;
 
+    virtual void Update() override;
+
 private:
 
     static const pchar BTN_NEW;

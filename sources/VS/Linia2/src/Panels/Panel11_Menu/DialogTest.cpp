@@ -55,7 +55,20 @@ DialogTest::DialogTest() :
 {
     self = this;
 
-//    FindButton(BTN_SAVE_PARAMETERS)->Enable(false);
+    Update();
+}
+
+
+void DialogTest::Update()
+{
+    MenuDialog::Update();
+
+    FindButton(BTN_SAVE_PARAMETERS)->Enable(false);
+    FindButton(BTN_DELETE)->Enable(false);
+    FindButton(BTN_DELETE_ALL)->Enable(false);
+    FindButton(BTN_COPY)->Enable(false);
+    FindButton(BTN_INSERT)->Enable(false);
+    FindButton(BTN_RENAME)->Enable(false);
 }
 
 

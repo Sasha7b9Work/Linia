@@ -88,6 +88,14 @@ DialogFile::DialogFile() :
 {
     self = this;
 
+    Update();
+}
+
+
+void DialogFile::Update()
+{
+    MenuDialog::Update();
+
     bool empty = Model::IsEmpty();
 
     FindButton(BTN_NEW)->Enable(empty);
