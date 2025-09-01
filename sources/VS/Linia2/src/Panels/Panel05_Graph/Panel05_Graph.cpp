@@ -46,6 +46,10 @@ PanelGraph::PanelGraph(wxWindow *parent) :
     CreateEntities();
 
     Draw();
+
+    panel_errors = new PanelErrors(this);
+
+    panel_errors->Hide();
 }
 
 

@@ -4,6 +4,8 @@
 #include "MainWindow.h"
 #include "Panels/Panel11_Menu/Panel11_Menu.h"
 #include "Controls/ButtonsCombo.h"
+#include "Panels/Panel03_Config/Panel03_Config.h"
+#include "Panels/Panel07_Indicator.h"
 
 
 class PanelModeLower : public Panel

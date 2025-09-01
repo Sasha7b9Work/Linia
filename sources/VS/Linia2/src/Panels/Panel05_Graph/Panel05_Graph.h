@@ -4,6 +4,7 @@
 #include "MainWindow.h"
 #include "Panels/Panel05_Graph/Grid.h"
 #include "Panels/Panel05_Graph/GraphEntity.h"
+#include "Panels/Panel05_Graph/PanelErrors.h"
 
 
 class PanelGraph : public Panel
@@ -32,6 +33,8 @@ public:
     bool track_none = true;         // Не отслеживать координаты
     bool mouse_is_pressed = false;
     bool full_screen = false;       // График рисуется на полный экран
+
+    PanelErrors *panel_errors = nullptr;
 
 private:
 
