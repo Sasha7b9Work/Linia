@@ -7,24 +7,24 @@ namespace UART
     
     void DeInit() {}
     
-    bool Open(int baudrate, const char* mode) 
+    bool Open(int /*baudrate*/, const char* /*mode*/) 
     { 
         return false; 
     }
     
     void Close() {}
     
-    bool SendByte(uint8_t byte) 
+    bool SendByte(uint8_t /*byte*/) 
     { 
         return false; 
     }
     
-    bool SendBuffer(const uint8_t* buffer, int size) 
+    bool SendBuffer(const uint8_t* /*buffer*/, int /*size*/) 
     { 
         return false; 
     }
     
-    void SetCallback(ReceivedCallback callback) {}
+    void SetCallback(ReceivedCallback /*callback*/) {}
     
     void Flush() {}
     
