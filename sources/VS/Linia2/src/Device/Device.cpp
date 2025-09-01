@@ -1,8 +1,7 @@
 #include "defines.h"
-#include "Device.h"
+#include "Device/Device.h"
 
 #ifdef _WIN32
-    #include <windows.h>
 #else
     #include <unistd.h>
     #include <fcntl.h>
