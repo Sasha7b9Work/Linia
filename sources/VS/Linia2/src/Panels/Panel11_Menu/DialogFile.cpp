@@ -31,6 +31,21 @@ DialogFile::DialogFile() :
         },
         "Закрыть", []()
         {
+            if (Model::IsModified())
+            {
+                wxMessageDialog dialog(self, "Файл модели был изменён. Сохранить изменения?", "Подтверждение", wxYES_NO | wxICON_QUESTION);
+
+                if (dialog.ShowModal() == wxID_YES)
+                {
+                    wxFileDialog dialog_save(self, "Сохранить файл модели измерения", wxEmptyString, wxEmptyString, "*.mod", wxFD_SAVE);
+
+                    if (dialog_save.ShowModal() == wxID_OK)
+                    {
+
+                    }
+                }
+            }
+
             DialogFile::self->Close(true);
         },
         "Cохранить", []()

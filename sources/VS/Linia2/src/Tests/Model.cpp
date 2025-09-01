@@ -27,3 +27,9 @@ wxString Model::GetName()
 {
     return name;
 }
+
+
+bool Model::IsModified()
+{
+    return true;
+}

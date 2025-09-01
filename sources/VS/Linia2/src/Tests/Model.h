@@ -10,4 +10,6 @@ namespace Model
     void CreateNew(const wxString &name);
 
     wxString GetName();
+
+    bool IsModified();
 }
