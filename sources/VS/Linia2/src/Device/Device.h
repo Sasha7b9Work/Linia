@@ -1,4 +1,7 @@
 #pragma once
+#include "Tests/SettingsTests.h"
+#include "Tests/Ranges.h"
+
 
 namespace Device {
     class IDevice;
@@ -7,29 +10,6 @@ namespace Device {
 extern Device::IDevice* g_device;
 
 namespace Device {
-
-enum class ChannelMode : uint8 {
-    OPEN         = 0,  // обрыв
-    CHANNEL      = 1,  // канал
-    COMMON       = 2,  // общий  
-    NEUTRAL      = 3,  // нейтральное положение
-    COMMON_1KOHM = 4   // общий, 1 kOm
-};
-
-enum class SweepType : uint8_t {
-    PLUS_IMP     = 0,  // + IMP
-    PLUS_DC      = 1,  // + DC
-    PLUS_SYN     = 2,  // + SYN
-    PLUS_MINUS_AC = 3, // ± AC
-    MINUS_SYN    = 4,  // - SYN
-    MINUS_DC     = 5,  // - DC
-    MINUS_IMP    = 6   // - IMP
-};
-
-enum class SourceType : uint8_t {
-    VOLTAGE = 0,  // источник напряжения
-    CURRENT = 1   // источник тока
-};
 
 struct ButtonEvent {
     enum Type : uint8_t {
@@ -82,44 +62,42 @@ public:
     virtual void Shutdown() = 0;
     virtual bool IsConnected() const = 0;
     
-//    virtual void SetButtonCallback(ButtonCallback callback) = 0;
-//    virtual void SetStatusCallback(StatusCallback callback) = 0;
 //    virtual void SetDataCallback(DataCallback callback) = 0;
 
-    virtual void SetCircuitConnection(ChannelMode channelC, ChannelMode channelB, ChannelMode channelS) = 0;
+    virtual void SetCircuitConnection(StateJack::E channelC, StateJack::E channelB, StateJack::E channelS) = 0;
     
-    virtual void SetSweepType(SweepType sweep, uint8_t queue) = 0;
+    virtual void SetSweepType(TypeScan::E, FirstQueue::E) = 0;
     
-    virtual void SetPulseDuration(uint8_t duration, uint8_t mode) = 0;
+    virtual void SetPulseDuration(uint durationUS, GenerationStup::E) = 0;
 
-    virtual void SetChannelC_SourceRange(uint8_t range) = 0;              
-    virtual void SetChannelC_MeasU_Range(uint8_t range) = 0;              
-    virtual void SetChannelC_MeasI_Range(uint8_t range) = 0;              
-    virtual void SetChannelC_LimitMax(uint8_t percent) = 0;               
-    virtual void SetChannelC_LimitMin(uint8_t percent) = 0;               
+    virtual void SetChannelC_SourceRange(RangeU::E) = 0;              
+    virtual void SetChannelC_Meas_Range(RangeU::E) = 0;              
+    virtual void SetChannelC_Meas_Range(RangeI::E) = 0;              
+    virtual void SetChannelC_LimitMax(int percent) = 0;               
+    virtual void SetChannelC_LimitMin(int percent) = 0;               
     
-    virtual void SetChannelB_SourceMode(SourceType type) = 0;
+    virtual void SetChannelB_SourceMode(ModeSource::E) = 0;
     virtual void SetChannelB_AmplitudeRange(uint8_t range) = 0;
     virtual void SetChannelB_StepCount(uint8_t steps) = 0;     
     virtual void SetChannelB_AmplitudeValue(uint16_t value) = 0;
     virtual void SetChannelB_Bias(uint16_t value) = 0;          
-    virtual void SetChannelB_MeasMode(SourceType type) = 0;     
+    virtual void SetChannelB_MeasMode(ModeMeas::E) = 0;     
     virtual void SetChannelB_MeasRange(uint8_t range) = 0;      
     virtual void SetChannelB_LimitRange(uint8_t range) = 0;     
     virtual void SetChannelB_LimitThreshold(uint16_t value) = 0;
     virtual void SetChannelB_HighResolution(bool enable) = 0;   
-    virtual void SetChannelB_SourceType(SourceType type) = 0;   
+    virtual void SetChannelB_SourceType(ModeSource::E) = 0;   
     
-    virtual void SetChannelS_SourceMode(SourceType type) = 0;
+    virtual void SetChannelS_SourceMode(ModeSource::E) = 0;
     virtual void SetChannelS_AmplitudeRange(uint8_t range) = 0;
     virtual void SetChannelS_StepCount(uint8_t steps) = 0;     
     virtual void SetChannelS_AmplitudeValue(uint16_t value) = 0;
     virtual void SetChannelS_Bias(uint16_t value) = 0;          
-    virtual void SetChannelS_MeasMode(SourceType type) = 0;     
+    virtual void SetChannelS_MeasMode(ModeSource::E) = 0;     
     virtual void SetChannelS_MeasRange(uint8_t range) = 0;      
     virtual void SetChannelS_LimitRange(uint8_t range) = 0;     
     virtual void SetChannelS_LimitThreshold(uint16_t value) = 0;
-    virtual void SetChannelS_SourceType(SourceType type) = 0;   
+    virtual void SetChannelS_SourceType(ModeSource::E) = 0;   
     
     virtual void SetAutoZeroOff() = 0;                                    
     virtual void SetAutoZeroOn() = 0;                                     
