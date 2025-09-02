@@ -3,8 +3,6 @@
 
 struct Pin
 {
-    typedef void (*ChangeCallback)(bool);
-
     enum E
     {
         START,
@@ -24,11 +22,27 @@ struct Pin
     bool Get() const;
     void Set(bool);
 
+protected:
+
+    E value;
+};
+
+
+struct PinOut : public Pin
+{
+    PinOut(Pin::E v) : Pin(v) { }
+};
+
+
+struct PinIn : public Pin
+{
+    typedef void (*ChangeCallback)(bool);
+
+    PinIn(Pin::E v) : Pin(v) { }
+
     void SetChangeCallback(ChangeCallback);
 
 private:
-
-    E value;
 
     ChangeCallback onChange;
 };
@@ -40,12 +54,12 @@ namespace GPIO
 }
 
 
-extern Pin pinSTART;
-extern Pin pinSTOP;
-extern Pin pinDAT_F0;
-extern Pin pinDAT_F1;
-extern Pin pinDAT_F2;
-extern Pin pinDAT_F3;
-extern Pin pinREQ_RD;
-extern Pin pinFIFO_FULL;
-extern Pin pinFIFO_EMPTY;
+extern PinIn pinSTART;
+extern PinIn pinSTOP;
+extern PinIn pinDAT_F0;
+extern PinIn pinDAT_F1;
+extern PinIn pinDAT_F2;
+extern PinIn pinDAT_F3;
+extern PinIn pinREQ_RD;
+extern PinIn pinFIFO_FULL;
+extern PinIn pinFIFO_EMPTY;
