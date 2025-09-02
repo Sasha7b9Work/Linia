@@ -9,8 +9,6 @@ struct Pin
     {
         START,
         STOP,
-        EN_DDA1,
-        EN_DDA2,
         DAT_F0,
         DAT_F1,
         DAT_F2,
@@ -44,8 +42,6 @@ namespace GPIO
 
 extern Pin pinSTART;
 extern Pin pinSTOP;
-extern Pin pinEN_DDA1;
-extern Pin pinEN_DDA2;
 extern Pin pinDAT_F0;
 extern Pin pinDAT_F1;
 extern Pin pinDAT_F2;

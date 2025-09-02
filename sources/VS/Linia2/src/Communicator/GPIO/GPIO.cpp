@@ -6,8 +6,6 @@
 
 extern Pin pinSTART(Pin::START);
 extern Pin pinSTOP(Pin::STOP);
-extern Pin pinEN_DDA1(Pin::EN_DDA1);
-extern Pin pinEN_DDA2(Pin::EN_DDA2);
 extern Pin pinDAT_F0(Pin::DAT_F0);
 extern Pin pinDAT_F1(Pin::DAT_F1);
 extern Pin pinDAT_F2(Pin::DAT_F2);
