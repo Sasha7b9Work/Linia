@@ -30,4 +30,6 @@ PanelModeLower::PanelModeLower(wxWindow *parent) :
 
         new ButtonsCombo(boxCategory, "1 очередь", { 5, 120 }, 100, choices, choices, 1, "comboFirst");
     }
+
+    boxCategory->SetFont(boxCategory->TitleFont());
 }
