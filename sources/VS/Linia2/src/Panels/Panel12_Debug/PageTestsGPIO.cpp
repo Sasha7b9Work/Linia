@@ -118,5 +118,7 @@ wxPanel *PageTestsGPIO::CreatePanelPin(wxWindow *parent, PinIn &in, PinOut &out)
 
     new wxStaticText(panel, wxID_ANY, wxString::Format("%s : %d", NamePin(in.GetValue()), NumPin(in.GetValue())), { 150, 2 }, { 100, 22 });
 
+    gpio.push_back(strGPIO);
+
     return panel;
 }
