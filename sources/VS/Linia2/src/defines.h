@@ -2,8 +2,8 @@
 #pragma once
 
 
-#define VERSION_BUILD 49
-#define DATE_BUILD "2025-09-03 14:05:43"
+#define VERSION_BUILD 50
+#define DATE_BUILD "2025-09-03 15:04:57"
 
 
 #define WIN32_LEAN_AND_MEAN
@@ -35,6 +35,7 @@
 #include <queue>
 #include <mutex>
 #include <stack>
+#include <thread>
 #pragma warning(pop)
 
 
@@ -94,3 +95,4 @@ static pString DIRECT_PROMT = "<- ";
 #else
     #define LIGHTNESS 140
 #endif
+

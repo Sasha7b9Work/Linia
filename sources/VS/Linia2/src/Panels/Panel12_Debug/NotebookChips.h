@@ -5,7 +5,12 @@
 class NotebookChips : public wxNotebook
 {
 public:
+
     NotebookChips(wxWindow *parent);
 
     static NotebookChips *self;
+
+    void Init();
+
+    void DeInit();
 };

@@ -32,3 +32,15 @@ NotebookChips::NotebookChips(wxWindow *parent) :
 
     wxWindowBase::Layout();
 }
+
+
+void NotebookChips::Init()
+{
+    PageTestsGPIO::self->Init();
+}
+
+
+void NotebookChips::DeInit()
+{
+    PageTestsGPIO::self->DeInit();
+}

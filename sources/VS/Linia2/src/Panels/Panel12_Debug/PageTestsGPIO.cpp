@@ -6,6 +6,8 @@
 
 PageTestsGPIO *PageTestsGPIO::self = nullptr;
 
+bool PageTestsGPIO::thread_is_running = false;
+
 
 PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
     wxPanel(parent)
@@ -110,9 +112,11 @@ wxPanel *PageTestsGPIO::CreatePanelPin(wxWindow *parent, PinIn &in, PinOut &out)
 {
     wxPanel *panel = new wxPanel(parent, wxID_ANY, wxDefaultPosition, { 250, 23 });
 
-    StructGPIO strGPIO;
+    StructGPIO strGPIO(in, out);
 
     strGPIO.button = new wxButton(panel, wxID_ANY, wxString::Format("%s : %d", NamePin(out.GetValue()), NumPin(out.GetValue())), { 0, 0 }, { 70, 22 });
+
+    strGPIO.button->Bind(wxEVT_BUTTON, &PageTestsGPIO::OnEventButton, this);
 
     strGPIO.txtState = new wxTextCtrl(panel, wxID_ANY, "", { 100, 0 }, { 20, 22 }, wxTE_READONLY);
 
@@ -121,4 +125,56 @@ wxPanel *PageTestsGPIO::CreatePanelPin(wxWindow *parent, PinIn &in, PinOut &out)
     gpio.push_back(strGPIO);
 
     return panel;
+}
+
+
+void PageTestsGPIO::OnEventButton(wxCommandEvent & /*event*/)
+{
+
+}
+
+
+void PageTestsGPIO::ThreadFunc()
+{
+    while (thread_is_running)
+    {
+        for (auto &str : PageTestsGPIO::self->gpio)
+        {
+            str.txtState->SetValue(str.in.Get() ? "1" : "0");
+        }
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+}
+
+
+void PageTestsGPIO::Init()
+{
+    if (thread)
+    {
+        return;
+    }
+
+    thread_is_running = true;
+
+    thread = new std::thread(ThreadFunc);
+
+    thread->detach();
+}
+
+
+void PageTestsGPIO::DeInit()
+{
+    if(!thread)
+    {
+        return;
+    }
+
+    thread_is_running = false;
+
+    while (thread->joinable())
+    {
+    }
+
+    SAFE_DELETE(thread);
 }

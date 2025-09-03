@@ -10,4 +10,6 @@ public:
     PanelDebug(wxWindow *parent);
 
     static PanelDebug *self;
+
+    virtual bool Show(bool) override;
 };

@@ -9,6 +9,7 @@
 #include "Windows/ConsoleRS232.h"
 #include "Tests/Tests.h"
 #include "DeviceTest/DeviceEmulator.h"
+#include "Communicator/GPIO/GPIO.h"
 
 
 wxIMPLEMENT_APP(Application);
@@ -63,6 +64,8 @@ bool Application::OnInit()
     devicet->Init();
 
     timer.Start(10);
+
+    GPIO::Init();
 
     return true;
 }

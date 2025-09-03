@@ -12,6 +12,10 @@ public:
 
     static PageTestsGPIO *self;
 
+    void Init();
+
+    void DeInit();
+
 private:
 
     wxString NamePin(Pin::E) const;
@@ -24,9 +28,20 @@ private:
 
     struct StructGPIO
     {
-        wxButton   *button;
-        wxTextCtrl *txtState;
+        StructGPIO(PinIn &_in, PinOut &_out) : in(_in), out(_out) { }
+        wxButton   *button = nullptr;
+        wxTextCtrl *txtState = nullptr;
+        PinIn      &in;
+        PinOut     &out;
     };
 
     std::vector<StructGPIO> gpio;
+
+    void OnEventButton(wxCommandEvent &);
+
+    static void ThreadFunc();
+
+    static bool thread_is_running;
+
+    std::thread *thread = nullptr;
 };

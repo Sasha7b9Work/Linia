@@ -23,3 +23,11 @@ PanelDebug::PanelDebug(wxWindow *parent) :
 
     wxPanel::Layout();
 }
+
+
+bool PanelDebug::Show(bool show)
+{
+    show ? NotebookChips::self->Init() : NotebookChips::self->DeInit();
+
+    return wxPanel::Show(show);
+}

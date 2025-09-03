@@ -50,4 +50,15 @@ void
 
 
 #else
+
+void GPIO::Init()
+{
+
+}
+
+bool Pin::Get() const
+{
+    return false;
+}
+
 #endif
