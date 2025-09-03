@@ -5,7 +5,7 @@
 
 
 PageChip::PageChip(wxNotebook *parent, const wxString &title) :
-    wxPanel(parent, wxID_ANY)
+    wxPanel(parent)
 {
     wxPanel::SetName(title);
 

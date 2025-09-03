@@ -14,6 +14,15 @@ struct Pin
         REQ_RD,
         FIFO_FULL,
         FIFO_EMPTY,
+        OUT_1,
+        OUT_2,
+        OUT_3,
+        OUT_4,
+        OUT_5,
+        OUT_6,
+        OUT_7,
+        OUT_8,
+        OUT_9,
         Count
     };
 
@@ -44,7 +53,7 @@ struct PinIn : public Pin
 
 private:
 
-    ChangeCallback onChange;
+    ChangeCallback onChange = nullptr;
 };
 
 
@@ -63,3 +72,13 @@ extern PinIn pinDAT_F3;
 extern PinIn pinREQ_RD;
 extern PinIn pinFIFO_FULL;
 extern PinIn pinFIFO_EMPTY;
+
+extern PinOut pinOUT1;
+extern PinOut pinOUT2;
+extern PinOut pinOUT3;
+extern PinOut pinOUT4;
+extern PinOut pinOUT5;
+extern PinOut pinOUT6;
+extern PinOut pinOUT7;
+extern PinOut pinOUT8;
+extern PinOut pinOUT9;

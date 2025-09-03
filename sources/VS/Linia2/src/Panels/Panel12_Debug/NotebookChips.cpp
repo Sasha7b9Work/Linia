@@ -5,6 +5,7 @@
 #include "Panels/Panel12_Debug/Old/PageAD9952.h"
 #include "Panels/Panel12_Debug/Old/PageMCP4811.h"
 #include "Panels/Panel12_Debug/PagesChips/PageAD5300.h"
+#include "Panels/Panel12_Debug/PageTestsGPIO.h"
 
 
 NotebookChips *NotebookChips::self = nullptr;
@@ -15,10 +16,14 @@ NotebookChips::NotebookChips(wxWindow *parent) :
 {
     self = this;
 
+    new PageTestsGPIO(this);
+
     new PageAD5300(this);
     new PageAD5697(this);
     new PageAD9952(this);
     new PageMCP4811(this);
+
+    wxNotebook::AddPage(PageTestsGPIO::self, PageTestsGPIO::self->GetName());
 
     wxNotebook::AddPage(PageAD5300::self, PageAD5300::self->GetName());
     wxNotebook::AddPage(PageAD5697::self, PageAD5697::self->GetName());
