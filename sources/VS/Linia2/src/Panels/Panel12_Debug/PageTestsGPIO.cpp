@@ -17,7 +17,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
 
     {
         int x = 10;
-        int y = 30;
+        int y = 20;
         int dy = 25;
 
         struct StructPin
@@ -43,7 +43,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
         {
             wxPanel *panel = CreatePanelPin(boxGPIO, pins[i].in, pins[i].out);
 
-            panel->SetPosition({ x, y + i * dy });
+            panel->SetPosition({ x, SD::Y_SB(y + i * dy) });
         }
     }
 }
