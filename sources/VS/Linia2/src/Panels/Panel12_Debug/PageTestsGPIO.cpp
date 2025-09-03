@@ -110,7 +110,11 @@ wxPanel *PageTestsGPIO::CreatePanelPin(wxWindow *parent, PinIn &in, PinOut &out)
 {
     wxPanel *panel = new wxPanel(parent, wxID_ANY, wxDefaultPosition, { 250, 23 });
 
-    new wxButton(panel, wxID_ANY, wxString::Format("%s : %d", NamePin(out.GetValue()), NumPin(out.GetValue())), { 0, 0 }, { 70, 22 });
+    StructGPIO strGPIO;
+
+    strGPIO.button = new wxButton(panel, wxID_ANY, wxString::Format("%s : %d", NamePin(out.GetValue()), NumPin(out.GetValue())), { 0, 0 }, { 70, 22 });
+
+    strGPIO.txtState = new wxTextCtrl(panel, wxID_ANY, "", { 100, 0 }, { 20, 22 });
 
     new wxStaticText(panel, wxID_ANY, wxString::Format("%s : %d", NamePin(in.GetValue()), NumPin(in.GetValue())), { 150, 2 }, { 100, 22 });
 

@@ -2,8 +2,8 @@
 #pragma once
 
 
-#define VERSION_BUILD 47
-#define DATE_BUILD "2025-09-03 13:50:19"
+#define VERSION_BUILD 48
+#define DATE_BUILD "2025-09-03 14:02:56"
 
 
 #define WIN32_LEAN_AND_MEAN
