@@ -31,6 +31,11 @@ struct Pin
     bool Get() const;
     void Set(bool);
 
+    E GetValue() const
+    {
+        return value;
+    }
+
 protected:
 
     E value;

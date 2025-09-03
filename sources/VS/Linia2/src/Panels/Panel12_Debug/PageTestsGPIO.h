@@ -15,7 +15,9 @@ private:
 
     wxString NamePin(Pin::E) const;
 
+    int NumPin(Pin::E) const;
+
     // in - на этом пине висит лампочка
     // out - сюда ставим переключатель, чтобы управлять лампочкой
-    wxPanel *CreatePanelPin(PinIn &, PinOut &);
+    wxPanel *CreatePanelPin(wxWindow *, PinIn &, PinOut &);
 };
