@@ -3,44 +3,54 @@
 #ifdef WIN32
 namespace UART
 {
-    void Init() {}
-    
-    void DeInit() {}
-    
-    bool Open(int /*baudrate*/, const char* /*mode*/) 
-    { 
-        return false; 
+    void Init()
+    {
     }
-    
-    void Close() {}
-    
-    bool SendByte(uint8_t /*byte*/) 
-    { 
-        return false; 
+
+    void DeInit()
+    {
     }
-    
-    bool SendBuffer(const uint8_t* /*buffer*/, int /*size*/) 
-    { 
-        return false; 
+
+    bool Open(int /*baudrate*/, const char * /*mode*/)
+    {
+        return false;
     }
-    
-    void SetCallback(ReceivedCallback /*callback*/) {}
-    
-    void Flush() {}
-    
-    bool IsReady() 
-    { 
-        return false; 
+
+    void Close()
+    {
     }
-    
-    int GetBaudrate() 
-    { 
-        return 0; 
+
+    bool SendByte(uint8_t /*byte*/)
+    {
+        return false;
     }
-    
-    const char* GetMode() 
-    { 
-        return ""; 
+
+    bool SendBuffer(const uint8_t * /*buffer*/, int /*size*/)
+    {
+        return false;
+    }
+
+    void SetCallback(ReceivedCallback /*callback*/)
+    {
+    }
+
+    void Flush()
+    {
+    }
+
+    bool IsReady()
+    {
+        return false;
+    }
+
+    int GetBaudrate()
+    {
+        return 0;
+    }
+
+    const char *GetMode()
+    {
+        return "";
     }
 }
 
@@ -60,20 +70,30 @@ namespace UART
 
 namespace UART
 {
-    static int g_uart_fd = -1;                    
-    static int g_baudrate = 115200;               
-    static char g_mode[4] = "8N1";                
-    static ReceivedCallback g_callback = nullptr; 
-    static pthread_t g_reader_thread;             
-    static bool g_thread_running = false;         
-    static bool g_stop_reading = false;           
-    
+
+    /*
+    *   Вопросы Николаю.
+    *  1. Что означает префикс g_ у переменой g_uart_fd ?
+    *  2. Почему в функции ReaderThreadFunc() локальные переменные объявлены в начале функции ?
+    *  3. Функция ReaderThreadFunc() будет потреблять 100% процессорного времени. Это неправильно. Нужно вызывать функцию вроде Sleep(10) в каждой итерации цикла.
+    *  4. Можно ли сделать так, чтобы операционная система генерировала событие (либо что-то подобное) при поступлении нового символа в приёмный буфер?
+    *     Т.е. чтобы сама система вызывала некий аналог g_callback, а не опрашивать в ручную самим состяние приёмного буфера?
+    */
+
+    static int g_uart_fd = -1;
+    static int g_baudrate = 115200;
+    static char g_mode[4] = "8N1";
+    static ReceivedCallback g_callback = nullptr;
+    static pthread_t g_reader_thread;
+    static bool g_thread_running = false;
+    static bool g_stop_reading = false;
+
     const char *UART_DEVICE = "/dev/ttyS6";       // Путь к UART устройству
     const size_t BUFFER_SIZE = 1024;
 
     static int GetBaudrateConstant(int baudrate);
-    static bool ConfigurePort(int baudrate, const char* mode);
-    static void* ReaderThreadFunc(void* arg);
+    static bool ConfigurePort(int baudrate, const char *mode);
+    static void *ReaderThreadFunc(void *arg);
 
     void Init()
     {
@@ -83,7 +103,7 @@ namespace UART
         g_callback = nullptr;
         g_thread_running = false;
         g_stop_reading = false;
-        
+
         std::cout << "UART initialized" << std::endl;
     }
 
@@ -99,7 +119,7 @@ namespace UART
     // Открытие UART порта с настройкой параметров и запуском потока чтения
     // Принимает: baudrate - скорость передачи (9600, 19200 и т.д.), mode - формат данных ("8N1" и т.д.)
     // Возвращает: true если порт успешно открыт, false при ошибке
-    bool Open(int baudrate, const char* mode)
+    bool Open(int baudrate, const char *mode)
     {
         if (IsReady())
         {
@@ -146,8 +166,8 @@ namespace UART
         }
 
         g_thread_running = true;
-        std::cout << "UART opened successfully on " << UART_DEVICE 
-                  << " with baudrate " << baudrate << " and mode " << mode << std::endl;
+        std::cout << "UART opened successfully on " << UART_DEVICE
+            << " with baudrate " << baudrate << " and mode " << mode << std::endl;
         return true;
     }
 
@@ -172,7 +192,7 @@ namespace UART
         flock(g_uart_fd, LOCK_UN);
         ::close(g_uart_fd);
         g_uart_fd = -1;
-        
+
         std::cout << "UART closed" << std::endl;
     }
 
@@ -200,7 +220,7 @@ namespace UART
     // Отправка буфера данных через UART порциями по 32 байта
     // Принимает: указатель на данные для отправки, количество байт для отправки (должно быть > 0)
     // Возвращает: true если все данные отправлены успешно, false при ошибке
-    bool SendBuffer(const uint8_t* buffer, int size)
+    bool SendBuffer(const uint8_t *buffer, int size)
     {
         if (!IsReady())
         {
@@ -232,7 +252,7 @@ namespace UART
             }
 
             bytes_sent += n;
-            
+
             if (bytes_sent < size)
             {
                 usleep(100);
@@ -272,7 +292,7 @@ namespace UART
         return g_baudrate;
     }
 
-    const char* GetMode()
+    const char *GetMode()
     {
         return g_mode;
     }
@@ -282,24 +302,24 @@ namespace UART
     // Возвращает: системная константа (B115200, B9600, и т.д.)
     static int GetBaudrateConstant(int baudrate)
     {
-        switch(baudrate)
+        switch (baudrate)
         {
-            case 9600:   return B9600;
-            case 19200:  return B19200;
-            case 38400:  return B38400;
-            case 57600:  return B57600;
-            case 115200: return B115200;
-            case 230400: return B230400;
-            case 460800: return B460800;
-            case 921600: return B921600;
-            default:     return -1;
+        case 9600:   return B9600;
+        case 19200:  return B19200;
+        case 38400:  return B38400;
+        case 57600:  return B57600;
+        case 115200: return B115200;
+        case 230400: return B230400;
+        case 460800: return B460800;
+        case 921600: return B921600;
+        default:     return -1;
         }
     }
 
     // Внутренняя функция: настройка параметров UART порта
     // Принимает: baudrate - скорость передачи (9600, 19200 и т.д.), mode - режим передачи ("8N1" и т.д.)
     // Возвращает: true если настройка успешна, false при ошибке
-    static bool ConfigurePort(int baudrate, const char* mode)
+    static bool ConfigurePort(int baudrate, const char *mode)
     {
         struct termios port_settings;
         memset(&port_settings, 0, sizeof(port_settings));
@@ -315,28 +335,28 @@ namespace UART
 
         if (strlen(mode) == 3)
         {
-            switch(mode[0])
+            switch (mode[0])
             {
-                case '8': cbits = CS8; break;
-                case '7': cbits = CS7; break;
-                case '6': cbits = CS6; break;
-                case '5': cbits = CS5; break;
-                default: cbits = CS8; break;
+            case '8': cbits = CS8; break;
+            case '7': cbits = CS7; break;
+            case '6': cbits = CS6; break;
+            case '5': cbits = CS5; break;
+            default: cbits = CS8; break;
             }
 
-            switch(mode[1])
+            switch (mode[1])
             {
-                case 'N': case 'n': cpar = 0; ipar = IGNPAR; break;
-                case 'E': case 'e': cpar = PARENB; ipar = INPCK; break;
-                case 'O': case 'o': cpar = (PARENB | PARODD); ipar = INPCK; break;
-                default: cpar = 0; ipar = IGNPAR; break;
+            case 'N': case 'n': cpar = 0; ipar = IGNPAR; break;
+            case 'E': case 'e': cpar = PARENB; ipar = INPCK; break;
+            case 'O': case 'o': cpar = (PARENB | PARODD); ipar = INPCK; break;
+            default: cpar = 0; ipar = IGNPAR; break;
             }
 
-            switch(mode[2])
+            switch (mode[2])
             {
-                case '1': bstop = 0; break;
-                case '2': bstop = CSTOPB; break;
-                default: bstop = 0; break;
+            case '1': bstop = 0; break;
+            case '2': bstop = CSTOPB; break;
+            default: bstop = 0; break;
             }
         }
 
@@ -377,10 +397,10 @@ namespace UART
     // Функция потока чтения UART
     // Читает данные из UART и вызывает callback для каждого принятого байта
     // Работает до установки флага g_stop_reading
-    static void* ReaderThreadFunc(void* arg)
+    static void *ReaderThreadFunc(void *arg)
     {
         (void)arg;
-        
+
         uint8_t buffer[BUFFER_SIZE];
         int bytes_read;
         fd_set read_fds;
@@ -391,17 +411,17 @@ namespace UART
             // Настраиваем select для ожидания данных
             FD_ZERO(&read_fds);
             FD_SET(g_uart_fd, &read_fds);
-            
+
             timeout.tv_sec = 0;
             timeout.tv_usec = 100000;
-            
+
             // select блокируется до появления данных или таймаута
             int result = select(g_uart_fd + 1, &read_fds, nullptr, nullptr, &timeout);
-            
+
             if (result > 0 && FD_ISSET(g_uart_fd, &read_fds))
             {
                 bytes_read = read(g_uart_fd, buffer, sizeof(buffer));
-                
+
                 if (bytes_read > 0)
                 {
                     if (g_callback)
