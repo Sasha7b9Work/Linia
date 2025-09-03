@@ -18,9 +18,9 @@ public:
 
 private:
 
-    wxString NamePin(Pin::E) const;
+    wxString NamePin(Pin::Type) const;
 
-    int NumPin(Pin::E) const;
+    int NumPin(Pin::Type) const;
 
     // in - на этом пине висит лампочка
     // out - сюда ставим переключатель, чтобы управлять лампочкой
