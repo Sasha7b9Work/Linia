@@ -75,7 +75,7 @@ namespace GPIO {
     void Init();
     void DeInit();
 
-#ifndef WIN32
+#ifdef ARM64
     // Вспомогательные функции
     InputPinInfo *GetInputPinInfo(Pin::Type type);
     OutputPinInfo *GetOutputPinInfo(Pin::Type type);
