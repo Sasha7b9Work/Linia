@@ -1,4 +1,4 @@
-// 2025/09/03 09:54:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/09/03 09:54:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/Panel12_Debug/PageTestsGPIO.h"
 
@@ -11,7 +11,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
 {
     self = this;
 
-    wxPanel::SetName("Тесты разъёма GPIO");
+    wxPanel::SetName("РўРµСЃС‚С‹ СЂР°Р·СЉС‘РјР° GPIO");
 
     new wxStaticBox(this, wxID_ANY, "GPIO", { 10, 10 }, { 100, 100 });
 
