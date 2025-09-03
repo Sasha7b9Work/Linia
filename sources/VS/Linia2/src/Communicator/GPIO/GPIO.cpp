@@ -12,14 +12,26 @@ PinIn pinFIFO_FULL(Pin::FIFO_FULL);
 
 PinOut pinREQ_RD(Pin::REQ_RD);
 
-void GPIO::Init() {}
-void GPIO::DeInit() {}
+void GPIO::Init()
+{
+}
+void GPIO::DeInit()
+{
+}
 
-void PinIn::SetChangeCallback(ChangeCallback cb) { callback_ = cb; }
+void PinIn::SetChangeCallback(ChangeCallback cb)
+{
+    callback_ = cb;
+}
 
-void PinOut::Set(bool) {}
+void PinOut::Set(bool)
+{
+}
 
-bool Pin::Get() const { return false; }
+bool Pin::Get() const
+{
+    return false;
+}
 
 #else
 
@@ -78,33 +90,35 @@ namespace GPIO
     static bool g_thread_running = false;
     static bool g_stop_monitoring = false;
 
-    static const int INPUT_PINS_COUNT = sizeof(g_input_pins)/sizeof(g_input_pins[0]);
-    static const int OUTPUT_PINS_COUNT = sizeof(g_output_pins)/sizeof(g_output_pins[0]);
+    static const int INPUT_PINS_COUNT = sizeof(g_input_pins) / sizeof(g_input_pins[0]);
+    static const int OUTPUT_PINS_COUNT = sizeof(g_output_pins) / sizeof(g_output_pins[0]);
 
     // Вспомогательные функции для получения информации о пинах
-    InputPinInfo* GetInputPinInfo(Pin::Type type)
+    InputPinInfo *GetInputPinInfo(Pin::Type type)
     {
         if (type >= Pin::Count) return nullptr;
-        
-        auto& mapping = g_pin_mapping[type];
-        if (mapping.is_input) {
+
+        auto &mapping = g_pin_mapping[type];
+        if (mapping.is_input)
+        {
             return &g_input_pins[mapping.index];
         }
-        return nullptr; 
+        return nullptr;
     }
 
-    OutputPinInfo* GetOutputPinInfo(Pin::Type type)
+    OutputPinInfo *GetOutputPinInfo(Pin::Type type)
     {
         if (type >= Pin::Count) return nullptr;
-        
-        auto& mapping = g_pin_mapping[type];
-        if (!mapping.is_input) {
+
+        auto &mapping = g_pin_mapping[type];
+        if (!mapping.is_input)
+        {
             return &g_output_pins[mapping.index];
         }
-        return nullptr; 
+        return nullptr;
     }
 
-    static void* MonitorThreadFunc(void* arg);
+    static void *MonitorThreadFunc(void *arg);
 }
 
 PinIn pinSTART(Pin::START);
@@ -126,8 +140,8 @@ namespace GPIO
 
         for (int i = 0; i < INPUT_PINS_COUNT; i++)
         {
-            InputPinInfo& info = g_input_pins[i];
-            
+            InputPinInfo &info = g_input_pins[i];
+
             info.hw.chip = gpiod_chip_open_by_name(info.hw.chip_name);
             if (!info.hw.chip)
             {
@@ -144,12 +158,12 @@ namespace GPIO
                 continue;
             }
 
-            int ret = gpiod_line_request_input_flags(info.hw.line, nullptr, 
-                                                   GPIOD_LINE_REQUEST_FLAG_BIAS_PULL_UP);
+            int ret = gpiod_line_request_input_flags(info.hw.line, nullptr,
+                GPIOD_LINE_REQUEST_FLAG_BIAS_PULL_UP);
             if (ret < 0)
             {
-                std::cerr << "Error: Cannot request GPIO line " << info.hw.pin_number 
-                          << " as input" << std::endl;
+                std::cerr << "Error: Cannot request GPIO line " << info.hw.pin_number
+                    << " as input" << std::endl;
                 gpiod_chip_close(info.hw.chip);
                 info.hw.chip = nullptr;
                 info.hw.line = nullptr;
@@ -163,8 +177,8 @@ namespace GPIO
 
         for (int i = 0; i < OUTPUT_PINS_COUNT; i++)
         {
-            OutputPinInfo& info = g_output_pins[i];
-            
+            OutputPinInfo &info = g_output_pins[i];
+
             info.hw.chip = gpiod_chip_open_by_name(info.hw.chip_name);
             if (!info.hw.chip)
             {
@@ -184,8 +198,8 @@ namespace GPIO
             int ret = gpiod_line_request_output(info.hw.line, nullptr, 0);
             if (ret < 0)
             {
-                std::cerr << "Error: Cannot request GPIO line " << info.hw.pin_number 
-                          << " as output" << std::endl;
+                std::cerr << "Error: Cannot request GPIO line " << info.hw.pin_number
+                    << " as output" << std::endl;
                 gpiod_chip_close(info.hw.chip);
                 info.hw.chip = nullptr;
                 info.hw.line = nullptr;
@@ -195,15 +209,15 @@ namespace GPIO
             std::cout << "GPIO output pin " << info.hw.pin_number << " initialized" << std::endl;
         }
 
-    g_stop_monitoring = false;
-    if (pthread_create(&g_monitor_thread, nullptr, MonitorThreadFunc, nullptr) == 0)
-    {
-        g_thread_running = true;
-        std::cout << "GPIO monitor thread started" << std::endl;
-    }
-    else
-    {
-        std::cerr << "Error: Cannot create GPIO monitor thread" << std::endl;
+        g_stop_monitoring = false;
+        if (pthread_create(&g_monitor_thread, nullptr, MonitorThreadFunc, nullptr) == 0)
+        {
+            g_thread_running = true;
+            std::cout << "GPIO monitor thread started" << std::endl;
+        }
+        else
+        {
+            std::cerr << "Error: Cannot create GPIO monitor thread" << std::endl;
         }
     }
 
@@ -220,14 +234,14 @@ namespace GPIO
 
         for (int i = 0; i < INPUT_PINS_COUNT; i++)
         {
-            InputPinInfo& info = g_input_pins[i];
-            
+            InputPinInfo &info = g_input_pins[i];
+
             if (info.hw.line)
             {
                 gpiod_line_release(info.hw.line);
                 info.hw.line = nullptr;
             }
-            
+
             if (info.hw.chip)
             {
                 gpiod_chip_close(info.hw.chip);
@@ -237,14 +251,14 @@ namespace GPIO
 
         for (int i = 0; i < OUTPUT_PINS_COUNT; i++)
         {
-            OutputPinInfo& info = g_output_pins[i];
-            
+            OutputPinInfo &info = g_output_pins[i];
+
             if (info.hw.line)
             {
                 gpiod_line_release(info.hw.line);
                 info.hw.line = nullptr;
             }
-            
+
             if (info.hw.chip)
             {
                 gpiod_chip_close(info.hw.chip);
@@ -255,10 +269,10 @@ namespace GPIO
         std::cout << "GPIO deinitialized" << std::endl;
     }
 
-    static void* MonitorThreadFunc(void* arg)
+    static void *MonitorThreadFunc(void *arg)
     {
         (void)arg;
-        
+
         std::cout << "GPIO event-driven monitor thread started" << std::endl;
 
         fd_set read_fds;
@@ -268,44 +282,44 @@ namespace GPIO
 
         for (int i = 0; i < INPUT_PINS_COUNT; i++)
         {
-            InputPinInfo& info = g_input_pins[i];
-            
+            InputPinInfo &info = g_input_pins[i];
+
             if (!info.hw.line)
                 continue;
 
             gpiod_line_release(info.hw.line);
-            
+
             int ret = gpiod_line_request_both_edges_events_flags(
-                info.hw.line, 
+                info.hw.line,
                 nullptr,
                 GPIOD_LINE_REQUEST_FLAG_BIAS_PULL_UP
             );
-            
+
             if (ret < 0)
             {
-                std::cerr << "Error: Cannot request events for GPIO pin " 
-                          << info.hw.pin_number << std::endl;
+                std::cerr << "Error: Cannot request events for GPIO pin "
+                    << info.hw.pin_number << std::endl;
                 continue;
             }
 
             int fd = gpiod_line_event_get_fd(info.hw.line);
             if (fd < 0)
             {
-                std::cerr << "Error: Cannot get event fd for GPIO pin " 
-                          << info.hw.pin_number << std::endl;
+                std::cerr << "Error: Cannot get event fd for GPIO pin "
+                    << info.hw.pin_number << std::endl;
                 continue;
             }
 
             input_pins[input_count] = i;
             input_count++;
-            
+
             if (fd > max_fd)
                 max_fd = fd;
 
             info.last_state = (gpiod_line_get_value(info.hw.line) == 1);
-            
-            std::cout << "GPIO pin " << info.hw.pin_number 
-                      << " configured for event monitoring" << std::endl;
+
+            std::cout << "GPIO pin " << info.hw.pin_number
+                << " configured for event monitoring" << std::endl;
         }
 
         if (input_count == 0)
@@ -317,12 +331,12 @@ namespace GPIO
         while (!g_stop_monitoring)
         {
             FD_ZERO(&read_fds);
-            
+
             for (int i = 0; i < input_count; i++)
             {
                 int pin_idx = input_pins[i];
-                InputPinInfo& info = g_input_pins[pin_idx];
-                
+                InputPinInfo &info = g_input_pins[pin_idx];
+
                 if (info.hw.line)
                 {
                     int fd = gpiod_line_event_get_fd(info.hw.line);
@@ -336,16 +350,16 @@ namespace GPIO
             struct timeval timeout;
             timeout.tv_sec = 1;
             timeout.tv_usec = 0;
-            
+
             int result = select(max_fd + 1, &read_fds, nullptr, nullptr, &timeout);
-            
+
             if (result < 0)
             {
                 if (errno == EINTR)
-                    continue; 
-                
-                std::cerr << "Error: select() failed in GPIO monitor: " 
-                          << strerror(errno) << std::endl;
+                    continue;
+
+                std::cerr << "Error: select() failed in GPIO monitor: "
+                    << strerror(errno) << std::endl;
                 break;
             }
             else if (result == 0)
@@ -356,8 +370,8 @@ namespace GPIO
             for (int i = 0; i < input_count; i++)
             {
                 int pin_idx = input_pins[i];
-                InputPinInfo& info = g_input_pins[pin_idx];
-                
+                InputPinInfo &info = g_input_pins[pin_idx];
+
                 if (!info.hw.line || !info.callback)
                     continue;
 
@@ -367,11 +381,11 @@ namespace GPIO
 
                 struct gpiod_line_event event;
                 int ret = gpiod_line_event_read(info.hw.line, &event);
-                
+
                 if (ret < 0)
                 {
-                    std::cerr << "Error: Cannot read GPIO event for pin " 
-                              << info.hw.pin_number << std::endl;
+                    std::cerr << "Error: Cannot read GPIO event for pin "
+                        << info.hw.pin_number << std::endl;
                     continue;
                 }
 
@@ -386,18 +400,18 @@ namespace GPIO
                 }
                 else
                 {
-                    continue; 
+                    continue;
                 }
 
                 if (new_state != info.last_state)
                 {
                     info.last_state = new_state;
-                    
+
                     info.callback(new_state);
-                    
-                    std::cout << "GPIO pin " << info.hw.pin_number 
-                              << " event: " << (new_state ? "RISING" : "FALLING") 
-                              << " -> " << (new_state ? "HIGH" : "LOW") << std::endl;
+
+                    std::cout << "GPIO pin " << info.hw.pin_number
+                        << " event: " << (new_state ? "RISING" : "FALLING")
+                        << " -> " << (new_state ? "HIGH" : "LOW") << std::endl;
                 }
             }
         }
@@ -410,55 +424,60 @@ namespace GPIO
 bool Pin::Get() const
 {
     if (type_ >= Pin::Count) return false;
-    
+
     // Сначала пробуем как input pin
-    InputPinInfo* input_info = GPIO::GetInputPinInfo(type_);
-    if (input_info && input_info->hw.line) {
+    InputPinInfo *input_info = GPIO::GetInputPinInfo(type_);
+    if (input_info && input_info->hw.line)
+    {
         int val = gpiod_line_get_value(input_info->hw.line);
-        if (val < 0) {
+        if (val < 0)
+        {
             std::cerr << "Error: Cannot read GPIO pin " << input_info->hw.pin_number << std::endl;
             return false;
         }
         return (val == 1);
     }
-    
+
     // Если не input, то пробуем как output pin
-    OutputPinInfo* output_info = GPIO::GetOutputPinInfo(type_);
-    if (output_info && output_info->hw.line) {
+    OutputPinInfo *output_info = GPIO::GetOutputPinInfo(type_);
+    if (output_info && output_info->hw.line)
+    {
         int val = gpiod_line_get_value(output_info->hw.line);
-        if (val < 0) {
+        if (val < 0)
+        {
             std::cerr << "Error: Cannot read GPIO pin " << output_info->hw.pin_number << std::endl;
             return false;
         }
         return (val == 1);
     }
-    
+
     return false;
 }
 
 void PinOut::Set(bool state)
 {
     if (type_ >= Pin::Count) return;
-    
-    OutputPinInfo* info = GPIO::GetOutputPinInfo(type_);
+
+    OutputPinInfo *info = GPIO::GetOutputPinInfo(type_);
     if (!info || !info->hw.line) return;
 
     int ret = gpiod_line_set_value(info->hw.line, state ? 1 : 0);
     if (ret < 0)
     {
-        std::cerr << "Error: Cannot set GPIO pin " << info->hw.pin_number 
-                  << " to " << (state ? "HIGH" : "LOW") << std::endl;
+        std::cerr << "Error: Cannot set GPIO pin " << info->hw.pin_number
+            << " to " << (state ? "HIGH" : "LOW") << std::endl;
     }
 }
 
 void PinIn::SetChangeCallback(ChangeCallback callback)
 {
     callback_ = callback;
-    
+
     if (type_ < Pin::Count)
     {
-        InputPinInfo* info = GPIO::GetInputPinInfo(type_);
-        if (info) {
+        InputPinInfo *info = GPIO::GetInputPinInfo(type_);
+        if (info)
+        {
             info->callback = callback;
         }
     }
@@ -480,17 +499,21 @@ PinOut pinREQ_RD(Pin::REQ_RD);
 
 namespace GPIO
 {
-    void Init() {}
-    
-    void DeInit() {}
+    void Init()
+    {
+    }
+
+    void DeInit()
+    {
+    }
 }
 
-bool Pin::Get() const 
-{ 
-    return false; 
+bool Pin::Get() const
+{
+    return false;
 }
 
-void PinOut::Set(bool state) 
+void PinOut::Set(bool state)
 {
     (void)state;
 }
