@@ -397,10 +397,8 @@ namespace UART
     // Функция потока чтения UART
     // Читает данные из UART и вызывает callback для каждого принятого байта
     // Работает до установки флага g_stop_reading
-    static void *ReaderThreadFunc(void *arg)
+    static void *ReaderThreadFunc(void *)
     {
-        (void)arg;
-
         uint8_t buffer[BUFFER_SIZE];
         int bytes_read;
         fd_set read_fds;
