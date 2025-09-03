@@ -1,7 +1,7 @@
 ﻿// 2025/6/4 10:27:32 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel12_Debug/PanelRegister.h"
-#include "Panels/Panel12_Debug/PainterRegister.h"
+#include "Panels/Panel12_Debug/PagesChips/PanelRegister.h"
+#include "Panels/Panel12_Debug/PagesChips/PainterRegister.h"
 #include "Controls/TextControls.h"
 #include "Utils/StringUtils.h"
 #include "Panels/Panel12_Debug/CommandsCombo.h"

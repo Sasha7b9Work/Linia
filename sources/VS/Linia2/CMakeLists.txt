@@ -68,6 +68,7 @@ file(GLOB PANELS_PANEL5                 src/Panels/Panel05_Graph/*.*)
 file(GLOB PANELS_PANEL11                src/Panels/Panel11_Menu/*.*)
 file(GLOB PANELS_PANEL11_SETUP          src/Panels/Panel11_Menu/Setup/*.*)
 file(GLOB PANELS_PANEL12                src/Panels/Panel12_Debug/*.*)
+file(GLOB PANELS_PANEL12_PAGESCHIPS     src/Panels/Panel12_Debug/PagesChips/*.*)
 file(GLOB PANELS_PANEL12_OLD            src/Panels/Panel12_Debug/Old/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB STORAGE                       src/Storage/*.*)
@@ -93,6 +94,7 @@ source_group(Panels/Panel05_Graph                 FILES ${PANELS_PANEL5})
 source_group(Panels/Panel11_Menu                  FILES ${PANELS_PANEL11})
 source_group(Panels/Panel11_Menu/Setup            FILES ${PANELS_PANEL11_SETUP})
 source_group(Panels/Panel12_Debug                 FILES ${PANELS_PANEL12})
+source_group(Panels/Panel12_Debug/PagesChips      FILES ${PANELS_PANEL12_PAGESCHIPS})
 source_group(Panels/Panel12_Debug/Old             FILES ${PANELS_PANEL12_OLD})
 source_group(Settings                             FILES ${SETTINGS})
 source_group(Storage                              FILES ${STORAGE})
@@ -119,6 +121,7 @@ add_executable(${PROJECT_NAME}
     ${PANELS_PANEL11}
     ${PANELS_PANEL11_SETUP}
     ${PANELS_PANEL12}
+    ${PANELS_PANEL12_PAGESCHIPS}
     ${PANELS_PANEL12_OLD}
     ${SETTINGS}
     ${STORAGE}

@@ -4,7 +4,7 @@
 #include "Panels/Panel12_Debug/Old/PageAD5697.h"
 #include "Panels/Panel12_Debug/Old/PageAD9952.h"
 #include "Panels/Panel12_Debug/Old/PageMCP4811.h"
-#include "Panels/Panel12_Debug/PageAD5300.h"
+#include "Panels/Panel12_Debug/PagesChips/PageAD5300.h"
 
 
 NotebookChips *NotebookChips::self = nullptr;
