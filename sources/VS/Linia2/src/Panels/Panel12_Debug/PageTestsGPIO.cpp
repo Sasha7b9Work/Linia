@@ -13,12 +13,12 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
 
     wxPanel::SetName("Тесты разъёма GPIO");
 
-    wxStaticBox *boxGPIO = new wxStaticBox(this, wxID_ANY, "GPIO", { 10, 10 }, { 400, 300 });
+    wxStaticBox *boxGPIO = new wxStaticBox(this, wxID_ANY, "GPIO", { 10, 10 }, { 300, 300 });
 
     {
         int x = 10;
         int y = 20;
-        int dy = 25;
+        int dy = 31;
 
         struct StructPin
         {
@@ -105,13 +105,13 @@ int PageTestsGPIO::NumPin(Pin::E pin) const
 }
 
 
-wxPanel *PageTestsGPIO::CreatePanelPin(wxWindow *parent, PinIn & /*in*/, PinOut &out)
+wxPanel *PageTestsGPIO::CreatePanelPin(wxWindow *parent, PinIn &in, PinOut &out)
 {
-    wxPanel *panel = new wxPanel(parent, wxID_ANY, wxDefaultPosition, { 150, 20 });
+    wxPanel *panel = new wxPanel(parent, wxID_ANY, wxDefaultPosition, { 250, 23 });
 
-    wxButton *button = new wxButton(panel, wxID_ANY, wxString::Format("%s : %d", NamePin(out.GetValue()), NumPin(out.GetValue())), { 0, 0 }, { 70, 20 });
+    new wxButton(panel, wxID_ANY, wxString::Format("%s : %d", NamePin(out.GetValue()), NumPin(out.GetValue())), { 0, 0 }, { 70, 22 });
 
-    button = button;
+    new wxStaticText(panel, wxID_ANY, wxString::Format("%s : %d", NamePin(in.GetValue()), NumPin(in.GetValue())), { 150, 2 }, { 100, 22 });
 
     return panel;
 }
