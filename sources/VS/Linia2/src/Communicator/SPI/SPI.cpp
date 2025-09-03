@@ -1,44 +1,6 @@
 ﻿#include "Communicator/SPI/SPI.h"
 
-#ifdef WIN32
-namespace SPI
-{
-    void Init() {}
-
-    void DeInit() {}
-
-    bool WriteDynamicDAC(int /*number_DAC*/, uint16_t /*value*/)
-    {
-        return false;
-    }
-
-    bool SetSpeed(uint32_t /*speedHz*/)
-    {
-        return false;
-    }
-
-    bool SetMode(uint8_t /*mode*/)
-    {
-        return false;
-    }
-
-    bool IsReady()
-    {
-        return false;
-    }
-
-    uint32_t GetSpeed()
-    {
-        return 0;
-    }
-
-    uint8_t GetMode()
-    {
-        return 0;
-    }
-}
-
-#else
+#ifdef ARM64
 
 #include <fcntl.h>
 #include <unistd.h>
@@ -46,13 +8,14 @@ namespace SPI
 #include <linux/spi/spidev.h>
 #include <iostream>
 #include <cstring>
-
-#ifdef ARM64
 #include <gpiod.h>
+
 #endif
 
 namespace SPI
 {
+#ifdef ARM64
+
     static int g_spi_fd = -1;
     static uint32_t g_speed = SPI_SPEED;
     static uint8_t g_mode = 0;
@@ -63,7 +26,6 @@ namespace SPI
 
     const int MAX_DAC_COUNT = 2;
 
-#ifdef ARM64
     const char *gpio_chip_name = SPI_CHIP;                                  // Имя GPIO чипа для ARM64
     struct gpiod_chip *g_gpio_chip = nullptr;                               // Дескриптор GPIO чипа
     struct gpiod_line *g_dac_lines[MAX_DAC_COUNT] = { nullptr, nullptr };   // Линии GPIO для каждого DAC
@@ -78,7 +40,6 @@ namespace SPI
         "SPI_EN_DDA1",  // Включение DAC #1
         "SPI_EN_DDA2"   // Включение DAC #2
     };
-#endif
 
     static bool InitGPIO();
     static void DeInitGPIO();
@@ -244,7 +205,6 @@ namespace SPI
         return g_mode;
     }
 
-#ifdef ARM64
     bool InitGPIO()
     {
         if (g_gpio_initialized)
@@ -387,28 +347,44 @@ namespace SPI
     }
 
 #else
-    bool InitGPIO()
-    {
-        g_gpio_initialized = true;
-        return true;
-    }
 
-    void DeInitGPIO()
-    {
-        g_gpio_initialized = false;
-    }
-
-    void SetCS(int dac_number, bool enable)
+    void Init()
     {
     }
 
-    bool Write(uint8_t *data, size_t length)
+    void DeInit()
+    {
+    }
+
+    bool WriteDynamicDAC(int /*number_DAC*/, uint16_t /*value*/)
     {
         return false;
     }
 
+    bool SetSpeed(uint32_t /*speedHz*/)
+    {
+        return false;
+    }
+
+    bool SetMode(uint8_t /*mode*/)
+    {
+        return false;
+    }
+
+    bool IsReady()
+    {
+        return false;
+    }
+
+    uint32_t GetSpeed()
+    {
+        return 0;
+    }
+
+    uint8_t GetMode()
+    {
+        return 0;
+    }
+
 #endif 
-
 }
-
-#endif
