@@ -1,6 +1,9 @@
 #pragma once
-
 #include <cstdint>
+
+
+#define UART_DEVICE "/dev/ttyS6"
+
 
 namespace UART {
     typedef void (*ReceivedCallback)(uint8_t byte);

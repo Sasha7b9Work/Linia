@@ -4,37 +4,37 @@
 namespace SPI
 {
     void Init() {}
-    
+
     void DeInit() {}
-    
-    bool WriteDynamicDAC(int /*number_DAC*/, uint16_t /*value*/) 
-    { 
-        return false; 
+
+    bool WriteDynamicDAC(int /*number_DAC*/, uint16_t /*value*/)
+    {
+        return false;
     }
-    
-    bool SetSpeed(uint32_t /*speedHz*/) 
-    { 
-        return false; 
+
+    bool SetSpeed(uint32_t /*speedHz*/)
+    {
+        return false;
     }
-    
-    bool SetMode(uint8_t /*mode*/) 
-    { 
-        return false; 
+
+    bool SetMode(uint8_t /*mode*/)
+    {
+        return false;
     }
-    
-    bool IsReady() 
-    { 
-        return false; 
+
+    bool IsReady()
+    {
+        return false;
     }
-    
-    uint32_t GetSpeed() 
-    { 
-        return 0; 
+
+    uint32_t GetSpeed()
+    {
+        return 0;
     }
-    
-    uint8_t GetMode() 
-    { 
-        return 0; 
+
+    uint8_t GetMode()
+    {
+        return 0;
     }
 }
 
@@ -53,20 +53,20 @@ namespace SPI
 
 namespace SPI
 {
-    static int g_spi_fd = -1;                     
-    static uint32_t g_speed = 100000;             
-    static uint8_t g_mode = 0;                    
-    static uint8_t g_bits_per_word = 8;           
-    static bool g_gpio_initialized = false;       
+    static int g_spi_fd = -1;
+    static uint32_t g_speed = SPI_SPEED;
+    static uint8_t g_mode = 0;
+    static uint8_t g_bits_per_word = 8;
+    static bool g_gpio_initialized = false;
 
-    const char *device = "/dev/spidev0.0"; // Путь к SPI устройству
+    const char *device = SPI_DEVICE;
 
-    const int MAX_DAC_COUNT = 2;                  
+    const int MAX_DAC_COUNT = 2;
 
 #ifdef ARM64
-    const char *gpio_chip_name = "gpiochip3";                        // Имя GPIO чипа для ARM64
-    struct gpiod_chip *g_gpio_chip = nullptr;                        // Дескриптор GPIO чипа
-    struct gpiod_line *g_dac_lines[MAX_DAC_COUNT] = {nullptr, nullptr}; // Линии GPIO для каждого DAC
+    const char *gpio_chip_name = SPI_CHIP;                                  // Имя GPIO чипа для ARM64
+    struct gpiod_chip *g_gpio_chip = nullptr;                               // Дескриптор GPIO чипа
+    struct gpiod_line *g_dac_lines[MAX_DAC_COUNT] = { nullptr, nullptr };   // Линии GPIO для каждого DAC
 
     const unsigned int DAC_GPIO_NUMS[MAX_DAC_COUNT] = {
         0,  // GPIO пин для DAC (pin. 31)
@@ -74,20 +74,20 @@ namespace SPI
     };
 
     // Имена GPIO линий для отладки
-    const char* DAC_NAMES[MAX_DAC_COUNT] = {
+    const char *DAC_NAMES[MAX_DAC_COUNT] = {
         "SPI_EN_DDA1",  // Включение DAC #1
         "SPI_EN_DDA2"   // Включение DAC #2
     };
 #endif
 
-    static bool InitGPIO();                           
-    static void DeInitGPIO();                         
+    static bool InitGPIO();
+    static void DeInitGPIO();
     static void SetCS(int dac_number, bool enable);   // Управление CS (Chip Select) для конкретного DAC
-    static bool Write(uint8_t *data, size_t length);  
+    static bool Write(uint8_t *data, size_t length);
 
     void Init()
     {
-        
+
 
         g_spi_fd = ::open(device, O_RDWR);
         if (g_spi_fd < 0)
@@ -256,16 +256,16 @@ namespace SPI
             std::cerr << "Error: Cannot open " << gpio_chip_name << std::endl;
             return false;
         }
-        
+
         std::cout << "Opened " << gpio_chip_name << " for GPIO3_A0 and GPIO3_A2" << std::endl;
 
         for (int i = 0; i < MAX_DAC_COUNT; i++)
         {
             unsigned int gpio_num = DAC_GPIO_NUMS[i];
-            
-            std::cout << "Initializing " << DAC_NAMES[i] 
-                      << " (GPIO" << gpio_num << " in gpiochip3)" << std::endl;
-            
+
+            std::cout << "Initializing " << DAC_NAMES[i]
+                << " (GPIO" << gpio_num << " in gpiochip3)" << std::endl;
+
             g_dac_lines[i] = gpiod_chip_get_line(g_gpio_chip, gpio_num);
             if (!g_dac_lines[i])
             {
@@ -317,7 +317,7 @@ namespace SPI
                 g_dac_lines[i] = nullptr;
             }
         }
-        
+
         if (g_gpio_chip)
         {
             gpiod_chip_close(g_gpio_chip);
