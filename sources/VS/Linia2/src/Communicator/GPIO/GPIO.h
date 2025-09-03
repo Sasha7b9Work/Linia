@@ -3,7 +3,7 @@
 #include <functional>
 
 // Структуры для аппаратной информации GPIO (нужны для Linux)
-#ifndef WIN32
+#ifdef ARM64
 struct gpiod_chip;
 struct gpiod_line;
 

@@ -1,6 +1,5 @@
 #include "GPIO.h"
 
-#ifdef WIN32
 
 PinIn pinSTART(Pin::START);
 PinIn pinSTOP(Pin::STOP);
@@ -12,28 +11,6 @@ PinIn pinFIFO_FULL(Pin::FIFO_FULL);
 
 PinOut pinREQ_RD(Pin::REQ_RD);
 
-void GPIO::Init()
-{
-}
-void GPIO::DeInit()
-{
-}
-
-void PinIn::SetChangeCallback(ChangeCallback cb)
-{
-    callback_ = cb;
-}
-
-void PinOut::Set(bool)
-{
-}
-
-bool Pin::Get() const
-{
-    return false;
-}
-
-#else
 
 #ifdef ARM64
 
@@ -121,16 +98,6 @@ namespace GPIO
     static void *MonitorThreadFunc(void *arg);
 }
 
-PinIn pinSTART(Pin::START);
-PinIn pinSTOP(Pin::STOP);
-PinIn pinDAT_F0(Pin::DAT_F0);
-PinIn pinDAT_F1(Pin::DAT_F1);
-PinIn pinDAT_F2(Pin::DAT_F2);
-PinIn pinDAT_F3(Pin::DAT_F3);
-PinIn pinFIFO_FULL(Pin::FIFO_FULL);
-// PinIn pinFIFO_EMPTY(Pin::FIFO_EMPTY);
-
-PinOut pinREQ_RD(Pin::REQ_RD);
 
 namespace GPIO
 {
@@ -485,18 +452,6 @@ void PinIn::SetChangeCallback(ChangeCallback callback)
 
 #else
 
-#include <iostream>
-
-PinIn pinSTART(Pin::START);
-PinIn pinSTOP(Pin::STOP);
-PinIn pinDAT_F0(Pin::DAT_F0);
-PinIn pinDAT_F1(Pin::DAT_F1);
-PinIn pinDAT_F2(Pin::DAT_F2);
-PinIn pinDAT_F3(Pin::DAT_F3);
-PinIn pinFIFO_FULL(Pin::FIFO_FULL);
-
-PinOut pinREQ_RD(Pin::REQ_RD);
-
 namespace GPIO
 {
     void Init()
@@ -522,7 +477,5 @@ void PinIn::SetChangeCallback(ChangeCallback callback)
 {
     callback_ = callback;
 }
-
-#endif
 
 #endif
