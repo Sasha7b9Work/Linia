@@ -46,7 +46,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
         {
             wxPanel *panel = CreatePanelPinIn(boxGPIO, in);
 
-            panel->SetPosition({ x, y });
+            panel->SetPosition({ x, SD::Y_SB(y) });
 
             y += dy;
 
@@ -67,7 +67,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
         {
             wxPanel *panel = CreatePanelPinOut(boxGPIO, out);
 
-            panel->SetPosition({ x, y });
+            panel->SetPosition({ x, SD::Y_SB(y) });
 
             y += dy;
 
