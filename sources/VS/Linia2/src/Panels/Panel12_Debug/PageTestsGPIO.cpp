@@ -74,6 +74,31 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
             out = pins_out[++index];
         }
     }
+
+    wxStaticBox *boxUART = new wxStaticBox(this, wxID_ANY, "UART", { boxGPIO->GetPosition().x + boxGPIO->GetSize().x + 10, 10 }, { 200, 270 });
+
+    {
+        new wxStaticText(boxUART, wxID_ANY, "TX : 8", { 10, 20 });
+        new wxStaticText(boxUART, wxID_ANY, "RX : 10", { 10, 45 });
+
+        new wxTextCtrl(boxUART, wxID_ANY, "", { 10, 70 }, { 100, 20 });
+        btnSendUART = new wxButton(boxUART, wxID_ANY, "Send", { 120, 70 }, { 50, 20 });
+
+        new wxStaticText(boxUART, wxID_ANY, "Принято:", { 10, 105 });
+        new wxTextCtrl(boxUART, wxID_ANY, "", { 10, 130 }, { 100, 20 });
+    }
+
+    wxStaticBox *boxSPI = new wxStaticBox(this, wxID_ANY, "SPI", { boxUART->GetPosition().x + boxUART->GetSize().x + 10, 10 }, { 200, 270 });
+
+    {
+        new wxStaticText(boxSPI, wxID_ANY, "MOSI : 19", { 10, 20 });
+        new wxStaticText(boxSPI, wxID_ANY, "CLK : 23", { 10, 45 });
+
+        new wxTextCtrl(boxSPI, wxID_ANY, "", { 10, 70 }, { 100, 20 });
+        btnSendSPI = new wxButton(boxSPI, wxID_ANY, "Send", { 120, 70 }, { 50, 20 });
+    }
+
+    Bind(wxEVT_BUTTON, &PageTestsGPIO::OnEventButton, this);
 }
 
 
@@ -155,9 +180,30 @@ wxPanel *PageTestsGPIO::CreatePanelPinIn(wxWindow *parent, PinIn *pin)
 }
 
 
-void PageTestsGPIO::OnEventButton(wxCommandEvent & /*event*/)
+void PageTestsGPIO::OnEventButton(wxCommandEvent &event)
 {
+    event.Skip();
 
+    int id = event.GetId();
+
+    if (id == btnSendSPI->GetId())
+    {
+
+    }
+    else if (id == btnSendUART->GetId())
+    {
+
+    }
+    else
+    {
+        for (auto &pin : gpio_out)
+        {
+            if (id == pin.button->GetId())
+            {
+                return;
+            }
+        }
+    }
 }
 
 

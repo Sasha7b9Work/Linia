@@ -18,6 +18,9 @@ public:
 
 private:
 
+    wxButton *btnSendUART = nullptr;
+    wxButton *btnSendSPI = nullptr;
+
     wxString NamePin(Pin::Type) const;
 
     int NumPin(Pin::Type) const;
