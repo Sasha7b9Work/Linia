@@ -23,22 +23,24 @@ private:
     int NumPin(Pin::Type) const;
 
     // in - на этом пине висит лампочка
-    wxPanel *CreatePanelPinOut(wxWindow *, PinOut &);
-    wxPanel *CreatePanelPinIn(wxWindow *, PinIn &);
+    wxPanel *CreatePanelPinOut(wxWindow *, PinOut *);
+    wxPanel *CreatePanelPinIn(wxWindow *, PinIn *);
 
     struct StructOutGPIO
     {
-        StructOutGPIO(PinOut &_out) : pin(_out) { }
+        StructOutGPIO(PinOut *_out) : pin(_out) { }
         wxButton   *button = nullptr;
-        wxTextCtrl *txtState = nullptr;
-        PinOut     &pin;
+        wxTextCtrl *txtStatePull = nullptr;     // Здесь отображается состояние после опроса
+        wxTextCtrl *txtStateInt = nullptr;      // Здесь отображается состояние после срабатывания функции обратного вызова
+        PinOut     *pin;
     };
 
     struct StructInGPIO
     {
-        StructInGPIO(PinIn &_in) : pin(_in) { }
-        wxTextCtrl *txtState = nullptr;
-        PinIn      &pin;
+        StructInGPIO(PinIn *_in) : pin(_in) { }
+        wxTextCtrl *txtStatePull = nullptr;     // Здесь отображается состояние после опроса
+        wxTextCtrl *txtStateInt = nullptr;      // Здесь отображается состояние после срабатывания функции обратного вызова
+        PinIn      *pin;
     };
 
     std::vector<StructOutGPIO> gpio_out;
@@ -51,4 +53,16 @@ private:
     static bool thread_is_running;
 
     std::thread *thread = nullptr;
+
+    static void CallbackOnStart(bool);
+    static void CallbackOnStop(bool);
+    static void CallbackOnDAT_F0(bool);
+    static void CallbackOnDAT_F1(bool);
+    static void CallbackOnDAT_F2(bool);
+    static void CallbackOnDAT_F3(bool);
+    static void CallbackOnFIFO_FULL(bool);
+    static void CallbackonREQ_RD(bool);
+
+    void OnChangeStatePin(PinIn *, bool state);
+    void OnChangeStatePin(PinOut *, bool state);
 };

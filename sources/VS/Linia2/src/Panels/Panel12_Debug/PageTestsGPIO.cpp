@@ -16,7 +16,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
 
     wxPanel::SetName("Тесты разъёма GPIO");
 
-    wxStaticBox *boxGPIO = new wxStaticBox(this, wxID_ANY, "GPIO", { 10, 10 }, { 300, 300 });
+    wxStaticBox *boxGPIO = new wxStaticBox(this, wxID_ANY, "GPIO", { 10, 10 }, { 200, 270 });
 
     {
         int x = 10;
@@ -36,13 +36,15 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
             nullptr
         };
 
+        pinSTART.SetChangeCallback(CallbackOnStart);
+
         int index = 0;
 
         PinIn *in = pins_in[index];
 
         while (in)
         {
-            wxPanel *panel = CreatePanelPinIn(boxGPIO, *in);
+            wxPanel *panel = CreatePanelPinIn(boxGPIO, in);
 
             panel->SetPosition({ x, y });
 
@@ -63,7 +65,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
 
         while (out)
         {
-            wxPanel *panel = CreatePanelPinOut(boxGPIO, *out);
+            wxPanel *panel = CreatePanelPinOut(boxGPIO, out);
 
             panel->SetPosition({ x, y });
 
@@ -111,19 +113,21 @@ int PageTestsGPIO::NumPin(Pin::Type pin) const
 }
 
 
-wxPanel *PageTestsGPIO::CreatePanelPinOut(wxWindow *parent, PinOut &pin)
+wxPanel *PageTestsGPIO::CreatePanelPinOut(wxWindow *parent, PinOut *pin)
 {
-    wxPanel *panel = new wxPanel(parent, wxID_ANY, wxDefaultPosition, { 250, 23 });
+    wxPanel *panel = new wxPanel(parent, wxID_ANY, wxDefaultPosition, { 180, 23 });
 
     StructOutGPIO strGPIO(pin);
 
-    strGPIO.button = new wxButton(panel, wxID_ANY, NamePin(pin.type()), { 0, 0 }, { 70, 22 });
+    strGPIO.button = new wxButton(panel, wxID_ANY, NamePin(pin->type()), { 0, 0 }, { 70, 22 });
 
     strGPIO.button->Bind(wxEVT_BUTTON, &PageTestsGPIO::OnEventButton, this);
 
-    strGPIO.txtState = new wxTextCtrl(panel, wxID_ANY, "", { 100, 0 }, { 20, 22 }, wxTE_READONLY);
+    strGPIO.txtStatePull = new wxTextCtrl(panel, wxID_ANY, "", { 100, 0 }, { 20, 22 }, wxTE_READONLY);
 
-    new wxStaticText(panel, wxID_ANY, wxString::Format("%d", NumPin(pin.type())), {130, 0});
+    strGPIO.txtStateInt = new wxTextCtrl(panel, wxID_ANY, "", { 130, 0 }, { 20, 22 }, wxTE_READONLY);
+
+    new wxStaticText(panel, wxID_ANY, wxString::Format("%d", NumPin(pin->type())), { 160, 2 }, { 40, 22 });
 
     gpio_out.push_back(strGPIO);
 
@@ -131,17 +135,19 @@ wxPanel *PageTestsGPIO::CreatePanelPinOut(wxWindow *parent, PinOut &pin)
 }
 
 
-wxPanel *PageTestsGPIO::CreatePanelPinIn(wxWindow *parent, PinIn &pin)
+wxPanel *PageTestsGPIO::CreatePanelPinIn(wxWindow *parent, PinIn *pin)
 {
-    wxPanel *panel = new wxPanel(parent, wxID_ANY, wxDefaultPosition, { 250, 23 });
+    wxPanel *panel = new wxPanel(parent, wxID_ANY, wxDefaultPosition, { 180, 23 });
 
     StructInGPIO strGPIO(pin);
 
-    new wxStaticText(panel, wxID_ANY, NamePin(pin.type()), { 0, 0 }, { 80, 22 });
+    new wxStaticText(panel, wxID_ANY, NamePin(pin->type()), { 0, 2 }, { 80, 22 });
 
-    strGPIO.txtState = new wxTextCtrl(panel, wxID_ANY, "", { 100, 0 }, { 20, 22 }, wxTE_READONLY);
+    strGPIO.txtStatePull = new wxTextCtrl(panel, wxID_ANY, "", { 100, 0 }, { 20, 22 }, wxTE_READONLY);
 
-    new wxStaticText(panel, wxID_ANY, wxString::Format("%d", NumPin(pin.type())), { 130, 0 });
+    strGPIO.txtStateInt = new wxTextCtrl(panel, wxID_ANY, "", { 130, 0 }, { 20, 22 }, wxTE_READONLY);
+
+    new wxStaticText(panel, wxID_ANY, wxString::Format("%d", NumPin(pin->type())), { 160, 2 }, { 40, 22 });
 
     gpio_in.push_back(strGPIO);
 
@@ -161,15 +167,39 @@ void PageTestsGPIO::ThreadFunc()
     {
         for (auto &str : PageTestsGPIO::self->gpio_out)
         {
-            str.txtState->SetValue(str.pin.Get() ? "1" : "0");
+            str.txtStatePull->SetValue(str.pin->Get() ? "1" : "0");
         }
 
         for (auto &str : PageTestsGPIO::self->gpio_in)
         {
-            str.txtState->SetValue(str.pin.Get() ? "1" : "0");
+            str.txtStatePull->SetValue(str.pin->Get() ? "1" : "0");
         }
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    }
+}
+
+
+void PageTestsGPIO::OnChangeStatePin(PinIn *pin, bool state)
+{
+    for (auto &str : PageTestsGPIO::self->gpio_in)
+    {
+        if (str.pin == pin)
+        {
+            str.txtStateInt->SetValue(state ? "1" : "0");
+        }
+    }
+}
+
+
+void PageTestsGPIO::OnChangeStatePin(PinOut *pin, bool state)
+{
+    for (auto &str : PageTestsGPIO::self->gpio_out)
+    {
+        if (str.pin == pin)
+        {
+            str.txtStateInt->SetValue(state ? "1" : "0");
+        }
     }
 }
 
@@ -203,4 +233,45 @@ void PageTestsGPIO::DeInit()
     }
 
     SAFE_DELETE(thread);
+}
+
+
+void PageTestsGPIO::CallbackOnStart(bool state)
+{
+    PageTestsGPIO::self->OnChangeStatePin(&pinSTART, state);
+}
+
+void PageTestsGPIO::CallbackOnStop(bool state)
+{
+    PageTestsGPIO::self->OnChangeStatePin(&pinSTOP, state);
+}
+
+void PageTestsGPIO::CallbackOnDAT_F0(bool state)
+{
+    PageTestsGPIO::self->OnChangeStatePin(&pinDAT_F0, state);
+}
+
+void PageTestsGPIO::CallbackOnDAT_F1(bool state)
+{
+    PageTestsGPIO::self->OnChangeStatePin(&pinDAT_F1, state);
+}
+
+void PageTestsGPIO::CallbackOnDAT_F2(bool state)
+{
+    PageTestsGPIO::self->OnChangeStatePin(&pinDAT_F2, state);
+}
+
+void PageTestsGPIO::CallbackOnDAT_F3(bool state)
+{
+    PageTestsGPIO::self->OnChangeStatePin(&pinDAT_F3, state);
+}
+
+void PageTestsGPIO::CallbackOnFIFO_FULL(bool state)
+{
+    PageTestsGPIO::self->OnChangeStatePin(&pinFIFO_FULL, state);
+}
+
+void PageTestsGPIO::CallbackonREQ_RD(bool state)
+{
+    PageTestsGPIO::self->OnChangeStatePin(&pinREQ_RD, state);
 }
