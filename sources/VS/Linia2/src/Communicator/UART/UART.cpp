@@ -85,7 +85,7 @@ namespace UART
     static bool g_thread_running = false;
     static bool g_stop_reading = false;
 
-    const char *UART_DEVICE = UART_DEVICE;
+    const char *UART_DEVICE = uart_device;
     const size_t BUFFER_SIZE = 1024;
 
     static int GetBaudrateConstant(int baudrate);

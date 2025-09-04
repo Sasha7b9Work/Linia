@@ -2,7 +2,7 @@
 #include <cstdint>
 
 
-#define UART_DEVICE "/dev/ttyS6"
+#define uart_device "/dev/ttyS6"
 
 
 namespace UART {
