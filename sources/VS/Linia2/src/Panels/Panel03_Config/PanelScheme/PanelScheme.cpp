@@ -10,6 +10,7 @@
 #include "Tests/Tests.h"
 #include "Controls/StaticBox.h"
 #include "Utils/Configurator.h"
+#include "Panels/Panel03_Config/PanelChannelC.h"
 
 
 PanelScheme *PanelScheme::self = nullptr;
@@ -190,6 +191,20 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
         id == comboCommutation->GetId())
     {
         BuildPanel();
+
+        wxString suffix = "a";
+
+        if (Category::IsBCE())
+        {
+            suffix = "c";
+        }
+        else if (Category::IsGDS())
+        {
+            suffix = "d";
+        }
+
+        PanelChannelC::self->comboVoltage->SetTitle(wxString("U") + suffix);
+        PanelChannelC::self->comboCurrent->SetTitle(wxString("I") + suffix);
     }
 }
 

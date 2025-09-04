@@ -52,6 +52,7 @@ public:
 
     void SetChoices(const wxArrayString &labels, const wxArrayString &tooltips);
 
+    void SetTitle(const wxString &);
 
     void Pack();
     void Unpack();

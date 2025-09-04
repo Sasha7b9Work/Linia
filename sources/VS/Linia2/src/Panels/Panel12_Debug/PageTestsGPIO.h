@@ -23,19 +23,26 @@ private:
     int NumPin(Pin::Type) const;
 
     // in - на этом пине висит лампочка
-    // out - сюда ставим переключатель, чтобы управлять лампочкой
-    wxPanel *CreatePanelPin(wxWindow *, PinIn &, PinOut &);
+    wxPanel *CreatePanelPinOut(wxWindow *, PinOut &);
+    wxPanel *CreatePanelPinIn(wxWindow *, PinIn &);
 
-    struct StructGPIO
+    struct StructOutGPIO
     {
-        StructGPIO(PinIn &_in, PinOut &_out) : in(_in), out(_out) { }
+        StructOutGPIO(PinOut &_out) : pin(_out) { }
         wxButton   *button = nullptr;
         wxTextCtrl *txtState = nullptr;
-        PinIn      &in;
-        PinOut     &out;
+        PinOut     &pin;
     };
 
-    std::vector<StructGPIO> gpio;
+    struct StructInGPIO
+    {
+        StructInGPIO(PinIn &_in) : pin(_in) { }
+        wxTextCtrl *txtState = nullptr;
+        PinIn      &pin;
+    };
+
+    std::vector<StructOutGPIO> gpio_out;
+    std::vector<StructInGPIO> gpio_in;
 
     void OnEventButton(wxCommandEvent &);
 

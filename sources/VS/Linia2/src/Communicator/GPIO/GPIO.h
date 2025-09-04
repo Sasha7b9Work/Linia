@@ -92,7 +92,6 @@ extern PinIn pinDAT_F1;
 extern PinIn pinDAT_F2;
 extern PinIn pinDAT_F3;
 extern PinIn pinFIFO_FULL;
-// extern PinIn pinFIFO_EMPTY;
 
 // Категория: выходные пины
 extern PinOut pinREQ_RD;

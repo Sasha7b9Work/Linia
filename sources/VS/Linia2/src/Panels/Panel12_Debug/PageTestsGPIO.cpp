@@ -16,38 +16,61 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
 
     wxPanel::SetName("Тесты разъёма GPIO");
 
-    new wxStaticBox(this, wxID_ANY, "GPIO", { 10, 10 }, { 300, 300 });
+    wxStaticBox *boxGPIO = new wxStaticBox(this, wxID_ANY, "GPIO", { 10, 10 }, { 300, 300 });
 
     {
-//        int x = 10;
-//        int y = 20;
-//        int dy = 31;
+        int x = 10;
+        int y = 20;
+        int dy = 31;
 
-        struct StructPin
+
+        static PinIn *pins_in[] =
         {
-            PinIn  &in;
-            PinOut &out;
+            &pinSTART,
+            &pinSTOP,
+            &pinDAT_F0,
+            &pinDAT_F1,
+            &pinDAT_F2,
+            &pinDAT_F3,
+            &pinFIFO_FULL,
+            nullptr
         };
 
-//        static StructPin pins[9] =
-//        {
-//            { pinSTART,      pinOUT1 },
-//            { pinSTOP,       pinOUT2 },
-//            { pinDAT_F0,     pinOUT3 },
-//            { pinDAT_F1,     pinOUT4 },
-//            { pinDAT_F2,     pinOUT5 },
-//            { pinDAT_F3,     pinOUT6 },
-//            { pinREQ_RD,     pinOUT7 },
-//            { pinFIFO_FULL,  pinOUT8 },
-//            { pinFIFO_EMPTY, pinOUT9 }
-//        };
-//
-//        for (int i = 0; i < 9; i++)
-//        {
-//            wxPanel *panel = CreatePanelPin(boxGPIO, pins[i].in, pins[i].out);
-//
-//            panel->SetPosition({ x, SD::Y_SB(y + i * dy) });
-//        }
+        int index = 0;
+
+        PinIn *in = pins_in[index];
+
+        while (in)
+        {
+            wxPanel *panel = CreatePanelPinIn(boxGPIO, *in);
+
+            panel->SetPosition({ x, y });
+
+            y += dy;
+
+            in = pins_in[++index];
+        }
+
+        static PinOut *pins_out[] =
+        {
+            &pinREQ_RD,
+            nullptr
+        };
+
+        index = 0;
+
+        PinOut *out = pins_out[index];
+
+        while (out)
+        {
+            wxPanel *panel = CreatePanelPinOut(boxGPIO, *out);
+
+            panel->SetPosition({ x, y });
+
+            y += dy;
+
+            out = pins_out[++index];
+        }
     }
 }
 
@@ -62,8 +85,8 @@ wxString PageTestsGPIO::NamePin(Pin::Type pin) const
         "DAT_F1",
         "DAT_F2",
         "DAT_F3",
-        "REQ_RD",
-        "FIFO_FULL"
+        "FIFO_FULL",
+        "REQ_RD"
     };
 
     return names[pin];
@@ -74,35 +97,49 @@ int PageTestsGPIO::NumPin(Pin::Type pin) const
 {
     static const int num[Pin::Count] =
     {
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
+        15,
+        21,
+        16,
+        18,
+        22,
+        24,
+        36,
+        32
     };
 
     return num[pin];
 }
 
 
-wxPanel *PageTestsGPIO::CreatePanelPin(wxWindow *parent, PinIn & /*in*/, PinOut & /*out*/)
+wxPanel *PageTestsGPIO::CreatePanelPinOut(wxWindow *parent, PinOut &pin)
 {
     wxPanel *panel = new wxPanel(parent, wxID_ANY, wxDefaultPosition, { 250, 23 });
 
-//    StructGPIO strGPIO(in, out);
-//
-//    strGPIO.button = new wxButton(panel, wxID_ANY, wxString::Format("%s : %d", NamePin(out.GetValue()), NumPin(out.GetValue())), { 0, 0 }, { 70, 22 });
-//
-//    strGPIO.button->Bind(wxEVT_BUTTON, &PageTestsGPIO::OnEventButton, this);
-//
-//    strGPIO.txtState = new wxTextCtrl(panel, wxID_ANY, "", { 100, 0 }, { 20, 22 }, wxTE_READONLY);
-//
-//    new wxStaticText(panel, wxID_ANY, wxString::Format("%s : %d", NamePin(in.GetValue()), NumPin(in.GetValue())), { 150, 2 }, { 100, 22 });
-//
-//    gpio.push_back(strGPIO);
+    StructOutGPIO strGPIO(pin);
+
+    strGPIO.button = new wxButton(panel, wxID_ANY, wxString::Format("%s : %d", NamePin(pin.type()), NumPin(pin.type())), { 0, 0 }, { 70, 22 });
+
+    strGPIO.button->Bind(wxEVT_BUTTON, &PageTestsGPIO::OnEventButton, this);
+
+    strGPIO.txtState = new wxTextCtrl(panel, wxID_ANY, "", { 100, 0 }, { 20, 22 }, wxTE_READONLY);
+
+    gpio_out.push_back(strGPIO);
+
+    return panel;
+}
+
+
+wxPanel *PageTestsGPIO::CreatePanelPinIn(wxWindow *parent, PinIn &pin)
+{
+    wxPanel *panel = new wxPanel(parent, wxID_ANY, wxDefaultPosition, { 250, 23 });
+
+    StructInGPIO strGPIO(pin);
+
+    new wxStaticText(panel, wxID_ANY, wxString::Format("%s : %d", NamePin(pin.type()), NumPin(pin.type())), { 0, 0 }, { 80, 22 });
+
+    strGPIO.txtState = new wxTextCtrl(panel, wxID_ANY, "", { 100, 0 }, { 20, 22 }, wxTE_READONLY);
+
+    gpio_in.push_back(strGPIO);
 
     return panel;
 }
@@ -118,9 +155,9 @@ void PageTestsGPIO::ThreadFunc()
 {
     while (thread_is_running)
     {
-        for (auto &str : PageTestsGPIO::self->gpio)
+        for (auto &str : PageTestsGPIO::self->gpio_out)
         {
-            str.txtState->SetValue(str.in.Get() ? "1" : "0");
+            str.txtState->SetValue(str.pin.Get() ? "1" : "0");
         }
 
         std::this_thread::sleep_for(std::chrono::milliseconds(10));

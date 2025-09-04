@@ -8,6 +8,8 @@
 
 class PanelChannelC : public wxPanel
 {
+    friend class PanelScheme;
+
 public:
 
     PanelChannelC(wxPanel *parent, int x, int w, int h);

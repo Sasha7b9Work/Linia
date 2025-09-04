@@ -21,6 +21,9 @@ struct Category
     };
 
     static E Current();
+
+    static bool IsBCE();        // Биполярный транзистор
+    static bool IsGDS();        // Полевой транзистор
 };
 
 

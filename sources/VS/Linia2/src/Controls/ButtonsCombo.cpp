@@ -306,6 +306,14 @@ void ButtonsCombo::SetCurrentString(const wxString &choice)
 }
 
 
+void ButtonsCombo::SetTitle(const wxString &_title)
+{
+    title = _title;
+
+    SetCurrentSelection(GetCurrentSelection());
+}
+
+
 void ButtonsCombo::SetExtendedLabel(const wxString &start, const wxString &end)
 {
     if (start.IsEmpty())
