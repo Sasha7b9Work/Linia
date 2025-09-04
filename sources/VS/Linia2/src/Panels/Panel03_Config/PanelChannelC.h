@@ -21,9 +21,10 @@ public:
 
 private:
 
-    ButtonsComboRange *comboVoltage = nullptr;              // Измеритель U
-    ButtonsComboRange *comboCurrent = nullptr;              // Измеритель I
-    ButtonsCombo      *comboRange = nullptr;                // Источник U - Диапазон
+    ButtonsComboRange *comboMeasVoltage = nullptr;          // Измеритель U
+    ButtonsComboRange *comboMeasCurrent = nullptr;          // Измеритель I
+    ButtonsCombo      *comboSourceRange = nullptr;          // Источник U - Диапазон
+    wxStaticText      *txtLimit = nullptr;                  // Источник U - Ограничение %
     BmpButtonsCombo   *comboScan = nullptr;                 // Развёртка
     ButtonsCombo      *comboDutyCycleIncrease = nullptr;    // Развёртка - Скважность
     ButtonsCombo      *comboNumberPoints = nullptr;         // Развёртка - Число точек

@@ -86,10 +86,10 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
         int width = 85;
 
         RangeU::FillArrayStrings(names, DSet::Type::ChanC_Meas, false);
-        comboVoltage = new ButtonsComboRange(boxMeter, "Uc", SD::XY0(), width, names, names, "comboVoltage");
+        comboMeasVoltage = new ButtonsComboRange(boxMeter, "Uc", SD::XY0(), width, names, names, "comboVoltage");
 
         RangeI::FillArrayStrings(names, DSet::Type::ChanC_Meas, false);
-        comboCurrent = new ButtonsComboRange(boxMeter, "Ic", { SD::XY0().x + PanelConfig::WIDTH_COMBO - width, SD::XY0().y }, width, names, names, "comboCurrent");
+        comboMeasCurrent = new ButtonsComboRange(boxMeter, "Ic", { SD::XY0().x + PanelConfig::WIDTH_COMBO - width, SD::XY0().y }, width, names, names, "comboCurrent");
     }
 
     boxMeter->SetFont(StaticBox::TitleFont());
@@ -106,9 +106,9 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
             "2 kV"
         };
 
-        comboRange = new ButtonsCombo(boxSource, "Диапазон Ud", SD::XY0(), PanelConfig::WIDTH_COMBO, names, names, 1, "comboRange");
+        comboSourceRange = new ButtonsCombo(boxSource, "Диапазон Ud", SD::XY0(), PanelConfig::WIDTH_COMBO, names, names, 1, "comboRange");
 
-        new wxStaticText(boxSource, wxID_ANY, "Ограничение Uc, %", { 40, SD::Y_SB(65) });
+        txtLimit = new wxStaticText(boxSource, wxID_ANY, "Ограничение Uc, %", { 40, SD::Y_SB(65) });
 
         int y = 90;
 
@@ -146,7 +146,7 @@ void PanelChannelC::OnEventComboBox(wxCommandEvent &event)
 {
     int id = event.GetId();
 
-    if (id == comboRange->GetId())
+    if (id == comboSourceRange->GetId())
     {
         static const pchar values[5] =
         {
@@ -157,7 +157,7 @@ void PanelChannelC::OnEventComboBox(wxCommandEvent &event)
             "2.0 ms"
         };
 
-        textValueImpulse->SetLabel(values[comboRange->GetCurrentSelection()]);
+        textValueImpulse->SetLabel(values[comboSourceRange->GetCurrentSelection()]);
     }
     else if (id == comboScan->GetId())
     {
@@ -199,11 +199,11 @@ void PanelChannelC::Pack()
     comboScan->Pack();
     comboNumberPoints->Pack();
     comboDutyCycleIncrease->Pack();
-    comboVoltage->Pack();
-    comboCurrent->Pack();
+    comboMeasVoltage->Pack();
+    comboMeasCurrent->Pack();
     spinStart->Pack();
     spinStop->Pack();
-    comboRange->Pack();
+    comboSourceRange->Pack();
 }
 
 
@@ -213,9 +213,9 @@ void PanelChannelC::Unpack()
     wxYield();                      // Немедленно обрабатываем все события
     comboNumberPoints->Unpack();
     comboDutyCycleIncrease->Unpack();
-    comboVoltage->Unpack();
-    comboCurrent->Unpack();
+    comboMeasVoltage->Unpack();
+    comboMeasCurrent->Unpack();
     spinStart->Unpack();
     spinStop->Unpack();
-    comboRange->Unpack();
+    comboSourceRange->Unpack();
 }

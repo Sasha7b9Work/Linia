@@ -203,8 +203,10 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
             suffix = "d";
         }
 
-        PanelChannelC::self->comboVoltage->SetTitle(wxString("U") + suffix);
-        PanelChannelC::self->comboCurrent->SetTitle(wxString("I") + suffix);
+        PanelChannelC::self->comboMeasVoltage->SetTitle(wxString("U") + suffix);
+        PanelChannelC::self->comboMeasCurrent->SetTitle(wxString("I") + suffix);
+        PanelChannelC::self->comboSourceRange->SetTitle(wxString("Диапазон U") + suffix);
+        PanelChannelC::self->txtLimit->SetLabel(wxString("Ограничение U") + suffix + ", %");
     }
 }
 

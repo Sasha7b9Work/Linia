@@ -85,7 +85,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
         btnSendUART = new wxButton(boxUART, wxID_ANY, "Send", { 120, 70 }, { 50, 20 });
 
         new wxStaticText(boxUART, wxID_ANY, "Принято:", { 10, 105 });
-        new wxTextCtrl(boxUART, wxID_ANY, "", { 10, 130 }, { 100, 20 });
+        new wxTextCtrl(boxUART, wxID_ANY, "", { 10, 130 }, { 100, 20 }, wxTE_READONLY);
     }
 
     wxStaticBox *boxSPI = new wxStaticBox(this, wxID_ANY, "SPI", { boxUART->GetPosition().x + boxUART->GetSize().x + 10, 10 }, { 200, 270 });
