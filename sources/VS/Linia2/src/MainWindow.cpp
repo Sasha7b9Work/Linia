@@ -229,6 +229,8 @@ void MainWindow::OnQuit(wxCommandEvent &WXUNUSED(event))
 
 void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 {
+    PanelDebug::self->Show(false);
+
     Test::Save("example.tst");
 
     SET::Save("");

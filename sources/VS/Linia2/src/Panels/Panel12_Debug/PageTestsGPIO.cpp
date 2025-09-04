@@ -117,11 +117,13 @@ wxPanel *PageTestsGPIO::CreatePanelPinOut(wxWindow *parent, PinOut &pin)
 
     StructOutGPIO strGPIO(pin);
 
-    strGPIO.button = new wxButton(panel, wxID_ANY, wxString::Format("%s : %d", NamePin(pin.type()), NumPin(pin.type())), { 0, 0 }, { 70, 22 });
+    strGPIO.button = new wxButton(panel, wxID_ANY, NamePin(pin.type()), { 0, 0 }, { 70, 22 });
 
     strGPIO.button->Bind(wxEVT_BUTTON, &PageTestsGPIO::OnEventButton, this);
 
     strGPIO.txtState = new wxTextCtrl(panel, wxID_ANY, "", { 100, 0 }, { 20, 22 }, wxTE_READONLY);
+
+    new wxStaticText(panel, wxID_ANY, wxString::Format("%d", NumPin(pin.type())), {130, 0});
 
     gpio_out.push_back(strGPIO);
 
@@ -135,9 +137,11 @@ wxPanel *PageTestsGPIO::CreatePanelPinIn(wxWindow *parent, PinIn &pin)
 
     StructInGPIO strGPIO(pin);
 
-    new wxStaticText(panel, wxID_ANY, wxString::Format("%s : %d", NamePin(pin.type()), NumPin(pin.type())), { 0, 0 }, { 80, 22 });
+    new wxStaticText(panel, wxID_ANY, NamePin(pin.type()), { 0, 0 }, { 80, 22 });
 
     strGPIO.txtState = new wxTextCtrl(panel, wxID_ANY, "", { 100, 0 }, { 20, 22 }, wxTE_READONLY);
+
+    new wxStaticText(panel, wxID_ANY, wxString::Format("%d", NumPin(pin.type())), { 130, 0 });
 
     gpio_in.push_back(strGPIO);
 
@@ -156,6 +160,11 @@ void PageTestsGPIO::ThreadFunc()
     while (thread_is_running)
     {
         for (auto &str : PageTestsGPIO::self->gpio_out)
+        {
+            str.txtState->SetValue(str.pin.Get() ? "1" : "0");
+        }
+
+        for (auto &str : PageTestsGPIO::self->gpio_in)
         {
             str.txtState->SetValue(str.pin.Get() ? "1" : "0");
         }
