@@ -117,15 +117,13 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         {
             wxArrayString files;
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < Category::Count; i++)
             {
                 files.push_back(wxString::Format("sch/cat%d.bmp", i + 1));
             }
 
             wxArrayString tooltips =
             {
-                "Диод",
-                "Тиристор",
                 "Биполярный NPN-транзистор (трёхполюсный)",
                 "Биполярный PNP-транзистор (трёхполюсный)",
                 "Полевой или МОП транзистор NMOS (трёхполюсный)",
@@ -133,7 +131,11 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
                 "Биполярный NPN-транзистор (четырёхполюсный)",
                 "Биполярный PNP-транзистор (четырёхполюсный)",
                 "Полевой или МОП транзистор NMOS (четырёхполюсный)",
-                "Полевой или МОП транзистор PMOS (четырёхполюсный)"
+                "Полевой или МОП транзистор PMOS (четырёхполюсный)",
+                "Диод",
+                "Тиристор",
+                "Резистор",
+                "Конденсатор"
             };
 
             comboCategory = new BmpButtonsCombo(painter, "Категория", { 50, 28 }, { 55, 65 }, files, tooltips, 0, 4, "comboCategory");

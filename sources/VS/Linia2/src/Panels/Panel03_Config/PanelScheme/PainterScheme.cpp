@@ -19,8 +19,6 @@ void PainterScheme::DrawElement()
 {
     static const pchar files[Category::Count] =
     {
-        "sch/diod2.bmp",
-        "sch/GASK.bmp",
         "sch/BCE_N.bmp",
         "sch/BCE_P.bmp",
         "sch/GDS_N.bmp",
@@ -28,7 +26,11 @@ void PainterScheme::DrawElement()
         "sch/BCSE_N.bmp",
         "sch/BCSE_P.bmp",
         "sch/GDBS_N.bmp",
-        "sch/GDBS_P.bmp"
+        "sch/GDBS_P.bmp",
+        "sch/diod2.bmp",
+        "sch/GASK.bmp",
+        "sch/resistor.bmp",
+        "sch/capasitor.bmp"
     };
 
     DrawBitmap(50, 33, Bitmap::Get(files[Category::Current()]).GetBitmap(), {241, 241, 241});

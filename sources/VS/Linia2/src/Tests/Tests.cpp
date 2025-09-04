@@ -18,7 +18,7 @@ bool Chan::IsVisible() const
 
     if (value == Chan::_B)
     {
-        if (cat == Category::Diod)
+        if (cat == Category::Diod || cat == Category::Resistor || cat == Category::Capacitor)
         {
             return false;
         }
@@ -27,6 +27,8 @@ bool Chan::IsVisible() const
     if (value == Chan::_S)
     {
         if (cat == Category::Diod ||
+            cat == Category::Resistor ||
+            cat == Category::Capacitor ||
             cat == Category::BCE_N ||
             cat == Category::BCE_P ||
             cat == Category::GDS_N ||
