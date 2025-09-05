@@ -1,7 +1,5 @@
-﻿#include "Communicator/SPI/SPI.h"
-
-#ifdef ARM64
-
+﻿#include "defines.h"
+#include "Communicator/SPI/SPI.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
@@ -10,12 +8,15 @@
 #include <cstring>
 #include <gpiod.h>
 
+
+#ifdef WIN32
+    #pragma warning(push)
+    #pragma warning(disable:4996)
 #endif
+
 
 namespace SPI
 {
-#ifdef ARM64
-
     static int g_spi_fd = -1;
     static uint32_t g_speed = SPI_SPEED;
     static uint8_t g_mode = 0;
@@ -345,46 +346,9 @@ namespace SPI
 
         return true;
     }
-
-#else
-
-    void Init()
-    {
-    }
-
-    void DeInit()
-    {
-    }
-
-    bool WriteDynamicDAC(int /*number_DAC*/, uint16_t /*value*/)
-    {
-        return false;
-    }
-
-    bool SetSpeed(uint32_t /*speedHz*/)
-    {
-        return false;
-    }
-
-    bool SetMode(uint8_t /*mode*/)
-    {
-        return false;
-    }
-
-    bool IsReady()
-    {
-        return false;
-    }
-
-    uint32_t GetSpeed()
-    {
-        return 0;
-    }
-
-    uint8_t GetMode()
-    {
-        return 0;
-    }
-
-#endif 
 }
+
+
+#ifdef WIN32
+    #pragma warning(pop)
+#endif

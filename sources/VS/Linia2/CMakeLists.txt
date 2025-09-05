@@ -81,8 +81,10 @@ file(GLOB STORAGE                       src/Storage/*.*)
 file(GLOB TESTS                         src/Tests/*.*)
 file(GLOB UTILS                         src/Utils/*.*)
 file(GLOB WINDOWS                       src/Windows/*.*)
-file(GLOB PLUGS_ARM64                   arm64_plugs/*.*)
-file(GLOB PLUGS_LINUX                   linux_plugs/*.*)
+file(GLOB PLUGS_ARM64                   arm64_plugs/*.*
+                                        arm64_plugs/linux/spi/*.*)
+file(GLOB PLUGS_LINUX                   linux_plugs/*.*
+                                        linux_plugs/sys/*.*)
 
 source_group(doc                                  FILES ${DOC})
 source_group(Resources                            FILES ${RESOURCES})
