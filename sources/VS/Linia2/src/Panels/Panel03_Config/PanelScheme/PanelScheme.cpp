@@ -87,21 +87,21 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         y += 40;
 
-        jack[Chan::_C] = new FullJack(Chan::_C, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_C.bmp", &choices);
+        jacks[Chan::_C] = new FullJack(Chan::_C, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_C.bmp", &choices);
 
         int dy = 35;
 
         y += dy;
 
-        jack[Chan::_B] = new FullJack(Chan::_B, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_B.bmp", &choices);
+        jacks[Chan::_B] = new FullJack(Chan::_B, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_B.bmp", &choices);
 
         y += dy;
 
-        jack[Chan::_S] = new FullJack(Chan::_S, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_S.bmp", &choices);
+        jacks[Chan::_S] = new FullJack(Chan::_S, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_S.bmp", &choices);
 
         y += dy;
 
-        jack[Chan::_E] = new FullJack(Chan::_E, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_E.bmp");
+        jacks[Chan::_E] = new FullJack(Chan::_E, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_E.bmp");
 
         choices.clear();
         choices.Add("C");
@@ -151,15 +151,15 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         int width = 45;
 
         // IDC_COMBOCHECKKOL
-        combo[Chan::_C] = new ComboJack(Chan::_C, painter, "", {x0 + dx, y - dy}, width, choices);
+        combos[Chan::_C] = new ComboJack(Chan::_C, painter, "", {x0 + dx, y - dy}, width, choices);
 
         // IDC_COMBOCHECKBAZA
-        combo[Chan::_B] = new ComboJack(Chan::_B, painter, "", {x0, y}, width, choices);
+        combos[Chan::_B] = new ComboJack(Chan::_B, painter, "", {x0, y}, width, choices);
 
         // IDC_COMBOCHECKDOP
-        combo[Chan::_E] = new ComboJack(Chan::_E, painter, "", {x0 + dx, y + dy}, width, choices);
+        combos[Chan::_E] = new ComboJack(Chan::_E, painter, "", {x0 + dx, y + dy}, width, choices);
 
-        combo[Chan::_S] = new ComboJack(Chan::_S, painter, "", {x0 + 2 * dx, y}, width, choices);
+        combos[Chan::_S] = new ComboJack(Chan::_S, painter, "", {x0 + 2 * dx, y}, width, choices);
     }
 
     boxCommutation->SetFont(StaticBox::TitleFont());
@@ -195,82 +195,59 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
     {
         BuildPanel();
 
+        if (id == comboCategory->GetId())
         {
-            wxString suffix_c = "a";                                                                            // Суффикс канала C
+            {                                                                                               // Суффикс канала C
+                char suffix_c = 'a';
 
-            if (Category::IsBCE())
-            {
-                suffix_c = "c";
-            }
-            else if (Category::IsGDS())
-            {
-                suffix_c = "d";
-            }
-
-            PanelChannelC::self->comboMeasVoltage->SetTitle(wxString("U") + suffix_c);
-            PanelChannelC::self->comboMeasCurrent->SetTitle(wxString("I") + suffix_c);
-            PanelChannelC::self->comboSourceRange->SetTitle(wxString("Диапазон U") + suffix_c);
-            PanelChannelC::self->txtLimit->SetLabel(wxString("Ограничение U") + suffix_c + ", %");
-        }
-
-        {
-            wxString suffix_b = "b";                                                                            // Суффикс канала B
-
-            if (Category::IsGDS() || Category::Current() == Category::Thyristor)
-            {
-                suffix_b = "g";
-            }
-
-            const wxArrayString &old_choices = PanelChannelB::self->comboTypeGenerator->GetChoices();
-
-            wxArrayString choices;
-
-            for (auto elem : old_choices)
-            {
-                if (elem.Length() == 1)
+                if (Category::IsBCE())
                 {
-                    choices.push_back(elem + suffix_b);
+                    suffix_c = 'c';
                 }
-                else
+                else if (Category::IsGDS())
                 {
-                    wxString choice = elem;
-                    choice[1] = suffix_b[0];
-                    choices.push_back(choice);
+                    suffix_c = 'd';
                 }
+
+                PanelChannelC::self->comboMeasVoltage->SetTitle(wxString("U") + suffix_c);
+                PanelChannelC::self->comboMeasCurrent->SetTitle(wxString("I") + suffix_c);
+                PanelChannelC::self->comboSourceRange->SetTitle(wxString("Диапазон U") + suffix_c);
+                PanelChannelC::self->txtLimit->SetLabel(wxString("Ограничение U") + suffix_c + ", %");
             }
 
-            PanelChannelB::self->comboTypeGenerator->SetChoices(choices, choices);
-        }
-
-        {
-            wxString suffix_s = "s";
-
-            if (Category::IsGDS())
-            {
-                suffix_s = "b";
+            {                                                                                               // Суффикс канала B
+                UpdateSuffixGenerator(PanelChannelB::self->comboTypeGenerator, (Category::IsGDS() || Category::Current() == Category::Thyristor) ? 'g' : 'b');
             }
 
-            const wxArrayString &old_choices = PanelChannelS::self->comboTypeGenerator->GetChoices();
-
-            wxArrayString choices;
-
-            for (auto elem : old_choices)
-            {
-                if (elem.Length() == 1)
-                {
-                    choices.push_back(elem + suffix_s);
-                }
-                else
-                {
-                    wxString choice = elem;
-                    choice[1] = suffix_s[0];
-                    choices.push_back(choice);
-                }
+            {                                                                                               // Суффикс канала S
+                UpdateSuffixGenerator(PanelChannelS::self->comboTypeGenerator, Category::IsGDS() ? 'b' : 's');
             }
-
-            PanelChannelS::self->comboTypeGenerator->SetChoices(choices, choices);
         }
     }
+}
+
+
+void PanelScheme::UpdateSuffixGenerator(ButtonsCombo *combo, char suffix)
+{
+    const wxArrayString &old_choices = combo->GetChoices();
+
+    wxArrayString choices;
+
+    for (auto elem : old_choices)
+    {
+        if (elem.Length() == 1)
+        {
+            choices.push_back(elem + suffix);
+        }
+        else
+        {
+            wxString choice = elem;
+            choice[1] = suffix;
+            choices.push_back(choice);
+        }
+    }
+
+    combo->SetChoices(choices, choices);
 }
 
 
@@ -279,12 +256,12 @@ void PanelScheme::BuildPanel()
     PanelConfig::self->btnChannelB->Enable(PanelChannelB::self->IsEnabled());
     PanelConfig::self->btnChannelS->Enable(PanelChannelS::self->IsEnabled());
 
-    for (auto _jack : jack)
+    for (auto _jack : jacks)
     {
         _jack->TuneState();
     }
 
-    for (auto _combo : combo)
+    for (auto _combo : combos)
     {
         _combo->TuneState();
     }
@@ -402,8 +379,8 @@ void PanelScheme::Pack()
     comboCommutation->Pack();
     for (int i = 0; i < Chan::Count; i++)
     {
-        combo[i]->Pack();
-        jack[i]->Pack();
+        combos[i]->Pack();
+        jacks[i]->Pack();
     }
 }
 
@@ -416,8 +393,8 @@ void PanelScheme::Unpack()
     wxYield();
     for (int i = 0; i < Chan::Count; i++)
     {
-        combo[i]->Unpack();
-        jack[i]->Unpack();
+        combos[i]->Unpack();
+        jacks[i]->Unpack();
     }
 }
 

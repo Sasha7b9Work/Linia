@@ -68,8 +68,8 @@ private:
     ButtonsCombo *comboTest = nullptr,
         *comboCommutation = nullptr;        // IDC_COMBO_KOMMUTATOR         m_iKommutator           OnSelchangeComboKommutator
 
-    ComboJack *combo[Chan::Count];       // Комбобоксы на схеме. Активны при внешней коммутации  IDC_COMBO_GNEZDO_C
-    FullJack *jack[Chan::Count];         // Активны при внутренней коммутации                    IDC_COMBOCHECKKOL
+    ComboJack *combos[Chan::Count];         // Комбобоксы на схеме. Активны при внешней коммутации  IDC_COMBO_GNEZDO_C
+    FullJack *jacks[Chan::Count];           // Активны при внутренней коммутации                    IDC_COMBOCHECKKOL
 
     BmpButtonsCombo *comboCategory = nullptr;
 
@@ -83,5 +83,8 @@ private:
 
     // Нарисовать схему в соответствии с установками
     void BuildPanel();
+
+    // Обновить обозначение типа генерируемой величины в соответствии с выбраной категорией
+    void UpdateSuffixGenerator(ButtonsCombo *, char suffix);
 };
  
