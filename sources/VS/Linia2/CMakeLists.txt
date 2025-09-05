@@ -35,10 +35,12 @@ if(WIN32)
 else()
 
     include_directories(
+
     if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
     else()
         arm64_plugs
     endif()
+
         ./src
         ../../ThirdParty/wxWidgets/generated/lib/wx/include/gtk3-unicode-static-3.2
         ../../ThirdParty/wxWidgets/include
@@ -79,6 +81,8 @@ file(GLOB STORAGE                       src/Storage/*.*)
 file(GLOB TESTS                         src/Tests/*.*)
 file(GLOB UTILS                         src/Utils/*.*)
 file(GLOB WINDOWS                       src/Windows/*.*)
+file(GLOB PLUGS_ARM64                   arm64_plugs/*.*)
+file(GLOB PLUGS_LINUX                   linux_plugs/*.*)
 
 source_group(doc                                  FILES ${DOC})
 source_group(Resources                            FILES ${RESOURCES})
@@ -105,6 +109,8 @@ source_group(Storage                              FILES ${STORAGE})
 source_group(Tests                                FILES ${TESTS})
 source_group(Utils                                FILES ${UTILS})
 source_group(Windows                              FILES ${WINDOWS})
+source_group(Plugs/Arm64                          FILES ${PLUGS_ARM64})
+source_group(Plugs/linux                          FILES ${PLUGS_LINUX})
 
 add_executable(${PROJECT_NAME}
     ${DOC}
@@ -132,6 +138,8 @@ add_executable(${PROJECT_NAME}
     ${TESTS}
     ${UTILS}
     ${WINDOWS}
+    ${PLUGS_ARM64}
+    ${PLUGS_LINUX}
 )
 
 

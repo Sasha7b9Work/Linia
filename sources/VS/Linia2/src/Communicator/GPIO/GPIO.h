@@ -3,7 +3,6 @@
 #include <functional>
 
 // Структуры для аппаратной информации GPIO (нужны для Linux)
-#ifdef ARM64
 struct gpiod_chip;
 struct gpiod_line;
 
@@ -26,7 +25,6 @@ struct OutputPinInfo
 {
     HardwarePinInfo hw;
 };
-#endif
 
 class Pin {
 public:
@@ -75,11 +73,9 @@ namespace GPIO {
     void Init();
     void DeInit();
 
-#ifdef ARM64
     // Вспомогательные функции
     InputPinInfo *GetInputPinInfo(Pin::Type type);
     OutputPinInfo *GetOutputPinInfo(Pin::Type type);
-#endif
 }
 
 

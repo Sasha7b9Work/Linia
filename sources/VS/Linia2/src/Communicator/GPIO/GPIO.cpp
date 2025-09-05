@@ -1,4 +1,13 @@
-#include "GPIO.h"
+#include "defines.h"
+#include "Communicator/GPIO/GPIO.h"
+#include <gpiod.h>
+#include <iostream>
+#include <unistd.h>
+#include <pthread.h>
+#include <sys/select.h>
+#include <sys/time.h>
+#include <errno.h>
+#include <cstring>
 
 
 PinIn pinSTART(Pin::START);
@@ -11,17 +20,6 @@ PinIn pinFIFO_FULL(Pin::FIFO_FULL);
 
 PinOut pinREQ_RD(Pin::REQ_RD);
 
-
-#ifdef ARM64
-
-#include <gpiod.h>
-#include <iostream>
-#include <unistd.h>
-#include <pthread.h>
-#include <sys/select.h>
-#include <sys/time.h>
-#include <errno.h>
-#include <cstring>
 
 namespace GPIO
 {
@@ -116,7 +114,7 @@ namespace GPIO
                 continue;
             }
 
-            info.hw.line = gpiod_chip_get_line(info.hw.chip, info.hw.pin_number);
+            info.hw.line = gpiod_chip_get_line(info.hw.chip, (uint)info.hw.pin_number);
             if (!info.hw.line)
             {
                 std::cerr << "Error: Cannot get GPIO line " << info.hw.pin_number << std::endl;
@@ -153,7 +151,7 @@ namespace GPIO
                 continue;
             }
 
-            info.hw.line = gpiod_chip_get_line(info.hw.chip, info.hw.pin_number);
+            info.hw.line = gpiod_chip_get_line(info.hw.chip, (uint)info.hw.pin_number);
             if (!info.hw.line)
             {
                 std::cerr << "Error: Cannot get GPIO line " << info.hw.pin_number << std::endl;
@@ -309,7 +307,13 @@ namespace GPIO
                     int fd = gpiod_line_event_get_fd(info.hw.line);
                     if (fd >= 0)
                     {
+#ifdef WIN32
+    #pragma warning(push, 0)
+#endif
                         FD_SET(fd, &read_fds);
+#ifdef WIN32
+    #pragma warning(pop)
+#endif
                     }
                 }
             }
@@ -449,33 +453,3 @@ void PinIn::SetChangeCallback(ChangeCallback callback)
         }
     }
 }
-
-#else
-
-namespace GPIO
-{
-    void Init()
-    {
-    }
-
-    void DeInit()
-    {
-    }
-}
-
-bool Pin::Get() const
-{
-    return false;
-}
-
-void PinOut::Set(bool state)
-{
-    (void)state;
-}
-
-void PinIn::SetChangeCallback(ChangeCallback callback)
-{
-    callback_ = callback;
-}
-
-#endif
