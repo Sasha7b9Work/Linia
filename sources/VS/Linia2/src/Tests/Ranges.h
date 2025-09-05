@@ -88,7 +88,7 @@ struct RangeI
     pchar Name(RowRange::E) const;
     wxString NameStep(RowRange::E) const;
 
-    void operator++(int)
+    void operator++()
     {
         value = (E)(value + 1);
     }
@@ -154,7 +154,7 @@ struct RangeU
     pchar Name(RowRange::E) const;
     wxString NameStep(RowRange::E) const;
 
-    void operator++(int)
+    void operator++()
     {
         value = (E)(value + 1);
     }

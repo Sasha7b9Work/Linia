@@ -10,7 +10,7 @@ SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _
     min(_min),
     max(_max)
 {
-    SetName(parent->GetName() + "_" + _name);
+    wxPanel::SetName(parent->GetName() + "_" + _name);
 
     int w1 = 20;
     int w2 = 17;
@@ -140,7 +140,7 @@ void SliderFloat::SetIntValue(int value)
 SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width, const wxString &name) :
     wxPanel(parent, wxID_ANY, position, { width, TEXTCNTRL_HEIGHT + 5 + 5 })
 {
-    SetName(parent->GetName() + "_" + name);
+    wxPanel::SetName(parent->GetName() + "_" + name);
 
     int w1 = 50;
     int w2 = 17;

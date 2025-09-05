@@ -122,7 +122,7 @@ ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &s
 
     SetFileBitmap(file_bitmap);
 
-    SetClientSize(((size == wxDefaultSize) ? bitmap.GetBitmap().GetSize() : size ) + wxSize(10, 10));
+    wxBitmapButton::SetClientSize(((size == wxDefaultSize) ? bitmap.GetBitmap().GetSize() : size ) + wxSize(10, 10));
 
     wxBitmapButton::Update();
 
@@ -136,7 +136,7 @@ void ButtonBitmap::SetFileBitmap(const wxString &file_bitmap)
 {
     bitmap = Bitmap::Get(file_bitmap);
 
-    SetBitmap(bitmap.GetBitmap());
+    wxBitmapButton::SetBitmap(bitmap.GetBitmap());
 }
 
 

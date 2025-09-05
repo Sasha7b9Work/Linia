@@ -111,7 +111,7 @@ void WindowTableOffsets::CreateFields_U(wxPanel *panel)
 
                 fields_U.push_back(field);
 
-                range++;
+                ++range;
             }
         }
     }
@@ -163,7 +163,7 @@ void WindowTableOffsets::CreateFields_I(wxPanel *panel)
 
                 fields_I.push_back(field);
 
-                range++;
+                ++range;
             }
         }
     }

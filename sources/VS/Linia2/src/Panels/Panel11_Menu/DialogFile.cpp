@@ -88,7 +88,7 @@ DialogFile::DialogFile() :
 {
     self = this;
 
-    Update();
+    MenuDialog::Update();
 }
 
 

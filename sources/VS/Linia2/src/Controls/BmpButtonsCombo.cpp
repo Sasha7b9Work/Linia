@@ -129,7 +129,7 @@ void BmpButtonsCombo::OnButtonClicked(wxCommandEvent &)
     popup->Position(pos, wxSize(0, 0));
     popup->Popup();
     popup->SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY);
-}
+} //-V773
 
 
 void BmpButtonsCombo::SetCurrentChoice(int choice)

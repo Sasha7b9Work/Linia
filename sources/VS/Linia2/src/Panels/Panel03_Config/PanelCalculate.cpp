@@ -13,7 +13,7 @@ PanelCalculate *PanelCalculate::self = nullptr;
 PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
     wxPanel(parent)
 {
-    SetName("PanelCalculate");
+    wxPanel::SetName("PanelCalculate");
 
     self = this;
 
@@ -82,7 +82,7 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
         boxCalculate->SetFont(StaticBox::TitleFont());
 
         wxPoint pos = boxCalculate->GetPosition();
-        pos.y = SD::Y_SB(boxParameter->GetSize().y - boxCalculate->GetSize().y - 8);
+        pos.y = SD::Y_SB(boxParameter->GetSize().y - boxCalculate->GetSize().y - 8); //-V807
         boxCalculate->SetPosition(pos);
     }
 

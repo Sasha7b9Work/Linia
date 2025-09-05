@@ -73,11 +73,11 @@ WindowLibraryTests::WindowLibraryTests() :
     }
 
     // Устанавливаем минимальный размер окна
-    SetMinSize(wxSize(WIDTH, HEIGHT));
+    Dialog::SetMinSize(wxSize(WIDTH, HEIGHT));
 
-    SetSizeHints(WIDTH, HEIGHT, WIDTH, HEIGHT);
+    Dialog::SetSizeHints(WIDTH, HEIGHT, WIDTH, HEIGHT);
 
-    Layout();
+    Dialog::Layout();
 
     SetAutoSizeColumns();
 
