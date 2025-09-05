@@ -1,61 +1,5 @@
+#include "defines.h"
 #include "Communicator/UART/UART.h"
-
-#ifdef WIN32
-namespace UART
-{
-    void Init()
-    {
-    }
-
-    void DeInit()
-    {
-    }
-
-    bool Open(int /*baudrate*/, const char * /*mode*/)
-    {
-        return false;
-    }
-
-    void Close()
-    {
-    }
-
-    bool SendByte(uint8_t /*byte*/)
-    {
-        return false;
-    }
-
-    bool SendBuffer(const uint8_t * /*buffer*/, int /*size*/)
-    {
-        return false;
-    }
-
-    void SetCallback(ReceivedCallback /*callback*/)
-    {
-    }
-
-    void Flush()
-    {
-    }
-
-    bool IsReady()
-    {
-        return false;
-    }
-
-    int GetBaudrate()
-    {
-        return 0;
-    }
-
-    const char *GetMode()
-    {
-        return "";
-    }
-}
-
-#else
-
 #include <fcntl.h>
 #include <termios.h>
 #include <unistd.h>
@@ -67,6 +11,18 @@ namespace UART
 #include <sys/ioctl.h>
 #include <algorithm>
 #include <sys/select.h>
+
+
+#ifdef WIN32
+    #pragma warning(push)
+    #pragma warning(disable:4365 4996)
+    #define O_NOCTTY  0x00000400
+    #define O_NDELAY  0
+    #define LOCK_EX 2
+    #define LOCK_NB 0
+    #define LOCK_UN 0
+#endif
+
 
 namespace UART
 {
@@ -405,7 +361,13 @@ namespace UART
         {
             // Настраиваем select для ожидания данных
             FD_ZERO(&read_fds);
+#ifdef WIN32
+    #pragma warning(push, 0)
+#endif
             FD_SET(g_uart_fd, &read_fds);
+#ifdef WIN32
+    #pragma warning(pop)
+#endif
 
             timeout.tv_sec = 0;
             timeout.tv_usec = 100000;
@@ -451,4 +413,7 @@ namespace UART
     }
 }
 
+
+#ifdef WIN32
+    #pragma warning(pop)
 #endif
