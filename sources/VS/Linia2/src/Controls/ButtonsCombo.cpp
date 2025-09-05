@@ -11,11 +11,11 @@ DrawingButton::DrawingButton(wxWindow *parent, int id, const wxString &label, co
     wxButton(parent, id, label, position, size),
     file_name(_name_file)
 {
-    SetBackgroundStyle(wxBG_STYLE_PAINT); // Для избежания мерцания
+    wxButton::SetBackgroundStyle(wxBG_STYLE_PAINT); // Для избежания мерцания
 
     Bind(wxEVT_PAINT, &DrawingButton::OnPaint, this);
 
-    SetBackgroundColour(GetBackgroundColour().ChangeLightness(LIGHTNESS));
+    wxButton::SetBackgroundColour(GetBackgroundColour().ChangeLightness(LIGHTNESS));
 }
 
 
@@ -33,7 +33,7 @@ class ButtonPopup : public wxPopupTransientWindow
 public:
     ButtonPopup(wxWindow *parent) : wxPopupTransientWindow(parent)
     {
-        Hide();
+        wxPopupTransientWindow::Hide();
 
         wxArrayString &labels = GetCombo()->labels;
 
@@ -90,16 +90,16 @@ public:
         outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 3);
         SetSizer(outerSizer);
 
-        Layout();
+        wxPopupTransientWindow::Layout();
 
-        Fit(); // Автоподбор размера
+        wxPopupTransientWindow::Fit(); // Автоподбор размера
 
         GetParent()->Bind(wxEVT_KEY_DOWN, &ButtonPopup::OnKeyDown, this);
 
-        Refresh();
-        Update();
+        wxPopupTransientWindow::Refresh();
+        wxPopupTransientWindow::Update();
 
-        SetBackgroundColour(GetBackgroundColour().ChangeLightness(50));
+        wxPopupTransientWindow::SetBackgroundColour(GetBackgroundColour().ChangeLightness(50));
 
         // Отключаем изменение фона для всех детей
         for (auto child : GetChildren())
@@ -109,9 +109,9 @@ public:
             child->Refresh(); // Обновляем внешний вид
         }
 
-        SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
+        wxPopupTransientWindow::SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
 
-        Show();
+        wxPopupTransientWindow::Show();
     }
 
 private:
@@ -158,14 +158,14 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoi
     DrawingButton(parent, wxID_ANY, _labels[0], pos, { width, TEXTCNTRL_HEIGHT + 3 }, (type == Type::Bitmap) ? _title : wxString("")),
     current_choice(0)
 {
-    SetName(parent->GetName() + "_" + name);
+    DrawingButton::SetName(parent->GetName() + "_" + name);
 
-    LOG_WRITE(GetName().ToStdString().c_str());
+    LOG_WRITE(DrawingButton::GetName().ToStdString().c_str());
 
     Bind(wxEVT_BUTTON, &ButtonsCombo::OnButtonClicked, this);
     Bind(wxEVT_LEFT_DOWN, &ButtonsCombo::OnMouseDown, this);
 
-    title = (type == Type::Text) ? _title : wxString("");
+    title = (type == Type::Text) ? _title : wxString();
 
     SetChoices(_labels, _tooltips);
 
@@ -234,7 +234,7 @@ void ButtonsCombo::SetCurrentSelection(int choice)
 
     SetExtendedLabel(label, labels[index]);
 
-    SetToolTip((tooltips[index] != labels[index]) ? (tooltips[index]) : wxString(""));
+    SetToolTip((tooltips[index] != labels[index]) ? (tooltips[index]) : wxString());
 
     if(need_event)
     {
@@ -378,5 +378,5 @@ ButtonsComboRange::ButtonsComboRange(wxWindow *parent, const wxString &title, co
 {
     ButtonsCombo::insert_empty = true;
 
-    SetChoices(labels, tooltips);
+    ButtonsCombo::SetChoices(labels, tooltips);
 }

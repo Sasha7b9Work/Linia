@@ -12,7 +12,7 @@ public:
     BmpButtonPopup(wxWindow *parent, const wxString &title, const wxArrayString &files, const wxArrayString &tooltips, int buttons_in_row) :
         wxPopupTransientWindow(parent)
     {
-        Hide();
+        wxPopupTransientWindow::Hide();
 
         // Основной контейнер с отступами по краям
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
@@ -55,11 +55,11 @@ public:
         outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 3);
         SetSizer(outerSizer);
 
-        Fit(); // Автоподбор размера
+        wxPopupTransientWindow::Fit();
 
         GetParent()->Bind(wxEVT_KEY_DOWN, &BmpButtonPopup::OnKeyDown, this);
 
-        SetBackgroundColour(GetBackgroundColour().ChangeLightness(70));
+        wxPopupTransientWindow::SetBackgroundColour(GetBackgroundColour().ChangeLightness(70));
 
         // Отключаем изменение фона для всех детей
         for (auto child : GetChildren())
@@ -69,9 +69,9 @@ public:
             child->Refresh(); // Обновляем внешний вид
         }
 
-        SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
+        wxPopupTransientWindow::SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
 
-        Show();
+        wxPopupTransientWindow::Show();
     }
 
 private:
@@ -109,7 +109,7 @@ BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxString &_title, const
 {
     Bind(wxEVT_BUTTON, &BmpButtonsCombo::OnButtonClicked, this);
 
-    SetToolTip(_tooltips[(size_t)num_file]);
+    ButtonBitmap::SetToolTip(_tooltips[(size_t)num_file]);
 
     title = _title;
     files = _files;

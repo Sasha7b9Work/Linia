@@ -41,7 +41,7 @@ CheckButton::CheckButton(wxWindow *parent, const wxString &title, const wxPoint 
     wxPanel(parent, wxID_ANY, pos)
 {
     wxSize size{ width, TEXTCNTRL_HEIGHT + 3 };
-    SetSize(size);
+    wxPanel::SetSize(size);
 
     button = new wxToggleButton(this, wxID_ANY, ' ' + title, { 0, 0 }, {size.x - 20, size.y}, wxBU_LEFT);
 
@@ -116,19 +116,19 @@ void CheckButton::SetToolTip(const wxString &tool_tip)
 ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString &file_bitmap, const wxString &name) :
     wxBitmapButton(parent, wxID_ANY, wxNullBitmap, pos, size, wxBU_EXACTFIT)
 {
-    SetName(parent->GetName() + "_" + name);
+    wxBitmapButton::SetName(parent->GetName() + "_" + name);
 
-    LOG_WRITE(GetName().ToStdString().c_str());
+    LOG_WRITE(wxBitmapButton::GetName().ToStdString().c_str());
 
     SetFileBitmap(file_bitmap);
 
     SetClientSize(((size == wxDefaultSize) ? bitmap.GetBitmap().GetSize() : size ) + wxSize(10, 10));
 
-    Update();
+    wxBitmapButton::Update();
 
-    Refresh();
+    wxBitmapButton::Refresh();
 
-    SetBackgroundColour(GetBackgroundColour().ChangeLightness(LIGHTNESS));
+    wxBitmapButton::SetBackgroundColour(GetBackgroundColour().ChangeLightness(LIGHTNESS));
 }
 
 
