@@ -146,11 +146,8 @@ void PanelReferenceGraph::OnEventMenu(wxCommandEvent &event)
 }
 
 
-void PanelReferenceGraph::OnEventGridClick(wxGridEvent &event)
+void PanelReferenceGraph::OnEventGridClick(wxGridEvent &)
 {
-    int id = event.GetId();
-
-    id = id;
 }
 
 

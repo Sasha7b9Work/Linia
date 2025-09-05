@@ -202,7 +202,7 @@ void ButtonsCombo::OnButtonClicked(wxCommandEvent &event)
             popup->Refresh();
             popup->Update();
             popup->SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY);
-        }
+        } //-V773
     }
 
     event.Skip();
@@ -333,7 +333,7 @@ void ButtonsCombo::SetExtendedLabel(const wxString &start, const wxString &end)
 {
     if (start.IsEmpty())
     {
-        SetLabel(end);
+        DrawingButton::SetLabel(end);
     }
     else
     {
@@ -343,7 +343,7 @@ void ButtonsCombo::SetExtendedLabel(const wxString &start, const wxString &end)
         {
             SetExtendedLabel(start, num_spaces, end);
 
-            wxSize size = GetTextExtent(GetLabel());
+            wxSize size = GetTextExtent(DrawingButton::GetLabel());
 
             if (size.x >= GetClientSize().x - 12)
             {

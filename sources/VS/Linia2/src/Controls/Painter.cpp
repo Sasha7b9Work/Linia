@@ -163,21 +163,21 @@ PainterBMP::PainterBMP(wxWindow *parent, const wxPoint &position, const wxSize &
 
     if (size == wxDefaultSize)
     {
-        SetSize(bitmap.GetBitmap().GetSize());
+        wxPanel::SetSize(bitmap.GetBitmap().GetSize());
     }
 
     Bind(wxEVT_PAINT, &PainterBMP::OnEventPaint, this);
 
-    Refresh();
+    wxPanel::Refresh();
 }
 
 
 void PainterBMP::OnEventPaint(wxPaintEvent &)
 {
-    wxPaintDC dc(this);
-
     if (bitmap.GetBitmap().IsOk())
     {
+        wxPaintDC dc(this);
+
         dc.DrawBitmap(bitmap.GetBitmap(), 0, 0, true);
     }
 }

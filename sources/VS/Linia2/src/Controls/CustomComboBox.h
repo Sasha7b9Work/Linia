@@ -75,6 +75,6 @@ public:
     CustomComboBox(wxWindow *parent, wxWindowID id)
         : wxComboCtrl(parent, id, wxEmptyString, wxDefaultPosition, wxSize(150, -1), wxCB_READONLY)
     {
-        SetPopupControl(new CustomComboPopup());
+        wxComboCtrl::SetPopupControl(new CustomComboPopup());
     }
 };

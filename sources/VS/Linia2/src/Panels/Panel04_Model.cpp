@@ -25,7 +25,7 @@ PanelModel::PanelModel(wxWindow* parent) :
 
     panel_graph->SetBackgroundColour(*wxWHITE);
 
-    Update();
+    Panel::Update();
 }
 
 

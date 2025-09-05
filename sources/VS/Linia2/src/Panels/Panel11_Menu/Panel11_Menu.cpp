@@ -38,7 +38,7 @@ PanelButtons::PanelButtons(wxWindow* parent) :
         { "Отладка",   &btnDebug }
     };
 
-    const int delta = GetSize().x / NumButtons();
+    const int delta = Panel::GetSize().x / NumButtons();
 
     for (int i = 0; i < NumButtons(); i++)
     {

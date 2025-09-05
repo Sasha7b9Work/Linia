@@ -17,15 +17,15 @@ MenuDialog::MenuDialog(const wxString &title, int width_button, const wxArrayInt
     Dialog(nullptr, wxID_ANY, title)
 {
     {
-        if (func1) buttons.push_back({ wxID_ANY, btn1, func1 });
-        if (func2) buttons.push_back({ wxID_ANY, btn2, func2 });
-        if (func3) buttons.push_back({ wxID_ANY, btn3, func3 });
-        if (func4) buttons.push_back({ wxID_ANY, btn4, func4 });
-        if (func5) buttons.push_back({ wxID_ANY, btn5, func5 });
-        if (func6) buttons.push_back({ wxID_ANY, btn6, func6 });
-        if (func7) buttons.push_back({ wxID_ANY, btn7, func7 });
-        if (func8) buttons.push_back({ wxID_ANY, btn8, func8 });
-        if (func9) buttons.push_back({ wxID_ANY, btn9, func9 });
+        if (func1) buttons.emplace_back(ButtonStruct{ wxID_ANY, btn1, func1 });
+        if (func2) buttons.emplace_back(ButtonStruct{ wxID_ANY, btn2, func2 });
+        if (func3) buttons.emplace_back(ButtonStruct{ wxID_ANY, btn3, func3 });
+        if (func4) buttons.emplace_back(ButtonStruct{ wxID_ANY, btn4, func4 });
+        if (func5) buttons.emplace_back(ButtonStruct{ wxID_ANY, btn5, func5 });
+        if (func6) buttons.emplace_back(ButtonStruct{ wxID_ANY, btn6, func6 });
+        if (func7) buttons.emplace_back(ButtonStruct{ wxID_ANY, btn7, func7 });
+        if (func8) buttons.emplace_back(ButtonStruct{ wxID_ANY, btn8, func8 });
+        if (func9) buttons.emplace_back(ButtonStruct{ wxID_ANY, btn9, func9 });
     }
 
     int height_delim = 10;
@@ -45,7 +45,7 @@ MenuDialog::MenuDialog(const wxString &title, int width_button, const wxArrayInt
             y += height_delim;
         }
         buttons[i].id = btn->GetId();
-    }
+    } //-V773
 
     Bind(wxEVT_BUTTON, &MenuDialog::OnEventButton, this);
 }

@@ -16,7 +16,7 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
     Panel(parent, MainWindow::WIDTH1 + MainWindow::WIDTH2, PanelConfig::HEIGHT,
         MainWindow::WIDTH3, HEIGHT)
 {
-    SetName("PanelIndicator");
+    Panel::SetName("PanelIndicator");
 
     self = this;
 
@@ -38,7 +38,7 @@ PanelIndicator::PanelIndicator(wxWindow* parent) :
     text->SetFont(font);
 
     button_start->Bind(EVT_BUTTON_BITMAP_CHOICE, &PanelIndicator::OnEventButton, this);
-}
+} //-V773
 
 
 void PanelIndicator::OnEventButton(ButtonBitmapChoiceEvent &event)
