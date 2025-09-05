@@ -296,6 +296,12 @@ void ButtonsCombo::SetChoices(const wxArrayString &choices, const wxArrayString 
 }
 
 
+const wxArrayString &ButtonsCombo::GetChoices() const
+{
+    return labels;
+}
+
+
 int ButtonsCombo::NumChoices() const
 {
     return (int)labels.Count();

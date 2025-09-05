@@ -11,6 +11,7 @@
 #include "Controls/StaticBox.h"
 #include "Utils/Configurator.h"
 #include "Panels/Panel03_Config/PanelChannelC.h"
+#include "Panels/Panel03_Config/PanelChannelBS.h"
 
 
 PanelScheme *PanelScheme::self = nullptr;
@@ -194,21 +195,55 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
     {
         BuildPanel();
 
-        wxString suffix = "a";
-
-        if (Category::IsBCE())
         {
-            suffix = "c";
-        }
-        else if (Category::IsGDS())
-        {
-            suffix = "d";
+            wxString suffix_c = "a";        // Суффикс канала C
+
+            if (Category::IsBCE())
+            {
+                suffix_c = "c";
+            }
+            else if (Category::IsGDS())
+            {
+                suffix_c = "d";
+            }
+
+            PanelChannelC::self->comboMeasVoltage->SetTitle(wxString("U") + suffix_c);
+            PanelChannelC::self->comboMeasCurrent->SetTitle(wxString("I") + suffix_c);
+            PanelChannelC::self->comboSourceRange->SetTitle(wxString("Диапазон U") + suffix_c);
+            PanelChannelC::self->txtLimit->SetLabel(wxString("Ограничение U") + suffix_c + ", %");
         }
 
-        PanelChannelC::self->comboMeasVoltage->SetTitle(wxString("U") + suffix);
-        PanelChannelC::self->comboMeasCurrent->SetTitle(wxString("I") + suffix);
-        PanelChannelC::self->comboSourceRange->SetTitle(wxString("Диапазон U") + suffix);
-        PanelChannelC::self->txtLimit->SetLabel(wxString("Ограничение U") + suffix + ", %");
+        {
+            wxString suffix_b = "b";
+
+            if (Category::IsGDS() || Category::Current() == Category::Thyristor)
+            {
+                suffix_b = "g";
+            }
+
+            const wxArrayString &old_choices = PanelChannelB::self->comboTypeGenerator->GetChoices();
+
+            wxArrayString choices;
+
+            if (old_choices[0].Length() == 1)
+            {
+                for (auto elem : old_choices)
+                {
+                    choices.push_back(elem + suffix_b);
+                }
+            }
+            else
+            {
+                for (auto elem : old_choices)
+                {
+                    wxString choice = elem;
+                    choice[1] = suffix_b[0];
+                    choices.push_back(choice);
+                }
+            }
+
+            PanelChannelB::self->comboTypeGenerator->SetChoices(choices, choices);
+        }
     }
 }
 

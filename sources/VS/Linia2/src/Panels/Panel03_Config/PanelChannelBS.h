@@ -11,6 +11,7 @@ class PanelChannelBS : public wxPanel
 {
     friend class PanelChannelB;
     friend class PanelChannelS;
+    friend class PanelScheme;
 
 public:
 
@@ -40,6 +41,8 @@ private:
 
 class PanelChannelB : public PanelChannelBS
 {
+    friend class PanelScheme;
+
 public:
 
     PanelChannelB(wxPanel *parent, int x, int w, int h) :
@@ -56,6 +59,8 @@ public:
 
 class PanelChannelS : public PanelChannelBS
 {
+    friend class PanelScheme;
+
 public:
 
     PanelChannelS(wxPanel *parent, int x, int w, int h) :
