@@ -57,6 +57,8 @@ public:
     void Pack();
     void Unpack();
 
+    int NumChoices() const;
+
     bool left_align = false;            // Если true - надписи на выборах будут выравниваться по левому краю
 
 protected:
@@ -67,9 +69,9 @@ private:
 
     int current_choice = -1;            // Номер реального выбора
     wxString title;
-    wxArrayString labels;               // Здесь впереди добавлено
+    wxArrayString labels;
     wxArrayString tooltips;
-    int buttons_in_row;
+    int buttons_in_row = 0;
     bool left_part_clicked = true;      // Если true, то кликнули мышкой в левой части кнопки
     int num_empties = 0;                // Столько добавлено пустых полей перед первым вариантом, чтобы выровнять столбцы по значениям
 

@@ -292,7 +292,13 @@ void ButtonsCombo::SetChoices(const wxArrayString &choices, const wxArrayString 
         }
     }
 
-    SetCurrentSelection(0);
+    SetCurrentSelection(GetCurrentSelection() >= NumChoices() ? 0 : GetCurrentSelection());
+}
+
+
+int ButtonsCombo::NumChoices() const
+{
+    return (int)labels.Count();
 }
 
 
