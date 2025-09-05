@@ -97,7 +97,7 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, Chan::E ch, int x, int w, int h)
         boxOffset->SetFont(StaticBox::TitleFont());
 
         wxPoint pos = boxOffset->GetPosition();
-        pos.y = SD::Y_SB(boxGenerator->GetSize().y - boxOffset->GetSize().y - 28);
+        pos.y = SD::Y_SB(boxGenerator->GetSize().y - boxOffset->GetSize().y - 28); //-V807
         boxOffset->SetPosition(pos);
     }
 

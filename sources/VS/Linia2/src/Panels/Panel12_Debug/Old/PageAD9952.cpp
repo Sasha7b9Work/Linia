@@ -22,7 +22,7 @@ PageAD9952::PageAD9952(wxNotebook *parent) : PageChip(parent, "AD9952")
 
         regCFR1->SetNamesBits(names);
 
-        std::vector<StructDescription> desc0;
+        std::vector<StructDescription> desc0; //-V827
 
         desc0.emplace_back(StructDescription{ 0, 1, "Not Used" });
         desc0.emplace_back(StructDescription{ 1, 1, "SYNC_CLK Out Disable" });
@@ -68,7 +68,7 @@ PageAD9952::PageAD9952(wxNotebook *parent) : PageChip(parent, "AD9952")
 
         regCFR2->SetNamesBits(names);
 
-        std::vector<StructDescription> desc0;
+        std::vector<StructDescription> desc0; //-V827
         desc0.emplace_back(StructDescription{ 0, 2, "Charge Pump Current" });
         desc0.emplace_back(StructDescription{ 2, 1, "VCO Rang" });
         desc0.emplace_back(StructDescription{ 3, 5, "REFCLK Multiplier" });

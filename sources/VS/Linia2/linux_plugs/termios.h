@@ -16,9 +16,9 @@
 #define NCCS 19
 
 #define CS5 0000060
-#define CS6 0000060
-#define CS7 0000060
-#define CS8 0000060
+#define CS6 0000061
+#define CS7 0000062
+#define CS8 0000063
 
 #define IGNPAR 0000004
 #define PARENB 0000400
@@ -29,7 +29,7 @@
 #define CLOCAL 0
 #define CREAD  0
 #define VMIN   0
-#define VTIME  0
+#define VTIME  1
 
 #define TCSANOW   0
 
