@@ -165,7 +165,7 @@ else()
     find_library(XKBCOMMON_LIBRARY xkbcommon REQUIRED)
     find_library(PNG_LIBRARY png REQUIRED)
     find_library(DL_LIBRARY dl REQUIRED)
-    
+
     if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
         message(STATUS "ARM64 platform detected - libgpiod is required")
         pkg_check_modules(GPIOD REQUIRED libgpiod)
@@ -182,7 +182,7 @@ else()
     else()
         message(STATUS "Non-ARM64 platform detected (${CMAKE_SYSTEM_PROCESSOR}) - skipping libgpiod search")
     endif()
-    
+
     target_link_libraries(${PROJECT_NAME}
         wx_gtk3u_core-3.2
         ${GTK3_LIBRARIES}
@@ -193,7 +193,7 @@ else()
         wx_baseu-3.2
         ${DL_LIBRARY}
     )
-    
+
     # Добавляем GSpell если найдена
     if(GSPELL_FOUND)
         target_link_libraries(${PROJECT_NAME} ${GSPELL_LIBRARIES})
@@ -203,7 +203,7 @@ else()
     else()
         message(WARNING "GSpell library not found - spell checking may not work")
     endif()
-    
+
     # Добавляем include директории GTK3
     target_include_directories(${PROJECT_NAME} PRIVATE ${GTK3_INCLUDE_DIRS})
     target_compile_options(${PROJECT_NAME} PRIVATE ${GTK3_CFLAGS_OTHER})
