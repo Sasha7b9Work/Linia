@@ -26,13 +26,6 @@
 
 namespace UART
 {
-
-    /*
-    *   Вопросы Николаю.
-    *  2. Почему в функции ReaderThreadFunc() локальные переменные объявлены в начале функции ?
-    *  5. Почему ReaderThreadFunc() возвращает указатель?
-    */
-
     static int g_uart_fd = -1;
     static int g_baudrate = 115200;
     static char g_mode[4] = "8N1";
