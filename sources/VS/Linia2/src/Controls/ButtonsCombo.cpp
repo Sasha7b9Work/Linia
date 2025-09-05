@@ -31,9 +31,10 @@ void DrawingButton::OnPaint(wxPaintEvent &)
 class ButtonPopup : public wxPopupTransientWindow
 {
 public:
-    ButtonPopup(wxWindow *parent) :
-        wxPopupTransientWindow(parent)
+    ButtonPopup(wxWindow *parent) : wxPopupTransientWindow(parent)
     {
+        Hide();
+
         wxArrayString &labels = GetCombo()->labels;
 
         // Основной контейнер с отступами по краям
@@ -109,6 +110,8 @@ public:
         }
 
         SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
+
+        Show();
     }
 
 private:
