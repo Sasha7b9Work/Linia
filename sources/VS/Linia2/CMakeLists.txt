@@ -7,10 +7,10 @@ if(WIN32)
 
     include_directories(
         src
+        arm64_plugs
+        linux_plugs
         ../../ThirdParty/wxWidgets/include
         ../../ThirdParty/wxWidgets/generated/lib/vc_lib/mswud
-        src/ThirdParty/libmpg123/src/libmpg123/
-        src/ThirdParty/libmpg123/config/win/x64/
     )
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall -MT -std:c++20")
@@ -35,6 +35,10 @@ if(WIN32)
 else()
 
     include_directories(
+    if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
+    else()
+        arm64_plugs
+    endif()
         ./src
         ../../ThirdParty/wxWidgets/generated/lib/wx/include/gtk3-unicode-static-3.2
         ../../ThirdParty/wxWidgets/include
