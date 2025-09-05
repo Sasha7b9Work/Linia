@@ -196,7 +196,7 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
         BuildPanel();
 
         {
-            wxString suffix_c = "a";        // Суффикс канала C
+            wxString suffix_c = "a";                                                                            // Суффикс канала C
 
             if (Category::IsBCE())
             {
@@ -214,7 +214,7 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
         }
 
         {
-            wxString suffix_b = "b";
+            wxString suffix_b = "b";                                                                            // Суффикс канала B
 
             if (Category::IsGDS() || Category::Current() == Category::Thyristor)
             {
