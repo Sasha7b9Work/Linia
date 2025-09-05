@@ -17,8 +17,8 @@ PanelCalculate::PanelCalculate(wxPanel *parent, int x, int w, int h) :
 
     self = this;
 
-    SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
-    SetPosition({ 0, 40 });
+    wxPanel::SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
+    wxPanel::SetPosition({ 0, 40 });
 
     StaticBox *boxGraph = new StaticBox(this, "График", { x, SD::DSBY() }, { w, 95 });
 

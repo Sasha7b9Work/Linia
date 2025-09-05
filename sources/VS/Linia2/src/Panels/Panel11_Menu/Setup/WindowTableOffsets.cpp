@@ -77,7 +77,7 @@ void WindowTableOffsets::CreateFields_U(wxPanel *panel)
 
     wxSize size{ (size1.x + size2.x) * 2 + d, (size1.y + dh) * ((int)(RangeU::Count + 1) / 2 + 1) };
 
-    SetSizeHints(size);
+    Dialog::SetSizeHints(size);
 
     new wxStaticText(panel, wxID_ANY, "Диапазон", { 0, 0 }, size1, wxALIGN_CENTER);
     new wxStaticText(panel, wxID_ANY, "Значение", { size1.x, 0 }, size2, wxALIGN_CENTER);
@@ -129,7 +129,7 @@ void WindowTableOffsets::CreateFields_I(wxPanel *panel)
 
     wxSize size{ (size1.x + size2.x) * 2 + d, (size1.y + dh) * ((int)(RangeI::Count + 1) / 2 + 1) };
 
-    SetSizeHints(size);
+    Dialog::SetSizeHints(size);
 
     new wxStaticText(panel, wxID_ANY, "Диапазон", { 0, 0 }, size1, wxALIGN_CENTER);
     new wxStaticText(panel, wxID_ANY, "Значение", { size1.x, 0 }, size2, wxALIGN_CENTER);

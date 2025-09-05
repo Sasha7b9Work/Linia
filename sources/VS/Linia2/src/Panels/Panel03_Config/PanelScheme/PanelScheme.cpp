@@ -29,7 +29,7 @@ FullJack::FullJack(Chan::E ch, wxWindow *parent, const wxPoint &position, pchar 
     wxPanel(parent, wxID_ANY, position, { 180, 30 }),
     channel(ch)
 {
-    SetName(parent->GetName() + wxString::Format("_fullJack%d", (int)ch));
+    wxPanel::SetName(parent->GetName() + wxString::Format("_fullJack%d", (int)ch));
 
     painterBMP = new PainterBMP(this, { 10, 0 }, wxDefaultSize, file_jack_bmp, { 241, 241, 241 });
 
@@ -43,7 +43,7 @@ FullJack::FullJack(Chan::E ch, wxWindow *parent, const wxPoint &position, pchar 
 PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
     wxPanel(parent)
 {
-    SetName("PanelScheme");
+    wxPanel::SetName("PanelScheme");
 
     self = this;
 

@@ -24,11 +24,11 @@ PanelChannelC *PanelChannelC::self = nullptr;
 PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
     wxPanel(parent)
 {
-    SetName("PanelChannelC");
+    wxPanel::SetName("PanelChannelC");
 
     self = this;
 
-    SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
+    wxPanel::SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });
 
     StaticBox *boxScan = new StaticBox(this, "Развёртка", { x, SD::DSBY() }, { w, 160 });          // IDC_STATICRAZV
