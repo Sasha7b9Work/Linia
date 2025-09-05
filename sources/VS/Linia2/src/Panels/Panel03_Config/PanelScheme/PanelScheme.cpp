@@ -225,16 +225,13 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
 
             wxArrayString choices;
 
-            if (old_choices[0].Length() == 1)
+            for (auto elem : old_choices)
             {
-                for (auto elem : old_choices)
+                if (elem.Length() == 1)
                 {
                     choices.push_back(elem + suffix_b);
                 }
-            }
-            else
-            {
-                for (auto elem : old_choices)
+                else
                 {
                     wxString choice = elem;
                     choice[1] = suffix_b[0];
@@ -243,6 +240,35 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
             }
 
             PanelChannelB::self->comboTypeGenerator->SetChoices(choices, choices);
+        }
+
+        {
+            wxString suffix_s = "s";
+
+            if (Category::IsGDS())
+            {
+                suffix_s = "b";
+            }
+
+            const wxArrayString &old_choices = PanelChannelS::self->comboTypeGenerator->GetChoices();
+
+            wxArrayString choices;
+
+            for (auto elem : old_choices)
+            {
+                if (elem.Length() == 1)
+                {
+                    choices.push_back(elem + suffix_s);
+                }
+                else
+                {
+                    wxString choice = elem;
+                    choice[1] = suffix_s[0];
+                    choices.push_back(choice);
+                }
+            }
+
+            PanelChannelS::self->comboTypeGenerator->SetChoices(choices, choices);
         }
     }
 }
