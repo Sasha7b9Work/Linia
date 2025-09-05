@@ -18,7 +18,7 @@ PanelChannelS *PanelChannelS::self = nullptr;
 PanelChannelBS::PanelChannelBS(wxPanel *parent, Chan::E ch, int x, int w, int h) :
     wxPanel(parent)
 {
-    SetName(wxString("PanelChannel") + ((ch == Chan::_B) ? "B" : "S"));
+    wxPanel::SetName(wxString("PanelChannel") + ((ch == Chan::_B) ? "B" : "S"));
 
     SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     SetPosition({ 0, 40 });

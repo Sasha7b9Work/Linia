@@ -26,7 +26,7 @@ void Model::CreateNew(const wxString &_name)
 void Model::Delete()
 {
     empty = true;
-    name = "";
+    name.Clear();
 }
 
 

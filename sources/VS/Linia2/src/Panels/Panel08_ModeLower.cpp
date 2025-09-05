@@ -14,7 +14,7 @@ PanelModeLower *PanelModeLower::self = nullptr;
 PanelModeLower::PanelModeLower(wxWindow *parent) :
     Panel(parent, MainWindow::WIDTH1 + MainWindow::WIDTH2, PanelConfig::HEIGHT + PanelIndicator::HEIGHT, WIDTH, HEIGHT)
 {
-    SetName("PanelModeLower");
+    Panel::SetName("PanelModeLower");
 
     self = this;
 

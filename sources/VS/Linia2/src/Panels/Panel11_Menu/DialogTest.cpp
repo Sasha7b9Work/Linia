@@ -60,7 +60,7 @@ DialogTest::DialogTest() :
 {
     self = this;
 
-    Update();
+    MenuDialog::Update();
 }
 
 

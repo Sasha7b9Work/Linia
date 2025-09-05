@@ -12,11 +12,11 @@ PanelName::PanelName(wxWindow *parent) :
 {
     self = this;
 
-    new wxStaticText(this, wxID_ANY, "ИППП 4", { 0, 10 }, { GetSize().x, 20 }, wxALIGN_CENTRE_HORIZONTAL);
+    new wxStaticText(this, wxID_ANY, "ИППП 4", { 0, 10 }, { Panel::GetSize().x, 20 }, wxALIGN_CENTRE_HORIZONTAL);
 
-    textDate = new wxStaticText(this, wxID_ANY, "", {0, 30}, {GetSize().x, 20}, wxALIGN_CENTRE_HORIZONTAL);
+    textDate = new wxStaticText(this, wxID_ANY, "", { 0, 30 }, { Panel::GetSize().x, 20 }, wxALIGN_CENTRE_HORIZONTAL);
 
-    textTime = new wxStaticText(this, wxID_ANY, "", {0, 50}, {GetSize().x, 20}, wxALIGN_CENTRE_HORIZONTAL);
+    textTime = new wxStaticText(this, wxID_ANY, "", { 0, 50 }, { Panel::GetSize().x, 20 }, wxALIGN_CENTRE_HORIZONTAL);
 
     Bind(wxEVT_TIMER, &PanelName::OnTimer, this, timer.GetId());
 

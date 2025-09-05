@@ -157,7 +157,7 @@ void PanelGraph::Draw()
 
     EndPaint();
 
-    Refresh();
+    Panel::Refresh();
 }
 
 

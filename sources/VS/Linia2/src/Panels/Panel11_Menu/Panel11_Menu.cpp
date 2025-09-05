@@ -42,7 +42,7 @@ PanelButtons::PanelButtons(wxWindow* parent) :
 
     for (int i = 0; i < NumButtons(); i++)
     {
-        *structs[i].button = new wxButton(this, wxID_ANY, structs[i].label, {i * delta, 0}, {delta - 3, GetSize().y - 3});
+        *structs[i].button = new wxButton(this, wxID_ANY, structs[i].label, {i * delta, 0}, {delta - 3, Panel::GetSize().y - 3});
     }
 
     Bind(wxEVT_BUTTON, &PanelButtons::OnEventButton, this);

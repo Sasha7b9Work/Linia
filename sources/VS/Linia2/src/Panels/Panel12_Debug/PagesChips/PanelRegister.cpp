@@ -11,7 +11,7 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
     bit_depth(_bit_depth)
 {
-    SetName("PanelRegister");
+    wxPanel::SetName("PanelRegister");
 
     new wxStaticText(this, wxID_ANY, title, { 10, 10 });
 
