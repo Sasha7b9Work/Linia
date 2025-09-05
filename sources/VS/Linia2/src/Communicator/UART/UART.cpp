@@ -15,7 +15,7 @@
 
 #ifdef WIN32
     #pragma warning(push)
-    #pragma warning(disable:4365 4996)
+    #pragma warning(disable:4365 4389 4996)
     #define O_NOCTTY  0x00000400
     #define O_NDELAY  0
     #define LOCK_EX 2
@@ -361,13 +361,7 @@ namespace UART
         {
             // Настраиваем select для ожидания данных
             FD_ZERO(&read_fds);
-#ifdef WIN32
-    #pragma warning(push, 0)
-#endif
             FD_SET(g_uart_fd, &read_fds);
-#ifdef WIN32
-    #pragma warning(pop)
-#endif
 
             timeout.tv_sec = 0;
             timeout.tv_usec = 100000;
