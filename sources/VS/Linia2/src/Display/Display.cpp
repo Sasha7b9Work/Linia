@@ -9,9 +9,6 @@
 #include <algorithm>
 
 
-wxBitmap Display::bitmap(MainWindow::WIDTH2, MainWindow::HEIGHT2);
-
-
 Display *Display::self = nullptr;
 
 
@@ -19,6 +16,8 @@ Display::Display(wxWindow *parent) :
     Panel(parent, MainWindow::WIDTH1, MainWindow::HEIGHT1, MainWindow::WIDTH2, MainWindow::HEIGHT2)
 {
     self = this;
+
+    bitmap = new wxBitmap(GetSize().x, GetSize().y);
 
     Panel::SetDoubleBuffered(true);
     Bind(wxEVT_PAINT, &Display::OnEventPaint, this);
@@ -56,6 +55,7 @@ Display::Display(wxWindow *parent) :
 
 Display::~Display()
 {
+    SAFE_DELETE(bitmap);
     SAFE_DELETE(grid);
 }
 
@@ -64,7 +64,7 @@ void Display::OnEventPaint(wxPaintEvent &)
 {
     wxPaintDC paint_dc(this);
 
-    paint_dc.DrawBitmap(bitmap, 0, 0);
+    paint_dc.DrawBitmap(*bitmap, 0, 0);
 }
 
 
@@ -170,7 +170,7 @@ void Display::Draw()
 
 void Display::BeginPaint()
 {
-    dc.SelectObject(bitmap);
+    dc.SelectObject(*bitmap);
     gc = wxGraphicsContext::Create(dc);
 }
 

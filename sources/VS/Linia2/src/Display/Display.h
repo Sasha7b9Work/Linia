@@ -55,7 +55,7 @@ private:
 
     std::vector<GraphEntity *> entities;    // Сущности для отрисовки
 
-    static wxBitmap bitmap;
+    wxBitmap *bitmap = nullptr;
     wxGraphicsContext *gc = nullptr;        // Используется для рисования
     wxMemoryDC dc;                          // А здесь хранится то, что нарисовано, пока не будет вызвано событие wxEVT_PAINT
     wxColor color;
