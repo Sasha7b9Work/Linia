@@ -5,7 +5,7 @@
 #include "MainWindow.h"
 #include "Utils/SystemDepend.h"
 #include "Controls/Bitmap.h"
-#include "DeviceTest/DeviceTest.h"
+#include "Device/Device.h"
 #include "Panels/Panel03_Config/Panel03_Config.h"
 
 
@@ -51,12 +51,12 @@ void PanelIndicator::OnEventButton(ButtonBitmapChoiceEvent &event)
         if (value == 0)
         {
             PanelConfig::self->EnableSubPanels(true);
-            devicet->Stop();
+//            devicet->Stop();
         }
         else if (value == 1)
         {
             PanelConfig::self->EnableSubPanels(false);
-            devicet->Start();
+//            devicet->Start();
         }
     }
 

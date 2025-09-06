@@ -59,9 +59,9 @@ bool Application::OnInit()
 
     frame->Show();
 
-    devicet = new DeviceEmulator();
+    g_device = new DeviceEmulator();
 
-    devicet->Init();
+    g_device->Init();
 
     timer.Start(10);
 

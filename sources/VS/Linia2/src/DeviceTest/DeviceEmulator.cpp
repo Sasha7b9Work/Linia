@@ -3,154 +3,278 @@
 #include "DeviceTest/DeviceEmulator.h"
 
 
-void DeviceEmulator::Init()
+bool DeviceEmulator::Init()
 {
+    LOG_ERROR("Can not init device");
 
+    return false;
 }
 
 
-void DeviceEmulator::Start()
+void DeviceEmulator::DeviceEmulator::Shutdown()
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::Stop()
+bool DeviceEmulator::IsConnected() const
 {
+    LOG_ERROR("Not implemented");
 
+    return false;
 }
 
 
-void DeviceEmulator::SetCallbackReadData(void (* /*func*/)(int16))
+void DeviceEmulator::SetCircuitConnection(Chan::E, StateJack::E)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::SchemeInclusion(StateJack::E /*chC*/, StateJack::E /*chB*/, StateJack::E /*chS*/)
+void DeviceEmulator::SetSweepType(TypeScan::E)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::WriteTypeScan(TypeScan::E, FirstQueue::E)
+void DeviceEmulator::SetFirstQueue(FirstQueue::E)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::WriteDurationImpulseUS(uint /*durationUS*/, GenerationStup::E)
+void DeviceEmulator::SetPulseDuration(uint /*durationUS*/, GenerationStup::E)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-//------------------------------------------------------------------------------------------------------------
-
-
-void DeviceEmulator::ChannelC_RangeSourceU(RangeU::E)
+void DeviceEmulator::SetChannelC_SourceRange(RangeU::E)
 {
+    LOG_ERROR("Not implemented");
+}
 
+void DeviceEmulator::SetChannelC_MeasRange(RangeU::E)
+{
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::ChannelC_RangeMeas(RangeU::E)
+void DeviceEmulator::SetChannelC_MeasRange(RangeI::E)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::ChannelC_RangeMeas(RangeI::E)
+void DeviceEmulator::SetChannelC_LimitSourceU(int /*min*/, int /*max*/)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::ChannelC_LimitSourceU(int /*min*/, int /*max*/)
+void DeviceEmulator::SetChannelB_SourceMode(ModeSource::E)
 {
+    LOG_ERROR("Not implemented");
+}
 
+void DeviceEmulator::SetChannelB_AmplitudeRange(uint8_t /*range*/)
+{
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::ChannelBS_ModeSource(Chan::E, ModeSource::E)
+void DeviceEmulator::SetChannelB_StepCount(int)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::ChannelBS_RangeStep(Chan::E, RangeU::E)
+void DeviceEmulator::SetChannelB_AmplitudeValue(int16_t)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::ChannelBS_RangeStep(Chan::E, RangeI::E)
+void DeviceEmulator::SetChannelB_Bias(pchar)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::ChannelBS_NumberSteps(Chan::E, int)
+void DeviceEmulator::SetChannelB_MeasMode(ModeMeas::E)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::ChannelBS_AmplitudeStep(Chan::E, int16)
+void DeviceEmulator::SetChannelB_MeasRange(RangeU::E)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::AutoSetZero(bool)
+void DeviceEmulator::SetChannelB_MeasRange(RangeI::E)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::ChannelBS_Offset(Chan::E, int16)
+void DeviceEmulator::SetChannelB_LimitRange(RangeU::E)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::ChannelBS_ModeMeas(Chan::E, ModeMeas::E)
+void DeviceEmulator::SetChannelB_LimitRange(RangeI::E)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::ChannelBS_RangeMeas(Chan::E, RangeU::E)
+void DeviceEmulator::SetChannelB_LimitThreshold(int16_t)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::ChannelBS_RangeMeas(Chan::E, RangeI::E)
+void DeviceEmulator::SetChannelB_HighResolution(bool)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::ChannelBS_RangeLimit(Chan::E, RangeU::E)
+void DeviceEmulator::SetChannelS_SourceMode(ModeSource::E)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::ChannelBS_RangeLimit(Chan::E, RangeI::E)
+void DeviceEmulator::SetChannelS_AmplitudeRange(uint8_t /*range*/)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::ChannelBS_ThresholdLimit(Chan::E, int16)
+void DeviceEmulator::SetChannelS_StepCount(uint8_t /*steps*/)
 {
-
+    LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::NumberPoints(int)
+void DeviceEmulator::SetChannelS_AmplitudeValue(uint16_t /*value*/)
 {
+    LOG_ERROR("Not implemented");
+}
 
+
+void DeviceEmulator::SetChannelS_Bias(uint16_t /*value*/)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::SetChannelS_MeasMode(ModeSource::E)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::SetChannelS_MeasRange(uint8_t /*range*/)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::SetChannelS_LimitRange(uint8_t /*range*/)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::SetChannelS_LimitThreshold(uint16_t /*value*/)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::SetChannelS_SourceType(ModeSource::E)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::SetAutoZeroOff(bool)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::SetPointCount(int)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::SetStartType(bool /*external*/, bool /*multiple*/)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::SetMeasurementMode(uint8_t /*mode*/)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::SetMaxDacCode(uint8_t /*code*/)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::SetBitQ18(uint8_t /*state*/)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::SetElementType(bool /*isMultipole*/)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::SendLimitSignal(uint8_t /*limitCode*/)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::SetConfigData(uint8_t /*modification*/, uint8_t /*nominal*/)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::EmergencyStop()
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::StartMeasurement()
+{
+    LOG_ERROR("Not implemented");
+}
+
+void DeviceEmulator::StopMeasurement()
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::ResetToDefaults()
+{
+    LOG_ERROR("Not implemented");
 }
