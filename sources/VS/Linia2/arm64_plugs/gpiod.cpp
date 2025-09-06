@@ -29,7 +29,7 @@ struct gpiod_line *gpiod_chip_get_line(struct gpiod_chip *chip, unsigned int /*o
 
     if (lines.find(chip) == lines.end())
     {
-        gpiod_line line((int)lines.size());
+        gpiod_line line{ (int)lines.size() };
 
         lines[chip] = line;
     }
