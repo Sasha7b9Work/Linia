@@ -15,7 +15,7 @@ struct gpiod_chip *gpiod_chip_open_by_name(const char *name)
 
     if (chips.find(name) == chips.end())
     {
-        gpiod_chip chip((int)chips.size());
+        gpiod_chip chip{ (int)chips.size() };
 
         chips[name] = chip;
     }
