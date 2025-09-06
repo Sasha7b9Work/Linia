@@ -56,8 +56,6 @@ void Log::WriteLine(pchar line)
 {
     log_file.AddLine(line);
 
-    CutSize();
-
     log_file.Write();
 }
 
@@ -224,14 +222,10 @@ wxString Log::GetTime()
 {
     wxDateTime now = wxDateTime::Now();
 
-    return wxString::Format("%02d:%02d:%02d-%02d:%02d:%02d",
+    return wxString::Format("%02d:%02d:%02d",
         now.GetHour(),
         now.GetMinute(),
-        now.GetSecond(),
-        now.GetDay(),
-        now.GetMonth(),
-        now.GetYear()
-        );
+        now.GetSecond());
 }
 
 

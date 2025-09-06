@@ -99,7 +99,7 @@ void Application::OnTimer(wxTimerEvent &)
 
 int Application::OnExit()
 {
-    LOG_WRITE("Application::OnExit() %s", wxDateTime::Now().Format("%Y-%m-%d %H:%M:%S").c_str().AsChar());
+    LOG_WRITE("Application::OnExit()");
 
     wxConfigBase::Get(false)->Flush();
 
