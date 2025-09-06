@@ -4,6 +4,7 @@
 #include "MainWindow.h"
 #include "Display/WindowScale.h"
 #include "Utils/SystemDepend.h"
+#include "MainWindow.h"
 #include <string>
 #include <map>
 #include <algorithm>
@@ -473,7 +474,7 @@ void Display::OnEventRightClick(wxMouseEvent &)
 
     // Добавляем пункты меню
     menu.Append(wxID_RESET, "Сброс");
-    itemFullscreen = menu.AppendCheckItem(wxID_ANY, "Развернуть");
+    itemFullscreen = menu.AppendCheckItem(wxID_ANY, "Полный экран");
 
     menu.AppendSeparator();
 
@@ -512,9 +513,9 @@ void Display::OnMenuReset(wxCommandEvent &)
 }
 
 
-void Display::OnMenuFullScreen(wxCommandEvent &)
+void Display::OnMenuFullScreen(wxCommandEvent &event)
 {
-
+    MainWindow::self->SetMode(event.IsChecked() ? ModeMainWindow::FullGraph : ModeMainWindow::Standard);
 }
 
 

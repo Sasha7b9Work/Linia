@@ -286,7 +286,7 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
     PanelModeUpper::self->Show(mode == ModeMainWindow::Standard);
     PanelConfig::self->Show(mode == ModeMainWindow::Standard);
     PanelModel::self->Show(mode == ModeMainWindow::Standard);
-    Display::self->Show(mode == ModeMainWindow::Standard);
+    Display::self->Show(mode == ModeMainWindow::Standard || mode == ModeMainWindow::FullGraph);
     PanelIndicator::self->Show(mode == ModeMainWindow::Standard);
     PanelModeLower::self->Show(mode == ModeMainWindow::Standard);
     PanelTable::self->Show(mode == ModeMainWindow::Standard);
