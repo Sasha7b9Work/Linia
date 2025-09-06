@@ -2,7 +2,7 @@
 #include <cstdint>
 
 
-#define SPI_DEVICE "/dev/spidev0.0";
+#define SPI_DEVICE "/dev/spidev0.0"
 #define SPI_SPEED  100000
 #define SPI_CHIP   "gpiochip3"
 
