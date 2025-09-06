@@ -1,3 +1,4 @@
+#include "defines.h"
 #include "gpiod.h"
 
 
@@ -8,8 +9,10 @@ int gpiod_line_event_get_fd(struct gpiod_line * /*line*/)
     return 0;
 }
 
-struct gpiod_chip *gpiod_chip_open_by_name(const char * /*name*/)
+struct gpiod_chip *gpiod_chip_open_by_name(const char *name)
 {
+    LOG_WRITE("Need chip for name %s", name);
+
     return nullptr;
 }
 

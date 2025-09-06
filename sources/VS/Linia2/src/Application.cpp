@@ -65,8 +65,6 @@ bool Application::OnInit()
 
     timer.Start(10);
 
-    GPIO::Init();
-
     return true;
 }
 

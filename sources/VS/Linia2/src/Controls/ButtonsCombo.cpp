@@ -160,8 +160,6 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoi
 {
     DrawingButton::SetName(parent->GetName() + "_" + name);
 
-    LOG_WRITE(DrawingButton::GetName().ToStdString().c_str());
-
     Bind(wxEVT_BUTTON, &ButtonsCombo::OnButtonClicked, this);
     Bind(wxEVT_LEFT_DOWN, &ButtonsCombo::OnMouseDown, this);
 
