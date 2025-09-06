@@ -54,13 +54,13 @@ namespace SPI
         g_spi_fd = ::open(device, O_RDWR);
         if (g_spi_fd < 0)
         {
-            std::cerr << "Error: Cannot open SPI device: " << device << std::endl;
+            LOG_ERROR("Cannot open SPI device: %s", device);
             return;
         }
 
         if (ioctl(g_spi_fd, SPI_IOC_WR_MODE, &g_mode) < 0)
         {
-            std::cerr << "Error: Cannot set SPI mode" << std::endl;
+            LOG_ERROR("Cannot set SPI mode");
             ::close(g_spi_fd);
             g_spi_fd = -1;
             return;
@@ -68,7 +68,7 @@ namespace SPI
 
         if (ioctl(g_spi_fd, SPI_IOC_WR_BITS_PER_WORD, &g_bits_per_word) < 0)
         {
-            std::cerr << "Error: Cannot set bits per word" << std::endl;
+            LOG_ERROR("Cannot set bits per word");
             ::close(g_spi_fd);
             g_spi_fd = -1;
             return;
@@ -76,7 +76,7 @@ namespace SPI
 
         if (ioctl(g_spi_fd, SPI_IOC_WR_MAX_SPEED_HZ, &g_speed) < 0)
         {
-            std::cerr << "Error: Cannot set SPI speed" << std::endl;
+            LOG_ERROR("Cannot set SPI speed");
             ::close(g_spi_fd);
             g_spi_fd = -1;
             return;
@@ -89,7 +89,7 @@ namespace SPI
             return;
         }
 
-        std::cout << "SPI initialized successfully on " << device << std::endl;
+        LOG_WRITE("SPI initialized successfully on %s", device);
     }
 
     void DeInit()
@@ -103,7 +103,7 @@ namespace SPI
 
             ::close(g_spi_fd);
             g_spi_fd = -1;
-            std::cout << "SPI deinitialized" << std::endl;
+            LOG_WRITE("SPI deinitialized");
         }
 
         DeInitGPIO();
@@ -117,13 +117,13 @@ namespace SPI
     {
         if (!IsReady())
         {
-            std::cerr << "Error: SPI not ready" << std::endl;
+            LOG_ERROR("SPI not ready");
             return false;
         }
 
         if (number_DAC < 1 || number_DAC > 2)
         {
-            std::cerr << "Error: Invalid DAC number: " << number_DAC << ". Valid range: 1-2" << std::endl;
+            LOG_ERROR("Invalid DAC number: %d. Valid range: 1-2");
             return false;
         }
 
@@ -138,7 +138,7 @@ namespace SPI
 
         if (result)
         {
-            std::cout << "DAC" << number_DAC << " written: 0x" << std::hex << value << std::dec << std::endl;
+            LOG_WRITE("DAC%d  written: %04X", number_DAC, value);
         }
 
         usleep(1);
@@ -156,10 +156,11 @@ namespace SPI
         {
             if (ioctl(g_spi_fd, SPI_IOC_WR_MAX_SPEED_HZ, &g_speed) < 0)
             {
-                std::cerr << "Error: Cannot set SPI speed to " << speedHz << " Hz" << std::endl;
+                LOG_ERROR("Cannot set SPI speed to %u Hz", speedHz);
                 return false;
             }
-            std::cout << "SPI speed set to " << speedHz << " Hz" << std::endl;
+
+            LOG_WRITE("SPI speed set to %u Hz", speedHz);
         }
 
         return true;
@@ -176,10 +177,11 @@ namespace SPI
         {
             if (ioctl(g_spi_fd, SPI_IOC_WR_MODE, &g_mode) < 0)
             {
-                std::cerr << "Error: Cannot set SPI mode to " << static_cast<int>(mode) << std::endl;
+                LOG_ERROR("Cannot set SPI mode to %d", (int)mode);
                 return false;
             }
-            std::cout << "SPI mode set to " << static_cast<int>(mode) << std::endl;
+
+            LOG_WRITE("SPI mode set to %d", (int)mode);
         }
 
         return true;
@@ -214,23 +216,22 @@ namespace SPI
         g_gpio_chip = gpiod_chip_open_by_name(gpio_chip_name);
         if (!g_gpio_chip)
         {
-            std::cerr << "Error: Cannot open " << gpio_chip_name << std::endl;
+            LOG_ERROR("Cannot open %s", gpio_chip_name);
             return false;
         }
 
-        std::cout << "Opened " << gpio_chip_name << " for GPIO3_A0 and GPIO3_A2" << std::endl;
+        LOG_WRITE("Opened %s  for GPIO3_A0 and GPIO3_A2", gpio_chip_name);
 
         for (int i = 0; i < MAX_DAC_COUNT; i++)
         {
             unsigned int gpio_num = DAC_GPIO_NUMS[i];
 
-            std::cout << "Initializing " << DAC_NAMES[i]
-                << " (GPIO" << gpio_num << " in gpiochip3)" << std::endl;
+            LOG_WRITE("Initializing %s (GPIO%u in gpiochip3)", DAC_NAMES[i], gpio_num);
 
             g_dac_lines[i] = gpiod_chip_get_line(g_gpio_chip, gpio_num);
             if (!g_dac_lines[i])
             {
-                std::cerr << "Error: Cannot get GPIO line " << gpio_num << " for " << DAC_NAMES[i] << std::endl;
+                LOG_ERROR("Cannot get GPIO line %u for %s", gpio_num, DAC_NAMES[i]);
 
                 for (int j = 0; j < i; j++)
                 {
@@ -247,7 +248,7 @@ namespace SPI
 
             if (gpiod_line_request_output(g_dac_lines[i], DAC_NAMES[i], 0) < 0)
             {
-                std::cerr << "Error: Cannot request GPIO line " << DAC_NAMES[i] << " as output" << std::endl;
+                LOG_ERROR("Cannot request GPIO line %s as output", DAC_NAMES[i]);
 
                 for (int j = 0; j <= i; j++)
                 {
@@ -264,7 +265,7 @@ namespace SPI
         }
 
         g_gpio_initialized = true;
-        std::cout << "GPIO initialized successfully using libgpiod" << std::endl;
+        LOG_WRITE("GPIO initialized successfully using libgpiod");
         return true;
     }
 
@@ -297,7 +298,7 @@ namespace SPI
 
         if (dac_number < 1 || dac_number > MAX_DAC_COUNT)
         {
-            std::cerr << "Error: Invalid DAC number: " << dac_number << std::endl;
+            LOG_ERROR("Invalid DAC number: %d", dac_number);
             return;
         }
 
@@ -310,7 +311,7 @@ namespace SPI
         }
         else
         {
-            std::cerr << "Error: GPIO line for DAC" << dac_number << " not initialized" << std::endl;
+            LOG_ERROR("GPIO line for DAC%d not initialized", dac_number);
         }
     }
 
@@ -318,13 +319,13 @@ namespace SPI
     {
         if (g_spi_fd < 0)
         {
-            std::cerr << "Error: SPI not initialized" << std::endl;
+            LOG_ERROR("SPI not initialized");
             return false;
         }
 
         if (data == nullptr || length == 0)
         {
-            std::cerr << "Error: Invalid data or length" << std::endl;
+            LOG_ERROR("Invalid data or length");
             return false;
         }
 
@@ -340,7 +341,7 @@ namespace SPI
         int result = ioctl(g_spi_fd, SPI_IOC_MESSAGE(1), &transfer);
         if (result < 0)
         {
-            std::cerr << "Error: SPI transfer failed" << std::endl;
+            LOG_ERROR("SPI transfer failed");
             return false;
         }
 

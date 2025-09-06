@@ -101,7 +101,7 @@ namespace GPIO
 {
     void Init()
     {
-        std::cout << "Initializing GPIO..." << std::endl;
+        LOG_WRITE("Initializing GPIO...");
 
         for (int i = 0; i < INPUT_PINS_COUNT; i++)
         {
@@ -110,14 +110,14 @@ namespace GPIO
             info.hw.chip = gpiod_chip_open_by_name(info.hw.chip_name);
             if (!info.hw.chip)
             {
-                std::cerr << "Error: Cannot open GPIO chip " << info.hw.chip_name << std::endl;
+                LOG_ERROR("Cannot open GPIO chip %s", info.hw.chip_name);
                 continue;
             }
 
             info.hw.line = gpiod_chip_get_line(info.hw.chip, (uint)info.hw.pin_number);
             if (!info.hw.line)
             {
-                std::cerr << "Error: Cannot get GPIO line " << info.hw.pin_number << std::endl;
+                LOG_ERROR("Cannot get GPIO line %d", info.hw.pin_number);
                 gpiod_chip_close(info.hw.chip);
                 info.hw.chip = nullptr;
                 continue;
@@ -127,8 +127,7 @@ namespace GPIO
                 GPIOD_LINE_REQUEST_FLAG_BIAS_PULL_UP);
             if (ret < 0)
             {
-                std::cerr << "Error: Cannot request GPIO line " << info.hw.pin_number
-                    << " as input" << std::endl;
+                LOG_ERROR("Cannot request GPIO line %d as input", info.hw.pin_number);
                 gpiod_chip_close(info.hw.chip);
                 info.hw.chip = nullptr;
                 info.hw.line = nullptr;
@@ -137,7 +136,7 @@ namespace GPIO
 
             info.last_state = (gpiod_line_get_value(info.hw.line) == 1);
 
-            std::cout << "GPIO input pin " << info.hw.pin_number << " initialized" << std::endl;
+            LOG_WRITE("GPIO input pin %d initialized", info.hw.pin_number);
         }
 
         for (int i = 0; i < OUTPUT_PINS_COUNT; i++)
@@ -147,14 +146,14 @@ namespace GPIO
             info.hw.chip = gpiod_chip_open_by_name(info.hw.chip_name);
             if (!info.hw.chip)
             {
-                std::cerr << "Error: Cannot open GPIO chip " << info.hw.chip_name << std::endl;
+                LOG_ERROR("Cannot open GPIO chip %s", info.hw.chip_name);
                 continue;
             }
 
             info.hw.line = gpiod_chip_get_line(info.hw.chip, (uint)info.hw.pin_number);
             if (!info.hw.line)
             {
-                std::cerr << "Error: Cannot get GPIO line " << info.hw.pin_number << std::endl;
+                LOG_ERROR("Cannot get GPIO line for pin %d", info.hw.pin_number);
                 gpiod_chip_close(info.hw.chip);
                 info.hw.chip = nullptr;
                 continue;
@@ -163,32 +162,31 @@ namespace GPIO
             int ret = gpiod_line_request_output(info.hw.line, nullptr, 0);
             if (ret < 0)
             {
-                std::cerr << "Error: Cannot request GPIO line " << info.hw.pin_number
-                    << " as output" << std::endl;
+                LOG_ERROR("Cannot request GPIO line for pin %d as output", info.hw.pin_number);
                 gpiod_chip_close(info.hw.chip);
                 info.hw.chip = nullptr;
                 info.hw.line = nullptr;
                 continue;
             }
 
-            std::cout << "GPIO output pin " << info.hw.pin_number << " initialized" << std::endl;
+            LOG_WRITE("GPIO output pin %d initialized", info.hw.pin_number);
         }
 
         g_stop_monitoring = false;
         if (pthread_create(&g_monitor_thread, nullptr, MonitorThreadFunc, nullptr) == 0)
         {
             g_thread_running = true;
-            std::cout << "GPIO monitor thread started" << std::endl;
+            LOG_WRITE("GPIO monitor thread started");
         }
         else
         {
-            std::cerr << "Error: Cannot create GPIO monitor thread" << std::endl;
+            LOG_ERROR("Cannot create GPIO monitor thread");
         }
     }
 
     void DeInit()
     {
-        std::cout << "Deinitializing GPIO..." << std::endl;
+        LOG_WRITE("Deinitializing GPIO...");
 
         if (g_thread_running)
         {
@@ -231,14 +229,14 @@ namespace GPIO
             }
         }
 
-        std::cout << "GPIO deinitialized" << std::endl;
+        LOG_WRITE("GPIO deinitialized");
     }
 
     static void *MonitorThreadFunc(void *arg)
     {
         (void)arg;
 
-        std::cout << "GPIO event-driven monitor thread started" << std::endl;
+        LOG_WRITE("GPIO event-driven monitor thread started");
 
         fd_set read_fds;
         int max_fd = 0;
@@ -262,16 +260,14 @@ namespace GPIO
 
             if (ret < 0)
             {
-                std::cerr << "Error: Cannot request events for GPIO pin "
-                    << info.hw.pin_number << std::endl;
+                LOG_ERROR("Cannot request events for GPIO pin %d", info.hw.pin_number);
                 continue;
             }
 
             int fd = gpiod_line_event_get_fd(info.hw.line);
             if (fd < 0)
             {
-                std::cerr << "Error: Cannot get event fd for GPIO pin "
-                    << info.hw.pin_number << std::endl;
+                LOG_ERROR("Cannot get event fd for GPIO pin %d", info.hw.pin_number);
                 continue;
             }
 
@@ -283,13 +279,12 @@ namespace GPIO
 
             info.last_state = (gpiod_line_get_value(info.hw.line) == 1);
 
-            std::cout << "GPIO pin " << info.hw.pin_number
-                << " configured for event monitoring" << std::endl;
+            LOG_WRITE("GPIO pin %d configured for event monitoring", info.hw.pin_number);
         }
 
         if (input_count == 0)
         {
-            std::cerr << "Warning: No input pins configured for event monitoring" << std::endl;
+            LOG_ERROR("No input pins configured for event monitoring");
             return nullptr;
         }
 
@@ -329,8 +324,7 @@ namespace GPIO
                 if (errno == EINTR)
                     continue;
 
-                std::cerr << "Error: select() failed in GPIO monitor: "
-                    << strerror(errno) << std::endl;
+                LOG_ERROR("select() failed in GPIO monitor: %s", strerror(errno));
                 break;
             }
             else if (result == 0)
@@ -355,8 +349,7 @@ namespace GPIO
 
                 if (ret < 0)
                 {
-                    std::cerr << "Error: Cannot read GPIO event for pin "
-                        << info.hw.pin_number << std::endl;
+                    LOG_ERROR("Cannot read GPIO event for pin %d", info.hw.pin_number);
                     continue;
                 }
 
@@ -380,14 +373,13 @@ namespace GPIO
 
                     info.callback(new_state);
 
-                    std::cout << "GPIO pin " << info.hw.pin_number
-                        << " event: " << (new_state ? "RISING" : "FALLING")
-                        << " -> " << (new_state ? "HIGH" : "LOW") << std::endl;
+                    LOG_WRITE("GPIO pin %d event: %s -> %s", info.hw.pin_number, new_state ? "RISING" : "FALLING", new_state ? "HIGH" : "LOW");
                 }
             }
         }
 
-        std::cout << "GPIO event-driven monitor thread stopped" << std::endl;
+        LOG_WRITE("GPIO event-driven monitor thread stopped");
+
         return nullptr;
     }
 }
@@ -403,7 +395,7 @@ bool Pin::Get() const
         int val = gpiod_line_get_value(input_info->hw.line);
         if (val < 0)
         {
-            std::cerr << "Error: Cannot read GPIO pin " << input_info->hw.pin_number << std::endl;
+            LOG_ERROR("Error: Cannot read GPIO pin number %d", input_info->hw.pin_number);
             return false;
         }
         return (val == 1);
@@ -416,7 +408,7 @@ bool Pin::Get() const
         int val = gpiod_line_get_value(output_info->hw.line);
         if (val < 0)
         {
-            std::cerr << "Error: Cannot read GPIO pin " << output_info->hw.pin_number << std::endl;
+            LOG_ERROR("Cannot read GPIO pin %d", output_info->hw.pin_number);
             return false;
         }
         return (val == 1);
@@ -435,8 +427,7 @@ void PinOut::Set(bool state)
     int ret = gpiod_line_set_value(info->hw.line, state ? 1 : 0);
     if (ret < 0)
     {
-        std::cerr << "Error: Cannot set GPIO pin " << info->hw.pin_number
-            << " to " << (state ? "HIGH" : "LOW") << std::endl;
+        LOG_ERROR("Error: Cannot set GPIO pin %d to %s", info->hw.pin_number, state ? "HIGH" : "LOW");
     }
 }
 

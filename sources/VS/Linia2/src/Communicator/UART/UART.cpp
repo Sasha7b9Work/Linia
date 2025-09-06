@@ -50,7 +50,7 @@ namespace UART
         g_thread_running = false;
         g_stop_reading = false;
 
-        std::cout << "UART initialized" << std::endl;
+        LOG_WRITE("UART initialized");
     }
 
     void DeInit()
@@ -59,7 +59,7 @@ namespace UART
         {
             Close();
         }
-        std::cout << "UART deinitialized" << std::endl;
+        LOG_WRITE("UART deinitialized");
     }
 
     // Открытие UART порта с настройкой параметров и запуском потока чтения
@@ -69,20 +69,20 @@ namespace UART
     {
         if (IsReady())
         {
-            std::cerr << "Error: UART already opened" << std::endl;
+            LOG_ERROR("UART already opened");
             return false;
         }
 
         g_uart_fd = ::open(UART_DEVICE, O_RDWR | O_NOCTTY | O_NDELAY);
         if (g_uart_fd < 0)
         {
-            std::cerr << "Error: Cannot open UART device: " << UART_DEVICE << std::endl;
+            LOG_ERROR("Cannot open UART device: %s", UART_DEVICE);
             return false;
         }
 
         if (flock(g_uart_fd, LOCK_EX | LOCK_NB) != 0)
         {
-            std::cerr << "Error: Cannot lock UART device" << std::endl;
+            LOG_ERROR("Cannot lock UART device");
             ::close(g_uart_fd);
             g_uart_fd = -1;
             return false;
@@ -90,7 +90,7 @@ namespace UART
 
         if (!ConfigurePort(baudrate, mode))
         {
-            std::cerr << "Error: Cannot configure UART port" << std::endl;
+            LOG_ERROR("Cannot configure UART port");
             flock(g_uart_fd, LOCK_UN);
             ::close(g_uart_fd);
             g_uart_fd = -1;
@@ -104,7 +104,7 @@ namespace UART
         g_stop_reading = false;
         if (pthread_create(&g_reader_thread, nullptr, ReaderThreadFunc, nullptr) != 0)
         {
-            std::cerr << "Error: Cannot create reader thread" << std::endl;
+            LOG_ERROR("Cannot create reader thread");
             flock(g_uart_fd, LOCK_UN);
             ::close(g_uart_fd);
             g_uart_fd = -1;
@@ -112,8 +112,7 @@ namespace UART
         }
 
         g_thread_running = true;
-        std::cout << "UART opened successfully on " << UART_DEVICE
-            << " with baudrate " << baudrate << " and mode " << mode << std::endl;
+        LOG_WRITE("UART opened successfully on %s with baudrate %d and mode %s", UART_DEVICE, baudrate, mode);
         return true;
     }
 
@@ -139,7 +138,7 @@ namespace UART
         ::close(g_uart_fd);
         g_uart_fd = -1;
 
-        std::cout << "UART closed" << std::endl;
+        LOG_WRITE("UART closed");
     }
 
     // Отправка одного байта через UART
@@ -149,14 +148,14 @@ namespace UART
     {
         if (!IsReady())
         {
-            std::cerr << "Error: UART not ready" << std::endl;
+            LOG_ERROR("UART not ready");
             return false;
         }
 
         int n = write(g_uart_fd, &byte, 1);
         if (n < 0)
         {
-            std::cerr << "Error: Failed to send byte" << std::endl;
+            LOG_ERROR("Failed to send byte");
             return false;
         }
 
@@ -170,13 +169,13 @@ namespace UART
     {
         if (!IsReady())
         {
-            std::cerr << "Error: UART not ready" << std::endl;
+            LOG_ERROR("UART not ready");
             return false;
         }
 
         if (buffer == nullptr || size <= 0)
         {
-            std::cerr << "Error: Invalid buffer or size" << std::endl;
+            LOG_ERROR("Invalid buffer or size");
             return false;
         }
 
@@ -193,7 +192,8 @@ namespace UART
                     usleep(1000);
                     continue;
                 }
-                std::cerr << "Error: Failed to send buffer, errno: " << errno << std::endl;
+
+                LOG_ERROR("Failed to send buffer, errno: %d", errno);
                 return false;
             }
 
@@ -207,7 +207,7 @@ namespace UART
 
         if (bytes_sent == size)
         {
-            std::cout << "UART sent " << size << " bytes" << std::endl;
+            LOG_WRITE("UART sent %d bytes");
         }
 
         return (bytes_sent == size);
@@ -273,7 +273,7 @@ namespace UART
         int baudr = GetBaudrateConstant(baudrate);
         if (baudr == -1)
         {
-            std::cerr << "Error: Unsupported baudrate: " << baudrate << std::endl;
+            LOG_ERROR("Unsupported baudrate: %d", baudrate);
             return false;
         }
 
@@ -318,14 +318,14 @@ namespace UART
 
         if (tcsetattr(g_uart_fd, TCSANOW, &port_settings) == -1)
         {
-            std::cerr << "Error: Cannot set port settings" << std::endl;
+            LOG_ERROR("Cannot set port settings");
             return false;
         }
 
         int status;
         if (ioctl(g_uart_fd, TIOCMGET, &status) == -1)
         {
-            std::cerr << "Error: Cannot get modem status" << std::endl;
+            LOG_ERROR("Cannot get modem status");
             return false;
         }
 
@@ -333,7 +333,7 @@ namespace UART
 
         if (ioctl(g_uart_fd, TIOCMSET, &status) == -1)
         {
-            std::cerr << "Error: Cannot set modem status" << std::endl;
+            LOG_ERROR("Cannot set modem status");
             return false;
         }
 
@@ -380,7 +380,7 @@ namespace UART
                 {
                     if (errno != EAGAIN && errno != EWOULDBLOCK)
                     {
-                        std::cerr << "Error: Read failed" << std::endl;
+                        LOG_ERROR("Read failed");
                         break;
                     }
                 }
@@ -389,7 +389,7 @@ namespace UART
             {
                 if (errno != EINTR)
                 {
-                    std::cerr << "Error: select failed" << std::endl;
+                    LOG_ERROR("Select failed");
                     break;
                 }
             }

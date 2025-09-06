@@ -152,6 +152,8 @@ void Log::ErrorTrace(const char *file, int line, const char *function, const cha
         ConsoleRS232::self->AddLine(text_string.c_str());
 
         WriteLine(text_string.c_str());
+
+        std::cerr << text_string.c_str() << std::endl;
     }
 
     mutex.unlock();
@@ -201,6 +203,8 @@ void Log::WriteTrace(const char *file, int line, const char *function, const cha
         }
 
         WriteLine(text_string.c_str());
+
+        std::cout << text_string.c_str() << std::endl;
     }
 
     mutex.unlock();

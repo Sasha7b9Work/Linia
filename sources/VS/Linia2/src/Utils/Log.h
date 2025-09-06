@@ -3,11 +3,11 @@
 
 
 #define LOG_WRITE(...)          Log::WriteTrace(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#define LOG_WRITE_SERVER(...)   Log::WriteServerTrace(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+//#define LOG_WRITE_SERVER(...)   Log::WriteServerTrace(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 //#define LOG_WRITE_TRACE(...)  Log::WriteTrace(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 
 #define LOG_ERROR(...)          Log::ErrorTrace(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#define LOG_ERROR_SERVER(...)   Log::ErrorServerTrace(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+//#define LOG_ERROR_SERVER(...)   Log::ErrorServerTrace(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 //#define LOG_ERROR_TRACE(...)  Log::ErrorTrace(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 
 
