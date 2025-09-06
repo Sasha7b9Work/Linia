@@ -71,8 +71,6 @@ bool Application::OnInit()
 
 void Application::Disable()
 {
-    LOG_WRITE("Application::Disable()");
-
     timer.Stop();
 
     SET::GUI::Save();
@@ -94,7 +92,7 @@ void Application::OnTimer(wxTimerEvent &)
 
 int Application::OnExit()
 {
-    LOG_WRITE("Application::OnExit()");
+    LOG_WRITE("Application::OnExit() %s", wxDateTime::Now().Format("%Y-%m-%d %H:%M:%S").c_str().AsChar());
 
     wxConfigBase::Get(false)->Flush();
 
