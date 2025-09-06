@@ -8,7 +8,7 @@
 PanelErrors::PanelErrors(wxWindow *parent) :
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { MainWindow::WIDTH2, 100 })
 {
-    text_ctrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, { 0, 0 }, { MainWindow::WIDTH2, 90 }, wxTE_MULTILINE | wxTE_READONLY | wxNO_BORDER | wxTE_NO_VSCROLL);
+    text_ctrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, { 0, 0 }, { MainWindow::WIDTH2, 90 }, wxTE_MULTILINE | wxTE_READONLY | wxNO_BORDER);
 
     text_ctrl->SetBackgroundColour(*wxRED);
 
