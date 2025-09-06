@@ -2,8 +2,8 @@
 #pragma once
 #include "Panels/Panel.h"
 #include "MainWindow.h"
-#include "Panels/Panel05_Graph/Grid.h"
-#include "Panels/Panel05_Graph/GraphEntity.h"
+#include "Display/Grid.h"
+#include "Display/GraphEntity.h"
 #include "Panels/Panel05_Graph/PanelErrors.h"
 
 

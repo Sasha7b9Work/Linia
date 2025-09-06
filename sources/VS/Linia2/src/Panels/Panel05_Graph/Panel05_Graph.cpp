@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Panels/Panel05_Graph/Panel05_Graph.h"
 #include "MainWindow.h"
-#include "Panels/Panel05_Graph/WindowScale.h"
+#include "Display/WindowScale.h"
 #include "Utils/SystemDepend.h"
 #include <string>
 #include <map>

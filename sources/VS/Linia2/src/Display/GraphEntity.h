@@ -1,6 +1,6 @@
 ﻿// 2025/7/14 17:22:55 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Panels/Panel05_Graph/Grid.h"
+#include "Display/Grid.h"
 
 
 // Сущности для отрисовки - графики, маркеры, еtc.

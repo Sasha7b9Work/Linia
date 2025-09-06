@@ -1,7 +1,7 @@
 ﻿// 2025/7/25 10:02:07 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Utils/SystemDepend.h"
-#include "Panels/Panel05_Graph/WindowScale.h"
+#include "Display/WindowScale.h"
 #include "Controls/StaticBox.h"
 
 

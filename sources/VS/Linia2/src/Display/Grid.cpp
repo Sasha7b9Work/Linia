@@ -1,8 +1,8 @@
 // 2025/7/13 20:39:15 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel05_Graph/Grid.h"
+#include "Display/Grid.h"
 #include "Panels/Panel05_Graph/Panel05_Graph.h"
-#include "Panels/Panel05_Graph/WindowScale.h"
+#include "Display/WindowScale.h"
 #include "Utils/Math.h"
 #include <algorithm>
 
