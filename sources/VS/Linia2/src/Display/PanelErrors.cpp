@@ -92,12 +92,10 @@ void PanelErrors::AppendError(Error::E err, const wxString &message)
 {
     for (auto &elem : errors)
     {
-        if (elem.err == err)
+        if (elem.err == err &&
+            elem.message == message)
         {
-            if (elem.message == message)
-            {
-                return;                     // Если такое сообщение уже есть - выходим. Добавлять такое же не будем
-            }
+            return;                     // Если такое сообщение уже есть - выходим. Добавлять такое же не будем
         }
     }
 
@@ -113,7 +111,8 @@ void PanelErrors::RemoveError(Error::E err, const wxString &message)
 {
     for (auto it = errors.begin(); it != errors.end(); it++)
     {
-        if (it->err == err && it->message == message)
+        if (it->err == err &&
+            it->message == message)
         {
             errors.erase(it);
 
