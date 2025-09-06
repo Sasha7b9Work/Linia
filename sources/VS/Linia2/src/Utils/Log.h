@@ -13,6 +13,8 @@ namespace Log
 {
     void Init();
 
+    void DeInit();
+
     void FromDevice(char *);
 
     void ToDevice(char *);
