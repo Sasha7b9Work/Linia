@@ -9,14 +9,14 @@
 #include <algorithm>
 
 
-wxBitmap Display::bitmap(MainWindow::WIDTH2, MainWindow::HEIGTH2);
+wxBitmap Display::bitmap(MainWindow::WIDTH2, MainWindow::HEIGHT2);
 
 
 Display *Display::self = nullptr;
 
 
 Display::Display(wxWindow *parent) :
-    Panel(parent, MainWindow::WIDTH1, MainWindow::HEIGTH1, MainWindow::WIDTH2, MainWindow::HEIGTH2)
+    Panel(parent, MainWindow::WIDTH1, MainWindow::HEIGHT1, MainWindow::WIDTH2, MainWindow::HEIGHT2)
 {
     self = this;
 

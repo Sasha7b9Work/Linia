@@ -8,7 +8,7 @@ PanelModeUpper *PanelModeUpper::self = nullptr;
 
 
 PanelModeUpper::PanelModeUpper(wxWindow* parent) :
-    Panel(parent, MainWindow::WIDTH1, 0, MainWindow::WIDTH2, MainWindow::HEIGTH1)
+    Panel(parent, MainWindow::WIDTH1, 0, MainWindow::WIDTH2, MainWindow::HEIGHT1)
 {
     self = this;
 }

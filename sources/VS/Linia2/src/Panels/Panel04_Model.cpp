@@ -9,7 +9,7 @@ PanelModel *PanelModel::self = nullptr;
 
 
 PanelModel::PanelModel(wxWindow* parent) :
-    Panel(parent, 0, MainWindow::HEIGTH1, WIDTH, HEIGHT)
+    Panel(parent, 0, MainWindow::HEIGHT1, WIDTH, HEIGHT)
 {
     self = this;
 
