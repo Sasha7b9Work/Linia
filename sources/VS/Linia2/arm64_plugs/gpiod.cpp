@@ -11,14 +11,30 @@ int gpiod_line_event_get_fd(struct gpiod_line * /*line*/)
 
 struct gpiod_chip *gpiod_chip_open_by_name(const char *name)
 {
-    LOG_WRITE("Need chip for name %s", name);
+    static std::map<pchar, gpiod_chip> chips;
 
-    return nullptr;
+    if (chips.find(name) == chips.end())
+    {
+        gpiod_chip chip((int)chips.size());
+
+        chips[name] = chip;
+    }
+
+    return &chips.find(name)->second;
 }
 
-struct gpiod_line *gpiod_chip_get_line(struct gpiod_chip * /*chip*/, unsigned int /*offset*/)
+struct gpiod_line *gpiod_chip_get_line(struct gpiod_chip *chip, unsigned int /*offset*/)
 {
-    return nullptr;
+    static std::map<gpiod_chip *, gpiod_line> lines;
+
+    if (lines.find(chip) == lines.end())
+    {
+        gpiod_line line((int)lines.size());
+
+        lines[chip] = line;
+    }
+
+    return &lines.find(chip)->second;
 }
 
 void gpiod_chip_close(struct gpiod_chip * /*chip*/)

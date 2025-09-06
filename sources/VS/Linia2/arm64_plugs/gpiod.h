@@ -5,6 +5,18 @@
 
 #define GPIOD_LINE_REQUEST_FLAG_BIAS_PULL_UP     (1 << 1)
 
+struct gpiod_chip
+{
+    int num;
+};
+
+
+struct gpiod_line
+{
+    int num;
+};
+
+
 enum gpiod_line_event_type {
     GPIOD_LINE_EVENT_RISING_EDGE = 1,  // Передний фронт (0 → 1)
     GPIOD_LINE_EVENT_FALLING_EDGE = 2, // Задний фронт (1 → 0)

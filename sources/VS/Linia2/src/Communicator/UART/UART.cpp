@@ -43,6 +43,7 @@ namespace UART
 
     void Init()
     {
+        LOG_WRITE("Initializing UART...");
         g_uart_fd = -1;
         g_baudrate = 115200;
         strcpy(g_mode, "8N1");
@@ -50,7 +51,7 @@ namespace UART
         g_thread_running = false;
         g_stop_reading = false;
 
-        LOG_WRITE("UART initialized");
+        LOG_WRITE("UART initialized successfully");
     }
 
     void DeInit()

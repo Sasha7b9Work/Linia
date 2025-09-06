@@ -49,7 +49,7 @@ namespace SPI
 
     void Init()
     {
-
+        LOG_WRITE("Initializing SPI...");
 
         g_spi_fd = ::open(device, O_RDWR);
         if (g_spi_fd < 0)
