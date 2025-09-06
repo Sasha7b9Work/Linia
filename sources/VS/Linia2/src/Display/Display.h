@@ -19,8 +19,6 @@ class Display : public Panel
 
 public:
 
-    static const int HEIGHT = 520;
-
     Display(wxWindow *parent);
     ~Display();
 

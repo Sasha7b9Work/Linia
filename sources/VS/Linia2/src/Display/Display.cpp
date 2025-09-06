@@ -9,14 +9,14 @@
 #include <algorithm>
 
 
-wxBitmap Display::bitmap(MainWindow::WIDTH2, HEIGHT);
+wxBitmap Display::bitmap(MainWindow::WIDTH2, MainWindow::HEIGTH2);
 
 
 Display *Display::self = nullptr;
 
 
 Display::Display(wxWindow *parent) :
-    Panel(parent, MainWindow::WIDTH1, MainWindow::HEIGTH1, MainWindow::WIDTH2, HEIGHT)
+    Panel(parent, MainWindow::WIDTH1, MainWindow::HEIGTH1, MainWindow::WIDTH2, MainWindow::HEIGTH2)
 {
     self = this;
 
@@ -35,7 +35,7 @@ Display::Display(wxWindow *parent) :
 
     int d = 10;
     int x0 = d;
-    int y0 = HEIGHT - d - w;
+    int y0 = GetSize().y - d - w;
 
     btnHelp = new wxButton(this, wxID_ANY, "?", { x0, y0 }, size);
     btnLessX = new wxButton(this, wxID_ANY, "X-", { x0 + w + d, y0 }, size);
@@ -158,7 +158,7 @@ void Display::Draw()
 {
     BeginPaint();
 
-    FillRectangle(0, 0, GetSize().x, HEIGHT, *wxWHITE);
+    FillRectangle(0, 0, GetSize().x, GetSize().y, *wxWHITE);
 
     grid->Draw(entities);
 

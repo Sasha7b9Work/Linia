@@ -18,7 +18,7 @@ void Grid::CalculateCenter()
     center.x = Display::self->GetSize().x / 2 + SizeCell() * 5                      // Перемещаемся к правой границе сетки
         - (int)(WindowScale::rangeX.max / UnitsInCellX() * (double)SizeCell());     // И отсчитываем назад - влево
 
-    center.y = Display::HEIGHT / 2 - SizeCell() * 5
+    center.y = Display::self->GetSize().y / 2 - SizeCell() * 5
         +(int)(WindowScale::rangeY.max / UnitsInCellY() * (double)SizeCell());
 }
 
@@ -196,7 +196,7 @@ void Grid::DrawLabelsOnAxis() const
         {
             wxPoint coord = GetCoordPointAxisX(i);
 
-            if (BottomY() < Display::HEIGHT)
+            if (BottomY() < Display::self->GetSize().y)
             {
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
@@ -207,7 +207,7 @@ void Grid::DrawLabelsOnAxis() const
             {
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
-                    Text(WindowScale::rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, Display::HEIGHT - 25, true, *wxWHITE);
+                    Text(WindowScale::rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, Display::self->GetSize().y - 25, true, *wxWHITE);
                 }
             }
         }

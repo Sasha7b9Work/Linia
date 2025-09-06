@@ -10,7 +10,7 @@ PanelTable *PanelTable::self = nullptr;
 
 
 PanelTable::PanelTable(wxWindow* parent) :
-    Panel(parent, MainWindow::WIDTH1, MainWindow::HEIGTH1 + Display::HEIGHT, WIDTH, HEIGHT)
+    Panel(parent, MainWindow::WIDTH1, MainWindow::HEIGTH1 + MainWindow::HEIGTH2, WIDTH, HEIGHT)
 {
     self = this;
 
