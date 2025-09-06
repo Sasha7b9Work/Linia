@@ -43,7 +43,7 @@ Display::Display(wxWindow *parent) :
 
     panel_errors = new PanelErrors(this);
 
-    panel_errors->Hide();
+    panel_errors->Show();
 }
 
 
@@ -51,6 +51,7 @@ Display::~Display()
 {
     SAFE_DELETE(bitmap);
     SAFE_DELETE(grid);
+    SAFE_DELETE(panel_errors);
 }
 
 
@@ -69,33 +70,21 @@ void Display::FullScreen(bool full)
 
 void Display::Init()
 {
-    int width = MainWindow::WIDTH2;
-    int height = MainWindow::HEIGHT2;
+    int width = full_screen ? MainWindow::WIDTH : MainWindow::WIDTH2;
+    int height = full_screen ? MainWindow::HEIGHT : MainWindow::HEIGHT2;
 
-    if (full_screen)
-    {
-        width = MainWindow::WIDTH;
-        height = MainWindow::HEIGHT;
-    }
+    Panel::SetSize({ width, height });
 
-    SetSize({ width, height });
-
-    if (full_screen)
-    {
-        SetPosition({ 0, 0 });
-    }
-    else
-    {
-        SetPosition({ MainWindow::WIDTH1, MainWindow::HEIGHT1 });
-    }
+    Panel::SetPosition(full_screen ? wxPoint{ 0, 0 } : wxPoint{ MainWindow::WIDTH1, MainWindow::HEIGHT1 });
 
     SAFE_DELETE(bitmap);
 
     bitmap = new wxBitmap(GetSize().x, GetSize().y);
 
-    SAFE_DELETE(grid);
-
-    grid = new Grid();
+    if (!grid)
+    {
+        grid = new Grid();
+    }
 
     int w = btnHelp->GetSize().x;
     int d = 10;
@@ -108,7 +97,7 @@ void Display::Init()
     btnLessY->SetPosition({ x0, y0 - w - d });
     btnMoreY->SetPosition({ x0, y0 - 2 * (w + d) });
 
-    Layout();
+    Panel::Layout();
 
     Draw();
 }

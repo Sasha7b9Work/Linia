@@ -20,7 +20,7 @@ struct gpiod_chip *gpiod_chip_open_by_name(const char *name)
         chips[name] = chip;
     }
 
-    return &chips.find(name)->second;
+    return &chips.find(name)->second; //-V783
 }
 
 struct gpiod_line *gpiod_chip_get_line(struct gpiod_chip *chip, unsigned int /*offset*/)
@@ -34,7 +34,7 @@ struct gpiod_line *gpiod_chip_get_line(struct gpiod_chip *chip, unsigned int /*o
         lines[chip] = line;
     }
 
-    return &lines.find(chip)->second;
+    return &lines.find(chip)->second; //-V783
 }
 
 void gpiod_chip_close(struct gpiod_chip * /*chip*/)
