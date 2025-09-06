@@ -96,7 +96,7 @@ void Display::Init()
 
     grid = new Grid();
 
-    int w = 25;
+    int w = btnHelp->GetSize().x;
     int d = 10;
     int x0 = d;
     int y0 = GetSize().y - d - w;
