@@ -26,7 +26,7 @@ public:
     void ReInit();
 
     void AppendError(Error::E, const wxString &);
-    void RemoveError(Error::E);
+    void RemoveError(Error::E, const wxString &);
 
 private:
 
@@ -38,7 +38,13 @@ private:
 
     wxTimer timer;
 
-    std::map<Error::E, wxString> errors;
+    struct StructError
+    {
+        Error::E err;
+        wxString message;
+    };
+
+    std::vector<StructError> errors;
 
     void OnEventButton(wxCommandEvent &);
     void OnEventTimer(wxTimerEvent &);

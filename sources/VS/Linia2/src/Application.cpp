@@ -67,6 +67,10 @@ bool Application::OnInit()
     timer.Start(10);
 
     PanelErrors::self->AppendError(Error::_1, "Мало памяти");
+    PanelErrors::self->AppendError(Error::_2, "Много памяти");
+
+    PanelErrors::self->RemoveError(Error::_1, "Мало памяти");
+    PanelErrors::self->RemoveError(Error::_2, "Много памяти");
 
     return true;
 }

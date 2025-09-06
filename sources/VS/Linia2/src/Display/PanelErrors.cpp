@@ -90,7 +90,18 @@ void PanelErrors::SetColors(bool inverse)
 
 void PanelErrors::AppendError(Error::E err, const wxString &message)
 {
-    errors[err] = message;
+    for (auto &elem : errors)
+    {
+        if (elem.err == err)
+        {
+            if (elem.message == message)
+            {
+                return;                     // Если такое сообщение уже есть - выходим. Добавлять такое же не будем
+            }
+        }
+    }
+
+    errors.emplace_back(StructError{ err, message });
 
     BuildCanvas();
 
@@ -98,15 +109,23 @@ void PanelErrors::AppendError(Error::E err, const wxString &message)
 }
 
 
-void PanelErrors::RemoveError(Error::E err)
+void PanelErrors::RemoveError(Error::E err, const wxString &message)
 {
-    errors.erase(err);
-
-    BuildCanvas();
-
-    if (errors.empty())
+    for (auto it = errors.begin(); it != errors.end(); it++)
     {
-        Hide();
+        if (it->err == err && it->message == message)
+        {
+            errors.erase(it);
+
+            BuildCanvas();
+
+            if (errors.empty())
+            {
+                Hide();
+            }
+
+            return;
+        }
     }
 }
 
@@ -115,9 +134,9 @@ void PanelErrors::BuildCanvas()
 {
     wxString label;
 
-    for (const auto &pair : errors)
+    for (const auto &elem : errors)
     {
-        label += wxString::Format("ERROR %d - %s\n", pair.first, pair.second);
+        label += wxString::Format("ERROR %d - %s\r\n", elem.err, elem.message);
     }
 
     text_ctrl->SetLabel(label);
