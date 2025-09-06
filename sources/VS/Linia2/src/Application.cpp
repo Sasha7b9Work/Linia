@@ -10,6 +10,7 @@
 #include "Tests/Tests.h"
 #include "DeviceTest/DeviceEmulator.h"
 #include "Communicator/GPIO/GPIO.h"
+#include "Display/PanelErrors.h"
 
 
 wxIMPLEMENT_APP(Application);
@@ -64,6 +65,8 @@ bool Application::OnInit()
     g_device->Init();
 
     timer.Start(10);
+
+    PanelErrors::self->AppendError(Error::_1, "Мало памяти");
 
     return true;
 }

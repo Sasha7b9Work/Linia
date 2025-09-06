@@ -41,8 +41,6 @@ Display::Display(wxWindow *parent) :
 
     panel_errors = new PanelErrors(this);
 
-    panel_errors->Show();
-
     Init();
 }
 

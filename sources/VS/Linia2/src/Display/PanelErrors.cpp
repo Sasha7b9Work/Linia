@@ -5,9 +5,14 @@
 #include "Display/Display.h"
 
 
+PanelErrors *PanelErrors::self = nullptr;
+
+
 PanelErrors::PanelErrors(wxWindow *parent) :
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { MainWindow::WIDTH2, 100 })
 {
+    self = this;
+
     text_ctrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, { 0, 0 }, { MainWindow::WIDTH2, 90 }, wxTE_MULTILINE | wxTE_READONLY | wxNO_BORDER | wxTE_NO_VSCROLL);
 
     text_ctrl->SetBackgroundColour(*wxRED);
@@ -18,9 +23,6 @@ PanelErrors::PanelErrors(wxWindow *parent) :
     SetSizer(sizer);
 
     text_ctrl->SetForegroundColour(*wxWHITE);
-
-    text_ctrl->AppendText("ERROR 123 - Мало памяти\n");
-    text_ctrl->AppendText("ERROR 177 - Много памяти\n");
 
 //    btnCollapse = new wxButton(text_ctrl, wxID_ANY, "Свернуть", wxDefaultPosition, { 90, 22 });
 
@@ -83,4 +85,40 @@ void PanelErrors::SetColors(bool inverse)
     text_ctrl->SetForegroundColour(inverse ? *wxBLACK : *wxWHITE);
 
     text_ctrl->Refresh();
+}
+
+
+void PanelErrors::AppendError(Error::E err, const wxString &message)
+{
+    errors[err] = message;
+
+    BuildCanvas();
+
+    Show();
+}
+
+
+void PanelErrors::RemoveError(Error::E err)
+{
+    errors.erase(err);
+
+    BuildCanvas();
+
+    if (errors.empty())
+    {
+        Hide();
+    }
+}
+
+
+void PanelErrors::BuildCanvas()
+{
+    wxString label;
+
+    for (const auto &pair : errors)
+    {
+        label += wxString::Format("ERROR %d - %s\n", pair.first, pair.second);
+    }
+
+    text_ctrl->SetLabel(label);
 }

@@ -2,26 +2,48 @@
 #pragma once
 
 
+struct Error
+{
+    enum E
+    {
+        _1 = 1,
+        _2,
+        _3,
+        _4,
+        Count
+    };
+};
+
+
 class PanelErrors : public wxPanel
 {
 public:
 
     PanelErrors(wxWindow *);
 
+    static PanelErrors *self;
+
     void ReInit();
+
+    void AppendError(Error::E, const wxString &);
+    void RemoveError(Error::E);
 
 private:
 
+    //    wxButton *btnCollapse = nullptr;
+
     wxTextCtrl *text_ctrl = nullptr;
 
-//    wxButton *btnCollapse = nullptr;
-
     bool collapse = false;
+
+    wxTimer timer;
+
+    std::map<Error::E, wxString> errors;
 
     void OnEventButton(wxCommandEvent &);
     void OnEventTimer(wxTimerEvent &);
 
-    wxTimer timer;
-
     void SetColors(bool inverse);
+
+    void BuildCanvas();
 };
