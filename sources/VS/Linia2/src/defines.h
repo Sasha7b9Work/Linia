@@ -2,8 +2,8 @@
 #pragma once
 
 
-#define VERSION_BUILD 96
-#define DATE_BUILD "2025-09-06 14:05:58"
+#define VERSION_BUILD 97
+#define DATE_BUILD "2025-09-06 14:18:36"
 
 
 #define WIN32_LEAN_AND_MEAN
@@ -40,9 +40,6 @@
 
 
 #include <cstdint>
-
-
-#include "Utils/Log.h"
 
 
 typedef const char *       pchar;
@@ -96,3 +93,4 @@ static pString DIRECT_PROMT = "<- ";
     #define LIGHTNESS 140
 #endif
 
+#include "Utils/Log.h"

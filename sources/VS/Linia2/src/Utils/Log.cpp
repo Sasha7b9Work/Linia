@@ -62,32 +62,6 @@ void Log::WriteLine(pchar line)
 }
 
 
-void Log::Write(char *file, int line, char *format, ...)
-{
-    mutex.lock();
-
-    {
-        char message[1024];
-
-        std::va_list args;
-        va_start(args, format);
-        std::vsprintf(message, format, args);
-        va_end(args);
-
-        String text_string(wxString::Format("Log %3d : %s:%3d : %s : %s", counter++, SU::LeaveTheLastOnes(file, 27), line, GetTime().c_str(), message).c_str());
-
-        if (ConsoleRS232::self)
-        {
-            ConsoleRS232::self->AddLine(text_string.c_str());
-        }
-
-        WriteLine(text_string.c_str());
-    }
-
-    mutex.unlock();
-}
-
-
 void Log::FromDevice(char *line)
 {
     mutex.lock();
@@ -112,7 +86,7 @@ void Log::ToDevice(char *line)
 }
 
 
-void Log::Error(char *file, int line, char *format, ...)
+void Log::Error(pchar file, int line, pchar format, ...)
 {
     mutex.lock();
 
@@ -129,13 +103,15 @@ void Log::Error(char *file, int line, char *format, ...)
         ConsoleRS232::self->AddLine(text_string.c_str());
 
         WriteLine(text_string.c_str());
+
+        std::cerr << text_string.c_str() << std::endl;
     }
 
     mutex.unlock();
 }
 
 
-void Log::ErrorTrace(const char *file, int line, const char *function, const char *format, ...)
+void Log::ErrorTrace(pchar file, int line, pchar function, pchar format, ...)
 {
     mutex.lock();
 
@@ -160,7 +136,7 @@ void Log::ErrorTrace(const char *file, int line, const char *function, const cha
 }
 
 
-void Log::ErrorServerTrace(const char *file, int line, const char *function, const char *format, ...)
+void Log::Write(pchar file, int line, pchar format, ...)
 {
     mutex.lock();
 
@@ -172,18 +148,23 @@ void Log::ErrorServerTrace(const char *file, int line, const char *function, con
         std::vsprintf(message, format, args);
         va_end(args);
 
-        String text_string(wxString::Format("!!! ERROR !!! %3d : SERVER : %s:%3d : %s() : %s : %s", counter++, SU::LeaveTheLastOnes(file, 17), line, function, GetTime().c_str(), message).c_str());
+        String text_string(wxString::Format("Log %3d : %s:%3d : %s : %s", counter++, SU::LeaveTheLastOnes(file, 27), line, GetTime().c_str(), message).c_str());
 
-        ConsoleRS232::self->AddLine(text_string.c_str());
+        if (ConsoleRS232::self)
+        {
+            ConsoleRS232::self->AddLine(text_string.c_str());
+        }
 
         WriteLine(text_string.c_str());
+
+        std::cout << text_string.c_str() << std::endl;
     }
 
     mutex.unlock();
 }
 
 
-void Log::WriteTrace(const char *file, int line, const char *function, const char *format, ...)
+void Log::WriteTrace(pchar file, int line, pchar function, pchar format, ...)
 {
     mutex.lock();
 
@@ -205,32 +186,6 @@ void Log::WriteTrace(const char *file, int line, const char *function, const cha
         WriteLine(text_string.c_str());
 
         std::cout << text_string.c_str() << std::endl;
-    }
-
-    mutex.unlock();
-}
-
-
-void Log::WriteServerTrace(const char *file, int line, const char *function, const char *format, ...)
-{
-    mutex.lock();
-
-    {
-        char message[1024];
-
-        std::va_list args;
-        va_start(args, format);
-        std::vsprintf(message, format, args);
-        va_end(args);
-
-        String text_string(wxString::Format("Log %3d : SERVER : %s:%3d : %s() : %s : %s", counter++, SU::LeaveTheLastOnes(file, 27), line, function, GetTime().c_str(), message).c_str());
-
-        if (ConsoleRS232::self)
-        {
-            ConsoleRS232::self->AddLine(text_string.c_str());
-        }
-
-        WriteLine(text_string.c_str());
     }
 
     mutex.unlock();
