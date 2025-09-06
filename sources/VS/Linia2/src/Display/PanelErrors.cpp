@@ -8,7 +8,7 @@
 PanelErrors::PanelErrors(wxWindow *parent) :
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { MainWindow::WIDTH2, 100 })
 {
-    text_ctrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, { 0, 0 }, { MainWindow::WIDTH2, 90 }, wxTE_MULTILINE | wxTE_READONLY);
+    text_ctrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, { 0, 0 }, { MainWindow::WIDTH2, 90 }, wxTE_MULTILINE | wxTE_READONLY | wxNO_BORDER | wxTE_NO_VSCROLL);
 
     text_ctrl->SetBackgroundColour(*wxRED);
 
@@ -22,7 +22,7 @@ PanelErrors::PanelErrors(wxWindow *parent) :
     text_ctrl->AppendText("ERROR 123 - Мало памяти\n");
     text_ctrl->AppendText("ERROR 177 - Много памяти\n");
 
-    btnCollapse = new wxButton(text_ctrl, wxID_ANY, "Свернуть", wxDefaultPosition, { 90, 22 });
+//    btnCollapse = new wxButton(text_ctrl, wxID_ANY, "Свернуть", wxDefaultPosition, { 90, 22 });
 
     ReInit();
 
@@ -41,9 +41,9 @@ void PanelErrors::ReInit()
 
     SetSize(size);                                                  // Корректируем размер под размер дисплея
 
-    wxPoint position{ size.x - btnCollapse->GetSize().x - 20, 0 };
+//    wxPoint position{ size.x - btnCollapse->GetSize().x - 20, 0 };
 
-    btnCollapse->SetPosition(position);                             // Корректируем положение кнопки
+//    btnCollapse->SetPosition(position);                             // Корректируем положение кнопки
 }
 
 
@@ -56,14 +56,14 @@ void PanelErrors::OnEventButton(wxCommandEvent &event)
     if (collapse)
     {
         SetSize({ GetSize().x, 23 });
-        btnCollapse->SetLabel("Развернуть");
-        timer.Start(500);
+//        btnCollapse->SetLabel("Развернуть");
+//        timer.Start(500);
     }
     else
     {
         SetSize({ GetSize().x, 100 });
-        btnCollapse->SetLabel("Свернуть");
-        timer.Stop();
+//        btnCollapse->SetLabel("Свернуть");
+//        timer.Stop();
     }
 
     event.Skip();

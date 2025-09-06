@@ -14,7 +14,7 @@ private:
 
     wxTextCtrl *text_ctrl = nullptr;
 
-    wxButton *btnCollapse = nullptr;
+//    wxButton *btnCollapse = nullptr;
 
     bool collapse = false;
 
