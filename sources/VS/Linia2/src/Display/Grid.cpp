@@ -1,7 +1,7 @@
-// 2025/7/13 20:39:15 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/7/13 20:39:15 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Display/Grid.h"
-#include "Panels/Panel05_Graph/Panel05_Graph.h"
+#include "Display/Display.h"
 #include "Display/WindowScale.h"
 #include "Utils/Math.h"
 #include <algorithm>
@@ -15,10 +15,10 @@ Grid::Grid()
 
 void Grid::CalculateCenter()
 {
-    center.x = PanelGraph::WIDTH / 2 + SizeCell() * 5                               // Перемещаемся к правой границе сетки
-        - (int)(WindowScale::rangeX.max / UnitsInCellX() * (double)SizeCell());     // И отсчитываем назад - влево
+    center.x = Display::self->GetSize().x / 2 + SizeCell() * 5                      // РџРµСЂРµРјРµС‰Р°РµРјСЃСЏ Рє РїСЂР°РІРѕР№ РіСЂР°РЅРёС†Рµ СЃРµС‚РєРё
+        - (int)(WindowScale::rangeX.max / UnitsInCellX() * (double)SizeCell());     // Р РѕС‚СЃС‡РёС‚С‹РІР°РµРј РЅР°Р·Р°Рґ - РІР»РµРІРѕ
 
-    center.y = PanelGraph::HEIGHT / 2 - SizeCell() * 5
+    center.y = Display::HEIGHT / 2 - SizeCell() * 5
         +(int)(WindowScale::rangeY.max / UnitsInCellY() * (double)SizeCell());
 }
 
@@ -64,7 +64,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
     const int y_bottom = BottomY();
 
     {
-        // Горизонтальные линии
+        // Р“РѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Рµ Р»РёРЅРёРё
         Line(x_left, y_top, RightX(), y_top).Draw(*wxBLACK);
 
         if (Math::InRange(center.y, y_top, y_bottom))
@@ -74,7 +74,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
         Line(x_left, BottomY(), RightX(), BottomY()).Draw();
 
-        // Вертикальные линии
+        // Р’РµСЂС‚РёРєР°Р»СЊРЅС‹Рµ Р»РёРЅРёРё
         Line(x_left, y_top, x_left, BottomY()).Draw();
 
         if (Math::InRange(center.x, x_left, x_right))
@@ -87,7 +87,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
     int d = 4 * scale;
 
-    // Рисуем вертикальные линии справа от нуля
+    // Р РёСЃСѓРµРј РІРµСЂС‚РёРєР°Р»СЊРЅС‹Рµ Р»РёРЅРёРё СЃРїСЂР°РІР° РѕС‚ РЅСѓР»СЏ
     for (int i = 1; i < 100; i++)
     {
         int x = center.x + i * size_cell;
@@ -105,7 +105,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         }
     }
 
-    // Рисуем вертикальные линии слева от нуля
+    // Р РёСЃСѓРµРј РІРµСЂС‚РёРєР°Р»СЊРЅС‹Рµ Р»РёРЅРёРё СЃР»РµРІР° РѕС‚ РЅСѓР»СЏ
     for (int i = 1; i < 100; i++)
     {
         int x = center.x - i * size_cell;
@@ -123,7 +123,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         }
     }
 
-    // Рисуем горизонтальные линии сверху от нуля
+    // Р РёСЃСѓРµРј РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Рµ Р»РёРЅРёРё СЃРІРµСЂС…Сѓ РѕС‚ РЅСѓР»СЏ
     for (int i = 1; i < 100; i++)
     {
         int y = center.y - i * size_cell;
@@ -141,7 +141,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         }
     }
 
-    // Рисуем горизонтальные линии снизу от нуля
+    // Р РёСЃСѓРµРј РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Рµ Р»РёРЅРёРё СЃРЅРёР·Сѓ РѕС‚ РЅСѓР»СЏ
     for (int i = 1; i < 100; i++)
     {
         int y = center.y + i * size_cell;
@@ -180,7 +180,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
 void Grid::DrawLabelsOnAxis() const
 {
-    PanelGraph::self->SetColor(*wxBLACK);
+    Display::self->SetColor(*wxBLACK);
 
     Text::SetFont();
 
@@ -196,7 +196,7 @@ void Grid::DrawLabelsOnAxis() const
         {
             wxPoint coord = GetCoordPointAxisX(i);
 
-            if (BottomY() < PanelGraph::HEIGHT)
+            if (BottomY() < Display::HEIGHT)
             {
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
@@ -207,7 +207,7 @@ void Grid::DrawLabelsOnAxis() const
             {
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
-                    Text(WindowScale::rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, PanelGraph::HEIGHT - 25, true, *wxWHITE);
+                    Text(WindowScale::rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, Display::HEIGHT - 25, true, *wxWHITE);
                 }
             }
         }
@@ -293,7 +293,7 @@ void Grid::ScaleMeasuresOn(const wxPoint &, int delta)
 
     CalculateCenter();
 
-    PanelGraph::self->Draw();
+    Display::self->Draw();
 }
 
 
@@ -310,7 +310,7 @@ void Grid::ScaleMeasuresOnX(int delta)
 
     CalculateCenter();
 
-    PanelGraph::self->Draw();
+    Display::self->Draw();
 }
 
 
@@ -327,7 +327,7 @@ void Grid::ScaleMeasuresOnY(int delta)
 
     CalculateCenter();
 
-    PanelGraph::self->Draw();
+    Display::self->Draw();
 }
 
 
@@ -413,7 +413,7 @@ void Grid::OnMouseMove(const wxPoint &position)
 
 void Grid::DrawMouseMarkers() const
 {
-    if (PanelGraph::self->mouse_is_pressed)
+    if (Display::self->mouse_is_pressed)
     {
         return;
     }
@@ -428,18 +428,18 @@ void Grid::DrawMouseMarkers() const
 
     Text::SetFont();
 
-    PanelGraph::self->SetColor(*wxBLACK);
+    Display::self->SetColor(*wxBLACK);
 
     wxPoint2DDouble value = CoordToValues(pos_mouse);
 
     Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(pos_mouse.x + 5, pos_mouse.y - 5, true, *wxWHITE, true);
 
-    if (PanelGraph::self->track_y)
+    if (Display::self->track_y)
     {
         Line(LeftX(), pos_mouse.y, RightX(), pos_mouse.y).Draw(*wxBLACK);
     }
 
-    if (PanelGraph::self->track_x)
+    if (Display::self->track_x)
     {
         Line(pos_mouse.x, TopY(), pos_mouse.x, BottomY()).Draw(*wxBLACK);
     }

@@ -1,3 +1,519 @@
-﻿// 2025/09/06 14:51:54 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2022/10/28 23:17:06 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Display/Display.h"
+#include "MainWindow.h"
+#include "Display/WindowScale.h"
+#include "Utils/SystemDepend.h"
+#include <string>
+#include <map>
+#include <algorithm>
+
+
+wxBitmap Display::bitmap(MainWindow::WIDTH2, HEIGHT);
+
+
+Display *Display::self = nullptr;
+
+
+Display::Display(wxWindow *parent) :
+    Panel(parent, MainWindow::WIDTH1, MainWindow::HEIGTH1, MainWindow::WIDTH2, HEIGHT)
+{
+    self = this;
+
+    Panel::SetDoubleBuffered(true);
+    Bind(wxEVT_PAINT, &Display::OnEventPaint, this);
+    Bind(wxEVT_LEFT_DOWN, &Display::OnEventMouseDown, this);
+    Bind(wxEVT_LEFT_UP, &Display::OnEventMouseUp, this);
+    Bind(wxEVT_MOTION, &Display::OnEventMouseMove, this);
+    Bind(wxEVT_MOUSEWHEEL, &Display::OnEventMouseWheel, this);
+    Bind(wxEVT_RIGHT_DOWN, &Display::OnEventRightClick, this);
+    Bind(wxEVT_BUTTON, &Display::OnEventButton, this);
+
+    int w = 25;
+
+    wxSize size{ w, w };
+
+    int d = 10;
+    int x0 = d;
+    int y0 = HEIGHT - d - w;
+
+    btnHelp = new wxButton(this, wxID_ANY, "?", { x0, y0 }, size);
+    btnLessX = new wxButton(this, wxID_ANY, "X-", { x0 + w + d, y0 }, size);
+    btnMoreX = new wxButton(this, wxID_ANY, "X+", { x0 + 2 * (w + d), y0 }, size);
+    btnLessY = new wxButton(this, wxID_ANY, "Y-", { x0, y0 - w - d }, size);
+    btnMoreY = new wxButton(this, wxID_ANY, "Y+", { x0, y0 - 2 * (w + d) }, size);
+
+    CreateEntities();
+
+    grid = new Grid();
+
+    Draw();
+
+    panel_errors = new PanelErrors(this);
+
+    panel_errors->Hide();
+}
+
+Display::~Display()
+{
+    SAFE_DELETE(grid);
+}
+
+
+void Display::OnEventPaint(wxPaintEvent &)
+{
+    wxPaintDC paint_dc(this);
+
+    paint_dc.DrawBitmap(bitmap, 0, 0);
+}
+
+
+void Display::OnEventMouseDown(wxMouseEvent &event)
+{
+    pos_mouse_down = event.GetPosition();
+
+    mouse_is_pressed = true;
+}
+
+
+void Display::OnEventMouseUp(wxMouseEvent &)
+{
+    mouse_is_pressed = false;
+}
+
+
+void Display::OnEventMouseMove(wxMouseEvent &event)
+{
+    wxPoint position = event.GetPosition();
+
+    if (mouse_is_pressed)                            // Перемещение графика
+    {
+        wxPoint delta = position - pos_mouse_down;
+
+        if (event.GetModifiers() == wxMOD_CONTROL)
+        {
+            grid->MoveGridOn(delta);
+        }
+        else
+        {
+            grid->MoveMeasuresOn(delta);
+        }
+
+        pos_mouse_down = position;
+    }
+    else                                            // Отслеживание координат
+    {
+        grid->OnMouseMove(position);
+    }
+
+    Draw();
+}
+
+
+void Display::OnEventMouseWheel(wxMouseEvent &event)
+{
+    if (event.GetModifiers() == wxMOD_CONTROL)
+    {
+        grid->ScaleGridOn(event.GetPosition(), event.GetWheelRotation());
+    }
+    else
+    {
+        grid->ScaleMeasuresOn(event.GetPosition(), event.GetWheelRotation());
+    }
+
+    Draw();
+}
+
+
+void Display::OnEventButton(wxCommandEvent &event)
+{
+    int id = event.GetId();
+
+    if (id == btnHelp->GetId())
+    {
+        wxMessageBox("Левая Кнопка Мыши - перемещение графика.\nКолёсико - масштаб графика.\n"
+            "ЛКМ+Ctrl - перемещение сетки.\nКолёсико+Ctrl - масштаб сетки.", " ");
+    }
+    else if (id == btnLessX->GetId())
+    {
+        grid->ScaleMeasuresOnX(-1);
+    }
+    else if (id == btnMoreX->GetId())
+    {
+        grid->ScaleMeasuresOnX(+1);
+    }
+    else if (id == btnLessY->GetId())
+    {
+        grid->ScaleMeasuresOnY(-1);
+    }
+    else if (id == btnMoreY->GetId())
+    {
+        grid->ScaleMeasuresOnY(+1);
+    }
+}
+
+
+
+void Display::Draw()
+{
+    BeginPaint();
+
+    FillRectangle(0, 0, GetSize().x, HEIGHT, *wxWHITE);
+
+    grid->Draw(entities);
+
+    EndPaint();
+
+    Panel::Refresh();
+}
+
+
+void Display::BeginPaint()
+{
+    dc.SelectObject(bitmap);
+    gc = wxGraphicsContext::Create(dc);
+}
+
+
+void Display::EndPaint()
+{
+    dc.SelectObject(wxNullBitmap);
+}
+
+
+void Point::Draw(int x, int y) const
+{
+    Display::self->gc->StrokeLine(x, y, x + 0.01, y);
+}
+
+
+void Line::Draw() const
+{
+    Display::self->gc->StrokeLine(x1, y1, x2, y2);
+}
+
+
+void Line::Draw(const wxColor &color) const
+{
+    Display::self->SetColor(color);
+    Display::self->gc->StrokeLine(x1, y1, x2, y2);
+}
+
+
+Text::Text(const wxString &_text) : text(_text)
+{
+
+}
+
+
+void Text::SetFont()
+{
+    Display::self->gc->SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL), Display::self->color);
+}
+
+
+void Text::Draw(int x, int y) const
+{
+    Display::self->gc->DrawText(text, x, y);
+}
+
+
+void Text::DrawAboutCenterLeft(int x, int y) const
+{
+    double width, height, descent, externalLeading;
+    Display::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+
+    x -= (int)(width + 0.5);
+    y -= (int)(height / 2.0 + 0.5);
+
+    Display::self->gc->DrawText(text, x, y);
+}
+
+
+void Display::FillRectangle(int x, int y, int width, int height, const wxColor &_color)
+{
+    color = _color;
+    gc->SetBrush(color);
+    gc->SetPen(color);
+    gc->DrawRectangle(x, y, width, height);
+}
+
+
+void Text::DrawAboutCenterDown(int x, int y, bool fillBackground, const wxColor &background) const
+{
+    double width, height, descent, externalLeading;
+    Display::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+
+    x -= (int)(width / 2.0 + 0.5);
+
+    if (fillBackground)
+    {
+        Display::self->gc->SetBrush(background);
+        Display::self->gc->SetPen(background);
+        Display::self->gc->DrawRectangle(x, y, width, height);
+
+        Display::self->gc->SetBrush(Display::self->color);
+        Display::self->gc->SetPen(Display::self->color);
+    }
+
+    Display::self->gc->DrawText(text, x, y);
+}
+
+
+void Text::DrawAboutCenterUp(int x, int y, bool fillBackground, const wxColor &background, bool bound) const
+{
+    double width, height, descent, externalLeading;
+    Display::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+
+    y -= (int)(height);
+    x -= (int)(width / 2);
+
+    if (fillBackground)
+    {
+        Display::self->gc->SetBrush(background);
+        Display::self->gc->SetPen(background);
+        Display::self->gc->DrawRectangle(x, y, width, height);
+
+        Display::self->LoadColor();
+    }
+
+    Display::self->gc->DrawText(text, x, y);
+
+    if (bound)
+    {
+        Display::self->gc->SetBrush(*wxTRANSPARENT_BRUSH);
+
+        Display::self->gc->DrawRectangle(x - 1, y - 1, width + 2, height + 2);
+
+        Display::self->LoadColor();
+    }
+}
+
+
+void Text::DrawAboutRightUp(int x, int y, bool fillBackground, const wxColor &background, bool bound) const
+{
+    double width, height, descent, externalLeading;
+    Display::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+
+    y -= (int)(height);
+
+    if (fillBackground)
+    {
+        Display::self->gc->SetBrush(background);
+        Display::self->gc->SetPen(background);
+        Display::self->gc->DrawRectangle(x, y, width, height);
+
+        Display::self->LoadColor();
+    }
+
+    Display::self->gc->DrawText(text, x, y);
+
+    if (bound)
+    {
+        Display::self->gc->SetBrush(*wxTRANSPARENT_BRUSH);
+
+        Display::self->gc->DrawRectangle(x - 1, y - 1, width + 2, height + 2);
+
+        Display::self->LoadColor();
+    }
+}
+
+
+void Text::DrawAboutCenterRigth(int x, int y, bool fillBackground, const wxColor &background) const
+{
+    double width, height, descent, externalLeading;
+    Display::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+
+    y -= (int)(height / 2.0 + 0.5);
+
+    if (fillBackground)
+    {
+        Display::self->gc->SetBrush(background);
+        Display::self->gc->SetPen(background);
+        Display::self->gc->DrawRectangle(x, y, width, height);
+
+        Display::self->LoadColor();
+    }
+
+    Display::self->gc->DrawText(text, x, y);
+}
+
+
+void Display::CreateEntities()
+{
+    entities.push_back(new GraphLine(-1.0, -1.0, 1.0, 1.0, *wxBLUE));
+
+    GraphMeasures *meas = new GraphMeasures(*wxGREEN);
+
+    meas->AppendPoint({ 0.0, 0.0 });
+    meas->AppendPoint({ 0.3, 0.5 });
+    meas->AppendPoint({ 0.7, 1.0 });
+    meas->AppendPoint({ 1.1, 1.5 });
+    meas->AppendPoint({ 1.6, 2.0 });
+    meas->AppendPoint({ 2.0, 2.5 });
+    meas->AppendPoint({ 2.5, 3.0 });
+    meas->AppendPoint({ 3.0, 3.4 });
+    meas->AppendPoint({ 4.0, 4.0 });
+    meas->AppendPoint({ 6.0, 4.3 });
+    meas->AppendPoint({ 8.0, 4.35 });
+    meas->AppendPoint({ 10.0, 4.38 });
+    meas->AppendPoint({ 12.0, 4.4 });
+
+    entities.push_back(meas);
+}
+
+
+void Spline::AppendPoint(const wxPoint2DDouble &point)
+{
+    points.push_back(point);
+}
+
+
+void Spline::Draw(bool smooth, bool draw_points) const
+{
+    wxGraphicsPath path = Display::self->gc->CreatePath();
+
+    Display::self->SetColor(Display::self->color);
+
+    path.MoveToPoint(points[0].m_x, points[0].m_y);
+
+    if (smooth)
+    {
+        for (uint i = 1; i < points.size(); i += 3)
+        {
+            path.AddCurveToPoint(
+                points[i].m_x, points[i].m_y,
+                points[i + 1].m_x, points[i + 1].m_y,
+                points[i + 2].m_x, points[i + 2].m_y
+            );
+        }
+    }
+    else
+    {
+        for (uint i = 1; i < points.size(); i++)
+        {
+            path.AddLineToPoint(points[i].m_x, points[i].m_y);
+        }
+    }
+
+    Display::self->gc->StrokePath(path);
+
+    if (draw_points)
+    {
+        wxGraphicsPath path_circle = Display::self->gc->CreatePath();
+
+        Display::self->gc->SetBrush(*wxRED_BRUSH);
+
+        for (const auto &pt : points)
+        {
+            path_circle.AddCircle(pt.m_x, pt.m_y, 3);
+        }
+
+        Display::self->gc->FillPath(path_circle);
+    }
+}
+
+
+void Display::OnEventRightClick(wxMouseEvent &)
+{
+    wxMenu menu;
+
+    // Добавляем пункты меню
+    menu.Append(wxID_RESET, "Сброс");
+    itemFullscreen = menu.AppendCheckItem(wxID_ANY, "Развернуть");
+
+    menu.AppendSeparator();
+
+    // Привязываем обработчики для пунктов меню
+    Bind(wxEVT_MENU, &Display::OnMenuReset, this, wxID_RESET);
+    Bind(wxEVT_MENU, &Display::OnMenuFullScreen, this, itemFullscreen->GetId());
+
+    menu.Check(itemFullscreen->GetId(), full_screen);
+
+    wxMenu *subMenu = new wxMenu();
+    itemTrackX = subMenu->AppendCheckItem(wxID_ANY, "X");
+    itemTrackY = subMenu->AppendCheckItem(wxID_ANY, "Y");
+    itemTrackNone = subMenu->AppendCheckItem(wxID_ANY, "Ничего");
+
+    subMenu->Check(itemTrackX->GetId(), track_x);
+    subMenu->Check(itemTrackY->GetId(), track_y);
+    subMenu->Check(itemTrackNone->GetId(), track_none);
+
+    menu.AppendSubMenu(subMenu, "Отслеживать");
+
+    itemScale = menu.AppendCheckItem(wxID_ANY, "Шкала");
+
+    Bind(wxEVT_MENU, &Display::OnMenuTrackX, this, itemTrackX->GetId());
+    Bind(wxEVT_MENU, &Display::OnMenuTrackY, this, itemTrackY->GetId());
+    Bind(wxEVT_MENU, &Display::OnMenuTrackNone, this, itemTrackNone->GetId());
+    Bind(wxEVT_MENU, &Display::OnMenuScale, this, itemScale->GetId());
+
+    // Показываем меню в позиции клика
+    PopupMenu(&menu);
+}
+
+
+void Display::OnMenuReset(wxCommandEvent &)
+{
+
+}
+
+
+void Display::OnMenuFullScreen(wxCommandEvent &)
+{
+
+}
+
+
+void Display::OnMenuTrackX(wxCommandEvent &event)
+{
+    if (event.IsChecked())
+    {
+        track_x = true;
+        track_y = false;
+        track_none = false;
+    }
+}
+
+
+void Display::OnMenuTrackY(wxCommandEvent &event)
+{
+    if (event.IsChecked())
+    {
+        track_x = false;
+        track_y = true;
+        track_none = false;
+    }
+}
+
+
+void Display::OnMenuTrackNone(wxCommandEvent &event)
+{
+    if (event.IsChecked())
+    {
+        track_x = false;
+        track_y = false;
+        track_none = true;
+    }
+}
+
+
+void Display::OnMenuScale(wxCommandEvent &)
+{
+    WindowScale().ShowModal();
+}
+
+
+void Display::SetColor(const wxColor &_color)
+{
+    color = _color;
+
+    LoadColor();
+}
+
+
+void Display::LoadColor()
+{
+    Display::self->gc->SetPen(color);
+    Display::self->gc->SetBrush(color);
+}

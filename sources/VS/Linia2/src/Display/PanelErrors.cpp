@@ -1,6 +1,6 @@
 ﻿// 2025/09/01 22:59:47 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel05_Graph/PanelErrors.h"
+#include "Display/PanelErrors.h"
 #include "MainWindow.h"
 
 
