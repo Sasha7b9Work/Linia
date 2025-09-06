@@ -99,7 +99,7 @@ void Application::OnTimer(wxTimerEvent &)
 
 int Application::OnExit()
 {
-    LOG_WRITE("Application::OnExit()");
+    LOG_WRITE("Exit application");
 
     wxConfigBase::Get(false)->Flush();
 
