@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Display/PanelErrors.h"
 #include "MainWindow.h"
+#include "Display/Display.h"
 
 
 PanelErrors::PanelErrors(wxWindow *parent) :
@@ -20,4 +21,43 @@ PanelErrors::PanelErrors(wxWindow *parent) :
 
     text_ctrl->AppendText("ERROR 123 - Мало памяти\n");
     text_ctrl->AppendText("ERROR 177 - Много памяти\n");
+
+    btnCollapse = new wxButton(text_ctrl, wxID_ANY, "Свернуть", wxDefaultPosition, { 100, 20 });
+
+    ReInit();
+
+    Bind(wxEVT_BUTTON, &PanelErrors::OnEventButton, this);
+}
+
+
+void PanelErrors::ReInit()
+{
+    wxSize size = GetSize();
+
+    size.x = Display::self->GetSize().x;
+
+    SetSize(size);
+
+    wxPoint position{ size.x - btnCollapse->GetSize().x - 20, 0 };
+
+    btnCollapse->SetPosition(position);
+}
+
+
+void PanelErrors::OnEventButton(wxCommandEvent &event)
+{
+    collapse = !collapse;
+
+    if (collapse)
+    {
+        SetSize({ GetSize().x, 23 });
+        SetLabel("Развернуть");
+    }
+    else
+    {
+        SetSize({ GetSize().x, 100 });
+        SetLabel("Свернуть");
+    }
+
+    event.Skip();
 }

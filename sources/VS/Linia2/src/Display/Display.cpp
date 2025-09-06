@@ -37,13 +37,13 @@ Display::Display(wxWindow *parent) :
     btnLessY = new wxButton(this, wxID_ANY, "Y-", wxDefaultPosition, size);
     btnMoreY = new wxButton(this, wxID_ANY, "Y+", wxDefaultPosition, size);
 
-    Init();
-
     CreateEntities();
 
     panel_errors = new PanelErrors(this);
 
     panel_errors->Show();
+
+    Init();
 }
 
 
@@ -96,6 +96,8 @@ void Display::Init()
     btnMoreX->SetPosition({ x0 + 2 * (w + d), y0 });
     btnLessY->SetPosition({ x0, y0 - w - d });
     btnMoreY->SetPosition({ x0, y0 - 2 * (w + d) });
+
+    panel_errors->ReInit();
 
     Panel::Layout();
 

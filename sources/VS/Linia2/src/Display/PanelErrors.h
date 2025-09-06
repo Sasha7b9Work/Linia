@@ -8,7 +8,15 @@ public:
 
     PanelErrors(wxWindow *);
 
+    void ReInit();
+
 private:
 
     wxTextCtrl *text_ctrl = nullptr;
+
+    wxButton *btnCollapse = nullptr;
+
+    bool collapse = false;
+
+    void OnEventButton(wxCommandEvent &);
 };
