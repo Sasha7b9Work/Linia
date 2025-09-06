@@ -10,7 +10,7 @@ PanelErrors::PanelErrors(wxWindow *parent) :
 {
     text_ctrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, { 0, 0 }, { MainWindow::WIDTH2, 90 }, wxTE_MULTILINE | wxTE_READONLY);
 
-    text_ctrl->SetBackgroundColour({ 255, 0, 0 });
+    text_ctrl->SetBackgroundColour(*wxRED);
 
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
     sizer->Add(text_ctrl, 0, wxEXPAND | wxALL, 0);
@@ -22,11 +22,14 @@ PanelErrors::PanelErrors(wxWindow *parent) :
     text_ctrl->AppendText("ERROR 123 - Мало памяти\n");
     text_ctrl->AppendText("ERROR 177 - Много памяти\n");
 
-    btnCollapse = new wxButton(text_ctrl, wxID_ANY, "Свернуть", wxDefaultPosition, { 100, 20 });
+    btnCollapse = new wxButton(text_ctrl, wxID_ANY, "Свернуть", wxDefaultPosition, { 90, 18 });
 
     ReInit();
 
     Bind(wxEVT_BUTTON, &PanelErrors::OnEventButton, this);
+    Bind(wxEVT_TIMER, &PanelErrors::OnEventTimer, this, timer.GetId());
+
+    timer.SetOwner(this, timer.GetId());
 }
 
 
@@ -48,16 +51,36 @@ void PanelErrors::OnEventButton(wxCommandEvent &event)
 {
     collapse = !collapse;
 
+    SetColors(false);
+
     if (collapse)
     {
         SetSize({ GetSize().x, 23 });
-        SetLabel("Развернуть");
+        btnCollapse->SetLabel("Развернуть");
+        timer.Start(500);
     }
     else
     {
         SetSize({ GetSize().x, 100 });
-        SetLabel("Свернуть");
+        btnCollapse->SetLabel("Свернуть");
+        timer.Stop();
     }
 
     event.Skip();
+}
+
+
+void PanelErrors::OnEventTimer(wxTimerEvent &)
+{
+    SetColors(text_ctrl->GetBackgroundColour() == *wxRED);
+}
+
+
+void PanelErrors::SetColors(bool inverse)
+{
+    text_ctrl->SetBackgroundColour(inverse ? *wxWHITE : *wxRED);
+
+    text_ctrl->SetForegroundColour(inverse ? *wxBLACK : *wxWHITE);
+
+    text_ctrl->Refresh();
 }

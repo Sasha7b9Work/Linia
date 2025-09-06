@@ -19,4 +19,9 @@ private:
     bool collapse = false;
 
     void OnEventButton(wxCommandEvent &);
+    void OnEventTimer(wxTimerEvent &);
+
+    wxTimer timer;
+
+    void SetColors(bool inverse);
 };
