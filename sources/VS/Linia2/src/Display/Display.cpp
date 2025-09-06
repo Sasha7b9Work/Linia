@@ -17,8 +17,6 @@ Display::Display(wxWindow *parent) :
 {
     self = this;
 
-    bitmap = new wxBitmap(GetSize().x, GetSize().y);
-
     Panel::SetDoubleBuffered(true);
     Bind(wxEVT_PAINT, &Display::OnEventPaint, this);
     Bind(wxEVT_LEFT_DOWN, &Display::OnEventMouseDown, this);
@@ -32,31 +30,86 @@ Display::Display(wxWindow *parent) :
 
     wxSize size{ w, w };
 
-    int d = 10;
-    int x0 = d;
-    int y0 = GetSize().y - d - w;
+    btnHelp = new wxButton(this, wxID_ANY, "?", wxDefaultPosition, size);
+    btnLessX = new wxButton(this, wxID_ANY, "X-", wxDefaultPosition, size);
+    btnMoreX = new wxButton(this, wxID_ANY, "X+", wxDefaultPosition, size);
+    btnLessY = new wxButton(this, wxID_ANY, "Y-", wxDefaultPosition, size);
+    btnMoreY = new wxButton(this, wxID_ANY, "Y+", wxDefaultPosition, size);
 
-    btnHelp = new wxButton(this, wxID_ANY, "?", { x0, y0 }, size);
-    btnLessX = new wxButton(this, wxID_ANY, "X-", { x0 + w + d, y0 }, size);
-    btnMoreX = new wxButton(this, wxID_ANY, "X+", { x0 + 2 * (w + d), y0 }, size);
-    btnLessY = new wxButton(this, wxID_ANY, "Y-", { x0, y0 - w - d }, size);
-    btnMoreY = new wxButton(this, wxID_ANY, "Y+", { x0, y0 - 2 * (w + d) }, size);
+    Init();
 
     CreateEntities();
-
-    grid = new Grid();
-
-    Draw();
 
     panel_errors = new PanelErrors(this);
 
     panel_errors->Hide();
 }
 
+
 Display::~Display()
 {
     SAFE_DELETE(bitmap);
     SAFE_DELETE(grid);
+}
+
+
+void Display::FullScreen(bool full)
+{
+    if (!IsShown())
+    {
+        return;
+    }
+
+    full_screen = full;
+
+    Init();
+}
+
+
+void Display::Init()
+{
+    int width = MainWindow::WIDTH2;
+    int height = MainWindow::HEIGHT2;
+
+    if (full_screen)
+    {
+        width = MainWindow::WIDTH;
+        height = MainWindow::HEIGHT;
+    }
+
+    SetSize({ width, height });
+
+    if (full_screen)
+    {
+        SetPosition({ 0, 0 });
+    }
+    else
+    {
+        SetPosition({ MainWindow::WIDTH1, MainWindow::HEIGHT1 });
+    }
+
+    SAFE_DELETE(bitmap);
+
+    bitmap = new wxBitmap(GetSize().x, GetSize().y);
+
+    SAFE_DELETE(grid);
+
+    grid = new Grid();
+
+    int w = 25;
+    int d = 10;
+    int x0 = d;
+    int y0 = GetSize().y - d - w;
+
+    btnHelp->SetPosition({ x0, y0 });
+    btnLessX->SetPosition({ x0 + w + d, y0 });
+    btnMoreX->SetPosition({ x0 + 2 * (w + d), y0 });
+    btnLessY->SetPosition({ x0, y0 - w - d });
+    btnMoreY->SetPosition({ x0, y0 - 2 * (w + d) });
+
+    Layout();
+
+    Draw();
 }
 
 

@@ -296,5 +296,7 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
 
     PanelReferenceGraph::self->Show(mode == ModeMainWindow::ReferenceGraphs);
 
+    Display::self->FullScreen(mode == ModeMainWindow::FullGraph);
+
     wxFrame::Layout();
 }

@@ -37,6 +37,8 @@ public:
 
     PanelErrors *panel_errors = nullptr;
 
+    void FullScreen(bool);
+
 private:
 
     wxButton *btnHelp = nullptr,
@@ -62,6 +64,8 @@ private:
 
     // Координаты мыши при нажатии кнопки
     wxPoint pos_mouse_down;
+
+    void Init();
 
     void BeginPaint();
 

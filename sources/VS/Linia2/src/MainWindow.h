@@ -13,6 +13,7 @@ struct ModeMainWindow
     {
         Standard,           // Стартовый вид окна
         ReferenceGraphs,    // Архив эталонных графиков на весь экран
+        FullGraph,          // Графики на весь экран
         Debug,              // Отладочный режим - засылка в регисты
         Count
     };
