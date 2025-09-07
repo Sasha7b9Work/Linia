@@ -83,6 +83,7 @@ file(GLOB PANELS_PANEL12                src/Panels/Panel12_Debug/*.*)
 file(GLOB PANELS_PANEL12_PAGESCHIPS     src/Panels/Panel12_Debug/PagesChips/*.*)
 file(GLOB PANELS_PANEL12_OLD            src/Panels/Panel12_Debug/Old/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
+file(GLOB SOFTTESTS                     src/SoftTests/*.*)
 file(GLOB STORAGE                       src/Storage/*.*)
 file(GLOB UTILS                         src/Utils/*.*)
 file(GLOB WINDOWS                       src/Windows/*.*)
@@ -115,6 +116,7 @@ source_group(Panels/Panel12_Debug                 FILES ${PANELS_PANEL12})
 source_group(Panels/Panel12_Debug/PagesChips      FILES ${PANELS_PANEL12_PAGESCHIPS})
 source_group(Panels/Panel12_Debug/Old             FILES ${PANELS_PANEL12_OLD})
 source_group(Settings                             FILES ${SETTINGS})
+source_group(SoftTests                            FILES ${SOFTTESTS})
 source_group(Storage                              FILES ${STORAGE})
 source_group(Utils                                FILES ${UTILS})
 source_group(Windows                              FILES ${WINDOWS})
@@ -146,6 +148,7 @@ add_executable(${PROJECT_NAME}
     ${PANELS_PANEL12_PAGESCHIPS}
     ${PANELS_PANEL12_OLD}
     ${SETTINGS}
+    ${SOFTTESTS}
     ${STORAGE}
     ${UTILS}
     ${WINDOWS}
@@ -231,4 +234,3 @@ else()
     target_include_directories(${PROJECT_NAME} PRIVATE ${GTK3_INCLUDE_DIRS})
     target_compile_options(${PROJECT_NAME} PRIVATE ${GTK3_CFLAGS_OTHER})
 endif()
-
