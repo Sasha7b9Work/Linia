@@ -322,7 +322,7 @@ void WindowTableOffsets::ShowFieldsI(bool show)
 
         if (show)
         {
-            field.name->SetLabel(RangeI((RangeI::E)field.range).Name(GetTypeMeasure() == TypeDSet::ChanC_Meas ? RowRange::_125 : RowRange::_124));
+            field.name->SetLabel(RangeI((RangeI::E)field.range).Name(GetTypeMeasure() == TypeDSet::Meas_C ? RowRange::_125 : RowRange::_124));
 
             bool condition = InRange<int>(field.range, RangeI::Min(type), RangeI::Max(type));
 
@@ -351,7 +351,7 @@ void WindowTableOffsets::ShowFieldsU(bool show)
 
         if (show)
         {
-            field.name->SetLabel(RangeU((RangeU::E)field.range).Name(GetTypeMeasure() == TypeDSet::ChanC_Meas ? RowRange::_125 : RowRange::_124));
+            field.name->SetLabel(RangeU((RangeU::E)field.range).Name(GetTypeMeasure() == TypeDSet::Meas_C ? RowRange::_125 : RowRange::_124));
 
             bool condition = InRange<int>(field.range, RangeU::Min(type), RangeU::Max(type));
 

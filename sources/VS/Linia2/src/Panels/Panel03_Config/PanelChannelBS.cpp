@@ -133,7 +133,7 @@ void PanelChannelBS::Tune()
     comboTypeGenerator->SetCurrentSelection(1);
 
     wxArrayString ranges;
-    RangeI::FillArrayStrings(ranges, TypeDSet::ChanB_Limit, false);
+    RangeI::FillArrayStrings(ranges, TypeDSet::Limit_B, false);
     comboLimitRange->SetChoices(ranges, ranges);
 
     {
@@ -160,10 +160,10 @@ void PanelChannelBS::OnEventComboBox(wxCommandEvent &event)
 
         if (combo->GetCurrentSelection() == 0)              // Напряжение
         {
-            RangeU::FillArrayStrings(ranges, TypeDSet::ChanB_Source, true);
+            RangeU::FillArrayStrings(ranges, TypeDSet::Source_B, true);
 
             wxArrayString tooltips;
-            RangeU::FillArrayStrings(tooltips, TypeDSet::ChanB_Source, false);
+            RangeU::FillArrayStrings(tooltips, TypeDSet::Source_B, false);
 
             for (auto &elem : tooltips)
             {
@@ -174,10 +174,10 @@ void PanelChannelBS::OnEventComboBox(wxCommandEvent &event)
         }
         else if (combo->GetCurrentSelection() == 1)         // Ток
         {
-            RangeI::FillArrayStrings(ranges, TypeDSet::ChanB_Source, true);
+            RangeI::FillArrayStrings(ranges, TypeDSet::Source_B, true);
 
             wxArrayString tooltips;
-            RangeI::FillArrayStrings(tooltips, TypeDSet::ChanB_Source, false);
+            RangeI::FillArrayStrings(tooltips, TypeDSet::Source_B, false);
 
             for (auto &elem : tooltips)
             {

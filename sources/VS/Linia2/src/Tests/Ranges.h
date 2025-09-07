@@ -6,13 +6,13 @@ struct TypeDSet
 {
     enum E
     {
-        ChanC_Meas,
-        ChanB_Meas,
-        ChanB_Source,
-        ChanB_Limit,
-        ChanS_Meas,
-        ChanS_Source,
-        ChanS_Limit,
+        Meas_C,
+        Meas_B,
+        Source_B,
+        Limit_B,
+        Meas_S,
+        Source_S,
+        Limit_S,
         Count
     };
 
