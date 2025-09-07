@@ -8,7 +8,7 @@ class DataConverterI
 {
 public:
 
-    DataConverterI(TypeDSet::E t, RangeI::E r) : range{ r }, type_set{ t } { }
+    DataConverterI(TypeDSet::E, RangeI::E);
 
     double Convert(int) const;
 
@@ -16,6 +16,8 @@ private:
 
     RangeI      range;
     TypeDSet::E type_set;
+    double      k;          // Коэффициент наклона. Рассчитывается в конструкторе
+    const CalK &cal;        // Коэффициенты калибровки устанавливаются в конструкторе
 };
 
 

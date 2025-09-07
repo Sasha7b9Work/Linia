@@ -20,16 +20,20 @@ namespace DCI
 }
 
 
-double DataConverterI::Convert(int adc) const
+DataConverterI::DataConverterI(TypeDSet::E t, RangeI::E r) :
+    range{ r },
+    type_set{ t },
+    cal{ DSet::Get(type_set, range.value) }
 {
     using namespace DCI;
 
-    double k = range.MaxValueAbs(RowRange::ForType(type_set)) / (double)max_ADC[type_set];  // Коэффициент наклона
-
-    double value = k * (double)adc;                                                         // Узнаём абсолютное значение, соответствующее значению АЦП
-
-    const CalK &cal = DSet::Get(type_set, range.value);
-
-    return (value + cal.offset) * cal.k;
+    k = range.MaxValueAbs(RowRange::ForType(type_set)) / (double)max_ADC[type_set];
 }
 
+
+double DataConverterI::Convert(int adc) const
+{
+    double value = k * (double)adc;         // Узнаём абсолютное значение, соответствующее значению АЦП
+
+    return (value + cal.offset) * cal.k;    // И применяем к нему коэффициенты
+}

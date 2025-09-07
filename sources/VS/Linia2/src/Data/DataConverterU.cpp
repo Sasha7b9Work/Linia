@@ -33,8 +33,7 @@ DataConverterU::DataConverterU(TypeDSet::E t, RangeU::E r) :
 
 double DataConverterU::Convert(int adc) const
 {
-    double value = k * (double)adc;                                                         // Узнаём абсолютное значение, соответствующее значению АЦП
+    double value = k * (double)adc;         // Узнаём абсолютное значение, соответствующее значению АЦП
 
-    return (value + cal.offset) * cal.k;
+    return (value + cal.offset) * cal.k;    // И применяем к нему коэффициенты
 }
-
