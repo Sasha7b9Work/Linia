@@ -8,9 +8,6 @@ class DataConverterI
 {
 public:
 
-    // Перед использованием нужно инициализировать таблицы коэффициентов
-    static void Init();
-
     DataConverterI(TypeDSet::E t, RangeI::E r) : range{ r }, type_set{ t } { }
 
     float Convert(int) const;
@@ -26,9 +23,6 @@ private:
 class DataConverterU
 {
 public:
-
-    // Перед использованием нужно инициализировать таблицы коэффициентов
-    static void Init();
 
     DataConverterU(TypeDSet::E t, RangeU::E r) : range{ r }, type_set{ t } { }
 

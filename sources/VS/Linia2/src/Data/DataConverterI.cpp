@@ -9,13 +9,6 @@ namespace DCI
 }
 
 
-void DataConverterI::Init()
-{
-
-}
-
-
-
 float DataConverterI::Convert(int) const
 {
     return 0.0f;

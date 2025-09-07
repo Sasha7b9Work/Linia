@@ -5,18 +5,17 @@
 
 namespace DCU
 {
-
+    // Это значение для данного измерения либо источника приходит с АЦП при максимально возможном значении на входе.
+    // Ему соответствует минимальное значение -max_value_ADC
+    static int max_ADC[TypeDSet::Count];
 }
 
 
-void DataConverterU::Init()
+float DataConverterU::Convert(int adc) const
 {
+//    float value = 
 
-}
 
-
-float DataConverterU::Convert(int) const
-{
     return 0.0f;
 }
 

@@ -56,6 +56,52 @@ pchar RangeI::Name(RowRange::E row) const
 }
 
 
+float RangeI::MaxValueAbs(RowRange::E r) const
+{
+    static const float values[Count][RowRange::Count] =
+    {
+        { 400e-12f, 500e-12f },
+        { 1e-9f,    1e-9f },
+        { 2e-9f,    2e-9f },
+        { 4e-9f,    5e-9f },
+        { 1e-8f,    1e-8f },
+        { 2e-8f,    2e-8f },
+        { 4e-8f,    5e-8f },
+        { 1e-7f,    1e-7f },
+        { 2e-7f,    2e-7f },
+        { 4e-7f,    4e-7f },
+        { 1e-6f,    1e-6f },
+        { 2e-6f,    2e-6f },
+        { 4e-6f,    5e-6f },
+        { 1e-5f,    1e-5f },
+        { 2e-5f,    2e-5f },
+        { 4e-5f,    5e-5f },
+        { 1e-4f,    1e-4f },
+        { 2e-4f,    2e-4f },
+        { 4e-4f,    5e-4f },
+        { 1e-3f,    1e-3f },
+        { 2e-3f,    2e-3f },
+        { 4e-3f,    5e-3f },
+        { 1e-2f,    1e-2f },
+        { 2e-2f,    2e-2f },
+        { 4e-2f,    5e-2f },
+        { 1e-1f,    1e-1f },
+        { 2e-1f,    2e-1f },
+        { 4e-1f,    5e-1f },
+        { 1e0f,     1e0f  },
+        { 2e0f,     2e0f  },
+        { 4e0f,     5e0f  },
+        { 1e1f,     1e0f  },
+        { 2e1f,     2e1f  },
+        { 4e1f,     5e1f  },
+        { 1e2f,     1e2f  },
+        { 2e2f,     2e2f  }
+    };
+
+    return values[value][r];
+}
+
+
 wxString RangeI::NameStep(RowRange::E row) const
 {
     wxString name = Name(row);
@@ -125,7 +171,7 @@ wxString RangeU::NameStep(RowRange::E row) const
 }
 
 
-pchar RangeU::Name(RowRange::E row) const
+pchar RangeU::Name(RowRange::E r) const
 {
     static const pchar names[Count][RowRange::Count] =
     {
@@ -171,7 +217,57 @@ pchar RangeU::Name(RowRange::E row) const
         { "10 kV",  "10 kV" }
     };
 
-    return names[value][row];
+    return names[value][r];
+}
+
+
+float RangeU::MaxValueAbs(RowRange::E r) const
+{
+    static const float values[Count][RowRange::Count] =
+    {
+        { 1e-9f, 1e-9f },
+        { 2e-9f, 2e-9f },
+        { 4e-9f, 5e-9f },
+        { 1e-8f, 1e-8f },
+        { 2e-8f, 2e-8f },
+        { 4e-8f, 5e-8f },
+        { 1e-7f, 1e-7f },
+        { 2e-7f, 2e-7f },
+        { 4e-7f, 5e-7f },
+        { 1e-6f, 1e-6f },
+        { 2e-6f, 2e-6f },
+        { 4e-6f, 5e-6f },
+        { 1e-5f, 1e-5f },
+        { 2e-5f, 2e-5f },
+        { 4e-5f, 5e-5f },
+        { 1e-4f, 1e-4f },
+        { 2e-4f, 2e-4f },
+        { 4e-4f, 5e-4f },
+        { 1e-3f, 1e-3f },
+        { 2e-3f, 2e-3f },
+        { 4e-3f, 5e-3f },
+        { 1e-2f, 1e-2f },
+        { 2e-2f, 2e-2f },
+        { 4e-2f, 5e-2f },
+        { 1e-1f, 1e-1f },
+        { 2e-1f, 2e-1f },
+        { 4e-1f, 5e-1f },
+        { 1e0f,  1e0f  },
+        { 2e0f,  2e0f  },
+        { 4e0f,  5e0f  },
+        { 1e1f,  1e1f  },
+        { 2e1f,  2e1f  },
+        { 4e1f,  5e1f  },
+        { 1e2f,  1e2f  },
+        { 2e2f,  2e2f  },
+        { 4e2f,  5e2f  },
+        { 1e3f,  1e3f  },
+        { 2e3f,  2e3f  },
+        { 4e3f,  5e3f  },
+        { 1e4f,  1e4f  }
+    };
+
+    return values[value][r];
 }
 
 

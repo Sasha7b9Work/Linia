@@ -39,7 +39,7 @@ struct RangeI
 {
     enum E
     {
-        _500pA,
+        _400_500pA,
         _1nA,
         _2nA,
         _4_5nA,
@@ -84,6 +84,8 @@ struct RangeI
 
     pchar Name(RowRange::E) const;
     wxString NameStep(RowRange::E) const;
+    // Максимально возможное значение на данном диапазоне
+    float MaxValueAbs(RowRange::E) const;
 
     void operator++()
     {
@@ -150,6 +152,8 @@ struct RangeU
 
     pchar Name(RowRange::E) const;
     wxString NameStep(RowRange::E) const;
+    // Максимально возможное значение на данном диапазоне
+    float MaxValueAbs(RowRange::E) const;
 
     void operator++()
     {
