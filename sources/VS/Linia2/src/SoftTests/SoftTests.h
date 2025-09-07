@@ -13,4 +13,6 @@ namespace SoftTests
 namespace DataTests
 {
     void RunAll();
+
+    void Converter();
 }

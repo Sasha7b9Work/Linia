@@ -54,4 +54,6 @@ namespace GF
 
     // true, если запущено на плате встраиваемого ПК
     bool IsBoardPCM();
+
+    bool ApproxEqual(double, double);
 }

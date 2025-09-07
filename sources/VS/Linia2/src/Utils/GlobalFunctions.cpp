@@ -175,3 +175,26 @@ wxString GF::DirForModFiles()
 
     return normalizedPath;
 }
+
+
+bool GF::ApproxEqual(double a, double b)
+{
+    a = std::abs(a);
+    b = std::abs(b);
+
+    if (std::abs(a - b) < std::numeric_limits<double>::epsilon())
+    {
+        return true;
+    }
+
+    double epsilon = 1.00002;
+
+    if (a > b)
+    {
+        return a / b < epsilon;
+    }
+    else
+    {
+        return b / a < epsilon;
+    }
+}

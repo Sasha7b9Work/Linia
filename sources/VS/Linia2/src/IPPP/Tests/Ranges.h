@@ -20,6 +20,12 @@ struct TypeDSet
     E value;
 
     TypeDSet(E v) : value(v) { }
+
+    void operator++()
+    {
+        value = (E)(value + 1);
+    }
+
 };
 
 

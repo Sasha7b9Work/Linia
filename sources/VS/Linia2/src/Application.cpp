@@ -11,6 +11,7 @@
 #include "Communicator/GPIO/GPIO.h"
 #include "Display/PanelErrors.h"
 #include "IPPP/IPPP.h"
+#include "SoftTests/SoftTests.h"
 
 
 wxIMPLEMENT_APP(Application);
@@ -61,6 +62,8 @@ bool Application::OnInit()
     frame->Show();
 
     IPPP::Init();
+
+    SoftTests::RunAll();
 
     timer.Start(10);
 
