@@ -1,8 +1,5 @@
 #include "defines.h"
 #include "Communicator/GPIO/GPIO.h"
-#include <iostream>
-#include <errno.h>
-#include <cstring>
 
 // Lin specific
 #include <gpiod.h>

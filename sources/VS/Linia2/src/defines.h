@@ -2,8 +2,8 @@
 #pragma once
 
 
-#define VERSION_BUILD 141
-#define DATE_BUILD "2025-09-07 21:49:36"
+#define VERSION_BUILD 142
+#define DATE_BUILD "2025-09-07 21:53:50"
 
 
 #define WIN32_LEAN_AND_MEAN
@@ -31,15 +31,20 @@
 #include <wx/datetime.h>
 #include <wx/dirctrl.h>
 #include <wx/dir.h>
+
 #include <map>
 #include <queue>
 #include <mutex>
 #include <stack>
 #include <thread>
-#pragma warning(pop)
-
-
+#include <iostream>
+#include <errno.h>
+#include <cstring>
+#include <iostream>
+#include <algorithm>
+#include <functional>
 #include <cstdint>
+#pragma warning(pop)
 
 
 typedef const char *       pchar;

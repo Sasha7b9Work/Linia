@@ -1,9 +1,6 @@
 #include "defines.h"
 #include "Communicator/UART/UART.h"
-#include <errno.h>
-#include <cstring>
-#include <iostream>
-#include <algorithm>
+
 
 //  Lin specific
 #include <unistd.h>

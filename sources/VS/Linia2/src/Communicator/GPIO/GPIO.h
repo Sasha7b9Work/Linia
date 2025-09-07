@@ -1,6 +1,5 @@
 #pragma once
 
-#include <functional>
 
 // Структуры для аппаратной информации GPIO (нужны для Linux)
 struct gpiod_chip;

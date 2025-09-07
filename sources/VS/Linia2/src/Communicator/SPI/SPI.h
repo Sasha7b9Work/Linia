@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include <cstdint>
 
 
 #define SPI_DEVICE "/dev/spidev0.0"

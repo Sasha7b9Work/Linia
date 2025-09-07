@@ -1,5 +1,4 @@
 #pragma once
-#include <cstdint>
 
 
 #define uart_device "/dev/ttyS6"
