@@ -1,13 +1,15 @@
 #include "defines.h"
 #include "Communicator/GPIO/GPIO.h"
-#include <gpiod.h>
 #include <iostream>
+#include <errno.h>
+#include <cstring>
+
+// Lin specific
+#include <gpiod.h>
 #include <unistd.h>
 #include <pthread.h>
 #include <sys/select.h>
 #include <sys/time.h>
-#include <errno.h>
-#include <cstring>
 
 
 PinIn pinSTART(Pin::START);

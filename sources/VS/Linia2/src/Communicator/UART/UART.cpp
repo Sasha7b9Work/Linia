@@ -1,16 +1,18 @@
 #include "defines.h"
 #include "Communicator/UART/UART.h"
-#include <fcntl.h>
-#include <termios.h>
-#include <unistd.h>
-#include <sys/file.h>
 #include <errno.h>
 #include <cstring>
 #include <iostream>
-#include <pthread.h>
-#include <sys/ioctl.h>
 #include <algorithm>
+
+//  Lin specific
+#include <unistd.h>
+#include <sys/file.h>
+#include <fcntl.h>
+#include <termios.h>
+#include <pthread.h>
 #include <sys/select.h>
+#include <sys/ioctl.h>
 
 
 #ifdef WIN32

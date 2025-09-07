@@ -1,12 +1,14 @@
 ﻿#include "defines.h"
 #include "Communicator/SPI/SPI.h"
+#include <iostream>
+#include <cstring>
+
+// Lin specific
+#include <gpiod.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <linux/spi/spidev.h>
-#include <iostream>
-#include <cstring>
-#include <gpiod.h>
 
 
 #ifdef WIN32
