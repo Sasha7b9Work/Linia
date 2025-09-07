@@ -73,6 +73,7 @@ file(GLOB DEVICE                        src/Device/*.*)
 file(GLOB DEVICETEST                    src/DeviceTest/*.*)
 file(GLOB DISPLAY                       src/Display/*.*)
 file(GLOB IPPP                          src/IPPP/*.*)
+file(GLOB IPPP_TESTS                     src/IPPP/Tests/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
 file(GLOB PANELS_PANEL3                 src/Panels/Panel03_Config/*.*)
 file(GLOB PANELS_PANEL3_SHCEME          src/Panels/Panel03_Config/PanelScheme/*.*)
@@ -83,7 +84,6 @@ file(GLOB PANELS_PANEL12_PAGESCHIPS     src/Panels/Panel12_Debug/PagesChips/*.*)
 file(GLOB PANELS_PANEL12_OLD            src/Panels/Panel12_Debug/Old/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB STORAGE                       src/Storage/*.*)
-file(GLOB TESTS                         src/Tests/*.*)
 file(GLOB UTILS                         src/Utils/*.*)
 file(GLOB WINDOWS                       src/Windows/*.*)
 file(GLOB PLUGS_ARM64                   arm64_plugs/*.*
@@ -105,6 +105,7 @@ source_group(Device                               FILES ${DEVICE})
 source_group(DeviceTest                           FILES ${DEVICETEST})
 source_group(Display                              FILES ${DISPLAY})
 source_group(IPPP                                 FILES ${IPPP})
+source_group(IPPP/Tests                           FILES ${IPPP_TESTS})
 source_group(Panels                               FILES ${PANELS})
 source_group(Panels/Panel03_Config                FILES ${PANELS_PANEL3})
 source_group(Panels/Panel03_Config/PanelScheme    FILES ${PANELS_PANEL3_SHCEME})
@@ -115,7 +116,6 @@ source_group(Panels/Panel12_Debug/PagesChips      FILES ${PANELS_PANEL12_PAGESCH
 source_group(Panels/Panel12_Debug/Old             FILES ${PANELS_PANEL12_OLD})
 source_group(Settings                             FILES ${SETTINGS})
 source_group(Storage                              FILES ${STORAGE})
-source_group(Tests                                FILES ${TESTS})
 source_group(Utils                                FILES ${UTILS})
 source_group(Windows                              FILES ${WINDOWS})
 source_group(Plugs/Arm64                          FILES ${PLUGS_ARM64})
@@ -136,6 +136,7 @@ add_executable(${PROJECT_NAME}
     ${DEVICETEST}
     ${DISPLAY}
     ${IPPP}
+    ${IPPP_TESTS}
     ${PANELS}
     ${PANELS_PANEL3}
     ${PANELS_PANEL3_SHCEME}
@@ -146,7 +147,6 @@ add_executable(${PROJECT_NAME}
     ${PANELS_PANEL12_OLD}
     ${SETTINGS}
     ${STORAGE}
-    ${TESTS}
     ${UTILS}
     ${WINDOWS}
     ${PLUGS_ARM64}

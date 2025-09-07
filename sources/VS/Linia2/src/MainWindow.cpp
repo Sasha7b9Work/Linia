@@ -18,7 +18,7 @@
 #include "Panels/Panel12_Debug/Panel12_Debug.h"
 #include "Panels/Panel13_ReferenceGraphs.h"
 #include "Controls/Dialog.h"
-#include "Tests/Tests.h"
+#include "IPPP/Tests/Tests.h"
 
 
 /*

@@ -7,7 +7,7 @@
 #include "Utils/Timer.h"
 #include "MainWindow.h"
 #include "Windows/ConsoleRS232.h"
-#include "Tests/Tests.h"
+#include "IPPP/Tests/Tests.h"
 #include "Communicator/GPIO/GPIO.h"
 #include "Display/PanelErrors.h"
 #include "IPPP/IPPP.h"

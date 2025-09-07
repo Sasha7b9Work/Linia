@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Panels/Panel04_Model.h"
 #include "Utils/GlobalFunctions.h"
-#include "Tests/Model.h"
+#include "IPPP/Tests/Model.h"
 
 
 PanelModel *PanelModel::self = nullptr;

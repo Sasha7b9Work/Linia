@@ -1,6 +1,6 @@
 ﻿// 2025/7/27 22:27:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Tests/Ranges.h"
+#include "IPPP/Tests/Ranges.h"
 
 
 struct DSettings

@@ -3,7 +3,7 @@
 #include "Controls/ButtonsCombo.h"
 #include "Panels/Panel03_Config/PanelScheme/PainterScheme.h"
 #include "Controls/BmpButtonsCombo.h"
-#include "Tests/Tests.h"
+#include "IPPP/Tests/Tests.h"
 
 
 // Отображается на отрисованной схеме

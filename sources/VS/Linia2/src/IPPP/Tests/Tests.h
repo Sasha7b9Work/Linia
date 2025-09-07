@@ -1,6 +1,6 @@
 ﻿// 2025/08/19 14:10:47 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Tests/SettingsTests.h"
+#include "IPPP/Tests/SettingsTests.h"
 
 
 namespace Test

@@ -1,6 +1,6 @@
 #pragma once
-#include "Tests/SettingsTests.h"
-#include "Tests/Ranges.h"
+#include "IPPP/Tests/SettingsTests.h"
+#include "IPPP/Tests/Ranges.h"
 
 
 // \todo Дописать комментарии на функции неочевидного назначения

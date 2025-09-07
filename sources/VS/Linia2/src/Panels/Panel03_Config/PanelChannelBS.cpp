@@ -4,10 +4,10 @@
 #include "Utils/SystemDepend.h"
 #include "MainWindow.h"
 #include "Panels/Panel03_Config/Panel03_Config.h"
-#include "Tests/Ranges.h"
+#include "IPPP/Tests/Ranges.h"
 #include "Utils/StringUtils.h"
 #include "Utils/GlobalFunctions.h"
-#include "Tests/Tests.h"
+#include "IPPP/Tests/Tests.h"
 #include "Controls/StaticBox.h"
 
 

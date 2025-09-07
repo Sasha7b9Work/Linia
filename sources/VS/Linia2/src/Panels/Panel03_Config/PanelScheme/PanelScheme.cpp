@@ -7,7 +7,7 @@
 #include "Panels/Panel03_Config/PanelScheme/WindowLibraryTests.h"
 #include "Panels/Panel03_Config/PanelChannelBS.h"
 #include "Controls/Bitmap.h"
-#include "Tests/Tests.h"
+#include "IPPP/Tests/Tests.h"
 #include "Controls/StaticBox.h"
 #include "Utils/Configurator.h"
 #include "Panels/Panel03_Config/PanelChannelC.h"

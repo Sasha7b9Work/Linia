@@ -6,7 +6,7 @@
 #include "MainWindow.h"
 #include "Panels/Panel03_Config/Panel03_Config.h"
 #include "Controls/CustomComboBox.h"
-#include "Tests/Ranges.h"
+#include "IPPP/Tests/Ranges.h"
 #include "Controls/StaticBox.h"
 
 
