@@ -134,7 +134,10 @@ void ButtonBitmap::SetFileBitmap(const wxString &file_bitmap)
 {
     bitmap = Bitmap::Get(file_bitmap);
 
-    wxBitmapButton::SetBitmap(bitmap.GetBitmap());
+    if (bitmap.GetBitmap().IsOk())
+    {
+        wxBitmapButton::SetBitmap(bitmap.GetBitmap());
+    }
 }
 
 

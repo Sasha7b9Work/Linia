@@ -67,12 +67,15 @@ void Painter::DrawBitmap(int x, int y, const wxBitmap &_bmp, const wxColor &alph
 {
     wxBitmap bmp = _bmp;
 
-    if (alpha != wxNullColour)
+    if (bmp.IsOk())
     {
-        bmp.SetMask(new wxMask(_bmp, alpha));
-    }
+        if (alpha != wxNullColour)
+        {
+            bmp.SetMask(new wxMask(_bmp, alpha));
+        }
 
-    gc->DrawBitmap(bmp, x, y, bmp.GetSize().x, bmp.GetSize().y);
+        gc->DrawBitmap(bmp, x, y, bmp.GetSize().x, bmp.GetSize().y);
+    }
 }
 
 
@@ -157,8 +160,11 @@ PainterBMP::PainterBMP(wxWindow *parent, const wxPoint &position, const wxSize &
     if (alpha != wxNullColour)
     {
         wxBitmap bmp = bitmap.GetBitmap();
-        bmp.SetMask(new wxMask(bitmap.GetBitmap(), alpha));
-        bitmap.GetBitmap() = bmp;
+        if (bmp.IsOk())
+        {
+            bmp.SetMask(new wxMask(bitmap.GetBitmap(), alpha));
+            bitmap.GetBitmap() = bmp;
+        }
     }
 
     if (size == wxDefaultSize)

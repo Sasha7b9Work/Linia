@@ -10,24 +10,28 @@ Bitmap::Bitmap(const wxString &file_bitmap)
 {
     wxString path = wxString("resources/") + file_bitmap;
 
+    wxFileName filename(path);
+
     if (file_bitmap[file_bitmap.size() - 1] == 'p')
     {
         wxImage image;
 
-        if (!image.LoadFile(path, wxBITMAP_TYPE_BMP))
+        if (filename.FileExists() && image.LoadFile(path, wxBITMAP_TYPE_BMP))
+        {
+            bitmap = wxBitmap(image);
+
+            bitmap.SetMask(new wxMask(bitmap, *wxWHITE));
+        }
+        else
         {
             LOG_ERROR("Не удалось загрузить файл изображения %s", file_bitmap.c_str().AsChar());
         }
-
-        bitmap = wxBitmap(image);
-
-        bitmap.SetMask(new wxMask(bitmap, *wxWHITE));
     }
     else
     {
         wxIcon icon;
 
-        if (!icon.LoadFile(path, wxBITMAP_TYPE_ICO))
+        if (filename.FileExists() && !icon.LoadFile(path, wxBITMAP_TYPE_ICO))
         {
             LOG_ERROR("Не удалось загрузить файл изображения %s", file_bitmap.c_str().AsChar());
         }
