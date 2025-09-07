@@ -5,30 +5,6 @@
 #include "Controls/Controls.h"
 
 
-struct Color;
-
-
-class ButtonColor : public wxButton
-{
-public:
-
-    ButtonColor(wxWindow *, int, const wxString &, wxPoint, wxSize, PainterRect *);
-
-    void SetColor(const Color &);
-
-    wxColour GetColor() const
-    {
-        return m_painter->GetColor();
-    };
-
-private:
-
-    PainterRect *m_painter = nullptr;
-
-    void OnMouseEvent(wxMouseEvent &);
-};
-
-
 class ButtonBitmap : public wxBitmapButton
 {
 public:

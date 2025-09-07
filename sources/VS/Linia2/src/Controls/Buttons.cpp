@@ -12,31 +12,6 @@ wxDEFINE_EVENT(EVT_BUTTON_BITMAP_CHOICE, ButtonBitmapChoiceEvent);
 
 
 
-ButtonColor::ButtonColor(wxWindow *parent, int id, const wxString &title, wxPoint position, wxSize size, PainterRect *painter) :
-    wxButton(parent, id, title, position, size),
-    m_painter(painter)
-{
-    m_painter->Bind(wxEVT_LEFT_UP, &ButtonColor::OnMouseEvent, this);
-}
-
-
-void ButtonColor::SetColor(const Color &color)
-{
-    m_painter->SetColor(color);
-}
-
-
-void ButtonColor::OnMouseEvent(wxMouseEvent &event)
-{
-    if (event.IsButton())
-    {
-        GF::SendCommandEvent(this, wxEVT_BUTTON, 0);
-    }
-
-    event.Skip();
-}
-
-
 ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString &file_bitmap, const wxString &name) :
     wxBitmapButton(parent, wxID_ANY, wxNullBitmap, pos, size, wxBU_EXACTFIT)
 {

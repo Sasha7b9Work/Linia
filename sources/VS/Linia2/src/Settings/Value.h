@@ -275,32 +275,3 @@ protected:
         }
     }
 };
-
-
-class ValueColor : public Value<Color>
-{
-public:
-    ValueColor(const wxString &key, const Color &default_value) : Value<Color>(key, default_value) { }
-    void Load(ButtonColor *button)
-    {
-        Value<Color>::Load();
-        button->SetColor(Get());
-    }
-    virtual void SetFromControl() override { }
-    void ResetToFactoryColor(bool factory, ButtonColor *button)
-    {
-        if (factory)
-        {
-            stored_value = GetValueAndReset();
-            button->SetColor(Get());
-        }
-        else
-        {
-            Set(stored_value);
-            button->SetColor(stored_value);
-        }
-    }
-protected:
-    virtual void LoadToWindow() override { }
-};
-
