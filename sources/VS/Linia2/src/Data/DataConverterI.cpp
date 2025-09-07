@@ -3,13 +3,21 @@
 #include "Data/Data.h"
 
 
+namespace DCI
+{
+
+}
+
+
+void DataConverterI::Init()
+{
+
+}
+
+
+
 float DataConverterI::Convert(int) const
 {
     return 0.0f;
 }
 
-
-float DataConverterU::Convert(int) const
-{
-    return 0.0f;
-}
