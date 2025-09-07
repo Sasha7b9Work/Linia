@@ -5,6 +5,8 @@
 // Здесь логика работы прибора (логика обмена с контроллером фактически)
 namespace IPPP
 {
+    void Init();
+
     void Start();
 
     void Stop();

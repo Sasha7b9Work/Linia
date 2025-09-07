@@ -8,9 +8,9 @@
 #include "MainWindow.h"
 #include "Windows/ConsoleRS232.h"
 #include "Tests/Tests.h"
-#include "DeviceTest/DeviceEmulator.h"
 #include "Communicator/GPIO/GPIO.h"
 #include "Display/PanelErrors.h"
+#include "IPPP/IPPP.h"
 
 
 wxIMPLEMENT_APP(Application);
@@ -60,9 +60,7 @@ bool Application::OnInit()
 
     frame->Show();
 
-    g_device = new DeviceEmulator();
-
-    g_device->Init();
+    IPPP::Init();
 
     timer.Start(10);
 
