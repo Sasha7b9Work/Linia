@@ -66,7 +66,9 @@ private:
     void ShowFieldsI(bool);
     void ShowFieldsU(bool);
 
-    TypeDSet::E GetTypeMeasure() const;
+    // Такое измерение сейчас выбрано чекбоксом
+    TypeDSet::E CurrentMeasure() const;
 
+    // Выводит значение в стандартизированном для данного окна виде
     wxString GetStringValue(double) const;
 };
