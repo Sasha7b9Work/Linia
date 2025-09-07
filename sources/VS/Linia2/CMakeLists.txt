@@ -87,10 +87,19 @@ file(GLOB SOFTTESTS                     src/SoftTests/*.*)
 file(GLOB STORAGE                       src/Storage/*.*)
 file(GLOB UTILS                         src/Utils/*.*)
 file(GLOB WINDOWS                       src/Windows/*.*)
+
+if(WIN32)                                                           # Эти заглушки включаем для Windows
 file(GLOB PLUGS_ARM64                   arm64_plugs/*.*
                                         arm64_plugs/linux/spi/*.*)
 file(GLOB PLUGS_LINUX                   linux_plugs/*.*
                                         linux_plugs/sys/*.*)
+else()
+    if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
+    else()                                                          # Эти заглушки включаем для Ubuntu x64
+file(GLOB PLUGS_ARM64                   arm64_plugs/*.*
+                                        arm64_plugs/linux/spi/*.*)
+    endif()
+endif()
 
 source_group(doc                                  FILES ${DOC})
 source_group(Resources                            FILES ${RESOURCES})
