@@ -2,6 +2,13 @@
 #pragma once
 
 
+/*
+
+    1. В таблице коэффициентов нету источника TypeDSet
+
+*/
+
+
 class Application : public wxApp
 {
 public:
