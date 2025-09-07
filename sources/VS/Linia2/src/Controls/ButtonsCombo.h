@@ -1,12 +1,9 @@
 ﻿// 2025/8/9 11:41:23 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/Buttons.h"
-#include "Controls/Controls.h"
 
 
-// Кнопка с рисунком, по нажатию на которую открывается окно с другими выборами
-
-
+// Кнопка с рисунком на ней
 class DrawingButton : public wxButton
 {
 public:
@@ -20,6 +17,7 @@ private:
 };
 
 
+// Кнопка с рисунком, по нажатию на которую открывается окно с другими выборами
 class ButtonsCombo : public DrawingButton
 {
     friend class ButtonPopup;
@@ -85,6 +83,7 @@ private:
 };
 
 
+// Кнопка выбора диапазона
 class ButtonsComboRange : public ButtonsCombo
 {
 public:
@@ -93,6 +92,4 @@ public:
         const wxArrayString &labels,
         const wxArrayString &tooltips,
         const wxString &name);
-
-private:
 };

@@ -2,7 +2,6 @@
 #pragma once
 #include "Controls/Painter.h"
 #include "Controls/Bitmap.h"
-#include "Controls/Controls.h"
 
 
 class ButtonBitmap : public wxBitmapButton
@@ -40,6 +39,7 @@ private:
 };
 
 
+// Событие от кнопки ButtonBitmapChoice
 class ButtonBitmapChoiceEvent : public wxCommandEvent
 {
 public:
