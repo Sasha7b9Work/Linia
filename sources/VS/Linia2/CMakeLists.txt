@@ -73,7 +73,7 @@ file(GLOB DEVICE                        src/Device/*.*)
 file(GLOB DEVICETEST                    src/DeviceTest/*.*)
 file(GLOB DISPLAY                       src/Display/*.*)
 file(GLOB IPPP                          src/IPPP/*.*)
-file(GLOB IPPP_TESTS                     src/IPPP/Tests/*.*)
+file(GLOB IPPP_TESTS                    src/IPPP/Tests/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
 file(GLOB PANELS_PANEL3                 src/Panels/Panel03_Config/*.*)
 file(GLOB PANELS_PANEL3_SHCEME          src/Panels/Panel03_Config/PanelScheme/*.*)
@@ -89,14 +89,14 @@ file(GLOB UTILS                         src/Utils/*.*)
 file(GLOB WINDOWS                       src/Windows/*.*)
 
 if(WIN32)                                                           # Эти заглушки включаем для Windows
-file(GLOB PLUGS_ARM64                   arm64_plugs/*.*
+    file(GLOB PLUGS_ARM64               arm64_plugs/*.*
                                         arm64_plugs/linux/spi/*.*)
-file(GLOB PLUGS_LINUX                   linux_plugs/*.*
+    file(GLOB PLUGS_LINUX               linux_plugs/*.*
                                         linux_plugs/sys/*.*)
 else()
     if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
     else()                                                          # Эти заглушки включаем для Ubuntu x64
-file(GLOB PLUGS_ARM64                   arm64_plugs/*.*
+        file(GLOB PLUGS_ARM64           arm64_plugs/*.*
                                         arm64_plugs/linux/spi/*.*)
     endif()
 endif()
