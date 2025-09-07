@@ -55,10 +55,10 @@ private:
     void OnEventCombobox(wxCommandEvent &);
 
     // Включить поля смещений
-    void FillOffsets(DSet::Type::E, bool show_I);
+    void FillOffsets(TypeDSet::E, bool show_I);
 
     // Включить поля коэффициентов
-    void FillK(DSet::Type::E, bool show_I);
+    void FillK(TypeDSet::E, bool show_I);
 
     // Заполнить поля в соответствии с текущими установками
     void FillFields();
@@ -66,7 +66,7 @@ private:
     void ShowFieldsI(bool);
     void ShowFieldsU(bool);
 
-    DSet::Type::E GetTypeMeasure() const;
+    TypeDSet::E GetTypeMeasure() const;
 
     wxString GetStringValue(double) const;
 };

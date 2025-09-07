@@ -2,27 +2,24 @@
 #pragma once
 
 
-namespace DSet
+struct TypeDSet
 {
-    struct Type
+    enum E
     {
-        enum E
-        {
-            ChanC_Meas,
-            ChanB_Meas,
-            ChanB_Source,
-            ChanB_Limit,
-            ChanS_Meas,
-            ChanS_Source,
-            ChanS_Limit,
-            Count
-        };
-
-        E value;
-
-        Type(E v) : value(v) {}
+        ChanC_Meas,
+        ChanB_Meas,
+        ChanB_Source,
+        ChanB_Limit,
+        ChanS_Meas,
+        ChanS_Source,
+        ChanS_Limit,
+        Count
     };
-}
+
+    E value;
+
+    TypeDSet(E v) : value(v) { }
+};
 
 
 struct RowRange
@@ -34,7 +31,7 @@ struct RowRange
         Count
     };
 
-    static E ForType(DSet::Type::E);
+    static E ForType(TypeDSet::E);
 };
 
 
@@ -93,10 +90,10 @@ struct RangeI
         value = (E)(value + 1);
     }
 
-    static E Min(DSet::Type::E);
-    static E Max(DSet::Type::E);
+    static E Min(TypeDSet::E);
+    static E Max(TypeDSet::E);
 
-    static void FillArrayStrings(wxArrayString &, DSet::Type::E, bool step);
+    static void FillArrayStrings(wxArrayString &, TypeDSet::E, bool step);
 };
 
 
@@ -159,10 +156,10 @@ struct RangeU
         value = (E)(value + 1);
     }
 
-    static E Min(DSet::Type::E);
-    static E Max(DSet::Type::E);
+    static E Min(TypeDSet::E);
+    static E Max(TypeDSet::E);
 
-    static void FillArrayStrings(wxArrayString &, DSet::Type::E, bool step);
+    static void FillArrayStrings(wxArrayString &, TypeDSet::E, bool step);
 };
 
 
@@ -173,11 +170,12 @@ struct CalK
 };
 
 
+// Здесь калибровочные коэффициенты
 namespace DSet
 {
-    const CalK &Get(Type::E, RangeI::E);
-    const CalK &Get(Type::E, RangeU::E);
+    const CalK &Get(TypeDSet::E, RangeI::E);
+    const CalK &Get(TypeDSet::E, RangeU::E);
 
-    void Set(Type::E, RangeI::E, const CalK &);
-    void Set(Type::E, RangeU::E, const CalK &);
+    void Set(TypeDSet::E, RangeI::E, const CalK &);
+    void Set(TypeDSet::E, RangeU::E, const CalK &);
 }

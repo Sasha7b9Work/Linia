@@ -85,10 +85,10 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
         wxArrayString names;
         int width = 85;
 
-        RangeU::FillArrayStrings(names, DSet::Type::ChanC_Meas, false);
+        RangeU::FillArrayStrings(names, TypeDSet::ChanC_Meas, false);
         comboMeasVoltage = new ButtonsComboRange(boxMeter, "Uc", SD::XY0(), width, names, names, "comboVoltage");
 
-        RangeI::FillArrayStrings(names, DSet::Type::ChanC_Meas, false);
+        RangeI::FillArrayStrings(names, TypeDSet::ChanC_Meas, false);
         comboMeasCurrent = new ButtonsComboRange(boxMeter, "Ic", { SD::XY0().x + PanelConfig::WIDTH_COMBO - width, SD::XY0().y }, width, names, names, "comboCurrent");
     }
 

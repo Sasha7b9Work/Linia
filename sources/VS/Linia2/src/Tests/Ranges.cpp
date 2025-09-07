@@ -5,8 +5,8 @@
 
 struct DSettings
 {
-    CalK calI[DSet::Type::Count][RangeI::Count];
-    CalK calU[DSet::Type::Count][RangeU::Count];
+    CalK calI[TypeDSet::Count][RangeI::Count];
+    CalK calU[TypeDSet::Count][RangeU::Count];
 };
 
 
@@ -744,33 +744,33 @@ static DSettings dset =
 };
 
 
-const CalK &DSet::Get(Type::E type, RangeI::E range)
+const CalK &DSet::Get(TypeDSet::E type, RangeI::E range)
 {
     return dset.calI[type][range];
 }
 
 
-const CalK &DSet::Get(Type::E type, RangeU::E range)
+const CalK &DSet::Get(TypeDSet::E type, RangeU::E range)
 {
     return dset.calU[type][range];
 }
 
 
-void DSet::Set(Type::E type, RangeI::E range, const CalK &cal)
+void DSet::Set(TypeDSet::E type, RangeI::E range, const CalK &cal)
 {
     dset.calI[type][range] = cal;
 }
 
 
-void DSet::Set(Type::E type, RangeU::E range, const CalK &cal)
+void DSet::Set(TypeDSet::E type, RangeU::E range, const CalK &cal)
 {
     dset.calU[type][range] = cal;
 }
 
 
-RangeI::E RangeI::Min(DSet::Type::E type)
+RangeI::E RangeI::Min(TypeDSet::E type)
 {
-    static const RangeI::E min[DSet::Type::Count] =
+    static const RangeI::E min[TypeDSet::Count] =
     {
         _10nA,
         _40_50nA,
@@ -785,9 +785,9 @@ RangeI::E RangeI::Min(DSet::Type::E type)
 }
 
 
-RangeI::E RangeI::Max(DSet::Type::E type)
+RangeI::E RangeI::Max(TypeDSet::E type)
 {
-    static const RangeI::E max[DSet::Type::Count] =
+    static const RangeI::E max[TypeDSet::Count] =
     {
         _40_50A,
         _10A,
@@ -802,9 +802,9 @@ RangeI::E RangeI::Max(DSet::Type::E type)
 }
 
 
-RangeU::E RangeU::Min(DSet::Type::E type)
+RangeU::E RangeU::Min(TypeDSet::E type)
 {
-    static const RangeU::E min[DSet::Type::Count] =
+    static const RangeU::E min[TypeDSet::Count] =
     {
         _400_500mV,
         _1V,
@@ -819,9 +819,9 @@ RangeU::E RangeU::Min(DSet::Type::E type)
 }
 
 
-RangeU::E RangeU::Max(DSet::Type::E type)
+RangeU::E RangeU::Max(TypeDSet::E type)
 {
-    static const RangeU::E max[DSet::Type::Count] =
+    static const RangeU::E max[TypeDSet::Count] =
     {
         _2kV,
         _40_50V,
@@ -836,7 +836,7 @@ RangeU::E RangeU::Max(DSet::Type::E type)
 }
 
 
-void RangeI::FillArrayStrings(wxArrayString &arr, DSet::Type::E type, bool steps)
+void RangeI::FillArrayStrings(wxArrayString &arr, TypeDSet::E type, bool steps)
 {
     arr.clear();
     for (int i = RangeI::Min(type); i <= RangeI::Max(type); i++)
@@ -853,7 +853,7 @@ void RangeI::FillArrayStrings(wxArrayString &arr, DSet::Type::E type, bool steps
 }
 
 
-void RangeU::FillArrayStrings(wxArrayString &arr, DSet::Type::E type, bool steps)
+void RangeU::FillArrayStrings(wxArrayString &arr, TypeDSet::E type, bool steps)
 {
     arr.clear();
 
@@ -871,9 +871,9 @@ void RangeU::FillArrayStrings(wxArrayString &arr, DSet::Type::E type, bool steps
 }
 
 
-RowRange::E RowRange::ForType(DSet::Type::E type)
+RowRange::E RowRange::ForType(TypeDSet::E type)
 {
-    static const E row[DSet::Type::Count] =
+    static const E row[TypeDSet::Count] =
     {
         _125,
         _125,

@@ -3,25 +3,13 @@
 #include "Data/Data.h"
 
 
-float DataConverterI::Convert(uint16)
+float DataConverterI::Convert(int) const
 {
     return 0.0f;
 }
 
 
-float DataConverterI::Convert(uint)
-{
-    return 0.0f;
-}
-
-
-float DataConverterU::Convert(uint16)
-{
-    return 0.0f;
-}
-
-
-float DataConverterU::Convert(uint)
+float DataConverterU::Convert(int) const
 {
     return 0.0f;
 }

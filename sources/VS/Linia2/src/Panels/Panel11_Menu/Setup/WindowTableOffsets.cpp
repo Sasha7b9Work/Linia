@@ -226,7 +226,7 @@ void WindowTableOffsets::FillFields()
 }
 
 
-void WindowTableOffsets::FillOffsets(DSet::Type::E type, bool show_I)
+void WindowTableOffsets::FillOffsets(TypeDSet::E type, bool show_I)
 {
     if (show_I)
     {
@@ -249,7 +249,7 @@ void WindowTableOffsets::FillOffsets(DSet::Type::E type, bool show_I)
 }
 
 
-void WindowTableOffsets::FillK(DSet::Type::E type, bool show_I)
+void WindowTableOffsets::FillK(TypeDSet::E type, bool show_I)
 {
     if (show_I)
     {
@@ -278,9 +278,9 @@ wxString WindowTableOffsets::GetStringValue(double value) const
 }
 
 
-DSet::Type::E WindowTableOffsets::GetTypeMeasure() const
+TypeDSet::E WindowTableOffsets::GetTypeMeasure() const
 {
-    const wxRadioButton *buttons[DSet::Type::Count][2] =
+    const wxRadioButton *buttons[TypeDSet::Count][2] =
     {
         { rbChanC_MeasI,   rbChanC_MeasU },
         { rbChanB_MeasI,   rbChanB_MeasU },
@@ -291,7 +291,7 @@ DSet::Type::E WindowTableOffsets::GetTypeMeasure() const
         { rbChanS_LimitI,  rbChanS_LimitU }
     };
 
-    for (int i = 0; i < DSet::Type::Count; i++)
+    for (int i = 0; i < TypeDSet::Count; i++)
     {
         const wxRadioButton *rb0 = buttons[i][0];
         const wxRadioButton *rb1 = buttons[i][1];
@@ -299,13 +299,13 @@ DSet::Type::E WindowTableOffsets::GetTypeMeasure() const
         if (rb0->GetValue() ||
             rb1->GetValue())
         {
-            return (DSet::Type::E)i;
+            return (TypeDSet::E)i;
         }
     }
 
     LOG_ERROR("Can not find type measure");
 
-    return DSet::Type::Count;
+    return TypeDSet::Count;
 }
 
 
@@ -313,7 +313,7 @@ void WindowTableOffsets::ShowFieldsI(bool show)
 {
     using namespace Math;
 
-    DSet::Type::E type = GetTypeMeasure();
+    TypeDSet::E type = GetTypeMeasure();
 
     for (auto &field : fields_I)
     {
@@ -322,7 +322,7 @@ void WindowTableOffsets::ShowFieldsI(bool show)
 
         if (show)
         {
-            field.name->SetLabel(RangeI((RangeI::E)field.range).Name(GetTypeMeasure() == DSet::Type::ChanC_Meas ? RowRange::_125 : RowRange::_124));
+            field.name->SetLabel(RangeI((RangeI::E)field.range).Name(GetTypeMeasure() == TypeDSet::ChanC_Meas ? RowRange::_125 : RowRange::_124));
 
             bool condition = InRange<int>(field.range, RangeI::Min(type), RangeI::Max(type));
 
@@ -342,7 +342,7 @@ void WindowTableOffsets::ShowFieldsU(bool show)
 {
     using namespace Math;
 
-    DSet::Type::E type = GetTypeMeasure();
+    TypeDSet::E type = GetTypeMeasure();
 
     for (auto &field : fields_U)
     {
@@ -351,7 +351,7 @@ void WindowTableOffsets::ShowFieldsU(bool show)
 
         if (show)
         {
-            field.name->SetLabel(RangeU((RangeU::E)field.range).Name(GetTypeMeasure() == DSet::Type::ChanC_Meas ? RowRange::_125 : RowRange::_124));
+            field.name->SetLabel(RangeU((RangeU::E)field.range).Name(GetTypeMeasure() == TypeDSet::ChanC_Meas ? RowRange::_125 : RowRange::_124));
 
             bool condition = InRange<int>(field.range, RangeU::Min(type), RangeU::Max(type));
 

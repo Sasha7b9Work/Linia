@@ -3,31 +3,33 @@
 #include "Tests/Ranges.h"
 
 
+// Конвертирует принятое с АЦП значение прямо в амперы
 class DataConverterI
 {
 public:
 
-    DataConverterI(RangeI::E r) : range{r} { }
+    DataConverterI(TypeDSet::E t, RangeI::E r) : range{ r }, type_set{ t } { }
 
-    float Convert(uint16);
-    float Convert(uint);
+    float Convert(int) const;
 
 private:
 
-    RangeI::E range;
+    RangeI::E     range;
+    TypeDSet::E type_set;
 };
 
 
+// Конвертирует принятое с АЦП значение прямо в вольты
 class DataConverterU
 {
 public:
 
-    DataConverterU(RangeU::E r) : range{r} { }
+    DataConverterU(TypeDSet::E t, RangeU::E r) : range{ r }, type_set{ t } { }
 
-    float Convert(uint16);
-    float Convert(uint);
+    float Convert(int) const;
 
 private:
 
-    RangeU::E range;
+    RangeU::E     range;
+    TypeDSet::E type_set;
 };
