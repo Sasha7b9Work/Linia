@@ -10,7 +10,11 @@ public:
     DataConverter(TypeDSet::E t, RangeI::E r) : type_set{ t }, cal{ DSet::Get(type_set, r) } { }
     DataConverter(TypeDSet::E t, RangeU::E r) : type_set{ t }, cal{ DSet::Get(type_set, r) } { }
 
+    // Конвертирет отсчёт АЦП в абсолютную величину
     double Convert(int adc) const;
+
+    // Конвертирует абсолютную величину в отсчёт АЦП
+    int InverseConvert(double abs) const;
 
 protected:
 

@@ -9,3 +9,13 @@ double DataConverter::Convert(int adc) const
 
     return (value + cal.offset) * cal.k;    // И применяем к нему коэффициенты
 }
+
+
+int DataConverter::InverseConvert(double abs) const
+{
+    double val1 = abs - cal.offset * cal.k;
+
+    double val2 = k * cal.k;
+
+    return (int)(val1 / val2);
+}
