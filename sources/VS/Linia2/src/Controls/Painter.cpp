@@ -157,22 +157,25 @@ PainterBMP::PainterBMP(wxWindow *parent, const wxPoint &position, const wxSize &
 {
     bitmap = Bitmap::Get(file_name);
 
-    if (alpha != wxNullColour)
+    if (bitmap.GetBitmap().IsOk())
     {
-        wxBitmap bmp = bitmap.GetBitmap();
-        if (bmp.IsOk())
+        if (alpha != wxNullColour)
         {
-            bmp.SetMask(new wxMask(bitmap.GetBitmap(), alpha));
-            bitmap.GetBitmap() = bmp;
+            wxBitmap bmp = bitmap.GetBitmap();
+            if (bmp.IsOk())
+            {
+                bmp.SetMask(new wxMask(bitmap.GetBitmap(), alpha));
+                bitmap.GetBitmap() = bmp;
+            }
         }
-    }
 
-    if (size == wxDefaultSize)
-    {
-        wxPanel::SetSize(bitmap.GetBitmap().GetSize());
-    }
+        if (size == wxDefaultSize)
+        {
+            wxPanel::SetSize(bitmap.GetBitmap().GetSize());
+        }
 
-    Bind(wxEVT_PAINT, &PainterBMP::OnEventPaint, this);
+        Bind(wxEVT_PAINT, &PainterBMP::OnEventPaint, this);
+    }
 
     wxPanel::Refresh();
 }
