@@ -539,6 +539,44 @@ static DSettings dset =
             { 0.0, 1.0 },
             { 0.0, 1.0 },
             { 0.0, 1.0 }
+        },
+        {
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 },
+            { 0.0, 1.0 }
         }
     },
     {
@@ -866,8 +904,15 @@ void DSet::Set(TypeDSet::E type, RangeU::E range, const CalK &cal)
 
 RangeI::E RangeI::Min(TypeDSet::E type)
 {
-    static const RangeI::E min[TypeDSet::Count] =
+    struct StructMin
     {
+        StructMin(RangeI::E r) : range{r} { }
+        RangeI::E range;
+    };
+
+    static const StructMin min[TypeDSet::Count] =
+    {
+        _10nA,
         _10nA,
         _40_50nA,
         _40_50nA,
@@ -877,14 +922,21 @@ RangeI::E RangeI::Min(TypeDSet::E type)
         _40_50nA
     };
 
-    return min[type];
+    return min[type].range;
 }
 
 
 RangeI::E RangeI::Max(TypeDSet::E type)
 {
-    static const RangeI::E max[TypeDSet::Count] =
+    struct StructMax
     {
+        StructMax(RangeI::E r) : range{r} { }
+        RangeI::E range;
+    };
+
+    static const StructMax max[TypeDSet::Count] =
+    {
+        _40_50A,
         _40_50A,
         _10A,
         _10A,
@@ -894,14 +946,21 @@ RangeI::E RangeI::Max(TypeDSet::E type)
         _10mA
     };
 
-    return max[type];
+    return max[type].range;
 }
 
 
 RangeU::E RangeU::Min(TypeDSet::E type)
 {
-    static const RangeU::E min[TypeDSet::Count] =
+    struct StructMin
     {
+        StructMin(RangeU::E r) : range{r} { }
+        RangeU::E range;
+    };
+
+    static const StructMin min[TypeDSet::Count] =
+    {
+        _400_500mV,
         _400_500mV,
         _1V,
         _1V,
@@ -911,14 +970,21 @@ RangeU::E RangeU::Min(TypeDSet::E type)
         _1V
     };
 
-    return min[type];
+    return min[type].range;
 }
 
 
 RangeU::E RangeU::Max(TypeDSet::E type)
 {
-    static const RangeU::E max[TypeDSet::Count] =
+    struct StructMax
     {
+        StructMax(RangeU::E r) : range{r} { }
+        RangeU::E range;
+    };
+
+    static const StructMax max[TypeDSet::Count] =
+    {
+        _2kV,
         _2kV,
         _40_50V,
         _40_50V,
@@ -928,7 +994,7 @@ RangeU::E RangeU::Max(TypeDSet::E type)
         _40_50V
     };
 
-    return max[type];
+    return max[type].range;
 }
 
 
@@ -969,8 +1035,15 @@ void RangeU::FillArrayStrings(wxArrayString &arr, TypeDSet::E type, bool steps)
 
 RowRange::E RowRange::ForType(TypeDSet::E type)
 {
-    static const E row[TypeDSet::Count] =
+    struct StructRow
     {
+        StructRow(E r) : row{r} { }
+        E row;
+    };
+
+    static const StructRow row[TypeDSet::Count] =
+    {
+        _125,
         _125,
         _125,
         _124,
@@ -980,5 +1053,5 @@ RowRange::E RowRange::ForType(TypeDSet::E type)
         _124
     };
 
-    return row[type];
+    return row[type].row;
 }

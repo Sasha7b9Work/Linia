@@ -15,10 +15,17 @@ DataConverterI::DataConverterI(TypeDSet::E t, RangeI::E r) :
     DataConverter(t, r),
     range{ r }
 {
+    struct StructADC
+    {
+        StructADC(int v) : value{v} { }
+        int value;
+    };
+
     // Это значение для данного измерения либо источника приходит с АЦП при максимально возможном значении на входе.
     // Ему соответствует минимальное значение -max_value_ADC
-    static const int max_ADC[TypeDSet::Count] =
+    static const StructADC max_ADC[TypeDSet::Count] =
     {
+        ((1 << 16) - 1),
         ((1 << 16) - 1),
         ((1 << 16) - 1),
         ((1 << 16) - 1),
@@ -28,7 +35,7 @@ DataConverterI::DataConverterI(TypeDSet::E t, RangeI::E r) :
         ((1 << 16) - 1),
     };
 
-    k = range.MaxValueAbs(RowRange::ForType(type_set)) / (double)max_ADC[type_set];
+    k = range.MaxValueAbs(RowRange::ForType(type_set)) / (double)max_ADC[type_set].value;
 }
 
 
@@ -36,10 +43,17 @@ DataConverterU::DataConverterU(TypeDSet::E t, RangeU::E r) :
     DataConverter(t, r),
     range{ r }
 {
+    struct StructADC
+    {
+        StructADC(int v) : value{v} { }
+        int value;
+    };
+
     // Это значение для данного измерения либо источника приходит с АЦП при максимально возможном значении на входе.
     // Ему соответствует минимальное значение -max_value_ADC
-    static const int max_ADC[TypeDSet::Count] =
+    static const StructADC max_ADC[TypeDSet::Count] =
     {
+        ((1 << 16) - 1),
         ((1 << 16) - 1),
         ((1 << 16) - 1),
         ((1 << 16) - 1),
@@ -49,5 +63,5 @@ DataConverterU::DataConverterU(TypeDSet::E t, RangeU::E r) :
         ((1 << 16) - 1),
     };
 
-    k = range.MaxValueAbs(RowRange::ForType(type_set)) / (double)max_ADC[type_set];
+    k = range.MaxValueAbs(RowRange::ForType(type_set)) / (double)max_ADC[type_set].value;
 }

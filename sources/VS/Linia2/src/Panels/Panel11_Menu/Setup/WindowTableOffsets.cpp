@@ -280,8 +280,17 @@ wxString WindowTableOffsets::GetStringValue(double value) const
 
 TypeDSet::E WindowTableOffsets::GetTypeMeasure() const
 {
-    const wxRadioButton *buttons[TypeDSet::Count][2] =
+    struct StructButton
     {
+        StructButton(wxRadioButton *b0, wxRadioButton *b1) : rb0{b0}, rb1{b1} { }
+
+        wxRadioButton *rb0;
+        wxRadioButton *rb1;
+    };
+
+    static const StructButton buttons[TypeDSet::Count] =
+    {
+        { rbChanC_MeasI,   rbChanC_MeasU },
         { rbChanC_MeasI,   rbChanC_MeasU },
         { rbChanB_MeasI,   rbChanB_MeasU },
         { rbChanB_SourceI, rbChanB_SourceU },
@@ -293,8 +302,8 @@ TypeDSet::E WindowTableOffsets::GetTypeMeasure() const
 
     for (int i = 0; i < TypeDSet::Count; i++)
     {
-        const wxRadioButton *rb0 = buttons[i][0];
-        const wxRadioButton *rb1 = buttons[i][1];
+        const wxRadioButton *rb0 = buttons[i].rb0;
+        const wxRadioButton *rb1 = buttons[i].rb1;
 
         if (rb0->GetValue() ||
             rb1->GetValue())

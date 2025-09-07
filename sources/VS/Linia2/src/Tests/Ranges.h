@@ -7,6 +7,7 @@ struct TypeDSet
     enum E
     {
         Meas_C,
+        Source_C,
         Meas_B,
         Source_B,
         Limit_B,
