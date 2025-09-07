@@ -25,7 +25,6 @@ namespace SET
         extern Value<bool>      maximized_list;
         extern Value<bool>      maximized_console;
         extern Value<int>       current_page_notebook;
-        extern ValueCheckButton serial_port_auto_find;
         extern Value<int>       serial_port_num;             // Нумерация начинается с нуля. 0 == COM1
         extern Value<bool>      debug_mode;
     }

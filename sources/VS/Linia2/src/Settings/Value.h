@@ -214,48 +214,6 @@ private:
 };
 
 
-class ValueCheckButton : public Value<bool>
-{
-public:
-    ValueCheckButton(pchar _key, bool value) : Value<bool>(_key, value, nullptr, 0)
-    {
-    }
-    virtual void SetFromControl() override
-    {
-        Value<bool>::Set(GF::FindCheckButton(window, id)->GetValue());
-    }
-    // Посылает событие данного контрола на всё ГУИ
-    void SendEventToGUI(wxWindow *parent = nullptr, int _id = 0)
-    {
-        if (parent == nullptr)
-        {
-            parent = window;
-            _id = id;
-        }
-
-        GF::SendCommandEvent(parent, _id, wxEVT_TOGGLEBUTTON, Get());
-    }
-    void Set(const bool &val)
-    {
-        Value<bool>::Set(val);
-    }
-    virtual void ResetToFactory(bool factory) override
-    {
-        Value<bool>::ResetToFactory(factory);
-
-        SendEventToGUI();
-    }
-protected:
-    virtual void LoadToWindow() override
-    {
-        if (window)
-        {
-            GF::FindCheckButton(window, id)->SetValue(Get());
-        }
-    }
-};
-
-
 // Значение из TextCtrl
 class ValueTextCtrl : public Value<int>
 {

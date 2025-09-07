@@ -69,11 +69,9 @@ bool ComPort::TryConnect()
 {
     for (int i = 0; i < NUM_PORTS; i++)
     {
-        bool find_port = SET::GUI::serial_port_auto_find.Get();
-
         bool current_port = (i == SET::GUI::serial_port_num.Get());
 
-        if (find_port || current_port)
+        if (current_port)
         {
             if (RS232_OpenComport(i, 115200, "8N1", 0) == 0)
             {

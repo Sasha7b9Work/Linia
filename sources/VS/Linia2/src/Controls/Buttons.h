@@ -29,33 +29,6 @@ private:
 };
 
 
-class CheckButton : public wxPanel
-{
-public:
-
-    CheckButton(wxWindow *, const wxString &, const wxPoint &, int width);
-
-    bool GetValue() const;
-
-    void SetValue(bool);
-
-    void SetToolTip(const wxString &);
-
-private:
-
-    wxToggleButton *button;
-    wxCheckBox *ch_box;
-
-    static const int delta_id = 0;
-
-    void OnEventCheckBox(wxCommandEvent &);
-    void OnEventToggleButton(wxCommandEvent &);
-
-    // Послать событие переключения кнопки
-    void SendEvent();
-};
-
-
 class ButtonBitmap : public wxBitmapButton
 {
 public:

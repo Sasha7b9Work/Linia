@@ -16,7 +16,6 @@ namespace SET
         Value<bool>      maximized_list("gui_maximized_list", false);
         Value<bool>      maximized_console("gui_maximized_console", false);
         Value<int>       current_page_notebook("gui_current_page_notebook", 0);
-        ValueCheckButton serial_port_auto_find("serial_port_auto_find", true);
         Value<int>       serial_port_num("serial_port_num", 0);
         Value<bool>      debug_mode("debug_mode", false);
     }
