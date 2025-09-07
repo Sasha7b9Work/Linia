@@ -10,11 +10,11 @@ public:
 
     DataConverterI(TypeDSet::E t, RangeI::E r) : range{ r }, type_set{ t } { }
 
-    float Convert(int) const;
+    double Convert(int) const;
 
 private:
 
-    RangeI::E     range;
+    RangeI      range;
     TypeDSet::E type_set;
 };
 
@@ -24,12 +24,14 @@ class DataConverterU
 {
 public:
 
-    DataConverterU(TypeDSet::E t, RangeU::E r) : range{ r }, type_set{ t } { }
+    DataConverterU(TypeDSet::E, RangeU::E);
 
-    float Convert(int) const;
+    double Convert(int) const;
 
 private:
 
-    RangeU::E     range;
+    RangeU      range;
     TypeDSet::E type_set;
+    double      k;          // Коэффициент наклона. Рассчитывается в конструкторе
+    const CalK &cal;        // Коэффициенты калибровки устанавливаются в конструкторе
 };

@@ -85,7 +85,7 @@ struct RangeI
     pchar Name(RowRange::E) const;
     wxString NameStep(RowRange::E) const;
     // Максимально возможное значение на данном диапазоне
-    float MaxValueAbs(RowRange::E) const;
+    double MaxValueAbs(RowRange::E) const;
 
     void operator++()
     {
@@ -153,7 +153,7 @@ struct RangeU
     pchar Name(RowRange::E) const;
     wxString NameStep(RowRange::E) const;
     // Максимально возможное значение на данном диапазоне
-    float MaxValueAbs(RowRange::E) const;
+    double MaxValueAbs(RowRange::E) const;
 
     void operator++()
     {
