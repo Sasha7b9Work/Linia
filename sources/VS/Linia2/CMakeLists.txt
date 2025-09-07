@@ -72,6 +72,7 @@ file(GLOB DATA                          src/Data/*.*)
 file(GLOB DEVICE                        src/Device/*.*)
 file(GLOB DEVICETEST                    src/DeviceTest/*.*)
 file(GLOB DISPLAY                       src/Display/*.*)
+file(GLOB IPPP                          src/IPPP/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
 file(GLOB PANELS_PANEL3                 src/Panels/Panel03_Config/*.*)
 file(GLOB PANELS_PANEL3_SHCEME          src/Panels/Panel03_Config/PanelScheme/*.*)
@@ -103,6 +104,7 @@ source_group(Data                                 FILES ${DATA})
 source_group(Device                               FILES ${DEVICE})
 source_group(DeviceTest                           FILES ${DEVICETEST})
 source_group(Display                              FILES ${DISPLAY})
+source_group(IPPP                                 FILES ${IPPP})
 source_group(Panels                               FILES ${PANELS})
 source_group(Panels/Panel03_Config                FILES ${PANELS_PANEL3})
 source_group(Panels/Panel03_Config/PanelScheme    FILES ${PANELS_PANEL3_SHCEME})
@@ -133,6 +135,7 @@ add_executable(${PROJECT_NAME}
     ${DEVICE}
     ${DEVICETEST}
     ${DISPLAY}
+    ${IPPP}
     ${PANELS}
     ${PANELS_PANEL3}
     ${PANELS_PANEL3_SHCEME}
@@ -228,6 +231,3 @@ else()
     target_include_directories(${PROJECT_NAME} PRIVATE ${GTK3_INCLUDE_DIRS})
     target_compile_options(${PROJECT_NAME} PRIVATE ${GTK3_CFLAGS_OTHER})
 endif()
-
-
-
