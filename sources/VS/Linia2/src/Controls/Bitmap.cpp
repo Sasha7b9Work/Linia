@@ -31,12 +31,14 @@ Bitmap::Bitmap(const wxString &file_bitmap)
     {
         wxIcon icon;
 
-        if (filename.FileExists() && !icon.LoadFile(path, wxBITMAP_TYPE_ICO))
+        if (filename.FileExists() && icon.LoadFile(path, wxBITMAP_TYPE_ICO))
+        {
+            bitmap.CopyFromIcon(icon);
+        }
+        else
         {
             LOG_ERROR("Не удалось загрузить файл изображения %s", file_bitmap.c_str().AsChar());
         }
-
-        bitmap.CopyFromIcon(icon);
     }
 }
 
