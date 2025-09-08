@@ -36,6 +36,11 @@ public:
         DAT_F3,
         FIFO_FULL,
         REQ_RD,
+//        FIFO_EMPTY,   Конт. 26
+//        KA,           11
+//        KB,           13
+//        ENB_PC,       27
+//        RDY,          40
         Count
     };
     explicit Pin(Type type) : type_(type)
@@ -87,6 +92,7 @@ extern PinIn pinDAT_F1;
 extern PinIn pinDAT_F2;
 extern PinIn pinDAT_F3;
 extern PinIn pinFIFO_FULL;
+extern PinIn pinFIFO_EMPTY;
 
 // Категория: выходные пины
 extern PinOut pinREQ_RD;
