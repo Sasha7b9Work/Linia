@@ -11,6 +11,6 @@ namespace IPPP
 
     void Stop();
 
-    // 
-    void ReadData(ModeMeas::E [4], int ranges[4], std::vector<)
+    // Читает четыре массива значений из ПЛИС
+    bool ReadData(std::vector<int> (&data)[4]);
 }
