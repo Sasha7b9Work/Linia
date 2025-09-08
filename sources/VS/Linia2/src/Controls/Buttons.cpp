@@ -7,9 +7,8 @@
 #include "Utils/SystemDepend.h"
 #include "Application.h"
 
+
 wxDEFINE_EVENT(EVT_BUTTON_BITMAP_CHOICE, ButtonBitmapChoiceEvent);
-
-
 
 
 ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &size, const wxString &file_bitmap, const wxString &name) :
