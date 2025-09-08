@@ -94,24 +94,6 @@ void TextCtrlNumbersLimits::LimitValue()
 }
 
 
-TextCtrlPassword::TextCtrlPassword(wxWindow *parent, int id, const wxPoint &position) : TextCtrlNumbers(parent, id, 0, position)
-{
-    wxSize size{ 97, TEXTCNTRL_HEIGHT };
-
-    wxTextCtrl::SetMinSize(size);
-    wxTextCtrl::SetMaxSize(size);
-    wxTextCtrl::SetSize(size);
-
-    wxTextCtrl::SetMaxLength(14);
-}
-
-
-void TextCtrlPassword::SetUInt64(uint64 value)
-{
-    SetLabelText(wxString::Format("%llu", value));
-}
-
-
 TextCtrlNumber::TextCtrlNumber(wxWindow *parent, int id, const wxString &text_val, const wxPoint &pos, const wxSize &size, int _min, int _max) :
     wxTextCtrl(parent, id, text_val, pos, size),
     min(_min),

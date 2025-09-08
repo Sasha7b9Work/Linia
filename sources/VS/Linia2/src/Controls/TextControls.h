@@ -35,16 +35,6 @@ protected:
 };
 
 
-class TextCtrlPassword : public TextCtrlNumbers
-{
-public:
-
-    TextCtrlPassword(wxWindow *parent, int id, const wxPoint &position = wxDefaultPosition);
-
-    void SetUInt64(uint64);
-};
-
-
 class TextCtrlNumber : public wxTextCtrl
 {
 public:
