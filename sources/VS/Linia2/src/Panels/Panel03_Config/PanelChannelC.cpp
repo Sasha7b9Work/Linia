@@ -5,7 +5,6 @@
 #include "Controls/SpinBox.h"
 #include "MainWindow.h"
 #include "Panels/Panel03_Config/Panel03_Config.h"
-#include "Controls/CustomComboBox.h"
 #include "IPPP/Tests/Ranges.h"
 #include "Controls/StaticBox.h"
 
