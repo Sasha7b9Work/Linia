@@ -3,38 +3,6 @@
 #include "Settings/Settings.h"
 
 
-class TextCtrlNumbers : public wxTextCtrl
-{
-public:
-
-    TextCtrlNumbers(wxWindow *parent, int id, int value, const wxPoint & = wxDefaultPosition, const wxSize & = wxDefaultSize);
-
-protected:
-
-    void OnEventChar(wxKeyEvent &);
-};
-
-
-class TextCtrlNumbersLimits : public TextCtrlNumbers
-{
-public:
-    TextCtrlNumbersLimits(wxWindow *parent, int id, int value, int min, int max, const wxPoint & = wxDefaultPosition, const wxSize & = wxDefaultSize);
-
-    // Ограничить значение в соответствии с установками
-    void LimitValue();
-
-private:
-    int min = 0;
-    int max = 0;
-
-    int Max() const;
-
-protected:
-
-    void OnEventChar(wxKeyEvent &);
-};
-
-
 class TextCtrlNumber : public wxTextCtrl
 {
 public:
