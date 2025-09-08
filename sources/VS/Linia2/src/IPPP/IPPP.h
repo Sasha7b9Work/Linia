@@ -10,4 +10,7 @@ namespace IPPP
     void Start();
 
     void Stop();
+
+    // 
+    void ReadData(ModeMeas::E [4], int ranges[4], std::vector<)
 }
