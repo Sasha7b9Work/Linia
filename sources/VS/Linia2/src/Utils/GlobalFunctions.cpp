@@ -173,6 +173,11 @@ wxString GF::DirForModFiles()
 
 bool GF::ApproxEqual(double a, double b)
 {
+    if (std::signbit(a) != std::signbit(b))
+    {
+        return false;
+    }
+
     a = std::abs(a);
     b = std::abs(b);
 
