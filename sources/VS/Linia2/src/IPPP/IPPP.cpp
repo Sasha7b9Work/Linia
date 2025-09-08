@@ -20,7 +20,7 @@ namespace IPPP
         }
 
         // Ожидать, пока счётчик counter увеличится до timeNextNS
-        void WatiFormNS(uint64 /*timeNextNS*/)
+        void WaitForNS(uint64 /*timeNextNS*/)
         {
 
         }
@@ -67,7 +67,7 @@ bool IPPP::ReadData(std::vector<int> (&data)[4])
 
     Timer timer;
 
-    uint64 time_next = 500;                 // В это время должен сработать следующий счётчик
+    uint64 time_next = 500;                 // Первый бит будем читать через 0.5 мкс после подачи сигнала REQ_RD
 
     pinREQ_RD.Set(false);                   // Сообщаем ПЛИС-ке, что будем читать данные
 
@@ -77,19 +77,19 @@ bool IPPP::ReadData(std::vector<int> (&data)[4])
     {
         int val[4] = { 0, 0, 0, 0 };
 
-        for (int i = 0; i < 18; i++)        // Читаем 18 бит числа
+        for (int i = 0; i < 18; i++)        // Читаем 18 бит каждого из четырёх значений АЦП
         {
-            timer.WatiFormNS(time_next);    // Ждём, пока передатчик выставит следующие четыре бита
+            timer.WaitForNS(time_next);     // Ждём, пока передатчик выставит следующие четыре бита
 
-            for (int num_bit = 0; num_bit < 4; num_bit++)
+            time_next += 1000;              // Следующие данные будем читать через 1 мкс
+
+            for (int bit = 0; bit < 4; bit++)
             {
-                bool bit = pins[num_bit]->Get();
+                val[bit] <<= 1;
 
-                val[num_bit] <<= 1;
-
-                if (bit)
+                if (pins[bit]->Get())
                 {
-                    val[num_bit] |= 1;
+                    val[bit] |= 1;
                 }
             }
         }
@@ -98,8 +98,6 @@ bool IPPP::ReadData(std::vector<int> (&data)[4])
         {
             data[i].push_back(val[i]);
         }
-
-        time_next += 1000;                  // Следующие данные будем читать через 1 мкс.
     }
 
     pinREQ_RD.Set(true);
