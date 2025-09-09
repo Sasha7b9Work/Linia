@@ -36,7 +36,7 @@ void Log::Init()
 
         fname.Normalize(wxPATH_NORM_ALL);
 
-        file_name = fname.GetFullName();
+        file_name = fname.GetFullPath();
 
         if (wxFile::Exists(file_name))
         {
