@@ -1,11 +1,15 @@
-// 2023/08/11 17:01:17 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2023/08/11 17:01:17 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Utils/Configurator.h"
 
 
+template void Config::ReadFontParameter<int>(const wxString &key, int &parameter);
+template void Config::ReadFontParameter<wxString>(const wxString &key, wxString &parameter);
+
+
 namespace Config
 {
-    wxConfigBase *base = nullptr;
+    static wxConfigBase *base = nullptr;
     static wxFileConfig *file = nullptr;
 }
 
@@ -224,4 +228,18 @@ void Config::WriteString(const wxString &key, const wxString &value)
 void Config::Write(const wxString &key, const wxString &value)
 {
     WriteString(key, value);
+}
+
+
+template <class T>
+void Config::ReadFontParameter(const wxString &key, T &parameter)
+{
+    if (base->Exists(key))
+    {
+        base->Read(key, &parameter);
+    }
+    else
+    {
+        base->Write(key, parameter);
+    }
 }

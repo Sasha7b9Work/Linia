@@ -146,7 +146,7 @@ void MainWindow::TuneFont()
 
     wxFontFamily family = wxFONTFAMILY_DEFAULT;
 
-    ReadFontParameter("font_family", (int &)family);
+    Config::ReadFontParameter("font_family", (int &)family);
 
     font.SetFamily(family);
 
@@ -154,7 +154,7 @@ void MainWindow::TuneFont()
 
     wxString face_name = "Segoe UI";
 
-    ReadFontParameter("font_face_name", face_name);
+    Config::ReadFontParameter("font_face_name", face_name);
 
     font.SetFaceName(face_name);
 
@@ -162,7 +162,7 @@ void MainWindow::TuneFont()
 
     wxFontStyle style = wxFONTSTYLE_NORMAL;
 
-    ReadFontParameter("font_style", (int &)style);
+    Config::ReadFontParameter("font_style", (int &)style);
 
     font.SetStyle(style);
 
@@ -170,7 +170,7 @@ void MainWindow::TuneFont()
 
     int point_size = 9;
 
-    ReadFontParameter("font_point_size", point_size);
+    Config::ReadFontParameter("font_point_size", point_size);
 
     font.SetPointSize(point_size);
 
@@ -178,8 +178,8 @@ void MainWindow::TuneFont()
 
     wxSize pixel_size = font.GetPixelSize();
 
-    ReadFontParameter("font_pixel_size_x", pixel_size.x);
-    ReadFontParameter("font_pixel_size_y", pixel_size.y);
+    Config::ReadFontParameter("font_pixel_size_x", pixel_size.x);
+    Config::ReadFontParameter("font_pixel_size_y", pixel_size.y);
 
     font.SetPixelSize(pixel_size);
 
@@ -193,27 +193,13 @@ void MainWindow::TuneFont()
 
     wxFontWeight weigth = wxFONTWEIGHT_NORMAL;
 
-    ReadFontParameter("font_weigth", (int &)weigth);
+    Config::ReadFontParameter("font_weigth", (int &)weigth);
 
     font.SetWeight(weigth);
 
     //------------------------------------------------------------
 
     wxWindow::SetFont(font);
-}
-
-
-template <class T>
-void MainWindow::ReadFontParameter(const wxString &key, T &parameter)
-{
-    if (Config::base->Exists(key))
-    {
-        Config::base->Read(key, &parameter);
-    }
-    else
-    {
-        Config::base->Write(key, parameter);
-    }
 }
 
 

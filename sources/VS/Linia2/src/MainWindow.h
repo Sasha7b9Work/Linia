@@ -54,6 +54,4 @@ private:
 
     // Настроить шрифт
     void TuneFont();
-
-    template <class T> void ReadFontParameter(const wxString &, T &);
 };
