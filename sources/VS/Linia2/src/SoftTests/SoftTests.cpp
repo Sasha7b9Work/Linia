@@ -3,8 +3,8 @@
 #include "SoftTests/SoftTests.h"
 
 
-void SoftTests::RunAll()
+bool SoftTests::RunAll()
 {
-    DataTests::RunAll();
+    return DataTests::RunAll();
 }
 

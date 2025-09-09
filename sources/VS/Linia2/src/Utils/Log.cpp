@@ -16,7 +16,7 @@ namespace Log
 
     static wxString file_name;
 
-    static wxTextFile log_file(file_name);
+    static wxTextFile log_file;
 
     static wxString GetTime();
 
@@ -32,7 +32,11 @@ void Log::Init()
     mutex.lock();
 
     {
-        file_name = wxGetCwd() + "/Linia.log";
+        wxFileName fname{ wxGetCwd() + "/Linia.log" };
+
+        fname.Normalize(wxPATH_NORM_ALL);
+
+        file_name = fname.GetFullName();
 
         if (wxFile::Exists(file_name))
         {
@@ -49,6 +53,12 @@ void Log::Init()
     mutex.unlock();
 
     LOG_WRITE("Start application %s", wxDateTime::Now().Format("%Y-%m-%d %H:%M:%S").c_str().AsChar());
+}
+
+
+wxString Log::FileName()
+{
+    return file_name;
 }
 
 

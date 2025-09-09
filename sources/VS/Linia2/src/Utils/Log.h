@@ -13,6 +13,8 @@ namespace Log
 {
     void Init();
 
+    wxString FileName();
+
     void DeInit();
 
     void FromDevice(char *);

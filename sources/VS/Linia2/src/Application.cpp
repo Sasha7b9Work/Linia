@@ -63,8 +63,6 @@ bool Application::OnInit()
 
     IPPP::Init();
 
-    SoftTests::RunAll();
-
     timer.Start(10);
 
     PanelErrors::self->AppendError(Error::_1, "Мало памяти");
@@ -72,6 +70,12 @@ bool Application::OnInit()
 
     PanelErrors::self->RemoveError(Error::_1, "Мало памяти");
     PanelErrors::self->RemoveError(Error::_2, "Много памяти");
+
+    if (!SoftTests::RunAll())
+    {
+        wxMessageBox(wxString::Format("Во время выполнения тестов произошли ошибки.\n"
+            "Дополнительная информация в файле %s.", Log::FileName().c_str().AsChar()), "Ошибка", wxOK | wxCENTRE | wxICON_ERROR);
+    }
 
     return true;
 }

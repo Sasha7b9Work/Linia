@@ -6,13 +6,13 @@
 #include "Utils/GlobalFunctions.h"
 
 
-void DataTests::RunAll()
+bool DataTests::RunAll()
 {
-    Converter();
+    return Converter();
 }
 
 
-void DataTests::Converter()
+bool DataTests::Converter()
 {
     bool correct = true;
 
@@ -65,4 +65,6 @@ void DataTests::Converter()
     {
         LOG_ERROR("DataTests::Converter() is fail");
     }
+
+    return correct;
 }

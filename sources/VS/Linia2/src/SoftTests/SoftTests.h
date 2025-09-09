@@ -5,14 +5,14 @@
 
 namespace SoftTests
 {
-    void RunAll();
+    bool RunAll();
 }
 
 
 // Тесты сущностей каталога Data
 namespace DataTests
 {
-    void RunAll();
+    bool RunAll();
 
-    void Converter();
+    bool Converter();
 }
