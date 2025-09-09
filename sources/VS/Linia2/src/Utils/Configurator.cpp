@@ -6,7 +6,25 @@
 namespace Config
 {
     wxConfigBase *base = nullptr;
-    wxFileConfig *file = nullptr;
+    static wxFileConfig *file = nullptr;
+}
+
+
+void Config::Init(const wxString &file_name_config)
+{
+    file = new wxFileConfig("", "", file_name_config);
+
+    SetFile("");
+}
+
+
+void Config::DeInit()
+{
+    wxConfigBase::Get(false)->Flush();
+
+    wxConfigBase::Set(nullptr);
+
+    SAFE_DELETE(file);
 }
 
 

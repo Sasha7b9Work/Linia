@@ -39,9 +39,7 @@ bool Application::OnInit()
 
     self = this;
 
-    Config::file = new wxFileConfig("", "", file_name_config);
-
-    Config::SetFile("");
+    Config::Init(file_name_config);
 
     SET::GUI::Load();
 
@@ -106,11 +104,7 @@ int Application::OnExit()
 {
     Log::DeInit();
 
-    wxConfigBase::Get(false)->Flush();
-
-    wxConfigBase::Set(nullptr);
-
-    SAFE_DELETE(Config::file);
+    Config::DeInit();
 
     return wxApp::OnExit();
 }
