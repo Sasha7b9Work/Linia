@@ -206,13 +206,13 @@ void MainWindow::TuneFont()
 template <class T>
 void MainWindow::ReadFontParameter(const wxString &key, T &parameter)
 {
-    if (g_config->Exists(key))
+    if (Config::base->Exists(key))
     {
-        g_config->Read(key, &parameter);
+        Config::base->Read(key, &parameter);
     }
     else
     {
-        g_config->Write(key, parameter);
+        Config::base->Write(key, parameter);
     }
 }
 

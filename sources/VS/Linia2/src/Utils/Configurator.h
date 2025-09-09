@@ -5,6 +5,8 @@
 
 namespace Config
 {
+    extern wxConfigBase *base;
+
     // Устанавливает файл с настройками.
     // Если "", будет установлен глобальный файл
     void SetFile(const wxString &file_path);

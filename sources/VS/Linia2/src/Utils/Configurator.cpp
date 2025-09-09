@@ -3,6 +3,12 @@
 #include "Utils/Configurator.h"
 
 
+namespace Config
+{
+    wxConfigBase *base = nullptr;
+}
+
+
 void Config::SetFile(const wxString &file_path)
 {
     static wxString current_file = "unimaginable name";
@@ -24,14 +30,14 @@ void Config::SetFile(const wxString &file_path)
     if (file_path.IsEmpty())
     {
         wxConfigBase::Set(g_file_config);
-        g_config = wxConfigBase::Get(false);
+        Config::base = wxConfigBase::Get(false);
     }
     else
     {
         config = new wxFileConfig("IPPP", "MNIPI", file_path);
 
         wxConfigBase::Set(config);
-        g_config = wxConfigBase::Get(false);
+        Config::base = wxConfigBase::Get(false);
     }
 }
 
@@ -40,7 +46,7 @@ int Config::ReadInt(const wxString &key, int def)
 {
     int result = def;
 
-    g_config->Read(key, &result, def);
+    Config::base->Read(key, &result, def);
 
     return result;
 }
@@ -72,7 +78,7 @@ uint64 Config::ReadUInt64(const wxString &key, uint64 def)
 {
     uint64 result = def;
 
-    g_config->Read(key, (int64 *)&result, (int64)def);
+    Config::base->Read(key, (int64 *)&result, (int64)def);
 
     return result;
 }
@@ -82,8 +88,8 @@ BitSet128 Config::ReadUInt128(const wxString &key, const BitSet128 &def)
 {
     BitSet128 result = def;
 
-    g_config->Read(key + "[0]", (int64 *)&result.word64[0], (int64)def.word64[0]);
-    g_config->Read(key + "[1]", (int64 *)&result.word64[1], (int64)def.word64[1]);
+    Config::base->Read(key + "[0]", (int64 *)&result.word64[0], (int64)def.word64[0]);
+    Config::base->Read(key + "[1]", (int64 *)&result.word64[1], (int64)def.word64[1]);
 
     return result;
 }
@@ -93,7 +99,7 @@ int64 Config::ReadInt64(const wxString &key, int64 def)
 {
     int64 result = def;
 
-    g_config->Read(key, &result, def);
+    Config::base->Read(key, &result, def);
 
     return result;
 }
@@ -103,7 +109,7 @@ bool Config::ReadBool(const wxString &key, bool def)
 {
     bool result = def;
 
-    g_config->Read(key, &result, def);
+    Config::base->Read(key, &result, def);
 
     return result;
 }
@@ -119,7 +125,7 @@ wxString Config::ReadString(const wxString &key, const wxString &def)
 {
     wxString result = def;
 
-    g_config->Read(key, &result, def);
+    Config::base->Read(key, &result, def);
 
     return result;
 }
@@ -133,7 +139,7 @@ wxString Config::Read(const wxString &key, const wxString &def)
 
 void Config::WriteInt(const wxString &key, int value)
 {
-    g_config->Write(key, value);
+    Config::base->Write(key, value);
 }
 
 
@@ -145,7 +151,7 @@ void Config::Write(const wxString &key, int value)
 
 void Config::WriteUint(const wxString &key, uint value)
 {
-    g_config->Write(key, value);
+    Config::base->Write(key, value);
 }
 
 
@@ -165,32 +171,32 @@ Color Config::Read(const wxString &key, const Color &def)
 
 void Config::WriteUInt64(const wxString &key, uint64 value)
 {
-    g_config->Write(key, (int64)value);
+    Config::base->Write(key, (int64)value);
 }
 
 
 void Config::WriteUInt128(const wxString &key, const BitSet128 &value)
 {
-    g_config->Write(key + "[0]", (int64)value.word64[0]);
-    g_config->Write(key + "[1]", (int64)value.word64[1]);
+    Config::base->Write(key + "[0]", (int64)value.word64[0]);
+    Config::base->Write(key + "[1]", (int64)value.word64[1]);
 }
 
 
 void Config::WriteInt64(const wxString &key, int64 value)
 {
-    g_config->Write(key, value);
+    Config::base->Write(key, value);
 }
 
 
 void Config::WriteBool(const wxString &key, bool value)
 {
-    g_config->Write(key, value);
+    Config::base->Write(key, value);
 }
 
 
 void Config::WriteString(const wxString &key, const wxString &value)
 {
-    g_config->Write(key, value);
+    Config::base->Write(key, value);
 }
 
 
