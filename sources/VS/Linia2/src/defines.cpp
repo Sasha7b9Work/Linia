@@ -4,8 +4,6 @@
 #include <cstring>
 
 
-wxFileConfig *g_file_config = nullptr;
-
 wxSize BUTTON_SIZE = { BUTTON_WIDTH, BUTTON_HEIGHT };
 wxSize BUTTON_SIZE_SMALL = { 100, BUTTON_HEIGHT };
 

@@ -39,7 +39,7 @@ bool Application::OnInit()
 
     self = this;
 
-    g_file_config = new wxFileConfig("", "", file_name_config);
+    Config::file = new wxFileConfig("", "", file_name_config);
 
     Config::SetFile("");
 
@@ -110,7 +110,7 @@ int Application::OnExit()
 
     wxConfigBase::Set(nullptr);
 
-    SAFE_DELETE(g_file_config);
+    SAFE_DELETE(Config::file);
 
     return wxApp::OnExit();
 }

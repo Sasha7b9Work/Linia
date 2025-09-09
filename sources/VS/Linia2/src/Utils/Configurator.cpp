@@ -6,6 +6,7 @@
 namespace Config
 {
     wxConfigBase *base = nullptr;
+    wxFileConfig *file = nullptr;
 }
 
 
@@ -29,7 +30,7 @@ void Config::SetFile(const wxString &file_path)
 
     if (file_path.IsEmpty())
     {
-        wxConfigBase::Set(g_file_config);
+        wxConfigBase::Set(file);
         Config::base = wxConfigBase::Get(false);
     }
     else

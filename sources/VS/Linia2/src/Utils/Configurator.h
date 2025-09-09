@@ -6,6 +6,7 @@
 namespace Config
 {
     extern wxConfigBase *base;
+    extern wxFileConfig *file;
 
     // Устанавливает файл с настройками.
     // Если "", будет установлен глобальный файл

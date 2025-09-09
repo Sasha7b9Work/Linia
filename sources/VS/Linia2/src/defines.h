@@ -2,8 +2,8 @@
 #pragma once
 
 
-#define VERSION_BUILD 173
-#define DATE_BUILD "2025-09-09 15:28:39"
+#define VERSION_BUILD 174
+#define DATE_BUILD "2025-09-09 15:29:53"
 
 
 #define WIN32_LEAN_AND_MEAN
@@ -58,9 +58,6 @@ typedef unsigned long long uint64;
 typedef signed long long   int64;
 typedef signed char        int8;
 
-
-
-extern wxFileConfig *g_file_config;
 
 static const int BUTTON_WIDTH = 165;
 static const int BUTTON_HEIGHT = 25;
