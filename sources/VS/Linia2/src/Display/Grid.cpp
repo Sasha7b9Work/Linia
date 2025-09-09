@@ -3,6 +3,7 @@
 #include "Display/Grid.h"
 #include "Display/Display.h"
 #include "Display/WindowScale.h"
+#include "MainWindow.h"
 #include "Utils/Math.h"
 #include <algorithm>
 
@@ -31,7 +32,14 @@ int Grid::BottomY() const
 
 int Grid::TopY() const
 {
-    return center.y - (int)(WindowScale::rangeY.max / UnitsInCellY() * SizeCell());
+    if (ModeMainWindow::Current() == ModeMainWindow::Standard)
+    {
+        return 15;
+    }
+    else
+    {
+        return center.y - (int)(WindowScale::rangeY.max / UnitsInCellY() * SizeCell());
+    }
 }
 
 
@@ -333,7 +341,7 @@ void Grid::ScaleMeasuresOnY(int delta)
 
 int Grid::SizeCell() const
 {
-    return 40 * scale;
+    return 50 * scale;
 }
 
 

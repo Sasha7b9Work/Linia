@@ -33,6 +33,8 @@ PanelTable::PanelTable(wxWindow* parent) :
 
     grid->CreateGrid(0, 5);
 
+    grid->SetColLabelSize(20);
+
     SetTitlesColumn();
 
     grid->SetScrollRate(10, 10);
@@ -52,6 +54,7 @@ PanelTable::PanelTable(wxWindow* parent) :
         lines.push_back({ 1, 1, 1, 0.0f, 0.0f, 0.0f });
         lines.push_back({ 2, 1, 2, 0.0f, 0.0f, 0.0f });
         lines.push_back({ 3, 1, 3, 0.0f, 0.0f, 0.1f });
+        lines.push_back({ 4, 1, 4, 0.0f, 0.0f, 0.05f });
     }
 
     UpdateLines();
@@ -76,7 +79,7 @@ void PanelTable::SetAutoSizeColumns()
 {
     int gridWidth = grid->GetClientSize().GetWidth();
     int colsCount = grid->GetNumberCols();
-    int colWidth = (gridWidth - grid->GetRowLabelSize()) / colsCount;
+    int colWidth = (gridWidth - grid->GetRowLabelSize()) / colsCount - 5;
 
     for (int col = 0; col < colsCount; ++col)
     {

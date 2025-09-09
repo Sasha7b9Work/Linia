@@ -54,6 +54,7 @@
 
 
 MainWindow *MainWindow::self = nullptr;
+ModeMainWindow::E ModeMainWindow::current = ModeMainWindow::Standard;
 
 
 MainWindow::MainWindow(const wxString &title)
@@ -268,6 +269,8 @@ void MainWindow::OnAbout(wxCommandEvent &WXUNUSED(event))
 
 void MainWindow::SetMode(ModeMainWindow::E mode)
 {
+    ModeMainWindow::current = mode;
+
     PanelName::self->Show(mode == ModeMainWindow::Standard);
     PanelModeUpper::self->Show(mode == ModeMainWindow::Standard);
     PanelConfig::self->Show(mode == ModeMainWindow::Standard);

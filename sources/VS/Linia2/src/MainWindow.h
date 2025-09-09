@@ -9,6 +9,8 @@
 
 struct ModeMainWindow
 {
+    friend class MainWindow;
+
     enum E
     {
         Standard,           // Стартовый вид окна
@@ -17,6 +19,15 @@ struct ModeMainWindow
         Debug,              // Отладочный режим - засылка в регисты
         Count
     };
+
+    static E Current()
+    {
+        return current;
+    }
+
+private:
+
+    static E current;
 };
 
 
@@ -32,7 +43,7 @@ public:
     static const int WIDTH3 = WIDTH - WIDTH1 - WIDTH2;  // Ширина последнего, третьего, столбика с панелями
 
     static const int HEIGHT1 = 75;
-    static const int HEIGHT2 = 520;     // Столько занимает окно отрисовки, когда не развёрнуто на весь экран
+    static const int HEIGHT2 = 568;     // Столько занимает окно отрисовки, когда не развёрнуто на весь экран
 
 
     MainWindow(const wxString &title);
