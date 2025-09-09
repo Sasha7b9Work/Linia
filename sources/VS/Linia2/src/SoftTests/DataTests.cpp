@@ -32,7 +32,7 @@ bool DataTests::Converter()
 
             if (!GF::ApproxEqual(abs, abs_2))
             {
-                LOG_ERROR("%s : %.20f != %.20f, %.20f", r.Name(row), abs, abs_2, abs / abs_2);
+                LOG_ERROR("%s : %.10e != %.10e, %.10e", r.Name(row), abs, abs_2, abs / abs_2);
                 correct = false;
             }
         }
@@ -51,7 +51,7 @@ bool DataTests::Converter()
 
             if (!GF::ApproxEqual(abs, abs_2))
             {
-                LOG_ERROR("type = %d, %s : %.20f != %.20f, %.20f", (int)t.value, r.Name(row), abs, abs_2, abs / abs_2);
+                LOG_ERROR("type = %d, %s : %.10e != %.10e, %.10e", (int)t.value, r.Name(row), abs, abs_2, abs / abs_2);
                 correct = false;
             }
         }
