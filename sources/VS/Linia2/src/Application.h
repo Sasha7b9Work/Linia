@@ -11,6 +11,8 @@
 
 class Application : public wxApp
 {
+    friend class Deivce;
+
 public:
     virtual bool OnInit() wxOVERRIDE;
 
@@ -21,6 +23,19 @@ public:
     void Disable();
 
 private:
+
+    // Эти функции вызываеются из Device -----------------------------------------
+    // Приём байта от контроллера по UART
+    void OnReceiveUART(uint8);
+
+    // Поворот ручки
+    void OnGovernor(int rotate);
+
+    // Нажатие/отпускание кнопки СТАРТ
+    void OnButtonStart(bool press);
+
+    // Нажатие/отпускание кнопки СТОП
+    void OnButtonStop(bool press);
 
     wxTimer timer;
 
