@@ -8,8 +8,6 @@
 
 namespace IPPP
 {
-    static void WaitForNS(uint64 &counter, uint timeNextNS);
-
     struct Timer
     {
         uint64 counter;
