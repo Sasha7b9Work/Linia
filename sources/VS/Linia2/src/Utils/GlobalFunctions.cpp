@@ -186,7 +186,7 @@ bool GF::ApproxEqual(double a, double b)
         return true;
     }
 
-    double epsilon = 1.000002;
+    double epsilon = 1.00002;
 
     if (a > b)
     {
