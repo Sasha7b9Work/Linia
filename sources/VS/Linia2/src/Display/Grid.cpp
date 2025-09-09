@@ -11,6 +11,11 @@
 Grid::Grid()
 {
     CalculateCenter();
+
+    if (ModeMainWindow::Current() == ModeMainWindow::Standard)
+    {
+        center.y -= 20;
+    }
 }
 
 
@@ -32,14 +37,7 @@ int Grid::BottomY() const
 
 int Grid::TopY() const
 {
-    if (ModeMainWindow::Current() == ModeMainWindow::Standard)
-    {
-        return 15;
-    }
-    else
-    {
-        return center.y - (int)(WindowScale::rangeY.max / UnitsInCellY() * SizeCell());
-    }
+    return center.y - (int)(WindowScale::rangeY.max / UnitsInCellY() * SizeCell());
 }
 
 
