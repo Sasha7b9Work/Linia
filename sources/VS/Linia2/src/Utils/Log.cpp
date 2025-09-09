@@ -34,7 +34,7 @@ void Log::Init()
     {
         wxFileName fname{ wxGetCwd() + "/Linia.log" };
 
-        fname.Normalize(wxPATH_NORM_ALL);
+        fname.Normalize(wxPATH_NORM_ABSOLUTE);
 
         file_name = fname.GetFullPath();
 
