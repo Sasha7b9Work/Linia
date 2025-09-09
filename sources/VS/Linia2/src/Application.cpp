@@ -17,9 +17,6 @@
 wxIMPLEMENT_APP(Application);
 
 
-wxString Application::file_name_config;
-
-
 Application *Application::self = nullptr;
 
 
@@ -33,13 +30,11 @@ bool Application::OnInit()
         return false;
     }
 
-    file_name_config = wxGetCwd() + "/Linia.conf";
-
     Log::Init();
 
     self = this;
 
-    Config::Init(file_name_config);
+    Config::Init();
 
     SET::GUI::Load();
 

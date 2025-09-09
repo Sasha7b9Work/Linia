@@ -10,8 +10,10 @@ namespace Config
 }
 
 
-void Config::Init(const wxString &file_name_config)
+void Config::Init()
 {
+    wxString file_name_config = wxGetCwd() + "/Linia.conf";
+
     file = new wxFileConfig("", "", file_name_config);
 
     SetFile("");

@@ -18,8 +18,6 @@ public:
 
     static Application *self;
 
-    static wxString file_name_config;       // Имя файла конфигурации
-
     void Disable();
 
 private:

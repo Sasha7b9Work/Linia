@@ -7,7 +7,7 @@ namespace Config
 {
     extern wxConfigBase *base;
 
-    void Init(const wxString &file_name_config);
+    void Init();
 
     void DeInit();
 
