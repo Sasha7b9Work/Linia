@@ -72,7 +72,6 @@ file(GLOB COMMUNICATOR_UART             src/Communicator/UART/*.*)
 file(GLOB CONTROLS                      src/Controls/*.*)
 file(GLOB DATA                          src/Data/*.*)
 file(GLOB DEVICE                        src/Device/*.*)
-file(GLOB DEVICETEST                    src/DeviceTest/*.*)
 file(GLOB DISPLAY                       src/Display/*.*)
 file(GLOB IPPP                          src/IPPP/*.*)
 file(GLOB IPPP_TESTS                    src/IPPP/Tests/*.*)
@@ -114,7 +113,6 @@ source_group(Communicator/UART                    FILES ${COMMUNICATOR_UART})
 source_group(Controls                             FILES ${CONTROLS})
 source_group(Data                                 FILES ${DATA})
 source_group(Device                               FILES ${DEVICE})
-source_group(DeviceTest                           FILES ${DEVICETEST})
 source_group(Display                              FILES ${DISPLAY})
 source_group(IPPP                                 FILES ${IPPP})
 source_group(IPPP/Tests                           FILES ${IPPP_TESTS})
@@ -146,7 +144,6 @@ add_executable(${PROJECT_NAME}
     ${CONTROLS}
     ${DATA}
     ${DEVICE}
-    ${DEVICETEST}
     ${DISPLAY}
     ${IPPP}
     ${IPPP_TESTS}
