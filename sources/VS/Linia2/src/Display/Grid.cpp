@@ -165,7 +165,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         }
     }
 
-    d = 8 * scale;
+    d = 10 * scale;
 
     for (int i = 1; i < 3; i++)
     {
@@ -339,7 +339,7 @@ void Grid::ScaleMeasuresOnY(int delta)
 
 int Grid::SizeCell() const
 {
-    return 40 * scale;
+    return 50 * scale;
 }
 
 
