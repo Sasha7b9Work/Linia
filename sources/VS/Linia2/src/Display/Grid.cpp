@@ -102,7 +102,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         {
             if (x > x_left)
             {
-                DrawVPointLine(x, y_top, center.y % d + 2, d, length);
+                DrawVPointLine(x, y_top, d, length);
             }
         }
         else
@@ -120,7 +120,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         {
             if (x < x_right)
             {
-                DrawVPointLine(x, y_top, center.y % d + 2, d, length);
+                DrawVPointLine(x, y_top, d, length);
             }
         }
         else
@@ -138,7 +138,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         {
             if (y < y_bottom)
             {
-                DrawHPointLine(x_left, y, center.x % d, d, length);
+                DrawHPointLine(x_left, y, d, length);
             }
         }
         else
@@ -156,7 +156,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         {
             if (y > y_top)
             {
-                DrawHPointLine(x_left, y, center.x % d, d, length);
+                DrawHPointLine(x_left, y, d, length);
             }
         }
         else
@@ -169,8 +169,8 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
     for (int i = 1; i < 3; i++)
     {
-        DrawVPointLine(x_left + i, y_top, center.y % d + 2, d, length);
-        DrawHPointLine(x_left, BottomY() - i, center.x % d, d, length);
+        DrawVPointLine(x_left + i, y_top, d, length);
+        DrawHPointLine(x_left, BottomY() - i, d, length);
     }
 
     for (auto *entity : entities)
@@ -339,7 +339,7 @@ void Grid::ScaleMeasuresOnY(int delta)
 
 int Grid::SizeCell() const
 {
-    return 50 * scale;
+    return 40 * scale;
 }
 
 
@@ -362,11 +362,8 @@ void Grid::ScaleGridOn(const wxPoint &pos, int delta)
 }
 
 
-void Grid::DrawVPointLine(int x, int y, int sy, int d, int height)
+void Grid::DrawVPointLine(int x, int y, int d, int height)
 {
-    y += sy;
-    height -= sy;
-
     for (int i = y; i < y + height; i += d)
     {
         Point().Draw(x, i);
@@ -374,11 +371,8 @@ void Grid::DrawVPointLine(int x, int y, int sy, int d, int height)
 }
 
 
-void Grid::DrawHPointLine(int x, int y, int s, int d, int width)
+void Grid::DrawHPointLine(int x, int y, int d, int width)
 {
-    x += s;
-    width -= s;
-
     for (int i = x; i < x + width; i += d)
     {
         Point().Draw(i, y);
