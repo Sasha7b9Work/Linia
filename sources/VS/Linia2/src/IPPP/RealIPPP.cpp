@@ -16,6 +16,12 @@ void RealIPPP::Init()
 }
 
 
+void RealIPPP::Update()
+{
+
+}
+
+
 void RealIPPP::PressButtonStart()
 {
 
