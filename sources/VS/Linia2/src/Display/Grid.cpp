@@ -91,7 +91,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         Line(RightX(), y_top, RightX(), BottomY()).Draw();
     }
 
-    int d = 4 * scale;
+    int d = 5 * scale;
 
     // Рисуем вертикальные линии справа от нуля
     for (int i = 1; i < 100; i++)
@@ -102,7 +102,8 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         {
             if (x > x_left)
             {
-                DrawVPointLineDown(x, y_top, d, length);
+                DrawVPointLineDown(x, center.y, d, length - (center.y - y_top));
+                DrawVPointLineUp(x, center.y, d, length - (y_bottom - center.y));
             }
         }
         else
@@ -120,7 +121,8 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         {
             if (x < x_right)
             {
-                DrawVPointLineDown(x, y_top, d, length);
+                DrawVPointLineDown(x, center.y, d, length - (center.y - y_top));
+                DrawVPointLineUp(x, center.y, d, length - (y_bottom - center.y));
             }
         }
         else
@@ -138,7 +140,8 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         {
             if (y < y_bottom)
             {
-                DrawHPointLineRight(x_left, y, d, length);
+                DrawHPointLineRight(center.x, y, d, length - (center.x - x_left));
+                DrawHPointLineLeft(center.x, y, d, length - (x_right - center.x));
             }
         }
         else
@@ -156,7 +159,8 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         {
             if (y > y_top)
             {
-                DrawHPointLineRight(x_left, y, d, length);
+                DrawHPointLineRight(center.x, y, d, length - (center.x - x_left));
+                DrawHPointLineLeft(center.x, y, d, length - (x_right - center.x));
             }
         }
         else
