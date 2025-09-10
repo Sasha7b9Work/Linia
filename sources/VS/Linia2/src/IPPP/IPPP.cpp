@@ -8,21 +8,7 @@
 
 namespace IPPP
 {
-    struct Timer
-    {
-        uint64 counter;
-
-        void Start()
-        {
-            counter = 0;
-        }
-
-        // Ожидать, пока счётчик counter увеличится до timeNextNS
-        void WaitForNS(uint64 /*timeNextNS*/)
-        {
-
-        }
-    };
+    static void Pause();
 }
 
 
@@ -32,7 +18,7 @@ void IPPP::Init()
 
     g_device->Init();
 
-    pinREQ_RD.Set(true);    // Это состояние означает, что чтение не нужно
+    pinREQ_RD.Set(false);    // Это состояние означает, что чтение не нужно
 }
 
 
@@ -63,23 +49,15 @@ bool IPPP::ReadData(std::vector<int> (&data)[4])
         &pinDAT_F3
     };
 
-    Timer timer;
-
-    uint64 time_next = 500;                 // Первый бит будем читать через 0.5 мкс после подачи сигнала REQ_RD
-
-    pinREQ_RD.Set(false);                   // Сообщаем ПЛИС-ке, что будем читать данные
-
-    timer.Start();
-
     while (!pinFIFO_FULL.Get())             // Продолжаем, пока не опустеет буфер передатчика
     {
         int val[4] = { 0, 0, 0, 0 };
 
         for (int i = 0; i < 18; i++)        // Читаем 18 бит каждого из четырёх значений АЦП
         {
-            timer.WaitForNS(time_next);     // Ждём, пока передатчик выставит следующие четыре бита
+            pinREQ_RD.Set(true);
 
-            time_next += 1000;              // Следующие данные будем читать через 1 мкс
+            Pause();
 
             for (int bit = 0; bit < 4; bit++)
             {
@@ -90,6 +68,8 @@ bool IPPP::ReadData(std::vector<int> (&data)[4])
                     val[bit] |= 1;
                 }
             }
+
+            pinREQ_RD.Set(false);
         }
 
         for (int i = 0; i < 4; i++)
@@ -98,7 +78,15 @@ bool IPPP::ReadData(std::vector<int> (&data)[4])
         }
     }
 
-    pinREQ_RD.Set(true);
-
     return true;
+}
+
+
+void IPPP::Pause()
+{
+    volatile int i = 0;
+
+    for (i = 0; i < 1000; i += 1)
+    {
+    }
 }
