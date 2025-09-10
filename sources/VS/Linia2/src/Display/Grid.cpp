@@ -11,11 +11,6 @@
 Grid::Grid()
 {
     CalculateCenter();
-
-    if (ModeMainWindow::Current() == ModeMainWindow::Standard)
-    {
-        center.y -= 20;
-    }
 }
 
 
@@ -26,6 +21,11 @@ void Grid::CalculateCenter()
 
     center.y = Display::self->GetSize().y / 2 - SizeCell() * 5
         +(int)(WindowScale::rangeY.max / UnitsInCellY() * (double)SizeCell());
+
+    if (ModeMainWindow::Current() == ModeMainWindow::Standard)
+    {
+        center.y -= 20;
+    }
 }
 
 
