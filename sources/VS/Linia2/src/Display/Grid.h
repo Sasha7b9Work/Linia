@@ -42,8 +42,8 @@ private:
 
     // sy - смещение по вертикали
     // d - расстояние между точками
-    void DrawVPointLine(int x, int y, int d, int height);
-    void DrawHPointLine(int x, int y, int d, int width);
+    void DrawVPointLineDown(int x, int y, int d, int height);
+    void DrawHPointLineRight(int x, int y, int d, int width);
 
     double UnitsInCellX() const;
     double UnitsInCellY() const;
