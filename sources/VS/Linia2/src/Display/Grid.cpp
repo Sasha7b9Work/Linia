@@ -69,13 +69,16 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
     const int y_top = TopY();
     const int y_bottom = BottomY();
 
+    int d = 5 * scale;
+
     {
         // Горизонтальные линии
         Line(x_left, y_top, RightX(), y_top).Draw(*wxBLACK);
 
         if (Math::InRange(center.y, y_top, y_bottom))
         {
-            Line(x_left, center.y, RightX(), center.y).Draw();
+            DrawHPointLineRight2(center.x, center.y, d, length - (center.x - x_left));
+            DrawHPointLineLeft2(center.x, center.y, d, length - (x_right - center.x));
         }
 
         Line(x_left, BottomY(), RightX(), BottomY()).Draw();
@@ -85,13 +88,12 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
         if (Math::InRange(center.x, x_left, x_right))
         {
-            Line(center.x, y_top, center.x, BottomY()).Draw();
+            DrawVPointLineDown2(center.x, center.y, d, length - (center.y - y_top));
+            DrawVPointLineUp2(center.x, center.y, d, length - (y_bottom - center.y));
         }
 
         Line(RightX(), y_top, RightX(), BottomY()).Draw();
     }
-
-    int d = 5 * scale;
 
     // Рисуем вертикальные линии справа от нуля
     for (int i = 1; i < 100; i++)
@@ -401,6 +403,50 @@ void Grid::DrawHPointLineLeft(int x, int y, int d, int width)
     for (int i = x; i > x - width; i -= d)
     {
         Point().Draw(i, y);
+    }
+}
+
+
+void Grid::DrawVPointLineDown2(int x, int y, int d, int height)
+{
+    for (int i = y; i < y + height; i += d)
+    {
+        Point().Draw(x, i);
+        Point().Draw(x, i + 1);
+        Point().Draw(x, i + 2);
+    }
+}
+
+
+void Grid::DrawVPointLineUp2(int x, int y, int d, int height)
+{
+    for (int i = y; i > y - height; i -= d)
+    {
+        Point().Draw(x, i);
+        Point().Draw(x, i - 1);
+        Point().Draw(x, i - 2);
+    }
+}
+
+
+void Grid::DrawHPointLineRight2(int x, int y, int d, int width)
+{
+    for (int i = x; i < x + width; i += d)
+    {
+        Point().Draw(i, y);
+        Point().Draw(i + 1, y);
+        Point().Draw(i + 2, y);
+    }
+}
+
+
+void Grid::DrawHPointLineLeft2(int x, int y, int d, int width)
+{
+    for (int i = x; i > x - width; i -= d)
+    {
+        Point().Draw(i, y);
+        Point().Draw(i - 1, y);
+        Point().Draw(i - 2, y);
     }
 }
 

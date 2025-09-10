@@ -46,6 +46,11 @@ private:
     void DrawHPointLineRight(int x, int y, int d, int width);
     void DrawHPointLineLeft(int x, int y, int d, int width);
 
+    void DrawVPointLineDown2(int x, int y, int d, int height);
+    void DrawVPointLineUp2(int x, int y, int d, int height);
+    void DrawHPointLineRight2(int x, int y, int d, int width);
+    void DrawHPointLineLeft2(int x, int y, int d, int width);
+
     double UnitsInCellX() const;
     double UnitsInCellY() const;
 
