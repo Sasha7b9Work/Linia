@@ -1,4 +1,4 @@
-// 2025/09/10 21:36:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/09/10 21:36:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "IPPP/IPPP.h"
 
@@ -9,11 +9,15 @@ public:
 
     virtual void Init() override;
 
-    virtual void Start() override;
+    virtual void Update() override;
 
-    virtual void Stop() override;
+    virtual void PressButtonStart() override;
+
+    virtual void PressButtonStop() override;
+
+private:
 
     virtual bool ReadData(std::vector<int>(&data)[4]);
 
-private:
+    bool in_process_measuring = false;                  // Устанавливается при нажатии кнопки СТАРТ. Снимается при нажатии кнопки СТОП.
 };

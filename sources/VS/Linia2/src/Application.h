@@ -12,6 +12,7 @@
 class Application : public wxApp
 {
     friend class Deivce;
+    friend class EmulatorIPPP;
 
 public:
     virtual bool OnInit() wxOVERRIDE;
@@ -22,7 +23,14 @@ public:
 
 private:
 
-    // Эти функции вызываеются из Device -----------------------------------------
+    wxTimer timer;
+
+    virtual int OnExit() wxOVERRIDE;
+
+    // Таймер главного цикла
+    void OnTimer(wxTimerEvent &);
+
+    // Эти функции вызываются из Device -----------------------------------------
     // Приём байта от контроллера по UART
     void OnReceiveUART(uint8);
 
@@ -35,9 +43,8 @@ private:
     // Нажатие/отпускание кнопки СТОП
     void OnButtonStop(bool press);
 
-    wxTimer timer;
+    // Эти функции вызываются из IPPP --------------------------------------------
+    void OnReadData(std::vector<int>(&)[4]);
 
-    virtual int OnExit() wxOVERRIDE;
-
-    void OnTimer(wxTimerEvent &);
+    //-----------------------------------------------------------------------------
 };

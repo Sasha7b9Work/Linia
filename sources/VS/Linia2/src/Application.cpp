@@ -92,6 +92,11 @@ void Application::OnTimer(wxTimerEvent &)
     {
         ComPort::Update();
 
+        if (IPPP::self)
+        {
+            IPPP::self->Update();
+        }
+
         mutex.unlock();
     };
 }
@@ -126,6 +131,12 @@ void Application::OnButtonStart(bool /*press*/)
 
 
 void Application::OnButtonStop(bool /*press*/)
+{
+
+}
+
+
+void Application::OnReadData(std::vector<int>(&)[4])
 {
 
 }

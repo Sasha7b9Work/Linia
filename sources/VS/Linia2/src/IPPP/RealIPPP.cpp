@@ -16,13 +16,13 @@ void RealIPPP::Init()
 }
 
 
-void RealIPPP::Start()
+void RealIPPP::PressButtonStart()
 {
 
 }
 
 
-void RealIPPP::Stop()
+void RealIPPP::PressButtonStop()
 {
 
 }

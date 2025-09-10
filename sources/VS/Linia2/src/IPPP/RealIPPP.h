@@ -9,15 +9,15 @@ public:
 
     virtual void Init() override;
 
-    virtual void Start() override;
+    virtual void Update() override;
 
-    virtual void Stop() override;
+    virtual void PressButtonStart() override;
 
-    virtual bool ReadData(std::vector<int>(&data)[4]);
+    virtual void PressButtonStop() override;
 
 private:
 
-    void Pause();
+    virtual bool ReadData(std::vector<int>(&data)[4]);
 
-    virtual ~RealIPPP() { }
+    void Pause();
 };
