@@ -10,7 +10,7 @@
 #include "IPPP/Tests/Tests.h"
 #include "Communicator/GPIO/GPIO.h"
 #include "Display/PanelErrors.h"
-#include "IPPP/IPPP.h"
+#include "IPPP/RealIPPP.h"
 #include "SoftTests/SoftTests.h"
 
 
@@ -54,7 +54,8 @@ bool Application::OnInit()
 
     frame->Show();
 
-    IPPP::Init();
+    IPPP::self = new RealIPPP();
+    IPPP::self->Init();
 
     timer.Start(10);
 

@@ -2,15 +2,23 @@
 #pragma once
 
 
-// Здесь логика работы прибора (логика обмена с контроллером фактически)
-namespace IPPP
+// Здесь логика работы прибора (логика работы с контроллером фактически)
+class IPPP
 {
-    void Init();
+public:
 
-    void Start();
+    virtual void Init() = 0;
 
-    void Stop();
+    virtual void Start() = 0;
+
+    virtual void Stop() = 0;
 
     // Читает четыре массива значений из ПЛИС
-    bool ReadData(std::vector<int> (&data)[4]);
-}
+    virtual bool ReadData(std::vector<int>(&data)[4]) = 0;
+
+    static IPPP *self;
+
+protected:
+
+    virtual ~IPPP() { }
+};
