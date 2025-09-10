@@ -187,6 +187,11 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         entity->Draw(this);
     }
 
+    Display::self->FillRectangle(0, 0, x_left - 1, Display::self->GetSize().y, *wxWHITE);
+    Display::self->FillRectangle(x_left, 0, length, y_top - 1, *wxWHITE);
+    Display::self->FillRectangle(x_right + 1, 0, Display::self->GetSize().x - x_right, Display::self->GetSize().y, *wxWHITE);
+    Display::self->FillRectangle(x_left, y_bottom + 1, length, Display::self->GetSize().y - y_bottom, *wxWHITE);
+
     DrawLabelsOnAxis();
 
     DrawMouseMarkers();

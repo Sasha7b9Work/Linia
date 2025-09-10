@@ -39,6 +39,8 @@ public:
 
     void FullScreen(bool);
 
+    void FillRectangle(int x, int y, int width, int height, const wxColor &);
+
 private:
 
     wxButton *btnHelp = nullptr,
@@ -85,8 +87,6 @@ private:
     void OnMenuTrackY(wxCommandEvent &);
     void OnMenuTrackNone(wxCommandEvent &);
     void OnMenuScale(wxCommandEvent &);
-
-    void FillRectangle(int x, int y, int width, int height, const wxColor &);
 
     void CreateEntities();
 };
