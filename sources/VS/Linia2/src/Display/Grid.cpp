@@ -169,9 +169,11 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
     for (int i = 1; i < 3; i++)
     {
-        DrawVPointLineDown(x_left + i, y_top, d, length);
+        DrawVPointLineUp(x_left + i, center.y, d, length - (BottomY() - center.y));
+        DrawVPointLineDown(x_left + i, center.y, d, length - (center.y - TopY()));
 
-        DrawHPointLineRight(x_left, BottomY() - i, d, length);
+        DrawHPointLineRight(center.x, BottomY() - i, d, length - (center.x - LeftX()));
+        DrawHPointLineLeft(center.x, BottomY() - i, d, length - (RightX() - center.x));
     }
 
     for (auto *entity : entities)
@@ -372,9 +374,27 @@ void Grid::DrawVPointLineDown(int x, int y, int d, int height)
 }
 
 
+void Grid::DrawVPointLineUp(int x, int y, int d, int height)
+{
+    for (int i = y; i > y - height; i -= d)
+    {
+        Point().Draw(x, i);
+    }
+}
+
+
 void Grid::DrawHPointLineRight(int x, int y, int d, int width)
 {
     for (int i = x; i < x + width; i += d)
+    {
+        Point().Draw(i, y);
+    }
+}
+
+
+void Grid::DrawHPointLineLeft(int x, int y, int d, int width)
+{
+    for (int i = x; i > x - width; i -= d)
     {
         Point().Draw(i, y);
     }

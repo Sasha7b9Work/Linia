@@ -40,10 +40,11 @@ private:
 
     wxPoint pos_mouse;
 
-    // sy - смещение по вертикали
     // d - расстояние между точками
     void DrawVPointLineDown(int x, int y, int d, int height);
+    void DrawVPointLineUp(int x, int y, int d, int height);
     void DrawHPointLineRight(int x, int y, int d, int width);
+    void DrawHPointLineLeft(int x, int y, int d, int width);
 
     double UnitsInCellX() const;
     double UnitsInCellY() const;
