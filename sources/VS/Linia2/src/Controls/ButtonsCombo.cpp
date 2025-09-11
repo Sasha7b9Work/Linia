@@ -192,20 +192,22 @@ void ButtonsCombo::OnButtonClicked(wxCommandEvent &event)
 
             wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
 
-            pos.x -= popup->GetSize().x / 2;
-            pos.y -= popup->GetSize().y / 2;
+            wxSize size = popup->GetSize();
+
+            pos.x -= size.x / 2;
+            pos.y -= size.y / 2;
 
             if (GF::IsBoardPCM())
             {
-                if (pos.x + popup->GetSize().x >= MainWindow::WIDTH)
+                if (pos.x + size.x >= MainWindow::WIDTH)
                 {
-                    int delta = pos.x + popup->GetSize().x - MainWindow::WIDTH;
+                    int delta = pos.x + size.x - MainWindow::WIDTH;
                     pos.x -= delta + 8;
                 }
             }
             else
             {
-                int right_pop = pos.x + popup->GetSize().x;
+                int right_pop = pos.x + size.x;
                 int right_win = MainWindow::self->GetPosition().x + MainWindow::self->GetSize().x;
 
                 if (right_pop >= right_win)

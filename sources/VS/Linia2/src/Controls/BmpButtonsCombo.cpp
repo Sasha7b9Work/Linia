@@ -108,13 +108,13 @@ BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxString &_title, const
     ButtonBitmap(parent, pos, size, _files[(size_t)num_file], _name),
     current_choice(num_file),
     title(_title),
-    files(_files)
+    files(_files),
+    tooltips(_tooltips)
 {
     Bind(wxEVT_BUTTON, &BmpButtonsCombo::OnButtonClicked, this);
 
     ButtonBitmap::SetToolTip(_tooltips[(size_t)num_file]);
 
-    tooltips = _tooltips;
     buttons_in_row = _buttons_in_row;
 }
 
