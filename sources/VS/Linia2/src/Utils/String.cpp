@@ -3,9 +3,6 @@
 #include "Utils/Buffer.h"
 #include "Utils/String.h"
 #include "Utils/StringUtils.h"
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
 
 
 pchar  const String::_ERROR = "---.---";

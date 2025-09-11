@@ -2,15 +2,6 @@
 #include "defines.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Buffer.h"
-#include <iomanip>
-#include <cstring>
-#include <cctype>
-#include <cstdlib>
-#include <sstream>
-#include <iostream>
-#ifdef WIN32
-#include <cstring>
-#endif
 
 #ifndef LANG
 #define LANG 0

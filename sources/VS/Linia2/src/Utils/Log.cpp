@@ -3,9 +3,6 @@
 #include "Utils/Log.h"
 #include "Utils/StringUtils.h"
 #include "Windows/ConsoleRS232.h"
-#include <cstdarg>
-#include <cstdio>
-#include <cstring>
 
 
 namespace Log

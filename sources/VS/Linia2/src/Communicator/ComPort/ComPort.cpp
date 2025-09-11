@@ -6,9 +6,6 @@
 #include "Utils/StringUtils.h"
 #include "Settings/Settings.h"
 #include "Windows/ConsoleRS232.h"
-#include <cstring>
-#include <chrono>
-#include <thread>
 
 
 using namespace std::chrono;
