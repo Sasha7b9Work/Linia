@@ -18,7 +18,7 @@ public:
     // Вызывается при нажатии кнопки СТОП
     virtual void PressButtonStop() = 0;
 
-    static IPPP *self;
+    static IPPP *impl;
 
 protected:
 

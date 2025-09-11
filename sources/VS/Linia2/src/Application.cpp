@@ -55,8 +55,8 @@ bool Application::OnInit()
 
     frame->Show();
 
-    IPPP::self = new EmulatorIPPP();
-    IPPP::self->Init();
+    IPPP::impl = new EmulatorIPPP();
+    IPPP::impl->Init();
 
     timer.Start(10);
 
@@ -92,10 +92,7 @@ void Application::OnTimer(wxTimerEvent &)
     {
         ComPort::Update();
 
-        if (IPPP::self)
-        {
-            IPPP::self->Update();
-        }
+        IPPP::impl->Update();
 
         mutex.unlock();
     };

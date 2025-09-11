@@ -6,4 +6,4 @@
 #include "Communicator/GPIO/GPIO.h"
 
 
-IPPP *IPPP::self = nullptr;
+IPPP *IPPP::impl = nullptr;
