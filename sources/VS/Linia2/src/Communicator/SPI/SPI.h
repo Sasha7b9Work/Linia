@@ -11,12 +11,12 @@ namespace SPI
     void Init();
     void DeInit();
 
-    bool WriteDynamicDAC(int number_DAC, uint16_t value);
+    bool WriteDynamicDAC(int number_DAC, uint16 value);
 
-    bool SetSpeed(uint32_t speedHz);
+    bool SetSpeed(uint speedHz);
     bool SetMode(uint8_t mode);
 
     bool IsReady();
-    uint32_t GetSpeed();
+    uint GetSpeed();
     uint8_t GetMode();
 }

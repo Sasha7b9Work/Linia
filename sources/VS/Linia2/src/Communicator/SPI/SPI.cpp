@@ -19,7 +19,7 @@
 namespace SPI
 {
     static int g_spi_fd = -1;
-    static uint32_t g_speed = SPI_SPEED;
+    static uint g_speed = SPI_SPEED;
     static uint8_t g_mode = 0;
     static uint8_t g_bits_per_word = 8;
     static bool g_gpio_initialized = false;
@@ -114,7 +114,7 @@ namespace SPI
     // number_DAC: номер DAC (1 или 2)
     // value: 16-битное значение для записи (0x0000-0xFFFF)
     // Возвращает: true если запись успешна, false при ошибке
-    bool WriteDynamicDAC(int number_DAC, uint16_t value)
+    bool WriteDynamicDAC(int number_DAC, uint16 value)
     {
         if (!IsReady())
         {
@@ -149,7 +149,7 @@ namespace SPI
     }
 
     // Установка скорости SPI интерфейса
-    bool SetSpeed(uint32_t speedHz)
+    bool SetSpeed(uint speedHz)
     {
         g_speed = speedHz;
 
@@ -197,7 +197,7 @@ namespace SPI
 
     // Получение текущей скорости SPI
     // Возвращает: скорость в Герцах
-    uint32_t GetSpeed()
+    uint GetSpeed()
     {
         return g_speed;
     }
