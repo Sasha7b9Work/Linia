@@ -66,10 +66,15 @@ protected:
 class PinIn : public Pin
 {
 public:
+
     using Pin::Pin;
+
     using ChangeCallback = std::function<void(bool)>;
+
     void SetChangeCallback(ChangeCallback);
+
 private:
+
     ChangeCallback callback_;
 };
 
