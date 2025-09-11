@@ -6,7 +6,9 @@
 class DeviceIPPP : public IDevice
 {
 public:
+
     DeviceIPPP();
+
     virtual ~DeviceIPPP();
 
     virtual bool Init() override;
@@ -42,45 +44,45 @@ public:
     // Функции для каналов B и S
 
     // Режим источника в канале
-    virtual void SetChannel_SourceMode(Chan::E chan, ModeSource::E mode) override;
+    virtual void SetChannel_SourceMode(Chan::E, ModeSource::E) override;
 
-    virtual void SetChannel_AmplitudeRange(Chan::E chan, AmplitudeRange::E range) override;
+    virtual void SetChannel_AmplitudeRange(Chan::E, AmplitudeRange::E) override;
 
     // Число ступеней
-    virtual void SetChannel_StepCount(Chan::E chan, StepCount::E count) override;
+    virtual void SetChannel_StepCount(Chan::E, StepCount::E) override;
 
-    virtual void SetChannel_AmplitudeValue(Chan::E chan, AmplitudeValue::E value) override;
+    virtual void SetChannel_AmplitudeValue(Chan::E, AmplitudeValue::E) override;
 
     // Смещение
-    virtual void SetChannel_Bias(Chan::E chan, AmplitudeValue::E bias) override;
+    virtual void SetChannel_Bias(Chan::E, AmplitudeValue::E) override;
 
     // Режим измерителя
-    virtual void SetChannel_MeasMode(Chan::E chan, ModeMeas::E mode) override;
+    virtual void SetChannel_MeasMode(Chan::E, ModeMeas::E) override;
 
     // Диапазон измерителя
-    virtual void SetChannel_MeasRangeU(Chan::E chan, RangeU::E range) override;
-    virtual void SetChannel_MeasRangeI(Chan::E chan, RangeI::E range) override;
+    virtual void SetChannel_MeasRangeU(Chan::E, RangeU::E) override;
+    virtual void SetChannel_MeasRangeI(Chan::E, RangeI::E) override;
 
     // Диапазон ограничения
-    virtual void SetChannel_LimitRangeU(Chan::E chan, RangeU::E range) override;
-    virtual void SetChannel_LimitRangeI(Chan::E chan, RangeI::E range) override;
+    virtual void SetChannel_LimitRangeU(Chan::E, RangeU::E) override;
+    virtual void SetChannel_LimitRangeI(Chan::E, RangeI::E) override;
 
     // Порог ограничения измерителя
-    virtual void SetChannel_LimitThreshold(Chan::E chan, LimitThreshold::E threshold) override;
+    virtual void SetChannel_LimitThreshold(Chan::E, LimitThreshold::E) override;
 
-    virtual void SetChannel_HighResolution(Chan::E chan, bool highRes) override;
+    virtual void SetChannel_HighResolution(Chan::E, bool highRes) override;
 
     //------------------------------------------------------------------------------------------------------------
 
     virtual void SetAutoZeroOff(bool) override;
     virtual void SetPointCount(PointCount::E) override;
     virtual void SetStartType(StartTrigger::E, StartMode::E) override;
-    virtual void SetMeasurementMode(MeasMode::E mode) override;
-    virtual void SetMaxDacCode(DacCode::E code) override;
-    virtual void SetBitQ18(PulseState::E state) override;
-    virtual void SetElementType(ElementType::E isMultipole) override;
-    virtual void SendLimitSignal(LimitResult::E limitCode) override;
-    virtual void SetConfigData(uint8_t modification, PowerNominal::E nominal) override;
+    virtual void SetMeasurementMode(MeasMode::E) override;
+    virtual void SetMaxDacCode(DacCode::E) override;
+    virtual void SetBitQ18(PulseState::E) override;
+    virtual void SetElementType(ElementType::E) override;
+    virtual void SendLimitSignal(LimitResult::E) override;
+    virtual void SetConfigData(uint8_t modification, PowerNominal::E) override;
     virtual void EmergencyStop() override;
     virtual void StartMeasurement() override;
 
@@ -89,6 +91,7 @@ public:
 
 
 private:
+
     void SendCommand(const std::string &cmd);
     void CommunicationThread();
 
