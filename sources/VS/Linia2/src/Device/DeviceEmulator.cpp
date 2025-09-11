@@ -90,7 +90,12 @@ void DeviceEmulator::ChanBS_SourceMode(const Chan &/*chan*/, ModeSource::E /*mod
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_AmplitudeRange(const Chan &/*chan*/, RangeU::E /*range*/)
+void DeviceEmulator::ChanBS_RangeStep(const Chan &/*chan*/, RangeU::E /*range*/)
+{
+    LOG_ERROR("Not implemented");
+}
+
+void DeviceEmulator::ChanBS_RangeStep(const Chan &, RangeI::E)
 {
     LOG_ERROR("Not implemented");
 }

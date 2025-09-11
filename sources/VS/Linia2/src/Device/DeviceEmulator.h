@@ -42,7 +42,8 @@ public:
     // Функции для каналов B и S
 
     virtual void ChanBS_SourceMode(const Chan &, ModeSource::E) override;
-    virtual void ChanBS_AmplitudeRange(const Chan &, RangeU::E) override;
+    virtual void ChanBS_RangeStep(const Chan &, RangeU::E) override;
+    virtual void ChanBS_RangeStep(const Chan &, RangeI::E) override;
     virtual void ChanBS_StepCount(const Chan &, int) override;
     virtual void ChanBS_AmplitudeValue(const Chan &, int) override;
     virtual void ChaBS_Offset(const Chan &, double) override;

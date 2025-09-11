@@ -124,13 +124,24 @@ void DeviceIPPP::ChanBS_SourceMode(const Chan &ch, ModeSource::E mode)
 }
 
 
-void DeviceIPPP::ChanBS_AmplitudeRange(const Chan &ch, RangeU::E range)
+void DeviceIPPP::ChanBS_RangeStep(const Chan &ch, RangeU::E range)
 {
     if (IsChanBS(ch))
     {
-        SendCommand(":%s:RANGE:AMPLITUDE %s",
+        SendCommand(":%s:RANGE:STEP %s",
             ch.Name(),
             RangeU(range).Name(RowRange(ch.value), false));
+    }
+}
+
+
+void DeviceIPPP::ChanBS_RangeStep(const Chan &ch, RangeI::E range)
+{
+    if (IsChanBS(ch))
+    {
+        SendCommand(":%s:RANGE:STEP %s",
+            ch.Name(),
+            RangeI(range).Name(RowRange(ch.value), false));
     }
 }
 
