@@ -293,13 +293,6 @@ void DeviceIPPP::SendLimitSignal(LimitResult::E limitCode) {
 }
 
 
-void DeviceIPPP::SetConfigData(uint8_t modification, PowerNominal::E nominal) {
-    std::stringstream ss;
-    ss << ":CONFIG " << (int)modification << " " << PowerNominal::Name(nominal).ToStdString();
-    SendCommand(ss.str());
-}
-
-
 void DeviceIPPP::EmergencyStop() {
     SendCommand(":EMERGENCYSTOP");
 }

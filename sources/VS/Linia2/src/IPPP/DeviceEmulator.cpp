@@ -188,12 +188,6 @@ void DeviceEmulator::SendLimitSignal(LimitResult::E /*limitCode*/)
 }
 
 
-void DeviceEmulator::SetConfigData(uint8_t /*modification*/, PowerNominal::E /*nominal*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
 void DeviceEmulator::EmergencyStop()
 {
     LOG_ERROR("Not implemented");

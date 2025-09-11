@@ -175,12 +175,6 @@ wxString LimitResult::Name(E result)
 }
 
 
-wxString PowerNominal::Name(E nominal)
-{
-    return nominal == Nominal_110V ? "110V" : "220V";
-}
-
-
 wxString AmplitudeRange::Name(E range)
 {
     switch (range)

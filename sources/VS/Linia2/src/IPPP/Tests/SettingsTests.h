@@ -300,17 +300,3 @@ struct LimitResult
 
     static wxString Name(E);
 };
-
-
-// Номинальная мощность
-struct PowerNominal
-{
-    enum E
-    {
-        Nominal_110V,
-        Nominal_220V,
-        Count
-    };
-
-    static wxString Name(E);
-};

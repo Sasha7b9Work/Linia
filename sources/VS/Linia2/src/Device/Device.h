@@ -80,7 +80,6 @@ public:
     virtual void SetBitQ18(PulseState::E) = 0;                                      // Состояние бита Q18
     virtual void SetElementType(ElementType::E) = 0;                                // Тип элемента: многополюсный или нет
     virtual void SendLimitSignal(LimitResult::E) = 0;                               // Отправка сигнала ограничения
-    virtual void SetConfigData(uint8_t modification, PowerNominal::E) = 0;          // Установка конфигурационных данных
     virtual void EmergencyStop() = 0;                                               // Аварийная остановка
     virtual void StartMeasurement() = 0;                                            // Запуск измерения
 

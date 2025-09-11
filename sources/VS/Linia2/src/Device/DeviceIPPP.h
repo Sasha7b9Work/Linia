@@ -82,7 +82,6 @@ public:
     virtual void SetBitQ18(PulseState::E) override;
     virtual void SetElementType(ElementType::E) override;
     virtual void SendLimitSignal(LimitResult::E) override;
-    virtual void SetConfigData(uint8_t modification, PowerNominal::E) override;
     virtual void EmergencyStop() override;
     virtual void StartMeasurement() override;
 
