@@ -8,6 +8,6 @@
 #define TIOCM_RTS 0
 #define TIOCMSET  0
 
-int ioctl(int fd, unsigned long request, ...);
+int ioctl(int fd, unsigned long request, ...); //-V1071
 
 #endif
