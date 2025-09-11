@@ -28,24 +28,23 @@ struct OutputPinInfo
 class Pin {
 public:
     enum Type {
-        START,
-        STOP,
+        START,          // Кнопка СТАРТ
+        STOP,           // Кнопка СТОП
         DAT_F0,
         DAT_F1,
         DAT_F2,
         DAT_F3,
         FIFO_FULL,
         REQ_RD,
+        KA,             // 11  Энкодер А
+        KB,             // 13  Энкодер B
 //        FIFO_EMPTY,   Конт. 26
-//        KA,           11
-//        KB,           13
 //        ENB_PC,       27
 //        RDY,          40
         Count
     };
-    explicit Pin(Type type) : type_(type)
-    {
-    }
+    explicit Pin(Type type) : type_(type) { }
+
     Type type() const
     {
         return type_;
@@ -66,33 +65,34 @@ private:
     ChangeCallback callback_;
 };
 
-class PinOut : public Pin {
+class PinOut : public Pin
+{
 public:
+
     using Pin::Pin;
 
     void Set(bool state);
 };
 
-namespace GPIO {
+namespace GPIO
+{
     void Init();
     void DeInit();
 
-    // Вспомогательные функции
     InputPinInfo *GetInputPinInfo(Pin::Type type);
     OutputPinInfo *GetOutputPinInfo(Pin::Type type);
 }
 
 
-
-// Категория: входные пины
-extern PinIn pinSTART;
-extern PinIn pinSTOP;
 extern PinIn pinDAT_F0;
 extern PinIn pinDAT_F1;
 extern PinIn pinDAT_F2;
 extern PinIn pinDAT_F3;
 extern PinIn pinFIFO_FULL;
-//extern PinIn pinFIFO_EMPTY;
 
-// Категория: выходные пины
+extern PinIn pinSTART;
+extern PinIn pinSTOP;
+extern PinIn pinKA;
+extern PinIn pinKB;
+
 extern PinOut pinREQ_RD;

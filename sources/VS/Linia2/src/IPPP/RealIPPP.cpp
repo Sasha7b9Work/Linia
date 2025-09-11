@@ -4,6 +4,7 @@
 #include "IPPP/Device/IDevice.h"
 #include "IPPP/Device/DeviceEmulator.h"
 #include "Communicator/GPIO/GPIO.h"
+#include "IPPP/Device/Keyboard.h"
 
 
 void RealIPPP::Init()
@@ -13,12 +14,14 @@ void RealIPPP::Init()
     IDevice::impl->Init();
 
     pinREQ_RD.Set(false);    // Это состояние означает, что чтение не нужно
+
+    Keyboard::Init();
 }
 
 
 void RealIPPP::Update()
 {
-
+    Keyboard::Update();
 }
 
 

@@ -9,13 +9,16 @@
 #include <sys/time.h>
 
 
-PinIn pinSTART(Pin::START);
-PinIn pinSTOP(Pin::STOP);
 PinIn pinDAT_F0(Pin::DAT_F0);
 PinIn pinDAT_F1(Pin::DAT_F1);
 PinIn pinDAT_F2(Pin::DAT_F2);
 PinIn pinDAT_F3(Pin::DAT_F3);
 PinIn pinFIFO_FULL(Pin::FIFO_FULL);
+
+PinIn pinSTART(Pin::START);
+PinIn pinSTOP(Pin::STOP);
+PinIn pinKA(Pin::KA);
+PinIn pinKB(Pin::KB);
 
 PinOut pinREQ_RD(Pin::REQ_RD);
 
