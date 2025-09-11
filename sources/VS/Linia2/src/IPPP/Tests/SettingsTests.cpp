@@ -87,6 +87,22 @@ pchar StateJack::NameGUI(E v)
 }
 
 
+void StateJack::PrepareArray(wxArrayString &arr, E v1, E v2, E v3, E v4)
+{
+    arr.Clear();
+    arr.push_back(NameGUI(v1));
+    arr.push_back(NameGUI(v2));
+    if (v3 != Count)
+    {
+        arr.push_back(NameGUI(v3));
+    }
+    if (v4 != Count)
+    {
+        arr.push_back(NameGUI(v4));
+    }
+}
+
+
 Category::E Category::Current()
 {
     return (E)PanelScheme::self->comboCategory->GetCurrentChoice();
@@ -120,22 +136,6 @@ bool Chan::IsVisible() const
     }
 
     return true;
-}
-
-
-void StateJack::PrepareArray(wxArrayString &arr, E v1, E v2, E v3, E v4)
-{
-    arr.Clear();
-    arr.push_back(NameGUI(v1));
-    arr.push_back(NameGUI(v2));
-    if (v3 != Count)
-    {
-        arr.push_back(NameGUI(v3));
-    }
-    if (v4 != Count)
-    {
-        arr.push_back(NameGUI(v4));
-    }
 }
 
 
