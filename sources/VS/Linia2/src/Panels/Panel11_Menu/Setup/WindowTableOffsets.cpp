@@ -2,9 +2,9 @@
 #include "defines.h"
 #include "Panels/Panel11_Menu/Setup/WindowTableOffsets.h"
 #include "Utils/SystemDepend.h"
-#include "IPPP/Tests/Ranges.h"
 #include "Utils/GlobalFunctions.h"
 #include "Utils/Math.h"
+#include "IPPP/Tests/DSettings.h"
 
 
 WindowTableOffsets::WindowTableOffsets() :

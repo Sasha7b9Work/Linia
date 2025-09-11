@@ -212,21 +212,3 @@ private:
 
     static const StructDesc desc[Count];
 };
-
-
-struct CalK
-{
-    double offset;  // Смещение
-    double k;       // Коэффициент
-};
-
-
-// Здесь калибровочные коэффициенты
-namespace DSet
-{
-    const CalK &Get(TypeDSet::E, RangeI::E);
-    const CalK &Get(TypeDSet::E, RangeU::E);
-
-    void Set(TypeDSet::E, RangeI::E, const CalK &);
-    void Set(TypeDSet::E, RangeU::E, const CalK &);
-}
