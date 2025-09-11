@@ -1,8 +1,8 @@
 ﻿// 2025/09/10 21:28:18 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "IPPP/RealIPPP.h"
-#include "Device/Device.h"
-#include "IPPP/DeviceEmulator.h"
+#include "Device/IDevice.h"
+#include "Device/DeviceEmulator.h"
 #include "Communicator/GPIO/GPIO.h"
 
 

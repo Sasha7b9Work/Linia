@@ -5,7 +5,7 @@
 #include "MainWindow.h"
 #include "Utils/SystemDepend.h"
 #include "Controls/Bitmap.h"
-#include "Device/Device.h"
+#include "Device/IDevice.h"
 #include "Panels/Panel03_Config/Panel03_Config.h"
 #include "IPPP/IPPP.h"
 

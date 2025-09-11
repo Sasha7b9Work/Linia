@@ -1,6 +1,6 @@
 ﻿// 2025/09/11 08:48:15 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Device/Device.h"
+#include "Device/IDevice.h"
 
 
 class DeviceIPPP : public IDevice

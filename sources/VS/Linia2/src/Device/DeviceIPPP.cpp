@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Device/Device.h"
+#include "Device/IDevice.h"
 #include "Device/DeviceIPPP.h"
 #include "Communicator/UART/UART.h"
 #include <sstream>
