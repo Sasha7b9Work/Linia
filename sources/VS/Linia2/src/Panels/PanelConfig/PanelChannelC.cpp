@@ -9,14 +9,6 @@
 #include "Controls/StaticBox.h"
 
 
-/*
-    Не найдено
-    IDC_STATICIMP1POS
-    IDC_STATICIMP1NEG
-    IDC_CHECKPAUZA
-*/
-
-
 PanelChannelC *PanelChannelC::self = nullptr;
 
 
@@ -30,18 +22,18 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
     wxPanel::SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
     wxPanel::SetPosition({ 0, 40 });
 
-    StaticBox *boxScan = new StaticBox(this, "Развёртка", { x, SD::DSBY() }, { w, 160 });          // IDC_STATICRAZV
+    StaticBox *boxScan = new StaticBox(this, "Развёртка", { x, SD::DSBY() }, { w, 160 });
 
     {
         wxArrayString files =
         {
-            "icons/graphs/imp_up.ico",      // IMP_POS  IDC_RADIO_RAZVIMPPOSITIVE   IDC_STATICIMPPOSITIVE   OnRadioRazvimppositive
-            "icons/graphs/imp_down.ico",    // IMP_NEG  IDC_RADIO_RAZVIMPNEGATIVE   IDC_STATICIMPNEGATIVE
-            "icons/graphs/triang_up.ico",   // DC_POS   IDC_RADIO_RAZVDCPOSITIVE
-            "icons/graphs/triang_down.ico", // DC_NEG   IDC_RADIO_RAZVDCNEGATIVE
-            "icons/graphs/sin_hi.ico",      // SYN_POS  IDC_RADIO_SYNPOSITIVE
-            "icons/graphs/sin_lo.ico",      // SYN_NEG  IDC_RADIO_SYNNEGATIVE
-            "icons/graphs/sin.ico"          // AC       IDC_RADIO_RAZVAC            IDC_STATICAC
+            "icons/graphs/imp_up.ico",
+            "icons/graphs/imp_down.ico",
+            "icons/graphs/triang_up.ico",
+            "icons/graphs/triang_down.ico",
+            "icons/graphs/sin_hi.ico",
+            "icons/graphs/sin_lo.ico",
+            "icons/graphs/sin.ico"
         };
 
         wxArrayString tooltips =
@@ -60,8 +52,8 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
         int y = 25;
         int x0 = 80;
 
-        textLabelImpulse = new wxStaticText(boxScan, wxID_ANY, "Длина импульса", { x0, SD::Y_SB(y) });                  // IDC_STATICIMP
-        textValueImpulse = new wxStaticText(boxScan, wxID_ANY, "0.2 ms", { x0 + 30, SD::Y_SB(y + 15) });                // IDC_EDITDLITIMP
+        textLabelImpulse = new wxStaticText(boxScan, wxID_ANY, "Длина импульса", { x0, SD::Y_SB(y) });
+        textValueImpulse = new wxStaticText(boxScan, wxID_ANY, "0.2 ms", { x0 + 30, SD::Y_SB(y + 15) });
 
         y = 80;
 

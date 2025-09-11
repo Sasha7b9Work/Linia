@@ -57,8 +57,6 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         choices.Add("IdVd");
         choices.Add("_USER");
 
-        // IDC_COMBOMOD
-        // IDC_BUTTON_LOADTST
         comboTest = new ButtonsCombo(boxTest, "", SD::XY0(), 100, choices, choices, 1, "comboTest");
 
         btnLoad = new wxButton(boxTest, wxID_ANY, "Загрузить", { PanelConfig::X, SD::Y_SB(50) }, { 100, 30 });
@@ -150,13 +148,10 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         int width = 45;
 
-        // IDC_COMBOCHECKKOL
         combos[Chan::_C] = new ComboJack(Chan::_C, painter, "", {x0 + dx, y - dy}, width, choices);
 
-        // IDC_COMBOCHECKBAZA
         combos[Chan::_B] = new ComboJack(Chan::_B, painter, "", {x0, y}, width, choices);
 
-        // IDC_COMBOCHECKDOP
         combos[Chan::_E] = new ComboJack(Chan::_E, painter, "", {x0 + dx, y + dy}, width, choices);
 
         combos[Chan::_S] = new ComboJack(Chan::_S, painter, "", {x0 + 2 * dx, y}, width, choices);

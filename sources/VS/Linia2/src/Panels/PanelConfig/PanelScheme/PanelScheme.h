@@ -66,10 +66,10 @@ private:
     wxButton *btnLoad = nullptr;
 
     ButtonsCombo *comboTest = nullptr,
-        *comboCommutation = nullptr;        // IDC_COMBO_KOMMUTATOR         m_iKommutator           OnSelchangeComboKommutator
+        *comboCommutation = nullptr;
 
-    ComboJack *combos[Chan::Count];         // Комбобоксы на схеме. Активны при внешней коммутации  IDC_COMBO_GNEZDO_C
-    FullJack *jacks[Chan::Count];           // Активны при внутренней коммутации                    IDC_COMBOCHECKKOL
+    ComboJack *combos[Chan::Count];         // Комбобоксы на схеме. Активны при внешней коммутации
+    FullJack *jacks[Chan::Count];           // Активны при внутренней коммутации
 
     BmpButtonsCombo *comboCategory = nullptr;
 

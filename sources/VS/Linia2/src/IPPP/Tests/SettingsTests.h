@@ -88,7 +88,7 @@ private:
 };
 
 
-// Тип коммутации       CLineDlg::ShowGnezdoKommutator()
+// Тип коммутации
 struct TypeCommutation
 {
     enum E
