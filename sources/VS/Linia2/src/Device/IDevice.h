@@ -49,31 +49,31 @@ public:
     // Функции для каналов B и S
 
     // Режим источника в канале
-    virtual void ChanBS_SourceMode(Chan::E, ModeSource::E) = 0;
+    virtual void ChanBS_SourceMode(Chan &, ModeSource::E) = 0;
 
-    virtual void ChanBS_AmplitudeRange(Chan::E, RangeU::E) = 0;
+    virtual void ChanBS_AmplitudeRange(Chan &, RangeU::E) = 0;
 
     // Число ступеней
-    virtual void ChanBS_StepCount(Chan::E, int) = 0;
+    virtual void ChanBS_StepCount(Chan &, int) = 0;
 
-    virtual void ChanBS_AmplitudeValue(Chan::E, int) = 0;
+    virtual void ChanBS_AmplitudeValue(Chan &, int) = 0;
 
     // Смещение
-    virtual void ChaBS_Bias(Chan::E, double) = 0;
+    virtual void ChaBS_Bias(Chan &, double) = 0;
 
     // Режим измерителя
-    virtual void ChanBS_MeasMode(Chan::E, ModeMeas::E) = 0;
+    virtual void ChanBS_MeasMode(Chan &, ModeMeas::E) = 0;
 
     // Диапазон измерителя
-    virtual void ChanBS_MeasRange(Chan::E, RangeU::E) = 0;
-    virtual void ChanBS_MeasRange(Chan::E, RangeI::E) = 0;
+    virtual void ChanBS_MeasRange(Chan &, RangeU::E) = 0;
+    virtual void ChanBS_MeasRange(Chan &, RangeI::E) = 0;
 
     // Диапазон ограничения
-    virtual void ChanBS_LimitRange(Chan::E, RangeU::E) = 0;
-    virtual void ChanBS_LimitRange(Chan::E, RangeI::E) = 0;
+    virtual void ChanBS_LimitRange(Chan &, RangeU::E) = 0;
+    virtual void ChanBS_LimitRange(Chan &, RangeI::E) = 0;
 
     // Порог ограничения измерителя
-    virtual void ChanBS_LimitThreshold(Chan::E, int) = 0;
+    virtual void ChanBS_LimitThreshold(Chan &, int) = 0;
 
     //------------------------------------------------------------------------------------------------------------
 

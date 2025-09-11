@@ -117,118 +117,118 @@ void DeviceIPPP::ChanC_LimitSourceU(int min, int max)
 }
 
 
-void DeviceIPPP::ChanBS_SourceMode(Chan::E ch, ModeSource::E mode)
+void DeviceIPPP::ChanBS_SourceMode(Chan &ch, ModeSource::E mode)
 {
     if (IsChanBS(ch))
     {
-        SendCommand(":%s:MODE:SOURCE %s", Chan(ch).Name(), ModeSource::Name(mode));
+        SendCommand(":%s:MODE:SOURCE %s", ch.Name(), ModeSource::Name(mode));
     }
 }
 
 
-void DeviceIPPP::ChanBS_AmplitudeRange(Chan::E ch, RangeU::E range)
+void DeviceIPPP::ChanBS_AmplitudeRange(Chan &ch, RangeU::E range)
 {
     if (IsChanBS(ch))
     {
         SendCommand(":%s:RANGE:AMPLITUDE %s",
-            Chan(ch).Name(),
-            RangeU(range).Name(RowRange(ch), false));
+            ch.Name(),
+            RangeU(range).Name(RowRange(ch.value), false));
     }
 }
 
 
-void DeviceIPPP::ChanBS_StepCount(Chan::E ch, int count)
+void DeviceIPPP::ChanBS_StepCount(Chan &ch, int count)
 {
     if (IsChanBS(ch))
     {
-        SendCommand(":%s:STEP:COUNT %d", Chan(ch).Name(), count);
+        SendCommand(":%s:STEP:COUNT %d", ch.Name(), count);
     }
 }
 
 
-void DeviceIPPP::ChanBS_AmplitudeValue(Chan::E ch, int value)
+void DeviceIPPP::ChanBS_AmplitudeValue(Chan &ch, int value)
 {
     if (IsChanBS(ch))
     {
-        SendCommand("%s:AMPLITUDE %d", Chan(ch).Name(), value);
+        SendCommand("%s:AMPLITUDE %d", ch.Name(), value);
     }
 }
 
 
-void DeviceIPPP::ChaBS_Bias(Chan::E ch, double bias)
+void DeviceIPPP::ChaBS_Bias(Chan &ch, double bias)
 {
     if (IsChanBS(ch))
     {
-        SendCommand("%s:BIAS %10e", Chan(ch).Name(), bias);
+        SendCommand("%s:BIAS %10e", ch.Name(), bias);
     }
 }
 
 
-void DeviceIPPP::ChanBS_MeasMode(Chan::E ch, ModeMeas::E mode)
+void DeviceIPPP::ChanBS_MeasMode(Chan &ch, ModeMeas::E mode)
 {
     if (IsChanBS(ch))
     {
-        SendCommand(":%s:MODE:MEAS %s", Chan(ch).Name(), ModeMeas::Name(mode));
+        SendCommand(":%s:MODE:MEAS %s", ch.Name(), ModeMeas::Name(mode));
     }
 }
 
 
-void DeviceIPPP::ChanBS_MeasRange(Chan::E ch, RangeU::E range)
-{
-    if (IsChanBS(ch))
-    {
-        SendCommand(":%s:RANGE:MEAS %s",
-            Chan(ch).Name(),
-            RangeU(range).Name(RowRange(ch), false));
-    }
-}
-
-
-void DeviceIPPP::ChanBS_MeasRange(Chan::E ch, RangeI::E range)
+void DeviceIPPP::ChanBS_MeasRange(Chan &ch, RangeU::E range)
 {
     if (IsChanBS(ch))
     {
         SendCommand(":%s:RANGE:MEAS %s",
-            Chan(ch).Name(),
-            RangeI(range).Name(RowRange(ch), false));
+            ch.Name(),
+            RangeU(range).Name(RowRange(ch.value), false));
     }
 }
 
 
-void DeviceIPPP::ChanBS_LimitRange(Chan::E ch, RangeU::E range)
+void DeviceIPPP::ChanBS_MeasRange(Chan &ch, RangeI::E range)
+{
+    if (IsChanBS(ch))
+    {
+        SendCommand(":%s:RANGE:MEAS %s",
+            ch.Name(),
+            RangeI(range).Name(RowRange(ch.value), false));
+    }
+}
+
+
+void DeviceIPPP::ChanBS_LimitRange(Chan &ch, RangeU::E range)
 {
     if (IsChanBS(ch))
     {
         SendCommand(":%s:RANGE:LIMIT %s",
-            Chan(ch).Name(),
-            RangeU(range).Name(RowRange(ch), false));
+            ch.Name(),
+            RangeU(range).Name(RowRange(ch.value), false));
     }
 }
 
 
-void DeviceIPPP::ChanBS_LimitRange(Chan::E ch, RangeI::E range)
+void DeviceIPPP::ChanBS_LimitRange(Chan &ch, RangeI::E range)
 {
     if (IsChanBS(ch))
     {
         SendCommand(":%s:RANGE:LIMIT %s",
-            Chan(ch).Name(),
-            RangeI(range).Name(RowRange(ch), false));
+            ch.Name(),
+            RangeI(range).Name(RowRange(ch.value), false));
     }
 }
 
 
-void DeviceIPPP::ChanBS_LimitThreshold(Chan::E ch, int threshold)
+void DeviceIPPP::ChanBS_LimitThreshold(Chan &ch, int threshold)
 {
     if (IsChanBS(ch))
     {
-        SendCommand(":%s:LIMIT:THRESHOLD %d", Chan(ch).Name(), threshold);
+        SendCommand(":%s:LIMIT:THRESHOLD %d", ch.Name(), threshold);
     }
 }
 
 
-bool DeviceIPPP::IsChanBS(Chan::E ch) const
+bool DeviceIPPP::IsChanBS(const Chan &ch) const
 {
-    if (ch == Chan::_B || ch == Chan::_S)
+    if (ch.IsBS())
     {
         return true;
     }

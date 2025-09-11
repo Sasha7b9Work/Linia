@@ -47,6 +47,11 @@ struct Chan
     bool IsVisible() const;
 
     pchar Name() const;
+
+    bool IsBS() const
+    {
+        return value == _B || value == _S;
+    }
 };
 
 

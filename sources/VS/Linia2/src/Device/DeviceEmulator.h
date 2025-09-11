@@ -41,17 +41,17 @@ public:
 
     // Функции для каналов B и S
 
-    virtual void ChanBS_SourceMode(Chan::E, ModeSource::E) override;
-    virtual void ChanBS_AmplitudeRange(Chan::E, RangeU::E) override;
-    virtual void ChanBS_StepCount(Chan::E, int) override;
-    virtual void ChanBS_AmplitudeValue(Chan::E, int) override;
-    virtual void ChaBS_Bias(Chan::E, double) override;
-    virtual void ChanBS_MeasMode(Chan::E, ModeMeas::E) override;
-    virtual void ChanBS_MeasRange(Chan::E, RangeU::E) override;
-    virtual void ChanBS_MeasRange(Chan::E, RangeI::E) override;
-    virtual void ChanBS_LimitRange(Chan::E, RangeU::E) override;
-    virtual void ChanBS_LimitRange(Chan::E, RangeI::E) override;
-    virtual void ChanBS_LimitThreshold(Chan::E, int) override;
+    virtual void ChanBS_SourceMode(Chan &, ModeSource::E) override;
+    virtual void ChanBS_AmplitudeRange(Chan &, RangeU::E) override;
+    virtual void ChanBS_StepCount(Chan &, int) override;
+    virtual void ChanBS_AmplitudeValue(Chan &, int) override;
+    virtual void ChaBS_Bias(Chan &, double) override;
+    virtual void ChanBS_MeasMode(Chan &, ModeMeas::E) override;
+    virtual void ChanBS_MeasRange(Chan &, RangeU::E) override;
+    virtual void ChanBS_MeasRange(Chan &, RangeI::E) override;
+    virtual void ChanBS_LimitRange(Chan &, RangeU::E) override;
+    virtual void ChanBS_LimitRange(Chan &, RangeI::E) override;
+    virtual void ChanBS_LimitThreshold(Chan &, int) override;
 
     //------------------------------------------------------------------------------------------------------------
 
