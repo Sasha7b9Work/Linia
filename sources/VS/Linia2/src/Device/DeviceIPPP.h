@@ -76,7 +76,6 @@ public:
 
     virtual void SetAutoZeroOff(bool) override;
     virtual void SetPointCount(int) override;
-    virtual void SetBitQ18(PulseState::E) override;
     virtual void SetElementType(ElementType::E) override;
     virtual void EmergencyStop() override;
     virtual void StartMeasurement() override;

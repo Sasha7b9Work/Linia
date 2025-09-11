@@ -254,13 +254,6 @@ void DeviceIPPP::SetPointCount(int count)
 }
 
 
-void DeviceIPPP::SetBitQ18(PulseState::E state) {
-    std::stringstream ss;
-    ss << ":BITQ18 " << PulseState::Name(state).ToStdString();
-    SendCommand(ss.str());
-}
-
-
 void DeviceIPPP::SetElementType(ElementType::E isMultipole) {
     std::string cmd = ":ELEMENT " + ElementType::Name(isMultipole).ToStdString();
     SendCommand(cmd);

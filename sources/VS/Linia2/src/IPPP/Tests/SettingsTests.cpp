@@ -92,12 +92,6 @@ wxString StartMode::Name(E mode)
 }
 
 
-wxString PulseState::Name(E state)
-{
-    return state == Enabled ? "ON" : "OFF";
-}
-
-
 wxString ElementType::Name(E type)
 {
     return type == Multipole ? "MULTI" : "TWO";

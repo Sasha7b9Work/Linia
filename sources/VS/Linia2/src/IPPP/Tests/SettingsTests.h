@@ -176,20 +176,6 @@ struct StartMode
 };
 
 
-// Состояние импульса
-struct PulseState
-{
-    enum E
-    {
-        Disabled,
-        Enabled,
-        Count
-    };
-
-    static wxString Name(E);
-};
-
-
 // Тип элемента
 struct ElementType
 {
