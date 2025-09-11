@@ -296,5 +296,5 @@ void DeviceIPPP::StopMeasurement()
 
 void DeviceIPPP::WriteMicroChip(MicroChip::E chip, int reg, uint value)
 {
-    SendCommand(":CHIP:%s:%d:WRITE %u", MicroChip::Name(chip), reg, value);
+    SendCommand(":CHIP:%s:%d:WRITE %08X", MicroChip::Name(chip), reg, value);
 }
