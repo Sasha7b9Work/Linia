@@ -42,8 +42,8 @@ public:
     virtual void ChanBS_SourceMode(Chan::E chan, ModeSource::E mode) override;
     virtual void ChanBS_AmplitudeRange(Chan::E chan, AmplitudeRange::E range) override;
     virtual void ChanBS_StepCount(Chan::E chan, StepCount::E count) override;
-    virtual void ChanBS_AmplitudeValue(Chan::E chan, AmplitudeValue::E value) override;
-    virtual void ChaBS_Bias(Chan::E chan, AmplitudeValue::E bias) override;
+    virtual void ChanBS_AmplitudeValue(Chan::E chan, int) override;
+    virtual void ChaBS_Bias(Chan::E chan, int) override;
     virtual void ChanBS_MeasMode(Chan::E chan, ModeMeas::E mode) override;
     virtual void ChanBS_MeasRangeU(Chan::E chan, RangeU::E range) override;
     virtual void ChanBS_MeasRangeI(Chan::E chan, RangeI::E range) override;

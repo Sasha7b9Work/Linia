@@ -94,12 +94,12 @@ void DeviceEmulator::ChanBS_StepCount(Chan::E /*chan*/, StepCount::E /*count*/)
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_AmplitudeValue(Chan::E /*chan*/, AmplitudeValue::E /*value*/)
+void DeviceEmulator::ChanBS_AmplitudeValue(Chan::E /*chan*/, int /*value*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChaBS_Bias(Chan::E /*chan*/, AmplitudeValue::E /*bias*/)
+void DeviceEmulator::ChaBS_Bias(Chan::E /*chan*/, int /*bias*/)
 {
     LOG_ERROR("Not implemented");
 }

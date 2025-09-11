@@ -304,77 +304,12 @@ int StepCount::Value(E count)
 }
 
 
-wxString AmplitudeValue::Name(E value)
+wxString LimitThreshold::Name(E)
 {
-    switch (value)
-    {
-    case Value_N32767: return "-32767";
-    case Value_N30000: return "-30000";
-    case Value_N20000: return "-20000";
-    case Value_N10000: return "-10000";
-    case Value_N5000: return "-5000";
-    case Value_N1000: return "-1000";
-    case Value_N500: return "-500";
-    case Value_N100: return "-100";
-    case Value_N50: return "-50";
-    case Value_N10: return "-10";
-    case Value_N1: return "-1";
-    case Value_0: return "0";
-    case Value_1: return "1";
-    case Value_10: return "10";
-    case Value_50: return "50";
-    case Value_100: return "100";
-    case Value_500: return "500";
-    case Value_1000: return "1000";
-    case Value_5000: return "5000";
-    case Value_10000: return "10000";
-    case Value_20000: return "20000";
-    case Value_30000: return "30000";
-    case Value_32767: return "32767";
-    case Count:
-    default: return "0";
-    }
+    return "";
 }
 
-int16_t AmplitudeValue::Value(E value)
+int16_t LimitThreshold::Value(E)
 {
-    switch (value)
-    {
-    case Value_N32767: return -32767;
-    case Value_N30000: return -30000;
-    case Value_N20000: return -20000;
-    case Value_N10000: return -10000;
-    case Value_N5000: return -5000;
-    case Value_N1000: return -1000;
-    case Value_N500: return -500;
-    case Value_N100: return -100;
-    case Value_N50: return -50;
-    case Value_N10: return -10;
-    case Value_N1: return -1;
-    case Value_0: return 0;
-    case Value_1: return 1;
-    case Value_10: return 10;
-    case Value_50: return 50;
-    case Value_100: return 100;
-    case Value_500: return 500;
-    case Value_1000: return 1000;
-    case Value_5000: return 5000;
-    case Value_10000: return 10000;
-    case Value_20000: return 20000;
-    case Value_30000: return 30000;
-    case Value_32767: return 32767;
-    case Count:
-    default: return 0;
-    }
-}
-
-
-wxString LimitThreshold::Name(E threshold)
-{
-    return AmplitudeValue::Name((AmplitudeValue::E)threshold);
-}
-
-int16_t LimitThreshold::Value(E threshold)
-{
-    return AmplitudeValue::Value((AmplitudeValue::E)threshold);
+    return 0;
 }

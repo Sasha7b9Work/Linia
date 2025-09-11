@@ -54,6 +54,18 @@ void DeviceIPPP::SendCommand(const std::string& cmd) {
 }
 
 
+void DeviceIPPP::SendCommand(pchar format, ...)
+{
+    char message[1024];
+    std::va_list args;
+    va_start(args, format);
+    std::vsprintf(message, format, args);
+    va_end(args);
+
+    SendCommand(std::string(message));
+}
+
+
 void DeviceIPPP::CommunicationThread() {
     while (running) {
         std::string cmd;
@@ -159,17 +171,15 @@ void DeviceIPPP::ChanBS_StepCount(Chan::E chan, StepCount::E count) {
 }
 
 
-void DeviceIPPP::ChanBS_AmplitudeValue(Chan::E chan, AmplitudeValue::E value) {
-    std::stringstream ss;
-    ss << ":" << Chan::Name(chan).ToStdString() << ":AMPLITUDE " << AmplitudeValue::Value(value);
-    SendCommand(ss.str());
+void DeviceIPPP::ChanBS_AmplitudeValue(Chan::E ch, int value)
+{
+    SendCommand("%s:AMPLITUDE %d", Chan::Name(ch).c_str().AsChar(), value);
 }
 
 
-void DeviceIPPP::ChaBS_Bias(Chan::E chan, AmplitudeValue::E bias) {
-    std::stringstream ss;
-    ss << ":" << Chan::Name(chan).ToStdString() << ":BIAS " << AmplitudeValue::Value(bias);
-    SendCommand(ss.str());
+void DeviceIPPP::ChaBS_Bias(Chan::E ch, int bias)
+{
+    SendCommand("%s:BIAS %d", Chan::Name(ch).c_str().AsChar(), bias);
 }
 
 

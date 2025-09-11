@@ -49,10 +49,10 @@ public:
     // Число ступеней
     virtual void ChanBS_StepCount(Chan::E, StepCount::E) = 0;
 
-    virtual void ChanBS_AmplitudeValue(Chan::E, AmplitudeValue::E) = 0;
+    virtual void ChanBS_AmplitudeValue(Chan::E, int) = 0;
 
     // Смещение
-    virtual void ChaBS_Bias(Chan::E, AmplitudeValue::E) = 0;
+    virtual void ChaBS_Bias(Chan::E, int) = 0;
 
     // Режим измерителя
     virtual void ChanBS_MeasMode(Chan::E, ModeMeas::E) = 0;

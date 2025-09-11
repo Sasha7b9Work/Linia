@@ -391,42 +391,6 @@ struct StepCount
 };
 
 
-// Значение амплитуды
-struct AmplitudeValue
-{
-    enum E
-    {
-        Value_N32767,
-        Value_N30000,
-        Value_N20000,
-        Value_N10000,
-        Value_N5000,
-        Value_N1000,
-        Value_N500,
-        Value_N100,
-        Value_N50,
-        Value_N10,
-        Value_N1,
-        Value_0,
-        Value_1,
-        Value_10,
-        Value_50,
-        Value_100,
-        Value_500,
-        Value_1000,
-        Value_5000,
-        Value_10000,
-        Value_20000,
-        Value_30000,
-        Value_32767,
-        Count
-    };
-
-    static wxString Name(E);
-    static int16_t Value(E);
-};
-
-
 // Порог ограничения
 struct LimitThreshold
 {

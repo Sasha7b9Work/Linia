@@ -51,10 +51,10 @@ public:
     // Число ступеней
     virtual void ChanBS_StepCount(Chan::E, StepCount::E) override;
 
-    virtual void ChanBS_AmplitudeValue(Chan::E, AmplitudeValue::E) override;
+    virtual void ChanBS_AmplitudeValue(Chan::E, int) override;
 
     // Смещение
-    virtual void ChaBS_Bias(Chan::E, AmplitudeValue::E) override;
+    virtual void ChaBS_Bias(Chan::E, int) override;
 
     // Режим измерителя
     virtual void ChanBS_MeasMode(Chan::E, ModeMeas::E) override;
@@ -93,6 +93,7 @@ public:
 private:
 
     void SendCommand(const std::string &cmd);
+    void SendCommand(pchar format, ...);
     void CommunicationThread();
 
     std::queue<std::string> commandQueue;
