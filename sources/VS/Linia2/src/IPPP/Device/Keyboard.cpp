@@ -94,27 +94,27 @@ void Keyboard::Update()
 
 void Keyboard::CallbackOnSTART(bool press)
 {
-    pins[0].press = press;
-    pins[0].event_time = Timer::CurrentTimeMS();
+    PIN_START.press = press;
+    PIN_START.event_time = Timer::CurrentTimeMS();
 }
 
 
 void Keyboard::CallbackOnSTOP(bool press)
 {
-    pins[1].press = press;
-    pins[1].event_time = Timer::CurrentTimeMS();
+    PIN_STOP.press = press;
+    PIN_STOP.event_time = Timer::CurrentTimeMS();
 }
 
 
 void Keyboard::CallbackOnKA(bool press)
 {
-    pins[2].press = press;
-    pins[2].event_time = Timer::CurrentTimeMS();
+    PIN_KA.press = press;
+    PIN_KA.event_time = Timer::CurrentTimeMS();
 }
 
 
 void Keyboard::CallbackOnKB(bool press)
 {
-    pins[3].press = press;
-    pins[3].event_time = Timer::CurrentTimeMS();
+    PIN_KB.press = press;
+    PIN_KB.event_time = Timer::CurrentTimeMS();
 }
