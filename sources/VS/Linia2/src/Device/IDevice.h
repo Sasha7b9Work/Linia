@@ -12,8 +12,17 @@ public:
     virtual ~IDevice() = default;
 
     virtual bool Init() = 0;
+
     virtual void Shutdown() = 0;
+
     virtual bool IsConnected() const = 0;
+
+    // Количество точек в режиме DC или импульсном
+    virtual void SetPointCount(int) = 0;
+
+    virtual void StartMeasurement() = 0
+        ;
+    virtual void StopMeasurement() = 0;
 
     // Записать значение в регистр.
     // Если размер регистра меньше 32, записываются младшие биты
@@ -79,9 +88,4 @@ public:
     virtual void ChanBS_LimitThreshold(const Chan &, double) = 0;
 
     //------------------------------------------------------------------------------------------------------------
-
-    virtual void SetPointCount(int) = 0;                            // Установка количества точек измерения
-
-    virtual void StartMeasurement() = 0;                            // Запуск измерения
-    virtual void StopMeasurement() = 0;                             // Остановка измерения
 };
