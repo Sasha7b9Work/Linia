@@ -52,12 +52,10 @@ public:
     virtual void ChanBS_LimitThreshold(Chan::E, int) override;
     virtual void ChanBS_HighResolution(Chan::E, bool highRes) override;
 
-
-
     //------------------------------------------------------------------------------------------------------------
 
     virtual void SetAutoZeroOff(bool) override;
-    virtual void SetPointCount(PointCount::E) override;
+    virtual void SetPointCount(int) override;
     virtual void SetStartType(StartTrigger::E, StartMode::E) override;
     virtual void SetMeasurementMode(MeasMode::E) override;
     virtual void SetMaxDacCode(DacCode::E) override;

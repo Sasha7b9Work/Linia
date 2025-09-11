@@ -146,7 +146,7 @@ void DeviceEmulator::SetAutoZeroOff(bool)
 }
 
 
-void DeviceEmulator::SetPointCount(PointCount::E)
+void DeviceEmulator::SetPointCount(int)
 {
     LOG_ERROR("Not implemented");
 }

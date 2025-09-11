@@ -162,20 +162,6 @@ struct GenerationStup
 };
 
 
-// Количество точек измерения
-struct PointCount
-{
-    enum E
-    {
-        Points_20,
-        Points_50,
-        Count
-    };
-
-    static wxString Name(E);
-};
-
-
 // Тип запуска
 struct StartTrigger
 {

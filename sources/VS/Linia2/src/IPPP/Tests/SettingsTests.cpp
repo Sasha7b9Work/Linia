@@ -74,19 +74,16 @@ wxString TypeScan::Name(E type)
     }
 }
 
+
 wxString FirstQueue::Name(E fq)
 {
     return fq == ChannelC ? "C" : "B";
 }
 
+
 wxString GenerationStup::Name(E gs)
 {
     return gs == Enable ? "1" : "0";
-}
-
-wxString PointCount::Name(E points)
-{
-    return points == Points_20 ? "20" : "50";
 }
 
 

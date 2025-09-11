@@ -75,7 +75,7 @@ public:
     //------------------------------------------------------------------------------------------------------------
 
     virtual void SetAutoZeroOff(bool) override;
-    virtual void SetPointCount(PointCount::E) override;
+    virtual void SetPointCount(int) override;
     virtual void SetStartType(StartTrigger::E, StartMode::E) override;
     virtual void SetMeasurementMode(MeasMode::E) override;
     virtual void SetMaxDacCode(DacCode::E) override;

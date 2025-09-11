@@ -72,18 +72,18 @@ public:
 
     //------------------------------------------------------------------------------------------------------------
 
-    virtual void SetAutoZeroOff(bool) = 0;                                          // Отключение автоматической коррекции нуля
-    virtual void SetPointCount(PointCount::E) = 0;                                  // Установка количества точек измерения
-    virtual void SetStartType(StartTrigger::E, StartMode::E) = 0;                   // Тип запуска: внешний/внутренний, одиночный/множественный
-    virtual void SetMeasurementMode(MeasMode::E) = 0;                               // Режим измерения
-    virtual void SetMaxDacCode(DacCode::E) = 0;                                     // Максимальный код DAC
-    virtual void SetBitQ18(PulseState::E) = 0;                                      // Состояние бита Q18
-    virtual void SetElementType(ElementType::E) = 0;                                // Тип элемента: многополюсный или нет
-    virtual void EmergencyStop() = 0;                                               // Аварийная остановка
-    virtual void StartMeasurement() = 0;                                            // Запуск измерения
+    virtual void SetAutoZeroOff(bool) = 0;                          // Отключение автоматической коррекции нуля
+    virtual void SetPointCount(int) = 0;                            // Установка количества точек измерения
+    virtual void SetStartType(StartTrigger::E, StartMode::E) = 0;   // Тип запуска: внешний/внутренний, одиночный/множественный
+    virtual void SetMeasurementMode(MeasMode::E) = 0;               // Режим измерения
+    virtual void SetMaxDacCode(DacCode::E) = 0;                     // Максимальный код DAC
+    virtual void SetBitQ18(PulseState::E) = 0;                      // Состояние бита Q18
+    virtual void SetElementType(ElementType::E) = 0;                // Тип элемента: многополюсный или нет
+    virtual void EmergencyStop() = 0;                               // Аварийная остановка
+    virtual void StartMeasurement() = 0;                            // Запуск измерения
 
-    virtual void StopMeasurement() = 0;                                             // Остановка измерения
-    virtual void ResetToDefaults() = 0;                                             // Сброс к настройкам по умолчанию
+    virtual void StopMeasurement() = 0;                             // Остановка измерения
+    virtual void ResetToDefaults() = 0;                             // Сброс к настройкам по умолчанию
 };
 
 

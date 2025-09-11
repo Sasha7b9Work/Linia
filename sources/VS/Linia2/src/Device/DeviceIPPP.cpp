@@ -248,10 +248,9 @@ void DeviceIPPP::SetAutoZeroOff(bool off) {
 }
 
 
-void DeviceIPPP::SetPointCount(PointCount::E count) {
-    std::stringstream ss;
-    ss << ":POINTCOUNT " << PointCount::Name(count).ToStdString();
-    SendCommand(ss.str());
+void DeviceIPPP::SetPointCount(int count)
+{
+    SendCommand(":POINTCOUNT %d", count);
 }
 
 
