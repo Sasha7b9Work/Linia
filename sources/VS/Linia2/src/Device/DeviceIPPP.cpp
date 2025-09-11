@@ -7,12 +7,6 @@
 IDevice *IDevice::impl = nullptr;
 
 
-DeviceIPPP::DeviceIPPP() :
-    running(false), connected(false)
-{
-}
-
-
 DeviceIPPP::~DeviceIPPP()
 {
     Shutdown();

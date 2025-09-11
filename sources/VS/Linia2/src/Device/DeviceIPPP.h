@@ -7,7 +7,7 @@ class DeviceIPPP : public IDevice
 {
 public:
 
-    DeviceIPPP();
+    DeviceIPPP() { }
 
     virtual ~DeviceIPPP();
 
@@ -87,6 +87,6 @@ private:
 
     bool IsChanBS(const Chan &) const;
 
-    std::atomic<bool> running;
-    std::atomic<bool> connected;
+    std::atomic<bool> running = false;
+    std::atomic<bool> connected = false;
 };
