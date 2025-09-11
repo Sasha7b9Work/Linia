@@ -19,26 +19,6 @@ namespace SET
         Value<int>       serial_port_num("serial_port_num", 0);
         Value<bool>      debug_mode("debug_mode", false);
     }
-
-    void Init()
-    {
-        Load("");
-    }
-
-    void Load(const wxString &file_path)
-    {
-        Config::SetFile(file_path);
-
-        Config::SetFile("");
-    }
-
-
-    void Save(const wxString &file_path)
-    {
-        Config::SetFile(file_path);
-
-        Config::SetFile("");
-    }
 }
 
 

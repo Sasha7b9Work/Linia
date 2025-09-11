@@ -6,12 +6,6 @@
 // Настройки прибора
 namespace SET
 {
-    void Init();
-    void Load(const wxString &file_path);
-    void Save(const wxString &file_path);
-
-    ////////////////////////////////////////////////// Карты доступа
-
     // Настройки ГУИ
     namespace GUI
     {
@@ -28,5 +22,4 @@ namespace SET
         extern Value<int>       serial_port_num;             // Нумерация начинается с нуля. 0 == COM1
         extern Value<bool>      debug_mode;
     }
-
 };

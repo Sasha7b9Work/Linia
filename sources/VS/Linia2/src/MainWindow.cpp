@@ -220,8 +220,6 @@ void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 
     Test::Save("example.tst");
 
-    SET::Save("");
-
     if (ConsoleRS232::self)
     {
         SET::GUI::pos_console.Set(ConsoleRS232::self->GetPosition());
