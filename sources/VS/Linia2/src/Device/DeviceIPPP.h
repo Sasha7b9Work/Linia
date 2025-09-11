@@ -71,7 +71,7 @@ public:
     virtual void ChanBS_LimitRange(const Chan &, RangeI::E) override;
 
     // Порог ограничения измерителя
-    virtual void ChanBS_LimitThreshold(const Chan &, int) override;
+    virtual void ChanBS_LimitThreshold(const Chan &, double) override;
 
     //------------------------------------------------------------------------------------------------------------
 

@@ -76,7 +76,7 @@ public:
     virtual void ChanBS_LimitRange(const Chan &, RangeI::E) = 0;
 
     // Порог ограничения измерителя
-    virtual void ChanBS_LimitThreshold(const Chan &, int) = 0;
+    virtual void ChanBS_LimitThreshold(const Chan &, double) = 0;
 
     //------------------------------------------------------------------------------------------------------------
 

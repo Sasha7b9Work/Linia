@@ -52,7 +52,7 @@ public:
     virtual void ChanBS_MeasRange(const Chan &, RangeI::E) override;
     virtual void ChanBS_LimitRange(const Chan &, RangeU::E) override;
     virtual void ChanBS_LimitRange(const Chan &, RangeI::E) override;
-    virtual void ChanBS_LimitThreshold(const Chan &, int) override;
+    virtual void ChanBS_LimitThreshold(const Chan &, double) override;
 
     //------------------------------------------------------------------------------------------------------------
 

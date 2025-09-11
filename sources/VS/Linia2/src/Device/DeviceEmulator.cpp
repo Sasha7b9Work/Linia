@@ -142,7 +142,7 @@ void DeviceEmulator::ChanBS_LimitRange(const Chan &/*chan*/, RangeI::E /*range*/
 }
 
 
-void DeviceEmulator::ChanBS_LimitThreshold(const Chan &/*chan*/, int /*threshold*/)
+void DeviceEmulator::ChanBS_LimitThreshold(const Chan &/*chan*/, double /*threshold*/)
 {
     LOG_ERROR("Not implemented");
 }
