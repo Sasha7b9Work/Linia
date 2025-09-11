@@ -1135,7 +1135,7 @@ RowRange::E RowRange::ForType(TypeDSet::E type)
 }
 
 
-RowRange::E RowRange::ForChannel(Chan::E ch)
+RowRange::RowRange(Chan::E ch)
 {
     static const E r[Chan::Count] =
     {
@@ -1145,5 +1145,5 @@ RowRange::E RowRange::ForChannel(Chan::E ch)
         _124
     };
 
-    return r[ch];
+    value = r[ch];
 }

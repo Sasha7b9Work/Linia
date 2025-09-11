@@ -39,8 +39,18 @@ struct RowRange
         Count
     };
 
+    RowRange(Chan::E);
+
     static E ForType(TypeDSet::E);
-    static E ForChannel(Chan::E);
+
+    operator E()const
+    {
+        return value;
+    }
+
+private:
+
+    E value;
 };
 
 

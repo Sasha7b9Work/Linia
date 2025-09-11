@@ -132,19 +132,19 @@ void DeviceIPPP::SetPulseDuration(uint durationUS, bool genertaion_stump)
 
 void DeviceIPPP::ChanC_SourceRange(RangeU::E range)
 {
-    SendCommand(":C:RANGE:SOURCE %s", RangeU(range).Name(RowRange::ForChannel(Chan::_C), false));
+    SendCommand(":C:RANGE:SOURCE %s", RangeU(range).Name(RowRange(Chan::_C), false));
 }
 
 
 void DeviceIPPP::ChanC_MeasRange(RangeU::E range)
 {
-    SendCommand(":C:RANGE:MEAS %s", RangeU(range).Name(RowRange::ForChannel(Chan::_C), false));
+    SendCommand(":C:RANGE:MEAS %s", RangeU(range).Name(RowRange(Chan::_C), false));
 }
 
 
 void DeviceIPPP::ChanC_MeasRange(RangeI::E range)
 {
-    SendCommand(":C:RANGE:MEAS %s", RangeI(range).Name(RowRange::ForChannel(Chan::_C), false));
+    SendCommand(":C:RANGE:MEAS %s", RangeI(range).Name(RowRange(Chan::_C), false));
 }
 
 
@@ -169,7 +169,7 @@ void DeviceIPPP::ChanBS_AmplitudeRange(Chan::E ch, RangeU::E range)
     {
         SendCommand(":%s:RANGE:AMPLITUDE %s",
             Chan(ch).Name(),
-            RangeU(range).Name(RowRange::ForChannel(ch), false));
+            RangeU(range).Name(RowRange(ch), false));
     }
 }
 
@@ -216,7 +216,7 @@ void DeviceIPPP::ChanBS_MeasRangeU(Chan::E ch, RangeU::E range)
     {
         SendCommand(":%s:RANGE:MEAS %s",
             Chan(ch).Name(),
-            RangeU(range).Name(RowRange::ForChannel(ch), false));
+            RangeU(range).Name(RowRange(ch), false));
     }
 }
 
@@ -227,7 +227,7 @@ void DeviceIPPP::ChanBS_MeasRangeI(Chan::E ch, RangeI::E range)
     {
         SendCommand(":%s:RANGE:MEAS %s",
             Chan(ch).Name(),
-            RangeI(range).Name(RowRange::ForChannel(ch), false));
+            RangeI(range).Name(RowRange(ch), false));
     }
 }
 
@@ -238,7 +238,7 @@ void DeviceIPPP::ChanBS_LimitRangeU(Chan::E ch, RangeU::E range)
     {
         SendCommand(":%s:RANGE:LIMIT %s",
             Chan(ch).Name(),
-            RangeU(range).Name(RowRange::ForChannel(ch), false));
+            RangeU(range).Name(RowRange(ch), false));
     }
 }
 
@@ -249,7 +249,7 @@ void DeviceIPPP::ChanBS_LimitRangeI(Chan::E ch, RangeI::E range)
     {
         SendCommand(":%s:RANGE:LIMIT %s",
             Chan(ch).Name(),
-            RangeI(range).Name(RowRange::ForChannel(ch), false));
+            RangeI(range).Name(RowRange(ch), false));
     }
 }
 
