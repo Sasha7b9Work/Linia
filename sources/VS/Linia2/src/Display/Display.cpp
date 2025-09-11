@@ -75,7 +75,7 @@ void Display::Init()
 
     SAFE_DELETE(bitmap);
 
-    bitmap = new wxBitmap(GetSize().x, GetSize().y);
+    bitmap = new wxBitmap(Panel::GetSize().x, Panel::GetSize().y);
 
     if (!grid)
     {
@@ -85,7 +85,7 @@ void Display::Init()
     int w = btnHelp->GetSize().x;
     int d = 10;
     int x0 = d;
-    int y0 = GetSize().y - d - w;
+    int y0 = Panel::GetSize().y - d - w;
 
     btnHelp->SetPosition({ x0, y0 });
     btnLessX->SetPosition({ x0 + w + d, y0 });
