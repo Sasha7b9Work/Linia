@@ -40,7 +40,7 @@ struct Chan
         Count
     };
 
-    Chan(E v) : value(v) { }
+    explicit Chan(E v) : value(v) { }
 
     E value;
 
