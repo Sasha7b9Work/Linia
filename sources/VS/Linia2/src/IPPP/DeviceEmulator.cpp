@@ -89,7 +89,7 @@ void DeviceEmulator::ChanBS_AmplitudeRange(Chan::E /*chan*/, AmplitudeRange::E /
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_StepCount(Chan::E /*chan*/, StepCount::E /*count*/)
+void DeviceEmulator::ChanBS_StepCount(Chan::E /*chan*/, int /*count*/)
 {
     LOG_ERROR("Not implemented");
 }

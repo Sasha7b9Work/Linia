@@ -368,25 +368,3 @@ struct LimitPercent
     static wxString Name(E);
     static int Value(E);
 };
-
-
-// Количество шагов
-struct StepCount
-{
-    enum E
-    {
-        Steps_1,
-        Steps_10,
-        Steps_20,
-        Steps_50,
-        Steps_100,
-        Steps_200,
-        Steps_500,
-        Steps_1000,
-        Count
-    };
-
-    static wxString Name(E);
-    static int Value(E);
-};
-

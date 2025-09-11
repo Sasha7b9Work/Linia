@@ -47,7 +47,7 @@ public:
     virtual void ChanBS_AmplitudeRange(Chan::E, AmplitudeRange::E) = 0;
 
     // Число ступеней
-    virtual void ChanBS_StepCount(Chan::E, StepCount::E) = 0;
+    virtual void ChanBS_StepCount(Chan::E, int) = 0;
 
     virtual void ChanBS_AmplitudeValue(Chan::E, int) = 0;
 

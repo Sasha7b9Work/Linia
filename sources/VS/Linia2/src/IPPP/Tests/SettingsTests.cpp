@@ -267,38 +267,3 @@ uint8_t AmplitudeRange::Value(E range)
 {
     return (uint8_t)range;
 }
-
-
-wxString StepCount::Name(E count)
-{
-    switch (count)
-    {
-    case Steps_1: return "1";
-    case Steps_10: return "10";
-    case Steps_20: return "20";
-    case Steps_50: return "50";
-    case Steps_100: return "100";
-    case Steps_200: return "200";
-    case Steps_500: return "500";
-    case Steps_1000: return "1000";
-    case Count:
-    default: return "1";
-    }
-}
-
-int StepCount::Value(E count)
-{
-    switch (count)
-    {
-    case Steps_1: return 1;
-    case Steps_10: return 10;
-    case Steps_20: return 20;
-    case Steps_50: return 50;
-    case Steps_100: return 100;
-    case Steps_200: return 200;
-    case Steps_500: return 500;
-    case Steps_1000: return 1000;
-    case Count:
-    default: return 1;
-    }
-}

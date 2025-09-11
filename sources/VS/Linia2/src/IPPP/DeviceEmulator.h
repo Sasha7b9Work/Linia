@@ -39,18 +39,18 @@ public:
 
     // Функции для каналов B и S
 
-    virtual void ChanBS_SourceMode(Chan::E chan, ModeSource::E mode) override;
-    virtual void ChanBS_AmplitudeRange(Chan::E chan, AmplitudeRange::E range) override;
-    virtual void ChanBS_StepCount(Chan::E chan, StepCount::E count) override;
-    virtual void ChanBS_AmplitudeValue(Chan::E chan, int) override;
-    virtual void ChaBS_Bias(Chan::E chan, int) override;
-    virtual void ChanBS_MeasMode(Chan::E chan, ModeMeas::E mode) override;
-    virtual void ChanBS_MeasRangeU(Chan::E chan, RangeU::E range) override;
-    virtual void ChanBS_MeasRangeI(Chan::E chan, RangeI::E range) override;
-    virtual void ChanBS_LimitRangeU(Chan::E chan, RangeU::E range) override;
-    virtual void ChanBS_LimitRangeI(Chan::E chan, RangeI::E range) override;
-    virtual void ChanBS_LimitThreshold(Chan::E chan, int) override;
-    virtual void ChanBS_HighResolution(Chan::E chan, bool highRes) override;
+    virtual void ChanBS_SourceMode(Chan::E, ModeSource::E) override;
+    virtual void ChanBS_AmplitudeRange(Chan::E, AmplitudeRange::E) override;
+    virtual void ChanBS_StepCount(Chan::E, int) override;
+    virtual void ChanBS_AmplitudeValue(Chan::E, int) override;
+    virtual void ChaBS_Bias(Chan::E, int) override;
+    virtual void ChanBS_MeasMode(Chan::E, ModeMeas::E) override;
+    virtual void ChanBS_MeasRangeU(Chan::E, RangeU::E) override;
+    virtual void ChanBS_MeasRangeI(Chan::E, RangeI::E) override;
+    virtual void ChanBS_LimitRangeU(Chan::E, RangeU::E) override;
+    virtual void ChanBS_LimitRangeI(Chan::E, RangeI::E) override;
+    virtual void ChanBS_LimitThreshold(Chan::E, int) override;
+    virtual void ChanBS_HighResolution(Chan::E, bool highRes) override;
 
 
 
@@ -59,12 +59,12 @@ public:
     virtual void SetAutoZeroOff(bool) override;
     virtual void SetPointCount(PointCount::E) override;
     virtual void SetStartType(StartTrigger::E, StartMode::E) override;
-    virtual void SetMeasurementMode(MeasMode::E mode) override;
-    virtual void SetMaxDacCode(DacCode::E code) override;
-    virtual void SetBitQ18(PulseState::E state) override;
-    virtual void SetElementType(ElementType::E isMultipole) override;
-    virtual void SendLimitSignal(LimitResult::E limitCode) override;
-    virtual void SetConfigData(uint8_t modification, PowerNominal::E nominal) override;
+    virtual void SetMeasurementMode(MeasMode::E) override;
+    virtual void SetMaxDacCode(DacCode::E) override;
+    virtual void SetBitQ18(PulseState::E) override;
+    virtual void SetElementType(ElementType::E) override;
+    virtual void SendLimitSignal(LimitResult::E) override;
+    virtual void SetConfigData(uint8_t modification, PowerNominal::E) override;
     virtual void EmergencyStop();
     virtual void StartMeasurement();
 

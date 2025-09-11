@@ -49,7 +49,7 @@ public:
     virtual void ChanBS_AmplitudeRange(Chan::E, AmplitudeRange::E) override;
 
     // Число ступеней
-    virtual void ChanBS_StepCount(Chan::E, StepCount::E) override;
+    virtual void ChanBS_StepCount(Chan::E, int) override;
 
     virtual void ChanBS_AmplitudeValue(Chan::E, int) override;
 

@@ -162,9 +162,9 @@ void DeviceIPPP::ChanBS_AmplitudeRange(Chan::E ch, AmplitudeRange::E range)
 }
 
 
-void DeviceIPPP::ChanBS_StepCount(Chan::E ch, StepCount::E count)
+void DeviceIPPP::ChanBS_StepCount(Chan::E ch, int count)
 {
-    SendCommand(":%s:STEP:COUNT ", Chan(ch).Name().c_str().AsChar(), StepCount::Value(count));
+    SendCommand(":%s:STEP:COUNT %d", Chan(ch).Name().c_str().AsChar(), count);
 }
 
 
