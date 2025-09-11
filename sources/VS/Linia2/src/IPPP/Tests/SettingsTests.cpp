@@ -181,39 +181,6 @@ wxString PowerNominal::Name(E nominal)
 }
 
 
-wxString PulseDuration::Name(E duration)
-{
-    switch (duration)
-    {
-    case Duration_50us: return "50us";
-    case Duration_100us: return "100us";
-    case Duration_200us: return "200us";
-    case Duration_300us: return "300us";
-    case Duration_400us: return "400us";
-    case Duration_500us: return "500us";
-    case Duration_1000us: return "1000us";
-    case Count:
-    default: return "200us";
-    }
-}
-
-uint PulseDuration::Value(E duration)
-{
-    switch (duration)
-    {
-    case Duration_50us: return 50;
-    case Duration_100us: return 100;
-    case Duration_200us: return 200;
-    case Duration_300us: return 300;
-    case Duration_400us: return 400;
-    case Duration_500us: return 500;
-    case Duration_1000us: return 1000;
-    case Count:
-    default: return 200;
-    }
-}
-
-
 wxString AmplitudeRange::Name(E range)
 {
     switch (range)

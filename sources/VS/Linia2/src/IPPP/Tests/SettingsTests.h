@@ -314,23 +314,3 @@ struct PowerNominal
 
     static wxString Name(E);
 };
-
-
-// Длительность импульса
-struct PulseDuration
-{
-    enum E
-    {
-        Duration_50us,
-        Duration_100us,
-        Duration_200us,
-        Duration_300us,
-        Duration_400us,
-        Duration_500us,
-        Duration_1000us,
-        Count
-    };
-
-    static wxString Name(E);
-    static uint Value(E);
-};
