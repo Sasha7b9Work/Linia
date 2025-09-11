@@ -41,7 +41,7 @@ struct RowRange
 
     RowRange(Chan::E);
 
-    static E ForType(TypeDSet::E);
+    RowRange(TypeDSet::E);
 
     operator E()const
     {

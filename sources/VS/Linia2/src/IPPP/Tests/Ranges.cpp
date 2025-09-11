@@ -1083,11 +1083,11 @@ void RangeI::FillArrayStrings(wxArrayString &arr, TypeDSet::E type, bool steps)
     {
         if (steps)
         {
-            arr.push_back(RangeI((RangeI::E)i).NameStep(RowRange::ForType(type)));
+            arr.push_back(RangeI((RangeI::E)i).NameStep(RowRange(type)));
         }
         else
         {
-            arr.push_back(RangeI((RangeI::E)i).Name(RowRange::ForType(type)));
+            arr.push_back(RangeI((RangeI::E)i).Name(RowRange(type)));
         }
     }
 }
@@ -1101,17 +1101,17 @@ void RangeU::FillArrayStrings(wxArrayString &arr, TypeDSet::E type, bool steps)
     {
         if (steps)
         {
-            arr.push_back(RangeU((RangeU::E)i).NameStep(RowRange::ForType(type)));
+            arr.push_back(RangeU((RangeU::E)i).NameStep(RowRange(type)));
         }
         else
         {
-            arr.push_back(RangeU((RangeU::E)i).Name(RowRange::ForType(type)));
+            arr.push_back(RangeU((RangeU::E)i).Name(RowRange(type)));
         }
     }
 }
 
 
-RowRange::E RowRange::ForType(TypeDSet::E type)
+RowRange::RowRange(TypeDSet::E type)
 {
     struct StructRow
     {
@@ -1131,7 +1131,7 @@ RowRange::E RowRange::ForType(TypeDSet::E type)
         _124
     };
 
-    return row[type].row;
+    value = row[type].row;
 }
 
 

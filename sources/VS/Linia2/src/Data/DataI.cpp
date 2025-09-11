@@ -33,5 +33,5 @@ DataConverterI::DataConverterI(TypeDSet::E t, RangeI::E r) :
 {
     using namespace DCI;
 
-    k = range.MaxValueAbs(RowRange::ForType(type_set)) / (double)max_ADC[type_set].value;
+    k = range.MaxValueAbs(RowRange(type_set)) / (double)max_ADC[type_set].value;
 }
