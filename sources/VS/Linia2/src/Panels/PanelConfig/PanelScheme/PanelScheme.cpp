@@ -1,17 +1,17 @@
 ﻿// 2025/8/9 09:54:44 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel03_Config/PanelScheme/PanelScheme.h"
+#include "Panels/PanelConfig/PanelScheme/PanelScheme.h"
 #include "MainWindow.h"
-#include "Panels/Panel03_Config/Panel03_Config.h"
+#include "Panels/PanelConfig/PanelConfig.h"
 #include "Utils/SystemDepend.h"
-#include "Panels/Panel03_Config/PanelScheme/WindowLibraryTests.h"
-#include "Panels/Panel03_Config/PanelChannelBS.h"
+#include "Panels/PanelConfig/PanelScheme/WindowLibraryTests.h"
+#include "Panels/PanelConfig/PanelChannelBS.h"
 #include "Controls/Bitmap.h"
 #include "IPPP/Tests/Tests.h"
 #include "Controls/StaticBox.h"
 #include "Utils/Configurator.h"
-#include "Panels/Panel03_Config/PanelChannelC.h"
-#include "Panels/Panel03_Config/PanelChannelBS.h"
+#include "Panels/PanelConfig/PanelChannelC.h"
+#include "Panels/PanelConfig/PanelChannelBS.h"
 
 
 PanelScheme *PanelScheme::self = nullptr;

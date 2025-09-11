@@ -8,7 +8,7 @@
 #include "MainWindow.h"
 #include "Panels/Panel01_Name.h"
 #include "Panels/Panel02_ModeUpper.h"
-#include "Panels/Panel03_Config/Panel03_Config.h"
+#include "Panels/PanelConfig/PanelConfig.h"
 #include "Panels/Panel04_Model.h"
 #include "Display/Display.h"
 #include "Panels/Panel07_Indicator.h"

@@ -4,7 +4,7 @@
 #include "Panels/Panel08_ModeLower.h"
 #include "Utils/SystemDepend.h"
 #include "Controls/StaticBox.h"
-#include "Panels/Panel03_Config/Panel03_Config.h"
+#include "Panels/PanelConfig/PanelConfig.h"
 #include "Panels/Panel07_Indicator.h"
 
 

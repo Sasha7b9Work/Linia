@@ -76,8 +76,8 @@ file(GLOB IPPP                          src/IPPP/*.*)
 file(GLOB IPPP_DEVICE                   src/IPPP/Device/*.*)
 file(GLOB IPPP_TESTS                    src/IPPP/Tests/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
-file(GLOB PANELS_PANEL3                 src/Panels/Panel03_Config/*.*)
-file(GLOB PANELS_PANEL3_SHCEME          src/Panels/Panel03_Config/PanelScheme/*.*)
+file(GLOB PANELS_PANELCONFIG            src/Panels/PanelConfig/*.*)
+file(GLOB PANELS_PANELCONFIG_SCHEME     src/Panels/PanelConfig/PanelScheme/*.*)
 file(GLOB PANELS_PANEL11                src/Panels/Panel11_Menu/*.*)
 file(GLOB PANELS_PANEL11_SETUP          src/Panels/Panel11_Menu/Setup/*.*)
 file(GLOB PANELS_PANEL12                src/Panels/Panel12_Debug/*.*)
@@ -117,8 +117,8 @@ source_group(IPPP                                 FILES ${IPPP})
 source_group(IPPP/Device                          FILES ${IPPP_DEVICE})
 source_group(IPPP/Tests                           FILES ${IPPP_TESTS})
 source_group(Panels                               FILES ${PANELS})
-source_group(Panels/Panel03_Config                FILES ${PANELS_PANEL3})
-source_group(Panels/Panel03_Config/PanelScheme    FILES ${PANELS_PANEL3_SHCEME})
+source_group(Panels/PanelConfig                   FILES ${PANELS_PANELCONFIG})
+source_group(Panels/PanelConfig/PanelScheme       FILES ${PANELS_PANELCONFIG_SCHEME})
 source_group(Panels/Panel11_Menu                  FILES ${PANELS_PANEL11})
 source_group(Panels/Panel11_Menu/Setup            FILES ${PANELS_PANEL11_SETUP})
 source_group(Panels/Panel12_Debug                 FILES ${PANELS_PANEL12})
@@ -148,8 +148,8 @@ add_executable(${PROJECT_NAME}
     ${IPPP_DEVICE}
     ${IPPP_TESTS}
     ${PANELS}
-    ${PANELS_PANEL3}
-    ${PANELS_PANEL3_SHCEME}
+    ${PANELS_PANELCONFIG}
+    ${PANELS_PANELCONFIG_SCHEME}
     ${PANELS_PANEL11}
     ${PANELS_PANEL11_SETUP}
     ${PANELS_PANEL12}

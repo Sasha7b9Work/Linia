@@ -1,12 +1,12 @@
 ﻿// 2025/6/1 18:25:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel03_Config/Panel03_Config.h"
+#include "Panels/PanelConfig/PanelConfig.h"
 #include "Panels/Panel07_Indicator.h"
 #include "MainWindow.h"
 #include "Utils/SystemDepend.h"
 #include "Controls/Bitmap.h"
 #include "IPPP/Device/IDevice.h"
-#include "Panels/Panel03_Config/Panel03_Config.h"
+#include "Panels/PanelConfig/PanelConfig.h"
 #include "IPPP/IPPP.h"
 
 

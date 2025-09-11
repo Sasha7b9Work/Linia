@@ -1,8 +1,8 @@
 ﻿// 2025/08/14 20:09:49 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel03_Config/PanelCalculate.h"
+#include "Panels/PanelConfig/PanelCalculate.h"
 #include "MainWindow.h"
-#include "Panels/Panel03_Config/Panel03_Config.h"
+#include "Panels/PanelConfig/PanelConfig.h"
 #include "Utils/SystemDepend.h"
 #include "Controls/StaticBox.h"
 

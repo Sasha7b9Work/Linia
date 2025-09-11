@@ -1,7 +1,7 @@
 ﻿// 2025/8/9 09:54:32 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/ButtonsCombo.h"
-#include "Panels/Panel03_Config/PanelScheme/PainterScheme.h"
+#include "Panels/PanelConfig/PanelScheme/PainterScheme.h"
 #include "Controls/BmpButtonsCombo.h"
 #include "IPPP/Tests/Tests.h"
 

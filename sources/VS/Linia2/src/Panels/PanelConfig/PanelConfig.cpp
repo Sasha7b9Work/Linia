@@ -1,15 +1,15 @@
 ﻿// 2025/6/1 17:20:45 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel03_Config/Panel03_Config.h"
+#include "Panels/PanelConfig/PanelConfig.h"
 #include "MainWindow.h"
 #include "Utils/GlobalFunctions.h"
 #include "Utils/SystemDepend.h"
 #include "Controls/SpinBox.h"
-#include "Panels/Panel03_Config/PanelScheme/WindowLibraryTests.h"
-#include "Panels/Panel03_Config/PanelScheme/PanelScheme.h"
-#include "Panels/Panel03_Config/PanelChannelBS.h"
-#include "Panels/Panel03_Config/PanelChannelC.h"
-#include "Panels/Panel03_Config/PanelCalculate.h"
+#include "Panels/PanelConfig/PanelScheme/WindowLibraryTests.h"
+#include "Panels/PanelConfig/PanelScheme/PanelScheme.h"
+#include "Panels/PanelConfig/PanelChannelBS.h"
+#include "Panels/PanelConfig/PanelChannelC.h"
+#include "Panels/PanelConfig/PanelCalculate.h"
 #include "Utils/Configurator.h"
 
 
