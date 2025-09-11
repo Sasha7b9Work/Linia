@@ -60,7 +60,7 @@ class PinIn : public Pin {
 public:
     using Pin::Pin;
     using ChangeCallback = std::function<void(bool)>;
-    void SetChangeCallback(ChangeCallback cb);
+    void SetChangeCallback(ChangeCallback);
 private:
     ChangeCallback callback_;
 };
@@ -79,8 +79,8 @@ namespace GPIO
     void Init();
     void DeInit();
 
-    InputPinInfo *GetInputPinInfo(Pin::Type type);
-    OutputPinInfo *GetOutputPinInfo(Pin::Type type);
+    InputPinInfo *GetInputPinInfo(Pin::Type);
+    OutputPinInfo *GetOutputPinInfo(Pin::Type);
 }
 
 
