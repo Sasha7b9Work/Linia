@@ -71,9 +71,9 @@ file(GLOB COMMUNICATOR_SPI              src/Communicator/SPI/*.*)
 file(GLOB COMMUNICATOR_UART             src/Communicator/UART/*.*)
 file(GLOB CONTROLS                      src/Controls/*.*)
 file(GLOB DATA                          src/Data/*.*)
-file(GLOB DEVICE                        src/Device/*.*)
 file(GLOB DISPLAY                       src/Display/*.*)
 file(GLOB IPPP                          src/IPPP/*.*)
+file(GLOB IPPP_DEVICE                   src/IPPP/Device/*.*)
 file(GLOB IPPP_TESTS                    src/IPPP/Tests/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
 file(GLOB PANELS_PANEL3                 src/Panels/Panel03_Config/*.*)
@@ -112,9 +112,9 @@ source_group(Communicator/SPI                     FILES ${COMMUNICATOR_SPI})
 source_group(Communicator/UART                    FILES ${COMMUNICATOR_UART})
 source_group(Controls                             FILES ${CONTROLS})
 source_group(Data                                 FILES ${DATA})
-source_group(Device                               FILES ${DEVICE})
 source_group(Display                              FILES ${DISPLAY})
 source_group(IPPP                                 FILES ${IPPP})
+source_group(IPPP/Device                          FILES ${IPPP_DEVICE})
 source_group(IPPP/Tests                           FILES ${IPPP_TESTS})
 source_group(Panels                               FILES ${PANELS})
 source_group(Panels/Panel03_Config                FILES ${PANELS_PANEL3})
@@ -143,9 +143,9 @@ add_executable(${PROJECT_NAME}
     ${COMMUNICATOR_UART}
     ${CONTROLS}
     ${DATA}
-    ${DEVICE}
     ${DISPLAY}
     ${IPPP}
+    ${IPPP_DEVICE}
     ${IPPP_TESTS}
     ${PANELS}
     ${PANELS_PANEL3}
