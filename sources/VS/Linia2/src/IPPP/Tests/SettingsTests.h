@@ -50,6 +50,11 @@ struct Chan
 };
 
 
+extern Chan ChC;
+extern Chan ChB;
+extern Chan ChS;
+
+
 struct StateJack
 {
     enum E

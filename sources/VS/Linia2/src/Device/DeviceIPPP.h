@@ -18,13 +18,13 @@ public:
     virtual void WriteMicroChip(MicroChip::E, int reg, uint value) override;
 
     // Схема включения канала
-    virtual void SetCircuitConnection(Chan::E, StateJack::E) override;
+    virtual void SetCircuitConnection(Chan &, StateJack::E) override;
 
     // Вид развёртки
     virtual void SetSweepType(TypeScan::E) override;
 
     // Первая очередь
-    virtual void SetFirstQueue(Chan::E) override;
+    virtual void SetFirstQueue(Chan &) override;
 
     // Длительность импульса
     virtual void SetPulseDuration(uint durationUS, bool generation_stump) override;

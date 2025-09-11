@@ -20,13 +20,13 @@ public:
     virtual void WriteMicroChip(MicroChip::E, int reg, uint value) = 0;
 
     // Схема включения канала
-    virtual void SetCircuitConnection(Chan::E, StateJack::E) = 0;
+    virtual void SetCircuitConnection(Chan &, StateJack::E) = 0;
 
     // Вид развёртки
     virtual void SetSweepType(TypeScan::E) = 0;
 
     // Первая очередь
-    virtual void SetFirstQueue(Chan::E) = 0;
+    virtual void SetFirstQueue(Chan &) = 0;
 
     // Длительность импульса
     // generation_stump - семейство кривых

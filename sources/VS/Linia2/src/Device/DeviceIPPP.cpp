@@ -66,10 +66,10 @@ void DeviceIPPP::SendCommand(pchar format, ...)
 }
 
 
-void DeviceIPPP::SetCircuitConnection(Chan::E ch, StateJack::E state)
+void DeviceIPPP::SetCircuitConnection(Chan &ch, StateJack::E state)
 {
     SendCommand("%s:CONNECTION %s",
-        Chan(ch).Name(),
+        ch.Name(),
         StateJack::NameHardware(state));
 }
 
@@ -80,9 +80,9 @@ void DeviceIPPP::SetSweepType(TypeScan::E type)
 }
 
 
-void DeviceIPPP::SetFirstQueue(Chan::E ch)
+void DeviceIPPP::SetFirstQueue(Chan &ch)
 {
-    SendCommand(":FIRSTQUEUE %s", Chan(ch).Name());
+    SendCommand(":FIRSTQUEUE %s", ch.Name());
 }
 
 

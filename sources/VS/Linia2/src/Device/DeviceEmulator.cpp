@@ -38,7 +38,7 @@ void DeviceEmulator::WriteMicroChip(MicroChip::E, int, uint)
 }
 
 
-void DeviceEmulator::SetCircuitConnection(Chan::E, StateJack::E)
+void DeviceEmulator::SetCircuitConnection(Chan &, StateJack::E)
 {
     LOG_ERROR("Not implemented");
 }
@@ -50,7 +50,7 @@ void DeviceEmulator::SetSweepType(TypeScan::E)
 }
 
 
-void DeviceEmulator::SetFirstQueue(Chan::E)
+void DeviceEmulator::SetFirstQueue(Chan &)
 {
     LOG_ERROR("Not implemented");
 }
