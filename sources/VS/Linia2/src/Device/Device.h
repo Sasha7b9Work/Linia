@@ -74,11 +74,9 @@ public:
 
     virtual void SetAutoZeroOff(bool) = 0;                          // Отключение автоматической коррекции нуля
     virtual void SetPointCount(int) = 0;                            // Установка количества точек измерения
-    virtual void EmergencyStop() = 0;                               // Аварийная остановка
-    virtual void StartMeasurement() = 0;                            // Запуск измерения
 
+    virtual void StartMeasurement() = 0;                            // Запуск измерения
     virtual void StopMeasurement() = 0;                             // Остановка измерения
-    virtual void ResetToDefaults() = 0;                             // Сброс к настройкам по умолчанию
 };
 
 

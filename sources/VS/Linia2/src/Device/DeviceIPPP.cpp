@@ -254,11 +254,6 @@ void DeviceIPPP::SetPointCount(int count)
 }
 
 
-void DeviceIPPP::EmergencyStop() {
-    SendCommand(":EMERGENCYSTOP");
-}
-
-
 void DeviceIPPP::StartMeasurement() {
     SendCommand(":STARTMEAS");
 }
@@ -266,9 +261,4 @@ void DeviceIPPP::StartMeasurement() {
 
 void DeviceIPPP::StopMeasurement() {
     SendCommand(":STOPMEAS");
-}
-
-
-void DeviceIPPP::ResetToDefaults() {
-    SendCommand(":RESET");
 }

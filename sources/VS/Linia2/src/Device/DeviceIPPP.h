@@ -76,12 +76,9 @@ public:
 
     virtual void SetAutoZeroOff(bool) override;
     virtual void SetPointCount(int) override;
-    virtual void EmergencyStop() override;
+
     virtual void StartMeasurement() override;
-
     virtual void StopMeasurement() override;
-    virtual void ResetToDefaults() override;
-
 
 private:
 
