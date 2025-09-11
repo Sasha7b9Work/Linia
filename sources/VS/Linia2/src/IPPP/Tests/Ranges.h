@@ -31,6 +31,7 @@ struct TypeValue
 };
 
 
+// По какому закону изменяется диапазон : "1-2-5" или "1-2-4"
 struct RowRange
 {
     enum E
