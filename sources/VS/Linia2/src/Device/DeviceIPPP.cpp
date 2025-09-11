@@ -44,16 +44,6 @@ bool DeviceIPPP::IsConnected() const {
 }
 
 
-void DeviceIPPP::SendCommand(const std::string& cmd) {
-    std::string CMD = cmd;
-    if (!CMD.empty() && CMD.back() != '\r' && CMD.back() != '\n') {
-        CMD += "\r";
-    }
-    std::lock_guard<std::mutex> lock(queueMutex);
-    commandQueue.push(CMD);
-}
-
-
 void DeviceIPPP::SendCommand(pchar format, ...)
 {
     char message[1024];
@@ -62,7 +52,16 @@ void DeviceIPPP::SendCommand(pchar format, ...)
     std::vsprintf(message, format, args);
     va_end(args);
 
-    SendCommand(std::string(message));
+    std::string CMD = message;
+
+    if (!CMD.empty() && CMD.back() != '\r' && CMD.back() != '\n')
+    {
+        CMD += "\r";
+    }
+
+    std::lock_guard<std::mutex> lock(queueMutex);
+
+    commandQueue.push(CMD);
 }
 
 
@@ -84,69 +83,52 @@ void DeviceIPPP::CommunicationThread() {
 }
 
 
-// Реализации функций
 void DeviceIPPP::SetCircuitConnection(Chan::E ch, StateJack::E state)
 {
     SendCommand("%s:CONNECTION %s", Chan(ch).Name().c_str().AsChar(), StateJack::Name(state).c_str().AsChar());
 }
 
 
-void DeviceIPPP::SetSweepType(TypeScan::E type) {
-    std::string cmd = ":TYPESCAN " + TypeScan::Name(type).ToStdString();
-    SendCommand(cmd);
+void DeviceIPPP::SetSweepType(TypeScan::E type)
+{
+    SendCommand(":TYPESCAN %s", TypeScan::Name(type).c_str().AsChar());
 }
 
 
-void DeviceIPPP::SetFirstQueue(FirstQueue::E fq) {
-    std::string cmd = ":FIRSTQUEUE " + FirstQueue::Name(fq).ToStdString();
-    SendCommand(cmd);
+void DeviceIPPP::SetFirstQueue(FirstQueue::E fq)
+{
+    SendCommand(":FIRSTQUEUE %s", + FirstQueue::Name(fq).c_str().AsChar());
 }
 
 
-void DeviceIPPP::SetPulseDuration(uint durationUS, GenerationStup::E gs) {
-    std::stringstream ss;
-    ss << ":PULSE:DURATION " << durationUS << "\n:GENERATIONSTUP " << GenerationStup::Name(gs).ToStdString();
-    SendCommand(ss.str());
+void DeviceIPPP::SetPulseDuration(uint durationUS, GenerationStup::E gs)
+{
+    SendCommand(":PULSE:DURATION %u", durationUS);
+    SendCommand(":GENERATIONSTUP %s", GenerationStup::Name(gs).c_str().AsChar());
 }
 
 
-void DeviceIPPP::ChanC_SourceRange(RangeU::E range) {
-    std::string rangeStr = std::string(RangeU(range).Name(RowRange::_124));
-    size_t spacePos = rangeStr.find(' ');
-    if (spacePos != std::string::npos) {
-        rangeStr.erase(spacePos, 1);
-    }
-    std::string cmd = ":C:RANGE:SOURCE " + rangeStr;
-    SendCommand(cmd);
+void DeviceIPPP::ChanC_SourceRange(RangeU::E range)
+{
+    SendCommand(":C:RANGE:SOURCE %s", RangeU(range).Name(RowRange::ForChannel(Chan::_C), false));
 }
 
 
-void DeviceIPPP::ChanC_MeasRange(RangeU::E range) {
-    std::string rangeStr = std::string(RangeU(range).Name(RowRange::_124));
-    size_t spacePos = rangeStr.find(' ');
-    if (spacePos != std::string::npos) {
-        rangeStr.erase(spacePos, 1);
-    }
-    std::string cmd = ":C:RANGE:MEAS " + rangeStr;
-    SendCommand(cmd);
+void DeviceIPPP::ChanC_MeasRange(RangeU::E range)
+{
+    SendCommand(":C:RANGE:MEAS %s", RangeU(range).Name(RowRange::ForChannel(Chan::_C), false));
 }
 
 
-void DeviceIPPP::ChanC_MeasRange(RangeI::E range) {
-    std::string rangeStr = std::string(RangeI(range).Name(RowRange::_124));
-    size_t spacePos = rangeStr.find(' ');
-    if (spacePos != std::string::npos) {
-        rangeStr.erase(spacePos, 1);
-    }
-    std::string cmd = ":C:RANGE:MEAS " + rangeStr;
-    SendCommand(cmd);
+void DeviceIPPP::ChanC_MeasRange(RangeI::E range)
+{
+    SendCommand(":C:RANGE:MEAS %s", RangeI(range).Name(RowRange::ForChannel(Chan::_C), false));
 }
 
 
-void DeviceIPPP::ChanC_LimitSourceU(int min, int max) {
-    std::stringstream ss;
-    ss << ":C:LIMIT " << min << " " << max;
-    SendCommand(ss.str());
+void DeviceIPPP::ChanC_LimitSourceU(int min, int max)
+{
+    SendCommand(":C:LIMIT %d %d", min, max);
 }
 
 
@@ -190,15 +172,6 @@ void DeviceIPPP::ChanBS_MeasMode(Chan::E ch, ModeMeas::E mode)
 
 void DeviceIPPP::ChanBS_MeasRangeU(Chan::E ch, RangeU::E range)
 {
-//    std::string rangeStr = std::string(RangeU(range).Name(RowRange::_124));
-//
-//    size_t spacePos = rangeStr.find(' ');
-//
-//    if (spacePos != std::string::npos)
-//    {
-//        rangeStr.erase(spacePos, 1);
-//    }
-
     SendCommand(":%s:RANGE:MEAS %s",
         Chan(ch).Name().c_str().AsChar(),
         RangeU(range).Name(RowRange::ForChannel(ch), false));
@@ -232,12 +205,6 @@ void DeviceIPPP::ChanBS_LimitRangeI(Chan::E ch, RangeI::E range)
 void DeviceIPPP::ChanBS_LimitThreshold(Chan::E ch, int threshold)
 {
     SendCommand(":%s:LIMIT:THRESHOLD %d", Chan(ch).Name().c_str().AsChar(), threshold);
-}
-
-
-void DeviceIPPP::SetAutoZeroOff(bool off) {
-    std::string cmd = ":AUTOZERO " + std::string(off ? "OFF" : "ON");
-    SendCommand(cmd);
 }
 
 

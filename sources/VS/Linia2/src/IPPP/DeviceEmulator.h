@@ -53,7 +53,6 @@ public:
 
     //------------------------------------------------------------------------------------------------------------
 
-    virtual void SetAutoZeroOff(bool) override;
     virtual void SetPointCount(int) override;
     virtual void EmergencyStop();
     virtual void StartMeasurement();

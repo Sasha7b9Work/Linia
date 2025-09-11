@@ -72,7 +72,6 @@ public:
 
     //------------------------------------------------------------------------------------------------------------
 
-    virtual void SetAutoZeroOff(bool) override;
     virtual void SetPointCount(int) override;
 
     virtual void StartMeasurement() override;
@@ -80,7 +79,6 @@ public:
 
 private:
 
-    void SendCommand(const std::string &cmd);
     void SendCommand(pchar format, ...);
     void CommunicationThread();
 
