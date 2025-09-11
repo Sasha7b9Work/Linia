@@ -56,10 +56,63 @@ pchar RangeI::Name(RowRange::E row, bool space) const
     {
         return names[value][row];
     }
-    else
+
+    return names[value][row * 2 + 1];
+}
+
+
+pchar RangeU::Name(RowRange::E row, bool space) const
+{
+    static const pchar names[Count][RowRange::Count * 2] =
     {
-        return names[value][row * 2 + 1];
+        { "1 nV",   "1 nV",   "1nV",   "1nV"   },
+        { "2 nV",   "2 nV",   "2nV",   "2nV"   },
+        { "4 nV",   "5 nV",   "4nV",   "5nV"   },
+        { "10 nV",  "10 nV",  "10nV",  "10nV"  },
+        { "20 nV",  "20 nV",  "20nV",  "20nV"  },
+        { "40 nV",  "50 nV",  "40nV",  "50nV"  },
+        { "100 nV", "100 nV", "100nV", "100nV" },
+        { "200 nV", "200 nV", "200nV", "200nV" },
+        { "400 nV", "500 nV", "400nV", "500nV" },
+        { "1 uV",   "1 uV",   "1uV",   "1uV"   },
+        { "2 uV",   "2 uV",   "2uV",   "2uV"   },
+        { "4 uV",   "5 uV",   "4uV",   "5uV"   },
+        { "10 uV",  "10 uV",  "10uV",  "10uV"  },
+        { "20 uV",  "20 uV",  "20uV",  "20uV"  },
+        { "40 uV",  "50 uV",  "40uV",  "50uV"  },
+        { "100 uV", "100 uV", "100uV", "100uV" },
+        { "200 uV", "200 uV", "200uV", "200uV" },
+        { "400 uV", "500 uV", "400uV", "500uV" },
+        { "1 mV",   "1 mV",   "1mV",   "1mV"   },
+        { "2 mV",   "2 mV",   "2mV",   "2mV"   },
+        { "4 mV",   "5 mV",   "4mV",   "5mV"   },
+        { "10 mV",  "10 mV",  "10mV",  "10mV"  },
+        { "20 mV",  "20 mV",  "20mV",  "20mV"  },
+        { "40 mV",  "50 mV",  "40mV",  "50mV"  },
+        { "100 mV", "100 mV", "100mV", "100mV" },
+        { "200 mV", "200 mV", "200mV", "200mV" },
+        { "400 mV", "500 mV", "400mV", "500mV" },
+        { "1 V",    "1 V",    "1V",    "1V"    },
+        { "2 V",    "2 V",    "2V",    "2V"    },
+        { "4 V",    "5 V",    "4V",    "5V"    },
+        { "10 V",   "10 V",   "10V",   "10V"   },
+        { "20 V",   "20 V",   "20V",   "20V"   },
+        { "40 V",   "50 V",   "40V",   "50V"   },
+        { "100 V",  "100 V",  "100V",  "100V"  },
+        { "200 V",  "200 V",  "200V",  "200V"  },
+        { "400 V",  "500 V",  "400V",  "500V"  },
+        { "1 kV",   "1 kV",   "1kV",   "1kV"   },
+        { "2 kV",   "2 kV",   "2kV",   "2kV"   },
+        { "4 kV",   "5 kV",   "4kV",   "5kV"   },
+        { "10 kV",  "10 kV",  "10kV",  "10kV"  }
+    };
+
+    if (space)
+    {
+        return names[value][row];
     }
+
+    return names[value][row * 2 + 1];
 }
 
 
@@ -175,74 +228,6 @@ wxString RangeU::NameStep(RowRange::E row) const
     }
 
     return val + " " + units;
-}
-
-
-pchar RangeU::Name(RowRange::E r, bool space) const
-{
-    static const pchar names[Count][RowRange::Count] =
-    {
-        { "1 nV",   "1 nV" },
-        { "2 nV",   "2 nV" },
-        { "4 nV",   "5 nV" },
-        { "10 nV",  "10 nV" },
-        { "20 nV",  "20 nV" },
-        { "40 nV",  "50 nV" },
-        { "100 nV", "100 nV" },
-        { "200 nV", "200 nV" },
-        { "400 nV", "500 nV" },
-        { "1 uV",   "1 uV" },
-        { "2 uV",   "2 uV" },
-        { "4 uV",   "5 uV" },
-        { "10 uV",  "10 uV" },
-        { "20 uV",  "20 uV" },
-        { "40 uV",  "50 uV" },
-        { "100 uV", "100 uV" },
-        { "200 uV", "200 uV" },
-        { "400 uV", "500 uV" },
-        { "1 mV",   "1 mV" },
-        { "2 mV",   "2 mV" },
-        { "4 mV",   "5 mV" },
-        { "10 mV",  "10 mV" },
-        { "20 mV",  "20 mV" },
-        { "40 mV",  "50 mV" },
-        { "100 mV", "100 mV" },
-        { "200 mV", "200 mV" },
-        { "400 mV", "500 mV" },
-        { "1 V",    "1 V" },
-        { "2 V",    "2 V" },
-        { "4 V",    "5 V" },
-        { "10 V",   "10 V" },
-        { "20 V",   "20 V" },
-        { "40 V",   "50 V" },
-        { "100 V",  "100 V" },
-        { "200 V",  "200 V" },
-        { "400 V",  "500 V" },
-        { "1 kV",   "1 kV" },
-        { "2 kV",   "2 kV" },
-        { "4 kV",   "5 kV" },
-        { "10 kV",  "10 kV" }
-    };
-
-    if (space)
-    {
-        return names[value][r];
-    }
-    else
-    {
-        static std::string range;
-
-        range = names[value][r];
-
-        size_t pos = range.find(' ');
-
-        if (pos != std::string::npos)
-        {
-            range.erase(pos, 1);
-        }
-
-        return range.c_str();
-    }
 }
 
 
