@@ -66,7 +66,7 @@ void DeviceIPPP::SendCommand(pchar format, ...)
 
 void DeviceIPPP::SetCircuitConnection(const Chan &ch, StateJack::E state)
 {
-    SendCommand("%s:CONNECTION %s",
+    SendCommand(":%s:CONNECTION %s",
         ch.Name(),
         StateJack::NameHardware(state));
 }
@@ -148,7 +148,7 @@ void DeviceIPPP::ChanBS_AmplitudeValue(const Chan &ch, int value)
 {
     if (IsChanBS(ch))
     {
-        SendCommand("%s:AMPLITUDE %d", ch.Name(), value);
+        SendCommand(":%s:AMPLITUDE %d", ch.Name(), value);
     }
 }
 
@@ -157,7 +157,7 @@ void DeviceIPPP::ChaBS_Bias(const Chan &ch, double bias)
 {
     if (IsChanBS(ch))
     {
-        SendCommand("%s:BIAS %10e", ch.Name(), bias);
+        SendCommand(":%s:BIAS %10e", ch.Name(), bias);
     }
 }
 
