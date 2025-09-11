@@ -254,12 +254,6 @@ void DeviceIPPP::SetPointCount(int count)
 }
 
 
-void DeviceIPPP::SetElementType(ElementType::E isMultipole) {
-    std::string cmd = ":ELEMENT " + ElementType::Name(isMultipole).ToStdString();
-    SendCommand(cmd);
-}
-
-
 void DeviceIPPP::EmergencyStop() {
     SendCommand(":EMERGENCYSTOP");
 }

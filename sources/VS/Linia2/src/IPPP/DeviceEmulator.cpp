@@ -152,12 +152,6 @@ void DeviceEmulator::SetPointCount(int)
 }
 
 
-void DeviceEmulator::SetElementType(ElementType::E /*isMultipole*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
 void DeviceEmulator::EmergencyStop()
 {
     LOG_ERROR("Not implemented");

@@ -90,9 +90,3 @@ wxString StartMode::Name(E mode)
 {
     return mode == Multiple ? "MULT" : "SINGLE";
 }
-
-
-wxString ElementType::Name(E type)
-{
-    return type == Multipole ? "MULTI" : "TWO";
-}

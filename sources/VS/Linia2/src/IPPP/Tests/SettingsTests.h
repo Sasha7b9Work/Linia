@@ -174,17 +174,3 @@ struct StartMode
 
     static wxString Name(E);
 };
-
-
-// Тип элемента
-struct ElementType
-{
-    enum E
-    {
-        TwoPole,
-        Multipole,
-        Count
-    };
-
-    static wxString Name(E);
-};
