@@ -302,14 +302,3 @@ int StepCount::Value(E count)
     default: return 1;
     }
 }
-
-
-wxString LimitThreshold::Name(E)
-{
-    return "";
-}
-
-int16_t LimitThreshold::Value(E)
-{
-    return 0;
-}

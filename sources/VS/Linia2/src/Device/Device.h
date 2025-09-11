@@ -66,7 +66,7 @@ public:
     virtual void ChanBS_LimitRangeI(Chan::E, RangeI::E) = 0;
 
     // Порог ограничения измерителя
-    virtual void ChanBS_LimitThreshold(Chan::E, LimitThreshold::E) = 0;
+    virtual void ChanBS_LimitThreshold(Chan::E, int) = 0;
 
     virtual void ChanBS_HighResolution(Chan::E, bool highRes) = 0;
 

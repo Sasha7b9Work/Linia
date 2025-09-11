@@ -233,10 +233,9 @@ void DeviceIPPP::ChanBS_LimitRangeI(Chan::E chan, RangeI::E range) {
 }
 
 
-void DeviceIPPP::ChanBS_LimitThreshold(Chan::E chan, LimitThreshold::E threshold) {
-    std::stringstream ss;
-    ss << ":" << Chan::Name(chan).ToStdString() << ":LIMIT:THRESHOLD " << LimitThreshold::Value(threshold);
-    SendCommand(ss.str());
+void DeviceIPPP::ChanBS_LimitThreshold(Chan::E ch, int threshold)
+{
+    SendCommand(":%s:LIMIT:THRESHOLD %d", Chan::Name(ch).c_str().AsChar(), threshold);
 }
 
 
