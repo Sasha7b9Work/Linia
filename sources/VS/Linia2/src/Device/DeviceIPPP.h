@@ -77,7 +77,6 @@ public:
     virtual void SetAutoZeroOff(bool) override;
     virtual void SetPointCount(int) override;
     virtual void SetMeasurementMode(MeasMode::E) override;
-    virtual void SetMaxDacCode(DacCode::E) override;
     virtual void SetBitQ18(PulseState::E) override;
     virtual void SetElementType(ElementType::E) override;
     virtual void EmergencyStop() override;

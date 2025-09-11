@@ -194,25 +194,6 @@ struct MeasMode
 };
 
 
-// Код DAC
-struct DacCode
-{
-    enum E
-    {
-        Code_100,
-        Code_110,
-        Code_120,
-        Code_130,
-        Code_140,
-        Code_150,
-        Count
-    };
-
-    static wxString Name(E);
-    static uint8_t Value(E);
-};
-
-
 // Состояние импульса
 struct PulseState
 {

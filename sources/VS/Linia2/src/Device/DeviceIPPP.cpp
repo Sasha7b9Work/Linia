@@ -261,13 +261,6 @@ void DeviceIPPP::SetMeasurementMode(MeasMode::E mode) {
 }
 
 
-void DeviceIPPP::SetMaxDacCode(DacCode::E code) {
-    std::stringstream ss;
-    ss << ":MAXDAC " << DacCode::Name(code).ToStdString();
-    SendCommand(ss.str());
-}
-
-
 void DeviceIPPP::SetBitQ18(PulseState::E state) {
     std::stringstream ss;
     ss << ":BITQ18 " << PulseState::Name(state).ToStdString();

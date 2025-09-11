@@ -158,12 +158,6 @@ void DeviceEmulator::SetMeasurementMode(MeasMode::E /*mode*/)
 }
 
 
-void DeviceEmulator::SetMaxDacCode(DacCode::E /*code*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
 void DeviceEmulator::SetBitQ18(PulseState::E /*state*/)
 {
     LOG_ERROR("Not implemented");

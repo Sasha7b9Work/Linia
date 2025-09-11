@@ -108,37 +108,6 @@ wxString MeasMode::Name(E mode)
 }
 
 
-wxString DacCode::Name(E code)
-{
-    switch (code)
-    {
-    case Code_100: return "100";
-    case Code_110: return "110";
-    case Code_120: return "120";
-    case Code_130: return "130";
-    case Code_140: return "140";
-    case Code_150: return "150";
-    case Count:
-    default: return "130";
-    }
-}
-
-uint8_t DacCode::Value(E code)
-{
-    switch (code)
-    {
-    case Code_100: return 100;
-    case Code_110: return 110;
-    case Code_120: return 120;
-    case Code_130: return 130;
-    case Code_140: return 140;
-    case Code_150: return 150;
-    case Count:
-    default: return 130;
-    }
-}
-
-
 wxString PulseState::Name(E state)
 {
     return state == Enabled ? "ON" : "OFF";
