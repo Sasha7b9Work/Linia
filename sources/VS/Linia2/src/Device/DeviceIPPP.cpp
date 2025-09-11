@@ -2,8 +2,6 @@
 #include "Device/IDevice.h"
 #include "Device/DeviceIPPP.h"
 #include "Communicator/UART/UART.h"
-#include <sstream>
-#include <cstdio>
 
 
 IDevice *IDevice::impl = nullptr;
