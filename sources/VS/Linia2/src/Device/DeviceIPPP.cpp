@@ -119,7 +119,7 @@ void DeviceIPPP::SetSweepType(TypeScan::E type)
 
 void DeviceIPPP::SetFirstQueue(Chan::E ch)
 {
-    SendCommand(":FIRSTQUEUE %s", + Chan(ch).Name());
+    SendCommand(":FIRSTQUEUE %s", Chan(ch).Name());
 }
 
 
@@ -192,11 +192,11 @@ void DeviceIPPP::ChanBS_AmplitudeValue(Chan::E ch, int value)
 }
 
 
-void DeviceIPPP::ChaBS_Bias(Chan::E ch, int bias)
+void DeviceIPPP::ChaBS_Bias(Chan::E ch, double bias)
 {
     if (IsChanBS(ch))
     {
-        SendCommand("%s:BIAS %d", Chan(ch).Name(), bias);
+        SendCommand("%s:BIAS %10e", Chan(ch).Name(), bias);
     }
 }
 

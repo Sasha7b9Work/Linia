@@ -56,7 +56,7 @@ public:
     virtual void ChanBS_AmplitudeValue(Chan::E, int) override;
 
     // Смещение
-    virtual void ChaBS_Bias(Chan::E, int) override;
+    virtual void ChaBS_Bias(Chan::E, double) override;
 
     // Режим измерителя
     virtual void ChanBS_MeasMode(Chan::E, ModeMeas::E) override;
