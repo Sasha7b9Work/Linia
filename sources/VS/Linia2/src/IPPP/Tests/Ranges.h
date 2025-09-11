@@ -123,14 +123,14 @@ struct RangeI
 
 private:
 
-    struct StructDesc
+    struct Desc
     {
         pchar name_spaces[RowRange::Count];
         pchar name[RowRange::Count];
         double max_abs[RowRange::Count];
     };
 
-    static const StructDesc desc[Count];
+    static const Desc desc[Count];
 };
 
 
@@ -205,12 +205,12 @@ struct RangeU
 
 private:
 
-    struct StructDesc
+    struct Desc
     {
         pchar name_spaces[RowRange::Count];
         pchar name[RowRange::Count];
         double max_abs[RowRange::Count];
     };
 
-    static const StructDesc desc[Count];
+    static const Desc desc[Count];
 };

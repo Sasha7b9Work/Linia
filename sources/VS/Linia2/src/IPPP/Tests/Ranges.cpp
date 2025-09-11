@@ -3,7 +3,7 @@
 #include "IPPP/Tests/Ranges.h"
 
 
-const RangeI::StructDesc RangeI::desc[RangeI::Count] =
+const RangeI::Desc RangeI::desc[RangeI::Count] =
 {
     { { "400 pA", "500 pA" }, { "400pA", "500pA" }, { 4e-10, 5e-10 } },
     { { "1 nA",   "1 nA" },   { "1nA",   "1nA" },   { 1e-9,  1e-9 } },
@@ -61,7 +61,7 @@ double RangeI::MaxValueAbs(RowRange::E row) const
 }
 
 
-const RangeU::StructDesc RangeU::desc[RangeU::Count] =
+const RangeU::Desc RangeU::desc[RangeU::Count] =
 {
     { { "1 nV",   "1 nV" },   { "1nV",   "1nV" },   { 1e-9, 1e-9 } },
     { { "2 nV",   "2 nV" },   { "2nV",   "2nV" },   { 2e-9, 2e-9 } },
