@@ -59,7 +59,7 @@ public:
     virtual void ChanBS_AmplitudeValue(const Chan &, int) = 0;
 
     // Смещение
-    virtual void ChaBS_Bias(const Chan &, double) = 0;
+    virtual void ChaBS_Offset(const Chan &, double) = 0;
 
     // Режим измерителя
     virtual void ChanBS_MeasMode(const Chan &, ModeMeas::E) = 0;

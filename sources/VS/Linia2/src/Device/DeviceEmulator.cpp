@@ -105,7 +105,7 @@ void DeviceEmulator::ChanBS_AmplitudeValue(const Chan &/*chan*/, int /*value*/)
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChaBS_Bias(const Chan &/*chan*/, double /*bias*/)
+void DeviceEmulator::ChaBS_Offset(const Chan &/*chan*/, double)
 {
     LOG_ERROR("Not implemented");
 }

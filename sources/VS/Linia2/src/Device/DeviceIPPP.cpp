@@ -153,11 +153,11 @@ void DeviceIPPP::ChanBS_AmplitudeValue(const Chan &ch, int value)
 }
 
 
-void DeviceIPPP::ChaBS_Bias(const Chan &ch, double bias)
+void DeviceIPPP::ChaBS_Offset(const Chan &ch, double offset)
 {
     if (IsChanBS(ch))
     {
-        SendCommand(":%s:BIAS %10e", ch.Name(), bias);
+        SendCommand(":%s:OFFSET %10e", ch.Name(), offset);
     }
 }
 
