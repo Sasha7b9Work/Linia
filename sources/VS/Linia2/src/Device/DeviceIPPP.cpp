@@ -128,7 +128,7 @@ void DeviceIPPP::ChanBS_RangeStep(const Chan &ch, RangeU::E range)
 {
     if (IsChanBS(ch))
     {
-        SendCommand(":%s:RANGE:STEP %s",
+        SendCommand(":%s:STEP:RANGE %s",
             ch.Name(),
             RangeU(range).Name(RowRange(ch.value), false));
     }
@@ -139,7 +139,7 @@ void DeviceIPPP::ChanBS_RangeStep(const Chan &ch, RangeI::E range)
 {
     if (IsChanBS(ch))
     {
-        SendCommand(":%s:RANGE:STEP %s",
+        SendCommand(":%s:STEP:RANGE %s",
             ch.Name(),
             RangeI(range).Name(RowRange(ch.value), false));
     }
@@ -155,11 +155,11 @@ void DeviceIPPP::ChanBS_StepCount(const Chan &ch, int count)
 }
 
 
-void DeviceIPPP::ChanBS_AmplitudeValue(const Chan &ch, int value)
+void DeviceIPPP::ChanBS_ValueStep(const Chan &ch, double value)
 {
     if (IsChanBS(ch))
     {
-        SendCommand(":%s:AMPLITUDE %d", ch.Name(), value);
+        SendCommand(":%s:STEP:VALUE %10e", ch.Name(), value);
     }
 }
 

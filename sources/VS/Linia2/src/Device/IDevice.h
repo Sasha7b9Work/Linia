@@ -58,7 +58,8 @@ public:
     // Число ступеней
     virtual void ChanBS_StepCount(const Chan &, int) = 0;
 
-    virtual void ChanBS_AmplitudeValue(const Chan &, int) = 0;
+    // Значение амплитуды ступени
+    virtual void ChanBS_ValueStep(const Chan &, double) = 0;
 
     // Смещение
     virtual void ChaBS_Offset(const Chan &, double) = 0;

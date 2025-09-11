@@ -45,7 +45,7 @@ public:
     virtual void ChanBS_RangeStep(const Chan &, RangeU::E) override;
     virtual void ChanBS_RangeStep(const Chan &, RangeI::E) override;
     virtual void ChanBS_StepCount(const Chan &, int) override;
-    virtual void ChanBS_AmplitudeValue(const Chan &, int) override;
+    virtual void ChanBS_ValueStep(const Chan &, double) override;
     virtual void ChaBS_Offset(const Chan &, double) override;
     virtual void ChanBS_MeasMode(const Chan &, ModeMeas::E) override;
     virtual void ChanBS_MeasRange(const Chan &, RangeU::E) override;

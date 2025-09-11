@@ -105,7 +105,7 @@ void DeviceEmulator::ChanBS_StepCount(const Chan &/*chan*/, int /*count*/)
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_AmplitudeValue(const Chan &/*chan*/, int /*value*/)
+void DeviceEmulator::ChanBS_ValueStep(const Chan &/*chan*/, double /*value*/)
 {
     LOG_ERROR("Not implemented");
 }

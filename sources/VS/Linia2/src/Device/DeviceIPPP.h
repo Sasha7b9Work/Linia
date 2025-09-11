@@ -54,7 +54,7 @@ public:
     // Число ступеней
     virtual void ChanBS_StepCount(const Chan &, int) override;
 
-    virtual void ChanBS_AmplitudeValue(const Chan &, int) override;
+    virtual void ChanBS_ValueStep(const Chan &, double) override;
 
     // Смещение
     virtual void ChaBS_Offset(const Chan &, double) override;
