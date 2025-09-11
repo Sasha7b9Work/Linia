@@ -76,7 +76,7 @@ struct StateJack
 
 private:
 
-    static pchar names[Count][2];
+    static const pchar names[Count][2];
 };
 
 

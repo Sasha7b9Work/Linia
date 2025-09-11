@@ -46,24 +46,24 @@ wxString ModeMeas::Name(E mode)
 }
 
 
-wxString TypeScan::Name(E type)
+wxString TypeScan::Name(E v)
 {
-    switch (type)
+    static const pchar names[Count] =
     {
-    case ImpulsePos: return "IMP_P";
-    case ImpulseNeg: return "IMP_N";
-    case DCPos: return "DC_P";
-    case DCNeg: return "DC_N";
-    case SYNPos: return "SYN_P";
-    case SYNNeg: return "SYN_N";
-    case AC: return "AC";
-    case Count:
-    default: return "";
-    }
+        "IMP_P",
+        "IMP_N",
+        "DC_P",
+        "DC_N",
+        "SYN_P",
+        "SYN_N",
+        "AC"
+    };
+
+    return names[v];
 }
 
 
-pchar StateJack::names[StateJack::Count][2] =
+const pchar StateJack::names[StateJack::Count][2] =
 {
     { "C",        "C" },
     { "B",        "B" },
