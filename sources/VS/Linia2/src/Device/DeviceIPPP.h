@@ -84,6 +84,8 @@ private:
     void SendCommand(pchar format, ...);
     void CommunicationThread();
 
+    bool VerifyChanBS(Chan::E) const;
+
     std::queue<std::string> commandQueue;
     std::mutex queueMutex;
     std::thread commThread;

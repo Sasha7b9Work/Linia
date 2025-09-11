@@ -156,77 +156,123 @@ void DeviceIPPP::ChanC_LimitSourceU(int min, int max)
 
 void DeviceIPPP::ChanBS_SourceMode(Chan::E ch, ModeSource::E mode)
 {
-    SendCommand(":%s:MODE:SOURCE %s", Chan(ch).Name(), ModeSource::Name(mode));
+    if (VerifyChanBS(ch))
+    {
+        SendCommand(":%s:MODE:SOURCE %s", Chan(ch).Name(), ModeSource::Name(mode));
+    }
 }
 
 
 void DeviceIPPP::ChanBS_AmplitudeRange(Chan::E ch, RangeU::E range)
 {
-    SendCommand(":%s:RANGE:AMPLITUDE %s",
-        Chan(ch).Name(),
-        RangeU(range).Name(RowRange::ForChannel(ch), false));
+    if (VerifyChanBS(ch))
+    {
+        SendCommand(":%s:RANGE:AMPLITUDE %s",
+            Chan(ch).Name(),
+            RangeU(range).Name(RowRange::ForChannel(ch), false));
+    }
 }
 
 
 void DeviceIPPP::ChanBS_StepCount(Chan::E ch, int count)
 {
-    SendCommand(":%s:STEP:COUNT %d", Chan(ch).Name(), count);
+    if (VerifyChanBS(ch))
+    {
+        SendCommand(":%s:STEP:COUNT %d", Chan(ch).Name(), count);
+    }
 }
 
 
 void DeviceIPPP::ChanBS_AmplitudeValue(Chan::E ch, int value)
 {
-    SendCommand("%s:AMPLITUDE %d", Chan(ch).Name(), value);
+    if (VerifyChanBS(ch))
+    {
+        SendCommand("%s:AMPLITUDE %d", Chan(ch).Name(), value);
+    }
 }
 
 
 void DeviceIPPP::ChaBS_Bias(Chan::E ch, int bias)
 {
-    SendCommand("%s:BIAS %d", Chan(ch).Name(), bias);
+    if (VerifyChanBS(ch))
+    {
+        SendCommand("%s:BIAS %d", Chan(ch).Name(), bias);
+    }
 }
 
 
 void DeviceIPPP::ChanBS_MeasMode(Chan::E ch, ModeMeas::E mode)
 {
-    SendCommand(":%s:MODE:MEAS %s", Chan(ch).Name(), ModeMeas::Name(mode));
+    if (VerifyChanBS(ch))
+    {
+        SendCommand(":%s:MODE:MEAS %s", Chan(ch).Name(), ModeMeas::Name(mode));
+    }
 }
 
 
 void DeviceIPPP::ChanBS_MeasRangeU(Chan::E ch, RangeU::E range)
 {
-    SendCommand(":%s:RANGE:MEAS %s",
-        Chan(ch).Name(),
-        RangeU(range).Name(RowRange::ForChannel(ch), false));
+    if (VerifyChanBS(ch))
+    {
+        SendCommand(":%s:RANGE:MEAS %s",
+            Chan(ch).Name(),
+            RangeU(range).Name(RowRange::ForChannel(ch), false));
+    }
 }
 
 
 void DeviceIPPP::ChanBS_MeasRangeI(Chan::E ch, RangeI::E range)
 {
-    SendCommand(":%s:RANGE:MEAS %s",
-        Chan(ch).Name(),
-        RangeI(range).Name(RowRange::ForChannel(ch), false));
+    if (VerifyChanBS(ch))
+    {
+        SendCommand(":%s:RANGE:MEAS %s",
+            Chan(ch).Name(),
+            RangeI(range).Name(RowRange::ForChannel(ch), false));
+    }
 }
 
 
 void DeviceIPPP::ChanBS_LimitRangeU(Chan::E ch, RangeU::E range)
 {
-    SendCommand(":%s:RANGE:LIMIT %s",
-        Chan(ch).Name(),
-        RangeU(range).Name(RowRange::ForChannel(ch), false));
+    if (VerifyChanBS(ch))
+    {
+        SendCommand(":%s:RANGE:LIMIT %s",
+            Chan(ch).Name(),
+            RangeU(range).Name(RowRange::ForChannel(ch), false));
+    }
 }
 
 
 void DeviceIPPP::ChanBS_LimitRangeI(Chan::E ch, RangeI::E range)
 {
-    SendCommand(":%s:RANGE:LIMIT %s",
-        Chan(ch).Name(),
-        RangeI(range).Name(RowRange::ForChannel(ch), false));
+    if (VerifyChanBS(ch))
+    {
+        SendCommand(":%s:RANGE:LIMIT %s",
+            Chan(ch).Name(),
+            RangeI(range).Name(RowRange::ForChannel(ch), false));
+    }
 }
 
 
 void DeviceIPPP::ChanBS_LimitThreshold(Chan::E ch, int threshold)
 {
-    SendCommand(":%s:LIMIT:THRESHOLD %d", Chan(ch).Name(), threshold);
+    if (VerifyChanBS(ch))
+    {
+        SendCommand(":%s:LIMIT:THRESHOLD %d", Chan(ch).Name(), threshold);
+    }
+}
+
+
+bool DeviceIPPP::VerifyChanBS(Chan::E ch) const
+{
+    if (ch == Chan::_B || ch == Chan::_S)
+    {
+        return true;
+    }
+
+    LOG_ERROR("Channel must be B or S");
+
+    return false;
 }
 
 
