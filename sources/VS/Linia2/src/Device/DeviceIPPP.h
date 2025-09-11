@@ -15,6 +15,8 @@ public:
     virtual void Shutdown() override;
     virtual bool IsConnected() const override;
 
+    virtual void WriteMicroChip(MicroChip::E, int reg, uint value) override;
+
     // Схема включения канала
     virtual void SetCircuitConnection(Chan::E, StateJack::E) override;
 

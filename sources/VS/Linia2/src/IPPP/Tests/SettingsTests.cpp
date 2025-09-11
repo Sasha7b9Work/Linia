@@ -143,3 +143,15 @@ bool TypeCommutation::IsInternal()
 {
     return PanelScheme::self->comboCommutation->GetCurrentSelection() == 0;
 }
+
+
+pchar MicroChip::Name(E v)
+{
+    static const pchar names[Count] =
+    {
+        "ADC1",
+        "DAC1"
+    };
+
+    return names[v];
+}

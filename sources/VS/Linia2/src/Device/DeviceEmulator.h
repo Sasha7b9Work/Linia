@@ -11,6 +11,8 @@ public:
     virtual void Shutdown();
     virtual bool IsConnected() const;
 
+    virtual void WriteMicroChip(MicroChip::E, int reg, uint value) override;
+
     // Схема включения канала
     virtual void SetCircuitConnection(Chan::E, StateJack::E);
 

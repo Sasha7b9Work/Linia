@@ -137,3 +137,16 @@ struct TypeScan
 
     static pchar Name(E);
 };
+
+
+struct MicroChip
+{
+    enum E
+    {
+        ADC1,
+        DAC1,
+        Count
+    };
+
+    static pchar Name(E);
+};

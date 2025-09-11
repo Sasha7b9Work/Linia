@@ -32,6 +32,12 @@ bool DeviceEmulator::IsConnected() const
 }
 
 
+void DeviceEmulator::WriteMicroChip(MicroChip::E, int, uint)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
 void DeviceEmulator::SetCircuitConnection(Chan::E, StateJack::E)
 {
     LOG_ERROR("Not implemented");
