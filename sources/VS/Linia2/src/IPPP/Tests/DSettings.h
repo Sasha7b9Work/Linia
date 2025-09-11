@@ -10,13 +10,6 @@ struct CalK
 };
 
 
-struct DSettings
-{
-    CalK calI[TypeValue::Count][RangeI::Count];
-    CalK calU[TypeValue::Count][RangeU::Count];
-};
-
-
 // Здесь калибровочные коэффициенты
 namespace DSet
 {

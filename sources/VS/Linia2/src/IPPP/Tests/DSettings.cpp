@@ -3,6 +3,13 @@
 #include "IPPP/Tests/DSettings.h"
 
 
+struct DSettings
+{
+    CalK calI[TypeValue::Count][RangeI::Count];
+    CalK calU[TypeValue::Count][RangeU::Count];
+};
+
+
 static DSettings dset =
 {
     {
