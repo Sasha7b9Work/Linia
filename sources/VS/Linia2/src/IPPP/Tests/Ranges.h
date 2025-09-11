@@ -118,6 +118,17 @@ struct RangeI
     static E Max(TypeDSet::E);
 
     static void FillArrayStrings(wxArrayString &, TypeDSet::E, bool step);
+
+private:
+
+    struct StructDesc
+    {
+        pchar name_spaces[RowRange::Count];
+        pchar name[RowRange::Count];
+        double max_abs[RowRange::Count];
+    };
+
+    static const StructDesc desc[Count];
 };
 
 
