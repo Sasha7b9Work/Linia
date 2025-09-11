@@ -74,8 +74,8 @@ const pchar StateJack::names[StateJack::Count][2] =
     { "B",        "B" },
     { "S",        "S" },
     { "E",        "E" },
-    { "общий",    "GENERAL" },
-    { "общий 1к", "GENERAL_1K"},
+    { "общий",    "GND" },
+    { "общий 1к", "GND_1K"},
     { "обрыв",    "BREAK" }
 };
 
