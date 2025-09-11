@@ -63,37 +63,27 @@ wxString TypeScan::Name(E type)
 }
 
 
-wxString StateJack::NameHardware(E state)
+pchar StateJack::names[StateJack::Count][2] =
 {
-    switch (state)
-    {
-    case _C: return "C";
-    case _B: return "B";
-    case _S: return "S";
-    case _E: return "E";
-    case General: return "GENERAL";
-    case General_1k: return "GENERAL_1K";
-    case Break: return "BREAK";
-    case Count:
-    default: return "BREAK";
-    }
+    { "C",        "C" },
+    { "B",        "B" },
+    { "S",        "S" },
+    { "E",        "E" },
+    { "общий",    "GENERAL" },
+    { "общий 1к", "GENERAL_1K"},
+    { "обрыв",    "BREAK" }
+};
+
+
+wxString StateJack::NameHardware(E v)
+{
+    return names[v][1];
 }
 
 
 wxString StateJack::NameGUI(E v)
 {
-    static const pchar names[Count] =
-    {
-        "C",
-        "B",
-        "S",
-        "E",
-        "общий",
-        "общий 1к",
-        "обрыв"
-    };
-
-    return names[v];
+    return names[v][0];
 }
 
 

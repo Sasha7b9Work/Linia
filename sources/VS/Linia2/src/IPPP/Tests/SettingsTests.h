@@ -73,6 +73,10 @@ struct StateJack
 
     // Эти обозначения используются в ГИП
     static wxString NameGUI(E);
+
+private:
+
+    static pchar names[Count][2];
 };
 
 
