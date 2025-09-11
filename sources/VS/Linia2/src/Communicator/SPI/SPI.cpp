@@ -234,7 +234,7 @@ namespace SPI
             {
                 LOG_ERROR("Cannot get GPIO line %u for %s", gpio_num, DAC_NAMES[i]);
 
-                for (int j = 0; j < i; j++)
+                for (int j = 0; j < i; j++) //-V1008
                 {
                     if (g_dac_lines[j])
                     {

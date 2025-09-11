@@ -109,7 +109,7 @@ void PanelErrors::AppendError(Error::E err, const wxString &message)
 
 void PanelErrors::RemoveError(Error::E err, const wxString &message)
 {
-    for (auto it = errors.begin(); it != errors.end(); it++)
+    for (auto it = errors.begin(); it != errors.end(); ++it)
     {
         if (it->err == err &&
             it->message == message)

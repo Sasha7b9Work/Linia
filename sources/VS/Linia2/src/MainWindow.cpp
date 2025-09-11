@@ -72,8 +72,6 @@ MainWindow::MainWindow(const wxString &title)
     Bind(wxEVT_CLOSE_WINDOW, &MainWindow::OnEventCloseWindow, this);
     TuneFont();
 
-    SET::Init();
-
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
     SetSizer(sizer);

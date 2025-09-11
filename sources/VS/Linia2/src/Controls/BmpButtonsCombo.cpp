@@ -103,16 +103,17 @@ private:
 };
 
 
-BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos, const wxSize &size, const wxArrayString &_files, const wxArrayString &_tooltips, int num_file, int _buttons_in_row, const wxString &_name) :
+BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos,
+    const wxSize &size, const wxArrayString &_files, const wxArrayString &_tooltips, int num_file, int _buttons_in_row, const wxString &_name) :
     ButtonBitmap(parent, pos, size, _files[(size_t)num_file], _name),
-    current_choice(num_file)
+    current_choice(num_file),
+    title(_title),
+    files(_files)
 {
     Bind(wxEVT_BUTTON, &BmpButtonsCombo::OnButtonClicked, this);
 
     ButtonBitmap::SetToolTip(_tooltips[(size_t)num_file]);
 
-    title = _title;
-    files = _files;
     tooltips = _tooltips;
     buttons_in_row = _buttons_in_row;
 }

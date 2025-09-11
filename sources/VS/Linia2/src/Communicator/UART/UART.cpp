@@ -285,19 +285,19 @@ namespace UART
         {
             switch (mode[0])
             {
-            case '8': cbits = CS8; break;
+            case '8': cbits = CS8; break; //-V1048
             case '7': cbits = CS7; break;
             case '6': cbits = CS6; break;
             case '5': cbits = CS5; break;
-            default: cbits = CS8; break;
+            default: cbits = CS8; break; //-V1048
             }
 
             switch (mode[1])
             {
-            case 'N': case 'n': cpar = 0; ipar = IGNPAR; break;
+            case 'N': case 'n': cpar = 0; ipar = IGNPAR; break; //-V1048 //-V525
             case 'E': case 'e': cpar = PARENB; ipar = INPCK; break;
             case 'O': case 'o': cpar = (PARENB | PARODD); ipar = INPCK; break;
-            default: cpar = 0; ipar = IGNPAR; break;
+            default: cpar = 0; ipar = IGNPAR; break; //-V1048
             }
 
             switch (mode[2])

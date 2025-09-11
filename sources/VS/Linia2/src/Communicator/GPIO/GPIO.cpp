@@ -138,7 +138,7 @@ namespace GPIO
             LOG_WRITE("GPIO input pin %d initialized", info.hw.pin_number);
         }
 
-        for (int i = 0; i < OUTPUT_PINS_COUNT; i++)
+        for (int i = 0; i < OUTPUT_PINS_COUNT; i++) //-V1008
         {
             OutputPinInfo &info = g_output_pins[i];
 
@@ -211,7 +211,7 @@ namespace GPIO
             }
         }
 
-        for (int i = 0; i < OUTPUT_PINS_COUNT; i++)
+        for (int i = 0; i < OUTPUT_PINS_COUNT; i++) //-V1008
         {
             OutputPinInfo &info = g_output_pins[i];
 
