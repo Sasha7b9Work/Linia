@@ -55,9 +55,9 @@ struct Chan
 };
 
 
-extern Chan ChC;
-extern Chan ChB;
-extern Chan ChS;
+extern const Chan ChC;
+extern const Chan ChB;
+extern const Chan ChS;
 
 
 struct StateJack

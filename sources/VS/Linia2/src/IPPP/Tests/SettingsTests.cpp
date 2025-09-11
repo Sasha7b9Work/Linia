@@ -4,9 +4,9 @@
 #include "Panels/Panel03_Config/PanelScheme/PanelScheme.h"
 
 
-Chan ChC(Chan::_C);
-Chan ChB(Chan::_B);
-Chan ChS(Chan::_S);
+const Chan ChC(Chan::_C);
+const Chan ChB(Chan::_B);
+const Chan ChS(Chan::_S);
 
 
 bool Category::IsBCE()
