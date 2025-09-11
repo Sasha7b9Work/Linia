@@ -50,7 +50,7 @@ void DeviceEmulator::SetFirstQueue(FirstQueue::E)
 }
 
 
-void DeviceEmulator::SetPulseDuration(uint /*durationUS*/, GenerationStup::E)
+void DeviceEmulator::SetPulseDuration(uint /*durationUS*/, bool)
 {
     LOG_ERROR("Not implemented");
 }

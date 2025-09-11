@@ -21,7 +21,7 @@ public:
     virtual void SetFirstQueue(FirstQueue::E);
 
     // Длительность импульса
-    virtual void SetPulseDuration(uint durationUS, GenerationStup::E);
+    virtual void SetPulseDuration(uint durationUS, bool generation_stump);
 
     //------------------------------------------------------------------------------------------------------------
 

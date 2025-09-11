@@ -103,12 +103,6 @@ wxString FirstQueue::Name(E fq)
 }
 
 
-wxString GenerationStup::Name(E gs)
-{
-    return gs == Enable ? "1" : "0";
-}
-
-
 Category::E Category::Current()
 {
     return (E)PanelScheme::self->comboCategory->GetCurrentChoice();

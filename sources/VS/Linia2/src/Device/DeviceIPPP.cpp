@@ -123,10 +123,10 @@ void DeviceIPPP::SetFirstQueue(FirstQueue::E fq)
 }
 
 
-void DeviceIPPP::SetPulseDuration(uint durationUS, GenerationStup::E gs)
+void DeviceIPPP::SetPulseDuration(uint durationUS, bool genertaion_stump)
 {
     SendCommand(":PULSE:DURATION %u", durationUS);
-    SendCommand(":GENERATIONSTUP %s", GenerationStup::Name(gs).c_str().AsChar());
+    SendCommand(":GENERATIONSTUP %d", genertaion_stump ? 1 : 0);
 }
 
 

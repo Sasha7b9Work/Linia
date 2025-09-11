@@ -25,7 +25,7 @@ public:
     virtual void SetFirstQueue(FirstQueue::E) override;
 
     // Длительность импульса
-    virtual void SetPulseDuration(uint durationUS, GenerationStup::E) override;
+    virtual void SetPulseDuration(uint durationUS, bool generation_stump) override;
 
     //------------------------------------------------------------------------------------------------------------
 

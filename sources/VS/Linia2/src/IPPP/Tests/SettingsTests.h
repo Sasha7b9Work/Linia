@@ -149,17 +149,3 @@ struct FirstQueue
 
     static wxString Name(E);
 };
-
-
-// Семейство кривых
-struct GenerationStup
-{
-    enum E
-    {
-        Disable,
-        Enable,
-        Count
-    };
-
-    static wxString Name(E);
-};
