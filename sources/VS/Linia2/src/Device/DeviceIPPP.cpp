@@ -156,7 +156,7 @@ void DeviceIPPP::ChanC_LimitSourceU(int min, int max)
 
 void DeviceIPPP::ChanBS_SourceMode(Chan::E ch, ModeSource::E mode)
 {
-    SendCommand(":%s:MODE:SOURCE %s", Chan(ch).Name(), ModeSource::Name(mode).c_str().AsChar());
+    SendCommand(":%s:MODE:SOURCE %s", Chan(ch).Name(), ModeSource::Name(mode));
 }
 
 

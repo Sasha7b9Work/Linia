@@ -34,7 +34,7 @@ pchar Chan::Name() const
 }
 
 
-wxString ModeSource::Name(E mode)
+pchar ModeSource::Name(E mode)
 {
     return mode == U ? "U" : "I";
 }
