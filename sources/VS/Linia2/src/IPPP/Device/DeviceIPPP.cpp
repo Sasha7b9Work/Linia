@@ -220,11 +220,11 @@ void DeviceIPPP::ChanBS_LimitRange(const Chan &ch, RangeI::E range)
 }
 
 
-void DeviceIPPP::ChanBS_LimitThreshold(const Chan &ch, double threshold)
+void DeviceIPPP::ChanBS_LimitThreshold(const Chan &ch, int threshold)
 {
     if (IsChanBS(ch))
     {
-        SendCommand(":%s:LIMIT:THRESHOLD %10e", ch.Name(), threshold);
+        SendCommand(":%s:LIMIT:THRESHOLD %d", ch.Name(), threshold);
     }
 }
 
