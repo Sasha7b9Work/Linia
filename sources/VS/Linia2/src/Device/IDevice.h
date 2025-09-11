@@ -20,8 +20,8 @@ public:
     // Количество точек в режиме DC или импульсном
     virtual void SetPointCount(int) = 0;
 
-    virtual void StartMeasurement() = 0
-        ;
+    virtual void StartMeasurement() = 0;
+
     virtual void StopMeasurement() = 0;
 
     // Записать значение в регистр.
