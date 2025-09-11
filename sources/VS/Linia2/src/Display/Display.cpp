@@ -5,9 +5,7 @@
 #include "Display/WindowScale.h"
 #include "Utils/SystemDepend.h"
 #include "MainWindow.h"
-#include <string>
-#include <map>
-#include <algorithm>
+#include "Utils/Timer.h"
 
 
 Display *Display::self = nullptr;
