@@ -165,13 +165,15 @@ namespace UART
     // Отправка буфера данных через UART порциями по 32 байта
     // Принимает: указатель на данные для отправки, количество байт для отправки (должно быть > 0)
     // Возвращает: true если все данные отправлены успешно, false при ошибке
-    bool SendBuffer(const uint8 *buffer, int size)
+    bool SendBuffer(const void *_buffer, int size)
     {
         if (!IsReady())
         {
             LOG_ERROR("UART not ready");
             return false;
         }
+
+        const uint8 *buffer = (const uint8 *)_buffer;
 
         if (buffer == nullptr || size <= 0)
         {

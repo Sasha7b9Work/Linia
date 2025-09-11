@@ -13,7 +13,7 @@ namespace UART {
     bool Open(int baudrate, const char *mode);
     void Close();
     bool SendByte(uint8 byte);
-    bool SendBuffer(const uint8 *buffer, int size);
+    bool SendBuffer(const void *buffer, int size);
     void SetCallback(ReceivedCallback callback);
     void Flush();
 

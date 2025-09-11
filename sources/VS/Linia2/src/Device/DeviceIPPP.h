@@ -82,13 +82,9 @@ public:
 private:
 
     void SendCommand(pchar format, ...);
-    void CommunicationThread();
 
     bool IsChanBS(Chan::E) const;
 
-    std::queue<std::string> commandQueue;
-    std::mutex queueMutex;
-    std::thread commThread;
     std::atomic<bool> running;
     std::atomic<bool> connected;
 };

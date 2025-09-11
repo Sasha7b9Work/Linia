@@ -28,7 +28,6 @@ bool DeviceIPPP::Init()
     {
         connected = true;
         running = true;
-        commThread = std::thread(&DeviceIPPP::CommunicationThread, this);
         return true;
     }
 
@@ -39,11 +38,6 @@ bool DeviceIPPP::Init()
 void DeviceIPPP::Shutdown()
 {
     running = false;
-
-    if (commThread.joinable())
-    {
-        commThread.join();
-    }
 
     UART::Close();
     UART::DeInit();
@@ -66,40 +60,9 @@ void DeviceIPPP::SendCommand(pchar format, ...)
     std::vsprintf(message, format, args);
     va_end(args);
 
-    std::string CMD = message;
+    std::strcat(message, "\r");
 
-    if (!CMD.empty() && CMD.back() != '\r' && CMD.back() != '\n')
-    {
-        CMD += "\r";
-    }
-
-    std::lock_guard<std::mutex> lock(queueMutex);
-
-    commandQueue.push(CMD);
-}
-
-
-void DeviceIPPP::CommunicationThread()
-{
-    while (running)
-    {
-        std::string cmd;
-        {
-            std::lock_guard<std::mutex> lock(queueMutex);
-            if (!commandQueue.empty())
-            {
-                cmd = commandQueue.front();
-                commandQueue.pop();
-            }
-        }
-
-        if (!cmd.empty())
-        {
-            UART::SendBuffer((uint8*)cmd.c_str(), (int)cmd.length());
-        }
-
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
-    }
+    UART::SendBuffer(message, (int)std::strlen(message));
 }
 
 
