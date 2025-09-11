@@ -86,13 +86,6 @@ wxString GenerationStup::Name(E gs)
     return gs == Enable ? "1" : "0";
 }
 
-
-wxString StartTrigger::Name(E trigger)
-{
-    return trigger == External ? "EXT" : "INT";
-}
-
-
 wxString StartMode::Name(E mode)
 {
     return mode == Multiple ? "MULT" : "SINGLE";

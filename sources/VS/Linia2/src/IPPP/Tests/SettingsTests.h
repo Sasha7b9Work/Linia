@@ -162,20 +162,6 @@ struct GenerationStup
 };
 
 
-// Тип запуска
-struct StartTrigger
-{
-    enum E
-    {
-        Internal,
-        External,
-        Count
-    };
-
-    static wxString Name(E);
-};
-
-
 // Режим запуска
 struct StartMode
 {

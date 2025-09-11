@@ -254,12 +254,6 @@ void DeviceIPPP::SetPointCount(int count)
 }
 
 
-void DeviceIPPP::SetStartType(StartTrigger::E external, StartMode::E multiple) {
-    std::string cmd = ":START " + StartTrigger::Name(external).ToStdString() + " " + StartMode::Name(multiple).ToStdString();
-    SendCommand(cmd);
-}
-
-
 void DeviceIPPP::SetMeasurementMode(MeasMode::E mode) {
     std::stringstream ss;
     ss << ":MEASMODE " << MeasMode::Name(mode).ToStdString();

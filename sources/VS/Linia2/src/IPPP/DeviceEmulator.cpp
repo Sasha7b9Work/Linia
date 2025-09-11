@@ -152,12 +152,6 @@ void DeviceEmulator::SetPointCount(int)
 }
 
 
-void DeviceEmulator::SetStartType(StartTrigger::E /*external*/, StartMode::E /*multiple*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
 void DeviceEmulator::SetMeasurementMode(MeasMode::E /*mode*/)
 {
     LOG_ERROR("Not implemented");
