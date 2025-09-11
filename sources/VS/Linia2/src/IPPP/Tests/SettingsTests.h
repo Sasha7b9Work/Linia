@@ -118,7 +118,7 @@ struct ModeMeas
         Count
     };
 
-    static wxString Name(E);
+    static pchar Name(E);
 };
 
 

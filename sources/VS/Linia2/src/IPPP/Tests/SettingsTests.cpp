@@ -40,7 +40,7 @@ pchar ModeSource::Name(E mode)
 }
 
 
-wxString ModeMeas::Name(E mode)
+pchar ModeMeas::Name(E mode)
 {
     return mode == U ? "U" : "I";
 }

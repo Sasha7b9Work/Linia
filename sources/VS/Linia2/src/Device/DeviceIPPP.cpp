@@ -188,7 +188,7 @@ void DeviceIPPP::ChaBS_Bias(Chan::E ch, int bias)
 
 void DeviceIPPP::ChanBS_MeasMode(Chan::E ch, ModeMeas::E mode)
 {
-    SendCommand(":%s:MODE:MEAS %s", Chan(ch).Name(), ModeMeas::Name(mode).c_str().AsChar());
+    SendCommand(":%s:MODE:MEAS %s", Chan(ch).Name(), ModeMeas::Name(mode));
 }
 
 
