@@ -12,44 +12,44 @@ struct DSettings
 
 pchar RangeI::Name(RowRange::E row, bool space) const
 {
-    static const pchar names[Count][RowRange::Count] =
+    static const pchar names[Count][RowRange::Count * 2] =
     {
-        { "400 pA", "500 pA" },
-        { "1 nA",   "1 nA" },
-        { "2 nA",   "2 nA" },
-        { "4 nA",   "5 nA" },
-        { "10 nA",  "10 nA" },
-        { "20 nA",  "20 nA" },
-        { "40 nA",  "50 nА" },
-        { "100 nA", "100 nA" },
-        { "200 nA", "200 nA" },
-        { "400 nA", "500 nA" },
-        { "1 uA",   "1 uA" },
-        { "2 uA",   "2 uA" },
-        { "4 uA",   "5 uA" },
-        { "10 uA",  "10 uA" },
-        { "20 uA",  "20 uA" },
-        { "40 uA",  "50 uA" },
-        { "100 uA", "100 uA" },
-        { "200 uA", "200 uA" },
-        { "400 uA", "500 uA" },
-        { "1 mA",   "1 mA" },
-        { "2 mA",   "2 mA" },
-        { "4 mA",   "5 mA" },
-        { "10 mA",  "10 mA" },
-        { "20 mA",  "20 mA" },
-        { "40 mA",  "50 mA" },
-        { "100 mA", "100 mA" },
-        { "200 mA", "200 mA" },
-        { "400 mA", "500 mA" },
-        { "1 A",    "1 A" },
-        { "2 A",    "2 A" },
-        { "4 A",    "5 A" },
-        { "10 A",   "10 A" },
-        { "20 A",   "20 A" },
-        { "40 A",   "50 A" },
-        { "100 A",  "100 A" },
-        { "200 A",  "200 A" }
+        { "400 pA", "500 pA", "400pA", "500pA" },
+        { "1 nA",   "1 nA",   "1nA",   "1nA"   },
+        { "2 nA",   "2 nA",   "2nA",   "2nA"   },
+        { "4 nA",   "5 nA",   "4nA",   "5nA"   },
+        { "10 nA",  "10 nA",  "10nA",  "10nA"  },
+        { "20 nA",  "20 nA",  "20nA",  "20nA"  },
+        { "40 nA",  "50 nА",  "40nA",  "50nА"  },
+        { "100 nA", "100 nA", "100nA", "100nA" },
+        { "200 nA", "200 nA", "200nA", "200nA" },
+        { "400 nA", "500 nA", "400nA", "500nA" },
+        { "1 uA",   "1 uA",   "1uA",   "1uA"   },
+        { "2 uA",   "2 uA",   "2uA",   "2uA"   },
+        { "4 uA",   "5 uA",   "4uA",   "5uA"   },
+        { "10 uA",  "10 uA",  "10uA",  "10uA"  },
+        { "20 uA",  "20 uA",  "20uA",  "20uA"  },
+        { "40 uA",  "50 uA",  "40uA",  "50uA"  },
+        { "100 uA", "100 uA", "100uA", "100uA" },
+        { "200 uA", "200 uA", "200uA", "200uA" },
+        { "400 uA", "500 uA", "400uA", "500uA" },
+        { "1 mA",   "1 mA",   "1mA",   "1mA"   },
+        { "2 mA",   "2 mA",   "2mA",   "2mA"   },
+        { "4 mA",   "5 mA",   "4mA",   "5mA"   },
+        { "10 mA",  "10 mA",  "10mA",  "10mA"  },
+        { "20 mA",  "20 mA",  "20mA",  "20mA"  },
+        { "40 mA",  "50 mA",  "40mA",  "50mA"  },
+        { "100 mA", "100 mA", "100mA", "100mA" },
+        { "200 mA", "200 mA", "200mA", "200mA" },
+        { "400 mA", "500 mA", "400mA", "500mA" },
+        { "1 A",    "1 A",    "1A",    "1A"    },
+        { "2 A",    "2 A",    "2A",    "2A"    },
+        { "4 A",    "5 A",    "4A",    "5A"    },
+        { "10 A",   "10 A",   "10A",   "10A"   },
+        { "20 A",   "20 A",   "20A",   "20A"   },
+        { "40 A",   "50 A",   "40A",   "50A"   },
+        { "100 A",  "100 A",  "100A",  "100A"  },
+        { "200 A",  "200 A",  "200A",  "200A"  }
     };
 
     if (space)
@@ -58,18 +58,7 @@ pchar RangeI::Name(RowRange::E row, bool space) const
     }
     else
     {
-        static std::string range;
-
-        range = names[value][row];
-
-        size_t pos = range.find(' ');
-
-        if (pos != std::string::npos)
-        {
-            range.erase(pos, 1);
-        }
-
-        return range.c_str();
+        return names[value][row * 2 + 1];
     }
 }
 
