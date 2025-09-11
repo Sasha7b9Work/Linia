@@ -7,6 +7,8 @@ class IDevice
 {
 public:
 
+    static IDevice *impl;
+
     virtual ~IDevice() = default;
 
     virtual bool Init() = 0;
@@ -75,6 +77,3 @@ public:
     virtual void StartMeasurement() = 0;                            // Запуск измерения
     virtual void StopMeasurement() = 0;                             // Остановка измерения
 };
-
-
-extern IDevice *g_device;

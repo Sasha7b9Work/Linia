@@ -6,10 +6,13 @@
 #include <cstdio>
 
 
-IDevice *g_device = nullptr;
+IDevice *IDevice::impl = nullptr;
 
 
-DeviceIPPP::DeviceIPPP() : running(false), connected(false) {}
+DeviceIPPP::DeviceIPPP() :
+    running(false), connected(false)
+{
+}
 
 
 DeviceIPPP::~DeviceIPPP() {

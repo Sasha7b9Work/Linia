@@ -8,9 +8,9 @@
 
 void RealIPPP::Init()
 {
-    g_device = new DeviceEmulator();
+    IDevice::impl = new DeviceEmulator();
 
-    g_device->Init();
+    IDevice::impl->Init();
 
     pinREQ_RD.Set(false);    // Это состояние означает, что чтение не нужно
 }
