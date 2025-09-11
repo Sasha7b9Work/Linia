@@ -143,8 +143,12 @@ struct MicroChip
 {
     enum E
     {
-        ADC1,
-        DAC1,
+        ADC_7691_1,
+        ADC_7691_2,
+        DAC_5300_1,
+        DAC_5300_2,
+        DAC_5443,
+        DAC_5531,
         Count
     };
 
