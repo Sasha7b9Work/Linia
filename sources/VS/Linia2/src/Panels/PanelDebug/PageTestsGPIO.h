@@ -21,9 +21,9 @@ private:
     wxButton *btnSendUART = nullptr;
     wxButton *btnSendSPI = nullptr;
 
-    wxString NamePin(Pin::Type) const;
+    wxString NamePin(Pin::E) const;
 
-    int NumPin(Pin::Type) const;
+    int NumPin(Pin::E) const;
 
     // in - на этом пине висит лампочка
     wxPanel *CreatePanelPinOut(wxWindow *, PinOut *);

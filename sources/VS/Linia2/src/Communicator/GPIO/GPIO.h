@@ -5,6 +5,7 @@
 struct gpiod_chip;
 struct gpiod_line;
 
+
 struct HardwarePinInfo
 {
     int pin_number;          // Номер GPIO пина  
@@ -13,6 +14,7 @@ struct HardwarePinInfo
     gpiod_line *line;        // Дескриптор линии
 };
 
+
 struct InputPinInfo
 {
     HardwarePinInfo hw;
@@ -20,14 +22,18 @@ struct InputPinInfo
     std::function<void(bool)> callback; // Callback функция
 };
 
+
 struct OutputPinInfo
 {
     HardwarePinInfo hw;
 };
 
-class Pin {
+
+class Pin
+{
 public:
-    enum Type {
+    enum E
+    {
         START,          // Кнопка СТАРТ
         STOP,           // Кнопка СТОП
         DAT_F0,
@@ -43,9 +49,9 @@ public:
 //        RDY,          40
         Count
     };
-    explicit Pin(Type type) : type_(type) { }
+    explicit Pin(E type) : type_(type) { }
 
-    Type type() const
+    E type() const
     {
         return type_;
     }
@@ -53,10 +59,12 @@ public:
     bool Get() const;
 
 protected:
-    Type type_;
+    E type_;
 };
 
-class PinIn : public Pin {
+
+class PinIn : public Pin
+{
 public:
     using Pin::Pin;
     using ChangeCallback = std::function<void(bool)>;
@@ -64,6 +72,7 @@ public:
 private:
     ChangeCallback callback_;
 };
+
 
 class PinOut : public Pin
 {
@@ -79,8 +88,8 @@ namespace GPIO
     void Init();
     void DeInit();
 
-    InputPinInfo *GetInputPinInfo(Pin::Type);
-    OutputPinInfo *GetOutputPinInfo(Pin::Type);
+    InputPinInfo *GetInputPinInfo(Pin::E);
+    OutputPinInfo *GetOutputPinInfo(Pin::E);
 }
 
 

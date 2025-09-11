@@ -102,7 +102,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
 }
 
 
-wxString PageTestsGPIO::NamePin(Pin::Type pin) const
+wxString PageTestsGPIO::NamePin(Pin::E pin) const
 {
     static const pchar names[Pin::Count] =
     {
@@ -120,7 +120,7 @@ wxString PageTestsGPIO::NamePin(Pin::Type pin) const
 }
 
 
-int PageTestsGPIO::NumPin(Pin::Type pin) const
+int PageTestsGPIO::NumPin(Pin::E pin) const
 {
     static const int num[Pin::Count] =
     {

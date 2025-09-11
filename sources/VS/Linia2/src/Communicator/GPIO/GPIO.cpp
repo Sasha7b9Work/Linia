@@ -71,7 +71,7 @@ namespace GPIO
     static const int OUTPUT_PINS_COUNT = sizeof(g_output_pins) / sizeof(g_output_pins[0]);
 
     // Вспомогательные функции для получения информации о пинах
-    InputPinInfo *GetInputPinInfo(Pin::Type type)
+    InputPinInfo *GetInputPinInfo(Pin::E type)
     {
         if (type >= Pin::Count) return nullptr;
 
@@ -83,7 +83,7 @@ namespace GPIO
         return nullptr;
     }
 
-    OutputPinInfo *GetOutputPinInfo(Pin::Type type)
+    OutputPinInfo *GetOutputPinInfo(Pin::E type)
     {
         if (type >= Pin::Count) return nullptr;
 
