@@ -144,7 +144,7 @@ namespace UART
     // Отправка одного байта через UART
     // Принимает: байт для отправки (0x00-0xFF)
     // Возвращает: true если байт отправлен успешно, false при ошибке
-    bool SendByte(uint8_t byte)
+    bool SendByte(uint8 byte)
     {
         if (!IsReady())
         {
@@ -165,7 +165,7 @@ namespace UART
     // Отправка буфера данных через UART порциями по 32 байта
     // Принимает: указатель на данные для отправки, количество байт для отправки (должно быть > 0)
     // Возвращает: true если все данные отправлены успешно, false при ошибке
-    bool SendBuffer(const uint8_t *buffer, int size)
+    bool SendBuffer(const uint8 *buffer, int size)
     {
         if (!IsReady())
         {
@@ -345,7 +345,7 @@ namespace UART
     // Работает до установки флага g_stop_reading
     static void *ReaderThreadFunc(void *)
     {
-        uint8_t buffer[BUFFER_SIZE];
+        uint8 buffer[BUFFER_SIZE];
         int bytes_read;
         fd_set read_fds;
         struct timeval timeout;

@@ -76,7 +76,7 @@ void DeviceIPPP::CommunicationThread() {
             }
         }
         if (!cmd.empty()) {
-            UART::SendBuffer((uint8_t*)cmd.c_str(), (int)cmd.length());
+            UART::SendBuffer((uint8*)cmd.c_str(), (int)cmd.length());
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }

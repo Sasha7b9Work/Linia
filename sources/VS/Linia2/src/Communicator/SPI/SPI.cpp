@@ -20,8 +20,8 @@ namespace SPI
 {
     static int g_spi_fd = -1;
     static uint g_speed = SPI_SPEED;
-    static uint8_t g_mode = 0;
-    static uint8_t g_bits_per_word = 8;
+    static uint8 g_mode = 0;
+    static uint8 g_bits_per_word = 8;
     static bool g_gpio_initialized = false;
 
     const char *device = SPI_DEVICE;
@@ -46,7 +46,7 @@ namespace SPI
     static bool InitGPIO();
     static void DeInitGPIO();
     static void SetCS(int dac_number, bool enable);   // Управление CS (Chip Select) для конкретного DAC
-    static bool Write(uint8_t *data, size_t length);
+    static bool Write(uint8 *data, size_t length);
 
     void Init()
     {
@@ -128,9 +128,9 @@ namespace SPI
             return false;
         }
 
-        uint8_t data[2];
-        data[0] = static_cast<uint8_t>((value >> 8) & 0xFF);
-        data[1] = static_cast<uint8_t>(value & 0xFF);
+        uint8 data[2];
+        data[0] = static_cast<uint8>((value >> 8) & 0xFF);
+        data[1] = static_cast<uint8>(value & 0xFF);
 
         SetCS(number_DAC, true);
         usleep(1);
@@ -170,7 +170,7 @@ namespace SPI
     // Установка режима SPI (полярность и фаза тактового сигнала)
     // mode: режим SPI (0-3: 0=CPOL=0,CPHA=0; 1=CPOL=0,CPHA=1; 2=CPOL=1,CPHA=0; 3=CPOL=1,CPHA=1)
     // Возвращает: true если режим установлен успешно, false при ошибке
-    bool SetMode(uint8_t mode)
+    bool SetMode(uint8 mode)
     {
         g_mode = mode;
 
@@ -204,7 +204,7 @@ namespace SPI
 
     // Получение текущего режима SPI
     // Возвращает: режим SPI (0-3)
-    uint8_t GetMode()
+    uint8 GetMode()
     {
         return g_mode;
     }
@@ -316,7 +316,7 @@ namespace SPI
         }
     }
 
-    bool Write(uint8_t *data, size_t length)
+    bool Write(uint8 *data, size_t length)
     {
         if (g_spi_fd < 0)
         {
