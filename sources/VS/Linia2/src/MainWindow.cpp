@@ -15,7 +15,7 @@
 #include "Panels/Panel08_ModeLower.h"
 #include "Panels/Panel09_Table.h"
 #include "Panels/PanelMenu/PanelMenu.h"
-#include "Panels/Panel12_Debug/Panel12_Debug.h"
+#include "Panels/PanelDebug/PanelDebug.h"
 #include "Panels/Panel13_ReferenceGraphs.h"
 #include "Controls/Dialog.h"
 #include "IPPP/Tests/Tests.h"

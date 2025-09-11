@@ -1,9 +1,9 @@
 ﻿// 2025/6/4 10:25:39 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/ButtonsCombo.h"
-#include "Panels/Panel12_Debug/PagesChips/PainterRegister.h"
+#include "Panels/PanelDebug/PagesChips/PainterRegister.h"
 #include "Controls/TextControls.h"
-#include "Panels/Panel12_Debug/CommandsCombo.h"
+#include "Panels/PanelDebug/CommandsCombo.h"
 
 
 // Визуальное представление регистра

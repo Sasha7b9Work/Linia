@@ -1,10 +1,10 @@
 ﻿// 2025/6/4 10:27:32 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel12_Debug/PagesChips/PanelRegister.h"
-#include "Panels/Panel12_Debug/PagesChips/PainterRegister.h"
+#include "Panels/PanelDebug/PagesChips/PanelRegister.h"
+#include "Panels/PanelDebug/PagesChips/PainterRegister.h"
 #include "Controls/TextControls.h"
 #include "Utils/StringUtils.h"
-#include "Panels/Panel12_Debug/CommandsCombo.h"
+#include "Panels/PanelDebug/CommandsCombo.h"
 
 
 PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_depth) :

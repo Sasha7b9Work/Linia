@@ -1,11 +1,11 @@
 ﻿// 2025/6/3 14:06:23 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel12_Debug/NotebookChips.h"
-#include "Panels/Panel12_Debug/Old/PageAD5697.h"
-#include "Panels/Panel12_Debug/Old/PageAD9952.h"
-#include "Panels/Panel12_Debug/Old/PageMCP4811.h"
-#include "Panels/Panel12_Debug/PagesChips/PageAD5300.h"
-#include "Panels/Panel12_Debug/PageTestsGPIO.h"
+#include "Panels/PanelDebug/NotebookChips.h"
+#include "Panels/PanelDebug/Old/PageAD5697.h"
+#include "Panels/PanelDebug/Old/PageAD9952.h"
+#include "Panels/PanelDebug/Old/PageMCP4811.h"
+#include "Panels/PanelDebug/PagesChips/PageAD5300.h"
+#include "Panels/PanelDebug/PageTestsGPIO.h"
 
 
 NotebookChips *NotebookChips::self = nullptr;

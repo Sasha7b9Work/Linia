@@ -1,6 +1,6 @@
 ﻿// 2025/6/3 22:44:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel12_Debug/Old/PageAD9952.h"
+#include "Panels/PanelDebug/Old/PageAD9952.h"
 
 
 PageAD9952 *PageAD9952::self = nullptr;

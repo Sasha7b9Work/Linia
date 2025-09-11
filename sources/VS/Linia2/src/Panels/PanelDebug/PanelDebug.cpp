@@ -1,8 +1,8 @@
 ﻿// 2025/6/3 13:44:28 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel12_Debug/Panel12_Debug.h"
+#include "Panels/PanelDebug/PanelDebug.h"
 #include "MainWindow.h"
-#include "Panels/Panel12_Debug/NotebookChips.h"
+#include "Panels/PanelDebug/NotebookChips.h"
 
 
 PanelDebug *PanelDebug::self = nullptr;

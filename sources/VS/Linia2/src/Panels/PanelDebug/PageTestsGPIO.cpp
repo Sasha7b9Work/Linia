@@ -1,6 +1,6 @@
 ﻿// 2025/09/03 09:54:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel12_Debug/PageTestsGPIO.h"
+#include "Panels/PanelDebug/PageTestsGPIO.h"
 #include "Utils/SystemDepend.h"
 
 
