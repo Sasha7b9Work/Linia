@@ -10,7 +10,7 @@ struct DSettings
 };
 
 
-pchar RangeI::Name(RowRange::E row) const
+pchar RangeI::Name(RowRange::E row, bool space) const
 {
     static const pchar names[Count][RowRange::Count] =
     {
@@ -52,7 +52,25 @@ pchar RangeI::Name(RowRange::E row) const
         { "200 A",  "200 A" }
     };
 
-    return names[value][row];
+    if (space)
+    {
+        return names[value][row];
+    }
+    else
+    {
+        static std::string range;
+
+        range = names[value][row];
+
+        size_t pos = range.find(' ');
+
+        if (pos != std::string::npos)
+        {
+            range.erase(pos, 1);
+        }
+
+        return range.c_str();
+    }
 }
 
 
@@ -171,7 +189,7 @@ wxString RangeU::NameStep(RowRange::E row) const
 }
 
 
-pchar RangeU::Name(RowRange::E r) const
+pchar RangeU::Name(RowRange::E r, bool space) const
 {
     static const pchar names[Count][RowRange::Count] =
     {
@@ -217,7 +235,25 @@ pchar RangeU::Name(RowRange::E r) const
         { "10 kV",  "10 kV" }
     };
 
-    return names[value][r];
+    if (space)
+    {
+        return names[value][r];
+    }
+    else
+    {
+        static std::string range;
+
+        range = names[value][r];
+
+        size_t pos = range.find(' ');
+
+        if (pos != std::string::npos)
+        {
+            range.erase(pos, 1);
+        }
+
+        return range.c_str();
+    }
 }
 
 
@@ -1096,4 +1132,18 @@ RowRange::E RowRange::ForType(TypeDSet::E type)
     };
 
     return row[type].row;
+}
+
+
+RowRange::E RowRange::ForChannel(Chan::E ch)
+{
+    static const E r[Chan::Count] =
+    {
+        _125,
+        _124,
+        _124,
+        _124
+    };
+
+    return r[ch];
 }

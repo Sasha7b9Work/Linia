@@ -48,7 +48,7 @@ struct Chan
 
     bool IsVisible() const;
 
-    static wxString Name(E);
+    wxString Name() const;
 };
 
 

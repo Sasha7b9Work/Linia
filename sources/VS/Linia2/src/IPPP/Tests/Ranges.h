@@ -1,5 +1,6 @@
 ﻿// 2025/7/27 22:17:39 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "IPPP/Tests/SettingsTests.h"
 
 
 struct TypeDSet
@@ -39,6 +40,7 @@ struct RowRange
     };
 
     static E ForType(TypeDSet::E);
+    static E ForChannel(Chan::E);
 };
 
 
@@ -89,8 +91,11 @@ struct RangeI
 
     RangeI(E v) : value(v) { }
 
-    pchar Name(RowRange::E) const;
+    // Если true == false, то между значением и единицами измерения нету пробела
+    pchar Name(RowRange::E, bool space = true) const;
+
     wxString NameStep(RowRange::E) const;
+
     // Максимально возможное значение на данном диапазоне
     double MaxValueAbs(RowRange::E) const;
 
@@ -157,8 +162,11 @@ struct RangeU
 
     RangeU(E v) : value(v) { }
 
-    pchar Name(RowRange::E) const;
+    // Если space, то между значением и единицами измерения пробел
+    pchar Name(RowRange::E, bool space = true) const;
+
     wxString NameStep(RowRange::E) const;
+
     // Максимально возможное значение на данном диапазоне
     double MaxValueAbs(RowRange::E) const;
 

@@ -19,17 +19,17 @@ bool Category::IsGDS()
 }
 
 
-wxString Chan::Name(E chan)
+wxString Chan::Name() const
 {
-    switch (chan)
+    static const pchar names[Count] =
     {
-    case _C: return "C";
-    case _B: return "B";
-    case _S: return "S";
-    case _E: return "E";
-    case Count:
-    default: return "";
-    }
+        "C",
+        "B",
+        "S",
+        "E"
+    };
+
+    return names[value];
 }
 
 wxString StateJack::Name(E state)

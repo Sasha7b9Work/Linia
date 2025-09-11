@@ -85,9 +85,9 @@ void DeviceIPPP::CommunicationThread() {
 
 
 // Реализации функций
-void DeviceIPPP::SetCircuitConnection(Chan::E chan, StateJack::E state) {
-    std::string cmd = ":S:CONNECTION " + Chan::Name(chan).ToStdString() + " " + StateJack::Name(state).ToStdString();
-    SendCommand(cmd);
+void DeviceIPPP::SetCircuitConnection(Chan::E ch, StateJack::E state)
+{
+    SendCommand("%s:CONNECTION %s", Chan(ch).Name().c_str().AsChar(), StateJack::Name(state).c_str().AsChar());
 }
 
 
@@ -150,97 +150,92 @@ void DeviceIPPP::ChanC_LimitSourceU(int min, int max) {
 }
 
 
-// Объединенные функции для B и S
-void DeviceIPPP::ChanBS_SourceMode(Chan::E chan, ModeSource::E mode) {
-    std::string cmd = ":" + Chan::Name(chan).ToStdString() + ":MODE:SOURCE " + ModeSource::Name(mode).ToStdString();
-    SendCommand(cmd);
+void DeviceIPPP::ChanBS_SourceMode(Chan::E ch, ModeSource::E mode)
+{
+    SendCommand(":%s:MODE:SOURCE %s", Chan(ch).Name().c_str().AsChar(), ModeSource::Name(mode).c_str().AsChar());
 }
 
 
-void DeviceIPPP::ChanBS_AmplitudeRange(Chan::E chan, AmplitudeRange::E range) {
-    std::stringstream ss;
-    ss << ":" << Chan::Name(chan).ToStdString() << ":RANGE:AMPLITUDE " << (int)AmplitudeRange::Value(range);
-    SendCommand(ss.str());
+void DeviceIPPP::ChanBS_AmplitudeRange(Chan::E ch, AmplitudeRange::E range)
+{
+    SendCommand(":%s:RANGE:AMPLITUDE %d", Chan(ch).Name().c_str().AsChar(), (int)AmplitudeRange::Value(range));
 }
 
 
-void DeviceIPPP::ChanBS_StepCount(Chan::E chan, StepCount::E count) {
-    std::stringstream ss;
-    ss << ":" << Chan::Name(chan).ToStdString() << ":STEP:COUNT " << StepCount::Value(count);
-    SendCommand(ss.str());
+void DeviceIPPP::ChanBS_StepCount(Chan::E ch, StepCount::E count)
+{
+    SendCommand(":%s:STEP:COUNT ", Chan(ch).Name().c_str().AsChar(), StepCount::Value(count));
 }
 
 
 void DeviceIPPP::ChanBS_AmplitudeValue(Chan::E ch, int value)
 {
-    SendCommand("%s:AMPLITUDE %d", Chan::Name(ch).c_str().AsChar(), value);
+    SendCommand("%s:AMPLITUDE %d", Chan(ch).Name().c_str().AsChar(), value);
 }
 
 
 void DeviceIPPP::ChaBS_Bias(Chan::E ch, int bias)
 {
-    SendCommand("%s:BIAS %d", Chan::Name(ch).c_str().AsChar(), bias);
+    SendCommand("%s:BIAS %d", Chan(ch).Name().c_str().AsChar(), bias);
 }
 
 
-void DeviceIPPP::ChanBS_MeasMode(Chan::E chan, ModeMeas::E mode) {
-    std::string cmd = ":" + Chan::Name(chan).ToStdString() + ":MODE:MEAS " + ModeMeas::Name(mode).ToStdString();
-    SendCommand(cmd);
+void DeviceIPPP::ChanBS_MeasMode(Chan::E ch, ModeMeas::E mode)
+{
+    SendCommand(":%s:MODE:MEAS %s", Chan(ch).Name().c_str().AsChar(), ModeMeas::Name(mode).c_str().AsChar());
 }
 
 
-void DeviceIPPP::ChanBS_MeasRangeU(Chan::E chan, RangeU::E range) {
-    std::string rangeStr = std::string(RangeU(range).Name(RowRange::_124));
-    size_t spacePos = rangeStr.find(' ');
-    if (spacePos != std::string::npos) {
-        rangeStr.erase(spacePos, 1);
-    }
-    std::string cmd = ":" + Chan::Name(chan).ToStdString() + ":RANGE:MEAS " + rangeStr;
-    SendCommand(cmd);
+void DeviceIPPP::ChanBS_MeasRangeU(Chan::E ch, RangeU::E range)
+{
+//    std::string rangeStr = std::string(RangeU(range).Name(RowRange::_124));
+//
+//    size_t spacePos = rangeStr.find(' ');
+//
+//    if (spacePos != std::string::npos)
+//    {
+//        rangeStr.erase(spacePos, 1);
+//    }
+
+    SendCommand(":%s:RANGE:MEAS %s",
+        Chan(ch).Name().c_str().AsChar(),
+        RangeU(range).Name(RowRange::ForChannel(ch), false));
 }
 
 
-void DeviceIPPP::ChanBS_MeasRangeI(Chan::E chan, RangeI::E range) {
-    std::string rangeStr = std::string(RangeI(range).Name(RowRange::_124));
-    size_t spacePos = rangeStr.find(' ');
-    if (spacePos != std::string::npos) {
-        rangeStr.erase(spacePos, 1);
-    }
-    std::string cmd = ":" + Chan::Name(chan).ToStdString() + ":RANGE:MEAS " + rangeStr;
-    SendCommand(cmd);
+void DeviceIPPP::ChanBS_MeasRangeI(Chan::E ch, RangeI::E range)
+{
+    SendCommand(":%s:RANGE:MEAS %s",
+        Chan(ch).Name().c_str().AsChar(),
+        RangeI(range).Name(RowRange::ForChannel(ch), false));
 }
 
 
-void DeviceIPPP::ChanBS_LimitRangeU(Chan::E chan, RangeU::E range) {
-    std::string rangeStr = std::string(RangeU(range).Name(RowRange::_124));
-    size_t spacePos = rangeStr.find(' ');
-    if (spacePos != std::string::npos) {
-        rangeStr.erase(spacePos, 1);
-    }
-    std::string cmd = ":" + Chan::Name(chan).ToStdString() + ":RANGE:LIMIT " + rangeStr;
-    SendCommand(cmd);
+void DeviceIPPP::ChanBS_LimitRangeU(Chan::E ch, RangeU::E range)
+{
+    SendCommand(":%s:RANGE:LIMIT %s",
+        Chan(ch).Name().c_str().AsChar(),
+        RangeU(range).Name(RowRange::ForChannel(ch), false));
 }
 
 
-void DeviceIPPP::ChanBS_LimitRangeI(Chan::E chan, RangeI::E range) {
-    std::string rangeStr = std::string(RangeI(range).Name(RowRange::_124));
-    size_t spacePos = rangeStr.find(' ');
-    if (spacePos != std::string::npos) {
-        rangeStr.erase(spacePos, 1);
-    }
-    std::string cmd = ":" + Chan::Name(chan).ToStdString() + ":RANGE:LIMIT " + rangeStr;
-    SendCommand(cmd);
+void DeviceIPPP::ChanBS_LimitRangeI(Chan::E ch, RangeI::E range)
+{
+    SendCommand(":%s:RANGE:LIMIT %s",
+        Chan(ch).Name().c_str().AsChar(),
+        RangeI(range).Name(RowRange::ForChannel(ch), false));
 }
 
 
 void DeviceIPPP::ChanBS_LimitThreshold(Chan::E ch, int threshold)
 {
-    SendCommand(":%s:LIMIT:THRESHOLD %d", Chan::Name(ch).c_str().AsChar(), threshold);
+    SendCommand(":%s:LIMIT:THRESHOLD %d", Chan(ch).Name().c_str().AsChar(), threshold);
 }
 
 
-void DeviceIPPP::ChanBS_HighResolution(Chan::E chan, bool highRes) {
-    std::string cmd = ":" + Chan::Name(chan).ToStdString() + ":HIGHRES " + std::string(highRes ? "1" : "0");
+void DeviceIPPP::ChanBS_HighResolution(Chan::E ch, bool highRes)
+{
+    std::string cmd = ":" + Chan(ch).Name().ToStdString() + ":HIGHRES " + std::string(highRes ? "1" : "0");
     SendCommand(cmd);
 }
 
