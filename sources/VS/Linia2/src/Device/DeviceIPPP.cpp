@@ -236,7 +236,7 @@ bool DeviceIPPP::IsChanBS(const Chan &ch) const
         return true;
     }
 
-    LOG_ERROR("Channel must be B or S");
+    LOG_ERROR("Channel must be B or S, not %s", ch.Name());
 
     return false;
 }
