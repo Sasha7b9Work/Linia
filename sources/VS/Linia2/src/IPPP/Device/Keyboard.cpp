@@ -8,6 +8,11 @@
 
 namespace Keyboard
 {
+#define PIN_START pins[0]
+#define PIN_STOP  pins[1]
+#define PIN_KA    pins[2]
+#define PIN_KB    pins[3]
+
     static const int64 TIME_EVENT_BTN = 100;    // Столько мс состояние кнопки не должно меняться, чтобы действие свершилось (пропустить дребезг контактов)
     static const int64 TIME_EVENT_GOV = 3;
 
@@ -15,11 +20,6 @@ namespace Keyboard
     static void CallbackOnSTOP(bool);
     static void CallbackOnKA(bool);
     static void CallbackOnKB(bool);
-
-    static const int START = 0;
-    static const int STOP = 0;
-    static const int KA = 0;
-    static const int KB = 0;
 
     struct StructPin
     {
@@ -42,10 +42,10 @@ void Keyboard::Init()
 
     pinKB.SetChangeCallback(CallbackOnKB);
 
-    pins[START].pin = &pinSTART;
-    pins[STOP].pin = &pinSTOP;
-    pins[KA].pin = &pinKA;
-    pins[KB].pin = &pinKB;
+    PIN_START.pin = &pinSTART;
+    PIN_STOP.pin = &pinSTOP;
+    PIN_KA.pin = &pinKA;
+    PIN_KB.pin = &pinKB;
 }
 
 
@@ -53,40 +53,40 @@ void Keyboard::Update()
 {
     int64 time = Timer::CurrentTimeMS();
 
-    if (pins[START].event_time)                                     // Идёт событие - нажатие или отпускание
+    if (PIN_START.event_time)                                     // Идёт событие - нажатие или отпускание
     {
-        if (time - pins[START].event_time > TIME_EVENT_BTN)         // Если после последнего события прошло достаточно времени
+        if (time - PIN_START.event_time > TIME_EVENT_BTN)         // Если после последнего события прошло достаточно времени
         {
-            Application::self->OnButtonStart(pins[START].press);    // То считаем, что кнопка в устойчивом положении - обрабатываем нажатие
-            pins[START].event_time = 0;                             // И устанавливаем признак того, что событие произошло
+            Application::self->OnButtonStart(PIN_START.press);    // То считаем, что кнопка в устойчивом положении - обрабатываем нажатие
+            PIN_START.event_time = 0;                             // И устанавливаем признак того, что событие произошло
         }
     }
 
-    if (pins[STOP].event_time)
+    if (PIN_STOP.event_time)
     {
-        if (time - pins[STOP].event_time > TIME_EVENT_BTN)
+        if (time - PIN_STOP.event_time > TIME_EVENT_BTN)
         {
-            Application::self->OnButtonStop(pins[STOP].press);
-            pins[STOP].event_time = 0;
+            Application::self->OnButtonStop(PIN_STOP.press);
+            PIN_STOP.event_time = 0;
         }
     }
 
-    if (pins[KA].event_time && pins[KB].event_time)
+    if (PIN_KA.event_time && PIN_KB.event_time)
     {
-        if ((time - pins[KA].event_time) > TIME_EVENT_GOV &&
-            (time - pins[KB].event_time) > TIME_EVENT_GOV)
+        if ((time - PIN_KA.event_time) > TIME_EVENT_GOV &&
+            (time - PIN_KB.event_time) > TIME_EVENT_GOV)
         {
-            if (pins[KA].press && !pins[KB].press)
+            if (PIN_KA.press && !PIN_KB.press)
             {
-                Application::self->OnGovernor(pins[KA].event_time > pins[KB].event_time);
+                Application::self->OnGovernor(PIN_KA.event_time > PIN_KB.event_time);
             }
-            else if (!pins[KA].press && pins[KB].press)
+            else if (!PIN_KA.press && PIN_KB.press)
             {
-                Application::self->OnGovernor(pins[KA].event_time > pins[KB].event_time);
+                Application::self->OnGovernor(PIN_KA.event_time > PIN_KB.event_time);
             }
 
-            pins[KA].event_time = 0;
-            pins[KB].event_time = 0;
+            PIN_KA.event_time = 0;
+            PIN_KB.event_time = 0;
         }
     }
 }
