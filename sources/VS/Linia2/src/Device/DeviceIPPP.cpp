@@ -93,25 +93,25 @@ void DeviceIPPP::SetPulseDuration(uint durationUS, bool genertaion_stump)
 
 void DeviceIPPP::ChanC_SourceRange(RangeU::E range)
 {
-    SendCommand(":C:RANGE:SOURCE %s", RangeU(range).Name(RowRange(Chan::_C), false));
+    SendCommand(":C:SOURCE:RANGE %s", RangeU(range).Name(RowRange(Chan::_C), false));
 }
 
 
 void DeviceIPPP::ChanC_MeasRange(RangeU::E range)
 {
-    SendCommand(":C:RANGE:MEAS %s", RangeU(range).Name(RowRange(Chan::_C), false));
+    SendCommand(":C:MEAS:RANGE %s", RangeU(range).Name(RowRange(Chan::_C), false));
 }
 
 
 void DeviceIPPP::ChanC_MeasRange(RangeI::E range)
 {
-    SendCommand(":C:RANGE:MEAS %s", RangeI(range).Name(RowRange(Chan::_C), false));
+    SendCommand(":C:MEAS:RANGE %s", RangeI(range).Name(RowRange(Chan::_C), false));
 }
 
 
 void DeviceIPPP::ChanC_LimitSourceU(int min, int max)
 {
-    SendCommand(":C:LIMIT %d %d", min, max);
+    SendCommand(":C:SOURCE:LIMIT %d %d", min, max);
 }
 
 
@@ -119,7 +119,7 @@ void DeviceIPPP::ChanBS_SourceMode(const Chan &ch, ModeSource::E mode)
 {
     if (IsChanBS(ch))
     {
-        SendCommand(":%s:MODE:SOURCE %s", ch.Name(), ModeSource::Name(mode));
+        SendCommand(":%s:SOURCE:MODE %s", ch.Name(), ModeSource::Name(mode));
     }
 }
 
@@ -177,7 +177,7 @@ void DeviceIPPP::ChanBS_MeasMode(const Chan &ch, ModeMeas::E mode)
 {
     if (IsChanBS(ch))
     {
-        SendCommand(":%s:MODE:MEAS %s", ch.Name(), ModeMeas::Name(mode));
+        SendCommand(":%s:MEAS:MODE %s", ch.Name(), ModeMeas::Name(mode));
     }
 }
 
@@ -186,7 +186,7 @@ void DeviceIPPP::ChanBS_MeasRange(const Chan &ch, RangeU::E range)
 {
     if (IsChanBS(ch))
     {
-        SendCommand(":%s:RANGE:MEAS %s",
+        SendCommand(":%s:MEAS:RANGE %s",
             ch.Name(),
             RangeU(range).Name(RowRange(ch.value), false));
     }
@@ -197,7 +197,7 @@ void DeviceIPPP::ChanBS_MeasRange(const Chan &ch, RangeI::E range)
 {
     if (IsChanBS(ch))
     {
-        SendCommand(":%s:RANGE:MEAS %s",
+        SendCommand(":%s:MEAS:RANGE %s",
             ch.Name(),
             RangeI(range).Name(RowRange(ch.value), false));
     }
@@ -208,7 +208,7 @@ void DeviceIPPP::ChanBS_LimitRange(const Chan &ch, RangeU::E range)
 {
     if (IsChanBS(ch))
     {
-        SendCommand(":%s:RANGE:LIMIT %s",
+        SendCommand(":%s:LIMIT:RANGE %s",
             ch.Name(),
             RangeU(range).Name(RowRange(ch.value), false));
     }
@@ -219,7 +219,7 @@ void DeviceIPPP::ChanBS_LimitRange(const Chan &ch, RangeI::E range)
 {
     if (IsChanBS(ch))
     {
-        SendCommand(":%s:RANGE:LIMIT %s",
+        SendCommand(":%s:LIMIT:RANGE %s",
             ch.Name(),
             RangeI(range).Name(RowRange(ch.value), false));
     }
