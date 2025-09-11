@@ -284,13 +284,13 @@ void DeviceIPPP::SetPointCount(int count)
 
 void DeviceIPPP::StartMeasurement()
 {
-    SendCommand(":STARTMEAS");
+    SendCommand(":MEAS:START");
 }
 
 
 void DeviceIPPP::StopMeasurement()
 {
-    SendCommand(":STOPMEAS");
+    SendCommand(":MEAS:STOP");
 }
 
 
