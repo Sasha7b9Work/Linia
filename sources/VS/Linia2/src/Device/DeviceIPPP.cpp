@@ -98,7 +98,7 @@ void DeviceIPPP::SetPulseDuration(uint durationUS, GenerationStup::E gs) {
 }
 
 
-void DeviceIPPP::SetChannelC_SourceRange(RangeU::E range) {
+void DeviceIPPP::ChanC_SourceRange(RangeU::E range) {
     std::string rangeStr = std::string(RangeU(range).Name(RowRange::_124));
     size_t spacePos = rangeStr.find(' ');
     if (spacePos != std::string::npos) {
@@ -109,7 +109,7 @@ void DeviceIPPP::SetChannelC_SourceRange(RangeU::E range) {
 }
 
 
-void DeviceIPPP::SetChannelC_MeasRange(RangeU::E range) {
+void DeviceIPPP::ChanC_MeasRange(RangeU::E range) {
     std::string rangeStr = std::string(RangeU(range).Name(RowRange::_124));
     size_t spacePos = rangeStr.find(' ');
     if (spacePos != std::string::npos) {
@@ -120,7 +120,7 @@ void DeviceIPPP::SetChannelC_MeasRange(RangeU::E range) {
 }
 
 
-void DeviceIPPP::SetChannelC_MeasRange(RangeI::E range) {
+void DeviceIPPP::ChanC_MeasRange(RangeI::E range) {
     std::string rangeStr = std::string(RangeI(range).Name(RowRange::_124));
     size_t spacePos = rangeStr.find(' ');
     if (spacePos != std::string::npos) {
@@ -131,7 +131,7 @@ void DeviceIPPP::SetChannelC_MeasRange(RangeI::E range) {
 }
 
 
-void DeviceIPPP::SetChannelC_LimitSourceU(int min, int max) {
+void DeviceIPPP::ChanC_LimitSourceU(int min, int max) {
     std::stringstream ss;
     ss << ":C:LIMIT " << min << " " << max;
     SendCommand(ss.str());
@@ -139,47 +139,47 @@ void DeviceIPPP::SetChannelC_LimitSourceU(int min, int max) {
 
 
 // Объединенные функции для B и S
-void DeviceIPPP::SetChannel_SourceMode(Chan::E chan, ModeSource::E mode) {
+void DeviceIPPP::ChanBS_SourceMode(Chan::E chan, ModeSource::E mode) {
     std::string cmd = ":" + Chan::Name(chan).ToStdString() + ":MODE:SOURCE " + ModeSource::Name(mode).ToStdString();
     SendCommand(cmd);
 }
 
 
-void DeviceIPPP::SetChannel_AmplitudeRange(Chan::E chan, AmplitudeRange::E range) {
+void DeviceIPPP::ChanBS_AmplitudeRange(Chan::E chan, AmplitudeRange::E range) {
     std::stringstream ss;
     ss << ":" << Chan::Name(chan).ToStdString() << ":RANGE:AMPLITUDE " << (int)AmplitudeRange::Value(range);
     SendCommand(ss.str());
 }
 
 
-void DeviceIPPP::SetChannel_StepCount(Chan::E chan, StepCount::E count) {
+void DeviceIPPP::ChanBS_StepCount(Chan::E chan, StepCount::E count) {
     std::stringstream ss;
     ss << ":" << Chan::Name(chan).ToStdString() << ":STEP:COUNT " << StepCount::Value(count);
     SendCommand(ss.str());
 }
 
 
-void DeviceIPPP::SetChannel_AmplitudeValue(Chan::E chan, AmplitudeValue::E value) {
+void DeviceIPPP::ChanBS_AmplitudeValue(Chan::E chan, AmplitudeValue::E value) {
     std::stringstream ss;
     ss << ":" << Chan::Name(chan).ToStdString() << ":AMPLITUDE " << AmplitudeValue::Value(value);
     SendCommand(ss.str());
 }
 
 
-void DeviceIPPP::SetChannel_Bias(Chan::E chan, AmplitudeValue::E bias) {
+void DeviceIPPP::ChaBS_Bias(Chan::E chan, AmplitudeValue::E bias) {
     std::stringstream ss;
     ss << ":" << Chan::Name(chan).ToStdString() << ":BIAS " << AmplitudeValue::Value(bias);
     SendCommand(ss.str());
 }
 
 
-void DeviceIPPP::SetChannel_MeasMode(Chan::E chan, ModeMeas::E mode) {
+void DeviceIPPP::ChanBS_MeasMode(Chan::E chan, ModeMeas::E mode) {
     std::string cmd = ":" + Chan::Name(chan).ToStdString() + ":MODE:MEAS " + ModeMeas::Name(mode).ToStdString();
     SendCommand(cmd);
 }
 
 
-void DeviceIPPP::SetChannel_MeasRangeU(Chan::E chan, RangeU::E range) {
+void DeviceIPPP::ChanBS_MeasRangeU(Chan::E chan, RangeU::E range) {
     std::string rangeStr = std::string(RangeU(range).Name(RowRange::_124));
     size_t spacePos = rangeStr.find(' ');
     if (spacePos != std::string::npos) {
@@ -190,7 +190,7 @@ void DeviceIPPP::SetChannel_MeasRangeU(Chan::E chan, RangeU::E range) {
 }
 
 
-void DeviceIPPP::SetChannel_MeasRangeI(Chan::E chan, RangeI::E range) {
+void DeviceIPPP::ChanBS_MeasRangeI(Chan::E chan, RangeI::E range) {
     std::string rangeStr = std::string(RangeI(range).Name(RowRange::_124));
     size_t spacePos = rangeStr.find(' ');
     if (spacePos != std::string::npos) {
@@ -201,7 +201,7 @@ void DeviceIPPP::SetChannel_MeasRangeI(Chan::E chan, RangeI::E range) {
 }
 
 
-void DeviceIPPP::SetChannel_LimitRangeU(Chan::E chan, RangeU::E range) {
+void DeviceIPPP::ChanBS_LimitRangeU(Chan::E chan, RangeU::E range) {
     std::string rangeStr = std::string(RangeU(range).Name(RowRange::_124));
     size_t spacePos = rangeStr.find(' ');
     if (spacePos != std::string::npos) {
@@ -212,7 +212,7 @@ void DeviceIPPP::SetChannel_LimitRangeU(Chan::E chan, RangeU::E range) {
 }
 
 
-void DeviceIPPP::SetChannel_LimitRangeI(Chan::E chan, RangeI::E range) {
+void DeviceIPPP::ChanBS_LimitRangeI(Chan::E chan, RangeI::E range) {
     std::string rangeStr = std::string(RangeI(range).Name(RowRange::_124));
     size_t spacePos = rangeStr.find(' ');
     if (spacePos != std::string::npos) {
@@ -223,14 +223,14 @@ void DeviceIPPP::SetChannel_LimitRangeI(Chan::E chan, RangeI::E range) {
 }
 
 
-void DeviceIPPP::SetChannel_LimitThreshold(Chan::E chan, LimitThreshold::E threshold) {
+void DeviceIPPP::ChanBS_LimitThreshold(Chan::E chan, LimitThreshold::E threshold) {
     std::stringstream ss;
     ss << ":" << Chan::Name(chan).ToStdString() << ":LIMIT:THRESHOLD " << LimitThreshold::Value(threshold);
     SendCommand(ss.str());
 }
 
 
-void DeviceIPPP::SetChannel_HighResolution(Chan::E chan, bool highRes) {
+void DeviceIPPP::ChanBS_HighResolution(Chan::E chan, bool highRes) {
     std::string cmd = ":" + Chan::Name(chan).ToStdString() + ":HIGHRES " + std::string(highRes ? "1" : "0");
     SendCommand(cmd);
 }

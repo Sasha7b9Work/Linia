@@ -30,47 +30,47 @@ public:
     //------------------------------------------------------------------------------------------------------------
 
     // Диапазон источника
-    virtual void SetChannelC_SourceRange(RangeU::E) override;
+    virtual void ChanC_SourceRange(RangeU::E) override;
 
     // Диапазон измерителя
-    virtual void SetChannelC_MeasRange(RangeU::E) override;
-    virtual void SetChannelC_MeasRange(RangeI::E) override;
+    virtual void ChanC_MeasRange(RangeU::E) override;
+    virtual void ChanC_MeasRange(RangeI::E) override;
 
     // Ограничение источника U от 0 до 100%
-    virtual void SetChannelC_LimitSourceU(int min, int max) override;
+    virtual void ChanC_LimitSourceU(int min, int max) override;
 
     //------------------------------------------------------------------------------------------------------------
 
     // Функции для каналов B и S
 
     // Режим источника в канале
-    virtual void SetChannel_SourceMode(Chan::E, ModeSource::E) override;
+    virtual void ChanBS_SourceMode(Chan::E, ModeSource::E) override;
 
-    virtual void SetChannel_AmplitudeRange(Chan::E, AmplitudeRange::E) override;
+    virtual void ChanBS_AmplitudeRange(Chan::E, AmplitudeRange::E) override;
 
     // Число ступеней
-    virtual void SetChannel_StepCount(Chan::E, StepCount::E) override;
+    virtual void ChanBS_StepCount(Chan::E, StepCount::E) override;
 
-    virtual void SetChannel_AmplitudeValue(Chan::E, AmplitudeValue::E) override;
+    virtual void ChanBS_AmplitudeValue(Chan::E, AmplitudeValue::E) override;
 
     // Смещение
-    virtual void SetChannel_Bias(Chan::E, AmplitudeValue::E) override;
+    virtual void ChaBS_Bias(Chan::E, AmplitudeValue::E) override;
 
     // Режим измерителя
-    virtual void SetChannel_MeasMode(Chan::E, ModeMeas::E) override;
+    virtual void ChanBS_MeasMode(Chan::E, ModeMeas::E) override;
 
     // Диапазон измерителя
-    virtual void SetChannel_MeasRangeU(Chan::E, RangeU::E) override;
-    virtual void SetChannel_MeasRangeI(Chan::E, RangeI::E) override;
+    virtual void ChanBS_MeasRangeU(Chan::E, RangeU::E) override;
+    virtual void ChanBS_MeasRangeI(Chan::E, RangeI::E) override;
 
     // Диапазон ограничения
-    virtual void SetChannel_LimitRangeU(Chan::E, RangeU::E) override;
-    virtual void SetChannel_LimitRangeI(Chan::E, RangeI::E) override;
+    virtual void ChanBS_LimitRangeU(Chan::E, RangeU::E) override;
+    virtual void ChanBS_LimitRangeI(Chan::E, RangeI::E) override;
 
     // Порог ограничения измерителя
-    virtual void SetChannel_LimitThreshold(Chan::E, LimitThreshold::E) override;
+    virtual void ChanBS_LimitThreshold(Chan::E, LimitThreshold::E) override;
 
-    virtual void SetChannel_HighResolution(Chan::E, bool highRes) override;
+    virtual void ChanBS_HighResolution(Chan::E, bool highRes) override;
 
     //------------------------------------------------------------------------------------------------------------
 

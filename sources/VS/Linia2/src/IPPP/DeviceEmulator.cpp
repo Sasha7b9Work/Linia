@@ -56,85 +56,85 @@ void DeviceEmulator::SetPulseDuration(uint /*durationUS*/, GenerationStup::E)
 }
 
 
-void DeviceEmulator::SetChannelC_SourceRange(RangeU::E)
+void DeviceEmulator::ChanC_SourceRange(RangeU::E)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::SetChannelC_MeasRange(RangeU::E)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
-void DeviceEmulator::SetChannelC_MeasRange(RangeI::E)
+void DeviceEmulator::ChanC_MeasRange(RangeU::E)
 {
     LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::SetChannelC_LimitSourceU(int /*min*/, int /*max*/)
+void DeviceEmulator::ChanC_MeasRange(RangeI::E)
 {
     LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::SetChannel_SourceMode(Chan::E /*chan*/, ModeSource::E /*mode*/)
+void DeviceEmulator::ChanC_LimitSourceU(int /*min*/, int /*max*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::SetChannel_AmplitudeRange(Chan::E /*chan*/, AmplitudeRange::E /*range*/)
+
+void DeviceEmulator::ChanBS_SourceMode(Chan::E /*chan*/, ModeSource::E /*mode*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::SetChannel_StepCount(Chan::E /*chan*/, StepCount::E /*count*/)
+void DeviceEmulator::ChanBS_AmplitudeRange(Chan::E /*chan*/, AmplitudeRange::E /*range*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::SetChannel_AmplitudeValue(Chan::E /*chan*/, AmplitudeValue::E /*value*/)
+void DeviceEmulator::ChanBS_StepCount(Chan::E /*chan*/, StepCount::E /*count*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::SetChannel_Bias(Chan::E /*chan*/, AmplitudeValue::E /*bias*/)
+void DeviceEmulator::ChanBS_AmplitudeValue(Chan::E /*chan*/, AmplitudeValue::E /*value*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::SetChannel_MeasMode(Chan::E /*chan*/, ModeMeas::E /*mode*/)
+void DeviceEmulator::ChaBS_Bias(Chan::E /*chan*/, AmplitudeValue::E /*bias*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::SetChannel_MeasRangeU(Chan::E /*chan*/, RangeU::E /*range*/)
+void DeviceEmulator::ChanBS_MeasMode(Chan::E /*chan*/, ModeMeas::E /*mode*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::SetChannel_MeasRangeI(Chan::E /*chan*/, RangeI::E /*range*/)
+void DeviceEmulator::ChanBS_MeasRangeU(Chan::E /*chan*/, RangeU::E /*range*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::SetChannel_LimitRangeU(Chan::E /*chan*/, RangeU::E /*range*/)
+void DeviceEmulator::ChanBS_MeasRangeI(Chan::E /*chan*/, RangeI::E /*range*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::SetChannel_LimitRangeI(Chan::E /*chan*/, RangeI::E /*range*/)
+void DeviceEmulator::ChanBS_LimitRangeU(Chan::E /*chan*/, RangeU::E /*range*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::SetChannel_LimitThreshold(Chan::E /*chan*/, LimitThreshold::E /*threshold*/)
+void DeviceEmulator::ChanBS_LimitRangeI(Chan::E /*chan*/, RangeI::E /*range*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::SetChannel_HighResolution(Chan::E /*chan*/, bool /*highRes*/)
+void DeviceEmulator::ChanBS_LimitThreshold(Chan::E /*chan*/, LimitThreshold::E /*threshold*/)
+{
+    LOG_ERROR("Not implemented");
+}
+
+void DeviceEmulator::ChanBS_HighResolution(Chan::E /*chan*/, bool /*highRes*/)
 {
     LOG_ERROR("Not implemented");
 }
