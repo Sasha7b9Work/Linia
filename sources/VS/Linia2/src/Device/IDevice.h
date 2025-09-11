@@ -65,12 +65,12 @@ public:
     virtual void ChanBS_MeasMode(Chan::E, ModeMeas::E) = 0;
 
     // Диапазон измерителя
-    virtual void ChanBS_MeasRangeU(Chan::E, RangeU::E) = 0;
-    virtual void ChanBS_MeasRangeI(Chan::E, RangeI::E) = 0;
+    virtual void ChanBS_MeasRange(Chan::E, RangeU::E) = 0;
+    virtual void ChanBS_MeasRange(Chan::E, RangeI::E) = 0;
 
     // Диапазон ограничения
-    virtual void ChanBS_LimitRangeU(Chan::E, RangeU::E) = 0;
-    virtual void ChanBS_LimitRangeI(Chan::E, RangeI::E) = 0;
+    virtual void ChanBS_LimitRange(Chan::E, RangeU::E) = 0;
+    virtual void ChanBS_LimitRange(Chan::E, RangeI::E) = 0;
 
     // Порог ограничения измерителя
     virtual void ChanBS_LimitThreshold(Chan::E, int) = 0;

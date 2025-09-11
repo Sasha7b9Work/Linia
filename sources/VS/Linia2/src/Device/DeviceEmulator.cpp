@@ -115,23 +115,23 @@ void DeviceEmulator::ChanBS_MeasMode(Chan::E /*chan*/, ModeMeas::E /*mode*/)
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_MeasRangeU(Chan::E /*chan*/, RangeU::E /*range*/)
+void DeviceEmulator::ChanBS_MeasRange(Chan::E /*chan*/, RangeU::E /*range*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_MeasRangeI(Chan::E /*chan*/, RangeI::E /*range*/)
+void DeviceEmulator::ChanBS_MeasRange(Chan::E /*chan*/, RangeI::E /*range*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_LimitRangeU(Chan::E /*chan*/, RangeU::E /*range*/)
+void DeviceEmulator::ChanBS_LimitRange(Chan::E /*chan*/, RangeU::E /*range*/)
 {
     LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::ChanBS_LimitRangeI(Chan::E /*chan*/, RangeI::E /*range*/)
+void DeviceEmulator::ChanBS_LimitRange(Chan::E /*chan*/, RangeI::E /*range*/)
 {
     LOG_ERROR("Not implemented");
 }

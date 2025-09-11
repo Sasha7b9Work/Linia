@@ -173,7 +173,7 @@ void DeviceIPPP::ChanBS_MeasMode(Chan::E ch, ModeMeas::E mode)
 }
 
 
-void DeviceIPPP::ChanBS_MeasRangeU(Chan::E ch, RangeU::E range)
+void DeviceIPPP::ChanBS_MeasRange(Chan::E ch, RangeU::E range)
 {
     if (IsChanBS(ch))
     {
@@ -184,7 +184,7 @@ void DeviceIPPP::ChanBS_MeasRangeU(Chan::E ch, RangeU::E range)
 }
 
 
-void DeviceIPPP::ChanBS_MeasRangeI(Chan::E ch, RangeI::E range)
+void DeviceIPPP::ChanBS_MeasRange(Chan::E ch, RangeI::E range)
 {
     if (IsChanBS(ch))
     {
@@ -195,7 +195,7 @@ void DeviceIPPP::ChanBS_MeasRangeI(Chan::E ch, RangeI::E range)
 }
 
 
-void DeviceIPPP::ChanBS_LimitRangeU(Chan::E ch, RangeU::E range)
+void DeviceIPPP::ChanBS_LimitRange(Chan::E ch, RangeU::E range)
 {
     if (IsChanBS(ch))
     {
@@ -206,7 +206,7 @@ void DeviceIPPP::ChanBS_LimitRangeU(Chan::E ch, RangeU::E range)
 }
 
 
-void DeviceIPPP::ChanBS_LimitRangeI(Chan::E ch, RangeI::E range)
+void DeviceIPPP::ChanBS_LimitRange(Chan::E ch, RangeI::E range)
 {
     if (IsChanBS(ch))
     {
