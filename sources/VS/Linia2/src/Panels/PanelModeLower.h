@@ -5,7 +5,7 @@
 #include "Panels/PanelMenu/PanelMenu.h"
 #include "Controls/ButtonsCombo.h"
 #include "Panels/PanelConfig/PanelConfig.h"
-#include "Panels/Panel07_Indicator.h"
+#include "Panels/PanelIndicator.h"
 
 
 class PanelModeLower : public Panel

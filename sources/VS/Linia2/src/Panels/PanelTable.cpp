@@ -1,7 +1,7 @@
 ﻿// 2025/6/1 18:08:43 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Display/Display.h"
-#include "Panels/Panel09_Table.h"
+#include "Panels/PanelTable.h"
 #include "Panels/PanelMenu/PanelMenu.h"
 #include "MainWindow.h"
 

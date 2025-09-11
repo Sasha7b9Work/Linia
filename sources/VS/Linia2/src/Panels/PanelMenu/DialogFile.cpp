@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Panels/PanelMenu/DialogFile.h"
 #include "IPPP/Tests/Model.h"
-#include "Panels/Panel04_Model.h"
+#include "Panels/PanelModel.h"
 
 
 DialogFile *DialogFile::self = nullptr;

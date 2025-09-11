@@ -1,11 +1,11 @@
 ﻿// 2025/6/1 18:03:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel04_Model.h"
-#include "Panels/Panel08_ModeLower.h"
+#include "Panels/PanelModel.h"
+#include "Panels/PanelModeLower.h"
 #include "Utils/SystemDepend.h"
 #include "Controls/StaticBox.h"
 #include "Panels/PanelConfig/PanelConfig.h"
-#include "Panels/Panel07_Indicator.h"
+#include "Panels/PanelIndicator.h"
 
 
 PanelModeLower *PanelModeLower::self = nullptr;

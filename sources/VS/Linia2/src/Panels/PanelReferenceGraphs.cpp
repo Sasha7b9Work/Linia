@@ -1,6 +1,6 @@
 ﻿// 2025/7/26 23:56:51 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel13_ReferenceGraphs.h"
+#include "Panels/PanelReferenceGraphs.h"
 #include "MainWindow.h"
 
 
