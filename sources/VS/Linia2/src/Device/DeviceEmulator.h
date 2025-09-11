@@ -7,35 +7,35 @@ class DeviceEmulator : public IDevice
 {
 public:
 
-    virtual bool Init();
-    virtual void Shutdown();
+    virtual bool Init() override;
+    virtual void Shutdown() override;
     virtual bool IsConnected() const;
 
     virtual void WriteMicroChip(MicroChip::E, int reg, uint value) override;
 
     // Схема включения канала
-    virtual void SetCircuitConnection(Chan::E, StateJack::E);
+    virtual void SetCircuitConnection(Chan::E, StateJack::E) override;
 
     // Вид развёртки
-    virtual void SetSweepType(TypeScan::E);
+    virtual void SetSweepType(TypeScan::E) override;
 
     // Первая очередь
-    virtual void SetFirstQueue(Chan::E);
+    virtual void SetFirstQueue(Chan::E) override;
 
     // Длительность импульса
-    virtual void SetPulseDuration(uint durationUS, bool generation_stump);
+    virtual void SetPulseDuration(uint durationUS, bool generation_stump) override;
 
     //------------------------------------------------------------------------------------------------------------
 
     // Диапазон источника
-    virtual void ChanC_SourceRange(RangeU::E);
+    virtual void ChanC_SourceRange(RangeU::E) override;
 
     // Диапазон измерителя
-    virtual void ChanC_MeasRange(RangeU::E);
-    virtual void ChanC_MeasRange(RangeI::E);
+    virtual void ChanC_MeasRange(RangeU::E) override;
+    virtual void ChanC_MeasRange(RangeI::E) override;
 
     // Ограничение источника U от 0 до 100%
-    virtual void ChanC_LimitSourceU(int min, int max);
+    virtual void ChanC_LimitSourceU(int min, int max) override;
 
     //------------------------------------------------------------------------------------------------------------
 
@@ -56,30 +56,11 @@ public:
     //------------------------------------------------------------------------------------------------------------
 
     virtual void SetPointCount(int) override;
-    virtual void EmergencyStop();
-    virtual void StartMeasurement();
 
-    virtual void StopMeasurement();
-    virtual void ResetToDefaults();
+    virtual void StartMeasurement() override;
+    virtual void StopMeasurement() override;
 
 private:
 
     virtual ~DeviceEmulator() { }
-
-    void (*callback_read_data)(int16) = nullptr;
-    StateJack::E jackC;
-    StateJack::E jackB;
-    StateJack::E jackS;
-
-    // Диапазон источника напряжения
-    RangeU::E range_source[Chan::Count];
-
-    // Диапазон измерителя напряжения
-    RangeU::E range_measU[Chan::Count];
-
-    // Диапазон измерителя тока
-    RangeI::E range_measI[Chan::Count];
-
-    // Ограничение источника U в канале C в процентах
-    wxRange limit_sourceC;
 };

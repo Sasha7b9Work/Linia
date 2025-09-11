@@ -149,12 +149,6 @@ void DeviceEmulator::SetPointCount(int)
 }
 
 
-void DeviceEmulator::EmergencyStop()
-{
-    LOG_ERROR("Not implemented");
-}
-
-
 void DeviceEmulator::StartMeasurement()
 {
     LOG_ERROR("Not implemented");
@@ -162,12 +156,6 @@ void DeviceEmulator::StartMeasurement()
 
 
 void DeviceEmulator::StopMeasurement()
-{
-    LOG_ERROR("Not implemented");
-}
-
-
-void DeviceEmulator::ResetToDefaults()
 {
     LOG_ERROR("Not implemented");
 }
