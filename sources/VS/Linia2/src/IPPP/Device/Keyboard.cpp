@@ -9,7 +9,7 @@
 namespace Keyboard
 {
     static const int64 TIME_EVENT_BTN = 100;    // Столько мс состояние кнопки не должно меняться, чтобы действие свершилось (пропустить дребезг контактов)
-    static const int64 TIME_EVENT_GOV = 1;
+    static const int64 TIME_EVENT_GOV = 3;
 
     static void CallbackOnSTART(bool);
     static void CallbackOnSTOP(bool);
@@ -68,7 +68,8 @@ void Keyboard::Update()
 
     if (pins[2].event_time && pins[3].event_time)
     {
-        if (time - pins[2].event_time > TIME_EVENT_GOV && time - pins[3].event_time > TIME_EVENT_GOV)
+        if ((time - pins[2].event_time) > TIME_EVENT_GOV &&
+            (time - pins[3].event_time) > TIME_EVENT_GOV)
         {
             if (pins[2].press && !pins[3].press)
             {
