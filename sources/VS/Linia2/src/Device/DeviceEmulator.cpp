@@ -44,7 +44,7 @@ void DeviceEmulator::SetCircuitConnection(const Chan &, StateJack::E)
 }
 
 
-void DeviceEmulator::SetSweepType(TypeScan::E)
+void DeviceEmulator::SetTypeScan(TypeScan::E)
 {
     LOG_ERROR("Not implemented");
 }

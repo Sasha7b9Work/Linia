@@ -23,7 +23,7 @@ public:
     virtual void SetCircuitConnection(const Chan &, StateJack::E) = 0;
 
     // Вид развёртки
-    virtual void SetSweepType(TypeScan::E) = 0;
+    virtual void SetTypeScan(TypeScan::E) = 0;
 
     // Первая очередь
     virtual void SetFirstQueue(const Chan &) = 0;

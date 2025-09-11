@@ -17,7 +17,7 @@ public:
     virtual void SetCircuitConnection(const Chan &, StateJack::E) override;
 
     // Вид развёртки
-    virtual void SetSweepType(TypeScan::E) override;
+    virtual void SetTypeScan(TypeScan::E) override;
 
     // Первая очередь
     virtual void SetFirstQueue(const Chan &) override;
