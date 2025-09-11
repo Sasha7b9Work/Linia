@@ -42,6 +42,8 @@ void Keyboard::Init()
 
     pinKB.SetChangeCallback(CallbackOnKB);
 
+    std::memset(pins, 0, sizeof(pins));
+
     PIN_START.pin = &pinSTART;
     PIN_STOP.pin = &pinSTOP;
     PIN_KA.pin = &pinKA;
