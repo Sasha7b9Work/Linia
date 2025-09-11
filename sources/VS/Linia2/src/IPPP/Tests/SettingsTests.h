@@ -334,37 +334,3 @@ struct PulseDuration
     static wxString Name(E);
     static uint Value(E);
 };
-
-
-// Процент ограничения
-struct LimitPercent
-{
-    enum E
-    {
-        Percent_0 = 0,
-        Percent_5 = 1,
-        Percent_10 = 2,
-        Percent_15 = 3,
-        Percent_20 = 4,
-        Percent_25 = 5,
-        Percent_30 = 6,
-        Percent_35 = 7,
-        Percent_40 = 8,
-        Percent_45 = 9,
-        Percent_50 = 10,
-        Percent_55 = 11,
-        Percent_60 = 12,
-        Percent_65 = 13,
-        Percent_70 = 14,
-        Percent_75 = 15,
-        Percent_80 = 16,
-        Percent_85 = 17,
-        Percent_90 = 18,
-        Percent_95 = 19,
-        Percent_100 = 20,
-        Count
-    };
-
-    static wxString Name(E);
-    static int Value(E);
-};

@@ -214,42 +214,6 @@ uint PulseDuration::Value(E duration)
 }
 
 
-wxString LimitPercent::Name(E percent)
-{
-    switch (percent)
-    {
-    case Percent_0: return "0%";
-    case Percent_5: return "5%";
-    case Percent_10: return "10%";
-    case Percent_15: return "15%";
-    case Percent_20: return "20%";
-    case Percent_25: return "25%";
-    case Percent_30: return "30%";
-    case Percent_35: return "35%";
-    case Percent_40: return "40%";
-    case Percent_45: return "45%";
-    case Percent_50: return "50%";
-    case Percent_55: return "55%";
-    case Percent_60: return "60%";
-    case Percent_65: return "65%";
-    case Percent_70: return "70%";
-    case Percent_75: return "75%";
-    case Percent_80: return "80%";
-    case Percent_85: return "85%";
-    case Percent_90: return "90%";
-    case Percent_95: return "95%";
-    case Percent_100: return "100%";
-    case Count:
-    default: return "0%";
-    }
-}
-
-int LimitPercent::Value(E percent)
-{
-    return (int)percent * 5;
-}
-
-
 wxString AmplitudeRange::Name(E range)
 {
     switch (range)
