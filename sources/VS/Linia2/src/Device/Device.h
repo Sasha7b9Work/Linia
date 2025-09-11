@@ -22,7 +22,7 @@ public:
     virtual void SetSweepType(TypeScan::E) = 0;
 
     // Первая очередь
-    virtual void SetFirstQueue(FirstQueue::E) = 0;
+    virtual void SetFirstQueue(Chan::E) = 0;
 
     // Длительность импульса
     // generation_stump - семейство кривых

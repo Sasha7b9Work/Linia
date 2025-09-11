@@ -44,7 +44,7 @@ void DeviceEmulator::SetSweepType(TypeScan::E)
 }
 
 
-void DeviceEmulator::SetFirstQueue(FirstQueue::E)
+void DeviceEmulator::SetFirstQueue(Chan::E)
 {
     LOG_ERROR("Not implemented");
 }

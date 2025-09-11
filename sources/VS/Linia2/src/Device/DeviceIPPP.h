@@ -22,7 +22,7 @@ public:
     virtual void SetSweepType(TypeScan::E) override;
 
     // Первая очередь
-    virtual void SetFirstQueue(FirstQueue::E) override;
+    virtual void SetFirstQueue(Chan::E) override;
 
     // Длительность импульса
     virtual void SetPulseDuration(uint durationUS, bool generation_stump) override;

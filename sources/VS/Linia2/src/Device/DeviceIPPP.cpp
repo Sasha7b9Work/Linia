@@ -117,9 +117,9 @@ void DeviceIPPP::SetSweepType(TypeScan::E type)
 }
 
 
-void DeviceIPPP::SetFirstQueue(FirstQueue::E fq)
+void DeviceIPPP::SetFirstQueue(Chan::E ch)
 {
-    SendCommand(":FIRSTQUEUE %s", + FirstQueue::Name(fq).c_str().AsChar());
+    SendCommand(":FIRSTQUEUE %s", + Chan(ch).Name().c_str().AsChar());
 }
 
 

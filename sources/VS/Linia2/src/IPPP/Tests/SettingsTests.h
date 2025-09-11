@@ -135,17 +135,3 @@ struct TypeScan
 
     static wxString Name(E);
 };
-
-
-// Первая очередь
-struct FirstQueue
-{
-    enum E
-    {
-        ChannelC,
-        ChannelB,
-        Count
-    };
-
-    static wxString Name(E);
-};

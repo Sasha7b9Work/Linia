@@ -97,12 +97,6 @@ wxString StateJack::NameGUI(E v)
 }
 
 
-wxString FirstQueue::Name(E fq)
-{
-    return fq == ChannelC ? "C" : "B";
-}
-
-
 Category::E Category::Current()
 {
     return (E)PanelScheme::self->comboCategory->GetCurrentChoice();

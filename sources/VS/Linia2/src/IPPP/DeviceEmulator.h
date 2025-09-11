@@ -18,7 +18,7 @@ public:
     virtual void SetSweepType(TypeScan::E);
 
     // Первая очередь
-    virtual void SetFirstQueue(FirstQueue::E);
+    virtual void SetFirstQueue(Chan::E);
 
     // Длительность импульса
     virtual void SetPulseDuration(uint durationUS, bool generation_stump);
