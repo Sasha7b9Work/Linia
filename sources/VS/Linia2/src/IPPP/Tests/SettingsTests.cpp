@@ -159,22 +159,3 @@ wxString ElementType::Name(E type)
 {
     return type == Multipole ? "MULTI" : "TWO";
 }
-
-
-wxString AmplitudeRange::Name(E range)
-{
-    switch (range)
-    {
-    case Range_200mV: return "200mV";
-    case Range_2V: return "2V";
-    case Range_20V: return "20V";
-    case Range_200V: return "200V";
-    case Count:
-    default: return "200mV";
-    }
-}
-
-uint8_t AmplitudeRange::Value(E range)
-{
-    return (uint8_t)range;
-}

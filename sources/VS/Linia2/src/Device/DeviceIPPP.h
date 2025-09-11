@@ -46,7 +46,7 @@ public:
     // Режим источника в канале
     virtual void ChanBS_SourceMode(Chan::E, ModeSource::E) override;
 
-    virtual void ChanBS_AmplitudeRange(Chan::E, AmplitudeRange::E) override;
+    virtual void ChanBS_AmplitudeRange(Chan::E, RangeU::E) override;
 
     // Число ступеней
     virtual void ChanBS_StepCount(Chan::E, int) override;

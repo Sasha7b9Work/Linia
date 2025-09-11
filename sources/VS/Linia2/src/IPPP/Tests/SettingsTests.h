@@ -148,23 +148,6 @@ struct FirstQueue
 };
 
 
-// Диапазон амплитуды
-struct AmplitudeRange
-{
-    enum E
-    {
-        Range_200mV = 0,
-        Range_2V = 1,
-        Range_20V = 2,
-        Range_200V = 3,
-        Count
-    };
-
-    static wxString Name(E);
-    static uint8_t Value(E);
-};
-
-
 // Семейство кривых
 struct GenerationStup
 {

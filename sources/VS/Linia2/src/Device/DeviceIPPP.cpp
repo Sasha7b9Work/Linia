@@ -156,9 +156,11 @@ void DeviceIPPP::ChanBS_SourceMode(Chan::E ch, ModeSource::E mode)
 }
 
 
-void DeviceIPPP::ChanBS_AmplitudeRange(Chan::E ch, AmplitudeRange::E range)
+void DeviceIPPP::ChanBS_AmplitudeRange(Chan::E ch, RangeU::E range)
 {
-    SendCommand(":%s:RANGE:AMPLITUDE %d", Chan(ch).Name().c_str().AsChar(), (int)AmplitudeRange::Value(range));
+    SendCommand(":%s:RANGE:AMPLITUDE %s",
+        Chan(ch).Name().c_str().AsChar(),
+        RangeU(range).Name(RowRange::ForChannel(ch), false));
 }
 
 

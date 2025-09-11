@@ -40,7 +40,7 @@ public:
     // Функции для каналов B и S
 
     virtual void ChanBS_SourceMode(Chan::E, ModeSource::E) override;
-    virtual void ChanBS_AmplitudeRange(Chan::E, AmplitudeRange::E) override;
+    virtual void ChanBS_AmplitudeRange(Chan::E, RangeU::E) override;
     virtual void ChanBS_StepCount(Chan::E, int) override;
     virtual void ChanBS_AmplitudeValue(Chan::E, int) override;
     virtual void ChaBS_Bias(Chan::E, int) override;
