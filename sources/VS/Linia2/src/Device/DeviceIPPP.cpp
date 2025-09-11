@@ -156,7 +156,7 @@ void DeviceIPPP::ChanC_LimitSourceU(int min, int max)
 
 void DeviceIPPP::ChanBS_SourceMode(Chan::E ch, ModeSource::E mode)
 {
-    if (VerifyChanBS(ch))
+    if (IsChanBS(ch))
     {
         SendCommand(":%s:MODE:SOURCE %s", Chan(ch).Name(), ModeSource::Name(mode));
     }
@@ -165,7 +165,7 @@ void DeviceIPPP::ChanBS_SourceMode(Chan::E ch, ModeSource::E mode)
 
 void DeviceIPPP::ChanBS_AmplitudeRange(Chan::E ch, RangeU::E range)
 {
-    if (VerifyChanBS(ch))
+    if (IsChanBS(ch))
     {
         SendCommand(":%s:RANGE:AMPLITUDE %s",
             Chan(ch).Name(),
@@ -176,7 +176,7 @@ void DeviceIPPP::ChanBS_AmplitudeRange(Chan::E ch, RangeU::E range)
 
 void DeviceIPPP::ChanBS_StepCount(Chan::E ch, int count)
 {
-    if (VerifyChanBS(ch))
+    if (IsChanBS(ch))
     {
         SendCommand(":%s:STEP:COUNT %d", Chan(ch).Name(), count);
     }
@@ -185,7 +185,7 @@ void DeviceIPPP::ChanBS_StepCount(Chan::E ch, int count)
 
 void DeviceIPPP::ChanBS_AmplitudeValue(Chan::E ch, int value)
 {
-    if (VerifyChanBS(ch))
+    if (IsChanBS(ch))
     {
         SendCommand("%s:AMPLITUDE %d", Chan(ch).Name(), value);
     }
@@ -194,7 +194,7 @@ void DeviceIPPP::ChanBS_AmplitudeValue(Chan::E ch, int value)
 
 void DeviceIPPP::ChaBS_Bias(Chan::E ch, int bias)
 {
-    if (VerifyChanBS(ch))
+    if (IsChanBS(ch))
     {
         SendCommand("%s:BIAS %d", Chan(ch).Name(), bias);
     }
@@ -203,7 +203,7 @@ void DeviceIPPP::ChaBS_Bias(Chan::E ch, int bias)
 
 void DeviceIPPP::ChanBS_MeasMode(Chan::E ch, ModeMeas::E mode)
 {
-    if (VerifyChanBS(ch))
+    if (IsChanBS(ch))
     {
         SendCommand(":%s:MODE:MEAS %s", Chan(ch).Name(), ModeMeas::Name(mode));
     }
@@ -212,7 +212,7 @@ void DeviceIPPP::ChanBS_MeasMode(Chan::E ch, ModeMeas::E mode)
 
 void DeviceIPPP::ChanBS_MeasRangeU(Chan::E ch, RangeU::E range)
 {
-    if (VerifyChanBS(ch))
+    if (IsChanBS(ch))
     {
         SendCommand(":%s:RANGE:MEAS %s",
             Chan(ch).Name(),
@@ -223,7 +223,7 @@ void DeviceIPPP::ChanBS_MeasRangeU(Chan::E ch, RangeU::E range)
 
 void DeviceIPPP::ChanBS_MeasRangeI(Chan::E ch, RangeI::E range)
 {
-    if (VerifyChanBS(ch))
+    if (IsChanBS(ch))
     {
         SendCommand(":%s:RANGE:MEAS %s",
             Chan(ch).Name(),
@@ -234,7 +234,7 @@ void DeviceIPPP::ChanBS_MeasRangeI(Chan::E ch, RangeI::E range)
 
 void DeviceIPPP::ChanBS_LimitRangeU(Chan::E ch, RangeU::E range)
 {
-    if (VerifyChanBS(ch))
+    if (IsChanBS(ch))
     {
         SendCommand(":%s:RANGE:LIMIT %s",
             Chan(ch).Name(),
@@ -245,7 +245,7 @@ void DeviceIPPP::ChanBS_LimitRangeU(Chan::E ch, RangeU::E range)
 
 void DeviceIPPP::ChanBS_LimitRangeI(Chan::E ch, RangeI::E range)
 {
-    if (VerifyChanBS(ch))
+    if (IsChanBS(ch))
     {
         SendCommand(":%s:RANGE:LIMIT %s",
             Chan(ch).Name(),
@@ -256,14 +256,14 @@ void DeviceIPPP::ChanBS_LimitRangeI(Chan::E ch, RangeI::E range)
 
 void DeviceIPPP::ChanBS_LimitThreshold(Chan::E ch, int threshold)
 {
-    if (VerifyChanBS(ch))
+    if (IsChanBS(ch))
     {
         SendCommand(":%s:LIMIT:THRESHOLD %d", Chan(ch).Name(), threshold);
     }
 }
 
 
-bool DeviceIPPP::VerifyChanBS(Chan::E ch) const
+bool DeviceIPPP::IsChanBS(Chan::E ch) const
 {
     if (ch == Chan::_B || ch == Chan::_S)
     {
