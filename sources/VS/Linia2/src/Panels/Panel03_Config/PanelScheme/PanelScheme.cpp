@@ -351,13 +351,13 @@ void FullJack::Unpack()
 
 void FullJack::SetChoice(StateJack::E state)
 {
-    combo->SetCurrentString(StateJack::Name(state));
+    combo->SetCurrentString(StateJack::NameHardware(state));
 }
 
 
 void ComboJack::SetChoice(StateJack::E state)
 {
-    ButtonsCombo::SetCurrentString(StateJack::Name(state));
+    ButtonsCombo::SetCurrentString(StateJack::NameHardware(state));
 }
 
 
