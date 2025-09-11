@@ -1,12 +1,19 @@
 #pragma once
-#include "IPPP/Tests/SettingsTests.h"
-#include "IPPP/Tests/Ranges.h"
 
+// Стандартные заголовки
+#include <atomic>
+#include <sstream>
+#include <queue>
+#include <mutex>
+#include <thread>
+#include <string>
+#include <vector>
 
-// \todo Дописать комментарии на функции неочевидного назначения
-// \todo В каналах B и S одинаковые функции. Их нужно объединить и первым аргументом передавать канал
-
-
+// Заголовки проекта
+#include "../defines.h"
+#include "../IPPP/Tests/SettingsTests.h"
+#include "../IPPP/Tests/Ranges.h"
+    
 class IDevice {
 public:
     virtual ~IDevice() = default;
@@ -14,8 +21,6 @@ public:
     virtual bool Init() = 0;
     virtual void Shutdown() = 0;
     virtual bool IsConnected() const = 0;
-
-    //    virtual void SetDataCallback(DataCallback callback) = 0;
 
     // Схема включения канала
     virtual void SetCircuitConnection(Chan::E, StateJack::E) = 0;               // :S:CONNECTION <C,B,S,E,GEN,1K,BREAK>
@@ -44,64 +49,148 @@ public:
 
     //------------------------------------------------------------------------------------------------------------
 
-    // Режим источника в канале B
-    virtual void SetChannelB_SourceMode(ModeSource::E) = 0;                     // :S:MODE:SOURCE U
+    // Функции для каналов B и S
 
-    virtual void SetChannelB_AmplitudeRange(uint8_t range) = 0;
+    // Режим источника в канале
+    virtual void SetChannel_SourceMode(Chan::E chan, ModeSource::E mode) = 0; // :(B/S):MODE:SOURCE U
+
+    virtual void SetChannel_AmplitudeRange(Chan::E chan, AmplitudeRange::E range) = 0; // :(B/S):RANGE:AMPLITUDE <range>
 
     // Число ступеней
-    virtual void SetChannelB_StepCount(int) = 0;                                // :B:STEP:COUNT 8
+    virtual void SetChannel_StepCount(Chan::E chan, StepCount::E count) = 0; // :(B/S):STEP:COUNT <count>
 
-    virtual void SetChannelB_AmplitudeValue(int16_t) = 0;
+    virtual void SetChannel_AmplitudeValue(Chan::E chan, AmplitudeValue::E value) = 0; // :(B/S):AMPLITUDE <value>
 
     // Смещение
-    virtual void SetChannelB_Bias(pchar) = 0;                                   // :S:BIAS 10.2mV
+    virtual void SetChannel_Bias(Chan::E chan, AmplitudeValue::E bias) = 0; // :(B/S):BIAS <value>
 
     // Режим измерителя
-    virtual void SetChannelB_MeasMode(ModeMeas::E) = 0;                         // :B:MODE:MEAS I
+    virtual void SetChannel_MeasMode(Chan::E chan, ModeMeas::E mode) = 0; // :(B/S):MODE:MEAS U
 
     // Диапазон измерителя
-    virtual void SetChannelB_MeasRange(RangeU::E) = 0;                          // :B:RANGE:MEAS 10V
-    virtual void SetChannelB_MeasRange(RangeI::E) = 0;                          // :B:RANGE:MEAS 1pA
+    virtual void SetChannel_MeasRangeU(Chan::E chan, RangeU::E range) = 0; // :(B/S):RANGE:MEAS <range>
+    virtual void SetChannel_MeasRangeI(Chan::E chan, RangeI::E range) = 0; // :(B/S):RANGE:MEAS <range>
 
     // Диапазон ограничения
-    virtual void SetChannelB_LimitRange(RangeU::E) = 0;                         // :S:RANGE:LIMIT 10V
-    virtual void SetChannelB_LimitRange(RangeI::E) = 0;                         // :B:RANGE:LIMIT 40A
+    virtual void SetChannel_LimitRangeU(Chan::E chan, RangeU::E range) = 0; // :(B/S):RANGE:LIMIT <range>
+    virtual void SetChannel_LimitRangeI(Chan::E chan, RangeI::E range) = 0; // :(B/S):RANGE:LIMIT <range>
 
     // Порог ограничения измерителя
-    virtual void SetChannelB_LimitThreshold(int16_t) = 0;
+    virtual void SetChannel_LimitThreshold(Chan::E chan, LimitThreshold::E threshold) = 0; // :(B/S):LIMIT:THRESHOLD <threshold>
 
-    virtual void SetChannelB_HighResolution(bool) = 0;
+    virtual void SetChannel_HighResolution(Chan::E chan, bool highRes) = 0; // :(B/S):HIGHRES <0|1>
+    //------------------------------------------------------------------------------------------------------------
+
+    virtual void SetAutoZeroOff(bool) = 0;                                    // Отключение автоматической коррекции нуля
+    virtual void SetPointCount(PointCount::E) = 0;                        // Установка количества точек измерения
+    virtual void SetStartType(StartTrigger::E, StartMode::E) = 0;         // Тип запуска: внешний/внутренний, одиночный/множественный
+    virtual void SetMeasurementMode(MeasMode::E mode) = 0;                // Режим измерения
+    virtual void SetMaxDacCode(DacCode::E code) = 0;                      // Максимальный код DAC
+    virtual void SetBitQ18(PulseState::E state) = 0;                      // Состояние бита Q18
+    virtual void SetElementType(ElementType::E isMultipole) = 0;          // Тип элемента: многополюсный или нет
+    virtual void SendLimitSignal(LimitResult::E limitCode) = 0;                   // Отправка сигнала ограничения
+    virtual void SetConfigData(uint8_t modification, PowerNominal::E nominal) = 0; // Установка конфигурационных данных
+    virtual void EmergencyStop() = 0;                                      // Аварийная остановка
+    virtual void StartMeasurement() = 0;                                   // Запуск измерения
+
+    virtual void StopMeasurement() = 0;                                    // Остановка измерения
+    virtual void ResetToDefaults() = 0;                                    // Сброс к настройкам по умолчанию
+};
+
+
+class Device : public IDevice {
+public:
+    Device();
+    virtual ~Device();
+
+    virtual bool Init() override;
+    virtual void Shutdown() override;
+    virtual bool IsConnected() const override;
+
+    // Схема включения канала
+    virtual void SetCircuitConnection(Chan::E, StateJack::E) override;
+
+    // Вид развёртки
+    virtual void SetSweepType(TypeScan::E) override;
+
+    // Первая очередь
+    virtual void SetFirstQueue(FirstQueue::E) override;
+
+    // Длительность импульса
+    virtual void SetPulseDuration(uint durationUS, GenerationStup::E) override;
 
     //------------------------------------------------------------------------------------------------------------
 
-    virtual void SetChannelS_SourceMode(ModeSource::E) = 0;
-    virtual void SetChannelS_AmplitudeRange(uint8_t range) = 0;
-    virtual void SetChannelS_StepCount(uint8_t steps) = 0;
-    virtual void SetChannelS_AmplitudeValue(uint16_t value) = 0;
-    virtual void SetChannelS_Bias(uint16_t value) = 0;
-    virtual void SetChannelS_MeasMode(ModeSource::E) = 0;
-    virtual void SetChannelS_MeasRange(uint8_t range) = 0;
-    virtual void SetChannelS_LimitRange(uint8_t range) = 0;
-    virtual void SetChannelS_LimitThreshold(uint16_t value) = 0;
-    virtual void SetChannelS_SourceType(ModeSource::E) = 0;
+    // Диапазон источника
+    virtual void SetChannelC_SourceRange(RangeU::E) override;
+
+    // Диапазон измерителя
+    virtual void SetChannelC_MeasRange(RangeU::E) override;
+    virtual void SetChannelC_MeasRange(RangeI::E) override;
+
+    // Ограничение источника U от 0 до 100%
+    virtual void SetChannelC_LimitSourceU(int min, int max) override;
 
     //------------------------------------------------------------------------------------------------------------
 
-    virtual void SetAutoZeroOff(bool) = 0;
-    virtual void SetPointCount(int) = 0;
-    virtual void SetStartType(bool external, bool multiple) = 0;
-    virtual void SetMeasurementMode(uint8_t mode) = 0;
-    virtual void SetMaxDacCode(uint8_t code) = 0;
-    virtual void SetBitQ18(uint8_t state) = 0;
-    virtual void SetElementType(bool isMultipole) = 0;
-    virtual void SendLimitSignal(uint8_t limitCode) = 0;
-    virtual void SetConfigData(uint8_t modification, uint8_t nominal) = 0;
-    virtual void EmergencyStop() = 0;
-    virtual void StartMeasurement() = 0;
+    // Функции для каналов B и S
 
-    virtual void StopMeasurement() = 0;
-    virtual void ResetToDefaults() = 0;
+    // Режим источника в канале
+    virtual void SetChannel_SourceMode(Chan::E chan, ModeSource::E mode) override;
+    
+    virtual void SetChannel_AmplitudeRange(Chan::E chan, AmplitudeRange::E range) override;
+
+    // Число ступеней
+    virtual void SetChannel_StepCount(Chan::E chan, StepCount::E count) override;
+    
+    virtual void SetChannel_AmplitudeValue(Chan::E chan, AmplitudeValue::E value) override;
+
+    // Смещение
+    virtual void SetChannel_Bias(Chan::E chan, AmplitudeValue::E bias) override;
+
+    // Режим измерителя
+    virtual void SetChannel_MeasMode(Chan::E chan, ModeMeas::E mode) override;
+
+    // Диапазон измерителя
+    virtual void SetChannel_MeasRangeU(Chan::E chan, RangeU::E range) override;
+    virtual void SetChannel_MeasRangeI(Chan::E chan, RangeI::E range) override;
+
+    // Диапазон ограничения
+    virtual void SetChannel_LimitRangeU(Chan::E chan, RangeU::E range) override;
+    virtual void SetChannel_LimitRangeI(Chan::E chan, RangeI::E range) override;
+
+    // Порог ограничения измерителя
+    virtual void SetChannel_LimitThreshold(Chan::E chan, LimitThreshold::E threshold) override;
+
+    virtual void SetChannel_HighResolution(Chan::E chan, bool highRes) override;
+
+    //------------------------------------------------------------------------------------------------------------
+
+    virtual void SetAutoZeroOff(bool) override;
+    virtual void SetPointCount(PointCount::E) override;
+    virtual void SetStartType(StartTrigger::E, StartMode::E) override;
+    virtual void SetMeasurementMode(MeasMode::E mode) override;
+    virtual void SetMaxDacCode(DacCode::E code) override;
+    virtual void SetBitQ18(PulseState::E state) override;
+    virtual void SetElementType(ElementType::E isMultipole) override;
+    virtual void SendLimitSignal(LimitResult::E limitCode) override;
+    virtual void SetConfigData(uint8_t modification, PowerNominal::E nominal) override;
+    virtual void EmergencyStop() override;
+    virtual void StartMeasurement() override;
+
+    virtual void StopMeasurement() override;
+    virtual void ResetToDefaults() override;
+    
+
+private:
+    void SendCommand(const std::string& cmd);
+    void CommunicationThread();
+
+    std::queue<std::string> commandQueue;
+    std::mutex queueMutex;
+    std::thread commThread;
+    std::atomic<bool> running;
+    std::atomic<bool> connected;
 };
 
 

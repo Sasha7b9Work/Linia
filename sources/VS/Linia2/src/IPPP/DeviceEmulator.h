@@ -37,59 +37,34 @@ public:
 
     //------------------------------------------------------------------------------------------------------------
 
-    // Режим источника в канале B
-    virtual void SetChannelB_SourceMode(ModeSource::E);
+    // Функции для каналов B и S
 
-    virtual void SetChannelB_AmplitudeRange(uint8_t range);
+    virtual void SetChannel_SourceMode(Chan::E chan, ModeSource::E mode) override;
+    virtual void SetChannel_AmplitudeRange(Chan::E chan, AmplitudeRange::E range) override;
+    virtual void SetChannel_StepCount(Chan::E chan, StepCount::E count) override;
+    virtual void SetChannel_AmplitudeValue(Chan::E chan, AmplitudeValue::E value) override;
+    virtual void SetChannel_Bias(Chan::E chan, AmplitudeValue::E bias) override;
+    virtual void SetChannel_MeasMode(Chan::E chan, ModeMeas::E mode) override;
+    virtual void SetChannel_MeasRangeU(Chan::E chan, RangeU::E range) override;
+    virtual void SetChannel_MeasRangeI(Chan::E chan, RangeI::E range) override;
+    virtual void SetChannel_LimitRangeU(Chan::E chan, RangeU::E range) override;
+    virtual void SetChannel_LimitRangeI(Chan::E chan, RangeI::E range) override;
+    virtual void SetChannel_LimitThreshold(Chan::E chan, LimitThreshold::E threshold) override;
+    virtual void SetChannel_HighResolution(Chan::E chan, bool highRes) override;
 
-    // Число ступеней
-    virtual void SetChannelB_StepCount(int);
 
-    virtual void SetChannelB_AmplitudeValue(int16_t);
-
-    // Смещение
-    virtual void SetChannelB_Bias(pchar);
-
-    // Режим измерителя
-    virtual void SetChannelB_MeasMode(ModeMeas::E);
-
-    // Диапазон измерителя
-    virtual void SetChannelB_MeasRange(RangeU::E);
-    virtual void SetChannelB_MeasRange(RangeI::E);
-
-    // Диапазон ограничения
-    virtual void SetChannelB_LimitRange(RangeU::E);
-    virtual void SetChannelB_LimitRange(RangeI::E);
-
-    // Порог ограничения измерителя
-    virtual void SetChannelB_LimitThreshold(int16_t);
-
-    virtual void SetChannelB_HighResolution(bool);
 
     //------------------------------------------------------------------------------------------------------------
 
-    virtual void SetChannelS_SourceMode(ModeSource::E);
-    virtual void SetChannelS_AmplitudeRange(uint8_t range);
-    virtual void SetChannelS_StepCount(uint8_t steps);
-    virtual void SetChannelS_AmplitudeValue(uint16_t value);
-    virtual void SetChannelS_Bias(uint16_t value);
-    virtual void SetChannelS_MeasMode(ModeSource::E);
-    virtual void SetChannelS_MeasRange(uint8_t range);
-    virtual void SetChannelS_LimitRange(uint8_t range);
-    virtual void SetChannelS_LimitThreshold(uint16_t value);
-    virtual void SetChannelS_SourceType(ModeSource::E);
-
-    //------------------------------------------------------------------------------------------------------------
-
-    virtual void SetAutoZeroOff(bool);
-    virtual void SetPointCount(int);
-    virtual void SetStartType(bool external, bool multiple);
-    virtual void SetMeasurementMode(uint8_t mode);
-    virtual void SetMaxDacCode(uint8_t code);
-    virtual void SetBitQ18(uint8_t state);
-    virtual void SetElementType(bool isMultipole);
-    virtual void SendLimitSignal(uint8_t limitCode);
-    virtual void SetConfigData(uint8_t modification, uint8_t nominal);
+    virtual void SetAutoZeroOff(bool) override;
+    virtual void SetPointCount(PointCount::E) override;
+    virtual void SetStartType(StartTrigger::E, StartMode::E) override;
+    virtual void SetMeasurementMode(MeasMode::E mode) override;
+    virtual void SetMaxDacCode(DacCode::E code) override;
+    virtual void SetBitQ18(PulseState::E state) override;
+    virtual void SetElementType(ElementType::E isMultipole) override;
+    virtual void SendLimitSignal(LimitResult::E limitCode) override;
+    virtual void SetConfigData(uint8_t modification, PowerNominal::E nominal) override;
     virtual void EmergencyStop();
     virtual void StartMeasurement();
 

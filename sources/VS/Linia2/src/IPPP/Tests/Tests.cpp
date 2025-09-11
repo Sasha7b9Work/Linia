@@ -45,20 +45,20 @@ bool Chan::IsVisible() const
 void StateJack::PrepareArray(wxArrayString &arr, E v1, E v2, E v3, E v4)
 {
     arr.Clear();
-    arr.push_back(Name(v1));
-    arr.push_back(Name(v2));
+    arr.push_back(NameWx(v1));
+    arr.push_back(NameWx(v2));
     if (v3 != Count)
     {
-        arr.push_back(Name(v3));
+        arr.push_back(NameWx(v3));
     }
     if (v4 != Count)
     {
-        arr.push_back(Name(v4));
+        arr.push_back(NameWx(v4));
     }
 }
 
 
-wxString StateJack::Name(E v)
+wxString StateJack::NameWx(E v)
 {
     static const pchar names[Count] =
     {

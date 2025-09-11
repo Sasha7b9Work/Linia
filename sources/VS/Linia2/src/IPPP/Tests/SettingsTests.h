@@ -47,6 +47,8 @@ struct Chan
     E value;
 
     bool IsVisible() const;
+    
+    static wxString Name(E);
 };
 
 
@@ -67,6 +69,7 @@ struct StateJack
     static void PrepareArray(wxArrayString &, E, E, E = Count, E = Count);
 
     static wxString Name(E);
+    static wxString NameWx(E);
 };
 
 
@@ -93,6 +96,8 @@ struct ModeSource
         I,
         Count
     };
+    
+    static wxString Name(E);
 };
 
 
@@ -105,6 +110,8 @@ struct ModeMeas
         I,
         Count
     };
+    
+    static wxString Name(E);
 };
 
 
@@ -122,6 +129,8 @@ struct TypeScan
         AC,
         Count
     };
+    
+    static wxString Name(E);
 };
 
 
@@ -134,6 +143,25 @@ struct FirstQueue
         ChannelB,
         Count
     };
+    
+    static wxString Name(E);
+};
+
+
+// Диапазон амплитуды
+struct AmplitudeRange
+{
+    enum E
+    {
+        Range_200mV = 0,
+        Range_2V = 1,
+        Range_20V = 2,
+        Range_200V = 3,
+        Count
+    };
+    
+    static wxString Name(E);
+    static uint8_t Value(E);
 };
 
 
@@ -146,4 +174,290 @@ struct GenerationStup
         Enable,
         Count
     };
+    
+    static wxString Name(E);
+};
+
+
+// Количество точек измерения
+struct PointCount
+{
+    enum E
+    {
+        Points_20,
+        Points_50,
+        Count
+    };
+    
+    static wxString Name(E);
+};
+
+
+// Тип запуска
+struct StartTrigger
+{
+    enum E
+    {
+        Internal,
+        External,
+        Count
+    };
+    
+    static wxString Name(E);
+};
+
+
+// Режим запуска
+struct StartMode
+{
+    enum E
+    {
+        Single,
+        Multiple,
+        Count
+    };
+    
+    static wxString Name(E);
+};
+
+
+// Режим измерения
+struct MeasMode
+{
+    enum E
+    {
+        Manual,
+        Auto_1,
+        Auto_2,
+        Auto_3,
+        Auto_4,
+        Auto_5,
+        Count
+    };
+    
+    static wxString Name(E);
+};
+
+
+// Код DAC
+struct DacCode
+{
+    enum E
+    {
+        Code_100,
+        Code_110,
+        Code_120,
+        Code_130,
+        Code_140,
+        Code_150,
+        Count
+    };
+    
+    static wxString Name(E);
+    static uint8_t Value(E);
+};
+
+
+// Состояние импульса
+struct PulseState
+{
+    enum E
+    {
+        Disabled,
+        Enabled,
+        Count
+    };
+    
+    static wxString Name(E);
+};
+
+
+// Тип элемента
+struct ElementType
+{
+    enum E
+    {
+        TwoPole,
+        Multipole,
+        Count
+    };
+    
+    static wxString Name(E);
+};
+
+
+// Результат ограничения
+struct LimitResult
+{
+    enum E
+    {
+        Pass,
+        Fail,
+        NotReached,
+        Protection,
+        Count
+    };
+    
+    static wxString Name(E);
+};
+
+
+// Номинальная мощность
+struct PowerNominal
+{
+    enum E
+    {
+        Nominal_110V,
+        Nominal_220V,
+        Count
+    };
+    
+    static wxString Name(E);
+};
+
+
+// Длительность импульса
+struct PulseDuration
+{
+    enum E
+    {
+        Duration_50us,
+        Duration_100us,
+        Duration_200us,
+        Duration_300us,
+        Duration_400us,
+        Duration_500us,
+        Duration_1000us,
+        Count
+    };
+    
+    static wxString Name(E);
+    static uint Value(E);
+};
+
+
+// Процент ограничения
+struct LimitPercent
+{
+    enum E
+    {
+        Percent_0 = 0,
+        Percent_5 = 1,
+        Percent_10 = 2,
+        Percent_15 = 3,
+        Percent_20 = 4,
+        Percent_25 = 5,
+        Percent_30 = 6,
+        Percent_35 = 7,
+        Percent_40 = 8,
+        Percent_45 = 9,
+        Percent_50 = 10,
+        Percent_55 = 11,
+        Percent_60 = 12,
+        Percent_65 = 13,
+        Percent_70 = 14,
+        Percent_75 = 15,
+        Percent_80 = 16,
+        Percent_85 = 17,
+        Percent_90 = 18,
+        Percent_95 = 19,
+        Percent_100 = 20,
+        Count
+    };
+    
+    static wxString Name(E);
+    static int Value(E);
+};
+
+
+// Количество шагов
+struct StepCount
+{
+    enum E
+    {
+        Steps_1,
+        Steps_10,
+        Steps_20,
+        Steps_50,
+        Steps_100,
+        Steps_200,
+        Steps_500,
+        Steps_1000,
+        Count
+    };
+    
+    static wxString Name(E);
+    static int Value(E);
+};
+
+
+// Значение амплитуды
+struct AmplitudeValue
+{
+    enum E
+    {
+        Value_N32767,
+        Value_N30000,
+        Value_N20000,
+        Value_N10000,
+        Value_N5000,
+        Value_N1000,
+        Value_N500,
+        Value_N100,
+        Value_N50,
+        Value_N10,
+        Value_N1,
+        Value_0,
+        Value_1,
+        Value_10,
+        Value_50,
+        Value_100,
+        Value_500,
+        Value_1000,
+        Value_5000,
+        Value_10000,
+        Value_20000,
+        Value_30000,
+        Value_32767,
+        Count
+    };
+    
+    static wxString Name(E);
+    static int16_t Value(E);
+};
+
+
+// Порог ограничения
+struct LimitThreshold
+{
+    enum E
+    {
+        Value_N32767,
+        Value_N30000,
+        Value_N20000,
+        Value_N10000,
+        Value_N5000,
+        Value_N1000,
+        Value_N500,
+        Value_N100,
+        Value_N50,
+        Value_N10,
+        Value_N1,
+        Value_0,
+        Value_1,
+        Value_10,
+        Value_50,
+        Value_100,
+        Value_500,
+        Value_1000,
+        Value_5000,
+        Value_10000,
+        Value_20000,
+        Value_30000,
+        Value_32767,
+        Count
+    };
+    
+    static wxString Name(E);
+    static int16_t Value(E);
 };
