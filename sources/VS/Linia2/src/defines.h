@@ -2,8 +2,8 @@
 #pragma once
 
 
-#define VERSION_BUILD 200
-#define DATE_BUILD "2025-09-11 08:44:14"
+#define VERSION_BUILD 201
+#define DATE_BUILD "2025-09-11 08:45:42"
 
 
 #define WIN32_LEAN_AND_MEAN
@@ -47,6 +47,7 @@
 #include <string>
 #include <cstdarg>
 #include <chrono>
+#include <atomic>
 
 #pragma warning(pop)
 
