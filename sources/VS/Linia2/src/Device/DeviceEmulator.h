@@ -14,13 +14,13 @@ public:
     virtual void WriteMicroChip(MicroChip::E, int reg, uint value) override;
 
     // Схема включения канала
-    virtual void SetCircuitConnection(Chan &, StateJack::E) override;
+    virtual void SetCircuitConnection(const Chan &, StateJack::E) override;
 
     // Вид развёртки
     virtual void SetSweepType(TypeScan::E) override;
 
     // Первая очередь
-    virtual void SetFirstQueue(Chan &) override;
+    virtual void SetFirstQueue(const Chan &) override;
 
     // Длительность импульса
     virtual void SetPulseDuration(uint durationUS, bool generation_stump) override;
@@ -41,17 +41,17 @@ public:
 
     // Функции для каналов B и S
 
-    virtual void ChanBS_SourceMode(Chan &, ModeSource::E) override;
-    virtual void ChanBS_AmplitudeRange(Chan &, RangeU::E) override;
-    virtual void ChanBS_StepCount(Chan &, int) override;
-    virtual void ChanBS_AmplitudeValue(Chan &, int) override;
-    virtual void ChaBS_Bias(Chan &, double) override;
-    virtual void ChanBS_MeasMode(Chan &, ModeMeas::E) override;
-    virtual void ChanBS_MeasRange(Chan &, RangeU::E) override;
-    virtual void ChanBS_MeasRange(Chan &, RangeI::E) override;
-    virtual void ChanBS_LimitRange(Chan &, RangeU::E) override;
-    virtual void ChanBS_LimitRange(Chan &, RangeI::E) override;
-    virtual void ChanBS_LimitThreshold(Chan &, int) override;
+    virtual void ChanBS_SourceMode(const Chan &, ModeSource::E) override;
+    virtual void ChanBS_AmplitudeRange(const Chan &, RangeU::E) override;
+    virtual void ChanBS_StepCount(const Chan &, int) override;
+    virtual void ChanBS_AmplitudeValue(const Chan &, int) override;
+    virtual void ChaBS_Bias(const Chan &, double) override;
+    virtual void ChanBS_MeasMode(const Chan &, ModeMeas::E) override;
+    virtual void ChanBS_MeasRange(const Chan &, RangeU::E) override;
+    virtual void ChanBS_MeasRange(const Chan &, RangeI::E) override;
+    virtual void ChanBS_LimitRange(const Chan &, RangeU::E) override;
+    virtual void ChanBS_LimitRange(const Chan &, RangeI::E) override;
+    virtual void ChanBS_LimitThreshold(const Chan &, int) override;
 
     //------------------------------------------------------------------------------------------------------------
 

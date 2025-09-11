@@ -38,7 +38,7 @@ void DeviceEmulator::WriteMicroChip(MicroChip::E, int, uint)
 }
 
 
-void DeviceEmulator::SetCircuitConnection(Chan &, StateJack::E)
+void DeviceEmulator::SetCircuitConnection(const Chan &, StateJack::E)
 {
     LOG_ERROR("Not implemented");
 }
@@ -50,7 +50,7 @@ void DeviceEmulator::SetSweepType(TypeScan::E)
 }
 
 
-void DeviceEmulator::SetFirstQueue(Chan &)
+void DeviceEmulator::SetFirstQueue(const Chan &)
 {
     LOG_ERROR("Not implemented");
 }
@@ -85,59 +85,59 @@ void DeviceEmulator::ChanC_LimitSourceU(int /*min*/, int /*max*/)
 }
 
 
-void DeviceEmulator::ChanBS_SourceMode(Chan &/*chan*/, ModeSource::E /*mode*/)
+void DeviceEmulator::ChanBS_SourceMode(const Chan &/*chan*/, ModeSource::E /*mode*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_AmplitudeRange(Chan &/*chan*/, RangeU::E /*range*/)
+void DeviceEmulator::ChanBS_AmplitudeRange(const Chan &/*chan*/, RangeU::E /*range*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_StepCount(Chan &/*chan*/, int /*count*/)
+void DeviceEmulator::ChanBS_StepCount(const Chan &/*chan*/, int /*count*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_AmplitudeValue(Chan &/*chan*/, int /*value*/)
+void DeviceEmulator::ChanBS_AmplitudeValue(const Chan &/*chan*/, int /*value*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChaBS_Bias(Chan &/*chan*/, double /*bias*/)
+void DeviceEmulator::ChaBS_Bias(const Chan &/*chan*/, double /*bias*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_MeasMode(Chan &/*chan*/, ModeMeas::E /*mode*/)
+void DeviceEmulator::ChanBS_MeasMode(const Chan &/*chan*/, ModeMeas::E /*mode*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_MeasRange(Chan &/*chan*/, RangeU::E /*range*/)
+void DeviceEmulator::ChanBS_MeasRange(const Chan &/*chan*/, RangeU::E /*range*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_MeasRange(Chan &/*chan*/, RangeI::E /*range*/)
+void DeviceEmulator::ChanBS_MeasRange(const Chan &/*chan*/, RangeI::E /*range*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_LimitRange(Chan &/*chan*/, RangeU::E /*range*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
-void DeviceEmulator::ChanBS_LimitRange(Chan &/*chan*/, RangeI::E /*range*/)
+void DeviceEmulator::ChanBS_LimitRange(const Chan &/*chan*/, RangeU::E /*range*/)
 {
     LOG_ERROR("Not implemented");
 }
 
 
-void DeviceEmulator::ChanBS_LimitThreshold(Chan &/*chan*/, int /*threshold*/)
+void DeviceEmulator::ChanBS_LimitRange(const Chan &/*chan*/, RangeI::E /*range*/)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void DeviceEmulator::ChanBS_LimitThreshold(const Chan &/*chan*/, int /*threshold*/)
 {
     LOG_ERROR("Not implemented");
 }

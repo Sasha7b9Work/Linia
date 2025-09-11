@@ -20,13 +20,13 @@ public:
     virtual void WriteMicroChip(MicroChip::E, int reg, uint value) = 0;
 
     // Схема включения канала
-    virtual void SetCircuitConnection(Chan &, StateJack::E) = 0;
+    virtual void SetCircuitConnection(const Chan &, StateJack::E) = 0;
 
     // Вид развёртки
     virtual void SetSweepType(TypeScan::E) = 0;
 
     // Первая очередь
-    virtual void SetFirstQueue(Chan &) = 0;
+    virtual void SetFirstQueue(const Chan &) = 0;
 
     // Длительность импульса
     // generation_stump - семейство кривых
@@ -49,31 +49,31 @@ public:
     // Функции для каналов B и S
 
     // Режим источника в канале
-    virtual void ChanBS_SourceMode(Chan &, ModeSource::E) = 0;
+    virtual void ChanBS_SourceMode(const Chan &, ModeSource::E) = 0;
 
-    virtual void ChanBS_AmplitudeRange(Chan &, RangeU::E) = 0;
+    virtual void ChanBS_AmplitudeRange(const Chan &, RangeU::E) = 0;
 
     // Число ступеней
-    virtual void ChanBS_StepCount(Chan &, int) = 0;
+    virtual void ChanBS_StepCount(const Chan &, int) = 0;
 
-    virtual void ChanBS_AmplitudeValue(Chan &, int) = 0;
+    virtual void ChanBS_AmplitudeValue(const Chan &, int) = 0;
 
     // Смещение
-    virtual void ChaBS_Bias(Chan &, double) = 0;
+    virtual void ChaBS_Bias(const Chan &, double) = 0;
 
     // Режим измерителя
-    virtual void ChanBS_MeasMode(Chan &, ModeMeas::E) = 0;
+    virtual void ChanBS_MeasMode(const Chan &, ModeMeas::E) = 0;
 
     // Диапазон измерителя
-    virtual void ChanBS_MeasRange(Chan &, RangeU::E) = 0;
-    virtual void ChanBS_MeasRange(Chan &, RangeI::E) = 0;
+    virtual void ChanBS_MeasRange(const Chan &, RangeU::E) = 0;
+    virtual void ChanBS_MeasRange(const Chan &, RangeI::E) = 0;
 
     // Диапазон ограничения
-    virtual void ChanBS_LimitRange(Chan &, RangeU::E) = 0;
-    virtual void ChanBS_LimitRange(Chan &, RangeI::E) = 0;
+    virtual void ChanBS_LimitRange(const Chan &, RangeU::E) = 0;
+    virtual void ChanBS_LimitRange(const Chan &, RangeI::E) = 0;
 
     // Порог ограничения измерителя
-    virtual void ChanBS_LimitThreshold(Chan &, int) = 0;
+    virtual void ChanBS_LimitThreshold(const Chan &, int) = 0;
 
     //------------------------------------------------------------------------------------------------------------
 
