@@ -161,20 +161,6 @@ wxString ElementType::Name(E type)
 }
 
 
-wxString LimitResult::Name(E result)
-{
-    switch (result)
-    {
-    case Pass: return "PASS";
-    case Fail: return "FAIL";
-    case NotReached: return "NOT_REACHED";
-    case Protection: return "PROTECTION";
-    case Count:
-    default: return "PASS";
-    }
-}
-
-
 wxString AmplitudeRange::Name(E range)
 {
     switch (range)

@@ -284,19 +284,3 @@ struct ElementType
 
     static wxString Name(E);
 };
-
-
-// Результат ограничения
-struct LimitResult
-{
-    enum E
-    {
-        Pass,
-        Fail,
-        NotReached,
-        Protection,
-        Count
-    };
-
-    static wxString Name(E);
-};

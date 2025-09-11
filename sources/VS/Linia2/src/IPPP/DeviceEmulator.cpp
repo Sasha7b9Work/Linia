@@ -182,12 +182,6 @@ void DeviceEmulator::SetElementType(ElementType::E /*isMultipole*/)
 }
 
 
-void DeviceEmulator::SendLimitSignal(LimitResult::E /*limitCode*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
 void DeviceEmulator::EmergencyStop()
 {
     LOG_ERROR("Not implemented");

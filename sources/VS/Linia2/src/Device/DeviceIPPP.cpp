@@ -286,13 +286,6 @@ void DeviceIPPP::SetElementType(ElementType::E isMultipole) {
 }
 
 
-void DeviceIPPP::SendLimitSignal(LimitResult::E limitCode) {
-    std::stringstream ss;
-    ss << ":LIMITSIGNAL " << LimitResult::Name(limitCode).ToStdString();
-    SendCommand(ss.str());
-}
-
-
 void DeviceIPPP::EmergencyStop() {
     SendCommand(":EMERGENCYSTOP");
 }

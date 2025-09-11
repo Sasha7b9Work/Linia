@@ -81,7 +81,6 @@ public:
     virtual void SetMaxDacCode(DacCode::E) override;
     virtual void SetBitQ18(PulseState::E) override;
     virtual void SetElementType(ElementType::E) override;
-    virtual void SendLimitSignal(LimitResult::E) override;
     virtual void EmergencyStop() override;
     virtual void StartMeasurement() override;
 
