@@ -48,13 +48,14 @@ public:
     // Режим источника в канале
     virtual void ChanBS_SourceMode(const Chan &, ModeSource::E) override;
 
-    virtual void ChanBS_RangeStep(const Chan &, RangeU::E) override;
-    virtual void ChanBS_RangeStep(const Chan &, RangeI::E) override;
+    // Диапазон амплитуды ступени
+    virtual void ChanBS_StepRange(const Chan &, RangeU::E) override;
+    virtual void ChanBS_StepRange(const Chan &, RangeI::E) override;
 
     // Число ступеней
     virtual void ChanBS_StepCount(const Chan &, int) override;
 
-    virtual void ChanBS_ValueStep(const Chan &, double) override;
+    virtual void ChanBS_StepValue(const Chan &, double) override;
 
     // Смещение
     virtual void ChaBS_Offset(const Chan &, double) override;

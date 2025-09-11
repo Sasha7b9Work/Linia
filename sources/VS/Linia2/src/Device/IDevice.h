@@ -61,14 +61,14 @@ public:
     virtual void ChanBS_SourceMode(const Chan &, ModeSource::E) = 0;
 
     // Диапазон амплитуды ступени в канале
-    virtual void ChanBS_RangeStep(const Chan &, RangeU::E) = 0;
-    virtual void ChanBS_RangeStep(const Chan &, RangeI::E) = 0;
+    virtual void ChanBS_StepRange(const Chan &, RangeU::E) = 0;
+    virtual void ChanBS_StepRange(const Chan &, RangeI::E) = 0;
 
     // Число ступеней
     virtual void ChanBS_StepCount(const Chan &, int) = 0;
 
     // Значение амплитуды ступени
-    virtual void ChanBS_ValueStep(const Chan &, double) = 0;
+    virtual void ChanBS_StepValue(const Chan &, double) = 0;
 
     // Смещение
     virtual void ChaBS_Offset(const Chan &, double) = 0;

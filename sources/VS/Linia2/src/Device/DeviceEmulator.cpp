@@ -90,12 +90,12 @@ void DeviceEmulator::ChanBS_SourceMode(const Chan &/*chan*/, ModeSource::E /*mod
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_RangeStep(const Chan &/*chan*/, RangeU::E /*range*/)
+void DeviceEmulator::ChanBS_StepRange(const Chan &/*chan*/, RangeU::E /*range*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_RangeStep(const Chan &, RangeI::E)
+void DeviceEmulator::ChanBS_StepRange(const Chan &, RangeI::E)
 {
     LOG_ERROR("Not implemented");
 }
@@ -105,7 +105,7 @@ void DeviceEmulator::ChanBS_StepCount(const Chan &/*chan*/, int /*count*/)
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_ValueStep(const Chan &/*chan*/, double /*value*/)
+void DeviceEmulator::ChanBS_StepValue(const Chan &/*chan*/, double /*value*/)
 {
     LOG_ERROR("Not implemented");
 }

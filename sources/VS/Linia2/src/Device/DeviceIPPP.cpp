@@ -124,7 +124,7 @@ void DeviceIPPP::ChanBS_SourceMode(const Chan &ch, ModeSource::E mode)
 }
 
 
-void DeviceIPPP::ChanBS_RangeStep(const Chan &ch, RangeU::E range)
+void DeviceIPPP::ChanBS_StepRange(const Chan &ch, RangeU::E range)
 {
     if (IsChanBS(ch))
     {
@@ -135,7 +135,7 @@ void DeviceIPPP::ChanBS_RangeStep(const Chan &ch, RangeU::E range)
 }
 
 
-void DeviceIPPP::ChanBS_RangeStep(const Chan &ch, RangeI::E range)
+void DeviceIPPP::ChanBS_StepRange(const Chan &ch, RangeI::E range)
 {
     if (IsChanBS(ch))
     {
@@ -155,7 +155,7 @@ void DeviceIPPP::ChanBS_StepCount(const Chan &ch, int count)
 }
 
 
-void DeviceIPPP::ChanBS_ValueStep(const Chan &ch, double value)
+void DeviceIPPP::ChanBS_StepValue(const Chan &ch, double value)
 {
     if (IsChanBS(ch))
     {
