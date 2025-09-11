@@ -69,10 +69,10 @@ struct StateJack
     static void PrepareArray(wxArrayString &, E, E, E = Count, E = Count);
 
     // Эти обозначения используются для сообщений в аппаратной части
-    static wxString NameHardware(E);
+    static pchar NameHardware(E);
 
     // Эти обозначения используются в ГИП
-    static wxString NameGUI(E);
+    static pchar NameGUI(E);
 
 private:
 

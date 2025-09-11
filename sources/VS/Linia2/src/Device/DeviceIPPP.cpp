@@ -107,7 +107,7 @@ void DeviceIPPP::SetCircuitConnection(Chan::E ch, StateJack::E state)
 {
     SendCommand("%s:CONNECTION %s",
         Chan(ch).Name(),
-        StateJack::NameHardware(state).c_str().AsChar());
+        StateJack::NameHardware(state));
 }
 
 

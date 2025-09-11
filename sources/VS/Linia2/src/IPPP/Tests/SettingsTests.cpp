@@ -75,13 +75,13 @@ const pchar StateJack::names[StateJack::Count][2] =
 };
 
 
-wxString StateJack::NameHardware(E v)
+pchar StateJack::NameHardware(E v)
 {
     return names[v][1];
 }
 
 
-wxString StateJack::NameGUI(E v)
+pchar StateJack::NameGUI(E v)
 {
     return names[v][0];
 }
