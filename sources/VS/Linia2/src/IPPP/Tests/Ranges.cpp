@@ -335,7 +335,7 @@ RowRange::RowRange(TypeValue::E type)
     {
         _125,
         _125,
-        _125,
+        _124,
         _124,
         _124,
         _124,
