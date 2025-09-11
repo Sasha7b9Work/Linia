@@ -46,7 +46,7 @@ pchar ModeMeas::Name(E mode)
 }
 
 
-wxString TypeScan::Name(E v)
+pchar TypeScan::Name(E v)
 {
     static const pchar names[Count] =
     {

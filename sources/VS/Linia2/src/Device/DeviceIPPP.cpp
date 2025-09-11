@@ -113,7 +113,7 @@ void DeviceIPPP::SetCircuitConnection(Chan::E ch, StateJack::E state)
 
 void DeviceIPPP::SetSweepType(TypeScan::E type)
 {
-    SendCommand(":TYPESCAN %s", TypeScan::Name(type).c_str().AsChar());
+    SendCommand(":TYPESCAN %s", TypeScan::Name(type));
 }
 
 
