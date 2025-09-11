@@ -12,17 +12,17 @@ struct CalK
 
 struct DSettings
 {
-    CalK calI[TypeDSet::Count][RangeI::Count];
-    CalK calU[TypeDSet::Count][RangeU::Count];
+    CalK calI[TypeValue::Count][RangeI::Count];
+    CalK calU[TypeValue::Count][RangeU::Count];
 };
 
 
 // Здесь калибровочные коэффициенты
 namespace DSet
 {
-    const CalK &Get(TypeDSet::E, RangeI::E);
-    const CalK &Get(TypeDSet::E, RangeU::E);
+    const CalK &Get(TypeValue::E, RangeI::E);
+    const CalK &Get(TypeValue::E, RangeU::E);
 
-    void Set(TypeDSet::E, RangeI::E, const CalK &);
-    void Set(TypeDSet::E, RangeU::E, const CalK &);
+    void Set(TypeValue::E, RangeI::E, const CalK &);
+    void Set(TypeValue::E, RangeU::E, const CalK &);
 }

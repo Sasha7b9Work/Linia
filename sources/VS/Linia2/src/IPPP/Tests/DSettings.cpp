@@ -652,25 +652,25 @@ static DSettings dset =
 };
 
 
-const CalK &DSet::Get(TypeDSet::E type, RangeI::E range)
+const CalK &DSet::Get(TypeValue::E type, RangeI::E range)
 {
     return dset.calI[type][range];
 }
 
 
-const CalK &DSet::Get(TypeDSet::E type, RangeU::E range)
+const CalK &DSet::Get(TypeValue::E type, RangeU::E range)
 {
     return dset.calU[type][range];
 }
 
 
-void DSet::Set(TypeDSet::E type, RangeI::E range, const CalK &cal)
+void DSet::Set(TypeValue::E type, RangeI::E range, const CalK &cal)
 {
     dset.calI[type][range] = cal;
 }
 
 
-void DSet::Set(TypeDSet::E type, RangeU::E range, const CalK &cal)
+void DSet::Set(TypeValue::E type, RangeU::E range, const CalK &cal)
 {
     dset.calU[type][range] = cal;
 }

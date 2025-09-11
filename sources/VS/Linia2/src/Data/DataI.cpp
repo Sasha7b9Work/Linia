@@ -13,7 +13,7 @@ namespace DCI
 
     // Это значение для данного измерения либо источника приходит с АЦП при максимально возможном значении на входе.
     // Ему соответствует минимальное значение -max_value_ADC
-    static const StructADC max_ADC[TypeDSet::Count] =
+    static const StructADC max_ADC[TypeValue::Count] =
     {
         ((1 << 18) - 1),
         ((1 << 18) - 1),
@@ -27,7 +27,7 @@ namespace DCI
 }
 
 
-DataConverterI::DataConverterI(TypeDSet::E t, RangeI::E r) :
+DataConverterI::DataConverterI(TypeValue::E t, RangeI::E r) :
     DataConverter(t, r),
     range{ r }
 {

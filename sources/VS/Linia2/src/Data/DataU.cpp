@@ -13,7 +13,7 @@ namespace DCU
 
     // Это значение для данного измерения либо источника приходит с АЦП при максимально возможном значении на входе.
     // Ему соответствует минимальное значение -max_value_ADC
-    static const StructADC max_ADC[TypeDSet::Count] =
+    static const StructADC max_ADC[TypeValue::Count] =
     {
         ((1 << 18) - 1),
         ((1 << 18) - 1),
@@ -27,7 +27,7 @@ namespace DCU
 }
 
 
-DataConverterU::DataConverterU(TypeDSet::E t, RangeU::E r) :
+DataConverterU::DataConverterU(TypeValue::E t, RangeU::E r) :
     DataConverter(t, r),
     range{ r }
 {

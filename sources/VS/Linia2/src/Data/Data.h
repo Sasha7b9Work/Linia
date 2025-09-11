@@ -7,8 +7,8 @@ class DataConverter
 {
 public:
 
-    DataConverter(TypeDSet::E t, RangeI::E r) : type_set{ t }, cal{ DSet::Get(type_set, r) } { }
-    DataConverter(TypeDSet::E t, RangeU::E r) : type_set{ t }, cal{ DSet::Get(type_set, r) } { }
+    DataConverter(TypeValue::E t, RangeI::E r) : type_set{ t }, cal{ DSet::Get(type_set, r) } { }
+    DataConverter(TypeValue::E t, RangeU::E r) : type_set{ t }, cal{ DSet::Get(type_set, r) } { }
 
     // Конвертирет отсчёт АЦП в абсолютную величину
     double Convert(int adc) const;
@@ -18,7 +18,7 @@ public:
 
 protected:
 
-    TypeDSet::E type_set;
+    TypeValue::E type_set;
     double      k = 1.0;    // Коэффициент наклона. Рассчитывается в конструкторе
     const CalK &cal;        // Коэффициенты калибровки устанавливаются в конструкторе
 };
@@ -29,7 +29,7 @@ class DataConverterI : public DataConverter
 {
 public:
 
-    DataConverterI(TypeDSet::E, RangeI::E);
+    DataConverterI(TypeValue::E, RangeI::E);
 
 private:
 
@@ -42,7 +42,7 @@ class DataConverterU : public DataConverter
 {
 public:
 
-    DataConverterU(TypeDSet::E, RangeU::E);
+    DataConverterU(TypeValue::E, RangeU::E);
 
 private:
 

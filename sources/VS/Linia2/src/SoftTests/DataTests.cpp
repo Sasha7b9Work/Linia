@@ -16,7 +16,7 @@ bool DataTests::Converter()
 {
     bool correct = true;
 
-    for (TypeDSet t = (TypeDSet::E)0; t.value < TypeDSet::Count; ++t)
+    for (TypeValue t = (TypeValue::E)0; t.value < TypeValue::Count; ++t)
     {
         for (RangeI r = (RangeI::E)0; r.value < RangeI::Count; ++r)
         {

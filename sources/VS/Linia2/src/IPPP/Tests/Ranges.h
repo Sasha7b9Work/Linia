@@ -3,7 +3,8 @@
 #include "IPPP/Tests/SettingsTests.h"
 
 
-struct TypeDSet
+// Вид источника/измерения
+struct TypeValue
 {
     enum E
     {
@@ -20,7 +21,7 @@ struct TypeDSet
 
     E value;
 
-    TypeDSet(E v) : value(v) { }
+    TypeValue(E v) : value(v) { }
 
     void operator++()
     {
@@ -41,7 +42,7 @@ struct RowRange
 
     RowRange(Chan::E);
 
-    RowRange(TypeDSet::E);
+    RowRange(TypeValue::E);
 
     operator E()const
     {
@@ -114,10 +115,10 @@ struct RangeI
         value = (E)(value + 1);
     }
 
-    static E Min(TypeDSet::E);
-    static E Max(TypeDSet::E);
+    static E Min(TypeValue::E);
+    static E Max(TypeValue::E);
 
-    static void FillArrayStrings(wxArrayString &, TypeDSet::E, bool step);
+    static void FillArrayStrings(wxArrayString &, TypeValue::E, bool step);
 
 private:
 
@@ -196,10 +197,10 @@ struct RangeU
         value = (E)(value + 1);
     }
 
-    static E Min(TypeDSet::E);
-    static E Max(TypeDSet::E);
+    static E Min(TypeValue::E);
+    static E Max(TypeValue::E);
 
-    static void FillArrayStrings(wxArrayString &, TypeDSet::E, bool step);
+    static void FillArrayStrings(wxArrayString &, TypeValue::E, bool step);
 
 private:
 

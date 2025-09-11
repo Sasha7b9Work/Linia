@@ -192,7 +192,7 @@ wxString RangeU::NameStep(RowRange::E row) const
 }
 
 
-RangeI::E RangeI::Min(TypeDSet::E type)
+RangeI::E RangeI::Min(TypeValue::E type)
 {
     struct StructMin
     {
@@ -200,7 +200,7 @@ RangeI::E RangeI::Min(TypeDSet::E type)
         RangeI::E range;
     };
 
-    static const StructMin min[TypeDSet::Count] =
+    static const StructMin min[TypeValue::Count] =
     {
         _10nA,
         _10nA,
@@ -216,7 +216,7 @@ RangeI::E RangeI::Min(TypeDSet::E type)
 }
 
 
-RangeI::E RangeI::Max(TypeDSet::E type)
+RangeI::E RangeI::Max(TypeValue::E type)
 {
     struct StructMax
     {
@@ -224,7 +224,7 @@ RangeI::E RangeI::Max(TypeDSet::E type)
         RangeI::E range;
     };
 
-    static const StructMax max[TypeDSet::Count] =
+    static const StructMax max[TypeValue::Count] =
     {
         _40_50A,
         _40_50A,
@@ -240,7 +240,7 @@ RangeI::E RangeI::Max(TypeDSet::E type)
 }
 
 
-RangeU::E RangeU::Min(TypeDSet::E type)
+RangeU::E RangeU::Min(TypeValue::E type)
 {
     struct StructMin
     {
@@ -248,7 +248,7 @@ RangeU::E RangeU::Min(TypeDSet::E type)
         RangeU::E range;
     };
 
-    static const StructMin min[TypeDSet::Count] =
+    static const StructMin min[TypeValue::Count] =
     {
         _400_500mV,
         _400_500mV,
@@ -264,7 +264,7 @@ RangeU::E RangeU::Min(TypeDSet::E type)
 }
 
 
-RangeU::E RangeU::Max(TypeDSet::E type)
+RangeU::E RangeU::Max(TypeValue::E type)
 {
     struct StructMax
     {
@@ -272,7 +272,7 @@ RangeU::E RangeU::Max(TypeDSet::E type)
         RangeU::E range;
     };
 
-    static const StructMax max[TypeDSet::Count] =
+    static const StructMax max[TypeValue::Count] =
     {
         _2kV,
         _2kV,
@@ -288,7 +288,7 @@ RangeU::E RangeU::Max(TypeDSet::E type)
 }
 
 
-void RangeI::FillArrayStrings(wxArrayString &arr, TypeDSet::E type, bool steps)
+void RangeI::FillArrayStrings(wxArrayString &arr, TypeValue::E type, bool steps)
 {
     arr.clear();
     for (int i = RangeI::Min(type); i <= RangeI::Max(type); i++)
@@ -305,7 +305,7 @@ void RangeI::FillArrayStrings(wxArrayString &arr, TypeDSet::E type, bool steps)
 }
 
 
-void RangeU::FillArrayStrings(wxArrayString &arr, TypeDSet::E type, bool steps)
+void RangeU::FillArrayStrings(wxArrayString &arr, TypeValue::E type, bool steps)
 {
     arr.clear();
 
@@ -323,7 +323,7 @@ void RangeU::FillArrayStrings(wxArrayString &arr, TypeDSet::E type, bool steps)
 }
 
 
-RowRange::RowRange(TypeDSet::E type)
+RowRange::RowRange(TypeValue::E type)
 {
     struct StructRow
     {
@@ -331,7 +331,7 @@ RowRange::RowRange(TypeDSet::E type)
         E row;
     };
 
-    static const StructRow row[TypeDSet::Count] =
+    static const StructRow row[TypeValue::Count] =
     {
         _125,
         _125,
