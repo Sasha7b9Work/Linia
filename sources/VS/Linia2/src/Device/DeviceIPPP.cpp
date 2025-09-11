@@ -106,7 +106,7 @@ void DeviceIPPP::CommunicationThread()
 void DeviceIPPP::SetCircuitConnection(Chan::E ch, StateJack::E state)
 {
     SendCommand("%s:CONNECTION %s",
-        Chan(ch).Name().c_str().AsChar(),
+        Chan(ch).Name(),
         StateJack::NameHardware(state).c_str().AsChar());
 }
 
@@ -119,7 +119,7 @@ void DeviceIPPP::SetSweepType(TypeScan::E type)
 
 void DeviceIPPP::SetFirstQueue(Chan::E ch)
 {
-    SendCommand(":FIRSTQUEUE %s", + Chan(ch).Name().c_str().AsChar());
+    SendCommand(":FIRSTQUEUE %s", + Chan(ch).Name());
 }
 
 
@@ -156,46 +156,46 @@ void DeviceIPPP::ChanC_LimitSourceU(int min, int max)
 
 void DeviceIPPP::ChanBS_SourceMode(Chan::E ch, ModeSource::E mode)
 {
-    SendCommand(":%s:MODE:SOURCE %s", Chan(ch).Name().c_str().AsChar(), ModeSource::Name(mode).c_str().AsChar());
+    SendCommand(":%s:MODE:SOURCE %s", Chan(ch).Name(), ModeSource::Name(mode).c_str().AsChar());
 }
 
 
 void DeviceIPPP::ChanBS_AmplitudeRange(Chan::E ch, RangeU::E range)
 {
     SendCommand(":%s:RANGE:AMPLITUDE %s",
-        Chan(ch).Name().c_str().AsChar(),
+        Chan(ch).Name(),
         RangeU(range).Name(RowRange::ForChannel(ch), false));
 }
 
 
 void DeviceIPPP::ChanBS_StepCount(Chan::E ch, int count)
 {
-    SendCommand(":%s:STEP:COUNT %d", Chan(ch).Name().c_str().AsChar(), count);
+    SendCommand(":%s:STEP:COUNT %d", Chan(ch).Name(), count);
 }
 
 
 void DeviceIPPP::ChanBS_AmplitudeValue(Chan::E ch, int value)
 {
-    SendCommand("%s:AMPLITUDE %d", Chan(ch).Name().c_str().AsChar(), value);
+    SendCommand("%s:AMPLITUDE %d", Chan(ch).Name(), value);
 }
 
 
 void DeviceIPPP::ChaBS_Bias(Chan::E ch, int bias)
 {
-    SendCommand("%s:BIAS %d", Chan(ch).Name().c_str().AsChar(), bias);
+    SendCommand("%s:BIAS %d", Chan(ch).Name(), bias);
 }
 
 
 void DeviceIPPP::ChanBS_MeasMode(Chan::E ch, ModeMeas::E mode)
 {
-    SendCommand(":%s:MODE:MEAS %s", Chan(ch).Name().c_str().AsChar(), ModeMeas::Name(mode).c_str().AsChar());
+    SendCommand(":%s:MODE:MEAS %s", Chan(ch).Name(), ModeMeas::Name(mode).c_str().AsChar());
 }
 
 
 void DeviceIPPP::ChanBS_MeasRangeU(Chan::E ch, RangeU::E range)
 {
     SendCommand(":%s:RANGE:MEAS %s",
-        Chan(ch).Name().c_str().AsChar(),
+        Chan(ch).Name(),
         RangeU(range).Name(RowRange::ForChannel(ch), false));
 }
 
@@ -203,7 +203,7 @@ void DeviceIPPP::ChanBS_MeasRangeU(Chan::E ch, RangeU::E range)
 void DeviceIPPP::ChanBS_MeasRangeI(Chan::E ch, RangeI::E range)
 {
     SendCommand(":%s:RANGE:MEAS %s",
-        Chan(ch).Name().c_str().AsChar(),
+        Chan(ch).Name(),
         RangeI(range).Name(RowRange::ForChannel(ch), false));
 }
 
@@ -211,7 +211,7 @@ void DeviceIPPP::ChanBS_MeasRangeI(Chan::E ch, RangeI::E range)
 void DeviceIPPP::ChanBS_LimitRangeU(Chan::E ch, RangeU::E range)
 {
     SendCommand(":%s:RANGE:LIMIT %s",
-        Chan(ch).Name().c_str().AsChar(),
+        Chan(ch).Name(),
         RangeU(range).Name(RowRange::ForChannel(ch), false));
 }
 
@@ -219,14 +219,14 @@ void DeviceIPPP::ChanBS_LimitRangeU(Chan::E ch, RangeU::E range)
 void DeviceIPPP::ChanBS_LimitRangeI(Chan::E ch, RangeI::E range)
 {
     SendCommand(":%s:RANGE:LIMIT %s",
-        Chan(ch).Name().c_str().AsChar(),
+        Chan(ch).Name(),
         RangeI(range).Name(RowRange::ForChannel(ch), false));
 }
 
 
 void DeviceIPPP::ChanBS_LimitThreshold(Chan::E ch, int threshold)
 {
-    SendCommand(":%s:LIMIT:THRESHOLD %d", Chan(ch).Name().c_str().AsChar(), threshold);
+    SendCommand(":%s:LIMIT:THRESHOLD %d", Chan(ch).Name(), threshold);
 }
 
 

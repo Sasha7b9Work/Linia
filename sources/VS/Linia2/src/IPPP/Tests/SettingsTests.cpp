@@ -20,7 +20,7 @@ bool Category::IsGDS()
 }
 
 
-wxString Chan::Name() const
+pchar Chan::Name() const
 {
     static const pchar names[Count] =
     {
