@@ -1,7 +1,7 @@
 ﻿// 2025/6/1 18:08:05 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Panels/Panel.h"
-#include "Panels/Panel11_Menu/Panel11_Menu.h"
+#include "Panels/PanelMenu/PanelMenu.h"
 
 
 class PanelTable : public Panel

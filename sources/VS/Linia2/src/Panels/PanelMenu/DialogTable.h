@@ -1,6 +1,6 @@
 ﻿// 2025/7/12 17:36:21 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Panels/Panel11_Menu/MenuDialog.h"
+#include "Panels/PanelMenu/MenuDialog.h"
 
 
 class DialogTable : public MenuDialog

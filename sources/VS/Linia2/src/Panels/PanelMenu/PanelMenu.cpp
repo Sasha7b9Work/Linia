@@ -1,14 +1,14 @@
 ﻿// 2025/6/1 17:32:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel11_Menu/Panel11_Menu.h"
+#include "Panels/PanelMenu/PanelMenu.h"
 #include "MainWindow.h"
 #include "Settings/Settings.h"
-#include "Panels/Panel11_Menu/DialogFile.h"
-#include "Panels/Panel11_Menu/DialogTest.h"
-#include "Panels/Panel11_Menu/Setup/DialogSetup.h"
-#include "Panels/Panel11_Menu/DialogGraph.h"
-#include "Panels/Panel11_Menu/DialogTable.h"
-#include "Panels/Panel11_Menu/DialogReport.h"
+#include "Panels/PanelMenu/DialogFile.h"
+#include "Panels/PanelMenu/DialogTest.h"
+#include "Panels/PanelMenu/Setup/DialogSetup.h"
+#include "Panels/PanelMenu/DialogGraph.h"
+#include "Panels/PanelMenu/DialogTable.h"
+#include "Panels/PanelMenu/DialogReport.h"
 
 
 PanelButtons *PanelButtons::self = nullptr;

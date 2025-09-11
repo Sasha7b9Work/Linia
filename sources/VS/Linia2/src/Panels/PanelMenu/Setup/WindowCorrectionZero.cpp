@@ -1,6 +1,6 @@
 ﻿// 2025/7/27 13:41:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel11_Menu/Setup/WindowCorrectionZero.h"
+#include "Panels/PanelMenu/Setup/WindowCorrectionZero.h"
 #include "Utils/SystemDepend.h"
 #include "Controls/StaticBox.h"
 

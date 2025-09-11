@@ -78,8 +78,8 @@ file(GLOB IPPP_TESTS                    src/IPPP/Tests/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
 file(GLOB PANELS_PANELCONFIG            src/Panels/PanelConfig/*.*)
 file(GLOB PANELS_PANELCONFIG_SCHEME     src/Panels/PanelConfig/PanelScheme/*.*)
-file(GLOB PANELS_PANEL11                src/Panels/Panel11_Menu/*.*)
-file(GLOB PANELS_PANEL11_SETUP          src/Panels/Panel11_Menu/Setup/*.*)
+file(GLOB PANELS_PANELMENU              src/Panels/PanelMenu/*.*)
+file(GLOB PANELS_PANELMENU_SETUP        src/Panels/PanelMenu/Setup/*.*)
 file(GLOB PANELS_PANEL12                src/Panels/Panel12_Debug/*.*)
 file(GLOB PANELS_PANEL12_PAGESCHIPS     src/Panels/Panel12_Debug/PagesChips/*.*)
 file(GLOB PANELS_PANEL12_OLD            src/Panels/Panel12_Debug/Old/*.*)
@@ -119,8 +119,8 @@ source_group(IPPP/Tests                           FILES ${IPPP_TESTS})
 source_group(Panels                               FILES ${PANELS})
 source_group(Panels/PanelConfig                   FILES ${PANELS_PANELCONFIG})
 source_group(Panels/PanelConfig/PanelScheme       FILES ${PANELS_PANELCONFIG_SCHEME})
-source_group(Panels/Panel11_Menu                  FILES ${PANELS_PANEL11})
-source_group(Panels/Panel11_Menu/Setup            FILES ${PANELS_PANEL11_SETUP})
+source_group(Panels/PanelMenu                     FILES ${PANELS_PANELMENU})
+source_group(Panels/PanelMenu/Setup               FILES ${PANELS_PANELMENU_SETUP})
 source_group(Panels/Panel12_Debug                 FILES ${PANELS_PANEL12})
 source_group(Panels/Panel12_Debug/PagesChips      FILES ${PANELS_PANEL12_PAGESCHIPS})
 source_group(Panels/Panel12_Debug/Old             FILES ${PANELS_PANEL12_OLD})
@@ -150,8 +150,8 @@ add_executable(${PROJECT_NAME}
     ${PANELS}
     ${PANELS_PANELCONFIG}
     ${PANELS_PANELCONFIG_SCHEME}
-    ${PANELS_PANEL11}
-    ${PANELS_PANEL11_SETUP}
+    ${PANELS_PANELMENU}
+    ${PANELS_PANELMENU_SETUP}
     ${PANELS_PANEL12}
     ${PANELS_PANEL12_PAGESCHIPS}
     ${PANELS_PANEL12_OLD}

@@ -14,7 +14,7 @@
 #include "Panels/Panel07_Indicator.h"
 #include "Panels/Panel08_ModeLower.h"
 #include "Panels/Panel09_Table.h"
-#include "Panels/Panel11_Menu/Panel11_Menu.h"
+#include "Panels/PanelMenu/PanelMenu.h"
 #include "Panels/Panel12_Debug/Panel12_Debug.h"
 #include "Panels/Panel13_ReferenceGraphs.h"
 #include "Controls/Dialog.h"

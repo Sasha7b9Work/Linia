@@ -2,7 +2,7 @@
 #pragma once
 #include "Panels/Panel.h"
 #include "MainWindow.h"
-#include "Panels/Panel11_Menu/Panel11_Menu.h"
+#include "Panels/PanelMenu/PanelMenu.h"
 
 
 class PanelModel : public Panel

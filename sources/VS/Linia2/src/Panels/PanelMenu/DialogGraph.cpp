@@ -1,6 +1,6 @@
 ﻿// 2025/7/12 17:26:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/Panel11_Menu/DialogGraph.h"
+#include "Panels/PanelMenu/DialogGraph.h"
 #include "Display/WindowScale.h"
 
 

@@ -2,7 +2,7 @@
 #pragma once
 #include "Panels/Panel.h"
 #include "MainWindow.h"
-#include "Panels/Panel11_Menu/Panel11_Menu.h"
+#include "Panels/PanelMenu/PanelMenu.h"
 #include "Controls/ButtonsCombo.h"
 #include "Panels/PanelConfig/PanelConfig.h"
 #include "Panels/Panel07_Indicator.h"
