@@ -15,34 +15,45 @@ DeviceIPPP::DeviceIPPP() :
 }
 
 
-DeviceIPPP::~DeviceIPPP() {
+DeviceIPPP::~DeviceIPPP()
+{
     Shutdown();
 }
 
-bool DeviceIPPP::Init() {
+bool DeviceIPPP::Init()
+{
     UART::Init();
-    if (UART::Open(115200, "8N1")) {
+
+    if (UART::Open(115200, "8N1"))
+    {
         connected = true;
         running = true;
         commThread = std::thread(&DeviceIPPP::CommunicationThread, this);
         return true;
     }
+
     return false;
 }
 
 
-void DeviceIPPP::Shutdown() {
+void DeviceIPPP::Shutdown()
+{
     running = false;
-    if (commThread.joinable()) {
+
+    if (commThread.joinable())
+    {
         commThread.join();
     }
+
     UART::Close();
     UART::DeInit();
+
     connected = false;
 }
 
 
-bool DeviceIPPP::IsConnected() const {
+bool DeviceIPPP::IsConnected() const
+{
     return connected && UART::IsReady();
 }
 
@@ -68,19 +79,25 @@ void DeviceIPPP::SendCommand(pchar format, ...)
 }
 
 
-void DeviceIPPP::CommunicationThread() {
-    while (running) {
+void DeviceIPPP::CommunicationThread()
+{
+    while (running)
+    {
         std::string cmd;
         {
             std::lock_guard<std::mutex> lock(queueMutex);
-            if (!commandQueue.empty()) {
+            if (!commandQueue.empty())
+            {
                 cmd = commandQueue.front();
                 commandQueue.pop();
             }
         }
-        if (!cmd.empty()) {
+
+        if (!cmd.empty())
+        {
             UART::SendBuffer((uint8*)cmd.c_str(), (int)cmd.length());
         }
+
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
 }
