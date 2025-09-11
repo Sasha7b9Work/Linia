@@ -214,7 +214,7 @@ namespace UART
     }
 
     // Установка callback функции для обработки принятых данных
-    // Принимает: функция вида void callback(uint8_t byte)
+    // Принимает: функция вида void callback(uint8 byte)
     void SetCallback(ReceivedCallback callback)
     {
         g_callback = callback;
