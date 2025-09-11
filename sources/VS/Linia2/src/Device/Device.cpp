@@ -1,3 +1,4 @@
+#include "defines.h"
 #include "Device/Device.h"
 #include "Communicator/UART/UART.h"
 #include <sstream>
@@ -58,7 +59,7 @@ void Device::CommunicationThread() {
             }
         }
         if (!cmd.empty()) {
-            UART::SendBuffer((uint8_t*)cmd.c_str(), cmd.length());
+            UART::SendBuffer((uint8_t*)cmd.c_str(), (int)cmd.length());
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }

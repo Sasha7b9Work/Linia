@@ -47,7 +47,7 @@ struct Chan
     E value;
 
     bool IsVisible() const;
-    
+
     static wxString Name(E);
 };
 
@@ -96,7 +96,7 @@ struct ModeSource
         I,
         Count
     };
-    
+
     static wxString Name(E);
 };
 
@@ -110,7 +110,7 @@ struct ModeMeas
         I,
         Count
     };
-    
+
     static wxString Name(E);
 };
 
@@ -129,7 +129,7 @@ struct TypeScan
         AC,
         Count
     };
-    
+
     static wxString Name(E);
 };
 
@@ -143,7 +143,7 @@ struct FirstQueue
         ChannelB,
         Count
     };
-    
+
     static wxString Name(E);
 };
 
@@ -159,7 +159,7 @@ struct AmplitudeRange
         Range_200V = 3,
         Count
     };
-    
+
     static wxString Name(E);
     static uint8_t Value(E);
 };
@@ -174,7 +174,7 @@ struct GenerationStup
         Enable,
         Count
     };
-    
+
     static wxString Name(E);
 };
 
@@ -188,7 +188,7 @@ struct PointCount
         Points_50,
         Count
     };
-    
+
     static wxString Name(E);
 };
 
@@ -202,7 +202,7 @@ struct StartTrigger
         External,
         Count
     };
-    
+
     static wxString Name(E);
 };
 
@@ -216,7 +216,7 @@ struct StartMode
         Multiple,
         Count
     };
-    
+
     static wxString Name(E);
 };
 
@@ -234,7 +234,7 @@ struct MeasMode
         Auto_5,
         Count
     };
-    
+
     static wxString Name(E);
 };
 
@@ -252,7 +252,7 @@ struct DacCode
         Code_150,
         Count
     };
-    
+
     static wxString Name(E);
     static uint8_t Value(E);
 };
@@ -267,7 +267,7 @@ struct PulseState
         Enabled,
         Count
     };
-    
+
     static wxString Name(E);
 };
 
@@ -281,7 +281,7 @@ struct ElementType
         Multipole,
         Count
     };
-    
+
     static wxString Name(E);
 };
 
@@ -297,7 +297,7 @@ struct LimitResult
         Protection,
         Count
     };
-    
+
     static wxString Name(E);
 };
 
@@ -311,7 +311,7 @@ struct PowerNominal
         Nominal_220V,
         Count
     };
-    
+
     static wxString Name(E);
 };
 
@@ -330,7 +330,7 @@ struct PulseDuration
         Duration_1000us,
         Count
     };
-    
+
     static wxString Name(E);
     static uint Value(E);
 };
@@ -364,7 +364,7 @@ struct LimitPercent
         Percent_100 = 20,
         Count
     };
-    
+
     static wxString Name(E);
     static int Value(E);
 };
@@ -385,7 +385,7 @@ struct StepCount
         Steps_1000,
         Count
     };
-    
+
     static wxString Name(E);
     static int Value(E);
 };
@@ -421,7 +421,7 @@ struct AmplitudeValue
         Value_32767,
         Count
     };
-    
+
     static wxString Name(E);
     static int16_t Value(E);
 };
@@ -457,7 +457,7 @@ struct LimitThreshold
         Value_32767,
         Count
     };
-    
+
     static wxString Name(E);
     static int16_t Value(E);
 };

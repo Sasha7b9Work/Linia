@@ -1,19 +1,8 @@
 #pragma once
+#include "IPPP/Tests/SettingsTests.h"
+#include "IPPP/Tests/Ranges.h"
 
-// Стандартные заголовки
-#include <atomic>
-#include <sstream>
-#include <queue>
-#include <mutex>
-#include <thread>
-#include <string>
-#include <vector>
 
-// Заголовки проекта
-#include "../defines.h"
-#include "../IPPP/Tests/SettingsTests.h"
-#include "../IPPP/Tests/Ranges.h"
-    
 class IDevice {
 public:
     virtual ~IDevice() = default;
@@ -33,11 +22,11 @@ public:
 
     // Длительность импульса
     virtual void SetPulseDuration(uint durationUS, GenerationStup::E) = 0;      // :PULSE:DURATION 200
-                                                                                // :GENERATIONSTUP 1
+    // :GENERATIONSTUP 1
 
-    //------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------
 
-    // Диапазон источника
+// Диапазон источника
     virtual void SetChannelC_SourceRange(RangeU::E) = 0;                        // :C:RANGE:SOURCE 50mV
 
     // Диапазон измерителя
@@ -137,12 +126,12 @@ public:
 
     // Режим источника в канале
     virtual void SetChannel_SourceMode(Chan::E chan, ModeSource::E mode) override;
-    
+
     virtual void SetChannel_AmplitudeRange(Chan::E chan, AmplitudeRange::E range) override;
 
     // Число ступеней
     virtual void SetChannel_StepCount(Chan::E chan, StepCount::E count) override;
-    
+
     virtual void SetChannel_AmplitudeValue(Chan::E chan, AmplitudeValue::E value) override;
 
     // Смещение
@@ -180,10 +169,10 @@ public:
 
     virtual void StopMeasurement() override;
     virtual void ResetToDefaults() override;
-    
+
 
 private:
-    void SendCommand(const std::string& cmd);
+    void SendCommand(const std::string &cmd);
     void CommunicationThread();
 
     std::queue<std::string> commandQueue;
