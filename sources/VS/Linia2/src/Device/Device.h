@@ -74,7 +74,6 @@ public:
 
     virtual void SetAutoZeroOff(bool) = 0;                          // Отключение автоматической коррекции нуля
     virtual void SetPointCount(int) = 0;                            // Установка количества точек измерения
-    virtual void SetMeasurementMode(MeasMode::E) = 0;               // Режим измерения
     virtual void SetBitQ18(PulseState::E) = 0;                      // Состояние бита Q18
     virtual void SetElementType(ElementType::E) = 0;                // Тип элемента: многополюсный или нет
     virtual void EmergencyStop() = 0;                               // Аварийная остановка

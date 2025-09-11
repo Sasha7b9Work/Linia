@@ -254,13 +254,6 @@ void DeviceIPPP::SetPointCount(int count)
 }
 
 
-void DeviceIPPP::SetMeasurementMode(MeasMode::E mode) {
-    std::stringstream ss;
-    ss << ":MEASMODE " << MeasMode::Name(mode).ToStdString();
-    SendCommand(ss.str());
-}
-
-
 void DeviceIPPP::SetBitQ18(PulseState::E state) {
     std::stringstream ss;
     ss << ":BITQ18 " << PulseState::Name(state).ToStdString();

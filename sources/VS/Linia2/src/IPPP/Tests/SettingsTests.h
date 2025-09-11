@@ -176,24 +176,6 @@ struct StartMode
 };
 
 
-// Режим измерения
-struct MeasMode
-{
-    enum E
-    {
-        Manual,
-        Auto_1,
-        Auto_2,
-        Auto_3,
-        Auto_4,
-        Auto_5,
-        Count
-    };
-
-    static wxString Name(E);
-};
-
-
 // Состояние импульса
 struct PulseState
 {

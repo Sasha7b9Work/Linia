@@ -92,22 +92,6 @@ wxString StartMode::Name(E mode)
 }
 
 
-wxString MeasMode::Name(E mode)
-{
-    switch (mode)
-    {
-    case Manual: return "MANUAL";
-    case Auto_1: return "AUTO_1";
-    case Auto_2: return "AUTO_2";
-    case Auto_3: return "AUTO_3";
-    case Auto_4: return "AUTO_4";
-    case Auto_5: return "AUTO_5";
-    case Count:
-    default: return "MANUAL";
-    }
-}
-
-
 wxString PulseState::Name(E state)
 {
     return state == Enabled ? "ON" : "OFF";

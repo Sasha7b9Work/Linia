@@ -152,12 +152,6 @@ void DeviceEmulator::SetPointCount(int)
 }
 
 
-void DeviceEmulator::SetMeasurementMode(MeasMode::E /*mode*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
 void DeviceEmulator::SetBitQ18(PulseState::E /*state*/)
 {
     LOG_ERROR("Not implemented");
