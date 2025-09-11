@@ -12,74 +12,59 @@ public:
     virtual ~DeviceIPPP();
 
     virtual bool Init() override;
+
     virtual void Shutdown() override;
+
     virtual bool IsConnected() const override;
-
-    virtual void WriteMicroChip(MicroChip::E, int reg, uint value) override;
-
-    // Схема включения канала
-    virtual void SetCircuitConnection(const Chan &, StateJack::E) override;
-
-    // Вид развёртки
-    virtual void SetTypeScan(TypeScan::E) override;
-
-    // Первая очередь
-    virtual void SetFirstQueue(const Chan &) override;
-
-    // Длительность импульса
-    virtual void SetPulseDuration(uint durationUS, bool generation_stump) override;
-
-    //------------------------------------------------------------------------------------------------------------
-
-    // Диапазон источника
-    virtual void ChanC_SourceRange(RangeU::E) override;
-
-    // Диапазон измерителя
-    virtual void ChanC_MeasRange(RangeU::E) override;
-    virtual void ChanC_MeasRange(RangeI::E) override;
-
-    // Ограничение источника U от 0 до 100%
-    virtual void ChanC_LimitSourceU(int min, int max) override;
-
-    //------------------------------------------------------------------------------------------------------------
-
-    // Функции для каналов B и S
-
-    // Режим источника в канале
-    virtual void ChanBS_SourceMode(const Chan &, ModeSource::E) override;
-
-    // Диапазон амплитуды ступени
-    virtual void ChanBS_StepRange(const Chan &, RangeU::E) override;
-    virtual void ChanBS_StepRange(const Chan &, RangeI::E) override;
-
-    // Число ступеней
-    virtual void ChanBS_StepCount(const Chan &, int) override;
-
-    virtual void ChanBS_StepValue(const Chan &, double) override;
-
-    // Смещение
-    virtual void ChaBS_Offset(const Chan &, double) override;
-
-    // Режим измерителя
-    virtual void ChanBS_MeasMode(const Chan &, ModeMeas::E) override;
-
-    // Диапазон измерителя
-    virtual void ChanBS_MeasRange(const Chan &, RangeU::E) override;
-    virtual void ChanBS_MeasRange(const Chan &, RangeI::E) override;
-
-    // Диапазон ограничения
-    virtual void ChanBS_LimitRange(const Chan &, RangeU::E) override;
-    virtual void ChanBS_LimitRange(const Chan &, RangeI::E) override;
-
-    // Порог ограничения измерителя
-    virtual void ChanBS_LimitThreshold(const Chan &, double) override;
-
-    //------------------------------------------------------------------------------------------------------------
 
     virtual void SetPointCount(int) override;
 
     virtual void StartMeasurement() override;
     virtual void StopMeasurement() override;
+
+    virtual void WriteMicroChip(MicroChip::E, int reg, uint value) override;
+
+    virtual void SetCircuitConnection(const Chan &, StateJack::E) override;
+
+    virtual void SetTypeScan(TypeScan::E) override;
+
+    virtual void SetFirstQueue(const Chan &) override;
+
+    virtual void SetPulseDuration(uint durationUS, bool generation_stump) override;
+
+    //------------------------------------------------------------------------------------------------------------
+
+    virtual void ChanC_SourceRange(RangeU::E) override;
+
+    virtual void ChanC_MeasRange(RangeU::E) override;
+    virtual void ChanC_MeasRange(RangeI::E) override;
+
+    virtual void ChanC_LimitSourceU(int min, int max) override;
+
+    //------------------------------------------------------------------------------------------------------------
+
+    virtual void ChanBS_SourceMode(const Chan &, ModeSource::E) override;
+
+    virtual void ChanBS_StepRange(const Chan &, RangeU::E) override;
+    virtual void ChanBS_StepRange(const Chan &, RangeI::E) override;
+
+    virtual void ChanBS_StepCount(const Chan &, int) override;
+
+    virtual void ChanBS_StepValue(const Chan &, double) override;
+
+    virtual void ChaBS_Offset(const Chan &, double) override;
+
+    virtual void ChanBS_MeasMode(const Chan &, ModeMeas::E) override;
+
+    virtual void ChanBS_MeasRange(const Chan &, RangeU::E) override;
+    virtual void ChanBS_MeasRange(const Chan &, RangeI::E) override;
+
+    virtual void ChanBS_LimitRange(const Chan &, RangeU::E) override;
+    virtual void ChanBS_LimitRange(const Chan &, RangeI::E) override;
+
+    virtual void ChanBS_LimitThreshold(const Chan &, double) override;
+
+    //------------------------------------------------------------------------------------------------------------
 
 private:
 
