@@ -235,13 +235,6 @@ void DeviceIPPP::ChanBS_LimitThreshold(Chan::E ch, int threshold)
 }
 
 
-void DeviceIPPP::ChanBS_HighResolution(Chan::E ch, bool highRes)
-{
-    std::string cmd = ":" + Chan(ch).Name().ToStdString() + ":HIGHRES " + std::string(highRes ? "1" : "0");
-    SendCommand(cmd);
-}
-
-
 void DeviceIPPP::SetAutoZeroOff(bool off) {
     std::string cmd = ":AUTOZERO " + std::string(off ? "OFF" : "ON");
     SendCommand(cmd);

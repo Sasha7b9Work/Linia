@@ -124,17 +124,14 @@ void DeviceEmulator::ChanBS_LimitRangeU(Chan::E /*chan*/, RangeU::E /*range*/)
     LOG_ERROR("Not implemented");
 }
 
+
 void DeviceEmulator::ChanBS_LimitRangeI(Chan::E /*chan*/, RangeI::E /*range*/)
 {
     LOG_ERROR("Not implemented");
 }
 
-void DeviceEmulator::ChanBS_LimitThreshold(Chan::E /*chan*/, int /*threshold*/)
-{
-    LOG_ERROR("Not implemented");
-}
 
-void DeviceEmulator::ChanBS_HighResolution(Chan::E /*chan*/, bool /*highRes*/)
+void DeviceEmulator::ChanBS_LimitThreshold(Chan::E /*chan*/, int /*threshold*/)
 {
     LOG_ERROR("Not implemented");
 }
@@ -162,6 +159,7 @@ void DeviceEmulator::StartMeasurement()
 {
     LOG_ERROR("Not implemented");
 }
+
 
 void DeviceEmulator::StopMeasurement()
 {

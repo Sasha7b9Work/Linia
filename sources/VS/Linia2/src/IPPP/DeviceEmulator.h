@@ -50,7 +50,6 @@ public:
     virtual void ChanBS_LimitRangeU(Chan::E, RangeU::E) override;
     virtual void ChanBS_LimitRangeI(Chan::E, RangeI::E) override;
     virtual void ChanBS_LimitThreshold(Chan::E, int) override;
-    virtual void ChanBS_HighResolution(Chan::E, bool highRes) override;
 
     //------------------------------------------------------------------------------------------------------------
 
