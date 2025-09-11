@@ -70,8 +70,8 @@ struct StateJack
 
     static wxString Name(E);
 
-    // 
-    static wxString NameEn(E);
+    // Эти обозначения используются в ГИП
+    static wxString NameGUI(E);
 };
 
 
