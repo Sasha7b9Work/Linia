@@ -69,7 +69,9 @@ struct StateJack
     static void PrepareArray(wxArrayString &, E, E, E = Count, E = Count);
 
     static wxString Name(E);
-    static wxString NameWx(E);
+
+    // 
+    static wxString NameEn(E);
 };
 
 
@@ -155,20 +157,6 @@ struct GenerationStup
     {
         Disable,
         Enable,
-        Count
-    };
-
-    static wxString Name(E);
-};
-
-
-// Режим запуска
-struct StartMode
-{
-    enum E
-    {
-        Single,
-        Multiple,
         Count
     };
 
