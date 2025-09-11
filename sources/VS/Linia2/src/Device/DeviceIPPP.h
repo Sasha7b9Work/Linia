@@ -1,4 +1,4 @@
-// 2025/09/11 08:48:15 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/09/11 08:48:15 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Device/Device.h"
 
@@ -15,59 +15,59 @@ public:
     virtual void Shutdown() override;
     virtual bool IsConnected() const override;
 
-    // Схема включения канала
+    // РЎС…РµРјР° РІРєР»СЋС‡РµРЅРёСЏ РєР°РЅР°Р»Р°
     virtual void SetCircuitConnection(Chan::E, StateJack::E) override;
 
-    // Вид развёртки
+    // Р’РёРґ СЂР°Р·РІС‘СЂС‚РєРё
     virtual void SetSweepType(TypeScan::E) override;
 
-    // Первая очередь
+    // РџРµСЂРІР°СЏ РѕС‡РµСЂРµРґСЊ
     virtual void SetFirstQueue(FirstQueue::E) override;
 
-    // Длительность импульса
+    // Р”Р»РёС‚РµР»СЊРЅРѕСЃС‚СЊ РёРјРїСѓР»СЊСЃР°
     virtual void SetPulseDuration(uint durationUS, GenerationStup::E) override;
 
     //------------------------------------------------------------------------------------------------------------
 
-    // Диапазон источника
+    // Р”РёР°РїР°Р·РѕРЅ РёСЃС‚РѕС‡РЅРёРєР°
     virtual void ChanC_SourceRange(RangeU::E) override;
 
-    // Диапазон измерителя
+    // Р”РёР°РїР°Р·РѕРЅ РёР·РјРµСЂРёС‚РµР»СЏ
     virtual void ChanC_MeasRange(RangeU::E) override;
     virtual void ChanC_MeasRange(RangeI::E) override;
 
-    // Ограничение источника U от 0 до 100%
+    // РћРіСЂР°РЅРёС‡РµРЅРёРµ РёСЃС‚РѕС‡РЅРёРєР° U РѕС‚ 0 РґРѕ 100%
     virtual void ChanC_LimitSourceU(int min, int max) override;
 
     //------------------------------------------------------------------------------------------------------------
 
-    // Функции для каналов B и S
+    // Р¤СѓРЅРєС†РёРё РґР»СЏ РєР°РЅР°Р»РѕРІ B Рё S
 
-    // Режим источника в канале
+    // Р РµР¶РёРј РёСЃС‚РѕС‡РЅРёРєР° РІ РєР°РЅР°Р»Рµ
     virtual void ChanBS_SourceMode(Chan::E, ModeSource::E) override;
 
     virtual void ChanBS_AmplitudeRange(Chan::E, AmplitudeRange::E) override;
 
-    // Число ступеней
+    // Р§РёСЃР»Рѕ СЃС‚СѓРїРµРЅРµР№
     virtual void ChanBS_StepCount(Chan::E, int) override;
 
     virtual void ChanBS_AmplitudeValue(Chan::E, int) override;
 
-    // Смещение
+    // РЎРјРµС‰РµРЅРёРµ
     virtual void ChaBS_Bias(Chan::E, int) override;
 
-    // Режим измерителя
+    // Р РµР¶РёРј РёР·РјРµСЂРёС‚РµР»СЏ
     virtual void ChanBS_MeasMode(Chan::E, ModeMeas::E) override;
 
-    // Диапазон измерителя
+    // Р”РёР°РїР°Р·РѕРЅ РёР·РјРµСЂРёС‚РµР»СЏ
     virtual void ChanBS_MeasRangeU(Chan::E, RangeU::E) override;
     virtual void ChanBS_MeasRangeI(Chan::E, RangeI::E) override;
 
-    // Диапазон ограничения
+    // Р”РёР°РїР°Р·РѕРЅ РѕРіСЂР°РЅРёС‡РµРЅРёСЏ
     virtual void ChanBS_LimitRangeU(Chan::E, RangeU::E) override;
     virtual void ChanBS_LimitRangeI(Chan::E, RangeI::E) override;
 
-    // Порог ограничения измерителя
+    // РџРѕСЂРѕРі РѕРіСЂР°РЅРёС‡РµРЅРёСЏ РёР·РјРµСЂРёС‚РµР»СЏ
     virtual void ChanBS_LimitThreshold(Chan::E, int) override;
 
     virtual void ChanBS_HighResolution(Chan::E, bool highRes) override;
