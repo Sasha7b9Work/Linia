@@ -12,7 +12,8 @@ fi
 echo "Сборка основного проекта..."
 cmake ../../VS/CMakeLists.txt -B../../generated -G "CodeBlocks - Unix Makefiles" \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_FLAGS="-O2 -march=armv8-a -Wall -Werror"
+    -DCMAKE_CXX_FLAGS="-O2 -march=armv8-a -Wall -Werror" \
+    -DDISABLE_GSPELL=ON
 
 cd ../../generated
 
@@ -25,8 +26,8 @@ else
     echo "❌ Ошибка сборки основного проекта"
     echo ""
     echo "Возможные причины и решения:"
-    echo "1. Отсутствие библиотеки GSpell - запустите: ./fix_packages_arm64.sh"
-    echo "2. Проблемы с линковкой - запустите: ./fix_build_arm64.sh"
+    echo "1. Отсутствие библиотек - проверьте установку зависимостей"
+    echo "2. Проблемы с линковкой - проверьте wxWidgets сборку"
     echo ""
     echo "Для получения подробной информации об ошибке, посмотрите вывод выше"
     cd ../scripts/orange_pi

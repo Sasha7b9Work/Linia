@@ -191,8 +191,6 @@ else()
     # Поиск GTK3
     pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
     
-    # Поиск GSpell (для проверки орфографии в wxWidgets)
-    pkg_check_modules(GSPELL gspell-1)
     
     # Поиск других библиотек
     find_library(X11_LIBRARY X11 REQUIRED)

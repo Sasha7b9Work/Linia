@@ -23,8 +23,8 @@ sudo apt-get install libgtk-3-dev -y
 sudo apt-get install curl cmake -y
 sudo apt install libcurl4-openssl-dev -y
 sudo apt-get install libsecret-1-dev -y
-# Добавляем GSpell для проверки орфографии
-sudo apt-get install libgspell-1-dev -y
+# GSpell отключен для уменьшения зависимостей
+# sudo apt-get install libgspell-1-dev -y
 
 # Дополнительные пакеты для корректного GUI отображения на ARM64
 echo "Установка дополнительных GUI библиотек для ARM64..."
