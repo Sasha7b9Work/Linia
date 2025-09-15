@@ -190,8 +190,7 @@ else()
     
     # Поиск GTK3
     pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
-    
-    
+        
     # Поиск других библиотек
     find_library(X11_LIBRARY X11 REQUIRED)
     find_library(XKBCOMMON_LIBRARY xkbcommon REQUIRED)
@@ -225,16 +224,6 @@ else()
         wx_baseu-3.2
         ${DL_LIBRARY}
     )
-
-    # Добавляем GSpell если найдена
-    if(GSPELL_FOUND)
-        target_link_libraries(${PROJECT_NAME} ${GSPELL_LIBRARIES})
-        target_include_directories(${PROJECT_NAME} PRIVATE ${GSPELL_INCLUDE_DIRS})
-        target_compile_options(${PROJECT_NAME} PRIVATE ${GSPELL_CFLAGS_OTHER})
-        message(STATUS "GSpell library found: ${GSPELL_LIBRARIES}")
-    else()
-        message(WARNING "GSpell library not found - spell checking may not work")
-    endif()
 
     # Добавляем include директории GTK3
     target_include_directories(${PROJECT_NAME} PRIVATE ${GTK3_INCLUDE_DIRS})

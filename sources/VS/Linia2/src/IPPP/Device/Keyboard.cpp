@@ -42,7 +42,10 @@ void Keyboard::Init()
 
     pinKB.SetChangeCallback(CallbackOnKB);
 
-    std::memset(pins, 0, sizeof(pins));
+    for (int i = 0; i < 4; ++i)
+    {
+        pins[i] = StructPin{};
+    }
 
     PIN_START.pin = &pinSTART;
     PIN_STOP.pin = &pinSTOP;

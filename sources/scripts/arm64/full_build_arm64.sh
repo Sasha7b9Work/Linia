@@ -35,7 +35,6 @@ echo "Сборка основного проекта..."
 cmake ../../VS/CMakeLists.txt -B../../generated -G "CodeBlocks - Unix Makefiles" \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_FLAGS="-O2 -march=armv8-a -Wall -Werror" \
-    -DDISABLE_GSPELL=ON
 
 cd ../../generated
 
