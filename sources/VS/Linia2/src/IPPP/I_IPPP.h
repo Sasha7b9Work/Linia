@@ -42,6 +42,9 @@ protected:
     // generation_stump - семейство кривых
     virtual void SetPulseDuration(uint durationUS, bool generation_stump) = 0;
 
+    // Первая очередь
+    virtual void SetFirstQueue(const Chan &) = 0;
+
     // Настройки канала C ------------------------------------------------------------------------------------------------
 
     // Диапазон источника

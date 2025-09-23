@@ -274,3 +274,9 @@ void RealIPPP::SetPulseDuration(uint /*durationUS*/, bool /*genertaion_stump*/)
 //    SendCommand(":PULSE:DURATION %u", durationUS);
 //    SendCommand(":GENERATIONSTUP %d", genertaion_stump ? 1 : 0);
 }
+
+
+void RealIPPP::SetFirstQueue(const Chan & /*ch*/)
+{
+//    SendCommand(":FIRSTQUEUE %s", ch.Name());
+}

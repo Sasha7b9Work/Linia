@@ -58,12 +58,6 @@ void Device::SendCommand(pchar format, ...)
 }
 
 
-void Device::SetFirstQueue(const Chan &ch)
-{
-    SendCommand(":FIRSTQUEUE %s", ch.Name());
-}
-
-
 void Device::WriteMicroChip(MicroChip::E chip, int reg, uint value)
 {
     SendCommand(":CHIP:%s:%d:WRITE %08X", MicroChip::Name(chip), reg, value);

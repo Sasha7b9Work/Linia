@@ -22,7 +22,4 @@ public:
     // Записать значение в регистр.
     // Если размер регистра меньше 32, записываются младшие биты
     virtual void WriteMicroChip(MicroChip::E, int reg, uint value) = 0;
-
-    // Первая очередь
-    virtual void SetFirstQueue(const Chan &) = 0;
 };

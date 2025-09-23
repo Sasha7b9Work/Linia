@@ -15,8 +15,6 @@ public:
 
     virtual void WriteMicroChip(MicroChip::E, int reg, uint value) override;
 
-    virtual void SetFirstQueue(const Chan &) override;
-
 private:
 
     virtual ~DeviceEmulator() { }

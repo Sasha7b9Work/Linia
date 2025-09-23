@@ -150,3 +150,8 @@ void EmulatorIPPP::SetPulseDuration(uint /*durationUS*/, bool)
 {
     LOG_ERROR("Not implemented");
 }
+
+void EmulatorIPPP::SetFirstQueue(const Chan &)
+{
+    LOG_ERROR("Not implemented");
+}
