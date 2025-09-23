@@ -22,4 +22,6 @@ private:
     virtual bool ReadData(std::vector<int>(&data)[4]);
 
     virtual void SetPointCount(int) override;
+
+    virtual void SetCircuitConnection(const Chan &, StateJack::E) override;
 };

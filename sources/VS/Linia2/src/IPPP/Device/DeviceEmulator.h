@@ -18,8 +18,6 @@ public:
 
     virtual void WriteMicroChip(MicroChip::E, int reg, uint value) override;
 
-    virtual void SetCircuitConnection(const Chan &, StateJack::E) override;
-
     virtual void SetTypeScan(TypeScan::E) override;
 
     virtual void SetFirstQueue(const Chan &) override;

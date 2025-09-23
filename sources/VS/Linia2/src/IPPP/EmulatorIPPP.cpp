@@ -46,3 +46,9 @@ void EmulatorIPPP::SetPointCount(int)
 {
     LOG_ERROR("Not implemented");
 }
+
+
+void EmulatorIPPP::SetCircuitConnection(const Chan &, StateJack::E)
+{
+    LOG_ERROR("Not implemented");
+}

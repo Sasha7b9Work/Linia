@@ -38,12 +38,6 @@ void DeviceEmulator::WriteMicroChip(MicroChip::E, int, uint)
 }
 
 
-void DeviceEmulator::SetCircuitConnection(const Chan &, StateJack::E)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
 void DeviceEmulator::SetTypeScan(TypeScan::E)
 {
     LOG_ERROR("Not implemented");

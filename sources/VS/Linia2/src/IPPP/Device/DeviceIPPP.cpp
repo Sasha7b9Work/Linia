@@ -58,14 +58,6 @@ void DeviceIPPP::SendCommand(pchar format, ...)
 }
 
 
-void DeviceIPPP::SetCircuitConnection(const Chan &ch, StateJack::E state)
-{
-    SendCommand(":%s:CONNECTION %s",
-        ch.Name(),
-        StateJack::NameHardware(state));
-}
-
-
 void DeviceIPPP::SetTypeScan(TypeScan::E type)
 {
     SendCommand(":TYPESCAN %s", TypeScan::Name(type));

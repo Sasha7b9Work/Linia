@@ -22,4 +22,6 @@ private:
     void Pause();
 
     virtual void SetPointCount(int) override;
+
+    virtual void SetCircuitConnection(const Chan &, StateJack::E) override;
 };
