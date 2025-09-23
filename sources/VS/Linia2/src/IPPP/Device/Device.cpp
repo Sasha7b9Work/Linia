@@ -44,7 +44,7 @@ void Device::CallbackOnReceive(uint8)
 
 bool Device::IsConnected() const
 {
-    return connected && UART::IsReady();
+    return connected;
 }
 
 

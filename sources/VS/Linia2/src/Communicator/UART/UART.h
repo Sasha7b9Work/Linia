@@ -17,6 +17,4 @@ namespace UART
     bool SendByte(uint8 byte);
     bool SendBuffer(const void *buffer, int size);
     void Flush();
-
-    bool IsReady();
 }
