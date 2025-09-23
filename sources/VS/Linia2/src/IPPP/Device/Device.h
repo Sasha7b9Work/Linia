@@ -3,13 +3,13 @@
 #include "IPPP/Device/IDevice.h"
 
 
-class DeviceIPPP : public IDevice
+class Device : public IDevice
 {
 public:
 
-    DeviceIPPP() { }
+    Device() { }
 
-    virtual ~DeviceIPPP();
+    virtual ~Device();
 
     virtual bool Init() override;
 
