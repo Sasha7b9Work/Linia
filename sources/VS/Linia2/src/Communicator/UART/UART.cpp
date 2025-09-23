@@ -26,7 +26,6 @@
 namespace UART
 {
     static int g_uart_fd = -1;
-    static const char g_mode[4] = "8N1";
     static ReceivedCallback g_callback = nullptr;
     static pthread_t g_reader_thread;
     static bool g_thread_running = false;
@@ -104,7 +103,7 @@ namespace UART
         }
 
         g_thread_running = true;
-        LOG_WRITE("UART opened successfully on %s with baudrate %d and mode %s", UART_DEVICE, UART_BAUDRATE, g_mode);
+        LOG_WRITE("UART opened successfully on %s with baudrate %d and mode %s", UART_DEVICE, UART_BAUDRATE, UART_MODE);
         return true;
     }
 
@@ -227,11 +226,6 @@ namespace UART
         return g_uart_fd >= 0;
     }
 
-    const char *GetMode()
-    {
-        return g_mode;
-    }
-
     static int GetBaudrateConstant(int baudrate)
     {
         switch (baudrate)
@@ -262,9 +256,9 @@ namespace UART
 
         int cbits = CS8, cpar = 0, ipar = IGNPAR, bstop = 0;
 
-        if (strlen(g_mode) == 3)
+        if (strlen(UART_MODE) == 3)
         {
-            switch (g_mode[0])
+            switch (UART_MODE[0])
             {
             case '8': cbits = CS8; break; //-V1048
             case '7': cbits = CS7; break;
@@ -273,7 +267,7 @@ namespace UART
             default: cbits = CS8; break; //-V1048
             }
 
-            switch (g_mode[1])
+            switch (UART_MODE[1])
             {
             case 'N': case 'n': cpar = 0; ipar = IGNPAR; break; //-V1048 //-V525
             case 'E': case 'e': cpar = PARENB; ipar = INPCK; break;
@@ -281,7 +275,7 @@ namespace UART
             default: cpar = 0; ipar = IGNPAR; break; //-V1048
             }
 
-            switch (g_mode[2])
+            switch (UART_MODE[2])
             {
             case '1': bstop = 0; break;
             case '2': bstop = CSTOPB; break;
