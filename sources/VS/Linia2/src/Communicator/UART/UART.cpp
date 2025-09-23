@@ -26,7 +26,7 @@
 namespace UART
 {
     static int g_uart_fd = -1;
-    static ReceivedCallback g_callback = nullptr;
+    static ReceivedCallback recv_callback = nullptr;
     static pthread_t g_reader_thread;
     static bool g_thread_running = false;
     static bool g_stop_reading = false;
@@ -41,7 +41,7 @@ namespace UART
     {
         LOG_WRITE("Initializing UART...");
         g_uart_fd = -1;
-        g_callback = nullptr;
+        recv_callback = nullptr;
         g_thread_running = false;
         g_stop_reading = false;
 
@@ -210,7 +210,7 @@ namespace UART
     // Принимает: функция вида void callback(uint8 byte)
     void SetCallback(ReceivedCallback callback)
     {
-        g_callback = callback;
+        recv_callback = callback;
     }
 
     void Flush()
@@ -345,11 +345,11 @@ namespace UART
 
                 if (bytes_read > 0)
                 {
-                    if (g_callback)
+                    if (recv_callback)
                     {
                         for (int i = 0; i < bytes_read; i++)
                         {
-                            g_callback(buffer[i]);
+                            recv_callback(buffer[i]);
                         }
                     }
                 }
