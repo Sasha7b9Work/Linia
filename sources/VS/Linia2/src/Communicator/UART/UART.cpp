@@ -29,7 +29,7 @@ namespace UART
     static ReceivedCallback recv_callback = nullptr;
     static pthread_t g_reader_thread;
     static bool is_running_thread = false;
-    static bool g_stop_reading = false;
+    static bool need_stop_reading = false;
 
     const size_t BUFFER_SIZE = 1024;
 
@@ -49,7 +49,7 @@ bool UART::Init(ReceivedCallback callback)
     fd = -1;
     recv_callback = callback;
     is_running_thread = false;
-    g_stop_reading = false;
+    need_stop_reading = false;
 
     LOG_WRITE("UART initialized successfully");
 
@@ -102,7 +102,7 @@ bool UART::Open()
         return false;
     }
 
-    g_stop_reading = false;
+    need_stop_reading = false;
     if (pthread_create(&g_reader_thread, nullptr, ReaderThreadFunc, nullptr) != 0)
     {
         LOG_ERROR("Cannot create reader thread");
@@ -122,7 +122,7 @@ void UART::Close()
 {
     if (!IsReady()) return;
 
-    g_stop_reading = true;
+    need_stop_reading = true;
     if (is_running_thread)
     {
         pthread_join(g_reader_thread, nullptr);
@@ -330,7 +330,7 @@ bool UART::ConfigurePort()
 
 // Функция потока чтения UART
 // Читает данные из UART и вызывает callback для каждого принятого байта
-// Работает до установки флага g_stop_reading
+// Работает до установки флага need_stop_reading
 void *UART::ReaderThreadFunc(void *)
 {
     uint8 buffer[BUFFER_SIZE];
@@ -338,7 +338,7 @@ void *UART::ReaderThreadFunc(void *)
     fd_set read_fds;
     struct timeval timeout;
 
-    while (!g_stop_reading)
+    while (!need_stop_reading)
     {
         // Настраиваем select для ожидания данных
         FD_ZERO(&read_fds);
