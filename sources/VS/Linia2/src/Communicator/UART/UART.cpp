@@ -17,9 +17,6 @@
     #pragma warning(disable:4365 4389 4996)
     #define O_NOCTTY  0x00000400
     #define O_NDELAY  0
-    #define LOCK_EX 2
-    #define LOCK_NB 0
-    #define LOCK_UN 0
 #endif
 
 
