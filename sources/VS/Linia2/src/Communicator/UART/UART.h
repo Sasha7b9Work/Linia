@@ -9,9 +9,13 @@
 namespace UART
 {
     bool Init(void (*recv_callback)(uint8));
+
     void DeInit();
 
     bool SendByte(uint8 byte);
+
+    // Отправка буфера данных через UART порциями по 32 байта
     bool SendBuffer(const void *buffer, int size);
+
     void Flush();
 }
