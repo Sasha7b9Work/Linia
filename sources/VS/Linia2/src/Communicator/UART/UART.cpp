@@ -33,10 +33,15 @@ namespace UART
 
     static int GetBaudrateConstant(int baudrate);
     static bool ConfigurePort();
-    static void *ReaderThreadFunc(void *arg);
     static bool Open();
     static void Close();
     static bool IsReady();
+
+    // Функция потока чтения UART
+    // Читает данные из UART и вызывает callback для каждого принятого байта
+    // Работает до установки флага need_stop_reading
+    static void *ReaderThreadFunc(void *arg);
+
 }
 
 
@@ -317,9 +322,6 @@ bool UART::ConfigurePort()
 }
 
 
-// Функция потока чтения UART
-// Читает данные из UART и вызывает callback для каждого принятого байта
-// Работает до установки флага need_stop_reading
 void *UART::ReaderThreadFunc(void *)
 {
     uint8 buffer[1024];
