@@ -2,8 +2,9 @@
 #pragma once
 
 
-// Здесь логика работы прибора (логика работы с контроллером фактически)
-class IPPP
+// Здесь логика работы прибора (логика работы железа фактически)
+
+class I_IPPP
 {
 public:
 
@@ -18,11 +19,11 @@ public:
     // Вызывается при нажатии кнопки СТОП
     virtual void PressButtonStop() = 0;
 
-    static IPPP *impl;
+    static I_IPPP *impl;
 
 protected:
 
-    virtual ~IPPP() { }
+    virtual ~I_IPPP() { }
 
     // Читает четыре массива значений из ПЛИС
     virtual bool ReadData(std::vector<int>(&data)[4]) = 0;

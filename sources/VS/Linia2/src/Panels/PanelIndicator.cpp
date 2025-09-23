@@ -7,7 +7,7 @@
 #include "Controls/Bitmap.h"
 #include "IPPP/Device/IDevice.h"
 #include "Panels/PanelConfig/PanelConfig.h"
-#include "IPPP/IPPP.h"
+#include "IPPP/I_IPPP.h"
 
 
 PanelIndicator *PanelIndicator::self = nullptr;
@@ -52,12 +52,12 @@ void PanelIndicator::OnEventButton(ButtonBitmapChoiceEvent &event)
         if (value == 0)
         {
             PanelConfig::self->EnableSubPanels(true);
-            IPPP::impl->PressButtonStop();
+            I_IPPP::impl->PressButtonStop();
         }
         else if (value == 1)
         {
             PanelConfig::self->EnableSubPanels(false);
-            IPPP::impl->PressButtonStart();
+            I_IPPP::impl->PressButtonStart();
         }
     }
 

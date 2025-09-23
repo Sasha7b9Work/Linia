@@ -1,9 +1,9 @@
 ﻿// 2025/09/10 21:27:54 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "IPPP/IPPP.h"
+#include "IPPP/I_IPPP.h"
 
 
-class RealIPPP : public IPPP
+class RealIPPP : public I_IPPP
 {
 public:
 

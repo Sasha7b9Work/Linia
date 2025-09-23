@@ -3,6 +3,8 @@
 #include "IPPP/Tests/Ranges.h"
 
 
+// Здесь идёт обмен с контроллером
+
 class IDevice
 {
 public:
