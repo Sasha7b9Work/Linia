@@ -19,6 +19,20 @@ void RealIPPP::Init()
 }
 
 
+bool RealIPPP::IsChanBS(const Chan &ch) const
+{
+    if (ch.IsBS())
+    {
+        return true;
+    }
+
+    LOG_ERROR("Channel must be B or S, not %s", ch.Name());
+
+    return false;
+}
+
+
+
 void RealIPPP::Update()
 {
     Keyboard::Update();
@@ -132,4 +146,124 @@ void RealIPPP::ChanC_MeasRange(RangeI::E /*range*/)
 void RealIPPP::ChanC_LimitSourceU(int /*min*/, int /*max*/)
 {
 //    SendCommand(":C:SOURCE:LIMIT %d %d", min, max);
+}
+
+
+void RealIPPP::ChanBS_SourceMode(const Chan & /*ch*/, ModeSource::E /*mode*/)
+{
+//    if (IsChanBS(ch))
+//    {
+//        SendCommand(":%s:SOURCE:MODE %s", ch.Name(), ModeSource::Name(mode));
+//    }
+}
+
+
+void RealIPPP::ChanBS_StepRange(const Chan & /*ch*/, RangeU::E /*range*/)
+{
+//    if (IsChanBS(ch))
+//    {
+//        SendCommand(":%s:STEP:RANGE %s",
+//            ch.Name(),
+//            RangeU(range).Name(RowRange(ch.value), false));
+//    }
+}
+
+
+void RealIPPP::ChanBS_StepRange(const Chan & /*ch*/, RangeI::E /*range*/)
+{
+//    if (IsChanBS(ch))
+//    {
+//        SendCommand(":%s:STEP:RANGE %s",
+//            ch.Name(),
+//            RangeI(range).Name(RowRange(ch.value), false));
+//    }
+}
+
+
+void RealIPPP::ChanBS_StepCount(const Chan & /*ch*/, int /*count*/)
+{
+//    if (IsChanBS(ch))
+//    {
+//        SendCommand(":%s:STEP:COUNT %d", ch.Name(), count);
+//    }
+}
+
+
+void RealIPPP::ChanBS_StepValue(const Chan & /*ch*/, double /*value*/)
+{
+//    if (IsChanBS(ch))
+//    {
+//        SendCommand(":%s:STEP:VALUE %10e", ch.Name(), value);
+//    }
+}
+
+
+void RealIPPP::ChaBS_Offset(const Chan & /*ch*/, double /*offset*/)
+{
+//    if (IsChanBS(ch))
+//    {
+//        SendCommand(":%s:OFFSET %10e", ch.Name(), offset);
+//    }
+}
+
+
+void RealIPPP::ChanBS_MeasMode(const Chan & /*ch*/, ModeMeas::E /*mode*/)
+{
+//    if (IsChanBS(ch))
+//    {
+//        SendCommand(":%s:MEAS:MODE %s", ch.Name(), ModeMeas::Name(mode));
+//    }
+}
+
+
+void RealIPPP::ChanBS_MeasRange(const Chan & /*ch*/, RangeU::E /*range*/)
+{
+//    if (IsChanBS(ch))
+//    {
+//        SendCommand(":%s:MEAS:RANGE %s",
+//            ch.Name(),
+//            RangeU(range).Name(RowRange(ch.value), false));
+//    }
+}
+
+
+void RealIPPP::ChanBS_MeasRange(const Chan & /*ch*/, RangeI::E /*range*/)
+{
+//    if (IsChanBS(ch))
+//    {
+//        SendCommand(":%s:MEAS:RANGE %s",
+//            ch.Name(),
+//            RangeI(range).Name(RowRange(ch.value), false));
+//    }
+}
+
+
+void RealIPPP::ChanBS_LimitRange(const Chan & /*ch*/, RangeU::E /*range*/)
+{
+//    if (IsChanBS(ch))
+//    {
+//        SendCommand(":%s:LIMIT:RANGE %s",
+//            ch.Name(),
+//            RangeU(range).Name(RowRange(ch.value), false));
+//    }
+}
+
+
+void RealIPPP::ChanBS_LimitRange(const Chan & /*ch*/, RangeI::E /*range*/)
+{
+//    if (IsChanBS(ch))
+//    {
+//        SendCommand(":%s:LIMIT:RANGE %s",
+//            ch.Name(),
+//            RangeI(range).Name(RowRange(ch.value), false));
+//    }
+}
+
+
+void RealIPPP::ChanBS_LimitThreshold(const Chan & /*ch*/, int /*threshold*/)
+{
+//    if (IsChanBS(ch))
+//    {
+//        SendCommand(":%s:LIMIT:THRESHOLD %d", ch.Name(), threshold);
+//    }
 }

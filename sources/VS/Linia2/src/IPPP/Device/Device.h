@@ -26,36 +26,9 @@ public:
 
     virtual void SetPulseDuration(uint durationUS, bool generation_stump) override;
 
-    //------------------------------------------------------------------------------------------------------------
-
-    virtual void ChanBS_SourceMode(const Chan &, ModeSource::E) override;
-
-    virtual void ChanBS_StepRange(const Chan &, RangeU::E) override;
-    virtual void ChanBS_StepRange(const Chan &, RangeI::E) override;
-
-    virtual void ChanBS_StepCount(const Chan &, int) override;
-
-    virtual void ChanBS_StepValue(const Chan &, double) override;
-
-    virtual void ChaBS_Offset(const Chan &, double) override;
-
-    virtual void ChanBS_MeasMode(const Chan &, ModeMeas::E) override;
-
-    virtual void ChanBS_MeasRange(const Chan &, RangeU::E) override;
-    virtual void ChanBS_MeasRange(const Chan &, RangeI::E) override;
-
-    virtual void ChanBS_LimitRange(const Chan &, RangeU::E) override;
-    virtual void ChanBS_LimitRange(const Chan &, RangeI::E) override;
-
-    virtual void ChanBS_LimitThreshold(const Chan &, int) override;
-
-    //------------------------------------------------------------------------------------------------------------
-
 private:
 
     void SendCommand(pchar format, ...);
-
-    bool IsChanBS(const Chan &) const;
 
     std::atomic<bool> running = false;
     std::atomic<bool> connected = false;

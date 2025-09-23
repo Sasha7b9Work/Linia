@@ -32,38 +32,4 @@ public:
     // Длительность импульса
     // generation_stump - семейство кривых
     virtual void SetPulseDuration(uint durationUS, bool generation_stump) = 0;
-
-    // Настройки каналов B и S -------------------------------------------------------------------------------------------
-
-    // Режим источника в канале
-    virtual void ChanBS_SourceMode(const Chan &, ModeSource::E) = 0;
-
-    // Диапазон амплитуды ступени в канале
-    virtual void ChanBS_StepRange(const Chan &, RangeU::E) = 0;
-    virtual void ChanBS_StepRange(const Chan &, RangeI::E) = 0;
-
-    // Число ступеней
-    virtual void ChanBS_StepCount(const Chan &, int) = 0;
-
-    // Значение амплитуды ступени
-    virtual void ChanBS_StepValue(const Chan &, double) = 0;
-
-    // Смещение
-    virtual void ChaBS_Offset(const Chan &, double) = 0;
-
-    // Режим измерителя
-    virtual void ChanBS_MeasMode(const Chan &, ModeMeas::E) = 0;
-
-    // Диапазон измерителя
-    virtual void ChanBS_MeasRange(const Chan &, RangeU::E) = 0;
-    virtual void ChanBS_MeasRange(const Chan &, RangeI::E) = 0;
-
-    // Диапазон ограничения
-    virtual void ChanBS_LimitRange(const Chan &, RangeU::E) = 0;
-    virtual void ChanBS_LimitRange(const Chan &, RangeI::E) = 0;
-
-    // Порог ограничения измерителя
-    virtual void ChanBS_LimitThreshold(const Chan &, int percents) = 0;
-
-    //------------------------------------------------------------------------------------------------------------
 };
