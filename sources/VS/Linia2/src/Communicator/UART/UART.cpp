@@ -26,7 +26,6 @@
 namespace UART
 {
     static int g_uart_fd = -1;
-    static const int g_baudrate = 115200;
     static const char g_mode[4] = "8N1";
     static ReceivedCallback g_callback = nullptr;
     static pthread_t g_reader_thread;
@@ -105,7 +104,7 @@ namespace UART
         }
 
         g_thread_running = true;
-        LOG_WRITE("UART opened successfully on %s with baudrate %d and mode %s", UART_DEVICE, g_baudrate, g_mode);
+        LOG_WRITE("UART opened successfully on %s with baudrate %d and mode %s", UART_DEVICE, UART_BAUDRATE, g_mode);
         return true;
     }
 
@@ -228,11 +227,6 @@ namespace UART
         return g_uart_fd >= 0;
     }
 
-    int GetBaudrate()
-    {
-        return g_baudrate;
-    }
-
     const char *GetMode()
     {
         return g_mode;
@@ -259,10 +253,10 @@ namespace UART
         struct termios port_settings;
         memset(&port_settings, 0, sizeof(port_settings));
 
-        int baudr = GetBaudrateConstant(g_baudrate);
+        int baudr = GetBaudrateConstant(UART_BAUDRATE);
         if (baudr == -1)
         {
-            LOG_ERROR("Unsupported baudrate: %d", g_baudrate);
+            LOG_ERROR("Unsupported baudrate: %d", UART_BAUDRATE);
             return false;
         }
 

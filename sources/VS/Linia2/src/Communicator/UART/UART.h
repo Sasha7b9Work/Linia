@@ -1,7 +1,8 @@
 #pragma once
 
 
-#define UART_DEVICE "/dev/ttyS6"
+#define UART_DEVICE   "/dev/ttyS6"
+#define UART_BAUDRATE 115200
 
 
 namespace UART
@@ -19,6 +20,5 @@ namespace UART
     void Flush();
 
     bool IsReady();
-    int GetBaudrate();
     const char *GetMode();
 }
