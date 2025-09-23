@@ -25,7 +25,7 @@
 
 namespace UART
 {
-    static int g_uart_fd = -1;
+    static int fd = -1;
     static ReceivedCallback recv_callback = nullptr;
     static pthread_t g_reader_thread;
     static bool g_thread_running = false;
@@ -37,6 +37,7 @@ namespace UART
     static bool ConfigurePort();
     static void *ReaderThreadFunc(void *arg);
     static bool Open();
+    static void Close();
     static bool IsReady();
 }
 
@@ -45,7 +46,7 @@ bool UART::Init(ReceivedCallback callback)
 {
     LOG_WRITE("Initializing UART...");
 
-    g_uart_fd = -1;
+    fd = -1;
     recv_callback = callback;
     g_thread_running = false;
     g_stop_reading = false;
@@ -77,27 +78,27 @@ bool UART::Open()
         return false;
     }
 
-    g_uart_fd = ::open(UART_DEVICE, O_RDWR | O_NOCTTY | O_NDELAY);
-    if (g_uart_fd < 0)
+    fd = ::open(UART_DEVICE, O_RDWR | O_NOCTTY | O_NDELAY);
+    if (fd < 0)
     {
         LOG_ERROR("Cannot open UART device: %s", UART_DEVICE);
         return false;
     }
 
-    if (flock(g_uart_fd, LOCK_EX | LOCK_NB) != 0)
+    if (flock(fd, LOCK_EX | LOCK_NB) != 0)
     {
         LOG_ERROR("Cannot lock UART device");
-        ::close(g_uart_fd);
-        g_uart_fd = -1;
+        ::close(fd);
+        fd = -1;
         return false;
     }
 
     if (!ConfigurePort())
     {
         LOG_ERROR("Cannot configure UART port");
-        flock(g_uart_fd, LOCK_UN);
-        ::close(g_uart_fd);
-        g_uart_fd = -1;
+        flock(fd, LOCK_UN);
+        ::close(fd);
+        fd = -1;
         return false;
     }
 
@@ -105,9 +106,9 @@ bool UART::Open()
     if (pthread_create(&g_reader_thread, nullptr, ReaderThreadFunc, nullptr) != 0)
     {
         LOG_ERROR("Cannot create reader thread");
-        flock(g_uart_fd, LOCK_UN);
-        ::close(g_uart_fd);
-        g_uart_fd = -1;
+        flock(fd, LOCK_UN);
+        ::close(fd);
+        fd = -1;
         return false;
     }
 
@@ -129,15 +130,15 @@ void UART::Close()
     }
 
     int status;
-    if (ioctl(g_uart_fd, TIOCMGET, &status) != -1)
+    if (ioctl(fd, TIOCMGET, &status) != -1)
     {
         status &= ~(TIOCM_DTR | TIOCM_RTS);
-        ioctl(g_uart_fd, TIOCMSET, &status);
+        ioctl(fd, TIOCMSET, &status);
     }
 
-    flock(g_uart_fd, LOCK_UN);
-    ::close(g_uart_fd);
-    g_uart_fd = -1;
+    flock(fd, LOCK_UN);
+    ::close(fd);
+    fd = -1;
 
     LOG_WRITE("UART closed");
 }
@@ -154,7 +155,7 @@ bool UART::SendByte(uint8 byte)
         return false;
     }
 
-    int n = write(g_uart_fd, &byte, 1);
+    int n = write(fd, &byte, 1);
     if (n < 0)
     {
         LOG_ERROR("Failed to send byte");
@@ -188,7 +189,7 @@ bool UART::SendBuffer(const void *_buffer, int size)
     while (bytes_sent < size)
     {
         int chunk_size = std::min(32, size - bytes_sent);
-        int n = write(g_uart_fd, buffer + bytes_sent, chunk_size);
+        int n = write(fd, buffer + bytes_sent, chunk_size);
 
         if (n < 0)
         {
@@ -223,14 +224,14 @@ void UART::Flush()
 {
     if (IsReady())
     {
-        tcflush(g_uart_fd, TCIOFLUSH);
+        tcflush(fd, TCIOFLUSH);
     }
 }
 
 
 bool UART::IsReady()
 {
-    return g_uart_fd >= 0;
+    return fd >= 0;
 }
 
 
@@ -302,14 +303,14 @@ bool UART::ConfigurePort()
     cfsetispeed(&port_settings, baudr);
     cfsetospeed(&port_settings, baudr);
 
-    if (tcsetattr(g_uart_fd, TCSANOW, &port_settings) == -1)
+    if (tcsetattr(fd, TCSANOW, &port_settings) == -1)
     {
         LOG_ERROR("Cannot set port settings");
         return false;
     }
 
     int status;
-    if (ioctl(g_uart_fd, TIOCMGET, &status) == -1)
+    if (ioctl(fd, TIOCMGET, &status) == -1)
     {
         LOG_ERROR("Cannot get modem status");
         return false;
@@ -317,7 +318,7 @@ bool UART::ConfigurePort()
 
     status |= TIOCM_DTR | TIOCM_RTS;
 
-    if (ioctl(g_uart_fd, TIOCMSET, &status) == -1)
+    if (ioctl(fd, TIOCMSET, &status) == -1)
     {
         LOG_ERROR("Cannot set modem status");
         return false;
@@ -341,17 +342,17 @@ void *UART::ReaderThreadFunc(void *)
     {
         // Настраиваем select для ожидания данных
         FD_ZERO(&read_fds);
-        FD_SET(g_uart_fd, &read_fds);
+        FD_SET(fd, &read_fds);
 
         timeout.tv_sec = 0;
         timeout.tv_usec = 100000;
 
         // select блокируется до появления данных или таймаута
-        int result = select(g_uart_fd + 1, &read_fds, nullptr, nullptr, &timeout);
+        int result = select(fd + 1, &read_fds, nullptr, nullptr, &timeout);
 
-        if (result > 0 && FD_ISSET(g_uart_fd, &read_fds))
+        if (result > 0 && FD_ISSET(fd, &read_fds))
         {
-            bytes_read = read(g_uart_fd, buffer, sizeof(buffer));
+            bytes_read = read(fd, buffer, sizeof(buffer));
 
             if (bytes_read > 0)
             {

@@ -13,7 +13,6 @@ namespace UART
     bool Init(ReceivedCallback callback);
     void DeInit();
 
-    void Close();
     bool SendByte(uint8 byte);
     bool SendBuffer(const void *buffer, int size);
     void Flush();

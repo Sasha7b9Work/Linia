@@ -29,7 +29,6 @@ void Device::Shutdown()
 {
     running = false;
 
-    UART::Close();
     UART::DeInit();
 
     connected = false;
