@@ -31,8 +31,6 @@ namespace UART
     static bool is_running_thread = false;
     static bool need_stop_reading = false;
 
-    const size_t BUFFER_SIZE = 1024;
-
     static int GetBaudrateConstant(int baudrate);
     static bool ConfigurePort();
     static void *ReaderThreadFunc(void *arg);
@@ -333,7 +331,7 @@ bool UART::ConfigurePort()
 // Работает до установки флага need_stop_reading
 void *UART::ReaderThreadFunc(void *)
 {
-    uint8 buffer[BUFFER_SIZE];
+    uint8 buffer[1024];
     int bytes_read;
     fd_set read_fds;
     struct timeval timeout;
