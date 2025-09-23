@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "IPPP/Device/IDevice.h"
-#include "IPPP/Device/DeviceIPPP.h"
+#include "IPPP/Device/Device.h"
 #include "Communicator/UART/UART.h"
 
 
