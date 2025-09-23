@@ -27,7 +27,7 @@ namespace UART
 {
     static int fd = -1;
     static ReceivedCallback recv_callback = nullptr;
-    static pthread_t g_reader_thread;
+    static pthread_t id_thread;
     static bool is_running_thread = false;
     static bool need_stop_reading = false;
 
@@ -101,7 +101,7 @@ bool UART::Open()
     }
 
     need_stop_reading = false;
-    if (pthread_create(&g_reader_thread, nullptr, ReaderThreadFunc, nullptr) != 0)
+    if (pthread_create(&id_thread, nullptr, ReaderThreadFunc, nullptr) != 0)
     {
         LOG_ERROR("Cannot create reader thread");
         flock(fd, LOCK_UN);
@@ -123,7 +123,7 @@ void UART::Close()
     need_stop_reading = true;
     if (is_running_thread)
     {
-        pthread_join(g_reader_thread, nullptr);
+        pthread_join(id_thread, nullptr);
         is_running_thread = false;
     }
 
