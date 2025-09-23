@@ -52,3 +52,9 @@ void EmulatorIPPP::SetCircuitConnection(const Chan &, StateJack::E)
 {
     LOG_ERROR("Not implemented");
 }
+
+
+void EmulatorIPPP::SetTypeScan(TypeScan::E)
+{
+    LOG_ERROR("Not implemented");
+}

@@ -38,12 +38,6 @@ void DeviceEmulator::WriteMicroChip(MicroChip::E, int, uint)
 }
 
 
-void DeviceEmulator::SetTypeScan(TypeScan::E)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
 void DeviceEmulator::SetFirstQueue(const Chan &)
 {
     LOG_ERROR("Not implemented");

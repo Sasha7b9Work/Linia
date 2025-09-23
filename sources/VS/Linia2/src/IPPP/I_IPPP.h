@@ -33,4 +33,7 @@ protected:
 
     // Схема включения канала
     virtual void SetCircuitConnection(const Chan &, StateJack::E) = 0;
+
+    // Вид развёртки
+    virtual void SetTypeScan(TypeScan::E) = 0;
 };

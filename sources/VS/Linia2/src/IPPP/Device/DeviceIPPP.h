@@ -22,8 +22,6 @@ public:
 
     virtual void WriteMicroChip(MicroChip::E, int reg, uint value) override;
 
-    virtual void SetTypeScan(TypeScan::E) override;
-
     virtual void SetFirstQueue(const Chan &) override;
 
     virtual void SetPulseDuration(uint durationUS, bool generation_stump) override;

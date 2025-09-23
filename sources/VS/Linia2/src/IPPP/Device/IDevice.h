@@ -26,9 +26,6 @@ public:
     // Если размер регистра меньше 32, записываются младшие биты
     virtual void WriteMicroChip(MicroChip::E, int reg, uint value) = 0;
 
-    // Вид развёртки
-    virtual void SetTypeScan(TypeScan::E) = 0;
-
     // Первая очередь
     virtual void SetFirstQueue(const Chan &) = 0;
 

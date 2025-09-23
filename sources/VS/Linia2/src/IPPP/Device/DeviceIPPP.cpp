@@ -58,12 +58,6 @@ void DeviceIPPP::SendCommand(pchar format, ...)
 }
 
 
-void DeviceIPPP::SetTypeScan(TypeScan::E type)
-{
-    SendCommand(":TYPESCAN %s", TypeScan::Name(type));
-}
-
-
 void DeviceIPPP::SetFirstQueue(const Chan &ch)
 {
     SendCommand(":FIRSTQUEUE %s", ch.Name());
