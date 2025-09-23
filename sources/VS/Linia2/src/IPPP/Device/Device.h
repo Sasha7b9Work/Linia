@@ -7,7 +7,7 @@ class Device : public IDevice
 {
 public:
 
-    Device() { }
+    Device() = default;
 
     virtual ~Device();
 
