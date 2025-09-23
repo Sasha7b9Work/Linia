@@ -1,10 +1,11 @@
 #pragma once
 
 
-#define uart_device "/dev/ttyS6"
+#define UART_DEVICE "/dev/ttyS6"
 
 
-namespace UART {
+namespace UART
+{
     typedef void (*ReceivedCallback)(uint8 byte);
 
     void Init();
