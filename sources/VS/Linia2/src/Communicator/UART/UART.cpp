@@ -28,7 +28,7 @@ namespace UART
     static int fd = -1;
     static ReceivedCallback recv_callback = nullptr;
     static pthread_t g_reader_thread;
-    static bool g_thread_running = false;
+    static bool is_running_thread = false;
     static bool g_stop_reading = false;
 
     const size_t BUFFER_SIZE = 1024;
@@ -48,7 +48,7 @@ bool UART::Init(ReceivedCallback callback)
 
     fd = -1;
     recv_callback = callback;
-    g_thread_running = false;
+    is_running_thread = false;
     g_stop_reading = false;
 
     LOG_WRITE("UART initialized successfully");
@@ -112,7 +112,7 @@ bool UART::Open()
         return false;
     }
 
-    g_thread_running = true;
+    is_running_thread = true;
     LOG_WRITE("UART opened successfully on %s with baudrate %d and mode %s", UART_DEVICE, UART_BAUDRATE, UART_MODE);
     return true;
 }
@@ -123,10 +123,10 @@ void UART::Close()
     if (!IsReady()) return;
 
     g_stop_reading = true;
-    if (g_thread_running)
+    if (is_running_thread)
     {
         pthread_join(g_reader_thread, nullptr);
-        g_thread_running = false;
+        is_running_thread = false;
     }
 
     int status;
