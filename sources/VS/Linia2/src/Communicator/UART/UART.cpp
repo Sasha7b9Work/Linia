@@ -36,8 +36,9 @@ namespace UART
     static int GetBaudrateConstant(int baudrate);
     static bool ConfigurePort();
     static void *ReaderThreadFunc(void *arg);
+    static bool Open();
 
-    void Init(ReceivedCallback callback)
+    bool Init(ReceivedCallback callback)
     {
         LOG_WRITE("Initializing UART...");
 
@@ -47,6 +48,8 @@ namespace UART
         g_stop_reading = false;
 
         LOG_WRITE("UART initialized successfully");
+
+        return Open();
     }
 
     void DeInit()

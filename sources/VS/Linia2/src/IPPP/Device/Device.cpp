@@ -14,9 +14,7 @@ Device::~Device()
 
 bool Device::Init()
 {
-    UART::Init(Device::CallbackOnReceive);
-
-    if(UART::Open())
+    if(UART::Init(Device::CallbackOnReceive))
     {
         connected = true;
         running = true;
