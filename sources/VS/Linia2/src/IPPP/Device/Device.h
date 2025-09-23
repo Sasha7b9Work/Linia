@@ -23,6 +23,8 @@ private:
 
     void SendCommand(pchar format, ...);
 
+    static void CallbackOnReceive(uint8);
+
     std::atomic<bool> running = false;
     std::atomic<bool> connected = false;
 };

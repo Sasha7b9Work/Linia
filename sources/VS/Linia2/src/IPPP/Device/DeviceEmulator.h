@@ -18,4 +18,6 @@ public:
 private:
 
     virtual ~DeviceEmulator() { }
+
+    static void CallbackOnReceive(uint8);
 };

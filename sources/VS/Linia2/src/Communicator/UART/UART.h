@@ -10,14 +10,13 @@ namespace UART
 {
     typedef void (*ReceivedCallback)(uint8 byte);
 
-    void Init();
+    void Init(ReceivedCallback callback);
     void DeInit();
 
     bool Open();
     void Close();
     bool SendByte(uint8 byte);
     bool SendBuffer(const void *buffer, int size);
-    void SetCallback(ReceivedCallback callback);
     void Flush();
 
     bool IsReady();

@@ -14,7 +14,7 @@ Device::~Device()
 
 bool Device::Init()
 {
-    UART::Init();
+    UART::Init(Device::CallbackOnReceive);
 
     if(UART::Open())
     {
@@ -35,6 +35,12 @@ void Device::Shutdown()
     UART::DeInit();
 
     connected = false;
+}
+
+
+void Device::CallbackOnReceive(uint8)
+{
+
 }
 
 

@@ -37,11 +37,12 @@ namespace UART
     static bool ConfigurePort();
     static void *ReaderThreadFunc(void *arg);
 
-    void Init()
+    void Init(ReceivedCallback callback)
     {
         LOG_WRITE("Initializing UART...");
+
         g_uart_fd = -1;
-        recv_callback = nullptr;
+        recv_callback = callback;
         g_thread_running = false;
         g_stop_reading = false;
 
