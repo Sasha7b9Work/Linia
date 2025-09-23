@@ -26,7 +26,7 @@
 namespace UART
 {
     static int fd = -1;
-    static ReceivedCallback recv_callback = nullptr;
+    static void (*recv_callback)(uint8) = nullptr;
     static pthread_t id_thread;
     static bool is_running_thread = false;
     static bool need_stop_reading = false;
@@ -40,7 +40,7 @@ namespace UART
 }
 
 
-bool UART::Init(ReceivedCallback callback)
+bool UART::Init(void (*callback)(uint8))
 {
     LOG_WRITE("Initializing UART...");
 

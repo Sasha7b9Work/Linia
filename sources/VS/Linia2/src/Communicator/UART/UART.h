@@ -8,9 +8,7 @@
 
 namespace UART
 {
-    typedef void (*ReceivedCallback)(uint8 byte);
-
-    bool Init(ReceivedCallback callback);
+    bool Init(void (*recv_callback)(uint8));
     void DeInit();
 
     bool SendByte(uint8 byte);
