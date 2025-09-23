@@ -28,7 +28,7 @@ namespace UART
     static int fd = -1;
     static void (*recv_callback)(uint8) = nullptr;
     static pthread_t id_thread = (pthread_t)-1;
-    static bool need_stop_reading = false;
+    static bool need_stop_reading = false;          // С помощью этого флага будем останавливать поток
 
     static int GetBaudrateConstant(int baudrate);
     static bool ConfigurePort();
@@ -37,23 +37,16 @@ namespace UART
     static bool IsReady();
 
     // Функция потока чтения UART
-    // Читает данные из UART и вызывает callback для каждого принятого байта
-    // Работает до установки флага need_stop_reading
+    // Читает данные из UART и вызывает recv_callback для каждого принятого байта
     static void *ReaderThreadFunc(void *arg);
-
 }
 
 
 bool UART::Init(void (*callback)(uint8))
 {
-    LOG_WRITE("Initializing UART...");
-
     fd = -1;
     recv_callback = callback;
-    need_stop_reading = false;
     id_thread = (pthread_t)-1;
-
-    LOG_WRITE("UART initialized successfully");
 
     return Open();
 }
@@ -65,7 +58,6 @@ void UART::DeInit()
     {
         Close();
     }
-    LOG_WRITE("UART deinitialized");
 }
 
 
@@ -323,7 +315,6 @@ bool UART::ConfigurePort()
 void *UART::ReaderThreadFunc(void *)
 {
     uint8 buffer[1024];
-    int bytes_read;
     fd_set read_fds;
     struct timeval timeout;
 
@@ -341,7 +332,7 @@ void *UART::ReaderThreadFunc(void *)
 
         if (result > 0 && FD_ISSET(fd, &read_fds))
         {
-            bytes_read = read(fd, buffer, sizeof(buffer));
+            int bytes_read = read(fd, buffer, sizeof(buffer));
 
             if (bytes_read > 0)
             {
