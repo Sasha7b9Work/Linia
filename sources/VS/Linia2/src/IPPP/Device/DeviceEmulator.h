@@ -24,15 +24,6 @@ public:
 
     //------------------------------------------------------------------------------------------------------------
 
-    virtual void ChanC_SourceRange(RangeU::E) override;
-
-    virtual void ChanC_MeasRange(RangeU::E) override;
-    virtual void ChanC_MeasRange(RangeI::E) override;
-
-    virtual void ChanC_LimitSourceU(int min, int max) override;
-
-    //------------------------------------------------------------------------------------------------------------
-
     virtual void ChanBS_SourceMode(const Chan &, ModeSource::E) override;
     virtual void ChanBS_StepRange(const Chan &, RangeU::E) override;
     virtual void ChanBS_StepRange(const Chan &, RangeI::E) override;

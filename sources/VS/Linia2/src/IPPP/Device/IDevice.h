@@ -33,18 +33,6 @@ public:
     // generation_stump - семейство кривых
     virtual void SetPulseDuration(uint durationUS, bool generation_stump) = 0;
 
-    // Настройки канала C ------------------------------------------------------------------------------------------------
-
-    // Диапазон источника
-    virtual void ChanC_SourceRange(RangeU::E) = 0;
-
-    // Диапазон измерителя
-    virtual void ChanC_MeasRange(RangeU::E) = 0;
-    virtual void ChanC_MeasRange(RangeI::E) = 0;
-
-    // Ограничение источника U от 0 до 100%
-    virtual void ChanC_LimitSourceU(int min, int max) = 0;
-
     // Настройки каналов B и S -------------------------------------------------------------------------------------------
 
     // Режим источника в канале

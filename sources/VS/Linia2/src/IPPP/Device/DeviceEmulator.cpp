@@ -50,29 +50,6 @@ void DeviceEmulator::SetPulseDuration(uint /*durationUS*/, bool)
 }
 
 
-void DeviceEmulator::ChanC_SourceRange(RangeU::E)
-{
-    LOG_ERROR("Not implemented");
-}
-
-void DeviceEmulator::ChanC_MeasRange(RangeU::E)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
-void DeviceEmulator::ChanC_MeasRange(RangeI::E)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
-void DeviceEmulator::ChanC_LimitSourceU(int /*min*/, int /*max*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
 void DeviceEmulator::ChanBS_SourceMode(const Chan &/*chan*/, ModeSource::E /*mode*/)
 {
     LOG_ERROR("Not implemented");

@@ -58,3 +58,26 @@ void EmulatorIPPP::SetTypeScan(TypeScan::E)
 {
     LOG_ERROR("Not implemented");
 }
+
+
+void EmulatorIPPP::ChanC_SourceRange(RangeU::E)
+{
+    LOG_ERROR("Not implemented");
+}
+
+void EmulatorIPPP::ChanC_MeasRange(RangeU::E)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void EmulatorIPPP::ChanC_MeasRange(RangeI::E)
+{
+    LOG_ERROR("Not implemented");
+}
+
+
+void EmulatorIPPP::ChanC_LimitSourceU(int /*min*/, int /*max*/)
+{
+    LOG_ERROR("Not implemented");
+}

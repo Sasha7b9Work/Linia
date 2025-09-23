@@ -71,30 +71,6 @@ void Device::SetPulseDuration(uint durationUS, bool genertaion_stump)
 }
 
 
-void Device::ChanC_SourceRange(RangeU::E range)
-{
-    SendCommand(":C:SOURCE:RANGE %s", RangeU(range).Name(RowRange(Chan::_C), false));
-}
-
-
-void Device::ChanC_MeasRange(RangeU::E range)
-{
-    SendCommand(":C:MEAS:RANGE %s", RangeU(range).Name(RowRange(Chan::_C), false));
-}
-
-
-void Device::ChanC_MeasRange(RangeI::E range)
-{
-    SendCommand(":C:MEAS:RANGE %s", RangeI(range).Name(RowRange(Chan::_C), false));
-}
-
-
-void Device::ChanC_LimitSourceU(int min, int max)
-{
-    SendCommand(":C:SOURCE:LIMIT %d %d", min, max);
-}
-
-
 void Device::ChanBS_SourceMode(const Chan &ch, ModeSource::E mode)
 {
     if (IsChanBS(ch))
