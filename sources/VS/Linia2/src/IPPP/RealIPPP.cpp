@@ -93,3 +93,9 @@ void RealIPPP::Pause()
     {
     }
 }
+
+
+void RealIPPP::SetPointCount(int /*count*/)
+{
+
+}

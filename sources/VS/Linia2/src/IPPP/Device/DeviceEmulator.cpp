@@ -148,12 +148,6 @@ void DeviceEmulator::ChanBS_LimitThreshold(const Chan &/*chan*/, int /*threshold
 }
 
 
-void DeviceEmulator::SetPointCount(int)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
 void DeviceEmulator::StartMeasurement()
 {
     LOG_ERROR("Not implemented");

@@ -17,8 +17,6 @@ public:
 
     virtual bool IsConnected() const override;
 
-    virtual void SetPointCount(int) override;
-
     virtual void StartMeasurement() override;
     virtual void StopMeasurement() override;
 

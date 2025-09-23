@@ -40,3 +40,9 @@ bool EmulatorIPPP::ReadData(std::vector<int>(& /*data*/)[4])
 {
     return false;
 }
+
+
+void EmulatorIPPP::SetPointCount(int)
+{
+    LOG_ERROR("Not implemented");
+}

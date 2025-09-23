@@ -242,12 +242,6 @@ bool DeviceIPPP::IsChanBS(const Chan &ch) const
 }
 
 
-void DeviceIPPP::SetPointCount(int count)
-{
-    SendCommand(":POINTCOUNT %d", count);
-}
-
-
 void DeviceIPPP::StartMeasurement()
 {
     SendCommand(":MEAS:START");

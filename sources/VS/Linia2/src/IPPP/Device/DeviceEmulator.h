@@ -13,11 +13,8 @@ public:
 
     virtual bool IsConnected() const;
 
-    virtual void SetPointCount(int) override;
-
     virtual void StartMeasurement() override;
     virtual void StopMeasurement() override;
-
 
     virtual void WriteMicroChip(MicroChip::E, int reg, uint value) override;
 

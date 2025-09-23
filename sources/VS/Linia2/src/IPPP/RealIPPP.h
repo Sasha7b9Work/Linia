@@ -20,4 +20,6 @@ private:
     virtual bool ReadData(std::vector<int>(&data)[4]);
 
     void Pause();
+
+    virtual void SetPointCount(int) override;
 };

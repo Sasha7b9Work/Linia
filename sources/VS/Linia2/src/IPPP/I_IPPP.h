@@ -27,4 +27,7 @@ protected:
 
     // Читает четыре массива значений из ПЛИС
     virtual bool ReadData(std::vector<int>(&data)[4]) = 0;
+
+    // Количество точек в режиме DC или импульсном
+    virtual void SetPointCount(int) = 0;
 };
