@@ -71,18 +71,6 @@ void Device::SetPulseDuration(uint durationUS, bool genertaion_stump)
 }
 
 
-void Device::StartMeasurement()
-{
-    SendCommand(":MEAS:START");
-}
-
-
-void Device::StopMeasurement()
-{
-    SendCommand(":MEAS:STOP");
-}
-
-
 void Device::WriteMicroChip(MicroChip::E chip, int reg, uint value)
 {
     SendCommand(":CHIP:%s:%d:WRITE %08X", MicroChip::Name(chip), reg, value);

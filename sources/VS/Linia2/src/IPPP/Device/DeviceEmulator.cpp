@@ -48,15 +48,3 @@ void DeviceEmulator::SetPulseDuration(uint /*durationUS*/, bool)
 {
     LOG_ERROR("Not implemented");
 }
-
-
-void DeviceEmulator::StartMeasurement()
-{
-    LOG_ERROR("Not implemented");
-}
-
-
-void DeviceEmulator::StopMeasurement()
-{
-    LOG_ERROR("Not implemented");
-}

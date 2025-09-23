@@ -17,9 +17,6 @@ public:
 
     virtual bool IsConnected() const override;
 
-    virtual void StartMeasurement() override;
-    virtual void StopMeasurement() override;
-
     virtual void WriteMicroChip(MicroChip::E, int reg, uint value) override;
 
     virtual void SetFirstQueue(const Chan &) override;

@@ -19,9 +19,6 @@ public:
 
     virtual bool IsConnected() const = 0;
 
-    virtual void StartMeasurement() = 0;
-    virtual void StopMeasurement() = 0;
-
     // Записать значение в регистр.
     // Если размер регистра меньше 32, записываются младшие биты
     virtual void WriteMicroChip(MicroChip::E, int reg, uint value) = 0;
