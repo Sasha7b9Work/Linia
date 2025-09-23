@@ -27,8 +27,7 @@ namespace UART
 {
     static int fd = -1;
     static void (*recv_callback)(uint8) = nullptr;
-    static pthread_t id_thread;
-    static bool is_running_thread = false;
+    static pthread_t id_thread = (pthread_t)-1;
     static bool need_stop_reading = false;
 
     static int GetBaudrateConstant(int baudrate);
@@ -51,8 +50,8 @@ bool UART::Init(void (*callback)(uint8))
 
     fd = -1;
     recv_callback = callback;
-    is_running_thread = false;
     need_stop_reading = false;
+    id_thread = (pthread_t)-1;
 
     LOG_WRITE("UART initialized successfully");
 
@@ -112,7 +111,6 @@ bool UART::Open()
         return false;
     }
 
-    is_running_thread = true;
     LOG_WRITE("UART opened successfully on %s with baudrate %d and mode %s", UART_DEVICE, UART_BAUDRATE, UART_MODE);
     return true;
 }
@@ -123,10 +121,10 @@ void UART::Close()
     if (!IsReady()) return;
 
     need_stop_reading = true;
-    if (is_running_thread)
+    if (id_thread != (pthread_t)-1)
     {
         pthread_join(id_thread, nullptr);
-        is_running_thread = false;
+        id_thread = (pthread_t)-1;
     }
 
     int status;

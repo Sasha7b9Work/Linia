@@ -12,7 +12,7 @@ namespace UART
 
     void DeInit();
 
-    bool SendByte(uint8 byte);
+    bool SendByte(uint8);
 
     // Отправка буфера данных через UART порциями по 32 байта
     bool SendBuffer(const void *buffer, int size);
