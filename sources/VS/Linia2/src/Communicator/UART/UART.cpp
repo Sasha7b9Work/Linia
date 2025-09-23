@@ -26,8 +26,8 @@
 namespace UART
 {
     static int g_uart_fd = -1;
-    static int g_baudrate = 115200;
-    static char g_mode[4] = "8N1";
+    static const int g_baudrate = 115200;
+    static const char g_mode[4] = "8N1";
     static ReceivedCallback g_callback = nullptr;
     static pthread_t g_reader_thread;
     static bool g_thread_running = false;
@@ -37,15 +37,13 @@ namespace UART
     const size_t BUFFER_SIZE = 1024;
 
     static int GetBaudrateConstant(int baudrate);
-    static bool ConfigurePort(int baudrate, const char *mode);
+    static bool ConfigurePort();
     static void *ReaderThreadFunc(void *arg);
 
     void Init()
     {
         LOG_WRITE("Initializing UART...");
         g_uart_fd = -1;
-        g_baudrate = 115200;
-        strcpy(g_mode, "8N1");
         g_callback = nullptr;
         g_thread_running = false;
         g_stop_reading = false;
@@ -65,7 +63,7 @@ namespace UART
     // Открытие UART порта с настройкой параметров и запуском потока чтения
     // Принимает: baudrate - скорость передачи (9600, 19200 и т.д.), mode - формат данных ("8N1" и т.д.)
     // Возвращает: true если порт успешно открыт, false при ошибке
-    bool Open(int baudrate, const char *mode)
+    bool Open()
     {
         if (IsReady())
         {
@@ -88,7 +86,7 @@ namespace UART
             return false;
         }
 
-        if (!ConfigurePort(baudrate, mode))
+        if (!ConfigurePort())
         {
             LOG_ERROR("Cannot configure UART port");
             flock(g_uart_fd, LOCK_UN);
@@ -96,10 +94,6 @@ namespace UART
             g_uart_fd = -1;
             return false;
         }
-
-        g_baudrate = baudrate;
-        strncpy(g_mode, mode, sizeof(g_mode) - 1);
-        g_mode[sizeof(g_mode) - 1] = '\0';
 
         g_stop_reading = false;
         if (pthread_create(&g_reader_thread, nullptr, ReaderThreadFunc, nullptr) != 0)
@@ -112,7 +106,7 @@ namespace UART
         }
 
         g_thread_running = true;
-        LOG_WRITE("UART opened successfully on %s with baudrate %d and mode %s", UART_DEVICE, baudrate, mode);
+        LOG_WRITE("UART opened successfully on %s with baudrate %d and mode %s", UART_DEVICE, g_baudrate, g_mode);
         return true;
     }
 
@@ -245,9 +239,6 @@ namespace UART
         return g_mode;
     }
 
-    // Внутренняя функция: преобразование скорости в системную константу
-    // Принимает: скорость (9600, 19200 и т.д.)
-    // Возвращает: системная константа (B115200, B9600, и т.д.)
     static int GetBaudrateConstant(int baudrate)
     {
         switch (baudrate)
@@ -264,26 +255,23 @@ namespace UART
         }
     }
 
-    // Внутренняя функция: настройка параметров UART порта
-    // Принимает: baudrate - скорость передачи (9600, 19200 и т.д.), mode - режим передачи ("8N1" и т.д.)
-    // Возвращает: true если настройка успешна, false при ошибке
-    static bool ConfigurePort(int baudrate, const char *mode)
+    static bool ConfigurePort()
     {
         struct termios port_settings;
         memset(&port_settings, 0, sizeof(port_settings));
 
-        int baudr = GetBaudrateConstant(baudrate);
+        int baudr = GetBaudrateConstant(g_baudrate);
         if (baudr == -1)
         {
-            LOG_ERROR("Unsupported baudrate: %d", baudrate);
+            LOG_ERROR("Unsupported baudrate: %d", g_baudrate);
             return false;
         }
 
         int cbits = CS8, cpar = 0, ipar = IGNPAR, bstop = 0;
 
-        if (strlen(mode) == 3)
+        if (strlen(g_mode) == 3)
         {
-            switch (mode[0])
+            switch (g_mode[0])
             {
             case '8': cbits = CS8; break; //-V1048
             case '7': cbits = CS7; break;
@@ -292,7 +280,7 @@ namespace UART
             default: cbits = CS8; break; //-V1048
             }
 
-            switch (mode[1])
+            switch (g_mode[1])
             {
             case 'N': case 'n': cpar = 0; ipar = IGNPAR; break; //-V1048 //-V525
             case 'E': case 'e': cpar = PARENB; ipar = INPCK; break;
@@ -300,7 +288,7 @@ namespace UART
             default: cpar = 0; ipar = IGNPAR; break; //-V1048
             }
 
-            switch (mode[2])
+            switch (g_mode[2])
             {
             case '1': bstop = 0; break;
             case '2': bstop = CSTOPB; break;

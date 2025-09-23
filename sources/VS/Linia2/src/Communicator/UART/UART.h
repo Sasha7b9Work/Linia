@@ -10,7 +10,7 @@ namespace UART {
     void Init();
     void DeInit();
 
-    bool Open(int baudrate, const char *mode);
+    bool Open();
     void Close();
     bool SendByte(uint8 byte);
     bool SendBuffer(const void *buffer, int size);

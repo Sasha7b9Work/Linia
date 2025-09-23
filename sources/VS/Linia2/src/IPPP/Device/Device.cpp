@@ -16,7 +16,7 @@ bool Device::Init()
 {
     UART::Init();
 
-    if (UART::Open(115200, "8N1"))
+    if(UART::Open())
     {
         connected = true;
         running = true;
