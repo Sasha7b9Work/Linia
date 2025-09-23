@@ -38,6 +38,10 @@ protected:
     // Вид развёртки
     virtual void SetTypeScan(TypeScan::E) = 0;
 
+    // Длительность импульса
+    // generation_stump - семейство кривых
+    virtual void SetPulseDuration(uint durationUS, bool generation_stump) = 0;
+
     // Настройки канала C ------------------------------------------------------------------------------------------------
 
     // Диапазон источника

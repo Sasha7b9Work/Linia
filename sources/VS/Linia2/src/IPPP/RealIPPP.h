@@ -29,6 +29,8 @@ private:
 
     virtual void SetTypeScan(TypeScan::E) override;
 
+    virtual void SetPulseDuration(uint durationUS, bool generation_stump) override;
+
     //------------------------------------------------------------------------------------------------------------
 
     virtual void ChanC_SourceRange(RangeU::E) override;

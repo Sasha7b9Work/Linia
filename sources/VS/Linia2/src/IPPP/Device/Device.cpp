@@ -64,13 +64,6 @@ void Device::SetFirstQueue(const Chan &ch)
 }
 
 
-void Device::SetPulseDuration(uint durationUS, bool genertaion_stump)
-{
-    SendCommand(":PULSE:DURATION %u", durationUS);
-    SendCommand(":GENERATIONSTUP %d", genertaion_stump ? 1 : 0);
-}
-
-
 void Device::WriteMicroChip(MicroChip::E chip, int reg, uint value)
 {
     SendCommand(":CHIP:%s:%d:WRITE %08X", MicroChip::Name(chip), reg, value);

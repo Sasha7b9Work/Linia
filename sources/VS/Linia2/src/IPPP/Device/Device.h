@@ -21,8 +21,6 @@ public:
 
     virtual void SetFirstQueue(const Chan &) override;
 
-    virtual void SetPulseDuration(uint durationUS, bool generation_stump) override;
-
 private:
 
     void SendCommand(pchar format, ...);

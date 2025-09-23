@@ -267,3 +267,10 @@ void RealIPPP::ChanBS_LimitThreshold(const Chan & /*ch*/, int /*threshold*/)
 //        SendCommand(":%s:LIMIT:THRESHOLD %d", ch.Name(), threshold);
 //    }
 }
+
+
+void RealIPPP::SetPulseDuration(uint /*durationUS*/, bool /*genertaion_stump*/)
+{
+//    SendCommand(":PULSE:DURATION %u", durationUS);
+//    SendCommand(":GENERATIONSTUP %d", genertaion_stump ? 1 : 0);
+}

@@ -42,9 +42,3 @@ void DeviceEmulator::SetFirstQueue(const Chan &)
 {
     LOG_ERROR("Not implemented");
 }
-
-
-void DeviceEmulator::SetPulseDuration(uint /*durationUS*/, bool)
-{
-    LOG_ERROR("Not implemented");
-}

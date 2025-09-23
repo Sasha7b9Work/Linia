@@ -144,3 +144,9 @@ void EmulatorIPPP::ChanBS_LimitThreshold(const Chan &/*chan*/, int /*threshold*/
 {
     LOG_ERROR("Not implemented");
 }
+
+
+void EmulatorIPPP::SetPulseDuration(uint /*durationUS*/, bool)
+{
+    LOG_ERROR("Not implemented");
+}
