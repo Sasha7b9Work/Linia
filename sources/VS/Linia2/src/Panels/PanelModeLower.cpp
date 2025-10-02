@@ -31,7 +31,7 @@ PanelModeLower::PanelModeLower(wxWindow *parent) :
 
         new ButtonsCombo(boxCategory, "1 очередь", { 5, 120 }, 100, choices, choices, 1, "comboFirst");
 
-        btnExit = new wxButton(boxCategory, wxID_ANY, "Х", { WIDTH - 35, HEIGHT - 32 }, { 20, 20 });
+        btnExit = new wxButton(boxCategory, wxID_ANY, "Х", { WIDTH - 35, HEIGHT - 52 }, { 20, 20 });
     }
 
     boxCategory->SetFont(boxCategory->TitleFont());
