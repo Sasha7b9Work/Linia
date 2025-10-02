@@ -55,7 +55,7 @@ bool Application::OnInit()
 
     frame->Show();
 
-    I_IPPP::impl = new EmulatorIPPP();
+    I_IPPP::impl = new RealIPPP();
     I_IPPP::impl->Init();
 
     timer.Start(10);

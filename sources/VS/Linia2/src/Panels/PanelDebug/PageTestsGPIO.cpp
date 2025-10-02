@@ -224,19 +224,19 @@ void PageTestsGPIO::OnEventToggleButton(wxCommandEvent &event)
         {
             thread_autoUART_is_running = true;
 
-            thread = new std::thread(ThreadFuncAutoUART);
+            thread_UART = new std::thread(ThreadFuncAutoUART);
 
-            thread->detach();
+            thread_UART->detach();
         }
         else
         {
             thread_autoUART_is_running = false;
 
-            while (thread->joinable())
+            while (thread_UART->joinable())
             {
             }
 
-            SAFE_DELETE(thread);
+            SAFE_DELETE(thread_UART);
         }
     }
 }
@@ -298,33 +298,33 @@ void PageTestsGPIO::OnChangeStatePin(PinOut *pin, bool state)
 
 void PageTestsGPIO::Init()
 {
-    if (thread)
+    if (_thread)
     {
         return;
     }
 
     thread_is_running = true;
 
-    thread = new std::thread(ThreadFunc);
+    _thread = new std::thread(ThreadFunc);
 
-    thread->detach();
+    _thread->detach();
 }
 
 
 void PageTestsGPIO::DeInit()
 {
-    if(!thread)
+    if(!_thread)
     {
         return;
     }
 
     thread_is_running = false;
 
-    while (thread->joinable())
+    while (_thread->joinable())
     {
     }
 
-    SAFE_DELETE(thread);
+    SAFE_DELETE(_thread);
 }
 
 

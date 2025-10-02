@@ -55,11 +55,11 @@ private:
 
     static void ThreadFunc();
     static bool thread_is_running;
+    std::thread *_thread = nullptr;
 
     static void ThreadFuncAutoUART();
     static bool thread_autoUART_is_running;
-
-    std::thread *thread = nullptr;
+    std::thread *thread_UART = nullptr;
 
     static void CallbackOnStart(bool);
     static void CallbackOnStop(bool);
