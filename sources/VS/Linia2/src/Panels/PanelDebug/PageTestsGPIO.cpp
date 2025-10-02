@@ -2,11 +2,13 @@
 #include "defines.h"
 #include "Panels/PanelDebug/PageTestsGPIO.h"
 #include "Utils/SystemDepend.h"
+#include "Communicator/UART/UART.h"
 
 
 PageTestsGPIO *PageTestsGPIO::self = nullptr;
 
 bool PageTestsGPIO::thread_is_running = false;
+bool PageTestsGPIO::thread_autoUART_is_running = false;
 
 
 PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
@@ -86,6 +88,8 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
 
         new wxStaticText(boxUART, wxID_ANY, "Принято:", { 10, 105 });
         new wxTextCtrl(boxUART, wxID_ANY, "", { 10, 130 }, { 100, 20 }, wxTE_READONLY);
+
+        btnAutoUART = new wxToggleButton(boxUART, wxID_ANY, "AutoSend", { 10, 170 }, { 100, 20 });
     }
 
     wxStaticBox *boxSPI = new wxStaticBox(this, wxID_ANY, "SPI", { boxUART->GetPosition().x + boxUART->GetSize().x + 10, 10 }, { 200, 270 });
@@ -99,6 +103,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
     }
 
     Bind(wxEVT_BUTTON, &PageTestsGPIO::OnEventButton, this);
+    Bind(wxEVT_TOGGLEBUTTON, &PageTestsGPIO::OnEventToggleButton, this);
 }
 
 
@@ -207,6 +212,36 @@ void PageTestsGPIO::OnEventButton(wxCommandEvent &event)
 }
 
 
+void PageTestsGPIO::OnEventToggleButton(wxCommandEvent &event)
+{
+    event.Skip();
+
+    int id = event.GetId();
+
+    if (id == btnAutoUART->GetId())
+    {
+        if (event.GetInt())
+        {
+            thread_autoUART_is_running = true;
+
+            thread = new std::thread(ThreadFuncAutoUART);
+
+            thread->detach();
+        }
+        else
+        {
+            thread_autoUART_is_running = false;
+
+            while (thread->joinable())
+            {
+            }
+
+            SAFE_DELETE(thread);
+        }
+    }
+}
+
+
 void PageTestsGPIO::ThreadFunc()
 {
     while (thread_is_running)
@@ -222,6 +257,17 @@ void PageTestsGPIO::ThreadFunc()
         }
 
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    }
+}
+
+
+void PageTestsGPIO::ThreadFuncAutoUART()
+{
+    while (thread_autoUART_is_running)
+    {
+        UART::SendByte(0x55);
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 }
 

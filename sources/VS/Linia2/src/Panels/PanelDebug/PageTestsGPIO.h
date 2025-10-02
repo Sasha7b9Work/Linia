@@ -19,6 +19,7 @@ public:
 private:
 
     wxButton *btnSendUART = nullptr;
+    wxToggleButton *btnAutoUART = nullptr;    // По этой кнопке начинается автоматическая передача по UART
     wxButton *btnSendSPI = nullptr;
 
     wxString NamePin(Pin::E) const;
@@ -50,10 +51,13 @@ private:
     std::vector<StructInGPIO> gpio_in;
 
     void OnEventButton(wxCommandEvent &);
+    void OnEventToggleButton(wxCommandEvent &);
 
     static void ThreadFunc();
-
     static bool thread_is_running;
+
+    static void ThreadFuncAutoUART();
+    static bool thread_autoUART_is_running;
 
     std::thread *thread = nullptr;
 
