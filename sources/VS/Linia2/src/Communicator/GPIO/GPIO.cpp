@@ -9,43 +9,43 @@
 #include <sys/time.h>
 
 
-PinIn pinDAT_F0(Pin::DAT_F0);
-PinIn pinDAT_F1(Pin::DAT_F1);
-PinIn pinDAT_F2(Pin::DAT_F2);
-PinIn pinDAT_F3(Pin::DAT_F3);
-PinIn pinFIFO_FULL(Pin::FIFO_FULL);
+PinIn pinDAT_F0(Pin::In_DAT_F0);
+PinIn pinDAT_F1(Pin::In_DAT_F1);
+PinIn pinDAT_F2(Pin::In_DAT_F2);
+PinIn pinDAT_F3(Pin::In_DAT_F3);
+PinIn pinFIFO_FULL(Pin::In_FIFO_FULL);
 
-PinIn pinSTART(Pin::START);
-PinIn pinSTOP(Pin::STOP);
-PinIn pinKA(Pin::KA);
-PinIn pinKB(Pin::KB);
+PinIn pinSTART(Pin::In_START);
+PinIn pinSTOP(Pin::In_STOP);
+PinIn pinKA(Pin::In_KA);
+PinIn pinKB(Pin::In_KB);
 
-PinOut pinREQ_RD(Pin::REQ_RD);
+PinOut pinREQ_RD(Pin::Out_REQ_RD);
+PinOut pinSPI_CS(Pin::Out_SPI_CS);
 
 
 namespace GPIO
 {
     // Отдельные массивы для разных типов пинов
     static InputPinInfo g_input_pins[] = {
-        // START - pin 15 (GPIO1_B0) 
-        { { 8, "gpiochip1", nullptr, nullptr }, false, nullptr },
-        // STOP - pin 21 (GPIO1_B1)
-        { { 9, "gpiochip1", nullptr, nullptr }, false, nullptr },
-        // DAT_F0 - pin 16 (GPIO3_B5)
-        { { 13, "gpiochip3", nullptr, nullptr }, false, nullptr },
-        // DAT_F1 - pin 18 (GPIO3_B6) 
-        { { 14, "gpiochip3", nullptr, nullptr }, false, nullptr },
-        // DAT_F2 - pin 22 (GPIO1_A2)
-        { { 2, "gpiochip1", nullptr, nullptr }, false, nullptr },
-        // DAT_F3 - pin 24 (GPIO1_B4)
-        { { 12, "gpiochip1", nullptr, nullptr }, false, nullptr },
-        // FIFO_FULL - pin 36 (GPIO3_A5)
-        { { 5, "gpiochip3", nullptr, nullptr }, false, nullptr },
+        { { 8, "gpiochip1", nullptr, nullptr }, false, nullptr },   // START     - pin 15 GPIO1_B0      0
+        { { 9, "gpiochip1", nullptr, nullptr }, false, nullptr },   // STOP      - pin 21 GPIO1_B1      1
+        { { 13, "gpiochip3", nullptr, nullptr }, false, nullptr },  // DAT_F0    - pin 16 GPIO3_B5      2
+        { { 14, "gpiochip3", nullptr, nullptr }, false, nullptr },  // DAT_F1    - pin 18 GPIO3_B6      3
+        { { 2, "gpiochip1", nullptr, nullptr }, false, nullptr },   // DAT_F2    - pin 22 GPIO1_A2      4
+        { { 12, "gpiochip1", nullptr, nullptr }, false, nullptr },  // DAT_F3    - pin 24 GPIO1_B4      5
+        { { 5, "gpiochip3", nullptr, nullptr }, false, nullptr },   // FIFO_FULL - pin 36 GPIO3_A5      6
+
+        // \todo Проверить
+        { { 4, "gpiochip1", nullptr, nullptr }, false, nullptr },   // KA        - pin 11 GPIO1_A4      7
+        { { 7, "gpiochip1", nullptr, nullptr }, false, nullptr }    // KB        - pin 13 GPIO1_A7      8
     };
 
     static OutputPinInfo g_output_pins[] = {
-        // REQ_RD - pin 32 (GPIO1_A3)
-        { { 3, "gpiochip1", nullptr, nullptr } },
+        { { 3, "gpiochip1", nullptr, nullptr } },       // REQ_RD - pin 32 GPIO1_A3 0
+
+        // \todo Проверить
+        { { 13, "gpiochip1", nullptr, nullptr } }       // SPI_CS - pin 26 GPIO1_B5 1
     };
 
     // Маппинг enum Pin::Type на индексы в массивах
@@ -53,14 +53,17 @@ namespace GPIO
         bool is_input;
         int index;
     } g_pin_mapping[] = {
-        { true,  0 },  // START -> g_input_pins[0]
-        { true,  1 },  // STOP -> g_input_pins[1]
-        { true,  2 },  // DAT_F0 -> g_input_pins[2]
-        { true,  3 },  // DAT_F1 -> g_input_pins[3]
-        { true,  4 },  // DAT_F2 -> g_input_pins[4]
-        { true,  5 },  // DAT_F3 -> g_input_pins[5]
-        { true,  6 },  // FIFO_FULL -> g_input_pins[6]
-        { false, 0 },  // REQ_RD -> g_output_pins[0]
+        { true,  0 },   // START
+        { true,  1 },   // STOP
+        { true,  2 },   // DAT_F0
+        { true,  3 },   // DAT_F1
+        { true,  4 },   // DAT_F2
+        { true,  5 },   // DAT_F3
+        { true,  6 },   // FIFO_FULL
+        { false, 0 },   // REQ_RD
+        { true,  7 },   // KA
+        { true,  8 },    // KB
+        { false, 1 }    // SPI_CS
     };
 
     static pthread_t g_monitor_thread;

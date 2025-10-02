@@ -34,19 +34,17 @@ class Pin
 public:
     enum E
     {
-        START,          // Кнопка СТАРТ
-        STOP,           // Кнопка СТОП
-        DAT_F0,
-        DAT_F1,
-        DAT_F2,
-        DAT_F3,
-        FIFO_FULL,
-        REQ_RD,
-        KA,             // 11  Энкодер А
-        KB,             // 13  Энкодер B
-//        FIFO_EMPTY,   Конт. 26
-//        ENB_PC,       27
-//        RDY,          40
+        In_START,       // Кнопка СТАРТ
+        In_STOP,        // Кнопка СТОП
+        In_DAT_F0,      //
+        In_DAT_F1,      //
+        In_DAT_F2,      //
+        In_DAT_F3,      //
+        In_FIFO_FULL,   //
+        Out_REQ_RD,     //
+        In_KA,          // 11 GPIO1_A4
+        In_KB,          // 13 GPIO1_A7
+        Out_SPI_CS,     // 26 GPIO1_B5
         Count
     };
     explicit Pin(E type) : type_(type) { }
@@ -110,3 +108,4 @@ extern PinIn pinKA;
 extern PinIn pinKB;
 
 extern PinOut pinREQ_RD;
+extern PinOut pinSPI_CS;
