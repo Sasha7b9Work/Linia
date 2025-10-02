@@ -9,6 +9,7 @@ PageTestsGPIO *PageTestsGPIO::self = nullptr;
 
 bool PageTestsGPIO::thread_is_running = false;
 bool PageTestsGPIO::thread_autoUART_is_running = false;
+bool PageTestsGPIO::thread_encoder_is_running = false;
 
 
 PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
@@ -100,6 +101,18 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
 
         new wxTextCtrl(boxSPI, wxID_ANY, "", { 10, 70 }, { 100, 20 });
         btnSendSPI = new wxButton(boxSPI, wxID_ANY, "Send", { 120, 70 }, { 50, 20 });
+    }
+
+    wxStaticBox *boxEncoder = new wxStaticBox(this, wxID_ANY, "Encoder", { boxSPI->GetPosition().x + boxSPI->GetSize().x + 10, 10 }, { 200, 270 });
+
+    {
+        new wxStaticText(boxEncoder, wxID_ANY, "KA : 11", { 10, 20 });
+        txtKA = new wxTextCtrl(boxEncoder, wxID_ANY, "0", { 50, 20 }, { 30, 20 });
+        txtKA->SetEditable(false);
+
+        new wxStaticText(boxEncoder, wxID_ANY, "KB : 13", { 10, 45 });
+        txtKB = new wxTextCtrl(boxEncoder, wxID_ANY, "0", { 50, 45 }, { 30, 20 });
+        txtKB->SetEditable(false);
     }
 
     Bind(wxEVT_BUTTON, &PageTestsGPIO::OnEventButton, this);
@@ -220,6 +233,8 @@ void PageTestsGPIO::OnEventToggleButton(wxCommandEvent &event)
 
     if (id == btnAutoUART->GetId())
     {
+        btnSendUART->Enable(event.GetInt() == 0);
+
         if (event.GetInt())
         {
             thread_autoUART_is_running = true;
@@ -272,6 +287,50 @@ void PageTestsGPIO::ThreadFuncAutoUART()
 }
 
 
+void PageTestsGPIO::ThreadFuncEncoder()
+{
+    static bool prevKA = false;
+    static bool prevKB = false;
+
+    bool first = true;
+
+    while (thread_encoder_is_running)
+    {
+        if (first)
+        {
+            first = false;
+            prevKA = pinKA.Get();
+            prevKB = pinKB.Get();
+        }
+        else
+        {
+            bool valKA = pinKA.Get();
+            bool valKB = pinKB.Get();
+
+            if (valKA != prevKA)
+            {
+                prevKA = valKA;
+
+                int value = 0;
+                PageTestsGPIO::self->txtKA->GetValue().ToInt(&value);
+                PageTestsGPIO::self->txtKA->SetValue(wxString::Format("%d", value + 1));
+            }
+
+            if (valKB != prevKB)
+            {
+                prevKB = valKB;
+
+                int value = 0;
+                PageTestsGPIO::self->txtKB->GetValue().ToInt(&value);
+                PageTestsGPIO::self->txtKB->SetValue(wxString::Format("%d", value + 1));
+            }
+        }
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    }
+}
+
+
 void PageTestsGPIO::OnChangeStatePin(PinIn *pin, bool state)
 {
     for (auto &str : PageTestsGPIO::self->gpio_in)
@@ -304,10 +363,12 @@ void PageTestsGPIO::Init()
     }
 
     thread_is_running = true;
-
     _thread = new std::thread(ThreadFunc);
-
     _thread->detach();
+
+    thread_encoder_is_running = true;
+    thread_encoder = new std::thread(ThreadFuncEncoder);
+    thread_encoder->detach();
 }
 
 
@@ -319,12 +380,18 @@ void PageTestsGPIO::DeInit()
     }
 
     thread_is_running = false;
+    thread_encoder_is_running = false;
 
     while (_thread->joinable())
     {
     }
 
+    while (thread_encoder->joinable())
+    {
+    }
+
     SAFE_DELETE(_thread);
+    SAFE_DELETE(thread_encoder);
 }
 
 
@@ -367,3 +434,4 @@ void PageTestsGPIO::CallbackonREQ_RD(bool state)
 {
     PageTestsGPIO::self->OnChangeStatePin(&pinREQ_RD, state);
 }
+

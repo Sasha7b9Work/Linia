@@ -16,6 +16,9 @@ public:
 
     void DeInit();
 
+    wxTextCtrl *txtKA = nullptr;
+    wxTextCtrl *txtKB = nullptr;
+
 private:
 
     wxButton *btnSendUART = nullptr;
@@ -53,14 +56,6 @@ private:
     void OnEventButton(wxCommandEvent &);
     void OnEventToggleButton(wxCommandEvent &);
 
-    static void ThreadFunc();
-    static bool thread_is_running;
-    std::thread *_thread = nullptr;
-
-    static void ThreadFuncAutoUART();
-    static bool thread_autoUART_is_running;
-    std::thread *thread_UART = nullptr;
-
     static void CallbackOnStart(bool);
     static void CallbackOnStop(bool);
     static void CallbackOnDAT_F0(bool);
@@ -72,4 +67,16 @@ private:
 
     void OnChangeStatePin(PinIn *, bool state);
     void OnChangeStatePin(PinOut *, bool state);
+
+    static void ThreadFunc();
+    static bool thread_is_running;
+    std::thread *_thread = nullptr;
+
+    static void ThreadFuncAutoUART();
+    static bool thread_autoUART_is_running;
+    std::thread *thread_UART = nullptr;
+
+    static void ThreadFuncEncoder();
+    static bool thread_encoder_is_running;
+    std::thread *thread_encoder = nullptr;
 };
