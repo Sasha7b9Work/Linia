@@ -18,4 +18,10 @@ public:
     PanelModeLower(wxWindow *parent);
 
     static PanelModeLower *self;
+
+private:
+
+    wxButton *btnExit = nullptr;
+
+    void OnEventButton(wxCommandEvent &);
 };
