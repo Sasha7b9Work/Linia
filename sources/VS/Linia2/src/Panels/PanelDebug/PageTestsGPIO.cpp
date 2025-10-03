@@ -78,6 +78,17 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
         }
     }
 
+    wxStaticBox *boxFPGA = new wxStaticBox(this, wxID_ANY, "FPGA", { boxGPIO->GetPosition().x,
+        boxGPIO->GetPosition().y + boxGPIO->GetSize().y + 10 }, { 400, 270 });
+
+    {
+        new wxStaticText(boxFPGA, wxID_ANY, "Кол-во измерений", { 10, 20 });
+        txtNumberMeas = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 20 });
+
+        new wxStaticText(boxFPGA, wxID_ANY, "Кол-во FULL", { 10, 50 });
+        txtNumberFULL = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 50 });
+    }
+
     wxStaticBox *boxUART = new wxStaticBox(this, wxID_ANY, "UART", { boxGPIO->GetPosition().x + boxGPIO->GetSize().x + 10, 10 }, { 200, 270 });
 
     {

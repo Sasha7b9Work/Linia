@@ -24,6 +24,8 @@ private:
     wxButton *btnSendUART = nullptr;
     wxToggleButton *btnAutoUART = nullptr;    // По этой кнопке начинается автоматическая передача по UART
     wxButton *btnSendSPI = nullptr;
+    wxTextCtrl *txtNumberMeas = nullptr;
+    wxTextCtrl *txtNumberFULL = nullptr;
 
     wxString NamePin(Pin::E) const;
 
