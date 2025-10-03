@@ -84,6 +84,10 @@ public:
     using Pin::Pin;
 
     void Set(bool state);
+
+    void ToLow();
+
+    void ToHi();
 };
 
 namespace GPIO

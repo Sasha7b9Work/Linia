@@ -422,6 +422,7 @@ bool Pin::Get() const
     return false;
 }
 
+
 void PinOut::Set(bool state)
 {
     if (type_ >= Pin::Count) return;
@@ -435,6 +436,19 @@ void PinOut::Set(bool state)
         LOG_ERROR("Error: Cannot set GPIO pin %d to %s", info->hw.pin_number, state ? "HIGH" : "LOW");
     }
 }
+
+
+void PinOut::ToHi()
+{
+    Set(true);
+}
+
+
+void PinOut::ToLow()
+{
+    Set(false);
+}
+
 
 void PinIn::SetChangeCallback(ChangeCallback callback)
 {
