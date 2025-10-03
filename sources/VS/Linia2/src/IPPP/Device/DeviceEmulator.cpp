@@ -8,7 +8,7 @@
 
 bool DeviceEmulator::Init()
 {
-//    GPIO::Init();
+    GPIO::Init();
     SPI::Init();
     UART::Init(DeviceEmulator::CallbackOnReceive);
 

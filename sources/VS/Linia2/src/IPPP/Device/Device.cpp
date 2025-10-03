@@ -2,7 +2,8 @@
 #include "IPPP/Device/IDevice.h"
 #include "IPPP/Device/Device.h"
 #include "Communicator/UART/UART.h"
-
+#include "Communicator/GPIO/GPIO.h"
+#include "Communicator/SPI/SPI.h"
 
 IDevice *IDevice::impl = nullptr;
 
@@ -14,6 +15,9 @@ Device::~Device()
 
 bool Device::Init()
 {
+    GPIO::Init();
+    SPI::Init();
+
     if(UART::Init(Device::CallbackOnReceive))
     {
         connected = true;

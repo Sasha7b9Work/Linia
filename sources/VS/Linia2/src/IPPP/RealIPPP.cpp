@@ -5,18 +5,20 @@
 #include "IPPP/Device/DeviceEmulator.h"
 #include "Communicator/GPIO/GPIO.h"
 #include "IPPP/Device/Keyboard.h"
+#include "IPPP/Device/Device.h"
 
 
 void RealIPPP::Init()
 {
     LOG_WRITE(" ");
-    IDevice::impl = new DeviceEmulator();
+
+    IDevice::impl = new Device();
 
     IDevice::impl->Init();
 
     pinREQ_RD.Set(false);    // Это состояние означает, что чтение не нужно
 
-    Keyboard::Init();
+//    Keyboard::Init();
     LOG_WRITE(" ");
 }
 
