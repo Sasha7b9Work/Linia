@@ -360,7 +360,7 @@ void PageTestsGPIO::FuncFPGA()
 
         bool _error = false;
 
-        while (bytes_left)
+        while (bytes_left > 0)
         {
             pinSPI_CS.ToHi();
 
