@@ -350,7 +350,9 @@ void PageTestsGPIO::FuncFPGA()
 {
     static const int SIZE_BUFFER = 8000 / 8;
 
-    if (pinFIFO_FULL.Get())
+    static bool prev = false;
+
+    if (pinFIFO_FULL.Get() && prev == false)
     {
         for (int i = 0; i < SIZE_BUFFER * 8; i++)
         {
@@ -361,6 +363,8 @@ void PageTestsGPIO::FuncFPGA()
 
         PageTestsGPIO::self->valueMeas++;
     }
+
+    prev = pinFIFO_FULL.Get();
 }
 
 
