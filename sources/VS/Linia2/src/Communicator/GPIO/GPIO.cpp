@@ -293,6 +293,8 @@ namespace GPIO
 
         while (!g_stop_monitoring)
         {
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
             FD_ZERO(&read_fds);
 
             for (int i = 0; i < input_count; i++)
