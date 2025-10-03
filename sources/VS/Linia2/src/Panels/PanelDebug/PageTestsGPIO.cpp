@@ -348,7 +348,7 @@ void PageTestsGPIO::FuncEncoder()
 
 void PageTestsGPIO::FuncFPGA()
 {
-    static const int SIZE_BUFFER = 8000 / 8 * 4;
+    static const int SIZE_BUFFER = 8000 / 8;
 
     if (pinFIFO_FULL.Get())
     {
