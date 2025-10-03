@@ -75,7 +75,7 @@ else()
         -pthread
         -Wno-unknown-pragmas
         -Wno-write-strings
-        -g                       # Без этого Code Blocks не останавливается на точках останова
+        -g3                       # Без этого Code Blocks не останавливается на точках останова
         -O0
     )
 endif()
