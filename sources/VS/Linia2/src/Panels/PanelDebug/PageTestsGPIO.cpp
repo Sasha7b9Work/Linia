@@ -355,19 +355,19 @@ void PageTestsGPIO::OnChangeStatePin(PinOut *pin, bool state)
 
 void PageTestsGPIO::Init()
 {
-//    if (!_thread)
-//    {
-//        thread_is_running = true;
-//        _thread = new std::thread(ThreadFunc);
-//        _thread->detach();
-//    }
-//
-//    if (!thread_encoder)
-//    {
-//        thread_encoder_is_running = true;
-//        thread_encoder = new std::thread(ThreadFuncEncoder);
-//        thread_encoder->detach();
-//    }
+    if (!_thread)
+    {
+        thread_is_running = true;
+        _thread = new std::thread(ThreadFunc);
+        _thread->detach();
+    }
+
+    if (!thread_encoder)
+    {
+        thread_encoder_is_running = true;
+        thread_encoder = new std::thread(ThreadFuncEncoder);
+        thread_encoder->detach();
+    }
 }
 
 
