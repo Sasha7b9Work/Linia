@@ -164,6 +164,10 @@ add_executable(${PROJECT_NAME}
     ${PLUGS_LINUX}
 )
 
+set_source_files_properties(
+    src/version.cpp
+    PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON
+)
 
 if(WIN32)
     target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_lib/wxbase32u)

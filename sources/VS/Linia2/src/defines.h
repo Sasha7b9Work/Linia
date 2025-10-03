@@ -99,5 +99,4 @@ static pString DIRECT_PROMT = "<- ";
 #include "Utils/Log.h"
 
 extern uint VERSION_BUILD;
-
 extern pchar DATE_BUILD;
