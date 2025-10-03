@@ -283,8 +283,6 @@ namespace GPIO
                 max_fd = fd;
 
             info.last_state = (gpiod_line_get_value(info.hw.line) == 1);
-
-            LOG_WRITE("GPIO pin %d configured for event monitoring", info.hw.pin_number);
         }
 
         if (input_count == 0)
