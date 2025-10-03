@@ -115,7 +115,7 @@ MainWindow::MainWindow(const wxString &title)
 
     new PanelButtons(this);
 
-    new PanelDebug(this);
+//    new PanelDebug(this);
 
     new PanelReferenceGraph(this);
 
@@ -214,7 +214,7 @@ void MainWindow::OnQuit(wxCommandEvent &WXUNUSED(event))
 
 void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 {
-    PanelDebug::self->Show(false);
+//    PanelDebug::self->Show(false);
 
     Test::Save("example.tst");
 
@@ -279,7 +279,7 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
     PanelTable::self->Show(mode == ModeMainWindow::Standard);
     PanelButtons::self->Show(mode == ModeMainWindow::Standard);
 
-    PanelDebug::self->Show(mode == ModeMainWindow::Debug);
+//    PanelDebug::self->Show(mode == ModeMainWindow::Debug);
 
     PanelReferenceGraph::self->Show(mode == ModeMainWindow::ReferenceGraphs);
 
