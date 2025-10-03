@@ -96,7 +96,7 @@ void Application::OnTimer(wxTimerEvent &)
     {
         ComPort::Update();
 
-        I_IPPP::impl->Update();
+//        I_IPPP::impl->Update();
 
         mutex.unlock();
     };
