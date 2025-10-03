@@ -113,7 +113,7 @@ MainWindow::MainWindow(const wxString &title)
 
     new PanelTable(this);
 
-    new PanelButtons(this);
+//    new PanelButtons(this);
 
 //    new PanelDebug(this);
 
@@ -277,7 +277,7 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
     PanelIndicator::self->Show(mode == ModeMainWindow::Standard);
     PanelModeLower::self->Show(mode == ModeMainWindow::Standard);
     PanelTable::self->Show(mode == ModeMainWindow::Standard);
-    PanelButtons::self->Show(mode == ModeMainWindow::Standard);
+//    PanelButtons::self->Show(mode == ModeMainWindow::Standard);
 
 //    PanelDebug::self->Show(mode == ModeMainWindow::Debug);
 
