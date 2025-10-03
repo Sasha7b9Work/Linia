@@ -106,6 +106,7 @@ namespace GPIO
 {
     void Init()
     {
+        return;
         LOG_WRITE("Initializing GPIO...");
 
         for (int i = 0; i < INPUT_PINS_COUNT; i++)
