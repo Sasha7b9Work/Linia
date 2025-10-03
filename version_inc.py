@@ -15,12 +15,14 @@ def CurrentTime():
         '{:-02}'.format(t.second)
 
 def ProcessLine(line):
-    if line.startswith("#define VERSION_BUILD"):
+    if line.startswith("unsigned int VERSION_BUILD = "):
         strings = line.split(" ")
-        line = strings[0] + " " + strings[1] + " " + str(int(strings[2]) + 1) + "\n"
+        line = strings[0] + " " + strings[1] + " " + strings[2] + " " + strings[3] + " " + str(int(strings[4]) + 1) + " ;\n"
+
     if line.startswith("#define DATE_BUILD"):
         strings = line.split(" ")
-        line = strings[0] + " " + strings[1] + " " + "\"" + CurrentTime() + "\"\n"
+        line = strings[0] + " " + strings[1] + " " + strings[2] + " " + strings[3] + " \"" + CurrentTime() + "\" \n"
+
     return line
 
 def ProcessFile(name_file):
@@ -35,4 +37,4 @@ def ProcessFile(name_file):
                 file.write(line)
             file.close()
 
-ProcessFile("sources/VS/Linia2/src/defines.h")
+ProcessFile("sources/VS/Linia2/src/version.cpp")

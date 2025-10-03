@@ -2,10 +2,6 @@
 #pragma once
 
 
-#define VERSION_BUILD 413
-#define DATE_BUILD "2025-10-03 19:14:26"
-
-
 #define WIN32_LEAN_AND_MEAN
 #pragma warning (push, 0)
 #include <wx/config.h>
@@ -101,3 +97,7 @@ static pString DIRECT_PROMT = "<- ";
 #endif
 
 #include "Utils/Log.h"
+
+extern uint VERSION_BUILD;
+
+extern pchar DATE_BUILD;
