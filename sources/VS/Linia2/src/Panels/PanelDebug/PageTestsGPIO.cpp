@@ -383,35 +383,35 @@ void PageTestsGPIO::OnChangeStatePin(PinOut *pin, bool state)
 
 void PageTestsGPIO::Init()
 {
-    LOG_WRITE(" ");
-
-    if (!_thread)
-    {
-        thread_is_running = true;
-        _thread = new std::thread(ThreadFunc);
-        _thread->detach();
-    }
-
-    LOG_WRITE(" ");
+//    LOG_WRITE(" ");
+//
+//    if (!_thread)
+//    {
+//        thread_is_running = true;
+//        _thread = new std::thread(ThreadFunc);
+//        _thread->detach();
+//    }
+//
+//    LOG_WRITE(" ");
 }
 
 
 void PageTestsGPIO::DeInit()
 {
-    LOG_WRITE(" ");
-
-    thread_is_running = false;
- 
-    if (_thread)
-    {
-        while (_thread->joinable())
-        {
-        }
-
-        SAFE_DELETE(_thread);
-    }
-
-    LOG_WRITE(" ");
+//    LOG_WRITE(" ");
+//
+//    thread_is_running = false;
+// 
+//    if (_thread)
+//    {
+//        while (_thread->joinable())
+//        {
+//        }
+//
+//        SAFE_DELETE(_thread);
+//    }
+//
+//    LOG_WRITE(" ");
 }
 
 
