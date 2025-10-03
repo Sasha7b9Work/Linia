@@ -117,7 +117,7 @@ MainWindow::MainWindow(const wxString &title)
 
 //    new PanelDebug(this);
 
-    new PanelReferenceGraph(this);
+//    new PanelReferenceGraph(this);
 
     SetMode(SET::GUI::debug_mode.Get() ? ModeMainWindow::Debug : ModeMainWindow::Standard);
 }
@@ -281,7 +281,7 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
 
 //    PanelDebug::self->Show(mode == ModeMainWindow::Debug);
 
-    PanelReferenceGraph::self->Show(mode == ModeMainWindow::ReferenceGraphs);
+//    PanelReferenceGraph::self->Show(mode == ModeMainWindow::ReferenceGraphs);
 
     Display::self->FullScreen(mode == ModeMainWindow::FullGraph);
 
