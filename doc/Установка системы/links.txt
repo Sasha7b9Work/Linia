@@ -17,4 +17,9 @@ https://github.com/Joshua-Riek/ubuntu-rockchip
     в утилите armbian-config включить соотвествующие интерфейсы
     перезагрузить
     
-    
+*** Автологин ***
+    XFCE:
+    sudo nano /etc/lightdm/lightdm.conf
+    [Seat:*]
+    autologin-user=your_username
+    autologin-user-timeout=0
