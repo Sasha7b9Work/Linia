@@ -71,6 +71,8 @@ private:
     void OnChangeStatePin(PinOut *, bool state);
 
     static void ThreadFunc();
+    static void FuncFPGA();
+    static void FuncEncoder();
     static bool thread_is_running;
     std::thread *_thread = nullptr;
 

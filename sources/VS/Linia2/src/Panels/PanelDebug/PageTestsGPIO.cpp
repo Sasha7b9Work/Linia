@@ -267,11 +267,6 @@ void PageTestsGPIO::OnEventToggleButton(wxCommandEvent &event)
 
 void PageTestsGPIO::ThreadFunc()
 {
-    static bool prevKA = false;
-    static bool prevKB = false;
-
-    bool first = true;
-
     while (thread_is_running)
     {
         for (auto &str : PageTestsGPIO::self->gpio_out)
@@ -284,41 +279,60 @@ void PageTestsGPIO::ThreadFunc()
             str.txtStatePull->SetValue(str.pin->Get() ? "1" : "0");
         }
 
-        for (int i = 0; i < 50; i++)
-        {
-            if (first)
-            {
-                first = false;
-                prevKA = pinKA.Get();
-                prevKB = pinKB.Get();
-            }
-            else
-            {
-                bool valKA = pinKA.Get();
-                bool valKB = pinKB.Get();
+        FuncEncoder();
 
-                if (valKA != prevKA)
-                {
-                    prevKA = valKA;
-
-                    int value = 0;
-                    PageTestsGPIO::self->txtKA->GetValue().ToInt(&value);
-                    PageTestsGPIO::self->txtKA->SetValue(wxString::Format("%d", value + 1));
-                }
-
-                if (valKB != prevKB)
-                {
-                    prevKB = valKB;
-
-                    int value = 0;
-                    PageTestsGPIO::self->txtKB->GetValue().ToInt(&value);
-                    PageTestsGPIO::self->txtKB->SetValue(wxString::Format("%d", value + 1));
-                }
-            }
-
-            std::this_thread::sleep_for(std::chrono::milliseconds(1));
-        }
+        FuncFPGA();
     }
+}
+
+
+void PageTestsGPIO::FuncEncoder()
+{
+    static bool prevKA = false;
+    static bool prevKB = false;
+
+    static bool first = true;
+
+    for (int i = 0; i < 50; i++)
+    {
+        if (first)
+        {
+            first = false;
+            prevKA = pinKA.Get();
+            prevKB = pinKB.Get();
+        }
+        else
+        {
+            bool valKA = pinKA.Get();
+            bool valKB = pinKB.Get();
+
+            if (valKA != prevKA)
+            {
+                prevKA = valKA;
+
+                int value = 0;
+                PageTestsGPIO::self->txtKA->GetValue().ToInt(&value);
+                PageTestsGPIO::self->txtKA->SetValue(wxString::Format("%d", value + 1));
+            }
+
+            if (valKB != prevKB)
+            {
+                prevKB = valKB;
+
+                int value = 0;
+                PageTestsGPIO::self->txtKB->GetValue().ToInt(&value);
+                PageTestsGPIO::self->txtKB->SetValue(wxString::Format("%d", value + 1));
+            }
+        }
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    }
+}
+
+
+void PageTestsGPIO::FuncFPGA()
+{
+
 }
 
 
