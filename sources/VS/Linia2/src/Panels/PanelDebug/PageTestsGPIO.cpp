@@ -85,7 +85,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
         _txtNumberMeas = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 20 });
 
         new wxStaticText(boxFPGA, wxID_ANY, "Кол-во FULL", { 10, 50 });
-        _txtNumberFULL = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 50 });
+        _txtNumberErrors = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 50 });
     }
 
     wxStaticBox *boxUART = new wxStaticBox(this, wxID_ANY, "UART", { boxGPIO->GetPosition().x + boxGPIO->GetSize().x + 10, 10 }, { 200, 270 });
@@ -303,6 +303,8 @@ void PageTestsGPIO::Update()
     PageTestsGPIO::self->_txtKB->SetValue(wxString::Format("%d", valueKB));
 
     PageTestsGPIO::self->_txtNumberMeas->SetValue(wxString::Format("%d", valueMeas));
+
+    PageTestsGPIO::self->_txtNumberErrors->SetValue(wxString::Format("%d", numErrors));
 }
 
 
@@ -354,14 +356,50 @@ void PageTestsGPIO::FuncFPGA()
 
     if (pinFIFO_FULL.Get() && prev == false)
     {
-        for (int i = 0; i < SIZE_BUFFER * 8; i++)
+        int bytes_left = 8000;
+
+        uint8 bytes[5];
+
+        bool _error = false;
+
+        while (bytes_left)
         {
-            pinREQ_RD.ToHi();
-            pinDAT_F0.Get();
-            pinREQ_RD.ToLow();
+            pinSPI_CS.ToHi();
+
+            for (int b = 0; b < 5; b++)
+            {
+                uint8 byte = 0;
+
+                for (int i = 7; i >= 0; i--)
+                {
+                    bytes_left--;
+                    pinREQ_RD.ToHi();
+                    if (pinDAT_F0.Get())
+                    {
+                        byte |= (1 << i);
+                    }
+                    pinREQ_RD.ToLow();
+                }
+
+                bytes[b] = byte;
+            }
+
+            pinSPI_CS.ToLow();
+
+            uint8 crc = (uint8)(bytes[0] ^ bytes[1] ^ bytes[2] ^ bytes[3]);
+
+            if (crc != bytes[4])
+            {
+                _error = true;
+            }
         }
 
         PageTestsGPIO::self->valueMeas++;
+
+        if (_error)
+        {
+            PageTestsGPIO::self->numErrors++;
+        }
     }
 
     prev = pinFIFO_FULL.Get();

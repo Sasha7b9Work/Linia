@@ -27,8 +27,9 @@ private:
 
     // FPGA
     wxTextCtrl *_txtNumberMeas = nullptr;
-    wxTextCtrl *_txtNumberFULL = nullptr;
+    wxTextCtrl *_txtNumberErrors = nullptr;
     int valueMeas = 0;
+    int numErrors = 0;
 
     // Ручка
     wxTextCtrl *_txtKA = nullptr;
