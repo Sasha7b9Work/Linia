@@ -350,7 +350,7 @@ void PageTestsGPIO::FuncEncoder()
 
 void PageTestsGPIO::FuncFPGA()
 {
-    static bool prev = false;
+//    static bool prev = false;
 
 //    if (pinFIFO_FULL.Get() && prev == false)
     {
@@ -404,7 +404,7 @@ void PageTestsGPIO::FuncFPGA()
         }
     }
 
-    prev = pinFIFO_FULL.Get();
+//    prev = pinFIFO_FULL.Get();
 }
 
 
