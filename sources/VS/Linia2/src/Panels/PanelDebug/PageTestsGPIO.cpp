@@ -117,10 +117,10 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
 
     {
         new wxStaticText(boxEncoder, wxID_ANY, "KA : 11", { 10, 20 });
-        _txtKA = new wxTextCtrl(boxEncoder, wxID_ANY, "0", { 50, 20 }, { 30, 20 }, wxTE_READONLY);
+        _txtKA = new wxTextCtrl(boxEncoder, wxID_ANY, "0", { 50, 20 }, { 60, 20 }, wxTE_READONLY);
 
         new wxStaticText(boxEncoder, wxID_ANY, "KB : 13", { 10, 45 });
-        _txtKB = new wxTextCtrl(boxEncoder, wxID_ANY, "0", { 50, 45 }, { 30, 20 }, wxTE_READONLY);
+        _txtKB = new wxTextCtrl(boxEncoder, wxID_ANY, "0", { 50, 45 }, { 60, 20 }, wxTE_READONLY);
     }
 
     Bind(wxEVT_BUTTON, &PageTestsGPIO::OnEventButton, this);
