@@ -9,7 +9,6 @@ PageTestsGPIO *PageTestsGPIO::self = nullptr;
 
 bool PageTestsGPIO::thread_is_running = false;
 bool PageTestsGPIO::thread_autoUART_is_running = false;
-bool PageTestsGPIO::thread_encoder_is_running = false;
 
 
 PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
@@ -268,6 +267,11 @@ void PageTestsGPIO::OnEventToggleButton(wxCommandEvent &event)
 
 void PageTestsGPIO::ThreadFunc()
 {
+    static bool prevKA = false;
+    static bool prevKB = false;
+
+    bool first = true;
+
     while (thread_is_running)
     {
         for (auto &str : PageTestsGPIO::self->gpio_out)
@@ -280,7 +284,40 @@ void PageTestsGPIO::ThreadFunc()
             str.txtStatePull->SetValue(str.pin->Get() ? "1" : "0");
         }
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        for (int i = 0; i < 50; i++)
+        {
+            if (first)
+            {
+                first = false;
+                prevKA = pinKA.Get();
+                prevKB = pinKB.Get();
+            }
+            else
+            {
+                bool valKA = pinKA.Get();
+                bool valKB = pinKB.Get();
+
+                if (valKA != prevKA)
+                {
+                    prevKA = valKA;
+
+                    int value = 0;
+                    PageTestsGPIO::self->txtKA->GetValue().ToInt(&value);
+                    PageTestsGPIO::self->txtKA->SetValue(wxString::Format("%d", value + 1));
+                }
+
+                if (valKB != prevKB)
+                {
+                    prevKB = valKB;
+
+                    int value = 0;
+                    PageTestsGPIO::self->txtKB->GetValue().ToInt(&value);
+                    PageTestsGPIO::self->txtKB->SetValue(wxString::Format("%d", value + 1));
+                }
+            }
+
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        }
     }
 }
 
@@ -292,50 +329,6 @@ void PageTestsGPIO::ThreadFuncAutoUART()
         UART::SendByte(0x55);
 
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    }
-}
-
-
-void PageTestsGPIO::ThreadFuncEncoder()
-{
-    static bool prevKA = false;
-    static bool prevKB = false;
-
-    bool first = true;
-
-    while (thread_encoder_is_running)
-    {
-        if (first)
-        {
-            first = false;
-            prevKA = pinKA.Get();
-            prevKB = pinKB.Get();
-        }
-        else
-        {
-            bool valKA = pinKA.Get();
-            bool valKB = pinKB.Get();
-
-            if (valKA != prevKA)
-            {
-                prevKA = valKA;
-
-                int value = 0;
-                PageTestsGPIO::self->txtKA->GetValue().ToInt(&value);
-                PageTestsGPIO::self->txtKA->SetValue(wxString::Format("%d", value + 1));
-            }
-
-            if (valKB != prevKB)
-            {
-                prevKB = valKB;
-
-                int value = 0;
-                PageTestsGPIO::self->txtKB->GetValue().ToInt(&value);
-                PageTestsGPIO::self->txtKB->SetValue(wxString::Format("%d", value + 1));
-            }
-        }
-
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
 }
 
@@ -372,21 +365,13 @@ void PageTestsGPIO::Init()
         _thread = new std::thread(ThreadFunc);
         _thread->detach();
     }
-
-    if (!thread_encoder)
-    {
-        thread_encoder_is_running = true;
-        thread_encoder = new std::thread(ThreadFuncEncoder);
-        thread_encoder->detach();
-    }
 }
 
 
 void PageTestsGPIO::DeInit()
 {
     thread_is_running = false;
-    thread_encoder_is_running = false;
-
+ 
     if (_thread)
     {
         while (_thread->joinable())
@@ -394,15 +379,6 @@ void PageTestsGPIO::DeInit()
         }
 
         SAFE_DELETE(_thread);
-    }
-
-    if (thread_encoder)
-    {
-        while (thread_encoder->joinable())
-        {
-        }
-
-        SAFE_DELETE(thread_encoder);
     }
 }
 

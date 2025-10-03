@@ -77,8 +77,4 @@ private:
     static void ThreadFuncAutoUART();
     static bool thread_autoUART_is_running;
     std::thread *thread_UART = nullptr;
-
-    static void ThreadFuncEncoder();
-    static bool thread_encoder_is_running;
-    std::thread *thread_encoder = nullptr;
 };
