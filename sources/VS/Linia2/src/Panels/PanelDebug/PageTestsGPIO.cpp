@@ -341,7 +341,7 @@ void PageTestsGPIO::FuncFPGA()
         for (int i = 0; i < SIZE_BUFFER * 8; i++)
         {
             pinREQ_RD.ToHi();
-            bool bit = pinDAT_F0.Get();
+            pinDAT_F0.Get();
             pinREQ_RD.ToLow();
         }
     }
