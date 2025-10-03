@@ -19,7 +19,7 @@ def ProcessLine(line):
         strings = line.split(" ")
         line = strings[0] + " " + strings[1] + " " + strings[2] + " " + strings[3] + " " + str(int(strings[4]) + 1) + " ;\n"
 
-    if line.startswith("#define DATE_BUILD"):
+    if line.startswith("const char *DATE_BUILD = "):
         strings = line.split(" ")
         line = strings[0] + " " + strings[1] + " " + strings[2] + " " + strings[3] + " \"" + CurrentTime() + "\" \n"
 
