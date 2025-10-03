@@ -84,7 +84,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
         new wxStaticText(boxFPGA, wxID_ANY, "Кол-во измерений", { 10, 20 });
         _txtNumberMeas = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 20 });
 
-        new wxStaticText(boxFPGA, wxID_ANY, "Кол-во FULL", { 10, 50 });
+        new wxStaticText(boxFPGA, wxID_ANY, "Кол-во ошибок", { 10, 50 });
         _txtNumberErrors = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 50 });
     }
 
