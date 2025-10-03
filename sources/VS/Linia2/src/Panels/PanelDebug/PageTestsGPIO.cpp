@@ -352,7 +352,7 @@ void PageTestsGPIO::FuncFPGA()
 {
     static bool prev = false;
 
-    if (pinFIFO_FULL.Get() && prev == false)
+//    if (pinFIFO_FULL.Get() && prev == false)
     {
         int bytes_left = 8000;
 

@@ -62,7 +62,7 @@ namespace GPIO
         { true,  6 },   // FIFO_FULL
         { false, 0 },   // REQ_RD
         { true,  7 },   // KA
-        { true,  8 },    // KB
+        { true,  8 },   // KB
         { false, 1 }    // SPI_CS
     };
 
