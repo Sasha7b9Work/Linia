@@ -44,3 +44,9 @@ void NotebookChips::DeInit()
 {
     PageTestsGPIO::self->DeInit();
 }
+
+
+void NotebookChips::Update()
+{
+    PageTestsGPIO::self->Update();
+}

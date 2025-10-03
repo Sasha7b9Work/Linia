@@ -31,3 +31,9 @@ bool PanelDebug::Show(bool show)
 
     return wxPanel::Show(show);
 }
+
+
+void PanelDebug::Update()
+{
+    NotebookChips::self->Update();
+}

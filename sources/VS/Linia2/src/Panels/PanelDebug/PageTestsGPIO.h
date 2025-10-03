@@ -14,18 +14,22 @@ public:
 
     void Init();
 
-    void DeInit();
+    void Update();
 
-    wxTextCtrl *txtKA = nullptr;
-    wxTextCtrl *txtKB = nullptr;
+    void DeInit();
 
 private:
 
     wxButton *btnSendUART = nullptr;
     wxToggleButton *btnAutoUART = nullptr;    // По этой кнопке начинается автоматическая передача по UART
     wxButton *btnSendSPI = nullptr;
+
     wxTextCtrl *txtNumberMeas = nullptr;
     wxTextCtrl *txtNumberFULL = nullptr;
+
+    // Ручка
+    wxTextCtrl *txtKA = nullptr;
+    wxTextCtrl *txtKB = nullptr;
 
     wxString NamePin(Pin::E) const;
 

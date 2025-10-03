@@ -12,4 +12,6 @@ public:
     static PanelDebug *self;
 
     virtual bool Show(bool) override;
+
+    void Update();
 };

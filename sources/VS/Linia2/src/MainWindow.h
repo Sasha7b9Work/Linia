@@ -57,6 +57,8 @@ public:
 
     void SetMode(ModeMainWindow::E);
 
+    void Update();
+
 private:
 
     wxToolBar *toolBar = nullptr;

@@ -123,6 +123,12 @@ MainWindow::MainWindow(const wxString &title)
 }
 
 
+void MainWindow::Update()
+{
+    PanelDebug::self->Update();
+}
+
+
 void MainWindow::OnEventKeyHook(wxKeyEvent &event)
 {
     if (event.GetKeyCode() == 'K')

@@ -286,6 +286,12 @@ void PageTestsGPIO::ThreadFunc()
 }
 
 
+void PageTestsGPIO::Update()
+{
+
+}
+
+
 void PageTestsGPIO::FuncEncoder()
 {
     static bool prevKA = false;
@@ -342,6 +348,10 @@ void PageTestsGPIO::FuncFPGA()
             pinDAT_F0.Get();
             pinREQ_RD.ToLow();
         }
+
+        int value = 0;
+        PageTestsGPIO::self->txtNumberMeas->GetValue().ToInt(&value);
+        PageTestsGPIO::self->txtNumberMeas->SetValue(wxString::Format("%d", value + 1));
     }
 }
 
