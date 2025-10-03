@@ -364,9 +364,9 @@ void PageTestsGPIO::Init()
     _thread = new std::thread(ThreadFunc);
     _thread->detach();
 
-//    thread_encoder_is_running = true;
-//    thread_encoder = new std::thread(ThreadFuncEncoder);
-//    thread_encoder->detach();
+    thread_encoder_is_running = true;
+    thread_encoder = new std::thread(ThreadFuncEncoder);
+    thread_encoder->detach();
 }
 
 
