@@ -8,10 +8,6 @@ if [ "$(uname -m)" != "aarch64" ]; then
     echo "Предупреждение: Скрипт предназначен для ARM64 (aarch64), текущая архитектура: $(uname -m)"
 fi
 
-# Очистка предыдущих сборок
-echo "Очистка предыдущих сборок..."
-rm -R -f ../../generated
-
 # Сборка основного проекта
 echo "Сборка основного проекта..."
 cmake ../../VS/CMakeLists.txt -B../../generated -G "CodeBlocks - Unix Makefiles" \
