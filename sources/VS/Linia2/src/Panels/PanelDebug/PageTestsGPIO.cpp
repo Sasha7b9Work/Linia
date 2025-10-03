@@ -334,8 +334,6 @@ void PageTestsGPIO::FuncFPGA()
 {
     static const int SIZE_BUFFER = 8000 / 8 * 4;
 
-    uint8 buffer[SIZE_BUFFER];
-
     if (pinFIFO_FULL.Get())
     {
         for (int i = 0; i < SIZE_BUFFER * 8; i++)
