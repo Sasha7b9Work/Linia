@@ -1,3 +1,20 @@
 https://github.com/Joshua-Riek/ubuntu-rockchip
 
-balena etcher - запись *.img
+
+*** Запись образа *.img на карту ***
+    balena etcher
+
+*** Как сделать запуск приложения через ярлык под рутом ***
+    sudo visudo
+
+    добавить строку
+    mnipi ALL = (root) NOPASSWD: /home/mnipi/Linia/sources/generated/Linia2/Linia2
+
+    в .desktop файл использовать
+    Exec=sudo /home/mnipi/Linia/sources/generated/Linia2/Linia2
+    
+*** Включить spi, uart ***
+    в утилите armbian-config включить соотвествующие интерфейсы
+    перезагрузить
+    
+    
