@@ -21,7 +21,7 @@ def ProcessLine(line):
 
     if line.startswith("const char *DATE_BUILD = "):
         strings = line.split(" ")
-        line = strings[0] + " " + strings[1] + " " + strings[2] + " " + strings[3] + " \"" + CurrentTime() + "\" \n"
+        line = strings[0] + " " + strings[1] + " " + strings[2] + " " + strings[3] + " \"" + CurrentTime() + "\" ;\n"
 
     return line
 
