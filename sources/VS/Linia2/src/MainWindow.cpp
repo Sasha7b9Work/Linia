@@ -105,19 +105,19 @@ MainWindow::MainWindow(const wxString &title)
 
     new PanelModel(this);
 
-//    new Display(this);
+    new Display(this);
 
     new PanelIndicator(this);
 
     new PanelModeLower(this);
 
-//    new PanelTable(this);
+    new PanelTable(this);
 
-//    new PanelButtons(this);
+    new PanelButtons(this);
 
-//    new PanelDebug(this);
+    new PanelDebug(this);
 
-//    new PanelReferenceGraph(this);
+    new PanelReferenceGraph(this);
 
     SetMode(SET::GUI::debug_mode.Get() ? ModeMainWindow::Debug : ModeMainWindow::Standard);
 }
@@ -214,7 +214,7 @@ void MainWindow::OnQuit(wxCommandEvent &WXUNUSED(event))
 
 void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 {
-//    PanelDebug::self->Show(false);
+    PanelDebug::self->Show(false);
 
     Test::Save("example.tst");
 
@@ -273,17 +273,17 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
     PanelModeUpper::self->Show(mode == ModeMainWindow::Standard);
     PanelConfig::self->Show(mode == ModeMainWindow::Standard);
     PanelModel::self->Show(mode == ModeMainWindow::Standard);
-//    Display::self->Show(mode == ModeMainWindow::Standard || mode == ModeMainWindow::FullGraph);
+    Display::self->Show(mode == ModeMainWindow::Standard || mode == ModeMainWindow::FullGraph);
     PanelIndicator::self->Show(mode == ModeMainWindow::Standard);
     PanelModeLower::self->Show(mode == ModeMainWindow::Standard);
-//    PanelTable::self->Show(mode == ModeMainWindow::Standard);
-//    PanelButtons::self->Show(mode == ModeMainWindow::Standard);
+    PanelTable::self->Show(mode == ModeMainWindow::Standard);
+    PanelButtons::self->Show(mode == ModeMainWindow::Standard);
 
-//    PanelDebug::self->Show(mode == ModeMainWindow::Debug);
+    PanelDebug::self->Show(mode == ModeMainWindow::Debug);
 
-//    PanelReferenceGraph::self->Show(mode == ModeMainWindow::ReferenceGraphs);
+    PanelReferenceGraph::self->Show(mode == ModeMainWindow::ReferenceGraphs);
 
-//    Display::self->FullScreen(mode == ModeMainWindow::FullGraph);
+    Display::self->FullScreen(mode == ModeMainWindow::FullGraph);
 
     wxFrame::Layout();
 

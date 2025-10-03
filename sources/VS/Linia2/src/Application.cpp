@@ -62,11 +62,11 @@ bool Application::OnInit()
 
     timer.Start(10);
 
-//    PanelErrors::self->AppendError(Error::_1, "Мало памяти");
-//    PanelErrors::self->AppendError(Error::_2, "Много памяти");
-//
-//    PanelErrors::self->RemoveError(Error::_1, "Мало памяти");
-//    PanelErrors::self->RemoveError(Error::_2, "Много памяти");
+    PanelErrors::self->AppendError(Error::_1, "Мало памяти");
+    PanelErrors::self->AppendError(Error::_2, "Много памяти");
+
+    PanelErrors::self->RemoveError(Error::_1, "Мало памяти");
+    PanelErrors::self->RemoveError(Error::_2, "Много памяти");
 
     if (!SoftTests::RunAll())
     {
@@ -96,7 +96,7 @@ void Application::OnTimer(wxTimerEvent &)
     {
         ComPort::Update();
 
-//        I_IPPP::impl->Update();
+        I_IPPP::impl->Update();
 
         mutex.unlock();
     };
