@@ -1,3 +1,4 @@
+https://habr.com/ru/companies/timeweb/articles/861844/
 https://github.com/schneid-l/u-boot-orangepi5
 https://github.com/Joshua-Riek/ubuntu-rockchip
 
