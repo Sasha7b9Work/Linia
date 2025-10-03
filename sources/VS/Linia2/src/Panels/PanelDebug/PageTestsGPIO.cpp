@@ -376,6 +376,10 @@ void PageTestsGPIO::FuncFPGA()
                     {
                         byte |= (1 << i);
                     }
+                    else
+                    {
+                        byte |= 0;
+                    }
                     pinREQ_RD.ToLow();
                 }
 
