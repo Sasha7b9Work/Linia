@@ -384,12 +384,16 @@ void PageTestsGPIO::DeInit()
     {
     }
 
-    while (thread_encoder->joinable())
+    if (thread_encoder)
     {
+        while (thread_encoder->joinable())
+        {
+        }
+
+        SAFE_DELETE(thread_encoder);
     }
 
     SAFE_DELETE(_thread);
-    SAFE_DELETE(thread_encoder);
 }
 
 
