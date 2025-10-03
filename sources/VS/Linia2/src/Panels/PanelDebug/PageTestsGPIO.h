@@ -48,16 +48,18 @@ private:
     {
         StructOutGPIO(PinOut *_out) : pin(_out) { }
         wxButton   *button = nullptr;
-        wxTextCtrl *txtStatePull = nullptr;     // Здесь отображается состояние после опроса
-        wxTextCtrl *txtStateInt = nullptr;      // Здесь отображается состояние после срабатывания функции обратного вызова
+        wxTextCtrl *_txtStatePull = nullptr;     // Здесь отображается состояние после опроса
+        int value_pull = 0;
+        wxTextCtrl *_txtStateInt = nullptr;      // Здесь отображается состояние после срабатывания функции обратного вызова
         PinOut     *pin;
     };
 
     struct StructInGPIO
     {
         StructInGPIO(PinIn *_in) : pin(_in) { }
-        wxTextCtrl *txtStatePull = nullptr;     // Здесь отображается состояние после опроса
-        wxTextCtrl *txtStateInt = nullptr;      // Здесь отображается состояние после срабатывания функции обратного вызова
+        wxTextCtrl *_txtStatePull = nullptr;     // Здесь отображается состояние после опроса
+        wxTextCtrl *_txtStateInt = nullptr;      // Здесь отображается состояние после срабатывания функции обратного вызова
+        int value_int = 0;
         PinIn      *pin;
     };
 
