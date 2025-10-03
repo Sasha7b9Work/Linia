@@ -1,1 +1,3 @@
 https://github.com/Joshua-Riek/ubuntu-rockchip
+
+balena etcher - запись *.img
