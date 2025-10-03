@@ -9,6 +9,7 @@
 
 void RealIPPP::Init()
 {
+    LOG_WRITE(" ");
     IDevice::impl = new DeviceEmulator();
 
     IDevice::impl->Init();
@@ -16,6 +17,7 @@ void RealIPPP::Init()
     pinREQ_RD.Set(false);    // Это состояние означает, что чтение не нужно
 
     Keyboard::Init();
+    LOG_WRITE(" ");
 }
 
 

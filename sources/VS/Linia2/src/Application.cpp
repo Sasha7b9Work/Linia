@@ -55,6 +55,8 @@ bool Application::OnInit()
 
     frame->Show();
 
+    LOG_WRITE_TRACE(" ");
+
     I_IPPP::impl = new RealIPPP();
     I_IPPP::impl->Init();
 
@@ -71,6 +73,8 @@ bool Application::OnInit()
         wxMessageBox(wxString::Format("Во время выполнения тестов произошли ошибки.\n"
             "Дополнительная информация в файле %s.", Log::FileName().c_str().AsChar()), "Ошибка", wxOK | wxCENTRE | wxICON_ERROR);
     }
+
+    LOG_WRITE_TRACE(" ");
 
     return true;
 }

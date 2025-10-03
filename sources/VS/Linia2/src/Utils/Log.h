@@ -3,7 +3,7 @@
 
 
 #define LOG_WRITE(...)          Log::Write(__FILE__, __LINE__, __VA_ARGS__)
-//#define LOG_WRITE_TRACE(...)  Log::WriteTrace(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#define LOG_WRITE_TRACE(...)  Log::WriteTrace(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 
 #define LOG_ERROR(...)          Log::Error(__FILE__, __LINE__, __VA_ARGS__)
 //#define LOG_ERROR_TRACE(...)  Log::ErrorTrace(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
