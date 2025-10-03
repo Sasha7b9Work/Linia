@@ -81,11 +81,11 @@ else()
 endif()
 
 
-#if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
-#    add_definitions(
-#        -march=armv8-a
-#    )
-#endif()
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
+    add_definitions(
+        -march=armv8-a          # Для получения оптимального когда на Orange Pi 5 Plus (ARM64)
+    )
+endif()
 
 
 add_subdirectory(Linia2)
