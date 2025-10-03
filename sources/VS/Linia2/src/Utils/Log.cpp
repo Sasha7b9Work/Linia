@@ -35,11 +35,11 @@ void Log::Init()
 
         file_name = fname.GetFullPath();
 
-//        if (wxFile::Exists(file_name))
-//        {
-//            log_file.Open(file_name);
-//        }
-//        else
+        if (wxFile::Exists(file_name))
+        {
+            log_file.Open(file_name);
+        }
+        else
         {
             log_file.Create(file_name);
         }
