@@ -76,10 +76,6 @@ void Log::WriteLine(pchar line)
     log_file.AddLine(line);
 
     log_file.Write();
-
-    log_file.Close();
-
-    log_file.Open(file_name);
 }
 
 
