@@ -81,4 +81,11 @@ else()
 endif()
 
 
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
+    add_definitions(
+        -march=armv8-a
+    )
+endif()
+
+
 add_subdirectory(Linia2)

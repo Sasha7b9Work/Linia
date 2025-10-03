@@ -23,7 +23,7 @@ cmake CMakeLists.txt -Bgenerated -G "CodeBlocks - Unix Makefiles" \
     -DwxBUILD_SAMPLES=ALL \
     -DwxBUILD_SHARED=OFF \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_FLAGS="-O2 -march=armv8-a" \
+    -DCMAKE_CXX_FLAGS="-O0 -march=armv8-a" \
     -DwxUSE_SPELLCHECK=OFF
 
 cd generated
@@ -34,7 +34,7 @@ cd ../../../scripts/arm64
 echo "Сборка основного проекта..."
 cmake ../../VS/CMakeLists.txt -B../../generated -G "CodeBlocks - Unix Makefiles" \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_FLAGS="-O2 -march=armv8-a -Wall -Werror" \
+    -DCMAKE_CXX_FLAGS="-O0 -march=armv8-a -Wall -Werror" \
 
 cd ../../generated
 
