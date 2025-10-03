@@ -82,10 +82,10 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
 
     {
         new wxStaticText(boxFPGA, wxID_ANY, "Кол-во измерений", { 10, 20 });
-        txtNumberMeas = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 20 });
+        _txtNumberMeas = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 20 });
 
         new wxStaticText(boxFPGA, wxID_ANY, "Кол-во FULL", { 10, 50 });
-        txtNumberFULL = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 50 });
+        _txtNumberFULL = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 50 });
     }
 
     wxStaticBox *boxUART = new wxStaticBox(this, wxID_ANY, "UART", { boxGPIO->GetPosition().x + boxGPIO->GetSize().x + 10, 10 }, { 200, 270 });
@@ -117,10 +117,10 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
 
     {
         new wxStaticText(boxEncoder, wxID_ANY, "KA : 11", { 10, 20 });
-        txtKA = new wxTextCtrl(boxEncoder, wxID_ANY, "0", { 50, 20 }, { 30, 20 }, wxTE_READONLY);
+        _txtKA = new wxTextCtrl(boxEncoder, wxID_ANY, "0", { 50, 20 }, { 30, 20 }, wxTE_READONLY);
 
         new wxStaticText(boxEncoder, wxID_ANY, "KB : 13", { 10, 45 });
-        txtKB = new wxTextCtrl(boxEncoder, wxID_ANY, "0", { 50, 45 }, { 30, 20 }, wxTE_READONLY);
+        _txtKB = new wxTextCtrl(boxEncoder, wxID_ANY, "0", { 50, 45 }, { 30, 20 }, wxTE_READONLY);
     }
 
     Bind(wxEVT_BUTTON, &PageTestsGPIO::OnEventButton, this);
@@ -269,15 +269,15 @@ void PageTestsGPIO::ThreadFunc()
 {
     while (thread_is_running)
     {
-        for (auto &str : PageTestsGPIO::self->gpio_out)
-        {
-            str.txtStatePull->SetValue(str.pin->Get() ? "1" : "0");
-        }
-
-        for (auto &str : PageTestsGPIO::self->gpio_in)
-        {
-            str.txtStatePull->SetValue(str.pin->Get() ? "1" : "0");
-        }
+//        for (auto &str : PageTestsGPIO::self->gpio_out)
+//        {
+//            str.txtStatePull->SetValue(str.pin->Get() ? "1" : "0");
+//        }
+//
+//        for (auto &str : PageTestsGPIO::self->gpio_in)
+//        {
+//            str.txtStatePull->SetValue(str.pin->Get() ? "1" : "0");
+//        }
 
         FuncEncoder();
 
@@ -288,7 +288,11 @@ void PageTestsGPIO::ThreadFunc()
 
 void PageTestsGPIO::Update()
 {
+    PageTestsGPIO::self->_txtKA->SetValue(wxString::Format("%d", valueKA));
 
+    PageTestsGPIO::self->_txtKB->SetValue(wxString::Format("%d", valueKB));
+
+    PageTestsGPIO::self->_txtNumberMeas->SetValue(wxString::Format("%d", valueMeas));
 }
 
 
@@ -316,18 +320,14 @@ void PageTestsGPIO::FuncEncoder()
             {
                 prevKA = valKA;
 
-                int value = 0;
-                PageTestsGPIO::self->txtKA->GetValue().ToInt(&value);
-                PageTestsGPIO::self->txtKA->SetValue(wxString::Format("%d", value + 1));
+                PageTestsGPIO::self->valueKA++;
             }
 
             if (valKB != prevKB)
             {
                 prevKB = valKB;
 
-                int value = 0;
-                PageTestsGPIO::self->txtKB->GetValue().ToInt(&value);
-                PageTestsGPIO::self->txtKB->SetValue(wxString::Format("%d", value + 1));
+                PageTestsGPIO::self->valueKB++;
             }
         }
 
@@ -349,9 +349,7 @@ void PageTestsGPIO::FuncFPGA()
             pinREQ_RD.ToLow();
         }
 
-        int value = 0;
-        PageTestsGPIO::self->txtNumberMeas->GetValue().ToInt(&value);
-        PageTestsGPIO::self->txtNumberMeas->SetValue(wxString::Format("%d", value + 1));
+        PageTestsGPIO::self->valueMeas++;
     }
 }
 

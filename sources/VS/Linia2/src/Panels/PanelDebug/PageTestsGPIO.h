@@ -20,16 +20,21 @@ public:
 
 private:
 
+    // UART
     wxButton *btnSendUART = nullptr;
     wxToggleButton *btnAutoUART = nullptr;    // По этой кнопке начинается автоматическая передача по UART
     wxButton *btnSendSPI = nullptr;
 
-    wxTextCtrl *txtNumberMeas = nullptr;
-    wxTextCtrl *txtNumberFULL = nullptr;
+    // FPGA
+    wxTextCtrl *_txtNumberMeas = nullptr;
+    wxTextCtrl *_txtNumberFULL = nullptr;
+    int valueMeas = 0;
 
     // Ручка
-    wxTextCtrl *txtKA = nullptr;
-    wxTextCtrl *txtKB = nullptr;
+    wxTextCtrl *_txtKA = nullptr;
+    wxTextCtrl *_txtKB = nullptr;
+    int valueKA = 0;
+    int valueKB = 0;
 
     wxString NamePin(Pin::E) const;
 
