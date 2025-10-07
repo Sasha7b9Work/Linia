@@ -1,6 +1,11 @@
 #pragma once
 
 
+/*
+    Используется для связи с платой контроллера
+*/
+
+
 #define UART_DEVICE   "/dev/ttyS6"
 #define UART_BAUDRATE 115200
 #define UART_MODE     "8N1"
