@@ -291,13 +291,12 @@ void PageTestsGPIO::ThreadFunc()
 void PageTestsGPIO::FuncUART()
 {
     PageTestsGPIO::self->mutex_str_UART.lock();
+    wxString str = PageTestsGPIO::self->strRecvUART;
+    PageTestsGPIO::self->strRecvUART.Clear();
+    PageTestsGPIO::self->mutex_str_UART.unlock();
 
-    if (PageTestsGPIO::self->strRecvUART.Length())
+    if (str.Length())
     {
-        wxString str = PageTestsGPIO::self->strRecvUART;
-
-        PageTestsGPIO::self->mutex_str_UART.unlock();
-
         for (uint i = 0; i < str.Length(); i++)
         {
             char symbol = str[i];
@@ -317,10 +316,6 @@ void PageTestsGPIO::FuncUART()
                 text.Clear();
             }
         }
-    }
-    else
-    {
-        PageTestsGPIO::self->mutex_str_UART.unlock();
     }
 }
 
