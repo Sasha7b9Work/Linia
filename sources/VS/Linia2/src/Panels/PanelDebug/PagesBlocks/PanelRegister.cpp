@@ -38,6 +38,14 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_d
         {
             event.Skip(); // Пропустить событие дальше (родителю)
         });
+
+    wxArrayString names;
+    for (int i = 0; i < bit_depth; i++)
+    {
+        names.push_back(wxString::Format("D%d", i));
+    }
+
+    SetNamesBits(names);
 }
 
 
