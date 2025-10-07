@@ -7,12 +7,12 @@
 #include "Panels/PanelDebug/CommandsCombo.h"
 
 
-PanelRegister::PanelRegister(wxWindow *parent, const wxString &_title, const wxString &_name, int _bit_depth) :
+Register::Register(wxWindow *parent, const wxString &_title, const wxString &_name, int _bit_depth) :
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
     bit_depth(_bit_depth),
     nameSTM32(_name)
 {
-    wxPanel::SetName("PanelRegister");
+    wxPanel::SetName("Register");
 
     new wxStaticText(this, wxID_ANY, _title + " " + _name, {10, 10});
 
@@ -31,7 +31,7 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &_title, const wxS
 
         for (auto box : chbox)
         {
-            box->Bind(wxEVT_CHECKBOX, &PanelRegister::OnEventCheckBox, this);
+            box->Bind(wxEVT_CHECKBOX, &Register::OnEventCheckBox, this);
         }
     }
 
@@ -48,17 +48,17 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &_title, const wxS
 
     SetNamesBits(names);
 
-    Bind(wxEVT_TOGGLEBUTTON, &PanelRegister::OnEventToggleButton, this);
+    Bind(wxEVT_TOGGLEBUTTON, &Register::OnEventToggleButton, this);
 }
 
 
-void PanelRegister::SetNamesBits(const wxArrayString &_names)
+void Register::SetNamesBits(const wxArrayString &_names)
 {
     names_bits = _names;
 }
 
 
-void PanelRegister::SetDescriptionBits(int index, const std::vector<StructDescription> &_desc)
+void Register::SetDescriptionBits(int index, const std::vector<StructDescription> &_desc)
 {
     desc[index] = _desc;
 
@@ -74,7 +74,7 @@ void PanelRegister::SetDescriptionBits(int index, const std::vector<StructDescri
 
                 elem.field.text_ctrl = new TextCtrlNumber(painter, wxID_ANY, "", { x, (PainterRegister::W_B + 1) * 3 }, { PainterRegister::W_B * elem.num_bits, 20 }, 0, (1 << elem.num_bits) - 1);
 
-                elem.field.text_ctrl->Bind(wxEVT_TEXT, &PanelRegister::OnEventTextCtrl, this);
+                elem.field.text_ctrl->Bind(wxEVT_TEXT, &Register::OnEventTextCtrl, this);
             }
 
             if (elem.field.need_commands)
@@ -89,18 +89,18 @@ void PanelRegister::SetDescriptionBits(int index, const std::vector<StructDescri
                     names.push_back(com.CreateFullLine(elem));
                 }
 
-                elem.field.combo = new CommandsCombo(painter, elem.desc, { x, (PainterRegister::W_B + 1) * 3 }, PainterRegister::W_B * elem.num_bits, names, "PanelRegister");
+                elem.field.combo = new CommandsCombo(painter, elem.desc, { x, (PainterRegister::W_B + 1) * 3 }, PainterRegister::W_B * elem.num_bits, names, "Register");
 
                 elem.field.combo->left_align = true;
 
-                elem.field.combo->Bind(wxEVT_COMBOBOX, &PanelRegister::OnEventCombo, this);
+                elem.field.combo->Bind(wxEVT_COMBOBOX, &Register::OnEventCombo, this);
             }
         }
     }
 }
 
 
-void PanelRegister::OnEventTextCtrl(wxCommandEvent &event)
+void Register::OnEventTextCtrl(wxCommandEvent &event)
 {
     int id = event.GetId();
 
@@ -137,7 +137,7 @@ void PanelRegister::OnEventTextCtrl(wxCommandEvent &event)
 }
 
 
-void PanelRegister::OnEventToggleButton(wxCommandEvent &event)
+void Register::OnEventToggleButton(wxCommandEvent &event)
 {
     int id = event.GetId();
 
@@ -157,7 +157,7 @@ void PanelRegister::OnEventToggleButton(wxCommandEvent &event)
 }
 
 
-void PanelRegister::OnEventCheckBox(wxCommandEvent &event)
+void Register::OnEventCheckBox(wxCommandEvent &event)
 {
     int id = event.GetId();
 
@@ -207,7 +207,7 @@ wxString StructDescription::CommandStruct::CreateFullLine(StructDescription &d) 
 }
 
 
-void PanelRegister::OnEventCombo(wxCommandEvent &event)
+void Register::OnEventCombo(wxCommandEvent &event)
 {
     int id = event.GetId();
 
@@ -235,14 +235,14 @@ void PanelRegister::OnEventCombo(wxCommandEvent &event)
 
 
 RegAD5543::RegAD5543(wxWindow *_parent, const wxString &_name) :
-    PanelRegister(_parent, "AD5543", _name, 12)
+    Register(_parent, "AD5543", _name, 12)
 {
 
 }
 
 
 RegAD5531::RegAD5531(wxWindow *_parent, const wxString &_name) :
-    PanelRegister(_parent, "AD5531", _name, 12)
+    Register(_parent, "AD5531", _name, 12)
 {
 
 }

@@ -32,7 +32,7 @@ struct StructDescription
 };
 
 
-class PanelRegister : public wxPanel
+class Register : public wxPanel
 {
     friend class PainterRegister;
 
@@ -41,7 +41,7 @@ public:
     static const int WIDTH = 800;
     static const int HEIGHT = 150;
 
-    PanelRegister(wxWindow *parent, const wxString &_title,     // Это написано на изображении
+    Register(wxWindow *parent, const wxString &_title,     // Это написано на изображении
         const wxString &_name,                                  // А это имя для работы с контроллером
         int bit_depth);
 
@@ -73,18 +73,18 @@ private:
 };
 
 
-class RegFPGA : public PanelRegister
+class RegFPGA : public Register
 {
 public:
 
     RegFPGA(wxWindow *_parent, const wxString & _name, int _bit_depth) :
-        PanelRegister(_parent, "", _name, _bit_depth)
+        Register(_parent, "", _name, _bit_depth)
     {
     }
 };
 
 
-class RegAD5543 : public PanelRegister
+class RegAD5543 : public Register
 {
 public:
 
@@ -92,7 +92,7 @@ public:
 };
 
 
-class RegAD5531 : public PanelRegister
+class RegAD5531 : public Register
 {
 public:
 

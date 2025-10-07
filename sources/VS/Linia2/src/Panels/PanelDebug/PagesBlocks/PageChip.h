@@ -11,7 +11,7 @@ public:
 
     PageChip(wxNotebook *parent, const wxString &title);
 
-    void AppendRegister(PanelRegister *);
+    void AppendRegister(Register *);
 
 private:
 
@@ -19,7 +19,7 @@ private:
 
     wxButton *btnReturn = nullptr;
 
-    std::vector<PanelRegister *> registers;
+    std::vector<Register *> registers;
 
     void OnRightClick(wxMouseEvent &);
 

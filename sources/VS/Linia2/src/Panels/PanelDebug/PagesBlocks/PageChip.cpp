@@ -19,7 +19,7 @@ PageChip::PageChip(wxNotebook *parent, const wxString &title) :
 }
 
 
-void PageChip::AppendRegister(PanelRegister *reg)
+void PageChip::AppendRegister(Register *reg)
 {
     int y = 0;
 

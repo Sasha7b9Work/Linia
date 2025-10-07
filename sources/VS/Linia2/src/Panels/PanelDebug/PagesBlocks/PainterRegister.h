@@ -3,7 +3,7 @@
 #include "Controls/Painter.h"
 
 
-class PanelRegister;
+class Register;
 
 
 class PainterRegister : public PainterRect
@@ -13,7 +13,7 @@ public:
     // Ширина бита
     static const int W_B = 20;
 
-    PainterRegister(wxWindow *parent, PanelRegister *panel, const wxPoint &position);
+    PainterRegister(wxWindow *parent, Register *panel, const wxPoint &position);
 
     virtual void OnPaint(wxPaintEvent &) override;
 
@@ -26,7 +26,7 @@ private:
 
     bool first_paint = true;
 
-    PanelRegister *panel = nullptr;
+    Register *panel = nullptr;
 
     // Возвращает координаты верхнего левого угла отображения бита
     wxPoint CoordBit(int num_bit);
