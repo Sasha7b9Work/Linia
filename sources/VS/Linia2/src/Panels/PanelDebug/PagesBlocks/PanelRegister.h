@@ -63,3 +63,14 @@ private:
     void OnEventCheckBox(wxCommandEvent &);
     void OnEventCombo(wxCommandEvent &);
 };
+
+
+class RegFPGA : public PanelRegister
+{
+public:
+
+    RegFPGA(wxWindow *_parent, const wxString &_title, int _bit_depth) :
+        PanelRegister(_parent, _title, _bit_depth)
+    {
+    }
+};
