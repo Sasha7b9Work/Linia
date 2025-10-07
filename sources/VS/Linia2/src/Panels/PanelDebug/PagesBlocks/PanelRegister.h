@@ -74,3 +74,19 @@ public:
     {
     }
 };
+
+
+class RegAD5543 : public PanelRegister
+{
+public:
+
+    RegAD5543(wxWindow *, const wxString &);
+};
+
+
+class RegAD5531 : public PanelRegister
+{
+public:
+
+    RegAD5531(wxWindow *, const wxString &);
+};

@@ -209,3 +209,17 @@ void PanelRegister::OnEventCombo(wxCommandEvent &event)
 
     event.Skip();
 }
+
+
+RegAD5543::RegAD5543(wxWindow *_parent, const wxString &_name) :
+    PanelRegister(_parent, _name, 12)
+{
+
+}
+
+
+RegAD5531::RegAD5531(wxWindow *_parent, const wxString &_name) :
+    PanelRegister(_parent, _name, 12)
+{
+
+}

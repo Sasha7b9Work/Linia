@@ -17,4 +17,8 @@ PageChannelC::PageChannelC(wxNotebook *parent) :
     PageChip(parent, "Канал C")
 {
     self = this;
+
+    AppendRegister(new RegAD5543(this, "AD5543_2"));
+
+    AppendRegister(new RegFPGA(this, "REG3", 32));
 }
