@@ -51,6 +51,9 @@ public:
 
 private:
 
+    wxButton *btnSend = nullptr;
+    wxToggleButton *btnAutoSend = nullptr;
+
     int bit_depth = 0;
 
     wxString nameSTM32;                         // Под этим именем идёт работа с платой контроллера
@@ -66,6 +69,7 @@ private:
     void OnEventTextCtrl(wxCommandEvent &);
     void OnEventCheckBox(wxCommandEvent &);
     void OnEventCombo(wxCommandEvent &);
+    void OnEventToggleButton(wxCommandEvent &);
 };
 
 

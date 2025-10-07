@@ -16,13 +16,13 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &_title, const wxS
 
     new wxStaticText(this, wxID_ANY, _title + " " + _name, {10, 10});
 
-    wxSize size_button{ 100, 30 };
+    wxSize size_button{ 100, 25 };
 
     int x = 580;
 
-    new wxButton(this, wxID_ANY, "Предустановки", { x, 0 }, size_button);
+    btnAutoSend = new wxToggleButton(this, wxID_ANY, "Автозапись", { x, 0 }, size_button);
 
-    new wxButton(this, wxID_ANY, "Записать", { x + 100, 0 }, size_button);
+    btnSend = new wxButton(this, wxID_ANY, "Записать", { x + 100, 0 }, size_button);
 
     int y0 = 40;
 
@@ -47,6 +47,8 @@ PanelRegister::PanelRegister(wxWindow *parent, const wxString &_title, const wxS
     }
 
     SetNamesBits(names);
+
+    Bind(wxEVT_TOGGLEBUTTON, &PanelRegister::OnEventToggleButton, this);
 }
 
 
@@ -128,6 +130,26 @@ void PanelRegister::OnEventTextCtrl(wxCommandEvent &event)
 
                 return;
             }
+        }
+    }
+
+    event.Skip();
+}
+
+
+void PanelRegister::OnEventToggleButton(wxCommandEvent &event)
+{
+    int id = event.GetId();
+
+    if (id == btnAutoSend->GetId())
+    {
+        if (event.GetInt() == 1)
+        {
+            btnSend->Enable(false);
+        }
+        else
+        {
+            btnSend->Enable(true);
         }
     }
 
