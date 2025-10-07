@@ -1,10 +1,10 @@
 ﻿// 2025/6/3 14:06:23 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/NotebookChips.h"
-#include "Panels/PanelDebug/Old/PageAD5697.h"
-#include "Panels/PanelDebug/Old/PageAD9952.h"
-#include "Panels/PanelDebug/Old/PageMCP4811.h"
-#include "Panels/PanelDebug/PagesBlocks/PageAD5300.h"
+//#include "Panels/PanelDebug/Old/PageAD5697.h"
+//#include "Panels/PanelDebug/Old/PageAD9952.h"
+//#include "Panels/PanelDebug/Old/PageMCP4811.h"
+//#include "Panels/PanelDebug/PagesBlocks/PageAD5300.h"
 #include "Panels/PanelDebug/PageTestsGPIO.h"
 
 
@@ -18,17 +18,17 @@ NotebookChips::NotebookChips(wxWindow *parent) :
 
     new PageTestsGPIO(this);
 
-    new PageAD5300(this);
-    new PageAD5697(this);
-    new PageAD9952(this);
-    new PageMCP4811(this);
+//    new PageAD5300(this);
+//    new PageAD5697(this);
+//    new PageAD9952(this);
+//    new PageMCP4811(this);
 
     wxNotebook::AddPage(PageTestsGPIO::self, PageTestsGPIO::self->GetName());
 
-    wxNotebook::AddPage(PageAD5300::self, PageAD5300::self->GetName());
-    wxNotebook::AddPage(PageAD5697::self, PageAD5697::self->GetName());
-    wxNotebook::AddPage(PageAD9952::self, PageAD9952::self->GetName());
-    wxNotebook::AddPage(PageMCP4811::self, PageMCP4811::self->GetName());
+//    wxNotebook::AddPage(PageAD5300::self, PageAD5300::self->GetName());
+//    wxNotebook::AddPage(PageAD5697::self, PageAD5697::self->GetName());
+//    wxNotebook::AddPage(PageAD9952::self, PageAD9952::self->GetName());
+//    wxNotebook::AddPage(PageMCP4811::self, PageMCP4811::self->GetName());
 
     wxWindowBase::Layout();
 }
