@@ -226,11 +226,6 @@ bool UART::SendBuffer(const void *_buffer, int size)
         }
     }
 
-    if (bytes_sent == size)
-    {
-        LOG_WRITE("UART sent %d bytes");
-    }
-
     return (bytes_sent == size);
 }
 
