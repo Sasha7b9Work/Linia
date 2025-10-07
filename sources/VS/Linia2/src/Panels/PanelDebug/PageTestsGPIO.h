@@ -12,10 +12,13 @@ public:
 
     static PageTestsGPIO *self;
 
+    // Вызывается при заходе на панель отадки
     void Init();
 
+    // Вызывается при открытой панели отладки
     void Update();
 
+    // Вызывается при выходе из панели отладки
     void DeInit();
 
 private:
@@ -23,6 +26,10 @@ private:
     // UART
     wxButton *btnSendUART = nullptr;
     wxToggleButton *btnAutoUART = nullptr;    // По этой кнопке начинается автоматическая передача по UART
+    wxTextCtrl *txtRecvUART = nullptr;
+    wxString strRecvUART;
+
+    // SPI
     wxButton *btnSendSPI = nullptr;
 
     // FPGA
@@ -82,13 +89,18 @@ private:
     void OnChangeStatePin(PinIn *, bool state);
     void OnChangeStatePin(PinOut *, bool state);
 
-    static void ThreadFunc();
-    static void FuncFPGA();
-    static void FuncEncoder();
+    static void ThreadFunc();   // Главный поток
+    static void FuncFPGA();     // Обработка ПЛИС в главном потоке
+    static void FuncEncoder();  // Обработка ручки в главном потоке
+    static void FuncUART();     // Обработка принятых данных по UART в главном потоке
     static bool thread_is_running;
     std::thread *_thread = nullptr;
 
+    // Поток на передачу по UART
     static void ThreadFuncAutoUART();
     static bool thread_autoUART_is_running;
     std::thread *thread_UART = nullptr;
+
+    // Функция на приём символа по UART
+    static void FuncRecvUART(uint8);
 };

@@ -98,7 +98,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
         btnSendUART = new wxButton(boxUART, wxID_ANY, "Send", { 120, 70 }, { 50, 20 });
 
         new wxStaticText(boxUART, wxID_ANY, "Принято:", { 10, 105 });
-        new wxTextCtrl(boxUART, wxID_ANY, "", { 10, 130 }, { 100, 20 }, wxTE_READONLY);
+        txtRecvUART = new wxTextCtrl(boxUART, wxID_ANY, "", { 10, 130 }, { 100, 20 }, wxTE_READONLY);
 
         btnAutoUART = new wxToggleButton(boxUART, wxID_ANY, "AutoSend", { 10, 170 }, { 100, 20 });
     }
@@ -282,6 +282,40 @@ void PageTestsGPIO::ThreadFunc()
         FuncEncoder();
 
         FuncFPGA();
+
+        FuncUART();
+    }
+}
+
+
+void PageTestsGPIO::FuncUART()
+{
+    if (PageTestsGPIO::self->strRecvUART.Length())
+    {
+        static wxString text;
+
+        wxString &str = PageTestsGPIO::self->strRecvUART;
+
+        for (uint i = 0; i < str.Length(); i++)
+        {
+            char symbol = str[i];
+
+            if (symbol == '\n')
+            {
+                symbol = 0x00;
+            }
+
+            text.Append(symbol);
+
+            PageTestsGPIO::self->txtRecvUART->SetValue(text);
+
+            if (symbol == 0)
+            {
+                text.Clear();
+            }
+        }
+
+        str.Clear();
     }
 }
 
@@ -447,6 +481,9 @@ void PageTestsGPIO::Init()
 {
     if (!_thread)
     {
+        UART::RecvCallback::Store();
+        UART::RecvCallback::Set(FuncRecvUART);
+
         thread_is_running = true;
         _thread = new std::thread(ThreadFunc);
         _thread->detach();
@@ -460,6 +497,8 @@ void PageTestsGPIO::DeInit()
  
     if (_thread)
     {
+        UART::RecvCallback::Restore();
+
         while (_thread->joinable())
         {
         }
@@ -509,3 +548,13 @@ void PageTestsGPIO::CallbackonREQ_RD(bool state)
     PageTestsGPIO::self->OnChangeStatePin(&pinREQ_RD, state);
 }
 
+
+void PageTestsGPIO::FuncRecvUART(uint8 byte)
+{
+    if (byte == 0x00)
+    {
+        byte = '\n';
+    }
+
+    PageTestsGPIO::self->strRecvUART.Append(byte);
+}
