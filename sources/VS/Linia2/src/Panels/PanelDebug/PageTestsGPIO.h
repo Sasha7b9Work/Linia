@@ -28,6 +28,7 @@ private:
     wxToggleButton *btnAutoUART = nullptr;    // По этой кнопке начинается автоматическая передача по UART
     wxTextCtrl *txtRecvUART = nullptr;
     wxString strRecvUART;
+    std::mutex mutex_str_UART;
 
     // SPI
     wxButton *btnSendSPI = nullptr;

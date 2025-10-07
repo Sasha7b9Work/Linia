@@ -290,11 +290,13 @@ void PageTestsGPIO::ThreadFunc()
 
 void PageTestsGPIO::FuncUART()
 {
+    PageTestsGPIO::self->mutex_str_UART.lock();
+
     if (PageTestsGPIO::self->strRecvUART.Length())
     {
-        static wxString text;
+        wxString str = PageTestsGPIO::self->strRecvUART;
 
-        wxString &str = PageTestsGPIO::self->strRecvUART;
+        PageTestsGPIO::self->mutex_str_UART.unlock();
 
         for (uint i = 0; i < str.Length(); i++)
         {
@@ -304,6 +306,7 @@ void PageTestsGPIO::FuncUART()
             {
                 symbol = 0x00;
             }
+            static wxString text;
 
             text.Append(symbol);
 
@@ -314,8 +317,10 @@ void PageTestsGPIO::FuncUART()
                 text.Clear();
             }
         }
-
-        str.Clear();
+    }
+    else
+    {
+        PageTestsGPIO::self->mutex_str_UART.unlock();
     }
 }
 
@@ -556,5 +561,7 @@ void PageTestsGPIO::FuncRecvUART(uint8 byte)
         byte = '\n';
     }
 
+    PageTestsGPIO::self->mutex_str_UART.lock();
     PageTestsGPIO::self->strRecvUART.Append(byte);
+    PageTestsGPIO::self->mutex_str_UART.unlock();
 }
