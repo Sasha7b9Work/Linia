@@ -1,6 +1,6 @@
 ﻿// 2025/6/3 14:06:23 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/PanelDebug/NotebookChips.h"
+#include "Panels/PanelDebug/NotebookDebug.h"
 //#include "Panels/PanelDebug/Old/PageAD5697.h"
 //#include "Panels/PanelDebug/Old/PageAD9952.h"
 //#include "Panels/PanelDebug/Old/PageMCP4811.h"
@@ -8,10 +8,10 @@
 #include "Panels/PanelDebug/PageTestsGPIO.h"
 
 
-NotebookChips *NotebookChips::self = nullptr;
+NotebookDebug *NotebookDebug::self = nullptr;
 
 
-NotebookChips::NotebookChips(wxWindow *parent) :
+NotebookDebug::NotebookDebug(wxWindow *parent) :
     wxNotebook(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBK_TOP)
 {
     self = this;
@@ -34,19 +34,19 @@ NotebookChips::NotebookChips(wxWindow *parent) :
 }
 
 
-void NotebookChips::Init()
+void NotebookDebug::Init()
 {
     PageTestsGPIO::self->Init();
 }
 
 
-void NotebookChips::DeInit()
+void NotebookDebug::DeInit()
 {
     PageTestsGPIO::self->DeInit();
 }
 
 
-void NotebookChips::Update()
+void NotebookDebug::Update()
 {
     PageTestsGPIO::self->Update();
 }

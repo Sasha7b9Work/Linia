@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Panels/PanelDebug/PanelDebug.h"
 #include "MainWindow.h"
-#include "Panels/PanelDebug/NotebookChips.h"
+#include "Panels/PanelDebug/NotebookDebug.h"
 
 
 PanelDebug *PanelDebug::self = nullptr;
@@ -13,11 +13,11 @@ PanelDebug::PanelDebug(wxWindow *parent) :
 {
     self = this;
 
-    new NotebookChips(this);
+    new NotebookDebug(this);
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    sizer->Add(NotebookChips::self, 1, wxEXPAND);
+    sizer->Add(NotebookDebug::self, 1, wxEXPAND);
 
     SetSizer(sizer);
 
@@ -27,7 +27,7 @@ PanelDebug::PanelDebug(wxWindow *parent) :
 
 bool PanelDebug::Show(bool show)
 {
-    show ? NotebookChips::self->Init() : NotebookChips::self->DeInit();
+    show ? NotebookDebug::self->Init() : NotebookDebug::self->DeInit();
 
     return wxPanel::Show(show);
 }
@@ -35,5 +35,5 @@ bool PanelDebug::Show(bool show)
 
 void PanelDebug::Update()
 {
-    NotebookChips::self->Update();
+    NotebookDebug::self->Update();
 }

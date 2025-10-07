@@ -2,13 +2,13 @@
 #pragma once
 
 
-class NotebookChips : public wxNotebook
+class NotebookDebug : public wxNotebook
 {
 public:
 
-    NotebookChips(wxWindow *parent);
+    NotebookDebug(wxWindow *parent);
 
-    static NotebookChips *self;
+    static NotebookDebug *self;
 
     void Init();
 
