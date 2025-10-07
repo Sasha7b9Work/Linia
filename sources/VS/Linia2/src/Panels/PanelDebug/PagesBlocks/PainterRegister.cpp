@@ -170,7 +170,7 @@ void PainterRegister::DrawTitleBit(int num_bit, const wxString &title, wxGraphic
 
     int d = (num_bit % 2) ? 2 : 6;
 
-    DrawTextInCenter(coord.x, coord.y + d, W_B, title, 8, gc);
+    DrawTextInCenter(coord.x, coord.y + d, W_B, title, 7, gc);
 }
 
 
