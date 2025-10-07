@@ -11,4 +11,6 @@ PanelModeUpper::PanelModeUpper(wxWindow* parent) :
     Panel(parent, MainWindow::WIDTH1, 0, MainWindow::WIDTH2, MainWindow::HEIGHT1)
 {
     self = this;
+
+    new wxStaticText(this, wxID_ANY, wxString::Format("ver.%d : %s", VERSION_BUILD, DATE_BUILD), { 500, 53 });
 }
