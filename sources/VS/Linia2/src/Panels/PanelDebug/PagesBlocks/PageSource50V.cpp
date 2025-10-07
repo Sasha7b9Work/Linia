@@ -15,4 +15,6 @@ PageSource50V::PageSource50V(wxNotebook *parent) :
     PageChip(parent, "Источник 50 В")
 {
     self = this;
+
+    AppendRegister(new RegFPGA(this, "REG7", 8));
 }

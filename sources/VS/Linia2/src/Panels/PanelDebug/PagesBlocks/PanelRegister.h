@@ -41,7 +41,9 @@ public:
     static const int WIDTH = 800;
     static const int HEIGHT = 150;
 
-    PanelRegister(wxWindow *parent, const wxString &title, int bit_depth);
+    PanelRegister(wxWindow *parent, const wxString &_title,     // Это написано на изображении
+        const wxString &_name,                                  // А это имя для работы с контроллером
+        int bit_depth);
 
     void SetNamesBits(const wxArrayString &);
 
@@ -50,6 +52,8 @@ public:
 private:
 
     int bit_depth = 0;
+
+    wxString nameSTM32;                         // Под этим именем идёт работа с платой контроллера
 
     PainterRegister *painter = nullptr;
 
@@ -69,8 +73,8 @@ class RegFPGA : public PanelRegister
 {
 public:
 
-    RegFPGA(wxWindow *_parent, const wxString &_title, int _bit_depth) :
-        PanelRegister(_parent, _title, _bit_depth)
+    RegFPGA(wxWindow *_parent, const wxString & _name, int _bit_depth) :
+        PanelRegister(_parent, "", _name, _bit_depth)
     {
     }
 };

@@ -14,5 +14,7 @@ PageMeasCurrent::PageMeasCurrent(wxNotebook *parent) :
     PageChip(parent, "Измеритель тока")
 {
     self = this;
+
+    AppendRegister(new RegFPGA(this, "REG6", 16));
 }
 

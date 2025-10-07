@@ -18,4 +18,10 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
     PageChip(parent, "Канал B")
 {
     self = this;
+
+    AppendRegister(new RegAD5531(this, "DAC3"));
+
+    AppendRegister(new RegAD5531(this, "DAC4"));
+
+    AppendRegister(new RegFPGA(this, "REG4", 32));
 }

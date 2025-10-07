@@ -16,7 +16,7 @@ PageCommutator::PageCommutator(wxNotebook *parent) :
 {
     self = this;
 
-    PanelRegister *reg = new RegFPGA(this, "REG1", 16);
+    PanelRegister *reg = new RegFPGA(this, "REG2", 16);
 
     AppendRegister(reg);
 }

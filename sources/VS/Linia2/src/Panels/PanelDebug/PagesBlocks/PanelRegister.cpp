@@ -7,13 +7,14 @@
 #include "Panels/PanelDebug/CommandsCombo.h"
 
 
-PanelRegister::PanelRegister(wxWindow *parent, const wxString &title, int _bit_depth) :
+PanelRegister::PanelRegister(wxWindow *parent, const wxString &_title, const wxString &_name, int _bit_depth) :
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
-    bit_depth(_bit_depth)
+    bit_depth(_bit_depth),
+    nameSTM32(_name)
 {
     wxPanel::SetName("PanelRegister");
 
-    new wxStaticText(this, wxID_ANY, title, { 10, 10 });
+    new wxStaticText(this, wxID_ANY, _title + " " + _name, {10, 10});
 
     wxSize size_button{ 100, 30 };
 
@@ -212,14 +213,14 @@ void PanelRegister::OnEventCombo(wxCommandEvent &event)
 
 
 RegAD5543::RegAD5543(wxWindow *_parent, const wxString &_name) :
-    PanelRegister(_parent, _name, 12)
+    PanelRegister(_parent, "AD5543", _name, 12)
 {
 
 }
 
 
 RegAD5531::RegAD5531(wxWindow *_parent, const wxString &_name) :
-    PanelRegister(_parent, _name, 12)
+    PanelRegister(_parent, "AD5531", _name, 12)
 {
 
 }
