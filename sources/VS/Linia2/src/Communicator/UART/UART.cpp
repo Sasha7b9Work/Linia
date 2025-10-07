@@ -76,7 +76,7 @@ void UART::RecvCallback::Restore()
 bool UART::Init(void (*callback)(uint8))
 {
     fd = -1;
-    recv_callback = callback;
+    RecvCallback::Set(callback);
     id_thread = (pthread_t)-1;
 
     return Open();
@@ -356,7 +356,7 @@ void *UART::ReaderThreadFunc(void *)
         FD_SET(fd, &read_fds);
 
         timeout.tv_sec = 0;
-        timeout.tv_usec = 100000;
+        timeout.tv_usec = 10000;
 
         // select блокируется до появления данных или таймаута
         int result = select(fd + 1, &read_fds, nullptr, nullptr, &timeout);
@@ -367,13 +367,14 @@ void *UART::ReaderThreadFunc(void *)
 
             if (bytes_read > 0)
             {
-                if (recv_callback)
+                mutex_recv_callback.lock();
+
+                for (int i = 0; i < bytes_read; i++)
                 {
-                    for (int i = 0; i < bytes_read; i++)
-                    {
-                        recv_callback(buffer[i]);
-                    }
+                    recv_callback(buffer[i]);
                 }
+
+                mutex_recv_callback.unlock();
             }
             else if (bytes_read < 0)
             {
