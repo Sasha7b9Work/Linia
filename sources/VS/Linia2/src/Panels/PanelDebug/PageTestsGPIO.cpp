@@ -282,8 +282,6 @@ void PageTestsGPIO::ThreadFunc()
         FuncEncoder();
 
         FuncFPGA();
-
-        FuncUART();
     }
 }
 
@@ -341,6 +339,8 @@ void PageTestsGPIO::Update()
     PageTestsGPIO::self->_txtNumberMeas->SetValue(wxString::Format("%d", valueMeas));
 
     PageTestsGPIO::self->_txtNumberErrors->SetValue(wxString::Format("%d", numErrors));
+
+    FuncUART();
 }
 
 
