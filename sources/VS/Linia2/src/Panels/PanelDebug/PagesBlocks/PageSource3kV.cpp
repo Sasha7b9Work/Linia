@@ -13,4 +13,8 @@ PageSource3kV::PageSource3kV(wxNotebook *parent) :
     PageChip(parent, "Источник 3 кВ")
 {
     self = this;
+
+    PanelRegister *reg = new RegFPGA(this, "REG2", 24);
+
+    AppendRegister(reg);
 }
