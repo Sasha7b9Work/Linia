@@ -5,6 +5,7 @@
 class PageSource3kV : public wxPanel
 {
 public:
+
     PageSource3kV(wxNotebook *);
 
     static PageSource3kV *self;
