@@ -291,23 +291,22 @@ void PageTestsGPIO::ThreadFunc()
 void PageTestsGPIO::FuncUART()
 {
     PageTestsGPIO::self->mutex_str_UART.lock();
-    wxString str = PageTestsGPIO::self->strRecvUART;
-    PageTestsGPIO::self->strRecvUART.Clear();
+    std::vector<uint8> b = PageTestsGPIO::self->bytesUART;
+    PageTestsGPIO::self->bytesUART.clear();
     PageTestsGPIO::self->mutex_str_UART.unlock();
 
-    if (str.Length())
+    if (b.size())
     {
-        for (uint i = 0; i < str.Length(); i++)
+        for (uint i = 0; i < b.size(); i++)
         {
-            char symbol = str[i];
-
-            if (symbol == '\n')
-            {
-                symbol = 0x00;
-            }
             static wxString text;
 
-            text.Append(symbol);
+            char symbol = (char)b[i];
+
+            if (symbol != 0x00)
+            {
+                text.Append(symbol);
+            }
 
             PageTestsGPIO::self->txtRecvUART->SetValue(text);
 
@@ -551,12 +550,7 @@ void PageTestsGPIO::CallbackonREQ_RD(bool state)
 
 void PageTestsGPIO::FuncRecvUART(uint8 byte)
 {
-    if (byte == 0x00)
-    {
-        byte = '\n';
-    }
-
     PageTestsGPIO::self->mutex_str_UART.lock();
-    PageTestsGPIO::self->strRecvUART.Append(byte);
+    PageTestsGPIO::self->bytesUART.push_back(byte);
     PageTestsGPIO::self->mutex_str_UART.unlock();
 }
