@@ -455,7 +455,7 @@ void PageTestsGPIO::ThreadFuncAutoUART()
     {
         static int counter = 0;
 
-        wxString message = wxString::Format("Message %d", counter++);
+        wxString message = wxString::Format("MessagABC %d", counter++);
 
         UART::SendBuffer(message.GetData().AsChar(), (int)(std::strlen(message.GetData().AsChar()) + 1));
 
