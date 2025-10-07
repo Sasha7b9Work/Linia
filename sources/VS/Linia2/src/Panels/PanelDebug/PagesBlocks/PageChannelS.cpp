@@ -1,13 +1,13 @@
-// 2025/10/07 12:22:30 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/10/07 12:22:30 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/PagesBlocks/PageChannelS.h"
 
 
 /*
-    ADC     AD7691      16 разрядов
-    DAC     AD5531_1    12 разрядов
-    DAC     AD5531_2    12 разрядов
-    Регистр. упр.       32 разрядов
+    ADC     AD7691      16 СЂР°Р·СЂСЏРґРѕРІ
+    DAC     AD5531_1    12 СЂР°Р·СЂСЏРґРѕРІ
+    DAC     AD5531_2    12 СЂР°Р·СЂСЏРґРѕРІ
+    Р РµРіРёСЃС‚СЂ. СѓРїСЂ.       32 СЂР°Р·СЂСЏРґРѕРІ
 */
 
 
@@ -15,7 +15,7 @@ PageChannelS *PageChannelS::self = nullptr;
 
 
 PageChannelS::PageChannelS(wxNotebook *parent) :
-    PageChip(parent, "Канал S")
+    PageChip(parent, "РљР°РЅР°Р» S")
 {
     self = this;
 

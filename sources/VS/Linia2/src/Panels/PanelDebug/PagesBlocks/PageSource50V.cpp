@@ -1,10 +1,10 @@
-// 2025/10/07 12:29:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/10/07 12:29:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/PagesBlocks/PageSource50V.h"
 
 
 /*
-    Регистр управления      8 разрядов
+    Р РµРіРёСЃС‚СЂ СѓРїСЂР°РІР»РµРЅРёСЏ      8 СЂР°Р·СЂСЏРґРѕРІ
 */
 
 
@@ -12,7 +12,7 @@ PageSource50V *PageSource50V::self = nullptr;
 
 
 PageSource50V::PageSource50V(wxNotebook *parent) :
-    PageChip(parent, "Источник 50 В")
+    PageChip(parent, "РСЃС‚РѕС‡РЅРёРє 50 Р’")
 {
     self = this;
 
