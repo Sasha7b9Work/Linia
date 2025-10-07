@@ -18,6 +18,12 @@ PageChannelC::PageChannelC(wxNotebook *parent) :
 {
     self = this;
 
+    RegAD5543 *regDAC1 = new RegAD5543(this, "DAC1");
+
+    regDAC1->Disable();
+
+    AppendRegister(regDAC1);
+
     AppendRegister(new RegAD5543(this, "DAC2"));
 
     AppendRegister(new RegFPGA(this, "REG3", 32));
