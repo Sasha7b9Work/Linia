@@ -23,7 +23,11 @@
 namespace UART
 {
     static int fd = -1;
+
     static void (*recv_callback)(uint8) = nullptr;
+    static void (*stored_recv_callback)(uint8) = nullptr;
+    static std::mutex mutex_recv_callback;
+
     static pthread_t id_thread = (pthread_t)-1;
     static bool need_stop_reading = false;          // С помощью этого флага будем останавливать поток
 
@@ -36,6 +40,36 @@ namespace UART
     // Функция потока чтения UART
     // Читает данные из UART и вызывает recv_callback для каждого принятого байта
     static void *ReaderThreadFunc(void *arg);
+}
+
+
+void UART::RecvCallback::Store()
+{
+    mutex_recv_callback.lock();
+
+    stored_recv_callback = recv_callback;
+
+    mutex_recv_callback.unlock();
+}
+
+
+void UART::RecvCallback::Set(void (*callback)(uint8))
+{
+    mutex_recv_callback.lock();
+
+    recv_callback = callback;
+
+    mutex_recv_callback.unlock();
+}
+
+
+void UART::RecvCallback::Restore()
+{
+    mutex_recv_callback.lock();
+
+    recv_callback = stored_recv_callback;
+
+    mutex_recv_callback.unlock();
 }
 
 
