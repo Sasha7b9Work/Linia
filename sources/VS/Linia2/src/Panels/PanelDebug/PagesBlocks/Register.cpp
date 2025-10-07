@@ -7,10 +7,12 @@
 #include "Panels/PanelDebug/CommandsCombo.h"
 
 
-Register::Register(wxWindow *parent, const wxString &_title, const wxString &_name, int _bit_depth) :
+Register::Register(wxWindow *parent, const wxString &_title, const wxString &_name, int _bit_depth, bool _sended, bool _received) :
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
     bit_depth(_bit_depth),
-    nameSTM32(_name)
+    nameSTM32(_name),
+    sended(_sended),
+    received(_received)
 {
     wxPanel::SetName("Register");
 
@@ -235,14 +237,14 @@ void Register::OnEventCombo(wxCommandEvent &event)
 
 
 RegAD5543::RegAD5543(wxWindow *_parent, const wxString &_name) :
-    Register(_parent, "AD5543", _name, 12)
+    Register(_parent, "AD5543", _name, 12, true, false)
 {
 
 }
 
 
 RegAD5531::RegAD5531(wxWindow *_parent, const wxString &_name) :
-    Register(_parent, "AD5531", _name, 12)
+    Register(_parent, "AD5531", _name, 12, true, false)
 {
 
 }

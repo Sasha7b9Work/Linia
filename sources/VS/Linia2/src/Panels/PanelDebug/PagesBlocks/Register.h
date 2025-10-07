@@ -41,9 +41,10 @@ public:
     static const int WIDTH = 800;
     static const int HEIGHT = 150;
 
-    Register(wxWindow *parent, const wxString &_title,     // Это написано на изображении
-        const wxString &_name,                                  // А это имя для работы с контроллером
-        int bit_depth);
+    Register(wxWindow *parent, const wxString &_title,      // Это написано на изображении
+        const wxString &_name,                              // А это имя для работы с контроллером
+        int bit_depth, bool _sended,                        // Можно ли засылать в регистр
+        bool _received);                                    // Можно ли читать из регистра
 
     void SetNamesBits(const wxArrayString &);
 
@@ -53,10 +54,10 @@ private:
 
     wxButton *btnSend = nullptr;
     wxToggleButton *btnAutoSend = nullptr;
-
     int bit_depth = 0;
-
     wxString nameSTM32;                         // Под этим именем идёт работа с платой контроллера
+    bool sended = true;
+    bool received = true;
 
     PainterRegister *painter = nullptr;
 
@@ -78,7 +79,7 @@ class RegFPGA : public Register
 public:
 
     RegFPGA(wxWindow *_parent, const wxString & _name, int _bit_depth) :
-        Register(_parent, "", _name, _bit_depth)
+        Register(_parent, "", _name, _bit_depth, true, false)
     {
     }
 };
