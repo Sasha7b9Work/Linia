@@ -1,6 +1,6 @@
 ﻿// 2025/6/4 10:27:32 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/PanelDebug/PagesBlocks/PanelRegister.h"
+#include "Panels/PanelDebug/PagesBlocks/Register.h"
 #include "Panels/PanelDebug/PagesBlocks/PainterRegister.h"
 #include "Controls/TextControls.h"
 #include "Utils/StringUtils.h"
