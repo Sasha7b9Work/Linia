@@ -1,0 +1,20 @@
+// 2025/10/07 12:29:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#include "defines.h"
+#include "Panels/PanelDebug/PagesBlocks/PageSource50V.h"
+
+
+/*
+    Регистр управления      8 разрядов
+*/
+
+
+PageSource50V *PageSource50V::self = nullptr;
+
+
+PageSource50V::PageSource50V(wxNotebook *parent) :
+    wxPanel(parent)
+{
+    self = this;
+
+    wxPanel::SetName("Источник 50 В");
+}

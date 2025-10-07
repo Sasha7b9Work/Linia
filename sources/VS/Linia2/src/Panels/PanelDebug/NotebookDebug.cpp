@@ -8,6 +8,7 @@
 #include "Panels/PanelDebug/PagesBlocks/PageChannelB.h"
 #include "Panels/PanelDebug/PagesBlocks/PageChannelS.h"
 #include "Panels/PanelDebug/PagesBlocks/PageMeasCurrent.h"
+#include "Panels/PanelDebug/PagesBlocks/PageSource50V.h"
 
 
 NotebookDebug *NotebookDebug::self = nullptr;
@@ -25,6 +26,7 @@ NotebookDebug::NotebookDebug(wxWindow *parent) :
     AppendNewPage(new PageChannelB(this));
     AppendNewPage(new PageChannelS(this));
     AppendNewPage(new PageMeasCurrent(this));
+    AppendNewPage(new PageSource50V(this));
 
     wxWindowBase::Layout();
 }
