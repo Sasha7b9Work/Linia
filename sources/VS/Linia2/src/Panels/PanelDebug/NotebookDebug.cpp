@@ -4,6 +4,7 @@
 #include "Panels/PanelDebug/PageTestsGPIO.h"
 #include "Panels/PanelDebug/PagesBlocks/PageSource3kV.h"
 #include "Panels/PanelDebug/PagesBlocks/PageCommutator.h"
+#include "Panels/PanelDebug/PagesBlocks/PageChannelC.h"
 
 
 NotebookDebug *NotebookDebug::self = nullptr;
@@ -14,15 +15,18 @@ NotebookDebug::NotebookDebug(wxWindow *parent) :
 {
     self = this;
 
-    new PageTestsGPIO(this);
-    new PageSource3kV(this);
-    new PageCommutator(this);
-
-    wxNotebook::AddPage(PageTestsGPIO::self, PageTestsGPIO::self->GetName());
-    wxNotebook::AddPage(PageSource3kV::self, PageSource3kV::self->GetName());
-    wxNotebook::AddPage(PageCommutator::self, PageCommutator::self->GetName());
+    AppendNewPage(new PageTestsGPIO(this));
+    AppendNewPage(new PageSource3kV(this));
+    AppendNewPage(new PageCommutator(this));
+    AppendNewPage(new PageChannelC(this));
 
     wxWindowBase::Layout();
+}
+
+
+void NotebookDebug::AppendNewPage(wxPanel *page)
+{
+    wxNotebook::AddPage(page, page->GetName());
 }
 
 

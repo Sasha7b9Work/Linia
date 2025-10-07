@@ -15,4 +15,8 @@ public:
     void Update();
 
     void DeInit();
+
+private:
+
+    void AppendNewPage(wxPanel *);
 };
