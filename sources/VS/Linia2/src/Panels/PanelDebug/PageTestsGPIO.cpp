@@ -279,14 +279,14 @@ void PageTestsGPIO::ThreadFunc()
             str.value_int = str.pin->Get() ? 1 : 0;
         }
 
-        FuncEncoder();
+        ThreadFuncEncoder();
 
-        FuncFPGA();
+        ThreadFuncFPGA();
     }
 }
 
 
-void PageTestsGPIO::FuncUART()
+void PageTestsGPIO::FuncUpdateUART()
 {
     std::vector<uint8> b;
     PageTestsGPIO::self->mutex_str_UART.lock();
@@ -340,11 +340,11 @@ void PageTestsGPIO::Update()
 
     PageTestsGPIO::self->_txtNumberErrors->SetValue(wxString::Format("%d", numErrors));
 
-    FuncUART();
+    FuncUpdateUART();
 }
 
 
-void PageTestsGPIO::FuncEncoder()
+void PageTestsGPIO::ThreadFuncEncoder()
 {
     static bool prevKA = false;
     static bool prevKB = false;
@@ -384,7 +384,7 @@ void PageTestsGPIO::FuncEncoder()
 }
 
 
-void PageTestsGPIO::FuncFPGA()
+void PageTestsGPIO::ThreadFuncFPGA()
 {
     static bool prev = false;
 
