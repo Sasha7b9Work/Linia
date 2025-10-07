@@ -21,12 +21,12 @@ NotebookDebug::NotebookDebug(wxWindow *parent) :
 
     AppendNewPage(new PageTestsGPIO(this));
     AppendNewPage(new PageSource3kV(this));
-    AppendNewPage(new PageCommutator(this));
     AppendNewPage(new PageChannelC(this));
     AppendNewPage(new PageChannelB(this));
     AppendNewPage(new PageChannelS(this));
     AppendNewPage(new PageMeasCurrent(this));
     AppendNewPage(new PageSource50V(this));
+    AppendNewPage(new PageCommutator(this));
 
     wxWindowBase::Layout();
 }
