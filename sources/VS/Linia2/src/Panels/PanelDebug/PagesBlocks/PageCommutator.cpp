@@ -11,9 +11,7 @@ PageCommutator *PageCommutator::self = nullptr;
 
 
 PageCommutator::PageCommutator(wxNotebook *parent) :
-    wxPanel(parent)
+    PageChip(parent, "Коммутатор")
 {
     self = this;
-
-    wxPanel::SetName("Коммутатор");
 }

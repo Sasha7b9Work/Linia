@@ -12,9 +12,7 @@ PageSource50V *PageSource50V::self = nullptr;
 
 
 PageSource50V::PageSource50V(wxNotebook *parent) :
-    wxPanel(parent)
+    PageChip(parent, "Источник 50 В")
 {
     self = this;
-
-    wxPanel::SetName("Источник 50 В");
 }

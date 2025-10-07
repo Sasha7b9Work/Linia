@@ -1,8 +1,9 @@
 ﻿// 2025/10/07 11:52:47 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Panels/PanelDebug/PagesBlocks/PageChip.h"
 
 
-class PageChannelC : public wxPanel
+class PageChannelC : public PageChip
 {
 public:
 

@@ -15,9 +15,7 @@ PageChannelS *PageChannelS::self = nullptr;
 
 
 PageChannelS::PageChannelS(wxNotebook *parent) :
-    wxPanel(parent)
+    PageChip(parent, "Канал S")
 {
     self = this;
-
-    wxPanel::SetName("Канал S");
 }
