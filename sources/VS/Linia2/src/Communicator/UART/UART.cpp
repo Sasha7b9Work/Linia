@@ -200,33 +200,18 @@ bool UART::SendBuffer(const void *_buffer, int size)
         return false;
     }
 
-    int bytes_sent = 0;
-    while (bytes_sent < size)
+    int n = write(fd, buffer, size);
+
+    if (n < 0)
     {
-        int chunk_size = std::min(32, size - bytes_sent);
-        int n = write(fd, buffer + bytes_sent, chunk_size);
-
-        if (n < 0)
+        if (errno == EAGAIN || errno == EWOULDBLOCK)
         {
-            if (errno == EAGAIN || errno == EWOULDBLOCK)
-            {
-                usleep(1000);
-                continue;
-            }
-
             LOG_ERROR("Failed to send buffer, errno: %d", errno);
             return false;
         }
-
-        bytes_sent += n;
-
-        if (bytes_sent < size)
-        {
-            usleep(100);
-        }
     }
 
-    return (bytes_sent == size);
+    return (n == size);
 }
 
 
