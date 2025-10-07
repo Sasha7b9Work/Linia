@@ -41,7 +41,7 @@ void Device::Shutdown()
 
 void Device::CallbackOnReceive(uint8 byte)
 {
-    LOG_WRITE("receive %c", (char)byte);
+//    LOG_WRITE("receive %c", (char)byte);
 }
 
 
