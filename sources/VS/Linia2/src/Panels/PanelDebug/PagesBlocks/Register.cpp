@@ -18,13 +18,33 @@ Register::Register(wxWindow *parent, const wxString &_title, const wxString &_na
 
     new wxStaticText(this, wxID_ANY, _title + " " + _name, {10, 10});
 
-    wxSize size_button{ 100, 25 };
+    wxSize size_button{ 90, 25 };
 
-    int x = 580;
+    int x = 690;
 
-    btnAutoSend = new wxToggleButton(this, wxID_ANY, "Автозапись", { x, 0 }, size_button);
+    if (sended)
+    {
+        btnSend = new wxButton(this, wxID_ANY, "Записать", { x, 0 }, size_button);
 
-    btnSend = new wxButton(this, wxID_ANY, "Записать", { x + 100, 0 }, size_button);
+        windows.push_back(btnSend);
+
+        x -= size_button.x + 5;
+
+        btnAutoSend = new wxToggleButton(this, wxID_ANY, "Автозапись", { x, 0 }, size_button);
+
+        windows.push_back(btnAutoSend);
+
+        x -= size_button.x + 5;
+    }
+
+    if (received)
+    {
+        btnReceptin = new wxToggleButton(this, wxID_ANY, "Чтение", { x, 0 }, size_button);
+
+        windows.push_back(btnReceptin);
+
+        x -= size_button.x + 5;
+    }
 
     int y0 = 40;
 
@@ -143,19 +163,28 @@ void Register::OnEventToggleButton(wxCommandEvent &event)
 {
     int id = event.GetId();
 
-    if (id == btnAutoSend->GetId())
+    if (btnAutoSend && id == btnAutoSend->GetId())
     {
-        if (event.GetInt() == 1)
-        {
-            btnSend->Enable(false);
-        }
-        else
-        {
-            btnSend->Enable(true);
-        }
+        SetActiveAcross(event.GetInt() == 0, btnAutoSend);
+    }
+    else if (btnReceptin && id == btnReceptin->GetId())
+    {
+        SetActiveAcross(event.GetInt() == 0, btnReceptin);
     }
 
     event.Skip();
+}
+
+
+void Register::SetActiveAcross(bool active, wxWindow *_wnd)
+{
+    for (auto wnd : windows)
+    {
+        if (wnd != _wnd)
+        {
+            wnd->Enable(active);
+        }
+    }
 }
 
 

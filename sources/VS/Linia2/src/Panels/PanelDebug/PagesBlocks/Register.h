@@ -52,8 +52,12 @@ public:
 
 private:
 
-    wxButton *btnSend = nullptr;
-    wxToggleButton *btnAutoSend = nullptr;
+    wxButton *btnSend = nullptr;                // Однократная засылка
+    wxToggleButton *btnAutoSend = nullptr;      // Если кнопка нажата, то каждую секунду происходит запись в данный регистр
+    wxToggleButton *btnReceptin = nullptr;      // Если кнопка нажата, то каждую секунду происходит чтение данного регистра
+
+    std::vector<wxWindow *> windows;
+
     int bit_depth = 0;
     wxString nameSTM32;                         // Под этим именем идёт работа с платой контроллера
     bool sended = true;
@@ -71,6 +75,9 @@ private:
     void OnEventCheckBox(wxCommandEvent &);
     void OnEventCombo(wxCommandEvent &);
     void OnEventToggleButton(wxCommandEvent &);
+
+    // Все элементы кроме wnd будут установлены в состояние active
+    void SetActiveAcross(bool active, wxWindow *wnd);
 };
 
 
