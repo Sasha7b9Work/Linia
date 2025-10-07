@@ -4,7 +4,7 @@
 #include "Panels/PanelDebug/Old/PageAD5697.h"
 #include "Panels/PanelDebug/Old/PageAD9952.h"
 #include "Panels/PanelDebug/Old/PageMCP4811.h"
-#include "Panels/PanelDebug/PagesChips/PageAD5300.h"
+#include "Panels/PanelDebug/PagesBlocks/PageAD5300.h"
 #include "Panels/PanelDebug/PageTestsGPIO.h"
 
 
