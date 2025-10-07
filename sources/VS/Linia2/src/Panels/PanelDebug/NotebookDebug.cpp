@@ -6,6 +6,7 @@
 #include "Panels/PanelDebug/PagesBlocks/PageCommutator.h"
 #include "Panels/PanelDebug/PagesBlocks/PageChannelC.h"
 #include "Panels/PanelDebug/PagesBlocks/PageChannelB.h"
+#include "Panels/PanelDebug/PagesBlocks/PageChannelS.h"
 
 
 NotebookDebug *NotebookDebug::self = nullptr;
@@ -21,6 +22,7 @@ NotebookDebug::NotebookDebug(wxWindow *parent) :
     AppendNewPage(new PageCommutator(this));
     AppendNewPage(new PageChannelC(this));
     AppendNewPage(new PageChannelB(this));
+    AppendNewPage(new PageChannelS(this));
 
     wxWindowBase::Layout();
 }

@@ -1,0 +1,23 @@
+// 2025/10/07 12:22:30 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#include "defines.h"
+#include "Panels/PanelDebug/PagesBlocks/PageChannelS.h"
+
+
+/*
+    ADC     AD7691      16 разрядов
+    DAC     AD5531_1    12 разрядов
+    DAC     AD5531_2    12 разрядов
+    Регистр. упр.       32 разрядов
+*/
+
+
+PageChannelS *PageChannelS::self = nullptr;
+
+
+PageChannelS::PageChannelS(wxNotebook *parent) :
+    wxPanel(parent)
+{
+    self = this;
+
+    wxPanel::SetName("Канал S");
+}
