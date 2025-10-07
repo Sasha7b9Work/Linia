@@ -290,9 +290,13 @@ void PageTestsGPIO::ThreadFunc()
 
 void PageTestsGPIO::FuncUART()
 {
+    std::vector<uint8> b;
     PageTestsGPIO::self->mutex_str_UART.lock();
-    std::vector<uint8> b = PageTestsGPIO::self->bytesUART;
-    PageTestsGPIO::self->bytesUART.clear();
+    if (PageTestsGPIO::self->bytesUART.size())
+    {
+        b = PageTestsGPIO::self->bytesUART;
+        PageTestsGPIO::self->bytesUART.clear();
+    }
     PageTestsGPIO::self->mutex_str_UART.unlock();
 
     if (b.size())
