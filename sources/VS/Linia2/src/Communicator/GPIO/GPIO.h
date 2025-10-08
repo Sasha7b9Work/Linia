@@ -90,6 +90,8 @@ public:
     void ToLow();
 
     void ToHi();
+
+    static void Set(gpiod_line *, int);
 };
 
 namespace GPIO

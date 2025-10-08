@@ -445,6 +445,12 @@ void PinOut::Set(bool state)
 }
 
 
+void PinOut::Set(gpiod_line *line, int state)
+{
+    gpiod_line_set_value(line, state);
+}
+
+
 void PinOut::ToHi()
 {
     Set(true);
