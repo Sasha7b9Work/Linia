@@ -47,7 +47,7 @@ struct TimeMeterMS
 
     void WaitFor(uint timeMS);
 
-    float ElapsedTimeSec() const;
+    float ElapsedTime() const;
 
 private:
 
