@@ -39,19 +39,11 @@ struct TimeMeterMS
     // Установить момент отсчёта
     void Reset();
 
-    // Теймер "сработает" через time ms (Значение IsFinished() будет true)
-    void SetResponseTime(uint time);
-
-    // Вернёт true, когда закончится промежуток time из функции SetResponseTime
-    bool IsFinished() const;
-
-    void WaitFor(uint timeMS);
-
     float ElapsedTime() const;
 
 private:
 
-    uint time_reset;        // От этого времени отсчитывается ElapsedTime()
+    clock_t time_reset;        // От этого времени отсчитывается ElapsedTime()
 
-    uint time_response;     // После этого времени нужно вернуть true в IsFinished()
+    clock_t time_response;     // После этого времени нужно вернуть true в IsFinished()
 };

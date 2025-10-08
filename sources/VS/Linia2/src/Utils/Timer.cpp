@@ -17,20 +17,8 @@ uint TimerMS::ElapsedTime()
 
 void TimeMeterMS::Reset()
 {
-    time_reset = (uint)std::clock();
+    time_reset = std::clock();
     time_response = time_reset;
-}
-
-
-void TimeMeterMS::SetResponseTime(uint time)
-{
-    time_response = (uint)std::clock() + time;
-}
-
-
-bool TimeMeterMS::IsFinished() const
-{
-    return ((uint)std::clock() >= time_response);
 }
 
 
@@ -58,17 +46,7 @@ void Timer::PauseOnMS(uint timeMS)
 }
 
 
-void TimeMeterMS::WaitFor(uint timeMS)
-{
-    SetResponseTime(timeMS);
-
-    while (!IsFinished())
-    {
-    }
-}
-
-
 float TimeMeterMS::ElapsedTime() const
 {
-    return 100.0f * (float)(((uint)std::clock() - time_reset) / CLOCKS_PER_SEC);
+    return 1000.0f * (float)((std::clock() - time_reset) / CLOCKS_PER_SEC);
 }
