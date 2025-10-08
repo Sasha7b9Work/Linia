@@ -534,7 +534,7 @@ void PageTestsGPIO::Init()
         _thread = new std::thread(ThreadFunc);
 #ifdef WIN32
 #else
-        set_thread_priority_linux(t, SCHED_FIFO, 50);
+        set_thread_priority_linux(*_thread, SCHED_FIFO, 50);
 #endif
         _thread->detach();
     }
