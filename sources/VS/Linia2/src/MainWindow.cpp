@@ -149,9 +149,9 @@ void MainWindow::TuneFont()
 
     //------------------------------------------------------------
 
-    alignas(sizeof(int)) wxFontFamily family = wxFONTFAMILY_DEFAULT;
+    wxFontFamily family = wxFONTFAMILY_DEFAULT;
 
-    Config::ReadFontParameter("font_family", (int &)family);
+    Config::ReadFontParameter("font_family", family);
 
     font.SetFamily(family);
 
@@ -159,15 +159,15 @@ void MainWindow::TuneFont()
 
     wxString face_name = "Segoe UI";
 
-    Config::ReadFontParameter("font_face_name", face_name);
+    Config::ReadString("font_face_name", face_name);
 
     font.SetFaceName(face_name);
 
     //------------------------------------------------------------
 
-    alignas(sizeof(int)) wxFontStyle style = wxFONTSTYLE_NORMAL;
+    wxFontStyle style = wxFONTSTYLE_NORMAL;
 
-    Config::ReadFontParameter("font_style", (int &)style);
+    Config::ReadFontParameter("font_style", style);
 
     font.SetStyle(style);
 
@@ -175,18 +175,18 @@ void MainWindow::TuneFont()
 
     int point_size = 9;
 
-    Config::ReadFontParameter("font_point_size", point_size);
+    Config::ReadInt("font_point_size", point_size);
 
     font.SetPointSize(point_size);
 
     //------------------------------------------------------------
 
-    wxSize pixel_size = font.GetPixelSize();
+    wxPoint pixel_size{ font.GetPixelSize().x, font.GetPixelSize().y };
 
-    Config::ReadFontParameter("font_pixel_size_x", pixel_size.x);
-    Config::ReadFontParameter("font_pixel_size_y", pixel_size.y);
+    Config::Read("font_pixel_size_x", pixel_size.x);
+    Config::Read("font_pixel_size_y", pixel_size.y);
 
-    font.SetPixelSize(pixel_size);
+    font.SetPixelSize({ pixel_size.x, pixel_size.y });
 
     //------------------------------------------------------------
 
@@ -196,9 +196,9 @@ void MainWindow::TuneFont()
 
     //------------------------------------------------------------
 
-    alignas(sizeof(int)) wxFontWeight weigth = wxFONTWEIGHT_NORMAL;
+    wxFontWeight weigth = wxFONTWEIGHT_NORMAL;
 
-    Config::ReadFontParameter("font_weigth", (int &)weigth);
+    Config::ReadFontParameter("font_weigth", weigth);
 
     font.SetWeight(weigth);
 

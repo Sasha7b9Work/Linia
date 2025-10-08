@@ -3,10 +3,6 @@
 #include "Utils/Configurator.h"
 
 
-template void Config::ReadFontParameter<int>(const wxString &key, int &parameter);
-template void Config::ReadFontParameter<wxString>(const wxString &key, wxString &parameter);
-
-
 namespace Config
 {
     static wxConfigBase *base = nullptr;
@@ -231,15 +227,25 @@ void Config::Write(const wxString &key, const wxString &value)
 }
 
 
-template <class T>
-void Config::ReadFontParameter(const wxString &key, T &parameter)
+void Config::ReadFontParameter(const wxString &key, wxFontFamily &parameter)
 {
-    if (base->Exists(key))
-    {
-        base->Read(key, &parameter);
-    }
-    else
-    {
-        base->Write(key, parameter);
-    }
+    int value = ReadInt(key, wxFONTFAMILY_DEFAULT);
+
+    parameter = (wxFontFamily)value;
+}
+
+
+void Config::ReadFontParameter(const wxString &key, wxFontStyle &style)
+{
+    int value = ReadInt(key, wxFONTWEIGHT_NORMAL);
+
+    style = (wxFontStyle)value;
+}
+
+
+void Config::ReadFontParameter(const wxString &key, wxFontWeight &weight)
+{
+    int value = ReadInt(key, wxFONTWEIGHT_NORMAL);
+
+    weight = (wxFontWeight)value;
 }

@@ -9,8 +9,9 @@ namespace Config
 
     void DeInit();
 
-    template <class T>
-    void ReadFontParameter(const wxString &, T &);
+    void ReadFontParameter(const wxString &, wxFontFamily &);
+    void ReadFontParameter(const wxString &, wxFontStyle &);
+    void ReadFontParameter(const wxString &, wxFontWeight &);
 
     // Устанавливает файл с настройками.
     // Если "", будет установлен глобальный файл
