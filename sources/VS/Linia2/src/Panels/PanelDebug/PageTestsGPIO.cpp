@@ -460,7 +460,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
             PageTestsGPIO::self->numErrors++;
         }
 
-//        LOG_WRITE("Time FPGA = %f ms", meter.ElapsedTime());
+        LOG_WRITE("Time FPGA = %f ms", meter.ElapsedTime());
     }
 
     prev = pinFIFO_FULL.Get();
