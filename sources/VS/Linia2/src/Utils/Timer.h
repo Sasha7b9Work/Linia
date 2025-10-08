@@ -47,6 +47,8 @@ struct TimeMeterMS
 
     void WaitFor(uint timeMS);
 
+    uint ElapsedTime() const;
+
 private:
 
     uint time_reset;        // От этого времени отсчитывается ElapsedTime()

@@ -3,6 +3,7 @@
 #include "Panels/PanelDebug/PageTestsGPIO.h"
 #include "Utils/SystemDepend.h"
 #include "Communicator/UART/UART.h"
+#include "Utils/Timer.h"
 
 
 PageTestsGPIO *PageTestsGPIO::self = nullptr;
@@ -404,6 +405,8 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
     if (pinFIFO_FULL.Get() && prev == false)
     {
+        TimeMeterMS meter;
+
         int bytes_left = 8000;
 
         uint8 bytes[5];
@@ -452,6 +455,8 @@ void PageTestsGPIO::ThreadFuncFPGA()
         {
             PageTestsGPIO::self->numErrors++;
         }
+
+        LOG_WRITE("Time FPGA = %u ms", meter.ElapsedTime());
     }
 
     prev = pinFIFO_FULL.Get();

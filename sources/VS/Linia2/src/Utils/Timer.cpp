@@ -66,3 +66,9 @@ void TimeMeterMS::WaitFor(uint timeMS)
     {
     }
 }
+
+
+uint TimeMeterMS::ElapsedTime() const
+{
+    return ((uint)std::clock() >= time_reset);
+}
