@@ -448,7 +448,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
                         byte |= 0;
                     }
 
-                    PinOut::Set(infoREQ, 0);
+//                    PinOut::Set(infoREQ, 0);
                 }
 
                 bytes[b] = byte;
