@@ -363,7 +363,7 @@ void PageTestsGPIO::Update()
 
     if (time_FPGA > 0.1f)
     {
-        LOG_WRITE("time FPGA = %.1f", time_FPGA);
+        LOG_WRITE("time FPGA = %.1f ms", time_FPGA);
         time_FPGA = 0.0f;
     }
 }
