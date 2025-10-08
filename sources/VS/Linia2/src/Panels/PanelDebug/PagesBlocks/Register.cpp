@@ -284,3 +284,11 @@ RegAD7691::RegAD7691(wxWindow *_parent, const wxString &_name) :
 {
 
 }
+
+
+bool Register::Enable(bool enable)
+{
+    painter->SetEnabled(enable);
+
+    return wxPanel::Enable(enable);
+}

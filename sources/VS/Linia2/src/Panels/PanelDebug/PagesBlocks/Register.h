@@ -50,6 +50,8 @@ public:
 
     void SetDescriptionBits(int index, const std::vector<StructDescription> &);
 
+    virtual bool Enable(bool) override;
+
 private:
 
     wxButton *btnSend = nullptr;                // Однократная засылка

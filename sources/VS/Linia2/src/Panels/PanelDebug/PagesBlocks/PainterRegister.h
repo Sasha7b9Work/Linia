@@ -22,11 +22,13 @@ public:
     // Возвращает координату X бита num_bit
     int BitX(int num_bit, int all_bits) const;
 
+    void SetEnabled(bool);
+
 private:
 
     bool first_paint = true;
-
     Register *panel = nullptr;
+    bool enabled = true;
 
     // Возвращает координаты верхнего левого угла отображения бита
     wxPoint CoordBit(int num_bit);
