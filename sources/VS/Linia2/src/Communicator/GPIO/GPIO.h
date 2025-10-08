@@ -71,6 +71,8 @@ public:
 
     void SetChangeCallback(ChangeCallback);
 
+    static bool GetHardware(gpiod_line *);
+
 private:
 
     ChangeCallback callback_;

@@ -389,6 +389,13 @@ namespace GPIO
     }
 }
 
+
+bool PinIn::GetHardware(gpiod_line *line)
+{
+    return gpiod_line_get_value(line) == 1;
+}
+
+
 bool Pin::Get() const
 {
     if (type_ >= Pin::Count) return false;

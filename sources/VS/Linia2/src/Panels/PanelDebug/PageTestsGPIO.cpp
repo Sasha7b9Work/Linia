@@ -415,6 +415,8 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
     if (pinFIFO_FULL.Get() && prev == false)
     {
+        InputPinInfo *info = GPIO::GetInputPinInfo(Pin::In_DAT_F0);
+
         TimeMeterMS meter;
 
         int bytes_left = 8000;
@@ -434,7 +436,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
                 for (int i = 7; i >= 0; i--)
                 {
                     pinREQ_RD.ToHi();
-                    if (pinDAT_F0.Get())
+                    if (PinIn::GetHardware(info->hw.line))
                     {
                         byte |= (1 << i);
                     }
