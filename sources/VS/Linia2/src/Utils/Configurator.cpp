@@ -227,17 +227,17 @@ void Config::Write(const wxString &key, const wxString &value)
 }
 
 
-void Config::ReadFontParameter(const wxString &key, wxFontFamily &parameter)
+void Config::ReadFontParameter(const wxString &key, wxFontFamily &family)
 {
-    int value = ReadInt(key, wxFONTFAMILY_DEFAULT);
+    int value = ReadInt(key, (int)family);
 
-    parameter = (wxFontFamily)value;
+    family = (wxFontFamily)value;
 }
 
 
 void Config::ReadFontParameter(const wxString &key, wxFontStyle &style)
 {
-    int value = ReadInt(key, wxFONTWEIGHT_NORMAL);
+    int value = ReadInt(key, (int)style);
 
     style = (wxFontStyle)value;
 }
