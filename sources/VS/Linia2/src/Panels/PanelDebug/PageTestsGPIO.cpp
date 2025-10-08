@@ -361,7 +361,7 @@ void PageTestsGPIO::Update()
 
     FuncUpdateUART();
 
-    if (time_FPGA < 0.1f)
+    if (time_FPGA > 0.1f)
     {
         LOG_WRITE("time FPGA = %.1f", time_FPGA);
         time_FPGA = 0.0f;
