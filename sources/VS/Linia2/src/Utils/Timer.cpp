@@ -48,5 +48,5 @@ void Timer::PauseOnMS(uint timeMS)
 
 float TimeMeterMS::ElapsedTime() const
 {
-    return 1000.0f * (float)((std::clock() - time_reset) / CLOCKS_PER_SEC);
+    return (1000.0f * (float)(std::clock() - time_reset)) / CLOCKS_PER_SEC;
 }
