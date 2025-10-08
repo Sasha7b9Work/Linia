@@ -98,7 +98,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
         btnSendUART = new wxButton(boxUART, wxID_ANY, "Send", { 120, 70 }, { 50, 20 });
 
         new wxStaticText(boxUART, wxID_ANY, "Принято:", { 10, 105 });
-        txtRecvUART = new wxTextCtrl(boxUART, wxID_ANY, "", { 10, 150 }, { 150, 20 }, wxTE_READONLY);
+        txtRecvUART = new wxTextCtrl(boxUART, wxID_ANY, "", { 10, 130 }, { 170, 20 }, wxTE_READONLY);
 
         btnAutoUART = new wxToggleButton(boxUART, wxID_ANY, "AutoSend", { 10, 170 }, { 100, 20 });
     }
@@ -462,7 +462,7 @@ void PageTestsGPIO::ThreadFuncAutoUART()
     {
         static int counter = 0;
 
-        wxString message = wxString::Format("12345678901234567 %d", counter++);
+        wxString message = wxString::Format("Message %d", counter++);
 
         UART::SendBuffer(message.GetData().AsChar(), (int)(std::strlen(message.GetData().AsChar()) + 1));
 
