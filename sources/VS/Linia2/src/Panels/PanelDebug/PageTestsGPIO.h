@@ -23,6 +23,8 @@ public:
 
 private:
 
+    float time_FPGA = 0.0f;
+
     // UART
     wxButton *btnSendUART = nullptr;
     wxToggleButton *btnAutoUART = nullptr;    // По этой кнопке начинается автоматическая передача по UART

@@ -360,6 +360,12 @@ void PageTestsGPIO::Update()
     PageTestsGPIO::self->_txtNumberErrors->SetValue(wxString::Format("%d", numErrors));
 
     FuncUpdateUART();
+
+    if (time_FPGA < 0.1f)
+    {
+        LOG_WRITE("time FPGA = %.1f", time_FPGA);
+        time_FPGA = 0.0f;
+    }
 }
 
 
@@ -460,7 +466,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
             PageTestsGPIO::self->numErrors++;
         }
 
-        LOG_WRITE("Time FPGA = %f ms", meter.ElapsedTime());
+        PageTestsGPIO::self->time_FPGA = meter.ElapsedTime();
     }
 
     prev = pinFIFO_FULL.Get();
