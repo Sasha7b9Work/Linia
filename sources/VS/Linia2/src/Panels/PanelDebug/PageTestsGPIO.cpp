@@ -433,7 +433,6 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
                 for (int i = 7; i >= 0; i--)
                 {
-                    bytes_left--;
                     pinREQ_RD.ToHi();
                     if (pinDAT_F0.Get())
                     {
@@ -447,6 +446,8 @@ void PageTestsGPIO::ThreadFuncFPGA()
                 }
 
                 bytes[b] = byte;
+
+                bytes_left--;
             }
 
             pinSPI_CS.ToLow();
