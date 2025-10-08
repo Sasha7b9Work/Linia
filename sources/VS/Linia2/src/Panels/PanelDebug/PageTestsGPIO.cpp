@@ -437,7 +437,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
                 for (int i = 7; i >= 0; i--)
                 {
-                    PinOut::Set(infoREQ, 1);
+//                    PinOut::Set(infoREQ, 1);
 
                     if (PinIn::GetHardware(infoF0))
                     {
