@@ -286,6 +286,14 @@ void PageTestsGPIO::ThreadFunc()
 }
 
 
+void PageTestsGPIO::FuncRecvUART(uint8 byte)
+{
+    PageTestsGPIO::self->mutex_str_UART.lock();
+    PageTestsGPIO::self->bytesUART.push_back(byte);
+    PageTestsGPIO::self->mutex_str_UART.unlock();
+}
+
+
 void PageTestsGPIO::FuncUpdateUART()
 {
     std::vector<uint8> b;
@@ -556,12 +564,4 @@ void PageTestsGPIO::CallbackOnFIFO_FULL(bool state)
 void PageTestsGPIO::CallbackonREQ_RD(bool state)
 {
     PageTestsGPIO::self->OnChangeStatePin(&pinREQ_RD, state);
-}
-
-
-void PageTestsGPIO::FuncRecvUART(uint8 byte)
-{
-    PageTestsGPIO::self->mutex_str_UART.lock();
-    PageTestsGPIO::self->bytesUART.push_back(byte);
-    PageTestsGPIO::self->mutex_str_UART.unlock();
 }
