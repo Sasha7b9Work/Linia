@@ -149,7 +149,7 @@ void MainWindow::TuneFont()
 
     //------------------------------------------------------------
 
-    wxFontFamily family = wxFONTFAMILY_DEFAULT;
+    alignas(sizeof(int)) wxFontFamily family = wxFONTFAMILY_DEFAULT;
 
     Config::ReadFontParameter("font_family", (int &)family);
 
@@ -165,7 +165,7 @@ void MainWindow::TuneFont()
 
     //------------------------------------------------------------
 
-    wxFontStyle style = wxFONTSTYLE_NORMAL;
+    alignas(sizeof(int)) wxFontStyle style = wxFONTSTYLE_NORMAL;
 
     Config::ReadFontParameter("font_style", (int &)style);
 
@@ -196,7 +196,7 @@ void MainWindow::TuneFont()
 
     //------------------------------------------------------------
 
-    wxFontWeight weigth = wxFONTWEIGHT_NORMAL;
+    alignas(sizeof(int)) wxFontWeight weigth = wxFONTWEIGHT_NORMAL;
 
     Config::ReadFontParameter("font_weigth", (int &)weigth);
 
