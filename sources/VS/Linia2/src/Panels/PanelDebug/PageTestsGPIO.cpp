@@ -272,17 +272,17 @@ void PageTestsGPIO::ThreadFunc()
 {
     while (thread_is_running)
     {
-        for (auto &str : PageTestsGPIO::self->gpio_out)
-        {
-            str.value_pull = str.pin->Get() ? 1 : 0;
-        }
-
-        for (auto &str : PageTestsGPIO::self->gpio_in)
-        {
-            str.value_int = str.pin->Get() ? 1 : 0;
-        }
-
-        ThreadFuncEncoder();
+//        for (auto &str : PageTestsGPIO::self->gpio_out)
+//        {
+//            str.value_pull = str.pin->Get() ? 1 : 0;
+//        }
+//
+//        for (auto &str : PageTestsGPIO::self->gpio_in)
+//        {
+//            str.value_int = str.pin->Get() ? 1 : 0;
+//        }
+//
+//        ThreadFuncEncoder();
 
         ThreadFuncFPGA();
     }
