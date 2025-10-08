@@ -68,7 +68,7 @@ void TimeMeterMS::WaitFor(uint timeMS)
 }
 
 
-uint TimeMeterMS::ElapsedTime() const
+float TimeMeterMS::ElapsedTimeSec() const
 {
-    return ((uint)std::clock() - time_reset) / (uint)CLOCKS_PER_SEC * 1000U;
+    return (float)(((uint)std::clock() - time_reset) / CLOCKS_PER_SEC);
 }
