@@ -27,6 +27,7 @@ private:
     wxButton *btnSendUART = nullptr;
     wxToggleButton *btnAutoUART = nullptr;    // По этой кнопке начинается автоматическая передача по UART
     wxTextCtrl *txtRecvUART = nullptr;
+    wxTextCtrl *txtSendUART = nullptr;
     std::vector<uint8> bytesUART;
     std::mutex mutex_str_UART;
 

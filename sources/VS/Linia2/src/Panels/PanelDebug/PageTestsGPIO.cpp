@@ -91,16 +91,15 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
     wxStaticBox *boxUART = new wxStaticBox(this, wxID_ANY, "UART", { boxGPIO->GetPosition().x + boxGPIO->GetSize().x + 10, 10 }, { 200, 270 });
 
     {
-        new wxStaticText(boxUART, wxID_ANY, "TX : 8", { 10, 20 });
-        new wxStaticText(boxUART, wxID_ANY, "RX : 10", { 10, 45 });
+        new wxStaticText(boxUART, wxID_ANY, "TX : 8", { 10, SD::Y_SB(20) });
+        new wxStaticText(boxUART, wxID_ANY, "RX : 10", { 70, SD::Y_SB(20) });
 
-        new wxTextCtrl(boxUART, wxID_ANY, "", { 10, 70 }, { 100, 20 });
-        btnSendUART = new wxButton(boxUART, wxID_ANY, "Send", { 120, 70 }, { 50, 20 });
+        txtSendUART = new wxTextCtrl(boxUART, wxID_ANY, "", { 10, SD::Y_SB(50) }, { 170, 20 });
+        btnSendUART = new wxButton(boxUART, wxID_ANY, "Send", { 10, SD::Y_SB(75) }, { 100, 20 });
+        btnAutoUART = new wxToggleButton(boxUART, wxID_ANY, "AutoSend", { 10, SD::Y_SB(100) }, { 100, 20 });
 
-        new wxStaticText(boxUART, wxID_ANY, "Принято:", { 10, 105 });
-        txtRecvUART = new wxTextCtrl(boxUART, wxID_ANY, "", { 10, 130 }, { 170, 20 }, wxTE_READONLY);
-
-        btnAutoUART = new wxToggleButton(boxUART, wxID_ANY, "AutoSend", { 10, 170 }, { 100, 20 });
+        new wxStaticText(boxUART, wxID_ANY, "Принято:", { 10, SD::Y_SB(150) });
+        txtRecvUART = new wxTextCtrl(boxUART, wxID_ANY, "", { 10, SD::Y_SB(170) }, { 170, 20 }, wxTE_READONLY);
     }
 
     wxStaticBox *boxSPI = new wxStaticBox(this, wxID_ANY, "SPI", { boxUART->GetPosition().x + boxUART->GetSize().x + 10, 10 }, { 200, 270 });
@@ -241,7 +240,10 @@ void PageTestsGPIO::OnEventToggleButton(wxCommandEvent &event)
 
     if (id == btnAutoUART->GetId())
     {
-        btnSendUART->Enable(event.GetInt() == 0);
+        bool enable = event.GetInt() == 0;
+
+        btnSendUART->Enable(enable);
+        txtSendUART->Enable(enable);
 
         if (event.GetInt())
         {
@@ -462,7 +464,7 @@ void PageTestsGPIO::ThreadFuncAutoUART()
     {
         static int counter = 0;
 
-        wxString message = wxString::Format("Message %d", counter++);
+        wxString message = wxString::Format("%s %d", PageTestsGPIO::self->txtSendUART->GetValue().c_str().AsChar(), counter++);
 
         UART::SendBuffer(message.GetData().AsChar(), (int)(std::strlen(message.GetData().AsChar()) + 1));
 
