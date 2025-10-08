@@ -308,11 +308,10 @@ void PageTestsGPIO::FuncUpdateUART()
             if (symbol != 0x00)
             {
                 text.Append(symbol);
-                PageTestsGPIO::self->txtRecvUART->SetValue(text);
             }
-
-            if (symbol == 0)
+            else
             {
+                PageTestsGPIO::self->txtRecvUART->SetValue(text);
                 text.Clear();
             }
 
