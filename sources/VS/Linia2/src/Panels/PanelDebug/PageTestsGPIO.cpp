@@ -417,7 +417,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
     {
         gpiod_line *infoF0 = GPIO::GetInputPinInfo(Pin::In_DAT_F0)->hw.line;
         gpiod_line *infoCS = GPIO::GetOutputPinInfo(Pin::Out_SPI_CS)->hw.line;
-//        gpiod_line *infoREQ = GPIO::GetOutputPinInfo(Pin::Out_REQ_RD)->hw.line;
+        gpiod_line *infoREQ = GPIO::GetOutputPinInfo(Pin::Out_REQ_RD)->hw.line;
 
         TimeMeterMS meter;
 
@@ -437,7 +437,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
                 for (int i = 7; i >= 0; i--)
                 {
-//                    PinOut::Set(infoREQ, 1);
+                    PinOut::Set(infoREQ, 1);
 
                     if (PinIn::GetHardware(infoF0))
                     {
@@ -448,7 +448,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
                         byte |= 0;
                     }
 
-//                    PinOut::Set(infoREQ, 0);
+                    PinOut::Set(infoREQ, 0);
                 }
 
                 bytes[b] = byte;
