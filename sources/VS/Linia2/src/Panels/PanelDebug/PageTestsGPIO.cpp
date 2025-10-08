@@ -4,6 +4,10 @@
 #include "Utils/SystemDepend.h"
 #include "Communicator/UART/UART.h"
 #include "Utils/Timer.h"
+#ifdef WIN32
+#else
+    #include <sched.h>
+#endif
 
 
 PageTestsGPIO *PageTestsGPIO::self = nullptr;
@@ -502,6 +506,23 @@ void PageTestsGPIO::OnChangeStatePin(PinOut *pin, bool state)
 }
 
 
+#ifdef WIN32
+#else
+void set_thread_priority_linux(std::thread &thread, int policy, int priority)
+{
+    pthread_t handle = thread.native_handle();
+
+    sched_param sch_params;
+    sch_params.sched_priority = priority;
+
+    if (pthread_setschedparam(handle, policy, &sch_params) != 0)
+    {
+        std::cerr << "Failed to set thread priority" << std::endl;
+    }
+}
+#endif
+
+
 void PageTestsGPIO::Init()
 {
     if (!_thread)
@@ -511,6 +532,10 @@ void PageTestsGPIO::Init()
 
         thread_is_running = true;
         _thread = new std::thread(ThreadFunc);
+#ifdef WIN32
+#else
+        set_thread_priority_linux(t, SCHED_FIFO, 50);
+#endif
         _thread->detach();
     }
 }

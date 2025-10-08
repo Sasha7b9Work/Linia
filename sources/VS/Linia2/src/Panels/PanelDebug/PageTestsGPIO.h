@@ -91,11 +91,11 @@ private:
     void OnChangeStatePin(PinIn *, bool state);
     void OnChangeStatePin(PinOut *, bool state);
 
-    static void FuncUpdateUART();     // Обработка принятых данных по UART в Update
+    static void FuncUpdateUART();       // Обработка принятых данных по UART в Update
 
-    static void ThreadFunc();   // Главный поток
-    static void ThreadFuncFPGA();     // Обработка ПЛИС в главном потоке
-    static void ThreadFuncEncoder();  // Обработка ручки в главном потоке
+    static void ThreadFunc();           // Главный поток
+    static void ThreadFuncFPGA();       // Обработка ПЛИС в главном потоке
+    static void ThreadFuncEncoder();    // Обработка ручки в главном потоке
     static bool thread_is_running;
     std::thread *_thread = nullptr;
 
