@@ -245,7 +245,7 @@ void Config::ReadFontParameter(const wxString &key, wxFontStyle &style)
 
 void Config::ReadFontParameter(const wxString &key, wxFontWeight &weight)
 {
-    int value = ReadInt(key, wxFONTWEIGHT_NORMAL);
+    int value = ReadInt(key, (int)weight);
 
     weight = (wxFontWeight)value;
 }
