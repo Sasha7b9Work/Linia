@@ -431,11 +431,14 @@ void PageTestsGPIO::ThreadFuncFPGA()
         {
             PinOut::Set(infoCS, 1);
 
-            for (int b = 0; b < 5; b++)
+            volatile int b = 0;
+
+            for (; b < 5; b++)
             {
                 volatile uint8 byte = 0;
+                volatile int i = 7;
 
-                for (int i = 7; i >= 0; i--)
+                for (; i >= 0; i--)
                 {
 ////                    PinOut::Set(infoREQ, 1);
 //
