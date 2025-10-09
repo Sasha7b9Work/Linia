@@ -24,6 +24,7 @@ public:
 private:
 
     float time_FPGA = 0.0f;
+    float time_ave_FPGA = 0.0f;
 
     // UART
     wxButton *btnSendUART = nullptr;

@@ -363,7 +363,7 @@ void PageTestsGPIO::Update()
 
     if (time_FPGA > 0.1f)
     {
-        LOG_WRITE("time FPGA = %.1f ms", time_FPGA);
+        LOG_WRITE("time FPGA last = %.1f ms, ave = %.1f ms", time_FPGA, time_ave_FPGA);
         time_FPGA = 0.0f;
     }
 }
@@ -437,7 +437,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
                 for (int i = 7; i >= 0; i--)
                 {
-                    PinOut::Set(infoREQ, 1);
+//                    PinOut::Set(infoREQ, 1);
 
                     if (PinIn::GetHardware(infoF0))
                     {
@@ -473,7 +473,17 @@ void PageTestsGPIO::ThreadFuncFPGA()
             PageTestsGPIO::self->numErrors++;
         }
 
-        PageTestsGPIO::self->time_FPGA = meter.ElapsedTime();
+        {
+            static float full_time = 0.0f;
+            static int num_meas = 0;
+
+            PageTestsGPIO::self->time_FPGA = meter.ElapsedTime();
+
+            full_time += PageTestsGPIO::self->time_FPGA;
+            num_meas++;
+
+            PageTestsGPIO::self->time_ave_FPGA = full_time / (float)num_meas;
+        }
     }
 
     prev = pinFIFO_FULL.Get();
