@@ -437,18 +437,18 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
                 for (int i = 7; i >= 0; i--)
                 {
-//                    PinOut::Set(infoREQ, 1);
-
-//                    if (PinIn::GetHardware(infoF0))
-                    {
-                        byte |= (1 << i);
-                    }
-//                    else
-                    {
-                        byte |= 0;
-                    }
-
-//                    PinOut::Set(infoREQ, 0);
+////                    PinOut::Set(infoREQ, 1);
+//
+////                    if (PinIn::GetHardware(infoF0))
+//                    {
+//                        byte |= (1 << i);
+//                    }
+////                    else
+//                    {
+//                        byte |= 0;
+//                    }
+//
+////                    PinOut::Set(infoREQ, 0);
                 }
 
                 bytes[b] = byte;

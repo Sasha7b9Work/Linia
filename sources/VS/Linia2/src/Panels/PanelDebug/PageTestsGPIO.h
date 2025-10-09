@@ -30,7 +30,7 @@ private:
     *            if (PinIn::GetHardware(infoF0)) - 75 мс
     *   Отключен PinOut::Set(infoREQ, 1);
     *            if (PinIn::GetHardware(infoF0))
-    *            PinOut::Set(infoREQ, 0);       - 
+    *            PinOut::Set(infoREQ, 0);        - 5 мс
     */
     float time_ave_FPGA = 0.0f;
 
