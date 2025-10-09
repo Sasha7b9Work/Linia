@@ -428,14 +428,14 @@ void PageTestsGPIO::ThreadFuncFPGA()
         {
             PinOut::SetRaw(infoCS, 0);
         }
-        PageTestsGPIO::self->time_set_pin = meter.ElapsedMS() / num_meas / 1e6;
+        PageTestsGPIO::self->time_set_pin = meter.ElapsedMS() / num_meas / 1e6f;
 
         meter.Reset();
         for (int i = 0; i < num_meas; i++)
         {
             PinIn::GetHardwareRaw(infoF0);
         }
-        PageTestsGPIO::self->time_get_pin = meter.ElapsedMS() / num_meas / 1e6;
+        PageTestsGPIO::self->time_get_pin = meter.ElapsedMS() / num_meas / 1e6f;
 
         meter.Reset();
 
