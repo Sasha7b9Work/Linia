@@ -421,7 +421,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
         gpiod_line *infoCS = GPIO::GetOutputPinInfo(Pin::Out_SPI_CS)->hw.line;
         gpiod_line *infoREQ = GPIO::GetOutputPinInfo(Pin::Out_REQ_RD)->hw.line;
 
-        static const int num_meas = 1000;
+        static const int num_meas = 1000000;
 
         auto start = std::chrono::high_resolution_clock::now();
         for (int i = 0; i < num_meas; i++)
