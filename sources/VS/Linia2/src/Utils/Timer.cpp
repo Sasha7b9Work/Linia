@@ -22,6 +22,12 @@ void TimeMeterMS::Reset()
 }
 
 
+void TimeMeterUS::Reset()
+{
+    time_reset = std::clock();
+}
+
+
 int64 Timer::CurrentTimeMS()
 {
     std::chrono::milliseconds duration = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
@@ -46,7 +52,13 @@ void Timer::PauseOnMS(uint timeMS)
 }
 
 
-float TimeMeterMS::ElapsedTime() const
+float TimeMeterMS::ElapsedMS() const
 {
     return (1000.0f * (float)(std::clock() - time_reset)) / CLOCKS_PER_SEC;
+}
+
+
+float TimeMeterUS::ElapsedUS() const
+{
+    return (1e6f * (float)(std::clock() - time_reset)) / CLOCKS_PER_SEC;
 }

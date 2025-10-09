@@ -364,6 +364,7 @@ void PageTestsGPIO::Update()
     if (time_FPGA > 0.1f)
     {
         LOG_WRITE("time FPGA last = %.1f ms, ave = %.1f ms", time_FPGA, time_ave_FPGA);
+        LOG_WRITE("time pin get = %.1f us, time pin set = %.1f", PinIn::TimeGetAverage(), PinOut::TimeSetAverage());
         time_FPGA = 0.0f;
     }
 }
@@ -415,58 +416,58 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
     if (pinFIFO_FULL.Get() && prev == false)
     {
-//        gpiod_line *infoF0 = GPIO::GetInputPinInfo(Pin::In_DAT_F0)->hw.line;
+        gpiod_line *infoF0 = GPIO::GetInputPinInfo(Pin::In_DAT_F0)->hw.line;
         gpiod_line *infoCS = GPIO::GetOutputPinInfo(Pin::Out_SPI_CS)->hw.line;
-//        gpiod_line *infoREQ = GPIO::GetOutputPinInfo(Pin::Out_REQ_RD)->hw.line;
+        gpiod_line *infoREQ = GPIO::GetOutputPinInfo(Pin::Out_REQ_RD)->hw.line;
 
         TimeMeterMS meter;
 
-        volatile int bytes_left = 8000;
+        int bytes_left = 8000;
 
-//        volatile uint8 bytes[5];
+        uint8 bytes[5];
 
-        volatile bool _error = false;
+        bool _error = false;
 
         while (bytes_left > 0)
         {
             PinOut::Set(infoCS, 1);
 
-            volatile int b = 0;
+            int b = 0;
 
             for (; b < 5; b++)
             {
-//                volatile uint8 byte = 0;
-//                volatile int i = 7;
-//
-//                for (; i >= 0; i--)
-//                {
-//////                    PinOut::Set(infoREQ, 1);
-////
-//////                    if (PinIn::GetHardware(infoF0))
-////                    {
-//                        byte |= (1 << i);
-////                    }
-//////                    else
-////                    {
-////                        byte |= 0;
-////                    }
-////
-//////                    PinOut::Set(infoREQ, 0);
-//                }
-//
-//                bytes[b] = byte;
+                uint8 byte = 0;
+                int i = 7;
+
+                for (; i >= 0; i--)
+                {
+                    PinOut::Set(infoREQ, 1);
+
+                    if (PinIn::GetHardware(infoF0))
+                    {
+                        byte |= (1 << i);
+                    }
+                    else
+                    {
+                        byte |= 0;
+                    }
+
+                    PinOut::Set(infoREQ, 0);
+                }
+
+                bytes[b] = byte;
 
                 bytes_left--;
             }
 
-//            PinOut::Set(infoCS, 0);
+            PinOut::Set(infoCS, 0);
 
-//            uint8 crc = (uint8)(bytes[0] ^ bytes[1] ^ bytes[2] ^ bytes[3]);
-//
-//            if (crc != bytes[4])
-//            {
-//                _error = true;
-//            }
+            uint8 crc = (uint8)(bytes[0] ^ bytes[1] ^ bytes[2] ^ bytes[3]);
+
+            if (crc != bytes[4])
+            {
+                _error = true;
+            }
         }
 
         PageTestsGPIO::self->valueMeas++;
@@ -480,7 +481,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
             static float full_time = 0.0f;
             static int num_meas = 0;
 
-            PageTestsGPIO::self->time_FPGA = meter.ElapsedTime();
+            PageTestsGPIO::self->time_FPGA = meter.ElapsedMS();
 
             full_time += PageTestsGPIO::self->time_FPGA;
             num_meas++;

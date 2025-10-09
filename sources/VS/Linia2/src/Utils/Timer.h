@@ -39,11 +39,28 @@ struct TimeMeterMS
     // Установить момент отсчёта
     void Reset();
 
-    float ElapsedTime() const;
+    float ElapsedMS() const;
 
 private:
 
     clock_t time_reset;        // От этого времени отсчитывается ElapsedTime()
 
     clock_t time_response;     // После этого времени нужно вернуть true в IsFinished()
+};
+
+
+struct TimeMeterUS
+{
+    TimeMeterUS()
+    {
+        Reset();
+    }
+
+    void Reset();
+
+    float ElapsedUS() const;
+
+private:
+
+    clock_t time_reset;
 };

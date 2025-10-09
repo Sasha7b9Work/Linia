@@ -72,6 +72,7 @@ public:
     void SetChangeCallback(ChangeCallback);
 
     static bool GetHardware(gpiod_line *);
+    static float TimeGetAverage();
 
 private:
 
@@ -92,6 +93,7 @@ public:
     void ToHi();
 
     static void Set(gpiod_line *, int);
+    static float TimeSetAverage();
 };
 
 namespace GPIO
