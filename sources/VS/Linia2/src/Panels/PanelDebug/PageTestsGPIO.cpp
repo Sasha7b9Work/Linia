@@ -430,11 +430,10 @@ void PageTestsGPIO::ThreadFuncFPGA()
         }
         PageTestsGPIO::self->time_set_pin = meter.ElapsedMS() / num_meas / 1000;
 
-        volatile bool state = false;
         meter.Reset();
         for (int i = 0; i < num_meas; i++)
         {
-            state = PinIn::GetHardwareRaw(infoF0);
+            PinIn::GetHardwareRaw(infoF0);
         }
         PageTestsGPIO::self->time_get_pin = meter.ElapsedMS() / num_meas / 1000;
 
