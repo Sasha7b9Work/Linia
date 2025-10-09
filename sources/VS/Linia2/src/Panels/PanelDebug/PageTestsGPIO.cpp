@@ -415,7 +415,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
     if (pinFIFO_FULL.Get() && prev == false)
     {
-        gpiod_line *infoF0 = GPIO::GetInputPinInfo(Pin::In_DAT_F0)->hw.line;
+//        gpiod_line *infoF0 = GPIO::GetInputPinInfo(Pin::In_DAT_F0)->hw.line;
         gpiod_line *infoCS = GPIO::GetOutputPinInfo(Pin::Out_SPI_CS)->hw.line;
         gpiod_line *infoREQ = GPIO::GetOutputPinInfo(Pin::Out_REQ_RD)->hw.line;
 
