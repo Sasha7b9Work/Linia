@@ -433,7 +433,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
             for (int b = 0; b < 5; b++)
             {
-                uint8 byte = 0;
+                volatile uint8 byte = 0;
 
                 for (int i = 7; i >= 0; i--)
                 {
@@ -441,7 +441,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
 //
 ////                    if (PinIn::GetHardware(infoF0))
 //                    {
-//                        byte |= (1 << i);
+                        byte |= (1 << i);
 //                    }
 ////                    else
 //                    {
