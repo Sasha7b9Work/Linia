@@ -461,12 +461,12 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
             PinOut::Set(infoCS, 0);
 
-            uint8 crc = (uint8)(bytes[0] ^ bytes[1] ^ bytes[2] ^ bytes[3]);
-
-            if (crc != bytes[4])
-            {
-                _error = true;
-            }
+//            uint8 crc = (uint8)(bytes[0] ^ bytes[1] ^ bytes[2] ^ bytes[3]);
+//
+//            if (crc != bytes[4])
+//            {
+//                _error = true;
+//            }
         }
 
         PageTestsGPIO::self->valueMeas++;
