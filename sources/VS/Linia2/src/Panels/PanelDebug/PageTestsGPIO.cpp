@@ -423,7 +423,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
         volatile int bytes_left = 8000;
 
-        volatile uint8 bytes[5];
+//        volatile uint8 bytes[5];
 
         volatile bool _error = false;
 
