@@ -364,7 +364,6 @@ void PageTestsGPIO::Update()
     if (time_FPGA > 0.1f)
     {
         LOG_WRITE("time FPGA last = %.1f ms, ave = %.1f ms", time_FPGA, time_ave_FPGA);
-        LOG_WRITE("time pin get = %.1f us, time pin set = %.1f us", PinIn::TimeGetAverage(), PinOut::TimeSetAverage());
         LOG_WRITE("time pin get raw = %.1f us, time pin set raw = %.1f us", time_get_pin, time_set_pin);
         time_FPGA = 0.0f;
     }
@@ -423,23 +422,20 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
         static const int num_meas = 1000000;
 
-        auto start = std::chrono::high_resolution_clock::now();
+        TimeMeterNS meter_ns;
         for (int i = 0; i < num_meas; i++)
         {
-            PinOut::SetRaw(infoCS, 0);
+            PinOut::Set(infoCS, 0);
         }
-        auto end = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-        PageTestsGPIO::self->time_set_pin = (float)duration.count() / (float)num_meas;
+        PageTestsGPIO::self->time_set_pin = meter_ns.ElapsedNS() / (float)num_meas / 1e3f;
 
-        start = std::chrono::high_resolution_clock::now();
+
+        meter_ns.Reset();
         for (int i = 0; i < num_meas; i++)
         {
-            PinIn::GetHardwareRaw(infoF0);
+            PinIn::GetHardware(infoF0);
         }
-        end = std::chrono::high_resolution_clock::now();
-        duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-        PageTestsGPIO::self->time_get_pin = (float)duration.count() / (float)num_meas;
+        PageTestsGPIO::self->time_get_pin = meter_ns.ElapsedNS() / (float)num_meas / 1e3f;
 
         TimeMeterMS meter;
 

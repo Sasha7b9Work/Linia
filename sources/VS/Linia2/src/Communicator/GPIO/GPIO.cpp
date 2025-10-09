@@ -393,30 +393,9 @@ namespace GPIO
 }
 
 
-static float full_time_get = 0.0f;
-static int num_meas_get = 0;
-
-
 bool PinIn::GetHardware(gpiod_line *line)
 {
-    TimeMeterUS meter;
-    bool result = gpiod_line_get_value(line) == 1;
-    full_time_get += meter.ElapsedUS();
-    num_meas_get++;
-
-    return result;
-}
-
-
-bool PinIn::GetHardwareRaw(gpiod_line *line)
-{
     return gpiod_line_get_value(line) == 1;
-}
-
-
-float PinIn::TimeGetAverage()
-{
-    return full_time_get / (float)num_meas_get;
 }
 
 
@@ -469,26 +448,7 @@ void PinOut::Set(bool state)
 }
 
 
-static float full_time_set = 0.0f;
-static int num_meas_set = 0;
-
-
-float PinOut::TimeSetAverage()
-{
-    return full_time_set / (float)num_meas_set;
-}
-
-
 void PinOut::Set(gpiod_line *line, int state)
-{
-    TimeMeterUS meter;
-    gpiod_line_set_value(line, state);
-    full_time_set += meter.ElapsedUS();
-    num_meas_set++;
-}
-
-
-void PinOut::SetRaw(gpiod_line *line, int state)
 {
     gpiod_line_set_value(line, state);
 }

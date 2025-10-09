@@ -49,19 +49,18 @@ private:
 };
 
 
-struct TimeMeterUS
+struct TimeMeterNS
 {
-    TimeMeterUS()
+    TimeMeterNS()
     {
-        time_reset = std::clock();
+        Reset();
     }
 
-    float ElapsedUS() const
-    {
-        return (1e6f * (float)(std::clock() - time_reset)) / CLOCKS_PER_SEC;
-    }
+    void Reset();
+
+    float ElapsedNS() const;
 
 private:
 
-    clock_t time_reset;
+    std::chrono::steady_clock::time_point time_reset;
 };

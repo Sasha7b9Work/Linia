@@ -22,6 +22,20 @@ void TimeMeterMS::Reset()
 }
 
 
+void TimeMeterNS::Reset()
+{
+    time_reset = std::chrono::high_resolution_clock::now();
+}
+
+
+float TimeMeterNS::ElapsedNS() const
+{
+    auto time = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(time - time_reset);
+    return (float)duration.count();
+}
+
+
 int64 Timer::CurrentTimeMS()
 {
     std::chrono::milliseconds duration = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());

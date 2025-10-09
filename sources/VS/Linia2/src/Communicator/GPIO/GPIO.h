@@ -71,10 +71,8 @@ public:
 
     void SetChangeCallback(ChangeCallback);
 
-    // Время чтения пина - 1.25 мкс
+    // Время чтения пина - 0.5 мкс
     static bool GetHardware(gpiod_line *);
-    static bool GetHardwareRaw(gpiod_line *);
-    static float TimeGetAverage();
 
 private:
 
@@ -94,10 +92,8 @@ public:
 
     void ToHi();
 
-    // Время установки пина - 1.35 мкс
+    // Время установки пина - 0.5 мкс
     static void Set(gpiod_line *, int);
-    static void SetRaw(gpiod_line *, int);
-    static float TimeSetAverage();
 };
 
 namespace GPIO
