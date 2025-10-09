@@ -62,5 +62,5 @@ struct TimeMeterNS
 
 private:
 
-    std::chrono::steady_clock::time_point time_reset;
+    std::chrono::high_resolution_clock::time_point time_reset;
 };
