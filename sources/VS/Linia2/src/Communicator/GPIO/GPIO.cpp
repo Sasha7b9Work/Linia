@@ -400,9 +400,11 @@ static int num_meas_get = 0;
 bool PinIn::GetHardware(gpiod_line *line)
 {
     TimeMeterUS meter;
-    return gpiod_line_get_value(line) == 1;
+    bool result = gpiod_line_get_value(line) == 1;
     full_time_get += meter.ElapsedUS();
     num_meas_get++;
+
+    return result;
 }
 
 

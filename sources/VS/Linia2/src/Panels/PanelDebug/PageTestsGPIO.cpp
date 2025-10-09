@@ -364,7 +364,7 @@ void PageTestsGPIO::Update()
     if (time_FPGA > 0.1f)
     {
         LOG_WRITE("time FPGA last = %.1f ms, ave = %.1f ms", time_FPGA, time_ave_FPGA);
-        LOG_WRITE("time pin get = %.1f us, time pin set = %.1f", PinIn::TimeGetAverage(), PinOut::TimeSetAverage());
+        LOG_WRITE("time pin get = %.1f us, time pin set = %.1f us", PinIn::TimeGetAverage(), PinOut::TimeSetAverage());
         time_FPGA = 0.0f;
     }
 }
