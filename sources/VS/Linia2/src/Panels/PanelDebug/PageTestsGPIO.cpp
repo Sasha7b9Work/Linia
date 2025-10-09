@@ -365,7 +365,7 @@ void PageTestsGPIO::Update()
     {
         LOG_WRITE("time FPGA last = %.1f ms, ave = %.1f ms", time_FPGA, time_ave_FPGA);
         LOG_WRITE("time pin get = %.1f us, time pin set = %.1f us", PinIn::TimeGetAverage(), PinOut::TimeSetAverage());
-        LOG_WRITE("time pin get raw = %.1f us, time pin set raw = %.1f us", time_get_pin, time_set_pin);
+        LOG_WRITE("time pin get raw = %.1f ns, time pin set raw = %.1f ns", time_get_pin, time_set_pin);
         time_FPGA = 0.0f;
     }
 }
@@ -428,14 +428,14 @@ void PageTestsGPIO::ThreadFuncFPGA()
         {
             PinOut::SetRaw(infoCS, 0);
         }
-        PageTestsGPIO::self->time_set_pin = meter.ElapsedMS() / num_meas / 1000;
+        PageTestsGPIO::self->time_set_pin = meter.ElapsedMS() / num_meas / 1e6;
 
         meter.Reset();
         for (int i = 0; i < num_meas; i++)
         {
             PinIn::GetHardwareRaw(infoF0);
         }
-        PageTestsGPIO::self->time_get_pin = meter.ElapsedMS() / num_meas / 1000;
+        PageTestsGPIO::self->time_get_pin = meter.ElapsedMS() / num_meas / 1e6;
 
         meter.Reset();
 
