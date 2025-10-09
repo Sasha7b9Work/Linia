@@ -439,11 +439,11 @@ void PageTestsGPIO::ThreadFuncFPGA()
                 {
 //                    PinOut::Set(infoREQ, 1);
 
-                    if (PinIn::GetHardware(infoF0))
+//                    if (PinIn::GetHardware(infoF0))
                     {
                         byte |= (1 << i);
                     }
-                    else
+//                    else
                     {
                         byte |= 0;
                     }

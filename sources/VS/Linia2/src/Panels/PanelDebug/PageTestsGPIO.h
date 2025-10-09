@@ -24,6 +24,11 @@ public:
 private:
 
     float time_FPGA = 0.0f;
+    /*
+    *   Отключен PinOut::Set(infoREQ, 1);        - 158 мс
+    *   Отключен PinOut::Set(infoREQ, 1);
+    *            if (PinIn::GetHardware(infoF0)) - 
+    */
     float time_ave_FPGA = 0.0f;
 
     // UART
