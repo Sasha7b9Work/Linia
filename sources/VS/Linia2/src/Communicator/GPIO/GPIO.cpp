@@ -408,6 +408,12 @@ bool PinIn::GetHardware(gpiod_line *line)
 }
 
 
+bool PinIn::GetHardwareRaw(gpiod_line *line)
+{
+    return gpiod_line_get_value(line) == 1;
+}
+
+
 float PinIn::TimeGetAverage()
 {
     return full_time_get / (float)num_meas_get;
@@ -479,6 +485,12 @@ void PinOut::Set(gpiod_line *line, int state)
     gpiod_line_set_value(line, state);
     full_time_set += meter.ElapsedUS();
     num_meas_set++;
+}
+
+
+void PinOut::SetRaw(gpiod_line *line, int state)
+{
+    gpiod_line_set_value(line, state);
 }
 
 

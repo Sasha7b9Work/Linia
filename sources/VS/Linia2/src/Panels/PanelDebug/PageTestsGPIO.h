@@ -24,10 +24,9 @@ public:
 private:
 
     float time_FPGA = 0.0f;
-    /*
-     * Оп
-    */
     float time_ave_FPGA = 0.0f;
+    float time_set_pin = 0.0f;
+    float time_get_pin = 0.0f;
 
     // UART
     wxButton *btnSendUART = nullptr;

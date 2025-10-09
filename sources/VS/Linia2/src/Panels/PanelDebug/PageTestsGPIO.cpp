@@ -365,6 +365,7 @@ void PageTestsGPIO::Update()
     {
         LOG_WRITE("time FPGA last = %.1f ms, ave = %.1f ms", time_FPGA, time_ave_FPGA);
         LOG_WRITE("time pin get = %.1f us, time pin set = %.1f us", PinIn::TimeGetAverage(), PinOut::TimeSetAverage());
+        LOG_WRITE("time pin get raw = %.1f us, time pin set raw = %.1f us", time_get_pin, time_set_pin);
         time_FPGA = 0.0f;
     }
 }
@@ -420,7 +421,24 @@ void PageTestsGPIO::ThreadFuncFPGA()
         gpiod_line *infoCS = GPIO::GetOutputPinInfo(Pin::Out_SPI_CS)->hw.line;
         gpiod_line *infoREQ = GPIO::GetOutputPinInfo(Pin::Out_REQ_RD)->hw.line;
 
+        static const int num_meas = 1000;
+
         TimeMeterMS meter;
+        for (int i = 0; i < num_meas; i++)
+        {
+            PinOut::SetRaw(infoCS, 0);
+        }
+        PageTestsGPIO::self->time_set_pin = meter.ElapsedMS() / num_meas / 1000;
+
+        volatile bool state = false;
+        meter.Reset();
+        for (int i = 0; i < num_meas; i++)
+        {
+            state = PinIn::GetHardwareRaw(infoF0);
+        }
+        PageTestsGPIO::self->time_get_pin = meter.ElapsedMS() / num_meas / 1000;
+
+        meter.Reset();
 
         int bytes_left = 8000;
 
@@ -479,14 +497,14 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
         {
             static float full_time = 0.0f;
-            static int num_meas = 0;
+            static int n_meas = 0;
 
             PageTestsGPIO::self->time_FPGA = meter.ElapsedMS();
 
             full_time += PageTestsGPIO::self->time_FPGA;
-            num_meas++;
+            n_meas++;
 
-            PageTestsGPIO::self->time_ave_FPGA = full_time / (float)num_meas;
+            PageTestsGPIO::self->time_ave_FPGA = full_time / (float)n_meas;
         }
     }
 
