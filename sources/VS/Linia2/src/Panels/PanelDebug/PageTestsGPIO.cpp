@@ -423,14 +423,16 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
         static const int num_meas = 1000;
 
-        TimeMeterMS meter;
+        auto start = std::chrono::high_resolution_clock::now();
         for (int i = 0; i < num_meas; i++)
         {
             PinOut::SetRaw(infoCS, 0);
         }
-        PageTestsGPIO::self->time_set_pin = meter.ElapsedMS() / num_meas / 1e6f;
+        auto end = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+        PageTestsGPIO::self->time_set_pin = (float)duration.count();
 
-        meter.Reset();
+        TimeMeterMS meter;
         for (int i = 0; i < num_meas; i++)
         {
             PinIn::GetHardwareRaw(infoF0);
