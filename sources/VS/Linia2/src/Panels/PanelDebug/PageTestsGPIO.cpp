@@ -420,23 +420,6 @@ void PageTestsGPIO::ThreadFuncFPGA()
         gpiod_line *infoCS = GPIO::GetOutputPinInfo(Pin::Out_SPI_CS)->hw.line;
         gpiod_line *infoREQ = GPIO::GetOutputPinInfo(Pin::Out_REQ_RD)->hw.line;
 
-        static const int num_meas = 1000000;
-
-        TimeMeterNS meter_ns;
-        for (int i = 0; i < num_meas; i++)
-        {
-            PinOut::Set(infoCS, 0);
-        }
-        PageTestsGPIO::self->time_set_pin = meter_ns.ElapsedNS() / (float)num_meas / 1e3f;
-
-
-        meter_ns.Reset();
-        for (int i = 0; i < num_meas; i++)
-        {
-            PinIn::GetHardware(infoF0);
-        }
-        PageTestsGPIO::self->time_get_pin = meter_ns.ElapsedNS() / (float)num_meas / 1e3f;
-
         TimeMeterMS meter;
 
         int bytes_left = 8000;
