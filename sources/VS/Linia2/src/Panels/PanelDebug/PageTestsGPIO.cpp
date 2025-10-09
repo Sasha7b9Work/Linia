@@ -421,11 +421,11 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
         TimeMeterMS meter;
 
-        int bytes_left = 8000;
+        volatile int bytes_left = 8000;
 
-        uint8 bytes[5];
+        volatile uint8 bytes[5];
 
-        bool _error = false;
+        volatile bool _error = false;
 
         while (bytes_left > 0)
         {
@@ -435,26 +435,26 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
             for (; b < 5; b++)
             {
-                volatile uint8 byte = 0;
-                volatile int i = 7;
-
-                for (; i >= 0; i--)
-                {
-////                    PinOut::Set(infoREQ, 1);
+//                volatile uint8 byte = 0;
+//                volatile int i = 7;
 //
-////                    if (PinIn::GetHardware(infoF0))
-//                    {
-                        byte |= (1 << i);
-//                    }
-////                    else
-//                    {
-//                        byte |= 0;
-//                    }
+//                for (; i >= 0; i--)
+//                {
+//////                    PinOut::Set(infoREQ, 1);
+////
+//////                    if (PinIn::GetHardware(infoF0))
+////                    {
+//                        byte |= (1 << i);
+////                    }
+//////                    else
+////                    {
+////                        byte |= 0;
+////                    }
+////
+//////                    PinOut::Set(infoREQ, 0);
+//                }
 //
-////                    PinOut::Set(infoREQ, 0);
-                }
-
-                bytes[b] = byte;
+//                bytes[b] = byte;
 
                 bytes_left--;
             }
