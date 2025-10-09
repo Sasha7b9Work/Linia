@@ -459,7 +459,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
                 bytes_left--;
             }
 
-            PinOut::Set(infoCS, 0);
+//            PinOut::Set(infoCS, 0);
 
 //            uint8 crc = (uint8)(bytes[0] ^ bytes[1] ^ bytes[2] ^ bytes[3]);
 //
