@@ -410,7 +410,7 @@ bool PinIn::GetHardware(gpiod_line *line)
 
 float PinIn::TimeGetAverage()
 {
-    return full_time_get / num_meas_get;
+    return full_time_get / (float)num_meas_get;
 }
 
 

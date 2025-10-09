@@ -53,12 +53,13 @@ struct TimeMeterUS
 {
     TimeMeterUS()
     {
-        Reset();
+        time_reset = std::clock();
     }
 
-    void Reset();
-
-    float ElapsedUS() const;
+    float ElapsedUS() const
+    {
+        return (1e6f * (float)(std::clock() - time_reset)) / CLOCKS_PER_SEC;
+    }
 
 private:
 
