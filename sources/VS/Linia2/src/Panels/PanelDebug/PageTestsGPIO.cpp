@@ -4,6 +4,7 @@
 #include "Utils/SystemDepend.h"
 #include "Communicator/UART/UART.h"
 #include "Utils/Timer.h"
+#include "MainWindow.h"
 #ifdef WIN32
 #else
     #include <sched.h>
@@ -127,6 +128,9 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
         _txtKB = new wxTextCtrl(boxEncoder, wxID_ANY, "0", { 50, 45 }, { 60, 20 }, wxTE_READONLY);
     }
 
+    wxSize size_button{ 75, BUTTON_HEIGHT };
+    btnReturn = new wxButton(this, wxID_ANY, "Закрыть", { MainWindow::WIDTH - size_button.x - 15, 0 }, size_button);
+
     Bind(wxEVT_BUTTON, &PageTestsGPIO::OnEventButton, this);
     Bind(wxEVT_TOGGLEBUTTON, &PageTestsGPIO::OnEventToggleButton, this);
 }
@@ -223,6 +227,10 @@ void PageTestsGPIO::OnEventButton(wxCommandEvent &event)
     else if (id == btnSendUART->GetId())
     {
 
+    }
+    else if (id == btnReturn->GetId())
+    {
+        MainWindow::self->SetMode(ModeMainWindow::Standard);
     }
     else
     {
