@@ -1,3 +1,13 @@
+*** После установки ***
+- Обновление загрузчика и прошивки
+    # Вам понадобится другая SD-карта с рабочей системой
+    sudo nand-sata-update
+    sudo update-initramfs -u
+- Патч для NVMe
+    apt install orangepi5plus-nvme-fix
+- !!! ВНИМИНИЕ !!! ни в коем случае не делать установку последнего ядра
+    apt install linux-image-current-rockchip64
+
 https://habr.com/ru/companies/timeweb/articles/861844/
 https://github.com/schneid-l/u-boot-orangepi5
 https://github.com/Joshua-Riek/ubuntu-rockchip
