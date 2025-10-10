@@ -5,9 +5,6 @@
     sudo update-initramfs -u
 - Патч для NVMe
     apt install orangepi5plus-nvme-fix
-- Права на использование SPI, UART
-    usermod -a -G spi $USER
-    usermod -a -G dialout $USER
 - !!! ВНИМИНИЕ !!! ни в коем случае не делать установку последнего ядра
     apt install linux-image-current-rockchip64
 
@@ -30,6 +27,9 @@ https://github.com/Joshua-Riek/ubuntu-rockchip
     
 *** Включить spi, uart ***
     в утилите armbian-config включить соотвествующие интерфейсы
+    Права на использование SPI, UART:
+        usermod -a -G spi $USER
+        usermod -a -G dialout $USER
     перезагрузить
     
 *** Автологин ***
