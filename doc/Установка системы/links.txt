@@ -32,6 +32,8 @@ https://github.com/Joshua-Riek/ubuntu-rockchip
     
 *** Включить spi, uart ***
     в утилите armbian-config включить соотвествующие интерфейсы
+        rk3588-spi0-m2-cs0-cs1-spidev
+        rk3588-uart6-m1
     Права на использование SPI, UART:
         usermod -a -G spi $USER
         usermod -a -G dialout $USER
