@@ -30,7 +30,7 @@ void BitSet128::FromASCII(const wxString &input)
 
         word64[0] = SU::UInt64FromHex(end - 16);
 
-        end -= 16;
+        end -= 15;
         *end = '\0';
 
         word64[1] = SU::UInt64FromHex(str_value);
