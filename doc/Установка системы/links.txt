@@ -7,6 +7,11 @@
     apt install orangepi5plus-nvme-fix
 - !!! ВНИМИНИЕ !!! ни в коем случае не делать установку последнего ядра
     apt install linux-image-current-rockchip64
+- Содержимое /etc/apt/sources.list.d/sources.list
+    deb http://ports.ubuntu.com/ noble main restricted universe multiverse
+    deb http://ports.ubuntu.com/ noble-updates main restricted universe multiverse
+    deb http://ports.ubuntu.com/ noble-security main restricted universe multiverse
+    Остальные можно (?) удалить
 
 https://habr.com/ru/companies/timeweb/articles/861844/
 https://github.com/schneid-l/u-boot-orangepi5
