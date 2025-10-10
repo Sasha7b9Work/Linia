@@ -11,7 +11,7 @@
     deb http://ports.ubuntu.com/ noble main restricted universe multiverse
     deb http://ports.ubuntu.com/ noble-updates main restricted universe multiverse
     deb http://ports.ubuntu.com/ noble-security main restricted universe multiverse
-    Остальные можно (?) удалить
+    Остальные не трогать (только ubuntu.sources вызывает сообщения об ошибках при apt update)
 
 https://habr.com/ru/companies/timeweb/articles/861844/
 https://github.com/schneid-l/u-boot-orangepi5
