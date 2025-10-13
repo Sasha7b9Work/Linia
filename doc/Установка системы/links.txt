@@ -16,6 +16,8 @@
 https://habr.com/ru/companies/timeweb/articles/861844/
 https://github.com/schneid-l/u-boot-orangepi5
 https://github.com/Joshua-Riek/ubuntu-rockchip
+https://www.armbian.com/orange-pi-5-plus/
+https://joshua-riek.github.io/ubuntu-rockchip-download/boards/orangepi-5-plus.html
 
 
 *** Запись образа *.img на карту ***

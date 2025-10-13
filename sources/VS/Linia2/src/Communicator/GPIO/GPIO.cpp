@@ -132,7 +132,7 @@ namespace GPIO
             }
 
             int ret = gpiod_line_request_input_flags(info.hw.line, nullptr,
-                GPIOD_LINE_REQUEST_FLAG_BIAS_PULL_UP);
+                GPIOD_LINE_REQUEST_FLAG_BIAS_PULL_DOWN);
             if (ret < 0)
             {
                 LOG_ERROR("Cannot request GPIO line %d as input", info.hw.pin_number);

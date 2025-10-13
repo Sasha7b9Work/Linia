@@ -4,6 +4,7 @@
 #ifndef ARM64
 
 #define GPIOD_LINE_REQUEST_FLAG_BIAS_PULL_UP     (1 << 1)
+#define GPIOD_LINE_REQUEST_FLAG_BIAS_PULL_DOWN   (1 << 1)
 
 struct gpiod_chip
 {

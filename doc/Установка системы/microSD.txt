@@ -1,7 +1,11 @@
 *** 1 ***
 25.10.13 CLEAN_IMAGE_ORANGE_PI_5_PLUS_UBUNTU_24.04_XFCE.img + тема Numix
+         или
+         Orangepi5plus_1.2.0_ubuntu_jammy_desktop_xfce_linux6.1.43 + тема Numix
 
 *** 2 ***
+25.10.13 Armbian_25.8.1_Orangepi5-plus_noble_current_6.12.43_xfce_desktop.img
+         Записалось с ошибкой проверки
 
 *** 3 ***
 Установочный диск, что Николай приготовил
