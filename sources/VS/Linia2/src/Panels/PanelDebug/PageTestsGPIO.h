@@ -8,7 +8,7 @@ class PageTestsGPIO : public wxPanel
 {
 public:
 
-    PageTestsGPIO(wxNotebook *parent);
+    PageTestsGPIO(wxNotebook *);
 
     static PageTestsGPIO *self;
 

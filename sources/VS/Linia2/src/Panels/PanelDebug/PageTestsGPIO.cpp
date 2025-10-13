@@ -22,7 +22,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
 {
     self = this;
 
-    wxPanel::SetName("Тесты разъёма GPIO");
+    wxPanel::SetName("Orange Pi 5");
 
     wxStaticBox *boxGPIO = new wxStaticBox(this, wxID_ANY, "GPIO", { 10, 10 }, { 200, 270 });
 
