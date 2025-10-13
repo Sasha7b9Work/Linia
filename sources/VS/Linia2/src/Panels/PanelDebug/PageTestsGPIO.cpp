@@ -111,21 +111,21 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
     wxStaticBox *boxSPI = new wxStaticBox(this, wxID_ANY, "SPI", { boxUART->GetPosition().x + boxUART->GetSize().x + 10, 10 }, { 200, 270 });
 
     {
-        new wxStaticText(boxSPI, wxID_ANY, "MOSI : 19", { 10, 20 });
-        new wxStaticText(boxSPI, wxID_ANY, "CLK : 23", { 10, 45 });
+        new wxStaticText(boxSPI, wxID_ANY, "MOSI : 19", { 10, SD::Y_SB(20) });
+        new wxStaticText(boxSPI, wxID_ANY, "CLK : 23", { 10, SD::Y_SB(45) });
 
-        new wxTextCtrl(boxSPI, wxID_ANY, "", { 10, 70 }, { 100, 20 });
-        btnSendSPI = new wxButton(boxSPI, wxID_ANY, "Send", { 120, 70 }, { 50, 20 });
+        new wxTextCtrl(boxSPI, wxID_ANY, "", { 10, SD::Y_SB(70) }, { 100, 20 });
+        btnSendSPI = new wxButton(boxSPI, wxID_ANY, "Send", { 120, SD::Y_SB(70) }, { 50, 20 });
     }
 
     wxStaticBox *boxEncoder = new wxStaticBox(this, wxID_ANY, "Encoder", { boxSPI->GetPosition().x + boxSPI->GetSize().x + 10, 10 }, { 200, 270 });
 
     {
-        new wxStaticText(boxEncoder, wxID_ANY, "KA : 11", { 10, 20 });
-        _txtKA = new wxTextCtrl(boxEncoder, wxID_ANY, "0", { 50, 20 }, { 60, 20 }, wxTE_READONLY);
+        new wxStaticText(boxEncoder, wxID_ANY, "KA : 11", { 10, SD::Y_SB(20) });
+        _txtKA = new wxTextCtrl(boxEncoder, wxID_ANY, "0", { 60, SD::Y_SB(20) }, { 60, 20 }, wxTE_READONLY);
 
-        new wxStaticText(boxEncoder, wxID_ANY, "KB : 13", { 10, 45 });
-        _txtKB = new wxTextCtrl(boxEncoder, wxID_ANY, "0", { 50, 45 }, { 60, 20 }, wxTE_READONLY);
+        new wxStaticText(boxEncoder, wxID_ANY, "KB : 13", { 10, SD::Y_SB(45) });
+        _txtKB = new wxTextCtrl(boxEncoder, wxID_ANY, "0", { 60, SD::Y_SB(45) }, { 60, 20 }, wxTE_READONLY);
     }
 
     wxSize size_button{ 75, BUTTON_HEIGHT };
