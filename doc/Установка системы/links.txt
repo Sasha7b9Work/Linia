@@ -37,8 +37,11 @@ https://joshua-riek.github.io/ubuntu-rockchip-download/boards/orangepi-5-plus.ht
         rk3588-spi0-m2-cs0-cs1-spidev
         rk3588-uart6-m1
     Права на использование SPI, UART:
-        usermod -a -G spi $USER
-        usermod -a -G dialout $USER
+        1. usermod -a -G spi $USER
+           usermod -a -G dialout $USER
+           или
+        2. sudo chmod 666 /dev/gpiochip*
+           sudo chmod 666 /dev/spidev*
     перезагрузить
     
 *** Автологин ***
