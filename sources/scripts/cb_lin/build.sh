@@ -2,6 +2,6 @@
 
 dir=$PWD
 cd ../../generated
-cmake --build . -- -j$(nproc)
+cmake --build . -- -j4
 cd $dir
 
