@@ -50,17 +50,35 @@ https://joshua-riek.github.io/ubuntu-rockchip-download/boards/orangepi-5-plus.ht
     XFCE:
     sudo nano /etc/lightdm/lightdm.conf
     [Seat:*]
-    autologin-user=your_username
+    autologin-user=mnipi
     autologin-user-timeout=0
 
 *** Автозапуск на старте ***
-    создать файл ~/.config/autostart
+        создать файл ~/.config/autostart/linia.desktop:
     [Desktop Entry]
     Type=Application
-    Name=My Application
-    Exec=sudo /home/mnipi/Linia/sources/generated/Linia2/Linia2
+    Name=linia
+    Exec=sudo /home/mnipi/Linia.sh
     Hidden=false
     NoDisplay=false
+        ~/Linia.sh:
+    #!/bin/bash
+    cd /home/mnipi/Linia/sources/generated/Linia2
+    sudo ./Linia2
+
+*** Ярлык ***
+        ~/Desktop/Linia.destop:
+    [Desktop Entry]
+    Version=1.0
+    Type=Application
+    Name=Linia
+    Comment=
+    Exec=sudo /home/mnipi/Linia.sh
+    Icon=
+    Path=/home/mnipi/Linia/sources/generated/Linia2
+    Terminal=true
+    StartupNotify=false
+
 
 *** Настройка сети без сохранения при выключении ***
     #!/bin/bash
