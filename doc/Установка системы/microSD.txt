@@ -1,11 +1,20 @@
-*** 1 ***
-25.10.13 CLEAN_IMAGE_ORANGE_PI_5_PLUS_UBUNTU_24.04_XFCE.img + тема Numix
-         или
-         Orangepi5plus_1.2.0_ubuntu_jammy_desktop_xfce_linux6.1.43 + тема Numix
+*** 1 *** 64 Гб
+25.10.13 Orangepi5plus_1.2.0_ubuntu_jammy_desktop_xfce_linux6.1.43 : balenaEtcher
+         Работает. Окно с ошибкой на рабочем столе                                          +
 
-*** 2 ***
-25.10.13 Armbian_25.8.1_Orangepi5-plus_noble_current_6.12.43_xfce_desktop.img
-         Записалось с ошибкой проверки
+*** 2 *** 32 Гб
+25.10.14 MNIPI_LINIA_UBUNTU_24.04_XFCE_IMAGE_STABLE_V3.img : USBImager                      -
+         Молчит.
+25.10.14 Armbian_25.8.1_Orangepi5-plus_noble_current_6.12.43_xfce_desktop : USBImager       -
+         Круговая перезагрузка
+25.10.14 Orangepi5plus_1.2.0_ubuntu_jammy_desktop_xfce_linux6.1.43 : USBImager              +
+         Загрузилось
 
-*** 3 ***
-Установочный диск, что Николай приготовил
+*** 3 *** 64Гб
+25.10.14 MNIPI_LINIA_UBUNTU_24.04_XFCE_IMAGE_STABLE_V3.img : USBImager                      -
+         Ошибка загрузки в COM3
+25.10.14 Armbian_25.8.1_Orangepi5-plus_noble_vendor_6.1.115_xfce_desktop : USBImager        -
+         Бесконечные перезагрузки. Пытается задействовать монитор.
+25.10.14 Orangepi5plus_1.0.8_ubuntu_focal_desktop_xfce_linux6.1.43 : USBImager              +
+25.10.14 Armbian_25.8.1_Orangepi5-plus_noble_vendor_6.1.115_xfce_desktop : Rufus            +
+         После одной перезагрузки на первом запуске предложило ввести пароль и понеслось
