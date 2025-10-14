@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-dir = $PWD
+cur_dir = $PWD
 cd ../wxWidgets/generated
 cmake --build . -- -j$(nproc)
-cd $dir
+cd $cur_dir
