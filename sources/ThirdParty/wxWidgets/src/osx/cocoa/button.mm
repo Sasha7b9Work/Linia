@@ -2,6 +2,7 @@
 // Name:        src/osx/cocoa/button.mm
 // Purpose:     wxButton
 // Author:      Stefan Csomor
+// Modified by:
 // Created:     1998-01-01
 // Copyright:   (c) Stefan Csomor
 // Licence:     wxWindows licence
@@ -100,7 +101,7 @@ void wxButtonCocoaImpl::SetBitmap(const wxBitmapBundle& bitmap)
     {
         [GetNSButton() setBezelStyle:NSRoundedBezelStyle];
     }
-
+    
     wxWidgetCocoaImpl::SetBitmap(bitmap);
 }
 
@@ -109,7 +110,7 @@ void wxButtonCocoaImpl::SetLabelMarkup(const wxString& markup)
 {
     wxMarkupToAttrString toAttr(GetWXPeer()->GetFont(), markup);
     NSMutableAttributedString *attrString = toAttr.GetNSAttributedString();
-
+    
     // Button text is always centered.
     NSMutableParagraphStyle *
     paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -118,7 +119,7 @@ void wxButtonCocoaImpl::SetLabelMarkup(const wxString& markup)
                        value:paragraphStyle
                        range:NSMakeRange(0, [attrString length])];
     [paragraphStyle release];
-
+    
     [GetNSButton() setAttributedTitle:attrString];
 }
 #endif // wxUSE_MARKUP
@@ -147,12 +148,13 @@ void wxButtonCocoaImpl::SetAcceleratorFromLabel(const wxString& label)
         wxString accelstring(label[accelPos + 1]); // Skip '&' itself
         accelstring.MakeLower();
         // Avoid Cmd+C closing dialog on Mac.
-        if (accelstring == "c" && (GetWXPeer()->GetId() == wxID_CANCEL || GetWXPeer()->GetId() == wxID_CLOSE))
+        if (accelstring == "c" && GetWXPeer()->GetId() == wxID_CANCEL)
         {
             [GetNSButton() setKeyEquivalent:@""];
         }
         else
         {
+            wxString cancelLabel(_("&Cancel"));
             wxCFStringRef cfText(accelstring);
             [GetNSButton() setKeyEquivalent:cfText.AsNSString()];
             [GetNSButton() setKeyEquivalentModifierMask:NSCommandKeyMask];
@@ -167,7 +169,7 @@ void wxButtonCocoaImpl::SetAcceleratorFromLabel(const wxString& label)
 NSButton *wxButtonCocoaImpl::GetNSButton() const
 {
     wxASSERT( [m_osxView isKindOfClass:[NSButton class]] );
-
+    
     return static_cast<NSButton *>(m_osxView);
 }
 

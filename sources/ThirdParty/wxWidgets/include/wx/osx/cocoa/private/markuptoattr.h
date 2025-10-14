@@ -24,7 +24,7 @@ protected:
     // font larger than it) to it and so it must be valid.
     wxMarkupToAttrStringBase(const wxFont& font)
         : wxMarkupParserAttrOutput(font, wxColour(), wxColour()),
-          m_attrString(nullptr)
+          m_attrString(NULL)
     {}
 
     void Parse(const wxFont& font, const wxString& markup)
@@ -91,19 +91,19 @@ public:
 
 
     // Implement base class pure virtual methods to process markup tags.
-    virtual void OnText(const wxString& text) override
+    virtual void OnText(const wxString& text)
     {
         m_pos += PrepareText(text).length();
     }
 
-    virtual void OnAttrStart(const Attr& WXUNUSED(attr)) override
+    virtual void OnAttrStart(const Attr& WXUNUSED(attr))
     {
         // Just remember the starting position of the range, we can't really
         // set the attribute until we find the end of it.
         m_rangeStarts.push(m_pos);
     }
 
-    virtual void OnAttrEnd(const Attr& attr) override
+    virtual void OnAttrEnd(const Attr& attr)
     {
         unsigned start = m_rangeStarts.top();
         m_rangeStarts.pop();
@@ -150,7 +150,7 @@ public:
     }
 
 protected:
-    virtual wxString PrepareText(const wxString& text) override
+    virtual wxString PrepareText(const wxString& text)
     {
         return wxControl::RemoveMnemonics(text);
     }
@@ -170,7 +170,7 @@ public:
     }
 
 protected:
-    virtual wxString PrepareText(const wxString& text) override
+    virtual wxString PrepareText(const wxString& text)
     {
         return text;
     }

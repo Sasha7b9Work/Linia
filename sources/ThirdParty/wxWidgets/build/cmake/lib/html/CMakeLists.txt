@@ -9,7 +9,7 @@
 
 wx_append_sources(HTML_FILES HTML_CMN)
 
-if(WXMSW)
+if(WIN32 OR wxUSE_LIBMSPACK)
     wx_append_sources(HTML_FILES HTML_MSW)
 endif()
 

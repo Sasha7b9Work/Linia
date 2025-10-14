@@ -26,10 +26,10 @@
     class MyCar : public wxObject
     {
     public:
-        MyCar() = default;
+        MyCar() { }
         MyCar( int price );
 
-        bool IsOk() const { return m_refData != nullptr; }
+        bool IsOk() const { return m_refData != NULL; }
 
         bool operator == ( const MyCar& car ) const;
         bool operator != (const MyCar& car) const { return !(*this == car); }
@@ -349,7 +349,7 @@ public:
 
         It takes over memory allocation, allowing wxDebugContext operations.
     */
-    void* operator new(size_t size, const wxString& filename = nullptr, int lineNum = 0);
+    void* operator new(size_t size, const wxString& filename = NULL, int lineNum = 0);
 
 protected:
     /**
@@ -581,9 +581,9 @@ public:
         Constructor.
 
         @a ptr is a pointer to the reference counted object to which this class points.
-        If @a ptr is not null @b T::IncRef() will be called on the object.
+        If @a ptr is not NULL @b T::IncRef() will be called on the object.
     */
-    wxObjectDataPtr(T* ptr = nullptr);
+    wxObjectDataPtr(T* ptr = NULL);
 
     ///@{
     /**
@@ -867,11 +867,8 @@ public:
 /**
     This macro is equivalent to <tt>wxDynamicCast(this, classname)</tt> but the latter provokes
     spurious compilation warnings from some compilers (because it tests whether
-    @c this pointer is non-null which is always true), so this macro should be
+    @c this pointer is non-@NULL which is always true), so this macro should be
     used to avoid them.
-
-    Note that @a ptr must be an object of wxObject-derived class, otherwise
-    using this macro results in undefined behaviour.
 
     @header{wx/object.h}
 
@@ -883,9 +880,6 @@ public:
     This macro checks that the cast is valid in debug mode (an assert failure
     will result if wxDynamicCast(ptr, classname) == @NULL) and then returns the
     result of executing an equivalent of <tt>static_cast<classname *>(ptr)</tt>.
-
-    Note that @a ptr must be an object of wxObject-derived class, otherwise
-    using this macro results in undefined behaviour.
 
     @header{wx/object.h}
 

@@ -1,8 +1,8 @@
 /* pnglibconf.h - library build configuration */
 
-/* libpng version 1.6.47 */
+/* libpng version 1.6.37 */
 
-/* Copyright (c) 2018-2025 Cosmin Truta */
+/* Copyright (c) 2018-2019 Cosmin Truta */
 /* Copyright (c) 1998-2002,2004,2006-2018 Glenn Randers-Pehrson */
 
 /* This code is released under the libpng license. */
@@ -27,7 +27,6 @@
 #define PNG_COLORSPACE_SUPPORTED
 #define PNG_CONSOLE_IO_SUPPORTED
 #define PNG_CONVERT_tIME_SUPPORTED
-/*#undef PNG_DISABLE_ADLER32_CHECK_SUPPORTED*/
 #define PNG_EASY_ACCESS_SUPPORTED
 /*#undef PNG_ERROR_NUMBERS_SUPPORTED*/
 #define PNG_ERROR_TEXT_SUPPORTED
@@ -42,10 +41,6 @@
 #define PNG_INCH_CONVERSIONS_SUPPORTED
 #define PNG_INFO_IMAGE_SUPPORTED
 #define PNG_IO_STATE_SUPPORTED
-/*#undef PNG_MIPS_MMI_API_SUPPORTED*/
-/*#undef PNG_MIPS_MMI_CHECK_SUPPORTED*/
-/*#undef PNG_MIPS_MSA_API_SUPPORTED*/
-/*#undef PNG_MIPS_MSA_CHECK_SUPPORTED*/
 #define PNG_MNG_FEATURES_SUPPORTED
 #define PNG_POINTER_INDEXING_SUPPORTED
 /*#undef PNG_POWERPC_VSX_API_SUPPORTED*/
@@ -88,14 +83,11 @@
 #define PNG_READ_USER_TRANSFORM_SUPPORTED
 #define PNG_READ_bKGD_SUPPORTED
 #define PNG_READ_cHRM_SUPPORTED
-#define PNG_READ_cICP_SUPPORTED
-#define PNG_READ_cLLI_SUPPORTED
 #define PNG_READ_eXIf_SUPPORTED
 #define PNG_READ_gAMA_SUPPORTED
 #define PNG_READ_hIST_SUPPORTED
 #define PNG_READ_iCCP_SUPPORTED
 #define PNG_READ_iTXt_SUPPORTED
-#define PNG_READ_mDCV_SUPPORTED
 #define PNG_READ_oFFs_SUPPORTED
 #define PNG_READ_pCAL_SUPPORTED
 #define PNG_READ_pHYs_SUPPORTED
@@ -161,14 +153,11 @@
 #define PNG_WRITE_WEIGHTED_FILTER_SUPPORTED
 #define PNG_WRITE_bKGD_SUPPORTED
 #define PNG_WRITE_cHRM_SUPPORTED
-#define PNG_WRITE_cICP_SUPPORTED
-#define PNG_WRITE_cLLI_SUPPORTED
 #define PNG_WRITE_eXIf_SUPPORTED
 #define PNG_WRITE_gAMA_SUPPORTED
 #define PNG_WRITE_hIST_SUPPORTED
 #define PNG_WRITE_iCCP_SUPPORTED
 #define PNG_WRITE_iTXt_SUPPORTED
-#define PNG_WRITE_mDCV_SUPPORTED
 #define PNG_WRITE_oFFs_SUPPORTED
 #define PNG_WRITE_pCAL_SUPPORTED
 #define PNG_WRITE_pHYs_SUPPORTED
@@ -182,14 +171,11 @@
 #define PNG_WRITE_zTXt_SUPPORTED
 #define PNG_bKGD_SUPPORTED
 #define PNG_cHRM_SUPPORTED
-#define PNG_cICP_SUPPORTED
-#define PNG_cLLI_SUPPORTED
 #define PNG_eXIf_SUPPORTED
 #define PNG_gAMA_SUPPORTED
 #define PNG_hIST_SUPPORTED
 #define PNG_iCCP_SUPPORTED
 #define PNG_iTXt_SUPPORTED
-#define PNG_mDCV_SUPPORTED
 #define PNG_oFFs_SUPPORTED
 #define PNG_pCAL_SUPPORTED
 #define PNG_pHYs_SUPPORTED
@@ -263,9 +249,6 @@
 #define png_get_cHRM_XYZ wx_png_get_cHRM_XYZ
 #define png_get_cHRM_XYZ_fixed wx_png_get_cHRM_XYZ_fixed
 #define png_get_cHRM_fixed wx_png_get_cHRM_fixed
-#define png_get_cICP wx_png_get_cICP
-#define png_get_cLLI wx_png_get_cLLI
-#define png_get_cLLI_fixed wx_png_get_cLLI_fixed
 #define png_get_channels wx_png_get_channels
 #define png_get_chunk_cache_max wx_png_get_chunk_cache_max
 #define png_get_chunk_malloc_max wx_png_get_chunk_malloc_max
@@ -293,8 +276,6 @@
 #define png_get_io_ptr wx_png_get_io_ptr
 #define png_get_io_state wx_png_get_io_state
 #define png_get_libpng_ver wx_png_get_libpng_ver
-#define png_get_mDCV wx_png_get_mDCV
-#define png_get_mDCV_fixed wx_png_get_mDCV_fixed
 #define png_get_mem_ptr wx_png_get_mem_ptr
 #define png_get_oFFs wx_png_get_oFFs
 #define png_get_pCAL wx_png_get_pCAL
@@ -385,9 +366,6 @@
 #define png_set_cHRM_XYZ wx_png_set_cHRM_XYZ
 #define png_set_cHRM_XYZ_fixed wx_png_set_cHRM_XYZ_fixed
 #define png_set_cHRM_fixed wx_png_set_cHRM_fixed
-#define png_set_cICP wx_png_set_cICP
-#define png_set_cLLI wx_png_set_cLLI
-#define png_set_cLLI_fixed wx_png_set_cLLI_fixed
 #define png_set_check_for_invalid_index wx_png_set_check_for_invalid_index
 #define png_set_chunk_cache_max wx_png_set_chunk_cache_max
 #define png_set_chunk_malloc_max wx_png_set_chunk_malloc_max
@@ -422,8 +400,6 @@
 #define png_set_invert_mono wx_png_set_invert_mono
 #define png_set_keep_unknown_chunks wx_png_set_keep_unknown_chunks
 #define png_set_longjmp_fn wx_png_set_longjmp_fn
-#define png_set_mDCV wx_png_set_mDCV
-#define png_set_mDCV_fixed wx_png_set_mDCV_fixed
 #define png_set_mem_fn wx_png_set_mem_fn
 #define png_set_oFFs wx_png_set_oFFs
 #define png_set_option wx_png_set_option
