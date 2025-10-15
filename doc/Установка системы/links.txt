@@ -20,6 +20,9 @@ https://www.armbian.com/orange-pi-5-plus/
 https://joshua-riek.github.io/ubuntu-rockchip-download/boards/orangepi-5-plus.html
 
 
+*** Расширение раздела на весь диск ***
+    apt install gparted
+
 *** Запись образа *.img на карту ***
     balena etcher
 
