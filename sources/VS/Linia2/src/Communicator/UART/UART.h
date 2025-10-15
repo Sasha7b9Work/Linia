@@ -15,6 +15,8 @@ namespace UART
 {
     bool Init(void (*recv_callback)(uint8));
 
+    void ReInit();
+
     void DeInit();
 
     bool SendByte(uint8);

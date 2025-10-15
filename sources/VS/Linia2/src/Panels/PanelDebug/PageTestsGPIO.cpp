@@ -97,6 +97,8 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
     wxStaticBox *boxUART = new wxStaticBox(this, wxID_ANY, "UART", { boxGPIO->GetPosition().x + boxGPIO->GetSize().x + 10, 10 }, { 200, 270 });
 
     {
+        btnReinitUart = new wxButton(boxUART, wxID_ANY, "Reinit", { 10, SD::Y_SB(230) }, { 100, 20 });
+
         new wxStaticText(boxUART, wxID_ANY, "TX : 8", { 10, SD::Y_SB(20) });
         new wxStaticText(boxUART, wxID_ANY, "RX : 10", { 70, SD::Y_SB(20) });
 
@@ -231,6 +233,10 @@ void PageTestsGPIO::OnEventButton(wxCommandEvent &event)
     else if (id == btnReturn->GetId())
     {
         MainWindow::self->SetMode(ModeMainWindow::Standard);
+    }
+    else if (id == btnReinitUart->GetId())
+    {
+        UART::ReInit();
     }
     else
     {

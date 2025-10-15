@@ -83,6 +83,14 @@ bool UART::Init(void (*callback)(uint8))
 }
 
 
+void UART::ReInit()
+{
+    DeInit();
+
+    Init(recv_callback);
+}
+
+
 void UART::DeInit()
 {
     if (IsReady())

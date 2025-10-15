@@ -26,6 +26,7 @@ private:
     wxButton *btnReturn = nullptr;
 
     // UART
+    wxButton *btnReinitUart = nullptr;
     wxButton *btnSendUART = nullptr;
     wxToggleButton *btnAutoUART = nullptr;    // По этой кнопке начинается автоматическая передача по UART
     wxTextCtrl *txtRecvUART = nullptr;
