@@ -18,7 +18,7 @@ PageSource50V::PageSource50V(wxNotebook *parent) :
 
     AppendRegister(new RegFPGA(this, "REG6", 8));
 
-    RegAD5543 *regDAC7 = new RegAD5543(this, "DAC7");
+    RegAD5543 *regDAC7 = new RegAD5543(this, "DAC6");
 
     regDAC7->Disable();
 
