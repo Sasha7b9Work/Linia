@@ -150,12 +150,10 @@ bool TypeCommutation::IsInternal()
 }
 
 
-pchar MicroChip::Name(E v)
+pchar MicroChip::_Name(E v)
 {
     static const pchar names[Count] =
     {
-        "ADC_7691_1",
-        "ADC_7691_2"
         "DAC_5300_1",
         "DAC_5300_2",
         "DAC_5443",

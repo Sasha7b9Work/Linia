@@ -13,8 +13,6 @@ public:
 
     virtual bool IsConnected() const;
 
-    virtual void WriteMicroChip(MicroChip::E, int reg, uint value) override;
-
 private:
 
     virtual ~DeviceEmulator() { }

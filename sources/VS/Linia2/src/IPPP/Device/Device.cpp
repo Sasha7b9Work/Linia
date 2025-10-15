@@ -63,9 +63,3 @@ void Device::SendCommand(pchar format, ...)
 
     UART::SendBuffer(message, (int)std::strlen(message));
 }
-
-
-void Device::WriteMicroChip(MicroChip::E chip, int reg, uint value)
-{
-    SendCommand(":CHIP:%s:%d:WRITE %08X", MicroChip::Name(chip), reg, value);
-}

@@ -14,7 +14,7 @@ PageSource3kV::PageSource3kV(wxNotebook *parent) :
 {
     self = this;
 
-    Register *reg = new RegFPGA(this, "REG1", 24);
+    Register *reg = new RegFPGA(this, "REG0", 24);
 
     AppendRegister(reg);
 }

@@ -18,8 +18,4 @@ public:
     virtual void Shutdown() = 0;
 
     virtual bool IsConnected() const = 0;
-
-    // Записать значение в регистр.
-    // Если размер регистра меньше 32, записываются младшие биты
-    virtual void WriteMicroChip(MicroChip::E, int reg, uint value) = 0;
 };

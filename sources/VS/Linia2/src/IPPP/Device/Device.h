@@ -17,8 +17,6 @@ public:
 
     virtual bool IsConnected() const override;
 
-    virtual void WriteMicroChip(MicroChip::E, int reg, uint value) override;
-
 private:
 
     void SendCommand(pchar format, ...);

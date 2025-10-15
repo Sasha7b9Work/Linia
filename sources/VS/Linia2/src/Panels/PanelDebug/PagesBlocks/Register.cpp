@@ -279,13 +279,6 @@ RegAD5531::RegAD5531(wxWindow *_parent, const wxString &_name) :
 }
 
 
-RegAD7691::RegAD7691(wxWindow *_parent, const wxString &_name) :
-    Register(_parent, "AD7691", _name, 18, false, true)
-{
-
-}
-
-
 bool Register::Enable(bool enable)
 {
     painter->SetEnabled(enable);

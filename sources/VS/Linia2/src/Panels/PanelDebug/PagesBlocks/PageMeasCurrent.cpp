@@ -15,8 +15,6 @@ PageMeasCurrent::PageMeasCurrent(wxNotebook *parent) :
 {
     self = this;
 
-    AppendRegister(new RegFPGA(this, "REG6", 16));
-
-    AppendRegister(new RegAD7691(this, "ADC4"));
+    AppendRegister(new RegFPGA(this, "REG5", 16));
 }
 

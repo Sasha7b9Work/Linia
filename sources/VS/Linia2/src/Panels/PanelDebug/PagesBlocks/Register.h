@@ -108,11 +108,3 @@ public:
 
     RegAD5531(wxWindow *, const wxString &);
 };
-
-
-class RegAD7691 : public Register
-{
-public:
-
-    RegAD7691(wxWindow *, const wxString &);
-};

@@ -36,9 +36,3 @@ bool DeviceEmulator::IsConnected() const
 
     return false;
 }
-
-
-void DeviceEmulator::WriteMicroChip(MicroChip::E, int, uint)
-{
-    LOG_ERROR("Not implemented");
-}
