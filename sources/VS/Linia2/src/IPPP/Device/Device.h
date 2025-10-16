@@ -17,9 +17,9 @@ public:
 
     virtual bool IsConnected() const override;
 
-private:
+    virtual void SendCommand(pchar format, ...) const override;
 
-    void SendCommand(pchar format, ...);
+private:
 
     static void CallbackOnReceive(uint8);
 

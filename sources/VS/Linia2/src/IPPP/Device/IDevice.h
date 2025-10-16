@@ -18,4 +18,7 @@ public:
     virtual void Shutdown() = 0;
 
     virtual bool IsConnected() const = 0;
+
+    // Заслать команду и завершить нулём
+    virtual void SendCommand(pchar format, ...) const = 0;
 };

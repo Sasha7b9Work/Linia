@@ -52,6 +52,8 @@ public:
 
     virtual bool Enable(bool) override;
 
+    uint GetValue() const;
+
 private:
 
     wxButton *btnSend = nullptr;                // Однократная засылка
@@ -77,6 +79,7 @@ private:
     void OnEventCheckBox(wxCommandEvent &);
     void OnEventCombo(wxCommandEvent &);
     void OnEventToggleButton(wxCommandEvent &);
+    void OnEventButton(wxCommandEvent &);
 
     // Все элементы кроме wnd будут установлены в состояние active
     void SetActiveAcross(bool active, wxWindow *wnd);

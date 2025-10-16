@@ -51,7 +51,7 @@ bool Device::IsConnected() const
 }
 
 
-void Device::SendCommand(pchar format, ...)
+void Device::SendCommand(pchar format, ...) const
 {
     char message[1024];
     std::va_list args;
@@ -59,7 +59,7 @@ void Device::SendCommand(pchar format, ...)
     std::vsprintf(message, format, args);
     va_end(args);
 
-    std::strcat(message, "\r");
+    std::strcat(message, "\0");
 
-    UART::SendBuffer(message, (int)std::strlen(message));
+    UART::SendBuffer(message, (int)std::strlen(message) + 1);
 }

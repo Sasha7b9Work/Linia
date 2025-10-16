@@ -5,6 +5,7 @@
 #include "Controls/TextControls.h"
 #include "Utils/StringUtils.h"
 #include "Panels/PanelDebug/CommandsCombo.h"
+#include "IPPP/Device/IDevice.h"
 
 
 Register::Register(wxWindow *parent, const wxString &_title, const wxString &_name, int _bit_depth, bool _sended, bool _received) :
@@ -70,6 +71,7 @@ Register::Register(wxWindow *parent, const wxString &_title, const wxString &_na
 
     SetNamesBits(names);
 
+    Bind(wxEVT_BUTTON, &Register::OnEventButton, this);
     Bind(wxEVT_TOGGLEBUTTON, &Register::OnEventToggleButton, this);
 }
 
@@ -173,6 +175,17 @@ void Register::OnEventToggleButton(wxCommandEvent &event)
     }
 
     event.Skip();
+}
+
+
+void Register::OnEventButton(wxCommandEvent &event)
+{
+    int id = event.GetId();
+
+    if (id == btnSend->GetId())
+    {
+        IDevice::impl->SendCommand(":%s:WRITE %X", nameSTM32.c_str().AsChar(), GetValue());
+    }
 }
 
 
@@ -284,4 +297,20 @@ bool Register::Enable(bool enable)
     painter->SetEnabled(enable);
 
     return wxPanel::Enable(enable);
+}
+
+
+uint Register::GetValue() const
+{
+    uint result = 0;
+
+    for (uint i = 0; i < chbox.size(); i++)
+    {
+        if (chbox[i]->IsChecked())
+        {
+            result |= (1 << i);
+        }
+    }
+
+    return result;
 }
