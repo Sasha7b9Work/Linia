@@ -320,6 +320,8 @@ CheckBoxBit::CheckBoxBit(wxWindow *parent, const wxPoint &pos, const wxSize &siz
     Painter(parent, pos, size)
 {
     RePaint();
+
+    Bind(wxEVT_LEFT_DOWN, &CheckBoxBit::OnEventLeftClick, this);
 }
 
 
@@ -352,4 +354,12 @@ void CheckBoxBit::RePaint()
     gc->DrawText(value ? "1" : "0", 7, 0);
 
     EndPaint();
+}
+
+
+void CheckBoxBit::OnEventLeftClick(wxMouseEvent &)
+{
+    value = !value;
+
+    RePaint();
 }

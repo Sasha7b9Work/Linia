@@ -23,6 +23,8 @@ private:
     bool value = false;
 
     void RePaint();
+
+    void OnEventLeftClick(wxMouseEvent &);
 };
 
 
