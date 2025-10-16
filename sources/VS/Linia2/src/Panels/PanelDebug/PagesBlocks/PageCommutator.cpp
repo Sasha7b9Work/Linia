@@ -16,7 +16,19 @@ PageCommutator::PageCommutator(wxNotebook *parent) :
 {
     self = this;
 
-    Register *reg = new RegFPGA(this, "REG1", 16);
+    Register *reg1 = new RegFPGA(this, "REG1", 16);
 
-    AppendRegister(reg);
+    std::vector<StructDescription::CommandStruct> commandsBase;
+    commandsBase.emplace_back(StructDescription::CommandStruct{ 0b00000, "Обрыв" });
+    commandsBase.emplace_back(StructDescription::CommandStruct{ 0b10001, "Коллектор" });
+    commandsBase.emplace_back(StructDescription::CommandStruct{ 0b10010, "Эммитер" });
+    commandsBase.emplace_back(StructDescription::CommandStruct{ 0b10100, "Эммитер 1кОм" });
+    commandsBase.emplace_back(StructDescription::CommandStruct{ 0b11000, "Генератор ступенек" });
+
+    std::vector<StructDescription> desc1;
+    desc1.emplace_back(StructDescription{ 0, 5, "база", "", { true, true, commandsBase }});
+    desc1.emplace_back(StructDescription{ 5, 2, "подложка" });
+    reg1->SetDescriptionBits(0, desc1);
+
+    AppendRegister(reg1);
 }
