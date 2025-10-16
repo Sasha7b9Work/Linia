@@ -8,6 +8,12 @@
 
 // Визуальное представление регистра
 
+class CheckBoxBit : public wxCheckBox
+{
+public:
+    CheckBoxBit(wxWindow *, const wxPoint &, const wxSize &);
+};
+
 
 struct StructDescription
 {
@@ -73,7 +79,7 @@ private:
 
     std::vector<StructDescription> desc[2];     // Описания групп битов
 
-    std::vector<wxCheckBox *> chbox;
+    std::vector<CheckBoxBit *> chbox;
 
     void OnEventTextCtrl(wxCommandEvent &);
     void OnEventCheckBox(wxCommandEvent &);

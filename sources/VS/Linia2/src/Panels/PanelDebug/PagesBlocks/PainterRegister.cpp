@@ -12,7 +12,7 @@ PainterRegister::PainterRegister(wxWindow *parent, Register *_panel, const wxPoi
 
     for (int i = 0; i < panel->bit_depth; i++)
     {
-        panel->chbox[(uint)i] = new wxCheckBox(this, wxID_ANY, "", { BitX(i, panel->bit_depth), W_B + 1 }, { W_B, W_B });
+        panel->chbox[(uint)i] = new CheckBoxBit(this, { BitX(i, panel->bit_depth), W_B + 1 }, { W_B, W_B });
     }
 }
 

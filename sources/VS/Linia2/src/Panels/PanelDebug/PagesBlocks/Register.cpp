@@ -314,3 +314,9 @@ uint Register::GetValue() const
 
     return result;
 }
+
+
+CheckBoxBit::CheckBoxBit(wxWindow *parent, const wxPoint &pos, const wxSize &size) :
+    wxCheckBox(parent, wxID_ANY, "", pos, size)
+{
+}
