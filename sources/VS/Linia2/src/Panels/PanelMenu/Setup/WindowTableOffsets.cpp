@@ -12,28 +12,28 @@ WindowTableOffsets::WindowTableOffsets() :
 {
     CreateFields();
 
-//    int x = 500;
-//    int y = 20;
-//
-//    wxArrayString choices;
-//    choices.Add("смещений");
-//    choices.Add("коэффициентов");
-//
-//    comboType = new ButtonsCombo(this, "Таблица", { x, SD::Y_SB(y - 3) }, 130, choices, choices, 1, "comboType");
-//
-//    y = CreateLabelGroup(this, x, y + 20, "Канал С");
-//    y = CreateRadioButton(this, x, y, &rbChanC_MeasI, "Измеритель I");
-//    y = CreateRadioButton(this, x, y, &rbChanC_MeasU, "Измеритель U");
-//    rbChanC_MeasI->SetFocus();
-//
-//    y = CreateLabelGroup(this, x, y, "Канал B");
-//    y = CreateRadioButton(this, x, y, &rbChanB_MeasI, "Измеритель I");
-//    y = CreateRadioButton(this, x, y, &rbChanB_MeasU, "Измеритель U");
-//    y = CreateRadioButton(this, x, y, &rbChanB_SourceI, "Источник I");
-//    y = CreateRadioButton(this, x, y, &rbChanB_SourceU, "Источник U");
-//    y = CreateRadioButton(this, x, y, &rbChanB_LimitI, "Ограничение I");
-//    y = CreateRadioButton(this, x, y, &rbChanB_LimitU, "Ограничение U");
-//
+    int x = 500;
+    int y = 20;
+
+    wxArrayString choices;
+    choices.Add("смещений");
+    choices.Add("коэффициентов");
+
+    comboType = new ButtonsCombo(this, "Таблица", { x, SD::Y_SB(y - 3) }, 130, choices, choices, 1, "comboType");
+
+    y = CreateLabelGroup(this, x, y + 20, "Канал С");
+    y = CreateRadioButton(this, x, y, &rbChanC_MeasI, "Измеритель I");
+    y = CreateRadioButton(this, x, y, &rbChanC_MeasU, "Измеритель U");
+    rbChanC_MeasI->SetFocus();
+
+    y = CreateLabelGroup(this, x, y, "Канал B");
+    y = CreateRadioButton(this, x, y, &rbChanB_MeasI, "Измеритель I");
+    y = CreateRadioButton(this, x, y, &rbChanB_MeasU, "Измеритель U");
+    y = CreateRadioButton(this, x, y, &rbChanB_SourceI, "Источник I");
+    y = CreateRadioButton(this, x, y, &rbChanB_SourceU, "Источник U");
+    y = CreateRadioButton(this, x, y, &rbChanB_LimitI, "Ограничение I");
+    y = CreateRadioButton(this, x, y, &rbChanB_LimitU, "Ограничение U");
+
 //    y = CreateLabelGroup(this, x, y, "Канал S");
 //    y = CreateRadioButton(this, x, y, &rbChanS_MeasI, "Измеритель I");
 //    y = CreateRadioButton(this, x, y, &rbChanS_MeasU, "Измеритель U");
