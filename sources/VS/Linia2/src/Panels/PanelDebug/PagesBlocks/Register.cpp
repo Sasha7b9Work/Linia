@@ -317,6 +317,31 @@ uint Register::GetValue() const
 
 
 CheckBoxBit::CheckBoxBit(wxWindow *parent, const wxPoint &pos, const wxSize &size) :
-    wxCheckBox(parent, wxID_ANY, "", pos, size)
+    Painter(parent, pos, size)
 {
+    RePaint();
+}
+
+
+void CheckBoxBit::SetValue(bool new_value)
+{
+    value = new_value;
+
+    RePaint();
+}
+
+
+bool CheckBoxBit::IsChecked() const
+{
+    return value;
+}
+
+
+void CheckBoxBit::RePaint()
+{
+    BeginPaint(*wxWHITE);
+
+    DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1, *wxBLACK);
+
+    EndPaint();
 }

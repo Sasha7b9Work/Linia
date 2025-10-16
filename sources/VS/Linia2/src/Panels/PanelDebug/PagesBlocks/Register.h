@@ -4,14 +4,25 @@
 #include "Panels/PanelDebug/PagesBlocks/PainterRegister.h"
 #include "Controls/TextControls.h"
 #include "Panels/PanelDebug/CommandsCombo.h"
+#include "Controls/Painter.h"
 
 
 // Визуальное представление регистра
 
-class CheckBoxBit : public wxCheckBox
+class CheckBoxBit : public Painter
 {
 public:
     CheckBoxBit(wxWindow *, const wxPoint &, const wxSize &);
+
+    void SetValue(bool);
+
+    bool IsChecked() const;
+
+private:
+
+    bool value = false;
+
+    void RePaint();
 };
 
 
