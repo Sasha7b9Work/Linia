@@ -21,7 +21,7 @@ int PainterRegister::BitX(int num_bit, int all_bits) const
 {
     int rigth = 40 + all_bits * W_B;
 
-    return rigth - (num_bit + 1) * W_B;
+    return rigth - (num_bit + 1) * W_B - 4;
 }
 
 

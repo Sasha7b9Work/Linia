@@ -341,7 +341,15 @@ void CheckBoxBit::RePaint()
 {
     BeginPaint(*wxWHITE);
 
-    DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1, *wxBLACK);
+    wxFont font(7, wxFONTFAMILY_DEFAULT,
+        wxFONTSTYLE_NORMAL,
+        wxFONTWEIGHT_BOLD);
+
+    font.SetPointSize(10);
+
+    gc->SetFont(font, *wxBLACK);
+
+    gc->DrawText(value ? "1" : "0", 7, 0);
 
     EndPaint();
 }
