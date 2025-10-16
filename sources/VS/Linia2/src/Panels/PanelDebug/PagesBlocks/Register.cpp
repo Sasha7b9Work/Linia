@@ -94,9 +94,9 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
             {
                 int num_bit = elem.first_bit + elem.num_bits - 1;
 
-                int x = painter->BitX(num_bit, bit_depth) - 4;
+                int x = painter->BitX(num_bit, bit_depth);
 
-                elem.field.text_ctrl = new TextCtrlNumber(painter, wxID_ANY, "", { x, (PainterRegister::W_B + 1) * 3 }, { PainterRegister::W_B * elem.num_bits, 20 }, 0, (1 << elem.num_bits) - 1);
+                elem.field.text_ctrl = new TextCtrlNumber(painter, wxID_ANY, "", { x, (PainterRegister::W_B + 1) * 3 }, { PainterRegister::W_B * elem.num_bits + 1, 20 }, 0, (1 << elem.num_bits) - 1);
 
                 elem.field.text_ctrl->Bind(wxEVT_TEXT, &Register::OnEventTextCtrl, this);
             }
@@ -105,7 +105,7 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
             {
                 int num_bit = elem.first_bit + elem.num_bits - 1;
 
-                int x = painter->BitX(num_bit, bit_depth) - 4;
+                int x = painter->BitX(num_bit, bit_depth) - 1;
 
                 wxArrayString names;
                 for (auto &com : elem.field.commands)
@@ -113,7 +113,7 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
                     names.push_back(com.CreateFullLine(elem));
                 }
 
-                elem.field.combo = new CommandsCombo(painter, elem.hint, { x, (PainterRegister::W_B + 1) * 4 }, PainterRegister::W_B * elem.num_bits, names, "Register");
+                elem.field.combo = new CommandsCombo(painter, elem.hint, { x, (PainterRegister::W_B + 1) * 4 - 1}, PainterRegister::W_B * elem.num_bits + 2, names, "Register");
 
                 elem.field.combo->left_align = true;
 
@@ -362,4 +362,6 @@ void CheckBoxBit::OnEventLeftClick(wxMouseEvent &)
     value = !value;
 
     RePaint();
+
+    GF::SendCommandEvent(this, wxEVT_CHECKBOX, value ? 1 : 0);
 }
