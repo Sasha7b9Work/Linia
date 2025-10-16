@@ -49,11 +49,11 @@ WindowTableOffsets::WindowTableOffsets() :
     Bind(wxEVT_BUTTON, &WindowTableOffsets::OnEventButton, this);
     Bind(wxEVT_COMBOBOX, &WindowTableOffsets::OnEventCombobox, this);
 
-//    {
-//        // Включаем соотвествующие поля
-//
-//        GF::SendCommandEvent(comboType, wxEVT_COMBOBOX, comboType->GetCurrentSelection());
-//    }
+    {
+        // Включаем соотвествующие поля
+
+        GF::SendCommandEvent(comboType, wxEVT_COMBOBOX, comboType->GetCurrentSelection());
+    }
 }
 
 
