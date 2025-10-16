@@ -288,7 +288,7 @@ TypeValue::E WindowTableOffsets::CurrentMeasure() const
         wxRadioButton *rb1;
     };
 
-    static const StructButton buttons[TypeValue::Count] =
+    const StructButton buttons[TypeValue::Count] =
     {
         { rbChanC_MeasI,   rbChanC_MeasU },
         { rbChanC_MeasI,   rbChanC_MeasU },
