@@ -17,6 +17,8 @@ public:
 
     WindowTableOffsets();
 
+    virtual ~WindowTableOffsets() { }
+
 private:
 
     wxRadioButton *rbChanC_MeasI = nullptr,
