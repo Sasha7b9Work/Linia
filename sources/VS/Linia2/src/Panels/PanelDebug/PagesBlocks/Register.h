@@ -24,8 +24,7 @@ struct StructDescription
     struct DecField
     {
         bool need_text_ctrl = false;            // если true, то есть возможность вводить десятичное значение
-        bool need_commands = false;             // если true, то есть возможность выбирать команды
-        std::vector<CommandStruct> commands;     // Сюда ложим нужные команды, чтобы потом создать combo
+        std::vector<CommandStruct> commands;    // Сюда ложим нужные команды, чтобы потом создать combo
         TextCtrlNumber *text_ctrl = nullptr;
         CommandsCombo *combo = nullptr;
     };
@@ -40,7 +39,7 @@ class Register : public wxPanel
 public:
 
     static const int WIDTH = 800;
-    static const int HEIGHT = 150;
+    static const int HEIGHT = 155;
 
     Register(wxWindow *parent, const wxString &_title,      // Это написано на изображении
         const wxString &_name,                              // А это имя для работы с контроллером

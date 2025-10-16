@@ -101,7 +101,7 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
                 elem.field.text_ctrl->Bind(wxEVT_TEXT, &Register::OnEventTextCtrl, this);
             }
 
-            if (elem.field.need_commands)
+            if (elem.field.commands.size())
             {
                 int num_bit = elem.first_bit + elem.num_bits - 1;
 
@@ -113,7 +113,7 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
                     names.push_back(com.CreateFullLine(elem));
                 }
 
-                elem.field.combo = new CommandsCombo(painter, elem.desc, { x, (PainterRegister::W_B + 1) * 3 }, PainterRegister::W_B * elem.num_bits, names, "Register");
+                elem.field.combo = new CommandsCombo(painter, elem.desc, { x, (PainterRegister::W_B + 1) * 4 }, PainterRegister::W_B * elem.num_bits, names, "Register");
 
                 elem.field.combo->left_align = true;
 
@@ -257,7 +257,7 @@ void Register::OnEventCombo(wxCommandEvent &event)
 
     for (auto &d : desc[0])
     {
-        if (d.field.need_commands)
+        if (d.field.commands.size())
         {
             if (d.field.combo->GetId() == id)
             {

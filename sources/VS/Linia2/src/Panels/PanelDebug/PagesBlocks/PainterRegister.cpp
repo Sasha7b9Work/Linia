@@ -5,7 +5,7 @@
 
 
 PainterRegister::PainterRegister(wxWindow *parent, Register *_panel, const wxPoint &position) :
-    PainterRect(parent, position, { 750, 100 }),
+    PainterRect(parent, position, { 750, 110 }),
     panel(_panel)
 {
     panel->chbox.resize((uint)panel->bit_depth );

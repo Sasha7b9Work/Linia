@@ -25,9 +25,14 @@ PageCommutator::PageCommutator(wxNotebook *parent) :
     commandsBase.emplace_back(StructDescription::CommandStruct{ 0b10100, "Эммитер 1кОм" });
     commandsBase.emplace_back(StructDescription::CommandStruct{ 0b11000, "Генератор ступенек" });
 
+    std::vector<StructDescription::CommandStruct> commandsS;
+    commandsS.emplace_back(StructDescription::CommandStruct{ 0b00, "Обрыв" });
+    commandsS.emplace_back(StructDescription::CommandStruct{ 0b01, "Эмиттера" });
+    commandsS.emplace_back(StructDescription::CommandStruct{ 0b10, "Генератор ступенек" });
+
     std::vector<StructDescription> desc1;
-    desc1.emplace_back(StructDescription{ 0, 5, "база", "", { true, true, commandsBase }});
-    desc1.emplace_back(StructDescription{ 5, 2, "подложка" });
+    desc1.emplace_back(StructDescription{ 0, 5, "база", "база", { true, commandsBase } });
+    desc1.emplace_back(StructDescription{ 5, 2, "подложка", "подложка", { true, commandsS }});
     reg1->SetDescriptionBits(0, desc1);
 
     AppendRegister(reg1);
