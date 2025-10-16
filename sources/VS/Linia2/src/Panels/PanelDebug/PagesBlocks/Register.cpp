@@ -105,7 +105,7 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
             {
                 int num_bit = elem.first_bit + elem.num_bits - 1;
 
-                int x = painter->BitX(num_bit, bit_depth) - 1;
+                int x = painter->BitX(num_bit, bit_depth);
 
                 wxArrayString names;
                 for (auto &com : elem.field.commands)
