@@ -105,7 +105,7 @@ void PainterRegister::SetHintCheckBox(int num_bit)
 {
     wxString hint = panel->names_bits[(uint)num_bit];
 
-    wxString desc0 = GetDescription(0, num_bit);
+    wxString desc0 = GetHint(0, num_bit);
 
     if (!desc0.empty())
     {
@@ -113,7 +113,7 @@ void PainterRegister::SetHintCheckBox(int num_bit)
         hint += desc0;
     }
 
-    wxString desc1 = GetDescription(1, num_bit);
+    wxString desc1 = GetHint(1, num_bit);
 
     if (!desc1.empty())
     {
@@ -206,7 +206,7 @@ void PainterRegister::DrawTextInCenter(int x, int y, int width, const wxString &
 }
 
 
-wxString PainterRegister::GetDescription(int index_desc, int num_bit)
+wxString PainterRegister::GetHint(int index_desc, int num_bit)
 {
     if (panel->desc[index_desc].empty())
     {
@@ -221,7 +221,7 @@ wxString PainterRegister::GetDescription(int index_desc, int num_bit)
         {
             if (num_bit < desc[i].first_bit + desc[i].num_bits)
             {
-                return desc[i].desc;
+                return desc[i].hint;
             }
         }
     }

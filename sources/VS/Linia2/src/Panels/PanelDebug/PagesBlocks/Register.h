@@ -20,6 +20,7 @@ struct StructDescription
     int      first_bit;
     int      num_bits;
     wxString desc;
+    wxString hint;
     struct DecField
     {
         bool need_text_ctrl = false;            // если true, то есть возможность вводить десятичное значение

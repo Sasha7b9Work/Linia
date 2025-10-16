@@ -42,5 +42,5 @@ private:
 
     void SetHintCheckBox(int num_bit);
 
-    wxString GetDescription(int index_desc, int num_bit);
+    wxString GetHint(int index_desc, int num_bit);
 };
