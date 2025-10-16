@@ -105,7 +105,7 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
             {
                 int num_bit = elem.first_bit + elem.num_bits - 1;
 
-                int x = painter->BitX(num_bit, bit_depth);
+                int x = painter->BitX(num_bit, bit_depth) + 1;
 
                 wxArrayString names;
                 for (auto &com : elem.field.commands)
@@ -113,7 +113,7 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
                     names.push_back(com.CreateFullLine(elem));
                 }
 
-                elem.field.combo = new CommandsCombo(painter, elem.hint, { x, (PainterRegister::W_B + 1) * 4 - 1}, PainterRegister::W_B * elem.num_bits, names, "Register");
+                elem.field.combo = new CommandsCombo(painter, elem.hint, { x, (PainterRegister::W_B + 1) * 4 - 1}, PainterRegister::W_B * elem.num_bits - 2, names, "Register");
 
                 elem.field.combo->left_align = true;
 
