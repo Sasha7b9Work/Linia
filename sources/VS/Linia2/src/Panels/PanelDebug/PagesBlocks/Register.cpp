@@ -113,7 +113,7 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
                     names.push_back(com.CreateFullLine(elem));
                 }
 
-                elem.field.combo = new CommandsCombo(painter, elem.desc, { x, (PainterRegister::W_B + 1) * 4 }, PainterRegister::W_B * elem.num_bits, names, "Register");
+                elem.field.combo = new CommandsCombo(painter, elem.hint, { x, (PainterRegister::W_B + 1) * 4 }, PainterRegister::W_B * elem.num_bits, names, "Register");
 
                 elem.field.combo->left_align = true;
 
