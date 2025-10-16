@@ -3,14 +3,6 @@
 #include "Panels/PanelDebug/PagesBlocks/PageChannelB.h"
 
 
-/*
-    ADC     AD7691      16 разрядов
-    DAC     AD5531_1    12 разрядов
-    DAC     AD5531_2    12 разрядов
-    Регистр. упр.       32 разрядов
-*/
-
-
 PageChannelB *PageChannelB::self = nullptr;
 
 
@@ -23,5 +15,32 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
 
     AppendRegister(new RegAD5531(this, "DAC3"));
 
-    AppendRegister(new RegFPGA(this, "REG3", 32));
+    RegFPGA *reg3 = new RegFPGA(this, "REG3", 32);
+
+    std::vector<StructDescription> desc3;
+
+    std::vector<StructDescription::CommandStruct> commandsLimitCurrent;
+    commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b000, "200 нA" });
+    commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b001, "2 мкA" });
+    commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b010, "20 мкA" });
+    commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b011, "200 мкA" });
+    commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b100, "2 мA" });
+    commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b101, "20 мA" });
+    commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b110, "200 мA" });
+    commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b111, "2 A" });
+    desc3.emplace_back(StructDescription{ 0, 3, "ппт", "Предел по току", { true, commandsLimitCurrent } });
+
+    std::vector<StructDescription::CommandStruct> commandsLimit20A;
+    commandsLimit20A.emplace_back(StructDescription::CommandStruct{ 0, "Выключено" });
+    commandsLimit20A.emplace_back(StructDescription::CommandStruct{ 1, "Включено" });
+    desc3.emplace_back(StructDescription{ 3, 1, "п", "Предел 20А", { true, commandsLimit20A } });
+
+    std::vector<StructDescription::CommandStruct> commandsUc;
+    commandsUc.emplace_back(StructDescription::CommandStruct{ 0, "Подключение " });
+    commandsUc.emplace_back(StructDescription::CommandStruct{ 1, "Отключение " });
+    desc3.emplace_back(StructDescription{ 4, 1, "U", "Uc", { true, commandsUc }});
+
+    reg3->SetDescriptionBits(0, desc3);
+
+    AppendRegister(reg3);
 }
