@@ -190,39 +190,39 @@ void WindowTableOffsets::OnEventCombobox(wxCommandEvent &)
 
 void WindowTableOffsets::FillFields()
 {
-    bool show_I = rbChanC_MeasI->GetValue() ||
-        rbChanB_MeasI->GetValue() ||
-        rbChanB_SourceI->GetValue() ||
-        rbChanB_LimitI->GetValue() ||
-        rbChanS_MeasI->GetValue() ||
-        rbChanS_SourceI->GetValue() ||
-        rbChanS_LimitI->GetValue();
-
-    int index = comboType->GetCurrentSelection();
-
-    if (index == 0)
-    {
-        FillOffsets(CurrentMeasure(), show_I);
-    }
-    else if (index == 1)
-    {
-        FillK(CurrentMeasure(), show_I);
-    }
-    else
-    {
-        LOG_ERROR("Bad index");
-    }
-
-    if (show_I)
-    {
-        ShowFieldsI(true);
-        ShowFieldsU(false);
-    }
-    else
-    {
-        ShowFieldsU(true);
-        ShowFieldsI(false);
-    }
+//    bool show_I = rbChanC_MeasI->GetValue() ||
+//        rbChanB_MeasI->GetValue() ||
+//        rbChanB_SourceI->GetValue() ||
+//        rbChanB_LimitI->GetValue() ||
+//        rbChanS_MeasI->GetValue() ||
+//        rbChanS_SourceI->GetValue() ||
+//        rbChanS_LimitI->GetValue();
+//
+//    int index = comboType->GetCurrentSelection();
+//
+//    if (index == 0)
+//    {
+//        FillOffsets(CurrentMeasure(), show_I);
+//    }
+//    else if (index == 1)
+//    {
+//        FillK(CurrentMeasure(), show_I);
+//    }
+//    else
+//    {
+//        LOG_ERROR("Bad index");
+//    }
+//
+//    if (show_I)
+//    {
+//        ShowFieldsI(true);
+//        ShowFieldsU(false);
+//    }
+//    else
+//    {
+//        ShowFieldsU(true);
+//        ShowFieldsI(false);
+//    }
 }
 
 
