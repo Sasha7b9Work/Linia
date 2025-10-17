@@ -371,6 +371,18 @@ uint Register::GetValue() const
 }
 
 
+void Register::SetValue(uint new_value)
+{
+    for (uint i = 0; i < chbox.size(); i++)
+    {
+        chbox[i]->SetValue((new_value & (1 << i)) != 0);
+    }
+
+    UpdateComboCommands();
+    UpdateDecFields();
+}
+
+
 CheckBoxBit::CheckBoxBit(wxWindow *parent, const wxPoint &pos, const wxSize &size) :
     Painter(parent, pos, size)
 {
@@ -424,20 +436,11 @@ void CheckBoxBit::OnEventLeftClick(wxMouseEvent &)
 
 void Register::Pack()
 {
-    for (uint i = 0; i < chbox.size(); i++)
-    {
-        Config::WriteBool(chip->GetNameSTM32() + wxString::Format("_%u", i), chbox[i]->IsChecked());
-    }
+    Config::WriteUint(chip->GetNameSTM32(), GetValue());
 }
 
 
 void Register::Unpack()
 {
-    for (uint i = 0; i < chbox.size(); i++)
-    {
-        chbox[i]->SetValue(Config::ReadBool(chip->GetNameSTM32() + wxString::Format("_%u", i), false));
-    }
-
-    UpdateComboCommands();
-    UpdateDecFields();
+    SetValue(Config::ReadUint(chip->GetNameSTM32()));
 }

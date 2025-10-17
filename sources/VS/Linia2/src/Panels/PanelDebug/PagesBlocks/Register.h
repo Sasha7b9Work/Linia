@@ -75,6 +75,7 @@ public:
 
     virtual bool Enable(bool) override;
 
+    void SetValue(uint);
     uint GetValue() const;
 
     void Pack();

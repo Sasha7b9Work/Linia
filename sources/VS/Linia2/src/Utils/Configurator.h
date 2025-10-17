@@ -32,6 +32,7 @@ namespace Config
     wxString Read(const wxString &key, const wxString &def = "");
 
     void WriteUint(const wxString &key, uint);
+    uint ReadUint(const wxString &key, uint def = 0);
 
     void WriteInt(const wxString &key, int);
     void Write(const wxString &key, int);
