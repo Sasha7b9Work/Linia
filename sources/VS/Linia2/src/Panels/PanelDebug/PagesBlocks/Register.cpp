@@ -113,7 +113,13 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
                     names.push_back(com.CreateFullLine(elem));
                 }
 
-                elem.field.combo = new CommandsCombo(painter, elem.hint, { x, (PainterRegister::W_B + 1) * 4 - 1}, PainterRegister::W_B * elem.num_bits - 1, names, "Register");
+                wxArrayString tooltips;
+                for (auto &com : elem.field.commands)
+                {
+                    tooltips.push_back(com.CreateTooltip(elem));
+                }
+
+                elem.field.combo = new CommandsCombo(painter, elem.hint, { x, (PainterRegister::W_B + 1) * 4 - 1}, PainterRegister::W_B * elem.num_bits - 1, names, tooltips, "Register");
 
                 elem.field.combo->left_align = true;
 
@@ -247,6 +253,12 @@ void Register::OnEventCheckBox(wxCommandEvent &event)
 wxString StructDescription::CommandStruct::CreateFullLine(StructDescription &d) const
 {
     return SU::BinToString(value, d.num_bits) + " - " + desc;
+}
+
+
+wxString StructDescription::CommandStruct::CreateTooltip(StructDescription &) const
+{
+    return desc;
 }
 
 

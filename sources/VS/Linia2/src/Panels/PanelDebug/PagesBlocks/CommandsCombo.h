@@ -7,7 +7,7 @@ class CommandsCombo : public ButtonsCombo
 {
 public:
     CommandsCombo(wxWindow *parent, const wxString &title, const wxPoint &pos, int width,
-        const wxArrayString &labels,
+        const wxArrayString &labels, const wxArrayString &tooltips,
         const wxString &name);
 private:
 };

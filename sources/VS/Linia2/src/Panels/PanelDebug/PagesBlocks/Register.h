@@ -35,6 +35,7 @@ struct StructDescription
         uint16   value;  // Значение
         wxString desc;   // Описание данного значения
         wxString CreateFullLine(StructDescription &) const;
+        wxString CreateTooltip(StructDescription &) const;
     };
     int      first_bit;
     int      num_bits;

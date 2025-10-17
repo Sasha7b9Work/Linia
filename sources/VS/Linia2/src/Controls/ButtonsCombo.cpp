@@ -254,7 +254,8 @@ void ButtonsCombo::SetCurrentSelection(int choice)
 
     SetExtendedLabel(label, labels[index]);
 
-    SetToolTip((tooltips[index] != labels[index]) ? (tooltips[index]) : wxString());
+    SetToolTip((tooltips[index] != labels[index]) ?     // Предполагается, что подсказка устанавливается только в том случае, если она не совпадает с надписью
+        (tooltips[index]) : wxString());
 
     if(need_event)
     {
