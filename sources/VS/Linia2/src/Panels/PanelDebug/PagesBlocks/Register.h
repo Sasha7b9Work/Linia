@@ -44,10 +44,9 @@ struct StructDescription
     {
         bool need_text_ctrl = false;            // если true, то есть возможность вводить десятичное значение
         std::vector<CommandStruct> commands;    // Сюда ложим нужные команды, чтобы потом создать combo
-        TextCtrlNumber *text_ctrl = nullptr;
-        CommandsCombo *combo = nullptr;
-    };
-    DecField field;
+        TextCtrlNumber *text_ctrl = nullptr;    // Здесь находятся десятичные значения
+        CommandsCombo *combo = nullptr;         // А здесь находятся команды
+    } field;
 };
 
 
@@ -93,6 +92,9 @@ private:
     std::vector<StructDescription> desc[2];     // Описания групп битов
 
     std::vector<CheckBoxBit *> chbox;
+
+    // Привести десятичные поля в соответствие с битовыми
+    void UpdateDecFields();
 
     void OnEventTextCtrl(wxCommandEvent &);
     void OnEventCheckBox(wxCommandEvent &);

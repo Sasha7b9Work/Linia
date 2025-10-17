@@ -121,6 +121,8 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
             }
         }
     }
+
+    UpdateDecFields();
 }
 
 
@@ -201,45 +203,42 @@ void Register::SetActiveAcross(bool active, wxWindow *_wnd)
 }
 
 
-void Register::OnEventCheckBox(wxCommandEvent &event)
+void Register::UpdateDecFields()
 {
-    int id = event.GetId();
-
-    for (int i = 0; i < (int)chbox.size(); i++)
+    for (int i = 0; i < (int)chbox.size(); i++)                         // Перебираем все биты
     {
-        if (chbox[(uint)i]->GetId() == id)                                  // Нашли данный бит
+        for (auto &d : desc[0])
         {
-            for (auto &d : desc[0])
+            if (d.field.need_text_ctrl)
             {
-                if (d.field.need_text_ctrl)
+                if (i >= d.first_bit && i < d.first_bit + d.num_bits)   // Нашли описатель поля, в которое входит данный бит
                 {
-                    if (i >= d.first_bit && i < d.first_bit + d.num_bits)   // Нашли описатель поля, в которое входит данный бит
+                    int value = 0;
+
+                    int counter = 0;
+
+                    for (int bit = d.first_bit; bit < d.first_bit + d.num_bits; bit++)
                     {
-                        int value = 0;
-
-                        int counter = 0;
-
-                        for (int bit = d.first_bit; bit < d.first_bit + d.num_bits; bit++)
+                        if (chbox[(uint)bit]->IsChecked())
                         {
-                            if (chbox[(uint)bit]->IsChecked())
-                            {
-                                value |= (1 << counter);
-                            }
-
-                            counter++;
+                            value |= (1 << counter);
                         }
 
-                        d.field.text_ctrl->SetValue(wxString::Format("%d", value));
-
-                        event.Skip();
-
-                        return;
+                        counter++;
                     }
-                }
 
+                    d.field.text_ctrl->SetValue(wxString::Format("%d", value));
+                }
             }
+
         }
     }
+}
+
+
+void Register::OnEventCheckBox(wxCommandEvent &event)
+{
+    UpdateDecFields();
 
     event.Skip();
 }
