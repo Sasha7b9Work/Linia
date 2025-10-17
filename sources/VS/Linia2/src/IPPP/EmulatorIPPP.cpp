@@ -83,69 +83,6 @@ void EmulatorIPPP::ChanC_LimitSourceU(int /*min*/, int /*max*/)
 }
 
 
-void EmulatorIPPP::ChanBS_SourceMode(const Chan &/*chan*/, ModeSource::E /*mode*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-void EmulatorIPPP::ChanBS_StepRange(const Chan &/*chan*/, RangeU::E /*range*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-void EmulatorIPPP::ChanBS_StepRange(const Chan &, RangeI::E)
-{
-    LOG_ERROR("Not implemented");
-}
-
-void EmulatorIPPP::ChanBS_StepCount(const Chan &/*chan*/, int /*count*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-void EmulatorIPPP::ChanBS_StepValue(const Chan &/*chan*/, double /*value*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-void EmulatorIPPP::ChaBS_Offset(const Chan &/*chan*/, double)
-{
-    LOG_ERROR("Not implemented");
-}
-
-void EmulatorIPPP::ChanBS_MeasMode(const Chan &/*chan*/, ModeMeas::E /*mode*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-void EmulatorIPPP::ChanBS_MeasRange(const Chan &/*chan*/, RangeU::E /*range*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-void EmulatorIPPP::ChanBS_MeasRange(const Chan &/*chan*/, RangeI::E /*range*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-void EmulatorIPPP::ChanBS_LimitRange(const Chan &/*chan*/, RangeU::E /*range*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
-void EmulatorIPPP::ChanBS_LimitRange(const Chan &/*chan*/, RangeI::E /*range*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
-void EmulatorIPPP::ChanBS_LimitThreshold(const Chan &/*chan*/, int /*threshold*/)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
 void EmulatorIPPP::SetPulseDuration(uint /*durationUS*/, bool)
 {
     LOG_ERROR("Not implemented");
