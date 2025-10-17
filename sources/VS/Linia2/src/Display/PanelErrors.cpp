@@ -21,6 +21,8 @@ PanelErrors::PanelErrors(wxWindow *parent) :
     text_ctrl->SetForegroundColour(*wxWHITE);
     text_ctrl->SetBackgroundColour(*wxRED);
 
+    text_ctrl->SetDoubleBuffered(true);
+
     wxSize size_button{ 90, 22 };
     btnCollapse = new wxButton(this, wxID_ANY, "Свернуть", { Display::self->GetSize().x - size_button.x - 10, SD::Y_SB(0) }, size_button);
 
