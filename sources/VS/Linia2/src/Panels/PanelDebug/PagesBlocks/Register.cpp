@@ -310,15 +310,17 @@ void Register::UpdateComboCommands()
 
             bool exist_value = false;
 
-            for (auto &command : d.field.commands)
+            for (uint i = 0; i < d.field.commands.size(); i++)
             {
                 if (exist_value)
                 {
                     break;
                 }
 
-                if (value == command.value)
+                if (value == d.field.commands[i].value)
                 {
+                    d.field.combo->SetCurrentSelection((int)i);
+
                     exist_value = true;
                 }
             }

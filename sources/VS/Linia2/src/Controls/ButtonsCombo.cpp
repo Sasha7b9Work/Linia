@@ -158,6 +158,9 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoi
     DrawingButton(parent, wxID_ANY, _labels[0], pos, { width, TEXTCNTRL_HEIGHT + 3 }, (type == Type::Bitmap) ? _title : wxString("")),
     current_choice(0)
 {
+    colorBackground = DrawingButton::GetBackgroundColour();
+    colorForeground = DrawingButton::GetForegroundColour();
+
     DrawingButton::SetName(parent->GetName() + "_" + name);
 
     Bind(wxEVT_BUTTON, &ButtonsCombo::OnButtonClicked, this);
@@ -241,6 +244,10 @@ void ButtonsCombo::OnMouseDown(wxMouseEvent &event)
 
 void ButtonsCombo::SetCurrentSelection(int choice)
 {
+    DrawingButton::SetBackgroundColour(colorBackground);
+    DrawingButton::SetForegroundColour(colorForeground);
+    DrawingButton::Refresh();
+
     bool need_event = (choice != current_choice);
 
     current_choice = choice;

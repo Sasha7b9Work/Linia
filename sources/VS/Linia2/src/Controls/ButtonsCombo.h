@@ -72,6 +72,8 @@ protected:
     void SetExtendedLabel(const wxString &, int num_spaces, const wxString &);
 
 private:
+    wxColour colorBackground;
+    wxColour colorForeground;
     wxString myToolTip;
     int current_choice = -1;            // Номер реального выбора
     wxString title;
