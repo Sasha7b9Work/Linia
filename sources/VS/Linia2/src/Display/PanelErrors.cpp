@@ -16,7 +16,7 @@ PanelErrors::PanelErrors(wxWindow *parent) :
 
     //    wxPanel *panel = new wxPanel(this);
 
-    text_ctrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, { 0, 0 }, { MainWindow::WIDTH2, 90 }, wxTE_MULTILINE | wxTE_READONLY | wxNO_BORDER | wxTE_NO_VSCROLL);
+    text_ctrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, { 0, 0 }, { MainWindow::WIDTH2, 90 }, wxTE_MULTILINE | wxTE_READONLY | wxNO_BORDER | wxTE_NO_VSCROLL | wxVSCROLL);
     text_ctrl->SetForegroundColour(*wxWHITE);
     text_ctrl->SetBackgroundColour(*wxRED);
 
@@ -136,7 +136,11 @@ void PanelErrors::BuildCanvas()
 
     for (const auto &elem : errors)
     {
-        label += wxString::Format("ERROR %d - %s\r\n", elem.err, elem.message);
+        if (!label.empty())
+        {
+            label += "\r\n";
+        }
+        label += wxString::Format("ERROR %d - %s", elem.err, elem.message);
     }
 
     text_ctrl->SetValue(label);
