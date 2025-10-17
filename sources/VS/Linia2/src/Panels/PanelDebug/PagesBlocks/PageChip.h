@@ -13,6 +13,9 @@ public:
 
     void AppendRegister(Register *);
 
+    void Pack();
+    void Unpack();
+
 private:
 
     wxMenuItem *itemReturn = nullptr;

@@ -9,4 +9,7 @@ public:
     PageTestsFPGA(wxNotebook *);
 
     static PageTestsFPGA *self;
+
+    void Pack();
+    void Unpack();
 };

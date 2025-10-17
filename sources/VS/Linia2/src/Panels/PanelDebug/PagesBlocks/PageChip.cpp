@@ -97,3 +97,15 @@ void PageChip::FillRegisterBS(RegFPGA *reg)
 
     reg->SetDescriptionBits(0, desc3);
 }
+
+
+void PageChip::Pack()
+{
+
+}
+
+
+void PageChip::Unpack()
+{
+
+}

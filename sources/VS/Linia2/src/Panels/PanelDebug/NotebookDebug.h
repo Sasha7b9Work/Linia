@@ -16,6 +16,10 @@ public:
 
     void DeInit();
 
+    void Unpack();
+
+    void Pack();
+
 private:
 
     void AppendNewPage(wxPanel *);

@@ -13,3 +13,15 @@ PageTestsFPGA::PageTestsFPGA(wxNotebook *parent) :
 
     wxPanel::SetName("FPGA");
 }
+
+
+void PageTestsFPGA::Pack()
+{
+
+}
+
+
+void PageTestsFPGA::Unpack()
+{
+
+}

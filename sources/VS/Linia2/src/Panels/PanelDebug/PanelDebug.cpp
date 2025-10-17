@@ -22,6 +22,8 @@ PanelDebug::PanelDebug(wxWindow *parent) :
     SetSizer(sizer);
 
     wxPanel::Layout();
+
+    Unpack();
 }
 
 
@@ -36,4 +38,16 @@ bool PanelDebug::Show(bool show)
 void PanelDebug::Update()
 {
     NotebookDebug::self->Update();
+}
+
+
+void PanelDebug::Unpack()
+{
+    NotebookDebug::self->Unpack();
+}
+
+
+void PanelDebug::Pack()
+{
+    NotebookDebug::self->Pack();
 }

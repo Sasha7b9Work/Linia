@@ -21,6 +21,9 @@ public:
     // Вызывается при выходе из панели отладки
     void DeInit();
 
+    void Pack();
+    void Unpack();
+
 private:
 
     wxButton *btnReturn = nullptr;

@@ -271,8 +271,6 @@ void MainWindow::OnAbout(wxCommandEvent &WXUNUSED(event))
 
 void MainWindow::SetMode(ModeMainWindow::E mode)
 {
-    LOG_WRITE(" ");
-
     ModeMainWindow::current = mode;
 
     PanelName::self->Show(mode == ModeMainWindow::Standard);
@@ -293,5 +291,5 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
 
     wxFrame::Layout();
 
-    LOG_WRITE(" ");
+    PanelDebug::self->Pack();
 }

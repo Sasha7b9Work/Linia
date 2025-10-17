@@ -623,3 +623,15 @@ void PageTestsGPIO::CallbackonREQ_RD(bool state)
 {
     PageTestsGPIO::self->OnChangeStatePin(&pinREQ_RD, state);
 }
+
+
+void PageTestsGPIO::Pack()
+{
+
+}
+
+
+void PageTestsGPIO::Unpack()
+{
+
+}
