@@ -14,6 +14,8 @@ public:
     // Если в комбобоксе нету выбора для установленных значений битов, надо вызывать эту функцию
     void SetInvalidChoice();
 
+    virtual void SetMyToolTip(const wxString &) override;
+
 private:
 
     virtual void SetExtendedLabel(const wxString &, const wxString &) override;

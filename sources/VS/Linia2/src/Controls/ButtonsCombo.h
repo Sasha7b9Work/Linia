@@ -58,14 +58,16 @@ public:
 
     int NumChoices() const;
 
-    void SetMyToolTip(const wxString &);
+    virtual void SetMyToolTip(const wxString &);
     wxString GetMyToolTip() const;
 
     bool left_align = false;            // Если true - надписи на выборах будут выравниваться по левому краю
 
 protected:
 
+    wxString myToolTip;
     bool insert_empty = false;          // true, если перед первым элементом нужно вставлять пустые элементы (для диапазонов, чтобы они согласованно располагались по столбцам)
+    wxString title;
 
     // Между строками будут пробелы таким образом, что строки будут по краям кнопки
     virtual void SetExtendedLabel(const wxString &, const wxString &);
@@ -74,9 +76,7 @@ protected:
 private:
     wxColour colorBackground;
     wxColour colorForeground;
-    wxString myToolTip;
     int current_choice = -1;            // Номер реального выбора
-    wxString title;
     wxArrayString labels;
     wxArrayString tooltips;
     int buttons_in_row = 0;

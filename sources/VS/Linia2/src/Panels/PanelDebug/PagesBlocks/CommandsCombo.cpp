@@ -22,3 +22,11 @@ void CommandsCombo::SetInvalidChoice()
     DrawingButton::SetForegroundColour(*wxRED);
     DrawingButton::Refresh();
 }
+
+
+void CommandsCombo::SetMyToolTip(const wxString &tool)
+{
+    ButtonsCombo::SetMyToolTip(tool);
+
+    SetToolTip(title + " :\n" + GetMyToolTip());
+}
