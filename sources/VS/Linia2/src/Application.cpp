@@ -58,7 +58,7 @@ bool Application::OnInit()
 
     frame->Show();
 
-    if (!UART::IsAvailability())
+    if (UART::IsAvailability())
     {
         AutoRebootDialog dialog(frame, "Устройство UART не обнаружено.", 10, []
             {
@@ -68,7 +68,7 @@ bool Application::OnInit()
         dialog.ShowModal();
     }
 
-    if (!SPI::IsAvailability())
+    if (SPI::IsAvailability())
     {
         AutoRebootDialog dialog(frame, "Устройство SPI не обнаружено.", 10, []
             {
