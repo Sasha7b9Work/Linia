@@ -539,7 +539,11 @@ void set_thread_priority_linux(std::thread &thread, int policy, int priority)
 
     if (pthread_setschedparam(handle, policy, &sch_params) != 0)
     {
-        std::cerr << "Failed to set thread priority" << std::endl;
+        LOG_ERROR("Priority gpio read thread %d is FAIL", priority);
+    }
+    else
+    {
+        LOG_WRITE("Priority gpio read thread %d is OK", priority);
     }
 }
 #endif
