@@ -139,6 +139,8 @@ void PanelErrors::BuildCanvas()
 
     text_ctrl->SetLabel(label);
 
+    LOG_WRITE("Label = %s", label.c_str().AsChar());
+
     text_ctrl->Update();
     text_ctrl->Layout();
 
