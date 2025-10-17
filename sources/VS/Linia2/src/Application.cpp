@@ -26,61 +26,10 @@ wxIMPLEMENT_APP(Application);
 Application *Application::self = nullptr;
 
 
-class FilteredStreambuf : public std::streambuf {
-    std::streambuf *original;
-
-public:
-    FilteredStreambuf(std::streambuf *orig) : original(orig)
-    {
-    }
-
-protected:
-    virtual int overflow(int c) override
-    {
-        // Можно добавить фильтрацию по содержимому
-        return original->sputc(c);
-    }
-
-    virtual std::streamsize xsputn(const char *s, std::streamsize n) override
-    {
-        // Фильтруем ненужные сообщения GTK
-        if (std::strstr(s, "Gtk") || std::strstr(s, "gtk") ||
-            std::strstr(s, "GDK") || std::strstr(s, "gdk"))
-        {
-            return n; // Игнорируем
-        }
-        return original->sputn(s, n);
-    }
-};
-
-
 bool Application::OnInit()
 {
     std::locale::global(std::locale(""));  // Установка системной локали
     setlocale(LC_ALL, "");
-
-    wxLogNull logNo; // Логи отключены до разрушения этого объекта
-
-    wxLog::EnableLogging(false);
-
-    FilteredStreambuf filtered_stderr(std::cerr.rdbuf());
-    std::cerr.rdbuf(&filtered_stderr);
-
-#ifndef WIN32
-
-    // Устанавливаем переменные окружения для GTK
-    ::setenv("G_MESSAGES_DEBUG", "0", 1);
-    ::setenv("GTK_DEBUG", "0", 1);
-    ::setenv("GDK_DEBUG", "0", 1);
-    ::setenv("NO_AT_BRIDGE", "1", 1);
-
-    // Отключаем логирование в wxWidgets
-//    wxLog::SetActiveTarget(new wxLogNull);
-
-    // Дополнительно: отключаем X11 warnings
-    ::setenv("XLIB_SKIP_ARGB_VISUALS", "1", 1);
-
-#endif
 
     if (!wxApp::OnInit())
     {
