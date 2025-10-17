@@ -19,11 +19,11 @@ PageChannelS::PageChannelS(wxNotebook *parent) :
 {
     self = this;
 
-    AppendRegister(new RegAD5531(this, "DAC4"));
+    AppendRegister(new RegAD5531(this, &dacs[4]));
 
-    AppendRegister(new RegAD5531(this, "DAC5"));
+    AppendRegister(new RegAD5531(this, &dacs[5]));
 
-    RegFPGA *reg4 = new RegFPGA(this, "REG4", 32);
+    RegFPGA *reg4 = new RegFPGA(this, &regs[4], 32);
 
     FillRegisterBS(reg4);
 

@@ -8,16 +8,16 @@
 #include "IPPP/Device/IDevice.h"
 
 
-Register::Register(wxWindow *parent, const wxString &_title, const wxString &_name, int _bit_depth, bool _sended, bool _received) :
+Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, int _bit_depth, bool _sended, bool _received) :
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
     bit_depth(_bit_depth),
-    nameSTM32(_name),
     sended(_sended),
-    received(_received)
+    received(_received),
+    chip(_chip)
 {
     wxPanel::SetName("Register");
 
-    new wxStaticText(this, wxID_ANY, _title + " " + _name, {10, 10});
+    new wxStaticText(this, wxID_ANY, _title + " " + chip->GetNameSTM32(), {10, 10});
 
     wxSize size_button{ 90, 25 };
 
@@ -192,7 +192,7 @@ void Register::OnEventButton(wxCommandEvent &event)
 
     if (id == btnSend->GetId())
     {
-        IDevice::impl->SendCommand(":%s:WRITE %X", nameSTM32.c_str().AsChar(), GetValue());
+        IDevice::impl->SendCommand(":%s:WRITE %X", chip->GetNameSTM32().c_str().AsChar(), GetValue());
     }
 }
 
@@ -334,15 +334,15 @@ void Register::UpdateComboCommands()
 }
 
 
-RegAD5543::RegAD5543(wxWindow *_parent, const wxString &_name) :
-    Register(_parent, "AD5543", _name, 12, true, false)
+RegAD5543::RegAD5543(wxWindow *_parent, Chip *_chip) :
+    Register(_parent, "AD5543", _chip, 12, true, false)
 {
 
 }
 
 
-RegAD5531::RegAD5531(wxWindow *_parent, const wxString &_name) :
-    Register(_parent, "AD5531", _name, 12, true, false)
+RegAD5531::RegAD5531(wxWindow *_parent, Chip *_chip) :
+    Register(_parent, "AD5531", _chip, 12, true, false)
 {
 
 }

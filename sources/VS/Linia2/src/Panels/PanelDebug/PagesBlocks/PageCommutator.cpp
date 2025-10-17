@@ -1,4 +1,4 @@
-﻿// 2025/10/07 11:46:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿ // 2025/10/07 11:46:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/PagesBlocks/PageCommutator.h"
 #include "Panels/PanelDebug/PagesBlocks/Register.h"
@@ -16,7 +16,7 @@ PageCommutator::PageCommutator(wxNotebook *parent) :
 {
     self = this;
 
-    Register *reg1 = new RegFPGA(this, "REG1", 16);
+    Register *reg1 = new RegFPGA(this, &regs[1], 16);
 
     std::vector<StructDescription::CommandStruct> commandsBase;
     commandsBase.emplace_back(StructDescription::CommandStruct{ 0b00000, "Обрыв" });

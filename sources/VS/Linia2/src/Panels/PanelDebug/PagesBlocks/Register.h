@@ -5,6 +5,7 @@
 #include "Controls/TextControls.h"
 #include "Panels/PanelDebug/PagesBlocks/CommandsCombo.h"
 #include "Controls/Painter.h"
+#include "IPPP/Device/Chips.h"
 
 
 // Визуальное представление регистра
@@ -64,7 +65,7 @@ public:
     static const int HEIGHT = 155;
 
     Register(wxWindow *parent, const wxString &_title,      // Это написано на изображении
-        const wxString &_name,                              // А это имя для работы с контроллером
+        Chip *,
         int bit_depth, bool _sended,                        // Можно ли засылать в регистр
         bool _received);                                    // Можно ли читать из регистра
 
@@ -85,7 +86,6 @@ private:
     std::vector<wxWindow *> windows;
 
     int bit_depth = 0;
-    wxString nameSTM32;                         // Под этим именем идёт работа с платой контроллера
     bool sended = true;
     bool received = true;
 
@@ -96,6 +96,8 @@ private:
     std::vector<StructDescription> desc[2];     // Описания групп битов
 
     std::vector<CheckBoxBit *> chbox;
+
+    Chip *chip = nullptr;
 
     // Привести десятичные поля в соответствие с битовыми
     void UpdateDecFields();
@@ -118,8 +120,8 @@ class RegFPGA : public Register
 {
 public:
 
-    RegFPGA(wxWindow *_parent, const wxString & _name, int _bit_depth) :
-        Register(_parent, "", _name, _bit_depth, true, false)
+    RegFPGA(wxWindow *_parent, Chip *_chip, int _bit_depth) :
+        Register(_parent, "", _chip, _bit_depth, true, false)
     {
     }
 };
@@ -129,7 +131,7 @@ class RegAD5543 : public Register
 {
 public:
 
-    RegAD5543(wxWindow *, const wxString &);
+    RegAD5543(wxWindow *, Chip *_chip);
 };
 
 
@@ -137,5 +139,5 @@ class RegAD5531 : public Register
 {
 public:
 
-    RegAD5531(wxWindow *, const wxString &);
+    RegAD5531(wxWindow *, Chip *_chip);
 };
