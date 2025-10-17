@@ -40,9 +40,10 @@ public:
 
 bool Application::OnInit()
 {
+    // Попытка отключить предупреждения вида "Gtk-WARNING"
     wxLog::SetActiveTarget(new NullLog());
 
-
+    // Попытка отключить предупреждения вида "Gtk-WARNING"
     // Устанавливаем переменные окружения для GTK (для Linux)
 #ifndef __WXMSW__
     setenv("G_MESSAGES_DEBUG", "0", 1);
