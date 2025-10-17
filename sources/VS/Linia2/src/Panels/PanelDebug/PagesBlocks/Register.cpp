@@ -191,7 +191,7 @@ void Register::OnEventButton(wxCommandEvent &event)
 
     if (id == btnSend->GetId())
     {
-        IDevice::impl->SendCommand(":%s:WRITE %X", chip->GetNameSTM32().c_str().AsChar(), GetValue());
+        chip->WriteValueToSTM32(GetValue());
     }
 }
 

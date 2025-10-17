@@ -1,6 +1,7 @@
 ﻿// 2025/10/17 11:39:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "IPPP/Device/Chips.h"
+#include "IPPP/Device/IDevice.h"
 
 
 DAC *dacs[DAC::Count];
@@ -95,4 +96,10 @@ int FPGA::BitDepth() const
     };
 
     return depth[v];
+}
+
+
+void Chip::WriteValueToSTM32(uint value) const
+{
+    IDevice::impl->SendCommand(":%s:WRITE %X", GetNameSTM32().c_str().AsChar(), value);
 }

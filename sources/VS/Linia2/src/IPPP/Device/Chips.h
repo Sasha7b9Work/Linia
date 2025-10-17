@@ -13,6 +13,9 @@ struct Chip
 
     // Ширина в битах
     virtual int BitDepth() const = 0;
+
+    // Послать значение в контроллер
+    void WriteValueToSTM32(uint) const;
 };
 
 
