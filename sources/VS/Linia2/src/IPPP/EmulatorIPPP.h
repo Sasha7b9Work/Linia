@@ -30,13 +30,4 @@ private:
     virtual void SetPulseDuration(uint durationUS, bool generation_stump) override;
 
     virtual void SetFirstQueue(const Chan &) override;
-
-    //------------------------------------------------------------------------------------------------------------
-
-    virtual void ChanC_SourceRange(RangeU::E) override;
-
-    virtual void ChanC_MeasRange(RangeU::E) override;
-    virtual void ChanC_MeasRange(RangeI::E) override;
-
-    virtual void ChanC_LimitSourceU(int min, int max) override;
 };

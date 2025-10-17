@@ -129,30 +129,6 @@ void RealIPPP::SetTypeScan(TypeScan::E /*type*/)
 }
 
 
-void RealIPPP::ChanC_SourceRange(RangeU::E /*range*/)
-{
-//    SendCommand(":C:SOURCE:RANGE %s", RangeU(range).Name(RowRange(Chan::_C), false));
-}
-
-
-void RealIPPP::ChanC_MeasRange(RangeU::E /*range*/)
-{
-//    SendCommand(":C:MEAS:RANGE %s", RangeU(range).Name(RowRange(Chan::_C), false));
-}
-
-
-void RealIPPP::ChanC_MeasRange(RangeI::E /*range*/)
-{
-//    SendCommand(":C:MEAS:RANGE %s", RangeI(range).Name(RowRange(Chan::_C), false));
-}
-
-
-void RealIPPP::ChanC_LimitSourceU(int /*min*/, int /*max*/)
-{
-//    SendCommand(":C:SOURCE:LIMIT %d %d", min, max);
-}
-
-
 void RealIPPP::SetPulseDuration(uint /*durationUS*/, bool /*genertaion_stump*/)
 {
 //    SendCommand(":PULSE:DURATION %u", durationUS);
