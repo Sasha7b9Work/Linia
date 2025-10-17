@@ -139,7 +139,7 @@ void PanelErrors::BuildCanvas()
         label += wxString::Format("ERROR %d - %s\r\n", elem.err, elem.message);
     }
 
-    text_ctrl->SetLabel(label);
+    text_ctrl->SetValue(label);
 
     LOG_WRITE("Label = %s", label.c_str().AsChar());
 
