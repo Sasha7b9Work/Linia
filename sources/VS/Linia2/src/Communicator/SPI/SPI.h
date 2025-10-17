@@ -8,6 +8,8 @@
 
 namespace SPI
 {
+    bool IsAvailability();
+
     void Init();
     void DeInit();
 

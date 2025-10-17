@@ -14,6 +14,7 @@
 #include "IPPP/EmulatorIPPP.h"
 #include "SoftTests/SoftTests.h"
 #include "Communicator/UART/UART.h"
+#include "Communicator/SPI/SPI.h"
 #include "Controls/AutoRebootDialog.h"
 
 
@@ -59,8 +60,17 @@ bool Application::OnInit()
 
     if (UART::IsAvailability())
     {
-        AutoRebootDialog dialog(frame, "Устройство UART не обнаружено.\n"
-            "Будет выполнена автоматическая перезагрузка.", 10, []
+        AutoRebootDialog dialog(frame, "Устройство UART не обнаружено.", 10, []
+            {
+                (void)std::system("reboot -f");
+            });
+
+        dialog.ShowModal();
+    }
+
+    if (SPI::IsAvailability())
+    {
+        AutoRebootDialog dialog(frame, "Устройство SPI не обнаружено.", 10, []
             {
                 (void)std::system("reboot -f");
             });

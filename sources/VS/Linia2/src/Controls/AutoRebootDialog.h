@@ -6,7 +6,7 @@ class AutoRebootDialog : public wxDialog
 {
 public:
     AutoRebootDialog(wxWindow *parent, const wxString &message, int countdownSeconds, void (*_func_on_finish)()) :
-        wxDialog(parent, wxID_ANY, "Сообщение", wxDefaultPosition, wxSize(300, 170)),
+        wxDialog(parent, wxID_ANY, "Ошибка", wxDefaultPosition, wxSize(300, 170)),
         m_countdown(countdownSeconds),
         m_initialCountdown(countdownSeconds),
         func_on_finish(_func_on_finish)
@@ -19,7 +19,7 @@ public:
 
         // Текст отсчета
         m_countdownText = new wxStaticText(this, wxID_ANY,
-            wxString::Format("Автоматическое закрытие через %d секунд", m_countdown));
+            wxString::Format("Перезагрузка через %d секунд", m_countdown));
         mainSizer->Add(m_countdownText, 0, wxALL | wxALIGN_CENTER, 10);
 
         // Кнопки
@@ -68,7 +68,7 @@ private:
         {
             // Обновляем текст отсчета
             m_countdownText->SetLabel(
-                wxString::Format("Автоматическое закрытие через: %d секунд", m_countdown));
+                wxString::Format("Перезагрузка через %d секунд", m_countdown));
             Layout();
         }
     }

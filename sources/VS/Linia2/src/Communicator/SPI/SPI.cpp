@@ -351,6 +351,16 @@ namespace SPI
 }
 
 
+bool SPI::IsAvailability()
+{
+#ifdef ARM64
+    return std::filesystem::exists(SPI_DEVICE);
+#else
+    return true;
+#endif
+}
+
+
 #ifdef WIN32
     #pragma warning(pop)
 #endif
