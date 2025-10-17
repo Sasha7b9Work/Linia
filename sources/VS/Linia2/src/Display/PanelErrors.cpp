@@ -24,7 +24,9 @@ PanelErrors::PanelErrors(wxWindow *parent) :
 
     text_ctrl->SetForegroundColour(*wxWHITE);
 
-//    btnCollapse = new wxButton(text_ctrl, wxID_ANY, "Свернуть", wxDefaultPosition, { 90, 22 });
+    wxSize size_button{ 90, 22 };
+
+    btnCollapse = new wxButton(text_ctrl, wxID_ANY, "Свернуть", { Display::self->GetSize().x - size_button.x - 5, 0 }, size_button);
 
     ReInit();
 
@@ -42,10 +44,6 @@ void PanelErrors::ReInit()
     size.x = Display::self->GetSize().x;
 
     SetSize(size);                                                  // Корректируем размер под размер дисплея
-
-//    wxPoint position{ size.x - btnCollapse->GetSize().x - 20, 0 };
-
-//    btnCollapse->SetPosition(position);                             // Корректируем положение кнопки
 }
 
 
@@ -58,14 +56,14 @@ void PanelErrors::OnEventButton(wxCommandEvent &event)
     if (collapse)
     {
         SetSize({ GetSize().x, 23 });
-//        btnCollapse->SetLabel("Развернуть");
-//        timer.Start(500);
+        btnCollapse->SetLabel("Развернуть");
+        timer.Start(500);
     }
     else
     {
         SetSize({ GetSize().x, 100 });
-//        btnCollapse->SetLabel("Свернуть");
-//        timer.Stop();
+        btnCollapse->SetLabel("Свернуть");
+        timer.Stop();
     }
 
     event.Skip();

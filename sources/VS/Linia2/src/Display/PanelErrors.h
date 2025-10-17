@@ -30,7 +30,7 @@ public:
 
 private:
 
-    //    wxButton *btnCollapse = nullptr;
+    wxButton *btnCollapse = nullptr;
 
     wxTextCtrl *text_ctrl = nullptr;
 
