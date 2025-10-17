@@ -101,11 +101,17 @@ void PageChip::FillRegisterBS(RegFPGA *reg)
 
 void PageChip::Pack()
 {
-
+    for (auto *reg : registers)
+    {
+        reg->Pack();
+    }
 }
 
 
 void PageChip::Unpack()
 {
-
+    for (auto *reg : registers)
+    {
+        reg->Unpack();
+    }
 }

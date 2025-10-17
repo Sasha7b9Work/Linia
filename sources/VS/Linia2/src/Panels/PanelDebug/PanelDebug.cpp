@@ -3,6 +3,7 @@
 #include "Panels/PanelDebug/PanelDebug.h"
 #include "MainWindow.h"
 #include "Panels/PanelDebug/NotebookDebug.h"
+#include "Utils/Configurator.h"
 
 
 PanelDebug *PanelDebug::self = nullptr;
@@ -43,11 +44,19 @@ void PanelDebug::Update()
 
 void PanelDebug::Unpack()
 {
+    Config::SetFile(wxGetCwd() + "/" + "PanelDebug.cfg");
+
     NotebookDebug::self->Unpack();
+
+    Config::SetFile("");
 }
 
 
 void PanelDebug::Pack()
 {
+    Config::SetFile(wxGetCwd() + "/" + "PanelDebug.cfg");
+
     NotebookDebug::self->Pack();
+
+    Config::SetFile("");
 }

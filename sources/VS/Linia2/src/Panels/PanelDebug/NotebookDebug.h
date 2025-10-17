@@ -23,4 +23,6 @@ public:
 private:
 
     void AppendNewPage(wxPanel *);
+
+    void OnEventPageChanged(wxBookCtrlEvent &);
 };

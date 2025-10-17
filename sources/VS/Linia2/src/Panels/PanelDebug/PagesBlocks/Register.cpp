@@ -420,3 +420,24 @@ void CheckBoxBit::OnEventLeftClick(wxMouseEvent &)
 
     GF::SendCommandEvent(this, wxEVT_CHECKBOX, value ? 1 : 0);
 }
+
+
+void Register::Pack()
+{
+    for (uint i = 0; i < chbox.size(); i++)
+    {
+        Config::WriteBool(chip->GetNameSTM32() + wxString::Format("_%u", i), chbox[i]->IsChecked());
+    }
+}
+
+
+void Register::Unpack()
+{
+    for (uint i = 0; i < chbox.size(); i++)
+    {
+        chbox[i]->SetValue(Config::ReadBool(chip->GetNameSTM32() + wxString::Format("_%u", i), false));
+    }
+
+    UpdateComboCommands();
+    UpdateDecFields();
+}

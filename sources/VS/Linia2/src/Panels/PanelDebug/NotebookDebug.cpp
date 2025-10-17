@@ -31,6 +31,8 @@ NotebookDebug::NotebookDebug(wxWindow *parent) :
     AppendNewPage(new PageSource50V(this));
 
     wxWindowBase::Layout();
+
+    Bind(wxEVT_NOTEBOOK_PAGE_CHANGED, &NotebookDebug::OnEventPageChanged, this);
 }
 
 
@@ -83,4 +85,10 @@ void NotebookDebug::Unpack()
     PageChannelS::self->Unpack();
     PageMeasCurrent::self->Unpack();
     PageSource50V::self->Unpack();
+}
+
+
+void NotebookDebug::OnEventPageChanged(wxBookCtrlEvent &)
+{
+    Pack();
 }

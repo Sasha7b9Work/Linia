@@ -77,6 +77,9 @@ public:
 
     uint GetValue() const;
 
+    void Pack();
+    void Unpack();
+
 private:
 
     wxButton *btnSend = nullptr;                // Однократная засылка
