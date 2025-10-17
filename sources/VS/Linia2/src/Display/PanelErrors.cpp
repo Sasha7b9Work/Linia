@@ -24,8 +24,8 @@ PanelErrors::PanelErrors(wxWindow *parent) :
     btnCollapse = new wxButton(this, wxID_ANY, "Свернуть", { Display::self->GetSize().x - size_button.x - 10, SD::Y_SB(0) }, size_button);
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
-    sizer->Add(text_ctrl, 1, wxEXPAND | wxALL, 5);
-    sizer->Add(btnCollapse, 0, wxTOP, 5);
+    sizer->Add(text_ctrl, 1, wxEXPAND | wxALL, 0);
+    sizer->Add(btnCollapse, 0, wxTOP, 0);
 
     SetSizer(sizer);
 
