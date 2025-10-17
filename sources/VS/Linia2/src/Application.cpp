@@ -42,6 +42,14 @@ bool Application::OnInit()
 {
     wxLog::SetActiveTarget(new NullLog());
 
+
+    // Устанавливаем переменные окружения для GTK (для Linux)
+#ifndef __WXMSW__
+    setenv("G_MESSAGES_DEBUG", "0", 1);
+    setenv("GTK_DEBUG", "0", 1);
+    setenv("NO_AT_BRIDGE", "1", 1);
+#endif
+
     std::locale::global(std::locale(""));  // Установка системной локали
     setlocale(LC_ALL, "");
 
