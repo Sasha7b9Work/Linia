@@ -73,7 +73,7 @@ bool Application::OnInit()
     ::setenv("NO_AT_BRIDGE", "1", 1);
 
     // Отключаем логирование в wxWidgets
-    wxLog::SetActiveTarget(new wxLogNull);
+//    wxLog::SetActiveTarget(new wxLogNull);
 
     // Дополнительно: отключаем X11 warnings
     ::setenv("XLIB_SKIP_ARGB_VISUALS", "1", 1);
