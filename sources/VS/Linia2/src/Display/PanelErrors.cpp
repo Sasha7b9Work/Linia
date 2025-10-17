@@ -18,7 +18,6 @@ PanelErrors::PanelErrors(wxWindow *parent) :
 
     text_ctrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, { 0, 0 }, { MainWindow::WIDTH2, 90 },
         wxTE_MULTILINE | wxTE_READONLY | wxNO_BORDER | wxVSCROLL | wxTE_RICH);
-    text_ctrl->SetWindowStyle(text_ctrl->GetWindowStyle() | wxVSCROLL);
     text_ctrl->SetForegroundColour(*wxWHITE);
     text_ctrl->SetBackgroundColour(*wxRED);
 
