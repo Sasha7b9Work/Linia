@@ -61,6 +61,8 @@ bool Application::OnInit()
 
     wxLogNull logNo; // Логи отключены до разрушения этого объекта
 
+    wxLog::EnableLogging(false);
+
     FilteredStreambuf filtered_stderr(std::cerr.rdbuf());
     std::cerr.rdbuf(&filtered_stderr);
 
