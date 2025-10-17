@@ -4,11 +4,12 @@
 
 struct Chip
 {
+    virtual ~Chip() { }
+
+    static void Init();
+
     // Под этим именем она обозначена в плате контроллера stm32
-    wxString GetNameSTM32() const
-    {
-        return "";
-    }
+    virtual wxString GetNameSTM32() const = 0;
 };
 
 
@@ -25,6 +26,14 @@ struct DAC : public Chip
         _6,
         Count
     };
+
+    DAC(E i);
+
+    virtual wxString GetNameSTM32() const override;
+
+private:
+
+    E v = Count;
 };
 
 
@@ -40,6 +49,14 @@ struct REG : public Chip
         _5,
         Count
     };
+
+    REG(E i);
+
+    virtual wxString GetNameSTM32() const override;
+
+private:
+
+    E v = Count;
 };
 
 
@@ -52,9 +69,17 @@ struct FPGA : public Chip
         _2,
         Count
     };
+
+    FPGA(E i);
+
+    virtual wxString GetNameSTM32() const override;
+
+private:
+
+    E v = Count;
 };
 
 
-extern DAC dacs[DAC::Count];
-extern REG regs[REG::Count];
-extern FPGA fpgas[FPGA::Count];
+extern DAC *dacs[DAC::Count];
+extern REG *regs[REG::Count];
+extern FPGA *fpgas[FPGA::Count];

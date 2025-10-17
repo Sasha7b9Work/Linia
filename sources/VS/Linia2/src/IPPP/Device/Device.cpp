@@ -4,6 +4,7 @@
 #include "Communicator/UART/UART.h"
 #include "Communicator/GPIO/GPIO.h"
 #include "Communicator/SPI/SPI.h"
+#include "IPPP/Device/Chips.h"
 
 IDevice *IDevice::impl = nullptr;
 
@@ -17,6 +18,8 @@ bool Device::Init()
 {
     GPIO::Init();
     SPI::Init();
+
+    Chip::Init();
 
     if(UART::Init(Device::CallbackOnReceive))
     {
