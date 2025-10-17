@@ -141,4 +141,6 @@ void PanelErrors::BuildCanvas()
 
     text_ctrl->Update();
     text_ctrl->Layout();
+
+    text_ctrl->Refresh();
 }
