@@ -24,13 +24,13 @@ public:
 
         // Кнопки
         wxBoxSizer *buttonSizer = new wxBoxSizer(wxHORIZONTAL);
-        m_okButton = new wxButton(this, wxID_OK, "OK");
+        m_okButton = new wxButton(this, wxID_OK, "Перезагрузить");
         m_cancelButton = new wxButton(this, wxID_CANCEL, "Отмена");
 
         buttonSizer->Add(m_okButton, 0, wxALL, 5);
         buttonSizer->Add(m_cancelButton, 0, wxALL, 5);
 
-        mainSizer->Add(buttonSizer, 0, wxALIGN_CENTER | wxBOTTOM, 10);
+        mainSizer->Add(buttonSizer, 10, wxALIGN_CENTER | wxBOTTOM, 20);
 
         SetSizer(mainSizer);
         Centre();
