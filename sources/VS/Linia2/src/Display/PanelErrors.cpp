@@ -87,6 +87,8 @@ void PanelErrors::SetColors(bool inverse)
     text_ctrl->SetForegroundColour(inverse ? *wxBLACK : *wxWHITE);
 
     text_ctrl->Refresh();
+
+    text_ctrl->Update();
 }
 
 
