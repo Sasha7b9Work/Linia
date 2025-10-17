@@ -77,13 +77,15 @@ void PanelErrors::OnEventTimer(wxTimerEvent &)
 }
 
 
-void PanelErrors::SetColors(bool inverse)
+void PanelErrors::SetColors(bool /*inverse*/)
 {
-    text_ctrl->SetBackgroundColour(inverse ? *wxWHITE : *wxRED);
+    return;
 
-    text_ctrl->SetForegroundColour(inverse ? *wxBLACK : *wxWHITE);
-
-    text_ctrl->Refresh();
+//    text_ctrl->SetBackgroundColour(inverse ? *wxWHITE : *wxRED);
+//
+//    text_ctrl->SetForegroundColour(inverse ? *wxBLACK : *wxWHITE);
+//
+//    text_ctrl->Refresh();
 }
 
 
