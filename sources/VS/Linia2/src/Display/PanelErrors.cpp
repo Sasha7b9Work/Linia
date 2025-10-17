@@ -86,10 +86,10 @@ void PanelErrors::SetColors(bool inverse)
 
     text_ctrl->SetForegroundColour(inverse ? *wxBLACK : *wxWHITE);
 
+    GetParent()->Refresh();
+
     text_ctrl->Refresh();
-
     text_ctrl->Update();
-
     text_ctrl->Freeze();
     text_ctrl->Thaw(); // Это вызовет полное обновление
 }
