@@ -64,8 +64,11 @@ protected:
 
     bool insert_empty = false;          // true, если перед первым элементом нужно вставлять пустые элементы (для диапазонов, чтобы они согласованно располагались по столбцам)
 
-private:
+    // Между строками будут пробелы таким образом, что строки будут по краям кнопки
+    virtual void SetExtendedLabel(const wxString &, const wxString &);
+    void SetExtendedLabel(const wxString &, int num_spaces, const wxString &);
 
+private:
     int current_choice = -1;            // Номер реального выбора
     wxString title;
     wxArrayString labels;
@@ -76,10 +79,6 @@ private:
 
     void OnButtonClicked(wxCommandEvent &);
     void OnMouseDown(wxMouseEvent &);
-
-    // Между строками будут пробелы таким образом, что строки будут по краям кнопки
-    void SetExtendedLabel(const wxString &, const wxString &);
-    void SetExtendedLabel(const wxString &, int num_spaces, const wxString &);
 };
 
 

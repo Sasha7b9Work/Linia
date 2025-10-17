@@ -8,3 +8,9 @@ CommandsCombo::CommandsCombo(wxWindow *parent, const wxString &title, const wxPo
 {
 
 }
+
+
+void CommandsCombo::SetExtendedLabel(const wxString &, const wxString &)
+{
+    SetLabel(GetToolTip()->GetTip());
+}

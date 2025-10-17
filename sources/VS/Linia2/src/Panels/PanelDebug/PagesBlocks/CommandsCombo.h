@@ -10,4 +10,5 @@ public:
         const wxArrayString &labels, const wxArrayString &tooltips,
         const wxString &name);
 private:
+    virtual void SetExtendedLabel(const wxString &, const wxString &) override;
 };
