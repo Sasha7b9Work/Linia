@@ -14,8 +14,6 @@ PanelErrors::PanelErrors(wxWindow *parent) :
 {
     self = this;
 
-//    wxPanel *panel = new wxPanel(this);
-
     text_ctrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, { 0, 0 }, { MainWindow::WIDTH2, 90 }, wxTE_MULTILINE | wxTE_READONLY | wxNO_BORDER | wxTE_NO_VSCROLL);
     text_ctrl->SetForegroundColour(*wxWHITE);
     text_ctrl->SetBackgroundColour(*wxRED);
@@ -140,4 +138,7 @@ void PanelErrors::BuildCanvas()
     }
 
     text_ctrl->SetLabel(label);
+
+    text_ctrl->Update();
+    text_ctrl->Layout();
 }

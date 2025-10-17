@@ -89,7 +89,7 @@ bool Application::OnInit()
     PanelErrors::self->AppendError(Error::_1, "Мало памяти");
     PanelErrors::self->AppendError(Error::_2, "Много памяти");
 
-    PanelErrors::self->RemoveError(Error::_1, "Мало памяти");
+//    PanelErrors::self->RemoveError(Error::_1, "Мало памяти");
 //    PanelErrors::self->RemoveError(Error::_2, "Много памяти");
 
     if (!SoftTests::RunAll())
