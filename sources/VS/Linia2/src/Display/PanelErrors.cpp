@@ -3,6 +3,7 @@
 #include "Display/PanelErrors.h"
 #include "MainWindow.h"
 #include "Display/Display.h"
+#include "Utils/SystemDepend.h"
 
 
 PanelErrors *PanelErrors::self = nullptr;
@@ -20,11 +21,11 @@ PanelErrors::PanelErrors(wxWindow *parent) :
     text_ctrl->SetBackgroundColour(*wxRED);
 
     wxSize size_button{ 90, 22 };
-    btnCollapse = new wxButton(this, wxID_ANY, "Свернуть", { Display::self->GetSize().x - size_button.x - 10, 0 }, size_button);
+    btnCollapse = new wxButton(this, wxID_ANY, "Свернуть", { Display::self->GetSize().x - size_button.x - 10, SD::Y_SB(0) }, size_button);
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
     sizer->Add(text_ctrl, 1, wxEXPAND | wxALL, 5);
-    sizer->Add(btnCollapse, 0, wxTOP, 15);
+    sizer->Add(btnCollapse, 0, wxTOP, 5);
 
     SetSizer(sizer);
 
