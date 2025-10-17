@@ -40,6 +40,17 @@ PanelErrors::PanelErrors(wxWindow *parent) :
     Bind(wxEVT_TIMER, &PanelErrors::OnEventTimer, this, timer.GetId());
 
     timer.SetOwner(this, timer.GetId());
+
+    AppendError(Error::_1, "Мало памяти");
+    AppendError(Error::_2, "Много памяти");
+
+//    for (int i = 0; i < 10; i++)
+//    {
+//        AppendError(Error::_1, wxString::Format("Ошибка %d", i));
+//    }
+
+    RemoveError(Error::_1, "Мало памяти");
+    RemoveError(Error::_2, "Много памяти");
 }
 
 
