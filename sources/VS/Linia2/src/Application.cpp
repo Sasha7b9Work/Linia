@@ -113,13 +113,13 @@ bool Application::OnInit()
     PanelErrors::self->AppendError(Error::_1, "Мало памяти");
     PanelErrors::self->AppendError(Error::_2, "Много памяти");
 
-    for (int i = 0; i < 10; i++)
-    {
-        PanelErrors::self->AppendError(Error::_1, wxString::Format("Ошибка %d", i));
-    }
+//    for (int i = 0; i < 10; i++)
+//    {
+//        PanelErrors::self->AppendError(Error::_1, wxString::Format("Ошибка %d", i));
+//    }
 
-//    PanelErrors::self->RemoveError(Error::_1, "Мало памяти");
-//    PanelErrors::self->RemoveError(Error::_2, "Много памяти");
+    PanelErrors::self->RemoveError(Error::_1, "Мало памяти");
+    PanelErrors::self->RemoveError(Error::_2, "Много памяти");
 
     if (!SoftTests::RunAll())
     {
