@@ -6,9 +6,15 @@
 class CommandsCombo : public ButtonsCombo
 {
 public:
+
     CommandsCombo(wxWindow *parent, const wxString &title, const wxPoint &pos, int width,
         const wxArrayString &labels, const wxArrayString &tooltips,
         const wxString &name);
+
+    // Если в комбобоксе нету выбора для установленных значений битов, надо вызывать эту функцию
+    void SetInvalidChoice();
+
 private:
+
     virtual void SetExtendedLabel(const wxString &, const wxString &) override;
 };

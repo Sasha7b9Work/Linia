@@ -14,3 +14,11 @@ void CommandsCombo::SetExtendedLabel(const wxString &, const wxString &)
 {
     SetLabel(GetMyToolTip());
 }
+
+
+void CommandsCombo::SetInvalidChoice()
+{
+    DrawingButton::SetBackgroundColour(*wxRED);
+    DrawingButton::SetForegroundColour(*wxRED);
+    DrawingButton::Refresh();
+}

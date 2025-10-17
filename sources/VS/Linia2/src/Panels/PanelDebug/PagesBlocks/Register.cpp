@@ -158,6 +158,8 @@ void Register::OnEventTextCtrl(wxCommandEvent &event)
                     value >>= 1;
                 }
 
+                UpdateComboCommands();
+
                 event.Skip();
 
                 return;
@@ -308,7 +310,27 @@ void Register::UpdateComboCommands()
     {
         if (d.field.commands.size())
         {
+            uint value = d.CalculateValue(chbox);
 
+            bool exist_value = false;
+
+            for (auto &command : d.field.commands)
+            {
+                if (exist_value)
+                {
+                    break;
+                }
+
+                if (value == command.value)
+                {
+                    exist_value = true;
+                }
+            }
+
+            if(!exist_value)
+            {
+                d.field.combo->SetInvalidChoice();
+            }
         }
     }
 }
