@@ -27,9 +27,6 @@
 #include <wx/datetime.h>
 #include <wx/dirctrl.h>
 #include <wx/dir.h>
-#ifndef WIN32
-#include <wx/qt/tooltip.h>
-#endif
 
 #include <map>
 #include <queue>

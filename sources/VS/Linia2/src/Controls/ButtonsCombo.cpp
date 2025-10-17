@@ -252,7 +252,7 @@ void ButtonsCombo::SetCurrentSelection(int choice)
 
     uint index = (uint)current_choice;
 
-    SetToolTip((tooltips[index] != labels[index]) ?     // Предполагается, что подсказка устанавливается только в том случае, если она не совпадает с надписью
+    SetMyToolTip((tooltips[index] != labels[index]) ?     // Предполагается, что подсказка устанавливается только в том случае, если она не совпадает с надписью
         (tooltips[index]) : wxString());
 
     SetExtendedLabel(label, labels[index]);
@@ -261,6 +261,19 @@ void ButtonsCombo::SetCurrentSelection(int choice)
     {
         GF::SendCommandEvent(this, wxEVT_COMBOBOX, GetCurrentSelection());
     }
+}
+
+
+void ButtonsCombo::SetMyToolTip(const wxString &tool)
+{
+    myToolTip = tool;
+    SetToolTip(myToolTip);
+}
+
+
+wxString ButtonsCombo::GetMyToolTip() const
+{
+    return myToolTip;
 }
 
 

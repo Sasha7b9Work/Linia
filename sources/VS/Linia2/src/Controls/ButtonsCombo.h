@@ -58,6 +58,9 @@ public:
 
     int NumChoices() const;
 
+    void SetMyToolTip(const wxString &);
+    wxString GetMyToolTip() const;
+
     bool left_align = false;            // Если true - надписи на выборах будут выравниваться по левому краю
 
 protected:
@@ -69,6 +72,7 @@ protected:
     void SetExtendedLabel(const wxString &, int num_spaces, const wxString &);
 
 private:
+    wxString myToolTip;
     int current_choice = -1;            // Номер реального выбора
     wxString title;
     wxArrayString labels;
