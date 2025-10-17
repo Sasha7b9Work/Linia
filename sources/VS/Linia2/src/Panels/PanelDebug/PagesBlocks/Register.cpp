@@ -158,11 +158,7 @@ void Register::OnEventTextCtrl(wxCommandEvent &event)
                     value >>= 1;
                 }
 
-                UpdateComboCommands();
-
-                event.Skip();
-
-                return;
+                break;
             }
         }
     }
