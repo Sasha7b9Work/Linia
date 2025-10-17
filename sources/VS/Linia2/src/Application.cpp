@@ -26,8 +26,22 @@ wxIMPLEMENT_APP(Application);
 Application *Application::self = nullptr;
 
 
+class NullLog : public wxLog
+{
+public:
+    virtual void DoLogRecord(wxLogLevel,
+        const wxString &,
+        const wxLogRecordInfo &) override
+    {
+        // Ничего не делаем - просто игнорируем все логи
+    }
+};
+
+
 bool Application::OnInit()
 {
+    wxLog::SetActiveTarget(new NullLog());
+
     std::locale::global(std::locale(""));  // Установка системной локали
     setlocale(LC_ALL, "");
 
