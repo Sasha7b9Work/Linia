@@ -1,4 +1,4 @@
-// 2025/10/17 08:25:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/10/17 08:25:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
 
@@ -6,24 +6,24 @@ class CountdownDialog : public wxDialog
 {
 public:
     CountdownDialog(wxWindow *parent, const wxString &message, int countdownSeconds)
-        : wxDialog(parent, wxID_ANY, "Сообщение", wxDefaultPosition, wxSize(300, 150)),
+        : wxDialog(parent, wxID_ANY, "РЎРѕРѕР±С‰РµРЅРёРµ", wxDefaultPosition, wxSize(300, 150)),
         m_countdown(countdownSeconds), m_initialCountdown(countdownSeconds)
     {
         wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
 
-        // Текст сообщения
+        // РўРµРєСЃС‚ СЃРѕРѕР±С‰РµРЅРёСЏ
         m_messageText = new wxStaticText(this, wxID_ANY, message);
         mainSizer->Add(m_messageText, 0, wxALL | wxALIGN_CENTER, 10);
 
-        // Текст отсчета
+        // РўРµРєСЃС‚ РѕС‚СЃС‡РµС‚Р°
         m_countdownText = new wxStaticText(this, wxID_ANY,
-            wxString::Format("Автоматическое закрытие через: %d секунд", m_countdown));
+            wxString::Format("РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ Р·Р°РєСЂС‹С‚РёРµ С‡РµСЂРµР·: %d СЃРµРєСѓРЅРґ", m_countdown));
         mainSizer->Add(m_countdownText, 0, wxALL | wxALIGN_CENTER, 10);
 
-        // Кнопки
+        // РљРЅРѕРїРєРё
         wxBoxSizer *buttonSizer = new wxBoxSizer(wxHORIZONTAL);
         m_okButton = new wxButton(this, wxID_OK, "OK");
-        m_cancelButton = new wxButton(this, wxID_CANCEL, "Отмена");
+        m_cancelButton = new wxButton(this, wxID_CANCEL, "РћС‚РјРµРЅР°");
 
         buttonSizer->Add(m_okButton, 0, wxALL, 5);
         buttonSizer->Add(m_cancelButton, 0, wxALL, 5);
@@ -33,12 +33,12 @@ public:
         SetSizer(mainSizer);
         Centre();
 
-        // Настройка таймера
+        // РќР°СЃС‚СЂРѕР№РєР° С‚Р°Р№РјРµСЂР°
         m_timer = new wxTimer(this, wxID_ANY);
         Bind(wxEVT_TIMER, &CountdownDialog::OnTimer, this);
-        m_timer->Start(1000); // Таймер срабатывает каждую секунду
+        m_timer->Start(1000); // РўР°Р№РјРµСЂ СЃСЂР°Р±Р°С‚С‹РІР°РµС‚ РєР°Р¶РґСѓСЋ СЃРµРєСѓРЅРґСѓ
 
-        // Привязка событий кнопок
+        // РџСЂРёРІСЏР·РєР° СЃРѕР±С‹С‚РёР№ РєРЅРѕРїРѕРє
         m_okButton->Bind(wxEVT_BUTTON, &CountdownDialog::OnOk, this);
         m_cancelButton->Bind(wxEVT_BUTTON, &CountdownDialog::OnCancel, this);
     }
@@ -59,24 +59,24 @@ private:
         if (m_countdown <= 0)
         {
             m_timer->Stop();
-            // Выполняем действие по достижении нуля
+            // Р’С‹РїРѕР»РЅСЏРµРј РґРµР№СЃС‚РІРёРµ РїРѕ РґРѕСЃС‚РёР¶РµРЅРёРё РЅСѓР»СЏ
             OnCountdownFinished();
         }
         else
         {
-            // Обновляем текст отсчета
+            // РћР±РЅРѕРІР»СЏРµРј С‚РµРєСЃС‚ РѕС‚СЃС‡РµС‚Р°
             m_countdownText->SetLabel(
-                wxString::Format("Автоматическое закрытие через: %d секунд", m_countdown));
+                wxString::Format("РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ Р·Р°РєСЂС‹С‚РёРµ С‡РµСЂРµР·: %d СЃРµРєСѓРЅРґ", m_countdown));
             Layout();
         }
     }
 
     void OnCountdownFinished()
     {
-        // Действие при достижении нуля
-        wxMessageBox("Обратный отсчет завершен! Выполняется действие...", "Информация");
+        // Р”РµР№СЃС‚РІРёРµ РїСЂРё РґРѕСЃС‚РёР¶РµРЅРёРё РЅСѓР»СЏ
+        wxMessageBox("РћР±СЂР°С‚РЅС‹Р№ РѕС‚СЃС‡РµС‚ Р·Р°РІРµСЂС€РµРЅ! Р’С‹РїРѕР»РЅСЏРµС‚СЃСЏ РґРµР№СЃС‚РІРёРµ...", "РРЅС„РѕСЂРјР°С†РёСЏ");
 
-        // Закрываем диалог с кодом OK
+        // Р—Р°РєСЂС‹РІР°РµРј РґРёР°Р»РѕРі СЃ РєРѕРґРѕРј OK
         EndModal(wxID_OK);
     }
 
