@@ -66,7 +66,7 @@ public:
 
     Register(wxWindow *parent, const wxString &_title,      // Это написано на изображении
         Chip *,
-        int bit_depth, bool _sended,                        // Можно ли засылать в регистр
+        bool _sended,                                       // Можно ли засылать в регистр
         bool _received);                                    // Можно ли читать из регистра
 
     void SetNamesBits(const wxArrayString &);
@@ -85,7 +85,6 @@ private:
 
     std::vector<wxWindow *> windows;
 
-    int bit_depth = 0;
     bool sended = true;
     bool received = true;
 
@@ -120,8 +119,8 @@ class RegFPGA : public Register
 {
 public:
 
-    RegFPGA(wxWindow *_parent, Chip *_chip, int _bit_depth) :
-        Register(_parent, "", _chip, _bit_depth, true, false)
+    RegFPGA(wxWindow *_parent, Chip *_chip) :
+        Register(_parent, "", _chip, true, false)
     {
     }
 };

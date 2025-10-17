@@ -10,6 +10,9 @@ struct Chip
 
     // Под этим именем она обозначена в плате контроллера stm32
     virtual wxString GetNameSTM32() const = 0;
+
+    // Ширина в битах
+    virtual int BitDepth() const = 0;
 };
 
 
@@ -30,6 +33,8 @@ struct DAC : public Chip
     DAC(E i);
 
     virtual wxString GetNameSTM32() const override;
+
+    virtual int BitDepth() const override;
 
 private:
 
@@ -54,6 +59,8 @@ struct REG : public Chip
 
     virtual wxString GetNameSTM32() const override;
 
+    virtual int BitDepth() const override;
+
 private:
 
     E v = Count;
@@ -73,6 +80,8 @@ struct FPGA : public Chip
     FPGA(E i);
 
     virtual wxString GetNameSTM32() const override;
+
+    virtual int BitDepth() const override;
 
 private:
 

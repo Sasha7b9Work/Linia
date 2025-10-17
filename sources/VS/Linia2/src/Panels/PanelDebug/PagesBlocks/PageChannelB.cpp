@@ -15,7 +15,7 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
 
     AppendRegister(new RegAD5531(this, dacs[3]));
 
-    RegFPGA *reg3 = new RegFPGA(this, regs[3], 32);
+    RegFPGA *reg3 = new RegFPGA(this, regs[3]);
 
     FillRegisterBS(reg3);
 

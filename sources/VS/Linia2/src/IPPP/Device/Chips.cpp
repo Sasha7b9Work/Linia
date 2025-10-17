@@ -39,6 +39,12 @@ wxString DAC::GetNameSTM32() const
 }
 
 
+int DAC::BitDepth() const
+{
+    return 12;
+}
+
+
 REG::REG(E _v) : v(_v)
 {
 
@@ -51,6 +57,22 @@ wxString REG::GetNameSTM32() const
 }
 
 
+int REG::BitDepth() const
+{
+    static const int depth[Count] =
+    {
+        24,
+        16,
+        32,
+        32,
+        32,
+        16,
+    };
+
+    return depth[v];
+}
+
+
 FPGA::FPGA(E _v) : v(_v)
 {
 
@@ -60,4 +82,17 @@ FPGA::FPGA(E _v) : v(_v)
 wxString FPGA::GetNameSTM32() const
 {
     return wxString::Format("FPGA%d", (int)v);
+}
+
+
+int FPGA::BitDepth() const
+{
+    static const int depth[Count] =
+    {
+        9,
+        3,
+        3
+    };
+
+    return depth[v];
 }

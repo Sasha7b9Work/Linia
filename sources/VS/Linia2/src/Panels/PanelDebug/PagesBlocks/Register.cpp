@@ -8,9 +8,8 @@
 #include "IPPP/Device/IDevice.h"
 
 
-Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, int _bit_depth, bool _sended, bool _received) :
+Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, bool _sended, bool _received) :
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
-    bit_depth(_bit_depth),
     sended(_sended),
     received(_received),
     chip(_chip)
@@ -64,7 +63,7 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, int _b
         });
 
     wxArrayString names;
-    for (int i = 0; i < bit_depth; i++)
+    for (int i = 0; i < chip->BitDepth(); i++)
     {
         names.push_back(wxString::Format("D%d", i));
     }
@@ -94,7 +93,7 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
             {
                 int num_bit = elem.first_bit + elem.num_bits - 1;
 
-                int x = painter->BitX(num_bit, bit_depth);
+                int x = painter->BitX(num_bit, chip->BitDepth());
 
                 elem.field.text_ctrl = new TextCtrlNumber(painter, wxID_ANY, "", { x, (PainterRegister::W_B + 1) * 3 }, { PainterRegister::W_B * elem.num_bits + 1, 20 }, 0, (1 << elem.num_bits) - 1);
 
@@ -105,7 +104,7 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
             {
                 int num_bit = elem.first_bit + elem.num_bits - 1;
 
-                int x = painter->BitX(num_bit, bit_depth) + 1;
+                int x = painter->BitX(num_bit, chip->BitDepth()) + 1;
 
                 wxArrayString names;
                 for (auto &com : elem.field.commands)
@@ -335,14 +334,14 @@ void Register::UpdateComboCommands()
 
 
 RegAD5543::RegAD5543(wxWindow *_parent, Chip *_chip) :
-    Register(_parent, "AD5543", _chip, 12, true, false)
+    Register(_parent, "AD5543", _chip, true, false)
 {
 
 }
 
 
 RegAD5531::RegAD5531(wxWindow *_parent, Chip *_chip) :
-    Register(_parent, "AD5531", _chip, 12, true, false)
+    Register(_parent, "AD5531", _chip, true, false)
 {
 
 }

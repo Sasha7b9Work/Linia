@@ -14,7 +14,7 @@ PageSource3kV::PageSource3kV(wxNotebook *parent) :
 {
     self = this;
 
-    Register *reg0 = new RegFPGA(this, regs[0], 24);
+    Register *reg0 = new RegFPGA(this, regs[0]);
 
     std::vector<StructDescription> desc0;
 

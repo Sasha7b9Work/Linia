@@ -8,11 +8,11 @@ PainterRegister::PainterRegister(wxWindow *parent, Register *_panel, const wxPoi
     PainterRect(parent, position, { 750, 110 }),
     panel(_panel)
 {
-    panel->chbox.resize((uint)panel->bit_depth );
+    panel->chbox.resize((uint)_panel->chip->BitDepth() );
 
-    for (int i = 0; i < panel->bit_depth; i++)
+    for (int i = 0; i < panel->chip->BitDepth(); i++)
     {
-        panel->chbox[(uint)i] = new CheckBoxBit(this, { BitX(i, panel->bit_depth), W_B + 1 }, { W_B, W_B });
+        panel->chbox[(uint)i] = new CheckBoxBit(this, { BitX(i, panel->chip->BitDepth()), W_B + 1 }, { W_B, W_B });
     }
 }
 
@@ -39,7 +39,7 @@ void PainterRegister::OnPaint(wxPaintEvent &)
     {
         first_paint = false;
 
-        for (int i = 0; i < panel->bit_depth; i++)
+        for (int i = 0; i < panel->chip->BitDepth(); i++)
         {
             SetHintCheckBox(i);
         }
@@ -57,7 +57,7 @@ void PainterRegister::OnPaint(wxPaintEvent &)
 
     gc->SetPen(*wxBLACK_PEN);
 
-    int num_bits = panel->bit_depth;
+    int num_bits = panel->chip->BitDepth();
 
     int w = 20;
     int h = w;
@@ -94,8 +94,8 @@ void PainterRegister::OnPaint(wxPaintEvent &)
     gc->SetFont(GetDefaultFont(8), *wxBLACK);
 
     int y = 24;
-    gc->DrawText("DB0", W_B * panel->bit_depth + 45, y);
-    gc->DrawText(wxString::Format("DB%d", panel->bit_depth - 1), 5, y);
+    gc->DrawText("DB0", W_B * panel->chip->BitDepth() + 45, y);
+    gc->DrawText(wxString::Format("DB%d", panel->chip->BitDepth() - 1), 5, y);
 
     delete gc;
 }
@@ -128,7 +128,7 @@ void PainterRegister::SetHintCheckBox(int num_bit)
 
 wxPoint PainterRegister::CoordBit(int num_bit)
 {
-    num_bit = panel->bit_depth - num_bit - 1;
+    num_bit = panel->chip->BitDepth() - num_bit - 1;
 
     return { 36 + num_bit * 20, 0 };
 }
