@@ -285,6 +285,8 @@ void Register::OnEventCombo(wxCommandEvent &event)
         }
     }
 
+    UpdateDecFields();
+
     event.Skip();
 }
 

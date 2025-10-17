@@ -167,6 +167,8 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoi
 
     SetChoices(_labels, _tooltips);
 
+    SetCurrentSelection(0);
+
     buttons_in_row = _buttons_in_row;
 }
 

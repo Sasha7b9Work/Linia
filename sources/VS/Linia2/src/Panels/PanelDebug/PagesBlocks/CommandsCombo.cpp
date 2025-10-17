@@ -6,7 +6,7 @@
 CommandsCombo::CommandsCombo(wxWindow *parent, const wxString &title, const wxPoint &pos, int width, const wxArrayString &labels, const wxArrayString &tooltips, const wxString &name) :
     ButtonsCombo(parent, title, pos, width, labels, tooltips, 1, name, Type::Text)
 {
-
+    SetCurrentSelection(0);
 }
 
 
