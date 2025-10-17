@@ -19,8 +19,6 @@ bool Device::Init()
     GPIO::Init();
     SPI::Init();
 
-    Chip::Init();
-
     if(UART::Init(Device::CallbackOnReceive))
     {
         connected = true;

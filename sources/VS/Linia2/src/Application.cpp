@@ -16,6 +16,7 @@
 #include "Communicator/UART/UART.h"
 #include "Communicator/SPI/SPI.h"
 #include "Controls/AutoRebootDialog.h"
+#include "IPPP/Device/Chips.h"
 
 
 wxIMPLEMENT_APP(Application);
@@ -46,6 +47,8 @@ bool Application::OnInit()
     wxImage::AddHandler(new wxPNGHandler);
 
     ConsoleRS232::Create();
+
+    Chip::Init();
 
     // create and show the main application window
     MainWindow *frame = new MainWindow("ИППП 4");
