@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -e
+
+kill -9 $(pidof Linia2)
