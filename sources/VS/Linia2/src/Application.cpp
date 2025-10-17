@@ -14,7 +14,7 @@
 #include "IPPP/EmulatorIPPP.h"
 #include "SoftTests/SoftTests.h"
 #include "Communicator/UART/UART.h"
-#include "Controls/CountdownDialog.h"
+#include "Controls/AutoRebootDialog.h"
 
 
 wxIMPLEMENT_APP(Application);
@@ -57,29 +57,15 @@ bool Application::OnInit()
 
     frame->Show();
 
-    // Создаем и показываем диалог с обратным отсчетом
-    CountdownDialog dialog(frame, "Это тестовое сообщение с обратным отсчетом!", 10);
-
-    int result = dialog.ShowModal();
-
-    if (result == wxID_OK)
-    {
-        wxMessageBox("Диалог закрыт (OK или автоматически)", "Результат");
-    }
-    else
-    {
-        wxMessageBox("Диалог отменен", "Результат");
-    }
-
     if (UART::IsAvailability())
     {
-        result = wxMessageBox(wxString::Format("Устройство UART не обнаружено. Перезагрузка через %d секунд", 5),
-            "Ошибка", wxCANCEL | wxOK | wxCENTRE | wxICON_ERROR);
+        AutoRebootDialog dialog(frame, "Устройство UART не обнаружено.\n"
+            "Будет выполнена автоматическая перезагрузка.", 10, []
+            {
+                (void)std::system("reboot -f");
+            });
 
-        if (result == wxOK)
-        {
-            (void)std::system("reboot -f");
-        }
+        dialog.ShowModal();
     }
 
     I_IPPP::impl = new RealIPPP();

@@ -2,12 +2,14 @@
 #pragma once
 
 
-class CountdownDialog : public wxDialog
+class AutoRebootDialog : public wxDialog
 {
 public:
-    CountdownDialog(wxWindow *parent, const wxString &message, int countdownSeconds)
-        : wxDialog(parent, wxID_ANY, "Сообщение", wxDefaultPosition, wxSize(300, 150)),
-        m_countdown(countdownSeconds), m_initialCountdown(countdownSeconds)
+    AutoRebootDialog(wxWindow *parent, const wxString &message, int countdownSeconds, void (*_func_on_finish)()) :
+        wxDialog(parent, wxID_ANY, "Сообщение", wxDefaultPosition, wxSize(300, 170)),
+        m_countdown(countdownSeconds),
+        m_initialCountdown(countdownSeconds),
+        func_on_finish(_func_on_finish)
     {
         wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
 
@@ -17,7 +19,7 @@ public:
 
         // Текст отсчета
         m_countdownText = new wxStaticText(this, wxID_ANY,
-            wxString::Format("Автоматическое закрытие через: %d секунд", m_countdown));
+            wxString::Format("Автоматическое закрытие через %d секунд", m_countdown));
         mainSizer->Add(m_countdownText, 0, wxALL | wxALIGN_CENTER, 10);
 
         // Кнопки
@@ -35,15 +37,15 @@ public:
 
         // Настройка таймера
         m_timer = new wxTimer(this, wxID_ANY);
-        Bind(wxEVT_TIMER, &CountdownDialog::OnTimer, this);
+        Bind(wxEVT_TIMER, &AutoRebootDialog::OnTimer, this);
         m_timer->Start(1000); // Таймер срабатывает каждую секунду
 
         // Привязка событий кнопок
-        m_okButton->Bind(wxEVT_BUTTON, &CountdownDialog::OnOk, this);
-        m_cancelButton->Bind(wxEVT_BUTTON, &CountdownDialog::OnCancel, this);
+        m_okButton->Bind(wxEVT_BUTTON, &AutoRebootDialog::OnOk, this);
+        m_cancelButton->Bind(wxEVT_BUTTON, &AutoRebootDialog::OnCancel, this);
     }
 
-    ~CountdownDialog()
+    ~AutoRebootDialog()
     {
         if (m_timer && m_timer->IsRunning())
         {
@@ -73,17 +75,18 @@ private:
 
     void OnCountdownFinished()
     {
-        // Действие при достижении нуля
-        wxMessageBox("Обратный отсчет завершен! Выполняется действие...", "Информация");
-
         // Закрываем диалог с кодом OK
         EndModal(wxID_OK);
+
+        func_on_finish();
     }
 
     void OnOk(wxCommandEvent &)
     {
         m_timer->Stop();
         EndModal(wxID_OK);
+
+        func_on_finish();
     }
 
     void OnCancel(wxCommandEvent &)
@@ -100,4 +103,5 @@ private:
     wxTimer *m_timer;
     int m_countdown;
     int m_initialCountdown;
+    void (*func_on_finish)() = nullptr;
 };
