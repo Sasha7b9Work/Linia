@@ -388,6 +388,16 @@ void *UART::ReaderThreadFunc(void *)
 }
 
 
+bool UART::IsAvailability()
+{
+#ifdef ARM64
+    return std::filesystem::exists(UART_DEVICE);
+#else
+    return true;
+#endif
+}
+
+
 #ifdef WIN32
     #pragma warning(pop)
 #endif

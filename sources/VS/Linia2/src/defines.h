@@ -44,6 +44,7 @@
 #include <cstdarg>
 #include <chrono>
 #include <atomic>
+#include <filesystem>
 
 #pragma warning(pop)
 

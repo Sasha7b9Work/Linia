@@ -13,6 +13,7 @@
 #include "IPPP/RealIPPP.h"
 #include "IPPP/EmulatorIPPP.h"
 #include "SoftTests/SoftTests.h"
+#include "Communicator/UART/UART.h"
 
 
 wxIMPLEMENT_APP(Application);
@@ -56,6 +57,17 @@ bool Application::OnInit()
     frame->Show();
 
     LOG_WRITE_TRACE(" ");
+
+    if (UART::IsAvailability())
+    {
+        int result = wxMessageBox(wxString::Format("Устройство UART не обнаружено. Перезагрузка через %d секунд", 5),
+            "Ошибка", wxCANCEL | wxOK | wxCENTRE | wxICON_ERROR);
+
+        if (result == wxOK)
+        {
+            std::system("reboot -f");
+        }
+    }
 
     I_IPPP::impl = new RealIPPP();
     I_IPPP::impl->Init();
