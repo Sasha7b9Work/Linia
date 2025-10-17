@@ -14,9 +14,11 @@ PanelErrors::PanelErrors(wxWindow *parent) :
 {
     self = this;
 
-    text_ctrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, { 0, 0 }, { MainWindow::WIDTH2, 90 });
-//    text_ctrl->SetForegroundColour(*wxWHITE);
-//    text_ctrl->SetBackgroundColour(*wxRED);
+    //    wxPanel *panel = new wxPanel(this);
+
+    text_ctrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, { 0, 0 }, { MainWindow::WIDTH2, 90 }, wxTE_MULTILINE | wxTE_READONLY | wxNO_BORDER | wxTE_NO_VSCROLL);
+    text_ctrl->SetForegroundColour(*wxWHITE);
+    text_ctrl->SetBackgroundColour(*wxRED);
 
     wxSize size_button{ 90, 22 };
     btnCollapse = new wxButton(this, wxID_ANY, "Свернуть", { Display::self->GetSize().x - size_button.x - 10, SD::Y_SB(0) }, size_button);
@@ -77,15 +79,13 @@ void PanelErrors::OnEventTimer(wxTimerEvent &)
 }
 
 
-void PanelErrors::SetColors(bool /*inverse*/)
+void PanelErrors::SetColors(bool inverse)
 {
-    return;
+    text_ctrl->SetBackgroundColour(inverse ? *wxWHITE : *wxRED);
 
-//    text_ctrl->SetBackgroundColour(inverse ? *wxWHITE : *wxRED);
-//
-//    text_ctrl->SetForegroundColour(inverse ? *wxBLACK : *wxWHITE);
-//
-//    text_ctrl->Refresh();
+    text_ctrl->SetForegroundColour(inverse ? *wxBLACK : *wxWHITE);
+
+    text_ctrl->Refresh();
 }
 
 
@@ -140,11 +140,4 @@ void PanelErrors::BuildCanvas()
     }
 
     text_ctrl->SetValue(label);
-
-    LOG_WRITE("Label = %s", label.c_str().AsChar());
-
-    text_ctrl->Update();
-    text_ctrl->Layout();
-
-    text_ctrl->Refresh();
 }
