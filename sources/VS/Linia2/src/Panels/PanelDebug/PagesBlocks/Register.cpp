@@ -166,6 +166,8 @@ void Register::OnEventTextCtrl(wxCommandEvent &event)
     }
 
     event.Skip();
+
+    UpdateComboCommands();
 }
 
 
@@ -219,32 +221,41 @@ void Register::UpdateDecFields()
             {
                 if (i >= d.first_bit && i < d.first_bit + d.num_bits)   // Нашли описатель поля, в которое входит данный бит
                 {
-                    int value = 0;
+                    uint value = d.CalculateValue(chbox);
 
-                    int counter = 0;
-
-                    for (int bit = d.first_bit; bit < d.first_bit + d.num_bits; bit++)
-                    {
-                        if (chbox[(uint)bit]->IsChecked())
-                        {
-                            value |= (1 << counter);
-                        }
-
-                        counter++;
-                    }
-
-                    d.field.text_ctrl->SetValue(wxString::Format("%d", value));
+                    d.field.text_ctrl->SetValue(wxString::Format("%u", value));
                 }
             }
-
         }
     }
+}
+
+
+uint StructDescription::CalculateValue(std::vector<CheckBoxBit *> &chbox)
+{
+    uint value = 0;
+
+    int counter = 0;
+
+    for (int bit = first_bit; bit < first_bit + num_bits; bit++)
+    {
+        if (chbox[(uint)bit]->IsChecked())
+        {
+            value |= (1 << counter);
+        }
+
+        counter++;
+    }
+
+    return value;
 }
 
 
 void Register::OnEventCheckBox(wxCommandEvent &event)
 {
     UpdateDecFields();
+
+    UpdateComboCommands();
 
     event.Skip();
 }
@@ -288,6 +299,18 @@ void Register::OnEventCombo(wxCommandEvent &event)
     UpdateDecFields();
 
     event.Skip();
+}
+
+
+void Register::UpdateComboCommands()
+{
+    for (auto &d : desc[0])
+    {
+        if (d.field.commands.size())
+        {
+
+        }
+    }
 }
 
 

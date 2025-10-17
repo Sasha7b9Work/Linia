@@ -48,6 +48,9 @@ struct StructDescription
         TextCtrlNumber *text_ctrl = nullptr;    // Здесь находятся десятичные значения
         CommandsCombo *combo = nullptr;         // А здесь находятся команды
     } field;
+
+    // Рассчитать значение в соотвествие с чекбоксами
+    uint CalculateValue(std::vector<CheckBoxBit *> &);
 };
 
 
@@ -96,6 +99,9 @@ private:
 
     // Привести десятичные поля в соответствие с битовыми
     void UpdateDecFields();
+
+    // Привести комбобоксы команд в соотвествие с битовыми полями
+    void UpdateComboCommands();
 
     void OnEventTextCtrl(wxCommandEvent &);
     void OnEventCheckBox(wxCommandEvent &);
