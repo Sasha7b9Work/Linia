@@ -65,7 +65,8 @@ bool Application::OnInit()
 
         if (result == wxOK)
         {
-            std::system("reboot -f");
+            result = std::system("reboot -f");
+            (void)result;
         }
     }
 
