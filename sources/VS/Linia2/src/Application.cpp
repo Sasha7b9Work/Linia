@@ -17,6 +17,7 @@
 #include "Communicator/SPI/SPI.h"
 #include "Controls/AutoRebootDialog.h"
 #include "IPPP/Device/Chips.h"
+#include <cstdlib>
 
 
 wxIMPLEMENT_APP(Application);
@@ -29,6 +30,22 @@ bool Application::OnInit()
 {
     std::locale::global(std::locale(""));  // Установка системной локали
     setlocale(LC_ALL, "");
+
+#ifndef WIN32
+
+    // Устанавливаем переменные окружения для GTK
+    ::setenv("G_MESSAGES_DEBUG", "0", 1);
+    ::setenv("GTK_DEBUG", "0", 1);
+    ::setenv("GDK_DEBUG", "0", 1);
+    ::setenv("NO_AT_BRIDGE", "1", 1);
+
+    // Отключаем логирование в wxWidgets
+    wxLog::SetActiveTarget(new wxLogNull);
+
+    // Дополнительно: отключаем X11 warnings
+    ::setenv("XLIB_SKIP_ARGB_VISUALS", "1", 1);
+
+#endif
 
     if (!wxApp::OnInit())
     {
