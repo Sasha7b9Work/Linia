@@ -4,7 +4,7 @@
 #include "Panels/PanelDebug/PagesBlocks/PainterRegister.h"
 #include "Controls/TextControls.h"
 #include "Utils/StringUtils.h"
-#include "Panels/PanelDebug/CommandsCombo.h"
+#include "Panels/PanelDebug/PagesBlocks/CommandsCombo.h"
 #include "IPPP/Device/IDevice.h"
 
 
