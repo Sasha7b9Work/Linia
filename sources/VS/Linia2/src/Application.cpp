@@ -26,10 +26,41 @@ wxIMPLEMENT_APP(Application);
 Application *Application::self = nullptr;
 
 
+class FilteredStreambuf : public std::streambuf {
+    std::streambuf *original;
+
+public:
+    FilteredStreambuf(std::streambuf *orig) : original(orig)
+    {
+    }
+
+protected:
+    virtual int overflow(int c) override
+    {
+        // Можно добавить фильтрацию по содержимому
+        return original->sputc(c);
+    }
+
+    virtual std::streamsize xsputn(const char *s, std::streamsize n) override
+    {
+        // Фильтруем ненужные сообщения GTK
+        if (std::strstr(s, "Gtk") || std::strstr(s, "gtk") ||
+            std::strstr(s, "GDK") || std::strstr(s, "gdk"))
+        {
+            return n; // Игнорируем
+        }
+        return original->sputn(s, n);
+    }
+};
+
+
 bool Application::OnInit()
 {
     std::locale::global(std::locale(""));  // Установка системной локали
     setlocale(LC_ALL, "");
+
+    FilteredStreambuf filtered_stderr(std::cerr.rdbuf());
+    std::cerr.rdbuf(&filtered_stderr);
 
 #ifndef WIN32
 
