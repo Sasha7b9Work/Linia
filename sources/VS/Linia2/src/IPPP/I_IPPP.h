@@ -28,17 +28,4 @@ protected:
 
     // Читает четыре массива значений из ПЛИС
     virtual bool ReadData(std::vector<int>(&data)[4]) = 0;
-
-    // Количество точек в режиме DC или импульсном
-    virtual void SetPointCount(int) = 0;
-
-    // Вид развёртки
-    virtual void SetTypeScan(TypeScan::E) = 0;
-
-    // Длительность импульса
-    // generation_stump - семейство кривых
-    virtual void SetPulseDuration(uint durationUS, bool generation_stump) = 0;
-
-    // Первая очередь
-    virtual void SetFirstQueue(const Chan &) = 0;
 };

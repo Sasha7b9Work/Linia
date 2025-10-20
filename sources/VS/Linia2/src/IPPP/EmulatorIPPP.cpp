@@ -40,25 +40,3 @@ bool EmulatorIPPP::ReadData(std::vector<int>(& /*data*/)[4])
 {
     return false;
 }
-
-
-void EmulatorIPPP::SetPointCount(int)
-{
-    LOG_ERROR("Not implemented");
-}
-
-
-void EmulatorIPPP::SetTypeScan(TypeScan::E)
-{
-    LOG_ERROR("Not implemented");
-}
-
-void EmulatorIPPP::SetPulseDuration(uint /*durationUS*/, bool)
-{
-    LOG_ERROR("Not implemented");
-}
-
-void EmulatorIPPP::SetFirstQueue(const Chan &)
-{
-    LOG_ERROR("Not implemented");
-}

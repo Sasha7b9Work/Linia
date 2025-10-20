@@ -22,12 +22,4 @@ private:
     virtual bool ReadData(std::vector<int>(&data)[4]);
 
     void Pause();
-
-    virtual void SetPointCount(int) override;
-
-    virtual void SetTypeScan(TypeScan::E) override;
-
-    virtual void SetPulseDuration(uint durationUS, bool generation_stump) override;
-
-    virtual void SetFirstQueue(const Chan &) override;
 };

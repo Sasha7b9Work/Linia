@@ -20,12 +20,4 @@ private:
     bool in_process_measuring = false;                  // Устанавливается при нажатии кнопки СТАРТ. Снимается при нажатии кнопки СТОП.
 
     virtual bool ReadData(std::vector<int>(&data)[4]);
-
-    virtual void SetPointCount(int) override;
-
-    virtual void SetTypeScan(TypeScan::E) override;
-
-    virtual void SetPulseDuration(uint durationUS, bool generation_stump) override;
-
-    virtual void SetFirstQueue(const Chan &) override;
 };
