@@ -408,9 +408,19 @@ bool CheckBoxBit::IsChecked() const
 }
 
 
+bool CheckBoxBit::Enable(bool enable)
+{
+    bool result = Painter::Enable(enable);
+
+    RePaint();
+
+    return result;
+}
+
+
 void CheckBoxBit::RePaint()
 {
-    BeginPaint(*wxWHITE);
+    BeginPaint(IsEnabled() ? *wxWHITE : *wxLIGHT_GREY);
 
     wxFont font(7, wxFONTFAMILY_DEFAULT,
         wxFONTSTYLE_NORMAL,

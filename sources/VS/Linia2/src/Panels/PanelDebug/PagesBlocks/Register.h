@@ -19,6 +19,8 @@ public:
 
     bool IsChecked() const;
 
+    virtual bool Enable(bool) override;
+
 private:
 
     bool value = false;
