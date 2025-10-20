@@ -8,6 +8,9 @@
 #include "IPPP/Device/Device.h"
 
 
+I_IPPP *I_IPPP::impl = nullptr;
+
+
 void RealIPPP::Init()
 {
     LOG_WRITE(" ");

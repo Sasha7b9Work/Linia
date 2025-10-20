@@ -65,9 +65,7 @@ public:
     static const int HEIGHT = 155;
 
     Register(wxWindow *parent, const wxString &_title,      // Это написано на изображении
-        Chip *,
-        bool _sended,                                       // Можно ли засылать в регистр
-        bool _received);                                    // Можно ли читать из регистра
+        Chip *);
 
     void SetNamesBits(const wxArrayString &);
 
@@ -85,12 +83,8 @@ private:
 
     wxButton *btnSend = nullptr;                // Однократная засылка
     wxToggleButton *btnAutoSend = nullptr;      // Если кнопка нажата, то каждую секунду происходит запись в данный регистр
-    wxToggleButton *btnReceptin = nullptr;      // Если кнопка нажата, то каждую секунду происходит чтение данного регистра
 
     std::vector<wxWindow *> windows;
-
-    bool sended = true;
-    bool received = true;
 
     PainterRegister *painter = nullptr;
 
@@ -124,7 +118,7 @@ class RegFPGA : public Register
 public:
 
     RegFPGA(wxWindow *_parent, Chip *_chip) :
-        Register(_parent, "", _chip, true, false)
+        Register(_parent, "", _chip)
     {
     }
 };

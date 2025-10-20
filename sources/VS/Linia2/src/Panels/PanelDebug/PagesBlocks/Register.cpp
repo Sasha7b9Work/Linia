@@ -8,10 +8,8 @@
 #include "IPPP/Device/IDevice.h"
 
 
-Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, bool _sended, bool _received) :
+Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip) :
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
-    sended(_sended),
-    received(_received),
     chip(_chip)
 {
     wxPanel::SetName("Register");
@@ -22,29 +20,17 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, bool _
 
     int x = 690;
 
-    if (sended)
-    {
-        btnSend = new wxButton(this, wxID_ANY, "Записать", { x, 0 }, size_button);
+    btnSend = new wxButton(this, wxID_ANY, "Записать", { x, 0 }, size_button);
 
-        windows.push_back(btnSend);
+    windows.push_back(btnSend);
 
-        x -= size_button.x + 5;
+    x -= size_button.x + 5;
 
-        btnAutoSend = new wxToggleButton(this, wxID_ANY, "Автозапись", { x, 0 }, size_button);
+    btnAutoSend = new wxToggleButton(this, wxID_ANY, "Автозапись", { x, 0 }, size_button);
 
-        windows.push_back(btnAutoSend);
+    windows.push_back(btnAutoSend);
 
-        x -= size_button.x + 5;
-    }
-
-    if (received)
-    {
-        btnReceptin = new wxToggleButton(this, wxID_ANY, "Чтение", { x, 0 }, size_button);
-
-        windows.push_back(btnReceptin);
-
-        x -= size_button.x + 5;
-    }
+    x -= size_button.x + 5;
 
     int y0 = 40;
 
@@ -175,10 +161,6 @@ void Register::OnEventToggleButton(wxCommandEvent &event)
     if (btnAutoSend && id == btnAutoSend->GetId())
     {
         SetActiveAcross(event.GetInt() == 0, btnAutoSend);
-    }
-    else if (btnReceptin && id == btnReceptin->GetId())
-    {
-        SetActiveAcross(event.GetInt() == 0, btnReceptin);
     }
 
     event.Skip();
@@ -334,14 +316,14 @@ void Register::UpdateComboCommands()
 
 
 RegAD5543::RegAD5543(wxWindow *_parent, Chip *_chip) :
-    Register(_parent, "AD5543", _chip, true, false)
+    Register(_parent, "AD5543", _chip)
 {
 
 }
 
 
 RegAD5531::RegAD5531(wxWindow *_parent, Chip *_chip) :
-    Register(_parent, "AD5531", _chip, true, false)
+    Register(_parent, "AD5531", _chip)
 {
 
 }
