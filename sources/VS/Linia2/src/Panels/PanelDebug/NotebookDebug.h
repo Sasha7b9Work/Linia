@@ -20,7 +20,11 @@ public:
 
     void Pack();
 
+    void EnableSwitching(bool);
+
 private:
+
+    bool switching_allowed = true;
 
     void AppendNewPage(wxPanel *);
 

@@ -6,6 +6,7 @@
 #include "Utils/StringUtils.h"
 #include "Panels/PanelDebug/PagesBlocks/CommandsCombo.h"
 #include "IPPP/Device/IDevice.h"
+#include "Panels/PanelDebug/NotebookDebug.h"
 
 
 Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip) :
@@ -187,6 +188,8 @@ void Register::SetActiveAcross(bool active, wxWindow *_wnd)
             wnd->Enable(active);
         }
     }
+
+    NotebookDebug::self->EnableSwitching(active);
 }
 
 

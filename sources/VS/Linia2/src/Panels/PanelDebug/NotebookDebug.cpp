@@ -32,7 +32,7 @@ NotebookDebug::NotebookDebug(wxWindow *parent) :
 
     wxWindowBase::Layout();
 
-    Bind(wxEVT_NOTEBOOK_PAGE_CHANGED, &NotebookDebug::OnEventPageChanged, this);
+    Bind(wxEVT_NOTEBOOK_PAGE_CHANGING, &NotebookDebug::OnEventPageChanged, this);
 }
 
 
@@ -88,7 +88,20 @@ void NotebookDebug::Unpack()
 }
 
 
-void NotebookDebug::OnEventPageChanged(wxBookCtrlEvent &)
+void NotebookDebug::OnEventPageChanged(wxBookCtrlEvent &event)
 {
-    Pack();
+    if (switching_allowed)
+    {
+        Pack();
+    }
+    else
+    {
+        event.Veto();
+    }
+}
+
+
+void NotebookDebug::EnableSwitching(bool enable)
+{
+    switching_allowed = enable;
 }
