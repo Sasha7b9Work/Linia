@@ -16,6 +16,9 @@ public:
     void Pack();
     void Unpack();
 
+    // Возвращает указатель на кнопку закрытия
+    wxButton *GetButtonReturn();
+
 private:
 
     wxMenuItem *itemReturn = nullptr;

@@ -115,3 +115,9 @@ void PageChip::Unpack()
         reg->Unpack();
     }
 }
+
+
+wxButton *PageChip::GetButtonReturn()
+{
+    return btnReturn;
+}

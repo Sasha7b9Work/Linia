@@ -7,6 +7,7 @@
 #include "Panels/PanelDebug/PagesBlocks/CommandsCombo.h"
 #include "IPPP/Device/IDevice.h"
 #include "Panels/PanelDebug/NotebookDebug.h"
+#include "Panels/PanelDebug/PagesBlocks/PageChip.h"
 
 
 Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip) :
@@ -188,6 +189,22 @@ void Register::SetActiveAcross(bool active, wxWindow *_wnd)
             wnd->Enable(active);
         }
     }
+
+    for (auto &d : desc[0])
+    {
+        if (d.field.need_text_ctrl)
+        {
+            d.field.text_ctrl->Enable(active);
+            d.field.combo->Enable(active);
+        }
+    }
+
+    for (auto *chb : chbox)
+    {
+        chb->Enable(active);
+    }
+
+    ((PageChip *)GetParent())->GetButtonReturn()->Enable(active);
 
     NotebookDebug::self->EnableSwitching(active);
 }
