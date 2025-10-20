@@ -25,8 +25,6 @@ private:
 
     virtual void SetPointCount(int) override;
 
-    virtual void SetCircuitConnection(const Chan &, StateJack::E) override;
-
     virtual void SetTypeScan(TypeScan::E) override;
 
     virtual void SetPulseDuration(uint durationUS, bool generation_stump) override;

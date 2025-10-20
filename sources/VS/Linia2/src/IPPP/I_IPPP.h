@@ -32,9 +32,6 @@ protected:
     // Количество точек в режиме DC или импульсном
     virtual void SetPointCount(int) = 0;
 
-    // Схема включения канала
-    virtual void SetCircuitConnection(const Chan &, StateJack::E) = 0;
-
     // Вид развёртки
     virtual void SetTypeScan(TypeScan::E) = 0;
 

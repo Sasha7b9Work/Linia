@@ -119,11 +119,6 @@ void RealIPPP::SetPointCount(int /*count*/)
 }
 
 
-void RealIPPP::SetCircuitConnection(const Chan & /*ch*/, StateJack::E /*state*/)
-{
-}
-
-
 void RealIPPP::SetTypeScan(TypeScan::E /*type*/)
 {
 }
