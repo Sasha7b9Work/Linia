@@ -11,7 +11,7 @@
 #include "Communicator/GPIO/GPIO.h"
 #include "Display/PanelErrors.h"
 #include "IPPP/RealIPPP.h"
-#include "IPPP/EmulatorIPPP.h"
+#include "IPPP/Emulator/EmulatorIPPP.h"
 #include "SoftTests/SoftTests.h"
 #include "Communicator/UART/UART.h"
 #include "Communicator/SPI/SPI.h"

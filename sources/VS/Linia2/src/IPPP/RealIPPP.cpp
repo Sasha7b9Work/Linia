@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "IPPP/RealIPPP.h"
 #include "IPPP/Device/IDevice.h"
-#include "IPPP/Device/DeviceEmulator.h"
+#include "IPPP/Emulator/DeviceEmulator.h"
 #include "Communicator/GPIO/GPIO.h"
 #include "IPPP/Keyboard.h"
 #include "IPPP/Device/Device.h"
