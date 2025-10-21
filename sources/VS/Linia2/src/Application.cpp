@@ -87,7 +87,7 @@ bool Application::OnInit()
 
     if (UART::IsAvailability())
     {
-        AutoRebootDialog dialog(frame, wxString::Format("Устройство UART %s\nне обнаружено.", UART_DEVICE), 10, []
+        AutoRebootDialog dialog(frame, wxString::Format("Устройство UART %s не обнаружено.", UART_DEVICE), 10, []
             {
                 (void)std::system("shutdown -r now");
             });
@@ -97,7 +97,7 @@ bool Application::OnInit()
 
     if (SPI::IsAvailability())
     {
-        AutoRebootDialog dialog(frame, wxString::Format("Устройство SPI %s\nне обнаружено.", SPI_DEVICE), 10, []
+        AutoRebootDialog dialog(frame, wxString::Format("Устройство SPI %s не обнаружено.", SPI_DEVICE), 10, []
             {
                 (void)std::system("shutdown -r now");
             });
