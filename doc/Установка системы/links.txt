@@ -31,6 +31,7 @@ https://joshua-riek.github.io/ubuntu-rockchip-download/boards/orangepi-5-plus.ht
 
     добавить строку
     mnipi ALL = (root) NOPASSWD: /home/mnipi/Linia/sources/generated/Linia2/Linia2
+    mnipi ALL = (root) NOPASSWD: /home/mnipi/Linia.sh
 
     в .desktop файл использовать
     Exec=sudo /home/mnipi/Linia/sources/generated/Linia2/Linia2
@@ -64,6 +65,7 @@ https://joshua-riek.github.io/ubuntu-rockchip-download/boards/orangepi-5-plus.ht
     Exec=sudo /home/mnipi/Linia.sh
     Hidden=false
     NoDisplay=false
+
         ~/Linia.sh:
     #!/bin/bash
     cd /home/mnipi/Linia/sources/generated/Linia2
