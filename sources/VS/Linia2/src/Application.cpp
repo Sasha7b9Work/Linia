@@ -89,7 +89,7 @@ bool Application::OnInit()
     {
         AutoRebootDialog dialog(frame, wxString::Format("Устройство UART %s не обнаружено.", UART_DEVICE), 10, []
             {
-                (void)std::system("reboot -f");
+                (void)std::system("shutdown -r now");
             });
 
         dialog.ShowModal();
@@ -99,7 +99,7 @@ bool Application::OnInit()
     {
         AutoRebootDialog dialog(frame, wxString::Format("Устройство SPI %s не обнаружено.", SPI_DEVICE), 10, []
             {
-                (void)std::system("reboot -f");
+                (void)std::system("shutdown -r now");
             });
 
         dialog.ShowModal();
