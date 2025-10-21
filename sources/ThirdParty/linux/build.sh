@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 cd ../wxWidgets/generated
-cmake --build . -- -j4
+cmake --build . -- -j$(nproc)
