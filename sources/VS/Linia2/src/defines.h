@@ -46,6 +46,10 @@
 #include <atomic>
 #include <filesystem>
 
+#ifndef WIN32
+#include <gtk/gtk.h>
+#endif
+
 #pragma warning(pop)
 
 
