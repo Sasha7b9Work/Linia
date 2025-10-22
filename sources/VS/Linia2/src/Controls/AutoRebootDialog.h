@@ -6,7 +6,7 @@ class AutoRebootDialog : public wxDialog
 {
 public:
     AutoRebootDialog(wxWindow *parent, const wxString &message, int countdownSeconds, void (*_func_on_finish)()) :
-        wxDialog(parent, wxID_ANY, "Ошибка", wxDefaultPosition, wxSize(350, 170)),
+        wxDialog(parent, wxID_ANY, "Ошибка", wxDefaultPosition, wxSize(350, 170), wxDEFAULT_DIALOG_STYLE | wxDIALOG_MODALITY_APP_MODAL),
         m_countdown(countdownSeconds),
         m_initialCountdown(countdownSeconds),
         func_on_finish(_func_on_finish)
