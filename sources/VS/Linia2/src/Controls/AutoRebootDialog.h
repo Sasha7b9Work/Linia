@@ -18,7 +18,7 @@ public:
         // Пробуем установить как transient для родителя
         if (parent)
         {
-            GTK_WIDGET_SET_FLAGS(m_widget, GTK_DIALOG_MODAL);
+//            GTK_WIDGET_SET_FLAGS(m_widget, GTK_DIALOG_MODAL);
         }
 #endif
 
