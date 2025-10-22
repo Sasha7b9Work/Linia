@@ -11,6 +11,12 @@ public:
         wxDialog(parent, id, title, pos, size)
     {
         Bind(wxEVT_CHAR_HOOK, &Dialog::OnKeyDown, this);
+
+        wxDialog null_dialog;
+
+        null_dialog.Show();
+
+        null_dialog.Close();
     }
 
     virtual int ShowModal() override
