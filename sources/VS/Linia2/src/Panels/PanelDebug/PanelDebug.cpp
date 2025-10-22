@@ -44,19 +44,11 @@ void PanelDebug::Update()
 
 void PanelDebug::Unpack()
 {
-    Config::SetFile(wxGetCwd() + "/" + "PanelDebug.cfg");
-
     NotebookDebug::self->Unpack();
-
-    Config::SetFile("");
 }
 
 
 void PanelDebug::Pack()
 {
-    Config::SetFile(wxGetCwd() + "/" + "PanelDebug.cfg");
-
     NotebookDebug::self->Pack();
-
-    Config::SetFile("");
 }
