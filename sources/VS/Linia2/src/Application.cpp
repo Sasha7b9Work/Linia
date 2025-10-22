@@ -96,7 +96,7 @@ bool Application::OnInit()
                 (void)std::system("shutdown -r now");
             });
 
-        dialog.Show();
+        dialog.ShowWindowModal();
     }
 
     if (SPI::IsAvailability())
