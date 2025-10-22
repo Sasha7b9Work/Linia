@@ -6,22 +6,11 @@ class AutoRebootDialog : public wxDialog
 {
 public:
     AutoRebootDialog(wxWindow *parent, const wxString &message, int countdownSeconds, void (*_func_on_finish)()) :
-        wxDialog(parent, wxID_ANY, "Ошибка", wxDefaultPosition, wxSize(350, 170), wxDEFAULT_DIALOG_STYLE | wxDIALOG_MODALITY_APP_MODAL),
+        wxDialog(parent, wxID_ANY, "Ошибка", wxDefaultPosition, wxSize(350, 170), wxCAPTION | wxCLOSE_BOX | wxRESIZE_BORDER),
         m_countdown(countdownSeconds),
         m_initialCountdown(countdownSeconds),
         func_on_finish(_func_on_finish)
     {
-        // Устанавливаем стили, которые могут помочь
-        SetWindowStyle(wxDEFAULT_DIALOG_STYLE | wxSTAY_ON_TOP);
-
-#ifndef WIN32
-        // Пробуем установить как transient для родителя
-        if (parent)
-        {
-//            GTK_WIDGET_SET_FLAGS(m_widget, GTK_DIALOG_MODAL);
-        }
-#endif
-
         wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
 
         // Текст сообщения
