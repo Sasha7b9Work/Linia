@@ -192,9 +192,12 @@ void Register::SetActiveAcross(bool active, wxWindow *_wnd)
 
     for (auto &d : desc[0])
     {
-        if (d.field.need_text_ctrl)
+        if (d.field.text_ctrl)
         {
             d.field.text_ctrl->Enable(active);
+        }
+        if(d.field.combo)
+        {
             d.field.combo->Enable(active);
         }
     }
