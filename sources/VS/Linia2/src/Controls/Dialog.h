@@ -5,38 +5,12 @@
 
 class Dialog : public wxDialog
 {
-private:
-
-    class NullDialog :public wxDialog
-    {
-    public:
-
-        NullDialog(wxWindow *parent) : wxDialog(parent, wxID_ANY, "")
-        {
-            timer.Bind(wxEVT_TIMER, &NullDialog::OnTimer, this);
-            timer.Start(1000, wxTIMER_ONE_SHOT);
-        }
-
-    private:
-
-        wxTimer timer;
-
-        void OnTimer(wxTimerEvent &)
-        {
-            EndModal(wxID_OK);
-        }
-    };
-
 public:
 
     Dialog(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &pos = wxDefaultPosition, const wxSize &size = wxDefaultSize) :
         wxDialog(parent, id, title, pos, size)
     {
         Bind(wxEVT_CHAR_HOOK, &Dialog::OnKeyDown, this);
-
-        NullDialog null_dialog(this);
-
-        null_dialog.ShowModal();
     }
 
     virtual int ShowModal() override
