@@ -14,7 +14,7 @@ private:
         NullDialog(wxWindow *parent) : wxDialog(parent, wxID_ANY, "")
         {
             timer.Bind(wxEVT_TIMER, &NullDialog::OnTimer, this);
-            timer.Start(1, wxTIMER_ONE_SHOT);
+            timer.Start(1000, wxTIMER_ONE_SHOT);
         }
 
     private:
