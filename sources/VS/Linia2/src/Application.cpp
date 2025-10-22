@@ -97,8 +97,6 @@ bool Application::OnInit()
             });
 
         dialog.ShowModal();
-        dialog.Show();
-        dialog.ShowFullScreen(true);
     }
 
     if (SPI::IsAvailability())

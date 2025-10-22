@@ -11,6 +11,17 @@ public:
         m_initialCountdown(countdownSeconds),
         func_on_finish(_func_on_finish)
     {
+        // Устанавливаем стили, которые могут помочь
+        SetWindowStyle(wxDEFAULT_DIALOG_STYLE | wxSTAY_ON_TOP);
+
+#ifndef WIN32
+        // Пробуем установить как transient для родителя
+        if (parent)
+        {
+            GTK_WIDGET_SET_FLAGS(m_widget, GTK_DIALOG_MODAL);
+        }
+#endif
+
         wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
 
         // Текст сообщения
