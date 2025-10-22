@@ -85,7 +85,7 @@ bool Application::OnInit()
 
     frame->Show();
 
-    if (UART::IsAvailability())
+    if (!UART::IsAvailability())
     {
         wxString message = wxString::Format("Устройство UART %s не обнаружено.", UART_DEVICE);
 
@@ -96,10 +96,10 @@ bool Application::OnInit()
                 (void)std::system("shutdown -r now");
             });
 
-        dialog.ShowWindowModal();
+        dialog.ShowModal();
     }
 
-    if (SPI::IsAvailability())
+    if (!SPI::IsAvailability())
     {
         wxString message = wxString::Format("Устройство SPI %s не обнаружено.", SPI_DEVICE);
 
