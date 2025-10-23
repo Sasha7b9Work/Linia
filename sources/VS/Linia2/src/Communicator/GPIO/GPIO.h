@@ -18,14 +18,16 @@ struct HardwarePinInfo
 struct InputPinInfo
 {
     HardwarePinInfo hw;
-    bool last_state;         // Последнее состояние
+    bool last_state;                    // Последнее состояние
     std::function<void(bool)> callback; // Callback функция
+    pchar name;
 };
 
 
 struct OutputPinInfo
 {
     HardwarePinInfo hw;
+    pchar name;
 };
 
 
