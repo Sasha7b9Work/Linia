@@ -3,7 +3,7 @@
 #include "Utils/RingBuffer.h"
 
 
-void RingBuffer::Push(uint8 byte)
+void RingBuffer::Push(char byte)
 {
     buffer[in++] = byte;
 
@@ -14,9 +14,9 @@ void RingBuffer::Push(uint8 byte)
 }
 
 
-uint8 RingBuffer::Pop()
+char RingBuffer::Pop()
 {
-    uint8 result = buffer[out++];
+    char result = buffer[out++];
 
     if (out == SIZE)
     {
@@ -37,6 +37,6 @@ void RingBuffer::Get(Buffer1024 &result)
 {
     while (!IsEmpty())
     {
-        result.Append(Pop());
+        result.Append((uint8)Pop());
     }
 }

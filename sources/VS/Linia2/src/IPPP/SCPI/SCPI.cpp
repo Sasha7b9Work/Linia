@@ -32,7 +32,9 @@ namespace SCPI
 
 void SCPI::OnEventCallback(uint8 byte)
 {
-    ring_buffer.Push(byte);
+    char symbol = (char)byte;
+
+    ring_buffer.Push((char)std::toupper((int)symbol));
 }
 
 

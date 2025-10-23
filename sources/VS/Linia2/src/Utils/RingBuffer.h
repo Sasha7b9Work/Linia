@@ -6,13 +6,13 @@
 class RingBuffer
 {
 public:
-    void Push(uint8);
-    uint8 Pop();
+    void Push(char);
+    char Pop();
     void Get(Buffer1024 &);
     bool IsEmpty() const;
 private:
     static const int SIZE = 1024;
-    uint8 buffer[SIZE];
+    char buffer[SIZE];
     int in;                 // Сюда ложим очередной байт
     int out;                // А отсюда считываем
 };
