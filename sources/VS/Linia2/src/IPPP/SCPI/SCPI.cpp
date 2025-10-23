@@ -1,4 +1,4 @@
-// 2025/10/23 11:44:22 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/10/23 11:44:22 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "IPPP/SCPI/SCPI.h"
 
