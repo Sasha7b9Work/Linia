@@ -13,8 +13,6 @@ I_IPPP *I_IPPP::impl = nullptr;
 
 void RealIPPP::Init()
 {
-    LOG_WRITE(" ");
-
     IDevice::impl = new Device();
 
     IDevice::impl->Init();
@@ -22,7 +20,6 @@ void RealIPPP::Init()
     pinREQ_RD.Set(false);    // Это состояние означает, что чтение не нужно
 
 //    Keyboard::Init();
-    LOG_WRITE(" ");
 }
 
 
