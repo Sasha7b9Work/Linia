@@ -7,11 +7,26 @@ PageFPGA *PageFPGA::self = nullptr;
 
 
 PageFPGA::PageFPGA(wxNotebook *parent) :
-    wxPanel(parent)
+    PageChip(parent, "ПЛИС")
 {
     self = this;
 
-    wxPanel::SetName("FPGA");
+    Register *fpga0 = new RegFPGA(this, fpgas[0]);
+
+    std::vector<StructDescription> desc0;
+
+    std::vector<StructDescription::CommandStruct> commandsStart;
+    commandsStart.emplace_back(StructDescription::CommandStruct{ 0, "Однократный" });
+    commandsStart.emplace_back(StructDescription::CommandStruct{ 1, "Автоматический" });
+    desc0.emplace_back(StructDescription{ 8, 1, "з", "запуск", { true, commandsStart } });
+
+    fpga0->SetDescriptionBits(0, desc0);
+
+    AppendRegister(fpga0);
+
+    AppendRegister(new RegFPGA(this, fpgas[1]));
+
+    AppendRegister(new RegFPGA(this, fpgas[2]));
 }
 
 
