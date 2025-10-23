@@ -92,7 +92,7 @@ int FPGA::BitDepth() const
     {
         9,
         3,
-        3
+        5
     };
 
     return depth[v];
