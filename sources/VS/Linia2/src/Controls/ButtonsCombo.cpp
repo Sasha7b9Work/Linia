@@ -209,6 +209,10 @@ void ButtonsCombo::OnButtonClicked(wxCommandEvent &event)
                     int delta = pos.x + size.x - MainWindow::WIDTH;
                     pos.x -= delta + 8;
                 }
+                else if (pos.x < 0)
+                {
+                    pos.x = 5;
+                }
             }
             else
             {
