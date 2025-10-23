@@ -32,6 +32,8 @@ public:
 
     uint8 *Data() { return buffer; }
 
+    const uint8 *DataConst() const { return buffer; }
+
     char *DataChar() { return (char *)buffer; }
 
     // Возвращает количество элементов в буфере

@@ -3,6 +3,7 @@
 #include "IPPP/SCPI/SCPI.h"
 #include "Utils/RingBuffer.h"
 #include "Utils/Buffer.h"
+#include "IPPP/SCPI/HeadSCPI.h"
 
 
 namespace SCPI
@@ -12,9 +13,19 @@ namespace SCPI
     class BufferSCPI
     {
     public:
-        void Append(const Buffer1024 &);
+        void Append(Buffer1024 &);
         bool Update();
     private:
+        static const int SIZE = 1024;
+        uint8 buffer[SIZE];
+        int pointer = 0;
+        bool ExistMessage();
+        pchar GetMessage();
+        void RemoveMessage();
+        // Возвращает первую встреченную позицию символа
+        int FindSymbol(char) const;
+        void Clear();
+        int Size() const;
     } buffer;
 }
 
@@ -35,18 +46,102 @@ void SCPI::Update()
 
         while (buffer.Update())
         {
+
         }
     }
 }
 
 
-void SCPI::BufferSCPI::Append(const Buffer1024 &)
+void SCPI::BufferSCPI::Append(Buffer1024 &in)
 {
-
+    std::memcpy(buffer, in.DataConst(), (size_t)in.Size());
+    pointer += in.Size();
+    in.Clear();
 }
 
 
 bool SCPI::BufferSCPI::Update()
 {
+    if (ExistMessage())
+    {
+        pchar message = GetMessage();
+
+        bool result = SCPI::StructSCPI::Update(message, SCPI::head);
+
+        RemoveMessage();
+
+        return result;
+    }
+
     return false;
+}
+
+
+bool SCPI::BufferSCPI::ExistMessage()
+{
+    if (Size() == 0)
+    {
+        return false;
+    }
+
+    int pos = FindSymbol(':');
+
+    if (pos < 0)
+    {
+        Clear();
+
+        return false;
+    }
+
+    if (pos > 0)
+    {
+        std::memmove(buffer, buffer + pos, (size_t)(Size() - pos));
+        pointer -= pos;
+    }
+
+    return FindSymbol('\0') > 0;
+}
+
+
+pchar SCPI::BufferSCPI::GetMessage()
+{
+    return (pchar)buffer;
+}
+
+
+int SCPI::BufferSCPI::FindSymbol(char symbol) const
+{
+    for (int i = 0; i < pointer; i++)
+    {
+        if ((char)buffer[i] == symbol)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+
+void SCPI::BufferSCPI::Clear()
+{
+    pointer = 0;
+}
+
+
+int SCPI::BufferSCPI::Size() const
+{
+    return pointer;
+}
+
+
+void SCPI::BufferSCPI::RemoveMessage()
+{
+    int pos = FindSymbol('\0');
+
+    if (pos >= 0)
+    {
+        std::memmove(buffer, buffer + pos + 1, pointer - pos + 1);
+        pointer = pointer - pos - 1;
+    }
 }

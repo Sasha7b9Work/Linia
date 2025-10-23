@@ -3,13 +3,40 @@
 #include "Utils/RingBuffer.h"
 
 
-void RingBuffer::Push(uint8)
+void RingBuffer::Push(uint8 byte)
 {
+    buffer[in++] = byte;
 
+    if (in == SIZE)
+    {
+        in = 0;
+    }
 }
 
 
-void RingBuffer::Get(Buffer1024 &)
+uint8 RingBuffer::Pop()
 {
+    uint8 result = buffer[out++];
 
+    if (out == SIZE)
+    {
+        out = 0;
+    }
+
+    return result;
+}
+
+
+bool RingBuffer::IsEmpty() const
+{
+    return in == out;
+}
+
+
+void RingBuffer::Get(Buffer1024 &result)
+{
+    while (!IsEmpty())
+    {
+        result.Append(Pop());
+    }
 }
