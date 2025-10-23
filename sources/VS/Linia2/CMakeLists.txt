@@ -75,6 +75,7 @@ file(GLOB DISPLAY                       src/Display/*.*)
 file(GLOB IPPP                          src/IPPP/*.*)
 file(GLOB IPPP_DEVICE                   src/IPPP/Device/*.*)
 file(GLOB IPPP_EMULATOR                 src/IPPP/Emulator/*.*)
+file(GLOB IPPP_SCPI                     src/IPPP/SCPI/*.*)
 file(GLOB IPPP_TESTS                    src/IPPP/Tests/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
 file(GLOB PANELS_PANELCONFIG            src/Panels/PanelConfig/*.*)
@@ -117,6 +118,7 @@ source_group(Display                              FILES ${DISPLAY})
 source_group(IPPP                                 FILES ${IPPP})
 source_group(IPPP/Device                          FILES ${IPPP_DEVICE})
 source_group(IPPP/Emulator                        FILES ${IPPP_EMULATOR})
+source_group(IPPP/SCPI                            FILES ${IPPP_SCPI})
 source_group(IPPP/Tests                           FILES ${IPPP_TESTS})
 source_group(Panels                               FILES ${PANELS})
 source_group(Panels/PanelConfig                   FILES ${PANELS_PANELCONFIG})
@@ -149,6 +151,7 @@ add_executable(${PROJECT_NAME}
     ${IPPP}
     ${IPPP_DEVICE}
     ${IPPP_EMULATOR}
+    ${IPPP_SCPI}
     ${IPPP_TESTS}
     ${PANELS}
     ${PANELS_PANELCONFIG}

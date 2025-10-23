@@ -5,6 +5,7 @@
 #include "Communicator/GPIO/GPIO.h"
 #include "Communicator/SPI/SPI.h"
 #include "IPPP/Device/Chips.h"
+#include "IPPP/SCPI/SCPI.h"
 
 IDevice *IDevice::impl = nullptr;
 
@@ -19,7 +20,7 @@ bool Device::Init()
     GPIO::Init();
     SPI::Init();
 
-    if(UART::Init(Device::CallbackOnReceive))
+    if(UART::Init(SCPI::OnEventCallback))
     {
         connected = true;
         running = true;
@@ -30,6 +31,12 @@ bool Device::Init()
 }
 
 
+void Device::Update()
+{
+    SCPI::Update();
+}
+
+
 void Device::Shutdown()
 {
     running = false;
@@ -37,12 +44,6 @@ void Device::Shutdown()
     UART::DeInit();
 
     connected = false;
-}
-
-
-void Device::CallbackOnReceive(uint8 /*byte*/)
-{
-//    LOG_WRITE("receive %c", (char)byte);
 }
 
 

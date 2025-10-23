@@ -13,6 +13,8 @@ public:
 
     virtual bool Init() override;
 
+    virtual void Update() override;
+
     virtual void Shutdown() override;
 
     virtual bool IsConnected() const override;
@@ -20,8 +22,6 @@ public:
     virtual void SendCommand(pchar format, ...) const override;
 
 private:
-
-    static void CallbackOnReceive(uint8);
 
     std::atomic<bool> running = false;
     std::atomic<bool> connected = false;

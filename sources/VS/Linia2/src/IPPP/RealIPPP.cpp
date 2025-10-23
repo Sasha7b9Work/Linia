@@ -40,6 +40,8 @@ bool RealIPPP::IsChanBS(const Chan &ch) const
 void RealIPPP::Update()
 {
     Keyboard::Update();
+
+    IDevice::impl->Update();
 }
 
 
