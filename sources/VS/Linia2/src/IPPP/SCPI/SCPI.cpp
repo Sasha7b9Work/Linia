@@ -8,11 +8,11 @@
 namespace SCPI
 {
     static RingBuffer ring_buffer;
-    static Buffer1024 buffer1024;
+
     class BufferSCPI
     {
     public:
-        void Append(Buffer1024 &);
+        void Push(uint8);
         bool Update();
     private:
         static const int SIZE = 1024;
@@ -43,25 +43,20 @@ void SCPI::OnEventCallback(uint8 byte)
 
 void SCPI::Update()
 {
-    ring_buffer.Get(buffer1024);
-
-    if (buffer1024.Size())
+    if (!ring_buffer.IsEmpty())
     {
-        buffer.Append(buffer1024);
+        buffer.Push((uint8)ring_buffer.Pop());
+    }
 
-        while (buffer.Update())
-        {
-
-        }
+    while (buffer.Update())
+    {
     }
 }
 
 
-void SCPI::BufferSCPI::Append(Buffer1024 &in)
+void SCPI::BufferSCPI::Push(uint8 byte)
 {
-    std::memcpy(buffer, in.DataConst(), (size_t)in.Size());
-    pointer += in.Size();
-    in.Clear();
+    buffer[pointer++] = byte;
 }
 
 

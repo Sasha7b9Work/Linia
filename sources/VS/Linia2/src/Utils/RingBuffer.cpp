@@ -5,9 +5,9 @@
 
 void RingBuffer::Push(char byte)
 {
-    buffer[in++] = byte;
+    buffer[in] = byte;
 
-    if (in == SIZE)
+    if (++in == SIZE)
     {
         in = 0;
     }
@@ -16,9 +16,9 @@ void RingBuffer::Push(char byte)
 
 char RingBuffer::Pop()
 {
-    char result = buffer[out++];
+    char result = buffer[out];
 
-    if (out == SIZE)
+    if (++out == SIZE)
     {
         out = 0;
     }
@@ -30,13 +30,4 @@ char RingBuffer::Pop()
 bool RingBuffer::IsEmpty() const
 {
     return in == out;
-}
-
-
-void RingBuffer::Get(Buffer1024 &result)
-{
-    while (!IsEmpty())
-    {
-        result.Append((uint8)Pop());
-    }
 }

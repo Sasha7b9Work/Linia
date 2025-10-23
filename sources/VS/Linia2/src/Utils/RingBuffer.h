@@ -8,7 +8,6 @@ class RingBuffer
 public:
     void Push(char);
     char Pop();
-    void Get(Buffer1024 &);
     bool IsEmpty() const;
 private:
     static const int SIZE = 1024;
