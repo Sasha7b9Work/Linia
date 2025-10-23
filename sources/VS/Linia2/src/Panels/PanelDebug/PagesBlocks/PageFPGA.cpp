@@ -1,4 +1,4 @@
-// 2025/10/13 13:54:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/10/13 13:54:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/PagesBlocks/PageFPGA.h"
 
@@ -7,7 +7,7 @@ PageFPGA *PageFPGA::self = nullptr;
 
 
 PageFPGA::PageFPGA(wxNotebook *parent) :
-    PageChip(parent, "ПЛИС")
+    PageChip(parent, "РџР›РРЎ")
 {
     self = this;
 
@@ -17,12 +17,12 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
         std::vector<StructDescription> desc0;
 
         std::vector<StructDescription::CommandStruct> commandsStart;
-        commandsStart.emplace_back(StructDescription::CommandStruct{ 0, "Однократный" });
-        commandsStart.emplace_back(StructDescription::CommandStruct{ 1, "Автоматический" });
-        desc0.emplace_back(StructDescription{ 8, 1, "з", "запуск", { true, commandsStart } });
+        commandsStart.emplace_back(StructDescription::CommandStruct{ 0, "РћРґРЅРѕРєСЂР°С‚РЅС‹Р№" });
+        commandsStart.emplace_back(StructDescription::CommandStruct{ 1, "РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРёР№" });
+        desc0.emplace_back(StructDescription{ 8, 1, "Р·", "Р·Р°РїСѓСЃРє", { true, commandsStart } });
 
         std::vector<StructDescription::CommandStruct> commandsScan;
-        commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0000, "Выключена" });
+        commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0000, "Р’С‹РєР»СЋС‡РµРЅР°" });
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0001, "SIN+" });
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0010, "SIN-" });
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0011, "AC" });
@@ -30,9 +30,9 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0101, "DC+" });
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0110, "IMP+" });
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0111, "IMP-" });
-        commandsScan.emplace_back(StructDescription::CommandStruct{ 0b1000, "Осциллограф" });
-        commandsScan.emplace_back(StructDescription::CommandStruct{ 0b1000, "ВАХ" });
-        desc0.emplace_back(StructDescription{ 3, 4, "разв", "развёртка", { true, commandsScan } });
+        commandsScan.emplace_back(StructDescription::CommandStruct{ 0b1000, "РћСЃС†РёР»Р»РѕРіСЂР°С„" });
+        commandsScan.emplace_back(StructDescription::CommandStruct{ 0b1000, "Р’РђРҐ" });
+        desc0.emplace_back(StructDescription{ 3, 4, "СЂР°Р·РІ", "СЂР°Р·РІС‘СЂС‚РєР°", { true, commandsScan } });
 
         std::vector<StructDescription::CommandStruct> commandsCurvers;
         commandsCurvers.emplace_back(StructDescription::CommandStruct{ 0b000, "1" });
@@ -43,7 +43,7 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
         commandsCurvers.emplace_back(StructDescription::CommandStruct{ 0b101, "10" });
         commandsCurvers.emplace_back(StructDescription::CommandStruct{ 0b110, "10" });
         commandsCurvers.emplace_back(StructDescription::CommandStruct{ 0b111, "10" });
-        desc0.emplace_back(StructDescription{ 0, 3, "к", "количество кривых ВАХ для DC+, DC-", { true, commandsCurvers } });
+        desc0.emplace_back(StructDescription{ 0, 3, "Рє", "РєРѕР»РёС‡РµСЃС‚РІРѕ РєСЂРёРІС‹С… Р’РђРҐ РґР»СЏ DC+, DC-", { true, commandsCurvers } });
 
         fpga0->SetDescriptionBits(0, desc0);
 
@@ -56,15 +56,15 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
         std::vector<StructDescription> desc1;
 
         std::vector<StructDescription::CommandStruct> commandsDuration;
-        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b000, "0.2 мс" });
-        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b001, "0.2 мс" });
-        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b010, "1.0 мс" });
-        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b011, "0.2 мс" });
-        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b100, "2.0 мс" });
-        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b101, "0.2 мс" });
-        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b110, "0.2 мс" });
-        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b111, "0.2 мс" });
-        desc1.emplace_back(StructDescription{ 0, 3, "д", "длит. имп. для IMP+, IMP-(высокое напряжение)", { true, commandsDuration } });
+        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b000, "0.2 РјСЃ" });
+        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b001, "0.2 РјСЃ" });
+        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b010, "1.0 РјСЃ" });
+        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b011, "0.2 РјСЃ" });
+        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b100, "2.0 РјСЃ" });
+        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b101, "0.2 РјСЃ" });
+        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b110, "0.2 РјСЃ" });
+        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b111, "0.2 РјСЃ" });
+        desc1.emplace_back(StructDescription{ 0, 3, "Рґ", "РґР»РёС‚. РёРјРї. РґР»СЏ IMP+, IMP-(РІС‹СЃРѕРєРѕРµ РЅР°РїСЂСЏР¶РµРЅРёРµ)", { true, commandsDuration } });
 
         fpga1->SetDescriptionBits(0, desc1);
 
@@ -77,11 +77,11 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
         std::vector<StructDescription> desc2;
 
         std::vector<StructDescription::CommandStruct> commandsDuration;
-        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b00, "10 мкс" });
-        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b01, "20 мкс" });
-        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b10, "50 мкс" });
-        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b11, "100 мкс" });
-        desc2.emplace_back(StructDescription{ 0, 2, "дл", "длит. имп. для IMP+, IMP-(большой ток)", { true, commandsDuration } });
+        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b00, "10 РјРєСЃ" });
+        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b01, "20 РјРєСЃ" });
+        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b10, "50 РјРєСЃ" });
+        commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b11, "100 РјРєСЃ" });
+        desc2.emplace_back(StructDescription{ 0, 2, "РґР»", "РґР»РёС‚. РёРјРї. РґР»СЏ IMP+, IMP-(Р±РѕР»СЊС€РѕР№ С‚РѕРє)", { true, commandsDuration } });
 
         std::vector<StructDescription::CommandStruct> commandsN;
         commandsN.emplace_back(StructDescription::CommandStruct{ 0b001, "0" });
