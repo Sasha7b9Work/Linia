@@ -3,7 +3,6 @@
 #include "IPPP/SCPI/SCPI.h"
 #include "Utils/RingBuffer.h"
 #include "Utils/Buffer.h"
-#include "IPPP/SCPI/HeadSCPI.h"
 
 
 namespace SCPI
@@ -27,6 +26,10 @@ namespace SCPI
         void Clear();
         int Size() const;
     } buffer;
+
+    extern StructSCPI head[];
+
+    static bool Update(pchar, StructSCPI *);
 }
 
 
@@ -68,7 +71,7 @@ bool SCPI::BufferSCPI::Update()
     {
         pchar message = GetMessage();
 
-        bool result = SCPI::StructSCPI::Update(message, SCPI::head);
+        bool result = SCPI::Update(message, SCPI::head);
 
         RemoveMessage();
 
@@ -146,4 +149,32 @@ void SCPI::BufferSCPI::RemoveMessage()
         std::memmove(buffer, buffer + pos + 1, (size_t)(pointer - pos + 1));
         pointer = pointer - pos - 1;
     }
+}
+
+
+bool SCPI::Update(pchar message, StructSCPI *handler)
+{
+    while (handler->begin != nullptr)
+    {
+        size_t len_msg = std::strlen(message);
+
+        if (std::strlen(handler->begin) >= len_msg)
+        {
+            if (std::memcmp(handler->begin, message, len_msg) == 0)
+            {
+                if (handler->func)
+                {
+                    return handler->func(message + len_msg);
+                }
+                else if (handler->handler)
+                {
+                    return Update(message + len_msg, handler->handler);
+                }
+            }
+        }
+
+        handler++;
+    }
+
+    return false;
 }
