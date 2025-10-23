@@ -71,6 +71,8 @@ void NotebookDebug::Pack()
     PageChannelS::self->Pack();
     PageMeasCurrent::self->Pack();
     PageSource50V::self->Pack();
+
+    Config::WriteInt("pagedebug_page", GetSelection());
 }
 
 
@@ -85,6 +87,8 @@ void NotebookDebug::Unpack()
     PageChannelS::self->Unpack();
     PageMeasCurrent::self->Unpack();
     PageSource50V::self->Unpack();
+
+    SetSelection((size_t)Config::ReadInt("pagedebug_page", 0));
 }
 
 
