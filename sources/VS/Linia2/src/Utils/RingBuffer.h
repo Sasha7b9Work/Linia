@@ -12,6 +12,6 @@ public:
 private:
     static const int SIZE = 1024;
     char buffer[SIZE];
-    int in;                 // Сюда ложим очередной байт
-    int out;                // А отсюда считываем
+    int in = 0;                 // Сюда ложим очередной байт
+    int out = 0;                // А отсюда считываем
 };
