@@ -1,4 +1,4 @@
-// 2025/10/23 15:09:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/10/23 15:09:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
 
@@ -20,7 +20,7 @@ struct PinDevice
 
     pchar Name() const;
 
-    // Это устанавливает состояние входа в данной программе - ничего не посылается в stm32
+    // Р­С‚Рѕ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ СЃРѕСЃС‚РѕСЏРЅРёРµ РІС…РѕРґР° РІ РґР°РЅРЅРѕР№ РїСЂРѕРіСЂР°РјРјРµ - РЅРёС‡РµРіРѕ РЅРµ РїРѕСЃС‹Р»Р°РµС‚СЃСЏ РІ stm32
     void SetState(bool);
 
 protected:
