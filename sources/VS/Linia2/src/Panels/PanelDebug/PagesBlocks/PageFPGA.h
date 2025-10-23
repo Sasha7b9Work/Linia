@@ -10,7 +10,4 @@ public:
     PageFPGA(wxNotebook *);
 
     static PageFPGA *self;
-
-    void Pack();
-    void Unpack();
 };

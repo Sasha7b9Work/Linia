@@ -99,15 +99,3 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
         AppendRegister(fpga2);
     }
 }
-
-
-void PageFPGA::Pack()
-{
-
-}
-
-
-void PageFPGA::Unpack()
-{
-
-}
