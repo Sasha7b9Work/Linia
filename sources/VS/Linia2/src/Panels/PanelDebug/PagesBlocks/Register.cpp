@@ -60,6 +60,9 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip) :
 
     Bind(wxEVT_BUTTON, &Register::OnEventButton, this);
     Bind(wxEVT_TOGGLEBUTTON, &Register::OnEventToggleButton, this);
+    Bind(wxEVT_TIMER, &Register::OnEventTimerAutoSend, this);
+
+    timerAutoSend.SetOwner(this, timerAutoSend.GetId());
 }
 
 
@@ -163,6 +166,15 @@ void Register::OnEventToggleButton(wxCommandEvent &event)
     if (btnAutoSend && id == btnAutoSend->GetId())
     {
         SetActiveAcross(event.GetInt() == 0, btnAutoSend);
+
+        if (event.GetInt())
+        {
+            timerAutoSend.Start(1000);
+        }
+        else
+        {
+            timerAutoSend.Stop();
+        }
     }
 
     event.Skip();
@@ -177,6 +189,12 @@ void Register::OnEventButton(wxCommandEvent &event)
     {
         chip->WriteValueToSTM32(GetValue());
     }
+}
+
+
+void Register::OnEventTimerAutoSend(wxTimerEvent &)
+{
+    chip->WriteValueToSTM32(GetValue());
 }
 
 

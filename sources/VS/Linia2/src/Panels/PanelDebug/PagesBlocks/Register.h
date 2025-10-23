@@ -85,6 +85,7 @@ private:
 
     wxButton *btnSend = nullptr;                // Однократная засылка
     wxToggleButton *btnAutoSend = nullptr;      // Если кнопка нажата, то каждую секунду происходит запись в данный регистр
+    wxTimer timerAutoSend;                      // По этому таймеру будут автозасылки
 
     std::vector<wxWindow *> windows;
 
@@ -109,6 +110,7 @@ private:
     void OnEventCombo(wxCommandEvent &);
     void OnEventToggleButton(wxCommandEvent &);
     void OnEventButton(wxCommandEvent &);
+    void OnEventTimerAutoSend(wxTimerEvent &);
 
     // Все элементы кроме wnd будут установлены в состояние active
     void SetActiveAcross(bool active, wxWindow *wnd);
