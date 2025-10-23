@@ -33,6 +33,17 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
     commandsScan.emplace_back(StructDescription::CommandStruct{ 0b1000, "ВАХ" });
     desc0.emplace_back(StructDescription{ 3, 4, "разв", "развёртка", { true, commandsScan } });
 
+    std::vector<StructDescription::CommandStruct> commandsCurvers;
+    commandsCurvers.emplace_back(StructDescription::CommandStruct{ 0b000, "1" });
+    commandsCurvers.emplace_back(StructDescription::CommandStruct{ 0b001, "2" });
+    commandsCurvers.emplace_back(StructDescription::CommandStruct{ 0b010, "4" });
+    commandsCurvers.emplace_back(StructDescription::CommandStruct{ 0b011, "8" });
+    commandsCurvers.emplace_back(StructDescription::CommandStruct{ 0b100, "10" });
+    commandsCurvers.emplace_back(StructDescription::CommandStruct{ 0b101, "10" });
+    commandsCurvers.emplace_back(StructDescription::CommandStruct{ 0b110, "10" });
+    commandsCurvers.emplace_back(StructDescription::CommandStruct{ 0b111, "10" });
+    desc0.emplace_back(StructDescription{ 0, 3, "к", "количество кривых ВАХ для DC+, DC-", { true, commandsCurvers } });
+
     fpga0->SetDescriptionBits(0, desc0);
 
     AppendRegister(fpga0);
