@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Panels/PanelDebug/NotebookDebug.h"
 #include "Panels/PanelDebug/PageTestsGPIO.h"
-#include "Panels/PanelDebug/PageTestsFPGA.h"
+#include "Panels/PanelDebug/PagesBlocks/PageFPGA.h"
 #include "Panels/PanelDebug/PagesBlocks/PageSource3kV.h"
 #include "Panels/PanelDebug/PagesBlocks/PageCommutator.h"
 #include "Panels/PanelDebug/PagesBlocks/PageChannelC.h"
@@ -21,7 +21,7 @@ NotebookDebug::NotebookDebug(wxWindow *parent) :
     self = this;
 
     AppendNewPage(new PageTestsGPIO(this));
-    AppendNewPage(new PageTestsFPGA(this));
+    AppendNewPage(new PageFPGA(this));
     AppendNewPage(new PageCommutator(this));
     AppendNewPage(new PageSource3kV(this));
     AppendNewPage(new PageChannelC(this));
@@ -63,7 +63,7 @@ void NotebookDebug::Update()
 void NotebookDebug::Pack()
 {
     PageTestsGPIO::self->Pack();
-    PageTestsFPGA::self->Pack();
+    PageFPGA::self->Pack();
     PageCommutator::self->Pack();
     PageSource3kV::self->Pack();
     PageChannelC::self->Pack();
@@ -77,7 +77,7 @@ void NotebookDebug::Pack()
 void NotebookDebug::Unpack()
 {
     PageTestsGPIO::self->Unpack();
-    PageTestsFPGA::self->Unpack();
+    PageFPGA::self->Unpack();
     PageCommutator::self->Unpack();
     PageSource3kV::self->Unpack();
     PageChannelC::self->Unpack();

@@ -2,13 +2,13 @@
 #pragma once
 
 
-class PageTestsFPGA : public wxPanel
+class PageFPGA : public wxPanel
 {
 public:
 
-    PageTestsFPGA(wxNotebook *);
+    PageFPGA(wxNotebook *);
 
-    static PageTestsFPGA *self;
+    static PageFPGA *self;
 
     void Pack();
     void Unpack();
