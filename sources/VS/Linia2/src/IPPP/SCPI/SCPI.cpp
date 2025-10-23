@@ -141,7 +141,7 @@ void SCPI::BufferSCPI::RemoveMessage()
 
     if (pos >= 0)
     {
-        std::memmove(buffer, buffer + pos + 1, pointer - pos + 1);
+        std::memmove(buffer, buffer + pos + 1, (size_t)(pointer - pos + 1));
         pointer = pointer - pos - 1;
     }
 }
