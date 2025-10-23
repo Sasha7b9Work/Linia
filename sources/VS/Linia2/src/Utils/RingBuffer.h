@@ -9,4 +9,8 @@ public:
     void Push(uint8);
     void Get(Buffer1024 &);
 private:
+    static const int SIZE = 1024;
+    uint8 buffer[SIZE];
+    int in;                 // Сюда ложим очередной байт
+    int out;                
 };
