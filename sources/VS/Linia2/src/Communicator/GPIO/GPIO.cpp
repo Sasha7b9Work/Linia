@@ -144,7 +144,7 @@ namespace GPIO
 
             info.last_state = (gpiod_line_get_value(info.hw.line) == 1);
 
-            LOG_WRITE("GPIO input pin %d initialized", info.hw.pin_number);
+            LOG_WRITE("GPIO input pin %s:%d initialized", info.hw.chip_name, info.hw.pin_number);
         }
 
         for (int i = 0; i < OUTPUT_PINS_COUNT; i++) //-V1008
