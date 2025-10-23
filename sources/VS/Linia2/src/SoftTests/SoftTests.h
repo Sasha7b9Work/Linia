@@ -16,3 +16,9 @@ namespace DataTests
 
     bool Converter();
 }
+
+
+namespace SCPITests
+{
+    bool RunAll();
+}

@@ -41,16 +41,21 @@ void SCPI::OnEventCallback(uint8 byte)
 }
 
 
-void SCPI::Update()
+bool SCPI::Update()
 {
-    if (!ring_buffer.IsEmpty())
+    while (!ring_buffer.IsEmpty())
     {
         buffer.Push((uint8)ring_buffer.Pop());
     }
 
+    bool result = false;
+
     while (buffer.Update())
     {
+        result = true;
     }
+
+    return result;
 }
 
 
@@ -149,21 +154,35 @@ void SCPI::BufferSCPI::RemoveMessage()
 
 bool SCPI::Update(pchar message, StructSCPI *handler)
 {
+    while (*message == ':' || *message == ' ')
+    {
+        message++;
+    }
+
     while (handler->begin != nullptr)
     {
-        size_t len_msg = std::strlen(message);
+        size_t len_begin = std::strlen(handler->begin);
 
-        if (std::strlen(handler->begin) >= len_msg)
+        if (std::strlen(message) >= std::strlen(handler->begin))
         {
-            if (std::memcmp(handler->begin, message, len_msg) == 0)
+            if (std::memcmp(handler->begin, message, len_begin) == 0)
             {
                 if (handler->func)
                 {
-                    return handler->func(message + len_msg);
+                    message += len_begin;
+
+                    while (*message == ':' || *message == ' ')
+                    {
+                        message++;
+                    }
+
+                    return handler->func(message);
                 }
                 else if (handler->handler)
                 {
-                    return Update(message + len_msg, handler->handler);
+                    message += len_begin;
+
+                    return Update(message, handler->handler);
                 }
             }
         }

@@ -5,6 +5,7 @@
 
 bool SoftTests::RunAll()
 {
-    return DataTests::RunAll();
+    return DataTests::RunAll() &&
+        SCPITests::RunAll();
 }
 

@@ -12,5 +12,5 @@ namespace SCPI
 {
     void OnEventCallback(uint8);
 
-    void Update();
+    bool Update();
 }

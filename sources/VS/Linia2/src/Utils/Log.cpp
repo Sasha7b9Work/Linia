@@ -47,6 +47,8 @@ void Log::Init()
         CutSize();
     }
 
+    WriteLine("");
+
     mutex.unlock();
 
     LOG_WRITE("Start application %s", wxDateTime::Now().Format("%Y-%m-%d").c_str().AsChar());
@@ -61,7 +63,7 @@ wxString Log::FileName()
 
 void Log::DeInit()
 {
-    LOG_WRITE("Exit application %s\n", wxDateTime::Now().Format("%Y-%m-%d").c_str().AsChar());
+    LOG_WRITE("Exit application %s", wxDateTime::Now().Format("%Y-%m-%d").c_str().AsChar());
 
     mutex.lock();
 
