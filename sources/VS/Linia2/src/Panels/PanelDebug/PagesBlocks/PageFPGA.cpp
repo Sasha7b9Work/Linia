@@ -20,6 +20,19 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
     commandsStart.emplace_back(StructDescription::CommandStruct{ 1, "Автоматический" });
     desc0.emplace_back(StructDescription{ 8, 1, "з", "запуск", { true, commandsStart } });
 
+    std::vector<StructDescription::CommandStruct> commandsScan;
+    commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0000, "Выключена" });
+    commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0001, "SIN+" });
+    commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0010, "SIN-" });
+    commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0011, "AC" });
+    commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0100, "DC-" });
+    commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0101, "DC+" });
+    commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0110, "IMP+" });
+    commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0111, "IMP-" });
+    commandsScan.emplace_back(StructDescription::CommandStruct{ 0b1000, "Осциллограф" });
+    commandsScan.emplace_back(StructDescription::CommandStruct{ 0b1000, "ВАХ" });
+    desc0.emplace_back(StructDescription{ 3, 4, "разв", "развёртка", { true, commandsScan } });
+
     fpga0->SetDescriptionBits(0, desc0);
 
     AppendRegister(fpga0);
