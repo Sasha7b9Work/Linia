@@ -142,10 +142,16 @@ struct TypeScan
         SYNPos,
         SYNNeg,
         AC,
+        ImpulseOsc,     // Импульсная осчиллографическая
+        ImpulseIVC,     // Импульсная ВАХ
         Count
     };
 
-    static pchar Name(E);
+    static pchar NameShort(E);
+
+    static pchar NameGUI(E);
+
+    static pchar NameFileICO(E);
 };
 
 
@@ -160,5 +166,5 @@ struct MicroChip
         Count
     };
 
-    static pchar _Name(E);
+    static pchar Name(E);
 };

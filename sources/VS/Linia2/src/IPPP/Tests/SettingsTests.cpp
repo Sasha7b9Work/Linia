@@ -51,7 +51,7 @@ pchar ModeMeas::Name(E mode)
 }
 
 
-pchar TypeScan::Name(E v)
+pchar TypeScan::NameShort(E v)
 {
     static const pchar names[Count] =
     {
@@ -65,6 +65,58 @@ pchar TypeScan::Name(E v)
     };
 
     return names[v];
+}
+
+
+pchar TypeScan::NameFileICO(E v)
+{
+    static pchar names[Count] =
+    {
+        "icons/graphs/imp_up.ico",
+        "icons/graphs/imp_down.ico",
+        "icons/graphs/triang_up.ico",
+        "icons/graphs/triang_down.ico",
+        "icons/graphs/sin_hi.ico",
+        "icons/graphs/sin_lo.ico",
+        "icons/graphs/sin.ico",
+        "icons/graphs/imp_hi_osc.ico",
+        "icons/graphs/imp_hi_IVC.ico"
+    };
+
+    if (v < Count)
+    {
+        return names[v];
+    }
+
+    LOG_ERROR("Very big index");
+
+    return "";
+}
+
+
+pchar TypeScan::NameGUI(E v)
+{
+    static const pchar names[Count] =
+    {
+        "Положительные импульсы",
+        "Отрицательные импульсы",
+        "Положительное постоянное",
+        "Отрицательное постоянное",
+        "Положительные полуволны",
+        "Отрицательные полуволны",
+        "Синусоидальное",
+        "U(t)",
+        "ВАХ"
+    };
+
+    if (v < Count)
+    {
+        return names[v];
+    }
+
+    LOG_ERROR("Very big index");
+
+    return "";
 }
 
 
@@ -150,7 +202,7 @@ bool TypeCommutation::IsInternal()
 }
 
 
-pchar MicroChip::_Name(E v)
+pchar MicroChip::Name(E v)
 {
     static const pchar names[Count] =
     {

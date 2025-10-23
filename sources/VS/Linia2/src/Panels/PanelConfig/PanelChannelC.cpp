@@ -25,27 +25,14 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
     StaticBox *boxScan = new StaticBox(this, "Развёртка", { x, SD::DSBY() }, { w, 160 });
 
     {
-        wxArrayString files =
-        {
-            "icons/graphs/imp_up.ico",
-            "icons/graphs/imp_down.ico",
-            "icons/graphs/triang_up.ico",
-            "icons/graphs/triang_down.ico",
-            "icons/graphs/sin_hi.ico",
-            "icons/graphs/sin_lo.ico",
-            "icons/graphs/sin.ico"
-        };
+        wxArrayString files;
+        wxArrayString tooltips;
 
-        wxArrayString tooltips =
+        for (uint i = 0; i < TypeScan::Count; i++)
         {
-            "Положительные импульсы",
-            "Отрицательные импульсы",
-            "Положительное постоянное",
-            "Отрицательное постоянное",
-            "Положительные полуволны",
-            "Отрицательные полуволны",
-            "Синусоидальное"
-        };
+            files.push_back(TypeScan::NameFileICO((TypeScan::E)i));
+            tooltips.push_back(TypeScan::NameGUI((TypeScan::E)i));
+        }
 
         comboScan = new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::XY0().y }, { 32, 32 }, files, tooltips, 0, 3, "comboScan");
 
