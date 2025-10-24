@@ -310,6 +310,10 @@ void PageTestsGPIO::ThreadFunc()
 void PageTestsGPIO::FuncRecvUART(uint8 byte)
 {
     PageTestsGPIO::self->mutex_str_UART.lock();
+    if (byte & 0x80)
+    {
+        byte &= 0x7F;
+    }
     PageTestsGPIO::self->bytesUART.push_back(byte);
     PageTestsGPIO::self->mutex_str_UART.unlock();
 }
