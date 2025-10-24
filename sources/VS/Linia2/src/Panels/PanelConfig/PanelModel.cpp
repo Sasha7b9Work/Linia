@@ -3,15 +3,19 @@
 #include "Panels/PanelConfig/PanelModel.h"
 #include "Utils/GlobalFunctions.h"
 #include "IPPP/Tests/Model.h"
+#include "Panels/PanelConfig/PanelConfig.h"
 
 
 PanelModel *PanelModel::self = nullptr;
 
 
-PanelModel::PanelModel(wxWindow* parent) :
-    Panel(parent, 0, MainWindow::HEIGHT1, WIDTH, HEIGHT)
+PanelModel::PanelModel(wxWindow* parent, int /*_x*/, int /*_w*/, int /*_h*/) :
+    wxPanel(parent)
 {
     self = this;
+
+    wxPanel::SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
+    wxPanel::SetPosition({ 0, 40 });
 
     const int height_name = 20;
 
@@ -19,13 +23,13 @@ PanelModel::PanelModel(wxWindow* parent) :
 
     txtName = new wxStaticText(panel_name, wxID_ANY, "", { 0, 0 }, { WIDTH, height_name }, wxALIGN_CENTER);
 
-    Panel::SetName("Файл модели");
+//    Panel::SetName("Файл модели");
 
     panel_graph = new wxPanel(this, wxID_ANY, { 0, height_name }, { WIDTH, HEIGHT - height_name }, wxTAB_TRAVERSAL | wxSUNKEN_BORDER);
 
     panel_graph->SetBackgroundColour(*wxWHITE);
 
-    Panel::Update();
+//    Panel::Update();
 }
 
 
@@ -37,7 +41,7 @@ void PanelModel::SetName(const wxString &_name)
 
 void PanelModel::Update()
 {
-    Panel::Update();
+//    Panel::Update();
 
     if (Model::IsEmpty())
     {

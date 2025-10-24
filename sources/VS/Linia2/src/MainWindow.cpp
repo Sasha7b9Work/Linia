@@ -103,8 +103,6 @@ MainWindow::MainWindow(const wxString &title)
 
     new PanelConfig(this);
 
-    new PanelModel(this);
-
     new Display(this);
 
     new PanelIndicator(this);
@@ -276,7 +274,6 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
     PanelName::self->Show(mode == ModeMainWindow::Standard);
     PanelModeUpper::self->Show(mode == ModeMainWindow::Standard);
     PanelConfig::self->Show(mode == ModeMainWindow::Standard);
-    PanelModel::self->Show(mode == ModeMainWindow::Standard);
     Display::self->Show(mode == ModeMainWindow::Standard || mode == ModeMainWindow::FullGraph);
     PanelIndicator::self->Show(mode == ModeMainWindow::Standard);
     PanelModeLower::self->Show(mode == ModeMainWindow::Standard);

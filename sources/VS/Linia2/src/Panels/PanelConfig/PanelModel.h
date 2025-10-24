@@ -5,14 +5,14 @@
 #include "Panels/PanelMenu/PanelMenu.h"
 
 
-class PanelModel : public Panel
+class PanelModel : public wxPanel
 {
 public:
 
     static const int WIDTH = MainWindow::WIDTH1;
     static const int HEIGHT = MainWindow::HEIGHT - MainWindow::HEIGHT1 - PanelButtons::HEIGHT;
 
-    PanelModel(wxWindow *parent);
+    PanelModel(wxWindow *parent, int x, int w, int h);
 
     static PanelModel *self;
 

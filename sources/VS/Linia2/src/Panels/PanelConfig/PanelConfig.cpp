@@ -10,6 +10,7 @@
 #include "Panels/PanelConfig/PanelChannelBS.h"
 #include "Panels/PanelConfig/PanelChannelC.h"
 #include "Panels/PanelConfig/PanelCalculate.h"
+#include "Panels/PanelConfig/PanelModel.h"
 #include "Utils/Configurator.h"
 
 
@@ -42,6 +43,9 @@ PanelConfig::PanelConfig(wxWindow* parent) :
 
     btnCalculate = new wxToggleButton(this, wxID_ANY, "Расчёт", { sizeScheme.x, h }, { MainWindow::WIDTH3 - sizeScheme.x - 3, h });
     str_panels.emplace_back(StructPanel{ btnCalculate, CreatePanel(btnCalculate) });
+
+    btnModel = new wxToggleButton(this, wxID_ANY, "Модель", { 0, h * 2 }, { sizeChan.x * 3, h });
+    str_panels.emplace_back(StructPanel{ btnModel, CreatePanel(btnModel) });
 
     {
         // Включаем панель
@@ -76,6 +80,10 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
     {
         return new PanelCalculate(self, x, w, h);
     }
+    else if (button == btnModel)
+    {
+        return new PanelModel(self, x, w, h);
+    }
 
     return nullptr;
 }
@@ -89,7 +97,8 @@ void PanelConfig::OnEventToggleButton(wxCommandEvent &event)
         id == btnChannelB->GetId() ||
         id == btnChannelS->GetId() ||
         id == btnScheme->GetId() ||
-        id == btnCalculate->GetId())
+        id == btnCalculate->GetId() ||
+        id == btnModel->GetId())
     {
         if (!event.IsChecked())
         {
