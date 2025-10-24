@@ -9,7 +9,7 @@ class Dialog : public wxDialog
 public:
 
     Dialog(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &pos = wxDefaultPosition, const wxSize &size = wxDefaultSize) :
-        wxDialog(parent, id, title, pos, size)
+        wxDialog(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE | wxSTAY_ON_TOP)
     {
         Bind(wxEVT_CHAR_HOOK, &Dialog::OnKeyDown, this);
     }
