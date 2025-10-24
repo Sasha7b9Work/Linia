@@ -1,6 +1,7 @@
 ﻿// 2025/7/25 12:23:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Utils/GlobalFunctions.h"
+#include "MainWindow.h"
 
 
 class Dialog : public wxDialog
@@ -19,7 +20,11 @@ public:
 
         SetPosition(pos);
 
-        return wxDialog::ShowModal();
+        int result = wxDialog::ShowModal();
+
+        MainWindow::self->Raise();
+
+        return result;
     }
 
 protected:
