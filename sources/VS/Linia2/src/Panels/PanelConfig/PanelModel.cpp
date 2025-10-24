@@ -1,6 +1,6 @@
 ﻿// 2025/6/1 17:41:03 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/PanelModel.h"
+#include "Panels/PanelConfig/PanelModel.h"
 #include "Utils/GlobalFunctions.h"
 #include "IPPP/Tests/Model.h"
 

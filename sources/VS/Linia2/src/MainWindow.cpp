@@ -9,7 +9,7 @@
 #include "Panels/PanelName.h"
 #include "Panels/PanelUpper.h"
 #include "Panels/PanelConfig/PanelConfig.h"
-#include "Panels/PanelModel.h"
+#include "Panels/PanelConfig/PanelModel.h"
 #include "Display/Display.h"
 #include "Panels/PanelIndicator.h"
 #include "Panels/PanelModeLower.h"
