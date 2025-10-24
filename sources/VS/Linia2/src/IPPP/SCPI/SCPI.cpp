@@ -37,8 +37,6 @@ void SCPI::OnEventCallback(uint8 byte)
 {
     char symbol = (char)std::toupper((int)byte);
 
-    LOG_WRITE("%02X %c", symbol, symbol);
-
     ring_buffer.Push(symbol);
 }
 
@@ -72,6 +70,8 @@ bool SCPI::BufferSCPI::Update()
     if (ExistMessage())
     {
         pchar message = GetMessage();
+
+        LOG_WRITE("message : %s", message);
 
         bool result = SCPI::Update(message, SCPI::head);
 
