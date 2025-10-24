@@ -55,15 +55,15 @@ void PanelMenu::OnEventButton(wxCommandEvent &event)
 
     if (id == btnFile->GetId())
     {
-        DialogFile().ShowModal();
+        DialogFile().ShowOnWindow(btnFile);
     }
     else if (id == btnTest->GetId())
     {
-        DialogTest().ShowModal();
+        DialogTest().ShowOnWindow(btnTest);
     }
     else if (id == btnSetup->GetId())
     {
-        DialogSetup().ShowModal();
+        DialogSetup().ShowOnWindow(btnSetup);
     }
     else if (id == btnArchiv->GetId())
     {
@@ -71,15 +71,15 @@ void PanelMenu::OnEventButton(wxCommandEvent &event)
     }
     else if (id == btnGraph->GetId())
     {
-        DialogGraph().ShowModal();
+        DialogGraph().ShowOnWindow(btnGraph);
     }
     else if (id == btnTable->GetId())
     {
-        DialogTable().ShowModal();
+        DialogTable().ShowOnWindow(btnTable);
     }
     else if (id == btnReport->GetId())
     {
-        DialogReport().ShowModal();
+        DialogReport().ShowOnWindow(btnReport);
     }
     else if (id == btnMeasure->GetId())
     {

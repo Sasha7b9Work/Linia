@@ -14,17 +14,41 @@ public:
         Bind(wxEVT_CHAR_HOOK, &Dialog::OnKeyDown, this);
     }
 
-    virtual int ShowModal() override
+    void ShowOnWindow(wxWindow *window)
     {
-        wxPoint pos = GF::GetCoordCenter(GetSize());
+        wxSize size = window->GetSize();
+
+        wxPoint pos = window->ClientToScreen(wxPoint(size.x / 2, size.y / 2));
+
+        pos -= GetSize() / 2;
+
+        if (GF::IsBoardPCM())
+        {
+
+        }
+        else
+        {
+            int win_bottom = MainWindow::self->GetPosition().y + MainWindow::self->GetSize().y;     // Координата нижней кромки окна
+            int win_left = MainWindow::self->GetPosition().x;
+
+            int bottom = pos.y + GetSize().y;
+            int left = pos.x;
+
+            if (bottom >= win_bottom)
+            {
+                pos.y -= (bottom - win_bottom);
+            }
+            if (left <= win_left)
+            {
+                pos.x += (win_left - left);
+            }
+        }
 
         SetPosition(pos);
 
-        int result = wxDialog::ShowModal();
+        wxDialog::ShowModal();
 
         MainWindow::self->Raise();
-
-        return result;
     }
 
 protected:

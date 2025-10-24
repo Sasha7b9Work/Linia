@@ -24,12 +24,20 @@ DialogTable::DialogTable() :
         BTN_EXPAND, []()
         {
             PanelTable::self->Show();
+
+            DialogTable::self->Close();
         },
         BTN_COLLAPSE, []()
         {
             PanelTable::self->Hide();
+
+            DialogTable::self->Close();
         }
     )
 {
     self = this;
+
+    FindButton(BTN_EXPAND)->Enable(!PanelTable::self->IsShown());
+
+    FindButton(BTN_COLLAPSE)->Enable(PanelTable::self->IsShown());
 }
