@@ -19,39 +19,39 @@ DialogSetup::DialogSetup() :
     MenuDialog("Настройка", 275, { 2, 5 },
         "Настройки пользователя", []()
         {
-            WindowUser().ShowModal();
+            WindowUser().ShowOnWindow(DialogSetup::self->FindButton("Настройки пользователя"));
         },
         "Запуск", []()
         {
-            WindowLaunch().ShowModal();
+            WindowLaunch().ShowOnWindow(DialogSetup::self->FindButton("Запуск"));
         },
         "Автосохранение", []()
         {
-            WindowAutoSave().ShowModal();
+            WindowAutoSave().ShowOnWindow(DialogSetup::self->FindButton("Автосохранение"));
         },
         "Коррекция смещения нуля", []()
         {
-            WindowCorretionZero().ShowModal();
+            WindowCorretionZero().ShowOnWindow(DialogSetup::self->FindButton("Коррекция смещения нуля"));
         },
         "Калибровка", []()
         {
-            WindowCalibrate().ShowModal();
+            WindowCalibrate().ShowOnWindow(DialogSetup::self->FindButton("Калибровка"));
         },
         "Таблица смещений и коэффициентов", []()
         {
-            WindowTableOffsets().ShowModal();
+            WindowTableOffsets().ShowOnWindow(DialogSetup::self->FindButton("Таблица смещений и коэффициентов"));
         },
         "Изменить пароль", []()
         {
-            WindowPassword().ShowModal();
+            WindowPassword().ShowOnWindow(DialogSetup::self->FindButton("Изменить пароль"));
         },
         "IP-адрес", []()
         {
-            WindowAddressIP().ShowModal();
+            WindowAddressIP().ShowOnWindow(DialogSetup::self->FindButton("IP-адрес"));
         },
         "Мой компьютер", []()
         {
-            WindowMyComputer().ShowModal();
+            WindowMyComputer().ShowOnWindow(DialogSetup::self->FindButton("Мой компьютер"));
         }
     )
 {

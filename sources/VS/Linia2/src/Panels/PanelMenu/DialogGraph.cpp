@@ -34,14 +34,14 @@ DialogGraph::DialogGraph() :
         },
         BTN_COLOR, []()
         {
-            DialogGraphColor().ShowModal();
+            DialogGraphColor().ShowOnWindow(DialogGraph::self->FindButton(BTN_COLOR));
         },
         BTN_MARKERS, []()
         {
         },
         BTN_SCALE, []()
         {
-            WindowScale().ShowModal();
+            WindowScale().ShowOnWindow(DialogGraph::self->FindButton(BTN_SCALE));
         },
         BTN_SAVE, []()
         {

@@ -29,7 +29,7 @@ DialogTest::DialogTest() :
     MenuDialog("Тест", 175, { 0, 1, 3, 6, 7 },
         BTN_APPEND, []()
         {
-            DialogTestAppend().ShowModal();
+            DialogTestAppend().ShowOnWindow(DialogTest::self->FindButton(BTN_APPEND));
         },
         BTN_SAVE_PARAMETERS, []()
         {
@@ -51,7 +51,7 @@ DialogTest::DialogTest() :
         },
         BTN_LIBRARY, []()
         {
-            DialogTestLibrary().ShowModal();
+            DialogTestLibrary().ShowOnWindow(DialogTest::self->FindButton(BTN_LIBRARY));
         },
         BTN_SAVE_TO_LIBRARY, []()
         {

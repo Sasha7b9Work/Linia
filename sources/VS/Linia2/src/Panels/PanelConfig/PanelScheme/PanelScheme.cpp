@@ -172,7 +172,7 @@ void PanelScheme::OnEventButton(wxCommandEvent &event)
 
     if (id == btnLoad->GetId())
     {
-        WindowLibraryTests().ShowModal();
+        WindowLibraryTests().ShowOnWindow(btnLoad);
     }
 }
 
