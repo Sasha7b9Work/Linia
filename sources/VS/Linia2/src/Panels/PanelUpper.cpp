@@ -8,7 +8,7 @@ PanelUpper *PanelUpper::self = nullptr;
 
 
 PanelUpper::PanelUpper(wxWindow* parent) :
-    Panel(parent, MainWindow::WIDTH1, 0, MainWindow::WIDTH_DRAW - MainWindow::WIDTH1, MainWindow::HEIGHT1)
+    Panel(parent, MainWindow::WIDTH1, 0, MainWindow::WIDTH_DRAW - MainWindow::WIDTH1, MainWindow::HEIGHT_HI)
 {
     self = this;
 

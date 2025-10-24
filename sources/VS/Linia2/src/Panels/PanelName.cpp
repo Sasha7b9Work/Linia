@@ -8,7 +8,7 @@ PanelName *PanelName::self = nullptr;
 
 
 PanelName::PanelName(wxWindow *parent) :
-    Panel(parent, 0, 0, MainWindow::WIDTH1, MainWindow::HEIGHT1)
+    Panel(parent, 0, 0, MainWindow::WIDTH1, MainWindow::HEIGHT_HI)
 {
     self = this;
 

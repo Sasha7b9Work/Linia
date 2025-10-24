@@ -12,7 +12,7 @@ Display *Display::self = nullptr;
 
 
 Display::Display(wxWindow *parent) :
-    Panel(parent, 0, MainWindow::HEIGHT1, MainWindow::WIDTH_DRAW, MainWindow::HEIGHT_DRAW)
+    Panel(parent, 0, MainWindow::HEIGHT_HI, MainWindow::WIDTH_DRAW, MainWindow::HEIGHT_DRAW)
 {
     self = this;
 
@@ -71,7 +71,7 @@ void Display::Init()
 
     Panel::SetSize({ width, height });
 
-    Panel::SetPosition({ 0, full_screen ? 0 : MainWindow::HEIGHT1 });
+    Panel::SetPosition({ 0, full_screen ? 0 : MainWindow::HEIGHT_HI });
 
     SAFE_DELETE(bitmap);
 

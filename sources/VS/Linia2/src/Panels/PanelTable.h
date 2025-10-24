@@ -9,7 +9,7 @@ class PanelTable : public Panel
 public:
 
     static const int WIDTH = MainWindow::WIDTH_DRAW;
-    static const int HEIGHT = MainWindow::HEIGHT - MainWindow::HEIGHT1 - PanelButtons::HEIGHT;
+    static const int HEIGHT = MainWindow::HEIGHT - MainWindow::HEIGHT_HI - PanelButtons::HEIGHT;
 
     PanelTable(wxWindow *parent);
 

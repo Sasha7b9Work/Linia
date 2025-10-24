@@ -42,7 +42,7 @@ public:
     static const int WIDTH_DRAW = 820;              // Ширина зоны отрисовки
     static const int WIDTH3 = WIDTH - WIDTH_DRAW;   // Ширина последнего, третьего, столбика с панелями
 
-    static const int HEIGHT1 = 75;
+    static const int HEIGHT_HI = 75;
     static const int HEIGHT_DRAW = 660;             // Столько занимает окно отрисовки, когда не развёрнуто на весь экран
 
 
