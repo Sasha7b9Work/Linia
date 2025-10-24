@@ -11,17 +11,18 @@ public:
     Dialog(wxWindow *parent, wxWindowID /*id*/, const wxString &_title, const wxPoint &pos = wxDefaultPosition, const wxSize &size = wxDefaultSize) :
 //        wxPopupWindow(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE | wxSTAY_ON_TOP)
         wxPopupWindow(parent),
+        position(pos),
         title(_title)
     {
         SetSize(size);
-
-        SetPosition(pos);
 
         Bind(wxEVT_CHAR_HOOK, &Dialog::OnKeyDown, this);
     }
 
     void ShowModal()
     {
+        SetPosition(position);
+
         Show();
     }
 
@@ -46,5 +47,6 @@ private:
         }
     }
 
+    wxPoint position;
     wxString title;
 };
