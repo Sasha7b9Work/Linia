@@ -10,7 +10,7 @@ struct StructSCPI
 
 namespace SCPI
 {
-    void OnEventCallback(uint8);
+    void OnEventCallback(uint8 *, int);
 
     bool Update();
 }

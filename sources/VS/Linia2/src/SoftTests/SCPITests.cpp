@@ -30,11 +30,11 @@ bool SCPITests::RunAll()
 
         while (*command) 
         {
-            SCPI::OnEventCallback((uint8)(*command));
+            SCPI::OnEventCallback((uint8 *)command, 1);
             command++;
         }
 
-        SCPI::OnEventCallback((uint8)(*command));
+        SCPI::OnEventCallback((uint8 *)command, 1);
 
         if (!SCPI::Update())
         {

@@ -24,7 +24,7 @@ namespace UART
 {
     static int fd = -1;
 
-    static void (*recv_callback)(uint8) = nullptr;
+    static void (*recv_callback)(uint8 *, int) = nullptr;
 
     static pthread_t id_thread = (pthread_t)-1;
     static bool need_stop_reading = false;          // С помощью этого флага будем останавливать поток
@@ -41,7 +41,7 @@ namespace UART
 }
 
 
-bool UART::Init(void (*callback)(uint8))
+bool UART::Init(void (*callback)(uint8 *, int))
 {
     fd = -1;
     recv_callback = callback;
@@ -323,10 +323,7 @@ void *UART::ReaderThreadFunc(void *)
 
             if (bytes_read > 0)
             {
-                for (int i = 0; i < bytes_read; i++)
-                {
-                    recv_callback(buffer[i]);
-                }
+                recv_callback(buffer, bytes_read);
             }
             else if (bytes_read < 0)
             {

@@ -18,7 +18,7 @@ bool DeviceEmulator::Init()
 }
 
 
-void DeviceEmulator::CallbackOnReceive(uint8)
+void DeviceEmulator::CallbackOnReceive(uint8 *, int)
 {
 
 }

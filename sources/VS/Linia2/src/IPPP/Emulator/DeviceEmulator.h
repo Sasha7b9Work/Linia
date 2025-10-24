@@ -17,5 +17,5 @@ private:
 
     virtual ~DeviceEmulator() { }
 
-    static void CallbackOnReceive(uint8);
+    static void CallbackOnReceive(uint8 *, int);
 };

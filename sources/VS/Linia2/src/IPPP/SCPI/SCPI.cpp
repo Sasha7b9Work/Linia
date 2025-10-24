@@ -34,25 +34,30 @@ namespace SCPI
 }
 
 
-void SCPI::OnEventCallback(uint8 byte)
+void SCPI::OnEventCallback(uint8 *bytes, int size)
 {
-    char symbol = (char)byte;
-
-    if ((byte & 0x80) == 0)
+    for (int i = 0; i < size; i++)
     {
-        symbol = (char)std::toupper((int)byte);
-    }
-    else
-    {
-        symbol &= 0x7F;
-    }
+        uint8 byte = bytes[i];
 
-    if (PageTestsGPIO::self->IsInit())
-    {
-        PageTestsGPIO::self->FuncOnRecvUART(symbol);
-    }
+        char symbol = (char)byte;
 
-    ring_buffer.Push(symbol);
+        if ((byte & 0x80) == 0)
+        {
+            symbol = (char)std::toupper((int)byte);
+        }
+        else
+        {
+            symbol &= 0x7F;
+        }
+
+        if (PageTestsGPIO::self->IsInit())
+        {
+            PageTestsGPIO::self->FuncOnRecvUART(symbol);
+        }
+
+        ring_buffer.Push(symbol);
+    }
 }
 
 

@@ -16,7 +16,7 @@ namespace UART
     // Доступно ли в системе (только на ARM64)
     bool IsAvailability();
 
-    bool Init(void (*recv_callback)(uint8));
+    bool Init(void (*recv_callback)(uint8 *, int));
 
     void ReInit();
 
