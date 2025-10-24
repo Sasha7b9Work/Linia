@@ -106,8 +106,8 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
         btnSendUART = new wxButton(boxUART, wxID_ANY, "Send", { 10, SD::Y_SB(75) }, { 100, 20 });
         btnAutoUART = new wxToggleButton(boxUART, wxID_ANY, "AutoSend", { 10, SD::Y_SB(100) }, { 100, 20 });
 
-        new wxStaticText(boxUART, wxID_ANY, "Принято:", { 10, SD::Y_SB(150) });
-        txtRecvUART = new wxTextCtrl(boxUART, wxID_ANY, "", { 10, SD::Y_SB(170) }, { 170, 20 }, wxTE_READONLY);
+        new wxStaticText(boxUART, wxID_ANY, "Принято:", { 10, SD::Y_SB(130) });
+        txtRecvUART = new wxTextCtrl(boxUART, wxID_ANY, "", { 10, SD::Y_SB(150) }, { 150, 60 }, wxTE_READONLY | wxTE_MULTILINE);
     }
 
     wxStaticBox *boxSPI = new wxStaticBox(this, wxID_ANY, "SPI", { boxUART->GetPosition().x + boxUART->GetSize().x + 10, 10 }, { 200, 270 });
