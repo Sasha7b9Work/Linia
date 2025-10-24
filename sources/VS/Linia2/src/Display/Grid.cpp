@@ -352,7 +352,7 @@ void Grid::ScaleMeasuresOnY(int delta)
 
 int Grid::SizeCell() const
 {
-    return 50 * scale;
+    return 60 * scale;
 }
 
 
