@@ -47,8 +47,8 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
     self = this;
 
-    wxPanel::SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
-    wxPanel::SetPosition({ 0, 40 });
+    wxPanel::SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - PanelConfig::HEIGHT_BUTTONS });
+    wxPanel::SetPosition({ 0, PanelConfig::HEIGHT_BUTTONS });
 
     StaticBox *boxTest = new StaticBox(this, "Тест", { x, SD::DSBY() }, { w, 90 });
 

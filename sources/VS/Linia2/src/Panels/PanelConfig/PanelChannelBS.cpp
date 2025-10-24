@@ -20,8 +20,8 @@ PanelChannelBS::PanelChannelBS(wxPanel *parent, Chan::E ch, int x, int w, int h)
 {
     wxPanel::SetName(wxString("PanelChannel") + ((ch == Chan::_B) ? "B" : "S"));
 
-    SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - 40 });
-    SetPosition({ 0, 40 });
+    SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - PanelConfig::HEIGHT_BUTTONS });
+    SetPosition({ 0, PanelConfig::HEIGHT_BUTTONS });
 
     StaticBox *boxGenerator = new StaticBox(this, "Генератор ступенек", { x, SD::DSBY() }, { w, 320 });
 
