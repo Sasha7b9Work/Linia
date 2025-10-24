@@ -343,11 +343,6 @@ void PageTestsGPIO::FuncUpdateUART()
                 PageTestsGPIO::self->txtRecvUART->SetValue(text);
                 text.Clear();
             }
-
-            if (text.Length())
-            {
-                text.Clear();
-            }
         }
     }
 }
