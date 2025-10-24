@@ -10,7 +10,7 @@ WindowScale::Range WindowScale::rangeY{ -2.5, 7.5, "Ic", "A"};
 
 
 WindowScale::WindowScale() :
-    Dialog(nullptr, "Шкала", wxDefaultPosition, { WIDTH, HEIGHT })
+    Dialog(nullptr, wxID_ANY, "Шкала", wxDefaultPosition, { WIDTH, HEIGHT })
 {
     int width = 200;
     int height = 200;

@@ -1,27 +1,25 @@
 ﻿// 2025/7/25 12:23:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Utils/GlobalFunctions.h"
-#include "Controls/ButtonsCombo.h"
 
 
-class Dialog : public ButtonsCombo
+class Dialog : public wxDialog
 {
 public:
 
-    Dialog(wxWindow *parent, const wxString &title, const wxPoint &pos = wxDefaultPosition, const wxSize & = wxDefaultSize) :
-        ButtonsCombo(parent, title, pos, 100, wxArrayString(), wxArrayString(), 1, title)
+    Dialog(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &pos = wxDefaultPosition, const wxSize &size = wxDefaultSize) :
+        wxDialog(parent, id, title, pos, size)
     {
         Bind(wxEVT_CHAR_HOOK, &Dialog::OnKeyDown, this);
     }
 
-    int ShowModal()
+    virtual int ShowModal() override
     {
-//        wxPoint pos = GF::GetCoordCenter(GetSize());
-//
-//        SetPosition(pos);
-//
-//        return wxDialog::ShowModal();
-        return 0;
+        wxPoint pos = GF::GetCoordCenter(GetSize());
+
+        SetPosition(pos);
+
+        return wxDialog::ShowModal();
     }
 
 protected:
@@ -37,7 +35,7 @@ private:
         if (event.GetKeyCode() == WXK_ESCAPE)
         {
             // Close();
-//            EndModal(wxID_CANCEL);
+            EndModal(wxID_CANCEL);
         }
         else
         {
