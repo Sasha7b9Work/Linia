@@ -133,13 +133,15 @@ void GF::SendCommandEvent(wxWindow *object, int type_event, int int_value)
 
 bool GF::IsBoardPCM()
 {
-    const wxSize size(MainWindow::WIDTH, MainWindow::HEIGHT);
+    return true;
 
-    wxSize screenSize = wxGetDisplaySize(); // Получить общее разрешение экрана
-    int width = screenSize.GetWidth();
-    int height = screenSize.GetHeight();
-
-    return (width == MainWindow::WIDTH) && (height == MainWindow::HEIGHT);
+//    const wxSize size(MainWindow::WIDTH, MainWindow::HEIGHT);
+//
+//    wxSize screenSize = wxGetDisplaySize(); // Получить общее разрешение экрана
+//    int width = screenSize.GetWidth();
+//    int height = screenSize.GetHeight();
+//
+//    return (width == MainWindow::WIDTH) && (height == MainWindow::HEIGHT);
 }
 
 

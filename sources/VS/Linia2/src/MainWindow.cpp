@@ -78,6 +78,8 @@ MainWindow::MainWindow(const wxString &title)
 
     wxWindow::SetPosition(SET::GUI::position.Get());
 
+
+
     Bind(wxEVT_CHAR_HOOK, &MainWindow::OnEventKeyHook, this);
 
     {
@@ -86,6 +88,8 @@ MainWindow::MainWindow(const wxString &title)
         if (GF::IsBoardPCM())
         {
             SetSize(size);
+
+            SetSize(wxGetDisplaySize());
 
             ShowFullScreen(true);
         }
