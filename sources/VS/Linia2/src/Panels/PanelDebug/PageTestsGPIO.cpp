@@ -344,7 +344,7 @@ void PageTestsGPIO::FuncUpdateUART()
                 text.Clear();
             }
 
-            if (text.Length() > 50)
+            if (text.Length())
             {
                 text.Clear();
             }
