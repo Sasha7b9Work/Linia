@@ -249,7 +249,7 @@ void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 void MainWindow::OnAbout(wxCommandEvent &WXUNUSED(event))
 {
     wxBoxSizer *topsizer;
-    Dialog dlg(this, wxID_ANY, wxString(_("About")));
+    Dialog dlg(this, wxString(_("About")));
 
     topsizer = new wxBoxSizer(wxVERTICAL);
 

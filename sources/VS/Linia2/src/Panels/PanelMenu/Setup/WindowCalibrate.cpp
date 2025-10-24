@@ -7,7 +7,7 @@
 
 
 WindowCalibrate::WindowCalibrate() :
-    Dialog(nullptr, wxID_ANY, "Калибровка", wxDefaultPosition, {WIDTH, HEIGHT})
+    Dialog(nullptr, "Калибровка", wxDefaultPosition, {WIDTH, HEIGHT})
 {
     int d = 20;
 

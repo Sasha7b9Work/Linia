@@ -6,7 +6,7 @@
 
 
 WindowCorretionZero::WindowCorretionZero() :
-    Dialog(nullptr, wxID_ANY, "Коррекция смещения нуля", wxDefaultPosition, { WIDTH, HEIGHT })
+    Dialog(nullptr, "Коррекция смещения нуля", wxDefaultPosition, { WIDTH, HEIGHT })
 {
     int d = 10;
     const int w = WIDTH / 2 - 3 * d;
