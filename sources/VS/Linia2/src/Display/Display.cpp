@@ -6,6 +6,7 @@
 #include "Utils/SystemDepend.h"
 #include "MainWindow.h"
 #include "Utils/Timer.h"
+#include "Panels/PanelTable.h"
 
 
 Display *Display::self = nullptr;
@@ -38,6 +39,10 @@ Display::Display(wxWindow *parent) :
     CreateEntities();
 
     panel_errors = new PanelErrors(this);
+
+    new PanelTable(this);
+
+    PanelTable::self->Hide();
 
     Init();
 }

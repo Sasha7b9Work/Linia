@@ -1,6 +1,7 @@
 ﻿// 2025/7/12 17:38:54 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelMenu/DialogTable.h"
+#include "Panels/PanelTable.h"
 
 
 DialogTable *DialogTable::self = nullptr;
@@ -8,8 +9,8 @@ DialogTable *DialogTable::self = nullptr;
 
 const pchar DialogTable::BTN_SAVE = "Сохранить";
 const pchar DialogTable::BTN_DELETE = "Удалить";
-const pchar DialogTable::BTN_EXPAND = "Развернуть";
-const pchar DialogTable::BTN_COLLAPSE = "Свернуть";
+const pchar DialogTable::BTN_EXPAND = "Показать";
+const pchar DialogTable::BTN_COLLAPSE = "Скрыть";
 
 
 DialogTable::DialogTable() :
@@ -22,9 +23,11 @@ DialogTable::DialogTable() :
         },
         BTN_EXPAND, []()
         {
+            PanelTable::self->Show();
         },
         BTN_COLLAPSE, []()
         {
+            PanelTable::self->Hide();
         }
     )
 {
