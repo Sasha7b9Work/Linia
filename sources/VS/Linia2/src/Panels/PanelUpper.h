@@ -3,10 +3,10 @@
 #include "Panels/Panel.h"
 
 
-class PanelModeUpper : public Panel
+class PanelUpper : public Panel
 {
 public:
-    PanelModeUpper(wxWindow* parent);
+    PanelUpper(wxWindow* parent);
 
-    static PanelModeUpper *self;
+    static PanelUpper *self;
 };

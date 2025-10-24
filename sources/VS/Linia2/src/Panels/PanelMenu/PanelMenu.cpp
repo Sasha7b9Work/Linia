@@ -15,7 +15,7 @@ PanelButtons *PanelButtons::self = nullptr;
 
 
 PanelButtons::PanelButtons(wxWindow* parent) :
-    Panel(parent, 0, MainWindow::HEIGHT - HEIGHT, MainWindow::WIDTH1 + MainWindow::WIDTH2, HEIGHT)
+    Panel(parent, 0, MainWindow::HEIGHT - HEIGHT, MainWindow::WIDTH_DRAW, HEIGHT)
 {
     self = this;
 

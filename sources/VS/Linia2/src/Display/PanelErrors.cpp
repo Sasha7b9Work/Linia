@@ -10,13 +10,13 @@ PanelErrors *PanelErrors::self = nullptr;
 
 
 PanelErrors::PanelErrors(wxWindow *parent) :
-    wxPanel(parent, wxID_ANY, wxDefaultPosition, { MainWindow::WIDTH2, 100 })
+    wxPanel(parent, wxID_ANY, wxDefaultPosition, { MainWindow::WIDTH_DRAW, 100 })
 {
     self = this;
 
     //    wxPanel *panel = new wxPanel(this);
 
-    text_ctrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, { 0, 0 }, { MainWindow::WIDTH2, 90 },
+    text_ctrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, { 0, 0 }, { MainWindow::WIDTH_DRAW, 90 },
         wxTE_MULTILINE | wxTE_READONLY | wxNO_BORDER | wxVSCROLL | wxTE_RICH);
     text_ctrl->SetForegroundColour(*wxWHITE);
     text_ctrl->SetBackgroundColour(*wxRED);

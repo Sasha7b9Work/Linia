@@ -14,7 +14,7 @@ PanelIndicator *PanelIndicator::self = nullptr;
 
 
 PanelIndicator::PanelIndicator(wxWindow* parent) :
-    Panel(parent, MainWindow::WIDTH1 + MainWindow::WIDTH2, PanelConfig::HEIGHT,
+    Panel(parent, MainWindow::WIDTH_DRAW, PanelConfig::HEIGHT,
         MainWindow::WIDTH3, HEIGHT)
 {
     Panel::SetName("PanelIndicator");

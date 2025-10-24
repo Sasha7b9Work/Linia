@@ -38,9 +38,9 @@ public:
     static const int WIDTH = 1024;     // Полная ширина - соотвествует разрешению экрана
     static const int HEIGHT = 768;     // Полная высота - соотвествует разрешению экрана
 
-    static const int WIDTH1 = 160;                      // Ширина первого столбика с панелями
-    static const int WIDTH2 = 660;                      // Ширина зоны отрисовки
-    static const int WIDTH3 = WIDTH - WIDTH1 - WIDTH2;  // Ширина последнего, третьего, столбика с панелями
+    static const int WIDTH1 = 160;                  // Ширина левой верхней зоны
+    static const int WIDTH_DRAW = 820;              // Ширина зоны отрисовки
+    static const int WIDTH3 = WIDTH - WIDTH_DRAW;   // Ширина последнего, третьего, столбика с панелями
 
     static const int HEIGHT1 = 75;
     static const int HEIGHT2 = 568;     // Столько занимает окно отрисовки, когда не развёрнуто на весь экран

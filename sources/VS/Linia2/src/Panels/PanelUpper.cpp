@@ -4,11 +4,11 @@
 #include "MainWindow.h"
 
 
-PanelModeUpper *PanelModeUpper::self = nullptr;
+PanelUpper *PanelUpper::self = nullptr;
 
 
-PanelModeUpper::PanelModeUpper(wxWindow* parent) :
-    Panel(parent, MainWindow::WIDTH1, 0, MainWindow::WIDTH2, MainWindow::HEIGHT1)
+PanelUpper::PanelUpper(wxWindow* parent) :
+    Panel(parent, MainWindow::WIDTH1, 0, MainWindow::WIDTH_DRAW - MainWindow::WIDTH1, MainWindow::HEIGHT1)
 {
     self = this;
 
