@@ -58,7 +58,7 @@ ModeMainWindow::E ModeMainWindow::current = ModeMainWindow::Standard;
 
 
 MainWindow::MainWindow(const wxString &title)
-    : wxFrame((wxFrame *)NULL, wxID_ANY, title, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE & ~wxMAXIMIZE_BOX)
+    : wxFrame((wxFrame *)NULL, wxID_ANY, title, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE | wxSTAY_ON_TOP)
 {
     self = this;
 
