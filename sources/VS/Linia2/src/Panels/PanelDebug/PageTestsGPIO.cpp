@@ -551,8 +551,8 @@ void PageTestsGPIO::Init()
 {
     if (!_thread)
     {
-        UART::RecvCallback::Store();
-        UART::RecvCallback::Set(FuncRecvUART);
+//        UART::RecvCallback::Store();
+//        UART::RecvCallback::Set(FuncRecvUART);
 
         thread_is_running = true;
         _thread = new std::thread(ThreadFunc);
@@ -571,7 +571,7 @@ void PageTestsGPIO::DeInit()
  
     if (_thread)
     {
-        UART::RecvCallback::Restore();
+//        UART::RecvCallback::Restore();
 
         while (_thread->joinable())
         {
