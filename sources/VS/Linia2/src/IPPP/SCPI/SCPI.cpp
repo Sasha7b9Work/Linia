@@ -41,6 +41,10 @@ void SCPI::OnEventCallback(uint8 byte)
     {
         symbol = (char)std::toupper((int)byte);
     }
+    else
+    {
+        symbol &= 0x7F;
+    }
 
     ring_buffer.Push(symbol);
 }
