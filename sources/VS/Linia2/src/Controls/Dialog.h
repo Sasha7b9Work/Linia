@@ -4,27 +4,25 @@
 #include "MainWindow.h"
 
 
-class Dialog : public wxDialog
+class Dialog : public wxPopupWindow
 {
 public:
 
-    Dialog(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &pos = wxDefaultPosition, const wxSize &size = wxDefaultSize) :
-        wxDialog(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE | wxSTAY_ON_TOP)
+    Dialog(wxWindow *parent, wxWindowID /*id*/, const wxString &_title, const wxPoint &pos = wxDefaultPosition, const wxSize &size = wxDefaultSize) :
+//        wxPopupWindow(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE | wxSTAY_ON_TOP)
+        wxPopupWindow(parent),
+        title(_title)
     {
-        Bind(wxEVT_CHAR_HOOK, &Dialog::OnKeyDown, this);
-    }
-
-    virtual int ShowModal() override
-    {
-        wxPoint pos = GF::GetCoordCenter(GetSize());
+        SetSize(size);
 
         SetPosition(pos);
 
-        int result = wxDialog::ShowModal();
+        Bind(wxEVT_CHAR_HOOK, &Dialog::OnKeyDown, this);
+    }
 
-        MainWindow::self->Raise();
-
-        return result;
+    void ShowModal()
+    {
+        Show();
     }
 
 protected:
@@ -40,11 +38,13 @@ private:
         if (event.GetKeyCode() == WXK_ESCAPE)
         {
             // Close();
-            EndModal(wxID_CANCEL);
+//            EndModal(wxID_CANCEL);
         }
         else
         {
             event.Skip();
         }
     }
+
+    wxString title;
 };
