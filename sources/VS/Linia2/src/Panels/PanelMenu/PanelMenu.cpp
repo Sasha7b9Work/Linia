@@ -55,9 +55,7 @@ void PanelButtons::OnEventButton(wxCommandEvent &event)
 
     if (id == btnFile->GetId())
     {
-        DialogFile *dialog = new DialogFile();
-
-        dialog->ShowModal();
+        DialogFile().ShowModal();
     }
     else if (id == btnTest->GetId())
     {
