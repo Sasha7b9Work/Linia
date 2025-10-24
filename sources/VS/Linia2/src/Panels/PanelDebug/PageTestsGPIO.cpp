@@ -228,7 +228,9 @@ void PageTestsGPIO::OnEventButton(wxCommandEvent &event)
     }
     else if (id == btnSendUART->GetId())
     {
+        wxString message = wxString::Format("%s", PageTestsGPIO::self->txtSendUART->GetValue().c_str().AsChar());
 
+        UART::SendBuffer(message.GetData().AsChar(), (int)(std::strlen(message.GetData().AsChar()) + 1));
     }
     else if (id == btnReturn->GetId())
     {
