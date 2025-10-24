@@ -83,19 +83,15 @@ MainWindow::MainWindow(const wxString &title)
     Bind(wxEVT_CHAR_HOOK, &MainWindow::OnEventKeyHook, this);
 
     {
-        const wxSize size(WIDTH, HEIGHT);
-
         if (GF::IsBoardPCM())
         {
-            SetSize(size);
-
-            SetSize(wxGetDisplaySize());
+            SetSize({ WIDTH, HEIGHT });
 
             ShowFullScreen(true);
         }
         else
         {
-            SetClientSize(size);
+            SetClientSize({ WIDTH, HEIGHT });
 
             SetWindowStyle(GetWindowStyle() & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX));
         }
