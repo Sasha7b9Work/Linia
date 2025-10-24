@@ -60,7 +60,7 @@ bool SCPI::FuncPinIn(pchar command)
 
 bool SCPI::FuncLog(pchar command)
 {
-    return FuncLogMessage("LOG", command);
+    return FuncLogMessage("LOG    ", command);
 }
 
 
@@ -72,7 +72,7 @@ bool SCPI::FuncWarning(pchar command)
 
 bool SCPI::FuncError(pchar command)
 {
-    return FuncLogMessage("ERROR", command);
+    return FuncLogMessage("ERROR  ", command);
 }
 
 
