@@ -8,11 +8,18 @@
 namespace SCPI
 {
     static bool FuncPinIn(pchar);
+    static bool FuncLog(pchar);
+    static bool FuncWarning(pchar);
+    static bool FuncError(pchar);
+    static bool FuncLogMessage(pchar type, pchar message);
 
     StructSCPI head[] =
     {
-        { "PININ",    FuncPinIn,    nullptr },
-        { nullptr,    nullptr,      nullptr }
+        { "PININ",    FuncPinIn,   nullptr },
+        { "LOG",      FuncLog,     nullptr },
+        { "WARNING",  FuncWarning, nullptr },
+        { "ERROR",    FuncError,   nullptr },
+        { nullptr,    nullptr,     nullptr }
     };
 }
 
@@ -48,4 +55,30 @@ bool SCPI::FuncPinIn(pchar command)
     }
 
     return false;
+}
+
+
+bool SCPI::FuncLog(pchar command)
+{
+    return FuncLogMessage("LOG", command);
+}
+
+
+bool SCPI::FuncWarning(pchar command)
+{
+    return FuncLogMessage("WARNING", command);
+}
+
+
+bool SCPI::FuncError(pchar command)
+{
+    return FuncLogMessage("ERROR", command);
+}
+
+
+bool SCPI::FuncLogMessage(pchar type, pchar message)
+{
+    Log::LogMCU(type, message);
+
+    return true;
 }

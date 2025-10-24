@@ -28,4 +28,7 @@ namespace Log
     void WriteTrace(pchar file, int line, pchar function, pchar format, ...);
 
     void ErrorTrace(pchar file, int line, pchar function, pchar format, ...);
+
+    // Вывод сообщения от stm32
+    void LogMCU(pchar type, pchar message);
 }
