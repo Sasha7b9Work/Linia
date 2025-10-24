@@ -1,10 +1,11 @@
 ﻿// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Panels/PanelMenu/PanelMenu.h"
 
-#pragma warning(push, 0)
-#define WIN32_LEAN_AND_MEAN
-#include <wx/wx.h>
-#pragma warning(pop)
+//#pragma warning(push, 0)
+//#define WIN32_LEAN_AND_MEAN
+//#include <wx/wx.h>
+//#pragma warning(pop)
 
 
 struct ModeMainWindow
@@ -43,8 +44,7 @@ public:
     static const int WIDTH3 = WIDTH - WIDTH_DRAW;   // Ширина последнего, третьего, столбика с панелями
 
     static const int HEIGHT_HI = 75;
-    static const int HEIGHT_DRAW = 660;             // Столько занимает окно отрисовки, когда не развёрнуто на весь экран
-
+    static const int HEIGHT_DRAW = HEIGHT - HEIGHT_HI - PanelButtons::HEIGHT;
 
     MainWindow(const wxString &title);
 
