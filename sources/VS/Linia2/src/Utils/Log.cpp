@@ -78,6 +78,8 @@ void Log::WriteLine(pchar line)
     log_file.AddLine(line);
 
     log_file.Write();
+
+    std::cerr << line << std::endl;
 }
 
 
@@ -122,8 +124,6 @@ void Log::Error(pchar file, int line, pchar format, ...)
         ConsoleRS232::self->AddLine(text_string.c_str());
 
         WriteLine(text_string.c_str());
-
-        std::cerr << text_string.c_str() << std::endl;
     }
 
     mutex.unlock();
@@ -147,8 +147,6 @@ void Log::ErrorTrace(pchar file, int line, pchar function, pchar format, ...)
         ConsoleRS232::self->AddLine(text_string.c_str());
 
         WriteLine(text_string.c_str());
-
-        std::cerr << text_string.c_str() << std::endl;
     }
 
     mutex.unlock();
@@ -175,8 +173,6 @@ void Log::Write(pchar file, int line, pchar format, ...)
         }
 
         WriteLine(text_string.c_str());
-
-        std::cout << text_string.c_str() << std::endl;
     }
 
     mutex.unlock();
@@ -188,8 +184,6 @@ void Log::LogMCU(pchar type, pchar message)
     char buffer[1024];
 
     std::sprintf(buffer, "%s %s", type, message);
-
-    LOG_WRITE("message %s", message);
 
     WriteLine(buffer);
 }
@@ -215,8 +209,6 @@ void Log::WriteTrace(pchar file, int line, pchar function, pchar format, ...)
         }
 
         WriteLine(text_string.c_str());
-
-        std::cout << text_string.c_str() << std::endl;
     }
 
     mutex.unlock();
