@@ -12,7 +12,7 @@ Display *Display::self = nullptr;
 
 
 Display::Display(wxWindow *parent) :
-    Panel(parent, 0, MainWindow::HEIGHT1, MainWindow::WIDTH_DRAW, MainWindow::HEIGHT2)
+    Panel(parent, 0, MainWindow::HEIGHT1, MainWindow::WIDTH_DRAW, MainWindow::HEIGHT_DRAW)
 {
     self = this;
 
@@ -67,7 +67,7 @@ void Display::FullScreen(bool full)
 void Display::Init()
 {
     int width = full_screen ? MainWindow::WIDTH : MainWindow::WIDTH_DRAW;
-    int height = full_screen ? MainWindow::HEIGHT : MainWindow::HEIGHT2;
+    int height = full_screen ? MainWindow::HEIGHT : MainWindow::HEIGHT_DRAW;
 
     Panel::SetSize({ width, height });
 

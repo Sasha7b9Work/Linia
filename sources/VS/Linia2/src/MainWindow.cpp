@@ -13,7 +13,6 @@
 #include "Display/Display.h"
 #include "Panels/PanelIndicator.h"
 #include "Panels/PanelModeLower.h"
-#include "Panels/PanelTable.h"
 #include "Panels/PanelMenu/PanelMenu.h"
 #include "Panels/PanelDebug/PanelDebug.h"
 #include "Panels/PanelReferenceGraphs.h"
@@ -108,8 +107,6 @@ MainWindow::MainWindow(const wxString &title)
     new PanelIndicator(this);
 
     new PanelModeLower(this);
-
-    new PanelTable(this);
 
     new PanelButtons(this);
 
@@ -277,7 +274,6 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
     Display::self->Show(mode == ModeMainWindow::Standard || mode == ModeMainWindow::FullGraph);
     PanelIndicator::self->Show(mode == ModeMainWindow::Standard);
     PanelModeLower::self->Show(mode == ModeMainWindow::Standard);
-    PanelTable::self->Show(mode == ModeMainWindow::Standard);
     PanelButtons::self->Show(mode == ModeMainWindow::Standard);
 
     PanelDebug::self->Show(mode == ModeMainWindow::Debug);
