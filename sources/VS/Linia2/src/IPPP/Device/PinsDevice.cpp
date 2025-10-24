@@ -37,7 +37,7 @@ pchar PinDevice::Name() const
         "20N"
     };
 
-    if (value < Count)
+    if (value >= 0 &&value < Count)
     {
         return names[value];
     }
