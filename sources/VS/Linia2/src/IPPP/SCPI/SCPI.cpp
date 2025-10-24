@@ -37,7 +37,7 @@ void SCPI::OnEventCallback(uint8 byte)
 {
     char symbol = (char)std::toupper((int)byte);
 
-    LOG_WRITE("%02X", symbol);
+    LOG_WRITE("%02X %c", symbol, symbol);
 
     ring_buffer.Push(symbol);
 }
