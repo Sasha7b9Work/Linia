@@ -11,10 +11,10 @@
 #include "Panels/PanelMenu/DialogReport.h"
 
 
-PanelButtons *PanelButtons::self = nullptr;
+PanelMenu *PanelMenu::self = nullptr;
 
 
-PanelButtons::PanelButtons(wxWindow* parent) :
+PanelMenu::PanelMenu(wxWindow* parent) :
     Panel(parent, 0, MainWindow::HEIGHT - HEIGHT, MainWindow::WIDTH_DRAW, HEIGHT)
 {
     self = this;
@@ -45,11 +45,11 @@ PanelButtons::PanelButtons(wxWindow* parent) :
         *structs[i].button = new wxButton(this, wxID_ANY, structs[i].label, {i * delta, 0}, {delta - 3, Panel::GetSize().y - 3});
     }
 
-    Bind(wxEVT_BUTTON, &PanelButtons::OnEventButton, this);
+    Bind(wxEVT_BUTTON, &PanelMenu::OnEventButton, this);
 }
 
 
-void PanelButtons::OnEventButton(wxCommandEvent &event)
+void PanelMenu::OnEventButton(wxCommandEvent &event)
 {
     int id = event.GetId();
 
@@ -92,7 +92,7 @@ void PanelButtons::OnEventButton(wxCommandEvent &event)
 }
 
 
-int PanelButtons::NumButtons() const
+int PanelMenu::NumButtons() const
 {
 //    return SET::GUI::debug_mode.Get() ? 9 : 8;
     return 9;

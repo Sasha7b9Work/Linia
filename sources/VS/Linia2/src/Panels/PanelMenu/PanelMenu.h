@@ -3,15 +3,15 @@
 #include "Panels/Panel.h"
 
 
-class PanelButtons : public Panel
+class PanelMenu : public Panel
 {
 public:
 
     static const int HEIGHT = 35;
 
-    PanelButtons(wxWindow *parent);
+    PanelMenu(wxWindow *parent);
 
-    static PanelButtons *self;
+    static PanelMenu *self;
 
 private:
 

@@ -44,7 +44,7 @@ public:
     static const int WIDTH3 = WIDTH - WIDTH_DRAW;   // Ширина последнего, третьего, столбика с панелями
 
     static const int HEIGHT_HI = 75;
-    static const int HEIGHT_DRAW = HEIGHT - HEIGHT_HI - PanelButtons::HEIGHT;
+    static const int HEIGHT_DRAW = HEIGHT - HEIGHT_HI - PanelMenu::HEIGHT;
 
     MainWindow(const wxString &title);
 
