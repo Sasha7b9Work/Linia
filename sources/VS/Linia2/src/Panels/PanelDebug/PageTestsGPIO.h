@@ -15,16 +15,23 @@ public:
     // Вызывается при заходе на панель отадки
     void Init();
 
-    // Вызывается при открытой панели отладки
-    void Update();
+    bool IsInit() const;
 
     // Вызывается при выходе из панели отладки
     void DeInit();
 
+    // Вызывается при открытой панели отладки
+    void Update();
+
     void Pack();
     void Unpack();
 
+    // Функция на приём символа по UART
+    static void FuncOnRecvUART(char);
+
 private:
+
+    bool is_init = false;
 
     wxButton *btnReturn = nullptr;
 
@@ -34,7 +41,7 @@ private:
     wxToggleButton *btnAutoUART = nullptr;    // По этой кнопке начинается автоматическая передача по UART
     wxTextCtrl *txtRecvUART = nullptr;
     wxTextCtrl *txtSendUART = nullptr;
-    std::vector<uint8> bytesUART;
+    std::vector<char> bytesUART;
     std::mutex mutex_str_UART;
 
     // SPI
@@ -109,7 +116,4 @@ private:
     static void ThreadFuncAutoUART();
     static bool thread_autoUART_is_running;
     std::thread *thread_UART = nullptr;
-
-    // Функция на приём символа по UART
-    static void FuncRecvUART(uint8);
 };

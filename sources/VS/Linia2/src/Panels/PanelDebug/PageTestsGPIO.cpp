@@ -307,13 +307,9 @@ void PageTestsGPIO::ThreadFunc()
 }
 
 
-void PageTestsGPIO::FuncRecvUART(uint8 byte)
+void PageTestsGPIO::FuncOnRecvUART(char byte)
 {
     PageTestsGPIO::self->mutex_str_UART.lock();
-    if (byte & 0x80)
-    {
-        byte &= 0x7F;
-    }
     PageTestsGPIO::self->bytesUART.push_back(byte);
     PageTestsGPIO::self->mutex_str_UART.unlock();
 }
@@ -321,7 +317,7 @@ void PageTestsGPIO::FuncRecvUART(uint8 byte)
 
 void PageTestsGPIO::FuncUpdateUART()
 {
-    std::vector<uint8> b;
+    std::vector<char> b;
     PageTestsGPIO::self->mutex_str_UART.lock();
     if (PageTestsGPIO::self->bytesUART.size())
     {
@@ -336,7 +332,7 @@ void PageTestsGPIO::FuncUpdateUART()
         {
             static wxString text;
 
-            char symbol = (char)b[i];
+            char symbol = b[i];
 
             if (symbol != 0x00)
             {
@@ -555,9 +551,6 @@ void PageTestsGPIO::Init()
 {
     if (!_thread)
     {
-        UART::RecvCallback::Store();
-        UART::RecvCallback::Set(FuncRecvUART);
-
         thread_is_running = true;
         _thread = new std::thread(ThreadFunc);
 #ifdef WIN32
@@ -566,17 +559,25 @@ void PageTestsGPIO::Init()
 #endif
         _thread->detach();
     }
+
+    is_init = true;
+}
+
+
+bool PageTestsGPIO::IsInit() const
+{
+    return is_init;
 }
 
 
 void PageTestsGPIO::DeInit()
 {
+    is_init = false;
+
     thread_is_running = false;
  
     if (_thread)
     {
-        UART::RecvCallback::Restore();
-
         while (_thread->joinable())
         {
         }
