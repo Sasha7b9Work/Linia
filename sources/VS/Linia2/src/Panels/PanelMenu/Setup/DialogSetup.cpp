@@ -15,43 +15,54 @@
 DialogSetup *DialogSetup::self = nullptr;
 
 
+#define SET_USER_SETTINGS "Настройки пользователя"
+#define SET_START         "Запуск"
+#define SET_AUTOSAVE      "Автосохранение"
+#define SET_CORR_ZERO     "Коррекция смещения нуля"
+#define SET_CALIB         "Калибровка"
+#define SET_TABLES_OFF    "Таблица смещений и коэффициентов"
+#define SET_PASSWORD      "Изменить пароль"
+#define SET_IP            "IP-адрес"
+#define SET_COMPUPTER     "Мой компьютер"
+
+
 DialogSetup::DialogSetup() :
     MenuDialog("Настройка", 275, { 2, 5 },
-        "Настройки пользователя", []()
+        SET_USER_SETTINGS, []()
         {
-            WindowUser().ShowOnWindow(DialogSetup::self->FindButton("Настройки пользователя"));
+            WindowUser().ShowOnWindow(DialogSetup::self->FindButton(SET_USER_SETTINGS));
         },
-        "Запуск", []()
+        SET_START, []()
         {
-            WindowLaunch().ShowOnWindow(DialogSetup::self->FindButton("Запуск"));
+            WindowLaunch().ShowOnWindow(DialogSetup::self->FindButton(SET_START));
         },
-        "Автосохранение", []()
+        SET_AUTOSAVE, []()
         {
-            WindowAutoSave().ShowOnWindow(DialogSetup::self->FindButton("Автосохранение"));
+            WindowAutoSave().ShowOnWindow(DialogSetup::self->FindButton(SET_AUTOSAVE));
         },
-        "Коррекция смещения нуля", []()
+        SET_CORR_ZERO, []()
         {
-            WindowCorretionZero().ShowOnWindow(DialogSetup::self->FindButton("Коррекция смещения нуля"));
+            WindowCorretionZero().ShowOnWindow(DialogSetup::self->FindButton(SET_CORR_ZERO));
         },
-        "Калибровка", []()
+        SET_CALIB, []()
         {
-            WindowCalibrate().ShowOnWindow(DialogSetup::self->FindButton("Калибровка"));
+            WindowCalibrate().ShowOnWindow(DialogSetup::self->FindButton(SET_CALIB));
         },
-        "Таблица смещений и коэффициентов", []()
+        SET_TABLES_OFF, []()
         {
-            WindowTableOffsets().ShowOnWindow(DialogSetup::self->FindButton("Таблица смещений и коэффициентов"));
+            WindowTableOffsets().ShowOnWindow(DialogSetup::self->FindButton(SET_TABLES_OFF));
         },
-        "Изменить пароль", []()
+        SET_PASSWORD, []()
         {
-            WindowPassword().ShowOnWindow(DialogSetup::self->FindButton("Изменить пароль"));
+            WindowPassword().ShowOnWindow(DialogSetup::self->FindButton(SET_PASSWORD));
         },
-        "IP-адрес", []()
+        SET_IP, []()
         {
-            WindowAddressIP().ShowOnWindow(DialogSetup::self->FindButton("IP-адрес"));
+            WindowAddressIP().ShowOnWindow(DialogSetup::self->FindButton(SET_IP));
         },
-        "Мой компьютер", []()
+        SET_COMPUPTER, []()
         {
-            WindowMyComputer().ShowOnWindow(DialogSetup::self->FindButton("Мой компьютер"));
+            WindowMyComputer().ShowOnWindow(DialogSetup::self->FindButton(SET_COMPUPTER));
         }
     )
 {
