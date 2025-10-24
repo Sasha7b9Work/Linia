@@ -73,6 +73,11 @@ bool SCPI::BufferSCPI::Update()
 
         bool result = SCPI::Update(message, SCPI::head);
 
+        if (!result)
+        {
+            LOG_ERROR("Error process message %s", message);
+        }
+
         RemoveMessage();
 
         return result;
