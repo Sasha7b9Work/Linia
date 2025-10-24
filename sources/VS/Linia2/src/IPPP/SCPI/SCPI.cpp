@@ -71,8 +71,6 @@ bool SCPI::BufferSCPI::Update()
     {
         pchar message = GetMessage();
 
-        LOG_WRITE("message : %s", message);
-
         bool result = SCPI::Update(message, SCPI::head);
 
         if (!result)
