@@ -60,6 +60,8 @@ bool SCPI::FuncPinIn(pchar command)
 
 bool SCPI::FuncLog(pchar command)
 {
+    LOG_WRITE("command %s", command);
+
     return FuncLogMessage("LOG", command);
 }
 

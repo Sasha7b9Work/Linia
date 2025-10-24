@@ -174,8 +174,6 @@ bool SCPI::Update(pchar message, StructSCPI *handler)
         {
             if (std::memcmp(handler->begin, message, len_begin) == 0)
             {
-                LOG_WRITE("find %s", handler->begin);
-
                 if (handler->func)
                 {
                     message += len_begin;
