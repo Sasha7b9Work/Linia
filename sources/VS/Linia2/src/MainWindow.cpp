@@ -7,7 +7,7 @@
 #include "Windows/ConsoleRS232.h"
 #include "MainWindow.h"
 #include "Panels/PanelName.h"
-#include "Panels/PanelModeUpper.h"
+#include "Panels/PanelUpper.h"
 #include "Panels/PanelConfig/PanelConfig.h"
 #include "Panels/PanelModel.h"
 #include "Display/Display.h"

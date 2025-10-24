@@ -1,6 +1,6 @@
 // 2025/6/1 17:14:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/PanelModeUpper.h"
+#include "Panels/PanelUpper.h"
 #include "MainWindow.h"
 
 
