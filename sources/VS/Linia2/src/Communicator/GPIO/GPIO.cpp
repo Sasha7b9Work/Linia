@@ -31,24 +31,24 @@ namespace GPIO
 {
     // Отдельные массивы для разных типов пинов
     static InputPinInfo g_input_pins[] = {
-        { { 8, "gpiochip1", nullptr, nullptr, "15:GPIO1-B0" }, false, nullptr },   // START     - pin 15 GPIO1_B0      0
-        { { 9, "gpiochip1", nullptr, nullptr, "21:GPIO1-B1" }, false, nullptr },   // STOP      - pin 21 GPIO1_B1      1
+        { {  8, "gpiochip1", nullptr, nullptr, "15:GPIO1-B0" }, false, nullptr },  // START     - pin 15 GPIO1_B0      0
+        { {  9, "gpiochip1", nullptr, nullptr, "21:GPIO1-B1" }, false, nullptr },  // STOP      - pin 21 GPIO1_B1      1
         { { 13, "gpiochip3", nullptr, nullptr, "16:GPIO3-B5" }, false, nullptr },  // DAT_F0    - pin 16 GPIO3_B5      2
         { { 14, "gpiochip3", nullptr, nullptr, "18:GPIO3-B6" }, false, nullptr },  // DAT_F1    - pin 18 GPIO3_B6      3
-        { { 2, "gpiochip1", nullptr, nullptr, "22:GPIO1-A2" }, false, nullptr },   // DAT_F2    - pin 22 GPIO1_A2      4
+        { {  2, "gpiochip1", nullptr, nullptr, "22:GPIO1-A2" }, false, nullptr },  // DAT_F2    - pin 22 GPIO1_A2      4
         { { 12, "gpiochip1", nullptr, nullptr, "24:GPIO1-B4" }, false, nullptr },  // DAT_F3    - pin 24 GPIO1_B4      5
-        { { 5, "gpiochip3", nullptr, nullptr, "36:GPIO3-A5" }, false, nullptr },   // FIFO_FULL - pin 36 GPIO3_A5      6
+        { {  5, "gpiochip3", nullptr, nullptr, "36:GPIO3-A5" }, false, nullptr },  // FIFO_FULL - pin 36 GPIO3_A5      6
 
         // \todo Проверить
-        { { 4, "gpiochip1", nullptr, nullptr, "11:GPIO1-A4" }, false, nullptr},   // KA        - pin 11 GPIO1_A4      7
-        { { 7, "gpiochip1", nullptr, nullptr, "13:GPIO1-A7" }, false, nullptr}    // KB        - pin 13 GPIO1_A7      8
+        { {  4, "gpiochip1", nullptr, nullptr, "11:GPIO1-A4" }, false, nullptr},   // KA        - pin 11 GPIO1_A4      7
+        { {  7, "gpiochip1", nullptr, nullptr, "13:GPIO1-A7" }, false, nullptr}    // KB        - pin 13 GPIO1_A7      8
     };
 
     static OutputPinInfo g_output_pins[] = {
-        { { 3, "gpiochip1", nullptr, nullptr, "32:GPIO1-A3" }},       // REQ_RD - pin 32 GPIO1_A3 0
+        { {  3, "gpiochip1", nullptr, nullptr, "32:GPIO1-A3" }},    // REQ_RD - pin 32 GPIO1_A3 0
 
         // \todo Проверить
-        { { 13, "gpiochip1", nullptr, nullptr, "26:GPIO1-B5" }}       // SPI_CS - pin 26 GPIO1_B5 1
+        { { 13, "gpiochip1", nullptr, nullptr, "26:GPIO1-B5" }}     // SPI_CS - pin 26 GPIO1_B5 1
     };
 
     // Маппинг enum Pin::Type на индексы в массивах
