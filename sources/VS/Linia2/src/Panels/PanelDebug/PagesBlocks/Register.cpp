@@ -16,7 +16,7 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip) :
 {
     wxPanel::SetName("Register");
 
-    new wxStaticText(this, wxID_ANY, _title + " " + chip->GetNameSTM32(), {10, 10});
+    new wxStaticText(this, wxID_ANY, _title + " " + chip->GetNameDevice(), {10, 10});
 
     wxSize size_button{ 90, 25 };
 
@@ -187,14 +187,14 @@ void Register::OnEventButton(wxCommandEvent &event)
 
     if (id == btnSend->GetId())
     {
-        chip->WriteValueToSTM32(GetValue());
+        chip->WriteValueToDevice(GetValue());
     }
 }
 
 
 void Register::OnEventTimerAutoSend(wxTimerEvent &)
 {
-    chip->WriteValueToSTM32(GetValue());
+    chip->WriteValueToDevice(GetValue());
 }
 
 
@@ -469,11 +469,11 @@ void CheckBoxBit::OnEventLeftClick(wxMouseEvent &)
 
 void Register::Pack()
 {
-    Config::WriteUint(chip->GetNameSTM32(), GetValue());
+    Config::WriteUint(chip->GetNameDevice(), GetValue());
 }
 
 
 void Register::Unpack()
 {
-    SetValue(Config::ReadUint(chip->GetNameSTM32()));
+    SetValue(Config::ReadUint(chip->GetNameDevice()));
 }

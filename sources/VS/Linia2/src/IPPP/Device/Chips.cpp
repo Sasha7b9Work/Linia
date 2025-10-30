@@ -34,7 +34,7 @@ DAC::DAC(E _v) : v(_v)
 }
 
 
-wxString DAC::GetNameSTM32() const
+wxString DAC::GetNameDevice() const
 {
     return wxString::Format("DAC%d", (int)v);
 }
@@ -52,7 +52,7 @@ REG::REG(E _v) : v(_v)
 }
 
 
-wxString REG::GetNameSTM32() const
+wxString REG::GetNameDevice() const
 {
     return wxString::Format("REG%d", (int)v);
 }
@@ -80,7 +80,7 @@ FPGA::FPGA(E _v) : v(_v)
 }
 
 
-wxString FPGA::GetNameSTM32() const
+wxString FPGA::GetNameDevice() const
 {
     return wxString::Format("FPGA%d", (int)v);
 }
@@ -99,7 +99,13 @@ int FPGA::BitDepth() const
 }
 
 
-void Chip::WriteValueToSTM32(uint value) const
+void Chip::WriteValueToDevice(uint value) const
 {
-    IDevice::impl->SendCommand(":%s:WRITE %X", GetNameSTM32().c_str().AsChar(), value);
+    IDevice::impl->SendCommand(":%s:WRITE %X", GetNameDevice().c_str().AsChar(), value);
+}
+
+
+void Chip::WriteBitDepthToDevice() const
+{
+    IDevice::impl->SendCommand(":%s:LENGTH %d", GetNameDevice().c_str().AsChar(), BitDepth());
 }

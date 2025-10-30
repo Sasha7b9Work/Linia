@@ -2,20 +2,24 @@
 #pragma once
 
 
+// Эта структура описывает регистр ПЛИС, регистр или ЦАП блока
 struct Chip
 {
     virtual ~Chip() { }
 
     static void Init();
 
-    // Под этим именем она обозначена в плате контроллера stm32
-    virtual wxString GetNameSTM32() const = 0;
+    // Под этим именем она обозначена в плате контроллера
+    virtual wxString GetNameDevice() const = 0;
 
     // Ширина в битах
     virtual int BitDepth() const = 0;
 
     // Послать значение в контроллер
-    void WriteValueToSTM32(uint) const;
+    void WriteValueToDevice(uint) const;
+
+    // Послать в контроллер размер регистра
+    void WriteBitDepthToDevice() const;
 };
 
 
@@ -35,7 +39,7 @@ struct DAC : public Chip
 
     DAC(E i);
 
-    virtual wxString GetNameSTM32() const override;
+    virtual wxString GetNameDevice() const override;
 
     virtual int BitDepth() const override;
 
@@ -60,7 +64,7 @@ struct REG : public Chip
 
     REG(E i);
 
-    virtual wxString GetNameSTM32() const override;
+    virtual wxString GetNameDevice() const override;
 
     virtual int BitDepth() const override;
 
@@ -82,7 +86,7 @@ struct FPGA : public Chip
 
     FPGA(E i);
 
-    virtual wxString GetNameSTM32() const override;
+    virtual wxString GetNameDevice() const override;
 
     virtual int BitDepth() const override;
 
