@@ -39,14 +39,14 @@ else()
     if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
         include_directories(
             ./src
-            ../../ThirdParty/wxWidgets/generated/lib/wx/include/gtk3-unicode-static-3.2
+            ../../ThirdParty/wxWidgets/generated/lib/wx/include/gtk3-unicode-static-3.3
             ../../ThirdParty/wxWidgets/include
         )
     else()
         include_directories(
             ./arm64_plugs
             ./src
-            ../../ThirdParty/wxWidgets/generated/lib/wx/include/gtk3-unicode-static-3.2
+            ../../ThirdParty/wxWidgets/generated/lib/wx/include/gtk3-unicode-static-3.3
             ../../ThirdParty/wxWidgets/include
         )
     endif()
