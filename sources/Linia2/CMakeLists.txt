@@ -11,8 +11,8 @@ if(WIN32)
         src
         arm64_plugs
         linux_plugs
-        ../../ThirdParty/wxWidgets/include
-        ../../ThirdParty/wxWidgets/generated/lib/vc_lib/mswud
+        ../ThirdParty/wxWidgets/include
+        ../ThirdParty/wxWidgets/generated/lib/vc_lib/mswud
     )
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall -MT -std:c++20")
@@ -39,20 +39,20 @@ else()
     if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
         include_directories(
             ./src
-            ../../ThirdParty/wxWidgets/generated/lib/wx/include/gtk3-unicode-static-3.3
-            ../../ThirdParty/wxWidgets/include
+            ../ThirdParty/wxWidgets/generated/lib/wx/include/gtk3-unicode-static-3.3
+            ../ThirdParty/wxWidgets/include
         )
     else()
         include_directories(
             ./arm64_plugs
             ./src
-            ../../ThirdParty/wxWidgets/generated/lib/wx/include/gtk3-unicode-static-3.3
-            ../../ThirdParty/wxWidgets/include
+            ../ThirdParty/wxWidgets/generated/lib/wx/include/gtk3-unicode-static-3.3
+            ../ThirdParty/wxWidgets/include
         )
     endif()
 
     link_directories(
-        ../../ThirdParty/wxWidgets/generated/lib
+        ../ThirdParty/wxWidgets/generated/lib
     )
 
     add_definitions(-D__WXGTK__ -D__WXGTK3__ -D_FILE_OFFSET_BITS=64)
