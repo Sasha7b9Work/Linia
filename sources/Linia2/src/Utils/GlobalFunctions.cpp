@@ -201,12 +201,14 @@ wxString GF::GetSelfIP()
 {
     struct ifaddrs *ifaddr, *ifa;
     int family, s;
-    char host[NI_MAXHOST];
+    char host[NI_MAXHOST] = { '\0' };
 
     if (getifaddrs(&ifaddr) == -1)
     {
         return "ERROR getifaddrs()";
     }
+
+    wxString result;
 
     // Проходим по всем интерфейсам
     for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next)
@@ -221,15 +223,22 @@ wxString GF::GetSelfIP()
         {
             s = getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in),
                 host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
+
             if (s != 0)
             {
-                std::cout << "getnameinfo() failed: " << gai_strerror(s) << std::endl;
+                LOG_ERROR("getnameinfo() failed: %s", gai_strerror(s));
+
                 continue;
             }
 
-            std::cout << "Interface: " << ifa->ifa_name << "\tAddress: " << host << std::endl;
+            result += ifa->ifa_name;
+            result += " ";
+            result += host;
+            result += " ";
         }
     }
 
     freeifaddrs(ifaddr);
+
+    return result;
 }
