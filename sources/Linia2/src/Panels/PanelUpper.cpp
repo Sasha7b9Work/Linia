@@ -13,7 +13,11 @@ PanelUpper::PanelUpper(wxWindow* parent) :
 {
     self = this;
 
-    new wxStaticText(this, wxID_ANY, wxString::Format("ver. %d : %s", VERSION_BUILD, DATE_BUILD), { 460, 53 });
+    new wxStaticText(this, wxID_ANY, wxString::Format("ver. %d : %s", VERSION_BUILD, DATE_BUILD), { 460, 56 });
 
-    new wxStaticText(this, wxID_ANY, wxString::Format("IP : %s", GF::GetSelfIP().c_str().AsChar()), {10, 53});
+#ifndef WIN32
+
+    new wxStaticText(this, wxID_ANY, wxString::Format("IP : %s", GF::GetSelfIP().c_str().AsChar()), {10, 56});
+
+#endif
 }
