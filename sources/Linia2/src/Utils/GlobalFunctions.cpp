@@ -231,10 +231,13 @@ wxString GF::GetSelfIP()
                 continue;
             }
 
-            result += ifa->ifa_name;
-            result += " ";
-            result += host;
-            result += " ";
+            if (wxString("lo") != ifa->ifa_name)
+            {
+                result += ifa->ifa_name;
+                result += " ";
+                result += host;
+                result += " ";
+            }
         }
     }
 
