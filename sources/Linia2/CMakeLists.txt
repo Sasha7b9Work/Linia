@@ -191,6 +191,7 @@ if(WIN32)
     target_link_libraries(${PROJECT_NAME} Setupapi.lib)
     target_link_libraries(${PROJECT_NAME} Comctl32.lib)
     target_link_libraries(${PROJECT_NAME} Rpcrt4.lib)
+    target_link_libraries(${PROJECT_NAME} iphlpapi.lib)
 
     # Копируем в рабочий каталог
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy $(OutputPath)\\$(PROJECT_NAME) . /Y)

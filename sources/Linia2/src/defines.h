@@ -46,13 +46,17 @@
 #include <atomic>
 #include <filesystem>
 
-#include <ifaddrs.h>
-#include <netdb.h>
-
-
-#ifndef WIN32
-#include <gtk/gtk.h>
+#ifdef WIN32
+    #define NDIS_MINIPORT_MAJOR_VERSION 0
+    #include <winsock2.h>
+    #include <ws2tcpip.h>
+    #include <iphlpapi.h>
+#else
+    #include <ifaddrs.h>
+    #include <netdb.h>
+    #include <gtk/gtk.h>
 #endif
+
 
 #pragma warning(pop)
 

@@ -201,7 +201,89 @@ wxString GF::GetSelfIP()
 {
 #ifdef WIN32
 
-    return "";
+    struct Interface
+    {
+        std::wstring name;
+        std::string ipv4;
+        std::string ipv6;
+    };
+
+    std::vector<Interface> interfaces;
+
+    // Windows implementation
+    PIP_ADAPTER_ADDRESSES adapter_addresses = nullptr;
+    ULONG buffer_size = 15000;
+    DWORD result = 0;
+
+    // Получаем адаптеры (может потребоваться несколько попыток)
+    for (int i = 0; i < 3; ++i)
+    {
+        adapter_addresses = (PIP_ADAPTER_ADDRESSES)malloc(buffer_size);
+        if (!adapter_addresses)
+        {
+            return wxString(interfaces[0].ipv4);
+        }
+
+        result = GetAdaptersAddresses(AF_UNSPEC, 0, nullptr, adapter_addresses, &buffer_size);
+        if (result == ERROR_SUCCESS)
+        {
+            break;
+        }
+        else if (result == ERROR_BUFFER_OVERFLOW)
+        {
+            free(adapter_addresses);
+            adapter_addresses = nullptr;
+        }
+        else
+        {
+            free(adapter_addresses);
+            return wxString(interfaces[0].ipv4);
+        }
+    }
+
+    if (result != ERROR_SUCCESS)
+    {
+        free(adapter_addresses);
+        return wxString(interfaces[0].ipv4);
+    }
+
+    // Обходим адаптеры
+    for (PIP_ADAPTER_ADDRESSES adapter = adapter_addresses; adapter != nullptr; adapter = adapter->Next)
+    {
+        Interface iface;
+        iface.name = adapter->FriendlyName;
+
+        // Обходим адреса адаптера
+        for (PIP_ADAPTER_UNICAST_ADDRESS address = adapter->FirstUnicastAddress;
+            address != nullptr;
+            address = address->Next)
+        {
+
+            sockaddr *sa = address->Address.lpSockaddr;
+            if (sa->sa_family == AF_INET)
+            {
+                // IPv4
+                sockaddr_in *sin = (sockaddr_in *)sa;
+                char ip_str[INET_ADDRSTRLEN];
+                inet_ntop(AF_INET, &(sin->sin_addr), ip_str, INET_ADDRSTRLEN);
+                iface.ipv4 = ip_str;
+            }
+            else if (sa->sa_family == AF_INET6)
+            {
+                // IPv6
+                sockaddr_in6 *sin6 = (sockaddr_in6 *)sa;
+                char ip_str[INET6_ADDRSTRLEN];
+                inet_ntop(AF_INET6, &(sin6->sin6_addr), ip_str, INET6_ADDRSTRLEN);
+                iface.ipv6 = ip_str;
+            }
+        }
+
+        interfaces.push_back(iface);
+    }
+
+    free(adapter_addresses);
+
+    return wxString(interfaces[0].ipv4);
 
 #else
 
