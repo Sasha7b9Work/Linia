@@ -54,4 +54,7 @@ namespace GF
     bool IsBoardPCM();
 
     bool ApproxEqual(double, double);
+
+    // Получить ip-адрес устройства, на котором запущены
+    wxString GetSelfIP();
 }

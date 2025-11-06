@@ -195,3 +195,42 @@ bool GF::ApproxEqual(double a, double b)
         return b / a < epsilon;
     }
 }
+
+
+wxString GF::GetSelfIP()
+{
+    struct ifaddrs *ifaddr, *ifa;
+    int family, s;
+    char host[NI_MAXHOST];
+
+    if (getifaddrs(&ifaddr) == -1)
+    {
+        perror("getifaddrs");
+        return 1;
+    }
+
+    // Проходим по всем интерфейсам
+    for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next)
+    {
+        if (ifa->ifa_addr == NULL)
+            continue;
+
+        family = ifa->ifa_addr->sa_family;
+
+        // Отображаем IPv4 адреса
+        if (family == AF_INET)
+        {
+            s = getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in),
+                host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
+            if (s != 0)
+            {
+                std::cout << "getnameinfo() failed: " << gai_strerror(s) << std::endl;
+                continue;
+            }
+
+            std::cout << "Interface: " << ifa->ifa_name << "\tAddress: " << host << std::endl;
+        }
+    }
+
+    freeifaddrs(ifaddr);
+}

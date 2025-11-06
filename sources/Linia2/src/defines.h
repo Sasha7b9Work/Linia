@@ -46,6 +46,10 @@
 #include <atomic>
 #include <filesystem>
 
+#include <ifaddrs.h>
+#include <netdb.h>
+
+
 #ifndef WIN32
 #include <gtk/gtk.h>
 #endif
