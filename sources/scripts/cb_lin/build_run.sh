@@ -6,4 +6,4 @@ git pull
 ./build.sh
 kill -9 $(pidof Linia2)
 
-./start_x.sh
+#./start_x.sh
