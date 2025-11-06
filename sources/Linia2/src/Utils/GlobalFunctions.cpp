@@ -205,8 +205,7 @@ wxString GF::GetSelfIP()
 
     if (getifaddrs(&ifaddr) == -1)
     {
-        perror("getifaddrs");
-        return 1;
+        return "ERROR getifaddrs()";
     }
 
     // Проходим по всем интерфейсам
