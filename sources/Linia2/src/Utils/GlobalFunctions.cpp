@@ -233,8 +233,6 @@ wxString GF::GetSelfIP()
 
             if (wxString("lo") != ifa->ifa_name)
             {
-                result += ifa->ifa_name;
-                result += " ";
                 result += host;
                 result += " ";
             }
