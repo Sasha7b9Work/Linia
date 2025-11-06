@@ -199,6 +199,12 @@ bool GF::ApproxEqual(double a, double b)
 
 wxString GF::GetSelfIP()
 {
+#ifdef WIN32
+
+    return "";
+
+#else
+
     struct ifaddrs *ifaddr, *ifa;
     int family, s;
     char host[NI_MAXHOST] = { '\0' };
@@ -242,4 +248,6 @@ wxString GF::GetSelfIP()
     freeifaddrs(ifaddr);
 
     return result;
+
+#endif
 }
