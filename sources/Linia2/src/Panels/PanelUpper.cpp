@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Panels/PanelUpper.h"
 #include "MainWindow.h"
+#include "Utils/GlobalFunctions.h"
 
 
 PanelUpper *PanelUpper::self = nullptr;
@@ -13,4 +14,6 @@ PanelUpper::PanelUpper(wxWindow* parent) :
     self = this;
 
     new wxStaticText(this, wxID_ANY, wxString::Format("ver. %d : %s", VERSION_BUILD, DATE_BUILD), { 480, 53 });
+
+    new wxStaticText(this, wxID_ANY, GF::GetSelfIP(), { 10, 53 });
 }
