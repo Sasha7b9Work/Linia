@@ -235,33 +235,33 @@ bool UART::ConfigurePort()
         return false;
     }
 
-    int cbits = CS8, cpar = 0, ipar = IGNPAR, bstop = 0;
+    int cbits = CS8;
+    int cpar = 0;
+    int ipar = IGNPAR;
+    int bstop = 0;
 
-    if (strlen(UART_MODE) == 3)
+    switch (UART_MODE[0])
     {
-        switch (UART_MODE[0])
-        {
-        case '8': cbits = CS8; break; //-V1048
-        case '7': cbits = CS7; break;
-        case '6': cbits = CS6; break;
-        case '5': cbits = CS5; break;
-        default: cbits = CS8; break; //-V1048
-        }
+    case '8': cbits = CS8; break; //-V1048
+    case '7': cbits = CS7; break;
+    case '6': cbits = CS6; break;
+    case '5': cbits = CS5; break;
+    default: cbits = CS8; break; //-V1048
+    }
 
-        switch (UART_MODE[1])
-        {
-        case 'N': case 'n': cpar = 0; ipar = IGNPAR; break; //-V1048 //-V525
-        case 'E': case 'e': cpar = PARENB; ipar = INPCK; break;
-        case 'O': case 'o': cpar = (PARENB | PARODD); ipar = INPCK; break;
-        default: cpar = 0; ipar = IGNPAR; break; //-V1048
-        }
+    switch (UART_MODE[1])
+    {
+    case 'N': case 'n': cpar = 0; ipar = IGNPAR; break; //-V1048 //-V525
+    case 'E': case 'e': cpar = PARENB; ipar = INPCK; break;
+    case 'O': case 'o': cpar = (PARENB | PARODD); ipar = INPCK; break;
+    default: cpar = 0; ipar = IGNPAR; break; //-V1048
+    }
 
-        switch (UART_MODE[2])
-        {
-        case '1': bstop = 0; break;
-        case '2': bstop = CSTOPB; break;
-        default: bstop = 0; break;
-        }
+    switch (UART_MODE[2])
+    {
+    case '1': bstop = 0; break;
+    case '2': bstop = CSTOPB; break;
+    default: bstop = 0; break;
     }
 
     port_settings.c_cflag = cbits | cpar | bstop | CLOCAL | CREAD;

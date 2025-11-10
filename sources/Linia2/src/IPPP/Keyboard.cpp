@@ -23,8 +23,8 @@ namespace Keyboard
 
     struct StructPin
     {
-        PinIn *pin = nullptr;
         int64  event_time = 0;     // Время предыдущего изменения состояния. Если 0, то изменения не было
+        PinIn *pin = nullptr;
         bool   press = false;      // Предыдущее состояние. true - была нажата (переход из 0 в 1), false - была отпущена (переход из 1 в 0)
     };
 

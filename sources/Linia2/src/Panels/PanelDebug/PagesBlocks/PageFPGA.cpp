@@ -14,14 +14,14 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
     {
         Register *fpga0 = new RegFPGA(this, fpgas[0]);
 
-        std::vector<StructDescription> desc0;
+        std::vector<StructDescription> desc0; //-V827
 
-        std::vector<StructDescription::CommandStruct> commandsStart;
+        std::vector<StructDescription::CommandStruct> commandsStart; //-V826
         commandsStart.emplace_back(StructDescription::CommandStruct{ 0, "Однократный" });
         commandsStart.emplace_back(StructDescription::CommandStruct{ 1, "Автоматический" });
         desc0.emplace_back(StructDescription{ 8, 1, "з", "запуск", { true, commandsStart } });
 
-        std::vector<StructDescription::CommandStruct> commandsScan;
+        std::vector<StructDescription::CommandStruct> commandsScan; //-V827 //-V826
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0000, "Выключена" });
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0001, "SIN+" });
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0010, "SIN-" });
@@ -34,7 +34,7 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b1000, "ВАХ" });
         desc0.emplace_back(StructDescription{ 3, 4, "разв", "развёртка", { true, commandsScan } });
 
-        std::vector<StructDescription::CommandStruct> commandsCurvers;
+        std::vector<StructDescription::CommandStruct> commandsCurvers; //-V827 //-V826
         commandsCurvers.emplace_back(StructDescription::CommandStruct{ 0b000, "1" });
         commandsCurvers.emplace_back(StructDescription::CommandStruct{ 0b001, "2" });
         commandsCurvers.emplace_back(StructDescription::CommandStruct{ 0b010, "4" });
@@ -55,7 +55,7 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
 
         std::vector<StructDescription> desc1;
 
-        std::vector<StructDescription::CommandStruct> commandsDuration;
+        std::vector<StructDescription::CommandStruct> commandsDuration; //-V827 //-V826
         commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b000, "0.2 мс" });
         commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b001, "0.2 мс" });
         commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b010, "1.0 мс" });
@@ -76,14 +76,14 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
 
         std::vector<StructDescription> desc2;
 
-        std::vector<StructDescription::CommandStruct> commandsDuration;
+        std::vector<StructDescription::CommandStruct> commandsDuration; //-V827 //-V826
         commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b00, "10 мкс" });
         commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b01, "20 мкс" });
         commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b10, "50 мкс" });
         commandsDuration.emplace_back(StructDescription::CommandStruct{ 0b11, "100 мкс" });
         desc2.emplace_back(StructDescription{ 0, 2, "дл", "длит. имп. для IMP+, IMP-(большой ток)", { true, commandsDuration } });
 
-        std::vector<StructDescription::CommandStruct> commandsN;
+        std::vector<StructDescription::CommandStruct> commandsN; //-V827 //-V826
         commandsN.emplace_back(StructDescription::CommandStruct{ 0b001, "0" });
         commandsN.emplace_back(StructDescription::CommandStruct{ 0b001, "1" });
         commandsN.emplace_back(StructDescription::CommandStruct{ 0b010, "2" });

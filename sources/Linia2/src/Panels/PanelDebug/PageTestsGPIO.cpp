@@ -83,7 +83,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
         }
     }
 
-    wxStaticBox *boxFPGA = new wxStaticBox(this, wxID_ANY, "FPGA", { boxGPIO->GetPosition().x,
+    wxStaticBox *boxFPGA = new wxStaticBox(this, wxID_ANY, "FPGA", { boxGPIO->GetPosition().x, //-V807
         boxGPIO->GetPosition().y + boxGPIO->GetSize().y + 10 }, { 400, 270 });
 
     {

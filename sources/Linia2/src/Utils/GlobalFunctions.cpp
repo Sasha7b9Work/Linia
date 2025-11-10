@@ -201,15 +201,6 @@ wxString GF::GetSelfIP()
 {
 #ifdef WIN32
 
-    struct Interface
-    {
-        std::wstring name;
-        std::string ipv4;
-        std::string ipv6;
-    };
-
-    std::vector<Interface> interfaces;
-
     // Windows implementation
     PIP_ADAPTER_ADDRESSES adapter_addresses = nullptr;
     ULONG buffer_size = 15000;
@@ -221,7 +212,7 @@ wxString GF::GetSelfIP()
         adapter_addresses = (PIP_ADAPTER_ADDRESSES)malloc(buffer_size);
         if (!adapter_addresses)
         {
-            return wxString(interfaces[0].ipv4);
+            return "";
         }
 
         result = GetAdaptersAddresses(AF_UNSPEC, 0, nullptr, adapter_addresses, &buffer_size);
@@ -237,15 +228,24 @@ wxString GF::GetSelfIP()
         else
         {
             free(adapter_addresses);
-            return wxString(interfaces[0].ipv4);
+            return "";
         }
     }
 
     if (result != ERROR_SUCCESS)
     {
         free(adapter_addresses);
-        return wxString(interfaces[0].ipv4);
+        return "";
     }
+
+    struct Interface
+    {
+        std::wstring name;
+        std::string ipv4;
+        std::string ipv6;
+    };
+
+    std::vector<Interface> interfaces;
 
     // Обходим адаптеры
     for (PIP_ADAPTER_ADDRESSES adapter = adapter_addresses; adapter != nullptr; adapter = adapter->Next)

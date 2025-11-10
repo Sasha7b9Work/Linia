@@ -217,7 +217,7 @@ void ButtonsCombo::OnButtonClicked(wxCommandEvent &event)
             else
             {
                 int right_pop = pos.x + size.x;
-                int right_win = MainWindow::self->GetPosition().x + MainWindow::self->GetSize().x;
+                int right_win = MainWindow::self->GetPosition().x + MainWindow::self->GetSize().x; //-V807
 
                 if (right_pop >= right_win)
                 {
