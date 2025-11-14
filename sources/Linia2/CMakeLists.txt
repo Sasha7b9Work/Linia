@@ -11,11 +11,13 @@ if(WIN32)
         src
         arm64_plugs
         linux_plugs
-        ../ThirdParty/wxWidgets/include
-        ../ThirdParty/wxWidgets/generated/lib/vc_lib/mswud
+        ../ThirdParty/wxWidgets/include/
+        ../ThirdParty/wxWidgets/generated/lib/vc_lib/mswu
     )
+    
+    link_directories(../ThirdParty/wxWidgets/generated/lib/vc_lib)
 
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall -MT -std:c++20")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall -std:c++20")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS /STACK:10000000")
 
     add_compile_options(
@@ -176,22 +178,18 @@ set_source_files_properties(
 )
 
 if(WIN32)
-    target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_lib/wxbase33u)
-    target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_lib/wxbase33u_net)
-    target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_lib/wxmsw33u_core)
-    target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_lib/wxmsw33u_aui)
-    target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_lib/wxzlib)
-    target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_lib/wxregexu)
-    target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_lib/wxpng)
-
-    target_link_libraries(${PROJECT_NAME} WinMM.lib)
-    target_link_libraries(${PROJECT_NAME} Ws2_32.lib)
-    target_link_libraries(${PROJECT_NAME} version.lib)
-    target_link_libraries(${PROJECT_NAME} Imm32.Lib)
-    target_link_libraries(${PROJECT_NAME} Setupapi.lib)
-    target_link_libraries(${PROJECT_NAME} Comctl32.lib)
-    target_link_libraries(${PROJECT_NAME} Rpcrt4.lib)
-    target_link_libraries(${PROJECT_NAME} iphlpapi.lib)
+target_link_libraries(${PROJECT_NAME}
+    wxbase33u
+    wxmsw33u_core
+    wxbase33u_net
+    wxzlib
+    wxpng
+    Ws2_32
+    Comctl32
+    Rpcrt4
+    Setupapi
+    Iphlpapi
+)
 
     # Копируем в рабочий каталог
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy $(OutputPath)\\$(PROJECT_NAME) . /Y)
