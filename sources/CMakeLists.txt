@@ -75,8 +75,18 @@ else()
         -pthread
         -Wno-unknown-pragmas
         -Wno-write-strings
-        -g3                       # Без этого Code Blocks не останавливается на точках останова
-        -O0
+        -pipe
+#  Без оптимизации - лучше для отладки
+#       -g3                       # Без этого Code Blocks не останавливается на точках останова
+#       -O0
+
+# Максимальная оптимизация - релизная версия
+        -Ofast
+        -flto
+        -s
+        -g0
+        -fno-stack-protector
+        
     )
 endif()
 
