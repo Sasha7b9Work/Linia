@@ -40,7 +40,7 @@ else()
 
 # Максимальная оптимизация - релизная версия
         -Ofast
-        -flto
+#        -flto
         -s
         -g0
         -fno-stack-protector   
