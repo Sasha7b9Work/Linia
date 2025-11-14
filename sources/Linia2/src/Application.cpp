@@ -93,7 +93,7 @@ bool Application::OnInit()
 
         AutoRebootDialog dialog(frame, message, 10, []
             {
-                (void)std::system("shutdown -r now");
+                IGNORE_RESULT(std::system("shutdown -r now"));
             });
 
         dialog.ShowModal();
@@ -107,7 +107,7 @@ bool Application::OnInit()
 
         AutoRebootDialog dialog(frame, message, 10, []
             {
-                (void)std::system("shutdown -r now");
+                IGNORE_RESULT(std::system("shutdown -r now"));
             });
 
         dialog.ShowModal();

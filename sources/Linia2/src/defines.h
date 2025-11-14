@@ -113,3 +113,6 @@ static pString DIRECT_PROMT = "<- ";
 
 extern uint VERSION_BUILD;
 extern pchar DATE_BUILD;
+
+
+#define IGNORE_RESULT(x) do { if (x) {} } while(0)
