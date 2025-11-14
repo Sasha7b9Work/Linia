@@ -76,6 +76,7 @@ else()
         -Wno-unknown-pragmas
         -Wno-write-strings
         -pipe
+
 #  Без оптимизации - лучше для отладки
 #       -g3                       # Без этого Code Blocks не останавливается на точках останова
 #       -O0
@@ -85,8 +86,7 @@ else()
         -flto
         -s
         -g0
-        -fno-stack-protector
-        
+        -fno-stack-protector   
     )
 endif()
 
