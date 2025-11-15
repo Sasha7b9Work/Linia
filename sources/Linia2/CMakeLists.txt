@@ -178,29 +178,26 @@ set_source_files_properties(
 )
 
 if(WIN32)
-target_link_libraries(${PROJECT_NAME}
-    wxbase33u
-    wxmsw33u_core
-    wxbase33u_net
-    wxzlib
-    wxpng
-    Ws2_32
-    Comctl32
-    Rpcrt4
-    Setupapi
-    Iphlpapi
-)
+    target_link_libraries(${PROJECT_NAME}
+        wxbase33u
+        wxmsw33u_core
+        wxbase33u_net
+        wxzlib
+        wxpng
+        Ws2_32
+        Comctl32
+        Rpcrt4
+        Setupapi
+        Iphlpapi
+    )
 
     # Копируем в рабочий каталог
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy $(OutputPath)\\$(PROJECT_NAME) . /Y)
 else()
-    # Поиск необходимых библиотек для Linux
     find_package(PkgConfig REQUIRED)
     
-    # Поиск GTK3
     pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
         
-    # Поиск других библиотек
     find_library(X11_LIBRARY X11 REQUIRED)
     find_library(XKBCOMMON_LIBRARY xkbcommon REQUIRED)
     find_library(PNG_LIBRARY png REQUIRED)
@@ -222,17 +219,16 @@ else()
     endif()
 
     target_link_libraries(${PROJECT_NAME}
+        wx_baseu-3.3
         wx_gtk3u_core-3.3
-        ${GTK3_LIBRARIES}
         pthread
+        ${GTK3_LIBRARIES}
         ${X11_LIBRARY}
         ${XKBCOMMON_LIBRARY}
         ${PNG_LIBRARY}
-        wx_baseu-3.3
         ${DL_LIBRARY}
     )
 
-    # Добавляем include директории GTK3
     target_include_directories(${PROJECT_NAME} PRIVATE ${GTK3_INCLUDE_DIRS})
     target_compile_options(${PROJECT_NAME} PRIVATE ${GTK3_CFLAGS_OTHER})
 endif()
