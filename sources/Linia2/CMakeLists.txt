@@ -43,7 +43,7 @@ else()
         include_directories(
             ./src
             ../generated/wxWidgets/lib/wx/include/gtk3-unicode-static-3.3
-            ../generated/wxWidgets/include
+            ../ThirdParty/wxWidgets/include
         )
     else()
         include_directories(
