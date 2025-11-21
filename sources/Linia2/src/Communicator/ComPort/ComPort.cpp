@@ -261,7 +261,7 @@ wxString ComPort::ExtractMessage(char *buffer)
 
         if (pointer)
         {
-            int index = pointer - buffer + 4;
+            int64 index = pointer - buffer + 4;
             buffer[index] = '\0';
             return wxString(buffer);
         }

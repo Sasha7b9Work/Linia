@@ -34,7 +34,7 @@ private:
 
     private:
         std::vector<wxString> history;
-        uint position = 1;
+        uint64 position = 1;
     };
 
     History history;

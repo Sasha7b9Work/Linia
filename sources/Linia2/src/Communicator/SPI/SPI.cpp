@@ -331,9 +331,9 @@ namespace SPI
         }
 
         struct spi_ioc_transfer transfer = {};
-        transfer.tx_buf = (unsigned long)data;
+        transfer.tx_buf = (unsigned long long)data;
         transfer.rx_buf = 0;
-        transfer.len = length;
+        transfer.len = (uint)length;
         transfer.speed_hz = g_speed;
         transfer.delay_usecs = 0;
         transfer.bits_per_word = g_bits_per_word;

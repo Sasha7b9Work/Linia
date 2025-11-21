@@ -309,8 +309,13 @@ void *UART::ReaderThreadFunc(void *)
     {
         // Настраиваем select для ожидания данных
         FD_ZERO(&read_fds);
+#ifdef WIN32
+    #pragma warning(push, 0)
+#endif
         FD_SET(fd, &read_fds);
-
+#ifdef WIN32
+    #pragma warning(pop)
+#endif
         timeout.tv_sec = 0;
         timeout.tv_usec = 10000;
 

@@ -16,7 +16,7 @@ bool String2Int(char *str, int *value)
     {
         str++;
     }
-    uint length = std::strlen(str);
+    uint64 length = std::strlen(str);
     if (length == 0)
     {
         return false;
@@ -24,7 +24,7 @@ bool String2Int(char *str, int *value)
 
     *value = 0;
     int pow = 1;
-    uint i = length;
+    uint64 i = length;
     do
     {
         --i;
@@ -135,7 +135,7 @@ void SU::SplitToParameters(pchar message, Parameters &parameters, pchar delimit)
     {
         std::string string = words.At(i);
 
-        uint index = string.find('=');
+        uint64 index = string.find('=');
 
         if(index != std::string::npos)
         {

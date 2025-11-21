@@ -12,10 +12,10 @@ if(WIN32)
         arm64_plugs
         linux_plugs
         ../ThirdParty/wxWidgets/include
-        ../generated/ThirdParty/lib/vc_lib/mswu
+        ../generated/ThirdParty/lib/vc_x64_lib/mswu
     )
 
-    link_directories(../generated/ThirdParty/lib/vc_lib)
+    link_directories(../generated/ThirdParty/lib/vc_x64_lib)
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall -std:c++20")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS /STACK:10000000")

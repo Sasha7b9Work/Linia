@@ -3,7 +3,7 @@
 @echo.
 @echo %TIME%   Building VS-GUI version ...
 
-MSBuild.exe ..\..\generated\Win32\Linia2-GUI.slnx -clp:ErrorsOnly;WarningsOnly -nologo /m
+MSBuild.exe ..\..\generated\Linia\Linia2-GUI.slnx -clp:ErrorsOnly;WarningsOnly -nologo /m
 set BUILD_STATUS=%ERRORLEVEL%
 if %BUILD_STATUS%==0 goto Succsess
 
@@ -16,7 +16,6 @@ goto Exit
 
 :Exit
 
-copy ..\..\..\files\Linia.loc ..\..\generated\Win32\Linia2 /Y
-rmdir ..\..\generated\Win32\Linia2\resources /S /Q
-mkdir ..\..\generated\Win32\Linia2\resources
-robocopy ..\..\..\files\resources ..\..\generated\Win32\Linia2\resources /E /MT:32 /NFL
+rmdir ..\..\generated\Linia\Linia2\resources /S /Q
+mkdir ..\..\generated\Linia\Linia2\resources
+robocopy ..\..\..\files\resources ..\..\generated\Linia\Linia2\resources /E /MT:32 /NFL
