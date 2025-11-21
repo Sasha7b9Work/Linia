@@ -220,9 +220,9 @@ else()
     endif()
 
     target_link_libraries(${PROJECT_NAME}
+        wx_gtk3u_core-3.3
         wx_baseu-3.3
         wx_baseu_net-3.3
-        wx_gtk3u_core-3.3
         pthread
         ${GTK3_LIBRARIES}
         ${X11_LIBRARY}
