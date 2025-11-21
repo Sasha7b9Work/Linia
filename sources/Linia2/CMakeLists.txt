@@ -196,9 +196,9 @@ if(WIN32)
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy $(OutputPath)\\$(PROJECT_NAME) . /Y)
 else()
     find_package(PkgConfig REQUIRED)
-    
+
     pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
-        
+
     find_library(X11_LIBRARY X11 REQUIRED)
     find_library(XKBCOMMON_LIBRARY xkbcommon REQUIRED)
     find_library(PNG_LIBRARY png REQUIRED)
@@ -206,7 +206,7 @@ else()
 
     if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
         pkg_check_modules(GPIOD REQUIRED libgpiod)
-        
+
         if(NOT GPIOD_FOUND)
             message(FATAL_ERROR "libgpiod is required for ARM64 builds but was not found! Install with: sudo apt-get install libgpiod-dev")
         endif()
@@ -221,6 +221,7 @@ else()
 
     target_link_libraries(${PROJECT_NAME}
         wx_baseu-3.3
+        wx_baseu_net-3.3
         wx_gtk3u_core-3.3
         pthread
         ${GTK3_LIBRARIES}
