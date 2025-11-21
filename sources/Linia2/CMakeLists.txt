@@ -11,11 +11,11 @@ if(WIN32)
         src
         arm64_plugs
         linux_plugs
-        ../ThirdParty/wxWidgets/include/
-        ../ThirdParty/wxWidgets/generated/lib/vc_lib/mswu
+        ../ThirdParty/wxWidgets/include
+        ../generated/ThirdParty/lib/vc_lib/mswu
     )
-    
-    link_directories(../ThirdParty/wxWidgets/generated/lib/vc_lib)
+
+    link_directories(../generated/ThirdParty/lib/vc_lib)
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall -std:c++20")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS /STACK:10000000")
@@ -30,6 +30,7 @@ if(WIN32)
         /wd4710    # function not inlined
         /wd4711    # function xxx selected for automatic inline expansion
         /wd4820    # 'N' bytes padding added after data member
+        /wd4865    # '<unnamed-enum-XXX>': the underlying type will change from 'int' to '__int64' when '/Zc:enumTypes' is specified on the command line
         /wd5026    # move constructor was implicitly defined as deleted
         /wd5027    # move assignment operator was implicitly defined as deleted
         /wd5045    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
