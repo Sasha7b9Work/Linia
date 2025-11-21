@@ -2,7 +2,7 @@
 
 git pull
 dir=$PWD
-cd ../../generated
+cd ../../generated/Linia
 cmake --build . -- -j$(nproc)
 cd $dir
 
