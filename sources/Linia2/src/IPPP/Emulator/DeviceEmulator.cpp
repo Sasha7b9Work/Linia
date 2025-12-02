@@ -9,7 +9,7 @@
 bool DeviceEmulator::Init()
 {
     GPIO::Init();
-    SPI::Init();
+//    SPI::Init();
     UART::Init(DeviceEmulator::CallbackOnReceive);
 
     LOG_ERROR("Not implemented");

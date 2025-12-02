@@ -18,7 +18,7 @@ Device::~Device()
 bool Device::Init()
 {
     GPIO::Init();
-    SPI::Init();
+//    SPI::Init();
 
     if(UART::Init(SCPI::OnEventCallback))
     {
