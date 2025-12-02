@@ -50,8 +50,11 @@ private:
     // FPGA
     wxTextCtrl *_txtNumberMeas = nullptr;
     wxTextCtrl *_txtNumberErrors = nullptr;
+    wxTextCtrl *_txtReadData = nullptr;
     int valueMeas = 0;
     int numErrors = 0;
+    uint16 values[4];
+    uint time_read;
 
     // Ручка
     wxTextCtrl *_txtKA = nullptr;

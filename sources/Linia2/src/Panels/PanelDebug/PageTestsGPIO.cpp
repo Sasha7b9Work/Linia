@@ -93,6 +93,8 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
 
         new wxStaticText(boxFPGA, wxID_ANY, "Кол-во ошибок", { 10, 50 });
         _txtNumberErrors = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 50 });
+
+        _txtReadData = new wxTextCtrl(boxFPGA, wxID_ANY, " ", { 10, 80 }, { 300, 20 });
     }
 
     wxStaticBox *boxUART = new wxStaticBox(this, wxID_ANY, "UART", { boxGPIO->GetPosition().x + boxGPIO->GetSize().x + 10, 10 }, { 200, 270 });
@@ -371,6 +373,8 @@ void PageTestsGPIO::Update()
 
     PageTestsGPIO::self->_txtNumberErrors->SetValue(wxString::Format("%d", numErrors));
 
+    PageTestsGPIO::self->_txtReadData->SetValue(wxString::Format("%u %u %u %u   %u ms", values[0], values[1], values[2], values[3], time_read));
+
     FuncUpdateUART();
 }
 
@@ -458,10 +462,10 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
         uint16 values[200][4];
 
+        PinOut::Set(infoCS, 1);
+
         for (int i = 0; i < 200; i++)
         {
-            PinOut::Set(infoCS, 1);
-
             for (int num_adc = 0; num_adc < 4; num_adc++)
             {
                 uint16 value = 0;
@@ -495,15 +499,25 @@ void PageTestsGPIO::ThreadFuncFPGA()
                 PinOut::Set(infoREQ, 0);
             }
 
-            PinOut::Set(infoCS, 0);
-
             uint8 crc = CalculateCRC(values[i]);
 
             if (crc != crc_read)
             {
                 _error = true;
             }
+
+            if (i == 0)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    PageTestsGPIO::self->values[j] = values[i][j];
+                }
+            }
         }
+
+        PinOut::Set(infoCS, 0);
+
+        PageTestsGPIO::self->time_read = (uint)meter.ElapsedMS();
 
         PageTestsGPIO::self->valueMeas++;
 
