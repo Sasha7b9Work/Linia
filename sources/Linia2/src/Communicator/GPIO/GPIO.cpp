@@ -61,11 +61,11 @@ namespace GPIO
         { true,  2 },   // DAT_F0
         { true,  3 },   // SPI MOSI
         { true,  4 },   // DAT_F2
+        { false, 1 },   // Out SPI CS
         { true,  5 },   // FIFO_FULL
+        { false, 0 },   // REQ_RD
         { true,  6 },   // KA
         { true,  7 },   // KB
-        { false, 0 },   // REQ_RD
-        { false, 1 },   // Out SPI CS
         { false, 2 }    // Out
     };
 
