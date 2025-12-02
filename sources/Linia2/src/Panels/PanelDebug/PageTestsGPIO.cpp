@@ -479,6 +479,11 @@ void PageTestsGPIO::ThreadFuncFPGA()
                 values[num_adc][i] = value;
             }
 
+            if (i == 100)
+            {
+                LOG_WRITE("%u %u %u %u", values[i][0], values[i][1], values[i][2], values[i][3]);
+            }
+
             uint8 crc_read = 0;
 
             for (int num_bit = 0; num_bit < 8; num_bit++)
