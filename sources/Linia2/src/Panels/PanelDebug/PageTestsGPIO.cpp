@@ -476,7 +476,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
                     PinOut::Set(infoREQ, 0);
                 }
 
-                values[num_adc][i] = value;
+                values[i][num_adc] = value;
             }
 
             if (i == 100)
