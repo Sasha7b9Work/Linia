@@ -146,9 +146,9 @@ wxString PageTestsGPIO::NamePin(Pin::E pin) const
         "START",
         "STOP",
         "DAT_F0",
-        "DAT_F1",
+        "SPI_MOSI",
         "DAT_F2",
-        "DAT_F3",
+        "SPI_CS",
         "FIFO_FULL",
         "REQ_RD"
     };
