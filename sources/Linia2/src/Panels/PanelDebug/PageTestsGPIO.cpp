@@ -45,6 +45,8 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
 
         pinSTART.SetChangeCallback(CallbackOnStart);
 
+        pinFIFO_FULL.SetChangeCallback(CallbackOnFIFO_FULL);
+
         int index = 0;
 
         PinIn *in = pins_in[index];
