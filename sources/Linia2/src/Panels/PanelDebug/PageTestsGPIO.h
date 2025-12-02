@@ -109,6 +109,7 @@ private:
     static void ThreadFunc();           // Главный поток
     static void ThreadFuncFPGA();       // Обработка ПЛИС в главном потоке
     static void ThreadFuncEncoder();    // Обработка ручки в главном потоке
+    static uint8 CalculateCRC(uint16 values[4]);
     static bool thread_is_running;
     std::thread *_thread = nullptr;
 

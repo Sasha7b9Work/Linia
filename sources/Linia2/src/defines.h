@@ -97,6 +97,16 @@ union BitSet128
     bool operator!=(const BitSet128 &) const;
 };
 
+union BitSet16
+{
+    BitSet16(uint16 value)
+    {
+        u16 = value;
+    }
+    uint8  u8[2];
+    uint16 u16;
+};
+
 static pString REVERSE_PROMT = "-> ";
 static pString DIRECT_PROMT = "<- ";
 

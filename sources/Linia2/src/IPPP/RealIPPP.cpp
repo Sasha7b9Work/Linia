@@ -67,9 +67,9 @@ bool RealIPPP::ReadData(std::vector<int>(&data)[4])
     static PinIn *pins[4] =
     {
         &pinDAT_F0,
-        &pinDAT_F1,
-        &pinDAT_F2,
-        &pinDAT_F3
+        &pinSPI_MOSI,
+        &pinDAT_F2
+//        &pinDAT_F3
     };
 
     while (!pinFIFO_FULL.Get())             // Продолжаем, пока не опустеет буфер передатчика

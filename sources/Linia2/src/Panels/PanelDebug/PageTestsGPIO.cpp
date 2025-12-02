@@ -37,9 +37,8 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
             &pinSTART,
             &pinSTOP,
             &pinDAT_F0,
-            &pinDAT_F1,
+            &pinSPI_MOSI,
             &pinDAT_F2,
-            &pinDAT_F3,
             &pinFIFO_FULL,
             nullptr
         };
@@ -414,61 +413,91 @@ void PageTestsGPIO::ThreadFuncEncoder()
 }
 
 
+uint8 PageTestsGPIO::CalculateCRC(uint16 values[4])
+{
+    BitSet16 bs0{ values[0] };
+
+    uint8 xor0 = (uint8)(bs0.u8[0] ^ bs0.u8[1]);
+
+    BitSet16 bs1{ values[1] };
+
+    uint8 xor1 = (uint8)(bs1.u8[0] ^ bs1.u8[1]);
+
+    BitSet16 bs2{ values[2] };
+
+    uint8 xor2 = (uint8)(bs2.u8[0] ^ bs2.u8[1]);
+
+    BitSet16 bs3{ values[3] };
+
+    uint8 xor3 = (uint8)(bs3.u8[0] ^ bs3.u8[1]);
+
+    uint8 xor01 = (uint8)(xor0 ^ xor1);
+    uint8 xor23 = (uint8)(xor2 ^ xor3);
+
+    uint8 crc = (uint8)(xor01 ^ xor23);
+
+    return crc;
+}
+
+
 void PageTestsGPIO::ThreadFuncFPGA()
 {
     static bool prev = false;
 
     if (pinFIFO_FULL.Get() && prev == false)
     {
-        gpiod_line *infoF0 = GPIO::GetInputPinInfo(Pin::In_DAT_F0)->hw.line;
+        gpiod_line *infoMOSI = GPIO::GetInputPinInfo(Pin::In_SPI_MOSI)->hw.line;
         gpiod_line *infoCS = GPIO::GetOutputPinInfo(Pin::Out_SPI_CS)->hw.line;
         gpiod_line *infoREQ = GPIO::GetOutputPinInfo(Pin::Out_REQ_RD)->hw.line;
 
         TimeMeterMS meter;
 
-        int bytes_left = 8000;
-
-        uint8 bytes[5];
-
         bool _error = false;
 
-        while (bytes_left > 0)
+        uint16 values[200][4];
+
+        for (int i = 0; i < 200; i++)
         {
             PinOut::Set(infoCS, 1);
 
-            int b = 0;
-
-            for (; b < 5; b++)
+            for (int num_adc = 0; num_adc < 4; num_adc++)
             {
-                uint8 byte = 0;
-                int i = 7;
+                uint16 value = 0;
 
-                for (; i >= 0; i--)
+                for (int num_bit = 0; num_bit < 16; num_bit++)
                 {
                     PinOut::Set(infoREQ, 1);
 
-                    if (PinIn::GetHardware(infoF0))
+                    if (PinIn::GetHardware(infoMOSI))
                     {
-                        byte |= (1 << i);
-                    }
-                    else
-                    {
-                        byte |= 0;
+                        value |= (1 << i);
                     }
 
                     PinOut::Set(infoREQ, 0);
                 }
 
-                bytes[b] = byte;
+                values[num_adc][i] = value;
+            }
 
-                bytes_left--;
+            uint8 crc_read = 0;
+
+            for (int num_bit = 0; num_bit < 8; num_bit++)
+            {
+                PinOut::Set(infoREQ, 1);
+
+                if (PinIn::GetHardware(infoMOSI))
+                {
+                    crc_read |= (1 << i);
+                }
+
+                PinOut::Set(infoREQ, 0);
             }
 
             PinOut::Set(infoCS, 0);
 
-            uint8 crc = (uint8)(bytes[0] ^ bytes[1] ^ bytes[2] ^ bytes[3]);
+            uint8 crc = CalculateCRC(values[i]);
 
-            if (crc != bytes[4])
+            if (crc != crc_read)
             {
                 _error = true;
             }
@@ -601,7 +630,7 @@ void PageTestsGPIO::CallbackOnDAT_F0(bool state)
 
 void PageTestsGPIO::CallbackOnDAT_F1(bool state)
 {
-    PageTestsGPIO::self->OnChangeStatePin(&pinDAT_F1, state);
+    PageTestsGPIO::self->OnChangeStatePin(&pinSPI_MOSI, state);
 }
 
 void PageTestsGPIO::CallbackOnDAT_F2(bool state)
@@ -609,9 +638,9 @@ void PageTestsGPIO::CallbackOnDAT_F2(bool state)
     PageTestsGPIO::self->OnChangeStatePin(&pinDAT_F2, state);
 }
 
-void PageTestsGPIO::CallbackOnDAT_F3(bool state)
+void PageTestsGPIO::CallbackOnDAT_F3(bool /*state*/)
 {
-    PageTestsGPIO::self->OnChangeStatePin(&pinDAT_F3, state);
+//    PageTestsGPIO::self->OnChangeStatePin(&pinDAT_F3, state);
 }
 
 void PageTestsGPIO::CallbackOnFIFO_FULL(bool state)

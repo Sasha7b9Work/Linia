@@ -13,9 +13,8 @@
 
 
 PinIn pinDAT_F0(Pin::In_DAT_F0);
-PinIn pinDAT_F1(Pin::In_DAT_F1);
+PinIn pinSPI_MOSI(Pin::In_SPI_MOSI);
 PinIn pinDAT_F2(Pin::In_DAT_F2);
-PinIn pinDAT_F3(Pin::In_DAT_F3);
 PinIn pinFIFO_FULL(Pin::In_FIFO_FULL);
 
 PinIn pinSTART(Pin::In_START);
@@ -24,6 +23,7 @@ PinIn pinKA(Pin::In_KA);
 PinIn pinKB(Pin::In_KB);
 
 PinOut pinREQ_RD(Pin::Out_REQ_RD);
+PinOut pinOut(Pin::Out);
 PinOut pinSPI_CS(Pin::Out_SPI_CS);
 
 
@@ -34,21 +34,21 @@ namespace GPIO
         { {  8, "gpiochip1", nullptr, nullptr, "15:GPIO1-B0" }, false, nullptr },  // START     0
         { {  9, "gpiochip1", nullptr, nullptr, "21:GPIO1-B1" }, false, nullptr },  // STOP      1
         { { 13, "gpiochip3", nullptr, nullptr, "16:GPIO3-B5" }, false, nullptr },  // DAT_F0    2
-        { { 14, "gpiochip3", nullptr, nullptr, "18:GPIO3-B6" }, false, nullptr },  // DAT_F1    3
+        { { 14, "gpiochip3", nullptr, nullptr, "18:GPIO3-B6" }, false, nullptr },  // SPI MOSI  3
         { {  2, "gpiochip1", nullptr, nullptr, "22:GPIO1-A2" }, false, nullptr },  // DAT_F2    4
-        { { 12, "gpiochip1", nullptr, nullptr, "24:GPIO1-B4" }, false, nullptr },  // DAT_F3    5
-        { {  5, "gpiochip3", nullptr, nullptr, "36:GPIO3-A5" }, false, nullptr },  // FIFO_FULL 6
+        { {  5, "gpiochip3", nullptr, nullptr, "36:GPIO3-A5" }, false, nullptr },  // FIFO_FULL 5
 
         // \todo Проверить
-        { {  4, "gpiochip1", nullptr, nullptr, "11:GPIO1-A4" }, false, nullptr},   // KA        7
-        { {  7, "gpiochip1", nullptr, nullptr, "13:GPIO1-A7" }, false, nullptr}    // KB        8
+        { {  4, "gpiochip1", nullptr, nullptr, "11:GPIO1-A4" }, false, nullptr},   // KA        6
+        { {  7, "gpiochip1", nullptr, nullptr, "13:GPIO1-A7" }, false, nullptr}    // KB        7
     };
 
     static OutputPinInfo g_output_pins[] = {
         { {  3, "gpiochip1", nullptr, nullptr, "32:GPIO1-A3" }},    // REQ_RD   0
+        { { 12, "gpiochip1", nullptr, nullptr, "24:GPIO1-B4" }},    // SPI CS   1
 
         // \todo Проверить
-        { { 13, "gpiochip1", nullptr, nullptr, "26:GPIO1-B5" }}     // SPI_CS   1
+        { { 13, "gpiochip1", nullptr, nullptr, "26:GPIO1-B5" }}     // Out      2
     };
 
     // Маппинг enum Pin::Type на индексы в массивах
@@ -59,14 +59,14 @@ namespace GPIO
         { true,  0 },   // START
         { true,  1 },   // STOP
         { true,  2 },   // DAT_F0
-        { true,  3 },   // DAT_F1
+        { true,  3 },   // SPI MOSI
         { true,  4 },   // DAT_F2
-        { true,  5 },   // DAT_F3
-        { true,  6 },   // FIFO_FULL
+        { true,  5 },   // FIFO_FULL
+        { true,  6 },   // KA
+        { true,  7 },   // KB
         { false, 0 },   // REQ_RD
-        { true,  7 },   // KA
-        { true,  8 },   // KB
-        { false, 1 }    // SPI_CS
+        { false, 1 },   // Out SPI CS
+        { false, 2 }    // Out
     };
 
     static pthread_t g_monitor_thread;
