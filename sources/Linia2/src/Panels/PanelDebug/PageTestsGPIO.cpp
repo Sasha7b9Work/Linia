@@ -24,7 +24,63 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
 
     wxPanel::SetName("Orange Pi 5");
 
-    wxStaticBox *boxGPIO = new wxStaticBox(this, wxID_ANY, "GPIO", { 10, 10 }, { 200, 270 });
+//    wxStaticBox *boxGPIO = CreateBoxGPIO();
+
+    wxStaticBox *boxFPGA = new wxStaticBox(this, wxID_ANY, "FPGA",
+        (boxGPIO != nullptr) ? wxPoint{ boxGPIO->GetPosition().x, boxGPIO->GetPosition().y + boxGPIO->GetSize().y + 10 } : wxPoint{10, 300},
+        {400, 270});
+
+    {
+        new wxStaticText(boxFPGA, wxID_ANY, "Кол-во измерений", { 10, 20 });
+        _txtNumberMeas = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 20 });
+
+        new wxStaticText(boxFPGA, wxID_ANY, "Кол-во ошибок", { 10, 50 });
+        _txtNumberErrors = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 50 });
+
+        _txtReadData = new wxTextCtrl(boxFPGA, wxID_ANY, " ", { 10, 80 }, { 300, 20 });
+    }
+
+    wxStaticBox *boxUART = new wxStaticBox(this, wxID_ANY, "UART",
+        (boxGPIO != nullptr) ? wxPoint{ boxGPIO->GetPosition().x + boxGPIO->GetSize().x + 10, 10 } : wxPoint{10, 10},
+        { 200, 270 });
+
+    {
+        btnReinitUart = new wxButton(boxUART, wxID_ANY, "Reinit", { 10, SD::Y_SB(230) }, { 100, 20 });
+
+        new wxStaticText(boxUART, wxID_ANY, "TX : 8", { 10, SD::Y_SB(20) });
+        new wxStaticText(boxUART, wxID_ANY, "RX : 10", { 70, SD::Y_SB(20) });
+
+        txtSendUART = new wxTextCtrl(boxUART, wxID_ANY, "", { 10, SD::Y_SB(50) }, { 170, 20 });
+        btnSendUART = new wxButton(boxUART, wxID_ANY, "Send", { 10, SD::Y_SB(75) }, { 100, 20 });
+        btnAutoUART = new wxToggleButton(boxUART, wxID_ANY, "AutoSend", { 10, SD::Y_SB(100) }, { 100, 20 });
+
+        new wxStaticText(boxUART, wxID_ANY, "Принято:", { 10, SD::Y_SB(130) });
+        txtRecvUART = new wxTextCtrl(boxUART, wxID_ANY, "", { 10, SD::Y_SB(150) }, { 150, 60 }, wxTE_READONLY | wxTE_MULTILINE);
+    }
+
+    wxStaticBox *boxSPI = new wxStaticBox(this, wxID_ANY, "SPI", { boxUART->GetPosition().x + boxUART->GetSize().x + 10, 10 }, { 200, 270 });
+
+    {
+        new wxStaticText(boxSPI, wxID_ANY, "MOSI : 19", { 10, SD::Y_SB(20) });
+        new wxStaticText(boxSPI, wxID_ANY, "CLK : 23", { 10, SD::Y_SB(45) });
+
+        new wxTextCtrl(boxSPI, wxID_ANY, "", { 10, SD::Y_SB(70) }, { 100, 20 });
+        btnSendSPI = new wxButton(boxSPI, wxID_ANY, "Send", { 120, SD::Y_SB(70) }, { 50, 20 });
+    }
+
+//    CreateBoxEncoder({ boxSPI->GetPosition().x + boxSPI->GetSize().x + 10, 10 });
+
+    wxSize size_button{ 75, BUTTON_HEIGHT };
+    btnReturn = new wxButton(this, wxID_ANY, "Закрыть", { MainWindow::WIDTH - size_button.x - 15, 0 }, size_button);
+
+    Bind(wxEVT_BUTTON, &PageTestsGPIO::OnEventButton, this);
+    Bind(wxEVT_TOGGLEBUTTON, &PageTestsGPIO::OnEventToggleButton, this);
+}
+
+
+void PageTestsGPIO::CreateBoxGPIO()
+{
+    boxGPIO = new wxStaticBox(this, wxID_ANY, "GPIO", { 10, 10 }, { 200, 270 });
 
     {
         int x = 10;
@@ -45,7 +101,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
 
         pinSTART.SetChangeCallback(CallbackOnStart);
 
-//        pinFIFO_FULL.SetChangeCallback(CallbackOnFIFO_FULL);
+        //        pinFIFO_FULL.SetChangeCallback(CallbackOnFIFO_FULL);
 
         int index = 0;
 
@@ -83,53 +139,6 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
             out = pins_out[++index];
         }
     }
-
-    wxStaticBox *boxFPGA = new wxStaticBox(this, wxID_ANY, "FPGA", { boxGPIO->GetPosition().x, //-V807
-        boxGPIO->GetPosition().y + boxGPIO->GetSize().y + 10 }, { 400, 270 });
-
-    {
-        new wxStaticText(boxFPGA, wxID_ANY, "Кол-во измерений", { 10, 20 });
-        _txtNumberMeas = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 20 });
-
-        new wxStaticText(boxFPGA, wxID_ANY, "Кол-во ошибок", { 10, 50 });
-        _txtNumberErrors = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 50 });
-
-        _txtReadData = new wxTextCtrl(boxFPGA, wxID_ANY, " ", { 10, 80 }, { 300, 20 });
-    }
-
-    wxStaticBox *boxUART = new wxStaticBox(this, wxID_ANY, "UART", { boxGPIO->GetPosition().x + boxGPIO->GetSize().x + 10, 10 }, { 200, 270 });
-
-    {
-        btnReinitUart = new wxButton(boxUART, wxID_ANY, "Reinit", { 10, SD::Y_SB(230) }, { 100, 20 });
-
-        new wxStaticText(boxUART, wxID_ANY, "TX : 8", { 10, SD::Y_SB(20) });
-        new wxStaticText(boxUART, wxID_ANY, "RX : 10", { 70, SD::Y_SB(20) });
-
-        txtSendUART = new wxTextCtrl(boxUART, wxID_ANY, "", { 10, SD::Y_SB(50) }, { 170, 20 });
-        btnSendUART = new wxButton(boxUART, wxID_ANY, "Send", { 10, SD::Y_SB(75) }, { 100, 20 });
-        btnAutoUART = new wxToggleButton(boxUART, wxID_ANY, "AutoSend", { 10, SD::Y_SB(100) }, { 100, 20 });
-
-        new wxStaticText(boxUART, wxID_ANY, "Принято:", { 10, SD::Y_SB(130) });
-        txtRecvUART = new wxTextCtrl(boxUART, wxID_ANY, "", { 10, SD::Y_SB(150) }, { 150, 60 }, wxTE_READONLY | wxTE_MULTILINE);
-    }
-
-    wxStaticBox *boxSPI = new wxStaticBox(this, wxID_ANY, "SPI", { boxUART->GetPosition().x + boxUART->GetSize().x + 10, 10 }, { 200, 270 });
-
-    {
-        new wxStaticText(boxSPI, wxID_ANY, "MOSI : 19", { 10, SD::Y_SB(20) });
-        new wxStaticText(boxSPI, wxID_ANY, "CLK : 23", { 10, SD::Y_SB(45) });
-
-        new wxTextCtrl(boxSPI, wxID_ANY, "", { 10, SD::Y_SB(70) }, { 100, 20 });
-        btnSendSPI = new wxButton(boxSPI, wxID_ANY, "Send", { 120, SD::Y_SB(70) }, { 50, 20 });
-    }
-
-//    CreateBoxEncoder({ boxSPI->GetPosition().x + boxSPI->GetSize().x + 10, 10 });
-
-    wxSize size_button{ 75, BUTTON_HEIGHT };
-    btnReturn = new wxButton(this, wxID_ANY, "Закрыть", { MainWindow::WIDTH - size_button.x - 15, 0 }, size_button);
-
-    Bind(wxEVT_BUTTON, &PageTestsGPIO::OnEventButton, this);
-    Bind(wxEVT_TOGGLEBUTTON, &PageTestsGPIO::OnEventToggleButton, this);
 }
 
 
