@@ -481,7 +481,8 @@ void PageTestsGPIO::ThreadFuncFPGA()
             {
                 uint16 value = 0;
 
-                for (int num_bit = 15; num_bit >= 0; num_bit--)
+//                for (int num_bit = 15; num_bit >= 0; num_bit--)
+                for(int num_bit = 0; num_bit < 16; num_bit++)
                 {
                     PinOut::Set(infoREQ, 0);
 
