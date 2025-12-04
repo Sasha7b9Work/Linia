@@ -483,14 +483,14 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
                 for (int num_bit = 15; num_bit >= 0; num_bit--)
                 {
-                    PinOut::Set(infoREQ, 1);
+                    PinOut::Set(infoREQ, 0);
 
                     if (PinIn::GetHardware(infoMOSI))
                     {
                         value |= (1 << num_bit);
                     }
 
-                    PinOut::Set(infoREQ, 0);
+                    PinOut::Set(infoREQ, 1);
                 }
 
                 values[i][num_adc] = value;
