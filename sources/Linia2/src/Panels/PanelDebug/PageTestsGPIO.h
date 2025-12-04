@@ -70,6 +70,8 @@ private:
     wxPanel *CreatePanelPinOut(wxWindow *, PinOut *);
     wxPanel *CreatePanelPinIn(wxWindow *, PinIn *);
 
+    wxStaticBox *CreateBoxEncoder(const wxPoint &position);
+
     struct StructOutGPIO
     {
         StructOutGPIO(PinOut *_out) : pin(_out) { }

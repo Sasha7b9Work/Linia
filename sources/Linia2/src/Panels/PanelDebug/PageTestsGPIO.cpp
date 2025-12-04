@@ -123,7 +123,19 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
         btnSendSPI = new wxButton(boxSPI, wxID_ANY, "Send", { 120, SD::Y_SB(70) }, { 50, 20 });
     }
 
-    wxStaticBox *boxEncoder = new wxStaticBox(this, wxID_ANY, "Encoder", { boxSPI->GetPosition().x + boxSPI->GetSize().x + 10, 10 }, { 200, 270 });
+//    CreateBoxEncoder({ boxSPI->GetPosition().x + boxSPI->GetSize().x + 10, 10 });
+
+    wxSize size_button{ 75, BUTTON_HEIGHT };
+    btnReturn = new wxButton(this, wxID_ANY, "Закрыть", { MainWindow::WIDTH - size_button.x - 15, 0 }, size_button);
+
+    Bind(wxEVT_BUTTON, &PageTestsGPIO::OnEventButton, this);
+    Bind(wxEVT_TOGGLEBUTTON, &PageTestsGPIO::OnEventToggleButton, this);
+}
+
+
+wxStaticBox *PageTestsGPIO::CreateBoxEncoder(const wxPoint &position)
+{
+    wxStaticBox *boxEncoder = new wxStaticBox(this, wxID_ANY, "Encoder", position, { 200, 270 });
 
     {
         new wxStaticText(boxEncoder, wxID_ANY, "KA : 11", { 10, SD::Y_SB(20) });
@@ -133,11 +145,7 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
         _txtKB = new wxTextCtrl(boxEncoder, wxID_ANY, "0", { 60, SD::Y_SB(45) }, { 60, 20 }, wxTE_READONLY);
     }
 
-    wxSize size_button{ 75, BUTTON_HEIGHT };
-    btnReturn = new wxButton(this, wxID_ANY, "Закрыть", { MainWindow::WIDTH - size_button.x - 15, 0 }, size_button);
-
-    Bind(wxEVT_BUTTON, &PageTestsGPIO::OnEventButton, this);
-    Bind(wxEVT_TOGGLEBUTTON, &PageTestsGPIO::OnEventToggleButton, this);
+    return boxEncoder;
 }
 
 
@@ -305,7 +313,10 @@ void PageTestsGPIO::ThreadFunc()
             str.value_int = str.pin->Get() ? 1 : 0;
         }
 
-//        ThreadFuncEncoder();
+        if (PageTestsGPIO::self->_txtKA)
+        {
+            ThreadFuncEncoder();
+        }
 
         ThreadFuncFPGA();
     }
@@ -365,9 +376,11 @@ void PageTestsGPIO::Update()
         str._txtStatePull->SetValue(wxString::Format("%d", str.value_int));
     }
 
-    PageTestsGPIO::self->_txtKA->SetValue(wxString::Format("%d", valueKA));
-
-    PageTestsGPIO::self->_txtKB->SetValue(wxString::Format("%d", valueKB));
+    if (PageTestsGPIO::self->_txtKA)
+    {
+        PageTestsGPIO::self->_txtKA->SetValue(wxString::Format("%d", valueKA));
+        PageTestsGPIO::self->_txtKB->SetValue(wxString::Format("%d", valueKB));
+    }
 
     PageTestsGPIO::self->_txtNumberMeas->SetValue(wxString::Format("%d", valueMeas));
 
