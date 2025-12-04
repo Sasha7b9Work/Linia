@@ -305,7 +305,7 @@ void PageTestsGPIO::ThreadFunc()
             str.value_int = str.pin->Get() ? 1 : 0;
         }
 
-        ThreadFuncEncoder();
+//        ThreadFuncEncoder();
 
         ThreadFuncFPGA();
     }
@@ -458,8 +458,6 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
         TimeMeterMS meter;
 
-        bool _error = false;
-
         uint16 values[200][4];
 
         for (int i = 0; i < 200; i++)
@@ -505,7 +503,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
             if (crc != crc_read)
             {
-                _error = true;
+                PageTestsGPIO::self->numErrors++;
             }
 
             if (i == 0)
@@ -520,11 +518,6 @@ void PageTestsGPIO::ThreadFuncFPGA()
         PageTestsGPIO::self->time_read = (uint)meter.ElapsedMS();
 
         PageTestsGPIO::self->valueMeas++;
-
-        if (_error)
-        {
-            PageTestsGPIO::self->numErrors++;
-        }
     }
 
     prev = pinFIFO_FULL.Get();
