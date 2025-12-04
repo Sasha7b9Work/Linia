@@ -2,7 +2,6 @@
 
 #set -e
 
-git pull
 ./build.sh
 kill -9 $(pidof Linia2)
 
