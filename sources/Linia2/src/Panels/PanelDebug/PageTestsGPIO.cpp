@@ -484,14 +484,14 @@ void PageTestsGPIO::ThreadFuncFPGA()
 //                for (int num_bit = 15; num_bit >= 0; num_bit--)
                 for(int num_bit = 0; num_bit < 16; num_bit++)
                 {
-                    PinOut::Set(infoREQ, 0);
+                    PinOut::Set(infoREQ, 1);
 
                     if (PinIn::GetHardware(infoMOSI))
                     {
                         value |= (1 << num_bit);
                     }
 
-                    PinOut::Set(infoREQ, 1);
+                    PinOut::Set(infoREQ, 0);
                 }
 
                 values[i][num_adc] = value;
@@ -526,6 +526,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
                 {
                     PageTestsGPIO::self->values[j] = values[i][j];
                 }
+                PageTestsGPIO::self->values[4] = crc_read;
             }
         }
 

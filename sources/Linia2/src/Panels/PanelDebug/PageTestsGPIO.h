@@ -53,7 +53,7 @@ private:
     wxTextCtrl *_txtReadData = nullptr;
     int valueMeas = 0;
     int numErrors = 0;
-    uint16 values[4];
+    uint16 values[5];           // 5-е значение - контрольная сумма
     uint time_read;
 
     // Ручка
