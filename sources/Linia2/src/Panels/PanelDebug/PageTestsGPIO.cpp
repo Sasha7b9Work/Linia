@@ -499,7 +499,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
                 PinOut::Set(infoREQ, 0);
             }
 
-            PinOut::Set(infoCS, 0);
+            PinOut::Set(infoCS, 1);
 
             uint8 crc = CalculateCRC(values[i]);
 
