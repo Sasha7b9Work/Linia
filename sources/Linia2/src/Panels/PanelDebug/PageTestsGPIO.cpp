@@ -520,7 +520,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
                 PageTestsGPIO::self->numErrors++;
             }
 
-            if (i == 0)
+            if (i == 10)
             {
                 for (int j = 0; j < 4; j++)
                 {
