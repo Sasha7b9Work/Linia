@@ -386,7 +386,7 @@ void PageTestsGPIO::Update()
 
     PageTestsGPIO::self->_txtNumberErrors->SetValue(wxString::Format("%d", numErrors));
 
-    PageTestsGPIO::self->_txtReadData->SetValue(wxString::Format("%u %u %u %u   %u ms", values[0], values[1], values[2], values[3], time_read));
+    PageTestsGPIO::self->_txtReadData->SetValue(wxString::Format("%u %u %u %u, crc=%u, %u ms", values[0], values[1], values[2], values[3], values[4], time_read));
 
     FuncUpdateUART();
 }
