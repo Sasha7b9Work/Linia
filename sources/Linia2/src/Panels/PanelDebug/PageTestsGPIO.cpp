@@ -462,10 +462,10 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
         uint16 values[200][4];
 
-        PinOut::Set(infoCS, 1);
-
         for (int i = 0; i < 200; i++)
         {
+            PinOut::Set(infoCS, 0);
+
             for (int num_adc = 0; num_adc < 4; num_adc++)
             {
                 uint16 value = 0;
@@ -499,6 +499,8 @@ void PageTestsGPIO::ThreadFuncFPGA()
                 PinOut::Set(infoREQ, 0);
             }
 
+            PinOut::Set(infoCS, 0);
+
             uint8 crc = CalculateCRC(values[i]);
 
             if (crc != crc_read)
@@ -514,8 +516,6 @@ void PageTestsGPIO::ThreadFuncFPGA()
                 }
             }
         }
-
-        PinOut::Set(infoCS, 0);
 
         PageTestsGPIO::self->time_read = (uint)meter.ElapsedMS();
 
