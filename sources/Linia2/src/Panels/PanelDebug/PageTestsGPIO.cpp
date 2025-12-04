@@ -474,7 +474,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
                     if (PinIn::GetHardware(infoMOSI))
                     {
-                        value |= (1 << i);
+                        value |= (1 << num_bit);
                     }
 
                     PinOut::Set(infoREQ, 0);
@@ -491,7 +491,7 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
                 if (PinIn::GetHardware(infoMOSI))
                 {
-                    crc_read |= (1 << i);
+                    crc_read |= (1 << num_bit);
                 }
 
                 PinOut::Set(infoREQ, 0);
