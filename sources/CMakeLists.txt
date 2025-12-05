@@ -56,4 +56,7 @@ endif()
 
 
 add_subdirectory(Linia2)
-add_subdirectory(Device)
+
+if(WIN32)
+    add_subdirectory(Device)
+endif()
