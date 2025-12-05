@@ -56,3 +56,4 @@ endif()
 
 
 add_subdirectory(Linia2)
+add_subdirectory(Device)
