@@ -1,7 +1,4 @@
 archive.zip
-*.out
-*.uvgui*.*
-~*
 
 old/*
 sources/generated/*
@@ -15,11 +12,9 @@ sources/Device/Listings-Debug/*
 sources/Device/Objects/*
 sources/Device/Objects-Debug/*
 
-ALGORITM.md
-BUILD_ARM64.md
-ПЕРЕЧЕНЬ_КОМАНД_ОТ_PIC_КОНТРОЛЛЕРА.md
-ПЕРЕЧЕНЬ_КОМАНД_PIC_КОНТРОЛЛЕРУ.md
-
 .vs/*
-sources/VS/Linia2/src/test/*
 
+sources/*uvgui*
+sources/Device/*uvgui*
+sources/Device/*uvoptx*
+sources/Device/RTE/*
