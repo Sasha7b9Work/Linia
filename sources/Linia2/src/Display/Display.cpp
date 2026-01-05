@@ -3,10 +3,9 @@
 #include "Display/Display.h"
 #include "MainWindow.h"
 #include "Display/WindowScale.h"
-#include "Utils/SystemDepend.h"
 #include "MainWindow.h"
-#include "Utils/Timer.h"
 #include "Panels/PanelTable.h"
+#include "Display/GraphEntity.h"
 
 
 Display *Display::self = nullptr;

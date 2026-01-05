@@ -5,6 +5,7 @@
 #include "Display/WindowScale.h"
 #include "MainWindow.h"
 #include "Utils/Math.h"
+#include "Display/GraphEntity.h"
 
 
 Grid::Grid()
