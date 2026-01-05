@@ -6,6 +6,29 @@
 // Сущности для отрисовки - графики, маркеры, еtc.
 
 
+// Единицы измерения - вольты, амперы
+struct UnitsMeas
+{
+    UnitsMeas(double v) : val(v) { }
+
+private:
+
+    double val;
+};
+
+
+struct Volt : public UnitsMeas
+{
+    Volt(double v) : UnitsMeas(v) { }
+};
+
+
+struct Amper : public UnitsMeas
+{
+    Amper(double v) : UnitsMeas(v) { }
+};
+
+
 class GraphEntity
 {
 public:
@@ -32,11 +55,11 @@ public:
     {
     }
 
-    virtual void Draw(const Grid *) const;
+    void Draw(const Grid *) const override;
 
 private:
 
-    double x1, y1, x2, y2;
+    double x1, y1, x2, y2;              // Единицы измерения здесь вольты, амперы
 
     virtual ~GraphLine() {}
 };
@@ -50,9 +73,9 @@ public:
 
     void AppendPoint(const wxPoint2DDouble &);
 
-    virtual void Draw(const Grid *) const;
+    void Draw(const Grid *) const override;
 
 private:
 
-    std::vector<wxPoint2DDouble> points;
+    std::vector<wxPoint2DDouble> points;    // Единицы здесь вольты, амперы
 };
