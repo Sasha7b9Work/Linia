@@ -6,10 +6,10 @@
 
 void GraphLine::Draw(const Grid *grid) const
 {
-    wxPoint start = grid->ValuesToCoord(x1.val, y1.val);
-    wxPoint end = grid->ValuesToCoord(x2.val, y2.val);
+    wxPoint s = grid->ValuesToCoord(start.x.val, start.y.val);
+    wxPoint e = grid->ValuesToCoord(end.x.val, end.y.val);
 
-    Line(start.x, start.y, end.x, end.y).Draw(color);
+    Line(s.x, s.y, e.x, e.y).Draw(color);
 }
 
 

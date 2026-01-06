@@ -56,7 +56,7 @@ public:
 
     GraphLine(const Unit &_x1, const Unit &_y1, const Unit &_x2, const Unit &_y2, const wxColor &_color = *wxBLACK) :
         GraphEntity(_color),
-        x1(_x1), y1(_y1), x2(_x2), y2(_y2)
+        start(_x1, _y1), end(_x2, _y2)
     {
     }
 
@@ -64,7 +64,8 @@ public:
 
 private:
 
-    Unit x1, y1, x2, y2;              // Единицы измерения здесь вольты, амперы
+    UPoint start;
+    UPoint end;
 
     virtual ~GraphLine() {}
 };
