@@ -30,8 +30,10 @@ struct UPoint
 };
 
 
-#define VOLT(x) Unit(x, V)
-#define AMPS(x) Unit(x, A)
+#define VOLT(x)     Unit(x, V)
+#define AMPS(x)     Unit(x, A)
+#define VA(v, a)    UPoint{ VOLT(v), AMPS(a) }
+#define AV(a, v)    UPoint{ AMPS(a), VOLT(v) }
 
 
 class GraphEntity
