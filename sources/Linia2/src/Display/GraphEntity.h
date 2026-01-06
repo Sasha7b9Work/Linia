@@ -28,10 +28,10 @@ struct UPoint
 };
 
 
-#define VOLT(x)     Unit{x, V}
-#define AMPS(x)     Unit{x, A}
-#define VA(v, a)    UPoint{ VOLT(v), AMPS(a) }
-#define AV(a, v)    UPoint{ AMPS(a), VOLT(v) }
+#define VOLT(x)     Unit{ x, V }                    // Значение в вольтах
+#define AMPS(x)     Unit{ x, A }                    // Значение в амперах
+#define VA(v, a)    UPoint{ VOLT(v), AMPS(a) }      // Вольты по горизонтали, амперы по вертикали
+#define AV(a, v)    UPoint{ AMPS(a), VOLT(v) }      // Амперы по горизонтали, вольты по горизонтали
 
 
 class GraphEntity
