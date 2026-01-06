@@ -54,9 +54,9 @@ class GraphLine : public GraphEntity
 {
 public:
 
-    GraphLine(const Unit &_x1, const Unit &_y1, const Unit &_x2, const Unit &_y2, const wxColor &_color = *wxBLACK) :
+    GraphLine(const UPoint &_start, const UPoint &_end, const wxColor &_color = *wxBLACK) :
         GraphEntity(_color),
-        start(_x1, _y1), end(_x2, _y2)
+        start(_start), end(_end)
     {
     }
 
