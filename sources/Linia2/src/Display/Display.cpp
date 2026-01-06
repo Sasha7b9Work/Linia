@@ -386,9 +386,13 @@ void Text::DrawAboutCenterRigth(int x, int y, bool fillBackground, const wxColor
 
 void Display::CreateEntities()
 {
-    entities.push_back(new GraphLine(Meas{ -1.0, -1.0 }, Meas{ 1.0, 1.0 }, *wxBLUE));
+    GraphLine *line = new GraphLine(Meas{ -1.0, -1.0 }, Meas{ 1.0, 1.0 });
+    line->SetColor(*wxBLUE);
 
-    GraphMeasures *meas = new GraphMeasures(*wxGREEN);
+    entities.push_back(line);
+
+    GraphMeasures *meas = new GraphMeasures();
+    meas->SetColor(*wxGREEN);
 
     meas->AppendPoint({ 0.0, 0.0 });
     meas->AppendPoint({ 0.3, 0.5 });
@@ -446,8 +450,6 @@ void Spline::Draw(bool smooth, bool draw_points) const
     if (draw_points)
     {
         wxGraphicsPath path_circle = Display::self->gc->CreatePath();
-
-        Display::self->gc->SetBrush(*wxRED_BRUSH);
 
         for (const auto &pt : points)
         {

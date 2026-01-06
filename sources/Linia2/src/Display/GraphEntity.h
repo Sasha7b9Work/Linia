@@ -16,9 +16,11 @@ class GraphEntity
 {
 public:
 
-    GraphEntity(const wxColor &_color = *wxBLACK) : color(_color) { }
+    GraphEntity() : color{ *wxWHITE } { }
 
     virtual void Draw(const Grid *) const = 0;
+
+    void SetColor(const wxColor &_color) { color = _color; }
 
 protected:
 
@@ -32,8 +34,8 @@ class GraphLine : public GraphEntity
 {
 public:
 
-    GraphLine(const Meas &_start, const Meas &_end, const wxColor &_color = *wxBLACK) :
-        GraphEntity(_color),
+    GraphLine(const Meas &_start, const Meas &_end) :
+        GraphEntity(),
         start(_start), end(_end)
     {
     }
@@ -53,7 +55,7 @@ class GraphMeasures : public GraphEntity
 {
 public:
 
-    GraphMeasures(const wxColor &_color) : GraphEntity(_color) { }
+    GraphMeasures() : GraphEntity() { }
 
     void AppendPoint(const wxPoint2DDouble &);
 
