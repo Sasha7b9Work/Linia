@@ -16,7 +16,6 @@ enum TypeUnit
 
 struct Unit
 {
-    Unit(double v, TypeUnit t) : val(v), type(t) { }
     double val;
     TypeUnit type;
 };
@@ -24,14 +23,13 @@ struct Unit
 
 struct UPoint
 {
-    UPoint(const Unit &_x, const Unit &_y) : x(_x), y(_y) { }
     Unit x;
     Unit y;
 };
 
 
-#define VOLT(x)     Unit(x, V)
-#define AMPS(x)     Unit(x, A)
+#define VOLT(x)     Unit{x, V}
+#define AMPS(x)     Unit{x, A}
 #define VA(v, a)    UPoint{ VOLT(v), AMPS(a) }
 #define AV(a, v)    UPoint{ AMPS(a), VOLT(v) }
 
