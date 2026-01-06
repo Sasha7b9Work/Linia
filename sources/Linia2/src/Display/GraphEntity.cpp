@@ -6,8 +6,8 @@
 
 void GraphLine::Draw(const Grid *grid) const
 {
-    wxPoint s = grid->ValuesToCoord(start.x.val, start.y.val);
-    wxPoint e = grid->ValuesToCoord(end.x.val, end.y.val);
+    wxPoint s = grid->ValuesToCoord(start.u, start.i);
+    wxPoint e = grid->ValuesToCoord(end.u, end.i);
 
     Line(s.x, s.y, e.x, e.y).Draw(color);
 }

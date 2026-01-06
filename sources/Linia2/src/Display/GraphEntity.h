@@ -5,33 +5,11 @@
 
 // Сущности для отрисовки - графики, маркеры, еtc.
 
-
-// Единицы измерения - вольты, амперы
-
-enum TypeUnit
+struct Meas
 {
-    A,
-    V
+    double u;       // Вольты
+    double i;       // Амперы
 };
-
-struct Unit
-{
-    double val;
-    TypeUnit type;
-};
-
-
-struct UPoint
-{
-    Unit x;
-    Unit y;
-};
-
-
-#define VOLT(x)     Unit{ x, V }                    // Значение в вольтах
-#define AMPS(x)     Unit{ x, A }                    // Значение в амперах
-#define VA(v, a)    UPoint{ VOLT(v), AMPS(a) }      // Вольты по горизонтали, амперы по вертикали
-#define AV(a, v)    UPoint{ AMPS(a), VOLT(v) }      // Амперы по горизонтали, вольты по горизонтали
 
 
 class GraphEntity
@@ -54,7 +32,7 @@ class GraphLine : public GraphEntity
 {
 public:
 
-    GraphLine(const UPoint &_start, const UPoint &_end, const wxColor &_color = *wxBLACK) :
+    GraphLine(const Meas &_start, const Meas &_end, const wxColor &_color = *wxBLACK) :
         GraphEntity(_color),
         start(_start), end(_end)
     {
@@ -64,8 +42,8 @@ public:
 
 private:
 
-    UPoint start;
-    UPoint end;
+    Meas start;
+    Meas end;
 
     virtual ~GraphLine() {}
 };
