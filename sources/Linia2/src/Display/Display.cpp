@@ -386,7 +386,7 @@ void Text::DrawAboutCenterRigth(int x, int y, bool fillBackground, const wxColor
 
 void Display::CreateEntities()
 {
-    entities.push_back(new GraphLine(-1.0, -1.0, 1.0, 1.0, *wxBLUE));
+    entities.push_back(new GraphLine(VOLT(-1.0), AMPS(-1.0), VOLT(1.0), AMPS(1.0), *wxBLUE));
 
     GraphMeasures *meas = new GraphMeasures(*wxGREEN);
 

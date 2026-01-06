@@ -7,26 +7,31 @@
 
 
 // Единицы измерения - вольты, амперы
-struct UnitsMeas
+
+enum TypeUnit
 {
-    UnitsMeas(double v) : val(v) { }
+    A,
+    V
+};
 
-private:
-
+struct Unit
+{
+    Unit(double v, TypeUnit t) : val(v), type(t) { }
     double val;
+    TypeUnit type;
 };
 
 
-struct Volt : public UnitsMeas
+struct UPoint
 {
-    Volt(double v) : UnitsMeas(v) { }
+    UPoint(const Unit &_x, const Unit &_y) : x(_x), y(_y) { }
+    Unit x;
+    Unit y;
 };
 
 
-struct Amper : public UnitsMeas
-{
-    Amper(double v) : UnitsMeas(v) { }
-};
+#define VOLT(x) Unit(x, V)
+#define AMPS(x) Unit(x, A)
 
 
 class GraphEntity
@@ -49,7 +54,7 @@ class GraphLine : public GraphEntity
 {
 public:
 
-    GraphLine(double _x1, double _y1, double _x2, double _y2, const wxColor &_color = *wxBLACK) :
+    GraphLine(const Unit &_x1, const Unit &_y1, const Unit &_x2, const Unit &_y2, const wxColor &_color = *wxBLACK) :
         GraphEntity(_color),
         x1(_x1), y1(_y1), x2(_x2), y2(_y2)
     {
@@ -59,7 +64,7 @@ public:
 
 private:
 
-    double x1, y1, x2, y2;              // Единицы измерения здесь вольты, амперы
+    Unit x1, y1, x2, y2;              // Единицы измерения здесь вольты, амперы
 
     virtual ~GraphLine() {}
 };
