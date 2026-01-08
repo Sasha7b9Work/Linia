@@ -91,8 +91,8 @@ int FPGA::BitDepth() const
     static const int depth[Count] =
     {
         9,
-        3,
-        5
+        8,
+        8
     };
 
     return depth[v];
