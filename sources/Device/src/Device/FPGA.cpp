@@ -13,15 +13,17 @@ namespace FPGA
     static PinOut pinCLK_RG(Port::_G, Pin::_7);              // 92
     static PinOut pinWR_RG(Port::_G, Pin::_8);               // 93
     static PinOut pinDAT_RG(Port::_D, Pin::_13);             // 82
-    static PinOut pinSTART_TB(Port::_G, Pin::_3);            // 89
+    static PinOut pinSTART_TB(Port::_G, Pin::_4);            // 89
 
-    static uint lengths[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    static uint lengths[10] = { 9, 8, 8, 0, 0, 0, 0, 0, 0, 0 };
 
     // Дать start FPGA
     static void WriteStart();
 
     static TimeMeterMS meter;
     static bool is_running_scan = false;    // Если true - идёт развёртка
+
+    static void Pause();
 }
 
 
@@ -76,6 +78,7 @@ void FPGA::StopScan()
 void FPGA::WriteStart()
 {
     pinSTART_TB.ToHi();
+    Pause();
     pinSTART_TB.ToLow();
 }
 
@@ -97,9 +100,22 @@ void FPGA::Reg::Write(int num, uint value)
     {
         pinDAT_RG.Set(_GET_BIT(value, bit) != 0);
         pinCLK_RG.ToHi();
+        Pause();
         pinCLK_RG.ToLow();
     }
 
     pinWR_RG.ToHi();
+    Pause();
     pinWR_RG.ToLow();
+}
+
+
+void FPGA::Pause()
+{
+    volatile int i = 10000;
+
+    while (i > 0)
+    {
+        i--;
+    }
 }
