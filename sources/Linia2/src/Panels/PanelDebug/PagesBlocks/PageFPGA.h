@@ -10,4 +10,11 @@ public:
     PageFPGA(wxNotebook *);
 
     static PageFPGA *self;
+
+private:
+
+    wxButton *btnStart = nullptr;
+    wxButton *btnStop = nullptr;
+
+    void OnEventButton(wxCommandEvent &);
 };

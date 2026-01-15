@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Panels/PanelDebug/PagesBlocks/PageFPGA.h"
 #include "Utils/String.h"
+#include "Utils/SystemDepend.h"
 
 
 PageFPGA *PageFPGA::self = nullptr;
@@ -70,5 +71,31 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
         fpga2->SetDescriptionBits(0, desc2);
 
         AppendRegister(fpga2);
+    }
+
+    btnStart = new wxButton{ this, wxID_ANY, "Start", { 10, SD::Y_SB(500) }, { 75, BUTTON_HEIGHT } };
+    btnStop = new wxButton{ this, wxID_ANY, "Stop", {10, SD::Y_SB(540)}, { 75, BUTTON_HEIGHT} };
+
+    btnStop->Enable(false);
+
+    Bind(wxEVT_BUTTON, &PageFPGA::OnEventButton, this);
+}
+
+
+void PageFPGA::OnEventButton(wxCommandEvent &event)
+{
+    event.Skip();
+
+    int id = event.GetId();
+
+    if (id == btnStart->GetId())
+    {
+        btnStart->Enable(false);
+        btnStop->Enable(true);
+    }
+    else if (id == btnStop->GetId())
+    {
+        btnStart->Enable(true);
+        btnStop->Enable(false);
     }
 }
