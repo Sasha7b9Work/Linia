@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Device/FPGA.h"
 #include "Hardware/HAL/HAL_PINS.h"
+#include "Hardware/Timer.h"
 
 
 namespace FPGA
@@ -15,6 +16,12 @@ namespace FPGA
     static PinOut pinSTART_TB(Port::_G, Pin::_3);            // 89
 
     static uint lengths[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+    // Дать start FPGA
+    static void WriteStart();
+
+    static TimeMeterMS meter;
+    static bool is_running_scan = false;    // Если true - идёт развёртка
 }
 
 
@@ -23,25 +30,53 @@ void FPGA::Init()
     pinLIMIT.Init();
     pinA0_RG.Init();
     pinA1_RG.Init();
-    pinCLK_RG.Init();
-    pinWR_RG.Init();
-    pinDAT_RG.Init();
-    pinSTART_TB.Init();
 
+    pinCLK_RG.Init();
     pinCLK_RG.ToLow();
+
+    pinWR_RG.Init();
     pinWR_RG.ToLow();
+
+    pinDAT_RG.Init();
+
+    pinSTART_TB.Init();
+    pinSTART_TB.ToLow();
+}
+
+
+void FPGA::Update()
+{
+    if (!is_running_scan)
+    {
+        return;
+    }
+
+    if (meter.ElapsedTime() >= 1000)
+    {
+        WriteStart();
+        meter.Reset();
+    }
 }
 
 
 void FPGA::StartScan(uint /*periodMS*/)
 {
+    is_running_scan = true;
 
+    WriteStart();
 }
 
 
 void FPGA::StopScan()
 {
+    is_running_scan = false;
+}
 
+
+void FPGA::WriteStart()
+{
+    pinSTART_TB.ToHi();
+    pinSTART_TB.ToLow();
 }
 
 

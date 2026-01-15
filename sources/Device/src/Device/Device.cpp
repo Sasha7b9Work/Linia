@@ -28,4 +28,6 @@ void Device::Init()
 void Device::Update()
 {
     Commutator::Update();
+
+    FPGA::Update();
 }
