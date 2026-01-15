@@ -3,6 +3,7 @@
 #include "Panels/PanelDebug/PagesBlocks/PageFPGA.h"
 #include "Utils/String.h"
 #include "Utils/SystemDepend.h"
+#include "IPPP/Device/IDevice.h"
 
 
 PageFPGA *PageFPGA::self = nullptr;
@@ -90,11 +91,15 @@ void PageFPGA::OnEventButton(wxCommandEvent &event)
 
     if (id == btnStart->GetId())
     {
+        IDevice::impl->SendCommand(":SCAN:START 1000");
+
         btnStart->Enable(false);
         btnStop->Enable(true);
     }
     else if (id == btnStop->GetId())
     {
+        IDevice::impl->SendCommand(":SCAN:STOP");
+
         btnStart->Enable(true);
         btnStop->Enable(false);
     }

@@ -24,3 +24,11 @@ public:
     // Заслать команду и завершить нулём
     virtual void SendCommand(pchar format, ...) const = 0;
 };
+
+
+/*
+    :FPGA[0...2]:LENGTH [1...32]    Установка длины регистра FPGA
+    :FPGA[0...2]:WRITE XXXXXh       Запись шестнадцатиричного значения в регистр FPGA
+    :SCAN:START  Xms                Запуск развёртки с периодом X ms
+    :SCAN:STOP                      Останов развёртки
+*/
