@@ -59,7 +59,7 @@ public:
 
     virtual ~Pin() { }
 
-    virtual void Init();
+    virtual void Init() = 0;
 
 protected:
 
@@ -92,6 +92,7 @@ class PinOut : public Pin
 {
 public:
     PinOut(Port::E _port, Pin::E _pin) : Pin(_port, _pin, PinMode::Out) { }
+    virtual void Init() override;
     void ToLow();
     void ToHi();
     void Set(bool);
