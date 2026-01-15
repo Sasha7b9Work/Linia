@@ -66,6 +66,8 @@ namespace Timer
 
     // Вызывается при срабатывании таймера
     void ElapsedCallback();
+
+    void DelayMS(uint delayMS);
 };
 
 

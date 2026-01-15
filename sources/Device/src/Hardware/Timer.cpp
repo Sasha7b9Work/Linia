@@ -235,4 +235,14 @@ uint TimeMeterMS::ElapsedTime()
 }
 
 
+void Timer::DelayMS(uint delayMS)
+{
+    uint time_end = TIME_MS + delayMS;
+
+    while (TIME_MS < time_end)
+    {
+    }
+}
+
+
 #undef TIME_NEXT
