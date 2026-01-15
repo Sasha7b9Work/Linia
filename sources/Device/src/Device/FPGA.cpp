@@ -33,6 +33,18 @@ void FPGA::Init()
 }
 
 
+void FPGA::StartScan(uint /*periodMS*/)
+{
+
+}
+
+
+void FPGA::StopScan()
+{
+
+}
+
+
 void FPGA::Reg::SetLength(int num, uint length)
 {
     lengths[num] = length;

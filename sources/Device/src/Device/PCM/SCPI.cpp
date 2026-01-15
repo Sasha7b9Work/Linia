@@ -55,6 +55,7 @@ namespace PCM
         static bool Func_FPGA(pchar);
         static bool Func_DAC(pchar);
         static bool Func_REG(pchar);
+        static bool Func_SCAN(pchar);
 
         static StructParser head[] =
         {
@@ -63,6 +64,7 @@ namespace PCM
             { "FPGA",  Func_FPGA, nullptr },
             { "DAC",   Func_DAC,  nullptr },
             { "REG",   Func_REG,  nullptr },
+            { "SCAN",  Func_SCAN, nullptr },
             { nullptr, nullptr,   nullptr }
         };
 
@@ -180,6 +182,36 @@ bool PCM::SCPI::Func_FPGA(pchar command)
         }
 
         return false;
+    }
+
+    return false;
+}
+
+
+bool PCM::SCPI::Func_SCAN(pchar command)
+{
+    if (SU::BeginWith(command, "START "))
+    {
+        command += std::strlen("START ");
+
+        char *pos = nullptr;
+
+        uint period = std::strtoul(command, &pos, 10);
+
+        if (SU::CharIs(*pos, " :"))
+        {
+            FPGA::StartScan(period);
+
+            return true;
+        }
+
+        return false;
+    }
+    else if (SU::BeginWith(command, "STOP"))
+    {
+        FPGA::StopScan();
+
+        return true;
     }
 
     return false;

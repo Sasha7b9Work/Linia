@@ -10,6 +10,10 @@ namespace FPGA
 {
     void Init();
 
+    void StartScan(uint periodMS);
+
+    void StopScan();
+
     namespace Reg
     {
         void SetLength(int num, uint length);
