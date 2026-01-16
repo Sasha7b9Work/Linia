@@ -48,6 +48,7 @@ void FPGA::Init()
 
 void FPGA::Update()
 {
+/*
     Reg::Write(0, 1);
 
     Timer::DelayMS(1000);
@@ -55,8 +56,9 @@ void FPGA::Update()
     WriteStart();
 
     Timer::DelayMS(2000);
+*/
 
-    /*
+//    /*
     if (!is_running_scan)
     {
         return;
@@ -67,7 +69,7 @@ void FPGA::Update()
         WriteStart();
         meter.Reset();
     }
-    */
+//    */
 }
 
 
@@ -122,7 +124,7 @@ void FPGA::Reg::Write(int num, uint value)
 
 void FPGA::Pause()
 {
-    volatile int i = 10000;
+    volatile int i = 20;
 
     while (i > 0)
     {
