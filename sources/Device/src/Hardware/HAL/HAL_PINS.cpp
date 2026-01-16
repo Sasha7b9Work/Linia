@@ -54,17 +54,35 @@ Pin::Pin(Port::E _port, Pin::E _pin, PinMode::E _mode)
 }
 
 
-void Pin::Init()
+void PinIn::Init()
 {
+    GPIO_InitTypeDef is =
+    {
+        pin,
+        GPIO_MODE_INPUT,
+        GPIO_PULLUP,
+        GPIO_SPEED_FREQ_HIGH,
+        0
+    };
 
+    HAL_GPIO_Init((GPIO_TypeDef *)port, &is);
+
+    prev_state = Get();
 }
 
 
-void PinIn::Init()
+void PinOut::Init()
 {
-    Pin::Init();
+    GPIO_InitTypeDef is =
+    {
+        pin,
+        GPIO_MODE_OUTPUT_PP,
+        GPIO_PULLUP,
+        GPIO_SPEED_FREQ_HIGH,
+        0
+    };
 
-    prev_state = Get();
+    HAL_GPIO_Init((GPIO_TypeDef *)port, &is);
 }
 
 
