@@ -162,43 +162,6 @@ static int8_t CDC_Itf_Control(uint8_t cmd, uint8_t * pbuf, uint16_t /*length*/)
 }
 
 /**
-  * @brief  TIM period elapsed callback
-  * @param  htim: TIM handle
-  * @retval None
-  */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef * /*htim*/)
-{
-  uint32_t buffptr;
-  uint32_t buffsize;
-
-  if (UserTxBufPtrOut != UserTxBufPtrIn)
-  {
-    if (UserTxBufPtrOut > UserTxBufPtrIn) /* Rollback */
-    {
-      buffsize = APP_TX_DATA_SIZE - UserTxBufPtrOut;
-    }
-    else
-    {
-      buffsize = UserTxBufPtrIn - UserTxBufPtrOut;
-    }
-
-    buffptr = UserTxBufPtrOut;
-
-    USBD_CDC_SetTxBuffer(&USBD_Device, (uint8_t *) & UserTxBuffer[buffptr],
-                         buffsize);
-
-    if (USBD_CDC_TransmitPacket(&USBD_Device) == USBD_OK)
-    {
-      UserTxBufPtrOut += buffsize;
-      if (UserTxBufPtrOut == APP_RX_DATA_SIZE)
-      {
-        UserTxBufPtrOut = 0;
-      }
-    }
-  }
-}
-
-/**
   * @brief  CDC_Itf_DataRx
   *         Data received over USB OUT endpoint are sent over CDC interface 
   *         through this function.
@@ -208,7 +171,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef * /*htim*/)
   */
 static int8_t CDC_Itf_Receive(uint8_t * /*Buf*/, uint32_t * /*Len*/)
 {
-  return (USBD_OK);
+//    USBD_CDC_ReceivePacket(reinterpret_cast<USBD_HandleTypeDef *>(VCP::handleUSBD));
+    return (USBD_OK);
 }
 
 /**
