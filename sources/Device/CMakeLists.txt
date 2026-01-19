@@ -108,7 +108,6 @@ file(GLOB HARDWARE_CMSIS src/Hardware/CMSIS/*)
 file(GLOB HARDWARE_FATFS src/Hardware/FatFS/*)
 file(GLOB HARDWARE_HAL   src/Hardware/HAL/*)
 file(GLOB HARDWARE_USBD  src/Hardware/USBD/*)
-file(GLOB HARDWARE_USBH  src/Hardware/USBH/*)
 file(GLOB SRC            src/*.h src/*.cpp)
 file(GLOB DEVICE         src/Device/*.*)
 file(GLOB DEVICE_PCM     src/Device/PCM/*.*)
@@ -125,7 +124,6 @@ source_group(Hardware/CMSIS  FILES ${HARDWARE_CMSIS})
 source_group(Hardware/FatFS  FILES ${HARDWARE_FATFS})
 source_group(Hardware/HAL    FILES ${HARDWARE_HAL})
 source_group(Hardware/USBD   FILES ${HARDWARE_USBD})
-source_group(Hardware/USBH   FILES ${HARDWARE_USBH})
 source_group(src             FILES ${SRC})
 source_group(Device          FILES ${DEVICE})
 source_group(Device/PCM      FILES ${DEVICE_PCM})
@@ -141,7 +139,6 @@ add_library(${PROJECT_NAME}
     ${HARDWARE_FATFS}
     ${HARDWARE_HAL}
     ${HARDWARE_USBD}
-    ${HARDWARE_USBH}
     ${SRC}
     ${DEVICE}
     ${DEVICE_PCM}
