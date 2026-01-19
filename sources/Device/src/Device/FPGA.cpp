@@ -48,15 +48,6 @@ void FPGA::Init()
 
 void FPGA::Update()
 {
-    Reg::Write(0, 2);
-
-    Timer::DelayMS(1000);
-
-    WriteStart();
-
-    Timer::DelayMS(2000);
-
-    /*
     if (!is_running_scan)
     {
         return;
@@ -67,6 +58,15 @@ void FPGA::Update()
         WriteStart();
         meter.Reset();
     }
+
+    /*
+    Reg::Write(0, 2);
+
+    Timer::DelayMS(1000);
+
+    WriteStart();
+
+    Timer::DelayMS(2000);
     */
 }
 
