@@ -6,6 +6,7 @@
 #include "Communicator/SPI/SPI.h"
 #include "IPPP/Device/Chips.h"
 #include "IPPP/SCPI/SCPI.h"
+#include "Communicator/ComPort/ComPort.h"
 
 IDevice *IDevice::impl = nullptr;
 
@@ -63,5 +64,9 @@ void Device::SendCommand(pchar format, ...) const
 
     std::strcat(message, "\0");
 
+#ifdef WIN32
+    ComPort::Send(message);
+#else
     UART::SendBuffer(message, (int)std::strlen(message) + 1);
+#endif
 }

@@ -64,28 +64,13 @@ void ComPort::GetComports(std::vector<bool> &ports)
 
 bool ComPort::TryConnect()
 {
-    for (int i = 0; i < NUM_PORTS; i++)
+    int num_port = SET::GUI::serial_port_num.Get();
+
+    if (RS232_OpenComport(num_port, 115200, "8N1", 0) == 0)
     {
-        bool current_port = (i == SET::GUI::serial_port_num.Get());
+        connected_port = num_port;
 
-        if (current_port)
-        {
-            if (RS232_OpenComport(i, 115200, "8N1", 0) == 0)
-            {
-                connected_port = i;
-
-                milliseconds end = duration_cast<milliseconds>(system_clock::now().time_since_epoch()) + 1000ms;
-
-                do
-                {
-                    UpdateConnected();
-                } while (duration_cast<milliseconds>(system_clock::now().time_since_epoch()) < end);
-
-                connected_port = -1;
-
-                RS232_CloseComport(i);
-            }
-        }
+        return true;
     }
 
     return false;

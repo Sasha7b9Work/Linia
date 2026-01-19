@@ -39,5 +39,14 @@ void SET::GUI::Load()
 
 void SET::GUI::Save()
 {
+    position.Save();
+    pos_console.Save();
+    size_console.Save();
+    pos_list.Save();
+    size_list.Save();
+    maximized_list.Save();
     debug_mode.Save();
+    maximized_console.Save();
+    current_page_notebook.Save();
+    serial_port_num.Save();
 }
