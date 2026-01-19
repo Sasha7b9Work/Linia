@@ -3,6 +3,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Device/PCM/PCM.h"
 #include "Device/Device.h"
+#include "Hardware/VCP.h"
 
 
 int main()
@@ -16,6 +17,8 @@ int main()
     while (true)
     {
         PCM::Update();
+
+        VCP::Update();
 
         Device::Update();
     }

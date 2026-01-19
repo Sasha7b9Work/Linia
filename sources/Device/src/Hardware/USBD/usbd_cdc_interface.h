@@ -16,11 +16,12 @@
   ******************************************************************************
   */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __USBD_CDC_IF_H
-#define __USBD_CDC_IF_H
+#pragma once
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_cdc.h"
+
+#include "Utils/BufferOSDP.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
@@ -70,6 +71,8 @@
 
 extern USBD_CDC_ItfTypeDef  USBD_CDC_fops;
 
-/* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */
-#endif /* __USBD_CDC_IF_H */
+
+namespace _CDC
+{
+    void GetData(BufferOSDP &);
+}

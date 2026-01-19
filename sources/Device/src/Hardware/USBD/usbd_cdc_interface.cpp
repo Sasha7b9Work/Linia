@@ -16,8 +16,9 @@
   ******************************************************************************
   */
 /* Includes ------------------------------------------------------------------ */
-//#include "main.h"
+#include "defines.h"
 #include "usbd_cdc.h"
+#include "Hardware/USBD/usbd_cdc_interface.h"
 
 
 USBD_HandleTypeDef USBD_Device;
@@ -202,4 +203,10 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef * /*huart*/)
   /* Initiate next USB packet transfer once UART completes transfer
    * (transmitting data over Tx line) */
   USBD_CDC_ReceivePacket(&USBD_Device);
+}
+
+
+void _CDC::GetData(BufferOSDP &)
+{
+
 }
