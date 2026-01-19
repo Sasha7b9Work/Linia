@@ -2,7 +2,13 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PINS.h"
+#include "Hardware/USBD/usbd_desc.h"
+#include "Hardware/USBD/usbd_cdc_interface.h"
 #include <stm32f4xx_hal.h>
+#include "usbd_cdc.h"
+
+
+extern USBD_HandleTypeDef USBD_Device;
 
 
 namespace HAL
@@ -22,6 +28,18 @@ void HAL::Init()
     HAL_Init();
 
     HAL_USART1::Init();
+
+    /* Init Device Library */
+    USBD_Init(&USBD_Device, &VCP_Desc, 0);
+
+    /* Add Supported Class */
+    USBD_RegisterClass(&USBD_Device, USBD_CDC_CLASS);
+
+    /* Add CDC Interface Class */
+    USBD_CDC_RegisterInterface(&USBD_Device, &USBD_CDC_fops);
+
+    /* Start Device Process */
+    USBD_Start(&USBD_Device);
 }
 
 

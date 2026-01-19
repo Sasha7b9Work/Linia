@@ -17,6 +17,11 @@
   */
 /* Includes ------------------------------------------------------------------ */
 //#include "main.h"
+#include "usbd_cdc.h"
+
+
+USBD_HandleTypeDef USBD_Device;
+
 
 /* Private typedef ----------------------------------------------------------- */
 /* Private define ------------------------------------------------------------ */
@@ -59,7 +64,7 @@ static int8_t CDC_Itf_Receive(uint8_t* pbuf, uint32_t *Len);
 static int8_t CDC_Itf_TransmitCplt(uint8_t *pbuf, uint32_t *Len, uint8_t epnum);
 static void Error_Handler(void);
 static void ComPort_Config(void);
-static void TIM_Config(void);
+
 
 USBD_CDC_ItfTypeDef USBD_CDC_fops = {
   CDC_Itf_Init,
@@ -83,7 +88,7 @@ static int8_t CDC_Itf_Init(void)
   /* USART configured as follow: - Word Length = 8 Bits - Stop Bit = One Stop
    * bit - Parity = No parity - BaudRate = 115200 baud - Hardware flow control
    * disabled (RTS and CTS signals) */
-  UartHandle.Instance = USARTx;
+  UartHandle.Instance = USART1;
   UartHandle.Init.BaudRate = 115200;
   UartHandle.Init.WordLength = UART_WORDLENGTH_8B;
   UartHandle.Init.StopBits = UART_STOPBITS_1;
@@ -104,9 +109,6 @@ static int8_t CDC_Itf_Init(void)
     /* Transfer error in reception process */
     Error_Handler();
   }
-
-  /* ##-3- Configure the TIM Base generation ################################# */
-  TIM_Config();
 
   /* ##-4- Start the TIM Base generation in interrupt mode #################### */
   /* Start Channel1 */
@@ -148,7 +150,7 @@ static int8_t CDC_Itf_DeInit(void)
   * @param  Len: Number of data to be sent (in bytes)
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
-static int8_t CDC_Itf_Control(uint8_t cmd, uint8_t * pbuf, uint16_t length)
+static int8_t CDC_Itf_Control(uint8_t cmd, uint8_t * pbuf, uint16_t /*length*/)
 {
   switch (cmd)
   {
@@ -213,7 +215,7 @@ static int8_t CDC_Itf_Control(uint8_t cmd, uint8_t * pbuf, uint16_t length)
   * @param  htim: TIM handle
   * @retval None
   */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef * htim)
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef * /*htim*/)
 {
   uint32_t buffptr;
   uint32_t buffsize;
@@ -246,27 +248,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef * htim)
 }
 
 /**
-  * @brief  Rx Transfer completed callback
-  * @param  huart: UART handle
-  * @retval None
-  */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef * huart)
-{
-  /* Increment Index for buffer writing */
-  UserTxBufPtrIn++;
-
-  /* To avoid buffer overflow */
-  if (UserTxBufPtrIn == APP_RX_DATA_SIZE)
-  {
-    UserTxBufPtrIn = 0;
-  }
-
-  /* Start another reception: provide the buffer pointer with offset and the
-   * buffer size */
-  HAL_UART_Receive_IT(huart, (uint8_t *) (UserTxBuffer + UserTxBufPtrIn), 1);
-}
-
-/**
   * @brief  CDC_Itf_DataRx
   *         Data received over USB OUT endpoint are sent over CDC interface 
   *         through this function.
@@ -292,7 +273,7 @@ static int8_t CDC_Itf_Receive(uint8_t * Buf, uint32_t * Len)
   * @param  Len: Number of data received (in bytes)
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
-static int8_t CDC_Itf_TransmitCplt(uint8_t *Buf, uint32_t *Len, uint8_t epnum)
+static int8_t CDC_Itf_TransmitCplt(uint8_t * /*Buf*/, uint32_t * /*Len*/, uint8_t /*epnum*/)
 {
   return (0);
 }
@@ -302,7 +283,7 @@ static int8_t CDC_Itf_TransmitCplt(uint8_t *Buf, uint32_t *Len, uint8_t epnum)
   * @param  huart: UART handle
   * @retval None
   */
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef * huart)
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef * /*huart*/)
 {
   /* Initiate next USB packet transfer once UART completes transfer
    * (transmitting data over Tx line) */
@@ -393,41 +374,6 @@ static void ComPort_Config(void)
    * size */
   HAL_UART_Receive_IT(&UartHandle, (uint8_t *) (UserTxBuffer + UserTxBufPtrIn),
                       1);
-}
-
-/**
-  * @brief  TIM_Config: Configure TIMx timer
-  * @param  None.
-  * @retval None
-  */
-static void TIM_Config(void)
-{
-  /* Set TIMx instance */
-  TimHandle.Instance = TIMx;
-
-  /* Initialize TIM3 peripheral as follows: + Period = (CDC_POLLING_INTERVAL *
-   * 10000) - 1 + Prescaler = ((APB1 frequency / 1000000) - 1) + ClockDivision
-   * = 0 + Counter direction = Up */
-  TimHandle.Init.Period = (CDC_POLLING_INTERVAL * 1000) - 1;
-  TimHandle.Init.Prescaler = 84 - 1;
-  TimHandle.Init.ClockDivision = 0;
-  TimHandle.Init.CounterMode = TIM_COUNTERMODE_UP;
-  if (HAL_TIM_Base_Init(&TimHandle) != HAL_OK)
-  {
-    /* Initialization Error */
-    Error_Handler();
-  }
-}
-
-/**
-  * @brief  UART error callbacks
-  * @param  UartHandle: UART handle
-  * @retval None
-  */
-void HAL_UART_ErrorCallback(UART_HandleTypeDef * UartHandle)
-{
-  /* Transfer error occurred in reception and/or transmission process */
-  Error_Handler();
 }
 
 /**
