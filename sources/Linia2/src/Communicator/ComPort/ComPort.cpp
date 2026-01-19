@@ -137,7 +137,7 @@ void ComPort::Update()
 {
     if (IsConnected())
     {
-        UpdateConnected();
+//        UpdateConnected();
     }
     else
     {
