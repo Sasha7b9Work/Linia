@@ -19,6 +19,14 @@
 #include "defines.h"
 #include "usbd_cdc.h"
 #include "Hardware/USBD/usbd_cdc_interface.h"
+#include "Utils/RingBuffer.h"
+#include <cctype>
+
+
+namespace _CDC
+{
+    static RingBuffer in_buffer;
+}
 
 
 USBD_HandleTypeDef USBD_Device;
@@ -170,9 +178,16 @@ static int8_t CDC_Itf_Control(uint8_t cmd, uint8_t * pbuf, uint16_t /*length*/)
   * @param  Len: Number of data received (in bytes)
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
-static int8_t CDC_Itf_Receive(uint8_t * /*Buf*/, uint32_t * /*Len*/)
+static int8_t CDC_Itf_Receive(uint8_t *Buf, uint32_t *Len)
 {
-//    USBD_CDC_ReceivePacket(reinterpret_cast<USBD_HandleTypeDef *>(VCP::handleUSBD));
+    int size = (int)(*Len);
+
+    for (int i = 0; i < size; i++)
+    {
+        _CDC::in_buffer.Append(*Buf);
+        Buf++;
+    }
+
     return (USBD_OK);
 }
 
@@ -206,7 +221,14 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef * /*huart*/)
 }
 
 
-void _CDC::GetData(BufferOSDP &)
+void _CDC::GetData(BufferOSDP &out_buffer)
 {
+    while (!in_buffer.IsEmpty())
+    {
+        char symbol = (char)in_buffer.Pop();
 
+        symbol = (char)std::toupper(symbol);
+
+        out_buffer.Append(symbol);
+    }
 }
