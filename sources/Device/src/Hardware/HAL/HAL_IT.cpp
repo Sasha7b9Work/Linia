@@ -5,6 +5,8 @@
 #include "Utils/Debug.h"
 #include <stm32f4xx_hal.h>
 
+extern PCD_HandleTypeDef hpcd;
+
 
 #define TRACE_HANDLER                   
 /*
@@ -33,15 +35,10 @@ extern "C" {
     
     void OTG_FS_IRQHandler()
     {
+        HAL_PCD_IRQHandler(&hpcd);
     }
 
-    
-    void OTG_HS_IRQHandler()
-    {
-        // VCP
-    }
-    
-    
+       
     void MemManage_Handler()
     {
         TRACE_HANDLER;

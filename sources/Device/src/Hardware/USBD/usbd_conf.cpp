@@ -249,7 +249,7 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
   hpcd.Init.phy_itface = PCD_PHY_EMBEDDED;
   hpcd.Init.Sof_enable = 0;
   hpcd.Init.speed = PCD_SPEED_FULL;
-  hpcd.Init.vbus_sensing_enable = DISABLE;
+  hpcd.Init.vbus_sensing_enable = ENABLE;
   /* Link The driver to the stack */
   hpcd.pData = pdev;
   pdev->pData = &hpcd;
