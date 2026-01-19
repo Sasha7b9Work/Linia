@@ -20,6 +20,10 @@
 #ifndef __USBD_DEF_H
 #define __USBD_DEF_H
 
+#ifdef WIN32
+    #define __STATIC_INLINE
+#endif
+
 #if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
     #pragma clang diagnostic push 
     #pragma clang diagnostic ignored "-Weverything"
@@ -193,6 +197,11 @@ extern "C" {
 /**
   * @}
   */
+
+
+#ifdef WIN32
+    #define __PACKED
+#endif
 
 
 /** @defgroup USBD_DEF_Exported_TypesDefinitions
@@ -438,7 +447,7 @@ __STATIC_INLINE uint16_t SWAPBYTE(uint8_t *addr)
   _pbuff++;
   _Byte2 = *(uint8_t *)_pbuff;
 
-  _SwapVal = (_Byte2 << 8) | _Byte1;
+  _SwapVal = (uint16_t)((_Byte2 << 8) | _Byte1);
 
   return _SwapVal;
 }

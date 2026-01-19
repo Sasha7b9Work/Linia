@@ -32,6 +32,7 @@ add_compile_options(
     /wd4514
     /wd4623
     /wd4626
+    /wd4668
     /wd4820
     /wd5027
     /wd5039

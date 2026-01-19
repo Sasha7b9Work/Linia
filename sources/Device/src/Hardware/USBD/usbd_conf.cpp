@@ -19,6 +19,10 @@
 #include "stm32f4xx_hal.h"
 #include "usbd_core.h"
 
+#ifdef WIN32
+    #pragma warning(disable:4459)
+#endif
+
 /* Private typedef ----------------------------------------------------------- */
 /* Private define ------------------------------------------------------------ */
 /* Private macro ------------------------------------------------------------- */
