@@ -6,6 +6,7 @@
 #include "Utils/StringUtils.h"
 #include "Settings/Settings.h"
 #include "Windows/ConsoleRS232.h"
+#include "Panels/PanelUpper.h"
 
 
 using namespace std::chrono;
@@ -64,11 +65,31 @@ void ComPort::GetComports(std::vector<bool> &ports)
 
 bool ComPort::TryConnect()
 {
-    int num_port = SET::GUI::serial_port_num.Get();
-
-    if (RS232_OpenComport(num_port, 115200, "8N1", 0) == 0)
+    if (PanelUpper::self->comboPorts->GetCount() == 0)
     {
-        connected_port = num_port;
+        return false;
+    }
+
+    uint selection = (uint)PanelUpper::self->comboPorts->GetSelection();
+
+    wxString name_port = PanelUpper::self->comboPorts->GetString(selection);
+
+    int i = (int)name_port.Length() - 1;
+
+    while (i >= 0 && wxIsdigit(name_port[i]))
+    {
+        i--;
+    }
+
+    int num_port = 0;
+
+    (name_port.Mid((size_t)(i + 1))).ToInt(&num_port);
+
+    if (RS232_OpenComport(num_port - 1, 115200, "8N1", 0) == 0)     // Открываем порт с меньшим на 1 значением - в функциях rs232.cpp нумерация начинается с нуля
+    {
+        connected_port = num_port - 1;
+
+        SET::GUI::serial_port_num.Set(num_port);
 
         return true;
     }
