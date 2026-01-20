@@ -187,6 +187,10 @@ static int8_t CDC_Itf_Receive(uint8_t *Buf, uint32_t *Len)
         _CDC::in_buffer.Append(*Buf);
         Buf++;
     }
+    
+    extern USBD_HandleTypeDef USBD_Device;
+    
+    USBD_CDC_ReceivePacket(&USBD_Device);
 
     return (USBD_OK);
 }
@@ -215,20 +219,17 @@ static int8_t CDC_Itf_TransmitCplt(uint8_t * /*Buf*/, uint32_t * /*Len*/, uint8_
   */
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef * /*huart*/)
 {
-  /* Initiate next USB packet transfer once UART completes transfer
-   * (transmitting data over Tx line) */
-  USBD_CDC_ReceivePacket(&USBD_Device);
 }
 
 
 void _CDC::GetData(BufferOSDP &out_buffer)
 {
-    while (!in_buffer.IsEmpty())
-    {
-        char symbol = (char)in_buffer.Pop();
+        while (!in_buffer.IsEmpty())
+        {
+            char symbol = (char)in_buffer.Pop();
 
-        symbol = (char)std::toupper(symbol);
+            symbol = (char)std::toupper(symbol);
 
-        out_buffer.Append(symbol);
-    }
+            out_buffer.Append(symbol);
+        }
 }

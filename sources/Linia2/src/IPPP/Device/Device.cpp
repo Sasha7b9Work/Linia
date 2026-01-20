@@ -65,7 +65,7 @@ void Device::SendCommand(pchar format, ...) const
     std::strcat(message, "\0");
 
 #ifdef WIN32
-    ComPort::Send(message);
+    ComPort::Send(message, (int)std::strlen(message) + 1);
 #else
     UART::SendBuffer(message, (int)std::strlen(message) + 1);
 #endif
