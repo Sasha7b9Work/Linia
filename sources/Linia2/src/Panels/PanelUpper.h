@@ -1,4 +1,4 @@
-// 2025/6/1 17:13:34 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/6/1 17:13:34 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Panels/Panel.h"
 
@@ -23,7 +23,7 @@ private:
 
     void OnEventComboBox(wxCommandEvent &);
 
-    // Установить в comboPorts порт из настроек
+    // РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РІ comboPorts РїРѕСЂС‚ РёР· РЅР°СЃС‚СЂРѕРµРє
     void SetTunedPort();
 
 #endif

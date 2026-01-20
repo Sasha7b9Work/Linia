@@ -1,4 +1,4 @@
-// 2025/6/1 17:14:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/6/1 17:14:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelUpper.h"
 #include "MainWindow.h"
@@ -21,7 +21,7 @@ PanelUpper::PanelUpper(wxWindow* parent) :
 
 #ifdef WIN32
 
-    new wxStaticText(this, wxID_ANY, "COM-порт", { 150, 56 });
+    new wxStaticText(this, wxID_ANY, "COM-РїРѕСЂС‚", { 150, 56 });
 
     comboPorts = new wxComboBox(this, wxID_ANY, "", { 220, 45 });
 
