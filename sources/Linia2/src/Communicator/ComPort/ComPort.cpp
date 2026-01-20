@@ -91,8 +91,12 @@ bool ComPort::TryConnect()
 
         SET::GUI::serial_port_num.Set(num_port);
 
+        PanelUpper::self->color_square->SetColor(*wxGREEN);
+
         return true;
     }
+
+    PanelUpper::self->color_square->SetColor(*wxRED);
 
     return false;
 }

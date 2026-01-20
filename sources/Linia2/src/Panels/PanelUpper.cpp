@@ -21,9 +21,12 @@ PanelUpper::PanelUpper(wxWindow* parent) :
 
 #ifdef WIN32
 
-    new wxStaticText(this, wxID_ANY, "COM-порт", { 150, 56 });
+    new wxStaticText(this, wxID_ANY, "COM-порт", { 150, 50 });
 
     comboPorts = new wxComboBox(this, wxID_ANY, "", { 220, 45 });
+
+    color_square = new ColorSquare(this, wxID_ANY);
+    color_square->SetPosition({ 340, 45 });
 
     std::vector<bool> ports;
 
