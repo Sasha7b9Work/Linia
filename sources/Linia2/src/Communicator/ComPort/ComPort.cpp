@@ -65,6 +65,8 @@ void ComPort::GetComports(std::vector<bool> &ports)
 
 bool ComPort::TryConnect()
 {
+#ifdef WIN32
+
     if (PanelUpper::self->comboPorts->GetCount() == 0)
     {
         return false;
@@ -97,6 +99,8 @@ bool ComPort::TryConnect()
     }
 
     PanelUpper::self->color_square->SetColor(*wxRED);
+
+#endif
 
     return false;
 }
