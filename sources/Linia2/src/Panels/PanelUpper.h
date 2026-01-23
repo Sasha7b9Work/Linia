@@ -18,6 +18,9 @@ public:
 
     ColorSquare *color_square = nullptr;
 
+    // Возвращает номер COM-порта из комбобокса
+    int GetNumPort() const;
+
 #endif
 
 private:

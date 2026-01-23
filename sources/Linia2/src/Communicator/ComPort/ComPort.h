@@ -10,9 +10,10 @@ namespace ComPort
     // Возвращает массив портов. 0 == COM1, true - cуществует
     void GetComports(std::vector<bool> &);
 
-    void Update();
+    // 0 == COM1
+    bool Connect(int num_port);
 
-    void Close();
+    void Disconnect();
 
     void Send(pchar);
 

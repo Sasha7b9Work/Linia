@@ -54,7 +54,9 @@ void PanelUpper::OnEventComboBox(wxCommandEvent &event)
 {
     if (event.GetId() == comboPorts->GetId())
     {
+        ComPort::Disconnect();
 
+        ComPort::Connect(GetNumPort());
     }
 }
 
@@ -78,6 +80,32 @@ void PanelUpper::SetTunedPort()
     {
         comboPorts->SetSelection(0);
     }
+}
+
+
+int PanelUpper::GetNumPort() const
+{
+    if (comboPorts->GetCount() == 0)
+    {
+        return false;
+    }
+
+    uint selection = (uint)comboPorts->GetSelection();
+
+    wxString name_port = comboPorts->GetString(selection);
+
+    int i = (int)name_port.Length() - 1;
+
+    while (i >= 0 && wxIsdigit(name_port[i]))
+    {
+        i--;
+    }
+
+    int num_port = -1;
+
+    (name_port.Mid((size_t)(i + 1))).ToInt(&num_port);
+
+    return num_port - 1;
 }
 
 #endif

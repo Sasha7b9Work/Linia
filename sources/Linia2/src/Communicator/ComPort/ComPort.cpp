@@ -26,14 +26,8 @@ namespace ComPort
     // Столько первых портов опрашивается
     static const int NUM_PORTS = 32;
 
-    // Нумерация начинается с 0 : 0 == COM1
-    bool PortIsExist(int);
-
     // Каждофреймовое обновление при подключённом устройстве
     void UpdateConnected();
-
-    // Попытка приконнектиться в соотвествии с настройками
-    bool TryConnect();
 
     bool IsConnected();
 
@@ -63,33 +57,20 @@ void ComPort::GetComports(std::vector<bool> &ports)
 }
 
 
-bool ComPort::TryConnect()
+bool ComPort::Connect(int num_port)
 {
 #ifdef WIN32
 
-    if (PanelUpper::self->comboPorts->GetCount() == 0)
+    Disconnect();
+
+    if (num_port < 0)
     {
         return false;
     }
 
-    uint selection = (uint)PanelUpper::self->comboPorts->GetSelection();
-
-    wxString name_port = PanelUpper::self->comboPorts->GetString(selection);
-
-    int i = (int)name_port.Length() - 1;
-
-    while (i >= 0 && wxIsdigit(name_port[i]))
+    if (RS232_OpenComport(num_port, 115200, "8N1", 0) == 0)     // Открываем порт с меньшим на 1 значением - в функциях rs232.cpp нумерация начинается с нуля
     {
-        i--;
-    }
-
-    int num_port = 0;
-
-    (name_port.Mid((size_t)(i + 1))).ToInt(&num_port);
-
-    if (RS232_OpenComport(num_port - 1, 115200, "8N1", 0) == 0)     // Открываем порт с меньшим на 1 значением - в функциях rs232.cpp нумерация начинается с нуля
-    {
-        connected_port = num_port - 1;
+        connected_port = num_port;
 
         SET::GUI::serial_port_num.Set(num_port);
 
@@ -116,7 +97,7 @@ pchar ComPort::NameOpenedPort()
 }
 
 
-void ComPort::Close()
+void ComPort::Disconnect()
 {
     if (IsConnected())
     {
@@ -159,22 +140,6 @@ int ComPort::Receive(char *buffer, int size)
     }
 
     return 0;
-}
-
-
-void ComPort::Update()
-{
-    if (IsConnected())
-    {
-//        UpdateConnected();
-    }
-    else
-    {
-        if (TryConnect())
-        {
-            LOG_WRITE("Обнаружен карт-ридер на порту %s", NameOpenedPort());
-        }
-    }
 }
 
 

@@ -2,21 +2,18 @@
 #include "defines.h"
 #include "Application.h"
 #include "Utils/Configurator.h"
-#include "Communicator/ComPort/ComPort.h"
 #include "Settings/Settings.h"
-#include "Utils/Timer.h"
 #include "MainWindow.h"
 #include "Windows/ConsoleRS232.h"
 #include "IPPP/Tests/Tests.h"
-#include "Communicator/GPIO/GPIO.h"
-#include "Display/PanelErrors.h"
 #include "IPPP/RealIPPP.h"
-#include "IPPP/Emulator/EmulatorIPPP.h"
 #include "SoftTests/SoftTests.h"
 #include "Communicator/UART/UART.h"
 #include "Communicator/SPI/SPI.h"
 #include "Controls/AutoRebootDialog.h"
 #include "IPPP/Device/Chips.h"
+#include "Panels/PanelUpper.h"
+#include "Communicator/ComPort/ComPort.h"
 #include <cstdlib>
 
 
@@ -124,6 +121,8 @@ bool Application::OnInit()
             "Дополнительная информация в файле %s.", Log::FileName().c_str().AsChar()), "Ошибка", wxOK | wxCENTRE | wxICON_ERROR);
     }
 
+    ComPort::Connect(PanelUpper::self->GetNumPort());
+
     return true;
 }
 
@@ -142,8 +141,6 @@ void Application::OnTimer(wxTimerEvent &)
 
     if (mutex.try_lock())
     {
-        ComPort::Update();
-
         I_IPPP::impl->Update();
 
         MainWindow::self->Update();
