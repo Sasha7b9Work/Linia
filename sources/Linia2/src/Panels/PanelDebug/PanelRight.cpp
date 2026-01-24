@@ -19,11 +19,15 @@ PanelRight::PanelRight(wxWindow *parent) : wxPanel(parent)
 
     btnReturn->SetToolTip("Возврат в главную панель");
 
-    btnStart = new wxButton{ this, wxID_ANY, "Старт", { 10, SD::Y_SB(50) }, size_button };
+    btnStart = new wxButton{ this, wxID_ANY, "Старт", { 10, SD::Y_SB(60) }, size_button };
 
     btnStart->SetToolTip("Запуск развёртки");
 
-    btnStop = new wxButton{ this, wxID_ANY, "Стоп", {10, SD::Y_SB(80)}, size_button };
+    txtPeriodScan = new wxTextCtrl{ this, wxID_ANY, "1000", { 100, SD::Y_SB(60)}, size_button };
+
+    txtPeriodScan->SetToolTip("Период запуска развёртки в миллисекундах");
+
+    btnStop = new wxButton{ this, wxID_ANY, "Стоп", {10, SD::Y_SB(90)}, size_button };
 
     btnStop->SetToolTip("Останов развёртки");
 
@@ -43,10 +47,15 @@ void PanelRight::OnEventButton(wxCommandEvent &event)
     }
     else if (id == btnStart->GetId())
     {
-        IDevice::impl->SendCommand(":SCAN:START 1000");
+        wxString str_value = txtPeriodScan->GetValue();
+        int int_value = 0;
+        str_value.ToInt(&int_value);
+
+        IDevice::impl->SendCommand(wxString::Format(":SCAN:START %d", int_value));
 
         btnStart->Enable(false);
         btnStop->Enable(true);
+        txtPeriodScan->Enable(false);
     }
     else if (id == btnStop->GetId())
     {
@@ -54,5 +63,6 @@ void PanelRight::OnEventButton(wxCommandEvent &event)
 
         btnStart->Enable(true);
         btnStop->Enable(false);
+        txtPeriodScan->Enable(true);
     }
 }

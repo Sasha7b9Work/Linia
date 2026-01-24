@@ -16,5 +16,7 @@ private:
     wxButton *btnStart = nullptr;       // Запуск развёртки
     wxButton *btnStop = nullptr;        // Останов развёртки
 
+    wxTextCtrl *txtPeriodScan = nullptr;    // Период запуска развёртки в миллисекундах
+
     void OnEventButton(wxCommandEvent &);
 };
