@@ -1,6 +1,6 @@
 // 2026/01/24 21:42:08 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/PanelDebug/PageRight.h"
+#include "Panels/PanelDebug/PanelRight.h"
 #include "MainWindow.h"
 
 

@@ -3,7 +3,7 @@
 #include "Panels/PanelDebug/PanelDebug.h"
 #include "MainWindow.h"
 #include "Panels/PanelDebug/Notebook/NotebookDebug.h"
-#include "Panels/PanelDebug/PageRight.h"
+#include "Panels/PanelDebug/PanelRight.h"
 
 
 PanelDebug *PanelDebug::self = nullptr;
