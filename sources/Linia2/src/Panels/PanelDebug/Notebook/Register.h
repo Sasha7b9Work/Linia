@@ -1,9 +1,9 @@
 ﻿// 2025/6/4 10:25:39 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/ButtonsCombo.h"
-#include "Panels/PanelDebug/PagesBlocks/PainterRegister.h"
+#include "Panels/PanelDebug/Notebook/PainterRegister.h"
 #include "Controls/TextControls.h"
-#include "Panels/PanelDebug/PagesBlocks/CommandsCombo.h"
+#include "Panels/PanelDebug/Notebook/CommandsCombo.h"
 #include "Controls/Painter.h"
 #include "IPPP/Device/Chips.h"
 

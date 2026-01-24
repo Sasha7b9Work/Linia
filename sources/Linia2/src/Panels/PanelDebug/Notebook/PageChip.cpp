@@ -1,6 +1,6 @@
 ﻿// 2025/6/3 14:01:53 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/PanelDebug/PagesBlocks/PageChip.h"
+#include "Panels/PanelDebug/Notebook/PageChip.h"
 #include "MainWindow.h"
 
 

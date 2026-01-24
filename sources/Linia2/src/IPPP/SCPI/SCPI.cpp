@@ -2,8 +2,7 @@
 #include "defines.h"
 #include "IPPP/SCPI/SCPI.h"
 #include "Utils/RingBuffer.h"
-#include "Utils/Buffer.h"
-#include "Panels/PanelDebug/PageTestsGPIO.h"
+#include "Panels/PanelDebug/Notebook/PageOrangePi.h"
 
 
 namespace SCPI
@@ -51,9 +50,9 @@ void SCPI::OnEventCallback(uint8 *bytes, int size)
             symbol &= 0x7F;
         }
 
-        if (PageTestsGPIO::self->IsInit())
+        if (PageOrangePi::self->IsInit())
         {
-            PageTestsGPIO::self->FuncOnRecvUART(symbol);
+            PageOrangePi::self->FuncOnRecvUART(symbol);
         }
 
         ring_buffer.Push(symbol);

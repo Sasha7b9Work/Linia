@@ -1,15 +1,15 @@
 ﻿// 2025/6/3 14:06:23 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/PanelDebug/NotebookDebug.h"
-#include "Panels/PanelDebug/PageTestsGPIO.h"
-#include "Panels/PanelDebug/PagesBlocks/PageFPGA.h"
-#include "Panels/PanelDebug/PagesBlocks/PageSource3kV.h"
-#include "Panels/PanelDebug/PagesBlocks/PageCommutator.h"
-#include "Panels/PanelDebug/PagesBlocks/PageChannelC.h"
-#include "Panels/PanelDebug/PagesBlocks/PageChannelB.h"
-#include "Panels/PanelDebug/PagesBlocks/PageChannelS.h"
-#include "Panels/PanelDebug/PagesBlocks/PageMeasCurrent.h"
-#include "Panels/PanelDebug/PagesBlocks/PageSource50V.h"
+#include "Panels/PanelDebug/Notebook/NotebookDebug.h"
+#include "Panels/PanelDebug/Notebook/PageOrangePi.h"
+#include "Panels/PanelDebug/Notebook/PageFPGA.h"
+#include "Panels/PanelDebug/Notebook/PageSource3kV.h"
+#include "Panels/PanelDebug/Notebook/PageCommutator.h"
+#include "Panels/PanelDebug/Notebook/PageChannelC.h"
+#include "Panels/PanelDebug/Notebook/PageChannelB.h"
+#include "Panels/PanelDebug/Notebook/PageChannelS.h"
+#include "Panels/PanelDebug/Notebook/PageMeasCurrent.h"
+#include "Panels/PanelDebug/Notebook/PageSource50V.h"
 
 
 NotebookDebug *NotebookDebug::self = nullptr;
@@ -20,7 +20,7 @@ NotebookDebug::NotebookDebug(wxWindow *parent) :
 {
     self = this;
 
-    AppendNewPage(new PageTestsGPIO(this));
+    AppendNewPage(new PageOrangePi(this));
     AppendNewPage(new PageFPGA(this));
     AppendNewPage(new PageCommutator(this));
     AppendNewPage(new PageSource3kV(this));
@@ -44,25 +44,25 @@ void NotebookDebug::AppendNewPage(wxPanel *page)
 
 void NotebookDebug::Init()
 {
-    PageTestsGPIO::self->Init();
+    PageOrangePi::self->Init();
 }
 
 
 void NotebookDebug::DeInit()
 {
-    PageTestsGPIO::self->DeInit();
+    PageOrangePi::self->DeInit();
 }
 
 
 void NotebookDebug::Update()
 {
-    PageTestsGPIO::self->Update();
+    PageOrangePi::self->Update();
 }
 
 
 void NotebookDebug::Pack()
 {
-    PageTestsGPIO::self->Pack();
+    PageOrangePi::self->Pack();
     PageFPGA::self->Pack();
     PageCommutator::self->Pack();
     PageSource3kV::self->Pack();
@@ -78,7 +78,7 @@ void NotebookDebug::Pack()
 
 void NotebookDebug::Unpack()
 {
-    PageTestsGPIO::self->Unpack();
+    PageOrangePi::self->Unpack();
     PageFPGA::self->Unpack();
     PageCommutator::self->Unpack();
     PageSource3kV::self->Unpack();

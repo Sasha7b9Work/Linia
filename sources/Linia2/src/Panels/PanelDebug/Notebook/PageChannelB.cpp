@@ -1,6 +1,6 @@
 ﻿// 2025/10/07 12:05:33 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/PanelDebug/PagesBlocks/PageChannelB.h"
+#include "Panels/PanelDebug/Notebook/PageChannelB.h"
 
 
 PageChannelB *PageChannelB::self = nullptr;

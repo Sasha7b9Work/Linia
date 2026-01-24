@@ -1,6 +1,6 @@
 ﻿// 2025/10/07 12:22:30 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/PanelDebug/PagesBlocks/PageChannelS.h"
+#include "Panels/PanelDebug/Notebook/PageChannelS.h"
 
 
 /*

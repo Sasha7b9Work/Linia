@@ -1,6 +1,6 @@
 ﻿// 2025/09/03 09:54:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/PanelDebug/PageTestsGPIO.h"
+#include "Panels/PanelDebug/Notebook/PageOrangePi.h"
 #include "Utils/SystemDepend.h"
 #include "Communicator/UART/UART.h"
 #include "Utils/Timer.h"
@@ -11,13 +11,13 @@
 #endif
 
 
-PageTestsGPIO *PageTestsGPIO::self = nullptr;
+PageOrangePi *PageOrangePi::self = nullptr;
 
-bool PageTestsGPIO::thread_is_running = false;
-bool PageTestsGPIO::thread_autoUART_is_running = false;
+bool PageOrangePi::thread_is_running = false;
+bool PageOrangePi::thread_autoUART_is_running = false;
 
 
-PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
+PageOrangePi::PageOrangePi(wxNotebook *parent) :
     wxPanel(parent)
 {
     self = this;
@@ -73,12 +73,12 @@ PageTestsGPIO::PageTestsGPIO(wxNotebook *parent) :
     wxSize size_button{ 75, BUTTON_HEIGHT };
     btnReturn = new wxButton(this, wxID_ANY, "Закрыть", { MainWindow::WIDTH - size_button.x - 15, 0 }, size_button);
 
-    Bind(wxEVT_BUTTON, &PageTestsGPIO::OnEventButton, this);
-    Bind(wxEVT_TOGGLEBUTTON, &PageTestsGPIO::OnEventToggleButton, this);
+    Bind(wxEVT_BUTTON, &PageOrangePi::OnEventButton, this);
+    Bind(wxEVT_TOGGLEBUTTON, &PageOrangePi::OnEventToggleButton, this);
 }
 
 
-void PageTestsGPIO::CreateBoxGPIO()
+void PageOrangePi::CreateBoxGPIO()
 {
     boxGPIO = new wxStaticBox(this, wxID_ANY, "GPIO", { 10, 10 }, { 200, 270 });
 
@@ -142,7 +142,7 @@ void PageTestsGPIO::CreateBoxGPIO()
 }
 
 
-wxStaticBox *PageTestsGPIO::CreateBoxEncoder(const wxPoint &position)
+wxStaticBox *PageOrangePi::CreateBoxEncoder(const wxPoint &position)
 {
     wxStaticBox *boxEncoder = new wxStaticBox(this, wxID_ANY, "Encoder", position, { 200, 270 });
 
@@ -158,7 +158,7 @@ wxStaticBox *PageTestsGPIO::CreateBoxEncoder(const wxPoint &position)
 }
 
 
-wxString PageTestsGPIO::NamePin(Pin::E pin) const
+wxString PageOrangePi::NamePin(Pin::E pin) const
 {
     static const pchar names[Pin::Count] =
     {
@@ -176,7 +176,7 @@ wxString PageTestsGPIO::NamePin(Pin::E pin) const
 }
 
 
-int PageTestsGPIO::NumPin(Pin::E pin) const
+int PageOrangePi::NumPin(Pin::E pin) const
 {
     static const int num[Pin::Count] =
     {
@@ -194,7 +194,7 @@ int PageTestsGPIO::NumPin(Pin::E pin) const
 }
 
 
-wxPanel *PageTestsGPIO::CreatePanelPinOut(wxWindow *parent, PinOut *pin)
+wxPanel *PageOrangePi::CreatePanelPinOut(wxWindow *parent, PinOut *pin)
 {
     wxPanel *panel = new wxPanel(parent, wxID_ANY, wxDefaultPosition, { 180, 23 });
 
@@ -202,7 +202,7 @@ wxPanel *PageTestsGPIO::CreatePanelPinOut(wxWindow *parent, PinOut *pin)
 
     strGPIO.button = new wxButton(panel, wxID_ANY, NamePin(pin->type()), { 0, 0 }, { 70, 22 });
 
-    strGPIO.button->Bind(wxEVT_BUTTON, &PageTestsGPIO::OnEventButton, this);
+    strGPIO.button->Bind(wxEVT_BUTTON, &PageOrangePi::OnEventButton, this);
 
     strGPIO._txtStatePull = new wxTextCtrl(panel, wxID_ANY, "", { 100, 0 }, { 20, 22 }, wxTE_READONLY);
 
@@ -216,7 +216,7 @@ wxPanel *PageTestsGPIO::CreatePanelPinOut(wxWindow *parent, PinOut *pin)
 }
 
 
-wxPanel *PageTestsGPIO::CreatePanelPinIn(wxWindow *parent, PinIn *pin)
+wxPanel *PageOrangePi::CreatePanelPinIn(wxWindow *parent, PinIn *pin)
 {
     wxPanel *panel = new wxPanel(parent, wxID_ANY, wxDefaultPosition, { 180, 23 });
 
@@ -236,7 +236,7 @@ wxPanel *PageTestsGPIO::CreatePanelPinIn(wxWindow *parent, PinIn *pin)
 }
 
 
-void PageTestsGPIO::OnEventButton(wxCommandEvent &event)
+void PageOrangePi::OnEventButton(wxCommandEvent &event)
 {
     event.Skip();
 
@@ -248,7 +248,7 @@ void PageTestsGPIO::OnEventButton(wxCommandEvent &event)
     }
     else if (id == btnSendUART->GetId())
     {
-        wxString message = wxString::Format("%s", PageTestsGPIO::self->txtSendUART->GetValue().c_str().AsChar());
+        wxString message = wxString::Format("%s", PageOrangePi::self->txtSendUART->GetValue().c_str().AsChar());
 
         UART::SendBuffer(message.GetData().AsChar(), (int)(std::strlen(message.GetData().AsChar()) + 1));
     }
@@ -273,7 +273,7 @@ void PageTestsGPIO::OnEventButton(wxCommandEvent &event)
 }
 
 
-void PageTestsGPIO::OnEventToggleButton(wxCommandEvent &event)
+void PageOrangePi::OnEventToggleButton(wxCommandEvent &event)
 {
     event.Skip();
 
@@ -308,21 +308,21 @@ void PageTestsGPIO::OnEventToggleButton(wxCommandEvent &event)
 }
 
 
-void PageTestsGPIO::ThreadFunc()
+void PageOrangePi::ThreadFunc()
 {
     while (thread_is_running)
     {
-        for (auto &str : PageTestsGPIO::self->gpio_out)
+        for (auto &str : PageOrangePi::self->gpio_out)
         {
             str.value_pull = str.pin->Get() ? 1 : 0;
         }
 
-        for (auto &str : PageTestsGPIO::self->gpio_in)
+        for (auto &str : PageOrangePi::self->gpio_in)
         {
             str.value_int = str.pin->Get() ? 1 : 0;
         }
 
-        if (PageTestsGPIO::self->_txtKA)
+        if (PageOrangePi::self->_txtKA)
         {
             ThreadFuncEncoder();
         }
@@ -332,24 +332,24 @@ void PageTestsGPIO::ThreadFunc()
 }
 
 
-void PageTestsGPIO::FuncOnRecvUART(char byte)
+void PageOrangePi::FuncOnRecvUART(char byte)
 {
-    PageTestsGPIO::self->mutex_str_UART.lock();
-    PageTestsGPIO::self->bytesUART.push_back(byte);
-    PageTestsGPIO::self->mutex_str_UART.unlock();
+    PageOrangePi::self->mutex_str_UART.lock();
+    PageOrangePi::self->bytesUART.push_back(byte);
+    PageOrangePi::self->mutex_str_UART.unlock();
 }
 
 
-void PageTestsGPIO::FuncUpdateUART()
+void PageOrangePi::FuncUpdateUART()
 {
     std::vector<char> b;
-    PageTestsGPIO::self->mutex_str_UART.lock();
-    if (PageTestsGPIO::self->bytesUART.size())
+    PageOrangePi::self->mutex_str_UART.lock();
+    if (PageOrangePi::self->bytesUART.size())
     {
-        b = PageTestsGPIO::self->bytesUART;
-        PageTestsGPIO::self->bytesUART.clear();
+        b = PageOrangePi::self->bytesUART;
+        PageOrangePi::self->bytesUART.clear();
     }
-    PageTestsGPIO::self->mutex_str_UART.unlock();
+    PageOrangePi::self->mutex_str_UART.unlock();
 
     if (b.size())
     {
@@ -365,7 +365,7 @@ void PageTestsGPIO::FuncUpdateUART()
             }
             else
             {
-                PageTestsGPIO::self->txtRecvUART->SetValue(text);
+                PageOrangePi::self->txtRecvUART->SetValue(text);
                 text.Clear();
             }
         }
@@ -373,35 +373,35 @@ void PageTestsGPIO::FuncUpdateUART()
 }
 
 
-void PageTestsGPIO::Update()
+void PageOrangePi::Update()
 {
-    for (auto &str : PageTestsGPIO::self->gpio_out)
+    for (auto &str : PageOrangePi::self->gpio_out)
     {
         str._txtStatePull->SetValue(wxString::Format("%d", str.value_pull));
     }
 
-    for (auto &str : PageTestsGPIO::self->gpio_in)
+    for (auto &str : PageOrangePi::self->gpio_in)
     {
         str._txtStatePull->SetValue(wxString::Format("%d", str.value_int));
     }
 
-    if (PageTestsGPIO::self->_txtKA)
+    if (PageOrangePi::self->_txtKA)
     {
-        PageTestsGPIO::self->_txtKA->SetValue(wxString::Format("%d", valueKA));
-        PageTestsGPIO::self->_txtKB->SetValue(wxString::Format("%d", valueKB));
+        PageOrangePi::self->_txtKA->SetValue(wxString::Format("%d", valueKA));
+        PageOrangePi::self->_txtKB->SetValue(wxString::Format("%d", valueKB));
     }
 
-    PageTestsGPIO::self->_txtNumberMeas->SetValue(wxString::Format("%d", valueMeas));
+    PageOrangePi::self->_txtNumberMeas->SetValue(wxString::Format("%d", valueMeas));
 
-    PageTestsGPIO::self->_txtNumberErrors->SetValue(wxString::Format("%d", numErrors));
+    PageOrangePi::self->_txtNumberErrors->SetValue(wxString::Format("%d", numErrors));
 
-    PageTestsGPIO::self->_txtReadData->SetValue(wxString::Format("%u %u %u %u, crc=%u, %u ms", values[0], values[1], values[2], values[3], values[4], time_read));
+    PageOrangePi::self->_txtReadData->SetValue(wxString::Format("%u %u %u %u, crc=%u, %u ms", values[0], values[1], values[2], values[3], values[4], time_read));
 
     FuncUpdateUART();
 }
 
 
-void PageTestsGPIO::ThreadFuncEncoder()
+void PageOrangePi::ThreadFuncEncoder()
 {
     static bool prevKA = false;
     static bool prevKB = false;
@@ -425,14 +425,14 @@ void PageTestsGPIO::ThreadFuncEncoder()
             {
                 prevKA = valKA;
 
-                PageTestsGPIO::self->valueKA++;
+                PageOrangePi::self->valueKA++;
             }
 
             if (valKB != prevKB)
             {
                 prevKB = valKB;
 
-                PageTestsGPIO::self->valueKB++;
+                PageOrangePi::self->valueKB++;
             }
         }
 
@@ -441,7 +441,7 @@ void PageTestsGPIO::ThreadFuncEncoder()
 }
 
 
-uint8 PageTestsGPIO::CalculateCRC(uint16 values[4])
+uint8 PageOrangePi::CalculateCRC(uint16 values[4])
 {
     BitSet16 bs0{ values[0] };
 
@@ -468,7 +468,7 @@ uint8 PageTestsGPIO::CalculateCRC(uint16 values[4])
 }
 
 
-void PageTestsGPIO::ThreadFuncFPGA()
+void PageOrangePi::ThreadFuncFPGA()
 {
     static bool prev = false;
 
@@ -525,33 +525,33 @@ void PageTestsGPIO::ThreadFuncFPGA()
 
             if (crc != crc_read)
             {
-                PageTestsGPIO::self->numErrors++;
+                PageOrangePi::self->numErrors++;
             }
 
             if (i == 10)
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    PageTestsGPIO::self->values[j] = values[i][j];
+                    PageOrangePi::self->values[j] = values[i][j];
                 }
-                PageTestsGPIO::self->values[4] = crc_read;
+                PageOrangePi::self->values[4] = crc_read;
             }
         }
 
-        PageTestsGPIO::self->time_read = (uint)meter.ElapsedMS();
+        PageOrangePi::self->time_read = (uint)meter.ElapsedMS();
 
-        PageTestsGPIO::self->valueMeas++;
+        PageOrangePi::self->valueMeas++;
     }
 
     prev = pinFIFO_FULL.Get();
 }
 
 
-void PageTestsGPIO::ThreadFuncAutoUART()
+void PageOrangePi::ThreadFuncAutoUART()
 {
     while (thread_autoUART_is_running)
     {
-        wxString message = wxString::Format("%s", PageTestsGPIO::self->txtSendUART->GetValue().c_str().AsChar());
+        wxString message = wxString::Format("%s", PageOrangePi::self->txtSendUART->GetValue().c_str().AsChar());
 
         UART::SendBuffer(message.GetData().AsChar(), (int)(std::strlen(message.GetData().AsChar()) + 1));
 
@@ -560,9 +560,9 @@ void PageTestsGPIO::ThreadFuncAutoUART()
 }
 
 
-void PageTestsGPIO::OnChangeStatePin(PinIn *pin, bool state)
+void PageOrangePi::OnChangeStatePin(PinIn *pin, bool state)
 {
-    for (auto &str : PageTestsGPIO::self->gpio_in)
+    for (auto &str : PageOrangePi::self->gpio_in)
     {
         if (str.pin == pin)
         {
@@ -572,9 +572,9 @@ void PageTestsGPIO::OnChangeStatePin(PinIn *pin, bool state)
 }
 
 
-void PageTestsGPIO::OnChangeStatePin(PinOut *pin, bool state)
+void PageOrangePi::OnChangeStatePin(PinOut *pin, bool state)
 {
-    for (auto &str : PageTestsGPIO::self->gpio_out)
+    for (auto &str : PageOrangePi::self->gpio_out)
     {
         if (str.pin == pin)
         {
@@ -605,7 +605,7 @@ void set_thread_priority_linux(std::thread &thread, int policy, int priority)
 #endif
 
 
-void PageTestsGPIO::Init()
+void PageOrangePi::Init()
 {
     if (!_thread)
     {
@@ -622,13 +622,13 @@ void PageTestsGPIO::Init()
 }
 
 
-bool PageTestsGPIO::IsInit() const
+bool PageOrangePi::IsInit() const
 {
     return is_init;
 }
 
 
-void PageTestsGPIO::DeInit()
+void PageOrangePi::DeInit()
 {
     is_init = false;
 
@@ -645,54 +645,54 @@ void PageTestsGPIO::DeInit()
 }
 
 
-void PageTestsGPIO::CallbackOnStart(bool state)
+void PageOrangePi::CallbackOnStart(bool state)
 {
-    PageTestsGPIO::self->OnChangeStatePin(&pinSTART, state);
+    PageOrangePi::self->OnChangeStatePin(&pinSTART, state);
 }
 
-void PageTestsGPIO::CallbackOnStop(bool state)
+void PageOrangePi::CallbackOnStop(bool state)
 {
-    PageTestsGPIO::self->OnChangeStatePin(&pinSTOP, state);
+    PageOrangePi::self->OnChangeStatePin(&pinSTOP, state);
 }
 
-void PageTestsGPIO::CallbackOnDAT_F0(bool state)
+void PageOrangePi::CallbackOnDAT_F0(bool state)
 {
-    PageTestsGPIO::self->OnChangeStatePin(&pinDAT_F0, state);
+    PageOrangePi::self->OnChangeStatePin(&pinDAT_F0, state);
 }
 
-void PageTestsGPIO::CallbackOnDAT_F1(bool state)
+void PageOrangePi::CallbackOnDAT_F1(bool state)
 {
-    PageTestsGPIO::self->OnChangeStatePin(&pinSPI_MOSI, state);
+    PageOrangePi::self->OnChangeStatePin(&pinSPI_MOSI, state);
 }
 
-void PageTestsGPIO::CallbackOnDAT_F2(bool state)
+void PageOrangePi::CallbackOnDAT_F2(bool state)
 {
-    PageTestsGPIO::self->OnChangeStatePin(&pinDAT_F2, state);
+    PageOrangePi::self->OnChangeStatePin(&pinDAT_F2, state);
 }
 
-void PageTestsGPIO::CallbackOnDAT_F3(bool /*state*/)
+void PageOrangePi::CallbackOnDAT_F3(bool /*state*/)
 {
-//    PageTestsGPIO::self->OnChangeStatePin(&pinDAT_F3, state);
+//    PageOrangePi::self->OnChangeStatePin(&pinDAT_F3, state);
 }
 
-void PageTestsGPIO::CallbackOnFIFO_FULL(bool state)
+void PageOrangePi::CallbackOnFIFO_FULL(bool state)
 {
-    PageTestsGPIO::self->OnChangeStatePin(&pinFIFO_FULL, state);
+    PageOrangePi::self->OnChangeStatePin(&pinFIFO_FULL, state);
 }
 
-void PageTestsGPIO::CallbackonREQ_RD(bool state)
+void PageOrangePi::CallbackonREQ_RD(bool state)
 {
-    PageTestsGPIO::self->OnChangeStatePin(&pinREQ_RD, state);
-}
-
-
-void PageTestsGPIO::Pack()
-{
-
+    PageOrangePi::self->OnChangeStatePin(&pinREQ_RD, state);
 }
 
 
-void PageTestsGPIO::Unpack()
+void PageOrangePi::Pack()
+{
+
+}
+
+
+void PageOrangePi::Unpack()
 {
 
 }

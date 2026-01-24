@@ -1,6 +1,6 @@
 ﻿// 2025/10/07 11:39:05 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/PanelDebug/PagesBlocks/PageSource3kV.h"
+#include "Panels/PanelDebug/Notebook/PageSource3kV.h"
 
 /*
     Регистр управления 24 разряда

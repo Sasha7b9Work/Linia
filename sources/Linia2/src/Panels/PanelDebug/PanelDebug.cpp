@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Panels/PanelDebug/PanelDebug.h"
 #include "MainWindow.h"
-#include "Panels/PanelDebug/NotebookDebug.h"
+#include "Panels/PanelDebug/Notebook/NotebookDebug.h"
 #include "Utils/Configurator.h"
 
 
@@ -19,6 +19,8 @@ PanelDebug::PanelDebug(wxWindow *parent) :
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
     sizer->Add(NotebookDebug::self, 1, wxEXPAND);
+
+    sizer->AddSpacer(100);
 
     SetSizer(sizer);
 

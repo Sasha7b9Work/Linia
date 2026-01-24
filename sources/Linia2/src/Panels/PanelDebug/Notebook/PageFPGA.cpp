@@ -1,6 +1,6 @@
 ﻿// 2025/10/13 13:54:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/PanelDebug/PagesBlocks/PageFPGA.h"
+#include "Panels/PanelDebug/Notebook/PageFPGA.h"
 #include "Utils/String.h"
 #include "Utils/SystemDepend.h"
 #include "IPPP/Device/IDevice.h"

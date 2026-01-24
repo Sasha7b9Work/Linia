@@ -1,13 +1,13 @@
 ﻿// 2025/6/4 10:27:32 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/PanelDebug/PagesBlocks/Register.h"
-#include "Panels/PanelDebug/PagesBlocks/PainterRegister.h"
+#include "Panels/PanelDebug/Notebook/Register.h"
+#include "Panels/PanelDebug/Notebook/PainterRegister.h"
 #include "Controls/TextControls.h"
 #include "Utils/StringUtils.h"
-#include "Panels/PanelDebug/PagesBlocks/CommandsCombo.h"
+#include "Panels/PanelDebug/Notebook/CommandsCombo.h"
 #include "IPPP/Device/IDevice.h"
-#include "Panels/PanelDebug/NotebookDebug.h"
-#include "Panels/PanelDebug/PagesBlocks/PageChip.h"
+#include "Panels/PanelDebug/Notebook/NotebookDebug.h"
+#include "Panels/PanelDebug/Notebook/PageChip.h"
 
 
 Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip) :

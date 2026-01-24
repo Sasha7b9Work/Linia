@@ -1,16 +1,15 @@
 ﻿// 2025/09/03 09:50:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Communicator/GPIO/GPIO.h"
-#include "Controls/Painter.h"
 
 
-class PageTestsGPIO : public wxPanel
+class PageOrangePi : public wxPanel
 {
 public:
 
-    PageTestsGPIO(wxNotebook *);
+    PageOrangePi(wxNotebook *);
 
-    static PageTestsGPIO *self;
+    static PageOrangePi *self;
 
     // Вызывается при заходе на панель отадки
     void Init();

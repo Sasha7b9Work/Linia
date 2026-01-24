@@ -86,7 +86,7 @@ file(GLOB PANELS_PANELCONFIG_SCHEME     src/Panels/PanelConfig/PanelScheme/*.*)
 file(GLOB PANELS_PANELMENU              src/Panels/PanelMenu/*.*)
 file(GLOB PANELS_PANELMENU_SETUP        src/Panels/PanelMenu/Setup/*.*)
 file(GLOB PANELS_PANELDEBUG             src/Panels/PanelDebug/*.*)
-file(GLOB PANELS_PANELDEBUG_PAGESBLOCKS src/Panels/PanelDebug/PagesBlocks/*.*)
+file(GLOB PANELS_PANELDEBUG_NOTEBOOK    src/Panels/PanelDebug/Notebook/*.*)
 file(GLOB PANELS_PANELDEBUG_OLD         src/Panels/PanelDebug/Old/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB SOFTTESTS                     src/SoftTests/*.*)
@@ -129,7 +129,7 @@ source_group(Panels/PanelConfig/PanelScheme       FILES ${PANELS_PANELCONFIG_SCH
 source_group(Panels/PanelMenu                     FILES ${PANELS_PANELMENU})
 source_group(Panels/PanelMenu/Setup               FILES ${PANELS_PANELMENU_SETUP})
 source_group(Panels/PanelDebug                    FILES ${PANELS_PANELDEBUG})
-source_group(Panels/PanelDebug/PagesBlocks        FILES ${PANELS_PANELDEBUG_PAGESBLOCKS})
+source_group(Panels/PanelDebug/Notebook           FILES ${PANELS_PANELDEBUG_NOTEBOOK})
 source_group(Panels/PanelDebug/Old                FILES ${PANELS_PANELDEBUG_OLD})
 source_group(Settings                             FILES ${SETTINGS})
 source_group(SoftTests                            FILES ${SOFTTESTS})
@@ -162,7 +162,7 @@ add_executable(${PROJECT_NAME}
     ${PANELS_PANELMENU}
     ${PANELS_PANELMENU_SETUP}
     ${PANELS_PANELDEBUG}
-    ${PANELS_PANELDEBUG_PAGESBLOCKS}
+    ${PANELS_PANELDEBUG_NOTEBOOK}
     ${PANELS_PANELDEBUG_OLD}
     ${SETTINGS}
     ${SOFTTESTS}

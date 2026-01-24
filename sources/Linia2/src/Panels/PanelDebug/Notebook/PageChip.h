@@ -1,6 +1,6 @@
 ﻿// 2025/6/3 14:02:10 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Panels/PanelDebug/PagesBlocks/Register.h"
+#include "Panels/PanelDebug/Notebook/Register.h"
 
 
 // Это панель для засылки данных в регистры микросхем типа AD
