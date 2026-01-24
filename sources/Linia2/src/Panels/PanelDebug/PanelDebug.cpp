@@ -3,7 +3,7 @@
 #include "Panels/PanelDebug/PanelDebug.h"
 #include "MainWindow.h"
 #include "Panels/PanelDebug/Notebook/NotebookDebug.h"
-#include "Utils/Configurator.h"
+#include "Panels/PanelDebug/PageRight.h"
 
 
 PanelDebug *PanelDebug::self = nullptr;
@@ -16,11 +16,13 @@ PanelDebug::PanelDebug(wxWindow *parent) :
 
     new NotebookDebug(this);
 
+    new PanelRight(this);
+
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
     sizer->Add(NotebookDebug::self, 1, wxEXPAND);
 
-    sizer->AddSpacer(100);
+    sizer->Add(PanelRight::self, 0, wxEXPAND);
 
     SetSizer(sizer);
 

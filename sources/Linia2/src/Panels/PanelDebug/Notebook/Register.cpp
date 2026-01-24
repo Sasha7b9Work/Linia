@@ -225,8 +225,6 @@ void Register::SetActiveAcross(bool active, wxWindow *_wnd)
         chb->Enable(active);
     }
 
-    ((PageChip *)GetParent())->GetButtonReturn()->Enable(active);
-
     NotebookDebug::self->EnableSwitching(active);
 }
 

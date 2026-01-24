@@ -16,22 +16,15 @@ public:
     void Pack();
     void Unpack();
 
-    // Возвращает указатель на кнопку закрытия
-    wxButton *GetButtonReturn();
-
 private:
 
     wxMenuItem *itemReturn = nullptr;
-
-    wxButton *btnReturn = nullptr;
 
     std::vector<Register *> registers;
 
     void OnRightClick(wxMouseEvent &);
 
     void OnMenuEvent(wxCommandEvent &);
-
-    void OnEventButton(wxCommandEvent &);
 
 protected:
 

@@ -11,11 +11,7 @@ PageChip::PageChip(wxNotebook *parent, const wxString &title) :
 
     wxPanel::SetBackgroundColour(parent->GetThemeBackgroundColour());
 
-    wxSize size_button{ 75, BUTTON_HEIGHT };
-    btnReturn = new wxButton(this, wxID_ANY, "Закрыть", { MainWindow::WIDTH - size_button.x - 15, 0 }, size_button);
-
     Bind(wxEVT_RIGHT_DOWN, &PageChip::OnRightClick, this);
-    Bind(wxEVT_BUTTON, &PageChip::OnEventButton, this);
 }
 
 
@@ -53,17 +49,6 @@ void PageChip::OnMenuEvent(wxCommandEvent &event)
     int id = event.GetId();
 
     if (id == itemReturn->GetId())
-    {
-        MainWindow::self->SetMode(ModeMainWindow::Standard);
-    }
-}
-
-
-void PageChip::OnEventButton(wxCommandEvent &event)
-{
-    int id = event.GetId();
-
-    if (id == btnReturn->GetId())
     {
         MainWindow::self->SetMode(ModeMainWindow::Standard);
     }
@@ -114,10 +99,4 @@ void PageChip::Unpack()
     {
         reg->Unpack();
     }
-}
-
-
-wxButton *PageChip::GetButtonReturn()
-{
-    return btnReturn;
 }
