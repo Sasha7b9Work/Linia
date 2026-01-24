@@ -33,6 +33,8 @@ NotebookDebug::NotebookDebug(wxWindow *parent) :
     wxWindowBase::Layout();
 
     Bind(wxEVT_NOTEBOOK_PAGE_CHANGING, &NotebookDebug::OnEventPageChanged, this);
+
+    SetMaxSize({ 812, -1 });
 }
 
 

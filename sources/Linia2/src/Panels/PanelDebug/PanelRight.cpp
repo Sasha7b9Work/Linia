@@ -13,9 +13,7 @@ PanelRight::PanelRight(wxWindow *parent) : wxPanel(parent)
 
     wxSize size_button{ 75, BUTTON_HEIGHT };
 
-    btnReturn = new wxButton(this, wxID_ANY, "Закрыть", { 10, 10 }, size_button);
-
-    SetMinSize({ 100, -1 });
+    btnReturn = new wxButton(this, wxID_ANY, "Закрыть", { 125, 20 }, size_button);
 
     Bind(wxEVT_BUTTON, &PanelRight::OnEventButton, this);
 }
