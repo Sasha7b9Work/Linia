@@ -1,4 +1,4 @@
-// 2026/01/24 21:41:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2026/01/24 21:41:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
 
@@ -12,7 +12,9 @@ public:
 
 private:
 
-    wxButton *btnReturn = nullptr;
+    wxButton *btnReturn = nullptr;      // Выход в основную панель
+    wxButton *btnStart = nullptr;       // Запуск развёртки
+    wxButton *btnStop = nullptr;        // Останов развёртки
 
     void OnEventButton(wxCommandEvent &);
 };

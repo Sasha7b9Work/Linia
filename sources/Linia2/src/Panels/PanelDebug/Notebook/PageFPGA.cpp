@@ -73,34 +73,4 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
 
         AppendRegister(fpga2);
     }
-
-    btnStart = new wxButton{ this, wxID_ANY, "Start", { 10, SD::Y_SB(500) }, { 75, BUTTON_HEIGHT } };
-    btnStop = new wxButton{ this, wxID_ANY, "Stop", {10, SD::Y_SB(540)}, { 75, BUTTON_HEIGHT} };
-
-    btnStop->Enable(false);
-
-    Bind(wxEVT_BUTTON, &PageFPGA::OnEventButton, this);
-}
-
-
-void PageFPGA::OnEventButton(wxCommandEvent &event)
-{
-    event.Skip();
-
-    int id = event.GetId();
-
-    if (id == btnStart->GetId())
-    {
-        IDevice::impl->SendCommand(":SCAN:START 1000");
-
-        btnStart->Enable(false);
-        btnStop->Enable(true);
-    }
-    else if (id == btnStop->GetId())
-    {
-        IDevice::impl->SendCommand(":SCAN:STOP");
-
-        btnStart->Enable(true);
-        btnStop->Enable(false);
-    }
 }
