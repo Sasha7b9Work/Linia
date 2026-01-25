@@ -23,6 +23,8 @@ namespace FPGA
     static TimeMeterMS meter;
     static bool is_running_scan = false;    // Если true - идёт развёртка
 
+    static uint period_scan = 1000;         // Период запуска развёртки
+
     static void Pause();
 }
 
@@ -53,26 +55,18 @@ void FPGA::Update()
         return;
     }
 
-    if (meter.ElapsedTime() >= 1000)
+    if (meter.ElapsedTime() >= period_scan)
     {
         WriteStart();
         meter.Reset();
     }
-
-    /*
-    Reg::Write(0, 2);
-
-    Timer::DelayMS(1000);
-
-    WriteStart();
-
-    Timer::DelayMS(2000);
-    */
 }
 
 
-void FPGA::StartScan(uint /*periodMS*/)
+void FPGA::StartScan(uint periodMS)
 {
+    period_scan = periodMS;
+
     is_running_scan = true;
 
     WriteStart();
