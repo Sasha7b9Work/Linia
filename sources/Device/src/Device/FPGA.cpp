@@ -20,6 +20,8 @@ namespace FPGA
     // Дать start FPGA
     static void WriteStart();
 
+    static TimeMeterMS meter_scan;          // По этому счётчику отсчитываем развёртку
+
     static bool is_running_scan = false;    // Если true - идёт развёртка
 
     static uint period_scan = 1000;         // Период запуска развёртки
@@ -63,8 +65,6 @@ void FPGA::Update()
         return;
     }
 
-    static TimeMeterMS meter_scan;
-
     if (meter_scan.ElapsedTime() >= period_scan)
     {
         meter_scan.Reset();
@@ -95,6 +95,7 @@ void FPGA::WriteStart()
     pinSTART_TB.ToHi();
     Pause();
     pinSTART_TB.ToLow();
+    meter_scan.Reset();
 }
 
 
