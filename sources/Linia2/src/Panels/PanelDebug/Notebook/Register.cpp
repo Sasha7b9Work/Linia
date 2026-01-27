@@ -278,6 +278,11 @@ bool Register::NeedTextCtrlDEC() const
 
 void Register::UpdateDecFields()
 {
+    if (!NeedTextCtrlDEC())
+    {
+        return;
+    }
+
     for (int i = 0; i < (int)chbox.size(); i++)                         // Перебираем все биты
     {
         for (auto &d : desc[0])
