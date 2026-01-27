@@ -166,7 +166,7 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_200mA.state.emplace_back(StateBit{ 0, true });
                 modeI_200mA.state.emplace_back(StateBit{ 1, true });
                 modeI_200mA.state.emplace_back(StateBit{ 2, true });
-                modeI_200mA.state.emplace_back(StateBit{ 3, true });
+                modeI_200mA.state.emplace_back(StateBit{ 3, false });
                 modeI_200mA.state.emplace_back(StateBit{ 4, false });
                 modeI_200mA.state.emplace_back(StateBit{ 10, true });
                 modeI_200mA.state.emplace_back(StateBit{ 17, false });
@@ -176,7 +176,7 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_20mA.state.emplace_back(StateBit{ 0, false });
                 modeI_20mA.state.emplace_back(StateBit{ 1, true });
                 modeI_20mA.state.emplace_back(StateBit{ 2, true });
-                modeI_20mA.state.emplace_back(StateBit{ 3, true });
+                modeI_20mA.state.emplace_back(StateBit{ 3, false });
                 modeI_20mA.state.emplace_back(StateBit{ 4, false });
                 modeI_20mA.state.emplace_back(StateBit{ 10, true });
                 modeI_20mA.state.emplace_back(StateBit{ 17, false });
@@ -186,7 +186,7 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_2mA.state.emplace_back(StateBit{ 0, true });
                 modeI_2mA.state.emplace_back(StateBit{ 1, false });
                 modeI_2mA.state.emplace_back(StateBit{ 2, true });
-                modeI_2mA.state.emplace_back(StateBit{ 3, true });
+                modeI_2mA.state.emplace_back(StateBit{ 3, false });
                 modeI_2mA.state.emplace_back(StateBit{ 4, false });
                 modeI_2mA.state.emplace_back(StateBit{ 10, true });
                 modeI_2mA.state.emplace_back(StateBit{ 17, false });
@@ -196,7 +196,7 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_200uA.state.emplace_back(StateBit{ 0, false });
                 modeI_200uA.state.emplace_back(StateBit{ 1, false });
                 modeI_200uA.state.emplace_back(StateBit{ 2, true });
-                modeI_200uA.state.emplace_back(StateBit{ 3, true });
+                modeI_200uA.state.emplace_back(StateBit{ 3, false });
                 modeI_200uA.state.emplace_back(StateBit{ 4, false });
                 modeI_200uA.state.emplace_back(StateBit{ 10, true });
                 modeI_200uA.state.emplace_back(StateBit{ 17, false });
@@ -206,7 +206,7 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_20uA.state.emplace_back(StateBit{ 0, true });
                 modeI_20uA.state.emplace_back(StateBit{ 1, true });
                 modeI_20uA.state.emplace_back(StateBit{ 2, false });
-                modeI_20uA.state.emplace_back(StateBit{ 3, true });
+                modeI_20uA.state.emplace_back(StateBit{ 3, false });
                 modeI_20uA.state.emplace_back(StateBit{ 4, false });
                 modeI_20uA.state.emplace_back(StateBit{ 10, true });
                 modeI_20uA.state.emplace_back(StateBit{ 17, false });
@@ -216,7 +216,7 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_2uA.state.emplace_back(StateBit{ 0, false });
                 modeI_2uA.state.emplace_back(StateBit{ 1, true });
                 modeI_2uA.state.emplace_back(StateBit{ 2, false });
-                modeI_2uA.state.emplace_back(StateBit{ 3, true });
+                modeI_2uA.state.emplace_back(StateBit{ 3, false });
                 modeI_2uA.state.emplace_back(StateBit{ 4, false });
                 modeI_2uA.state.emplace_back(StateBit{ 10, true });
                 modeI_2uA.state.emplace_back(StateBit{ 17, false });
@@ -226,7 +226,7 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_200nA.state.emplace_back(StateBit{ 0, true });
                 modeI_200nA.state.emplace_back(StateBit{ 1, false });
                 modeI_200nA.state.emplace_back(StateBit{ 2, false });
-                modeI_200nA.state.emplace_back(StateBit{ 3, true });
+                modeI_200nA.state.emplace_back(StateBit{ 3, false });
                 modeI_200nA.state.emplace_back(StateBit{ 4, false });
                 modeI_200nA.state.emplace_back(StateBit{ 10, true });
                 modeI_200nA.state.emplace_back(StateBit{ 17, false });
@@ -236,7 +236,7 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_20nA.state.emplace_back(StateBit{ 0, false });
                 modeI_20nA.state.emplace_back(StateBit{ 1, false });
                 modeI_20nA.state.emplace_back(StateBit{ 2, false });
-                modeI_20nA.state.emplace_back(StateBit{ 3, true });
+                modeI_20nA.state.emplace_back(StateBit{ 3, false });
                 modeI_20nA.state.emplace_back(StateBit{ 4, false });
                 modeI_20nA.state.emplace_back(StateBit{ 10, true });
                 modeI_20nA.state.emplace_back(StateBit{ 17, false });

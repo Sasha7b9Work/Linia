@@ -114,9 +114,10 @@ private:
 
     std::vector<StructDescription> desc[2];     // Описания групп битов
 
-    std::vector<ModeDescripion> modes[2];                   // Описания режимов
-    wxString title_modes[2];                                // Названия режимов
-    CommandsCombo *combo_modes[2] = { nullptr, nullptr };   // А это элемент управления для выбора режимов
+    std::vector<ModeDescripion> modes[5];                   // Описания режимов
+    wxString title_modes[5];                                // Названия режимов
+    // А это элемент управления для выбора режимов
+    CommandsCombo *combo_modes[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };
 
     std::vector<CheckBoxBit *> chbox;
 
@@ -141,6 +142,8 @@ private:
     void OnEventCheckBox(wxCommandEvent &);
     // Управление состоянием групп битов
     void OnEventComboField(wxCommandEvent &);
+    // Выбор режима
+    void OnEventComboMode(wxCommandEvent &);
     void OnEventToggleButton(wxCommandEvent &);
     void OnEventButton(wxCommandEvent &);
     void OnEventTimerAutoSend(wxTimerEvent &);

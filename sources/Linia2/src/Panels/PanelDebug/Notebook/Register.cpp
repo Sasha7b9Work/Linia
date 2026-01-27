@@ -97,12 +97,6 @@ void Register::AppendModes(const wxString &title, const std::vector<ModeDescripi
 }
 
 
-void Register::CreateControlMode(int i)
-{
-    new wxStaticText(painter, wxID_ANY, title_modes[i], { 10 + i * 300, 100 });
-}
-
-
 void Register::IncreaseHeight(int dH)
 {
     wxSize size = GetSize();
@@ -173,6 +167,31 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
     }
 
     UpdateDecFields();
+}
+
+
+void Register::CreateControlMode(int i)
+{
+    int x = 10 + i * 300;
+    int y = 110;
+
+    new wxStaticText(painter, wxID_ANY, title_modes[i], { x, y });
+
+    wxArrayString names;
+    for (auto &mode : modes[i])
+    {
+        names.push_back(mode.name);
+    }
+
+    wxArrayString tooltips;
+    for (auto &mode : modes[i])
+    {
+        tooltips.push_back(mode.hint);
+    }
+
+    combo_modes[i] = new CommandsCombo(painter, title_modes[i], { x, y + 25 }, 250, names, tooltips, title_modes[i]);
+
+    combo_modes[i]->Bind(wxEVT_COMBOBOX, &Register::OnEventComboMode, this);
 }
 
 
@@ -398,6 +417,44 @@ void Register::OnEventComboField(wxCommandEvent &event)
     UpdateDecFields();
 
     event.Skip();
+}
+
+
+void Register::OnEventComboMode(wxCommandEvent &event)
+{
+    int id = event.GetId();
+
+    int num_mode = -1;
+
+    for (int i = 0; i < 5; i++)
+    {
+        if (combo_modes[i])
+        {
+            if (combo_modes[i]->GetId() == id)
+            {
+                num_mode = i;
+                break;
+            }
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    if (num_mode == -1)
+    {
+        return;
+    }
+
+    ModeDescripion &mode = modes[num_mode][(uint)event.GetInt()];
+
+    for (uint i = 0; i < mode.state.size(); i++)
+    {
+        StateBit &state = mode.state[i];
+
+        chbox[(uint)state.num]->SetValue(state.state);
+    }
 }
 
 
