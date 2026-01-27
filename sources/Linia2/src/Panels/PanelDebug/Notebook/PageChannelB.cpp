@@ -138,6 +138,112 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
 
                 reg3->AppendModes("Источник напряжения", modesU);
             }
+
+            {
+                std::vector<ModeDescripion> modesI;
+
+                ModeDescripion modeI_10A{ "10A", "10A 5A 0.5A/ст 0.2 Ом 20A" };
+                modeI_10A.state.emplace_back(StateBit{ 0, false });
+                modeI_10A.state.emplace_back(StateBit{ 1, false });
+                modeI_10A.state.emplace_back(StateBit{ 2, false });
+                modeI_10A.state.emplace_back(StateBit{ 3, false });
+                modeI_10A.state.emplace_back(StateBit{ 4, true });
+                modeI_10A.state.emplace_back(StateBit{ 10, true });
+                modeI_10A.state.emplace_back(StateBit{ 17, false });
+                modesI.emplace_back(modeI_10A);
+
+                ModeDescripion modeI_2A{ "2A", "2A 1A 0.1A/ст 1 Ом 2A" };
+                modeI_2A.state.emplace_back(StateBit{ 0, false });
+                modeI_2A.state.emplace_back(StateBit{ 1, false });
+                modeI_2A.state.emplace_back(StateBit{ 2, false });
+                modeI_2A.state.emplace_back(StateBit{ 3, true });
+                modeI_2A.state.emplace_back(StateBit{ 4, false });
+                modeI_2A.state.emplace_back(StateBit{ 10, true });
+                modeI_2A.state.emplace_back(StateBit{ 17, false });
+                modesI.emplace_back(modeI_2A);
+
+                ModeDescripion modeI_200mA{ "200mA", "200mA 100mA 10mA/ст 10 Ом 200mA" };
+                modeI_200mA.state.emplace_back(StateBit{ 0, true });
+                modeI_200mA.state.emplace_back(StateBit{ 1, true });
+                modeI_200mA.state.emplace_back(StateBit{ 2, true });
+                modeI_200mA.state.emplace_back(StateBit{ 3, true });
+                modeI_200mA.state.emplace_back(StateBit{ 4, false });
+                modeI_200mA.state.emplace_back(StateBit{ 10, true });
+                modeI_200mA.state.emplace_back(StateBit{ 17, false });
+                modesI.emplace_back(modeI_200mA);
+
+                ModeDescripion modeI_20mA{ "20mA", "20mA 10mA 1mA/ст 100 Ом 20mA" };
+                modeI_20mA.state.emplace_back(StateBit{ 0, false });
+                modeI_20mA.state.emplace_back(StateBit{ 1, true });
+                modeI_20mA.state.emplace_back(StateBit{ 2, true });
+                modeI_20mA.state.emplace_back(StateBit{ 3, true });
+                modeI_20mA.state.emplace_back(StateBit{ 4, false });
+                modeI_20mA.state.emplace_back(StateBit{ 10, true });
+                modeI_20mA.state.emplace_back(StateBit{ 17, false });
+                modesI.emplace_back(modeI_20mA);
+
+                ModeDescripion modeI_2mA{ "2mA", "2mA 1mA 0.1mA/ст 1 kОм 2mA" };
+                modeI_2mA.state.emplace_back(StateBit{ 0, true });
+                modeI_2mA.state.emplace_back(StateBit{ 1, false });
+                modeI_2mA.state.emplace_back(StateBit{ 2, true });
+                modeI_2mA.state.emplace_back(StateBit{ 3, true });
+                modeI_2mA.state.emplace_back(StateBit{ 4, false });
+                modeI_2mA.state.emplace_back(StateBit{ 10, true });
+                modeI_2mA.state.emplace_back(StateBit{ 17, false });
+                modesI.emplace_back(modeI_2mA);
+
+                ModeDescripion modeI_200uA{ "200uA", "200uA 100uA 10uA/ст 10 kОм 200uA" };
+                modeI_200uA.state.emplace_back(StateBit{ 0, false });
+                modeI_200uA.state.emplace_back(StateBit{ 1, false });
+                modeI_200uA.state.emplace_back(StateBit{ 2, true });
+                modeI_200uA.state.emplace_back(StateBit{ 3, true });
+                modeI_200uA.state.emplace_back(StateBit{ 4, false });
+                modeI_200uA.state.emplace_back(StateBit{ 10, true });
+                modeI_200uA.state.emplace_back(StateBit{ 17, false });
+                modesI.emplace_back(modeI_200uA);
+
+                ModeDescripion modeI_20uA{ "20uA", "20uA 10uA 1uA/ст 100 kОм 20uA" };
+                modeI_20uA.state.emplace_back(StateBit{ 0, true });
+                modeI_20uA.state.emplace_back(StateBit{ 1, true });
+                modeI_20uA.state.emplace_back(StateBit{ 2, false });
+                modeI_20uA.state.emplace_back(StateBit{ 3, true });
+                modeI_20uA.state.emplace_back(StateBit{ 4, false });
+                modeI_20uA.state.emplace_back(StateBit{ 10, true });
+                modeI_20uA.state.emplace_back(StateBit{ 17, false });
+                modesI.emplace_back(modeI_20uA);
+
+                ModeDescripion modeI_2uA{ "2uA", "2uA 1uA 0.1uA/ст 1 MОм 2uA" };
+                modeI_2uA.state.emplace_back(StateBit{ 0, false });
+                modeI_2uA.state.emplace_back(StateBit{ 1, true });
+                modeI_2uA.state.emplace_back(StateBit{ 2, false });
+                modeI_2uA.state.emplace_back(StateBit{ 3, true });
+                modeI_2uA.state.emplace_back(StateBit{ 4, false });
+                modeI_2uA.state.emplace_back(StateBit{ 10, true });
+                modeI_2uA.state.emplace_back(StateBit{ 17, false });
+                modesI.emplace_back(modeI_2uA);
+
+                ModeDescripion modeI_200nA{ "200nA", "200nA 100nA 10nA/ст 10 MОм 200nA" };
+                modeI_200nA.state.emplace_back(StateBit{ 0, true });
+                modeI_200nA.state.emplace_back(StateBit{ 1, false });
+                modeI_200nA.state.emplace_back(StateBit{ 2, false });
+                modeI_200nA.state.emplace_back(StateBit{ 3, true });
+                modeI_200nA.state.emplace_back(StateBit{ 4, false });
+                modeI_200nA.state.emplace_back(StateBit{ 10, true });
+                modeI_200nA.state.emplace_back(StateBit{ 17, false });
+                modesI.emplace_back(modeI_200nA);
+
+                ModeDescripion modeI_20nA{ "20nA", "20nA 10nA 1nA/ст 100 MОм 20nA" };
+                modeI_20nA.state.emplace_back(StateBit{ 0, false });
+                modeI_20nA.state.emplace_back(StateBit{ 1, false });
+                modeI_20nA.state.emplace_back(StateBit{ 2, false });
+                modeI_20nA.state.emplace_back(StateBit{ 3, true });
+                modeI_20nA.state.emplace_back(StateBit{ 4, false });
+                modeI_20nA.state.emplace_back(StateBit{ 10, true });
+                modeI_20nA.state.emplace_back(StateBit{ 17, false });
+                modesI.emplace_back(modeI_20nA);
+
+                reg3->AppendModes("Источник тока", modesI);
+            }
         }
 
         AppendRegister(reg3);
