@@ -84,7 +84,29 @@ void Register::AppendModes(const wxString &title, const std::vector<ModeDescripi
         }
     }
 
-    painter->IncreaseHeight(100);
+    int dH = 30;
+
+    painter->IncreaseHeight(dH);
+
+    IncreaseHeight(dH);
+
+    PageChip *page_chip = (PageChip *)GetParent();
+
+    page_chip->Rebuild();
+}
+
+
+void Register::IncreaseHeight(int dH)
+{
+    wxSize size = GetSize();
+    size.y += dH;
+
+    SetMinSize(size);
+    SetMaxSize(size);
+
+    SetSize(size);
+
+    Layout();
 }
 
 

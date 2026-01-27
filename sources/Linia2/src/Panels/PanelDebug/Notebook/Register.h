@@ -130,6 +130,9 @@ private:
     // Привести комбобоксы команд в соотвествие с битовыми полями
     void UpdateComboCommands();
 
+    // Увеличить высоту на dH
+    void IncreaseHeight(int dH);
+
     void OnEventTextCtrl(wxCommandEvent &);
     void OnEventCheckBox(wxCommandEvent &);
     void OnEventCombo(wxCommandEvent &);

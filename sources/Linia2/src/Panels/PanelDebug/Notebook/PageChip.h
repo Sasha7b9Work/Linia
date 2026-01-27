@@ -16,6 +16,8 @@ public:
     void Pack();
     void Unpack();
 
+    void Rebuild();
+
 private:
 
     wxMenuItem *itemReturn = nullptr;
