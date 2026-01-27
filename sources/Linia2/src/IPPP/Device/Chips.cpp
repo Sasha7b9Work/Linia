@@ -65,7 +65,7 @@ int REG::BitDepth() const
         24,
         16,
         32,
-        32,
+        24,
         32,
         16,
     };

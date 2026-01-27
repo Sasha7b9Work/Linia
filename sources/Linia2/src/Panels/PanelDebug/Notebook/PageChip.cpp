@@ -83,7 +83,34 @@ void PageChip::FillRegisterBS(RegFPGA *reg)
     std::vector<StructDescription::CommandStruct> commandsOS_OPA; //-V826
     commandsOS_OPA.emplace_back(StructDescription::CommandStruct{ 0, "В режиме U" });
     commandsOS_OPA.emplace_back(StructDescription::CommandStruct{ 1, "В режиме I" });
-    desc3.emplace_back(StructDescription{ 5, 1, "о", "Подключение ОС вых ОУ", { true, commandsOS_OPA } });
+    desc3.emplace_back(StructDescription{ 5, 1, "о", "Ucl Подключение ОС вых ОУ", { true, commandsOS_OPA } });
+
+    std::vector<StructDescription::CommandStruct> commandsZeroCorr; //-V826
+    commandsZeroCorr.emplace_back(StructDescription::CommandStruct{ 0, "Выключен" });
+    commandsZeroCorr.emplace_back(StructDescription::CommandStruct{ 1, "Включен" });
+    desc3.emplace_back(StructDescription{ 6, 1, "г", "CLBR Геркон \"Корр. 0 измерителя Uии\"", { true, commandsZeroCorr } });
+
+    std::vector<StructDescription::CommandStruct> commandsAz; //-V826
+    commandsAz.emplace_back(StructDescription::CommandStruct{ 0, "Стоп" });
+    commandsAz.emplace_back(StructDescription::CommandStruct{ 1, "Измерение" });
+    desc3.emplace_back(StructDescription{ 7, 1, "р", "Az Режим", { true, commandsAz } });
+
+    std::vector<StructDescription::CommandStruct> commandsDivider; //-V826
+    commandsDivider.emplace_back(StructDescription::CommandStruct{ 0b00, "1:1" });
+    commandsDivider.emplace_back(StructDescription::CommandStruct{ 0b01, "1:4" });
+    commandsDivider.emplace_back(StructDescription::CommandStruct{ 0b10, "1:10" });
+    desc3.emplace_back(StructDescription{ 8, 2, "д", "Делитель в режиме Источник U", { true, commandsDivider } });
+
+    std::vector<StructDescription::CommandStruct> commandsQ10; //-V826
+    commandsQ10.emplace_back(StructDescription::CommandStruct{ 0, "Источник U - ограничение по I" });
+    commandsQ10.emplace_back(StructDescription::CommandStruct{ 1, "Режим 1:1 источника тока" });
+    desc3.emplace_back(StructDescription{ 10, 1, "р", "Режим", { true, commandsQ10 } });
+
+    std::vector<StructDescription::CommandStruct> commandsRange; //-V826
+    commandsRange.emplace_back(StructDescription::CommandStruct{ 0b00, "1" });
+    commandsRange.emplace_back(StructDescription::CommandStruct{ 0b01, "4" });
+    commandsRange.emplace_back(StructDescription::CommandStruct{ 0b10, "10" });
+    desc3.emplace_back(StructDescription{ 12, 2, "д", "Диапазон измерения", { true, commandsRange } });
 
 
     reg->SetDescriptionBits(0, desc3);
