@@ -51,6 +51,7 @@ void FPGA::Init()
 
 void FPGA::Update()
 {
+    /*
     static TimeMeterMS meter_local;
 
     if (meter_local.ElapsedTime() > 1000)
@@ -59,6 +60,7 @@ void FPGA::Update()
 
         Reg::Write(2, 20);
     }
+    */
 
     if (!is_running_scan)
     {
