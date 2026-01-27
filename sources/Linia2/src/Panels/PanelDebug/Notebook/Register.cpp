@@ -228,7 +228,7 @@ void Register::OnEventTextCtrl(wxCommandEvent &event)
 
     event.Skip();
 
-    UpdateComboCommands();
+    UpdateComboCommandsAndModes();
 }
 
 
@@ -373,7 +373,7 @@ void Register::OnEventCheckBox(wxCommandEvent &event)
 {
     UpdateDecFields();
 
-    UpdateComboCommands();
+    UpdateComboCommandsAndModes();
 
     event.Skip();
 }
@@ -458,7 +458,7 @@ void Register::OnEventComboMode(wxCommandEvent &event)
 }
 
 
-void Register::UpdateComboCommands()
+void Register::UpdateComboCommandsAndModes()
 {
     for (auto &d : desc[0])
     {
@@ -486,6 +486,40 @@ void Register::UpdateComboCommands()
             if(!exist_value)
             {
                 d.field.combo->SetInvalidChoice();
+            }
+        }
+    }
+
+    for (int num_combo = 0; num_combo < 5; num_combo++)
+    {
+        if (combo_modes[num_combo])
+        {
+            std::vector<ModeDescripion> &mode_desc = modes[num_combo];
+
+            for (uint num_desc = 0; num_desc < mode_desc.size(); num_desc++)
+            {
+                ModeDescripion &_desc = mode_desc[num_desc];
+
+                std::vector<StateBit> &state_bit_array = _desc.state;
+
+                bool current_state = true;          // Если после следующего цикла это значение будет оставаться правдой, это означает, что биты регистра соответствуют данному std::vector<StateBit>
+
+                for (uint num_bit = 0; num_bit < state_bit_array.size(); num_bit++)
+                {
+                    StateBit &state_bit = state_bit_array[num_bit];
+
+                    if (chbox[(uint)state_bit.num]->IsChecked() != state_bit.state)
+                    {
+                        current_state = false;
+                        break;
+                    }
+                }
+
+                if (current_state)
+                {
+                    combo_modes[num_combo]->SetCurrentSelection((int)num_desc);
+                    return;
+                }
             }
         }
     }
@@ -537,7 +571,7 @@ void Register::SetValue(uint new_value)
         chbox[i]->SetValue((new_value & (1 << i)) != 0);
     }
 
-    UpdateComboCommands();
+    UpdateComboCommandsAndModes();
     UpdateDecFields();
 }
 

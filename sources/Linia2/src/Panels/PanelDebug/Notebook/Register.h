@@ -132,8 +132,8 @@ private:
     // Привести десятичные поля в соответствие с битовыми
     void UpdateDecFields();
 
-    // Привести комбобоксы команд в соотвествие с битовыми полями
-    void UpdateComboCommands();
+    // Привести комбобоксы команд и режимов в соотвествие с битовыми полями
+    void UpdateComboCommandsAndModes();
 
     // Увеличить высоту на dH
     void IncreaseHeight(int dH);
