@@ -31,6 +31,7 @@ private:
 };
 
 
+// Описание группы бит
 struct StructDescription
 {
     struct CommandStruct
@@ -57,6 +58,22 @@ struct StructDescription
 };
 
 
+struct StateBit
+{
+    int num;        // Номер бита
+    bool state;     // Состояние, в которое должен быть установлен бит
+};
+
+
+// Описание режима - при его выборе заданные биты устанавливаются в заданные положения
+struct ModeDescripion
+{
+    wxString name;                  // Это название будет на кнопки органа управления
+    wxString hint;                  // Более развёрнутое описание - будет выведено при наведении мыши на орган управления
+    std::vector<StateBit> state;    // При выборе данного режима биты будут установлены в данные состояния
+};
+
+
 class Register : public wxPanel
 {
     friend class PainterRegister;
@@ -72,6 +89,8 @@ public:
     void SetNamesBits(const wxArrayString &);
 
     void SetDescriptionBits(int index, const std::vector<StructDescription> &);
+
+    void AppendModes(const wxString &title, const std::vector<ModeDescripion> &);
 
     virtual bool Enable(bool) override;
 

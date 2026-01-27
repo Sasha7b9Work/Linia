@@ -72,6 +72,12 @@ void Register::SetNamesBits(const wxArrayString &_names)
 }
 
 
+void Register::AppendModes(const wxString &, const std::vector<ModeDescripion> &)
+{
+
+}
+
+
 void Register::SetDescriptionBits(int index, const std::vector<StructDescription> &_desc)
 {
     desc[index] = _desc;

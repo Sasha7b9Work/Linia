@@ -105,6 +105,41 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
 
         reg3->SetDescriptionBits(0, desc3);
 
+        {
+            {
+                std::vector<ModeDescripion> modesU;
+
+                ModeDescripion modeU_40V{ "40В", "40В 20В 2В/ст 1:1 40В" };
+                modeU_40V.state.emplace_back(StateBit{ 8, false });
+                modeU_40V.state.emplace_back(StateBit{ 9, false });
+                modeU_40V.state.emplace_back(StateBit{ 10, false });
+                modeU_40V.state.emplace_back(StateBit{ 12, false });
+                modeU_40V.state.emplace_back(StateBit{ 13, false });
+                modeU_40V.state.emplace_back(StateBit{ 17, true });
+                modesU.emplace_back(modeU_40V);
+
+                ModeDescripion modeU_10V{ "10В", "10В 5В 0.5В/ст 1:4 10В" };
+                modeU_10V.state.emplace_back(StateBit{ 8, true });
+                modeU_10V.state.emplace_back(StateBit{ 9, false });
+                modeU_10V.state.emplace_back(StateBit{ 10, false });
+                modeU_10V.state.emplace_back(StateBit{ 12, true });
+                modeU_10V.state.emplace_back(StateBit{ 13, false });
+                modeU_10V.state.emplace_back(StateBit{ 17, true });
+                modesU.emplace_back(modeU_10V);
+
+                ModeDescripion modeU_4V{ "4В", "4В 2В 0.2В/ст 1:10 4В" };
+                modeU_4V.state.emplace_back(StateBit{ 8, false });
+                modeU_4V.state.emplace_back(StateBit{ 9, true });
+                modeU_4V.state.emplace_back(StateBit{ 10, false });
+                modeU_4V.state.emplace_back(StateBit{ 12, false });
+                modeU_4V.state.emplace_back(StateBit{ 13, true });
+                modeU_4V.state.emplace_back(StateBit{ 17, true });
+                modesU.emplace_back(modeU_4V);
+
+                reg3->AppendModes("Источник напряжения", modesU);
+            }
+        }
+
         AppendRegister(reg3);
     }
 }
