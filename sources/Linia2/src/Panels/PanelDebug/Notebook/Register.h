@@ -47,10 +47,10 @@ struct StructDescription
     wxString hint;
     struct DecField
     {
-        bool need_text_ctrl = false;            // если true, то есть возможность вводить десятичное значение
-        std::vector<CommandStruct> commands;    // Сюда ложим нужные команды, чтобы потом создать combo
-        TextCtrlNumber *text_ctrl = nullptr;    // Здесь находятся десятичные значения
-        CommandsCombo *combo = nullptr;         // А здесь находятся команды
+        bool need_text_ctrl_dec = false;            // если true, то есть возможность вводить десятичное значение
+        std::vector<CommandStruct> commands;        // Сюда ложим нужные команды, чтобы потом создать combo
+        TextCtrlNumber *text_ctrl_dec = nullptr;    // Здесь находятся десятичные значения
+        CommandsCombo *combo = nullptr;             // А здесь находятся команды
     } field;
 
     // Рассчитать значение в соотвествие с чекбоксами
@@ -114,9 +114,15 @@ private:
 
     std::vector<StructDescription> desc[2];     // Описания групп битов
 
+    std::vector<ModeDescripion> modes[2];       // Описания режимов
+    wxString title_mode[2];                     // Названия режимов
+
     std::vector<CheckBoxBit *> chbox;
 
     Chip *chip = nullptr;
+
+    // Возвращает true, если нужно выводить текстовое поле для десятичного значения хотя бы у одной группы бит
+    bool NeedTextCtrlDEC() const;
 
     // Привести десятичные поля в соответствие с битовыми
     void UpdateDecFields();

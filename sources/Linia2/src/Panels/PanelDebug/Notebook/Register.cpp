@@ -72,9 +72,17 @@ void Register::SetNamesBits(const wxArrayString &_names)
 }
 
 
-void Register::AppendModes(const wxString &, const std::vector<ModeDescripion> &)
+void Register::AppendModes(const wxString &title, const std::vector<ModeDescripion> &mode_desc)
 {
-
+    for (uint i = 0; i < 10; i++)
+    {
+        if (modes[i].size() == 0)
+        {
+            modes[i] = mode_desc;
+            title_mode[i] = title;
+            break;
+        }
+    }
 }
 
 
@@ -84,17 +92,22 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
 
     if (index == 0)
     {
+        bool need_dec = NeedTextCtrlDEC();
+
         for (auto &elem : desc[0])
         {
-            if (elem.field.need_text_ctrl)
+            if (elem.field.need_text_ctrl_dec)
             {
                 int num_bit = elem.first_bit + elem.num_bits - 1;
 
                 int x = painter->BitX(num_bit, chip->BitDepth());
 
-                elem.field.text_ctrl = new TextCtrlNumber(painter, wxID_ANY, "", { x, (PainterRegister::W_B + 1) * 3 }, { PainterRegister::W_B * elem.num_bits + 1, 20 }, 0, (1 << elem.num_bits) - 1);
+                elem.field.text_ctrl_dec = new TextCtrlNumber(painter, wxID_ANY, "",
+                    { x, (PainterRegister::W_B + 1) * 3 },
+                    { PainterRegister::W_B * elem.num_bits + 1, 20 },
+                    0, (1 << elem.num_bits) - 1);
 
-                elem.field.text_ctrl->Bind(wxEVT_TEXT, &Register::OnEventTextCtrl, this);
+                elem.field.text_ctrl_dec->Bind(wxEVT_TEXT, &Register::OnEventTextCtrl, this);
             }
 
             if (elem.field.commands.size())
@@ -115,7 +128,11 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
                     tooltips.push_back(com.CreateTooltip(elem));
                 }
 
-                elem.field.combo = new CommandsCombo(painter, elem.hint, { x, (PainterRegister::W_B + 1) * 4 - 1}, PainterRegister::W_B * elem.num_bits - 1, names, tooltips, "Register");
+                int y = (PainterRegister::W_B + 1) * (need_dec ? 4 : 3) - 1;
+
+                elem.field.combo = new CommandsCombo(painter, elem.hint,
+                    { x, y },
+                    PainterRegister::W_B * elem.num_bits - 1, names, tooltips, "Register");
 
                 elem.field.combo->left_align = true;
 
@@ -134,11 +151,11 @@ void Register::OnEventTextCtrl(wxCommandEvent &event)
 
     for (auto &d : desc[0])
     {
-        if (d.field.need_text_ctrl)
+        if (d.field.need_text_ctrl_dec)
         {
-            if (id == d.field.text_ctrl->GetId())
+            if (id == d.field.text_ctrl_dec->GetId())
             {
-                wxString str = d.field.text_ctrl->GetValue();
+                wxString str = d.field.text_ctrl_dec->GetValue();
 
                 long value = 0;
                 str.ToLong(&value);
@@ -216,9 +233,9 @@ void Register::SetActiveAcross(bool active, wxWindow *_wnd)
 
     for (auto &d : desc[0])
     {
-        if (d.field.text_ctrl)
+        if (d.field.text_ctrl_dec)
         {
-            d.field.text_ctrl->Enable(active);
+            d.field.text_ctrl_dec->Enable(active);
         }
         if(d.field.combo)
         {
@@ -235,19 +252,41 @@ void Register::SetActiveAcross(bool active, wxWindow *_wnd)
 }
 
 
+bool Register::NeedTextCtrlDEC() const
+{
+    for (uint num_desc = 0; num_desc < 2; num_desc++)
+    {
+        const std::vector<StructDescription> &d = desc[num_desc];
+
+        if (d.size() > 0)
+        {
+            for (uint i = 0; i < d.size(); i++)
+            {
+                if (d[i].field.need_text_ctrl_dec)
+                {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
+}
+
+
 void Register::UpdateDecFields()
 {
     for (int i = 0; i < (int)chbox.size(); i++)                         // Перебираем все биты
     {
         for (auto &d : desc[0])
         {
-            if (d.field.need_text_ctrl)
+            if (d.field.need_text_ctrl_dec)
             {
                 if (i >= d.first_bit && i < d.first_bit + d.num_bits)   // Нашли описатель поля, в которое входит данный бит
                 {
                     uint value = d.CalculateValue(chbox);
 
-                    d.field.text_ctrl->SetValue(wxString::Format("%u", value));
+                    d.field.text_ctrl_dec->SetValue(wxString::Format("%u", value));
                 }
             }
         }
