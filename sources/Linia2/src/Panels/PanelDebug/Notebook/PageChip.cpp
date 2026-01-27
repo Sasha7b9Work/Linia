@@ -55,12 +55,6 @@ void PageChip::OnMenuEvent(wxCommandEvent &event)
 }
 
 
-void PageChip::FillRegisterBS(RegFPGA */*reg*/)
-{
-
-}
-
-
 void PageChip::Pack()
 {
     for (auto *reg : registers)

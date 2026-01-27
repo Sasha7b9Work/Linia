@@ -27,7 +27,4 @@ private:
     void OnMenuEvent(wxCommandEvent &);
 
 protected:
-
-    // Заполнить регистры каналов B и S, которые одинаковые
-    static void FillRegisterBS(RegFPGA *);
 };

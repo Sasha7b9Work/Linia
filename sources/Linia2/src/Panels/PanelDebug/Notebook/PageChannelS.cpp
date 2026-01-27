@@ -25,7 +25,5 @@ PageChannelS::PageChannelS(wxNotebook *parent) :
 
     RegFPGA *reg4 = new RegFPGA(this, regs[4]);
 
-    FillRegisterBS(reg4);
-
     AppendRegister(reg4);
 }
