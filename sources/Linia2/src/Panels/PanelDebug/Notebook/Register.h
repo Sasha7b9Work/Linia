@@ -114,12 +114,16 @@ private:
 
     std::vector<StructDescription> desc[2];     // Описания групп битов
 
-    std::vector<ModeDescripion> modes[2];       // Описания режимов
-    wxString title_mode[2];                     // Названия режимов
+    std::vector<ModeDescripion> modes[2];                   // Описания режимов
+    wxString title_modes[2];                                // Названия режимов
+    CommandsCombo *combo_modes[2] = { nullptr, nullptr };   // А это элемент управления для выбора режимов
 
     std::vector<CheckBoxBit *> chbox;
 
     Chip *chip = nullptr;
+
+    // Создать элемент управления для выбора режима
+    void CreateControlMode(int i);
 
     // Возвращает true, если нужно выводить текстовое поле для десятичного значения хотя бы у одной группы бит
     bool NeedTextCtrlDEC() const;
@@ -135,7 +139,8 @@ private:
 
     void OnEventTextCtrl(wxCommandEvent &);
     void OnEventCheckBox(wxCommandEvent &);
-    void OnEventCombo(wxCommandEvent &);
+    // Управление состоянием групп битов
+    void OnEventComboField(wxCommandEvent &);
     void OnEventToggleButton(wxCommandEvent &);
     void OnEventButton(wxCommandEvent &);
     void OnEventTimerAutoSend(wxTimerEvent &);

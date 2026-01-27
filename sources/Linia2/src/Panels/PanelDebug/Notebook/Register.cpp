@@ -79,7 +79,8 @@ void Register::AppendModes(const wxString &title, const std::vector<ModeDescripi
         if (modes[i].size() == 0)
         {
             modes[i] = mode_desc;
-            title_mode[i] = title;
+            title_modes[i] = title;
+            CreateControlMode((int)i);
             break;
         }
     }
@@ -93,6 +94,12 @@ void Register::AppendModes(const wxString &title, const std::vector<ModeDescripi
     PageChip *page_chip = (PageChip *)GetParent();
 
     page_chip->Rebuild();
+}
+
+
+void Register::CreateControlMode(int i)
+{
+    new wxStaticText(painter, wxID_ANY, title_modes[i], { 10 + i * 300, 100 });
 }
 
 
@@ -160,7 +167,7 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
 
                 elem.field.combo->left_align = true;
 
-                elem.field.combo->Bind(wxEVT_COMBOBOX, &Register::OnEventCombo, this);
+                elem.field.combo->Bind(wxEVT_COMBOBOX, &Register::OnEventComboField, this);
             }
         }
     }
@@ -365,7 +372,7 @@ wxString StructDescription::CommandStruct::CreateTooltip(StructDescription &) co
 }
 
 
-void Register::OnEventCombo(wxCommandEvent &event)
+void Register::OnEventComboField(wxCommandEvent &event)
 {
     int id = event.GetId();
 
