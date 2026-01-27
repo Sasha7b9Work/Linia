@@ -24,6 +24,9 @@ public:
 
     void SetEnabled(bool);
 
+    // Увеличить высоту на dH
+    void IncreaseHeight(int dH);
+
 private:
 
     bool first_paint = true;

@@ -17,6 +17,22 @@ PainterRegister::PainterRegister(wxWindow *parent, Register *_panel, const wxPoi
 }
 
 
+void PainterRegister::IncreaseHeight(int dH)
+{
+    wxSize size = GetSize();
+
+    size.y += dH;
+
+    SetMinSize(size);
+    SetMaxSize(size);
+    SetSize(size);
+
+    Layout();
+
+    Refresh();
+}
+
+
 int PainterRegister::BitX(int num_bit, int all_bits) const
 {
     int rigth = 40 + all_bits * W_B;

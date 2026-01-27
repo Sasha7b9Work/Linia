@@ -83,6 +83,8 @@ void Register::AppendModes(const wxString &title, const std::vector<ModeDescripi
             break;
         }
     }
+
+    painter->IncreaseHeight(100);
 }
 
 
