@@ -5,7 +5,7 @@
 
 
 PainterRegister::PainterRegister(wxWindow *parent, Register *_panel, const wxPoint &position) :
-    PainterRect(parent, position, { 750, 110 }),
+    wxPanel(parent, wxID_ANY, position, { 750, 110 }),
     panel(_panel)
 {
     panel->chbox.resize((uint)_panel->chip->BitDepth() );
@@ -14,6 +14,8 @@ PainterRegister::PainterRegister(wxWindow *parent, Register *_panel, const wxPoi
     {
         panel->chbox[(uint)i] = new CheckBoxBit(this, { BitX(i, panel->chip->BitDepth()), W_B + 1 }, { W_B, W_B });
     }
+
+    Bind(wxEVT_PAINT, &PainterRegister::OnPaint, this);
 }
 
 

@@ -6,7 +6,7 @@
 class Register;
 
 
-class PainterRegister : public PainterRect
+class PainterRegister : public wxPanel
 {
 public:
 
@@ -15,7 +15,7 @@ public:
 
     PainterRegister(wxWindow *parent, Register *panel, const wxPoint &position);
 
-    virtual void OnPaint(wxPaintEvent &) override;
+    virtual void OnPaint(wxPaintEvent &);
 
     wxFont GetDefaultFont(int size = -1);
 
