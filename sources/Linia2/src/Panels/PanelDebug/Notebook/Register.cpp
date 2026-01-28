@@ -455,6 +455,8 @@ void Register::OnEventComboMode(wxCommandEvent &event)
 
         chbox[(uint)state.num]->SetValue(state.state);
     }
+
+    UpdateComboCommandsAndModes();
 }
 
 
