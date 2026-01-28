@@ -10,6 +10,13 @@
 #include "Panels/PanelDebug/Notebook/PageChip.h"
 
 
+// Функции для комбобоксов выбора режимов
+namespace ComboRange
+{
+    static void UpdateState(std::vector<ModeDescripion> &, std::vector<CheckBoxBit *> chbox, CommandsCombo *);
+}
+
+
 Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip) :
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
     chip(_chip)
@@ -496,35 +503,42 @@ void Register::UpdateComboCommandsAndModes()
     {
         if (combo_modes[num_combo])
         {
-            std::vector<ModeDescripion> &mode_desc = modes[num_combo];
-
-            for (uint num_desc = 0; num_desc < mode_desc.size(); num_desc++)
-            {
-                ModeDescripion &_desc = mode_desc[num_desc];
-
-                std::vector<StateBit> &state_bit_array = _desc.state;
-
-                bool current_state = true;          // Если после следующего цикла это значение будет оставаться правдой, это означает, что биты регистра соответствуют данному std::vector<StateBit>
-
-                for (uint num_bit = 0; num_bit < state_bit_array.size(); num_bit++)
-                {
-                    StateBit &state_bit = state_bit_array[num_bit];
-
-                    if (chbox[(uint)state_bit.num]->IsChecked() != state_bit.state)
-                    {
-                        current_state = false;
-                        break;
-                    }
-                }
-
-                if (current_state)
-                {
-                    combo_modes[num_combo]->SetCurrentSelection((int)num_desc);
-                    return;
-                }
-            }
+            ComboRange::UpdateState(modes[num_combo], chbox, combo_modes[num_combo]);
         }
     }
+}
+
+
+void ComboRange::UpdateState(std::vector<ModeDescripion> &mode_desc, std::vector<CheckBoxBit *> chbox, CommandsCombo *combo)
+{
+    for (uint num_desc = 0; num_desc < mode_desc.size(); num_desc++)
+    {
+        ModeDescripion &_desc = mode_desc[num_desc];
+
+        std::vector<StateBit> &state_bit_array = _desc.state;
+
+        bool current_state = true;          // Если после следующего цикла это значение будет оставаться правдой,
+                                            // это означает, что биты регистра соответствуют данному std::vector<StateBit>
+
+        for (uint num_bit = 0; num_bit < state_bit_array.size(); num_bit++)
+        {
+            StateBit &state_bit = state_bit_array[num_bit];
+
+            if (chbox[(uint)state_bit.num]->IsChecked() != state_bit.state)
+            {
+                current_state = false;
+                break;
+            }
+        }
+
+        if (current_state)
+        {
+            combo->SetCurrentSelection((int)num_desc);
+            return;
+        }
+    }
+
+    combo->SetInvalidChoice();
 }
 
 
