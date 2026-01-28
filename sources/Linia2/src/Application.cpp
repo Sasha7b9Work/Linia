@@ -121,7 +121,11 @@ bool Application::OnInit()
             "Дополнительная информация в файле %s.", Log::FileName().c_str().AsChar()), "Ошибка", wxOK | wxCENTRE | wxICON_ERROR);
     }
 
+#ifdef WIN32
+
     ComPort::Connect(PanelUpper::self->GetNumPort());
+
+#endif
 
     return true;
 }
