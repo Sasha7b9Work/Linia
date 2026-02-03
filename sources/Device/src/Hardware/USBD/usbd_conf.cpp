@@ -16,11 +16,16 @@
   ******************************************************************************
   */
 /* Includes ------------------------------------------------------------------ */
+#include "defines.h"
 #include "stm32f4xx_hal.h"
 #include "usbd_core.h"
 
 #ifdef WIN32
     #pragma warning(disable:4459)
+#else
+    #if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+        #pragma clang diagnostic ignored "-Wshadow"
+    #endif
 #endif
 
 /* Private typedef ----------------------------------------------------------- */

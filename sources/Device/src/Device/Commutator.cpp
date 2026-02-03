@@ -36,7 +36,7 @@ void Commutator::Init()
     pin20EP.Init();
     pinENRGK.Init();
 
-    REG.WriteValue(0);
+    REG.Write(0);
 }
 
 

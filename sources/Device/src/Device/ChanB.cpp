@@ -16,7 +16,14 @@ namespace ChanB
 void ChanB::Init()
 {
     pin3_50_V.Init();
+    pin3_50_V.ToHi();
+
     pinEND1B.Init();
+    pinEND1B.ToHi();
+
     pinEND2B.Init();
+    pinEND2B.ToHi();
+
     pinENRGB.Init();
+    pinENRGB.ToHi();
 }

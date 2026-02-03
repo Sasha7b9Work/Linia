@@ -17,6 +17,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
+#include "defines.h"
 #include "usbd_core.h"
 
 #ifdef USE_USBD_COMPOSITE

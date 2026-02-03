@@ -5,7 +5,7 @@
 
   <Header>### uVision Project, (C) Keil Software</Header>
 
-  <WorkspaceName>LiniaMCU</WorkspaceName>
+  <WorkspaceName>D:\My\Prog\GitHub\Work\Linia\sources\LiniaMCU.uvmpw</WorkspaceName>
 
   <project>
     <PathAndName>.\Device\Device.uvprojx</PathAndName>

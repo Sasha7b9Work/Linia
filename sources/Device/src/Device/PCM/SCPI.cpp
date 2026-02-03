@@ -305,7 +305,7 @@ bool PCM::SCPI::Func_REG(pchar command)
 
         if (SU::CharIs(*pos, " :"))
         {
-            ChipREG::SetLength((ChipREG::E)num_reg, length);
+            ChipREG::GetReg((ChipREG::E)num_reg).SetLength(length);
 
             return true;
         }
@@ -324,7 +324,7 @@ bool PCM::SCPI::Func_REG(pchar command)
         {
             LOG_WRITE("Write %08X to REG%d", value, num_reg);
 
-            ChipREG::Write((ChipREG::E)num_reg, value);
+            ChipREG::GetReg((ChipREG::E)num_reg).Write(value);
 
             return true;
         }

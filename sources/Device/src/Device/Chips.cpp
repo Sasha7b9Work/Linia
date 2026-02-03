@@ -74,16 +74,16 @@ ChipDAC ChipDAC::dacs[10] =
 
 ChipREG ChipREG::regs[10] =
 {
-    { 24, &Source3kV::pinENRGV,    &pCLK2_DAC, &pDAT2_DAC },  // 0 Источник 3кВ
-    { 16, &Commutator::pinENRGK,   &pCLK2_DAC, &pDAT2_DAC },  // 1 Коммутатор
-    { 32, &ChanC::pinRAZV_ENRGF,   &pCLK2_DAC, &pDAT2_DAC },  // 2 Формирователь развёртки
-    { 32, &ChanB::pinENRGB,        &pCLK1_DAC, &pDAT1_DAC },  // 3 Канал B
-    { 32, &ChanS::pinENRGP,        &pCLK1_DAC, &pDAT1_DAC },  // 4 Канал S
-    { 16, &ChanC::pinMEAS_I_ENRGI, &pCLK2_DAC, &pDAT2_DAC },  // 5 Измеритель тока
-    { 0,  nullptr,                 nullptr,    nullptr },
-    { 0,  nullptr,                 nullptr,    nullptr },
-    { 0,  nullptr,                 nullptr,    nullptr },
-    { 0,  nullptr,                 nullptr,    nullptr }
+    { ChipREG::SOURCE_3kV, 24, &Source3kV::pinENRGV,    &pCLK2_DAC, &pDAT2_DAC },  // 0 Источник 3кВ
+    { ChipREG::COMMUTATOR, 16, &Commutator::pinENRGK,   &pCLK2_DAC, &pDAT2_DAC },  // 1 Коммутатор
+    { ChipREG::CHAN_C,     32, &ChanC::pinRAZV_ENRGF,   &pCLK2_DAC, &pDAT2_DAC },  // 2 Формирователь развёртки
+    { ChipREG::CHAN_B,     32, &ChanB::pinENRGB,        &pCLK1_DAC, &pDAT1_DAC },  // 3 Канал B
+    { ChipREG::CHAN_S,     32, &ChanS::pinENRGP,        &pCLK1_DAC, &pDAT1_DAC },  // 4 Канал S
+    { ChipREG::MEAS_I,     16, &ChanC::pinMEAS_I_ENRGI, &pCLK2_DAC, &pDAT2_DAC },  // 5 Измеритель тока
+    { ChipREG::Count,      0,  nullptr,                 nullptr,    nullptr },
+    { ChipREG::Count,      0,  nullptr,                 nullptr,    nullptr },
+    { ChipREG::Count,      0,  nullptr,                 nullptr,    nullptr },
+    { ChipREG::Count,      0,  nullptr,                 nullptr,    nullptr }
 };
 
 
@@ -120,15 +120,30 @@ void ChipDAC::WriteValue(uint value)
 }
 
 
-void ChipREG::SetLength(E type, uint l)
+void ChipREG::SetLength(uint l)
 {
     regs[type].Chip::SetLength(l);
 }
 
 
-void ChipREG::Write(E type, uint value)
+void ChipREG::Write(uint value)
 {
-    regs[type].ChipDAC::WriteValue(value);
+    clk->ToLow();
+
+    cs->ToLow();
+
+    for (int bit = (int)length - 1; bit >= 0; bit--)
+    {
+        clk->ToLow();
+
+        dat->Set(_GET_BIT(value, bit) != 0);
+
+        clk->ToHi();
+    }
+
+    cs->ToHi();
+
+    clk->ToLow();
 }
 
 

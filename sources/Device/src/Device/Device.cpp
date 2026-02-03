@@ -9,6 +9,18 @@
 
 void Device::Init()
 {
+    pDAT1_DAC.Init();
+    pDAT1_DAC.ToLow();
+
+    pCLK1_DAC.Init();
+    pCLK1_DAC.ToLow();
+
+    pDAT2_DAC.Init();
+    pDAT2_DAC.ToLow();
+
+    pCLK2_DAC.Init();
+    pCLK2_DAC.ToLow();
+
     FPGA::Init();
 
     Commutator::Init();
