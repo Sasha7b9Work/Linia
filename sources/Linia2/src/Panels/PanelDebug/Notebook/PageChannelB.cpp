@@ -21,51 +21,48 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
         std::vector<StructDescription> desc3; //-V827
 
         std::vector<StructDescription::CommandStruct> commandsLimitCurrent; //-V827 //-V826
-        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b000, "20 нA" });
-        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b001, "200 нA" });
-        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b010, "2 мкA" });
-        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b011, "20 мкA" });
-        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b100, "200 мкA" });
-        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b101, "2 мA" });
-        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b110, "20 мA" });
-        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b111, "200 мA" });
-        desc3.emplace_back(StructDescription{ 0, 3, "ппт", "Предел по току", { false, commandsLimitCurrent } });
-
-        std::vector<StructDescription::CommandStruct> commandsLimit2A; //-V826
-        commandsLimit2A.emplace_back(StructDescription::CommandStruct{ 0, "Выключено" });
-        commandsLimit2A.emplace_back(StructDescription::CommandStruct{ 1, "Включено" });
-        desc3.emplace_back(StructDescription{ 3, 1, "п", "Предел 2А", { false, commandsLimit2A } });
-
-        std::vector<StructDescription::CommandStruct> commandsLimit10A; //-V826
-        commandsLimit10A.emplace_back(StructDescription::CommandStruct{ 0, "Выключено" });
-        commandsLimit10A.emplace_back(StructDescription::CommandStruct{ 1, "Включено" });
-        desc3.emplace_back(StructDescription{ 4, 1, "п", "Предел 10A", { false, commandsLimit10A } });
+        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b0000, "20 нA" });
+        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b0001, "200 нA" });
+        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b0010, "2 мкA" });
+        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b0011, "20 мкA" });
+        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b0100, "200 мкA" });
+        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b0101, "2 мA" });
+        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b0110, "20 мA" });
+        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b0111, "200 мA" });
+        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b1000, "2 A" });
+        commandsLimitCurrent.emplace_back(StructDescription::CommandStruct{ 0b1001, "10 A" });
+        desc3.emplace_back(StructDescription{ 0, 4, "ппт", "Предел по току", { false, commandsLimitCurrent } });
 
         std::vector<StructDescription::CommandStruct> commandsOS_OPA; //-V826
         commandsOS_OPA.emplace_back(StructDescription::CommandStruct{ 0, "В режиме U" });
         commandsOS_OPA.emplace_back(StructDescription::CommandStruct{ 1, "В режиме I" });
-        desc3.emplace_back(StructDescription{ 5, 1, "о", "Ucl Подключение ОС вых ОУ", { false, commandsOS_OPA } });
+        desc3.emplace_back(StructDescription{ 4, 1, "о", "Ucl Подключение ОС вых ОУ", { false, commandsOS_OPA } });
 
         std::vector<StructDescription::CommandStruct> commandsZeroCorr; //-V826
         commandsZeroCorr.emplace_back(StructDescription::CommandStruct{ 0, "Выключен" });
         commandsZeroCorr.emplace_back(StructDescription::CommandStruct{ 1, "Включен" });
-        desc3.emplace_back(StructDescription{ 6, 1, "г", "CLBR Геркон \"Корр. 0 измерителя Uии\"", { false, commandsZeroCorr } });
+        desc3.emplace_back(StructDescription{ 5, 1, "г", "CLBR Геркон \"Корр. 0 измерителя Uии\"", { false, commandsZeroCorr } });
 
         std::vector<StructDescription::CommandStruct> commandsAz; //-V826
         commandsAz.emplace_back(StructDescription::CommandStruct{ 0, "Стоп" });
         commandsAz.emplace_back(StructDescription::CommandStruct{ 1, "Измерение" });
-        desc3.emplace_back(StructDescription{ 7, 1, "р", "Az Режим", { false, commandsAz } });
+        desc3.emplace_back(StructDescription{ 6, 1, "р", "Az Режим", { false, commandsAz } });
 
-        std::vector<StructDescription::CommandStruct> commandsDivider; //-V826
-        commandsDivider.emplace_back(StructDescription::CommandStruct{ 0b00, "1:1" });
-        commandsDivider.emplace_back(StructDescription::CommandStruct{ 0b01, "1:4" });
-        commandsDivider.emplace_back(StructDescription::CommandStruct{ 0b10, "1:10" });
-        desc3.emplace_back(StructDescription{ 8, 2, "д", "Делитель в режиме Источник U", { false, commandsDivider } });
+        std::vector<StructDescription::CommandStruct> commandsCopositor; //-V826
+        commandsCopositor.emplace_back(StructDescription::CommandStruct{ 0b0, "Включение сглаж. Ёмкости (в диапазонах 200нА, 2мкА)" });
+        commandsCopositor.emplace_back(StructDescription::CommandStruct{ 0b1, "Выкл. сглаживающей ёмкости (в остальных диапазонах)" });
+        desc3.emplace_back(StructDescription{ 7, 1, "ё", "Сглаживающая ёмкость", { false, commandsCopositor } });
+
+        std::vector<StructDescription::CommandStruct> commandsDivider;
+        commandsDivider.emplace_back(StructDescription::CommandStruct{ 0x00, "Делитель 1:1  в режиме \"источник U\"." });
+        commandsDivider.emplace_back(StructDescription::CommandStruct{ 0x01, "Делитель 1:4 в режиме \"источник U\"." });
+        commandsDivider.emplace_back(StructDescription::CommandStruct{ 0x10, "Делитель 1:10 в режиме \"источник U\"." });
+        desc3.emplace_back(StructDescription{ 8, 2, "д", "Делитель", {false, commandsDivider} });
 
         std::vector<StructDescription::CommandStruct> commandsQ10; //-V826
         commandsQ10.emplace_back(StructDescription::CommandStruct{ 0, "Источник U - ограничение по I" });
         commandsQ10.emplace_back(StructDescription::CommandStruct{ 1, "Режим 1:1 источника тока" });
-        desc3.emplace_back(StructDescription{ 10, 1, "р", "Режим", { false, commandsQ10 } });
+        desc3.emplace_back(StructDescription{ 10, 1, "р", "Ui Режим", { false, commandsQ10 } });
 
         std::vector<StructDescription::CommandStruct> commandsRange; //-V826
         commandsRange.emplace_back(StructDescription::CommandStruct{ 0b00, "1" });
@@ -97,6 +94,11 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
         commandsImpI.emplace_back(StructDescription::CommandStruct{ 0, "Запрещены" });
         commandsImpI.emplace_back(StructDescription::CommandStruct{ 1, "Разрешены" });
         desc3.emplace_back(StructDescription{ 19, 1, "и", "ImpI Импульсы в режиме высокого тока", { false, commandsImpI } });
+
+        std::vector<StructDescription::CommandStruct> commandsSignal;
+        commandsSignal.emplace_back(StructDescription::CommandStruct{ 0, "" });
+        commandsSignal.emplace_back(StructDescription::CommandStruct{ 1, "" });
+        desc3.emplace_back(StructDescription{ 20, 1, "c", "(Onl1) – 1RUout Сигнал включения 2А диапазона", {false, commandsSignal} });
 
         std::vector<StructDescription::CommandStruct> commands55; //-V826
         commands55.emplace_back(StructDescription::CommandStruct{ 0, "Отключено" });
@@ -143,11 +145,10 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 std::vector<ModeDescripion> modesI;
 
                 ModeDescripion modeI_10A{ "10A", "10A 5A 0.5A/ст 0.2 Ом 20A" };
-                modeI_10A.state.emplace_back(StateBit{ 0, false });
+                modeI_10A.state.emplace_back(StateBit{ 0, true });
                 modeI_10A.state.emplace_back(StateBit{ 1, false });
                 modeI_10A.state.emplace_back(StateBit{ 2, false });
-                modeI_10A.state.emplace_back(StateBit{ 3, false });
-                modeI_10A.state.emplace_back(StateBit{ 4, true });
+                modeI_10A.state.emplace_back(StateBit{ 3, true });
                 modeI_10A.state.emplace_back(StateBit{ 10, true });
                 modeI_10A.state.emplace_back(StateBit{ 17, false });
                 modesI.emplace_back(modeI_10A);
@@ -157,7 +158,6 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_2A.state.emplace_back(StateBit{ 1, false });
                 modeI_2A.state.emplace_back(StateBit{ 2, false });
                 modeI_2A.state.emplace_back(StateBit{ 3, true });
-                modeI_2A.state.emplace_back(StateBit{ 4, false });
                 modeI_2A.state.emplace_back(StateBit{ 10, true });
                 modeI_2A.state.emplace_back(StateBit{ 17, false });
                 modesI.emplace_back(modeI_2A);
@@ -167,7 +167,6 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_200mA.state.emplace_back(StateBit{ 1, true });
                 modeI_200mA.state.emplace_back(StateBit{ 2, true });
                 modeI_200mA.state.emplace_back(StateBit{ 3, false });
-                modeI_200mA.state.emplace_back(StateBit{ 4, false });
                 modeI_200mA.state.emplace_back(StateBit{ 10, true });
                 modeI_200mA.state.emplace_back(StateBit{ 17, false });
                 modesI.emplace_back(modeI_200mA);
@@ -177,7 +176,6 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_20mA.state.emplace_back(StateBit{ 1, true });
                 modeI_20mA.state.emplace_back(StateBit{ 2, true });
                 modeI_20mA.state.emplace_back(StateBit{ 3, false });
-                modeI_20mA.state.emplace_back(StateBit{ 4, false });
                 modeI_20mA.state.emplace_back(StateBit{ 10, true });
                 modeI_20mA.state.emplace_back(StateBit{ 17, false });
                 modesI.emplace_back(modeI_20mA);
@@ -187,7 +185,6 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_2mA.state.emplace_back(StateBit{ 1, false });
                 modeI_2mA.state.emplace_back(StateBit{ 2, true });
                 modeI_2mA.state.emplace_back(StateBit{ 3, false });
-                modeI_2mA.state.emplace_back(StateBit{ 4, false });
                 modeI_2mA.state.emplace_back(StateBit{ 10, true });
                 modeI_2mA.state.emplace_back(StateBit{ 17, false });
                 modesI.emplace_back(modeI_2mA);
@@ -197,7 +194,6 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_200uA.state.emplace_back(StateBit{ 1, false });
                 modeI_200uA.state.emplace_back(StateBit{ 2, true });
                 modeI_200uA.state.emplace_back(StateBit{ 3, false });
-                modeI_200uA.state.emplace_back(StateBit{ 4, false });
                 modeI_200uA.state.emplace_back(StateBit{ 10, true });
                 modeI_200uA.state.emplace_back(StateBit{ 17, false });
                 modesI.emplace_back(modeI_200uA);
@@ -207,7 +203,6 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_20uA.state.emplace_back(StateBit{ 1, true });
                 modeI_20uA.state.emplace_back(StateBit{ 2, false });
                 modeI_20uA.state.emplace_back(StateBit{ 3, false });
-                modeI_20uA.state.emplace_back(StateBit{ 4, false });
                 modeI_20uA.state.emplace_back(StateBit{ 10, true });
                 modeI_20uA.state.emplace_back(StateBit{ 17, false });
                 modesI.emplace_back(modeI_20uA);
@@ -217,7 +212,6 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_2uA.state.emplace_back(StateBit{ 1, true });
                 modeI_2uA.state.emplace_back(StateBit{ 2, false });
                 modeI_2uA.state.emplace_back(StateBit{ 3, false });
-                modeI_2uA.state.emplace_back(StateBit{ 4, false });
                 modeI_2uA.state.emplace_back(StateBit{ 10, true });
                 modeI_2uA.state.emplace_back(StateBit{ 17, false });
                 modesI.emplace_back(modeI_2uA);
@@ -227,7 +221,6 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_200nA.state.emplace_back(StateBit{ 1, false });
                 modeI_200nA.state.emplace_back(StateBit{ 2, false });
                 modeI_200nA.state.emplace_back(StateBit{ 3, false });
-                modeI_200nA.state.emplace_back(StateBit{ 4, false });
                 modeI_200nA.state.emplace_back(StateBit{ 10, true });
                 modeI_200nA.state.emplace_back(StateBit{ 17, false });
                 modesI.emplace_back(modeI_200nA);
@@ -237,7 +230,6 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_20nA.state.emplace_back(StateBit{ 1, false });
                 modeI_20nA.state.emplace_back(StateBit{ 2, false });
                 modeI_20nA.state.emplace_back(StateBit{ 3, false });
-                modeI_20nA.state.emplace_back(StateBit{ 4, false });
                 modeI_20nA.state.emplace_back(StateBit{ 10, true });
                 modeI_20nA.state.emplace_back(StateBit{ 17, false });
                 modesI.emplace_back(modeI_20nA);
