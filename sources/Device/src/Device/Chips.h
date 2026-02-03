@@ -36,21 +36,21 @@ struct ChipDAC : public Chip
         CHAN_B_2,
         CHAN_S_1,
         CHAN_S_2,
-        SOURCE_50V
+        SOURCE_50V,
+        Count
     };
 
-    ChipDAC(uint _l, PinOut *_cs, PinOut *_clk, PinOut *_dat) : Chip(_l, _cs, _clk), dat(_dat) { }
+    ChipDAC(E v, uint _l, PinOut *_cs, PinOut *_clk, PinOut *_dat) : Chip(_l, _cs, _clk), type(v), dat(_dat) { }
 
     void WriteValue(uint);
 
-    static void SetLength(E, uint);
-    static void Write(E, uint);
+    static ChipDAC &Get(E);
 
 private:
+
+    E type;
 
     PinOut *dat;
-
-private:
 
     static ChipDAC dacs[10];
 };
@@ -72,9 +72,8 @@ struct ChipREG : public Chip
     ChipREG(E v, uint _l, PinOut *_cs, PinOut *_clk, PinOut *_dat) :
         Chip(_l, _cs, _clk), type(v), dat(_dat) { }
 
-    void SetLength(uint);
-    void Write(uint);
-    static ChipREG &GetReg(E);
+    void WriteValue(uint);
+    static ChipREG &Get(E);
 
 private:
 

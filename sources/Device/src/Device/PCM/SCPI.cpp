@@ -246,7 +246,7 @@ bool PCM::SCPI::Func_DAC(pchar command)
 
         if(SU::CharIs(*pos, " :"))
         {
-            ChipDAC::SetLength((ChipDAC::E)num_dac, length);
+            ChipDAC::Get((ChipDAC::E)num_dac).SetLength(length);
 
             return true;
         }
@@ -265,7 +265,7 @@ bool PCM::SCPI::Func_DAC(pchar command)
         {
             LOG_WRITE("Write %08X to DAC%d", value, num_dac);
 
-            ChipDAC::Write((ChipDAC::E)num_dac, value);
+            ChipDAC::Get((ChipDAC::E)num_dac).WriteValue(value);
 
             return true;
         }
@@ -305,7 +305,7 @@ bool PCM::SCPI::Func_REG(pchar command)
 
         if (SU::CharIs(*pos, " :"))
         {
-            ChipREG::GetReg((ChipREG::E)num_reg).SetLength(length);
+            ChipREG::Get((ChipREG::E)num_reg).SetLength(length);
 
             return true;
         }
@@ -324,7 +324,7 @@ bool PCM::SCPI::Func_REG(pchar command)
         {
             LOG_WRITE("Write %08X to REG%d", value, num_reg);
 
-            ChipREG::GetReg((ChipREG::E)num_reg).Write(value);
+            ChipREG::Get((ChipREG::E)num_reg).WriteValue(value);
 
             return true;
         }

@@ -6,7 +6,7 @@
 
 namespace Commutator
 {
-    ChipREG &REG = ChipREG::GetReg(ChipREG::COMMUTATOR);
+    ChipREG &REG = ChipREG::Get(ChipREG::COMMUTATOR);
 
     static PinIn pin3000VE(Port::_C, Pin::_4);     // 44
     static PinIn pin200EN(Port::_C, Pin::_5);      // 45
@@ -36,7 +36,7 @@ void Commutator::Init()
     pin20EP.Init();
     pinENRGK.Init();
 
-    REG.Write(0);
+    REG.WriteValue(0);
 }
 
 
