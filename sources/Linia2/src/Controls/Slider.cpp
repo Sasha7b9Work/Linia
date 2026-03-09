@@ -90,11 +90,18 @@ void SliderInt::OnEventSlider(wxCommandEvent &event)
 {
     if (event.GetEventObject() == slider)
     {
-        int value = event.GetInt();
+        wxTimer timer;
 
-        text->SetLabel(wxString::Format("%d", value));
+        if (!timer.IsRunning())
+        {
+            int value = event.GetInt();
 
-        GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
+            text->SetLabel(wxString::Format("%d", value));
+
+            GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
+        }
+
+        timer.StartOnce(100);
     }
 
     event.Skip();
