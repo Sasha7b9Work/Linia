@@ -55,6 +55,8 @@ void SliderInt::OnEventMouseDown(wxMouseEvent &event)
             slider->SetValue(new_value);
             text->SetLabel(wxString::Format("%d", new_value));
             GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
+
+            timer_more.Start(400);
         }
     }
     else if (event.GetId() == btnLess->GetId())
@@ -65,6 +67,8 @@ void SliderInt::OnEventMouseDown(wxMouseEvent &event)
             slider->SetValue(new_value);
             text->SetLabel(wxString::Format("%d", new_value));
             GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
+
+            timer_less.Start(400);
         }
     }
 
@@ -111,11 +115,13 @@ void SliderInt::OnEventMouseUp(wxMouseEvent &event)
 
 void SliderInt::OnEventTimer(wxTimerEvent &event)
 {
-//    int delta = (event.GetId() == timer_more.GetId()) ? 1 : -1;
+    int delta = (event.GetId() == timer_more.GetId()) ? 1 : -1;
 
-//    slider->SetValue(slider->GetValue() + delta);
+    slider->SetValue(slider->GetValue() + delta);
 
-//    GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
+    text->SetLabel(wxString::Format("%d", slider->GetValue()));
+
+    GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
 
     event.Skip();
 }
