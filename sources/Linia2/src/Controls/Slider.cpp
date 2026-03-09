@@ -80,15 +80,23 @@ void SliderInt::OnEventSlider(wxCommandEvent &event)
 
         text->SetLabel(wxString::Format("%d", value));
 
-        if (slider->GetValue() != value)
-        {
-            slider->SetValue(value);
-
-            GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
-        }
+        GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
     }
 
     event.Skip();
+}
+
+
+void SliderInt::SetValue(int value)
+{
+    if (value != GetValue())
+    {
+        text->SetLabel(wxString::Format("%d", value));
+
+        slider->SetValue(value);
+
+        GF::SendCommandEvent(this, wxEVT_SLIDER, value);
+    }
 }
 
 
@@ -150,15 +158,6 @@ int SliderInt::GetValue() const
 int SliderFloat::GetIntValue() const
 {
     return slider->GetValue();
-}
-
-
-void SliderInt::SetValue(int value)
-{
-    if (value != GetValue())
-    {
-        GF::SendCommandEvent(this, wxEVT_SLIDER, value);
-    }
 }
 
 
