@@ -85,7 +85,8 @@ public:
     static const int HEIGHT = 155;
 
     Register(wxWindow *parent, const wxString &_title,      // Это написано на изображении
-        Chip *);
+        Chip *,
+        bool need_knob);                                    // Нужна ли ручка значения
 
     void SetNamesBits(const wxArrayString &);
 
@@ -106,6 +107,8 @@ protected:
     PainterRegister *painter = nullptr;
 
     Chip *chip = nullptr;
+
+    KnobWidget *knob = nullptr;
 
 private:
 
@@ -141,6 +144,8 @@ private:
     // Увеличить высоту на dH
     void IncreaseHeight(int dH);
 
+    void SetValueToKnob();
+
     void OnEventTextCtrl(wxCommandEvent &);
     void OnEventCheckBox(wxCommandEvent &);
     // Управление состоянием групп битов
@@ -153,6 +158,8 @@ private:
 
     // Все элементы кроме wnd будут установлены в состояние active
     void SetActiveAcross(bool active, wxWindow *wnd);
+
+    void OnEventKnob(wxCommandEvent &);
 };
 
 
@@ -161,7 +168,7 @@ class RegFPGA : public Register
 public:
 
     RegFPGA(wxWindow *_parent, Chip *_chip) :
-        Register(_parent, "", _chip)
+        Register(_parent, "", _chip, false)
     {
     }
 };
@@ -173,12 +180,6 @@ public:
 
     // Если need_knob, то рисуем ручку
     RegAD5543(wxWindow *, Chip *_chip);
-
-private:
-
-    KnobWidget *knob = nullptr;
-
-    void OnEventKnob(wxCommandEvent &);
 };
 
 
@@ -187,8 +188,4 @@ class RegAD5531 : public Register
 public:
 
     RegAD5531(wxWindow *, Chip *_chip);
-
-private:
-
-    KnobWidget *knob = nullptr;
 };

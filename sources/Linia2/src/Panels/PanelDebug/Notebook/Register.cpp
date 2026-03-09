@@ -18,7 +18,7 @@ namespace ComboRange
 }
 
 
-Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip) :
+Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, bool need_knob) :
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
     chip(_chip)
 {
@@ -71,6 +71,17 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip) :
     Bind(wxEVT_TIMER, &Register::OnEventTimerAutoSend, this);
 
     timerAutoSend.SetOwner(this, timerAutoSend.GetId());
+
+    if (need_knob)
+    {
+        const int SIZE = 50;
+
+        const int d = 10;
+
+        knob = new KnobWidget(painter, wxID_ANY, 0, 100, 50, { painter->GetSize().x - SIZE - d - 20, d }, { SIZE, SIZE });
+
+        knob->Bind(wxEVT_SLIDER, &RegAD5543::OnEventKnob, this);
+    }
 }
 
 
@@ -509,6 +520,8 @@ void Register::UpdateComboCommandsAndModes()
             ComboRange::UpdateState(modes[num_combo], chbox, combo_modes[num_combo]);
         }
     }
+
+    SetValueToKnob();
 }
 
 
@@ -546,19 +559,11 @@ void ComboRange::UpdateState(std::vector<ModeDescripion> &mode_desc, std::vector
 
 
 RegAD5543::RegAD5543(wxWindow *_parent, Chip *_chip) :
-    Register(_parent, "AD5543", _chip)
+    Register(_parent, "AD5543", _chip, true)
 {
-    const int SIZE = 50;
-
-    const int d = 10;
-
-    knob = new KnobWidget(painter, wxID_ANY, 0, 100, 50, { painter->GetSize().x - SIZE - d - 20, d }, { SIZE, SIZE });
-
-    knob->Bind(wxEVT_SLIDER, &RegAD5543::OnEventKnob, this);
 }
 
-
-void RegAD5543::OnEventKnob(wxCommandEvent &event)
+void Register::OnEventKnob(wxCommandEvent &event)
 {
     int max_value = (1 << chip->BitDepth()) - 1;
 
@@ -567,13 +572,8 @@ void RegAD5543::OnEventKnob(wxCommandEvent &event)
 
 
 RegAD5531::RegAD5531(wxWindow *_parent, Chip *_chip) :
-    Register(_parent, "AD5531", _chip)
+    Register(_parent, "AD5531", _chip, true)
 {
-    const int SIZE = 50;
-
-    const int d = 10;
-
-    knob = new KnobWidget(painter, wxID_ANY, 0, 100, 50, { painter->GetSize().x - SIZE - d - 20, d }, { SIZE, SIZE });
 }
 
 
@@ -683,4 +683,23 @@ void Register::Pack()
 void Register::Unpack()
 {
     SetValue(Config::ReadUint(chip->GetNameDevice()));
+
+    SetValueToKnob();
+}
+
+
+void Register::SetValueToKnob()
+{
+    if (knob)
+    {
+        knob->Unbind(wxEVT_SLIDER, &Register::OnEventKnob, this);
+
+        int max_value = (1 << chip->BitDepth()) - 1;
+
+        int value = (int)GetValue();
+
+        knob->SetValue(value * 100 / max_value);
+
+        knob->Bind(wxEVT_SLIDER, &Register::OnEventKnob, this);
+    }
 }
