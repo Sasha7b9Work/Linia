@@ -27,6 +27,4 @@ private:
     void OnRightClick(wxMouseEvent &);
 
     void OnMenuEvent(wxCommandEvent &);
-
-protected:
 };

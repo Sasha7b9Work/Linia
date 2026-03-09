@@ -285,14 +285,14 @@ void Register::OnEventButton(wxCommandEvent &event)
 
     if (id == btnSend->GetId())
     {
-        chip->WriteValueToDevice(GetValue());
+        chip->WriteValue(GetValue());
     }
 }
 
 
 void Register::OnEventTimerAutoSend(wxTimerEvent &)
 {
-    chip->WriteValueToDevice(GetValue());
+    chip->WriteValue(GetValue());
 }
 
 

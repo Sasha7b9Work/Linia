@@ -36,7 +36,7 @@ struct ChipDAC : public Chip
         CHAN_B_2,
         CHAN_S_1,
         CHAN_S_2,
-        SOURCE_50V,
+        SOURCE_50V_PCM,
         Count
     };
 

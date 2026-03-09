@@ -16,10 +16,12 @@ struct Chip
     virtual int BitDepth() const = 0;
 
     // Послать значение в контроллер
-    void WriteValueToDevice(uint) const;
+    void WriteValue(uint) const;
 
     // Послать в контроллер размер регистра
     void WriteBitDepthToDevice() const;
+
+    virtual bool IsDAC() const { return false; }
 };
 
 
@@ -42,6 +44,27 @@ struct DAC : public Chip
     virtual wxString GetNameDevice() const override;
 
     virtual int BitDepth() const override;
+
+    virtual bool IsDAC() const override
+    {
+        return true;
+    }
+
+    int GetNumberDynamicDAC() const
+    {
+        if (v == _0)
+        {
+            return 1;
+        }
+        else if (v == _5)
+        {
+            return 2;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 
 private:
 

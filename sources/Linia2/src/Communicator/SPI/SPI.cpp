@@ -48,7 +48,7 @@ namespace SPI
     static void SetCS(int dac_number, bool enable);   // Управление CS (Chip Select) для конкретного DAC
     static bool Write(uint8 *data, size_t length);
 
-    void _Init()
+    void Init()
     {
         LOG_WRITE("Initializing SPI...");
 

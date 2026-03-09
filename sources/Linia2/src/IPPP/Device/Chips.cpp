@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "IPPP/Device/Chips.h"
 #include "IPPP/Device/IDevice.h"
+#include "Communicator/SPI/SPI.h"
 
 
 DAC *dacs[DAC::Count];
@@ -64,7 +65,7 @@ int REG::BitDepth() const
     {
         24,
         16,
-        8,
+         8,
         24,
         32,
         16,
@@ -99,8 +100,22 @@ int FPGA::BitDepth() const
 }
 
 
-void Chip::WriteValueToDevice(uint value) const
+void Chip::WriteValue(uint value) const
 {
+    if (IsDAC())
+    {
+        DAC *dac = (DAC *)this;
+
+        int numberDAC = dac->GetNumberDynamicDAC();
+
+        if (numberDAC == 1 || numberDAC == 2)
+        {
+            SPI::WriteDynamicDAC(dac->GetNumberDynamicDAC(), (uint16)value);
+
+            return;
+        }
+    }
+
     IDevice::impl->SendCommand(":%s:WRITE %X", GetNameDevice().c_str().AsChar(), value);
 }
 
