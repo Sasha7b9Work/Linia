@@ -49,9 +49,9 @@ void SliderInt::OnEventMouseDown(wxMouseEvent &event)
 {
     if (event.GetId() == btnMore->GetId())
     {
-        static wxTimer timer;
+//        static wxTimer timer;
 
-        if (!timer.IsRunning())
+//        if (!timer.IsRunning())
         {
             int new_value = slider->GetValue() + 1;
             if (new_value <= slider->GetMax())
@@ -61,14 +61,14 @@ void SliderInt::OnEventMouseDown(wxMouseEvent &event)
                 GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
             }
 
-            timer.StartOnce(100);
+//            timer.StartOnce(100);
         }
     }
     else if (event.GetId() == btnLess->GetId())
     {
-        static wxTimer timer;
+//        static wxTimer timer;
 
-        if (!timer.IsRunning())
+//        if (!timer.IsRunning())
         {
             int new_value = slider->GetValue() - 1;
             if (new_value >= slider->GetMin())
@@ -78,7 +78,7 @@ void SliderInt::OnEventMouseDown(wxMouseEvent &event)
                 GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
             }
 
-            timer.StartOnce(100);
+//            timer.StartOnce(100);
         }
     }
 
@@ -90,9 +90,9 @@ void SliderInt::OnEventSlider(wxCommandEvent &event)
 {
     if (event.GetEventObject() == slider)
     {
-        wxTimer timer;
+//        wxTimer timer;
 
-        if (!timer.IsRunning())
+//        if (!timer.IsRunning())
         {
             int value = event.GetInt();
 
@@ -100,7 +100,7 @@ void SliderInt::OnEventSlider(wxCommandEvent &event)
 
             GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
 
-            timer.StartOnce(100);
+//            timer.StartOnce(100);
         }
     }
 
