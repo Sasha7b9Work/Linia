@@ -560,7 +560,7 @@ void RegAD5543::OnEventKnob(wxCommandEvent &event)
 {
     int max_value = (1 << chip->BitDepth()) - 1;
 
-    SetValue(max_value * event.GetInt() / 100);
+    SetValue((uint)(max_value * event.GetInt() / 100));
 }
 
 
