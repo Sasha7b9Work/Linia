@@ -102,15 +102,11 @@ public:
     void Pack();
     void Unpack();
 
-protected:
-
-    PainterRegister *painter = nullptr;
-
-    Chip *chip = nullptr;
+private:
 
     KnobWidget *knob = nullptr;
-
-private:
+    Chip *chip = nullptr;
+    PainterRegister *painter = nullptr;
 
     wxButton *btnSend = nullptr;                // Однократная засылка
     wxToggleButton *btnAutoSend = nullptr;      // Если кнопка нажата, то каждую секунду происходит запись в данный регистр
