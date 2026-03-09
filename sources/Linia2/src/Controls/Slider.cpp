@@ -99,9 +99,9 @@ void SliderInt::OnEventSlider(wxCommandEvent &event)
             text->SetLabel(wxString::Format("%d", value));
 
             GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
-        }
 
-        timer.StartOnce(100);
+            timer.StartOnce(100);
+        }
     }
 
     event.Skip();
