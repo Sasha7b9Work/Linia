@@ -105,6 +105,8 @@ protected:
 
     PainterRegister *painter = nullptr;
 
+    Chip *chip = nullptr;
+
 private:
 
     wxButton *btnSend = nullptr;                // Однократная засылка
@@ -123,8 +125,6 @@ private:
     CommandsCombo *combo_modes[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };
 
     std::vector<CheckBoxBit *> chbox;
-
-    Chip *chip = nullptr;
 
     // Создать элемент управления для выбора режима
     void CreateControlMode(int i);
@@ -177,6 +177,8 @@ public:
 private:
 
     KnobWidget *knob = nullptr;
+
+    void OnEventKnob(wxCommandEvent &);
 };
 
 

@@ -551,6 +551,16 @@ RegAD5543::RegAD5543(wxWindow *_parent, Chip *_chip) :
     const int d = 10;
 
     knob = new KnobWidget(painter, wxID_ANY, 0, 100, 50, { painter->GetSize().x - SIZE - d - 20, d }, { SIZE, SIZE });
+
+    knob->Bind(wxEVT_SLIDER, &RegAD5543::OnEventKnob, this);
+}
+
+
+void RegAD5543::OnEventKnob(wxCommandEvent &event)
+{
+    int max_value = (1 << chip->BitDepth()) - 1;
+
+    SetValue(max_value * event.GetInt() / 100);
 }
 
 
