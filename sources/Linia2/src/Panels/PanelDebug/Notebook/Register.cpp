@@ -573,7 +573,12 @@ void Register::OnEventKnob(wxCommandEvent &event)
     {
         int max_value = (1 << chip->BitDepth()) - 1;
 
-        SetValue((uint)(max_value * event.GetInt() / 100));
+        uint new_value = (uint)(max_value * event.GetInt() / 100);
+
+        if (GetValue() != new_value)
+        {
+            SetValue(new_value);
+        }
     }
 
     event.Skip();
@@ -724,11 +729,11 @@ void Register::SetValueToKnob()
 
         int max_value = (1 << chip->BitDepth()) - 1;
 
-        int value = (int)GetValue();
+        int new_value = (int)((float)GetValue() * 100.0f / (float)max_value + 0.5f);
 
-        knob->SetValue(value * 100 / max_value);
+        knob->SetValue(new_value);
 
-        slider_value->SetValue(value * 100 / max_value);
+        slider_value->SetValue(new_value);
 
         knob->Bind(wxEVT_SLIDER, &Register::OnEventKnob, this);
         slider_value->Bind(wxEVT_SLIDER, &Register::OnEventSlider, this);
