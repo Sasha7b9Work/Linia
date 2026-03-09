@@ -34,7 +34,7 @@ SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _
     btnLess = new wxButton(this, wxID_ANY, "", { x, size_button.y }, size_button);
     btnLess->SetBackgroundColour(btnLess->GetBackgroundColour().ChangeLightness(LIGHTNESS));
 
-    Bind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
+    slider->Bind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
     btnMore->Bind(wxEVT_LEFT_DOWN, &SliderInt::OnEventMouseDown, this);
     btnLess->Bind(wxEVT_LEFT_DOWN, &SliderInt::OnEventMouseDown, this);
     btnMore->Bind(wxEVT_LEFT_UP, &SliderInt::OnEventMouseUp, this);
@@ -49,16 +49,44 @@ void SliderInt::OnEventMouseDown(wxMouseEvent &event)
 {
     if (event.GetId() == btnMore->GetId())
     {
-        slider->SetValue(slider->GetValue() + 1);
-        timer_more.Start(400);
+        int new_value = slider->GetValue() + 1;
+        if (new_value <= slider->GetMax())
+        {
+            slider->SetValue(new_value);
+            text->SetLabel(wxString::Format("%d", new_value));
+            GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
+        }
     }
     else if (event.GetId() == btnLess->GetId())
     {
-        slider->SetValue(slider->GetValue() - 1);
-        timer_less.Start(400);
+        int new_value = slider->GetValue() - 1;
+        if (new_value >= slider->GetMin())
+        {
+            slider->SetValue(new_value);
+            text->SetLabel(wxString::Format("%d", new_value));
+            GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
+        }
     }
 
-    GF::SendCommandEvent(slider, wxEVT_SLIDER, slider->GetValue());
+    event.Skip();
+}
+
+
+void SliderInt::OnEventSlider(wxCommandEvent &event)
+{
+    if (event.GetEventObject() == slider)
+    {
+        int value = event.GetInt();
+
+        text->SetLabel(wxString::Format("%d", value));
+
+        if (slider->GetValue() != value)
+        {
+            slider->SetValue(value);
+
+            GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
+        }
+    }
 
     event.Skip();
 }
@@ -75,11 +103,11 @@ void SliderInt::OnEventMouseUp(wxMouseEvent &event)
 
 void SliderInt::OnEventTimer(wxTimerEvent &event)
 {
-    int delta = (event.GetId() == timer_more.GetId()) ? 1 : -1;
+//    int delta = (event.GetId() == timer_more.GetId()) ? 1 : -1;
 
-    slider->SetValue(slider->GetValue() + delta);
+//    slider->SetValue(slider->GetValue() + delta);
 
-    GF::SendCommandEvent(slider, wxEVT_SLIDER, slider->GetValue());
+//    GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
 
     event.Skip();
 }
@@ -127,13 +155,16 @@ int SliderFloat::GetIntValue() const
 
 void SliderInt::SetValue(int value)
 {
-    GF::SendCommandEvent(slider, wxEVT_SLIDER, value);
+    if (value != GetValue())
+    {
+        GF::SendCommandEvent(this, wxEVT_SLIDER, value);
+    }
 }
 
 
 void SliderFloat::SetIntValue(int value)
 {
-    GF::SendCommandEvent(slider, wxEVT_SLIDER, value);
+    GF::SendCommandEvent(this, wxEVT_SLIDER, value);
 }
 
 
@@ -299,27 +330,8 @@ void SliderFloat::OnEventSlider(wxCommandEvent &event)
 }
 
 
-void SliderInt::OnEventSlider(wxCommandEvent &event)
-{
-    if (event.GetId() == slider->GetId())
-    {
-        int value = event.GetInt();
-
-        text->SetLabel(wxString::Format("%d", value));
-
-        if (slider->GetValue() != value)
-        {
-            slider->SetValue(value);
-        }
-    }
-
-    event.Skip();
-}
-
-
 void SliderFloat::OnEventMouseDown(wxMouseEvent &event)
 {
-
     if (event.GetId() == btnMore->GetId())
     {
         slider->SetValue(slider->GetValue() + 1);
@@ -331,7 +343,7 @@ void SliderFloat::OnEventMouseDown(wxMouseEvent &event)
         timer_less.Start(400);
     }
 
-    GF::SendCommandEvent(slider, wxEVT_SLIDER, slider->GetValue());
+    GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
 
     event.Skip();
 }
@@ -352,7 +364,7 @@ void SliderFloat::OnEventTimer(wxTimerEvent &event)
 
     slider->SetValue(slider->GetValue() + delta);
 
-    GF::SendCommandEvent(slider, wxEVT_SLIDER, slider->GetValue());
+    GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
 
     event.Skip();
 }

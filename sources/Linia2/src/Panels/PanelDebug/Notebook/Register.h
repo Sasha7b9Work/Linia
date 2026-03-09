@@ -7,6 +7,7 @@
 #include "Controls/Painter.h"
 #include "IPPP/Device/Chips.h"
 #include "Controls/Knob.h"
+#include "Controls/Slider.h"
 
 
 // Визуальное представление регистра
@@ -104,7 +105,8 @@ public:
 
 private:
 
-    KnobWidget *knob = nullptr;
+    KnobWidget *knob = nullptr;                 // Ручка установки значения
+    SliderInt *slider_value = nullptr;          // Ползунок установки значения
     Chip *chip = nullptr;
     PainterRegister *painter = nullptr;
 
@@ -156,6 +158,8 @@ private:
     void SetActiveAcross(bool active, wxWindow *wnd);
 
     void OnEventKnob(wxCommandEvent &);
+
+    void OnEventSlider(wxCommandEvent &);
 };
 
 

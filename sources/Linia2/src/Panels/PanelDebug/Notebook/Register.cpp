@@ -81,6 +81,10 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, bool n
         knob = new KnobWidget(painter, wxID_ANY, 0, 100, 50, { painter->GetSize().x - SIZE - d - 20, d }, { SIZE, SIZE });
 
         knob->Bind(wxEVT_SLIDER, &RegAD5543::OnEventKnob, this);
+
+        slider_value = new SliderInt(painter, { painter->BitX(chip->BitDepth() - 1, chip->BitDepth()), 75 }, chip->BitDepth() * 20, 0, 100, "");
+
+        slider_value->Bind(wxEVT_SLIDER, &RegAD5543::OnEventSlider, this);
     }
 }
 
@@ -565,9 +569,32 @@ RegAD5543::RegAD5543(wxWindow *_parent, Chip *_chip) :
 
 void Register::OnEventKnob(wxCommandEvent &event)
 {
-    int max_value = (1 << chip->BitDepth()) - 1;
+    if (event.GetId() == knob->GetId())
+    {
+        int max_value = (1 << chip->BitDepth()) - 1;
 
-    SetValue((uint)(max_value * event.GetInt() / 100));
+        SetValue((uint)(max_value * event.GetInt() / 100));
+    }
+
+    event.Skip();
+}
+
+
+void Register::OnEventSlider(wxCommandEvent &event)
+{
+    if (event.GetId() == slider_value->GetId())
+    {
+        int max_value = (1 << chip->BitDepth()) - 1;
+
+        uint new_value = (uint)(max_value * event.GetInt() / 100);
+
+        if (GetValue() != new_value)
+        {
+            SetValue(new_value);
+        }
+    }
+
+    event.Skip();
 }
 
 
@@ -693,6 +720,7 @@ void Register::SetValueToKnob()
     if (knob)
     {
         knob->Unbind(wxEVT_SLIDER, &Register::OnEventKnob, this);
+        slider_value->Unbind(wxEVT_SLIDER, &Register::OnEventSlider, this);
 
         int max_value = (1 << chip->BitDepth()) - 1;
 
@@ -700,6 +728,9 @@ void Register::SetValueToKnob()
 
         knob->SetValue(value * 100 / max_value);
 
+        slider_value->SetValue(value * 100 / max_value);
+
         knob->Bind(wxEVT_SLIDER, &Register::OnEventKnob, this);
+        slider_value->Bind(wxEVT_SLIDER, &Register::OnEventSlider, this);
     }
 }
