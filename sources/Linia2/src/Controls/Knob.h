@@ -96,9 +96,9 @@ private:
             wxPoint currentPos = event.GetPosition();
 
             // Вычисляем дельту относительно точки захвата
-            int deltaY = currentPos.y - m_capturePoint.y;
+            float deltaY = (float)(currentPos.y - m_capturePoint.y) / 2.0f;
 
-            if (deltaY != 0)
+            if (deltaY != 0.0f)
             {
                 // Изменяем значение в зависимости от направления движения
                 // Тянем вверх (отрицательный deltaY) - увеличиваем значение
