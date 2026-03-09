@@ -11,7 +11,7 @@ public:
         int minValue = 0, int maxValue = 100, int initialValue = 50,
         const wxPoint &pos = wxDefaultPosition,
         const wxSize &size = wxDefaultSize)
-        : wxControl(parent, id, pos, size, wxBORDER_NONE)
+        : wxControl(parent, id, pos, { size.x + 20, size.y }, wxBORDER_NONE)
         , m_minValue(minValue)
         , m_maxValue(maxValue)
         , m_value(initialValue)
@@ -119,7 +119,7 @@ private:
         event.Skip();
     }
 
-    void OnMouseCaptureLost(wxMouseCaptureLostEvent &event)
+    void OnMouseCaptureLost(wxMouseCaptureLostEvent &)
     {
         m_dragging = false;
     }
@@ -136,7 +136,7 @@ private:
         event.Skip();
     }
 
-    void OnPaint(wxPaintEvent &event)
+    void OnPaint(wxPaintEvent &)
     {
         wxAutoBufferedPaintDC dc(this);
         dc.Clear();
@@ -156,19 +156,19 @@ private:
         // Рисуем корпус ручки
         dc.SetBrush(wxBrush(wxColour(80, 80, 80))); // Тёмно-серый
         dc.SetPen(wxPen(wxColour(120, 120, 120), 1));
-        dc.DrawEllipse(x, y, diameter, diameter);
+        dc.DrawEllipse(x + 10, y, diameter, diameter);
 
         // Рисуем блик
         dc.SetBrush(*wxTRANSPARENT_BRUSH);
         dc.SetPen(wxPen(wxColour(220, 220, 220), 1));
-        dc.DrawEllipse(x + 2, y + 2, diameter - 4, diameter - 4);
+        dc.DrawEllipse(x + 2 + 10, y + 2, diameter - 4, diameter - 4);
 
         // Вычисляем угол поворота (от -210° до +90°, диапазон 300°)
         double angle = (double)(m_value - m_minValue) / (m_maxValue - m_minValue) * 300.0 - 210.0;
         angle = angle * M_PI / 180.0; // Конвертируем в радианы
 
         // Рисуем указатель
-        int centerX = x + diameter / 2;
+        int centerX = x + diameter / 2 + 10;
         int centerY = y + diameter / 2;
         int radius = diameter / 2 - 6;
 
@@ -186,18 +186,18 @@ private:
         // Опционально: рисуем метки минимального и максимального значения
         dc.SetPen(wxPen(wxColour(200, 200, 200), 1));
 
-        // Метка минимума (слева)
-        int minX = x + 5;
-        int minY = y + diameter - 8;
+        // Метка минимума
+        int minX = 0;
+        int minY = GetClientSize().y - 15;
         dc.DrawText(wxString::Format("%d", m_minValue), minX, minY);
+
+        dc.DrawText(wxString::Format("%d", m_value), 0, GetClientSize().y / 2 - 7);
 
         // Метка максимума (справа)
         wxString maxStr = wxString::Format("%d", m_maxValue);
         int textWidth, textHeight;
         dc.GetTextExtent(maxStr, &textWidth, &textHeight);
-        int maxX = x + diameter - textWidth - 5;
-        int maxY = y + 5;
-        dc.DrawText(maxStr, maxX, maxY);
+        dc.DrawText(maxStr, 0, 0);
 
         // Рисуем фокус, если есть
         if (HasFocus())

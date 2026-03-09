@@ -550,7 +550,7 @@ RegAD5543::RegAD5543(wxWindow *_parent, Chip *_chip) :
 
     const int d = 10;
 
-    knob = new KnobWidget(painter, wxID_ANY, 0, 100, 50, { painter->GetSize().x - SIZE - d, d }, { SIZE, SIZE });
+    knob = new KnobWidget(painter, wxID_ANY, 0, 100, 50, { painter->GetSize().x - SIZE - d - 20, d }, { SIZE, SIZE });
 }
 
 
@@ -561,7 +561,7 @@ RegAD5531::RegAD5531(wxWindow *_parent, Chip *_chip) :
 
     const int d = 10;
 
-    knob = new KnobWidget(painter, wxID_ANY, 0, 100, 50, { painter->GetSize().x - SIZE - d, d }, { SIZE, SIZE });
+    knob = new KnobWidget(painter, wxID_ANY, 0, 100, 50, { painter->GetSize().x - SIZE - d - 20, d }, { SIZE, SIZE });
 }
 
 
