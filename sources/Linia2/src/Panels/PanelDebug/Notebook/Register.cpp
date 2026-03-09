@@ -573,7 +573,7 @@ void Register::OnEventKnob(wxCommandEvent &event)
     {
         int max_value = (1 << chip->BitDepth()) - 1;
 
-        uint new_value = (uint)(max_value * event.GetInt() / 100);
+        uint new_value = (uint)((float)max_value * (float)event.GetInt() / 100.0f + 0.5f);
 
         if (GetValue() != new_value)
         {
@@ -587,19 +587,17 @@ void Register::OnEventKnob(wxCommandEvent &event)
 
 void Register::OnEventSlider(wxCommandEvent &event)
 {
-    /*
     if (event.GetId() == slider_value->GetId())
     {
         int max_value = (1 << chip->BitDepth()) - 1;
 
-        uint new_value = (uint)(max_value * event.GetInt() / 100);
+        uint new_value = (uint)((float)max_value * (float)event.GetInt() / 100.0f + 0.5f);
 
         if (GetValue() != new_value)
         {
             SetValue(new_value);
         }
     }
-    */
 
     event.Skip();
 }
