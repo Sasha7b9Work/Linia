@@ -95,11 +95,11 @@ void SliderInt::SetValue(int value)
 {
     if (value != GetValue())
     {
-        text->SetLabel(wxString::Format("%d", value));
-
         slider->SetValue(value);
 
-        GF::SendCommandEvent(this, wxEVT_SLIDER, value);
+        text->SetLabel(wxString::Format("%d", slider->GetValue()));
+
+        GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
     }
 }
 
