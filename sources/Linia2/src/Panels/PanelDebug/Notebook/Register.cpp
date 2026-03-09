@@ -8,6 +8,7 @@
 #include "IPPP/Device/IDevice.h"
 #include "Panels/PanelDebug/Notebook/NotebookDebug.h"
 #include "Panels/PanelDebug/Notebook/PageChip.h"
+#include "Controls/Knob.h"
 
 
 // Функции для комбобоксов выбора режимов
@@ -542,10 +543,17 @@ void ComboRange::UpdateState(std::vector<ModeDescripion> &mode_desc, std::vector
 }
 
 
-RegAD5543::RegAD5543(wxWindow *_parent, Chip *_chip) :
+RegAD5543::RegAD5543(wxWindow *_parent, Chip *_chip, bool need_knob) :
     Register(_parent, "AD5543", _chip)
 {
+    if (need_knob)
+    {
+        const int SIZE = 50;
 
+        const int d = 10;
+
+        knob = new KnobWidget(painter, wxID_ANY, 0, 100, 50, { painter->GetSize().x - SIZE - d, d }, { SIZE, SIZE });
+    }
 }
 
 

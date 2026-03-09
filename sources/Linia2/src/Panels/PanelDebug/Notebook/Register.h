@@ -6,6 +6,7 @@
 #include "Panels/PanelDebug/Notebook/CommandsCombo.h"
 #include "Controls/Painter.h"
 #include "IPPP/Device/Chips.h"
+#include "Controls/Knob.h"
 
 
 // Визуальное представление регистра
@@ -100,6 +101,10 @@ public:
     void Pack();
     void Unpack();
 
+protected:
+
+    PainterRegister *painter = nullptr;
+
 private:
 
     wxButton *btnSend = nullptr;                // Однократная засылка
@@ -107,8 +112,6 @@ private:
     wxTimer timerAutoSend;                      // По этому таймеру будут автозасылки
 
     std::vector<wxWindow *> windows;
-
-    PainterRegister *painter = nullptr;
 
     wxArrayString names_bits;                   // Названия битов
 
@@ -168,7 +171,12 @@ class RegAD5543 : public Register
 {
 public:
 
-    RegAD5543(wxWindow *, Chip *_chip);
+    // Если need_knob, то рисуем ручку
+    RegAD5543(wxWindow *, Chip *_chip, bool need_knob);
+
+private:
+
+    KnobWidget *knob = nullptr;
 };
 
 
