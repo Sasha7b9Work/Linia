@@ -591,7 +591,7 @@ void Register::OnEventSlider(wxCommandEvent &event)
     {
         int max_value = (1 << chip->BitDepth()) - 1;
 
-        uint new_value = (uint)((float)max_value * (float)event.GetInt() / 100.0f + 0.5f);
+        uint new_value = (uint)((float)max_value * (float)slider_value->GetValue() / 100.0f + 0.5f);
 
         if (GetValue() != new_value)
         {
