@@ -23,7 +23,7 @@ PageChannelC::PageChannelC(wxNotebook *parent) :
 
         std::vector<StructDescription> desc1;
 
-        desc1.emplace_back(StructDescription{ 0, 12, "значение", "значение", { true } });
+        desc1.emplace_back(StructDescription{ 0, 12, "", "", { true } });
 
         dac1->SetDescriptionBits(0, desc1);
 

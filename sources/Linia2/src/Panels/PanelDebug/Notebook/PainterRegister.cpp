@@ -160,17 +160,20 @@ void PainterRegister::DrawDescriptions(int index, wxGraphicsContext *gc)
     {
         StructDescription &d = desc[i];
 
-        wxPoint coord = CoordBit(d.first_bit);
+        if (d.desc[0])
+        {
+            wxPoint coord = CoordBit(d.first_bit);
 
-        int x = coord.x;
-        x -= (d.num_bits - 1) * W_B;
-        int y = coord.y + 41 + index * W_B;
-        int w = W_B * d.num_bits;
-        int h = W_B;
+            int x = coord.x;
+            x -= (d.num_bits - 1) * W_B;
+            int y = coord.y + 41 + index * W_B;
+            int w = W_B * d.num_bits;
+            int h = W_B;
 
-        gc->DrawRectangle(x, y, w, h);
+            gc->DrawRectangle(x, y, w, h);
 
-        DrawTextInCenter(x, y + 4, w, d.desc, 8, gc);
+            DrawTextInCenter(x, y + 4, w, d.desc, 8, gc);
+        }
     }
 }
 

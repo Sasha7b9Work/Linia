@@ -135,8 +135,10 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
 
                 int x = painter->BitX(num_bit, chip->BitDepth());
 
+                int num_y = elem.desc[0] ? 3 : 2;
+
                 elem.field.text_ctrl_dec = new TextCtrlNumber(painter, wxID_ANY, "",
-                    { x, (PainterRegister::W_B + 1) * 3 },
+                    { x, (PainterRegister::W_B + 1) * num_y },
                     { PainterRegister::W_B * elem.num_bits + 1, 20 },
                     0, (1 << elem.num_bits) - 1);
 
