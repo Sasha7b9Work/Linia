@@ -49,36 +49,22 @@ void SliderInt::OnEventMouseDown(wxMouseEvent &event)
 {
     if (event.GetId() == btnMore->GetId())
     {
-//        static wxTimer timer;
-
-//        if (!timer.IsRunning())
+        int new_value = slider->GetValue() + 1;
+        if (new_value <= slider->GetMax())
         {
-            int new_value = slider->GetValue() + 1;
-            if (new_value <= slider->GetMax())
-            {
-                slider->SetValue(new_value);
-                text->SetLabel(wxString::Format("%d", new_value));
-                GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
-            }
-
-//            timer.StartOnce(100);
+            slider->SetValue(new_value);
+            text->SetLabel(wxString::Format("%d", new_value));
+            GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
         }
     }
     else if (event.GetId() == btnLess->GetId())
     {
-//        static wxTimer timer;
-
-//        if (!timer.IsRunning())
+        int new_value = slider->GetValue() - 1;
+        if (new_value >= slider->GetMin())
         {
-            int new_value = slider->GetValue() - 1;
-            if (new_value >= slider->GetMin())
-            {
-                slider->SetValue(new_value);
-                text->SetLabel(wxString::Format("%d", new_value));
-                GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
-            }
-
-//            timer.StartOnce(100);
+            slider->SetValue(new_value);
+            text->SetLabel(wxString::Format("%d", new_value));
+            GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
         }
     }
 
@@ -90,18 +76,11 @@ void SliderInt::OnEventSlider(wxCommandEvent &event)
 {
     if (event.GetEventObject() == slider)
     {
-//        wxTimer timer;
+        int value = event.GetInt();
 
-//        if (!timer.IsRunning())
-        {
-            int value = event.GetInt();
+        text->SetLabel(wxString::Format("%d", value));
 
-            text->SetLabel(wxString::Format("%d", value));
-
-            GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
-
-//            timer.StartOnce(100);
-        }
+        GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
     }
 
     event.Skip();

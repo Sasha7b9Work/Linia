@@ -32,9 +32,15 @@ PageChannelC::PageChannelC(wxNotebook *parent) :
 
     AppendRegister(new RegFPGA(this, regs[2]));
 
-    RegAD5543 *regDAC1 = new RegAD5543(this, dacs[0]);
+    {
+        RegAD5543 *dac0 = new RegAD5543(this, dacs[0]);
 
-    regDAC1->Disable();
+        std::vector<StructDescription> desc1;
 
-    AppendRegister(regDAC1);
+        desc1.emplace_back(StructDescription{ 0, 12, "", "", { true } });
+
+        dac0->SetDescriptionBits(0, desc1);
+
+        AppendRegister(dac0);
+    }
 }
