@@ -543,24 +543,25 @@ void ComboRange::UpdateState(std::vector<ModeDescripion> &mode_desc, std::vector
 }
 
 
-RegAD5543::RegAD5543(wxWindow *_parent, Chip *_chip, bool need_knob) :
+RegAD5543::RegAD5543(wxWindow *_parent, Chip *_chip) :
     Register(_parent, "AD5543", _chip)
 {
-    if (need_knob)
-    {
-        const int SIZE = 50;
+    const int SIZE = 50;
 
-        const int d = 10;
+    const int d = 10;
 
-        knob = new KnobWidget(painter, wxID_ANY, 0, 100, 50, { painter->GetSize().x - SIZE - d, d }, { SIZE, SIZE });
-    }
+    knob = new KnobWidget(painter, wxID_ANY, 0, 100, 50, { painter->GetSize().x - SIZE - d, d }, { SIZE, SIZE });
 }
 
 
 RegAD5531::RegAD5531(wxWindow *_parent, Chip *_chip) :
     Register(_parent, "AD5531", _chip)
 {
+    const int SIZE = 50;
 
+    const int d = 10;
+
+    knob = new KnobWidget(painter, wxID_ANY, 0, 100, 50, { painter->GetSize().x - SIZE - d, d }, { SIZE, SIZE });
 }
 
 

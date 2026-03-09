@@ -1,7 +1,5 @@
 // 2026/03/09 10:24:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-
-
 #include <wx/wx.h>
 #include <wx/dcbuffer.h>
 #include <cmath>
@@ -67,14 +65,14 @@ private:
     int m_maxValue;
     int m_value;
     bool m_dragging;
-    wxPoint m_lastMousePos;
+    wxPoint m_capturePoint; // Точка, где был захвачен виджет
 
     void OnMouseLeftDown(wxMouseEvent &event)
     {
         if (!m_dragging)
         {
             m_dragging = true;
-            m_lastMousePos = event.GetPosition();
+            m_capturePoint = event.GetPosition(); // Запоминаем позицию захвата
             CaptureMouse(); // Захватываем мышь для получения событий вне виджета
         }
         event.Skip();
@@ -96,7 +94,9 @@ private:
         if (m_dragging && event.LeftIsDown())
         {
             wxPoint currentPos = event.GetPosition();
-            int deltaY = currentPos.y - m_lastMousePos.y;
+
+            // Вычисляем дельту относительно точки захвата
+            int deltaY = currentPos.y - m_capturePoint.y;
 
             if (deltaY != 0)
             {
@@ -111,14 +111,15 @@ private:
 
                 SetValue(newValue);
 
-                // Сохраняем текущую позицию для следующего шага
-                m_lastMousePos = currentPos;
+                // ВАЖНО: Возвращаем курсор мыши в исходную позицию
+                // Это создает эффект, что курсор остается на месте при вращении
+                WarpPointer(m_capturePoint.x, m_capturePoint.y);
             }
         }
         event.Skip();
     }
 
-    void OnMouseCaptureLost(wxMouseCaptureLostEvent &)
+    void OnMouseCaptureLost(wxMouseCaptureLostEvent &event)
     {
         m_dragging = false;
     }
@@ -135,7 +136,7 @@ private:
         event.Skip();
     }
 
-    void OnPaint(wxPaintEvent &)
+    void OnPaint(wxPaintEvent &event)
     {
         wxAutoBufferedPaintDC dc(this);
         dc.Clear();
@@ -162,7 +163,7 @@ private:
         dc.SetPen(wxPen(wxColour(220, 220, 220), 1));
         dc.DrawEllipse(x + 2, y + 2, diameter - 4, diameter - 4);
 
-        // Вычисляем угол поворота
+        // Вычисляем угол поворота (от -210° до +90°, диапазон 300°)
         double angle = (double)(m_value - m_minValue) / (m_maxValue - m_minValue) * 300.0 - 210.0;
         angle = angle * M_PI / 180.0; // Конвертируем в радианы
 
@@ -182,6 +183,22 @@ private:
         dc.SetPen(*wxTRANSPARENT_PEN);
         dc.DrawCircle(centerX, centerY, 3);
 
+        // Опционально: рисуем метки минимального и максимального значения
+        dc.SetPen(wxPen(wxColour(200, 200, 200), 1));
+
+        // Метка минимума (слева)
+        int minX = x + 5;
+        int minY = y + diameter - 8;
+        dc.DrawText(wxString::Format("%d", m_minValue), minX, minY);
+
+        // Метка максимума (справа)
+        wxString maxStr = wxString::Format("%d", m_maxValue);
+        int textWidth, textHeight;
+        dc.GetTextExtent(maxStr, &textWidth, &textHeight);
+        int maxX = x + diameter - textWidth - 5;
+        int maxY = y + 5;
+        dc.DrawText(maxStr, maxX, maxY);
+
         // Рисуем фокус, если есть
         if (HasFocus())
         {
@@ -192,35 +209,59 @@ private:
     }
 };
 
-
 // Пример использования в главном окне
 /*
 class MyFrame : public wxFrame
 {
 public:
-    MyFrame() : wxFrame(nullptr, wxID_ANY, "Knob Widget Example", wxDefaultPosition, wxSize(300, 200))
+    MyFrame() : wxFrame(nullptr, wxID_ANY, "Knob Widget Example", wxDefaultPosition, wxSize(400, 300))
     {
         wxPanel *panel = new wxPanel(this);
 
         // Создаём вертикальный sizer для размещения элементов
         wxBoxSizer *vSizer = new wxBoxSizer(wxVERTICAL);
 
-        // Создаём ручку
-        KnobWidget *knob = new KnobWidget(panel, wxID_ANY, 0, 100, 50, wxDefaultPosition, wxSize(100, 100));
+        // Создаём горизонтальный sizer для ручек
+        wxBoxSizer *hSizer = new wxBoxSizer(wxHORIZONTAL);
 
-        // Создаём текстовое поле для отображения значения
-        wxStaticText *valueText = new wxStaticText(panel, wxID_ANY, "Value: 50");
+        // Создаём первую ручку (громкость)
+        wxStaticBoxSizer *volumeBox = new wxStaticBoxSizer(wxVERTICAL, panel, "Volume");
+        KnobWidget *volumeKnob = new KnobWidget(volumeBox->GetStaticBox(), wxID_ANY, 0, 100, 75, wxDefaultPosition, wxSize(100, 100));
+        wxStaticText *volumeValue = new wxStaticText(volumeBox->GetStaticBox(), wxID_ANY, "75");
 
-        // Обработчик изменения значения ручки
-        knob->Bind(wxEVT_SLIDER, [valueText](wxCommandEvent &event)
+        volumeKnob->Bind(wxEVT_SLIDER, [volumeValue](wxCommandEvent &event)
             {
-                valueText->SetLabel(wxString::Format("Value: %d", event.GetInt()));
+                volumeValue->SetLabel(wxString::Format("%d", event.GetInt()));
             });
 
+        volumeBox->Add(volumeKnob, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+        volumeBox->Add(volumeValue, 0, wxALIGN_CENTER_HORIZONTAL | wxBOTTOM, 10);
+
+        // Создаём вторую ручку (тембр)
+        wxStaticBoxSizer *toneBox = new wxStaticBoxSizer(wxVERTICAL, panel, "Tone");
+        KnobWidget *toneKnob = new KnobWidget(toneBox->GetStaticBox(), wxID_ANY, -50, 50, 0, wxDefaultPosition, wxSize(100, 100));
+        wxStaticText *toneValue = new wxStaticText(toneBox->GetStaticBox(), wxID_ANY, "0");
+
+        toneKnob->Bind(wxEVT_SLIDER, [toneValue](wxCommandEvent &event)
+            {
+                toneValue->SetLabel(wxString::Format("%d", event.GetInt()));
+            });
+
+        toneBox->Add(toneKnob, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
+        toneBox->Add(toneValue, 0, wxALIGN_CENTER_HORIZONTAL | wxBOTTOM, 10);
+
+        hSizer->Add(volumeBox, 1, wxEXPAND | wxALL, 10);
+        hSizer->Add(toneBox, 1, wxEXPAND | wxALL, 10);
+
         vSizer->AddStretchSpacer();
-        vSizer->Add(knob, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
-        vSizer->Add(valueText, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
+        vSizer->Add(hSizer, 0, wxEXPAND);
         vSizer->AddStretchSpacer();
+
+        // Добавляем пояснительный текст
+        wxStaticText *infoText = new wxStaticText(panel, wxID_ANY,
+            "Press and drag UP to increase, DOWN to decrease.\nMouse cursor stays in place while dragging.");
+        infoText->SetForegroundColour(wxColour(100, 100, 100));
+        vSizer->Add(infoText, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 10);
 
         panel->SetSizer(vSizer);
     }

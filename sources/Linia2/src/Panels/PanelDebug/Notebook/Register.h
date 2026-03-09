@@ -172,7 +172,7 @@ class RegAD5543 : public Register
 public:
 
     // Если need_knob, то рисуем ручку
-    RegAD5543(wxWindow *, Chip *_chip, bool need_knob);
+    RegAD5543(wxWindow *, Chip *_chip);
 
 private:
 
@@ -185,4 +185,8 @@ class RegAD5531 : public Register
 public:
 
     RegAD5531(wxWindow *, Chip *_chip);
+
+private:
+
+    KnobWidget *knob = nullptr;
 };
