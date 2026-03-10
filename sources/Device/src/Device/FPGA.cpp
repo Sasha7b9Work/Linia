@@ -92,6 +92,12 @@ void FPGA::StopScan()
 }
 
 
+bool FPGA::IsScanning()
+{
+    return is_running_scan;
+}
+
+
 void FPGA::WriteStart()
 {
     pinSTART_TB.ToHi();

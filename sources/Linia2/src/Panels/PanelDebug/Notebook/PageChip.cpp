@@ -91,3 +91,12 @@ void PageChip::Unpack()
         reg->Unpack();
     }
 }
+
+
+void PageChip::SendAllRegisters()
+{
+    for (auto *reg : registers)
+    {
+        reg->WriteValue();
+    }
+}

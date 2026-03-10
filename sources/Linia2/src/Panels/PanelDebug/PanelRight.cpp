@@ -4,6 +4,8 @@
 #include "MainWindow.h"
 #include "Utils/SystemDepend.h"
 #include "IPPP/Device/IDevice.h"
+#include "Panels/PanelDebug/Notebook/PageFPGA.h"
+#include "Panels/PanelDebug/Notebook/PageChannelC.h"
 
 
 PanelRight *PanelRight::self = nullptr;
@@ -50,6 +52,9 @@ void PanelRight::OnEventButton(wxCommandEvent &event)
         wxString str_value = txtPeriodScan->GetValue();
         int int_value = 0;
         str_value.ToInt(&int_value);
+
+        PageFPGA::self->SendAllRegisters();
+        PageChannelC::self->SendAllRegisters();
 
         IDevice::impl->SendCommand(wxString::Format(":SCAN:START %d", int_value));
 

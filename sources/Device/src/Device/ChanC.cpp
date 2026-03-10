@@ -26,13 +26,13 @@ void ChanC::Init()
 
 void ChanC::EmergencyStop()
 {
-    ChipDAC::Get(ChipDAC::CHAN_C_RANGE).Stop();
-    ChipREG::Get(ChipREG::CHAN_C).Stop();
+    ChipDAC::Get(ChipDAC::CHAN_C_RANGE).ToZero();
+    ChipREG::Get(ChipREG::CHAN_C).ToZero();
 }
 
 
 void ChanC::EmergencyStart()
 {
-    ChipDAC::Get(ChipDAC::CHAN_C_RANGE).Start();
-    ChipREG::Get(ChipREG::CHAN_C).Start();
+    ChipDAC::Get(ChipDAC::CHAN_C_RANGE).WriteValue();
+    ChipREG::Get(ChipREG::CHAN_C).WriteValue();
 }

@@ -4,6 +4,7 @@
 #include "Device/Commutator.h"
 #include "Device/Channels.h"
 #include "Device/Sources.h"
+#include "Device/FPGA.h"
 
 
 /*
@@ -91,7 +92,7 @@ void Chip::WriteValue(uint value)
 {
     buffer_value = value;
 
-    if (is_running)
+    if (FPGA::IsScanning())                 // Если развёртка запущена - сразу записываем значение в аппаратный регистр
     {
         WriteValueRAW(buffer_value);
     }
@@ -125,19 +126,15 @@ void Chip::WriteValueRAW(uint value)
 }
 
 
-void Chip::Stop()
+void Chip::ToZero()
 {
     WriteValueRAW(0);
-
-    is_running = false;
 }
 
 
-void Chip::Start()
+void Chip::WriteValue()
 {
     WriteValueRAW(buffer_value);
-
-    is_running = true;
 }
 
 

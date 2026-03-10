@@ -98,10 +98,10 @@ public:
     virtual bool Enable(bool) override;
 
     void SetValue(uint);
-    uint GetValue() const;
-
     void Pack();
     void Unpack();
+
+    void WriteValue();
 
 private:
 
@@ -129,6 +129,8 @@ private:
 
     // Создать элемент управления для выбора режима
     void CreateControlMode(int i);
+
+    uint GetValue() const;
 
     // Возвращает true, если нужно выводить текстовое поле для десятичного значения хотя бы у одной группы бит
     bool NeedTextCtrlDEC() const;

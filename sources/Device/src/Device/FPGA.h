@@ -16,6 +16,9 @@ namespace FPGA
 
     void StopScan();
 
+    // Развёртка запущена
+    bool IsScanning();
+
     namespace Reg
     {
         void SetLength(int num, uint length);

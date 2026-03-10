@@ -18,6 +18,9 @@ public:
 
     void Rebuild();
 
+    // Заслать ве значения регистров в прибор
+    void SendAllRegisters();
+
 private:
 
     wxMenuItem *itemReturn = nullptr;

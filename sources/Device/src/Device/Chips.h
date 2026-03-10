@@ -22,10 +22,10 @@ struct Chip
     void WriteValue(uint);
 
     // ѕо этой команде происходит запись нулевого значени€ в регистр на плате
-    void Stop();
+    void ToZero();
 
     // ѕо этой команде происходит запись значени€ из буферного регистра в аппаратный регист на плате
-    void Start();
+    void WriteValue();
 
 protected:
 
@@ -34,7 +34,6 @@ protected:
     PinOut *dat;
     uint length = 0;
     uint buffer_value = 0;         // «десь хранитс€ буферное значение, которое по команде Start() переписывает€ в аппаратный регистр на плате
-    bool is_running = false;
 
     // Ќепросредственна€ запись значени€ в железный регистр на плате
     void WriteValueRAW(uint);

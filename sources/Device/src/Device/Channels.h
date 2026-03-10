@@ -42,6 +42,5 @@ namespace ChanC
 
     // ѕривести состо€ние всех элементов в безопасное состо€ние - записать нули
     void EmergencyStop();
-
     void EmergencyStart();
 }
