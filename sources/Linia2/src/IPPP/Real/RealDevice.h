@@ -3,13 +3,13 @@
 #include "IPPP/IDevice.h"
 
 
-class Device : public IDevice
+class RealDevice : public IDevice
 {
 public:
 
-    Device() = default;
+    RealDevice() = default;
 
-    virtual ~Device();
+    virtual ~RealDevice();
 
     virtual bool Init() override;
 

@@ -11,12 +11,12 @@
 IDevice *IDevice::impl = nullptr;
 
 
-Device::~Device()
+RealDevice::~RealDevice()
 {
     Shutdown();
 }
 
-bool Device::Init()
+bool RealDevice::Init()
 {
     GPIO::Init();
     SPI::Init();
@@ -32,13 +32,13 @@ bool Device::Init()
 }
 
 
-void Device::Update()
+void RealDevice::Update()
 {
     SCPI::Update();
 }
 
 
-void Device::Shutdown()
+void RealDevice::Shutdown()
 {
     running = false;
 
@@ -48,13 +48,13 @@ void Device::Shutdown()
 }
 
 
-bool Device::IsConnected() const
+bool RealDevice::IsConnected() const
 {
     return connected;
 }
 
 
-void Device::SendCommand(pchar format, ...) const
+void RealDevice::SendCommand(pchar format, ...) const
 {
     char message[1024];
     std::va_list args;

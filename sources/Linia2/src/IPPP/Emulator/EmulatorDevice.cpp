@@ -6,11 +6,11 @@
 #include "Communicator/UART/UART.h"
 
 
-bool DeviceEmulator::Init()
+bool EmulatorDevice::Init()
 {
     GPIO::Init();
 //    SPI::Init();
-    UART::Init(DeviceEmulator::CallbackOnReceive);
+    UART::Init(EmulatorDevice::CallbackOnReceive);
 
     LOG_ERROR("Not implemented");
 
@@ -18,19 +18,19 @@ bool DeviceEmulator::Init()
 }
 
 
-void DeviceEmulator::CallbackOnReceive(uint8 *, int)
+void EmulatorDevice::CallbackOnReceive(uint8 *, int)
 {
 
 }
 
 
-void DeviceEmulator::DeviceEmulator::Shutdown()
+void EmulatorDevice::EmulatorDevice::Shutdown()
 {
     LOG_ERROR("Not implemented");
 }
 
 
-bool DeviceEmulator::IsConnected() const
+bool EmulatorDevice::IsConnected() const
 {
     LOG_ERROR("Not implemented");
 

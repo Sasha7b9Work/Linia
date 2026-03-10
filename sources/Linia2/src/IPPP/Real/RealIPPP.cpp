@@ -13,7 +13,7 @@ I_IPPP *I_IPPP::impl = nullptr;
 
 void RealIPPP::Init()
 {
-    IDevice::impl = new Device();
+    IDevice::impl = new RealDevice();
 
     IDevice::impl->Init();
 

@@ -3,7 +3,7 @@
 #include "IPPP/IDevice.h"
 
 
-class DeviceEmulator : public IDevice
+class EmulatorDevice : public IDevice
 {
 public:
 
@@ -15,7 +15,7 @@ public:
 
 private:
 
-    virtual ~DeviceEmulator() { }
+    virtual ~EmulatorDevice() { }
 
     static void CallbackOnReceive(uint8 *, int);
 };
