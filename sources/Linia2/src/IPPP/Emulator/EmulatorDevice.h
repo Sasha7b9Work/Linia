@@ -7,15 +7,21 @@ class EmulatorDevice : public IDevice
 {
 public:
 
+    EmulatorDevice() = default;
+
+    virtual ~EmulatorDevice();
+
     virtual bool Init() override;
+
+    virtual void Update() override;
 
     virtual void Shutdown() override;
 
     virtual bool IsConnected() const;
 
-private:
+    virtual void SendCommand(pchar format, ...) const override;
 
-    virtual ~EmulatorDevice() { }
+private:
 
     static void CallbackOnReceive(uint8 *, int);
 };

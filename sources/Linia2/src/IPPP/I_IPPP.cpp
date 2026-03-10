@@ -6,6 +6,8 @@
 #include "IPPP/Keyboard/Keyboard.h"
 #include "Communicator/GPIO/GPIO.h"
 #include "IPPP/Real/RealIPPP.h"
+#include "IPPP/Emulator/EmulatorDevice.h"
+#include "IPPP/Emulator/EmulatorIPPP.h"
 
 
 I_IPPP *I_IPPP::impl = nullptr;
@@ -15,7 +17,11 @@ void I_IPPP::Create()
 {
 #ifdef EMULATOR_ENABLED
 
+    impl = new EmulatorIPPP();
 
+    IDevice::impl = new EmulatorDevice();
+
+    IDevice::impl->Init();
 
 #else
 

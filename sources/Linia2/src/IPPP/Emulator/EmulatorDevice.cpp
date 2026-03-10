@@ -6,6 +6,12 @@
 #include "Communicator/UART/UART.h"
 
 
+EmulatorDevice::~EmulatorDevice()
+{
+    Shutdown();
+}
+
+
 bool EmulatorDevice::Init()
 {
     GPIO::Init();
@@ -15,6 +21,12 @@ bool EmulatorDevice::Init()
     LOG_ERROR("Not implemented");
 
     return false;
+}
+
+
+void EmulatorDevice::Update()
+{
+
 }
 
 
@@ -35,4 +47,10 @@ bool EmulatorDevice::IsConnected() const
     LOG_ERROR("Not implemented");
 
     return false;
+}
+
+
+void EmulatorDevice::SendCommand(pchar /*format*/, ...) const
+{
+
 }
