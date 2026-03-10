@@ -23,6 +23,7 @@ protected:
     PinOut *clk;
     uint length = 0;
     uint buffer_value = 0;         // Здесь хранится буферное значение, которое по команде Start() переписываетя в аппаратный регистр на плате
+    bool is_running = false;
 };
 
 
@@ -58,7 +59,6 @@ private:
 
     E type;
     PinOut *dat;
-    bool is_running = false;
 
     static ChipDAC dacs[10];
 
@@ -99,7 +99,6 @@ private:
 
     E type;
     PinOut *dat;
-    bool is_running = false;
 
     static ChipREG regs[10];
 
