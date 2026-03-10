@@ -1,6 +1,6 @@
 ﻿// 2025/09/11 21:22:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "IPPP/Keyboard.h"
+#include "IPPP/Keyboard/Keyboard.h"
 #include "Communicator/GPIO/GPIO.h"
 #include "Utils/Timer.h"
 #include "Application.h"

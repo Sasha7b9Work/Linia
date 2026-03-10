@@ -5,7 +5,7 @@
 #include "Controls/TextControls.h"
 #include "Panels/PanelDebug/Notebook/CommandsCombo.h"
 #include "Controls/Painter.h"
-#include "IPPP/Device/Chips.h"
+#include "IPPP/Real/Chips.h"
 #include "Controls/Knob.h"
 #include "Controls/Slider.h"
 

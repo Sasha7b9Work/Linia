@@ -3,7 +3,7 @@
 #include "Panels/PanelDebug/Notebook/PageFPGA.h"
 #include "Utils/String.h"
 #include "Utils/SystemDepend.h"
-#include "IPPP/Device/IDevice.h"
+#include "IPPP/IDevice.h"
 
 
 PageFPGA *PageFPGA::self = nullptr;

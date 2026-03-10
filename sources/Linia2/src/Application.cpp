@@ -6,14 +6,15 @@
 #include "MainWindow.h"
 #include "Windows/ConsoleRS232.h"
 #include "IPPP/Tests/Tests.h"
-#include "IPPP/RealIPPP.h"
 #include "SoftTests/SoftTests.h"
 #include "Communicator/UART/UART.h"
 #include "Communicator/SPI/SPI.h"
 #include "Controls/AutoRebootDialog.h"
-#include "IPPP/Device/Chips.h"
+#include "IPPP/Real/Chips.h"
 #include "Panels/PanelUpper.h"
 #include "Communicator/ComPort/ComPort.h"
+#include "IPPP/I_IPPP.h"
+#include "IPPP/Real/RealIPPP.h"
 #include <cstdlib>
 
 

@@ -5,7 +5,7 @@
 #include "Controls/TextControls.h"
 #include "Utils/StringUtils.h"
 #include "Panels/PanelDebug/Notebook/CommandsCombo.h"
-#include "IPPP/Device/IDevice.h"
+#include "IPPP/IDevice.h"
 #include "Panels/PanelDebug/Notebook/NotebookDebug.h"
 #include "Panels/PanelDebug/Notebook/PageChip.h"
 #include "Controls/Knob.h"

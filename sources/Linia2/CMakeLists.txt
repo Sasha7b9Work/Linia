@@ -76,8 +76,9 @@ file(GLOB CONTROLS                      src/Controls/*.*)
 file(GLOB DATA                          src/Data/*.*)
 file(GLOB DISPLAY                       src/Display/*.*)
 file(GLOB IPPP                          src/IPPP/*.*)
-file(GLOB IPPP_DEVICE                   src/IPPP/Device/*.*)
 file(GLOB IPPP_EMULATOR                 src/IPPP/Emulator/*.*)
+file(GLOB IPPP_KEYBOARD                 src/IPPP/Keyboard/*.*)
+file(GLOB IPPP_REAL                     src/IPPP/Real/*.*)
 file(GLOB IPPP_SCPI                     src/IPPP/SCPI/*.*)
 file(GLOB IPPP_TESTS                    src/IPPP/Tests/*.*)
 file(GLOB PANELS                        src/Panels/*.*)
@@ -119,8 +120,9 @@ source_group(Controls                             FILES ${CONTROLS})
 source_group(Data                                 FILES ${DATA})
 source_group(Display                              FILES ${DISPLAY})
 source_group(IPPP                                 FILES ${IPPP})
-source_group(IPPP/Device                          FILES ${IPPP_DEVICE})
 source_group(IPPP/Emulator                        FILES ${IPPP_EMULATOR})
+source_group(IPPP/Keyboard                        FILES ${IPPP_KEYBOARD})
+source_group(IPPP/Real                            FILES ${IPPP_REAL})
 source_group(IPPP/SCPI                            FILES ${IPPP_SCPI})
 source_group(IPPP/Tests                           FILES ${IPPP_TESTS})
 source_group(Panels                               FILES ${PANELS})
@@ -152,8 +154,9 @@ add_executable(${PROJECT_NAME}
     ${DATA}
     ${DISPLAY}
     ${IPPP}
-    ${IPPP_DEVICE}
     ${IPPP_EMULATOR}
+    ${IPPP_KEYBOARD}
+    ${IPPP_REAL}
     ${IPPP_SCPI}
     ${IPPP_TESTS}
     ${PANELS}

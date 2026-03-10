@@ -1,11 +1,11 @@
 ﻿// 2025/09/10 21:28:18 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "IPPP/RealIPPP.h"
-#include "IPPP/Device/IDevice.h"
-#include "IPPP/Emulator/DeviceEmulator.h"
+#include "IPPP/Real/RealIPPP.h"
+#include "IPPP/IDevice.h"
+#include "IPPP/Emulator/EmulatorDevice.h"
 #include "Communicator/GPIO/GPIO.h"
-#include "IPPP/Keyboard.h"
-#include "IPPP/Device/Device.h"
+#include "IPPP/Keyboard/Keyboard.h"
+#include "IPPP/Real/RealDevice.h"
 
 
 I_IPPP *I_IPPP::impl = nullptr;

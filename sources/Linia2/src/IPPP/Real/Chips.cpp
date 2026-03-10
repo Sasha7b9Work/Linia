@@ -1,7 +1,7 @@
 ﻿// 2025/10/17 11:39:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "IPPP/Device/Chips.h"
-#include "IPPP/Device/IDevice.h"
+#include "IPPP/Real/Chips.h"
+#include "IPPP/IDevice.h"
 #include "Communicator/SPI/SPI.h"
 
 

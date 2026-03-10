@@ -1,6 +1,6 @@
 ﻿// 2025/08/29 18:05:35 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "IPPP/Device/IDevice.h"
+#include "IPPP/IDevice.h"
 
 
 class DeviceEmulator : public IDevice

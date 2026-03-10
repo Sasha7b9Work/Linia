@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "IPPP/SCPI/SCPI.h"
 #include "Utils/StringUtils.h"
-#include "IPPP/Device/PinsDevice.h"
+#include "IPPP/Real/PinsDevice.h"
 
 
 namespace SCPI

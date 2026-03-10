@@ -1,12 +1,12 @@
 #include "defines.h"
-#include "IPPP/Device/IDevice.h"
-#include "IPPP/Device/Device.h"
+#include "IPPP/IDevice.h"
 #include "Communicator/UART/UART.h"
 #include "Communicator/GPIO/GPIO.h"
 #include "Communicator/SPI/SPI.h"
-#include "IPPP/Device/Chips.h"
+#include "IPPP/Real/Chips.h"
 #include "IPPP/SCPI/SCPI.h"
 #include "Communicator/ComPort/ComPort.h"
+#include "IPPP/Real/RealDevice.h"
 
 IDevice *IDevice::impl = nullptr;
 

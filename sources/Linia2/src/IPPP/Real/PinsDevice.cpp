@@ -1,6 +1,6 @@
 ﻿// 2025/10/23 15:09:04 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "IPPP/Device/PinsDevice.h"
+#include "IPPP/Real/PinsDevice.h"
 
 
 PinInDevice pin3000V(PinDevice::_3000V);

@@ -1,6 +1,6 @@
 ﻿// 2025/08/29 18:05:22 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "IPPP/Emulator/DeviceEmulator.h"
+#include "IPPP/Emulator/EmulatorDevice.h"
 #include "Communicator/GPIO/GPIO.h"
 #include "Communicator/SPI/SPI.h"
 #include "Communicator/UART/UART.h"

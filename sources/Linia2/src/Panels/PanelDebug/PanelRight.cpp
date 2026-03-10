@@ -3,7 +3,7 @@
 #include "Panels/PanelDebug/PanelRight.h"
 #include "MainWindow.h"
 #include "Utils/SystemDepend.h"
-#include "IPPP/Device/IDevice.h"
+#include "IPPP/IDevice.h"
 #include "Panels/PanelDebug/Notebook/PageFPGA.h"
 #include "Panels/PanelDebug/Notebook/PageChannelC.h"
 
