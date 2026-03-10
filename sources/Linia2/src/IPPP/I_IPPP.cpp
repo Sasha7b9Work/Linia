@@ -2,6 +2,9 @@
 #include "defines.h"
 #include "IPPP/I_IPPP.h"
 #include "IPPP/IDevice.h"
+#include "IPPP/Real/RealDevice.h"
+#include "IPPP/Real/PinsDevice.h"
+#include "IPPP/Keyboard/Keyboard.h"
 
 
 I_IPPP *I_IPPP::impl = nullptr;
