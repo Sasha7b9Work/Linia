@@ -5,6 +5,7 @@
 #include "Device/FPGA.h"
 #include "Device/Chips.h"
 #include "Hardware/HAL/HAL.h"
+#include "Device/Device.h"
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -209,7 +210,7 @@ bool PCM::SCPI::Func_SCAN(pchar command)
     }
     else if (SU::BeginWith(command, "STOP"))
     {
-
+        Device::EmergencyStop();
 
         FPGA::StopScan();
 

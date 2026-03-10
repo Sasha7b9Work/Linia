@@ -22,3 +22,10 @@ void ChanC::Init()
     pinMEAS_I_ENRGI.Init();
     pinMEAS_I_SPEED.Init();
 }
+
+
+void ChanC::EmergencyStop()
+{
+    ChipDAC::Get(ChipDAC::CHAN_C_RANGE).Stop();
+    ChipREG::Get(ChipREG::CHAN_C).Stop();
+}

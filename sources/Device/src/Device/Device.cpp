@@ -43,3 +43,9 @@ void Device::Update()
 
     FPGA::Update();
 }
+
+
+void Device::EmergencyStop()
+{
+    ChanC::EmergencyStop();
+}

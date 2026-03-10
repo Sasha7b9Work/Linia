@@ -42,9 +42,17 @@ struct ChipDAC : public Chip
 
     ChipDAC(E v, uint _l, PinOut *_cs, PinOut *_clk, PinOut *_dat) : Chip(_l, _cs, _clk), type(v), dat(_dat) { }
 
+    static ChipDAC &Get(E);
+
+    // «апись значени€ в буферный регистр. ѕерезапись в регистр устойства происходит по
+    // команде Start()
     void WriteValue(uint);
 
-    static ChipDAC &Get(E);
+    // ѕо этой команде происходит запись нулевого значени€ в регистр на плате
+    void Stop();
+
+    // ѕо этой команде происходит запись значени€ из буферного регистра в аппаратный регист на плате
+    void Start();
 
 private:
 
@@ -53,6 +61,11 @@ private:
     PinOut *dat;
 
     static ChipDAC dacs[10];
+
+    uint buffer_value = 0;         // «десь хранитс€ буферное значение, которое по команде Start() переписывает€ в аппаратный регистр на плате
+
+    // Ќепросредственна€ запись значени€ в железный регистр на плате
+    void WriteValueRAW(uint);
 };
 
 
@@ -72,8 +85,17 @@ struct ChipREG : public Chip
     ChipREG(E v, uint _l, PinOut *_cs, PinOut *_clk, PinOut *_dat) :
         Chip(_l, _cs, _clk), type(v), dat(_dat) { }
 
-    void WriteValue(uint);
     static ChipREG &Get(E);
+
+    // «апись значени€ в буферный регистр. ѕерезапись в регистр устойства происходит по
+    // команде Start()
+    void WriteValue(uint);
+
+    // ѕо этой команде происходит запись нулевого значени€ в регистр на плате
+    void Stop();
+
+    // ѕо этой команде происходит запись значени€ из буферного регистра в аппаратный регист на плате
+    void Start();
 
 private:
 
@@ -82,4 +104,9 @@ private:
     PinOut *dat;
 
     static ChipREG regs[10];
+
+    uint buffer_value = 0;         // «десь хранитс€ буферное значение, которое по команде Start() переписывает€ в аппаратный регистр на плате
+
+    // Ќепросредственна€ запись значени€ в железный регистр на плате
+    void WriteValueRAW(uint);
 };

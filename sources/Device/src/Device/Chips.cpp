@@ -89,6 +89,12 @@ ChipREG ChipREG::regs[10] =
 
 void ChipDAC::WriteValue(uint value)
 {
+    buffer_value = value;
+}
+
+
+void ChipDAC::WriteValueRAW(uint value)
+{
     if (!clk)
     {
         LOG_ERROR("Bad record");
@@ -113,6 +119,19 @@ void ChipDAC::WriteValue(uint value)
     clk->ToLow();
 }
 
+
+void ChipDAC::Stop()
+{
+    WriteValueRAW(0);
+}
+
+
+void ChipDAC::Start()
+{
+    WriteValueRAW(buffer_value);
+}
+
+
 ChipDAC &ChipDAC::Get(E type)
 {
     return dacs[type];
@@ -120,6 +139,24 @@ ChipDAC &ChipDAC::Get(E type)
 
 
 void ChipREG::WriteValue(uint value)
+{
+    buffer_value = value;
+}
+
+
+void ChipREG::Stop()
+{
+    WriteValueRAW(0);
+}
+
+
+void ChipREG::Start()
+{
+    WriteValueRAW(buffer_value);
+}
+
+
+void ChipREG::WriteValueRAW(uint value)
 {
     clk->ToLow();
 

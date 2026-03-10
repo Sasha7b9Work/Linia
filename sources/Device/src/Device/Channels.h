@@ -39,4 +39,7 @@ namespace ChanC
     static const ChipREG::E REG_I = ChipREG::MEAS_I;
 
     void Init();
+
+    // ѕривести состо€ние всех элементов в безопасное состо€ние - записать нули
+    void EmergencyStop();
 }
