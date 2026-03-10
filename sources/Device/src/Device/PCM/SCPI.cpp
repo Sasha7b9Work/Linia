@@ -201,6 +201,8 @@ bool PCM::SCPI::Func_SCAN(pchar command)
 
         if (SU::CharIs(*pos, " :"))
         {
+            Device::EmergencyStart();
+
             FPGA::StartScan(period);
 
             return true;

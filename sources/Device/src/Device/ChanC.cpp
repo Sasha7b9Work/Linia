@@ -29,3 +29,10 @@ void ChanC::EmergencyStop()
     ChipDAC::Get(ChipDAC::CHAN_C_RANGE).Stop();
     ChipREG::Get(ChipREG::CHAN_C).Stop();
 }
+
+
+void ChanC::EmergencyStart()
+{
+    ChipDAC::Get(ChipDAC::CHAN_C_RANGE).Start();
+    ChipREG::Get(ChipREG::CHAN_C).Start();
+}

@@ -90,6 +90,11 @@ ChipREG ChipREG::regs[10] =
 void ChipDAC::WriteValue(uint value)
 {
     buffer_value = value;
+
+    if (is_running)
+    {
+        WriteValueRAW(buffer_value);
+    }
 }
 
 
@@ -123,12 +128,16 @@ void ChipDAC::WriteValueRAW(uint value)
 void ChipDAC::Stop()
 {
     WriteValueRAW(0);
+
+    is_running = false;
 }
 
 
 void ChipDAC::Start()
 {
     WriteValueRAW(buffer_value);
+
+    is_running = true;
 }
 
 
@@ -141,18 +150,27 @@ ChipDAC &ChipDAC::Get(E type)
 void ChipREG::WriteValue(uint value)
 {
     buffer_value = value;
+
+    if (is_running)
+    {
+        WriteValueRAW(buffer_value);
+    }
 }
 
 
 void ChipREG::Stop()
 {
     WriteValueRAW(0);
+
+    is_running = false;
 }
 
 
 void ChipREG::Start()
 {
     WriteValueRAW(buffer_value);
+
+    is_running = true;
 }
 
 

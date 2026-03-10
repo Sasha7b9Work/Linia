@@ -49,3 +49,9 @@ void Device::EmergencyStop()
 {
     ChanC::EmergencyStop();
 }
+
+
+void Device::EmergencyStart()
+{
+    ChanC::EmergencyStart();
+}

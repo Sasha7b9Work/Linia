@@ -21,8 +21,8 @@ protected:
 
     PinOut *cs;
     PinOut *clk;
-
     uint length = 0;
+    uint buffer_value = 0;         // «десь хранитс€ буферное значение, которое по команде Start() переписывает€ в аппаратный регистр на плате
 };
 
 
@@ -57,12 +57,10 @@ struct ChipDAC : public Chip
 private:
 
     E type;
-
     PinOut *dat;
+    bool is_running = false;
 
     static ChipDAC dacs[10];
-
-    uint buffer_value = 0;         // «десь хранитс€ буферное значение, которое по команде Start() переписывает€ в аппаратный регистр на плате
 
     // Ќепросредственна€ запись значени€ в железный регистр на плате
     void WriteValueRAW(uint);
@@ -100,12 +98,10 @@ struct ChipREG : public Chip
 private:
 
     E type;
-
     PinOut *dat;
+    bool is_running = false;
 
     static ChipREG regs[10];
-
-    uint buffer_value = 0;         // «десь хранитс€ буферное значение, которое по команде Start() переписывает€ в аппаратный регистр на плате
 
     // Ќепросредственна€ запись значени€ в железный регистр на плате
     void WriteValueRAW(uint);
