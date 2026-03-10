@@ -8,9 +8,9 @@ set(CMAKE_UNITY_BUILD_BATCH_SIZE 18)
 if(WIN32)
 
     include_directories(
-        src
-        arm64_plugs
-        linux_plugs
+        ./src
+        ./arm64_plugs
+        ./linux_plugs
         ../ThirdParty/wxWidgets/include
         ../generated/ThirdParty/lib/vc_x64_lib/mswu
         ../generated/wxWidgets/lib/wx/include/gtk3-unicode-static-3.3
