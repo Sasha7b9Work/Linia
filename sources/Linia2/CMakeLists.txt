@@ -13,6 +13,7 @@ if(WIN32)
         linux_plugs
         ../ThirdParty/wxWidgets/include
         ../generated/ThirdParty/lib/vc_x64_lib/mswu
+        ../generated/wxWidgets/lib/wx/include/gtk3-unicode-static-3.3
     )
 
     link_directories(../generated/ThirdParty/lib/vc_x64_lib)
@@ -40,17 +41,9 @@ if(WIN32)
 else()
 
     if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
-        include_directories(
-            ./src
-            ../generated/wxWidgets/lib/wx/include/gtk3-unicode-static-3.3
-            ../ThirdParty/wxWidgets/include
-        )
     else()
         include_directories(
             ./arm64_plugs
-            ./src
-            ../generated/wxWidgets/lib/wx/include/gtk3-unicode-static-3.3
-            ../ThirdParty/wxWidgets/include
         )
     endif()
 
