@@ -87,7 +87,7 @@ ChipREG ChipREG::regs[10] =
 };
 
 
-void ChipDAC::WriteValue(uint value)
+void Chip::WriteValue(uint value)
 {
     buffer_value = value;
 
@@ -98,7 +98,7 @@ void ChipDAC::WriteValue(uint value)
 }
 
 
-void ChipDAC::WriteValueRAW(uint value)
+void Chip::WriteValueRAW(uint value)
 {
     if (!clk)
     {
@@ -125,7 +125,7 @@ void ChipDAC::WriteValueRAW(uint value)
 }
 
 
-void ChipDAC::Stop()
+void Chip::Stop()
 {
     WriteValueRAW(0);
 
@@ -133,7 +133,7 @@ void ChipDAC::Stop()
 }
 
 
-void ChipDAC::Start()
+void Chip::Start()
 {
     WriteValueRAW(buffer_value);
 
@@ -144,54 +144,6 @@ void ChipDAC::Start()
 ChipDAC &ChipDAC::Get(E type)
 {
     return dacs[type];
-}
-
-
-void ChipREG::WriteValue(uint value)
-{
-    buffer_value = value;
-
-    if (is_running)
-    {
-        WriteValueRAW(buffer_value);
-    }
-}
-
-
-void ChipREG::Stop()
-{
-    WriteValueRAW(0);
-
-    is_running = false;
-}
-
-
-void ChipREG::Start()
-{
-    WriteValueRAW(buffer_value);
-
-    is_running = true;
-}
-
-
-void ChipREG::WriteValueRAW(uint value)
-{
-    clk->ToLow();
-
-    cs->ToLow();
-
-    for (int bit = (int)length - 1; bit >= 0; bit--)
-    {
-        clk->ToLow();
-
-        dat->Set(_GET_BIT(value, bit) != 0);
-
-        clk->ToHi();
-    }
-
-    cs->ToHi();
-
-    clk->ToLow();
 }
 
 
