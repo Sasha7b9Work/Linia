@@ -10,7 +10,7 @@
 
 struct Chip
 {
-    Chip(uint _l, PinOut *_cs, PinOut *_clk) : cs(_cs), clk(_clk), length(_l) { }
+    Chip(uint _l, PinOut *_cs, PinOut *_clk, PinOut *_dat) : cs(_cs), clk(_clk), dat(_dat), length(_l) { }
 
     void SetLength(uint _length)
     {
@@ -21,6 +21,7 @@ protected:
 
     PinOut *cs;
     PinOut *clk;
+    PinOut *dat;
     uint length = 0;
     uint buffer_value = 0;         // Здесь хранится буферное значение, которое по команде Start() переписываетя в аппаратный регистр на плате
     bool is_running = false;
@@ -41,7 +42,7 @@ struct ChipDAC : public Chip
         Count
     };
 
-    ChipDAC(E v, uint _l, PinOut *_cs, PinOut *_clk, PinOut *_dat) : Chip(_l, _cs, _clk), type(v), dat(_dat) { }
+    ChipDAC(E v, uint _l, PinOut *_cs, PinOut *_clk, PinOut *_dat) : Chip(_l, _cs, _clk, _dat), type(v)  { }
 
     static ChipDAC &Get(E);
 
@@ -58,7 +59,6 @@ struct ChipDAC : public Chip
 private:
 
     E type;
-    PinOut *dat;
 
     static ChipDAC dacs[10];
 
@@ -81,7 +81,7 @@ struct ChipREG : public Chip
     };
 
     ChipREG(E v, uint _l, PinOut *_cs, PinOut *_clk, PinOut *_dat) :
-        Chip(_l, _cs, _clk), type(v), dat(_dat) { }
+        Chip(_l, _cs, _clk, _dat), type(v) { }
 
     static ChipREG &Get(E);
 
@@ -98,7 +98,6 @@ struct ChipREG : public Chip
 private:
 
     E type;
-    PinOut *dat;
 
     static ChipREG regs[10];
 
