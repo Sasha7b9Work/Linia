@@ -4,12 +4,6 @@
 #include "Application.h"
 
 
-void EmulatorIPPP::Init()
-{
-
-}
-
-
 void EmulatorIPPP::Update()
 {
     if (in_process_measuring)

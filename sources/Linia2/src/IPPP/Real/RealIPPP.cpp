@@ -8,21 +8,6 @@
 #include "IPPP/Real/RealDevice.h"
 
 
-I_IPPP *I_IPPP::impl = nullptr;
-
-
-void RealIPPP::Init()
-{
-    IDevice::impl = new RealDevice();
-
-    IDevice::impl->Init();
-
-    pinREQ_RD.Set(false);    // Это состояние означает, что чтение не нужно
-
-//    Keyboard::Init();
-}
-
-
 bool RealIPPP::IsChanBS(const Chan &ch) const
 {
     if (ch.IsBS())

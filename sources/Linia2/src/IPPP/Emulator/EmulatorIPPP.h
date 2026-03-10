@@ -7,8 +7,6 @@ class EmulatorIPPP : public I_IPPP
 {
 public:
 
-    virtual void Init() override;
-
     virtual void Update() override;
 
     virtual void PressButtonStart() override;

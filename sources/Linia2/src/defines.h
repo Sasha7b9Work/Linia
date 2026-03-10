@@ -2,6 +2,9 @@
 #pragma once
 
 
+#include "option.h"
+
+
 #define WIN32_LEAN_AND_MEAN
 #pragma warning (push, 0)
 #include <wx/config.h>

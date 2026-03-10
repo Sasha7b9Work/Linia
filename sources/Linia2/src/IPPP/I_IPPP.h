@@ -9,7 +9,7 @@ class I_IPPP
 {
 public:
 
-    virtual void Init() = 0;
+    void Init();
 
     // Вызывается в главном цикле
     virtual void Update() = 0;
