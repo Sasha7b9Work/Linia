@@ -3,8 +3,8 @@
 #include "IPPP/I_IPPP.h"
 #include "IPPP/IDevice.h"
 #include "IPPP/Real/RealDevice.h"
-#include "IPPP/Real/PinsDevice.h"
 #include "IPPP/Keyboard/Keyboard.h"
+#include "Communicator/GPIO/GPIO.h"
 
 
 I_IPPP *I_IPPP::impl = nullptr;
