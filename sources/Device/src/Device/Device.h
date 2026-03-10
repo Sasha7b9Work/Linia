@@ -7,4 +7,7 @@ namespace Device
     void Init();
 
     void Update();
+
+    // По этой команде засылаем во все регистры и DACи нули
+    void EmergencyStop();
 }

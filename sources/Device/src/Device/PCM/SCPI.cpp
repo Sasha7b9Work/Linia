@@ -209,6 +209,8 @@ bool PCM::SCPI::Func_SCAN(pchar command)
     }
     else if (SU::BeginWith(command, "STOP"))
     {
+
+
         FPGA::StopScan();
 
         return true;
