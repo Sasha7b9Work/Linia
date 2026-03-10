@@ -111,8 +111,7 @@ bool Application::OnInit()
         dialog.ShowModal();
     }
 
-    I_IPPP::impl = new RealIPPP();
-    I_IPPP::impl->Init();
+    I_IPPP::Create();
 
     timer.Start(10);
 

@@ -5,18 +5,21 @@
 #include "IPPP/Real/RealDevice.h"
 #include "IPPP/Keyboard/Keyboard.h"
 #include "Communicator/GPIO/GPIO.h"
+#include "IPPP/Real/RealIPPP.h"
 
 
 I_IPPP *I_IPPP::impl = nullptr;
 
 
-void I_IPPP::Init()
+void I_IPPP::Create()
 {
 #ifdef EMULATOR_ENABLED
 
 
 
 #else
+
+    impl = new RealIPPP();
 
     IDevice::impl = new RealDevice();
 
