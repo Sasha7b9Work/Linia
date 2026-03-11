@@ -49,7 +49,7 @@ int Grid::LengthAxis() const
 
 int Grid::LeftX() const
 {
-    return center.x + (int)(rangeX.min / UnitsInCellX() * SizeCell());
+    return center.x + (int)(rangeX.max / UnitsInCellX() * SizeCell());
 }
 
 
@@ -298,43 +298,9 @@ void Grid::MoveMeasuresOn(const wxPoint &delta)
 }
 
 
-void Grid::ScaleMeasuresOnX(int delta)
-{
-    if (delta < 0)
-    {
-        rangeX *= 1.5;
-    }
-    else
-    {
-        rangeX *= 1 / 1.5;
-    }
-
-    CalculateCenter();
-
-    Display::self->Draw();
-}
-
-
-void Grid::ScaleMeasuresOnY(int delta)
-{
-    if (delta < 0)
-    {
-        rangeY *= 1.5;
-    }
-    else
-    {
-        rangeY *= 1 / 1.5;
-    }
-
-    CalculateCenter();
-
-    Display::self->Draw();
-}
-
-
 int Grid::SizeCell() const
 {
-    return 60 * scale;
+    return 100 * scale;
 }
 
 
@@ -354,6 +320,40 @@ void Grid::ScaleGridOn(const wxPoint &pos, int delta)
 
         center -= delta_center / 2;
     }
+}
+
+
+void Grid::ScaleGridOnX(int delta)
+{
+    if (delta < 0)
+    {
+        rangeX *= 1.5;
+    }
+    else
+    {
+        rangeX *= 1 / 1.5;
+    }
+
+    CalculateCenter();
+
+    Display::self->Draw();
+}
+
+
+void Grid::ScaleGridOnY(int delta)
+{
+    if (delta < 0)
+    {
+        rangeY *= 1.5;
+    }
+    else
+    {
+        rangeY *= 1 / 1.5;
+    }
+
+    CalculateCenter();
+
+    Display::self->Draw();
 }
 
 
@@ -515,37 +515,26 @@ void Grid::OnEventCnangeMeasuredElement()
 }
 
 
-double Range::MaxAbs() const
-{
-    double _min = std::fabs(min);
-    double _max = std::fabs(max);
-
-    return (_min > _max) ? _min : _max;
-}
-
-
 double Range::Amplitude() const
 {
-    return max - min;
+    return 2.0 * max;
 }
 
 
 void Range::operator+=(const double &delta)
 {
-    min += delta;
     max += delta;
 }
 
 
 void Range::operator*=(const double &delta)
 {
-    double center = (max + min) / 2.0;
+    double center = 0.0;
 
     double amplitude = Amplitude();
 
     amplitude *= delta;
 
-    min = center - amplitude / 2.0;
     max = center + amplitude / 2.0;
 }
 
@@ -554,23 +543,23 @@ wxString Range::FullTitle() const
 {
     wxString prefix;
 
-    if (MaxAbs() >= 1e3)
+    if (max >= 1e3)
     {
         prefix = "k";
     }
-    else if (MaxAbs() >= 1.0)
+    else if (max >= 1.0)
     {
-
+        prefix = "";
     }
-    else if (MaxAbs() >= 1e-3)
+    else if (max >= 1e-3)
     {
         prefix = "m";
     }
-    else if (MaxAbs() >= 1e-6)
+    else if (max >= 1e-6)
     {
         prefix = "u";
     }
-    else if (MaxAbs() >= 1e-9)
+    else if (max >= 1e-9)
     {
         prefix = "n";
     }
@@ -583,19 +572,19 @@ wxString Range::GetValuePointAxis(int num) const
 {
     double step = Amplitude() / 10.0;   // По горизонтали всегда 10 клеток
 
-    if (MaxAbs() >= 1e3)
+    if (max >= 1e3)
     {
         step /= 1e3;
     }
-    else if (MaxAbs() >= 1)
+    else if (max >= 1)
     {
-
+        step *= 1.0;
     }
-    else if (MaxAbs() >= 1e-3)
+    else if (max >= 1e-3)
     {
         step *= 1e3;
     }
-    else if (MaxAbs() >= 1e-6)
+    else if (max >= 1e-6)
     {
         step *= 1e6;
     }

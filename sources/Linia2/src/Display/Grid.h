@@ -7,14 +7,10 @@ class GraphEntity;
 
 struct Range
 {
-    double min;
-    double max;
+    double max;                 // Размах от нуля. Т.е. полный размах будет [-max, +max]
 
     wxString title;
     wxString units;
-
-    // Возвращает максимальное отклонение от нуля в минимальную или максимальную сторону
-    double MaxAbs() const;
 
     // Разница между максимальным и минимальным значениями - амплитуда
     double Amplitude() const;
@@ -47,8 +43,8 @@ public:
     void OnEventCnangeMeasuredElement();
 
     void ScaleGridOn(const wxPoint &, int);
-    void ScaleMeasuresOnX(int);
-    void ScaleMeasuresOnY(int);
+    void ScaleGridOnX(int);
+    void ScaleGridOnY(int);
 
     // Преобразует точку графика в координаты на холсте
     wxPoint ValuesToCoord(double x, double y) const;
@@ -61,11 +57,13 @@ public:
 
 private:
 
-    wxPoint center;     // В этом месте относительно центра экрана находится центр сетки
+    wxPoint center;         // В этом месте относительно центра экрана находится центр сетки
     int     scale = 1;      // 2 - увеличено в два раза, 3 - увелично в три и так далее
     wxPoint pos_mouse;
-    Range   rangeX{ -20, 20, "Uc", "V" };
-    Range   rangeY{ -5, 5, "Ic", "A" };
+    Range   rangeX{ 20, "Uc", "V" };
+    Range   rangeY{ 5, "Ic", "A" };
+    // Количество клеток в осях X и Y
+    int num_cells = 10;
 
     // d - расстояние между точками
     void DrawVPointLineDown(int x, int y, int d, int height);
@@ -80,9 +78,6 @@ private:
 
     double UnitsInCellX() const;
     double UnitsInCellY() const;
-
-    // Количество клеток в осях X и Y
-    int num_cells = 10;
 
     // Размер клетки в пикселях
     int SizeCell() const;

@@ -173,19 +173,19 @@ void Display::OnEventButton(wxCommandEvent &event)
     }
     else if (id == btnLessX->GetId())
     {
-        grid->ScaleMeasuresOnX(-1);
+        grid->ScaleGridOnX(-1);
     }
     else if (id == btnMoreX->GetId())
     {
-        grid->ScaleMeasuresOnX(+1);
+        grid->ScaleGridOnX(+1);
     }
     else if (id == btnLessY->GetId())
     {
-        grid->ScaleMeasuresOnY(-1);
+        grid->ScaleGridOnY(-1);
     }
     else if (id == btnMoreY->GetId())
     {
-        grid->ScaleMeasuresOnY(+1);
+        grid->ScaleGridOnY(+1);
     }
 }
 
