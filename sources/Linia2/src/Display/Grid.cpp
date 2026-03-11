@@ -298,25 +298,6 @@ void Grid::MoveMeasuresOn(const wxPoint &delta)
 }
 
 
-void Grid::ScaleMeasuresOn(const wxPoint &, int delta)
-{
-    if (delta < 0)
-    {
-        rangeX *= 1.5;
-        rangeY *= 1.5;
-    }
-    else
-    {
-        rangeX *= 1 / 1.5;
-        rangeY *= 1 / 1.5;
-    }
-
-    CalculateCenter();
-
-    Display::self->Draw();
-}
-
-
 void Grid::ScaleMeasuresOnX(int delta)
 {
     if (delta < 0)
