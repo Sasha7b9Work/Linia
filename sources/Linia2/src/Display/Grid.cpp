@@ -300,7 +300,7 @@ void Grid::MoveMeasuresOn(const wxPoint &delta)
 
 int Grid::SizeCell() const
 {
-    return 100 * scale;
+    return 60 * scale;
 }
 
 
