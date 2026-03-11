@@ -71,8 +71,8 @@ void Grid::DrawArea() const
     int size_x = size.x * size.x / LengthAxis();
     int size_y = size.y * size.y / LengthAxis();
 
-    int d_x = (int)((float)-LeftX() * (float)size.x / (float)LengthAxis() + 0.5f);
-    int d_y = (int)((float)-TopY() * (float)size.y / (float)LengthAxis() + 0.5f);
+    int d_x = -LeftX() * size.x / LengthAxis();
+    int d_y = -TopY() * size.y / LengthAxis();
 
     wxColor color{ 127, 127, 127 };
 
