@@ -306,6 +306,17 @@ void Grid::MoveGridOn(const wxPoint &delta)
 
     center += delta;
 
+    FitIntoDisplay();
+}
+
+
+void Grid::FitIntoDisplay()
+{
+    if (scale == 1)
+    {
+        return;
+    }
+
     wxSize size = Display::self->GetSize();
 
     if (LeftX() > 5)
@@ -353,6 +364,8 @@ void Grid::ScaleGridOn(const wxPoint &pos, int delta)
     {
         ResetCenter();
     }
+
+    FitIntoDisplay();
 }
 
 
