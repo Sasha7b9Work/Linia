@@ -63,13 +63,13 @@ private:
     const int size_cell = 60;       // Столько клетка всегда занимает на экране
 
     // d - расстояние между точками
-    void DrawVPointLineDown(int x, int y, int d, int height);
-    void DrawVPointLineUp(int x, int y, int d, int height);
+    void DrawVPointLineDown(int x, int y0, int y_low, int d);
+    void DrawVPointLineUp(int x, int y0, int y_hi, int d);
     void DrawHPointLineRight(int x, int y, int d, int width);
     void DrawHPointLineLeft(int x, int y, int d, int width);
 
-    void DrawVPointLineDown2(int x, int y, int d, int height);
-    void DrawVPointLineUp2(int x, int y, int d, int height);
+    void DrawVPointLineDown2(int x, int y0, int y_low, int d);
+    void DrawVPointLineUp2(int x, int y0, int y_hi, int d);
     void DrawHPointLineRight2(int x, int y, int d, int width);
     void DrawHPointLineLeft2(int x, int y, int d, int width);
 

@@ -70,6 +70,8 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
     int d = 5;
 
+    wxSize size = Display::self->GetSize();
+
     {
         // Горизонтальные линии
         Line(x_left, y_top, RightX(), y_top).Draw(*wxBLACK);
@@ -87,8 +89,8 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
         if (Math::InRange(center.x, x_left, x_right))
         {
-            DrawVPointLineDown2(center.x, center.y, d, length - (center.y - y_top));
-            DrawVPointLineUp2(center.x, center.y, d, length - (y_bottom - center.y));
+            DrawVPointLineDown2(center.x, center.y, size.y, d);
+            DrawVPointLineUp2(center.x, center.y, 0, d);
         }
 
         Line(RightX(), y_top, RightX(), BottomY()).Draw();
@@ -99,83 +101,76 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
     {
         int x = center.x + i * size_cell;
 
-        if (x < x_right)
+        if (x > 0 && x < size.x)
         {
-            if (x > x_left)
-            {
-                DrawVPointLineDown(x, center.y, d, length - (center.y - y_top));
-                DrawVPointLineUp(x, center.y, d, length - (y_bottom - center.y));
-            }
-        }
-        else
-        {
-            break;
+            DrawVPointLineDown(x, center.y, size.y, d);
+            DrawVPointLineUp(x, center.y, 0, d);
         }
     }
 
     // Рисуем вертикальные линии слева от нуля
-    for (int i = 1; i < 100; i++)
-    {
-        int x = center.x - i * size_cell;
-
-        if (x > x_left)
-        {
-            if (x < x_right)
-            {
-                DrawVPointLineDown(x, center.y, d, length - (center.y - y_top));
-                DrawVPointLineUp(x, center.y, d, length - (y_bottom - center.y));
-            }
-        }
-        else
-        {
-            break;
-        }
-    }
+//    for (int i = 1; i < 100; i++)
+//    {
+//        int x = center.x - i * size_cell;
+//
+//        if (x > x_left)
+//        {
+//            if (x < x_right)
+//            {
+//                DrawVPointLineDown(x, center.y, d, length - (center.y - y_top));
+//                DrawVPointLineUp(x, center.y, d, length - (y_bottom - center.y));
+//            }
+//        }
+//        else
+//        {
+//            break;
+//        }
+//    }
 
     // Рисуем горизонтальные линии сверху от нуля
-    for (int i = 1; i < 100; i++)
-    {
-        int y = center.y - i * size_cell;
-
-        if (y > y_top)
-        {
-            if (y < y_bottom)
-            {
-                DrawHPointLineRight(center.x, y, d, length - (center.x - x_left));
-                DrawHPointLineLeft(center.x, y, d, length - (x_right - center.x));
-            }
-        }
-        else
-        {
-            break;
-        }
-    }
+//    for (int i = 1; i < 100; i++)
+//    {
+//        int y = center.y - i * size_cell;
+//
+//        if (y > y_top)
+//        {
+//            if (y < y_bottom)
+//            {
+//                DrawHPointLineRight(center.x, y, d, length - (center.x - x_left));
+//                DrawHPointLineLeft(center.x, y, d, length - (x_right - center.x));
+//            }
+//        }
+//        else
+//        {
+//            break;
+//        }
+//    }
 
     // Рисуем горизонтальные линии снизу от нуля
-    for (int i = 1; i < 100; i++)
-    {
-        int y = center.y + i * size_cell;
-
-        if (y < y_bottom)
-        {
-            if (y > y_top)
-            {
-                DrawHPointLineRight(center.x, y, d, length - (center.x - x_left));
-                DrawHPointLineLeft(center.x, y, d, length - (x_right - center.x));
-            }
-        }
-        else
-        {
-            break;
-        }
-    }
+//    for (int i = 1; i < 100; i++)
+//    {
+//        int y = center.y + i * size_cell;
+//
+//        if (y < y_bottom)
+//        {
+//            if (y > y_top)
+//            {
+//                DrawHPointLineRight(center.x, y, d, length - (center.x - x_left));
+//                DrawHPointLineLeft(center.x, y, d, length - (x_right - center.x));
+//            }
+//        }
+//        else
+//        {
+//            break;
+//        }
+//    }
 
     d = size_cell / 5;
 
     for (int i = 1; i < 3; i++)
     {
-        DrawVPointLineUp(x_left + i, center.y, d, length - (BottomY() - center.y));
-        DrawVPointLineDown(x_left + i, center.y, d, length - (center.y - TopY()));
+        DrawVPointLineUp(x_left + i, center.y, 0, d);
+        DrawVPointLineDown(x_left + i, center.y, size.y, d);
 
         DrawHPointLineRight(center.x, BottomY() - i, d, length - (center.x - LeftX()));
         DrawHPointLineLeft(center.x, BottomY() - i, d, length - (RightX() - center.x));
@@ -391,18 +386,18 @@ void Grid::ScaleGridOnY(int delta)
 }
 
 
-void Grid::DrawVPointLineDown(int x, int y, int d, int height)
+void Grid::DrawVPointLineDown(int x, int y0, int y_low, int d)
 {
-    for (int i = y; i < y + height; i += d)
+    for (int i = y0; i < y_low; i += d)
     {
         Point().Draw(x, i);
     }
 }
 
 
-void Grid::DrawVPointLineUp(int x, int y, int d, int height)
+void Grid::DrawVPointLineUp(int x, int y0, int y_hi, int d)
 {
-    for (int i = y; i > y - height; i -= d)
+    for (int i = y0; i > y_hi; i -= d)
     {
         Point().Draw(x, i);
     }
@@ -427,9 +422,9 @@ void Grid::DrawHPointLineLeft(int x, int y, int d, int width)
 }
 
 
-void Grid::DrawVPointLineDown2(int x, int y, int d, int height)
+void Grid::DrawVPointLineDown2(int x, int y0, int y_low, int d)
 {
-    for (int i = y; i < y + height; i += d)
+    for (int i = y0; i < y_low; i += d)
     {
         Point().Draw(x, i);
         Point().Draw(x, i + 1);
@@ -438,9 +433,9 @@ void Grid::DrawVPointLineDown2(int x, int y, int d, int height)
 }
 
 
-void Grid::DrawVPointLineUp2(int x, int y, int d, int height)
+void Grid::DrawVPointLineUp2(int x, int y0, int y_hi, int d)
 {
-    for (int i = y; i > y - height; i -= d)
+    for (int i = y0; i > y_hi; i -= d)
     {
         Point().Draw(x, i);
         Point().Draw(x, i - 1);
