@@ -48,7 +48,7 @@ public:
 
     wxPoint2DDouble CoordToValues(const wxPoint &) const;
 
-    void CalculateCenter();
+    void ResetCenter();
 
     void Reset();
 

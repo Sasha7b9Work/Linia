@@ -13,7 +13,7 @@ Grid::Grid()
 }
 
 
-void Grid::CalculateCenter()
+void Grid::ResetCenter()
 {
     wxSize display_size = Display::self->GetSize();
 
@@ -25,7 +25,7 @@ void Grid::Reset()
 {
     scale = 1;
 
-    CalculateCenter();
+    ResetCenter();
 }
 
 
@@ -318,7 +318,7 @@ void Grid::ScaleGridOnX(int delta)
         rangeX *= 1 / 1.5;
     }
 
-    CalculateCenter();
+    ResetCenter();
 
     Display::self->Draw();
 }
@@ -335,7 +335,7 @@ void Grid::ScaleGridOnY(int delta)
         rangeY *= 1 / 1.5;
     }
 
-    CalculateCenter();
+    ResetCenter();
 
     Display::self->Draw();
 }

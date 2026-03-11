@@ -473,6 +473,8 @@ void Display::OnMenuReset(wxCommandEvent &)
 void Display::OnMenuFullScreen(wxCommandEvent &event)
 {
     MainWindow::self->SetMode(event.IsChecked() ? ModeMainWindow::FullGraph : ModeMainWindow::Standard);
+
+    grid->ResetCenter();
 }
 
 
