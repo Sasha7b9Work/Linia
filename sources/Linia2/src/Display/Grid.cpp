@@ -49,7 +49,7 @@ int Grid::LengthAxis() const
 
 int Grid::LeftX() const
 {
-    return center.x + (int)(rangeX.max / UnitsInCellX() * SizeCell());
+    return center.x - (int)(rangeX.max / UnitsInCellX() * SizeCell());
 }
 
 

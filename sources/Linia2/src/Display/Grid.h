@@ -86,10 +86,10 @@ private:
     wxPoint GetCoordPointAxisX(int) const;
     wxPoint GetCoordPointAxisY(int) const;
 
-    int BottomY() const;
-    int TopY() const;
-    int LeftX() const;
-    int RightX() const;
+    int BottomY() const;            // В этой позиции экрана находится нижняя сторона экрана
+    int TopY() const;               // В этой позиции экрана находится верхняя сторона экрана
+    int LeftX() const;              // В этой позиции экрана находится левая сторона сетки
+    int RightX() const;             // В этой позиции экрана находится правая сторона сетки
 
     // Длина оси в пикселях
     int LengthAxis() const;
