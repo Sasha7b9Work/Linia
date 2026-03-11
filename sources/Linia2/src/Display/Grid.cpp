@@ -59,6 +59,31 @@ int Grid::RightX() const
 }
 
 
+void Grid::DrawArea() const
+{
+    if (scale == 1)
+    {
+        return;
+    }
+
+    wxSize size = Display::self->GetSize();
+
+    float portion_size_x = (float)size.x / (float)LengthAxis();
+    float portion_size_y = (float)size.y / (float)LengthAxis();
+
+    int size_x = (int)((float)size.x * portion_size_x + 0.5f);
+    int size_y = (int)((float)size.y * portion_size_y + 0.5f);
+
+    int d_x = (int)((float)-LeftX() / (float)LengthAxis() * (float)size.x + 0.5f);
+    int d_y = (int)((float)-TopY() / (float)LengthAxis() * (float)size.y + 0.5f);
+
+    wxColor color{ 127, 127, 127 };
+
+    Rect(size_x, 2).Draw(d_x, 0, color);
+    Rect(2, size_y).Draw(0, d_y, color);
+}
+
+
 void Grid::Draw(const std::vector<GraphEntity *> &entities)
 {
     const int length = LengthAxis();
@@ -160,10 +185,15 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         entity->Draw(this);
     }
 
-    Display::self->FillRectangle(0, 0, x_left - 1, Display::self->GetSize().y, *wxWHITE); //-V807
-    Display::self->FillRectangle(x_left, 0, length, y_top - 1, *wxWHITE);
-    Display::self->FillRectangle(x_right + 1, 0, Display::self->GetSize().x - x_right, Display::self->GetSize().y, *wxWHITE);
-    Display::self->FillRectangle(x_left, y_bottom + 1, length, Display::self->GetSize().y - y_bottom, *wxWHITE);
+    DrawArea();
+
+    if (scale == 1)
+    {
+        Display::self->FillRectangle(0, 0, x_left - 1, Display::self->GetSize().y, *wxWHITE); //-V807
+        Display::self->FillRectangle(x_left, 0, length, y_top - 1, *wxWHITE);
+        Display::self->FillRectangle(x_right + 1, 0, Display::self->GetSize().x - x_right, Display::self->GetSize().y, *wxWHITE);
+        Display::self->FillRectangle(x_left, y_bottom + 1, length, Display::self->GetSize().y - y_bottom, *wxWHITE);
+    }
 
     DrawLabelsOnAxis();
 

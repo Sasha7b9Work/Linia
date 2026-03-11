@@ -230,6 +230,13 @@ void Line::Draw(const wxColor &color) const
 }
 
 
+void Rect::Draw(int x, int y, const wxColor &color) const
+{
+    Display::self->SetColor(color);
+    Display::self->gc->DrawRectangle(x, y, width, height);
+}
+
+
 Text::Text(const wxString &_text) : text(_text)
 {
 

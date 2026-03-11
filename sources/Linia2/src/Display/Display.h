@@ -14,6 +14,7 @@ class Display : public Panel
     friend class Text;
     friend class Spline;
     friend class Line;
+    friend class Rect;
 
 public:
 
@@ -108,6 +109,19 @@ public:
 
 private:
     int x1, y1, x2, y2;
+};
+
+
+class Rect
+{
+public:
+
+    Rect(int _w, int _h) : width(_w), height(_h) { }
+
+    void Draw(int x, int y, const wxColor &) const;
+
+private:
+    int width, height;
 };
 
 
