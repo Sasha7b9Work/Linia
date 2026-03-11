@@ -35,8 +35,6 @@ Display::Display(wxWindow *parent) :
     btnLessY = new wxButton(this, wxID_ANY, "Y-", wxDefaultPosition, size);
     btnMoreY = new wxButton(this, wxID_ANY, "Y+", wxDefaultPosition, size);
 
-    CreateEntities();
-
     panel_errors = new PanelErrors(this);
 
     new PanelTable(this);
@@ -381,34 +379,6 @@ void Text::DrawAboutCenterRigth(int x, int y, bool fillBackground, const wxColor
     }
 
     Display::self->gc->DrawText(text, x, y);
-}
-
-
-void Display::CreateEntities()
-{
-    GraphLine *line = new GraphLine(Meas{ -1.0, -1.0 }, Meas{ 1.0, 1.0 });
-    line->SetColor(*wxBLUE);
-
-    entities.push_back(line);
-
-    GraphMeasures *meas = new GraphMeasures();
-    meas->SetColor(*wxGREEN);
-
-    meas->AppendPoint({ 0.0, 0.0 });
-    meas->AppendPoint({ 0.3, 0.5 });
-    meas->AppendPoint({ 0.7, 1.0 });
-    meas->AppendPoint({ 1.1, 1.5 });
-    meas->AppendPoint({ 1.6, 2.0 });
-    meas->AppendPoint({ 2.0, 2.5 });
-    meas->AppendPoint({ 2.5, 3.0 });
-    meas->AppendPoint({ 3.0, 3.4 });
-    meas->AppendPoint({ 4.0, 4.0 });
-    meas->AppendPoint({ 6.0, 4.3 });
-    meas->AppendPoint({ 8.0, 4.35 });
-    meas->AppendPoint({ 10.0, 4.38 });
-    meas->AppendPoint({ 12.0, 4.4 });
-
-    entities.push_back(meas);
 }
 
 

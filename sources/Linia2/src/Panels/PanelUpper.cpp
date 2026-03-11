@@ -15,7 +15,21 @@ PanelUpper::PanelUpper(wxWindow* parent) :
 {
     self = this;
 
-    new wxStaticText(this, wxID_ANY, wxString::Format("ver. %d : %s", VERSION_BUILD, DATE_BUILD), { 460, 56 });
+#ifdef EMULATOR_ENABLED
+
+    wxStaticText *text = new wxStaticText(this, wxID_ANY, "Э М У Л Я Т О Р", { 200, 0 });
+
+    wxFont bigFont(25, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
+
+    text->SetFont(bigFont);
+
+    text->SetForegroundColour(wxColour(127, 127, 127));
+
+    text->Refresh();
+
+#endif
+
+    new wxStaticText(this, wxID_ANY, wxString::Format("ver. %d : %s", VERSION_BUILD, DATE_BUILD), { 450, 56 });
 
     new wxStaticText(this, wxID_ANY, wxString::Format("IP : %s", GF::GetSelfIP().c_str().AsChar()), {10, 56});
 

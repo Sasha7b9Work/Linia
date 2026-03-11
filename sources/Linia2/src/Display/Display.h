@@ -85,8 +85,6 @@ private:
     void OnMenuTrackY(wxCommandEvent &);
     void OnMenuTrackNone(wxCommandEvent &);
     void OnMenuScale(wxCommandEvent &);
-
-    void CreateEntities();
 };
 
 
