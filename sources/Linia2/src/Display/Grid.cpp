@@ -239,39 +239,13 @@ void Grid::DrawLabelsOnAxis() const
             }
         }
 
-        // Единицы зимерения
-        if (BottomY() + 20 < size.y && last_pos.x < size.x)
-        {
-            if (size.x < 0)
-            {
-                Text(rangeX.FullTitle()).DrawAboutCenterDown(last_pos.x < size.x ? last_pos.x : size.x - 20, last_pos.y, true, background);
-            }
-            else
-            {
-                Text(rangeX.FullTitle()).DrawAboutCenterDown(center.x, BottomY() + 25, true, background);
-            }
-        }
-        else
-        {
-            if (BottomY() + 20 < size.y)
-            {
-                Text(rangeX.FullTitle()).DrawAboutCenterDown(center.x, BottomY() + 25, true, background);
-            }
-            else
-            {
-                Text(rangeX.FullTitle()).DrawAboutCenterDown(last_pos.x < size.x ? last_pos.x : size.x - 20, last_pos.y, true, background);
-            }
-        }
+        Text(rangeX.FullTitle()).DrawAboutCenterDown(last_pos.x < size.x ? last_pos.x : size.x - 20, last_pos.y, true, background);
     }
 
     {
         // Подписываем вертикальную ось
 
-        if (Math::InRange(center.y, TopY(), BottomY()))
-        {
-            // Единицы измерения
-            Text(rangeY.FullTitle()).DrawAboutCenterLeft(LeftX() - 30, center.y, true, background);
-        }
+        wxPoint last_pos{ 0, 0 };   // Здесь отрисовано последнее значение
 
         for (int i = -100; i < 100; i++)
         {
@@ -282,16 +256,30 @@ void Grid::DrawLabelsOnAxis() const
             {
                 if (Math::InRange(coord.y, TopY(), BottomY() - 1))
                 {
-                    Text(rangeY.GetValuePointAxis(i)).DrawAboutCenterLeft(coord.x - d, coord.y, true, background);
+                    last_pos = { coord.x - d, coord.y };
+                    Text(rangeY.GetValuePointAxis(i)).DrawAboutCenterLeft(last_pos.x, last_pos.y, true, background);
                 }
             }
             else
             {
                 if (Math::InRange(coord.y, TopY(), BottomY() - 1))
                 {
-                    Text(rangeY.GetValuePointAxis(i)).DrawAboutCenterRigth(0 + d, coord.y, true, background);
+                    last_pos = { d, coord.y };
+                    Text(rangeY.GetValuePointAxis(i)).DrawAboutCenterRigth(last_pos.x, last_pos.y, true, background);
                 }
             }
+        }
+
+        d = 7;
+
+        // Единицы измерения
+        if (LeftX() - 20 > 0)
+        {
+            Text(rangeY.FullTitle()).DrawAboutCenterLeft(last_pos.x, last_pos.y < d ? d : last_pos.y, true, background);
+        }
+        else
+        {
+            Text(rangeY.FullTitle()).DrawAboutCenterRigth(last_pos.x, last_pos.y < d ? d : last_pos.y, true, background);
         }
     }
 }
