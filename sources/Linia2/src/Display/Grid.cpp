@@ -281,28 +281,26 @@ void Grid::MoveGridOn(const wxPoint &delta)
 
     wxSize size = Display::self->GetSize();
 
-    if (LengthAxis() < size.x)
+    if (LeftX() > 5)
     {
-        if (LeftX() < 5)
-        {
-            center.x = 5 + LengthAxis() / 2;
-        }
-        if (RightX() > size.x - 8)
-        {
-            center.x = size.x - 8 - LengthAxis() / 2;
-        }
+        center.x = 5 + LengthAxis() / 2;
     }
 
-    if (LengthAxis() < size.y)
+    if (TopY() > 5)
     {
-        if (TopY() < 5)
-        {
-            center.y = 5 + LengthAxis() / 2;
-        }
-        if (BottomY() > size.y - 8)
-        {
-            center.y = size.y - 8 - LengthAxis() / 2;
-        }
+        center.y = 5 + LengthAxis() / 2;
+    }
+
+    int d = 8;
+
+    if (RightX() < size.x - d)
+    {
+        center.x = size.x - d - LengthAxis() / 2;
+    }
+
+    if (BottomY() < size.y - d)
+    {
+        center.y = size.y - d - LengthAxis() / 2;
     }
 }
 

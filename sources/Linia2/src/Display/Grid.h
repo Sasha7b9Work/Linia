@@ -58,8 +58,8 @@ private:
     wxPoint center;         // В этом месте относительно центра экрана находится центр сетки
     int     scale = 1;      // 2 - увеличено в два раза, 3 - увелично в три и так далее
     wxPoint pos_mouse;
-    Range   rangeX{ 20, "Uc", "V" };
-    Range   rangeY{ 5, "Ic", "A" };
+    Range   rangeX{ 1.0, "Uc", "V" };
+    Range   rangeY{ 1.0, "Ic", "A" };
     const int size_cell = 60;       // Столько клетка всегда занимает на экране
 
     // d - расстояние между точками
