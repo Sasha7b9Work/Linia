@@ -248,13 +248,23 @@ void Text::Draw(int x, int y) const
 }
 
 
-void Text::DrawAboutCenterLeft(int x, int y) const
+void Text::DrawAboutCenterLeft(int x, int y, bool fillBackground, const wxColor &background) const
 {
     double width, height, descent, externalLeading;
     Display::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
 
     x -= (int)(width + 0.5);
     y -= (int)(height / 2.0 + 0.5);
+
+    if (fillBackground)
+    {
+        Display::self->gc->SetBrush(background);
+        Display::self->gc->SetPen(background);
+        Display::self->gc->DrawRectangle(x, y, width, height);
+
+        Display::self->gc->SetBrush(Display::self->color);
+        Display::self->gc->SetPen(Display::self->color);
+    }
 
     Display::self->gc->DrawText(text, x, y);
 }

@@ -202,6 +202,8 @@ void Grid::DrawLabelsOnAxis() const
 {
     Display::self->SetColor(*wxBLACK);
 
+    wxColor background{ 230, 230, 230 };
+
     Text::SetFont();
 
     int d = 2;
@@ -209,7 +211,7 @@ void Grid::DrawLabelsOnAxis() const
     {
         if (Math::InRange(center.x, LeftX(), RightX()))
         {
-            Text(rangeX.FullTitle()).DrawAboutCenterDown(center.x, BottomY() + 25);
+            Text(rangeX.FullTitle()).DrawAboutCenterDown(center.x, BottomY() + 25, true, background);
         }
 
         for (int i = -100; i < 100; i++)
@@ -220,14 +222,14 @@ void Grid::DrawLabelsOnAxis() const
             {
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
-                    Text(rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, coord.y + d);
+                    Text(rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, coord.y + d, true, background);
                 }
             }
             else
             {
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
-                    Text(rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, Display::self->GetSize().y - 25, true, *wxWHITE);
+                    Text(rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, Display::self->GetSize().y - 25, true, background);
                 }
             }
         }
@@ -236,7 +238,7 @@ void Grid::DrawLabelsOnAxis() const
     {
         if (Math::InRange(center.y, TopY(), BottomY()))
         {
-            Text(rangeY.FullTitle()).DrawAboutCenterLeft(LeftX() - 30, center.y);
+            Text(rangeY.FullTitle()).DrawAboutCenterLeft(LeftX() - 30, center.y, true, background);
         }
 
         for (int i = -100; i < 100; i++)
@@ -247,14 +249,14 @@ void Grid::DrawLabelsOnAxis() const
             {
                 if (Math::InRange(coord.y, TopY(), BottomY() - 1))
                 {
-                    Text(rangeY.GetValuePointAxis(i)).DrawAboutCenterLeft(coord.x - d, coord.y);
+                    Text(rangeY.GetValuePointAxis(i)).DrawAboutCenterLeft(coord.x - d, coord.y, true, background);
                 }
             }
             else
             {
                 if (Math::InRange(coord.y, TopY(), BottomY() - 1))
                 {
-                    Text(rangeY.GetValuePointAxis(i)).DrawAboutCenterRigth(0 + d, coord.y, true, *wxWHITE);
+                    Text(rangeY.GetValuePointAxis(i)).DrawAboutCenterRigth(0 + d, coord.y, true, background);
                 }
             }
         }

@@ -122,7 +122,7 @@ public:
     void Draw(int x, int y) const;
 
     // Рисует слева от точки по центру
-    void DrawAboutCenterLeft(int x, int y) const;
+    void DrawAboutCenterLeft(int x, int y, bool fillBackground = false, const wxColor & = *wxWHITE) const;
 
     void DrawAboutCenterRigth(int x, int y, bool fillBackground = false, const wxColor & = *wxWHITE) const;
 
