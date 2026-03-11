@@ -68,8 +68,8 @@ void Grid::DrawArea() const
 
     wxSize size = Display::self->GetSize();
 
-    int size_x = (int)((float)size.x * (float)size.x / (float)LengthAxis() + 0.5f);
-    int size_y = (int)((float)size.y * (float)size.y / (float)LengthAxis() + 0.5f);
+    int size_x = size.x * size.x / LengthAxis();
+    int size_y = size.y * size.y / LengthAxis();
 
     int d_x = (int)((float)-LeftX() * (float)size.x / (float)LengthAxis() + 0.5f);
     int d_y = (int)((float)-TopY() * (float)size.y / (float)LengthAxis() + 0.5f);
