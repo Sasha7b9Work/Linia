@@ -170,7 +170,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         }
     }
 
-    d = 10 * scale;
+    d = size_cell / 5;
 
     for (int i = 1; i < 3; i++)
     {
@@ -337,15 +337,15 @@ void Grid::ScaleGridOn(const wxPoint &pos, int delta)
 {
     wxPoint delta_center = center - pos;
 
-    if (delta > 0 && scale < 5)
+    if (delta > 0 && scale < 8)
     {
-        scale++;
+        scale *= 2;
 
         center += delta_center;
     }
     else if (delta < 0 && scale > 1)
     {
-        scale--;
+        scale /= 2;
 
         center -= delta_center / 2;
     }
