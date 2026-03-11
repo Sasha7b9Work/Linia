@@ -134,14 +134,7 @@ void Display::OnEventMouseMove(wxMouseEvent &event)
     {
         wxPoint delta = position - pos_mouse_down;
 
-        if (event.GetModifiers() == wxMOD_CONTROL)
-        {
-            grid->MoveGridOn(delta);
-        }
-        else
-        {
-            grid->MoveMeasuresOn(delta);
-        }
+        grid->MoveGridOn(delta);
 
         pos_mouse_down = position;
     }

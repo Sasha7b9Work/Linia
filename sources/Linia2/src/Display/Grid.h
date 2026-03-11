@@ -35,9 +35,6 @@ public:
     // Переместить сетку целиком
     void MoveGridOn(const wxPoint &);
 
-    // Переместить графики внутри сетки
-    void MoveMeasuresOn(const wxPoint &);
-
     void OnMouseMove(const wxPoint &);
 
     void OnEventCnangeMeasuredElement();
