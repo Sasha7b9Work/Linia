@@ -17,9 +17,13 @@ PanelUpper::PanelUpper(wxWindow* parent) :
 
 #ifdef EMULATOR_ENABLED
 
-    wxStaticText *text = new wxStaticText(this, wxID_ANY, "Э М У Л Я Т О Р", { 200, 0 });
-
     wxFont bigFont(25, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
+
+    wxClientDC dc(this);
+    dc.SetFont(bigFont);
+    wxSize textSize = dc.GetTextExtent("Э М У Л Я Т О Р");
+
+    wxStaticText *text = new wxStaticText(this, wxID_ANY, "Э М У Л Я Т О Р", { 200, 0 }, wxSize(textSize.GetWidth(), textSize.GetHeight()));
 
     text->SetFont(bigFont);
 
