@@ -68,14 +68,11 @@ void Grid::DrawArea() const
 
     wxSize size = Display::self->GetSize();
 
-    float portion_size_x = (float)size.x / (float)LengthAxis();
-    float portion_size_y = (float)size.y / (float)LengthAxis();
+    int size_x = (int)((float)size.x * (float)size.x / (float)LengthAxis() + 0.5f);
+    int size_y = (int)((float)size.y * (float)size.y / (float)LengthAxis() + 0.5f);
 
-    int size_x = (int)((float)size.x * portion_size_x + 0.5f);
-    int size_y = (int)((float)size.y * portion_size_y + 0.5f);
-
-    int d_x = (int)((float)-LeftX() / (float)LengthAxis() * (float)size.x + 0.5f);
-    int d_y = (int)((float)-TopY() / (float)LengthAxis() * (float)size.y + 0.5f);
+    int d_x = (int)((float)-LeftX() * (float)size.x / (float)LengthAxis() + 0.5f);
+    int d_y = (int)((float)-TopY() * (float)size.y / (float)LengthAxis() + 0.5f);
 
     wxColor color{ 127, 127, 127 };
 
