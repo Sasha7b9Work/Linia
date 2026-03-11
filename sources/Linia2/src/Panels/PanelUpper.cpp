@@ -25,6 +25,8 @@ PanelUpper::PanelUpper(wxWindow* parent) :
 
     text->SetForegroundColour(wxColour(127, 127, 127));
 
+    text->SetSize(text->GetBestSize());
+
     text->Refresh();
 
 #endif
