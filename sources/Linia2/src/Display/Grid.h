@@ -5,6 +5,29 @@
 class GraphEntity;
 
 
+struct Range
+{
+    double min;
+    double max;
+
+    wxString title;
+    wxString units;
+
+    // Возвращает максимальное отклонение от нуля в минимальную или максимальную сторону
+    double MaxAbs() const;
+
+    // Разница между максимальным и минимальным значениями - амплитуда
+    double Amplitude() const;
+
+    wxString GetValuePointAxis(int) const;
+
+    wxString FullTitle() const;
+
+    void operator+=(const double &);
+    void operator*=(const double &);
+};
+
+
 class Grid
 {
 public:
@@ -40,9 +63,10 @@ public:
 private:
 
     wxPoint center;     // В этом месте относительно центра экрана находится центр сетки
-    int scale = 1;      // 2 - увеличено в два раза, 3 - увелично в три и так далее
-
+    int     scale = 1;      // 2 - увеличено в два раза, 3 - увелично в три и так далее
     wxPoint pos_mouse;
+    Range   rangeX{ -20, 20, "Uc", "V" };
+    Range   rangeY{ -5, 5, "Ic", "A" };
 
     // d - расстояние между точками
     void DrawVPointLineDown(int x, int y, int d, int height);

@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "Display/Display.h"
 #include "MainWindow.h"
-#include "Display/WindowScale.h"
 #include "MainWindow.h"
 #include "Panels/PanelTable.h"
 #include "Display/GraphEntity.h"
@@ -460,12 +459,9 @@ void Display::OnEventRightClick(wxMouseEvent &)
 
     menu.AppendSubMenu(subMenu, "Отслеживать");
 
-    itemScale = menu.AppendCheckItem(wxID_ANY, "Шкала");
-
     Bind(wxEVT_MENU, &Display::OnMenuTrackX, this, itemTrackX->GetId());
     Bind(wxEVT_MENU, &Display::OnMenuTrackY, this, itemTrackY->GetId());
     Bind(wxEVT_MENU, &Display::OnMenuTrackNone, this, itemTrackNone->GetId());
-    Bind(wxEVT_MENU, &Display::OnMenuScale, this, itemScale->GetId());
 
     // Показываем меню в позиции клика
     PopupMenu(&menu);
@@ -514,12 +510,6 @@ void Display::OnMenuTrackNone(wxCommandEvent &event)
         track_y = false;
         track_none = true;
     }
-}
-
-
-void Display::OnMenuScale(wxCommandEvent &)
-{
-    WindowScale().ShowModal();
 }
 
 

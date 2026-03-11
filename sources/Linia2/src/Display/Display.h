@@ -52,8 +52,7 @@ private:
     wxMenuItem *itemFullscreen = nullptr,
         *itemTrackX = nullptr,
         *itemTrackY = nullptr,
-        *itemTrackNone = nullptr,
-        *itemScale = nullptr;
+        *itemTrackNone = nullptr;
 
     Grid *grid = nullptr;                   // Координатная сетка
 
@@ -86,7 +85,6 @@ private:
     void OnMenuTrackX(wxCommandEvent &);
     void OnMenuTrackY(wxCommandEvent &);
     void OnMenuTrackNone(wxCommandEvent &);
-    void OnMenuScale(wxCommandEvent &);
 };
 
 

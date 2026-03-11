@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "Display/Grid.h"
 #include "Display/Display.h"
-#include "Display/WindowScale.h"
 #include "MainWindow.h"
 #include "Utils/Math.h"
 #include "Display/GraphEntity.h"
@@ -38,7 +37,7 @@ int Grid::BottomY() const
 
 int Grid::TopY() const
 {
-    return center.y - (int)(WindowScale::rangeY.max / UnitsInCellY() * SizeCell());
+    return center.y - (int)(rangeY.max / UnitsInCellY() * SizeCell());
 }
 
 
@@ -50,7 +49,7 @@ int Grid::LengthAxis() const
 
 int Grid::LeftX() const
 {
-    return center.x + (int)(WindowScale::rangeX.min / UnitsInCellX() * SizeCell());
+    return center.x + (int)(rangeX.min / UnitsInCellX() * SizeCell());
 }
 
 
@@ -210,7 +209,7 @@ void Grid::DrawLabelsOnAxis() const
     {
         if (Math::InRange(center.x, LeftX(), RightX()))
         {
-            Text(WindowScale::rangeX.FullTitle()).DrawAboutCenterDown(center.x, BottomY() + 25);
+            Text(rangeX.FullTitle()).DrawAboutCenterDown(center.x, BottomY() + 25);
         }
 
         for (int i = -100; i < 100; i++)
@@ -221,14 +220,14 @@ void Grid::DrawLabelsOnAxis() const
             {
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
-                    Text(WindowScale::rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, coord.y + d);
+                    Text(rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, coord.y + d);
                 }
             }
             else
             {
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
-                    Text(WindowScale::rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, Display::self->GetSize().y - 25, true, *wxWHITE);
+                    Text(rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, Display::self->GetSize().y - 25, true, *wxWHITE);
                 }
             }
         }
@@ -237,7 +236,7 @@ void Grid::DrawLabelsOnAxis() const
     {
         if (Math::InRange(center.y, TopY(), BottomY()))
         {
-            Text(WindowScale::rangeY.FullTitle()).DrawAboutCenterLeft(LeftX() - 30, center.y);
+            Text(rangeY.FullTitle()).DrawAboutCenterLeft(LeftX() - 30, center.y);
         }
 
         for (int i = -100; i < 100; i++)
@@ -248,14 +247,14 @@ void Grid::DrawLabelsOnAxis() const
             {
                 if (Math::InRange(coord.y, TopY(), BottomY() - 1))
                 {
-                    Text(WindowScale::rangeY.GetValuePointAxis(i)).DrawAboutCenterLeft(coord.x - d, coord.y);
+                    Text(rangeY.GetValuePointAxis(i)).DrawAboutCenterLeft(coord.x - d, coord.y);
                 }
             }
             else
             {
                 if (Math::InRange(coord.y, TopY(), BottomY() - 1))
                 {
-                    Text(WindowScale::rangeY.GetValuePointAxis(i)).DrawAboutCenterRigth(0 + d, coord.y, true, *wxWHITE);
+                    Text(rangeY.GetValuePointAxis(i)).DrawAboutCenterRigth(0 + d, coord.y, true, *wxWHITE);
                 }
             }
         }
@@ -287,13 +286,13 @@ void Grid::MoveMeasuresOn(const wxPoint &delta)
 
     double delta_x = -delta.x * units_on_pixel;
 
-    WindowScale::rangeX += delta_x;
+    rangeX += delta_x;
 
     units_on_pixel = UnitsInCellY() / SizeCell();
 
     double delta_y = delta.y * units_on_pixel;
 
-    WindowScale::rangeY += delta_y;
+    rangeY += delta_y;
 
     center += delta;
 }
@@ -303,13 +302,13 @@ void Grid::ScaleMeasuresOn(const wxPoint &, int delta)
 {
     if (delta < 0)
     {
-        WindowScale::rangeX *= 1.5;
-        WindowScale::rangeY *= 1.5;
+        rangeX *= 1.5;
+        rangeY *= 1.5;
     }
     else
     {
-        WindowScale::rangeX *= 1 / 1.5;
-        WindowScale::rangeY *= 1 / 1.5;
+        rangeX *= 1 / 1.5;
+        rangeY *= 1 / 1.5;
     }
 
     CalculateCenter();
@@ -322,11 +321,11 @@ void Grid::ScaleMeasuresOnX(int delta)
 {
     if (delta < 0)
     {
-        WindowScale::rangeX *= 1.5;
+        rangeX *= 1.5;
     }
     else
     {
-        WindowScale::rangeX *= 1 / 1.5;
+        rangeX *= 1 / 1.5;
     }
 
     CalculateCenter();
@@ -339,11 +338,11 @@ void Grid::ScaleMeasuresOnY(int delta)
 {
     if (delta < 0)
     {
-        WindowScale::rangeY *= 1.5;
+        rangeY *= 1.5;
     }
     else
     {
-        WindowScale::rangeY *= 1 / 1.5;
+        rangeY *= 1 / 1.5;
     }
 
     CalculateCenter();
@@ -459,21 +458,21 @@ void Grid::DrawHPointLineLeft2(int x, int y, int d, int width)
 
 double Grid::UnitsInCellX() const
 {
-    return WindowScale::rangeX.Amplitude() / num_cells;
+    return rangeX.Amplitude() / num_cells;
 }
 
 
 double Grid::UnitsInCellY() const
 {
-    return WindowScale::rangeY.Amplitude() / num_cells;
+    return rangeY.Amplitude() / num_cells;
 }
 
 
 wxPoint Grid::ValuesToCoord(double x, double y) const
 {
-    double cells_in_x = x / WindowScale::rangeX.Amplitude() * 10.0;
+    double cells_in_x = x / rangeX.Amplitude() * 10.0;
 
-    double cells_in_y = y / WindowScale::rangeY.Amplitude() * 10.0;
+    double cells_in_y = y / rangeY.Amplitude() * 10.0;
 
     return { (int)(center.x + cells_in_x * SizeCell() + 0.5), (int)(center.y - cells_in_y * SizeCell() + 0.5) };
 }
@@ -482,8 +481,8 @@ wxPoint Grid::ValuesToCoord(double x, double y) const
 wxPoint2DDouble Grid::CoordToValues(const wxPoint &coord) const
 {
     return {
-        WindowScale::rangeX.Amplitude() * (coord.x - center.x) / (10.0 * SizeCell()),
-        WindowScale::rangeY.Amplitude() * (coord.y - center.y) / (10.0 * SizeCell())
+        rangeX.Amplitude() * (coord.x - center.x) / (10.0 * SizeCell()),
+        rangeY.Amplitude() * (coord.y - center.y) / (10.0 * SizeCell())
     };
 }
 
@@ -532,4 +531,97 @@ void Grid::DrawMouseMarkers() const
 void Grid::OnEventCnangeMeasuredElement()
 {
 
+}
+
+
+double Range::MaxAbs() const
+{
+    double _min = std::fabs(min);
+    double _max = std::fabs(max);
+
+    return (_min > _max) ? _min : _max;
+}
+
+
+double Range::Amplitude() const
+{
+    return max - min;
+}
+
+
+void Range::operator+=(const double &delta)
+{
+    min += delta;
+    max += delta;
+}
+
+
+void Range::operator*=(const double &delta)
+{
+    double center = (max + min) / 2.0;
+
+    double amplitude = Amplitude();
+
+    amplitude *= delta;
+
+    min = center - amplitude / 2.0;
+    max = center + amplitude / 2.0;
+}
+
+
+wxString Range::FullTitle() const
+{
+    wxString prefix;
+
+    if (MaxAbs() >= 1e3)
+    {
+        prefix = "k";
+    }
+    else if (MaxAbs() >= 1.0)
+    {
+
+    }
+    else if (MaxAbs() >= 1e-3)
+    {
+        prefix = "m";
+    }
+    else if (MaxAbs() >= 1e-6)
+    {
+        prefix = "u";
+    }
+    else if (MaxAbs() >= 1e-9)
+    {
+        prefix = "n";
+    }
+
+    return title + "," + prefix + units;
+}
+
+
+wxString Range::GetValuePointAxis(int num) const
+{
+    double step = Amplitude() / 10.0;   // По горизонтали всегда 10 клеток
+
+    if (MaxAbs() >= 1e3)
+    {
+        step /= 1e3;
+    }
+    else if (MaxAbs() >= 1)
+    {
+
+    }
+    else if (MaxAbs() >= 1e-3)
+    {
+        step *= 1e3;
+    }
+    else if (MaxAbs() >= 1e-6)
+    {
+        step *= 1e6;
+    }
+    else
+    {
+        step *= 1e9;
+    }
+
+    return wxString::Format("%.1f", step * num);
 }
