@@ -78,8 +78,8 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
         if (Math::InRange(center.y, y_top, y_bottom))
         {
-            DrawHPointLineRight2(center.x, center.y, d, length - (center.x - x_left));
-            DrawHPointLineLeft2(center.x, center.y, d, length - (x_right - center.x));
+            DrawHPointLineRight2(center.x, center.y, size.x, d);
+            DrawHPointLineLeft2(center.x, center.y, 0, d);
         }
 
         Line(x_left, BottomY(), RightX(), BottomY()).Draw();
@@ -109,61 +109,61 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
     }
 
     // Рисуем вертикальные линии слева от нуля
-//    for (int i = 1; i < 100; i++)
-//    {
-//        int x = center.x - i * size_cell;
-//
-//        if (x > x_left)
-//        {
-//            if (x < x_right)
-//            {
-//                DrawVPointLineDown(x, center.y, d, length - (center.y - y_top));
-//                DrawVPointLineUp(x, center.y, d, length - (y_bottom - center.y));
-//            }
-//        }
-//        else
-//        {
-//            break;
-//        }
-//    }
+    for (int i = 1; i < 100; i++)
+    {
+        int x = center.x - i * size_cell;
+
+        if (x > x_left)
+        {
+            if (x < x_right)
+            {
+                DrawVPointLineDown(x, center.y, size.y, d);
+                DrawVPointLineUp(x, center.y, 0, d);
+            }
+        }
+        else
+        {
+            break;
+        }
+    }
 
     // Рисуем горизонтальные линии сверху от нуля
-//    for (int i = 1; i < 100; i++)
-//    {
-//        int y = center.y - i * size_cell;
-//
-//        if (y > y_top)
-//        {
-//            if (y < y_bottom)
-//            {
-//                DrawHPointLineRight(center.x, y, d, length - (center.x - x_left));
-//                DrawHPointLineLeft(center.x, y, d, length - (x_right - center.x));
-//            }
-//        }
-//        else
-//        {
-//            break;
-//        }
-//    }
+    for (int i = 1; i < 100; i++)
+    {
+        int y = center.y - i * size_cell;
+
+        if (y > y_top)
+        {
+            if (y < y_bottom)
+            {
+                DrawHPointLineRight(center.x, y, size.x, d);
+                DrawHPointLineLeft(center.x, y, 0, d);
+            }
+        }
+        else
+        {
+            break;
+        }
+    }
 
     // Рисуем горизонтальные линии снизу от нуля
-//    for (int i = 1; i < 100; i++)
-//    {
-//        int y = center.y + i * size_cell;
-//
-//        if (y < y_bottom)
-//        {
-//            if (y > y_top)
-//            {
-//                DrawHPointLineRight(center.x, y, d, length - (center.x - x_left));
-//                DrawHPointLineLeft(center.x, y, d, length - (x_right - center.x));
-//            }
-//        }
-//        else
-//        {
-//            break;
-//        }
-//    }
+    for (int i = 1; i < 100; i++)
+    {
+        int y = center.y + i * size_cell;
+
+        if (y < y_bottom)
+        {
+            if (y > y_top)
+            {
+                DrawHPointLineRight(center.x, y, size.x, d);
+                DrawHPointLineLeft(center.x, y, 0, d);
+            }
+        }
+        else
+        {
+            break;
+        }
+    }
 
     d = size_cell / 5;
 
@@ -172,8 +172,8 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         DrawVPointLineUp(x_left + i, center.y, 0, d);
         DrawVPointLineDown(x_left + i, center.y, size.y, d);
 
-        DrawHPointLineRight(center.x, BottomY() - i, d, length - (center.x - LeftX()));
-        DrawHPointLineLeft(center.x, BottomY() - i, d, length - (RightX() - center.x));
+        DrawHPointLineRight(center.x, BottomY() - i, size.x, d);
+        DrawHPointLineLeft(center.x, BottomY() - i, 0, d);
     }
 
     for (auto *entity : entities)
@@ -404,18 +404,18 @@ void Grid::DrawVPointLineUp(int x, int y0, int y_hi, int d)
 }
 
 
-void Grid::DrawHPointLineRight(int x, int y, int d, int width)
+void Grid::DrawHPointLineRight(int x, int y, int x_right, int d)
 {
-    for (int i = x; i < x + width; i += d)
+    for (int i = x; i < x_right; i += d)
     {
         Point().Draw(i, y);
     }
 }
 
 
-void Grid::DrawHPointLineLeft(int x, int y, int d, int width)
+void Grid::DrawHPointLineLeft(int x, int y, int x_left, int d)
 {
-    for (int i = x; i > x - width; i -= d)
+    for (int i = x; i > x_left; i -= d)
     {
         Point().Draw(i, y);
     }
@@ -444,9 +444,9 @@ void Grid::DrawVPointLineUp2(int x, int y0, int y_hi, int d)
 }
 
 
-void Grid::DrawHPointLineRight2(int x, int y, int d, int width)
+void Grid::DrawHPointLineRight2(int x, int y, int x_right, int d)
 {
-    for (int i = x; i < x + width; i += d)
+    for (int i = x; i < x_right; i += d)
     {
         Point().Draw(i, y);
         Point().Draw(i + 1, y);
@@ -455,9 +455,9 @@ void Grid::DrawHPointLineRight2(int x, int y, int d, int width)
 }
 
 
-void Grid::DrawHPointLineLeft2(int x, int y, int d, int width)
+void Grid::DrawHPointLineLeft2(int x, int y, int x_left, int d)
 {
-    for (int i = x; i > x - width; i -= d)
+    for (int i = x; i > x_left; i -= d)
     {
         Point().Draw(i, y);
         Point().Draw(i - 1, y);

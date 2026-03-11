@@ -65,13 +65,13 @@ private:
     // d - расстояние между точками
     void DrawVPointLineDown(int x, int y0, int y_low, int d);
     void DrawVPointLineUp(int x, int y0, int y_hi, int d);
-    void DrawHPointLineRight(int x, int y, int d, int width);
-    void DrawHPointLineLeft(int x, int y, int d, int width);
+    void DrawHPointLineRight(int x, int y, int x_right, int d);
+    void DrawHPointLineLeft(int x, int y, int x_left, int d);
 
     void DrawVPointLineDown2(int x, int y0, int y_low, int d);
     void DrawVPointLineUp2(int x, int y0, int y_hi, int d);
-    void DrawHPointLineRight2(int x, int y, int d, int width);
-    void DrawHPointLineLeft2(int x, int y, int d, int width);
+    void DrawHPointLineRight2(int x, int y, int x_right, int d);
+    void DrawHPointLineLeft2(int x, int y, int x_left, int d);
 
     double UnitsInCellX() const;
     double UnitsInCellY() const;
