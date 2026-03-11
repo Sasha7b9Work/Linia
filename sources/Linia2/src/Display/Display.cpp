@@ -86,14 +86,16 @@ void Display::Init()
 
     int w = btnHelp->GetSize().x;
     int d = 10;
-    int x0 = d;
-    int y0 = Panel::GetSize().y - d - w;
+    int x0 = Panel::GetSize().x - d - btnHelp->GetSize().x;
+    int y0 = d;
 
     btnHelp->SetPosition({ x0, y0 });
-    btnLessX->SetPosition({ x0 + w + d, y0 });
-    btnMoreX->SetPosition({ x0 + 2 * (w + d), y0 });
-    btnLessY->SetPosition({ x0, y0 - w - d });
-    btnMoreY->SetPosition({ x0, y0 - 2 * (w + d) });
+
+    btnLessX->SetPosition({ x0 - 2 * (w + d), y0 });
+    btnMoreX->SetPosition({ x0 - 1 * (w + d), y0 });
+
+    btnLessY->SetPosition({ x0, y0 + 2 * (w + d) });
+    btnMoreY->SetPosition({ x0, y0 + w + d });
 
     panel_errors->ReInit();
 

@@ -527,3 +527,8 @@ void Grid::DrawMouseMarkers() const
     }
 }
 
+
+void Grid::OnEventCnangeMeasuredElement()
+{
+
+}
