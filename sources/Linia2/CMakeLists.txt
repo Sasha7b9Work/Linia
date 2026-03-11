@@ -92,6 +92,7 @@ file(GLOB PANELS_PANELDEBUG_OLD         src/Panels/PanelDebug/Old/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB SOFTTESTS                     src/SoftTests/*.*)
 file(GLOB STORAGE                       src/Storage/*.*)
+file(GLOB SYSTEM                        src/System/*.*)
 file(GLOB UTILS                         src/Utils/*.*)
 file(GLOB WINDOWS                       src/Windows/*.*)
 
@@ -136,6 +137,7 @@ source_group(Panels/PanelDebug/Old                FILES ${PANELS_PANELDEBUG_OLD}
 source_group(Settings                             FILES ${SETTINGS})
 source_group(SoftTests                            FILES ${SOFTTESTS})
 source_group(Storage                              FILES ${STORAGE})
+source_group(System                               FILES ${SYSTEM})
 source_group(Utils                                FILES ${UTILS})
 source_group(Windows                              FILES ${WINDOWS})
 source_group(Plugs/Arm64                          FILES ${PLUGS_ARM64})
@@ -170,6 +172,7 @@ add_executable(${PROJECT_NAME}
     ${SETTINGS}
     ${SOFTTESTS}
     ${STORAGE}
+    ${SYSTEM}
     ${UTILS}
     ${WINDOWS}
     ${PLUGS_ARM64}

@@ -3,6 +3,7 @@
 #include "Controls/Dialog.h"
 
 
+// Открывается по "ПКМ -> Шкала" на дисплее
 class WindowScale : public Dialog
 {
 public:
