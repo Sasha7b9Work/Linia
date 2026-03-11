@@ -35,9 +35,11 @@ public:
 
     void CalculateCenter();
 
+    void Reset();
+
 private:
 
-    wxPoint center;
+    wxPoint center;     // В этом месте относительно центра экрана находится центр сетки
     int scale = 1;      // 2 - увеличено в два раза, 3 - увелично в три и так далее
 
     wxPoint pos_mouse;

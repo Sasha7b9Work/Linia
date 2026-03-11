@@ -474,7 +474,7 @@ void Display::OnEventRightClick(wxMouseEvent &)
 
 void Display::OnMenuReset(wxCommandEvent &)
 {
-
+    grid->Reset();
 }
 
 

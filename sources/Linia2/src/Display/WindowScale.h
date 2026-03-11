@@ -15,7 +15,7 @@ public:
 
     struct Range
     {
-        double min;
+        double min; 
         double max;
 
         wxString title;

@@ -10,22 +10,23 @@
 
 Grid::Grid()
 {
-    CalculateCenter();
+    Reset();
 }
 
 
 void Grid::CalculateCenter()
 {
-    center.x = Display::self->GetSize().x / 2 + SizeCell() * 5                      // Перемещаемся к правой границе сетки
-        - (int)(WindowScale::rangeX.max / UnitsInCellX() * (double)SizeCell());     // И отсчитываем назад - влево
+    wxSize display_size = Display::self->GetSize();
 
-    center.y = Display::self->GetSize().y / 2 - SizeCell() * 5
-        +(int)(WindowScale::rangeY.max / UnitsInCellY() * (double)SizeCell());
+    center = { display_size.x / 2, display_size.y / 2 };
+}
 
-    if (ModeMainWindow::Current() == ModeMainWindow::Standard)
-    {
-        center.y -= 20;
-    }
+
+void Grid::Reset()
+{
+    scale = 1;
+
+    CalculateCenter();
 }
 
 
