@@ -37,19 +37,19 @@ int Grid::BottomY() const
 
 int Grid::TopY() const
 {
-    return center.y - (int)(rangeY.max / UnitsInCellY() * SizeCell());
+    return center.y - (int)(rangeY.max / UnitsInCellY() * size_cell);
 }
 
 
 int Grid::LengthAxis() const
 {
-    return SizeCell() * num_cells;
+    return size_cell * NumCells();
 }
 
 
 int Grid::LeftX() const
 {
-    return center.x - (int)(rangeX.max / UnitsInCellX() * SizeCell());
+    return center.x - (int)(rangeX.max / UnitsInCellX() * size_cell);
 }
 
 
@@ -61,7 +61,6 @@ int Grid::RightX() const
 
 void Grid::Draw(const std::vector<GraphEntity *> &entities)
 {
-    const int size_cell = SizeCell();
     const int length = LengthAxis();
 
     const int x_left = LeftX();
@@ -69,7 +68,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
     const int y_top = TopY();
     const int y_bottom = BottomY();
 
-    int d = 5 * scale;
+    int d = 5;
 
     {
         // Горизонтальные линии
@@ -287,13 +286,13 @@ void Grid::DrawLabelsOnAxis() const
 
 wxPoint Grid::GetCoordPointAxisX(int num) const
 {
-    return { center.x + SizeCell() * num, BottomY() };
+    return { center.x + size_cell * num, BottomY() };
 }
 
 
 wxPoint Grid::GetCoordPointAxisY(int num) const
 {
-    return { LeftX(), center.y + SizeCell() * num };
+    return { LeftX(), center.y + size_cell * num };
 }
 
 
@@ -331,12 +330,6 @@ void Grid::MoveGridOn(const wxPoint &delta)
             center.y = size.y - 8 - LengthAxis() / 2;
         }
     }
-}
-
-
-int Grid::SizeCell() const
-{
-    return 60 * scale;
 }
 
 
@@ -480,31 +473,37 @@ void Grid::DrawHPointLineLeft2(int x, int y, int d, int width)
 
 double Grid::UnitsInCellX() const
 {
-    return rangeX.Amplitude() / num_cells;
+    return rangeX.Amplitude() / NumCells();
 }
 
 
 double Grid::UnitsInCellY() const
 {
-    return rangeY.Amplitude() / num_cells;
+    return rangeY.Amplitude() / NumCells();
+}
+
+
+int Grid::NumCells() const
+{
+    return 10 * scale;
 }
 
 
 wxPoint Grid::ValuesToCoord(double x, double y) const
 {
-    double cells_in_x = x / rangeX.Amplitude() * 10.0;
+    double cells_in_x = x / rangeX.Amplitude() * NumCells();
 
-    double cells_in_y = y / rangeY.Amplitude() * 10.0;
+    double cells_in_y = y / rangeY.Amplitude() * NumCells();
 
-    return { (int)(center.x + cells_in_x * SizeCell() + 0.5), (int)(center.y - cells_in_y * SizeCell() + 0.5) };
+    return { (int)(center.x + cells_in_x * size_cell + 0.5), (int)(center.y - cells_in_y * size_cell + 0.5) };
 }
 
 
 wxPoint2DDouble Grid::CoordToValues(const wxPoint &coord) const
 {
     return {
-        rangeX.Amplitude() * (coord.x - center.x) / (10.0 * SizeCell()),
-        rangeY.Amplitude() * (coord.y - center.y) / (10.0 * SizeCell())
+        rangeX.Amplitude() * (coord.x - center.x) / (NumCells() * size_cell),
+        rangeY.Amplitude() * (coord.y - center.y) / (NumCells() * size_cell)
     };
 }
 

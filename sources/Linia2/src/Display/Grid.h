@@ -59,8 +59,7 @@ private:
     wxPoint pos_mouse;
     Range   rangeX{ 20, "Uc", "V" };
     Range   rangeY{ 5, "Ic", "A" };
-    // Количество клеток в осях X и Y
-    int num_cells = 10;
+    const int size_cell = 60;       // Столько клетка всегда занимает на экране
 
     // d - расстояние между точками
     void DrawVPointLineDown(int x, int y, int d, int height);
@@ -75,9 +74,6 @@ private:
 
     double UnitsInCellX() const;
     double UnitsInCellY() const;
-
-    // Размер клетки в пикселях
-    int SizeCell() const;
 
     // Координаты точки оси для подписи значения
     wxPoint GetCoordPointAxisX(int) const;
@@ -94,4 +90,7 @@ private:
     void DrawLabelsOnAxis() const;
 
     void DrawMouseMarkers() const;
+
+    // Количество клеток по осям X и Y
+    int NumCells() const;
 };
