@@ -113,17 +113,10 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
     {
         int x = center.x - i * size_cell;
 
-        if (x > x_left)
+        if (x > 0 && x < size.x)
         {
-            if (x < x_right)
-            {
-                DrawVPointLineDown(x, center.y, size.y, d);
-                DrawVPointLineUp(x, center.y, 0, d);
-            }
-        }
-        else
-        {
-            break;
+            DrawVPointLineDown(x, center.y, size.y, d);
+            DrawVPointLineUp(x, center.y, 0, d);
         }
     }
 
@@ -132,17 +125,10 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
     {
         int y = center.y - i * size_cell;
 
-        if (y > y_top)
+        if (y > 0 && y < size.y)
         {
-            if (y < y_bottom)
-            {
-                DrawHPointLineRight(center.x, y, size.x, d);
-                DrawHPointLineLeft(center.x, y, 0, d);
-            }
-        }
-        else
-        {
-            break;
+            DrawHPointLineRight(center.x, y, size.x, d);
+            DrawHPointLineLeft(center.x, y, 0, d);
         }
     }
 
@@ -151,17 +137,10 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
     {
         int y = center.y + i * size_cell;
 
-        if (y < y_bottom)
+        if (y > 0 && y < size.y)
         {
-            if (y > y_top)
-            {
-                DrawHPointLineRight(center.x, y, size.x, d);
-                DrawHPointLineLeft(center.x, y, 0, d);
-            }
-        }
-        else
-        {
-            break;
+            DrawHPointLineRight(center.x, y, size.x, d);
+            DrawHPointLineLeft(center.x, y, 0, d);
         }
     }
 
