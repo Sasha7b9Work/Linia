@@ -15,7 +15,8 @@ struct Range
     // Разница между максимальным и минимальным значениями - амплитуда
     double Amplitude() const;
 
-    wxString GetValuePointAxis(int) const;
+    // cells_in_axis - количество клеток по любой оси. Оно всегда одинаковое
+    wxString GetValuePointAxis(int, int cells_in_axis) const;
 
     wxString FullTitle() const;
 

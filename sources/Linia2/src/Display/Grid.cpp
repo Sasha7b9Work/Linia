@@ -225,7 +225,7 @@ void Grid::DrawLabelsOnAxis() const
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
                     last_pos = { coord.x, coord.y + d };
-                    Text(rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(last_pos.x, last_pos.y, true, background);
+                    Text(rangeX.GetValuePointAxis(i, NumCells())).DrawAboutCenterDown(last_pos.x, last_pos.y, true, background);
                 }
             }
             else
@@ -233,7 +233,7 @@ void Grid::DrawLabelsOnAxis() const
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
                     last_pos = { coord.x, size.y - 25 };
-                    Text(rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(last_pos.x, last_pos.y, true, background);
+                    Text(rangeX.GetValuePointAxis(i, NumCells())).DrawAboutCenterDown(last_pos.x, last_pos.y, true, background);
                 }
             }
         }
@@ -256,7 +256,7 @@ void Grid::DrawLabelsOnAxis() const
                 if (Math::InRange(coord.y, TopY(), BottomY() - 1))
                 {
                     last_pos = { coord.x - d, coord.y };
-                    Text(rangeY.GetValuePointAxis(i)).DrawAboutCenterLeft(last_pos.x, last_pos.y, true, background);
+                    Text(rangeY.GetValuePointAxis(i, NumCells())).DrawAboutCenterLeft(last_pos.x, last_pos.y, true, background);
                 }
             }
             else
@@ -264,7 +264,7 @@ void Grid::DrawLabelsOnAxis() const
                 if (Math::InRange(coord.y, TopY(), BottomY() - 1))
                 {
                     last_pos = { d, coord.y };
-                    Text(rangeY.GetValuePointAxis(i)).DrawAboutCenterRigth(last_pos.x, last_pos.y, true, background);
+                    Text(rangeY.GetValuePointAxis(i, NumCells())).DrawAboutCenterRigth(last_pos.x, last_pos.y, true, background);
                 }
             }
         }
@@ -608,9 +608,9 @@ wxString Range::FullTitle() const
 }
 
 
-wxString Range::GetValuePointAxis(int num) const
+wxString Range::GetValuePointAxis(int num, int cells_in_axis) const
 {
-    double step = Amplitude() / 10.0;   // По горизонтали всегда 10 клеток
+    double step = Amplitude() / cells_in_axis;
 
     if (max >= 1e3)
     {
