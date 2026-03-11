@@ -100,7 +100,7 @@ void Display::Init()
 
     Panel::Layout();
 
-    _Draw();
+    Draw();
 }
 
 
@@ -143,7 +143,7 @@ void Display::OnEventMouseMove(wxMouseEvent &event)
         grid->OnMouseMove(position);
     }
 
-    _Draw();
+    Draw();
 }
 
 
@@ -151,7 +151,7 @@ void Display::OnEventMouseWheel(wxMouseEvent &event)
 {
     grid->ScaleGridOn(event.GetPosition(), event.GetWheelRotation());
 
-    _Draw();
+    Draw();
 }
 
 
@@ -184,13 +184,13 @@ void Display::OnEventButton(wxCommandEvent &event)
 
 
 
-void Display::_Draw()
+void Display::Draw()
 {
     BeginPaint();
 
     FillRectangle(0, 0, GetSize().x, GetSize().y, *wxWHITE);
 
-    grid->_Draw(entities);
+    grid->Draw(entities);
 
     EndPaint();
 

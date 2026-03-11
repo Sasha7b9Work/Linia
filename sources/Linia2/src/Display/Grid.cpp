@@ -59,7 +59,7 @@ int Grid::RightX() const
 }
 
 
-void Grid::_Draw(const std::vector<GraphEntity *> &entities)
+void Grid::Draw(const std::vector<GraphEntity *> &entities)
 {
     const int size_cell = SizeCell();
     const int length = LengthAxis();
@@ -299,6 +299,11 @@ wxPoint Grid::GetCoordPointAxisY(int num) const
 
 void Grid::MoveGridOn(const wxPoint &delta)
 {
+    if (scale == 1)
+    {
+        return;
+    }
+
     center += delta;
 
     wxSize size = Display::self->GetSize();
@@ -351,6 +356,11 @@ void Grid::ScaleGridOn(const wxPoint &pos, int delta)
 
         center -= delta_center / 2;
     }
+
+    if (scale == 1)
+    {
+        ResetCenter();
+    }
 }
 
 
@@ -367,7 +377,7 @@ void Grid::ScaleGridOnX(int delta)
 
     ResetCenter();
 
-    Display::self->_Draw();
+    Display::self->Draw();
 }
 
 
@@ -384,7 +394,7 @@ void Grid::ScaleGridOnY(int delta)
 
     ResetCenter();
 
-    Display::self->_Draw();
+    Display::self->Draw();
 }
 
 

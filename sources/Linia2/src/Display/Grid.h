@@ -30,7 +30,7 @@ public:
 
     Grid();
 
-    void _Draw(const std::vector<GraphEntity *> &);
+    void Draw(const std::vector<GraphEntity *> &);
 
     // Переместить сетку целиком
     void MoveGridOn(const wxPoint &);
