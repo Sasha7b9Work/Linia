@@ -213,7 +213,7 @@ void Grid::DrawLabelsOnAxis() const
     {
         // Подписываем горизонтульную ось
 
-        int last_x = 0;     // Здесь отрисовано последнее значение
+        wxPoint last_pos{ 0, 0 };   // Здесь отрисовано последнее значение
 
         // Значения
         for (int i = -100; i < 100; i++)
@@ -225,27 +225,42 @@ void Grid::DrawLabelsOnAxis() const
             {
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
-                    Text(rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, coord.y + d, true, background);
+                    last_pos = { coord.x, coord.y + d };
+                    Text(rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(last_pos.x, last_pos.y, true, background);
                 }
             }
             else
             {
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
-                    Text(rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, size.y - 25, true, background);
-                    last_x = coord.x;
+                    last_pos = { coord.x, size.y - 25 };
+                    Text(rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(last_pos.x, last_pos.y, true, background);
                 }
             }
         }
 
         // Единицы зимерения
-        if (BottomY() + 20 < size.y)
+        if (BottomY() + 20 < size.y && last_pos.x < size.x)
         {
-            Text(rangeX.FullTitle()).DrawAboutCenterDown(center.x, BottomY() + 25, true, background);
+            if (size.x < 0)
+            {
+                Text(rangeX.FullTitle()).DrawAboutCenterDown(last_pos.x < size.x ? last_pos.x : size.x - 20, last_pos.y, true, background);
+            }
+            else
+            {
+                Text(rangeX.FullTitle()).DrawAboutCenterDown(center.x, BottomY() + 25, true, background);
+            }
         }
         else
         {
-            Text(rangeX.FullTitle()).DrawAboutCenterDown(last_x < size.x ? last_x : size.x - 20, size.y - 25, true, background);
+            if (BottomY() + 20 < size.y)
+            {
+                Text(rangeX.FullTitle()).DrawAboutCenterDown(center.x, BottomY() + 25, true, background);
+            }
+            else
+            {
+                Text(rangeX.FullTitle()).DrawAboutCenterDown(last_pos.x < size.x ? last_pos.x : size.x - 20, last_pos.y, true, background);
+            }
         }
     }
 
