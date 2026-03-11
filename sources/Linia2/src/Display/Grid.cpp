@@ -59,7 +59,7 @@ int Grid::RightX() const
 }
 
 
-void Grid::Draw(const std::vector<GraphEntity *> &entities)
+void Grid::_Draw(const std::vector<GraphEntity *> &entities)
 {
     const int size_cell = SizeCell();
     const int length = LengthAxis();
@@ -209,8 +209,11 @@ void Grid::DrawLabelsOnAxis() const
     int d = 2;
 
     {
+        // Подписываем горизонтульную ось
+
         if (Math::InRange(center.x, LeftX(), RightX()))
         {
+            // Единицы измерения
             Text(rangeX.FullTitle()).DrawAboutCenterDown(center.x, BottomY() + 25, true, background);
         }
 
@@ -218,7 +221,8 @@ void Grid::DrawLabelsOnAxis() const
         {
             wxPoint coord = GetCoordPointAxisX(i);
 
-            if (BottomY() < Display::self->GetSize().y)
+            // Если влазит под сеткой
+            if (BottomY() + 20 < Display::self->GetSize().y)
             {
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
@@ -236,8 +240,11 @@ void Grid::DrawLabelsOnAxis() const
     }
 
     {
+        // Подписываем вертикальную ось
+
         if (Math::InRange(center.y, TopY(), BottomY()))
         {
+            // Единицы измерения
             Text(rangeY.FullTitle()).DrawAboutCenterLeft(LeftX() - 30, center.y, true, background);
         }
 
@@ -245,7 +252,8 @@ void Grid::DrawLabelsOnAxis() const
         {
             wxPoint coord = GetCoordPointAxisY(-i);
 
-            if (LeftX() > 0)
+            // Если влазит слева от сетки
+            if (LeftX() - 20 > 0)
             {
                 if (Math::InRange(coord.y, TopY(), BottomY() - 1))
                 {
@@ -279,6 +287,32 @@ wxPoint Grid::GetCoordPointAxisY(int num) const
 void Grid::MoveGridOn(const wxPoint &delta)
 {
     center += delta;
+
+    wxSize size = Display::self->GetSize();
+
+    if (LengthAxis() < size.x)
+    {
+        if (LeftX() < 5)
+        {
+            center.x = 5 + LengthAxis() / 2;
+        }
+        if (RightX() > size.x - 8)
+        {
+            center.x = size.x - 8 - LengthAxis() / 2;
+        }
+    }
+
+    if (LengthAxis() < size.y)
+    {
+        if (TopY() < 5)
+        {
+            center.y = 5 + LengthAxis() / 2;
+        }
+        if (BottomY() > size.y - 8)
+        {
+            center.y = size.y - 8 - LengthAxis() / 2;
+        }
+    }
 }
 
 
@@ -320,7 +354,7 @@ void Grid::ScaleGridOnX(int delta)
 
     ResetCenter();
 
-    Display::self->Draw();
+    Display::self->_Draw();
 }
 
 
@@ -337,7 +371,7 @@ void Grid::ScaleGridOnY(int delta)
 
     ResetCenter();
 
-    Display::self->Draw();
+    Display::self->_Draw();
 }
 
 

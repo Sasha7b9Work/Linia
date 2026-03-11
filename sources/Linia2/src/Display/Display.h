@@ -22,7 +22,7 @@ public:
 
     static Display *self;
 
-    void Draw();
+    void _Draw();
 
     void SetColor(const wxColor &);
     void LoadColor();
