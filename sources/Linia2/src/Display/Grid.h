@@ -21,6 +21,8 @@ public:
 
     void OnMouseMove(const wxPoint &);
 
+    void OnEventCnangeMeasuredElement();
+
     void ScaleGridOn(const wxPoint &, int);
     void ScaleMeasuresOn(const wxPoint &, int);
     void ScaleMeasuresOnX(int);

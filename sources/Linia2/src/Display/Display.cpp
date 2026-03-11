@@ -534,3 +534,9 @@ void Display::LoadColor()
     Display::self->gc->SetPen(color);
     Display::self->gc->SetBrush(color);
 }
+
+
+void Display::OnEventCnangeMeasuredElement()
+{
+    grid->OnEventCnangeMeasuredElement();
+}

@@ -12,6 +12,7 @@
 #include "Utils/Configurator.h"
 #include "Panels/PanelConfig/PanelChannelC.h"
 #include "Panels/PanelConfig/PanelChannelBS.h"
+#include "System/Events.h"
 
 
 PanelScheme *PanelScheme::self = nullptr;
@@ -218,6 +219,8 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
                 UpdateSuffixGenerator(PanelChannelS::self->comboTypeGenerator, Category::IsGDS() ? 'b' : 's');
             }
         }
+
+        Events::ChangingTheConnectionOfTheMeasuredElement();
     }
 }
 

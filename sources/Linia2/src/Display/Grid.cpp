@@ -526,3 +526,4 @@ void Grid::DrawMouseMarkers() const
         Line(pos_mouse.x, TopY(), pos_mouse.x, BottomY()).Draw(*wxBLACK);
     }
 }
+

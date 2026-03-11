@@ -39,6 +39,8 @@ public:
 
     void FillRectangle(int x, int y, int width, int height, const wxColor &);
 
+    void OnEventCnangeMeasuredElement();
+
 private:
 
     wxButton *btnHelp = nullptr,
