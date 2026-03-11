@@ -208,21 +208,20 @@ void Grid::DrawLabelsOnAxis() const
 
     int d = 2;
 
+    wxSize size = Display::self->GetSize();
+
     {
         // Подписываем горизонтульную ось
 
-        if (Math::InRange(center.x, LeftX(), RightX()))
-        {
-            // Единицы измерения
-            Text(rangeX.FullTitle()).DrawAboutCenterDown(center.x, BottomY() + 25, true, background);
-        }
+        int last_x = 0;     // Здесь отрисовано последнее значение
 
+        // Значения
         for (int i = -100; i < 100; i++)
         {
             wxPoint coord = GetCoordPointAxisX(i);
 
             // Если влазит под сеткой
-            if (BottomY() + 20 < Display::self->GetSize().y)
+            if (BottomY() + 20 < size.y)
             {
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
@@ -233,9 +232,20 @@ void Grid::DrawLabelsOnAxis() const
             {
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
-                    Text(rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, Display::self->GetSize().y - 25, true, background);
+                    Text(rangeX.GetValuePointAxis(i)).DrawAboutCenterDown(coord.x, size.y - 25, true, background);
+                    last_x = coord.x;
                 }
             }
+        }
+
+        // Единицы зимерения
+        if (BottomY() + 20 < size.y)
+        {
+            Text(rangeX.FullTitle()).DrawAboutCenterDown(center.x, BottomY() + 25, true, background);
+        }
+        else
+        {
+            Text(rangeX.FullTitle()).DrawAboutCenterDown(last_x < size.x ? last_x : size.x - 20, size.y - 25, true, background);
         }
     }
 
