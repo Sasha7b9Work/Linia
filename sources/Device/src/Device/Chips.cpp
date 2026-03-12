@@ -60,32 +60,42 @@ namespace Commutator
 
 ChipDAC ChipDAC::dacs[10] =
 {   //                               cs                     clk        dat
-    { ChipDAC::CHAN_C_PCM,     12, nullptr,              nullptr,    nullptr    },  // 0 Канал C. Управляется с PCM
-    { ChipDAC::CHAN_C_RANGE,   12, &ChanC::pinRAZV_ENDU, &pCLK2_DAC, &pDAT2_DAC },  // 1 Канал C. Диапазон
-    { ChipDAC::CHAN_B_1,       12, &ChanB::pinEND1B,     &pCLK1_DAC, &pDAT1_DAC },  // 2 Канал B
-    { ChipDAC::CHAN_B_2,       12, &ChanB::pinEND2B,     &pCLK1_DAC, &pDAT1_DAC },  // 3 Канал B
-    { ChipDAC::CHAN_S_1,       12, &ChanS::pinEND1P,     &pCLK1_DAC, &pDAT1_DAC },  // 4 Канал S
-    { ChipDAC::CHAN_S_2,       12, &ChanS::pinEND2P,     &pCLK1_DAC, &pDAT1_DAC },  // 5 Канал S
-    { ChipDAC::SOURCE_50V_PCM, 12, nullptr,              nullptr,    nullptr    },  // 6 Источник 50 В. Управляется с PCM
-    { ChipDAC::Count,           0, nullptr,              nullptr,    nullptr    },
-    { ChipDAC::Count,           0, nullptr,              nullptr,    nullptr    },
-    { ChipDAC::Count,           0, nullptr,              nullptr,    nullptr    }
+    { ChipDAC::CHAN_C_PCM,     12, nullptr,              nullptr,    nullptr,    false },  // 0 Канал C. Управляется с PCM
+    { ChipDAC::CHAN_C_RANGE,   12, &ChanC::pinRAZV_ENDU, &pCLK2_DAC, &pDAT2_DAC, false },  // 1 Канал C. Диапазон
+    { ChipDAC::CHAN_B_1,       14, &ChanB::pinEND1B,     &pCLK1_DAC, &pDAT1_DAC, true  },  // 2 Канал B
+    { ChipDAC::CHAN_B_2,        8, &ChanB::pinEND2B,     &pCLK1_DAC, &pDAT1_DAC, true  },  // 3 Канал B
+    { ChipDAC::CHAN_S_1,       12, &ChanS::pinEND1P,     &pCLK1_DAC, &pDAT1_DAC, false },  // 4 Канал S
+    { ChipDAC::CHAN_S_2,       12, &ChanS::pinEND2P,     &pCLK1_DAC, &pDAT1_DAC, false },  // 5 Канал S
+    { ChipDAC::SOURCE_50V_PCM, 12, nullptr,              nullptr,    nullptr,    false },  // 6 Источник 50 В. Управляется с PCM
+    { ChipDAC::Count,           0, nullptr,              nullptr,    nullptr,    false },
+    { ChipDAC::Count,           0, nullptr,              nullptr,    nullptr,    false },
+    { ChipDAC::Count,           0, nullptr,              nullptr,    nullptr,    false }
 };
 
 
 ChipREG ChipREG::regs[10] =
 {
-    { ChipREG::SOURCE_3kV, 24, &Source3kV::pinENRGV,    &pCLK2_DAC, &pDAT2_DAC },  // 0 Источник 3кВ
-    { ChipREG::COMMUTATOR, 16, &Commutator::pinENRGK,   &pCLK2_DAC, &pDAT2_DAC },  // 1 Коммутатор
-    { ChipREG::CHAN_C,      8, &ChanC::pinRAZV_ENRGF,   &pCLK2_DAC, &pDAT2_DAC },  // 2 Формирователь развёртки
-    { ChipREG::CHAN_B,     32, &ChanB::pinENRGB,        &pCLK1_DAC, &pDAT1_DAC },  // 3 Канал B
-    { ChipREG::CHAN_S,     32, &ChanS::pinENRGP,        &pCLK1_DAC, &pDAT1_DAC },  // 4 Канал S
-    { ChipREG::MEAS_I,     16, &ChanC::pinMEAS_I_ENRGI, &pCLK2_DAC, &pDAT2_DAC },  // 5 Измеритель тока
-    { ChipREG::Count,       0, nullptr,                 nullptr,    nullptr },
-    { ChipREG::Count,       0, nullptr,                 nullptr,    nullptr },
-    { ChipREG::Count,       0, nullptr,                 nullptr,    nullptr },
-    { ChipREG::Count,       0, nullptr,                 nullptr,    nullptr }
+    { ChipREG::SOURCE_3kV, 24, &Source3kV::pinENRGV,    &pCLK2_DAC, &pDAT2_DAC, false },  // 0 Источник 3кВ
+    { ChipREG::COMMUTATOR, 16, &Commutator::pinENRGK,   &pCLK2_DAC, &pDAT2_DAC, false },  // 1 Коммутатор
+    { ChipREG::CHAN_C,      8, &ChanC::pinRAZV_ENRGF,   &pCLK2_DAC, &pDAT2_DAC, false },  // 2 Формирователь развёртки
+    { ChipREG::CHAN_B,     32, &ChanB::pinENRGB,        &pCLK1_DAC, &pDAT1_DAC, false },  // 3 Канал B
+    { ChipREG::CHAN_S,     32, &ChanS::pinENRGP,        &pCLK1_DAC, &pDAT1_DAC, false },  // 4 Канал S
+    { ChipREG::MEAS_I,     16, &ChanC::pinMEAS_I_ENRGI, &pCLK2_DAC, &pDAT2_DAC, false },  // 5 Измеритель тока
+    { ChipREG::Count,       0, nullptr,                 nullptr,    nullptr,    false },
+    { ChipREG::Count,       0, nullptr,                 nullptr,    nullptr,    false },
+    { ChipREG::Count,       0, nullptr,                 nullptr,    nullptr,    false },
+    { ChipREG::Count,       0, nullptr,                 nullptr,    nullptr,    false }
 };
+
+
+void Chip::Init()
+{
+    if (clk)
+    {
+        cs->Set(!level_cs);
+        clk->ToHi();
+    }
+}
 
 
 void Chip::WriteValue(uint value)
@@ -109,7 +119,7 @@ void Chip::WriteValueRAW(uint value)
 
     clk->ToLow();
 
-    cs->ToLow();
+    cs->Set(level_cs);
 
     for (int bit = (int)length - 1; bit >= 0; bit--)
     {
@@ -120,7 +130,7 @@ void Chip::WriteValueRAW(uint value)
         clk->ToHi();
     }
 
-    cs->ToHi();
+    cs->Set(!level_cs);
 
     clk->ToLow();
 }

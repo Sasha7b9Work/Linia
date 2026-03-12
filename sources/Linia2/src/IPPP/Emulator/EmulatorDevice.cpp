@@ -50,7 +50,13 @@ bool EmulatorDevice::IsConnected() const
 }
 
 
-void EmulatorDevice::SendCommand(pchar /*format*/, ...) const
+void EmulatorDevice::SendCommand(pchar format, ...) const
 {
+    char message[1024];
+    std::va_list args;
+    va_start(args, format);
+    std::vsprintf(message, format, args);
+    va_end(args);
 
+    std::strcat(message, "\0");
 }

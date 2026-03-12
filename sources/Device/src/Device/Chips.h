@@ -10,7 +10,13 @@
 
 struct Chip
 {
-    Chip(uint _l, PinOut *_cs, PinOut *_clk, PinOut *_dat) : cs(_cs), clk(_clk), dat(_dat), length(_l) { }
+    Chip(uint _l, PinOut *_cs, PinOut *_clk, PinOut *_dat, bool _level_cs) :
+        cs(_cs), clk(_clk), dat(_dat), level_cs(_level_cs), length(_l)
+    {
+        Init();
+    }
+
+    void Init();
 
     void SetLength(uint _length)
     {
@@ -32,8 +38,9 @@ protected:
     PinOut *cs;
     PinOut *clk;
     PinOut *dat;
+    bool   level_cs;                // ≈сли false, то активный уровень выбора - 0, иначе - 1
     uint length = 0;
-    uint buffer_value = 0;         // «десь хранитс€ буферное значение, которое по команде Start() переписывает€ в аппаратный регистр на плате
+    uint buffer_value = 0;          // «десь хранитс€ буферное значение, которое по команде Start() переписывает€ в аппаратный регистр на плате
 
     // Ќепросредственна€ запись значени€ в железный регистр на плате
     void WriteValueRAW(uint);
@@ -54,7 +61,7 @@ struct ChipDAC : public Chip
         Count
     };
 
-    ChipDAC(E v, uint _l, PinOut *_cs, PinOut *_clk, PinOut *_dat) : Chip(_l, _cs, _clk, _dat), type(v)  { }
+    ChipDAC(E v, uint _l, PinOut *_cs, PinOut *_clk, PinOut *_dat, bool _level_cs) : Chip(_l, _cs, _clk, _dat, _level_cs), type(v)  { }
 
     static ChipDAC &Get(E);
 
@@ -79,8 +86,8 @@ struct ChipREG : public Chip
         Count
     };
 
-    ChipREG(E v, uint _l, PinOut *_cs, PinOut *_clk, PinOut *_dat) :
-        Chip(_l, _cs, _clk, _dat), type(v) { }
+    ChipREG(E v, uint _l, PinOut *_cs, PinOut *_clk, PinOut *_dat, bool _level_cs) :
+        Chip(_l, _cs, _clk, _dat, _level_cs), type(v) { }
 
     static ChipREG &Get(E);
 

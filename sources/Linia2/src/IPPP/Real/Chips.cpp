@@ -43,7 +43,18 @@ wxString DAC::GetNameDevice() const
 
 int DAC::BitDepth() const
 {
-    return 12;
+    static const int depth[Count] =
+    {
+        12,
+        12,
+        14,
+         8,
+        12,
+        12,
+        12
+    };
+
+    return depth[v];
 }
 
 
