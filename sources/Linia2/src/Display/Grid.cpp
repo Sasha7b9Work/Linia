@@ -76,8 +76,8 @@ void Grid::DrawArea() const
 
     wxColor color{ 127, 127, 127 };
 
-    Rect(size_x, 2).Draw(d_x, 0, color);
-    Rect(2, size_y).Draw(size.x - 4, d_y, color);
+    Rect(size_x, 2).Fill(d_x, 0, color);
+    Rect(2, size_y).Fill(size.x - 4, d_y, color);
 }
 
 
@@ -107,8 +107,10 @@ void Grid::DrawNavigationWindow() const
         int d_x = -LeftX() * size_display.x / LengthAxis() / k;
         int d_y = -TopY() * size_display.y / LengthAxis() / k;
 
-        Rect(size_x, size_y).Draw(d_x, d_y, *wxWHITE);
+        Rect(size_x, size_y).Fill(d_x, d_y, *wxWHITE);
     }
+
+    Rect(size_window.x, size_window.y).Draw(0, 0, color_gray);
 }
 
 

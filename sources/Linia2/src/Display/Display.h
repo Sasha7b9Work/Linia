@@ -127,6 +127,7 @@ public:
 
     Rect(int _w, int _h) : width(_w), height(_h) { }
 
+    void Fill(int x, int y, const wxColor &) const;
     void Draw(int x, int y, const wxColor &) const;
 
 private:

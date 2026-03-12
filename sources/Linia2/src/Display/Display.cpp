@@ -234,10 +234,20 @@ void Line::Draw(const wxColor &color) const
 }
 
 
-void Rect::Draw(int x, int y, const wxColor &color) const
+void Rect::Fill(int x, int y, const wxColor &color) const
 {
     Display::self->SetColor(color);
     Display::self->gc->DrawRectangle(x, y, width, height);
+}
+
+
+void Rect::Draw(int x, int y, const wxColor &color) const
+{
+    Display::self->SetColor(color);
+    Line(x, y, x + width, y).Draw();
+    Line(x + width, y, x + width, y + height).Draw();
+    Line(x, y + height, x + width, y + height).Draw();
+    Line(x, y, x, y + height).Draw();
 }
 
 
@@ -283,9 +293,7 @@ void Text::DrawAboutCenterLeft(int x, int y, bool fillBackground, const wxColor 
 
 void Display::FillRectangle(int x, int y, int width, int height, const wxColor &_color)
 {
-    color = _color;
-    gc->SetBrush(color);
-    gc->SetPen(color);
+    SetColor(_color);
     gc->DrawRectangle(x, y, width, height);
 }
 
