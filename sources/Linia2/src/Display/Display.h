@@ -42,6 +42,12 @@ public:
 
     void OnEventCnangeMeasuredElement();
 
+    // Возвращает размер области для отрисовки
+    wxSize GetDrawingSize() const;
+
+    // Возврщает полнлный размер виджета
+    wxSize GetFullSize() const;
+
 private:
 
     wxButton *btnHelp = nullptr,
@@ -86,6 +92,9 @@ private:
     void OnMenuTrackX(wxCommandEvent &);
     void OnMenuTrackY(wxCommandEvent &);
     void OnMenuTrackNone(wxCommandEvent &);
+
+    wxSize GetSize() const;
+    wxSize GetClientSize() const;
 };
 
 

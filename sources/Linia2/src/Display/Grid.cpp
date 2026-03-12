@@ -15,7 +15,7 @@ Grid::Grid()
 
 void Grid::ResetCenter()
 {
-    wxSize display_size = Display::self->GetSize();
+    wxSize display_size = Display::self->GetDrawingSize();
 
     center = { display_size.x / 2, display_size.y / 2 };
 }
@@ -66,7 +66,7 @@ void Grid::DrawArea() const
         return;
     }
 
-    wxSize size = Display::self->GetClientSize();
+    wxSize size = Display::self->GetDrawingSize();
 
     int size_x = size.x * size.x / LengthAxis();
     int size_y = size.y * size.y / LengthAxis();
@@ -83,7 +83,7 @@ void Grid::DrawArea() const
 
 void Grid::Draw(const std::vector<GraphEntity *> &entities)
 {
-    wxSize size = Display::self->GetSize();
+    wxSize size = Display::self->GetDrawingSize();
 
     const int length = LengthAxis();
 
@@ -186,10 +186,10 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
     if (scale == 1)
     {
-        Display::self->FillRectangle(0, 0, x_left - 1, Display::self->GetSize().y, *wxWHITE); //-V807
+        Display::self->FillRectangle(0, 0, x_left - 1, Display::self->GetDrawingSize().y, *wxWHITE); //-V807
         Display::self->FillRectangle(x_left, 0, length, y_top - 1, *wxWHITE);
-        Display::self->FillRectangle(x_right + 1, 0, Display::self->GetSize().x - x_right, Display::self->GetSize().y, *wxWHITE);
-        Display::self->FillRectangle(x_left, y_bottom + 1, length, Display::self->GetSize().y - y_bottom, *wxWHITE);
+        Display::self->FillRectangle(x_right + 1, 0, Display::self->GetDrawingSize().x - x_right, Display::self->GetDrawingSize().y, *wxWHITE);
+        Display::self->FillRectangle(x_left, y_bottom + 1, length, Display::self->GetDrawingSize().y - y_bottom, *wxWHITE);
     }
 
     DrawLabelsOnAxis();
@@ -208,7 +208,7 @@ void Grid::DrawLabelsOnAxis() const
 
     int d = 2;
 
-    wxSize size = Display::self->GetSize();
+    wxSize size = Display::self->GetDrawingSize();
 
     {
         // Подписываем горизонтульную ось
@@ -317,7 +317,7 @@ void Grid::FitIntoDisplay()
         return;
     }
 
-    wxSize size = Display::self->GetSize();
+    wxSize size = Display::self->GetDrawingSize();
 
     if (LeftX() > 5)
     {
@@ -329,7 +329,7 @@ void Grid::FitIntoDisplay()
         center.y = 5 + LengthAxis() / 2;
     }
 
-    int d = 8;
+    int d = 5;
 
     if (RightX() < size.x - d)
     {

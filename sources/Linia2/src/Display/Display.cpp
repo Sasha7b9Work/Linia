@@ -180,7 +180,7 @@ void Display::Draw()
 {
     BeginPaint();
 
-    FillRectangle(0, 0, GetSize().x, GetSize().y, *wxWHITE);
+    FillRectangle(0, 0, GetDrawingSize().x, GetDrawingSize().y, *wxWHITE);
 
     grid->Draw(entities);
 
@@ -537,3 +537,17 @@ void Display::OnEventCnangeMeasuredElement()
 {
     grid->OnEventCnangeMeasuredElement();
 }
+
+
+wxSize Display::GetDrawingSize() const
+{
+    return Panel::GetClientSize();
+}
+
+
+wxSize Display::GetFullSize() const
+{
+    return Panel::GetSize();
+}
+
+
