@@ -104,7 +104,7 @@ void Grid::DrawNavigationWindow() const
         int size_x = size_display.x * size_display.x / LengthAxis() / k;
         int size_y = size_display.y * size_display.y / LengthAxis() / k;
 
-        int d_x = -LeftX() * size_display.x / LengthAxis() / k;
+        int d_x = (int)(-(float)LeftX() * (float)size_display.x / (float)LengthAxis() / (float)k / ((float)size_display.x / (float)size_display.y));
         int d_y = -TopY() * size_display.y / LengthAxis() / k;
 
         Rect(size_x, size_y).Fill(d_x, d_y, *wxWHITE);
