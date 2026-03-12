@@ -55,9 +55,9 @@ public:
 
     static Grid *self;
 
-    wxBitmap *bitmap = nullptr;                 // \ Используем для быстрой
-    wxNativePixelData *pixels = nullptr;        // | отрисовки сетки
-    wxNativePixelData::Iterator *it = nullptr;  // /
+    uint8 *pixels = nullptr;     // Здесь производим отрисовку
+
+    uint8 *GetPixel(int x, int y);
 
 private:
 
