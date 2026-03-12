@@ -90,9 +90,19 @@ void Grid::DrawNavigationWindow() const
 
     wxSize size_window { 150, 150 };
 
-    wxColor color_gray{ 200, 200, 200 };
+    Display::self->FillRectangle(0, 0, size_window.x, size_window.y, { 200, 200, 200 });
 
-    Display::self->FillRectangle(0, 0, size_window.x, size_window.y, color_gray);
+    {
+        wxSize size = Display::self->GetDrawingSize();
+
+        int size_x = size.x * size_window.x / LengthAxis();
+        int size_y = size.y * size_window.y / LengthAxis();
+
+        int d_x = 0;
+        int d_y = 0;
+
+        Rect(size_x, size_y).Fill(d_x, d_y, { 240, 240, 240 });
+    }
 
     Rect(size_window.x, size_window.y).Draw(0, 0, *wxBLACK);
 }
