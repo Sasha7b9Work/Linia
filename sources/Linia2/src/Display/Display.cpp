@@ -286,6 +286,12 @@ void Display::FillRectangle(int x, int y, int width, int height, const wxColor &
 }
 
 
+void Display::DrawBitmap(const wxBitmap &bmp, int x, int y, int width, int height)
+{
+    gc->DrawBitmap(bmp, x, y, width, height);
+}
+
+
 void Text::DrawAboutCenterDown(int x, int y, bool fillBackground, const wxColor &background) const
 {
     double width, height, descent, externalLeading;
@@ -523,6 +529,12 @@ void Display::SetColor(const wxColor &_color)
     color = _color;
 
     LoadColor();
+}
+
+
+wxColor Display::GetColor() const
+{
+    return color;
 }
 
 

@@ -53,6 +53,12 @@ public:
 
     void Reset();
 
+    static Grid *self;
+
+    wxBitmap *bitmap = nullptr;                 // \ Используем для быстрой
+    wxNativePixelData *pixels = nullptr;        // | отрисовки сетки
+    wxNativePixelData::Iterator *it = nullptr;  // /
+
 private:
 
     wxPoint center;         // В этом месте относительно центра экрана находится центр сетки
@@ -61,8 +67,6 @@ private:
     Range   rangeX{ 1.0, "Uc", "V" };
     Range   rangeY{ 1.0, "Ic", "A" };
     const int size_cell = 60;       // Столько клетка всегда занимает на экране
-    wxBitmap *bitmap = nullptr;             // \ Используем для быстрой
-    wxNativePixelData *pixels = nullptr;    // / отрисовки сетки
 
     // d - расстояние между точками
     void DrawVPointLineDown(int x, int y0, int y_low, int d);
@@ -102,4 +106,13 @@ private:
 
     // Вписать в дисплей таким образом, чтобы не было полей по краям
     void FitIntoDisplay();
+
+    struct Line
+    {
+        Line(int _x1, int _y1, int _x2, int _y2) : x1(_x1), y1(_y1), x2(_x2), y2(_y2) { }
+        void Draw() const;
+        void Draw(const wxColor &) const;
+    private:
+        int x1, y1, x2, y2;
+    };
 };

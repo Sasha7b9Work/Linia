@@ -7,8 +7,13 @@
 #include "Display/GraphEntity.h"
 
 
+Grid *Grid::self = nullptr;
+
+
 Grid::Grid()
 {
+    self = this;
+
     Reset();
 }
 
@@ -87,6 +92,22 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
     bitmap = new wxBitmap(size.x, size.y, 24);
     pixels = new wxNativePixelData(*bitmap);
+    it = new wxNativePixelData::Iterator(*pixels);
+
+    {
+        for (int y = 0; y < size.y; ++y)
+        {
+            it->MoveTo(*pixels, 0, y); // Перемещаемся в начало строки y
+
+            for (int x = 0; x < size.x; ++x)
+            {
+                it->Red() = 255;
+                it->Green() = 255;
+                it->Blue() = 255;
+                (*it)++;
+            }
+        }
+    }
 
     const int length = LengthAxis();
 
@@ -97,9 +118,11 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
     int d = 5;
 
+    Display::self->SetColor(*wxBLACK);
+
     {
         // Горизонтальные линии
-        Line(x_left, y_top, RightX(), y_top).Draw(*wxBLACK);
+        Line(x_left, y_top, RightX(), y_top).Draw();
 
         if (Math::InRange(center.y, y_top, y_bottom))
         {
@@ -185,6 +208,8 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         entity->Draw(this);
     }
 
+    Display::self->DrawBitmap(*bitmap, 0, 0, bitmap->GetSize().x, bitmap->GetSize().y);
+
     DrawArea();
 
     if (scale == 1)
@@ -199,6 +224,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
     DrawMouseMarkers();
 
+    delete it;
     delete pixels;
     delete bitmap;
 }
@@ -652,4 +678,53 @@ wxString Range::GetValuePointAxis(int num, int cells_in_axis) const
     }
 
     return wxString::Format("%.1f", step * num);
+}
+
+
+void Grid::Line::Draw(const wxColor &color) const
+{
+    Display::self->SetColor(color);
+
+    wxNativePixelData::Iterator *p = Grid::self->it;
+
+    if (y1 == y2)
+    {
+        if (y1 >= 0 && y1 < Display::self->GetClientSize().y)
+        {
+            p->MoveTo(*Grid::self->pixels, Math::Max(0, x1), y1);
+
+            for (int i = Math::Max(0, x1); i < x2; i++)
+            {
+                p->Red() = color.Red();
+                p->Green() = color.Green();
+                p->Blue() = color.Blue();
+                p->OffsetX(*Grid::self->pixels, 1);
+            }
+        }
+    }
+    if (x1 == x2)
+    {
+        if (x1 >= 0 && x1 < Display::self->GetClientSize().x)
+        {
+            p->MoveTo(*Grid::self->pixels, x1, Math::Max(0, y1));
+
+            for (int i = Math::Max(0, y1); i < y2; i++)
+            {
+                if (y2 >= Display::self->GetClientSize().y)
+                {
+                    break;
+                }
+                p->Red() = color.Red();
+                p->Green() = color.Green();
+                p->Blue() = color.Blue();
+                p->OffsetY(*Grid::self->pixels, 1);
+            }
+        }
+    }
+}
+
+
+void Grid::Line::Draw() const
+{
+    Draw(Display::self->GetColor());
 }

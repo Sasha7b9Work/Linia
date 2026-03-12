@@ -9,4 +9,10 @@ namespace Math
     {
         return x >= min && x <= max;
     }
+
+    template<class T>
+    T Max(T val1, T val2)
+    {
+        return val1 > val2 ? val1 : val2;
+    }
 }
