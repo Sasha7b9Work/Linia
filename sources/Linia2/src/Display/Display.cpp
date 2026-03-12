@@ -104,14 +104,6 @@ void Display::Init()
 }
 
 
-void Display::OnEventPaint(wxPaintEvent &)
-{
-    wxPaintDC paint_dc(this);
-
-    paint_dc.DrawBitmap(*bitmap, 0, 0);
-}
-
-
 void Display::OnEventMouseDown(wxMouseEvent &event)
 {
     pos_mouse_down = event.GetPosition();
@@ -208,6 +200,14 @@ void Display::BeginPaint()
 void Display::EndPaint()
 {
     dc.SelectObject(wxNullBitmap);
+}
+
+
+void Display::OnEventPaint(wxPaintEvent &)
+{
+    wxPaintDC paint_dc(this);
+
+    paint_dc.DrawBitmap(*bitmap, 0, 0);
 }
 
 

@@ -61,6 +61,8 @@ private:
     Range   rangeX{ 1.0, "Uc", "V" };
     Range   rangeY{ 1.0, "Ic", "A" };
     const int size_cell = 60;       // Столько клетка всегда занимает на экране
+    wxBitmap *bitmap = nullptr;             // \ Используем для быстрой
+    wxNativePixelData *pixels = nullptr;    // / отрисовки сетки
 
     // d - расстояние между точками
     void DrawVPointLineDown(int x, int y0, int y_low, int d);

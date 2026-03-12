@@ -83,6 +83,11 @@ void Grid::DrawArea() const
 
 void Grid::Draw(const std::vector<GraphEntity *> &entities)
 {
+    wxSize size = Display::self->GetSize();
+
+    bitmap = new wxBitmap(size.x, size.y, 24);
+    pixels = new wxNativePixelData(*bitmap);
+
     const int length = LengthAxis();
 
     const int x_left = LeftX();
@@ -91,8 +96,6 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
     const int y_bottom = BottomY();
 
     int d = 5;
-
-    wxSize size = Display::self->GetSize();
 
     {
         // Горизонтальные линии
@@ -195,6 +198,9 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
     DrawLabelsOnAxis();
 
     DrawMouseMarkers();
+
+    delete pixels;
+    delete bitmap;
 }
 
 

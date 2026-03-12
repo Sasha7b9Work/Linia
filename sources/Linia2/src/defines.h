@@ -30,6 +30,7 @@
 #include <wx/datetime.h>
 #include <wx/dirctrl.h>
 #include <wx/dir.h>
+#include <wx/rawbmp.h>
 
 #include <map>
 #include <queue>
