@@ -77,7 +77,7 @@ void Grid::DrawArea() const
     wxColor color{ 127, 127, 127 };
 
     Rect(size_x, 2).Draw(d_x, 0, color);
-    Rect(2, size_y).Draw(size.x - 3, d_y, color);
+    Rect(2, size_y).Draw(size.x - 4, d_y, color);
 }
 
 
@@ -621,6 +621,11 @@ double Range::Value::MaxAbs() const
 
 void Range::Value::Increase()
 {
+    if (MaxAbs() > 3e3)
+    {
+        return;
+    }
+
     type = (Type)((int)type + 1);
     if (type == Count)
     {
@@ -632,6 +637,11 @@ void Range::Value::Increase()
 
 void Range::Value::Decrease()
 {
+    if (MaxAbs() < 1e-11)
+    {
+        return;
+    }
+
     int new_type = (int)type - 1;
 
     if (new_type < 0)
@@ -648,25 +658,31 @@ wxString Range::FullTitle() const
 {
     wxString prefix;
 
-    if (MaxAbs() > 1e3)
+    double value = MaxAbs();
+
+    if (value > 1e3)
     {
         prefix = "k";
     }
-    else if (MaxAbs() > 1.0)
+    else if (value > 1.0)
     {
         prefix = "";
     }
-    else if (MaxAbs() > 1e-3)
+    else if((int64)(value * 1000) > 1)
     {
         prefix = "m";
     }
-    else if (MaxAbs() > 1e-6)
+    else if ((int64)(value * 1000000) > 1)
     {
         prefix = "u";
     }
-    else if (MaxAbs() > 1e-9)
+    else if ((int64)(value * 1e9) > 1)
     {
         prefix = "n";
+    }
+    else if ((int64)(value * 1e12) > 1)
+    {
+        prefix = "p";
     }
 
     return title + "," + prefix + units;
@@ -677,25 +693,31 @@ wxString Range::GetValuePointAxis(int num, int cells_in_axis) const
 {
     double step = Amplitude() / cells_in_axis;
 
-    if (MaxAbs() > 1e3)
+    double value = MaxAbs();
+
+    if (value > 1e3)
     {
         step /= 1e3;
     }
-    else if (MaxAbs() > 1)
+    else if (value > 1)
     {
         step *= 1.0;
     }
-    else if (MaxAbs() > 1e-3)
+    else if ((int64)(value * 1000) > 1)
     {
         step *= 1e3;
     }
-    else if (MaxAbs() > 1e-6)
+    else if ((int64)(value * 1e6) > 1)
     {
         step *= 1e6;
     }
-    else
+    else if ((int64)(value * 1e9) > 1)
     {
         step *= 1e9;
+    }
+    else if ((int64)(value * 1e12) > 1)
+    {
+        step *= 1e12;
     }
 
     return wxString::Format("%.1f", step * num);
