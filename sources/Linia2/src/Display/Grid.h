@@ -23,7 +23,8 @@ struct Range
     void Increase();
     void Decrease();
 
-    double Max() const;
+    // Возвращает абсолютное значение - амперы, вольты
+    double MaxAbs() const;
 
 private:
 

@@ -37,7 +37,7 @@ int Grid::BottomY() const
 
 int Grid::TopY() const
 {
-    return center.y - (int)(rangeY.Max() / UnitsInCellY() * size_cell);
+    return center.y - (int)(rangeY.MaxAbs() / UnitsInCellY() * size_cell);
 }
 
 
@@ -49,7 +49,7 @@ int Grid::LengthAxis() const
 
 int Grid::LeftX() const
 {
-    return center.x - (int)(rangeX.Max() / UnitsInCellX() * size_cell);
+    return center.x - (int)(rangeX.MaxAbs() / UnitsInCellX() * size_cell);
 }
 
 
@@ -563,7 +563,7 @@ void Grid::DrawMouseMarkers() const
 
 double Range::Amplitude() const
 {
-    return 2.0 * Max();
+    return 2.0 * MaxAbs();
 }
 
 
@@ -579,7 +579,7 @@ void Range::Decrease()
 }
 
 
-double Range::Max() const
+double Range::MaxAbs() const
 {
     return max.MaxAbs();
 }
@@ -625,6 +625,7 @@ void Range::Value::Increase()
     if (type == Count)
     {
         type = (Type)0;
+        order++;
     }
 }
 
@@ -636,6 +637,7 @@ void Range::Value::Decrease()
     if (new_type < 0)
     {
         new_type = Count - 1;
+        order--;
     }
 
     type = (Type)new_type;
@@ -646,23 +648,23 @@ wxString Range::FullTitle() const
 {
     wxString prefix;
 
-    if (Max() >= 1e3)
+    if (MaxAbs() > 1e3)
     {
         prefix = "k";
     }
-    else if (Max() >= 1.0)
+    else if (MaxAbs() > 1.0)
     {
         prefix = "";
     }
-    else if (Max() >= 1e-3)
+    else if (MaxAbs() > 1e-3)
     {
         prefix = "m";
     }
-    else if (Max() >= 1e-6)
+    else if (MaxAbs() > 1e-6)
     {
         prefix = "u";
     }
-    else if (Max() >= 1e-9)
+    else if (MaxAbs() > 1e-9)
     {
         prefix = "n";
     }
@@ -675,19 +677,19 @@ wxString Range::GetValuePointAxis(int num, int cells_in_axis) const
 {
     double step = Amplitude() / cells_in_axis;
 
-    if (Max() >= 1e3)
+    if (MaxAbs() > 1e3)
     {
         step /= 1e3;
     }
-    else if (Max() >= 1)
+    else if (MaxAbs() > 1)
     {
         step *= 1.0;
     }
-    else if (Max() >= 1e-3)
+    else if (MaxAbs() > 1e-3)
     {
         step *= 1e3;
     }
-    else if (Max() >= 1e-6)
+    else if (MaxAbs() > 1e-6)
     {
         step *= 1e6;
     }
