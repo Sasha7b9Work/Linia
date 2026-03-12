@@ -26,7 +26,6 @@ public:
     void Draw();
 
     void SetColor(const wxColor &);
-    wxColor GetColor() const;
     void LoadColor();
 
     bool track_x = false;           // Отслеживать координату x
@@ -42,8 +41,6 @@ public:
     void FillRectangle(int x, int y, int width, int height, const wxColor &);
 
     void OnEventCnangeMeasuredElement();
-
-    void DrawBitmap(const wxBitmap &, int x, int y, int width, int height);
 
 private:
 

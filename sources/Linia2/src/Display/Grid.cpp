@@ -7,13 +7,8 @@
 #include "Display/GraphEntity.h"
 
 
-Grid *Grid::self = nullptr;
-
-
 Grid::Grid()
 {
-    self = this;
-
     Reset();
 }
 
@@ -90,22 +85,6 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 {
     wxSize size = Display::self->GetSize();
 
-    pixels = new uint8[(size_t)(size.x * size.y * 3)];
-
-    {
-        uint8 *p = pixels;
-
-        for (int x = 0; x < size.x; x++)
-        {
-            for (int y = 0; y < size.y; y++)
-            {
-                *p++ = 0xFF;
-                *p++ = 0xFF;
-                *p++ = 0xFF;
-            }
-        }
-    }
-
     const int length = LengthAxis();
 
     const int x_left = LeftX();
@@ -115,11 +94,9 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
     int d = 5;
 
-    Display::self->SetColor(*wxBLACK);
-
     {
         // Горизонтальные линии
-        Line(x_left, y_top, RightX(), y_top).Draw();
+        Line(x_left, y_top, RightX(), y_top).Draw(*wxBLACK);
 
         if (Math::InRange(center.y, y_top, y_bottom))
         {
@@ -204,13 +181,6 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
     {
         entity->Draw(this);
     }
-
-    wxImage image(size.x, size.y, pixels, true);
-
-    Display::self->DrawBitmap(wxBitmap(image), 0, 0, size.x, size.y);
-
-    delete []pixels;
-    pixels = nullptr;
 
     DrawArea();
 
@@ -676,57 +646,4 @@ wxString Range::GetValuePointAxis(int num, int cells_in_axis) const
     }
 
     return wxString::Format("%.1f", step * num);
-}
-
-
-uint8 *Grid::GetPixel(int x, int y)
-{
-    return &pixels[(x + y * Display::self->GetSize().x) * 3];
-}
-
-
-void Grid::Line::Draw(const wxColor &color) const
-{
-    Display::self->SetColor(color);
-
-    uint8 red = color.Red();
-    uint8 green = color.Green();
-    uint8 blue = color.Blue();
-
-    if (y1 == y2)
-    {
-        if (y1 >= 0 && y1 < Display::self->GetClientSize().y)
-        {
-            uint8 *p = Grid::self->GetPixel(Math::Max(0, x1), y1);
-
-            for (int i = Math::Max(0, x1); i < x2; i++)
-            {
-                *p++ = red;
-                *p++ = green;
-                *p++ = blue;
-            }
-        }
-    }
-
-    if (x1 == x2)
-    {
-        if (x1 >= 0 && x1 < Display::self->GetClientSize().x)
-        {
-            uint8 *p = Grid::self->GetPixel(x1, Math::Max(0, y1));
-
-            for (int i = Math::Max(0, y1); i < y2; i++)
-            {
-                *p++ = red;
-                *p++ = green;
-                *p++ = blue;
-                p += (Display::self->GetSize().x - 1) * 3;
-            }
-        }
-    }
-}
-
-
-void Grid::Line::Draw() const
-{
-    Draw(Display::self->GetColor());
 }

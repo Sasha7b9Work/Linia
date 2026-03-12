@@ -53,12 +53,6 @@ public:
 
     void Reset();
 
-    static Grid *self;
-
-    uint8 *pixels = nullptr;     // Здесь производим отрисовку
-
-    uint8 *GetPixel(int x, int y);
-
 private:
 
     wxPoint center;         // В этом месте относительно центра экрана находится центр сетки
@@ -106,13 +100,4 @@ private:
 
     // Вписать в дисплей таким образом, чтобы не было полей по краям
     void FitIntoDisplay();
-
-    struct Line
-    {
-        Line(int _x1, int _y1, int _x2, int _y2) : x1(_x1), y1(_y1), x2(_x2), y2(_y2) { }
-        void Draw() const;
-        void Draw(const wxColor &) const;
-    private:
-        int x1, y1, x2, y2;
-    };
 };
