@@ -111,6 +111,8 @@ void Display::OnEventMouseDown(wxMouseEvent &event)
     mouse_is_pressed = true;
 
     Draw();
+
+    SetCursor(wxCursor(wxCURSOR_HAND));
 }
 
 
@@ -119,6 +121,8 @@ void Display::OnEventMouseUp(wxMouseEvent &)
     mouse_is_pressed = false;
 
     Draw();
+
+    SetCursor(wxCursor(wxCURSOR_ARROW));
 }
 
 
