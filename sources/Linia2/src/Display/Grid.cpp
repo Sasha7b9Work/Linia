@@ -88,29 +88,13 @@ void Grid::DrawNavigationWindow() const
         return;
     }
 
-    wxSize size_display = Display::self->GetDrawingSize();
-
-    wxSize size_window { size_display.y, size_display.y };
-
-    int k = 4;
-
-    size_window /= k;
+    wxSize size_window { 150, 150 };
 
     wxColor color_gray{ 200, 200, 200 };
 
     Display::self->FillRectangle(0, 0, size_window.x, size_window.y, color_gray);
 
-    {
-        int size_x = size_display.x * size_display.x / LengthAxis() / k;
-        int size_y = size_display.y * size_display.y / LengthAxis() / k;
-
-        int d_x = (int)(-(float)LeftX() * (float)size_display.x / (float)LengthAxis() / (float)k / ((float)size_display.x / (float)size_display.y));
-        int d_y = -TopY() * size_display.y / LengthAxis() / k;
-
-        Rect(size_x, size_y).Fill(d_x, d_y, *wxWHITE);
-    }
-
-    Rect(size_window.x, size_window.y).Draw(0, 0, color_gray);
+    Rect(size_window.x, size_window.y).Draw(0, 0, *wxBLACK);
 }
 
 
