@@ -109,12 +109,16 @@ void Display::OnEventMouseDown(wxMouseEvent &event)
     pos_mouse_down = event.GetPosition();
 
     mouse_is_pressed = true;
+
+    Draw();
 }
 
 
 void Display::OnEventMouseUp(wxMouseEvent &)
 {
     mouse_is_pressed = false;
+
+    Draw();
 }
 
 

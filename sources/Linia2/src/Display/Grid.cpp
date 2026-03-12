@@ -81,6 +81,37 @@ void Grid::DrawArea() const
 }
 
 
+void Grid::DrawNavigationWindow() const
+{
+    if (scale == 1 || !wxGetMouseState().LeftIsDown())
+    {
+        return;
+    }
+
+    wxSize size_display = Display::self->GetDrawingSize();
+
+    wxSize size_window { size_display.y, size_display.y };
+
+    int k = 4;
+
+    size_window /= k;
+
+    wxColor color_gray{ 200, 200, 200 };
+
+    Display::self->FillRectangle(0, 0, size_window.x, size_window.y, color_gray);
+
+    {
+        int size_x = size_display.x * size_display.x / LengthAxis() / k;
+        int size_y = size_display.y * size_display.y / LengthAxis() / k;
+
+        int d_x = -LeftX() * size_display.x / LengthAxis() / k;
+        int d_y = -TopY() * size_display.y / LengthAxis() / k;
+
+        Rect(size_x, size_y).Draw(d_x, d_y, *wxWHITE);
+    }
+}
+
+
 void Grid::Draw(const std::vector<GraphEntity *> &entities)
 {
     wxSize size = Display::self->GetDrawingSize();
@@ -195,6 +226,8 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
     DrawLabelsOnAxis();
 
     DrawMouseMarkers();
+
+    DrawNavigationWindow();
 }
 
 
