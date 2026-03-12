@@ -158,19 +158,19 @@ void Display::OnEventButton(wxCommandEvent &event)
     }
     else if (id == btnLessX->GetId())
     {
-        grid->ScaleGridOnX(-1);
+        grid->RangeGridOnX(-1);
     }
     else if (id == btnMoreX->GetId())
     {
-        grid->ScaleGridOnX(+1);
+        grid->RangeGridOnX(+1);
     }
     else if (id == btnLessY->GetId())
     {
-        grid->ScaleGridOnY(-1);
+        grid->RangeGridOnY(-1);
     }
     else if (id == btnMoreY->GetId())
     {
-        grid->ScaleGridOnY(+1);
+        grid->RangeGridOnY(+1);
     }
 }
 
@@ -535,7 +535,6 @@ void Display::LoadColor()
 
 void Display::OnEventCnangeMeasuredElement()
 {
-    grid->OnEventCnangeMeasuredElement();
 }
 
 

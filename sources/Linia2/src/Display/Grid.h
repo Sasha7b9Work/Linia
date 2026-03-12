@@ -7,7 +7,7 @@ class GraphEntity;
 
 struct Range
 {
-    double max;                 // Размах от нуля. Т.е. полный размах будет [-max, +max]
+    Range(const wxString &_title, const wxString &_units) : title(_title), units(_units) { }
 
     wxString title;
     wxString units;
@@ -20,8 +20,34 @@ struct Range
 
     wxString FullTitle() const;
 
-    void operator+=(const double &);
-    void operator*=(const double &);
+    void Increase();
+    void Decrease();
+
+    double Max() const;
+
+private:
+
+    struct Value
+    {
+        // Возвращает значение в абсолютных значениях - амперы, вольты
+        double MaxAbs() const;
+        void Increase();
+        void Decrease();
+    private:
+        // Чему кратно значение - единице, 2, 4(5)
+        enum Type
+        {
+            _1,
+            _2,
+            _4_5,
+            Count
+        };
+
+        Type type = _1;
+        int order = 0;
+    };
+
+    Value max;
 };
 
 
@@ -38,11 +64,9 @@ public:
 
     void OnMouseMove(const wxPoint &);
 
-    void OnEventCnangeMeasuredElement();
-
     void ScaleGridOn(const wxPoint &, int);
-    void ScaleGridOnX(int);
-    void ScaleGridOnY(int);
+    void RangeGridOnX(int);
+    void RangeGridOnY(int);
 
     // Преобразует точку графика в координаты на холсте
     wxPoint ValuesToCoord(double x, double y) const;
@@ -58,8 +82,8 @@ private:
     wxPoint center;         // В этом месте относительно центра экрана находится центр сетки
     int     scale = 1;      // 2 - увеличено в два раза, 3 - увелично в три и так далее
     wxPoint pos_mouse;
-    Range   rangeX{ 1.0, "Uc", "V" };
-    Range   rangeY{ 1.0, "Ic", "A" };
+    Range   rangeX{ "Uc", "V" };
+    Range   rangeY{ "Ic", "A" };
     const int size_cell = 60;       // Столько клетка всегда занимает на экране
 
     // d - расстояние между точками

@@ -37,7 +37,7 @@ int Grid::BottomY() const
 
 int Grid::TopY() const
 {
-    return center.y - (int)(rangeY.max / UnitsInCellY() * size_cell);
+    return center.y - (int)(rangeY.Max() / UnitsInCellY() * size_cell);
 }
 
 
@@ -49,7 +49,7 @@ int Grid::LengthAxis() const
 
 int Grid::LeftX() const
 {
-    return center.x - (int)(rangeX.max / UnitsInCellX() * size_cell);
+    return center.x - (int)(rangeX.Max() / UnitsInCellX() * size_cell);
 }
 
 
@@ -369,15 +369,15 @@ void Grid::ScaleGridOn(const wxPoint &pos, int delta)
 }
 
 
-void Grid::ScaleGridOnX(int delta)
+void Grid::RangeGridOnX(int delta)
 {
     if (delta < 0)
     {
-        rangeX *= 1.5;
+        rangeX.Increase();
     }
     else
     {
-        rangeX *= 1 / 1.5;
+        rangeX.Decrease();
     }
 
     ResetCenter();
@@ -386,15 +386,15 @@ void Grid::ScaleGridOnX(int delta)
 }
 
 
-void Grid::ScaleGridOnY(int delta)
+void Grid::RangeGridOnY(int delta)
 {
     if (delta < 0)
     {
-        rangeY *= 1.5;
+        rangeY.Increase();
     }
     else
     {
-        rangeY *= 1 / 1.5;
+        rangeY.Decrease();
     }
 
     ResetCenter();
@@ -561,33 +561,84 @@ void Grid::DrawMouseMarkers() const
 }
 
 
-void Grid::OnEventCnangeMeasuredElement()
-{
-
-}
-
-
 double Range::Amplitude() const
 {
-    return 2.0 * max;
+    return 2.0 * Max();
 }
 
 
-void Range::operator+=(const double &delta)
+void Range::Increase()
 {
-    max += delta;
+    max.Increase();
 }
 
 
-void Range::operator*=(const double &delta)
+void Range::Decrease()
 {
-    double center = 0.0;
+    max.Decrease();
+}
 
-    double amplitude = Amplitude();
 
-    amplitude *= delta;
+double Range::Max() const
+{
+    return max.MaxAbs();
+}
 
-    max = center + amplitude / 2.0;
+
+double Range::Value::MaxAbs() const
+{
+    static double values[Type::Count] =
+    {
+        1.0,
+        2.0,
+        5.0
+    };
+
+    if (order == 0)
+    {
+        return values[type];
+    }
+    else if (order > 0)
+    {
+        double result = 1.0;
+        for (int i = 0; i < order; i++)
+        {
+            result *= 10.0;
+        }
+        return result * values[type];
+    }
+    else
+    {
+        double result = 1.0;
+        for (int i = order; i < 0; i++)
+        {
+            result *= 0.1;
+        }
+        return result * values[type];
+    }
+}
+
+
+void Range::Value::Increase()
+{
+    type = (Type)((int)type + 1);
+    if (type == Count)
+    {
+        type = (Type)0;
+    }
+}
+
+
+void Range::Value::Decrease()
+{
+    int new_type = (int)type - 1;
+
+    if (new_type < 0)
+    {
+        new_type = Count - 1;
+    }
+
+    type = (Type)new_type;
 }
 
 
@@ -595,23 +646,23 @@ wxString Range::FullTitle() const
 {
     wxString prefix;
 
-    if (max >= 1e3)
+    if (Max() >= 1e3)
     {
         prefix = "k";
     }
-    else if (max >= 1.0)
+    else if (Max() >= 1.0)
     {
         prefix = "";
     }
-    else if (max >= 1e-3)
+    else if (Max() >= 1e-3)
     {
         prefix = "m";
     }
-    else if (max >= 1e-6)
+    else if (Max() >= 1e-6)
     {
         prefix = "u";
     }
-    else if (max >= 1e-9)
+    else if (Max() >= 1e-9)
     {
         prefix = "n";
     }
@@ -624,19 +675,19 @@ wxString Range::GetValuePointAxis(int num, int cells_in_axis) const
 {
     double step = Amplitude() / cells_in_axis;
 
-    if (max >= 1e3)
+    if (Max() >= 1e3)
     {
         step /= 1e3;
     }
-    else if (max >= 1)
+    else if (Max() >= 1)
     {
         step *= 1.0;
     }
-    else if (max >= 1e-3)
+    else if (Max() >= 1e-3)
     {
         step *= 1e3;
     }
-    else if (max >= 1e-6)
+    else if (Max() >= 1e-6)
     {
         step *= 1e6;
     }
