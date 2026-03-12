@@ -66,7 +66,7 @@ void Grid::DrawArea() const
         return;
     }
 
-    wxSize size = Display::self->GetSize();
+    wxSize size = Display::self->GetClientSize();
 
     int size_x = size.x * size.x / LengthAxis();
     int size_y = size.y * size.y / LengthAxis();
@@ -77,7 +77,7 @@ void Grid::DrawArea() const
     wxColor color{ 127, 127, 127 };
 
     Rect(size_x, 2).Draw(d_x, 0, color);
-    Rect(2, size_y).Draw(0, d_y, color);
+    Rect(2, size_y).Draw(size.x - 3, d_y, color);
 }
 
 
