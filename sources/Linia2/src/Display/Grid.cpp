@@ -424,8 +424,6 @@ void Grid::RangeGridOnY(int delta)
         rangeY.Decrease();
     }
 
-    ResetCenter();
-
     Display::self->Draw();
 }
 
