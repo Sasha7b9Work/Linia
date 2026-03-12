@@ -333,7 +333,7 @@ void Grid::MoveGridOn(const wxPoint &delta)
         return;
     }
 
-    center += delta;
+    center += delta * scale;
 
     FitIntoDisplay();
 }
