@@ -103,6 +103,11 @@ public:
 
     void WriteValue();
 
+    const Chip *GetChip() const
+    {
+        return chip;
+    }
+
 private:
 
     KnobWidget *knob = nullptr;                 // Ручка установки значения

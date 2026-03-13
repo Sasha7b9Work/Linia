@@ -54,7 +54,7 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
         std::vector<StructDescription> desc1;
 
         std::vector<StructDescription::CommandStruct> commandsDuration; //-V827 //-V826
-        desc1.emplace_back(StructDescription{ 0, 8, "Ти = N * Sk", "", { true, commandsDuration } });
+        desc1.emplace_back(StructDescription{ 0, fpga1->GetChip()->BitDepth(), "Ти = N * Sk", "", {true, commandsDuration}});
 
         fpga1->SetDescriptionBits(0, desc1);
 
@@ -67,7 +67,7 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
         std::vector<StructDescription> desc2;
 
         std::vector<StructDescription::CommandStruct> commandsDuration; //-V827 //-V826
-        desc2.emplace_back(StructDescription{ 0, 8, "RunDelay = N * 1us", "", { true, commandsDuration } });
+        desc2.emplace_back(StructDescription{ 0, fpga2->GetChip()->BitDepth(), "RunDelay = N * 1us", "", { true, commandsDuration } });
 
         fpga2->SetDescriptionBits(0, desc2);
 

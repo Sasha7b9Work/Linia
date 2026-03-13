@@ -19,9 +19,25 @@ PageChannelS::PageChannelS(wxNotebook *parent) :
 {
     self = this;
 
-    AppendRegister(new RegAD5531(this, dacs[4]));
+    {
+        RegAD5531 *dac4 = new RegAD5531(this, dacs[4]);
 
-    AppendRegister(new RegAD5531(this, dacs[5]));
+        std::vector<StructDescription> desc4;
+        desc4.emplace_back(StructDescription{ 0, dac4->GetChip()->BitDepth(), "", "", { true } });
+        dac4->SetDescriptionBits(0, desc4);
+
+        AppendRegister(dac4);
+    }
+
+    {
+        RegAD5531 *dac5 = new RegAD5531(this, dacs[5]);
+
+        std::vector<StructDescription> desc5;
+        desc5.emplace_back(StructDescription{ 0, dac5->GetChip()->BitDepth(), "", "", { true } });
+        dac5->SetDescriptionBits(0, desc5);
+
+        AppendRegister(dac5);
+    }
 
     RegFPGA *reg4 = new RegFPGA(this, regs[4]);
 
