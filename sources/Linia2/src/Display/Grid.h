@@ -6,7 +6,32 @@
 class GraphEntity;
 
 
-class Grid
+class IGrid
+{
+public:
+
+    virtual ~IGrid() {}
+
+    static void Create();
+
+    static IGrid *self;
+
+    virtual void OnChangedOffsetMeasure(const wxPoint &) = 0;
+    virtual void OnMouseDown() = 0;
+    virtual void OnMouseUp() = 0;
+    virtual void MoveImageOn(const wxPoint &) = 0;
+    virtual void MoveCenterOn(const wxPoint &) = 0;
+    virtual void SetNewMousePosition(const wxPoint &) = 0;
+    virtual void ScaleGridOn(const wxPoint &, int) = 0;
+    virtual void RangeGridOnX(int) = 0;
+    virtual void RangeGridOnY(int) = 0;
+    virtual void Draw(const std::vector<GraphEntity *> &) = 0;
+    virtual void ResetCenter() = 0;
+    virtual void Reset() = 0;
+};
+
+
+class Grid : public IGrid
 {
     struct Offset
     {
@@ -89,31 +114,29 @@ public:
 
     Grid();
 
-    static Grid *self;
+    virtual void Draw(const std::vector<GraphEntity *> &) override;
 
-    void Draw(const std::vector<GraphEntity *> &);
+    virtual void MoveImageOn(const wxPoint &) override;     // Переместить изображение на экране целиком
+    virtual void MoveCenterOn(const wxPoint &) override;    // Переместить центр графика (избражение измерений в графике)
+    virtual void SetNewMousePosition(const wxPoint &) override;
 
-    void MoveImageOn(const wxPoint &);  // Переместить изображение на экране целиком
-    void MoveCenterOn(const wxPoint &); // Переместить центр графика (избражение измерений в графике)
-    void SetNewMousePosition(const wxPoint &);
+    virtual void OnChangedOffsetMeasure(const wxPoint &) override;
 
-    void OnChangedOffsetMeasure(const wxPoint &);
+    virtual void OnMouseDown() override;
+    virtual void OnMouseUp() override;
 
-    void OnMouseDown();
-    void OnMouseUp();
-
-    void ScaleGridOn(const wxPoint &, int);
-    void RangeGridOnX(int);
-    void RangeGridOnY(int);
+    virtual void ScaleGridOn(const wxPoint &, int) override;
+    virtual void RangeGridOnX(int) override;
+    virtual void RangeGridOnY(int) override;
 
     // Преобразует точку графика в координаты на холсте
     wxPoint ValuesToCoord(double x, double y) const;
 
     wxPoint2DDouble CoordToValues(const wxPoint &) const;
 
-    void ResetCenter();
+    virtual void ResetCenter() override;
 
-    void Reset();
+    virtual void Reset() override;
 
     static const int size_cell = 60;       // Столько клетка всегда занимает на экране
 

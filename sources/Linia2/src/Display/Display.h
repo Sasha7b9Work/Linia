@@ -55,8 +55,6 @@ private:
         *btnLessY = nullptr,
         *btnMoreY = nullptr;
 
-    Grid *grid = nullptr;                   // Координатная сетка
-
     std::vector<GraphEntity *> entities;    // Сущности для отрисовки
 
     wxBitmap *bitmap = nullptr;

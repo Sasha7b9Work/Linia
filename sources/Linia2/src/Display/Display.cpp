@@ -48,7 +48,7 @@ Display::Display(wxWindow *parent) :
 Display::~Display()
 {
     SAFE_DELETE(bitmap);
-    SAFE_DELETE(grid);
+    SAFE_DELETE(IGrid::self);
     SAFE_DELETE(panel_errors);
 }
 
@@ -79,10 +79,7 @@ void Display::Init()
 
     bitmap = new wxBitmap(Panel::GetSize().x, Panel::GetSize().y);
 
-    if (!grid)
-    {
-        grid = new Grid();
-    }
+    IGrid::Create();
 
     int w = btnHelp->GetSize().x;
     int d = 10;
@@ -115,7 +112,7 @@ void Display::OnEventMouseDown(wxMouseEvent &event)
 
     SetCursor(wxCursor(wxCURSOR_HAND));
 
-    grid->OnMouseDown();
+    IGrid::self->OnMouseDown();
 
     Refresh();
 }
@@ -127,7 +124,7 @@ void Display::OnEventMouseUp(wxMouseEvent &)
 
     SetCursor(wxCursor(wxCURSOR_ARROW));
 
-    grid->OnMouseUp();
+    IGrid::self->OnMouseUp();
 
     Refresh();
 }
@@ -143,18 +140,18 @@ void Display::OnEventMouseMove(wxMouseEvent &event)
 
         if (event.GetModifiers() == wxMOD_CONTROL)
         {
-            grid->MoveImageOn(delta);
+            IGrid::self->MoveImageOn(delta);
         }
         else
         {
-            grid->MoveCenterOn(delta);
+            IGrid::self->MoveCenterOn(delta);
         }
 
         pos_mouse_down = position;
     }
     else                                            // Отслеживание координат
     {
-        grid->SetNewMousePosition(position);
+        IGrid::self->SetNewMousePosition(position);
     }
 
     Refresh();
@@ -165,12 +162,12 @@ void Display::OnEventMouseWheel(wxMouseEvent &event)
 {
     if (event.GetModifiers() == wxMOD_CONTROL)
     {
-        grid->ScaleGridOn(event.GetPosition(), event.GetWheelRotation());
+        IGrid::self->ScaleGridOn(event.GetPosition(), event.GetWheelRotation());
     }
     else
     {
-        grid->RangeGridOnX(event.GetWheelRotation());
-        grid->RangeGridOnY(event.GetWheelRotation());
+        IGrid::self->RangeGridOnX(event.GetWheelRotation());
+        IGrid::self->RangeGridOnY(event.GetWheelRotation());
     }
 
     Refresh();
@@ -188,19 +185,19 @@ void Display::OnEventButton(wxCommandEvent &event)
     }
     else if (id == btnLessX->GetId())
     {
-        grid->RangeGridOnX(-1);
+        IGrid::self->RangeGridOnX(-1);
     }
     else if (id == btnMoreX->GetId())
     {
-        grid->RangeGridOnX(+1);
+        IGrid::self->RangeGridOnX(+1);
     }
     else if (id == btnLessY->GetId())
     {
-        grid->RangeGridOnY(-1);
+        IGrid::self->RangeGridOnY(-1);
     }
     else if (id == btnMoreY->GetId())
     {
-        grid->RangeGridOnY(+1);
+        IGrid::self->RangeGridOnY(+1);
     }
 }
 
@@ -225,7 +222,7 @@ void Display::OnEventPaint(wxPaintEvent &)
 
     FillRectangle(0, 0, GetDrawingSize().x, GetDrawingSize().y, *wxWHITE);
 
-    grid->Draw(entities);
+    IGrid::self->Draw(entities);
 
     EndPaint();
 

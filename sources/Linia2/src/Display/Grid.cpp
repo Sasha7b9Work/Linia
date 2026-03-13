@@ -7,13 +7,20 @@
 #include "Display/GraphEntity.h"
 
 
-Grid *Grid::self = nullptr;
+IGrid *IGrid::self = nullptr;
+
+
+void IGrid::Create()
+{
+    if (!self)
+    {
+        self = new Grid();
+    }
+}
 
 
 Grid::Grid()
 {
-    self = this;
-
     Reset();
 }
 
