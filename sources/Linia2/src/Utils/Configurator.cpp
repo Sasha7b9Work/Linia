@@ -176,6 +176,12 @@ void Config::WriteUint(const wxString &key, uint value)
 }
 
 
+void Config::Write(const wxString &key, uint &value)
+{
+    WriteUint(key, value);
+}
+
+
 uint Config::ReadUint(const wxString &key, uint def)
 {
     uint result;
@@ -183,6 +189,12 @@ uint Config::ReadUint(const wxString &key, uint def)
     result = (uint)Config::base->Read(key, (long)def);
 
     return result;
+}
+
+
+uint Config::Read(const wxString &key, uint &def)
+{
+    return ReadUint(key, def);
 }
 
 

@@ -18,6 +18,7 @@ namespace SET
         Value<int>       current_page_notebook("gui_current_page_notebook", 0);
         Value<int>       serial_port_num("serial_port_num", 0);
         Value<bool>      debug_mode("debug_mode", false);
+        Value<uint>      color_curve("color_curve", 0x00000000);
     }
 }
 
@@ -34,6 +35,8 @@ void SET::GUI::Load()
     maximized_console.Load();
     current_page_notebook.Load();
     serial_port_num.Load();
+
+    color_curve.Load();
 }
 
 
@@ -49,4 +52,6 @@ void SET::GUI::Save()
     maximized_console.Save();
     current_page_notebook.Save();
     serial_port_num.Save();
+
+    color_curve.Save();
 }
