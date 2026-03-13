@@ -13,7 +13,6 @@ public:
 
 private:
 
-    static const pchar BTN_SIZE_POINT;
     static const pchar BTN_STYLE_CURVE;
     static const pchar BTN_MARKERS;
     static const pchar BTN_SCALE;

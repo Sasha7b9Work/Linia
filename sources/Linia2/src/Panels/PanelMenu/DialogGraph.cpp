@@ -6,7 +6,6 @@
 DialogGraph *DialogGraph::self = nullptr;
 
 
-const pchar DialogGraph::BTN_SIZE_POINT = "Размер точки";
 const pchar DialogGraph::BTN_STYLE_CURVE = "Стиль кривой";
 const pchar DialogGraph::BTN_MARKERS = "Маркеры";
 const pchar DialogGraph::BTN_SCALE = "Шкала";
@@ -15,9 +14,6 @@ const pchar DialogGraph::BTN_RESET = "Сброс графика Ref";
 
 DialogGraph::DialogGraph() :
     MenuDialog("График", 200, { },
-        BTN_SIZE_POINT, []()
-        {
-        },
         BTN_STYLE_CURVE, []()
         {
         },
