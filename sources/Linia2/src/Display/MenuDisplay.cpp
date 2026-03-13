@@ -29,11 +29,13 @@ MenuDisplay::MenuDisplay() : wxMenu()
         Bind(wxEVT_MENU, &MenuDisplay::OnTrackX, this, item->GetId());
         subMenu->Check(item->GetId(), Display::self->track_x);
 
-        itemTrackY = subMenu->AppendCheckItem(wxID_ANY, "Y");
-        itemTrackNone = subMenu->AppendCheckItem(wxID_ANY, "Ничего");
+        item = subMenu->AppendCheckItem(wxID_ANY, "Y");
+        Bind(wxEVT_MENU, &MenuDisplay::OnTrackY, this, item->GetId());
+        subMenu->Check(item->GetId(), Display::self->track_y);
 
-        subMenu->Check(itemTrackY->GetId(), Display::self->track_y);
-        subMenu->Check(itemTrackNone->GetId(), Display::self->track_none);
+        item = subMenu->AppendCheckItem(wxID_ANY, "Ничего");
+        Bind(wxEVT_MENU, &MenuDisplay::OnTrackNone, this, item->GetId());
+        subMenu->Check(item->GetId(), Display::self->track_none);
 
         AppendSubMenu(subMenu, "Отслеживать");
     }
@@ -62,9 +64,6 @@ MenuDisplay::MenuDisplay() : wxMenu()
 
         AppendSubMenu(subFacade, "Внешний вид");
     }
-
-    Bind(wxEVT_MENU, &MenuDisplay::OnTrackY, this, itemTrackY->GetId());
-    Bind(wxEVT_MENU, &MenuDisplay::OnTrackNone, this, itemTrackNone->GetId());
 }
 
 
