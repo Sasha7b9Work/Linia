@@ -60,8 +60,11 @@ public:
 
     void Draw(const std::vector<GraphEntity *> &);
 
-    // Переместить сетку целиком
-    void MoveGridOn(const wxPoint &);
+    // Переместить изоражение на экране целиком
+    void MoveImageOn(const wxPoint &);
+
+    // Переместить центр графика (избражение измерений в графике)
+    void MoveCenterOn(const wxPoint &);
 
     void OnMouseMove(const wxPoint &);
 
@@ -80,8 +83,8 @@ public:
 
 private:
 
-    wxPoint center;         // В этом месте относительно центра экрана находится центр сетки
-    int     scale = 1;      // 2 - увеличено в два раза, 3 - увелично в три и так далее
+    wxPoint center_about_screen;    // В этом месте относительно центра экрана находится центр сетки
+    int     scale = 1;              // 2 - увеличено в два раза, 3 - увелично в три и так далее
     wxPoint pos_mouse;
     Range   rangeX{ "Uc", "V" };
     Range   rangeY{ "Ic", "A" };
