@@ -151,7 +151,15 @@ void Display::OnEventMouseMove(wxMouseEvent &event)
 
 void Display::OnEventMouseWheel(wxMouseEvent &event)
 {
-    grid->ScaleGridOn(event.GetPosition(), event.GetWheelRotation());
+    if (event.GetModifiers() == wxMOD_CONTROL)
+    {
+        grid->ScaleGridOn(event.GetPosition(), event.GetWheelRotation());
+    }
+    else
+    {
+        grid->RangeGridOnX(event.GetWheelRotation());
+        grid->RangeGridOnY(event.GetWheelRotation());
+    }
 
     Draw();
 }
