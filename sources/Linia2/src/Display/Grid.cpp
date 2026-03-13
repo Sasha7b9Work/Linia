@@ -781,3 +781,21 @@ wxString Range::GetValuePointAxis(int num, int cells_in_axis) const
 
     return wxString::Format("%.1f", step * num);
 }
+
+
+void Offset::Process(int &_x, int &_delta)
+{
+    int d = Grid::size_cell;
+
+    while (_delta >= d)
+    {
+        _delta -= d;
+        _x++;
+    }
+
+    while (_delta <= -d)
+    {
+        _delta += d;
+        _x--;
+    }
+}

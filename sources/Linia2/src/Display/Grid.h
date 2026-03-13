@@ -38,20 +38,7 @@ private:
     int dx = 0;
     int dy = 0;
 
-    void Process(int &_x, int &_delta)
-    {
-        while (_delta >= 10)
-        {
-            _delta -= 10;
-            _x++;
-        }
-
-        while (_delta <= -10)
-        {
-            _delta += 10;
-            _x--;
-        }
-    }
+    void Process(int &_x, int &_delta);
 };
 
 
@@ -139,6 +126,8 @@ public:
 
     void Reset();
 
+    static const int size_cell = 60;       // Столько клетка всегда занимает на экране
+
 private:
 
     wxPoint center_about_screen;    // В этом месте относительно центра экрана находится центр сетки
@@ -147,7 +136,6 @@ private:
     Offset  offset;
     Range   rangeX{ "Uc", "V", offset.x };
     Range   rangeY{ "Ic", "A", offset.y };
-    const int size_cell = 60;       // Столько клетка всегда занимает на экране
 
     // d - расстояние между точками
     void DrawVPointLineDown(int x, int y0, int y_low, int d);
