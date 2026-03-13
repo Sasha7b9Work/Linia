@@ -28,4 +28,6 @@ private:
     void OnTrackNone(wxCommandEvent &);
     void OnColor(wxCommandEvent &);
     void OnSizePoint(wxCommandEvent &);
+    void OnSaveGraphic(wxCommandEvent &);
+    void OnResetGraphic(wxCommandEvent &);
 };

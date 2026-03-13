@@ -8,7 +8,7 @@
 
 MenuDisplay::MenuDisplay() : wxMenu()
 {
-    Bind(wxEVT_MENU, &MenuDisplay::OnReset, this, (Append(wxID_RESET, "Сброс"))->GetId());
+    Bind(wxEVT_MENU, &MenuDisplay::OnReset, this, (Append(wxID_ANY, "Сброс"))->GetId());
 
     wxMenuItem *item = AppendCheckItem(wxID_ANY, "Полный экран");
     Bind(wxEVT_MENU, &MenuDisplay::OnFullScreen, this, item->GetId());
@@ -19,6 +19,11 @@ MenuDisplay::MenuDisplay() : wxMenu()
     AppendMenuTrack();
 
     AppendMenuFacade();
+
+    AppendSeparator();
+
+    Bind(wxEVT_MENU, &MenuDisplay::OnSaveGraphic, this, (Append(wxID_ANY, "Сохранать график"))->GetId());
+    Bind(wxEVT_MENU, &MenuDisplay::OnResetGraphic, this, (Append(wxID_ANY, "Сбросить график"))->GetId());
 }
 
 
@@ -151,6 +156,18 @@ void MenuDisplay::OnColor(wxCommandEvent &event)
 
 
 void MenuDisplay::OnSizePoint(wxCommandEvent &)
+{
+
+}
+
+
+void MenuDisplay::OnSaveGraphic(wxCommandEvent &)
+{
+
+}
+
+
+void MenuDisplay::OnResetGraphic(wxCommandEvent &)
 {
 
 }

@@ -19,7 +19,6 @@ private:
         *btnTest = nullptr,
         *btnSetup = nullptr,
         *btnArchiv = nullptr,
-        *btnGraph = nullptr,
         *btnTable = nullptr,
         *btnReport = nullptr,
         *btnMeasure = nullptr,

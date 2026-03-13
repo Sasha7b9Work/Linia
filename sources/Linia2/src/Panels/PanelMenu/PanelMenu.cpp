@@ -6,7 +6,6 @@
 #include "Panels/PanelMenu/DialogFile.h"
 #include "Panels/PanelMenu/DialogTest.h"
 #include "Panels/PanelMenu/Setup/DialogSetup.h"
-#include "Panels/PanelMenu/DialogGraph.h"
 #include "Panels/PanelMenu/DialogTable.h"
 #include "Panels/PanelMenu/DialogReport.h"
 
@@ -31,7 +30,6 @@ PanelMenu::PanelMenu(wxWindow* parent) :
         { "Тест",      &btnTest },
         { "Настройка", &btnSetup },
         { "Архив",     &btnArchiv },
-        { "График",    &btnGraph },
         { "Таблица",   &btnTable },
         { "Отчёт",     &btnReport },
         { "Измерение", &btnMeasure },
@@ -69,10 +67,6 @@ void PanelMenu::OnEventButton(wxCommandEvent &event)
     {
         MainWindow::self->SetMode(ModeMainWindow::ReferenceGraphs);
     }
-    else if (id == btnGraph->GetId())
-    {
-        DialogGraph().ShowOnWindow(btnGraph);
-    }
     else if (id == btnTable->GetId())
     {
         DialogTable().ShowOnWindow(btnTable);
@@ -94,6 +88,5 @@ void PanelMenu::OnEventButton(wxCommandEvent &event)
 
 int PanelMenu::NumButtons() const
 {
-//    return SET::GUI::debug_mode.Get() ? 9 : 8;
-    return 9;
+    return 8;
 }
