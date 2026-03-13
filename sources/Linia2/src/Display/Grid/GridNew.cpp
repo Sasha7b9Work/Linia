@@ -190,7 +190,7 @@ void GridNew::DrawLabelsOnAxis() const
     wxSize size = Display::self->GetDrawingSize();
 
     {
-        // Подписываем горизонтульную ось
+        // Подписываем горизонтальную ось
 
         wxPoint last_pos{ 0, 0 };   // Здесь отрисовано последнее значение
 
@@ -205,7 +205,10 @@ void GridNew::DrawLabelsOnAxis() const
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
                     last_pos = { coord.x, coord.y + d };
-                    Text(rangeX.GetValuePointAxis(i, NumCellsX())).DrawAboutCenterDown(last_pos.x, last_pos.y, true, background);
+
+                    wxString value = rangeX.GetValuePointAxis(i, NumCellsX());
+
+                    Text(value).DrawAboutCenterDown(last_pos.x, last_pos.y, true, background);
                 }
             }
             else
@@ -563,29 +566,32 @@ double GridNew::Range::Value::HalfAmplitudeAbs(int num_cells) const
         5.0
     };
 
-    if (order == 0)
+    double result = values[type];
+
+    if (order > 0)
     {
-        return values[type];
-    }
-    else if (order > 0)
-    {
-        double result = 1.0;
+        result = 1.0;
+
         for (int i = 0; i < order; i++)
         {
             result *= 10.0;
         }
-        return result * values[type];
+
+        result *= values[type];
     }
-    else
+    else if(order < 0)
     {
-        double result = 1.0;
+        result = 1.0;
+
         for (int i = order; i < 0; i++)
         {
             result *= 0.1;
         }
 
-        return result * values[type] * num_cells / 10.0f;
+        result *= values[type];
     }
+
+    return result * num_cells / 10.0;
 }
 
 
@@ -607,7 +613,7 @@ double GridNew::Range::Value::MinAbs() const
 
 void GridNew::Range::Value::Increase()
 {
-    if (MaxAbs() > 3e3)
+    if ((MaxAbs() - MinAbs()) > 3e3)
     {
         return;
     }
@@ -623,7 +629,7 @@ void GridNew::Range::Value::Increase()
 
 void GridNew::Range::Value::Decrease()
 {
-    if (MaxAbs() < 1e-11)
+    if ((MaxAbs() - MinAbs()) < 1e-11)
     {
         return;
     }
@@ -706,7 +712,9 @@ wxString GridNew::Range::GetValuePointAxis(int num, int cells_in_axis) const
         step *= 1e12;
     }
 
-    return wxString::Format("%.1f", step * num);
+    double val = step * num;
+
+    return wxString::Format("%.1f", val);
 }
 
 
