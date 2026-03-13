@@ -10,6 +10,11 @@ public:
 
 private:
 
+    struct MenuItemColor
+    {
+        wxMenuItem *item;
+    };
+
     wxMenuItem *itemFullscreen = nullptr,
 
         *itemColorBackground = nullptr,

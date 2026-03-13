@@ -132,32 +132,12 @@ void MenuDisplay::OnColor(wxCommandEvent &event)
             return false;
         };
 
-    int id = event.GetId();
+    wxMenuItem *item = FindItem(event.GetId());
 
-    wxColour color;
+    if (item)
+    {
+        wxColour color;
 
-    if (id == itemColorBackground->GetId())
-    {
-        SetColor("Фон", color);
-    }
-    else if (id == itemColorGrid->GetId())
-    {
-        SetColor("Сетка", color);
-    }
-    else if (id == itemColorFont->GetId())
-    {
-        SetColor("Шрифт", color);
-    }
-    else if (id == itemColorCurve->GetId())
-    {
-        SetColor("Кривая", color);
-    }
-    else if (id == itemColorLink->GetId())
-    {
-        SetColor("Ссылка", color);
-    }
-    else if (id == itemColorSecant->GetId())
-    {
-        SetColor("Секущая", color);
+        SetColor(item->GetItemLabel(), color);
     }
 }
