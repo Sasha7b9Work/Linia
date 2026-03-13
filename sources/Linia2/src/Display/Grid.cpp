@@ -7,8 +7,13 @@
 #include "Display/GraphEntity.h"
 
 
+Grid *Grid::self = nullptr;
+
+
 Grid::Grid()
 {
+    self = this;
+
     Reset();
 }
 
@@ -345,6 +350,12 @@ void Grid::MoveCenterOn(const wxPoint &delta)
 }
 
 
+void Grid::OnChangedOffsetMeasure(const wxPoint &delta)
+{
+    center_about_screen += delta * size_cell;
+}
+
+
 void Grid::FitIntoDisplay()
 {
     if (scale == 1)
@@ -553,13 +564,13 @@ wxPoint2DDouble Grid::CoordToValues(const wxPoint &coord) const
 
 void Grid::OnMouseDown()
 {
-    offset.Reset();
+    offset.ResetDelta();
 }
 
 
 void Grid::OnMouseUp()
 {
-    offset.Reset();
+    offset.ResetDelta();
 }
 
 
@@ -783,19 +794,19 @@ wxString Range::GetValuePointAxis(int num, int cells_in_axis) const
 }
 
 
-void Offset::Process(int &_x, int &_delta)
+void Offset::Process(int &_value, int &_delta)
 {
     int d = Grid::size_cell;
 
     while (_delta >= d)
     {
         _delta -= d;
-        _x++;
+        _value++;
     }
 
     while (_delta <= -d)
     {
         _delta += d;
-        _x--;
+        _value--;
     }
 }

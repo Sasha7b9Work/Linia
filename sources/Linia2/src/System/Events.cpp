@@ -2,9 +2,16 @@
 #include "defines.h"
 #include "System/Events.h"
 #include "Display/Display.h"
+#include "Display/Grid.h"
 
 
 void Events::ChangingTheConnectionOfTheMeasuredElement()
 {
     Display::self->OnEventCnangeMeasuredElement();
+}
+
+
+void Events::ChangeOffsetMeasure(const wxPoint &delta)
+{
+    Grid::self->OnChangedOffsetMeasure(delta);
 }

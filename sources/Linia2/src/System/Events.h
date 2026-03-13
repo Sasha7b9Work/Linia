@@ -8,4 +8,7 @@ namespace Events
 {
     // Следует вызывает при изменении испытуемого элемент или способе его подключения
     void ChangingTheConnectionOfTheMeasuredElement();
+
+    // Пользователь сместил мышкой изображение сигнала на экране
+    void ChangeOffsetMeasure(const wxPoint &);
 }

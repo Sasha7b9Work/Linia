@@ -1,5 +1,6 @@
 ﻿// 2025/7/13 20:38:50 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "System/Events.h"
 
 
 class GraphEntity;
@@ -7,12 +8,6 @@ class GraphEntity;
 
 struct Offset
 {
-    void Reset()
-    {
-        x = 0;
-        y = 0;
-    }
-
     // При нажимании/отпускании мышки вызываем эту функцию, чтобы обнулить накопительный счётчик смещения
     void ResetDelta()
     {
@@ -26,8 +21,18 @@ struct Offset
         dx += delta.x;
         dy += delta.y;
 
+        wxPoint diff{ x, y };
+
         Process(x, dx);
         Process(y, dy);
+
+        if (x != diff.x || y != diff.y)
+        {
+            diff.x = x - diff.x;
+            diff.y = y - diff.y;
+
+            Events::ChangeOffsetMeasure(diff);
+        }
     }
 
     int x = 0;
@@ -100,13 +105,17 @@ public:
 
     Grid();
 
+    static Grid *self;
+
     void Draw(const std::vector<GraphEntity *> &);
 
-    // Переместить изоражение на экране целиком
+    // Переместить изображение на экране целиком
     void MoveImageOn(const wxPoint &);
 
     // Переместить центр графика (избражение измерений в графике)
     void MoveCenterOn(const wxPoint &);
+
+    void OnChangedOffsetMeasure(const wxPoint &);
 
     void OnMouseMove(const wxPoint &);
 
