@@ -56,20 +56,22 @@ void MenuDisplay::AppendMenuFacade()
         // Настройка цветов
 
         wxMenuItem *item = nullptr;
+        StructColor str_color;
 
-#define APPEND_COLOR(title, value_color)                                \
+#define APPEND_COLOR(title, value_color, func)                          \
         item = subColors->Append(wxID_ANY, title);                      \
         Bind(wxEVT_MENU, &MenuDisplay::OnColor, this, item->GetId());   \
-        colors[item->GetId()] = &value_color;
+        str_color = { &value_color, func };                             \
+        colors[item->GetId()] = str_color;
 
         wxMenu *subColors = new wxMenu();
 
-        APPEND_COLOR("Фон", SET::GUI::color_background);
-        APPEND_COLOR("Сетка", SET::GUI::color_grid);
-        APPEND_COLOR("Шрифт", SET::GUI::color_font);
-        APPEND_COLOR("Кривая", SET::GUI::color_curve);
-        APPEND_COLOR("Ссылка", SET::GUI::color_link);
-        APPEND_COLOR("Секущая", SET::GUI::color_secant);
+        APPEND_COLOR("Фон", SET::GUI::color_background, nullptr);
+        APPEND_COLOR("Сетка", SET::GUI::color_grid, nullptr);
+        APPEND_COLOR("Шрифт", SET::GUI::color_font, nullptr);
+        APPEND_COLOR("Кривая", SET::GUI::color_curve, OnColorCurve);
+        APPEND_COLOR("Ссылка", SET::GUI::color_link, nullptr);
+        APPEND_COLOR("Секущая", SET::GUI::color_secant, nullptr);
 
         subFacade->AppendSubMenu(subColors, "Цвета");
     }
@@ -162,7 +164,12 @@ void MenuDisplay::OnColor(wxCommandEvent &event)
 
             if (elem != colors.end())
             {
-                elem->second->Set(color.GetRGB());
+                elem->second.set->Set(color.GetRGB());
+
+                if (elem->second.func)
+                {
+                    elem->second.func();
+                }
             }
         }
     }
@@ -184,4 +191,13 @@ void MenuDisplay::OnSaveGraphic(wxCommandEvent &)
 void MenuDisplay::OnResetGraphic(wxCommandEvent &)
 {
 
+}
+
+
+void MenuDisplay::OnColorCurve()
+{
+    for (auto elem : Display::self->entities)
+    {
+        elem->SetColor(SET::GUI::color_curve.Get());
+    }
 }

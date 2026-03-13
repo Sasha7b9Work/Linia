@@ -3,6 +3,7 @@
 #include "Panels/Panel.h"
 #include "Display/Grid/Grid.h"
 #include "Display/PanelErrors.h"
+#include "Display/GraphEntity.h"
 
 
 // Здесь отрисовывается график ну и кнопки разные
@@ -47,6 +48,8 @@ public:
     // Возврщает полнлный размер виджета
     wxSize GetFullSize() const;
 
+    std::vector<GraphEntity *> entities;    // Сущности для отрисовки
+
 private:
 
     wxButton *btnHelp = nullptr,
@@ -54,8 +57,6 @@ private:
         *btnMoreX = nullptr,
         *btnLessY = nullptr,
         *btnMoreY = nullptr;
-
-    std::vector<GraphEntity *> entities;    // Сущности для отрисовки
 
     wxBitmap *bitmap = nullptr;
     wxGraphicsContext *gc = nullptr;        // Используется для рисования

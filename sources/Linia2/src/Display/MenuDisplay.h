@@ -11,7 +11,13 @@ public:
 
 private:
 
-    std::map<int, Value<uint> *> colors;        // Здесь будем хранить настройки цветов, соответствующие пунктам меню
+    struct StructColor
+    {
+        Value<uint> *set;
+        void (*func)();
+    };
+
+    std::map<int, StructColor> colors;      // Здесь будем хранить настройки цветов, соответствующие пунктам меню
 
     // Следить
     void AppendMenuTrack();
@@ -28,4 +34,6 @@ private:
     void OnSizePoint(wxCommandEvent &);
     void OnSaveGraphic(wxCommandEvent &);
     void OnResetGraphic(wxCommandEvent &);
+
+    static void OnColorCurve();
 };
