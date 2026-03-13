@@ -5,9 +5,59 @@
 class GraphEntity;
 
 
+struct Offset
+{
+    void Reset()
+    {
+        x = 0;
+        y = 0;
+    }
+
+    // При нажимании/отпускании мышки вызываем эту функцию, чтобы обнулить накопительный счётчик смещения
+    void ResetDelta()
+    {
+        dx = 0;
+        dy = 0;
+    }
+
+    // При перемещении мышки вызываем эту функцию
+    void MoveOn(const wxPoint &delta)
+    {
+        dx += delta.x;
+        dy += delta.y;
+
+        Process(x, dx);
+        Process(y, dy);
+    }
+
+    int x = 0;
+    int y = 0;
+
+private:
+
+    int dx = 0;
+    int dy = 0;
+
+    void Process(int &_x, int &_delta)
+    {
+        while (_delta >= 10)
+        {
+            _delta -= 10;
+            _x++;
+        }
+
+        while (_delta <= -10)
+        {
+            _delta += 10;
+            _x--;
+        }
+    }
+};
+
+
 struct Range
 {
-    Range(const wxString &_title, const wxString &_units) : title(_title), units(_units) { }
+    Range(const wxString &_title, const wxString &_units, int &_offset) : title(_title), units(_units), max(_offset) { }
 
     wxString title;
     wxString units;
@@ -30,10 +80,13 @@ private:
 
     struct Value
     {
+        Value(int &_offset) : offset(_offset) { }
+
         // Возвращает значение в абсолютных значениях - амперы, вольты
         double MaxAbs() const;
         void Increase();
         void Decrease();
+
     private:
         // Чему кратно значение - единице, 2, 4(5)
         enum Type
@@ -46,6 +99,7 @@ private:
 
         Type type = _1;
         int order = 0;
+        int &offset;        // Смещение 0 относительно центра графика. Измеряется в клетках графика
     };
 
     Value max;
@@ -68,6 +122,9 @@ public:
 
     void OnMouseMove(const wxPoint &);
 
+    void OnMouseDown();
+    void OnMouseUp();
+
     void ScaleGridOn(const wxPoint &, int);
     void RangeGridOnX(int);
     void RangeGridOnY(int);
@@ -86,8 +143,9 @@ private:
     wxPoint center_about_screen;    // В этом месте относительно центра экрана находится центр сетки
     int     scale = 1;              // 2 - увеличено в два раза, 3 - увелично в три и так далее
     wxPoint pos_mouse;
-    Range   rangeX{ "Uc", "V" };
-    Range   rangeY{ "Ic", "A" };
+    Offset  offset;
+    Range   rangeX{ "Uc", "V", offset.x };
+    Range   rangeY{ "Ic", "A", offset.y };
     const int size_cell = 60;       // Столько клетка всегда занимает на экране
 
     // d - расстояние между точками

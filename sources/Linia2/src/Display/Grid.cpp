@@ -268,7 +268,7 @@ void Grid::DrawLabelsOnAxis() const
             }
         }
 
-        Text(rangeX.FullTitle()).DrawAboutCenterDown(last_pos.x < size.x ? last_pos.x : size.x - 20, last_pos.y, true, background);
+        Text(rangeX.FullTitle()).DrawAboutCenterDown(last_pos.x < size.x ? last_pos.x : size.x - 20, last_pos.y - 20, true, background);
     }
 
     {
@@ -304,11 +304,11 @@ void Grid::DrawLabelsOnAxis() const
         // Единицы измерения
         if (LeftX() - 20 > 0)
         {
-            Text(rangeY.FullTitle()).DrawAboutCenterLeft(last_pos.x, last_pos.y < d ? d : last_pos.y, true, background);
+            Text(rangeY.FullTitle()).DrawAboutCenterLeft(last_pos.x + 40, last_pos.y < d ? d : last_pos.y, true, background);
         }
         else
         {
-            Text(rangeY.FullTitle()).DrawAboutCenterRigth(last_pos.x, last_pos.y < d ? d : last_pos.y, true, background);
+            Text(rangeY.FullTitle()).DrawAboutCenterRigth(last_pos.x + 40, last_pos.y < d ? d : last_pos.y, true, background);
         }
     }
 }
@@ -339,9 +339,9 @@ void Grid::MoveImageOn(const wxPoint &delta)
 }
 
 
-void Grid::MoveCenterOn(const wxPoint &)
+void Grid::MoveCenterOn(const wxPoint &delta)
 {
-
+    offset.MoveOn(delta);
 }
 
 
@@ -548,6 +548,18 @@ wxPoint2DDouble Grid::CoordToValues(const wxPoint &coord) const
         rangeX.Amplitude() * (coord.x - center_about_screen.x) / (NumCells() * size_cell),
         rangeY.Amplitude() * (coord.y - center_about_screen.y) / (NumCells() * size_cell)
     };
+}
+
+
+void Grid::OnMouseDown()
+{
+    offset.Reset();
+}
+
+
+void Grid::OnMouseUp()
+{
+    offset.Reset();
 }
 
 

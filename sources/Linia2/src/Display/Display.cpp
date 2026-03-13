@@ -115,6 +115,8 @@ void Display::OnEventMouseDown(wxMouseEvent &event)
     Draw();
 
     SetCursor(wxCursor(wxCURSOR_HAND));
+
+    grid->OnMouseDown();
 }
 
 
@@ -125,6 +127,8 @@ void Display::OnEventMouseUp(wxMouseEvent &)
     Draw();
 
     SetCursor(wxCursor(wxCURSOR_ARROW));
+
+    grid->OnMouseUp();
 }
 
 

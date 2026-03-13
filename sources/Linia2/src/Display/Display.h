@@ -25,6 +25,8 @@ public:
 
     void Draw();
 
+//    virtual void Refresh(bool, bool) override;
+
     void SetColor(const wxColor &);
     void LoadColor();
 
@@ -82,8 +84,8 @@ private:
     void OnEventRightClick(wxMouseEvent &);
     void OnEventPaint(wxPaintEvent &);
     void OnEventMouseDown(wxMouseEvent &);
-    void OnEventMouseMove(wxMouseEvent &);
     void OnEventMouseUp(wxMouseEvent &);
+    void OnEventMouseMove(wxMouseEvent &);
     void OnEventMouseWheel(wxMouseEvent &);
     void OnEventButton(wxCommandEvent &);
 
