@@ -35,7 +35,6 @@ public:
 
 private:
 
-    static const pchar BTN_BACKGROUND;
     static const pchar BTN_GRID;
     static const pchar BTN_FONT;
     static const pchar BTN_CURVE;

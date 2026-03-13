@@ -15,7 +15,6 @@ const pchar DialogGraph::BTN_SCALE = "Шкала";
 const pchar DialogGraph::BTN_SAVE = "Сохранить график в архиве";
 const pchar DialogGraph::BTN_RESET = "Сброс графика Ref";
 
-const pchar DialogGraphColor::BTN_BACKGROUND = "Фона";
 const pchar DialogGraphColor::BTN_GRID = "Сетки";
 const pchar DialogGraphColor::BTN_FONT = "Шрифта";
 const pchar DialogGraphColor::BTN_CURVE = "Кривой";
@@ -52,15 +51,6 @@ DialogGraph::DialogGraph() :
 
 DialogGraphColor::DialogGraphColor() :
     MenuDialog("Цвет", 125, { },
-        BTN_BACKGROUND, []()
-        {
-            wxColour color;
-
-            if (SelectColor("фона", color))
-            {
-
-            }
-        },
         BTN_GRID, []()
         {
             wxColour color;
