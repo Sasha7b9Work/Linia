@@ -331,6 +331,19 @@ wxPoint Grid::GetCoordPointAxisY(int num) const
 }
 
 
+void Grid::OnMouseMove(const wxPoint &position)
+{
+    pos_mouse = position;
+}
+
+
+
+void Grid::MoveCenterOn(const wxPoint &delta)
+{
+    offset.MoveOn(delta);
+}
+
+
 void Grid::MoveImageOn(const wxPoint &delta)
 {
     if (scale == 1)
@@ -341,12 +354,6 @@ void Grid::MoveImageOn(const wxPoint &delta)
     center_about_screen += delta * scale;
 
     FitIntoDisplay();
-}
-
-
-void Grid::MoveCenterOn(const wxPoint &delta)
-{
-    offset.MoveOn(delta);
 }
 
 
@@ -571,12 +578,6 @@ void Grid::OnMouseDown()
 void Grid::OnMouseUp()
 {
     offset.ResetDelta();
-}
-
-
-void Grid::OnMouseMove(const wxPoint &position)
-{
-    pos_mouse = position;
 }
 
 
