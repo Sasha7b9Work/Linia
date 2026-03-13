@@ -56,6 +56,9 @@ MenuDisplay::MenuDisplay() : wxMenu()
             subFacade->AppendSubMenu(subColors, "Цвета");
         }
 
+        itemSizePoint = subFacade->Append(wxID_ANY, "Размер точки");
+        Bind(wxEVT_MENU, &MenuDisplay::OnSizePoint, this, itemSizePoint->GetId());
+
         AppendSubMenu(subFacade, "Внешний вид");
     }
 
@@ -143,4 +146,10 @@ void MenuDisplay::OnColor(wxCommandEvent &event)
 
         SetColor(item->GetItemLabel(), color);
     }
+}
+
+
+void MenuDisplay::OnSizePoint(wxCommandEvent &)
+{
+
 }

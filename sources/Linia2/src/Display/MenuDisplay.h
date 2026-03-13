@@ -16,6 +16,9 @@ private:
     };
 
     wxMenuItem *itemFullscreen = nullptr,
+
+        *itemSizePoint = nullptr,
+
         *itemTrackX = nullptr,
         *itemTrackY = nullptr,
         *itemTrackNone = nullptr;
@@ -26,4 +29,5 @@ private:
     void OnTrackY(wxCommandEvent &);
     void OnTrackNone(wxCommandEvent &);
     void OnColor(wxCommandEvent &);
+    void OnSizePoint(wxCommandEvent &);
 };
