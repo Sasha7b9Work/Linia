@@ -435,7 +435,7 @@ void Spline::Draw(bool smooth, bool draw_points) const
             p.push_back({ (int)p_d.m_x, (int)p_d.m_y });
         }
 
-        GraphicsSplineRenderer::DrawSplinePath(Display::self->gc, p, 2.0);
+        GraphicsSplineRenderer::DrawSplinePath(Display::self->gc, p, 1.0);
     }
     else
     {
