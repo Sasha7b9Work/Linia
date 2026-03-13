@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Display/GraphEntity.h"
 #include "Display/Display.h"
+#include "Settings/Settings.h"
 
 
 void GraphLine::Draw(const IGrid *grid) const
@@ -38,25 +39,11 @@ void GraphMeasures::Draw(const IGrid *grid) const
 
 void GraphEntity::CreateForEmulator(std::vector<GraphEntity *> &entities)
 {
-    wxColor colors[10] =
-    {
-        *wxBLACK,
-        *wxBLACK,
-        *wxBLACK,
-        *wxBLACK,
-        *wxBLACK,
-        *wxBLACK,
-        *wxBLACK,
-        *wxBLACK,
-        *wxBLACK,
-        *wxBLACK
-    };
-
     for (int num_line = 0; num_line < 10; num_line++)
     {
         GraphMeasures *meas = new GraphMeasures();
 
-        meas->SetColor(colors[num_line]);
+        meas->SetColor(SET::GUI::color_curve.Get());
 
         for (double u = 0.0; u <= 1.0; u += 0.1)
         {
