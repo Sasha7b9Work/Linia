@@ -16,9 +16,6 @@ private:
     };
 
     wxMenuItem *itemFullscreen = nullptr,
-
-        *itemSizePoint = nullptr,
-
         *itemTrackX = nullptr,
         *itemTrackY = nullptr,
         *itemTrackNone = nullptr;

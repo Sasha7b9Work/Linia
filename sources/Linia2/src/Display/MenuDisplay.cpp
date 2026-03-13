@@ -8,6 +8,8 @@
 
 MenuDisplay::MenuDisplay() : wxMenu()
 {
+    wxMenuItem *item = nullptr;
+
     // Добавляем пункты меню
     Append(wxID_RESET, "Сброс");
     itemFullscreen = AppendCheckItem(wxID_ANY, "Полный экран");
@@ -45,7 +47,6 @@ MenuDisplay::MenuDisplay() : wxMenu()
 
             wxMenu *subColors = new wxMenu();
 
-            wxMenuItem *item = nullptr;
             APPEND_COLOR("Фон");
             APPEND_COLOR("Сетка");
             APPEND_COLOR("Шрифт");
@@ -56,8 +57,7 @@ MenuDisplay::MenuDisplay() : wxMenu()
             subFacade->AppendSubMenu(subColors, "Цвета");
         }
 
-        itemSizePoint = subFacade->Append(wxID_ANY, "Размер точки");
-        Bind(wxEVT_MENU, &MenuDisplay::OnSizePoint, this, itemSizePoint->GetId());
+        Bind(wxEVT_MENU, &MenuDisplay::OnSizePoint, this, (subFacade->Append(wxID_ANY, "Размер точки"))->GetId());
 
         AppendSubMenu(subFacade, "Внешний вид");
     }
