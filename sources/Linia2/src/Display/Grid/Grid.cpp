@@ -1,6 +1,5 @@
 ﻿// 2025/7/13 20:39:15 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Display/Grid.h"
 #include "Display/Display.h"
 #include "MainWindow.h"
 #include "Utils/Math.h"

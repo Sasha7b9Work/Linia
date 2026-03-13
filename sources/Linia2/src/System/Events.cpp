@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "System/Events.h"
 #include "Display/Display.h"
-#include "Display/Grid.h"
+#include "Display/Grid/Grid.h"
 
 
 void Events::ChangingTheConnectionOfTheMeasuredElement()

@@ -1,7 +1,7 @@
 ﻿// 2026/03/13 16:31:27 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Display/MenuDisplay.h"
-#include "Display/Grid.h"
+#include "Display/Grid/Grid.h"
 #include "Display/Display.h"
 #include "MainWindow.h"
 
