@@ -208,6 +208,7 @@ void Display::BeginPaint()
 {
     dc.SelectObject(*bitmap);
     gc = wxGraphicsContext::Create(dc);
+    gc->SetAntialiasMode(wxANTIALIAS_NONE);
 }
 
 
@@ -457,7 +458,7 @@ void Spline::Draw(bool smooth, bool draw_points) const
 
         for (const auto &pt : points)
         {
-            path_circle.AddCircle(pt.m_x, pt.m_y, 3);
+            path_circle.AddCircle(pt.m_x, pt.m_y, 2);
         }
 
         Display::self->gc->FillPath(path_circle);

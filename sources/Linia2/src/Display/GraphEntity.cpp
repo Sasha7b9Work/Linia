@@ -40,16 +40,16 @@ void GraphEntity::CreateForEmulator(std::vector<GraphEntity *> &entities)
 {
     wxColor colors[10] =
     {
-        *wxBLUE,
-        *wxCYAN,
-        *wxGREEN,
-        *wxYELLOW,
-        *wxRED,
-        *wxBLUE,
-        *wxCYAN,
-        *wxGREEN,
-        *wxYELLOW,
-        *wxRED
+        *wxBLACK,
+        *wxBLACK,
+        *wxBLACK,
+        *wxBLACK,
+        *wxBLACK,
+        *wxBLACK,
+        *wxBLACK,
+        *wxBLACK,
+        *wxBLACK,
+        *wxBLACK
     };
 
     for (int num_line = 0; num_line < 10; num_line++)
