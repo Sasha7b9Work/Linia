@@ -516,13 +516,13 @@ void Grid::DrawHPointLineLeft2(int x, int y, int x_left, int d)
 
 double Grid::UnitsInCellX() const
 {
-    return rangeX.Amplitude() / NumCells();
+    return rangeX.AmplitudeAbs() / NumCells();
 }
 
 
 double Grid::UnitsInCellY() const
 {
-    return rangeY.Amplitude() / NumCells();
+    return rangeY.AmplitudeAbs() / NumCells();
 }
 
 
@@ -534,9 +534,9 @@ int Grid::NumCells() const
 
 wxPoint Grid::ValuesToCoord(double x, double y) const
 {
-    double cells_in_x = x / rangeX.Amplitude() * NumCells();
+    double cells_in_x = x * NumCells() / rangeX.AmplitudeAbs();
 
-    double cells_in_y = y / rangeY.Amplitude() * NumCells();
+    double cells_in_y = y * NumCells() / rangeY.AmplitudeAbs();
 
     return { (int)(center_about_screen.x + cells_in_x * size_cell + 0.5), (int)(center_about_screen.y - cells_in_y * size_cell + 0.5) };
 }
@@ -545,8 +545,8 @@ wxPoint Grid::ValuesToCoord(double x, double y) const
 wxPoint2DDouble Grid::CoordToValues(const wxPoint &coord) const
 {
     return {
-        rangeX.Amplitude() * (coord.x - center_about_screen.x) / (NumCells() * size_cell),
-        rangeY.Amplitude() * (coord.y - center_about_screen.y) / (NumCells() * size_cell)
+        rangeX.AmplitudeAbs() * (coord.x - center_about_screen.x) / (NumCells() * size_cell),
+        rangeY.AmplitudeAbs() * (coord.y - center_about_screen.y) / (NumCells() * size_cell)
     };
 }
 
@@ -604,31 +604,31 @@ void Grid::DrawMouseMarkers() const
 }
 
 
-double Range::Amplitude() const
+double Range::AmplitudeAbs() const
 {
-    return 2.0 * MaxAbs();
-}
-
-
-void Range::Increase()
-{
-    max.Increase();
-}
-
-
-void Range::Decrease()
-{
-    max.Decrease();
+    return value.HalfAmplitudeAbs() * 2.0;
 }
 
 
 double Range::MaxAbs() const
 {
-    return max.MaxAbs();
+    return value.MaxAbs();
 }
 
 
-double Range::Value::MaxAbs() const
+void Range::Increase()
+{
+    value.Increase();
+}
+
+
+void Range::Decrease()
+{
+    value.Decrease();
+}
+
+
+double Range::Value::HalfAmplitudeAbs() const
 {
     static double values[Type::Count] =
     {
@@ -659,6 +659,22 @@ double Range::Value::MaxAbs() const
         }
         return result * values[type];
     }
+}
+
+
+double Range::Value::MaxAbs() const
+{
+    double max = HalfAmplitudeAbs();
+
+    return max + (double)offset * HalfAmplitudeAbs() / 5.0;
+}
+
+
+double Range::Value::MinAbs() const
+{
+    double min = -HalfAmplitudeAbs();
+
+    return min + (double)offset * HalfAmplitudeAbs() / 5.0f;
 }
 
 
@@ -701,29 +717,29 @@ wxString Range::FullTitle() const
 {
     wxString prefix;
 
-    double value = MaxAbs();
+    double max_abs = MaxAbs();
 
-    if (value > 1e3)
+    if (max_abs > 1e3)
     {
         prefix = "k";
     }
-    else if (value > 1.0)
+    else if (max_abs > 1.0)
     {
         prefix = "";
     }
-    else if((int64)(value * 1000) > 1)
+    else if((int64)(max_abs * 1000) > 1)
     {
         prefix = "m";
     }
-    else if ((int64)(value * 1000000) > 1)
+    else if ((int64)(max_abs * 1000000) > 1)
     {
         prefix = "u";
     }
-    else if ((int64)(value * 1e9) > 1)
+    else if ((int64)(max_abs * 1e9) > 1)
     {
         prefix = "n";
     }
-    else if ((int64)(value * 1e12) > 1)
+    else if ((int64)(max_abs * 1e12) > 1)
     {
         prefix = "p";
     }
@@ -734,31 +750,31 @@ wxString Range::FullTitle() const
 
 wxString Range::GetValuePointAxis(int num, int cells_in_axis) const
 {
-    double step = Amplitude() / cells_in_axis;
+    double step = AmplitudeAbs() / cells_in_axis;
 
-    double value = MaxAbs();
+    double max_abs = MaxAbs();
 
-    if (value > 1e3)
+    if (max_abs > 1e3)
     {
         step /= 1e3;
     }
-    else if (value > 1)
+    else if (max_abs > 1)
     {
         step *= 1.0;
     }
-    else if ((int64)(value * 1000) > 1)
+    else if ((int64)(max_abs * 1000) > 1)
     {
         step *= 1e3;
     }
-    else if ((int64)(value * 1e6) > 1)
+    else if ((int64)(max_abs * 1e6) > 1)
     {
         step *= 1e6;
     }
-    else if ((int64)(value * 1e9) > 1)
+    else if ((int64)(max_abs * 1e9) > 1)
     {
         step *= 1e9;
     }
-    else if ((int64)(value * 1e12) > 1)
+    else if ((int64)(max_abs * 1e12) > 1)
     {
         step *= 1e12;
     }

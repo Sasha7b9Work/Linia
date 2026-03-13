@@ -57,13 +57,14 @@ private:
 
 struct Range
 {
-    Range(const wxString &_title, const wxString &_units, int &_offset) : title(_title), units(_units), max(_offset) { }
+    Range(const wxString &_title, const wxString &_units, int &_offset) : title(_title), units(_units), value(_offset) { }
 
     wxString title;
     wxString units;
 
     // Разница между максимальным и минимальным значениями - амплитуда
-    double Amplitude() const;
+    double AmplitudeAbs() const;
+    double MaxAbs() const;
 
     // cells_in_axis - количество клеток по любой оси. Оно всегда одинаковое
     wxString GetValuePointAxis(int, int cells_in_axis) const;
@@ -73,16 +74,16 @@ struct Range
     void Increase();
     void Decrease();
 
-    // Возвращает абсолютное значение - амперы, вольты
-    double MaxAbs() const;
-
 private:
 
     struct Value
     {
         Value(int &_offset) : offset(_offset) { }
 
-        // Возвращает значение в абсолютных значениях - амперы, вольты
+        double HalfAmplitudeAbs() const;
+        // Минимальное значение
+        double MinAbs() const;
+        // Максимальное значение
         double MaxAbs() const;
         void Increase();
         void Decrease();
@@ -102,7 +103,7 @@ private:
         int &offset;        // Смещение 0 относительно центра графика. Измеряется в клетках графика
     };
 
-    Value max;
+    Value value;
 };
 
 
@@ -166,10 +167,10 @@ private:
     wxPoint GetCoordPointAxisX(int) const;
     wxPoint GetCoordPointAxisY(int) const;
 
-    int BottomY() const;            // В этой позиции экрана находится нижняя сторона экрана
-    int TopY() const;               // В этой позиции экрана находится верхняя сторона экрана
-    int LeftX() const;              // В этой позиции экрана находится левая сторона сетки
-    int RightX() const;             // В этой позиции экрана находится правая сторона сетки
+    int BottomY() const;  // В этой позиции экрана находится нижняя сторона экрана
+    int TopY() const;     // В этой позиции экрана находится верхняя сторона экрана
+    int LeftX() const;    // В этой позиции экрана находится левая сторона сетки
+    int RightX() const;   // В этой позиции экрана находится правая сторона сетки
 
     // Длина оси в пикселях
     int LengthAxis() const;
