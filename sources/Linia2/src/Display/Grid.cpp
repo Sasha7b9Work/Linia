@@ -415,7 +415,7 @@ void Grid::RangeGridOnX(int delta)
         rangeX.Decrease();
     }
 
-    Display::self->Draw();
+    Display::self->Refresh();
 }
 
 
@@ -430,7 +430,7 @@ void Grid::RangeGridOnY(int delta)
         rangeY.Decrease();
     }
 
-    Display::self->Draw();
+    Display::self->Refresh();
 }
 
 

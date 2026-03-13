@@ -100,9 +100,9 @@ void Display::Init()
 
     Panel::Layout();
 
-    Draw();
-
     GraphEntity::CreateForEmulator(entities);
+
+    Refresh();
 }
 
 
@@ -112,11 +112,11 @@ void Display::OnEventMouseDown(wxMouseEvent &event)
 
     mouse_is_pressed = true;
 
-    Draw();
-
     SetCursor(wxCursor(wxCURSOR_HAND));
 
     grid->OnMouseDown();
+
+    Refresh();
 }
 
 
@@ -124,11 +124,11 @@ void Display::OnEventMouseUp(wxMouseEvent &)
 {
     mouse_is_pressed = false;
 
-    Draw();
-
     SetCursor(wxCursor(wxCURSOR_ARROW));
 
     grid->OnMouseUp();
+
+    Refresh();
 }
 
 
@@ -156,7 +156,7 @@ void Display::OnEventMouseMove(wxMouseEvent &event)
         grid->OnMouseMove(position);
     }
 
-    Draw();
+    Refresh();
 }
 
 
@@ -172,7 +172,7 @@ void Display::OnEventMouseWheel(wxMouseEvent &event)
         grid->RangeGridOnY(event.GetWheelRotation());
     }
 
-    Draw();
+    Refresh();
 }
 
 
@@ -204,21 +204,6 @@ void Display::OnEventButton(wxCommandEvent &event)
 }
 
 
-
-void Display::Draw()
-{
-    BeginPaint();
-
-    FillRectangle(0, 0, GetDrawingSize().x, GetDrawingSize().y, *wxWHITE);
-
-    grid->Draw(entities);
-
-    EndPaint();
-
-    Panel::Refresh();
-}
-
-
 void Display::BeginPaint()
 {
     dc.SelectObject(*bitmap);
@@ -234,6 +219,14 @@ void Display::EndPaint()
 
 void Display::OnEventPaint(wxPaintEvent &)
 {
+    BeginPaint();
+
+    FillRectangle(0, 0, GetDrawingSize().x, GetDrawingSize().y, *wxWHITE);
+
+    grid->Draw(entities);
+
+    EndPaint();
+
     wxPaintDC paint_dc(this);
 
     paint_dc.DrawBitmap(*bitmap, 0, 0);
@@ -520,7 +513,7 @@ void Display::OnMenuFullScreen(wxCommandEvent &event)
 
     grid->ResetCenter();
 
-    Display::self->Draw();
+    Refresh();
 }
 
 

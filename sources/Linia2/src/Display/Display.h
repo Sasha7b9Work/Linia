@@ -23,10 +23,6 @@ public:
 
     static Display *self;
 
-    void Draw();
-
-//    virtual void Refresh(bool, bool) override;
-
     void SetColor(const wxColor &);
     void LoadColor();
 
