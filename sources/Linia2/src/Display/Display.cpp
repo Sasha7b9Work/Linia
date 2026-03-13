@@ -6,6 +6,7 @@
 #include "Panels/PanelTable.h"
 #include "Display/Graphics/GraphEntity.h"
 #include "Display/MenuDisplay.h"
+#include "Display/Graphics/Splines.h"
 
 
 Display *Display::self = nullptr;
@@ -423,39 +424,34 @@ void Spline::AppendPoint(const wxPoint2DDouble &point)
 
 void Spline::Draw(bool smooth, bool draw_points) const
 {
-    wxGraphicsPath path = Display::self->gc->CreatePath();
-
-    Display::self->SetColor(Display::self->color);
-
-    path.MoveToPoint(points[0].m_x, points[0].m_y);
-
     if (smooth)
     {
-        size_t num_points = points.size();
+        std::vector<wxPoint> p;
 
-        while (num_points % 3)
+        for (uint i = 0; i < points.size(); i++)
         {
-            num_points--;
+            wxPoint2DDouble p_d = points[i];
+
+            p.push_back({ (int)p_d.m_x, (int)p_d.m_y });
         }
 
-        for (uint i = 1; i < num_points; i += 3)
-        {
-            path.AddCurveToPoint(
-                points[i].m_x, points[i].m_y,
-                points[i + 1].m_x, points[i + 1].m_y,
-                points[i + 2].m_x, points[i + 2].m_y
-            );
-        }
+        GraphicsSplineRenderer::DrawSplinePath(Display::self->gc, p, 2.0);
     }
     else
     {
+        wxGraphicsPath path = Display::self->gc->CreatePath();
+
+        Display::self->SetColor(Display::self->color);
+
+        path.MoveToPoint(points[0].m_x, points[0].m_y);
+
         for (uint i = 1; i < points.size(); i++)
         {
             path.AddLineToPoint(points[i].m_x, points[i].m_y);
         }
-    }
 
-    Display::self->gc->StrokePath(path);
+        Display::self->gc->StrokePath(path);
+    }
 
     if (draw_points)
     {
