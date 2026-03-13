@@ -431,7 +431,14 @@ void Spline::Draw(bool smooth, bool draw_points) const
 
     if (smooth)
     {
-        for (uint i = 1; i < points.size(); i += 3)
+        size_t num_points = points.size();
+
+        while (num_points % 3)
+        {
+            num_points--;
+        }
+
+        for (uint i = 1; i < num_points; i += 3)
         {
             path.AddCurveToPoint(
                 points[i].m_x, points[i].m_y,

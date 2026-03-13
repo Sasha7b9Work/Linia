@@ -428,13 +428,13 @@ void GridNew::DrawHPointLineLeft2(const wxPoint &p, int x_left, int d)
 
 double GridNew::UnitsInCellX() const
 {
-    return rangeX.AmplitudeAbs() / NumCellsX();
+    return rangeX.AmplitudeAbs(NumCellsX()) / NumCellsX();
 }
 
 
 double GridNew::UnitsInCellY() const
 {
-    return rangeY.AmplitudeAbs() / NumCellsY();
+    return rangeY.AmplitudeAbs(NumCellsY()) / NumCellsY();
 }
 
 
@@ -462,9 +462,9 @@ int GridNew::NumCellsY() const
 
 wxPoint GridNew::ValuesToCoord(double x, double y) const
 {
-    double cells_in_x = x * NumCellsX() / rangeX.AmplitudeAbs();
+    double cells_in_x = x * NumCellsX() / rangeX.AmplitudeAbs(NumCellsX());
 
-    double cells_in_y = y * NumCellsY() / rangeY.AmplitudeAbs();
+    double cells_in_y = y * NumCellsY() / rangeY.AmplitudeAbs(NumCellsY());
 
     wxPoint coord_zero = CoordZeroInPixels();
 
@@ -477,8 +477,8 @@ wxPoint2DDouble GridNew::CoordToValues(const wxPoint &coord) const
     wxPoint coord_zero = CoordZeroInPixels();
 
     return {
-        rangeX.AmplitudeAbs() * (coord.x - coord_zero.x) / (NumCellsX() * size_cell),
-        rangeY.AmplitudeAbs() * (coord.y - coord_zero.y) / (NumCellsY() * size_cell)
+        rangeX.AmplitudeAbs(NumCellsX()) * (coord.x - coord_zero.x) / (NumCellsX() * size_cell),
+        rangeY.AmplitudeAbs(NumCellsY()) * (coord.y - coord_zero.y) / (NumCellsY() * size_cell)
     };
 }
 
@@ -530,9 +530,9 @@ void GridNew::DrawMouseMarkers() const
 }
 
 
-double GridNew::Range::AmplitudeAbs() const
+double GridNew::Range::AmplitudeAbs(int num_cells) const
 {
-    return value.HalfAmplitudeAbs() * 2.0;
+    return value.HalfAmplitudeAbs(num_cells) * 2.0;
 }
 
 
@@ -554,7 +554,7 @@ void GridNew::Range::Decrease()
 }
 
 
-double GridNew::Range::Value::HalfAmplitudeAbs() const
+double GridNew::Range::Value::HalfAmplitudeAbs(int num_cells) const
 {
     static double values[Type::Count] =
     {
@@ -583,24 +583,25 @@ double GridNew::Range::Value::HalfAmplitudeAbs() const
         {
             result *= 0.1;
         }
-        return result * values[type];
+
+        return result * values[type] * num_cells / 10.0f;
     }
 }
 
 
 double GridNew::Range::Value::MaxAbs() const
 {
-    double max = HalfAmplitudeAbs();
+    double max = HalfAmplitudeAbs(NumCells());
 
-    return max + (double)offset * HalfAmplitudeAbs() / 5.0;
+    return max + (double)offset * HalfAmplitudeAbs(NumCells()) / (NumCells() / 2.0);
 }
 
 
 double GridNew::Range::Value::MinAbs() const
 {
-    double min = -HalfAmplitudeAbs();
+    double min = -HalfAmplitudeAbs(NumCells());
 
-    return min + (double)offset * HalfAmplitudeAbs() / 5.0f;
+    return min + (double)offset * HalfAmplitudeAbs(NumCells()) / (NumCells() / 2.0);
 }
 
 
@@ -676,7 +677,7 @@ wxString GridNew::Range::FullTitle() const
 
 wxString GridNew::Range::GetValuePointAxis(int num, int cells_in_axis) const
 {
-    double step = AmplitudeAbs() / cells_in_axis;
+    double step = AmplitudeAbs(cells_in_axis) / cells_in_axis;
 
     double max_abs = MaxAbs();
 
@@ -739,5 +740,5 @@ void GridNew::Offset::MoveOn(const wxPoint &delta)
 
 wxPoint GridNew::CoordZeroInPixels() const
 {
-    return { CenterX(), CenterY() };
+    return { CenterX() + offset.GetValueX() * size_cell, CenterY() + offset.GetValueY() * size_cell };
 }

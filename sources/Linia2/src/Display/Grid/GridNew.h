@@ -30,6 +30,16 @@ class GridNew : public IGrid
             return y;
         }
 
+        int GetValueX() const
+        {
+            return x;
+        }
+
+        int GetValueY() const
+        {
+            return y;
+        }
+
     private:
 
         int x = 0;
@@ -44,13 +54,14 @@ class GridNew : public IGrid
 
     struct Range
     {
-        Range(const wxString &_title, const wxString &_units, int &_offset) : title(_title), units(_units), value(_offset) {}
+        Range(const wxString &_title, const wxString &_units, int &_offset, int (*num_cells)()) :
+            title(_title), units(_units), value(_offset, num_cells) {}
 
         wxString title;
         wxString units;
 
         // Разница между максимальным и минимальным значениями - амплитуда
-        double AmplitudeAbs() const;
+        double AmplitudeAbs(int num_cells) const;
         double MaxAbs() const;
 
         // cells_in_axis - количество клеток по любой оси. Оно всегда одинаковое
@@ -65,16 +76,18 @@ class GridNew : public IGrid
 
         struct Value
         {
-            Value(int &_offset) : offset(_offset)
-            {}
+            Value(int &_offset, int (*num_cells)()) :
+                NumCells(num_cells), offset(_offset) {}
 
-            double HalfAmplitudeAbs() const;
+            double HalfAmplitudeAbs(int num_cells) const;
             // Минимальное значение
             double MinAbs() const;
             // Максимальное значение
             double MaxAbs() const;
             void Increase();
             void Decrease();
+
+            int (*NumCells)();
 
         private:
             // Чему кратно значение - единице, 2, 4(5)
@@ -128,8 +141,14 @@ private:
 
     wxPoint pos_mouse;
     Offset  offset;
-    Range   rangeX{ "Uc", "V", offset.GetX() };
-    Range   rangeY{ "Ic", "A", offset.GetY() };
+    Range   rangeX{ "Uc", "V", offset.GetX(), []()->int
+        {
+            return IGrid::self->NumCellsX();
+        } };
+    Range   rangeY{ "Ic", "A", offset.GetY(), []() ->int
+        {
+            return IGrid::self->NumCellsY();
+        } };
 
     // d - расстояние между точками
     void DrawVPointLineDown(int x, int y0, int y_low, int d);
@@ -168,6 +187,6 @@ private:
     void DrawMouseMarkers() const;
 
     // Количество клеток по осям X и Y
-    int NumCellsX() const;
-    int NumCellsY() const;
+    int NumCellsX() const override;
+    int NumCellsY() const override;
 };

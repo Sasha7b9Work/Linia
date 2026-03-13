@@ -29,6 +29,8 @@ public:
     virtual void ResetCenter() = 0;
     virtual void Reset() = 0;
     virtual wxPoint ValuesToCoord(double x, double y) const = 0;
+    virtual int NumCellsX() const = 0;
+    virtual int NumCellsY() const = 0;
 };
 
 
@@ -181,6 +183,16 @@ private:
 
     // Количество клеток по осям X и Y
     int NumCells() const;
+
+    int NumCellsX() const override
+    {
+        return NumCells();
+    }
+
+    int NumCellsY() const override
+    {
+        return NumCells();
+    }
 
     // Отрисовать область сетки, отображаемую на дисплее
     void DrawArea() const;
