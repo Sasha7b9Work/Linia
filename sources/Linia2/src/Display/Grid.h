@@ -36,8 +36,7 @@ class Grid
 
     struct Range
     {
-        Range(const wxString &_title, const wxString &_units, int &_offset) : title(_title), units(_units), value(_offset)
-        {}
+        Range(const wxString &_title, const wxString &_units, int &_offset) : title(_title), units(_units), value(_offset) {}
 
         wxString title;
         wxString units;
