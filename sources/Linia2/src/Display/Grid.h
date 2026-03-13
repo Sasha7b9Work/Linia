@@ -23,6 +23,8 @@ class Grid
         int x = 0;
         int y = 0;
 
+        wxPoint center_about_screen;    // В этом месте относительно центра экрана находится центр сетки
+
     private:
 
         int dx = 0;
@@ -118,7 +120,6 @@ public:
 
 private:
 
-    wxPoint center_about_screen;    // В этом месте относительно центра экрана находится центр сетки
     int     scale = 1;              // 2 - увеличено в два раза, 3 - увелично в три и так далее
     wxPoint pos_mouse;
     Offset  offset;

@@ -22,7 +22,7 @@ void Grid::ResetCenter()
 {
     wxSize display_size = Display::self->GetDrawingSize();
 
-    center_about_screen = { display_size.x / 2, display_size.y / 2 };
+    offset.center_about_screen = { display_size.x / 2, display_size.y / 2 };
 }
 
 
@@ -42,7 +42,7 @@ int Grid::BottomY() const
 
 int Grid::TopY() const
 {
-    return center_about_screen.y - (int)(rangeY.MaxAbs() / UnitsInCellY() * size_cell);
+    return offset.center_about_screen.y - (int)(rangeY.MaxAbs() / UnitsInCellY() * size_cell);
 }
 
 
@@ -54,7 +54,7 @@ int Grid::LengthAxis() const
 
 int Grid::LeftX() const
 {
-    return center_about_screen.x - (int)(rangeX.MaxAbs() / UnitsInCellX() * size_cell);
+    return offset.center_about_screen.x - (int)(rangeX.MaxAbs() / UnitsInCellX() * size_cell);
 }
 
 
@@ -130,10 +130,10 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         // Горизонтальные линии
         Line(x_left, y_top, RightX(), y_top).Draw(*wxBLACK);
 
-        if (Math::InRange(center_about_screen.y, y_top, y_bottom))
+        if (Math::InRange(offset.center_about_screen.y, y_top, y_bottom))
         {
-            DrawHPointLineRight2(center_about_screen.x, center_about_screen.y, size.x, d);
-            DrawHPointLineLeft2(center_about_screen.x, center_about_screen.y, 0, d);
+            DrawHPointLineRight2(offset.center_about_screen.x, offset.center_about_screen.y, size.x, d);
+            DrawHPointLineLeft2(offset.center_about_screen.x, offset.center_about_screen.y, 0, d);
         }
 
         Line(x_left, BottomY(), RightX(), BottomY()).Draw();
@@ -141,10 +141,10 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
         // Вертикальные линии
         Line(x_left, y_top, x_left, BottomY()).Draw();
 
-        if (Math::InRange(center_about_screen.x, x_left, x_right))
+        if (Math::InRange(offset.center_about_screen.x, x_left, x_right))
         {
-            DrawVPointLineDown2(center_about_screen.x, center_about_screen.y, size.y, d);
-            DrawVPointLineUp2(center_about_screen.x, center_about_screen.y, 0, d);
+            DrawVPointLineDown2(offset.center_about_screen.x, offset.center_about_screen.y, size.y, d);
+            DrawVPointLineUp2(offset.center_about_screen.x, offset.center_about_screen.y, 0, d);
         }
 
         Line(RightX(), y_top, RightX(), BottomY()).Draw();
@@ -153,48 +153,48 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
     // Рисуем вертикальные линии справа от нуля
     for (int i = 1; i < 100; i++)
     {
-        int x = center_about_screen.x + i * size_cell;
+        int x = offset.center_about_screen.x + i * size_cell;
 
         if (x > 0 && x < size.x)
         {
-            DrawVPointLineDown(x, center_about_screen.y, size.y, d);
-            DrawVPointLineUp(x, center_about_screen.y, 0, d);
+            DrawVPointLineDown(x, offset.center_about_screen.y, size.y, d);
+            DrawVPointLineUp(x, offset.center_about_screen.y, 0, d);
         }
     }
 
     // Рисуем вертикальные линии слева от нуля
     for (int i = 1; i < 100; i++)
     {
-        int x = center_about_screen.x - i * size_cell;
+        int x = offset.center_about_screen.x - i * size_cell;
 
         if (x > 0 && x < size.x)
         {
-            DrawVPointLineDown(x, center_about_screen.y, size.y, d);
-            DrawVPointLineUp(x, center_about_screen.y, 0, d);
+            DrawVPointLineDown(x, offset.center_about_screen.y, size.y, d);
+            DrawVPointLineUp(x, offset.center_about_screen.y, 0, d);
         }
     }
 
     // Рисуем горизонтальные линии сверху от нуля
     for (int i = 1; i < 100; i++)
     {
-        int y = center_about_screen.y - i * size_cell;
+        int y = offset.center_about_screen.y - i * size_cell;
 
         if (y > 0 && y < size.y)
         {
-            DrawHPointLineRight(center_about_screen.x, y, size.x, d);
-            DrawHPointLineLeft(center_about_screen.x, y, 0, d);
+            DrawHPointLineRight(offset.center_about_screen.x, y, size.x, d);
+            DrawHPointLineLeft(offset.center_about_screen.x, y, 0, d);
         }
     }
 
     // Рисуем горизонтальные линии снизу от нуля
     for (int i = 1; i < 100; i++)
     {
-        int y = center_about_screen.y + i * size_cell;
+        int y = offset.center_about_screen.y + i * size_cell;
 
         if (y > 0 && y < size.y)
         {
-            DrawHPointLineRight(center_about_screen.x, y, size.x, d);
-            DrawHPointLineLeft(center_about_screen.x, y, 0, d);
+            DrawHPointLineRight(offset.center_about_screen.x, y, size.x, d);
+            DrawHPointLineLeft(offset.center_about_screen.x, y, 0, d);
         }
     }
 
@@ -202,11 +202,11 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
     for (int i = 1; i < 3; i++)
     {
-        DrawVPointLineUp(x_left + i, center_about_screen.y, 0, d);
-        DrawVPointLineDown(x_left + i, center_about_screen.y, size.y, d);
+        DrawVPointLineUp(x_left + i, offset.center_about_screen.y, 0, d);
+        DrawVPointLineDown(x_left + i, offset.center_about_screen.y, size.y, d);
 
-        DrawHPointLineRight(center_about_screen.x, BottomY() - i, size.x, d);
-        DrawHPointLineLeft(center_about_screen.x, BottomY() - i, 0, d);
+        DrawHPointLineRight(offset.center_about_screen.x, BottomY() - i, size.x, d);
+        DrawHPointLineLeft(offset.center_about_screen.x, BottomY() - i, 0, d);
     }
 
     for (auto *entity : entities)
@@ -321,13 +321,13 @@ void Grid::DrawLabelsOnAxis() const
 
 wxPoint Grid::GetCoordPointAxisX(int num) const
 {
-    return { center_about_screen.x + size_cell * num, BottomY() };
+    return { offset.center_about_screen.x + size_cell * num, BottomY() };
 }
 
 
 wxPoint Grid::GetCoordPointAxisY(int num) const
 {
-    return { LeftX(), center_about_screen.y + size_cell * num };
+    return { LeftX(), offset.center_about_screen.y + size_cell * num };
 }
 
 
@@ -351,7 +351,7 @@ void Grid::MoveImageOn(const wxPoint &delta)
         return;
     }
 
-    center_about_screen += delta * scale;
+    offset.center_about_screen += delta * scale;
 
     FitIntoDisplay();
 }
@@ -359,7 +359,7 @@ void Grid::MoveImageOn(const wxPoint &delta)
 
 void Grid::OnChangedOffsetMeasure(const wxPoint &delta)
 {
-    center_about_screen += delta * size_cell;
+    offset.center_about_screen += delta * size_cell;
 }
 
 
@@ -374,43 +374,43 @@ void Grid::FitIntoDisplay()
 
     if (LeftX() > 5)
     {
-        center_about_screen.x = 5 + LengthAxis() / 2;
+        offset.center_about_screen.x = 5 + LengthAxis() / 2;
     }
 
     if (TopY() > 5)
     {
-        center_about_screen.y = 5 + LengthAxis() / 2;
+        offset.center_about_screen.y = 5 + LengthAxis() / 2;
     }
 
     int d = 5;
 
     if (RightX() < size.x - d)
     {
-        center_about_screen.x = size.x - d - LengthAxis() / 2;
+        offset.center_about_screen.x = size.x - d - LengthAxis() / 2;
     }
 
     if (BottomY() < size.y - d)
     {
-        center_about_screen.y = size.y - d - LengthAxis() / 2;
+        offset.center_about_screen.y = size.y - d - LengthAxis() / 2;
     }
 }
 
 
 void Grid::ScaleGridOn(const wxPoint &pos, int delta)
 {
-    wxPoint delta_center = center_about_screen - pos;
+    wxPoint delta_center = offset.center_about_screen - pos;
 
     if (delta > 0 && scale < 8)
     {
         scale *= 2;
 
-        center_about_screen += delta_center;
+        offset.center_about_screen += delta_center;
     }
     else if (delta < 0 && scale > 1)
     {
         scale /= 2;
 
-        center_about_screen -= delta_center / 2;
+        offset.center_about_screen -= delta_center / 2;
     }
 
     if (scale == 1)
@@ -556,15 +556,15 @@ wxPoint Grid::ValuesToCoord(double x, double y) const
 
     double cells_in_y = y * NumCells() / rangeY.AmplitudeAbs();
 
-    return { (int)(center_about_screen.x + cells_in_x * size_cell + 0.5), (int)(center_about_screen.y - cells_in_y * size_cell + 0.5) };
+    return { (int)(offset.center_about_screen.x + cells_in_x * size_cell + 0.5), (int)(offset.center_about_screen.y - cells_in_y * size_cell + 0.5) };
 }
 
 
 wxPoint2DDouble Grid::CoordToValues(const wxPoint &coord) const
 {
     return {
-        rangeX.AmplitudeAbs() * (coord.x - center_about_screen.x) / (NumCells() * size_cell),
-        rangeY.AmplitudeAbs() * (coord.y - center_about_screen.y) / (NumCells() * size_cell)
+        rangeX.AmplitudeAbs() * (coord.x - offset.center_about_screen.x) / (NumCells() * size_cell),
+        rangeY.AmplitudeAbs() * (coord.y - offset.center_about_screen.y) / (NumCells() * size_cell)
     };
 }
 
