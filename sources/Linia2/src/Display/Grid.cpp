@@ -616,31 +616,31 @@ void Grid::DrawMouseMarkers() const
 }
 
 
-double Range::AmplitudeAbs() const
+double Grid::Range::AmplitudeAbs() const
 {
     return value.HalfAmplitudeAbs() * 2.0;
 }
 
 
-double Range::MaxAbs() const
+double Grid::Range::MaxAbs() const
 {
     return value.MaxAbs();
 }
 
 
-void Range::Increase()
+void Grid::Range::Increase()
 {
     value.Increase();
 }
 
 
-void Range::Decrease()
+void Grid::Range::Decrease()
 {
     value.Decrease();
 }
 
 
-double Range::Value::HalfAmplitudeAbs() const
+double Grid::Range::Value::HalfAmplitudeAbs() const
 {
     static double values[Type::Count] =
     {
@@ -674,7 +674,7 @@ double Range::Value::HalfAmplitudeAbs() const
 }
 
 
-double Range::Value::MaxAbs() const
+double Grid::Range::Value::MaxAbs() const
 {
     double max = HalfAmplitudeAbs();
 
@@ -682,7 +682,7 @@ double Range::Value::MaxAbs() const
 }
 
 
-double Range::Value::MinAbs() const
+double Grid::Range::Value::MinAbs() const
 {
     double min = -HalfAmplitudeAbs();
 
@@ -690,7 +690,7 @@ double Range::Value::MinAbs() const
 }
 
 
-void Range::Value::Increase()
+void Grid::Range::Value::Increase()
 {
     if (MaxAbs() > 3e3)
     {
@@ -706,7 +706,7 @@ void Range::Value::Increase()
 }
 
 
-void Range::Value::Decrease()
+void Grid::Range::Value::Decrease()
 {
     if (MaxAbs() < 1e-11)
     {
@@ -725,7 +725,7 @@ void Range::Value::Decrease()
 }
 
 
-wxString Range::FullTitle() const
+wxString Grid::Range::FullTitle() const
 {
     wxString prefix;
 
@@ -760,7 +760,7 @@ wxString Range::FullTitle() const
 }
 
 
-wxString Range::GetValuePointAxis(int num, int cells_in_axis) const
+wxString Grid::Range::GetValuePointAxis(int num, int cells_in_axis) const
 {
     double step = AmplitudeAbs() / cells_in_axis;
 

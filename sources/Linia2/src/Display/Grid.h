@@ -47,60 +47,61 @@ private:
 };
 
 
-struct Range
+
+class Grid
 {
-    Range(const wxString &_title, const wxString &_units, int &_offset) : title(_title), units(_units), value(_offset) { }
-
-    wxString title;
-    wxString units;
-
-    // Разница между максимальным и минимальным значениями - амплитуда
-    double AmplitudeAbs() const;
-    double MaxAbs() const;
-
-    // cells_in_axis - количество клеток по любой оси. Оно всегда одинаковое
-    wxString GetValuePointAxis(int, int cells_in_axis) const;
-
-    wxString FullTitle() const;
-
-    void Increase();
-    void Decrease();
-
-private:
-
-    struct Value
+    struct Range
     {
-        Value(int &_offset) : offset(_offset) { }
+        Range(const wxString &_title, const wxString &_units, int &_offset) : title(_title), units(_units), value(_offset)
+        {}
 
-        double HalfAmplitudeAbs() const;
-        // Минимальное значение
-        double MinAbs() const;
-        // Максимальное значение
+        wxString title;
+        wxString units;
+
+        // Разница между максимальным и минимальным значениями - амплитуда
+        double AmplitudeAbs() const;
         double MaxAbs() const;
+
+        // cells_in_axis - количество клеток по любой оси. Оно всегда одинаковое
+        wxString GetValuePointAxis(int, int cells_in_axis) const;
+
+        wxString FullTitle() const;
+
         void Increase();
         void Decrease();
 
     private:
-        // Чему кратно значение - единице, 2, 4(5)
-        enum Type
+
+        struct Value
         {
-            _1,
-            _2,
-            _4_5,
-            Count
+            Value(int &_offset) : offset(_offset) {}
+
+            double HalfAmplitudeAbs() const;
+            // Минимальное значение
+            double MinAbs() const;
+            // Максимальное значение
+            double MaxAbs() const;
+            void Increase();
+            void Decrease();
+
+        private:
+            // Чему кратно значение - единице, 2, 4(5)
+            enum Type
+            {
+                _1,
+                _2,
+                _4_5,
+                Count
+            };
+
+            Type type = _1;
+            int order = 0;
+            int &offset;        // Смещение 0 относительно центра графика. Измеряется в клетках графика
         };
 
-        Type type = _1;
-        int order = 0;
-        int &offset;        // Смещение 0 относительно центра графика. Измеряется в клетках графика
+        Value value;
     };
 
-    Value value;
-};
-
-
-class Grid
-{
 public:
 
     Grid();
