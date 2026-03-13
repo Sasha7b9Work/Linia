@@ -4,7 +4,7 @@
 #include "MainWindow.h"
 #include "MainWindow.h"
 #include "Panels/PanelTable.h"
-#include "Display/GraphEntity.h"
+#include "Display/Graphics/GraphEntity.h"
 #include "Display/MenuDisplay.h"
 
 

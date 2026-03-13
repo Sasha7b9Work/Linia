@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "MainWindow.h"
 #include "Utils/Math.h"
-#include "Display/GraphEntity.h"
+#include "Display/Graphics/GraphEntity.h"
 #include "Display/Grid/Grid.h"
 #include "Display/Grid/GridNew.h"
 #include "Display/Display.h"

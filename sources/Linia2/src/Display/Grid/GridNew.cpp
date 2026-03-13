@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "MainWindow.h"
 #include "Utils/Math.h"
-#include "Display/GraphEntity.h"
+#include "Display/Graphics/GraphEntity.h"
 #include "Display/Grid/GridNew.h"
 #include "Display/Display.h"
 
@@ -181,7 +181,7 @@ void GridNew::DrawLabelsOnAxis() const
 {
     Display::self->SetColor(*wxBLACK);
 
-    wxColor background{ 230, 230, 230 };
+    wxColor background{ *wxWHITE };
 
     Text::SetFont();
 

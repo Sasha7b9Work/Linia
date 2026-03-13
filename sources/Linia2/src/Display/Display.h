@@ -3,7 +3,7 @@
 #include "Panels/Panel.h"
 #include "Display/Grid/Grid.h"
 #include "Display/PanelErrors.h"
-#include "Display/GraphEntity.h"
+#include "Display/Graphics/GraphEntity.h"
 
 
 // Здесь отрисовывается график ну и кнопки разные
