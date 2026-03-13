@@ -8,6 +8,8 @@
 
 MenuDisplay::MenuDisplay() : wxMenu()
 {
+    wxMenuItem *item = nullptr;
+
     // Добавляем пункты меню
     Append(wxID_RESET, "Сброс");
     itemFullscreen = AppendCheckItem(wxID_ANY, "Полный экран");
@@ -22,11 +24,14 @@ MenuDisplay::MenuDisplay() : wxMenu()
 
     {
         wxMenu *subMenu = new wxMenu();
-        itemTrackX = subMenu->AppendCheckItem(wxID_ANY, "X");
+
+        item = subMenu->AppendCheckItem(wxID_ANY, "X");
+        Bind(wxEVT_MENU, &MenuDisplay::OnTrackX, this, item->GetId());
+        subMenu->Check(item->GetId(), Display::self->track_x);
+
         itemTrackY = subMenu->AppendCheckItem(wxID_ANY, "Y");
         itemTrackNone = subMenu->AppendCheckItem(wxID_ANY, "Ничего");
 
-        subMenu->Check(itemTrackX->GetId(), Display::self->track_x);
         subMenu->Check(itemTrackY->GetId(), Display::self->track_y);
         subMenu->Check(itemTrackNone->GetId(), Display::self->track_none);
 
@@ -58,7 +63,6 @@ MenuDisplay::MenuDisplay() : wxMenu()
         AppendSubMenu(subFacade, "Внешний вид");
     }
 
-    Bind(wxEVT_MENU, &MenuDisplay::OnTrackX, this, itemTrackX->GetId());
     Bind(wxEVT_MENU, &MenuDisplay::OnTrackY, this, itemTrackY->GetId());
     Bind(wxEVT_MENU, &MenuDisplay::OnTrackNone, this, itemTrackNone->GetId());
 }
