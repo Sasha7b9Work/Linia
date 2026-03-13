@@ -61,27 +61,27 @@ void GraphEntity::CreateForEmulator(std::vector<GraphEntity *> &entities)
         for (double u = 0.0; u <= 1.0; u += 0.1)
         {
             // Базовый ток пропорционален номеру линии (от 5 до 50 мкА)
-            float Ib = 5.0f + (num_line + 1 - 1) * 5.0f; // мкА
+            double Ib = 5.0 + (num_line + 1 - 1) * 5.0; // мкА
 
             // Коэффициент усиления
-            float beta = 8000.0f + (num_line +1 ) * 1000.0f; // немного растет с током
+            double beta = 8000.0 + (num_line + 1) * 1000.0; // немного растет с током
 
             // Параметры формы кривой
-            double U_nas = 30.0;            // напряжение насыщения
-            float smoothness = 150.0f;       // плавность перехода
-            float Early = 300.0f;            // напряжение Эрли
+            double U_nas = 30.0;                // напряжение насыщения
+            double smoothness = 150.0f;         // плавность перехода
+            double Early = 300.0;               // напряжение Эрли
 
             // Максимальный ток коллектора
-            float Ik_max = beta * Ib * 1e-6f;
+            double Ik_max = beta * Ib * 1e-6;
 
             // Плавный переход от 0 к Ik_max с помощью tanh
-            float transition = tanhf(smoothness * u / U_nas);
+            double transition = tanh(smoothness * u / U_nas);
 
             // Эффект Эрли - небольшой наклон кривых
-            float early_effect = 1.0f + u / Early;
+            double early_effect = 1.0 + u / Early;
 
             // Небольшая кривизна для реалистичности
-            float curvature = 1.0f - 0.05f * expf(-u * 10.0f);
+            double curvature = 1.0 - 0.05 * exp(-u * 10.0);
 
             double i = Ik_max * transition * early_effect * curvature;
 
