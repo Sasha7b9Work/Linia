@@ -95,7 +95,7 @@ public:
 
     void MoveImageOn(const wxPoint &);  // Переместить изображение на экране целиком
     void MoveCenterOn(const wxPoint &); // Переместить центр графика (избражение измерений в графике)
-    void OnMouseMove(const wxPoint &);
+    void SetNewMousePosition(const wxPoint &);
 
     void OnChangedOffsetMeasure(const wxPoint &);
 

@@ -331,7 +331,7 @@ wxPoint Grid::GetCoordPointAxisY(int num) const
 }
 
 
-void Grid::OnMouseMove(const wxPoint &position)
+void Grid::SetNewMousePosition(const wxPoint &position)
 {
     pos_mouse = position;
 }

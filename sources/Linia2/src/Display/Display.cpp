@@ -153,7 +153,7 @@ void Display::OnEventMouseMove(wxMouseEvent &event)
     }
     else                                            // Отслеживание координат
     {
-        grid->OnMouseMove(position);
+        grid->SetNewMousePosition(position);
     }
 
     Refresh();
