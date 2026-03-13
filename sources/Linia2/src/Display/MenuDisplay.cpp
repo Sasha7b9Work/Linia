@@ -4,6 +4,7 @@
 #include "Display/Grid/Grid.h"
 #include "Display/Display.h"
 #include "MainWindow.h"
+#include "Settings/Settings.h"
 
 
 MenuDisplay::MenuDisplay() : wxMenu()
@@ -54,16 +55,21 @@ void MenuDisplay::AppendMenuFacade()
     {
         // Настройка цветов
 
-#define APPEND_COLOR(title) Bind(wxEVT_MENU, &MenuDisplay::OnColor, this, (subColors->Append(wxID_ANY, title))->GetId());
+        wxMenuItem *item = nullptr;
+
+#define APPEND_COLOR(title, value_color)                                \
+        item = subColors->Append(wxID_ANY, title);                      \
+        Bind(wxEVT_MENU, &MenuDisplay::OnColor, this, item->GetId());   \
+        colors[item->GetId()] = &value_color;
 
         wxMenu *subColors = new wxMenu();
 
-        APPEND_COLOR("Фон");
-        APPEND_COLOR("Сетка");
-        APPEND_COLOR("Шрифт");
-        APPEND_COLOR("Кривая");
-        APPEND_COLOR("Ссылка");
-        APPEND_COLOR("Секущая");
+        APPEND_COLOR("Фон", SET::GUI::color_background);
+        APPEND_COLOR("Сетка", SET::GUI::color_grid);
+        APPEND_COLOR("Шрифт", SET::GUI::color_font);
+        APPEND_COLOR("Кривая", SET::GUI::color_curve);
+        APPEND_COLOR("Ссылка", SET::GUI::color_link);
+        APPEND_COLOR("Секущая", SET::GUI::color_secant);
 
         subFacade->AppendSubMenu(subColors, "Цвета");
     }
@@ -150,7 +156,15 @@ void MenuDisplay::OnColor(wxCommandEvent &event)
     {
         wxColour color;
 
-        SetColor(item->GetItemLabel(), color);
+        if (SetColor(item->GetItemLabel(), color))
+        {
+            auto elem = colors.find(event.GetId());
+
+            if (elem != colors.end())
+            {
+                elem->second->Set(color.GetRGB());
+            }
+        }
     }
 }
 

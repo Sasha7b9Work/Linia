@@ -18,7 +18,12 @@ namespace SET
         Value<int>       current_page_notebook("gui_current_page_notebook", 0);
         Value<int>       serial_port_num("serial_port_num", 0);
         Value<bool>      debug_mode("debug_mode", false);
-        Value<uint>      color_curve("color_curve", 0x00000000);
+        Value<uint>      color_background("color_background", 0xFFFFFF);
+        Value<uint>      color_grid("color_grid", 0);
+        Value<uint>      color_font("color_font", 0);
+        Value<uint>      color_curve("color_curve", 0);
+        Value<uint>      color_link("color_link", 0);
+        Value<uint>      color_secant("color_secant", 0);
     }
 }
 
@@ -36,7 +41,12 @@ void SET::GUI::Load()
     current_page_notebook.Load();
     serial_port_num.Load();
 
+    color_background.Load();
+    color_grid.Load();
+    color_font.Load();
     color_curve.Load();
+    color_link.Load();
+    color_secant.Load();
 }
 
 
@@ -53,5 +63,10 @@ void SET::GUI::Save()
     current_page_notebook.Save();
     serial_port_num.Save();
 
+    color_background.Save();
+    color_grid.Save();
+    color_font.Save();
     color_curve.Save();
+    color_link.Save();
+    color_secant.Save();
 }

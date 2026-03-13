@@ -1,5 +1,6 @@
 ﻿// 2026/03/13 16:31:04 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Settings/Value.h"
 
 
 class MenuDisplay : public wxMenu
@@ -10,10 +11,7 @@ public:
 
 private:
 
-    struct MenuItemColor
-    {
-        wxMenuItem *item;
-    };
+    std::map<int, Value<uint> *> colors;        // Здесь будем хранить настройки цветов, соответствующие пунктам меню
 
     // Следить
     void AppendMenuTrack();
