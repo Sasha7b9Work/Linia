@@ -22,7 +22,7 @@ MenuDisplay::MenuDisplay() : wxMenu()
 
     AppendSeparator();
 
-    Bind(wxEVT_MENU, &MenuDisplay::OnSaveGraphic, this, (Append(wxID_ANY, "Сохранать график"))->GetId());
+    Bind(wxEVT_MENU, &MenuDisplay::OnSaveGraphic, this, (Append(wxID_ANY, "Сохранить график"))->GetId());
     Bind(wxEVT_MENU, &MenuDisplay::OnResetGraphic, this, (Append(wxID_ANY, "Сбросить график"))->GetId());
 }
 
