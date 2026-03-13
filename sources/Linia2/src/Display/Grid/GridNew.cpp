@@ -1,31 +1,18 @@
-﻿// 2025/7/13 20:39:15 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2025/7/13 20:39:15 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "MainWindow.h"
 #include "Utils/Math.h"
 #include "Display/GraphEntity.h"
-#include "Display/Grid/Grid.h"
 #include "Display/Grid/GridNew.h"
 
 
-IGrid *IGrid::self = nullptr;
-
-
-void IGrid::Create()
-{
-    if (!self)
-    {
-        self = new GridNew();
-    }
-}
-
-
-Grid::Grid()
+GridNew::GridNew()
 {
     Reset();
 }
 
 
-void Grid::ResetCenter()
+void GridNew::ResetCenter()
 {
     wxSize display_size = Display::self->GetDrawingSize();
 
@@ -33,7 +20,7 @@ void Grid::ResetCenter()
 }
 
 
-void Grid::Reset()
+void GridNew::Reset()
 {
     scale = 1;
 
@@ -41,37 +28,37 @@ void Grid::Reset()
 }
 
 
-int Grid::BottomY() const
+int GridNew::BottomY() const
 {
     return TopY() + LengthAxis();
 }
 
 
-int Grid::TopY() const
+int GridNew::TopY() const
 {
     return offset.center_about_screen.y - (int)(rangeY.MaxAbs() / UnitsInCellY() * size_cell);
 }
 
 
-int Grid::LengthAxis() const
+int GridNew::LengthAxis() const
 {
     return size_cell * NumCells();
 }
 
 
-int Grid::LeftX() const
+int GridNew::LeftX() const
 {
     return offset.center_about_screen.x - (int)(rangeX.MaxAbs() / UnitsInCellX() * size_cell);
 }
 
 
-int Grid::RightX() const
+int GridNew::RightX() const
 {
     return LeftX() + LengthAxis();
 }
 
 
-void Grid::DrawArea() const
+void GridNew::DrawArea() const
 {
     if (scale == 1)
     {
@@ -93,14 +80,14 @@ void Grid::DrawArea() const
 }
 
 
-void Grid::DrawNavigationWindow() const
+void GridNew::DrawNavigationWindow() const
 {
     if (scale == 1 || !wxGetMouseState().LeftIsDown())
     {
         return;
     }
 
-    wxSize size_window { 150, 150 };
+    wxSize size_window{ 150, 150 };
 
     Display::self->FillRectangle(0, 0, size_window.x, size_window.y, { 240, 240, 240 });
 
@@ -120,7 +107,7 @@ void Grid::DrawNavigationWindow() const
 }
 
 
-void Grid::Draw(const std::vector<GraphEntity *> &entities)
+void GridNew::Draw(const std::vector<GraphEntity *> &entities)
 {
     wxSize size = Display::self->GetDrawingSize();
 
@@ -239,7 +226,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 }
 
 
-void Grid::DrawLabelsOnAxis() const
+void GridNew::DrawLabelsOnAxis() const
 {
     Display::self->SetColor(*wxBLACK);
 
@@ -326,32 +313,32 @@ void Grid::DrawLabelsOnAxis() const
 }
 
 
-wxPoint Grid::GetCoordPointAxisX(int num) const
+wxPoint GridNew::GetCoordPointAxisX(int num) const
 {
     return { offset.center_about_screen.x + size_cell * num, BottomY() };
 }
 
 
-wxPoint Grid::GetCoordPointAxisY(int num) const
+wxPoint GridNew::GetCoordPointAxisY(int num) const
 {
     return { LeftX(), offset.center_about_screen.y + size_cell * num };
 }
 
 
-void Grid::SetNewMousePosition(const wxPoint &position)
+void GridNew::SetNewMousePosition(const wxPoint &position)
 {
     pos_mouse = position;
 }
 
 
 
-void Grid::MoveCenterOn(const wxPoint &delta)
+void GridNew::MoveCenterOn(const wxPoint &delta)
 {
     offset.MoveOn(delta);
 }
 
 
-void Grid::MoveImageOn(const wxPoint &delta)
+void GridNew::MoveImageOn(const wxPoint &delta)
 {
     if (scale == 1)
     {
@@ -364,13 +351,13 @@ void Grid::MoveImageOn(const wxPoint &delta)
 }
 
 
-void Grid::OnChangedOffsetMeasure(const wxPoint &delta)
+void GridNew::OnChangedOffsetMeasure(const wxPoint &delta)
 {
     offset.center_about_screen += delta * size_cell;
 }
 
 
-void Grid::FitIntoDisplay()
+void GridNew::FitIntoDisplay()
 {
     if (scale == 1)
     {
@@ -403,7 +390,7 @@ void Grid::FitIntoDisplay()
 }
 
 
-void Grid::ScaleGridOn(const wxPoint &pos, int delta)
+void GridNew::ScaleGridOn(const wxPoint &pos, int delta)
 {
     wxPoint delta_center = offset.center_about_screen - pos;
 
@@ -429,7 +416,7 @@ void Grid::ScaleGridOn(const wxPoint &pos, int delta)
 }
 
 
-void Grid::RangeGridOnX(int delta)
+void GridNew::RangeGridOnX(int delta)
 {
     if (delta < 0)
     {
@@ -444,7 +431,7 @@ void Grid::RangeGridOnX(int delta)
 }
 
 
-void Grid::RangeGridOnY(int delta)
+void GridNew::RangeGridOnY(int delta)
 {
     if (delta < 0)
     {
@@ -459,7 +446,7 @@ void Grid::RangeGridOnY(int delta)
 }
 
 
-void Grid::DrawVPointLineDown(int x, int y0, int y_low, int d)
+void GridNew::DrawVPointLineDown(int x, int y0, int y_low, int d)
 {
     for (int i = y0; i < y_low; i += d)
     {
@@ -468,7 +455,7 @@ void Grid::DrawVPointLineDown(int x, int y0, int y_low, int d)
 }
 
 
-void Grid::DrawVPointLineUp(int x, int y0, int y_hi, int d)
+void GridNew::DrawVPointLineUp(int x, int y0, int y_hi, int d)
 {
     for (int i = y0; i > y_hi; i -= d)
     {
@@ -477,7 +464,7 @@ void Grid::DrawVPointLineUp(int x, int y0, int y_hi, int d)
 }
 
 
-void Grid::DrawHPointLineRight(int x, int y, int x_right, int d)
+void GridNew::DrawHPointLineRight(int x, int y, int x_right, int d)
 {
     for (int i = x; i < x_right; i += d)
     {
@@ -486,7 +473,7 @@ void Grid::DrawHPointLineRight(int x, int y, int x_right, int d)
 }
 
 
-void Grid::DrawHPointLineLeft(int x, int y, int x_left, int d)
+void GridNew::DrawHPointLineLeft(int x, int y, int x_left, int d)
 {
     for (int i = x; i > x_left; i -= d)
     {
@@ -495,7 +482,7 @@ void Grid::DrawHPointLineLeft(int x, int y, int x_left, int d)
 }
 
 
-void Grid::DrawVPointLineDown2(int x, int y0, int y_low, int d)
+void GridNew::DrawVPointLineDown2(int x, int y0, int y_low, int d)
 {
     for (int i = y0; i < y_low; i += d)
     {
@@ -506,7 +493,7 @@ void Grid::DrawVPointLineDown2(int x, int y0, int y_low, int d)
 }
 
 
-void Grid::DrawVPointLineUp2(int x, int y0, int y_hi, int d)
+void GridNew::DrawVPointLineUp2(int x, int y0, int y_hi, int d)
 {
     for (int i = y0; i > y_hi; i -= d)
     {
@@ -517,7 +504,7 @@ void Grid::DrawVPointLineUp2(int x, int y0, int y_hi, int d)
 }
 
 
-void Grid::DrawHPointLineRight2(int x, int y, int x_right, int d)
+void GridNew::DrawHPointLineRight2(int x, int y, int x_right, int d)
 {
     for (int i = x; i < x_right; i += d)
     {
@@ -528,7 +515,7 @@ void Grid::DrawHPointLineRight2(int x, int y, int x_right, int d)
 }
 
 
-void Grid::DrawHPointLineLeft2(int x, int y, int x_left, int d)
+void GridNew::DrawHPointLineLeft2(int x, int y, int x_left, int d)
 {
     for (int i = x; i > x_left; i -= d)
     {
@@ -539,25 +526,25 @@ void Grid::DrawHPointLineLeft2(int x, int y, int x_left, int d)
 }
 
 
-double Grid::UnitsInCellX() const
+double GridNew::UnitsInCellX() const
 {
     return rangeX.AmplitudeAbs() / NumCells();
 }
 
 
-double Grid::UnitsInCellY() const
+double GridNew::UnitsInCellY() const
 {
     return rangeY.AmplitudeAbs() / NumCells();
 }
 
 
-int Grid::NumCells() const
+int GridNew::NumCells() const
 {
     return 10 * scale;
 }
 
 
-wxPoint Grid::ValuesToCoord(double x, double y) const
+wxPoint GridNew::ValuesToCoord(double x, double y) const
 {
     double cells_in_x = x * NumCells() / rangeX.AmplitudeAbs();
 
@@ -567,7 +554,7 @@ wxPoint Grid::ValuesToCoord(double x, double y) const
 }
 
 
-wxPoint2DDouble Grid::CoordToValues(const wxPoint &coord) const
+wxPoint2DDouble GridNew::CoordToValues(const wxPoint &coord) const
 {
     return {
         rangeX.AmplitudeAbs() * (coord.x - offset.center_about_screen.x) / (NumCells() * size_cell),
@@ -576,19 +563,19 @@ wxPoint2DDouble Grid::CoordToValues(const wxPoint &coord) const
 }
 
 
-void Grid::OnMouseDown()
+void GridNew::OnMouseDown()
 {
     offset.ResetDelta();
 }
 
 
-void Grid::OnMouseUp()
+void GridNew::OnMouseUp()
 {
     offset.ResetDelta();
 }
 
 
-void Grid::DrawMouseMarkers() const
+void GridNew::DrawMouseMarkers() const
 {
     if (Display::self->mouse_is_pressed)
     {
@@ -623,31 +610,31 @@ void Grid::DrawMouseMarkers() const
 }
 
 
-double Grid::Range::AmplitudeAbs() const
+double GridNew::Range::AmplitudeAbs() const
 {
     return value.HalfAmplitudeAbs() * 2.0;
 }
 
 
-double Grid::Range::MaxAbs() const
+double GridNew::Range::MaxAbs() const
 {
     return value.MaxAbs();
 }
 
 
-void Grid::Range::Increase()
+void GridNew::Range::Increase()
 {
     value.Increase();
 }
 
 
-void Grid::Range::Decrease()
+void GridNew::Range::Decrease()
 {
     value.Decrease();
 }
 
 
-double Grid::Range::Value::HalfAmplitudeAbs() const
+double GridNew::Range::Value::HalfAmplitudeAbs() const
 {
     static double values[Type::Count] =
     {
@@ -681,7 +668,7 @@ double Grid::Range::Value::HalfAmplitudeAbs() const
 }
 
 
-double Grid::Range::Value::MaxAbs() const
+double GridNew::Range::Value::MaxAbs() const
 {
     double max = HalfAmplitudeAbs();
 
@@ -689,7 +676,7 @@ double Grid::Range::Value::MaxAbs() const
 }
 
 
-double Grid::Range::Value::MinAbs() const
+double GridNew::Range::Value::MinAbs() const
 {
     double min = -HalfAmplitudeAbs();
 
@@ -697,7 +684,7 @@ double Grid::Range::Value::MinAbs() const
 }
 
 
-void Grid::Range::Value::Increase()
+void GridNew::Range::Value::Increase()
 {
     if (MaxAbs() > 3e3)
     {
@@ -713,7 +700,7 @@ void Grid::Range::Value::Increase()
 }
 
 
-void Grid::Range::Value::Decrease()
+void GridNew::Range::Value::Decrease()
 {
     if (MaxAbs() < 1e-11)
     {
@@ -732,7 +719,7 @@ void Grid::Range::Value::Decrease()
 }
 
 
-wxString Grid::Range::FullTitle() const
+wxString GridNew::Range::FullTitle() const
 {
     wxString prefix;
 
@@ -746,7 +733,7 @@ wxString Grid::Range::FullTitle() const
     {
         prefix = "";
     }
-    else if((int64)(max_abs * 1000) > 1)
+    else if ((int64)(max_abs * 1000) > 1)
     {
         prefix = "m";
     }
@@ -767,7 +754,7 @@ wxString Grid::Range::FullTitle() const
 }
 
 
-wxString Grid::Range::GetValuePointAxis(int num, int cells_in_axis) const
+wxString GridNew::Range::GetValuePointAxis(int num, int cells_in_axis) const
 {
     double step = AmplitudeAbs() / cells_in_axis;
 
@@ -802,9 +789,9 @@ wxString Grid::Range::GetValuePointAxis(int num, int cells_in_axis) const
 }
 
 
-void Grid::Offset::Process(int &_value, int &_delta)
+void GridNew::Offset::Process(int &_value, int &_delta)
 {
-    int d = Grid::size_cell;
+    int d = GridNew::size_cell;
 
     while (_delta >= d)
     {
@@ -820,7 +807,7 @@ void Grid::Offset::Process(int &_value, int &_delta)
 }
 
 
-void Grid::Offset::MoveOn(const wxPoint &delta)
+void GridNew::Offset::MoveOn(const wxPoint &delta)
 {
     dx += delta.x;
     dy += delta.y;

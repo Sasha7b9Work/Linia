@@ -1,4 +1,4 @@
-﻿// 2025/7/13 20:38:50 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2025/7/13 20:38:50 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "System/Events.h"
 
@@ -6,33 +6,7 @@
 class GraphEntity;
 
 
-class IGrid
-{
-public:
-
-    virtual ~IGrid() {}
-
-    static void Create();
-
-    static IGrid *self;
-
-    virtual void OnChangedOffsetMeasure(const wxPoint &) = 0;
-    virtual void OnMouseDown() = 0;
-    virtual void OnMouseUp() = 0;
-    virtual void MoveImageOn(const wxPoint &) = 0;
-    virtual void MoveCenterOn(const wxPoint &) = 0;
-    virtual void SetNewMousePosition(const wxPoint &) = 0;
-    virtual void ScaleGridOn(const wxPoint &, int) = 0;
-    virtual void RangeGridOnX(int) = 0;
-    virtual void RangeGridOnY(int) = 0;
-    virtual void Draw(const std::vector<GraphEntity *> &) = 0;
-    virtual void ResetCenter() = 0;
-    virtual void Reset() = 0;
-    virtual wxPoint ValuesToCoord(double x, double y) const = 0;
-};
-
-
-class Grid : public IGrid
+class GridNew : public IGrid
 {
     struct Offset
     {
@@ -62,7 +36,8 @@ class Grid : public IGrid
 
     struct Range
     {
-        Range(const wxString &_title, const wxString &_units, int &_offset) : title(_title), units(_units), value(_offset) {}
+        Range(const wxString &_title, const wxString &_units, int &_offset) : title(_title), units(_units), value(_offset)
+        {}
 
         wxString title;
         wxString units;
@@ -83,7 +58,8 @@ class Grid : public IGrid
 
         struct Value
         {
-            Value(int &_offset) : offset(_offset) {}
+            Value(int &_offset) : offset(_offset)
+            {}
 
             double HalfAmplitudeAbs() const;
             // Минимальное значение
@@ -113,7 +89,7 @@ class Grid : public IGrid
 
 public:
 
-    Grid();
+    GridNew();
 
     void Draw(const std::vector<GraphEntity *> &) override;
 

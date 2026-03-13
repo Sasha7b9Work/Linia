@@ -4,7 +4,7 @@
 #include "Display/Display.h"
 
 
-void GraphLine::Draw(const Grid *grid) const
+void GraphLine::Draw(const IGrid *grid) const
 {
     wxPoint s = grid->ValuesToCoord(start.u, start.i);
     wxPoint e = grid->ValuesToCoord(end.u, end.i);
@@ -19,7 +19,7 @@ void GraphMeasures::AppendPoint(const wxPoint2DDouble &point)
 }
 
 
-void GraphMeasures::Draw(const Grid *grid) const
+void GraphMeasures::Draw(const IGrid *grid) const
 {
     Display::self->SetColor(color);
 
