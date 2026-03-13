@@ -16,14 +16,6 @@ private:
     };
 
     wxMenuItem *itemFullscreen = nullptr,
-
-        *itemColorBackground = nullptr,
-        *itemColorGrid = nullptr,
-        *itemColorFont = nullptr,
-        *itemColorCurve = nullptr,
-        *itemColorLink = nullptr,
-        *itemColorSecant = nullptr,
-
         *itemTrackX = nullptr,
         *itemTrackY = nullptr,
         *itemTrackNone = nullptr;

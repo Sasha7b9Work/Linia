@@ -37,18 +37,21 @@ MenuDisplay::MenuDisplay() : wxMenu()
         wxMenu *subFacade = new wxMenu();
 
         {
-#define APPEND_COLOR(title, item)                                   \
+            // Настройка цветов
+
+#define APPEND_COLOR(title)                                         \
     item = subColors->Append(wxID_ANY, title);                      \
     Bind(wxEVT_MENU, &MenuDisplay::OnColor, this, item->GetId());
 
             wxMenu *subColors = new wxMenu();
 
-            APPEND_COLOR("Фон", itemColorBackground);
-            APPEND_COLOR("Сетка", itemColorGrid);
-            APPEND_COLOR("Шрифт", itemColorFont);
-            APPEND_COLOR("Кривая", itemColorCurve);
-            APPEND_COLOR("Ссылка", itemColorLink);
-            APPEND_COLOR("Секущая", itemColorSecant);
+            wxMenuItem *item = nullptr;
+            APPEND_COLOR("Фон");
+            APPEND_COLOR("Сетка");
+            APPEND_COLOR("Шрифт");
+            APPEND_COLOR("Кривая");
+            APPEND_COLOR("Ссылка");
+            APPEND_COLOR("Секущая");
 
             subFacade->AppendSubMenu(subColors, "Цвета");
         }
