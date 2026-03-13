@@ -15,8 +15,6 @@ private:
         wxMenuItem *item;
     };
 
-    wxMenuItem *itemFullscreen = nullptr;
-
     void OnReset(wxCommandEvent &);
     void OnFullScreen(wxCommandEvent &);
     void OnTrackX(wxCommandEvent &);

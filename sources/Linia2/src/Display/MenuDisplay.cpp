@@ -12,15 +12,13 @@ MenuDisplay::MenuDisplay() : wxMenu()
 
     // Добавляем пункты меню
     Append(wxID_RESET, "Сброс");
-    itemFullscreen = AppendCheckItem(wxID_ANY, "Полный экран");
+    Bind(wxEVT_MENU, &MenuDisplay::OnReset, this, wxID_RESET);
+
+    item = AppendCheckItem(wxID_ANY, "Полный экран");
+    Bind(wxEVT_MENU, &MenuDisplay::OnFullScreen, this, item->GetId());
+    Check(item->GetId(), Display::self->full_screen);
 
     AppendSeparator();
-
-    // Привязываем обработчики для пунктов меню
-    Bind(wxEVT_MENU, &MenuDisplay::OnReset, this, wxID_RESET);
-    Bind(wxEVT_MENU, &MenuDisplay::OnFullScreen, this, itemFullscreen->GetId());
-
-    Check(itemFullscreen->GetId(), Display::self->full_screen);
 
     {
         wxMenu *subMenu = new wxMenu();
