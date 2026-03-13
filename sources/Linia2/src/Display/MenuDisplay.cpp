@@ -8,8 +8,6 @@
 
 MenuDisplay::MenuDisplay() : wxMenu()
 {
-    wxMenuItem *item = nullptr;
-
     // Добавляем пункты меню
     Append(wxID_RESET, "Сброс");
     itemFullscreen = AppendCheckItem(wxID_ANY, "Полный экран");
@@ -41,9 +39,7 @@ MenuDisplay::MenuDisplay() : wxMenu()
         {
             // Настройка цветов
 
-#define APPEND_COLOR(title)                                         \
-    item = subColors->Append(wxID_ANY, title);                      \
-    Bind(wxEVT_MENU, &MenuDisplay::OnColor, this, item->GetId());
+#define APPEND_COLOR(title) Bind(wxEVT_MENU, &MenuDisplay::OnColor, this, (subColors->Append(wxID_ANY, title))->GetId());
 
             wxMenu *subColors = new wxMenu();
 
