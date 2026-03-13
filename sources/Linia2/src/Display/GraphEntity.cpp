@@ -58,35 +58,32 @@ void GraphEntity::CreateForEmulator(std::vector<GraphEntity *> &entities)
 
         meas->SetColor(colors[num_line]);
 
-        for (double u = 0.0; u <= 1.0; u += 0.05)
+        for (double u = 0.0; u <= 1.0; u += 0.1)
         {
-            // Базовый ток пропорционален номеру линии
-            double Ib = (double)(num_line + 1) * 10.0; // мкА
+            // Базовый ток пропорционален номеру линии (от 5 до 50 мкА)
+            float Ib = 5.0f + (num_line + 1 - 1) * 5.0f; // мкА
 
-            // Параметры транзистора (подобраны для красивого графика)
-            double beta = 9000.0;        // коэффициент усиления
-            double Upor = 0.3;            // пороговое напряжение (напряжение насыщения)
-            double Uearly = 50.0;         // напряжение Эрли для наклона кривых
+            // Коэффициент усиления
+            float beta = 8000.0f + (num_line +1 ) * 1000.0f; // немного растет с током
 
-            double i = 0.0;
+            // Параметры формы кривой
+            double U_nas = 30.0;            // напряжение насыщения
+            float smoothness = 150.0f;       // плавность перехода
+            float Early = 300.0f;            // напряжение Эрли
 
-            // Если напряжение меньше порогового - линейная область (насыщение)
-            if (u < Upor)
-            {
-                // В области насыщения ток растет линейно от 0 до максимального
-                double Ik_max = beta * Ib * 1e-6f; // максимальный ток для этой линии
-                i = Ik_max * (u / Upor) * (1.0f + (u - Upor) / Uearly);
-            }
-            else
-            {
-                // Активная область - ток слабо растет с напряжением из-за эффекта Эрли
-                double Ik = beta * Ib * 1e-6f; // базовый ток
-                // Добавляем небольшой рост с напряжением и небольшую кривизну
-                double Early_factor = 1.0f + (u - Upor) / Uearly;
-                // Добавляем небольшую нелинейность для большей реалистичности
-                double nonlinearity = 1.0f + 0.02f * sin(u * 3.14159f);
-                i = Ik * Early_factor * nonlinearity;
-            }
+            // Максимальный ток коллектора
+            float Ik_max = beta * Ib * 1e-6f;
+
+            // Плавный переход от 0 к Ik_max с помощью tanh
+            float transition = tanhf(smoothness * u / U_nas);
+
+            // Эффект Эрли - небольшой наклон кривых
+            float early_effect = 1.0f + u / Early;
+
+            // Небольшая кривизна для реалистичности
+            float curvature = 1.0f - 0.05f * expf(-u * 10.0f);
+
+            double i = Ik_max * transition * early_effect * curvature;
 
             meas->AppendPoint({ u, i });
         }
