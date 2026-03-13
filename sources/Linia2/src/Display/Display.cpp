@@ -5,6 +5,7 @@
 #include "MainWindow.h"
 #include "Panels/PanelTable.h"
 #include "Display/GraphEntity.h"
+#include "Display/MenuDisplay.h"
 
 
 Display *Display::self = nullptr;
@@ -468,86 +469,9 @@ void Spline::Draw(bool smooth, bool draw_points) const
 
 void Display::OnEventRightClick(wxMouseEvent &)
 {
-    wxMenu menu;
+    MenuDisplay menu;
 
-    // Добавляем пункты меню
-    menu.Append(wxID_RESET, "Сброс");
-    itemFullscreen = menu.AppendCheckItem(wxID_ANY, "Полный экран");
-
-    menu.AppendSeparator();
-
-    // Привязываем обработчики для пунктов меню
-    Bind(wxEVT_MENU, &Display::OnMenuReset, this, wxID_RESET);
-    Bind(wxEVT_MENU, &Display::OnMenuFullScreen, this, itemFullscreen->GetId());
-
-    menu.Check(itemFullscreen->GetId(), full_screen);
-
-    wxMenu *subMenu = new wxMenu();
-    itemTrackX = subMenu->AppendCheckItem(wxID_ANY, "X");
-    itemTrackY = subMenu->AppendCheckItem(wxID_ANY, "Y");
-    itemTrackNone = subMenu->AppendCheckItem(wxID_ANY, "Ничего");
-
-    subMenu->Check(itemTrackX->GetId(), track_x);
-    subMenu->Check(itemTrackY->GetId(), track_y);
-    subMenu->Check(itemTrackNone->GetId(), track_none);
-
-    menu.AppendSubMenu(subMenu, "Отслеживать");
-
-    Bind(wxEVT_MENU, &Display::OnMenuTrackX, this, itemTrackX->GetId());
-    Bind(wxEVT_MENU, &Display::OnMenuTrackY, this, itemTrackY->GetId());
-    Bind(wxEVT_MENU, &Display::OnMenuTrackNone, this, itemTrackNone->GetId());
-
-    // Показываем меню в позиции клика
     PopupMenu(&menu);
-}
-
-
-void Display::OnMenuReset(wxCommandEvent &)
-{
-    grid->Reset();
-}
-
-
-void Display::OnMenuFullScreen(wxCommandEvent &event)
-{
-    MainWindow::self->SetMode(event.IsChecked() ? ModeMainWindow::FullGraph : ModeMainWindow::Standard);
-
-    grid->ResetCenter();
-
-    Refresh();
-}
-
-
-void Display::OnMenuTrackX(wxCommandEvent &event)
-{
-    if (event.IsChecked())
-    {
-        track_x = true;
-        track_y = false;
-        track_none = false;
-    }
-}
-
-
-void Display::OnMenuTrackY(wxCommandEvent &event)
-{
-    if (event.IsChecked())
-    {
-        track_x = false;
-        track_y = true;
-        track_none = false;
-    }
-}
-
-
-void Display::OnMenuTrackNone(wxCommandEvent &event)
-{
-    if (event.IsChecked())
-    {
-        track_x = false;
-        track_y = false;
-        track_none = true;
-    }
 }
 
 

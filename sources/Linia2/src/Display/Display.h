@@ -15,6 +15,7 @@ class Display : public Panel
     friend class Spline;
     friend class Line;
     friend class Rect;
+    friend class MenuDisplay;
 
 public:
 
@@ -54,11 +55,6 @@ private:
         *btnLessY = nullptr,
         *btnMoreY = nullptr;
 
-    wxMenuItem *itemFullscreen = nullptr,
-        *itemTrackX = nullptr,
-        *itemTrackY = nullptr,
-        *itemTrackNone = nullptr;
-
     Grid *grid = nullptr;                   // Координатная сетка
 
     std::vector<GraphEntity *> entities;    // Сущности для отрисовки
@@ -84,12 +80,6 @@ private:
     void OnEventMouseMove(wxMouseEvent &);
     void OnEventMouseWheel(wxMouseEvent &);
     void OnEventButton(wxCommandEvent &);
-
-    void OnMenuReset(wxCommandEvent &);
-    void OnMenuFullScreen(wxCommandEvent &);
-    void OnMenuTrackX(wxCommandEvent &);
-    void OnMenuTrackY(wxCommandEvent &);
-    void OnMenuTrackNone(wxCommandEvent &);
 
     wxSize GetSize() const;
     wxSize GetClientSize() const;
