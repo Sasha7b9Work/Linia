@@ -22,6 +22,8 @@ public:
 
     void SetColor(const wxColor &_color) { color = _color; }
 
+    static void CreateForEmulator(std::vector<GraphEntity *> &);
+
 protected:
 
     virtual ~GraphEntity() { }

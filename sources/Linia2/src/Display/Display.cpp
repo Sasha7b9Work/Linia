@@ -101,6 +101,8 @@ void Display::Init()
     Panel::Layout();
 
     Draw();
+
+    GraphEntity::CreateForEmulator(entities);
 }
 
 
