@@ -109,14 +109,9 @@ public:
 
     void Draw(const std::vector<GraphEntity *> &);
 
-    // Переместить изображение на экране целиком
-    void MoveImageOn(const wxPoint &);
-
-    // Переместить центр графика (избражение измерений в графике)
-    void MoveCenterOn(const wxPoint &);
-
+    void MoveImageOn(const wxPoint &);              // Переместить изображение на экране целиком
+    void MoveCenterOn(const wxPoint &);             // Переместить центр графика (избражение измерений в графике)
     void OnChangedOffsetMeasure(const wxPoint &);
-
     void OnMouseMove(const wxPoint &);
 
     void OnMouseDown();
