@@ -20,12 +20,20 @@ class GridNew : public IGrid
         // При перемещении мышки вызываем эту функцию
         void MoveOn(const wxPoint &delta);
 
-        int x = 0;
-        int y = 0;
+        int &GetX()
+        {
+            return x;
+        }
 
-        wxPoint center_about_screen;    // В этом месте относительно центра экрана находится центр сетки
+        int &GetY()
+        {
+            return y;
+        }
 
     private:
+
+        int x = 0;
+        int y = 0;
 
         int dx = 0;
         int dy = 0;
@@ -36,8 +44,7 @@ class GridNew : public IGrid
 
     struct Range
     {
-        Range(const wxString &_title, const wxString &_units, int &_offset) : title(_title), units(_units), value(_offset)
-        {}
+        Range(const wxString &_title, const wxString &_units, int &_offset) : title(_title), units(_units), value(_offset) {}
 
         wxString title;
         wxString units;
@@ -121,8 +128,8 @@ private:
 
     wxPoint pos_mouse;
     Offset  offset;
-    Range   rangeX{ "Uc", "V", offset.x };
-    Range   rangeY{ "Ic", "A", offset.y };
+    Range   rangeX{ "Uc", "V", offset.GetX() };
+    Range   rangeY{ "Ic", "A", offset.GetY() };
 
     // d - расстояние между точками
     void DrawVPointLineDown(int x, int y0, int y_low, int d);
@@ -130,10 +137,10 @@ private:
     void DrawHPointLineRight(int x, int y, int x_right, int d);
     void DrawHPointLineLeft(int x, int y, int x_left, int d);
 
-    void DrawVPointLineDown2(int x, int y0, int y_low, int d);
-    void DrawVPointLineUp2(int x, int y0, int y_hi, int d);
-    void DrawHPointLineRight2(int x, int y, int x_right, int d);
-    void DrawHPointLineLeft2(int x, int y, int x_left, int d);
+    void DrawVPointLineDown2(const wxPoint &, int y_low, int d);
+    void DrawVPointLineUp2(const wxPoint &, int y_hi, int d);
+    void DrawHPointLineRight2(const wxPoint &, int x_right, int d);
+    void DrawHPointLineLeft2(const wxPoint &, int x_left, int d);
 
     double UnitsInCellX() const;
     double UnitsInCellY() const;
@@ -142,10 +149,15 @@ private:
     wxPoint GetCoordPointAxisX(int) const;
     wxPoint GetCoordPointAxisY(int) const;
 
-    int BottomY() const;  // В этой позиции экрана находится нижняя сторона экрана
-    int TopY() const;     // В этой позиции экрана находится верхняя сторона экрана
-    int LeftX() const;    // В этой позиции экрана находится левая сторона сетки
-    int RightX() const;   // В этой позиции экрана находится правая сторона сетки
+    int BottomY() const;    // В этой позиции экрана находится нижняя сторона сетки
+    int TopY() const;       // В этой позиции экрана находится верхняя сторона сетки
+    int CenterY() const;    // Середина сетки по Y
+    int LeftX() const;      // В этой позиции экрана находится левая сторона сетки
+    int RightX() const;     // В этой позиции экрана находится правая сторона сетки
+    int CenterX() const;    // Середина сетки по X
+
+    // Координаты точки (0, 0) в пикселях
+    wxPoint CoordZeroInPixels() const;
 
     // Длина оси в пикселях
     int LengthAxisX() const;
