@@ -10,9 +10,7 @@ MenuDisplay::MenuDisplay() : wxMenu()
 {
     wxMenuItem *item = nullptr;
 
-    // Добавляем пункты меню
-    Append(wxID_RESET, "Сброс");
-    Bind(wxEVT_MENU, &MenuDisplay::OnReset, this, wxID_RESET);
+    Bind(wxEVT_MENU, &MenuDisplay::OnReset, this, (Append(wxID_RESET, "Сброс"))->GetId());
 
     item = AppendCheckItem(wxID_ANY, "Полный экран");
     Bind(wxEVT_MENU, &MenuDisplay::OnFullScreen, this, item->GetId());
