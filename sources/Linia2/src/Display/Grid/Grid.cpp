@@ -5,6 +5,7 @@
 #include "Display/GraphEntity.h"
 #include "Display/Grid/Grid.h"
 #include "Display/Grid/GridNew.h"
+#include "Display/Display.h"
 
 
 IGrid *IGrid::self = nullptr;

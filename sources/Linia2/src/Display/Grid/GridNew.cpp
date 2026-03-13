@@ -425,12 +425,22 @@ double GridNew::UnitsInCellY() const
 
 int GridNew::NumCellsX() const
 {
+    if (ModeMainWindow::Current() == ModeMainWindow::FullGraph)
+    {
+        return 16;
+    }
+
     return 12;
 }
 
 
 int GridNew::NumCellsY() const
 {
+    if (ModeMainWindow::Current() == ModeMainWindow::FullGraph)
+    {
+        return 12;
+    }
+
     return 10;
 }
 
