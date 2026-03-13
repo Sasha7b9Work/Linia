@@ -115,11 +115,10 @@ public:
 
     void Reset() override;
 
-    static const int size_cell = 60;       // Столько клетка всегда занимает на экране
+    static const int size_cell = 50;       // Столько клетка всегда занимает на экране
 
 private:
 
-    int     scale = 1;              // 2 - увеличено в два раза, 3 - увелично в три и так далее
     wxPoint pos_mouse;
     Offset  offset;
     Range   rangeX{ "Uc", "V", offset.x };
@@ -149,21 +148,14 @@ private:
     int RightX() const;   // В этой позиции экрана находится правая сторона сетки
 
     // Длина оси в пикселях
-    int LengthAxis() const;
+    int LengthAxisX() const;
+    int LengthAxisY() const;
 
     void DrawLabelsOnAxis() const;
 
     void DrawMouseMarkers() const;
 
     // Количество клеток по осям X и Y
-    int NumCells() const;
-
-    // Отрисовать область сетки, отображаемую на дисплее
-    void DrawArea() const;
-
-    // Отобразить окошко навигации (когда сетка целиком не умещается в окне)
-    void DrawNavigationWindow() const;
-
-    // Вписать в дисплей таким образом, чтобы не было полей по краям
-    void FitIntoDisplay();
+    int NumCellsX() const;
+    int NumCellsY() const;
 };

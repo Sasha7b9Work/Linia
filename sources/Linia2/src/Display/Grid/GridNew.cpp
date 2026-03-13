@@ -4,6 +4,7 @@
 #include "Utils/Math.h"
 #include "Display/GraphEntity.h"
 #include "Display/Grid/GridNew.h"
+#include "Display/Display.h"
 
 
 GridNew::GridNew()
@@ -22,15 +23,13 @@ void GridNew::ResetCenter()
 
 void GridNew::Reset()
 {
-    scale = 1;
-
     ResetCenter();
 }
 
 
 int GridNew::BottomY() const
 {
-    return TopY() + LengthAxis();
+    return TopY() + LengthAxisY();
 }
 
 
@@ -40,9 +39,15 @@ int GridNew::TopY() const
 }
 
 
-int GridNew::LengthAxis() const
+int GridNew::LengthAxisX() const
 {
-    return size_cell * NumCells();
+    return size_cell * NumCellsX();
+}
+
+
+int GridNew::LengthAxisY() const
+{
+    return size_cell * NumCellsY();
 }
 
 
@@ -54,64 +59,13 @@ int GridNew::LeftX() const
 
 int GridNew::RightX() const
 {
-    return LeftX() + LengthAxis();
-}
-
-
-void GridNew::DrawArea() const
-{
-    if (scale == 1)
-    {
-        return;
-    }
-
-    wxSize size = Display::self->GetDrawingSize();
-
-    int size_x = size.x * size.x / LengthAxis();
-    int size_y = size.y * size.y / LengthAxis();
-
-    int d_x = -LeftX() * size.x / LengthAxis();
-    int d_y = -TopY() * size.y / LengthAxis();
-
-    wxColor color{ 127, 127, 127 };
-
-    Rect(size_x, 2).Fill(d_x, 0, color);
-    Rect(2, size_y).Fill(size.x - 4, d_y, color);
-}
-
-
-void GridNew::DrawNavigationWindow() const
-{
-    if (scale == 1 || !wxGetMouseState().LeftIsDown())
-    {
-        return;
-    }
-
-    wxSize size_window{ 150, 150 };
-
-    Display::self->FillRectangle(0, 0, size_window.x, size_window.y, { 240, 240, 240 });
-
-    {
-        wxSize size = Display::self->GetDrawingSize();
-
-        int size_x = size.x * size_window.x / LengthAxis();
-        int size_y = size.y * size_window.y / LengthAxis();
-
-        int dx = -LeftX() * size_window.x / LengthAxis();
-        int dy = -TopY() * size_window.y / LengthAxis();
-
-        Rect(size_x, size_y).Fill(dx, dy, *wxWHITE);
-    }
-
-    Rect(size_window.x, size_window.y).Draw(0, 0, *wxBLACK);
+    return LeftX() + LengthAxisX();
 }
 
 
 void GridNew::Draw(const std::vector<GraphEntity *> &entities)
 {
     wxSize size = Display::self->GetDrawingSize();
-
-    const int length = LengthAxis();
 
     const int x_left = LeftX();
     const int x_right = RightX();
@@ -208,21 +162,14 @@ void GridNew::Draw(const std::vector<GraphEntity *> &entities)
         entity->Draw(this);
     }
 
-    DrawArea();
-
-    if (scale == 1)
-    {
-        Display::self->FillRectangle(0, 0, x_left - 1, Display::self->GetDrawingSize().y, *wxWHITE); //-V807
-        Display::self->FillRectangle(x_left, 0, length, y_top - 1, *wxWHITE);
-        Display::self->FillRectangle(x_right + 1, 0, Display::self->GetDrawingSize().x - x_right, Display::self->GetDrawingSize().y, *wxWHITE);
-        Display::self->FillRectangle(x_left, y_bottom + 1, length, Display::self->GetDrawingSize().y - y_bottom, *wxWHITE);
-    }
+    Display::self->FillRectangle(0, 0, x_left - 1, Display::self->GetDrawingSize().y, *wxWHITE); //-V807
+    Display::self->FillRectangle(x_left, 0, LengthAxisX(), y_top - 1, *wxWHITE);
+    Display::self->FillRectangle(x_right + 1, 0, Display::self->GetDrawingSize().x - x_right, Display::self->GetDrawingSize().y, *wxWHITE);
+    Display::self->FillRectangle(x_left, y_bottom + 1, LengthAxisX(), Display::self->GetDrawingSize().y - y_bottom, *wxWHITE);
 
     DrawLabelsOnAxis();
 
     DrawMouseMarkers();
-
-    DrawNavigationWindow();
 }
 
 
@@ -254,7 +201,7 @@ void GridNew::DrawLabelsOnAxis() const
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
                     last_pos = { coord.x, coord.y + d };
-                    Text(rangeX.GetValuePointAxis(i, NumCells())).DrawAboutCenterDown(last_pos.x, last_pos.y, true, background);
+                    Text(rangeX.GetValuePointAxis(i, NumCellsX())).DrawAboutCenterDown(last_pos.x, last_pos.y, true, background);
                 }
             }
             else
@@ -262,7 +209,7 @@ void GridNew::DrawLabelsOnAxis() const
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
                     last_pos = { coord.x, size.y - 25 };
-                    Text(rangeX.GetValuePointAxis(i, NumCells())).DrawAboutCenterDown(last_pos.x, last_pos.y, true, background);
+                    Text(rangeX.GetValuePointAxis(i, NumCellsX())).DrawAboutCenterDown(last_pos.x, last_pos.y, true, background);
                 }
             }
         }
@@ -285,7 +232,7 @@ void GridNew::DrawLabelsOnAxis() const
                 if (Math::InRange(coord.y, TopY(), BottomY() - 1))
                 {
                     last_pos = { coord.x - d, coord.y };
-                    Text(rangeY.GetValuePointAxis(i, NumCells())).DrawAboutCenterLeft(last_pos.x, last_pos.y, true, background);
+                    Text(rangeY.GetValuePointAxis(i, NumCellsY())).DrawAboutCenterLeft(last_pos.x, last_pos.y, true, background);
                 }
             }
             else
@@ -293,7 +240,7 @@ void GridNew::DrawLabelsOnAxis() const
                 if (Math::InRange(coord.y, TopY(), BottomY() - 1))
                 {
                     last_pos = { d, coord.y };
-                    Text(rangeY.GetValuePointAxis(i, NumCells())).DrawAboutCenterRigth(last_pos.x, last_pos.y, true, background);
+                    Text(rangeY.GetValuePointAxis(i, NumCellsY())).DrawAboutCenterRigth(last_pos.x, last_pos.y, true, background);
                 }
             }
         }
@@ -338,16 +285,8 @@ void GridNew::MoveCenterOn(const wxPoint &delta)
 }
 
 
-void GridNew::MoveImageOn(const wxPoint &delta)
+void GridNew::MoveImageOn(const wxPoint &)
 {
-    if (scale == 1)
-    {
-        return;
-    }
-
-    offset.center_about_screen += delta * scale;
-
-    FitIntoDisplay();
 }
 
 
@@ -357,62 +296,8 @@ void GridNew::OnChangedOffsetMeasure(const wxPoint &delta)
 }
 
 
-void GridNew::FitIntoDisplay()
+void GridNew::ScaleGridOn(const wxPoint &, int)
 {
-    if (scale == 1)
-    {
-        return;
-    }
-
-    wxSize size = Display::self->GetDrawingSize();
-
-    if (LeftX() > 5)
-    {
-        offset.center_about_screen.x = 5 + LengthAxis() / 2;
-    }
-
-    if (TopY() > 5)
-    {
-        offset.center_about_screen.y = 5 + LengthAxis() / 2;
-    }
-
-    int d = 5;
-
-    if (RightX() < size.x - d)
-    {
-        offset.center_about_screen.x = size.x - d - LengthAxis() / 2;
-    }
-
-    if (BottomY() < size.y - d)
-    {
-        offset.center_about_screen.y = size.y - d - LengthAxis() / 2;
-    }
-}
-
-
-void GridNew::ScaleGridOn(const wxPoint &pos, int delta)
-{
-    wxPoint delta_center = offset.center_about_screen - pos;
-
-    if (delta > 0 && scale < 8)
-    {
-        scale *= 2;
-
-        offset.center_about_screen += delta_center;
-    }
-    else if (delta < 0 && scale > 1)
-    {
-        scale /= 2;
-
-        offset.center_about_screen -= delta_center / 2;
-    }
-
-    if (scale == 1)
-    {
-        ResetCenter();
-    }
-
-    FitIntoDisplay();
 }
 
 
@@ -528,27 +413,33 @@ void GridNew::DrawHPointLineLeft2(int x, int y, int x_left, int d)
 
 double GridNew::UnitsInCellX() const
 {
-    return rangeX.AmplitudeAbs() / NumCells();
+    return rangeX.AmplitudeAbs() / NumCellsX();
 }
 
 
 double GridNew::UnitsInCellY() const
 {
-    return rangeY.AmplitudeAbs() / NumCells();
+    return rangeY.AmplitudeAbs() / NumCellsY();
 }
 
 
-int GridNew::NumCells() const
+int GridNew::NumCellsX() const
 {
-    return 10 * scale;
+    return 14;
+}
+
+
+int GridNew::NumCellsY() const
+{
+    return 12;
 }
 
 
 wxPoint GridNew::ValuesToCoord(double x, double y) const
 {
-    double cells_in_x = x * NumCells() / rangeX.AmplitudeAbs();
+    double cells_in_x = x * NumCellsX() / rangeX.AmplitudeAbs();
 
-    double cells_in_y = y * NumCells() / rangeY.AmplitudeAbs();
+    double cells_in_y = y * NumCellsY() / rangeY.AmplitudeAbs();
 
     return { (int)(offset.center_about_screen.x + cells_in_x * size_cell + 0.5), (int)(offset.center_about_screen.y - cells_in_y * size_cell + 0.5) };
 }
@@ -557,8 +448,8 @@ wxPoint GridNew::ValuesToCoord(double x, double y) const
 wxPoint2DDouble GridNew::CoordToValues(const wxPoint &coord) const
 {
     return {
-        rangeX.AmplitudeAbs() * (coord.x - offset.center_about_screen.x) / (NumCells() * size_cell),
-        rangeY.AmplitudeAbs() * (coord.y - offset.center_about_screen.y) / (NumCells() * size_cell)
+        rangeX.AmplitudeAbs() * (coord.x - offset.center_about_screen.x) / (NumCellsX() * size_cell),
+        rangeY.AmplitudeAbs() * (coord.y - offset.center_about_screen.y) / (NumCellsY() * size_cell)
     };
 }
 
