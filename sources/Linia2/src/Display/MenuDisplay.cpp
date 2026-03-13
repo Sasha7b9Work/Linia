@@ -8,58 +8,64 @@
 
 MenuDisplay::MenuDisplay() : wxMenu()
 {
-    wxMenuItem *item = nullptr;
-
     Bind(wxEVT_MENU, &MenuDisplay::OnReset, this, (Append(wxID_RESET, "Сброс"))->GetId());
 
-    item = AppendCheckItem(wxID_ANY, "Полный экран");
+    wxMenuItem *item = AppendCheckItem(wxID_ANY, "Полный экран");
     Bind(wxEVT_MENU, &MenuDisplay::OnFullScreen, this, item->GetId());
     Check(item->GetId(), Display::self->full_screen);
 
     AppendSeparator();
 
+    AppendMenuTrack();
+
+    AppendMenuFacade();
+}
+
+
+void MenuDisplay::AppendMenuTrack()
+{
+    wxMenu *subMenu = new wxMenu();
+
+    wxMenuItem *item = subMenu->AppendCheckItem(wxID_ANY, "X");
+    Bind(wxEVT_MENU, &MenuDisplay::OnTrackX, this, item->GetId());
+    subMenu->Check(item->GetId(), Display::self->track_x);
+
+    item = subMenu->AppendCheckItem(wxID_ANY, "Y");
+    Bind(wxEVT_MENU, &MenuDisplay::OnTrackY, this, item->GetId());
+    subMenu->Check(item->GetId(), Display::self->track_y);
+
+    item = subMenu->AppendCheckItem(wxID_ANY, "Ничего");
+    Bind(wxEVT_MENU, &MenuDisplay::OnTrackNone, this, item->GetId());
+    subMenu->Check(item->GetId(), Display::self->track_none);
+
+    AppendSubMenu(subMenu, "Отслеживать");
+}
+
+
+void MenuDisplay::AppendMenuFacade()
+{
+    wxMenu *subFacade = new wxMenu();
+
     {
-        wxMenu *subMenu = new wxMenu();
-
-        item = subMenu->AppendCheckItem(wxID_ANY, "X");
-        Bind(wxEVT_MENU, &MenuDisplay::OnTrackX, this, item->GetId());
-        subMenu->Check(item->GetId(), Display::self->track_x);
-
-        item = subMenu->AppendCheckItem(wxID_ANY, "Y");
-        Bind(wxEVT_MENU, &MenuDisplay::OnTrackY, this, item->GetId());
-        subMenu->Check(item->GetId(), Display::self->track_y);
-
-        item = subMenu->AppendCheckItem(wxID_ANY, "Ничего");
-        Bind(wxEVT_MENU, &MenuDisplay::OnTrackNone, this, item->GetId());
-        subMenu->Check(item->GetId(), Display::self->track_none);
-
-        AppendSubMenu(subMenu, "Отслеживать");
-    }
-
-    {
-        wxMenu *subFacade = new wxMenu();
-
-        {
-            // Настройка цветов
+        // Настройка цветов
 
 #define APPEND_COLOR(title) Bind(wxEVT_MENU, &MenuDisplay::OnColor, this, (subColors->Append(wxID_ANY, title))->GetId());
 
-            wxMenu *subColors = new wxMenu();
+        wxMenu *subColors = new wxMenu();
 
-            APPEND_COLOR("Фон");
-            APPEND_COLOR("Сетка");
-            APPEND_COLOR("Шрифт");
-            APPEND_COLOR("Кривая");
-            APPEND_COLOR("Ссылка");
-            APPEND_COLOR("Секущая");
+        APPEND_COLOR("Фон");
+        APPEND_COLOR("Сетка");
+        APPEND_COLOR("Шрифт");
+        APPEND_COLOR("Кривая");
+        APPEND_COLOR("Ссылка");
+        APPEND_COLOR("Секущая");
 
-            subFacade->AppendSubMenu(subColors, "Цвета");
-        }
-
-        Bind(wxEVT_MENU, &MenuDisplay::OnSizePoint, this, (subFacade->Append(wxID_ANY, "Размер точки"))->GetId());
-
-        AppendSubMenu(subFacade, "Внешний вид");
+        subFacade->AppendSubMenu(subColors, "Цвета");
     }
+
+    Bind(wxEVT_MENU, &MenuDisplay::OnSizePoint, this, (subFacade->Append(wxID_ANY, "Размер точки"))->GetId());
+
+    AppendSubMenu(subFacade, "Внешний вид");
 }
 
 

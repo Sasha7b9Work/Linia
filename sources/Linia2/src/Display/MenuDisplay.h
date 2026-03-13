@@ -15,6 +15,12 @@ private:
         wxMenuItem *item;
     };
 
+    // Следить
+    void AppendMenuTrack();
+
+    // Внешний вид
+    void AppendMenuFacade();
+
     void OnReset(wxCommandEvent &);
     void OnFullScreen(wxCommandEvent &);
     void OnTrackX(wxCommandEvent &);
