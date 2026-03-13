@@ -795,7 +795,7 @@ wxString Grid::Range::GetValuePointAxis(int num, int cells_in_axis) const
 }
 
 
-void Offset::Process(int &_value, int &_delta)
+void Grid::Offset::Process(int &_value, int &_delta)
 {
     int d = Grid::size_cell;
 
@@ -809,5 +809,25 @@ void Offset::Process(int &_value, int &_delta)
     {
         _delta += d;
         _value--;
+    }
+}
+
+
+void Grid::Offset::MoveOn(const wxPoint &delta)
+{
+    dx += delta.x;
+    dy += delta.y;
+
+    wxPoint diff{ x, y };
+
+    Process(x, dx);
+    Process(y, dy);
+
+    if (x != diff.x || y != diff.y)
+    {
+        diff.x = x - diff.x;
+        diff.y = y - diff.y;
+
+        Events::ChangeOffsetMeasure(diff);
     }
 }

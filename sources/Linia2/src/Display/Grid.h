@@ -6,50 +6,32 @@
 class GraphEntity;
 
 
-struct Offset
-{
-    // При нажимании/отпускании мышки вызываем эту функцию, чтобы обнулить накопительный счётчик смещения
-    void ResetDelta()
-    {
-        dx = 0;
-        dy = 0;
-    }
-
-    // При перемещении мышки вызываем эту функцию
-    void MoveOn(const wxPoint &delta)
-    {
-        dx += delta.x;
-        dy += delta.y;
-
-        wxPoint diff{ x, y };
-
-        Process(x, dx);
-        Process(y, dy);
-
-        if (x != diff.x || y != diff.y)
-        {
-            diff.x = x - diff.x;
-            diff.y = y - diff.y;
-
-            Events::ChangeOffsetMeasure(diff);
-        }
-    }
-
-    int x = 0;
-    int y = 0;
-
-private:
-
-    int dx = 0;
-    int dy = 0;
-
-    void Process(int &_x, int &_delta);
-};
-
-
-
 class Grid
 {
+    struct Offset
+    {
+        // При нажимании/отпускании мышки вызываем эту функцию, чтобы обнулить накопительный счётчик смещения
+        void ResetDelta()
+        {
+            dx = 0;
+            dy = 0;
+        }
+
+        // При перемещении мышки вызываем эту функцию
+        void MoveOn(const wxPoint &delta);
+
+        int x = 0;
+        int y = 0;
+
+    private:
+
+        int dx = 0;
+        int dy = 0;
+
+        void Process(int &_x, int &_delta);
+    };
+
+
     struct Range
     {
         Range(const wxString &_title, const wxString &_units, int &_offset) : title(_title), units(_units), value(_offset)
