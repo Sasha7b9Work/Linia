@@ -425,13 +425,13 @@ double GridNew::UnitsInCellY() const
 
 int GridNew::NumCellsX() const
 {
-    return 14;
+    return 12;
 }
 
 
 int GridNew::NumCellsY() const
 {
-    return 12;
+    return 10;
 }
 
 

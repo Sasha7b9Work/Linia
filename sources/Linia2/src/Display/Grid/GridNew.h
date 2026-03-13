@@ -115,7 +115,7 @@ public:
 
     void Reset() override;
 
-    static const int size_cell = 50;       // Столько клетка всегда занимает на экране
+    static const int size_cell = 60;       // Столько клетка всегда занимает на экране
 
 private:
 
