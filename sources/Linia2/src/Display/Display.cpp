@@ -31,11 +31,15 @@ Display::Display(wxWindow *parent) :
 
     wxSize size{ w, w };
 
-    btnHelp = new wxButton(this, wxID_ANY, "?", wxDefaultPosition, size);
-    btnLessX = new wxButton(this, wxID_ANY, "X-", wxDefaultPosition, size);
-    btnMoreX = new wxButton(this, wxID_ANY, "X+", wxDefaultPosition, size);
-    btnLessY = new wxButton(this, wxID_ANY, "Y-", wxDefaultPosition, size);
-    btnMoreY = new wxButton(this, wxID_ANY, "Y+", wxDefaultPosition, size);
+#define CREATE_BUTTON(btn, txt)                                         \
+    btn = new wxButton(this, wxID_ANY, txt, wxDefaultPosition, size);   \
+    buttons.push_back(btn);
+
+    CREATE_BUTTON(btnHelp, "?")
+    CREATE_BUTTON(btnLessX, "X-");
+    CREATE_BUTTON(btnMoreX, "X+");
+    CREATE_BUTTON(btnLessY, "Y-");
+    CREATE_BUTTON(btnMoreY, "Y+");
 
     panel_errors = new PanelErrors(this);
 
@@ -44,6 +48,18 @@ Display::Display(wxWindow *parent) :
     PanelTable::self->Hide();
 
     Init();
+}
+
+
+void Display::ReInit()
+{
+//    for (auto elem : buttons)
+//    {
+//        elem->SetBackgroundColour(SET::GUI::color_background.Get());
+//        elem->SetForegroundColour(SET::GUI::color_font.Get());
+//        elem->SetOwnBackgroundColour(SET::GUI::color_background.Get());
+//        elem->SetOwnForegroundColour(SET::GUI::color_font.Get());
+//    }
 }
 
 
@@ -101,6 +117,8 @@ void Display::Init()
     Panel::Layout();
 
     GraphEntity::CreateForEmulator(entities);
+
+    ReInit();
 
     Refresh();
 }

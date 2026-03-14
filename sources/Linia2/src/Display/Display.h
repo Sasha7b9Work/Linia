@@ -52,6 +52,8 @@ public:
 
     std::vector<GraphEntity *> entities;    // Сущности для отрисовки
 
+    void ReInit();
+
 private:
 
     wxButton *btnHelp = nullptr,
@@ -59,6 +61,8 @@ private:
         *btnMoreX = nullptr,
         *btnLessY = nullptr,
         *btnMoreY = nullptr;
+
+    std::vector<wxButton *> buttons;        // Здесь все кнопки, у которых нужно менять цвета
 
     wxBitmap *bitmap = nullptr;
     wxGraphicsContext *gc = nullptr;        // Используется для рисования
