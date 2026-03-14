@@ -545,6 +545,12 @@ double GridNew::Range::MaxAbs() const
 }
 
 
+double GridNew::Range::MinAbs() const
+{
+    return value.MinAbs();
+}
+
+
 void GridNew::Range::Increase()
 {
     value.Increase();
@@ -749,4 +755,22 @@ void GridNew::Offset::MoveOn(const wxPoint &delta)
 wxPoint GridNew::CoordZeroInPixels() const
 {
     return { CenterX() + offset.GetValueX() * size_cell, CenterY() + offset.GetValueY() * size_cell };
+}
+
+
+wxPoint2DDouble GridNew::GetRangeX() const
+{
+    double min = rangeX.MinAbs() - rangeX.AmplitudeAbs(NumCellsX());
+    double max = rangeX.MaxAbs() + rangeX.AmplitudeAbs(NumCellsX());
+
+    return { min, max };
+}
+
+
+wxPoint2DDouble GridNew::GetRangeY() const
+{
+    double min = rangeY.MinAbs() - rangeY.AmplitudeAbs(NumCellsY());
+    double max = rangeY.MaxAbs() + rangeY.AmplitudeAbs(NumCellsY());
+
+    return { min, max };
 }

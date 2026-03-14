@@ -63,6 +63,7 @@ class GridNew : public IGrid
         // Разница между максимальным и минимальным значениями - амплитуда
         double AmplitudeAbs(int num_cells) const;
         double MaxAbs() const;
+        double MinAbs() const;
 
         // cells_in_axis - количество клеток по любой оси. Оно всегда одинаковое
         wxString GetValuePointAxis(int, int cells_in_axis) const;
@@ -134,6 +135,10 @@ public:
     void ResetCenter() override;
 
     void Reset() override;
+
+    // Возвращает диапазон, попадающие в который точки нужно отрисовывать
+    wxPoint2DDouble GetRangeX() const;
+    wxPoint2DDouble GetRangeY() const;
 
     static const int size_cell = 60;       // Столько клетка всегда занимает на экране
 

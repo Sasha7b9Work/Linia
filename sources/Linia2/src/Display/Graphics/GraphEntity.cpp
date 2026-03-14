@@ -29,9 +29,12 @@ void GraphMeasures::Draw()
 
     for (auto &coord : abs_points)
     {
-        wxPoint point = Grid::self->ValuesToCoord(coord.m_x, coord.m_y);
+        if (Grid::self->NeedDrawing(coord))
+        {
+            wxPoint point = Grid::self->ValuesToCoord(coord.m_x, coord.m_y);
 
-        rel_points.push_back(point);
+            rel_points.push_back(point);
+        }
     }
 
     Spline().Draw(rel_points, true, true);

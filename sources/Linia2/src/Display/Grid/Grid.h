@@ -31,6 +31,8 @@ public:
     virtual wxPoint ValuesToCoord(double x, double y) const = 0;
     virtual int NumCellsX() const = 0;
     virtual int NumCellsY() const = 0;
+    // Возвращает true, если точку нужно отображать (попадает на экран)
+    virtual bool NeedDrawing(const wxPoint2DDouble &) const = 0;
 };
 
 
@@ -140,6 +142,11 @@ public:
     void ResetCenter() override;
 
     void Reset() override;
+
+    bool NeedDrawing(const wxPoint2DDouble &) const override
+    {
+        return true;
+    }
 
     static const int size_cell = 60;       // Столько клетка всегда занимает на экране
 
