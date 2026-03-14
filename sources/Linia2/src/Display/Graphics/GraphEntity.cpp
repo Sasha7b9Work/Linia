@@ -27,9 +27,13 @@ void GraphMeasures::Draw()
 
     rel_points.clear();
 
+    wxPoint2DDouble range_x = Grid::self->GetRangeX();
+    wxPoint2DDouble range_y = Grid::self->GetRangeY();
+
     for (auto &coord : abs_points)
     {
-//        if (Grid::self->NeedDrawing(coord))
+        if(coord.m_x > range_x.m_x && coord.m_x < range_x.m_y &&
+           coord.m_y > range_y.m_x && coord.m_y < range_y.m_y)
         {
             wxPoint point = Grid::self->ValuesToCoord(coord.m_x, coord.m_y);
 

@@ -31,6 +31,8 @@ public:
     virtual wxPoint ValuesToCoord(double x, double y) const = 0;
     virtual int NumCellsX() const = 0;
     virtual int NumCellsY() const = 0;
+    virtual wxPoint2DDouble GetRangeX() const = 0;
+    virtual wxPoint2DDouble GetRangeY() const = 0;
 };
 
 
@@ -140,6 +142,15 @@ public:
     void ResetCenter() override;
 
     void Reset() override;
+
+    wxPoint2DDouble GetRangeX() const override
+    {
+        return { 0.0, 0.0 };
+    };
+    wxPoint2DDouble GetRangeY() const override
+    {
+        return { 0.0, 0.0 };
+    };
 
     static const int size_cell = 60;       // Столько клетка всегда занимает на экране
 

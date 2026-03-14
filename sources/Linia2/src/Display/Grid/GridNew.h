@@ -137,8 +137,8 @@ public:
     void Reset() override;
 
     // Возвращает диапазон, попадающие в который точки нужно отрисовывать
-    wxPoint2DDouble GetRangeX() const;
-    wxPoint2DDouble GetRangeY() const;
+    wxPoint2DDouble GetRangeX() const override;
+    wxPoint2DDouble GetRangeY() const override;
 
     static const int size_cell = 60;       // Столько клетка всегда занимает на экране
 
