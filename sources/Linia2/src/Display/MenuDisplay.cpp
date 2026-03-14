@@ -78,7 +78,23 @@ void MenuDisplay::AppendMenuFacade()
         subFacade->AppendSubMenu(subColors, "Цвета");
     }
 
-    Bind(wxEVT_MENU, &MenuDisplay::OnSizePoint, this, (subFacade->Append(wxID_ANY, "Размер точки"))->GetId());
+    {
+        wxMenuItem *item = nullptr;
+
+#define APPEND_SIZE(title)                                                  \
+        item = subSize->Append(wxID_ANY, title);                            \
+        Bind(wxEVT_MENU, &MenuDisplay::OnSizePoint, this, item->GetId());
+
+        wxMenu *subSize = new wxMenu();
+
+        APPEND_SIZE("Откл");
+        APPEND_SIZE("2");
+        APPEND_SIZE("3");
+        APPEND_SIZE("4");
+        APPEND_SIZE("5");
+
+        subFacade->AppendSubMenu(subSize, "Размер точки");
+    }
 
     AppendSubMenu(subFacade, "Внешний вид");
 }
@@ -193,7 +209,7 @@ void MenuDisplay::OnColor(wxCommandEvent &event)
 }
 
 
-void MenuDisplay::OnSizePoint(wxCommandEvent &)
+void MenuDisplay::OnSizePoint(wxCommandEvent &event)
 {
 
 }
