@@ -183,6 +183,7 @@ void MenuDisplay::OnColor(wxCommandEvent &event)
                     if (col.second.set)
                     {
                         col.second.set->Reset();
+                        OnColorCurve();
                     }
                 }
             }
