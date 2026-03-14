@@ -85,6 +85,7 @@ private:
     void OnEventMouseUp(wxMouseEvent &);
     void OnEventMouseMove(wxMouseEvent &);
     void OnEventMouseWheel(wxMouseEvent &);
+    void OnLeaveWindow(wxMouseEvent &);
     void OnEventButton(wxCommandEvent &);
 
     wxSize GetSize() const;

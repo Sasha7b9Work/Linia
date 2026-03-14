@@ -25,6 +25,7 @@ Display::Display(wxWindow *parent) :
     Bind(wxEVT_MOTION, &Display::OnEventMouseMove, this);
     Bind(wxEVT_MOUSEWHEEL, &Display::OnEventMouseWheel, this);
     Bind(wxEVT_RIGHT_DOWN, &Display::OnEventRightClick, this);
+    Bind(wxEVT_LEAVE_WINDOW, &Display::OnLeaveWindow, this);
     Bind(wxEVT_BUTTON, &Display::OnEventButton, this);
 
     int w = 25;
@@ -138,6 +139,22 @@ void Display::OnEventMouseDown(wxMouseEvent &event)
 }
 
 
+void Display::OnLeaveWindow(wxMouseEvent &event)
+{
+    if (mouse_is_pressed)
+    {
+        mouse_is_pressed = false;
+
+        wxMouseEvent upEvent(wxEVT_LEFT_UP);
+        upEvent.SetPosition(event.GetPosition());
+        upEvent.SetEventObject(this);
+
+        GetEventHandler()->ProcessEvent(upEvent);
+    }
+    event.Skip();
+}
+
+
 void Display::OnEventMouseUp(wxMouseEvent &)
 {
     mouse_is_pressed = false;
@@ -168,6 +185,11 @@ void Display::OnEventMouseMove(wxMouseEvent &event)
         }
 
         pos_mouse_down = position;
+
+        if (!event.LeftIsDown())
+        {
+
+        }
     }
     else                                            // Отслеживание координат
     {
