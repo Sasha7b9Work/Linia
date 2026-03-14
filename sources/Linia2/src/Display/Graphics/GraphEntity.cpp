@@ -29,7 +29,7 @@ void GraphMeasures::Draw()
 
     for (auto &coord : abs_points)
     {
-        if (Grid::self->NeedDrawing(coord))
+//        if (Grid::self->NeedDrawing(coord))
         {
             wxPoint point = Grid::self->ValuesToCoord(coord.m_x, coord.m_y);
 

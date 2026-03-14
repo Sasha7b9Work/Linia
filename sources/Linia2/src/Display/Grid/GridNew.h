@@ -61,7 +61,7 @@ class GridNew : public IGrid
         wxString units;
 
         // Разница между максимальным и минимальным значениями - амплитуда
-        double AmplitudeAbs(int num_cells) const;
+        double AmplitudeAbs() const;
         double MaxAbs() const;
         double MinAbs() const;
 
@@ -80,7 +80,7 @@ class GridNew : public IGrid
             Value(int &_offset, int (*num_cells)()) :
                 NumCells(num_cells), offset(_offset) {}
 
-            double HalfAmplitudeAbs(int num_cells) const;
+            double HalfAmplitudeAbs() const;
             // Минимальное значение
             double MinAbs() const;
             // Максимальное значение
