@@ -429,7 +429,7 @@ void Text::DrawAboutCenterRigth(int x, int y, bool fillBackground) const
 
 void Spline::AppendPoint(const wxPoint2DDouble &point)
 {
-    points.push_back(point);
+    rel_points.push_back(point);
 }
 
 
@@ -439,9 +439,9 @@ void Spline::Draw(bool smooth, bool draw_points) const
     {
         std::vector<wxPoint> p;
 
-        for (uint i = 0; i < points.size(); i++)
+        for (uint i = 0; i < rel_points.size(); i++)
         {
-            wxPoint2DDouble p_d = points[i];
+            wxPoint2DDouble p_d = rel_points[i];
 
             p.push_back({ (int)p_d.m_x, (int)p_d.m_y });
         }
@@ -452,11 +452,11 @@ void Spline::Draw(bool smooth, bool draw_points) const
     {
         wxGraphicsPath path = Display::self->gc->CreatePath();
 
-        path.MoveToPoint(points[0].m_x, points[0].m_y);
+        path.MoveToPoint(rel_points[0].m_x, rel_points[0].m_y);
 
-        for (uint i = 1; i < points.size(); i++)
+        for (uint i = 1; i < rel_points.size(); i++)
         {
-            path.AddLineToPoint(points[i].m_x, points[i].m_y);
+            path.AddLineToPoint(rel_points[i].m_x, rel_points[i].m_y);
         }
 
         Display::self->gc->StrokePath(path);
@@ -466,7 +466,7 @@ void Spline::Draw(bool smooth, bool draw_points) const
     {
         wxGraphicsPath path_circle = Display::self->gc->CreatePath();
 
-        for (const auto &pt : points)
+        for (const auto &pt : rel_points)
         {
             path_circle.AddCircle(pt.m_x, pt.m_y, 2);
         }

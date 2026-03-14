@@ -168,5 +168,5 @@ public:
 
 private:
 
-    std::vector<wxPoint2DDouble> points;
+    std::vector<wxPoint2DDouble> rel_points;    // Здесь хранятся значения, приведённые к координатам экрана
 };

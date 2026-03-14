@@ -520,14 +520,16 @@ void GridNew::DrawMouseMarkers() const
 
     Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(pos_mouse.x + 5, pos_mouse.y - 5, true);
 
+    wxColor color = wxColor(SET::GUI::color_curve.Get()).ChangeLightness(70);
+
     if (Display::self->track_y)
     {
-        Line(LeftX(), pos_mouse.y, RightX(), pos_mouse.y).Draw(*wxBLACK);
+        Line(LeftX(), pos_mouse.y, RightX(), pos_mouse.y).Draw(color);
     }
 
     if (Display::self->track_x)
     {
-        Line(pos_mouse.x, TopY(), pos_mouse.x, BottomY()).Draw(*wxBLACK);
+        Line(pos_mouse.x, TopY(), pos_mouse.x, BottomY()).Draw(color);
     }
 }
 

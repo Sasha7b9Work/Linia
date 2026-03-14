@@ -6,6 +6,7 @@
 #include "Display/Grid/Grid.h"
 #include "Display/Grid/GridNew.h"
 #include "Display/Display.h"
+#include "Settings/Settings.h"
 
 
 IGrid *IGrid::self = nullptr;
@@ -610,12 +611,12 @@ void Grid::DrawMouseMarkers() const
 
     if (Display::self->track_y)
     {
-        Line(LeftX(), pos_mouse.y, RightX(), pos_mouse.y).Draw(*wxBLACK);
+        Line(LeftX(), pos_mouse.y, RightX(), pos_mouse.y).Draw(SET::GUI::color_curve.Get());
     }
 
     if (Display::self->track_x)
     {
-        Line(pos_mouse.x, TopY(), pos_mouse.x, BottomY()).Draw(*wxBLACK);
+        Line(pos_mouse.x, TopY(), pos_mouse.x, BottomY()).Draw(SET::GUI::color_curve.Get());
     }
 }
 
