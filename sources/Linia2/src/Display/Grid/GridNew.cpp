@@ -5,6 +5,7 @@
 #include "Display/Graphics/GraphEntity.h"
 #include "Display/Grid/GridNew.h"
 #include "Display/Display.h"
+#include "Settings/Settings.h"
 
 
 GridNew::GridNew()
@@ -86,7 +87,7 @@ void GridNew::Draw(const std::vector<GraphEntity *> &entities)
 
     {
         // Горизонтальные линии
-        Line(x_left, y_top, RightX(), y_top).Draw(*wxBLACK);
+        Line(x_left, y_top, RightX(), y_top).Draw(SET::GUI::color_grid.Get());
 
         DrawHPointLineRight2(coord_zero, size.x, d);
         DrawHPointLineLeft2(coord_zero, 0, d);
@@ -166,10 +167,10 @@ void GridNew::Draw(const std::vector<GraphEntity *> &entities)
         entity->Draw(this);
     }
 
-    Display::self->FillRectangle(0, 0, x_left - 1, Display::self->GetDrawingSize().y, *wxWHITE); //-V807
-    Display::self->FillRectangle(x_left, 0, LengthAxisX(), y_top - 1, *wxWHITE);
-    Display::self->FillRectangle(x_right + 1, 0, Display::self->GetDrawingSize().x - x_right, Display::self->GetDrawingSize().y, *wxWHITE);
-    Display::self->FillRectangle(x_left, y_bottom + 1, LengthAxisX(), Display::self->GetDrawingSize().y - y_bottom, *wxWHITE);
+    Display::self->FillRectangle(0, 0, x_left - 1, Display::self->GetDrawingSize().y, SET::GUI::color_background.Get()); //-V807
+    Display::self->FillRectangle(x_left, 0, LengthAxisX(), y_top - 1, SET::GUI::color_background.Get());
+    Display::self->FillRectangle(x_right + 1, 0, Display::self->GetDrawingSize().x - x_right, Display::self->GetDrawingSize().y, SET::GUI::color_background.Get());
+    Display::self->FillRectangle(x_left, y_bottom + 1, LengthAxisX(), Display::self->GetDrawingSize().y - y_bottom, SET::GUI::color_background.Get());
 
     DrawLabelsOnAxis();
 
@@ -179,9 +180,8 @@ void GridNew::Draw(const std::vector<GraphEntity *> &entities)
 
 void GridNew::DrawLabelsOnAxis() const
 {
-    Display::self->SetColor(*wxBLACK);
-
-    wxColor background{ *wxWHITE };
+    wxColor background{ SET::GUI::color_background.Get() };
+    wxColor color_font{ SET::GUI::color_font.Get() };
 
     Text::SetFont();
 
@@ -208,7 +208,7 @@ void GridNew::DrawLabelsOnAxis() const
 
                     wxString value = rangeX.GetValuePointAxis(i, NumCellsX());
 
-                    Text(value).DrawAboutCenterDown(last_pos.x, last_pos.y, true, background);
+                    Text(value).DrawAboutCenterDown(last_pos.x, last_pos.y, true, color_font);
                 }
             }
             else
@@ -216,12 +216,12 @@ void GridNew::DrawLabelsOnAxis() const
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
                     last_pos = { coord.x, size.y - 25 };
-                    Text(rangeX.GetValuePointAxis(i, NumCellsX())).DrawAboutCenterDown(last_pos.x, last_pos.y, true, background);
+                    Text(rangeX.GetValuePointAxis(i, NumCellsX())).DrawAboutCenterDown(last_pos.x, last_pos.y, true, color_font);
                 }
             }
         }
 
-        Text(rangeX.FullTitle()).DrawAboutCenterDown(last_pos.x < size.x ? last_pos.x : size.x - 20, last_pos.y - 20, true, background);
+        Text(rangeX.FullTitle()).DrawAboutCenterDown(last_pos.x < size.x ? last_pos.x : size.x - 20, last_pos.y - 20, true, color_font);
     }
 
     {
@@ -515,8 +515,6 @@ void GridNew::DrawMouseMarkers() const
 
     Text::SetFont();
 
-    Display::self->SetColor(*wxBLACK);
-
     wxPoint2DDouble value = CoordToValues(pos_mouse);
 
     Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(pos_mouse.x + 5, pos_mouse.y - 5, true, *wxWHITE, true);
@@ -531,7 +529,6 @@ void GridNew::DrawMouseMarkers() const
         Line(pos_mouse.x, TopY(), pos_mouse.x, BottomY()).Draw(*wxBLACK);
     }
 }
-
 
 double GridNew::Range::AmplitudeAbs(int num_cells) const
 {

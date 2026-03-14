@@ -25,8 +25,9 @@ public:
 
     static Display *self;
 
-    void SetColor(const wxColor &);
-    void LoadColor();
+    void SetColorBrush(const wxColor &);
+    void SetColorPen(const wxColor &);
+    void LoadColors();
 
     bool track_x = false;           // Отслеживать координату x
     bool track_y = false;           // Отслеживать координату y
@@ -61,7 +62,8 @@ private:
     wxBitmap *bitmap = nullptr;
     wxGraphicsContext *gc = nullptr;        // Используется для рисования
     wxMemoryDC dc;                          // А здесь хранится то, что нарисовано, пока не будет вызвано событие wxEVT_PAINT
-    wxColor color;
+    wxColor color_pen;
+    wxColor color_brush;
 
     // Координаты мыши при нажатии кнопки
     wxPoint pos_mouse_down;

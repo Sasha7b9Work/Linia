@@ -22,8 +22,6 @@ void GraphMeasures::AppendPoint(const wxPoint2DDouble &point)
 
 void GraphMeasures::Draw(const IGrid *grid) const
 {
-    Display::self->SetColor(color);
-
     Spline spline;
 
     for (auto &coord : points)

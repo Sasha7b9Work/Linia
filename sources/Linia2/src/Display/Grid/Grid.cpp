@@ -242,8 +242,6 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
 void Grid::DrawLabelsOnAxis() const
 {
-    Display::self->SetColor(*wxBLACK);
-
     wxColor background{ 230, 230, 230 };
 
     Text::SetFont();
@@ -605,8 +603,6 @@ void Grid::DrawMouseMarkers() const
     }
 
     Text::SetFont();
-
-    Display::self->SetColor(*wxBLACK);
 
     wxPoint2DDouble value = CoordToValues(pos_mouse);
 

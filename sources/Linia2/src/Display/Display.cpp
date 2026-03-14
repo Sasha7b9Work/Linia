@@ -7,6 +7,7 @@
 #include "Display/Graphics/GraphEntity.h"
 #include "Display/MenuDisplay.h"
 #include "Display/Graphics/Splines.h"
+#include "Settings/Settings.h"
 
 
 Display *Display::self = nullptr;
@@ -221,7 +222,7 @@ void Display::OnEventPaint(wxPaintEvent &)
 {
     BeginPaint();
 
-    FillRectangle(0, 0, GetDrawingSize().x, GetDrawingSize().y, *wxWHITE);
+    FillRectangle(0, 0, GetDrawingSize().x, GetDrawingSize().y, SET::GUI::color_background.Get());
 
     IGrid::self->Draw(entities);
 
@@ -247,21 +248,21 @@ void Line::Draw() const
 
 void Line::Draw(const wxColor &color) const
 {
-    Display::self->SetColor(color);
+    Display::self->SetColorPen(color);
     Display::self->gc->StrokeLine(x1, y1, x2, y2);
 }
 
 
 void Rect::Fill(int x, int y, const wxColor &color) const
 {
-    Display::self->SetColor(color);
+    Display::self->SetColorBrush(color);
     Display::self->gc->DrawRectangle(x, y, width, height);
 }
 
 
 void Rect::Draw(int x, int y, const wxColor &color) const
 {
-    Display::self->SetColor(color);
+    Display::self->SetColorPen(color);
     Line(x, y, x + width, y).Draw();
     Line(x + width, y, x + width, y + height).Draw();
     Line(x, y + height, x + width, y + height).Draw();
@@ -277,7 +278,7 @@ Text::Text(const wxString &_text) : text(_text)
 
 void Text::SetFont()
 {
-    Display::self->gc->SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL), Display::self->color);
+    Display::self->gc->SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL), Display::self->color_pen);
 }
 
 
@@ -298,11 +299,10 @@ void Text::DrawAboutCenterLeft(int x, int y, bool fillBackground, const wxColor 
     if (fillBackground)
     {
         Display::self->gc->SetBrush(background);
-        Display::self->gc->SetPen(background);
         Display::self->gc->DrawRectangle(x, y, width, height);
 
-        Display::self->gc->SetBrush(Display::self->color);
-        Display::self->gc->SetPen(Display::self->color);
+        Display::self->gc->SetBrush(Display::self->color_brush);
+        Display::self->gc->SetPen(Display::self->color_pen);
     }
 
     Display::self->gc->DrawText(text, x, y);
@@ -311,7 +311,7 @@ void Text::DrawAboutCenterLeft(int x, int y, bool fillBackground, const wxColor 
 
 void Display::FillRectangle(int x, int y, int width, int height, const wxColor &_color)
 {
-    SetColor(_color);
+    SetColorBrush(_color);
     gc->DrawRectangle(x, y, width, height);
 }
 
@@ -329,8 +329,8 @@ void Text::DrawAboutCenterDown(int x, int y, bool fillBackground, const wxColor 
         Display::self->gc->SetPen(background);
         Display::self->gc->DrawRectangle(x, y, width, height);
 
-        Display::self->gc->SetBrush(Display::self->color);
-        Display::self->gc->SetPen(Display::self->color);
+        Display::self->gc->SetBrush(Display::self->color_brush);
+        Display::self->gc->SetPen(Display::self->color_pen);
     }
 
     Display::self->gc->DrawText(text, x, y);
@@ -351,7 +351,7 @@ void Text::DrawAboutCenterUp(int x, int y, bool fillBackground, const wxColor &b
         Display::self->gc->SetPen(background);
         Display::self->gc->DrawRectangle(x, y, width, height);
 
-        Display::self->LoadColor();
+        Display::self->LoadColors();
     }
 
     Display::self->gc->DrawText(text, x, y);
@@ -362,7 +362,7 @@ void Text::DrawAboutCenterUp(int x, int y, bool fillBackground, const wxColor &b
 
         Display::self->gc->DrawRectangle(x - 1, y - 1, width + 2, height + 2);
 
-        Display::self->LoadColor();
+        Display::self->LoadColors();
     }
 }
 
@@ -380,7 +380,7 @@ void Text::DrawAboutRightUp(int x, int y, bool fillBackground, const wxColor &ba
         Display::self->gc->SetPen(background);
         Display::self->gc->DrawRectangle(x, y, width, height);
 
-        Display::self->LoadColor();
+        Display::self->LoadColors();
     }
 
     Display::self->gc->DrawText(text, x, y);
@@ -391,7 +391,7 @@ void Text::DrawAboutRightUp(int x, int y, bool fillBackground, const wxColor &ba
 
         Display::self->gc->DrawRectangle(x - 1, y - 1, width + 2, height + 2);
 
-        Display::self->LoadColor();
+        Display::self->LoadColors();
     }
 }
 
@@ -409,7 +409,7 @@ void Text::DrawAboutCenterRigth(int x, int y, bool fillBackground, const wxColor
         Display::self->gc->SetPen(background);
         Display::self->gc->DrawRectangle(x, y, width, height);
 
-        Display::self->LoadColor();
+        Display::self->LoadColors();
     }
 
     Display::self->gc->DrawText(text, x, y);
@@ -440,8 +440,6 @@ void Spline::Draw(bool smooth, bool draw_points) const
     else
     {
         wxGraphicsPath path = Display::self->gc->CreatePath();
-
-        Display::self->SetColor(Display::self->color);
 
         path.MoveToPoint(points[0].m_x, points[0].m_y);
 
@@ -475,18 +473,26 @@ void Display::OnEventRightClick(wxMouseEvent &)
 }
 
 
-void Display::SetColor(const wxColor &_color)
+void Display::SetColorBrush(const wxColor &_color)
 {
-    color = _color;
+    color_brush = _color;
 
-    LoadColor();
+    LoadColors();
 }
 
 
-void Display::LoadColor()
+void Display::SetColorPen(const wxColor &_color)
 {
-    Display::self->gc->SetPen(color);
-    Display::self->gc->SetBrush(color);
+    color_pen = _color;
+
+    LoadColors();
+}
+
+
+void Display::LoadColors()
+{
+    Display::self->gc->SetPen(color_pen);
+    Display::self->gc->SetBrush(color_brush);
 }
 
 
