@@ -431,9 +431,7 @@ void Spline::Draw(bool smooth, bool draw_points) const
             path_circle.AddCircle(pt.m_x, pt.m_y, 2);
         }
 
-        Display::self->gc->SetBrush(Display::self->color_pen);
         Display::self->gc->FillPath(path_circle);
-        Display::self->gc->SetBrush(Display::self->color_brush);
     }
 }
 

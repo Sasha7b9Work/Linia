@@ -17,6 +17,7 @@ class Display : public Panel
     friend class Line;
     friend class Rect;
     friend class MenuDisplay;
+    friend class GraphMeasures;
 
 public:
 
