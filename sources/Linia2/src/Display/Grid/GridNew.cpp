@@ -164,7 +164,7 @@ void GridNew::Draw(const std::vector<GraphEntity *> &entities)
 
     for (auto *entity : entities)
     {
-        entity->Draw(this);
+        entity->Draw();
     }
 
     Display::self->SetColorPen(SET::GUI::color_background.Get());

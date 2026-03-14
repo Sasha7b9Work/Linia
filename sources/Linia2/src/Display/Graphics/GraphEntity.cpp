@@ -5,10 +5,10 @@
 #include "Settings/Settings.h"
 
 
-void GraphLine::Draw(const IGrid *grid)
+void GraphLine::Draw()
 {
-    wxPoint s = grid->ValuesToCoord(start.u, start.i);
-    wxPoint e = grid->ValuesToCoord(end.u, end.i);
+    wxPoint s = Grid::self->ValuesToCoord(start.u, start.i);
+    wxPoint e = Grid::self->ValuesToCoord(end.u, end.i);
 
     Line(s.x, s.y, e.x, e.y).Draw(color);
 }
@@ -20,7 +20,7 @@ void GraphMeasures::AppendPoint(const wxPoint2DDouble &point)
 }
 
 
-void GraphMeasures::Draw(const IGrid *grid)
+void GraphMeasures::Draw()
 {
     Display::self->gc->SetBrush(color);
     Display::self->gc->SetPen(color);
@@ -29,7 +29,7 @@ void GraphMeasures::Draw(const IGrid *grid)
 
     for (auto &coord : abs_points)
     {
-        wxPoint point = grid->ValuesToCoord(coord.m_x, coord.m_y);
+        wxPoint point = Grid::self->ValuesToCoord(coord.m_x, coord.m_y);
 
         rel_points.push_back(point);
     }

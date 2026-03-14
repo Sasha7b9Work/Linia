@@ -18,7 +18,7 @@ public:
 
     GraphEntity() : color{ *wxWHITE } { }
 
-    virtual void Draw(const IGrid *) = 0;
+    virtual void Draw() = 0;
 
     void SetColor(const wxColor &_color) { color = _color; }
 
@@ -42,7 +42,7 @@ public:
     {
     }
 
-    void Draw(const IGrid *) override;
+    void Draw() override;
 
 private:
 
@@ -61,7 +61,7 @@ public:
 
     void AppendPoint(const wxPoint2DDouble &);
 
-    void Draw(const IGrid *) override;
+    void Draw() override;
 
 private:
 

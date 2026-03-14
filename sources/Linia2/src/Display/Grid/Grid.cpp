@@ -220,7 +220,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
 
     for (auto *entity : entities)
     {
-        entity->Draw(this);
+        entity->Draw();
     }
 
     DrawArea();
