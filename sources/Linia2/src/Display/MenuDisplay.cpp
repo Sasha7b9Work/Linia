@@ -61,17 +61,19 @@ void MenuDisplay::AppendMenuFacade()
 #define APPEND_COLOR(title, value_color, func)                          \
         item = subColors->Append(wxID_ANY, title);                      \
         Bind(wxEVT_MENU, &MenuDisplay::OnColor, this, item->GetId());   \
-        str_color = { &value_color, func };                             \
+        str_color = { value_color, func };                             \
         colors[item->GetId()] = str_color;
 
         wxMenu *subColors = new wxMenu();
 
-        APPEND_COLOR("Фон", SET::GUI::color_background, nullptr);
-        APPEND_COLOR("Сетка", SET::GUI::color_grid, nullptr);
-        APPEND_COLOR("Шрифт", SET::GUI::color_font, nullptr);
-        APPEND_COLOR("Кривая", SET::GUI::color_curve, OnColorCurve);
-        APPEND_COLOR("Ссылка", SET::GUI::color_link, nullptr);
-        APPEND_COLOR("Секущая", SET::GUI::color_secant, nullptr);
+        APPEND_COLOR("Фон", &SET::GUI::color_background, nullptr);
+        APPEND_COLOR("Сетка", &SET::GUI::color_grid, nullptr);
+        APPEND_COLOR("Шрифт", &SET::GUI::color_font, nullptr);
+        APPEND_COLOR("Кривая", &SET::GUI::color_curve, OnColorCurve);
+        APPEND_COLOR("Ссылка", &SET::GUI::color_link, nullptr);
+        APPEND_COLOR("Секущая", &SET::GUI::color_secant, nullptr);
+        subColors->AppendSeparator();
+        APPEND_COLOR("Сбросить", nullptr, nullptr);
 
         subFacade->AppendSubMenu(subColors, "Цвета");
     }
@@ -133,7 +135,7 @@ void MenuDisplay::OnTrackNone(wxCommandEvent &event)
 
 void MenuDisplay::OnColor(wxCommandEvent &event)
 {
-    auto SetColor = []( const wxString &title, wxColour &color) -> bool
+    auto SetColor = [](const wxString &title, wxColour &color) -> bool
         {
             wxColourData colourData;
             colourData.SetChooseFull(true);
@@ -158,20 +160,34 @@ void MenuDisplay::OnColor(wxCommandEvent &event)
     {
         wxColour color;
 
-        if (SetColor(item->GetItemLabel(), color))
+        auto elem = colors.find(event.GetId());
+
+        if (elem != colors.end())
         {
-            auto elem = colors.find(event.GetId());
-
-            if (elem != colors.end())
+            if (elem->second.set)
             {
-                elem->second.set->Set(color.GetRGB());
-
-                if (elem->second.func)
+                if (SetColor(item->GetItemLabel(), color))
                 {
-                    elem->second.func();
+                    elem->second.set->Set(color.GetRGB());
+
+                    if (elem->second.func)
+                    {
+                        elem->second.func();
+                    }
+                }
+            }
+            else                            // Сбросить
+            {
+                for (auto col : colors)
+                {
+                    if (col.second.set)
+                    {
+                        col.second.set->Reset();
+                    }
                 }
             }
         }
+
     }
 }
 

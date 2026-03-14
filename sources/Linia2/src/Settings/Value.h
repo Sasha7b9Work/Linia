@@ -89,16 +89,16 @@ public:
         return Get() == GetDefault();
     }
 
+    void Reset()
+    {
+        Set(default_value);
+    }
+
 private:
 
     T GetDefault() const
     {
         return default_value;
-    }
-
-    void Reset()
-    {
-        Set(default_value);
     }
 
     wxString GetKey() const

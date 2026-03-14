@@ -8,6 +8,7 @@
 #include "Display/MenuDisplay.h"
 #include "Display/Graphics/Splines.h"
 #include "Settings/Settings.h"
+#include "Utils/Timer.h"
 
 
 Display *Display::self = nullptr;

@@ -30,18 +30,25 @@ void GraphMeasures::Draw()
     wxPoint2DDouble range_x = Grid::self->GetRangeX();
     wxPoint2DDouble range_y = Grid::self->GetRangeY();
 
+    bool very_big = false;
+
     for (auto &coord : abs_points)
     {
         if(coord.m_x > range_x.m_x && coord.m_x < range_x.m_y &&
            coord.m_y > range_y.m_x && coord.m_y < range_y.m_y)
         {
-            wxPoint point = Grid::self->ValuesToCoord(coord.m_x, coord.m_y);
-
-            rel_points.push_back(point);
         }
+        else
+        {
+            very_big = true;
+        }
+
+        wxPoint point = Grid::self->ValuesToCoord(coord.m_x, coord.m_y);
+
+        rel_points.push_back(point);
     }
 
-    Spline().Draw(rel_points, true, true);
+    Spline().Draw(rel_points, very_big ? false : true, true);
 
     Display::self->LoadColors();
 }

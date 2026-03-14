@@ -760,8 +760,8 @@ wxPoint GridNew::CoordZeroInPixels() const
 
 wxPoint2DDouble GridNew::GetRangeX() const
 {
-    double min = rangeX.MinAbs() - rangeX.AmplitudeAbs() * 1e3;
-    double max = rangeX.MaxAbs() + rangeX.AmplitudeAbs() * 1e3;
+    double min = rangeX.MinAbs() - rangeX.AmplitudeAbs() * 1e1;
+    double max = rangeX.MaxAbs() + rangeX.AmplitudeAbs() * 1e1;
 
     return { min, max };
 }
@@ -769,8 +769,8 @@ wxPoint2DDouble GridNew::GetRangeX() const
 
 wxPoint2DDouble GridNew::GetRangeY() const
 {
-    double min = rangeY.MinAbs() - rangeY.AmplitudeAbs() * 1e3;
-    double max = rangeY.MaxAbs() + rangeY.AmplitudeAbs() * 1e3;
+    double min = rangeY.MinAbs() - rangeY.AmplitudeAbs() * 1e1;
+    double max = rangeY.MaxAbs() + rangeY.AmplitudeAbs() * 1e1;
 
     return { min, max };
 }
