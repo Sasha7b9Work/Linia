@@ -5,7 +5,7 @@
 #include "Settings/Settings.h"
 
 
-void GraphLine::Draw(const IGrid *grid) const
+void GraphLine::Draw(const IGrid *grid)
 {
     wxPoint s = grid->ValuesToCoord(start.u, start.i);
     wxPoint e = grid->ValuesToCoord(end.u, end.i);
@@ -16,25 +16,25 @@ void GraphLine::Draw(const IGrid *grid) const
 
 void GraphMeasures::AppendPoint(const wxPoint2DDouble &point)
 {
-    points.push_back(point);
+    abs_points.push_back(point);
 }
 
 
-void GraphMeasures::Draw(const IGrid *grid) const
+void GraphMeasures::Draw(const IGrid *grid)
 {
     Display::self->gc->SetBrush(color);
     Display::self->gc->SetPen(color);
 
-    Spline spline;
+    rel_points.clear();
 
-    for (auto &coord : points)
+    for (auto &coord : abs_points)
     {
         wxPoint point = grid->ValuesToCoord(coord.m_x, coord.m_y);
 
-        spline.AppendPoint({ (double)point.x, (double)point.y });
+        rel_points.push_back(point);
     }
 
-    spline.Draw(true, true);
+    Spline().Draw(rel_points, true, true);
 
     Display::self->LoadColors();
 }

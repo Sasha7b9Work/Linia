@@ -161,12 +161,6 @@ class Spline
 {
 public:
 
-    void AppendPoint(const wxPoint2DDouble &);
-
     // smooth - сглаживание
-    void Draw(bool smooth, bool draw_points) const;
-
-private:
-
-    std::vector<wxPoint2DDouble> rel_points;    // Здесь хранятся значения, приведённые к координатам экрана
+    void Draw(const std::vector<wxPoint> &, bool smooth, bool draw_points) const;
 };

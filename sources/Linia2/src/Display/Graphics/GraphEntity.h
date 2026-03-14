@@ -18,7 +18,7 @@ public:
 
     GraphEntity() : color{ *wxWHITE } { }
 
-    virtual void Draw(const IGrid *) const = 0;
+    virtual void Draw(const IGrid *) = 0;
 
     void SetColor(const wxColor &_color) { color = _color; }
 
@@ -42,7 +42,7 @@ public:
     {
     }
 
-    void Draw(const IGrid *) const override;
+    void Draw(const IGrid *) override;
 
 private:
 
@@ -61,9 +61,10 @@ public:
 
     void AppendPoint(const wxPoint2DDouble &);
 
-    void Draw(const IGrid *) const override;
+    void Draw(const IGrid *) override;
 
 private:
 
-    std::vector<wxPoint2DDouble> points;    // Единицы здесь вольты, амперы
+    std::vector<wxPoint2DDouble> abs_points;    // В абсолютных значениях - вольты, амперы
+    std::vector<wxPoint> rel_points;            // А здесь уже значения в координатах экрана, готовые к отрисовке
 };
