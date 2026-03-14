@@ -266,7 +266,7 @@ void Grid::DrawLabelsOnAxis() const
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
                     last_pos = { coord.x, coord.y + d };
-                    Text(rangeX.GetValuePointAxis(i, NumCells())).DrawAboutCenterDown(last_pos.x, last_pos.y, true, background);
+                    Text(rangeX.GetValuePointAxis(i, NumCells())).DrawAboutCenterDown(last_pos.x, last_pos.y, true);
                 }
             }
             else
@@ -274,12 +274,12 @@ void Grid::DrawLabelsOnAxis() const
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
                     last_pos = { coord.x, size.y - 25 };
-                    Text(rangeX.GetValuePointAxis(i, NumCells())).DrawAboutCenterDown(last_pos.x, last_pos.y, true, background);
+                    Text(rangeX.GetValuePointAxis(i, NumCells())).DrawAboutCenterDown(last_pos.x, last_pos.y, true);
                 }
             }
         }
 
-        Text(rangeX.FullTitle()).DrawAboutCenterDown(last_pos.x < size.x ? last_pos.x : size.x - 20, last_pos.y - 20, true, background);
+        Text(rangeX.FullTitle()).DrawAboutCenterDown(last_pos.x < size.x ? last_pos.x : size.x - 20, last_pos.y - 20, true);
     }
 
     {
@@ -297,7 +297,7 @@ void Grid::DrawLabelsOnAxis() const
                 if (Math::InRange(coord.y, TopY(), BottomY() - 1))
                 {
                     last_pos = { coord.x - d, coord.y };
-                    Text(rangeY.GetValuePointAxis(i, NumCells())).DrawAboutCenterLeft(last_pos.x, last_pos.y, true, background);
+                    Text(rangeY.GetValuePointAxis(i, NumCells())).DrawAboutCenterLeft(last_pos.x, last_pos.y, true);
                 }
             }
             else
@@ -305,7 +305,7 @@ void Grid::DrawLabelsOnAxis() const
                 if (Math::InRange(coord.y, TopY(), BottomY() - 1))
                 {
                     last_pos = { d, coord.y };
-                    Text(rangeY.GetValuePointAxis(i, NumCells())).DrawAboutCenterRigth(last_pos.x, last_pos.y, true, background);
+                    Text(rangeY.GetValuePointAxis(i, NumCells())).DrawAboutCenterRigth(last_pos.x, last_pos.y, true);
                 }
             }
         }
@@ -315,11 +315,11 @@ void Grid::DrawLabelsOnAxis() const
         // Единицы измерения
         if (LeftX() - 20 > 0)
         {
-            Text(rangeY.FullTitle()).DrawAboutCenterLeft(last_pos.x + 40, last_pos.y < d ? d : last_pos.y, true, background);
+            Text(rangeY.FullTitle()).DrawAboutCenterLeft(last_pos.x + 40, last_pos.y < d ? d : last_pos.y, true);
         }
         else
         {
-            Text(rangeY.FullTitle()).DrawAboutCenterRigth(last_pos.x + 40, last_pos.y < d ? d : last_pos.y, true, background);
+            Text(rangeY.FullTitle()).DrawAboutCenterRigth(last_pos.x + 40, last_pos.y < d ? d : last_pos.y, true);
         }
     }
 }
@@ -606,7 +606,7 @@ void Grid::DrawMouseMarkers() const
 
     wxPoint2DDouble value = CoordToValues(pos_mouse);
 
-    Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(pos_mouse.x + 5, pos_mouse.y - 5, true, *wxWHITE, true);
+    Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(pos_mouse.x + 5, pos_mouse.y - 5, true);
 
     if (Display::self->track_y)
     {

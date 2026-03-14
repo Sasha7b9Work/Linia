@@ -288,7 +288,7 @@ void Text::Draw(int x, int y) const
 }
 
 
-void Text::DrawAboutCenterLeft(int x, int y, bool fillBackground, const wxColor &background) const
+void Text::DrawAboutCenterLeft(int x, int y, bool fillBackground) const
 {
     double width, height, descent, externalLeading;
     Display::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
@@ -298,10 +298,8 @@ void Text::DrawAboutCenterLeft(int x, int y, bool fillBackground, const wxColor 
 
     if (fillBackground)
     {
-        Display::self->gc->SetBrush(background);
+        Display::self->gc->SetPen(Display::self->color_brush);
         Display::self->gc->DrawRectangle(x, y, width, height);
-
-        Display::self->gc->SetBrush(Display::self->color_brush);
         Display::self->gc->SetPen(Display::self->color_pen);
     }
 
@@ -316,7 +314,7 @@ void Display::FillRectangle(int x, int y, int width, int height, const wxColor &
 }
 
 
-void Text::DrawAboutCenterDown(int x, int y, bool fillBackground, const wxColor &background) const
+void Text::DrawAboutCenterDown(int x, int y, bool fillBackground) const
 {
     double width, height, descent, externalLeading;
     Display::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
@@ -325,11 +323,8 @@ void Text::DrawAboutCenterDown(int x, int y, bool fillBackground, const wxColor 
 
     if (fillBackground)
     {
-        Display::self->gc->SetBrush(background);
-        Display::self->gc->SetPen(background);
+        Display::self->gc->SetPen(Display::self->color_brush);
         Display::self->gc->DrawRectangle(x, y, width, height);
-
-        Display::self->gc->SetBrush(Display::self->color_brush);
         Display::self->gc->SetPen(Display::self->color_pen);
     }
 
@@ -337,7 +332,7 @@ void Text::DrawAboutCenterDown(int x, int y, bool fillBackground, const wxColor 
 }
 
 
-void Text::DrawAboutCenterUp(int x, int y, bool fillBackground, const wxColor &background, bool bound) const
+void Text::DrawAboutCenterUp(int x, int y, bool fillBackground) const
 {
     double width, height, descent, externalLeading;
     Display::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
@@ -347,27 +342,16 @@ void Text::DrawAboutCenterUp(int x, int y, bool fillBackground, const wxColor &b
 
     if (fillBackground)
     {
-        Display::self->gc->SetBrush(background);
-        Display::self->gc->SetPen(background);
+        Display::self->gc->SetPen(Display::self->color_brush);
         Display::self->gc->DrawRectangle(x, y, width, height);
-
-        Display::self->LoadColors();
+        Display::self->gc->SetPen(Display::self->color_pen);
     }
 
     Display::self->gc->DrawText(text, x, y);
-
-    if (bound)
-    {
-        Display::self->gc->SetBrush(*wxTRANSPARENT_BRUSH);
-
-        Display::self->gc->DrawRectangle(x - 1, y - 1, width + 2, height + 2);
-
-        Display::self->LoadColors();
-    }
 }
 
 
-void Text::DrawAboutRightUp(int x, int y, bool fillBackground, const wxColor &background, bool bound) const
+void Text::DrawAboutRightUp(int x, int y, bool fillBackground) const
 {
     double width, height, descent, externalLeading;
     Display::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
@@ -376,27 +360,16 @@ void Text::DrawAboutRightUp(int x, int y, bool fillBackground, const wxColor &ba
 
     if (fillBackground)
     {
-        Display::self->gc->SetBrush(background);
-        Display::self->gc->SetPen(background);
+        Display::self->gc->SetPen(Display::self->color_brush);
         Display::self->gc->DrawRectangle(x, y, width, height);
-
-        Display::self->LoadColors();
+        Display::self->gc->SetPen(Display::self->color_pen);
     }
 
     Display::self->gc->DrawText(text, x, y);
-
-    if (bound)
-    {
-        Display::self->gc->SetBrush(*wxTRANSPARENT_BRUSH);
-
-        Display::self->gc->DrawRectangle(x - 1, y - 1, width + 2, height + 2);
-
-        Display::self->LoadColors();
-    }
 }
 
 
-void Text::DrawAboutCenterRigth(int x, int y, bool fillBackground, const wxColor &background) const
+void Text::DrawAboutCenterRigth(int x, int y, bool fillBackground) const
 {
     double width, height, descent, externalLeading;
     Display::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
@@ -405,11 +378,9 @@ void Text::DrawAboutCenterRigth(int x, int y, bool fillBackground, const wxColor
 
     if (fillBackground)
     {
-        Display::self->gc->SetBrush(background);
-        Display::self->gc->SetPen(background);
+        Display::self->gc->SetPen(Display::self->color_brush);
         Display::self->gc->DrawRectangle(x, y, width, height);
-
-        Display::self->LoadColors();
+        Display::self->gc->SetPen(Display::self->color_pen);
     }
 
     Display::self->gc->DrawText(text, x, y);

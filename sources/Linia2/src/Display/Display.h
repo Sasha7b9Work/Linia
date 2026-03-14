@@ -135,15 +135,15 @@ public:
     void Draw(int x, int y) const;
 
     // Рисует слева от точки по центру
-    void DrawAboutCenterLeft(int x, int y, bool fillBackground = false, const wxColor & = *wxWHITE) const;
+    void DrawAboutCenterLeft(int x, int y, bool fillBackground) const;
 
-    void DrawAboutCenterRigth(int x, int y, bool fillBackground = false, const wxColor & = *wxWHITE) const;
+    void DrawAboutCenterRigth(int x, int y, bool fillBackground) const;
 
     // Рисует снизу по центру
-    void DrawAboutCenterDown(int x, int y, bool fillBackground = false, const wxColor & = *wxWHITE) const;
+    void DrawAboutCenterDown(int x, int y, bool fillBackground) const;
 
-    void DrawAboutCenterUp(int x, int y, bool fillBackground = false, const wxColor & = *wxWHITE, bool bound = false) const;
-    void DrawAboutRightUp(int x, int y, bool fillBackground = false, const wxColor & = *wxWHITE, bool bound = false) const;
+    void DrawAboutCenterUp(int x, int y, bool fillBackground) const;
+    void DrawAboutRightUp(int x, int y, bool fillBackground) const;
 
 private:
 

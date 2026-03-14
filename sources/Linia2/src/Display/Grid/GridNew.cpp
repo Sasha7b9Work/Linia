@@ -167,6 +167,8 @@ void GridNew::Draw(const std::vector<GraphEntity *> &entities)
         entity->Draw(this);
     }
 
+    Display::self->SetColorPen(SET::GUI::color_background.Get());
+
     Display::self->FillRectangle(0, 0, x_left - 1, Display::self->GetDrawingSize().y, SET::GUI::color_background.Get()); //-V807
     Display::self->FillRectangle(x_left, 0, LengthAxisX(), y_top - 1, SET::GUI::color_background.Get());
     Display::self->FillRectangle(x_right + 1, 0, Display::self->GetDrawingSize().x - x_right, Display::self->GetDrawingSize().y, SET::GUI::color_background.Get());
@@ -180,8 +182,7 @@ void GridNew::Draw(const std::vector<GraphEntity *> &entities)
 
 void GridNew::DrawLabelsOnAxis() const
 {
-    wxColor background{ SET::GUI::color_background.Get() };
-    wxColor color_font{ SET::GUI::color_font.Get() };
+    Display::self->SetColorPen(SET::GUI::color_font.Get());
 
     Text::SetFont();
 
@@ -208,7 +209,7 @@ void GridNew::DrawLabelsOnAxis() const
 
                     wxString value = rangeX.GetValuePointAxis(i, NumCellsX());
 
-                    Text(value).DrawAboutCenterDown(last_pos.x, last_pos.y, true, color_font);
+                    Text(value).DrawAboutCenterDown(last_pos.x, last_pos.y, false);
                 }
             }
             else
@@ -216,12 +217,12 @@ void GridNew::DrawLabelsOnAxis() const
                 if (Math::InRange(coord.x, LeftX() + 1, RightX()))
                 {
                     last_pos = { coord.x, size.y - 25 };
-                    Text(rangeX.GetValuePointAxis(i, NumCellsX())).DrawAboutCenterDown(last_pos.x, last_pos.y, true, color_font);
+                    Text(rangeX.GetValuePointAxis(i, NumCellsX())).DrawAboutCenterDown(last_pos.x, last_pos.y, false);
                 }
             }
         }
 
-        Text(rangeX.FullTitle()).DrawAboutCenterDown(last_pos.x < size.x ? last_pos.x : size.x - 20, last_pos.y - 20, true, color_font);
+        Text(rangeX.FullTitle()).DrawAboutCenterDown(last_pos.x < size.x ? last_pos.x : size.x - 20, last_pos.y - 20, false);
     }
 
     {
@@ -239,7 +240,7 @@ void GridNew::DrawLabelsOnAxis() const
                 if (Math::InRange(coord.y, TopY(), BottomY() - 1))
                 {
                     last_pos = { coord.x - d, coord.y };
-                    Text(rangeY.GetValuePointAxis(i, NumCellsY())).DrawAboutCenterLeft(last_pos.x, last_pos.y, true, background);
+                    Text(rangeY.GetValuePointAxis(i, NumCellsY())).DrawAboutCenterLeft(last_pos.x, last_pos.y, false);
                 }
             }
             else
@@ -247,7 +248,7 @@ void GridNew::DrawLabelsOnAxis() const
                 if (Math::InRange(coord.y, TopY(), BottomY() - 1))
                 {
                     last_pos = { d, coord.y };
-                    Text(rangeY.GetValuePointAxis(i, NumCellsY())).DrawAboutCenterRigth(last_pos.x, last_pos.y, true, background);
+                    Text(rangeY.GetValuePointAxis(i, NumCellsY())).DrawAboutCenterRigth(last_pos.x, last_pos.y, false);
                 }
             }
         }
@@ -257,11 +258,11 @@ void GridNew::DrawLabelsOnAxis() const
         // Единицы измерения
         if (LeftX() - 20 > 0)
         {
-            Text(rangeY.FullTitle()).DrawAboutCenterLeft(last_pos.x + 40, last_pos.y < d ? d : last_pos.y, true, background);
+            Text(rangeY.FullTitle()).DrawAboutCenterLeft(last_pos.x + 40, last_pos.y < d ? d : last_pos.y, false);
         }
         else
         {
-            Text(rangeY.FullTitle()).DrawAboutCenterRigth(last_pos.x + 40, last_pos.y < d ? d : last_pos.y, true, background);
+            Text(rangeY.FullTitle()).DrawAboutCenterRigth(last_pos.x + 40, last_pos.y < d ? d : last_pos.y, false);
         }
     }
 }
@@ -517,7 +518,7 @@ void GridNew::DrawMouseMarkers() const
 
     wxPoint2DDouble value = CoordToValues(pos_mouse);
 
-    Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(pos_mouse.x + 5, pos_mouse.y - 5, true, *wxWHITE, true);
+    Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(pos_mouse.x + 5, pos_mouse.y - 5, true);
 
     if (Display::self->track_y)
     {
