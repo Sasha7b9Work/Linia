@@ -454,7 +454,7 @@ void Spline::Draw(const std::vector<wxPoint> &points, bool smooth, bool draw_poi
 
         for (const auto &pt : points)
         {
-            path_circle.AddCircle(pt.x, pt.y, 2);
+            path_circle.AddCircle(pt.x, pt.y, SET::GUI::size_point.Get());
         }
 
         Display::self->gc->FillPath(path_circle);

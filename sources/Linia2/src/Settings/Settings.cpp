@@ -18,12 +18,15 @@ namespace SET
         Value<int>       current_page_notebook("gui_current_page_notebook", 0);
         Value<int>       serial_port_num("serial_port_num", 0);
         Value<bool>      debug_mode("debug_mode", false);
+
         Value<uint>      color_background("color_background", 0xFFFFFF);
         Value<uint>      color_grid("color_grid", 0);
         Value<uint>      color_font("color_font", 0);
         Value<uint>      color_curve("color_curve", 0);
         Value<uint>      color_link("color_link", 0);
         Value<uint>      color_secant("color_secant", 0);
+
+        Value<int>       size_point("size_point", 2);
     }
 }
 
@@ -47,6 +50,8 @@ void SET::GUI::Load()
     color_curve.Load();
     color_link.Load();
     color_secant.Load();
+
+    size_point.Load();
 }
 
 
@@ -69,4 +74,6 @@ void SET::GUI::Save()
     color_curve.Save();
     color_link.Save();
     color_secant.Save();
+
+    size_point.Save();
 }

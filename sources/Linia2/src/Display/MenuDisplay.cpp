@@ -82,7 +82,7 @@ void MenuDisplay::AppendMenuFacade()
         wxMenuItem *item = nullptr;
 
 #define APPEND_SIZE(title)                                                  \
-        item = subSize->Append(wxID_ANY, title);                            \
+        item = subSize->AppendCheckItem(wxID_ANY, title);                   \
         Bind(wxEVT_MENU, &MenuDisplay::OnSizePoint, this, item->GetId());
 
         wxMenu *subSize = new wxMenu();
@@ -94,6 +94,20 @@ void MenuDisplay::AppendMenuFacade()
         APPEND_SIZE("5");
 
         subFacade->AppendSubMenu(subSize, "Размер точки");
+
+        for (auto it = subSize->GetMenuItems().begin(); it != subSize->GetMenuItems().end(); ++it)
+        {
+            item = *it;
+
+            int size = 0;
+
+            item->GetItemLabelText().ToInt(&size);
+
+            if (size == SET::GUI::size_point.Get())
+            {
+                item->Check(true);
+            }
+        }
     }
 
     AppendSubMenu(subFacade, "Внешний вид");
@@ -211,7 +225,20 @@ void MenuDisplay::OnColor(wxCommandEvent &event)
 
 void MenuDisplay::OnSizePoint(wxCommandEvent &event)
 {
+    wxMenuItem *item = FindItem(event.GetId());
 
+    if (item)
+    {
+        wxString title = item->GetItemLabelText();
+
+        int value = 0;
+
+        title.ToInt(&value, 10);
+
+        SET::GUI::size_point.Set(value);
+
+        Display::self->Refresh();
+    }
 }
 
 

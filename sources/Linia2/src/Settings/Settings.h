@@ -21,11 +21,14 @@ namespace SET
         extern Value<int>       current_page_notebook;
         extern Value<int>       serial_port_num;            // Нумерация начинается с нуля. 0 == COM1
         extern Value<bool>      debug_mode;
+
         extern Value<uint>      color_background;
         extern Value<uint>      color_grid;
         extern Value<uint>      color_font;
         extern Value<uint>      color_curve;                // Цвет графиков
         extern Value<uint>      color_link;
         extern Value<uint>      color_secant;               // Цвет секущей
+
+        extern Value<int>       size_point;                 // Размер точки на графике
     }
 };
