@@ -392,7 +392,7 @@ void Text::DrawAboutCenterUp(int x, int y, bool fillBackground) const
 }
 
 
-void Text::DrawAboutRightUp(int x, int y, bool fillBackground) const
+void Text::DrawAboutRightUp(int x, int y, bool fillBackground, bool frame) const
 {
     double width, height, descent, externalLeading;
     Display::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
@@ -404,6 +404,11 @@ void Text::DrawAboutRightUp(int x, int y, bool fillBackground) const
         Display::self->gc->SetPen(Display::self->color_brush);
         Display::self->gc->DrawRectangle(x, y, width, height);
         Display::self->gc->SetPen(Display::self->color_pen);
+
+        if (frame)
+        {
+            Rect((int)width, (int)height).Draw(x, y, Display::self->color_pen);
+        }
     }
 
     Display::self->gc->DrawText(text, x, y);

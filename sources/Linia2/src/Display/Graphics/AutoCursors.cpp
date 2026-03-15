@@ -16,7 +16,7 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
 
     wxRect rect = Grid::self->GetRect();
 
-    Display::self->SetColorPen(SET::GUI::color_grid.Get());
+    Display::self->SetColorPen(SET::GUI::color_curve.Get());
 
     if (SET::GUI::track_y.Get())
     {
@@ -41,6 +41,8 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
 
     if (SET::GUI::track_x.Get())
     {
+        FinderMinMax <int>finder(std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
+
         for (GraphMeasure *meas : measures)
         {
             auto result = Math::GetIntersectionX(meas->rel_points, mouse_pos.x);
@@ -48,10 +50,16 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
             if (result.second)
             {
                 Line(rect.GetLeft(), result.first.y, rect.GetRight(), result.first.y).Draw();
+
+                finder.NextValue(result.first.y);
             }
         }
+
+        finder.NextValue(mouse_pos.y);
+
+        Line(mouse_pos.x, finder.Min(), mouse_pos.x, finder.Max()).Draw(SET::GUI::color_curve.Get());
     }
 
     Text::SetFont();
-    Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(mouse_pos.x + 5, mouse_pos.y - 5, true);
+    Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(mouse_pos.x + 5, mouse_pos.y - 5, true, true);
 }

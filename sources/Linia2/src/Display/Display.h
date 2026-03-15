@@ -146,7 +146,9 @@ public:
     void DrawAboutCenterDown(int x, int y, bool fillBackground) const;
 
     void DrawAboutCenterUp(int x, int y, bool fillBackground) const;
-    void DrawAboutRightUp(int x, int y, bool fillBackground) const;
+
+    // Если frame, то вокруг нужно нарисовать рамку
+    void DrawAboutRightUp(int x, int y, bool fillBackground, bool frame = false) const;
 
 private:
 
