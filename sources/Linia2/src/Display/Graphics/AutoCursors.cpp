@@ -5,6 +5,7 @@
 #include "Display/Display.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
+#include "Utils/FinderMinMax.h"
 
 
 void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
@@ -19,6 +20,8 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
 
     if (SET::GUI::track_y.Get())
     {
+        FinderMinMax <int>finder(std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
+
         for (GraphMeasure *meas : measures)
         {
             auto result = Math::GetIntersectionY(meas->rel_points, mouse_pos.y);
@@ -26,8 +29,14 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
             if (result.second)
             {
                 Line(result.first.x, rect.GetTop(), result.first.x, rect.GetBottom()).Draw();
+
+                finder.NextValue(result.first.x);
             }
         }
+
+        finder.NextValue(mouse_pos.x);
+
+        Line(finder.Min(), mouse_pos.y, finder.Max(), mouse_pos.y).Draw(SET::GUI::color_curve.Get());
     }
 
     if (SET::GUI::track_x.Get())

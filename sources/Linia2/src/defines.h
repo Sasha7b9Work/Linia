@@ -49,6 +49,7 @@
 #include <chrono>
 #include <atomic>
 #include <filesystem>
+#include <limits>
 
 #ifdef WIN32
     #define NDIS_MINIPORT_MAJOR_VERSION 0
