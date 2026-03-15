@@ -6,6 +6,7 @@
 #include "Display/Grid/GridNew.h"
 #include "Display/Display.h"
 #include "Settings/Settings.h"
+#include "Display/Graphics/AutoCursors.h"
 
 
 GridNew::GridNew()
@@ -176,7 +177,16 @@ void GridNew::Draw(const std::vector<GraphEntity *> &entities)
 
     DrawLabelsOnAxis();
 
-    DrawMouseMarkers();
+    if (!Display::self->mouse_is_pressed)
+    {
+        if (pos_mouse.y > TopY() &&
+            pos_mouse.y < BottomY() &&
+            pos_mouse.x > LeftX() &&
+            pos_mouse.x < RightX())
+        {
+            AutoCursors::Draw();
+        }
+    }
 }
 
 
@@ -499,40 +509,6 @@ void GridNew::OnMouseUp()
 }
 
 
-void GridNew::DrawMouseMarkers() const
-{
-    if (Display::self->mouse_is_pressed)
-    {
-        return;
-    }
-
-    if (pos_mouse.y < TopY() ||
-        pos_mouse.y > BottomY() ||
-        pos_mouse.x < LeftX() ||
-        pos_mouse.x > RightX())
-    {
-        return;
-    }
-
-    Text::SetFont();
-
-    wxPoint2DDouble value = CoordToValues(pos_mouse);
-
-    Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(pos_mouse.x + 5, pos_mouse.y - 5, true);
-
-    wxColor color = wxColor(SET::GUI::color_curve.Get()).ChangeLightness(70);
-
-    if (Display::self->track_y)
-    {
-        Line(LeftX(), pos_mouse.y, RightX(), pos_mouse.y).Draw(color);
-    }
-
-    if (Display::self->track_x)
-    {
-        Line(pos_mouse.x, TopY(), pos_mouse.x, BottomY()).Draw(color);
-    }
-}
-
 double GridNew::Range::AmplitudeAbs() const
 {
     return value.HalfAmplitudeAbs() * 2.0;
@@ -773,4 +749,21 @@ wxPoint2DDouble GridNew::GetRangeY() const
     double max = rangeY.MaxAbs() + rangeY.AmplitudeAbs() * 1e1;
 
     return { min, max };
+}
+
+
+wxRect GridNew::GetRect() const
+{
+    int x = LeftX();
+    int y = TopY();
+    int w = RightX() - LeftX();
+    int h = BottomY() - TopY();
+
+    return { x, y, w, h };
+}
+
+
+wxPoint GridNew::GetMousePosition() const
+{
+    return pos_mouse;
 }

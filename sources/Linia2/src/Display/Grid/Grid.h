@@ -33,6 +33,9 @@ public:
     virtual int NumCellsY() const = 0;
     virtual wxPoint2DDouble GetRangeX() const = 0;
     virtual wxPoint2DDouble GetRangeY() const = 0;
+    virtual wxPoint2DDouble CoordToValues(const wxPoint &) const = 0;
+    virtual wxPoint GetMousePosition() const = 0;
+    virtual wxRect GetRect() const = 0;
 };
 
 
@@ -137,7 +140,7 @@ public:
     // Преобразует точку графика в координаты на холсте
     virtual wxPoint ValuesToCoord(double x, double y) const override;
 
-    wxPoint2DDouble CoordToValues(const wxPoint &) const;
+    wxPoint2DDouble CoordToValues(const wxPoint &) const override;
 
     void ResetCenter() override;
 
@@ -189,8 +192,6 @@ private:
     int LengthAxis() const;
 
     void DrawLabelsOnAxis() const;
-
-    void DrawMouseMarkers() const;
 
     // Количество клеток по осям X и Y
     int NumCells() const;

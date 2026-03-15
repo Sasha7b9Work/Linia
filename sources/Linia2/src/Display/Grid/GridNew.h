@@ -1,6 +1,7 @@
 // 2025/7/13 20:38:50 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "System/Events.h"
+#include "Display/Grid/Grid.h"
 
 
 class GraphEntity;
@@ -140,6 +141,9 @@ public:
     wxPoint2DDouble GetRangeX() const override;
     wxPoint2DDouble GetRangeY() const override;
 
+    wxRect GetRect() const;
+    wxPoint GetMousePosition() const;
+
     static const int size_cell = 60;       // Столько клетка всегда занимает на экране
 
 private:
@@ -188,8 +192,6 @@ private:
     int LengthAxisY() const;
 
     void DrawLabelsOnAxis() const;
-
-    void DrawMouseMarkers() const;
 
     // Количество клеток по осям X и Y
     int NumCellsX() const override;
