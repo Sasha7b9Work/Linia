@@ -4,9 +4,10 @@
 #include "Display/Grid/GridNew.h"
 #include "Display/Display.h"
 #include "Settings/Settings.h"
+#include "Utils/Math.h"
 
 
-void AutoCursors::Draw(const std::vector<GraphMeasure *> & /*entities*/)
+void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
 {
     Text::SetFont();
 
@@ -26,5 +27,15 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> & /*entities*/)
     if (Display::self->track_x)
     {
         Line(mouse_pos.x, rect.GetTop(), mouse_pos.x, rect.GetBottom()).Draw(SET::GUI::color_curve.Get());
+
+        for (GraphMeasure *meas : measures)
+        {
+            auto result = Math::GetIntersectionX(meas->rel_points, mouse_pos.x);
+
+            if (result.second)
+            {
+                Line(rect.GetLeft(), result.first.y, rect.GetRight(), result.first.y).Draw();
+            }
+        }
     }
 }

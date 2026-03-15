@@ -18,10 +18,11 @@ public:
 
     static void CreateForEmulator(std::vector<GraphMeasure *> &);
 
+    std::vector<wxPoint> rel_points;            // А здесь уже значения в координатах экрана, готовые к отрисовке
+
 private:
 
     std::vector<wxPoint2DDouble> abs_points;    // В абсолютных значениях - вольты, амперы
-    std::vector<wxPoint> rel_points;            // А здесь уже значения в координатах экрана, готовые к отрисовке
 
     wxColor color{ *wxWHITE };
 };
