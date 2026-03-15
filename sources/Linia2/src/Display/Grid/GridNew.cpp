@@ -176,8 +176,6 @@ void GridNew::Draw(const std::vector<GraphEntity *> &entities)
     Display::self->FillRectangle(x_right + 1, 0, Display::self->GetDrawingSize().x - x_right, Display::self->GetDrawingSize().y, SET::GUI::color_background.Get());
     Display::self->FillRectangle(x_left, y_bottom + 1, LengthAxisX(), Display::self->GetDrawingSize().y - y_bottom, SET::GUI::color_background.Get());
 
-    DrawLabelsOnAxis();
-
     if (!Display::self->mouse_is_pressed)
     {
         if (pos_mouse.y > TopY() &&
@@ -185,9 +183,11 @@ void GridNew::Draw(const std::vector<GraphEntity *> &entities)
             pos_mouse.x > LeftX() &&
             pos_mouse.x < RightX())
         {
-            AutoCursors::Draw();
+            AutoCursors::Draw(entities);
         }
     }
+
+    DrawLabelsOnAxis();
 }
 
 

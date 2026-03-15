@@ -32,27 +32,6 @@ protected:
 };
 
 
-class GraphLine : public GraphEntity
-{
-public:
-
-    GraphLine(const Meas &_start, const Meas &_end) :
-        GraphEntity(),
-        start(_start), end(_end)
-    {
-    }
-
-    void Draw() override;
-
-private:
-
-    Meas start;
-    Meas end;
-
-    virtual ~GraphLine() {}
-};
-
-
 class GraphMeasures : public GraphEntity
 {
 public:

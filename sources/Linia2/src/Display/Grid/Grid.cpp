@@ -243,7 +243,7 @@ void Grid::Draw(const std::vector<GraphEntity *> &entities)
             pos_mouse.x > LeftX() &&
             pos_mouse.x < RightX())
         {
-            AutoCursors::Draw();
+            AutoCursors::Draw(entities);
         }
     }
 

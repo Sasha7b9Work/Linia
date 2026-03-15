@@ -6,7 +6,7 @@
 #include "Settings/Settings.h"
 
 
-void AutoCursors::Draw()
+void AutoCursors::Draw(const std::vector<GraphEntity *> &entities)
 {
     Text::SetFont();
 

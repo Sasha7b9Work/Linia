@@ -9,4 +9,7 @@ namespace Math
     {
         return x >= min && x <= max;
     }
+
+    // Возвращает пересечение кривой с вертикальной линией по координате x
+    std::pair<wxPoint, bool> GetIntersectionX(std::vector<wxPoint> &, int x);
 }
