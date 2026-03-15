@@ -30,11 +30,11 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
             {
                 Line(result.first.x, rect.GetTop(), result.first.x, rect.GetBottom()).Draw();
 
-                finder.NextValue(result.first.x);
+                finder.Push(result.first.x);
             }
         }
 
-        finder.NextValue(mouse_pos.x);
+        finder.Push(mouse_pos.x);
 
         Line(finder.Min(), mouse_pos.y, finder.Max(), mouse_pos.y).Draw(SET::GUI::color_curve.Get());
     }
@@ -51,15 +51,18 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
             {
                 Line(rect.GetLeft(), result.first.y, rect.GetRight(), result.first.y).Draw();
 
-                finder.NextValue(result.first.y);
+                finder.Push(result.first.y);
             }
         }
 
-        finder.NextValue(mouse_pos.y);
+        finder.Push(mouse_pos.y);
 
         Line(mouse_pos.x, finder.Min(), mouse_pos.x, finder.Max()).Draw(SET::GUI::color_curve.Get());
     }
 
-    Text::SetFont();
-    Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(mouse_pos.x + 5, mouse_pos.y - 5, true, true);
+    if (SET::GUI::track_mouse)
+    {
+        Text::SetFont();
+        Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(mouse_pos.x + 5, mouse_pos.y - 5, true, true);
+    }
 }

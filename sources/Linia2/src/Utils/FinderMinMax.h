@@ -6,7 +6,7 @@ template<class T>
 struct FinderMinMax
 {
     FinderMinMax(T _min_, T _max_) : min(_max_), max(_min_) {}
-    void NextValue(T value)
+    void Push(T value)
     {
         counter++;
         if (value < min)

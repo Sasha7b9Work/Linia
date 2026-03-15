@@ -32,5 +32,6 @@ namespace SET
         extern Value<int>       size_point;                 // Размер точки на графике
         extern Value<bool>      track_x;                    // Отслеживать значения измерений по Х
         extern Value<bool>      track_y;                    // и Y
+        extern Value<bool>      track_mouse;                // и положение мыши
     }
 };

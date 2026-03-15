@@ -94,6 +94,11 @@ public:
         Set(default_value);
     }
 
+    operator T() const
+    {
+        return Get();
+    }
+
 private:
 
     T GetDefault() const

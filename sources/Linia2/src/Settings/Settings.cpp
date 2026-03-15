@@ -29,6 +29,7 @@ namespace SET
         Value<int>       size_point("size_point", 2);
         Value<bool>      track_x("track_x", false);
         Value<bool>      track_y("track_y", false);
+        Value<bool>      track_mouse("track_mouse", false);
     }
 }
 
@@ -56,6 +57,7 @@ void SET::GUI::Load()
     size_point.Load();
     track_x.Load();
     track_y.Load();
+    track_mouse.Load();
 }
 
 
@@ -82,4 +84,5 @@ void SET::GUI::Save()
     size_point.Save();
     track_x.Save();
     track_y.Save();
+    track_mouse.Save();
 }

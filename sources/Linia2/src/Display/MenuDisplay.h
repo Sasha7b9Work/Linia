@@ -19,8 +19,9 @@ private:
 
     std::map<int, StructColor> colors;      // Здесь будем хранить настройки цветов, соответствующие пунктам меню
 
-    wxMenuItem *itemX = nullptr;
-    wxMenuItem *itemY = nullptr;
+    wxMenuItem *trackX = nullptr;
+    wxMenuItem *trackY = nullptr;
+    wxMenuItem *trackMouse = nullptr;
 
     // Следить
     void AppendMenuTrack();

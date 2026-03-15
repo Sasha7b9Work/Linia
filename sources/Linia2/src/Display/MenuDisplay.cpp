@@ -32,13 +32,17 @@ void MenuDisplay::AppendMenuTrack()
 {
     wxMenu *subMenu = new wxMenu();
 
-    itemX = subMenu->AppendCheckItem(wxID_ANY, "По X");
-    Bind(wxEVT_MENU, &MenuDisplay::OnTrack, this, itemX->GetId());
-    subMenu->Check(itemX->GetId(), SET::GUI::track_x.Get());
+    trackX = subMenu->AppendCheckItem(wxID_ANY, "По X");
+    Bind(wxEVT_MENU, &MenuDisplay::OnTrack, this, trackX->GetId());
+    subMenu->Check(trackX->GetId(), SET::GUI::track_x.Get());
 
-    itemY = subMenu->AppendCheckItem(wxID_ANY, "По Y");
-    Bind(wxEVT_MENU, &MenuDisplay::OnTrack, this, itemY->GetId());
-    subMenu->Check(itemY->GetId(), SET::GUI::track_y.Get());
+    trackY = subMenu->AppendCheckItem(wxID_ANY, "По Y");
+    Bind(wxEVT_MENU, &MenuDisplay::OnTrack, this, trackY->GetId());
+    subMenu->Check(trackY->GetId(), SET::GUI::track_y.Get());
+
+    trackMouse = subMenu->AppendCheckItem(wxID_ANY, "Указатель мыши");
+    Bind(wxEVT_MENU, &MenuDisplay::OnTrack, this, trackMouse->GetId());
+    subMenu->Check(trackMouse->GetId(), SET::GUI::track_mouse.Get());
 
     AppendSubMenu(subMenu, "Отслеживать");
 }
@@ -128,15 +132,17 @@ void MenuDisplay::OnFullScreen(wxCommandEvent &event)
 
 void MenuDisplay::OnTrack(wxCommandEvent &event)
 {
-    if (event.GetId() == itemX->GetId())
+    if (event.GetId() == trackX->GetId())
     {
-        bool value = event.IsChecked();
-        SET::GUI::track_x.Set(value);
+        SET::GUI::track_x.Set(event.IsChecked());
     }
-    else if(event.GetId() == itemY->GetId())
+    else if(event.GetId() == trackY->GetId())
     {
-        bool value = event.IsChecked();
-        SET::GUI::track_y.Set(value);
+        SET::GUI::track_y.Set(event.IsChecked());
+    }
+    else if (event.GetId() == trackMouse->GetId())
+    {
+        SET::GUI::track_mouse.Set(event.IsChecked());
     }
 }
 
