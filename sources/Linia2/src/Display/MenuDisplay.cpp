@@ -34,11 +34,11 @@ void MenuDisplay::AppendMenuTrack()
 
     itemX = subMenu->AppendCheckItem(wxID_ANY, "По X");
     Bind(wxEVT_MENU, &MenuDisplay::OnTrack, this, itemX->GetId());
-    subMenu->Check(itemX->GetId(), Display::self->track_x);
+    subMenu->Check(itemX->GetId(), SET::GUI::track_x.Get());
 
     itemY = subMenu->AppendCheckItem(wxID_ANY, "По Y");
     Bind(wxEVT_MENU, &MenuDisplay::OnTrack, this, itemY->GetId());
-    subMenu->Check(itemY->GetId(), Display::self->track_y);
+    subMenu->Check(itemY->GetId(), SET::GUI::track_y.Get());
 
     AppendSubMenu(subMenu, "Отслеживать");
 }
@@ -130,11 +130,13 @@ void MenuDisplay::OnTrack(wxCommandEvent &event)
 {
     if (event.GetId() == itemX->GetId())
     {
-        Display::self->track_x = event.IsChecked();
+        bool value = event.IsChecked();
+        SET::GUI::track_x.Set(value);
     }
     else if(event.GetId() == itemY->GetId())
     {
-        Display::self->track_y = event.IsChecked();
+        bool value = event.IsChecked();
+        SET::GUI::track_y.Set(value);
     }
 }
 

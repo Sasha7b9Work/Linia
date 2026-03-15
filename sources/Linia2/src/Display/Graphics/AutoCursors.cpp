@@ -19,7 +19,7 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
 
     Display::self->SetColorPen(SET::GUI::color_grid.Get());
 
-    if (Display::self->track_y)
+    if (SET::GUI::track_y.Get())
     {
         for (GraphMeasure *meas : measures)
         {
@@ -32,7 +32,7 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
         }
     }
 
-    if (Display::self->track_x)
+    if (SET::GUI::track_x.Get())
     {
         for (GraphMeasure *meas : measures)
         {

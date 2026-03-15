@@ -30,8 +30,6 @@ public:
     void SetColorPen(const wxColor &);
     void LoadColors();
 
-    bool track_x = false;           // Отслеживать координату x
-    bool track_y = false;           // Отслеживать координату y
     bool mouse_is_pressed = false;
     bool full_screen = false;       // График рисуется на полный экран
 
