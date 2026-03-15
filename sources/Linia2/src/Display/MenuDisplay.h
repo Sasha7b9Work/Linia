@@ -19,6 +19,9 @@ private:
 
     std::map<int, StructColor> colors;      // Здесь будем хранить настройки цветов, соответствующие пунктам меню
 
+    wxMenuItem *itemX = nullptr;
+    wxMenuItem *itemY = nullptr;
+
     // Следить
     void AppendMenuTrack();
 
@@ -27,8 +30,7 @@ private:
 
     void OnReset(wxCommandEvent &);
     void OnFullScreen(wxCommandEvent &);
-    void OnTrackX(wxCommandEvent &);
-    void OnTrackY(wxCommandEvent &);
+    void OnTrack(wxCommandEvent &);
     void OnColor(wxCommandEvent &);
     void OnSizePoint(wxCommandEvent &);
     void OnSaveGraphic(wxCommandEvent &);

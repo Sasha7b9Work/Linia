@@ -609,12 +609,12 @@ void Grid::DrawMouseMarkers() const
 
     Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(pos_mouse.x + 5, pos_mouse.y - 5, true);
 
-    if (Display::self->track_y)
+    if (Display::self->track_x)
     {
         Line(LeftX(), pos_mouse.y, RightX(), pos_mouse.y).Draw(SET::GUI::color_curve.Get());
     }
 
-    if (Display::self->track_x)
+    if (Display::self->track_y)
     {
         Line(pos_mouse.x, TopY(), pos_mouse.x, BottomY()).Draw(SET::GUI::color_curve.Get());
     }
