@@ -82,7 +82,7 @@ void MenuDisplay::AppendMenuFacade()
         wxMenuItem *item = nullptr;
 
 #define APPEND_SIZE(title)                                                  \
-        item = subSize->AppendCheckItem(wxID_ANY, title);                   \
+        item = subSize->AppendRadioItem(wxID_ANY, title);                   \
         Bind(wxEVT_MENU, &MenuDisplay::OnSizePoint, this, item->GetId());
 
         wxMenu *subSize = new wxMenu();
