@@ -9,8 +9,6 @@
 
 void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
 {
-    Text::SetFont();
-
     wxPoint mouse_pos = Grid::self->GetMousePosition();
 
     wxPoint2DDouble value = Grid::self->CoordToValues(mouse_pos);
@@ -45,5 +43,6 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
         }
     }
 
+    Text::SetFont();
     Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(mouse_pos.x + 5, mouse_pos.y - 5, true);
 }
