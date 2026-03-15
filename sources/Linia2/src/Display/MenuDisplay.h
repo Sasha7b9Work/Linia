@@ -28,7 +28,7 @@ private:
     // Внешний вид
     void AppendMenuFacade();
 
-    void OnReset(wxCommandEvent &);
+    void OnResetZeroGrid(wxCommandEvent &);
     void OnFullScreen(wxCommandEvent &);
     void OnTrack(wxCommandEvent &);
     void OnColor(wxCommandEvent &);

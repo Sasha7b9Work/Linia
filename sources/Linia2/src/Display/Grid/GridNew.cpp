@@ -22,6 +22,7 @@ void GridNew::ResetCenter()
 
 void GridNew::Reset()
 {
+    offset.ResetToZero();
 }
 
 

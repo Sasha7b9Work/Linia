@@ -11,6 +11,13 @@ class GridNew : public IGrid
 {
     struct Offset
     {
+        void ResetToZero()
+        {
+            ResetDelta();
+            x = 0;
+            y = 0;
+        }
+
         // При нажимании/отпускании мышки вызываем эту функцию, чтобы обнулить накопительный счётчик смещения
         void ResetDelta()
         {

@@ -9,7 +9,7 @@
 
 MenuDisplay::MenuDisplay() : wxMenu()
 {
-    Bind(wxEVT_MENU, &MenuDisplay::OnReset, this, (Append(wxID_ANY, "Сброс"))->GetId());
+    Bind(wxEVT_MENU, &MenuDisplay::OnResetZeroGrid, this, (Append(wxID_ANY, "Сброс"))->GetId());
 
     wxMenuItem *item = AppendCheckItem(wxID_ANY, "Полный экран");
     Bind(wxEVT_MENU, &MenuDisplay::OnFullScreen, this, item->GetId());
@@ -110,7 +110,7 @@ void MenuDisplay::AppendMenuFacade()
 }
 
 
-void MenuDisplay::OnReset(wxCommandEvent &)
+void MenuDisplay::OnResetZeroGrid(wxCommandEvent &)
 {
     IGrid::self->Reset();
 }
