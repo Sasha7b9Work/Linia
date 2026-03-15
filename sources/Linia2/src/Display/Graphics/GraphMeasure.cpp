@@ -1,17 +1,17 @@
 ﻿// 2025/7/14 17:22:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Display/Graphics/GraphEntity.h"
+#include "Display/Graphics/GraphMeasure.h"
 #include "Display/Display.h"
 #include "Settings/Settings.h"
 
 
-void GraphMeasures::AppendPoint(const wxPoint2DDouble &point)
+void GraphMeasure::AppendPoint(const wxPoint2DDouble &point)
 {
     abs_points.push_back(point);
 }
 
 
-void GraphMeasures::Draw()
+void GraphMeasure::Draw()
 {
     Display::self->gc->SetBrush(color);
     Display::self->gc->SetPen(color);
@@ -45,11 +45,11 @@ void GraphMeasures::Draw()
 }
 
 
-void GraphEntity::CreateForEmulator(std::vector<GraphEntity *> &entities)
+void GraphMeasure::CreateForEmulator(std::vector<GraphMeasure *> &entities)
 {
     for (int num_line = 0; num_line < 10; num_line++)
     {
-        GraphMeasures *meas = new GraphMeasures();
+        GraphMeasure *meas = new GraphMeasure();
 
         meas->SetColor(SET::GUI::color_curve.Get());
 

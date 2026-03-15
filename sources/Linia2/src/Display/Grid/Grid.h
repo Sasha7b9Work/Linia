@@ -3,7 +3,7 @@
 #include "System/Events.h"
 
 
-class GraphEntity;
+class GraphMeasure;
 
 
 class IGrid
@@ -25,7 +25,7 @@ public:
     virtual void ScaleGridOn(const wxPoint &, int) = 0;
     virtual void RangeGridOnX(int) = 0;
     virtual void RangeGridOnY(int) = 0;
-    virtual void Draw(const std::vector<GraphEntity *> &) = 0;
+    virtual void Draw(const std::vector<GraphMeasure *> &) = 0;
     virtual void ResetCenter() = 0;
     virtual void Reset() = 0;
     virtual wxPoint ValuesToCoord(double x, double y) const = 0;
@@ -122,7 +122,7 @@ public:
 
     Grid();
 
-    void Draw(const std::vector<GraphEntity *> &) override;
+    void Draw(const std::vector<GraphMeasure *> &) override;
 
     void MoveImageOn(const wxPoint &) override;     // Переместить изображение на экране целиком
     void MoveCenterOn(const wxPoint &) override;    // Переместить центр графика (избражение измерений в графике)

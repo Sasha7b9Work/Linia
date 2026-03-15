@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "MainWindow.h"
 #include "Utils/Math.h"
-#include "Display/Graphics/GraphEntity.h"
+#include "Display/Graphics/GraphMeasure.h"
 #include "Display/Grid/Grid.h"
 #include "Display/Grid/GridNew.h"
 #include "Display/Display.h"
@@ -123,7 +123,7 @@ void Grid::DrawNavigationWindow() const
 }
 
 
-void Grid::Draw(const std::vector<GraphEntity *> &entities)
+void Grid::Draw(const std::vector<GraphMeasure *> &entities)
 {
     wxSize size = Display::self->GetDrawingSize();
 

@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "MainWindow.h"
 #include "Utils/Math.h"
-#include "Display/Graphics/GraphEntity.h"
+#include "Display/Graphics/GraphMeasure.h"
 #include "Display/Grid/GridNew.h"
 #include "Display/Display.h"
 #include "Settings/Settings.h"
@@ -74,7 +74,7 @@ int GridNew::LengthAxisY() const
 }
 
 
-void GridNew::Draw(const std::vector<GraphEntity *> &entities)
+void GridNew::Draw(const std::vector<GraphMeasure *> &entities)
 {
     wxSize size = Display::self->GetDrawingSize();
 

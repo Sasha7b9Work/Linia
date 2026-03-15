@@ -4,7 +4,7 @@
 #include "Display/Grid/Grid.h"
 
 
-class GraphEntity;
+class GraphMeasure;
 
 
 class GridNew : public IGrid
@@ -120,7 +120,7 @@ public:
 
     GridNew();
 
-    void Draw(const std::vector<GraphEntity *> &) override;
+    void Draw(const std::vector<GraphMeasure *> &) override;
 
     void MoveImageOn(const wxPoint &) override;     // Переместить изображение на экране целиком
     void MoveCenterOn(const wxPoint &) override;    // Переместить центр графика (избражение измерений в графике)

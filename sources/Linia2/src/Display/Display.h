@@ -3,7 +3,7 @@
 #include "Panels/Panel.h"
 #include "Display/Grid/Grid.h"
 #include "Display/PanelErrors.h"
-#include "Display/Graphics/GraphEntity.h"
+#include "Display/Graphics/GraphMeasure.h"
 
 
 // Здесь отрисовывается график ну и кнопки разные
@@ -17,7 +17,7 @@ class Display : public Panel
     friend class Line;
     friend class Rect;
     friend class MenuDisplay;
-    friend class GraphMeasures;
+    friend class GraphMeasure;
 
 public:
 
@@ -49,7 +49,7 @@ public:
     // Возврщает полнлный размер виджета
     wxSize GetFullSize() const;
 
-    std::vector<GraphEntity *> entities;    // Сущности для отрисовки
+    std::vector<GraphMeasure *> entities;    // Сущности для отрисовки
 
     void ReInit();
 

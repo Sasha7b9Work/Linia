@@ -4,7 +4,7 @@
 #include "MainWindow.h"
 #include "MainWindow.h"
 #include "Panels/PanelTable.h"
-#include "Display/Graphics/GraphEntity.h"
+#include "Display/Graphics/GraphMeasure.h"
 #include "Display/MenuDisplay.h"
 #include "Display/Graphics/Splines.h"
 #include "Settings/Settings.h"
@@ -118,7 +118,7 @@ void Display::Init()
 
     Panel::Layout();
 
-    GraphEntity::CreateForEmulator(entities);
+    GraphMeasure::CreateForEmulator(entities);
 
     ReInit();
 
