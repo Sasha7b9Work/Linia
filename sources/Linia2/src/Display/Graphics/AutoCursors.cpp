@@ -18,12 +18,12 @@ void AutoCursors::Draw()
 
     wxRect rect = Grid::self->GetRect();
 
-    if (Display::self->track_x)
+    if (Display::self->track_y)
     {
         Line(rect.GetLeft(), mouse_pos.y, rect.GetRight(), mouse_pos.y).Draw(SET::GUI::color_curve.Get());
     }
 
-    if (Display::self->track_y)
+    if (Display::self->track_x)
     {
         Line(mouse_pos.x, rect.GetTop(), mouse_pos.x, rect.GetBottom()).Draw(SET::GUI::color_curve.Get());
     }

@@ -32,11 +32,11 @@ void MenuDisplay::AppendMenuTrack()
 {
     wxMenu *subMenu = new wxMenu();
 
-    itemX = subMenu->AppendCheckItem(wxID_ANY, "X");
+    itemX = subMenu->AppendCheckItem(wxID_ANY, "По X");
     Bind(wxEVT_MENU, &MenuDisplay::OnTrack, this, itemX->GetId());
     subMenu->Check(itemX->GetId(), Display::self->track_x);
 
-    itemY = subMenu->AppendCheckItem(wxID_ANY, "Y");
+    itemY = subMenu->AppendCheckItem(wxID_ANY, "По Y");
     Bind(wxEVT_MENU, &MenuDisplay::OnTrack, this, itemY->GetId());
     subMenu->Check(itemY->GetId(), Display::self->track_y);
 
