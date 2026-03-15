@@ -5,15 +5,6 @@
 #include "Settings/Settings.h"
 
 
-void GraphLine::Draw()
-{
-    wxPoint s = Grid::self->ValuesToCoord(start.u, start.i);
-    wxPoint e = Grid::self->ValuesToCoord(end.u, end.i);
-
-    Line(s.x, s.y, e.x, e.y).Draw(color);
-}
-
-
 void GraphMeasures::AppendPoint(const wxPoint2DDouble &point)
 {
     abs_points.push_back(point);

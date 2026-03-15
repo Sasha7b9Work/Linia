@@ -3,15 +3,6 @@
 #include "Display/Grid/Grid.h"
 
 
-// Сущности для отрисовки - графики, маркеры, еtc.
-
-struct Meas
-{
-    double u;       // Вольты
-    double i;       // Амперы
-};
-
-
 class GraphEntity
 {
 public:
