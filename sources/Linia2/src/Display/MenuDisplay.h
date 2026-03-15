@@ -29,7 +29,6 @@ private:
     void OnFullScreen(wxCommandEvent &);
     void OnTrackX(wxCommandEvent &);
     void OnTrackY(wxCommandEvent &);
-    void OnTrackNone(wxCommandEvent &);
     void OnColor(wxCommandEvent &);
     void OnSizePoint(wxCommandEvent &);
     void OnSaveGraphic(wxCommandEvent &);

@@ -40,10 +40,6 @@ void MenuDisplay::AppendMenuTrack()
     Bind(wxEVT_MENU, &MenuDisplay::OnTrackY, this, item->GetId());
     subMenu->Check(item->GetId(), Display::self->track_y);
 
-    item = subMenu->AppendCheckItem(wxID_ANY, "Ничего");
-    Bind(wxEVT_MENU, &MenuDisplay::OnTrackNone, this, item->GetId());
-    subMenu->Check(item->GetId(), Display::self->track_none);
-
     AppendSubMenu(subMenu, "Отслеживать");
 }
 
@@ -132,34 +128,13 @@ void MenuDisplay::OnFullScreen(wxCommandEvent &event)
 
 void MenuDisplay::OnTrackX(wxCommandEvent &event)
 {
-    if (event.IsChecked())
-    {
-        Display::self->track_x = true;
-        Display::self->track_y = false;
-        Display::self->track_none = false;
-    }
+    Display::self->track_x = event.IsChecked();
 }
 
 
 void MenuDisplay::OnTrackY(wxCommandEvent &event)
 {
-    if (event.IsChecked())
-    {
-        Display::self->track_x = false;
-        Display::self->track_y = true;
-        Display::self->track_none = false;
-    }
-}
-
-
-void MenuDisplay::OnTrackNone(wxCommandEvent &event)
-{
-    if (event.IsChecked())
-    {
-        Display::self->track_x = false;
-        Display::self->track_y = false;
-        Display::self->track_none = true;
-    }
+    Display::self->track_y = event.IsChecked();
 }
 
 
