@@ -15,19 +15,25 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
 
     wxPoint2DDouble value = Grid::self->CoordToValues(mouse_pos);
 
-    Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(mouse_pos.x + 5, mouse_pos.y - 5, true);
-
     wxRect rect = Grid::self->GetRect();
+
+    Display::self->SetColorPen(SET::GUI::color_grid.Get());
 
     if (Display::self->track_y)
     {
-        Line(rect.GetLeft(), mouse_pos.y, rect.GetRight(), mouse_pos.y).Draw(SET::GUI::color_curve.Get());
+        for (GraphMeasure *meas : measures)
+        {
+            auto result = Math::GetIntersectionY(meas->rel_points, mouse_pos.y);
+
+            if (result.second)
+            {
+                Line(result.first.x, rect.GetTop(), result.first.x, rect.GetBottom()).Draw();
+            }
+        }
     }
 
     if (Display::self->track_x)
     {
-        Line(mouse_pos.x, rect.GetTop(), mouse_pos.x, rect.GetBottom()).Draw(SET::GUI::color_curve.Get());
-
         for (GraphMeasure *meas : measures)
         {
             auto result = Math::GetIntersectionX(meas->rel_points, mouse_pos.x);
@@ -38,4 +44,6 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
             }
         }
     }
+
+    Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(mouse_pos.x + 5, mouse_pos.y - 5, true);
 }

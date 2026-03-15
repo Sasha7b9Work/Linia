@@ -12,4 +12,7 @@ namespace Math
 
     // Возвращает пересечение кривой с вертикальной линией по координате x
     std::pair<wxPoint, bool> GetIntersectionX(std::vector<wxPoint> &, int x);
+
+    // Возвращает пересечение кривой с горизонтальной линией по координате y
+    std::pair<wxPoint, bool> GetIntersectionY(std::vector<wxPoint> &, int y);
 }
