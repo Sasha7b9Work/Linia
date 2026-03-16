@@ -12,6 +12,8 @@ PanelCalc *PanelCalc::self = nullptr;
 PanelCalc::PanelCalc(wxWindow* parent, int /*_x*/, int _w, int /*_h*/) :
     wxPanel(parent)
 {
+    wxPanel::SetName("PanelCalc");
+
     self = this;
 
     wxPanel::SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - PanelConfig::HEIGHT_BUTTONS });
