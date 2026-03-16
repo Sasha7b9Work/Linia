@@ -4,36 +4,55 @@
 #include "Utils/GlobalFunctions.h"
 #include "IPPP/Tests/Model.h"
 #include "Panels/PanelConfig/PanelConfig.h"
+#include "Utils/SystemDepend.h"
+#include "Controls/StaticBox.h"
+#include "Panels/WindowCalculation/WindowCalculation.h"
 
 
 PanelCalc *PanelCalc::self = nullptr;
 
 
-PanelCalc::PanelCalc(wxWindow* parent, int /*_x*/, int _w, int /*_h*/) :
+PanelCalc::PanelCalc(wxWindow* parent, int x, int w, int /*_h*/) :
     wxPanel(parent)
 {
     self = this;
 
     wxPanel::SetName("PanelCalc");
-}
 
+    wxPanel::SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - PanelConfig::HEIGHT_BUTTONS });
+    wxPanel::SetPosition({ 0, PanelConfig::HEIGHT_BUTTONS });
 
-void PanelCalc::SetName(const wxString &_name)
-{
-    txtName->SetLabel(_name);
-}
+    StaticBox *box = new StaticBox(this, "", { x, SD::DSBY() }, { w, 320 });
 
-
-void PanelCalc::Update()
-{
-//    Panel::Update();
-
-    if (Model::IsEmpty())
     {
-        SetName("Файл модели");
+        btnCursors = new wxButton(box, wxID_ANY, "Курсоры", SD::XY0(), { 100, 20 });
     }
-    else
+
+    Bind(wxEVT_BUTTON, &PanelCalc::OnEventButton, this);
+}
+
+
+void PanelCalc::OnEventButton(wxCommandEvent &event)
+{
+    wxObject *obj = event.GetEventObject();
+
+    if (obj == btnCursors)
     {
-        SetName(Model::GetName());
+        if (!wndCursors)
+        {
+            wndCursors = new WindowCalculation(MainWindow::self);
+
+            wndCursors->Bind(wxEVT_CLOSE_WINDOW, [this](wxCloseEvent &event)
+                {
+                    wndCursors = nullptr;
+                    event.Skip();
+                });
+        }
+
+        if (wndCursors)
+        {
+            wndCursors->Show();
+            wndCursors->Raise();
+        }
     }
 }

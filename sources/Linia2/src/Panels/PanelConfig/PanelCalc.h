@@ -3,6 +3,7 @@
 #include "Panels/Panel.h"
 #include "MainWindow.h"
 #include "Panels/PanelMenu/PanelMenu.h"
+#include "Panels/WindowCalculation/WindowCalculation.h"
 
 
 class PanelCalc : public wxPanel
@@ -15,12 +16,10 @@ public:
 
     static PanelCalc *self;
 
-    virtual void Update() override;
-
 private:
 
-    wxPanel *panel_graph = nullptr;
-    wxStaticText *txtName = nullptr;
+    wxButton          *btnCursors = nullptr;
+    WindowCalculation *wndCursors = nullptr;
 
-    void SetName(const wxString &);
+    void OnEventButton(wxCommandEvent &);
 };
