@@ -139,7 +139,7 @@ private:
     {
         // Панель заголовка
         m_titleBar = new wxPanel(parent, wxID_ANY,
-            wxDefaultPosition, wxSize(-1, 40));
+            wxDefaultPosition, wxSize(-1, 25));
         m_titleBar->SetBackgroundColour(wxColour(60, 80, 120)); // Темно-синий
 
         // Горизонтальный сазер для заголовка
