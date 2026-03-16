@@ -11,6 +11,8 @@ private:
 
     void CreateTitleBar(wxWindow *, wxBoxSizer *);
 
+    void CreateMainPanel();
+
     void SetupDragging(wxWindow *);
 
     void OnDragStart(wxMouseEvent &);

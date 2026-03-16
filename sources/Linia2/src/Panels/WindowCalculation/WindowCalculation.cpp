@@ -14,6 +14,12 @@ WindowCalculation::WindowCalculation(wxFrame *parent)
     // Создаем основной цвет фона
     SetBackgroundColour(wxColour(240, 240, 245));
 
+    CreateMainPanel();
+}
+
+
+void WindowCalculation::CreateMainPanel()
+{
     // Создаем панель для всего содержимого
     wxPanel *mainPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL | wxNO_BORDER | wxEXPAND);
     mainPanel->SetBackgroundColour(wxColour(240, 240, 245));
@@ -125,9 +131,9 @@ WindowCalculation::WindowCalculation(wxFrame *parent)
     SetMinSize(wxSize(350, 300));
 
     // Центрируем относительно родителя
-    if (parent)
+    if (GetParent())
     {
-        wxRect parentRect = parent->GetScreenRect();
+        wxRect parentRect = GetParent()->GetScreenRect();
         SetPosition(wxPoint(parentRect.x + 50, parentRect.y + 50));
     }
 }
