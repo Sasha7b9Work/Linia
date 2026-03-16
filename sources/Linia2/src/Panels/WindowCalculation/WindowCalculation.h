@@ -169,7 +169,7 @@ private:
         titleSizer->Add(icon, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, 15);
 
         // Текст заголовка
-        wxStaticText *titleText = new wxStaticText(m_titleBar, wxID_ANY, "Расчёт");
+        wxStaticText *titleText = new wxStaticText(m_titleBar, wxID_ANY, "Расчёт", wxDefaultPosition, { 50, 20 });
         titleText->SetCanFocus(false);
         titleText->SetForegroundColour(*wxWHITE);
         wxFont titleFont = titleText->GetFont();
