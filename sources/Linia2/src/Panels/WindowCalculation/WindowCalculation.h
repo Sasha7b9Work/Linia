@@ -169,7 +169,7 @@ private:
         titleSizer->Add(icon, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, 15);
 
         // Текст заголовка
-        wxStaticText *titleText = new wxStaticText(m_titleBar, wxID_ANY,
+        titleText = new wxStaticText(m_titleBar, wxID_ANY,
             "WindowCalculation - Калькулятор");
         titleText->SetForegroundColour(*wxWHITE);
         wxFont titleFont = titleText->GetFont();
@@ -178,72 +178,62 @@ private:
         titleSizer->Add(titleText, 1, wxALIGN_CENTER_VERTICAL | wxLEFT, 10);
 
         // Кнопка закрытия
-        wxButton *closeBtn = new wxButton(m_titleBar, wxID_ANY, "x",
-            wxDefaultPosition, wxSize(35, 30), wxBORDER_NONE);
-        closeBtn->SetBackgroundColour(wxColour(180, 60, 60));
-        closeBtn->SetForegroundColour(*wxWHITE);
-        closeBtn->SetFont(closeBtn->GetFont().Scale(1.3f));
+//        wxButton *closeBtn = new wxButton(m_titleBar, wxID_ANY, "x",
+//            wxDefaultPosition, wxSize(35, 30), wxBORDER_NONE);
+//        closeBtn->SetBackgroundColour(wxColour(180, 60, 60));
+//        closeBtn->SetForegroundColour(*wxWHITE);
+//        closeBtn->SetFont(closeBtn->GetFont().Scale(1.3f));
+//
+//        closeBtn->Bind(wxEVT_ENTER_WINDOW, [closeBtn](wxMouseEvent &)
+//            {
+//                closeBtn->SetBackgroundColour(wxColour(200, 80, 80));
+//                closeBtn->Refresh();
+//            });
+//
+//        closeBtn->Bind(wxEVT_LEAVE_WINDOW, [closeBtn](wxMouseEvent &)
+//            {
+//                closeBtn->SetBackgroundColour(wxColour(180, 60, 60));
+//                closeBtn->Refresh();
+//            });
+//
+//        closeBtn->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
+//            {
+//                Close();
+//            });
 
-        closeBtn->Bind(wxEVT_ENTER_WINDOW, [closeBtn](wxMouseEvent &)
-            {
-                closeBtn->SetBackgroundColour(wxColour(200, 80, 80));
-                closeBtn->Refresh();
-            });
-
-        closeBtn->Bind(wxEVT_LEAVE_WINDOW, [closeBtn](wxMouseEvent &)
-            {
-                closeBtn->SetBackgroundColour(wxColour(180, 60, 60));
-                closeBtn->Refresh();
-            });
-
-        closeBtn->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
-            {
-                Close();
-            });
-
-        titleSizer->Add(closeBtn, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 10);
+//        titleSizer->Add(closeBtn, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 10);
 
         m_titleBar->SetSizer(titleSizer);
         mainSizer->Add(m_titleBar, 0, wxEXPAND);
 
         // Настраиваем перетаскивание
-        SetupDragging(m_titleBar);
-//        SetupDragging(icon);
-//        SetupDragging(titleText);
+        SetupDragging(titleText);
     }
 
     void SetupDragging(wxWindow *window)
     {
-        if (!window) return;
-
         window->Bind(wxEVT_LEFT_DOWN, &WindowCalculation::OnDragStart, this);
         window->Bind(wxEVT_LEFT_UP, &WindowCalculation::OnDragEnd, this);
         window->Bind(wxEVT_MOTION, &WindowCalculation::OnDragMotion, this);
-        window->Bind(wxEVT_MOUSE_CAPTURE_LOST, &WindowCalculation::OnCaptureLost, this);
     }
 
     void OnDragStart(wxMouseEvent &event)
     {
-        m_dragging = true;
-        m_dragStart = wxGetMousePosition();
-        CaptureMouse();
+        if (event.GetId() == titleText->GetId())
+        {
+            m_dragging = true;
+            m_dragStart = wxGetMousePosition();
+        }
         event.Skip();
-    }
-
-    void OnCaptureLost(wxMouseCaptureLostEvent &WXUNUSED(event))
-    {
-        m_dragging = false;
-        // Не вызываем ReleaseMouse() - wxWidgets сам освободит захват
     }
 
     void OnDragEnd(wxMouseEvent &event)
     {
-        if (m_dragging)
+        if (event.GetId() == titleText->GetId())
         {
-            m_dragging = false;
-            if (HasCapture())
+            if (m_dragging)
             {
-                ReleaseMouse();
+                m_dragging = false;
             }
         }
         event.Skip();
@@ -251,22 +241,25 @@ private:
 
     void OnDragMotion(wxMouseEvent &event)
     {
-        static bool in_progress = false;
-        if (in_progress)
+        if (event.GetId() == titleText->GetId())
         {
-            return;
-        }
-        in_progress = true;
+            static bool in_progress = false;
+            if (in_progress)
+            {
+                return;
+            }
+            in_progress = true;
 
-        if (m_dragging && event.Dragging() && HasCapture())
-        {
-            wxPoint currentPos = wxGetMousePosition();
-            wxPoint delta = currentPos - m_dragStart;
-            wxPoint newPos = GetPosition() + delta;
-            Move(newPos);
-            m_dragStart = currentPos;
+            if (m_dragging && event.Dragging())
+            {
+                wxPoint currentPos = wxGetMousePosition();
+                wxPoint delta = currentPos - m_dragStart;
+                wxPoint newPos = GetPosition() + delta;
+                Move(newPos);
+                m_dragStart = currentPos;
+            }
+            in_progress = false;
         }
-        in_progress = false;
         event.Skip();
     }
 
@@ -274,4 +267,5 @@ private:
     wxPanel *m_titleBar = nullptr;
     bool m_dragging = false;
     wxPoint m_dragStart;
+    wxStaticText *titleText = nullptr;
 };
