@@ -6,7 +6,6 @@
 #include "Panels/PanelConfig/PanelConfig.h"
 #include "Utils/SystemDepend.h"
 #include "Controls/StaticBox.h"
-#include "Panels/WindowCalculation/WindowCalculation.h"
 
 
 PanelCalc *PanelCalc::self = nullptr;
@@ -40,7 +39,7 @@ void PanelCalc::OnEventButton(wxCommandEvent &event)
     {
         if (!wndCursors)
         {
-            wndCursors = new WindowCalculation(MainWindow::self);
+            wndCursors = new WindowCursors(MainWindow::self);
 
             wndCursors->Bind(wxEVT_CLOSE_WINDOW, [this](wxCloseEvent &event)
                 {

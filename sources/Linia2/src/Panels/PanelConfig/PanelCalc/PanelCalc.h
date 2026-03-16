@@ -3,7 +3,7 @@
 #include "Panels/Panel.h"
 #include "MainWindow.h"
 #include "Panels/PanelMenu/PanelMenu.h"
-#include "Panels/WindowCalculation/WindowCalculation.h"
+#include "Panels/PanelConfig/PanelCalc/WindowCursors.h"
 
 
 class PanelCalc : public wxPanel
@@ -19,7 +19,7 @@ public:
 private:
 
     wxButton          *btnCursors = nullptr;
-    WindowCalculation *wndCursors = nullptr;
+    WindowCursors *wndCursors = nullptr;
 
     void OnEventButton(wxCommandEvent &);
 };
