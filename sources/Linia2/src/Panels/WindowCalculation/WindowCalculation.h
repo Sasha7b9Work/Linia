@@ -169,8 +169,8 @@ private:
         titleSizer->Add(icon, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, 15);
 
         // Текст заголовка
-        wxStaticText *titleText = new wxStaticText(m_titleBar, wxID_ANY,
-            "WindowCalculation - Калькулятор");
+        wxStaticText *titleText = new wxStaticText(m_titleBar, wxID_ANY, "WindowCalculation - Калькулятор");
+        titleText->SetCanFocus(false);
         titleText->SetForegroundColour(*wxWHITE);
         wxFont titleFont = titleText->GetFont();
         titleFont.MakeBold();
