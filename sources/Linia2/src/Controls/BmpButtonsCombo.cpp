@@ -72,9 +72,75 @@ public:
         wxPopupTransientWindow::SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
 
         wxPopupTransientWindow::Show();
+
+        SetupDragging(mainPanel);
+        SetupDragging(this);
     }
 
 private:
+
+    bool     dragging = false;
+    wxPoint  dragStart;
+
+    void SetupDragging(wxWindow *window)
+    {
+        window->Bind(wxEVT_LEFT_DOWN, &BmpButtonPopup::OnDragStart, this);
+        window->Bind(wxEVT_LEFT_UP, &BmpButtonPopup::OnDragEnd, this);
+        window->Bind(wxEVT_MOTION, &BmpButtonPopup::OnDragMotion, this);
+    }
+
+    void OnDragStart(wxMouseEvent &event)
+    {
+        if (!dragging)
+        {
+            wxWindow *source = (wxWindow *)event.GetEventObject();
+            if (source && !source->HasCapture())
+            {
+                source->CaptureMouse();
+            }
+
+            dragging = true;
+            dragStart = wxGetMousePosition();
+
+        }
+
+        event.Skip();
+    }
+
+
+    void OnDragEnd(wxMouseEvent &event)
+    {
+        if (dragging)
+        {
+            wxWindow *source = (wxWindow *)event.GetEventObject();
+            if (source && source->HasCapture())
+            {
+                source->ReleaseMouse();
+            }
+
+            dragging = false;
+        }
+
+        event.Skip();
+    }
+
+
+    void OnDragMotion(wxMouseEvent &event)
+    {
+        wxWindow *source = (wxWindow *)event.GetEventObject();
+
+        if (dragging && event.Dragging() && source && source->HasCapture())
+        {
+            wxPoint currentPos = wxGetMousePosition();
+            wxPoint delta = currentPos - dragStart;
+            wxPoint newPos = GetPosition() + delta;
+            Move(newPos);
+            SET::GUI::calculation_pos.Set(newPos);
+            dragStart = currentPos;
+        }
+
+        event.Skip();
+    }
 
     void OnButtonClick(wxCommandEvent &event)
     {
