@@ -169,7 +169,7 @@ private:
         titleSizer->Add(icon, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, 15);
 
         // Текст заголовка
-        titleText = new wxStaticText(m_titleBar, wxID_ANY,
+        wxStaticText *titleText = new wxStaticText(m_titleBar, wxID_ANY,
             "WindowCalculation - Калькулятор");
         titleText->SetForegroundColour(*wxWHITE);
         wxFont titleFont = titleText->GetFont();
@@ -177,37 +177,37 @@ private:
         titleText->SetFont(titleFont);
         titleSizer->Add(titleText, 1, wxALIGN_CENTER_VERTICAL | wxLEFT, 10);
 
-        // Кнопка закрытия
-//        wxButton *closeBtn = new wxButton(m_titleBar, wxID_ANY, "x",
-//            wxDefaultPosition, wxSize(35, 30), wxBORDER_NONE);
-//        closeBtn->SetBackgroundColour(wxColour(180, 60, 60));
-//        closeBtn->SetForegroundColour(*wxWHITE);
-//        closeBtn->SetFont(closeBtn->GetFont().Scale(1.3f));
-//
-//        closeBtn->Bind(wxEVT_ENTER_WINDOW, [closeBtn](wxMouseEvent &)
-//            {
-//                closeBtn->SetBackgroundColour(wxColour(200, 80, 80));
-//                closeBtn->Refresh();
-//            });
-//
-//        closeBtn->Bind(wxEVT_LEAVE_WINDOW, [closeBtn](wxMouseEvent &)
-//            {
-//                closeBtn->SetBackgroundColour(wxColour(180, 60, 60));
-//                closeBtn->Refresh();
-//            });
-//
-//        closeBtn->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
-//            {
-//                Close();
-//            });
+      // Кнопка закрытия
+        wxButton *closeBtn = new wxButton(m_titleBar, wxID_ANY, "x",
+            wxDefaultPosition, wxSize(35, 30), wxBORDER_NONE);
+        closeBtn->SetBackgroundColour(wxColour(180, 60, 60));
+        closeBtn->SetForegroundColour(*wxWHITE);
+        closeBtn->SetFont(closeBtn->GetFont().Scale(1.3f));
 
-//        titleSizer->Add(closeBtn, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 10);
+        closeBtn->Bind(wxEVT_ENTER_WINDOW, [closeBtn](wxMouseEvent &)
+            {
+                closeBtn->SetBackgroundColour(wxColour(200, 80, 80));
+                closeBtn->Refresh();
+            });
+
+        closeBtn->Bind(wxEVT_LEAVE_WINDOW, [closeBtn](wxMouseEvent &)
+            {
+                closeBtn->SetBackgroundColour(wxColour(180, 60, 60));
+                closeBtn->Refresh();
+            });
+
+        closeBtn->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
+            {
+                Close();
+            });
+
+        titleSizer->Add(closeBtn, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 10);
 
         m_titleBar->SetSizer(titleSizer);
         mainSizer->Add(m_titleBar, 0, wxEXPAND);
 
         // Настраиваем перетаскивание
-        SetupDragging(titleText);
+        SetupDragging(m_titleBar);
     }
 
     void SetupDragging(wxWindow *window)
@@ -219,7 +219,7 @@ private:
 
     void OnDragStart(wxMouseEvent &event)
     {
-        if (event.GetId() == titleText->GetId())
+        if (event.GetId() == m_titleBar->GetId())
         {
             m_dragging = true;
             m_dragStart = wxGetMousePosition();
@@ -229,7 +229,7 @@ private:
 
     void OnDragEnd(wxMouseEvent &event)
     {
-        if (event.GetId() == titleText->GetId())
+        if (event.GetId() == m_titleBar->GetId())
         {
             if (m_dragging)
             {
@@ -241,7 +241,7 @@ private:
 
     void OnDragMotion(wxMouseEvent &event)
     {
-        if (event.GetId() == titleText->GetId())
+        if (event.GetId() == m_titleBar->GetId())
         {
             static bool in_progress = false;
             if (in_progress)
@@ -267,5 +267,4 @@ private:
     wxPanel *m_titleBar = nullptr;
     bool m_dragging = false;
     wxPoint m_dragStart;
-    wxStaticText *titleText = nullptr;
 };
