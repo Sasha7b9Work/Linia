@@ -28,9 +28,14 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
 
             if (result.second)
             {
-                Line(result.first.x, rect.GetTop(), result.first.x, rect.GetBottom()).Draw();
+                int x = result.first.x;
 
-                finder.Push(result.first.x);
+                if (Math::InRange(x, rect.GetLeft(), rect.GetRight()))
+                {
+                    Line(x, rect.GetTop(), x, rect.GetBottom()).Draw();
+
+                    finder.Push(x);
+                }
             }
         }
 
@@ -49,9 +54,13 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
 
             if (result.second)
             {
-                Line(rect.GetLeft(), result.first.y, rect.GetRight(), result.first.y).Draw();
+                int y = result.first.y;
 
-                finder.Push(result.first.y);
+                if (Math::InRange(y, rect.GetTop(), rect.GetBottom()))
+                {
+                    Line(rect.GetLeft(), y, rect.GetRight(), y).Draw();
+                    finder.Push(y);
+                }
             }
         }
 

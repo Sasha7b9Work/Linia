@@ -28,10 +28,10 @@ PanelMenu::PanelMenu(wxWindow* parent) :
     {
         { "Модели",    &btnModels },
         { "Тесты",     &btnTests },
-        { "Архив",     &btnArchiv },
+        { "Расчёт",    &btnCalculation },
         { "Таблица",   &btnTable },
         { "Отчёт",     &btnReport },
-        { "Расчёт",    &btnCalculation },
+        { "Архив",     &btnArchiv },
         { "Настройки", &btnSetup },
         { "Отладка",   &btnDebug }
     };
