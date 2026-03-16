@@ -208,6 +208,7 @@ private:
 
         // Настраиваем перетаскивание
         SetupDragging(m_titleBar);
+        SetupDragging(titleText);
     }
 
     void SetupDragging(wxWindow *window)
@@ -219,7 +220,7 @@ private:
 
     void OnDragStart(wxMouseEvent &event)
     {
-        if (event.GetId() == m_titleBar->GetId())
+//        if (event.GetId() == m_titleBar->GetId())
         {
             m_dragging = true;
             m_dragStart = wxGetMousePosition();
@@ -229,7 +230,7 @@ private:
 
     void OnDragEnd(wxMouseEvent &event)
     {
-        if (event.GetId() == m_titleBar->GetId())
+//        if (event.GetId() == m_titleBar->GetId())
         {
             if (m_dragging)
             {
@@ -241,7 +242,7 @@ private:
 
     void OnDragMotion(wxMouseEvent &event)
     {
-        if (event.GetId() == m_titleBar->GetId())
+//        if (event.GetId() == m_titleBar->GetId())
         {
             static bool in_progress = false;
             if (in_progress)
