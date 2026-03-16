@@ -17,7 +17,7 @@ public:
         SetBackgroundColour(wxColour(240, 240, 245));
 
         // Создаем панель для всего содержимого
-        wxPanel *mainPanel = new wxPanel(this, wxID_ANY);
+        wxPanel *mainPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL | wxNO_BORDER | wxEXPAND);
         mainPanel->SetBackgroundColour(wxColour(240, 240, 245));
 
         // Вертикальный сазер для главной панели
@@ -120,6 +120,8 @@ public:
         wxBoxSizer *frameSizer = new wxBoxSizer(wxHORIZONTAL);
         frameSizer->Add(mainPanel, 1, wxEXPAND);
         SetSizer(frameSizer);
+        Layout();
+        Fit();
 
         // Устанавливаем минимальный размер
         SetMinSize(wxSize(350, 300));
@@ -176,7 +178,7 @@ private:
         titleSizer->Add(titleText, 1, wxALIGN_CENTER_VERTICAL | wxLEFT, 10);
 
         // Кнопка закрытия
-        wxButton *closeBtn = new wxButton(m_titleBar, wxID_ANY, "✕",
+        wxButton *closeBtn = new wxButton(m_titleBar, wxID_ANY, "x",
             wxDefaultPosition, wxSize(35, 30), wxBORDER_NONE);
         closeBtn->SetBackgroundColour(wxColour(180, 60, 60));
         closeBtn->SetForegroundColour(*wxWHITE);
