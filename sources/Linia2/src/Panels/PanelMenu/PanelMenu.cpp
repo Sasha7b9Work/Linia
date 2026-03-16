@@ -28,7 +28,6 @@ PanelMenu::PanelMenu(wxWindow* parent) :
     {
         { "Модели",    &btnModels },
         { "Тесты",     &btnTests },
-        { "Расчёт",    &btnCalculation },
         { "Таблица",   &btnTable },
         { "Отчёт",     &btnReport },
         { "Архив",     &btnArchiv },
@@ -75,25 +74,6 @@ void PanelMenu::OnEventButton(wxCommandEvent &event)
     {
         DialogReport().ShowOnWindow(btnReport);
     }
-    else if (id == btnCalculation->GetId())
-    {
-        if (!wndCalculation)
-        {
-            wndCalculation = new WindowCalculation(MainWindow::self);
-
-            wndCalculation->Bind(wxEVT_CLOSE_WINDOW, [this](wxCloseEvent &event)
-                {
-                    wndCalculation = nullptr;
-                    event.Skip();
-                });
-        }
-
-        if (wndCalculation)
-        {
-            wndCalculation->Show();
-            wndCalculation->Raise();
-        }
-    }
     else if (id == btnDebug->GetId())
     {
         MainWindow::self->SetMode(ModeMainWindow::Debug);
@@ -103,5 +83,5 @@ void PanelMenu::OnEventButton(wxCommandEvent &event)
 
 int PanelMenu::NumButtons() const
 {
-    return 8;
+    return 7;
 }

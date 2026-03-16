@@ -22,7 +22,6 @@ private:
         *btnArchiv = nullptr,
         *btnTable = nullptr,
         *btnReport = nullptr,
-        *btnCalculation = nullptr,
         *btnDebug = nullptr;
 
     WindowCalculation *wndCalculation = nullptr;
