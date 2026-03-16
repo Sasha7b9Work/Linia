@@ -253,7 +253,7 @@ void Grid::Draw(const std::vector<GraphMeasure *> &entities)
 
 void Grid::DrawLabelsOnAxis() const
 {
-    wxColor background{ 230, 230, 230 };
+//    wxColor background{ 230, 230, 230 };
 
     Text::SetFont();
 
