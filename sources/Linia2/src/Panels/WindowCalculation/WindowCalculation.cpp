@@ -9,6 +9,31 @@ WindowCalculation::WindowCalculation(wxFrame *parent)
         wxPoint(100, 100), wxSize(450, 350),
         wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE | wxSTAY_ON_TOP)
 {
+#ifdef __WXGTK__
+#include <X11/Xlib.h>
+#include <X11/Xatom.h>
+#include <gdk/gdkx.h>
+
+    GdkWindow *gdkWindow = gtk_widget_get_window(GTK_WIDGET(GetHandle()));
+    if (gdkWindow)
+    {
+        Display *display = GDK_WINDOW_XDISPLAY(gdkWindow);
+        Window xWindow = GDK_WINDOW_XID(gdkWindow);
+
+        // Убираем ограничения перемещения
+        Atom wmState = XInternAtom(display, "_NET_WM_STATE", False);
+        Atom wmSkipTaskbar = XInternAtom(display, "_NET_WM_STATE_SKIP_TASKBAR", False);
+
+        XChangeProperty(display, xWindow, wmState, XA_ATOM, 32,
+            PropModeReplace, (unsigned char *)&wmSkipTaskbar, 1);
+
+        // Добавляем возможность быть поверх всех (опционально)
+        Atom wmAbove = XInternAtom(display, "_NET_WM_STATE_ABOVE", False);
+        XChangeProperty(display, xWindow, wmState, XA_ATOM, 32,
+            PropModeAppend, (unsigned char *)&wmAbove, 1);
+    }
+#endif
+
     // Отключаем стандартный заголовок
     SetWindowStyleFlag(wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE);
 
