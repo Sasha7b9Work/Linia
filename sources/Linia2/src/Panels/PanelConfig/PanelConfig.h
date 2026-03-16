@@ -32,7 +32,6 @@ private:
         *btnChannelC = nullptr,
         *btnChannelB = nullptr,
         *btnChannelS = nullptr,
-        *btnCalculate = nullptr,
         *btnModel = nullptr;
 
     // Структура хранит кнопку и панель, которую та включает

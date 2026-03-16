@@ -15,13 +15,13 @@ public:
 
 private:
 
-    wxButton *btnFile = nullptr,
-        *btnTest = nullptr,
+    wxButton *btnModels = nullptr,
+        *btnTests = nullptr,
         *btnSetup = nullptr,
         *btnArchiv = nullptr,
         *btnTable = nullptr,
         *btnReport = nullptr,
-        *btnMeasure = nullptr,
+        *btnCalculation = nullptr,
         *btnDebug = nullptr;
 
     void OnEventButton(wxCommandEvent &);

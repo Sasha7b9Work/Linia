@@ -26,13 +26,13 @@ PanelMenu::PanelMenu(wxWindow* parent) :
 
     Struct structs[100] =
     {
-        { "Файл",      &btnFile },
-        { "Тест",      &btnTest },
-        { "Настройка", &btnSetup },
+        { "Модели",    &btnModels },
+        { "Тесты",     &btnTests },
         { "Архив",     &btnArchiv },
         { "Таблица",   &btnTable },
         { "Отчёт",     &btnReport },
-        { "Измерение", &btnMeasure },
+        { "Расчёт",    &btnCalculation },
+        { "Настройки", &btnSetup },
         { "Отладка",   &btnDebug }
     };
 
@@ -51,13 +51,13 @@ void PanelMenu::OnEventButton(wxCommandEvent &event)
 {
     int id = event.GetId();
 
-    if (id == btnFile->GetId())
+    if (id == btnModels->GetId())
     {
-        DialogFile().ShowOnWindow(btnFile);
+        DialogFile().ShowOnWindow(btnModels);
     }
-    else if (id == btnTest->GetId())
+    else if (id == btnTests->GetId())
     {
-        DialogTest().ShowOnWindow(btnTest);
+        DialogTest().ShowOnWindow(btnTests);
     }
     else if (id == btnSetup->GetId())
     {
@@ -75,7 +75,7 @@ void PanelMenu::OnEventButton(wxCommandEvent &event)
     {
         DialogReport().ShowOnWindow(btnReport);
     }
-    else if (id == btnMeasure->GetId())
+    else if (id == btnCalculation->GetId())
     {
 
     }
