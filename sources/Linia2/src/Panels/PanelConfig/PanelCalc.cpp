@@ -1,0 +1,54 @@
+﻿// 2025/6/1 17:41:03 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#include "defines.h"
+#include "Panels/PanelConfig/PanelCalc.h"
+#include "Utils/GlobalFunctions.h"
+#include "IPPP/Tests/Model.h"
+#include "Panels/PanelConfig/PanelConfig.h"
+
+
+PanelCalc *PanelCalc::self = nullptr;
+
+
+PanelCalc::PanelCalc(wxWindow* parent, int /*_x*/, int _w, int /*_h*/) :
+    wxPanel(parent)
+{
+    self = this;
+
+    wxPanel::SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - PanelConfig::HEIGHT_BUTTONS });
+    wxPanel::SetPosition({ 0, PanelConfig::HEIGHT_BUTTONS });
+
+    const int height_name = 20;
+
+    wxPanel *panel_name = new wxPanel(this, wxID_ANY, { 0, 0 }, { _w, height_name }, wxTAB_TRAVERSAL | wxSUNKEN_BORDER);
+
+    txtName = new wxStaticText(panel_name, wxID_ANY, "", { 0, 0 }, { _w, height_name }, wxALIGN_CENTER);
+
+//    Panel::SetName("Файл модели");
+
+    panel_graph = new wxPanel(this, wxID_ANY, { 0, height_name }, { _w, HEIGHT - height_name }, wxTAB_TRAVERSAL | wxSUNKEN_BORDER);
+
+    panel_graph->SetBackgroundColour(*wxWHITE);
+
+//    Panel::Update();
+}
+
+
+void PanelCalc::SetName(const wxString &_name)
+{
+    txtName->SetLabel(_name);
+}
+
+
+void PanelCalc::Update()
+{
+//    Panel::Update();
+
+    if (Model::IsEmpty())
+    {
+        SetName("Файл модели");
+    }
+    else
+    {
+        SetName(Model::GetName());
+    }
+}
