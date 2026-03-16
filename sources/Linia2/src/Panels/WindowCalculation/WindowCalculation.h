@@ -220,47 +220,33 @@ private:
 
     void OnDragStart(wxMouseEvent &event)
     {
-//        if (event.GetId() == m_titleBar->GetId())
-        {
-            m_dragging = true;
-            m_dragStart = wxGetMousePosition();
-        }
+        m_dragging = true;
+        m_dragStart = wxGetMousePosition();
+
         event.Skip();
     }
 
     void OnDragEnd(wxMouseEvent &event)
     {
-//        if (event.GetId() == m_titleBar->GetId())
+        if (m_dragging)
         {
-            if (m_dragging)
-            {
-                m_dragging = false;
-            }
+            m_dragging = false;
         }
+
         event.Skip();
     }
 
     void OnDragMotion(wxMouseEvent &event)
     {
-//        if (event.GetId() == m_titleBar->GetId())
+        if (m_dragging && event.Dragging())
         {
-            static bool in_progress = false;
-            if (in_progress)
-            {
-                return;
-            }
-            in_progress = true;
-
-            if (m_dragging && event.Dragging())
-            {
-                wxPoint currentPos = wxGetMousePosition();
-                wxPoint delta = currentPos - m_dragStart;
-                wxPoint newPos = GetPosition() + delta;
-                Move(newPos);
-                m_dragStart = currentPos;
-            }
-            in_progress = false;
+            wxPoint currentPos = wxGetMousePosition();
+            wxPoint delta = currentPos - m_dragStart;
+            wxPoint newPos = GetPosition() + delta;
+            Move(newPos);
+            m_dragStart = currentPos;
         }
+
         event.Skip();
     }
 
