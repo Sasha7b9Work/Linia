@@ -77,7 +77,22 @@ void PanelMenu::OnEventButton(wxCommandEvent &event)
     }
     else if (id == btnCalculation->GetId())
     {
+        if (!wndCalculation)
+        {
+            wndCalculation = new WindowCalculation(MainWindow::self);
 
+            wndCalculation->Bind(wxEVT_CLOSE_WINDOW, [this](wxCloseEvent &event)
+                {
+                    wndCalculation = nullptr;
+                    event.Skip();
+                });
+        }
+
+        if (wndCalculation)
+        {
+            wndCalculation->Show();
+            wndCalculation->Raise();
+        }
     }
     else if (id == btnDebug->GetId())
     {

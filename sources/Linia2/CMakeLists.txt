@@ -35,6 +35,7 @@ if(WIN32)
         /wd5027    # move assignment operator was implicitly defined as deleted
         /wd5045    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
         /wd5039    # pointer or reference to potentially throwing function passed to extern C function under -EHc. Undefined behavior may occur if this function throws an exception
+        /wd5233    # xplicit lambda capture 'this' is not used
     )
 
 else()
@@ -90,7 +91,7 @@ file(GLOB PANELS_PANELMENU              src/Panels/PanelMenu/*.*)
 file(GLOB PANELS_PANELMENU_SETUP        src/Panels/PanelMenu/Setup/*.*)
 file(GLOB PANELS_PANELDEBUG             src/Panels/PanelDebug/*.*)
 file(GLOB PANELS_PANELDEBUG_NOTEBOOK    src/Panels/PanelDebug/Notebook/*.*)
-file(GLOB PANELS_PANELDEBUG_OLD         src/Panels/PanelDebug/Old/*.*)
+file(GLOB PANELS_WINDOWCALCULATION      src/Panels/WindowCalculation/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB SOFTTESTS                     src/SoftTests/*.*)
 file(GLOB STORAGE                       src/Storage/*.*)
@@ -137,7 +138,7 @@ source_group(Panels/PanelMenu                     FILES ${PANELS_PANELMENU})
 source_group(Panels/PanelMenu/Setup               FILES ${PANELS_PANELMENU_SETUP})
 source_group(Panels/PanelDebug                    FILES ${PANELS_PANELDEBUG})
 source_group(Panels/PanelDebug/Notebook           FILES ${PANELS_PANELDEBUG_NOTEBOOK})
-source_group(Panels/PanelDebug/Old                FILES ${PANELS_PANELDEBUG_OLD})
+source_group(Panels/WindowCalculation             FILES ${PANELS_WINDOWCALCULATION})
 source_group(Settings                             FILES ${SETTINGS})
 source_group(SoftTests                            FILES ${SOFTTESTS})
 source_group(Storage                              FILES ${STORAGE})
@@ -174,7 +175,7 @@ add_executable(${PROJECT_NAME}
     ${PANELS_PANELMENU_SETUP}
     ${PANELS_PANELDEBUG}
     ${PANELS_PANELDEBUG_NOTEBOOK}
-    ${PANELS_PANELDEBUG_OLD}
+    ${PANELS_WINDOWCALCULATION}
     ${SETTINGS}
     ${SOFTTESTS}
     ${STORAGE}
@@ -246,6 +247,3 @@ else()
     target_include_directories(${PROJECT_NAME} PRIVATE ${GTK3_INCLUDE_DIRS})
     target_compile_options(${PROJECT_NAME} PRIVATE ${GTK3_CFLAGS_OTHER})
 endif()
-
-
-

@@ -1,6 +1,7 @@
 // 2025/6/1 17:31:42 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Panels/Panel.h"
+#include "Panels/WindowCalculation/WindowCalculation.h"
 
 
 class PanelMenu : public Panel
@@ -23,6 +24,8 @@ private:
         *btnReport = nullptr,
         *btnCalculation = nullptr,
         *btnDebug = nullptr;
+
+    WindowCalculation *wndCalculation = nullptr;
 
     void OnEventButton(wxCommandEvent &);
 
