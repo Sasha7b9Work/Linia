@@ -7,7 +7,7 @@
 WindowCalculation::WindowCalculation(wxFrame *parent)
     : wxFrame(parent, wxID_ANY, "WindowCalculation",
         wxPoint(100, 100), wxSize(450, 350),
-        wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE)
+        wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE | wxSTAY_ON_TOP)
 {
     // Отключаем стандартный заголовок
     SetWindowStyleFlag(wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE);
@@ -23,7 +23,7 @@ WindowCalculation::WindowCalculation(wxFrame *parent)
 
 void WindowCalculation::CreateMainPanel()
 {
-    wxPanel *panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL | wxNO_BORDER | wxEXPAND);
+    wxPanel *panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL | wxNO_BORDER | wxEXPAND | wxSTAY_ON_TOP);
     (void)panel;
 
 #ifdef WIN32
