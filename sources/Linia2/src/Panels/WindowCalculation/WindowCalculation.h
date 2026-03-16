@@ -182,7 +182,7 @@ private:
             wxDefaultPosition, wxSize(35, 30), wxBORDER_NONE);
         closeBtn->SetBackgroundColour(wxColour(180, 60, 60));
         closeBtn->SetForegroundColour(*wxWHITE);
-        closeBtn->SetFont(closeBtn->GetFont().Scale(1.3));
+        closeBtn->SetFont(closeBtn->GetFont().Scale(1.3f));
 
         closeBtn->Bind(wxEVT_ENTER_WINDOW, [closeBtn](wxMouseEvent &)
             {
@@ -208,8 +208,8 @@ private:
 
         // Настраиваем перетаскивание
         SetupDragging(m_titleBar);
-        SetupDragging(icon);
-        SetupDragging(titleText);
+//        SetupDragging(icon);
+//        SetupDragging(titleText);
     }
 
     void SetupDragging(wxWindow *window)
@@ -219,6 +219,7 @@ private:
         window->Bind(wxEVT_LEFT_DOWN, &WindowCalculation::OnDragStart, this);
         window->Bind(wxEVT_LEFT_UP, &WindowCalculation::OnDragEnd, this);
         window->Bind(wxEVT_MOTION, &WindowCalculation::OnDragMotion, this);
+        window->Bind(wxEVT_MOUSE_CAPTURE_LOST, &WindowCalculation::OnCaptureLost, this);
     }
 
     void OnDragStart(wxMouseEvent &event)
@@ -227,6 +228,12 @@ private:
         m_dragStart = wxGetMousePosition();
         CaptureMouse();
         event.Skip();
+    }
+
+    void OnCaptureLost(wxMouseCaptureLostEvent &WXUNUSED(event))
+    {
+        m_dragging = false;
+        // Не вызываем ReleaseMouse() - wxWidgets сам освободит захват
     }
 
     void OnDragEnd(wxMouseEvent &event)
@@ -244,7 +251,14 @@ private:
 
     void OnDragMotion(wxMouseEvent &event)
     {
-        if (m_dragging && event.Dragging())
+        static bool in_progress = false;
+        if (in_progress)
+        {
+            return;
+        }
+        in_progress = true;
+
+        if (m_dragging && event.Dragging() && HasCapture())
         {
             wxPoint currentPos = wxGetMousePosition();
             wxPoint delta = currentPos - m_dragStart;
@@ -252,6 +266,7 @@ private:
             Move(newPos);
             m_dragStart = currentPos;
         }
+        in_progress = false;
         event.Skip();
     }
 
