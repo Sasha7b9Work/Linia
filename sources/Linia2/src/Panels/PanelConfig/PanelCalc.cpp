@@ -12,26 +12,9 @@ PanelCalc *PanelCalc::self = nullptr;
 PanelCalc::PanelCalc(wxWindow* parent, int /*_x*/, int _w, int /*_h*/) :
     wxPanel(parent)
 {
-    wxPanel::SetName("PanelCalc");
-
     self = this;
 
-    wxPanel::SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - PanelConfig::HEIGHT_BUTTONS });
-    wxPanel::SetPosition({ 0, PanelConfig::HEIGHT_BUTTONS });
-
-    const int height_name = 20;
-
-    wxPanel *panel_name = new wxPanel(this, wxID_ANY, { 0, 0 }, { _w, height_name }, wxTAB_TRAVERSAL | wxSUNKEN_BORDER);
-
-    txtName = new wxStaticText(panel_name, wxID_ANY, "", { 0, 0 }, { _w, height_name }, wxALIGN_CENTER);
-
-//    Panel::SetName("Файл модели");
-
-    panel_graph = new wxPanel(this, wxID_ANY, { 0, height_name }, { _w, HEIGHT - height_name }, wxTAB_TRAVERSAL | wxSUNKEN_BORDER);
-
-    panel_graph->SetBackgroundColour(*wxWHITE);
-
-//    Panel::Update();
+    wxPanel::SetName("PanelCalc");
 }
 
 
