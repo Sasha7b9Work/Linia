@@ -5,6 +5,256 @@
 class WindowCalculation : public wxFrame
 {
 public:
-    WindowCalculation(wxFrame *);
+    WindowCalculation(wxFrame *parent)
+        : wxFrame(parent, wxID_ANY, "WindowCalculation",
+            wxPoint(100, 100), wxSize(450, 350),
+            wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE)
+    {
+        // Отключаем стандартный заголовок
+        SetWindowStyleFlag(wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE);
+
+        // Создаем основной цвет фона
+        SetBackgroundColour(wxColour(240, 240, 245));
+
+        // Создаем панель для всего содержимого
+        wxPanel *mainPanel = new wxPanel(this, wxID_ANY);
+        mainPanel->SetBackgroundColour(wxColour(240, 240, 245));
+
+        // Вертикальный сазер для главной панели
+        wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
+
+        // Создаем полосу заголовка (добавляем сразу в mainSizer)
+        CreateTitleBar(mainPanel, mainSizer);
+
+        // Создаем панель с содержимым
+        wxPanel *contentPanel = new wxPanel(mainPanel, wxID_ANY);
+        contentPanel->SetBackgroundColour(*wxWHITE);
+        mainSizer->Add(contentPanel, 1, wxEXPAND | wxALL, 5);
+
+        // Добавляем содержимое в contentPanel
+        wxBoxSizer *contentSizer = new wxBoxSizer(wxVERTICAL);
+        contentPanel->SetSizer(contentSizer);
+
+        // Заголовок секции
+        wxStaticText *titleLabel = new wxStaticText(contentPanel, wxID_ANY,
+            "Параметры расчета:", wxDefaultPosition, wxDefaultSize,
+            wxALIGN_LEFT);
+        wxFont titleFont = titleLabel->GetFont();
+        titleFont.MakeBold();
+        titleLabel->SetFont(titleFont);
+        contentSizer->Add(titleLabel, 0, wxALL, 10);
+
+        // Сетка для полей ввода
+        wxFlexGridSizer *gridSizer = new wxFlexGridSizer(2, 5, 10);
+        gridSizer->AddGrowableCol(1, 1);
+
+        // Поле 1
+        gridSizer->Add(new wxStaticText(contentPanel, wxID_ANY, "Значение 1:"),
+            0, wxALIGN_CENTER_VERTICAL | wxLEFT, 10);
+        wxTextCtrl *value1 = new wxTextCtrl(contentPanel, wxID_ANY, "100");
+        gridSizer->Add(value1, 1, wxEXPAND | wxRIGHT, 10);
+
+        // Поле 2
+        gridSizer->Add(new wxStaticText(contentPanel, wxID_ANY, "Значение 2:"),
+            0, wxALIGN_CENTER_VERTICAL | wxLEFT, 10);
+        wxTextCtrl *value2 = new wxTextCtrl(contentPanel, wxID_ANY, "200");
+        gridSizer->Add(value2, 1, wxEXPAND | wxRIGHT, 10);
+
+        // Поле 3
+        gridSizer->Add(new wxStaticText(contentPanel, wxID_ANY, "Значение 3:"),
+            0, wxALIGN_CENTER_VERTICAL | wxLEFT, 10);
+        wxTextCtrl *value3 = new wxTextCtrl(contentPanel, wxID_ANY, "300");
+        gridSizer->Add(value3, 1, wxEXPAND | wxRIGHT, 10);
+
+        contentSizer->Add(gridSizer, 0, wxEXPAND | wxTOP | wxBOTTOM, 10);
+
+        // Разделительная линия
+        wxStaticLine *line = new wxStaticLine(contentPanel);
+        contentSizer->Add(line, 0, wxEXPAND | wxALL, 10);
+
+        // Результат
+        wxBoxSizer *resultSizer = new wxBoxSizer(wxHORIZONTAL);
+        resultSizer->Add(new wxStaticText(contentPanel, wxID_ANY, "Результат:"),
+            0, wxALIGN_CENTER_VERTICAL | wxLEFT, 10);
+        wxStaticText *result = new wxStaticText(contentPanel, wxID_ANY, "600");
+        wxFont resultFont = result->GetFont();
+        resultFont.MakeBold();
+        resultFont.SetPointSize(resultFont.GetPointSize() + 2);
+        result->SetFont(resultFont);
+        result->SetForegroundColour(wxColour(0, 100, 0));
+        resultSizer->Add(result, 1, wxALIGN_CENTER_VERTICAL | wxLEFT, 10);
+        contentSizer->Add(resultSizer, 0, wxEXPAND | wxBOTTOM, 10);
+
+        // Кнопки
+        wxBoxSizer *buttonSizer = new wxBoxSizer(wxHORIZONTAL);
+
+        wxButton *calcBtn = new wxButton(contentPanel, wxID_ANY, "Рассчитать");
+        calcBtn->SetBackgroundColour(wxColour(220, 240, 220));
+        buttonSizer->Add(calcBtn, 0, wxALL, 5);
+
+        wxButton *closeBtn = new wxButton(contentPanel, wxID_ANY, "Закрыть");
+        closeBtn->SetBackgroundColour(wxColour(240, 220, 220));
+        buttonSizer->Add(closeBtn, 0, wxALL, 5);
+
+        contentSizer->Add(buttonSizer, 0, wxALIGN_CENTER | wxBOTTOM, 10);
+
+        // Обработчики кнопок
+        calcBtn->Bind(wxEVT_BUTTON, [value1, value2, value3, result](wxCommandEvent &)
+            {
+                double v1 = wxAtof(value1->GetValue());
+                double v2 = wxAtof(value2->GetValue());
+                double v3 = wxAtof(value3->GetValue());
+                double sum = v1 + v2 + v3;
+                result->SetLabel(wxString::Format("%.2f", sum));
+            });
+
+        closeBtn->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
+            {
+                Close();
+            });
+
+        // Устанавливаем сазер для главной панели
+        mainPanel->SetSizer(mainSizer);
+
+        // Создаем сазер для фрейма
+        wxBoxSizer *frameSizer = new wxBoxSizer(wxHORIZONTAL);
+        frameSizer->Add(mainPanel, 1, wxEXPAND);
+        SetSizer(frameSizer);
+
+        // Устанавливаем минимальный размер
+        SetMinSize(wxSize(350, 300));
+
+        // Центрируем относительно родителя
+        if (parent)
+        {
+            wxRect parentRect = parent->GetScreenRect();
+            SetPosition(wxPoint(parentRect.x + 50, parentRect.y + 50));
+        }
+    }
+
 private:
+    void CreateTitleBar(wxWindow *parent, wxBoxSizer *mainSizer)
+    {
+        // Панель заголовка
+        m_titleBar = new wxPanel(parent, wxID_ANY,
+            wxDefaultPosition, wxSize(-1, 40));
+        m_titleBar->SetBackgroundColour(wxColour(60, 80, 120)); // Темно-синий
+
+        // Горизонтальный сазер для заголовка
+        wxBoxSizer *titleSizer = new wxBoxSizer(wxHORIZONTAL);
+
+        // Иконка - используем существующий ART-идентификатор
+        wxBitmap iconBitmap;
+
+        // Пробуем разные варианты иконок
+        iconBitmap = wxArtProvider::GetBitmap(wxART_INFORMATION, wxART_OTHER, wxSize(16, 16));
+        if (!iconBitmap.IsOk())
+        {
+            // Если не получилось, создаем простую иконку
+            iconBitmap = wxBitmap(16, 16);
+            wxMemoryDC dc;
+            dc.SelectObject(iconBitmap);
+            dc.SetBackground(*wxWHITE_BRUSH);
+            dc.Clear();
+            dc.SetPen(*wxBLACK_PEN);
+            dc.SetBrush(*wxWHITE_BRUSH);
+            dc.DrawRectangle(0, 0, 16, 16);
+            dc.DrawText("i", 4, 2);
+            dc.SelectObject(wxNullBitmap);
+        }
+
+        wxStaticBitmap *icon = new wxStaticBitmap(m_titleBar, wxID_ANY, iconBitmap);
+        titleSizer->Add(icon, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, 15);
+
+        // Текст заголовка
+        wxStaticText *titleText = new wxStaticText(m_titleBar, wxID_ANY,
+            "WindowCalculation - Калькулятор");
+        titleText->SetForegroundColour(*wxWHITE);
+        wxFont titleFont = titleText->GetFont();
+        titleFont.MakeBold();
+        titleText->SetFont(titleFont);
+        titleSizer->Add(titleText, 1, wxALIGN_CENTER_VERTICAL | wxLEFT, 10);
+
+        // Кнопка закрытия
+        wxButton *closeBtn = new wxButton(m_titleBar, wxID_ANY, "✕",
+            wxDefaultPosition, wxSize(35, 30), wxBORDER_NONE);
+        closeBtn->SetBackgroundColour(wxColour(180, 60, 60));
+        closeBtn->SetForegroundColour(*wxWHITE);
+        closeBtn->SetFont(closeBtn->GetFont().Scale(1.3));
+
+        closeBtn->Bind(wxEVT_ENTER_WINDOW, [closeBtn](wxMouseEvent &)
+            {
+                closeBtn->SetBackgroundColour(wxColour(200, 80, 80));
+                closeBtn->Refresh();
+            });
+
+        closeBtn->Bind(wxEVT_LEAVE_WINDOW, [closeBtn](wxMouseEvent &)
+            {
+                closeBtn->SetBackgroundColour(wxColour(180, 60, 60));
+                closeBtn->Refresh();
+            });
+
+        closeBtn->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
+            {
+                Close();
+            });
+
+        titleSizer->Add(closeBtn, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 10);
+
+        m_titleBar->SetSizer(titleSizer);
+        mainSizer->Add(m_titleBar, 0, wxEXPAND);
+
+        // Настраиваем перетаскивание
+        SetupDragging(m_titleBar);
+        SetupDragging(icon);
+        SetupDragging(titleText);
+    }
+
+    void SetupDragging(wxWindow *window)
+    {
+        if (!window) return;
+
+        window->Bind(wxEVT_LEFT_DOWN, &WindowCalculation::OnDragStart, this);
+        window->Bind(wxEVT_LEFT_UP, &WindowCalculation::OnDragEnd, this);
+        window->Bind(wxEVT_MOTION, &WindowCalculation::OnDragMotion, this);
+    }
+
+    void OnDragStart(wxMouseEvent &event)
+    {
+        m_dragging = true;
+        m_dragStart = wxGetMousePosition();
+        CaptureMouse();
+        event.Skip();
+    }
+
+    void OnDragEnd(wxMouseEvent &event)
+    {
+        if (m_dragging)
+        {
+            m_dragging = false;
+            if (HasCapture())
+            {
+                ReleaseMouse();
+            }
+        }
+        event.Skip();
+    }
+
+    void OnDragMotion(wxMouseEvent &event)
+    {
+        if (m_dragging && event.Dragging())
+        {
+            wxPoint currentPos = wxGetMousePosition();
+            wxPoint delta = currentPos - m_dragStart;
+            wxPoint newPos = GetPosition() + delta;
+            Move(newPos);
+            m_dragStart = currentPos;
+        }
+        event.Skip();
+    }
+
+private:
+    wxPanel *m_titleBar = nullptr;
+    bool m_dragging = false;
+    wxPoint m_dragStart;
 };

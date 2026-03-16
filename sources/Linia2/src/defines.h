@@ -31,6 +31,7 @@
 #include <wx/dirctrl.h>
 #include <wx/dir.h>
 #include <wx/rawbmp.h>
+#include <wx/artprov.h>
 
 #include <map>
 #include <queue>
