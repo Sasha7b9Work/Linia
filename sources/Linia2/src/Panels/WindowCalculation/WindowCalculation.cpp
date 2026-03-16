@@ -23,6 +23,14 @@ WindowCalculation::WindowCalculation(wxFrame *parent)
 
 void WindowCalculation::CreateMainPanel()
 {
+    wxPanel *panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL | wxNO_BORDER | wxEXPAND);
+
+    SetupDragging(this);
+}
+
+
+void WindowCalculation::CreateMainPanel2()
+{
     // Создаем панель для всего содержимого
     wxPanel *mainPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL | wxNO_BORDER | wxEXPAND);
 

@@ -13,6 +13,8 @@ private:
 
     void CreateMainPanel();
 
+    void CreateMainPanel2();
+
     void SetupDragging(wxWindow *);
 
     void OnDragStart(wxMouseEvent &);
