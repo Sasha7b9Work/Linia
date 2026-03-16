@@ -40,13 +40,13 @@ int GridNew::TopY() const
 
 int GridNew::CenterY() const
 {
-    return Display::self->GetDrawingSize().y / 2;
+    return TheDisplay->GetDrawingSize().y / 2;
 }
 
 
 int GridNew::CenterX() const
 {
-    return Display::self->GetDrawingSize().x / 2;
+    return TheDisplay->GetDrawingSize().x / 2;
 }
 
 
@@ -76,7 +76,7 @@ int GridNew::LengthAxisY() const
 
 void GridNew::Draw(const std::vector<GraphMeasure *> &entities)
 {
-    wxSize size = Display::self->GetDrawingSize();
+    wxSize size = TheDisplay->GetDrawingSize();
 
     const int x_left = LeftX();
     const int x_right = RightX();
@@ -169,14 +169,14 @@ void GridNew::Draw(const std::vector<GraphMeasure *> &entities)
         entity->Draw();
     }
 
-    Display::self->SetColorPen(SET::GUI::color_background.Get());
+    TheDisplay->SetColorPen(SET::GUI::color_background.Get());
 
-    Display::self->FillRectangle(0, 0, x_left - 1, Display::self->GetDrawingSize().y, SET::GUI::color_background.Get()); //-V807
-    Display::self->FillRectangle(x_left, 0, LengthAxisX(), y_top - 1, SET::GUI::color_background.Get());
-    Display::self->FillRectangle(x_right + 1, 0, Display::self->GetDrawingSize().x - x_right, Display::self->GetDrawingSize().y, SET::GUI::color_background.Get());
-    Display::self->FillRectangle(x_left, y_bottom + 1, LengthAxisX(), Display::self->GetDrawingSize().y - y_bottom, SET::GUI::color_background.Get());
+    TheDisplay->FillRectangle(0, 0, x_left - 1, TheDisplay->GetDrawingSize().y, SET::GUI::color_background.Get()); //-V807
+    TheDisplay->FillRectangle(x_left, 0, LengthAxisX(), y_top - 1, SET::GUI::color_background.Get());
+    TheDisplay->FillRectangle(x_right + 1, 0, TheDisplay->GetDrawingSize().x - x_right, TheDisplay->GetDrawingSize().y, SET::GUI::color_background.Get());
+    TheDisplay->FillRectangle(x_left, y_bottom + 1, LengthAxisX(), TheDisplay->GetDrawingSize().y - y_bottom, SET::GUI::color_background.Get());
 
-    if (!Display::self->mouse_is_pressed)
+    if (!TheDisplay->mouse_is_pressed)
     {
         if (pos_mouse.y > TopY() &&
             pos_mouse.y < BottomY() &&
@@ -193,13 +193,13 @@ void GridNew::Draw(const std::vector<GraphMeasure *> &entities)
 
 void GridNew::DrawLabelsOnAxis() const
 {
-    Display::self->SetColorPen(SET::GUI::color_font.Get());
+    TheDisplay->SetColorPen(SET::GUI::color_font.Get());
 
     Text::SetFont();
 
     int d = 2;
 
-    wxSize size = Display::self->GetDrawingSize();
+    wxSize size = TheDisplay->GetDrawingSize();
 
     {
         // Подписываем горизонтальную ось
@@ -330,7 +330,7 @@ void GridNew::RangeGridOnX(int delta)
         rangeX.Decrease();
     }
 
-    Display::self->Refresh();
+    TheDisplay->Refresh();
 }
 
 
@@ -345,7 +345,7 @@ void GridNew::RangeGridOnY(int delta)
         rangeY.Decrease();
     }
 
-    Display::self->Refresh();
+    TheDisplay->Refresh();
 }
 
 

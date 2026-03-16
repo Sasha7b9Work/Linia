@@ -18,13 +18,11 @@ class Display : public Panel
     friend class Rect;
     friend class MenuDisplay;
     friend class GraphMeasure;
+    friend class MainWindow;
 
 public:
 
-    Display(wxWindow *parent);
     ~Display();
-
-    static Display *self;
 
     void SetColorBrush(const wxColor &);
     void SetColorPen(const wxColor &);
@@ -52,6 +50,8 @@ public:
     void ReInit();
 
 private:
+
+    Display(wxWindow *parent);
 
     wxButton *btnHelp = nullptr,
         *btnLessX = nullptr,
@@ -163,3 +163,6 @@ public:
     // smooth - сглаживание
     void Draw(const std::vector<wxPoint> &, bool smooth, bool draw_points) const;
 };
+
+
+extern Display *TheDisplay;

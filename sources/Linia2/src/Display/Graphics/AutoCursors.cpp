@@ -16,7 +16,7 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
 
     wxRect rect = Grid::self->GetRect();
 
-    Display::self->SetColorPen(SET::GUI::color_curve.Get());
+    TheDisplay->SetColorPen(SET::GUI::color_curve.Get());
 
     if (SET::GUI::track_y.Get())
     {

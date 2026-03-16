@@ -70,7 +70,7 @@ MainWindow::MainWindow(const wxString &title)
 
     new PanelConfig(this);
 
-    new Display(this);
+    TheDisplay = new Display(this);
 
     new PanelIndicator(this);
 
@@ -239,7 +239,7 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
     PanelName::self->Show(mode == ModeMainWindow::Standard);
     PanelUpper::self->Show(mode == ModeMainWindow::Standard);
     PanelConfig::self->Show(mode == ModeMainWindow::Standard);
-    Display::self->Show(mode == ModeMainWindow::Standard || mode == ModeMainWindow::FullGraph);
+    TheDisplay->Show(mode == ModeMainWindow::Standard || mode == ModeMainWindow::FullGraph);
     PanelIndicator::self->Show(mode == ModeMainWindow::Standard);
     PanelModeLower::self->Show(mode == ModeMainWindow::Standard);
     PanelMenu::self->Show(mode == ModeMainWindow::Standard);
@@ -248,7 +248,7 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
 
     PanelReferenceGraph::self->Show(mode == ModeMainWindow::ReferenceGraphs);
 
-    Display::self->FullScreen(mode == ModeMainWindow::FullGraph);
+    TheDisplay->FullScreen(mode == ModeMainWindow::FullGraph);
 
     wxFrame::Layout();
 

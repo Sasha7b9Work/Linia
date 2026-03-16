@@ -30,7 +30,7 @@ Grid::Grid()
 
 void Grid::ResetCenter()
 {
-    wxSize display_size = Display::self->GetDrawingSize();
+    wxSize display_size = TheDisplay->GetDrawingSize();
 
     offset.center_about_screen = { display_size.x / 2, display_size.y / 2 };
 }
@@ -81,7 +81,7 @@ void Grid::DrawArea() const
         return;
     }
 
-    wxSize size = Display::self->GetDrawingSize();
+    wxSize size = TheDisplay->GetDrawingSize();
 
     int size_x = size.x * size.x / LengthAxis();
     int size_y = size.y * size.y / LengthAxis();
@@ -105,10 +105,10 @@ void Grid::DrawNavigationWindow() const
 
     wxSize size_window { 150, 150 };
 
-    Display::self->FillRectangle(0, 0, size_window.x, size_window.y, { 240, 240, 240 });
+    TheDisplay->FillRectangle(0, 0, size_window.x, size_window.y, { 240, 240, 240 });
 
     {
-        wxSize size = Display::self->GetDrawingSize();
+        wxSize size = TheDisplay->GetDrawingSize();
 
         int size_x = size.x * size_window.x / LengthAxis();
         int size_y = size.y * size_window.y / LengthAxis();
@@ -125,7 +125,7 @@ void Grid::DrawNavigationWindow() const
 
 void Grid::Draw(const std::vector<GraphMeasure *> &entities)
 {
-    wxSize size = Display::self->GetDrawingSize();
+    wxSize size = TheDisplay->GetDrawingSize();
 
     const int length = LengthAxis();
 
@@ -228,15 +228,15 @@ void Grid::Draw(const std::vector<GraphMeasure *> &entities)
 
     if (scale == 1)
     {
-        Display::self->FillRectangle(0, 0, x_left - 1, Display::self->GetDrawingSize().y, *wxWHITE); //-V807
-        Display::self->FillRectangle(x_left, 0, length, y_top - 1, *wxWHITE);
-        Display::self->FillRectangle(x_right + 1, 0, Display::self->GetDrawingSize().x - x_right, Display::self->GetDrawingSize().y, *wxWHITE);
-        Display::self->FillRectangle(x_left, y_bottom + 1, length, Display::self->GetDrawingSize().y - y_bottom, *wxWHITE);
+        TheDisplay->FillRectangle(0, 0, x_left - 1, TheDisplay->GetDrawingSize().y, *wxWHITE); //-V807
+        TheDisplay->FillRectangle(x_left, 0, length, y_top - 1, *wxWHITE);
+        TheDisplay->FillRectangle(x_right + 1, 0, TheDisplay->GetDrawingSize().x - x_right, TheDisplay->GetDrawingSize().y, *wxWHITE);
+        TheDisplay->FillRectangle(x_left, y_bottom + 1, length, TheDisplay->GetDrawingSize().y - y_bottom, *wxWHITE);
     }
 
     DrawLabelsOnAxis();
 
-    if (!Display::self->mouse_is_pressed)
+    if (!TheDisplay->mouse_is_pressed)
     {
         if (pos_mouse.y > TopY() &&
             pos_mouse.y < BottomY() &&
@@ -259,7 +259,7 @@ void Grid::DrawLabelsOnAxis() const
 
     int d = 2;
 
-    wxSize size = Display::self->GetDrawingSize();
+    wxSize size = TheDisplay->GetDrawingSize();
 
     {
         // Подписываем горизонтульную ось
@@ -387,7 +387,7 @@ void Grid::FitIntoDisplay()
         return;
     }
 
-    wxSize size = Display::self->GetDrawingSize();
+    wxSize size = TheDisplay->GetDrawingSize();
 
     if (LeftX() > 5)
     {
@@ -450,7 +450,7 @@ void Grid::RangeGridOnX(int delta)
         rangeX.Decrease();
     }
 
-    Display::self->Refresh();
+    TheDisplay->Refresh();
 }
 
 
@@ -465,7 +465,7 @@ void Grid::RangeGridOnY(int delta)
         rangeY.Decrease();
     }
 
-    Display::self->Refresh();
+    TheDisplay->Refresh();
 }
 
 

@@ -7,7 +7,7 @@
 
 void Events::ChangingTheConnectionOfTheMeasuredElement()
 {
-    Display::self->OnEventCnangeMeasuredElement();
+    TheDisplay->OnEventCnangeMeasuredElement();
 }
 
 
