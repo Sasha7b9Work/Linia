@@ -220,6 +220,15 @@ private:
 
     void OnDragStart(wxMouseEvent &event)
     {
+        if (!m_dragging)
+        {
+            wxWindow *source = (wxWindow *)event.GetEventObject();
+            if (source && !source->HasCapture())
+            {
+                source->CaptureMouse();
+            }
+        }
+
         m_dragging = true;
         m_dragStart = wxGetMousePosition();
 
@@ -231,6 +240,8 @@ private:
         if (m_dragging)
         {
             m_dragging = false;
+
+            ReleaseMouse();
         }
 
         event.Skip();
