@@ -10,21 +10,6 @@ WindowCalculation::WindowCalculation(wxFrame *parent)
         wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE | wxSTAY_ON_TOP)
 {
 #ifdef __WXGTK__
-    // Специальный порядок подключения для избежания конфликтов
-#include <wx/platform.h>
-#ifdef __WXGTK__
-#include <gdk/gdk.h>
-#include <gdk/gdkx.h>
-// Отключаем problematic макросы X11 перед подключением
-#undef Status
-#undef Bool
-#undef None
-#undef KeyPress
-#undef KeyRelease
-#include <X11/Xlib.h>
-#include <X11/Xatom.h>
-#endif
-
     GdkWindow *gdkWindow = gtk_widget_get_window(GTK_WIDGET(GetHandle()));
     if (gdkWindow)
     {

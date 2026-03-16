@@ -1,6 +1,21 @@
 ﻿// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
+// Специальный порядок подключения для избежания конфликтов
+#ifdef __WXGTK__
+#include <wx/platform.h>
+#include <gdk/gdk.h>
+#include <gdk/gdkx.h>
+// Отключаем problematic макросы X11 перед подключением
+#undef Status
+#undef Bool
+#undef None
+#undef KeyPress
+#undef KeyRelease
+#include <X11/Xlib.h>
+#include <X11/Xatom.h>
+#endif
+
 
 #include "option.h"
 
