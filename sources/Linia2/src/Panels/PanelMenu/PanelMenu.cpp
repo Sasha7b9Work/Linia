@@ -53,7 +53,7 @@ void PanelMenu::OnEventButton(wxCommandEvent &event)
 
     if (id == btnModels->GetId())
     {
-        DialogFile().ShowOnWindow(btnModels);
+        DialogModels().ShowOnWindow(btnModels);
     }
     else if (id == btnTests->GetId())
     {

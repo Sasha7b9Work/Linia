@@ -3,13 +3,13 @@
 #include "Panels/PanelMenu/MenuDialog.h"
 
 
-class DialogFile : public MenuDialog
+class DialogModels : public MenuDialog
 {
 public:
+ 
+    DialogModels();
 
-    DialogFile();
-
-    static DialogFile *self;
+    static DialogModels *self;
 
     virtual void Update() override;
 

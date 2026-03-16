@@ -26,7 +26,7 @@ const pchar DialogTestLibrary::BTN_USER = "Пользовательских";
 
 
 DialogTest::DialogTest() :
-    MenuDialog("Тест", 175, { 0, 1, 3, 6, 7 },
+    MenuDialog("Тесты", 175, { 0, 1, 3, 6, 7 },
         BTN_APPEND, []()
         {
             DialogTestAppend().ShowOnWindow(DialogTest::self->FindButton(BTN_APPEND));

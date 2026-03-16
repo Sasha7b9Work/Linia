@@ -5,24 +5,24 @@
 #include "Panels/PanelConfig/PanelModel.h"
 
 
-DialogFile *DialogFile::self = nullptr;
+DialogModels *DialogModels::self = nullptr;
 
 
-const pchar DialogFile::BTN_NEW = "Новый";
-const pchar DialogFile::BTN_OPEN = "Открыть";
-const pchar DialogFile::BTN_CLOSE = "Закрыть";
-const pchar DialogFile::BTN_SAVE = "Cохранить";
-const pchar DialogFile::BTN_SAVE_AS = "Сохранить как...";
-const pchar DialogFile::BTN_DELETE = "Удалить";
+const pchar DialogModels::BTN_NEW = "Новый";
+const pchar DialogModels::BTN_OPEN = "Открыть";
+const pchar DialogModels::BTN_CLOSE = "Закрыть";
+const pchar DialogModels::BTN_SAVE = "Cохранить";
+const pchar DialogModels::BTN_SAVE_AS = "Сохранить как...";
+const pchar DialogModels::BTN_DELETE = "Удалить";
 
 
-DialogFile::DialogFile() :
-    MenuDialog("Файл", 125, { 2, 4 },
+DialogModels::DialogModels() :
+    MenuDialog("Модели", 125, { 2, 4 },
         BTN_NEW, []()
         {
             Model::CreateNew("Untitled");
             PanelModel::self->Update();
-            DialogFile::self->Close(true);
+            DialogModels::self->Close(true);
         },
         BTN_OPEN, []()
         {
@@ -59,11 +59,11 @@ DialogFile::DialogFile() :
                 }
             }
 
-            DialogFile::self->Close(true);
+            DialogModels::self->Close(true);
         },
         BTN_SAVE, []()
         {
-            DialogFile::self->Close(true);
+            DialogModels::self->Close(true);
         },
         BTN_SAVE_AS, []()
         {
@@ -91,7 +91,7 @@ DialogFile::DialogFile() :
 }
 
 
-void DialogFile::Update()
+void DialogModels::Update()
 {
     MenuDialog::Update();
 
