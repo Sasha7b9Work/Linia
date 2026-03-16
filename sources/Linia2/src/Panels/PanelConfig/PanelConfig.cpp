@@ -10,7 +10,7 @@
 #include "Panels/PanelConfig/PanelChannelBS.h"
 #include "Panels/PanelConfig/PanelChannelC.h"
 #include "Panels/PanelConfig/PanelModel.h"
-#include "Panels/PanelConfig/PanelCalc.h"
+#include "Panels/PanelConfig/PanelCalc/PanelCalc.h"
 #include "Utils/Configurator.h"
 
 

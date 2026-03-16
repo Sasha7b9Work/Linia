@@ -4,6 +4,7 @@
 #include "Utils/GlobalFunctions.h"
 #include "Controls/StaticBox.h"
 #include "Utils/Configurator.h"
+#include "Settings/Settings.h"
 
 
 class BmpButtonPopup : public wxPopupTransientWindow
