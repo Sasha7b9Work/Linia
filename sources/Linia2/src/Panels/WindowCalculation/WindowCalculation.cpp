@@ -174,19 +174,19 @@ void WindowCalculation::CreateTitleBar(wxWindow *parent, wxBoxSizer *mainSizer)
     wxStaticBitmap *icon = new wxStaticBitmap(titleBar, wxID_ANY, iconBitmap);
     titleSizer->Add(icon, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, 15);
 
-    {
-        // Текст заголовка
-
-        wxStaticText *titleText = new wxStaticText(titleBar, wxID_ANY, "Расчёт", wxDefaultPosition, { 50, 20 });
-        titleText->SetCanFocus(false);
-        titleText->SetForegroundColour(*wxWHITE);
-        wxFont titleFont = titleText->GetFont();
-        titleFont.MakeBold();
-        titleText->SetFont(titleFont);
-        titleSizer->Add(titleText, 1, wxALIGN_CENTER_VERTICAL | wxLEFT, 10);
-
-        SetupDragging(titleText);
-    }
+//    {
+//        // Текст заголовка
+//
+//        wxStaticText *titleText = new wxStaticText(titleBar, wxID_ANY, "Расчёт", wxDefaultPosition, { 50, 20 });
+//        titleText->SetCanFocus(false);
+//        titleText->SetForegroundColour(*wxWHITE);
+//        wxFont titleFont = titleText->GetFont();
+//        titleFont.MakeBold();
+//        titleText->SetFont(titleFont);
+//        titleSizer->Add(titleText, 1, wxALIGN_CENTER_VERTICAL | wxLEFT, 10);
+//
+//        SetupDragging(titleText);
+//    }
 
     {
         // Кнопка закрытия
