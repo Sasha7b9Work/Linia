@@ -227,10 +227,11 @@ private:
             {
                 source->CaptureMouse();
             }
-        }
 
-        m_dragging = true;
-        m_dragStart = wxGetMousePosition();
+            m_dragging = true;
+            m_dragStart = wxGetMousePosition();
+
+        }
 
         event.Skip();
     }
@@ -239,9 +240,13 @@ private:
     {
         if (m_dragging)
         {
-            m_dragging = false;
+            wxWindow *source = (wxWindow *)event.GetEventObject();
+            if (source && source->HasCapture())
+            {
+                source->ReleaseMouse();
+            }
 
-            ReleaseMouse();
+            m_dragging = false;
         }
 
         event.Skip();
@@ -249,7 +254,9 @@ private:
 
     void OnDragMotion(wxMouseEvent &event)
     {
-        if (m_dragging && event.Dragging())
+        wxWindow *source = (wxWindow *)event.GetEventObject();
+
+        if (m_dragging && event.Dragging() && source && source->HasCapture())
         {
             wxPoint currentPos = wxGetMousePosition();
             wxPoint delta = currentPos - m_dragStart;
