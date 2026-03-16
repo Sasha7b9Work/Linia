@@ -1,6 +1,7 @@
 ﻿// 2026/03/16 11:53:10 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/WindowCalculation/WindowCalculation.h"
+#include "Settings/Settings.h"
 
 
 WindowCalculation::WindowCalculation(wxFrame *parent)
@@ -15,6 +16,8 @@ WindowCalculation::WindowCalculation(wxFrame *parent)
     SetBackgroundColour(wxColour(240, 240, 245));
 
     CreateMainPanel();
+
+    Move(SET::GUI::calculation_pos.Get());
 }
 
 
@@ -270,6 +273,7 @@ void WindowCalculation::OnDragMotion(wxMouseEvent &event)
         wxPoint delta = currentPos - dragStart;
         wxPoint newPos = GetPosition() + delta;
         Move(newPos);
+        SET::GUI::calculation_pos.Set(newPos);
         dragStart = currentPos;
     }
 

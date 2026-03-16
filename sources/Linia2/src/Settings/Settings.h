@@ -33,5 +33,6 @@ namespace SET
         extern Value<bool>      track_x;                    // Отслеживать значения измерений по Х
         extern Value<bool>      track_y;                    // и Y
         extern Value<bool>      track_mouse;                // и положение мыши
+        extern Value<wxPoint>   calculation_pos;            // Позиция окна РАСЧЁТ
     }
 };
