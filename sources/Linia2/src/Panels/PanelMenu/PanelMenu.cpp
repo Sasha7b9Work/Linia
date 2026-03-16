@@ -3,7 +3,7 @@
 #include "Panels/PanelMenu/PanelMenu.h"
 #include "MainWindow.h"
 #include "Settings/Settings.h"
-#include "Panels/PanelMenu/DialogFile.h"
+#include "Panels/PanelMenu/DialogModels.h"
 #include "Panels/PanelMenu/DialogTest.h"
 #include "Panels/PanelMenu/Setup/DialogSetup.h"
 #include "Panels/PanelMenu/DialogTable.h"
