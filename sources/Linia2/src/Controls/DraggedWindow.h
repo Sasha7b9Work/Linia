@@ -3,8 +3,6 @@
 
 
 // Окно, которое можно передвигать мышью
-
-
 class DraggedWindow : public wxFrame
 {
 public:
@@ -28,4 +26,13 @@ private:
     wxPanel *titleBar = nullptr;
     bool     dragging = false;
     wxPoint  dragStart;
+};
+
+
+// В отличие от DraggedWindow, является модальным, т.е. все окна кроме этого неактивны
+class DraggedDialog : public DraggedWindow
+{
+public:
+    DraggedDialog(wxFrame *parent) : DraggedWindow(parent) { }
+private:
 };

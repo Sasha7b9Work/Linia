@@ -3,7 +3,7 @@
 #include "Controls/DraggedWindow.h"
 
 
-class WindowCursors : public DraggedWindow
+class WindowCursors : public DraggedDialog
 {
 public:
     WindowCursors(wxFrame *);

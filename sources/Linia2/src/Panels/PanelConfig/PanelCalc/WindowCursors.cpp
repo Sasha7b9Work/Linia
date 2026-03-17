@@ -3,7 +3,7 @@
 #include "Panels/PanelConfig/PanelCalc/WindowCursors.h"
 
 
-WindowCursors::WindowCursors(wxFrame *parent) : DraggedWindow(parent)
+WindowCursors::WindowCursors(wxFrame *parent) : DraggedDialog(parent)
 {
 
 }
