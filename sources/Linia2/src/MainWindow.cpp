@@ -273,4 +273,29 @@ void MainWindow::HideSystemPanel()
         gdk_window_raise(gdk_window);
     }
 #endif
+
+    // Убедимся что окно активно и видимо
+    TheMainWindow->Raise();
+    TheMainWindow->SetFocus();
+    wxYield();  // Даем время на обработку
+
+    // Создаем симулятор действий
+    wxUIActionSimulator sim;
+
+    // Получаем центр окна или конкретную точку
+    wxRect rect = TheMainWindow->GetRect();
+    wxPoint center(rect.GetX() + rect.GetWidth() / 2,
+        rect.GetY() + rect.GetHeight() / 2);
+
+    // Перемещаем мышь в центр окна
+    sim.MouseMove(center);
+    wxYield();  // Ждем перемещения
+
+    // Эмулируем нажатие и отпускание ЛКМ
+    sim.MouseClick(wxMOUSE_BTN_LEFT);
+
+    // Или по отдельности:
+    // sim.MouseDown(wxMOUSE_BTN_LEFT);
+    // wxMilliSleep(50);
+    // sim.MouseUp(wxMOUSE_BTN_LEFT);
 }
