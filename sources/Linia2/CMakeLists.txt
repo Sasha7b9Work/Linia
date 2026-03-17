@@ -215,8 +215,6 @@ else()
 
     pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
 
-#    find_library(PNG_LIBRARY png REQUIRED)
-
     if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
         pkg_check_modules(GPIOD REQUIRED libgpiod)
 
@@ -238,8 +236,8 @@ else()
         wx_baseu_net-3.3
         X11
         xkbcommon
+        png
         ${GTK3_LIBRARIES}
-#        ${PNG_LIBRARY}
     )
 
     target_include_directories(${PROJECT_NAME} PRIVATE ${GTK3_INCLUDE_DIRS})
