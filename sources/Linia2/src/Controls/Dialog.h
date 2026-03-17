@@ -48,7 +48,7 @@ public:
 
         wxDialog::ShowModal();
 
-        MainWindow::self->Raise();
+        MainWindow::self->HideSystemPanel();
     }
 
 protected:
