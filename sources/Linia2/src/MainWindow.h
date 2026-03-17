@@ -59,6 +59,8 @@ public:
 
     void Update();
 
+    void HidePanel();
+
 private:
 
     wxToolBar *toolBar = nullptr;

@@ -254,3 +254,19 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
 
     PanelDebug::self->Pack();
 }
+
+
+void MainWindow::HidePanel()
+{
+#ifdef __WXGTK__
+    GtkWidget *widget = GetHandle(); // В wxGTK GetHandle() возвращает GtkWidget*
+    if (widget && gtk_widget_get_window(widget))
+    {
+        GdkWindow *gdk_window = gtk_widget_get_window(widget);
+        // Делаем окно "выше всех" средствами GDK
+        gdk_window_set_keep_above(gdk_window, TRUE);
+        // Принудительно поднимаем
+        gdk_window_raise(gdk_window);
+    }
+#endif
+}
