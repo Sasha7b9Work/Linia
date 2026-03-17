@@ -213,7 +213,7 @@ if(WIN32)
 else()
 #    find_package(PkgConfig REQUIRED)
 
-    pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
+#    pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
 
     if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
         pkg_check_modules(GPIOD REQUIRED libgpiod)
