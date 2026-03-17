@@ -38,19 +38,19 @@ public:
 
     int ShowModal();
 
-    void EndModal(int retCode = wxID_OK);
-
 private:
 
+    bool m_modalActive;
+    int m_modalResult;
     wxWindow *m_parent;
-    bool m_isModal;
-    wxEventLoopBase *m_modalLoop;
 
-    void ShowWindowWithXFCEFix();
-
-    void OnShow(wxShowEvent &);
-
-    void OnActivate(wxActivateEvent &);
+    void ShowWithXFCEFix();
 
     void OnClose(wxCloseEvent &);
+
+    void OnOK(wxCommandEvent &);
+
+    void OnCancel(wxCommandEvent &);
+
+    void CloseModal();
 };

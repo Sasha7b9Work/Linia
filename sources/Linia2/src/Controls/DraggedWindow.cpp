@@ -108,188 +108,114 @@ bool DraggedWindow::Show(bool show)
 
 DraggedDialog::DraggedDialog(wxFrame *parent) : DraggedWindow(parent)
 {
-    // Отключаем стандартный заголовок
     SetWindowStyleFlag(wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE);
-
-    // Создаем основной цвет фона
     SetBackgroundColour(wxColour(240, 240, 245));
 
     m_parent = parent;
-    m_isModal = false;
-    m_modalLoop = nullptr;
+    m_modalActive = false;
+    m_modalResult = wxID_CANCEL;
 
-    // Bind events
+    // Создаем содержимое
+    wxPanel *panel = new wxPanel(this);
+    wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
+
+    // Добавьте ваши контролы здесь
+    wxStaticText *text = new wxStaticText(panel, wxID_ANY,
+        "Модальное окно", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    mainSizer->Add(text, 0, wxEXPAND | wxALL, 20);
+
+    // Кнопки OK/Cancel
+    wxBoxSizer *btnSizer = new wxBoxSizer(wxHORIZONTAL);
+    wxButton *okBtn = new wxButton(panel, wxID_OK, "OK");
+    wxButton *cancelBtn = new wxButton(panel, wxID_CANCEL, "Отмена");
+
+    btnSizer->Add(okBtn, 0, wxALL, 5);
+    btnSizer->Add(cancelBtn, 0, wxALL, 5);
+    mainSizer->Add(btnSizer, 0, wxALIGN_CENTER | wxBOTTOM, 10);
+
+    panel->SetSizer(mainSizer);
+
+    // Bind обработчики
+    okBtn->Bind(wxEVT_BUTTON, &DraggedDialog::OnOK, this);
+    cancelBtn->Bind(wxEVT_BUTTON, &DraggedDialog::OnCancel, this);
     Bind(wxEVT_CLOSE_WINDOW, &DraggedDialog::OnClose, this);
-    Bind(wxEVT_ACTIVATE, &DraggedDialog::OnActivate, this);
-
-    // Для XFCE особенно важно
-    Bind(wxEVT_SHOW, &DraggedDialog::OnShow, this);
 }
 
 
 int DraggedDialog::ShowModal()
 {
-    if (m_isModal)
-        return wxID_CANCEL;
+    m_modalActive = true;
+    m_modalResult = wxID_CANCEL;
 
-    m_isModal = true;
-
-    // Блокируем родительское окно
-    if (m_parent && m_parent->IsEnabled())
+    // Блокируем родителя
+    if (m_parent)
     {
         m_parent->Disable();
     }
 
-    // Блокируем все остальные окна верхнего уровня
-    wxWindowList &windows = wxTopLevelWindows;
-    for (wxWindowList::iterator it = windows.begin(); it != windows.end(); ++it)
+    // Показываем окно с XFCE фиксом
+    ShowWithXFCEFix();
+
+    // Простой цикл ожидания
+    while (m_modalActive)
     {
-        wxWindow *win = *it;
-        if (win != this && win->IsEnabled())
-        {
-            win->Disable();
-        }
+        wxYield();  // Обрабатываем события
+        wxMilliSleep(10);  // Небольшая задержка чтобы не нагружать CPU
     }
 
-    // Показываем окно с специальной обработкой для XFCE
-    ShowWindowWithXFCEFix();
-
-    // СОЗДАЕМ КОНКРЕТНЫЙ КЛАСС, А НЕ АБСТРАКТНЫЙ
-    wxGUIEventLoop loop;  // Создаем на стеке, не через new
-    m_modalLoop = &loop;   // Сохраняем указатель
-
-    int returnCode = loop.Run();  // Запускаем цикл
-
-    m_modalLoop = nullptr;  // Обнуляем указатель после завершения
-
-    return returnCode;
+    return m_modalResult;
 }
 
 
-void DraggedDialog::EndModal(int retCode)
+void DraggedDialog::ShowWithXFCEFix()
 {
-    if (!m_isModal)
-        return;
+    Show();
+    Raise();
+    SetFocus();
 
-    m_isModal = false;
+#ifdef __WXGTK__
+    wxYield();  // Даем время GTK/XFCE
 
-    // Разблокируем окна
+    GtkWidget *widget = GTK_WIDGET(GetHandle());
+    if (widget && gtk_widget_get_window(widget))
+    {
+        GdkWindow *gdkWindow = gtk_widget_get_window(widget);
+        gdk_window_set_keep_above(gdkWindow, TRUE);
+        gdk_window_raise(gdkWindow);
+    }
+#endif
+}
+
+
+void DraggedDialog::OnClose(wxCloseEvent &/*event*/)
+{
+    CloseModal();
+}
+
+
+void DraggedDialog::OnOK(wxCommandEvent &/*event*/)
+{
+    m_modalResult = wxID_OK;
+    CloseModal();
+}
+
+
+void DraggedDialog::OnCancel(wxCommandEvent &/*event*/)
+{
+    m_modalResult = wxID_CANCEL;
+    CloseModal();
+}
+
+
+void DraggedDialog::CloseModal()
+{
+    m_modalActive = false;
+    Hide();
+
+    // Разблокируем родителя
     if (m_parent)
     {
         m_parent->Enable();
-    }
-
-    wxWindowList &windows = wxTopLevelWindows;
-    for (wxWindowList::iterator it = windows.begin(); it != windows.end(); ++it)
-    {
-        wxWindow *win = *it;
-        if (win != this && !win->IsEnabled())
-        {
-            win->Enable();
-        }
-    }
-
-    // Выходим из модального цикла
-    if (m_modalLoop)
-    {
-        m_modalLoop->Exit(retCode);
-    }
-
-    // Скрываем окно
-    Hide();
-}
-
-
-void DraggedDialog::ShowWindowWithXFCEFix()
-{
-    // Показываем окно
-    Show();
-
-    // Специальная обработка для XFCE
-#ifdef __WXGTK__
-        // Даем время XFCE на обработку
-    wxYield();
-
-    // Получаем X11 окно
-    GdkWindow *gdkWindow = gtk_widget_get_window(GTK_WIDGET(GetHandle()));
-    if (gdkWindow)
-    {
-        // Устанавливаем окно выше всех
-        gdk_window_set_keep_above(gdkWindow, TRUE);
-
-        // Поднимаем окно
-        gdk_window_raise(gdkWindow);
-
-        // Для XFCE также полезно установить тип окна
-        gdk_window_set_type_hint(gdkWindow, GDK_WINDOW_TYPE_HINT_DIALOG);
-    }
-
-    // X11 прямой доступ
-    Display *display = GDK_DISPLAY_XDISPLAY(gdk_display_get_default());
-    Window xid = GDK_WINDOW_XID(gdkWindow);
-
-    if (xid)
-    {
-        // Устанавливаем атрибут "выше всех"
-        Atom wmState = XInternAtom(display, "_NET_WM_STATE", False);
-        Atom wmAbove = XInternAtom(display, "_NET_WM_STATE_ABOVE", False);
-
-        XChangeProperty(display, xid, wmState, XA_ATOM, 32,
-            PropModeReplace, (unsigned char *)&wmAbove, 1);
-
-        // Поднимаем окно
-        XRaiseWindow(display, xid);
-        XFlush(display);
-    }
-#endif
-
-    // Устанавливаем фокус
-    SetFocus();
-
-    // Дополнительный подъем через wxWidgets
-    Raise();
-}
-
-
-void DraggedDialog::OnShow(wxShowEvent &event)
-{
-    if (event.IsShown() && m_isModal)
-    {
-        // При показе модального окна, гарантируем что оно сверху
-        CallAfter([this]()
-            {
-                ShowWindowWithXFCEFix();
-            });
-    }
-    event.Skip();
-}
-
-
-void DraggedDialog::OnActivate(wxActivateEvent &event)
-{
-    if (m_isModal && !event.GetActive())
-    {
-        // Если модальное окно теряет активацию, возвращаем его сверху
-        CallAfter([this]()
-            {
-                if (m_isModal && IsShown())
-                {
-                    ShowWindowWithXFCEFix();
-                }
-            });
-    }
-    event.Skip();
-}
-
-
-void DraggedDialog::OnClose(wxCloseEvent &event)
-{
-    if (m_isModal)
-    {
-        EndModal(wxID_CANCEL);
-    }
-    else
-    {
-        event.Skip();
+        m_parent->Raise();  // Поднимаем родительское окно
     }
 }
