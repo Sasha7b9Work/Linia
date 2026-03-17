@@ -65,6 +65,8 @@ protected:
 
     virtual ~DraggedDialog() {}
 
+    void CloseModal();
+
 private:
 
     virtual bool Show(bool = true) override;
@@ -80,6 +82,4 @@ private:
     void OnOK(wxCommandEvent &);
 
     void OnCancel(wxCommandEvent &);
-
-    void CloseModal();
 };

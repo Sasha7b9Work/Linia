@@ -2,17 +2,14 @@
 #pragma once
 #include "Utils/GlobalFunctions.h"
 #include "MainWindow.h"
+#include "Controls/DraggedWindow.h"
 
 
-class Dialog : public wxDialog
+class Dialog : public DraggedDialog
 {
 public:
 
-    Dialog(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &pos = wxDefaultPosition, const wxSize &size = wxDefaultSize) :
-        wxDialog(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE | wxSTAY_ON_TOP)
-    {
-        Bind(wxEVT_CHAR_HOOK, &Dialog::OnKeyDown, this);
-    }
+    Dialog(wxWindow *, wxWindowID, const wxString &, const wxPoint & = wxDefaultPosition, const wxSize &size = wxDefaultSize);
 
     void ShowOnWindow(wxWindow *window)
     {
@@ -46,7 +43,7 @@ public:
 
         SetPosition(pos);
 
-        wxDialog::ShowModal();
+        DraggedDialog::ShowModal();
 
         TheMainWindow->HideSystemPanel();
     }
@@ -63,8 +60,7 @@ private:
     {
         if (event.GetKeyCode() == WXK_ESCAPE)
         {
-            // Close();
-            EndModal(wxID_CANCEL);
+            DraggedDialog::CloseModal();
         }
         else
         {

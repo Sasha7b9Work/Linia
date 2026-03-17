@@ -11,7 +11,7 @@ WindowCursors::WindowCursors(const wxString &_title) : DraggedDialog(_title, { 2
     SetPosition(SET::GUI::cursors_pos.Get());
 
     int x = 10;
-    int y = 20;
+    int y = 22;
     int dy = 25;
 
     wxWindow *wnd = MainWidget();
