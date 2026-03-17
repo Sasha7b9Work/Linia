@@ -11,6 +11,10 @@ public:
 
     virtual bool Show(bool = true) override;
 
+protected:
+
+    wxPanel *main_panel = nullptr;
+
 private:
 
     void CreateMainPanel();

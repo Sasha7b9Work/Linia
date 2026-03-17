@@ -19,18 +19,20 @@ DraggedWindow::DraggedWindow(wxFrame *parent)
     CreateMainPanel();
 
     Move(SET::GUI::calculation_pos.Get());
+
+    Layout();
+    Fit();
 }
 
 
 void DraggedWindow::CreateMainPanel()
 {
-    wxPanel *panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL | wxNO_BORDER | wxEXPAND | wxSTAY_ON_TOP);
-    (void)panel;
+    main_panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxNO_BORDER | wxEXPAND | wxSTAY_ON_TOP);
 
 #ifdef WIN32
-    SetupDragging(this);
+    SetupDragging(main_panel);
 #else
-    SetupDragging(panel);
+    SetupDragging(main_panel);
 #endif
 }
 
@@ -115,30 +117,31 @@ DraggedDialog::DraggedDialog(wxFrame *parent) : DraggedWindow(parent)
     m_modalActive = false;
     m_modalResult = wxID_CANCEL;
 
-    // Создаем содержимое
-    wxPanel *panel = new wxPanel(this);
     wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
 
     // Добавьте ваши контролы здесь
-    wxStaticText *text = new wxStaticText(panel, wxID_ANY,
+    wxStaticText *text = new wxStaticText(main_panel, wxID_ANY,
         "Модальное окно", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
     mainSizer->Add(text, 0, wxEXPAND | wxALL, 20);
 
     // Кнопки OK/Cancel
     wxBoxSizer *btnSizer = new wxBoxSizer(wxHORIZONTAL);
-    wxButton *okBtn = new wxButton(panel, wxID_OK, "OK");
-    wxButton *cancelBtn = new wxButton(panel, wxID_CANCEL, "Отмена");
+    wxButton *okBtn = new wxButton(main_panel, wxID_OK, "OK");
+    wxButton *cancelBtn = new wxButton(main_panel, wxID_CANCEL, "Отмена");
 
     btnSizer->Add(okBtn, 0, wxALL, 5);
     btnSizer->Add(cancelBtn, 0, wxALL, 5);
     mainSizer->Add(btnSizer, 0, wxALIGN_CENTER | wxBOTTOM, 10);
 
-    panel->SetSizer(mainSizer);
+    main_panel->SetSizer(mainSizer);
 
     // Bind обработчики
     okBtn->Bind(wxEVT_BUTTON, &DraggedDialog::OnOK, this);
     cancelBtn->Bind(wxEVT_BUTTON, &DraggedDialog::OnCancel, this);
     Bind(wxEVT_CLOSE_WINDOW, &DraggedDialog::OnClose, this);
+
+    Layout();
+    Fit();
 }
 
 
