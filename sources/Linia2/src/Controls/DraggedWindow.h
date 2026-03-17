@@ -13,11 +13,7 @@ public:
 
 private:
 
-    void CreateTitleBar(wxWindow *, wxBoxSizer *);
-
     void CreateMainPanel();
-
-    void CreateMainPanel2();
 
     void SetupDragging(wxWindow *);
 
