@@ -22,7 +22,6 @@ DialogModels::DialogModels() :
         {
             Model::CreateNew("Untitled");
             PanelModel::self->Update();
-            DialogModels::self->Close(true);
         },
         BTN_OPEN, []()
         {

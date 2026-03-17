@@ -20,8 +20,6 @@ public:
         const wxString &btn9 = "", void (*func9)() = nullptr
     );
 
-    virtual ~MenuDialog() { }
-
 protected:
 
     wxButton *FindButton(const wxString &label);

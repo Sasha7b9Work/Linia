@@ -58,12 +58,11 @@ class DraggedDialog : public DraggedWindow
 public:
 
     DraggedDialog(const wxString &, const wxSize &);
+    virtual ~DraggedDialog();
 
     int ShowModal();
 
 protected:
-
-    virtual ~DraggedDialog() {}
 
     void CloseModal();
 

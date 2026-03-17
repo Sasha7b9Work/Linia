@@ -39,7 +39,7 @@ MenuDialog::MenuDialog(const wxString &title, int width_button, const wxArrayInt
 
     for (uint i = 0; i < buttons.size(); i++)
     {
-        wxButton *btn = new wxButton(MainWidget(), buttons[i].id, buttons[i].label, { 5, y }, { width_button, BUTTON_HEIGHT });
+        wxButton *btn = new wxButton(MainWidget(), wxID_ANY, buttons[i].label, { 5, y }, { width_button, BUTTON_HEIGHT });
         y += BUTTON_HEIGHT + 5;
         if (ConsistIndex(delimit, (int)i))
         {

@@ -89,9 +89,11 @@ void DraggedWindow::OnEventMouseLeftDown(wxMouseEvent &event)
 }
 
 
-void DraggedWindow::OnEventClose(wxCloseEvent &)
+void DraggedWindow::OnEventClose(wxCloseEvent &event)
 {
     Destroy();
+
+    event.Skip();
 }
 
 
@@ -267,6 +269,12 @@ DraggedDialog::DraggedDialog(const wxString &_title, const wxSize &_size) : Drag
 }
 
 
+DraggedDialog::~DraggedDialog()
+{
+    int i = 0;
+}
+
+
 int DraggedDialog::ShowModal()
 {
     m_modalActive = true;
@@ -284,11 +292,9 @@ int DraggedDialog::ShowModal()
     // Простой цикл ожидания
     while (m_modalActive)
     {
-        wxYield();  // Обрабатываем события
-        wxMilliSleep(10);  // Небольшая задержка чтобы не нагружать CPU
+        wxYield();          // Обрабатываем события
+        wxMilliSleep(10);   // Небольшая задержка чтобы не нагружать CPU
     }
-
-    TheMainWindow->HideSystemPanel();
 
     return m_modalResult;
 }
@@ -317,8 +323,6 @@ void DraggedDialog::ShowWithXFCEFix()
 void DraggedDialog::OnEventClose(wxCloseEvent &event)
 {
     CloseModal();
-
-    event.Skip();
 }
 
 
