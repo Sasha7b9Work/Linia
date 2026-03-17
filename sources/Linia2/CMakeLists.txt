@@ -211,7 +211,7 @@ if(WIN32)
     # Копируем в рабочий каталог
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy $(OutputPath)\\$(PROJECT_NAME) . /Y)
 else()
-    find_package(PkgConfig REQUIRED)
+#    find_package(PkgConfig REQUIRED)
 
     pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
 
@@ -237,7 +237,7 @@ else()
         X11
         xkbcommon
         png
-#        ${GTK3_LIBRARIES}
+        ${GTK3_LIBRARIES}
     )
 
     target_include_directories(${PROJECT_NAME} PRIVATE ${GTK3_INCLUDE_DIRS})
