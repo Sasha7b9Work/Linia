@@ -29,7 +29,6 @@ else()
         -Wall
         -Werror
         -fmax-errors=1
-        -pthread
         -Wno-unknown-pragmas
         -Wno-write-strings
         -pipe
