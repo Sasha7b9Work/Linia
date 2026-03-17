@@ -21,7 +21,7 @@ WindowCursors::WindowCursors(const wxString &_title) : DraggedDialog(_title, { 2
     const int d = 5;
 
     size.x -= 5 + 5;
-    size.y = 90;
+    size.y = 100;
 
     wxStaticBox *boxAuto = new wxStaticBox(wnd, wxID_ANY, "Автоматические", { d, TopY() }, size);
 
