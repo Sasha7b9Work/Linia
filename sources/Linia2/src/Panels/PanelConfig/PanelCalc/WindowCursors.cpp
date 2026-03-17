@@ -40,6 +40,7 @@ WindowCursors::WindowCursors(const wxString &_title) : DraggedDialog(_title, { 2
     }
 
     wxStaticBox *boxManual = new wxStaticBox(wnd, wxID_ANY, "Управляемые", { d, boxAuto->GetPosition().y + boxAuto->GetSize().y + d }, size);
+    (void)boxManual;
 
     Bind(wxEVT_CHECKBOX, &WindowCursors::OnEventCheckBox, this);
 }
