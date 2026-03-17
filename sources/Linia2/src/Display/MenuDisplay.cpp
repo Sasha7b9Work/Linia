@@ -34,15 +34,15 @@ void MenuDisplay::AppendMenuTrack()
 
     trackX = subMenu->AppendCheckItem(wxID_ANY, "По X");
     Bind(wxEVT_MENU, &MenuDisplay::OnTrack, this, trackX->GetId());
-    subMenu->Check(trackX->GetId(), SET::GUI::track_x.Get());
+    subMenu->Check(trackX->GetId(), SET::GUI::track_x);
 
     trackY = subMenu->AppendCheckItem(wxID_ANY, "По Y");
     Bind(wxEVT_MENU, &MenuDisplay::OnTrack, this, trackY->GetId());
-    subMenu->Check(trackY->GetId(), SET::GUI::track_y.Get());
+    subMenu->Check(trackY->GetId(), SET::GUI::track_y);
 
     trackMouse = subMenu->AppendCheckItem(wxID_ANY, "Указатель мыши");
     Bind(wxEVT_MENU, &MenuDisplay::OnTrack, this, trackMouse->GetId());
-    subMenu->Check(trackMouse->GetId(), SET::GUI::track_mouse.Get());
+    subMenu->Check(trackMouse->GetId(), SET::GUI::track_mouse);
 
     AppendSubMenu(subMenu, "Отслеживать");
 }

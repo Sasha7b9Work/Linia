@@ -19,6 +19,16 @@ protected:
 
     virtual ~DraggedWindow() {}
 
+    int TopY() const
+    {
+        return titleHeight + 10;
+    }
+
+    wxWindow *MainWidget()
+    {
+        return main_panel;
+    }
+
 private:
 
     wxPanel *titleBar = nullptr;

@@ -7,9 +7,15 @@ class WindowCursors : public DraggedDialog
 {
 public:
 
-    WindowCursors(const wxString &, const wxSize &);
+    WindowCursors(const wxString &);
 
 private:
 
+    wxCheckBox *chbTrackX = nullptr,
+        *chbTrackY = nullptr,
+        *chbTrackMouse = nullptr;
+
     virtual ~WindowCursors() override;
+
+    void OnEventCheckBox(wxCommandEvent &);
 };
