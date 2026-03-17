@@ -11,11 +11,21 @@ public:
 
     virtual bool Show(bool = true) override;
 
+    void SetSize(const wxSize &);
+
 protected:
 
     wxPanel *main_panel = nullptr;
 
 private:
+
+    wxPanel *titleBar = nullptr;
+    bool     dragging = false;
+    wxPoint  dragStart;
+    wxString title;
+    wxRect m_closeButtonRect;   // Область кнопки закрытия
+    bool m_mouseInCloseButton;  // Для ховер-эффекта
+    const int titleHeight = 30;
 
     void CreateTitleBar();
 
@@ -27,10 +37,7 @@ private:
 
     void OnDragMotion(wxMouseEvent &);
 
-    wxPanel *titleBar = nullptr;
-    bool     dragging = false;
-    wxPoint  dragStart;
-    wxString title;
+    void OnPaint(wxPaintEvent &);
 };
 
 

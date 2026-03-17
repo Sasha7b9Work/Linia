@@ -8,15 +8,14 @@
 DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
     : wxFrame(TheMainWindow, wxID_ANY, "WindowCalculation",
         { TheMainWindow->GetSize().x / 2, TheMainWindow->GetSize().y / 2 }, _size,
-        wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE | wxSTAY_ON_TOP),
+        wxFRAME_FLOAT_ON_PARENT | wxSTAY_ON_TOP),
     title(_title)
 {
-    // Отключаем стандартный заголовок
-    SetWindowStyleFlag(wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE);
+    wxSize size = GetClientSize();
 
-    CreateTitleBar();
+    main_panel = new wxPanel(this, wxID_ANY, { 0, 0 }, size);
 
-    main_panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxNO_BORDER | wxEXPAND | wxSTAY_ON_TOP);
+    main_panel->SetBackgroundColour({ 0, 0, 255 });
 
 #ifdef WIN32
     SetupDragging(main_panel);
@@ -26,12 +25,31 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
 
     Layout();
     Fit();
+
+    main_panel->Bind(wxEVT_PAINT, &DraggedWindow::OnPaint, this);
+
+//    SetSize(_size);
 }
 
 
 void DraggedWindow::CreateTitleBar()
 {
 
+}
+
+
+void DraggedWindow::SetSize(const wxSize &_size)
+{
+    wxSize new_size = _size;
+    new_size.y += titleHeight;
+
+    wxFrame::SetClientSize(new_size);
+
+    main_panel->SetSize(_size);
+    main_panel->SetPosition( { 0, titleHeight });
+
+    main_panel->Layout();
+    main_panel->Fit();
 }
 
 
@@ -105,6 +123,76 @@ bool DraggedWindow::Show(bool show)
 }
 
 
+void DraggedWindow::OnPaint(wxPaintEvent &)
+{
+    wxPaintDC dc(main_panel);
+
+    int width, height;
+    GetClientSize(&width, &height);
+
+    wxRect titleRect(0, 0, width, titleHeight);
+
+    // Градиентная заливка заголовка
+    wxColour startColor(70, 130, 180);  // Steel blue
+    wxColour endColor(100, 149, 237);   // Cornflower blue
+
+    for (int y = 0; y < titleHeight; y++)
+    {
+        float ratio = (float)y / (float)titleHeight;
+        wxColour color(
+            (uint8)(startColor.Red() * (1 - ratio) + endColor.Red() * ratio),
+            (uint8)(startColor.Green() * (1 - ratio) + endColor.Green() * ratio),
+            (uint8)(startColor.Blue() * (1.0f - ratio) + endColor.Blue() * ratio)
+        );
+        dc.SetPen(wxPen(color));
+        dc.SetBrush(wxBrush(color));
+        dc.DrawLine(0, y, width, y);
+    }
+
+    // Рисуем рамку вокруг заголовка
+    dc.SetPen(wxPen(wxColour(50, 50, 50)));
+    dc.SetBrush(*wxTRANSPARENT_BRUSH);
+    dc.DrawRectangle(0, 0, width, titleHeight);
+
+    // Рисуем текст заголовка
+    dc.SetTextForeground(*wxWHITE);
+    dc.SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
+
+    // Отступаем от левого края 10 пикселей
+    dc.DrawText(title, 10, (titleHeight - dc.GetCharHeight()) / 2);
+
+    // Рисуем кнопку закрытия (квадратик 20x20 справа)
+    int buttonSize = 20;
+    int buttonX = width - buttonSize - 5;  // Отступ 5 пикселей от края
+    int buttonY = (titleHeight - buttonSize) / 2;
+
+    m_closeButtonRect = wxRect(buttonX, buttonY, buttonSize, buttonSize);
+
+    // Рисуем фон кнопки
+    if (m_mouseInCloseButton)
+    {
+        dc.SetBrush(wxBrush(wxColour(220, 80, 80)));  // Красный при наведении
+        dc.SetPen(wxPen(wxColour(200, 60, 60)));
+    }
+    else
+    {
+        dc.SetBrush(wxBrush(wxColour(150, 150, 150)));  // Серый обычно
+        dc.SetPen(wxPen(wxColour(120, 120, 120)));
+    }
+    dc.DrawRectangle(m_closeButtonRect);
+
+    // Рисуем крестик
+    dc.SetPen(wxPen(*wxWHITE, 2));
+    int margin = 5;  // Отступ от краев кнопки для крестика
+
+    // Линии крестика
+    dc.DrawLine(buttonX + margin, buttonY + margin,
+        buttonX + buttonSize - margin, buttonY + buttonSize - margin);
+    dc.DrawLine(buttonX + buttonSize - margin, buttonY + margin,
+        buttonX + margin, buttonY + buttonSize - margin);
+}
+
+
 DraggedDialog::DraggedDialog(const wxString &_title, const wxSize &_size) : DraggedWindow(_title, _size)
 {
     SetWindowStyleFlag(wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE);
@@ -112,6 +200,8 @@ DraggedDialog::DraggedDialog(const wxString &_title, const wxSize &_size) : Drag
     m_parent = GetParent();
     m_modalActive = false;
     m_modalResult = wxID_CANCEL;
+
+    /*
 
     wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
 
@@ -135,6 +225,7 @@ DraggedDialog::DraggedDialog(const wxString &_title, const wxSize &_size) : Drag
     okBtn->Bind(wxEVT_BUTTON, &DraggedDialog::OnOK, this);
     cancelBtn->Bind(wxEVT_BUTTON, &DraggedDialog::OnCancel, this);
     Bind(wxEVT_CLOSE_WINDOW, &DraggedDialog::OnClose, this);
+    */
 
     Layout();
     Fit();
