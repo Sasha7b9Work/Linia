@@ -7,10 +7,12 @@ class Display;
 class IGrid;
 class MainWindow;
 class PanelErrors;
+class PanelCalc;
 
 
 extern Application *TheApp;
 extern Display     *TheDisplay;
 extern IGrid       *TheGrid;
 extern MainWindow  *TheMainWindow;
+extern PanelCalc   *ThePanelCalc;
 extern PanelErrors *ThePanelErrors;

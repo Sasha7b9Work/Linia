@@ -14,8 +14,6 @@ public:
 
     PanelCalc(wxWindow *parent, int x, int w, int h);
 
-    static PanelCalc *self;
-
 private:
 
     wxButton      *btnCursors = nullptr;
