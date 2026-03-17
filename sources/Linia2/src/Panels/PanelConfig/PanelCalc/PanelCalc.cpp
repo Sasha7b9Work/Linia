@@ -52,7 +52,7 @@ void PanelCalc::OnEventButton(wxCommandEvent &event)
         if (wndCursors)
         {
             wndCursors->Show();
-            wndCursors->Raise();
+//            wndCursors->Raise();
             MainWindow::self->Raise();
         }
     }
