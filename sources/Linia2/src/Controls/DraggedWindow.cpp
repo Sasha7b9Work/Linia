@@ -130,7 +130,7 @@ void DraggedWindow::OnPaint(wxPaintEvent &)
     int width, height;
     GetClientSize(&width, &height);
 
-    wxRect titleRect(0, 0, width, titleHeight);
+//    wxRect titleRect(0, 0, width, titleHeight);
 
     // Градиентная заливка заголовка
     wxColour startColor(70, 130, 180);  // Steel blue
