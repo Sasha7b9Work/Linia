@@ -9,6 +9,8 @@ public:
 
     MenuDisplay();
 
+    ~MenuDisplay();
+
 private:
 
     struct StructColor

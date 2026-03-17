@@ -6,4 +6,10 @@
 namespace AutoCursors
 {
     void Draw(const std::vector<GraphMeasure *> &);
+
+    // Открыто какое-то окно поверху. Не нужно отображать курсоры
+    void Ban();
+
+    // Нету открытых окон. Нужно отображать курсоры
+    void Allow();
 }

@@ -5,10 +5,13 @@
 #include "Display/Display.h"
 #include "MainWindow.h"
 #include "Settings/Settings.h"
+#include "Display/Graphics/AutoCursors.h"
 
 
 MenuDisplay::MenuDisplay() : wxMenu()
 {
+    AutoCursors::Ban();
+
     Bind(wxEVT_MENU, &MenuDisplay::OnResetZeroGrid, this, (Append(wxID_ANY, "Сброс"))->GetId());
 
     wxMenuItem *item = AppendCheckItem(wxID_ANY, "Полный экран");
@@ -25,6 +28,12 @@ MenuDisplay::MenuDisplay() : wxMenu()
 
     Bind(wxEVT_MENU, &MenuDisplay::OnSaveGraphic, this, (Append(wxID_ANY, "Сохранить график"))->GetId());
     Bind(wxEVT_MENU, &MenuDisplay::OnResetGraphic, this, (Append(wxID_ANY, "Сбросить график"))->GetId());
+}
+
+
+MenuDisplay::~MenuDisplay()
+{
+    AutoCursors::Allow();
 }
 
 

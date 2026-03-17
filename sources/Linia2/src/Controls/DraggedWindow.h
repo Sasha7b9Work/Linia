@@ -17,7 +17,7 @@ protected:
 
     wxPanel *main_panel = nullptr;
 
-    virtual ~DraggedWindow() {}
+    virtual ~DraggedWindow();
 
     int TopY() const
     {

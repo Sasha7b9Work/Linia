@@ -8,8 +8,19 @@
 #include "Utils/FinderMinMax.h"
 
 
+namespace AutoCursors
+{
+    static bool is_allowed = true;
+}
+
+
 void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
 {
+    if (!is_allowed)
+    {
+        return;
+    }
+
     wxPoint mouse_pos = TheGrid->GetMousePosition();
 
     wxPoint2DDouble value = TheGrid->CoordToValues(mouse_pos);
@@ -74,4 +85,18 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
         Text::SetFont();
         Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(mouse_pos.x + 5, mouse_pos.y - 5, true, true);
     }
+}
+
+
+void AutoCursors::Ban()
+{
+    is_allowed = false;
+
+    TheDisplay->Refresh();
+}
+
+
+void AutoCursors::Allow()
+{
+    is_allowed = true;
 }

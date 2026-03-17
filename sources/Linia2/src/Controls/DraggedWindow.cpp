@@ -3,6 +3,7 @@
 #include "Controls/DraggedWindow.h"
 #include "Settings/Settings.h"
 #include "MainWindow.h"
+#include "Display/Graphics/AutoCursors.h"
 
 
 DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
@@ -11,6 +12,8 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
         wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE | wxSTAY_ON_TOP),
     title(_title)
 {
+    AutoCursors::Ban();
+
     main_panel = new wxPanel(this, wxID_ANY, { 0, 0 }, _size, wxNO_BORDER | wxEXPAND | wxSTAY_ON_TOP);
 
 #ifdef WIN32
@@ -28,6 +31,12 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
     Bind(wxEVT_LEAVE_WINDOW, &DraggedWindow::OnEventMouseLeave, this);
 
     SetSize(_size);
+}
+
+
+DraggedWindow::~DraggedWindow()
+{
+    AutoCursors::Allow();
 }
 
 
