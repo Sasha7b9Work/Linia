@@ -5,28 +5,41 @@
 #include "Display/Display.h"
 
 
-WindowCursors::WindowCursors(const wxString &_title) : DraggedDialog(_title, { 300, 200 })
+WindowCursors::WindowCursors(const wxString &_title) : DraggedDialog(_title, { 200, 300 })
 {
     SetPosition(SET::GUI::cursors_pos.Get());
 
     int x = 10;
-    int y = TopY();
+    int y = 20;
     int dy = 25;
 
     wxWindow *wnd = MainWidget();
 
-    chbTrackX = new wxCheckBox(wnd, wxID_ANY, "Отслеживать по X", { x, y });
-    chbTrackX->SetValue(SET::GUI::track_x);
+    wxSize size = wnd->GetClientSize();
 
-    y += dy;
+    const int d = 5;
 
-    chbTrackY = new wxCheckBox(wnd, wxID_ANY, "Отслеживать по Y", { x, y });
-    chbTrackY->SetValue(SET::GUI::track_y);
+    size.x -= 5 + 5;
+    size.y = 90;
 
-    y += dy;
+    wxStaticBox *boxAuto = new wxStaticBox(wnd, wxID_ANY, "Автоматические", { d, TopY() }, size);
 
-    chbTrackMouse = new wxCheckBox(wnd, wxID_ANY, "Указатель мыши", { x, y });
-    chbTrackMouse->SetValue(SET::GUI::track_mouse);
+    {
+        chbTrackX = new wxCheckBox(boxAuto, wxID_ANY, "Отслеживать по X", { x, y });
+        chbTrackX->SetValue(SET::GUI::track_x);
+
+        y += dy;
+
+        chbTrackY = new wxCheckBox(boxAuto, wxID_ANY, "Отслеживать по Y", { x, y });
+        chbTrackY->SetValue(SET::GUI::track_y);
+
+        y += dy;
+
+        chbTrackMouse = new wxCheckBox(boxAuto, wxID_ANY, "Указатель мыши", { x, y });
+        chbTrackMouse->SetValue(SET::GUI::track_mouse);
+    }
+
+    wxStaticBox *boxManual = new wxStaticBox(wnd, wxID_ANY, "Управляемые", { d, boxAuto->GetPosition().y + boxAuto->GetSize().y + d }, size);
 
     Bind(wxEVT_CHECKBOX, &WindowCursors::OnEventCheckBox, this);
 }
