@@ -7,7 +7,7 @@ class DraggedWindow : public wxFrame
 {
 public:
 
-    DraggedWindow();
+    DraggedWindow(const wxString &);
 
     virtual bool Show(bool = true) override;
 
@@ -39,7 +39,7 @@ class DraggedDialog : public DraggedWindow
 {
 public:
 
-    DraggedDialog();
+    DraggedDialog(const wxString &);
 
     int ShowModal();
 

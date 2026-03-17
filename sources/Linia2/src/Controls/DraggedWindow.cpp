@@ -5,10 +5,11 @@
 #include "MainWindow.h"
 
 
-DraggedWindow::DraggedWindow()
+DraggedWindow::DraggedWindow(const wxString &_title)
     : wxFrame(TheMainWindow, wxID_ANY, "WindowCalculation",
         wxPoint(100, 100), wxSize(450, 350),
-        wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE | wxSTAY_ON_TOP)
+        wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE | wxSTAY_ON_TOP),
+    title(_title)
 {
     // Отключаем стандартный заголовок
     SetWindowStyleFlag(wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE);
@@ -102,7 +103,7 @@ bool DraggedWindow::Show(bool show)
 }
 
 
-DraggedDialog::DraggedDialog() : DraggedWindow()
+DraggedDialog::DraggedDialog(const wxString &_title) : DraggedWindow(_title)
 {
     SetWindowStyleFlag(wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE);
 
