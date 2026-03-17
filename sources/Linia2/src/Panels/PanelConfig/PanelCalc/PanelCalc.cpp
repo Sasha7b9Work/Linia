@@ -56,5 +56,13 @@ void PanelCalc::OnEventButton(wxCommandEvent &event)
             MainWindow::self->Raise();
             MainWindow::self->ShowFullScreen(true);
         }
+
+        wxWindow *topLevel = wxTheApp->GetTopWindow();
+        if (topLevel)
+        {
+            topLevel->Raise();
+        }
     }
+
+    event.Skip();
 }
