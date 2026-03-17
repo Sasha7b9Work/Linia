@@ -282,10 +282,7 @@ void MainWindow::HideSystemPanel()
     // Создаем симулятор действий
     wxUIActionSimulator sim;
 
-    // Получаем центр окна или конкретную точку
-    wxRect rect = TheMainWindow->GetRect();
-    wxPoint center(rect.GetX() + rect.GetWidth() / 2,
-        rect.GetY() + rect.GetHeight() / 2);
+    wxPoint center(wxGetMousePosition());
 
     // Перемещаем мышь в центр окна
     sim.MouseMove(center);
