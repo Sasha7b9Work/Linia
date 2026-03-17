@@ -13,7 +13,7 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
 {
     wxSize size = GetClientSize();
 
-    main_panel = new wxPanel(this, wxID_ANY, { 0, 0 }, size);
+    main_panel = new wxPanel(this, wxID_ANY, { 0, 0 }, size, wxEXPAND);
 
     main_panel->SetBackgroundColour({ 0, 0, 255 });
 
