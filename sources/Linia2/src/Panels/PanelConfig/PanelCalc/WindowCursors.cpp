@@ -3,6 +3,7 @@
 #include "Panels/PanelConfig/PanelCalc/WindowCursors.h"
 #include "Settings/Settings.h"
 #include "Display/Display.h"
+#include "Utils/SystemDepend.h"
 
 
 WindowCursors::WindowCursors(const wxString &_title) : DraggedDialog(_title, { 200, 300 })
@@ -25,17 +26,17 @@ WindowCursors::WindowCursors(const wxString &_title) : DraggedDialog(_title, { 2
     wxStaticBox *boxAuto = new wxStaticBox(wnd, wxID_ANY, "Автоматические", { d, TopY() }, size);
 
     {
-        chbTrackX = new wxCheckBox(boxAuto, wxID_ANY, "Отслеживать по X", { x, y });
+        chbTrackX = new wxCheckBox(boxAuto, wxID_ANY, "Отслеживать по X", { x, SD::Y_SB(y) });
         chbTrackX->SetValue(SET::GUI::track_x);
 
         y += dy;
 
-        chbTrackY = new wxCheckBox(boxAuto, wxID_ANY, "Отслеживать по Y", { x, y });
+        chbTrackY = new wxCheckBox(boxAuto, wxID_ANY, "Отслеживать по Y", { x, SD::Y_SB(y) });
         chbTrackY->SetValue(SET::GUI::track_y);
 
         y += dy;
 
-        chbTrackMouse = new wxCheckBox(boxAuto, wxID_ANY, "Указатель мыши", { x, y });
+        chbTrackMouse = new wxCheckBox(boxAuto, wxID_ANY, "Указатель мыши", { x, SD::Y_SB(y) });
         chbTrackMouse->SetValue(SET::GUI::track_mouse);
     }
 
