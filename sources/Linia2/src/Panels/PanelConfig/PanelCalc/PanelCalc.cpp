@@ -51,7 +51,7 @@ void PanelCalc::OnEventButton(wxCommandEvent &event)
 
         if (wndCursors)
         {
-            wndCursors->Show();
+            wndCursors->ShowModal();
         }
     }
 

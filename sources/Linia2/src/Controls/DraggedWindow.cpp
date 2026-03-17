@@ -272,7 +272,7 @@ void DraggedDialog::OnActivate(wxActivateEvent &event)
         // Если модальное окно теряет активацию, возвращаем его сверху
         CallAfter([this]()
             {
-                if (m_isModal)
+                if (m_isModal && IsShown())
                 {
                     ShowWindowWithXFCEFix();
                 }
