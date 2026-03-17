@@ -44,7 +44,7 @@ void PanelModeLower::OnEventButton(wxCommandEvent &event)
 {
     if (event.GetId() == btnExit->GetId())
     {
-        MainWindow::self->Close();
+        TheMainWindow->Close();
     }
 
     event.Skip();

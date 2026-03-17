@@ -147,7 +147,7 @@ void Application::OnTimer(wxTimerEvent &)
     {
         I_IPPP::impl->Update();
 
-        MainWindow::self->Update();
+        TheMainWindow->Update();
 
         mutex.unlock();
     };

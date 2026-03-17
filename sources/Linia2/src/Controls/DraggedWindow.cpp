@@ -99,7 +99,7 @@ bool DraggedWindow::Show(bool show)
 {
     bool result = wxFrame::Show(show);
 
-    MainWindow::self->HideSystemPanel();
+    TheMainWindow->HideSystemPanel();
 
     return result;
 }

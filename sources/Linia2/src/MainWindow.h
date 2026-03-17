@@ -51,8 +51,6 @@ public:
     void OnQuit(wxCommandEvent &event);
     void OnAbout(wxCommandEvent &event);
 
-    static MainWindow *self;
-
     void OnEventCloseWindow(wxCloseEvent &);
 
     void SetMode(ModeMainWindow::E);

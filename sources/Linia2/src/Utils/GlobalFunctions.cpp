@@ -147,7 +147,7 @@ wxPoint GF::GetCoordCenter(const wxSize &size)
 
     if (!IsBoardPCM())
     {
-        pos_win += MainWindow::self->GetPosition();
+        pos_win += TheMainWindow->GetPosition();
     }
 
     return pos_win;

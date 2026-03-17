@@ -64,7 +64,7 @@ void PanelMenu::OnEventButton(wxCommandEvent &event)
     }
     else if (id == btnArchiv->GetId())
     {
-        MainWindow::self->SetMode(ModeMainWindow::ReferenceGraphs);
+        TheMainWindow->SetMode(ModeMainWindow::ReferenceGraphs);
     }
     else if (id == btnTable->GetId())
     {
@@ -76,7 +76,7 @@ void PanelMenu::OnEventButton(wxCommandEvent &event)
     }
     else if (id == btnDebug->GetId())
     {
-        MainWindow::self->SetMode(ModeMainWindow::Debug);
+        TheMainWindow->SetMode(ModeMainWindow::Debug);
     }
 }
 

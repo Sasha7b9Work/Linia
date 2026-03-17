@@ -70,7 +70,7 @@ void PageChip::OnMenuEvent(wxCommandEvent &event)
 
     if (id == itemReturn->GetId())
     {
-        MainWindow::self->SetMode(ModeMainWindow::Standard);
+        TheMainWindow->SetMode(ModeMainWindow::Standard);
     }
 }
 

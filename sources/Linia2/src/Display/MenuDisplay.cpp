@@ -122,7 +122,7 @@ void MenuDisplay::OnResetZeroGrid(wxCommandEvent &)
 
 void MenuDisplay::OnFullScreen(wxCommandEvent &event)
 {
-    MainWindow::self->SetMode(event.IsChecked() ? ModeMainWindow::FullGraph : ModeMainWindow::Standard);
+    TheMainWindow->SetMode(event.IsChecked() ? ModeMainWindow::FullGraph : ModeMainWindow::Standard);
 
     IGrid::self->ResetCenter();
 

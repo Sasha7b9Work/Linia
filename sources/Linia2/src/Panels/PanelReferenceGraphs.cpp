@@ -91,7 +91,7 @@ void PanelReferenceGraph::OnEventButton(wxCommandEvent &event)
 
     if (id == btnReturn->GetId())
     {
-        MainWindow::self->SetMode(ModeMainWindow::Standard);
+        TheMainWindow->SetMode(ModeMainWindow::Standard);
     }
 }
 
@@ -141,7 +141,7 @@ void PanelReferenceGraph::OnEventMenu(wxCommandEvent &event)
 
     if (id == itemReturn->GetId())
     {
-        MainWindow::self->SetMode(ModeMainWindow::Standard);
+        TheMainWindow->SetMode(ModeMainWindow::Standard);
     }
 }
 

@@ -45,7 +45,7 @@ void PanelRight::OnEventButton(wxCommandEvent &event)
 
     if (id == btnReturn->GetId())
     {
-        MainWindow::self->SetMode(ModeMainWindow::Standard);
+        TheMainWindow->SetMode(ModeMainWindow::Standard);
     }
     else if (id == btnStart->GetId())
     {

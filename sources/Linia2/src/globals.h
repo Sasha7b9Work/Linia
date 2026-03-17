@@ -3,6 +3,7 @@
 
 
 class Display;
+class MainWindow;
 
-
-extern Display *TheDisplay;
+extern Display    *TheDisplay;
+extern MainWindow *TheMainWindow;

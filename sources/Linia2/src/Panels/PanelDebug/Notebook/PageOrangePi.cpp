@@ -254,7 +254,7 @@ void PageOrangePi::OnEventButton(wxCommandEvent &event)
     }
     else if (id == btnReturn->GetId())
     {
-        MainWindow::self->SetMode(ModeMainWindow::Standard);
+        TheMainWindow->SetMode(ModeMainWindow::Standard);
     }
     else if (id == btnReinitUart->GetId())
     {

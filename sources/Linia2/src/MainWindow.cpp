@@ -20,14 +20,16 @@
 #include "IPPP/Tests/Tests.h"
 
 
-MainWindow *MainWindow::self = nullptr;
+MainWindow *TheMainWindow = nullptr;
+
+
 ModeMainWindow::E ModeMainWindow::current = ModeMainWindow::Standard;
 
 
 MainWindow::MainWindow(const wxString &title)
     : wxFrame((wxFrame *)NULL, wxID_ANY, title, wxDefaultPosition, wxDefaultSize)
 {
-    self = this;
+    TheMainWindow = this;
 
 #ifdef WIN32
     SetIcon(wxICON(MAIN_ICON));
@@ -175,7 +177,7 @@ void MainWindow::OnQuit(wxCommandEvent &WXUNUSED(event))
 {
     LOG_WRITE("Frame::OnQuit()");
 
-    self = nullptr;
+    TheMainWindow = nullptr;
 
     Close(true);
 }
@@ -201,7 +203,7 @@ void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 
     SET::GUI::position.Set(wxWindow::GetPosition());
 
-    self = nullptr;
+    TheMainWindow = nullptr;
 
     Application::self->Disable();
 

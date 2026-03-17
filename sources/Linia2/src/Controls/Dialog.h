@@ -28,8 +28,8 @@ public:
         }
         else
         {
-            int win_bottom = MainWindow::self->GetPosition().y + MainWindow::self->GetSize().y;     // Координата нижней кромки окна
-            int win_left = MainWindow::self->GetPosition().x;
+            int win_bottom = TheMainWindow->GetPosition().y + TheMainWindow->GetSize().y;     // Координата нижней кромки окна
+            int win_left = TheMainWindow->GetPosition().x;
 
             int bottom = pos.y + GetSize().y;
             int left = pos.x;
@@ -48,7 +48,7 @@ public:
 
         wxDialog::ShowModal();
 
-        MainWindow::self->HideSystemPanel();
+        TheMainWindow->HideSystemPanel();
     }
 
 protected:
