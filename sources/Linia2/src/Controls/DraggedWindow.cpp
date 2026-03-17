@@ -271,7 +271,6 @@ DraggedDialog::DraggedDialog(const wxString &_title, const wxSize &_size) : Drag
 
 DraggedDialog::~DraggedDialog()
 {
-    int i = 0;
 }
 
 
