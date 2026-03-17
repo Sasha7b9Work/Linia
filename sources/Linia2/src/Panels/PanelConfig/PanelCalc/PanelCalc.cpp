@@ -54,6 +54,7 @@ void PanelCalc::OnEventButton(wxCommandEvent &event)
             wndCursors->Show();
 //            wndCursors->Raise();
             MainWindow::self->Raise();
+            MainWindow::self->ShowFullScreen(true);
         }
     }
 }
