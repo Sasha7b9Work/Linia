@@ -34,5 +34,6 @@ namespace SET
         extern Value<bool>      track_y;                    // и Y
         extern Value<bool>      track_mouse;                // и положение мыши
         extern Value<wxPoint>   calculation_pos;            // Позиция окна РАСЧЁТ
+        extern Value<wxPoint>   cursors_pos;                // Позиция окна КУРСОРЫ
     }
 };

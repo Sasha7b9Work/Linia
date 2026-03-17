@@ -4,7 +4,6 @@
 #include "MainWindow.h"
 #include "Panels/PanelMenu/PanelMenu.h"
 #include "Panels/PanelConfig/PanelCalc/WindowCursors.h"
-#include "Panels/WindowCalculation/WindowCalculation.h"
 
 
 class PanelCalc : public wxPanel
@@ -19,8 +18,8 @@ public:
 
 private:
 
-    wxButton          *btnCursors = nullptr;
-    WindowCalculation *wndCursors = nullptr;
+    wxButton      *btnCursors = nullptr;
+    WindowCursors *wndCursors = nullptr;
 
     void OnEventButton(wxCommandEvent &);
 };

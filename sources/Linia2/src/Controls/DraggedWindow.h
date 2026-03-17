@@ -17,6 +17,8 @@ protected:
 
     wxPanel *main_panel = nullptr;
 
+    virtual ~DraggedWindow() {}
+
 private:
 
     wxPanel *titleBar = nullptr;
@@ -47,6 +49,10 @@ public:
     DraggedDialog(const wxString &, const wxSize &);
 
     int ShowModal();
+
+protected:
+
+    virtual ~DraggedDialog() {}
 
 private:
 

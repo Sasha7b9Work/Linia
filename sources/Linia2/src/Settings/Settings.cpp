@@ -31,6 +31,7 @@ namespace SET
         Value<bool>      track_y("track_y", false);
         Value<bool>      track_mouse("track_mouse", false);
         Value<wxPoint>   calculation_pos{ "calculation_pos", {10, 10} };
+        Value<wxPoint>   cursors_pos{ "cursors_pos", {10, 10} };
     }
 }
 
@@ -60,6 +61,7 @@ void SET::GUI::Load()
     track_y.Load();
     track_mouse.Load();
     calculation_pos.Load();
+    cursors_pos.Load();
 }
 
 
@@ -88,4 +90,5 @@ void SET::GUI::Save()
     track_y.Save();
     track_mouse.Save();
     calculation_pos.Save();
+    cursors_pos.Save();
 }

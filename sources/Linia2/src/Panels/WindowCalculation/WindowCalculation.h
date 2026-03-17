@@ -11,6 +11,8 @@ public:
 
 private:
 
+    virtual ~WindowCalculation() {}
+
     void CreateTitleBar(wxWindow *, wxBoxSizer *);
 
     void CreateMainPanel2();

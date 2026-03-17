@@ -40,7 +40,7 @@ void PanelCalc::OnEventButton(wxCommandEvent &event)
     {
         if (!wndCursors)
         {
-            wndCursors = new WindowCalculation("Курсоры", { 450, 350 });
+            wndCursors = new WindowCursors("Курсоры", { 450, 350 });
 
             wndCursors->Bind(wxEVT_CLOSE_WINDOW, [this](wxCloseEvent &event)
                 {
