@@ -27,6 +27,8 @@ namespace SET
         Value<uint>      color_secant("color_secant", 0);
 
         Value<int>       size_point("size_point", 2);
+        Value<bool>      cursors_x("cursors_x", false);
+        Value<bool>      cursors_y("cursors_y", false);
         Value<bool>      track_x("track_x", false);
         Value<bool>      track_y("track_y", false);
         Value<bool>      track_mouse("track_mouse", false);
@@ -57,6 +59,8 @@ void SET::GUI::Load()
     color_secant.Load();
 
     size_point.Load();
+    cursors_x.Load();
+    cursors_y.Load();
     track_x.Load();
     track_y.Load();
     track_mouse.Load();
@@ -86,6 +90,8 @@ void SET::GUI::Save()
     color_secant.Save();
 
     size_point.Save();
+    cursors_x.Save();
+    cursors_y.Save();
     track_x.Save();
     track_y.Save();
     track_mouse.Save();

@@ -41,7 +41,18 @@ WindowCursors::WindowCursors(const wxString &_title) : DraggedDialog(_title, { 2
     }
 
     wxStaticBox *boxManual = new wxStaticBox(wnd, wxID_ANY, "Управляемые", { d, boxAuto->GetPosition().y + boxAuto->GetSize().y + d }, size);
-    (void)boxManual;
+
+    y = 22;
+
+    {
+        chbCursorsX = new wxCheckBox(boxManual, wxID_ANY, "X", { x, SD::Y_SB(y) });
+        chbCursorsX->SetValue(SET::GUI::cursors_x);
+
+        y += dy;
+
+        chbCursorsY = new wxCheckBox(boxManual, wxID_ANY, "Y", { x, SD::Y_SB(y) });
+        chbCursorsY->SetValue(SET::GUI::cursors_y);
+    }
 
     Bind(wxEVT_CHECKBOX, &WindowCursors::OnEventCheckBox, this);
 }
@@ -71,6 +82,16 @@ void WindowCursors::OnEventCheckBox(wxCommandEvent &event)
     else if (id == chbTrackMouse->GetId())
     {
         SET::GUI::track_mouse.Set(check);
+        TheDisplay->Refresh();
+    }
+    else if (id == chbCursorsX->GetId())
+    {
+        SET::GUI::cursors_x.Set(check);
+        TheDisplay->Refresh();
+    }
+    else if (id == chbCursorsY->GetId())
+    {
+        SET::GUI::cursors_y.Set(check);
         TheDisplay->Refresh();
     }
 }

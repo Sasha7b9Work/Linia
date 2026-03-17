@@ -13,7 +13,9 @@ private:
 
     wxCheckBox *chbTrackX = nullptr,
         *chbTrackY = nullptr,
-        *chbTrackMouse = nullptr;
+        *chbTrackMouse = nullptr,
+        *chbCursorsX = nullptr,
+        *chbCursorsY = nullptr;
 
     virtual ~WindowCursors() override;
 
