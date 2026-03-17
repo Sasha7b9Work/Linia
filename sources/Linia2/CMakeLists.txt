@@ -211,9 +211,9 @@ if(WIN32)
     # Копируем в рабочий каталог
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy $(OutputPath)\\$(PROJECT_NAME) . /Y)
 else()
-#    find_package(PkgConfig REQUIRED)
+    find_package(PkgConfig REQUIRED)
 
-#    pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
+    pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
 
     if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
         pkg_check_modules(GPIOD REQUIRED libgpiod)
