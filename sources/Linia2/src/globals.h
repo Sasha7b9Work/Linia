@@ -3,7 +3,9 @@
 
 
 class Display;
+class IGrid;
 class MainWindow;
 
 extern Display    *TheDisplay;
+extern IGrid      *TheGrid;
 extern MainWindow *TheMainWindow;

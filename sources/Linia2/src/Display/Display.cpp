@@ -68,7 +68,7 @@ void Display::ReInit()
 Display::~Display()
 {
     SAFE_DELETE(bitmap);
-    SAFE_DELETE(IGrid::self);
+    SAFE_DELETE(TheGrid);
     SAFE_DELETE(panel_errors);
 }
 
@@ -134,7 +134,7 @@ void Display::OnEventMouseDown(wxMouseEvent &event)
 
     SetCursor(wxCursor(wxCURSOR_HAND));
 
-    IGrid::self->OnMouseDown();
+    TheGrid->OnMouseDown();
 
     Refresh();
 }
@@ -162,7 +162,7 @@ void Display::OnEventMouseUp(wxMouseEvent &)
 
     SetCursor(wxCursor(wxCURSOR_ARROW));
 
-    IGrid::self->OnMouseUp();
+    TheGrid->OnMouseUp();
 
     Refresh();
 }
@@ -178,11 +178,11 @@ void Display::OnEventMouseMove(wxMouseEvent &event)
 
         if (event.GetModifiers() == wxMOD_CONTROL)
         {
-            IGrid::self->MoveImageOn(delta);
+            TheGrid->MoveImageOn(delta);
         }
         else
         {
-            IGrid::self->MoveCenterOn(delta);
+            TheGrid->MoveCenterOn(delta);
         }
 
         pos_mouse_down = position;
@@ -194,7 +194,7 @@ void Display::OnEventMouseMove(wxMouseEvent &event)
     }
     else                                            // Отслеживание координат
     {
-        IGrid::self->SetNewMousePosition(position);
+        TheGrid->SetNewMousePosition(position);
     }
 
     Refresh();
@@ -205,12 +205,12 @@ void Display::OnEventMouseWheel(wxMouseEvent &event)
 {
     if (event.GetModifiers() == wxMOD_CONTROL)
     {
-        IGrid::self->ScaleGridOn(event.GetPosition(), event.GetWheelRotation());
+        TheGrid->ScaleGridOn(event.GetPosition(), event.GetWheelRotation());
     }
     else
     {
-        IGrid::self->RangeGridOnX(event.GetWheelRotation());
-        IGrid::self->RangeGridOnY(event.GetWheelRotation());
+        TheGrid->RangeGridOnX(event.GetWheelRotation());
+        TheGrid->RangeGridOnY(event.GetWheelRotation());
     }
 
     Refresh();
@@ -228,19 +228,19 @@ void Display::OnEventButton(wxCommandEvent &event)
     }
     else if (id == btnLessX->GetId())
     {
-        IGrid::self->RangeGridOnX(-1);
+        TheGrid->RangeGridOnX(-1);
     }
     else if (id == btnMoreX->GetId())
     {
-        IGrid::self->RangeGridOnX(+1);
+        TheGrid->RangeGridOnX(+1);
     }
     else if (id == btnLessY->GetId())
     {
-        IGrid::self->RangeGridOnY(-1);
+        TheGrid->RangeGridOnY(-1);
     }
     else if (id == btnMoreY->GetId())
     {
-        IGrid::self->RangeGridOnY(+1);
+        TheGrid->RangeGridOnY(+1);
     }
 }
 
@@ -265,7 +265,7 @@ void Display::OnEventPaint(wxPaintEvent &)
 
     FillRectangle(0, 0, GetDrawingSize().x, GetDrawingSize().y, SET::GUI::color_background.Get());
 
-    IGrid::self->Draw(entities);
+    TheGrid->Draw(entities);
 
     EndPaint();
 

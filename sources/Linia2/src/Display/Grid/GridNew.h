@@ -159,11 +159,11 @@ private:
     Offset  offset;
     Range   rangeX{ "Uc", "V", offset.GetX(), []()->int
         {
-            return IGrid::self->NumCellsX();
+            return TheGrid->NumCellsX();
         } };
     Range   rangeY{ "Ic", "A", offset.GetY(), []() ->int
         {
-            return IGrid::self->NumCellsY();
+            return TheGrid->NumCellsY();
         } };
 
     // d - расстояние между точками

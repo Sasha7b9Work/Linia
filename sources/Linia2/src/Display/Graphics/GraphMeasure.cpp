@@ -18,8 +18,8 @@ void GraphMeasure::Draw()
 
     rel_points.clear();
 
-    wxPoint2DDouble range_x = Grid::self->GetRangeX();
-    wxPoint2DDouble range_y = Grid::self->GetRangeY();
+    wxPoint2DDouble range_x = TheGrid->GetRangeX();
+    wxPoint2DDouble range_y = TheGrid->GetRangeY();
 
     bool very_big = false;
 
@@ -34,7 +34,7 @@ void GraphMeasure::Draw()
             very_big = true;
         }
 
-        wxPoint point = Grid::self->ValuesToCoord(coord.m_x, coord.m_y);
+        wxPoint point = TheGrid->ValuesToCoord(coord.m_x, coord.m_y);
 
         rel_points.push_back(point);
     }

@@ -14,8 +14,6 @@ public:
 
     static void Create();
 
-    static IGrid *self;
-
     virtual void OnChangedOffsetMeasure(const wxPoint &) = 0;
     virtual void OnMouseDown() = 0;
     virtual void OnMouseUp() = 0;

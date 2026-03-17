@@ -10,14 +10,14 @@
 #include "Display/Graphics/AutoCursors.h"
 
 
-IGrid *IGrid::self = nullptr;
+IGrid *TheGrid = nullptr;
 
 
 void IGrid::Create()
 {
-    if (!self)
+    if (!TheGrid)
     {
-        self = new GridNew();
+        TheGrid = new GridNew();
     }
 }
 

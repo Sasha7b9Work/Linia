@@ -116,7 +116,7 @@ void MenuDisplay::AppendMenuFacade()
 
 void MenuDisplay::OnResetZeroGrid(wxCommandEvent &)
 {
-    IGrid::self->Reset();
+    TheGrid->Reset();
 }
 
 
@@ -124,7 +124,7 @@ void MenuDisplay::OnFullScreen(wxCommandEvent &event)
 {
     TheMainWindow->SetMode(event.IsChecked() ? ModeMainWindow::FullGraph : ModeMainWindow::Standard);
 
-    IGrid::self->ResetCenter();
+    TheGrid->ResetCenter();
 
     TheDisplay->Refresh();
 }
