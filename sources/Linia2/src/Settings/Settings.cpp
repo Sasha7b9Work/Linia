@@ -13,11 +13,11 @@ namespace SET
         Value<wxPoint>   size_console("gui_size_console", { 400, 400 });
         Value<wxPoint>   pos_list("gui_pos_list", { 10, 10 });
         Value<wxPoint>   size_list("gui_size_list", { 400, 400 });
-        Value<bool>      maximized_list("gui_maximized_list", false);
-        Value<bool>      maximized_console("gui_maximized_console", false);
+        ValueBool        maximized_list("gui_maximized_list", false);
+        ValueBool        maximized_console("gui_maximized_console", false);
         Value<int>       current_page_notebook("gui_current_page_notebook", 0);
         Value<int>       serial_port_num("serial_port_num", 0);
-        Value<bool>      debug_mode("debug_mode", false);
+        ValueBool        debug_mode("debug_mode", false);
 
         Value<uint>      color_background("color_background", 0xFFFFFF);
         Value<uint>      color_grid("color_grid", 0);
@@ -27,11 +27,11 @@ namespace SET
         Value<uint>      color_secant("color_secant", 0);
 
         Value<int>       size_point("size_point", 2);
-        Value<bool>      cursors_x("cursors_x", false);
-        Value<bool>      cursors_y("cursors_y", false);
-        Value<bool>      track_x("track_x", false);
-        Value<bool>      track_y("track_y", false);
-        Value<bool>      track_mouse("track_mouse", false);
+        ValueBool        cursors_x("cursors_x", false);
+        ValueBool        cursors_y("cursors_y", false);
+        ValueBool        track_x("track_x", false);
+        ValueBool        track_y("track_y", false);
+        ValueBool        track_mouse("track_mouse", false);
         Value<wxPoint>   calculation_pos{ "calculation_pos", {10, 10} };
         Value<wxPoint>   cursors_pos{ "cursors_pos", {10, 10} };
     }

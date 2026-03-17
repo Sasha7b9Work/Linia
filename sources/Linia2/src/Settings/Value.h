@@ -43,12 +43,12 @@ public:
         }
     }
 
-    void Load()
+    virtual void Load()
     {
         value = Config::Read(key, default_value);
     }
 
-    void Save()
+    virtual void Save()
     {
         Set(value);
     }
@@ -138,145 +138,9 @@ private:
 };
 
 
-
-// Значение для выбора из ComboBox
-class ValueComboBox : public Value<int>
+class ValueBool : public Value<bool>
 {
 public:
-    ValueComboBox(pchar _key, int index) :
-        Value<int>(_key, index, nullptr, 0)
-    {
-    }
-    int GetIndex() const
-    {
-        return Value<int>::Get();
-    }
-    void SetIndex(int index)
-    {
-        Value<int>::Set(index);
-    }
-    // Установить значение из элемента управления
-    virtual void SetFromControl() override
-    {
-        Value<int>::Set(GF::FindComboBox(window, id)->GetCurrentSelection());
-    }
-    int GetDefaultIndex() const
-    {
-        return default_value;
-    }
-
-protected:
-
-    virtual void LoadToWindow() override
-    {
-        if (window)
-        {
-            GF::FindComboBox(window, id)->SetCurrentSelection(GetIndex());
-        }
-    }
-
+    ValueBool(const wxString &_key, const bool &_def) : Value<bool>(_key, _def) { }
 private:
-    int Get() const
-    {
-        return 0;
-    }
-};
-
-
-class ValueCheckBox : public Value<bool>
-{
-public:
-    ValueCheckBox(pchar _key, bool def) :
-        Value<bool>(_key, def, nullptr, 0)
-    {
-    }
-    void Load(wxWindow *parent, int _id = -1)
-    {
-        Value<bool>::Load();
-
-        if (parent)
-        {
-            GF::FindCheckBox(parent, _id)->SetValue(Get());
-        }
-    }
-    virtual void SetFromControl() override
-    {
-        Value<bool>::Set(GF::FindCheckBox(window, id)->GetValue());
-    }
-    void ApplyToGUI(wxWindow *parent, int _id)
-    {
-        GF::SendCommandEvent(parent, _id, wxEVT_CHECKBOX, Get());
-    }
-protected:
-    virtual void LoadToWindow() override
-    {
-        if (window)
-        {
-            GF::FindCheckBox(window, id)->SetValue(Get());
-        }
-    }
-private:
-};
-
-
-// Значение из TextCtrl
-class ValueTextCtrl : public Value<int>
-{
-public:
-    ValueTextCtrl(pchar _key, int def) : Value<int>(_key, def, nullptr, 0)
-    {
-    }
-    wxString ToString() const
-    {
-        return wxString::Format("%d", Get());
-    }
-    virtual void SetFromControl() override
-    {
-        Set(wxAtoi(GF::FindTextCtrl(window, id)->GetValue()));
-    }
-protected:
-    virtual void LoadToWindow() override
-    {
-        if (window)
-        {
-            GF::FindTextCtrl(window, id)->SetValue(ToString());
-        }
-    }
-};
-
-
-class ValueSpinCtrl : public Value<int>
-{
-public:
-    ValueSpinCtrl(pchar _key, int value) : Value<int>(_key, value, nullptr, 0)
-    {
-    }
-    wxString ToString() const
-    {
-        return wxString::Format("%d", Get());
-    }
-    int GetIntValue() const
-    {
-        return Value<int>::Get();
-    }
-    void SetIntValue(int val)
-    {
-        Value<int>::Set(val);
-    }
-    virtual void SetFromControl() override
-    {
-        Set(GF::FindSpinCtrl(window, id)->GetValue());
-    }
-    int GetDefaultValue() const
-    {
-        return default_value;
-    }
-protected:
-    virtual void LoadToWindow() override
-    {
-        if (window)
-        {
-            GF::FindSpinCtrl(window, id)->SetValue(Get());
-        }
-    }
 };
