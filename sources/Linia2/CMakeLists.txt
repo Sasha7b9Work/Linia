@@ -240,7 +240,7 @@ else()
         wx_baseu-3.3
         wx_baseu_net-3.3
 #        pthread
-        Xtst
+#       Xtst
         ${GTK3_LIBRARIES}
         ${X11_LIBRARY}
         ${XKBCOMMON_LIBRARY}
