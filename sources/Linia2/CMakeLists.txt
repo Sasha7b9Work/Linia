@@ -213,8 +213,6 @@ if(WIN32)
 else()
     find_package(PkgConfig REQUIRED)
 
-    pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
-
     find_library(X11_LIBRARY X11 REQUIRED)
     find_library(XKBCOMMON_LIBRARY xkbcommon REQUIRED)
     find_library(PNG_LIBRARY png REQUIRED)
@@ -239,6 +237,7 @@ else()
         wx_gtk3u_core-3.3
         wx_baseu-3.3
         wx_baseu_net-3.3
+        gtk+-3.0
 #        pthread
 #       Xtst
         ${GTK3_LIBRARIES}
