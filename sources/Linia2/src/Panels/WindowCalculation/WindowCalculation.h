@@ -3,7 +3,7 @@
 #include "Controls/DraggedWindow.h"
 
 
-class WindowCalculation : public DraggedWindow
+class WindowCalculation : public DraggedDialog
 {
 public:
 
