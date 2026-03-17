@@ -258,6 +258,8 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
 
 void MainWindow::HideSystemPanel()
 {
+    Raise();
+
 #ifdef __WXGTK__
     GtkWidget *widget = GetHandle(); // В wxGTK GetHandle() возвращает GtkWidget*
     if (widget && gtk_widget_get_window(widget))
