@@ -4,18 +4,6 @@
 #include "Settings/Settings.h"
 
 
-template<class T>
-Value<T>::Value(const wxString &_key, const T &_default_value, wxWindow *_window, int _id, bool _serialiazed) : //-V730
-    window(_window),
-    id(_id),
-    key(_key),
-    default_value(_default_value),
-    stored_value(_default_value),
-    serialiazed(_serialiazed)
-{
-}
-
-
 ValueBool::ValueBool(const wxString &_key, const bool &_def) : Value<bool>(_key, _def)
 {
     SET::AppendValue(this);
