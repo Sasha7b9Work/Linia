@@ -4,7 +4,7 @@
 #include "Settings/Settings.h"
 
 
-WindowCalculation::WindowCalculation(wxFrame *parent) : DraggedDialog(parent)
+WindowCalculation::WindowCalculation() : DraggedDialog()
 {
     Move(SET::GUI::calculation_pos.Get());
 }

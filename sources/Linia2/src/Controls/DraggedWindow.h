@@ -7,7 +7,7 @@ class DraggedWindow : public wxFrame
 {
 public:
 
-    DraggedWindow(wxFrame *);
+    DraggedWindow();
 
     virtual bool Show(bool = true) override;
 
@@ -30,6 +30,7 @@ private:
     wxPanel *titleBar = nullptr;
     bool     dragging = false;
     wxPoint  dragStart;
+    wxString title;
 };
 
 
@@ -38,7 +39,7 @@ class DraggedDialog : public DraggedWindow
 {
 public:
 
-    DraggedDialog(wxFrame *);
+    DraggedDialog();
 
     int ShowModal();
 

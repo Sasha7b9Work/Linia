@@ -5,8 +5,8 @@
 #include "MainWindow.h"
 
 
-DraggedWindow::DraggedWindow(wxFrame *parent)
-    : wxFrame(parent, wxID_ANY, "WindowCalculation",
+DraggedWindow::DraggedWindow()
+    : wxFrame(TheMainWindow, wxID_ANY, "WindowCalculation",
         wxPoint(100, 100), wxSize(450, 350),
         wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE | wxSTAY_ON_TOP)
 {
@@ -102,11 +102,11 @@ bool DraggedWindow::Show(bool show)
 }
 
 
-DraggedDialog::DraggedDialog(wxFrame *parent) : DraggedWindow(parent)
+DraggedDialog::DraggedDialog() : DraggedWindow()
 {
     SetWindowStyleFlag(wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE);
 
-    m_parent = parent;
+    m_parent = GetParent();
     m_modalActive = false;
     m_modalResult = wxID_CANCEL;
 

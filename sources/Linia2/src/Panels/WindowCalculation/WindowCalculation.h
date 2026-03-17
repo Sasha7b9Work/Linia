@@ -6,7 +6,7 @@
 class WindowCalculation : public DraggedDialog
 {
 public:
-    WindowCalculation(wxFrame *);
+    WindowCalculation();
 
 private:
 

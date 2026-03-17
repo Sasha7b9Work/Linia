@@ -6,6 +6,6 @@
 class WindowCursors : public DraggedDialog
 {
 public:
-    WindowCursors(wxFrame *);
+    WindowCursors();
 private:
 };
