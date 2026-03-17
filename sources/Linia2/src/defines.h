@@ -32,6 +32,7 @@
 #include <wx/dir.h>
 #include <wx/rawbmp.h>
 #include <wx/artprov.h>
+#include <wx/evtloop.h>
 
 #include <map>
 #include <queue>

@@ -33,6 +33,24 @@ private:
 class DraggedDialog : public DraggedWindow
 {
 public:
-    DraggedDialog(wxFrame *parent) : DraggedWindow(parent) { }
+
+    DraggedDialog(wxFrame *);
+
+    int ShowModal();
+
+    void EndModal(int retCode = wxID_OK);
+
 private:
+
+    wxWindow *m_parent;
+    bool m_isModal;
+    wxEventLoopBase *m_modalLoop;
+
+    void ShowWindowWithXFCEFix();
+
+    void OnShow(wxShowEvent &);
+
+    void OnActivate(wxActivateEvent &);
+
+    void OnClose(wxCloseEvent &);
 };
