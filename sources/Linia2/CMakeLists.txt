@@ -239,7 +239,7 @@ else()
         wx_gtk3u_core-3.3
         wx_baseu-3.3
         wx_baseu_net-3.3
-        pthread
+#        pthread
         Xtst
         ${GTK3_LIBRARIES}
         ${X11_LIBRARY}
