@@ -24,7 +24,7 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
     Layout();
     Fit();
 
-    main_panel->Bind(wxEVT_PAINT, &DraggedWindow::OnPaint, this);
+    main_panel->Bind(wxEVT_PAINT, &DraggedWindow::OnEventPaint, this);
 
     Bind(wxEVT_CLOSE_WINDOW, &DraggedWindow::OnEventClose, this);
     Bind(wxEVT_LEAVE_WINDOW, &DraggedWindow::OnEventMouseLeave, this);
