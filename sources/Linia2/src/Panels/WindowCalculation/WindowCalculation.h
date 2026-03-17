@@ -23,7 +23,6 @@ private:
 
     void OnDragMotion(wxMouseEvent &);
 
-private:
     wxPanel *titleBar = nullptr;
     bool     dragging = false;
     wxPoint  dragStart;

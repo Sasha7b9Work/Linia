@@ -6,5 +6,6 @@
 class WindowCursors : public DraggedWindow
 {
 public:
+    WindowCursors(wxFrame *);
 private:
 };
