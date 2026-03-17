@@ -9,6 +9,8 @@ public:
  
     DialogModels();
 
+    virtual ~DialogModels() { }
+
     static DialogModels *self;
 
     virtual void Update() override;

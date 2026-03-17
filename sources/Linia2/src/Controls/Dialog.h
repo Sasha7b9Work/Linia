@@ -11,6 +11,8 @@ public:
 
     Dialog(const wxString &, const wxPoint & = wxDefaultPosition, const wxSize &size = wxDefaultSize);
 
+    virtual ~Dialog() { }
+
     void ShowOnWindow(wxWindow *window);
 
 protected:

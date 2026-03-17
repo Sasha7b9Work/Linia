@@ -131,10 +131,10 @@ void WindowCalculation::CreateMainPanel2()
 }
 
 
-void WindowCalculation::CreateTitleBar(wxWindow *parent, wxBoxSizer *mainSizer)
+void WindowCalculation::CreateTitleBar(wxWindow *_parent, wxBoxSizer *mainSizer)
 {
     // Панель заголовка
-    titleBar = new wxPanel(parent, wxID_ANY,
+    titleBar = new wxPanel(_parent, wxID_ANY,
         wxDefaultPosition, wxSize(-1, 25));
     titleBar->SetBackgroundColour(wxColour(60, 80, 120)); // Темно-синий
 
