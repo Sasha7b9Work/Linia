@@ -9,6 +9,7 @@
 #include "Display/Graphics/Splines.h"
 #include "Settings/Settings.h"
 #include "Utils/Timer.h"
+#include "Display/Graphics/AutoCursors.h"
 
 
 Display *TheDisplay = nullptr;
@@ -26,7 +27,8 @@ Display::Display(wxWindow *parent) :
     Bind(wxEVT_MOTION, &Display::OnEventMouseMove, this);
     Bind(wxEVT_MOUSEWHEEL, &Display::OnEventMouseWheel, this);
     Bind(wxEVT_RIGHT_DOWN, &Display::OnEventRightClick, this);
-    Bind(wxEVT_LEAVE_WINDOW, &Display::OnLeaveWindow, this);
+    Bind(wxEVT_LEAVE_WINDOW, &Display::OnEventLeaveWindow, this);
+    Bind(wxEVT_ENTER_WINDOW, &Display::OnEventEnterWindow, this);
     Bind(wxEVT_BUTTON, &Display::OnEventButton, this);
 
     int w = 25;
@@ -140,7 +142,7 @@ void Display::OnEventMouseDown(wxMouseEvent &event)
 }
 
 
-void Display::OnLeaveWindow(wxMouseEvent &event)
+void Display::OnEventLeaveWindow(wxMouseEvent &event)
 {
     if (mouse_is_pressed)
     {
@@ -152,6 +154,17 @@ void Display::OnLeaveWindow(wxMouseEvent &event)
 
         GetEventHandler()->ProcessEvent(upEvent);
     }
+
+    AutoCursors::Ban();
+
+    event.Skip();
+}
+
+
+void Display::OnEventEnterWindow(wxMouseEvent &event)
+{
+    AutoCursors::Allow();
+
     event.Skip();
 }
 
