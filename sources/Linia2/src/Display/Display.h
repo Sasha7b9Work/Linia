@@ -163,6 +163,3 @@ public:
     // smooth - сглаживание
     void Draw(const std::vector<wxPoint> &, bool smooth, bool draw_points) const;
 };
-
-
-extern Display *TheDisplay;

@@ -13,9 +13,6 @@ DraggedWindow::DraggedWindow(wxFrame *parent)
     // Отключаем стандартный заголовок
     SetWindowStyleFlag(wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE);
 
-    // Создаем основной цвет фона
-    SetBackgroundColour(wxColour(240, 240, 245));
-
     CreateMainPanel();
 
     Move(SET::GUI::calculation_pos.Get());
@@ -111,7 +108,6 @@ bool DraggedWindow::Show(bool show)
 DraggedDialog::DraggedDialog(wxFrame *parent) : DraggedWindow(parent)
 {
     SetWindowStyleFlag(wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE);
-    SetBackgroundColour(wxColour(240, 240, 245));
 
     m_parent = parent;
     m_modalActive = false;

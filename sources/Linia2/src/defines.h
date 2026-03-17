@@ -133,3 +133,5 @@ extern pchar DATE_BUILD;
 
 
 #define IGNORE_RESULT(x) do { if (x) {} } while(0)
+
+#include "globals.h"
