@@ -205,7 +205,7 @@ void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 
     TheMainWindow = nullptr;
 
-    Application::self->Disable();
+    TheApp->Disable();
 
     event.Skip();
 }

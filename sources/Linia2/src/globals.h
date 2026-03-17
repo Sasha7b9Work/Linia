@@ -2,10 +2,13 @@
 #pragma once
 
 
+class Application;
 class Display;
 class IGrid;
 class MainWindow;
 
-extern Display    *TheDisplay;
-extern IGrid      *TheGrid;
-extern MainWindow *TheMainWindow;
+
+extern Application *TheApp;
+extern Display     *TheDisplay;
+extern IGrid       *TheGrid;
+extern MainWindow  *TheMainWindow;

@@ -21,7 +21,7 @@
 wxIMPLEMENT_APP(Application);
 
 
-Application *Application::self = nullptr;
+Application *TheApp = nullptr;
 
 
 class NullLog : public wxLog
@@ -38,6 +38,8 @@ public:
 
 bool Application::OnInit()
 {
+    TheApp = this;
+
     // Попытка отключить предупреждения вида "Gtk-WARNING"
     wxLog::SetActiveTarget(new NullLog());
 
@@ -58,8 +60,6 @@ bool Application::OnInit()
     }
 
     Log::Init();
-
-    self = this;
 
     Config::Init();
 

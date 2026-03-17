@@ -62,7 +62,7 @@ void Keyboard::Update()
     {
         if (time - PIN_START.event_time > TIME_EVENT_BTN)         // Если после последнего события прошло достаточно времени
         {
-            Application::self->OnButtonStart(PIN_START.press);    // То считаем, что кнопка в устойчивом положении - обрабатываем нажатие
+            TheApp->OnButtonStart(PIN_START.press);    // То считаем, что кнопка в устойчивом положении - обрабатываем нажатие
             PIN_START.event_time = 0;                             // И устанавливаем признак того, что событие произошло
         }
     }
@@ -71,7 +71,7 @@ void Keyboard::Update()
     {
         if (time - PIN_STOP.event_time > TIME_EVENT_BTN)
         {
-            Application::self->OnButtonStop(PIN_STOP.press);
+            TheApp->OnButtonStop(PIN_STOP.press);
             PIN_STOP.event_time = 0;
         }
     }
@@ -83,11 +83,11 @@ void Keyboard::Update()
         {
             if (PIN_KA.press && !PIN_KB.press)
             {
-                Application::self->OnGovernor(PIN_KA.event_time > PIN_KB.event_time);
+                TheApp->OnGovernor(PIN_KA.event_time > PIN_KB.event_time);
             }
             else if (!PIN_KA.press && PIN_KB.press)
             {
-                Application::self->OnGovernor(PIN_KA.event_time > PIN_KB.event_time);
+                TheApp->OnGovernor(PIN_KA.event_time > PIN_KB.event_time);
             }
 
             PIN_KA.event_time = 0;

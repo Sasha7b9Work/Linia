@@ -12,7 +12,7 @@ void EmulatorIPPP::Update()
 
         if (ReadData(data))
         {
-            Application::self->OnReadData(data);
+            TheApp->OnReadData(data);
         }
     }
 }

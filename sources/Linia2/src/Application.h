@@ -17,8 +17,6 @@ class Application : public wxApp
 public:
     virtual bool OnInit() wxOVERRIDE;
 
-    static Application *self;
-
     void Disable();
 
 private:
