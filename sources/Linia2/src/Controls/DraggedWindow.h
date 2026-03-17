@@ -27,7 +27,7 @@ private:
     wxString title;
     wxRect   closeButtonRect;               // Область кнопки закрытия
     bool     mouseInCloseButton = false;    // Для ховер-эффекта
-    const int titleHeight = 30;
+    const int titleHeight = 20;
 
     void CreateTitleBar();
 

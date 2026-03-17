@@ -13,8 +13,6 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
 {
     main_panel = new wxPanel(this, wxID_ANY, { 0, 0 }, _size, wxNO_BORDER | wxEXPAND | wxSTAY_ON_TOP);
 
-    main_panel->SetBackgroundColour({ 0, 0, 255 });
-
 #ifdef WIN32
     SetupDragging(main_panel);
 #else
@@ -63,19 +61,6 @@ void DraggedWindow::SetupDragging(wxWindow *window)
 
 void DraggedWindow::OnEventMouseLeftDown(wxMouseEvent &event)
 {
-    {
-        // Обработка нажатия кнопки мыш
-
-        wxPoint pos = event.GetPosition();
-
-        if (closeButtonRect.Contains(pos))
-        {
-            Close();
-            return;
-        }
-    }
-
-
     if (!dragging)
     {
         // Обработка захывата мыши
@@ -103,15 +88,31 @@ void DraggedWindow::OnEventClose(wxCloseEvent &)
 
 void DraggedWindow::OnEventMouseLeftUp(wxMouseEvent &event)
 {
-    if (dragging)
     {
-        wxWindow *source = (wxWindow *)event.GetEventObject();
-        if (source && source->HasCapture())
-        {
-            source->ReleaseMouse();
-        }
+        // Обработка перемещения мышью
 
-        dragging = false;
+        if (dragging)
+        {
+            wxWindow *source = (wxWindow *)event.GetEventObject();
+            if (source && source->HasCapture())
+            {
+                source->ReleaseMouse();
+            }
+
+            dragging = false;
+        }
+    }
+
+    {
+        // Обработка нажатия кнопки мыш
+
+        wxPoint pos = event.GetPosition();
+
+        if (closeButtonRect.Contains(pos))
+        {
+            Close();
+            return;
+        }
     }
 
     event.Skip();
@@ -211,7 +212,7 @@ void DraggedWindow::OnEventPaint(wxPaintEvent &)
     dc.DrawText(title, 10, (titleHeight - dc.GetCharHeight()) / 2);
 
     // Рисуем кнопку закрытия (квадратик 20x20 справа)
-    int buttonSize = 20;
+    int buttonSize = 16;
     int buttonX = width - buttonSize - 5;  // Отступ 5 пикселей от края
     int buttonY = (titleHeight - buttonSize) / 2;
 
