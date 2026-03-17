@@ -6,7 +6,8 @@
 class WindowCalculation : public DraggedDialog
 {
 public:
-    WindowCalculation(const wxString &);
+
+    WindowCalculation(const wxString &, const wxSize &);
 
 private:
 

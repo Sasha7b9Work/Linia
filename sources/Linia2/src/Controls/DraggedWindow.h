@@ -7,7 +7,7 @@ class DraggedWindow : public wxFrame
 {
 public:
 
-    DraggedWindow(const wxString &);
+    DraggedWindow(const wxString &, const wxSize &);
 
     virtual bool Show(bool = true) override;
 
@@ -16,6 +16,8 @@ protected:
     wxPanel *main_panel = nullptr;
 
 private:
+
+    void CreateTitleBar();
 
     void SetupDragging(wxWindow *);
 
@@ -37,7 +39,7 @@ class DraggedDialog : public DraggedWindow
 {
 public:
 
-    DraggedDialog(const wxString &);
+    DraggedDialog(const wxString &, const wxSize &);
 
     int ShowModal();
 

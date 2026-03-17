@@ -5,14 +5,16 @@
 #include "MainWindow.h"
 
 
-DraggedWindow::DraggedWindow(const wxString &_title)
+DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
     : wxFrame(TheMainWindow, wxID_ANY, "WindowCalculation",
-        wxPoint(100, 100), wxSize(450, 350),
+        { TheMainWindow->GetSize().x / 2, TheMainWindow->GetSize().y / 2 }, _size,
         wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE | wxSTAY_ON_TOP),
     title(_title)
 {
     // Отключаем стандартный заголовок
     SetWindowStyleFlag(wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE);
+
+    CreateTitleBar();
 
     main_panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxNO_BORDER | wxEXPAND | wxSTAY_ON_TOP);
 
@@ -24,6 +26,12 @@ DraggedWindow::DraggedWindow(const wxString &_title)
 
     Layout();
     Fit();
+}
+
+
+void DraggedWindow::CreateTitleBar()
+{
+
 }
 
 
@@ -97,7 +105,7 @@ bool DraggedWindow::Show(bool show)
 }
 
 
-DraggedDialog::DraggedDialog(const wxString &_title) : DraggedWindow(_title)
+DraggedDialog::DraggedDialog(const wxString &_title, const wxSize &_size) : DraggedWindow(_title, _size)
 {
     SetWindowStyleFlag(wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE);
 
