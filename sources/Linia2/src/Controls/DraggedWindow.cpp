@@ -27,6 +27,7 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
     main_panel->Bind(wxEVT_PAINT, &DraggedWindow::OnPaint, this);
 
     Bind(wxEVT_CLOSE_WINDOW, &DraggedWindow::OnCloseEvent, this);
+    Bind(wxEVT_LEAVE_WINDOW, &DraggedWindow::OnMouseLeaveEvent, this);
 
     SetSize(_size);
 }
@@ -57,7 +58,7 @@ void DraggedWindow::SetupDragging(wxWindow *window)
 {
     window->Bind(wxEVT_LEFT_DOWN, &DraggedWindow::OnMouseLeftDown, this);
     window->Bind(wxEVT_LEFT_UP, &DraggedWindow::OnDragEnd, this);
-    window->Bind(wxEVT_MOTION, &DraggedWindow::OnDragMotion, this);
+    window->Bind(wxEVT_MOTION, &DraggedWindow::OnMouseMotion, this);
 }
 
 void DraggedWindow::OnMouseLeftDown(wxMouseEvent &event)
@@ -117,17 +118,46 @@ void DraggedWindow::OnDragEnd(wxMouseEvent &event)
 }
 
 
-void DraggedWindow::OnDragMotion(wxMouseEvent &event)
+void DraggedWindow::OnMouseLeaveEvent(wxMouseEvent &event)
+{
+    mouseInCloseButton = false;
+    Refresh();
+
+    event.Skip();
+}
+
+
+void DraggedWindow::OnMouseMotion(wxMouseEvent &event)
 {
     wxWindow *source = (wxWindow *)event.GetEventObject();
 
-    if (dragging && event.Dragging() && source && source->HasCapture())
     {
-        wxPoint currentPos = wxGetMousePosition();
-        wxPoint delta = currentPos - dragStart;
-        wxPoint newPos = GetPosition() + delta;
-        Move(newPos);
-        dragStart = currentPos;
+        // Обработка подсветки кнопки ЭАКРЫТЬ
+
+        wxPoint pos = event.GetPosition();
+
+        // Проверяем, находится ли мышь над кнопкой закрытия
+        bool wasInButton = mouseInCloseButton;
+        mouseInCloseButton = closeButtonRect.Contains(pos);
+
+        // Если состояние изменилось, перерисовываем
+        if (wasInButton != mouseInCloseButton)
+        {
+            RefreshRect(closeButtonRect);  // Перерисовываем только область кнопки
+        }
+    }
+
+    {
+        // Обработка перемещения окна
+
+        if (dragging && event.Dragging() && source && source->HasCapture())
+        {
+            wxPoint currentPos = wxGetMousePosition();
+            wxPoint delta = currentPos - dragStart;
+            wxPoint newPos = GetPosition() + delta;
+            Move(newPos);
+            dragStart = currentPos;
+        }
     }
 
     event.Skip();
@@ -144,7 +174,7 @@ bool DraggedWindow::Show(bool show)
 }
 
 
-void DraggedWindow::OnPaint(wxPaintEvent &)
+void DraggedWindow::OnPaintEvent(wxPaintEvent &)
 {
     wxPaintDC dc(main_panel);
 

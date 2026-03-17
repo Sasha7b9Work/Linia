@@ -25,8 +25,8 @@ private:
     bool     dragging = false;
     wxPoint  dragStart;
     wxString title;
-    wxRect   closeButtonRect;       // Область кнопки закрытия
-    bool     mouseInCloseButton;    // Для ховер-эффекта
+    wxRect   closeButtonRect;               // Область кнопки закрытия
+    bool     mouseInCloseButton = false;    // Для ховер-эффекта
     const int titleHeight = 30;
 
     void CreateTitleBar();
@@ -35,9 +35,10 @@ private:
 
     void OnMouseLeftDown(wxMouseEvent &);
     void OnDragEnd(wxMouseEvent &);
-    void OnDragMotion(wxMouseEvent &);
-    void OnPaint(wxPaintEvent &);
+    void OnMouseMotion(wxMouseEvent &);
+    void OnPaintEvent(wxPaintEvent &);
     void OnCloseEvent(wxCloseEvent &);
+    void OnMouseLeaveEvent(wxMouseEvent &);
 };
 
 
