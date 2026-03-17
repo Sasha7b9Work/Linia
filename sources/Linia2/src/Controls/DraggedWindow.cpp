@@ -8,10 +8,10 @@
 DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
     : wxFrame(TheMainWindow, wxID_ANY, "WindowCalculation",
         { TheMainWindow->GetSize().x / 2, TheMainWindow->GetSize().y / 2 }, _size,
-        wxFRAME_FLOAT_ON_PARENT | wxSTAY_ON_TOP),
+        wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE | wxSTAY_ON_TOP),
     title(_title)
 {
-    main_panel = new wxPanel(this, wxID_ANY, { 0, 0 }, _size, wxEXPAND);
+    main_panel = new wxPanel(this, wxID_ANY, { 0, 0 }, _size, wxNO_BORDER | wxEXPAND | wxSTAY_ON_TOP);
 
     main_panel->SetBackgroundColour({ 0, 0, 255 });
 
