@@ -7,14 +7,10 @@
 WindowCursors::WindowCursors(const wxString &_title, const wxSize &_size) : DraggedDialog(_title, _size)
 {
     SetPosition(SET::GUI::cursors_pos.Get());
-
-    Bind(wxEVT_CLOSE_WINDOW, &WindowCursors::OnCloseEvent, this);
 }
 
 
-void WindowCursors::OnCloseEvent(wxCloseEvent &event)
+WindowCursors::~WindowCursors()
 {
     SET::GUI::cursors_pos.Set(GetPosition());
-
-    event.Skip();
 }

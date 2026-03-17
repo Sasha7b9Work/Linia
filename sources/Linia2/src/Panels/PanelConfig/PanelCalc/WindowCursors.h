@@ -11,5 +11,5 @@ public:
 
 private:
 
-    void OnCloseEvent(wxCloseEvent &);
+    virtual ~WindowCursors() override;
 };
