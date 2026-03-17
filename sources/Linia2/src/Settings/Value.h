@@ -9,15 +9,7 @@ template<class T>
 class Value
 {
 public:
-    Value(const wxString &_key, const T &_default_value, wxWindow *_window = nullptr, int _id = 0, bool _serialiazed = true) : //-V730
-        window(_window),
-        id(_id),
-        key(_key),
-        default_value(_default_value),
-        stored_value(_default_value),
-        serialiazed(_serialiazed)
-    {
-    }
+    Value(const wxString &_key, const T &_default_value, wxWindow *_window = nullptr, int _id = 0, bool _serialiazed = true);
 
     T Get() const
     {
@@ -141,26 +133,26 @@ private:
 class ValueBool : public Value<bool>
 {
 public:
-    ValueBool(const wxString &_key, const bool &_def) : Value<bool>(_key, _def) { }
+    ValueBool(const wxString &_key, const bool &_def);
 };
 
 
 class ValueInt : public Value<int>
 {
 public:
-    ValueInt(const wxString &_key, const int &_def) : Value<int>(_key, _def) { }
+    ValueInt(const wxString &_key, const int &_def);
 };
 
 
 class ValueUInt : public Value<uint>
 {
 public:
-    ValueUInt(const wxString &_key, const uint &_def) : Value<uint>(_key, _def) { }
+    ValueUInt(const wxString &_key, const uint &_def);
 };
 
 
 class ValuePoint : public Value<wxPoint>
 {
 public:
-    ValuePoint(const wxString &_key, const wxPoint &_def) : Value<wxPoint>(_key, _def) { }
+    ValuePoint(const wxString &_key, const wxPoint &_def);
 };

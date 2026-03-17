@@ -35,66 +35,81 @@ namespace SET
         ValuePoint       calculation_pos{ "calculation_pos", {10, 10} };
         ValuePoint       cursors_pos{ "cursors_pos", {10, 10} };
     }
+
+    static std::vector<ValuePoint *> values_point;
+    static std::vector<ValueBool *> values_bool;
+    static std::vector<ValueInt *> values_int;
+    static std::vector<ValueUInt *> values_uint;
+}
+
+
+void SET::AppendValue(ValuePoint *value)
+{
+    values_point.push_back(value);
+}
+
+
+void SET::AppendValue(ValueBool *value)
+{
+    values_bool.push_back(value);
+}
+
+
+void SET::AppendValue(ValueInt *value)
+{
+    values_int.push_back(value);
+}
+
+
+void SET::AppendValue(ValueUInt *value)
+{
+    values_uint.push_back(value);
 }
 
 
 void SET::GUI::Load()
 {
-    position.Load();
-    pos_console.Load();
-    size_console.Load();
-    pos_list.Load();
-    size_list.Load();
-    maximized_list.Load();
-    debug_mode.Load();
-    maximized_console.Load();
-    current_page_notebook.Load();
-    serial_port_num.Load();
+    for (auto elem : values_point)
+    {
+        elem->Load();
+    }
 
-    color_background.Load();
-    color_grid.Load();
-    color_font.Load();
-    color_curve.Load();
-    color_link.Load();
-    color_secant.Load();
+    for (auto elem : values_bool)
+    {
+        elem->Load();
+    }
 
-    size_point.Load();
-    cursors_x.Load();
-    cursors_y.Load();
-    track_x.Load();
-    track_y.Load();
-    track_mouse.Load();
-    calculation_pos.Load();
-    cursors_pos.Load();
+    for (auto elem : values_int)
+    {
+        elem->Load();
+    }
+
+    for (auto elem : values_uint)
+    {
+        elem->Load();
+    }
 }
 
 
 void SET::GUI::Save()
 {
-    position.Save();
-    pos_console.Save();
-    size_console.Save();
-    pos_list.Save();
-    size_list.Save();
-    maximized_list.Save();
-    debug_mode.Save();
-    maximized_console.Save();
-    current_page_notebook.Save();
-    serial_port_num.Save();
+    for (auto elem : values_point)
+    {
+        elem->Save();
+    }
 
-    color_background.Save();
-    color_grid.Save();
-    color_font.Save();
-    color_curve.Save();
-    color_link.Save();
-    color_secant.Save();
+    for (auto elem : values_bool)
+    {
+        elem->Save();
+    }
 
-    size_point.Save();
-    cursors_x.Save();
-    cursors_y.Save();
-    track_x.Save();
-    track_y.Save();
-    track_mouse.Save();
-    calculation_pos.Save();
-    cursors_pos.Save();
+    for (auto elem : values_int)
+    {
+        elem->Save();
+    }
+
+    for (auto elem : values_uint)
+    {
+        elem->Save();
+    }
 }

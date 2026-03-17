@@ -6,11 +6,17 @@
 // Настройки прибора
 namespace SET
 {
+    void AppendValue(ValuePoint *);
+    void AppendValue(ValueBool *);
+    void AppendValue(ValueInt *);
+    void AppendValue(ValueUInt *);
+
     // Настройки ГУИ
     namespace GUI
     {
         void Load();
         void Save();
+
         extern ValuePoint       position;
         extern ValuePoint       pos_console;
         extern ValuePoint       size_console;
