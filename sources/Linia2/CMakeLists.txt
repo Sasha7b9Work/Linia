@@ -237,7 +237,7 @@ else()
         X11
         xkbcommon
         png
-        ${GTK3_LIBRARIES}
+#        ${GTK3_LIBRARIES}
     )
 
     target_include_directories(${PROJECT_NAME} PRIVATE ${GTK3_INCLUDE_DIRS})
