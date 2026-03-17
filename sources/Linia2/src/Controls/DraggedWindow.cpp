@@ -26,7 +26,7 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
 
     main_panel->Bind(wxEVT_PAINT, &DraggedWindow::OnPaint, this);
 
-//    SetSize(_size);
+    SetSize(_size);
 }
 
 
