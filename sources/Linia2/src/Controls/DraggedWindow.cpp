@@ -128,8 +128,6 @@ void DraggedWindow::OnPaint(wxPaintEvent &)
     int width, height;
     GetClientSize(&width, &height);
 
-//    wxRect titleRect(0, 0, width, titleHeight);
-
     // Градиентная заливка заголовка
     wxColour startColor(70, 130, 180);  // Steel blue
     wxColour endColor(100, 149, 237);   // Cornflower blue
@@ -164,10 +162,10 @@ void DraggedWindow::OnPaint(wxPaintEvent &)
     int buttonX = width - buttonSize - 5;  // Отступ 5 пикселей от края
     int buttonY = (titleHeight - buttonSize) / 2;
 
-    m_closeButtonRect = wxRect(buttonX, buttonY, buttonSize, buttonSize);
+    closeButtonRect = wxRect(buttonX, buttonY, buttonSize, buttonSize);
 
     // Рисуем фон кнопки
-    if (m_mouseInCloseButton)
+    if (mouseInCloseButton)
     {
         dc.SetBrush(wxBrush(wxColour(220, 80, 80)));  // Красный при наведении
         dc.SetPen(wxPen(wxColour(200, 60, 60)));
@@ -177,7 +175,7 @@ void DraggedWindow::OnPaint(wxPaintEvent &)
         dc.SetBrush(wxBrush(wxColour(150, 150, 150)));  // Серый обычно
         dc.SetPen(wxPen(wxColour(120, 120, 120)));
     }
-    dc.DrawRectangle(m_closeButtonRect);
+    dc.DrawRectangle(closeButtonRect);
 
     // Рисуем крестик
     dc.SetPen(wxPen(*wxWHITE, 2));
@@ -308,4 +306,10 @@ void DraggedDialog::CloseModal()
         m_parent->Enable();
         m_parent->Raise();  // Поднимаем родительское окно
     }
+}
+
+
+bool DraggedDialog::Show(bool show)
+{
+    return DraggedWindow::Show(show);
 }

@@ -23,8 +23,8 @@ private:
     bool     dragging = false;
     wxPoint  dragStart;
     wxString title;
-    wxRect m_closeButtonRect;   // Область кнопки закрытия
-    bool m_mouseInCloseButton;  // Для ховер-эффекта
+    wxRect   closeButtonRect;       // Область кнопки закрытия
+    bool     mouseInCloseButton;    // Для ховер-эффекта
     const int titleHeight = 30;
 
     void CreateTitleBar();
@@ -51,6 +51,8 @@ public:
     int ShowModal();
 
 private:
+
+    virtual bool Show(bool = true) override;
 
     bool m_modalActive;
     int m_modalResult;
