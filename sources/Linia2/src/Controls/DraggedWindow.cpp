@@ -260,31 +260,6 @@ DraggedDialog::DraggedDialog(const wxString &_title, const wxSize &_size) : Drag
     m_modalActive = false;
     m_modalResult = wxID_CANCEL;
 
-    /*
-
-    wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
-
-    // Добавьте ваши контролы здесь
-    wxStaticText *text = new wxStaticText(main_panel, wxID_ANY,
-        "Модальное окно", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-    mainSizer->Add(text, 0, wxEXPAND | wxALL, 20);
-
-    // Кнопки OK/Cancel
-    wxBoxSizer *btnSizer = new wxBoxSizer(wxHORIZONTAL);
-    wxButton *okBtn = new wxButton(main_panel, wxID_OK, "OK");
-    wxButton *cancelBtn = new wxButton(main_panel, wxID_CANCEL, "Отмена");
-
-    btnSizer->Add(okBtn, 0, wxALL, 5);
-    btnSizer->Add(cancelBtn, 0, wxALL, 5);
-    mainSizer->Add(btnSizer, 0, wxALIGN_CENTER | wxBOTTOM, 10);
-
-    main_panel->SetSizer(mainSizer);
-
-    // Bind обработчики
-    okBtn->Bind(wxEVT_BUTTON, &DraggedDialog::OnOK, this);
-    cancelBtn->Bind(wxEVT_BUTTON, &DraggedDialog::OnCancel, this);
-    */
-
     Bind(wxEVT_CLOSE_WINDOW, &DraggedDialog::OnEventClose, this);
 
     Layout();

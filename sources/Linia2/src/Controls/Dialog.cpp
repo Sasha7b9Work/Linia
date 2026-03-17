@@ -66,8 +66,6 @@ void Dialog::ShowOnWindow(wxWindow *window)
     SetPosition(pos);
 
     DraggedDialog::ShowModal();
-
-    TheMainWindow->HideSystemPanel();
 }
 
 
