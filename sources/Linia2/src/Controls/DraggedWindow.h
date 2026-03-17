@@ -11,6 +11,8 @@ public:
 
     DraggedWindow(wxFrame *);
 
+    virtual bool Show(bool = true) override;
+
 private:
 
     void CreateMainPanel();

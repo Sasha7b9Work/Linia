@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Controls/DraggedWindow.h"
 #include "Settings/Settings.h"
+#include "MainWindow.h"
 
 
 DraggedWindow::DraggedWindow(wxFrame *parent)
@@ -92,4 +93,14 @@ void DraggedWindow::OnDragMotion(wxMouseEvent &event)
     }
 
     event.Skip();
+}
+
+
+bool DraggedWindow::Show(bool show)
+{
+    bool result = wxFrame::Show(show);
+
+    MainWindow::self->HideSystemPanel();
+
+    return result;
 }

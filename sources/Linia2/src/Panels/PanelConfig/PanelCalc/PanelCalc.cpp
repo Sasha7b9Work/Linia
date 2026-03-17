@@ -52,8 +52,6 @@ void PanelCalc::OnEventButton(wxCommandEvent &event)
         if (wndCursors)
         {
             wndCursors->Show();
-            MainWindow::self->HideSystemPanel();
-            MainWindow::self->Raise();
         }
     }
 
