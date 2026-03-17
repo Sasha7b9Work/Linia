@@ -4,6 +4,7 @@
 #include "Utils/GlobalFunctions.h"
 #include "IPPP/Tests/Model.h"
 #include "Panels/PanelConfig/PanelConfig.h"
+#include "Panels/WindowCalculation/WindowCalculation.h"
 #include "Utils/SystemDepend.h"
 #include "Controls/StaticBox.h"
 
@@ -39,7 +40,7 @@ void PanelCalc::OnEventButton(wxCommandEvent &event)
     {
         if (!wndCursors)
         {
-            wndCursors = new WindowCursors(MainWindow::self);
+            wndCursors = new WindowCalculation(MainWindow::self);
 
             wndCursors->Bind(wxEVT_CLOSE_WINDOW, [this](wxCloseEvent &event)
                 {
