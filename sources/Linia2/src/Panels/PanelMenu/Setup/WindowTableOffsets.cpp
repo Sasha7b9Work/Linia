@@ -8,7 +8,7 @@
 
 
 WindowTableOffsets::WindowTableOffsets() :
-    Dialog(nullptr, wxID_ANY, "Таблица смещений и коэффициентов", wxDefaultPosition, { WIDTH, HEIGHT })
+    Dialog("Таблица смещений и коэффициентов", wxDefaultPosition, { WIDTH, HEIGHT })
 {
     CreateFields();
 

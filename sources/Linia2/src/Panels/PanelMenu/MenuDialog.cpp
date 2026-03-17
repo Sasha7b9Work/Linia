@@ -15,7 +15,7 @@ MenuDialog::MenuDialog(const wxString &title, int width_button, const wxArrayInt
     const wxString &btn7, void (*func7)(),
     const wxString &btn8, void (*func8)(),
     const wxString &btn9, void (*func9)()) :
-    Dialog(nullptr, wxID_ANY, title)
+    Dialog(title)
 {
     {
         if (func1) buttons.emplace_back(ButtonStruct{ wxID_ANY, btn1, func1 });

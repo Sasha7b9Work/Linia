@@ -7,7 +7,7 @@
 
 
 WindowLibraryTests::WindowLibraryTests() :
-    Dialog(nullptr, wxID_ANY, "Библиотека пользовательских тестов", wxDefaultPosition, {WIDTH, HEIGHT})
+    Dialog("Библиотека пользовательских тестов", wxDefaultPosition, {WIDTH, HEIGHT})
 {
 
     int dw = 150;

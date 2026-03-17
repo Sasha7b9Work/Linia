@@ -3,7 +3,7 @@
 #include "Controls/Dialog.h"
 #include "Utils/SystemDepend.h"
 
-Dialog::Dialog(wxWindow *, wxWindowID, const wxString &_title, const wxPoint &_pos, const wxSize &_size) :
+Dialog::Dialog(const wxString &_title, const wxPoint &_pos, const wxSize &_size) :
     DraggedDialog(_title, _size)
 {
     SetPosition(_pos);

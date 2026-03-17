@@ -4,7 +4,7 @@
 
 
 WindowLaunch::WindowLaunch() :
-    Dialog(nullptr, wxID_ANY, "запуск", wxDefaultPosition, { WIDTH, HEIGHT })
+    Dialog("запуск", wxDefaultPosition, { WIDTH, HEIGHT })
 {
 
 }

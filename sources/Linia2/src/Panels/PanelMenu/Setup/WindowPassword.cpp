@@ -4,7 +4,7 @@
 
 
 WindowPassword::WindowPassword() :
-    Dialog(nullptr, wxID_ANY, "Изменить пароль", wxDefaultPosition, { WIDTH, HEIGHT })
+    Dialog("Изменить пароль", wxDefaultPosition, { WIDTH, HEIGHT })
 {
 
 }

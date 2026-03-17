@@ -9,7 +9,7 @@ class Dialog : public DraggedDialog
 {
 public:
 
-    Dialog(wxWindow *, wxWindowID, const wxString &, const wxPoint & = wxDefaultPosition, const wxSize &size = wxDefaultSize);
+    Dialog(const wxString &, const wxPoint & = wxDefaultPosition, const wxSize &size = wxDefaultSize);
 
     void ShowOnWindow(wxWindow *window)
     {
