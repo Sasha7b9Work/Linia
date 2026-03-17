@@ -53,16 +53,16 @@ void PanelCalc::OnEventButton(wxCommandEvent &event)
         {
             wndCursors->Show();
 //            wndCursors->Raise();
+//            MainWindow::self->ShowFullScreen(true);
+            MainWindow::self->HideSystemPanel();
             MainWindow::self->Raise();
-            MainWindow::self->ShowFullScreen(true);
-            MainWindow::self->HidePanel();
         }
 
-        wxWindow *topLevel = wxTheApp->GetTopWindow();
-        if (topLevel)
-        {
-            topLevel->Raise();
-        }
+//        wxWindow *topLevel = wxTheApp->GetTopWindow();
+//        if (topLevel)
+//        {
+//            topLevel->Raise();
+//        }
     }
 
     event.Skip();
