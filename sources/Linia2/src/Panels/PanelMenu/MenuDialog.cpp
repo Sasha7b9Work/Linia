@@ -31,7 +31,7 @@ MenuDialog::MenuDialog(const wxString &title, int width_button, const wxArrayInt
 
     int height_delim = 10;
 
-    wxSize client_size{ width_button + 10, (BUTTON_HEIGHT + 5) * (int)buttons.size() + 10 + height_delim * (int)delimit.GetCount() };
+    wxSize client_size{ width_button + 10, TopY() + (BUTTON_HEIGHT + 5) * (int)buttons.size() + 10 + height_delim * (int)delimit.GetCount()};
 
     Dialog::SetClientSize(client_size);
 
