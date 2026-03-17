@@ -319,20 +319,20 @@ void DraggedDialog::ShowWithXFCEFix()
 }
 
 
-void DraggedDialog::OnEventClose(wxCloseEvent &event)
+void DraggedDialog::OnEventClose(wxCloseEvent &)
 {
     CloseModal();
 }
 
 
-void DraggedDialog::OnOK(wxCommandEvent &/*event*/)
+void DraggedDialog::OnOK(wxCommandEvent &)
 {
     m_modalResult = wxID_OK;
     CloseModal();
 }
 
 
-void DraggedDialog::OnCancel(wxCommandEvent &/*event*/)
+void DraggedDialog::OnCancel(wxCommandEvent &)
 {
     m_modalResult = wxID_CANCEL;
     CloseModal();

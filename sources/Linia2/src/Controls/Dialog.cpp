@@ -47,19 +47,22 @@ void Dialog::ShowOnWindow(wxWindow *window)
     }
     else
     {
-        int win_bottom = TheMainWindow->GetPosition().y + TheMainWindow->GetSize().y;     // Координата нижней кромки окна
-        int win_left = TheMainWindow->GetPosition().x;
+        Fit();
+        Layout();
+
+        int win_bottom = TheMainWindow->GetRect().GetBottom();
+        int win_left = TheMainWindow->GetRect().GetLeft();
 
         int bottom = pos.y + GetSize().y;
         int left = pos.x;
 
         if (bottom >= win_bottom)
         {
-            pos.y -= (bottom - win_bottom);
+            pos.y = win_bottom - GetSize().y;
         }
         if (left <= win_left)
         {
-            pos.x += (win_left - left);
+            pos.x = win_left;
         }
     }
 
