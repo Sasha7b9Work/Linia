@@ -11,6 +11,9 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
         wxFRAME_FLOAT_ON_PARENT | wxSTAY_ON_TOP),
     title(_title)
 {
+    SetSizeHints(_size);
+    Fit();
+
     wxSize size = GetClientSize();
 
     main_panel = new wxPanel(this, wxID_ANY, { 0, 0 }, size, wxEXPAND);
