@@ -17,8 +17,6 @@ protected:
 
 private:
 
-    void CreateMainPanel();
-
     void SetupDragging(wxWindow *);
 
     void OnDragStart(wxMouseEvent &);

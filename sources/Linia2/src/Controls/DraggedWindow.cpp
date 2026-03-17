@@ -14,15 +14,6 @@ DraggedWindow::DraggedWindow(const wxString &_title)
     // Отключаем стандартный заголовок
     SetWindowStyleFlag(wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE);
 
-    CreateMainPanel();
-
-    Layout();
-    Fit();
-}
-
-
-void DraggedWindow::CreateMainPanel()
-{
     main_panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxNO_BORDER | wxEXPAND | wxSTAY_ON_TOP);
 
 #ifdef WIN32
@@ -30,6 +21,9 @@ void DraggedWindow::CreateMainPanel()
 #else
     SetupDragging(main_panel);
 #endif
+
+    Layout();
+    Fit();
 }
 
 
