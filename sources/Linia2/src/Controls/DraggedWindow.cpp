@@ -26,6 +26,8 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
 
     main_panel->Bind(wxEVT_PAINT, &DraggedWindow::OnPaint, this);
 
+    Bind(wxEVT_CLOSE_WINDOW, &DraggedWindow::OnCloseEvent, this);
+
     SetSize(_size);
 }
 
@@ -53,15 +55,30 @@ void DraggedWindow::SetSize(const wxSize &_size)
 
 void DraggedWindow::SetupDragging(wxWindow *window)
 {
-    window->Bind(wxEVT_LEFT_DOWN, &DraggedWindow::OnDragStart, this);
+    window->Bind(wxEVT_LEFT_DOWN, &DraggedWindow::OnMouseLeftDown, this);
     window->Bind(wxEVT_LEFT_UP, &DraggedWindow::OnDragEnd, this);
     window->Bind(wxEVT_MOTION, &DraggedWindow::OnDragMotion, this);
 }
 
-void DraggedWindow::OnDragStart(wxMouseEvent &event)
+void DraggedWindow::OnMouseLeftDown(wxMouseEvent &event)
 {
+    {
+        // Обработка нажатия кнопки мыш
+
+        wxPoint pos = event.GetPosition();
+
+        if (closeButtonRect.Contains(pos))
+        {
+            Close();
+            return;
+        }
+    }
+
+
     if (!dragging)
     {
+        // Обработка захывата мыши
+
         wxWindow *source = (wxWindow *)event.GetEventObject();
         if (source && !source->HasCapture())
         {
@@ -74,6 +91,12 @@ void DraggedWindow::OnDragStart(wxMouseEvent &event)
     }
 
     event.Skip();
+}
+
+
+void DraggedWindow::OnCloseEvent(wxCloseEvent &)
+{
+    Destroy();
 }
 
 
@@ -220,8 +243,9 @@ DraggedDialog::DraggedDialog(const wxString &_title, const wxSize &_size) : Drag
     // Bind обработчики
     okBtn->Bind(wxEVT_BUTTON, &DraggedDialog::OnOK, this);
     cancelBtn->Bind(wxEVT_BUTTON, &DraggedDialog::OnCancel, this);
-    Bind(wxEVT_CLOSE_WINDOW, &DraggedDialog::OnClose, this);
     */
+
+    Bind(wxEVT_CLOSE_WINDOW, &DraggedDialog::OnCloseEvent, this);
 
     Layout();
     Fit();
@@ -275,9 +299,11 @@ void DraggedDialog::ShowWithXFCEFix()
 }
 
 
-void DraggedDialog::OnClose(wxCloseEvent &/*event*/)
+void DraggedDialog::OnCloseEvent(wxCloseEvent &event)
 {
     CloseModal();
+
+    event.Skip();
 }
 
 
