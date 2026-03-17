@@ -239,8 +239,9 @@ else()
         wx_baseu-3.3
         wx_baseu_net-3.3
         X11
+        xkbcommon
         ${GTK3_LIBRARIES}
-        ${XKBCOMMON_LIBRARY}
+#        ${XKBCOMMON_LIBRARY}
         ${PNG_LIBRARY}
         ${DL_LIBRARY}
     )
