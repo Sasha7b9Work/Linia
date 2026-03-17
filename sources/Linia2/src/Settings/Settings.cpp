@@ -15,18 +15,18 @@ namespace SET
         Value<wxPoint>   size_list("gui_size_list", { 400, 400 });
         ValueBool        maximized_list("gui_maximized_list", false);
         ValueBool        maximized_console("gui_maximized_console", false);
-        Value<int>       current_page_notebook("gui_current_page_notebook", 0);
-        Value<int>       serial_port_num("serial_port_num", 0);
+        ValueInt         current_page_notebook("gui_current_page_notebook", 0);
+        ValueInt         serial_port_num("serial_port_num", 0);
         ValueBool        debug_mode("debug_mode", false);
 
-        Value<uint>      color_background("color_background", 0xFFFFFF);
-        Value<uint>      color_grid("color_grid", 0);
-        Value<uint>      color_font("color_font", 0);
-        Value<uint>      color_curve("color_curve", 0);
-        Value<uint>      color_link("color_link", 0);
-        Value<uint>      color_secant("color_secant", 0);
+        ValueUInt        color_background("color_background", 0xFFFFFF);
+        ValueUInt        color_grid("color_grid", 0);
+        ValueUInt        color_font("color_font", 0);
+        ValueUInt        color_curve("color_curve", 0);
+        ValueUInt        color_link("color_link", 0);
+        ValueUInt        color_secant("color_secant", 0);
 
-        Value<int>       size_point("size_point", 2);
+        ValueInt         size_point("size_point", 2);
         ValueBool        cursors_x("cursors_x", false);
         ValueBool        cursors_y("cursors_y", false);
         ValueBool        track_x("track_x", false);

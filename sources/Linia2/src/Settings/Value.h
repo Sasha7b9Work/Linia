@@ -142,5 +142,19 @@ class ValueBool : public Value<bool>
 {
 public:
     ValueBool(const wxString &_key, const bool &_def) : Value<bool>(_key, _def) { }
-private:
+};
+
+
+class ValueInt : public Value<int>
+{
+public:
+    ValueInt(const wxString &_key, const int &_def) : Value<int>(_key, _def) { }
+};
+
+
+class ValueUInt : public Value<uint>
+{
+public:
+    ValueUInt(const wxString &_key, const uint &_def) : Value<uint>(_key, _def)
+    {}
 };
