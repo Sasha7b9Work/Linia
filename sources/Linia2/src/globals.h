@@ -6,9 +6,11 @@ class Application;
 class Display;
 class IGrid;
 class MainWindow;
+class PanelErrors;
 
 
 extern Application *TheApp;
 extern Display     *TheDisplay;
 extern IGrid       *TheGrid;
 extern MainWindow  *TheMainWindow;
+extern PanelErrors *ThePanelErrors;

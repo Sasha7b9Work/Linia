@@ -6,13 +6,13 @@
 #include "Utils/SystemDepend.h"
 
 
-PanelErrors *PanelErrors::self = nullptr;
+PanelErrors *ThePanelErrors = nullptr;
 
 
 PanelErrors::PanelErrors(wxWindow *parent) :
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { MainWindow::WIDTH_DRAW, 100 })
 {
-    self = this;
+    ThePanelErrors = this;
 
     //    wxPanel *panel = new wxPanel(this);
 

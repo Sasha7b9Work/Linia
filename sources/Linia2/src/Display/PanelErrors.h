@@ -21,8 +21,6 @@ public:
 
     PanelErrors(wxWindow *);
 
-    static PanelErrors *self;
-
     void ReInit();
 
     void AppendError(Error::E, const wxString &);
