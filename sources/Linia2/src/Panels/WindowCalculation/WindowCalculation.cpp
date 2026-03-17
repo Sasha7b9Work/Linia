@@ -4,10 +4,11 @@
 #include "Settings/Settings.h"
 
 
-WindowCalculation::WindowCalculation(const wxString &_title, const wxSize &_size) : DraggedDialog(_title, _size)
+WindowCalculation::WindowCalculation(const wxString &_title, const wxSize &_size) : DraggedWindow(_title, _size)
 {
     Move(SET::GUI::calculation_pos.Get());
 }
+
 
 
 void WindowCalculation::CreateMainPanel2()
