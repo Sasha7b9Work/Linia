@@ -44,7 +44,7 @@ PanelConfig::PanelConfig(wxWindow* parent) :
     btnModel = new wxToggleButton(this, wxID_ANY, "Модель", { sizeScheme.x, h }, sizeScheme);
     str_panels.emplace_back(StructPanel{ btnModel, CreatePanel(btnModel) });
 
-    btnCalc = new wxToggleButton(this, wxID_ANY, "Расчёт", { sizeScheme.x * 2, h }, sizeChan);
+    btnCalc = new wxToggleButton(this, wxID_ANY, "Измер", { sizeScheme.x * 2, h }, sizeChan);
     str_panels.emplace_back(StructPanel{ btnCalc, CreatePanel(btnCalc) });
 
     {
