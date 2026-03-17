@@ -33,12 +33,12 @@ private:
 
     void SetupDragging(wxWindow *);
 
-    void OnMouseLeftDown(wxMouseEvent &);
-    void OnDragEnd(wxMouseEvent &);
-    void OnMouseMotion(wxMouseEvent &);
-    void OnPaintEvent(wxPaintEvent &);
-    void OnCloseEvent(wxCloseEvent &);
-    void OnMouseLeaveEvent(wxMouseEvent &);
+    void OnEventMouseLeftDown(wxMouseEvent &);
+    void OnEventMouseLeftUp(wxMouseEvent &);
+    void OnEventMouseMotion(wxMouseEvent &);
+    void OnEventMouseLeave(wxMouseEvent &);
+    void OnEventPaint(wxPaintEvent &);
+    void OnEventClose(wxCloseEvent &);
 };
 
 
@@ -65,7 +65,7 @@ private:
 
     void ShowWithXFCEFix();
 
-    void OnCloseEvent(wxCloseEvent &);
+    void OnEventClose(wxCloseEvent &);
 
     void OnOK(wxCommandEvent &);
 

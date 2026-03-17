@@ -18,7 +18,7 @@ public:
         , m_dragging(false)
     {
         // Включаем обработку событий мыши
-        Bind(wxEVT_LEFT_DOWN, &KnobWidget::OnMouseLeftDown, this);
+        Bind(wxEVT_LEFT_DOWN, &KnobWidget::OnEventMouseLeftDown, this);
         Bind(wxEVT_LEFT_UP, &KnobWidget::OnMouseLeftUp, this);
         Bind(wxEVT_MOTION, &KnobWidget::OnMouseMove, this);
         Bind(wxEVT_MOUSE_CAPTURE_LOST, &KnobWidget::OnMouseCaptureLost, this);
@@ -67,7 +67,7 @@ private:
     bool m_dragging;
     wxPoint m_capturePoint; // Точка, где был захвачен виджет
 
-    void OnMouseLeftDown(wxMouseEvent &event)
+    void OnEventMouseLeftDown(wxMouseEvent &event)
     {
         if (!m_dragging)
         {

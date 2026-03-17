@@ -26,8 +26,8 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
 
     main_panel->Bind(wxEVT_PAINT, &DraggedWindow::OnPaint, this);
 
-    Bind(wxEVT_CLOSE_WINDOW, &DraggedWindow::OnCloseEvent, this);
-    Bind(wxEVT_LEAVE_WINDOW, &DraggedWindow::OnMouseLeaveEvent, this);
+    Bind(wxEVT_CLOSE_WINDOW, &DraggedWindow::OnEventClose, this);
+    Bind(wxEVT_LEAVE_WINDOW, &DraggedWindow::OnEventMouseLeave, this);
 
     SetSize(_size);
 }
@@ -56,12 +56,12 @@ void DraggedWindow::SetSize(const wxSize &_size)
 
 void DraggedWindow::SetupDragging(wxWindow *window)
 {
-    window->Bind(wxEVT_LEFT_DOWN, &DraggedWindow::OnMouseLeftDown, this);
-    window->Bind(wxEVT_LEFT_UP, &DraggedWindow::OnDragEnd, this);
-    window->Bind(wxEVT_MOTION, &DraggedWindow::OnMouseMotion, this);
+    window->Bind(wxEVT_LEFT_DOWN, &DraggedWindow::OnEventMouseLeftDown, this);
+    window->Bind(wxEVT_LEFT_UP, &DraggedWindow::OnEventMouseLeftUp, this);
+    window->Bind(wxEVT_MOTION, &DraggedWindow::OnEventMouseMotion, this);
 }
 
-void DraggedWindow::OnMouseLeftDown(wxMouseEvent &event)
+void DraggedWindow::OnEventMouseLeftDown(wxMouseEvent &event)
 {
     {
         // Обработка нажатия кнопки мыш
@@ -95,13 +95,13 @@ void DraggedWindow::OnMouseLeftDown(wxMouseEvent &event)
 }
 
 
-void DraggedWindow::OnCloseEvent(wxCloseEvent &)
+void DraggedWindow::OnEventClose(wxCloseEvent &)
 {
     Destroy();
 }
 
 
-void DraggedWindow::OnDragEnd(wxMouseEvent &event)
+void DraggedWindow::OnEventMouseLeftUp(wxMouseEvent &event)
 {
     if (dragging)
     {
@@ -118,7 +118,7 @@ void DraggedWindow::OnDragEnd(wxMouseEvent &event)
 }
 
 
-void DraggedWindow::OnMouseLeaveEvent(wxMouseEvent &event)
+void DraggedWindow::OnEventMouseLeave(wxMouseEvent &event)
 {
     mouseInCloseButton = false;
     Refresh();
@@ -127,7 +127,7 @@ void DraggedWindow::OnMouseLeaveEvent(wxMouseEvent &event)
 }
 
 
-void DraggedWindow::OnMouseMotion(wxMouseEvent &event)
+void DraggedWindow::OnEventMouseMotion(wxMouseEvent &event)
 {
     wxWindow *source = (wxWindow *)event.GetEventObject();
 
@@ -174,7 +174,7 @@ bool DraggedWindow::Show(bool show)
 }
 
 
-void DraggedWindow::OnPaintEvent(wxPaintEvent &)
+void DraggedWindow::OnEventPaint(wxPaintEvent &)
 {
     wxPaintDC dc(main_panel);
 
@@ -275,7 +275,7 @@ DraggedDialog::DraggedDialog(const wxString &_title, const wxSize &_size) : Drag
     cancelBtn->Bind(wxEVT_BUTTON, &DraggedDialog::OnCancel, this);
     */
 
-    Bind(wxEVT_CLOSE_WINDOW, &DraggedDialog::OnCloseEvent, this);
+    Bind(wxEVT_CLOSE_WINDOW, &DraggedDialog::OnEventClose, this);
 
     Layout();
     Fit();
@@ -329,7 +329,7 @@ void DraggedDialog::ShowWithXFCEFix()
 }
 
 
-void DraggedDialog::OnCloseEvent(wxCloseEvent &event)
+void DraggedDialog::OnEventClose(wxCloseEvent &event)
 {
     CloseModal();
 

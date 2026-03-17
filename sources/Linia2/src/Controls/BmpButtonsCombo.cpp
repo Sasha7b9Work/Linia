@@ -86,7 +86,7 @@ private:
     void SetupDragging(wxWindow *window)
     {
         window->Bind(wxEVT_LEFT_DOWN, &BmpButtonPopup::OnDragStart, this);
-        window->Bind(wxEVT_LEFT_UP, &BmpButtonPopup::OnDragEnd, this);
+        window->Bind(wxEVT_LEFT_UP, &BmpButtonPopup::OnEventMouseLeftUp, this);
         window->Bind(wxEVT_MOTION, &BmpButtonPopup::OnDragMotion, this);
     }
 
@@ -109,7 +109,7 @@ private:
     }
 
 
-    void OnDragEnd(wxMouseEvent &event)
+    void OnEventMouseLeftUp(wxMouseEvent &event)
     {
         if (dragging)
         {
