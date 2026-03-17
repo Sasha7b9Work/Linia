@@ -136,7 +136,6 @@ private:
             wxPoint delta = currentPos - dragStart;
             wxPoint newPos = GetPosition() + delta;
             Move(newPos);
-            SET::GUI::calculation_pos.Set(newPos);
             dragStart = currentPos;
         }
 

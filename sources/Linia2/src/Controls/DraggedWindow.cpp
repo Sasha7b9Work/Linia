@@ -15,8 +15,6 @@ DraggedWindow::DraggedWindow(wxFrame *parent)
 
     CreateMainPanel();
 
-    Move(SET::GUI::calculation_pos.Get());
-
     Layout();
     Fit();
 }
@@ -87,7 +85,6 @@ void DraggedWindow::OnDragMotion(wxMouseEvent &event)
         wxPoint delta = currentPos - dragStart;
         wxPoint newPos = GetPosition() + delta;
         Move(newPos);
-        SET::GUI::calculation_pos.Set(newPos);
         dragStart = currentPos;
     }
 
@@ -161,6 +158,8 @@ int DraggedDialog::ShowModal()
         wxYield();  // Обрабатываем события
         wxMilliSleep(10);  // Небольшая задержка чтобы не нагружать CPU
     }
+
+    TheMainWindow->HideSystemPanel();
 
     return m_modalResult;
 }
