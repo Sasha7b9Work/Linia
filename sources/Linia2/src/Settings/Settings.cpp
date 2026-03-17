@@ -8,11 +8,11 @@ namespace SET
 {
     namespace GUI
     {
-        Value<wxPoint>   position("gui_position", { 100, 100 });
-        Value<wxPoint>   pos_console("gui_pos_console", { 10, 10 });
-        Value<wxPoint>   size_console("gui_size_console", { 400, 400 });
-        Value<wxPoint>   pos_list("gui_pos_list", { 10, 10 });
-        Value<wxPoint>   size_list("gui_size_list", { 400, 400 });
+        ValuePoint       position("gui_position", { 100, 100 });
+        ValuePoint       pos_console("gui_pos_console", { 10, 10 });
+        ValuePoint       size_console("gui_size_console", { 400, 400 });
+        ValuePoint       pos_list("gui_pos_list", { 10, 10 });
+        ValuePoint       size_list("gui_size_list", { 400, 400 });
         ValueBool        maximized_list("gui_maximized_list", false);
         ValueBool        maximized_console("gui_maximized_console", false);
         ValueInt         current_page_notebook("gui_current_page_notebook", 0);
@@ -32,8 +32,8 @@ namespace SET
         ValueBool        track_x("track_x", false);
         ValueBool        track_y("track_y", false);
         ValueBool        track_mouse("track_mouse", false);
-        Value<wxPoint>   calculation_pos{ "calculation_pos", {10, 10} };
-        Value<wxPoint>   cursors_pos{ "cursors_pos", {10, 10} };
+        ValuePoint       calculation_pos{ "calculation_pos", {10, 10} };
+        ValuePoint       cursors_pos{ "cursors_pos", {10, 10} };
     }
 }
 

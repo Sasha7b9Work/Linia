@@ -11,11 +11,11 @@ namespace SET
     {
         void Load();
         void Save();
-        extern Value<wxPoint>   position;
-        extern Value<wxPoint>   pos_console;
-        extern Value<wxPoint>   size_console;
-        extern Value<wxPoint>   pos_list;
-        extern Value<wxPoint>   size_list;
+        extern ValuePoint       position;
+        extern ValuePoint       pos_console;
+        extern ValuePoint       size_console;
+        extern ValuePoint       pos_list;
+        extern ValuePoint       size_list;
         extern ValueBool        maximized_list;
         extern ValueBool        maximized_console;
         extern ValueInt         current_page_notebook;
@@ -35,7 +35,7 @@ namespace SET
         extern ValueBool        track_x;                    // Отслеживать значения измерений по Х
         extern ValueBool        track_y;                    // и Y
         extern ValueBool        track_mouse;                // и положение мыши
-        extern Value<wxPoint>   calculation_pos;            // Позиция окна РАСЧЁТ
-        extern Value<wxPoint>   cursors_pos;                // Позиция окна КУРСОРЫ
+        extern ValuePoint       calculation_pos;            // Позиция окна РАСЧЁТ
+        extern ValuePoint       cursors_pos;                // Позиция окна КУРСОРЫ
     }
 };

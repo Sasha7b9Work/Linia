@@ -155,6 +155,12 @@ public:
 class ValueUInt : public Value<uint>
 {
 public:
-    ValueUInt(const wxString &_key, const uint &_def) : Value<uint>(_key, _def)
-    {}
+    ValueUInt(const wxString &_key, const uint &_def) : Value<uint>(_key, _def) { }
+};
+
+
+class ValuePoint : public Value<wxPoint>
+{
+public:
+    ValuePoint(const wxString &_key, const wxPoint &_def) : Value<wxPoint>(_key, _def) { }
 };
