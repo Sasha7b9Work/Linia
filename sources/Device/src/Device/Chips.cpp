@@ -22,6 +22,24 @@
 */
 
 
+namespace Chans
+{
+    static void DelayUS(uint us)
+    {
+        volatile uint counter = us * 1000;
+
+        while (counter--)
+        {
+        }
+    }
+
+    static void Delay()
+    {
+        DelayUS(1);
+    }
+}
+
+
 namespace ChanB
 {
     extern PinOut pinEND1B;
@@ -119,20 +137,36 @@ void Chip::WriteValueRAW(uint value)
 
     clk->ToLow();
 
+    Chans::Delay();
+
     cs->Set(level_cs);
+
+    Chans::Delay();
 
     for (int bit = (int)length - 1; bit >= 0; bit--)
     {
         clk->ToLow();
 
+        Chans::Delay();
+
         dat->Set(_GET_BIT(value, bit) != 0);
 
+        Chans::Delay();
+
         clk->ToHi();
+
+        Chans::Delay();
     }
+
+    Chans::Delay();
 
     cs->Set(!level_cs);
 
+    Chans::Delay();
+
     clk->ToLow();
+
+    Chans::Delay();
 }
 
 
