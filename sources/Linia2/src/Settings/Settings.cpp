@@ -14,7 +14,6 @@ namespace SET
         ValuePoint       size_list("gui_size_list", { 400, 400 });
         ValueBool        maximized_list("gui_maximized_list", false);
         ValueBool        maximized_console("gui_maximized_console", false);
-        ValueInt         current_page_notebook("gui_current_page_notebook", 0);
         ValueInt         serial_port_num("serial_port_num", 0);
         ValueBool        debug_mode("debug_mode", false);
 

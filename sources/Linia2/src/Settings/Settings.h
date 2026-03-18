@@ -23,7 +23,6 @@ namespace SET
         extern ValuePoint       size_list;
         extern ValueBool        maximized_list;
         extern ValueBool        maximized_console;
-        extern ValueInt         current_page_notebook;
         extern ValueInt         serial_port_num;            // Нумерация начинается с нуля. 0 == COM1
         extern ValueBool        debug_mode;
 
