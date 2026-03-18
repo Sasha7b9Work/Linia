@@ -46,9 +46,7 @@ MainWindow::MainWindow(const wxString &title)
 
     SetSizer(sizer);
 
-    wxWindow::SetPosition(SET::GUI::position.Get());
-
-
+    SetPosition();
 
     Bind(wxEVT_CHAR_HOOK, &MainWindow::OnEventKeyHook, this);
 
@@ -204,7 +202,7 @@ void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
         ConsoleRS232::self->Destroy();
     }
 
-    SET::GUI::position.Set(wxWindow::GetPosition());
+    position.Set(wxWindow::GetPosition());
 
     TheMainWindow = nullptr;
 
@@ -276,4 +274,12 @@ void MainWindow::HideSystemPanel()
         gdk_window_raise(gdk_window);
     }
 #endif
+}
+
+
+void MainWindow::SetPosition()
+{
+    position.Load();
+
+    wxWindow::SetPosition(position);
 }

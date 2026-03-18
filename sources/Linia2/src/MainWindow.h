@@ -1,11 +1,7 @@
 ﻿// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Panels/PanelMenu/PanelMenu.h"
-
-//#pragma warning(push, 0)
-//#define WIN32_LEAN_AND_MEAN
-//#include <wx/wx.h>
-//#pragma warning(pop)
+#include "Settings/Value.h"
 
 
 struct ModeMainWindow
@@ -64,8 +60,12 @@ private:
 
     wxToolBar *toolBar = nullptr;
 
+    ValuePoint position{ "gui_position", { 100, 100 } };
+
     void OnEventKeyHook(wxKeyEvent &);
 
     // Настроить шрифт
     void TuneFont();
+
+    void SetPosition();
 };

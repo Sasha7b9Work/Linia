@@ -17,7 +17,6 @@ namespace SET
         void Load();
         void Save();
 
-        extern ValuePoint       position;
         extern ValuePoint       pos_console;
         extern ValuePoint       size_console;
         extern ValuePoint       pos_list;

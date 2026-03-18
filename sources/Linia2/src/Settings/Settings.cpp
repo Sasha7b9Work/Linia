@@ -8,7 +8,6 @@ namespace SET
 {
     namespace GUI
     {
-        ValuePoint       position("gui_position", { 100, 100 });
         ValuePoint       pos_console("gui_pos_console", { 10, 10 });
         ValuePoint       size_console("gui_size_console", { 400, 400 });
         ValuePoint       pos_list("gui_pos_list", { 10, 10 });
