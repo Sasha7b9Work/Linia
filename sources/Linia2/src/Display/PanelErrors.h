@@ -17,9 +17,9 @@ struct Error
 
 class PanelErrors : public wxPanel
 {
-public:
+    friend class Display;
 
-    PanelErrors(wxWindow *);
+public:
 
     void ReInit();
 
@@ -27,6 +27,8 @@ public:
     void RemoveError(Error::E, const wxString &);
 
 private:
+
+    PanelErrors(wxWindow *);
 
     wxButton *btnCollapse = nullptr;
 

@@ -53,11 +53,6 @@ PanelConfig::PanelConfig(wxWindow* parent) :
 }
 
 
-PanelConfig::~PanelConfig()
-{
-}
-
-
 wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
 {
     int x = 4;

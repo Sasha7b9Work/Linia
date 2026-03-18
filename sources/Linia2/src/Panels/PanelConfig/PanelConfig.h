@@ -7,6 +7,7 @@
 class PanelConfig : public Panel
 {
     friend class PanelScheme;
+    friend class MainWindow;
 
 public:
 
@@ -16,8 +17,6 @@ public:
     static const int DYC = 26;              // Расстояние между комбобоксами по вертикали
     static const int X = 6;
 
-    PanelConfig(wxWindow *parent);
-
     void Pack();
 
     void Unpack();
@@ -26,7 +25,7 @@ public:
 
 private:
 
-    virtual ~PanelConfig();
+    PanelConfig(wxWindow *parent);
 
     wxToggleButton *btnScheme = nullptr,
         *btnChannelC = nullptr,

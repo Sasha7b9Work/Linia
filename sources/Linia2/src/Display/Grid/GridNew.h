@@ -9,6 +9,8 @@ class GraphMeasure;
 
 class GridNew : public IGrid
 {
+    friend class IGrid;
+
     struct Offset
     {
         void ResetToZero()
@@ -118,8 +120,6 @@ class GridNew : public IGrid
 
 public:
 
-    GridNew();
-
     void Draw(const std::vector<GraphMeasure *> &) override;
 
     void MoveImageOn(const wxPoint &) override;     // Переместить изображение на экране целиком
@@ -154,6 +154,8 @@ public:
     static const int size_cell = 60;       // Столько клетка всегда занимает на экране
 
 private:
+
+    GridNew();
 
     wxPoint pos_mouse;
     Offset  offset;

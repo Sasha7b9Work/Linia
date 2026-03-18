@@ -8,12 +8,11 @@ class WindowCursors : public DraggedDialog
 {
     friend class MenuDisplay;
     friend struct AutoCursors;
-
-public:
-
-    WindowCursors();
+    friend class PanelCalc;
 
 private:
+
+    WindowCursors();
 
     ValueCheckBox *chbTrackX = nullptr,
         *chbTrackY = nullptr,

@@ -5,7 +5,7 @@
 
 struct AutoCursors
 {
-    AutoCursors();
+    friend class MainWindow;
 
     void Draw(const std::vector<GraphMeasure *> &);
 
@@ -18,4 +18,6 @@ struct AutoCursors
 private:
 
     bool is_allowed = true;
+
+    AutoCursors();
 };

@@ -30,6 +30,8 @@ private:
 
 class MainWindow : public wxFrame
 {
+    friend class Application;
+
 public:
 
     static const int WIDTH = 1024;     // Полная ширина - соотвествует разрешению экрана
@@ -41,8 +43,6 @@ public:
 
     static const int HEIGHT_HI = 75;
     static const int HEIGHT_DRAW = HEIGHT - HEIGHT_HI - PanelMenu::HEIGHT;
-
-    MainWindow(const wxString &title);
 
     void OnQuit(wxCommandEvent &event);
     void OnAbout(wxCommandEvent &event);
@@ -57,6 +57,8 @@ public:
     void HideSystemPanel();
 
 private:
+
+    MainWindow(const wxString &title);
 
     wxToolBar *toolBar = nullptr;
 

@@ -8,15 +8,17 @@
 
 class PanelCalc : public wxPanel
 {
+    friend class PanelConfig;
+
 public:
 
     static const int HEIGHT = MainWindow::HEIGHT - MainWindow::HEIGHT_HI - PanelMenu::HEIGHT;
 
-    PanelCalc(wxWindow *parent, int x, int w, int h);
-
 private:
 
     wxButton      *btnCursors = nullptr;
+
+    PanelCalc(wxWindow *parent, int x, int w, int h);
 
     void OnEventButton(wxCommandEvent &);
 };
