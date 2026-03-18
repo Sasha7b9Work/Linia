@@ -36,7 +36,11 @@ namespace SET
         ValuePoint       cursors_pos{ "cursors_pos", {10, 10} };
     }
 
-    static std::vector<ValuePoint *> values_point;
+    static std::vector<ValuePoint *> &VectorPoint()
+    {
+        static std::vector<ValuePoint *> vec;
+        return vec;
+    }
     static std::vector<ValueBool *> values_bool;
     static std::vector<ValueInt *> values_int;
     static std::vector<ValueUInt *> values_uint;
@@ -45,7 +49,7 @@ namespace SET
 
 void SET::AppendValue(ValuePoint *value)
 {
-    values_point.push_back(value);
+    VectorPoint().push_back(value);
 }
 
 
@@ -69,7 +73,7 @@ void SET::AppendValue(ValueUInt *value)
 
 void SET::GUI::Load()
 {
-    for (auto elem : values_point)
+    for (auto elem : VectorPoint())
     {
         elem->Load();
     }
@@ -93,7 +97,7 @@ void SET::GUI::Load()
 
 void SET::GUI::Save()
 {
-    for (auto elem : values_point)
+    for (auto elem : VectorPoint())
     {
         elem->Save();
     }
