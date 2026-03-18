@@ -26,8 +26,6 @@ namespace SET
         ValueUInt        color_secant("color_secant", 0);
 
         ValueInt         size_point("size_point", 2);
-        ValueBool        cursors_x("cursors_x", false);
-        ValueBool        cursors_y("cursors_y", false);
     }
 
 

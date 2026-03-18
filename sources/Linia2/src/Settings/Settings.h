@@ -35,7 +35,5 @@ namespace SET
         extern ValueUInt        color_secant;               // Цвет секущей
 
         extern ValueInt         size_point;                 // Размер точки на графике
-        extern ValueBool        cursors_x;
-        extern ValueBool        cursors_y;
     }
 };

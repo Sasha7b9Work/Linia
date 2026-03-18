@@ -13,16 +13,11 @@ public:
 
     WindowCursors();
 
-    virtual ~WindowCursors() override;
-
 private:
 
     ValueCheckBox *chbTrackX = nullptr,
         *chbTrackY = nullptr,
-        *chbTrackMouse = nullptr;
-
-    wxCheckBox *chbCursorsX = nullptr,
+        *chbTrackMouse = nullptr,
+        *chbCursorsX = nullptr,
         *chbCursorsY = nullptr;
-
-    void OnEventCheckBox(wxCommandEvent &);
 };

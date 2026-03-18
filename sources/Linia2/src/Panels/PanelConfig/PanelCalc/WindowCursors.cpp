@@ -43,43 +43,10 @@ WindowCursors::WindowCursors() : DraggedDialog("Курсоры", {200, 300})
     y = 22;
 
     {
-        chbCursorsX = new wxCheckBox(boxManual, wxID_ANY, "X", { x, SD::Y_SB(y) });
-        chbCursorsX->SetValue(SET::GUI::cursors_x);
+        chbCursorsX = new ValueCheckBox(boxManual, "X", { x, SD::Y_SB(y) }, "cursors_x", false);
 
         y += dy;
 
-        chbCursorsY = new wxCheckBox(boxManual, wxID_ANY, "Y", { x, SD::Y_SB(y) });
-        chbCursorsY->SetValue(SET::GUI::cursors_y);
+        chbCursorsY = new ValueCheckBox(boxManual, "Y", { x, SD::Y_SB(y) }, "cursors_y", false);
     }
-
-    Bind(wxEVT_CHECKBOX, &WindowCursors::OnEventCheckBox, this);
-}
-
-
-WindowCursors::~WindowCursors()
-{
-}
-
-
-void WindowCursors::OnEventCheckBox(wxCommandEvent &event)
-{
-    int id = event.GetId();
-    bool check = event.IsChecked();
-
-    if (id == chbTrackX->GetId())
-    {
-        TheDisplay->Refresh();
-    }
-    else if (id == chbCursorsX->GetId())
-    {
-        SET::GUI::cursors_x.Set(check);
-        TheDisplay->Refresh();
-    }
-    else if (id == chbCursorsY->GetId())
-    {
-        SET::GUI::cursors_y.Set(check);
-        TheDisplay->Refresh();
-    }
-
-    event.Skip();
 }
