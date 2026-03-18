@@ -146,11 +146,16 @@ struct ValueCheckBox : public wxCheckBox
 {
     ValueCheckBox(wxWindow *parent, const wxString &title, const wxPoint &position, const wxString &_key, const bool &_def);
 
+    void SetNewValue(bool);
+
 private:
 
     ValueBool *value = nullptr;
 
     void OnEventCheckBox(wxCommandEvent &);
+
+    // Закрыли, чтобы случайно не вызвать
+    virtual void SetValue(bool value) override;
 };
 
 

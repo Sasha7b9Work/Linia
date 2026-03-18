@@ -34,6 +34,23 @@ void ValueCheckBox::OnEventCheckBox(wxCommandEvent &event)
 }
 
 
+void ValueCheckBox::SetNewValue(bool val)
+{
+    SetValue(val);
+
+    wxCommandEvent event(wxEVT_CHECKBOX, GetId());
+    event.SetEventObject(this);
+    event.SetInt(GetValue());
+    wxPostEvent(GetEventHandler(), event);
+}
+
+
+void ValueCheckBox::SetValue(bool val)
+{
+    wxCheckBox::SetValue(val);
+}
+
+
 ValueInt::ValueInt(const wxString &_key, const int &_def) : Value<int>(_key, _def)
 {
     SET::AppendValue(this);

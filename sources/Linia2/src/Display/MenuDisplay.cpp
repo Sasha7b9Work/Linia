@@ -145,9 +145,9 @@ void MenuDisplay::OnTrack(wxCommandEvent &event)
     wxObject *obj = event.GetEventObject();
     bool check = event.IsChecked();
 
-    if (obj == trackX)
+    if (event.GetId() == trackX->GetId())
     {
-        TheWindowCursors->chbTrackX->SetValue(check);
+        TheWindowCursors->chbTrackX->SetNewValue(check);
     }
     else if(obj == trackY)
     {
