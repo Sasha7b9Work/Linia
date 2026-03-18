@@ -37,6 +37,7 @@ public:
         if (serialiazed)
         {
             Config::Write(key, value);
+            Config::Flush();
         }
     }
 
