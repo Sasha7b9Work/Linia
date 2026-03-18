@@ -41,9 +41,24 @@ namespace SET
         static std::vector<ValuePoint *> vec;
         return vec;
     }
-    static std::vector<ValueBool *> values_bool;
-    static std::vector<ValueInt *> values_int;
-    static std::vector<ValueUInt *> values_uint;
+
+    static std::vector<ValueBool *> &VectorBool()
+    {
+        static std::vector<ValueBool *> vec;
+        return vec;
+    }
+
+    static std::vector<ValueInt *> &VectorInt()
+    {
+        static std::vector<ValueInt *> vec;
+        return vec;
+    }
+
+    static std::vector<ValueUInt *> &VectorUInt()
+    {
+        static std::vector<ValueUInt *> vec;
+        return vec;
+    }
 }
 
 
@@ -55,19 +70,19 @@ void SET::AppendValue(ValuePoint *value)
 
 void SET::AppendValue(ValueBool *value)
 {
-    values_bool.push_back(value);
+    VectorBool().push_back(value);
 }
 
 
 void SET::AppendValue(ValueInt *value)
 {
-    values_int.push_back(value);
+    VectorInt().push_back(value);
 }
 
 
 void SET::AppendValue(ValueUInt *value)
 {
-    values_uint.push_back(value);
+    VectorUInt().push_back(value);
 }
 
 
@@ -78,17 +93,17 @@ void SET::GUI::Load()
         elem->Load();
     }
 
-    for (auto elem : values_bool)
+    for (auto elem : VectorBool())
     {
         elem->Load();
     }
 
-    for (auto elem : values_int)
+    for (auto elem : VectorInt())
     {
         elem->Load();
     }
 
-    for (auto elem : values_uint)
+    for (auto elem : VectorUInt())
     {
         elem->Load();
     }
@@ -102,17 +117,17 @@ void SET::GUI::Save()
         elem->Save();
     }
 
-    for (auto elem : values_bool)
+    for (auto elem : VectorBool())
     {
         elem->Save();
     }
 
-    for (auto elem : values_int)
+    for (auto elem : VectorInt())
     {
         elem->Save();
     }
 
-    for (auto elem : values_uint)
+    for (auto elem : VectorUInt())
     {
         elem->Save();
     }
