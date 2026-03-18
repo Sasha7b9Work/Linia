@@ -7,6 +7,8 @@ namespace Config
 {
     void Init();
 
+    void Flush();
+
     void DeInit();
 
     void ReadFontParameter(const wxString &, wxFontFamily &);

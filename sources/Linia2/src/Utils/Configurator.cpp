@@ -20,6 +20,12 @@ void Config::Init()
 }
 
 
+void Config::Flush()
+{
+    wxConfigBase::Get(false)->Flush();
+}
+
+
 void Config::DeInit()
 {
     wxConfigBase::Get(false)->Flush();
