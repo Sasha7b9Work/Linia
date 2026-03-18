@@ -28,7 +28,6 @@ namespace SET
         ValueInt         size_point("size_point", 2);
         ValueBool        cursors_x("cursors_x", false);
         ValueBool        cursors_y("cursors_y", false);
-        ValuePoint       calculation_pos{ "calculation_pos", {10, 10} };
     }
 
 

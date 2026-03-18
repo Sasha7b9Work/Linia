@@ -37,6 +37,5 @@ namespace SET
         extern ValueInt         size_point;                 // Размер точки на графике
         extern ValueBool        cursors_x;
         extern ValueBool        cursors_y;
-        extern ValuePoint       calculation_pos;            // Позиция окна РАСЧЁТ
     }
 };
