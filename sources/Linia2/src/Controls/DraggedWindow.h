@@ -17,7 +17,7 @@ public:
 protected:
 
     wxPanel *main_panel = nullptr;
-    ValuePoint position;
+    ValuePoint *position = nullptr;
 
     virtual ~DraggedWindow();
 

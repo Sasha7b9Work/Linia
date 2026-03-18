@@ -10,7 +10,6 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
     : wxFrame(TheMainWindow, wxID_ANY, "WindowCalculation",
         { TheMainWindow->GetSize().x / 2, TheMainWindow->GetSize().y / 2 }, _size,
         wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE | wxSTAY_ON_TOP),
-    position(_title + "_pos", { 100, 100 }),
     title(_title)
 {
     TheAutoCursors->Ban();
@@ -33,6 +32,7 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
 
     SetSize(_size);
 
+    position = new ValuePoint(_title + "_pos", { 100, 100 }),
     SetPosition();
 }
 
@@ -45,8 +45,8 @@ DraggedWindow::~DraggedWindow()
 
 void DraggedWindow::SetPosition()
 {
-    position.Load();
-    wxFrame::SetPosition(position);
+    position->Load();
+    wxFrame::SetPosition(*position);
 }
 
 
@@ -101,7 +101,7 @@ void DraggedWindow::OnEventMouseLeftDown(wxMouseEvent &event)
 
 void DraggedWindow::OnEventClose(wxCloseEvent &event)
 {
-    position.Set(wxFrame::GetPosition());
+    position->Set(wxFrame::GetPosition());
 
     Destroy();
 
@@ -133,7 +133,7 @@ void DraggedWindow::OnEventMouseLeftUp(wxMouseEvent &event)
 
         if (closeButtonRect.Contains(pos))
         {
-            position.Set(wxFrame::GetPosition());
+            position->Set(wxFrame::GetPosition());
             Close();
             return;
         }
@@ -312,7 +312,7 @@ int DraggedDialog::ShowModal()
 
     TheAutoCursors->Allow();
 
-    position.Set(wxFrame::GetPosition());
+    position->Set(wxFrame::GetPosition());
 
     return m_modalResult;
 }
