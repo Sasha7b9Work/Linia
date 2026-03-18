@@ -6,7 +6,7 @@
 #include "Utils/SystemDepend.h"
 
 
-WindowCursors::WindowCursors(const wxString &_title) : DraggedDialog(_title, { 200, 300 })
+WindowCursors::WindowCursors() : DraggedDialog("Курсоры", {200, 300})
 {
     SetPosition(SET::GUI::cursors_pos.Get());
 
@@ -55,6 +55,7 @@ WindowCursors::WindowCursors(const wxString &_title) : DraggedDialog(_title, { 2
     }
 
     Bind(wxEVT_CHECKBOX, &WindowCursors::OnEventCheckBox, this);
+    Bind(wxEVT_CLOSE_WINDOW, &WindowCursors::OnEventClose, this);
 }
 
 
@@ -94,4 +95,11 @@ void WindowCursors::OnEventCheckBox(wxCommandEvent &event)
         SET::GUI::cursors_y.Set(check);
         TheDisplay->Refresh();
     }
+}
+
+
+void WindowCursors::OnEventClose(wxCloseEvent &event)
+{
+    SET::GUI::cursors_pos.Set(GetPosition());
+    event.Skip();
 }

@@ -38,21 +38,11 @@ void PanelCalc::OnEventButton(wxCommandEvent &event)
 
     if (obj == btnCursors)
     {
-        if (!wndCursors)
-        {
-            wndCursors = new WindowCursors("Курсоры");
+        wndCursors = new WindowCursors();
 
-            wndCursors->Bind(wxEVT_CLOSE_WINDOW, [this](wxCloseEvent &event)
-                {
-                    wndCursors = nullptr;
-                    event.Skip();
-                });
-        }
+        wndCursors->ShowModal();
 
-        if (wndCursors)
-        {
-            wndCursors->ShowModal();
-        }
+        delete wndCursors;
     }
 
     event.Skip();

@@ -36,6 +36,9 @@ namespace SET
         ValuePoint       cursors_pos{ "cursors_pos", {10, 10} };
     }
 
+
+    // \warn Такое хитрое обращение к векторам сделано потому, что порядок инициализации глобальных статических объектов неопределён,
+    // из-за чего к моменту, когда в эти вектора кладутся значения, оин могут быть не готовы к работе. 
     static std::vector<ValuePoint *> &VectorPoint()
     {
         static std::vector<ValuePoint *> vec;
