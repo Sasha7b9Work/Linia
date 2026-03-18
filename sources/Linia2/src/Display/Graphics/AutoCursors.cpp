@@ -9,9 +9,12 @@
 #include "Panels/PanelConfig/PanelCalc/WindowCursors.h"
 
 
-namespace AutoCursors
+AutoCursors *TheAutoCursors = nullptr;
+
+
+AutoCursors::AutoCursors()
 {
-    static bool is_allowed = true;
+    TheAutoCursors = this;
 }
 
 

@@ -18,6 +18,7 @@
 #include "Panels/PanelReferenceGraphs.h"
 #include "Controls/Dialog.h"
 #include "IPPP/Tests/Tests.h"
+#include "Display/Graphics/AutoCursors.h"
 
 
 MainWindow *TheMainWindow = nullptr;
@@ -65,6 +66,8 @@ MainWindow::MainWindow(const wxString &title)
             SetWindowStyle(GetWindowStyle() & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX));
         }
     }
+
+    new AutoCursors();
 
     new PanelName(this);
 

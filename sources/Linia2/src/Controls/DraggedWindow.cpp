@@ -12,7 +12,7 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
         wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE | wxSTAY_ON_TOP),
     title(_title)
 {
-    AutoCursors::Ban();
+    TheAutoCursors->Ban();
 
     main_panel = new wxPanel(this, wxID_ANY, { 0, 0 }, _size, wxNO_BORDER | wxEXPAND | wxSTAY_ON_TOP);
 
@@ -36,7 +36,7 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
 
 DraggedWindow::~DraggedWindow()
 {
-    AutoCursors::Allow();
+    TheAutoCursors->Allow();
 }
 
 
@@ -276,7 +276,7 @@ DraggedDialog::~DraggedDialog()
 
 int DraggedDialog::ShowModal()
 {
-    AutoCursors::Ban();
+    TheAutoCursors->Ban();
 
     m_modalActive = true;
     m_modalResult = wxID_CANCEL;
@@ -297,7 +297,7 @@ int DraggedDialog::ShowModal()
         wxMilliSleep(10);   // Небольшая задержка чтобы не нагружать CPU
     }
 
-    AutoCursors::Allow();
+    TheAutoCursors->Allow();
 
     return m_modalResult;
 }

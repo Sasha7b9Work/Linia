@@ -9,8 +9,9 @@ class MainWindow;
 class PanelErrors;
 class PanelCalc;
 class WindowCursors;
+struct AutoCursors;
 
-
+extern AutoCursors *TheAutoCursors;
 extern Application *TheApp;
 extern Display     *TheDisplay;
 extern IGrid       *TheGrid;

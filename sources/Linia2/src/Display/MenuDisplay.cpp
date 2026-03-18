@@ -11,7 +11,7 @@
 
 MenuDisplay::MenuDisplay() : wxMenu()
 {
-    AutoCursors::Ban();
+    TheAutoCursors->Ban();
 
     Bind(wxEVT_MENU, &MenuDisplay::OnResetZeroGrid, this, (Append(wxID_ANY, "Сброс"))->GetId());
 
@@ -34,7 +34,7 @@ MenuDisplay::MenuDisplay() : wxMenu()
 
 MenuDisplay::~MenuDisplay()
 {
-    AutoCursors::Allow();
+    TheAutoCursors->Allow();
 }
 
 

@@ -183,7 +183,7 @@ void GridNew::Draw(const std::vector<GraphMeasure *> &entities)
             pos_mouse.x > LeftX() &&
             pos_mouse.x < RightX())
         {
-            AutoCursors::Draw(entities);
+            TheAutoCursors->Draw(entities);
         }
     }
 

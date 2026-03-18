@@ -155,7 +155,7 @@ void Display::OnEventLeaveWindow(wxMouseEvent &event)
         GetEventHandler()->ProcessEvent(upEvent);
     }
 
-    AutoCursors::Ban();
+    TheAutoCursors->Ban();
 
     event.Skip();
 }
@@ -163,7 +163,7 @@ void Display::OnEventLeaveWindow(wxMouseEvent &event)
 
 void Display::OnEventEnterWindow(wxMouseEvent &event)
 {
-    AutoCursors::Allow();
+    TheAutoCursors->Allow();
 
     event.Skip();
 }

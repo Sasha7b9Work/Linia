@@ -6,17 +6,20 @@
 
 class WindowCursors : public DraggedDialog
 {
+    friend class MenuDisplay;
+    friend struct AutoCursors;
+
 public:
 
     WindowCursors();
 
     virtual ~WindowCursors() override;
 
+private:
+
     ValueCheckBox *chbTrackX = nullptr,
         *chbTrackY = nullptr,
         *chbTrackMouse = nullptr;
-
-private:
 
     wxCheckBox *chbCursorsX = nullptr,
         *chbCursorsY = nullptr;

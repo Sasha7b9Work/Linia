@@ -3,8 +3,10 @@
 #include "Display/Graphics/GraphMeasure.h"
 
 
-namespace AutoCursors
+struct AutoCursors
 {
+    AutoCursors();
+
     void Draw(const std::vector<GraphMeasure *> &);
 
     // Открыто какое-то окно поверху. Не нужно отображать курсоры
@@ -12,4 +14,8 @@ namespace AutoCursors
 
     // Нету открытых окон. Нужно отображать курсоры
     void Allow();
-}
+
+private:
+
+    bool is_allowed = true;
+};
