@@ -30,7 +30,7 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
 
     TheDisplay->SetColorPen(SET::GUI::color_curve.Get());
 
-    if (SET::GUI::track_y.Get())
+    if (TheWindowCursors->chbTrackY->IsChecked())
     {
         FinderMinMax <int>finder(std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
 

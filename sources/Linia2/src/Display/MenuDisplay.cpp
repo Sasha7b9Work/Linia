@@ -48,7 +48,7 @@ void MenuDisplay::AppendMenuTrack()
 
     trackY = subMenu->AppendCheckItem(wxID_ANY, "По Y");
     Bind(wxEVT_MENU, &MenuDisplay::OnTrack, this, trackY->GetId());
-    subMenu->Check(trackY->GetId(), SET::GUI::track_y);
+    subMenu->Check(trackY->GetId(), TheWindowCursors->chbTrackY->IsChecked());
 
     trackMouse = subMenu->AppendCheckItem(wxID_ANY, "Указатель мыши");
     Bind(wxEVT_MENU, &MenuDisplay::OnTrack, this, trackMouse->GetId());
@@ -142,18 +142,18 @@ void MenuDisplay::OnFullScreen(wxCommandEvent &event)
 
 void MenuDisplay::OnTrack(wxCommandEvent &event)
 {
-    wxObject *obj = event.GetEventObject();
+    int id = event.GetId();
     bool check = event.IsChecked();
 
     if (event.GetId() == trackX->GetId())
     {
         TheWindowCursors->chbTrackX->SetNewValue(check);
     }
-    else if(obj == trackY)
+    else if(id == trackY->GetId())
     {
-        SET::GUI::track_y.Set(check);
+        TheWindowCursors->chbTrackY->SetNewValue(check);
     }
-    else if (obj == trackMouse)
+    else if (id == trackMouse->GetId())
     {
         SET::GUI::track_mouse.Set(check);
     }

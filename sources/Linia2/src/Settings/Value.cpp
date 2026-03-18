@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Settings/Value.h"
 #include "Settings/Settings.h"
+#include "Display/Display.h"
 
 
 ValueBool::ValueBool(const wxString &_key, const bool &_def) : Value<bool>(_key, _def)
@@ -28,6 +29,7 @@ void ValueCheckBox::OnEventCheckBox(wxCommandEvent &event)
     if (event.GetEventObject() == this)
     {
         value->Set(event.IsChecked());
+        TheDisplay->Refresh();
     }
 
     event.Skip();

@@ -12,12 +12,12 @@ public:
 
     virtual ~WindowCursors() override;
 
-    ValueCheckBox *chbTrackX = nullptr;
+    ValueCheckBox *chbTrackX = nullptr,
+        *chbTrackY = nullptr;
 
 private:
 
-    wxCheckBox *chbTrackY = nullptr,
-        *chbTrackMouse = nullptr,
+    wxCheckBox *chbTrackMouse = nullptr,
         *chbCursorsX = nullptr,
         *chbCursorsY = nullptr;
 

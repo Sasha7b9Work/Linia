@@ -33,8 +33,7 @@ WindowCursors::WindowCursors() : DraggedDialog("Курсоры", {200, 300})
 
         y += dy;
 
-        chbTrackY = new wxCheckBox(boxAuto, wxID_ANY, "Отслеживать по Y", { x, SD::Y_SB(y) });
-        chbTrackY->SetValue(SET::GUI::track_y);
+        chbTrackY = new ValueCheckBox(boxAuto, "Отслеживать по Y", { x, SD::Y_SB(y) }, "track_y", false);
 
         y += dy;
 
@@ -73,11 +72,6 @@ void WindowCursors::OnEventCheckBox(wxCommandEvent &event)
 
     if (id == chbTrackX->GetId())
     {
-        TheDisplay->Refresh();
-    }
-    else if (id == chbTrackY->GetId())
-    {
-        SET::GUI::track_y.Set(check);
         TheDisplay->Refresh();
     }
     else if (id == chbTrackMouse->GetId())
