@@ -251,8 +251,8 @@ void PanelScheme::UpdateSuffixGenerator(ButtonsCombo *combo, char suffix)
 
 void PanelScheme::BuildPanel()
 {
-    PanelConfig::self->btnChannelB->Enable(PanelChannelB::self->IsEnabled());
-    PanelConfig::self->btnChannelS->Enable(PanelChannelS::self->IsEnabled());
+    ThePanelConfig->btnChannelB->Enable(PanelChannelB::self->IsEnabled());
+    ThePanelConfig->btnChannelS->Enable(PanelChannelS::self->IsEnabled());
 
     for (auto _jack : jacks)
     {

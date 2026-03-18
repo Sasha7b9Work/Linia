@@ -7,17 +7,20 @@ class Display;
 class IGrid;
 class MainWindow;
 class PanelErrors;
+class PanelConfig;
 class PanelCalc;
 class WindowCursors;
 struct AutoCursors;
 
-extern AutoCursors *TheAutoCursors;
-extern Application *TheApp;
-extern Display     *TheDisplay;
-extern IGrid       *TheGrid;
-extern MainWindow  *TheMainWindow;
 
+extern AutoCursors   *TheAutoCursors;
+extern Application   *TheApp;
+extern Display       *TheDisplay;
+extern IGrid         *TheGrid;
+extern MainWindow    *TheMainWindow;
+
+extern PanelConfig   *ThePanelConfig;
 extern PanelCalc     *ThePanelCalc;
 extern WindowCursors *TheWindowCursors;     // Настройки курсоров
 
-extern PanelErrors *ThePanelErrors;
+extern PanelErrors   *ThePanelErrors;

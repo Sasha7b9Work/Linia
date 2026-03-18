@@ -16,13 +16,13 @@
 #include "Application.h"
 
 
-PanelConfig *PanelConfig::self = nullptr;
+PanelConfig *ThePanelConfig = nullptr;
 
 
 PanelConfig::PanelConfig(wxWindow* parent) :
     Panel(parent, MainWindow::WIDTH_DRAW, 0, MainWindow::WIDTH3, HEIGHT)
 {
-    self = this;
+    ThePanelConfig = this;
 
     Bind(wxEVT_TOGGLEBUTTON, &PanelConfig::OnEventToggleButton, this);
 
@@ -66,27 +66,27 @@ wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
 
     if (button == btnChannelB)
     {
-        return new PanelChannelB(self, x, w, h);
+        return new PanelChannelB(this, x, w, h);
     }
     else if (button == btnChannelS)
     {
-        return new PanelChannelS(self, x, w, h);
+        return new PanelChannelS(this, x, w, h);
     }
     else if (button == btnChannelC)
     {
-        return new PanelChannelC(self, x, w, h);
+        return new PanelChannelC(this, x, w, h);
     }
     else if (button == btnScheme)
     {
-        return new PanelScheme(self, x, w, h);
+        return new PanelScheme(this, x, w, h);
     }
     else if (button == btnModel)
     {
-        return new PanelModel(self, x, w, h);
+        return new PanelModel(this, x, w, h);
     }
     else if (button == btnCalc)
     {
-        return new PanelCalc(self, x, w, h);
+        return new PanelCalc(this, x, w, h);
     }
 
     return nullptr;

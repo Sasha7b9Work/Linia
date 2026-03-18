@@ -18,8 +18,6 @@ public:
 
     PanelConfig(wxWindow *parent);
 
-    static PanelConfig *self;
-
     void Pack();
 
     void Unpack();

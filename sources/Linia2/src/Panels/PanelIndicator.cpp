@@ -50,12 +50,12 @@ void PanelIndicator::OnEventButton(ButtonBitmapChoiceEvent &event)
     {
         if (value == 0)
         {
-            PanelConfig::self->EnableSubPanels(true);
+            ThePanelConfig->EnableSubPanels(true);
             I_IPPP::impl->PressButtonStop();
         }
         else if (value == 1)
         {
-            PanelConfig::self->EnableSubPanels(false);
+            ThePanelConfig->EnableSubPanels(false);
             I_IPPP::impl->PressButtonStart();
         }
     }

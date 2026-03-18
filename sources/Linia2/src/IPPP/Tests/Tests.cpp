@@ -10,7 +10,7 @@ void Test::Load(pchar file_name)
 {
     Config::SetFile(wxGetCwd() + "/" + file_name);
 
-    PanelConfig::self->Unpack();
+    ThePanelConfig->Unpack();
 
     Config::SetFile("");
 }
@@ -20,7 +20,7 @@ void Test::Save(pchar file_name)
 {
     Config::SetFile(wxGetCwd() + "/" + file_name);
 
-    PanelConfig::self->Pack();
+    ThePanelConfig->Pack();
 
     Config::SetFile("");
 }
