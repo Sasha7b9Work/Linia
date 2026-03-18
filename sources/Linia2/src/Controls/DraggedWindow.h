@@ -17,6 +17,7 @@ public:
 protected:
 
     wxPanel *main_panel = nullptr;
+    ValuePoint position;
 
     virtual ~DraggedWindow();
 
@@ -39,7 +40,6 @@ private:
     wxRect   closeButtonRect;               // Область кнопки закрытия
     bool     mouseInCloseButton = false;    // Для ховер-эффекта
     const int titleHeight = 20;
-    ValuePoint position;
 
     void CreateTitleBar();
 
