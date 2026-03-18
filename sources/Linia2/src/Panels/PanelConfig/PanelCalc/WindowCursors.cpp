@@ -37,8 +37,7 @@ WindowCursors::WindowCursors() : DraggedDialog("Курсоры", {200, 300})
 
         y += dy;
 
-        chbTrackMouse = new wxCheckBox(boxAuto, wxID_ANY, "Указатель мыши", { x, SD::Y_SB(y) });
-        chbTrackMouse->SetValue(SET::GUI::track_mouse);
+        chbTrackMouse = new ValueCheckBox(boxAuto, "Указатель мыши", { x, SD::Y_SB(y) }, "track_mouse", false);
     }
 
     wxStaticBox *boxManual = new wxStaticBox(wnd, wxID_ANY, "Управляемые", { d, boxAuto->GetPosition().y + boxAuto->GetSize().y + d }, size);
@@ -74,11 +73,6 @@ void WindowCursors::OnEventCheckBox(wxCommandEvent &event)
     {
         TheDisplay->Refresh();
     }
-    else if (id == chbTrackMouse->GetId())
-    {
-        SET::GUI::track_mouse.Set(check);
-        TheDisplay->Refresh();
-    }
     else if (id == chbCursorsX->GetId())
     {
         SET::GUI::cursors_x.Set(check);
@@ -89,4 +83,6 @@ void WindowCursors::OnEventCheckBox(wxCommandEvent &event)
         SET::GUI::cursors_y.Set(check);
         TheDisplay->Refresh();
     }
+
+    event.Skip();
 }

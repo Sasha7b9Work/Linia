@@ -52,7 +52,7 @@ void MenuDisplay::AppendMenuTrack()
 
     trackMouse = subMenu->AppendCheckItem(wxID_ANY, "Указатель мыши");
     Bind(wxEVT_MENU, &MenuDisplay::OnTrack, this, trackMouse->GetId());
-    subMenu->Check(trackMouse->GetId(), SET::GUI::track_mouse);
+    subMenu->Check(trackMouse->GetId(), TheWindowCursors->chbTrackMouse->IsChecked());
 
     AppendSubMenu(subMenu, "Отслеживать");
 }
@@ -155,7 +155,7 @@ void MenuDisplay::OnTrack(wxCommandEvent &event)
     }
     else if (id == trackMouse->GetId())
     {
-        SET::GUI::track_mouse.Set(check);
+        TheWindowCursors->chbTrackMouse->SetNewValue(check);
     }
 }
 

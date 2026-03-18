@@ -81,7 +81,7 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
         Line(mouse_pos.x, finder.Min(), mouse_pos.x, finder.Max()).Draw(SET::GUI::color_curve.Get());
     }
 
-    if (SET::GUI::track_mouse)
+    if (TheWindowCursors->chbTrackMouse->IsChecked())
     {
         Text::SetFont();
         Text(wxString::Format("%.1f : %.1f", value.m_x, -value.m_y)).DrawAboutRightUp(mouse_pos.x + 5, mouse_pos.y - 5, true, true);
