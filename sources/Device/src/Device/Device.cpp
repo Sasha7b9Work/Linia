@@ -5,6 +5,8 @@
 #include "Device/FPGA.h"
 #include "Device/Sources.h"
 #include "Device/Channels.h"
+#include "Hardware/HAL/HAL.h"
+#include "Hardware/Timer.h"
 
 
 void Device::Init()
@@ -20,6 +22,8 @@ void Device::Init()
 
     pCLK2_DAC.Init();
     pCLK2_DAC.ToLow();
+
+    Timer::Init();
 
     FPGA::Init();
 
@@ -39,6 +43,8 @@ void Device::Init()
 
 void Device::Update()
 {
+    HAL_TIM2::StartMultiMeasurement();
+
     Commutator::Update();
 
     FPGA::Update();

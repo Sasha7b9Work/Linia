@@ -51,23 +51,12 @@ void FPGA::Init()
 
 void FPGA::Update()
 {
-    /*
-    static TimeMeterMS meter_local;
-
-    if (meter_local.ElapsedTime() > 1000)
-    {
-        meter_local.Reset();
-
-        Reg::Write(2, 20);
-    }
-    */
-
     if (!is_running_scan)
     {
         return;
     }
 
-    if (meter_scan.ElapsedTime() >= period_scan)
+    if (meter_scan.ElapsedMS() >= period_scan)
     {
         meter_scan.Reset();
 

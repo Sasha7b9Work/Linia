@@ -75,7 +75,31 @@ struct TimeMeterMS
 {
     TimeMeterMS() { Reset(); }
     void Reset();
-    uint ElapsedTime();
+    uint ElapsedMS();
 private:
     uint time_reset;
+};
+
+
+// !!! ¬нимание !!! Ёти измерени€ действительны в пределах одного прохода главного цикла программы
+struct TimeMeterUS
+{
+    TimeMeterUS()
+    {
+        Reset();
+    }
+
+    void Reset();
+
+    uint ElapsedUS() const;
+
+    // ќжидать, пока не пройдЄт timeUS микросекунд после последнего reset
+    void WaitForUS(uint timeUS);
+
+    // ќжидать timeUS после последнего сброса и сбросить
+    void WaitForUSandReset(uint timeUS);
+
+private:
+
+    uint time_reset = 0;
 };

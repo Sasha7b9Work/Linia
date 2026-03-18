@@ -229,7 +229,7 @@ void TimeMeterMS::Reset()
 }
 
 
-uint TimeMeterMS::ElapsedTime()
+uint TimeMeterMS::ElapsedMS()
 {
     return TIME_MS - time_reset;
 }
@@ -242,6 +242,35 @@ void Timer::DelayMS(uint delayMS)
     while (TIME_MS < time_end)
     {
     }
+}
+
+
+void TimeMeterUS::Reset()
+{
+    time_reset = TIME_US;
+}
+
+
+uint TimeMeterUS::ElapsedUS() const
+{
+    return TIME_US - time_reset;
+}
+
+
+void TimeMeterUS::WaitForUS(uint timeUS)
+{
+    volatile uint time_end = time_reset + timeUS;
+
+    while (TIME_US < time_end)
+    {
+    }
+}
+
+
+void TimeMeterUS::WaitForUSandReset(uint timeUS)
+{
+    WaitForUS(timeUS);
+    Reset();
 }
 
 
