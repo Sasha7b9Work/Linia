@@ -38,6 +38,5 @@ namespace SET
         extern ValueBool        cursors_x;
         extern ValueBool        cursors_y;
         extern ValuePoint       calculation_pos;            // Позиция окна РАСЧЁТ
-        extern ValuePoint       cursors_pos;                // Позиция окна КУРСОРЫ
     }
 };

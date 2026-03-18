@@ -10,7 +10,8 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
     : wxFrame(TheMainWindow, wxID_ANY, "WindowCalculation",
         { TheMainWindow->GetSize().x / 2, TheMainWindow->GetSize().y / 2 }, _size,
         wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE | wxSTAY_ON_TOP),
-    title(_title)
+    title(_title),
+    position(_title + "_pos", { 100, 100 })
 {
     TheAutoCursors->Ban();
 
@@ -36,7 +37,15 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
 
 DraggedWindow::~DraggedWindow()
 {
+    position.Set(wxFrame::GetPosition());
     TheAutoCursors->Allow();
+}
+
+
+void DraggedWindow::SetPosition()
+{
+    position.Load();
+    wxFrame::SetPosition(position);
 }
 
 

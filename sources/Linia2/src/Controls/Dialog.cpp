@@ -6,7 +6,7 @@
 Dialog::Dialog(const wxString &_title, const wxPoint &_pos, const wxSize &_size) :
     DraggedDialog(_title, _size)
 {
-    SetPosition(_pos);
+    wxFrame::SetPosition(_pos);
     Bind(wxEVT_CHAR_HOOK, &Dialog::OnKeyDown, this);
 }
 
@@ -66,7 +66,7 @@ void Dialog::ShowOnWindow(wxWindow *window)
         }
     }
 
-    SetPosition(pos);
+    wxFrame::SetPosition(pos);
 
     DraggedDialog::ShowModal();
 }

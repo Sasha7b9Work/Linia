@@ -11,8 +11,6 @@ WindowCursors *TheWindowCursors = nullptr;
 
 WindowCursors::WindowCursors() : DraggedDialog("Курсоры", {200, 300})
 {
-    SetPosition(SET::GUI::cursors_pos.Get());
-
     int x = 10;
     int y = 22;
     int dy = 25;
@@ -60,7 +58,6 @@ WindowCursors::WindowCursors() : DraggedDialog("Курсоры", {200, 300})
 
 WindowCursors::~WindowCursors()
 {
-    SET::GUI::cursors_pos.Set(GetPosition());
 }
 
 

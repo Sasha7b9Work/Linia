@@ -29,7 +29,6 @@ namespace SET
         ValueBool        cursors_x("cursors_x", false);
         ValueBool        cursors_y("cursors_y", false);
         ValuePoint       calculation_pos{ "calculation_pos", {10, 10} };
-        ValuePoint       cursors_pos{ "cursors_pos", {10, 10} };
     }
 
 

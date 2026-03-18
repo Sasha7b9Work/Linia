@@ -126,7 +126,7 @@ void WindowCalculation::CreateMainPanel2()
     if (GetParent())
     {
         wxRect parentRect = GetParent()->GetScreenRect();
-        SetPosition(wxPoint(parentRect.x + 50, parentRect.y + 50));
+        wxFrame::SetPosition(wxPoint(parentRect.x + 50, parentRect.y + 50));
     }
 }
 
