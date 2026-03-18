@@ -20,5 +20,4 @@ private:
         *chbCursorsY = nullptr;
 
     void OnEventCheckBox(wxCommandEvent &);
-    void OnEventClose(wxCloseEvent &);
 };
