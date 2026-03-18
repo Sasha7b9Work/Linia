@@ -41,8 +41,6 @@ void PanelCalc::OnEventButton(wxCommandEvent &event)
         wndCursors = new WindowCursors();
 
         wndCursors->ShowModal();
-
-        wndCursors = nullptr;
     }
 
     event.Skip();
