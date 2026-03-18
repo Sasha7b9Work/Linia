@@ -276,6 +276,8 @@ DraggedDialog::~DraggedDialog()
 
 int DraggedDialog::ShowModal()
 {
+    AutoCursors::Ban();
+
     m_modalActive = true;
     m_modalResult = wxID_CANCEL;
 
@@ -295,7 +297,7 @@ int DraggedDialog::ShowModal()
         wxMilliSleep(10);   // Небольшая задержка чтобы не нагружать CPU
     }
 
-    this->~DraggedDialog();
+    AutoCursors::Allow();
 
     return m_modalResult;
 }

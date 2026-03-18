@@ -8,11 +8,15 @@ class IGrid;
 class MainWindow;
 class PanelErrors;
 class PanelCalc;
+class WindowCursors;
 
 
 extern Application *TheApp;
 extern Display     *TheDisplay;
 extern IGrid       *TheGrid;
 extern MainWindow  *TheMainWindow;
-extern PanelCalc   *ThePanelCalc;
+
+extern PanelCalc     *ThePanelCalc;
+extern WindowCursors *TheWindowCursors;     // Настройки курсоров
+
 extern PanelErrors *ThePanelErrors;

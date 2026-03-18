@@ -6,6 +6,9 @@
 #include "Utils/SystemDepend.h"
 
 
+WindowCursors *TheWindowCursors = nullptr;
+
+
 WindowCursors::WindowCursors() : DraggedDialog("Курсоры", {200, 300})
 {
     SetPosition(SET::GUI::cursors_pos.Get());

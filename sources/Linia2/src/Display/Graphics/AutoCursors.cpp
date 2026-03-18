@@ -92,7 +92,10 @@ void AutoCursors::Ban()
 {
     is_allowed = false;
 
-    TheDisplay->Refresh();
+    if (TheDisplay)
+    {
+        TheDisplay->Refresh();
+    }
 }
 
 

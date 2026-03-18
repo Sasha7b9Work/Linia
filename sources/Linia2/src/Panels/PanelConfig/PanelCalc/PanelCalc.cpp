@@ -29,6 +29,8 @@ PanelCalc::PanelCalc(wxWindow* parent, int x, int w, int /*_h*/) :
     }
 
     Bind(wxEVT_BUTTON, &PanelCalc::OnEventButton, this);
+
+    TheWindowCursors = new WindowCursors();
 }
 
 
@@ -38,9 +40,7 @@ void PanelCalc::OnEventButton(wxCommandEvent &event)
 
     if (obj == btnCursors)
     {
-        wndCursors = new WindowCursors();
-
-        wndCursors->ShowModal();
+        TheWindowCursors->ShowModal();
     }
 
     event.Skip();

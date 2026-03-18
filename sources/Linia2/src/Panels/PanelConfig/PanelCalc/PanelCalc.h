@@ -17,7 +17,6 @@ public:
 private:
 
     wxButton      *btnCursors = nullptr;
-    WindowCursors *wndCursors = nullptr;
 
     void OnEventButton(wxCommandEvent &);
 };
