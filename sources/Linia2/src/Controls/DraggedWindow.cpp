@@ -295,6 +295,8 @@ int DraggedDialog::ShowModal()
         wxMilliSleep(10);   // Небольшая задержка чтобы не нагружать CPU
     }
 
+    this->~DraggedDialog();
+
     return m_modalResult;
 }
 

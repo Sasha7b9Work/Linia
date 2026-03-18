@@ -42,7 +42,7 @@ void PanelCalc::OnEventButton(wxCommandEvent &event)
 
         wndCursors->ShowModal();
 
-        delete wndCursors;
+        wndCursors = nullptr;
     }
 
     event.Skip();
