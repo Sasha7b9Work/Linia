@@ -19,9 +19,6 @@ namespace SET
 
         extern ValuePoint       pos_console;
         extern ValuePoint       size_console;
-        extern ValuePoint       pos_list;
-        extern ValuePoint       size_list;
-        extern ValueBool        maximized_list;
         extern ValueBool        maximized_console;
         extern ValueInt         serial_port_num;            // Нумерация начинается с нуля. 0 == COM1
         extern ValueBool        debug_mode;
@@ -34,5 +31,6 @@ namespace SET
         extern ValueUInt        color_secant;               // Цвет секущей
 
         extern ValueInt         size_point;                 // Размер точки на графике
+        extern Value<wxString>  current_panel;
     }
 };

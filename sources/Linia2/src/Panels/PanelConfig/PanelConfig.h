@@ -28,6 +28,8 @@ public:
 
 private:
 
+    virtual ~PanelConfig();
+
     wxToggleButton *btnScheme = nullptr,
         *btnChannelC = nullptr,
         *btnChannelB = nullptr,

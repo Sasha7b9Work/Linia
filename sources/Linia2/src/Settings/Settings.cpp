@@ -10,9 +10,6 @@ namespace SET
     {
         ValuePoint       pos_console("gui_pos_console", { 10, 10 });
         ValuePoint       size_console("gui_size_console", { 400, 400 });
-        ValuePoint       pos_list("gui_pos_list", { 10, 10 });
-        ValuePoint       size_list("gui_size_list", { 400, 400 });
-        ValueBool        maximized_list("gui_maximized_list", false);
         ValueBool        maximized_console("gui_maximized_console", false);
         ValueInt         serial_port_num("serial_port_num", 0);
         ValueBool        debug_mode("debug_mode", false);
@@ -25,6 +22,7 @@ namespace SET
         ValueUInt        color_secant("color_secant", 0);
 
         ValueInt         size_point("size_point", 2);
+        Value<wxString>  current_panel{ "current_panel", "PanelChannelC" };
     }
 
 
@@ -101,6 +99,8 @@ void SET::GUI::Load()
     {
         elem->Load();
     }
+
+    current_panel.Load();
 }
 
 
@@ -125,4 +125,6 @@ void SET::GUI::Save()
     {
         elem->Save();
     }
+
+    current_panel.Save();
 }

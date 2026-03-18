@@ -12,6 +12,8 @@
 #include "Panels/PanelConfig/PanelModel.h"
 #include "Panels/PanelConfig/PanelCalc/PanelCalc.h"
 #include "Utils/Configurator.h"
+#include "Settings/Settings.h"
+#include "Application.h"
 
 
 PanelConfig *PanelConfig::self = nullptr;
@@ -47,12 +49,14 @@ PanelConfig::PanelConfig(wxWindow* parent) :
     btnCalc = new wxToggleButton(this, wxID_ANY, "Измер", { sizeScheme.x * 2, h }, sizeChan);
     str_panels.emplace_back(StructPanel{ btnCalc, CreatePanel(btnCalc) });
 
-    {
-        // Включаем панель
-
-        GF::SendCommandEvent(btnChannelC, wxEVT_TOGGLEBUTTON, 1);
-    }
+    SetCurrentPanel(SET::GUI::current_panel.Get());
 }
+
+
+PanelConfig::~PanelConfig()
+{
+}
+
 
 wxPanel *PanelConfig::CreatePanel(wxToggleButton *button)
 {
@@ -111,6 +115,8 @@ void PanelConfig::OnEventToggleButton(wxCommandEvent &event)
             EnablePanel(event.GetId());
         }
     }
+
+    SET::GUI::current_panel.Set(GetCurrentPanel()->GetName());
 
     event.Skip();
 }
@@ -172,8 +178,6 @@ void PanelConfig::Pack()
     PanelChannelB::self->Pack();
     PanelChannelS::self->Pack();
     PanelScheme::self->Pack();
-
-    Config::WriteString("CurrentPanel", GetCurrentPanel()->GetName());
 }
 
 
@@ -183,8 +187,6 @@ void PanelConfig::Unpack()
     PanelChannelB::self->Unpack();
     PanelChannelS::self->Unpack();
     PanelScheme::self->Unpack();
-
-    SetCurrentPanel(Config::ReadString("CurrentPanel"));
 }
 
 
