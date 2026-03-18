@@ -23,6 +23,9 @@ namespace SET
 
         ValueInt         size_point("size_point", 2);
         Value<wxString>  current_panel{ "current_panel", "PanelChannelC" };
+
+        void Load();
+        void Save();
     }
 
 
@@ -78,7 +81,7 @@ void SET::AppendValue(ValueUInt *value)
 }
 
 
-void SET::GUI::Load()
+void SET::Load()
 {
     for (auto elem : VectorPoint())
     {
@@ -100,31 +103,43 @@ void SET::GUI::Load()
         elem->Load();
     }
 
+    GUI::Load();
+}
+
+
+void SET::Save()
+{
+    for (auto elem : VectorPoint())
+    {
+        elem->Save();
+    }
+
+    for (auto elem : VectorBool())
+    {
+        elem->Save();
+    }
+
+    for (auto elem : VectorInt())
+    {
+        elem->Save();
+    }
+
+    for (auto elem : VectorUInt())
+    {
+        elem->Save();
+    }
+
+    GUI::Save();
+}
+
+
+void SET::GUI::Load()
+{
     current_panel.Load();
 }
 
 
 void SET::GUI::Save()
 {
-    for (auto elem : VectorPoint())
-    {
-        elem->Save();
-    }
-
-    for (auto elem : VectorBool())
-    {
-        elem->Save();
-    }
-
-    for (auto elem : VectorInt())
-    {
-        elem->Save();
-    }
-
-    for (auto elem : VectorUInt())
-    {
-        elem->Save();
-    }
-
     current_panel.Save();
 }

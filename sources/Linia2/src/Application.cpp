@@ -63,7 +63,7 @@ bool Application::OnInit()
 
     Config::Init();
 
-    SET::GUI::Load();
+    SET::Load();
 
     // we use a PNG image in our HTML page
     wxImage::AddHandler(new wxPNGHandler);
@@ -135,7 +135,7 @@ void Application::Disable()
 {
     timer.Stop();
 
-    SET::GUI::Save();
+    SET::Save();
 }
 
 

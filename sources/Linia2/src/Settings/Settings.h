@@ -11,12 +11,12 @@ namespace SET
     void AppendValue(ValueInt *);
     void AppendValue(ValueUInt *);
 
+    void Load();
+    void Save();
+
     // Настройки ГУИ
     namespace GUI
     {
-        void Load();
-        void Save();
-
         extern ValuePoint       pos_console;
         extern ValuePoint       size_console;
         extern ValueBool        maximized_console;
