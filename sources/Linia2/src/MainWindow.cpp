@@ -85,7 +85,7 @@ MainWindow::MainWindow(const wxString &title)
 
     new PanelReferenceGraph(this);
 
-    SetMode(SET::GUI::debug_mode.Get() ? ModeMainWindow::Debug : ModeMainWindow::Standard);
+    SetMode(ModeMainWindow::Standard);
 }
 
 
