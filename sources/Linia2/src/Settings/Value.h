@@ -9,9 +9,7 @@ template<class T>
 class Value
 {
 public:
-    Value(const wxString &_key, const T &_default_value, wxWindow *_window = nullptr, int _id = 0, bool _serialiazed = true) : //-V730
-        window(_window),
-        id(_id),
+    Value(const wxString &_key, const T &_default_value, bool _serialiazed = true) : //-V730
         key(_key),
         default_value(_default_value),
         stored_value(_default_value),
@@ -52,20 +50,6 @@ public:
         Set(value);
     }
 
-    // Установить состояние контрола в соотвествии с состоянием переменной
-    void LoadToControl(wxWindow *_window = nullptr, int _id = 0)
-    {
-        if (_window)
-        {
-            window = _window;
-            id = _id;
-        }
-
-        Load();
-
-        LoadToWindow();
-    }
-
     virtual void ResetToFactory(bool factory)
     {
         if (factory)
@@ -76,8 +60,6 @@ public:
         {
             Set(stored_value);
         }
-
-        LoadToControl();
     }
 
     // Установить значение переменной из контрола
@@ -111,19 +93,15 @@ private:
     }
 
 protected:
-    wxWindow *window;           // Какому окну принадлежит элемент управления
-    int      id;                // id элемента управления
     wxString key;
     T        default_value;
     T        stored_value;      // Сюда записываем значение перед тем как загрузить заводскую настроку,
                                 // чтобы потом восстановить
 
-    void Init(const wxString &_key, const T &_default_value, wxWindow *_window, int _id)
+    void Init(const wxString &_key, const T &_default_value)
     {
         key = _key;
         default_value = _default_value;
-        window = _window;
-        id = _id;
 
         Load();
     }
