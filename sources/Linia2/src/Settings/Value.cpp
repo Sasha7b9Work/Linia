@@ -10,6 +10,30 @@ ValueBool::ValueBool(const wxString &_key, const bool &_def) : Value<bool>(_key,
 }
 
 
+ValueCheckBox::ValueCheckBox(wxWindow *parent, const wxString &title, const wxPoint &position, const wxString &_key, const bool &_def) :
+    wxCheckBox(parent, wxID_ANY, title, position)
+{
+    value = new ValueBool(_key, _def);
+
+    value->Load();
+
+    SetValue(value->Get());
+
+    Bind(wxEVT_CHECKBOX, &ValueCheckBox::OnEventCheckBox, this);
+}
+
+
+void ValueCheckBox::OnEventCheckBox(wxCommandEvent &event)
+{
+    if (event.GetEventObject() == this)
+    {
+        value->Set(event.IsChecked());
+    }
+
+    event.Skip();
+}
+
+
 ValueInt::ValueInt(const wxString &_key, const int &_def) : Value<int>(_key, _def)
 {
     SET::AppendValue(this);

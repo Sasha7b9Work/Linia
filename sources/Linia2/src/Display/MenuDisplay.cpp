@@ -6,6 +6,7 @@
 #include "MainWindow.h"
 #include "Settings/Settings.h"
 #include "Display/Graphics/AutoCursors.h"
+#include "Panels/PanelConfig/PanelCalc/WindowCursors.h"
 
 
 MenuDisplay::MenuDisplay() : wxMenu()
@@ -43,7 +44,7 @@ void MenuDisplay::AppendMenuTrack()
 
     trackX = subMenu->AppendCheckItem(wxID_ANY, "По X");
     Bind(wxEVT_MENU, &MenuDisplay::OnTrack, this, trackX->GetId());
-    subMenu->Check(trackX->GetId(), SET::GUI::track_x);
+    subMenu->Check(trackX->GetId(), TheWindowCursors->chbTrackX->IsChecked());
 
     trackY = subMenu->AppendCheckItem(wxID_ANY, "По Y");
     Bind(wxEVT_MENU, &MenuDisplay::OnTrack, this, trackY->GetId());
@@ -141,17 +142,20 @@ void MenuDisplay::OnFullScreen(wxCommandEvent &event)
 
 void MenuDisplay::OnTrack(wxCommandEvent &event)
 {
-    if (event.GetId() == trackX->GetId())
+    wxObject *obj = event.GetEventObject();
+    bool check = event.IsChecked();
+
+    if (obj == trackX)
     {
-        SET::GUI::track_x.Set(event.IsChecked());
+        TheWindowCursors->chbTrackX->SetValue(check);
     }
-    else if(event.GetId() == trackY->GetId())
+    else if(obj == trackY)
     {
-        SET::GUI::track_y.Set(event.IsChecked());
+        SET::GUI::track_y.Set(check);
     }
-    else if (event.GetId() == trackMouse->GetId())
+    else if (obj == trackMouse)
     {
-        SET::GUI::track_mouse.Set(event.IsChecked());
+        SET::GUI::track_mouse.Set(check);
     }
 }
 

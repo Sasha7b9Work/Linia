@@ -38,7 +38,6 @@ namespace SET
         extern ValueInt         size_point;                 // Размер точки на графике
         extern ValueBool        cursors_x;
         extern ValueBool        cursors_y;
-        extern ValueBool        track_x;                    // Отслеживать значения измерений по Х
         extern ValueBool        track_y;                    // и Y
         extern ValueBool        track_mouse;                // и положение мыши
         extern ValuePoint       calculation_pos;            // Позиция окна РАСЧЁТ

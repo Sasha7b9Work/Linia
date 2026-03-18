@@ -137,29 +137,36 @@ private:
 };
 
 
-class ValueBool : public Value<bool>
+struct ValueBool : public Value<bool>
 {
-public:
     ValueBool(const wxString &_key, const bool &_def);
 };
 
-
-class ValueInt : public Value<int>
+struct ValueCheckBox : public wxCheckBox
 {
-public:
+    ValueCheckBox(wxWindow *parent, const wxString &title, const wxPoint &position, const wxString &_key, const bool &_def);
+
+private:
+
+    ValueBool *value = nullptr;
+
+    void OnEventCheckBox(wxCommandEvent &);
+};
+
+
+struct ValueInt : public Value<int>
+{
     ValueInt(const wxString &_key, const int &_def);
 };
 
 
-class ValueUInt : public Value<uint>
+struct ValueUInt : public Value<uint>
 {
-public:
     ValueUInt(const wxString &_key, const uint &_def);
 };
 
 
-class ValuePoint : public Value<wxPoint>
+struct ValuePoint : public Value<wxPoint>
 {
-public:
     ValuePoint(const wxString &_key, const wxPoint &_def);
 };

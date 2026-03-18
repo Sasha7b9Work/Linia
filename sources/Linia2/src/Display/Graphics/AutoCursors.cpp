@@ -6,6 +6,7 @@
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "Utils/FinderMinMax.h"
+#include "Panels/PanelConfig/PanelCalc/WindowCursors.h"
 
 
 namespace AutoCursors
@@ -55,7 +56,7 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
         Line(finder.Min(), mouse_pos.y, finder.Max(), mouse_pos.y).Draw(SET::GUI::color_curve.Get());
     }
 
-    if (SET::GUI::track_x.Get())
+    if (TheWindowCursors->chbTrackX->IsChecked())
     {
         FinderMinMax <int>finder(std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
 
