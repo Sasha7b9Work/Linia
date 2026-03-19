@@ -190,3 +190,28 @@ void PainterBMP::OnEventPaint(wxPaintEvent &)
         dc.DrawBitmap(bitmap.GetBitmap(), 0, 0, true);
     }
 }
+
+
+PainterAnimated::PainterAnimated(wxWindow *parent, const wxPoint &position, const wxSize &size) :
+    Painter(parent, position, size)
+{
+    timer.SetOwner(this, timer.GetId());
+
+    Bind(wxEVT_TIMER, &PainterAnimated::OnEventTimer, this);
+    Bind(wxEVT_PAINT, &PainterAnimated::OnEventPaint, this);
+
+    timer.Start(50);
+}
+
+
+void PainterAnimated::OnEventTimer(wxTimerEvent &)
+{
+    Refresh();
+}
+
+
+void PainterAnimated::OnEventPaint(wxPaintEvent &)
+{
+    FuncDraw();
+}
+

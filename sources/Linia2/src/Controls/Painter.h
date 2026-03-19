@@ -66,3 +66,20 @@ private:
 
     void OnEventPaint(wxPaintEvent &);
 };
+
+
+class PainterAnimated : public Painter
+{
+public:
+
+    PainterAnimated(wxWindow *parent, const wxPoint &position, const wxSize &);
+
+private:
+
+    wxTimer timer;
+
+    void OnEventPaint(wxPaintEvent &);
+    void OnEventTimer(wxTimerEvent &);
+
+    virtual void FuncDraw() = 0;
+};

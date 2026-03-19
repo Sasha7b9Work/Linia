@@ -1,6 +1,7 @@
 ﻿// 2025/6/4 15:46:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/Painter.h"
+#include "Panels/PanelDebug/Notebook/AnimatedImpulse.h"
 
 
 class Register;
@@ -27,8 +28,9 @@ public:
 
 private:
 
-    bool first_paint = true;
-    Register *panel = nullptr;
+    bool             first_paint = true;
+    Register        *panel = nullptr;
+    AnimatedImpulse *animation = nullptr;
 
     // Возвращает координаты верхнего левого угла отображения бита
     wxPoint CoordBit(int num_bit);

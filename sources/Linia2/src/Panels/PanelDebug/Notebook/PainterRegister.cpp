@@ -18,6 +18,12 @@ PainterRegister::PainterRegister(wxWindow *parent, Register *_panel, const wxPoi
     }
 
     Bind(wxEVT_PAINT, &PainterRegister::OnEventPaint, this);
+
+    animation = new AnimatedImpulse(this, { 300, 50 });
+
+    wxPoint pos = { GetSize().x, 0 };
+    pos.x -= AnimatedImpulse::WIDTH;
+    animation->SetPosition(pos);
 }
 
 
