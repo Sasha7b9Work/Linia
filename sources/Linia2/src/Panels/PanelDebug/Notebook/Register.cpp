@@ -22,6 +22,8 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, bool n
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
     chip(_chip)
 {
+    SetBackgroundColour(parent->GetBackgroundColour());
+
     wxPanel::SetName("Register");
 
     new wxStaticText(this, wxID_ANY, _title + " " + chip->GetNameDevice(), {10, 10});

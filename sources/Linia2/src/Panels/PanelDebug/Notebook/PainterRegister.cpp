@@ -69,7 +69,7 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
 
     gc->SetPen(*wxGREEN_PEN);
 
-    gc->SetBrush(enabled ? *wxWHITE_BRUSH : panel->GetBackgroundColour());
+    gc->SetBrush(GetParent()->GetBackgroundColour());
 
     gc->DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
 
