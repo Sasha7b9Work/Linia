@@ -15,8 +15,6 @@ public:
 
     PainterRegister(wxWindow *parent, Register *panel, const wxPoint &position);
 
-    virtual void OnPaint(wxPaintEvent &);
-
     wxFont GetDefaultFont(int size = -1);
 
     // Возвращает координату X бита num_bit
@@ -46,4 +44,6 @@ private:
     void SetHintCheckBox(int num_bit);
 
     wxString GetHint(int index_desc, int num_bit);
+
+    void OnEventPaint(wxPaintEvent &);
 };

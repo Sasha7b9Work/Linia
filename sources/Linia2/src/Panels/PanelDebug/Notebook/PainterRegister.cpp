@@ -15,7 +15,7 @@ PainterRegister::PainterRegister(wxWindow *parent, Register *_panel, const wxPoi
         panel->chbox[(uint)i] = new CheckBoxBit(this, { BitX(i, panel->chip->BitDepth()), W_B + 1 }, { W_B, W_B });
     }
 
-    Bind(wxEVT_PAINT, &PainterRegister::OnPaint, this);
+    Bind(wxEVT_PAINT, &PainterRegister::OnEventPaint, this);
 }
 
 
@@ -51,7 +51,7 @@ void PainterRegister::SetEnabled(bool _enabled)
 }
 
 
-void PainterRegister::OnPaint(wxPaintEvent &)
+void PainterRegister::OnEventPaint(wxPaintEvent &)
 {
     if (first_paint)
     {
