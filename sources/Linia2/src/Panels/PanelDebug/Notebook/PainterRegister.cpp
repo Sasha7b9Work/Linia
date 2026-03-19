@@ -8,6 +8,8 @@ PainterRegister::PainterRegister(wxWindow *parent, Register *_panel, const wxPoi
     wxPanel(parent, wxID_ANY, position, { 750, 110 }),
     panel(_panel)
 {
+    SetBackgroundColour(parent->GetBackgroundColour().ChangeLightness(150));
+
     panel->chbox.resize((uint)_panel->chip->BitDepth() );
 
     for (int i = 0; i < panel->chip->BitDepth(); i++)
@@ -69,7 +71,7 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
 
     gc->SetPen(*wxGREEN_PEN);
 
-    gc->SetBrush(GetParent()->GetBackgroundColour());
+    gc->SetBrush(GetBackgroundColour());
 
     gc->DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
 

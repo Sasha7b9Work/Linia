@@ -22,7 +22,7 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, bool n
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
     chip(_chip)
 {
-    SetBackgroundColour(parent->GetBackgroundColour());
+    SetBackgroundColour(parent->GetBackgroundColour().ChangeLightness(110));
 
     wxPanel::SetName("Register");
 

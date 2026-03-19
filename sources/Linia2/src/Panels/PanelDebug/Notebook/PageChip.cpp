@@ -9,7 +9,7 @@ PageChip::PageChip(wxNotebook *parent, const wxString &title) :
 {
     wxPanel::SetName(title);
 
-    wxPanel::SetBackgroundColour(parent->GetBackgroundColour());
+    wxPanel::SetBackgroundColour(parent->GetBackgroundColour().ChangeLightness(110));
 
     Bind(wxEVT_RIGHT_DOWN, &PageChip::OnRightClick, this);
 }

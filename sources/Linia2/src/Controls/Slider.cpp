@@ -21,7 +21,7 @@ SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _
 
     slider->SetMinSize(wxSize(100, 30));
 
-    slider->SetBackgroundColour(slider->GetBackgroundColour().ChangeLightness(LIGHTNESS));
+    slider->SetBackgroundColour(parent->GetBackgroundColour());
 
     text = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT });
 
