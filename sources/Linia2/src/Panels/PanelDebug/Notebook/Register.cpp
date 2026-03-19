@@ -82,9 +82,13 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, bool n
 
         knob->Bind(wxEVT_SLIDER, &RegAD5543::OnEventKnob, this);
 
+        windows.push_back(knob);
+
         slider_value = new SliderInt(painter, { painter->BitX(chip->BitDepth() - 1, chip->BitDepth()), 75 }, chip->BitDepth() * 20, 0, 100, "");
 
         slider_value->Bind(wxEVT_SLIDER, &RegAD5543::OnEventSlider, this);
+
+        windows.push_back(slider_value);
     }
 }
 
