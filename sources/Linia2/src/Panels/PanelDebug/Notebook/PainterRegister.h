@@ -23,11 +23,12 @@ public:
     // Увеличить высоту на dH
     void IncreaseHeight(int dH);
 
+    virtual bool Enable(bool) override;
+
 private:
 
     bool first_paint = true;
     Register *panel = nullptr;
-    bool enabled = true;
 
     // Возвращает координаты верхнего левого угла отображения бита
     wxPoint CoordBit(int num_bit);

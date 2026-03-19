@@ -49,6 +49,8 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, bool n
     {
         painter = new PainterRegister(this, this, { 10, y0 });
 
+        windows.push_back(painter);
+
         for (auto box : chbox)
         {
             box->Bind(wxEVT_CHECKBOX, &Register::OnEventCheckBox, this);

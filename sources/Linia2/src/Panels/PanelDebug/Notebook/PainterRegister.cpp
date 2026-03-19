@@ -45,6 +45,16 @@ int PainterRegister::BitX(int num_bit, int all_bits) const
 }
 
 
+bool PainterRegister::Enable(bool _enable)
+{
+    bool result = wxPanel::Enable(_enable);
+
+    wxPanel::Refresh();
+
+    return result;
+}
+
+
 void PainterRegister::OnEventPaint(wxPaintEvent &)
 {
     if (first_paint)
@@ -63,7 +73,7 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
 
     gc->SetPen(*wxGREEN_PEN);
 
-    gc->SetBrush(enabled ? GetParent()->GetBackgroundColour() : GetParent()->GetBackgroundColour().ChangeLightness(150));
+    gc->SetBrush(IsEnabled() ? GetParent()->GetBackgroundColour().ChangeLightness(150) : GetParent()->GetBackgroundColour());
 
     gc->DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
 
