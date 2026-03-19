@@ -9,7 +9,7 @@
 WindowCursors *TheWindowCursors = nullptr;
 
 
-WindowCursors::WindowCursors() : DraggedDialog(L"Курсоры", {200, 300})
+WindowCursors::WindowCursors() : DraggedDialog(_("Курсоры"), {200, 300})
 {
     int x = 10;
     int y = 22;
