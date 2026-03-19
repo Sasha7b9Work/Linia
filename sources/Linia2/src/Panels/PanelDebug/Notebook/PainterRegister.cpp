@@ -45,14 +45,6 @@ int PainterRegister::BitX(int num_bit, int all_bits) const
 }
 
 
-void PainterRegister::SetEnabled(bool _enabled)
-{
-    enabled = _enabled;
-
-    Refresh();
-}
-
-
 void PainterRegister::OnEventPaint(wxPaintEvent &)
 {
     if (first_paint)

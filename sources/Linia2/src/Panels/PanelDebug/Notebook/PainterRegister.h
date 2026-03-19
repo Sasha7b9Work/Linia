@@ -20,8 +20,6 @@ public:
     // Возвращает координату X бита num_bit
     int BitX(int num_bit, int all_bits) const;
 
-    void SetEnabled(bool);
-
     // Увеличить высоту на dH
     void IncreaseHeight(int dH);
 
