@@ -55,6 +55,12 @@ bool PainterRegister::Enable(bool _enable)
 }
 
 
+wxColor PainterRegister::ColorBackground() const
+{
+    return IsEnabled() ? GetParent()->GetBackgroundColour().ChangeLightness(170) : GetParent()->GetBackgroundColour();
+}
+
+
 void PainterRegister::OnEventPaint(wxPaintEvent &)
 {
     if (first_paint)
@@ -73,7 +79,7 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
 
     gc->SetPen(*wxGREEN_PEN);
 
-    gc->SetBrush(IsEnabled() ? GetParent()->GetBackgroundColour().ChangeLightness(170) : GetParent()->GetBackgroundColour());
+    gc->SetBrush(ColorBackground());
 
     gc->DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
 
@@ -97,7 +103,7 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
         {
             wxBrush brush(wxColor(0xF0, 0xF0, 0xF0));
 
-            gc->SetBrush(IsEnabled() ? (pen_is_white ? brush : *wxWHITE_BRUSH) : *wxLIGHT_GREY_BRUSH);
+            gc->SetBrush(IsEnabled() ? (pen_is_white ? brush : *wxWHITE_BRUSH) : ColorBackground());
             pen_is_white = !pen_is_white;
         }
 
@@ -111,7 +117,7 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
         DrawTitleBit(i, panel->names_bits[(uint)i], gc);
     }
 
-    gc->SetBrush(IsEnabled() ? *wxWHITE_BRUSH : *wxLIGHT_GREY_BRUSH);
+    gc->SetBrush(IsEnabled() ? *wxWHITE_BRUSH : ColorBackground());
 
     for (int i = 0; i < 2; i++)
     {

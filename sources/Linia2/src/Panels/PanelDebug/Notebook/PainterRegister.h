@@ -45,4 +45,6 @@ private:
     wxString GetHint(int index_desc, int num_bit);
 
     void OnEventPaint(wxPaintEvent &);
+
+    wxColor ColorBackground() const;
 };
