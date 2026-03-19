@@ -27,7 +27,7 @@ goto HINT
     @echo %TIME%   Making Visual Studio Win Debug ...
     cd ../..
     rmdir "generated/Linia" /s /q
-    cd scripts/vs_win
+    cd scripts/win
     if %1==debug ( @echo on & cmake ../../CMakeLists.txt -B../../generated/Linia -G "Visual Studio 18 2026" -A x64 -DCMAKE_BUILD_TYPE=Release)
     @echo off
     if %1==release ( @echo on & cmake ../../CMakeLists.txt -B../../generated/Linia -G "Visual Studio 18 2026" -A x64 -DCMAKE_BUILD_TYPE=Release)
