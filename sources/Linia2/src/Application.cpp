@@ -73,7 +73,7 @@ bool Application::OnInit()
     Chip::Init();
 
     // create and show the main application window
-    MainWindow *frame = new MainWindow("ИППП 4");
+    MainWindow *frame = new MainWindow(_("ИППП 4"));
 
     Bind(wxEVT_TIMER, &Application::OnTimer, this, timer.GetId());
 
@@ -85,7 +85,7 @@ bool Application::OnInit()
 
     if (!UART::IsAvailability())
     {
-        wxString message = wxString::Format("Устройство UART %s не обнаружено.", UART_DEVICE);
+        wxString message = wxString::Format(_("Устройство UART %s не обнаружено."), UART_DEVICE);
 
         LOG_ERROR(message.c_str().AsChar());
 
@@ -99,7 +99,7 @@ bool Application::OnInit()
 
     if (!SPI::IsAvailability())
     {
-        wxString message = wxString::Format("Устройство SPI %s не обнаружено.", SPI_DEVICE);
+        wxString message = wxString::Format(_("Устройство SPI %s не обнаружено."), SPI_DEVICE);
 
         LOG_ERROR(message.c_str().AsChar());
 
@@ -117,8 +117,8 @@ bool Application::OnInit()
 
     if (!SoftTests::RunAll())
     {
-        wxMessageBox(wxString::Format("Во время выполнения тестов произошли ошибки.\n"
-            "Дополнительная информация в файле %s.", Log::FileName().c_str().AsChar()), "Ошибка", wxOK | wxCENTRE | wxICON_ERROR);
+        wxMessageBox(wxString::Format(_("Во время выполнения тестов произошли ошибки.\n") +
+            _("Дополнительная информация в файле %s."), Log::FileName().c_str().AsChar()), _("Ошибка"), wxOK | wxCENTRE | wxICON_ERROR);
     }
 
 #ifdef WIN32

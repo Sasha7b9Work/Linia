@@ -24,7 +24,7 @@ Bitmap::Bitmap(const wxString &file_bitmap)
         }
         else
         {
-            LOG_ERROR("Не удалось загрузить файл изображения %s", file_bitmap.c_str().AsChar());
+            LOG_ERROR(_("Не удалось загрузить файл изображения %s"), file_bitmap.c_str().AsChar());
         }
     }
     else
@@ -37,7 +37,7 @@ Bitmap::Bitmap(const wxString &file_bitmap)
         }
         else
         {
-            LOG_ERROR("Не удалось загрузить файл изображения %s", file_bitmap.c_str().AsChar());
+            LOG_ERROR(_("Не удалось загрузить файл изображения %s"), file_bitmap.c_str().AsChar());
         }
     }
 }

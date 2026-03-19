@@ -177,7 +177,7 @@ void ComPort::UpdateConnected()
                     {
                         if (message != "#OK")                       // Подтверждения отбрасываем, чтобы не засорять лог
                         {
-                            ConsoleRS232::self->AddLine(String("%s%s", REVERSE_PROMT, buffer).c_str());
+                            ConsoleRS232::self->AddLine(String(_("%s%s"), REVERSE_PROMT, buffer).c_str());
 
                             Log::FromDevice(buffer);
                         }
