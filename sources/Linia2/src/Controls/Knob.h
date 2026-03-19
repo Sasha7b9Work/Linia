@@ -17,6 +17,8 @@ public:
         , m_value(initialValue)
         , m_dragging(false)
     {
+        SetBackgroundColour(parent->GetBackgroundColour());
+
         // Включаем обработку событий мыши
         Bind(wxEVT_LEFT_DOWN, &KnobWidget::OnEventMouseLeftDown, this);
         Bind(wxEVT_LEFT_UP, &KnobWidget::OnMouseLeftUp, this);
