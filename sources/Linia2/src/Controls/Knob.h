@@ -140,6 +140,8 @@ private:
 
     void OnPaint(wxPaintEvent &)
     {
+        SetBackgroundColour(GetParent()->GetBackgroundColour());
+
         wxAutoBufferedPaintDC dc(this);
         dc.Clear();
 
