@@ -15,7 +15,7 @@ PanelTable::PanelTable(wxWindow* parent) :
     self = this;
 
     {
-        titles_columns.Add("Точка");
+        titles_columns.Add(_("Точка"));
         titles_columns.Add("Uc, V");
         titles_columns.Add("Ic, A");
         titles_columns.Add("Ib, A");

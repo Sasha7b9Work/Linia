@@ -8,25 +8,25 @@ DialogTestAppend *DialogTestAppend::self = nullptr;
 DialogTestLibrary *DialogTestLibrary::self = nullptr;
 
 
-const pchar DialogTest::BTN_APPEND = "Добавить";
-const pchar DialogTest::BTN_SAVE_PARAMETERS = "Сохранить параметры";
-const pchar DialogTest::BTN_DELETE = "Удалить";
-const pchar DialogTest::BTN_DELETE_ALL = "Удалить все";
-const pchar DialogTest::BTN_COPY = "Копировать";
-const pchar DialogTest::BTN_INSERT = "Вставить";
-const pchar DialogTest::BTN_RENAME = "Переименовать";
-const pchar DialogTest::BTN_LIBRARY = "Библиотека тестов";
-const pchar DialogTest::BTN_SAVE_TO_LIBRARY = "Сохранить в библиотеке";
+const pchar DialogTest::BTN_APPEND = _("Добавить");
+const pchar DialogTest::BTN_SAVE_PARAMETERS = _("Сохранить параметры");
+const pchar DialogTest::BTN_DELETE = _("Удалить");
+const pchar DialogTest::BTN_DELETE_ALL = _("Удалить все");
+const pchar DialogTest::BTN_COPY = _("Копировать");
+const pchar DialogTest::BTN_INSERT = _("Вставить");
+const pchar DialogTest::BTN_RENAME = _("Переименовать");
+const pchar DialogTest::BTN_LIBRARY = _("Библиотека тестов");
+const pchar DialogTest::BTN_SAVE_TO_LIBRARY = _("Сохранить в библиотеке");
 
-const pchar DialogTestAppend::BTN_ACTIVE = "Активный";
-const pchar DialogTestAppend::BTN_FROM_LIBRARY = "Из библиотеки";
+const pchar DialogTestAppend::BTN_ACTIVE = _("Активный");
+const pchar DialogTestAppend::BTN_FROM_LIBRARY = _("Из библиотеки");
 
-const pchar DialogTestLibrary::BTN_STANDARD = "Стандартных";
-const pchar DialogTestLibrary::BTN_USER = "Пользовательских";
+const pchar DialogTestLibrary::BTN_STANDARD = _("Стандартных");
+const pchar DialogTestLibrary::BTN_USER = _("Пользовательских");
 
 
 DialogTest::DialogTest() :
-    MenuDialog("Тесты", 175, { 0, 1, 3, 6, 7 },
+    MenuDialog(_("Тесты"), 175, { 0, 1, 3, 6, 7 },
         BTN_APPEND, []()
         {
             DialogTestAppend().ShowOnWindow(DialogTest::self->FindButton(BTN_APPEND));

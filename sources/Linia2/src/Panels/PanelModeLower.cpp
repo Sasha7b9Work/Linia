@@ -19,17 +19,17 @@ PanelModeLower::PanelModeLower(wxWindow *parent) :
 
     self = this;
 
-    StaticBox *boxCategory = new StaticBox(this, "Режим", { 5, 0 }, { WIDTH - 13, HEIGHT - 8});
+    StaticBox *boxCategory = new StaticBox(this, _("Режим"), { 5, 0 }, { WIDTH - 13, HEIGHT - 8});
 
     {
-        new wxStaticText(boxCategory, wxID_ANY, "Канал C:", { 10, SD::Y_SB(30) });
+        new wxStaticText(boxCategory, wxID_ANY, _("Канал C:"), { 10, SD::Y_SB(30) });
 
-        new wxStaticText(boxCategory, wxID_ANY, "Канал B:", { 10, SD::Y_SB(60) });
+        new wxStaticText(boxCategory, wxID_ANY, _("Канал B:"), { 10, SD::Y_SB(60) });
 
         wxArrayString choices;
         choices.Add("C");
 
-        new ButtonsCombo(boxCategory, "1 очередь", { 5, 120 }, 100, choices, choices, 1, "comboFirst");
+        new ButtonsCombo(boxCategory, _("1 очередь"), { 5, 120 }, 100, choices, choices, 1, "comboFirst");
 
         btnExit = new wxButton(boxCategory, wxID_ANY, "Х", { WIDTH - 35, HEIGHT - 52 }, { 20, 20 });
     }

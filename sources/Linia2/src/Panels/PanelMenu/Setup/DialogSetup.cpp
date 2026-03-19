@@ -15,19 +15,19 @@
 DialogSetup *DialogSetup::self = nullptr;
 
 
-#define SET_USER_SETTINGS "Настройки пользователя"
-#define SET_START         "Запуск"
-#define SET_AUTOSAVE      "Автосохранение"
-#define SET_CORR_ZERO     "Коррекция смещения нуля"
-#define SET_CALIB         "Калибровка"
-#define SET_TABLES_OFF    "Таблица смещений и коэффициентов"
-#define SET_PASSWORD      "Изменить пароль"
-#define SET_IP            "IP-адрес"
-#define SET_COMPUPTER     "Мой компьютер"
+#define SET_USER_SETTINGS _("Настройки пользователя")
+#define SET_START         _("Запуск")
+#define SET_AUTOSAVE      _("Автосохранение")
+#define SET_CORR_ZERO     _("Коррекция смещения нуля")
+#define SET_CALIB         _("Калибровка")
+#define SET_TABLES_OFF    _("Таблица смещений и коэффициентов")
+#define SET_PASSWORD      _("Изменить пароль")
+#define SET_IP            _("IP-адрес")
+#define SET_COMPUPTER     _("Мой компьютер")
 
 
 DialogSetup::DialogSetup() :
-    MenuDialog("Настройка", 275, { 2, 5 },
+    MenuDialog(_("Настройка"), 275, { 2, 5 },
         SET_USER_SETTINGS, []()
         {
             WindowUser().ShowOnWindow(DialogSetup::self->FindButton(SET_USER_SETTINGS));

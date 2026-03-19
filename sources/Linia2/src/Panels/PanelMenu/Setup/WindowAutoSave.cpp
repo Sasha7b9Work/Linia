@@ -4,7 +4,7 @@
 
 
 WindowAutoSave::WindowAutoSave() :
-    Dialog("Автосохранение", wxDefaultPosition, { WIDTH, HEIGHT })
+    Dialog(_("Автосохранение"), wxDefaultPosition, { WIDTH, HEIGHT })
 {
 
 }
