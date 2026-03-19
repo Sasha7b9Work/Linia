@@ -97,7 +97,7 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
         {
             wxBrush brush(wxColor(0xF0, 0xF0, 0xF0));
 
-            gc->SetBrush(pen_is_white ? brush : *wxWHITE_BRUSH);
+            gc->SetBrush(IsEnabled() ? (pen_is_white ? brush : *wxWHITE_BRUSH) : *wxLIGHT_GREY_BRUSH);
             pen_is_white = !pen_is_white;
         }
 
@@ -111,7 +111,7 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
         DrawTitleBit(i, panel->names_bits[(uint)i], gc);
     }
 
-    gc->SetBrush(*wxWHITE_BRUSH);
+    gc->SetBrush(IsEnabled() ? *wxWHITE_BRUSH : *wxLIGHT_GREY_BRUSH);
 
     for (int i = 0; i < 2; i++)
     {
