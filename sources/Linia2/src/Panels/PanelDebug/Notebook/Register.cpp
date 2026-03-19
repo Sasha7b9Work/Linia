@@ -621,8 +621,6 @@ RegAD5531::RegAD5531(wxWindow *_parent, Chip *_chip) :
 
 bool Register::Enable(bool enable)
 {
-    painter->SetEnabled(enable);
-
     return wxPanel::Enable(enable);
 }
 
