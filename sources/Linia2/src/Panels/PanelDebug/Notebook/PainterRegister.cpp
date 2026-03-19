@@ -22,7 +22,7 @@ PainterRegister::PainterRegister(wxWindow *parent, Register *_panel, const wxPoi
     animation = new AnimatedImpulse(this, { 300, 50 });
 
     wxPoint pos = { GetSize().x, 0 };
-    pos.x -= AnimatedImpulse::WIDTH + 5;
+    pos.x -= AnimatedImpulse::WIDTH + 5 + 100;
     pos.y += 5;
     animation->SetPosition(pos);
 }

@@ -1,7 +1,6 @@
 ﻿// 2026/03/19 16:46:21 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/Notebook/AnimatedImpulse.h"
-#include "Utils/Timer.h"
 
 
 AnimatedImpulse::AnimatedImpulse(wxWindow *parent, const wxPoint &position) :
@@ -15,8 +14,6 @@ void AnimatedImpulse::FuncDraw()
 {
     wxPaintDC _dc(this);
 
-    static TimeMeterMS meter;
-
     _dc.SetBrush(wxBrush(GetParent()->GetBackgroundColour()));
     _dc.SetPen(wxPen(GetParent()->GetBackgroundColour()));
 
@@ -27,20 +24,21 @@ void AnimatedImpulse::FuncDraw()
     }
     else
     {
-        _dc.DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
-
-        _dc.SetPen(*wxBLACK_PEN);
-
-        static int x = 0;
-
-        if (meter.ElapsedMS() > 1)
+        if (meter.ElapsedMS() > 10)
         {
-            x += 3;
+            meter.Reset();
+
+            x += 5;
             if (x > GetSize().x)
             {
                 x = 0;
             }
         }
+
+        _dc.DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
+
+        _dc.SetPen(*wxBLACK_PEN);
+
 
         int y = 10;
 

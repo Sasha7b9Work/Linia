@@ -1,6 +1,7 @@
 ﻿// 2026/03/19 16:45:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/Painter.h"
+#include "Utils/Timer.h"
 
 
 class AnimatedImpulse : public PainterAnimated
@@ -15,4 +16,7 @@ public:
 private:
 
     virtual void FuncDraw() override;
+
+    TimeMeterMS meter;
+    int x = 0;
 };

@@ -198,13 +198,18 @@ PainterAnimated::PainterAnimated(wxWindow *parent, const wxPoint &position, cons
     Bind(wxEVT_TIMER, &PainterAnimated::OnEventTimer, this);
     Bind(wxEVT_PAINT, &PainterAnimated::OnEventPaint, this);
 
-    timer.Start(5);
+    timer.Start(10);
 }
 
 
-void PainterAnimated::OnEventTimer(wxTimerEvent &)
+void PainterAnimated::OnEventTimer(wxTimerEvent &event)
 {
-    Refresh();
+    if (event.GetId() == timer.GetId())
+    {
+        Refresh();
+    }
+
+    event.Skip();
 }
 
 
