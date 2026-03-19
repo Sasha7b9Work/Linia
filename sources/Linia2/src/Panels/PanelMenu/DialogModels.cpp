@@ -8,12 +8,12 @@
 DialogModels *DialogModels::self = nullptr;
 
 
-const pchar DialogModels::BTN_NEW = "Новый";
-const pchar DialogModels::BTN_OPEN = "Открыть";
-const pchar DialogModels::BTN_CLOSE = "Закрыть";
-const pchar DialogModels::BTN_SAVE = "Cохранить";
-const pchar DialogModels::BTN_SAVE_AS = "Сохранить как...";
-const pchar DialogModels::BTN_DELETE = "Удалить";
+const wxString DialogModels::BTN_NEW = wxT("Новый");
+const wxString DialogModels::BTN_OPEN = wxT("Открыть");
+const wxString DialogModels::BTN_CLOSE = wxT("Закрыть");
+const wxString DialogModels::BTN_SAVE = wxT("Cохранить");
+const wxString DialogModels::BTN_SAVE_AS = wxT("Сохранить как...");
+const wxString DialogModels::BTN_DELETE = wxT("Удалить");
 
 
 DialogModels::DialogModels() :

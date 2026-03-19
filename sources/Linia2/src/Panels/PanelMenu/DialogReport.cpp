@@ -6,12 +6,12 @@
 DialogReport *DialogReport::self = nullptr;
 
 
-const pchar DialogReport::BTN_NEW = "Новый";
-const pchar DialogReport::BTN_SAVE = "Сохранить";
-const pchar DialogReport::BTN_DELETE = "Удалить";
-const pchar DialogReport::BTN_EXPAND = "Развернуть";
-const pchar DialogReport::BTN_COLLAPSE = "Свернуть";
-const pchar DialogReport::BTN_CLOSE = "Закрыть";
+const wxString DialogReport::BTN_NEW = wxT("Новый");
+const wxString DialogReport::BTN_SAVE = wxT("Сохранить");
+const wxString DialogReport::BTN_DELETE = wxT("Удалить");
+const wxString DialogReport::BTN_EXPAND = wxT("Развернуть");
+const wxString DialogReport::BTN_COLLAPSE = wxT("Свернуть");
+const wxString DialogReport::BTN_CLOSE = wxT("Закрыть");
 
 
 DialogReport::DialogReport() :

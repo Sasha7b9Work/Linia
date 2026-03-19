@@ -15,10 +15,10 @@ public:
 
 private:
 
-    static const pchar BTN_NEW;
-    static const pchar BTN_OPEN;
-    static const pchar BTN_CLOSE;
-    static const pchar BTN_SAVE;
-    static const pchar BTN_SAVE_AS;
-    static const pchar BTN_DELETE;
+    static const wxString BTN_NEW;
+    static const wxString BTN_OPEN;
+    static const wxString BTN_CLOSE;
+    static const wxString BTN_SAVE;
+    static const wxString BTN_SAVE_AS;
+    static const wxString BTN_DELETE;
 };
