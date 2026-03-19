@@ -236,8 +236,8 @@ void Display::OnEventButton(wxCommandEvent &event)
 
     if (id == btnHelp->GetId())
     {
-        wxMessageBox("Левая Кнопка Мыши - перемещение графика.\nКолёсико - масштаб графика.\n"
-            "ЛКМ+Ctrl - перемещение сетки.\nКолёсико+Ctrl - масштаб сетки.", " ");
+        wxMessageBox(_("Левая Кнопка Мыши - перемещение графика.\nКолёсико - масштаб графика.\n") +
+            _("ЛКМ+Ctrl - перемещение сетки.\nКолёсико+Ctrl - масштаб сетки."), " ");
     }
     else if (id == btnLessX->GetId())
     {

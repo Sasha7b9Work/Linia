@@ -17,21 +17,21 @@ PanelRight::PanelRight(wxWindow *parent) : wxPanel(parent)
 
     wxSize size_button{ 75, BUTTON_HEIGHT };
 
-    btnReturn = new wxButton(this, wxID_ANY, "Закрыть", { 125, SD::Y_SB(20) }, size_button);
+    btnReturn = new wxButton(this, wxID_ANY, _("Закрыть"), { 125, SD::Y_SB(20) }, size_button);
 
-    btnReturn->SetToolTip("Возврат в главную панель");
+    btnReturn->SetToolTip(_("Возврат в главную панель"));
 
     btnStart = new wxButton{ this, wxID_ANY, "Старт", { 10, SD::Y_SB(60) }, size_button };
 
-    btnStart->SetToolTip("Запуск развёртки");
+    btnStart->SetToolTip(_("Запуск развёртки"));
 
     txtPeriodScan = new wxTextCtrl{ this, wxID_ANY, "1000", { 100, SD::Y_SB(60)}, size_button };
 
-    txtPeriodScan->SetToolTip("Период запуска развёртки в миллисекундах");
+    txtPeriodScan->SetToolTip(_("Период запуска развёртки в миллисекундах"));
 
     btnStop = new wxButton{ this, wxID_ANY, "Стоп", {10, SD::Y_SB(90)}, size_button };
 
-    btnStop->SetToolTip("Останов развёртки");
+    btnStop->SetToolTip(_("Останов развёртки"));
 
     btnStop->Enable(false);
 

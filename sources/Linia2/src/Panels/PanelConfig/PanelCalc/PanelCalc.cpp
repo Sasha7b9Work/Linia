@@ -25,7 +25,7 @@ PanelCalc::PanelCalc(wxWindow* parent, int x, int w, int /*_h*/) :
     StaticBox *box = new StaticBox(this, "", { x, SD::DSBY() }, { w, 320 });
 
     {
-        btnCursors = new wxButton(box, wxID_ANY, "Курсоры", SD::XY0(), { 100, BUTTON_HEIGHT });
+        btnCursors = new wxButton(box, wxID_ANY, _("Курсоры"), SD::XY0(), { 100, BUTTON_HEIGHT });
     }
 
     Bind(wxEVT_BUTTON, &PanelCalc::OnEventButton, this);

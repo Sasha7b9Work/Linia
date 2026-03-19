@@ -51,7 +51,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
     wxPanel::SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - PanelConfig::HEIGHT_BUTTONS });
     wxPanel::SetPosition({ 0, PanelConfig::HEIGHT_BUTTONS });
 
-    StaticBox *boxTest = new StaticBox(this, "Тест", { x, SD::DSBY() }, { w, 90 });
+    StaticBox *boxTest = new StaticBox(this, _("Тест"), { x, SD::DSBY() }, { w, 90 });
 
     {
         wxArrayString choices;
@@ -60,29 +60,29 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
         comboTest = new ButtonsCombo(boxTest, "", SD::XY0(), 100, choices, choices, 1, "comboTest");
 
-        btnLoad = new wxButton(boxTest, wxID_ANY, "Загрузить", { PanelConfig::X, SD::Y_SB(50) }, { 100, 30 });
+        btnLoad = new wxButton(boxTest, wxID_ANY, _("Загрузить"), { PanelConfig::X, SD::Y_SB(50) }, { 100, 30 });
 
         btnLoad->Hide();
     }
 
     boxTest->SetFont(StaticBox::TitleFont());
 
-    StaticBox *boxCommutation = new StaticBox(this, "Коммутация",
+    StaticBox *boxCommutation = new StaticBox(this, _("Коммутация"),
         { x, boxTest->GetPosition().y + boxTest->GetSize().y + SD::DSBY() },
         { w, h - boxTest->GetPosition().y - boxTest->GetSize().y - SD::DSBY() });
 
     {
         wxArrayString choices;
-        choices.Add("внутренняя");
-        choices.Add("внешняя");
+        choices.Add(_("внутренняя"));
+        choices.Add(_("внешняя"));
 
         int y = 20;
 
-        comboCommutation = new ButtonsCombo(boxCommutation, "Тип", { SD::XY0() }, PanelConfig::WIDTH_COMBO, choices, choices, 1, "comboCommutation");
+        comboCommutation = new ButtonsCombo(boxCommutation, _("Тип"), { SD::XY0() }, PanelConfig::WIDTH_COMBO, choices, choices, 1, "comboCommutation");
 
         choices.clear();
-        choices.Add("канал C");
-        choices.Add("канал B");
+        choices.Add(_("канал C"));
+        choices.Add(_("канал B"));
 
         y += 40;
 
@@ -103,9 +103,9 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
         jacks[Chan::_E] = new FullJack(Chan::_E, boxCommutation, {10, SD::Y_SB(y)}, "sch/jacks/jack_E.bmp");
 
         choices.clear();
-        choices.Add("C");
-        choices.Add("B");
-        choices.Add("E");
+        choices.Add(_("C"));
+        choices.Add(_("B"));
+        choices.Add(_("E"));
 
         y = 53;
         dy = 52;
@@ -124,18 +124,18 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 
             wxArrayString tooltips =
             {
-                "Биполярный NPN-транзистор (трёхполюсный)",
-                "Биполярный PNP-транзистор (трёхполюсный)",
-                "Полевой или МОП транзистор NMOS (трёхполюсный)",
-                "Полевой или МОП транзистор PMOS (трёхполюсный)",
-                "Биполярный NPN-транзистор (четырёхполюсный)",
-                "Биполярный PNP-транзистор (четырёхполюсный)",
-                "Полевой или МОП транзистор NMOS (четырёхполюсный)",
-                "Полевой или МОП транзистор PMOS (четырёхполюсный)",
-                "Диод",
-                "Тиристор",
-                "Резистор",
-                "Конденсатор"
+                _("Биполярный NPN-транзистор (трёхполюсный)"),
+                _("Биполярный PNP-транзистор (трёхполюсный)"),
+                _("Полевой или МОП транзистор NMOS (трёхполюсный)"),
+                _("Полевой или МОП транзистор PMOS (трёхполюсный)"),
+                _("Биполярный NPN-транзистор (четырёхполюсный)"),
+                _("Биполярный PNP-транзистор (четырёхполюсный)"),
+                _("Полевой или МОП транзистор NMOS (четырёхполюсный)"),
+                _("Полевой или МОП транзистор PMOS (четырёхполюсный)"),
+                _("Диод"),
+                _("Тиристор"),
+                _("Резистор"),
+                _("Конденсатор")
             };
 
             comboCategory = new BmpButtonsCombo(painter, "Категория", { 50, 28 }, { 55, 65 }, files, tooltips, 0, 4, "comboCategory");
@@ -207,8 +207,8 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
 
                 PanelChannelC::self->comboMeasVoltage->SetTitle(wxString("U") + suffix_c);
                 PanelChannelC::self->comboMeasCurrent->SetTitle(wxString("I") + suffix_c);
-                PanelChannelC::self->comboSourceRange->SetTitle(wxString("Диапазон U") + suffix_c);
-                PanelChannelC::self->txtLimit->SetLabel(wxString("Ограничение U") + suffix_c + ", %");
+                PanelChannelC::self->comboSourceRange->SetTitle(wxString(_("Диапазон U")) + suffix_c);
+                PanelChannelC::self->txtLimit->SetLabel(wxString(_("Ограничение U")) + suffix_c + ", %");
             }
 
             {                                                                                               // Суффикс канала B

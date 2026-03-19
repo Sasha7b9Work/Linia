@@ -25,13 +25,9 @@ PanelModel::PanelModel(wxWindow* parent, int /*_x*/, int _w, int /*_h*/) :
 
     txtName = new wxStaticText(panel_name, wxID_ANY, "", { 0, 0 }, { _w, height_name }, wxALIGN_CENTER);
 
-//    Panel::SetName("Файл модели");
-
     panel_graph = new wxPanel(this, wxID_ANY, { 0, height_name }, { _w, HEIGHT - height_name }, wxTAB_TRAVERSAL | wxSUNKEN_BORDER);
 
     panel_graph->SetBackgroundColour(*wxWHITE);
-
-//    Panel::Update();
 }
 
 
@@ -43,11 +39,9 @@ void PanelModel::SetName(const wxString &_name)
 
 void PanelModel::Update()
 {
-//    Panel::Update();
-
     if (Model::IsEmpty())
     {
-        SetName("Файл модели");
+        SetName(_("Файл модели"));
     }
     else
     {
