@@ -119,7 +119,8 @@ void Chip::WriteValueRAW(uint value)
     }
 
 #define TIME_WAIT 2
-#define WAIT meter.WaitForUSandReset(TIME_WAIT)
+#define WAIT      meter.WaitForUSandReset(TIME_WAIT)
+#define WAIT_HALF meter.WaitForUSandReset(TIME_WAIT / 2)
 
     TimeMeterUS meter;
 
@@ -128,23 +129,27 @@ void Chip::WriteValueRAW(uint value)
     WAIT;
 
     cs->Set(level_cs);
-
-    WAIT;
+    
+    WAIT_HALF;
 
     for (int bit = (int)length - 1; bit >= 0; bit--)
     {
+        WAIT_HALF;
+
         clk->ToLow();
 
-        WAIT;
+        WAIT_HALF;
 
         dat->Set(_GET_BIT(value, bit) != 0);
 
-        WAIT;
+        WAIT_HALF;
 
         clk->ToHi();
 
-        WAIT;
+        WAIT_HALF;
     }
+    
+    WAIT_HALF;
 
     cs->Set(!level_cs);
 

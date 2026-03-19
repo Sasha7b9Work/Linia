@@ -19,8 +19,8 @@ WindowCorretionZero::WindowCorretionZero() :
     y = CreateRadioButton(wnd, d, y, &rbChanC_MeasU, _("Измеритель U"));
 
     y = CreateLabelGroup(wnd, d, y, _("Канал B"));
-    y = CreateRadioButton(wnd, d, y, &rbChanB_MeasI, _("Измеритель I")_(;
-    y = CreateRadioButton(wnd, d, y, &rbChanB_MeasU, _("Измеритель U")_(;
+    y = CreateRadioButton(wnd, d, y, &rbChanB_MeasI, _("Измеритель I"));
+    y = CreateRadioButton(wnd, d, y, &rbChanB_MeasU, _("Измеритель U"));
     y = CreateRadioButton(wnd, d, y, &rbChanB_SourceI, _("Источник I"));
     y = CreateRadioButton(wnd, d, y, &rbChanB_SourceU, _("Источник U"));
 
