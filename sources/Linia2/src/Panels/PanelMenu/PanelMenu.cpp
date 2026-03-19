@@ -26,13 +26,13 @@ PanelMenu::PanelMenu(wxWindow* parent) :
 
     Struct structs[100] =
     {
-        { "Модели",    &btnModels },
-        { "Тесты",     &btnTests },
-        { "Таблица",   &btnTable },
-        { "Отчёт",     &btnReport },
-        { "Архив",     &btnArchiv },
-        { "Настройки", &btnSetup },
-        { "Отладка",   &btnDebug }
+        { _("Модели"),    &btnModels },
+        { _("Тесты"),     &btnTests },
+        { _("Таблица"),   &btnTable },
+        { _("Отчёт"),     &btnReport },
+        { _("Архив"),     &btnArchiv },
+        { _("Настройки"), &btnSetup },
+        { _("Отладка"),   &btnDebug }
     };
 
     const int delta = Panel::GetSize().x / NumButtons();
