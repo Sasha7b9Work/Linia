@@ -32,7 +32,6 @@ void AnimatedImpulse::FuncDraw()
         _dc.SetPen(*wxBLACK_PEN);
 
         static int x = 0;
-        static int width = 100;
 
         if (meter.ElapsedMS() > 1)
         {
