@@ -9,24 +9,24 @@ DialogTestLibrary *DialogTestLibrary::self = nullptr;
 
 
 const wxString DialogTest::BTN_APPEND = wxT("Добавить");
-const wxString DialogTest::BTN_SAVE_PARAMETERS = _("Сохранить параметры");
-const wxString DialogTest::BTN_DELETE = _("Удалить");
-const wxString DialogTest::BTN_DELETE_ALL = _("Удалить все");
-const wxString DialogTest::BTN_COPY = _("Копировать");
-const wxString DialogTest::BTN_INSERT = _("Вставить");
-const wxString DialogTest::BTN_RENAME = _("Переименовать");
-const wxString DialogTest::BTN_LIBRARY = _("Библиотека тестов");
-const wxString DialogTest::BTN_SAVE_TO_LIBRARY = _("Сохранить в библиотеке");
+const wxString DialogTest::BTN_SAVE_PARAMETERS = wxT("Сохранить параметры");
+const wxString DialogTest::BTN_DELETE = wxT("Удалить");
+const wxString DialogTest::BTN_DELETE_ALL = wxT("Удалить все");
+const wxString DialogTest::BTN_COPY = wxT("Копировать");
+const wxString DialogTest::BTN_INSERT = wxT("Вставить");
+const wxString DialogTest::BTN_RENAME = wxT("Переименовать");
+const wxString DialogTest::BTN_LIBRARY = wxT("Библиотека тестов");
+const wxString DialogTest::BTN_SAVE_TO_LIBRARY = wxT("Сохранить в библиотеке");
 
-const wxString DialogTestAppend::BTN_ACTIVE = _("Активный");
-const wxString DialogTestAppend::BTN_FROM_LIBRARY = _("Из библиотеки");
+const wxString DialogTestAppend::BTN_ACTIVE = wxT("Активный");
+const wxString DialogTestAppend::BTN_FROM_LIBRARY = wxT("Из библиотеки");
 
-const wxString DialogTestLibrary::BTN_STANDARD = _("Стандартных");
-const wxString DialogTestLibrary::BTN_USER = _("Пользовательских");
+const wxString DialogTestLibrary::BTN_STANDARD = wxT("Стандартных");
+const wxString DialogTestLibrary::BTN_USER = wxT("Пользовательских");
 
 
 DialogTest::DialogTest() :
-    MenuDialog(_("Тесты"), 175, { 0, 1, 3, 6, 7 },
+    MenuDialog(wxT("Тесты"), 175, { 0, 1, 3, 6, 7 },
         BTN_APPEND, []()
         {
             DialogTestAppend().ShowOnWindow(DialogTest::self->FindButton(BTN_APPEND));

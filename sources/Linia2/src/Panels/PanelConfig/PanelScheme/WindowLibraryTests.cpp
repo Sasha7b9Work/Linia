@@ -7,7 +7,7 @@
 
 
 WindowLibraryTests::WindowLibraryTests() :
-    Dialog(_("Библиотека пользовательских тестов"), wxDefaultPosition, {WIDTH, HEIGHT})
+    Dialog(wxT("Библиотека пользовательских тестов"), wxDefaultPosition, {WIDTH, HEIGHT})
 {
 
     int dw = 150;
@@ -108,7 +108,7 @@ void WindowLibraryTests::SetAutoSizeColumns()
 
 void WindowLibraryTests::Fill()
 {
-    AppendLine("1", "IdVd_IRF840.tst", _("Выходная характеристика"));
+    AppendLine("1", "IdVd_IRF840.tst", wxT("Выходная характеристика"));
 }
 
 

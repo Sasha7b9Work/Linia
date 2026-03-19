@@ -8,7 +8,7 @@
 
 
 WindowTableOffsets::WindowTableOffsets() :
-    Dialog(_("Таблица смещений и коэффициентов"), wxDefaultPosition, { WIDTH, HEIGHT })
+    Dialog(wxT("Таблица смещений и коэффициентов"), wxDefaultPosition, { WIDTH, HEIGHT })
 {
     CreateFields();
 
@@ -16,34 +16,34 @@ WindowTableOffsets::WindowTableOffsets() :
     int y = 20;
 
     wxArrayString choices;
-    choices.Add(_("смещений"));
-    choices.Add(_("коэффициентов"));
+    choices.Add(wxT("смещений"));
+    choices.Add(wxT("коэффициентов"));
 
-    comboType = new ButtonsCombo(this, _("Таблица"), { x, SD::Y_SB(y - 3) }, 130, choices, choices, 1, "comboType");
+    comboType = new ButtonsCombo(this, wxT("Таблица"), { x, SD::Y_SB(y - 3) }, 130, choices, choices, 1, "comboType");
 
-    y = CreateLabelGroup(this, x, y + 20, _("Канал С"));
-    y = CreateRadioButton(this, x, y, &rbChanC_MeasI, _("Измеритель I"));
-    y = CreateRadioButton(this, x, y, &rbChanC_MeasU, _("Измеритель U"));
+    y = CreateLabelGroup(this, x, y + 20, wxT("Канал С"));
+    y = CreateRadioButton(this, x, y, &rbChanC_MeasI, wxT("Измеритель I"));
+    y = CreateRadioButton(this, x, y, &rbChanC_MeasU, wxT("Измеритель U"));
     rbChanC_MeasI->SetFocus();
 
-    y = CreateLabelGroup(this, x, y, _("Канал B"));
-    y = CreateRadioButton(this, x, y, &rbChanB_MeasI, _("Измеритель I"));
-    y = CreateRadioButton(this, x, y, &rbChanB_MeasU, _("Измеритель U"));
-    y = CreateRadioButton(this, x, y, &rbChanB_SourceI, _("Источник I"));
-    y = CreateRadioButton(this, x, y, &rbChanB_SourceU, _("Источник U"));
-    y = CreateRadioButton(this, x, y, &rbChanB_LimitI, _("Ограничение I"));
-    y = CreateRadioButton(this, x, y, &rbChanB_LimitU, _("Ограничение U"));
+    y = CreateLabelGroup(this, x, y, wxT("Канал B"));
+    y = CreateRadioButton(this, x, y, &rbChanB_MeasI, wxT("Измеритель I"));
+    y = CreateRadioButton(this, x, y, &rbChanB_MeasU, wxT("Измеритель U"));
+    y = CreateRadioButton(this, x, y, &rbChanB_SourceI, wxT("Источник I"));
+    y = CreateRadioButton(this, x, y, &rbChanB_SourceU, wxT("Источник U"));
+    y = CreateRadioButton(this, x, y, &rbChanB_LimitI, wxT("Ограничение I"));
+    y = CreateRadioButton(this, x, y, &rbChanB_LimitU, wxT("Ограничение U"));
 
-    y = CreateLabelGroup(this, x, y, _("Канал S"));
-    y = CreateRadioButton(this, x, y, &rbChanS_MeasI, _("Измеритель I"));
-    y = CreateRadioButton(this, x, y, &rbChanS_MeasU, _("Измеритель U"));
-    y = CreateRadioButton(this, x, y, &rbChanS_SourceI, _("Источник I"));
-    y = CreateRadioButton(this, x, y, &rbChanS_SourceU, _("Источник U"));
-    y = CreateRadioButton(this, x, y, &rbChanS_LimitI, _("Ограничение I"));
-    y = CreateRadioButton(this, x, y, &rbChanS_LimitU, _("Ограничение U"));
+    y = CreateLabelGroup(this, x, y, wxT("Канал S"));
+    y = CreateRadioButton(this, x, y, &rbChanS_MeasI, wxT("Измеритель I"));
+    y = CreateRadioButton(this, x, y, &rbChanS_MeasU, wxT("Измеритель U"));
+    y = CreateRadioButton(this, x, y, &rbChanS_SourceI, wxT("Источник I"));
+    y = CreateRadioButton(this, x, y, &rbChanS_SourceU, wxT("Источник U"));
+    y = CreateRadioButton(this, x, y, &rbChanS_LimitI, wxT("Ограничение I"));
+    y = CreateRadioButton(this, x, y, &rbChanS_LimitU, wxT("Ограничение U"));
 
-    new wxButton(this, wxID_ANY, _("Применить"), { 50, HEIGHT - 100 }, { BUTTON_WIDTH, BUTTON_HEIGHT });
-    new wxButton(this, wxID_ANY, _("Отменить"), { 250, HEIGHT - 100 }, { BUTTON_WIDTH, BUTTON_HEIGHT });
+    new wxButton(this, wxID_ANY, wxT("Применить"), { 50, HEIGHT - 100 }, { BUTTON_WIDTH, BUTTON_HEIGHT });
+    new wxButton(this, wxID_ANY, wxT("Отменить"), { 250, HEIGHT - 100 }, { BUTTON_WIDTH, BUTTON_HEIGHT });
 
     Bind(wxEVT_RADIOBUTTON, &WindowTableOffsets::OnEventRadioButton, this);
     Bind(wxEVT_BUTTON, &WindowTableOffsets::OnEventButton, this);

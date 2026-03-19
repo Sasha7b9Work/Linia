@@ -15,7 +15,7 @@ const pchar DialogReport::BTN_CLOSE = "Закрыть";
 
 
 DialogReport::DialogReport() :
-    MenuDialog(_("Отчёт"), 100, { },
+    MenuDialog(wxT("Отчёт"), 100, { },
         BTN_NEW, []()
         {
         },

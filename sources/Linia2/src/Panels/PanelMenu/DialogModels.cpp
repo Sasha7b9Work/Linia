@@ -17,7 +17,7 @@ const pchar DialogModels::BTN_DELETE = "Удалить";
 
 
 DialogModels::DialogModels() :
-    MenuDialog(_("Модели"), 125, { 2, 4 },
+    MenuDialog(wxT("Модели"), 125, { 2, 4 },
         BTN_NEW, []()
         {
             Model::CreateNew("Untitled");
@@ -25,7 +25,7 @@ DialogModels::DialogModels() :
         },
         BTN_OPEN, []()
         {
-            wxFileDialog dialog(self, _("Открыть файл модели измерения"), wxEmptyString, wxEmptyString, "*.mod", wxFD_OPEN);
+            wxFileDialog dialog(self, wxT("Открыть файл модели измерения"), wxEmptyString, wxEmptyString, "*.mod", wxFD_OPEN);
 
             if (dialog.ShowModal() == wxID_OK)
             {
@@ -40,11 +40,11 @@ DialogModels::DialogModels() :
         {
             if (Model::IsModified())
             {
-                wxMessageDialog dialog(self, _("Файл модели был изменён. Сохранить изменения?"), _("Подтверждение"), wxYES_NO | wxICON_QUESTION);
+                wxMessageDialog dialog(self, wxT("Файл модели был изменён. Сохранить изменения?"), wxT("Подтверждение"), wxYES_NO | wxICON_QUESTION);
 
                 if (dialog.ShowModal() == wxID_YES)
                 {
-                    wxFileDialog dialog_save(self, _("Сохранить файл модели измерения"), GF::DirForModFiles(), Model::GetName() + ".mod", "*.mod", wxFD_SAVE);
+                    wxFileDialog dialog_save(self, wxT("Сохранить файл модели измерения"), GF::DirForModFiles(), Model::GetName() + ".mod", "*.mod", wxFD_SAVE);
 
                     if (dialog_save.ShowModal() == wxID_OK)
                     {

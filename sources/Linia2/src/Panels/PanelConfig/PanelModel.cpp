@@ -41,7 +41,7 @@ void PanelModel::Update()
 {
     if (Model::IsEmpty())
     {
-        SetName(_("Файл модели"));
+        SetName(wxT("Файл модели"));
     }
     else
     {

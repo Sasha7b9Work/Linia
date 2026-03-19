@@ -22,7 +22,7 @@ void CommandsCombo::SetInvalidChoice()
     DrawingButton::SetForegroundColour(*wxRED);
     DrawingButton::Refresh();
 
-    SetToolTip(_("Запрещено"));
+    SetToolTip(wxT("Запрещено"));
 }
 
 

@@ -19,7 +19,7 @@ public:
 
         // Текст отсчета
         m_countdownText = new wxStaticText(this, wxID_ANY,
-            wxString::Format(_("Перезагрузка через %d секунд"), m_countdown));
+            wxString::Format(wxT("Перезагрузка через %d секунд"), m_countdown));
         mainSizer->Add(m_countdownText, 0, wxALL | wxALIGN_CENTER, 10);
 
         // Кнопки
@@ -68,7 +68,7 @@ private:
         {
             // Обновляем текст отсчета
             m_countdownText->SetLabel(
-                wxString::Format(_("Перезагрузка через %d секунд"), m_countdown));
+                wxString::Format(wxT("Перезагрузка через %d секунд"), m_countdown));
             Layout();
         }
     }

@@ -4,7 +4,7 @@
 
 
 WindowAddressIP::WindowAddressIP() :
-    Dialog(_("IP-адрес"), wxDefaultPosition, { WIDTH, HEIGHT })
+    Dialog(wxT("IP-адрес"), wxDefaultPosition, { WIDTH, HEIGHT })
 {
 
 }

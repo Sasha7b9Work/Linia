@@ -7,14 +7,14 @@
 DialogTable *DialogTable::self = nullptr;
 
 
-const pchar DialogTable::BTN_SAVE = _("Сохранить");
-const pchar DialogTable::BTN_DELETE = _("Удалить");
-const pchar DialogTable::BTN_EXPAND = _("Показать");
-const pchar DialogTable::BTN_COLLAPSE = _("Скрыть");
+const wxString DialogTable::BTN_SAVE = wxT("Сохранить");
+const wxString DialogTable::BTN_DELETE = wxT("Удалить");
+const wxString DialogTable::BTN_EXPAND = wxT("Показать");
+const wxString DialogTable::BTN_COLLAPSE = wxT("Скрыть");
 
 
 DialogTable::DialogTable() :
-    MenuDialog(_("Таблица"), 100, { },
+    MenuDialog(wxT("Таблица"), 100, { },
         BTN_SAVE, []()
         {
         },

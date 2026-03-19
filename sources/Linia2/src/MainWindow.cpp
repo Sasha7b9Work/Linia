@@ -215,7 +215,7 @@ void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 void MainWindow::OnAbout(wxCommandEvent &WXUNUSED(event))
 {
     wxBoxSizer *topsizer;
-    Dialog dlg(wxString(_("About")));
+    Dialog dlg(wxString(wxT("About")));
 
     topsizer = new wxBoxSizer(wxVERTICAL);
 
@@ -223,7 +223,7 @@ void MainWindow::OnAbout(wxCommandEvent &WXUNUSED(event))
     topsizer->Add(new wxStaticLine(&dlg, wxID_ANY), 0, wxEXPAND | wxLEFT | wxRIGHT, 10);
 #endif // wxUSE_STATLINE
 
-    wxButton *bu1 = new wxButton(&dlg, wxID_OK, _("OK"));
+    wxButton *bu1 = new wxButton(&dlg, wxID_OK, wxT("OK"));
     bu1->SetDefault();
 
     topsizer->Add(bu1, 0, wxALL | wxALIGN_RIGHT, 15);

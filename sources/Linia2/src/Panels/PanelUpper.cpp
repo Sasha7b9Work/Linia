@@ -20,7 +20,7 @@ PanelUpper::PanelUpper(wxWindow* parent) :
     wxFont bigFont(25, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
     wxClientDC dc(this);
     dc.SetFont(bigFont);
-    wxSize textSize = dc.GetTextExtent(_("Э М У Л Я Т О Р"));
+    wxSize textSize = dc.GetTextExtent(wxT("Э М У Л Я Т О Р"));
     wxStaticText *text = new wxStaticText(this, wxID_ANY, "Э М У Л Я Т О Р", { 200, 0 }, wxSize(textSize.GetWidth(), textSize.GetHeight()));
     text->SetFont(bigFont);
     text->SetForegroundColour(wxColour(127, 127, 127));

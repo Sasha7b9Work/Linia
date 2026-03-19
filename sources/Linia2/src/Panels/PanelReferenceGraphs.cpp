@@ -125,7 +125,7 @@ void PanelReferenceGraph::OnEventRightClick(wxMouseEvent &event)
     }
 
     menu.AppendSeparator();
-    itemReturn = menu.Append(wxID_ANY, _("Закрыть архив"));
+    itemReturn = menu.Append(wxID_ANY, wxT("Закрыть архив"));
 
     Bind(wxEVT_MENU, &PanelReferenceGraph::OnEventMenu, this);
 
@@ -153,11 +153,11 @@ void PanelReferenceGraph::OnEventGridClick(wxGridEvent &)
 
 void PanelReferenceGraph::SetTitlesColumn()
 {
-    titles_columns.Add(_("№"));
-    titles_columns.Add(_("График"));
-    titles_columns.Add(_("Дата"));
-    titles_columns.Add(_("Время"));
-    titles_columns.Add(_("Комментарий"));
+    titles_columns.Add(wxT("№"));
+    titles_columns.Add(wxT("График"));
+    titles_columns.Add(wxT("Дата"));
+    titles_columns.Add(wxT("Время"));
+    titles_columns.Add(wxT("Комментарий"));
 
     for (uint i = 0; i < 5; i++)
     {
@@ -184,8 +184,8 @@ void PanelReferenceGraph::CreateTestLines()
     wxDateTime date;
 //    date.Set(9, wxDateTime::Oct, 2015, 16, 3, 44);
 
-    lines.push_back({ 1, "Forward", date.Set(9, wxDateTime::Oct, 2025, 16, 3, 44), _("ВАХ в прямом включении перехода") });
-    lines.push_back({ 2, "IdVd", date.Set(12, wxDateTime::Oct, 2025, 10, 13, 2), _("Выходная характеристика") });
+    lines.push_back({ 1, "Forward", date.Set(9, wxDateTime::Oct, 2025, 16, 3, 44), wxT("ВАХ в прямом включении перехода") });
+    lines.push_back({ 2, "IdVd", date.Set(12, wxDateTime::Oct, 2025, 10, 13, 2), wxT("Выходная характеристика") });
 }
 
 
