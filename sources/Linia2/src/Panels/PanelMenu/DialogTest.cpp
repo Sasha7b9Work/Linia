@@ -8,7 +8,7 @@ DialogTestAppend *DialogTestAppend::self = nullptr;
 DialogTestLibrary *DialogTestLibrary::self = nullptr;
 
 
-const wxString DialogTest::BTN_APPEND = _("Добавить");
+const wxString DialogTest::BTN_APPEND = wxT("Добавить");
 const wxString DialogTest::BTN_SAVE_PARAMETERS = _("Сохранить параметры");
 const wxString DialogTest::BTN_DELETE = _("Удалить");
 const wxString DialogTest::BTN_DELETE_ALL = _("Удалить все");
@@ -18,11 +18,11 @@ const wxString DialogTest::BTN_RENAME = _("Переименовать");
 const wxString DialogTest::BTN_LIBRARY = _("Библиотека тестов");
 const wxString DialogTest::BTN_SAVE_TO_LIBRARY = _("Сохранить в библиотеке");
 
-const pchar DialogTestAppend::BTN_ACTIVE = _("Активный");
-const pchar DialogTestAppend::BTN_FROM_LIBRARY = _("Из библиотеки");
+const wxString DialogTestAppend::BTN_ACTIVE = _("Активный");
+const wxString DialogTestAppend::BTN_FROM_LIBRARY = _("Из библиотеки");
 
-const pchar DialogTestLibrary::BTN_STANDARD = _("Стандартных");
-const pchar DialogTestLibrary::BTN_USER = _("Пользовательских");
+const wxString DialogTestLibrary::BTN_STANDARD = _("Стандартных");
+const wxString DialogTestLibrary::BTN_USER = _("Пользовательских");
 
 
 DialogTest::DialogTest() :

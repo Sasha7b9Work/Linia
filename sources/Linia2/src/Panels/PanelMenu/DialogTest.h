@@ -38,8 +38,8 @@ public:
 
 private:
 
-    static const pchar BTN_ACTIVE;
-    static const pchar BTN_FROM_LIBRARY;
+    static const wxString BTN_ACTIVE;
+    static const wxString BTN_FROM_LIBRARY;
 };
 
 
@@ -53,6 +53,6 @@ public:
 
 private:
 
-    static const pchar BTN_STANDARD;
-    static const pchar BTN_USER;
+    static const wxString BTN_STANDARD;
+    static const wxString BTN_USER;
 };
