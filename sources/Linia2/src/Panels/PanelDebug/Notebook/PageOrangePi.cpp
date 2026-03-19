@@ -20,6 +20,8 @@ bool PageOrangePi::thread_autoUART_is_running = false;
 PageOrangePi::PageOrangePi(wxNotebook *parent) :
     wxPanel(parent)
 {
+    SetBackgroundColour(parent->GetBackgroundColour());
+
     self = this;
 
     wxPanel::SetName("Orange Pi 5");

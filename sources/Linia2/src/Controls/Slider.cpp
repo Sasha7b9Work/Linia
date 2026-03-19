@@ -6,7 +6,7 @@
 
 
 SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _min, int _max, const wxString &_name) :
-    wxPanel(parent, wxID_ANY, position, { width + 5, TEXTCNTRL_HEIGHT + 5 + 5 + 5 }),
+    wxPanel(parent, wxID_ANY, position, { width + 5, TEXTCNTRL_HEIGHT + 5 + 5 }),
     min(_min),
     max(_max)
 {
