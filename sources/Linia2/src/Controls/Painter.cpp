@@ -24,8 +24,6 @@ void Painter::BeginPaint(const wxColor &background)
     gc = wxGraphicsContext::Create(dc);
 
     FillRectangle(0, 0, size.x, size.y, background == wxNullColour ? GetBackgroundColour() : background);
-
-//    DrawRectangle(0, 0, size.x - 1, size.y - 1, *wxBLACK);
 }
 
 
@@ -200,7 +198,7 @@ PainterAnimated::PainterAnimated(wxWindow *parent, const wxPoint &position, cons
     Bind(wxEVT_TIMER, &PainterAnimated::OnEventTimer, this);
     Bind(wxEVT_PAINT, &PainterAnimated::OnEventPaint, this);
 
-    timer.Start(50);
+    timer.Start(5);
 }
 
 
