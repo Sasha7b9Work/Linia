@@ -115,7 +115,7 @@ bool Application::OnInit()
 
     timer.Start(10);
 
-//    if (!SoftTests::RunAll())
+    if (!SoftTests::RunAll())
     {
         wxMessageBox(wxString::Format(_("Во время выполнения тестов произошли ошибки.\n") +
             _("Дополнительная информация в файле %s."), Log::FileName().c_str().AsChar()), wxT("Ошибка"), wxOK | wxCENTRE | wxICON_ERROR);
