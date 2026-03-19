@@ -13,18 +13,18 @@ public:
 
     virtual void Update() override;
 
-    static const pchar BTN_APPEND;
-    static const pchar BTN_LIBRARY;
+    static const wxString BTN_APPEND;
+    static const wxString BTN_LIBRARY;
 
 private:
 
-    static const pchar BTN_SAVE_PARAMETERS;
-    static const pchar BTN_DELETE;
-    static const pchar BTN_DELETE_ALL;
-    static const pchar BTN_COPY;
-    static const pchar BTN_INSERT;
-    static const pchar BTN_RENAME;
-    static const pchar BTN_SAVE_TO_LIBRARY;
+    static const wxString BTN_SAVE_PARAMETERS;
+    static const wxString BTN_DELETE;
+    static const wxString BTN_DELETE_ALL;
+    static const wxString BTN_COPY;
+    static const wxString BTN_INSERT;
+    static const wxString BTN_RENAME;
+    static const wxString BTN_SAVE_TO_LIBRARY;
 };
 
 

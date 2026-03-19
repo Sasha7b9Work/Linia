@@ -8,15 +8,15 @@ DialogTestAppend *DialogTestAppend::self = nullptr;
 DialogTestLibrary *DialogTestLibrary::self = nullptr;
 
 
-const pchar DialogTest::BTN_APPEND = _("Добавить");
-const pchar DialogTest::BTN_SAVE_PARAMETERS = _("Сохранить параметры");
-const pchar DialogTest::BTN_DELETE = _("Удалить");
-const pchar DialogTest::BTN_DELETE_ALL = _("Удалить все");
-const pchar DialogTest::BTN_COPY = _("Копировать");
-const pchar DialogTest::BTN_INSERT = _("Вставить");
-const pchar DialogTest::BTN_RENAME = _("Переименовать");
-const pchar DialogTest::BTN_LIBRARY = _("Библиотека тестов");
-const pchar DialogTest::BTN_SAVE_TO_LIBRARY = _("Сохранить в библиотеке");
+const wxString DialogTest::BTN_APPEND = _("Добавить");
+const wxString DialogTest::BTN_SAVE_PARAMETERS = _("Сохранить параметры");
+const wxString DialogTest::BTN_DELETE = _("Удалить");
+const wxString DialogTest::BTN_DELETE_ALL = _("Удалить все");
+const wxString DialogTest::BTN_COPY = _("Копировать");
+const wxString DialogTest::BTN_INSERT = _("Вставить");
+const wxString DialogTest::BTN_RENAME = _("Переименовать");
+const wxString DialogTest::BTN_LIBRARY = _("Библиотека тестов");
+const wxString DialogTest::BTN_SAVE_TO_LIBRARY = _("Сохранить в библиотеке");
 
 const pchar DialogTestAppend::BTN_ACTIVE = _("Активный");
 const pchar DialogTestAppend::BTN_FROM_LIBRARY = _("Из библиотеки");
