@@ -73,7 +73,7 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
 
     gc->SetPen(*wxGREEN_PEN);
 
-    gc->SetBrush(IsEnabled() ? GetParent()->GetBackgroundColour().ChangeLightness(150) : GetParent()->GetBackgroundColour());
+    gc->SetBrush(IsEnabled() ? GetParent()->GetBackgroundColour().ChangeLightness(170) : GetParent()->GetBackgroundColour());
 
     gc->DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
 
