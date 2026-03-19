@@ -12,17 +12,18 @@ AnimatedImpulse::AnimatedImpulse(wxWindow *parent, const wxPoint &position) :
 
 void AnimatedImpulse::FuncDraw()
 {
-    wxPaintDC dc(this);
+    wxPaintDC _dc(this);
 
     if (GetParent()->IsEnabled())
     {
-        dc.SetPen(*wxBLACK_PEN);
-        dc.SetBrush(*wxWHITE_BRUSH);
+        _dc.SetPen(wxPen(GetParent()->GetBackgroundColour()));
+        _dc.SetBrush(wxBrush(GetParent()->GetBackgroundColour()));
     }
     else
     {
-        dc.SetPen(*wxWHITE_PEN);
-        dc.SetBrush(*wxBLACK_BRUSH);
+        _dc.SetPen(*wxWHITE_PEN);
+        _dc.SetBrush(*wxBLACK_BRUSH);
     }
-    dc.DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
+
+    _dc.DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
 }
