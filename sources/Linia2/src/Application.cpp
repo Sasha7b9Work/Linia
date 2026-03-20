@@ -59,6 +59,12 @@ bool Application::OnInit()
         return false;
     }
 
+#ifndef __WXMSW__
+    // Включаем отображение иконок в контекстных меню GTK3
+    GtkSettings *settings = gtk_settings_get_default();
+    g_object_set(settings, "gtk-menu-images", TRUE, NULL);
+#endif
+
     Log::Init();
 
     Config::Init();

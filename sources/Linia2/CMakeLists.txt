@@ -90,6 +90,7 @@ file(GLOB PANELS_PANELCONFIG_CALC       src/Panels/PanelConfig/PanelCalc/*.*)
 file(GLOB PANELS_PANELCONFIG_SCHEME     src/Panels/PanelConfig/PanelScheme/*.*)
 file(GLOB PANELS_PANELMENU              src/Panels/PanelMenu/*.*)
 file(GLOB PANELS_PANELMENU_SETUP        src/Panels/PanelMenu/Setup/*.*)
+file(GLOB PANELS_PANELMENU_SETUP_FP     src/Panels/PanelMenu/Setup/MyComputer/*.*)
 file(GLOB PANELS_PANELDEBUG             src/Panels/PanelDebug/*.*)
 file(GLOB PANELS_PANELDEBUG_NOTEBOOK    src/Panels/PanelDebug/Notebook/*.*)
 file(GLOB PANELS_WINDOWCALCULATION      src/Panels/WindowCalculation/*.*)
@@ -138,6 +139,7 @@ source_group(Panels/PanelConfig/PanelCalc         FILES ${PANELS_PANELCONFIG_CAL
 source_group(Panels/PanelConfig/PanelScheme       FILES ${PANELS_PANELCONFIG_SCHEME})
 source_group(Panels/PanelMenu                     FILES ${PANELS_PANELMENU})
 source_group(Panels/PanelMenu/Setup               FILES ${PANELS_PANELMENU_SETUP})
+source_group(Panels/PanelMenu/Setup/FilePanel     FILES ${PANELS_PANELMENU_SETUP_FP})
 source_group(Panels/PanelDebug                    FILES ${PANELS_PANELDEBUG})
 source_group(Panels/PanelDebug/Notebook           FILES ${PANELS_PANELDEBUG_NOTEBOOK})
 source_group(Panels/WindowCalculation             FILES ${PANELS_WINDOWCALCULATION})
@@ -176,6 +178,7 @@ add_executable(${PROJECT_NAME}
     ${PANELS_PANELCONFIG_SCHEME}
     ${PANELS_PANELMENU}
     ${PANELS_PANELMENU_SETUP}
+    ${PANELS_PANELMENU_SETUP_FP}
     ${PANELS_PANELDEBUG}
     ${PANELS_PANELDEBUG_NOTEBOOK}
     ${PANELS_WINDOWCALCULATION}
@@ -230,6 +233,8 @@ else()
         message(STATUS "Non-ARM64 platform detected (${CMAKE_SYSTEM_PROCESSOR}) - skipping libgpiod search")
     endif()
 
+    pkg_check_modules(GSPELL gspell-1)
+
     target_link_libraries(${PROJECT_NAME}
         wx_gtk3u_core-3.3
         wx_baseu-3.3
@@ -237,9 +242,18 @@ else()
         X11
         xkbcommon
         png
+        ssh
         ${GTK3_LIBRARIES}
+        ${GSPELL_LIBRARIES}
     )
 
     target_include_directories(${PROJECT_NAME} PRIVATE ${GTK3_INCLUDE_DIRS})
     target_compile_options(${PROJECT_NAME} PRIVATE ${GTK3_CFLAGS_OTHER})
+
+    # Копируем ресурсы в директорию сборки
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_CURRENT_SOURCE_DIR}/resources
+            $<TARGET_FILE_DIR:${PROJECT_NAME}>/resources
+    )
 endif()
