@@ -11,7 +11,7 @@ public:
     static const int WIDTH = 150;
     static const int HEIGHT = 75;
 
-    AnimatedImpulse(wxWindow *, const wxPoint &);
+    AnimatedImpulse(wxWindow *, const wxPoint &, const wxColor &background);
 
 private:
 
@@ -19,4 +19,5 @@ private:
 
     TimeMeterMS meter;
     int x = 0;
+    wxColor color_background;
 };

@@ -19,7 +19,7 @@ PainterRegister::PainterRegister(wxWindow *parent, Register *_panel, const wxPoi
 
     Bind(wxEVT_PAINT, &PainterRegister::OnEventPaint, this);
 
-    animation = new AnimatedImpulse(this, { 300, 50 });
+    animation = new AnimatedImpulse(this, { 300, 50 }, ColorBackground(true));
 
     wxPoint pos = { GetSize().x, 0 };
     pos.x -= AnimatedImpulse::WIDTH + 5 + 100;
@@ -44,6 +44,12 @@ void PainterRegister::IncreaseHeight(int dH)
 }
 
 
+void PainterRegister::EnableAutoSendAnimation(bool _enable)
+{
+    animation->wxWindowBase::Enable(_enable);
+}
+
+
 int PainterRegister::BitX(int num_bit, int all_bits) const
 {
     int rigth = 40 + all_bits * W_B;
@@ -52,9 +58,9 @@ int PainterRegister::BitX(int num_bit, int all_bits) const
 }
 
 
-wxColor PainterRegister::ColorBackground() const
+wxColor PainterRegister::ColorBackground(bool enabled) const
 {
-    return IsEnabled() ? GetParent()->GetBackgroundColour().ChangeLightness(170) : GetParent()->GetBackgroundColour();
+    return enabled ? GetParent()->GetBackgroundColour().ChangeLightness(170) : GetParent()->GetBackgroundColour();
 }
 
 
@@ -76,7 +82,7 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
 
     gc->SetPen(*wxGREEN_PEN);
 
-    gc->SetBrush(ColorBackground());
+    gc->SetBrush(ColorBackground(IsEnabled()));
 
     gc->DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
 
@@ -100,7 +106,7 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
         {
             wxBrush brush(wxColor(0xF0, 0xF0, 0xF0));
 
-            gc->SetBrush(IsEnabled() ? (pen_is_white ? brush : *wxWHITE_BRUSH) : ColorBackground());
+            gc->SetBrush(IsEnabled() ? (pen_is_white ? brush : *wxWHITE_BRUSH) : ColorBackground(IsEnabled()));
             pen_is_white = !pen_is_white;
         }
 
@@ -114,7 +120,7 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
         DrawTitleBit(i, panel->names_bits[(uint)i], gc);
     }
 
-    gc->SetBrush(IsEnabled() ? *wxWHITE_BRUSH : ColorBackground());
+    gc->SetBrush(IsEnabled() ? *wxWHITE_BRUSH : ColorBackground(IsEnabled()));
 
     for (int i = 0; i < 2; i++)
     {

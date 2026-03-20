@@ -24,6 +24,8 @@ public:
     // Увеличить высоту на dH
     void IncreaseHeight(int dH);
 
+    void EnableAutoSendAnimation(bool);
+
 private:
 
     bool             first_paint = true;
@@ -46,5 +48,5 @@ private:
 
     void OnEventPaint(wxPaintEvent &);
 
-    wxColor ColorBackground() const;
+    wxColor ColorBackground(bool enabled) const;
 };

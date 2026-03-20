@@ -3,10 +3,11 @@
 #include "Panels/PanelDebug/Notebook/AnimatedImpulse.h"
 
 
-AnimatedImpulse::AnimatedImpulse(wxWindow *parent, const wxPoint &position) :
-    PainterAnimated(parent, position, { WIDTH, HEIGHT })
+AnimatedImpulse::AnimatedImpulse(wxWindow *parent, const wxPoint &position, const wxColor &background) :
+    PainterAnimated(parent, position, { WIDTH, HEIGHT }),
+    color_background(background)
 {
-
+    wxWindow::Enable(false);
 }
 
 
@@ -14,11 +15,11 @@ void AnimatedImpulse::FuncDraw()
 {
     wxPaintDC _dc(this);
 
-    _dc.SetBrush(wxBrush(GetParent()->GetBackgroundColour()));
-    _dc.SetPen(wxPen(GetParent()->GetBackgroundColour()));
+    _dc.SetBrush(wxBrush(color_background));
+    _dc.SetPen(wxPen(color_background));
 
 
-    if (GetParent()->IsEnabled())
+    if(!IsEnabled())
     {
         _dc.DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
     }
