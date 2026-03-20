@@ -49,4 +49,6 @@ private:
     void OnEventPaint(wxPaintEvent &);
 
     wxColor ColorBackground(bool enabled) const;
+
+    void SetPositionAnimationWidget();
 };

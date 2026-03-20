@@ -9,9 +9,9 @@ class AnimatedImpulse : public PainterAnimated
 public:
 
     static const int WIDTH = 150;
-    static const int HEIGHT = 75;
+    static const int HEIGHT = 25;
 
-    AnimatedImpulse(wxWindow *, const wxPoint &, const wxColor &background);
+    AnimatedImpulse(wxWindow *, const wxColor &background);
 
 private:
 

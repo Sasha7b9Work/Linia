@@ -19,12 +19,9 @@ PainterRegister::PainterRegister(wxWindow *parent, Register *_panel, const wxPoi
 
     Bind(wxEVT_PAINT, &PainterRegister::OnEventPaint, this);
 
-    animation = new AnimatedImpulse(this, { 300, 50 }, ColorBackground(true));
+    animation = new AnimatedImpulse(this, ColorBackground(true));
 
-    wxPoint pos = { GetSize().x, 0 };
-    pos.x -= AnimatedImpulse::WIDTH + 5 + 100;
-    pos.y += 5;
-    animation->SetPosition(pos);
+    SetPositionAnimationWidget();
 }
 
 
@@ -40,7 +37,18 @@ void PainterRegister::IncreaseHeight(int dH)
 
     Layout();
 
+    SetPositionAnimationWidget();
+
     Refresh();
+}
+
+
+void PainterRegister::SetPositionAnimationWidget()
+{
+    wxPoint pos = { GetSize().x, GetSize().y };
+    pos.x -= AnimatedImpulse::WIDTH + 5;
+    pos.y -= AnimatedImpulse::HEIGHT + 5;
+    animation->SetPosition(pos);
 }
 
 
@@ -83,6 +91,7 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
     gc->SetPen(*wxGREEN_PEN);
 
     gc->SetBrush(ColorBackground(IsEnabled()));
+
 
     gc->DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
 

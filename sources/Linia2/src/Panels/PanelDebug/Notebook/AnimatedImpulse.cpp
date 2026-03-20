@@ -3,8 +3,8 @@
 #include "Panels/PanelDebug/Notebook/AnimatedImpulse.h"
 
 
-AnimatedImpulse::AnimatedImpulse(wxWindow *parent, const wxPoint &position, const wxColor &background) :
-    PainterAnimated(parent, position, { WIDTH, HEIGHT }),
+AnimatedImpulse::AnimatedImpulse(wxWindow *parent, const wxColor &background) :
+    PainterAnimated(parent, wxDefaultPosition, { WIDTH, HEIGHT }),
     color_background(background)
 {
     wxWindow::Enable(false);
@@ -17,7 +17,6 @@ void AnimatedImpulse::FuncDraw()
 
     _dc.SetBrush(wxBrush(color_background));
     _dc.SetPen(wxPen(color_background));
-
 
     if(!IsEnabled())
     {
@@ -41,12 +40,14 @@ void AnimatedImpulse::FuncDraw()
         _dc.SetPen(*wxBLACK_PEN);
 
 
-        int y = 10;
+        int y = 1;
 
-        _dc.DrawLine(0, 50, x, 50);
-        _dc.DrawLine(x, 50, x, y);
+        int y0 = GetSize().y - 2;
+
+        _dc.DrawLine(0, y0, x, y0);
+        _dc.DrawLine(x, y0, x, y);
         _dc.DrawLine(x, y, x + 10, y);
-        _dc.DrawLine(x + 10, y, x + 10, 50);
-        _dc.DrawLine(x + 10, 50, GetSize().x, 50);
+        _dc.DrawLine(x + 10, y, x + 10, y0);
+        _dc.DrawLine(x + 10, y0, GetSize().x, y0);
     }
 }
