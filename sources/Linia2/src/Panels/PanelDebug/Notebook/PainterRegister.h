@@ -24,8 +24,6 @@ public:
     // Увеличить высоту на dH
     void IncreaseHeight(int dH);
 
-    virtual bool Enable(bool) override;
-
 private:
 
     bool             first_paint = true;

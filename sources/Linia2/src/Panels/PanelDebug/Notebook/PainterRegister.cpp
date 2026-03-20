@@ -52,16 +52,6 @@ int PainterRegister::BitX(int num_bit, int all_bits) const
 }
 
 
-bool PainterRegister::Enable(bool _enable)
-{
-    bool result = wxPanel::Enable(_enable);
-
-    wxPanel::Refresh();
-
-    return result;
-}
-
-
 wxColor PainterRegister::ColorBackground() const
 {
     return IsEnabled() ? GetParent()->GetBackgroundColour().ChangeLightness(170) : GetParent()->GetBackgroundColour();

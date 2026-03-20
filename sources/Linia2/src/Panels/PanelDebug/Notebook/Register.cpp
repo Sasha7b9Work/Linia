@@ -332,6 +332,8 @@ void Register::SetActiveAcross(bool active, wxWindow *_wnd)
 //    }
 
     NotebookDebug::self->EnableSwitching(active);
+
+//    painter->
 }
 
 
