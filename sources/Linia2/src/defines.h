@@ -38,6 +38,7 @@
 #include <wx/dnd.h>
 #include <wx/msgdlg.h>
 #include <wx/splitter.h>
+#include <wx/progdlg.h>
 
 
 #include <map>

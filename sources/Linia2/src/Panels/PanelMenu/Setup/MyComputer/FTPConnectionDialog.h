@@ -1,34 +1,47 @@
 #pragma once
 
-#include <wx/wx.h>
-#include <wx/dialog.h>
 
 class FTPConnectionDialog : public wxDialog {
 public:
-    FTPConnectionDialog(wxWindow* parent);
+    FTPConnectionDialog(wxWindow *parent);
     ~FTPConnectionDialog();
-    
-    wxString GetServer() const { return m_server; }
-    wxString GetHost() const { return m_server; }  // Алиас для совместимости
-    int GetPort() const { return m_port; }
-    wxString GetUsername() const { return m_username; }
-    wxString GetPassword() const { return m_password; }
+
+    wxString GetServer() const
+    {
+        return m_server;
+    }
+    wxString GetHost() const
+    {
+        return m_server;
+    }  // Алиас для совместимости
+    int GetPort() const
+    {
+        return m_port;
+    }
+    wxString GetUsername() const
+    {
+        return m_username;
+    }
+    wxString GetPassword() const
+    {
+        return m_password;
+    }
     void ClearPassword();
-    
+
 private:
     void CreateControls();
-    void OnOK(wxCommandEvent& event);
-    void OnCancel(wxCommandEvent& event);
-    
-    wxTextCtrl* m_serverCtrl;
-    wxTextCtrl* m_portCtrl;
-    wxTextCtrl* m_usernameCtrl;
-    wxTextCtrl* m_passwordCtrl;
-    
+    void OnOK(wxCommandEvent &event);
+    void OnCancel(wxCommandEvent &event);
+
+    wxTextCtrl *m_serverCtrl;
+    wxTextCtrl *m_portCtrl;
+    wxTextCtrl *m_usernameCtrl;
+    wxTextCtrl *m_passwordCtrl;
+
     wxString m_server;
     int m_port;
     wxString m_username;
     wxString m_password;
-    
+
     wxDECLARE_EVENT_TABLE();
 };
