@@ -114,6 +114,8 @@ private:
     SliderInt *slider_value = nullptr;          // Ползунок установки значения
     Chip *chip = nullptr;
     PainterRegister *painter = nullptr;
+    wxCheckBox *chbSawDAC = nullptr;            // При включении в ЦАП будет засылаться пила
+    int direction_saw = 1;                      // Направление изменения пилы
 
     wxButton *btnSend = nullptr;                // Однократная засылка
     wxToggleButton *btnAutoSend = nullptr;      // Если кнопка нажата, то каждую секунду происходит запись в данный регистр

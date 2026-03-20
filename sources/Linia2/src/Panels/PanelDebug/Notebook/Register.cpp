@@ -88,6 +88,11 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, bool n
 
         slider_value->Bind(wxEVT_SLIDER, &RegAD5543::OnEventSlider, this);
     }
+
+    if (chip->IsDAC())
+    {
+        chbSawDAC = new wxCheckBox(painter, wxID_ANY, wxT("Пила"), { 600, 5 });
+    }
 }
 
 
@@ -269,12 +274,14 @@ void Register::OnEventToggleButton(wxCommandEvent &event)
 
         if (event.GetInt())
         {
-            timerAutoSend.Start(1000);
+            timerAutoSend.Start((chbSawDAC && chbSawDAC->IsChecked()) ? 100 : 1000);
         }
         else
         {
             timerAutoSend.Stop();
         }
+
+        WriteValue();
     }
 
     event.Skip();
@@ -300,7 +307,28 @@ void Register::WriteValue()
 
 void Register::OnEventTimerAutoSend(wxTimerEvent &)
 {
-    WriteValue();
+    if (chbSawDAC && chbSawDAC->IsChecked())
+    {
+        int new_value = knob->GetValue() + direction_saw;
+
+        if (new_value > knob->GetMaxValue())
+        {
+            direction_saw = -direction_saw;
+            new_value = knob->GetMaxValue();
+        }
+        else if (new_value < knob->GetMinValue())
+        {
+            direction_saw = -direction_saw;
+            new_value = knob->GetMinValue();
+        }
+
+        knob->SetValue(new_value);
+        WriteValue();
+    }
+    else
+    {
+        WriteValue();
+    }
 }
 
 

@@ -1,4 +1,4 @@
-// 2026/03/09 10:24:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2026/03/09 10:24:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include <wx/wx.h>
 #include <wx/dcbuffer.h>
@@ -42,6 +42,16 @@ public:
     int GetValue() const
     {
         return m_value;
+    }
+
+    int GetMinValue() const
+    {
+        return m_minValue;
+    }
+
+    int GetMaxValue() const
+    {
+        return m_maxValue;
     }
 
     void SetValue(int value)
