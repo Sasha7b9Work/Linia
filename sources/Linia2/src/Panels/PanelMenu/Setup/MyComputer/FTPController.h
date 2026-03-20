@@ -1,9 +1,8 @@
-// FTPController.h
 #pragma once
 
-#include <wx/wx.h>
-#include <libssh/libssh.h>
+
 #include <libssh/sftp.h>
+
 
 class FilePanel;
 

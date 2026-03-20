@@ -1,7 +1,7 @@
 ﻿# 2023/07/04 15:47:47 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (Linia2)
 
-#set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD OFF)
 
 set(CMAKE_UNITY_BUILD_BATCH_SIZE 20)
 
@@ -23,6 +23,7 @@ if(WIN32)
     add_compile_options(
         # Обязательные
         /wd4265    # class has virtual functions, but its non-trivial destructor is not virtual
+        /wd4355    # 'this' : used in base member initializer list
         /wd4514    # unreferenced inline function has been removed
         /wd4625    # copy constructor was implicitly defined as deleted
         /wd4623    # default constructor was implicitly defined as deleted
@@ -105,7 +106,8 @@ if(WIN32)                                                           # Эти з�
     file(GLOB PLUGS_ARM64               arm64_plugs/*.*
                                         arm64_plugs/linux/spi/*.*)
     file(GLOB PLUGS_LINUX               linux_plugs/*.*
-                                        linux_plugs/sys/*.*)
+                                        linux_plugs/sys/*.*
+                                        linux_plugs/libssh/*.*)
 else()
     if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
     else()                                                          # Эти заглушки включаем для Ubuntu x64
@@ -139,7 +141,7 @@ source_group(Panels/PanelConfig/PanelCalc         FILES ${PANELS_PANELCONFIG_CAL
 source_group(Panels/PanelConfig/PanelScheme       FILES ${PANELS_PANELCONFIG_SCHEME})
 source_group(Panels/PanelMenu                     FILES ${PANELS_PANELMENU})
 source_group(Panels/PanelMenu/Setup               FILES ${PANELS_PANELMENU_SETUP})
-source_group(Panels/PanelMenu/Setup/FilePanel     FILES ${PANELS_PANELMENU_SETUP_FP})
+source_group(Panels/PanelMenu/Setup/MyComputer    FILES ${PANELS_PANELMENU_SETUP_FP})
 source_group(Panels/PanelDebug                    FILES ${PANELS_PANELDEBUG})
 source_group(Panels/PanelDebug/Notebook           FILES ${PANELS_PANELDEBUG_NOTEBOOK})
 source_group(Panels/WindowCalculation             FILES ${PANELS_WINDOWCALCULATION})

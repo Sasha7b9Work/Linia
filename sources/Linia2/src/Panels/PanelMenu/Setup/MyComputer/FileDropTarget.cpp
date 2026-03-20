@@ -1,14 +1,15 @@
-// FileDropTarget.cpp
+#include "defines.h"
 #include "FileDropTarget.h"
 #include "FilePanelController.h"
 #include "FileOperations.h"
 #include "ClipboardManager.h"
 
+
 FileDropTarget::FileDropTarget(FilePanel* panel)
     : m_panel(panel) {
 }
 
-bool FileDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) {
+bool FileDropTarget::OnDropFiles(wxCoord /*x*/, wxCoord /*y*/, const wxArrayString &filenames) {
     if (filenames.IsEmpty()) {
         return false;
     }

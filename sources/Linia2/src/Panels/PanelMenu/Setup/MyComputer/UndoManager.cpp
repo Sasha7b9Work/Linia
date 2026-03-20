@@ -1,4 +1,4 @@
-// UndoManager.cpp
+#include "defines.h"
 #include "UndoManager.h"
 
 UndoManager& UndoManager::GetInstance() {
@@ -9,7 +9,7 @@ UndoManager& UndoManager::GetInstance() {
 void UndoManager::AddOperation(const FileOperation& operation) {
     // Удаляем все операции после текущей позиции
     if (m_currentIndex < m_operations.size()) {
-        m_operations.erase(m_operations.begin() + m_currentIndex, m_operations.end());
+        m_operations.erase(m_operations.begin() + (int64)m_currentIndex, m_operations.end());
     }
     
     m_operations.push_back(operation);

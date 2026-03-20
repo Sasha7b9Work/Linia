@@ -1,11 +1,10 @@
-﻿// WindowMyComputer.h
-#pragma once
+﻿#pragma once
+
 
 #include "Controls/Dialog.h"
-#include <wx/wx.h>
-#include <wx/splitter.h>
 #include "MyComputer/FilePanel.h"
 #include "MyComputer/FilePanelEvents.h"
+
 
 class WindowMyComputer : public Dialog {
 public:

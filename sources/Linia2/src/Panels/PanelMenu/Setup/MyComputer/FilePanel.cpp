@@ -1,4 +1,3 @@
-// FilePanel.cpp
 #include "defines.h"
 #include "FilePanel.h"
 #include "FilePanelEvents.h" 
@@ -11,21 +10,12 @@
 #include "FTPConnectionDialog.h"
 #include "FTPController.h"
 #include "Controls/Bitmap.h"
-#include <wx/sizer.h>
-#include <wx/dirdlg.h>
-#include <wx/textdlg.h>
-#include <wx/dnd.h>
-#include <wx/dataobj.h>
-#include <wx/dir.h>
-#include <wx/bmpbuttn.h>
-#include <wx/stdpaths.h>
-#include <wx/dcmemory.h>
-#include <algorithm>
-#include <vector>
+
 
 #ifdef __WXMSW__
 #include <windows.h>
 #endif
+
 
 // Определение таблицы событий
 wxBEGIN_EVENT_TABLE(FilePanel, wxPanel)
@@ -436,7 +426,7 @@ bool FilePanel::CopyFileBetweenSystems(const wxString& sourcePath,
                                        FileSystemType sourceType,
                                        const wxString& destPath,
                                        FileSystemType destType,
-                                       wxWindow* parent) {
+                                       wxWindow* /*parent*/) {
     // Local -> Local
     if (sourceType == FS_LOCAL && destType == FS_LOCAL) {
         return wxCopyFile(sourcePath, destPath);
@@ -471,13 +461,13 @@ bool FilePanel::CopyFileBetweenSystems(const wxString& sourcePath,
     return false;
 }
 
-void FilePanel::OnPathChanged(wxCommandEvent& event) {
+void FilePanel::OnPathChanged(wxCommandEvent& /*event*/) {
     wxString newPath = m_pathCtrl->GetValue();
     if (newPath.IsEmpty()) return;  // Игнорируем пустой путь
     m_controller->OnPathChanged(newPath);
 }
 
-void FilePanel::OnBrowseButton(wxCommandEvent& event) {
+void FilePanel::OnBrowseButton(wxCommandEvent& /*event*/) {
     // Открываем диалог выбора директории
     wxDirDialog dlg(this, "Выберите папку", m_controller->GetCurrentPath(), wxDD_DEFAULT_STYLE);
     if (dlg.ShowModal() == wxID_OK) {
@@ -500,7 +490,7 @@ void FilePanel::OnItemSelected(wxListEvent& event) {
     m_controller->OnItemSelected(event.GetIndex());
 }
 
-void FilePanel::OnItemRightClick(wxListEvent& event) {
+void FilePanel::OnItemRightClick(wxListEvent& /*event*/) {
     wxMenu menu;
 
     auto appendWithIcon = [&](wxMenu& m, int id, const wxString& label, const wxString& iconFile) {
@@ -555,7 +545,7 @@ void FilePanel::HandleRefresh(wxCommandEvent& event) {
     m_operations->HandleRefresh(event);
 }
 
-void FilePanel::OnBeginDrag(wxListEvent& event) {
+void FilePanel::OnBeginDrag(wxListEvent& /*event*/) {
     // Инициируем drag-and-drop для выбранных файлов
     if (!m_controller->HasSelectedFiles()) {
         return; // Ничего не выбрано
@@ -704,11 +694,11 @@ void FilePanel::OnColumnClick(wxListEvent& event) {
     };
     
     int count = m_fileList->GetItemCount();
-    std::vector<ItemData> items(count);
+    std::vector<ItemData> items((uint64)count);
     
-    for (int i = 0; i < count; i++) {
+    for (uint64 i = 0; i < (uint64)count; i++) {
         for (int c = 0; c < 4; c++) {
-            items[i].cols[c] = m_fileList->GetItemText(i, c);
+            items[i].cols[c] = m_fileList->GetItemText((long)i, c);
         }
         items[i].isParent = (items[i].cols[0] == "..");
         items[i].isDir = (items[i].cols[2] == "<DIR>");
@@ -737,8 +727,8 @@ void FilePanel::OnColumnClick(wxListEvent& event) {
     m_fileList->Freeze();
     m_fileList->DeleteAllItems();
     
-    for (int i = 0; i < count; i++) {
-        long item = m_fileList->InsertItem(i, items[i].cols[0]);
+    for (uint64 i = 0; i < (uint64)count; i++) {
+        long item = m_fileList->InsertItem((long)i, items[i].cols[0]);
         m_fileList->SetItem(item, 1, items[i].cols[1]);
         m_fileList->SetItem(item, 2, items[i].cols[2]);
         m_fileList->SetItem(item, 3, items[i].cols[3]);
@@ -778,7 +768,7 @@ wxString FilePanel::GetSourceTypeString() const {
     }
 }
 
-void FilePanel::OnSourceTypeChanged(wxCommandEvent& event) {
+void FilePanel::OnSourceTypeChanged(wxCommandEvent& /*event*/) {
     int selection = m_sourceTypeCombo->GetSelection();
     m_sourceType = static_cast<SourceType>(selection);
     
@@ -905,7 +895,7 @@ void FilePanel::CreateSourceButtons() {
     m_btnFTP->SetToolTip("FTP соединение");
 }
 
-void FilePanel::OnLocalButtonClick(wxCommandEvent& event) {
+void FilePanel::OnLocalButtonClick(wxCommandEvent& /*event*/) {
     m_sourceType = SOURCE_LOCAL;
     m_panelState = STATE_BROWSING;  // Переходим в режим просмотра каталога
     UpdateStatus("Переключено на: Локальное хранилище");
@@ -913,7 +903,7 @@ void FilePanel::OnLocalButtonClick(wxCommandEvent& event) {
     RefreshFileList();
 }
 
-void FilePanel::OnFTPButtonClick(wxCommandEvent& event) {
+void FilePanel::OnFTPButtonClick(wxCommandEvent& /*event*/) {
     // Показываем диалог подключения к FTP
     FTPConnectionDialog dlg(this);
     if (dlg.ShowModal() == wxID_OK) {
@@ -953,7 +943,7 @@ void FilePanel::OnFTPButtonClick(wxCommandEvent& event) {
     }
 }
 
-void FilePanel::OnBackButtonClick(wxCommandEvent& event) {
+void FilePanel::OnBackButtonClick(wxCommandEvent& /*event*/) {
     // Возврат к экрану выбора источника
     m_panelState = STATE_SELECTION;
     

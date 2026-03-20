@@ -1,13 +1,9 @@
 // FilePanel.h
 #pragma once
-
-#include <wx/wx.h>
-#include <wx/listctrl.h>
-#include <wx/combobox.h>
-#include <memory>
 #include "FilePanelController.h"
 #include "FilePanelEvents.h"
 #include "ClipboardManager.h"
+
 
 // Forward declarations
 class FTPController;

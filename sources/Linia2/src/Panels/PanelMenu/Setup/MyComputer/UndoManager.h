@@ -1,13 +1,10 @@
-// UndoManager.h
 #pragma once
-#include <wx/wx.h>
-#include <vector>
-#include <memory>
+
 
 enum class OperationType {
     COPY,
     MOVE,
-    DELETE,
+    _DELETE,
     CREATE_FOLDER
 };
 

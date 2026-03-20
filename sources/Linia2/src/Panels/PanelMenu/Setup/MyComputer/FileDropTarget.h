@@ -1,8 +1,6 @@
-// FileDropTarget.h
 #pragma once
-
-#include <wx/dnd.h>
 #include "FilePanel.h"
+
 
 class FileDropTarget : public wxFileDropTarget {
 public:

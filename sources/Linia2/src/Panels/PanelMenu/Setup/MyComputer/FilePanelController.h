@@ -1,12 +1,9 @@
 // FilePanelController.h
 #pragma once
 
-#include <wx/wx.h>
-#include <wx/listctrl.h>
-#include <wx/dir.h>
-#include <wx/filename.h>
 
 class FilePanel;
+
 
 class FilePanelController {
 public:

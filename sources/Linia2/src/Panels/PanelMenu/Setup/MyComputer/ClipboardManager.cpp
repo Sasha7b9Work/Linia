@@ -1,5 +1,6 @@
-// ClipboardManager.cpp
+#include "defines.h"
 #include "ClipboardManager.h"
+
 
 ClipboardManager& ClipboardManager::GetInstance() {
     static ClipboardManager instance;

@@ -1,7 +1,5 @@
-// ClipboardManager.h
 #pragma once
 
-#include <wx/wx.h>
 
 // Forward declarations
 class FilePanel;

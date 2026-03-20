@@ -34,6 +34,11 @@
 #include <wx/artprov.h>
 #include <wx/evtloop.h>
 #include <wx/uiaction.h>
+#include <wx/wfstream.h>
+#include <wx/dnd.h>
+#include <wx/msgdlg.h>
+#include <wx/splitter.h>
+
 
 #include <map>
 #include <queue>

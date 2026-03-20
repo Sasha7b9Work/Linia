@@ -1,22 +1,17 @@
-﻿// WindowMyComputer.cpp
-#include "defines.h"
+﻿#include "defines.h"
 #include "WindowMyComputer.h"
 #include "MyComputer/FilePanel.h"
 #include "MyComputer/FilePanelEvents.h"
-#include <wx/utils.h>
-#include <wx/datetime.h>
+
 
 WindowMyComputer::WindowMyComputer() :
-<<<<<<< HEAD
-    Dialog(wxT("Мой компьютер"), wxDefaultPosition, { WIDTH, HEIGHT })
-=======
+//    Dialog(wxT("Мой компьютер"), wxDefaultPosition, { WIDTH, HEIGHT })
     Dialog(_("Мой компьютер"), wxDefaultPosition, { WIDTH, HEIGHT }),
     m_splitter(nullptr),
     m_leftPanel(nullptr),
     m_rightPanel(nullptr),
     m_statusText(nullptr),
     m_activePanel(nullptr)
->>>>>>> 0b7f32dc (Виджет файлового менеджера)
 {
     SetMinSize(wxSize(600, 600));
     CreateControls();
@@ -89,7 +84,7 @@ void WindowMyComputer::OnTabKey(wxKeyEvent& event) {
     event.Skip();
 }
 
-void WindowMyComputer::OnClose(wxCommandEvent& event) {
+void WindowMyComputer::OnClose(wxCommandEvent& /*event*/) {
     CloseModal();
 }
 

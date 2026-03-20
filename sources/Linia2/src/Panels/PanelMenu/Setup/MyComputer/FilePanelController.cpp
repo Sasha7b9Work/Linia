@@ -1,8 +1,9 @@
-// FilePanelController.cpp
+#include "defines.h"
 #include "FilePanelController.h"
 #include "FilePanel.h"
 #include "FileOperations.h"
 #include "FTPController.h"
+
 
 FilePanelController::FilePanelController(FilePanel* view) 
     : m_view(view), m_currentPath(wxGetCwd()) {
@@ -131,11 +132,14 @@ void FilePanelController::SetPath(const wxString& path) {
             wxString ftpPath = path;
             if (ftpPath.StartsWith("ftp://")) {
                 // Находим путь после хоста
-                int slashPos = ftpPath.Find('/', 6);  // Пропускаем "ftp://"
+                                                 // \todo Здесь ошибка. Нужно пропустить первые 6 символов
+                int slashPos = ftpPath.Find('/', false);            // Пропускаем "ftp://"
                 if (slashPos != wxNOT_FOUND) {
-                    slashPos = ftpPath.Find('/', slashPos + 1);  // Находим следующий слэш
+                                                // \todo Здесь ошибка.
+                    slashPos = ftpPath.Find('/', false);     // Находим следующий слэш
+//                    slashPos = ftpPath.Find('/', slashPos + 1);     // Находим следующий слэш
                     if (slashPos != wxNOT_FOUND) {
-                        ftpPath = ftpPath.Mid(slashPos);
+                        ftpPath = ftpPath.Mid((size_t)slashPos);
                     } else {
                         ftpPath = "/";
                     }
@@ -210,7 +214,7 @@ void FilePanelController::AddFileItem(const wxFileName& file) {
         fileList->SetItem(item, 1, FileOperations::FormatSize(size));
         
         wxString ext = file.GetExt();
-        fileList->SetItem(item, 2, ext.IsEmpty() ? "Файл" : ext.Upper());
+        fileList->SetItem(item, 2, ext.IsEmpty() ? _("Файл") : ext.Upper());
         
         wxDateTime modTime;
         file.GetTimes(nullptr, &modTime, nullptr);
@@ -284,7 +288,7 @@ void FilePanelController::OnItemActivated(long itemIndex) {
                     // Удаляем последний компонент пути
                     int lastSlash = currentDir.Find('/', true);
                     if (lastSlash != wxNOT_FOUND && lastSlash > 0) {
-                        newPath = currentDir.Left(lastSlash);
+                        newPath = currentDir.Left((size_t)lastSlash);
                     } else {
                         newPath = "/";
                     }
@@ -322,11 +326,13 @@ void FilePanelController::OnItemActivated(long itemIndex) {
                     // Формируем полный FTP URL для отображения
                     wxString displayPath = pathCtrl->GetValue();
                     // Извлекаем префикс ftp://host:port
-                    int pathStart = displayPath.Find('/', 6);  // Пропускаем "ftp://"
+                    int pathStart = displayPath.Find('/', false);       // \todo Ошибка в последнем параметре
+//                    int pathStart = displayPath.Find('/', 6);  // Пропускаем "ftp://"
                     if (pathStart != wxNOT_FOUND) {
-                        pathStart = displayPath.Find('/', pathStart + 1);
+                        pathStart = displayPath.Find('/', false);       // \todo Ошибка в последнем параметре
+//                        pathStart = displayPath.Find('/', pathStart + 1);
                         if (pathStart != wxNOT_FOUND) {
-                            displayPath = displayPath.Left(pathStart) + newPath;
+                            displayPath = displayPath.Left((size_t)pathStart) + newPath;
                         }
                     }
                     pathCtrl->ChangeValue(displayPath);
@@ -349,7 +355,7 @@ void FilePanelController::OnItemActivated(long itemIndex) {
     }
 }
 
-void FilePanelController::OnItemSelected(long itemIndex) {
+void FilePanelController::OnItemSelected(long /*itemIndex*/) {
     UpdateStatusForSelection();
 }
 
@@ -405,7 +411,7 @@ void FilePanelController::AddFTPItem(const wxString& name, bool isDir, wxULongLo
         wxString ext;
         int dotPos = name.Find('.', true);  // Ищем последнюю точку
         if (dotPos != wxNOT_FOUND) {
-            ext = name.Mid(dotPos + 1).Upper();
+            ext = name.Mid((size_t)dotPos + 1U).Upper();
         } else {
             ext = "Файл";
         }

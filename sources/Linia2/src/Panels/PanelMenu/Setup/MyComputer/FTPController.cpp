@@ -1,8 +1,15 @@
-// FTPController.cpp
+#include "defines.h"
 #include "FTPController.h"
 #include "FilePanel.h"
-#include <wx/wfstream.h>
-#include <wx/tokenzr.h>
+
+
+#ifdef WIN32
+    #define S_IRUSR 0000400  /* Read permission, owner */
+    #define S_IWUSR 0000200  /* Write permission, owner */
+    #define S_IXUSR 0000100  /* Execute permission, owner */
+    #define S_IRWXU (S_IRUSR | S_IWUSR | S_IXUSR)  /* чтение + запись + выполнение */
+#endif
+
 
 FTPController::FTPController(FilePanel* view)
     : m_view(view),
@@ -28,8 +35,8 @@ void FTPController::ParseFTPUrl(const wxString& url, wxString& host, wxString& u
     // Извлекаем путь
     int pathPos = tempUrl.Find('/');
     if (pathPos != wxNOT_FOUND) {
-        path = tempUrl.Mid(pathPos);
-        tempUrl = tempUrl.Left(pathPos);
+        path = tempUrl.Mid((size_t)pathPos);
+        tempUrl = tempUrl.Left((size_t)pathPos);
     } else {
         path = "/";
     }
@@ -37,14 +44,14 @@ void FTPController::ParseFTPUrl(const wxString& url, wxString& host, wxString& u
     // Извлекаем user:pass@ — ищем ПОСЛЕДНИЙ '@' для защиты от '@' в пароле
     int atPos = tempUrl.Find('@', true);  // true = from end
     if (atPos != wxNOT_FOUND) {
-        wxString userPass = tempUrl.Left(atPos);
-        tempUrl = tempUrl.Mid(atPos + 1);
+        wxString userPass = tempUrl.Left((size_t)atPos);
+        tempUrl = tempUrl.Mid((size_t)atPos + 1U);
         
         // Ищем ПЕРВЫЙ ':' для разделения user:password
         int colonPos = userPass.Find(':');
         if (colonPos != wxNOT_FOUND) {
-            user = userPass.Left(colonPos);
-            password = userPass.Mid(colonPos + 1);
+            user = userPass.Left((size_t)colonPos);
+            password = userPass.Mid((size_t)colonPos + 1U);
         } else {
             user = userPass;
             password = "";
@@ -57,8 +64,8 @@ void FTPController::ParseFTPUrl(const wxString& url, wxString& host, wxString& u
     // Извлекаем host:port
     int colonPos = tempUrl.Find(':');
     if (colonPos != wxNOT_FOUND) {
-        host = tempUrl.Left(colonPos);
-        wxString portStr = tempUrl.Mid(colonPos + 1);
+        host = tempUrl.Left((size_t)colonPos);
+        wxString portStr = tempUrl.Mid((size_t)colonPos + 1U);
         long portLong;
         if (portStr.ToLong(&portLong) && portLong >= 1 && portLong <= 65535) {
             port = static_cast<int>(portLong);
@@ -412,7 +419,7 @@ bool FTPController::DownloadFile(const wxString& remoteFile, const wxString& loc
     bool success = true;
     
     while ((nbytes = sftp_read(file, buffer, sizeof(buffer))) > 0) {
-        output.Write(buffer, nbytes);
+        output.Write(buffer, (size_t)nbytes);
         if (!output.IsOk()) {
             m_lastError = "Ошибка записи в локальный файл";
             success = false;

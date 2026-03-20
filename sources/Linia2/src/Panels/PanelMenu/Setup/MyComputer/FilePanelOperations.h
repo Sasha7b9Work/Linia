@@ -1,4 +1,3 @@
-// FilePanelOperations.h
 #pragma once
 
 #include "ClipboardManager.h"

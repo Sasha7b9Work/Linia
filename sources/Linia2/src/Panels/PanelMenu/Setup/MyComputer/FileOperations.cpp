@@ -1,5 +1,6 @@
+#include "defines.h"
 #include "FileOperations.h"
-#include <wx/msgdlg.h>
+
 
 FileOperationResult FileOperations::CopyDirectory(const wxString& srcPath, const wxString& destPath, wxWindow* parent) {
     if (!wxDirExists(srcPath)) {
@@ -179,7 +180,7 @@ FileOperationResult FileOperations::MoveDirectory(const wxString& srcPath, const
     return copyResult;
 }
 
-FileOperationResult FileOperations::CreateDirectory(const wxString& path, wxWindow* parent) {
+FileOperationResult FileOperations::CreateDirectory(const wxString& path, wxWindow* /*parent*/) {
     if (wxDirExists(path)) {
         return FileOperationResult::Error("Папка уже существует: " + path);
     }
@@ -215,14 +216,14 @@ FileOperationResult FileOperations::MoveFile(const wxString& srcFile, const wxSt
     return FileOperationResult::Success(1, 0);
 }
 
-bool FileOperations::CheckDiskSpace(const wxString& source, const wxString& destination) {
+bool FileOperations::CheckDiskSpace(const wxString& /*source*/, const wxString& /*destination*/) {
     // Упрощенная проверка - в реальном приложении нужно использовать wxGetDiskSpace
     return true;
 }
 
 wxString FileOperations::FormatSize(wxULongLong size) {
     if (size < 1024) return size.ToString() + " B";
-    if (size < 1024 * 1024) return wxString::Format("%.1f KB", size.GetValue() / 1024.0);
-    if (size < 1024 * 1024 * 1024) return wxString::Format("%.1f MB", size.GetValue() / (1024.0 * 1024.0));
-    return wxString::Format("%.1f GB", size.GetValue() / (1024.0 * 1024.0 * 1024.0));
+    if (size < 1024 * 1024) return wxString::Format("%.1f KB", (double)size.GetValue() / 1024.0);
+    if (size < 1024 * 1024 * 1024) return wxString::Format("%.1f MB", (double)size.GetValue() / (1024.0 * 1024.0));
+    return wxString::Format("%.1f GB", (double)size.GetValue() / (1024.0 * 1024.0 * 1024.0));
 }

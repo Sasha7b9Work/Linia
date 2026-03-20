@@ -1,4 +1,3 @@
-// FilePanelOperations.cpp
 #include "defines.h"
 #include "FilePanelOperations.h"
 #include "FilePanel.h"
@@ -6,11 +5,7 @@
 #include "ClipboardManager.h"
 #include "UndoManager.h"
 #include "FTPController.h"
-#include <wx/textdlg.h>
-#include <wx/msgdlg.h>
-#include <wx/filename.h>
-#include <wx/dir.h>
-#include <wx/log.h>
+
 
 // Вспомогательная функция для преобразования типа источника
 static FilePanelSourceType ConvertSourceType(FilePanel::SourceType type) {
@@ -26,7 +21,7 @@ FilePanelOperations::FilePanelOperations(FilePanel* panel)
     : m_panel(panel) {
 }
 
-void FilePanelOperations::HandleCopyOperation(wxCommandEvent& event) {
+void FilePanelOperations::HandleCopyOperation(wxCommandEvent&) {
     if (!m_panel->HasSelectedFiles()) {
         m_panel->UpdateStatus("Не выбраны файлы или папки");
         return;
@@ -54,7 +49,7 @@ void FilePanelOperations::HandleCopyOperation(wxCommandEvent& event) {
     m_panel->UpdateStatus(ClipboardManager::GetInstance().GetOperationDescription());
 }
 
-void FilePanelOperations::HandleMoveOperation(wxCommandEvent& event) {
+void FilePanelOperations::HandleMoveOperation(wxCommandEvent&) {
     if (!m_panel->HasSelectedFiles()) {
         m_panel->UpdateStatus("Не выбраны файлы или папки");
         return;
@@ -71,7 +66,7 @@ void FilePanelOperations::HandleMoveOperation(wxCommandEvent& event) {
     m_panel->UpdateStatus(ClipboardManager::GetInstance().GetOperationDescription());
 }
 
-void FilePanelOperations::HandlePasteOperation(wxCommandEvent& event) {
+void FilePanelOperations::HandlePasteOperation(wxCommandEvent&) {
     HandlePasteOperationToTarget(nullptr);
 }
 
@@ -314,7 +309,7 @@ void FilePanelOperations::HandleFTPPasteOperation(const ClipboardManager::Clipbo
     }
 }
 
-void FilePanelOperations::HandleDeleteOperation(wxCommandEvent& event) {
+void FilePanelOperations::HandleDeleteOperation(wxCommandEvent&) {
     if (!m_panel->HasSelectedFiles()) {
         m_panel->UpdateStatus("Не выбраны файлы или папки");
         return;
@@ -395,7 +390,7 @@ void FilePanelOperations::HandleDeleteOperation(wxCommandEvent& event) {
 
     // Локальное удаление
     FileOperation operation(
-        OperationType::DELETE,
+        OperationType::_DELETE,
         selectedFiles,
         m_panel->GetCurrentPath()
     );
@@ -449,7 +444,7 @@ void FilePanelOperations::HandleDeleteOperation(wxCommandEvent& event) {
     m_panel->RefreshFileList();
 }
 
-void FilePanelOperations::HandleCreateFolder(wxCommandEvent& event) {
+void FilePanelOperations::HandleCreateFolder(wxCommandEvent &) {
     wxString folderName = wxGetTextFromUser("Введите имя папки:", 
                                            "Создание папки", "Новая папка", m_panel);
     if (folderName.IsEmpty()) return;
@@ -488,7 +483,7 @@ void FilePanelOperations::HandleCreateFolder(wxCommandEvent& event) {
     }
 }
 
-void FilePanelOperations::HandleRefresh(wxCommandEvent& event) {
+void FilePanelOperations::HandleRefresh(wxCommandEvent&) {
     m_panel->RefreshFileList();
     m_panel->UpdateStatus("Список обновлен");
 }
@@ -521,7 +516,7 @@ void FilePanelOperations::HandleUndo() {
                 }
                 break;
             }
-            case OperationType::DELETE: {
+            case OperationType::_DELETE: {
                 m_panel->UpdateStatus("Отмена удаления не поддерживается");
                 break;
             }
@@ -589,7 +584,7 @@ void FilePanelOperations::HandleRedo() {
                 m_panel->UpdateStatus("Повтор: папка создана");
                 break;
             }
-            case OperationType::DELETE: {
+            case OperationType::_DELETE: {
                 m_panel->UpdateStatus("Повтор удаления не поддерживается (необратимая операция)");
                 break;
             }
