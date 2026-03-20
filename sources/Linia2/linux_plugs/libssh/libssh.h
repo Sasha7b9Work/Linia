@@ -22,7 +22,7 @@ typedef struct ssh_session_struct* ssh_session;
       #ifdef __GNUC__
         #define LIBSSH_API __attribute__((dllimport))
       #else
-        #define LIBSSH_API __declspec(dllimport)
+        #define LIBSSH_API
       #endif
     #endif
   #endif

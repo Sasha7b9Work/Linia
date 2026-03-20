@@ -92,7 +92,7 @@ void FTPConnectionDialog::CreateControls() {
     mainSizer->SetSizeHints(this);
 }
 
-void FTPConnectionDialog::OnOK(wxCommandEvent& event) {
+void FTPConnectionDialog::OnOK(wxCommandEvent& /*event*/) {
     m_server = m_serverCtrl->GetValue();
     wxString portStr = m_portCtrl->GetValue();
     long portLong;
@@ -118,6 +118,6 @@ void FTPConnectionDialog::OnOK(wxCommandEvent& event) {
     EndModal(wxID_OK);
 }
 
-void FTPConnectionDialog::OnCancel(wxCommandEvent& event) {
+void FTPConnectionDialog::OnCancel(wxCommandEvent& /*event*/) {
     EndModal(wxID_CANCEL);
 }
