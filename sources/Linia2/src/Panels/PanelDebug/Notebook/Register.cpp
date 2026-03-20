@@ -49,8 +49,6 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, bool n
     {
         painter = new PainterRegister(this, this, { 10, y0 });
 
-        windows.push_back(painter);
-
         for (auto box : chbox)
         {
             box->Bind(wxEVT_CHECKBOX, &Register::OnEventCheckBox, this);
@@ -86,13 +84,9 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, bool n
 
         knob->Bind(wxEVT_SLIDER, &RegAD5543::OnEventKnob, this);
 
-        windows.push_back(knob);
-
         slider_value = new SliderInt(painter, { painter->BitX(chip->BitDepth() - 1, chip->BitDepth()), 75 }, chip->BitDepth() * 20, 0, 100, "");
 
         slider_value->Bind(wxEVT_SLIDER, &RegAD5543::OnEventSlider, this);
-
-        windows.push_back(slider_value);
     }
 }
 
@@ -320,22 +314,22 @@ void Register::SetActiveAcross(bool active, wxWindow *_wnd)
         }
     }
 
-    for (auto &d : desc[0])
-    {
-        if (d.field.text_ctrl_dec)
-        {
-            d.field.text_ctrl_dec->Enable(active);
-        }
-        if(d.field.combo)
-        {
-            d.field.combo->Enable(active);
-        }
-    }
+//    for (auto &d : desc[0])
+//    {
+//        if (d.field.text_ctrl_dec)
+//        {
+//            d.field.text_ctrl_dec->Enable(active);
+//        }
+//        if(d.field.combo)
+//        {
+//            d.field.combo->Enable(active);
+//        }
+//    }
 
-    for (auto *chb : chbox)
-    {
-        chb->Enable(active);
-    }
+//    for (auto *chb : chbox)
+//    {
+//        chb->Enable(active);
+//    }
 
     NotebookDebug::self->EnableSwitching(active);
 }

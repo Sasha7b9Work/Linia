@@ -20,7 +20,6 @@ NotebookDebug::NotebookDebug(wxWindow *parent) :
 {
     self = this;
 
-    AppendNewPage(new PageOrangePi(this));
     AppendNewPage(new PageFPGA(this));
     AppendNewPage(new PageCommutator(this));
     AppendNewPage(new PageSource3kV(this));
@@ -29,6 +28,7 @@ NotebookDebug::NotebookDebug(wxWindow *parent) :
     AppendNewPage(new PageChannelS(this));
     AppendNewPage(new PageMeasCurrent(this));
     AppendNewPage(new PageSource50V(this));
+    AppendNewPage(new PageOrangePi(this));
 
     wxWindowBase::Layout();
 
@@ -109,5 +109,17 @@ void NotebookDebug::OnEventPageChanged(wxBookCtrlEvent &event)
 
 void NotebookDebug::EnableSwitching(bool enable)
 {
-    switching_allowed = enable;
+    static int num_blocksed = 0;        // Количество блокирующих воздействий.
+                                        // Переключение страниц возможно только когда это значение равно нулю
+
+    if (enable)
+    {
+        num_blocksed--;
+    }
+    else
+    {
+        num_blocksed++;
+    }
+
+    switching_allowed = (num_blocksed == 0);
 }
