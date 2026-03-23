@@ -142,8 +142,6 @@ struct TypeScan
         SYNPos,
         SYNNeg,
         AC,
-//        ImpulseOsc,     // Импульсная осчиллографическая
-//        ImpulseIVC,     // Импульсная ВАХ
         Count
     };
 
