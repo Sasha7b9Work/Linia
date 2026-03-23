@@ -26,8 +26,6 @@ private:
     void PopulateFileList();
     void PopulateLocalFileList();
     void PopulateFTPFileList();
-    wxString GetFileSizeString(const wxFileName &file) const;
-    wxString GetFileTypeString(const wxFileName &file) const;
     void AddDirectoryItem(const wxString &name, const wxString &displayName = "");
     void AddFileItem(const wxFileName &file);
     void AddFTPItem(const wxString &name, bool isDir, wxULongLong size = 0);

@@ -78,9 +78,9 @@ pchar TypeScan::NameFileICO(E v)
         "icons/graphs/triang_down.ico",
         "icons/graphs/sin_hi.ico",
         "icons/graphs/sin_lo.ico",
-        "icons/graphs/sin.ico",
-        "icons/graphs/imp_hi_osc.ico",
-        "icons/graphs/imp_hi_IVC.ico"
+        "icons/graphs/sin.ico"
+//        "icons/graphs/imp_hi_osc.ico",
+//        "icons/graphs/imp_hi_IVC.ico"
     };
 
     if (v < Count)
@@ -104,9 +104,9 @@ pchar TypeScan::NameGUI(E v)
         "Отрицательное постоянное",
         "Положительные полуволны",
         "Отрицательные полуволны",
-        "Синусоидальное",
-        "U(t)",
-        "ВАХ"
+        "Синусоидальное"
+//        "U(t)",
+//        "ВАХ"
     };
 
     if (v < Count)

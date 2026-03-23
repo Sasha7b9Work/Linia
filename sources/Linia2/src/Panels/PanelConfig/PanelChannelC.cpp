@@ -15,14 +15,14 @@ PanelChannelC *PanelChannelC::self = nullptr;
 PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
     wxPanel(parent)
 {
-    wxPanel::SetName("PanelChannelC");
+    wxPanel::SetName(wxT("PanelChannelC"));
 
     self = this;
 
     wxPanel::SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - PanelConfig::HEIGHT_BUTTONS });
     wxPanel::SetPosition({ 0, PanelConfig::HEIGHT_BUTTONS });
 
-    StaticBox *boxScan = new StaticBox(this, "Развёртка", { x, SD::DSBY() }, { w, 160 });
+    StaticBox *boxScan = new StaticBox(this, _("Развёртка"), { x, SD::DSBY() }, { w, 160 });
 
     {
         wxArrayString files;

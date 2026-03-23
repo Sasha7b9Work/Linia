@@ -77,10 +77,8 @@ void FTPConnectionDialog::CreateControls()
 
     // Пароль
     wxBoxSizer *passSizer = new wxBoxSizer(wxHORIZONTAL);
-    passSizer->Add(new wxStaticText(this, wxID_ANY, "Пароль:",
-        wxDefaultPosition, wxSize(100, -1)), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
-    m_passwordCtrl = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition,
-        wxDefaultSize, wxTE_PASSWORD);
+    passSizer->Add(new wxStaticText(this, wxID_ANY, "Пароль:", wxDefaultPosition, wxSize(100, -1)), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+    m_passwordCtrl = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxTE_PASSWORD);
     passSizer->Add(m_passwordCtrl, 1, wxEXPAND | wxALL, 5);
     mainSizer->Add(passSizer, 0, wxEXPAND | wxALL, 5);
 
