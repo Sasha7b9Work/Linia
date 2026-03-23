@@ -2,7 +2,7 @@
 #pragma once
 
 
-#define EMULATOR_ENABLED
+//#define EMULATOR_ENABLED
 
 
 #define MAX_NUMBER_POINTS 100
