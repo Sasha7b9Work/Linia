@@ -1,4 +1,4 @@
-// 2026/03/23 11:42:54 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2026/03/23 11:42:54 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "IPPP/DeviceFactory.h"
 #include "Settings/Settings.h"
