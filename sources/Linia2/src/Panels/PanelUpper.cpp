@@ -15,7 +15,7 @@ PanelUpper::PanelUpper(wxWindow* parent) :
 {
     self = this;
 
-    if (SET::emulate_mode)
+    if (SET::emulate_mode->Get())
     {
         wxFont bigFont(25, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
         wxClientDC dc(this);

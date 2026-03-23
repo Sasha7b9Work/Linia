@@ -46,7 +46,7 @@ DraggedWindow::~DraggedWindow()
 void DraggedWindow::SetPosition()
 {
     position->Load();
-    wxFrame::SetPosition(*position);
+    wxFrame::SetPosition(position->Get());
 }
 
 

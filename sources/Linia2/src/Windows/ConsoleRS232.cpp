@@ -63,11 +63,11 @@ void ConsoleRS232::Create()
     {
         self = new ConsoleRS232(nullptr);
 
-        self->SetPosition(*SET::GUI::pos_console);
+        self->SetPosition(SET::GUI::pos_console->Get());
 
         self->SetClientSize(SET::GUI::size_console->Get().x, SET::GUI::size_console->Get().y);
 
-        self->Maximize(*SET::GUI::maximized_console);
+        self->Maximize(SET::GUI::maximized_console->Get());
 
         self->Show(false);
     }

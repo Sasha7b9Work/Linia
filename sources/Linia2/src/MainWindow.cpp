@@ -281,5 +281,5 @@ void MainWindow::SetPosition()
 {
     position.Load();
 
-    wxWindow::SetPosition(position);
+    wxWindow::SetPosition(position.Get());
 }
