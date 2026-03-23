@@ -46,7 +46,7 @@ public:
     ButtonBitmapChoiceEvent(wxEventType eventType, int id) : wxCommandEvent(eventType, id) { }
     ButtonBitmapChoiceEvent(const ButtonBitmapChoiceEvent &other) : wxCommandEvent(other) { }
 
-    virtual wxEvent *Clone() const
+    virtual wxEvent *Clone() const override
     {
         return new ButtonBitmapChoiceEvent(*this);
     }

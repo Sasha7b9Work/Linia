@@ -56,7 +56,7 @@ void ButtonBitmapChoice::OnEventButton(wxCommandEvent &event)
     {
         choice++;
 
-        if (choice >= (int)files.GetCount())
+        if ((size_t)choice >= files.GetCount()) //-V201
         {
             choice = 0;
         }
@@ -72,11 +72,11 @@ void ButtonBitmapChoice::OnEventButton(wxCommandEvent &event)
 
 void ButtonBitmapChoice::SetCurrentValue(int value)
 {
-    if (value < (int)files.GetCount())
+    if (value < (int)files.GetCount()) //-V202
     {
         choice = value;
 
-        SetFileBitmap(files[(size_t)choice]);
+        SetFileBitmap(files[(size_t)choice]); //-V201
     }
     else
     {

@@ -1,4 +1,4 @@
-﻿// 2025/09/11 14:47:22 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2025/09/11 14:47:22 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "IPPP/Tests/DSettings.h"
 
@@ -671,13 +671,13 @@ const CalK &DSet::Get(TypeValue::E type, RangeU::E range)
 }
 
 
-void DSet::Set(TypeValue::E type, RangeI::E range, const CalK &cal)
+void DSet::Set(TypeValue::E type, RangeI::E range, const CalK cal)
 {
     dset.calI[type][range] = cal;
 }
 
 
-void DSet::Set(TypeValue::E type, RangeU::E range, const CalK &cal)
+void DSet::Set(TypeValue::E type, RangeU::E range, const CalK cal)
 {
     dset.calU[type][range] = cal;
 }
