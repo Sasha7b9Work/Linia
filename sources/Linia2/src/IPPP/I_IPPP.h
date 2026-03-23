@@ -11,7 +11,9 @@ public:
 
     virtual ~I_IPPP() = default;
 
-    static void Create();
+    static void SetInstance(std::unique_ptr<I_IPPP>);
+
+    static I_IPPP *GetInstance();
 
     // Вызывается в главном цикле
     virtual void Update() = 0;
@@ -22,8 +24,6 @@ public:
     // Вызывается при нажатии кнопки СТОП
     virtual void PressButtonStop() = 0;
 
-    static I_IPPP *impl;
-
 protected:
 
     // Читает четыре массива значений из ПЛИС
@@ -33,4 +33,8 @@ protected:
         std::array<int, 100> &data3,
         std::array<int, 100> &data4
     ) = 0;
+
+private:
+
+    static std::unique_ptr<I_IPPP> instance;
 };

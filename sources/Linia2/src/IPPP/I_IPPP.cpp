@@ -11,29 +11,31 @@
 #include "Settings/Settings.h"
 
 
-I_IPPP *I_IPPP::impl = nullptr;
+std::unique_ptr<I_IPPP> I_IPPP::instance;
 
 
-void I_IPPP::Create()
+void I_IPPP::SetInstance(std::unique_ptr<I_IPPP> device)
 {
-    if (SET::emulate_mode)
+    instance = std::move(device);
+
+    if (SET::emulate_mode->Get())
     {
-        impl = new EmulatorIPPP();
-
         IDevice::impl = new EmulatorDevice();
-
-        IDevice::impl->Init();
     }
     else
     {
-        impl = new RealIPPP();
-
         IDevice::impl = new RealDevice();
-
-        IDevice::impl->Init();
 
         pinREQ_RD.Set(false);    // Это состояние означает, что чтение не нужно
 
         Keyboard::Init();
     }
+
+    IDevice::impl->Init();
+}
+
+
+I_IPPP *I_IPPP::GetInstance()
+{
+    return instance.get();
 }

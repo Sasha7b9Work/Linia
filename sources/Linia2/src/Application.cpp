@@ -15,6 +15,7 @@
 #include "Communicator/ComPort/ComPort.h"
 #include "IPPP/I_IPPP.h"
 #include "IPPP/Real/RealIPPP.h"
+#include "IPPP/DeviceFactory.h"
 #include <cstdlib>
 
 
@@ -119,7 +120,9 @@ bool Application::OnInit()
         dialog.ShowModal();
     }
 
-    I_IPPP::Create();
+    auto device = DeviceFactory::CreateFromConfig();
+
+    I_IPPP::SetInstance(std::move(device));
 
     timer.Start(10);
 
@@ -153,7 +156,7 @@ void Application::OnTimer(wxTimerEvent &)
 
     if (mutex.try_lock())
     {
-        I_IPPP::impl->Update();
+        I_IPPP::GetInstance()->Update();
 
         TheMainWindow->Update();
 
