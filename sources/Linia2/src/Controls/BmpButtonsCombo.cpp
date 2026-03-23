@@ -207,9 +207,7 @@ void BmpButtonsCombo::SetCurrentChoice(int choice)
 
     SetFileBitmap(files[index]);
 
-//    SetToolTip(m_tooltips[index].utf8_str());
-
-    SetToolTip(wxString("Подсказка").ToUTF8());
+    SetToolTip(m_tooltips[index]);
 
     GF::SendCommandEvent(this, wxEVT_COMBOBOX, GetCurrentChoice());
 }

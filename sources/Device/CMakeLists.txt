@@ -145,3 +145,12 @@ add_library(${PROJECT_NAME}
     ${DEVICE_PCM}
     ${UTILS}
 )
+
+
+# Устанавливаем кодировку для всех компиляторов
+if(MSVC)
+    target_compile_options(${PROJECT_NAME} PRIVATE /utf-8)
+else()
+    # Для GCC/Clang
+    target_compile_options(${PROJECT_NAME} PRIVATE -finput-charset=UTF-8 -fexec-charset=UTF-8)
+endif()
