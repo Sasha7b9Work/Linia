@@ -209,7 +209,7 @@ void BmpButtonsCombo::SetCurrentChoice(int choice)
 
 //    SetToolTip(m_tooltips[index].utf8_str());
 
-    SetToolTip(_("Подсказка"));
+    SetToolTip(wxString::FromUTF8("Подсказка"));
 
     GF::SendCommandEvent(this, wxEVT_COMBOBOX, GetCurrentChoice());
 }
