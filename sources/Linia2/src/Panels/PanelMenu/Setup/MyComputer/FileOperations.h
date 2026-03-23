@@ -1,7 +1,8 @@
 #pragma once
 
 
-class FileOperationResult {
+class FileOperationResult
+{
 public:
     bool success;
     wxString errorMessage;
@@ -19,27 +20,20 @@ public:
     }
 };
 
-class FileOperations {
+class FileOperations
+{
 public:
-    static FileOperationResult CopyDirectory(const wxString &srcPath, const wxString &destPath,
-        wxWindow *parent = nullptr);
-    static FileOperationResult MoveDirectory(const wxString &srcPath, const wxString &destPath,
-        wxWindow *parent = nullptr);
+    static FileOperationResult CopyDirectory(const wxString &srcPath, const wxString &destPath, wxWindow *parent = nullptr);
+    static FileOperationResult MoveDirectory(const wxString &srcPath, const wxString &destPath, wxWindow *parent = nullptr);
     static FileOperationResult DeleteDirectory(const wxString &dirPath, wxWindow *parent = nullptr);
     static FileOperationResult CreateDirectory(const wxString &path, wxWindow *parent = nullptr);
-    static FileOperationResult CopyFile(const wxString &srcFile, const wxString &destFile,
-        bool overwrite = true);
-    static FileOperationResult MoveFile(const wxString &srcFile, const wxString &destFile,
-        bool overwrite = true);
+    static FileOperationResult CopyFile(const wxString &srcFile, const wxString &destFile, bool overwrite = true);
+    static FileOperationResult MoveFile(const wxString &srcFile, const wxString &destFile, bool overwrite = true);
 
-    static bool IsValidSource(const wxString &path);
-    static bool IsValidDestination(const wxString &source, const wxString &destination);
     static wxString FormatSize(wxULongLong size);
 
 private:
-    static FileOperationResult RecursiveCopyImpl(const wxString &srcPath, const wxString &destPath,
-        wxProgressDialog *progress, int *fileCount);
+    static FileOperationResult RecursiveCopyImpl(const wxString &srcPath, const wxString &destPath, wxProgressDialog *progress, int *fileCount);
     static FileOperationResult RecursiveDeleteImpl(const wxString &dirPath);
     static bool CheckDiskSpace(const wxString &source, const wxString &destination);
-    static wxULongLong CalculateDirectorySize(const wxString &path);
 };

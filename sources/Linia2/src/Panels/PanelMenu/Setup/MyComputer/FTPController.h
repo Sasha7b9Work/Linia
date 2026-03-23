@@ -4,13 +4,12 @@
 
 class FilePanel;
 
-/**
- * @brief Контроллер для работы с FTP-соединениями
- *
- * Этот класс предоставляет интерфейс для работы с FTP-серверами
- * используя библиотеку libssh.
- */
-class FTPController {
+
+// @brief Контроллер для работы с FTP-соединениями
+// Этот класс предоставляет интерфейс для работы с FTP-серверами используя библиотеку libssh.
+
+class FTPController
+{
 public:
     explicit FTPController(FilePanel *view);
     ~FTPController();
@@ -53,8 +52,7 @@ public:
     }
 
 private:
-    void ParseFTPUrl(const wxString &url, wxString &host, wxString &user,
-        wxString &password, wxString &path, int &port);
+    void ParseFTPUrl(const wxString &url, wxString &host, wxString &user, wxString &password, wxString &path, int &port);
     int VerifyKnownHost();
     wxString BuildFullPath(const wxString &name) const;
 

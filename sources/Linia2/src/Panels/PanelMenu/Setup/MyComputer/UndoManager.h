@@ -1,26 +1,29 @@
 #pragma once
 
 
-enum class OperationType {
+enum class OperationType
+{
     COPY,
     MOVE,
     _DELETE,
     CREATE_FOLDER
 };
 
-struct FileOperation {
+struct FileOperation
+{
     OperationType type;
     wxArrayString files;
     wxString sourcePath;
     wxString destPath;
 
-    FileOperation(OperationType t, const wxArrayString &f,
-        const wxString &src, const wxString &dst = "")
-        : type(t), files(f), sourcePath(src), destPath(dst)
-    {}
+    FileOperation(OperationType t, const wxArrayString &f,const wxString &src, const wxString &dst = ""):
+        type(t), files(f), sourcePath(src), destPath(dst)
+    {
+    }
 };
 
-class UndoManager {
+class UndoManager
+{
 public:
     static UndoManager &GetInstance();
 
@@ -39,8 +42,7 @@ public:
     void Clear();
 
 private:
-    UndoManager() : m_currentIndex(0)
-    {}
+    UndoManager() : m_currentIndex(0) { }
 
     std::vector<FileOperation> m_operations;
     size_t m_currentIndex;

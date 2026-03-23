@@ -1,9 +1,10 @@
 #pragma once
 
 
-class FTPConnectionDialog : public wxDialog {
+class FTPConnectionDialog : public wxDialog
+{
 public:
-    FTPConnectionDialog(wxWindow *parent);
+    FTPConnectionDialog(wxWindow *);
     ~FTPConnectionDialog();
 
     wxString GetServer() const
@@ -30,8 +31,8 @@ public:
 
 private:
     void CreateControls();
-    void OnOK(wxCommandEvent &event);
-    void OnCancel(wxCommandEvent &event);
+    void OnOK(wxCommandEvent &);
+    void OnCancel(wxCommandEvent &);
 
     wxTextCtrl *m_serverCtrl;
     wxTextCtrl *m_portCtrl;

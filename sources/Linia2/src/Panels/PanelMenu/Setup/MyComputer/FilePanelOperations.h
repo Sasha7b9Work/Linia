@@ -5,19 +5,19 @@
 class FilePanel;
 
 
-class FilePanelOperations {
+class FilePanelOperations
+{
 public:
-    explicit FilePanelOperations(FilePanel *panel);
+    explicit FilePanelOperations(FilePanel *);
 
-    void HandleCopyOperation(wxCommandEvent &event);
-    void HandleMoveOperation(wxCommandEvent &event);
-    void HandlePasteOperation(wxCommandEvent &event);
+    void HandleCopyOperation(wxCommandEvent &);
+    void HandleMoveOperation(wxCommandEvent &);
+    void HandlePasteOperation(wxCommandEvent &);
     void HandlePasteOperationToTarget(FilePanel *targetPanel);
-    void HandleFTPPasteOperation(const ClipboardManager::ClipboardData &data,
-        FilePanel *destPanel, bool fromFTP, bool toFTP);
-    void HandleDeleteOperation(wxCommandEvent &event);
-    void HandleCreateFolder(wxCommandEvent &event);
-    void HandleRefresh(wxCommandEvent &event);
+    void HandleFTPPasteOperation(const ClipboardManager::ClipboardData &, FilePanel *destPanel, bool fromFTP, bool toFTP);
+    void HandleDeleteOperation(wxCommandEvent &);
+    void HandleCreateFolder(wxCommandEvent &);
+    void HandleRefresh(wxCommandEvent &);
     void HandleUndo();
     void HandleRedo();
 

@@ -4,7 +4,8 @@
 class FilePanel;
 
 
-class FilePanelController {
+class FilePanelController
+{
 public:
     explicit FilePanelController(FilePanel *view);
 
@@ -27,7 +28,7 @@ private:
     void PopulateLocalFileList();
     void PopulateFTPFileList();
     void AddDirectoryItem(const wxString &name, const wxString &displayName = "");
-    void AddFileItem(const wxFileName &file);
+    void AddFileItem(const wxFileName &);
     void AddFTPItem(const wxString &name, bool isDir, wxULongLong size = 0);
 
     FilePanel *m_view;
