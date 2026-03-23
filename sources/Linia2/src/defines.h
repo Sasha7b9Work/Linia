@@ -44,6 +44,7 @@
 #include <algorithm>
 #include <array>
 #include <functional>
+#include <memory>
 
 #include <map>
 #include <queue>

@@ -9,6 +9,8 @@ class I_IPPP
 {
 public:
 
+    virtual ~I_IPPP() = default;
+
     static void Create();
 
     // Вызывается в главном цикле
@@ -23,8 +25,6 @@ public:
     static I_IPPP *impl;
 
 protected:
-
-    virtual ~I_IPPP() { }
 
     // Читает четыре массива значений из ПЛИС
     virtual bool ReadData(

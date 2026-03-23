@@ -7,6 +7,8 @@ class RealIPPP : public I_IPPP
 {
 public:
 
+    virtual ~RealIPPP() override {}
+
     void Update() override;
 
     void PressButtonStart() override;

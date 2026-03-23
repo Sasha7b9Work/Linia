@@ -7,6 +7,8 @@ class EmulatorIPPP : public I_IPPP
 {
 public:
 
+    virtual ~EmulatorIPPP() override {}
+
     void Update() override;
 
     void PressButtonStart() override;
@@ -22,5 +24,5 @@ private:
         std::array<int, 100> &data2,
         std::array<int, 100> &data3,
         std::array<int, 100> &data4
-    );
+    ) override;
 };
