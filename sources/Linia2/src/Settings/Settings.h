@@ -14,6 +14,9 @@ namespace SET
     void Load();
     void Save();
 
+    extern ValueBool        debug_mode;
+    extern ValueBool        emulate_mode;               // Режим эмуляции
+
     // Настройки ГУИ
     namespace GUI
     {
@@ -21,8 +24,6 @@ namespace SET
         extern ValuePoint       size_console;
         extern ValueBool        maximized_console;
         extern ValueInt         serial_port_num;            // Нумерация начинается с нуля. 0 == COM1
-        extern ValueBool        debug_mode;
-        extern ValueBool        emulate_mode;               // Режим эмуляции
 
         extern ValueUInt        color_background;
         extern ValueUInt        color_grid;

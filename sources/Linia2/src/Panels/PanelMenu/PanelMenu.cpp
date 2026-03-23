@@ -83,5 +83,5 @@ void PanelMenu::OnEventButton(wxCommandEvent &event)
 
 int PanelMenu::NumButtons() const
 {
-    return SET::GUI::debug_mode ? 7 : 6;
+    return SET::debug_mode ? 7 : 6;
 }

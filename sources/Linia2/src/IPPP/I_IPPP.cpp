@@ -16,7 +16,7 @@ I_IPPP *I_IPPP::impl = nullptr;
 
 void I_IPPP::Create()
 {
-    if (SET::GUI::emulate_mode)
+    if (SET::emulate_mode)
     {
         impl = new EmulatorIPPP();
 
