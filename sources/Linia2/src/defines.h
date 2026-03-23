@@ -41,6 +41,10 @@
 #include <wx/progdlg.h>
 
 
+#include <algorithm>
+#include <array>
+#include <functional>
+
 #include <map>
 #include <queue>
 #include <mutex>
@@ -50,8 +54,6 @@
 #include <errno.h>
 #include <cstring>
 #include <iostream>
-#include <algorithm>
-#include <functional>
 #include <cstdint>
 #include <string>
 #include <cstdarg>

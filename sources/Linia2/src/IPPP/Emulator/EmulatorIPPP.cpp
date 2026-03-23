@@ -8,11 +8,14 @@ void EmulatorIPPP::Update()
 {
     if (in_process_measuring)
     {
-        std::vector<int> data[4];
+        std::array<int, 100> data1;
+        std::array<int, 100> data2;
+        std::array<int, 100> data3;
+        std::array<int, 100> data4;
 
-        if (ReadData(data))
+        if (ReadData(data1, data2, data3, data4))
         {
-            TheApp->OnReadData(data);
+            TheApp->OnReadData(data1, data2, data3, data4);
         }
     }
 }
@@ -30,7 +33,12 @@ void EmulatorIPPP::PressButtonStop()
 }
 
 
-bool EmulatorIPPP::ReadData(std::vector<int>(& /*data*/)[4])
+bool EmulatorIPPP::ReadData(
+    std::array<int, 100> &/*data1*/,
+    std::array<int, 100> &/*data2*/,
+    std::array<int, 100> &/*data3*/,
+    std::array<int, 100> &/*data4*/
+)
 {
     return false;
 }

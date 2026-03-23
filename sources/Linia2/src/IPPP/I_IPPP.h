@@ -27,5 +27,10 @@ protected:
     virtual ~I_IPPP() { }
 
     // Читает четыре массива значений из ПЛИС
-    virtual bool ReadData(std::vector<int>(&data)[4]) = 0;
+    virtual bool ReadData(
+        std::array<int, 100> &data1,
+        std::array<int, 100> &data2,
+        std::array<int, 100> &data3,
+        std::array<int, 100> &data4
+    ) = 0;
 };

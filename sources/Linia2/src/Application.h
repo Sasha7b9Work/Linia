@@ -44,7 +44,12 @@ public:
     void OnButtonStop(bool press);
 
     // Эти функции вызываются из IPPP --------------------------------------------
-    void OnReadData(std::vector<int>(&)[4]);
+    void OnReadData(
+        std::array<int, 100> &data1,
+        std::array<int, 100> &data2,
+        std::array<int, 100> &data3,
+        std::array<int, 100> &data4
+    );
 
     //-----------------------------------------------------------------------------
 };

@@ -42,8 +42,21 @@ void RealIPPP::PressButtonStop()
 }
 
 
-bool RealIPPP::ReadData(std::vector<int>(&data)[4])
+bool RealIPPP::ReadData(
+    std::array<int, MAX_NUMBER_POINTS> &data1,
+    std::array<int, MAX_NUMBER_POINTS> &data2,
+    std::array<int, MAX_NUMBER_POINTS> &data3,
+    std::array<int, MAX_NUMBER_POINTS> &data4
+)
 {
+    std::reference_wrapper<std::array<int, MAX_NUMBER_POINTS>> data[4] =
+    {
+        data1,
+        data2,
+        data3,
+        data4
+    };
+
     if (pinFIFO_FULL.Get())
     {
         return false;                       // Читать нечего - выходим
@@ -56,6 +69,8 @@ bool RealIPPP::ReadData(std::vector<int>(&data)[4])
         &pinDAT_F2
 //        &pinDAT_F3
     };
+
+    uint num_point = 0;
 
     while (!pinFIFO_FULL.Get())             // Продолжаем, пока не опустеет буфер передатчика
     {
@@ -82,8 +97,17 @@ bool RealIPPP::ReadData(std::vector<int>(&data)[4])
 
         for (int i = 0; i < 4; i++)
         {
-            data[i].push_back(val[i]);
+            if (num_point < MAX_NUMBER_POINTS)
+            {
+                data[i].get()[num_point] = val[i];
+            }
+            else
+            {
+                LOG_ERROR("Количество точек превышает размер массива");
+            }
         }
+
+        ++num_point;
     }
 
     return true;
