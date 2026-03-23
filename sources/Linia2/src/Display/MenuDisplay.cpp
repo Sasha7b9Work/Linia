@@ -76,12 +76,12 @@ void MenuDisplay::AppendMenuFacade()
 
         wxMenu *subColors = new wxMenu();
 
-        APPEND_COLOR(wxT("Фон"), &SET::GUI::color_background, nullptr);
-        APPEND_COLOR(wxT("Сетка"), &SET::GUI::color_grid, nullptr);
-        APPEND_COLOR(wxT("Шрифт"), &SET::GUI::color_font, nullptr);
-        APPEND_COLOR(wxT("Кривая"), &SET::GUI::color_curve, OnColorCurve);
-        APPEND_COLOR(wxT("Ссылка"), &SET::GUI::color_link, nullptr);
-        APPEND_COLOR(wxT("Секущая"), &SET::GUI::color_secant, nullptr);
+        APPEND_COLOR(wxT("Фон"), SET::GUI::color_background, nullptr);
+        APPEND_COLOR(wxT("Сетка"), SET::GUI::color_grid, nullptr);
+        APPEND_COLOR(wxT("Шрифт"), SET::GUI::color_font, nullptr);
+        APPEND_COLOR(wxT("Кривая"), SET::GUI::color_curve, OnColorCurve);
+        APPEND_COLOR(wxT("Ссылка"), SET::GUI::color_link, nullptr);
+        APPEND_COLOR(wxT("Секущая"), SET::GUI::color_secant, nullptr);
         subColors->AppendSeparator();
         APPEND_COLOR(wxT("Сбросить"), nullptr, nullptr);
 
@@ -113,7 +113,7 @@ void MenuDisplay::AppendMenuFacade()
 
             item->GetItemLabelText().ToInt(&size);
 
-            if (size == SET::GUI::size_point.Get())
+            if (size == SET::GUI::size_point->Get())
             {
                 item->Check(true);
             }
@@ -232,7 +232,7 @@ void MenuDisplay::OnSizePoint(wxCommandEvent &event)
 
         title.ToInt(&value, 10);
 
-        SET::GUI::size_point.Set(value);
+        SET::GUI::size_point->Set(value);
 
         TheDisplay->Refresh();
     }
@@ -255,6 +255,6 @@ void MenuDisplay::OnColorCurve()
 {
     for (auto elem : TheDisplay->entities)
     {
-        elem->SetColor(SET::GUI::color_curve.Get());
+        elem->SetColor(SET::GUI::color_curve->Get());
     }
 }

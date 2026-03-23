@@ -89,7 +89,7 @@ void GridNew::Draw(const std::vector<GraphMeasure *> &entities)
 
     {
         // Горизонтальные линии
-        Line(x_left, y_top, RightX(), y_top).Draw(SET::GUI::color_grid.Get());
+        Line(x_left, y_top, RightX(), y_top).Draw(SET::GUI::color_grid->Get());
 
         DrawHPointLineRight2(coord_zero, size.x, d);
         DrawHPointLineLeft2(coord_zero, 0, d);
@@ -169,12 +169,12 @@ void GridNew::Draw(const std::vector<GraphMeasure *> &entities)
         entity->Draw();
     }
 
-    TheDisplay->SetColorPen(SET::GUI::color_background.Get());
+    TheDisplay->SetColorPen(SET::GUI::color_background->Get());
 
-    TheDisplay->FillRectangle(0, 0, x_left - 1, TheDisplay->GetDrawingSize().y, SET::GUI::color_background.Get()); //-V807
-    TheDisplay->FillRectangle(x_left, 0, LengthAxisX(), y_top - 1, SET::GUI::color_background.Get());
-    TheDisplay->FillRectangle(x_right + 1, 0, TheDisplay->GetDrawingSize().x - x_right, TheDisplay->GetDrawingSize().y, SET::GUI::color_background.Get());
-    TheDisplay->FillRectangle(x_left, y_bottom + 1, LengthAxisX(), TheDisplay->GetDrawingSize().y - y_bottom, SET::GUI::color_background.Get());
+    TheDisplay->FillRectangle(0, 0, x_left - 1, TheDisplay->GetDrawingSize().y, SET::GUI::color_background->Get()); //-V807
+    TheDisplay->FillRectangle(x_left, 0, LengthAxisX(), y_top - 1, SET::GUI::color_background->Get());
+    TheDisplay->FillRectangle(x_right + 1, 0, TheDisplay->GetDrawingSize().x - x_right, TheDisplay->GetDrawingSize().y, SET::GUI::color_background->Get());
+    TheDisplay->FillRectangle(x_left, y_bottom + 1, LengthAxisX(), TheDisplay->GetDrawingSize().y - y_bottom, SET::GUI::color_background->Get());
 
     if (!TheDisplay->mouse_is_pressed)
     {
@@ -193,7 +193,7 @@ void GridNew::Draw(const std::vector<GraphMeasure *> &entities)
 
 void GridNew::DrawLabelsOnAxis() const
 {
-    TheDisplay->SetColorPen(SET::GUI::color_font.Get());
+    TheDisplay->SetColorPen(SET::GUI::color_font->Get());
 
     Text::SetFont();
 

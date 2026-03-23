@@ -51,7 +51,7 @@ void GraphMeasure::CreateForEmulator(std::vector<GraphMeasure *> &entities)
     {
         GraphMeasure *meas = new GraphMeasure();
 
-        meas->SetColor(SET::GUI::color_curve.Get());
+        meas->SetColor(SET::GUI::color_curve->Get());
 
         for (double u = 0.0; u <= 1.0; u += 0.1)
         {

@@ -276,7 +276,7 @@ void Display::OnEventPaint(wxPaintEvent &)
 {
     BeginPaint();
 
-    FillRectangle(0, 0, GetDrawingSize().x, GetDrawingSize().y, SET::GUI::color_background.Get());
+    FillRectangle(0, 0, GetDrawingSize().x, GetDrawingSize().y, SET::GUI::color_background->Get());
 
     TheGrid->Draw(entities);
 
@@ -472,7 +472,7 @@ void Spline::Draw(const std::vector<wxPoint> &points, bool smooth, bool draw_poi
 
         for (const auto &pt : points)
         {
-            path_circle.AddCircle(pt.x, pt.y, SET::GUI::size_point.Get());
+            path_circle.AddCircle(pt.x, pt.y, *SET::GUI::size_point);
         }
 
         TheDisplay->gc->FillPath(path_circle);

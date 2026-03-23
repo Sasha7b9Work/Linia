@@ -72,7 +72,7 @@ bool ComPort::Connect(int num_port)
     {
         connected_port = num_port;
 
-        SET::GUI::serial_port_num.Set(num_port + 1);
+        SET::GUI::serial_port_num->Set(num_port + 1);
 
         PanelUpper::self->color_square->SetColor(*wxGREEN);
 

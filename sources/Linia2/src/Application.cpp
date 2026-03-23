@@ -65,6 +65,8 @@ bool Application::OnInit()
     g_object_set(settings, "gtk-menu-images", TRUE, NULL);
 #endif
 
+    SET::Init();
+
     Log::Init();
 
     Config::Init();

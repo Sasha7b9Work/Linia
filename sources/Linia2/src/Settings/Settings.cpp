@@ -6,25 +6,25 @@
 
 namespace SET
 {
-    ValueBool        debug_mode("debug_mode", false);
-    ValueBool        emulate_mode("emulate_mode", false);
+    ValueBool            *debug_mode = nullptr;
+    ValueBool            *emulate_mode = nullptr;
 
     namespace GUI
     {
-        ValuePoint       pos_console("gui_pos_console", { 10, 10 });
-        ValuePoint       size_console("gui_size_console", { 400, 400 });
-        ValueBool        maximized_console("gui_maximized_console", false);
-        ValueInt         serial_port_num("serial_port_num", 0);
+        ValuePoint       *pos_console = nullptr;
+        ValuePoint       *size_console = nullptr;
+        ValueBool        *maximized_console = nullptr;
+        ValueInt         *serial_port_num = nullptr;
 
-        ValueUInt        color_background("color_background", 0xFFFFFF);
-        ValueUInt        color_grid("color_grid", 0);
-        ValueUInt        color_font("color_font", 0);
-        ValueUInt        color_curve("color_curve", 0);
-        ValueUInt        color_link("color_link", 0);
-        ValueUInt        color_secant("color_secant", 0);
+        ValueUInt        *color_background = nullptr;
+        ValueUInt        *color_grid = nullptr;
+        ValueUInt        *color_font = nullptr;
+        ValueUInt        *color_curve = nullptr;
+        ValueUInt        *color_link = nullptr;
+        ValueUInt        *color_secant = nullptr;
 
-        ValueInt         size_point("size_point", 2);
-        Value<wxString>  current_panel{ "current_panel", "PanelChannelC" };
+        ValueInt         *size_point = nullptr;
+        Value<wxString>  *current_panel = nullptr;
 
         void Load();
         void Save();
@@ -56,6 +56,28 @@ namespace SET
         static std::vector<ValueUInt *> vec;
         return vec;
     }
+}
+
+
+void SET::Init()
+{
+    debug_mode = new ValueBool("debug_mode", false);
+    emulate_mode = new ValueBool("emulate_mode", false);
+
+    GUI::pos_console = new ValuePoint("gui_pos_console", { 10, 10 });
+    GUI::size_console = new ValuePoint("gui_size_console", { 400, 400 });
+    GUI::maximized_console = new ValueBool("gui_maximized_console", false);
+    GUI::serial_port_num = new ValueInt("serial_port_num", 0);
+
+    GUI::color_background = new ValueUInt("color_background", 0xFFFFFF);
+    GUI::color_grid = new ValueUInt("color_grid", 0);
+    GUI::color_font = new ValueUInt("color_font", 0);
+    GUI::color_curve = new ValueUInt("color_curve", 0);
+    GUI::color_link = new ValueUInt("color_link", 0);
+    GUI::color_secant = new ValueUInt("color_secant", 0);
+
+    GUI::size_point = new ValueInt("size_point", 2);
+    GUI::current_panel = new Value<wxString>{ "current_panel", "PanelChannelC" };
 }
 
 
@@ -137,11 +159,11 @@ void SET::Save()
 
 void SET::GUI::Load()
 {
-    current_panel.Load();
+    current_panel->Load();
 }
 
 
 void SET::GUI::Save()
 {
-    current_panel.Save();
+    current_panel->Save();
 }

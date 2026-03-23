@@ -76,7 +76,7 @@ void PanelUpper::OnEventComboBox(wxCommandEvent &event)
 
 void PanelUpper::SetTunedPort()
 {
-    wxString pattern_end = wxString::Format("%d", SET::GUI::serial_port_num.Get());
+    wxString pattern_end = wxString::Format("%d", SET::GUI::serial_port_num->Get());
 
     for (uint i = 0; i < comboPorts->GetCount(); i++)
     {

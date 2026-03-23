@@ -192,12 +192,12 @@ void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 
     if (ConsoleRS232::self)
     {
-        SET::GUI::pos_console.Set(ConsoleRS232::self->GetPosition());
+        SET::GUI::pos_console->Set(ConsoleRS232::self->GetPosition());
 
         wxSize size = ConsoleRS232::self->GetSize();
-        SET::GUI::size_console.Set({ size.x, size.y });
+        SET::GUI::size_console->Set({ size.x, size.y });
 
-        SET::GUI::maximized_console.Set(ConsoleRS232::self->IsMaximized());
+        SET::GUI::maximized_console->Set(ConsoleRS232::self->IsMaximized());
 
         ConsoleRS232::self->Destroy();
     }

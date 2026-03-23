@@ -49,7 +49,7 @@ PanelConfig::PanelConfig(wxWindow* parent) :
     btnCalc = new wxToggleButton(this, wxID_ANY, "Измер", { sizeScheme.x * 2, h }, sizeChan);
     str_panels.emplace_back(StructPanel{ btnCalc, CreatePanel(btnCalc) });
 
-    SetCurrentPanel(SET::GUI::current_panel.Get());
+    SetCurrentPanel(SET::GUI::current_panel->Get());
 }
 
 
@@ -111,7 +111,7 @@ void PanelConfig::OnEventToggleButton(wxCommandEvent &event)
         }
     }
 
-    SET::GUI::current_panel.Set(GetCurrentPanel()->GetName());
+    SET::GUI::current_panel->Set(GetCurrentPanel()->GetName());
 
     event.Skip();
 }

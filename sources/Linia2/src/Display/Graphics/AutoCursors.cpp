@@ -31,7 +31,7 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
 
     wxRect rect = TheGrid->GetRect();
 
-    TheDisplay->SetColorPen(SET::GUI::color_curve.Get());
+    TheDisplay->SetColorPen(SET::GUI::color_curve->Get());
 
     if (TheWindowCursors->chbTrackY->IsChecked())
     {
@@ -56,7 +56,7 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
 
         finder.Push(mouse_pos.x);
 
-        Line(finder.Min(), mouse_pos.y, finder.Max(), mouse_pos.y).Draw(SET::GUI::color_curve.Get());
+        Line(finder.Min(), mouse_pos.y, finder.Max(), mouse_pos.y).Draw(SET::GUI::color_curve->Get());
     }
 
     if (TheWindowCursors->chbTrackX->IsChecked())
@@ -81,7 +81,7 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> &measures)
 
         finder.Push(mouse_pos.y);
 
-        Line(mouse_pos.x, finder.Min(), mouse_pos.x, finder.Max()).Draw(SET::GUI::color_curve.Get());
+        Line(mouse_pos.x, finder.Min(), mouse_pos.x, finder.Max()).Draw(SET::GUI::color_curve->Get());
     }
 
     if (TheWindowCursors->chbTrackMouse->IsChecked())
