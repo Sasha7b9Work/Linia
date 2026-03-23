@@ -147,7 +147,7 @@ struct TypeScan
 
     static pchar NameShort(E);
 
-    static pchar NameGUI(E);
+    static pchar _NameGUI(E);
 
     static pchar NameFileICO(E);
 };

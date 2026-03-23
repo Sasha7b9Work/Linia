@@ -31,7 +31,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
         for (uint i = 0; i < TypeScan::Count; i++)
         {
             files.push_back(TypeScan::NameFileICO((TypeScan::E)i));
-            tooltips.push_back(TypeScan::NameGUI((TypeScan::E)i));
+            tooltips.push_back(TypeScan::_NameGUI((TypeScan::E)i));
         }
 
         comboScan = new BmpButtonsCombo(boxScan, "Развёртка", { 18, SD::XY0().y }, { 32, 32 }, files, tooltips, 0, 3, "comboScan");

@@ -30,7 +30,7 @@ private:
 
     wxString title;
     wxArrayString files;
-    wxArrayString tooltips;
+    wxArrayString m_tooltips;
     int buttons_in_row;
 
     void OnButtonClicked(wxCommandEvent &);

@@ -175,7 +175,7 @@ BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxString &_title, const
     current_choice(num_file),
     title(_title),
     files(_files),
-    tooltips(_tooltips)
+    m_tooltips(_tooltips)
 {
     Bind(wxEVT_BUTTON, &BmpButtonsCombo::OnButtonClicked, this);
 
@@ -187,7 +187,7 @@ BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxString &_title, const
 
 void BmpButtonsCombo::OnButtonClicked(wxCommandEvent &)
 {
-    BmpButtonPopup *popup = new BmpButtonPopup(this, title, files, tooltips, buttons_in_row);
+    BmpButtonPopup *popup = new BmpButtonPopup(this, title, files, m_tooltips, buttons_in_row);
 
     wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
     pos.x -= popup->GetSize().x / 2;
@@ -207,7 +207,7 @@ void BmpButtonsCombo::SetCurrentChoice(int choice)
 
     SetFileBitmap(files[index]);
 
-    SetToolTip(tooltips[index]);
+    SetToolTip(m_tooltips[index].utf8_str());
 
     GF::SendCommandEvent(this, wxEVT_COMBOBOX, GetCurrentChoice());
 }

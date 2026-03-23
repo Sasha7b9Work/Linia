@@ -94,7 +94,7 @@ pchar TypeScan::NameFileICO(E v)
 }
 
 
-pchar TypeScan::NameGUI(E v)
+pchar TypeScan::_NameGUI(E v)
 {
     static pchar names[Count] =
     {
