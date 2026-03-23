@@ -1,10 +1,10 @@
-// 2025/7/27 19:54:59 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/7/27 19:54:59 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/Dialog.h"
 #include "Controls/ButtonsCombo.h"
 
 
-// Настройка - Калибровка
+// РќР°СЃС‚СЂРѕР№РєР° - РљР°Р»РёР±СЂРѕРІРєР°
 
 
 class WindowCalibrate : public Dialog

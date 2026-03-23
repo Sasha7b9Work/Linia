@@ -1,9 +1,9 @@
-// 2025/8/1 21:15:28 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/8/1 21:15:28 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/Dialog.h"
 
 
-// Настройки - Запуск
+// РќР°СЃС‚СЂРѕР№РєРё - Р—Р°РїСѓСЃРє
 
 
 class WindowLaunch : public Dialog

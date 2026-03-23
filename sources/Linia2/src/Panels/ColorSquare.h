@@ -1,4 +1,4 @@
-// 2026/01/20 11:20:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2026/01/20 11:20:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
 
@@ -13,21 +13,21 @@ public:
         m_color(initialColor)
     {
 
-        // Устанавливаем минимальный размер
+        // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ
         SetMinSize(size);
 
-        // Обработчик рисования
+        // РћР±СЂР°Р±РѕС‚С‡РёРє СЂРёСЃРѕРІР°РЅРёСЏ
         Bind(wxEVT_PAINT, &ColorSquare::OnPaint, this);
     }
 
-    // Установить цвет
+    // РЈСЃС‚Р°РЅРѕРІРёС‚СЊ С†РІРµС‚
     void SetColor(const wxColor &color)
     {
         m_color = color;
-        Refresh();  // Перерисовать
+        Refresh();  // РџРµСЂРµСЂРёСЃРѕРІР°С‚СЊ
     }
 
-    // Получить текущий цвет
+    // РџРѕР»СѓС‡РёС‚СЊ С‚РµРєСѓС‰РёР№ С†РІРµС‚
     wxColor GetColor() const
     {
         return m_color;
@@ -44,11 +44,11 @@ private:
     {
         wxSize size = GetClientSize();
 
-        // Устанавливаем цвет заливки
+        // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј С†РІРµС‚ Р·Р°Р»РёРІРєРё
         dc.SetBrush(wxBrush(m_color));
         dc.SetPen(wxPen(*wxBLACK, 1));
 
-        // Рисуем квадрат
+        // Р РёСЃСѓРµРј РєРІР°РґСЂР°С‚
         dc.DrawRectangle(0, 0, size.GetWidth(), size.GetHeight());
     }
 };

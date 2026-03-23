@@ -1,9 +1,9 @@
-// 2025/8/1 21:35:16 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/8/1 21:35:16 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/Dialog.h"
 
 
-// Настройки - IP-адрес
+// РќР°СЃС‚СЂРѕР№РєРё - IP-Р°РґСЂРµСЃ
 
 
 class WindowAddressIP : public Dialog

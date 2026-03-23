@@ -1,4 +1,4 @@
-// 2023/09/02 11:37:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2023/09/02 11:37:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/Painter.h"
 #include "Controls/Bitmap.h"
@@ -18,7 +18,7 @@ private:
 };
 
 
-// На кнопке при нажатиях переключаются картинки
+// РќР° РєРЅРѕРїРєРµ РїСЂРё РЅР°Р¶Р°С‚РёСЏС… РїРµСЂРµРєР»СЋС‡Р°СЋС‚СЃСЏ РєР°СЂС‚РёРЅРєРё
 class ButtonBitmapChoice : public ButtonBitmap
 {
 public:
@@ -39,7 +39,7 @@ private:
 };
 
 
-// Событие от кнопки ButtonBitmapChoice
+// РЎРѕР±С‹С‚РёРµ РѕС‚ РєРЅРѕРїРєРё ButtonBitmapChoice
 class ButtonBitmapChoiceEvent : public wxCommandEvent
 {
 public:

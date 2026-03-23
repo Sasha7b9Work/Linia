@@ -1,4 +1,4 @@
-// 2025/8/9 11:41:08 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/8/9 11:41:08 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Controls/BmpButtonsCombo.h"
 #include "Utils/GlobalFunctions.h"
@@ -15,7 +15,7 @@ public:
     {
         wxPopupTransientWindow::Hide();
 
-        // Основной контейнер с отступами по краям
+        // РћСЃРЅРѕРІРЅРѕР№ РєРѕРЅС‚РµР№РЅРµСЂ СЃ РѕС‚СЃС‚СѓРїР°РјРё РїРѕ РєСЂР°СЏРј
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
         wxPanel *mainPanel = new wxPanel(this, wxID_ANY);
 
@@ -33,11 +33,11 @@ public:
             num_cols++;
         }
 
-        wxGridSizer *gridSizer = new wxGridSizer(num_rows, num_cols, 2, 2); // 5px промежутки
+        wxGridSizer *gridSizer = new wxGridSizer(num_rows, num_cols, 2, 2); // 5px РїСЂРѕРјРµР¶СѓС‚РєРё
 
-        // Добавляем рамку вокруг сетки кнопок
+        // Р”РѕР±Р°РІР»СЏРµРј СЂР°РјРєСѓ РІРѕРєСЂСѓРі СЃРµС‚РєРё РєРЅРѕРїРѕРє
         StaticBoxSizer *boxSizer = new StaticBoxSizer(wxVERTICAL, mainPanel, title);
-        boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 0); // 10px отступ внутри рамки
+        boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 0); // 10px РѕС‚СЃС‚СѓРї РІРЅСѓС‚СЂРё СЂР°РјРєРё
 
         for (uint i = 0; i < files.size(); ++i)
         {
@@ -46,13 +46,13 @@ public:
             btn->SetLabel(wxString::Format("%d", i));
             btn->SetToolTip(tooltips[i]);
             btn->Bind(wxEVT_BUTTON, &BmpButtonPopup::OnButtonClick, this);
-            gridSizer->Add(btn, 0, wxEXPAND | wxALL, 2); // 2px отступы у кнопок
+            gridSizer->Add(btn, 0, wxEXPAND | wxALL, 2); // 2px РѕС‚СЃС‚СѓРїС‹ Сѓ РєРЅРѕРїРѕРє
         }
 
-        // Основная панель
+        // РћСЃРЅРѕРІРЅР°СЏ РїР°РЅРµР»СЊ
         mainPanel->SetSizer(boxSizer);
 
-        // Внешние отступы 15px
+        // Р’РЅРµС€РЅРёРµ РѕС‚СЃС‚СѓРїС‹ 15px
         outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 3);
         SetSizer(outerSizer);
 
@@ -62,12 +62,12 @@ public:
 
         wxPopupTransientWindow::SetBackgroundColour(GetBackgroundColour().ChangeLightness(70));
 
-        // Отключаем изменение фона для всех детей
+        // РћС‚РєР»СЋС‡Р°РµРј РёР·РјРµРЅРµРЅРёРµ С„РѕРЅР° РґР»СЏ РІСЃРµС… РґРµС‚РµР№
         for (auto child : GetChildren())
         {
             child->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
             child->SetBackgroundStyle(wxBG_STYLE_ERASE);
-            child->Refresh(); // Обновляем внешний вид
+            child->Refresh(); // РћР±РЅРѕРІР»СЏРµРј РІРЅРµС€РЅРёР№ РІРёРґ
         }
 
         wxPopupTransientWindow::SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);

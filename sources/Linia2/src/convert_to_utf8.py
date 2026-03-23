@@ -3,119 +3,122 @@
 
 import os
 import sys
-import chardet
+from pathlib import Path
 
-def detect_encoding(file_path):
-    """Определение кодировки файла"""
+def is_windows_1251(file_path):
+    """
+    Проверяет, является ли файл Windows-1251 (а не UTF-8 или другой кодировкой)
+    """
     try:
         with open(file_path, 'rb') as f:
-            raw_data = f.read()
-            # Если файл пустой, возвращаем None
-            if not raw_data:
-                return None
-            # Используем chardet для определения кодировки
-            result = chardet.detect(raw_data)
-            return result['encoding'].lower() if result['encoding'] else None
-    except Exception as e:
-        print(f"Ошибка при чтении {file_path}: {e}")
-        return None
-
-def convert_to_utf8(file_path, dry_run=False):
-    """Конвертация файла в UTF-8"""
-    try:
-        # Определяем кодировку
-        encoding = detect_encoding(file_path)
-        
-        # Если файл уже в UTF-8 или BOM, пропускаем
-        if encoding in ['utf-8', 'utf-8-sig', 'ascii']:
-            if dry_run:
-                print(f"[SKIP] {file_path} (уже в {encoding})")
-            return False
-        
-        # Если кодировка не определена или не Windows-1251
-        if encoding != 'windows-1251':
-            if dry_run:
-                print(f"[SKIP] {file_path} (кодировка: {encoding}, не Windows-1251)")
-            return False
-        
-        if dry_run:
-            print(f"[CONVERT] {file_path} (Windows-1251 -> UTF-8)")
-            return True
-        
-        # Читаем файл в Windows-1251
-        with open(file_path, 'r', encoding='windows-1251') as f:
             content = f.read()
         
-        # Записываем в UTF-8
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(content)
+        if not content:
+            return False
         
-        print(f"[OK] {file_path}")
+        # Проверяем наличие BOM (UTF-8 with BOM)
+        if content.startswith(b'\xef\xbb\xbf'):
+            return False
+        
+        # Пробуем декодировать как UTF-8
+        try:
+            content.decode('utf-8')
+            # Если успешно декодируется как UTF-8, то это не Windows-1251
+            # (если только файл не содержит только ASCII символы, которые одинаковы в обеих кодировках)
+            
+            # Проверяем наличие русских символов в UTF-8
+            try:
+                text = content.decode('utf-8')
+                # Ищем символы вне ASCII (>= 128)
+                non_ascii = [c for c in text if ord(c) > 127]
+                if non_ascii:
+                    # Если есть не-ASCII символы и файл валидный UTF-8, то это UTF-8
+                    return False
+            except:
+                pass
+                
+        except UnicodeDecodeError:
+            # Невалидный UTF-8 - возможно Windows-1251
+            pass
+        
+        # Пробуем декодировать как Windows-1251 и ищем русские символы
+        try:
+            text = content.decode('windows-1251')
+            
+            # Ищем русские символы в Windows-1251
+            # Русские символы в Windows-1251 имеют байты от 0xC0 до 0xFF
+            has_russian = any(b >= 0xC0 for b in content)
+            
+            # Также ищем специфичные для Windows-1251 последовательности
+            # (буквы Ё, ё имеют байты 0xA8 и 0xB8)
+            has_yo = any(b in (0xA8, 0xB8) for b in content)
+            
+            return has_russian or has_yo
+            
+        except:
+            return False
+            
+    except Exception:
+        return False
+
+def convert_file(file_path):
+    """
+    Преобразует файл из Windows-1251 в UTF-8 с BOM
+    """
+    try:
+        with open(file_path, 'rb') as f:
+            content = f.read()
+        
+        # Декодируем как Windows-1251
+        text = content.decode('windows-1251')
+        
+        # Записываем как UTF-8 с BOM
+        with open(file_path, 'wb') as f:
+            f.write(b'\xef\xbb\xbf')
+            f.write(text.encode('utf-8'))
+        
         return True
         
-    except UnicodeDecodeError:
-        print(f"[ERROR] Не удалось прочитать {file_path} в Windows-1251")
+    except Exception:
         return False
-    except Exception as e:
-        print(f"[ERROR] {file_path}: {e}")
-        return False
-
-def process_directory(directory, extensions=None, dry_run=False):
-    """Обработка всех файлов в директории"""
-    if extensions is None:
-        extensions = ['.cpp', '.h', '.c', '.hpp', '.cxx', '.hxx', '.txt']
-    
-    converted = 0
-    total = 0
-    
-    for root, dirs, files in os.walk(directory):
-        # Пропускаем скрытые папки
-        dirs[:] = [d for d in dirs if not d.startswith('.')]
-        
-        for file in files:
-            # Проверяем расширение
-            if not any(file.endswith(ext) for ext in extensions):
-                continue
-            
-            file_path = os.path.join(root, file)
-            total += 1
-            
-            if convert_to_utf8(file_path, dry_run):
-                converted += 1
-    
-    return converted, total
 
 def main():
-    import argparse
-    
-    parser = argparse.ArgumentParser(description='Конвертация файлов из Windows-1251 в UTF-8')
-    parser.add_argument('directory', nargs='?', default='.',
-                        help='Директория для обработки (по умолчанию: текущая)')
-    parser.add_argument('--extensions', '-e', nargs='+',
-                        default=['.cpp', '.h', '.c', '.hpp', '.cxx', '.hxx', '.txt'],
-                        help='Расширения файлов для обработки')
-    parser.add_argument('--dry-run', '-n', action='store_true',
-                        help='Только показать, какие файлы будут конвертированы')
-    parser.add_argument('--no-backup', action='store_true',
-                        help='Не создавать резервные копии')
-    
-    args = parser.parse_args()
-    
-    if not os.path.exists(args.directory):
-        print(f"Ошибка: Директория {args.directory} не существует")
-        sys.exit(1)
-    
-    print(f"{'ПРОВЕРКА' if args.dry_run else 'КОНВЕРТАЦИЯ'} файлов в {args.directory}")
-    print(f"Расширения: {', '.join(args.extensions)}")
-    print("-" * 60)
-    
-    converted, total = process_directory(args.directory, args.extensions, args.dry_run)
-    
-    print("-" * 60)
-    if args.dry_run:
-        print(f"Будет конвертировано: {converted} из {total} файлов")
+    # Определяем директорию для обхода
+    if len(sys.argv) > 1:
+        root_dir = sys.argv[1]
     else:
-        print(f"Конвертировано: {converted} из {total} файлов")
+        root_dir = "."
+    
+    root_path = Path(root_dir)
+    
+    if not root_path.exists():
+        print(f"Ошибка: директория '{root_dir}' не найдена")
+        return
+    
+    # Собираем все .h и .cpp файлы
+    files = []
+    for ext in ['*.h', '*.cpp']:
+        files.extend(root_path.rglob(ext))
+    
+    if not files:
+        print("Файлы .h и .cpp не найдены")
+        return
+    
+    # Обрабатываем файлы
+    converted_count = 0
+    
+    for file_path in sorted(files):
+        if is_windows_1251(file_path):
+            if convert_file(file_path):
+                rel_path = file_path.relative_to(root_path) if root_dir != "." else file_path.name
+                print(f"Преобразован: {rel_path}")
+                converted_count += 1
+    
+    # Выводим итог
+    if converted_count > 0:
+        print(f"\nВсего преобразовано файлов: {converted_count}")
+    else:
+        print("Файлы в кодировке Windows-1251 не найдены")
 
 if __name__ == "__main__":
     main()

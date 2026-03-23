@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include "Utils/StringUtils.h"
 
 
@@ -9,7 +9,7 @@ public:
 
     Buffer() : size(0) {}; //-V730
 
-    // Удвалить первые n байт
+    // РЈРґРІР°Р»РёС‚СЊ РїРµСЂРІС‹Рµ n Р±Р°Р№С‚
     void RemoveFirst(int n)
     {
         if (n >= size)
@@ -36,7 +36,7 @@ public:
 
     char *DataChar() { return (char *)buffer; }
 
-    // Возвращает количество элементов в буфере
+    // Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ РІ Р±СѓС„РµСЂРµ
     int Size() const
     {
         return size;
@@ -74,7 +74,7 @@ public:
         std::memset(buffer, 0xFF, size_buffer);
     }
 
-    // Возвращает позицию первого элемента последовательности data в buffer, если таковая имеется. Иначе : -1.
+    // Р’РѕР·РІСЂР°С‰Р°РµС‚ РїРѕР·РёС†РёСЋ РїРµСЂРІРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё data РІ buffer, РµСЃР»Рё С‚Р°РєРѕРІР°СЏ РёРјРµРµС‚СЃСЏ. РРЅР°С‡Рµ : -1.
     int Position(const void *data, int num_bytes) const
     {
         if (num_bytes > size)
@@ -142,10 +142,10 @@ public:
         return std::memcmp(Data(), symbols, std::strlen(symbols)) == 0;
     }
 
-    // Слово nuw_word == word
+    // РЎР»РѕРІРѕ nuw_word == word
     bool WordIs(int num_word, pchar string);
 
-    // Возвращает int из слова num_word
+    // Р’РѕР·РІСЂР°С‰Р°РµС‚ int РёР· СЃР»РѕРІР° num_word
     int GetINT(int num_word)
     {
         char word[32];
@@ -155,6 +155,6 @@ public:
         return atoi(word);
     }
 
-    // Берёт значение из 16-ричной строки
+    // Р‘РµСЂС‘С‚ Р·РЅР°С‡РµРЅРёРµ РёР· 16-СЂРёС‡РЅРѕР№ СЃС‚СЂРѕРєРё
     uint GetUINTFromHEX(int num_word);
 };
