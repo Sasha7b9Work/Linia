@@ -1,16 +1,16 @@
-// 2025/09/11 14:47:46 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+п»ї// 2025/09/11 14:47:46 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "IPPP/Tests/Ranges.h"
 
 
 struct CalK
 {
-    double offset;  // Смещение
-    double k;       // Коэффициент
+    double offset;  // РЎРјРµС‰РµРЅРёРµ
+    double k;       // РљРѕСЌС„С„РёС†РёРµРЅС‚
 };
 
 
-// Здесь калибровочные коэффициенты
+// Р—РґРµСЃСЊ РєР°Р»РёР±СЂРѕРІРѕС‡РЅС‹Рµ РєРѕСЌС„С„РёС†РёРµРЅС‚С‹
 namespace DSet
 {
     const CalK &Get(TypeValue::E, RangeI::E);
