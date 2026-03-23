@@ -29,10 +29,12 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
 add_compile_options(
     /wd4201
+    /wd4391
     /wd4514
     /wd4623
     /wd4626
     /wd4668
+    /wd4711
     /wd4820
     /wd5027
     /wd5039

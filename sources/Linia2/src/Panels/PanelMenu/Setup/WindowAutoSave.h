@@ -3,7 +3,7 @@
 #include "Controls/Dialog.h"
 
 
-// Настройки - Автосохранения
+// РќР°СЃС‚СЂРѕР№РєРё - РђРІС‚РѕСЃРѕС…СЂР°РЅРµРЅРёСЏ
 
 
 class WindowAutoSave : public Dialog

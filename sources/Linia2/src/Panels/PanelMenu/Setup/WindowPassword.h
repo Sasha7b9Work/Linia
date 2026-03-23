@@ -3,7 +3,7 @@
 #include "Controls/Dialog.h"
 
 
-// Настройки - Изменить пароль
+// РќР°СЃС‚СЂРѕР№РєРё - РР·РјРµРЅРёС‚СЊ РїР°СЂРѕР»СЊ
 
 
 class WindowPassword : public Dialog
