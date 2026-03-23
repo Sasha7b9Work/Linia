@@ -8,6 +8,7 @@
 #include "IPPP/Real/RealIPPP.h"
 #include "IPPP/Emulator/EmulatorDevice.h"
 #include "IPPP/Emulator/EmulatorIPPP.h"
+#include "Settings/Settings.h"
 
 
 I_IPPP *I_IPPP::impl = nullptr;
@@ -15,25 +16,24 @@ I_IPPP *I_IPPP::impl = nullptr;
 
 void I_IPPP::Create()
 {
-#ifdef EMULATOR_ENABLED
+    if (SET::GUI::emulate_mode)
+    {
+        impl = new EmulatorIPPP();
 
-    impl = new EmulatorIPPP();
+        IDevice::impl = new EmulatorDevice();
 
-    IDevice::impl = new EmulatorDevice();
+        IDevice::impl->Init();
+    }
+    else
+    {
+        impl = new RealIPPP();
 
-    IDevice::impl->Init();
+        IDevice::impl = new RealDevice();
 
-#else
+        IDevice::impl->Init();
 
-    impl = new RealIPPP();
+        pinREQ_RD.Set(false);    // Это состояние означает, что чтение не нужно
 
-    IDevice::impl = new RealDevice();
-
-    IDevice::impl->Init();
-
-    pinREQ_RD.Set(false);    // Это состояние означает, что чтение не нужно
-
-    Keyboard::Init();
-
-#endif
+        Keyboard::Init();
+    }
 }

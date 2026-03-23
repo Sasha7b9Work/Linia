@@ -13,6 +13,7 @@ namespace SET
         ValueBool        maximized_console("gui_maximized_console", false);
         ValueInt         serial_port_num("serial_port_num", 0);
         ValueBool        debug_mode("debug_mode", false);
+        ValueBool        emulate_mode("emulate_mode", false);
 
         ValueUInt        color_background("color_background", 0xFFFFFF);
         ValueUInt        color_grid("color_grid", 0);

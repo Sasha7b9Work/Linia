@@ -15,19 +15,18 @@ PanelUpper::PanelUpper(wxWindow* parent) :
 {
     self = this;
 
-#ifdef EMULATOR_ENABLED
-
-    wxFont bigFont(25, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
-    wxClientDC dc(this);
-    dc.SetFont(bigFont);
-    wxSize textSize = dc.GetTextExtent(wxT("Э М У Л Я Т О Р"));
-    wxStaticText *text = new wxStaticText(this, wxID_ANY, "Э М У Л Я Т О Р", { 200, 0 }, wxSize(textSize.GetWidth(), textSize.GetHeight()));
-    text->SetFont(bigFont);
-    text->SetForegroundColour(wxColour(127, 127, 127));
-    text->SetSize(text->GetBestSize());
-    text->Refresh();
-
-#endif
+    if (SET::GUI::emulate_mode)
+    {
+        wxFont bigFont(25, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
+        wxClientDC dc(this);
+        dc.SetFont(bigFont);
+        wxSize textSize = dc.GetTextExtent(wxT("Э М У Л Я Т О Р"));
+        wxStaticText *text = new wxStaticText(this, wxID_ANY, "Э М У Л Я Т О Р", { 200, 0 }, wxSize(textSize.GetWidth(), textSize.GetHeight()));
+        text->SetFont(bigFont);
+        text->SetForegroundColour(wxColour(127, 127, 127));
+        text->SetSize(text->GetBestSize());
+        text->Refresh();
+    }
 
     new wxStaticText(this, wxID_ANY, wxString::Format("ver. %d : %s", VERSION_BUILD, DATE_BUILD), { 450, 56 });
 
