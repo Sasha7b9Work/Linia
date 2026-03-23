@@ -3,11 +3,16 @@
 ** Tools
 
 Windows:
-	Visual Studio 2022
+	Visual Studio 2026
 
 Linux:
 	Ubuntu 24.04.2 LTS
 	gcc version 13.3.0
+    
+*** После устанвоки ***
+
+sources/Linia2/src/convert_to_utf8.py - преобразование исходных файлов в utf-8. В Visual Studio по умолчанию кодировка Windows-1251,
+                                        и строки могут неправильно отображаться в Linux
 
 *** Сборка под Linux.
 
