@@ -76,11 +76,9 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, bool n
 
     if (need_knob)
     {
-        const int SIZE = 50;
-
         const int d = 10;
 
-        knob = new KnobWidget(painter, wxID_ANY, 0, 100, 50, { painter->GetSize().x - SIZE - d - 20, d }, { SIZE, SIZE });
+        knob = new KnobWidget(painter, 0, 100, 50, { painter->GetSize().x - d - 70, d });
 
         knob->Bind(wxEVT_SLIDER, &RegAD5543::OnEventKnob, this);
 
@@ -603,6 +601,10 @@ void ComboRange::UpdateState(std::vector<ModeDescripion> &mode_desc, std::vector
 RegAD5543::RegAD5543(wxWindow *_parent, Chip *_chip) :
     Register(_parent, "AD5543", _chip, true)
 {
+    std::vector<StructDescription> desc0;
+    desc0.emplace_back(StructDescription{ 0, GetChip()->BitDepth() - 4, "", "", { true } });
+    SetDescriptionBits(0, desc0);
+
     GetChip()->WriteWidthToDevice();
 }
 

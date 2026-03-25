@@ -1,17 +1,14 @@
 ﻿// 2026/03/09 10:24:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include <wx/wx.h>
-#include <wx/dcbuffer.h>
-#include <cmath>
+
 
 class KnobWidget : public wxControl
 {
 public:
-    KnobWidget(wxWindow *parent, wxWindowID id = wxID_ANY,
+    KnobWidget(wxWindow *parent,
         int minValue = 0, int maxValue = 100, int initialValue = 50,
-        const wxPoint &pos = wxDefaultPosition,
-        const wxSize &size = wxDefaultSize)
-        : wxControl(parent, id, pos, { size.x + 20, size.y }, wxBORDER_NONE)
+        const wxPoint &pos = wxDefaultPosition)
+        : wxControl(parent, wxID_ANY, pos, wxDefaultSize, wxBORDER_NONE)
         , m_minValue(minValue)
         , m_maxValue(maxValue)
         , m_value(initialValue)
@@ -29,8 +26,7 @@ public:
         Bind(wxEVT_KILL_FOCUS, &KnobWidget::OnKillFocus, this);
 
         // Устанавливаем размер по умолчанию, если не задан
-        if (size == wxDefaultSize)
-            SetMinSize(wxSize(50, 50));
+        SetMinSize(wxSize(50, 50));
 
         // Устанавливаем курсор "рука" при наведении
         SetCursor(wxCursor(wxCURSOR_HAND));
@@ -221,4 +217,12 @@ private:
             dc.DrawRectangle(0, 0, width, height);
         }
     }
+};
+
+
+class KnobWidgetDAC : public KnobWidget
+{
+public:
+    KnobWidgetDAC(wxWindow *);
+private:
 };
