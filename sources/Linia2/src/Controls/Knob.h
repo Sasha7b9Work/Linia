@@ -5,9 +5,7 @@
 class KnobWidget : public wxControl
 {
 public:
-    KnobWidget(wxWindow *parent,
-        int minValue = 0, int maxValue = 100, int initialValue = 50,
-        const wxPoint &pos = wxDefaultPosition)
+    KnobWidget(wxWindow *parent, int minValue, int maxValue, int initialValue, const wxPoint &pos)
         : wxControl(parent, wxID_ANY, pos, wxDefaultSize, wxBORDER_NONE)
         , m_minValue(minValue)
         , m_maxValue(maxValue)
