@@ -6,11 +6,11 @@ class KnobWidget : public wxControl
 {
 public:
     KnobWidget(wxWindow *parent, int minValue, int maxValue, int initialValue, const wxPoint &pos)
-        : wxControl(parent, wxID_ANY, pos, wxDefaultSize, wxBORDER_NONE)
-        , m_minValue(minValue)
-        , m_maxValue(maxValue)
-        , m_value(initialValue)
-        , m_dragging(false)
+        : wxControl(parent, wxID_ANY, pos, {70, 50}, wxBORDER_NONE)
+        , minValue(minValue)
+        , maxValue(maxValue)
+        , value(initialValue)
+        , dragging(false)
     {
         SetBackgroundColour(parent->GetBackgroundColour());
 
@@ -23,9 +23,6 @@ public:
         Bind(wxEVT_SET_FOCUS, &KnobWidget::OnSetFocus, this);
         Bind(wxEVT_KILL_FOCUS, &KnobWidget::OnKillFocus, this);
 
-        // Устанавливаем размер по умолчанию, если не задан
-        SetMinSize(wxSize(50, 50));
-
         // Устанавливаем курсор "рука" при наведении
         SetCursor(wxCursor(wxCURSOR_HAND));
 
@@ -35,50 +32,50 @@ public:
 
     int GetValue() const
     {
-        return m_value;
+        return value;
     }
 
     int GetMinValue() const
     {
-        return m_minValue;
+        return minValue;
     }
 
     int GetMaxValue() const
     {
-        return m_maxValue;
+        return maxValue;
     }
 
-    void SetValue(int value)
+    void SetValue(int _value)
     {
-        if (value < m_minValue) value = m_minValue;
-        if (value > m_maxValue) value = m_maxValue;
+        if (_value < minValue) value = minValue;
+        if (_value > maxValue) value = maxValue;
 
-        if (m_value != value)
+        if (value != _value)
         {
-            m_value = value;
+            value = _value;
             Refresh();
 
             // Отправляем событие об изменении значения
             wxCommandEvent event(wxEVT_SLIDER, GetId());
-            event.SetInt(m_value);
+            event.SetInt(value);
             event.SetEventObject(this);
             GetEventHandler()->ProcessEvent(event);
         }
     }
 
 private:
-    int m_minValue;
-    int m_maxValue;
-    int m_value;
-    bool m_dragging;
-    wxPoint m_capturePoint; // Точка, где был захвачен виджет
+    int minValue;
+    int maxValue;
+    int value;
+    bool dragging;
+    wxPoint capturePoint; // Точка, где был захвачен виджет
 
     void OnEventMouseLeftDown(wxMouseEvent &event)
     {
-        if (!m_dragging)
+        if (!dragging)
         {
-            m_dragging = true;
-            m_capturePoint = event.GetPosition(); // Запоминаем позицию захвата
+            dragging = true;
+            capturePoint = event.GetPosition(); // Запоминаем позицию захвата
             CaptureMouse(); // Захватываем мышь для получения событий вне виджета
         }
         event.Skip();
@@ -86,9 +83,9 @@ private:
 
     void OnMouseLeftUp(wxMouseEvent &event)
     {
-        if (m_dragging)
+        if (dragging)
         {
-            m_dragging = false;
+            dragging = false;
             if (HasCapture())
                 ReleaseMouse();
         }
@@ -97,29 +94,29 @@ private:
 
     void OnMouseMove(wxMouseEvent &event)
     {
-        if (m_dragging && event.LeftIsDown())
+        if (dragging && event.LeftIsDown())
         {
             wxPoint currentPos = event.GetPosition();
 
             // Вычисляем дельту относительно точки захвата
-            float deltaY = (float)(currentPos.y - m_capturePoint.y) / 2.0f;
+            float deltaY = (float)(currentPos.y - capturePoint.y) / 2.0f;
 
             if (deltaY != 0.0f)
             {
                 // Изменяем значение в зависимости от направления движения
                 // Тянем вверх (отрицательный deltaY) - увеличиваем значение
                 // Тянем вниз (положительный deltaY) - уменьшаем значение
-                int newValue = (int)((float)m_value - deltaY); // Минус потому что Y увеличивается вниз
+                int newValue = (int)((float)value - deltaY); // Минус потому что Y увеличивается вниз
 
                 // Ограничиваем значение
-                if (newValue < m_minValue) newValue = m_minValue;
-                if (newValue > m_maxValue) newValue = m_maxValue;
+                if (newValue < minValue) newValue = minValue;
+                if (newValue > maxValue) newValue = maxValue;
 
                 SetValue(newValue);
 
                 // ВАЖНО: Возвращаем курсор мыши в исходную позицию
                 // Это создает эффект, что курсор остается на месте при вращении
-                WarpPointer(m_capturePoint.x, m_capturePoint.y);
+                WarpPointer(capturePoint.x, capturePoint.y);
             }
         }
         event.Skip();
@@ -127,7 +124,7 @@ private:
 
     void OnMouseCaptureLost(wxMouseCaptureLostEvent &)
     {
-        m_dragging = false;
+        dragging = false;
     }
 
     void OnSetFocus(wxFocusEvent &event)
@@ -172,7 +169,7 @@ private:
         dc.DrawEllipse(x + 2 + 10, y + 2, diameter - 4, diameter - 4);
 
         // Вычисляем угол поворота (от -210° до +90°, диапазон 300°)
-        double angle = (double)(m_value - m_minValue) / (m_maxValue - m_minValue) * 300.0 - 210.0;
+        double angle = (double)(value - minValue) / (maxValue - minValue) * 300.0 - 210.0;
         angle = angle * M_PI / 180.0; // Конвертируем в радианы
 
         // Рисуем указатель
@@ -197,12 +194,12 @@ private:
         // Метка минимума
         int minX = 0;
         int minY = GetClientSize().y - 15;
-        dc.DrawText(wxString::Format("%d", m_minValue), minX, minY);
+        dc.DrawText(wxString::Format("%d", minValue), minX, minY);
 
-        dc.DrawText(wxString::Format("%d", m_value), 0, GetClientSize().y / 2 - 7);
+        dc.DrawText(wxString::Format("%d", value), 0, GetClientSize().y / 2 - 7);
 
         // Метка максимума (справа)
-        wxString maxStr = wxString::Format("%d", m_maxValue);
+        wxString maxStr = wxString::Format("%d", maxValue);
         int textWidth, textHeight;
         dc.GetTextExtent(maxStr, &textWidth, &textHeight);
         dc.DrawText(maxStr, 0, 0);
