@@ -133,7 +133,7 @@ private:
     // А это элемент управления для выбора режимов
     CommandsCombo *combo_modes[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };
 
-    std::vector<CheckBoxBit *> chbox;
+    std::vector<CheckBoxBit *> chboxes;
 
     // Создать элемент управления для выбора режима
     void CreateControlMode(int i);
@@ -184,7 +184,14 @@ public:
 };
 
 
-class RegAD5543 : public Register
+class RegDAC : public Register
+{
+public:
+    RegDAC(wxWindow *, Chip *_chip);
+};
+
+
+class RegAD5543 : public RegDAC
 {
 public:
 

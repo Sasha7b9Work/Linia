@@ -49,7 +49,7 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, bool n
     {
         painter = new PainterRegister(this, this, { 10, y0 });
 
-        for (auto box : chbox)
+        for (auto box : chboxes)
         {
             box->Bind(wxEVT_CHECKBOX, &Register::OnEventCheckBox, this);
         }
@@ -246,7 +246,7 @@ void Register::OnEventTextCtrl(wxCommandEvent &event)
                 {
                     bool bit = value & 1;
 
-                    chbox[(uint)index++]->SetValue(bit);
+                    chboxes[(uint)index++]->SetValue(bit);
 
                     value >>= 1;
                 }
@@ -392,7 +392,7 @@ void Register::UpdateDecFields()
         return;
     }
 
-    for (int i = 0; i < (int)chbox.size(); i++)                         // Перебираем все биты
+    for (int i = 0; i < (int)chboxes.size(); i++)                         // Перебираем все биты
     {
         for (auto &d : desc[0])
         {
@@ -400,7 +400,7 @@ void Register::UpdateDecFields()
             {
                 if (i >= d.first_bit && i < d.first_bit + d.num_bits)   // Нашли описатель поля, в которое входит данный бит
                 {
-                    uint value = d.CalculateValue(chbox);
+                    uint value = d.CalculateValue(chboxes);
 
                     d.field.text_ctrl_dec->SetValue(wxString::Format("%u", value));
                 }
@@ -467,7 +467,7 @@ void Register::OnEventComboField(wxCommandEvent &event)
 
                 for (int i = 0; i < d.num_bits; i++)
                 {
-                    chbox[(uint)num_bit++]->SetValue((value & (1 << i)) != 0);
+                    chboxes[(uint)num_bit++]->SetValue((value & (1 << i)) != 0);
                 }
 
                 break;
@@ -514,7 +514,7 @@ void Register::OnEventComboMode(wxCommandEvent &event)
     {
         StateBit &state = mode.state[i];
 
-        chbox[(uint)state.num]->SetValue(state.state);
+        chboxes[(uint)state.num]->SetValue(state.state);
     }
 
     UpdateComboCommandsAndModes();
@@ -527,7 +527,7 @@ void Register::UpdateComboCommandsAndModes()
     {
         if (d.field.commands.size())
         {
-            uint value = d.CalculateValue(chbox);
+            uint value = d.CalculateValue(chboxes);
 
             bool exist_value = false;
 
@@ -557,7 +557,7 @@ void Register::UpdateComboCommandsAndModes()
     {
         if (combo_modes[num_combo])
         {
-            ComboRange::UpdateState(modes[num_combo], chbox, combo_modes[num_combo]);
+            ComboRange::UpdateState(modes[num_combo], chboxes, combo_modes[num_combo]);
         }
     }
 
@@ -598,8 +598,13 @@ void ComboRange::UpdateState(std::vector<ModeDescripion> &mode_desc, std::vector
 }
 
 
+RegDAC::RegDAC(wxWindow *parent, Chip *_chip) : Register(parent, "AD5543", _chip, true)
+{
+}
+
+
 RegAD5543::RegAD5543(wxWindow *_parent, Chip *_chip) :
-    Register(_parent, "AD5543", _chip, true)
+    RegDAC(_parent, _chip)
 {
     std::vector<StructDescription> desc0;
     desc0.emplace_back(StructDescription{ 0, GetChip()->BitDepth() - 4, "", "", { true } });
@@ -662,9 +667,9 @@ uint Register::GetValue() const
 {
     uint result = 0;
 
-    for (uint i = 0; i < chbox.size(); i++)
+    for (uint i = 0; i < chboxes.size(); i++)
     {
-        if (chbox[i]->IsChecked())
+        if (chboxes[i]->IsChecked())
         {
             result |= (1 << i);
         }
@@ -676,9 +681,9 @@ uint Register::GetValue() const
 
 void Register::SetValue(uint new_value)
 {
-    for (uint i = 0; i < chbox.size(); i++)
+    for (uint i = 0; i < chboxes.size(); i++)
     {
-        chbox[i]->SetValue((new_value & (1 << i)) != 0);
+        chboxes[i]->SetValue((new_value & (1 << i)) != 0);
     }
 
     UpdateComboCommandsAndModes();

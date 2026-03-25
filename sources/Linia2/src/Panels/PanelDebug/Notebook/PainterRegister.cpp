@@ -10,11 +10,11 @@ PainterRegister::PainterRegister(wxWindow *parent, Register *_panel, const wxPoi
 {
     SetBackgroundColour(GetBackgroundColour().ChangeLightness(150));
 
-    panel->chbox.resize((uint)_panel->chip->BitDepth() );
+    panel->chboxes.resize((uint)_panel->chip->BitDepth() );
 
     for (int i = 0; i < panel->chip->BitDepth(); i++)
     {
-        panel->chbox[(uint)i] = new CheckBoxBit(this, { BitX(i, panel->chip->BitDepth()), W_B + 1 }, { W_B, W_B });
+        panel->chboxes[(uint)i] = new CheckBoxBit(this, { BitX(i, panel->chip->BitDepth()), W_B + 1 }, { W_B, W_B });
     }
 
     Bind(wxEVT_PAINT, &PainterRegister::OnEventPaint, this);
@@ -167,7 +167,7 @@ void PainterRegister::SetHintCheckBox(int num_bit)
         hint += desc1;
     }
 
-    panel->chbox[(uint)num_bit]->SetToolTip(hint);
+    panel->chboxes[(uint)num_bit]->SetToolTip(hint);
 }
 
 

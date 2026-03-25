@@ -30,7 +30,7 @@ private:
 
     bool             first_paint = true;
     Register        *panel = nullptr;
-    AnimatedImpulse *animation = nullptr;
+    AnimatedImpulse *animation = nullptr;               // Здесь отрисовываются импульсы при автоматической засылке
 
     // Возвращает координаты верхнего левого угла отображения бита
     wxPoint CoordBit(int num_bit);

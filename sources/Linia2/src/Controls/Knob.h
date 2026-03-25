@@ -216,11 +216,3 @@ private:
         }
     }
 };
-
-
-class KnobWidgetDAC : public KnobWidget
-{
-public:
-    KnobWidgetDAC(wxWindow *);
-private:
-};
