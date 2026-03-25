@@ -33,7 +33,7 @@ public:
         mainSizer->Add(buttonSizer, 10, wxALIGN_CENTER | wxBOTTOM, 20);
 
         SetSizer(mainSizer);
-        Centre();
+        wxWindowBase::Centre();
 
         // Настройка таймера
         m_timer = new wxTimer(this, wxID_ANY);

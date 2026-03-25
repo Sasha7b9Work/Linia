@@ -30,7 +30,8 @@ PageChannelC::PageChannelC(wxNotebook *parent) :
         std::vector<StructDescription> desc0;
         desc0.reserve(6);
 
-        std::vector<StructDescription::CommandStruct> commandQ2; //-V826
+        std::vector<StructDescription::CommandStruct> commandQ2;
+        commandQ2.reserve(2);
         commandQ2.emplace_back(StructDescription::CommandStruct{ 0b0, wxT("x 20 вкл") });
         commandQ2.emplace_back(StructDescription::CommandStruct{ 0b1, wxT("x 20 выкл") });
         desc0.emplace_back(StructDescription{ 2, 1, "Q2", "x20", {false, commandQ2} });
