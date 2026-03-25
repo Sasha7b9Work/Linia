@@ -126,11 +126,13 @@ public:
         // Создаем замкнутый путь для заливки
         wxGraphicsPath path = gc->CreatePath();
 
+        const int x = splinePoints.front().x;
+
         // Начинаем с левой нижней точки (на базовой линии)
-        path.MoveToPoint(splinePoints.front().x, baselineY);
+        path.MoveToPoint(x, baselineY);
 
         // Идем вверх к началу сплайна
-        path.AddLineToPoint(splinePoints.front().x, splinePoints.front().y);
+        path.AddLineToPoint(x, splinePoints.front().y);
 
         // Идем по сплайну
         for (size_t i = 1; i < splinePoints.size(); i++)

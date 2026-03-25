@@ -50,7 +50,6 @@ bool CubicSpline::Initialize(const std::vector<wxRealPoint> &points,
 
     // Инициализация массивов для решения системы
     std::vector<double> h(n);      // шаги между точками
-    std::vector<double> alpha(n + 1); // правые части
 
     // Вычисляем шаги
     for (size_t i = 0; i < n; i++)
@@ -181,7 +180,7 @@ std::vector<wxPoint> CubicSpline::GetPoints(double step) const
     if (!valid || x.empty()) return result;
 
     // Генерируем точки от x[0] до x.back() с заданным шагом
-    for (double t = x.front(); t <= x.back() + step / 2; t += step)
+    for (double t = x.front(); t <= x.back() + step / 2; t += step) //-V1034
     {
         double val = Evaluate(t);
         result.emplace_back(static_cast<int>(t), static_cast<int>(val));
@@ -222,7 +221,7 @@ bool CubicSpline::SolveTridiagonal(const std::vector<double> &sub,
 
     // Обратный ход
     solution[n - 1] = d[n - 1];
-    for (int i = static_cast<int>(n) - 2; i >= 0; i--)
+    for (int64 i = static_cast<int64>(n) - 2; i >= 0; i--)
     {
         solution[(size_t)i] = d[(size_t)i] - c[(size_t)i] * solution[(size_t)(i + 1)];
     }

@@ -53,7 +53,7 @@ void GraphMeasure::CreateForEmulator(std::vector<GraphMeasure *> &entities)
 
         meas->SetColor(SET::GUI::color_curve->Get());
 
-        for (double u = 0.0; u <= 1.0; u += 0.1)
+        for (double u = 0.0; u <= 1.0; u += 0.1) //-V1034
         {
             // Базовый ток пропорционален номеру линии (от 5 до 50 мкА)
             double Ib = 5.0 + (num_line + 1 - 1) * 5.0; // мкА
