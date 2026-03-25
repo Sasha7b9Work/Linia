@@ -101,8 +101,6 @@ public:
     void Pack();
     void Unpack();
 
-    // Записать ширину (количество бит) в аппаратуру
-    void WriteWidth();
     // Записать значение в аппаратуру
     void WriteValue();
 

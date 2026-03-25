@@ -81,6 +81,10 @@ bool Application::OnInit()
 
     Chip::Init();
 
+    auto device = DeviceFactory::CreateFromConfig();
+
+    I_IPPP::SetInstance(std::move(device));
+
     // create and show the main application window
     MainWindow *frame = new MainWindow(wxT("ИППП 4"));
 
@@ -119,10 +123,6 @@ bool Application::OnInit()
 
         dialog.ShowModal();
     }
-
-    auto device = DeviceFactory::CreateFromConfig();
-
-    I_IPPP::SetInstance(std::move(device));
 
     timer.Start(10);
 

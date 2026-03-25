@@ -45,13 +45,13 @@ int DAC::BitDepth() const
 {
     static const int depth[Count] =
     {
-        12,
-        12,
+        16,
+        16,
         14,
-         8,
         12,
-        12,
-        12
+        16,
+        16,
+        16
     };
 
     return depth[v];

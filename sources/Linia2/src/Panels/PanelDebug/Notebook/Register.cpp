@@ -305,12 +305,6 @@ void Register::WriteValue()
 }
 
 
-void Register::WriteWidth()
-{
-    chip->WriteWidthToDevice();
-}
-
-
 void Register::OnEventTimerAutoSend(wxTimerEvent &)
 {
     if (chbSawDAC && chbSawDAC->IsChecked())
@@ -609,6 +603,7 @@ void ComboRange::UpdateState(std::vector<ModeDescripion> &mode_desc, std::vector
 RegAD5543::RegAD5543(wxWindow *_parent, Chip *_chip) :
     Register(_parent, "AD5543", _chip, true)
 {
+    GetChip()->WriteWidthToDevice();
 }
 
 void Register::OnEventKnob(wxCommandEvent &event)
