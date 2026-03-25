@@ -305,6 +305,12 @@ void Register::WriteValue()
 }
 
 
+void Register::WriteWidth()
+{
+    chip->WriteWidthToDevice();
+}
+
+
 void Register::OnEventTimerAutoSend(wxTimerEvent &)
 {
     if (chbSawDAC && chbSawDAC->IsChecked())

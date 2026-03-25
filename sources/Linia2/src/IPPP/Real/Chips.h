@@ -19,7 +19,7 @@ struct Chip
     void WriteValue(uint) const;
 
     // Послать в контроллер размер регистра
-    void WriteBitDepthToDevice() const;
+    void WriteWidthToDevice() const;
 
     virtual bool IsDAC() const { return false; }
 };

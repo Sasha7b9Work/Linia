@@ -131,7 +131,7 @@ void Chip::WriteValue(uint value) const
 }
 
 
-void Chip::WriteBitDepthToDevice() const
+void Chip::WriteWidthToDevice() const
 {
     IDevice::impl->SendCommand(":%s:LENGTH %d", GetNameDevice().c_str().AsChar(), BitDepth());
 }
