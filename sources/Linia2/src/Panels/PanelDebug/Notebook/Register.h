@@ -128,7 +128,8 @@ private:
 
     std::vector<StructDescription> desc[2];     // Описания групп битов
 
-    std::vector<ModeDescripion> modes[5];                   // Описания режимов
+    static const uint NUM_MODES = 5;
+    std::vector<ModeDescripion> modes[NUM_MODES];           // Описания режимов
     wxString title_modes[5];                                // Названия режимов
     // А это элемент управления для выбора режимов
     CommandsCombo *combo_modes[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };

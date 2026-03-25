@@ -99,11 +99,6 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
 
     int num_bits = panel->chip->BitDepth();
 
-    if (num_bits == 8)
-    {
-        num_bits = num_bits;
-    }
-
     int w = 20;
     int h = w;
 

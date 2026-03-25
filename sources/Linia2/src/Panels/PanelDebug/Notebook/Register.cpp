@@ -14,7 +14,7 @@
 // Функции для комбобоксов выбора режимов
 namespace ComboRange
 {
-    static void UpdateState(std::vector<ModeDescripion> &, std::vector<CheckBoxBit *> chbox, CommandsCombo *);
+    static void UpdateState(std::vector<ModeDescripion> &, const std::vector<CheckBoxBit *> &chbox, CommandsCombo *);
 }
 
 
@@ -22,7 +22,7 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, bool n
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
     chip(_chip)
 {
-    SetBackgroundColour(parent->GetBackgroundColour().ChangeLightness(110));
+    wxWindowBase::SetBackgroundColour(parent->GetBackgroundColour().ChangeLightness(110));
 
     wxPanel::SetName("Register");
 
@@ -102,7 +102,7 @@ void Register::SetNamesBits(const wxArrayString &_names)
 
 void Register::AppendModes(const wxString &title, const std::vector<ModeDescripion> &mode_desc)
 {
-    for (uint i = 0; i < 10; i++)
+    for (uint i = 0; i < NUM_MODES; i++)
     {
         if (modes[i].size() == 0)
         {
@@ -565,7 +565,7 @@ void Register::UpdateComboCommandsAndModes()
 }
 
 
-void ComboRange::UpdateState(std::vector<ModeDescripion> &mode_desc, std::vector<CheckBoxBit *> chbox, CommandsCombo *combo)
+void ComboRange::UpdateState(std::vector<ModeDescripion> &mode_desc, const std::vector<CheckBoxBit *> &chbox, CommandsCombo *combo)
 {
     for (uint num_desc = 0; num_desc < mode_desc.size(); num_desc++)
     {
