@@ -6,13 +6,12 @@ class KnobWidget : public wxControl
 {
 public:
     KnobWidget(wxWindow *parent, int minValue, int maxValue, int initialValue, const wxPoint &pos)
-        : wxControl(parent, wxID_ANY, pos, {70, 50}, wxBORDER_NONE)
-        , minValue(minValue)
-        , maxValue(maxValue)
-        , value(initialValue)
-        , dragging(false)
+        : wxControl(parent, wxID_ANY, pos, {70, 50}, wxBORDER_NONE),
+        minValue(minValue),
+        maxValue(maxValue),
+        value(initialValue)
     {
-        SetBackgroundColour(parent->GetBackgroundColour());
+        wxWindowBase::SetBackgroundColour(parent->GetBackgroundColour());
 
         // Включаем обработку событий мыши
         Bind(wxEVT_LEFT_DOWN, &KnobWidget::OnEventMouseLeftDown, this);
@@ -24,10 +23,10 @@ public:
         Bind(wxEVT_KILL_FOCUS, &KnobWidget::OnKillFocus, this);
 
         // Устанавливаем курсор "рука" при наведении
-        SetCursor(wxCursor(wxCURSOR_HAND));
+        wxWindowBase::SetCursor(wxCursor(wxCURSOR_HAND));
 
         // Включаем двойную буферизацию для устранения мерцания
-        SetBackgroundStyle(wxBG_STYLE_PAINT);
+        wxWindowBase::SetBackgroundStyle(wxBG_STYLE_PAINT);
     }
 
     int GetValue() const
@@ -67,7 +66,7 @@ private:
     int minValue;
     int maxValue;
     int value;
-    bool dragging;
+    bool dragging = false;
     wxPoint capturePoint; // Точка, где был захвачен виджет
 
     void OnEventMouseLeftDown(wxMouseEvent &event)
