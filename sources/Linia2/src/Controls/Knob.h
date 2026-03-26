@@ -102,13 +102,16 @@ private:
 
             // Вычисляем дельту относительно точки захвата
             float deltaY = (float)(currentPos.y - capturePoint.y) / 2.0f;
+            float deltaX = (float)(-currentPos.x + capturePoint.x) / 2.0f;
 
-            if (deltaY != 0.0f)
+            float delta = deltaX + deltaY;
+
+            if (delta != 0.0f)
             {
                 // Изменяем значение в зависимости от направления движения
                 // Тянем вверх (отрицательный deltaY) - увеличиваем значение
                 // Тянем вниз (положительный deltaY) - уменьшаем значение
-                int newValue = (int)((float)value - deltaY); // Минус потому что Y увеличивается вниз
+                int newValue = (int)((float)value - delta); // Минус потому что Y увеличивается вниз
 
                 // Ограничиваем значение
                 if (newValue < minValue) newValue = minValue;
