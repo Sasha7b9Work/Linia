@@ -12,7 +12,7 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
     self = this;
 
     {
-        RegAD5531 *dac2 = new RegAD5531(this, dacs[2]);
+        RegAD5531 *dac2 = new RegAD5531(this, dacs[2], "");
 
         std::vector<StructDescription> desc2;
         desc2.emplace_back(StructDescription{ 0, dac2->GetChip()->BitDepth(), "", "", { true } });
@@ -22,7 +22,7 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
     }
 
     {
-        RegAD5531 *dac3 = new RegAD5531(this, dacs[3]);
+        RegAD5531 *dac3 = new RegAD5531(this, dacs[3], "");
 
         std::vector<StructDescription> desc3;
         desc3.emplace_back(StructDescription{ 0, dac3->GetChip()->BitDepth(), "", "", { true } });

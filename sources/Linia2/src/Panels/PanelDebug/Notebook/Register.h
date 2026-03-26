@@ -86,7 +86,7 @@ public:
     static const int HEIGHT = 155;
 
     Register(wxWindow *parent, const wxString &_title,      // Это написано на изображении
-        Chip *);
+        Chip *, const wxString &_functional);
 
     void SetNamesBits(const wxArrayString &);
 
@@ -170,7 +170,7 @@ class RegFPGA : public Register
 public:
 
     RegFPGA(wxWindow *_parent, Chip *_chip) :
-        Register(_parent, "", _chip)
+        Register(_parent, "", _chip, "")
     {
     }
 
@@ -181,7 +181,7 @@ public:
 class RegDAC : public Register
 {
 public:
-    RegDAC(wxWindow *, pchar _title, Chip *_chip);
+    RegDAC(wxWindow *, pchar _title, Chip *_chip, const wxString &_functional);
 
 protected:
 
@@ -204,7 +204,7 @@ class RegAD5443 : public RegDAC
 public:
 
     // Если need_knob, то рисуем ручку
-    RegAD5443(wxWindow *, Chip *_chip);
+    RegAD5443(wxWindow *, Chip *_chip, const wxString &_functional);
 };
 
 
@@ -212,5 +212,5 @@ class RegAD5531 : public RegDAC
 {
 public:
 
-    RegAD5531(wxWindow *, Chip *_chip);
+    RegAD5531(wxWindow *, Chip *_chip, const wxString &_functional);
 };

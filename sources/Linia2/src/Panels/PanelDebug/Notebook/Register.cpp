@@ -18,7 +18,7 @@ namespace ComboRange
 }
 
 
-Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip) :
+Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, const wxString &_functional) :
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
     chip(_chip)
 {
@@ -26,7 +26,7 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip) :
 
     wxPanel::SetName("Register");
 
-    new wxStaticText(this, wxID_ANY, _title + " " + chip->GetNameDevice(), {10, 10});
+    new wxStaticText(this, wxID_ANY, _title + " " + chip->GetNameDevice() + (_functional.IsEmpty() ? wxString("") : (wxString(" : ") + _functional)), {10, 10});
 
     wxSize size_button{ 90, 25 };
 
@@ -544,7 +544,7 @@ void ComboRange::UpdateState(std::vector<ModeDescripion> &mode_desc, const std::
 }
 
 
-RegDAC::RegDAC(wxWindow *parent, pchar _title, Chip *_chip) : Register(parent, _title, _chip)
+RegDAC::RegDAC(wxWindow *parent, pchar _title, Chip *_chip, const wxString &_functional) : Register(parent, _title, _chip, _functional)
 {
     const int d = 10;
 
@@ -558,14 +558,14 @@ RegDAC::RegDAC(wxWindow *parent, pchar _title, Chip *_chip) : Register(parent, _
 }
 
 
-RegAD5531::RegAD5531(wxWindow *_parent, Chip *_chip) :
-    RegDAC(_parent, "AD5531", _chip)
+RegAD5531::RegAD5531(wxWindow *_parent, Chip *_chip, const wxString &_functional) :
+    RegDAC(_parent, "AD5531", _chip, _functional)
 {
 }
 
 
-RegAD5443::RegAD5443(wxWindow *_parent, Chip *_chip) :
-    RegDAC(_parent, "AD5443", _chip)
+RegAD5443::RegAD5443(wxWindow *_parent, Chip *_chip, const wxString &_functional) :
+    RegDAC(_parent, "AD5443", _chip, _functional)
 {
     std::vector<StructDescription> desc0;
     desc0.emplace_back(StructDescription{ 0, GetChip()->BitDepth() - 4, "", "", { true } });
