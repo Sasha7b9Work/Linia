@@ -193,6 +193,7 @@ private:
 
     KnobWidget *knob = nullptr;         // Ручка установки значения
     SliderInt *slider = nullptr;        // Ползунок установки значения
+    uint value_DAC = 0;
 
     void OnEventKnob(wxCommandEvent &);
     void OnEventSlider(wxCommandEvent &);
@@ -200,7 +201,7 @@ private:
     // Первый бит поля, где хранится значение
     int FirstBitValue() const;
 
-    uint GetValueDAC() const;
+    uint GetValueDAC();
     void SetValueDAC(uint);
 
     virtual void Unpack() override;

@@ -778,14 +778,17 @@ void RegDAC::SetValueToKnobAndSlider()
 
     int new_value = (int)((float)GetValueDAC() * 100.0f / (float)max_value + 0.5f);
 
-    if (new_value != knob->GetValue())
+    if ((uint)new_value != value_DAC)
     {
-        knob->SetValue(new_value);
-    }
+        if (new_value != knob->GetValue())
+        {
+            knob->SetValue(new_value);
+        }
 
-    if (new_value != slider->GetValue())
-    {
-        slider->SetValue(new_value);
+        if (new_value != slider->GetValue())
+        {
+            slider->SetValue(new_value);
+        }
     }
 
     knob->Bind(wxEVT_SLIDER, &RegDAC::OnEventKnob, this);
@@ -799,9 +802,11 @@ void RegDAC::OnEventUpdateComboCommandsAndModes()
 }
 
 
-uint RegDAC::GetValueDAC() const
+uint RegDAC::GetValueDAC()
 {
-    return GetValueFromBits(FirstBitValue(), NumBitsValue());
+    value_DAC = GetValueFromBits(FirstBitValue(), NumBitsValue());
+
+    return value_DAC;
 }
 
 
@@ -809,6 +814,8 @@ void RegDAC::SetValueDAC(uint value)
 {
     if (GetValueDAC() != value)
     {
+        value_DAC = value;
+
         SetValueToBits(value, FirstBitValue(), NumBitsValue());
     }
 }
