@@ -151,11 +151,11 @@ void Chip::WriteValueRAW(uint value)
     
     WAIT_HALF;
 
-    cs->Set(!level_cs);
+    clk->ToLow();
 
     WAIT;
 
-    clk->ToLow();
+    cs->Set(!level_cs);
 }
 
 
