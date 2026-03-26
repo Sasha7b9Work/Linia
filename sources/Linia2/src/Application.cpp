@@ -50,7 +50,7 @@ bool Application::OnInit()
     // Попытка отключить предупреждения вида "Gtk-WARNING"
     // Устанавливаем переменные окружения для GTK (для Linux)
 #ifndef __WXMSW__
-    g_log_set_handler(NULL, G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL,
+    g_log_set_handler(NULL, (GLogLevelFlags)(G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL),
         [](const gchar *log_domain, GLogLevelFlags level,
             const gchar *message, gpointer user_data)
         {
