@@ -87,7 +87,7 @@ void SliderInt::OnEventSlider(wxCommandEvent &event)
 }
 
 
-void SliderInt::SetValue(int value)
+void SliderInt::SetValue(int value, bool send_event)
 {
     if (value != GetValue())
     {
@@ -95,7 +95,10 @@ void SliderInt::SetValue(int value)
 
         text->SetLabel(wxString::Format("%d", slider->GetValue()));
 
-        GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
+        if (send_event)
+        {
+            GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
+        }
     }
 }
 

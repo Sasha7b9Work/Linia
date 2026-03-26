@@ -12,7 +12,7 @@ public:
     void Unpack();
 
     int GetValue() const;
-    void SetValue(int);
+    void SetValue(int, bool send_event = true);
 
 private:
 

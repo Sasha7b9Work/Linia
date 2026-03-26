@@ -782,12 +782,12 @@ void RegDAC::SetValueToKnobAndSlider()
     {
         if (new_value != knob->GetValue())
         {
-            knob->SetValue(new_value);
+            knob->SetValue(new_value, false);
         }
 
         if (new_value != slider->GetValue())
         {
-            slider->SetValue(new_value);
+            slider->SetValue(new_value, false);
         }
     }
 

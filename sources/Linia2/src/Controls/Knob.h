@@ -44,7 +44,7 @@ public:
         return maxValue;
     }
 
-    void SetValue(int _value)
+    void SetValue(int _value, bool _send_event = true)
     {
         if (_value < minValue) value = minValue;
         if (_value > maxValue) value = maxValue;
@@ -54,11 +54,14 @@ public:
             value = _value;
             Refresh();
 
-            // Отправляем событие об изменении значения
-            wxCommandEvent event(wxEVT_SLIDER, GetId());
-            event.SetInt(value);
-            event.SetEventObject(this);
-            GetEventHandler()->ProcessEvent(event);
+            if (_send_event)
+            {
+                // Отправляем событие об изменении значения
+                wxCommandEvent event(wxEVT_SLIDER, GetId());
+                event.SetInt(value);
+                event.SetEventObject(this);
+                GetEventHandler()->ProcessEvent(event);
+            }
         }
     }
 
