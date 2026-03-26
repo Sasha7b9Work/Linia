@@ -40,6 +40,31 @@ public:
 };
 
 
+#ifndef WIN32
+// Функция-фильтр для логов
+void glib_log_filter(const gchar *log_domain,
+    GLogLevelFlags log_level,
+    const gchar *message,
+    gpointer user_data)
+{
+    // Игнорируем всё, что содержит "Gtk" или является предупреждением/критикой
+    if (log_domain && (g_strcmp0(log_domain, "Gtk") == 0 ||
+        g_strcmp0(log_domain, "Gtk-WARNING") == 0))
+    {
+        return; // Полностью подавляем
+    }
+
+    // Если нужно подавить только WARNING и CRITICAL, раскомментируйте следующее:
+    // if (log_level & (G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL)) {
+    //     return;
+    // }
+
+    // Для всех остальных сообщений — стандартный вывод
+    g_log_default_handler(log_domain, log_level, message, user_data);
+}
+#endif
+
+
 bool Application::OnInit()
 {
     TheApp = this;
@@ -56,27 +81,17 @@ bool Application::OnInit()
         {
             // Игнорируем предупреждения
         }, NULL);
-    // Функция-фильтр для логов
-    void glib_log_filter(const gchar * log_domain,
-        GLogLevelFlags log_level,
-        const gchar * message,
-        gpointer user_data)
-    {
-        // Игнорируем всё, что содержит "Gtk" или является предупреждением/критикой
-        if (log_domain && (g_strcmp0(log_domain, "Gtk") == 0 ||
-            g_strcmp0(log_domain, "Gtk-WARNING") == 0))
-        {
-            return; // Полностью подавляем
-        }
 
-        // Если нужно подавить только WARNING и CRITICAL, раскомментируйте следующее:
-        // if (log_level & (G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL)) {
-        //     return;
-        // }
+    // Устанавливаем обработчик для доменов Gtk и GLib-GObject
+    g_log_set_handler("Gtk",
+        (GLogLevelFlags)(G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION),
+        (GLogFunc)glib_log_filter,
+        NULL);
+    g_log_set_handler("GLib-GObject",
+        (GLogLevelFlags)(G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION),
+        (GLogFunc)glib_log_filter,
+        NULL);
 
-        // Для всех остальных сообщений — стандартный вывод
-        g_log_default_handler(log_domain, log_level, message, user_data);
-    }
     setenv("G_MESSAGES_DEBUG", "0", 1);
     setenv("GTK_DEBUG", "0", 1);
     setenv("NO_AT_BRIDGE", "1", 1);
