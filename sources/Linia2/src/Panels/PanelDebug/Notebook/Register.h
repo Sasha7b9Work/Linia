@@ -191,8 +191,8 @@ protected:
 
 private:
 
-    KnobWidget *knob = nullptr;                 // Ручка установки значения
-    SliderInt *slider_value = nullptr;          // Ползунок установки значения
+    KnobWidget *knob = nullptr;         // Ручка установки значения
+    SliderInt *slider = nullptr;        // Ползунок установки значения
 
     void OnEventKnob(wxCommandEvent &);
     void OnEventSlider(wxCommandEvent &);
