@@ -765,6 +765,7 @@ void RegDAC::Unpack()
 
 void RegDAC::SetValueToKnobAndSlider()
 {
+    return;
     int max_value = (1 << NumBitsValue()) - 1;
 
     int new_value = (int)((float)GetValueDAC() * 100.0f / (float)max_value + 0.5f);
