@@ -591,9 +591,9 @@ void RegDAC::OnEventKnob(wxCommandEvent &event)
 
         uint new_value = (uint)((float)max_value * (float)event.GetInt() / 100.0f + 0.5f);
 
-        if (GetValue() != new_value)
+        if(GetValueDAC() != new_value)
         {
-            SetValueToBits(new_value, FirstBitValue(), NumBitsValue());
+            SetValueDAC(new_value);
         }
     }
 
@@ -609,9 +609,9 @@ void RegDAC::OnEventSlider(wxCommandEvent &event)
 
         uint new_value = (uint)((float)max_value * (float)slider_value->GetValue() / 100.0f + 0.5f);
 
-        if (GetValue() != new_value)
+        if (GetValueDAC() != new_value)
         {
-            SetValueToBits(new_value, FirstBitValue(), NumBitsValue());
+            SetValueDAC(new_value);
         }
     }
 
@@ -629,14 +629,6 @@ int RegDAC::NumBitsValue() const
 {
     return GetChip()->BitDepth() - 4;
 }
-
-
-//bool Register::Enable(bool enable)
-//{
-////    painter->SetEnabled(enable);
-//
-//    return wxPanel::Enable(enable);
-//}
 
 
 uint Register::GetValue() const
@@ -785,7 +777,7 @@ void RegDAC::SetValueToKnobAndSlider()
 {
     int max_value = (1 << NumBitsValue()) - 1;
 
-    int new_value = (int)((float)GetValueFromBits(FirstBitValue(), NumBitsValue()) * 100.0f / (float)max_value + 0.5f);
+    int new_value = (int)((float)GetValueDAC() * 100.0f / (float)max_value + 0.5f);
 
     if (new_value == knob->GetValue())
     {
@@ -807,4 +799,16 @@ void RegDAC::SetValueToKnobAndSlider()
 void RegDAC::OnEventUpdateComboCommandsAndModes()
 {
     SetValueToKnobAndSlider();
+}
+
+
+uint RegDAC::GetValueDAC() const
+{
+    return GetValueFromBits(FirstBitValue(), NumBitsValue());
+}
+
+
+void RegDAC::SetValueDAC(uint value)
+{
+    SetValueToBits(value, FirstBitValue(), NumBitsValue());
 }
