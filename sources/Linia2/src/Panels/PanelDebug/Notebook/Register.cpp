@@ -18,7 +18,7 @@ namespace ComboRange
 }
 
 
-Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, bool need_knob) :
+Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip) :
     wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
     chip(_chip)
 {
@@ -73,24 +73,6 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, bool n
     Bind(wxEVT_TIMER, &Register::OnEventTimerAutoSend, this);
 
     timerAutoSend.SetOwner(this, timerAutoSend.GetId());
-
-    if (need_knob)
-    {
-        const int d = 10;
-
-        knob = new KnobWidget(painter, 0, 100, 50, { painter->GetSize().x - d - 70, d });
-
-        knob->Bind(wxEVT_SLIDER, &RegAD5543::OnEventKnob, this);
-
-        slider_value = new SliderInt(painter, { painter->BitX(chip->BitDepth() - 1, chip->BitDepth()), 75 }, chip->BitDepth() * 20, 0, 100, "");
-
-        slider_value->Bind(wxEVT_SLIDER, &RegAD5543::OnEventSlider, this);
-    }
-
-    if (chip->IsDAC())
-    {
-        chbSawDAC = new wxCheckBox(painter, wxID_ANY, wxT("Пила"), { 600, 5 });
-    }
 }
 
 
@@ -272,7 +254,7 @@ void Register::OnEventToggleButton(wxCommandEvent &event)
 
         if (event.GetInt())
         {
-            timerAutoSend.Start((chbSawDAC && chbSawDAC->IsChecked()) ? 100 : 1000);
+            timerAutoSend.Start(1000);
         }
         else
         {
@@ -303,30 +285,11 @@ void Register::WriteValue()
 }
 
 
-void Register::OnEventTimerAutoSend(wxTimerEvent &)
+void Register::OnEventTimerAutoSend(wxTimerEvent &event)
 {
-    if (chbSawDAC && chbSawDAC->IsChecked())
-    {
-        int new_value = knob->GetValue() + direction_saw;
+    WriteValue();
 
-        if (new_value > knob->GetMaxValue())
-        {
-            direction_saw = -direction_saw;
-            new_value = knob->GetMaxValue();
-        }
-        else if (new_value < knob->GetMinValue())
-        {
-            direction_saw = -direction_saw;
-            new_value = knob->GetMinValue();
-        }
-
-        knob->SetValue(new_value);
-        WriteValue();
-    }
-    else
-    {
-        WriteValue();
-    }
+    event.Skip();
 }
 
 
@@ -339,23 +302,6 @@ void Register::SetActiveAcross(bool active, wxWindow *_wnd)
             wnd->Enable(active);
         }
     }
-
-//    for (auto &d : desc[0])
-//    {
-//        if (d.field.text_ctrl_dec)
-//        {
-//            d.field.text_ctrl_dec->Enable(active);
-//        }
-//        if(d.field.combo)
-//        {
-//            d.field.combo->Enable(active);
-//        }
-//    }
-
-//    for (auto *chb : chbox)
-//    {
-//        chb->Enable(active);
-//    }
 
     NotebookDebug::self->EnableSwitching(active);
 
@@ -561,7 +507,7 @@ void Register::UpdateComboCommandsAndModes()
         }
     }
 
-    SetValueToKnob();
+    OnEventUpdateComboCommandsAndModes();
 }
 
 
@@ -598,22 +544,37 @@ void ComboRange::UpdateState(std::vector<ModeDescripion> &mode_desc, const std::
 }
 
 
-RegDAC::RegDAC(wxWindow *parent, Chip *_chip) : Register(parent, "AD5543", _chip, true)
+RegDAC::RegDAC(wxWindow *parent, pchar _title, Chip *_chip) : Register(parent, _title, _chip)
+{
+    const int d = 10;
+
+    knob = new KnobWidget(painter, 0, 100, 50, { painter->GetSize().x - d - 70, d });
+
+    knob->Bind(wxEVT_SLIDER, &RegDAC::OnEventKnob, this);
+
+    slider_value = new SliderInt(painter, { painter->BitX(chip->BitDepth() - 1, chip->BitDepth()), 75 }, chip->BitDepth() * 20, 0, 100, "");
+
+    slider_value->Bind(wxEVT_SLIDER, &RegDAC::OnEventSlider, this);
+
+    Bind(wxEVT_TIMER, &RegDAC::OnEventTimerAutoSend, this);
+}
+
+
+RegAD5531::RegAD5531(wxWindow *_parent, Chip *_chip) :
+    RegDAC(_parent, "AD5531", _chip)
 {
 }
 
 
 RegAD5543::RegAD5543(wxWindow *_parent, Chip *_chip) :
-    RegDAC(_parent, _chip)
+    RegDAC(_parent, "AD5543", _chip)
 {
     std::vector<StructDescription> desc0;
     desc0.emplace_back(StructDescription{ 0, GetChip()->BitDepth() - 4, "", "", { true } });
     SetDescriptionBits(0, desc0);
-
-    GetChip()->WriteWidthToDevice();
 }
 
-void Register::OnEventKnob(wxCommandEvent &event)
+void RegDAC::OnEventKnob(wxCommandEvent &event)
 {
     if (event.GetId() == knob->GetId())
     {
@@ -631,7 +592,7 @@ void Register::OnEventKnob(wxCommandEvent &event)
 }
 
 
-void Register::OnEventSlider(wxCommandEvent &event)
+void RegDAC::OnEventSlider(wxCommandEvent &event)
 {
     if (event.GetId() == slider_value->GetId())
     {
@@ -646,12 +607,6 @@ void Register::OnEventSlider(wxCommandEvent &event)
     }
 
     event.Skip();
-}
-
-
-RegAD5531::RegAD5531(wxWindow *_parent, Chip *_chip) :
-    Register(_parent, "AD5531", _chip, true)
-{
 }
 
 
@@ -761,27 +716,35 @@ void Register::Pack()
 void Register::Unpack()
 {
     SetValue(Config::ReadUint(chip->GetNameDevice()));
+}
 
+
+void RegDAC::Unpack()
+{
+    Register::Unpack();
     SetValueToKnob();
 }
 
 
-void Register::SetValueToKnob()
+void RegDAC::SetValueToKnob()
 {
-    if (knob)
-    {
-        knob->Unbind(wxEVT_SLIDER, &Register::OnEventKnob, this);
-        slider_value->Unbind(wxEVT_SLIDER, &Register::OnEventSlider, this);
+    knob->Unbind(wxEVT_SLIDER, &RegDAC::OnEventKnob, this);
+    slider_value->Unbind(wxEVT_SLIDER, &RegDAC::OnEventSlider, this);
 
-        int max_value = (1 << chip->BitDepth()) - 1;
+    int max_value = (1 << chip->BitDepth()) - 1;
 
-        int new_value = (int)((float)GetValue() * 100.0f / (float)max_value + 0.5f);
+    int new_value = (int)((float)GetValue() * 100.0f / (float)max_value + 0.5f);
 
-        knob->SetValue(new_value);
+    knob->SetValue(new_value);
 
-        slider_value->SetValue(new_value);
+    slider_value->SetValue(new_value);
 
-        knob->Bind(wxEVT_SLIDER, &Register::OnEventKnob, this);
-        slider_value->Bind(wxEVT_SLIDER, &Register::OnEventSlider, this);
-    }
+    knob->Bind(wxEVT_SLIDER, &RegDAC::OnEventKnob, this);
+    slider_value->Bind(wxEVT_SLIDER, &RegDAC::OnEventSlider, this);
+}
+
+
+void RegDAC::OnEventUpdateComboCommandsAndModes()
+{
+    SetValueToKnob();
 }

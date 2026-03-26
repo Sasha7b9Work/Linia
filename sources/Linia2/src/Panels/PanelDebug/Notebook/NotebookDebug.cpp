@@ -47,6 +47,11 @@ void NotebookDebug::AppendNewPage(wxPanel *page)
 void NotebookDebug::Init()
 {
     PageOrangePi::self->Init();
+
+    for (int i = 0; i < DAC::Count; i++)
+    {
+        dacs[i]->WriteWidthToDevice();
+    }
 }
 
 

@@ -86,8 +86,7 @@ public:
     static const int HEIGHT = 155;
 
     Register(wxWindow *parent, const wxString &_title,      // Это написано на изображении
-        Chip *,
-        bool need_knob);                                    // Нужна ли ручка значения
+        Chip *);
 
     void SetNamesBits(const wxArrayString &);
 
@@ -99,7 +98,7 @@ public:
 
     void SetValue(uint);
     void Pack();
-    void Unpack();
+    virtual void Unpack();
 
     // Записать значение в аппаратуру
     void WriteValue();
@@ -109,14 +108,10 @@ public:
         return chip;
     }
 
-private:
+protected:
 
-    KnobWidget *knob = nullptr;                 // Ручка установки значения
-    SliderInt *slider_value = nullptr;          // Ползунок установки значения
     Chip *chip = nullptr;
     PainterRegister *painter = nullptr;
-    wxCheckBox *chbSawDAC = nullptr;            // При включении в ЦАП будет засылаться пила
-    int direction_saw = 1;                      // Направление изменения пилы
 
     wxButton *btnSend = nullptr;                // Однократная засылка
     wxToggleButton *btnAutoSend = nullptr;      // Если кнопка нажата, то каждую секунду происходит запись в данный регистр
@@ -153,8 +148,6 @@ private:
     // Увеличить высоту на dH
     void IncreaseHeight(int dH);
 
-    void SetValueToKnob();
-
     void OnEventTextCtrl(wxCommandEvent &);
     void OnEventCheckBox(wxCommandEvent &);
     // Управление состоянием групп битов
@@ -168,9 +161,7 @@ private:
     // Все элементы кроме wnd будут установлены в состояние active
     void SetActiveAcross(bool active, wxWindow *wnd);
 
-    void OnEventKnob(wxCommandEvent &);
-
-    void OnEventSlider(wxCommandEvent &);
+    virtual void OnEventUpdateComboCommandsAndModes() = 0;
 };
 
 
@@ -179,16 +170,32 @@ class RegFPGA : public Register
 public:
 
     RegFPGA(wxWindow *_parent, Chip *_chip) :
-        Register(_parent, "", _chip, false)
+        Register(_parent, "", _chip)
     {
     }
+
+    virtual void OnEventUpdateComboCommandsAndModes() override { }
 };
 
 
 class RegDAC : public Register
 {
 public:
-    RegDAC(wxWindow *, Chip *_chip);
+    RegDAC(wxWindow *, pchar _title, Chip *_chip);
+
+protected:
+
+    KnobWidget *knob = nullptr;                 // Ручка установки значения
+    SliderInt *slider_value = nullptr;          // Ползунок установки значения
+
+    void OnEventKnob(wxCommandEvent &);
+    void OnEventSlider(wxCommandEvent &);
+
+    virtual void Unpack() override;
+
+    void SetValueToKnob();
+
+    virtual void OnEventUpdateComboCommandsAndModes() override;
 };
 
 
@@ -201,7 +208,7 @@ public:
 };
 
 
-class RegAD5531 : public Register
+class RegAD5531 : public RegDAC
 {
 public:
 
