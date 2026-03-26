@@ -17,6 +17,9 @@
 #include "IPPP/Real/RealIPPP.h"
 #include "IPPP/DeviceFactory.h"
 #include <cstdlib>
+#ifndef WIN32
+    #include <glib.h>
+#endif
 
 
 wxIMPLEMENT_APP(Application);
@@ -47,6 +50,12 @@ bool Application::OnInit()
     // Попытка отключить предупреждения вида "Gtk-WARNING"
     // Устанавливаем переменные окружения для GTK (для Linux)
 #ifndef __WXMSW__
+    g_log_set_handler(NULL, G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL,
+        [](const gchar *log_domain, GLogLevelFlags level,
+            const gchar *message, gpointer user_data)
+        {
+            // Игнорируем предупреждения
+        }, NULL);
     setenv("G_MESSAGES_DEBUG", "0", 1);
     setenv("GTK_DEBUG", "0", 1);
     setenv("NO_AT_BRIDGE", "1", 1);
