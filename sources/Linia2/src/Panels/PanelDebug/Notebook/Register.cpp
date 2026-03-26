@@ -585,7 +585,10 @@ RegAD5443::RegAD5443(wxWindow *_parent, Chip *_chip, const wxString &_functional
 
 void RegDAC::OnEventKnob(wxCommandEvent &event)
 {
-    OnEventChangedControl(event.GetInt());
+    if (event.GetId() == knob->GetId())
+    {
+        OnEventChangedControl(event.GetInt());
+    }
 
     event.Skip();
 }
@@ -593,7 +596,10 @@ void RegDAC::OnEventKnob(wxCommandEvent &event)
 
 void RegDAC::OnEventSlider(wxCommandEvent &event)
 {
-    OnEventChangedControl(event.GetInt());
+    if (event.GetId() == slider->GetId())
+    {
+        OnEventChangedControl(event.GetInt());
+    }
 
     event.Skip();
 }
