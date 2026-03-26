@@ -73,6 +73,7 @@
     #include <ifaddrs.h>
     #include <netdb.h>
     #include <gtk/gtk.h>
+    #include <glib.h>
 #endif
 
 

@@ -17,9 +17,6 @@
 #include "IPPP/Real/RealIPPP.h"
 #include "IPPP/DeviceFactory.h"
 #include <cstdlib>
-#ifndef WIN32
-    #include <glib.h>
-#endif
 
 
 wxIMPLEMENT_APP(Application);
