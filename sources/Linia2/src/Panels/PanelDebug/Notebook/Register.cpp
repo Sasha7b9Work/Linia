@@ -587,14 +587,7 @@ void RegDAC::OnEventKnob(wxCommandEvent &event)
 {
     if (event.GetId() == knob->GetId())
     {
-        int max_value = (1 << NumBitsValue()) - 1;
-
-        uint new_value = (uint)((float)max_value * (float)event.GetInt() / 100.0f + 0.5f);
-
-        if(GetValueDAC() != new_value)
-        {
-            SetValueDAC(new_value);
-        }
+        OnEventChangedControl(event.GetInt());
     }
 
     event.Skip();
@@ -605,17 +598,23 @@ void RegDAC::OnEventSlider(wxCommandEvent &event)
 {
     if (event.GetId() == slider->GetId())
     {
-        int max_value = (1 << NumBitsValue()) - 1;
-
-        uint new_value = (uint)((float)max_value * (float)event.GetInt() / 100.0f + 0.5f);
-
-        if (GetValueDAC() != new_value)
-        {
-            SetValueDAC(new_value);
-        }
+        OnEventChangedControl(event.GetInt());
     }
 
     event.Skip();
+}
+
+
+void RegDAC::OnEventChangedControl(int value)
+{
+    int max_value = (1 << NumBitsValue()) - 1;
+
+    uint new_value = (uint)((float)max_value * (float)value / 100.0f + 0.5f);
+
+    if (GetValueDAC() != new_value)
+    {
+        SetValueDAC(new_value);
+    }
 }
 
 

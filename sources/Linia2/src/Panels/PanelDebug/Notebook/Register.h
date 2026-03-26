@@ -208,6 +208,8 @@ private:
     void SetValueToKnobAndSlider();
 
     virtual void OnEventUpdateComboCommandsAndModes() override;
+
+    void OnEventChangedControl(int);
 };
 
 
