@@ -568,7 +568,7 @@ RegAD5443::RegAD5443(wxWindow *_parent, Chip *_chip, const wxString &_functional
     RegDAC(_parent, "AD5443", _chip, _functional)
 {
     std::vector<StructDescription> desc0;
-    desc0.emplace_back(StructDescription{ 0, GetChip()->BitDepth() - 4, "", "", { true } });
+    desc0.emplace_back(StructDescription{ 0, NumBitsValue(), "", "", { true } });
 
     std::vector<StructDescription::CommandStruct> commands;
     commands.emplace_back(StructDescription::CommandStruct{ 0b0000, "No operation" });
@@ -578,7 +578,7 @@ RegAD5443::RegAD5443(wxWindow *_parent, Chip *_chip, const wxString &_functional
     commands.emplace_back(StructDescription::CommandStruct{ 0b1010, "Clock data to shift register on rising edge" });
     commands.emplace_back(StructDescription::CommandStruct{ 0b1011, "Clear DAC output to zero scale" });
     commands.emplace_back(StructDescription::CommandStruct{ 0b1100, "Clear DAC output to midscale" });
-    desc0.emplace_back(StructDescription{ GetChip()->BitDepth() - 4, 4, "DAC controls Bits", "DAC controls Bits", {true, commands} });
+    desc0.emplace_back(StructDescription{ NumBitsValue(), 4, "DAC controls Bits", "DAC controls Bits", {true, commands} });
 
     SetDescriptionBits(0, desc0);
 }
@@ -587,13 +587,13 @@ void RegDAC::OnEventKnob(wxCommandEvent &event)
 {
     if (event.GetId() == knob->GetId())
     {
-        int max_value = (1 << chip->BitDepth()) - 1;
+        int max_value = (1 << NumBitsValue()) - 1;
 
         uint new_value = (uint)((float)max_value * (float)event.GetInt() / 100.0f + 0.5f);
 
         if (GetValue() != new_value)
         {
-            SetValue(new_value);
+            SetValueToBits(new_value, FirstBitValue(), NumBitsValue());
         }
     }
 
@@ -605,13 +605,13 @@ void RegDAC::OnEventSlider(wxCommandEvent &event)
 {
     if (event.GetId() == slider_value->GetId())
     {
-        int max_value = (1 << chip->BitDepth()) - 1;
+        int max_value = (1 << NumBitsValue()) - 1;
 
         uint new_value = (uint)((float)max_value * (float)slider_value->GetValue() / 100.0f + 0.5f);
 
         if (GetValue() != new_value)
         {
-            SetValue(new_value);
+            SetValueToBits(new_value, FirstBitValue(), NumBitsValue());
         }
     }
 
@@ -619,12 +619,24 @@ void RegDAC::OnEventSlider(wxCommandEvent &event)
 }
 
 
-bool Register::Enable(bool enable)
+int RegDAC::FirstBitValue() const
 {
-//    painter->SetEnabled(enable);
-
-    return wxPanel::Enable(enable);
+    return 0;
 }
+
+
+int RegDAC::NumBitsValue() const
+{
+    return GetChip()->BitDepth() - 4;
+}
+
+
+//bool Register::Enable(bool enable)
+//{
+////    painter->SetEnabled(enable);
+//
+//    return wxPanel::Enable(enable);
+//}
 
 
 uint Register::GetValue() const
@@ -648,6 +660,20 @@ void Register::SetValue(uint new_value)
     for (uint i = 0; i < chboxes.size(); i++)
     {
         chboxes[i]->SetValue((new_value & (1 << i)) != 0);
+    }
+
+    UpdateComboCommandsAndModes();
+    UpdateDecFields();
+}
+
+
+void Register::SetValueToBits(uint new_value, int first_bit, int num_bits)
+{
+    for (int i = first_bit; i < first_bit + num_bits; i++)
+    {
+        chboxes[(uint)i]->SetValue((new_value & 0b1) != 0);
+
+        new_value >>= 1;
     }
 
     UpdateComboCommandsAndModes();

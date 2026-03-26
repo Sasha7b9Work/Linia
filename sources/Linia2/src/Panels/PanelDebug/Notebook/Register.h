@@ -94,9 +94,11 @@ public:
 
     void AppendModes(const wxString &title, const std::vector<ModeDescripion> &);
 
-    virtual bool Enable(bool) override;
+//    virtual bool Enable(bool) override;
 
     void SetValue(uint);
+    // Занести значения в определённые биты
+    void SetValueToBits(uint, int first_bit, int num_bits);
     void Pack();
     virtual void Unpack();
 
@@ -190,6 +192,12 @@ protected:
 
     void OnEventKnob(wxCommandEvent &);
     void OnEventSlider(wxCommandEvent &);
+
+    // Первый бит поля, где хранится значение
+    int FirstBitValue() const;
+
+    // Столько бит занимает поле со значением
+    int NumBitsValue() const;
 
     virtual void Unpack() override;
 
