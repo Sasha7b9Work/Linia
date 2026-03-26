@@ -19,7 +19,7 @@ PageChannelC::PageChannelC(wxNotebook *parent) :
     self = this;
 
     {
-        RegAD5543 *dac1 = new RegAD5543(this, dacs[1]);
+        RegAD5443 *dac1 = new RegAD5443(this, dacs[1]);
 
         AppendRegister(dac1);
     }
@@ -72,7 +72,7 @@ PageChannelC::PageChannelC(wxNotebook *parent) :
     }
 
     {
-        RegAD5543 *dac0 = new RegAD5543(this, dacs[0]);
+        RegAD5443 *dac0 = new RegAD5443(this, dacs[0]);
 
         AppendRegister(dac0);
     }

@@ -552,11 +552,9 @@ RegDAC::RegDAC(wxWindow *parent, pchar _title, Chip *_chip) : Register(parent, _
 
     knob->Bind(wxEVT_SLIDER, &RegDAC::OnEventKnob, this);
 
-    slider_value = new SliderInt(painter, { painter->BitX(chip->BitDepth() - 1, chip->BitDepth()), 75 }, chip->BitDepth() * 20, 0, 100, "");
+    slider_value = new SliderInt(painter, { painter->BitX(chip->BitDepth() - 5, chip->BitDepth()), 75 }, (chip->BitDepth() - 4) * 20, 0, 100, "");
 
     slider_value->Bind(wxEVT_SLIDER, &RegDAC::OnEventSlider, this);
-
-    Bind(wxEVT_TIMER, &RegDAC::OnEventTimerAutoSend, this);
 }
 
 
@@ -566,11 +564,22 @@ RegAD5531::RegAD5531(wxWindow *_parent, Chip *_chip) :
 }
 
 
-RegAD5543::RegAD5543(wxWindow *_parent, Chip *_chip) :
-    RegDAC(_parent, "AD5543", _chip)
+RegAD5443::RegAD5443(wxWindow *_parent, Chip *_chip) :
+    RegDAC(_parent, "AD5443", _chip)
 {
     std::vector<StructDescription> desc0;
     desc0.emplace_back(StructDescription{ 0, GetChip()->BitDepth() - 4, "", "", { true } });
+
+    std::vector<StructDescription::CommandStruct> commands;
+    commands.emplace_back(StructDescription::CommandStruct{ 0b0000, "No operation" });
+    commands.emplace_back(StructDescription::CommandStruct{ 0b0001, "Load and update" });
+    commands.emplace_back(StructDescription::CommandStruct{ 0b0010, "Initiate readback" });
+    commands.emplace_back(StructDescription::CommandStruct{ 0b1001, "Daisy-chain disable" });
+    commands.emplace_back(StructDescription::CommandStruct{ 0b1010, "Clock data to shift register on rising edge" });
+    commands.emplace_back(StructDescription::CommandStruct{ 0b1011, "Clear DAC output to zero scale" });
+    commands.emplace_back(StructDescription::CommandStruct{ 0b1100, "Clear DAC output to midscale" });
+    desc0.emplace_back(StructDescription{ GetChip()->BitDepth() - 4, 4, "DAC controls Bits", "DAC controls Bits", {true, commands} });
+
     SetDescriptionBits(0, desc0);
 }
 

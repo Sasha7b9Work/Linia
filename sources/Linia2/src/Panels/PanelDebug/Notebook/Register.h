@@ -199,12 +199,12 @@ protected:
 };
 
 
-class RegAD5543 : public RegDAC
+class RegAD5443 : public RegDAC
 {
 public:
 
     // Если need_knob, то рисуем ручку
-    RegAD5543(wxWindow *, Chip *_chip);
+    RegAD5443(wxWindow *, Chip *_chip);
 };
 
 
