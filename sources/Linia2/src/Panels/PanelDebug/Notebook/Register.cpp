@@ -681,6 +681,26 @@ void Register::SetValueToBits(uint new_value, int first_bit, int num_bits)
 }
 
 
+uint Register::GetValueFromBits(int first_bit, int num_bits) const
+{
+    uint result = 0;
+
+    uint mask = 1;
+
+    for (int i = first_bit; i < first_bit + num_bits; i++)
+    {
+        if (chboxes[(uint)i]->IsChecked())
+        {
+            result |= mask;
+        }
+
+        mask <<= 1;
+    }
+
+    return result;
+}
+
+
 CheckBoxBit::CheckBoxBit(wxWindow *parent, const wxPoint &pos, const wxSize &size) :
     Painter(parent, pos, size)
 {
@@ -757,18 +777,23 @@ void Register::Unpack()
 void RegDAC::Unpack()
 {
     Register::Unpack();
-    SetValueToKnob();
+    SetValueToKnobAndSlider();
 }
 
 
-void RegDAC::SetValueToKnob()
+void RegDAC::SetValueToKnobAndSlider()
 {
+    int max_value = (1 << NumBitsValue()) - 1;
+
+    int new_value = (int)((float)GetValueFromBits(FirstBitValue(), NumBitsValue()) * 100.0f / (float)max_value + 0.5f);
+
+    if (new_value == knob->GetValue())
+    {
+        return;
+    }
+
     knob->Unbind(wxEVT_SLIDER, &RegDAC::OnEventKnob, this);
     slider_value->Unbind(wxEVT_SLIDER, &RegDAC::OnEventSlider, this);
-
-    int max_value = (1 << chip->BitDepth()) - 1;
-
-    int new_value = (int)((float)GetValue() * 100.0f / (float)max_value + 0.5f);
 
     knob->SetValue(new_value);
 
@@ -781,5 +806,5 @@ void RegDAC::SetValueToKnob()
 
 void RegDAC::OnEventUpdateComboCommandsAndModes()
 {
-    SetValueToKnob();
+    SetValueToKnobAndSlider();
 }

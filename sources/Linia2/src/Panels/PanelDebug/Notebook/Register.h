@@ -99,6 +99,7 @@ public:
     void SetValue(uint);
     // Занести значения в определённые биты
     void SetValueToBits(uint, int first_bit, int num_bits);
+    uint GetValueFromBits(int first_bit, int num_bits) const;
     void Pack();
     virtual void Unpack();
 
@@ -201,7 +202,7 @@ protected:
 
     virtual void Unpack() override;
 
-    void SetValueToKnob();
+    void SetValueToKnobAndSlider();
 
     virtual void OnEventUpdateComboCommandsAndModes() override;
 };
