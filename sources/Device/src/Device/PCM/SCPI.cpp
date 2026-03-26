@@ -247,7 +247,7 @@ bool PCM::SCPI::Func_DAC(pchar command)
 
         char *pos = nullptr;
 
-        uint length = std::strtoul(command, &pos, 16);
+        uint length = std::strtoul(command, &pos, 10);
 
         if(SU::CharIs(*pos, " :"))
         {
