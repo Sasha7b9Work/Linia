@@ -56,6 +56,27 @@ bool Application::OnInit()
         {
             // Игнорируем предупреждения
         }, NULL);
+    // Функция-фильтр для логов
+    void glib_log_filter(const gchar * log_domain,
+        GLogLevelFlags log_level,
+        const gchar * message,
+        gpointer user_data)
+    {
+        // Игнорируем всё, что содержит "Gtk" или является предупреждением/критикой
+        if (log_domain && (g_strcmp0(log_domain, "Gtk") == 0 ||
+            g_strcmp0(log_domain, "Gtk-WARNING") == 0))
+        {
+            return; // Полностью подавляем
+        }
+
+        // Если нужно подавить только WARNING и CRITICAL, раскомментируйте следующее:
+        // if (log_level & (G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL)) {
+        //     return;
+        // }
+
+        // Для всех остальных сообщений — стандартный вывод
+        g_log_default_handler(log_domain, log_level, message, user_data);
+    }
     setenv("G_MESSAGES_DEBUG", "0", 1);
     setenv("GTK_DEBUG", "0", 1);
     setenv("NO_AT_BRIDGE", "1", 1);
