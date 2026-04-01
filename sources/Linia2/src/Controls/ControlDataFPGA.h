@@ -8,10 +8,6 @@ class PainterDataFPGA : public Painter
 public:
 
     PainterDataFPGA(wxWindow *, const wxSize &);
-
-private:
-
-    virtual void OnPaint(wxPaintEvent &) override;
 };
 
 
@@ -23,9 +19,13 @@ public:
 
     ControlDataFPGA(wxWindow *, const wxPoint &);
 
+    void SetMax(int);
+
+    void Update();
+
 private:
 
     PainterDataFPGA *painter = nullptr;
-
     wxToggleButton *btnScale = nullptr;
+    int max = (1 << 18) - 1;
 };

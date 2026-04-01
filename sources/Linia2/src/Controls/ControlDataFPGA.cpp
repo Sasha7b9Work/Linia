@@ -9,18 +9,6 @@ PainterDataFPGA::PainterDataFPGA(wxWindow *parent, const wxSize &size) :
 }
 
 
-void PainterDataFPGA::OnPaint(wxPaintEvent &event)
-{
-    BeginPaint(*wxWHITE);
-
-    EndPaint();
-
-    Painter::OnPaint(event);
-
-    event.Skip();
-}
-
-
 ControlDataFPGA::ControlDataFPGA(wxWindow *parent, const wxPoint &position) :
     wxPanel(parent, wxID_ANY, position, SIZE, wxBORDER_SIMPLE)
 {
@@ -37,4 +25,18 @@ ControlDataFPGA::ControlDataFPGA(wxWindow *parent, const wxPoint &position) :
     btnScale = new wxToggleButton(this, wxID_ANY, "S", { 1 + size.x, 1 }, { 18, 18 });
 
     btnScale->SetToolTip("Изменение масштаба - автоматический или постоянный");
+}
+
+
+void ControlDataFPGA::SetMax(int _max)
+{
+    max = _max;
+
+    Update();
+}
+
+
+void ControlDataFPGA::Update()
+{
+    painter->Refresh();
 }

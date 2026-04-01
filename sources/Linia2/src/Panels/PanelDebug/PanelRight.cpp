@@ -43,6 +43,8 @@ PanelRight::PanelRight(wxWindow *parent) :
         data[i] = new ControlDataFPGA(this, { 10, 130 + i * 95 });
     }
 
+    data[4]->SetMax((1 << 8) - 1);
+
     Fit();
     Layout();
 }
