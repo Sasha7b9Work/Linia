@@ -15,14 +15,14 @@ ControlDataFPGA::ControlDataFPGA(wxWindow *parent, const wxPoint &position) :
     SetSize(SIZE);
 
     wxSize size{ SIZE };
-    size.x -= 20;
+    size.x -= 2;
     size.y -= 2;
 
     painter = new PainterDataFPGA(this, size);
 
-    painter->SetPosition({ 1, 1 });
+    painter->SetPosition({ 0, 0 });
 
-    btnScale = new wxToggleButton(this, wxID_ANY, "S", { 1 + size.x, 1 }, { 17, 17 });
+    btnScale = new wxToggleButton(painter, wxID_ANY, "S", { size.x - 17, 0 }, { 17, 17 });
 
     btnScale->SetToolTip("Изменение масштаба - автоматический или постоянный");
 
@@ -65,7 +65,7 @@ void ControlDataFPGA::Draw(int data[200])
         }
     }
 
-    painter->gc->DrawText(wxString::Format("%d", min_value), {0.0, (double)(painter->GetSize().y - 15)});
+    painter->gc->DrawText(wxString::Format("%d", min_value), {0.0, (double)(painter->GetSize().y - 14)});
 
     painter->gc->DrawText(wxString::Format("%d", max_value), {0.0, -3.0});
 
