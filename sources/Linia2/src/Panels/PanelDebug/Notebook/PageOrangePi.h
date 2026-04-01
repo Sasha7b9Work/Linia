@@ -46,15 +46,6 @@ private:
     // SPI
     wxButton *btnSendSPI = nullptr;
 
-    // FPGA
-    wxTextCtrl *_txtNumberMeas = nullptr;
-    wxTextCtrl *_txtNumberErrors = nullptr;
-    wxTextCtrl *_txtReadData = nullptr;
-    int valueMeas = 0;
-    int numErrors = 0;
-    uint16 values[5];           // 5-е значение - контрольная сумма
-    uint time_read;
-
     // Ручка
     wxTextCtrl *_txtKA = nullptr;
     wxTextCtrl *_txtKB = nullptr;
@@ -114,7 +105,6 @@ private:
     static void FuncUpdateUART();       // Обработка принятых данных по UART в Update
 
     static void ThreadFunc();           // Главный поток
-    static void ThreadFuncFPGA();       // Обработка ПЛИС в главном потоке
     static void ThreadFuncEncoder();    // Обработка ручки в главном потоке
     static uint8 CalculateCRC(uint16 values[4]);
     static bool thread_is_running;

@@ -26,22 +26,6 @@ PageOrangePi::PageOrangePi(wxNotebook *parent) :
 
     wxPanel::SetName("Orange Pi 5");
 
-//    wxStaticBox *boxGPIO = CreateBoxGPIO();
-
-    wxStaticBox *boxFPGA = new wxStaticBox(this, wxID_ANY, "FPGA",
-        (boxGPIO != nullptr) ? wxPoint{ boxGPIO->GetPosition().x, boxGPIO->GetPosition().y + boxGPIO->GetSize().y + 10 } : wxPoint{10, 300},
-        {400, 270});
-
-    {
-        new wxStaticText(boxFPGA, wxID_ANY, "Кол-во измерений", { 10, 20 });
-        _txtNumberMeas = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 20 });
-
-        new wxStaticText(boxFPGA, wxID_ANY, "Кол-во ошибок", { 10, 50 });
-        _txtNumberErrors = new wxTextCtrl(boxFPGA, wxID_ANY, "0", { 150, 50 });
-
-        _txtReadData = new wxTextCtrl(boxFPGA, wxID_ANY, " ", { 10, 80 }, { 300, 20 });
-    }
-
     wxStaticBox *boxUART = new wxStaticBox(this, wxID_ANY, "UART",
         (boxGPIO != nullptr) ? wxPoint{ boxGPIO->GetPosition().x + boxGPIO->GetSize().x + 10, 10 } : wxPoint{10, 10},
         { 200, 270 });
@@ -328,8 +312,6 @@ void PageOrangePi::ThreadFunc()
         {
             ThreadFuncEncoder();
         }
-
-        ThreadFuncFPGA();
     }
 }
 
@@ -392,12 +374,6 @@ void PageOrangePi::PeriodicTask()
         PageOrangePi::self->_txtKA->SetValue(wxString::Format("%d", valueKA));
         PageOrangePi::self->_txtKB->SetValue(wxString::Format("%d", valueKB));
     }
-
-    PageOrangePi::self->_txtNumberMeas->SetValue(wxString::Format("%d", valueMeas));
-
-    PageOrangePi::self->_txtNumberErrors->SetValue(wxString::Format("%d", numErrors));
-
-    PageOrangePi::self->_txtReadData->SetValue(wxString::Format("%u %u %u %u, crc=%u, %u ms", values[0], values[1], values[2], values[3], values[4], time_read));
 
     FuncUpdateUART();
 }
@@ -467,85 +443,6 @@ uint8 PageOrangePi::CalculateCRC(uint16 values[4])
     uint8 crc = (uint8)(xor01 ^ xor23);
 
     return crc;
-}
-
-
-void PageOrangePi::ThreadFuncFPGA()
-{
-    static bool prev = false;
-
-    if (pinFIFO_FULL.Get() && prev == false)
-    {
-        gpiod_line *infoMOSI = GPIO::GetInputPinInfo(Pin::In_SPI_MOSI)->hw.line;
-        gpiod_line *infoCS = GPIO::GetOutputPinInfo(Pin::Out_SPI_CS)->hw.line;
-        gpiod_line *infoREQ = GPIO::GetOutputPinInfo(Pin::Out_REQ_RD)->hw.line;
-
-        TimeMeterMS meter;
-
-        uint16 values[200][4];
-
-        for (int i = 0; i < 200; i++)
-        {
-            PinOut::Set(infoCS, 0);
-
-            for (int num_adc = 0; num_adc < 4; num_adc++)
-            {
-                uint16 value = 0;
-
-                for (int num_bit = 15; num_bit >= 0; num_bit--)
-                {
-                    PinOut::Set(infoREQ, 1);
-
-                    if (PinIn::GetHardware(infoMOSI))
-                    {
-                        value |= (1 << num_bit);
-                    }
-
-                    PinOut::Set(infoREQ, 0);
-                }
-
-                values[i][num_adc] = value;
-            }
-
-            uint8 crc_read = 0;
-
-            for (int num_bit = 0; num_bit < 8; num_bit++)
-            {
-                PinOut::Set(infoREQ, 1);
-
-                if (PinIn::GetHardware(infoMOSI))
-                {
-                    crc_read |= (1 << num_bit);
-                }
-
-                PinOut::Set(infoREQ, 0);
-            }
-
-            PinOut::Set(infoCS, 1);
-
-            uint8 crc = CalculateCRC(values[i]);
-
-            if (crc != crc_read)
-            {
-                PageOrangePi::self->numErrors++;
-            }
-
-            if (i == 10)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    PageOrangePi::self->values[j] = values[i][j];
-                }
-                PageOrangePi::self->values[4] = crc_read;
-            }
-        }
-
-        PageOrangePi::self->time_read = (uint)meter.ElapsedMS();
-
-        PageOrangePi::self->valueMeas++;
-    }
-
-    prev = pinFIFO_FULL.Get();
 }
 
 
