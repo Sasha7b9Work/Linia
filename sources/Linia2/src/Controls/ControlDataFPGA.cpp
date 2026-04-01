@@ -33,4 +33,6 @@ ControlDataFPGA::ControlDataFPGA(wxWindow *parent, const wxPoint &position) :
     painter = new PainterDataFPGA(this, size);
 
     painter->SetPosition({ 1, 1 });
+
+    btnScale = new wxToggleButton(this, wxID_ANY, "S", { 1 + size.x, 1 }, { 18, 18 });
 }

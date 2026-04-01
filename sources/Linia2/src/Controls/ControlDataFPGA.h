@@ -26,4 +26,6 @@ public:
 private:
 
     PainterDataFPGA *painter = nullptr;
+
+    wxToggleButton *btnScale = nullptr;
 };
