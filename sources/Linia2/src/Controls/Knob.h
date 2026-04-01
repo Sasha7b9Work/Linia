@@ -98,6 +98,10 @@ private:
     {
         if (dragging && event.LeftIsDown())
         {
+            // ВАЖНО: Возвращаем курсор мыши в исходную позицию
+            // Это создает эффект, что курсор остается на месте при вращении
+            WarpPointer(capturePoint.x, capturePoint.y);
+
             wxPoint currentPos = event.GetPosition();
 
             static float delta = 0.0f;
@@ -120,10 +124,6 @@ private:
                 if (newValue > maxValue) newValue = maxValue;
 
                 SetValue(newValue);
-
-                // ВАЖНО: Возвращаем курсор мыши в исходную позицию
-                // Это создает эффект, что курсор остается на месте при вращении
-                WarpPointer(capturePoint.x, capturePoint.y);
 
                 delta -= (float)((int)delta);
             }
