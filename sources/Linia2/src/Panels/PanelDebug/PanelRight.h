@@ -8,8 +8,6 @@ public:
 
     PanelRight(wxWindow *);
 
-    static PanelRight *self;
-
 private:
 
     wxButton *btnReturn = nullptr;      // Выход в основную панель

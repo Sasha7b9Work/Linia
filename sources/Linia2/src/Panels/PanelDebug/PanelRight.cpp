@@ -8,12 +8,12 @@
 #include "Panels/PanelDebug/Notebook/PageChannelC.h"
 
 
-PanelRight *PanelRight::self = nullptr;
+PanelRight *ThePanelRight = nullptr;
 
 
 PanelRight::PanelRight(wxWindow *parent) : wxPanel(parent)
 {
-    self = this;
+    ThePanelRight = this;
 
     wxSize size_button{ 75, BUTTON_HEIGHT };
 

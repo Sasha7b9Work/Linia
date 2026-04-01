@@ -22,7 +22,7 @@ PanelDebug::PanelDebug(wxWindow *parent) :
 
     sizer->Add(NotebookDebug::self, 1, wxEXPAND);
 
-    sizer->Add(PanelRight::self, 0, wxEXPAND);
+    sizer->Add(ThePanelRight, 0, wxEXPAND);
 
     SetSizer(sizer);
 
