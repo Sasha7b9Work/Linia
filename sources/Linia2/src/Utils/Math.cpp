@@ -99,9 +99,8 @@ std::pair<wxPoint, bool> Math::GetIntersectionY(std::vector<wxPoint> &points, in
 
 int Math::Rand(int min, int max)
 {
-    int range = max - min;
-
-    int value = (std::rand() * std::rand()) % range;
-
-    return min + value;
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dist(min, max);
+    return dist(gen);
 }

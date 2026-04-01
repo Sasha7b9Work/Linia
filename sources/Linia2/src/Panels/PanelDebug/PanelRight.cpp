@@ -77,11 +77,7 @@ void PanelRight::PeriodicTask()
 
             int new_value = points[i - 1] + step;
 
-            if (new_value < 0)
-            {
-                new_value -= 2 * step;
-            }
-            else if (new_value > MAX)
+            if (new_value < 0 || new_value > MAX)
             {
                 new_value -= 2 * step;
             }
