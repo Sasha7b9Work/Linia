@@ -20,7 +20,7 @@ public:
     void DeInit();
 
     // Вызывается при открытой панели отладки
-    void Update();
+    void PeriodicTask();
 
     void Pack();
     void Unpack();

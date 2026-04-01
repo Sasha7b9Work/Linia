@@ -61,9 +61,9 @@ void NotebookDebug::DeInit()
 }
 
 
-void NotebookDebug::Update()
+void NotebookDebug::PeriodicTask()
 {
-    PageOrangePi::self->Update();
+    PageOrangePi::self->PeriodicTask();
 }
 
 

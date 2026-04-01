@@ -8,7 +8,7 @@ public:
 
     PanelRight(wxWindow *);
 
-    ControlDataFPGA *data[5];
+    ControlDataFPGA *data[5];           // Отображение данных, считанных c платы контроллера
 
     void PeriodicTask();
 

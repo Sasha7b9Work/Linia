@@ -12,7 +12,7 @@ public:
 
     void Init();
 
-    void Update();
+    void PeriodicTask();
 
     void DeInit();
 

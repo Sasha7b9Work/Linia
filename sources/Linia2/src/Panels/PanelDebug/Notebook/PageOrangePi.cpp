@@ -375,7 +375,7 @@ void PageOrangePi::FuncUpdateUART()
 }
 
 
-void PageOrangePi::Update()
+void PageOrangePi::PeriodicTask()
 {
     for (auto &str : PageOrangePi::self->gpio_out)
     {
