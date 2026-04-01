@@ -14,6 +14,9 @@ Painter::Painter(wxWindow *parent, const wxPoint &position, const wxSize &_size)
     Bind(wxEVT_PAINT, &Painter::OnPaint, this);
 
     bitmap = new wxBitmap(size);
+
+    Fit();
+    Layout();
 }
 
 

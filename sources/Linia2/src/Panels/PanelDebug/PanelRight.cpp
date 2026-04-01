@@ -11,7 +11,8 @@
 PanelRight *ThePanelRight = nullptr;
 
 
-PanelRight::PanelRight(wxWindow *parent) : wxPanel(parent)
+PanelRight::PanelRight(wxWindow *parent) :
+    wxPanel(parent)
 {
     ThePanelRight = this;
 
@@ -36,6 +37,14 @@ PanelRight::PanelRight(wxWindow *parent) : wxPanel(parent)
     btnStop->Enable(false);
 
     Bind(wxEVT_BUTTON, &PanelRight::OnEventButton, this);
+
+    for (int i = 0; i < 5; i++)
+    {
+        data[i] = new ControlDataFPGA(this, { 10, 130 + i * 95 });
+    }
+
+    Fit();
+    Layout();
 }
 
 

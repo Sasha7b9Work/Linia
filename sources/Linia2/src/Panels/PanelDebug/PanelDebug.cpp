@@ -27,6 +27,7 @@ PanelDebug::PanelDebug(wxWindow *parent) :
     SetSizer(sizer);
 
     wxPanel::Layout();
+    wxPanel::Fit();
 
     Unpack();
 }

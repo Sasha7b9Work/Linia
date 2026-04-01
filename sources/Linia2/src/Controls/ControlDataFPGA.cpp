@@ -3,15 +3,34 @@
 #include "Controls/ControlDataFPGA.h"
 
 
-PainterDataFPGA::PainterDataFPGA(wxWindow *parent) : Painter(parent, { 0, 0 }, { 100, 100 })
+PainterDataFPGA::PainterDataFPGA(wxWindow *parent, const wxSize &size) :
+    Painter(parent, { 0, 0 }, size)
 {
+}
 
+
+void PainterDataFPGA::OnPaint(wxPaintEvent &event)
+{
+    BeginPaint(*wxWHITE);
+
+    EndPaint();
+
+    Painter::OnPaint(event);
+
+    event.Skip();
 }
 
 
 ControlDataFPGA::ControlDataFPGA(wxWindow *parent, const wxPoint &position) :
-    wxPanel(parent, wxID_ANY, position, SIZE),
-    painter{ this }
+    wxPanel(parent, wxID_ANY, position, SIZE, wxBORDER_SIMPLE)
 {
+    SetSize(SIZE);
 
+    wxSize size{ SIZE };
+    size.x -= 20;
+    size.y -= 2;
+
+    painter = new PainterDataFPGA(this, size);
+
+    painter->SetPosition({ 1, 1 });
 }

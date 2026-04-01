@@ -6,8 +6,12 @@
 class PainterDataFPGA : public Painter
 {
 public:
-    PainterDataFPGA(wxWindow *);
+
+    PainterDataFPGA(wxWindow *, const wxSize &);
+
 private:
+
+    virtual void OnPaint(wxPaintEvent &) override;
 };
 
 
@@ -15,11 +19,11 @@ class ControlDataFPGA : public wxPanel
 {
 public:
 
-    const wxSize SIZE{ 200, 200 };
+    const wxSize SIZE{ 185, 85 };
 
     ControlDataFPGA(wxWindow *, const wxPoint &);
 
 private:
 
-    PainterDataFPGA painter;
+    PainterDataFPGA *painter = nullptr;
 };
