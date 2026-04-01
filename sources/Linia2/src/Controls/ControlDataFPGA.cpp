@@ -22,7 +22,7 @@ ControlDataFPGA::ControlDataFPGA(wxWindow *parent, const wxPoint &position) :
 
     painter->SetPosition({ 1, 1 });
 
-    btnScale = new wxToggleButton(this, wxID_ANY, "S", { 1 + size.x, 1 }, { 18, 18 });
+    btnScale = new wxToggleButton(this, wxID_ANY, "S", { 1 + size.x, 1 }, { 17, 17 });
 
     btnScale->SetToolTip("Изменение масштаба - автоматический или постоянный");
 
