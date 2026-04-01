@@ -1,4 +1,4 @@
-// 2026/04/01 14:24:03 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2026/04/01 14:24:03 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Controls/ControlDataFPGA.h"
 
@@ -35,4 +35,6 @@ ControlDataFPGA::ControlDataFPGA(wxWindow *parent, const wxPoint &position) :
     painter->SetPosition({ 1, 1 });
 
     btnScale = new wxToggleButton(this, wxID_ANY, "S", { 1 + size.x, 1 }, { 18, 18 });
+
+    btnScale->SetToolTip("Изменение масштаба - автоматический или постоянный");
 }
