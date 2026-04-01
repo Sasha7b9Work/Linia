@@ -6,6 +6,8 @@
 #include "IPPP/IDevice.h"
 #include "Panels/PanelDebug/Notebook/PageFPGA.h"
 #include "Panels/PanelDebug/Notebook/PageChannelC.h"
+#include "Utils/Math.h"
+#include "Utils/Timer.h"
 
 
 PanelRight *ThePanelRight = nullptr;
@@ -47,6 +49,48 @@ PanelRight::PanelRight(wxWindow *parent) :
 
     Fit();
     Layout();
+}
+
+
+void PanelRight::PeriodicTask()
+{
+    static TimerMS timer;
+
+    if (timer.ElapsedTime() < 1000)
+    {
+        return;
+    }
+
+    timer.Reset();
+
+    static int MAX = ((1 << 18) - 1);
+
+    int points[200];
+
+    for (int d = 0; d < 4; d++)
+    {
+        points[0] = (std::rand() * std::rand()) % MAX;
+
+        for (int i = 1; i < 200; i++)
+        {
+            int step = Math::Rand(-10000, 10000);
+
+            int new_value = points[i - 1] + step;
+
+            if (new_value < 0)
+            {
+                new_value -= 2 * step;
+            }
+            else if (new_value > MAX)
+            {
+                new_value -= 2 * step;
+            }
+
+            points[i] = new_value;
+        }
+
+        data[d]->SetData(points);
+    }
 }
 
 

@@ -44,6 +44,8 @@ bool PanelDebug::Show(bool show)
 void PanelDebug::Update()
 {
     NotebookDebug::self->Update();
+
+    ThePanelRight->PeriodicTask();
 }
 
 

@@ -71,6 +71,7 @@ void ControlDataFPGA::Draw(int data[200])
 
     if (data)
     {
+        painter->gc->SetPen(*wxBLACK_PEN);
         painter->gc->SetBrush(*wxBLACK_BRUSH);
 
         float scale_y = (float)painter->GetSize().y / (float)(max_value - min_value);

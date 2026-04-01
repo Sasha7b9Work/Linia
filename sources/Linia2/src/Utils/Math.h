@@ -15,4 +15,6 @@ namespace Math
 
     // Возвращает пересечение кривой с горизонтальной линией по координате y
     std::pair<wxPoint, bool> GetIntersectionY(std::vector<wxPoint> &, int y);
+
+    int Rand(int min, int max);
 }

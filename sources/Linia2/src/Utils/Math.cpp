@@ -95,3 +95,13 @@ std::pair<wxPoint, bool> Math::GetIntersectionY(std::vector<wxPoint> &points, in
     // Если пересечение не найдено, возвращаем точку с x=0 и false
     return std::make_pair(wxPoint(0, y), false);
 }
+
+
+int Math::Rand(int min, int max)
+{
+    int range = max - min;
+
+    int value = (std::rand() * std::rand()) % range;
+
+    return min + value;
+}

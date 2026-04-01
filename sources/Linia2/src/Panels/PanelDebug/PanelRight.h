@@ -10,6 +10,8 @@ public:
 
     ControlDataFPGA *data[5];
 
+    void PeriodicTask();
+
 private:
 
     wxButton *btnReturn = nullptr;      // Выход в основную панель
