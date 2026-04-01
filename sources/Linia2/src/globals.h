@@ -11,6 +11,7 @@ class PanelConfig;
 class PanelCalc;
 class WindowCursors;
 struct AutoCursors;
+class PanelDebug;
 
 
 extern AutoCursors   *TheAutoCursors;
@@ -24,3 +25,5 @@ extern PanelCalc     *ThePanelCalc;
 extern WindowCursors *TheWindowCursors;     // Настройки курсоров
 
 extern PanelErrors   *ThePanelErrors;
+
+extern PanelDebug    *ThePanelDebug;

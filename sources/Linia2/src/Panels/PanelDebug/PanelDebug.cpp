@@ -6,13 +6,13 @@
 #include "Panels/PanelDebug/PanelRight.h"
 
 
-PanelDebug *PanelDebug::self = nullptr;
+PanelDebug *ThePanelDebug = nullptr;
 
 
 PanelDebug::PanelDebug(wxWindow *parent) :
     Panel(parent, 0, 0, MainWindow::WIDTH, MainWindow::HEIGHT)
 {
-    self = this;
+    ThePanelDebug = this;
 
     new NotebookDebug(this);
 
