@@ -54,9 +54,9 @@ PanelRight::PanelRight(wxWindow *parent) :
 
 void PanelRight::PeriodicTask()
 {
-    static TimerMS timer;
+    static TimeMeterMS timer;
 
-    if (timer.ElapsedTime() < 1000)
+    if (timer.ElapsedMS() < 1000)
     {
         return;
     }

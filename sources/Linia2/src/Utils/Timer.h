@@ -11,23 +11,6 @@ namespace Timer
 }
 
 
-class TimerMS
-{
-public:
-
-    TimerMS() { Reset(); }
-
-    void Reset();
-
-    uint ElapsedTime();
-
-private:
-
-    uint time_reset = 0;
-};
-
-
-
 // Структура для отсчёта времени
 struct TimeMeterMS
 {
@@ -43,9 +26,7 @@ struct TimeMeterMS
 
 private:
 
-    clock_t time_reset;        // От этого времени отсчитывается ElapsedTime()
-
-    clock_t time_response;     // После этого времени нужно вернуть true в IsFinished()
+    std::chrono::high_resolution_clock::time_point time_reset;      // От этого времени отсчитывается ElapsedTime()
 };
 
 

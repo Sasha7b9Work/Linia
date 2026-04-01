@@ -3,22 +3,9 @@
 #include "Utils/Timer.h"
 
 
-void TimerMS::Reset()
-{
-    time_reset = (uint)std::clock();
-}
-
-
-uint TimerMS::ElapsedTime()
-{
-    return std::clock() - time_reset;
-}
-
-
 void TimeMeterMS::Reset()
 {
-    time_reset = std::clock();
-    time_response = time_reset;
+    time_reset = std::chrono::high_resolution_clock::now();
 }
 
 
@@ -32,6 +19,14 @@ float TimeMeterNS::ElapsedNS() const
 {
     auto time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(time - time_reset);
+    return (float)duration.count();
+}
+
+
+float TimeMeterMS::ElapsedMS() const
+{
+    auto time = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(time - time_reset);
     return (float)duration.count();
 }
 
@@ -57,10 +52,4 @@ void Timer::PauseOnMS(uint timeMS)
     while (CurrentTimeMS() < time_end)
     {
     }
-}
-
-
-float TimeMeterMS::ElapsedMS() const
-{
-    return (1000.0f * (float)(std::clock() - time_reset)) / CLOCKS_PER_SEC;
 }
