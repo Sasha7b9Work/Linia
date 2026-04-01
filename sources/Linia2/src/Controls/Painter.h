@@ -22,10 +22,11 @@ public:
     void DrawRectangle(int x, int y, int w, int h, const wxColor & = wxNullColour);
     void DrawBitmap(int x, int y, const wxBitmap &, const wxColor &alpha = wxNullColour);
 
+    wxGraphicsContext *gc = nullptr;
+
 protected:
 
     wxBitmap *bitmap = nullptr;
-    wxGraphicsContext *gc = nullptr;
     wxMemoryDC dc;
     wxColor color;
     wxSize size;

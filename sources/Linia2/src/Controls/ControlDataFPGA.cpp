@@ -25,6 +25,8 @@ ControlDataFPGA::ControlDataFPGA(wxWindow *parent, const wxPoint &position) :
     btnScale = new wxToggleButton(this, wxID_ANY, "S", { 1 + size.x, 1 }, { 18, 18 });
 
     btnScale->SetToolTip("Изменение масштаба - автоматический или постоянный");
+
+    Update();
 }
 
 
@@ -39,5 +41,12 @@ void ControlDataFPGA::SetMax(int _max)
 void ControlDataFPGA::Update()
 {
     painter->BeginPaint(*wxLIGHT_GREY);
+
+    painter->gc->SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL), *wxBLACK);
+
+    painter->gc->DrawText("0", { 1.0, (double)(painter->GetSize().y - 15) });
+
+    painter->gc->DrawText(wxString::Format("%d", max).ToStdString().c_str(), {1.0, 0.0});
+
     painter->EndPaint();
 }
