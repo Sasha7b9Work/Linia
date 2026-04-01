@@ -212,13 +212,5 @@ private:
         int textWidth, textHeight;
         dc.GetTextExtent(maxStr, &textWidth, &textHeight);
         dc.DrawText(maxStr, 0, 0);
-
-        // Рисуем фокус, если есть
-        if (HasFocus())
-        {
-            dc.SetBrush(*wxTRANSPARENT_BRUSH);
-            dc.SetPen(wxPen(*wxBLACK, 1, wxPENSTYLE_DOT));
-            dc.DrawRectangle(0, 0, width, height);
-        }
     }
 };
