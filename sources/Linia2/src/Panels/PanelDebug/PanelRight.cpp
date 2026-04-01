@@ -69,7 +69,7 @@ void PanelRight::PeriodicTask()
 
     for (int d = 0; d < 4; d++)
     {
-        points[0] = (std::rand() * std::rand()) % MAX;
+        points[0] = Math::Rand(0, MAX);
 
         for (int i = 1; i < 200; i++)
         {
