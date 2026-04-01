@@ -26,7 +26,22 @@ ControlDataFPGA::ControlDataFPGA(wxWindow *parent, const wxPoint &position) :
 
     btnScale->SetToolTip("Изменение масштаба - автоматический или постоянный");
 
+    SetMax((1 << 18) - 1);
+
     Draw();
+
+    Bind(wxEVT_TOGGLEBUTTON, &ControlDataFPGA::OnEventToggleButon, this);
+}
+
+
+void ControlDataFPGA::OnEventToggleButon(wxCommandEvent &event)
+{
+    int id = event.GetId();
+
+    if (id == btnScale->GetId())
+    {
+        Draw();
+    }
 }
 
 
@@ -34,11 +49,16 @@ void ControlDataFPGA::SetMax(int _max)
 {
     max = _max;
 
+    for (int i = 0; i < 200; i++)
+    {
+        data[i] = 0;
+    }
+
     Draw();
 }
 
 
-void ControlDataFPGA::Draw(int data[200])
+void ControlDataFPGA::Draw()
 {
     painter->BeginPaint(*wxLIGHT_GREY);
 
@@ -47,7 +67,7 @@ void ControlDataFPGA::Draw(int data[200])
     int min_value = 0;
     int max_value = max;
 
-    if (btnScale->GetValue() && data)
+    if (btnScale->GetValue())
     {
         min_value = max;
         max_value = 0;
@@ -69,26 +89,25 @@ void ControlDataFPGA::Draw(int data[200])
 
     painter->gc->DrawText(wxString::Format("%d", max_value), {0.0, -3.0});
 
-    if (data)
+    painter->gc->SetPen(*wxBLACK_PEN);
+    painter->gc->SetBrush(*wxBLACK_BRUSH);
+
+    float scale_y = (float)painter->GetSize().y / (float)(max_value - min_value);
+
+    for (int i = 0; i < painter->GetSize().x; i++)
     {
-        painter->gc->SetPen(*wxBLACK_PEN);
-        painter->gc->SetBrush(*wxBLACK_BRUSH);
+        int y = (int)((float)(data[i] - min_value) * scale_y);
 
-        float scale_y = (float)painter->GetSize().y / (float)(max_value - min_value);
-
-        for (int i = 0; i < painter->GetSize().x; i++)
-        {
-            int y = (int)((float)(data[i] - min_value) * scale_y);
-
-            painter->gc->DrawRectangle(i, y, 1, 1);
-        }
+        painter->gc->DrawRectangle(i, y, 1, 1);
     }
 
     painter->EndPaint();
 }
 
 
-void ControlDataFPGA::SetData(int data[200])
+void ControlDataFPGA::SetData(int _data[200])
 {
-    Draw(data);
+    std::memcpy(data, _data, sizeof(data[0]) * 200);
+
+    Draw();
 }
