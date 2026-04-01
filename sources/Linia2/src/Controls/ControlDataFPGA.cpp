@@ -38,5 +38,6 @@ void ControlDataFPGA::SetMax(int _max)
 
 void ControlDataFPGA::Update()
 {
-    painter->Refresh();
+    painter->BeginPaint(*wxLIGHT_GREY);
+    painter->EndPaint();
 }
