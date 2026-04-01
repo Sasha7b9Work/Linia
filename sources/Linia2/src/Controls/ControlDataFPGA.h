@@ -21,7 +21,9 @@ public:
 
     void SetMax(int);
 
-    void Update();
+    void Draw(int data[200] = nullptr);
+
+    void SetData(int[200]);
 
 private:
 
