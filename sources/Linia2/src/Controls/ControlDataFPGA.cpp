@@ -51,7 +51,7 @@ void ControlDataFPGA::SetMax(int _max)
 
     for (int i = 0; i < 200; i++)
     {
-        data[i] = 0;
+        data[i] = _max / 2;
     }
 
     Draw();
@@ -98,7 +98,7 @@ void ControlDataFPGA::Draw()
     {
         int y = (int)((float)(data[i] - min_value) * scale_y);
 
-        painter->gc->DrawRectangle(i, y, 1, 1);
+        painter->gc->DrawRectangle(i, painter->GetSize().y - y - 1, 1, 1);
     }
 
     painter->EndPaint();
