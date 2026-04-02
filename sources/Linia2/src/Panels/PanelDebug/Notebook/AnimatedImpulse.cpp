@@ -26,13 +26,13 @@ void AnimatedImpulse::FuncDraw()
     {
         if (meter.ElapsedMS() > 10)
         {
-            meter.Reset();
-
-            x += 5;
+            x += (int)(5.0f * ((float)meter.ElapsedMS() / 10.0f));
             if (x > GetSize().x)
             {
                 x = 0;
             }
+
+            meter.Reset();
         }
 
         _dc.DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
