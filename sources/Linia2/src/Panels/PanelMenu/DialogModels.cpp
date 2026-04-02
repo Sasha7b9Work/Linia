@@ -21,7 +21,7 @@ DialogModels::DialogModels() :
         BTN_NEW, []()
         {
             Model::CreateNew("Untitled");
-            ThePanelModel->Update();
+            ThePanelModel->PeriodicTask();
         },
         BTN_OPEN, []()
         {
@@ -54,7 +54,7 @@ DialogModels::DialogModels() :
                 else
                 {
                     Model::Delete();
-                    ThePanelModel->Update();
+                    ThePanelModel->PeriodicTask();
                 }
             }
 
@@ -71,7 +71,7 @@ DialogModels::DialogModels() :
             if (dialog.ShowModal() == wxID_OK)
             {
                 Model::Delete();
-                ThePanelModel->Update();
+                ThePanelModel->PeriodicTask();
             }
             else
             {

@@ -13,7 +13,7 @@ public:
 
     PanelModel(wxWindow *parent, int x, int w, int h);
 
-    virtual void Update() override;
+    void PeriodicTask();
 
 private:
 

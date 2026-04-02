@@ -37,7 +37,7 @@ void PanelModel::SetName(const wxString &_name)
 }
 
 
-void PanelModel::Update()
+void PanelModel::PeriodicTask()
 {
     if (Model::IsEmpty())
     {
