@@ -14,13 +14,13 @@ public:
         wxWindowBase::SetBackgroundColour(parent->GetBackgroundColour());
 
         // Включаем обработку событий мыши
-        Bind(wxEVT_LEFT_DOWN, &KnobWidget::OnEventMouseLeftDown, this);
-        Bind(wxEVT_LEFT_UP, &KnobWidget::OnMouseLeftUp, this);
-        Bind(wxEVT_MOTION, &KnobWidget::OnMouseMove, this);
-        Bind(wxEVT_MOUSE_CAPTURE_LOST, &KnobWidget::OnMouseCaptureLost, this);
+//        Bind(wxEVT_LEFT_DOWN, &KnobWidget::OnEventMouseLeftDown, this);
+//        Bind(wxEVT_LEFT_UP, &KnobWidget::OnMouseLeftUp, this);
+//        Bind(wxEVT_MOTION, &KnobWidget::OnMouseMove, this);
+//        Bind(wxEVT_MOUSE_CAPTURE_LOST, &KnobWidget::OnMouseCaptureLost, this);
         Bind(wxEVT_PAINT, &KnobWidget::OnPaint, this);
-        Bind(wxEVT_SET_FOCUS, &KnobWidget::OnSetFocus, this);
-        Bind(wxEVT_KILL_FOCUS, &KnobWidget::OnKillFocus, this);
+//        Bind(wxEVT_SET_FOCUS, &KnobWidget::OnSetFocus, this);
+//        Bind(wxEVT_KILL_FOCUS, &KnobWidget::OnKillFocus, this);
 
         // Устанавливаем курсор "рука" при наведении
         wxWindowBase::SetCursor(wxCursor(wxCURSOR_HAND));
