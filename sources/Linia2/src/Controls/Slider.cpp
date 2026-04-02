@@ -35,8 +35,8 @@ SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _
     btnLess->SetBackgroundColour(btnLess->GetBackgroundColour().ChangeLightness(LIGHTNESS));
 
     slider->Bind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
-    btnMore->Bind(wxEVT_LEFT_DOWN, &SliderInt::OnEventMouseDown, this);
-    btnLess->Bind(wxEVT_LEFT_DOWN, &SliderInt::OnEventMouseDown, this);
+//    btnMore->Bind(wxEVT_LEFT_DOWN, &SliderInt::OnEventMouseDown, this);
+//    btnLess->Bind(wxEVT_LEFT_DOWN, &SliderInt::OnEventMouseDown, this);
 //    btnMore->Bind(wxEVT_LEFT_UP, &SliderInt::OnEventMouseUp, this);
 //    btnLess->Bind(wxEVT_LEFT_UP, &SliderInt::OnEventMouseUp, this);
 
