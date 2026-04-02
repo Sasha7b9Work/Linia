@@ -200,7 +200,7 @@ void Application::OnTimer(wxTimerEvent &)
     {
         I_IPPP::GetInstance()->PeriodicTask();
 
-        TheMainWindow->Update();
+        TheMainWindow->PeriodicTask();
 
         mutex.unlock();
     };
