@@ -19,20 +19,6 @@ ValueCheckBox::ValueCheckBox(wxWindow *parent, const wxString &title, const wxPo
     value->Load();
 
     SetValue(value->Get());
-
-//    Bind(wxEVT_CHECKBOX, &ValueCheckBox::OnEventCheckBox, this);
-}
-
-
-void ValueCheckBox::OnEventCheckBox(wxCommandEvent &event)
-{
-    if (event.GetEventObject() == this)
-    {
-        value->Set(event.IsChecked());
-        TheDisplay->Refresh();
-    }
-
-    event.Skip();
 }
 
 

@@ -126,8 +126,6 @@ private:
 
     ValueBool *value = nullptr;
 
-    void OnEventCheckBox(wxCommandEvent &);
-
     // Закрыли, чтобы случайно не вызвать
     virtual void SetValue(bool value) override;
 };
