@@ -42,21 +42,8 @@ void RealIPPP::PressButtonStop()
 }
 
 
-bool RealIPPP::ReadData(
-    std::array<int, MAX_NUMBER_POINTS> &data1,
-    std::array<int, MAX_NUMBER_POINTS> &data2,
-    std::array<int, MAX_NUMBER_POINTS> &data3,
-    std::array<int, MAX_NUMBER_POINTS> &data4
-)
+bool RealIPPP::ReadData(int data[5][MAX_NUMBER_POINTS])
 {
-    std::reference_wrapper<std::array<int, MAX_NUMBER_POINTS>> data[4] =
-    {
-        data1,
-        data2,
-        data3,
-        data4
-    };
-
     if (pinFIFO_FULL.Get())
     {
         return false;                       // Читать нечего - выходим
@@ -99,7 +86,7 @@ bool RealIPPP::ReadData(
         {
             if (num_point < MAX_NUMBER_POINTS)
             {
-                data[i].get()[num_point] = val[i];
+                data[i][num_point] = val[i];
             }
             else
             {

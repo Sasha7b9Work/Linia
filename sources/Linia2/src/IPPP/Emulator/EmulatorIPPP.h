@@ -19,10 +19,5 @@ private:
 
     bool in_process_measuring = false;                  // Устанавливается при нажатии кнопки СТАРТ. Снимается при нажатии кнопки СТОП.
 
-    virtual bool ReadData(
-        std::array<int, 100> &data1,
-        std::array<int, 100> &data2,
-        std::array<int, 100> &data3,
-        std::array<int, 100> &data4
-    ) override;
+    virtual bool ReadData(int data1[5][MAX_NUMBER_POINTS]) override;
 };

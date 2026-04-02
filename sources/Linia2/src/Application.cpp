@@ -239,13 +239,3 @@ void Application::OnButtonStop(bool /*press*/)
 {
 
 }
-
-
-void Application::OnReadData(
-    std::array<int, 100> &/*data1*/,
-    std::array<int, 100> &/*data2*/,
-    std::array<int, 100> &/*data3*/,
-    std::array<int, 100> &/*data4*/)
-{
-
-}

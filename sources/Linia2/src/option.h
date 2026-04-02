@@ -2,4 +2,4 @@
 #pragma once
 
 
-#define MAX_NUMBER_POINTS 100
+#define MAX_NUMBER_POINTS 200

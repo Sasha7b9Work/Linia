@@ -27,12 +27,7 @@ public:
 protected:
 
     // Читает четыре массива значений из ПЛИС
-    virtual bool ReadData(
-        std::array<int, 100> &data1,
-        std::array<int, 100> &data2,
-        std::array<int, 100> &data3,
-        std::array<int, 100> &data4
-    ) = 0;
+    virtual bool ReadData(int data[5][MAX_NUMBER_POINTS]) = 0;
 
 private:
 
