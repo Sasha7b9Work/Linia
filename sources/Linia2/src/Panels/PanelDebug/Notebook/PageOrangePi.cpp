@@ -375,7 +375,7 @@ void PageOrangePi::PeriodicTask()
         ThePageOrangePi->_txtKB->SetValue(wxString::Format("%d", valueKB));
     }
 
-    FuncUpdateUART();
+//    FuncUpdateUART();
 }
 
 
@@ -506,16 +506,16 @@ void set_thread_priority_linux(std::thread &thread, int policy, int priority)
 
 void PageOrangePi::Init()
 {
-    if (!_thread)
-    {
-        thread_is_running = true;
-        _thread = new std::thread(ThreadFunc);
-#ifdef WIN32
-#else
-        set_thread_priority_linux(*_thread, SCHED_FIFO, 99);
-#endif
-        _thread->detach();
-    }
+//    if (!_thread)
+//    {
+//        thread_is_running = true;
+//        _thread = new std::thread(ThreadFunc);
+//#ifdef WIN32
+//#else
+//        set_thread_priority_linux(*_thread, SCHED_FIFO, 99);
+//#endif
+//        _thread->detach();
+//    }
 
     is_init = true;
 }
