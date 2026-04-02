@@ -28,7 +28,6 @@ NotebookDebug::NotebookDebug(wxWindow *parent) :
     AppendNewPage(new PageChannelS(this));
     AppendNewPage(new PageMeasCurrent(this));
     AppendNewPage(new PageSource50V(this));
-    AppendNewPage(new PageOrangePi(this));
 
     wxWindowBase::Layout();
 
@@ -46,8 +45,6 @@ void NotebookDebug::AppendNewPage(wxPanel *page)
 
 void NotebookDebug::Init()
 {
-    ThePageOrangePi->Init();
-
     for (int i = 0; i < DAC::Count; i++)
     {
         dacs[i]->WriteWidthToDevice();
@@ -57,19 +54,16 @@ void NotebookDebug::Init()
 
 void NotebookDebug::DeInit()
 {
-    ThePageOrangePi->DeInit();
 }
 
 
 void NotebookDebug::PeriodicTask()
 {
-    ThePageOrangePi->PeriodicTask();
 }
 
 
 void NotebookDebug::Pack()
 {
-    ThePageOrangePi->Pack();
     PageFPGA::self->Pack();
     PageCommutator::self->Pack();
     PageSource3kV::self->Pack();
@@ -85,7 +79,6 @@ void NotebookDebug::Pack()
 
 void NotebookDebug::Unpack()
 {
-    ThePageOrangePi->Unpack();
     PageFPGA::self->Unpack();
     PageCommutator::self->Unpack();
     PageSource3kV::self->Unpack();

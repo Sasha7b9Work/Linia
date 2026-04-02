@@ -16,7 +16,6 @@ class PanelConfig;
 class PanelDebug;
 class PanelErrors;
 class PanelModel;
-class PageOrangePi;
 class PanelRight;
 class PanelScheme;
 class WindowCursors;
@@ -35,7 +34,6 @@ extern PanelConfig   *ThePanelConfig;
 extern PanelDebug    *ThePanelDebug;
 extern PanelErrors   *ThePanelErrors;
 extern PanelModel    *ThePanelModel;
-extern PageOrangePi  *ThePageOrangePi;
 extern PanelRight    *ThePanelRight;
 extern PanelScheme   *ThePanelScheme;
 extern WindowCursors *TheWindowCursors;     // Настройки курсоров
