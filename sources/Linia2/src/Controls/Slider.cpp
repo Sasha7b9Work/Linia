@@ -52,9 +52,7 @@ void SliderInt::OnEventMouseDown(wxMouseEvent &event)
         int new_value = slider->GetValue() + 1;
         if (new_value <= slider->GetMax())
         {
-            slider->SetValue(new_value);
-            text->SetLabel(wxString::Format("%d", new_value));
-            GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
+            GF::SendCommandEvent(this, wxEVT_SLIDER, new_value);
         }
     }
     else if (event.GetId() == btnLess->GetId())
@@ -62,9 +60,7 @@ void SliderInt::OnEventMouseDown(wxMouseEvent &event)
         int new_value = slider->GetValue() - 1;
         if (new_value >= slider->GetMin())
         {
-            slider->SetValue(new_value);
-            text->SetLabel(wxString::Format("%d", new_value));
-            GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
+            GF::SendCommandEvent(this, wxEVT_SLIDER, new_value);
         }
     }
 
