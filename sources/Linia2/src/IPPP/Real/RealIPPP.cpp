@@ -119,67 +119,6 @@ bool RealIPPP::ReadData(int data[5][MAX_NUMBER_POINTS])
 }
 
 
-/*
-bool RealIPPP::ReadData(int data[5][MAX_NUMBER_POINTS])
-{
-    if (pinFIFO_FULL.Get())
-    {
-        return false;                       // Читать нечего - выходим
-    }
-
-    static PinIn *pins[4] =
-    {
-        &pinDAT_F0,
-        &pinSPI_MOSI,
-        &pinDAT_F2
-//        &pinDAT_F3
-    };
-
-    uint num_point = 0;
-
-    while (!pinFIFO_FULL.Get())             // Продолжаем, пока не опустеет буфер передатчика
-    {
-        int val[4] = { 0, 0, 0, 0 };
-
-        for (int i = 0; i < 18; i++)        // Читаем 18 бит каждого из четырёх значений АЦП
-        {
-            pinREQ_RD.Set(true);
-
-            Pause();
-
-            for (int bit = 0; bit < 4; bit++)
-            {
-                val[bit] <<= 1;
-
-                if (pins[bit]->Get())
-                {
-                    val[bit] |= 1;
-                }
-            }
-
-            pinREQ_RD.Set(false);
-        }
-
-        for (int i = 0; i < 4; i++)
-        {
-            if (num_point < MAX_NUMBER_POINTS)
-            {
-                data[i][num_point] = val[i];
-            }
-            else
-            {
-                LOG_ERROR("Количество точек превышает размер массива");
-            }
-        }
-
-        ++num_point;
-    }
-
-    return true;
-}
-*/
-
-
 void RealIPPP::Pause()
 {
     volatile int i = 0;
