@@ -54,7 +54,7 @@ void Keyboard::Init()
 }
 
 
-void Keyboard::Update()
+void Keyboard::PeriodicTask()
 {
     int64 time = Timer::CurrentTimeMS();
 

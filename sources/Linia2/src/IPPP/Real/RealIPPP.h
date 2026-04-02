@@ -9,7 +9,7 @@ public:
 
     virtual ~RealIPPP() override {}
 
-    void Update() override;
+    void PeriodicTask() override;
 
     void PressButtonStart() override;
 

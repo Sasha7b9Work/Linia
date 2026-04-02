@@ -13,7 +13,7 @@ public:
 
     virtual bool Init() override;
 
-    virtual void Update() override;
+    virtual void PeriodicTask() override;
 
     virtual void Shutdown() override;
 

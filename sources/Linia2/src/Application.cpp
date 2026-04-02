@@ -198,7 +198,7 @@ void Application::OnTimer(wxTimerEvent &)
 
     if (mutex.try_lock())
     {
-        I_IPPP::GetInstance()->Update();
+        I_IPPP::GetInstance()->PeriodicTask();
 
         TheMainWindow->Update();
 

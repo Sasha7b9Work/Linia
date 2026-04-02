@@ -24,7 +24,7 @@ bool EmulatorDevice::Init()
 }
 
 
-void EmulatorDevice::Update()
+void EmulatorDevice::PeriodicTask()
 {
 
 }

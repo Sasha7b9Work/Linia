@@ -16,7 +16,7 @@ public:
     static I_IPPP *GetInstance();
 
     // Вызывается в главном цикле
-    virtual void Update() = 0;
+    virtual void PeriodicTask() = 0;
 
     // Вызывается при нажатии кнопки СТАРТ
     virtual void PressButtonStart() = 0;

@@ -23,11 +23,11 @@ bool RealIPPP::IsChanBS(const Chan &ch) const
 
 
 
-void RealIPPP::Update()
+void RealIPPP::PeriodicTask()
 {
-    Keyboard::Update();
+    Keyboard::PeriodicTask();
 
-    IDevice::impl->Update();
+    IDevice::impl->PeriodicTask();
 }
 
 

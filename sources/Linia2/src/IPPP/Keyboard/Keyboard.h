@@ -6,5 +6,5 @@ namespace Keyboard
 {
     void Init();
 
-    void Update();
+    void PeriodicTask();
 }

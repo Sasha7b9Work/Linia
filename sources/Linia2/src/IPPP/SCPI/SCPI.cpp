@@ -13,7 +13,7 @@ namespace SCPI
     {
     public:
         void Push(uint8);
-        bool Update();
+        bool PeriodicTask();
     private:
         static const int SIZE = 1024;
         uint8 buffer[SIZE];
@@ -29,7 +29,7 @@ namespace SCPI
 
     extern StructSCPI head[];
 
-    static bool Update(pchar, StructSCPI *);
+    static bool PeriodicTask(pchar, StructSCPI *);
 }
 
 
@@ -60,7 +60,7 @@ void SCPI::OnEventCallback(uint8 *bytes, int size)
 }
 
 
-bool SCPI::Update()
+bool SCPI::PeriodicTask()
 {
     while (!ring_buffer.IsEmpty())
     {
@@ -69,7 +69,7 @@ bool SCPI::Update()
 
     bool result = false;
 
-    while (buffer.Update())
+    while (buffer.PeriodicTask())
     {
         result = true;
     }
@@ -84,13 +84,13 @@ void SCPI::BufferSCPI::Push(uint8 byte)
 }
 
 
-bool SCPI::BufferSCPI::Update()
+bool SCPI::BufferSCPI::PeriodicTask()
 {
     if (ExistMessage())
     {
         pchar message = GetMessage();
 
-        bool result = SCPI::Update(message, SCPI::head);
+        bool result = SCPI::PeriodicTask(message, SCPI::head);
 
         if (!result)
         {
@@ -176,7 +176,7 @@ void SCPI::BufferSCPI::RemoveMessage()
 }
 
 
-bool SCPI::Update(pchar message, StructSCPI *handler)
+bool SCPI::PeriodicTask(pchar message, StructSCPI *handler)
 {
     while (*message == ':' || *message == ' ')
     {
@@ -206,7 +206,7 @@ bool SCPI::Update(pchar message, StructSCPI *handler)
                 {
                     message += len_begin;
 
-                    return Update(message, handler->handler);
+                    return PeriodicTask(message, handler->handler);
                 }
             }
         }

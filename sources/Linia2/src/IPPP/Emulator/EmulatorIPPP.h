@@ -9,7 +9,7 @@ public:
 
     virtual ~EmulatorIPPP() override {}
 
-    void Update() override;
+    void PeriodicTask() override;
 
     void PressButtonStart() override;
 
