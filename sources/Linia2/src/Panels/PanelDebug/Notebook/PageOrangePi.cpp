@@ -359,21 +359,21 @@ void PageOrangePi::FuncUpdateUART()
 
 void PageOrangePi::PeriodicTask()
 {
-    for (auto &str : ThePageOrangePi->gpio_out)
-    {
-        str._txtStatePull->SetValue(wxString::Format("%d", str.value_pull));
-    }
-
-    for (auto &str : ThePageOrangePi->gpio_in)
-    {
-        str._txtStatePull->SetValue(wxString::Format("%d", str.value_int));
-    }
-
-    if (ThePageOrangePi->_txtKA)
-    {
-        ThePageOrangePi->_txtKA->SetValue(wxString::Format("%d", valueKA));
-        ThePageOrangePi->_txtKB->SetValue(wxString::Format("%d", valueKB));
-    }
+//    for (auto &str : ThePageOrangePi->gpio_out)
+//    {
+//        str._txtStatePull->SetValue(wxString::Format("%d", str.value_pull));
+//    }
+//
+//    for (auto &str : ThePageOrangePi->gpio_in)
+//    {
+//        str._txtStatePull->SetValue(wxString::Format("%d", str.value_int));
+//    }
+//
+//    if (ThePageOrangePi->_txtKA)
+//    {
+//        ThePageOrangePi->_txtKA->SetValue(wxString::Format("%d", valueKA));
+//        ThePageOrangePi->_txtKB->SetValue(wxString::Format("%d", valueKB));
+//    }
 
 //    FuncUpdateUART();
 }
