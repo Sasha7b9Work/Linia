@@ -550,11 +550,11 @@ RegDAC::RegDAC(wxWindow *parent, pchar _title, Chip *_chip, const wxString &_fun
 
     knob = new KnobWidget(painter, 0, 100, 50, { painter->GetSize().x - d - 70, d });
 
-    knob->Bind(wxEVT_SLIDER, &RegDAC::OnEventKnob, this);
+//    knob->Bind(wxEVT_SLIDER, &RegDAC::OnEventKnob, this);
 
     slider = new SliderInt(painter, { painter->BitX(chip->BitDepth() - 5, chip->BitDepth()), 75 }, (chip->BitDepth() - 4) * 20, 0, 100, "");
 
-//    slider->Bind(wxEVT_SLIDER, &RegDAC::OnEventSlider, this);
+    slider->Bind(wxEVT_SLIDER, &RegDAC::OnEventSlider, this);
 }
 
 
@@ -771,9 +771,6 @@ void RegDAC::Unpack()
 
 void RegDAC::SetValueToKnobAndSlider()
 {
-    knob->Unbind(wxEVT_SLIDER, &RegDAC::OnEventKnob, this);
-    slider->Unbind(wxEVT_SLIDER, &RegDAC::OnEventSlider, this);
-
     int max_value = (1 << NumBitsValue()) - 1;
 
     int new_value = (int)((float)GetValueDAC() * 100.0f / (float)max_value + 0.5f);
@@ -790,9 +787,6 @@ void RegDAC::SetValueToKnobAndSlider()
             slider->SetValue(new_value, false);
         }
     }
-
-    knob->Bind(wxEVT_SLIDER, &RegDAC::OnEventKnob, this);
-    slider->Bind(wxEVT_SLIDER, &RegDAC::OnEventSlider, this);
 }
 
 
