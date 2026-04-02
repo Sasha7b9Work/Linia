@@ -62,7 +62,7 @@ bool RealIPPP::ReadData(int data[5][MAX_NUMBER_POINTS])
 
     if (pinFIFO_FULL.Get() && prev == false)
     {
-        gpiod_line *infoMOSI = GPIO::GetInputPinInfo(Pin::In_SPI_MOSI)->hw.line;
+        gpiod_line *infoMOSI = GPIO::GetInputPinInfo(Pin::In_DAT_F0)->hw.line;
         gpiod_line *infoCS = GPIO::GetOutputPinInfo(Pin::Out_SPI_CS)->hw.line;
         gpiod_line *infoREQ = GPIO::GetOutputPinInfo(Pin::Out_REQ_RD)->hw.line;
 
