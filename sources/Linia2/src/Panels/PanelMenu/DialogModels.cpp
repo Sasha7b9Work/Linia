@@ -90,7 +90,7 @@ DialogModels::DialogModels() :
 }
 
 
-void DialogModels::Update()
+void DialogModels::PeriodicTask()
 {
     MenuDialog::Update();
 

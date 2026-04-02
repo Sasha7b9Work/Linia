@@ -11,7 +11,7 @@ public:
 
     static DialogModels *self;
 
-    virtual void Update() override;
+    void PeriodicTask();
 
 private:
 
