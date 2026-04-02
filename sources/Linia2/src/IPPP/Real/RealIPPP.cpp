@@ -30,7 +30,7 @@ void RealIPPP::PeriodicTask()
 
     IDevice::impl->PeriodicTask();
 
-    int data[5][MAX_NUMBER_POINTS];
+//    int data[5][MAX_NUMBER_POINTS];
 
 //    if (ReadData(data))
 //    {
