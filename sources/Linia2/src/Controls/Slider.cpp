@@ -40,8 +40,8 @@ SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _
     btnMore->Bind(wxEVT_LEFT_UP, &SliderInt::OnEventMouseUp, this);
     btnLess->Bind(wxEVT_LEFT_UP, &SliderInt::OnEventMouseUp, this);
 
-    timer_less.Bind(wxEVT_TIMER, &SliderInt::OnEventTimer, this);
-    timer_more.Bind(wxEVT_TIMER, &SliderInt::OnEventTimer, this);
+//    timer_less.Bind(wxEVT_TIMER, &SliderInt::OnEventTimer, this);
+//    timer_more.Bind(wxEVT_TIMER, &SliderInt::OnEventTimer, this);
 }
 
 
@@ -63,6 +63,15 @@ void SliderInt::OnEventMouseDown(wxMouseEvent &event)
             GF::SendCommandEvent(this, wxEVT_SLIDER, new_value);
         }
     }
+
+    event.Skip();
+}
+
+
+void SliderInt::OnEventMouseUp(wxMouseEvent &event)
+{
+    timer_more.Stop();
+    timer_less.Stop();
 
     event.Skip();
 }
@@ -100,15 +109,6 @@ void SliderInt::SetValue(int value, bool send_event)
             GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
         }
     }
-}
-
-
-void SliderInt::OnEventMouseUp(wxMouseEvent &event)
-{
-    timer_more.Stop();
-    timer_less.Stop();
-
-    event.Skip();
 }
 
 
