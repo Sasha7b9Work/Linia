@@ -86,13 +86,13 @@ DialogModels::DialogModels() :
 {
     self = this;
 
-    MenuDialog::Update();
+//    MenuDialog::Update();
 }
 
 
 void DialogModels::PeriodicTask()
 {
-    MenuDialog::Update();
+//    MenuDialog::Update();
 
     bool empty = Model::IsEmpty();
 
