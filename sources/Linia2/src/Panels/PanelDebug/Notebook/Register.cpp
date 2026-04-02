@@ -601,7 +601,7 @@ void RegDAC::OnEventSlider(wxCommandEvent &event)
         OnEventChangedControl(event.GetInt());
     }
 
-    event.Skip();
+//    event.Skip();
 }
 
 
