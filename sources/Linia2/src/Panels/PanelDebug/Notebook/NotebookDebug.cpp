@@ -46,7 +46,7 @@ void NotebookDebug::AppendNewPage(wxPanel *page)
 
 void NotebookDebug::Init()
 {
-    PageOrangePi::self->Init();
+    ThePageOrangePi->Init();
 
     for (int i = 0; i < DAC::Count; i++)
     {
@@ -57,19 +57,19 @@ void NotebookDebug::Init()
 
 void NotebookDebug::DeInit()
 {
-    PageOrangePi::self->DeInit();
+    ThePageOrangePi->DeInit();
 }
 
 
 void NotebookDebug::PeriodicTask()
 {
-    PageOrangePi::self->PeriodicTask();
+    ThePageOrangePi->PeriodicTask();
 }
 
 
 void NotebookDebug::Pack()
 {
-    PageOrangePi::self->Pack();
+    ThePageOrangePi->Pack();
     PageFPGA::self->Pack();
     PageCommutator::self->Pack();
     PageSource3kV::self->Pack();
@@ -85,7 +85,7 @@ void NotebookDebug::Pack()
 
 void NotebookDebug::Unpack()
 {
-    PageOrangePi::self->Unpack();
+    ThePageOrangePi->Unpack();
     PageFPGA::self->Unpack();
     PageCommutator::self->Unpack();
     PageSource3kV::self->Unpack();

@@ -50,9 +50,9 @@ void SCPI::OnEventCallback(uint8 *bytes, int size)
             symbol &= 0x7F;
         }
 
-        if (PageOrangePi::self->IsInit())
+        if (ThePageOrangePi->IsInit())
         {
-            PageOrangePi::self->FuncOnRecvUART(symbol);
+            ThePageOrangePi->FuncOnRecvUART(symbol);
         }
 
         ring_buffer.Push(symbol);

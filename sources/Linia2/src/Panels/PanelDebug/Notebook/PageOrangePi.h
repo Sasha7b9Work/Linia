@@ -9,8 +9,6 @@ public:
 
     PageOrangePi(wxNotebook *);
 
-    static PageOrangePi *self;
-
     // Вызывается при заходе на панель отадки
     void Init();
 

@@ -11,7 +11,7 @@
 #endif
 
 
-PageOrangePi *PageOrangePi::self = nullptr;
+PageOrangePi *ThePageOrangePi = nullptr;
 
 bool PageOrangePi::thread_is_running = false;
 bool PageOrangePi::thread_autoUART_is_running = false;
@@ -22,7 +22,7 @@ PageOrangePi::PageOrangePi(wxNotebook *parent) :
 {
     SetBackgroundColour(parent->GetBackgroundColour());
 
-    self = this;
+    ThePageOrangePi = this;
 
     wxPanel::SetName("Orange Pi 5");
 
@@ -234,7 +234,7 @@ void PageOrangePi::OnEventButton(wxCommandEvent &event)
     }
     else if (id == btnSendUART->GetId())
     {
-        wxString message = wxString::Format("%s", PageOrangePi::self->txtSendUART->GetValue().c_str().AsChar());
+        wxString message = wxString::Format("%s", ThePageOrangePi->txtSendUART->GetValue().c_str().AsChar());
 
         UART::SendBuffer(message.GetData().AsChar(), (int)(std::strlen(message.GetData().AsChar()) + 1));
     }
@@ -298,17 +298,17 @@ void PageOrangePi::ThreadFunc()
 {
     while (thread_is_running)
     {
-        for (auto &str : PageOrangePi::self->gpio_out)
+        for (auto &str : ThePageOrangePi->gpio_out)
         {
             str.value_pull = str.pin->Get() ? 1 : 0;
         }
 
-        for (auto &str : PageOrangePi::self->gpio_in)
+        for (auto &str : ThePageOrangePi->gpio_in)
         {
             str.value_int = str.pin->Get() ? 1 : 0;
         }
 
-        if (PageOrangePi::self->_txtKA)
+        if (ThePageOrangePi->_txtKA)
         {
             ThreadFuncEncoder();
         }
@@ -318,22 +318,22 @@ void PageOrangePi::ThreadFunc()
 
 void PageOrangePi::FuncOnRecvUART(char byte)
 {
-    PageOrangePi::self->mutex_str_UART.lock();
-    PageOrangePi::self->bytesUART.push_back(byte);
-    PageOrangePi::self->mutex_str_UART.unlock();
+    ThePageOrangePi->mutex_str_UART.lock();
+    ThePageOrangePi->bytesUART.push_back(byte);
+    ThePageOrangePi->mutex_str_UART.unlock();
 }
 
 
 void PageOrangePi::FuncUpdateUART()
 {
     std::vector<char> b;
-    PageOrangePi::self->mutex_str_UART.lock();
-    if (PageOrangePi::self->bytesUART.size())
+    ThePageOrangePi->mutex_str_UART.lock();
+    if (ThePageOrangePi->bytesUART.size())
     {
-        b = PageOrangePi::self->bytesUART;
-        PageOrangePi::self->bytesUART.clear();
+        b = ThePageOrangePi->bytesUART;
+        ThePageOrangePi->bytesUART.clear();
     }
-    PageOrangePi::self->mutex_str_UART.unlock();
+    ThePageOrangePi->mutex_str_UART.unlock();
 
     if (b.size())
     {
@@ -349,7 +349,7 @@ void PageOrangePi::FuncUpdateUART()
             }
             else
             {
-                PageOrangePi::self->txtRecvUART->SetValue(text);
+                ThePageOrangePi->txtRecvUART->SetValue(text);
                 text.Clear();
             }
         }
@@ -359,20 +359,20 @@ void PageOrangePi::FuncUpdateUART()
 
 void PageOrangePi::PeriodicTask()
 {
-    for (auto &str : PageOrangePi::self->gpio_out)
+    for (auto &str : ThePageOrangePi->gpio_out)
     {
         str._txtStatePull->SetValue(wxString::Format("%d", str.value_pull));
     }
 
-    for (auto &str : PageOrangePi::self->gpio_in)
+    for (auto &str : ThePageOrangePi->gpio_in)
     {
         str._txtStatePull->SetValue(wxString::Format("%d", str.value_int));
     }
 
-    if (PageOrangePi::self->_txtKA)
+    if (ThePageOrangePi->_txtKA)
     {
-        PageOrangePi::self->_txtKA->SetValue(wxString::Format("%d", valueKA));
-        PageOrangePi::self->_txtKB->SetValue(wxString::Format("%d", valueKB));
+        ThePageOrangePi->_txtKA->SetValue(wxString::Format("%d", valueKA));
+        ThePageOrangePi->_txtKB->SetValue(wxString::Format("%d", valueKB));
     }
 
     FuncUpdateUART();
@@ -403,14 +403,14 @@ void PageOrangePi::ThreadFuncEncoder()
             {
                 prevKA = valKA;
 
-                PageOrangePi::self->valueKA++;
+                ThePageOrangePi->valueKA++;
             }
 
             if (valKB != prevKB)
             {
                 prevKB = valKB;
 
-                PageOrangePi::self->valueKB++;
+                ThePageOrangePi->valueKB++;
             }
         }
 
@@ -450,7 +450,7 @@ void PageOrangePi::ThreadFuncAutoUART()
 {
     while (thread_autoUART_is_running)
     {
-        wxString message = wxString::Format("%s", PageOrangePi::self->txtSendUART->GetValue().c_str().AsChar());
+        wxString message = wxString::Format("%s", ThePageOrangePi->txtSendUART->GetValue().c_str().AsChar());
 
         UART::SendBuffer(message.GetData().AsChar(), (int)(std::strlen(message.GetData().AsChar()) + 1));
 
@@ -461,7 +461,7 @@ void PageOrangePi::ThreadFuncAutoUART()
 
 void PageOrangePi::OnChangeStatePin(PinIn *pin, bool state)
 {
-    for (auto &str : PageOrangePi::self->gpio_in)
+    for (auto &str : ThePageOrangePi->gpio_in)
     {
         if (str.pin == pin)
         {
@@ -473,7 +473,7 @@ void PageOrangePi::OnChangeStatePin(PinIn *pin, bool state)
 
 void PageOrangePi::OnChangeStatePin(PinOut *pin, bool state)
 {
-    for (auto &str : PageOrangePi::self->gpio_out)
+    for (auto &str : ThePageOrangePi->gpio_out)
     {
         if (str.pin == pin)
         {
@@ -546,42 +546,42 @@ void PageOrangePi::DeInit()
 
 void PageOrangePi::CallbackOnStart(bool state)
 {
-    PageOrangePi::self->OnChangeStatePin(&pinSTART, state);
+    ThePageOrangePi->OnChangeStatePin(&pinSTART, state);
 }
 
 void PageOrangePi::CallbackOnStop(bool state)
 {
-    PageOrangePi::self->OnChangeStatePin(&pinSTOP, state);
+    ThePageOrangePi->OnChangeStatePin(&pinSTOP, state);
 }
 
 void PageOrangePi::CallbackOnDAT_F0(bool state)
 {
-    PageOrangePi::self->OnChangeStatePin(&pinDAT_F0, state);
+    ThePageOrangePi->OnChangeStatePin(&pinDAT_F0, state);
 }
 
 void PageOrangePi::CallbackOnDAT_F1(bool state)
 {
-    PageOrangePi::self->OnChangeStatePin(&pinSPI_MOSI, state);
+    ThePageOrangePi->OnChangeStatePin(&pinSPI_MOSI, state);
 }
 
 void PageOrangePi::CallbackOnDAT_F2(bool state)
 {
-    PageOrangePi::self->OnChangeStatePin(&pinDAT_F2, state);
+    ThePageOrangePi->OnChangeStatePin(&pinDAT_F2, state);
 }
 
 void PageOrangePi::CallbackOnDAT_F3(bool /*state*/)
 {
-//    PageOrangePi::self->OnChangeStatePin(&pinDAT_F3, state);
+//    ThePageOrangePi->OnChangeStatePin(&pinDAT_F3, state);
 }
 
 void PageOrangePi::CallbackOnFIFO_FULL(bool state)
 {
-    PageOrangePi::self->OnChangeStatePin(&pinFIFO_FULL, state);
+    ThePageOrangePi->OnChangeStatePin(&pinFIFO_FULL, state);
 }
 
 void PageOrangePi::CallbackonREQ_RD(bool state)
 {
-    PageOrangePi::self->OnChangeStatePin(&pinREQ_RD, state);
+    ThePageOrangePi->OnChangeStatePin(&pinREQ_RD, state);
 }
 
 
