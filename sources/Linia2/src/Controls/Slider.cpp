@@ -89,7 +89,9 @@ void SliderInt::SetValue(int value, bool send_event)
 {
     if (value != GetValue())
     {
+        slider->Unbind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
         slider->SetValue(value);
+        slider->Bind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
 
         text->SetLabel(wxString::Format("%d", slider->GetValue()));
 
