@@ -49,7 +49,7 @@ void ControlDataFPGA::SetMax(int _max)
 {
     max = _max;
 
-    for (int i = 0; i < 200; i++)
+    for (int i = 0; i < MAX_NUMBER_POINTS; i++)
     {
         data[i] = _max / 2;
     }
@@ -72,7 +72,7 @@ void ControlDataFPGA::Draw()
         min_value = max;
         max_value = 0;
 
-        for (int i = 0; i < 200; i++)
+        for (int i = 0; i < MAX_NUMBER_POINTS; i++)
         {
             if (data[i] < min_value)
             {
@@ -105,9 +105,9 @@ void ControlDataFPGA::Draw()
 }
 
 
-void ControlDataFPGA::SetData(int _data[200])
+void ControlDataFPGA::SetData(int _data[MAX_NUMBER_POINTS])
 {
-    std::memcpy(data, _data, sizeof(data[0]) * 200);
+    std::memcpy(data, _data, sizeof(data[0]) * MAX_NUMBER_POINTS);
 
     Draw();
 }

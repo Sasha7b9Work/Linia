@@ -23,14 +23,14 @@ public:
 
     void Draw();
 
-    void SetData(int[200]);
+    void SetData(int[MAX_NUMBER_POINTS]);
 
 private:
 
     PainterDataFPGA *painter = nullptr;
     wxToggleButton *btnScale = nullptr;
     int max = (1 << 18) - 1;
-    int data[200];
+    int data[MAX_NUMBER_POINTS];
 
     void OnEventToggleButon(wxCommandEvent &);
 };
