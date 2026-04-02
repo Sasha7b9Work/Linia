@@ -611,7 +611,7 @@ void RegDAC::OnEventChangedControl(int value)
 
     uint new_value = (uint)((float)max_value * (float)value / 100.0f + 0.5f);
 
-    SetValueDAC(new_value);
+//    SetValueDAC(new_value);
 }
 
 
@@ -810,6 +810,6 @@ void RegDAC::SetValueDAC(uint value)
     {
         value_DAC = value;
 
-//        SetValueToBits(value, FirstBitValue(), NumBitsValue());
+        SetValueToBits(value, FirstBitValue(), NumBitsValue());
     }
 }
