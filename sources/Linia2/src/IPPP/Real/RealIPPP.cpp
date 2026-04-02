@@ -30,15 +30,15 @@ void RealIPPP::PeriodicTask()
 
     IDevice::impl->PeriodicTask();
 
-//    int data[5][MAX_NUMBER_POINTS];
+    int data[5][MAX_NUMBER_POINTS];
 
-//    if (ReadData(data))
-//    {
-//        for (int i = 0; i < 5; i++)
-//        {
-//            ThePanelRight->data[i]->SetData(data[i]);
-//        }
-//    }
+    if (ReadData(data))
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            ThePanelRight->data[i]->SetData(data[i]);
+        }
+    }
 }
 
 
