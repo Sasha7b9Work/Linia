@@ -93,7 +93,7 @@ bool RealIPPP::ReadData(int data[5][MAX_NUMBER_POINTS])
 
             int value = 0;
 
-            for (int num_bit = 0; num_bit < 8; num_bit++)
+            for (int num_bit = 7; num_bit >= 0; num_bit--)
             {
                 PinOut::Set(infoREQ, 1);
 
