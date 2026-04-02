@@ -21,7 +21,7 @@ namespace PCM
 }
 
 
-void PCM::Update()
+void PCM::PeriodicTask()
 {
     UpdateInput();
 }

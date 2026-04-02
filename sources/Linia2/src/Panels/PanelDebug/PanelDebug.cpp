@@ -41,7 +41,7 @@ bool PanelDebug::Show(bool show)
 }
 
 
-void PanelDebug::Update()
+void PanelDebug::PeriodicTask()
 {
     TheNotebookDebug->PeriodicTask();
 

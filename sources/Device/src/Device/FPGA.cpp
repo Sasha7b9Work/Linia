@@ -49,7 +49,7 @@ void FPGA::Init()
 }
 
 
-void FPGA::Update()
+void FPGA::PeriodicTask()
 {
     if (!is_running_scan)
     {

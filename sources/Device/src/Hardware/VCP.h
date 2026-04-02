@@ -4,5 +4,5 @@
 
 namespace VCP
 {
-    void Update();
+    void PeriodicTask();
 }

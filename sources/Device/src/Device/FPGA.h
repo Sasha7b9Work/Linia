@@ -10,7 +10,7 @@ namespace FPGA
 {
     void Init();
 
-    void Update();
+    void PeriodicTask();
 
     void StartScan(uint periodMS);
 

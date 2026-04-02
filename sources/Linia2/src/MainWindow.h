@@ -51,7 +51,7 @@ public:
 
     void SetMode(ModeMainWindow::E);
 
-    void Update();
+    void PeriodicTask();
 
     // Спрятать системную панель задач. Нужно вызывать после создания диалоговых окон чтобы спрятать системную панель.
     void HideSystemPanel();

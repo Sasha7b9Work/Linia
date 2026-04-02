@@ -89,7 +89,7 @@ MainWindow::MainWindow(const wxString &title)
 }
 
 
-void MainWindow::Update()
+void MainWindow::PeriodicTask()
 {
     ThePanelDebug->Update();
 }

@@ -7,5 +7,5 @@
 
 namespace PCM
 {
-    void Update();
+    void PeriodicTask();
 }

@@ -16,10 +16,10 @@ int main()
 
     while (true)
     {
-        PCM::Update();
+        PCM::PeriodicTask();
 
-        VCP::Update();
+        VCP::PeriodicTask();
 
-        Device::Update();
+        Device::PeriodicTask();
     }
 }

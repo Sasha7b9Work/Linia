@@ -41,13 +41,13 @@ void Device::Init()
 }
 
 
-void Device::Update()
+void Device::PeriodicTask()
 {
     HAL_TIM2::StartMultiMeasurement();
 
-    Commutator::Update();
+    Commutator::PeriodicTask();
 
-    FPGA::Update();
+    FPGA::PeriodicTask();
 }
 
 

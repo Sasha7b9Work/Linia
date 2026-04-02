@@ -40,7 +40,7 @@ void Commutator::Init()
 }
 
 
-void Commutator::Update()
+void Commutator::PeriodicTask()
 {
     StructPinIn *pin = &pins[0];
 

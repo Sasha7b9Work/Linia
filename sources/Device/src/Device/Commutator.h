@@ -10,7 +10,7 @@ namespace Commutator
 {
     void Init();
 
-    void Update();
+    void PeriodicTask();
 
     extern ChipREG &REG;
 }

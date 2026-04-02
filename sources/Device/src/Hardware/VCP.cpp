@@ -13,7 +13,7 @@ namespace VCP
 }
 
 
-void VCP::Update()
+void VCP::PeriodicTask()
 {
     _CDC::GetData(in_buffer);
 

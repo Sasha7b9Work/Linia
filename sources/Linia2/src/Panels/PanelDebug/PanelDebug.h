@@ -11,7 +11,7 @@ public:
 
     virtual bool Show(bool) override;
 
-    void Update();
+    void PeriodicTask();
 
     void Unpack();
 
