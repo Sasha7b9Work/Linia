@@ -52,6 +52,8 @@ void SliderInt::OnEventMouseDown(wxMouseEvent &event)
         int new_value = slider->GetValue() + 1;
         if (new_value <= slider->GetMax())
         {
+            text->SetLabel(wxString::Format("%d", new_value));
+            slider->SetValue(new_value);
             GF::SendCommandEvent(this, wxEVT_SLIDER, new_value);
         }
     }
@@ -60,6 +62,8 @@ void SliderInt::OnEventMouseDown(wxMouseEvent &event)
         int new_value = slider->GetValue() - 1;
         if (new_value >= slider->GetMin())
         {
+            text->SetLabel(wxString::Format("%d", new_value));
+            slider->SetValue(new_value);
             GF::SendCommandEvent(this, wxEVT_SLIDER, new_value);
         }
     }
@@ -79,14 +83,8 @@ void SliderInt::OnEventMouseUp(wxMouseEvent &event)
 
 void SliderInt::OnEventSlider(wxCommandEvent &event)
 {
-    if (event.GetEventObject() == slider)
-    {
-        int value = event.GetInt();
-
-        text->SetLabel(wxString::Format("%d", value));
-
-        GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
-    }
+    text->SetLabel(wxString::Format("%d", event.GetInt()));
+    GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
 
     event.Skip();
 }
