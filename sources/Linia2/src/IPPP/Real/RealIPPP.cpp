@@ -7,6 +7,7 @@
 #include "IPPP/Keyboard/Keyboard.h"
 #include "IPPP/Real/RealDevice.h"
 #include "Utils/Timer.h"
+#include "Panels/PanelDebug/PanelRight.h"
 
 
 bool RealIPPP::IsChanBS(const Chan &ch) const
@@ -28,6 +29,16 @@ void RealIPPP::PeriodicTask()
     Keyboard::PeriodicTask();
 
     IDevice::impl->PeriodicTask();
+
+    int data[5][MAX_NUMBER_POINTS];
+
+    if (ReadData(data))
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            ThePanelRight->data[i]->SetData(data[i]);
+        }
+    }
 }
 
 

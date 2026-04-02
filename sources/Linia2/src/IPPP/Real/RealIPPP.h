@@ -19,7 +19,7 @@ private:
 
     bool IsChanBS(const Chan &) const;
 
-    virtual bool ReadData(int data[5][MAX_NUMBER_POINTS]);
+    virtual bool ReadData(int data[5][MAX_NUMBER_POINTS]) override;
 
     void Pause();
 };
