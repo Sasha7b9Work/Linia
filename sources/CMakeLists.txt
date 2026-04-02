@@ -40,9 +40,9 @@ else()
 # Максимальная оптимизация - релизная версия
 #        -Ofast
 #        -flto
-        -s
-        -g0
-        -fno-stack-protector   
+#       -s
+#        -g0
+#       -fno-stack-protector   
     )
 endif()
 
