@@ -810,6 +810,6 @@ void RegDAC::SetValueDAC(uint value)
     {
         value_DAC = value;
 
-        SetValueToBits(value, FirstBitValue(), NumBitsValue());
+//        SetValueToBits(value, FirstBitValue(), NumBitsValue());
     }
 }
