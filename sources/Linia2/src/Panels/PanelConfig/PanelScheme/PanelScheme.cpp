@@ -15,7 +15,7 @@
 #include "System/Events.h"
 
 
-PanelScheme *PanelScheme::self = nullptr;
+PanelScheme *ThePanelScheme = nullptr;
 
 
 ComboJack::ComboJack(Chan::E ch, wxWindow *parent, const wxString &title, const wxPoint &pos, int width, const wxArrayString &labels) :
@@ -46,7 +46,7 @@ PanelScheme::PanelScheme(wxPanel *parent, const int x, int w, int h) :
 {
     wxPanel::SetName("PanelScheme");
 
-    self = this;
+    ThePanelScheme = this;
 
     wxPanel::SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - PanelConfig::HEIGHT_BUTTONS });
     wxPanel::SetPosition({ 0, PanelConfig::HEIGHT_BUTTONS });

@@ -56,8 +56,6 @@ public:
 
     PanelScheme(wxPanel *parent, const int x, int w, int h);
 
-    static PanelScheme *self;
-
     void Pack();
     void Unpack();
 

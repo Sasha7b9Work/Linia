@@ -17,6 +17,7 @@ class PanelDebug;
 class PanelErrors;
 class PanelModel;
 class PanelRight;
+class PanelScheme;
 class WindowCursors;
 
 extern Application   *TheApp;
@@ -34,4 +35,5 @@ extern PanelDebug    *ThePanelDebug;
 extern PanelErrors   *ThePanelErrors;
 extern PanelModel    *ThePanelModel;
 extern PanelRight    *ThePanelRight;
+extern PanelScheme   *ThePanelScheme;
 extern WindowCursors *TheWindowCursors;     // Настройки курсоров

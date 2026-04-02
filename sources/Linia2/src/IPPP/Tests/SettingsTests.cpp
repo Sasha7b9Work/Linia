@@ -160,7 +160,7 @@ void StateJack::PrepareArray(wxArrayString &arr, E v1, E v2, E v3, E v4)
 
 Category::E Category::Current()
 {
-    return (E)PanelScheme::self->comboCategory->GetCurrentChoice();
+    return (E)ThePanelScheme->comboCategory->GetCurrentChoice();
 }
 
 
@@ -196,7 +196,7 @@ bool Chan::IsVisible() const
 
 bool TypeCommutation::IsInternal()
 {
-    return PanelScheme::self->comboCommutation->GetCurrentSelection() == 0;
+    return ThePanelScheme->comboCommutation->GetCurrentSelection() == 0;
 }
 
 

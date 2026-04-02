@@ -172,7 +172,7 @@ void PanelConfig::Pack()
     ThePanelChannelC->Pack();
     ThePanelChannelB->Pack();
     ThePanelChannelS->Pack();
-    PanelScheme::self->Pack();
+    ThePanelScheme->Pack();
 }
 
 
@@ -181,7 +181,7 @@ void PanelConfig::Unpack()
     ThePanelChannelC->Unpack();
     ThePanelChannelB->Unpack();
     ThePanelChannelS->Unpack();
-    PanelScheme::self->Unpack();
+    ThePanelScheme->Unpack();
 }
 
 

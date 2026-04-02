@@ -14,7 +14,7 @@ PanelModel::PanelModel(wxWindow* parent, int /*_x*/, int _w, int /*_h*/) :
 {
     wxPanel::SetName("PanelModel");
 
-    self = this;
+    ThePanelModel = this;
 
     wxPanel::SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - PanelConfig::HEIGHT_BUTTONS });
     wxPanel::SetPosition({ 0, PanelConfig::HEIGHT_BUTTONS });
