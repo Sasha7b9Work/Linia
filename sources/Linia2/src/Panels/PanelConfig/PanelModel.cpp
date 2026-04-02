@@ -6,7 +6,7 @@
 #include "Panels/PanelConfig/PanelConfig.h"
 
 
-PanelModel *PanelModel::self = nullptr;
+PanelModel *ThePanelModel = nullptr;
 
 
 PanelModel::PanelModel(wxWindow* parent, int /*_x*/, int _w, int /*_h*/) :

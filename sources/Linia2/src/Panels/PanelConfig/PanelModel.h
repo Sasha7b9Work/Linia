@@ -13,8 +13,6 @@ public:
 
     PanelModel(wxWindow *parent, int x, int w, int h);
 
-    static PanelModel *self;
-
     virtual void Update() override;
 
 private:

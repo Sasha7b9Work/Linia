@@ -21,7 +21,7 @@ DialogModels::DialogModels() :
         BTN_NEW, []()
         {
             Model::CreateNew("Untitled");
-            PanelModel::self->Update();
+            ThePanelModel->Update();
         },
         BTN_OPEN, []()
         {
@@ -54,7 +54,7 @@ DialogModels::DialogModels() :
                 else
                 {
                     Model::Delete();
-                    PanelModel::self->Update();
+                    ThePanelModel->Update();
                 }
             }
 
@@ -71,7 +71,7 @@ DialogModels::DialogModels() :
             if (dialog.ShowModal() == wxID_OK)
             {
                 Model::Delete();
-                PanelModel::self->Update();
+                ThePanelModel->Update();
             }
             else
             {
