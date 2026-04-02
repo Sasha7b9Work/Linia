@@ -3,25 +3,27 @@
 
 
 class Application;
+struct AutoCursors;
 class Display;
 class IGrid;
 class MainWindow;
+class NotebookDebug;
 class PanelCalc;
 class PanelConfig;
 class PanelDebug;
 class PanelErrors;
 class PanelRight;
 class WindowCursors;
-struct AutoCursors;
 
 extern Application   *TheApp;
 extern AutoCursors   *TheAutoCursors;
 extern Display       *TheDisplay;
 extern IGrid         *TheGrid;
 extern MainWindow    *TheMainWindow;
-extern PanelConfig   *ThePanelConfig;
+extern NotebookDebug *TheNotebookDebug;
 extern PanelCalc     *ThePanelCalc;
-extern WindowCursors *TheWindowCursors;     // Настройки курсоров
+extern PanelConfig   *ThePanelConfig;
 extern PanelDebug    *ThePanelDebug;
 extern PanelErrors   *ThePanelErrors;
 extern PanelRight    *ThePanelRight;
+extern WindowCursors *TheWindowCursors;     // Настройки курсоров

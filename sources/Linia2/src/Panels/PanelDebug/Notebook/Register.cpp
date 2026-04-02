@@ -303,7 +303,7 @@ void Register::SetActiveAcross(bool active, wxWindow *_wnd)
         }
     }
 
-    NotebookDebug::self->EnableSwitching(active);
+    TheNotebookDebug->EnableSwitching(active);
 
     painter->EnableAutoSendAnimation(!active);
 }

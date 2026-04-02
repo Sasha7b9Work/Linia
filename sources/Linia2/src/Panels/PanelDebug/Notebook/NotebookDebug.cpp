@@ -12,13 +12,13 @@
 #include "Panels/PanelDebug/Notebook/PageSource50V.h"
 
 
-NotebookDebug *NotebookDebug::self = nullptr;
+NotebookDebug *TheNotebookDebug = nullptr;
 
 
 NotebookDebug::NotebookDebug(wxWindow *parent) :
     wxNotebook(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBK_TOP)
 {
-    self = this;
+    TheNotebookDebug = this;
 
     AppendNewPage(new PageFPGA(this));
     AppendNewPage(new PageCommutator(this));

@@ -20,7 +20,7 @@ PanelDebug::PanelDebug(wxWindow *parent) :
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    sizer->Add(NotebookDebug::self, 1, wxEXPAND);
+    sizer->Add(TheNotebookDebug, 1, wxEXPAND);
 
     sizer->Add(ThePanelRight, 0, wxEXPAND);
 
@@ -35,7 +35,7 @@ PanelDebug::PanelDebug(wxWindow *parent) :
 
 bool PanelDebug::Show(bool show)
 {
-    show ? NotebookDebug::self->Init() : NotebookDebug::self->DeInit();
+    show ? TheNotebookDebug->Init() : TheNotebookDebug->DeInit();
 
     return wxPanel::Show(show);
 }
@@ -43,7 +43,7 @@ bool PanelDebug::Show(bool show)
 
 void PanelDebug::Update()
 {
-    NotebookDebug::self->PeriodicTask();
+    TheNotebookDebug->PeriodicTask();
 
 //    ThePanelRight->PeriodicTask();
 }
@@ -51,11 +51,11 @@ void PanelDebug::Update()
 
 void PanelDebug::Unpack()
 {
-    NotebookDebug::self->Unpack();
+    TheNotebookDebug->Unpack();
 }
 
 
 void PanelDebug::Pack()
 {
-    NotebookDebug::self->Pack();
+    TheNotebookDebug->Pack();
 }
