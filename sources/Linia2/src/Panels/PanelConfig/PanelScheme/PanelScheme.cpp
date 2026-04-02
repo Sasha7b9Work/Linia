@@ -212,7 +212,7 @@ void PanelScheme::OnEventComboBox(wxCommandEvent &event)
             }
 
             {                                                                                               // Суффикс канала B
-                UpdateSuffixGenerator(PanelChannelB::self->comboTypeGenerator, (Category::IsGDS() || Category::Current() == Category::Thyristor) ? 'g' : 'b');
+                UpdateSuffixGenerator(ThePanelChannelB->comboTypeGenerator, (Category::IsGDS() || Category::Current() == Category::Thyristor) ? 'g' : 'b');
             }
 
             {                                                                                               // Суффикс канала S
@@ -251,7 +251,7 @@ void PanelScheme::UpdateSuffixGenerator(ButtonsCombo *combo, char suffix)
 
 void PanelScheme::BuildPanel()
 {
-    ThePanelConfig->btnChannelB->Enable(PanelChannelB::self->IsEnabled());
+    ThePanelConfig->btnChannelB->Enable(ThePanelChannelB->IsEnabled());
     ThePanelConfig->btnChannelS->Enable(PanelChannelS::self->IsEnabled());
 
     for (auto _jack : jacks)

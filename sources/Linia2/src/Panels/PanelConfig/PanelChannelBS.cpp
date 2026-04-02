@@ -11,7 +11,7 @@
 #include "Controls/StaticBox.h"
 
 
-PanelChannelB *PanelChannelB::self = nullptr;
+PanelChannelB *ThePanelChannelB = nullptr;
 PanelChannelS *PanelChannelS::self = nullptr;
 
 
