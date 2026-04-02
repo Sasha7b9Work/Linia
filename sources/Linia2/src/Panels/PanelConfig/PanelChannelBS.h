@@ -64,10 +64,8 @@ public:
     PanelChannelS(wxPanel *parent, int x, int w, int h) :
         PanelChannelBS(parent, Chan::_S, x, w, h)
     {
-        self = this;
+        ThePanelChannelS = this;
     }
-
-    static PanelChannelS *self;
 
     bool IsEnabled() const;
 };

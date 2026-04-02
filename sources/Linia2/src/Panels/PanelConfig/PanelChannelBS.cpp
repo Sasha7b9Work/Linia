@@ -12,7 +12,7 @@
 
 
 PanelChannelB *ThePanelChannelB = nullptr;
-PanelChannelS *PanelChannelS::self = nullptr;
+PanelChannelS *ThePanelChannelS = nullptr;
 
 
 PanelChannelBS::PanelChannelBS(wxPanel *parent, Chan::E ch, int x, int w, int h) :
