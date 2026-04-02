@@ -87,10 +87,8 @@ void SliderInt::OnEventSlider(wxCommandEvent &event)
 
         GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
     }
-    else
-    {
-        event.Skip();
-    }
+
+    event.Skip();
 }
 
 
