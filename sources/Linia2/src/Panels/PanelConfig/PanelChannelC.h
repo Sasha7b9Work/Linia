@@ -14,8 +14,6 @@ public:
 
     PanelChannelC(wxPanel *parent, int x, int w, int h);
 
-    static PanelChannelC *self;
-
     void Pack();
     void Unpack();
 

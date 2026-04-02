@@ -9,7 +9,7 @@
 #include "Controls/StaticBox.h"
 
 
-PanelChannelC *PanelChannelC::self = nullptr;
+PanelChannelC *ThePanelChannelC = nullptr;
 
 
 PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
@@ -17,7 +17,7 @@ PanelChannelC::PanelChannelC(wxPanel *parent, int x, int w, int h) :
 {
     wxPanel::SetName(wxT("PanelChannelC"));
 
-    self = this;
+    ThePanelChannelC = this;
 
     wxPanel::SetSize({ MainWindow::WIDTH3, PanelConfig::HEIGHT - PanelConfig::HEIGHT_BUTTONS });
     wxPanel::SetPosition({ 0, PanelConfig::HEIGHT_BUTTONS });

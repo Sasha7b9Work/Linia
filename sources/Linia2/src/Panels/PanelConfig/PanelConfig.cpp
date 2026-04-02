@@ -169,7 +169,7 @@ wxPanel *PanelConfig::GetCurrentPanel()
 
 void PanelConfig::Pack()
 {
-    PanelChannelC::self->Pack();
+    ThePanelChannelC->Pack();
     ThePanelChannelB->Pack();
     ThePanelChannelS->Pack();
     PanelScheme::self->Pack();
@@ -178,7 +178,7 @@ void PanelConfig::Pack()
 
 void PanelConfig::Unpack()
 {
-    PanelChannelC::self->Unpack();
+    ThePanelChannelC->Unpack();
     ThePanelChannelB->Unpack();
     ThePanelChannelS->Unpack();
     PanelScheme::self->Unpack();
