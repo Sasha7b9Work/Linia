@@ -20,7 +20,7 @@ ValueCheckBox::ValueCheckBox(wxWindow *parent, const wxString &title, const wxPo
 
     SetValue(value->Get());
 
-    Bind(wxEVT_CHECKBOX, &ValueCheckBox::OnEventCheckBox, this);
+//    Bind(wxEVT_CHECKBOX, &ValueCheckBox::OnEventCheckBox, this);
 }
 
 
