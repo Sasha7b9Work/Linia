@@ -21,8 +21,6 @@ SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _
 
     slider->SetMinSize(wxSize(100, 30));
 
-    slider->SetCursor(wxCursor(wxCURSOR_HAND));
-
     slider->SetBackgroundColour(parent->GetBackgroundColour());
 
     text = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT }, wxALIGN_RIGHT);
@@ -38,6 +36,7 @@ SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _
 
     btnMore->SetCursor(wxCursor(wxCURSOR_HAND));
     btnLess->SetCursor(wxCursor(wxCURSOR_HAND));
+    slider->SetCursor(wxCursor(wxCURSOR_HAND));
 
     slider->Bind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
     btnMore->Bind(wxEVT_LEFT_DOWN, &SliderInt::OnEventMouseDown, this);
