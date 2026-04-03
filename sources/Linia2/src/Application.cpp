@@ -239,3 +239,22 @@ void Application::OnButtonStop(bool /*press*/)
 {
 
 }
+
+
+void Application::SetMode(Mode mode)
+{
+    if ((int)mode == SET::GUI::mode_application->Get())
+    {
+        return;
+    }
+
+    SET::GUI::mode_application->Set((int)mode);
+
+    ReInit();
+}
+
+
+void Application::ReInit()
+{
+
+}

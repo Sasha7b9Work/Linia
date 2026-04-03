@@ -14,4 +14,11 @@ public:
     static const int HEIGHT = 500;
 
     WindowLaunch();
+
+private:
+
+    wxRadioButton *rbOld = nullptr;
+    wxRadioButton *rbNew = nullptr;
+
+    void OnEventRadioButton(wxCommandEvent &);
 };

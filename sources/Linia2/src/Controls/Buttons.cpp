@@ -28,7 +28,7 @@ ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &s
     wxBitmapButton::Refresh();
     wxBitmapButton::Update();
 
-    SetCursor(wxCursor(wxCURSOR_HAND));
+    wxWindowBase::SetCursor(wxCursor(wxCURSOR_HAND));
 }
 
 

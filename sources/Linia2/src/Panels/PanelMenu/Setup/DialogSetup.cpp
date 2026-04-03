@@ -27,7 +27,7 @@ DialogSetup *DialogSetup::self = nullptr;
 
 
 DialogSetup::DialogSetup() :
-    MenuDialog(wxT("Настройка"), 275, { 2, 5 },
+    MenuDialog(wxT("Настройки"), 275, { 2, 5 },
         SET_USER_SETTINGS, []()
         {
             WindowUser().ShowOnWindow(DialogSetup::self->FindButton(SET_USER_SETTINGS));

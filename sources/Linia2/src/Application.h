@@ -2,19 +2,13 @@
 #pragma once
 
 
-/*
-
-    1. В таблице коэффициентов нету источника TypeDSet
-
-*/
-
-
 class Application : public wxApp
 {
     friend class Deivce;
     friend class EmulatorIPPP;
 
 public:
+
     virtual bool OnInit() wxOVERRIDE;
 
     void Disable();
@@ -29,6 +23,16 @@ private:
     void OnTimer(wxTimerEvent &);
 
 public:
+
+    enum class Mode
+    {
+        Old,            // Старый вид приложения - ИППП3
+        New             // Новый вид приложения - B1505
+    };
+
+    void SetMode(Mode);
+
+    void ReInit();
 
     // Эти функции вызываются из Device -----------------------------------------
     // Приём байта от контроллера по UART
