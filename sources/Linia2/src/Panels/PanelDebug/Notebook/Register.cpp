@@ -344,7 +344,6 @@ void Register::UpdateDecFields()
         {
             if (d.field.need_text_ctrl_dec)
             {
-//                if (i >= d.first_bit && i < d.first_bit + d.num_bits)   // Нашли описатель поля, в которое входит данный бит
                 if(i == d.first_bit)                                    // Нашли первый бит поля
                 {
                     uint value = d.CalculateValue(chboxes);
@@ -555,7 +554,7 @@ RegDAC::RegDAC(wxWindow *parent, pchar _title, Chip *_chip, const wxString &_fun
 
     knob->Bind(wxEVT_SLIDER, &RegDAC::OnEventKnob, this);
 
-    slider = new SliderInt(painter, { painter->BitX(chip->BitDepth() - 5, chip->BitDepth()), 75 }, (chip->BitDepth() - 4) * 20, 0, 100, "");
+    slider = new SliderInt(painter, { painter->BitX(chip->BitDepth() - 5, chip->BitDepth()) + 3, 75 }, (chip->BitDepth() - 4) * 20, 0, 100, "");
 
     slider->Bind(wxEVT_SLIDER, &RegDAC::OnEventSlider, this);
 }
@@ -780,17 +779,14 @@ void RegDAC::SetValueToKnobAndSlider()
 
     int new_value = (int)((float)valueDAC * 100.0f / (float)max_value + 0.5f);
 
-    if ((uint)new_value != valueDAC)
+    if (new_value != knob->GetValue())
     {
-        if (new_value != knob->GetValue())
-        {
-            knob->_SetValue(new_value, false);
-        }
+        knob->SetValue(new_value, false);
+    }
 
-        if (new_value != slider->GetValue())
-        {
-            slider->SetValue(new_value, false);
-        }
+    if (new_value != slider->GetValue())
+    {
+        slider->SetValue(new_value, false);
     }
 }
 

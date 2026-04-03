@@ -44,7 +44,7 @@ public:
         return maxValue;
     }
 
-    void _SetValue(int _value, bool _send_event = true)
+    void SetValue(int _value, bool _send_event = true)
     {
         if (_value < minValue) value = minValue;
         if (_value > maxValue) value = maxValue;
@@ -123,7 +123,7 @@ private:
                 if (newValue < minValue) newValue = minValue;
                 if (newValue > maxValue) newValue = maxValue;
 
-                _SetValue(newValue);
+                SetValue(newValue);
 
                 delta -= (float)((int)delta);
             }

@@ -23,7 +23,7 @@ SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _
 
     slider->SetBackgroundColour(parent->GetBackgroundColour());
 
-    text = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT });
+    text = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT }, wxALIGN_RIGHT);
 
     wxSize size_button{ 15, 12 };
 

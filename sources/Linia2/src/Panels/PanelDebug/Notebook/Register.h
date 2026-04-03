@@ -50,7 +50,7 @@ struct StructDescription
     {
         bool need_text_ctrl_dec = false;            // если true, то есть возможность вводить десятичное значение
         std::vector<CommandStruct> commands;        // Сюда ложим нужные команды, чтобы потом создать combo
-        TextCtrlNumber *text_ctrl_dec = nullptr;    // Здесь находятся десятичные значения
+        TextCtrlNumber *text_ctrl_dec = nullptr;    // Здесь находятся десятичные значения. Если nullptr - его нету
         CommandsCombo *combo = nullptr;             // А здесь находятся команды
     } field;
 
