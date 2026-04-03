@@ -9,9 +9,7 @@ public:
  
     DialogModels();
 
-    static DialogModels *self;
-
-    void PeriodicTask();
+    void UpdateStateControls();
 
 private:
 

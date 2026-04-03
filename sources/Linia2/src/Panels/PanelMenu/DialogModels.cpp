@@ -5,7 +5,7 @@
 #include "Panels/PanelConfig/PanelModel.h"
 
 
-DialogModels *DialogModels::self = nullptr;
+DialogModels *TheDialogModels = nullptr;
 
 
 const wxString DialogModels::BTN_NEW = wxT("Новый");
@@ -25,7 +25,7 @@ DialogModels::DialogModels() :
         },
         BTN_OPEN, []()
         {
-            wxFileDialog dialog(self, wxT("Открыть файл модели измерения"), wxEmptyString, wxEmptyString, "*.mod", wxFD_OPEN);
+            wxFileDialog dialog(TheDialogModels, wxT("Открыть файл модели измерения"), wxEmptyString, wxEmptyString, "*.mod", wxFD_OPEN);
 
             if (dialog.ShowModal() == wxID_OK)
             {
@@ -40,11 +40,11 @@ DialogModels::DialogModels() :
         {
             if (Model::IsModified())
             {
-                wxMessageDialog dialog(self, wxT("Файл модели был изменён. Сохранить изменения?"), wxT("Подтверждение"), wxYES_NO | wxICON_QUESTION);
+                wxMessageDialog dialog(TheDialogModels, wxT("Файл модели был изменён. Сохранить изменения?"), wxT("Подтверждение"), wxYES_NO | wxICON_QUESTION);
 
                 if (dialog.ShowModal() == wxID_YES)
                 {
-                    wxFileDialog dialog_save(self, wxT("Сохранить файл модели измерения"), GF::DirForModFiles(), Model::GetName() + ".mod", "*.mod", wxFD_SAVE);
+                    wxFileDialog dialog_save(TheDialogModels, wxT("Сохранить файл модели измерения"), GF::DirForModFiles(), Model::GetName() + ".mod", "*.mod", wxFD_SAVE);
 
                     if (dialog_save.ShowModal() == wxID_OK)
                     {
@@ -58,15 +58,15 @@ DialogModels::DialogModels() :
                 }
             }
 
-            DialogModels::self->Close(true);
+            TheDialogModels->Close(true);
         },
         BTN_SAVE, []()
         {
-            DialogModels::self->Close(true);
+            TheDialogModels->Close(true);
         },
         BTN_SAVE_AS, []()
         {
-            wxFileDialog dialog(self, "Сохранить файл модели измерения", GF::DirForModFiles(), Model::GetName() + ".mod", "*.mod", wxFD_SAVE);
+            wxFileDialog dialog(TheDialogModels, "Сохранить файл модели измерения", GF::DirForModFiles(), Model::GetName() + ".mod", "*.mod", wxFD_SAVE);
 
             if (dialog.ShowModal() == wxID_OK)
             {
@@ -84,16 +84,14 @@ DialogModels::DialogModels() :
         }
     )
 {
-    self = this;
+    TheDialogModels = this;
 
-//    MenuDialog::Update();
+    UpdateStateControls();
 }
 
 
-void DialogModels::PeriodicTask()
+void DialogModels::UpdateStateControls()
 {
-//    MenuDialog::Update();
-
     bool empty = Model::IsEmpty();
 
     FindButton(BTN_NEW)->Enable(empty);

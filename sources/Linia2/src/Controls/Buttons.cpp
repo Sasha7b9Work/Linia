@@ -23,11 +23,10 @@ ButtonBitmap::ButtonBitmap(wxWindow *parent, const wxPoint &pos, const wxSize &s
         wxBitmapButton::SetClientSize(((size == wxDefaultSize) ? bitmap.GetBitmap().GetSize() : size) + wxSize(10, 10));
     }
 
-    wxBitmapButton::Update();
+    wxBitmapButton::SetBackgroundColour(GetBackgroundColour().ChangeLightness(LIGHTNESS));
 
     wxBitmapButton::Refresh();
-
-    wxBitmapButton::SetBackgroundColour(GetBackgroundColour().ChangeLightness(LIGHTNESS));
+    wxBitmapButton::Update();
 }
 
 
