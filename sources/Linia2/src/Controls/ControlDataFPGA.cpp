@@ -60,7 +60,7 @@ void ControlDataFPGA::SetMax(int _max)
 
 void ControlDataFPGA::Draw()
 {
-    painter->BeginPaint(*wxLIGHT_GREY);
+    painter->BeginPaint(*wxWHITE);
 
     painter->gc->SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL), *wxBLACK);
 
