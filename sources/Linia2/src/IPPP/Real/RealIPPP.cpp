@@ -66,8 +66,6 @@ bool RealIPPP::ReadData(int data[5][MAX_NUMBER_POINTS])
         gpiod_line *infoCS = GPIO::GetOutputPinInfo(Pin::Out_SPI_CS)->hw.line;
         gpiod_line *infoREQ = GPIO::GetOutputPinInfo(Pin::Out_REQ_RD)->hw.line;
 
-        TimeMeterMS meter;
-
         for (int i = 0; i < MAX_NUMBER_POINTS; i++)
         {
             PinOut::Set(infoCS, 0);
