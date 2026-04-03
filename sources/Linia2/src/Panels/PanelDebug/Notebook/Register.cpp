@@ -51,7 +51,7 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, const 
 
         for (auto box : chboxes)
         {
-            box->Bind(wxEVT_CHECKBOX, &Register::OnEventCheckBox, this);
+            box->Bind(wxEVT_CHECKBOX, &Register::OnEventCheckBoxBit, this);
         }
     }
 
@@ -238,9 +238,9 @@ void Register::OnEventTextCtrl(wxCommandEvent &event)
         }
     }
 
-    event.Skip();
-
     UpdateComboCommandsAndModes();
+
+    event.Skip();
 }
 
 
@@ -376,7 +376,7 @@ uint StructDescription::CalculateValue(std::vector<CheckBoxBit *> &chbox)
 }
 
 
-void Register::OnEventCheckBox(wxCommandEvent &event)
+void Register::OnEventCheckBoxBit(wxCommandEvent &event)
 {
     UpdateDecFields();
 
@@ -773,9 +773,11 @@ void RegDAC::SetValueToKnobAndSlider()
 {
     int max_value = (1 << NumBitsValue()) - 1;
 
-    int new_value = (int)((float)GetValueDAC() * 100.0f / (float)max_value + 0.5f);
+    uint valueDAC = GetValueDAC();
 
-    if ((uint)new_value != value_DAC)
+    int new_value = (int)((float)valueDAC * 100.0f / (float)max_value + 0.5f);
+
+    if ((uint)new_value != valueDAC)
     {
         if (new_value != knob->GetValue())
         {
@@ -798,9 +800,7 @@ void RegDAC::OnEventUpdateComboCommandsAndModes()
 
 uint RegDAC::GetValueDAC()
 {
-    value_DAC = GetValueFromBits(FirstBitValue(), NumBitsValue());
-
-    return value_DAC;
+    return GetValueFromBits(FirstBitValue(), NumBitsValue());
 }
 
 
@@ -808,8 +808,6 @@ void RegDAC::SetValueDAC(uint value)
 {
     if (GetValueDAC() != value)
     {
-        value_DAC = value;
-
         SetValueToBits(value, FirstBitValue(), NumBitsValue());
     }
 }

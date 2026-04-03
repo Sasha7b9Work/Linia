@@ -10,8 +10,7 @@
 #include "Controls/Slider.h"
 
 
-// Визуальное представление регистра
-
+// Квадратик с 0 или 1, на который щёлкают ЛКМ и он изменяет своё состояние
 class CheckBoxBit : public Painter
 {
 public:
@@ -75,6 +74,8 @@ struct ModeDescripion
     std::vector<StateBit> state;    // При выборе данного режима биты будут установлены в данные состояния
 };
 
+
+// Визуальное представление регистра
 
 class Register : public wxPanel
 {
@@ -150,7 +151,8 @@ protected:
     void IncreaseHeight(int dH);
 
     void OnEventTextCtrl(wxCommandEvent &);
-    void OnEventCheckBox(wxCommandEvent &);
+    // ЛКМ по состоянию бита CheckBoxBit
+    void OnEventCheckBoxBit(wxCommandEvent &);
     // Управление состоянием групп битов
     void OnEventComboField(wxCommandEvent &);
     // Выбор режима
@@ -193,7 +195,6 @@ private:
 
     KnobWidget *knob = nullptr;         // Ручка установки значения
     SliderInt *slider = nullptr;        // Ползунок установки значения
-    uint value_DAC = 0;
 
     void OnEventKnob(wxCommandEvent &);
     void OnEventSlider(wxCommandEvent &);
