@@ -9,8 +9,6 @@ public:
 
     DialogTest();
 
-    static DialogTest *self;
-
     void UpdateStateControls();
 
     static const wxString BTN_APPEND;

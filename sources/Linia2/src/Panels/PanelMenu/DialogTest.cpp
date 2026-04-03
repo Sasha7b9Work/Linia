@@ -3,7 +3,7 @@
 #include "Panels/PanelMenu/DialogTest.h"
 
 
-DialogTest *DialogTest::self = nullptr;
+DialogTest *TheDialogTest = nullptr;
 DialogTestAppend *DialogTestAppend::self = nullptr;
 DialogTestLibrary *DialogTestLibrary::self = nullptr;
 
@@ -29,7 +29,7 @@ DialogTest::DialogTest() :
     MenuDialog(wxT("Тесты"), 175, { 0, 1, 3, 6, 7 },
         BTN_APPEND, []()
         {
-            DialogTestAppend().ShowOnWindow(DialogTest::self->FindButton(BTN_APPEND));
+            DialogTestAppend().ShowOnWindow(TheDialogTest->FindButton(BTN_APPEND));
         },
         BTN_SAVE_PARAMETERS, []()
         {
@@ -51,14 +51,14 @@ DialogTest::DialogTest() :
         },
         BTN_LIBRARY, []()
         {
-            DialogTestLibrary().ShowOnWindow(DialogTest::self->FindButton(BTN_LIBRARY));
+            DialogTestLibrary().ShowOnWindow(TheDialogTest->FindButton(BTN_LIBRARY));
         },
         BTN_SAVE_TO_LIBRARY, []()
         {
         }
     )
 {
-    self = this;
+    TheDialogTest = this;
 
     UpdateStateControls();
 }

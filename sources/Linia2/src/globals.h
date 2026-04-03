@@ -4,6 +4,7 @@
 
 class Application;
 struct AutoCursors;
+class DialogTest;
 class Display;
 class IGrid;
 class MainWindow;
@@ -22,6 +23,7 @@ class WindowCursors;
 
 extern Application   *TheApp;
 extern AutoCursors   *TheAutoCursors;
+extern DialogTest    *TheDialogTest;
 extern Display       *TheDisplay;
 extern IGrid         *TheGrid;
 extern MainWindow    *TheMainWindow;
