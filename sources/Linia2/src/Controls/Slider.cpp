@@ -38,6 +38,7 @@ SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _
     btnLess->SetCursor(wxCursor(wxCURSOR_HAND));
     slider->SetCursor(wxCursor(wxCURSOR_HAND));
 
+    slider->Bind(wxEVT_ENTER_WINDOW, &SliderInt::OnEventEnterWindow, this);
     slider->Bind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
     btnMore->Bind(wxEVT_LEFT_DOWN, &SliderInt::OnEventMouseDown, this);
     btnLess->Bind(wxEVT_LEFT_DOWN, &SliderInt::OnEventMouseDown, this);
@@ -89,6 +90,17 @@ void SliderInt::OnEventSlider(wxCommandEvent &event)
 {
     text->SetLabel(wxString::Format("%d", event.GetInt()));
     GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
+
+    event.Skip();
+}
+
+
+void SliderInt::OnEventEnterWindow(wxMouseEvent &event)
+{
+    if (event.GetId() == slider->GetId())
+    {
+        slider->SetCursor(wxCursor(wxCURSOR_HAND));
+    }
 
     event.Skip();
 }
