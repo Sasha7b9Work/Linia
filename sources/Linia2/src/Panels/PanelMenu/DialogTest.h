@@ -11,7 +11,7 @@ public:
 
     static DialogTest *self;
 
-    virtual void Update() override;
+    void UpdateStateControls();
 
     static const wxString BTN_APPEND;
     static const wxString BTN_LIBRARY;

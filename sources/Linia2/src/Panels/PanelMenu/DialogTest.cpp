@@ -60,14 +60,12 @@ DialogTest::DialogTest() :
 {
     self = this;
 
-    MenuDialog::Update();
+    UpdateStateControls();
 }
 
 
-void DialogTest::Update()
+void DialogTest::UpdateStateControls()
 {
-    MenuDialog::Update();
-
     FindButton(BTN_SAVE_PARAMETERS)->Enable(false);
     FindButton(BTN_DELETE)->Enable(false);
     FindButton(BTN_DELETE_ALL)->Enable(false);
