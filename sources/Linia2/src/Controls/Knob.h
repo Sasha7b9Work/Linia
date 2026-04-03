@@ -22,7 +22,6 @@ public:
         Bind(wxEVT_SET_FOCUS, &KnobWidget::OnSetFocus, this);
         Bind(wxEVT_KILL_FOCUS, &KnobWidget::OnKillFocus, this);
 
-        // Устанавливаем курсор "рука" при наведении
         wxWindowBase::SetCursor(wxCursor(wxCURSOR_HAND));
 
         // Включаем двойную буферизацию для устранения мерцания
@@ -71,6 +70,7 @@ private:
     int value;
     bool dragging = false;
     wxPoint capturePoint; // Точка, где был захвачен виджет
+    wxPoint globalCapturePoint;
 
     void OnEventMouseLeftDown(wxMouseEvent &event)
     {
@@ -78,7 +78,10 @@ private:
         {
             dragging = true;
             capturePoint = event.GetPosition(); // Запоминаем позицию захвата
+            globalCapturePoint = ClientToScreen(capturePoint);
             CaptureMouse(); // Захватываем мышь для получения событий вне виджета
+
+            wxWindowBase::SetCursor(wxCursor(wxBitmap{ 1, 1, 1 }));
         }
         event.Skip();
     }
@@ -90,6 +93,8 @@ private:
             dragging = false;
             if (HasCapture())
                 ReleaseMouse();
+
+            wxWindowBase::SetCursor(wxCursor(wxCURSOR_HAND));
         }
         event.Skip();
     }
