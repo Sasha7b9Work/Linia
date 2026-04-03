@@ -92,11 +92,11 @@ void ControlDataFPGA::Draw()
     painter->gc->SetPen(*wxBLACK_PEN);
     painter->gc->SetBrush(*wxBLACK_BRUSH);
 
-    float scale_y = (float)(painter->GetSize().y - 2) / (float)(max_value - min_value);
+    float scale_y = (float)(painter->GetSize().y - 4) / (float)(max_value - min_value);
 
     for (int i = 0; i < painter->GetSize().x; i++)
     {
-        int y = (int)((float)(data[i] - min_value) * scale_y) + 1;
+        int y = (int)((float)(data[i] - min_value) * scale_y) + 2;
 
         painter->gc->DrawRectangle(i, painter->GetSize().y - y - 1, 1, 1);
     }
