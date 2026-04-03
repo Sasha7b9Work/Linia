@@ -39,7 +39,10 @@ SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _
     slider->SetCursor(wxCursor(wxCURSOR_HAND));
 
     slider->Bind(wxEVT_ENTER_WINDOW, &SliderInt::OnEventEnterWindow, this);
+
+    // Устанавливать курсор будем так, потому что на Linux обычная установка не работает
     slider->Bind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
+
     btnMore->Bind(wxEVT_LEFT_DOWN, &SliderInt::OnEventMouseDown, this);
     btnLess->Bind(wxEVT_LEFT_DOWN, &SliderInt::OnEventMouseDown, this);
 //    btnMore->Bind(wxEVT_LEFT_UP, &SliderInt::OnEventMouseUp, this);
