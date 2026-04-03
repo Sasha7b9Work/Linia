@@ -180,6 +180,11 @@ bool Application::OnInit()
 
 #endif
 
+    if (SET::debug_mode->Get())
+    {
+        TheMainWindow->SetMode(ModeMainWindow::Debug);
+    }
+
     return true;
 }
 
