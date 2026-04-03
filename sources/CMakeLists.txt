@@ -59,3 +59,4 @@ add_subdirectory(Linia2)
 if(WIN32)
     add_subdirectory(Device)
 endif()
+
