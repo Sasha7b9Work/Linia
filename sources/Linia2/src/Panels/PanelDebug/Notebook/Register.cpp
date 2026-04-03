@@ -338,17 +338,20 @@ void Register::UpdateDecFields()
         return;
     }
 
-    for (int i = 0; i < (int)chboxes.size(); i++)                         // Перебираем все биты
+    for (int i = 0; i < (int)chboxes.size(); i++)                       // Перебираем все биты
     {
         for (auto &d : desc[0])
         {
             if (d.field.need_text_ctrl_dec)
             {
-                if (i >= d.first_bit && i < d.first_bit + d.num_bits)   // Нашли описатель поля, в которое входит данный бит
+//                if (i >= d.first_bit && i < d.first_bit + d.num_bits)   // Нашли описатель поля, в которое входит данный бит
+                if(i == d.first_bit)                                    // Нашли первый бит поля
                 {
                     uint value = d.CalculateValue(chboxes);
 
                     d.field.text_ctrl_dec->SetValue(wxString::Format("%u", value));
+
+                    i += d.num_bits;                                    // Переходим к следующему полю
                 }
             }
         }
