@@ -114,7 +114,7 @@ void Chip::WriteValueRAW(uint value)
 {
     if (!clk)
     {
-        LOG_ERROR("Bad record");
+//        LOG_ERROR("Bad record");
         return;
     }
 
