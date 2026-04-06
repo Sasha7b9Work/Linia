@@ -60,30 +60,33 @@ bool SCPI::FuncPinIn(pchar command)
 }
 
 
-bool SCPI::FuncLog(pchar command)
+bool SCPI::FuncLog(pchar /*command*/)
 {
-    return FuncLogMessage("LOG    ", command);
-}
-
-
-bool SCPI::FuncWarning(pchar command)
-{
-    return FuncLogMessage("WARNING", command);
-}
-
-
-bool SCPI::FuncError(pchar command)
-{
-    return FuncLogMessage("ERROR  ", command);
-}
-
-
-bool SCPI::FuncLogMessage(pchar type, pchar message)
-{
-    Log::LogMCU(type, message);
-
     return true;
+//    return FuncLogMessage("LOG    ", command);
 }
+
+
+bool SCPI::FuncWarning(pchar /*command*/)
+{
+    return true;
+//    return FuncLogMessage("WARNING", command);
+}
+
+
+bool SCPI::FuncError(pchar /*command*/)
+{
+    return true;
+//    return FuncLogMessage("ERROR  ", command);
+}
+
+
+//bool SCPI::FuncLogMessage(pchar /*type*/, pchar /*message*/)
+//{
+////    Log::LogMCU(type, message);
+//
+//    return true;
+//}
 
 
 bool SCPI::FuncPing(pchar)
