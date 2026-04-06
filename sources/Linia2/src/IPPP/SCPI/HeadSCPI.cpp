@@ -11,7 +11,7 @@ namespace SCPI
     static bool FuncLog(pchar);
     static bool FuncWarning(pchar);
     static bool FuncError(pchar);
-    static bool FuncLogMessage(pchar type, pchar message);
+//    static bool FuncLogMessage(pchar type, pchar message);
     static bool FuncPing(pchar);
 
     StructSCPI head[] =
