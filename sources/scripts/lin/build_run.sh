@@ -5,6 +5,6 @@
 ./build.sh
 kill -9 $(pidof Linia2)
 
-~/Desktop/Linia.desktop
+/home/mnipi/Desktop/Linia.desktop
 
 #./start_x.sh
