@@ -7,18 +7,22 @@
 
 namespace FPGA
 {
-    static PinIn  pinLIMIT(Port::_E, Pin::_7);               // 58
-    static PinOut pinA0_RG(Port::_G, Pin::_5);               // 90
-    static PinOut pinA1_RG(Port::_G, Pin::_6);               // 91
-    static PinOut pinCLK_RG(Port::_G, Pin::_7);              // 92
-    static PinOut pinWR_RG(Port::_G, Pin::_8);               // 93
-    static PinOut pinDAT_RG(Port::_D, Pin::_13);             // 82
-    static PinOut pinSTART_TB(Port::_G, Pin::_4);            // 89
+    static PinIn  pinLIMIT(Port::_E, Pin::_7);          // 58
+    static PinOut pinA0_RG(Port::_G, Pin::_5);          // 90
+    static PinOut pinA1_RG(Port::_G, Pin::_6);          // 91
+    static PinOut pinCLK_RG(Port::_G, Pin::_7);         // 92
+    static PinOut pinWR_RG(Port::_G, Pin::_8);          // 93
+    static PinOut pinDAT_RG(Port::_D, Pin::_13);        // 82
+    static PinOut pinSTART_TB(Port::_G, Pin::_4);       // 89
+    static PinOut pinSTOP_TB(Port::_E, Pin::_13);       // 66
 
     static uint lengths[10] = { 9, 8, 8, 0, 0, 0, 0, 0, 0, 0 };
 
     // Дать start FPGA
     static void WriteStart();
+
+    // Дать стоп FPGA
+    static void WriteStop();
 
     static TimeMeterMS meter_scan;          // По этому счётчику отсчитываем развёртку
 
@@ -46,6 +50,9 @@ void FPGA::Init()
 
     pinSTART_TB.Init();
     pinSTART_TB.ToLow();
+
+    pinSTOP_TB.Init();
+    pinSTOP_TB.ToLow();
 }
 
 
@@ -78,6 +85,8 @@ void FPGA::StartScan(uint periodMS)
 void FPGA::StopScan()
 {
     is_running_scan = false;
+
+    WriteStop();
 }
 
 
@@ -93,6 +102,14 @@ void FPGA::WriteStart()
     Pause();
     pinSTART_TB.ToLow();
     meter_scan.Reset();
+}
+
+
+void FPGA::WriteStop()
+{
+    pinSTOP_TB.ToHi();
+    Pause();
+    pinSTOP_TB.ToLow();
 }
 
 
