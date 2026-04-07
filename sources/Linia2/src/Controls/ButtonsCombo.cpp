@@ -8,7 +8,7 @@
 
 
 DrawingButton::DrawingButton(wxWindow *parent, const wxString &label, const wxPoint &position, const wxSize &size, const wxString &_name_file) :
-    wxButton(parent, wxID_ANY, label, position, size),
+    Button(parent, label, position, size),
     file_name(_name_file)
 {
     wxButton::SetBackgroundStyle(wxBG_STYLE_PAINT); // Для избежания мерцания
