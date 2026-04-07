@@ -4,6 +4,18 @@
 #include "Controls/Bitmap.h"
 
 
+struct Button : public wxButton
+{
+    Button(wxWindow *, const wxString &, const wxPoint &, const wxSize &);
+};
+
+
+struct ToggleButton : public wxToggleButton
+{
+    ToggleButton(wxWindow *, const wxString &, const wxPoint &, const wxSize &);
+};
+
+
 class ButtonBitmap : public wxBitmapButton
 {
 public:

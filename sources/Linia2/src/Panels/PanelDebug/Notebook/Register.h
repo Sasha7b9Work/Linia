@@ -115,8 +115,8 @@ protected:
     Chip *chip = nullptr;
     PainterRegister *painter = nullptr;
 
-    wxButton *btnSend = nullptr;                // Однократная засылка
-    wxToggleButton *btnAutoSend = nullptr;      // Если кнопка нажата, то каждую секунду происходит запись в данный регистр
+    Button *btnSend = nullptr;                  // Однократная засылка
+    ToggleButton *btnAutoSend = nullptr;        // Если кнопка нажата, то каждую секунду происходит запись в данный регистр
     wxTimer timerAutoSend;                      // По этому таймеру будут автозасылки
 
     std::vector<wxWindow *> windows;

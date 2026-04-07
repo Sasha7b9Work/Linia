@@ -32,13 +32,13 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, const 
 
     int x = 690;
 
-    btnSend = new wxButton(this, wxID_ANY, wxT("Записать"), { x, 0 }, size_button);
+    btnSend = new Button(this, wxT("Записать"), { x, 0 }, size_button);
 
     windows.push_back(btnSend);
 
     x -= size_button.x + 5;
 
-    btnAutoSend = new wxToggleButton(this, wxID_ANY, wxT("Автозапись"), { x, 0 }, size_button);
+    btnAutoSend = new ToggleButton(this, wxT("Автозапись"), { x, 0 }, size_button);
 
     windows.push_back(btnAutoSend);
 

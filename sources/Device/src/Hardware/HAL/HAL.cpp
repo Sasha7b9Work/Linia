@@ -153,7 +153,7 @@ void HAL_MspInit()
 }
 
 
-void HAL::ErrorHandler(pchar file, int line)
+void HAL::ErrorHandler(pchar /*file*/, int /*line*/)
 {
 //    LOG_ERROR("A critical hardware error occurred in %s:%d", file, line);
 }
