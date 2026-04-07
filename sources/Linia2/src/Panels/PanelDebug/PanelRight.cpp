@@ -20,11 +20,11 @@ PanelRight::PanelRight(wxWindow *parent) :
 
     wxSize size_button{ 75, BUTTON_HEIGHT };
 
-    btnReturn = new wxButton(this, wxID_ANY, wxT("Закрыть"), { 125, SD::Y_SB(20) }, size_button);
+    btnReturn = new Button(this, wxT("Закрыть"), { 125, SD::Y_SB(20) }, size_button);
 
     btnReturn->SetToolTip(wxT("Возврат в главную панель"));
 
-    btnStart = new wxButton{ this, wxID_ANY, "Старт", { 10, SD::Y_SB(60) }, size_button };
+    btnStart = new Button{ this, "Старт", { 10, SD::Y_SB(60) }, size_button };
 
     btnStart->SetToolTip(wxT("Запуск развёртки"));
 
@@ -32,7 +32,7 @@ PanelRight::PanelRight(wxWindow *parent) :
 
     txtPeriodScan->SetToolTip(wxT("Период запуска развёртки в миллисекундах"));
 
-    btnStop = new wxButton{ this, wxID_ANY, "Стоп", {10, SD::Y_SB(90)}, size_button };
+    btnStop = new Button{ this, "Стоп", {10, SD::Y_SB(90)}, size_button };
 
     btnStop->SetToolTip(wxT("Останов развёртки"));
 

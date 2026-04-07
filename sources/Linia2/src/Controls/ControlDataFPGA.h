@@ -1,6 +1,7 @@
 // 2026/04/01 14:21:40 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/Painter.h"
+#include "COntrols/Buttons.h"
 
 
 class PainterDataFPGA : public Painter
@@ -28,7 +29,7 @@ public:
 private:
 
     PainterDataFPGA *painter = nullptr;
-    wxToggleButton *btnScale = nullptr;
+    ToggleButton *btnScale = nullptr;
     int max = (1 << 18) - 1;
     int data[MAX_NUMBER_POINTS];
 

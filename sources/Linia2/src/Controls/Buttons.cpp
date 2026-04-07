@@ -11,8 +11,8 @@
 wxDEFINE_EVENT(EVT_BUTTON_BITMAP_CHOICE, ButtonBitmapChoiceEvent);
 
 
-Button::Button(wxWindow *parent, const wxString &label, const wxPoint &pos, const wxSize &size) :
-    wxButton(parent, wxID_ANY, label, pos, size)
+Button::Button(wxWindow *parent, const wxString &label, const wxPoint &pos, const wxSize &size, int flags) :
+    wxButton(parent, wxID_ANY, label, pos, size, flags)
 {
     SetCursor(wxCursor(wxCURSOR_HAND));
 }

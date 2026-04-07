@@ -1,6 +1,8 @@
 ﻿// 2026/01/24 21:41:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/ControlDataFPGA.h"
+#include "Controls/Buttons.h"
+
 
 class PanelRight : public wxPanel
 {
@@ -14,9 +16,9 @@ public:
 
 private:
 
-    wxButton *btnReturn = nullptr;      // Выход в основную панель
-    wxButton *btnStart = nullptr;       // Запуск развёртки
-    wxButton *btnStop = nullptr;        // Останов развёртки
+    Button *btnReturn = nullptr;      // Выход в основную панель
+    Button *btnStart = nullptr;       // Запуск развёртки
+    Button *btnStop = nullptr;        // Останов развёртки
 
     wxTextCtrl *txtPeriodScan = nullptr;    // Период запуска развёртки в миллисекундах
 

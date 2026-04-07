@@ -70,7 +70,7 @@ public:
 
         for (uint i = 0; i < labels.size(); ++i)
         {
-            wxButton *btn = new wxButton(mainPanel, wxID_ANY, labels[i], wxDefaultPosition, wxDefaultSize, GetCombo()->left_align ? wxBU_LEFT : 0);
+            Button *btn = new Button(mainPanel, labels[i], wxDefaultPosition, wxDefaultSize, GetCombo()->left_align ? wxBU_LEFT : 0);
             btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(LIGHTNESS));
             btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(170));
             btn->SetMaxSize(wxSize(-1, 20));

@@ -6,7 +6,7 @@
 
 struct Button : public wxButton
 {
-    Button(wxWindow *, const wxString &, const wxPoint &, const wxSize &);
+    Button(wxWindow *, const wxString &, const wxPoint &, const wxSize &, int flags = 0);
 };
 
 
