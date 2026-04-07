@@ -7,7 +7,7 @@
 class DrawingButton : public wxButton
 {
 public:
-    DrawingButton(wxWindow *parent, int id, const wxString &, const wxPoint &, const wxSize &, const wxString &name_file = "");
+    DrawingButton(wxWindow *parent, const wxString &, const wxPoint &, const wxSize &, const wxString &name_file = "");
 
 private:
 
