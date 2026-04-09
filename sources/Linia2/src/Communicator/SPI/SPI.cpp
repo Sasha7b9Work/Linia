@@ -18,7 +18,7 @@
 
 namespace SPI
 {
-    static int g_spi_fd = -1;
+    static int fd = -1;
     static uint g_speed = SPI_SPEED;
     static uint8 g_mode = 0;
     static uint8 g_bits_per_word = 8;
@@ -57,41 +57,41 @@ namespace SPI
     {
         LOG_WRITE("Initializing SPI...");
 
-        g_spi_fd = ::open(device, O_RDWR);
-        if (g_spi_fd < 0)
+        fd = ::open(device, O_RDWR);
+        if (fd < 0)
         {
             LOG_ERROR("Cannot open SPI device: %s", device);
             return;
         }
 
-        if (ioctl(g_spi_fd, SPI_IOC_WR_MODE, &g_mode) < 0)
+        if (ioctl(fd, SPI_IOC_WR_MODE, &g_mode) < 0)
         {
             LOG_ERROR("Cannot set SPI mode");
-            ::close(g_spi_fd);
-            g_spi_fd = -1;
+            ::close(fd);
+            fd = -1;
             return;
         }
 
-        if (ioctl(g_spi_fd, SPI_IOC_WR_BITS_PER_WORD, &g_bits_per_word) < 0)
+        if (ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &g_bits_per_word) < 0)
         {
             LOG_ERROR("Cannot set bits per word");
-            ::close(g_spi_fd);
-            g_spi_fd = -1;
+            ::close(fd);
+            fd = -1;
             return;
         }
 
-        if (ioctl(g_spi_fd, SPI_IOC_WR_MAX_SPEED_HZ, &g_speed) < 0)
+        if (ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &g_speed) < 0)
         {
             LOG_ERROR("Cannot set SPI speed");
-            ::close(g_spi_fd);
-            g_spi_fd = -1;
+            ::close(fd);
+            fd = -1;
             return;
         }
 
         if (!InitGPIO())
         {
-            ::close(g_spi_fd);
-            g_spi_fd = -1;
+            ::close(fd);
+            fd = -1;
             return;
         }
 
@@ -100,22 +100,22 @@ namespace SPI
 
         SPI::SetSpeed(SPI_SPEED);
 
-        SPI::SetMode(1);
+        SPI::SetMode(1);        // При такой настройке данные выставляет на срез клока, как нам и нужно
 
         LOG_WRITE("SPI initialized successfully on %s", device);
     }
 
     void DeInit()
     {
-        if (g_spi_fd >= 0)
+        if (fd >= 0)
         {
             for (int i = 1; i <= MAX_DAC_COUNT; i++)
             {
                 SetCS(i, true);
             }
 
-            ::close(g_spi_fd);
-            g_spi_fd = -1;
+            ::close(fd);
+            fd = -1;
             LOG_WRITE("SPI deinitialized");
         }
 
@@ -145,11 +145,9 @@ namespace SPI
         data[1] = static_cast<uint8>(value & 0xFF);
 
         SetCS(number_DAC, false);
-//        usleep(1);
 
         bool result = Write(data, 2);
 
-//        usleep(1);
         SetCS(number_DAC, true);
 
         return result;
@@ -162,7 +160,7 @@ namespace SPI
 
         if (IsReady())
         {
-            if (ioctl(g_spi_fd, SPI_IOC_WR_MAX_SPEED_HZ, &g_speed) < 0)
+            if (ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &g_speed) < 0)
             {
                 LOG_ERROR("Cannot set SPI speed to %u Hz", speedHz);
                 return false;
@@ -181,7 +179,7 @@ namespace SPI
 
         if (IsReady())
         {
-            if (ioctl(g_spi_fd, SPI_IOC_WR_MODE, &g_mode) < 0)
+            if (ioctl(fd, SPI_IOC_WR_MODE, &g_mode) < 0)
             {
                 LOG_ERROR("Cannot set SPI mode to %d", (int)mode);
                 return false;
@@ -197,7 +195,7 @@ namespace SPI
     // Возвращает: true если SPI устройство открыто и готово к работе, false если закрыто
     bool IsReady()
     {
-        return g_spi_fd >= 0 && g_gpio_initialized;
+        return fd >= 0 && g_gpio_initialized;
     }
 
     bool InitGPIO()
@@ -309,7 +307,7 @@ namespace SPI
 
     bool Write(uint8 *data, size_t length)
     {
-        if (g_spi_fd < 0)
+        if (fd < 0)
         {
             LOG_ERROR("SPI not initialized");
             return false;
@@ -330,7 +328,7 @@ namespace SPI
         transfer.bits_per_word = g_bits_per_word;
         transfer.cs_change = 0;
 
-        int result = ioctl(g_spi_fd, SPI_IOC_MESSAGE(1), &transfer);
+        int result = ioctl(fd, SPI_IOC_MESSAGE(1), &transfer);
         if (result < 0)
         {
             LOG_ERROR("SPI transfer failed");
