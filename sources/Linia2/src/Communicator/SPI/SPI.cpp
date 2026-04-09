@@ -19,7 +19,7 @@
 namespace SPI
 {
     static int fd = -1;
-    static uint g_speed = SPI_SPEED;
+    static uint speed = SPI_SPEED;
     static uint8 g_mode = 0;
     static uint8 g_bits_per_word = 8;
     static bool g_gpio_initialized = false;
@@ -80,7 +80,7 @@ namespace SPI
             return;
         }
 
-        if (ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &g_speed) < 0)
+        if (ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed) < 0)
         {
             LOG_ERROR("Cannot set SPI speed");
             ::close(fd);
@@ -156,11 +156,11 @@ namespace SPI
     // Установка скорости SPI интерфейса
     bool SetSpeed(uint speedHz)
     {
-        g_speed = speedHz;
+        speed = speedHz;
 
         if (IsReady())
         {
-            if (ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &g_speed) < 0)
+            if (ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed) < 0)
             {
                 LOG_ERROR("Cannot set SPI speed to %u Hz", speedHz);
                 return false;
@@ -323,7 +323,7 @@ namespace SPI
         transfer.tx_buf = (unsigned long long)data;
         transfer.rx_buf = 0;
         transfer.len = (uint)length;
-        transfer.speed_hz = g_speed;
+        transfer.speed_hz = speed;
         transfer.delay_usecs = 0;
         transfer.bits_per_word = g_bits_per_word;
         transfer.cs_change = 0;
