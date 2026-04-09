@@ -22,14 +22,14 @@ namespace SPI
     static uint speed = SPI_SPEED;
     static uint8 mode = 0;
     static uint8 bits_per_word = 8;
-    static bool g_gpio_initialized = false;
+    static bool gpio_initialized = false;
 
     const char *device = SPI_DEVICE;
 
     static const int MAX_DAC_COUNT = 2;
 
     const char *gpio_chip_name = SPI_CHIP;                                  // Имя GPIO чипа для ARM64
-    struct gpiod_chip *g_gpio_chip = nullptr;                               // Дескриптор GPIO чипа
+    struct gpiod_chip *gpio_chip = nullptr;                               // Дескриптор GPIO чипа
     struct gpiod_line *g_dac_lines[MAX_DAC_COUNT] = { nullptr, nullptr };   // Линии GPIO для каждого DAC
 
     const unsigned int cs_DAC[MAX_DAC_COUNT] = {
@@ -195,16 +195,16 @@ namespace SPI
     // Возвращает: true если SPI устройство открыто и готово к работе, false если закрыто
     bool IsReady()
     {
-        return fd >= 0 && g_gpio_initialized;
+        return fd >= 0 && gpio_initialized;
     }
 
     bool InitGPIO()
     {
-        if (g_gpio_initialized)
+        if (gpio_initialized)
             return true;
 
-        g_gpio_chip = gpiod_chip_open_by_name(gpio_chip_name);
-        if (!g_gpio_chip)
+        gpio_chip = gpiod_chip_open_by_name(gpio_chip_name);
+        if (!gpio_chip)
         {
             LOG_ERROR("Cannot open %s", gpio_chip_name);
             return false;
@@ -218,7 +218,7 @@ namespace SPI
 
             LOG_WRITE("Initializing %s (GPIO%u in gpiochip3)", DAC_NAMES[i], cs_num);
 
-            g_dac_lines[i] = gpiod_chip_get_line(g_gpio_chip, cs_num);
+            g_dac_lines[i] = gpiod_chip_get_line(gpio_chip, cs_num);
             if (!g_dac_lines[i])
             {
                 LOG_ERROR("Cannot get GPIO line %u for %s", cs_num, DAC_NAMES[i]);
@@ -231,8 +231,8 @@ namespace SPI
                         g_dac_lines[j] = nullptr;
                     }
                 }
-                gpiod_chip_close(g_gpio_chip);
-                g_gpio_chip = nullptr;
+                gpiod_chip_close(gpio_chip);
+                gpio_chip = nullptr;
                 return false;
             }
 
@@ -248,13 +248,13 @@ namespace SPI
                         g_dac_lines[j] = nullptr;
                     }
                 }
-                gpiod_chip_close(g_gpio_chip);
-                g_gpio_chip = nullptr;
+                gpiod_chip_close(gpio_chip);
+                gpio_chip = nullptr;
                 return false;
             }
         }
 
-        g_gpio_initialized = true;
+        gpio_initialized = true;
         LOG_WRITE("GPIO initialized successfully using libgpiod");
         return true;
     }
@@ -270,12 +270,12 @@ namespace SPI
             }
         }
 
-        if (g_gpio_chip)
+        if (gpio_chip)
         {
-            gpiod_chip_close(g_gpio_chip);
-            g_gpio_chip = nullptr;
+            gpiod_chip_close(gpio_chip);
+            gpio_chip = nullptr;
         }
-        g_gpio_initialized = false;
+        gpio_initialized = false;
     }
 
     // Внутренняя функция: управление CS (Chip Select) для конкретного DAC
@@ -283,7 +283,7 @@ namespace SPI
     // enable: true = активировать CS (LOW), false = деактивировать CS (HIGH)
     void SetCS(int dac_number, bool enable)
     {
-        if (!g_gpio_initialized)
+        if (!gpio_initialized)
             return;
 
         if (dac_number < 1 || dac_number > MAX_DAC_COUNT)
