@@ -26,14 +26,14 @@ namespace SPI
 
     const char *device = SPI_DEVICE;
 
-    const int MAX_DAC_COUNT = 2;
+    static const int MAX_DAC_COUNT = 2;
 
     const char *gpio_chip_name = SPI_CHIP;                                  // Имя GPIO чипа для ARM64
     struct gpiod_chip *g_gpio_chip = nullptr;                               // Дескриптор GPIO чипа
     struct gpiod_line *g_dac_lines[MAX_DAC_COUNT] = { nullptr, nullptr };   // Линии GPIO для каждого DAC
 
-    const unsigned int DAC_GPIO_NUMS[MAX_DAC_COUNT] = {
-        0,  // GPIO пин для DAC (pin. 31)
+    const unsigned int cs_DAC[MAX_DAC_COUNT] = {
+        0,  // GPIO пин для DAC #1 (pin. 31)
         2   // GPIO пин для DAC #2 (pin. 35)
     };
 
@@ -90,6 +90,9 @@ namespace SPI
             return;
         }
 
+        SetCS(1, true);
+        SetCS(2, true);
+
         SPI::SetSpeed(1000000);
 
         SPI::SetMode(0);
@@ -103,7 +106,7 @@ namespace SPI
         {
             for (int i = 1; i <= MAX_DAC_COUNT; i++)
             {
-                SetCS(i, false);
+                SetCS(i, true);
             }
 
             ::close(g_spi_fd);
@@ -136,13 +139,13 @@ namespace SPI
         data[0] = static_cast<uint8>((value >> 8) & 0xFF);
         data[1] = static_cast<uint8>(value & 0xFF);
 
-        SetCS(number_DAC, true);
+        SetCS(number_DAC, false);
         usleep(1);
 
         bool result = Write(data, 2);
 
         usleep(1);
-        SetCS(number_DAC, false);
+        SetCS(number_DAC, true);
 
         return result;
     }
@@ -222,14 +225,14 @@ namespace SPI
 
         for (int i = 0; i < MAX_DAC_COUNT; i++)
         {
-            unsigned int gpio_num = DAC_GPIO_NUMS[i];
+            unsigned int cs_num = cs_DAC[i];
 
-            LOG_WRITE("Initializing %s (GPIO%u in gpiochip3)", DAC_NAMES[i], gpio_num);
+            LOG_WRITE("Initializing %s (GPIO%u in gpiochip3)", DAC_NAMES[i], cs_num);
 
-            g_dac_lines[i] = gpiod_chip_get_line(g_gpio_chip, gpio_num);
+            g_dac_lines[i] = gpiod_chip_get_line(g_gpio_chip, cs_num);
             if (!g_dac_lines[i])
             {
-                LOG_ERROR("Cannot get GPIO line %u for %s", gpio_num, DAC_NAMES[i]);
+                LOG_ERROR("Cannot get GPIO line %u for %s", cs_num, DAC_NAMES[i]);
 
                 for (int j = 0; j < i; j++) //-V1008
                 {
