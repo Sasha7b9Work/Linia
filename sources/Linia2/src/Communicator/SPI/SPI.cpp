@@ -90,6 +90,10 @@ namespace SPI
             return;
         }
 
+        SPI::SetSpeed(1000000);
+
+        SPI::SetMode(0);
+
         LOG_WRITE("SPI initialized successfully on %s", device);
     }
 
@@ -137,11 +141,6 @@ namespace SPI
 
         bool result = Write(data, 2);
 
-        if (result)
-        {
-            LOG_WRITE("DAC%d  written: %04X", number_DAC, value);
-        }
-
         usleep(1);
         SetCS(number_DAC, false);
 
@@ -167,9 +166,7 @@ namespace SPI
         return true;
     }
 
-    // Установка режима SPI (полярность и фаза тактового сигнала)
-    // mode: режим SPI (0-3: 0=CPOL=0,CPHA=0; 1=CPOL=0,CPHA=1; 2=CPOL=1,CPHA=0; 3=CPOL=1,CPHA=1)
-    // Возвращает: true если режим установлен успешно, false при ошибке
+
     bool SetMode(uint8 mode)
     {
         g_mode = mode;
