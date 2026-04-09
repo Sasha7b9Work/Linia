@@ -140,11 +140,11 @@ namespace SPI
         data[1] = static_cast<uint8>(value & 0xFF);
 
         SetCS(number_DAC, false);
-        usleep(1);
+//        usleep(1);
 
         bool result = Write(data, 2);
 
-        usleep(1);
+//        usleep(1);
         SetCS(number_DAC, true);
 
         return result;
