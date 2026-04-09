@@ -200,20 +200,6 @@ namespace SPI
         return g_spi_fd >= 0 && g_gpio_initialized;
     }
 
-    // Получение текущей скорости SPI
-    // Возвращает: скорость в Герцах
-    uint GetSpeed()
-    {
-        return g_speed;
-    }
-
-    // Получение текущего режима SPI
-    // Возвращает: режим SPI (0-3)
-    uint8 GetMode()
-    {
-        return g_mode;
-    }
-
     bool InitGPIO()
     {
         if (g_gpio_initialized)

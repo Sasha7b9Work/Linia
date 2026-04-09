@@ -16,6 +16,4 @@ namespace SPI
     bool WriteDynamicDAC(int number_DAC, uint16 value);
 
     bool IsReady();
-    uint GetSpeed();
-    uint8 GetMode();
 }
