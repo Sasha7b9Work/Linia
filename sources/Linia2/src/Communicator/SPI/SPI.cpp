@@ -46,60 +46,12 @@ namespace SPI
     static bool InitGPIO();
     static void DeInitGPIO();
     static void SetCS(int dac_number, bool enable);   // Управление CS (Chip Select) для конкретного DAC
+    static bool Write(uint8 *data, size_t length);
 
     static bool SetSpeed(uint speedHz);
     // Установка режима SPI (полярность и фаза тактового сигнала)
     // mode: режим SPI (0-3: 0=CPOL=0,CPHA=0; 1=CPOL=0,CPHA=1; 2=CPOL=1,CPHA=0; 3=CPOL=1,CPHA=1)
     static bool SetMode(uint8 mode);
-
-    static bool WriteCombined(int dac_number, uint8 *data, size_t length)
-    {
-        if (fd < 0 || !gpio_initialized) return false;
-
-        int dac_index = dac_number - 1;
-        if (dac_index < 0 || dac_index >= MAX_DAC_COUNT) return false;
-        struct gpiod_line *cs_line = g_dac_lines[dac_index];
-        if (!cs_line) return false;
-
-        // 1. Подготавливаем transfer для изменения CS через gpiod
-        struct spi_ioc_transfer tr_cs_active = { 0 };
-        // Используем флаг cs_change, чтобы сказать ядру: измени состояние CS ПОСЛЕ этого transfer'а
-        tr_cs_active.cs_change = 1;
-        // Устанавливаем tx_buf в NULL, чтобы ничего не передавать, а только изменить CS
-        tr_cs_active.tx_buf = 0;
-        tr_cs_active.len = 0;
-        tr_cs_active.delay_usecs = 0;
-
-        // 2. Подготавливаем transfer для основных данных
-        struct spi_ioc_transfer tr_data = { 0 };
-        tr_data.tx_buf = (unsigned long long)data;
-        tr_data.len = (uint32_t)length;
-        tr_data.speed_hz = speed;
-        tr_data.bits_per_word = bits_per_word;
-        // Для последнего transfer'а cs_change = 0 означает, что CS останется в текущем состоянии (активном)
-        tr_data.cs_change = 0;
-
-        // 3. Подготавливаем transfer для поднятия CS
-        struct spi_ioc_transfer tr_cs_inactive = { 0 };
-        tr_cs_inactive.cs_change = 1;
-        tr_cs_inactive.tx_buf = 0;
-        tr_cs_inactive.len = 0;
-        tr_cs_inactive.delay_usecs = 0;
-
-        // Собираем все три transfer'а в одно сообщение
-        struct spi_ioc_transfer transfers[3] = { tr_cs_active, tr_data, tr_cs_inactive };
-
-        // Выполняем все три операции за один системный вызов
-        int result = ioctl(fd, SPI_IOC_MESSAGE(3), transfers);
-        if (result < 0)
-        {
-            LOG_ERROR("Combined SPI+GPIO transfer failed");
-            return false;
-        }
-
-        return true;
-    }
-
 
     void Init()
     {
@@ -181,9 +133,10 @@ namespace SPI
             LOG_ERROR("SPI not ready");
             return false;
         }
-        if (number_DAC < 1 || number_DAC > MAX_DAC_COUNT)
+
+        if (number_DAC < 1 || number_DAC > 2)
         {
-            LOG_ERROR("Invalid DAC number: %d", number_DAC);
+            LOG_ERROR("Invalid DAC number: %d. Valid range: 1-2");
             return false;
         }
 
@@ -191,9 +144,13 @@ namespace SPI
         data[0] = static_cast<uint8>((value >> 8) & 0xFF);
         data[1] = static_cast<uint8>(value & 0xFF);
 
-        // Вызываем комбинированную функцию, которая сама управляет CS
-        // SetCS(..., false) и SetCS(..., true) больше не нужны, они внутри transfers
-        return WriteCombined(number_DAC, data, 2);
+        SetCS(number_DAC, false);
+
+        bool result = Write(data, 2);
+
+        SetCS(number_DAC, true);
+
+        return result;
     }
 
     // Установка скорости SPI интерфейса
@@ -346,6 +303,39 @@ namespace SPI
         {
             LOG_ERROR("GPIO line for DAC%d not initialized", dac_number);
         }
+    }
+
+    bool Write(uint8 *data, size_t length)
+    {
+        if (fd < 0)
+        {
+            LOG_ERROR("SPI not initialized");
+            return false;
+        }
+
+        if (data == nullptr || length == 0)
+        {
+            LOG_ERROR("Invalid data or length");
+            return false;
+        }
+
+        struct spi_ioc_transfer transfer = {};
+        transfer.tx_buf = (unsigned long long)data;
+        transfer.rx_buf = 0;
+        transfer.len = (uint)length;
+        transfer.speed_hz = speed;
+        transfer.delay_usecs = 0;
+        transfer.bits_per_word = bits_per_word;
+        transfer.cs_change = 0;
+
+        int result = ioctl(fd, SPI_IOC_MESSAGE(1), &transfer);
+        if (result < 0)
+        {
+            LOG_ERROR("SPI transfer failed");
+            return false;
+        }
+
+        return true;
     }
 }
 
