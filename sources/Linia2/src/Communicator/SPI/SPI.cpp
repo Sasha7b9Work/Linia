@@ -46,7 +46,6 @@ namespace SPI
     static bool InitGPIO();
     static void DeInitGPIO();
     static void SetCS(int dac_number, bool enable);   // Управление CS (Chip Select) для конкретного DAC
-    static bool Write(uint8 *data, size_t length);
 
     static bool SetSpeed(uint speedHz);
     // Установка режима SPI (полярность и фаза тактового сигнала)
@@ -347,39 +346,6 @@ namespace SPI
         {
             LOG_ERROR("GPIO line for DAC%d not initialized", dac_number);
         }
-    }
-
-    bool Write(uint8 *data, size_t length)
-    {
-        if (fd < 0)
-        {
-            LOG_ERROR("SPI not initialized");
-            return false;
-        }
-
-        if (data == nullptr || length == 0)
-        {
-            LOG_ERROR("Invalid data or length");
-            return false;
-        }
-
-        struct spi_ioc_transfer transfer = {};
-        transfer.tx_buf = (unsigned long long)data;
-        transfer.rx_buf = 0;
-        transfer.len = (uint)length;
-        transfer.speed_hz = speed;
-        transfer.delay_usecs = 0;
-        transfer.bits_per_word = bits_per_word;
-        transfer.cs_change = 0;
-
-        int result = ioctl(fd, SPI_IOC_MESSAGE(1), &transfer);
-        if (result < 0)
-        {
-            LOG_ERROR("SPI transfer failed");
-            return false;
-        }
-
-        return true;
     }
 }
 
