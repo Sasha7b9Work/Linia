@@ -100,7 +100,7 @@ namespace SPI
 
         SPI::SetSpeed(SPI_SPEED);
 
-        SPI::SetMode(0);
+        SPI::SetMode(1);
 
         LOG_WRITE("SPI initialized successfully on %s", device);
     }
