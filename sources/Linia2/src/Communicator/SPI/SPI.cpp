@@ -20,8 +20,8 @@ namespace SPI
 {
     static int fd = -1;
     static uint speed = SPI_SPEED;
-    static uint8 g_mode = 0;
-    static uint8 g_bits_per_word = 8;
+    static uint8 mode = 0;
+    static uint8 bits_per_word = 8;
     static bool g_gpio_initialized = false;
 
     const char *device = SPI_DEVICE;
@@ -64,7 +64,7 @@ namespace SPI
             return;
         }
 
-        if (ioctl(fd, SPI_IOC_WR_MODE, &g_mode) < 0)
+        if (ioctl(fd, SPI_IOC_WR_MODE, &mode) < 0)
         {
             LOG_ERROR("Cannot set SPI mode");
             ::close(fd);
@@ -72,7 +72,7 @@ namespace SPI
             return;
         }
 
-        if (ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &g_bits_per_word) < 0)
+        if (ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &bits_per_word) < 0)
         {
             LOG_ERROR("Cannot set bits per word");
             ::close(fd);
@@ -173,13 +173,13 @@ namespace SPI
     }
 
 
-    bool SetMode(uint8 mode)
+    bool SetMode(uint8 _mode)
     {
-        g_mode = mode;
+        mode = _mode;
 
         if (IsReady())
         {
-            if (ioctl(fd, SPI_IOC_WR_MODE, &g_mode) < 0)
+            if (ioctl(fd, SPI_IOC_WR_MODE, &mode) < 0)
             {
                 LOG_ERROR("Cannot set SPI mode to %d", (int)mode);
                 return false;
@@ -325,7 +325,7 @@ namespace SPI
         transfer.len = (uint)length;
         transfer.speed_hz = speed;
         transfer.delay_usecs = 0;
-        transfer.bits_per_word = g_bits_per_word;
+        transfer.bits_per_word = bits_per_word;
         transfer.cs_change = 0;
 
         int result = ioctl(fd, SPI_IOC_MESSAGE(1), &transfer);
