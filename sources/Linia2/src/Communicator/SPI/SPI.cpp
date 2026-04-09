@@ -48,6 +48,11 @@ namespace SPI
     static void SetCS(int dac_number, bool enable);   // Управление CS (Chip Select) для конкретного DAC
     static bool Write(uint8 *data, size_t length);
 
+    static bool SetSpeed(uint speedHz);
+    // Установка режима SPI (полярность и фаза тактового сигнала)
+    // mode: режим SPI (0-3: 0=CPOL=0,CPHA=0; 1=CPOL=0,CPHA=1; 2=CPOL=1,CPHA=0; 3=CPOL=1,CPHA=1)
+    static bool SetMode(uint8 mode);
+
     void Init()
     {
         LOG_WRITE("Initializing SPI...");
@@ -93,9 +98,9 @@ namespace SPI
         SetCS(1, true);
         SetCS(2, true);
 
-        SPI::SetSpeed(1000000);
+        SPI::SetSpeed(SPI_SPEED);
 
-        SPI::SetMode(3);
+        SPI::SetMode(0);
 
         LOG_WRITE("SPI initialized successfully on %s", device);
     }
