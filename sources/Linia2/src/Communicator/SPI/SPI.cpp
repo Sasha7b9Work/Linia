@@ -1,12 +1,14 @@
-﻿// 2026/04/09 10:03:09 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2026/04/09 10:07:16 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Communicator/SPI/SPI.h"
 
-// Lin specific
+// Системные заголовочные файлы
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <linux/spi/spidev.h>
+#include <cstring>
+#include <errno.h>
 
 #ifdef WIN32
 #pragma warning(push)
@@ -15,76 +17,106 @@
 
 namespace SPI
 {
-    static int fd = -1;
+    // Файловые дескрипторы для каждого аппаратного чипселекта
+    static int fd_cs0 = -1; // Для DAC1 (CS0, контакт 24)
+    static int fd_cs1 = -1; // Для DAC2 (CS1, контакт 26)
+
     static uint speed = SPI_SPEED;
     static uint8 mode = 0;
     static uint8 bits_per_word = 8;
 
-    const char *device = SPI_DEVICE;
+    // Пути к устройствам для разных чипселектов
+    const char *device_cs0 = "/dev/spidev0.0"; // CS0
+    const char *device_cs1 = "/dev/spidev0.1"; // CS1
 
-    static const int MAX_DAC_COUNT = 2;
+    // Вспомогательные функции
+    static bool SetSpeed(int fd, uint speedHz);
+    static bool SetMode(int fd, uint8 mode);
+    static bool Write(int fd, uint8 *data, size_t length);
+    static int OpenSPIDevice(const char *device);
 
-    // Маппинг номера DAC на аппаратный CS
-    static const uint8 dac_to_cs[MAX_DAC_COUNT] = {
-        SPI_CS0,  // DAC #1 использует CS0 (контакт 24)
-        SPI_CS1   // DAC #2 использует CS1 (контакт 26)
-    };
+    int OpenSPIDevice(const char *device)
+    {
+        int fd = ::open(device, O_RDWR);
+        if (fd < 0)
+        {
+            LOG_ERROR("Cannot open SPI device: %s (errno: %d)", device, errno);
+            return -1;
+        }
 
-    static bool SetSpeed(uint speedHz);
-    static bool SetMode(uint8 mode);
-    static bool Write(uint8 *data, size_t length, uint8 cs_line);
+        // Настройка режима SPI
+        if (ioctl(fd, SPI_IOC_WR_MODE, &mode) < 0)
+        {
+            LOG_ERROR("Cannot set SPI mode for %s", device);
+            ::close(fd);
+            return -1;
+        }
+
+        // Настройка количества бит на слово
+        if (ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &bits_per_word) < 0)
+        {
+            LOG_ERROR("Cannot set bits per word for %s", device);
+            ::close(fd);
+            return -1;
+        }
+
+        // Настройка максимальной скорости
+        if (ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed) < 0)
+        {
+            LOG_ERROR("Cannot set SPI speed for %s", device);
+            ::close(fd);
+            return -1;
+        }
+
+        LOG_WRITE("SPI device %s opened and configured successfully", device);
+        return fd;
+    }
 
     void Init()
     {
         LOG_WRITE("Initializing SPI with hardware CS...");
 
-        fd = ::open(device, O_RDWR);
-        if (fd < 0)
+        // Открываем устройство для CS0 (DAC1)
+        fd_cs0 = OpenSPIDevice(device_cs0);
+
+        // Открываем устройство для CS1 (DAC2)
+        fd_cs1 = OpenSPIDevice(device_cs1);
+
+        if (fd_cs0 < 0 && fd_cs1 < 0)
         {
-            LOG_ERROR("Cannot open SPI device: %s", device);
+            LOG_ERROR("Failed to open any SPI device");
             return;
         }
 
-        if (ioctl(fd, SPI_IOC_WR_MODE, &mode) < 0)
-        {
-            LOG_ERROR("Cannot set SPI mode");
-            ::close(fd);
-            fd = -1;
-            return;
-        }
+        // Устанавливаем режим работы (CPOL=0, CPHA=1)
+        SetMode(fd_cs0, 1);
+        SetMode(fd_cs1, 1);
 
-        if (ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &bits_per_word) < 0)
-        {
-            LOG_ERROR("Cannot set bits per word");
-            ::close(fd);
-            fd = -1;
-            return;
-        }
+        // Устанавливаем скорость
+        SetSpeed(fd_cs0, SPI_SPEED);
+        SetSpeed(fd_cs1, SPI_SPEED);
 
-        if (ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed) < 0)
-        {
-            LOG_ERROR("Cannot set SPI speed");
-            ::close(fd);
-            fd = -1;
-            return;
-        }
-
-        SPI::SetSpeed(SPI_SPEED);
-        SPI::SetMode(1);  // CPOL=0, CPHA=1 - данные выставляются на срез клока
-
-        LOG_WRITE("SPI initialized successfully on %s with hardware CS0 and CS1", device);
+        LOG_WRITE("SPI initialized successfully. CS0 fd=%d, CS1 fd=%d", fd_cs0, fd_cs1);
     }
 
     void DeInit()
     {
-        if (fd >= 0)
+        if (fd_cs0 >= 0)
         {
-            ::close(fd);
-            fd = -1;
-            LOG_WRITE("SPI deinitialized");
+            ::close(fd_cs0);
+            fd_cs0 = -1;
+            LOG_WRITE("SPI CS0 deinitialized");
+        }
+
+        if (fd_cs1 >= 0)
+        {
+            ::close(fd_cs1);
+            fd_cs1 = -1;
+            LOG_WRITE("SPI CS1 deinitialized");
         }
     }
 
+    // Запись 16-битного значения в динамический DAC через SPI
     bool WriteDynamicDAC(int number_DAC, uint16 value)
     {
         if (!IsReady())
@@ -93,9 +125,18 @@ namespace SPI
             return false;
         }
 
-        if (number_DAC < 1 || number_DAC > MAX_DAC_COUNT)
+        if (number_DAC < 1 || number_DAC > 2)
         {
             LOG_ERROR("Invalid DAC number: %d. Valid range: 1-2", number_DAC);
+            return false;
+        }
+
+        // Выбираем правильный файловый дескриптор на основе номера DAC
+        int fd = (number_DAC == 1) ? fd_cs0 : fd_cs1;
+
+        if (fd < 0)
+        {
+            LOG_ERROR("SPI device for DAC%d is not open", number_DAC);
             return false;
         }
 
@@ -103,60 +144,51 @@ namespace SPI
         data[0] = static_cast<uint8>((value >> 8) & 0xFF);
         data[1] = static_cast<uint8>(value & 0xFF);
 
-        // Используем аппаратный CS для выбранного DAC
-        uint8 cs_line = dac_to_cs[number_DAC - 1];
-
-        bool result = Write(data, 2, cs_line);
+        // Аппаратный CS управляется ядром автоматически при использовании
+        // правильного файла устройства
+        bool result = Write(fd, data, 2);
 
         return result;
     }
 
-    bool SetSpeed(uint speedHz)
+    bool SetSpeed(int fd, uint speedHz)
     {
-        speed = speedHz;
+        if (fd < 0) return false;
 
-        if (IsReady())
+        if (ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed) < 0)
         {
-            if (ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed) < 0)
-            {
-                LOG_ERROR("Cannot set SPI speed to %u Hz", speedHz);
-                return false;
-            }
-
-            LOG_WRITE("SPI speed set to %u Hz", speedHz);
+            LOG_ERROR("Cannot set SPI speed to %u Hz", speedHz);
+            return false;
         }
 
+        LOG_WRITE("SPI speed set to %u Hz", speedHz);
         return true;
     }
 
-    bool SetMode(uint8 _mode)
+    bool SetMode(int fd, uint8 _mode)
     {
-        mode = _mode;
+        if (fd < 0) return false;
 
-        if (IsReady())
+        if (ioctl(fd, SPI_IOC_WR_MODE, &_mode) < 0)
         {
-            if (ioctl(fd, SPI_IOC_WR_MODE, &mode) < 0)
-            {
-                LOG_ERROR("Cannot set SPI mode to %d", (int)mode);
-                return false;
-            }
-
-            LOG_WRITE("SPI mode set to %d", (int)mode);
+            LOG_ERROR("Cannot set SPI mode to %d", (int)_mode);
+            return false;
         }
 
+        LOG_WRITE("SPI mode set to %d", (int)_mode);
         return true;
     }
 
     bool IsReady()
     {
-        return fd >= 0;
+        return (fd_cs0 >= 0) || (fd_cs1 >= 0);
     }
 
-    bool Write(uint8 *data, size_t length, uint8 cs_line)
+    bool Write(int fd, uint8 *data, size_t length)
     {
         if (fd < 0)
         {
-            LOG_ERROR("SPI not initialized");
+            LOG_ERROR("SPI file descriptor invalid");
             return false;
         }
 
@@ -169,23 +201,19 @@ namespace SPI
         struct spi_ioc_transfer transfer = {};
         transfer.tx_buf = (unsigned long long)data;
         transfer.rx_buf = 0;
-        transfer.len = (uint)length;
+        transfer.len = (uint32_t)length;
         transfer.speed_hz = speed;
         transfer.delay_usecs = 0;
         transfer.bits_per_word = bits_per_word;
-        transfer.cs_change = 0;
-
-        // Указываем номер аппаратного чипселекта
-        transfer.cs = cs_line;
+        transfer.cs_change = 0; // Не меняем CS после этого transfer'а
 
         int result = ioctl(fd, SPI_IOC_MESSAGE(1), &transfer);
         if (result < 0)
         {
-            LOG_ERROR("SPI transfer failed on CS%d", cs_line);
+            LOG_ERROR("SPI transfer failed: %s", strerror(errno));
             return false;
         }
 
-        LOG_WRITE("SPI write success: %d bytes to CS%d", length, cs_line);
         return true;
     }
 }
@@ -193,7 +221,8 @@ namespace SPI
 bool SPI::IsAvailability()
 {
 #ifdef ARM64
-    return std::filesystem::exists(SPI_DEVICE);
+    return std::filesystem::exists("/dev/spidev0.0") ||
+        std::filesystem::exists("/dev/spidev0.1");
 #else
     return true;
 #endif
