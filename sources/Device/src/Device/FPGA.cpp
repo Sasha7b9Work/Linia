@@ -53,6 +53,8 @@ void FPGA::Init()
 
     pinSTOP_TB.Init();
     pinSTOP_TB.ToLow();
+
+    WriteStop();
 }
 
 
