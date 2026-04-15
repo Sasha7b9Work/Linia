@@ -255,10 +255,12 @@ void Register::OnEventToggleButton(wxCommandEvent &event)
         if (event.GetInt())
         {
             timerAutoSend.Start(1000);
+            painter->animation->RunPeriodic();
         }
         else
         {
             timerAutoSend.Stop();
+            painter->animation->Stop();
         }
 
         WriteValue();
@@ -275,6 +277,8 @@ void Register::OnEventButton(wxCommandEvent &event)
     if (id == btnSend->GetId())
     {
         WriteValue();
+
+        painter->animation->RunOnce();
     }
 }
 
@@ -304,8 +308,6 @@ void Register::SetActiveAcross(bool active, wxWindow *_wnd)
     }
 
     TheNotebookDebug->EnableSwitching(active);
-
-    painter->EnableAutoSendAnimation(!active);
 }
 
 
