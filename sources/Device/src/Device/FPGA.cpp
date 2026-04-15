@@ -113,18 +113,22 @@ bool FPGA::IsScanning()
 
 void FPGA::WriteStart()
 {
+    Pause();
     pinSTART_TB.ToHi();
     Pause();
     pinSTART_TB.ToLow();
     meter_scan.Reset();
+    Pause();
 }
 
 
 void FPGA::WriteStop()
 {
+    Pause();
     pinSTOP_TB.ToHi();
     Pause();
     pinSTOP_TB.ToLow();
+    Pause();
 }
 
 
@@ -140,6 +144,8 @@ void FPGA::Reg::WriteRAW(int num, uint value)
     {
         return;
     }
+
+    Pause();
 
     pinA0_RG.Set(_GET_BIT(num, 0) != 0);
     pinA1_RG.Set(_GET_BIT(num, 1) != 0);
@@ -157,6 +163,8 @@ void FPGA::Reg::WriteRAW(int num, uint value)
     pinWR_RG.ToHi();
     Pause();
     pinWR_RG.ToLow();
+
+    Pause();
 }
 
 
