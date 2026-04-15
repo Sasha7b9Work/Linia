@@ -31,6 +31,17 @@ namespace FPGA
     static uint period_scan = 1000;         // Период запуска развёртки
 
     static void Pause();
+
+    namespace Reg
+    {
+        static const int NUM_REGS = 3;
+
+        static uint values[NUM_REGS] = { 0, 0, 0 };
+
+        static void WriteRAW(int num, uint value);
+
+        static void WriteAll();
+    }
 }
 
 
@@ -80,6 +91,8 @@ void FPGA::StartScan(uint periodMS)
 
     is_running_scan = true;
 
+    Reg::WriteAll();
+
     WriteStart();
 }
 
@@ -121,8 +134,13 @@ void FPGA::Reg::SetLength(int num, uint length)
 }
 
 
-void FPGA::Reg::Write(int num, uint value)
+void FPGA::Reg::WriteRAW(int num, uint value)
 {
+    if (num < 0 || num >= NUM_REGS)
+    {
+        return;
+    }
+
     pinA0_RG.Set(_GET_BIT(num, 0) != 0);
     pinA1_RG.Set(_GET_BIT(num, 1) != 0);
 
@@ -139,6 +157,29 @@ void FPGA::Reg::Write(int num, uint value)
     pinWR_RG.ToHi();
     Pause();
     pinWR_RG.ToLow();
+}
+
+
+void FPGA::Reg::Write(int num, uint value)
+{
+    if (num >= 0 && num < NUM_REGS)
+    {
+        values[num] = value;
+
+        if (is_running_scan)
+        {
+            WriteRAW(num, values[num]);
+        }
+    }
+}
+
+
+void FPGA::Reg::WriteAll()
+{
+    for (int i = 0; i < 1; i++)
+    {
+        WriteRAW(i, values[i]);
+    }
 }
 
 
