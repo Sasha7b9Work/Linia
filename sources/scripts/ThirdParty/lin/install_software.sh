@@ -7,6 +7,6 @@ sudo apt-get install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgst
 sudo apt-get install libsdl2-2.0-0 -y
 sudo apt-get install libsdl2-dev -y
 apt-get install libnotify-dev -y
-sudo apt install libglu1-mesa-dev freeglut3-dev -y
+sudo apt install libglu1-mesa-dev freeglut3-dev libsm-dev libice-dev libx11-dev libxext-dev libxt-dev -y
 # Для сборки deb-пакета
-sudo apt-get install -y dh-make devscripts dpkg debconf debhelper lintian 
+sudo apt-get install -y dh-make devscripts dpkg debconf debhelper lintian
