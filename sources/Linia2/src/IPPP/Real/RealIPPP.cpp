@@ -7,7 +7,6 @@
 #include "IPPP/Keyboard/Keyboard.h"
 #include "IPPP/Real/RealDevice.h"
 #include "Utils/Timer.h"
-#include "Panels/PanelDebug/PanelRight.h"
 
 
 bool RealIPPP::IsChanBS(const Chan &ch) const
@@ -36,7 +35,6 @@ void RealIPPP::PeriodicTask()
     {
         for (int i = 0; i < 5; i++)
         {
-            ThePanelRight->data[i]->SetData(data[i]);
         }
     }
 }
@@ -54,10 +52,11 @@ void RealIPPP::PressButtonStop()
 }
 
 
-bool RealIPPP::ReadData(int data[5][MAX_NUMBER_POINTS])
+bool RealIPPP::ReadData(int /*data*/[5][MAX_NUMBER_POINTS])
 {
     bool result = false;
 
+    /*
     static bool prev = false;
 
     if (pinFIFO_FULL.Get() && prev == false)
@@ -112,6 +111,7 @@ bool RealIPPP::ReadData(int data[5][MAX_NUMBER_POINTS])
     }
 
     prev = pinFIFO_FULL.Get();
+    */
 
     return result;
 }

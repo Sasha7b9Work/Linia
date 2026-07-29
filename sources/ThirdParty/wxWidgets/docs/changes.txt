@@ -11,19 +11,6 @@ INCOMPATIBLE CHANGES SINCE 3.2.x:
 Changes in behaviour not resulting in compilation errors
 --------------------------------------------------------
 
-- wxMSW now uses double buffering by default, meaning that updating the
-  windows using wxClientDC doesn't work any longer, which is consistent with
-  the behaviour of wxGTK with Wayland backend and of wxOSX, but not with the
-  traditional historic behaviour of wxMSW (or wxGTK/X11). You may call
-  MSWDisableComposited() to restore the previous behaviour, however it is
-  strongly recommended to change your redrawing logic to avoid using wxClientDC
-  instead, as the code using it still won't work with wxGTK/wxOSX.
-
-  You may also choose to globally set the new msw.window.no-composited system
-  option to disable the use of double buffering, but please consider doing it
-  only as a last resort and/or temporary solution, as this _will_ result in
-  flicker and won't be supported at all in the future wxWidgets versions.
-
 - wxMSW doesn't support versions of Microsoft Windows before Windows 7. If you
   need Windows XP or Vista support, please use wxWidgets 3.2.
 
@@ -149,6 +136,16 @@ Changes in behaviour not resulting in compilation errors
   changed when called with "false" argument, please review the documentation
   and update your code if you called them with "false" (which is rarely done).
 
+- wxGetTranslation() and related functions now return wxString by value, not
+  as const reference. This may affect code returning wxGetTranslation() result
+  as const reference from its own functions, please change the return type of
+  the function to wxString to fix this.
+
+- wxWindow::Raise() doesn't show the window in all the ports now, just as it
+  already didn't do it in wxMSW. Call Show() explicitly before Raise() if
+  necessary.
+
+
 Changes in behaviour which may result in build errors
 -----------------------------------------------------
 
@@ -206,6 +203,13 @@ Changes in behaviour which may result in build errors
   the official ones and those using MSVS projects, but also when using
   makefile.vc or CMake, for consistency.
 
+- CMake files are now installed in a versioned subdirectory, e.g.
+  lib/cmake/wxWidgets-3.3, to allow installing multiple versions of wxWidgets
+  simultaneously, and not just "wxWidgets" as before. Please update your
+  CMake files if you rely on the exact name of this directory. Note that
+  nothing needs to be done if you simply use find_package(wxWidgets) as it
+  still works in the same way as before.
+
 - Support for memory debugging that was previously disabled but could be
   activated by using wxUSE_MEMORY_TRACING, wxUSE_GLOBAL_MEMORY_OPERATORS etc
   options was completely removed. Please use address sanitizer or similar
@@ -238,6 +242,92 @@ Changes in behaviour which may result in build errors
 - wxStyledTextCtrl::AddSelection() erroneously returned int, while the
   corresponding Scintilla doesn't have any return value, so it was changed
   to return void, please update your code to not use its return value.
+
+- Code unintentionally and mistakenly using wxColour ctor from bool that
+  previously compiled doesn't compile any longer, please fix it to use either
+  the ctor from RGB value or from string explicitly.
+
+- wxGLCanvas::CreateSurface() which was previously enabled in build
+  configurations using EGL is not available any longer as exposing it doesn't
+  make sense when wxGLCanvas may use either EGL or GLX.
+
+
+3.3.2: (released 2026-03-03)
+----------------------------
+
+Please note that this is a list of changes compared to 3.2.10, the full list of
+changes since 3.3.1 also includes all changes in 3.2.9 and 3.2.10 releases.
+
+All:
+
+- Add wxWebRequestDebugLogger (#26086).
+- Fix bitmap position in wxDC::DrawLabel() in high DPI (Blake Madden, #25888).
+- Fix using wxSOCKET_NOWAIT_READ|wxSOCKET_WAITALL_WRITE (#17114).
+- Improve number and currency formatting (Ulrich Telle, #25765).
+- Support configurable timeouts in wxWebRequest (Brian Delalex, #25673).
+- Update all 3rd party libraries to latest versions (Maarten Bent, #26010).
+
+All (GUI):
+
+- Add support for minimizing panes in wxAUI (#23986).
+- Add support for using LunaSVG (Randalphwa, #25902).
+- Add wxDisplay::GetRawPPI() (#26082).
+- Add wxGLCanvas::ClearCurrent() (#25958), SetSwapInterval() (#25449)
+  and GetProcAddress() (#9215).
+- Add wxStyledTextCtrlMiniMap (#25887).
+- Add wxTextEntryDialog::SetHint() (Lauri Nurmi, #26176).
+- Fix crash on mouse hover after closing tab in wxAuiNotebook (#25959).
+- Implement automatic wrapping of wxStaticText (Robert Roebling, #25753).
+- Improve splitting behaviour in wxAuiNotebook (#26081).
+- Make generic wxCalendarCtrl DPI-aware (Maarten Bent, #25713).
+- Make wxDC-derived objects moveable (#25726).
+- Make wxScrolled<> autoscroll configurable (Bill Su, #25978).
+- Many RTL layout fixes in wxMSW and wxGTK (AliKet, #25426).
+- Provide safer API for detecting closing wxTipWindow (Bill Su, #26070).
+- Restore columns positions in wxPersistentDVC (Vadym Hrynchyshyn, #26222).
+- Significant wxSVGFileDC improvements (Maarten Bent, #25723).
+
+wxGTK:
+
+- Allow using GLX and EGL in same program (#26023).
+- Fix multiple bugs in gesture handling (Filip Hejsek, #26241).
+- Make WarpPointer() work with supported Wayland compositors (#23778).
+- Support wxDIRP_DIR_MUST_EXIST in wxDirPickerCtrl.
+
+wxMSW:
+
+- Accessibility: fix support for it in wxCheckBox in dark mode (Quin Gillespie,
+  #26184), implement full support for it in wxCheckListBox (Glen Gordon,
+  #25948) and wxStyledTextCtrl (Maarten Bent, #25956) and basic support in
+  wxRichTextCtrl (Joshua Lee Ockert, #26202).
+- Add MSVS 2026 projects and solution files (PB, #26131).
+- Add wxNO_WIN32_W (Maarten Bent, #25965).
+- Dark mode improvements: rendering of several controls (Thomas Modes, #25835),
+  toolbar (#25892) and menus (Mohmed abdel-fattah, #26182).
+- Fix MSVS debug visualizer for wxString (#25684).
+- Revert use of WS_EX_COMPOSITED in previous 3.3 versions (#25808).
+
+wxOSX:
+
+- Add support for more axis in wxJoystick (Sean Maas, #26216).
+- Add support for suspend/resume event generation (Tijs Van Buggenhout, #25778).
+- Fix grid lines in dark mode (Daniel Kulp, #25783).
+- Fix nested markup attributes handling (Václav Slavík, #25864).
+- Make click events consistent with wxMSW (Robert Roebling, #25886).
+- Use threaded animation for wxGA_SMOOTH (Will Cosgrove, #25906).
+- Visual fixes for macOS 26 Tahoe (#25766, #25743, #25767)
+
+wxQt:
+
+- Add printing support (AliKet, #26126).
+- Implement wxArtProvider (AliKet, #26210).
+- Many fixes for RTL layout (AliKet, #25822).
+
+wxiOS:
+
+- Implement scrolling support (Robert Roebling, #25827).
+- Implement wxListBox (Robert Roebling, #25858).
+- Implement wxNotebook (Robert Roebling, #25857).
 
 
 3.3.1: (released 2025-07-21)

@@ -48,7 +48,14 @@ enum wxEventCategory
     /// This category is for wxSocketEvent
     wxEVT_CATEGORY_SOCKET = 4,
 
-    /// This category is for wxTimerEvent
+    /**
+        This category is for wxTimerEvent.
+
+        @note Under wxMSW, if this category is not specified when calling
+        wxEventLoopBase::YieldFor, events from one-off timers may be lost,
+        so it's recommended to either pass this category to it or use
+        repeatedly firing timers instead.
+     */
     wxEVT_CATEGORY_TIMER = 8,
 
     /**
@@ -1909,6 +1916,22 @@ public:
     */
     int GetPosition() const;
 
+    /**
+        Offset of the scroll position from the nearest position expressed in
+        scroll units.
+
+        In cases where scrolling is possible with single pixel precision,
+        such as when panning on a touch screen with fingers, this returns
+        the offset in pixels of the real position compared to the position
+        obtained by multiplying the current scroll position in scroll units by
+        the size of scroll unit in pixels. For example, if the scroll unit size
+        (pixels per line) is 20px, this function returns a value which can be
+        between 0 and 19.
+
+        @since 3.2.2
+    */
+    int GetPixelOffset() const;
+
     void SetOrientation(int orient);
     void SetPosition(int pos);
 };
@@ -2751,8 +2774,8 @@ enum wxMouseWheelAxis
     under Mac platforms with a single button mouse).
 
     For the @c wxEVT_ENTER_WINDOW and @c wxEVT_LEAVE_WINDOW events
-    purposes, the mouse is considered to be inside the window if it is in the
-    window client area and not inside one of its children. In other words, the
+    purposes, the mouse is considered to be inside the window if it is over the
+    window and not inside one of its children. In other words, the
     parent window receives @c wxEVT_LEAVE_WINDOW event not only when the
     mouse leaves the window entirely but also when it enters one of its children.
 
@@ -3830,6 +3853,11 @@ public:
     The application should call wxEvent::GetId to check the identity of the
     clicked-on window, and then either show some suitable help or call wxEvent::Skip()
     if the identifier is unrecognised.
+
+    Note that for some windows, such as wxToolBar, the event uses the ID of the
+    tool that was under the mouse, if any, and not the ID of the window itself.
+    If necessary, wxEvent::GetEventObject() may be used to get the pointer to
+    the toolbar itself.
 
     Calling Skip is important because it allows wxWidgets to generate further
     events for ancestors of the clicked-on window. Otherwise it would be impossible to

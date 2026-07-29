@@ -1,0 +1,51 @@
+{
+    "BJT" : {
+        "name" : "Биполярный транзистор",
+        "DC Diode Fwd" : {
+            "name" : "База-Коллектор прямое",
+            "settings" : {
+                "IntegTime" : [ "1", "2", "3" ]
+            }
+        }
+    },
+    
+    "CMOS" : {
+        "name" : "Полевой транзистор",
+        "DC Diode Fwd" : {
+            "name" : "База-Коллектор прямое",
+            "settings" : {
+                "IntegTime" : [ "1", "2", "3" ]
+            }
+        }
+    },
+    
+    "Diode" : {
+        "name" : "Диод",
+        "DC Diode Fwd" : {
+            "name" : "База-Коллектор прямое",
+            "settings" : {
+                "IntegTime" : [ "1", "2", "3" ]
+            }
+        }
+    },
+    
+    "Resistor" : {
+        "name" : "Резистор",
+        "DC Diode Fwd" : {
+            "name" : "База-Коллектор прямое",
+            "settings" : {
+                "IntegTime" : [ "1", "2", "3" ]
+            }
+        }
+    },
+
+    "Capacitor" : {
+        "name" : "Конденсатор",
+        "DC Diode Fwd" : {
+            "name" : "База-Коллектор прямое",
+            "settings" : {
+                "IntegTime" : [ "1", "2", "3" ]
+            }
+        }
+    }
+}

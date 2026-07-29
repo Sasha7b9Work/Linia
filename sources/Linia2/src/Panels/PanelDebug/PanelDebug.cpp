@@ -4,30 +4,27 @@
 #include "MainWindow.h"
 #include "Panels/PanelDebug/Notebook/NotebookDebug.h"
 #include "Panels/PanelDebug/PanelRight.h"
+#pragma warning(push, 0)
+#include <wx/sizer.h>
+#pragma warning(pop)
 
 
-PanelDebug *ThePanelDebug = nullptr;
+PanelDebug *PanelDebug::self = nullptr;
 
 
-PanelDebug::PanelDebug(wxWindow *parent) :
-    Panel(parent, 0, 0, MainWindow::WIDTH, MainWindow::HEIGHT)
+PanelDebug::PanelDebug(Notebook *board) : PageNotebook(board, L("Отладка"))
 {
-    ThePanelDebug = this;
-
-    new NotebookDebug(this);
-
-    new PanelRight(this);
+    self = this;
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    sizer->Add(TheNotebookDebug, 1, wxEXPAND);
+    sizer->Add(new NotebookDebug(this));
 
-    sizer->Add(ThePanelRight, 0, wxEXPAND);
+    sizer->Add(new PanelRight(this, ThePanelRight));
 
     SetSizer(sizer);
 
-    wxPanel::Layout();
-    wxPanel::Fit();
+    PageNotebook::Layout();
 
     Unpack();
 }
@@ -35,7 +32,7 @@ PanelDebug::PanelDebug(wxWindow *parent) :
 
 bool PanelDebug::Show(bool show)
 {
-    show ? TheNotebookDebug->Init() : TheNotebookDebug->DeInit();
+    show ? NotebookDebug::self->Init() : NotebookDebug::self->DeInit();
 
     return wxPanel::Show(show);
 }
@@ -43,7 +40,7 @@ bool PanelDebug::Show(bool show)
 
 void PanelDebug::PeriodicTask()
 {
-    TheNotebookDebug->PeriodicTask();
+    NotebookDebug::self->PeriodicTask();
 
 //    ThePanelRight->PeriodicTask();
 }
@@ -51,11 +48,11 @@ void PanelDebug::PeriodicTask()
 
 void PanelDebug::Unpack()
 {
-    TheNotebookDebug->Unpack();
+    NotebookDebug::self->Unpack();
 }
 
 
 void PanelDebug::Pack()
 {
-    TheNotebookDebug->Pack();
+    NotebookDebug::self->Pack();
 }

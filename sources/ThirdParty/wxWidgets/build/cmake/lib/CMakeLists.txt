@@ -23,7 +23,7 @@ endif()
 # Define third party libraries
 set(LIBS_THIRDPARTY regex zlib expat)
 if(wxUSE_GUI)
-    list(APPEND LIBS_THIRDPARTY jpeg png tiff nanosvg webp)
+    list(APPEND LIBS_THIRDPARTY jpeg png tiff nanosvg webp lunasvg)
 endif()
 foreach(LIB IN LISTS LIBS_THIRDPARTY)
     include(${LIB}.cmake)
@@ -45,7 +45,14 @@ endmacro()
 
 # Define base libraries
 set(LIBS base)
-add_opt_lib(net wxUSE_SOCKETS)
+
+# wxNet should be built if either wxUSE_SOCKETS or wxUSE_WEBREQUEST is on.
+if(wxUSE_SOCKETS OR wxUSE_WEBREQUEST)
+    set(wxUSE_NET ON)
+else()
+    set(wxUSE_NET OFF)
+endif()
+add_opt_lib(net wxUSE_NET)
 
 # Define UI libraries
 if(wxUSE_GUI)

@@ -35,8 +35,6 @@ namespace SET
         extern ValueUInt        *color_secant;          // Цвет секущей
 
         extern ValueInt         *size_point;            // Размер точки на графике
-        extern Value<wxString>  *current_panel;
-
-        extern ValueInt         *mode_application;      // Application::Mode
+        extern ValueInt         *current_panel;
     }
 };

@@ -2,6 +2,13 @@
 #include "defines.h"
 #include "Utils/GlobalFunctions.h"
 #include "MainWindow.h"
+#pragma warning(push, 0)
+#include <wx/stattext.h>
+#include <wx/filename.h>
+#include <wx/textctrl.h>
+#include <wx/msgdlg.h>
+#include <wx/stdpaths.h>
+#pragma warning(pop)
 
 
 void GF::HorizontalAlignCenter(wxStaticText *label , wxWindow *border)
@@ -94,11 +101,11 @@ uint64 GF::UInt64FromTextCtrl(wxWindow *window, int id)
 
     wxString value = control->GetValue();
 
-    uint64 result = 0;
+    unsigned long long ull_result = 0;
 
-    value.ToULongLong(&result);
+    value.ToULongLong(&ull_result);
 
-    return result;
+    return (uint64)ull_result;
 }
 
 
@@ -154,18 +161,15 @@ wxPoint GF::GetCoordCenter(const wxSize &size)
 }
 
 
-wxString GF::DirForModFiles()
+std::string GF::GetFullPath(pchar rel_path)
 {
-    wxString path = wxGetCwd() + wxT("/mod");
+    wxString exe_path = wxStandardPaths::Get().GetExecutablePath();
 
-    wxString normalizedPath = wxFileName::DirName(path).GetFullPath();
+    wxFileName file_name(exe_path);
 
-    if (!wxDirExists(path))
-    {
-        wxFileName::Mkdir(normalizedPath, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
-    }
+    wxString exe_dir = file_name.GetPath();
 
-    return normalizedPath;
+    return exe_dir.ToStdString() + "/" + rel_path;
 }
 
 

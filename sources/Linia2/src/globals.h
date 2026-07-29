@@ -3,39 +3,36 @@
 
 
 class Application;
-struct AutoCursors;
-class DialogTest;
-class Display;
+class AutoCursors;
 class IGrid;
 class MainWindow;
-class NotebookDebug;
-class PanelCalc;
-class PanelChannelB;
-class PanelChannelC;
-class PanelChannelS;
-class PanelConfig;
-class PanelDebug;
-class PanelErrors;
-class PanelModel;
-class PanelRight;
-class PanelScheme;
-class WindowCursors;
 
 extern Application   *TheApp;
 extern AutoCursors   *TheAutoCursors;
-extern DialogTest    *TheDialogTest;
-extern Display       *TheDisplay;
 extern IGrid         *TheGrid;
 extern MainWindow    *TheMainWindow;
-extern NotebookDebug *TheNotebookDebug;
-extern PanelCalc     *ThePanelCalc;
-extern PanelChannelB *ThePanelChannelB;
-extern PanelChannelC *ThePanelChannelC;
-extern PanelChannelS *ThePanelChannelS;
-extern PanelConfig   *ThePanelConfig;
-extern PanelDebug    *ThePanelDebug;
-extern PanelErrors   *ThePanelErrors;
-extern PanelModel    *ThePanelModel;
+
+class PanelArchive;
+class PanelDebug;
+class PanelMeasures;
+class PanelReports;
+class PanelSettings;
+class PanelTables;
+
+class PageTests;
+class PanelCategory;
+class PanelLibrary;
+class PanelViewTest;
+
+class PanelRight;
+
+extern PanelReports  *ThePanelReports;
+extern PanelSettings *ThePanelSettings;
+extern PanelTables   *ThePanelTables;
+
+extern PageTests     *ThePageTests;
+extern PanelCategory *ThePanelCategory;
+extern PanelLibrary  *ThePanelLibrary;
+extern PanelViewTest *ThePanelViewTest;
+
 extern PanelRight    *ThePanelRight;
-extern PanelScheme   *ThePanelScheme;
-extern WindowCursors *TheWindowCursors;     // Настройки курсоров

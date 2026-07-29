@@ -2019,7 +2019,7 @@ void wxCocoaDataViewControl::InitOutlineView(long style)
     NSTableHeaderView* header = nil;
     if ( !(style & wxDV_NO_HEADER) )
     {
-        header = [[wxDVCNSHeaderView alloc] initWithDVC:GetDataViewCtrl()];
+        header = [[[wxDVCNSHeaderView alloc] initWithDVC:GetDataViewCtrl()] autorelease];
     }
 
     [m_OutlineView setHeaderView:header];
@@ -2033,8 +2033,8 @@ wxCocoaDataViewControl::~wxCocoaDataViewControl()
 
 void wxCocoaDataViewControl::keyEvent(WX_NSEvent event, WXWidget slf, void *_cmd)
 {
-    if( [event type] == NSKeyDown && [[event charactersIgnoringModifiers]
-         characterAtIndex: 0] == NSCarriageReturnCharacter )
+    NSString* c = [event type] == NSKeyDown ? [event charactersIgnoringModifiers] : nil;
+    if( c != nil && [c length] >= 1 && [c characterAtIndex: 0] == NSCarriageReturnCharacter )
     {
         wxDataViewCtrl* const dvc = GetDataViewCtrl();
         const wxDataViewItem item = wxDataViewItem( [[m_OutlineView itemAtRow:[m_OutlineView selectedRow]] pointer]);
@@ -2850,7 +2850,7 @@ void wxDataViewRenderer::SetAttr(const wxDataViewItemAttr& attr)
                     data->SaveOriginalTextColour([(id)cell textColor]);
                 }
 
-                colText = attr.GetColour().OSXGetNSColor();
+                colText = attr.GetColour().OSXGetWXColor();
             }
         }
 
@@ -2863,7 +2863,7 @@ void wxDataViewRenderer::SetAttr(const wxDataViewItemAttr& attr)
                 if ( !data->GetOriginalBackgroundColour() )
                     data->SaveOriginalBackgroundColour([(id)cell backgroundColor]);
 
-                colBack = attr.GetBackgroundColour().OSXGetNSColor();
+                colBack = attr.GetBackgroundColour().OSXGetWXColor();
             }
         }
     }
@@ -3286,8 +3286,7 @@ bool wxDataViewIconTextRenderer::MacRender()
 
     cell = (wxImageTextCell*) GetNativeData()->GetItemCell();
     iconText << GetValue();
-    const wxDataViewCtrl* const dvc = GetOwner()->GetOwner();
-    [cell setImage:iconText.GetBitmapBundle().GetBitmapFor(dvc).GetNSImage()];
+    [cell setImage:wxOSXGetImageFromBundle(iconText.GetBitmapBundle())];
     [cell setStringValue:wxCFStringRef(iconText.GetText()).AsNSString()];
     return true;
 }
@@ -3401,7 +3400,7 @@ bool wxDataViewCheckIconTextRenderer::MacRender()
     {
         wxNSTextAttachmentCellWithBaseline* const attachmentCell =
             [[wxNSTextAttachmentCellWithBaseline alloc]
-             initImageCell: icon.GetBitmapFor(GetOwner()->GetOwner()).GetNSImage()];
+             initImageCell: wxOSXGetImageFromBundle(icon)];
         NSTextAttachment* const attachment = [NSTextAttachment new];
         [attachment setAttachmentCell: attachmentCell];
 
@@ -3649,12 +3648,7 @@ void wxDataViewColumn::SetBitmap(const wxBitmapBundle& bitmap)
     // the title is removed:
     m_title.clear();
     wxDataViewColumnBase::SetBitmap(bitmap);
-    wxBitmap bmp = m_owner ? bitmap.GetBitmapFor(m_owner) : bitmap.GetBitmap(
-        bitmap.GetPreferredBitmapSizeAtScale(
-            wxOSXGetMainScreenContentScaleFactor()
-        )
-    );
-    [[m_NativeDataPtr->GetNativeColumnPtr() headerCell] setImage:bmp.GetNSImage()];
+    [[m_NativeDataPtr->GetNativeColumnPtr() headerCell] setImage:wxOSXGetImageFromBundle(bitmap)];
 }
 
 void wxDataViewColumn::SetMaxWidth(int maxWidth)

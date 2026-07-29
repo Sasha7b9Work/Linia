@@ -1,16 +1,22 @@
 ﻿// 2023/09/02 18:48:55 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/Bitmap.h"
+#include "Controls/Panel.h"
+#pragma warning(push, 0)
+#include <wx/timer.h>
+#include <wx/dcmemory.h>
+#pragma warning(pop)
 
 
 struct Color;
+class wxGraphicsContext;
 
 
-class Painter : public wxPanel
+class Painter : public Panel
 {
 public:
 
-    Painter(wxWindow *parent, const wxPoint &position, const wxSize &size);
+    Painter(wxWindow *, const wxSize &);
 
     virtual void OnPaint(wxPaintEvent &);
 
@@ -34,11 +40,11 @@ protected:
 
 
 // Тупо заливает на себе прямоугольник
-class PainterRect : public wxPanel
+class PainterRect : public Panel
 {
 public:
 
-    PainterRect(wxWindow *parent, const wxPoint &position, const wxSize &size);
+    PainterRect(wxWindow *parent, const wxSize &size);
 
     virtual void OnPaint(wxPaintEvent &);
 
@@ -54,12 +60,12 @@ private:
 
 
 // Отображает BMP
-class PainterBMP : public wxPanel
+class PainterBMP : public Panel
 {
 public:
 
     // Если transparentColour != nullptr, то пиксели данного цвета будут прозрачными
-    PainterBMP(wxWindow *, const wxPoint &, const wxSize &, const wxString &file_name, const wxColour &alpha = wxNullColour);
+    PainterBMP(wxWindow *, const wxSize &, const wxString &file_name, const wxColour &alpha = wxNullColour);
 
 private:
 
@@ -73,7 +79,7 @@ class PainterAnimated : public Painter
 {
 public:
 
-    PainterAnimated(wxWindow *parent, const wxPoint &position, const wxSize &);
+    PainterAnimated(wxWindow *parent, const wxSize &);
 
 protected:
 

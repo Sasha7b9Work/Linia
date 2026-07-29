@@ -1,16 +1,19 @@
 ﻿// 2026/04/01 14:24:03 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Controls/ControlDataFPGA.h"
+#pragma warning(push, 0)
+#include <wx/graphics.h>
+#pragma warning(pop)
 
 
 PainterDataFPGA::PainterDataFPGA(wxWindow *parent, const wxSize &size) :
-    Painter(parent, { 0, 0 }, size)
+    Painter(parent, size)
 {
 }
 
 
-ControlDataFPGA::ControlDataFPGA(wxWindow *parent, const wxPoint &position) :
-    wxPanel(parent, wxID_ANY, position, SIZE, wxBORDER_SIMPLE)
+ControlDataFPGA::ControlDataFPGA(wxWindow *parent) :
+    Panel(parent)
 {
     SetSize(SIZE);
 
@@ -20,17 +23,14 @@ ControlDataFPGA::ControlDataFPGA(wxWindow *parent, const wxPoint &position) :
 
     painter = new PainterDataFPGA(this, size);
 
-    painter->SetPosition({ 0, 0 });
+    btnScale = new ToggleButton(painter, L("м"), { 17, 17 });
+    btnScale->Bind(wxEVT_TOGGLEBUTTON, &ControlDataFPGA::OnEventToggleButon, this);
 
-    btnScale = new ToggleButton(painter, "S", { size.x - 17, 0 }, { 17, 17 });
+    btnScale->SetToolTip(L("Изменение масштаба - автоматический или постоянный"));
 
-    btnScale->SetToolTip("Изменение масштаба - автоматический или постоянный");
+    SetMax((1 << 16) - 1);
 
-    SetMax((1 << 18) - 1);
-
-    Draw();
-
-    Bind(wxEVT_TOGGLEBUTTON, &ControlDataFPGA::OnEventToggleButon, this);
+    btnScale->SetPosition({ size.x - btnScale->GetSize().x - 2, 1 });
 }
 
 
@@ -49,9 +49,11 @@ void ControlDataFPGA::SetMax(int _max)
 {
     max = _max;
 
+    float scale = (float)_max / (float)(MAX_NUMBER_POINTS - 1);
+
     for (int i = 0; i < MAX_NUMBER_POINTS; i++)
     {
-        data[i] = _max / 2;
+        data[i] = (int)(scale * (float)i + 0.5f);
     }
 
     Draw();

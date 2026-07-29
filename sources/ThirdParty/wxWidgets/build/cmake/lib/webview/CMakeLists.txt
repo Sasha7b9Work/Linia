@@ -44,9 +44,12 @@ if(APPLE)
 elseif(WXMSW)
     if(wxUSE_WEBVIEW_EDGE)
         # Update the following variables if updating WebView2 SDK
-        set(WEBVIEW2_VERSION "1.0.1722.45")
+        set(WEBVIEW2_VERSION "1.0.3485.44")
         set(WEBVIEW2_URL "https://www.nuget.org/api/v2/package/Microsoft.Web.WebView2/${WEBVIEW2_VERSION}")
-        set(WEBVIEW2_SHA256 "10d78e9e11c7851f0a8bf0dd4c22bbf6383de45bd337e1be42240b103812947d")
+        # When updating the above version of WebView2, download the nupkg from the above URL.
+        # Then, from a PowerShell session, call Get-FileHash on the downloaded nupkg file to get its SHA256
+        # to update here.
+        set(WEBVIEW2_SHA256 "BC09150B179246AC90189649B13BE8E6B11B3AC200E817E18DF106E1F3CF489E")
 
         set(WEBVIEW2_DEFAULT_PACKAGE_DIR "${CMAKE_CURRENT_BINARY_DIR}/packages/Microsoft.Web.WebView2.${WEBVIEW2_VERSION}")
 
@@ -116,7 +119,7 @@ endif()
 
 # webkit extension plugin
 # we can't use (all of the) macros and functions because this library should
-# always be build as a shared libary, and not included in the monolithic build.
+# always be built as a shared library, and not included in the monolithic build.
 if(WXGTK AND wxUSE_WEBVIEW_WEBKIT2)
     wx_append_sources(WEBKIT2_EXT_FILES WEBVIEW_WEBKIT2_EXTENSION)
     add_library(wxwebkit2_ext SHARED ${WEBKIT2_EXT_FILES})
@@ -153,7 +156,9 @@ if(WXGTK AND wxUSE_WEBVIEW_WEBKIT2)
         ${WEBKIT2_LIBRARIES}
         )
 
-    wx_install(TARGETS wxwebkit2_ext LIBRARY DESTINATION "lib/wx/${WX_WEB_EXT_VERSION}/web-extensions")
+    wx_get_install_platform_dir(library)
+
+    wx_install(TARGETS wxwebkit2_ext LIBRARY DESTINATION "${library_dir}/wx/${WX_WEB_EXT_VERSION}/web-extensions")
 
     wx_add_dependencies(wxwebview wxwebkit2_ext)
 endif()

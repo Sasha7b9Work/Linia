@@ -1,7 +1,6 @@
 ﻿// 2023/08/09 19:11:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Settings/Settings.h"
-#include "Utils/Configurator.h"
 #include "Application.h"
 
 
@@ -25,12 +24,7 @@ namespace SET
         ValueUInt        *color_secant = nullptr;
 
         ValueInt         *size_point = nullptr;
-        Value<wxString>  *current_panel = nullptr;
-
-        ValueInt         *mode_application = nullptr;
-
-        void Load();
-        void Save();
+        ValueInt         *current_panel = nullptr;
     }
 
 
@@ -80,9 +74,7 @@ void SET::Init()
     GUI::color_secant = new ValueUInt("color_secant", 0);
 
     GUI::size_point = new ValueInt("size_point", 2);
-    GUI::current_panel = new Value<wxString>{ "current_panel", "PanelChannelC" };
-
-    GUI::mode_application = new ValueInt("mode_application", (int)Application::Mode::Old);
+    GUI::current_panel = new ValueInt{ "current_panel", 0 };
 }
 
 
@@ -131,8 +123,6 @@ void SET::Load()
     {
         elem->Load();
     }
-
-    GUI::Load();
 }
 
 
@@ -157,18 +147,4 @@ void SET::Save()
     {
         elem->Save();
     }
-
-    GUI::Save();
-}
-
-
-void SET::GUI::Load()
-{
-    current_panel->Load();
-}
-
-
-void SET::GUI::Save()
-{
-    current_panel->Save();
 }

@@ -430,7 +430,8 @@ void wxTopLevelWindowGTK::GTKHandleRealized()
                 if ((m_gdkFunc & GDK_FUNC_CLOSE) == 0)
                     layout.Replace("close", empty, false);
 
-                gtk_header_bar_set_decoration_layout(GTK_HEADER_BAR(titlebar), layout);
+                gtk_header_bar_set_decoration_layout(GTK_HEADER_BAR(titlebar),
+                                                     layout.utf8_str());
             }
 #endif // 3.12
             // Don't set WM decorations when GTK is using Client Side Decorations
@@ -476,11 +477,18 @@ gtk_frame_map_callback( GtkWidget*,
                         GdkEvent * WXUNUSED(event),
                         wxTopLevelWindow *win )
 {
-    wxLogTrace(TRACE_TLWSIZE, "Mapped for %s", wxDumpWindow(win));
+    win->GTKHandleMapped();
+    return false;
+}
+}
+
+void wxTopLevelWindowGTK::GTKHandleMapped()
+{
+    wxLogTrace(TRACE_TLWSIZE, "Mapped for %s", wxDumpWindow(this));
 
     // We couldn't set the app ID before, as it only works for mapped windows.
 #if defined(GDK_WINDOWING_WAYLAND) && GTK_CHECK_VERSION(3,24,22)
-    GdkWindow* const window = gtk_widget_get_window(win->m_widget);
+    GdkWindow* const window = gtk_widget_get_window(m_widget);
     if (wxGTKImpl::IsWayland(window) && gtk_check_version(3,24,22) == nullptr)
     {
         const wxString className(wxTheApp->GetClassName());
@@ -489,7 +497,7 @@ gtk_frame_map_callback( GtkWidget*,
     }
 #endif
 
-    const bool wasIconized = win->IsIconized();
+    const bool wasIconized = IsIconized();
     if (wasIconized)
     {
         // Because GetClientSize() returns (0,0) when IsIconized() is true,
@@ -498,21 +506,21 @@ gtk_frame_map_callback( GtkWidget*,
         // tlw that was "rolled up" with some WMs.
         // Queue a resize rather than sending size event directly to allow
         // children to be made visible first.
-        win->m_useCachedClientSize = false;
-        win->m_clientWidth = 0;
-        gtk_widget_queue_resize(win->m_wxwindow);
+        m_useCachedClientSize = false;
+        m_clientWidth = 0;
+        gtk_widget_queue_resize(m_wxwindow);
     }
     // it is possible for m_isShown to be false here, see bug #9909
-    if (win->wxWindowBase::Show(true))
+    if (wxWindowBase::Show(true))
     {
-        win->GTKDoAfterShow();
+        GTKDoAfterShow();
     }
 
     // restore focus-on-map setting in case ShowWithoutActivating() was called
-    gtk_window_set_focus_on_map(GTK_WINDOW(win->m_widget), true);
+    gtk_window_set_focus_on_map(GTK_WINDOW(m_widget), true);
 
-    return false;
-}
+    // Deferred show is no longer possible
+    m_deferShowAllowed = false;
 }
 
 //-----------------------------------------------------------------------------
@@ -591,7 +599,7 @@ wxGetFrameExtents(GdkWindow* window, wxTopLevelWindow::DecorSize* decorSize)
 
     if ( !data || nitems != 4 )
     {
-        wxLogTrace(TRACE_TLWSIZE, "Invalid _NET_FRAME_EXTENTS: %d items",
+        wxLogTrace(TRACE_TLWSIZE, "Invalid _NET_FRAME_EXTENTS: %lu items",
                    nitems);
         return false;
     }
@@ -1292,6 +1300,12 @@ void wxTopLevelWindowGTK::ShowWithoutActivating()
 
 void wxTopLevelWindowGTK::Raise()
 {
+    // Raising the window would show it and we don't want this to happen if
+    // it's currently hidden and it would also break our deferred show logic,
+    // so just do nothing in this case.
+    if (!m_isShown)
+        return;
+
     gtk_window_present( GTK_WINDOW( m_widget ) );
 }
 
@@ -1365,7 +1379,7 @@ void wxTopLevelWindowGTK::DoSetSize( int x, int y, int width, int height, int si
         wxLogTrace(TRACE_TLWSIZE, "Size set for %s (%d, %d) -> (%d, %d)",
                    wxDumpWindow(this), oldSize.x, oldSize.y, m_width, m_height);
 
-        m_deferShowAllowed = true;
+        m_deferShowAllowed = !gtk_widget_get_mapped(m_widget);
         m_useCachedClientSize = false;
 
 #ifdef __WXGTK3__

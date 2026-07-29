@@ -1,20 +1,23 @@
 ﻿// 2025/6/4 10:25:39 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Controls/ButtonsCombo.h"
-#include "Panels/PanelDebug/Notebook/PainterRegister.h"
-#include "Controls/TextControls.h"
-#include "Panels/PanelDebug/Notebook/CommandsCombo.h"
+#include "Controls/ButtonCombo.h"
+#include "Controls/TextControl.h"
 #include "Controls/Painter.h"
 #include "IPPP/Real/Chips.h"
 #include "Controls/Knob.h"
 #include "Controls/Slider.h"
+#include "Controls/Panel.h"
+
+
+class CommandsCombo;
+class PainterRegister;
 
 
 // Квадратик с 0 или 1, на который щёлкают ЛКМ и он изменяет своё состояние
 class CheckBoxBit : public Painter
 {
 public:
-    CheckBoxBit(wxWindow *, const wxPoint &, const wxSize &);
+    CheckBoxBit(wxWindow *, const wxSize &);
 
     void SetValue(bool);
 
@@ -77,17 +80,14 @@ struct ModeDescripion
 
 // Визуальное представление регистра
 
-class Register : public wxPanel
+class Register : public Panel
 {
     friend class PainterRegister;
 
 public:
 
-    static const int WIDTH = 800;
-    static const int HEIGHT = 155;
-
-    Register(wxWindow *parent, const wxString &_title,      // Это написано на изображении
-        Chip *, const wxString &_functional);
+    Register(wxWindow *parent, const wxString &_title,  // Это написано на изображении
+        Chip *, const wxString &_functional);           // На  значение append_height нужно увеличить высоту
 
     void SetNamesBits(const wxArrayString &);
 
@@ -147,9 +147,6 @@ protected:
     // Привести комбобоксы команд и режимов в соотвествие с битовыми полями
     void UpdateComboCommandsAndModes();
 
-    // Увеличить высоту на dH
-    void IncreaseHeight(int dH);
-
     void OnEventTextCtrl(wxCommandEvent &);
     // ЛКМ по состоянию бита CheckBoxBit
     void OnEventCheckBoxBit(wxCommandEvent &);
@@ -165,6 +162,8 @@ protected:
     void SetActiveAcross(bool active, wxWindow *wnd);
 
     virtual void OnEventUpdateComboCommandsAndModes() = 0;
+
+    wxSize GetMinSize() const;
 };
 
 
@@ -184,7 +183,10 @@ public:
 class RegDAC : public Register
 {
 public:
+
     RegDAC(wxWindow *, pchar _title, Chip *_chip, const wxString &_functional);
+
+    KnobWidget *knob;         // Ручка установки значения
 
 protected:
 
@@ -193,7 +195,6 @@ protected:
 
 private:
 
-    KnobWidget *knob = nullptr;         // Ручка установки значения
     SliderInt *slider = nullptr;        // Ползунок установки значения
 
     void OnEventKnob(wxCommandEvent &);

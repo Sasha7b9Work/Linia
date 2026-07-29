@@ -1,7 +1,17 @@
 ﻿// 2023/08/10 19:21:10 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Controls/Buttons.h"
-#include "Controls/ButtonsCombo.h"
+#include "Controls/Button.h"
+#include "Controls/ButtonCombo.h"
+#pragma warning(push, 0)
+#pragma warning(pop)
+
+
+class wxRadioButton;
+class wxWindow;
+class wxStaticText;
+class wxCheckBox;
+class wxTextCtrl;
+class wxSpinCtrl;
 
 
 #define FIND_CHECKBUTTON(id)  GF::FindCheckButton(this, (id))
@@ -14,8 +24,8 @@
 
 namespace GF
 {
-    // Возвращает каталог, где хранятся файлы *.mod и создаёт его, если таковой не существует
-    wxString DirForModFiles();
+    // Возвращает абсолютный путь относительно каталога с исполняемым файлом
+    std::string GetFullPath(pchar rel_path);
 
     // Центрировать text относительно border
     void HorizontalAlignCenter(wxStaticText *label, wxWindow *border);

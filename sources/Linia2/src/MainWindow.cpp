@@ -1,25 +1,23 @@
 ﻿// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Application.h"
-#include "Utils/Configurator.h"
 #include "Settings/Settings.h"
-#include "Utils/Configurator.h"
 #include "Windows/ConsoleRS232.h"
 #include "MainWindow.h"
-#include "Panels/PanelName.h"
-#include "Panels/PanelUpper.h"
-#include "Panels/PanelConfig/PanelConfig.h"
-#include "Panels/PanelConfig/PanelModel.h"
-#include "Display/Display.h"
-#include "Panels/PanelIndicator.h"
-#include "Panels/PanelModeLower.h"
-#include "Panels/PanelMenu/PanelMenu.h"
+#include "Panels/PanelMeasures/PanelMeasures.h"
+#include "Panels/PageTests/PageTests.h"
 #include "Panels/PanelDebug/PanelDebug.h"
-#include "Panels/PanelReferenceGraphs.h"
+#include "Panels/PanelMeasures/Graphics/AutoCursors.h"
+#include "Panels/PanelArchive/PanelArchive.h"
+#include "Panels/PanelReports/PanelReports.h"
+#include "Panels/PanelSettings/PanelSettings.h"
+#include "Panels/PanelTables/PanelTables.h"
 #include "Controls/Dialog.h"
-#include "IPPP/Tests/Tests.h"
-#include "Display/Graphics/AutoCursors.h"
-
+#include "Controls/Notebook.h"
+#pragma warning(push, 0)
+#include <wx/sizer.h>
+#include <wx/statline.h>
+#pragma warning(pop)
 
 MainWindow *TheMainWindow = nullptr;
 
@@ -27,10 +25,10 @@ MainWindow *TheMainWindow = nullptr;
 ModeMainWindow::E ModeMainWindow::current = ModeMainWindow::Standard;
 
 
-MainWindow::MainWindow(const wxString &title)
+MainWindow::MainWindow(MainWindow *&self, const wxString &title)
     : wxFrame((wxFrame *)NULL, wxID_ANY, title, wxDefaultPosition, wxDefaultSize)
 {
-    TheMainWindow = this;
+    self = this;
 
 #ifdef WIN32
     SetIcon(wxICON(MAIN_ICON));
@@ -38,13 +36,31 @@ MainWindow::MainWindow(const wxString &title)
 
     Bind(wxEVT_MENU, &MainWindow::OnAbout, this, wxID_ABOUT);
     Bind(wxEVT_MENU, &MainWindow::OnQuit, this, wxID_EXIT);
-
+    Bind(wxEVT_MAXIMIZE, &MainWindow::OnEventMaximize, this);
     Bind(wxEVT_CLOSE_WINDOW, &MainWindow::OnEventCloseWindow, this);
+
     TuneFont();
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
+    main_panel= new Notebook(this);
+    main_panel->AddPanel(new PanelDebug(main_panel));
+    main_panel->AddPanel(new PageTests(main_panel, ThePageTests));
+    main_panel->AddPanel(new PanelMeasures(main_panel));
 
+//    main_panel->AddPanel(new PanelTables(main_panel, ThePanelTables));
+//    main_panel->AddPanel(new PanelReports(main_panel, ThePanelReports));
+//    main_panel->AddPanel(new PanelArchive(main_panel, ThePanelArchive));
+//    main_panel->AddPanel(new PanelSettings(main_panel, ThePanelSettings));
+
+    sizer->Add(main_panel, 1, wxEXPAND | wxALL);
     SetSizer(sizer);
+
+    main_panel->SetCurrentPanel(PanelMeasures::self);
+    TheApp->ProcessPendingEvents();
+    TheApp->Yield();
+    main_panel->SetCurrentPanel(PanelDebug::self);
+    TheApp->ProcessPendingEvents();
+    TheApp->Yield();
 
     SetPosition();
 
@@ -61,29 +77,13 @@ MainWindow::MainWindow(const wxString &title)
         {
             SetClientSize({ WIDTH, HEIGHT });
 
+#ifndef WIN32
             SetWindowStyle(GetWindowStyle() & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX));
+#endif
         }
     }
 
-    new AutoCursors();
-
-    new PanelName(this);
-
-    new PanelUpper(this);
-
-    new PanelConfig(this);
-
-    TheDisplay = new Display(this);
-
-    new PanelIndicator(this);
-
-    new PanelModeLower(this);
-
-    new PanelMenu(this);
-
-    new PanelDebug(this);
-
-    new PanelReferenceGraph(this);
+    new AutoCursors(TheAutoCursors);
 
     SetMode(ModeMainWindow::Standard);
 }
@@ -91,7 +91,7 @@ MainWindow::MainWindow(const wxString &title)
 
 void MainWindow::PeriodicTask()
 {
-    ThePanelDebug->PeriodicTask();
+
 }
 
 
@@ -104,6 +104,18 @@ void MainWindow::OnEventKeyHook(wxKeyEvent &event)
             ConsoleRS232::self->Show(!ConsoleRS232::self->IsShown());
         }
     }
+
+    event.Skip();
+}
+
+
+void MainWindow::OnEventMaximize(wxMaximizeEvent &event)
+{
+    // Без этого первая максимизация окна приложения не отрабатывает на элементах сайзера
+
+    Layout();
+    GetSizer()->Layout();
+    Refresh();
 
     event.Skip();
 }
@@ -186,9 +198,7 @@ void MainWindow::OnQuit(wxCommandEvent &WXUNUSED(event))
 
 void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 {
-    ThePanelDebug->Show(false);
-
-    Test::Save("example.tst");
+    SET::GUI::current_panel->Set(main_panel->GetCurrentPanelIndex());
 
     if (ConsoleRS232::self)
     {
@@ -215,7 +225,7 @@ void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 void MainWindow::OnAbout(wxCommandEvent &WXUNUSED(event))
 {
     wxBoxSizer *topsizer;
-    Dialog dlg(wxString(wxT("About")));
+    Dialog dlg(wxString(L("About")));
 
     topsizer = new wxBoxSizer(wxVERTICAL);
 
@@ -223,7 +233,7 @@ void MainWindow::OnAbout(wxCommandEvent &WXUNUSED(event))
     topsizer->Add(new wxStaticLine(&dlg, wxID_ANY), 0, wxEXPAND | wxLEFT | wxRIGHT, 10);
 #endif // wxUSE_STATLINE
 
-    wxButton *bu1 = new wxButton(&dlg, wxID_OK, wxT("OK"));
+    Button *bu1 = new Button(&dlg, L("OK"));
     bu1->SetDefault();
 
     topsizer->Add(bu1, 0, wxALL | wxALIGN_RIGHT, 15);
@@ -239,23 +249,14 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
 {
     ModeMainWindow::current = mode;
 
-    PanelName::self->Show(mode == ModeMainWindow::Standard);
-    PanelUpper::self->Show(mode == ModeMainWindow::Standard);
-    ThePanelConfig->Show(mode == ModeMainWindow::Standard);
-    TheDisplay->Show(mode == ModeMainWindow::Standard || mode == ModeMainWindow::FullGraph);
-    PanelIndicator::self->Show(mode == ModeMainWindow::Standard);
-    PanelModeLower::self->Show(mode == ModeMainWindow::Standard);
-    PanelMenu::self->Show(mode == ModeMainWindow::Standard);
+    if (PanelMeasures::self)
+    {
+        PanelMeasures::self->Show(mode == ModeMainWindow::Standard || mode == ModeMainWindow::FullGraph);
 
-    ThePanelDebug->Show(mode == ModeMainWindow::Debug);
-
-    PanelReferenceGraph::self->Show(mode == ModeMainWindow::ReferenceGraphs);
-
-    TheDisplay->FullScreen(mode == ModeMainWindow::FullGraph);
+        PanelMeasures::self->FullScreen(mode == ModeMainWindow::FullGraph);
+    }
 
     wxFrame::Layout();
-
-    ThePanelDebug->Pack();
 }
 
 

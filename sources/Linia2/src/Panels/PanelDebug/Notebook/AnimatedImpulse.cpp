@@ -1,10 +1,13 @@
 ﻿// 2026/03/19 16:46:21 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/Notebook/AnimatedImpulse.h"
+#pragma warning(push, 0)
+#include <wx/dcclient.h>
+#pragma warning(pop)
 
 
 AnimatedImpulse::AnimatedImpulse(wxWindow *parent, const wxColor &background) :
-    PainterAnimated(parent, wxDefaultPosition, { WIDTH, HEIGHT }),
+    PainterAnimated(parent, { WIDTH, HEIGHT }),
     color_background(background)
 {
     wxWindow::Enable(false);

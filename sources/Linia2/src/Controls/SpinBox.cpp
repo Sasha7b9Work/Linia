@@ -1,13 +1,20 @@
 ﻿// 2025/7/23 14:20:52 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Controls/SpinBox.h"
+#include "Controls/Button.h"
+#pragma warning(push, 0)
+#include <wx/button.h>
+#include <wx/textctrl.h>
+#pragma warning(pop)
 
 
-SpinBox::SpinBox(wxWindow *parent, const wxPoint &position, const wxSize &size, int _min, int _max) :
-    wxPanel(parent, wxID_ANY, position, size),
-    min(_min),
-    max(_max)
+SpinBox::SpinBox(wxWindow *parent, const wxSize &size, int _min, int _max) :
+    Panel(parent),
+    m_min(_min),
+    m_max(_max)
 {
+    Panel::SetSize(size);
+
     const int width_btn = 15;
 
     wxSize size_text = size;
@@ -17,15 +24,16 @@ SpinBox::SpinBox(wxWindow *parent, const wxPoint &position, const wxSize &size, 
 
     text->SetEditable(false);
 
-    SetValue(min);
+    SetValue(m_min);
 
     wxSize size_button{ width_btn, 11 };
 
-    btnMore = new wxButton(this, wxID_ANY, ".", { size_text.x, 0 }, size_button);
+    btnMore = new Button(this, ".", size_button);
+    btnMore->Bind(wxEVT_BUTTON, &SpinBox::OnEventButton, this);
 
-    btnLess = new wxButton(this, wxID_ANY, ".", { size_text.x, size_button.y }, size_button);
+    btnLess = new Button(this, ".", size_button);
 
-    Bind(wxEVT_BUTTON, &SpinBox::OnEventButton, this);
+    btnLess->Bind(wxEVT_BUTTON, &SpinBox::OnEventButton, this);
 }
 
 
@@ -37,14 +45,14 @@ void SpinBox::OnEventButton(wxCommandEvent &event)
 
     if (id == btnMore->GetId())
     {
-        if (value < max)
+        if (value < m_max)
         {
             SetValue(value + 1);
         }
     }
     else if (id == btnLess->GetId())
     {
-        if (value > min)
+        if (value > m_min)
         {
             SetValue(value - 1);
         }

@@ -21,6 +21,7 @@
 #endif // WX_PRECOMP
 
 #include "wx/wxcrt.h"       // for wxStrstr()
+#include "wx/scopeguard.h"
 
 #include "wx/private/localeset.h"
 
@@ -795,6 +796,10 @@ TEST_CASE("wxDateTime::Format", "[datetime]")
     }
 
     CHECK(wxDateTime::Now().Format("%%") == "%");
+
+
+    wxDateTime dt(29, wxDateTime::May, 1976, 18, 30, 15, 678);
+    CHECK( dt.Format("%F %T.%l") == "1976-05-29 18:30:15.678" );
 }
 
 TEST_CASE("wxDateTime::ParseFormat", "[datetime]")
@@ -1838,7 +1843,7 @@ TEST_CASE("wxDateTime::DateOnly", "[datetime]")
 
 TEST_CASE("wxDateTime::TranslateFromUnicodeFormat", "[datetime]")
 {
-#if defined(__WINDOWS__) || defined(__WXOSX__)
+#if defined(__WINDOWS__) || defined(__DARWIN__)
     // This function is defined in src/common/intl.cpp and as it is not public we
     // need to declare it here explicitly.
     WXDLLIMPEXP_BASE
@@ -2538,6 +2543,12 @@ TEST_CASE("Easter", "[datetime][holiday][easter]")
 
 TEST_CASE("US Catholic Holidays", "[datetime][holiday]")
 {
+    // Clear the wxDateTimeWorkDays that exists by default, and restore it at the end,
+    // after cleaning up the authority tested here.
+    wxDateTimeHolidayAuthority::ClearAllAuthorities();
+    wxON_BLOCK_EXIT0(wxDateTimeHolidayAuthority::ClearAllAuthorities);
+    wxON_BLOCK_EXIT1(wxDateTimeHolidayAuthority::AddAuthority, new wxDateTimeWorkDays);
+
     SECTION("Ascension")
     {
         wxDateTime ascension = wxDateTimeUSCatholicFeasts::GetThursdayAscension(2023);
@@ -2565,6 +2576,12 @@ TEST_CASE("US Catholic Holidays", "[datetime][holiday]")
 
 TEST_CASE("Christian Holidays", "[datetime][holiday][christian]")
 {
+    // Clear the wxDateTimeWorkDays that exists by default, and restore it at the end,
+    // after cleaning up the authority tested here.
+    wxDateTimeHolidayAuthority::ClearAllAuthorities();
+    wxON_BLOCK_EXIT0(wxDateTimeHolidayAuthority::ClearAllAuthorities);
+    wxON_BLOCK_EXIT1(wxDateTimeHolidayAuthority::AddAuthority, new wxDateTimeWorkDays);
+
     SECTION("Easter")
     {
         wxDateTime easter = wxDateTimeChristianHolidays::GetEaster(2023);

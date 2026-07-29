@@ -2730,11 +2730,8 @@ wxWidgetImpl( peer, flags )
     if ( !peer->IsShown() )
         SetVisibility(false);
 
-    // gc aware handling
-    if ( m_osxView )
-        CFRetain(m_osxView);
-    [m_osxView release];
-    m_osxView.clipsToBounds = YES;
+    if ( IsUserPane() )
+        ClipsToBounds(true);
 }
 
 
@@ -2752,6 +2749,8 @@ void wxWidgetCocoaImpl::Init()
     m_lastKeyDownEvent = nil;
     m_lastKeyDownWXSent = false;
     m_hasEditor = false;
+    m_lastLeftDownWasDClick = false;
+    m_lastRightDownWasDClick = false;
 }
 
 wxWidgetCocoaImpl::~wxWidgetCocoaImpl()
@@ -2767,11 +2766,10 @@ wxWidgetCocoaImpl::~wxWidgetCocoaImpl()
         if ( sv != nil )
             [m_osxView removeFromSuperview];
     }
-    // gc aware handling
-    if ( m_osxView )
-        CFRelease(m_osxView);
 
     wxCocoaGestures::EraseForObject(this);
+
+    [m_osxView release];
 }
 
 void wxWidgetCocoaImpl::BeginNativeKeyDownEvent( NSEvent* event )
@@ -3528,7 +3526,7 @@ void wxWidgetCocoaImpl::SetBackgroundColour( const wxColour &col )
 
             if ( toplevel == nullptr || toplevel->GetShape().IsEmpty() )
                 [targetView setBackgroundColor:
-                        col.IsOk() ? col.OSXGetNSColor() : nil];
+                        col.IsOk() ? col.OSXGetWXColor() : nil];
         }
     }
 }
@@ -3592,7 +3590,7 @@ void wxWidgetCocoaImpl::SetLabel( const wxString& title )
             if ( col.IsOk() )
             {
                 [attrString addAttribute:NSForegroundColorAttributeName
-                                   value:col.OSXGetNSColor()
+                                   value:col.OSXGetWXColor()
                                    range:NSMakeRange(0, [attrString length])];
             }
 
@@ -3886,7 +3884,7 @@ void wxWidgetCocoaImpl::SetForegroundColour(const wxColour& col)
 
     if ([targetView respondsToSelector:@selector(setTextColor:)])
     {
-        [targetView setTextColor: col.IsOk() ? col.OSXGetNSColor() : nil];
+        [targetView setTextColor: col.IsOk() ? col.OSXGetWXColor() : nil];
     }
 }
 
@@ -4112,6 +4110,41 @@ bool wxWidgetCocoaImpl::DoHandleMouseEvent(NSEvent *event)
     bool processed = false;
     for ( auto& wxevent : TranslateMouseEvent(event) )
     {
+        if (wxevent.GetEventType() == wxEVT_LEFT_DOWN)
+        {
+                m_lastLeftDownWasDClick = false;
+        }
+        else if (wxevent.GetEventType() == wxEVT_LEFT_DCLICK)
+        {
+            if (m_lastLeftDownWasDClick)
+            {
+                // synthesize LEFT_DOWN event from second, fourth etc. DCLICK event
+                wxevent.SetEventType( wxEVT_LEFT_DOWN );
+                m_lastLeftDownWasDClick = false;
+            }
+            else
+            {
+                m_lastLeftDownWasDClick = true;
+            }
+        }
+        else if (wxevent.GetEventType() == wxEVT_RIGHT_DOWN)
+        {
+                m_lastRightDownWasDClick = false;
+        }
+        else if (wxevent.GetEventType() == wxEVT_RIGHT_DCLICK)
+        {
+            if (m_lastRightDownWasDClick)
+            {
+                // synthesize RIGHT_DOWN event from second, fourth etc. DCLICK event
+                wxevent.SetEventType( wxEVT_RIGHT_DOWN );
+                m_lastRightDownWasDClick = false;
+            }
+            else
+            {
+                m_lastRightDownWasDClick = true;
+            }
+        }
+
         // Even if this event was processed, still continue with the other
         // events, if any.
         if ( GetWXPeer()->HandleWindowEvent(wxevent) )
@@ -4276,6 +4309,7 @@ void wxWidgetCocoaImpl::UseClippingView()
             m_osxClipView = [[wxNSClipView alloc] initWithFrame: m_osxView.bounds];
             [(NSClipView*)m_osxClipView setDrawsBackground: NO];
             [m_osxView addSubview:m_osxClipView];
+            [m_osxClipView release];
 
             // add tracking for this clipview as well
 
@@ -4290,6 +4324,11 @@ void wxWidgetCocoaImpl::UseClippingView()
         }
     }
 #endif
+}
+
+void wxWidgetCocoaImpl::ClipsToBounds(bool clip)
+{
+    m_osxView.clipsToBounds = clip;
 }
 
 

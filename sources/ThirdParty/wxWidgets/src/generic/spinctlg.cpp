@@ -49,11 +49,15 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxSpinDoubleEvent, wxNotifyEvent);
 // ----------------------------------------------------------------------------
 
 // The margin between the text control and the spin: the value here is the same
-// as the margin between the spin button and its "buddy" text control in wxMSW
-// so the generic control looks similarly to the native one there, we might
-// need to use different value for the other platforms (and maybe even
-// determine it dynamically?).
+// as the margin between the spin button and its "buddy" text control in wxMSW,
+// and the commonly used spacing on macOS, so the generic control looks
+// similarly to the native one there, we might need to use different value for
+// other platforms (and maybe even determine it dynamically?).
+#ifdef __WXOSX__
+static const wxCoord MARGIN = 4;
+#else
 static const wxCoord MARGIN = 1;
+#endif
 
 #define SPINCTRLBUT_MAX 32000 // large to avoid wrap around trouble
 
@@ -215,8 +219,10 @@ bool wxSpinCtrlGenericBase::Create(wxWindow *parent,
     // don't use borders for this control itself, it wouldn't look good with
     // the text control borders (but we might want to use style border bits to
     // select the text control style)
+    const long styleWithoutBorder = (style & ~wxBORDER_MASK) | wxBORDER_NONE;
+
     if ( !wxControl::Create(parent, id, wxDefaultPosition, wxDefaultSize,
-                            (style & ~wxBORDER_MASK) | wxBORDER_NONE,
+                            styleWithoutBorder,
                             wxDefaultValidator, name) )
     {
         return false;
@@ -241,8 +247,15 @@ bool wxSpinCtrlGenericBase::Create(wxWindow *parent,
             m_value = AdjustAndSnap(d);
     }
 
+#ifdef __WXOSX__
+    MacClipsToBounds(false);
+#endif
+
     m_textCtrl   = new wxSpinCtrlTextGeneric(this, DoValueToText(m_value), style);
-    m_spinButton = new wxSpinCtrlButtonGeneric(this, style);
+    m_spinButton = new wxSpinCtrlButtonGeneric(this, styleWithoutBorder);
+
+    // ensure correct start value also if non-zero
+    m_spinButton->SetValue( m_value );
 
 #if wxUSE_TOOLTIPS
     m_textCtrl->SetToolTip(GetToolTipText());

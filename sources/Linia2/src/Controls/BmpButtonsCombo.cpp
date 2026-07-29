@@ -3,8 +3,11 @@
 #include "Controls/BmpButtonsCombo.h"
 #include "Utils/GlobalFunctions.h"
 #include "Controls/StaticBox.h"
-#include "Utils/Configurator.h"
 #include "Settings/Settings.h"
+#pragma warning(push, 0)
+#include <wx/settings.h>
+#include <wx/popupwin.h>
+#pragma warning(pop)
 
 
 class BmpButtonPopup : public wxPopupTransientWindow
@@ -41,7 +44,7 @@ public:
 
         for (uint i = 0; i < files.size(); ++i)
         {
-            ButtonBitmap *btn = new ButtonBitmap(mainPanel, wxDefaultPosition, wxDefaultSize, files[i], "");
+            ButtonBitmap *btn = new ButtonBitmap(mainPanel, wxDefaultSize, files[i], "");
             btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(170));
             btn->SetLabel(wxString::Format("%d", i));
             btn->SetToolTip(tooltips[i]);
@@ -169,9 +172,9 @@ private:
 };
 
 
-BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxString &_title, const wxPoint &pos,
+BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxString &_title,
     const wxSize &size, const wxArrayString &_files, const wxArrayString &_tooltips, int num_file, int _buttons_in_row, const wxString &_name) :
-    ButtonBitmap(parent, pos, size, _files[(size_t)num_file], _name),
+    ButtonBitmap(parent, size, _files[(size_t)num_file], _name),
     current_choice(num_file),
     title(_title),
     files(_files),

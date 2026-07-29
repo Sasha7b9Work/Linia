@@ -506,8 +506,6 @@
 
 #define wxUSE_GLCANVAS       0
 
-#define wxUSE_GLCANVAS_EGL   0
-
 #define wxUSE_RICHTEXT       0
 
 
@@ -571,6 +569,8 @@
 
 #define wxUSE_NANOSVG_EXTERNAL 0
 
+#define wxUSE_LUNASVG       0
+
 #define wxUSE_TGA           0
 
 #define wxUSE_GIF           0
@@ -621,6 +621,15 @@
 #define wxUSE_GSTREAMER 0
 
 #define wxUSE_GSTREAMER_PLAYER 0
+
+/**
+    Use wayland-client library.
+
+    This is needed by any Wayland-specific code in wxGTK implementation.
+
+    Recommended setting: 1, only set to 0 if wayland-client is not available.
+ */
+#undef wxHAVE_WAYLAND_CLIENT
 
 /*
    Use XTest extension to implement wxUIActionSimulator?
@@ -1128,6 +1137,12 @@
 
 /* Define if locale_t is available */
 #undef HAVE_LOCALE_T
+
+/* Define if you have EGL support */
+#undef wxHAS_EGL
+
+/* Define if you have GLX support */
+#undef wxHAS_GLX
 
 /* Define if you have inotify_xxx() functions. */
 #undef wxHAS_INOTIFY

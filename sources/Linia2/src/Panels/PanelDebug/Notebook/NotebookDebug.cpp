@@ -1,44 +1,76 @@
 ﻿// 2025/6/3 14:06:23 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/Notebook/NotebookDebug.h"
-#include "Panels/PanelDebug/Notebook/PageOrangePi.h"
 #include "Panels/PanelDebug/Notebook/PageFPGA.h"
 #include "Panels/PanelDebug/Notebook/PageSource3kV.h"
 #include "Panels/PanelDebug/Notebook/PageCommutator.h"
-#include "Panels/PanelDebug/Notebook/PageChannelC.h"
+#include "Panels/PanelDebug/Notebook/PageChannelForm.h"
 #include "Panels/PanelDebug/Notebook/PageChannelB.h"
 #include "Panels/PanelDebug/Notebook/PageChannelS.h"
 #include "Panels/PanelDebug/Notebook/PageMeasCurrent.h"
 #include "Panels/PanelDebug/Notebook/PageSource50V.h"
+#include "IPPP/Real/Chips.h"
+#include "Settings/Configurator.h"
 
 
-NotebookDebug *TheNotebookDebug = nullptr;
+NotebookDebug *NotebookDebug::self = nullptr;
 
 
 NotebookDebug::NotebookDebug(wxWindow *parent) :
     wxNotebook(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBK_TOP)
 {
-    TheNotebookDebug = this;
+    self = this;
 
     AppendNewPage(new PageFPGA(this));
-    AppendNewPage(new PageCommutator(this));
-    AppendNewPage(new PageSource3kV(this));
-    AppendNewPage(new PageChannelC(this));
+    AppendNewPage(new PageChannelForm(this));
+    AppendNewPage(new PageMeasCurrent(this));
     AppendNewPage(new PageChannelB(this));
     AppendNewPage(new PageChannelS(this));
-    AppendNewPage(new PageMeasCurrent(this));
+    AppendNewPage(new PageSource3kV(this));
     AppendNewPage(new PageSource50V(this));
+    AppendNewPage(new PageCommutator(this));
 
     wxWindowBase::Layout();
 
     Bind(wxEVT_NOTEBOOK_PAGE_CHANGING, &NotebookDebug::OnEventPageChanged, this);
 
+    Bind(wxEVT_SET_CURSOR, &NotebookDebug::OnEventSetCursor, this);
+
     SetMaxSize({ 812, -1 });
+}
+
+
+void NotebookDebug::OnEventSetCursor(wxSetCursorEvent &event)
+{
+    // Получаем позицию мыши в клиентских координатах
+    wxPoint mousePos = event.GetX() > -1 ? wxPoint(event.GetX(), event.GetY()) : ScreenToClient(wxGetMousePosition());
+
+    // Определяем, над какой вкладкой находится мышь
+    int tabIdx = HitTest(mousePos);
+
+    // Если мышь над областью вкладок, а не над клиентской областью
+    if (tabIdx != wxNOT_FOUND)
+    {
+        // Устанавливаем курсор-руку
+        event.SetCursor(wxCursor(wxCURSOR_HAND));
+    }
+    else
+    {
+        // Если мышь не над вкладкой, передаем событие дальше,
+        // чтобы система могла установить курсор по умолчанию.
+        event.Skip();
+    }
 }
 
 
 void NotebookDebug::AppendNewPage(wxPanel *page)
 {
+    wxString name = page->GetName();
+    if (name.IsEmpty())
+    {
+        name = wxString::Format("Page_%d", GetPageCount());
+    }
+
     wxNotebook::AddPage(page, page->GetName());
 }
 
@@ -67,7 +99,7 @@ void NotebookDebug::Pack()
     PageFPGA::self->Pack();
     PageCommutator::self->Pack();
     PageSource3kV::self->Pack();
-    PageChannelC::self->Pack();
+    PageChannelForm::self->Pack();
     PageChannelB::self->Pack();
     PageChannelS::self->Pack();
     PageMeasCurrent::self->Pack();
@@ -82,7 +114,7 @@ void NotebookDebug::Unpack()
     PageFPGA::self->Unpack();
     PageCommutator::self->Unpack();
     PageSource3kV::self->Unpack();
-    PageChannelC::self->Unpack();
+    PageChannelForm::self->Unpack();
     PageChannelB::self->Unpack();
     PageChannelS::self->Unpack();
     PageMeasCurrent::self->Unpack();

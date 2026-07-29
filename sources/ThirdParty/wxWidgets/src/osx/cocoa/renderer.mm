@@ -184,6 +184,19 @@ private:
         return m_nsPushButtonCell;
     }
 
+    NSButtonCell* GetPopDownArrowCell()
+    {
+        if ( !m_nsPopDownArrowCell )
+        {
+            m_nsPopDownArrowCell = [[NSButtonCell alloc] initImageCell:[NSImage imageNamed: @"NSTokenPopDownArrow"]];
+            m_nsPopDownArrowCell.buttonType = NSButtonTypeMomentaryPushIn;
+            m_nsPopDownArrowCell.highlightsBy = NSPushInCellMask;
+            m_nsPopDownArrowCell.bezelStyle = NSBezelStyleRoundedDisclosure;
+        }
+
+        return m_nsPopDownArrowCell;
+    }
+
     NSButtonCell* GetCheckBoxCell()
     {
         if ( !m_nsCheckBoxCell )
@@ -260,6 +273,7 @@ private:
     NSButtonCell* m_nsCheckBoxCell = nil;
     NSButtonCell* m_nsRadioButtonCell = nil;
     NSButtonCell* m_nsDisclosureButtonCell = nil;
+    NSButtonCell* m_nsPopDownArrowCell = nil;
     NSPopUpButtonCell* m_nsPopupbuttonCell = nil;
     NSComboBoxCell* m_nsComboBoxCell = nil;
     NSTableHeaderCell* m_nsTableHeaderCell = nil;
@@ -285,6 +299,7 @@ wxRendererMac::~wxRendererMac()
     [m_nsCheckBoxCell release];
     [m_nsRadioButtonCell release];
     [m_nsDisclosureButtonCell release];
+    [m_nsPopDownArrowCell release];
     [m_nsPopupbuttonCell release];
     [m_nsComboBoxCell release];
     [m_nsTableHeaderCell release];
@@ -406,6 +421,12 @@ void wxRendererMac::DrawTreeItemButton( wxWindow *win,
     else
     {
 #if wxOSX_USE_NSCELL_RENDERER
+        // this flag is required as this will make it choose
+        // the NSCell.highlighted mode. The chevron will
+        // otherwise be light grey on white background and be
+        // barely visible
+        flags |= wxCONTROL_PRESSED;
+
         NSControlStateValue stateValue = (flags & wxCONTROL_EXPANDED) ? NSControlStateValueOn : NSControlStateValueOff;
         DrawMacCell(win, dc, GetDisclosureButtonCell(), rect, flags, stateValue);
 #else
@@ -553,9 +574,31 @@ wxRendererMac::DrawItemSelectionRect(wxWindow * WXUNUSED(win),
     if ( !(flags & wxCONTROL_SELECTED) )
         return;
 
-    wxColour col( wxMacCreateCGColorFromHITheme( (flags & wxCONTROL_FOCUSED) ?
-                                                 kThemeBrushAlternatePrimaryHighlightColor
-                                                                             : kThemeBrushSecondaryHighlightColor ) );
+    wxColour col;
+
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_14
+    if (WX_IS_MACOS_AVAILABLE(10, 14))
+    {
+        col = wxColour( (flags & wxCONTROL_FOCUSED)
+            ? [NSColor selectedContentBackgroundColor]
+            : [NSColor unemphasizedSelectedContentBackgroundColor]
+        );
+    }
+    else
+#endif
+    {
+        col = wxColour( wxMacCreateCGColorFromHITheme( (flags & wxCONTROL_FOCUSED)
+                    ? kThemeBrushAlternatePrimaryHighlightColor
+                    : kThemeBrushSecondaryHighlightColor ) );
+
+        if (((flags & wxCONTROL_FOCUSED) == 0) && (wxSystemSettings::GetAppearance().IsDark()))
+        {
+            // OS X has two distinct background greys in dark mode. One very dark
+            // gray you can see as the background of e.g. wxListBox and wxTreeCtrl,
+            // and a lesser dark grey in some other cases. This looks good on both.
+            col = wxColour( 110, 110, 110 );
+        }
+    }
     wxBrush selBrush( col );
 
     wxDCPenChanger setPen(dc, *wxTRANSPARENT_PEN);
@@ -636,6 +679,19 @@ void wxRendererMac::ApplyMacControlFlags(wxWindow* win, NSCell* cell, int flags)
     cell.controlTint = (flags & wxCONTROL_FOCUSED) ? NSColor.currentControlTint : NSClearControlTint;
 }
 
+namespace
+{
+
+// Cell Drawing seems to run into problems with clipping when the device origin has changed
+// so undo this and restore with GState later
+void CellDrawHelper ( wxDC& dc, CGContextRef cgContext, NSRect& controlRect )
+{
+    wxPoint offset = dc.GetDeviceOrigin();
+    CGContextTranslateCTM( cgContext, -offset.x, -offset.y );
+    controlRect = NSOffsetRect(controlRect, offset.x, offset.y);
+}
+
+} // anonymous namespace
 
 void wxRendererMac::DrawMacCell(wxWindow *win,
                             wxDC& dc,
@@ -666,6 +722,8 @@ void wxRendererMac::DrawMacCell(wxWindow *win,
         CGContextRef cgContext = (CGContextRef) impl->GetGraphicsContext()->GetNativeContext();
 
         CGContextSaveGState(cgContext);
+
+        CellDrawHelper( dc, cgContext, controlRect );
 
         NSGraphicsContext* formerContext = NSGraphicsContext.currentContext;
         NSGraphicsContext.currentContext = [NSGraphicsContext graphicsContextWithCGContext:cgContext
@@ -740,6 +798,8 @@ void wxRendererMac::DrawMacHeaderCell(wxWindow *win,
         CGContextRef cgContext = (CGContextRef) impl->GetGraphicsContext()->GetNativeContext();
 
         CGContextSaveGState(cgContext);
+
+        CellDrawHelper( dc, cgContext, controlRect );
 
         NSGraphicsContext* formerContext = NSGraphicsContext.currentContext;
         NSGraphicsContext.currentContext = [NSGraphicsContext graphicsContextWithCGContext:cgContext
@@ -830,6 +890,10 @@ wxRendererMac::DrawComboBoxDropButton(wxWindow *win,
                               const wxRect& rect,
                               int flags)
 {
+#if wxOSX_USE_NSCELL_RENDERER
+    NSControlStateValue stateValue = (flags & wxCONTROL_PRESSED) ? NSControlStateValueOn : NSControlStateValueOff;
+    DrawMacCell(win, dc, GetPopDownArrowCell(), rect, flags, stateValue);
+#else
     int kind;
     if (win->GetWindowVariant() == wxWINDOW_VARIANT_SMALL || (win->GetParent() && win->GetParent()->GetWindowVariant() == wxWINDOW_VARIANT_SMALL))
         kind = kThemeArrowButtonSmall;
@@ -840,6 +904,7 @@ wxRendererMac::DrawComboBoxDropButton(wxWindow *win,
 
     DrawMacThemeButton(win, dc, rect, flags,
                        kind, kThemeAdornmentArrowDownArrow);
+#endif
 }
 
 void
@@ -898,7 +963,7 @@ wxSize wxRendererMac::GetCollapseButtonSize(wxWindow *WXUNUSED(win), wxReadOnlyD
     }
 
     // strict metrics size cutoff the button, increase the size
-    size.IncBy(1);
+    size.IncBy(3);
 
     return size;
 }

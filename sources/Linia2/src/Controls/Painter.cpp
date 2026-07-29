@@ -2,21 +2,26 @@
 #include "defines.h"
 #include "Controls/Painter.h"
 #include "Settings/Color.h"
+#pragma warning(push, 0)
+#include <wx/graphics.h>
+#include <wx/dcclient.h>
+#pragma warning(pop)
 
 
-Painter::Painter(wxWindow *parent, const wxPoint &position, const wxSize &_size) :
-    wxPanel(parent, wxID_ANY, position, _size),
+Painter::Painter(wxWindow *parent, const wxSize &_size) :
+    Panel(parent),
     size(_size)
 {
-    wxPanel::SetSize(size);
-    wxPanel::SetDoubleBuffered(true);
+    Panel::SetMinSize(size);
+    Panel::SetMaxSize(size);
+    Panel::SetDoubleBuffered(true);
 
-    Bind(wxEVT_PAINT, &Painter::OnPaint, this);
+    Panel::Bind(wxEVT_PAINT, &Painter::OnPaint, this);
 
     bitmap = new wxBitmap(size);
 
-    Fit();
-    Layout();
+    Panel::Fit();
+    Panel::Layout();
 }
 
 
@@ -114,12 +119,13 @@ void Painter::OnPaint(wxPaintEvent &)
 }
 
 
-PainterRect::PainterRect(wxWindow *parent, const wxPoint &position, const wxSize &size) :
-    wxPanel(parent, wxID_ANY, position, size)
+PainterRect::PainterRect(wxWindow *parent, const wxSize &size) :
+    Panel(parent)
 {
-    wxPanel::SetSize(size);
-    wxPanel::SetDoubleBuffered(true);
-    Bind(wxEVT_PAINT, &PainterRect::OnPaint, this);
+    Panel::SetMinSize(size);
+    Panel::SetMaxSize(size);
+    Panel::SetDoubleBuffered(true);
+    Panel::Bind(wxEVT_PAINT, &PainterRect::OnPaint, this);
 
     color = wxColour(255U, 0, 0);
 }
@@ -153,9 +159,11 @@ void PainterRect::SetColor(const Color &_color)
 }
 
 
-PainterBMP::PainterBMP(wxWindow *parent, const wxPoint &position, const wxSize &size, const wxString &file_name, const wxColour &alpha) :
-    wxPanel(parent, wxID_ANY, position, size)
+PainterBMP::PainterBMP(wxWindow *parent, const wxSize &size, const wxString &file_name, const wxColour &alpha) :
+    Panel(parent)
 {
+    Panel::SetSize(size);
+
     bitmap = Bitmap::Get(file_name);
 
     if (bitmap.GetBitmap().IsOk())
@@ -178,7 +186,7 @@ PainterBMP::PainterBMP(wxWindow *parent, const wxPoint &position, const wxSize &
         Bind(wxEVT_PAINT, &PainterBMP::OnEventPaint, this);
     }
 
-    wxPanel::Refresh();
+    Panel::Refresh();
 }
 
 
@@ -193,15 +201,13 @@ void PainterBMP::OnEventPaint(wxPaintEvent &)
 }
 
 
-PainterAnimated::PainterAnimated(wxWindow *parent, const wxPoint &position, const wxSize &size) :
-    Painter(parent, position, size)
+PainterAnimated::PainterAnimated(wxWindow *parent, const wxSize &size) :
+    Painter(parent, size)
 {
     timer.SetOwner(this, timer.GetId());
 
     Bind(wxEVT_TIMER, &PainterAnimated::OnEventTimer, this);
     Bind(wxEVT_PAINT, &PainterAnimated::OnEventPaint, this);
-
-    timer.Start(10);
 }
 
 

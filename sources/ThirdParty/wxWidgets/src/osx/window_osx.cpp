@@ -217,6 +217,10 @@ void wxWindowMac::Init()
     m_clipChildren = false ;
     m_cachedClippedRectValid = false ;
     m_isNativeWindowWrapper = false;
+#ifdef __WXOSX_IPHONE__
+    m_scrollTargetWindow = this;
+    m_scrollOwnerWindow = this;
+#endif
 }
 
 wxWindowMac::~wxWindowMac()
@@ -260,6 +264,13 @@ wxWindowMac::~wxWindowMac()
 
     delete GetPeer() ;
 }
+
+void wxWindowMac::MacClipsToBounds( bool clip )
+{
+    if ( m_peer )
+        m_peer->ClipsToBounds(clip);
+}
+
 
 void wxWindowMac::MacSetClipChildren()
 {
@@ -388,6 +399,8 @@ bool wxWindowMac::Create(wxWindowMac *parent,
 
     m_hScrollBarAlwaysShown =
     m_vScrollBarAlwaysShown = HasFlag(wxALWAYS_SHOW_SB);
+    if ( HasTransparentBackground())
+        m_backgroundStyle = wxBG_STYLE_TRANSPARENT;
 
     if ( m_peer != kOSXNoWidgetImpl )
     {
@@ -837,29 +850,14 @@ void wxWindowMac::DoGetClientSize( int *x, int *y ) const
     }
 }
 
-bool wxWindowMac::SetCursor(const wxCursor& cursor)
+void wxWindowMac::WXUpdateCursor()
 {
-    if (m_cursor.IsSameAs(cursor))
-        return false;
-
-    if (!cursor.IsOk())
-    {
-        if ( ! wxWindowBase::SetCursor( *wxSTANDARD_CURSOR ) )
-            return false ;
-    }
-    else
-    {
-        if ( ! wxWindowBase::SetCursor( cursor ) )
-            return false ;
-    }
-
-    wxASSERT_MSG( m_cursor.IsOk(),
-        wxT("cursor must be valid after call to the base version"));
+    wxWindowBase::WXUpdateCursor();
 
     if ( GetPeer() != nullptr )
-        GetPeer()->SetCursor( m_cursor );
-
-    return true ;
+    {
+        GetPeer()->SetCursor( m_cursor.IsOk() ? m_cursor : *wxSTANDARD_CURSOR ) ;
+    }
 }
 
 #if wxUSE_MENUS
@@ -1052,13 +1050,6 @@ wxSize wxWindowMac::DoGetBestSize() const
             if ( IsKindOf( CLASSINFO( wxScrollBar ) ) )
             {
                 r.height = 16 ;
-            }
-            else
-#endif
-#if wxUSE_SPINBTN
-            if ( IsKindOf( CLASSINFO( wxSpinButton ) ) )
-            {
-                r.height = 24 ;
             }
             else
 #endif
@@ -1412,8 +1403,25 @@ bool wxWindowMac::EnableTouchEvents(int eventsMask)
     return GetPeer() ? GetPeer()->EnableTouchEvents(eventsMask) : false;
 }
 
+#ifdef __WXOSX_IPHONE__
+void wxWindowMac::OSXSetScrollOwnerWindow( wxWindow *owner )
+{
+    m_scrollOwnerWindow = owner;
+}
+
+void wxWindowMac::OSXSetScrollTargetWindow( wxWindow *target )
+{
+    m_scrollTargetWindow = target;
+    target->OSXSetScrollOwnerWindow( this );
+}
+#endif
+
 int wxWindowMac::GetScrollPos(int orient) const
 {
+#ifdef __WXOSX_IPHONE__
+    const wxWidgetImpl *impl = (const wxWidgetImpl*) OSXGetScrollTargetWindow()->GetPeer();
+    return impl->GetScrollPos( orient );
+#endif
 #if wxUSE_SCROLLBAR
     if ( orient == wxHORIZONTAL )
     {
@@ -1467,6 +1475,10 @@ int wxWindowMac::GetScrollThumb(int orient) const
 
 void wxWindowMac::SetScrollPos(int orient, int pos, bool WXUNUSED(refresh))
 {
+#ifdef __WXOSX_IPHONE__
+    wxWidgetImpl *impl = (wxWidgetImpl*) OSXGetScrollTargetWindow()->GetPeer();
+    impl->SetScrollPos( orient, pos );
+#endif
 #if wxUSE_SCROLLBAR
     if ( orient == wxHORIZONTAL )
     {
@@ -1673,6 +1685,10 @@ void wxWindowMac::SetScrollbar(int orient, int pos, int thumb,
 
     DoUpdateScrollbarVisibility();
 #endif
+#ifdef __WXOSX_IPHONE__
+    wxWidgetImpl *impl = (wxWidgetImpl*) OSXGetScrollTargetWindow()->GetPeer();
+    impl->SetScrollbar( orient, pos, thumb, range, refresh );
+#endif
 }
 
 // Does a physical scroll
@@ -1680,6 +1696,11 @@ void wxWindowMac::ScrollWindow(int dx, int dy, const wxRect *rect)
 {
     if ( dx == 0 && dy == 0 )
         return ;
+
+#ifdef __WXOSX_IPHONE__
+    GetPeer()->ScrollWindow( dx, dy, rect );
+    return;
+#endif
 
     int width , height ;
     GetClientSize( &width , &height ) ;
@@ -1763,6 +1784,9 @@ wxWindow *wxWindowBase::DoFindFocus()
 // Raise the window to the top of the Z order
 void wxWindowMac::Raise()
 {
+    if ( !IsShown() )
+        return;
+
     GetPeer()->Raise();
 }
 
@@ -1910,8 +1934,11 @@ void wxWindowMac::MacUpdateClippedRects() const
 bool wxWindowMac::MacDoRedraw( long time )
 {
     bool handled = false ;
+#ifndef __WXOSX_IPHONE__
+    // iOS draws before the window is visible, I assume into off-screen buffer
     if ( !IsShownOnScreen() )
         return handled;
+#endif
 
     wxRegion formerUpdateRgn = m_updateRegion;
     wxRegion clientUpdateRgn = formerUpdateRgn;
@@ -1944,6 +1971,9 @@ bool wxWindowMac::MacDoRedraw( long time )
                     eevent.SetEventObject( this );
                     if ( ProcessWindowEvent( eevent ) )
                         break;
+
+                    if (!UseBgCol())
+                        dc.Clear();
                 }
 
                 if ( UseBgCol() )
@@ -2685,6 +2715,7 @@ void wxWidgetImpl::Init()
     m_wantsUserMouse = false;
     m_wxPeer = nullptr;
     m_needsFrame = true;
+    m_deviceLocalOrigin = wxPoint(0, 0);
 }
 
 void wxWidgetImpl::SetNeedsFrame( bool needs )
@@ -2698,6 +2729,10 @@ bool wxWidgetImpl::NeedsFrame() const
 }
 
 void wxWidgetImpl::SetDrawingEnabled(bool WXUNUSED(enabled))
+{
+}
+
+void wxWidgetImpl::ClipsToBounds(bool WXUNUSED(clip))
 {
 }
 

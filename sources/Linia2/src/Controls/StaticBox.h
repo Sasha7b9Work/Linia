@@ -1,12 +1,16 @@
 // 2025/8/20 19:59:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#pragma warning(push, 0)
+#include <wx/statbox.h>
+#include <wx/sizer.h>
+#pragma warning(pop)
 
 
 class StaticBox : public wxStaticBox
 {
 public:
-    StaticBox(wxWindow *parent, const wxString &title, const wxPoint &pos, const wxSize &size) :
-        wxStaticBox(parent, wxID_ANY, title, pos, size, wxBORDER_NONE)
+    StaticBox(wxWindow *parent, const wxString &title, const wxSize &size = wxDefaultSize) :
+        wxStaticBox(parent, wxID_ANY, title, wxDefaultPosition, size, wxBORDER_NONE)
     {
         wxStaticBox::SetName(parent->GetName());
 

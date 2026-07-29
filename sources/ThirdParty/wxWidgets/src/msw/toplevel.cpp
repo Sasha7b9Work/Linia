@@ -649,6 +649,8 @@ bool wxTopLevelWindowMSW::Show(bool show)
 
 void wxTopLevelWindowMSW::Raise()
 {
+    // Note that this doesn't show the window if it's currently hidden, which
+    // is exactly what this function is documented to do.
     ::SetForegroundWindow(GetHwnd());
 }
 
@@ -1016,12 +1018,16 @@ bool wxTopLevelWindowMSW::ShowFullScreen(bool show, long style)
 
 void wxTopLevelWindowMSW::SetTitle( const wxString& title)
 {
-    SetLabel(title);
+    // The base class version works for TLWs too in wxMSW but take care to
+    // select it explicitly as our overridden SetLabel() just redirects to
+    // SetTitle() itself.
+    wxWindow::SetLabel(title);
 }
 
 wxString wxTopLevelWindowMSW::GetTitle() const
 {
-    return GetLabel();
+    // See comment in SetTitle() above.
+    return wxWindow::GetLabel();
 }
 
 bool wxTopLevelWindowMSW::DoSelectAndSetIcon(const wxIconBundle& icons,

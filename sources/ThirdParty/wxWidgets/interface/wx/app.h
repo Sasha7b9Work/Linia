@@ -9,8 +9,7 @@
 /**
     @class wxAppConsole
 
-    This class is essential for writing console-only or hybrid apps without
-    having to define @c wxUSE_GUI=0.
+    This class us used instead of wxApp for console applications.
 
     It is used to:
     @li set and get application-wide properties (see wxAppConsole::CreateTraits
@@ -30,6 +29,8 @@
     Use wxDECLARE_APP(appClass) in a header file if you want the ::wxGetApp() function
     (which returns a reference to your application object) to be visible to other
     files.
+
+    Note that setting @c wxUSE_GUI=0 makes wxApp identical to this class.
 
     @library{wxbase}
     @category{appmanagement}
@@ -363,6 +364,9 @@ public:
 
         The return value of this function is currently ignored, return the same
         value as returned by the base class method if you override it.
+
+        NOTE: The base class method performs some cleanup - call it at the end
+        of your method if you override it.
     */
     virtual int OnExit();
 
@@ -513,12 +517,12 @@ public:
 
         Any unhandled exceptions thrown from (overridden versions of) OnInit()
         and OnExit() methods as well as any exceptions thrown from inside the
-        main loop and re-thrown by OnUnhandledException() will result in a call
+        main loop and re-thrown by OnExceptionInMainLoop() will result in a call
         to this function.
 
         By the time this function is called, the program is already about to
         exit and the exception can't be handled nor ignored any more, override
-        OnUnhandledException() or use explicit @c try/catch blocks around
+        OnExceptionInMainLoop() or use explicit @c try/catch blocks around
         OnInit() body to be able to handle the exception earlier.
 
         The default implementation dumps information about the exception using
@@ -1442,8 +1446,6 @@ public:
         - Toolbar items for which wxToolBar::SetDropdownMenu() was called
           don't draw the menu drop-down correctly, making it almost
           invisible.
-        - Calling wxMenu::Break() or wxMenuItem::SetDisabledBitmap() will result
-          in the menu being light.
 
         @param flags Can include @c wxApp::DarkMode_Always to force enabling
             dark mode for the application, even if the system doesn't use the
@@ -1493,6 +1495,24 @@ public:
 #define wxDECLARE_APP( className )
 
 /**
+    This macro and tells wxWidgets which application class should be used.
+
+    Unlike the more usual wxIMPLEMENT_APP() macro, this macro does not define
+    the entry point of the application, i.e. doesn't define @c main() or
+    @c WinMain() function, so you need to implement it separately when using
+    it.
+
+    The @a className passed to this macro must be a name of a default
+    constructible class deriving from wxApp that will be instantiated by
+    wxWidgets during its initialization.
+
+    Note that this macro requires a final semicolon.
+
+    @header{wx/app.h}
+ */
+#define wxIMPLEMENT_APP_NO_MAIN( className )
+
+/**
     This macro defines the application entry point and tells wxWidgets which
     application class should be used.
 
@@ -1501,8 +1521,9 @@ public:
     typical GUI application it's simpler and more convenient to use this macro
     to do both together.
 
-    The @a className passed to this macro must be a name of the class deriving
-    from wxApp.
+    The @a className passed to this macro must be a name of a default
+    constructible class deriving from wxApp that will be instantiated by
+    wxWidgets during its initialization.
 
     Note that this macro requires a final semicolon.
 

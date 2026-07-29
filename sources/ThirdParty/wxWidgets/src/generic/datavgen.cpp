@@ -2506,7 +2506,7 @@ wxBitmap wxDataViewMainWindow::CreateItemBitmap( unsigned int row, int &indent )
         if ( cell->PrepareForItem(model, item, column->GetModelColumn()) )
         {
             wxRect item_rect(x, 0, width, height);
-            item_rect.Deflate(PADDING_RIGHTLEFT, 0);
+            item_rect.Deflate(FromDIP(PADDING_RIGHTLEFT), 0);
 
             // dc.SetClippingRegion( item_rect );
             cell->WXCallRender(item_rect, &dc, 0);
@@ -2931,7 +2931,7 @@ void wxDataViewMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
             }
 
             wxRect item_rect = cell_rect;
-            item_rect.Deflate(PADDING_RIGHTLEFT, 0);
+            item_rect.Deflate(FromDIP(PADDING_RIGHTLEFT), 0);
 
             // account for the tree indent (harmless if we're not indented)
             item_rect.x += indent;
@@ -5889,6 +5889,14 @@ bool wxDataViewCtrl::Enable(bool enable)
 
 bool wxDataViewCtrl::AssociateModel( wxDataViewModel *model )
 {
+    if (wxDataViewModel* const oldModel = GetModel())
+    {
+        // Remove the notifier from the model before calling the base class
+        // version which may (or not) delete the model.
+        oldModel->RemoveNotifier( m_notifier );
+        m_notifier = nullptr;
+    }
+
     if (!wxDataViewCtrlBase::AssociateModel( model ))
         return false;
 
@@ -5896,14 +5904,6 @@ bool wxDataViewCtrl::AssociateModel( wxDataViewModel *model )
     {
         m_notifier = new wxGenericDataViewModelNotifier( m_clientArea );
         model->AddNotifier( m_notifier );
-    }
-    else
-    {
-        // Our previous notifier has either been already deleted when the
-        // previous model was DecRef()'d in the base class AssociateModel() or
-        // is not associated with us any more because if the model is still
-        // alive, it's not used by this control.
-        m_notifier = nullptr;
     }
 
     m_clientArea->DestroyTree();
@@ -6158,7 +6158,7 @@ unsigned int wxDataViewCtrl::GetBestColumnWidth(int idx) const
 
     int max_width = calculator.GetMaxWidth();
     if ( max_width > 0 )
-        max_width += 2 * PADDING_RIGHTLEFT;
+        max_width += 2 * FromDIP(PADDING_RIGHTLEFT);
 
     const_cast<wxDataViewCtrl*>(this)->m_colsBestWidths[idx].width = max_width;
     return max_width;

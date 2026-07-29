@@ -1,22 +1,22 @@
 ﻿// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Application.h"
-#include "Utils/Configurator.h"
 #include "Settings/Settings.h"
 #include "MainWindow.h"
-#include "Windows/ConsoleRS232.h"
-#include "IPPP/Tests/Tests.h"
-#include "SoftTests/SoftTests.h"
 #include "Communicator/UART/UART.h"
 #include "Communicator/SPI/SPI.h"
 #include "Controls/AutoRebootDialog.h"
-#include "IPPP/Real/Chips.h"
-#include "Panels/PanelUpper.h"
-#include "Communicator/ComPort/ComPort.h"
+#include "SoftTests/SoftTests.h"
 #include "IPPP/I_IPPP.h"
-#include "IPPP/Real/RealIPPP.h"
+#include "IPPP/Real/Chips.h"
 #include "IPPP/DeviceFactory.h"
+#include "Windows/ConsoleRS232.h"
+#include "Settings/FileJSON.h"
+#pragma warning(push, 0)
+#include <wx/msgdlg.h>
+#pragma warning(pop)
 #include <cstdlib>
+#include <locale>
 
 
 wxIMPLEMENT_APP(Application);
@@ -128,23 +128,17 @@ bool Application::OnInit()
     I_IPPP::SetInstance(std::move(device));
 
     // create and show the main application window
-    MainWindow *frame = new MainWindow(wxT("ИППП 4"));
-
-    Bind(wxEVT_TIMER, &Application::OnTimer, this, timer.GetId());
+    new MainWindow(TheMainWindow, L("ИППП 4"));
 
     timer.SetOwner(this, timer.GetId());
 
-    Test::Load("example.tst");
-
-    frame->Show();
-
     if (!UART::IsAvailability())
     {
-        wxString message = wxString::Format(wxT("Устройство UART %s не обнаружено."), UART_DEVICE);
+        wxString message = wxString::Format(L("Устройство UART %s не обнаружено."), UART_DEVICE);
 
         LOG_ERROR(message.c_str().AsChar());
 
-        AutoRebootDialog dialog(frame, message, 10, []
+        AutoRebootDialog dialog(TheMainWindow, message, 10, []
             {
                 IGNORE_RESULT(std::system("shutdown -r now"));
             });
@@ -154,11 +148,11 @@ bool Application::OnInit()
 
     if (!SPI::IsAvailability())
     {
-        wxString message = wxString::Format(wxT("Устройство SPI %s не обнаружено."), SPI_DEVICE);
+        wxString message = wxString::Format(L("Устройство SPI %s не обнаружено."), SPI_DEVICE);
 
         LOG_ERROR(message.c_str().AsChar());
 
-        AutoRebootDialog dialog(frame, message, 10, []
+        AutoRebootDialog dialog(TheMainWindow, message, 10, []
             {
                 IGNORE_RESULT(std::system("shutdown -r now"));
             });
@@ -171,12 +165,12 @@ bool Application::OnInit()
     if (!SoftTests::RunAll())
     {
         wxMessageBox(wxString::Format(_("Во время выполнения тестов произошли ошибки.\n") +
-            _("Дополнительная информация в файле %s."), Log::FileName().c_str().AsChar()), wxT("Ошибка"), wxOK | wxCENTRE | wxICON_ERROR);
+            _("Дополнительная информация в файле %s."), Log::FileName().c_str().AsChar()), L("Ошибка"), wxOK | wxCENTRE | wxICON_ERROR);
     }
 
 #ifdef WIN32
 
-    ComPort::Connect(PanelUpper::self->GetNumPort());
+//    ComPort::Connect(PanelUpper::self->GetNumPort());
 
 #endif
 
@@ -184,6 +178,15 @@ bool Application::OnInit()
     {
         TheMainWindow->SetMode(ModeMainWindow::Debug);
     }
+
+    if (!GF::IsBoardPCM())
+    {
+        TheMainWindow->Maximize(true);
+    }
+
+    TheMainWindow->Show();
+
+    Bind(wxEVT_TIMER, &Application::OnTimer, this, timer.GetId());
 
     return true;
 }
@@ -243,19 +246,6 @@ void Application::OnButtonStart(bool /*press*/)
 void Application::OnButtonStop(bool /*press*/)
 {
 
-}
-
-
-void Application::SetMode(Mode mode)
-{
-    if ((int)mode == SET::GUI::mode_application->Get())
-    {
-        return;
-    }
-
-    SET::GUI::mode_application->Set((int)mode);
-
-    ReInit();
 }
 
 

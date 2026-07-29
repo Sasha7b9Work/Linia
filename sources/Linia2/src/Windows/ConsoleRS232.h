@@ -1,6 +1,13 @@
 ﻿// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once 
 #include "Utils/String.h"
+#pragma warning(push, 0)
+#include <wx/frame.h>
+#pragma warning(pop)
+#include <mutex>
+
+
+class wxTextCtrl;
 
 
 class ConsoleRS232 : public wxFrame

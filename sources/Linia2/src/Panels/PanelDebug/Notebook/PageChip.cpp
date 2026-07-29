@@ -1,15 +1,22 @@
 ﻿// 2025/6/3 14:01:53 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/Notebook/PageChip.h"
+#include "Panels/PanelDebug/Notebook/Register.h"
 #include "MainWindow.h"
-
+#pragma warning(push, 0)
+#include <wx/sizer.h>
+#include <wx/menu.h>
+#pragma warning(pop)
 
 PageChip::PageChip(wxNotebook *parent, const wxString &title) :
-    wxPanel(parent)
+    Panel(parent)
 {
-    wxPanel::SetName(title);
+    Panel::SetName(title);
 
-    wxPanel::SetBackgroundColour(parent->GetBackgroundColour().ChangeLightness(110));
+    wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
+    SetSizer(mainSizer);
+
+    Panel::SetBackgroundColour(parent->GetBackgroundColour().ChangeLightness(110));
 
     Bind(wxEVT_RIGHT_DOWN, &PageChip::OnRightClick, this);
 }
@@ -17,36 +24,11 @@ PageChip::PageChip(wxNotebook *parent, const wxString &title) :
 
 void PageChip::AppendRegister(Register *reg)
 {
-    int y = 0;
+    // Добавить в сайзер, а не позиционировать вручную
+    GetSizer()->Add(reg, 0, wxEXPAND | wxALL, 5);
 
-    if (registers.size())
-    {
-        y = registers[registers.size() - 1]->GetPosition().y + registers[registers.size() - 1]->GetSize().y - 1;
-    }
-
-    reg->SetPosition({ 0, y });
-
-    registers.push_back(reg);
-}
-
-
-void PageChip::Rebuild()
-{
-    for (uint i = 0; i < registers.size(); i++)
-    {
-        Register *reg = registers[i];
-
-        int y = 0;
-
-        if(i != 0)
-        {
-            Register *prev = registers[i - 1];
-
-            y = prev->GetPosition().y + prev->GetSize().y - 1;
-        }
-
-        reg->SetPosition({ 0, y });
-    }
+    GetSizer()->Layout();
+    Layout();
 }
 
 
@@ -54,7 +36,7 @@ void PageChip::OnRightClick(wxMouseEvent &event)
 {
     wxMenu menu;
 
-    itemReturn = menu.Append(wxID_ANY, "Закрыть");
+    itemReturn = menu.Append(wxID_ANY, L("Закрыть"));
 
     Bind(wxEVT_MENU, &PageChip::OnMenuEvent, this);
 

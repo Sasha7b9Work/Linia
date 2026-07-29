@@ -14,13 +14,9 @@ if(WIN32)
     wx_append_sources(BASE_FILES BASE_WIN32)
     wx_append_sources(BASE_FILES BASE_AND_GUI_WIN32)
 elseif(APPLE)
-    if(WXOSX_COCOA OR WXOSX_IPHONE)
-        wx_append_sources(BASE_FILES BASE_OSX_SHARED)
-        if(WXOSX_COCOA)
-            wx_append_sources(BASE_FILES BASE_AND_GUI_OSX_COCOA)
-        endif()
-    else()
-        wx_append_sources(BASE_FILES BASE_OSX_NOTWXMAC)
+    wx_append_sources(BASE_FILES BASE_OSX)
+    if(WXOSX_COCOA)
+        wx_append_sources(BASE_FILES BASE_AND_GUI_OSX_COCOA)
     endif()
 elseif(UNIX)
     wx_append_sources(BASE_FILES BASE_UNIX)
@@ -28,12 +24,15 @@ endif()
 
 wx_add_library(wxbase IS_BASE ${BASE_FILES})
 
+# Note that when using built-in versions of the libraries, their include
+# directories must come before the system ones which could be used by some
+# other dependency.
 if(wxUSE_ZLIB)
-    wx_lib_include_directories(wxbase ${ZLIB_INCLUDE_DIRS})
+    wx_lib_include_directories_before(wxbase ${ZLIB_INCLUDE_DIRS})
     wx_lib_link_libraries(wxbase PRIVATE ${ZLIB_LIBRARIES})
 endif()
 if(wxUSE_REGEX)
-    wx_lib_include_directories(wxbase ${REGEX_INCLUDE_DIRS})
+    wx_lib_include_directories_before(wxbase ${REGEX_INCLUDE_DIRS})
     wx_lib_link_libraries(wxbase PRIVATE ${REGEX_LIBRARIES})
 endif()
 if(wxUSE_LIBLZMA)
@@ -55,13 +54,24 @@ endif()
 
 if(APPLE)
     wx_lib_link_libraries(wxbase
+        PRIVATE
+        "-framework Security"
         PUBLIC
         "-framework CoreFoundation"
     )
+    if(WXOSX_IPHONE)
+        wx_lib_link_libraries(wxbase
+            PUBLIC
+            "-framework UIKit"
+        )
+    else()
+        wx_lib_link_libraries(wxbase
+            PUBLIC
+            "-framework AppKit"
+        )
+    endif()
     if(WXOSX_COCOA)
         wx_lib_link_libraries(wxbase
-            PRIVATE
-            "-framework Security"
             PUBLIC
             "-framework Carbon"
             "-framework Cocoa"

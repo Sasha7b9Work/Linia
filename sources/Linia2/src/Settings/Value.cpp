@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Settings/Value.h"
 #include "Settings/Settings.h"
-#include "Display/Display.h"
+//#include "Panels/PanelMeasures/PanelMeasures.h"
 
 
 ValueBool::ValueBool(const wxString &_key, const bool &_def) : Value<bool>(_key, _def)
@@ -11,8 +11,8 @@ ValueBool::ValueBool(const wxString &_key, const bool &_def) : Value<bool>(_key,
 }
 
 
-ValueCheckBox::ValueCheckBox(wxWindow *parent, const wxString &title, const wxPoint &position, const wxString &_key, const bool &_def) :
-    wxCheckBox(parent, wxID_ANY, title, position)
+ValueCheckBox::ValueCheckBox(wxWindow *parent, const wxString &title, const wxString &_key, const bool &_def) :
+    wxCheckBox(parent, wxID_ANY, title)
 {
     value = new ValueBool(_key, _def);
 

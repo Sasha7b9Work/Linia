@@ -118,6 +118,20 @@ enum wxContentProtection
     wxCONTENT_PROTECTION_ENABLED
 };
 
+enum class wxWindowMode
+{
+    // Normal, not modal, window.
+    Normal,
+
+    // Modal in parent window scope, i.e. the user must close this window
+    // before being able to interact with the parent window again.
+    WindowModal,
+
+    // Modal in application scope, i.e. the user must close this window
+    // before being able to interact with any other window in the application.
+    AppModal
+};
+
 // ----------------------------------------------------------------------------
 // wxTopLevelWindow: a top level (as opposed to child) window
 // ----------------------------------------------------------------------------
@@ -190,6 +204,10 @@ public:
     // window shows usually at the top of the frame/dialog in dedicated bar
     virtual void SetTitle(const wxString& title) = 0;
     virtual wxString GetTitle() const = 0;
+
+    // label is the same as title for top-level windows
+    virtual void SetLabel(const wxString& label) override { SetTitle( label ); }
+    virtual wxString GetLabel() const override            { return GetTitle(); }
 
     // enable/disable close button [x]
     virtual bool EnableCloseButton(bool WXUNUSED(enable) = true) { return false; }

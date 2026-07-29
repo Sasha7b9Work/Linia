@@ -18,7 +18,6 @@ struct spi_ioc_transfer
     unsigned short delay_usecs;         // Задержка после передачи
     unsigned char bits_per_word;        // Битов на слово (можно переопределить)
     unsigned char cs_change;            // Изменение состояния chip select
-    unsigned char cs;
 //    __u8 tx_nbits;             // Количество линий для передачи (для dual/quad SPI)
 //    __u8 rx_nbits;             // Количество линий для приёма (для dual/quad SPI)
 //    __u8 pad;                  // Выравнивание

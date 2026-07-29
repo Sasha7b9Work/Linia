@@ -1,6 +1,6 @@
 ﻿// 2025/8/9 11:41:23 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Controls/Buttons.h"
+#include "Controls/Button.h"
 
 
 // Кнопка с рисунком, по нажатию на которую открывается окно с другими выборами
@@ -10,7 +10,7 @@ class BmpButtonsCombo : public ButtonBitmap
 {
 public:
 
-    BmpButtonsCombo(wxWindow *parent, const wxString &title, const wxPoint &pos, const wxSize &,
+    BmpButtonsCombo(wxWindow *parent, const wxString &title, const wxSize &,
         const wxArrayString &files,             // Эти изображения будут на кнопках
         const wxArrayString &tooltips,
         int num_file,                           // Эта изображение будет на главной кнопке

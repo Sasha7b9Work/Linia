@@ -81,8 +81,6 @@
 #endif
 
 
-#define wxPG_GUTTER_DIV                 3 // gutter is max(iconwidth/gutter_div,gutter_min)
-#define wxPG_GUTTER_MIN                 3 // gutter before and after image of [+] or [-]
 #define wxPG_YSPACING_MIN               1
 #define wxPG_DEFAULT_VSPACING           2 // This matches .NET propertygrid's value,
                                           // but causes normal combobox to spill out under MSW
@@ -306,7 +304,7 @@ wxEND_EVENT_TABLE()
 // -----------------------------------------------------------------------
 
 wxPropertyGrid::wxPropertyGrid()
-    : wxScrolled<wxControl>()
+    : wxSystemThemedControl<wxScrolled<wxControl>>()
 {
     Init1();
 }
@@ -319,7 +317,7 @@ wxPropertyGrid::wxPropertyGrid( wxWindow *parent,
                                 const wxSize& size,
                                 long style,
                                 const wxString& name )
-    : wxScrolled<wxControl>()
+    : wxSystemThemedControl<wxScrolled<wxControl>>()
 {
     Init1();
     Create(parent,id,pos,size,style,name);
@@ -350,6 +348,8 @@ bool wxPropertyGrid::Create( wxWindow *parent,
                       (style & wxWINDOW_STYLE_MASK) | wxScrolledWindowStyle,
                       wxDefaultValidator,
                       name);
+
+    EnableSystemThemeByDefault();
 
     m_windowStyle |= (style & wxPG_WINDOW_STYLE_MASK);
 
@@ -410,15 +410,15 @@ void wxPropertyGrid::Init1()
     m_doubleBuffer = nullptr;
 
 #ifndef wxPG_ICON_WIDTH
-    m_iconWidth = 11;
-    m_iconHeight = 11;
+    m_iconWidth = FromDIP(11);
+    m_iconHeight = FromDIP(11);
 #else
-    m_iconWidth = wxPG_ICON_WIDTH;
-    m_iconHeight = wxPG_ICON_WIDTH;
+    m_iconWidth = FromDIP(wxPG_ICON_WIDTH);
+    m_iconHeight = FromDIP(wxPG_ICON_WIDTH);
 #endif
 
-    m_gutterWidth = wxPG_GUTTER_MIN;
-    m_subgroup_extramargin = 10;
+    m_gutterWidth = wxMax(0, (FromDIP(16) - m_iconWidth) / 2);
+    m_subgroup_extramargin = m_iconWidth + m_gutterWidth;
 
     m_lineHeight = 0;
 
@@ -1286,7 +1286,7 @@ void wxPropertyGrid::SetScrollbars(int pixelsPerUnitX, int pixelsPerUnitY,
 {
     int oldX;
     CalcUnscrolledPosition(0, 0, &oldX, nullptr);
-    wxScrolled<wxControl>::SetScrollbars(pixelsPerUnitX, pixelsPerUnitY,
+    wxSystemThemedControl<wxScrolled<wxControl>>::SetScrollbars(pixelsPerUnitX, pixelsPerUnitY,
                                   noUnitsX, noUnitsY, xPos, yPos, noRefresh);
     int newX;
     CalcUnscrolledPosition(0, 0, &newX, nullptr);
@@ -1309,27 +1309,21 @@ void wxPropertyGrid::CalculateFontAndBitmapStuff( int vspacing )
     m_captionFont = wxControl::GetFont();
 
     GetTextExtent(wxS("jG"), &x, &y, nullptr, nullptr, &m_captionFont);
-    m_subgroup_extramargin = x + (x/2);
     m_fontHeight = y;
 
-#if wxPG_USE_RENDERER_NATIVE
-    m_iconWidth = FromDIP(wxPG_ICON_WIDTH);
-#elif wxPG_ICON_WIDTH
-    // scale icon
-    m_iconWidth = (m_fontHeight * wxPG_ICON_WIDTH) / 13;
-    if ( m_iconWidth < 5 ) m_iconWidth = 5;
-    else if ( !(m_iconWidth & 0x01) ) m_iconWidth++; // must be odd
-
-#endif
-
 #ifdef wxPG_ICON_WIDTH
-    // Icons are always square in this case.
-    m_iconHeight = m_iconWidth;
+#if wxPG_USE_RENDERER_NATIVE
+    wxSize iconSize = wxRendererNative::Get().GetExpanderSize(this);
+#else
+    wxSize iconSize = wxRendererNative::GetGeneric().GetExpanderSize(this);
+#endif
+    m_iconWidth = iconSize.GetWidth();
+    m_iconHeight = iconSize.GetHeight();
 #endif
 
-    m_gutterWidth = m_iconWidth / wxPG_GUTTER_DIV;
-    if ( m_gutterWidth < wxPG_GUTTER_MIN )
-        m_gutterWidth = wxPG_GUTTER_MIN;
+    m_gutterWidth = wxMax(0, (FromDIP(16) - m_iconWidth) / 2);
+
+    m_subgroup_extramargin = m_iconWidth + m_gutterWidth;
 
     int vdiv = 6;
     if ( vspacing <= 1 ) vdiv = 12;
@@ -1440,18 +1434,28 @@ void wxPropertyGrid::RegainColours()
 {
     if ( !(m_coloursCustomized & CustomColour_CaptionBg) )
     {
-        wxColour col = wxSystemSettings::GetColour( wxSYS_COLOUR_BTNFACE );
-
-        // Make sure colour is dark enough
-    #ifdef __WXGTK__
-        int colDec = wxPGGetColAvg(col) - 230;
-    #else
-        int colDec = wxPGGetColAvg(col) - 200;
-    #endif
-        if ( colDec > 0 )
-            m_colCapBack = wxPGAdjustColour(col,-colDec);
+        wxColour col = wxSystemSettings::GetColour( wxSYS_COLOUR_GRIDLINES );
+    #ifdef __WXOSX__
+        if ( wxSystemSettings::GetAppearance().IsDark() )
+        {
+            // Make sure colour is light enough
+            int colDec = wxPGGetColAvg(col);
+            if ( colDec < 30 )
+                col = wxPGAdjustColour(col, 20);
+        }
         else
-            m_colCapBack = col;
+    #endif
+        {
+            // Make sure colour is dark enough
+        #ifdef __WXGTK__
+            int colDec = wxPGGetColAvg(col) - 230;
+        #else
+            int colDec = wxPGGetColAvg(col) - 200;
+        #endif
+            if ( colDec > 0 )
+                col = wxPGAdjustColour(col,-colDec);
+        }
+        m_colCapBack = col;
         m_categoryDefaultCell.GetData()->SetBgCol(m_colCapBack);
     }
 
@@ -1854,33 +1858,20 @@ bool wxPropertyGrid::IsSmallScreen()
 
 // -----------------------------------------------------------------------
 
+#if WXWIN_COMPATIBILITY_3_2
 // static
 wxBitmap wxPropertyGrid::RescaleBitmap(const wxBitmap& srcBmp,
                                        double scaleX, double scaleY)
 {
-    int w = wxRound(srcBmp.GetWidth()*scaleX);
-    int h = wxRound(srcBmp.GetHeight()*scaleY);
+    wxSize size = srcBmp.GetSize();
+    size.x = wxRound(size.x * scaleX);
+    size.y = wxRound(size.y * scaleY);
 
-#if wxUSE_IMAGE
-    // Here we use high-quality wxImage scaling functions available
-    wxImage img = srcBmp.ConvertToImage();
-    img.Rescale(w, h, wxIMAGE_QUALITY_HIGH);
-    wxBitmap dstBmp(img);
-#else // !wxUSE_IMAGE
-    wxBitmap dstBmp(w, h, srcBmp.GetDepth());
-#if defined(__WXMSW__) || defined(__WXOSX__)
-    // wxBitmap::UseAlpha() is used only on wxMSW and wxOSX.
-    dstBmp.UseAlpha(srcBmp.HasAlpha());
-#endif // __WXMSW__ || __WXOSX__
-    {
-        wxMemoryDC dc(dstBmp);
-        dc.SetUserScale(scaleX, scaleY);
-        dc.DrawBitmap(srcBmp, 0, 0);
-    }
-#endif // wxUSE_IMAGE/!wxUSE_IMAGE
-
+    wxBitmap dstBmp(srcBmp);
+    wxBitmap::Rescale(dstBmp, size);
     return dstBmp;
 }
+#endif // WXWIN_COMPATIBILITY_3_2
 
 // -----------------------------------------------------------------------
 
@@ -1961,23 +1952,21 @@ void wxPropertyGrid::DrawExpanderButton( wxDC& dc, const wxRect& rect,
     // wxRenderer functions are non-mutating in nature, so it
     // should be safe to cast "const wxPropertyGrid*" to "wxWindow*".
     // Hopefully this does not cause problems.
-#if wxPG_USE_RENDERER_NATIVE
-    wxRendererNative::Get().DrawTreeItemButton(
-            const_cast<wxPropertyGrid*>(this),
-            dc,
-            r,
-            property->IsExpanded() ? wxCONTROL_EXPANDED : wxCONTROL_NONE
-        );
-#elif wxPG_ICON_WIDTH
-    wxRendererNative::GetGeneric().DrawTreeItemButton(
-            const_cast<wxPropertyGrid*>(this),
-            dc,
-            r,
-            property->IsExpanded() ? wxCONTROL_EXPANDED : wxCONTROL_NONE
-        );
-#else
+#ifndef wxPG_ICON_WIDTH
     wxBitmap bmp = property->IsExpanded() ? s_collbmp : s_expandbmp;
-    dc.DrawBitmap( bmp, r.x, r.y, true );
+    dc.DrawBitmap(bmp, r.x, r.y, true);
+#else
+#if wxPG_USE_RENDERER_NATIVE
+    wxRendererNative::Get().
+#else
+    wxRendererNative::GetGeneric().
+#endif
+        DrawTreeItemButton(
+            const_cast<wxPropertyGrid*>(this),
+            dc,
+            r,
+            property->IsExpanded() ? wxCONTROL_EXPANDED : wxCONTROL_NONE
+        );
 #endif
 }
 

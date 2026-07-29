@@ -1,40 +1,36 @@
 ﻿// 2025/6/4 15:46:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/Painter.h"
-#include "Panels/PanelDebug/Notebook/AnimatedImpulse.h"
+#include "Controls/Panel.h"
 
 
 class Register;
+class AnimatedImpulse;
 
 
-class PainterRegister : public wxPanel
+class PainterRegister : public Panel
 {
 public:
 
     // Ширина бита
     static const int W_B = 20;
 
-    PainterRegister(wxWindow *parent, Register *panel, const wxPoint &position);
+    PainterRegister(wxWindow *, Register *);
 
     wxFont GetDefaultFont(int size = -1);
 
     // Возвращает координату X бита num_bit
     int BitX(int num_bit, int all_bits) const;
 
-    // Увеличить высоту на dH
-    void IncreaseHeight(int dH);
-
     AnimatedImpulse *animation = nullptr;
 
 private:
 
-    bool             first_paint = true;
-    Register        *panel = nullptr;
+    bool      first_paint = true;
+    Register *reg = nullptr;
 
     // Возвращает координаты верхнего левого угла отображения бита
     wxPoint CoordBit(int num_bit);
-
-    void DrawTitleBit(int num_bit, const wxString &title, wxGraphicsContext *);
 
     void DrawDescriptions(int index, wxGraphicsContext *);
 
@@ -48,6 +44,4 @@ private:
     void OnEventPaint(wxPaintEvent &);
 
     wxColor ColorBackground(bool enabled) const;
-
-    void SetPositionAnimationWidget();
 };

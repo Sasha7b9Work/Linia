@@ -1,6 +1,9 @@
 ﻿// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Utils/String.h"
+#pragma warning(push, 0)
+#include <wx/tokenzr.h>
+#pragma warning(pop)
 
 
 struct Parameter
@@ -52,6 +55,8 @@ struct Words
     // true, если содержит слово
     bool Consist(const wxString &) const;
 
+    int GetArrayElementCount() const;
+
 private:
 
     wxArrayString words;
@@ -88,4 +93,6 @@ namespace SU
 
     // Оставить number последних символов от in. Если строка меньше, то в начале добавить пробелы
     pchar LeaveTheLastOnes(pchar in, int number);
+
+    double ASCIItoFloat(pchar);
 };

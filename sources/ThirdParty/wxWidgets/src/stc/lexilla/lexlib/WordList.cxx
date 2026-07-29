@@ -193,7 +193,8 @@ bool WordList::InList(const char *s) const noexcept {
 
 /** convenience overload so can easily call with std::string.
  */
-bool WordList::InList(const std::string &s) const noexcept {
+
+bool WordList::InList(std::string const& s) const noexcept {
 	return InList(s.c_str());
 }
 

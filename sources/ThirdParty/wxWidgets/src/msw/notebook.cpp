@@ -537,12 +537,9 @@ wxRect wxNotebook::GetTabRect(size_t page) const
     wxRect r;
     wxCHECK_MSG(IS_VALID_PAGE(page), r, wxT("invalid notebook page"));
 
-    if (GetPageCount() > 0)
-    {
-        RECT rect;
-        if (TabCtrl_GetItemRect(GetHwnd(), page, &rect))
-            r = wxRectFromRECT(rect);
-    }
+    RECT rect;
+    if (TabCtrl_GetItemRect(GetHwnd(), page, &rect))
+        r = wxRectFromRECT(rect);
 
     return r;
 }
@@ -1255,8 +1252,22 @@ DrawNotebookTab(wxWindow* win,
 
 } // anonymous namespace
 
-void wxNotebook::MSWNotebookPaint(wxDC& dc)
+void wxNotebook::MSWNotebookPaint()
 {
+    // This is tricky: GetTabRect() may result in a nested WM_PAINT when the
+    // native control decides to generate it from its Tab_CalcPaintMetrics()
+    // for some reason (this happens at least when using multiple tab rows), so
+    // we need to call it before creating wxPaintDC as otherwise the current
+    // paint DC would be invalidated by EndPaint() while we use it, see #25700.
+    wxRect rectTabArea;
+
+    // This is more than just an optimization: calling GetTabRect(0) for an
+    // empty control is not allowed and would assert.
+    if ( GetPageCount() > 0 )
+        rectTabArea = GetTabRect(0);
+
+    // Now create and use the DC.
+    wxPaintDC dc(this);
     dc.Clear();
 
     const wxDirection tabOrient = GetTabOrientation();
@@ -1282,7 +1293,6 @@ void wxNotebook::MSWNotebookPaint(wxDC& dc)
         return;
 
     // Start by erasing the tabs area background.
-    wxRect rectTabArea = GetTabRect(0);
     rectTabArea = ExpandSelectedTab(rectTabArea, tabOrient);
     if ( tabOrient == wxTOP || tabOrient == wxBOTTOM )
         rectTabArea.SetRight(sizeWindow.x);
@@ -1370,15 +1380,15 @@ void wxNotebook::OnPaint(wxPaintEvent& event)
         return;
     }
 
-    wxPaintDC dc(this);
-
     if ( wxMSWDarkMode::IsActive() )
     {
         // We can't use default painting in dark mode, it just doesn't work
         // there, whichever theme we use, so draw everything ourselves.
-        MSWNotebookPaint(dc);
+        MSWNotebookPaint();
         return;
     }
+
+    wxPaintDC dc(this);
 
     RECT rc;
     ::GetClientRect(GetHwnd(), &rc);
@@ -1631,7 +1641,17 @@ void wxNotebook::OnNavigationKey(wxNavigationKeyEvent& event)
             // focus is currently on notebook tab and should leave
             // it backwards (Shift-TAB)
             event.SetCurrentFocus(this);
-            parent->HandleWindowEvent(event);
+            if ( !parent->HandleWindowEvent(event) )
+            {
+                // if the parent didn't handle this event, the notebook
+                // must be its only child accepting focus, so let the page
+                // handle it to wrap around to the last control in tab order
+                if ( m_selection != wxNOT_FOUND )
+                {
+                    wxWindow* page = m_pages[m_selection];
+                    page->HandleWindowEvent(event);
+                }
+            }
         }
         else if ( isFromParent || isFromSelf )
         {

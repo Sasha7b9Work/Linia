@@ -149,11 +149,11 @@ void SU::SplitToParameters(pchar message, Parameters &parameters, pchar delimit)
 
 uint64 SU::UInt64FromHex(const wxString &value)
 {
-    uint64 result = 0;
+    unsigned long long result = 0;
 
     value.ToULongLong(&result, 16);
 
-    return result;
+    return (uint64)result;
 }
 
 
@@ -231,6 +231,12 @@ bool Words::Consist(const wxString &word) const
 }
 
 
+int Words::GetArrayElementCount() const
+{
+    return (int)words.GetCount();
+}
+
+
 std::string Words::At(int i) const
 {
     if (i < Size())
@@ -300,4 +306,10 @@ wxString SU::BinToString(uint value, int bit_deth)
     }
 
     return result;
+}
+
+
+double SU::ASCIItoFloat(pchar str)
+{
+    return std::atof(str);
 }

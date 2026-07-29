@@ -1036,7 +1036,7 @@ bool wxTextCtrl::IsEmpty() const
     return wxTextCtrlBase::IsEmpty();
 }
 
-wxString wxTextCtrl::GetValue() const
+wxString wxTextCtrl::DoGetValue() const
 {
     // range 0..-1 is special for GetRange() and means to retrieve all text
     return GetRange(0, -1);
@@ -1096,9 +1096,7 @@ wxString wxTextCtrl::GetRange(long from, long to) const
     else
 #endif // wxUSE_RICHEDIT
     {
-        // retrieve all text: wxTextEntry method works even for multiline
-        // controls and must be used for single line ones to account for hints
-        str = wxTextEntry::GetValue();
+        str = wxTextEntry::DoGetValue();
 
         // need only a range?
         if ( from < to )
@@ -3131,6 +3129,15 @@ bool wxTextCtrl::SetFont(const wxFont& font)
         // the default font for it.
         wxTextAttr attr;
         attr.SetFont(font);
+
+        // In dark mode we also need to set the colours explicitly, just as we
+        // do for the colours of the control itself in Create().
+        if ( wxMSWDarkMode::IsActive() )
+        {
+            attr.SetTextColour(GetForegroundColour());
+            attr.SetBackgroundColour(GetBackgroundColour());
+        }
+
         SetStyle(-1, -1, attr);
     }
 

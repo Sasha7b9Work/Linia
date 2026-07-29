@@ -1,12 +1,21 @@
 ﻿// 2025/08/13 14:18:41 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Controls/Panel.h"
+#pragma warning(push, 0)
+#include <wx/timer.h>
+#pragma warning(pop)
 
 
-class SliderInt : public wxPanel
+class wxSlider;
+class Button;
+class wxStaticText;
+
+
+class SliderInt : public Panel
 {
 public:
 
-    SliderInt(wxWindow *parent, const wxPoint &position, int width, int min, int max, const wxString &name);
+    SliderInt(wxWindow *parent, int width, int min, int max, const wxString &name);
 
     void Pack();
     void Unpack();
@@ -16,13 +25,13 @@ public:
 
 private:
 
-    int min = 0;
-    int max = 0;
+    int m_min = 0;
+    int m_max = 0;
 
     wxStaticText *text = nullptr;
     wxSlider     *slider = nullptr;
-    wxButton     *btnMore = nullptr;
-    wxButton     *btnLess = nullptr;
+    Button       *btnMore = nullptr;
+    Button       *btnLess = nullptr;
 
     wxTimer timer_less;
     wxTimer timer_more;
@@ -35,11 +44,11 @@ private:
 };
 
 
-class SliderFloat : public wxPanel
+class SliderFloat : public Panel
 {
 public:
 
-    SliderFloat(wxWindow *parent, const wxPoint &position, int width, const wxString &name);
+    SliderFloat(wxWindow *parent, int width, const wxString &name);
 
     void SetRange(double min, double max, const wxString &units, int digits_after_point);
 
@@ -53,8 +62,8 @@ protected:
 
     wxStaticText *text = nullptr;
     wxSlider     *slider = nullptr;
-    wxButton     *btnMore = nullptr;
-    wxButton     *btnLess = nullptr;
+    Button     *btnMore = nullptr;
+    Button     *btnLess = nullptr;
 
     wxTimer timer_less;
     wxTimer timer_more;
@@ -80,7 +89,7 @@ class SliderFloatPercents : public SliderFloat
 {
 public:
 
-    SliderFloatPercents(wxWindow *parent, const wxPoint &position, int width, int min_percents, int max_percents, const wxString &name);
+    SliderFloatPercents(wxWindow *parent, int width, int min_percents, int max_percents, const wxString &name);
 
     virtual void CalculateValue() override;
 
@@ -99,8 +108,8 @@ class SliderFloatOffset : public SliderFloatPercents
 {
 public:
 
-    SliderFloatOffset(wxWindow *parent, const wxPoint &position, int width, const wxString &name) :
-        SliderFloatPercents(parent, position, width, 0, 100, name) { }
+    SliderFloatOffset(wxWindow *parent, int width, const wxString &name) :
+        SliderFloatPercents(parent, width, 0, 100, name) { }
 
     void CalculateAndSetRange(const wxString &range, double multiplier);
 };
@@ -110,8 +119,8 @@ class SliderFloatLimit : public SliderFloatPercents
 {
 public:
 
-    SliderFloatLimit(wxWindow *parent, const wxPoint &position, int width, const wxString &name) :
-        SliderFloatPercents(parent, position, width, 10, 110, name) { }
+    SliderFloatLimit(wxWindow *parent, int width, const wxString &name) :
+        SliderFloatPercents(parent, width, 10, 110, name) { }
 
     void CalculateAndSetRange(const wxString &range);
 };

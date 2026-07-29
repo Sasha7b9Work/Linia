@@ -109,12 +109,36 @@ enum wxSystemColour
     wxSYS_COLOUR_LISTBOXTEXT,
 
     /**
-        Text colour for the unfocused selection of list-like controls.
+        Text colour for the selected items in list-like controls.
+
+        This colour is supposed to have good contrast with the background drawn
+        by wxRendererNative::DrawItemSelectionRect().
 
         @since 2.9.1
      */
     wxSYS_COLOUR_LISTBOXHIGHLIGHTTEXT,
 
+    /**
+        Colour of separator lines in grid-like controls.
+
+        On macOS, this maps to `[NSColor gridLines]`, on other platforms
+        it is currently the same as ::wxSYS_COLOUR_BTNFACE.
+
+        @since 3.3.2
+     */
+    wxSYS_COLOUR_GRIDLINES,
+
+    /**
+        Background colour of a selected item in a wxListBox or similar control.
+
+        This colour is usually either identical or close to the main accent or
+        theme colour of the operating system.
+
+        On macOS, this maps to `[NSColor selectedContentBackgroundColor]`.
+
+        @since 3.3.2
+     */
+    wxSYS_COLOUR_LISTBOXHIGHLIGHT,
 
     // synonyms:
 

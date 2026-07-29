@@ -2,9 +2,11 @@
 #include "defines.h"
 #include "Utils/String.h"
 #include "Communicator/ComPort/ComPort.h"
-#include "Utils/Configurator.h"
 #include "Settings/Settings.h"
 #include "Windows/ConsoleRS232.h"
+#pragma warning(push, 0)
+#include <wx/textctrl.h>
+#pragma warning(pop)
 
 
 ConsoleRS232 *ConsoleRS232::self = nullptr;
@@ -16,14 +18,14 @@ enum
 };
 
 
-ConsoleRS232::ConsoleRS232(wxFrame *parent) : wxFrame(parent, wxID_ANY, "ИППП4")
+ConsoleRS232::ConsoleRS232(wxFrame *parent) : wxFrame(parent, wxID_ANY, L("ИППП4"))
 {
     text = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, { 600, 300 }, wxTE_MULTILINE | wxTE_READONLY);
 
     line = new wxTextCtrl(this, ID_LINE, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
     line->SetFocus();
 
-    wxFont font(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Courier New"));
+    wxFont font(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, L("Courier New"));
     line->SetFont(font);
     text->SetFont(font);
 

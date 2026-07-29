@@ -113,6 +113,9 @@ wxColour wxSystemSettingsNative::GetColour(wxSystemColour index)
     case wxSYS_COLOUR_WINDOW:
         sysColor = [NSColor controlBackgroundColor];
         break;
+    case wxSYS_COLOUR_GRIDLINES:
+        sysColor = [NSColor gridColor];
+        break;
     case wxSYS_COLOUR_BTNFACE:
         if ( WX_IS_MACOS_AVAILABLE(10, 14 ) )
             sysColor = [NSColor windowBackgroundColor];
@@ -152,6 +155,18 @@ wxColour wxSystemSettingsNative::GetColour(wxSystemColour index)
         break;
     case wxSYS_COLOUR_LISTBOXHIGHLIGHTTEXT:
         sysColor = [NSColor alternateSelectedControlTextColor];
+        break;
+    case wxSYS_COLOUR_LISTBOXHIGHLIGHT:
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_14
+        if ( WX_IS_MACOS_AVAILABLE(10, 14) )
+        {
+            sysColor = [NSColor selectedContentBackgroundColor];
+        }
+        else
+#endif
+        {
+            sysColor = [NSColor selectedTextBackgroundColor];
+        }
         break;
     case wxSYS_COLOUR_INFOBK:
         // tooltip (bogus)

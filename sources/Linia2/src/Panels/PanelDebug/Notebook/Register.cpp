@@ -2,13 +2,19 @@
 #include "defines.h"
 #include "Panels/PanelDebug/Notebook/Register.h"
 #include "Panels/PanelDebug/Notebook/PainterRegister.h"
-#include "Controls/TextControls.h"
+#include "Controls/TextControl.h"
 #include "Utils/StringUtils.h"
 #include "Panels/PanelDebug/Notebook/CommandsCombo.h"
 #include "IPPP/IDevice.h"
 #include "Panels/PanelDebug/Notebook/NotebookDebug.h"
 #include "Panels/PanelDebug/Notebook/PageChip.h"
+#include "Panels/PanelDebug/Notebook/AnimatedImpulse.h"
 #include "Controls/Knob.h"
+#pragma warning(push, 0)
+#include <wx/stattext.h>
+#include <wx/graphics.h>
+#include <wx/sizer.h>
+#pragma warning(pop)
 
 
 // Функции для комбобоксов выбора режимов
@@ -19,37 +25,54 @@ namespace ComboRange
 
 
 Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, const wxString &_functional) :
-    wxPanel(parent, wxID_ANY, wxDefaultPosition, { WIDTH, HEIGHT }, wxTAB_TRAVERSAL | wxSIMPLE_BORDER),
+    Panel(parent),
     chip(_chip)
 {
+    wxSize size = GetMinSize();
+
+    Panel::SetMinSize(size);
+
+    wxSizer *main_sizer = new wxBoxSizer(wxVERTICAL);
+
     wxWindowBase::SetBackgroundColour(parent->GetBackgroundColour().ChangeLightness(110));
 
-    wxPanel::SetName("Register");
-
-    new wxStaticText(this, wxID_ANY, _title + " " + chip->GetNameDevice() + (_functional.IsEmpty() ? wxString("") : (wxString(" : ") + _functional)), {10, 10});
-
-    wxSize size_button{ 90, 25 };
-
-    int x = 690;
-
-    btnSend = new Button(this, wxT("Записать"), { x, 0 }, size_button);
-    btnSend->Bind(wxEVT_BUTTON, &Register::OnEventButton, this);
-
-    windows.push_back(btnSend);
-
-    x -= size_button.x + 5;
-
-    btnAutoSend = new ToggleButton(this, wxT("Автозапись"), { x, 0 }, size_button);
-    btnAutoSend->Bind(wxEVT_TOGGLEBUTTON, &Register::OnEventToggleButton, this);
-
-    windows.push_back(btnAutoSend);
-
-    x -= size_button.x + 5;
-
-    int y0 = 40;
+    Panel::SetName("Register");
 
     {
-        painter = new PainterRegister(this, this, { 10, y0 });
+        wxStaticText *txt_name = new wxStaticText(this, wxID_ANY, _title + " " + chip->GetNameDevice() + (_functional.IsEmpty() ? wxString("") : (wxString(" : ") + _functional)), { 10, 10 });
+
+        wxSize size_button{ 90, 25 };
+
+        int x = 690;
+
+        btnSend = new Button(this, wxT("Записать"), size_button);
+        btnSend->SetToolTip(L("Однократная засылка в регистр"));
+        btnSend->Bind(wxEVT_BUTTON, &Register::OnEventButton, this);
+
+        windows.push_back(btnSend);
+
+        x -= size_button.x + 5;
+
+        btnAutoSend = new ToggleButton(this, wxT("Автозапись"), size_button);
+        btnAutoSend->SetToolTip(L("Автоматическая засылка в регистр 1 раз в секунду"));
+        btnAutoSend->Bind(wxEVT_TOGGLEBUTTON, &Register::OnEventToggleButton, this);
+
+        windows.push_back(btnAutoSend);
+
+        wxSizer *top_sizer = new wxBoxSizer(wxHORIZONTAL);                      // В этом сайзере будет название регистра и кнопки
+
+        top_sizer->Add(txt_name, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, 10);
+        top_sizer->AddStretchSpacer(1);
+        top_sizer->Add(btnAutoSend, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
+        top_sizer->Add(btnSend, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 10);
+
+        main_sizer->Add(top_sizer, 0, wxEXPAND | wxTOP, 10);
+    }
+
+    {
+        painter = new PainterRegister(this, this);
+
+        main_sizer->Add(painter);
 
         for (auto box : chboxes)
         {
@@ -73,6 +96,17 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, const 
     Bind(wxEVT_TIMER, &Register::OnEventTimerAutoSend, this);
 
     timerAutoSend.SetOwner(this, timerAutoSend.GetId());
+
+    SetSizer(main_sizer);
+}
+
+
+wxSize Register::GetMinSize() const
+{
+    static const int WIDTH = 800;
+    static const int HEIGHT = 155;
+
+    return { WIDTH, (chip == regs[REG::_3_ChannelB]) ? (HEIGHT + 50) : HEIGHT };
 }
 
 
@@ -95,29 +129,9 @@ void Register::AppendModes(const wxString &title, const std::vector<ModeDescripi
         }
     }
 
-    int dH = 30;
-
-    painter->IncreaseHeight(dH);
-
-    IncreaseHeight(dH);
-
-    PageChip *page_chip = (PageChip *)GetParent();
-
-    page_chip->Rebuild();
-}
-
-
-void Register::IncreaseHeight(int dH)
-{
-    wxSize size = GetSize();
-    size.y += dH;
-
-    SetMinSize(size);
-    SetMaxSize(size);
-
-    SetSize(size);
-
     Layout();
+
+    GetParent()->Layout();
 }
 
 
@@ -139,10 +153,10 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
 
                 int num_y = elem.desc[0] ? 3 : 2;
 
-                elem.field.text_ctrl_dec = new TextCtrlNumber(painter, wxID_ANY, "",
-                    { x, (PainterRegister::W_B + 1) * num_y },
+                elem.field.text_ctrl_dec = new TextCtrlNumber(painter, "",
                     { PainterRegister::W_B * elem.num_bits + 1, 20 },
                     0, (1 << elem.num_bits) - 1);
+                elem.field.text_ctrl_dec->SetPosition({ x, (PainterRegister::W_B + 1) * num_y });
 
                 elem.field.text_ctrl_dec->Bind(wxEVT_TEXT, &Register::OnEventTextCtrl, this);
             }
@@ -168,8 +182,8 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
                 int y = (PainterRegister::W_B + 1) * (need_dec ? 4 : 3) - 1;
 
                 elem.field.combo = new CommandsCombo(painter, elem.hint,
-                    { x, y },
-                    PainterRegister::W_B * elem.num_bits - 1, names, tooltips, "Register");
+                   PainterRegister::W_B * elem.num_bits - 1, names, tooltips, "Register");
+                elem.field.combo->SetPosition({ x, y });
 
                 elem.field.combo->left_align = true;
 
@@ -185,7 +199,7 @@ void Register::SetDescriptionBits(int index, const std::vector<StructDescription
 void Register::CreateControlMode(int i)
 {
     int x = 10 + i * 300;
-    int y = 110;
+    int y = 100;
 
     new wxStaticText(painter, wxID_ANY, title_modes[i], { x, y });
 
@@ -201,7 +215,8 @@ void Register::CreateControlMode(int i)
         tooltips.push_back(mode.hint);
     }
 
-    combo_modes[i] = new CommandsCombo(painter, title_modes[i], { x, y + 25 }, 250, names, tooltips, title_modes[i]);
+    combo_modes[i] = new CommandsCombo(painter, title_modes[i], 250, names, tooltips, title_modes[i]);
+    combo_modes[i]->SetPosition({ x, y + 20 });
 
     combo_modes[i]->Bind(wxEVT_COMBOBOX, &Register::OnEventComboMode, this);
 }
@@ -277,7 +292,6 @@ void Register::OnEventButton(wxCommandEvent &event)
     if (id == btnSend->GetId())
     {
         WriteValue();
-
         painter->animation->RunOnce();
     }
 }
@@ -307,7 +321,7 @@ void Register::SetActiveAcross(bool active, wxWindow *_wnd)
         }
     }
 
-    TheNotebookDebug->EnableSwitching(active);
+    NotebookDebug::self->EnableSwitching(active);
 }
 
 
@@ -550,13 +564,10 @@ void ComboRange::UpdateState(std::vector<ModeDescripion> &mode_desc, const std::
 
 RegDAC::RegDAC(wxWindow *parent, pchar _title, Chip *_chip, const wxString &_functional) : Register(parent, _title, _chip, _functional)
 {
-    const int d = 10;
-
-    knob = new KnobWidget(painter, 0, 100, 50, { painter->GetSize().x - d - 70, d });
-
     knob->Bind(wxEVT_SLIDER, &RegDAC::OnEventKnob, this);
 
-    slider = new SliderInt(painter, { painter->BitX(chip->BitDepth() - 5, chip->BitDepth()) + 3, 75 }, (chip->BitDepth() - 4) * 20, 0, 100, "");
+    slider = new SliderInt(painter, (chip->BitDepth() - 4) * 20, 0, 100, "");
+    slider->SetPosition({ painter->BitX(chip->BitDepth() - 5, chip->BitDepth()) + 3, 75 });
 
     slider->Bind(wxEVT_SLIDER, &RegDAC::OnEventSlider, this);
 }
@@ -693,8 +704,8 @@ uint Register::GetValueFromBits(int first_bit, int num_bits) const
 }
 
 
-CheckBoxBit::CheckBoxBit(wxWindow *parent, const wxPoint &pos, const wxSize &size) :
-    Painter(parent, pos, size)
+CheckBoxBit::CheckBoxBit(wxWindow *parent, const wxSize &size) :
+    Painter(parent, size)
 {
     SetCursor(wxCursor(wxCURSOR_HAND));
 
@@ -731,6 +742,8 @@ bool CheckBoxBit::Enable(bool enable)
 void CheckBoxBit::RePaint()
 {
     BeginPaint(IsEnabled() ? *wxWHITE : *wxLIGHT_GREY);
+
+    DrawRectangle(0, 0, GetSize().x, GetSize().y - 1, *wxBLACK);
 
     wxFont font(7, wxFONTFAMILY_DEFAULT,
         wxFONTSTYLE_NORMAL,

@@ -1,6 +1,10 @@
 ﻿// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Utils/StringUtils.h"
+#pragma warning(push, 0)
+#include <wx/gdicmn.h>
+#pragma warning(pop)
+#include <cstring>
 
 
 wxSize BUTTON_SIZE = { BUTTON_WIDTH, BUTTON_HEIGHT };

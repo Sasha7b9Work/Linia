@@ -1,5 +1,6 @@
 ﻿// 2025/7/23 14:18:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Controls/Panel.h"
 
 
 /*
@@ -7,11 +8,15 @@
 */
 
 
-class SpinBox : public wxPanel
+class Button;
+class wxTextCtrl;
+
+
+class SpinBox : public Panel
 {
 public:
 
-    SpinBox(wxWindow *parent, const wxPoint &, const wxSize &, int min, int max);
+    SpinBox(wxWindow *parent, const wxSize &, int min, int max);
 
     int GetValue() const;
 
@@ -19,12 +24,12 @@ public:
 
 private:
 
-    int min = 0;
-    int max = 0;
+    int m_min = 0;
+    int m_max = 0;
 
     wxTextCtrl *text = nullptr;
-    wxButton *btnMore = nullptr;
-    wxButton *btnLess = nullptr;
+    Button *btnMore = nullptr;
+    Button *btnLess = nullptr;
 
     void OnEventButton(wxCommandEvent &);
 };

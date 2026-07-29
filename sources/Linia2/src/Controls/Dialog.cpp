@@ -2,6 +2,12 @@
 #include "defines.h"
 #include "Controls/Dialog.h"
 #include "Utils/SystemDepend.h"
+#pragma warning(push, 0)
+#include <wx/stattext.h>
+#include <wx/radiobut.h>
+#include <wx/statline.h>
+#pragma warning(pop)
+
 
 Dialog::Dialog(const wxString &_title, const wxPoint &_pos, const wxSize &_size) :
     DraggedDialog(_title, _size)
@@ -11,23 +17,23 @@ Dialog::Dialog(const wxString &_title, const wxPoint &_pos, const wxSize &_size)
 }
 
 
-int Dialog::CreateLabelGroup(wxWindow *parent, int x, int y, const wxString &label)
+int Dialog::CreateLabelGroup(wxWindow *parent, int y, const wxString &label)
 {
     y += 15;
 
-    new wxStaticLine(parent, wxID_ANY, { x, SD::Y_SB(y) }, { 100, -1 }, wxLI_HORIZONTAL);
+    new wxStaticLine(parent, wxID_ANY, wxDefaultPosition, { 100, -1 }, wxLI_HORIZONTAL);
 
     y += 7;
 
-    new wxStaticText(parent, wxID_ANY, label, { x + 10, SD::Y_SB(y) } );
+    new wxStaticText(parent, wxID_ANY, label);
 
     return y + 25;
 }
 
 
-int Dialog::CreateRadioButton(wxWindow *parent, int x, int y, wxRadioButton **rb, const wxString &label)
+int Dialog::CreateRadioButton(wxWindow *parent, int y, wxRadioButton **rb, const wxString &label)
 {
-    *rb = new wxRadioButton(parent, wxID_ANY, label, { x, SD::Y_SB(y) });
+    *rb = new wxRadioButton(parent, wxID_ANY, label);
 
     return y + 20;
 }

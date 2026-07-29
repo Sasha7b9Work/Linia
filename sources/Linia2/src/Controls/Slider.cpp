@@ -2,36 +2,44 @@
 #include "defines.h"
 #include "Controls/Slider.h"
 #include "Utils/GlobalFunctions.h"
-#include "Utils/Configurator.h"
+#include "Settings/Configurator.h"
+#pragma warning(push, 0)
+#include <wx/slider.h>
+#include <wx/stattext.h>
+#include <wx/sizer.h>
+#pragma warning(pop)
 
 
-SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _min, int _max, const wxString &_name) :
-    wxPanel(parent, wxID_ANY, position, { width + 5, TEXTCNTRL_HEIGHT + 5 + 5 }),
-    min(_min),
-    max(_max)
+SliderInt::SliderInt(wxWindow *parent, int width, int _min, int _max, const wxString &_name) :
+    Panel(parent),
+    m_min(_min),
+    m_max(_max)
 {
-    wxPanel::SetName(parent->GetName() + "_" + _name);
+    wxBoxSizer *main_sizer = new wxBoxSizer(wxHORIZONTAL);
+
+    Panel::SetSize({ width, TEXTCNTRL_HEIGHT + 5 + 5 });
+
+    Panel::SetName(parent->GetName() + "_" + _name);
 
     int w1 = 20;
     int w2 = 17;
 
     wxSize s{ width - w1 - w2, TEXTCNTRL_HEIGHT + 5 };
 
-    slider = new wxSlider(this, wxID_ANY, min, min, max, { w1, 0 }, s );
+    slider = new wxSlider(this, wxID_ANY, m_min, m_min, m_max);
 
-    slider->SetMinSize(wxSize(100, 30));
+    slider->SetMinSize(s);
 
     slider->SetBackgroundColour(parent->GetBackgroundColour());
 
-    text = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT }, wxALIGN_RIGHT);
+    text = new wxStaticText(this, wxID_ANY, "0", wxDefaultPosition, { w1, TEXTCNTRL_HEIGHT }, wxALIGN_RIGHT);
+    text->SetMinSize({ w1, TEXTCNTRL_HEIGHT });
 
     wxSize size_button{ 15, 12 };
 
-    int x = w1 + slider->GetSize().x;
-
-    btnMore = new wxButton(this, wxID_ANY, "", { x, 0 }, size_button);
+    btnMore = new Button(this, "", size_button);
     btnMore->SetBackgroundColour(btnMore->GetBackgroundColour().ChangeLightness(LIGHTNESS));
-    btnLess = new wxButton(this, wxID_ANY, "", { x, size_button.y }, size_button);
+    btnLess = new Button(this, "", size_button);
     btnLess->SetBackgroundColour(btnLess->GetBackgroundColour().ChangeLightness(LIGHTNESS));
 
     btnMore->SetCursor(wxCursor(wxCURSOR_HAND));
@@ -48,8 +56,17 @@ SliderInt::SliderInt(wxWindow *parent, const wxPoint &position, int width, int _
 //    btnMore->Bind(wxEVT_LEFT_UP, &SliderInt::OnEventMouseUp, this);
 //    btnLess->Bind(wxEVT_LEFT_UP, &SliderInt::OnEventMouseUp, this);
 
-//    timer_less.Bind(wxEVT_TIMER, &SliderInt::OnEventTimer, this);
-//    timer_more.Bind(wxEVT_TIMER, &SliderInt::OnEventTimer, this);
+    wxBoxSizer *ver_sizer = new wxBoxSizer(wxVERTICAL);
+    ver_sizer->Add(btnMore, 0, wxALL | wxTOP, 0);
+    ver_sizer->Add(btnLess, 0, wxALL | wxTOP, 0);
+
+    main_sizer->Add(ver_sizer, 0, wxEXPAND | wxTOP, 2);
+    main_sizer->Add(text, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL | wxFIXED_MINSIZE, 0);
+    main_sizer->Add(slider, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, 0);
+
+    SetSizer(main_sizer);
+
+    Layout();
 }
 
 
@@ -149,7 +166,7 @@ void SliderInt::Pack()
 
 void SliderInt::Unpack()
 {
-    int value = wxClip<int>(Config::ReadInt(GetName(), 0), min, max);
+    int value = wxClip<int>(Config::ReadInt(GetName(), 0), m_min, m_max);
 
     SetValue(value);
 }
@@ -187,10 +204,11 @@ void SliderFloat::SetIntValue(int value)
 }
 
 
-SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width, const wxString &name) :
-    wxPanel(parent, wxID_ANY, position, { width, TEXTCNTRL_HEIGHT + 5 + 5 })
+SliderFloat::SliderFloat(wxWindow *parent, int width, const wxString &name) :
+    Panel(parent)
 {
-    wxPanel::SetName(parent->GetName() + "_" + name);
+    Panel::SetSize({ width, TEXTCNTRL_HEIGHT + 5 + 5 });
+    Panel::SetName(parent->GetName() + "_" + name);
 
     int w1 = 50;
     int w2 = 17;
@@ -203,11 +221,9 @@ SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width, c
 
     wxSize size_button{ 15, 12 };
 
-    int x = w1 + slider->GetSize().x;
-
-    btnMore = new wxButton(this, wxID_ANY, "", { x, 0 }, size_button);
+    btnMore = new Button(this, "", size_button);
     btnMore->SetBackgroundColour(btnMore->GetBackgroundColour().ChangeLightness(LIGHTNESS));
-    btnLess = new wxButton(this, wxID_ANY, "", { x, size_button.y }, size_button);
+    btnLess = new Button(this, "", size_button);
     btnLess->SetBackgroundColour(btnLess->GetBackgroundColour().ChangeLightness(LIGHTNESS));
 
     Bind(wxEVT_SLIDER, &SliderFloat::OnEventSlider, this);
@@ -216,8 +232,8 @@ SliderFloat::SliderFloat(wxWindow *parent, const wxPoint &position, int width, c
     btnMore->Bind(wxEVT_LEFT_UP, &SliderFloat::OnEventMouseUp, this);
     btnLess->Bind(wxEVT_LEFT_UP, &SliderFloat::OnEventMouseUp, this);
 
-    timer_less.Bind(wxEVT_TIMER, &SliderFloat::OnEventTimer, this);
-    timer_more.Bind(wxEVT_TIMER, &SliderFloat::OnEventTimer, this);
+    Bind(wxEVT_TIMER, &SliderFloat::OnEventTimer, this);
+    Bind(wxEVT_TIMER, &SliderFloat::OnEventTimer, this);
 }
 
 
@@ -389,12 +405,10 @@ void SliderFloat::OnEventTimer(wxTimerEvent &event)
 }
 
 
-SliderFloatPercents::SliderFloatPercents(wxWindow *parent, const wxPoint &position, int width, int _min_percents, int _max_percents, const wxString &name) :
-    SliderFloat(parent, position, width, name),
+SliderFloatPercents::SliderFloatPercents(wxWindow *parent, int width, int _min_percents, int _max_percents, const wxString &name) :
+    SliderFloat(parent, width, name),
     min_percents(_min_percents),
     max_percents(_max_percents)
 {
-    text->SetPosition({0, 0});
-
-    textPercents = new wxStaticText(this, wxID_ANY, "0", { 0, 15 }, { 50, TEXTCNTRL_HEIGHT - 5 });
+    textPercents = new wxStaticText(this, wxID_ANY, "0", wxDefaultPosition, { 50, TEXTCNTRL_HEIGHT - 5 });
 }

@@ -764,6 +764,7 @@ wxColour wxSystemSettingsNative::GetColour(wxSystemColour index)
         }
         wxFALLTHROUGH;
 #endif
+    case wxSYS_COLOUR_GRIDLINES:
     case wxSYS_COLOUR_3DLIGHT:
     case wxSYS_COLOUR_ACTIVEBORDER:
     case wxSYS_COLOUR_BTNFACE:
@@ -845,6 +846,9 @@ wxColour wxSystemSettingsNative::GetColour(wxSystemColour index)
     case wxSYS_COLOUR_LISTBOXHIGHLIGHTTEXT:
         sc.AddTreeview().Fg(color, GTK_STATE_FLAG_SELECTED | GTK_STATE_FLAG_FOCUSED);
         break;
+    case wxSYS_COLOUR_LISTBOXHIGHLIGHT:
+        sc.AddTreeview().Bg(color, GTK_STATE_FLAG_SELECTED | GTK_STATE_FLAG_FOCUSED);
+        break;
     case wxSYS_COLOUR_LISTBOXTEXT:
         sc.AddTreeview().Fg(color);
         break;
@@ -921,6 +925,7 @@ wxColour wxSystemSettingsNative::GetColour( wxSystemColour index )
         case wxSYS_COLOUR_ACTIVEBORDER:
         case wxSYS_COLOUR_INACTIVEBORDER:
         case wxSYS_COLOUR_BTNFACE:
+        case wxSYS_COLOUR_GRIDLINES:
         //case wxSYS_COLOUR_3DFACE:
         case wxSYS_COLOUR_3DLIGHT:
             color = wxColor(ButtonStyle()->bg[GTK_STATE_NORMAL]);
@@ -959,6 +964,10 @@ wxColour wxSystemSettingsNative::GetColour( wxSystemColour index )
 
         case wxSYS_COLOUR_HIGHLIGHT:
             color = wxColor(ButtonStyle()->bg[GTK_STATE_SELECTED]);
+            break;
+
+        case wxSYS_COLOUR_LISTBOXHIGHLIGHT:
+            color = wxColor(ListStyle()->bg[GTK_STATE_SELECTED]);
             break;
 
         case wxSYS_COLOUR_LISTBOX:

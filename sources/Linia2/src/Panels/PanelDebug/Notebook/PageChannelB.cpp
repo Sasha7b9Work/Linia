@@ -1,6 +1,7 @@
 ﻿// 2025/10/07 12:05:33 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/Notebook/PageChannelB.h"
+#include "Panels/PanelDebug/Notebook/Register.h"
 
 
 PageChannelB *PageChannelB::self = nullptr;
@@ -12,7 +13,7 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
     self = this;
 
     {
-        RegAD5531 *dac2 = new RegAD5531(this, dacs[2], "");
+        RegAD5531 *dac2 = new RegAD5531(this, dacs[DAC::_2_ChannelB_DAC1], "");
 
         std::vector<StructDescription> desc2;
         desc2.emplace_back(StructDescription{ 0, dac2->GetChip()->BitDepth(), "", "", { true } });
@@ -22,7 +23,7 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
     }
 
     {
-        RegAD5531 *dac3 = new RegAD5531(this, dacs[3], "");
+        RegAD5531 *dac3 = new RegAD5531(this, dacs[DAC::_3_ChannelB_DAC2], "");
 
         std::vector<StructDescription> desc3;
         desc3.emplace_back(StructDescription{ 0, dac3->GetChip()->BitDepth(), "", "", { true } });
@@ -32,7 +33,7 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
     }
 
     {
-        RegFPGA *reg3 = new RegFPGA(this, regs[3]);
+        RegFPGA *reg3 = new RegFPGA(this, regs[REG::_3_ChannelB]);
 
         std::vector<StructDescription> desc3; //-V827
 
@@ -154,7 +155,7 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeU_4V.state.emplace_back(StateBit{ 17, true });
                 modesU.emplace_back(modeU_4V);
 
-                reg3->AppendModes(wxT("Источник напряжения"), modesU);
+                reg3->AppendModes(L("Источник напряжения"), modesU);
             }
 
             {
@@ -250,7 +251,7 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
                 modeI_20nA.state.emplace_back(StateBit{ 17, false });
                 modesI.emplace_back(modeI_20nA);
 
-                reg3->AppendModes(wxT("Источник тока"), modesI);
+                reg3->AppendModes(L("Источник тока"), modesI);
             }
         }
 

@@ -1,8 +1,11 @@
 ﻿// 2024/02/03 12:50:14 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Utils/Configurator.h"
 #include "Utils/GlobalFunctions.h"
-#include "Controls/Buttons.h"
+#include "Controls/Button.h"
+#include "Settings/Configurator.h"
+#pragma warning(push, 0)
+#include <wx/checkbox.h>
+#pragma warning(pop)
 
 
 template<class T>
@@ -118,7 +121,7 @@ struct ValueBool : public Value<bool>
 
 struct ValueCheckBox : public wxCheckBox
 {
-    ValueCheckBox(wxWindow *parent, const wxString &title, const wxPoint &position, const wxString &_key, const bool &_def);
+    ValueCheckBox(wxWindow *parent, const wxString &title, const wxString &_key, const bool &_def);
 
     void SetNewValue(bool);
 

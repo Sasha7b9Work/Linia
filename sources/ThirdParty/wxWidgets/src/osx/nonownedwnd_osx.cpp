@@ -288,6 +288,9 @@ void wxNonOwnedWindow::SetWindowStyleFlag(long flags)
 // Raise the window to the top of the Z order
 void wxNonOwnedWindow::Raise()
 {
+    if (!IsShown())
+        return;
+
     m_nowpeer->Raise();
 }
 
@@ -465,14 +468,7 @@ void wxNonOwnedWindow::DoGetClientSize( int *width, int *height ) const
         return;
 
     int left, top, w, h;
-    // under iphone with a translucent status bar the m_nowpeer returns the
-    // inner area, while the content area extends under the translucent
-    // status bar, therefore we use the content view's area
-#ifdef __WXOSX_IPHONE__
-    GetPeer()->GetContentArea(left, top, w, h);
-#else
     m_nowpeer->GetContentArea(left, top, w, h);
-#endif
 
     if (width)
        *width = w ;

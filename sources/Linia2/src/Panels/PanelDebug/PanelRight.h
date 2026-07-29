@@ -1,14 +1,18 @@
 ﻿// 2026/01/24 21:41:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Controls/ControlDataFPGA.h"
-#include "Controls/Buttons.h"
+#include "Controls/Button.h"
+#include "Controls/Panel.h"
 
 
-class PanelRight : public wxPanel
+class TextCtrlNumber;
+
+
+class PanelRight : public Panel
 {
 public:
 
-    PanelRight(wxWindow *);
+    PanelRight(wxWindow *, PanelRight *&);
 
     ControlDataFPGA *data[5];           // Отображение данных, считанных c платы контроллера
 
@@ -16,11 +20,10 @@ public:
 
 private:
 
-    Button *btnReturn = nullptr;      // Выход в основную панель
     Button *btnStart = nullptr;       // Запуск развёртки
     Button *btnStop = nullptr;        // Останов развёртки
 
-    wxTextCtrl *txtPeriodScan = nullptr;    // Период запуска развёртки в миллисекундах
+    TextCtrlNumber *txtPeriodScan = nullptr;    // Период запуска развёртки в миллисекундах
 
     void OnEventButton(wxCommandEvent &);
 };

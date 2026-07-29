@@ -1,7 +1,12 @@
 ﻿// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Panels/PanelMenu/PanelMenu.h"
 #include "Settings/Value.h"
+#pragma warning(push, 0)
+#include <wx/frame.h>
+#pragma warning(pop)
+
+
+class Notebook;
 
 
 struct ModeMainWindow
@@ -42,7 +47,7 @@ public:
     static const int WIDTH3 = WIDTH - WIDTH_DRAW;   // Ширина последнего, третьего, столбика с панелями
 
     static const int HEIGHT_HI = 75;
-    static const int HEIGHT_DRAW = HEIGHT - HEIGHT_HI - PanelMenu::HEIGHT;
+    static const int HEIGHT_DRAW = HEIGHT - HEIGHT_HI;
 
     void OnQuit(wxCommandEvent &event);
     void OnAbout(wxCommandEvent &event);
@@ -58,13 +63,16 @@ public:
 
 private:
 
-    MainWindow(const wxString &title);
+    MainWindow(MainWindow *&, const wxString &title);
 
     wxToolBar *toolBar = nullptr;
 
     ValuePoint position{ "gui_position", { 100, 100 } };
 
+    Notebook *main_panel = nullptr;
+
     void OnEventKeyHook(wxKeyEvent &);
+    void OnEventMaximize(wxMaximizeEvent &);
 
     // Настроить шрифт
     void TuneFont();

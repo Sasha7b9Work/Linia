@@ -17,6 +17,7 @@
 #include "wx/scrolwin.h"
 #include "wx/recguard.h"
 #include "wx/time.h" // needed for wxMilliClock_t
+#include "wx/systhemectrl.h"
 
 #include "wx/propgrid/property.h"
 #include "wx/propgrid/propgridiface.h"
@@ -555,7 +556,7 @@ enum wxPG_KEYBOARD_ACTIONS
 // Use Freeze() and Thaw() respectively to disable and enable drawing. This
 // will also delay sorting etc. miscellaneous calculations to the last
 // possible moment.
-class WXDLLIMPEXP_PROPGRID wxPropertyGrid : public wxScrolled<wxControl>,
+class WXDLLIMPEXP_PROPGRID wxPropertyGrid : public wxSystemThemedControl<wxScrolled<wxControl>>,
                                             public wxPropertyGridInterface
 {
     friend class wxPropertyGridEvent;
@@ -1164,8 +1165,11 @@ public:
     // Checks system screen design used for laying out various dialogs.
     static bool IsSmallScreen();
 
+#if WXWIN_COMPATIBILITY_3_2
     // Returns rescaled bitmap
+    wxDEPRECATED_MSG("use wxBitmap::Rescale instead")
     static wxBitmap RescaleBitmap(const wxBitmap& srcBmp, double scaleX, double scaleY);
+#endif // WXWIN_COMPATIBILITY_3_2
 
     // Returns rectangle that fully contains properties between and including
     // p1 and p2. Rectangle is in virtual scrolled window coordinates.
