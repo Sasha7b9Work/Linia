@@ -1,5 +1,14 @@
 ﻿# 2023/07/04 15:47:47 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+
+# Указываем путь к vcpkg и включаем манифестный режим
+set(CMAKE_TOOLCHAIN_FILE "e:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE PATH "")
+set(VCPKG_TARGET_TRIPLET "x64-windows" CACHE STRING "")
+set(VCPKG_MANIFEST_MODE ON CACHE BOOL "")
+
 project (Linia2)
+
+set(RapidJSON_DIR "e:/dev/vcpkg/installed/x64-windows/share/rapidjson" CACHE PATH "")
+find_package(RapidJSON CONFIG REQUIRED)
 
 set(CMAKE_UNITY_BUILD ON)
 
