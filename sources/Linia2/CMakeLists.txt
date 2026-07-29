@@ -246,6 +246,8 @@ else()
         ${GTK3_LIBRARIES}
         ${GSPELL_LIBRARIES}
         wayland-client
+        SM
+        ICE
     )
 
     target_include_directories(${PROJECT_NAME} PRIVATE ${GTK3_INCLUDE_DIRS})
