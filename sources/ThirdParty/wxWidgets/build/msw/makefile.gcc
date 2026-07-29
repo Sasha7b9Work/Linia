@@ -33,7 +33,7 @@ MAKEARGS = LINK_DLL_FLAGS="$(LINK_DLL_FLAGS)" \
 	RUNTIME_LIBS="$(RUNTIME_LIBS)" WINDRES="$(WINDRES)"
 CPPDEPS = -MT$@ -MF$@.d -MD -MP
 WX_RELEASE_NODOT = 33
-WX_VERSION_NODOT = $(WX_RELEASE_NODOT)2
+WX_VERSION_NODOT = $(WX_RELEASE_NODOT)3
 COMPILER_PREFIX = gcc
 OBJS = \
 	$(COMPILER_PREFIX)$(COMPILER_VERSION)_$(PORTNAME)$(WXUNIVNAME)u$(WXDEBUGFLAG)$(WXDLLFLAG)$(CFG)
@@ -1662,6 +1662,7 @@ RIBBONDLL_OBJECTS =  \
 	$(OBJS)\ribbondll_art_internal.o \
 	$(OBJS)\ribbondll_art_msw.o \
 	$(OBJS)\ribbondll_art_aui.o \
+	$(OBJS)\ribbondll_art_msw_flat.o \
 	$(OBJS)\ribbondll_bar.o \
 	$(OBJS)\ribbondll_buttonbar.o \
 	$(OBJS)\ribbondll_control.o \
@@ -1683,6 +1684,7 @@ RIBBONLIB_OBJECTS =  \
 	$(OBJS)\ribbonlib_art_internal.o \
 	$(OBJS)\ribbonlib_art_msw.o \
 	$(OBJS)\ribbonlib_art_aui.o \
+	$(OBJS)\ribbonlib_art_msw_flat.o \
 	$(OBJS)\ribbonlib_bar.o \
 	$(OBJS)\ribbonlib_buttonbar.o \
 	$(OBJS)\ribbonlib_control.o \
@@ -2048,6 +2050,7 @@ ____MONOLIB_GUI_SRC_FILENAMES_OBJECTS =  \
 	$(OBJS)\monodll_art_internal.o \
 	$(OBJS)\monodll_art_msw.o \
 	$(OBJS)\monodll_art_aui.o \
+	$(OBJS)\monodll_art_msw_flat.o \
 	$(OBJS)\monodll_bar.o \
 	$(OBJS)\monodll_ribbon_buttonbar.o \
 	$(OBJS)\monodll_ribbon_control.o \
@@ -2142,6 +2145,7 @@ ____CORE_SRC_FILENAMES_OBJECTS =  \
 	$(OBJS)\monodll_appprogress.o \
 	$(OBJS)\monodll_taskbarbutton.o \
 	$(OBJS)\monodll_power.o \
+	$(OBJS)\monodll_taskdlg.o \
 	$(OBJS)\monodll_clrpickerg.o \
 	$(OBJS)\monodll_collpaneg.o \
 	$(OBJS)\monodll_filepickerg.o \
@@ -2323,6 +2327,7 @@ ____CORE_SRC_FILENAMES_OBJECTS =  \
 	$(OBJS)\monodll_statlinecmn.o \
 	$(OBJS)\monodll_stattextcmn.o \
 	$(OBJS)\monodll_stockitem.o \
+	$(OBJS)\monodll_svggc.o \
 	$(OBJS)\monodll_tbarbase.o \
 	$(OBJS)\monodll_textcmn.o \
 	$(OBJS)\monodll_textentrycmn.o \
@@ -2494,6 +2499,7 @@ ____CORE_SRC_FILENAMES_OBJECTS =  \
 	$(OBJS)\monodll_appprogress.o \
 	$(OBJS)\monodll_taskbarbutton.o \
 	$(OBJS)\monodll_power.o \
+	$(OBJS)\monodll_taskdlg.o \
 	$(OBJS)\monodll_generic_accel.o \
 	$(OBJS)\monodll_clrpickerg.o \
 	$(OBJS)\monodll_collpaneg.o \
@@ -2662,6 +2668,7 @@ ____CORE_SRC_FILENAMES_OBJECTS =  \
 	$(OBJS)\monodll_statlinecmn.o \
 	$(OBJS)\monodll_stattextcmn.o \
 	$(OBJS)\monodll_stockitem.o \
+	$(OBJS)\monodll_svggc.o \
 	$(OBJS)\monodll_tbarbase.o \
 	$(OBJS)\monodll_textcmn.o \
 	$(OBJS)\monodll_textentrycmn.o \
@@ -2915,6 +2922,7 @@ ____MONOLIB_GUI_SRC_FILENAMES_1_OBJECTS =  \
 	$(OBJS)\monolib_art_internal.o \
 	$(OBJS)\monolib_art_msw.o \
 	$(OBJS)\monolib_art_aui.o \
+	$(OBJS)\monolib_art_msw_flat.o \
 	$(OBJS)\monolib_bar.o \
 	$(OBJS)\monolib_ribbon_buttonbar.o \
 	$(OBJS)\monolib_ribbon_control.o \
@@ -3009,6 +3017,7 @@ ____CORE_SRC_FILENAMES_1_OBJECTS =  \
 	$(OBJS)\monolib_appprogress.o \
 	$(OBJS)\monolib_taskbarbutton.o \
 	$(OBJS)\monolib_power.o \
+	$(OBJS)\monolib_taskdlg.o \
 	$(OBJS)\monolib_clrpickerg.o \
 	$(OBJS)\monolib_collpaneg.o \
 	$(OBJS)\monolib_filepickerg.o \
@@ -3190,6 +3199,7 @@ ____CORE_SRC_FILENAMES_1_OBJECTS =  \
 	$(OBJS)\monolib_statlinecmn.o \
 	$(OBJS)\monolib_stattextcmn.o \
 	$(OBJS)\monolib_stockitem.o \
+	$(OBJS)\monolib_svggc.o \
 	$(OBJS)\monolib_tbarbase.o \
 	$(OBJS)\monolib_textcmn.o \
 	$(OBJS)\monolib_textentrycmn.o \
@@ -3361,6 +3371,7 @@ ____CORE_SRC_FILENAMES_1_OBJECTS =  \
 	$(OBJS)\monolib_appprogress.o \
 	$(OBJS)\monolib_taskbarbutton.o \
 	$(OBJS)\monolib_power.o \
+	$(OBJS)\monolib_taskdlg.o \
 	$(OBJS)\monolib_generic_accel.o \
 	$(OBJS)\monolib_clrpickerg.o \
 	$(OBJS)\monolib_collpaneg.o \
@@ -3529,6 +3540,7 @@ ____CORE_SRC_FILENAMES_1_OBJECTS =  \
 	$(OBJS)\monolib_statlinecmn.o \
 	$(OBJS)\monolib_stattextcmn.o \
 	$(OBJS)\monolib_stockitem.o \
+	$(OBJS)\monolib_svggc.o \
 	$(OBJS)\monolib_tbarbase.o \
 	$(OBJS)\monolib_textcmn.o \
 	$(OBJS)\monolib_textentrycmn.o \
@@ -3752,6 +3764,7 @@ ____CORE_SRC_FILENAMES_2_OBJECTS =  \
 	$(OBJS)\coredll_appprogress.o \
 	$(OBJS)\coredll_taskbarbutton.o \
 	$(OBJS)\coredll_power.o \
+	$(OBJS)\coredll_taskdlg.o \
 	$(OBJS)\coredll_clrpickerg.o \
 	$(OBJS)\coredll_collpaneg.o \
 	$(OBJS)\coredll_filepickerg.o \
@@ -3933,6 +3946,7 @@ ____CORE_SRC_FILENAMES_2_OBJECTS =  \
 	$(OBJS)\coredll_statlinecmn.o \
 	$(OBJS)\coredll_stattextcmn.o \
 	$(OBJS)\coredll_stockitem.o \
+	$(OBJS)\coredll_svggc.o \
 	$(OBJS)\coredll_tbarbase.o \
 	$(OBJS)\coredll_textcmn.o \
 	$(OBJS)\coredll_textentrycmn.o \
@@ -4104,6 +4118,7 @@ ____CORE_SRC_FILENAMES_2_OBJECTS =  \
 	$(OBJS)\coredll_appprogress.o \
 	$(OBJS)\coredll_taskbarbutton.o \
 	$(OBJS)\coredll_power.o \
+	$(OBJS)\coredll_taskdlg.o \
 	$(OBJS)\coredll_generic_accel.o \
 	$(OBJS)\coredll_clrpickerg.o \
 	$(OBJS)\coredll_collpaneg.o \
@@ -4272,6 +4287,7 @@ ____CORE_SRC_FILENAMES_2_OBJECTS =  \
 	$(OBJS)\coredll_statlinecmn.o \
 	$(OBJS)\coredll_stattextcmn.o \
 	$(OBJS)\coredll_stockitem.o \
+	$(OBJS)\coredll_svggc.o \
 	$(OBJS)\coredll_tbarbase.o \
 	$(OBJS)\coredll_textcmn.o \
 	$(OBJS)\coredll_textentrycmn.o \
@@ -4451,6 +4467,7 @@ ____CORE_SRC_FILENAMES_3_OBJECTS =  \
 	$(OBJS)\corelib_appprogress.o \
 	$(OBJS)\corelib_taskbarbutton.o \
 	$(OBJS)\corelib_power.o \
+	$(OBJS)\corelib_taskdlg.o \
 	$(OBJS)\corelib_clrpickerg.o \
 	$(OBJS)\corelib_collpaneg.o \
 	$(OBJS)\corelib_filepickerg.o \
@@ -4632,6 +4649,7 @@ ____CORE_SRC_FILENAMES_3_OBJECTS =  \
 	$(OBJS)\corelib_statlinecmn.o \
 	$(OBJS)\corelib_stattextcmn.o \
 	$(OBJS)\corelib_stockitem.o \
+	$(OBJS)\corelib_svggc.o \
 	$(OBJS)\corelib_tbarbase.o \
 	$(OBJS)\corelib_textcmn.o \
 	$(OBJS)\corelib_textentrycmn.o \
@@ -4803,6 +4821,7 @@ ____CORE_SRC_FILENAMES_3_OBJECTS =  \
 	$(OBJS)\corelib_appprogress.o \
 	$(OBJS)\corelib_taskbarbutton.o \
 	$(OBJS)\corelib_power.o \
+	$(OBJS)\corelib_taskdlg.o \
 	$(OBJS)\corelib_generic_accel.o \
 	$(OBJS)\corelib_clrpickerg.o \
 	$(OBJS)\corelib_collpaneg.o \
@@ -4971,6 +4990,7 @@ ____CORE_SRC_FILENAMES_3_OBJECTS =  \
 	$(OBJS)\corelib_statlinecmn.o \
 	$(OBJS)\corelib_stattextcmn.o \
 	$(OBJS)\corelib_stockitem.o \
+	$(OBJS)\corelib_svggc.o \
 	$(OBJS)\corelib_tbarbase.o \
 	$(OBJS)\corelib_textcmn.o \
 	$(OBJS)\corelib_textentrycmn.o \
@@ -6282,7 +6302,7 @@ $(SETUPHDIR)\wx\msw\rcdefs.h: $(SETUPHDIR)\wx\msw ..\..\include\wx\msw\genrcdefs
 build_cfg_file: $(SETUPHDIR)
 	@echo WXVER_MAJOR=3 >$(BUILD_CFG_FILE)
 	@echo WXVER_MINOR=3 >>$(BUILD_CFG_FILE)
-	@echo WXVER_RELEASE=2 >>$(BUILD_CFG_FILE)
+	@echo WXVER_RELEASE=3 >>$(BUILD_CFG_FILE)
 	@echo BUILD=$(BUILD) >>$(BUILD_CFG_FILE)
 	@echo MONOLITHIC=$(MONOLITHIC) >>$(BUILD_CFG_FILE)
 	@echo SHARED=$(SHARED) >>$(BUILD_CFG_FILE)
@@ -8854,6 +8874,9 @@ $(OBJS)\monodll_art_msw.o: ../../src/ribbon/art_msw.cpp
 $(OBJS)\monodll_art_aui.o: ../../src/ribbon/art_aui.cpp
 	$(CXX) -c -o $@ $(MONODLL_CXXFLAGS) $(CPPDEPS) $<
 
+$(OBJS)\monodll_art_msw_flat.o: ../../src/ribbon/art_msw_flat.cpp
+	$(CXX) -c -o $@ $(MONODLL_CXXFLAGS) $(CPPDEPS) $<
+
 $(OBJS)\monodll_bar.o: ../../src/ribbon/bar.cpp
 	$(CXX) -c -o $@ $(MONODLL_CXXFLAGS) $(CPPDEPS) $<
 
@@ -9279,6 +9302,11 @@ endif
 
 ifeq ($(USE_GUI),1)
 $(OBJS)\monodll_power.o: ../../src/msw/power.cpp
+	$(CXX) -c -o $@ $(MONODLL_CXXFLAGS) $(CPPDEPS) $<
+endif
+
+ifeq ($(USE_GUI),1)
+$(OBJS)\monodll_taskdlg.o: ../../src/msw/taskdlg.cpp
 	$(CXX) -c -o $@ $(MONODLL_CXXFLAGS) $(CPPDEPS) $<
 endif
 
@@ -9869,6 +9897,11 @@ endif
 
 ifeq ($(USE_GUI),1)
 $(OBJS)\monodll_stockitem.o: ../../src/common/stockitem.cpp
+	$(CXX) -c -o $@ $(MONODLL_CXXFLAGS) $(CPPDEPS) $<
+endif
+
+ifeq ($(USE_GUI),1)
+$(OBJS)\monodll_svggc.o: ../../src/common/svggc.cpp
 	$(CXX) -c -o $@ $(MONODLL_CXXFLAGS) $(CPPDEPS) $<
 endif
 
@@ -11474,6 +11507,9 @@ $(OBJS)\monolib_art_msw.o: ../../src/ribbon/art_msw.cpp
 $(OBJS)\monolib_art_aui.o: ../../src/ribbon/art_aui.cpp
 	$(CXX) -c -o $@ $(MONOLIB_CXXFLAGS) $(CPPDEPS) $<
 
+$(OBJS)\monolib_art_msw_flat.o: ../../src/ribbon/art_msw_flat.cpp
+	$(CXX) -c -o $@ $(MONOLIB_CXXFLAGS) $(CPPDEPS) $<
+
 $(OBJS)\monolib_bar.o: ../../src/ribbon/bar.cpp
 	$(CXX) -c -o $@ $(MONOLIB_CXXFLAGS) $(CPPDEPS) $<
 
@@ -11899,6 +11935,11 @@ endif
 
 ifeq ($(USE_GUI),1)
 $(OBJS)\monolib_power.o: ../../src/msw/power.cpp
+	$(CXX) -c -o $@ $(MONOLIB_CXXFLAGS) $(CPPDEPS) $<
+endif
+
+ifeq ($(USE_GUI),1)
+$(OBJS)\monolib_taskdlg.o: ../../src/msw/taskdlg.cpp
 	$(CXX) -c -o $@ $(MONOLIB_CXXFLAGS) $(CPPDEPS) $<
 endif
 
@@ -12489,6 +12530,11 @@ endif
 
 ifeq ($(USE_GUI),1)
 $(OBJS)\monolib_stockitem.o: ../../src/common/stockitem.cpp
+	$(CXX) -c -o $@ $(MONOLIB_CXXFLAGS) $(CPPDEPS) $<
+endif
+
+ifeq ($(USE_GUI),1)
+$(OBJS)\monolib_svggc.o: ../../src/common/svggc.cpp
 	$(CXX) -c -o $@ $(MONOLIB_CXXFLAGS) $(CPPDEPS) $<
 endif
 
@@ -14466,6 +14512,11 @@ $(OBJS)\coredll_power.o: ../../src/msw/power.cpp
 endif
 
 ifeq ($(USE_GUI),1)
+$(OBJS)\coredll_taskdlg.o: ../../src/msw/taskdlg.cpp
+	$(CXX) -c -o $@ $(COREDLL_CXXFLAGS) $(CPPDEPS) $<
+endif
+
+ifeq ($(USE_GUI),1)
 $(OBJS)\coredll_clrpickerg.o: ../../src/generic/clrpickerg.cpp
 	$(CXX) -c -o $@ $(COREDLL_CXXFLAGS) $(CPPDEPS) $<
 endif
@@ -15052,6 +15103,11 @@ endif
 
 ifeq ($(USE_GUI),1)
 $(OBJS)\coredll_stockitem.o: ../../src/common/stockitem.cpp
+	$(CXX) -c -o $@ $(COREDLL_CXXFLAGS) $(CPPDEPS) $<
+endif
+
+ifeq ($(USE_GUI),1)
+$(OBJS)\coredll_svggc.o: ../../src/common/svggc.cpp
 	$(CXX) -c -o $@ $(COREDLL_CXXFLAGS) $(CPPDEPS) $<
 endif
 
@@ -16246,6 +16302,11 @@ $(OBJS)\corelib_power.o: ../../src/msw/power.cpp
 endif
 
 ifeq ($(USE_GUI),1)
+$(OBJS)\corelib_taskdlg.o: ../../src/msw/taskdlg.cpp
+	$(CXX) -c -o $@ $(CORELIB_CXXFLAGS) $(CPPDEPS) $<
+endif
+
+ifeq ($(USE_GUI),1)
 $(OBJS)\corelib_clrpickerg.o: ../../src/generic/clrpickerg.cpp
 	$(CXX) -c -o $@ $(CORELIB_CXXFLAGS) $(CPPDEPS) $<
 endif
@@ -16832,6 +16893,11 @@ endif
 
 ifeq ($(USE_GUI),1)
 $(OBJS)\corelib_stockitem.o: ../../src/common/stockitem.cpp
+	$(CXX) -c -o $@ $(CORELIB_CXXFLAGS) $(CPPDEPS) $<
+endif
+
+ifeq ($(USE_GUI),1)
+$(OBJS)\corelib_svggc.o: ../../src/common/svggc.cpp
 	$(CXX) -c -o $@ $(CORELIB_CXXFLAGS) $(CPPDEPS) $<
 endif
 
@@ -18134,6 +18200,9 @@ $(OBJS)\ribbondll_art_msw.o: ../../src/ribbon/art_msw.cpp
 $(OBJS)\ribbondll_art_aui.o: ../../src/ribbon/art_aui.cpp
 	$(CXX) -c -o $@ $(RIBBONDLL_CXXFLAGS) $(CPPDEPS) $<
 
+$(OBJS)\ribbondll_art_msw_flat.o: ../../src/ribbon/art_msw_flat.cpp
+	$(CXX) -c -o $@ $(RIBBONDLL_CXXFLAGS) $(CPPDEPS) $<
+
 $(OBJS)\ribbondll_bar.o: ../../src/ribbon/bar.cpp
 	$(CXX) -c -o $@ $(RIBBONDLL_CXXFLAGS) $(CPPDEPS) $<
 
@@ -18168,6 +18237,9 @@ $(OBJS)\ribbonlib_art_msw.o: ../../src/ribbon/art_msw.cpp
 	$(CXX) -c -o $@ $(RIBBONLIB_CXXFLAGS) $(CPPDEPS) $<
 
 $(OBJS)\ribbonlib_art_aui.o: ../../src/ribbon/art_aui.cpp
+	$(CXX) -c -o $@ $(RIBBONLIB_CXXFLAGS) $(CPPDEPS) $<
+
+$(OBJS)\ribbonlib_art_msw_flat.o: ../../src/ribbon/art_msw_flat.cpp
 	$(CXX) -c -o $@ $(RIBBONLIB_CXXFLAGS) $(CPPDEPS) $<
 
 $(OBJS)\ribbonlib_bar.o: ../../src/ribbon/bar.cpp

@@ -148,6 +148,8 @@ wxBEGIN_EVENT_TABLE(wxRibbonPage, wxRibbonControl)
     EVT_ERASE_BACKGROUND(wxRibbonPage::OnEraseBackground)
     EVT_PAINT(wxRibbonPage::OnPaint)
     EVT_SIZE(wxRibbonPage::OnSize)
+    EVT_DPI_CHANGED(wxRibbonPage::OnDPIChanged)
+    EVT_SYS_COLOUR_CHANGED(wxRibbonPage::OnSysColourChanged)
 wxEND_EVENT_TABLE()
 
 wxRibbonPage::wxRibbonPage()
@@ -161,7 +163,7 @@ wxRibbonPage::wxRibbonPage()
 wxRibbonPage::wxRibbonPage(wxRibbonBar* parent,
                    wxWindowID id,
                    const wxString& label,
-                   const wxBitmap& icon,
+                   const wxBitmapBundle& icon,
                    long WXUNUSED(style))
     : wxRibbonControl(parent, id, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE)
 {
@@ -178,7 +180,7 @@ wxRibbonPage::~wxRibbonPage()
 bool wxRibbonPage::Create(wxRibbonBar* parent,
                 wxWindowID id,
                 const wxString& label,
-                const wxBitmap& icon,
+                const wxBitmapBundle& icon,
                 long WXUNUSED(style))
 {
     if(!wxRibbonControl::Create(parent, id, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE))
@@ -189,7 +191,7 @@ bool wxRibbonPage::Create(wxRibbonBar* parent,
     return true;
 }
 
-void wxRibbonPage::CommonInit(const wxString& label, const wxBitmap& icon)
+void wxRibbonPage::CommonInit(const wxString& label, const wxBitmapBundle& icon)
 {
     SetName(label);
 
@@ -561,6 +563,18 @@ void wxRibbonPage::OnSize(wxSizeEvent& evt)
     }
 
     evt.Skip();
+}
+
+void wxRibbonPage::OnDPIChanged(wxDPIChangedEvent& event)
+{
+    Realize();
+    event.Skip();
+}
+
+void wxRibbonPage::OnSysColourChanged(wxSysColourChangedEvent& event)
+{
+    event.Skip();
+    m_art->UpdateColoursFromSystem();
 }
 
 void wxRibbonPage::RemoveChild(wxWindowBase *child)

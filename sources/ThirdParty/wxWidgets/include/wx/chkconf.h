@@ -1337,6 +1337,15 @@
 #            define wxUSE_PROTOCOL 1
 #        endif
 #   endif
+
+#   if !wxUSE_SOCKETS
+#       ifdef wxABORT_ON_CONFIG_ERROR
+#           error "wxUSE_URL requires wxUSE_SOCKETS"
+#        else
+#           undef wxUSE_SOCKETS
+#           define wxUSE_SOCKETS 1
+#       endif
+#   endif
 #endif /* wxUSE_URL */
 
 #if wxUSE_PROTOCOL
@@ -1710,24 +1719,6 @@
 #   undef wxUSE_ACTIVITYINDICATOR
 #   define wxUSE_ACTIVITYINDICATOR 0
 #endif /* wxUSE_ACTIVITYINDICATOR */
-
-#if wxUSE_GRAPHICS_CONTEXT && !wxUSE_GEOMETRY
-#   ifdef wxABORT_ON_CONFIG_ERROR
-#       error "wxUSE_GRAPHICS_CONTEXT requires wxUSE_GEOMETRY"
-#   else
-#       undef wxUSE_GRAPHICS_CONTEXT
-#       define wxUSE_GRAPHICS_CONTEXT 0
-#   endif
-#endif /* wxUSE_GRAPHICS_CONTEXT */
-
-#if wxUSE_DC_TRANSFORM_MATRIX && !wxUSE_GEOMETRY
-#   ifdef wxABORT_ON_CONFIG_ERROR
-#       error "wxUSE_DC_TRANSFORM_MATRIX requires wxUSE_GEOMETRY"
-#   else
-#       undef wxUSE_DC_TRANSFORM_MATRIX
-#       define wxUSE_DC_TRANSFORM_MATRIX 0
-#   endif
-#endif /* wxUSE_DC_TRANSFORM_MATRIX */
 
 /* generic controls dependencies */
 #if !defined(__WXMSW__) || defined(__WXUNIVERSAL__)
@@ -2318,7 +2309,7 @@
 #endif /* wxUSE_PREFERENCES_EDITOR */
 
 #if wxUSE_PRIVATE_FONTS
-#   if !defined(__WXMSW__) && !defined(__WXGTK__) && !defined(__WXOSX__)
+#   if !defined(__WXMSW__) && !defined(__WXGTK__) && !defined(__WXQT__) && !defined(__WXOSX__)
 #       undef wxUSE_PRIVATE_FONTS
 #       define wxUSE_PRIVATE_FONTS 0
 #   endif

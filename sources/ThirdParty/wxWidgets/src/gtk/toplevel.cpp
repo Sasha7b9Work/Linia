@@ -402,6 +402,12 @@ void wxTopLevelWindowGTK::GTKHandleRealized()
 
     wxNonOwnedWindow::GTKHandleRealized();
 
+    if (!GTK_IS_WINDOW(m_widget))
+    {
+        // This is some kind of not-a-TLW
+        return;
+    }
+
     GdkWindow* window = gtk_widget_get_window(m_widget);
 
 #if GTK_CHECK_VERSION(3,10,0)
@@ -899,14 +905,6 @@ bool wxTopLevelWindowGTK::Create( wxWindow *parent,
 
         if ( style & wxCAPTION )
             m_gdkDecor |= GDK_DECOR_TITLE;
-#if GTK_CHECK_VERSION(3,10,0)
-        else if (
-            wxGTKImpl::IsWayland(display) &&
-            gtk_check_version(3,10,0) == nullptr)
-        {
-            gtk_window_set_titlebar(GTK_WINDOW(m_widget), gtk_header_bar_new());
-        }
-#endif
 
         if ( style & wxSYSTEM_MENU )
             m_gdkDecor |= GDK_DECOR_MENU;
@@ -923,6 +921,14 @@ bool wxTopLevelWindowGTK::Create( wxWindow *parent,
            m_gdkDecor |= GDK_DECOR_RESIZEH;
         }
     }
+#if GTK_CHECK_VERSION(3,10,0)
+    if ((m_gdkDecor & GDK_DECOR_TITLE) == 0 &&
+        wxGTKImpl::IsWayland(display) &&
+        wx_is_at_least_gtk3(10))
+    {
+        gtk_window_set_titlebar(GTK_WINDOW(m_widget), gtk_header_bar_new());
+    }
+#endif
 
     m_decorSize = GetCachedDecorSize();
 
@@ -1437,6 +1443,8 @@ void wxTopLevelWindowGTK::DoSetClientSize(int width, int height)
 
     if (m_wxwindow)
     {
+        DoGetClientSize(&width, &height);
+
         // If window is not resizable or not yet shown, set size request on
         // client widget, to make it more likely window will get correct size
         // even if our decorations size cache is incorrect (as it will be before
@@ -1444,11 +1452,11 @@ void wxTopLevelWindowGTK::DoSetClientSize(int width, int height)
         if (!gtk_window_get_resizable(GTK_WINDOW(m_widget)))
         {
             gtk_widget_set_size_request(m_widget, -1, -1);
-            gtk_widget_set_size_request(m_wxwindow, m_clientWidth, m_clientHeight);
+            gtk_widget_set_size_request(m_wxwindow, width, height);
         }
         else if (!IsShown())
         {
-            gtk_widget_set_size_request(m_wxwindow, m_clientWidth, m_clientHeight);
+            gtk_widget_set_size_request(m_wxwindow, width, height);
             // Cancel size request at next idle to allow resizing
             g_idle_add_full(G_PRIORITY_LOW - 1, reset_size_request, m_wxwindow, nullptr);
             g_object_ref(m_wxwindow);

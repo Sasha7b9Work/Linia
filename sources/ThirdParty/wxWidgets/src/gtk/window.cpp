@@ -2650,9 +2650,9 @@ gtk_window_grab_broken( GtkWidget*,
 // "unrealize"
 //-----------------------------------------------------------------------------
 
-static void unrealize(GtkWidget*, wxWindow* win)
+static void gtk_window_unrealized_callback(GtkWidget*, wxWindow* win)
 {
-    win->GTKHandleUnrealize();
+    win->GTKHandleUnrealized();
 }
 
 #if GTK_CHECK_VERSION(3,8,0)
@@ -2678,9 +2678,14 @@ static void frame_clock_layout_after(GdkFrameClock*, wxWindowGTK* win)
 
             wxWindowGTK* w = static_cast<wxWindowGTK*>(p->data);
             g_object_remove_weak_pointer(G_OBJECT(w->m_widget), &p->data);
-            GtkAllocation a;
-            gtk_widget_get_allocation(w->m_widget, &a);
-            gtk_widget_set_size_request(w->m_widget, a.width, a.height);
+            if (WX_IS_PIZZA(gtk_widget_get_parent(w->m_widget)))
+                gtk_widget_queue_resize(w->m_widget);
+            else
+            {
+                GtkAllocation a;
+                gtk_widget_get_allocation(w->m_widget, &a);
+                gtk_widget_set_size_request(w->m_widget, a.width, a.height);
+            }
         }
         g_slist_free(gs_setSizeRequestList);
         gs_setSizeRequestList = nullptr;
@@ -2758,7 +2763,7 @@ void wxWindowGTK::GTKHandleRealized()
     WXUpdateCursor();
 }
 
-void wxWindowGTK::GTKHandleUnrealize()
+void wxWindowGTK::GTKHandleUnrealized()
 {
     m_isGtkPositionValid = false;
 
@@ -3253,12 +3258,14 @@ void wxWindowGTK::PostCreation()
     {
         GTKHandleRealized();
     }
-    else
-    {
-        g_signal_connect (connect_widget, "realize",
-                          G_CALLBACK (gtk_window_realized_callback), this);
-    }
-    g_signal_connect(connect_widget, "unrealize", G_CALLBACK(unrealize), this);
+
+    // Note that we connect to "realize" even if the widget is already realized
+    // because we might be unrealized later and then realized again, and we
+    // must be notified when the widget is re-realized again.
+    g_signal_connect (connect_widget, "realize",
+                      G_CALLBACK (gtk_window_realized_callback), this);
+    g_signal_connect(connect_widget, "unrealize",
+                      G_CALLBACK(gtk_window_unrealized_callback), this);
 
     if (!IsTopLevel())
     {
@@ -4278,17 +4285,7 @@ void wxWindowGTK::DoMoveWindow(int x, int y, int width, int height)
     {
         pizza = WX_PIZZA(parent);
         pizza->move(m_widget, x, y, width, height);
-        if (
-#ifdef __WXGTK3__
-            !g_inSizeAllocate &&
-#endif
-            gtk_widget_get_visible(m_widget))
-        {
-            // in case only the position is changing
-            gtk_widget_queue_resize(m_widget);
-        }
     }
-
 
 #ifdef __WXGTK3__
     // With GTK3, gtk_widget_queue_resize() is ignored while a size-allocate
@@ -4296,7 +4293,7 @@ void wxWindowGTK::DoMoveWindow(int x, int y, int width, int height)
     // size-allocate can generate wxSizeEvent and size event handlers often
     // call SetSize(), directly or indirectly. It should be fine to call
     // gtk_widget_size_allocate() immediately in this case.
-    if (g_inSizeAllocate && gtk_widget_get_visible(m_widget) && width > 0 && height > 0)
+    if (g_inSizeAllocate)
     {
         // obligatory size request before size allocate to avoid GTK3 warnings
         GtkRequisition req;
@@ -4316,18 +4313,16 @@ void wxWindowGTK::DoMoveWindow(int x, int y, int width, int height)
             // causes GTK's sizing state to become inconsistent
             gs_setSizeRequestList = g_slist_prepend(gs_setSizeRequestList, this);
             g_object_add_weak_pointer(G_OBJECT(m_widget), &gs_setSizeRequestList->data);
+            return;
         }
-        else
 #endif
-        {
-            gtk_widget_set_size_request(m_widget, width, height);
-        }
     }
-    else
 #endif // __WXGTK3__
-    {
+
+    if (pizza)
+        gtk_widget_queue_resize(m_widget);
+    else
         gtk_widget_set_size_request(m_widget, width, height);
-    }
 }
 
 void wxWindowGTK::ConstrainSize()

@@ -734,7 +734,8 @@ public:
         and then re-inserted into another.
 
         Notice that currently you need to explicitly call
-        wxNotebook::RemovePage() before reparenting a notebook page.
+        wxNotebook::RemovePage() before reparenting a notebook page
+        (and most likely you want to call Show() for the window afterwards).
 
         @param newParent
             New parent.
@@ -2005,6 +2006,9 @@ public:
         @param y
             Receives the y position of the window on the screen if non-null.
 
+        @note Starting from wxWidgets 3.3.3, this function correctly returns the
+              upper-left corner of the window in RTL layout for child windows too.
+
         @see GetPosition()
     */
     void GetScreenPosition(int* x, int* y) const;
@@ -2321,9 +2325,11 @@ public:
         @param string
             String whose extent is to be measured.
         @param w
-            Return value for width.
+            Return value for width. May be @NULL if the caller is not
+            interested in it.
         @param h
-            Return value for height.
+            Return value for height. May be @NULL if the caller is not
+            interested in it.
         @param descent
             Return value for descent (optional).
         @param externalLeading

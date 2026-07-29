@@ -32,6 +32,8 @@
 // Disable warning for numNonBlank
 #pragma clang diagnostic ignored "-Wunused-but-set-variable"
 #endif
+#elif defined(__GNUC__) && __GNUC__ >= 16
+#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
 #endif
 
 using namespace Lexilla;

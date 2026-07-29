@@ -428,3 +428,17 @@ TEST_CASE("wxNO_IMPLICIT_WXSTRING_ENCODING", "[string]")
     wxPLURAL(L"sing", L"plur", 3);
     wxGETTEXT_IN_CONTEXT_PLURAL(L"context", L"sing", L"plur", 3);
 }
+
+// Check that wxPropertyGrid macros compile without warnings too.
+#if wxUSE_PROPGRID
+
+// Except that it proposes const attribute to the function declared by the
+// macro which would be a wrong thing to do it general, so suppress it.
+#ifdef GCC_TURN_OFF
+    GCC_TURN_OFF(suggest-attribute=const)
+#endif
+
+WX_PG_DECLARE_VARIANT_DATA(wxArrayDouble)
+WX_PG_IMPLEMENT_VARIANT_DATA_DUMMY_EQ(wxArrayDouble)
+
+#endif // wxUSE_PROPGRID

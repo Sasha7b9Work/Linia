@@ -1152,6 +1152,8 @@ wxGetValuesFromOSRelease(const wxString& filename, wxLinuxDistributionInfo& ret)
     ret.Description = fc.Read(wxS("PRETTY_NAME"), wxEmptyString);
     ret.Release = fc.Read(wxS("VERSION_ID"), wxEmptyString);
     ret.CodeName = fc.Read(wxS("VERSION_CODENAME"), wxEmptyString);
+    ret.ParentName = fc.Read(wxS("ID_LIKE"), wxEmptyString);
+    ret.ParentCodeName = fc.Read(wxS("UBUNTU_CODENAME"), wxEmptyString);
 
     return true;
 #else
@@ -1253,11 +1255,103 @@ wxOperatingSystemId wxGetOsVersion(int *verMaj, int *verMin, int *verMicro)
     return wxPlatformInfo::GetOperatingSystemId(kernel);
 }
 
+static bool
+wxGetDescFromOSRelease(wxString* distName, wxString* version,
+                       wxString* parentName, wxString* parentCodeName)
+{
+#if wxUSE_CONFIG
+    // Read /etc/os-release and fall back to /usr/lib/os-release per below
+    // https://www.freedesktop.org/software/systemd/man/os-release.html
+    static const char* const osReleasePaths[] =
+    {
+        "/etc/os-release",
+        "/usr/lib/os-release"
+    };
+
+    for ( const auto& fileName : osReleasePaths )
+    {
+        if ( wxFileName::Exists(fileName) )
+        {
+            // No app, no vendor, no global file path, just the local config
+            // file to read the values from.
+            wxFileConfig fc({}, {}, {}, fileName);
+
+            // Default value suggested by the spec
+            *distName = fc.Read("NAME", "Linux");
+
+            *version = fc.Read("VERSION");
+
+            *parentName = fc.Read("ID_LIKE");
+            *parentCodeName = fc.Read("UBUNTU_CODENAME");
+
+            return true;
+        }
+    }
+#endif // wxUSE_CONFIG
+
+    return false;
+}
+
 wxString wxGetOsDescription()
 {
 #ifdef __VMS
     return wxGetCommandOutput(wxT("uname -s -v -m"));
 #else
+    wxString distName, version, parentName, parentCodeName;
+    if ( wxGetDescFromOSRelease(&distName, &version, &parentName, &parentCodeName) )
+    {
+        wxString osDesc = distName;
+        if ( !version.empty() )
+        {
+            osDesc += " " + version;
+        }
+        if ( !parentName.empty() )
+        {
+            if ( !parentCodeName.empty() )
+            {
+                /* TRANSLATORS: first %s is a Linux distribution parent name, second %s is its codename. */
+                osDesc += wxString::Format(_(", based on %s (%s)"), parentName, parentCodeName);
+            }
+            else
+            {
+                /* TRANSLATORS: %s is a Linux distribution parent name. */
+                osDesc += wxString::Format(_(", based on %s"), parentName);
+            }
+        }
+        else if ( !parentCodeName.empty() )
+        {
+            /* TRANSLATORS: %s is an upstream codename. */
+            osDesc += wxString::Format(_(", based on %s"), parentCodeName);
+        }
+        osDesc += ",";
+
+        const wxString unameSystem = wxGetCommandOutput(wxT("uname -s"));
+        const wxString unameRelease = wxGetCommandOutput(wxT("uname -r"));
+        const wxString unameMachine = wxGetCommandOutput(wxT("uname -m"));
+
+        // If any of the strings above is already present in the info
+        // read from os-release, avoid repeating the values to keep
+        // the description relatively short. Also do not repeat
+        // e.g. the machine type if it is already part of the kernel
+        // version number.
+
+        if ( osDesc.Find(unameSystem) == wxNOT_FOUND )
+        {
+            osDesc += " " + unameSystem;
+        }
+        if ( osDesc.Find(unameRelease) == wxNOT_FOUND )
+        {
+            osDesc += " " + unameRelease;
+        }
+        if ( osDesc.Find(unameMachine) == wxNOT_FOUND )
+        {
+            osDesc += " " + unameMachine;
+        }
+
+        osDesc.Trim(false);
+        return osDesc;
+    }
+
     return wxGetCommandOutput(wxT("uname -s -r -m"));
 #endif
 }

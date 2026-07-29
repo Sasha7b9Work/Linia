@@ -409,17 +409,6 @@ void wxPropertyGrid::Init1()
 
     m_doubleBuffer = nullptr;
 
-#ifndef wxPG_ICON_WIDTH
-    m_iconWidth = FromDIP(11);
-    m_iconHeight = FromDIP(11);
-#else
-    m_iconWidth = FromDIP(wxPG_ICON_WIDTH);
-    m_iconHeight = FromDIP(wxPG_ICON_WIDTH);
-#endif
-
-    m_gutterWidth = wxMax(0, (FromDIP(16) - m_iconWidth) / 2);
-    m_subgroup_extramargin = m_iconWidth + m_gutterWidth;
-
     m_lineHeight = 0;
 
     m_width = m_height = 0;
@@ -476,7 +465,13 @@ void wxPropertyGrid::Init2()
 
     m_iconWidth = s_expandbmp.GetWidth();
     m_iconHeight = s_expandbmp.GetHeight();
+#else
+    m_iconWidth = FromDIP(wxPG_ICON_WIDTH);
+    m_iconHeight = FromDIP(wxPG_ICON_WIDTH);
 #endif
+
+    m_gutterWidth = wxMax(0, (FromDIP(16) - m_iconWidth) / 2);
+    m_subgroup_extramargin = m_iconWidth + m_gutterWidth;
 
     m_curcursor = wxCURSOR_ARROW;
     m_cursorSizeWE = wxCursor(wxCURSOR_SIZEWE);
@@ -523,6 +518,8 @@ void wxPropertyGrid::Init2()
 
 wxPropertyGrid::~wxPropertyGrid()
 {
+    SendDestroyEvent();
+
 #if wxUSE_THREADS
     wxCriticalSectionLocker lock(wxPGGlobalVars->m_critSect);
 #endif
@@ -1359,17 +1356,27 @@ void wxPropertyGrid::CalculateFontAndBitmapStuff( int vspacing )
 
 // -----------------------------------------------------------------------
 
-void wxPropertyGrid::OnSysColourChanged( wxSysColourChangedEvent &WXUNUSED(event) )
+void wxPropertyGrid::OnSysColourChanged(wxSysColourChangedEvent& event)
 {
     if ((m_iFlags & wxPG_FL_INITIALIZED)!=0) {
         RegainColours();
         Refresh();
     }
+    event.Skip();
 }
 
 void wxPropertyGrid::OnDPIChanged(wxDPIChangedEvent &event)
 {
     CalculateFontAndBitmapStuff(m_vspacing);
+
+    if ( !HasExtraStyle(wxPG_EX_NATIVE_DOUBLE_BUFFERING) )
+    {
+        // Recreate the back buffer with correct DPI.
+        delete m_doubleBuffer;
+        m_doubleBuffer = nullptr;
+        ReallocDoubleBufferIfNeeded();
+    }
+
     Refresh();
 
     if ( wxPGProperty* const selected = GetSelection() )
@@ -4564,6 +4571,38 @@ void wxPropertyGrid::RecalculateVirtualSize( int forceXPos )
 
 // -----------------------------------------------------------------------
 
+void wxPropertyGrid::ReallocDoubleBufferIfNeeded()
+{
+    if ( !HasExtraStyle(wxPG_EX_NATIVE_DOUBLE_BUFFERING) )
+    {
+        double scaleFactor = GetDPIScaleFactor();
+        int dblh = (m_lineHeight*2);
+        if ( !m_doubleBuffer )
+        {
+            // Create double buffer bitmap to draw on, if none
+            int w = wxMax(m_width, FromDIP(250));
+            int h = wxMax(m_height + dblh, FromDIP(400));
+            m_doubleBuffer = new wxBitmap;
+            m_doubleBuffer->CreateWithLogicalSize( w, h, scaleFactor );
+        }
+        else
+        {
+            int w = m_doubleBuffer->GetLogicalWidth();
+            int h = m_doubleBuffer->GetLogicalHeight();
+
+            // Double buffer must be large enough
+            if ( w < m_width || h < (m_height+dblh) )
+            {
+                if ( w < m_width ) w = m_width;
+                if ( h < (m_height+dblh) ) h = m_height + dblh;
+                delete m_doubleBuffer;
+                m_doubleBuffer = new wxBitmap;
+                m_doubleBuffer->CreateWithLogicalSize( w, h, scaleFactor );
+            }
+        }
+    }
+}
+
 void wxPropertyGrid::OnResize( wxSizeEvent& event )
 {
     if ( !(m_iFlags & wxPG_FL_INITIALIZED) )
@@ -4575,34 +4614,7 @@ void wxPropertyGrid::OnResize( wxSizeEvent& event )
     m_width = width;
     m_height = height;
 
-    if ( !HasExtraStyle(wxPG_EX_NATIVE_DOUBLE_BUFFERING) )
-    {
-        double scaleFactor = GetDPIScaleFactor();
-        int dblh = (m_lineHeight*2);
-        if ( !m_doubleBuffer )
-        {
-            // Create double buffer bitmap to draw on, if none
-            int w = wxMax(width, FromDIP(250));
-            int h = wxMax(height + dblh, FromDIP(400));
-            m_doubleBuffer = new wxBitmap;
-            m_doubleBuffer->CreateWithLogicalSize( w, h, scaleFactor );
-        }
-        else
-        {
-            int w = m_doubleBuffer->GetLogicalWidth();
-            int h = m_doubleBuffer->GetLogicalHeight();
-
-            // Double buffer must be large enough
-            if ( w < width || h < (height+dblh) )
-            {
-                if ( w < width ) w = width;
-                if ( h < (height+dblh) ) h = height + dblh;
-                delete m_doubleBuffer;
-                m_doubleBuffer = new wxBitmap;
-                m_doubleBuffer->CreateWithLogicalSize( w, h, scaleFactor );
-            }
-        }
-    }
+    ReallocDoubleBufferIfNeeded();
 
     m_pState->OnClientWidthChange( width, event.GetSize().x - m_ncWidth, true );
     m_ncWidth = event.GetSize().x;

@@ -161,8 +161,10 @@ public:
 
     void HideIfExpanded();
 
-    // Return the image list containing images of the given size, creating it
-    // if necessary.
+    // Deprecated: wxRibbonButtonBar now uses wxBitmapBundle directly for
+    // DPI-aware bitmap management. This method is maintained for backward
+    // compatibility but is no longer used by wxRibbonButtonBar.
+    wxDEPRECATED_MSG("wxRibbonButtonBar now uses wxBitmapBundle for DPI support")
     wxImageList* GetButtonImageList(wxSize size, int initialCount = 1);
 
 protected:
@@ -185,6 +187,8 @@ protected:
     void OnEraseBackground(wxEraseEvent& evt);
     void DoEraseBackground(wxDC& dc);
     void OnSize(wxSizeEvent& evt);
+    void OnDPIChanged(wxDPIChangedEvent& evt);
+    void OnSysColourChanged(wxSysColourChangedEvent& evt);
     void OnMouseLeftDown(wxMouseEvent& evt);
     void OnMouseLeftUp(wxMouseEvent& evt);
     void OnMouseMiddleDown(wxMouseEvent& evt);
@@ -202,24 +206,24 @@ protected:
     wxRect m_tab_scroll_right_button_rect;
     wxRect m_toggle_button_rect;
     wxRect m_help_button_rect;
-    long m_flags;
-    int m_tabs_total_width_ideal;
-    int m_tabs_total_width_minimum;
-    int m_tab_margin_left;
-    int m_tab_margin_right;
-    int m_tab_height;
-    int m_tab_scroll_amount;
-    int m_current_page;
-    int m_current_hovered_page;
-    int m_tab_scroll_left_button_state;
-    int m_tab_scroll_right_button_state;
-    bool m_tab_scroll_buttons_shown;
-    bool m_arePanelsShown;
-    bool m_bar_hovered;
-    bool m_toggle_button_hovered;
-    bool m_help_button_hovered;
+    long m_flags = 0;
+    int m_tabs_total_width_ideal = 0;
+    int m_tabs_total_width_minimum = 0;
+    int m_tab_margin_left = 0;
+    int m_tab_margin_right = 0;
+    int m_tab_height = 0;
+    int m_tab_scroll_amount = 0;
+    int m_current_page = wxNOT_FOUND;
+    int m_current_hovered_page = wxNOT_FOUND;
+    int m_tab_scroll_left_button_state = 0;
+    int m_tab_scroll_right_button_state = 0;
+    bool m_tab_scroll_buttons_shown = false;
+    bool m_arePanelsShown = true;
+    bool m_bar_hovered = false;
+    bool m_toggle_button_hovered = false;
+    bool m_help_button_hovered = false;
 
-    wxRibbonDisplayMode m_ribbon_state;
+    wxRibbonDisplayMode m_ribbon_state = wxRIBBON_BAR_PINNED;
 
     wxVector<wxImageList*> m_image_lists;
 

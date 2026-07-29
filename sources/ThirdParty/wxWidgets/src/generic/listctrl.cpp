@@ -460,7 +460,7 @@ void wxListLineData::CalculateSize( wxReadOnlyDC *dc, int spacing )
             if (item->HasImage())
             {
                 int w, h;
-                m_owner->GetImageSize( item->GetImage(), w, h );
+                m_owner->GetImageSize( w, h );
                 m_gi->m_rectIcon.width = w + 8;
                 m_gi->m_rectIcon.height = h + 8;
 
@@ -498,7 +498,7 @@ void wxListLineData::CalculateSize( wxReadOnlyDC *dc, int spacing )
             if (item->HasImage())
             {
                 int w, h;
-                m_owner->GetImageSize( item->GetImage(), w, h );
+                m_owner->GetImageSize( w, h );
                 m_gi->m_rectIcon.width = w;
                 m_gi->m_rectIcon.height = h;
 
@@ -708,11 +708,14 @@ void wxListLineData::ApplyAttributes(wxDC *dc,
 #endif
 }
 
-void wxListLineData::Draw(wxDC *dc, bool current)
+void wxListLineData::Draw(wxDC *dc, const wxPoint& origin, bool current)
 {
     wxCHECK_RET( !m_items.empty(), wxT("no subitems at all??") );
 
-    ApplyAttributes(dc, m_gi->m_rectHighlight, IsHighlighted(), current);
+    wxRect rect(m_gi->m_rectHighlight);
+    rect.Offset(origin);
+
+    ApplyAttributes(dc, rect, IsHighlighted(), current);
 
     wxListItemData* const item = &m_items[0];
     if (item->HasImage())
@@ -720,13 +723,14 @@ void wxListLineData::Draw(wxDC *dc, bool current)
         // centre the image inside our rectangle, this looks nicer when items
         // ae aligned in a row
         const wxRect& rectIcon = m_gi->m_rectIcon;
-
-        m_owner->DrawImage(item->GetImage(), dc, rectIcon.x, rectIcon.y);
+        m_owner->DrawImage(
+            item->GetImage(), dc, rectIcon.x + origin.x, rectIcon.y + origin.y);
     }
 
     if (item->HasText())
     {
-        const wxRect& rectLabel = m_gi->m_rectLabel;
+        wxRect rectLabel = m_gi->m_rectLabel;
+        rectLabel.Offset(origin);
 
         wxDCClipper clipper(*dc, rectLabel);
         dc->DrawText(item->GetText(), rectLabel.x, rectLabel.y);
@@ -735,7 +739,6 @@ void wxListLineData::Draw(wxDC *dc, bool current)
 
 void wxListLineData::DrawInReportMode( wxDC *dc,
                                        const wxRect& rect,
-                                       const wxRect& rectHL,
                                        bool highlighted,
                                        bool current,
                                        bool checked )
@@ -746,7 +749,7 @@ void wxListLineData::DrawInReportMode( wxDC *dc,
 
     // Note: GetSubItemRect() needs to be modified if the layout here changes.
 
-    ApplyAttributes(dc, rectHL, highlighted, current);
+    ApplyAttributes(dc, rect, highlighted, current);
 
     wxCoord x = rect.x;
     wxCoord yMid = rect.y + rect.height/2;
@@ -784,7 +787,7 @@ void wxListLineData::DrawInReportMode( wxDC *dc,
         if ( item.HasImage() )
         {
             int ix, iy;
-            m_owner->GetImageSize( item.GetImage(), ix, iy );
+            m_owner->GetImageSize( ix, iy );
             m_owner->DrawImage( item.GetImage(), dc, xOld, yMid - iy/2 );
 
             ix += IMAGE_MARGIN_IN_REPORT_MODE;
@@ -1082,7 +1085,7 @@ void wxListHeaderWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
             smallImages = m_owner->GetSmallImages();
             if ( smallImages )
             {
-                smallImages->GetImageLogicalSize(this, image, ix, iy);
+                smallImages->GetImageLogicalSize(this, ix, iy);
                 wLabel += ix + HEADER_IMAGE_MARGIN_IN_REPORT_MODE;
             }
         }
@@ -1702,7 +1705,7 @@ wxCoord wxListMainWindow::GetLineHeight() const
         if ( m_small_images && m_small_images->GetImageCount() )
         {
             int iw = 0, ih = 0;
-            m_small_images->GetImageLogicalSize(this, 0, iw, ih);
+            m_small_images->GetImageLogicalSize(this, iw, ih);
             y = wxMax(y, ih);
         }
 
@@ -1747,7 +1750,7 @@ wxRect wxListMainWindow::GetLineLabelRect(size_t line) const
         if ( item->HasImage() )
         {
             int ix, iy;
-            GetImageSize( item->GetImage(), ix, iy );
+            GetImageSize( ix, iy );
             image_x = 3 + ix + IMAGE_MARGIN_IN_REPORT_MODE;
         }
     }
@@ -1766,8 +1769,7 @@ wxRect wxListMainWindow::GetLineIconRect(size_t line) const
     if ( !InReportView() )
         return GetLine(line)->m_gi->m_rectIcon;
 
-    wxListLineData *ld = GetLine(line);
-    wxASSERT_MSG( ld->HasImage(), wxT("should have an image") );
+    wxASSERT_MSG( GetLine(line)->HasImage(), wxT("should have an image") );
 
     wxRect rect = GetLineRect(line);
     rect.x += ICON_OFFSET_X;
@@ -1780,7 +1782,7 @@ wxRect wxListMainWindow::GetLineIconRect(size_t line) const
 
     // use full height of the line, same as win32 listctrl
     int ix, iy;
-    GetImageSize(ld->GetImage(), ix, iy);
+    GetImageSize(ix, iy);
     rect.width = ix;
 
     return rect;
@@ -2049,10 +2051,7 @@ void wxListMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
         return;
     }
 
-    GetListCtrl()->PrepareDC( dc );
-
-    int dev_x, dev_y;
-    GetListCtrl()->CalcScrolledPosition( 0, 0, &dev_x, &dev_y );
+    const wxPoint origin(GetListCtrl()->CalcScrolledPosition(wxPoint(0, 0)));
 
     if ( InReportView() )
     {
@@ -2076,10 +2075,6 @@ void wxListMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
             visibleEnd = visibleTo;
         }
 
-        wxRect rectLine;
-        int xOrig = dc.LogicalToDeviceX( 0 );
-        int yOrig = dc.LogicalToDeviceY( 0 );
-
         // tell the caller cache to cache the data
         if ( IsVirtual() )
         {
@@ -2092,13 +2087,14 @@ void wxListMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
             GetParent()->GetEventHandler()->ProcessEvent( evCache );
         }
 
-        for ( size_t line = visibleFrom; line <= visibleEnd; line++ )
+        wxRect rectLine(GetLineRect(visibleFrom));
+        rectLine.Offset(origin);
+
+        for (size_t line = visibleFrom;
+            line <= visibleEnd;
+            line++, rectLine.y += rectLine.height)
         {
-            rectLine = GetLineRect(line);
-
-
-            if ( !IsExposed(rectLine.x + xOrig, rectLine.y + yOrig,
-                            rectLine.width, rectLine.height) )
+            if ( !IsExposed(rectLine) )
             {
                 // don't redraw unaffected lines to avoid flicker
                 continue;
@@ -2121,7 +2117,6 @@ void wxListMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
 
             GetLine(line)->DrawInReportMode( &dc,
                                              rectLine,
-                                             GetLineHighlightRect(line),
                                              IsHighlighted(line),
                                              line == m_current,
                                              IsItemChecked(line) );
@@ -2134,12 +2129,13 @@ void wxListMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
 
             size_t i = visibleFrom;
             if (i == 0) i = 1; // Don't draw the first one
-            for ( ; i <= visibleEnd; i++ )
+
+            int y = (i - visibleFrom) * lineHeight;
+            for ( ; i <= visibleEnd; i++, y += lineHeight )
             {
                 dc.SetPen(pen);
                 dc.SetBrush( *wxTRANSPARENT_BRUSH );
-                dc.DrawLine(0 - dev_x, i * lineHeight,
-                            clientSize.x - dev_x, i * lineHeight);
+                dc.DrawLine(0, y, clientSize.x, y);
             }
 
             // Draw last horizontal rule
@@ -2147,8 +2143,7 @@ void wxListMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
             {
                 dc.SetPen( pen );
                 dc.SetBrush( *wxTRANSPARENT_BRUSH );
-                dc.DrawLine(0 - dev_x, (m_lineTo + 1) * lineHeight,
-                            clientSize.x - dev_x , (m_lineTo + 1) * lineHeight );
+                dc.DrawLine(0, y, clientSize.x, y);
             }
         }
 
@@ -2161,7 +2156,7 @@ void wxListMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
 
             GetItemRect(visibleFrom, firstItemRect);
             GetItemRect(visibleTo, lastItemRect);
-            int x = firstItemRect.GetX();
+            int x = rectLine.x;
             dc.SetPen(pen);
             dc.SetBrush(* wxTRANSPARENT_BRUSH);
 
@@ -2172,15 +2167,14 @@ void wxListMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
             {
                 int colWidth = GetColumnWidth(col);
                 x += colWidth;
-                int x_pos = x - dev_x;
+                int x_pos = x;
                 if (col < GetColumnCount()-1) x_pos -= 2;
 
                 int ruleHeight = m_extendRulesAndAlternateColour && visibleEnd > visibleTo
                                     ? clientHeight
-                                    : lastItemRect.GetBottom() + 1 - dev_y;
+                                    : lastItemRect.GetBottom() + 1;
 
-                dc.DrawLine(x_pos, firstItemRect.GetY() - 1 - dev_y,
-                            x_pos, ruleHeight);
+                dc.DrawLine(x_pos, firstItemRect.GetY() - 1, x_pos, ruleHeight);
             }
         }
     }
@@ -2189,7 +2183,7 @@ void wxListMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
         size_t count = GetItemCount();
         for ( size_t i = 0; i < count; i++ )
         {
-            GetLine(i)->Draw( &dc, i == m_current );
+            GetLine(i)->Draw( &dc, origin, i == m_current );
         }
     }
 
@@ -2203,8 +2197,10 @@ void wxListMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
         if ( IsHighlighted(m_current) )
             flags |= wxCONTROL_SELECTED;
 
-        wxRendererNative::Get().
-            DrawFocusRect(this, dc, GetLineHighlightRect(m_current), flags);
+        wxRect rect(GetLineHighlightRect(m_current));
+        rect.Offset(origin);
+
+        wxRendererNative::Get().DrawFocusRect(this, dc, rect, flags);
     }
 #endif // !__WXMAC__
 }
@@ -3318,15 +3314,15 @@ void wxListMainWindow::DrawImage( int index, wxDC *dc, int x, int y )
     }
 }
 
-void wxListMainWindow::GetImageSize( int index, int &width, int &height ) const
+void wxListMainWindow::GetImageSize( int &width, int &height ) const
 {
     if ( HasFlag(wxLC_ICON) && m_normal_images )
     {
-        m_normal_images->GetImageLogicalSize(this, index, width, height);
+        m_normal_images->GetImageLogicalSize(this, width, height);
     }
     else if ( HasFlag(wxLC_SMALL_ICON | wxLC_LIST | wxLC_REPORT) && m_small_images )
     {
-        m_small_images->GetImageLogicalSize(this, index, width, height);
+        m_small_images->GetImageLogicalSize(this, width, height);
     }
     else
     {
@@ -3346,7 +3342,7 @@ void wxListMainWindow::SetImages( wxWithImages *images, const int which )
     if ((images) && (images->HasImages()) )
     {
         int height;
-        images->GetImageLogicalSize(this, 0, width, height);
+        images->GetImageLogicalSize(this, width, height);
     }
 
     if (which == wxIMAGE_LIST_NORMAL)
@@ -3397,7 +3393,7 @@ wxListMainWindow::ComputeMinHeaderWidth(const wxListHeaderData* column) const
         if ( m_small_images )
         {
             int ix = 0, iy = 0;
-            m_small_images->GetImageLogicalSize(this, image, ix, iy);
+            m_small_images->GetImageLogicalSize(this, ix, iy);
             width += ix + HEADER_IMAGE_MARGIN_IN_REPORT_MODE;
         }
     }
@@ -3905,7 +3901,7 @@ wxListMainWindow::GetSubItemRect(long item, long subItem, wxRect& rect,
                     if ( subItem == 0 && line->HasImage() )
                     {
                         int ix, iy;
-                        GetImageSize(line->GetImage(), ix, iy);
+                        GetImageSize(ix, iy);
 
                         if ( code == wxLIST_RECT_ICON )
                         {
@@ -4624,7 +4620,7 @@ void wxListMainWindow::InsertItem( wxListItem &item )
         if ( m_small_images && image != -1 && InReportView() )
         {
             int imageWidth, imageHeight;
-            m_small_images->GetImageLogicalSize(this, image, imageWidth, imageHeight);
+            m_small_images->GetImageLogicalSize(this, imageWidth, imageHeight);
 
             if ( imageHeight > m_lineHeight )
                 m_lineHeight = 0;
@@ -4700,7 +4696,7 @@ int wxListMainWindow::GetItemWidthWithImage(wxListItem * item)
     if (item->GetImage() != -1)
     {
         int ix, iy;
-        GetImageSize( item->GetImage(), ix, iy );
+        GetImageSize( ix, iy );
         width += ix + IMAGE_MARGIN_IN_REPORT_MODE;
     }
 
