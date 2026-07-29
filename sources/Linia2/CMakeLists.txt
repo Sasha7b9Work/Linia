@@ -1,19 +1,6 @@
 ﻿# 2023/07/04 15:47:47 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 
-if(WIN32)
-    # Указываем путь к vcpkg и включаем манифестный режим
-    set(CMAKE_TOOLCHAIN_FILE "e:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE PATH "")
-    set(VCPKG_TARGET_TRIPLET "x64-windows" CACHE STRING "")
-    set(VCPKG_MANIFEST_MODE ON CACHE BOOL "")
-endif()
-
 project (Linia2)
-
-if(WIN32)
-    set(RapidJSON_DIR "e:/dev/vcpkg/installed/x64-windows/share/rapidjson" CACHE PATH "")
-endif()
-
-find_package(RapidJSON CONFIG REQUIRED)
 
 set(CMAKE_UNITY_BUILD ON)
 
@@ -26,6 +13,7 @@ if(WIN32)
         arm64_plugs
         linux_plugs
         ../ThirdParty/wxWidgets/include
+        ../ThirdParty/rapidjson/include
         ../generated/ThirdParty/lib/vc_x64_lib/mswu
     )
 
@@ -60,6 +48,7 @@ else()
             ./src
             ../generated/wxWidgets/lib/wx/include/gtk3-unicode-static-3.3
             ../ThirdParty/wxWidgets/include
+            ../ThirdParty/rapidjson/include
         )
     else()
         include_directories(
@@ -79,16 +68,6 @@ else()
 endif()
 
 add_definitions(-DOPT_GENERIC)
-
-if(WIN32)
-    set(RapidJSON_DIR "${CMAKE_CURRENT_LIST_DIR}/../../vcpkg_installed/x64-windows/share/rapidjson" CACHE PATH "Path to RapidJSON config")
-else()
-    if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
-        set(RapidJSON_DIR "${CMAKE_CURRENT_LIST_DIR}/../../vcpkg_installed/arm64-linux/share/rapidjson" CACHE PATH "Path to RapidJSON config")
-    else()
-        set(RapidJSON_DIR "${CMAKE_CURRENT_LIST_DIR}/../../vcpkg_installed/x64-linux/share/rapidjson" CACHE PATH "Path to RapidJSON config")
-    endif()
-endif()
 
 file(GLOB RESOURCES                     resources/*.*)
 file(GLOB SRC                           src/*.*)
@@ -174,8 +153,6 @@ source_group(Windows                          FILES ${WINDOWS})
 source_group(Plugs/Arm64                      FILES ${PLUGS_ARM64})
 source_group(Plugs/linux                      FILES ${PLUGS_LINUX})
 
-find_package(RapidJSON CONFIG REQUIRED)
-
 add_executable(${PROJECT_NAME}
     ${RESOURCES}
     ${SRC}
@@ -222,7 +199,6 @@ set_source_files_properties(
 
 if(WIN32)
     target_link_libraries(${PROJECT_NAME} PRIVATE
-        RapidJSON rapidjson
         wxbase33u
         wxmsw33u_core
         wxbase33u_net
@@ -260,7 +236,6 @@ else()
     pkg_check_modules(GSPELL gspell-1)
 
     target_link_libraries(${PROJECT_NAME}
-        RapidJSON rapidjson
         wx_gtk3u_core-3.3
         wx_baseu-3.3
         wx_baseu_net-3.3

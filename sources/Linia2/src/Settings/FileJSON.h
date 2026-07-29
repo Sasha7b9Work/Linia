@@ -5,7 +5,9 @@
 #include <wx/arrstr.h>
 #pragma warning(pop)
 #undef Bool
+#pragma warning(push, 0)
 #include <rapidjson/document.h>
+#pragma warning(pop)
 #include <vector>
 
 

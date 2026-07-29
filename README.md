@@ -51,3 +51,10 @@ sources/Linia2/src/convert_to_utf8.py - преобразование исход�
 
 11. Запустить файл sources/generated/Linia2/Linia2 :
     ./Linia2
+
+
+*** vcpkg ***
+
+** Установка под Linux **
+cd /путь/к/проекту
+vcpkg install --triplet x64-linux
