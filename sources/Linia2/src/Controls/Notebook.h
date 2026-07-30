@@ -35,7 +35,7 @@ public:
 
     wxPanel *GetCenterContainer() const
     {
-        return centerContainer;
+        return container;
     }
 
     int GetCurrentPanelIndex() const;
@@ -45,14 +45,14 @@ public:
 
 private:
 
-    wxBoxSizer *mainSizer = nullptr;        // Вертикальный главный sizer
+    wxBoxSizer *sizer_main = nullptr;       // Вертикальный главный sizer
     wxBoxSizer *sizer_buttons = nullptr;    // Горизонтальный sizer для верхних кнопок
+    wxBoxSizer *sizer_container = nullptr;  // Sizer для центрального контейнера
 
-    wxPanel *centerContainer = nullptr;     // Контейнер для центральной области
-    wxBoxSizer *centerSizer = nullptr;      // Sizer для центрального контейнера
+    wxPanel *container = nullptr;           // Здесь хранится содержимое (PageNotebook)
+    PageNotebook *page = nullptr;           // Текущая PageNotebook
 
     std::vector<ToggleButton *> buttons;    // Кнопки, соотвествующие панелям
-    PageNotebook *currentPanel = nullptr;   // Текущая активная панель
 
     // Добавить кнопку в верхнюю панель
     void AddTopButton(PageNotebook *);

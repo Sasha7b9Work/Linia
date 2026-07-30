@@ -24,7 +24,7 @@ Notebook::Notebook(wxWindow *parent) :
     Panel(parent)
 {
     // Создаём главный вертикальный sizer
-    mainSizer = new wxBoxSizer(wxVERTICAL);
+    sizer_main = new wxBoxSizer(wxVERTICAL);
 
     // === Верхняя область с кнопками ===
     wxPanel *panel_buttons = new wxPanel(this, wxID_ANY);
@@ -34,16 +34,16 @@ Notebook::Notebook(wxWindow *parent) :
     panel_buttons->SetSizer(sizer_buttons);
 
     // === Центральная область (динамическое содержимое) ===
-    centerContainer = new wxPanel(this, wxID_ANY);
-    centerSizer = new wxBoxSizer(wxVERTICAL);
-    centerContainer->SetSizer(centerSizer);
+    container = new wxPanel(this, wxID_ANY);
+    sizer_container = new wxBoxSizer(wxVERTICAL);
+    container->SetSizer(sizer_container);
 
     // Добавляем все области в главный sizer
     // Пропорции: 0 (минимальный размер), 1 (растягивается), 0 (минимальный размер)
-    mainSizer->Add(panel_buttons, 0, wxEXPAND | wxALL);
-    mainSizer->Add(centerContainer, 1, wxEXPAND | wxALL);
+    sizer_main->Add(panel_buttons, 0, wxEXPAND | wxALL);
+    sizer_main->Add(container, 1, wxEXPAND | wxALL);
 
-    SetSizer(mainSizer);
+    SetSizer(sizer_main);
 }
 
 
@@ -75,14 +75,14 @@ void Notebook::OnEventButtonToggle(wxCommandEvent &event)
 void Notebook::SetCurrentPanel(PageNotebook *panel)
 {
     // Скрываем текущую панель
-    if (currentPanel)
+    if (page)
     {
-        currentPanel->Hide();
+        page->Hide();
     }
 
     // Показываем новую панель
-    currentPanel = panel;
-    currentPanel->Show();
+    page = panel;
+    page->Show();
 
     panel->Layout();
     if (panel->GetSizer())
@@ -90,8 +90,8 @@ void Notebook::SetCurrentPanel(PageNotebook *panel)
         panel->GetSizer()->Layout();
     }
     // Обновляем макет
-    centerSizer->Layout();
-    centerContainer->Layout();
+    sizer_container->Layout();
+    container->Layout();
     Layout();
 
     for (auto btn : buttons)
@@ -99,8 +99,8 @@ void Notebook::SetCurrentPanel(PageNotebook *panel)
         btn->SetValue(btn->GetClientData() == panel);
     }
 
-    currentPanel->Refresh();
-    currentPanel->Update();
+    page->Refresh();
+    page->Update();
 }
 
 
@@ -111,13 +111,13 @@ void Notebook::AddPanel(PageNotebook *panel)
     panel->Hide();
 
     // Добавляем в sizer
-    centerSizer->Add(panel, 1, wxEXPAND | wxALL, 0);
+    sizer_container->Add(panel, 1, wxEXPAND | wxALL, 0);
 
     AddTopButton(panel);
 
-    centerSizer->Layout();
+    sizer_container->Layout();
 
-    wxSize newSize = centerContainer->GetSize();
+    wxSize newSize = container->GetSize();
     panel->SetSize(newSize);
 }
 
@@ -135,7 +135,7 @@ void Notebook::AddTopButton(PageNotebook *panel)
 
 int Notebook::GetCurrentPanelIndex() const
 {
-    return GetPanelIndex(currentPanel);
+    return GetPanelIndex(page);
 }
 
 
