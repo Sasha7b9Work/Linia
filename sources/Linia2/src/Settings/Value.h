@@ -116,12 +116,12 @@ private:
 
 struct ValueBool : public Value<bool>
 {
-    ValueBool(const wxString &_key, const bool &_def);
+    ValueBool(const wxString &_key, bool _def);
 };
 
 struct ValueCheckBox : public wxCheckBox
 {
-    ValueCheckBox(wxWindow *parent, const wxString &title, const wxString &_key, const bool &_def);
+    ValueCheckBox(wxWindow *parent, const wxString &title, const wxString &_key, bool _def);
 
     void SetNewValue(bool);
 
@@ -136,13 +136,13 @@ private:
 
 struct ValueInt : public Value<int>
 {
-    ValueInt(const wxString &_key, const int &_def);
+    ValueInt(const wxString &_key, int _def);
 };
 
 
 struct ValueUInt : public Value<uint>
 {
-    ValueUInt(const wxString &_key, const uint &_def);
+    ValueUInt(const wxString &_key, uint _def);
 };
 
 

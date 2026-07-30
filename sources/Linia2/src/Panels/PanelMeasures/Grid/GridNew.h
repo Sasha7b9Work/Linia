@@ -138,7 +138,7 @@ public:
     // Преобразует точку графика в координаты на холсте
     virtual wxPoint ValuesToCoord(double x, double y) const override;
 
-    wxPoint2DDouble CoordToValues(const wxPoint &) const;
+    virtual wxPoint2DDouble CoordToValues(const wxPoint &) const override;
 
     void ResetCenter() override;
 
@@ -148,8 +148,8 @@ public:
     wxPoint2DDouble GetRangeX() const override;
     wxPoint2DDouble GetRangeY() const override;
 
-    wxRect GetRect() const;
-    wxPoint GetMousePosition() const;
+    virtual wxRect GetRect() const override;
+    virtual wxPoint GetMousePosition() const override;
 
     static const int size_cell = 60;       // Столько клетка всегда занимает на экране
 

@@ -5,13 +5,13 @@
 //#include "Panels/PanelMeasures/PanelMeasures.h"
 
 
-ValueBool::ValueBool(const wxString &_key, const bool &_def) : Value<bool>(_key, _def)
+ValueBool::ValueBool(const wxString &_key, bool _def) : Value<bool>(_key, _def)
 {
     SET::AppendValue(this);
 }
 
 
-ValueCheckBox::ValueCheckBox(wxWindow *parent, const wxString &title, const wxString &_key, const bool &_def) :
+ValueCheckBox::ValueCheckBox(wxWindow *parent, const wxString &title, const wxString &_key, bool _def) :
     wxCheckBox(parent, wxID_ANY, title)
 {
     value = new ValueBool(_key, _def);
@@ -39,13 +39,13 @@ void ValueCheckBox::SetValue(bool val)
 }
 
 
-ValueInt::ValueInt(const wxString &_key, const int &_def) : Value<int>(_key, _def)
+ValueInt::ValueInt(const wxString &_key, int _def) : Value<int>(_key, _def)
 {
     SET::AppendValue(this);
 }
 
 
-ValueUInt::ValueUInt(const wxString &_key, const uint &_def) : Value<uint>(_key, _def)
+ValueUInt::ValueUInt(const wxString &_key, uint _def) : Value<uint>(_key, _def)
 {
     SET::AppendValue(this);
 }

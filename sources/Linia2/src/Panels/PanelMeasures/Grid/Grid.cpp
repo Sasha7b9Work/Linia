@@ -594,7 +594,7 @@ void Grid::OnMouseDown()
 }
 
 
-void Grid::OnMouseUp()
+void Grid::OnMouseUp() //-V524
 {
     offset.ResetDelta();
 }
@@ -721,7 +721,7 @@ wxString Grid::Range::FullTitle() const
     }
     else if (max_abs > 1.0)
     {
-        prefix = "";
+        prefix.Clear();
     }
     else if((int64)(max_abs * 1000) > 1)
     {

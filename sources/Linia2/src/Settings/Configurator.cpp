@@ -187,7 +187,7 @@ void Config::WriteUint(const wxString &key, uint value)
 }
 
 
-void Config::Write(const wxString &key, uint &value)
+void Config::Write(const wxString &key, const uint value)
 {
     WriteUint(key, value);
 }
@@ -203,7 +203,7 @@ uint Config::ReadUint(const wxString &key, uint def)
 }
 
 
-uint Config::Read(const wxString &key, uint &def)
+uint Config::Read(const wxString &key, const uint def)
 {
     return ReadUint(key, def);
 }

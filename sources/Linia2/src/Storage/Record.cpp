@@ -9,7 +9,7 @@ void Record::Open()
 }
 
 
-void Record::AppendPoint(const DataPoint &)
+void Record::AppendPoint(const DataPoint &) //-V835
 {
 
 }
