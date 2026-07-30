@@ -5,6 +5,8 @@
 
 bool Library::Read(FileJSON *_file)
 {
+    bool exist_errors = false;
+
     using namespace rapidjson;
 
     file = _file;
@@ -25,15 +27,20 @@ bool Library::Read(FileJSON *_file)
                 }
                 else
                 {
-                    LOG_ERROR("Load library from %s is FAIL!", _file->GetFullPath().c_str());
-
-                    return false;
+                    exist_errors = true;
                 }
             }
         }
     }
 
-    LOG_WRITE("Load library from %s is OK!", _file->GetFullPath().c_str());
+    if (exist_errors)
+    {
+        LOG_ERROR("Errors occurred while parsing the file %s", _file->GetFullPath().c_str());
+    }
+    else
+    {
+        LOG_WRITE("Load library from %s is OK!", _file->GetFullPath().c_str());
+    }
 
     return true;
 }
@@ -47,6 +54,8 @@ bool Library::ParseCategory(LibraryCategory &category, pchar name, const rapidjs
         {
             if (!ParseNameCategory(category, name))
             {
+                LOG_ERROR("Can not parse category %s", name);
+
                 return false;
             }
         }
