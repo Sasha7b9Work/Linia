@@ -3,10 +3,10 @@
 #include "Panels/PanelArchive/PanelArchive.h"
 
 
-PanelArchive *PanelArchive::self = nullptr;
+PanelArchive *ThePanelArchive = nullptr;
 
 
-PanelArchive::PanelArchive(Notebook *board) : PageNotebook(board, L("Архив"))
+PanelArchive::PanelArchive(Notebook *board, PanelArchive *&global) : PageNotebook(board, L("Архив"))
 {
-    self = this;
+    global = this;
 }

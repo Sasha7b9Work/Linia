@@ -7,7 +7,5 @@ class PanelArchive : public PageNotebook
 {
 public:
 
-    PanelArchive(Notebook *);
-
-    static PanelArchive *self;
+    PanelArchive(Notebook *, PanelArchive *&);
 };

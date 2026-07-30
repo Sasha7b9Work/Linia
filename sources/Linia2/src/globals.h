@@ -18,6 +18,7 @@ class PanelMeasures;
 class PanelReports;
 class PanelSettings;
 class PanelTables;
+class PanelArchive;
 
 class PageTests;
 class PanelCategory;
@@ -31,6 +32,7 @@ class PanelRight;
 extern PanelReports  *ThePanelReports;
 extern PanelSettings *ThePanelSettings;
 extern PanelTables   *ThePanelTables;
+extern PanelArchive  *ThePanelArchive;
 
 extern PageTests     *ThePageTests;
 extern PanelCategory *ThePanelCategory;
