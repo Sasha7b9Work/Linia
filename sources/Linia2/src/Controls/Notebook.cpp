@@ -74,22 +74,22 @@ void Notebook::OnEventButtonToggle(wxCommandEvent &event)
 
 void Notebook::SetCurrentPanel(PageNotebook *panel)
 {
-    // Скрываем текущую панель
-    if (page)
+    if (current_page)
     {
-        page->Hide();
+        current_page->Hide();
+        sizer_container->Detach(current_page);
     }
 
-    // Показываем новую панель
-    page = panel;
-    page->Show();
+    current_page = panel;
+    current_page->Show();
 
     panel->Layout();
+
     if (panel->GetSizer())
     {
         panel->GetSizer()->Layout();
     }
-    // Обновляем макет
+
     sizer_container->Layout();
     container->Layout();
     Layout();
@@ -99,18 +99,21 @@ void Notebook::SetCurrentPanel(PageNotebook *panel)
         btn->SetValue(btn->GetClientData() == panel);
     }
 
-    page->Refresh();
-    page->Update();
+    current_page->Refresh();
+    current_page->Update();
 }
 
 
 
 void Notebook::AddPanel(PageNotebook *panel)
 {
-    // Изначально все панели скрыты
     panel->Hide();
 
-    // Добавляем в sizer
+    if (current_page)
+    {
+        sizer_container->Detach(current_page);
+    }
+
     sizer_container->Add(panel, 1, wxEXPAND | wxALL, 0);
 
     AddTopButton(panel);
@@ -135,7 +138,7 @@ void Notebook::AddTopButton(PageNotebook *panel)
 
 int Notebook::GetCurrentPanelIndex() const
 {
-    return GetPanelIndex(page);
+    return GetPanelIndex(current_page);
 }
 
 

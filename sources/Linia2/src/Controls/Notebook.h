@@ -50,7 +50,7 @@ private:
     wxBoxSizer *sizer_container = nullptr;  // Sizer для центрального контейнера
 
     wxPanel *container = nullptr;           // Здесь хранится содержимое (PageNotebook)
-    PageNotebook *page = nullptr;           // Текущая PageNotebook
+    PageNotebook *current_page = nullptr;   // Текущая PageNotebook
 
     std::vector<ToggleButton *> buttons;    // Кнопки, соотвествующие панелям
 
