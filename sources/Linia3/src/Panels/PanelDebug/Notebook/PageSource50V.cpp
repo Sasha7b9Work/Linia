@@ -1,7 +1,7 @@
 ﻿// 2025/10/07 12:29:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/Notebook/PageSource50V.h"
-#include "Panels/PanelDebug/Notebook/Register.h"
+//#include "Panels/PanelDebug/Notebook/Register.h"
 
 
 /*
@@ -17,7 +17,9 @@ PageSource50V::PageSource50V(wxNotebook *parent) :
 {
     self = this;
 
+    /*
     RegAD5443 *regDAC7 = new RegAD5443(this, dacs[DAC::_6_Source_50V], L("Управление с Orange Pi"));
 
     AppendRegister(regDAC7);
+    */
 }

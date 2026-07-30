@@ -3,14 +3,14 @@
 #include "Panels/PanelDebug/PanelRight.h"
 #include "MainWindow.h"
 #include "Utils/SystemDepend.h"
-#include "IPPP/IDevice.h"
+//#include "IPPP/IDevice.h"
 #include "Panels/PanelDebug/Notebook/PageFPGA.h"
 #include "Panels/PanelDebug/Notebook/PageChannelForm.h"
 #include "Controls/TextControl.h"
 #include "Utils/Math.h"
 #include "Utils/Timer.h"
 #pragma warning(push, 0)
-#include <wx/sizer.h>
+    #include <wx/sizer.h>
 #pragma warning(pop)
 
 
@@ -128,7 +128,7 @@ void PanelRight::OnEventButton(wxCommandEvent &event)
         PageFPGA::self->SendAllRegisters();
         PageChannelForm::self->SendAllRegisters();
 
-        IDevice::impl->SendCommand(wxString::Format(":SCAN:START %d", int_value));
+//        IDevice::impl->SendCommand(wxString::Format(":SCAN:START %d", int_value));
 
         btnStart->Enable(false);
         btnStop->Enable(true);
@@ -136,7 +136,7 @@ void PanelRight::OnEventButton(wxCommandEvent &event)
     }
     else if (id == btnStop->GetId())
     {
-        IDevice::impl->SendCommand(":SCAN:STOP");
+//        IDevice::impl->SendCommand(":SCAN:STOP");
 
         btnStart->Enable(true);
         btnStop->Enable(false);

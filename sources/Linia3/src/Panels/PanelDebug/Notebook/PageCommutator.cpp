@@ -1,7 +1,7 @@
 ﻿ // 2025/10/07 11:46:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/Notebook/PageCommutator.h"
-#include "Panels/PanelDebug/Notebook/Register.h"
+//#include "Panels/PanelDebug/Notebook/Register.h"
 
 
 /*
@@ -16,6 +16,7 @@ PageCommutator::PageCommutator(wxNotebook *parent) :
 {
     self = this;
 
+    /*
     Register *reg1 = new RegFPGA(this, regs[REG::_1_Commutator]);
 
     std::vector<StructDescription::CommandStruct> commandsBase; //-V827 //-V826
@@ -36,4 +37,5 @@ PageCommutator::PageCommutator(wxNotebook *parent) :
     reg1->SetDescriptionBits(0, desc1);
 
     AppendRegister(reg1);
+    */
 }

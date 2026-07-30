@@ -1,7 +1,7 @@
 ﻿// 2025/10/07 12:22:30 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/Notebook/PageChannelS.h"
-#include "Panels/PanelDebug/Notebook/Register.h"
+//#include "Panels/PanelDebug/Notebook/Register.h"
 
 
 /*
@@ -20,6 +20,7 @@ PageChannelS::PageChannelS(wxNotebook *parent) :
 {
     self = this;
 
+    /*
     {
         RegAD5531 *dac4 = new RegAD5531(this, dacs[DAC::_4_ChannelS_DAC1], "");
 
@@ -43,4 +44,5 @@ PageChannelS::PageChannelS(wxNotebook *parent) :
     RegFPGA *reg4 = new RegFPGA(this, regs[REG::_4_ChannelS]);
 
     AppendRegister(reg4);
+    */
 }

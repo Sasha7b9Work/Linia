@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Application.h"
 #include "Settings/Settings.h"
-#include "Windows/ConsoleRS232.h"
+//#include "Windows/ConsoleRS232.h"
 #include "MainWindow.h"
 #include "Panels/PanelMeasures/PanelMeasures.h"
 #include "Panels/PageTests/PageTests.h"
@@ -15,8 +15,8 @@
 #include "Controls/Dialog.h"
 #include "Controls/Notebook.h"
 #pragma warning(push, 0)
-#include <wx/sizer.h>
-#include <wx/statline.h>
+    #include <wx/sizer.h>
+    #include <wx/statline.h>
 #pragma warning(pop)
 
 MainWindow *TheMainWindow = nullptr;
@@ -101,7 +101,7 @@ void MainWindow::OnEventKeyHook(wxKeyEvent &event)
     {
         if (event.ControlDown())
         {
-            ConsoleRS232::self->Show(!ConsoleRS232::self->IsShown());
+//            ConsoleRS232::self->Show(!ConsoleRS232::self->IsShown());
         }
     }
 
@@ -200,17 +200,17 @@ void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 {
     SET::GUI::current_panel->Set(main_panel->GetCurrentPanelIndex());
 
-    if (ConsoleRS232::self)
-    {
-        SET::GUI::pos_console->Set(ConsoleRS232::self->GetPosition());
-
-        wxSize size = ConsoleRS232::self->GetSize();
-        SET::GUI::size_console->Set({ size.x, size.y });
-
-        SET::GUI::maximized_console->Set(ConsoleRS232::self->IsMaximized());
-
-        ConsoleRS232::self->Destroy();
-    }
+//    if (ConsoleRS232::self)
+//    {
+//        SET::GUI::pos_console->Set(ConsoleRS232::self->GetPosition());
+//
+//        wxSize size = ConsoleRS232::self->GetSize();
+//        SET::GUI::size_console->Set({ size.x, size.y });
+//
+//        SET::GUI::maximized_console->Set(ConsoleRS232::self->IsMaximized());
+//
+//        ConsoleRS232::self->Destroy();
+//    }
 
     position.Set(wxWindow::GetPosition());
 

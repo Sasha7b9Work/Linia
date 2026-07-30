@@ -9,7 +9,7 @@
 #include "Panels/PanelDebug/Notebook/PageChannelS.h"
 #include "Panels/PanelDebug/Notebook/PageMeasCurrent.h"
 #include "Panels/PanelDebug/Notebook/PageSource50V.h"
-#include "IPPP/Real/Chips.h"
+//#include "IPPP/Real/Chips.h"
 #include "Settings/Configurator.h"
 
 
@@ -77,10 +77,10 @@ void NotebookDebug::AppendNewPage(wxPanel *page)
 
 void NotebookDebug::Init()
 {
-    for (int i = 0; i < DAC::Count; i++)
-    {
-        dacs[i]->WriteWidthToDevice();
-    }
+//    for (int i = 0; i < DAC::Count; i++)
+//    {
+//        dacs[i]->WriteWidthToDevice();
+//    }
 }
 
 

@@ -1,7 +1,7 @@
 ﻿// 2025/10/07 12:05:33 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/Notebook/PageChannelB.h"
-#include "Panels/PanelDebug/Notebook/Register.h"
+//#include "Panels/PanelDebug/Notebook/Register.h"
 
 
 PageChannelB *PageChannelB::self = nullptr;
@@ -12,6 +12,7 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
 {
     self = this;
 
+    /*
     {
         RegAD5531 *dac2 = new RegAD5531(this, dacs[DAC::_2_ChannelB_DAC1], "");
 
@@ -257,4 +258,5 @@ PageChannelB::PageChannelB(wxNotebook *parent) :
 
         AppendRegister(reg3);
     }
+    */
 }

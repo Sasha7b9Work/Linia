@@ -1,11 +1,11 @@
 ﻿// 2025/6/3 14:01:53 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/Notebook/PageChip.h"
-#include "Panels/PanelDebug/Notebook/Register.h"
+//#include "Panels/PanelDebug/Notebook/Register.h"
 #include "MainWindow.h"
 #pragma warning(push, 0)
-#include <wx/sizer.h>
-#include <wx/menu.h>
+    #include <wx/sizer.h>
+    #include <wx/menu.h>
 #pragma warning(pop)
 
 PageChip::PageChip(wxNotebook *parent, const wxString &title) :
@@ -22,13 +22,13 @@ PageChip::PageChip(wxNotebook *parent, const wxString &title) :
 }
 
 
-void PageChip::AppendRegister(Register *reg)
+void PageChip::AppendRegister(Register * /*reg*/)
 {
-    // Добавить в сайзер, а не позиционировать вручную
-    GetSizer()->Add(reg, 0, wxEXPAND | wxALL, 5);
-
-    GetSizer()->Layout();
-    Layout();
+//    // Добавить в сайзер, а не позиционировать вручную
+//    GetSizer()->Add(reg, 0, wxEXPAND | wxALL, 5);
+//
+//    GetSizer()->Layout();
+//    Layout();
 }
 
 
@@ -59,26 +59,26 @@ void PageChip::OnMenuEvent(wxCommandEvent &event)
 
 void PageChip::Pack()
 {
-    for (auto *reg : registers)
-    {
-        reg->Pack();
-    }
+//    for (auto *reg : registers)
+//    {
+//        reg->Pack();
+//    }
 }
 
 
 void PageChip::Unpack()
 {
-    for (auto *reg : registers)
-    {
-        reg->Unpack();
-    }
+//    for (auto *reg : registers)
+//    {
+//        reg->Unpack();
+//    }
 }
 
 
 void PageChip::SendAllRegisters()
 {
-    for (auto *reg : registers)
-    {
-        reg->WriteValue();
-    }
+//    for (auto *reg : registers)
+//    {
+//        reg->WriteValue();
+//    }
 }

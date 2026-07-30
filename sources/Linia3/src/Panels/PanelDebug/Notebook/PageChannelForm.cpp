@@ -1,7 +1,7 @@
 ﻿// 2025/10/07 11:51:53 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/Notebook/PageChannelForm.h"
-#include "Panels/PanelDebug/Notebook/Register.h"
+//#include "Panels/PanelDebug/Notebook/Register.h"
 
 
 /*
@@ -19,6 +19,7 @@ PageChannelForm::PageChannelForm(wxNotebook *parent) :
 {
     self = this;
 
+    /*
     {
         RegAD5443 *dac1 = new RegAD5443(this, dacs[DAC::_1_ChannelC_Meas], L("Измеритель"));
 
@@ -77,4 +78,5 @@ PageChannelForm::PageChannelForm(wxNotebook *parent) :
 
         AppendRegister(dac0);
     }
+    */
 }

@@ -1,7 +1,7 @@
 ﻿// 2025/10/07 12:25:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/Notebook/PageMeasCurrent.h"
-#include "Panels/PanelDebug/Notebook/Register.h"
+//#include "Panels/PanelDebug/Notebook/Register.h"
 
 /*
     ADC     AD7691      16 разрядов
@@ -16,6 +16,7 @@ PageMeasCurrent::PageMeasCurrent(wxNotebook *parent) :
 {
     self = this;
 
+    /*
     RegFPGA *reg5 = new RegFPGA(this, regs[REG::_5_MeasCurrent]);
 
     std::vector<StructDescription> desc5;
@@ -29,5 +30,6 @@ PageMeasCurrent::PageMeasCurrent(wxNotebook *parent) :
     reg5->SetDescriptionBits(0, desc5);
 
     AppendRegister(reg5);
+    */
 }
 

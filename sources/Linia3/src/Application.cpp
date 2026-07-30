@@ -3,20 +3,14 @@
 #include "Application.h"
 #include "Settings/Settings.h"
 #include "MainWindow.h"
-#include "Communicator/UART/UART.h"
-#include "Communicator/SPI/SPI.h"
 #include "Controls/AutoRebootDialog.h"
-#include "SoftTests/SoftTests.h"
-#include "IPPP/I_IPPP.h"
-#include "IPPP/Real/Chips.h"
-#include "IPPP/DeviceFactory.h"
-#include "Windows/ConsoleRS232.h"
 #include "Settings/FileJSON.h"
 #pragma warning(push, 0)
-#include <wx/msgdlg.h>
+    #include <wx/msgdlg.h>
 #pragma warning(pop)
 #include <cstdlib>
 #include <locale>
+#include <mutex>
 
 
 wxIMPLEMENT_APP(Application);
@@ -119,54 +113,54 @@ bool Application::OnInit()
     // we use a PNG image in our HTML page
     wxImage::AddHandler(new wxPNGHandler);
 
-    ConsoleRS232::Create();
+//    ConsoleRS232::Create();
 
-    Chip::Init();
+//    Chip::Init();
 
-    auto device = DeviceFactory::CreateFromConfig();
+//    auto device = DeviceFactory::CreateFromConfig();
 
-    I_IPPP::SetInstance(std::move(device));
+//    I_IPPP::SetInstance(std::move(device));
 
     // create and show the main application window
     new MainWindow(TheMainWindow, L("ИППП 4"));
 
     timer.SetOwner(this, timer.GetId());
 
-    if (!UART::IsAvailability())
-    {
-        wxString message = wxString::Format(L("Устройство UART %s не обнаружено."), UART_DEVICE);
+//    if (!UART::IsAvailability())
+//    {
+//        wxString message = wxString::Format(L("Устройство UART %s не обнаружено."), UART_DEVICE);
+//
+//        LOG_ERROR(message.c_str().AsChar());
+//
+//        AutoRebootDialog dialog(TheMainWindow, message, 10, []
+//            {
+//                IGNORE_RESULT(std::system("shutdown -r now"));
+//            });
+//
+//        dialog.ShowModal();
+//    }
 
-        LOG_ERROR(message.c_str().AsChar());
-
-        AutoRebootDialog dialog(TheMainWindow, message, 10, []
-            {
-                IGNORE_RESULT(std::system("shutdown -r now"));
-            });
-
-        dialog.ShowModal();
-    }
-
-    if (!SPI::IsAvailability())
-    {
-        wxString message = wxString::Format(L("Устройство SPI %s не обнаружено."), SPI_DEVICE);
-
-        LOG_ERROR(message.c_str().AsChar());
-
-        AutoRebootDialog dialog(TheMainWindow, message, 10, []
-            {
-                IGNORE_RESULT(std::system("shutdown -r now"));
-            });
-
-        dialog.ShowModal();
-    }
+//    if (!SPI::IsAvailability())
+//    {
+//        wxString message = wxString::Format(L("Устройство SPI %s не обнаружено."), SPI_DEVICE);
+//
+//        LOG_ERROR(message.c_str().AsChar());
+//
+//        AutoRebootDialog dialog(TheMainWindow, message, 10, []
+//            {
+//                IGNORE_RESULT(std::system("shutdown -r now"));
+//            });
+//
+//        dialog.ShowModal();
+//    }
 
     timer.Start(10);
 
-    if (!SoftTests::RunAll())
-    {
-        wxMessageBox(wxString::Format(_("Во время выполнения тестов произошли ошибки.\n") +
-            _("Дополнительная информация в файле %s."), Log::FileName().c_str().AsChar()), L("Ошибка"), wxOK | wxCENTRE | wxICON_ERROR);
-    }
+//    if (!SoftTests::RunAll())
+//    {
+//        wxMessageBox(wxString::Format(_("Во время выполнения тестов произошли ошибки.\n") +
+//            _("Дополнительная информация в файле %s."), Log::FileName().c_str().AsChar()), L("Ошибка"), wxOK | wxCENTRE | wxICON_ERROR);
+//    }
 
 #ifdef WIN32
 
@@ -206,7 +200,7 @@ void Application::OnTimer(wxTimerEvent &)
 
     if (mutex.try_lock())
     {
-        I_IPPP::GetInstance()->PeriodicTask();
+//        I_IPPP::GetInstance()->PeriodicTask();
 
         TheMainWindow->PeriodicTask();
 

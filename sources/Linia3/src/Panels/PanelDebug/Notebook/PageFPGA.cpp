@@ -1,10 +1,10 @@
 ﻿// 2025/10/13 13:54:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/Notebook/PageFPGA.h"
-#include "Panels/PanelDebug/Notebook/Register.h"
+//#include "Panels/PanelDebug/Notebook/Register.h"
 #include "Utils/String.h"
 #include "Utils/SystemDepend.h"
-#include "IPPP/IDevice.h"
+//#include "IPPP/IDevice.h"
 
 
 PageFPGA *PageFPGA::self = nullptr;
@@ -15,6 +15,7 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
 {
     self = this;
 
+    /*
     {
         Register *fpga0 = new RegFPGA(this, fpgas[0]);
 
@@ -74,4 +75,5 @@ PageFPGA::PageFPGA(wxNotebook *parent) :
 
         AppendRegister(fpga2);
     }
+    */
 }

@@ -1,11 +1,11 @@
 ﻿// 2025/6/4 15:50:26 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/Notebook/PainterRegister.h"
-#include "Panels/PanelDebug/Notebook/Register.h"
+//#include "Panels/PanelDebug/Notebook/Register.h"
 #include "Panels/PanelDebug/Notebook/AnimatedImpulse.h"
 #pragma warning(push, 0)
-#include <wx/graphics.h>
-#include <wx/sizer.h>
+    #include <wx/graphics.h>
+    #include <wx/sizer.h>
 #pragma warning(pop)
 
 
@@ -13,6 +13,7 @@ PainterRegister::PainterRegister(wxWindow *parent, Register *_reg) :
     Panel(parent),
     reg(_reg)
 {
+    /*
     wxSize size = _reg->GetMinSize();
     size.x -= 50;
     size.y -= 45;
@@ -84,6 +85,7 @@ PainterRegister::PainterRegister(wxWindow *parent, Register *_reg) :
     SetSizer(main_sizer);
 
     Bind(wxEVT_PAINT, &PainterRegister::OnEventPaint, this);
+    */
 }
 
 
@@ -103,6 +105,7 @@ wxColor PainterRegister::ColorBackground(bool enabled) const
 
 void PainterRegister::OnEventPaint(wxPaintEvent &)
 {
+    /*
     if (first_paint)
     {
         first_paint = false;
@@ -167,11 +170,13 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
     gc->DrawText(wxString::Format("DB%d", reg->chip->BitDepth() - 1), 5, y);
 
     delete gc;
+    */
 }
 
 
-void PainterRegister::SetHintCheckBox(int num_bit)
+void PainterRegister::SetHintCheckBox(int /*num_bit*/)
 {
+    /*
     wxString hint = reg->names_bits[(uint)num_bit];
 
     wxString desc0 = GetHint(0, num_bit);
@@ -192,19 +197,21 @@ void PainterRegister::SetHintCheckBox(int num_bit)
     }
 
     reg->chboxes[(uint)num_bit]->SetToolTip(hint);
+    */
 }
 
 
 wxPoint PainterRegister::CoordBit(int num_bit)
 {
-    num_bit = reg->chip->BitDepth() - num_bit - 1;
+//    num_bit = reg->chip->BitDepth() - num_bit - 1;
 
     return { 36 + num_bit * W_B, 0 };
 }
 
 
-void PainterRegister::DrawDescriptions(int index, wxGraphicsContext *gc)
+void PainterRegister::DrawDescriptions(int /*index*/, wxGraphicsContext * /*gc*/)
 {
+    /*
     std::vector<StructDescription> &desc = reg->desc[index];
 
     for (uint i = 0; i < desc.size(); i++)
@@ -226,6 +233,7 @@ void PainterRegister::DrawDescriptions(int index, wxGraphicsContext *gc)
             DrawTextInCenter(x, y + 4, w, d.desc, 8, gc);
         }
     }
+    */
 }
 
 
@@ -270,23 +278,23 @@ void PainterRegister::DrawTextInCenter(int x, int y, int width, const wxString &
 
 wxString PainterRegister::GetHint(int index_desc, int num_bit)
 {
-    if (reg->desc[index_desc].empty())
-    {
-        return "";
-    }
-
-    std::vector<StructDescription> &desc = reg->desc[index_desc];
-
-    for (uint i = 0; i < desc.size(); i++)
-    {
-        if (num_bit >= desc[i].first_bit)
-        {
-            if (num_bit < desc[i].first_bit + desc[i].num_bits)
-            {
-                return desc[i].hint;
-            }
-        }
-    }
+//    if (reg->desc[index_desc].empty())
+//    {
+//        return "";
+//    }
+//
+//    std::vector<StructDescription> &desc = reg->desc[index_desc];
+//
+//    for (uint i = 0; i < desc.size(); i++)
+//    {
+//        if (num_bit >= desc[i].first_bit)
+//        {
+//            if (num_bit < desc[i].first_bit + desc[i].num_bits)
+//            {
+//                return desc[i].hint;
+//            }
+//        }
+//    }
 
     return "";
 }

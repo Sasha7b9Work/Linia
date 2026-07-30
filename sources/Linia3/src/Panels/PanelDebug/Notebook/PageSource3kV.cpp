@@ -1,7 +1,7 @@
 ﻿// 2025/10/07 11:39:05 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Panels/PanelDebug/Notebook/PageSource3kV.h"
-#include "Panels/PanelDebug/Notebook/Register.h"
+//#include "Panels/PanelDebug/Notebook/Register.h"
 
 PageSource3kV *PageSource3kV::self = nullptr;
 
@@ -11,6 +11,7 @@ PageSource3kV::PageSource3kV(wxNotebook *parent) :
 {
     self = this;
 
+    /*
     Register *reg0 = new RegFPGA(this, regs[REG::_0_Source3kV]);
 
     std::vector<StructDescription> desc0;
@@ -50,4 +51,5 @@ PageSource3kV::PageSource3kV(wxNotebook *parent) :
     reg0->SetDescriptionBits(0, desc0);
 
     AppendRegister(reg0);
+    */
 }

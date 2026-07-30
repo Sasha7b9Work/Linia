@@ -2,13 +2,14 @@
 #include "defines.h"
 #include "Utils/Log.h"
 #include "Utils/StringUtils.h"
-#include "Windows/ConsoleRS232.h"
+//#include "Windows/ConsoleRS232.h"
 #include "Utils/GlobalFunctions.h"
 #pragma warning(push, 0)
-#include <wx/textfile.h>
-#include <wx/filename.h>
+    #include <wx/textfile.h>
+    #include <wx/filename.h>
 #pragma warning(pop)
 #include <iostream>
+#include <mutex>
 
 
 namespace Log
@@ -123,7 +124,7 @@ void Log::Error(pchar file, int line, pchar format, ...)
 
         String text_string(wxString::Format("!!! ERROR !!! %3d : %s:%3d : %s : %s", counter++, SU::LeaveTheLastOnes(file, 17), line, GetTime().c_str(), message).c_str());
 
-        ConsoleRS232::self->AddLine(text_string.c_str());
+//        ConsoleRS232::self->AddLine(text_string.c_str());
 
         WriteLine(text_string.c_str());
     }
@@ -146,7 +147,7 @@ void Log::ErrorTrace(pchar file, int line, pchar function, pchar format, ...)
 
         String text_string(wxString::Format("!!! ERROR !!! %3d : %s:%3d : %s() : %s : %s", counter++, SU::LeaveTheLastOnes(file, 17), line, function, GetTime().c_str(), message).c_str());
 
-        ConsoleRS232::self->AddLine(text_string.c_str());
+//        ConsoleRS232::self->AddLine(text_string.c_str());
 
         WriteLine(text_string.c_str());
     }
@@ -169,10 +170,10 @@ void Log::Write(pchar file, int line, pchar format, ...)
 
         String text_string(wxString::Format("Log %3d : %s:%3d : %s : %s", counter++, SU::LeaveTheLastOnes(file, 27), line, GetTime().c_str(), message).c_str());
 
-        if (ConsoleRS232::self)
-        {
-            ConsoleRS232::self->AddLine(text_string.c_str());
-        }
+//        if (ConsoleRS232::self)
+//        {
+//            ConsoleRS232::self->AddLine(text_string.c_str());
+//        }
 
         WriteLine(text_string.c_str());
     }
@@ -205,10 +206,10 @@ void Log::WriteTrace(pchar file, int line, pchar function, pchar format, ...)
 
         String text_string(wxString::Format("Log %3d : %s:%3d : %s() : %s : %s", counter++, SU::LeaveTheLastOnes(file, 27), line, function, GetTime().c_str(), message).c_str());
 
-        if (ConsoleRS232::self)
-        {
-            ConsoleRS232::self->AddLine(text_string.c_str());
-        }
+//        if (ConsoleRS232::self)
+//        {
+//            ConsoleRS232::self->AddLine(text_string.c_str());
+//        }
 
         WriteLine(text_string.c_str());
     }
