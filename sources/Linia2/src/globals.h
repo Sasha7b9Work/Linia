@@ -24,6 +24,7 @@ class PageTests;
 class PanelCategory;
 class PanelLibrary;
 class PanelViewTest;
+class PageChannelB;
 
 class NotebookDebug;
 
@@ -38,6 +39,7 @@ extern PageTests     *ThePageTests;
 extern PanelCategory *ThePanelCategory;
 extern PanelLibrary  *ThePanelLibrary;
 extern PanelViewTest *ThePanelViewTest;
+extern PageChannelB  *ThePageChannelB;
 
 extern NotebookDebug *TheNotebookDebug;
 

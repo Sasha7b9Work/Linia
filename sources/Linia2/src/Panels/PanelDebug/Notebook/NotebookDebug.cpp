@@ -24,7 +24,7 @@ NotebookDebug::NotebookDebug(wxWindow *parent, NotebookDebug *&global) :
     AppendNewPage(new PageFPGA(this));
     AppendNewPage(new PageChannelForm(this));
     AppendNewPage(new PageMeasCurrent(this));
-    AppendNewPage(new PageChannelB(this));
+    AppendNewPage(new PageChannelB(this, ThePageChannelB));
     AppendNewPage(new PageChannelS(this));
     AppendNewPage(new PageSource3kV(this));
     AppendNewPage(new PageSource50V(this));
@@ -100,7 +100,7 @@ void NotebookDebug::Pack()
     PageCommutator::self->Pack();
     PageSource3kV::self->Pack();
     PageChannelForm::self->Pack();
-    PageChannelB::self->Pack();
+    ThePageChannelB->Pack();
     PageChannelS::self->Pack();
     PageMeasCurrent::self->Pack();
     PageSource50V::self->Pack();
@@ -115,7 +115,7 @@ void NotebookDebug::Unpack()
     PageCommutator::self->Unpack();
     PageSource3kV::self->Unpack();
     PageChannelForm::self->Unpack();
-    PageChannelB::self->Unpack();
+    ThePageChannelB->Unpack();
     PageChannelS::self->Unpack();
     PageMeasCurrent::self->Unpack();
     PageSource50V::self->Unpack();

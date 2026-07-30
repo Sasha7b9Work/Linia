@@ -7,7 +7,5 @@ class PageChannelB : public PageChip
 {
 public:
 
-    PageChannelB(wxNotebook *);
-
-    static PageChannelB *self;
+    PageChannelB(wxNotebook *, PageChannelB *&);
 };

@@ -4,13 +4,13 @@
 #include "Panels/PanelDebug/Notebook/Register.h"
 
 
-PageChannelB *PageChannelB::self = nullptr;
+PageChannelB *ThePageChannelB = nullptr;
 
 
-PageChannelB::PageChannelB(wxNotebook *parent) :
+PageChannelB::PageChannelB(wxNotebook *parent, PageChannelB *&global) :
     PageChip(parent, "Канал B")
 {
-    self = this;
+    global = this;
 
     {
         RegAD5531 *dac2 = new RegAD5531(this, dacs[DAC::_2_ChannelB_DAC1], "");
