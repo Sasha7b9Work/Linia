@@ -17,15 +17,18 @@ bool Library::Read(FileJSON *_file)
         {
             LibraryCategory category;
 
-            if (ParseCategory(category, it->name.GetString(), it->value))
+            if (!wxString(it->name.GetString()).StartsWith("REM"))              // С последовательности "REM" начинаются комментарии. Пропускаем
             {
-                categories.push_back(category);
-            }
-            else
-            {
-                LOG_ERROR("Load library from %s is FAIL!", _file->GetFullPath().c_str());
+                if (ParseCategory(category, it->name.GetString(), it->value))
+                {
+                    categories.push_back(category);
+                }
+                else
+                {
+                    LOG_ERROR("Load library from %s is FAIL!", _file->GetFullPath().c_str());
 
-                return false;
+                    return false;
+                }
             }
         }
     }

@@ -26,7 +26,7 @@ PageTests::PageTests(Notebook *board, PageTests *&global) :
     wxPanel::SetName("PageTests");
 
     hor_splitter = new Splitter(this, wxSP_3D | wxSP_LIVE_UPDATE);
-    hor_splitter->SetMinimumPaneSize(50);  // Минимальный размер панели
+    hor_splitter->SetMinimumPaneSize(50);
 
     vert_splitter = new Splitter(hor_splitter, wxSP_3D | wxSP_LIVE_UPDATE);
     vert_splitter->SetMinimumPaneSize(50);
