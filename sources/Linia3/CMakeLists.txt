@@ -1,5 +1,4 @@
 ﻿# 2023/07/04 15:47:47 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
-
 project (Linia3)
 
 set(CMAKE_UNITY_BUILD ON)
