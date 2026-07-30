@@ -24,6 +24,8 @@ class PanelCategory;
 class PanelLibrary;
 class PanelViewTest;
 
+class NotebookDebug;
+
 class PanelRight;
 
 extern PanelReports  *ThePanelReports;
@@ -34,5 +36,7 @@ extern PageTests     *ThePageTests;
 extern PanelCategory *ThePanelCategory;
 extern PanelLibrary  *ThePanelLibrary;
 extern PanelViewTest *ThePanelViewTest;
+
+extern NotebookDebug *TheNotebookDebug;
 
 extern PanelRight    *ThePanelRight;

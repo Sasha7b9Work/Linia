@@ -13,13 +13,13 @@
 #include "Settings/Configurator.h"
 
 
-NotebookDebug *NotebookDebug::self = nullptr;
+NotebookDebug *TheNotebookDebug = nullptr;
 
 
-NotebookDebug::NotebookDebug(wxWindow *parent) :
+NotebookDebug::NotebookDebug(wxWindow *parent, NotebookDebug *&global) :
     wxNotebook(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBK_TOP)
 {
-    self = this;
+    global = this;
 
     AppendNewPage(new PageFPGA(this));
     AppendNewPage(new PageChannelForm(this));

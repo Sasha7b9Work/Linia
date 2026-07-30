@@ -18,7 +18,7 @@ PanelDebug::PanelDebug(Notebook *board) : PageNotebook(board, L("Отладка"
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    sizer->Add(new NotebookDebug(this));
+    sizer->Add(new NotebookDebug(this, TheNotebookDebug));
 
     sizer->Add(new PanelRight(this, ThePanelRight));
 
@@ -32,7 +32,7 @@ PanelDebug::PanelDebug(Notebook *board) : PageNotebook(board, L("Отладка"
 
 bool PanelDebug::Show(bool show)
 {
-    show ? NotebookDebug::self->Init() : NotebookDebug::self->DeInit();
+    show ? TheNotebookDebug->Init() : TheNotebookDebug->DeInit();
 
     return wxPanel::Show(show);
 }
@@ -40,7 +40,7 @@ bool PanelDebug::Show(bool show)
 
 void PanelDebug::PeriodicTask()
 {
-    NotebookDebug::self->PeriodicTask();
+    TheNotebookDebug->PeriodicTask();
 
 //    ThePanelRight->PeriodicTask();
 }
@@ -48,11 +48,11 @@ void PanelDebug::PeriodicTask()
 
 void PanelDebug::Unpack()
 {
-    NotebookDebug::self->Unpack();
+    TheNotebookDebug->Unpack();
 }
 
 
 void PanelDebug::Pack()
 {
-    NotebookDebug::self->Pack();
+    TheNotebookDebug->Pack();
 }
