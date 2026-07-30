@@ -47,6 +47,8 @@ MainWindow::MainWindow(MainWindow *&self, const wxString &title)
     main_panel->AddPanel(new PanelDebug(main_panel));
     main_panel->AddPanel(new PageTests(main_panel, ThePageTests));
 
+    main_panel->SetCurrentPanel(PanelMeasures::self);
+
     sizer->Add(main_panel, 1, wxEXPAND | wxALL);
     SetSizer(sizer);
 

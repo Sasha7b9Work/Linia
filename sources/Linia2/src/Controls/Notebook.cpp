@@ -83,11 +83,11 @@ void Notebook::SetCurrentPanel(PageNotebook *panel)
     current_page = panel;
     current_page->Show();
 
-    panel->Layout();
+    current_page->Layout();
 
-    if (panel->GetSizer())
+    if (current_page->GetSizer())
     {
-        panel->GetSizer()->Layout();
+        current_page->GetSizer()->Layout();
     }
 
     sizer_container->Layout();
@@ -96,7 +96,7 @@ void Notebook::SetCurrentPanel(PageNotebook *panel)
 
     for (auto btn : buttons)
     {
-        btn->SetValue(btn->GetClientData() == panel);
+        btn->SetValue(btn->GetClientData() == current_page);
     }
 
     current_page->Refresh();
