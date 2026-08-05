@@ -1,1 +1,1 @@
-apt-get install libgpiod-dev gpiod -y
+sudo apt-get install libgpiod-dev gpiod -y
