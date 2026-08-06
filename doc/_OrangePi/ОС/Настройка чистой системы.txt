@@ -1,12 +1,19 @@
+
+0. Подключение к отладочному интерфейсу Orange Pi 5 Plus по RS-232 :
+   putty.exe -serial COM5 -sercfg 1500000,8,n,1,N
+
 1. Установить XFCE
+
 2. Настроить автовход при загрузке:
     # Проверить наличие различных менеджеров входа
     ls /usr/sbin/ | grep -E "lightdm|gdm3|sddm|lxdm|xdm"
     и в зависимости от установленного менеджера действовать так, чтобы был автовход с сессией xfce
+
 3. Установить Chickago95:
    cd ~
    git clone https://github.com/grassmunk/chicago95
    cd chicago95
    ./installer.py
    !!! ВНИМАНИЕ !!! Запускать инсталлятор нужно с рабочего стола
+
 3. Склонировать Linia2
