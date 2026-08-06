@@ -1,19 +1,50 @@
+-1. Для установки системы следует использовать файл Armbian_26.5.1_Orangepi5-plus_resolute_vendor_6.1.115_gnome_desktop.img
+    После установки :
+    apt-get update
+    apt-get upgrade -y
+    armbian-config
+    System
+    Kernels
+    Выбрать ядро 6.1.115-vendor-rk35xx
 
-0. Подключение к отладочному интерфейсу Orange Pi 5 Plus по RS-232 :
-   putty.exe -serial COM5 -sercfg 1500000,8,n,1,N
+    Итоговая система :
+    v26.5.1 for Orange Pi 5 Plus running Armbian Linux 6.1.115-vendor-rk35xx
+    Packages:     Ubuntu stable (noble)
+    
+ 0. Подключение к отладочному интерфейсу Orange Pi 5 Plus по RS-232 :
+    putty.exe -serial COM5 -sercfg 1500000,8,n,1,N
+    
+ 0.0 Установка имени компьютера :
+     sudo hostnamectl set-hostname arm3
+     
+ 0.1 Вид приглашения:
+        # If this is an xterm set the title to user@host:dir
+        case "$TERM" in
+            xterm*|rxvt*)
+            PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]\[\e[1;33m\]\u\[\e[0m\]@\[\e[1;33m\]\h\[\e[0m\]: \w\$ "
+            ;;
+            *)
+         ;;
+        esac
 
-1. Установить XFCE
 
-2. Настроить автовход при загрузке:
-    # Проверить наличие различных менеджеров входа
-    ls /usr/sbin/ | grep -E "lightdm|gdm3|sddm|lxdm|xdm"
-    и в зависимости от установленного менеджера действовать так, чтобы был автовход с сессией xfce
+ 1. Установить XFCE
 
-3. Установить Chickago95:
-   cd ~
-   git clone https://github.com/grassmunk/chicago95
-   cd chicago95
-   ./installer.py
-   !!! ВНИМАНИЕ !!! Запускать инсталлятор нужно с рабочего стола
+ 2. Настроить автовход при загрузке:
+     # Проверить наличие различных менеджеров входа
+     ls /usr/sbin/ | grep -E "lightdm|gdm3|sddm|lxdm|xdm"
+     и в зависимости от установленного менеджера действовать так, чтобы был автовход с сессией xfce
+ 
+ 3. Установить Chickago95:
+    cd ~
+    git clone https://github.com/grassmunk/chicago95
+    cd chicago95
+    ./installer.py
+    !!! ВНИМАНИЕ !!! Запускать инсталлятор нужно с рабочего стола
+    
+    После установки можно зайти в .bashrc и удалить последние строки, где настраивается вид приглашения как в Windows
+ 
+ 4. Склонировать Linia2
 
-3. Склонировать Linia2
+ 5. Сканирование диапазона портов на наличие устройств
+    fping -ag 192.168.1.0/24 2>/dev/null)
