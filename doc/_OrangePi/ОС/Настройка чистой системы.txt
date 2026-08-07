@@ -34,6 +34,13 @@
      # Проверить наличие различных менеджеров входа
      ls /usr/sbin/ | grep -E "lightdm|gdm3|sddm|lxdm|xdm"
      и в зависимости от установленного менеджера действовать так, чтобы был автовход с сессией xfce
+     
+     lightdm:
+     sudo nano /etc/lightdm/lightdm.conf.d/50-autologin.conf
+        [SeatDefaults]
+        autologin-user=your_username
+        autologin-session=xfce
+        autologin-user-timeout=0
  
  3. Установить Chickago95:
     cd ~
