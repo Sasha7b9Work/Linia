@@ -14,7 +14,7 @@
  0. Подключение к отладочному интерфейсу Orange Pi 5 Plus по RS-232 :
     putty.exe -serial COM5 -sercfg 1500000,8,n,1,N
     
- 0.0 Установка имени компьютера :
+    0.0 Установка имени компьютера :
      sudo hostnamectl set-hostname arm3
      
  0.1 Вид приглашения:
@@ -59,3 +59,37 @@
     fping -ag 192.168.1.0/24 2>/dev/null)
 
  7. Скопировать в /home/mnipi/Desktop скрипт из Автозагрузка/Desktop
+ 
+ 8. Включить spi и uart :
+    armbian-config
+    
+ 9. Дать права на доступ к аппаратным ресурсам пользователю mnipi:
+ 
+        GPIO:
+    sudo groupadd gpio
+    sudo usermod -aG gpio mnipi
+    sudo nano /etc/udev/rules.d/99-gpio.rules
+        SUBSYSTEM=="gpio", GROUP="gpio", MODE="0660"
+        SUBSYSTEM=="gpio", KERNEL=="gpiochip*", GROUP="gpio", MODE="0660"
+    sudo udevadm control --reload-rules
+    sudo udevadm trigger
+        Проверяем права:
+    ls -l /dev/gpiochip*
+        crw-rw---- 1 root gpio 254, 0 ... /dev/gpiochip0
+        crw-rw---- 1 root gpio 254, 1 ... /dev/gpiochip1
+        
+        SPI:
+    sudo groupadd spi
+    sudo usermod -aG spi mnipi
+    sudo nano /etc/udev/rules.d/99-spi.rules
+        SUBSYSTEM=="spidev", GROUP="spi", MODE="0660"
+    sudo udevadm control --reload-rules
+    sudo udevadm trigger -s spidev
+    ls -l /dev/spidev*
+        crw-rw---- 1 root spi 153, 0 ... /dev/spidev0.0
+    
+    sudo reboot
+    
+10. Автозапуск приложение после входа в систему:
+        mkdir -p ~/.config/autostart
+        cp ~/Desktop/Linia.desktop ~/.config/autostart/
