@@ -11,6 +11,21 @@
 #include <linux/spi/spidev.h>
 
 
+/*
+
+    ПЛИС:
+    21 - spi_miso   GPIO1_B1 SPI0_MISO_M2
+    23 - spi_clk    GPIO1_B3 SPI0_
+    24 - spi_cs
+
+    DAC1, DAC2:
+    18 - spi_mosi
+    16 - spi_clk
+    31 - spi_cs         (формирователь развёртки)
+    35 - spi_cs         (источник 50В)
+*/
+
+
 #ifdef WIN32
 #pragma warning(push)
 #pragma warning(disable:4996)
