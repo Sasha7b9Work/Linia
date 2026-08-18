@@ -47,6 +47,7 @@ else()
          ./src
         ../ThirdParty/wxWidgets/include
         ../ThirdParty/rapidjson/include
+        ../generated/wxWidgets/lib/wx/include/gtk3-unicode-static-3.3
     )
 
     if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
@@ -55,7 +56,7 @@ else()
         )
     else()
         include_directories(
-            ../generated/wxWidgets/lib/wx/include/gtk3-unicode-static-3.3
+            arm64_plugs
         )
     endif()
 
