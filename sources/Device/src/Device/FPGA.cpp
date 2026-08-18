@@ -8,13 +8,13 @@
 namespace FPGA
 {
     static PinIn  pinLIMIT(Port::_E, Pin::_7);          // pin58
-    static PinOut pinA0_RG(Port::_G, Pin::_5);          // pin90
-    static PinOut pinA1_RG(Port::_G, Pin::_6);          // pin91
-    static PinOut pinCLK_RG(Port::_G, Pin::_7);         // pin92
-    static PinOut pinWR_RG(Port::_G, Pin::_8);          // pin93
-    static PinOut pinDAT_RG(Port::_D, Pin::_13);        // pin82
-    static PinOut pinSTART_TB(Port::_A, Pin::_2);       // pin36
-    static PinOut pinSTOP_TB(Port::_F, Pin::_5);        // pin15
+    static PinOut pinA0_RG(Port::_G, Pin::_5);          // pin90    0-й бит адреса регистра для записи
+    static PinOut pinA1_RG(Port::_G, Pin::_6);          // pin91    1-й бит адреса регистра для записи
+    static PinOut pinCLK_RG(Port::_G, Pin::_7);         // pin92    Такты записи в регистр
+    static PinOut pinWR_RG(Port::_G, Pin::_8);          // pin93    Сигнал записи в регистр
+    static PinOut pinDAT_RG(Port::_D, Pin::_13);        // pin82    Бит данныз записи в регистр
+    static PinOut pinSTART_TB(Port::_A, Pin::_2);       // pin36    Запуск развёртки
+    static PinOut pinSTOP_TB(Port::_F, Pin::_5);        // pin15    Останов развёртки
 
     static uint lengths[10] = { 9, 8, 8, 0, 0, 0, 0, 0, 0, 0 };
 
