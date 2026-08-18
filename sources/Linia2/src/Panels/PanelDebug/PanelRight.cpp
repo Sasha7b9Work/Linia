@@ -90,13 +90,13 @@ void PanelRight::PeriodicTask()
 
     static int MAX = ((1 << 18) - 1);
 
-    int points[MAX_NUMBER_POINTS];
+    int points[POINTS_IN_SAMPLE_ADC];
 
     for (int d = 0; d < 4; d++)
     {
         points[0] = Math::Rand(0, MAX);
 
-        for (int i = 1; i < MAX_NUMBER_POINTS; i++)
+        for (int i = 1; i < POINTS_IN_SAMPLE_ADC; i++)
         {
             int step = Math::Rand(-10000, 10000);
 

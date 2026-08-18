@@ -49,9 +49,9 @@ void ControlDataFPGA::SetMax(int _max)
 {
     max = _max;
 
-    float scale = (float)_max / (float)(MAX_NUMBER_POINTS - 1);
+    float scale = (float)_max / (float)(POINTS_IN_SAMPLE_ADC - 1);
 
-    for (int i = 0; i < MAX_NUMBER_POINTS; i++)
+    for (int i = 0; i < POINTS_IN_SAMPLE_ADC; i++)
     {
         data[i] = (int)(scale * (float)i + 0.5f);
     }
@@ -74,7 +74,7 @@ void ControlDataFPGA::Draw()
         min_value = max;
         max_value = 0;
 
-        for (int i = 0; i < MAX_NUMBER_POINTS; i++)
+        for (int i = 0; i < POINTS_IN_SAMPLE_ADC; i++)
         {
             if (data[i] < min_value)
             {
@@ -107,9 +107,9 @@ void ControlDataFPGA::Draw()
 }
 
 
-void ControlDataFPGA::SetData(int _data[MAX_NUMBER_POINTS])
+void ControlDataFPGA::SetData(int _data[POINTS_IN_SAMPLE_ADC])
 {
-    std::memcpy(data, _data, sizeof(data[0]) * MAX_NUMBER_POINTS);
+    std::memcpy(data, _data, sizeof(data[0]) * POINTS_IN_SAMPLE_ADC);
 
     Draw();
 }

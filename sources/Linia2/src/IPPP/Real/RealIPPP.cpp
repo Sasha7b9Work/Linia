@@ -7,6 +7,7 @@
 #include "IPPP/Keyboard/Keyboard.h"
 #include "IPPP/Real/RealDevice.h"
 #include "Utils/Timer.h"
+#include "Communicator/SPI/SPI.h"
 
 
 bool RealIPPP::IsChanBS(const Chan &ch) const
@@ -29,7 +30,7 @@ void RealIPPP::PeriodicTask()
 
     IDevice::impl->PeriodicTask();
 
-    int data[5][MAX_NUMBER_POINTS];
+    int data[NUMBER_ADC][POINTS_IN_SAMPLE_ADC];
 
     if (ReadData(data))
     {
@@ -52,66 +53,30 @@ void RealIPPP::PressButtonStop()
 }
 
 
-bool RealIPPP::ReadData(int /*data*/[5][MAX_NUMBER_POINTS])
+bool RealIPPP::ReadData(int data_out[NUMBER_ADC][POINTS_IN_SAMPLE_ADC])
 {
     bool result = false;
 
-    /*
     static bool prev = false;
 
-    if (pinFIFO_FULL.Get() && prev == false)
+    if (pinFIFO_FULL.GetState() && prev == false)
     {
-        gpiod_line *infoMOSI = GPIO::GetInputPinInfo(Pin::In_DAT_F0)->hw.line;
-        gpiod_line *infoCS = GPIO::GetOutputPinInfo(Pin::Out_SPI_CS)->hw.line;
-        gpiod_line *infoREQ = GPIO::GetOutputPinInfo(Pin::Out_REQ_RD)->hw.line;
+        uint8 data[POINTS_IN_SAMPLE_ADC * NUMBER_ADC];
 
-        for (int i = 0; i < MAX_NUMBER_POINTS; i++)
+        SPI::ReadFPGA(data, sizeof(data));
+
+        int *pointer = (int *)data_out;
+
+        for (size_t i = 0; i < sizeof(data); i++)
         {
-            PinOut::Set(infoCS, 0);
-
-            for (int num_adc = 0; num_adc < 4; num_adc++)
-            {
-                int value = 0;
-
-                for (int num_bit = 15; num_bit >= 0; num_bit--)
-                {
-                    PinOut::Set(infoREQ, 1);
-
-                    if (PinIn::GetHardware(infoMOSI))
-                    {
-                        value |= (1 << num_bit);
-                    }
-
-                    PinOut::Set(infoREQ, 0);
-                }
-
-                data[num_adc][i] = value;
-            }
-
-            int value = 0;
-
-            for (int num_bit = 7; num_bit >= 0; num_bit--)
-            {
-                PinOut::Set(infoREQ, 1);
-
-                if (PinIn::GetHardware(infoMOSI))
-                {
-                    value |= (1 << num_bit);
-                }
-
-                PinOut::Set(infoREQ, 0);
-            }
-
-            data[4][i] = value;
-
-            PinOut::Set(infoCS, 1);
+            *pointer = data[i];
+            pointer++;
         }
 
         result = true;
     }
 
-    prev = pinFIFO_FULL.Get();
-    */
+    prev = pinFIFO_FULL.GetState();
 
     return result;
 }

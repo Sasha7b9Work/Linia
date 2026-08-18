@@ -19,5 +19,5 @@ private:
 
     bool in_process_measuring = false;                  // Устанавливается при нажатии кнопки СТАРТ. Снимается при нажатии кнопки СТОП.
 
-    virtual bool ReadData(int data1[5][MAX_NUMBER_POINTS]) override;
+    virtual bool ReadData(int data1[NUMBER_ADC][POINTS_IN_SAMPLE_ADC]) override;
 };

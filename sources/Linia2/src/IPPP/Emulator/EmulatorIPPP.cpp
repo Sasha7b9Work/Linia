@@ -8,7 +8,7 @@ void EmulatorIPPP::PeriodicTask()
 {
     if (in_process_measuring)
     {
-        int data[5][MAX_NUMBER_POINTS];
+        int data[NUMBER_ADC][POINTS_IN_SAMPLE_ADC];
 
         if (ReadData(data))
         {
@@ -29,7 +29,7 @@ void EmulatorIPPP::PressButtonStop()
 }
 
 
-bool EmulatorIPPP::ReadData(int [5][MAX_NUMBER_POINTS])
+bool EmulatorIPPP::ReadData(int [NUMBER_ADC][POINTS_IN_SAMPLE_ADC])
 {
     return false;
 }
