@@ -58,3 +58,9 @@ sources/Linia2/src/convert_to_utf8.py - преобразование исход�
 ** Установка под Linux **
 cd /путь/к/проекту
 vcpkg install --triplet x64-linux
+
+
+*** Содержимое каталогов ***
+sources/Device - прошивка st32 платы контроллера
+sources/Linia  - старая версия ПО Orange Pi, для макетной платы контроллера
+sources/Linia2 - актуальная версия ПО Orange Pi для опытных образцов

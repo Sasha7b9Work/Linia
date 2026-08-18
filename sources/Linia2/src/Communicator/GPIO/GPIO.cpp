@@ -16,8 +16,8 @@
 PinIn pinFIFO_FULL(Pin::FULL_36);
 PinIn pinSTART(Pin::KN_START_15);
 PinIn pinSTOP(Pin::KN_STOP_33);
-PinIn pinKA(Pin::KN_A_11);
-PinIn pinKB(Pin::KN_B_13);
+PinIn pinEncA(Pin::ENC_A_11);
+PinIn pinEncB(Pin::ENC_B_13);
 
 
 namespace GPIO
@@ -27,9 +27,9 @@ namespace GPIO
         PinStorage::GetPinInfo(Pin::T13_03, true),
         PinStorage::GetPinInfo(Pin::T14_05, true),
         PinStorage::GetPinInfo(Pin::T15_07, true),
-        PinStorage::GetPinInfo(Pin::KN_A_11, true),
+        PinStorage::GetPinInfo(Pin::ENC_A_11, true),
         PinStorage::GetPinInfo(Pin::T17_12, true),
-        PinStorage::GetPinInfo(Pin::KN_B_13, true),
+        PinStorage::GetPinInfo(Pin::ENC_B_13, true),
         PinStorage::GetPinInfo(Pin::KN_START_15, true),
         PinStorage::GetPinInfo(Pin::DT_DDAC_16_out, false),
         PinStorage::GetPinInfo(Pin::CLK_DDAC_18_out, false),

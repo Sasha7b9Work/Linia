@@ -54,7 +54,7 @@ if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
 endif()
 
 
-add_subdirectory(Linia)
+#add_subdirectory(Linia)
 add_subdirectory(Linia2)
 
 if(WIN32)

@@ -10,8 +10,8 @@ namespace Keyboard
 {
 #define PIN_START pins[0]
 #define PIN_STOP  pins[1]
-#define PIN_KA    pins[2]
-#define PIN_KB    pins[3]
+#define PIN_ENC_A pins[2]
+#define PIN_ENC_B pins[3]
 
     static const int64 TIME_EVENT_BTN = 100;    // Столько мс состояние кнопки не должно меняться, чтобы действие свершилось (пропустить дребезг контактов)
     static const int64 TIME_EVENT_GOV = 3;
@@ -49,8 +49,8 @@ void Keyboard::Init()
 
     PIN_START.pin = &pinSTART;
     PIN_STOP.pin = &pinSTOP;
-    PIN_KA.pin = &pinKA;
-    PIN_KB.pin = &pinKB;
+    PIN_ENC_A.pin = &pinEncA;
+    PIN_ENC_B.pin = &pinEncB;
 }
 
 
@@ -76,22 +76,22 @@ void Keyboard::PeriodicTask()
         }
     }
 
-    if (PIN_KA.event_time && PIN_KB.event_time)
+    if (PIN_ENC_A.event_time && PIN_ENC_B.event_time)
     {
-        if ((time - PIN_KA.event_time) > TIME_EVENT_GOV &&
-            (time - PIN_KB.event_time) > TIME_EVENT_GOV)
+        if ((time - PIN_ENC_A.event_time) > TIME_EVENT_GOV &&
+            (time - PIN_ENC_B.event_time) > TIME_EVENT_GOV)
         {
-            if (PIN_KA.press && !PIN_KB.press)
+            if (PIN_ENC_A.press && !PIN_ENC_B.press)
             {
-                TheApp->OnGovernor(PIN_KA.event_time > PIN_KB.event_time);
+                TheApp->OnGovernor(PIN_ENC_A.event_time > PIN_ENC_B.event_time);
             }
-            else if (!PIN_KA.press && PIN_KB.press)
+            else if (!PIN_ENC_A.press && PIN_ENC_B.press)
             {
-                TheApp->OnGovernor(PIN_KA.event_time > PIN_KB.event_time);
+                TheApp->OnGovernor(PIN_ENC_A.event_time > PIN_ENC_B.event_time);
             }
 
-            PIN_KA.event_time = 0;
-            PIN_KB.event_time = 0;
+            PIN_ENC_A.event_time = 0;
+            PIN_ENC_B.event_time = 0;
         }
     }
 }
