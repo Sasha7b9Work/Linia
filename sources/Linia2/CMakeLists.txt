@@ -43,20 +43,19 @@ if(WIN32)
 
 else()
 
+    include_directories(
+         ./src
+        ../ThirdParty/wxWidgets/include
+        ../ThirdParty/rapidjson/include
+    )
+
     if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
         include_directories(
-            ./src
             ../generated/wxWidgets/lib/wx/include/gtk3-unicode-static-3.3
-            ../ThirdParty/wxWidgets/include
-            ../ThirdParty/rapidjson/include
         )
     else()
         include_directories(
-            ./arm64_plugs
-            ./src
             ../generated/wxWidgets/lib/wx/include/gtk3-unicode-static-3.3
-            ../ThirdParty/wxWidgets/include
-            ../ThirdParty/rapidjson/include
         )
     endif()
 
