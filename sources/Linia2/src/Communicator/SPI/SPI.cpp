@@ -13,16 +13,16 @@
 
 /*
 
-    ПЛИС:
+    ПЛИС: SPI0 CS0 M2
     21 - spi_miso   GPIO1_B1 SPI0_MISO_M2
-    23 - spi_clk    GPIO1_B3 SPI0_
-    24 - spi_cs
+    23 - spi_clk    GPIO1_B3 SPI0_CLK_M2
+    24 - spi_cs     GPIO1_B4 SPI0_CS0_M2
 
     DAC1, DAC2:
-    18 - spi_mosi
-    16 - spi_clk
-    31 - spi_cs         (формирователь развёртки)
-    35 - spi_cs         (источник 50В)
+    18 - spi_mosi   GPIO3_B6
+    16 - spi_clk    GPIO3_B5
+    31 - spi_cs     GPIO3_A0    (формирователь развёртки)
+    35 - spi_cs     GPIO3_A2    (источник 50В)
 */
 
 
@@ -43,7 +43,8 @@ namespace SPI
 
     static bool SetSpeed(uint speedHz);
     static bool SetMode(uint8 mode);
-    static bool Write(uint8 *data, size_t length);
+
+//    static bool Write(uint8 *data, size_t length);
 }
 
 void SPI::Init()
@@ -75,6 +76,7 @@ void SPI::Init()
     LOG_WRITE("SPI initialized successfully");
 }
 
+
 void SPI::DeInit()
 {
     if (fd_cs0 >= 0)
@@ -86,11 +88,14 @@ void SPI::DeInit()
     LOG_WRITE("SPI deinitialized");
 }
 
+
 bool SPI::WriteDynamicDAC(int /*number_DAC*/, uint16 /*value*/)
 {
     return false;
 }
 
+
+/*
 bool SPI::Write(uint8 *data, size_t length)
 {
     if (data == nullptr || length == 0)
@@ -117,24 +122,7 @@ bool SPI::Write(uint8 *data, size_t length)
 
     return true;
 }
-
-
-bool SPI::WriteFPGA(uint8 *data, size_t length)
-{
-    if (data == nullptr || length == 0)
-    {
-        LOG_ERROR("Invalid data or length");
-        return false;
-    }
-
-    if (fd_cs0 < 0)
-    {
-        LOG_ERROR("SPI not initialized");
-        return false;
-    }
-
-    return Write(data, length);
-}
+*/
 
 
 bool SPI::ReadFPGA(uint8 *data, size_t length)

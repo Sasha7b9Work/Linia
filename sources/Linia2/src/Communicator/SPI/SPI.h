@@ -13,12 +13,9 @@ namespace SPI
     bool IsAvailability();
     bool IsReady();
 
-    // Запись в FPGA
-    bool WriteFPGA(uint8 *data, size_t length);
-
-    // Чтение из FPGA
+    // Чтение из FPGA. Используется аппаратный SPI
     bool ReadFPGA(uint8 *data, size_t length);
 
-    // Записи в динамические ЦАП
+    // Запись в динамические ЦАПы. Используется программный SPI
     bool WriteDynamicDAC(int number_DAC, uint16 value);
 }

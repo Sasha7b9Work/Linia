@@ -43,8 +43,8 @@ namespace GPIO
     PinInfo *GetPinInfo(Pin::E);
 }
 
-extern PinIn pinFIFO_FULL;      // Значение "1" означает, что у ПЛИС на плате контроллера есть 
-extern PinIn pinSTART;
-extern PinIn pinSTOP;
+extern PinIn pinFIFO_FULL;      //   Значение "1" означает, что у ПЛИС на плате контроллера есть 
+extern PinIn pinSTART;          //   Кнопка старт
+extern PinIn pinSTOP;           //   Кнопка стоп
 extern PinIn pinEncA;           // / Выводы
 extern PinIn pinEncB;           // / энкодера
