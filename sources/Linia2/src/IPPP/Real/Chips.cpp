@@ -117,12 +117,8 @@ void Chip::WriteValue(uint value) const
     {
         DAC *dac = (DAC *)this;
 
-        int numberDAC = dac->GetNumberDynamicDAC();
-
-        if (numberDAC == 1 || numberDAC == 2)
+        if (SPI::WriteDynamicDAC(dac->GetType(), (uint16)value))
         {
-            SPI::WriteDynamicDAC(dac->GetNumberDynamicDAC(), (uint16)value);
-
             return;
         }
     }

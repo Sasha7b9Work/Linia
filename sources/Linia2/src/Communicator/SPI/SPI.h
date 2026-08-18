@@ -1,4 +1,6 @@
-﻿#pragma once
+﻿// 2026/08/18 17:10:34 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#pragma once
+#include "IPPP/Real/Chips.h"
 
 
 #define SPI_DEVICE "/dev/spidev0.0"
@@ -16,6 +18,7 @@ namespace SPI
     // Чтение из FPGA. Используется аппаратный SPI
     bool ReadFPGA(uint8 *data, size_t length);
 
-    // Запись в динамические ЦАПы. Используется программный SPI
-    bool WriteDynamicDAC(int number_DAC, uint16 value);
+    // Запись в динамические ЦАПы. Используется программный SPI.
+    // Возвращает false, если недопустимый номер DAC (не управляется с Orange Pi)
+    bool WriteDynamicDAC(DAC::E, uint16 value);
 }

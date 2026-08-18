@@ -29,13 +29,13 @@ struct DAC : public Chip
 {
     enum E
     {
-        _0_ChannelC_Form,   // Формирователь
+        _0_ChannelC_Form,   // Формирователь развёртки
         _1_ChannelC_Meas,   // Измеритель
         _2_ChannelB_DAC1,   // База DAC1
         _3_ChannelB_DAC2,   // База DAC2
         _4_ChannelS_DAC1,
         _5_ChannelS_DAC2,
-        _6_Source_50V,
+        _6_Source_50V,      // Источник 50 В
         Count
     };
 
@@ -50,20 +50,9 @@ struct DAC : public Chip
         return true;
     }
 
-    int GetNumberDynamicDAC() const
+    E GetType() const
     {
-        if (v == _0_ChannelC_Form)
-        {
-            return 1;
-        }
-        else if (v == _5_ChannelS_DAC2)
-        {
-            return 2;
-        }
-        else
-        {
-            return 0;
-        }
+        return v;
     }
 
 private:

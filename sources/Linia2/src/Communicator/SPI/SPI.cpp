@@ -1,5 +1,6 @@
 ﻿#include "defines.h"
 #include "Communicator/SPI/SPI.h"
+#include "Communicator/GPIO/GPIO.h"
 #include <filesystem>
 
 
@@ -19,8 +20,8 @@
     24 - spi_cs     GPIO1_B4 SPI0_CS0_M2
 
     DAC1, DAC2:
-    18 - spi_mosi   GPIO3_B6
     16 - spi_clk    GPIO3_B5
+    18 - spi_mosi   GPIO3_B6
     31 - spi_cs     GPIO3_A0    (формирователь развёртки)
     35 - spi_cs     GPIO3_A2    (источник 50В)
 */
@@ -34,12 +35,17 @@
 
 namespace SPI
 {
-    static int fd_cs0 = -1;  // для CS0 (пин 24)
+    static int fd_cs0 = -1;                             // для CS0 (пин 24)
     static uint speed = SPI_SPEED;
     static uint8 mode = 0;
     static uint8 bits_per_word = 8;
 
-    const char *device_cs0 = SPI_DEVICE;      // "/dev/spidev0.0"
+    static const char *device_cs0 = SPI_DEVICE;         // "/dev/spidev0.0"
+
+    static PinOut pinCLK(Pin::DDAC_CLK_18_out);
+    static PinOut pinMOSI(Pin::DDAC_MOSI_16_out);
+    static PinOut pinCS0_SCAN(Pin::DDAC_CS0_31_out);    // Формирователь развёртки
+    static PinOut pinCS1_50V(Pin::DDAC_CS1_35_out);     // Источник 50В
 
     static bool SetSpeed(uint speedHz);
     static bool SetMode(uint8 mode);
@@ -49,6 +55,11 @@ namespace SPI
 
 void SPI::Init()
 {
+    pinCS0_SCAN.ToHi();
+    pinCS1_50V.ToHi();
+    pinCLK.ToLow();
+    pinMOSI.ToLow();
+
     LOG_WRITE("Initializing SPI with hardware CS...");
 
     fd_cs0 = ::open(device_cs0, O_RDWR);
@@ -89,9 +100,29 @@ void SPI::DeInit()
 }
 
 
-bool SPI::WriteDynamicDAC(int /*number_DAC*/, uint16 /*value*/)
+bool SPI::WriteDynamicDAC(DAC::E dac, uint16 value)
 {
-    return false;
+    if (dac != DAC::_0_ChannelC_Form && dac != DAC::_6_Source_50V)
+    {
+        return false;
+    }
+
+    (dac == DAC::_0_ChannelC_Form) ? pinCS0_SCAN.ToLow() : pinCS1_50V.ToLow();
+
+    for (int i = 0; i < 16; i++)
+    {
+        pinMOSI.Set((value & 0x01) != 0);
+
+        pinCLK.ToHi();
+
+        value >>= 1;
+
+        pinCLK.ToLow();
+    }
+
+    (dac == DAC::_0_ChannelC_Form) ? pinCS0_SCAN.ToHi() : pinCS1_50V.ToHi();
+
+    return true;
 }
 
 
