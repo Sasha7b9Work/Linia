@@ -56,6 +56,7 @@ else()
             ./src
             ../generated/wxWidgets/lib/wx/include/gtk3-unicode-static-3.3
             ../ThirdParty/wxWidgets/include
+            ../ThirdParty/rapidjson/include
         )
     endif()
 
