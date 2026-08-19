@@ -4,8 +4,8 @@
 #include "GUI/PageDebug/Notebook/Register.h"
 #include "MainWindow.h"
 #pragma warning(push, 0)
-#include <wx/sizer.h>
-#include <wx/menu.h>
+    #include <wx/sizer.h>
+    #include <wx/menu.h>
 #pragma warning(pop)
 
 PageChip::PageChip(wxNotebook *notebook, const wxString &title) :
