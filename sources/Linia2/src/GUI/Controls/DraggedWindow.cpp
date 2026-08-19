@@ -3,7 +3,7 @@
 #include "GUI/Controls/DraggedWindow.h"
 #include "Settings/Settings.h"
 #include "MainWindow.h"
-#include "GUI/PanelMeasures/Graphics/AutoCursors.h"
+#include "GUI/PageMeasures/Graphics/AutoCursors.h"
 #pragma warning(push, 0)
 #include <wx/dcclient.h>
 #pragma warning(pop)

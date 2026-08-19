@@ -1,8 +1,8 @@
 // 2026/03/11 14:03:34 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "System/Events.h"
-#include "GUI/PanelMeasures/PanelMeasures.h"
-#include "GUI/PanelMeasures/Grid/Grid.h"
+#include "GUI/PageMeasures/PageMeasures.h"
+#include "GUI/PageMeasures/Grid/Grid.h"
 
 
 void Events::ChangingTheConnectionOfTheMeasuredElement()
