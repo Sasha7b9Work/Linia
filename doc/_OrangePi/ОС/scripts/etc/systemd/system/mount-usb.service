@@ -1,0 +1,8 @@
+[Unit]
+Description=Mount USB drive to /mnt/usb1
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=/usr/local/bin/mount-usb.sh
+ExecStop=/bin/umount /mnt/usb1
