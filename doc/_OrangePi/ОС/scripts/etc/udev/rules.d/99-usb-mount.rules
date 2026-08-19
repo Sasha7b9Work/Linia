@@ -1,5 +1,0 @@
-# Правило для монтирования при вставке
-ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd[a-z][0-9]", ENV{ID_BUS}=="usb", TAG+="systemd", ENV{SYSTEMD_WANTS}="mount-usb.service"
-
-# Правило для размонтирования при извлечении
-ACTION=="remove", SUBSYSTEM=="block", KERNEL=="sd[a-z][0-9]", ENV{ID_BUS}=="usb", RUN+="/bin/systemctl stop mount-usb.service"
