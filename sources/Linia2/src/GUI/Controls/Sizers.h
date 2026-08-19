@@ -1,5 +1,6 @@
 // 2026/04/23 11:53:12 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
+#include "GUI/Controls/StaticBox.h"
 #pragma warning(push, 0)
     #include <wx/sizer.h>
 #pragma warning(pop)
@@ -47,6 +48,11 @@ private:
 class StaticBoxSizer : public wxStaticBoxSizer
 {
 public:
+
+    StaticBoxSizer(StaticBox *box, int orient) : wxStaticBoxSizer(box, orient)
+    {
+    }
+
     StaticBoxSizer(int type, wxWindow *parent, const wxString &title) :
         wxStaticBoxSizer(type, parent, title)
     {

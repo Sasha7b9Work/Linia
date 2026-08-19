@@ -2,7 +2,6 @@
 #pragma once
 #pragma warning(push, 0)
     #include <wx/statbox.h>
-    #include <wx/sizer.h>
 #pragma warning(pop)
 
 

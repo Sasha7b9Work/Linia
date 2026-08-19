@@ -18,7 +18,7 @@ PageController::PageController(wxNotebook *notebook) :
     StaticBox *box = new StaticBox(this, L("Обновление прошивки"));
 
     // Вертикальный сайзер для всего содержимого бокса
-    wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(box, wxVERTICAL);
+    StaticBoxSizer *boxSizer = new StaticBoxSizer(box, wxVERTICAL);
 
     // --- Первая строка: кнопка "Выбрать файл" + название файла ---
     BoxSizerHor *fileRowSizer = new BoxSizerHor();
