@@ -3,13 +3,13 @@
 #include "GUI/Controls/Notebook.h"
 
 
-class PanelDebug : public PageNotebook
+class PageDebug : public PageNotebook
 {
 public:
 
-    static PanelDebug *self;
+    static PageDebug *self;
 
-    PanelDebug(Notebook *);
+    PageDebug(Notebook *);
 
     virtual bool Show(bool) override;
 

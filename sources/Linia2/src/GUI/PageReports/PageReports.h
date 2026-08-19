@@ -3,9 +3,9 @@
 #include "GUI/Controls/Notebook.h"
 
 
-class PanelReports : public PageNotebook
+class PageReports : public PageNotebook
 {
 public:
 
-    PanelReports(Notebook *, PanelReports *&);
+    PageReports(Notebook *, PageReports *&);
 };

@@ -9,10 +9,10 @@
 #pragma warning(pop)
 
 
-PanelDebug *PanelDebug::self = nullptr;
+PageDebug *PageDebug::self = nullptr;
 
 
-PanelDebug::PanelDebug(Notebook *board) : PageNotebook(board, L("Отладка"))
+PageDebug::PageDebug(Notebook *board) : PageNotebook(board, L("Отладка"))
 {
     self = this;
 
@@ -30,7 +30,7 @@ PanelDebug::PanelDebug(Notebook *board) : PageNotebook(board, L("Отладка"
 }
 
 
-bool PanelDebug::Show(bool show)
+bool PageDebug::Show(bool show)
 {
     show ? TheNotebookDebug->Init() : TheNotebookDebug->DeInit();
 
@@ -38,7 +38,7 @@ bool PanelDebug::Show(bool show)
 }
 
 
-void PanelDebug::PeriodicTask()
+void PageDebug::PeriodicTask()
 {
     TheNotebookDebug->PeriodicTask();
 
@@ -46,13 +46,13 @@ void PanelDebug::PeriodicTask()
 }
 
 
-void PanelDebug::Unpack()
+void PageDebug::Unpack()
 {
     TheNotebookDebug->Unpack();
 }
 
 
-void PanelDebug::Pack()
+void PageDebug::Pack()
 {
     TheNotebookDebug->Pack();
 }

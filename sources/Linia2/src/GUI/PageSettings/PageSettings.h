@@ -3,10 +3,10 @@
 #include "GUI/Controls/Notebook.h"
 
 
-class PanelSettings : public PageNotebook
+class PageSettings : public PageNotebook
 {
 public:
 
-    PanelSettings(Notebook *, PanelSettings *&);
+    PageSettings(Notebook *, PageSettings *&);
 };
 

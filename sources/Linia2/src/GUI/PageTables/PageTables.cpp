@@ -3,10 +3,10 @@
 #include "GUI/PageTables/PageTables.h"
 
 
-PanelTables *ThePanelTables = nullptr;
+PageTables *ThePanelTables = nullptr;
 
 
-PanelTables::PanelTables(Notebook *board, PanelTables *&self) :
+PageTables::PageTables(Notebook *board, PageTables *&self) :
     PageNotebook(board, L("Таблицы"))
 {
     self = this;

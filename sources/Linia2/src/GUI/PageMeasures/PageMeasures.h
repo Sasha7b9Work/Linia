@@ -14,7 +14,7 @@ class wxGraphicsContext;
 
 // Здесь отрисовывается график ну и кнопки разные
 
-class PanelMeasures : public PageNotebook
+class PageMeasures : public PageNotebook
 {
     friend class Point;
     friend class Text;
@@ -27,9 +27,9 @@ class PanelMeasures : public PageNotebook
 
 public:
 
-    static PanelMeasures *self;
+    static PageMeasures *self;
 
-    ~PanelMeasures();
+    ~PageMeasures();
 
     void SetColorBrush(const wxColor &);
     void SetColorPen(const wxColor &);
@@ -56,7 +56,7 @@ public:
 
 private:
 
-    PanelMeasures(Notebook *);
+    PageMeasures(Notebook *);
 
     Button *btnHelp = nullptr,
         *btnLessX = nullptr,

@@ -25,7 +25,7 @@ struct Error
 
 class PanelErrors : public Panel
 {
-    friend class PanelMeasures;
+    friend class PageMeasures;
 
 public:
 

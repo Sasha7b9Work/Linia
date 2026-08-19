@@ -17,23 +17,23 @@
 #pragma warning(pop)
 
 
-PanelMeasures *PanelMeasures::self = nullptr;
+PageMeasures *PageMeasures::self = nullptr;
 
 
-PanelMeasures::PanelMeasures(Notebook *board) : PageNotebook(board, L("Измерения"))
+PageMeasures::PageMeasures(Notebook *board) : PageNotebook(board, L("Измерения"))
 {
     self = this;
 
     wxPanel::SetDoubleBuffered(true);
-    Bind(wxEVT_PAINT, &PanelMeasures::OnEventPaint, this);
-    Bind(wxEVT_LEFT_DOWN, &PanelMeasures::OnEventMouseDown, this);
-    Bind(wxEVT_LEFT_UP, &PanelMeasures::OnEventMouseUp, this);
-    Bind(wxEVT_MOTION, &PanelMeasures::OnEventMouseMove, this);
-    Bind(wxEVT_MOUSEWHEEL, &PanelMeasures::OnEventMouseWheel, this);
-    Bind(wxEVT_RIGHT_DOWN, &PanelMeasures::OnEventRightClick, this);
-    Bind(wxEVT_LEAVE_WINDOW, &PanelMeasures::OnEventLeaveWindow, this);
-    Bind(wxEVT_ENTER_WINDOW, &PanelMeasures::OnEventEnterWindow, this);
-    Bind(wxEVT_BUTTON, &PanelMeasures::OnEventButton, this);
+    Bind(wxEVT_PAINT, &PageMeasures::OnEventPaint, this);
+    Bind(wxEVT_LEFT_DOWN, &PageMeasures::OnEventMouseDown, this);
+    Bind(wxEVT_LEFT_UP, &PageMeasures::OnEventMouseUp, this);
+    Bind(wxEVT_MOTION, &PageMeasures::OnEventMouseMove, this);
+    Bind(wxEVT_MOUSEWHEEL, &PageMeasures::OnEventMouseWheel, this);
+    Bind(wxEVT_RIGHT_DOWN, &PageMeasures::OnEventRightClick, this);
+    Bind(wxEVT_LEAVE_WINDOW, &PageMeasures::OnEventLeaveWindow, this);
+    Bind(wxEVT_ENTER_WINDOW, &PageMeasures::OnEventEnterWindow, this);
+    Bind(wxEVT_BUTTON, &PageMeasures::OnEventButton, this);
 
     int w = 25;
 
@@ -57,7 +57,7 @@ PanelMeasures::PanelMeasures(Notebook *board) : PageNotebook(board, L("Изме�
 }
 
 
-PanelMeasures::~PanelMeasures()
+PageMeasures::~PageMeasures()
 {
     SAFE_DELETE(bitmap);
     SAFE_DELETE(TheGrid);
@@ -65,7 +65,7 @@ PanelMeasures::~PanelMeasures()
 }
 
 
-void PanelMeasures::FullScreen(bool full)
+void PageMeasures::FullScreen(bool full)
 {
     if (!IsShown())
     {
@@ -76,7 +76,7 @@ void PanelMeasures::FullScreen(bool full)
 }
 
 
-void PanelMeasures::Init()
+void PageMeasures::Init()
 {
     int width = full_screen ? MainWindow::WIDTH : MainWindow::WIDTH_DRAW;
     int height = full_screen ? MainWindow::HEIGHT : MainWindow::HEIGHT_DRAW;
@@ -114,7 +114,7 @@ void PanelMeasures::Init()
 }
 
 
-void PanelMeasures::OnEventMouseDown(wxMouseEvent &event)
+void PageMeasures::OnEventMouseDown(wxMouseEvent &event)
 {
     pos_mouse_down = event.GetPosition();
 
@@ -128,7 +128,7 @@ void PanelMeasures::OnEventMouseDown(wxMouseEvent &event)
 }
 
 
-void PanelMeasures::OnEventLeaveWindow(wxMouseEvent &event)
+void PageMeasures::OnEventLeaveWindow(wxMouseEvent &event)
 {
     if (mouse_is_pressed)
     {
@@ -147,7 +147,7 @@ void PanelMeasures::OnEventLeaveWindow(wxMouseEvent &event)
 }
 
 
-void PanelMeasures::OnEventEnterWindow(wxMouseEvent &event)
+void PageMeasures::OnEventEnterWindow(wxMouseEvent &event)
 {
     TheAutoCursors->Allow();
 
@@ -155,7 +155,7 @@ void PanelMeasures::OnEventEnterWindow(wxMouseEvent &event)
 }
 
 
-void PanelMeasures::OnEventMouseUp(wxMouseEvent &)
+void PageMeasures::OnEventMouseUp(wxMouseEvent &)
 {
     mouse_is_pressed = false;
 
@@ -167,7 +167,7 @@ void PanelMeasures::OnEventMouseUp(wxMouseEvent &)
 }
 
 
-void PanelMeasures::OnEventMouseMove(wxMouseEvent &event)
+void PageMeasures::OnEventMouseMove(wxMouseEvent &event)
 {
     wxPoint position = event.GetPosition();
 
@@ -200,7 +200,7 @@ void PanelMeasures::OnEventMouseMove(wxMouseEvent &event)
 }
 
 
-void PanelMeasures::OnEventMouseWheel(wxMouseEvent &event)
+void PageMeasures::OnEventMouseWheel(wxMouseEvent &event)
 {
     if (event.GetModifiers() == wxMOD_CONTROL)
     {
@@ -216,7 +216,7 @@ void PanelMeasures::OnEventMouseWheel(wxMouseEvent &event)
 }
 
 
-void PanelMeasures::OnEventButton(wxCommandEvent &event)
+void PageMeasures::OnEventButton(wxCommandEvent &event)
 {
     int id = event.GetId();
 
@@ -244,7 +244,7 @@ void PanelMeasures::OnEventButton(wxCommandEvent &event)
 }
 
 
-void PanelMeasures::BeginPaint()
+void PageMeasures::BeginPaint()
 {
     dc.SelectObject(*bitmap);
     gc = wxGraphicsContext::Create(dc);
@@ -252,13 +252,13 @@ void PanelMeasures::BeginPaint()
 }
 
 
-void PanelMeasures::EndPaint()
+void PageMeasures::EndPaint()
 {
     dc.SelectObject(wxNullBitmap);
 }
 
 
-void PanelMeasures::OnEventPaint(wxPaintEvent &)
+void PageMeasures::OnEventPaint(wxPaintEvent &)
 {
     if (!bitmap)
     {
@@ -281,33 +281,33 @@ void PanelMeasures::OnEventPaint(wxPaintEvent &)
 
 void Point::Draw(int x, int y) const
 {
-    PanelMeasures::self->gc->StrokeLine(x, y, x + 0.01, y);
+    PageMeasures::self->gc->StrokeLine(x, y, x + 0.01, y);
 }
 
 
 void Line::Draw() const
 {
-    PanelMeasures::self->gc->StrokeLine(x1, y1, x2, y2);
+    PageMeasures::self->gc->StrokeLine(x1, y1, x2, y2);
 }
 
 
 void Line::Draw(const wxColor &color) const
 {
-    PanelMeasures::self->SetColorPen(color);
-    PanelMeasures::self->gc->StrokeLine(x1, y1, x2, y2);
+    PageMeasures::self->SetColorPen(color);
+    PageMeasures::self->gc->StrokeLine(x1, y1, x2, y2);
 }
 
 
 void Rect::Fill(int x, int y, const wxColor &color) const
 {
-    PanelMeasures::self->SetColorBrush(color);
-    PanelMeasures::self->gc->DrawRectangle(x, y, width, height);
+    PageMeasures::self->SetColorBrush(color);
+    PageMeasures::self->gc->DrawRectangle(x, y, width, height);
 }
 
 
 void Rect::Draw(int x, int y, const wxColor &color) const
 {
-    PanelMeasures::self->SetColorPen(color);
+    PageMeasures::self->SetColorPen(color);
     Line(x, y, x + width, y).Draw();
     Line(x + width, y, x + width, y + height).Draw();
     Line(x, y + height, x + width, y + height).Draw();
@@ -323,36 +323,36 @@ Text::Text(const wxString &_text) : text(_text)
 
 void Text::SetFont()
 {
-    PanelMeasures::self->gc->SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL), PanelMeasures::self->color_pen);
+    PageMeasures::self->gc->SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL), PageMeasures::self->color_pen);
 }
 
 
 void Text::Draw(int x, int y) const
 {
-    PanelMeasures::self->gc->DrawText(text, x, y);
+    PageMeasures::self->gc->DrawText(text, x, y);
 }
 
 
 void Text::DrawAboutCenterLeft(int x, int y, bool fillBackground) const
 {
     double width, height, descent, externalLeading;
-    PanelMeasures::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+    PageMeasures::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
 
     x -= (int)(width + 0.5);
     y -= (int)(height / 2.0 + 0.5);
 
     if (fillBackground)
     {
-        PanelMeasures::self->gc->SetPen(PanelMeasures::self->color_brush);
-        PanelMeasures::self->gc->DrawRectangle(x, y, width, height);
-        PanelMeasures::self->gc->SetPen(PanelMeasures::self->color_pen);
+        PageMeasures::self->gc->SetPen(PageMeasures::self->color_brush);
+        PageMeasures::self->gc->DrawRectangle(x, y, width, height);
+        PageMeasures::self->gc->SetPen(PageMeasures::self->color_pen);
     }
 
-    PanelMeasures::self->gc->DrawText(text, x, y);
+    PageMeasures::self->gc->DrawText(text, x, y);
 }
 
 
-void PanelMeasures::FillRectangle(int x, int y, int width, int height, const wxColor &_color)
+void PageMeasures::FillRectangle(int x, int y, int width, int height, const wxColor &_color)
 {
     SetColorBrush(_color);
     gc->DrawRectangle(x, y, width, height);
@@ -362,78 +362,78 @@ void PanelMeasures::FillRectangle(int x, int y, int width, int height, const wxC
 void Text::DrawAboutCenterDown(int x, int y, bool fillBackground) const
 {
     double width, height, descent, externalLeading;
-    PanelMeasures::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+    PageMeasures::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
 
     x -= (int)(width / 2.0 + 0.5);
 
     if (fillBackground)
     {
-        PanelMeasures::self->gc->SetPen(PanelMeasures::self->color_brush);
-        PanelMeasures::self->gc->DrawRectangle(x, y, width, height);
-        PanelMeasures::self->gc->SetPen(PanelMeasures::self->color_pen);
+        PageMeasures::self->gc->SetPen(PageMeasures::self->color_brush);
+        PageMeasures::self->gc->DrawRectangle(x, y, width, height);
+        PageMeasures::self->gc->SetPen(PageMeasures::self->color_pen);
     }
 
-    PanelMeasures::self->gc->DrawText(text, x, y);
+    PageMeasures::self->gc->DrawText(text, x, y);
 }
 
 
 void Text::DrawAboutCenterUp(int x, int y, bool fillBackground) const
 {
     double width, height, descent, externalLeading;
-    PanelMeasures::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+    PageMeasures::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
 
     y -= (int)(height);
     x -= (int)(width / 2);
 
     if (fillBackground)
     {
-        PanelMeasures::self->gc->SetPen(PanelMeasures::self->color_brush);
-        PanelMeasures::self->gc->DrawRectangle(x, y, width, height);
-        PanelMeasures::self->gc->SetPen(PanelMeasures::self->color_pen);
+        PageMeasures::self->gc->SetPen(PageMeasures::self->color_brush);
+        PageMeasures::self->gc->DrawRectangle(x, y, width, height);
+        PageMeasures::self->gc->SetPen(PageMeasures::self->color_pen);
     }
 
-    PanelMeasures::self->gc->DrawText(text, x, y);
+    PageMeasures::self->gc->DrawText(text, x, y);
 }
 
 
 void Text::DrawAboutRightUp(int x, int y, bool fillBackground, bool frame) const
 {
     double width, height, descent, externalLeading;
-    PanelMeasures::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+    PageMeasures::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
 
     y -= (int)(height);
 
     if (fillBackground)
     {
-        PanelMeasures::self->gc->SetPen(PanelMeasures::self->color_brush);
-        PanelMeasures::self->gc->DrawRectangle(x, y, width, height);
-        PanelMeasures::self->gc->SetPen(PanelMeasures::self->color_pen);
+        PageMeasures::self->gc->SetPen(PageMeasures::self->color_brush);
+        PageMeasures::self->gc->DrawRectangle(x, y, width, height);
+        PageMeasures::self->gc->SetPen(PageMeasures::self->color_pen);
 
         if (frame)
         {
-            Rect((int)width, (int)height).Draw(x, y, PanelMeasures::self->color_pen);
+            Rect((int)width, (int)height).Draw(x, y, PageMeasures::self->color_pen);
         }
     }
 
-    PanelMeasures::self->gc->DrawText(text, x, y);
+    PageMeasures::self->gc->DrawText(text, x, y);
 }
 
 
 void Text::DrawAboutCenterRigth(int x, int y, bool fillBackground) const
 {
     double width, height, descent, externalLeading;
-    PanelMeasures::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+    PageMeasures::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
 
     y -= (int)(height / 2.0 + 0.5);
 
     if (fillBackground)
     {
-        PanelMeasures::self->gc->SetPen(PanelMeasures::self->color_brush);
-        PanelMeasures::self->gc->DrawRectangle(x, y, width, height);
-        PanelMeasures::self->gc->SetPen(PanelMeasures::self->color_pen);
+        PageMeasures::self->gc->SetPen(PageMeasures::self->color_brush);
+        PageMeasures::self->gc->DrawRectangle(x, y, width, height);
+        PageMeasures::self->gc->SetPen(PageMeasures::self->color_pen);
     }
 
-    PanelMeasures::self->gc->DrawText(text, x, y);
+    PageMeasures::self->gc->DrawText(text, x, y);
 }
 
 
@@ -441,11 +441,11 @@ void Spline::Draw(const std::vector<wxPoint> &points, bool smooth, bool draw_poi
 {
     if (smooth)
     {
-        GraphicsSplineRenderer::DrawSplinePath(PanelMeasures::self->gc, points, 1.0);
+        GraphicsSplineRenderer::DrawSplinePath(PageMeasures::self->gc, points, 1.0);
     }
     else
     {
-        wxGraphicsPath path = PanelMeasures::self->gc->CreatePath();
+        wxGraphicsPath path = PageMeasures::self->gc->CreatePath();
 
         path.MoveToPoint(points[0].x, points[0].y);
 
@@ -454,24 +454,24 @@ void Spline::Draw(const std::vector<wxPoint> &points, bool smooth, bool draw_poi
             path.AddLineToPoint(points[i].x, points[i].y);
         }
 
-        PanelMeasures::self->gc->StrokePath(path);
+        PageMeasures::self->gc->StrokePath(path);
     }
 
     if (draw_points)
     {
-        wxGraphicsPath path_circle = PanelMeasures::self->gc->CreatePath();
+        wxGraphicsPath path_circle = PageMeasures::self->gc->CreatePath();
 
         for (const auto &pt : points)
         {
             path_circle.AddCircle(pt.x, pt.y, SET::GUI::size_point->Get());
         }
 
-        PanelMeasures::self->gc->FillPath(path_circle);
+        PageMeasures::self->gc->FillPath(path_circle);
     }
 }
 
 
-void PanelMeasures::OnEventRightClick(wxMouseEvent &)
+void PageMeasures::OnEventRightClick(wxMouseEvent &)
 {
     MenuDisplay menu;
 
@@ -479,7 +479,7 @@ void PanelMeasures::OnEventRightClick(wxMouseEvent &)
 }
 
 
-void PanelMeasures::SetColorBrush(const wxColor &_color)
+void PageMeasures::SetColorBrush(const wxColor &_color)
 {
     color_brush = _color;
 
@@ -487,7 +487,7 @@ void PanelMeasures::SetColorBrush(const wxColor &_color)
 }
 
 
-void PanelMeasures::SetColorPen(const wxColor &_color)
+void PageMeasures::SetColorPen(const wxColor &_color)
 {
     color_pen = _color;
 
@@ -495,25 +495,25 @@ void PanelMeasures::SetColorPen(const wxColor &_color)
 }
 
 
-void PanelMeasures::LoadColors()
+void PageMeasures::LoadColors()
 {
-    PanelMeasures::self->gc->SetPen(color_pen);
-    PanelMeasures::self->gc->SetBrush(color_brush);
+    PageMeasures::self->gc->SetPen(color_pen);
+    PageMeasures::self->gc->SetBrush(color_brush);
 }
 
 
-void PanelMeasures::OnEventCnangeMeasuredElement()
+void PageMeasures::OnEventCnangeMeasuredElement()
 {
 }
 
 
-wxSize PanelMeasures::GetDrawingSize() const
+wxSize PageMeasures::GetDrawingSize() const
 {
     return wxPanel::GetClientSize();
 }
 
 
-wxSize PanelMeasures::GetFullSize() const
+wxSize PageMeasures::GetFullSize() const
 {
     return wxPanel::GetSize();
 }

@@ -12,13 +12,13 @@ extern AutoCursors   *TheAutoCursors;
 extern IGrid         *TheGrid;
 extern MainWindow    *TheMainWindow;
 
-class PanelArchive;
-class PanelDebug;
-class PanelMeasures;
-class PanelReports;
-class PanelSettings;
-class PanelTables;
-class PanelArchive;
+class PageArchive;
+class PageDebug;
+class PageMeasures;
+class PageReports;
+class PageSettings;
+class PageTables;
+class PageArchive;
 
 class PageTests;
 class PanelCategory;
@@ -30,10 +30,10 @@ class NotebookDebug;
 
 class PanelRight;
 
-extern PanelReports  *ThePanelReports;
-extern PanelSettings *ThePanelSettings;
-extern PanelTables   *ThePanelTables;
-extern PanelArchive  *ThePanelArchive;
+extern PageReports  *ThePanelReports;
+extern PageSettings *ThePanelSettings;
+extern PageTables   *ThePanelTables;
+extern PageArchive  *ThePanelArchive;
 
 extern PageTests     *ThePageTests;
 extern PanelCategory *ThePanelCategory;
