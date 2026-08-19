@@ -10,8 +10,8 @@
 PageFPGA *PageFPGA::self = nullptr;
 
 
-PageFPGA::PageFPGA(wxNotebook *parent) :
-    PageChip(parent, "ПЛИС")
+PageFPGA::PageFPGA(wxNotebook *notebook) :
+    PageChip(notebook, "ПЛИС")
 {
     self = this;
 

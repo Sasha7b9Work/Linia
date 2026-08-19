@@ -4,15 +4,11 @@
 #include "GUI/PageDebug/Notebook/Register.h"
 
 
-/*
-    Регистр управления 16 разрядов
-*/
-
 PageCommutator *PageCommutator::self = nullptr;
 
 
-PageCommutator::PageCommutator(wxNotebook *parent) :
-    PageChip(parent, "Коммутатор")
+PageCommutator::PageCommutator(wxNotebook *notebook) :
+    PageChip(notebook, "Коммутатор")
 {
     self = this;
 

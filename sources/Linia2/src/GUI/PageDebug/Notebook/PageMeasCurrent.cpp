@@ -11,8 +11,8 @@
 PageMeasCurrent *PageMeasCurrent::self = nullptr;
 
 
-PageMeasCurrent::PageMeasCurrent(wxNotebook *parent) :
-    PageChip(parent, "Измеритель тока")
+PageMeasCurrent::PageMeasCurrent(wxNotebook *notebook) :
+    PageChip(notebook, "Измеритель тока")
 {
     self = this;
 

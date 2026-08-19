@@ -12,8 +12,8 @@
 PageSource50V *PageSource50V::self = nullptr;
 
 
-PageSource50V::PageSource50V(wxNotebook *parent) :
-    PageChip(parent, L("Источник 50 В"))
+PageSource50V::PageSource50V(wxNotebook *notebook) :
+    PageChip(notebook, L("Источник 50 В"))
 {
     self = this;
 

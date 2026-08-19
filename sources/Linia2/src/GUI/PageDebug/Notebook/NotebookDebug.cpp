@@ -9,6 +9,7 @@
 #include "GUI/PageDebug/Notebook/PageChannelS.h"
 #include "GUI/PageDebug/Notebook/PageMeasCurrent.h"
 #include "GUI/PageDebug/Notebook/PageSource50V.h"
+#include "GUI/PageDebug/Notebook/PageController.h"
 #include "IPPP/Real/Chips.h"
 #include "Settings/Configurator.h"
 
@@ -29,6 +30,7 @@ NotebookDebug::NotebookDebug(wxWindow *parent, NotebookDebug *&global) :
     AppendNewPage(new PageSource3kV(this));
     AppendNewPage(new PageSource50V(this));
     AppendNewPage(new PageCommutator(this));
+    AppendNewPage(new PageController(this));
 
     wxWindowBase::Layout();
 

@@ -15,8 +15,8 @@
 PageChannelS *PageChannelS::self = nullptr;
 
 
-PageChannelS::PageChannelS(wxNotebook *parent) :
-    PageChip(parent, "Канал S")
+PageChannelS::PageChannelS(wxNotebook *notebook) :
+    PageChip(notebook, "Канал S")
 {
     self = this;
 

@@ -7,8 +7,8 @@
 PageChannelB *ThePageChannelB = nullptr;
 
 
-PageChannelB::PageChannelB(wxNotebook *parent, PageChannelB *&global) :
-    PageChip(parent, "Канал B")
+PageChannelB::PageChannelB(wxNotebook *notebook, PageChannelB *&global) :
+    PageChip(notebook, "Канал B")
 {
     global = this;
 

@@ -6,8 +6,8 @@
 PageSource3kV *PageSource3kV::self = nullptr;
 
 
-PageSource3kV::PageSource3kV(wxNotebook *parent) :
-    PageChip(parent, "Источник 3 кВ")
+PageSource3kV::PageSource3kV(wxNotebook *notebook) :
+    PageChip(notebook, "Источник 3 кВ")
 {
     self = this;
 

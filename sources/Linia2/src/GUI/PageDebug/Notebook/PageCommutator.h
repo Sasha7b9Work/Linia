@@ -3,6 +3,11 @@
 #include "GUI/PageDebug/Notebook/PageChip.h"
 
 
+/*
+    Плата коммутатора
+*/
+
+
 class PageCommutator : public PageChip
 {
 public:

@@ -8,15 +8,15 @@
 #include <wx/menu.h>
 #pragma warning(pop)
 
-PageChip::PageChip(wxNotebook *parent, const wxString &title) :
-    Panel(parent)
+PageChip::PageChip(wxNotebook *notebook, const wxString &title) :
+    Panel(notebook)
 {
     Panel::SetName(title);
 
     wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
     SetSizer(mainSizer);
 
-    Panel::SetBackgroundColour(parent->GetBackgroundColour().ChangeLightness(110));
+    Panel::SetBackgroundColour(notebook->GetBackgroundColour().ChangeLightness(110));
 
     Bind(wxEVT_RIGHT_DOWN, &PageChip::OnRightClick, this);
 }
