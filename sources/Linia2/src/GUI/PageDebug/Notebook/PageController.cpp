@@ -36,7 +36,7 @@ PageController::PageController(wxNotebook *notebook) :
     updateButton->Enable(false);  // По умолчанию отключена, пока не выбран файл
 
     // Центрируем кнопку по горизонтали
-    wxBoxSizer *updateRowSizer = new wxBoxSizer(wxHORIZONTAL);
+    BoxSizerHor *updateRowSizer = new BoxSizerHor();
     updateRowSizer->AddStretchSpacer();
     updateRowSizer->Add(updateButton, 0, wxALL, 5);
     updateRowSizer->AddStretchSpacer();
@@ -45,7 +45,7 @@ PageController::PageController(wxNotebook *notebook) :
 
     // Устанавливаем сайзер на панель PageController
     // Предполагается, что PageChip уже имеет сайзер или его нужно создать
-    wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
+    BoxSizerVert *mainSizer = new BoxSizerVert();
     mainSizer->Add(boxSizer, 0, wxALL, 10);
     SetSizer(mainSizer);
 }
