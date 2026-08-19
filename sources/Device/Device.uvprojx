@@ -1066,27 +1066,27 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Device/PCM</GroupName>
+          <GroupName>Device/OPi5Plus</GroupName>
           <Files>
             <File>
-              <FileName>PCM.cpp</FileName>
+              <FileName>OPi5Plus.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Device\PCM\PCM.cpp</FilePath>
+              <FilePath>.\src\Device\OPi5Plus\OPi5Plus.cpp</FilePath>
             </File>
             <File>
-              <FileName>PCM.h</FileName>
+              <FileName>OPi5Plus.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Device\PCM\PCM.h</FilePath>
+              <FilePath>.\src\Device\OPi5Plus\OPi5Plus.h</FilePath>
             </File>
             <File>
               <FileName>SCPI.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Device\PCM\SCPI.cpp</FilePath>
+              <FilePath>.\src\Device\OPi5Plus\SCPI.cpp</FilePath>
             </File>
             <File>
               <FileName>SCPI.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Device\PCM\SCPI.h</FilePath>
+              <FilePath>.\src\Device\OPi5Plus\SCPI.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2392,27 +2392,27 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Device/PCM</GroupName>
+          <GroupName>Device/OPi5Plus</GroupName>
           <Files>
             <File>
-              <FileName>PCM.cpp</FileName>
+              <FileName>OPi5Plus.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Device\PCM\PCM.cpp</FilePath>
+              <FilePath>.\src\Device\OPi5Plus\OPi5Plus.cpp</FilePath>
             </File>
             <File>
-              <FileName>PCM.h</FileName>
+              <FileName>OPi5Plus.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Device\PCM\PCM.h</FilePath>
+              <FilePath>.\src\Device\OPi5Plus\OPi5Plus.h</FilePath>
             </File>
             <File>
               <FileName>SCPI.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Device\PCM\SCPI.cpp</FilePath>
+              <FilePath>.\src\Device\OPi5Plus\SCPI.cpp</FilePath>
             </File>
             <File>
               <FileName>SCPI.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Device\PCM\SCPI.h</FilePath>
+              <FilePath>.\src\Device\OPi5Plus\SCPI.h</FilePath>
             </File>
           </Files>
         </Group>

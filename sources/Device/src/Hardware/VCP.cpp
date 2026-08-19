@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Hardware/VCP.h"
 #include "Hardware/USBD/usbd_cdc_interface.h"
-#include "Device/PCM/SCPI.h"
+#include "Device/OPi5Plus/SCPI.h"
 
 
 namespace VCP

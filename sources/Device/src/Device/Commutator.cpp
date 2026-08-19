@@ -1,7 +1,7 @@
 // 2025/10/24 08:56:33 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Device/Commutator.h"
-#include "Device/PCM/SCPI.h"
+#include "Device/OPi5Plus/SCPI.h"
 
 
 namespace Commutator

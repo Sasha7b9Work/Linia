@@ -3,7 +3,7 @@
 #include "Utils/Log.h"
 #include "Utils/String.h"
 #include "Utils/StringUtils.h"
-#include "Device/PCM/SCPI.h"
+#include "Device/OPi5Plus/SCPI.h"
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>

@@ -8,7 +8,7 @@
 
 namespace Source50V
 {
-    static const ChipDAC::E DAC_1 = ChipDAC::SOURCE_50V_PCM;
+    static const ChipDAC::E DAC_1 = ChipDAC::SOURCE_50V_OPi5Plus;
 
     void Init();
 }
