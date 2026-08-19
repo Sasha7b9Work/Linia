@@ -5,7 +5,7 @@
 #include "MainWindow.h"
 #include "Communicator/UART/UART.h"
 #include "Communicator/SPI/SPI.h"
-#include "Controls/AutoRebootDialog.h"
+#include "GUI/Controls/AutoRebootDialog.h"
 #include "SoftTests/SoftTests.h"
 #include "IPPP/I_IPPP.h"
 #include "IPPP/Real/Chips.h"

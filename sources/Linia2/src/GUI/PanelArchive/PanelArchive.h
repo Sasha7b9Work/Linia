@@ -1,0 +1,11 @@
+﻿// 2026/04/08 15:03:46 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#pragma once
+#include "GUI/Controls/Notebook.h"
+
+
+class PanelArchive : public PageNotebook
+{
+public:
+
+    PanelArchive(Notebook *, PanelArchive *&);
+};

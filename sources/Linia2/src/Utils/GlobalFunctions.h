@@ -1,7 +1,7 @@
 ﻿// 2023/08/10 19:21:10 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Controls/Button.h"
-#include "Controls/ButtonCombo.h"
+#include "GUI/Controls/Button.h"
+#include "GUI/Controls/ButtonCombo.h"
 #pragma warning(push, 0)
 #pragma warning(pop)
 

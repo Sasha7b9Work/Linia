@@ -76,24 +76,23 @@ file(GLOB COMMUNICATOR_COMPORT          src/Communicator/ComPort/*.*)
 file(GLOB COMMUNICATOR_GPIO             src/Communicator/GPIO/*.*)
 file(GLOB COMMUNICATOR_SPI              src/Communicator/SPI/*.*)
 file(GLOB COMMUNICATOR_UART             src/Communicator/UART/*.*)
-file(GLOB CONTROLS                      src/Controls/*.*)
 file(GLOB DATA                          src/Data/*.*)
 file(GLOB IPPP                          src/IPPP/*.*)
 file(GLOB IPPP_EMULATOR                 src/IPPP/Emulator/*.*)
 file(GLOB IPPP_KEYBOARD                 src/IPPP/Keyboard/*.*)
 file(GLOB IPPP_REAL                     src/IPPP/Real/*.*)
 file(GLOB IPPP_SCPI                     src/IPPP/SCPI/*.*)
-file(GLOB MAIN_PANEL                    src/MainPanel/*.*)
-file(GLOB PANEL_ARCHIVE                 src/Panels/PanelArchive/*.*)
-file(GLOB PANEL_DEBUG                   src/Panels/PanelDebug/*.*)
-file(GLOB PANEL_DEBUG_NOTEBOOK          src/Panels/PanelDebug/Notebook/*.*)
-file(GLOB PANEL_MEAS                    src/Panels/PanelMeasures/*.*)
-file(GLOB PANEL_MEAS_GRAPHICS           src/Panels/PanelMeasures/Graphics/*.*)
-file(GLOB PANEL_MEAS_GRID               src/Panels/PanelMeasures/Grid/*.*)
-file(GLOB PANEL_REPORTS                 src/Panels/PanelReports/*.*)
-file(GLOB PANEL_SETTINGS                src/Panels/PanelSettings/*.*)
-file(GLOB PANEL_TABLES                  src/Panels/PanelTables/*.*)
-file(GLOB PANEL_TESTS                   src/Panels/PanelTests/*.*)
+file(GLOB GUI_CONTROLS                  src/GUI/Controls/*.*)
+file(GLOB GUI_ARCHIVE                   src/GUI/PanelArchive/*.*)
+file(GLOB GUI_DEBUG                     src/GUI/PanelDebug/*.*)
+file(GLOB GUI_DEBUG_NOTEBOOK            src/GUI/PanelDebug/Notebook/*.*)
+file(GLOB GUI_MEAS                      src/GUI/PanelMeasures/*.*)
+file(GLOB GUI_MEAS_GRAPHICS             src/GUI/PanelMeasures/Graphics/*.*)
+file(GLOB GUI_MEAS_GRID                 src/GUI/PanelMeasures/Grid/*.*)
+file(GLOB GUI_REPORTS                   src/GUI/PanelReports/*.*)
+file(GLOB GUI_SETTINGS                  src/GUI/PanelSettings/*.*)
+file(GLOB GUI_TABLES                    src/GUI/PanelTables/*.*)
+file(GLOB GUI_TESTS                     src/GUI/PanelTests/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB SETTINGS_TESTS                src/Settings/Tests/*.*)
 file(GLOB SETTINGS_TESTS_LIBRARY        src/Settings/Tests/Library/*.*)
@@ -124,24 +123,23 @@ source_group(Communicator/ComPort             FILES ${COMMUNICATOR_COMPORT})
 source_group(Communicator/GPIO                FILES ${COMMUNICATOR_GPIO})
 source_group(Communicator/SPI                 FILES ${COMMUNICATOR_SPI})
 source_group(Communicator/UART                FILES ${COMMUNICATOR_UART})
-source_group(Controls                         FILES ${CONTROLS})
 source_group(Data                             FILES ${DATA})
 source_group(IPPP                             FILES ${IPPP})
 source_group(IPPP/Emulator                    FILES ${IPPP_EMULATOR})
 source_group(IPPP/Keyboard                    FILES ${IPPP_KEYBOARD})
 source_group(IPPP/Real                        FILES ${IPPP_REAL})
 source_group(IPPP/SCPI                        FILES ${IPPP_SCPI})
-source_group(Panels                           FILES ${MAIN_PANEL})
-source_group(Panels/PanelArchive              FILES ${PANEL_ARCHIVE})
-source_group(Panels/PanelDebug                FILES ${PANEL_DEBUG})
-source_group(Panels/PanelDebug/Notebook       FILES ${PANEL_DEBUG_NOTEBOOK})
-source_group(Panels/PanelMeasures             FILES ${PANEL_MEAS})
-source_group(Panels/PanelMeasures/Graphics    FILES ${PANEL_MEAS_GRAPHICS})
-source_group(Panels/PanelMeasures/Grid        FILES ${PANEL_MEAS_GRID})
-source_group(Panels/PanelReports              FILES ${PANEL_REPORTS})
-source_group(Panels/PanelSettings             FILES ${PANEL_SETTINGS})
-source_group(Panels/PanelTables               FILES ${PANEL_TABLES})
-source_group(Panels/PanelTests                FILES ${PANEL_TESTS})
+source_group(GUI/Controls                     FILES ${GUI_CONTROLS})
+source_group(GUI/PanelArchive                 FILES ${GUI_ARCHIVE})
+source_group(GUI/PanelDebug                   FILES ${GUI_DEBUG})
+source_group(GUI/PanelDebug/Notebook          FILES ${GUI_DEBUG_NOTEBOOK})
+source_group(GUI/PanelMeasures                FILES ${GUI_MEAS})
+source_group(GUI/PanelMeasures/Graphics       FILES ${GUI_MEAS_GRAPHICS})
+source_group(GUI/PanelMeasures/Grid           FILES ${GUI_MEAS_GRID})
+source_group(GUI/PanelReports                 FILES ${GUI_REPORTS})
+source_group(GUI/PanelSettings                FILES ${GUI_SETTINGS})
+source_group(GUI/PanelTables                  FILES ${GUI_TABLES})
+source_group(GUI/PanelTests                   FILES ${GUI_TESTS})
 source_group(Settings                         FILES ${SETTINGS})
 source_group(Settings/Tests                   FILES ${SETTINGS_TESTS})
 source_group(Settings/Tests/Library           FILES ${SETTINGS_TESTS_LIBRARY})
@@ -161,7 +159,6 @@ add_executable(${PROJECT_NAME}
     ${COMMUNICATOR_GPIO}
     ${COMMUNICATOR_SPI}
     ${COMMUNICATOR_UART}
-    ${CONTROLS}
     ${DATA}
     ${IPPP}
     ${IPPP_EMULATOR}
@@ -169,16 +166,17 @@ add_executable(${PROJECT_NAME}
     ${IPPP_REAL}
     ${IPPP_SCPI}
     ${MAIN_PANEL}
-    ${PANEL_ARCHIVE}
-    ${PANEL_DEBUG}
-    ${PANEL_DEBUG_NOTEBOOK}
-    ${PANEL_MEAS}
-    ${PANEL_MEAS_GRAPHICS}
-    ${PANEL_MEAS_GRID}
-    ${PANEL_REPORTS}
-    ${PANEL_SETTINGS}
-    ${PANEL_TABLES}
-    ${PANEL_TESTS}
+    ${GUI_CONTROLS}
+    ${GUI_ARCHIVE}
+    ${GUI_DEBUG}
+    ${GUI_DEBUG_NOTEBOOK}
+    ${GUI_MEAS}
+    ${GUI_MEAS_GRAPHICS}
+    ${GUI_MEAS_GRID}
+    ${GUI_REPORTS}
+    ${GUI_SETTINGS}
+    ${GUI_TABLES}
+    ${GUI_TESTS}
     ${SETTINGS}
     ${SETTINGS_TESTS}
     ${SETTINGS_TESTS_LIBRARY}
