@@ -4,7 +4,9 @@
 #include "GUI/Controls/StaticBox.h"
 #include "GUI/Controls/Button.h"
 #include "GUI/Controls/StaticText.h"
-#include "GUI/Controls/Sizers.h"
+#pragma warning(push, 0)
+    #include <wx/sizer.h>
+#pragma warning(pop)
 
 
 PageController *PageController::self = nullptr;
@@ -18,10 +20,10 @@ PageController::PageController(wxNotebook *notebook) :
     StaticBox *box = new StaticBox(this, L("Обновление прошивки"));
 
     // Вертикальный сайзер для всего содержимого бокса
-    StaticBoxSizer *boxSizer = new StaticBoxSizer(wxVERTICAL, box);
+    wxStaticBoxSizer *boxSizer = new wxStaticBoxSizer(box, wxVERTICAL);
 
     // --- Первая строка: кнопка "Выбрать файл" + название файла ---
-    SizerHor *fileRowSizer = new SizerHor();
+    wxBoxSizer *fileRowSizer = new wxBoxSizer(wxHORIZONTAL);
 
     Button *selectButton = new Button(box, L("Выбрать файл"));
     fileRowSizer->Add(selectButton, 0, wxALL, 5);
