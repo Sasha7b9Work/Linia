@@ -16,5 +16,5 @@ PageController::PageController(wxNotebook *notebook) :
 
     wxStaticBox *box = new wxStaticBox(this, wxID_ANY, L("Обновление прошивки"), { 10, 10 }, { 200, 100 });
 
-
+    (void)box;
 }
