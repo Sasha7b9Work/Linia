@@ -1,5 +1,4 @@
 ﻿# 2023/07/04 15:47:47 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
-
 project (Linia2)
 
 set(CMAKE_UNITY_BUILD ON)
@@ -94,7 +93,7 @@ file(GLOB PANEL_MEAS_GRID               src/Panels/PanelMeasures/Grid/*.*)
 file(GLOB PANEL_REPORTS                 src/Panels/PanelReports/*.*)
 file(GLOB PANEL_SETTINGS                src/Panels/PanelSettings/*.*)
 file(GLOB PANEL_TABLES                  src/Panels/PanelTables/*.*)
-file(GLOB PAGE_TESTS                    src/Panels/PageTests/*.*)
+file(GLOB PANEL_TESTS                   src/Panels/PanelTests/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB SETTINGS_TESTS                src/Settings/Tests/*.*)
 file(GLOB SETTINGS_TESTS_LIBRARY        src/Settings/Tests/Library/*.*)
@@ -142,7 +141,7 @@ source_group(Panels/PanelMeasures/Grid        FILES ${PANEL_MEAS_GRID})
 source_group(Panels/PanelReports              FILES ${PANEL_REPORTS})
 source_group(Panels/PanelSettings             FILES ${PANEL_SETTINGS})
 source_group(Panels/PanelTables               FILES ${PANEL_TABLES})
-source_group(Panels/PageTests                 FILES ${PAGE_TESTS})
+source_group(Panels/PanelTests                FILES ${PANEL_TESTS})
 source_group(Settings                         FILES ${SETTINGS})
 source_group(Settings/Tests                   FILES ${SETTINGS_TESTS})
 source_group(Settings/Tests/Library           FILES ${SETTINGS_TESTS_LIBRARY})
@@ -179,7 +178,7 @@ add_executable(${PROJECT_NAME}
     ${PANEL_REPORTS}
     ${PANEL_SETTINGS}
     ${PANEL_TABLES}
-    ${PAGE_TESTS}
+    ${PANEL_TESTS}
     ${SETTINGS}
     ${SETTINGS_TESTS}
     ${SETTINGS_TESTS_LIBRARY}
@@ -255,5 +254,3 @@ else()
     target_compile_options(${PROJECT_NAME} PRIVATE ${GTK3_CFLAGS_OTHER})
 
 endif()
-
-

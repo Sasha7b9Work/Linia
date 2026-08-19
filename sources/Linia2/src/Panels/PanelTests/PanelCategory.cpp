@@ -1,10 +1,10 @@
 ﻿// 2026/04/29 11:34:17 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Panels/PageTests/PanelCategory.h"
-#include "Panels/PageTests/PageTests.h"
+#include "Panels/PanelTests/PanelCategory.h"
+#include "Panels/PanelTests/PanelTests.h"
 #include "Controls/Sizers.h"
 #include "Controls/CheckBox.h"
-#include "Panels/PageTests/PanelLibrary.h"
+#include "Panels/PanelTests/PanelLibrary.h"
 #pragma warning(push, 0)
 #include <wx/checkbox.h>
 #pragma warning(pop)
