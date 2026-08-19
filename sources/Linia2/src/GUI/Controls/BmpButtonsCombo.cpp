@@ -3,6 +3,7 @@
 #include "GUI/Controls/BmpButtonsCombo.h"
 #include "Utils/GlobalFunctions.h"
 #include "GUI/Controls/StaticBox.h"
+#include "GUI/Controls/Sizers.h"
 #include "Settings/Settings.h"
 #pragma warning(push, 0)
 #include <wx/settings.h>

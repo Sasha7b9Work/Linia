@@ -42,3 +42,17 @@ private:
 
     int spacer = 10;
 };
+
+
+class StaticBoxSizer : public wxStaticBoxSizer
+{
+public:
+    StaticBoxSizer(int type, wxWindow *parent, const wxString &title) :
+        wxStaticBoxSizer(type, parent, title)
+    {
+#ifdef WIN32
+#else
+        m_staticBox->SetWindowStyle(wxBORDER_RAISED);
+#endif
+    }
+};

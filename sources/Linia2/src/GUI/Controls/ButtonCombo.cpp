@@ -4,9 +4,10 @@
 #include "MainWindow.h"
 #include "Utils/GlobalFunctions.h"
 #include "GUI/Controls/StaticBox.h"
+#include "GUI/Controls/Sizers.h"
 #pragma warning(push, 0)
-#include <wx/popupwin.h>
-#include <wx/settings.h>
+    #include <wx/popupwin.h>
+    #include <wx/settings.h>
 #pragma warning(pop)
 
 
