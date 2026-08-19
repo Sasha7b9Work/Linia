@@ -5,6 +5,9 @@
 #include "GUI/Controls/Button.h"
 #include "GUI/Controls/StaticText.h"
 #include "GUI/Controls/Sizers.h"
+#pragma warning(push, 0)
+    #include <wx/filedlg.h>
+#pragma warning(pop)
 
 
 PageController *PageController::self = nullptr;
@@ -48,4 +51,24 @@ PageController::PageController(wxNotebook *notebook) :
     BoxSizerVert *mainSizer = new BoxSizerVert();
     mainSizer->Add(boxSizer, 0, wxALL, 10);
     SetSizer(mainSizer);
+
+    {
+        selectButton->Bind(wxEVT_BUTTON, [this, fileNameText, updateButton](wxCommandEvent &)
+            {
+                wxFileDialog dialog(this,
+                    L("Выберите файл прошивки"),          // Заголовок окна
+                    wxEmptyString,                        // Начальная папка (пусто = текущая)
+                    wxEmptyString,                        // Начальное имя файла
+                    L("Файлы прошивок (*.bin;*.hex)|*.bin;*.hex|Все файлы (*.*)|*.*"),  // Фильтры
+                    wxFD_OPEN | wxFD_FILE_MUST_EXIST);    // Стили
+
+                // Показываем диалог и проверяем результат
+                if (dialog.ShowModal() == wxID_OK)
+                {
+                    wxString path = dialog.GetPath();                    // Полный путь к файлу
+                    fileNameText->SetLabel(path);                        // Отображаем путь
+                    updateButton->Enable(true);                          // Активируем кнопку "Обновить"
+                }
+            });
+    }
 }
