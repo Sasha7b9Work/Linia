@@ -1,8 +1,8 @@
 // 2025/8/20 19:59:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #pragma warning(push, 0)
-#include <wx/statbox.h>
-#include <wx/sizer.h>
+    #include <wx/statbox.h>
+    #include <wx/sizer.h>
 #pragma warning(pop)
 
 
