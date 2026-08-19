@@ -57,7 +57,7 @@ PageController::PageController(wxNotebook *notebook) :
             {
                 wxFileDialog dialog(this,
                     L("Выберите файл прошивки"),          // Заголовок окна
-                    wxEmptyString,                        // Начальная папка (пусто = текущая)
+                    L("/media/mnipi"),                        // Начальная папка (пусто = текущая)
                     wxEmptyString,                        // Начальное имя файла
                     L("Файлы прошивок (*.bin;*.hex)|*.bin;*.hex|Все файлы (*.*)|*.*"),  // Фильтры
                     wxFD_OPEN | wxFD_FILE_MUST_EXIST);    // Стили
