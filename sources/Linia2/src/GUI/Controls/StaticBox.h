@@ -36,7 +36,7 @@ private:
 class StaticBoxSizer : public wxStaticBoxSizer
 {
 public:
-    StaticBoxSizer(int type, wxWindow *parent, const wxString &title) :
+    StaticBoxSizer(int type, wxWindow *parent, const wxString &title = "") :
         wxStaticBoxSizer(type, parent, title)
     {
 #ifdef WIN32
