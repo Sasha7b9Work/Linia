@@ -6,11 +6,11 @@
 
 
 // Сюда добавляются виджеты сверху вниз с определённым расстоянием между ними
-class SizerVert : public wxBoxSizer
+class BoxSizerVert : public wxBoxSizer
 {
 public:
 
-    SizerVert();
+    BoxSizerVert();
 
     void AddSizer(wxBoxSizer *);
 
@@ -28,11 +28,11 @@ private:
 };
 
 
-class SizerHor : public wxBoxSizer
+class BoxSizerHor : public wxBoxSizer
 {
 public:
 
-    SizerHor();
+    BoxSizerHor();
 
     void AddWidget(wxWindow *);
 

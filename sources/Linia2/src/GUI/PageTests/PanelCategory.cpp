@@ -17,7 +17,7 @@ PanelCategory::PanelCategory(wxWindow *parent, PanelCategory *&global) : Scrolle
 {
     global = this;
 
-    SizerVert *main_sizer = new SizerVert();
+    BoxSizerVert *main_sizer = new BoxSizerVert();
 
 //    for (int i = 0; i < 30; i++)
 //    {

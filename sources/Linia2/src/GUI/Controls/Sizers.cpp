@@ -3,13 +3,13 @@
 #include "GUI/Controls/Sizers.h"
 
 
-SizerVert::SizerVert() : wxBoxSizer(wxVERTICAL)
+BoxSizerVert::BoxSizerVert() : wxBoxSizer(wxVERTICAL)
 {
 
 }
 
 
-void SizerVert::AddSizer(wxBoxSizer *sizer)
+void BoxSizerVert::AddSizer(wxBoxSizer *sizer)
 {
     AddSpacer(spacer);
 
@@ -17,9 +17,9 @@ void SizerVert::AddSizer(wxBoxSizer *sizer)
 }
 
 
-void SizerVert::AddWidgetsInSizer(wxWindow *widget1, wxWindow *widget2)
+void BoxSizerVert::AddWidgetsInSizer(wxWindow *widget1, wxWindow *widget2)
 {
-    SizerHor *sizer = new SizerHor();
+    BoxSizerHor *sizer = new BoxSizerHor();
 
     sizer->AddWidget(widget1);
 
@@ -34,13 +34,13 @@ void SizerVert::AddWidgetsInSizer(wxWindow *widget1, wxWindow *widget2)
 }
 
 
-SizerHor::SizerHor() : wxBoxSizer(wxHORIZONTAL)
+BoxSizerHor::BoxSizerHor() : wxBoxSizer(wxHORIZONTAL)
 {
     AddSpacer(spacer);
 }
 
 
-void SizerHor::AddWidget(wxWindow *widget)
+void BoxSizerHor::AddWidget(wxWindow *widget)
 {
     wxBoxSizer::Add(widget, 0, wxALIGN_CENTER_VERTICAL | wxALL, 0);
 
@@ -48,7 +48,7 @@ void SizerHor::AddWidget(wxWindow *widget)
 }
 
 
-void SizerHor::Finish()
+void BoxSizerHor::Finish()
 {
     AddStretchSpacer();
 }

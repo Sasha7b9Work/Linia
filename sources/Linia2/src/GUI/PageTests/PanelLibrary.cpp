@@ -16,7 +16,7 @@ PanelLibrary::PanelLibrary(wxWindow *parent, PanelLibrary *&global) : Panel(pare
 {
     global = this;
 
-    SizerVert *main_sizer = new SizerVert();
+    BoxSizerVert *main_sizer = new BoxSizerVert();
 
     listView = new wxListView(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_LIST | wxLC_SINGLE_SEL);
 
