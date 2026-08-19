@@ -39,7 +39,7 @@ bool VCP::ProcessInputBuffer()
         return false;
     }
 
-    PCM::SCPI::Parse(in_buffer.Data(pos_begin));
+    OPi5Plus::SCPI::Parse(in_buffer.Data(pos_begin));
 
     in_buffer.RemoveFirst(pos_end + 1);
 

@@ -47,7 +47,7 @@ void Dialog::ShowOnWindow(wxWindow *window)
 
     pos -= GetSize() / 2;
 
-    if (GF::IsBoardPCM())
+    if (GF::IsBoardOPi5Plus())
     {
 
     }

@@ -7,7 +7,7 @@
 #include "Hardware/HAL/HAL_PINS.h"
 
 
-namespace PCM
+namespace OPi5Plus
 {
     static PinOut pPI_ENB_STM(Port::_D, Pin::_12);  // PD12  pin81
     //Pin    pPI_TX;                                // PB6  pin136
@@ -21,13 +21,13 @@ namespace PCM
 }
 
 
-void PCM::PeriodicTask()
+void OPi5Plus::PeriodicTask()
 {
     UpdateInput();
 }
 
 
-void PCM::UpdateInput()
+void OPi5Plus::UpdateInput()
 {
     HAL_USART1::GetData(in_buffer);
 
@@ -37,7 +37,7 @@ void PCM::UpdateInput()
 }
 
 
-bool PCM::ProcessInputBuffer()
+bool OPi5Plus::ProcessInputBuffer()
 {
     int pos_begin = in_buffer.FirstPosition(':');
 

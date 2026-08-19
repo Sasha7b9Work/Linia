@@ -179,7 +179,7 @@ bool Application::OnInit()
         TheMainWindow->SetMode(ModeMainWindow::Debug);
     }
 
-    if (!GF::IsBoardPCM())
+    if (!GF::IsBoardOPi5Plus())
     {
         TheMainWindow->Maximize(true);
     }

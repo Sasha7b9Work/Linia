@@ -57,7 +57,7 @@ MainWindow::MainWindow(MainWindow *&self, const wxString &title)
     Bind(wxEVT_CHAR_HOOK, &MainWindow::OnEventKeyHook, this);
 
     {
-        if (GF::IsBoardPCM())
+        if (GF::IsBoardOPi5Plus())
         {
             SetSize({ WIDTH, HEIGHT });
 

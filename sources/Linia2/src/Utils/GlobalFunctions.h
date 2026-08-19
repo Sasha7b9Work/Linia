@@ -60,8 +60,8 @@ namespace GF
     // В эту позицию нужно переместить окно с размерами { width, height }, чтобы оно оказалось в центре экрана
     wxPoint GetCoordCenter(const wxSize &);
 
-    // true, если запущено на плате встраиваемого ПК
-    bool IsBoardPCM();
+    // true, если запущено на Orange Pi 5 Plus
+    bool IsBoardOPi5Plus();
 
     bool ApproxEqual(double, double);
 

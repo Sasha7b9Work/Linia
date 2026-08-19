@@ -32,7 +32,7 @@
 */
 
 
-namespace PCM
+namespace OPi5Plus
 {
     namespace SCPI
     {
@@ -74,13 +74,13 @@ namespace PCM
 }
 
 
-bool PCM::SCPI::Parse(pchar command)
+bool OPi5Plus::SCPI::Parse(pchar command)
 {
     return ProcessStructures(command, head);
 }
 
 
-bool PCM::SCPI::Func_Ping(pchar command)
+bool OPi5Plus::SCPI::Func_Ping(pchar command)
 {
     if (*command != '\0')
     {
@@ -93,7 +93,7 @@ bool PCM::SCPI::Func_Ping(pchar command)
 }
 
 
-bool PCM::SCPI::ProcessStructures(pchar command, StructParser *handlers)
+bool OPi5Plus::SCPI::ProcessStructures(pchar command, StructParser *handlers)
 {
     if (command[0] == ':')
     {
@@ -130,7 +130,7 @@ bool PCM::SCPI::ProcessStructures(pchar command, StructParser *handlers)
 }
 
 
-bool PCM::SCPI::Func_FPGA(pchar command)
+bool OPi5Plus::SCPI::Func_FPGA(pchar command)
 {
     if (*command < '0' || *command > '9')
     {
@@ -189,7 +189,7 @@ bool PCM::SCPI::Func_FPGA(pchar command)
 }
 
 
-bool PCM::SCPI::Func_SCAN(pchar command)
+bool OPi5Plus::SCPI::Func_SCAN(pchar command)
 {
     if (SU::BeginWith(command, "START "))
     {
@@ -223,7 +223,7 @@ bool PCM::SCPI::Func_SCAN(pchar command)
 }
 
 
-bool PCM::SCPI::Func_DAC(pchar command)
+bool OPi5Plus::SCPI::Func_DAC(pchar command)
 {
     if (*command < '0' || *command > '9')
     {
@@ -282,7 +282,7 @@ bool PCM::SCPI::Func_DAC(pchar command)
 }
 
 
-bool PCM::SCPI::Func_REG(pchar command)
+bool OPi5Plus::SCPI::Func_REG(pchar command)
 {
     if (*command < '0' || *command > '9')
     {
@@ -341,13 +341,13 @@ bool PCM::SCPI::Func_REG(pchar command)
 }
 
 
-bool PCM::SCPI::Func_CHIP_REG(pchar)
+bool OPi5Plus::SCPI::Func_CHIP_REG(pchar)
 {
     return false;
 }
 
 
-void PCM::SCPI::Send(pchar format, ...)
+void OPi5Plus::SCPI::Send(pchar format, ...)
 {
     char message[1024];
     std::va_list args;

@@ -3,8 +3,10 @@
 #include "Utils/String.h"
 
 
-namespace PCM
+namespace OPi5Plus
 {
+    // Обмен по UART с Orange Pi 5 Plus
+
     namespace SCPI
     {
         bool Parse(pchar);

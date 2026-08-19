@@ -138,7 +138,7 @@ void GF::SendCommandEvent(wxWindow *object, int type_event, int int_value)
 }
 
 
-bool GF::IsBoardPCM()
+bool GF::IsBoardOPi5Plus()
 {
     wxSize screenSize = wxGetDisplaySize(); // Получить общее разрешение экрана
     int width = screenSize.GetWidth();
@@ -152,7 +152,7 @@ wxPoint GF::GetCoordCenter(const wxSize &size)
 {
     wxPoint pos_win = { (MainWindow::WIDTH - size.x) / 2, (MainWindow::HEIGHT - size.y) / 2 };
 
-    if (!IsBoardPCM())
+    if (!IsBoardOPi5Plus())
     {
         pos_win += TheMainWindow->GetPosition();
     }

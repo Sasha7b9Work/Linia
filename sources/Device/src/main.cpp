@@ -16,7 +16,7 @@ int main()
 
     while (true)
     {
-        PCM::PeriodicTask();
+        OPi5Plus::PeriodicTask();
 
         VCP::PeriodicTask();
 

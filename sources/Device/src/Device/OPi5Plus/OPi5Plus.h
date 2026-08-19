@@ -2,10 +2,10 @@
 #pragma once
 
 
-// Orange Pi
+// Orange Pi 5 Plus
 
 
-namespace PCM
+namespace OPi5Plus
 {
     void PeriodicTask();
 }

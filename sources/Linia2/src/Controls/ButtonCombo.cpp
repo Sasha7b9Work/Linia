@@ -205,7 +205,7 @@ void ButtonsCombo::OnButtonClicked(wxCommandEvent &event)
             pos.x -= size.x / 2;
             pos.y -= size.y / 2;
 
-            if (GF::IsBoardPCM())
+            if (GF::IsBoardOPi5Plus())
             {
                 if (pos.x + size.x >= MainWindow::WIDTH)
                 {
