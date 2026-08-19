@@ -1,4 +1,4 @@
-﻿// 2025/8/9 11:41:08 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/8/9 11:41:08 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/Controls/BmpButtonsCombo.h"
 #include "Utils/GlobalFunctions.h"

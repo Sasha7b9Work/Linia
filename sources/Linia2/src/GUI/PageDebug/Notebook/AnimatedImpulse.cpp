@@ -1,4 +1,4 @@
-﻿// 2026/03/19 16:46:21 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2026/03/19 16:46:21 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageDebug/Notebook/AnimatedImpulse.h"
 #pragma warning(push, 0)

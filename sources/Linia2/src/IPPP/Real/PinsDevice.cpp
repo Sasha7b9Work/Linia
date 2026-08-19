@@ -1,4 +1,4 @@
-﻿// 2025/10/23 15:09:04 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/10/23 15:09:04 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "IPPP/Real/PinsDevice.h"
 
@@ -11,7 +11,7 @@ PinInDevice pin200_N(PinDevice::_200_N);
 PinInDevice pin20_P(PinDevice::_20_P);
 PinInDevice pin20_N(PinDevice::_20_N);
 
-PinInDevice *pinsD[] =
+PinInDevice *pinsD[PinDevice::Count] =
 {
     &pin3000V,
     &pin50_P,
@@ -19,14 +19,13 @@ PinInDevice *pinsD[] =
     &pin200_P,
     &pin200_N,
     &pin20_P,
-    &pin20_N,
-    nullptr
+    &pin20_N
 };
 
 
 pchar PinDevice::Name() const
 {
-    static const pchar names[] =
+    static const pchar names[PinDevice::Count] =
     {
         "3000V",
         "50P",

@@ -1,4 +1,4 @@
-﻿// 2025/08/29 18:05:22 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/08/29 18:05:22 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "IPPP/Emulator/EmulatorDevice.h"
 #include "Communicator/GPIO/GPIO.h"

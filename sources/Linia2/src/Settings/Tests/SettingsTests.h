@@ -1,4 +1,4 @@
-﻿// 2025/08/29 18:39:03 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/08/29 18:39:03 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 
 

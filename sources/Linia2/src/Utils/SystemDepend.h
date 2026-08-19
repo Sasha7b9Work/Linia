@@ -1,4 +1,4 @@
-﻿// 2024/11/02 18:44:27 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2024/11/02 18:44:27 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #pragma warning(push, 0)
 #include <wx/gdicmn.h>

@@ -1,3 +1,3 @@
-﻿// 2025/10/17 08:25:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/10/17 08:25:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/Controls/AutoRebootDialog.h"

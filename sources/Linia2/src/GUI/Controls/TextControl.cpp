@@ -1,4 +1,4 @@
-﻿// 2023/08/09 13:34:49 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2023/08/09 13:34:49 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/Controls/TextControl.h"
 #include "Settings/Settings.h"

@@ -1,4 +1,4 @@
-// 2026/01/19 15:00:38 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2026/01/19 15:00:38 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Hardware/VCP.h"
 #include "Hardware/USBD/usbd_cdc_interface.h"

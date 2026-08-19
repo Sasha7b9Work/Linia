@@ -1,4 +1,4 @@
-﻿// 2023/08/10 19:21:00 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2023/08/10 19:21:00 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Utils/GlobalFunctions.h"
 #include "MainWindow.h"

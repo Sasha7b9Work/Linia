@@ -1,4 +1,4 @@
-﻿// 2026/03/14 01:12:43 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2026/03/14 01:12:43 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageMeasures/Graphics/Splines.h"
 

@@ -1,4 +1,4 @@
-﻿// 2026/3/16 21:10:11 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2026/3/16 21:10:11 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/Controls/DraggedWindow.h"
 #include "Settings/Settings.h"

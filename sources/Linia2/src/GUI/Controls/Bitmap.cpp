@@ -1,4 +1,4 @@
-﻿// 2025/08/10 13:41:02 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/08/10 13:41:02 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/Controls/Bitmap.h"
 #pragma warning(push, 0)

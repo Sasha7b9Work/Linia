@@ -1,4 +1,4 @@
-﻿// 2023/08/09 19:11:54 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2023/08/09 19:11:54 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "Settings/Value.h"
 

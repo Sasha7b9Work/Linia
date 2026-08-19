@@ -1,4 +1,4 @@
-﻿// 2026/08/18 17:10:34 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2026/08/18 17:10:34 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "IPPP/Real/Chips.h"
 

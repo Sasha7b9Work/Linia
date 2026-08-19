@@ -1,4 +1,4 @@
-﻿// 2025/09/10 21:36:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/09/10 21:36:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "IPPP/I_IPPP.h"
 

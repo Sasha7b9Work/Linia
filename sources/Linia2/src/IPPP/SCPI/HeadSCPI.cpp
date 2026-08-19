@@ -1,4 +1,4 @@
-// 2025/10/23 12:29:08 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2025/10/23 12:29:08 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "IPPP/SCPI/SCPI.h"
 #include "Utils/StringUtils.h"
@@ -34,14 +34,9 @@ bool SCPI::FuncPinIn(pchar command)
 
     if (words.Size() == 3 && words[1] == "STATE")
     {
-        for (int i = 0; ; i++)
+        for (int i = 0; i < PinDevice::Count; i++)
         {
             PinInDevice *pin = pinsD[i];
-
-            if (pin == nullptr)
-            {
-                return false;
-            }
 
             if (pin->Name() == words[0])
             {

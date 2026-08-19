@@ -1,4 +1,4 @@
-﻿// 2026/05/05 15:11:52 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2026/05/05 15:11:52 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Settings/Tests/Library/Library.h"
 

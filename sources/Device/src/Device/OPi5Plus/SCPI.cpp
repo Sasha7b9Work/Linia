@@ -1,4 +1,4 @@
-// 2025/10/15 14:32:26 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2025/10/15 14:32:26 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Device/OPi5Plus/SCPI.h"
 #include "Utils/StringUtils.h"

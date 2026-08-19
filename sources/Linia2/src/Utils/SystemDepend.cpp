@@ -1,4 +1,4 @@
-﻿// 2024/11/02 18:44:56 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2024/11/02 18:44:56 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Utils/SystemDepend.h"
 

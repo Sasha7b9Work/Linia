@@ -1,4 +1,4 @@
-// 2025/11/27 15:47:35 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2025/11/27 15:47:35 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Device/Device.h"
 #include "Device/Commutator.h"

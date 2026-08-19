@@ -1,4 +1,4 @@
-// 2026/04/22 09:27:01 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2026/04/22 09:27:01 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/Controls/Splitter.h"
 

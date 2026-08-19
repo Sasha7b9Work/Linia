@@ -1,4 +1,4 @@
-﻿// 2025/7/25 12:23:12 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/7/25 12:23:12 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/Controls/Dialog.h"
 #include "Utils/SystemDepend.h"

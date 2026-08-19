@@ -1,4 +1,4 @@
-﻿// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #pragma warning(push, 0)
 #include <wx/app.h>

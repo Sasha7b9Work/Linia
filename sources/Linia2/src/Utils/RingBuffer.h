@@ -1,4 +1,4 @@
-﻿// 2025/10/23 11:49:23 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/10/23 11:49:23 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "Utils/Buffer.h"
 

@@ -1,4 +1,4 @@
-﻿// 2025/09/01 22:59:47 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/09/01 22:59:47 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageMeasures/PanelErrors.h"
 #include "MainWindow.h"

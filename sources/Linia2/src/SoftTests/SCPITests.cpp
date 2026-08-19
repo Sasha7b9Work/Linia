@@ -1,4 +1,4 @@
-// 2025/10/23 15:26:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2025/10/23 15:26:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "SoftTests/SoftTests.h"
 #include "IPPP/SCPI/SCPI.h"

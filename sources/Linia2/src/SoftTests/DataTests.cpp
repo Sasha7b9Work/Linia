@@ -1,4 +1,4 @@
-﻿// 2025/09/07 19:42:29 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/09/07 19:42:29 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "SoftTests/SoftTests.h"
 #include "Settings/Tests/Ranges.h"

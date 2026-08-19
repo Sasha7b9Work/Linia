@@ -1,4 +1,4 @@
-﻿// 2026/3/15 19:49:01 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2026/3/15 19:49:01 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageMeasures/Graphics/AutoCursors.h"
 #include "GUI/PageMeasures/Grid/Grid.h"

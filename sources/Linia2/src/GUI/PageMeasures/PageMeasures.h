@@ -1,4 +1,4 @@
-﻿// 2022/10/28 23:17:02 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2022/10/28 23:17:02 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/Controls/Notebook.h"
 #pragma warning(push, 0)

@@ -1,4 +1,4 @@
-// 2025/11/27 17:04:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2025/11/27 17:04:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Device/Channels.h"
 #include "Hardware/HAL/HAL_PINS.h"

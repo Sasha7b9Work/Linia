@@ -1,4 +1,4 @@
-// 2025/09/22 13:50:22 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2025/09/22 13:50:22 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Device/OPi5Plus/OPi5Plus.h"
 #include "Utils/BufferOSDP.h"

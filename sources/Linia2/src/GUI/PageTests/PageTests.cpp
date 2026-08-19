@@ -1,4 +1,4 @@
-﻿// 2025/8/9 09:54:44 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/8/9 09:54:44 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/Controls/Notebook.h"
 #include "GUI/PageTests/PageTests.h"

@@ -1,4 +1,4 @@
-﻿// 2025/09/04 16:37:21 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/09/04 16:37:21 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Settings/Tests/SettingsTests.h"
 #pragma warning(push, 0)

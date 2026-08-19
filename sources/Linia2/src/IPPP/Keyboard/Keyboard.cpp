@@ -1,4 +1,4 @@
-﻿// 2025/09/11 21:22:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/09/11 21:22:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "IPPP/Keyboard/Keyboard.h"
 #include "Communicator/GPIO/GPIO.h"

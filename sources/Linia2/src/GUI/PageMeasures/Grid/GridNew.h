@@ -1,4 +1,4 @@
-// 2025/7/13 20:38:50 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2025/7/13 20:38:50 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "System/Events.h"
 #include "GUI/PageMeasures/Grid/Grid.h"

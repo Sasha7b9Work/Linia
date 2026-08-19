@@ -1,4 +1,4 @@
-﻿// 2026/07/21 14:44:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2026/07/21 14:44:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/Controls/Knob.h"
 

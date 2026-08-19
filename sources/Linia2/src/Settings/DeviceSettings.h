@@ -1,4 +1,4 @@
-﻿// 2025/09/11 14:47:46 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/09/11 14:47:46 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "Settings/Tests/Ranges.h"
 

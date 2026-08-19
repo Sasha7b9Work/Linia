@@ -1,4 +1,4 @@
-﻿// 2023/09/02 11:37:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2023/09/02 11:37:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/Controls/Painter.h"
 #include "GUI/Controls/Bitmap.h"

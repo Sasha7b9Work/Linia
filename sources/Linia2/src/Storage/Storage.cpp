@@ -1,3 +1,3 @@
-﻿// 2025/08/31 20:13:14 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/08/31 20:13:14 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Storage/Storage.h"

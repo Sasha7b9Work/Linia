@@ -1,5 +1,10 @@
-﻿// 2025/10/23 15:09:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/10/23 15:09:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
+
+
+/*
+    Описания входных пинов на плате контроллера, которые нужно контролировать и оповещать Orange Pi 5 Plus
+*/
 
 
 struct PinDevice
@@ -43,4 +48,4 @@ extern PinInDevice pin20_P;
 extern PinInDevice pin20_N;
 
 
-extern PinInDevice *pinsD[];
+extern PinInDevice *pinsD[PinDevice::Count];

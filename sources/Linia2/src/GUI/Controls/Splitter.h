@@ -1,4 +1,4 @@
-// 2026/04/22 09:26:55 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2026/04/22 09:26:55 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #pragma warning(push, 0)
 #include <wx/splitter.h>

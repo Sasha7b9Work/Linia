@@ -1,4 +1,4 @@
-// 2025/8/20 19:59:18 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2025/8/20 19:59:18 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/Controls/StaticBox.h"
 

@@ -1,4 +1,4 @@
-﻿// 2025/09/07 15:59:56 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/09/07 15:59:56 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Data/Data.h"
 

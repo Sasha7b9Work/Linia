@@ -1,4 +1,4 @@
-// 2026/04/23 08:57:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2026/04/23 08:57:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/Controls/Panel.h"
 #pragma warning(push, 0)

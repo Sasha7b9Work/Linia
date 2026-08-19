@@ -1,4 +1,4 @@
-﻿// 2025/6/3 14:06:23 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/6/3 14:06:23 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageDebug/Notebook/NotebookDebug.h"
 #include "GUI/PageDebug/Notebook/PageFPGA.h"

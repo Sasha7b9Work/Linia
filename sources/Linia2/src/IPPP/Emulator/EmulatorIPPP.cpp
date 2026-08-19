@@ -1,4 +1,4 @@
-﻿// 2025/09/10 21:36:34 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/09/10 21:36:34 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "IPPP/Emulator/EmulatorIPPP.h"
 #include "Application.h"

@@ -1,4 +1,4 @@
-﻿// 2023/08/09 19:11:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2023/08/09 19:11:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Settings/Settings.h"
 #include "Application.h"

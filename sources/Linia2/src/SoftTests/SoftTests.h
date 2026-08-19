@@ -1,4 +1,4 @@
-﻿// 2025/09/07 19:41:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/09/07 19:41:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 
 // Здесь находятся тесты классов и функций

@@ -1,4 +1,4 @@
-// 2025/10/09 08:37:40 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2025/10/09 08:37:40 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Communicator/GPIO/GPIO.h"
 #include "Utils/Timer.h"

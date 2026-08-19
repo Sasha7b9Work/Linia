@@ -1,4 +1,4 @@
-﻿// 2023/08/09 13:34:45 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2023/08/09 13:34:45 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "Settings/Settings.h"
 #pragma warning(push, 0)

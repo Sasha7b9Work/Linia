@@ -1,4 +1,4 @@
-// 2026/03/11 14:03:34 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2026/03/11 14:03:34 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "System/Events.h"
 #include "GUI/PageMeasures/PageMeasures.h"

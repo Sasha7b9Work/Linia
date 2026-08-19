@@ -1,4 +1,4 @@
-// 2023/09/02 11:37:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2023/09/02 11:37:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/Controls/Button.h"
 #include "GUI/Controls/Painter.h"

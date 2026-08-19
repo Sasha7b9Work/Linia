@@ -1,4 +1,4 @@
-// 2023/11/25 13:27:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2023/11/25 13:27:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 
 // Количество считываемых АЦП

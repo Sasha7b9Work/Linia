@@ -1,4 +1,4 @@
-﻿// 2024/02/03 12:50:14 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2024/02/03 12:50:14 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "Utils/GlobalFunctions.h"
 #include "GUI/Controls/Button.h"

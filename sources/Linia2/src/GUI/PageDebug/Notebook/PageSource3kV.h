@@ -1,4 +1,4 @@
-﻿// 2025/10/07 11:39:46 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/10/07 11:39:46 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/PageDebug/Notebook/PageChip.h"
 

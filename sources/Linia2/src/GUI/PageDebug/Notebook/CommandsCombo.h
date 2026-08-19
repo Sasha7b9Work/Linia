@@ -1,4 +1,4 @@
-﻿// 2025/08/30 16:03:29 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+﻿// 2025/08/30 16:03:29 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/Controls/ButtonCombo.h"
 

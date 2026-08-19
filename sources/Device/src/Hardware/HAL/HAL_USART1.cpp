@@ -1,4 +1,4 @@
-// 2025/10/06 11:10:16 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// 2025/10/06 11:10:16 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/RingBuffer.h"
