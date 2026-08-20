@@ -58,7 +58,7 @@ public:
     {
 #ifdef WIN32
 #else
-        staticBox->SetWindowStyle(wxBORDER_RAISED);
+        m_staticBox->SetWindowStyle(wxBORDER_RAISED);
 #endif
     }
 };
