@@ -49,8 +49,8 @@ public:
     static const int HEIGHT_HI = 75;
     static const int HEIGHT_DRAW = HEIGHT - HEIGHT_HI;
 
-    void OnQuit(wxCommandEvent &event);
-    void OnAbout(wxCommandEvent &event);
+    void OnQuit(wxCommandEvent &);
+    void OnAbout(wxCommandEvent &);
 
     void OnEventCloseWindow(wxCloseEvent &);
 

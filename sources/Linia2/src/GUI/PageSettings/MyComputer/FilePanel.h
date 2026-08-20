@@ -138,13 +138,13 @@ public:
     }
 
     // Обработчики операций (делегируют в FilePanelOperations)
-    void HandleCopyOperation(wxCommandEvent &event);
-    void HandleMoveOperation(wxCommandEvent &event);
-    void HandlePasteOperation(wxCommandEvent &event);
+    void HandleCopyOperation(wxCommandEvent &);
+    void HandleMoveOperation(wxCommandEvent &);
+    void HandlePasteOperation(wxCommandEvent &);
     void HandlePasteOperationToTarget(FilePanel *targetPanel);
-    void HandleDeleteOperation(wxCommandEvent &event);
-    void HandleCreateFolder(wxCommandEvent &event);
-    void HandleRefresh(wxCommandEvent &event);
+    void HandleDeleteOperation(wxCommandEvent &);
+    void HandleCreateFolder(wxCommandEvent &);
+    void HandleRefresh(wxCommandEvent &);
     void HandleUndo();
     void HandleRedo();
 
@@ -181,18 +181,18 @@ public:
     }
 
     // Обработчики событий
-    void OnSourceTypeChanged(wxCommandEvent &event);
-    void OnBackButtonClick(wxCommandEvent &event);
-    void OnPathChanged(wxCommandEvent &event);
-    void OnBrowseButton(wxCommandEvent &event);
-    void OnItemActivated(wxListEvent &event);
-    void OnItemSelected(wxListEvent &event);
-    void OnItemRightClick(wxListEvent &event);
-    void OnBeginDrag(wxListEvent &event);
-    void OnPanelClick(wxMouseEvent &event);
-    void OnPanelFocus(wxFocusEvent &event);
-    void OnKeyDown(wxKeyEvent &event);
-    void OnColumnClick(wxListEvent &event);
+    void OnSourceTypeChanged(wxCommandEvent &);
+    void OnBackButtonClick(wxCommandEvent &);
+    void OnPathChanged(wxCommandEvent &);
+    void OnBrowseButton(wxCommandEvent &);
+    void OnItemActivated(wxListEvent &);
+    void OnItemSelected(wxListEvent &);
+    void OnItemRightClick(wxListEvent &);
+    void OnBeginDrag(wxListEvent &);
+    void OnPanelClick(wxMouseEvent &);
+    void OnPanelFocus(wxFocusEvent &);
+    void OnKeyDown(wxKeyEvent &);
+    void OnColumnClick(wxListEvent &);
 
 private:
     // Удаляем методы CreateButtonPanel и связанные с кнопками элементы
