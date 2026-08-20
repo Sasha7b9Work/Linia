@@ -24,8 +24,8 @@ public:
 
 private:
 
-    int m_min = 0;
-    int m_max = 0;
+    int min = 0;
+    int max = 0;
 
     wxTextCtrl *text = nullptr;
     Button *btnMore = nullptr;

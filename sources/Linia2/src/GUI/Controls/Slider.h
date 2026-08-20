@@ -25,8 +25,8 @@ public:
 
 private:
 
-    int m_min = 0;
-    int m_max = 0;
+    int min = 0;
+    int max = 0;
 
     wxStaticText *text = nullptr;
     wxSlider     *slider = nullptr;

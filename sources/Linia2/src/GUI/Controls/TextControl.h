@@ -16,6 +16,6 @@ private:
 
     void OnEventChar(wxKeyEvent &);
 
-    int m_min;
-    int m_max;
+    int min;
+    int max;
 };

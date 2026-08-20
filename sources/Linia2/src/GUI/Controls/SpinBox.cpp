@@ -10,8 +10,8 @@
 
 SpinBox::SpinBox(wxWindow *parent, const wxSize &size, int _min, int _max) :
     Panel(parent),
-    m_min(_min),
-    m_max(_max)
+    min(_min),
+    max(_max)
 {
     Panel::SetSize(size);
 
@@ -24,7 +24,7 @@ SpinBox::SpinBox(wxWindow *parent, const wxSize &size, int _min, int _max) :
 
     text->SetEditable(false);
 
-    SetValue(m_min);
+    SetValue(min);
 
     wxSize size_button{ width_btn, 11 };
 
@@ -45,14 +45,14 @@ void SpinBox::OnEventButton(wxCommandEvent &event)
 
     if (id == btnMore->GetId())
     {
-        if (value < m_max)
+        if (value < max)
         {
             SetValue(value + 1);
         }
     }
     else if (id == btnLess->GetId())
     {
-        if (value > m_min)
+        if (value > min)
         {
             SetValue(value - 1);
         }
