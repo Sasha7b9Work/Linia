@@ -76,7 +76,15 @@ public:
 
         wxPopupTransientWindow::Fit();
 
-        GetParent()->Bind(wxEVT_KEY_DOWN, &BmpButtonPopup::OnKeyDown, this);
+        GetParent()->Bind(wxEVT_KEY_DOWN, [this](wxKeyEvent &event)
+            {
+                if (event.GetKeyCode() != WXK_SPACE)
+                {
+                    Dismiss();
+                }
+
+                event.Skip();
+            });
 
         wxPopupTransientWindow::SetBackgroundColour(GetBackgroundColour().ChangeLightness(70));
 
@@ -155,16 +163,6 @@ private:
             wxPoint newPos = GetPosition() + delta;
             Move(newPos);
             dragStart = currentPos;
-        }
-
-        event.Skip();
-    }
-
-    void OnKeyDown(wxKeyEvent &event)
-    {
-        if (event.GetKeyCode() != WXK_SPACE)
-        {
-            Dismiss();
         }
 
         event.Skip();
