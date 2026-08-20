@@ -16,16 +16,18 @@
 #endif
 
 
-FTPController::FTPController(FilePanel *_view)
-    : view(_view),
-    m_isConnected(false),
+FTPController::FTPController(FilePanel *_view) :
+    view(_view),
     currentPath("/")
-{}
+{
+}
+
 
 FTPController::~FTPController()
 {
     Disconnect();
 }
+
 
 void FTPController::ParseFTPUrl(const wxString &url, wxString &host, wxString &user, wxString &_password, wxString &path, int &_port)
 {
@@ -181,7 +183,7 @@ int FTPController::VerifyKnownHost()
 
 bool FTPController::Connect(const wxString &host, const wxString &user, const wxString &_password, int _port)
 {
-    if (m_isConnected)
+    if (is_connected)
     {
         Disconnect();
     }
@@ -274,7 +276,7 @@ bool FTPController::Connect(const wxString &host, const wxString &user, const wx
         m_initialPath = "/";
     }
 
-    m_isConnected = true;
+    is_connected = true;
     m_lastError.Clear();
 
     wxLogDebug("FTPController::Connect - current directory: %s", currentPath);
@@ -300,7 +302,7 @@ void FTPController::Disconnect()
 
     currentPath.Clear();
     m_initialPath.Clear();
-    m_isConnected = false;
+    is_connected = false;
 }
 
 wxString FTPController::BuildFullPath(const wxString &name) const
@@ -318,7 +320,7 @@ wxString FTPController::BuildFullPath(const wxString &name) const
 
 bool FTPController::ChangeDirectory(const wxString &path)
 {
-    if (!m_isConnected || !session_sftp)
+    if (!is_connected || !session_sftp)
     {
         m_lastError = "Нет подключения к FTP";
         return false;
@@ -368,7 +370,7 @@ wxArrayString FTPController::ListFiles()
 {
     wxArrayString files;
 
-    if (!m_isConnected || !session_sftp)
+    if (!is_connected || !session_sftp)
     {
         m_lastError = "Нет подключения к FTP";
         return files;
@@ -409,7 +411,7 @@ wxArrayString FTPController::ListDirectories()
 {
     wxArrayString dirs;
 
-    if (!m_isConnected || !session_sftp)
+    if (!is_connected || !session_sftp)
     {
         m_lastError = "Нет подключения к FTP";
         return dirs;
@@ -453,7 +455,7 @@ wxArrayString FTPController::ListDirectories()
 
 bool FTPController::DownloadFile(const wxString &remoteFile, const wxString &localFile)
 {
-    if (!m_isConnected || !session_sftp)
+    if (!is_connected || !session_sftp)
     {
         m_lastError = "Нет подключения к FTP";
         return false;
@@ -507,7 +509,7 @@ bool FTPController::DownloadFile(const wxString &remoteFile, const wxString &loc
 
 bool FTPController::UploadFile(const wxString &localFile, const wxString &remoteFile)
 {
-    if (!m_isConnected || !session_sftp)
+    if (!is_connected || !session_sftp)
     {
         m_lastError = "Нет подключения к FTP";
         return false;
@@ -560,7 +562,7 @@ bool FTPController::UploadFile(const wxString &localFile, const wxString &remote
 
 bool FTPController::DeleteFile(const wxString &remoteFile)
 {
-    if (!m_isConnected || !session_sftp)
+    if (!is_connected || !session_sftp)
     {
         m_lastError = "Нет подключения к FTP";
         return false;
@@ -580,7 +582,7 @@ bool FTPController::DeleteFile(const wxString &remoteFile)
 
 bool FTPController::RenameFile(const wxString &oldName, const wxString &newName)
 {
-    if (!m_isConnected || !session_sftp)
+    if (!is_connected || !session_sftp)
     {
         m_lastError = "Нет подключения к FTP";
         return false;
@@ -601,7 +603,7 @@ bool FTPController::RenameFile(const wxString &oldName, const wxString &newName)
 
 bool FTPController::MakeDirectory(const wxString &dirName)
 {
-    if (!m_isConnected || !session_sftp)
+    if (!is_connected || !session_sftp)
     {
         m_lastError = "Нет подключения к FTP";
         return false;
@@ -621,7 +623,7 @@ bool FTPController::MakeDirectory(const wxString &dirName)
 
 bool FTPController::RemoveDirectory(const wxString &dirName)
 {
-    if (!m_isConnected || !session_sftp)
+    if (!is_connected || !session_sftp)
     {
         m_lastError = "Нет подключения к FTP";
         return false;
@@ -641,7 +643,7 @@ bool FTPController::RemoveDirectory(const wxString &dirName)
 
 bool FTPController::IsDirectory(const wxString &path) const
 {
-    if (!m_isConnected || !session_sftp)
+    if (!is_connected || !session_sftp)
     {
         return false;
     }
@@ -660,7 +662,7 @@ bool FTPController::IsDirectory(const wxString &path) const
 
 wxULongLong FTPController::GetFileSize(const wxString &filename)
 {
-    if (!m_isConnected || !session_sftp)
+    if (!is_connected || !session_sftp)
     {
         return 0;
     }
@@ -683,7 +685,7 @@ wxDateTime FTPController::GetFileModTime(const wxString &filename)
 {
     wxDateTime dt;
 
-    if (!m_isConnected || !session_sftp)
+    if (!is_connected || !session_sftp)
     {
         return dt;
     }

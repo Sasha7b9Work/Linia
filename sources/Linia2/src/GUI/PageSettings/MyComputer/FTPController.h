@@ -24,7 +24,7 @@ public:
     void Disconnect();
     bool IsConnected() const
     {
-        return m_isConnected;
+        return is_connected;
     }
 
     // Навигация
@@ -64,7 +64,7 @@ private:
     FilePanel *view;
     ssh_session session_ssh = nullptr;
     sftp_session session_sftp = nullptr;
-    bool m_isConnected;
+    bool is_connected = false;
     wxString currentPath;
     wxString m_initialPath;  // Начальный путь для ограничения навигации
     wxString m_lastError;
