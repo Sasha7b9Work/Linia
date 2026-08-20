@@ -2,7 +2,6 @@
 #include "GUI/PageSettings/MyComputer/FTPConnectionDialog.h"
 #pragma warning(push, 0)
     #include <wx/sizer.h>
-    #include <wx/button.h>
     #include <wx/msgdlg.h>
 #pragma warning(pop)
 

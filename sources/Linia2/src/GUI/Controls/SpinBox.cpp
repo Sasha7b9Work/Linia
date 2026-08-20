@@ -3,8 +3,7 @@
 #include "GUI/Controls/SpinBox.h"
 #include "GUI/Controls/Button.h"
 #pragma warning(push, 0)
-#include <wx/button.h>
-#include <wx/textctrl.h>
+    #include <wx/textctrl.h>
 #pragma warning(pop)
 
 
