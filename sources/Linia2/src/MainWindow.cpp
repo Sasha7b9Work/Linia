@@ -43,6 +43,7 @@ MainWindow::MainWindow(MainWindow *&self, const wxString &title)
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
     main_panel= new Notebook(this);
+    main_panel->AddPanel(new PageSettings(main_panel, ThePageSettings));
     main_panel->AddPanel(new PageMeasures(main_panel));
     main_panel->AddPanel(new PageTests(main_panel, ThePageTests));
     main_panel->AddPanel(new PageDebug(main_panel));

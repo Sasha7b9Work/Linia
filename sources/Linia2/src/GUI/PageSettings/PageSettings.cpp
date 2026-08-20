@@ -3,11 +3,11 @@
 #include "GUI/PageSettings/PageSettings.h"
 
 
-PageSettings *ThePanelSettings = nullptr;
+PageSettings *ThePageSettings = nullptr;
 
 
-PageSettings::PageSettings(Notebook *board, PageSettings *&self) :
+PageSettings::PageSettings(Notebook *board, PageSettings *&global) :
     PageNotebook(board, L("Настройки"))
 {
-    self = this;
+    global = this;
 }
