@@ -9,8 +9,9 @@
 #pragma warning(pop)
 
 
-FilePanelController::FilePanelController(FilePanel *view)
-    : m_view(view), m_currentPath(wxGetCwd())
+FilePanelController::FilePanelController(FilePanel *_view) :
+    view(_view),
+    currentPath(wxGetCwd())
 {}
 
 void FilePanelController::RefreshFileList()
@@ -21,7 +22,7 @@ void FilePanelController::RefreshFileList()
 void FilePanelController::PopulateFileList()
 {
     // Проверяем тип источника данных
-    if (m_view->GetSourceType() == FilePanel::SOURCE_FTP)
+    if (view->GetSourceType() == FilePanel::SOURCE_FTP)
     {
         PopulateFTPFileList();
     }
@@ -33,13 +34,13 @@ void FilePanelController::PopulateFileList()
 
 void FilePanelController::PopulateLocalFileList()
 {
-    wxListCtrl *fileList = m_view->GetFileList();
+    wxListCtrl *fileList = view->GetFileList();
     if (!fileList) return;
 
     fileList->Freeze();
     fileList->DeleteAllItems();
 
-    if (!wxDirExists(m_currentPath))
+    if (!wxDirExists(currentPath))
     {
         fileList->Thaw();
         return;
@@ -47,7 +48,7 @@ void FilePanelController::PopulateLocalFileList()
 
     try
     {
-        wxDir dir(m_currentPath);
+        wxDir dir(currentPath);
         if (!dir.IsOpened())
         {
             fileList->Thaw();
@@ -55,7 +56,7 @@ void FilePanelController::PopulateLocalFileList()
         }
 
         // Добавляем ".." для навигации вверх (кроме корневого каталога)
-        if (m_currentPath != wxFileName::GetPathSeparator())
+        if (currentPath != wxFileName::GetPathSeparator())
         {
             AddDirectoryItem("..");
         }
@@ -73,27 +74,27 @@ void FilePanelController::PopulateLocalFileList()
         cont = dir.GetFirst(&filename, "", wxDIR_FILES);
         while (cont)
         {
-            wxFileName file(m_currentPath, filename);
+            wxFileName file(currentPath, filename);
             AddFileItem(file);
             cont = dir.GetNext(&filename);
         }
     }
     catch (const std::exception &e)
     {
-        wxLogError("Ошибка доступа к каталогу '%s': %s", m_currentPath, wxString(e.what()));
-        m_view->UpdateStatus(wxString::Format("Ошибка доступа: %s", wxString(e.what())));
+        wxLogError("Ошибка доступа к каталогу '%s': %s", currentPath, wxString(e.what()));
+        view->UpdateStatus(wxString::Format("Ошибка доступа: %s", wxString(e.what())));
     }
     catch (...)
     {
-        wxLogError("Неизвестная ошибка при чтении каталога '%s'", m_currentPath);
-        m_view->UpdateStatus("Ошибка чтения каталога");
+        wxLogError("Неизвестная ошибка при чтении каталога '%s'", currentPath);
+        view->UpdateStatus("Ошибка чтения каталога");
     }
     fileList->Thaw();
 }
 
 void FilePanelController::PopulateFTPFileList()
 {
-    wxListCtrl *fileList = m_view->GetFileList();
+    wxListCtrl *fileList = view->GetFileList();
     if (!fileList) return;
 
     fileList->Freeze();
@@ -101,17 +102,17 @@ void FilePanelController::PopulateFTPFileList()
 
     // Получаем FTP контроллер из FilePanel
     // Используем метод доступа, который мы создадим
-    FTPController *ftpCtrl = m_view->GetFTPController();
+    FTPController *ftpCtrl = view->GetFTPController();
     if (!ftpCtrl || !ftpCtrl->IsConnected())
     {
-        m_view->UpdateStatus("Нет подключения к FTP");
+        view->UpdateStatus("Нет подключения к FTP");
         fileList->Thaw();
         return;
     }
 
     // Добавляем ".." для навигации вверх (но не в начальном каталоге)
     wxString currentDir = ftpCtrl->GetCurrentDirectory();
-    wxString initialDir = m_view->GetFTPInitialDirectory();
+    wxString initialDir = view->GetFTPInitialDirectory();
 
     // Показываем ".." только если мы не в начальном каталоге
     if (!currentDir.IsEmpty() && currentDir != "/" && currentDir != initialDir)
@@ -140,7 +141,7 @@ void FilePanelController::PopulateFTPFileList()
         }
     }
 
-    m_view->UpdateStatus(wxString::Format("Каталог FTP: %s", currentDir));
+    view->UpdateStatus(wxString::Format("Каталог FTP: %s", currentDir));
     fileList->Thaw();
 }
 
@@ -149,9 +150,9 @@ void FilePanelController::SetPath(const wxString &path)
     if (m_updatingPath) return;  // Предотвращаем рекурсию
 
     // Для FTP обрабатываем путь отдельно
-    if (m_view->GetSourceType() == FilePanel::SOURCE_FTP)
+    if (view->GetSourceType() == FilePanel::SOURCE_FTP)
     {
-        FTPController *ftpCtrl = m_view->GetFTPController();
+        FTPController *ftpCtrl = view->GetFTPController();
         if (ftpCtrl && ftpCtrl->IsConnected())
         {
             m_updatingPath = true;
@@ -185,9 +186,9 @@ void FilePanelController::SetPath(const wxString &path)
 
             if (ftpCtrl->ChangeDirectory(ftpPath))
             {
-                m_currentPath = ftpPath;
+                currentPath = ftpPath;
 
-                wxTextCtrl *pathCtrl = m_view->GetPathCtrl();
+                wxTextCtrl *pathCtrl = view->GetPathCtrl();
                 if (pathCtrl)
                 {
                     pathCtrl->ChangeValue(path);
@@ -212,12 +213,12 @@ void FilePanelController::SetPath(const wxString &path)
     }
 
     m_updatingPath = true;
-    m_currentPath = safePath;
+    currentPath = safePath;
 
-    wxTextCtrl *pathCtrl = m_view->GetPathCtrl();
-    if (pathCtrl && pathCtrl->GetValue() != m_currentPath)
+    wxTextCtrl *pathCtrl = view->GetPathCtrl();
+    if (pathCtrl && pathCtrl->GetValue() != currentPath)
     {
-        pathCtrl->ChangeValue(m_currentPath);  // Используем ChangeValue вместо SetValue
+        pathCtrl->ChangeValue(currentPath);  // Используем ChangeValue вместо SetValue
     }
 
     PopulateFileList();
@@ -226,7 +227,7 @@ void FilePanelController::SetPath(const wxString &path)
 
 void FilePanelController::AddDirectoryItem(const wxString &name, const wxString &displayName)
 {
-    wxListCtrl *fileList = m_view->GetFileList();
+    wxListCtrl *fileList = view->GetFileList();
     if (!fileList) return;
 
     long index = fileList->GetItemCount();
@@ -234,7 +235,7 @@ void FilePanelController::AddDirectoryItem(const wxString &name, const wxString 
     fileList->SetItem(item, 1, ""); // Размер
     fileList->SetItem(item, 2, "<DIR>"); // Тип
 
-    wxFileName fn(m_currentPath, name);
+    wxFileName fn(currentPath, name);
     if (fn.DirExists())
     {
         wxDateTime modTime;
@@ -245,7 +246,7 @@ void FilePanelController::AddDirectoryItem(const wxString &name, const wxString 
 
 void FilePanelController::AddFileItem(const wxFileName &file)
 {
-    wxListCtrl *fileList = m_view->GetFileList();
+    wxListCtrl *fileList = view->GetFileList();
     if (!fileList) return;
 
     long index = fileList->GetItemCount();
@@ -268,7 +269,7 @@ void FilePanelController::AddFileItem(const wxFileName &file)
 wxArrayString FilePanelController::GetSelectedFiles() const
 {
     wxArrayString files;
-    wxListCtrl *fileList = m_view->GetFileList();
+    wxListCtrl *fileList = view->GetFileList();
     if (!fileList) return files;
 
     long item = fileList->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
@@ -284,7 +285,7 @@ wxArrayString FilePanelController::GetSelectedFiles() const
 
 bool FilePanelController::HasSelectedFiles() const
 {
-    wxListCtrl *fileList = m_view->GetFileList();
+    wxListCtrl *fileList = view->GetFileList();
     if (!fileList) return false;
 
     long itemCount = fileList->GetItemCount();
@@ -306,7 +307,7 @@ void FilePanelController::OnPathChanged(const wxString &newPath)
 
 void FilePanelController::OnItemActivated(long itemIndex)
 {
-    wxListCtrl *fileList = m_view->GetFileList();
+    wxListCtrl *fileList = view->GetFileList();
     if (!fileList || itemIndex < 0 || itemIndex >= fileList->GetItemCount())
         return;
 
@@ -316,9 +317,9 @@ void FilePanelController::OnItemActivated(long itemIndex)
     if (type == "<DIR>" || filename == "..")
     {
         // Для FTP обрабатываем навигацию отдельно
-        if (m_view->GetSourceType() == FilePanel::SOURCE_FTP)
+        if (view->GetSourceType() == FilePanel::SOURCE_FTP)
         {
-            FTPController *ftpCtrl = m_view->GetFTPController();
+            FTPController *ftpCtrl = view->GetFTPController();
             if (!ftpCtrl || !ftpCtrl->IsConnected()) return;
 
             wxString newPath;
@@ -326,7 +327,7 @@ void FilePanelController::OnItemActivated(long itemIndex)
             {
                 // Переходим на уровень вверх
                 wxString currentDir = ftpCtrl->GetCurrentDirectory();
-                wxString initialDir = m_view->GetFTPInitialDirectory();
+                wxString initialDir = view->GetFTPInitialDirectory();
 
                 wxLogDebug("FTP navigation up: current='%s', initial='%s'", currentDir, initialDir);
 
@@ -334,7 +335,7 @@ void FilePanelController::OnItemActivated(long itemIndex)
                 if (currentDir == initialDir || currentDir.Length() <= initialDir.Length())
                 {
                     wxLogDebug("  -> Already at or above initial directory, navigation blocked");
-                    m_view->UpdateStatus("Невозможно подняться выше начального каталога");
+                    view->UpdateStatus("Невозможно подняться выше начального каталога");
                     return;
                 }
 
@@ -355,7 +356,7 @@ void FilePanelController::OnItemActivated(long itemIndex)
                     if (newPath.Length() < initialDir.Length())
                     {
                         wxLogDebug("  -> New path '%s' would be above initial '%s', blocked", newPath, initialDir);
-                        m_view->UpdateStatus("Невозможно подняться выше начального каталога");
+                        view->UpdateStatus("Невозможно подняться выше начального каталога");
                         return;
                     }
 
@@ -363,7 +364,7 @@ void FilePanelController::OnItemActivated(long itemIndex)
                     if (!newPath.StartsWith(initialDir))
                     {
                         wxLogDebug("  -> New path '%s' does not start with initial '%s', blocked", newPath, initialDir);
-                        m_view->UpdateStatus("Невозможно подняться выше начального каталога");
+                        view->UpdateStatus("Невозможно подняться выше начального каталога");
                         return;
                     }
                 }
@@ -384,10 +385,10 @@ void FilePanelController::OnItemActivated(long itemIndex)
 
             if (!newPath.IsEmpty() && ftpCtrl->ChangeDirectory(newPath))
             {
-                m_currentPath = newPath;
+                currentPath = newPath;
 
                 // Обновляем строку пути в UI
-                wxTextCtrl *pathCtrl = m_view->GetPathCtrl();
+                wxTextCtrl *pathCtrl = view->GetPathCtrl();
                 if (pathCtrl)
                 {
                     // Формируем полный FTP URL для отображения
@@ -416,13 +417,13 @@ void FilePanelController::OnItemActivated(long itemIndex)
             wxString newPath;
             if (filename == "..")
             {
-                wxFileName fn(m_currentPath);
+                wxFileName fn(currentPath);
                 fn.RemoveLastDir();
                 newPath = fn.GetPath();
             }
             else
             {
-                newPath = m_currentPath + wxFileName::GetPathSeparator() + filename;
+                newPath = currentPath + wxFileName::GetPathSeparator() + filename;
             }
             SetPath(newPath);
         }
@@ -436,7 +437,7 @@ void FilePanelController::OnItemSelected(long /*itemIndex*/)
 
 void FilePanelController::UpdateStatusForSelection() const
 {
-    wxListCtrl *fileList = m_view->GetFileList();
+    wxListCtrl *fileList = view->GetFileList();
     if (!fileList) return;
 
     wxArrayString selected = GetSelectedFiles();
@@ -449,14 +450,14 @@ void FilePanelController::UpdateStatusForSelection() const
     wxString status;
 
     // Для FTP не пытаемся обращаться к локальной файловой системе
-    if (m_view->GetSourceType() == FilePanel::SOURCE_FTP)
+    if (view->GetSourceType() == FilePanel::SOURCE_FTP)
     {
         status = wxString::Format("Выбран: %s", filename);
-        m_view->UpdateStatus(status);
+        view->UpdateStatus(status);
         return;
     }
 
-    wxString fullPathStr = m_currentPath + wxFileName::GetPathSeparator() + filename;
+    wxString fullPathStr = currentPath + wxFileName::GetPathSeparator() + filename;
 
     if (wxDirExists(fullPathStr))
     {
@@ -473,12 +474,12 @@ void FilePanelController::UpdateStatusForSelection() const
         status = wxString::Format("Выбран: %s", filename);
     }
 
-    m_view->UpdateStatus(status);
+    view->UpdateStatus(status);
 }
 
 void FilePanelController::AddFTPItem(const wxString &name, bool isDir, wxULongLong size)
 {
-    wxListCtrl *fileList = m_view->GetFileList();
+    wxListCtrl *fileList = view->GetFileList();
     if (!fileList) return;
 
     long index = fileList->GetItemCount();

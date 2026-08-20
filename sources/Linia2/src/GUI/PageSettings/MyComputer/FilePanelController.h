@@ -11,13 +11,13 @@ class FilePanel;
 class FilePanelController
 {
 public:
-    explicit FilePanelController(FilePanel *view);
+    explicit FilePanelController(FilePanel *_view);
 
     void RefreshFileList();
     void SetPath(const wxString &path);
     wxString GetCurrentPath() const
     {
-        return m_currentPath;
+        return currentPath;
     }
     wxArrayString GetSelectedFiles() const;
     bool HasSelectedFiles() const;
@@ -35,8 +35,8 @@ private:
     void AddFileItem(const wxFileName &);
     void AddFTPItem(const wxString &name, bool isDir, wxULongLong size = 0);
 
-    FilePanel *m_view;
-    wxString m_currentPath;
+    FilePanel *view;
+    wxString currentPath;
 
     bool m_updatingPath = false;
 };

@@ -16,12 +16,12 @@
 #endif
 
 
-FTPController::FTPController(FilePanel *view)
-    : m_view(view),
+FTPController::FTPController(FilePanel *_view)
+    : view(_view),
     m_session(nullptr),
     m_ftp(nullptr),
     m_isConnected(false),
-    m_currentPath("/")
+    currentPath("/")
 {}
 
 FTPController::~FTPController()
@@ -268,20 +268,20 @@ bool FTPController::Connect(const wxString &host, const wxString &user,
     char *realPath = sftp_canonicalize_path(m_ftp, ".");
     if (realPath)
     {
-        m_currentPath = wxString::FromUTF8(realPath);
-        m_initialPath = m_currentPath;  // Сохраняем начальный путь
+        currentPath = wxString::FromUTF8(realPath);
+        m_initialPath = currentPath;  // Сохраняем начальный путь
         ssh_string_free_char(realPath);
     }
     else
     {
-        m_currentPath = "/";
+        currentPath = "/";
         m_initialPath = "/";
     }
 
     m_isConnected = true;
     m_lastError.Clear();
 
-    wxLogDebug("FTPController::Connect - current directory: %s", m_currentPath);
+    wxLogDebug("FTPController::Connect - current directory: %s", currentPath);
     wxLogDebug("FTPController::Connect - initial directory: %s", m_initialPath);
 
     return true;
@@ -302,7 +302,7 @@ void FTPController::Disconnect()
         m_session = nullptr;
     }
 
-    m_currentPath.Clear();
+    currentPath.Clear();
     m_initialPath.Clear();
     m_isConnected = false;
 }
@@ -313,11 +313,11 @@ wxString FTPController::BuildFullPath(const wxString &name) const
     {
         return name;
     }
-    if (m_currentPath.EndsWith("/"))
+    if (currentPath.EndsWith("/"))
     {
-        return m_currentPath + name;
+        return currentPath + name;
     }
-    return m_currentPath + "/" + name;
+    return currentPath + "/" + name;
 }
 
 bool FTPController::ChangeDirectory(const wxString &path)
@@ -329,7 +329,7 @@ bool FTPController::ChangeDirectory(const wxString &path)
     }
 
     wxLogDebug("FTPController::ChangeDirectory: attempting to change to '%s'", path);
-    wxLogDebug("  Current: '%s', Initial: '%s'", m_currentPath, m_initialPath);
+    wxLogDebug("  Current: '%s', Initial: '%s'", currentPath, m_initialPath);
 
     // Проверяем, что новый путь начинается с начального пути
     if (!path.StartsWith(m_initialPath))
@@ -358,14 +358,14 @@ bool FTPController::ChangeDirectory(const wxString &path)
     }
 
     sftp_closedir(dir);
-    m_currentPath = path;
-    wxLogDebug("  -> SUCCESS: changed to '%s'", m_currentPath);
+    currentPath = path;
+    wxLogDebug("  -> SUCCESS: changed to '%s'", currentPath);
     return true;
 }
 
 wxString FTPController::GetCurrentDirectory() const
 {
-    return m_currentPath;
+    return currentPath;
 }
 
 wxArrayString FTPController::ListFiles()
@@ -378,7 +378,7 @@ wxArrayString FTPController::ListFiles()
         return files;
     }
 
-    sftp_dir dir = sftp_opendir(m_ftp, m_currentPath.utf8_str().data());
+    sftp_dir dir = sftp_opendir(m_ftp, currentPath.utf8_str().data());
     if (!dir)
     {
         m_lastError = wxString::Format("Не удалось открыть директорию: %s",
@@ -419,7 +419,7 @@ wxArrayString FTPController::ListDirectories()
         return dirs;
     }
 
-    sftp_dir dir = sftp_opendir(m_ftp, m_currentPath.utf8_str().data());
+    sftp_dir dir = sftp_opendir(m_ftp, currentPath.utf8_str().data());
     if (!dir)
     {
         m_lastError = wxString::Format("Не удалось открыть директорию: %s",

@@ -16,7 +16,7 @@ class FilePanel;
 class FTPController
 {
 public:
-    explicit FTPController(FilePanel *view);
+    explicit FTPController(FilePanel *_view);
     ~FTPController();
 
     // Основные операции
@@ -61,11 +61,11 @@ private:
     int VerifyKnownHost();
     wxString BuildFullPath(const wxString &name) const;
 
-    FilePanel *m_view;
+    FilePanel *view;
     ssh_session m_session;
     sftp_session m_ftp;
     bool m_isConnected;
-    wxString m_currentPath;
+    wxString currentPath;
     wxString m_initialPath;  // Начальный путь для ограничения навигации
     wxString m_lastError;
 };
