@@ -136,7 +136,7 @@ public:
     // Доступ к FTP контроллеру
     FTPController *GetFTPController() const
     {
-        return m_ftpController.get();
+        return ftpController.get();
     }
 
     // Обработчики операций (делегируют в FilePanelOperations)
@@ -233,7 +233,7 @@ private:
     // Удаляем указатели на кнопки
     std::unique_ptr<FilePanelController> controller;
     std::unique_ptr<FilePanelOperations> operations;
-    std::unique_ptr<FTPController> m_ftpController;  // Контроллер FTP
+    std::unique_ptr<FTPController> ftpController = nullptr;
     wxString m_ftpInitialDirectory;  // Начальный каталог FTP для ограничения навигации
     bool m_isActive;
     SourceType sourceType;

@@ -57,7 +57,6 @@ FilePanel::FilePanel(wxWindow *parent, DisplayMode mode)
     displayMode(mode),
     controller(std::make_unique<FilePanelController>(this)),
     operations(std::make_unique<FilePanelOperations>(this)),
-    m_ftpController(nullptr),
     m_isActive(false),
     sourceType(SOURCE_LOCAL)
 {
@@ -80,29 +79,29 @@ FilePanel::FilePanel(wxWindow *parent, DisplayMode mode)
 FilePanel::~FilePanel()
 {
     // Только отключаем FTP-соединение, не обновляя UI (виджеты могут быть уже разрушены)
-    if (m_ftpController)
+    if (ftpController)
     {
-        m_ftpController->Disconnect();
+        ftpController->Disconnect();
     }
-    // Ресурсы (controller, m_ftpController) освобождаются автоматически через std::unique_ptr
+    // Ресурсы (controller, ftpController) освобождаются автоматически через std::unique_ptr
 }
 
 bool FilePanel::ConnectToFTP(const wxString &host, int port,
     const wxString &user, const wxString &pass)
 {
-    if (!m_ftpController)
+    if (!ftpController)
     {
-        m_ftpController = std::make_unique<FTPController>(this);
+        ftpController = std::make_unique<FTPController>(this);
     }
 
-    if (!m_ftpController->Connect(host, user, pass, port))
+    if (!ftpController->Connect(host, user, pass, port))
     {
-        UpdateStatus("Ошибка подключения к FTP: " + m_ftpController->GetLastError());
+        UpdateStatus("Ошибка подключения к FTP: " + ftpController->GetLastError());
         return false;
     }
 
     sourceType = SOURCE_FTP;
-    wxString ftpPath = m_ftpController->GetCurrentDirectory();
+    wxString ftpPath = ftpController->GetCurrentDirectory();
 
     // Сохраняем начальный каталог для ограничения навигации
     m_ftpInitialDirectory = ftpPath;
@@ -120,10 +119,10 @@ bool FilePanel::ConnectToFTP(const wxString &host, int port,
 
 void FilePanel::DisconnectFTP()
 {
-    if (m_ftpController)
+    if (ftpController)
     {
-        m_ftpController->Disconnect();
-        m_ftpController.reset();
+        ftpController->Disconnect();
+        ftpController.reset();
         m_ftpInitialDirectory.Clear();
         sourceType = SOURCE_LOCAL;
         controller->SetPath(wxGetCwd());
@@ -134,7 +133,7 @@ void FilePanel::DisconnectFTP()
 
 bool FilePanel::IsFTPConnected() const
 {
-    return m_ftpController && m_ftpController->IsConnected();
+    return ftpController && ftpController->IsConnected();
 }
 
 void FilePanel::SetActive(bool active)
@@ -303,7 +302,7 @@ bool FilePanel::ChangeDirectoryInternal(const wxString &path)
         return false;
 
     case SOURCE_FTP:
-        if (m_ftpController && m_ftpController->ChangeDirectory(path))
+        if (ftpController && ftpController->ChangeDirectory(path))
         {
             return true;
         }
@@ -321,9 +320,9 @@ wxString FilePanel::GetCurrentDirectoryInternal() const
         return controller->GetCurrentPath();
 
     case SOURCE_FTP:
-        if (m_ftpController)
+        if (ftpController)
         {
-            return m_ftpController->GetCurrentDirectory();
+            return ftpController->GetCurrentDirectory();
         }
         return wxEmptyString;
     }
@@ -361,10 +360,10 @@ bool FilePanel::GetDirectoryContentsInternal(wxArrayString &files, wxArrayString
     }
 
     case SOURCE_FTP: {
-        if (!m_ftpController) return false;
+        if (!ftpController) return false;
 
-        dirs = m_ftpController->ListDirectories();
-        files = m_ftpController->ListFiles();
+        dirs = ftpController->ListDirectories();
+        files = ftpController->ListFiles();
         return true;
     }
     }
@@ -382,7 +381,7 @@ bool FilePanel::CreateDirectoryInternal(const wxString &name)
     }
 
     case SOURCE_FTP:
-        return m_ftpController && m_ftpController->MakeDirectory(name);
+        return ftpController && ftpController->MakeDirectory(name);
     }
     return false;
 }
@@ -396,7 +395,7 @@ bool FilePanel::DeleteFileInternal(const wxString &path)
         return wxRemoveFile(path);
 
     case SOURCE_FTP:
-        return m_ftpController && m_ftpController->DeleteFile(path);
+        return ftpController && ftpController->DeleteFile(path);
     }
     return false;
 }
@@ -430,7 +429,7 @@ bool FilePanel::DeleteDirectoryInternal(const wxString &path)
     }
 
     case SOURCE_FTP:
-        return m_ftpController && m_ftpController->RemoveDirectory(path);
+        return ftpController && ftpController->RemoveDirectory(path);
     }
     return false;
 }
@@ -444,7 +443,7 @@ bool FilePanel::RenameFileInternal(const wxString &oldPath, const wxString &newP
         return wxRenameFile(oldPath, newPath);
 
     case SOURCE_FTP:
-        return m_ftpController && m_ftpController->RenameFile(oldPath, newPath);
+        return ftpController && ftpController->RenameFile(oldPath, newPath);
     }
     return false;
 }
@@ -458,9 +457,9 @@ bool FilePanel::FileExistsInternal(const wxString &path) const
         return wxFileExists(path) || wxDirExists(path);
 
     case SOURCE_FTP: {
-        if (!m_ftpController) return false;
+        if (!ftpController) return false;
         // Для FTP проверяем через размер файла
-        wxULongLong size = m_ftpController->GetFileSize(path);
+        wxULongLong size = ftpController->GetFileSize(path);
         return size != wxInvalidSize;
     }
     }
@@ -476,8 +475,8 @@ bool FilePanel::IsDirectoryInternal(const wxString &path) const
         return wxDirExists(path);
 
     case SOURCE_FTP: {
-        if (!m_ftpController) return false;
-        return m_ftpController->IsDirectory(path);
+        if (!ftpController) return false;
+        return ftpController->IsDirectory(path);
     }
     }
     return false;
@@ -498,15 +497,15 @@ bool FilePanel::CopyFileBetweenSystems(const wxString &sourcePath,
     // Local -> FTP
     if (_sourceType == FS_LOCAL && destType == FS_FTP)
     {
-        if (!m_ftpController) return false;
-        return m_ftpController->UploadFile(sourcePath, destPath);
+        if (!ftpController) return false;
+        return ftpController->UploadFile(sourcePath, destPath);
     }
 
     // FTP -> Local
     if (_sourceType == FS_FTP && destType == FS_LOCAL)
     {
-        if (!m_ftpController) return false;
-        return m_ftpController->DownloadFile(sourcePath, destPath);
+        if (!ftpController) return false;
+        return ftpController->DownloadFile(sourcePath, destPath);
     }
 
     // FTP -> FTP
@@ -515,10 +514,10 @@ bool FilePanel::CopyFileBetweenSystems(const wxString &sourcePath,
         // Через временный файл
         wxString tempFile = wxFileName::CreateTempFileName("ftp_copy");
 
-        bool success = m_ftpController->DownloadFile(sourcePath, tempFile);
+        bool success = ftpController->DownloadFile(sourcePath, tempFile);
         if (success)
         {
-            success = m_ftpController->UploadFile(tempFile, destPath);
+            success = ftpController->UploadFile(tempFile, destPath);
         }
 
         wxRemoveFile(tempFile);
@@ -1066,13 +1065,13 @@ void FilePanel::OnFTPButtonClick(wxCommandEvent & /*event*/)
         wxString password = dlg.GetPassword();
 
         // Создаем FTP контроллер если его еще нет
-        if (!m_ftpController)
+        if (!ftpController)
         {
-            m_ftpController = std::make_unique<FTPController>(this);
+            ftpController = std::make_unique<FTPController>(this);
         }
 
         // Пытаемся подключиться
-        bool connected = m_ftpController->Connect(server, username, password, port);
+        bool connected = ftpController->Connect(server, username, password, port);
 
         // Очищаем пароль из памяти сразу после использования
         dlg.ClearPassword();
@@ -1109,9 +1108,9 @@ void FilePanel::OnBackButtonClick(wxCommandEvent & /*event*/)
     panelState = STATE_SELECTION;
 
     // Если был FTP - отключаемся
-    if (sourceType == SOURCE_FTP && m_ftpController)
+    if (sourceType == SOURCE_FTP && ftpController)
     {
-        m_ftpController.reset();  // Уничтожаем контроллер, это закроет соединение
+        ftpController.reset();  // Уничтожаем контроллер, это закроет соединение
         UpdateStatus("FTP соединение закрыто");
     }
     else
