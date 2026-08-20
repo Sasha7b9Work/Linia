@@ -48,8 +48,18 @@ public:
         timer->Start(1000); // Таймер срабатывает каждую секунду
 
         // Привязка событий кнопок
-        okButton->Bind(wxEVT_BUTTON, &AutoRebootDialog::OnOk, this);
-        cancelButton->Bind(wxEVT_BUTTON, &AutoRebootDialog::OnCancel, this);
+        okButton->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
+            {
+                timer->Stop();
+                EndModal(wxID_OK);
+                func_on_finish();
+            });
+
+        cancelButton->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
+            {
+                timer->Stop();
+                EndModal(wxID_CANCEL);
+            });
 
         Bind(wxEVT_TIMER, &AutoRebootDialog::OnTimer, this);
     }
@@ -87,20 +97,6 @@ private:
         EndModal(wxID_OK);
 
         func_on_finish();
-    }
-
-    void OnOk(wxCommandEvent &)
-    {
-        timer->Stop();
-        EndModal(wxID_OK);
-
-        func_on_finish();
-    }
-
-    void OnCancel(wxCommandEvent &)
-    {
-        timer->Stop();
-        EndModal(wxID_CANCEL);
     }
 
 private:
