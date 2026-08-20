@@ -2,13 +2,11 @@
 #pragma once
 #include "GUI/Controls/Button.h"
 #include "GUI/Controls/ButtonCombo.h"
-#pragma warning(push, 0)
-#pragma warning(pop)
 
 
 class wxRadioButton;
 class wxWindow;
-class wxStaticText;
+class StaticText;
 class wxCheckBox;
 class wxTextCtrl;
 class wxSpinCtrl;
@@ -28,9 +26,9 @@ namespace GF
     std::string GetFullPath(pchar rel_path);
 
     // Центрировать text относительно border
-    void HorizontalAlignCenter(wxStaticText *label, wxWindow *border);
+    void HorizontalAlignCenter(StaticText *label, wxWindow *border);
 
-    wxStaticText *FindStaticText(wxWindow *, int id);
+    StaticText *FindStaticText(wxWindow *, int id);
 
     wxAnyButton *FindAnyButton(wxWindow *, int id);
 

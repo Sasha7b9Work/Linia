@@ -2,8 +2,8 @@
 #include "defines.h"
 #include "Utils/GlobalFunctions.h"
 #include "MainWindow.h"
+#include "GUI/Controls/StaticText.h"
 #pragma warning(push, 0)
-    #include <wx/stattext.h>
     #include <wx/filename.h>
     #include <wx/textctrl.h>
     #include <wx/msgdlg.h>
@@ -11,7 +11,7 @@
 #pragma warning(pop)
 
 
-void GF::HorizontalAlignCenter(wxStaticText *label , wxWindow *border)
+void GF::HorizontalAlignCenter(StaticText *label , wxWindow *border)
 {
     wxBitmap bitmap("BITMAP_CARD");
 
@@ -33,9 +33,9 @@ void GF::HorizontalAlignCenter(wxStaticText *label , wxWindow *border)
 }
 
 
-wxStaticText *GF::FindStaticText(wxWindow *window, int id)
+StaticText *GF::FindStaticText(wxWindow *window, int id)
 {
-    return (wxStaticText *)window->FindWindow(id);
+    return (StaticText *)window->FindWindow(id);
 }
 
 
