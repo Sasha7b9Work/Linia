@@ -62,27 +62,24 @@ ButtonBitmapChoice::ButtonBitmapChoice(wxWindow *parent, const wxSize &size, con
     ButtonBitmap(parent, size, _files[0], _name),
     files(_files)
 {
-    Bind(wxEVT_BUTTON, &ButtonBitmapChoice::OnEventButton, this);
-}
-
-
-void ButtonBitmapChoice::OnEventButton(wxCommandEvent &event)
-{
-    if (event.GetId() == GetId())
-    {
-        choice++;
-
-        if ((size_t)choice >= files.GetCount()) //-V201
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
         {
-            choice = 0;
-        }
+            if (event.GetId() == GetId())
+            {
+                choice++;
 
-        SetCurrentValue(choice);
+                if ((size_t)choice >= files.GetCount()) //-V201
+                {
+                    choice = 0;
+                }
 
-        GF::SendCommandEvent(this, EVT_BUTTON_BITMAP_CHOICE, choice);
-    }
+                SetCurrentValue(choice);
 
-    event.Skip();
+                GF::SendCommandEvent(this, EVT_BUTTON_BITMAP_CHOICE, choice);
+            }
+
+            event.Skip();
+        });
 }
 
 

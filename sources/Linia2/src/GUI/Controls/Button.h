@@ -55,8 +55,6 @@ private:
     wxArrayString files;
 
     int choice = 0;
-
-    void OnEventButton(wxCommandEvent &);
 };
 
 
