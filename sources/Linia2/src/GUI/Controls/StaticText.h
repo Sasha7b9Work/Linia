@@ -9,8 +9,8 @@ class StaticText : public wxStaticText
 {
 public:
 
-    StaticText(wxWindow *parent, const wxString &label, const wxSize & = wxDefaultSize) :
-        wxStaticText(parent, wxID_ANY, label)
+    StaticText(wxWindow *parent, const wxString &label, const wxSize &size = wxDefaultSize) :
+        wxStaticText(parent, wxID_ANY, label, wxDefaultPosition, size)
     {
 
     }
