@@ -59,7 +59,7 @@ FilePanel::FilePanel(wxWindow *parent, DisplayMode mode)
     operations(std::make_unique<FilePanelOperations>(this)),
     m_ftpController(nullptr),
     m_isActive(false),
-    m_sourceType(SOURCE_LOCAL)
+    sourceType(SOURCE_LOCAL)
 {
     CreateControls();
     BindEvents();
@@ -101,7 +101,7 @@ bool FilePanel::ConnectToFTP(const wxString &host, int port,
         return false;
     }
 
-    m_sourceType = SOURCE_FTP;
+    sourceType = SOURCE_FTP;
     wxString ftpPath = m_ftpController->GetCurrentDirectory();
 
     // Сохраняем начальный каталог для ограничения навигации
@@ -125,7 +125,7 @@ void FilePanel::DisconnectFTP()
         m_ftpController->Disconnect();
         m_ftpController.reset();
         m_ftpInitialDirectory.Clear();
-        m_sourceType = SOURCE_LOCAL;
+        sourceType = SOURCE_LOCAL;
         controller->SetPath(wxGetCwd());
         RefreshFileList();
         UpdateStatus("Отключено от FTP");
@@ -292,7 +292,7 @@ void FilePanel::UpdateVisualState()
 // Внутренние методы для абстракции файловых операций
 bool FilePanel::ChangeDirectoryInternal(const wxString &path)
 {
-    switch (m_sourceType)
+    switch (sourceType)
     {
     case SOURCE_LOCAL:
     case SOURCE_USB:
@@ -314,7 +314,7 @@ bool FilePanel::ChangeDirectoryInternal(const wxString &path)
 
 wxString FilePanel::GetCurrentDirectoryInternal() const
 {
-    switch (m_sourceType)
+    switch (sourceType)
     {
     case SOURCE_LOCAL:
     case SOURCE_USB:
@@ -335,7 +335,7 @@ bool FilePanel::GetDirectoryContentsInternal(wxArrayString &files, wxArrayString
     files.Clear();
     dirs.Clear();
 
-    switch (m_sourceType)
+    switch (sourceType)
     {
     case SOURCE_LOCAL:
     case SOURCE_USB: {
@@ -373,7 +373,7 @@ bool FilePanel::GetDirectoryContentsInternal(wxArrayString &files, wxArrayString
 
 bool FilePanel::CreateDirectoryInternal(const wxString &name)
 {
-    switch (m_sourceType)
+    switch (sourceType)
     {
     case SOURCE_LOCAL:
     case SOURCE_USB: {
@@ -389,7 +389,7 @@ bool FilePanel::CreateDirectoryInternal(const wxString &name)
 
 bool FilePanel::DeleteFileInternal(const wxString &path)
 {
-    switch (m_sourceType)
+    switch (sourceType)
     {
     case SOURCE_LOCAL:
     case SOURCE_USB:
@@ -403,7 +403,7 @@ bool FilePanel::DeleteFileInternal(const wxString &path)
 
 bool FilePanel::DeleteDirectoryInternal(const wxString &path)
 {
-    switch (m_sourceType)
+    switch (sourceType)
     {
     case SOURCE_LOCAL:
     case SOURCE_USB: {
@@ -437,7 +437,7 @@ bool FilePanel::DeleteDirectoryInternal(const wxString &path)
 
 bool FilePanel::RenameFileInternal(const wxString &oldPath, const wxString &newPath)
 {
-    switch (m_sourceType)
+    switch (sourceType)
     {
     case SOURCE_LOCAL:
     case SOURCE_USB:
@@ -451,7 +451,7 @@ bool FilePanel::RenameFileInternal(const wxString &oldPath, const wxString &newP
 
 bool FilePanel::FileExistsInternal(const wxString &path) const
 {
-    switch (m_sourceType)
+    switch (sourceType)
     {
     case SOURCE_LOCAL:
     case SOURCE_USB:
@@ -469,7 +469,7 @@ bool FilePanel::FileExistsInternal(const wxString &path) const
 
 bool FilePanel::IsDirectoryInternal(const wxString &path) const
 {
-    switch (m_sourceType)
+    switch (sourceType)
     {
     case SOURCE_LOCAL:
     case SOURCE_USB:
@@ -484,33 +484,33 @@ bool FilePanel::IsDirectoryInternal(const wxString &path) const
 }
 
 bool FilePanel::CopyFileBetweenSystems(const wxString &sourcePath,
-    FileSystemType sourceType,
+    FileSystemType _sourceType,
     const wxString &destPath,
     FileSystemType destType,
     wxWindow * /*parent*/)
 {
     // Local -> Local
-    if (sourceType == FS_LOCAL && destType == FS_LOCAL)
+    if (_sourceType == FS_LOCAL && destType == FS_LOCAL)
     {
         return wxCopyFile(sourcePath, destPath);
     }
 
     // Local -> FTP
-    if (sourceType == FS_LOCAL && destType == FS_FTP)
+    if (_sourceType == FS_LOCAL && destType == FS_FTP)
     {
         if (!m_ftpController) return false;
         return m_ftpController->UploadFile(sourcePath, destPath);
     }
 
     // FTP -> Local
-    if (sourceType == FS_FTP && destType == FS_LOCAL)
+    if (_sourceType == FS_FTP && destType == FS_LOCAL)
     {
         if (!m_ftpController) return false;
         return m_ftpController->DownloadFile(sourcePath, destPath);
     }
 
     // FTP -> FTP
-    if (sourceType == FS_FTP && destType == FS_FTP)
+    if (_sourceType == FS_FTP && destType == FS_FTP)
     {
         // Через временный файл
         wxString tempFile = wxFileName::CreateTempFileName("ftp_copy");
@@ -766,7 +766,7 @@ void FilePanel::OnKeyDown(wxKeyEvent &event)
 
         wxString basePath = controller->GetCurrentPath();
         wxString sep = wxFileName::GetPathSeparator();
-        if (m_sourceType == SOURCE_FTP) sep = "/";
+        if (sourceType == SOURCE_FTP) sep = "/";
 
         wxString oldPath = basePath + sep + oldName;
         wxString newPath = basePath + sep + newName;
@@ -872,7 +872,7 @@ void FilePanel::HandleRedo()
 // Методы для работы с типом источника данных
 void FilePanel::SetSourceType(SourceType type)
 {
-    m_sourceType = type;
+    sourceType = type;
     if (sourceTypeCombo)
     {
         sourceTypeCombo->SetSelection(static_cast<int>(type));
@@ -883,7 +883,7 @@ void FilePanel::SetSourceType(SourceType type)
 
 wxString FilePanel::GetSourceTypeString() const
 {
-    switch (m_sourceType)
+    switch (sourceType)
     {
     case SOURCE_LOCAL:
         return "Локальная файловая система";
@@ -899,7 +899,7 @@ wxString FilePanel::GetSourceTypeString() const
 void FilePanel::OnSourceTypeChanged(wxCommandEvent & /*event*/)
 {
     int selection = sourceTypeCombo->GetSelection();
-    m_sourceType = static_cast<SourceType>(selection);
+    sourceType = static_cast<SourceType>(selection);
 
     UpdateStatus(wxString::Format("Переключено на: %s", GetSourceTypeString()));
     UpdateControlsForSourceType();
@@ -908,7 +908,7 @@ void FilePanel::OnSourceTypeChanged(wxCommandEvent & /*event*/)
 
 void FilePanel::UpdateControlsForSourceType()
 {
-    switch (m_sourceType)
+    switch (sourceType)
     {
     case SOURCE_LOCAL:
         pathCtrl->Enable(true);
@@ -1047,7 +1047,7 @@ void FilePanel::CreateSourceButtons()
 
 void FilePanel::OnLocalButtonClick(wxCommandEvent & /*event*/)
 {
-    m_sourceType = SOURCE_LOCAL;
+    sourceType = SOURCE_LOCAL;
     panelState = STATE_BROWSING;  // Переходим в режим просмотра каталога
     UpdateStatus("Переключено на: Локальное хранилище");
     UpdatePanelState();
@@ -1084,7 +1084,7 @@ void FilePanel::OnFTPButtonClick(wxCommandEvent & /*event*/)
 
         if (connected)
         {
-            m_sourceType = SOURCE_FTP;
+            sourceType = SOURCE_FTP;
             panelState = STATE_BROWSING;  // Переходим в режим просмотра каталога
 
             // Формируем путь для отображения
@@ -1109,7 +1109,7 @@ void FilePanel::OnBackButtonClick(wxCommandEvent & /*event*/)
     panelState = STATE_SELECTION;
 
     // Если был FTP - отключаемся
-    if (m_sourceType == SOURCE_FTP && m_ftpController)
+    if (sourceType == SOURCE_FTP && m_ftpController)
     {
         m_ftpController.reset();  // Уничтожаем контроллер, это закроет соединение
         UpdateStatus("FTP соединение закрыто");
@@ -1119,7 +1119,7 @@ void FilePanel::OnBackButtonClick(wxCommandEvent & /*event*/)
         UpdateStatus("Возврат к выбору источника");
     }
 
-    m_sourceType = SOURCE_LOCAL;  // Сбрасываем тип источника
+    sourceType = SOURCE_LOCAL;  // Сбрасываем тип источника
     UpdatePanelState();
 }
 

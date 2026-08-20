@@ -101,11 +101,11 @@ public:
     // Методы для работы с типом источника
     SourceType GetSourceType() const
     {
-        return m_sourceType;
+        return sourceType;
     }
     FileSystemType GetFileSystemType() const
     {
-        return static_cast<FileSystemType>(m_sourceType);
+        return static_cast<FileSystemType>(sourceType);
     }
     void SetSourceType(SourceType type);
     void SetFileSystemType(FileSystemType type)
@@ -236,7 +236,7 @@ private:
     std::unique_ptr<FTPController> m_ftpController;  // Контроллер FTP
     wxString m_ftpInitialDirectory;  // Начальный каталог FTP для ограничения навигации
     bool m_isActive;
-    SourceType m_sourceType;
+    SourceType sourceType;
     int m_sortColumn = 0;
     bool m_sortAscending = true;
 
