@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "GUI/PageSettings/MyComputer/FTPConnectionDialog.h"
-#include "GUI/Controls/Button.h"
 #pragma warning(push, 0)
     #include <wx/sizer.h>
     #include <wx/stattext.h>
@@ -10,7 +9,6 @@
 
 
 wxBEGIN_EVENT_TABLE(FTPConnectionDialog, wxDialog)
-EVT_BUTTON(wxID_OK, FTPConnectionDialog::OnOK)
 EVT_BUTTON(wxID_CANCEL, FTPConnectionDialog::OnCancel)
 wxEND_EVENT_TABLE()
 
@@ -84,9 +82,41 @@ void FTPConnectionDialog::CreateControls()
     wxBoxSizer *buttonSizer = new wxBoxSizer(wxHORIZONTAL);
     buttonSizer->AddStretchSpacer(1);
 
-    Button *btnOK = new Button(this, L("Подключить"));
-    btnOK->SetId(wxID_OK);
-    buttonSizer->Add(btnOK, 0, wxALL, 5);
+    {
+        btnOK = new Button(this, L("Подключить"));
+        btnOK->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
+            {
+                server = serverCtrl->GetValue();
+                wxString portStr = portCtrl->GetValue();
+                long portLong;
+                if (portStr.ToLong(&portLong) && portLong >= 1 && portLong <= 65535)
+                {
+                    port = static_cast<int>(portLong);
+                }
+                else
+                {
+                    wxMessageBox("Порт должен быть числом от 1 до 65535", "Ошибка", wxOK | wxICON_ERROR);
+                    return;
+                }
+                username = usernameCtrl->GetValue();
+                password = passwordCtrl->GetValue();
+
+                if (server.IsEmpty())
+                {
+                    wxMessageBox("Введите адрес сервера", "Ошибка", wxOK | wxICON_ERROR);
+                    return;
+                }
+
+                if (username.IsEmpty())
+                {
+                    wxMessageBox("Введите имя пользователя", "Ошибка", wxOK | wxICON_ERROR);
+                    return;
+                }
+
+                EndModal(wxID_OK);
+            });
+        buttonSizer->Add(btnOK, 0, wxALL, 5);
+    }
 
     Button *btnCancel = new Button(this, L("Отмена"));
     btnCancel->SetId(wxID_CANCEL);
@@ -97,38 +127,6 @@ void FTPConnectionDialog::CreateControls()
     SetSizer(mainSizer);
     mainSizer->Fit(this);
     mainSizer->SetSizeHints(this);
-}
-
-void FTPConnectionDialog::OnOK(wxCommandEvent &)
-{
-    server = serverCtrl->GetValue();
-    wxString portStr = portCtrl->GetValue();
-    long portLong;
-    if (portStr.ToLong(&portLong) && portLong >= 1 && portLong <= 65535)
-    {
-        port = static_cast<int>(portLong);
-    }
-    else
-    {
-        wxMessageBox("Порт должен быть числом от 1 до 65535", "Ошибка", wxOK | wxICON_ERROR);
-        return;
-    }
-    username = usernameCtrl->GetValue();
-    password = passwordCtrl->GetValue();
-
-    if (server.IsEmpty())
-    {
-        wxMessageBox("Введите адрес сервера", "Ошибка", wxOK | wxICON_ERROR);
-        return;
-    }
-
-    if (username.IsEmpty())
-    {
-        wxMessageBox("Введите имя пользователя", "Ошибка", wxOK | wxICON_ERROR);
-        return;
-    }
-
-    EndModal(wxID_OK);
 }
 
 void FTPConnectionDialog::OnCancel(wxCommandEvent &)

@@ -1,4 +1,5 @@
 #pragma once
+#include "GUI/Controls/Button.h"
 #pragma warning(push, 0)
     #include <wx/dialog.h>
     #include <wx/textctrl.h>
@@ -35,13 +36,14 @@ public:
 
 private:
     void CreateControls();
-    void OnOK(wxCommandEvent &);
     void OnCancel(wxCommandEvent &);
 
     wxTextCtrl *serverCtrl = nullptr;
     wxTextCtrl *portCtrl = nullptr;
     wxTextCtrl *usernameCtrl = nullptr;
     wxTextCtrl *passwordCtrl = nullptr;
+
+    Button *btnOK = nullptr;
 
     wxString server;
     int port = 22;
