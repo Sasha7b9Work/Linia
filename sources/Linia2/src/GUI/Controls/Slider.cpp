@@ -218,7 +218,8 @@ SliderFloat::SliderFloat(wxWindow *parent, int width, const wxString &name) :
 
     slider->SetBackgroundColour(slider->GetBackgroundColour().ChangeLightness(LIGHTNESS));
 
-    text = new wxStaticText(this, wxID_ANY, "0", { 0, 5 }, { w1, TEXTCNTRL_HEIGHT - 5 });
+    text = new StaticText(this, "0", { w1, TEXTCNTRL_HEIGHT - 5 });
+    text->SetPosition({ 0, 5 });
 
     wxSize size_button{ 15, 12 };
 

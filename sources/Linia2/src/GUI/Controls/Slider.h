@@ -60,8 +60,8 @@ public:
 
 protected:
 
-    wxStaticText *text = nullptr;
-    wxSlider     *slider = nullptr;
+    StaticText *text = nullptr;
+    wxSlider   *slider = nullptr;
     Button     *btnMore = nullptr;
     Button     *btnLess = nullptr;
 
