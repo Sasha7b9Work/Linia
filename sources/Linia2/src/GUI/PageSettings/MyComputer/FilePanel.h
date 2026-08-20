@@ -63,7 +63,6 @@ public:
         ID_REFRESH,
         ID_PASTE,
         ID_SOURCE_TYPE,
-        ID_BTN_LOCAL,
         ID_BTN_FTP,
         ID_BTN_BACK,       // Кнопка возврата к выбору источника
         ID_PATH_CTRL,
@@ -184,7 +183,6 @@ public:
 
     // Обработчики событий
     void OnSourceTypeChanged(wxCommandEvent &event);
-    void OnLocalButtonClick(wxCommandEvent &event);
     void OnFTPButtonClick(wxCommandEvent &event);
     void OnBackButtonClick(wxCommandEvent &event);
     void OnPathChanged(wxCommandEvent &event);

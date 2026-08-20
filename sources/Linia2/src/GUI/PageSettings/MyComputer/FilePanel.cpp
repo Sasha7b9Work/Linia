@@ -30,7 +30,6 @@
 // Определение таблицы событий
 wxBEGIN_EVENT_TABLE(FilePanel, wxPanel)
 EVT_COMBOBOX(ID_SOURCE_TYPE, FilePanel::OnSourceTypeChanged)
-EVT_BUTTON(ID_BTN_LOCAL, FilePanel::OnLocalButtonClick)
 EVT_BUTTON(ID_BTN_FTP, FilePanel::OnFTPButtonClick)
 EVT_BUTTON(ID_BTN_BACK, FilePanel::OnBackButtonClick)
 EVT_TEXT(ID_PATH_CTRL, FilePanel::OnPathChanged)
@@ -1067,26 +1066,36 @@ void FilePanel::CreateSourceButtons()
     wxBitmap &bmpLocal = Bitmap::Get("computer.bmp").GetBitmap();
     wxBitmap &bmpFTP = Bitmap::Get("ftp.bmp").GetBitmap();
 
-    // Создаем кнопки
-    if (bmpLocal.IsOk())
     {
-        btnLocal = new wxBitmapButton(this, ID_BTN_LOCAL, bmpLocal, wxDefaultPosition, wxSize(64, 64));
-    }
-    else
-    {
-        // Создаём пустой bitmap 64x64 вместо wxNullBitmap (wxNullBitmap может вызвать segfault на GTK)
-        wxBitmap emptyBmp(64, 64);
+        if (bmpLocal.IsOk())
         {
-            wxMemoryDC dc(emptyBmp);
-            dc.SetBackground(*wxWHITE_BRUSH);
-            dc.Clear();
-            dc.SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
-            dc.DrawText("Local", 10, 22);
+            btnLocal = new wxBitmapButton(this, wxID_ANY, bmpLocal, wxDefaultPosition, wxSize(64, 64));
         }
-        btnLocal = new wxBitmapButton(this, ID_BTN_LOCAL, emptyBmp, wxDefaultPosition, wxSize(64, 64));
-    }
+        else
+        {
+            // Создаём пустой bitmap 64x64 вместо wxNullBitmap (wxNullBitmap может вызвать segfault на GTK)
+            wxBitmap emptyBmp(64, 64);
+            {
+                wxMemoryDC dc(emptyBmp);
+                dc.SetBackground(*wxWHITE_BRUSH);
+                dc.Clear();
+                dc.SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+                dc.DrawText("Local", 10, 22);
+            }
+            btnLocal = new wxBitmapButton(this, wxID_ANY, emptyBmp, wxDefaultPosition, wxSize(64, 64));
+        }
 
-    btnLocal->SetToolTip("Локальное хранилище");
+        btnLocal->SetToolTip("Локальное хранилище");
+
+        btnLocal->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
+            {
+                sourceType = SOURCE_LOCAL;
+                panelState = STATE_BROWSING;  // Переходим в режим просмотра каталога
+                UpdateStatus("Переключено на: Локальное хранилище");
+                UpdatePanelState();
+                RefreshFileList();
+            });
+    }
 
     if (bmpFTP.IsOk())
     {
@@ -1108,14 +1117,6 @@ void FilePanel::CreateSourceButtons()
     btnFTP->SetToolTip("FTP соединение");
 }
 
-void FilePanel::OnLocalButtonClick(wxCommandEvent &)
-{
-    sourceType = SOURCE_LOCAL;
-    panelState = STATE_BROWSING;  // Переходим в режим просмотра каталога
-    UpdateStatus("Переключено на: Локальное хранилище");
-    UpdatePanelState();
-    RefreshFileList();
-}
 
 void FilePanel::OnFTPButtonClick(wxCommandEvent &)
 {
