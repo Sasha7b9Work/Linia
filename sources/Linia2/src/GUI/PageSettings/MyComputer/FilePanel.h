@@ -125,11 +125,11 @@ public:
 
     wxTextCtrl *GetPathCtrl() const
     {
-        return m_pathCtrl;
+        return pathCtrl;
     }
     wxListCtrl *GetFileList() const
     {
-        return m_fileList;
+        return fileList;
     }
     void UpdateStatus(const wxString &status) const;
 
@@ -220,16 +220,16 @@ private:
     bool IsDirectoryInternal(const wxString &path) const;
     bool CopyFileBetweenSystems(const wxString &sourcePath, FileSystemType, const wxString &destPath, FileSystemType destType, wxWindow *parent = nullptr);
 
-    DisplayMode m_displayMode;
-    PanelState m_panelState;   // Текущее состояние панели
-    wxComboBox *m_sourceTypeCombo;
-    wxBitmapButton *m_btnLocal;
-    wxBitmapButton *m_btnFTP;
-    wxButton *m_btnBack;       // Кнопка возврата
-    wxBoxSizer *m_buttonsSizer;  // Сайзер для кнопок выбора источника
-    wxTextCtrl *m_pathCtrl;
-    wxButton *m_browseBtn;
-    wxListCtrl *m_fileList;
+    DisplayMode displayMode;
+    PanelState panelState = STATE_SELECTION;   // Текущее состояние панели
+    wxComboBox *sourceTypeCombo = nullptr;
+    wxBitmapButton *btnLocal = nullptr;
+    wxBitmapButton *btnFTP = nullptr;
+    wxButton *btnBack = nullptr;       // Кнопка возврата
+    wxBoxSizer *buttonsSizer = nullptr;  // Сайзер для кнопок выбора источника
+    wxTextCtrl *pathCtrl = nullptr;
+    wxButton *browseBtn = nullptr;
+    wxListCtrl *fileList = nullptr;
     // Удаляем указатели на кнопки
     std::unique_ptr<FilePanelController> m_controller;
     std::unique_ptr<FilePanelOperations> m_operations;

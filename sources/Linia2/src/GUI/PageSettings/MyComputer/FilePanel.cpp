@@ -54,16 +54,7 @@ wxEND_EVENT_TABLE()
 
 FilePanel::FilePanel(wxWindow *parent, DisplayMode mode)
     : wxPanel(parent, wxID_ANY),
-    m_displayMode(mode),
-    m_panelState(STATE_SELECTION),  // Начинаем с экрана выбора источника
-    m_sourceTypeCombo(nullptr),
-    m_btnLocal(nullptr),
-    m_btnFTP(nullptr),
-    m_btnBack(nullptr),
-    m_buttonsSizer(nullptr),
-    m_pathCtrl(nullptr),
-    m_browseBtn(nullptr),
-    m_fileList(nullptr),
+    displayMode(mode),
     m_controller(std::make_unique<FilePanelController>(this)),
     m_operations(std::make_unique<FilePanelOperations>(this)),
     m_ftpController(nullptr),
@@ -75,7 +66,7 @@ FilePanel::FilePanel(wxWindow *parent, DisplayMode mode)
     UpdateVisualState();
 
     // Для MODE_BUTTONS начинаем с экрана выбора (только кнопки)
-    if (m_displayMode == MODE_BUTTONS)
+    if (displayMode == MODE_BUTTONS)
     {
         UpdatePanelState();
     }
@@ -119,7 +110,7 @@ bool FilePanel::ConnectToFTP(const wxString &host, int port,
 
     if (!ftpPath.IsEmpty())
     {
-        m_pathCtrl->SetValue(ftpPath);
+        pathCtrl->SetValue(ftpPath);
     }
 
     RefreshFileList();
@@ -179,41 +170,41 @@ void FilePanel::CreateControls()
     wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
 
     // Создаем либо ComboBox либо кнопки в зависимости от режима
-    if (m_displayMode == MODE_COMBOBOX)
+    if (displayMode == MODE_COMBOBOX)
     {
         // Выпадающий список выбора типа источника
         wxBoxSizer *sourceTypeSizer = new wxBoxSizer(wxHORIZONTAL);
         wxStaticText *sourceLabel = new wxStaticText(this, wxID_ANY, "Источник:");
-        m_sourceTypeCombo = new wxComboBox(this, ID_SOURCE_TYPE, wxEmptyString,
+        sourceTypeCombo = new wxComboBox(this, ID_SOURCE_TYPE, wxEmptyString,
             wxDefaultPosition, wxDefaultSize,
             0, nullptr, wxCB_READONLY);
-        m_sourceTypeCombo->Append("Локальная файловая система");
-        m_sourceTypeCombo->Append("USB флешка");
-        m_sourceTypeCombo->Append("FTP соединение");
-        m_sourceTypeCombo->SetSelection(0);
+        sourceTypeCombo->Append("Локальная файловая система");
+        sourceTypeCombo->Append("USB флешка");
+        sourceTypeCombo->Append("FTP соединение");
+        sourceTypeCombo->SetSelection(0);
 
         sourceTypeSizer->Add(sourceLabel, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
-        sourceTypeSizer->Add(m_sourceTypeCombo, 1, wxEXPAND | wxALL, 5);
+        sourceTypeSizer->Add(sourceTypeCombo, 1, wxEXPAND | wxALL, 5);
         mainSizer->Add(sourceTypeSizer, 0, wxEXPAND | wxALL, 0);
     }
-    else if (m_displayMode == MODE_BUTTONS)
+    else if (displayMode == MODE_BUTTONS)
     {
         // Кнопки для выбора источника (будут показаны по центру)
         CreateSourceButtons();
-        m_buttonsSizer = new wxBoxSizer(wxVERTICAL);  // Вертикальный сайзер для центрирования
+        buttonsSizer = new wxBoxSizer(wxVERTICAL);  // Вертикальный сайзер для центрирования
 
         // Создаем горизонтальный сайзер для самих кнопок
         wxBoxSizer *buttonsHorzSizer = new wxBoxSizer(wxHORIZONTAL);
-        buttonsHorzSizer->Add(m_btnLocal, 0, wxALL, 10);
-        buttonsHorzSizer->Add(m_btnFTP, 0, wxALL, 10);
+        buttonsHorzSizer->Add(btnLocal, 0, wxALL, 10);
+        buttonsHorzSizer->Add(btnFTP, 0, wxALL, 10);
 
         // Добавляем кнопки в вертикальный сайзер с центрированием
-        m_buttonsSizer->AddStretchSpacer(1);  // Пустое пространство сверху
-        m_buttonsSizer->Add(buttonsHorzSizer, 0, wxALIGN_CENTER, 0);
-        m_buttonsSizer->AddStretchSpacer(1);  // Пустое пространство снизу
+        buttonsSizer->AddStretchSpacer(1);  // Пустое пространство сверху
+        buttonsSizer->Add(buttonsHorzSizer, 0, wxALIGN_CENTER, 0);
+        buttonsSizer->AddStretchSpacer(1);  // Пустое пространство снизу
 
         // Добавляем в главный сайзер - занимает все доступное пространство
-        mainSizer->Add(m_buttonsSizer, 1, wxEXPAND, 0);
+        mainSizer->Add(buttonsSizer, 1, wxEXPAND, 0);
     }
     // Если MODE_NONE - не добавляем ничего
 
@@ -221,50 +212,50 @@ void FilePanel::CreateControls()
     wxBoxSizer *pathSizer = new wxBoxSizer(wxHORIZONTAL);
 
     // Кнопка возврата (стрелка назад) - только для MODE_BUTTONS
-    if (m_displayMode == MODE_BUTTONS)
+    if (displayMode == MODE_BUTTONS)
     {
         wxBitmap &undoBmp = Bitmap::Get("undo.bmp").GetBitmap();
         if (undoBmp.IsOk())
         {
-            m_btnBack = new wxBitmapButton(this, ID_BTN_BACK, undoBmp, wxDefaultPosition);
+            btnBack = new wxBitmapButton(this, ID_BTN_BACK, undoBmp, wxDefaultPosition);
         }
         else
         {
-            m_btnBack = new wxButton(this, ID_BTN_BACK, wxString::FromUTF8("\xe2\x86\x90"), wxDefaultPosition);
+            btnBack = new wxButton(this, ID_BTN_BACK, wxString::FromUTF8("\xe2\x86\x90"), wxDefaultPosition);
         }
-        m_btnBack->SetToolTip("Вернуться к выбору источника");
-        pathSizer->Add(m_btnBack, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
+        btnBack->SetToolTip("Вернуться к выбору источника");
+        pathSizer->Add(btnBack, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
     }
 
-    m_pathCtrl = new wxTextCtrl(this, ID_PATH_CTRL, m_controller->GetCurrentPath(),
+    pathCtrl = new wxTextCtrl(this, ID_PATH_CTRL, m_controller->GetCurrentPath(),
         wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
     {
         wxBitmap &dirBmp = Bitmap::Get("directory_open.bmp").GetBitmap();
         if (dirBmp.IsOk())
         {
-            m_browseBtn = new wxBitmapButton(this, ID_BROWSE_BTN, dirBmp, wxDefaultPosition);
+            browseBtn = new wxBitmapButton(this, ID_BROWSE_BTN, dirBmp, wxDefaultPosition);
         }
         else
         {
-            m_browseBtn = new wxButton(this, ID_BROWSE_BTN, "...", wxDefaultPosition);
+            browseBtn = new wxButton(this, ID_BROWSE_BTN, "...", wxDefaultPosition);
         }
-        m_browseBtn->SetToolTip("Выбрать папку");
+        browseBtn->SetToolTip("Выбрать папку");
     }
 
-    pathSizer->Add(m_pathCtrl, 1, wxEXPAND | wxALL, 5);
-    pathSizer->Add(m_browseBtn, 0, wxALL, 5);
+    pathSizer->Add(pathCtrl, 1, wxEXPAND | wxALL, 5);
+    pathSizer->Add(browseBtn, 0, wxALL, 5);
 
     // Добавляем стили для отображения разделителей
-    m_fileList = new wxListCtrl(this, ID_FILE_LIST, wxDefaultPosition, wxDefaultSize,
+    fileList = new wxListCtrl(this, ID_FILE_LIST, wxDefaultPosition, wxDefaultSize,
         wxLC_REPORT | wxLC_VRULES | wxLC_HRULES); // wxLC_VRULES добавляет вертикальные линии
 
-    m_fileList->InsertColumn(0, "Имя", wxLIST_FORMAT_LEFT, 180);
-    m_fileList->InsertColumn(1, "Размер", wxLIST_FORMAT_LEFT, 80);
-    m_fileList->InsertColumn(2, "Тип", wxLIST_FORMAT_LEFT, 80);
-    m_fileList->InsertColumn(3, "Изменен", wxLIST_FORMAT_LEFT, 140);
+    fileList->InsertColumn(0, "Имя", wxLIST_FORMAT_LEFT, 180);
+    fileList->InsertColumn(1, "Размер", wxLIST_FORMAT_LEFT, 80);
+    fileList->InsertColumn(2, "Тип", wxLIST_FORMAT_LEFT, 80);
+    fileList->InsertColumn(3, "Изменен", wxLIST_FORMAT_LEFT, 140);
 
     mainSizer->Add(pathSizer, 0, wxEXPAND | wxALL, 0);
-    mainSizer->Add(m_fileList, 1, wxEXPAND | wxALL, 5);
+    mainSizer->Add(fileList, 1, wxEXPAND | wxALL, 5);
 
     SetSizer(mainSizer);
 }
@@ -273,10 +264,10 @@ void FilePanel::CreateControls()
 void FilePanel::BindEvents()
 {
     // Существующий код...
-    m_fileList->SetDropTarget(new FileDropTarget(this));
+    fileList->SetDropTarget(new FileDropTarget(this));
 
     // Добавьте обработку фокуса для списка файлов
-    m_fileList->Bind(wxEVT_SET_FOCUS, [this](wxFocusEvent &event)
+    fileList->Bind(wxEVT_SET_FOCUS, [this](wxFocusEvent &event)
         {
             if (!m_isActive)
             {
@@ -293,8 +284,8 @@ void FilePanel::UpdateVisualState()
     // Изменяем цвет фона для активной/неактивной панели
     wxColour bgColour = m_isActive ? wxColour(240, 240, 255) : wxColour(255, 255, 255);
     SetBackgroundColour(bgColour);
-    m_fileList->SetBackgroundColour(bgColour);
-    m_pathCtrl->SetBackgroundColour(bgColour);
+    fileList->SetBackgroundColour(bgColour);
+    pathCtrl->SetBackgroundColour(bgColour);
     Refresh();
 }
 
@@ -539,7 +530,7 @@ bool FilePanel::CopyFileBetweenSystems(const wxString &sourcePath,
 
 void FilePanel::OnPathChanged(wxCommandEvent & /*event*/)
 {
-    wxString newPath = m_pathCtrl->GetValue();
+    wxString newPath = pathCtrl->GetValue();
     if (newPath.IsEmpty()) return;  // Игнорируем пустой путь
     m_controller->OnPathChanged(newPath);
 }
@@ -697,12 +688,12 @@ void FilePanel::OnKeyDown(wxKeyEvent &event)
         case 'A':
         case 'a': {
             // Выделить все
-            if (m_fileList)
+            if (fileList)
             {
-                long count = m_fileList->GetItemCount();
+                long count = fileList->GetItemCount();
                 for (long i = 0; i < count; i++)
                 {
-                    m_fileList->SetItemState(i, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
+                    fileList->SetItemState(i, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
                 }
                 UpdateStatus(wxString::Format("Выделено элементов: %ld", count));
             }
@@ -750,18 +741,18 @@ void FilePanel::OnKeyDown(wxKeyEvent &event)
     else if (event.GetKeyCode() == WXK_F2)
     {
         // Переименование выделенного файла/папки
-        if (!m_fileList || !m_controller)
+        if (!fileList || !m_controller)
         {
             event.Skip(); return;
         }
 
-        long sel = m_fileList->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+        long sel = fileList->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
         if (sel == -1)
         {
             event.Skip(); return;
         }
 
-        wxString oldName = m_fileList->GetItemText(sel, 0);
+        wxString oldName = fileList->GetItemText(sel, 0);
         if (oldName == "..")
         {
             event.Skip(); return;
@@ -808,7 +799,7 @@ void FilePanel::OnColumnClick(wxListEvent &event)
         m_sortAscending = true;
     }
 
-    if (!m_fileList || m_fileList->GetItemCount() <= 1) return;
+    if (!fileList || fileList->GetItemCount() <= 1) return;
 
     // Собираем данные элементов
     struct ItemData {
@@ -817,14 +808,14 @@ void FilePanel::OnColumnClick(wxListEvent &event)
         bool isDir;      // "<DIR>"
     };
 
-    int count = m_fileList->GetItemCount();
+    int count = fileList->GetItemCount();
     std::vector<ItemData> items((uint64)count);
 
     for (uint64 i = 0; i < (uint64)count; i++)
     {
         for (int c = 0; c < 4; c++)
         {
-            items[i].cols[c] = m_fileList->GetItemText((long)i, c);
+            items[i].cols[c] = fileList->GetItemText((long)i, c);
         }
         items[i].isParent = (items[i].cols[0] == "..");
         items[i].isDir = (items[i].cols[2] == "<DIR>");
@@ -854,18 +845,18 @@ void FilePanel::OnColumnClick(wxListEvent &event)
         });
 
     // Перестраиваем список
-    m_fileList->Freeze();
-    m_fileList->DeleteAllItems();
+    fileList->Freeze();
+    fileList->DeleteAllItems();
 
     for (uint64 i = 0; i < (uint64)count; i++)
     {
-        long item = m_fileList->InsertItem((long)i, items[i].cols[0]);
-        m_fileList->SetItem(item, 1, items[i].cols[1]);
-        m_fileList->SetItem(item, 2, items[i].cols[2]);
-        m_fileList->SetItem(item, 3, items[i].cols[3]);
+        long item = fileList->InsertItem((long)i, items[i].cols[0]);
+        fileList->SetItem(item, 1, items[i].cols[1]);
+        fileList->SetItem(item, 2, items[i].cols[2]);
+        fileList->SetItem(item, 3, items[i].cols[3]);
     }
 
-    m_fileList->Thaw();
+    fileList->Thaw();
 }
 
 void FilePanel::HandleUndo()
@@ -882,9 +873,9 @@ void FilePanel::HandleRedo()
 void FilePanel::SetSourceType(SourceType type)
 {
     m_sourceType = type;
-    if (m_sourceTypeCombo)
+    if (sourceTypeCombo)
     {
-        m_sourceTypeCombo->SetSelection(static_cast<int>(type));
+        sourceTypeCombo->SetSelection(static_cast<int>(type));
     }
     UpdateControlsForSourceType();
     RefreshFileList();
@@ -907,7 +898,7 @@ wxString FilePanel::GetSourceTypeString() const
 
 void FilePanel::OnSourceTypeChanged(wxCommandEvent & /*event*/)
 {
-    int selection = m_sourceTypeCombo->GetSelection();
+    int selection = sourceTypeCombo->GetSelection();
     m_sourceType = static_cast<SourceType>(selection);
 
     UpdateStatus(wxString::Format("Переключено на: %s", GetSourceTypeString()));
@@ -920,32 +911,32 @@ void FilePanel::UpdateControlsForSourceType()
     switch (m_sourceType)
     {
     case SOURCE_LOCAL:
-        m_pathCtrl->Enable(true);
-        m_browseBtn->Enable(true);
-        m_pathCtrl->SetValue(wxGetCwd());
+        pathCtrl->Enable(true);
+        browseBtn->Enable(true);
+        pathCtrl->SetValue(wxGetCwd());
         break;
 
     case SOURCE_USB: {
-        m_pathCtrl->Enable(true);
-        m_browseBtn->Enable(true);
+        pathCtrl->Enable(true);
+        browseBtn->Enable(true);
         wxArrayString usbDrives = DetectUSBDrives();
         if (usbDrives.Count() > 0)
         {
-            m_pathCtrl->SetValue(usbDrives[0]);
+            pathCtrl->SetValue(usbDrives[0]);
             UpdateStatus(wxString::Format("Найдено USB устройств: %d", usbDrives.Count()));
         }
         else
         {
-            m_pathCtrl->SetValue("");
+            pathCtrl->SetValue("");
             UpdateStatus("USB устройства не обнаружены");
         }
         break;
     }
 
     case SOURCE_FTP:
-        m_pathCtrl->Enable(true);
-        m_browseBtn->Enable(false);
-        m_pathCtrl->SetValue("ftp://");
+        pathCtrl->Enable(true);
+        browseBtn->Enable(false);
+        pathCtrl->SetValue("ftp://");
         UpdateStatus("Введите FTP адрес (например: ftp://192.168.1.100/)");
         break;
     }
@@ -1014,7 +1005,7 @@ void FilePanel::CreateSourceButtons()
     // Создаем кнопки
     if (bmpLocal.IsOk())
     {
-        m_btnLocal = new wxBitmapButton(this, ID_BTN_LOCAL, bmpLocal,
+        btnLocal = new wxBitmapButton(this, ID_BTN_LOCAL, bmpLocal,
             wxDefaultPosition, wxSize(64, 64));
     }
     else
@@ -1028,14 +1019,14 @@ void FilePanel::CreateSourceButtons()
             dc.SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
             dc.DrawText("Local", 10, 22);
         }
-        m_btnLocal = new wxBitmapButton(this, ID_BTN_LOCAL, emptyBmp,
+        btnLocal = new wxBitmapButton(this, ID_BTN_LOCAL, emptyBmp,
             wxDefaultPosition, wxSize(64, 64));
     }
-    m_btnLocal->SetToolTip("Локальное хранилище");
+    btnLocal->SetToolTip("Локальное хранилище");
 
     if (bmpFTP.IsOk())
     {
-        m_btnFTP = new wxBitmapButton(this, ID_BTN_FTP, bmpFTP,
+        btnFTP = new wxBitmapButton(this, ID_BTN_FTP, bmpFTP,
             wxDefaultPosition, wxSize(64, 64));
     }
     else
@@ -1048,16 +1039,16 @@ void FilePanel::CreateSourceButtons()
             dc.SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
             dc.DrawText("FTP", 18, 22);
         }
-        m_btnFTP = new wxBitmapButton(this, ID_BTN_FTP, emptyBmp,
+        btnFTP = new wxBitmapButton(this, ID_BTN_FTP, emptyBmp,
             wxDefaultPosition, wxSize(64, 64));
     }
-    m_btnFTP->SetToolTip("FTP соединение");
+    btnFTP->SetToolTip("FTP соединение");
 }
 
 void FilePanel::OnLocalButtonClick(wxCommandEvent & /*event*/)
 {
     m_sourceType = SOURCE_LOCAL;
-    m_panelState = STATE_BROWSING;  // Переходим в режим просмотра каталога
+    panelState = STATE_BROWSING;  // Переходим в режим просмотра каталога
     UpdateStatus("Переключено на: Локальное хранилище");
     UpdatePanelState();
     RefreshFileList();
@@ -1094,11 +1085,11 @@ void FilePanel::OnFTPButtonClick(wxCommandEvent & /*event*/)
         if (connected)
         {
             m_sourceType = SOURCE_FTP;
-            m_panelState = STATE_BROWSING;  // Переходим в режим просмотра каталога
+            panelState = STATE_BROWSING;  // Переходим в режим просмотра каталога
 
             // Формируем путь для отображения
             wxString ftpPath = wxString::Format("ftp://%s:%d/", server, port);
-            m_pathCtrl->SetValue(ftpPath);
+            pathCtrl->SetValue(ftpPath);
 
             UpdateStatus(wxString::Format("Подключено к FTP: %s", server));
             UpdatePanelState();
@@ -1115,7 +1106,7 @@ void FilePanel::OnFTPButtonClick(wxCommandEvent & /*event*/)
 void FilePanel::OnBackButtonClick(wxCommandEvent & /*event*/)
 {
     // Возврат к экрану выбора источника
-    m_panelState = STATE_SELECTION;
+    panelState = STATE_SELECTION;
 
     // Если был FTP - отключаемся
     if (m_sourceType == SOURCE_FTP && m_ftpController)
@@ -1134,25 +1125,25 @@ void FilePanel::OnBackButtonClick(wxCommandEvent & /*event*/)
 
 void FilePanel::UpdatePanelState()
 {
-    if (m_displayMode != MODE_BUTTONS)
+    if (displayMode != MODE_BUTTONS)
     {
         return;  // Этот метод только для режима кнопок
     }
 
-    bool showButtons = (m_panelState == STATE_SELECTION);
-    bool showBrowser = (m_panelState == STATE_BROWSING);
+    bool showButtons = (panelState == STATE_SELECTION);
+    bool showBrowser = (panelState == STATE_BROWSING);
 
     // Показываем/скрываем кнопки выбора источника
-    if (m_buttonsSizer)
+    if (buttonsSizer)
     {
-        m_buttonsSizer->Show(showButtons);
+        buttonsSizer->Show(showButtons);
     }
 
     // Показываем/скрываем элементы браузера файлов
-    if (m_btnBack) m_btnBack->Show(showBrowser);
-    if (m_pathCtrl) m_pathCtrl->Show(showBrowser);
-    if (m_browseBtn) m_browseBtn->Show(showBrowser);
-    if (m_fileList) m_fileList->Show(showBrowser);
+    if (btnBack) btnBack->Show(showBrowser);
+    if (pathCtrl) pathCtrl->Show(showBrowser);
+    if (browseBtn) browseBtn->Show(showBrowser);
+    if (fileList) fileList->Show(showBrowser);
 
     // Обновляем layout
     Layout();
