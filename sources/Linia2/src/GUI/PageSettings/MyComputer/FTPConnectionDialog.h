@@ -38,13 +38,13 @@ private:
     void OnOK(wxCommandEvent &);
     void OnCancel(wxCommandEvent &);
 
-    wxTextCtrl *m_serverCtrl;
-    wxTextCtrl *m_portCtrl;
-    wxTextCtrl *m_usernameCtrl;
-    wxTextCtrl *m_passwordCtrl;
+    wxTextCtrl *serverCtrl = nullptr;
+    wxTextCtrl *portCtrl = nullptr;
+    wxTextCtrl *usernameCtrl = nullptr;
+    wxTextCtrl *passwordCtrl = nullptr;
 
     wxString m_server;
-    int m_port;
+    int m_port = 22;
     wxString m_username;
     wxString m_password;
 
