@@ -62,7 +62,6 @@ public:
         ID_CREATE_FOLDER,
         ID_REFRESH,
         ID_PASTE,
-        ID_SOURCE_TYPE,
         ID_PATH_CTRL,
         ID_FILE_LIST
     };
@@ -179,7 +178,6 @@ public:
     }
 
     // Обработчики событий
-    void OnSourceTypeChanged(wxCommandEvent &);
     void OnPathChanged(wxCommandEvent &);
     void OnItemActivated(wxListEvent &);
     void OnItemSelected(wxListEvent &);
@@ -214,7 +212,7 @@ private:
 
     DisplayMode displayMode;
     PanelState panelState{ STATE_SELECTION };   // Текущее состояние панели
-    wxComboBox *sourceTypeCombo = nullptr;
+    wxComboBox *comboTypeSource = nullptr;
     wxBitmapButton *btnLocal = nullptr;
     wxBitmapButton *btnFTP = nullptr;
     wxButton *btnBack = nullptr;                // Кнопка возврата

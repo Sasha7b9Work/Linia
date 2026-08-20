@@ -29,7 +29,6 @@
 
 // Определение таблицы событий
 wxBEGIN_EVENT_TABLE(FilePanel, wxPanel)
-EVT_COMBOBOX(ID_SOURCE_TYPE, FilePanel::OnSourceTypeChanged)
 EVT_TEXT(ID_PATH_CTRL, FilePanel::OnPathChanged)
 EVT_LIST_ITEM_ACTIVATED(ID_FILE_LIST, FilePanel::OnItemActivated)
 EVT_LIST_ITEM_SELECTED(ID_FILE_LIST, FilePanel::OnItemSelected)
@@ -181,14 +180,25 @@ void FilePanel::CreateControls()
         // Выпадающий список выбора типа источника
         wxBoxSizer *sourceTypeSizer = new wxBoxSizer(wxHORIZONTAL);
         wxStaticText *sourceLabel = new wxStaticText(this, wxID_ANY, "Источник:");
-        sourceTypeCombo = new wxComboBox(this, ID_SOURCE_TYPE, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, nullptr, wxCB_READONLY);
-        sourceTypeCombo->Append("Локальная файловая система");
-        sourceTypeCombo->Append("USB флешка");
-        sourceTypeCombo->Append("FTP соединение");
-        sourceTypeCombo->SetSelection(0);
+        {
+            comboTypeSource = new wxComboBox(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, nullptr, wxCB_READONLY);
+            comboTypeSource->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &)
+                {
+                    int selection = comboTypeSource->GetSelection();
+                    sourceType = static_cast<SourceType>(selection);
+
+                    UpdateStatus(wxString::Format("Переключено на: %s", GetSourceTypeString()));
+                    UpdateControlsForSourceType();
+                    RefreshFileList();
+                });
+            comboTypeSource->Append("Локальная файловая система");
+            comboTypeSource->Append("USB флешка");
+            comboTypeSource->Append("FTP соединение");
+            comboTypeSource->SetSelection(0);
+        }
 
         sourceTypeSizer->Add(sourceLabel, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
-        sourceTypeSizer->Add(sourceTypeCombo, 1, wxEXPAND | wxALL, 5);
+        sourceTypeSizer->Add(comboTypeSource, 1, wxEXPAND | wxALL, 5);
         mainSizer->Add(sourceTypeSizer, 0, wxEXPAND | wxALL, 0);
     }
     else if (displayMode == MODE_BUTTONS)
@@ -958,13 +968,14 @@ void FilePanel::HandleRedo()
 void FilePanel::SetSourceType(SourceType type)
 {
     sourceType = type;
-    if (sourceTypeCombo)
+    if (comboTypeSource)
     {
-        sourceTypeCombo->SetSelection(static_cast<int>(type));
+        comboTypeSource->SetSelection(static_cast<int>(type));
     }
     UpdateControlsForSourceType();
     RefreshFileList();
 }
+
 
 wxString FilePanel::GetSourceTypeString() const
 {
@@ -981,15 +992,6 @@ wxString FilePanel::GetSourceTypeString() const
     }
 }
 
-void FilePanel::OnSourceTypeChanged(wxCommandEvent &)
-{
-    int selection = sourceTypeCombo->GetSelection();
-    sourceType = static_cast<SourceType>(selection);
-
-    UpdateStatus(wxString::Format("Переключено на: %s", GetSourceTypeString()));
-    UpdateControlsForSourceType();
-    RefreshFileList();
-}
 
 void FilePanel::UpdateControlsForSourceType()
 {
