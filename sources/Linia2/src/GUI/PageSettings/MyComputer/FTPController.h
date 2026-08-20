@@ -49,11 +49,11 @@ public:
     // Обработка ошибок
     wxString GetLastError() const
     {
-        return m_lastError;
+        return last_error;
     }
     wxString GetInitialDirectory() const
     {
-        return m_initialPath;
+        return initialPath;
     }
 
 private:
@@ -66,6 +66,6 @@ private:
     sftp_session session_sftp = nullptr;
     bool is_connected = false;
     wxString currentPath;
-    wxString m_initialPath;  // Начальный путь для ограничения навигации
-    wxString m_lastError;
+    wxString initialPath;  // Начальный путь для ограничения навигации
+    wxString last_error;
 };

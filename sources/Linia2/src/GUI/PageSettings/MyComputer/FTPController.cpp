@@ -136,12 +136,12 @@ int FTPController::VerifyKnownHost()
         return 0;
 
     case SSH_KNOWN_HOSTS_CHANGED:
-        m_lastError = "Внимание: ключ хоста изменился! Возможна атака MITM!";
+        last_error = "Внимание: ключ хоста изменился! Возможна атака MITM!";
         ssh_clean_pubkey_hash(&hash);
         return -1;
 
     case SSH_KNOWN_HOSTS_OTHER:
-        m_lastError = "Хост найден, но тип ключа изменился";
+        last_error = "Хост найден, но тип ключа изменился";
         ssh_clean_pubkey_hash(&hash);
         return -1;
 
@@ -161,7 +161,7 @@ int FTPController::VerifyKnownHost()
             rc = ssh_session_update_known_hosts(session_ssh);
             if (rc < 0)
             {
-                m_lastError = wxString::Format("Ошибка обновления known_hosts: %s",
+                last_error = wxString::Format("Ошибка обновления known_hosts: %s",
                     wxString(ssh_get_error(session_ssh)));
                 return -1;
             }
@@ -171,7 +171,7 @@ int FTPController::VerifyKnownHost()
     }
 
     case SSH_KNOWN_HOSTS_ERROR:
-        m_lastError = wxString::Format("Ошибка проверки known_hosts: %s",
+        last_error = wxString::Format("Ошибка проверки known_hosts: %s",
             wxString(ssh_get_error(session_ssh)));
         ssh_clean_pubkey_hash(&hash);
         return -1;
@@ -192,7 +192,7 @@ bool FTPController::Connect(const wxString &host, const wxString &user, const wx
     session_ssh = ssh_new();
     if (!session_ssh)
     {
-        m_lastError = "Не удалось создать SSH сессию";
+        last_error = "Не удалось создать SSH сессию";
         return false;
     }
 
@@ -209,7 +209,7 @@ bool FTPController::Connect(const wxString &host, const wxString &user, const wx
     int rc = ssh_connect(session_ssh);
     if (rc != SSH_OK)
     {
-        m_lastError = wxString::Format("Не удалось подключиться: %s",
+        last_error = wxString::Format("Не удалось подключиться: %s",
             wxString(ssh_get_error(session_ssh)));
         ssh_free(session_ssh);
         session_ssh = nullptr;
@@ -229,7 +229,7 @@ bool FTPController::Connect(const wxString &host, const wxString &user, const wx
     rc = ssh_userauth_password(session_ssh, nullptr, _password.utf8_str().data());
     if (rc != SSH_AUTH_SUCCESS)
     {
-        m_lastError = wxString::Format("Ошибка аутентификации: %s",
+        last_error = wxString::Format("Ошибка аутентификации: %s",
             wxString(ssh_get_error(session_ssh)));
         ssh_disconnect(session_ssh);
         ssh_free(session_ssh);
@@ -241,7 +241,7 @@ bool FTPController::Connect(const wxString &host, const wxString &user, const wx
     session_sftp = sftp_new(session_ssh);
     if (!session_sftp)
     {
-        m_lastError = wxString::Format("Не удалось создать FTP сессию: %s",
+        last_error = wxString::Format("Не удалось создать FTP сессию: %s",
             wxString(ssh_get_error(session_ssh)));
         ssh_disconnect(session_ssh);
         ssh_free(session_ssh);
@@ -252,7 +252,7 @@ bool FTPController::Connect(const wxString &host, const wxString &user, const wx
     rc = sftp_init(session_sftp);
     if (rc != SSH_OK)
     {
-        m_lastError = wxString::Format("Ошибка инициализации FTP: %s",
+        last_error = wxString::Format("Ошибка инициализации FTP: %s",
             wxString(ssh_get_error(session_ssh)));
         sftp_free(session_sftp);
         session_sftp = nullptr;
@@ -267,20 +267,20 @@ bool FTPController::Connect(const wxString &host, const wxString &user, const wx
     if (realPath)
     {
         currentPath = wxString::FromUTF8(realPath);
-        m_initialPath = currentPath;  // Сохраняем начальный путь
+        initialPath = currentPath;  // Сохраняем начальный путь
         ssh_string_free_char(realPath);
     }
     else
     {
         currentPath = "/";
-        m_initialPath = "/";
+        initialPath = "/";
     }
 
     is_connected = true;
-    m_lastError.Clear();
+    last_error.Clear();
 
     wxLogDebug("FTPController::Connect - current directory: %s", currentPath);
-    wxLogDebug("FTPController::Connect - initial directory: %s", m_initialPath);
+    wxLogDebug("FTPController::Connect - initial directory: %s", initialPath);
 
     return true;
 }
@@ -301,7 +301,7 @@ void FTPController::Disconnect()
     }
 
     currentPath.Clear();
-    m_initialPath.Clear();
+    initialPath.Clear();
     is_connected = false;
 }
 
@@ -322,26 +322,26 @@ bool FTPController::ChangeDirectory(const wxString &path)
 {
     if (!is_connected || !session_sftp)
     {
-        m_lastError = "Нет подключения к FTP";
+        last_error = "Нет подключения к FTP";
         return false;
     }
 
     wxLogDebug("FTPController::ChangeDirectory: attempting to change to '%s'", path);
-    wxLogDebug("  Current: '%s', Initial: '%s'", currentPath, m_initialPath);
+    wxLogDebug("  Current: '%s', Initial: '%s'", currentPath, initialPath);
 
     // Проверяем, что новый путь начинается с начального пути
-    if (!path.StartsWith(m_initialPath))
+    if (!path.StartsWith(initialPath))
     {
         wxLogDebug("  -> BLOCKED: path does not start with initial directory");
-        m_lastError = "Навигация за пределы начального каталога запрещена";
+        last_error = "Навигация за пределы начального каталога запрещена";
         return false;
     }
 
     // Проверяем, что путь не короче начального (не выше в иерархии)
-    if (path.Length() < m_initialPath.Length())
+    if (path.Length() < initialPath.Length())
     {
         wxLogDebug("  -> BLOCKED: path is shorter than initial directory");
-        m_lastError = "Навигация за пределы начального каталога запрещена";
+        last_error = "Навигация за пределы начального каталога запрещена";
         return false;
     }
 
@@ -349,9 +349,9 @@ bool FTPController::ChangeDirectory(const wxString &path)
     sftp_dir dir = sftp_opendir(session_sftp, path.utf8_str().data());
     if (!dir)
     {
-        m_lastError = wxString::Format("Не удалось открыть директорию: %s",
+        last_error = wxString::Format("Не удалось открыть директорию: %s",
             wxString(ssh_get_error(session_ssh)));
-        wxLogDebug("  -> FAILED: %s", m_lastError);
+        wxLogDebug("  -> FAILED: %s", last_error);
         return false;
     }
 
@@ -372,14 +372,14 @@ wxArrayString FTPController::ListFiles()
 
     if (!is_connected || !session_sftp)
     {
-        m_lastError = "Нет подключения к FTP";
+        last_error = "Нет подключения к FTP";
         return files;
     }
 
     sftp_dir dir = sftp_opendir(session_sftp, currentPath.utf8_str().data());
     if (!dir)
     {
-        m_lastError = wxString::Format("Не удалось открыть директорию: %s",
+        last_error = wxString::Format("Не удалось открыть директорию: %s",
             wxString(ssh_get_error(session_ssh)));
         return files;
     }
@@ -400,7 +400,7 @@ wxArrayString FTPController::ListFiles()
 
     if (!sftp_dir_eof(dir))
     {
-        m_lastError = "Ошибка чтения директории";
+        last_error = "Ошибка чтения директории";
     }
 
     sftp_closedir(dir);
@@ -413,14 +413,14 @@ wxArrayString FTPController::ListDirectories()
 
     if (!is_connected || !session_sftp)
     {
-        m_lastError = "Нет подключения к FTP";
+        last_error = "Нет подключения к FTP";
         return dirs;
     }
 
     sftp_dir dir = sftp_opendir(session_sftp, currentPath.utf8_str().data());
     if (!dir)
     {
-        m_lastError = wxString::Format("Не удалось открыть директорию: %s",
+        last_error = wxString::Format("Не удалось открыть директорию: %s",
             wxString(ssh_get_error(session_ssh)));
         return dirs;
     }
@@ -446,7 +446,7 @@ wxArrayString FTPController::ListDirectories()
 
     if (!sftp_dir_eof(dir))
     {
-        m_lastError = "Ошибка чтения директории";
+        last_error = "Ошибка чтения директории";
     }
 
     sftp_closedir(dir);
@@ -457,7 +457,7 @@ bool FTPController::DownloadFile(const wxString &remoteFile, const wxString &loc
 {
     if (!is_connected || !session_sftp)
     {
-        m_lastError = "Нет подключения к FTP";
+        last_error = "Нет подключения к FTP";
         return false;
     }
 
@@ -466,7 +466,7 @@ bool FTPController::DownloadFile(const wxString &remoteFile, const wxString &loc
     sftp_file file = sftp_open(session_sftp, fullPath.utf8_str().data(), O_RDONLY, 0);
     if (!file)
     {
-        m_lastError = wxString::Format("Не удалось открыть удаленный файл: %s",
+        last_error = wxString::Format("Не удалось открыть удаленный файл: %s",
             wxString(ssh_get_error(session_ssh)));
         return false;
     }
@@ -475,7 +475,7 @@ bool FTPController::DownloadFile(const wxString &remoteFile, const wxString &loc
     wxFileOutputStream output(localFile);
     if (!output.IsOk())
     {
-        m_lastError = "Не удалось создать локальный файл";
+        last_error = "Не удалось создать локальный файл";
         sftp_close(file);
         return false;
     }
@@ -490,7 +490,7 @@ bool FTPController::DownloadFile(const wxString &remoteFile, const wxString &loc
         output.Write(buffer, (size_t)nbytes);
         if (!output.IsOk())
         {
-            m_lastError = "Ошибка записи в локальный файл";
+            last_error = "Ошибка записи в локальный файл";
             success = false;
             break;
         }
@@ -498,7 +498,7 @@ bool FTPController::DownloadFile(const wxString &remoteFile, const wxString &loc
 
     if (nbytes < 0)
     {
-        m_lastError = wxString::Format("Ошибка чтения удаленного файла: %s",
+        last_error = wxString::Format("Ошибка чтения удаленного файла: %s",
             wxString(ssh_get_error(session_ssh)));
         success = false;
     }
@@ -511,7 +511,7 @@ bool FTPController::UploadFile(const wxString &localFile, const wxString &remote
 {
     if (!is_connected || !session_sftp)
     {
-        m_lastError = "Нет подключения к FTP";
+        last_error = "Нет подключения к FTP";
         return false;
     }
 
@@ -519,7 +519,7 @@ bool FTPController::UploadFile(const wxString &localFile, const wxString &remote
     wxFileInputStream input(localFile);
     if (!input.IsOk())
     {
-        m_lastError = "Не удалось открыть локальный файл";
+        last_error = "Не удалось открыть локальный файл";
         return false;
     }
 
@@ -529,7 +529,7 @@ bool FTPController::UploadFile(const wxString &localFile, const wxString &remote
         O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU);
     if (!file)
     {
-        m_lastError = wxString::Format("Не удалось создать удаленный файл: %s",
+        last_error = wxString::Format("Не удалось создать удаленный файл: %s",
             wxString(ssh_get_error(session_ssh)));
         return false;
     }
@@ -548,7 +548,7 @@ bool FTPController::UploadFile(const wxString &localFile, const wxString &remote
             ssize_t nwritten = sftp_write(file, buffer, bytesRead);
             if (nwritten != (ssize_t)bytesRead)
             {
-                m_lastError = wxString::Format("Ошибка записи в удаленный файл: %s",
+                last_error = wxString::Format("Ошибка записи в удаленный файл: %s",
                     wxString(ssh_get_error(session_ssh)));
                 success = false;
                 break;
@@ -564,7 +564,7 @@ bool FTPController::DeleteFile(const wxString &remoteFile)
 {
     if (!is_connected || !session_sftp)
     {
-        m_lastError = "Нет подключения к FTP";
+        last_error = "Нет подключения к FTP";
         return false;
     }
 
@@ -572,7 +572,7 @@ bool FTPController::DeleteFile(const wxString &remoteFile)
     int rc = sftp_unlink(session_sftp, fullPath.utf8_str().data());
     if (rc != SSH_OK)
     {
-        m_lastError = wxString::Format("Не удалось удалить файл: %s",
+        last_error = wxString::Format("Не удалось удалить файл: %s",
             wxString(ssh_get_error(session_ssh)));
         return false;
     }
@@ -584,7 +584,7 @@ bool FTPController::RenameFile(const wxString &oldName, const wxString &newName)
 {
     if (!is_connected || !session_sftp)
     {
-        m_lastError = "Нет подключения к FTP";
+        last_error = "Нет подключения к FTP";
         return false;
     }
 
@@ -593,7 +593,7 @@ bool FTPController::RenameFile(const wxString &oldName, const wxString &newName)
     int rc = sftp_rename(session_sftp, fullOld.utf8_str().data(), fullNew.utf8_str().data());
     if (rc != SSH_OK)
     {
-        m_lastError = wxString::Format("Не удалось переименовать: %s",
+        last_error = wxString::Format("Не удалось переименовать: %s",
             wxString(ssh_get_error(session_ssh)));
         return false;
     }
@@ -605,7 +605,7 @@ bool FTPController::MakeDirectory(const wxString &dirName)
 {
     if (!is_connected || !session_sftp)
     {
-        m_lastError = "Нет подключения к FTP";
+        last_error = "Нет подключения к FTP";
         return false;
     }
 
@@ -613,7 +613,7 @@ bool FTPController::MakeDirectory(const wxString &dirName)
     int rc = sftp_mkdir(session_sftp, fullPath.utf8_str().data(), S_IRWXU);
     if (rc != SSH_OK)
     {
-        m_lastError = wxString::Format("Не удалось создать директорию: %s",
+        last_error = wxString::Format("Не удалось создать директорию: %s",
             wxString(ssh_get_error(session_ssh)));
         return false;
     }
@@ -625,7 +625,7 @@ bool FTPController::RemoveDirectory(const wxString &dirName)
 {
     if (!is_connected || !session_sftp)
     {
-        m_lastError = "Нет подключения к FTP";
+        last_error = "Нет подключения к FTP";
         return false;
     }
 
@@ -633,7 +633,7 @@ bool FTPController::RemoveDirectory(const wxString &dirName)
     int rc = sftp_rmdir(session_sftp, fullPath.utf8_str().data());
     if (rc != SSH_OK)
     {
-        m_lastError = wxString::Format("Не удалось удалить директорию: %s",
+        last_error = wxString::Format("Не удалось удалить директорию: %s",
             wxString(ssh_get_error(session_ssh)));
         return false;
     }
