@@ -62,8 +62,8 @@ private:
     wxString BuildFullPath(const wxString &name) const;
 
     FilePanel *view;
-    ssh_session m_session;
-    sftp_session m_ftp;
+    ssh_session session_ssh = nullptr;
+    sftp_session session_sftp = nullptr;
     bool m_isConnected;
     wxString currentPath;
     wxString m_initialPath;  // Начальный путь для ограничения навигации
