@@ -52,8 +52,9 @@ EVT_MENU(ID_REFRESH, FilePanel::OnRefresh)
 EVT_CHAR_HOOK(FilePanel::OnKeyDown)
 wxEND_EVENT_TABLE()
 
-FilePanel::FilePanel(wxWindow *parent, DisplayMode mode)
-    : wxPanel(parent, wxID_ANY),
+
+FilePanel::FilePanel(wxWindow *parent, DisplayMode mode):
+    wxPanel(parent, wxID_ANY),
     displayMode(mode),
     controller(std::make_unique<FilePanelController>(this)),
     operations(std::make_unique<FilePanelOperations>(this))
@@ -74,6 +75,7 @@ FilePanel::FilePanel(wxWindow *parent, DisplayMode mode)
     }
 }
 
+
 FilePanel::~FilePanel()
 {
     // Только отключаем FTP-соединение, не обновляя UI (виджеты могут быть уже разрушены)
@@ -83,6 +85,7 @@ FilePanel::~FilePanel()
     }
     // Ресурсы (controller, ftpController) освобождаются автоматически через std::unique_ptr
 }
+
 
 bool FilePanel::ConnectToFTP(const wxString &host, int _port, const wxString &user, const wxString &pass)
 {
@@ -114,6 +117,7 @@ bool FilePanel::ConnectToFTP(const wxString &host, int _port, const wxString &us
     return true;
 }
 
+
 void FilePanel::DisconnectFTP()
 {
     if (ftpController)
@@ -128,10 +132,12 @@ void FilePanel::DisconnectFTP()
     }
 }
 
+
 bool FilePanel::IsFTPConnected() const
 {
     return ftpController && ftpController->IsConnected();
 }
+
 
 void FilePanel::SetActive(bool active)
 {
@@ -148,18 +154,26 @@ void FilePanel::SetActive(bool active)
     }
 }
 
+
 void FilePanel::UpdateStatus(const wxString &status) const
 {
     wxWindow *parent = GetParent();
-    if (!parent || parent->IsBeingDeleted()) return;
+    if (!parent || parent->IsBeingDeleted())
+    {
+        return;
+    }
 
     wxWindow *grandParent = parent->GetParent();
-    if (!grandParent || grandParent->IsBeingDeleted()) return;
+    if (!grandParent || grandParent->IsBeingDeleted())
+    {
+        return;
+    }
 
     wxCommandEvent statusEvent(wxEVT_FILEPANEL_STATUS, GetId());
     statusEvent.SetString(status);
     grandParent->ProcessWindowEvent(statusEvent);
 }
+
 
 void FilePanel::CreateControls()
 {
@@ -171,9 +185,7 @@ void FilePanel::CreateControls()
         // Выпадающий список выбора типа источника
         wxBoxSizer *sourceTypeSizer = new wxBoxSizer(wxHORIZONTAL);
         wxStaticText *sourceLabel = new wxStaticText(this, wxID_ANY, "Источник:");
-        sourceTypeCombo = new wxComboBox(this, ID_SOURCE_TYPE, wxEmptyString,
-            wxDefaultPosition, wxDefaultSize,
-            0, nullptr, wxCB_READONLY);
+        sourceTypeCombo = new wxComboBox(this, ID_SOURCE_TYPE, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, nullptr, wxCB_READONLY);
         sourceTypeCombo->Append("Локальная файловая система");
         sourceTypeCombo->Append("USB флешка");
         sourceTypeCombo->Append("FTP соединение");
@@ -223,8 +235,8 @@ void FilePanel::CreateControls()
         pathSizer->Add(btnBack, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
     }
 
-    pathCtrl = new wxTextCtrl(this, ID_PATH_CTRL, controller->GetCurrentPath(),
-        wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+    pathCtrl = new wxTextCtrl(this, ID_PATH_CTRL, controller->GetCurrentPath(), wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+
     {
         wxBitmap &dirBmp = Bitmap::Get("directory_open.bmp").GetBitmap();
         if (dirBmp.IsOk())
@@ -242,8 +254,7 @@ void FilePanel::CreateControls()
     pathSizer->Add(browseBtn, 0, wxALL, 5);
 
     // Добавляем стили для отображения разделителей
-    fileList = new wxListCtrl(this, ID_FILE_LIST, wxDefaultPosition, wxDefaultSize,
-        wxLC_REPORT | wxLC_VRULES | wxLC_HRULES); // wxLC_VRULES добавляет вертикальные линии
+    fileList = new wxListCtrl(this, ID_FILE_LIST, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_VRULES | wxLC_HRULES); // wxLC_VRULES добавляет вертикальные линии
 
     fileList->InsertColumn(0, "Имя", wxLIST_FORMAT_LEFT, 180);
     fileList->InsertColumn(1, "Размер", wxLIST_FORMAT_LEFT, 80);
@@ -255,7 +266,7 @@ void FilePanel::CreateControls()
 
     SetSizer(mainSizer);
 }
-// Удаляем метод CreateButtonPanel полностью
+
 
 void FilePanel::BindEvents()
 {
@@ -275,6 +286,7 @@ void FilePanel::BindEvents()
         });
 }
 
+
 void FilePanel::UpdateVisualState()
 {
     // Изменяем цвет фона для активной/неактивной панели
@@ -285,28 +297,22 @@ void FilePanel::UpdateVisualState()
     Refresh();
 }
 
-// Внутренние методы для абстракции файловых операций
+
 bool FilePanel::ChangeDirectoryInternal(const wxString &path)
 {
     switch (sourceType)
     {
     case SOURCE_LOCAL:
     case SOURCE_USB:
-        if (wxDirExists(path))
-        {
-            return true;
-        }
-        return false;
+        return wxDirExists(path);
 
     case SOURCE_FTP:
-        if (ftpController && ftpController->ChangeDirectory(path))
-        {
-            return true;
-        }
-        return false;
+        return (ftpController && ftpController->ChangeDirectory(path));
     }
+
     return false;
 }
+
 
 wxString FilePanel::GetCurrentDirectoryInternal() const
 {
@@ -326,6 +332,7 @@ wxString FilePanel::GetCurrentDirectoryInternal() const
     return controller->GetCurrentPath();
 }
 
+
 bool FilePanel::GetDirectoryContentsInternal(wxArrayString &files, wxArrayString &dirs)
 {
     files.Clear();
@@ -334,7 +341,8 @@ bool FilePanel::GetDirectoryContentsInternal(wxArrayString &files, wxArrayString
     switch (sourceType)
     {
     case SOURCE_LOCAL:
-    case SOURCE_USB: {
+    case SOURCE_USB:
+    {
         wxString currentPath = controller->GetCurrentPath();
         wxDir dir(currentPath);
         if (!dir.IsOpened()) return false;
@@ -356,8 +364,12 @@ bool FilePanel::GetDirectoryContentsInternal(wxArrayString &files, wxArrayString
         return true;
     }
 
-    case SOURCE_FTP: {
-        if (!ftpController) return false;
+    case SOURCE_FTP:
+    {
+        if (!ftpController)
+        {
+            return false;
+        }
 
         dirs = ftpController->ListDirectories();
         files = ftpController->ListFiles();
@@ -367,12 +379,14 @@ bool FilePanel::GetDirectoryContentsInternal(wxArrayString &files, wxArrayString
     return false;
 }
 
+
 bool FilePanel::CreateDirectoryInternal(const wxString &name)
 {
     switch (sourceType)
     {
     case SOURCE_LOCAL:
-    case SOURCE_USB: {
+    case SOURCE_USB:
+    {
         wxString fullPath = wxFileName(controller->GetCurrentPath(), name).GetFullPath();
         return wxMkdir(fullPath);
     }
@@ -382,6 +396,7 @@ bool FilePanel::CreateDirectoryInternal(const wxString &name)
     }
     return false;
 }
+
 
 bool FilePanel::DeleteFileInternal(const wxString &path)
 {
@@ -397,15 +412,20 @@ bool FilePanel::DeleteFileInternal(const wxString &path)
     return false;
 }
 
+
 bool FilePanel::DeleteDirectoryInternal(const wxString &path)
 {
     switch (sourceType)
     {
     case SOURCE_LOCAL:
-    case SOURCE_USB: {
+    case SOURCE_USB:
+    {
         // Рекурсивное удаление
         wxDir dir(path);
-        if (!dir.IsOpened()) return false;
+        if (!dir.IsOpened())
+        {
+            return false;
+        }
 
         wxString filename;
         bool cont = dir.GetFirst(&filename);
@@ -414,14 +434,21 @@ bool FilePanel::DeleteDirectoryInternal(const wxString &path)
             wxString fullPath = wxFileName(path, filename).GetFullPath();
             if (wxDirExists(fullPath))
             {
-                if (!DeleteDirectoryInternal(fullPath)) return false;
+                if (!DeleteDirectoryInternal(fullPath))
+                {
+                    return false;
+                }
             }
             else
             {
-                if (!wxRemoveFile(fullPath)) return false;
+                if (!wxRemoveFile(fullPath))
+                {
+                    return false;
+                }
             }
             cont = dir.GetNext(&filename);
         }
+
         return wxRmdir(path);
     }
 
@@ -430,6 +457,7 @@ bool FilePanel::DeleteDirectoryInternal(const wxString &path)
     }
     return false;
 }
+
 
 bool FilePanel::RenameFileInternal(const wxString &oldPath, const wxString &newPath)
 {
@@ -445,6 +473,7 @@ bool FilePanel::RenameFileInternal(const wxString &oldPath, const wxString &newP
     return false;
 }
 
+
 bool FilePanel::FileExistsInternal(const wxString &path) const
 {
     switch (sourceType)
@@ -453,7 +482,8 @@ bool FilePanel::FileExistsInternal(const wxString &path) const
     case SOURCE_USB:
         return wxFileExists(path) || wxDirExists(path);
 
-    case SOURCE_FTP: {
+    case SOURCE_FTP:
+    {
         if (!ftpController) return false;
         // Для FTP проверяем через размер файла
         wxULongLong size = ftpController->GetFileSize(path);
@@ -463,6 +493,7 @@ bool FilePanel::FileExistsInternal(const wxString &path) const
     return false;
 }
 
+
 bool FilePanel::IsDirectoryInternal(const wxString &path) const
 {
     switch (sourceType)
@@ -471,19 +502,22 @@ bool FilePanel::IsDirectoryInternal(const wxString &path) const
     case SOURCE_USB:
         return wxDirExists(path);
 
-    case SOURCE_FTP: {
-        if (!ftpController) return false;
+    case SOURCE_FTP:
+    {
+        if (!ftpController)
+        {
+            return false;
+        }
+
         return ftpController->IsDirectory(path);
     }
     }
+
     return false;
 }
 
-bool FilePanel::CopyFileBetweenSystems(const wxString &sourcePath,
-    FileSystemType _sourceType,
-    const wxString &destPath,
-    FileSystemType destType,
-    wxWindow * /*parent*/)
+
+bool FilePanel::CopyFileBetweenSystems(const wxString &sourcePath, FileSystemType _sourceType, const wxString &destPath, FileSystemType destType, wxWindow *)
 {
     // Local -> Local
     if (_sourceType == FS_LOCAL && destType == FS_LOCAL)
@@ -494,14 +528,22 @@ bool FilePanel::CopyFileBetweenSystems(const wxString &sourcePath,
     // Local -> FTP
     if (_sourceType == FS_LOCAL && destType == FS_FTP)
     {
-        if (!ftpController) return false;
+        if (!ftpController)
+        {
+            return false;
+        }
+
         return ftpController->UploadFile(sourcePath, destPath);
     }
 
     // FTP -> Local
     if (_sourceType == FS_FTP && destType == FS_LOCAL)
     {
-        if (!ftpController) return false;
+        if (!ftpController)
+        {
+            return false;
+        }
+
         return ftpController->DownloadFile(sourcePath, destPath);
     }
 
@@ -524,28 +566,38 @@ bool FilePanel::CopyFileBetweenSystems(const wxString &sourcePath,
     return false;
 }
 
-void FilePanel::OnPathChanged(wxCommandEvent & /*event*/)
+
+void FilePanel::OnPathChanged(wxCommandEvent &)
 {
     wxString newPath = pathCtrl->GetValue();
-    if (newPath.IsEmpty()) return;  // Игнорируем пустой путь
+
+    if (newPath.IsEmpty())
+    {
+        return;
+    }
+
     controller->OnPathChanged(newPath);
 }
 
-void FilePanel::OnBrowseButton(wxCommandEvent & /*event*/)
+
+void FilePanel::OnBrowseButton(wxCommandEvent &)
 {
     // Открываем диалог выбора директории
     wxDirDialog dlg(this, "Выберите папку", controller->GetCurrentPath(), wxDD_DEFAULT_STYLE);
+
     if (dlg.ShowModal() == wxID_OK)
     {
         controller->SetPath(dlg.GetPath());
     }
 }
 
+
 void FilePanel::OnItemActivated(wxListEvent &event)
 {
     // Двойной клик по элементу списка (файл или папка)
     controller->OnItemActivated(event.GetIndex());
 }
+
 
 void FilePanel::OnItemSelected(wxListEvent &event)
 {
@@ -559,7 +611,8 @@ void FilePanel::OnItemSelected(wxListEvent &event)
     controller->OnItemSelected(event.GetIndex());
 }
 
-void FilePanel::OnItemRightClick(wxListEvent & /*event*/)
+
+void FilePanel::OnItemRightClick(wxListEvent &)
 {
     wxMenu menu;
 
@@ -587,44 +640,50 @@ void FilePanel::OnItemRightClick(wxListEvent & /*event*/)
     PopupMenu(&menu);
 }
 
-// Обработчики операций - делегируют в FilePanelOperations
 
 void FilePanel::HandleCopyOperation(wxCommandEvent &event)
 {
     operations->HandleCopyOperation(event);
 }
 
+
 void FilePanel::HandleMoveOperation(wxCommandEvent &event)
 {
     operations->HandleMoveOperation(event);
 }
+
 
 void FilePanel::HandlePasteOperation(wxCommandEvent &event)
 {
     operations->HandlePasteOperation(event);
 }
 
+
 void FilePanel::HandlePasteOperationToTarget(FilePanel *targetPanel)
 {
     operations->HandlePasteOperationToTarget(targetPanel);
 }
+
 
 void FilePanel::HandleDeleteOperation(wxCommandEvent &event)
 {
     operations->HandleDeleteOperation(event);
 }
 
+
 void FilePanel::HandleCreateFolder(wxCommandEvent &event)
 {
     operations->HandleCreateFolder(event);
 }
+
 
 void FilePanel::HandleRefresh(wxCommandEvent &event)
 {
     operations->HandleRefresh(event);
 }
 
-void FilePanel::OnBeginDrag(wxListEvent & /*event*/)
+
+void FilePanel::OnBeginDrag(wxListEvent &)
 {
     // Инициируем drag-and-drop для выбранных файлов
     if (!controller->HasSelectedFiles())
@@ -654,6 +713,7 @@ void FilePanel::OnBeginDrag(wxListEvent & /*event*/)
     dragSource.DoDragDrop(wxDrag_CopyOnly);
 }
 
+
 void FilePanel::OnPanelClick(wxMouseEvent &event)
 {
     SetFocus();
@@ -664,6 +724,7 @@ void FilePanel::OnPanelClick(wxMouseEvent &event)
     event.Skip();
 }
 
+
 void FilePanel::OnPanelFocus(wxFocusEvent &event)
 {
     wxCommandEvent *activateEvent = new wxCommandEvent(wxEVT_FILEPANEL_ACTIVATED, GetId());
@@ -671,6 +732,7 @@ void FilePanel::OnPanelFocus(wxFocusEvent &event)
     GetParent()->GetEventHandler()->QueueEvent(activateEvent);
     event.Skip();
 }
+
 
 void FilePanel::OnKeyDown(wxKeyEvent &event)
 {
@@ -682,7 +744,8 @@ void FilePanel::OnKeyDown(wxKeyEvent &event)
         switch (keyCode)
         {
         case 'A':
-        case 'a': {
+        case 'a':
+        {
             // Выделить все
             if (fileList)
             {
@@ -696,33 +759,38 @@ void FilePanel::OnKeyDown(wxKeyEvent &event)
             return;
         }
         case 'C':
-        case 'c': {
+        case 'c':
+        {
             wxLogDebug("  -> HandleCopyOperation");
             wxCommandEvent evt;
             HandleCopyOperation(evt);
             return;
         }
         case 'X':
-        case 'x': {
+        case 'x':
+        {
             wxLogDebug("  -> HandleMoveOperation");
             wxCommandEvent evt;
             HandleMoveOperation(evt);
             return;
         }
         case 'V':
-        case 'v': {
+        case 'v':
+        {
             wxLogDebug("  -> HandlePasteOperation");
             wxCommandEvent evt;
             HandlePasteOperation(evt);
             return;
         }
         case 'Z':
-        case 'z': {
+        case 'z':
+        {
             HandleUndo();
             return;
         }
         case 'Y':
-        case 'y': {
+        case 'y':
+        {
             HandleRedo();
             return;
         }
@@ -892,7 +960,7 @@ wxString FilePanel::GetSourceTypeString() const
     }
 }
 
-void FilePanel::OnSourceTypeChanged(wxCommandEvent & /*event*/)
+void FilePanel::OnSourceTypeChanged(wxCommandEvent &)
 {
     int selection = sourceTypeCombo->GetSelection();
     sourceType = static_cast<SourceType>(selection);
@@ -912,7 +980,8 @@ void FilePanel::UpdateControlsForSourceType()
         pathCtrl->SetValue(wxGetCwd());
         break;
 
-    case SOURCE_USB: {
+    case SOURCE_USB:
+    {
         pathCtrl->Enable(true);
         browseBtn->Enable(true);
         wxArrayString usbDrives = DetectUSBDrives();
@@ -1001,8 +1070,7 @@ void FilePanel::CreateSourceButtons()
     // Создаем кнопки
     if (bmpLocal.IsOk())
     {
-        btnLocal = new wxBitmapButton(this, ID_BTN_LOCAL, bmpLocal,
-            wxDefaultPosition, wxSize(64, 64));
+        btnLocal = new wxBitmapButton(this, ID_BTN_LOCAL, bmpLocal, wxDefaultPosition, wxSize(64, 64));
     }
     else
     {
@@ -1015,15 +1083,14 @@ void FilePanel::CreateSourceButtons()
             dc.SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
             dc.DrawText("Local", 10, 22);
         }
-        btnLocal = new wxBitmapButton(this, ID_BTN_LOCAL, emptyBmp,
-            wxDefaultPosition, wxSize(64, 64));
+        btnLocal = new wxBitmapButton(this, ID_BTN_LOCAL, emptyBmp, wxDefaultPosition, wxSize(64, 64));
     }
+
     btnLocal->SetToolTip("Локальное хранилище");
 
     if (bmpFTP.IsOk())
     {
-        btnFTP = new wxBitmapButton(this, ID_BTN_FTP, bmpFTP,
-            wxDefaultPosition, wxSize(64, 64));
+        btnFTP = new wxBitmapButton(this, ID_BTN_FTP, bmpFTP, wxDefaultPosition, wxSize(64, 64));
     }
     else
     {
@@ -1035,13 +1102,13 @@ void FilePanel::CreateSourceButtons()
             dc.SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
             dc.DrawText("FTP", 18, 22);
         }
-        btnFTP = new wxBitmapButton(this, ID_BTN_FTP, emptyBmp,
-            wxDefaultPosition, wxSize(64, 64));
+
+        btnFTP = new wxBitmapButton(this, ID_BTN_FTP, emptyBmp, wxDefaultPosition, wxSize(64, 64));
     }
     btnFTP->SetToolTip("FTP соединение");
 }
 
-void FilePanel::OnLocalButtonClick(wxCommandEvent & /*event*/)
+void FilePanel::OnLocalButtonClick(wxCommandEvent &)
 {
     sourceType = SOURCE_LOCAL;
     panelState = STATE_BROWSING;  // Переходим в режим просмотра каталога
@@ -1050,7 +1117,7 @@ void FilePanel::OnLocalButtonClick(wxCommandEvent & /*event*/)
     RefreshFileList();
 }
 
-void FilePanel::OnFTPButtonClick(wxCommandEvent & /*event*/)
+void FilePanel::OnFTPButtonClick(wxCommandEvent &)
 {
     // Показываем диалог подключения к FTP
     FTPConnectionDialog dlg(this);
@@ -1093,13 +1160,12 @@ void FilePanel::OnFTPButtonClick(wxCommandEvent & /*event*/)
         }
         else
         {
-            wxMessageBox("Не удалось подключиться к FTP серверу", "Ошибка подключения",
-                wxOK | wxICON_ERROR, this);
+            wxMessageBox("Не удалось подключиться к FTP серверу", "Ошибка подключения", wxOK | wxICON_ERROR, this);
         }
     }
 }
 
-void FilePanel::OnBackButtonClick(wxCommandEvent & /*event*/)
+void FilePanel::OnBackButtonClick(wxCommandEvent &)
 {
     // Возврат к экрану выбора источника
     panelState = STATE_SELECTION;

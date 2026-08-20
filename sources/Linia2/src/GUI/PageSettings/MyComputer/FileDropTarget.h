@@ -5,11 +5,15 @@
 #pragma warning(pop)
 
 
-class FileDropTarget : public wxFileDropTarget {
+class FileDropTarget : public wxFileDropTarget
+{
 public:
+
     FileDropTarget(FilePanel *);
+
     bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString &filenames) override;
 
 private:
+
     FilePanel *panel;
 };

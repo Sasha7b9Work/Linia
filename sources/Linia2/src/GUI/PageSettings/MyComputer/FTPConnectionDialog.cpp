@@ -50,24 +50,21 @@ void FTPConnectionDialog::CreateControls()
 
     // Сервер
     wxBoxSizer *serverSizer = new wxBoxSizer(wxHORIZONTAL);
-    serverSizer->Add(new wxStaticText(this, wxID_ANY, "Сервер:",
-        wxDefaultPosition, wxSize(100, -1)), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+    serverSizer->Add(new wxStaticText(this, wxID_ANY, "Сервер:", wxDefaultPosition, wxSize(100, -1)), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
     serverCtrl = new wxTextCtrl(this, wxID_ANY, "");
     serverSizer->Add(serverCtrl, 1, wxEXPAND | wxALL, 5);
     mainSizer->Add(serverSizer, 0, wxEXPAND | wxALL, 5);
 
     // Порт (по умолчанию 22 для FTP)
     wxBoxSizer *portSizer = new wxBoxSizer(wxHORIZONTAL);
-    portSizer->Add(new wxStaticText(this, wxID_ANY, "Порт:",
-        wxDefaultPosition, wxSize(100, -1)), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+    portSizer->Add(new wxStaticText(this, wxID_ANY, "Порт:", wxDefaultPosition, wxSize(100, -1)), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
     portCtrl = new wxTextCtrl(this, wxID_ANY, "22");
     portSizer->Add(portCtrl, 1, wxEXPAND | wxALL, 5);
     mainSizer->Add(portSizer, 0, wxEXPAND | wxALL, 5);
 
     // Имя пользователя
     wxBoxSizer *userSizer = new wxBoxSizer(wxHORIZONTAL);
-    userSizer->Add(new wxStaticText(this, wxID_ANY, "Пользователь:",
-        wxDefaultPosition, wxSize(100, -1)), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+    userSizer->Add(new wxStaticText(this, wxID_ANY, "Пользователь:", wxDefaultPosition, wxSize(100, -1)), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
     usernameCtrl = new wxTextCtrl(this, wxID_ANY, "");
     userSizer->Add(usernameCtrl, 1, wxEXPAND | wxALL, 5);
     mainSizer->Add(userSizer, 0, wxEXPAND | wxALL, 5);
@@ -94,7 +91,7 @@ void FTPConnectionDialog::CreateControls()
     mainSizer->SetSizeHints(this);
 }
 
-void FTPConnectionDialog::OnOK(wxCommandEvent & /*event*/)
+void FTPConnectionDialog::OnOK(wxCommandEvent &)
 {
     server = serverCtrl->GetValue();
     wxString portStr = portCtrl->GetValue();
@@ -126,7 +123,7 @@ void FTPConnectionDialog::OnOK(wxCommandEvent & /*event*/)
     EndModal(wxID_OK);
 }
 
-void FTPConnectionDialog::OnCancel(wxCommandEvent & /*event*/)
+void FTPConnectionDialog::OnCancel(wxCommandEvent &)
 {
     EndModal(wxID_CANCEL);
 }

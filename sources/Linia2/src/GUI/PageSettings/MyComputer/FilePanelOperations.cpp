@@ -103,8 +103,7 @@ void FilePanelOperations::HandlePasteOperationToTarget(FilePanel *targetPanel)
     bool fromFTP = (data.sourceType == SOURCE_TYPE_FTP);
     bool toFTP = (destType == FilePanel::SOURCE_FTP);
 
-    wxLogDebug("HandlePasteOperationToTarget: fromFTP=%d, toFTP=%d, sourceType=%d, destType=%d",
-        fromFTP, toFTP, data.sourceType, destType);
+    wxLogDebug("HandlePasteOperationToTarget: fromFTP=%d, toFTP=%d, sourceType=%d, destType=%d", fromFTP, toFTP, data.sourceType, destType);
     wxLogDebug("  Source path: %s", data.sourcePath);
     wxLogDebug("  Dest path: %s", destPath);
     wxLogDebug("  Files count: %d", (int)data.files.size());
@@ -116,12 +115,7 @@ void FilePanelOperations::HandlePasteOperationToTarget(FilePanel *targetPanel)
     }
 
     // Локальные операции
-    FileOperation operation(
-        data.isCut ? OperationType::MOVE : OperationType::COPY,
-        data.files,
-        data.sourcePath,
-        destPath
-    );
+    FileOperation operation(data.isCut ? OperationType::MOVE : OperationType::COPY, data.files, data.sourcePath, destPath);
 
     int totalFilesCopied = 0;
     int totalDirsCopied = 0;
@@ -197,8 +191,7 @@ void FilePanelOperations::HandlePasteOperationToTarget(FilePanel *targetPanel)
     }
 }
 
-void FilePanelOperations::HandleFTPPasteOperation(const ClipboardManager::ClipboardData &data,
-    FilePanel *destPanel, bool fromFTP, bool toFTP)
+void FilePanelOperations::HandleFTPPasteOperation(const ClipboardManager::ClipboardData &data, FilePanel *destPanel, bool fromFTP, bool toFTP)
 {
     wxString destPath = destPanel->GetCurrentPath();
     int totalFiles = 0;
@@ -345,13 +338,10 @@ void FilePanelOperations::HandleFTPPasteOperation(const ClipboardManager::Clipbo
         ClipboardManager::GetInstance().Clear();
     }
 
-    wxString resultMessage = wxString::Format("%s %d файлов",
-        wxString(data.isCut ? "Перемещено" : "Скопировано"),
-        totalFiles);
+    wxString resultMessage = wxString::Format("%s %d файлов", wxString(data.isCut ? "Перемещено" : "Скопировано"), totalFiles);
     panel->UpdateStatus(resultMessage);
 
-    wxLogDebug("HandleFTPPasteOperation completed: totalFiles=%d, destPanel=%p, this=%p",
-        totalFiles, destPanel, panel);
+    wxLogDebug("HandleFTPPasteOperation completed: totalFiles=%d, destPanel=%p, this=%p", totalFiles, destPanel, panel);
 
     if (fromFTP)
     {
@@ -426,8 +416,7 @@ void FilePanelOperations::HandleDeleteOperation(wxCommandEvent &)
         message = wxString::Format("Удалить %d папок?", dirCount);
     }
 
-    if (wxMessageBox(message, "Подтверждение удаления",
-        wxYES_NO | wxICON_QUESTION, panel) != wxYES)
+    if (wxMessageBox(message, "Подтверждение удаления", wxYES_NO | wxICON_QUESTION, panel) != wxYES)
     {
         return;
     }
@@ -467,8 +456,7 @@ void FilePanelOperations::HandleDeleteOperation(wxCommandEvent &)
             }
             else
             {
-                panel->UpdateStatus(wxString::Format("Ошибка удаления: %s - %s",
-                    filename, ftpCtrl->GetLastError()));
+                panel->UpdateStatus(wxString::Format("Ошибка удаления: %s - %s", filename, ftpCtrl->GetLastError()));
             }
         }
 
@@ -478,11 +466,7 @@ void FilePanelOperations::HandleDeleteOperation(wxCommandEvent &)
     }
 
     // Локальное удаление
-    FileOperation operation(
-        OperationType::_DELETE,
-        selectedFiles,
-        panel->GetCurrentPath()
-    );
+    FileOperation operation(OperationType::_DELETE, selectedFiles, panel->GetCurrentPath());
 
     int totalFilesDeleted = 0;
     int totalDirsDeleted = 0;
@@ -530,8 +514,7 @@ void FilePanelOperations::HandleDeleteOperation(wxCommandEvent &)
     wxString resultMessage;
     if (totalFilesDeleted > 0 && totalDirsDeleted > 0)
     {
-        resultMessage = wxString::Format("Удалено: %d файлов и %d папок",
-            totalFilesDeleted, totalDirsDeleted);
+        resultMessage = wxString::Format("Удалено: %d файлов и %d папок", totalFilesDeleted, totalDirsDeleted);
     }
     else if (totalFilesDeleted > 0)
     {
@@ -552,9 +535,12 @@ void FilePanelOperations::HandleDeleteOperation(wxCommandEvent &)
 
 void FilePanelOperations::HandleCreateFolder(wxCommandEvent &)
 {
-    wxString folderName = wxGetTextFromUser("Введите имя папки:",
-        "Создание папки", "Новая папка", panel);
-    if (folderName.IsEmpty()) return;
+    wxString folderName = wxGetTextFromUser("Введите имя папки:","Создание папки", "Новая папка", panel);
+
+    if (folderName.IsEmpty())
+    {
+        return;
+    }
 
     // FTP создание папки
     if (panel->GetSourceType() == FilePanel::SOURCE_FTP)
@@ -619,7 +605,8 @@ void FilePanelOperations::HandleUndo()
         switch (op.type)
         {
         case OperationType::COPY:
-        case OperationType::MOVE: {
+        case OperationType::MOVE:
+        {
             for (const wxString &filename : op.files)
             {
                 wxString fullPath = op.destPath + wxFileName::GetPathSeparator() + filename;
@@ -643,11 +630,13 @@ void FilePanelOperations::HandleUndo()
             }
             break;
         }
-        case OperationType::_DELETE: {
+        case OperationType::_DELETE:
+        {
             panel->UpdateStatus("Отмена удаления не поддерживается");
             break;
         }
-        case OperationType::CREATE_FOLDER: {
+        case OperationType::CREATE_FOLDER:
+        {
             for (const wxString &filename : op.files)
             {
                 wxString fullPath = op.sourcePath + wxFileName::GetPathSeparator() + filename;
@@ -683,7 +672,8 @@ void FilePanelOperations::HandleRedo()
 
         switch (op.type)
         {
-        case OperationType::COPY: {
+        case OperationType::COPY:
+        {
             for (const wxString &filename : op.files)
             {
                 wxString srcPath = op.sourcePath + wxFileName::GetPathSeparator() + filename;
@@ -700,7 +690,8 @@ void FilePanelOperations::HandleRedo()
             panel->UpdateStatus("Повтор: копирование выполнено");
             break;
         }
-        case OperationType::MOVE: {
+        case OperationType::MOVE:
+        {
             for (const wxString &filename : op.files)
             {
                 wxString srcPath = op.sourcePath + wxFileName::GetPathSeparator() + filename;
@@ -717,7 +708,8 @@ void FilePanelOperations::HandleRedo()
             panel->UpdateStatus("Повтор: перемещение выполнено");
             break;
         }
-        case OperationType::CREATE_FOLDER: {
+        case OperationType::CREATE_FOLDER:
+        {
             for (const wxString &filename : op.files)
             {
                 wxString fullPath = op.sourcePath + wxFileName::GetPathSeparator() + filename;
@@ -729,7 +721,8 @@ void FilePanelOperations::HandleRedo()
             panel->UpdateStatus("Повтор: папка создана");
             break;
         }
-        case OperationType::_DELETE: {
+        case OperationType::_DELETE:
+        {
             panel->UpdateStatus("Повтор удаления не поддерживается (необратимая операция)");
             break;
         }

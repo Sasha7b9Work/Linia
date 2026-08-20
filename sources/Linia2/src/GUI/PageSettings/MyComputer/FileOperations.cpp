@@ -26,11 +26,11 @@ FileOperationResult FileOperations::CopyDirectory(const wxString &srcPath, const
     wxProgressDialog *progress = nullptr;
     if (parent)
     {
-        progress = new wxProgressDialog("Копирование", "Подготовка...", 100, parent,
-            wxPD_CAN_ABORT | wxPD_AUTO_HIDE | wxPD_APP_MODAL);
+        progress = new wxProgressDialog("Копирование", "Подготовка...", 100, parent, wxPD_CAN_ABORT | wxPD_AUTO_HIDE | wxPD_APP_MODAL);
     }
 
     int fileCount = 0;
+
     FileOperationResult result = RecursiveCopyImpl(srcPath, destPath, progress, &fileCount);
 
     if (progress)
@@ -41,8 +41,8 @@ FileOperationResult FileOperations::CopyDirectory(const wxString &srcPath, const
     return result;
 }
 
-FileOperationResult FileOperations::RecursiveCopyImpl(const wxString &srcPath, const wxString &destPath,
-    wxProgressDialog *progress, int *fileCount)
+
+FileOperationResult FileOperations::RecursiveCopyImpl(const wxString &srcPath, const wxString &destPath, wxProgressDialog *progress, int *fileCount)
 {
     if (!wxDirExists(srcPath))
     {
@@ -117,6 +117,7 @@ FileOperationResult FileOperations::RecursiveCopyImpl(const wxString &srcPath, c
     return FileOperationResult::Success(filesProcessed, dirsProcessed);
 }
 
+
 FileOperationResult FileOperations::DeleteDirectory(const wxString &dirPath, wxWindow *parent)
 {
     if (!wxDirExists(dirPath))
@@ -127,8 +128,7 @@ FileOperationResult FileOperations::DeleteDirectory(const wxString &dirPath, wxW
     wxProgressDialog *progress = nullptr;
     if (parent)
     {
-        progress = new wxProgressDialog("Удаление", "Подготовка...", 100, parent,
-            wxPD_CAN_ABORT | wxPD_AUTO_HIDE | wxPD_APP_MODAL);
+        progress = new wxProgressDialog("Удаление", "Подготовка...", 100, parent, wxPD_CAN_ABORT | wxPD_AUTO_HIDE | wxPD_APP_MODAL);
     }
 
     FileOperationResult result = RecursiveDeleteImpl(dirPath);
@@ -140,6 +140,7 @@ FileOperationResult FileOperations::DeleteDirectory(const wxString &dirPath, wxW
 
     return result;
 }
+
 
 FileOperationResult FileOperations::RecursiveDeleteImpl(const wxString &dirPath)
 {
@@ -190,7 +191,7 @@ FileOperationResult FileOperations::RecursiveDeleteImpl(const wxString &dirPath)
     return FileOperationResult::Success(filesDeleted, dirsDeleted);
 }
 
-// Остальные методы FileOperations...
+
 FileOperationResult FileOperations::MoveDirectory(const wxString &srcPath, const wxString &destPath, wxWindow *parent)
 {
     // Быстрое перемещение на одном томе (атомарный rename)
@@ -216,6 +217,7 @@ FileOperationResult FileOperations::MoveDirectory(const wxString &srcPath, const
     return copyResult;
 }
 
+
 FileOperationResult FileOperations::CreateDirectory(const wxString &path, wxWindow * /*parent*/)
 {
     if (wxDirExists(path))
@@ -230,6 +232,7 @@ FileOperationResult FileOperations::CreateDirectory(const wxString &path, wxWind
 
     return FileOperationResult::Success(0, 1);
 }
+
 
 FileOperationResult FileOperations::CopyFile(const wxString &srcFile, const wxString &destFile, bool overwrite)
 {
@@ -246,6 +249,7 @@ FileOperationResult FileOperations::CopyFile(const wxString &srcFile, const wxSt
     return FileOperationResult::Success(1, 0);
 }
 
+
 FileOperationResult FileOperations::MoveFile(const wxString &srcFile, const wxString &destFile, bool overwrite)
 {
     if (!wxFileExists(srcFile))
@@ -261,11 +265,13 @@ FileOperationResult FileOperations::MoveFile(const wxString &srcFile, const wxSt
     return FileOperationResult::Success(1, 0);
 }
 
+
 bool FileOperations::CheckDiskSpace(const wxString & /*source*/, const wxString & /*destination*/)
 {
     // Упрощенная проверка - в реальном приложении нужно использовать wxGetDiskSpace
     return true;
 }
+
 
 wxString FileOperations::FormatSize(wxULongLong size)
 {

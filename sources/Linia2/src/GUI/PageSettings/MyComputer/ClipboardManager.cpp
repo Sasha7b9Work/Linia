@@ -11,6 +11,7 @@ ClipboardManager &ClipboardManager::GetInstance()
     return instance;
 }
 
+
 wxString ClipboardManager::GetOperationDescription() const
 {
     if (data.IsEmpty())

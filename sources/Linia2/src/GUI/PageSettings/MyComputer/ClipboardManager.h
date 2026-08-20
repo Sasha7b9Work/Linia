@@ -1,6 +1,6 @@
 #pragma once
 #pragma warning(push, 0)
-#include <wx/arrstr.h>
+    #include <wx/arrstr.h>
 #pragma warning(pop)
 
 
@@ -8,16 +8,22 @@
 class FilePanel;
 class FTPController;
 
+
 // Объявляем enum вне класса для избежания циклических зависимостей
-enum FilePanelSourceType {
+enum FilePanelSourceType
+{
     SOURCE_TYPE_LOCAL,
     SOURCE_TYPE_USB,
     SOURCE_TYPE_FTP
 };
 
-class ClipboardManager {
+
+class ClipboardManager
+{
 public:
-    struct ClipboardData {
+
+    struct ClipboardData
+    {
         wxArrayString files;
         wxString sourcePath;
         bool isCut = false;
@@ -44,14 +50,17 @@ public:
     {
         data = _data;
     }
+
     ClipboardData GetData() const
     {
         return data;
     }
+
     bool HasData() const
     {
         return !data.IsEmpty();
     }
+
     void Clear()
     {
         data.Clear();
@@ -60,7 +69,9 @@ public:
     wxString GetOperationDescription() const;
 
 private:
+
     ClipboardManager() = default;
+
     ~ClipboardManager() = default;
 
     ClipboardData data;

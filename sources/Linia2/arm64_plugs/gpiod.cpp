@@ -67,7 +67,7 @@ void gpiod_line_release(struct gpiod_line * /*line*/)
 {
 }
 
-int gpiod_line_event_read(gpiod_line *, struct gpiod_line_event * /*event*/)
+int gpiod_line_event_read(gpiod_line *, struct gpiod_line_event *)
 {
     return 0;
 }
