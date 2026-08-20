@@ -49,7 +49,21 @@ public:
             btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(170));
             btn->SetLabel(wxString::Format("%d", i));
             btn->SetToolTip(tooltips[i]);
-            btn->Bind(wxEVT_BUTTON, &BmpButtonPopup::OnButtonClick, this);
+            btn->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
+                {
+                    wxString label = ((ButtonBitmap *)event.GetEventObject())->GetLabel();
+
+                    BmpButtonsCombo *combo = (BmpButtonsCombo *)GetParent();
+
+                    int choice = -1;
+
+                    label.ToInt(&choice);
+
+                    combo->SetCurrentChoice(choice);
+
+                    Dismiss();
+                });
+
             gridSizer->Add(btn, 0, wxEXPAND | wxALL, 2); // 2px отступы у кнопок
         }
 
@@ -144,21 +158,6 @@ private:
         }
 
         event.Skip();
-    }
-
-    void OnButtonClick(wxCommandEvent &event)
-    {
-        wxString label = ((ButtonBitmap *)event.GetEventObject())->GetLabel();
-
-        BmpButtonsCombo *combo = (BmpButtonsCombo *)GetParent();
-
-        int choice = -1;
-
-        label.ToInt(&choice);
-
-        combo->SetCurrentChoice(choice);
-
-        Dismiss();
     }
 
     void OnKeyDown(wxKeyEvent &event)
