@@ -138,8 +138,6 @@ public:
         return operations.get();
     }
 
-    void OnKeyDown(wxKeyEvent &);
-
 private:
     // Удаляем методы CreateButtonPanel и связанные с кнопками элементы
     void CreateControls();
@@ -181,6 +179,4 @@ private:
     SourceType sourceType{ SOURCE_LOCAL };
     int sortColumn = 0;
     bool sortAscending = true;
-
-    wxDECLARE_EVENT_TABLE();
 };

@@ -27,13 +27,6 @@
 #endif
 
 
-// Определение таблицы событий
-wxBEGIN_EVENT_TABLE(FilePanel, wxPanel)
-// ТОЛЬКО обработчики меню - удалить дублирующиеся EVT_BUTTON
-EVT_CHAR_HOOK(FilePanel::OnKeyDown)
-wxEND_EVENT_TABLE()
-
-
 FilePanel::FilePanel(wxWindow *parent, DisplayMode mode):
     wxPanel(parent, wxID_ANY),
     displayMode(mode),
@@ -70,6 +63,122 @@ FilePanel::FilePanel(wxWindow *parent, DisplayMode mode):
             wxCommandEvent *activateEvent = new wxCommandEvent(wxEVT_FILEPANEL_ACTIVATED, GetId());
             activateEvent->SetEventObject(this);
             GetParent()->GetEventHandler()->QueueEvent(activateEvent);
+            event.Skip();
+        });
+
+    Bind(wxEVT_CHAR_HOOK, [this](wxKeyEvent &event)
+        {
+            if (event.ControlDown())
+            {
+                int keyCode = event.GetKeyCode();
+                wxLogDebug("OnKeyDown: Ctrl + %c (keyCode=%d)", (char)keyCode, keyCode);
+
+                switch (keyCode)
+                {
+                case 'A':
+                case 'a':
+                {
+                    // Выделить все
+                    if (fileList)
+                    {
+                        long count = fileList->GetItemCount();
+                        for (long i = 0; i < count; i++)
+                        {
+                            fileList->SetItemState(i, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
+                        }
+                        UpdateStatus(wxString::Format("Выделено элементов: %ld", count));
+                    }
+                    return;
+                }
+                case 'C':
+                case 'c':
+                {
+                    wxLogDebug("  -> HandleCopyOperation");
+                    wxCommandEvent evt;
+                    HandleCopyOperation(evt);
+                    return;
+                }
+                case 'X':
+                case 'x':
+                {
+                    wxLogDebug("  -> HandleMoveOperation");
+                    wxCommandEvent evt;
+                    HandleMoveOperation(evt);
+                    return;
+                }
+                case 'V':
+                case 'v':
+                {
+                    wxLogDebug("  -> HandlePasteOperation");
+                    wxCommandEvent evt;
+                    HandlePasteOperation(evt);
+                    return;
+                }
+                case 'Z':
+                case 'z':
+                {
+                    HandleUndo();
+                    return;
+                }
+                case 'Y':
+                case 'y':
+                {
+                    HandleRedo();
+                    return;
+                }
+                }
+            }
+            else if (event.GetKeyCode() == WXK_DELETE)
+            {
+                wxCommandEvent evt;
+                HandleDeleteOperation(evt);
+                return;
+            }
+            else if (event.GetKeyCode() == WXK_F2)
+            {
+                // Переименование выделенного файла/папки
+                if (!fileList || !controller)
+                {
+                    event.Skip(); return;
+                }
+
+                long sel = fileList->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+                if (sel == -1)
+                {
+                    event.Skip(); return;
+                }
+
+                wxString oldName = fileList->GetItemText(sel, 0);
+                if (oldName == "..")
+                {
+                    event.Skip(); return;
+                }
+
+                wxTextEntryDialog dlg(this, "Новое имя:", "Переименование", oldName);
+                if (dlg.ShowModal() != wxID_OK) return;
+
+                wxString newName = dlg.GetValue().Trim().Trim(false);
+                if (newName.IsEmpty() || newName == oldName) return;
+
+                wxString basePath = controller->GetCurrentPath();
+                wxString sep = wxFileName::GetPathSeparator();
+                if (sourceType == SOURCE_FTP) sep = "/";
+
+                wxString oldPath = basePath + sep + oldName;
+                wxString newPath = basePath + sep + newName;
+
+                if (RenameFileInternal(oldPath, newPath))
+                {
+                    controller->RefreshFileList();
+                    UpdateStatus("Переименовано: " + oldName + " → " + newName);
+                }
+                else
+                {
+                    wxMessageBox("Не удалось переименовать: " + oldName, "Ошибка", wxOK | wxICON_ERROR);
+                }
+                return;
+            }
+
             event.Skip();
         });
 }
@@ -845,123 +954,6 @@ void FilePanel::HandleCreateFolder(wxCommandEvent &event)
 void FilePanel::HandleRefresh(wxCommandEvent &event)
 {
     operations->HandleRefresh(event);
-}
-
-
-void FilePanel::OnKeyDown(wxKeyEvent &event)
-{
-    if (event.ControlDown())
-    {
-        int keyCode = event.GetKeyCode();
-        wxLogDebug("OnKeyDown: Ctrl + %c (keyCode=%d)", (char)keyCode, keyCode);
-
-        switch (keyCode)
-        {
-        case 'A':
-        case 'a':
-        {
-            // Выделить все
-            if (fileList)
-            {
-                long count = fileList->GetItemCount();
-                for (long i = 0; i < count; i++)
-                {
-                    fileList->SetItemState(i, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
-                }
-                UpdateStatus(wxString::Format("Выделено элементов: %ld", count));
-            }
-            return;
-        }
-        case 'C':
-        case 'c':
-        {
-            wxLogDebug("  -> HandleCopyOperation");
-            wxCommandEvent evt;
-            HandleCopyOperation(evt);
-            return;
-        }
-        case 'X':
-        case 'x':
-        {
-            wxLogDebug("  -> HandleMoveOperation");
-            wxCommandEvent evt;
-            HandleMoveOperation(evt);
-            return;
-        }
-        case 'V':
-        case 'v':
-        {
-            wxLogDebug("  -> HandlePasteOperation");
-            wxCommandEvent evt;
-            HandlePasteOperation(evt);
-            return;
-        }
-        case 'Z':
-        case 'z':
-        {
-            HandleUndo();
-            return;
-        }
-        case 'Y':
-        case 'y':
-        {
-            HandleRedo();
-            return;
-        }
-        }
-    }
-    else if (event.GetKeyCode() == WXK_DELETE)
-    {
-        wxCommandEvent evt;
-        HandleDeleteOperation(evt);
-        return;
-    }
-    else if (event.GetKeyCode() == WXK_F2)
-    {
-        // Переименование выделенного файла/папки
-        if (!fileList || !controller)
-        {
-            event.Skip(); return;
-        }
-
-        long sel = fileList->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
-        if (sel == -1)
-        {
-            event.Skip(); return;
-        }
-
-        wxString oldName = fileList->GetItemText(sel, 0);
-        if (oldName == "..")
-        {
-            event.Skip(); return;
-        }
-
-        wxTextEntryDialog dlg(this, "Новое имя:", "Переименование", oldName);
-        if (dlg.ShowModal() != wxID_OK) return;
-
-        wxString newName = dlg.GetValue().Trim().Trim(false);
-        if (newName.IsEmpty() || newName == oldName) return;
-
-        wxString basePath = controller->GetCurrentPath();
-        wxString sep = wxFileName::GetPathSeparator();
-        if (sourceType == SOURCE_FTP) sep = "/";
-
-        wxString oldPath = basePath + sep + oldName;
-        wxString newPath = basePath + sep + newName;
-
-        if (RenameFileInternal(oldPath, newPath))
-        {
-            controller->RefreshFileList();
-            UpdateStatus("Переименовано: " + oldName + " → " + newName);
-        }
-        else
-        {
-            wxMessageBox("Не удалось переименовать: " + oldName, "Ошибка", wxOK | wxICON_ERROR);
-        }
-        return;
-    }
-
-    event.Skip();
 }
 
 
