@@ -85,7 +85,7 @@ FilePanel::FilePanel(wxWindow *parent, DisplayMode mode):
                         {
                             fileList->SetItemState(i, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
                         }
-                        UpdateStatus(wxString::Format("Выделено элементов: %ld", count));
+                        UpdateStatus(wxString::Format(L("Выделено элементов: %ld"), count));
                     }
                     return;
                 }
@@ -169,11 +169,11 @@ FilePanel::FilePanel(wxWindow *parent, DisplayMode mode):
                 if (RenameFileInternal(oldPath, newPath))
                 {
                     controller->RefreshFileList();
-                    UpdateStatus("Переименовано: " + oldName + " → " + newName);
+                    UpdateStatus(L("Переименовано: ") + oldName + " → " + newName);
                 }
                 else
                 {
-                    wxMessageBox("Не удалось переименовать: " + oldName, "Ошибка", wxOK | wxICON_ERROR);
+                    wxMessageBox(L("Не удалось переименовать: ") + oldName, L("Ошибка"), wxOK | wxICON_ERROR);
                 }
                 return;
             }
@@ -203,7 +203,7 @@ bool FilePanel::ConnectToFTP(const wxString &host, int _port, const wxString &us
 
     if (!ftpController->Connect(host, user, pass, _port))
     {
-        UpdateStatus("Ошибка подключения к FTP: " + ftpController->GetLastError());
+        UpdateStatus(L("Ошибка подключения к FTP: ") + ftpController->GetLastError());
         return false;
     }
 
@@ -220,7 +220,7 @@ bool FilePanel::ConnectToFTP(const wxString &host, int _port, const wxString &us
     }
 
     RefreshFileList();
-    UpdateStatus("Подключено к FTP: " + host);
+    UpdateStatus(L("Подключено к FTP: ") + host);
     return true;
 }
 
@@ -235,7 +235,7 @@ void FilePanel::DisconnectFTP()
         sourceType = SOURCE_LOCAL;
         controller->SetPath(wxGetCwd());
         RefreshFileList();
-        UpdateStatus("Отключено от FTP");
+        UpdateStatus(L("Отключено от FTP"));
     }
 }
 
@@ -257,7 +257,7 @@ void FilePanel::SetActive(bool active)
     }
     else if (is_active)
     {
-        UpdateStatus("Панель активна, элементы не выбраны");
+        UpdateStatus(L("Панель активна, элементы не выбраны"));
     }
 }
 
@@ -299,13 +299,13 @@ void FilePanel::CreateControls()
                     int selection = comboTypeSource->GetSelection();
                     sourceType = static_cast<SourceType>(selection);
 
-                    UpdateStatus(wxString::Format("Переключено на: %s", GetSourceTypeString()));
+                    UpdateStatus(wxString::Format(L("Переключено на: %s"), GetSourceTypeString()));
                     UpdateControlsForSourceType();
                     RefreshFileList();
                 });
-            comboTypeSource->Append("Локальная файловая система");
-            comboTypeSource->Append("USB флешка");
-            comboTypeSource->Append("FTP соединение");
+            comboTypeSource->Append(L("Локальная файловая система"));
+            comboTypeSource->Append(L("USB флешка"));
+            comboTypeSource->Append(L("FTP соединение"));
             comboTypeSource->SetSelection(0);
         }
 
@@ -343,7 +343,7 @@ void FilePanel::CreateControls()
         {
             btnBack = new ButtonBitmap(this, wxDefaultSize, "undo.bmp", "");
 
-            btnBack->SetToolTip("Вернуться к выбору источника");
+            btnBack->SetToolTip(L("Вернуться к выбору источника"));
 
             btnBack->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
                 {
