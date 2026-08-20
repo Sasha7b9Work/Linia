@@ -30,7 +30,6 @@
 // Определение таблицы событий
 wxBEGIN_EVENT_TABLE(FilePanel, wxPanel)
 EVT_COMBOBOX(ID_SOURCE_TYPE, FilePanel::OnSourceTypeChanged)
-EVT_BUTTON(ID_BTN_BACK, FilePanel::OnBackButtonClick)
 EVT_TEXT(ID_PATH_CTRL, FilePanel::OnPathChanged)
 EVT_BUTTON(ID_BROWSE_BTN, FilePanel::OnBrowseButton)
 EVT_LIST_ITEM_ACTIVATED(ID_FILE_LIST, FilePanel::OnItemActivated)
@@ -217,20 +216,44 @@ void FilePanel::CreateControls()
     // Строка пути с кнопкой возврата
     wxBoxSizer *pathSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    // Кнопка возврата (стрелка назад) - только для MODE_BUTTONS
-    if (displayMode == MODE_BUTTONS)
     {
-        wxBitmap &undoBmp = Bitmap::Get("undo.bmp").GetBitmap();
-        if (undoBmp.IsOk())
+        // Кнопка возврата (стрелка назад) - только для MODE_BUTTONS
+        if (displayMode == MODE_BUTTONS)
         {
-            btnBack = new wxBitmapButton(this, ID_BTN_BACK, undoBmp, wxDefaultPosition);
+            wxBitmap &undoBmp = Bitmap::Get("undo.bmp").GetBitmap();
+            if (undoBmp.IsOk())
+            {
+                btnBack = new wxBitmapButton(this, wxID_ANY, undoBmp, wxDefaultPosition);
+            }
+            else
+            {
+                btnBack = new wxButton(this, wxID_ANY, wxString::FromUTF8("\xe2\x86\x90"), wxDefaultPosition);
+            }
+
+            btnBack->SetToolTip("Вернуться к выбору источника");
+
+            btnBack->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
+                {
+                    // Возврат к экрану выбора источника
+                    panelState = STATE_SELECTION;
+
+                    // Если был FTP - отключаемся
+                    if (sourceType == SOURCE_FTP && ftpController)
+                    {
+                        ftpController.reset();  // Уничтожаем контроллер, это закроет соединение
+                        UpdateStatus("FTP соединение закрыто");
+                    }
+                    else
+                    {
+                        UpdateStatus("Возврат к выбору источника");
+                    }
+
+                    sourceType = SOURCE_LOCAL;  // Сбрасываем тип источника
+                    UpdatePanelState();
+                });
+
+            pathSizer->Add(btnBack, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
         }
-        else
-        {
-            btnBack = new wxButton(this, ID_BTN_BACK, wxString::FromUTF8("\xe2\x86\x90"), wxDefaultPosition);
-        }
-        btnBack->SetToolTip("Вернуться к выбору источника");
-        pathSizer->Add(btnBack, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
     }
 
     pathCtrl = new wxTextCtrl(this, ID_PATH_CTRL, controller->GetCurrentPath(), wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
@@ -1167,26 +1190,6 @@ void FilePanel::CreateSourceButtons()
     }
 }
 
-
-void FilePanel::OnBackButtonClick(wxCommandEvent &)
-{
-    // Возврат к экрану выбора источника
-    panelState = STATE_SELECTION;
-
-    // Если был FTP - отключаемся
-    if (sourceType == SOURCE_FTP && ftpController)
-    {
-        ftpController.reset();  // Уничтожаем контроллер, это закроет соединение
-        UpdateStatus("FTP соединение закрыто");
-    }
-    else
-    {
-        UpdateStatus("Возврат к выбору источника");
-    }
-
-    sourceType = SOURCE_LOCAL;  // Сбрасываем тип источника
-    UpdatePanelState();
-}
 
 void FilePanel::UpdatePanelState()
 {

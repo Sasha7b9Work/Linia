@@ -63,7 +63,6 @@ public:
         ID_REFRESH,
         ID_PASTE,
         ID_SOURCE_TYPE,
-        ID_BTN_BACK,       // Кнопка возврата к выбору источника
         ID_PATH_CTRL,
         ID_BROWSE_BTN,
         ID_FILE_LIST
@@ -182,7 +181,6 @@ public:
 
     // Обработчики событий
     void OnSourceTypeChanged(wxCommandEvent &);
-    void OnBackButtonClick(wxCommandEvent &);
     void OnPathChanged(wxCommandEvent &);
     void OnBrowseButton(wxCommandEvent &);
     void OnItemActivated(wxListEvent &);
@@ -221,8 +219,8 @@ private:
     wxComboBox *sourceTypeCombo = nullptr;
     wxBitmapButton *btnLocal = nullptr;
     wxBitmapButton *btnFTP = nullptr;
-    wxButton *btnBack = nullptr;       // Кнопка возврата
-    wxBoxSizer *buttonsSizer = nullptr;  // Сайзер для кнопок выбора источника
+    wxButton *btnBack = nullptr;                // Кнопка возврата
+    wxBoxSizer *buttonsSizer = nullptr;         // Сайзер для кнопок выбора источника
     wxTextCtrl *pathCtrl = nullptr;
     wxButton *browseBtn = nullptr;
     wxListCtrl *fileList = nullptr;
