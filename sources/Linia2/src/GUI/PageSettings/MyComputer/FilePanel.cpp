@@ -56,9 +56,7 @@ FilePanel::FilePanel(wxWindow *parent, DisplayMode mode)
     : wxPanel(parent, wxID_ANY),
     displayMode(mode),
     controller(std::make_unique<FilePanelController>(this)),
-    operations(std::make_unique<FilePanelOperations>(this)),
-    m_isActive(false),
-    sourceType(SOURCE_LOCAL)
+    operations(std::make_unique<FilePanelOperations>(this))
 {
     CreateControls();
     BindEvents();
@@ -138,14 +136,14 @@ bool FilePanel::IsFTPConnected() const
 
 void FilePanel::SetActive(bool active)
 {
-    m_isActive = active;
+    is_active = active;
     UpdateVisualState();
     // Обновляем статус при активации панели
-    if (m_isActive && controller->HasSelectedFiles())
+    if (is_active && controller->HasSelectedFiles())
     {
         controller->UpdateStatusForSelection();
     }
-    else if (m_isActive)
+    else if (is_active)
     {
         UpdateStatus("Панель активна, элементы не выбраны");
     }
@@ -268,7 +266,7 @@ void FilePanel::BindEvents()
     // Добавьте обработку фокуса для списка файлов
     fileList->Bind(wxEVT_SET_FOCUS, [this](wxFocusEvent &event)
         {
-            if (!m_isActive)
+            if (!is_active)
             {
                 wxCommandEvent *activateEvent = new wxCommandEvent(wxEVT_FILEPANEL_ACTIVATED, GetId());
                 activateEvent->SetEventObject(this);
@@ -281,7 +279,7 @@ void FilePanel::BindEvents()
 void FilePanel::UpdateVisualState()
 {
     // Изменяем цвет фона для активной/неактивной панели
-    wxColour bgColour = m_isActive ? wxColour(240, 240, 255) : wxColour(255, 255, 255);
+    wxColour bgColour = is_active ? wxColour(240, 240, 255) : wxColour(255, 255, 255);
     SetBackgroundColour(bgColour);
     fileList->SetBackgroundColour(bgColour);
     pathCtrl->SetBackgroundColour(bgColour);
@@ -553,7 +551,7 @@ void FilePanel::OnItemActivated(wxListEvent &event)
 void FilePanel::OnItemSelected(wxListEvent &event)
 {
     // Активируем панель при выборе элемента
-    if (!m_isActive)
+    if (!is_active)
     {
         wxCommandEvent *activateEvent = new wxCommandEvent(wxEVT_FILEPANEL_ACTIVATED, GetId());
         activateEvent->SetEventObject(this);
@@ -788,14 +786,14 @@ void FilePanel::OnKeyDown(wxKeyEvent &event)
 void FilePanel::OnColumnClick(wxListEvent &event)
 {
     int col = event.GetColumn();
-    if (col == m_sortColumn)
+    if (col == sortColumn)
     {
-        m_sortAscending = !m_sortAscending;
+        sortAscending = !sortAscending;
     }
     else
     {
-        m_sortColumn = col;
-        m_sortAscending = true;
+        sortColumn = col;
+        sortAscending = true;
     }
 
     if (!fileList || fileList->GetItemCount() <= 1) return;
@@ -820,8 +818,8 @@ void FilePanel::OnColumnClick(wxListEvent &event)
         items[i].isDir = (items[i].cols[2] == "<DIR>");
     }
 
-    int sortCol = m_sortColumn;
-    bool asc = m_sortAscending;
+    int sortCol = sortColumn;
+    bool asc = sortAscending;
 
     std::sort(items.begin(), items.end(), [sortCol, asc](const ItemData &a, const ItemData &b)
         {

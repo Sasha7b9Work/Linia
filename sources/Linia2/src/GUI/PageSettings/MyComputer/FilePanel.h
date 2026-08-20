@@ -95,7 +95,7 @@ public:
     void SetActive(bool active);
     bool IsActive() const
     {
-        return m_isActive;
+        return is_active;
     }
 
     // Методы для работы с типом источника
@@ -221,7 +221,7 @@ private:
     bool CopyFileBetweenSystems(const wxString &sourcePath, FileSystemType, const wxString &destPath, FileSystemType destType, wxWindow *parent = nullptr);
 
     DisplayMode displayMode;
-    PanelState panelState = STATE_SELECTION;   // Текущее состояние панели
+    PanelState panelState{ STATE_SELECTION };   // Текущее состояние панели
     wxComboBox *sourceTypeCombo = nullptr;
     wxBitmapButton *btnLocal = nullptr;
     wxBitmapButton *btnFTP = nullptr;
@@ -235,10 +235,10 @@ private:
     std::unique_ptr<FilePanelOperations> operations;
     std::unique_ptr<FTPController> ftpController = nullptr;
     wxString m_ftpInitialDirectory;  // Начальный каталог FTP для ограничения навигации
-    bool m_isActive;
-    SourceType sourceType;
-    int m_sortColumn = 0;
-    bool m_sortAscending = true;
+    bool is_active{ false };
+    SourceType sourceType{ SOURCE_LOCAL };
+    int sortColumn = 0;
+    bool sortAscending = true;
 
     wxDECLARE_EVENT_TABLE();
 };
