@@ -102,8 +102,8 @@ bool FilePanel::ConnectToFTP(const wxString &host, int port,
     wxString ftpPath = ftpController->GetCurrentDirectory();
 
     // Сохраняем начальный каталог для ограничения навигации
-    m_ftpInitialDirectory = ftpPath;
-    wxLogDebug("FTP connected, initial directory: %s", m_ftpInitialDirectory);
+    ftpInitialDirectory = ftpPath;
+    wxLogDebug("FTP connected, initial directory: %s", ftpInitialDirectory);
 
     if (!ftpPath.IsEmpty())
     {
@@ -121,7 +121,7 @@ void FilePanel::DisconnectFTP()
     {
         ftpController->Disconnect();
         ftpController.reset();
-        m_ftpInitialDirectory.Clear();
+        ftpInitialDirectory.Clear();
         sourceType = SOURCE_LOCAL;
         controller->SetPath(wxGetCwd());
         RefreshFileList();

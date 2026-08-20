@@ -120,7 +120,7 @@ public:
     bool IsFTPConnected() const;
     wxString GetFTPInitialDirectory() const
     {
-        return m_ftpInitialDirectory;
+        return ftpInitialDirectory;
     }
 
     wxTextCtrl *GetPathCtrl() const
@@ -234,7 +234,7 @@ private:
     std::unique_ptr<FilePanelController> controller;
     std::unique_ptr<FilePanelOperations> operations;
     std::unique_ptr<FTPController> ftpController = nullptr;
-    wxString m_ftpInitialDirectory;  // Начальный каталог FTP для ограничения навигации
+    wxString ftpInitialDirectory;  // Начальный каталог FTP для ограничения навигации
     bool is_active{ false };
     SourceType sourceType{ SOURCE_LOCAL };
     int sortColumn = 0;
