@@ -84,15 +84,14 @@ FilePanel::~FilePanel()
     // Ресурсы (controller, ftpController) освобождаются автоматически через std::unique_ptr
 }
 
-bool FilePanel::ConnectToFTP(const wxString &host, int port,
-    const wxString &user, const wxString &pass)
+bool FilePanel::ConnectToFTP(const wxString &host, int _port, const wxString &user, const wxString &pass)
 {
     if (!ftpController)
     {
         ftpController = std::make_unique<FTPController>(this);
     }
 
-    if (!ftpController->Connect(host, user, pass, port))
+    if (!ftpController->Connect(host, user, pass, _port))
     {
         UpdateStatus("Ошибка подключения к FTP: " + ftpController->GetLastError());
         return false;

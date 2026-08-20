@@ -29,8 +29,7 @@ FTPController::~FTPController()
     Disconnect();
 }
 
-void FTPController::ParseFTPUrl(const wxString &url, wxString &host, wxString &user,
-    wxString &password, wxString &path, int &port)
+void FTPController::ParseFTPUrl(const wxString &url, wxString &host, wxString &user, wxString &_password, wxString &path, int &_port)
 {
     wxString tempUrl = url;
 
@@ -64,18 +63,18 @@ void FTPController::ParseFTPUrl(const wxString &url, wxString &host, wxString &u
         if (colonPos != wxNOT_FOUND)
         {
             user = userPass.Left((size_t)colonPos);
-            password = userPass.Mid((size_t)colonPos + 1U);
+            _password = userPass.Mid((size_t)colonPos + 1U);
         }
         else
         {
             user = userPass;
-            password = "";
+            _password = "";
         }
     }
     else
     {
         user = wxGetUserId();
-        password = "";
+        _password = "";
     }
 
     // Извлекаем host:port
@@ -87,17 +86,17 @@ void FTPController::ParseFTPUrl(const wxString &url, wxString &host, wxString &u
         long portLong;
         if (portStr.ToLong(&portLong) && portLong >= 1 && portLong <= 65535)
         {
-            port = static_cast<int>(portLong);
+            _port = static_cast<int>(portLong);
         }
         else
         {
-            port = 22;
+            _port = 22;
         }
     }
     else
     {
         host = tempUrl;
-        port = 22;
+        _port = 22;
     }
 
     // Валидация: хост не должен быть пустым и не должен содержать спецсимволы
@@ -182,8 +181,7 @@ int FTPController::VerifyKnownHost()
     return -1;
 }
 
-bool FTPController::Connect(const wxString &host, const wxString &user,
-    const wxString &password, int port)
+bool FTPController::Connect(const wxString &host, const wxString &user, const wxString &_password, int _port)
 {
     if (m_isConnected)
     {
@@ -200,7 +198,7 @@ bool FTPController::Connect(const wxString &host, const wxString &user,
 
     // Настраиваем параметры подключения
     ssh_options_set(m_session, SSH_OPTIONS_HOST, host.utf8_str().data());
-    ssh_options_set(m_session, SSH_OPTIONS_PORT, &port);
+    ssh_options_set(m_session, SSH_OPTIONS_PORT, &_port);
     ssh_options_set(m_session, SSH_OPTIONS_USER, user.utf8_str().data());
 
     // Устанавливаем таймаут
@@ -228,7 +226,7 @@ bool FTPController::Connect(const wxString &host, const wxString &user,
     }
 
     // Аутентификация
-    rc = ssh_userauth_password(m_session, nullptr, password.utf8_str().data());
+    rc = ssh_userauth_password(m_session, nullptr, _password.utf8_str().data());
     if (rc != SSH_AUTH_SUCCESS)
     {
         m_lastError = wxString::Format("Ошибка аутентификации: %s",

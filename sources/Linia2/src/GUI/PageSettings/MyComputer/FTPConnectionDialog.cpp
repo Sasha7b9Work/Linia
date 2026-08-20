@@ -41,7 +41,7 @@ FTPConnectionDialog::~FTPConnectionDialog()
 
 void FTPConnectionDialog::ClearPassword()
 {
-    SecureClearString(m_password);
+    SecureClearString(password);
 }
 
 void FTPConnectionDialog::CreateControls()
@@ -96,28 +96,28 @@ void FTPConnectionDialog::CreateControls()
 
 void FTPConnectionDialog::OnOK(wxCommandEvent & /*event*/)
 {
-    m_server = serverCtrl->GetValue();
+    server = serverCtrl->GetValue();
     wxString portStr = portCtrl->GetValue();
     long portLong;
     if (portStr.ToLong(&portLong) && portLong >= 1 && portLong <= 65535)
     {
-        m_port = static_cast<int>(portLong);
+        port = static_cast<int>(portLong);
     }
     else
     {
         wxMessageBox("Порт должен быть числом от 1 до 65535", "Ошибка", wxOK | wxICON_ERROR);
         return;
     }
-    m_username = usernameCtrl->GetValue();
-    m_password = passwordCtrl->GetValue();
+    username = usernameCtrl->GetValue();
+    password = passwordCtrl->GetValue();
 
-    if (m_server.IsEmpty())
+    if (server.IsEmpty())
     {
         wxMessageBox("Введите адрес сервера", "Ошибка", wxOK | wxICON_ERROR);
         return;
     }
 
-    if (m_username.IsEmpty())
+    if (username.IsEmpty())
     {
         wxMessageBox("Введите имя пользователя", "Ошибка", wxOK | wxICON_ERROR);
         return;

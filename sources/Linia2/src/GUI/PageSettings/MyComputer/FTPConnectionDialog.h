@@ -13,23 +13,23 @@ public:
 
     wxString GetServer() const
     {
-        return m_server;
+        return server;
     }
     wxString GetHost() const
     {
-        return m_server;
+        return server;
     }  // Алиас для совместимости
     int GetPort() const
     {
-        return m_port;
+        return port;
     }
     wxString GetUsername() const
     {
-        return m_username;
+        return username;
     }
     wxString GetPassword() const
     {
-        return m_password;
+        return password;
     }
     void ClearPassword();
 
@@ -43,10 +43,10 @@ private:
     wxTextCtrl *usernameCtrl = nullptr;
     wxTextCtrl *passwordCtrl = nullptr;
 
-    wxString m_server;
-    int m_port = 22;
-    wxString m_username;
-    wxString m_password;
+    wxString server;
+    int port = 22;
+    wxString username;
+    wxString password;
 
     wxDECLARE_EVENT_TABLE();
 };
