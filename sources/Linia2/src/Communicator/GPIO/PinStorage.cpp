@@ -1,6 +1,7 @@
 // 2026/07/23 16:23:32 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Communicator/GPIO/PinStorage.h"
+#include <cstring>
 
 
 PinInfo PinStorage::GetPinInfo(Pin::E pin_e, bool is_input)
