@@ -1,10 +1,10 @@
 ﻿// 2025/10/17 08:25:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/Controls/Button.h"
+#include "GUI/Controls/StaticText.h"
 #pragma warning(push, 0)
-#include <wx/stattext.h>
-#include <wx/sizer.h>
-#include <wx/dialog.h>
+    #include <wx/sizer.h>
+    #include <wx/dialog.h>
 #pragma warning(pop)
 
 
@@ -23,11 +23,11 @@ public:
         wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
 
         // Текст сообщения
-        messageText = new wxStaticText(this, wxID_ANY, message);
+        messageText = new StaticText(this, message);
         mainSizer->Add(messageText, 0, wxALL | wxALIGN_CENTER, 10);
 
         // Текст отсчета
-        countdownText = new wxStaticText(this, wxID_ANY, wxString::Format(L("Перезагрузка через %d секунд"), countdown));
+        countdownText = new StaticText(this, wxString::Format(L("Перезагрузка через %d секунд"), countdown));
         mainSizer->Add(countdownText, 0, wxALL | wxALIGN_CENTER, 10);
 
         // Кнопки
@@ -99,8 +99,8 @@ private:
     }
 
 private:
-    wxStaticText *messageText;
-    wxStaticText *countdownText;
+    StaticText  *messageText;
+    StaticText   *countdownText;
     Button       *okButton;
     Button       *cancelButton;
     wxTimer      *timer;
