@@ -12,19 +12,19 @@ UndoManager &UndoManager::GetInstance()
 void UndoManager::AddOperation(const FileOperation &operation)
 {
     // Удаляем все операции после текущей позиции
-    if (m_currentIndex < operations.size())
+    if (current_index < operations.size())
     {
-        operations.erase(operations.begin() + (int64)m_currentIndex, operations.end());
+        operations.erase(operations.begin() + (int64)current_index, operations.end());
     }
 
     operations.push_back(operation);
-    m_currentIndex++;
+    current_index++;
 
     // Ограничиваем размер истории
     if (operations.size() > MAX_OPERATIONS)
     {
         operations.erase(operations.begin());
-        m_currentIndex--;
+        current_index--;
     }
 }
 
@@ -34,8 +34,8 @@ FileOperation UndoManager::Undo()
     {
         throw std::runtime_error("Nothing to undo");
     }
-    m_currentIndex--;
-    return operations[m_currentIndex];
+    current_index--;
+    return operations[current_index];
 }
 
 FileOperation UndoManager::Redo()
@@ -44,13 +44,13 @@ FileOperation UndoManager::Redo()
     {
         throw std::runtime_error("Nothing to redo");
     }
-    FileOperation op = operations[m_currentIndex];
-    m_currentIndex++;
+    FileOperation op = operations[current_index];
+    current_index++;
     return op;
 }
 
 void UndoManager::Clear()
 {
     operations.clear();
-    m_currentIndex = 0;
+    current_index = 0;
 }

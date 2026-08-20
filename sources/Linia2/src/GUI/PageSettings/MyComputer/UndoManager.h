@@ -33,11 +33,11 @@ public:
     void AddOperation(const FileOperation &operation);
     bool CanUndo() const
     {
-        return m_currentIndex > 0;
+        return current_index > 0;
     }
     bool CanRedo() const
     {
-        return m_currentIndex < operations.size();
+        return current_index < operations.size();
     }
 
     FileOperation Undo();
@@ -45,9 +45,9 @@ public:
     void Clear();
 
 private:
-    UndoManager() : m_currentIndex(0) { }
+    UndoManager() : current_index(0) { }
 
     std::vector<FileOperation> operations;
-    size_t m_currentIndex;
+    size_t current_index;
     static const size_t MAX_OPERATIONS = 50;
 };
