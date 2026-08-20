@@ -29,11 +29,6 @@
 
 // Определение таблицы событий
 wxBEGIN_EVENT_TABLE(FilePanel, wxPanel)
-EVT_LIST_ITEM_ACTIVATED(ID_FILE_LIST, FilePanel::OnItemActivated)
-EVT_LIST_ITEM_SELECTED(ID_FILE_LIST, FilePanel::OnItemSelected)
-EVT_LIST_ITEM_RIGHT_CLICK(ID_FILE_LIST, FilePanel::OnItemRightClick)
-EVT_LIST_BEGIN_DRAG(ID_FILE_LIST, FilePanel::OnBeginDrag)
-EVT_LIST_COL_CLICK(ID_FILE_LIST, FilePanel::OnColumnClick)
 EVT_LEFT_DOWN(FilePanel::OnPanelClick)
 EVT_SET_FOCUS(FilePanel::OnPanelFocus)
 // ТОЛЬКО обработчики меню - удалить дублирующиеся EVT_BUTTON
@@ -309,13 +304,164 @@ void FilePanel::CreateControls()
     pathSizer->Add(pathCtrl, 1, wxEXPAND | wxALL, 5);
     pathSizer->Add(browseBtn, 0, wxALL, 5);
 
-    // Добавляем стили для отображения разделителей
-    fileList = new wxListCtrl(this, ID_FILE_LIST, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_VRULES | wxLC_HRULES); // wxLC_VRULES добавляет вертикальные линии
+    {
+        // Добавляем стили для отображения разделителей
+        fileList = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_VRULES | wxLC_HRULES); // wxLC_VRULES добавляет вертикальные линии
 
-    fileList->InsertColumn(0, "Имя", wxLIST_FORMAT_LEFT, 180);
-    fileList->InsertColumn(1, "Размер", wxLIST_FORMAT_LEFT, 80);
-    fileList->InsertColumn(2, "Тип", wxLIST_FORMAT_LEFT, 80);
-    fileList->InsertColumn(3, "Изменен", wxLIST_FORMAT_LEFT, 140);
+        fileList->Bind(wxEVT_LIST_ITEM_ACTIVATED, [this](wxListEvent &event)
+            {
+                // Двойной клик по элементу списка (файл или папка)
+                controller->OnItemActivated(event.GetIndex());
+            });
+
+        fileList->Bind(wxEVT_LIST_ITEM_SELECTED, [this](wxListEvent &event)
+            {
+                // Активируем панель при выборе элемента
+                if (!is_active)
+                {
+                    wxCommandEvent *activateEvent = new wxCommandEvent(wxEVT_FILEPANEL_ACTIVATED, GetId());
+                    activateEvent->SetEventObject(this);
+                    GetParent()->GetEventHandler()->QueueEvent(activateEvent);
+                }
+                controller->OnItemSelected(event.GetIndex());
+            });
+
+        fileList->Bind(wxEVT_LIST_ITEM_RIGHT_CLICK, [this](wxListEvent &)
+            {
+                wxMenu menu;
+
+                auto appendWithIcon = [&](wxMenu &m, int id, const wxString &label, const wxString &iconFile)
+                    {
+                        wxMenuItem *item = new wxMenuItem(&m, id, label);
+                        wxBitmap &bmp = Bitmap::Get(iconFile).GetBitmap();
+                        if (bmp.IsOk())
+                        {
+                            wxImage img = bmp.ConvertToImage();
+                            img.Rescale(16, 16, wxIMAGE_QUALITY_HIGH);
+                            item->SetBitmap(wxBitmap(img));
+                        }
+                        m.Append(item);
+                    };
+
+                appendWithIcon(menu, ID_COPY, "Копировать (Ctrl+C)", "edit-copy.bmp");
+                appendWithIcon(menu, ID_MOVE, "Вырезать (Ctrl+X)", "edit-cut.bmp");
+                appendWithIcon(menu, ID_PASTE, "Вставить (Ctrl+V)", "edit-paste.bmp");
+                appendWithIcon(menu, ID_DELETE, "Удалить (Del)", "edit-delete.bmp");
+                menu.AppendSeparator();
+                appendWithIcon(menu, ID_CREATE_FOLDER, "Создать папку", "folder-new.bmp");
+                appendWithIcon(menu, ID_REFRESH, "Обновить", "view-refresh.bmp");
+
+                PopupMenu(&menu);
+            });
+
+        fileList->Bind(wxEVT_LIST_BEGIN_DRAG, [this](wxListEvent &)
+            {
+                // Инициируем drag-and-drop для выбранных файлов
+                if (!controller->HasSelectedFiles())
+                {
+                    return; // Ничего не выбрано
+                }
+
+                wxArrayString selectedFiles = controller->GetSelectedFiles();
+                if (selectedFiles.IsEmpty())
+                {
+                    return;
+                }
+
+                // Создаем wxFileDataObject для совместимости с системным D&D
+                wxFileDataObject data;
+                for (const wxString &file : selectedFiles)
+                {
+                    if (file != "..")
+                    {
+                        wxFileName fullPath(controller->GetCurrentPath(), file);
+                        data.AddFile(fullPath.GetFullPath());
+                    }
+                }
+
+                wxDropSource dragSource(this);
+                dragSource.SetData(data);
+                dragSource.DoDragDrop(wxDrag_CopyOnly);
+            });
+
+        fileList->Bind(wxEVT_LIST_COL_CLICK, [this](wxListEvent &event)
+            {
+                int col = event.GetColumn();
+                if (col == sortColumn)
+                {
+                    sortAscending = !sortAscending;
+                }
+                else
+                {
+                    sortColumn = col;
+                    sortAscending = true;
+                }
+
+                if (!fileList || fileList->GetItemCount() <= 1) return;
+
+                // Собираем данные элементов
+                struct ItemData {
+                    wxString cols[4];
+                    bool isParent;   // ".."
+                    bool isDir;      // "<DIR>"
+                };
+
+                int count = fileList->GetItemCount();
+                std::vector<ItemData> items((uint64)count);
+
+                for (uint64 i = 0; i < (uint64)count; i++)
+                {
+                    for (int c = 0; c < 4; c++)
+                    {
+                        items[i].cols[c] = fileList->GetItemText((long)i, c);
+                    }
+                    items[i].isParent = (items[i].cols[0] == "..");
+                    items[i].isDir = (items[i].cols[2] == "<DIR>");
+                }
+
+                int sortCol = sortColumn;
+                bool asc = sortAscending;
+
+                std::sort(items.begin(), items.end(), [sortCol, asc](const ItemData &a, const ItemData &b)
+                    {
+                        // ".." всегда первый
+                        if (a.isParent) return true;
+                        if (b.isParent) return false;
+                        // Папки перед файлами
+                        if (a.isDir != b.isDir) return a.isDir;
+
+                        int cmp = 0;
+                        if (sortCol == 1)
+                        {
+                            cmp = a.cols[1].CmpNoCase(b.cols[1]);
+                        }
+                        else
+                        {
+                            cmp = a.cols[sortCol].CmpNoCase(b.cols[sortCol]);
+                        }
+                        return asc ? (cmp < 0) : (cmp > 0);
+                    });
+
+                // Перестраиваем список
+                fileList->Freeze();
+                fileList->DeleteAllItems();
+
+                for (uint64 i = 0; i < (uint64)count; i++)
+                {
+                    long item = fileList->InsertItem((long)i, items[i].cols[0]);
+                    fileList->SetItem(item, 1, items[i].cols[1]);
+                    fileList->SetItem(item, 2, items[i].cols[2]);
+                    fileList->SetItem(item, 3, items[i].cols[3]);
+                }
+
+                fileList->Thaw();
+            });
+
+        fileList->InsertColumn(0, "Имя", wxLIST_FORMAT_LEFT, 180);
+        fileList->InsertColumn(1, "Размер", wxLIST_FORMAT_LEFT, 80);
+        fileList->InsertColumn(2, "Тип", wxLIST_FORMAT_LEFT, 80);
+        fileList->InsertColumn(3, "Изменен", wxLIST_FORMAT_LEFT, 140);
+    }
 
     mainSizer->Add(pathSizer, 0, wxEXPAND | wxALL, 0);
     mainSizer->Add(fileList, 1, wxEXPAND | wxALL, 5);
@@ -623,55 +769,6 @@ bool FilePanel::CopyFileBetweenSystems(const wxString &sourcePath, FileSystemTyp
 }
 
 
-void FilePanel::OnItemActivated(wxListEvent &event)
-{
-    // Двойной клик по элементу списка (файл или папка)
-    controller->OnItemActivated(event.GetIndex());
-}
-
-
-void FilePanel::OnItemSelected(wxListEvent &event)
-{
-    // Активируем панель при выборе элемента
-    if (!is_active)
-    {
-        wxCommandEvent *activateEvent = new wxCommandEvent(wxEVT_FILEPANEL_ACTIVATED, GetId());
-        activateEvent->SetEventObject(this);
-        GetParent()->GetEventHandler()->QueueEvent(activateEvent);
-    }
-    controller->OnItemSelected(event.GetIndex());
-}
-
-
-void FilePanel::OnItemRightClick(wxListEvent &)
-{
-    wxMenu menu;
-
-    auto appendWithIcon = [&](wxMenu &m, int id, const wxString &label, const wxString &iconFile)
-        {
-            wxMenuItem *item = new wxMenuItem(&m, id, label);
-            wxBitmap &bmp = Bitmap::Get(iconFile).GetBitmap();
-            if (bmp.IsOk())
-            {
-                wxImage img = bmp.ConvertToImage();
-                img.Rescale(16, 16, wxIMAGE_QUALITY_HIGH);
-                item->SetBitmap(wxBitmap(img));
-            }
-            m.Append(item);
-        };
-
-    appendWithIcon(menu, ID_COPY, "Копировать (Ctrl+C)", "edit-copy.bmp");
-    appendWithIcon(menu, ID_MOVE, "Вырезать (Ctrl+X)", "edit-cut.bmp");
-    appendWithIcon(menu, ID_PASTE, "Вставить (Ctrl+V)", "edit-paste.bmp");
-    appendWithIcon(menu, ID_DELETE, "Удалить (Del)", "edit-delete.bmp");
-    menu.AppendSeparator();
-    appendWithIcon(menu, ID_CREATE_FOLDER, "Создать папку", "folder-new.bmp");
-    appendWithIcon(menu, ID_REFRESH, "Обновить", "view-refresh.bmp");
-
-    PopupMenu(&menu);
-}
-
-
 void FilePanel::HandleCopyOperation(wxCommandEvent &event)
 {
     operations->HandleCopyOperation(event);
@@ -711,37 +808,6 @@ void FilePanel::HandleCreateFolder(wxCommandEvent &event)
 void FilePanel::HandleRefresh(wxCommandEvent &event)
 {
     operations->HandleRefresh(event);
-}
-
-
-void FilePanel::OnBeginDrag(wxListEvent &)
-{
-    // Инициируем drag-and-drop для выбранных файлов
-    if (!controller->HasSelectedFiles())
-    {
-        return; // Ничего не выбрано
-    }
-
-    wxArrayString selectedFiles = controller->GetSelectedFiles();
-    if (selectedFiles.IsEmpty())
-    {
-        return;
-    }
-
-    // Создаем wxFileDataObject для совместимости с системным D&D
-    wxFileDataObject data;
-    for (const wxString &file : selectedFiles)
-    {
-        if (file != "..")
-        {
-            wxFileName fullPath(controller->GetCurrentPath(), file);
-            data.AddFile(fullPath.GetFullPath());
-        }
-    }
-
-    wxDropSource dragSource(this);
-    dragSource.SetData(data);
-    dragSource.DoDragDrop(wxDrag_CopyOnly);
 }
 
 
@@ -881,88 +947,18 @@ void FilePanel::OnKeyDown(wxKeyEvent &event)
     event.Skip();
 }
 
-void FilePanel::OnColumnClick(wxListEvent &event)
-{
-    int col = event.GetColumn();
-    if (col == sortColumn)
-    {
-        sortAscending = !sortAscending;
-    }
-    else
-    {
-        sortColumn = col;
-        sortAscending = true;
-    }
-
-    if (!fileList || fileList->GetItemCount() <= 1) return;
-
-    // Собираем данные элементов
-    struct ItemData {
-        wxString cols[4];
-        bool isParent;   // ".."
-        bool isDir;      // "<DIR>"
-    };
-
-    int count = fileList->GetItemCount();
-    std::vector<ItemData> items((uint64)count);
-
-    for (uint64 i = 0; i < (uint64)count; i++)
-    {
-        for (int c = 0; c < 4; c++)
-        {
-            items[i].cols[c] = fileList->GetItemText((long)i, c);
-        }
-        items[i].isParent = (items[i].cols[0] == "..");
-        items[i].isDir = (items[i].cols[2] == "<DIR>");
-    }
-
-    int sortCol = sortColumn;
-    bool asc = sortAscending;
-
-    std::sort(items.begin(), items.end(), [sortCol, asc](const ItemData &a, const ItemData &b)
-        {
-            // ".." всегда первый
-            if (a.isParent) return true;
-            if (b.isParent) return false;
-            // Папки перед файлами
-            if (a.isDir != b.isDir) return a.isDir;
-
-            int cmp = 0;
-            if (sortCol == 1)
-            {
-                cmp = a.cols[1].CmpNoCase(b.cols[1]);
-            }
-            else
-            {
-                cmp = a.cols[sortCol].CmpNoCase(b.cols[sortCol]);
-            }
-            return asc ? (cmp < 0) : (cmp > 0);
-        });
-
-    // Перестраиваем список
-    fileList->Freeze();
-    fileList->DeleteAllItems();
-
-    for (uint64 i = 0; i < (uint64)count; i++)
-    {
-        long item = fileList->InsertItem((long)i, items[i].cols[0]);
-        fileList->SetItem(item, 1, items[i].cols[1]);
-        fileList->SetItem(item, 2, items[i].cols[2]);
-        fileList->SetItem(item, 3, items[i].cols[3]);
-    }
-
-    fileList->Thaw();
-}
 
 void FilePanel::HandleUndo()
 {
     operations->HandleUndo();
 }
 
+
 void FilePanel::HandleRedo()
 {
     operations->HandleRedo();
 }
+
 
 // Методы для работы с типом источника данных
 void FilePanel::SetSourceType(SourceType type)

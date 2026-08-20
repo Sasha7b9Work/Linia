@@ -61,8 +61,7 @@ public:
         ID_DELETE,
         ID_CREATE_FOLDER,
         ID_REFRESH,
-        ID_PASTE,
-        ID_FILE_LIST
+        ID_PASTE
     };
 
     void RefreshFileList()
@@ -177,14 +176,9 @@ public:
     }
 
     // Обработчики событий
-    void OnItemActivated(wxListEvent &);
-    void OnItemSelected(wxListEvent &);
-    void OnItemRightClick(wxListEvent &);
-    void OnBeginDrag(wxListEvent &);
     void OnPanelClick(wxMouseEvent &);
     void OnPanelFocus(wxFocusEvent &);
     void OnKeyDown(wxKeyEvent &);
-    void OnColumnClick(wxListEvent &);
 
 private:
     // Удаляем методы CreateButtonPanel и связанные с кнопками элементы
