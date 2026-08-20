@@ -38,13 +38,14 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, const 
     Panel::SetName("Register");
 
     {
-        wxStaticText *txt_name = new wxStaticText(this, wxID_ANY, _title + " " + chip->GetNameDevice() + (_functional.IsEmpty() ? wxString("") : (wxString(" : ") + _functional)), { 10, 10 });
+        StaticText *txt_name = new StaticText(this, _title + " " + chip->GetNameDevice() + (_functional.IsEmpty() ? wxString("") : (wxString(" : ") + _functional)));
+        txt_name->SetPosition({ 10, 10 });
 
         wxSize size_button{ 90, 25 };
 
         int x = 690;
 
-        btnSend = new Button(this, wxT("Записать"), size_button);
+        btnSend = new Button(this, L("Записать"), size_button);
         btnSend->SetToolTip(L("Однократная засылка в регистр"));
         btnSend->Bind(wxEVT_BUTTON, &Register::OnEventButton, this);
 
@@ -200,7 +201,7 @@ void Register::CreateControlMode(int i)
     int x = 10 + i * 300;
     int y = 100;
 
-    new wxStaticText(painter, wxID_ANY, title_modes[i], { x, y });
+    (new StaticText(painter, title_modes[i]))->SetPosition({ x, y });
 
     wxArrayString names;
     for (auto &mode : modes[i])

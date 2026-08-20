@@ -291,7 +291,7 @@ void FilePanel::CreateControls()
     {
         // Выпадающий список выбора типа источника
         wxBoxSizer *sourceTypeSizer = new wxBoxSizer(wxHORIZONTAL);
-        wxStaticText *sourceLabel = new wxStaticText(this, wxID_ANY, "Источник:");
+        StaticText *sourceLabel = new StaticText(this, L("Источник:"));
         {
             comboTypeSource = new wxComboBox(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, nullptr, wxCB_READONLY);
             comboTypeSource->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &)
