@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "GUI/PageSettings/MyComputer/FTPConnectionDialog.h"
+#include "GUI/Controls/Button.h"
 #pragma warning(push, 0)
     #include <wx/sizer.h>
     #include <wx/stattext.h>
@@ -82,8 +83,15 @@ void FTPConnectionDialog::CreateControls()
     // Кнопки
     wxBoxSizer *buttonSizer = new wxBoxSizer(wxHORIZONTAL);
     buttonSizer->AddStretchSpacer(1);
-    buttonSizer->Add(new wxButton(this, wxID_OK, "Подключить"), 0, wxALL, 5);
-    buttonSizer->Add(new wxButton(this, wxID_CANCEL, "Отмена"), 0, wxALL, 5);
+
+    Button *btnOK = new Button(this, L("Подключить"));
+    btnOK->SetId(wxID_OK);
+    buttonSizer->Add(btnOK, 0, wxALL, 5);
+
+    Button *btnCancel = new Button(this, L("Отмена"));
+    btnCancel->SetId(wxID_CANCEL);
+    buttonSizer->Add(btnCancel, 0, wxALL, 5);
+
     mainSizer->Add(buttonSizer, 0, wxEXPAND | wxALL, 10);
 
     SetSizer(mainSizer);
