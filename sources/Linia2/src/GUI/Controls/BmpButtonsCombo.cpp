@@ -111,61 +111,54 @@ private:
 
     void SetupDragging(wxWindow *window)
     {
-        window->Bind(wxEVT_LEFT_DOWN, &BmpButtonPopup::OnDragStart, this);
-        window->Bind(wxEVT_LEFT_UP, &BmpButtonPopup::OnEventMouseLeftUp, this);
-        window->Bind(wxEVT_MOTION, &BmpButtonPopup::OnDragMotion, this);
-    }
-
-    void OnDragStart(wxMouseEvent &event)
-    {
-        if (!dragging)
-        {
-            wxWindow *source = (wxWindow *)event.GetEventObject();
-            if (source && !source->HasCapture())
+        window->Bind(wxEVT_LEFT_DOWN, [this](wxMouseEvent &event)
             {
-                source->CaptureMouse();
-            }
+                if (!dragging)
+                {
+                    wxWindow *source = (wxWindow *)event.GetEventObject();
+                    if (source && !source->HasCapture())
+                    {
+                        source->CaptureMouse();
+                    }
 
-            dragging = true;
-            dragStart = wxGetMousePosition();
+                    dragging = true;
+                    dragStart = wxGetMousePosition();
+                }
 
-        }
+                event.Skip();
+            });
 
-        event.Skip();
-    }
-
-
-    void OnEventMouseLeftUp(wxMouseEvent &event)
-    {
-        if (dragging)
-        {
-            wxWindow *source = (wxWindow *)event.GetEventObject();
-            if (source && source->HasCapture())
+        window->Bind(wxEVT_LEFT_UP, [this](wxMouseEvent &event)
             {
-                source->ReleaseMouse();
-            }
+                if (dragging)
+                {
+                    wxWindow *source = (wxWindow *)event.GetEventObject();
+                    if (source && source->HasCapture())
+                    {
+                        source->ReleaseMouse();
+                    }
 
-            dragging = false;
-        }
+                    dragging = false;
+                }
 
-        event.Skip();
-    }
+                event.Skip();
+            });
 
+        window->Bind(wxEVT_MOTION, [this](wxMouseEvent &event)
+            {
+                wxWindow *source = (wxWindow *)event.GetEventObject();
 
-    void OnDragMotion(wxMouseEvent &event)
-    {
-        wxWindow *source = (wxWindow *)event.GetEventObject();
+                if (dragging && event.Dragging() && source && source->HasCapture())
+                {
+                    wxPoint currentPos = wxGetMousePosition();
+                    wxPoint delta = currentPos - dragStart;
+                    wxPoint newPos = GetPosition() + delta;
+                    Move(newPos);
+                    dragStart = currentPos;
+                }
 
-        if (dragging && event.Dragging() && source && source->HasCapture())
-        {
-            wxPoint currentPos = wxGetMousePosition();
-            wxPoint delta = currentPos - dragStart;
-            wxPoint newPos = GetPosition() + delta;
-            Move(newPos);
-            dragStart = currentPos;
-        }
-
-        event.Skip();
+                event.Skip();
+            });
     }
 };
 
