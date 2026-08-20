@@ -80,14 +80,14 @@ void MenuDisplay::AppendMenuFacade()
 
         wxMenu *subColors = new wxMenu();
 
-        APPEND_COLOR(wxT("Фон"), SET::GUI::color_background, nullptr);
-        APPEND_COLOR(wxT("Сетка"), SET::GUI::color_grid, nullptr);
-        APPEND_COLOR(wxT("Шрифт"), SET::GUI::color_font, nullptr);
-        APPEND_COLOR(wxT("Кривая"), SET::GUI::color_curve, OnColorCurve);
-        APPEND_COLOR(wxT("Ссылка"), SET::GUI::color_link, nullptr);
-        APPEND_COLOR(wxT("Секущая"), SET::GUI::color_secant, nullptr);
+        APPEND_COLOR(L("Фон"), SET::GUI::color_background, nullptr);
+        APPEND_COLOR(L("Сетка"), SET::GUI::color_grid, nullptr);
+        APPEND_COLOR(L("Шрифт"), SET::GUI::color_font, nullptr);
+        APPEND_COLOR(L("Кривая"), SET::GUI::color_curve, OnColorCurve);
+        APPEND_COLOR(L("Ссылка"), SET::GUI::color_link, nullptr);
+        APPEND_COLOR(L("Секущая"), SET::GUI::color_secant, nullptr);
         subColors->AppendSeparator();
-        APPEND_COLOR(wxT("Сбросить"), nullptr, nullptr);
+        APPEND_COLOR(L("Сбросить"), nullptr, nullptr);
 
         subFacade->AppendSubMenu(subColors, "Цвета");
     }
@@ -101,7 +101,7 @@ void MenuDisplay::AppendMenuFacade()
 
         wxMenu *subSize = new wxMenu();
 
-        APPEND_SIZE(wxT("Откл"));
+        APPEND_SIZE(L("Откл"));
         APPEND_SIZE("2");
         APPEND_SIZE("3");
         APPEND_SIZE("4");
@@ -173,7 +173,7 @@ void MenuDisplay::OnColor(wxCommandEvent &event)
 
             wxColourDialog dialog(ThePageMeasures, &colourData);
 
-            dialog.SetTitle(wxString(wxT("Цвет ")) + title);
+            dialog.SetTitle(wxString(L("Цвет ")) + title);
 
             if (dialog.ShowModal() == wxID_OK)
             {

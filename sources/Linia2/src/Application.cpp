@@ -164,8 +164,8 @@ bool Application::OnInit()
 
     if (!SoftTests::RunAll())
     {
-        wxMessageBox(wxString::Format(_("Во время выполнения тестов произошли ошибки.\n") +
-            _("Дополнительная информация в файле %s."), Log::FileName().c_str().AsChar()), L("Ошибка"), wxOK | wxCENTRE | wxICON_ERROR);
+        wxMessageBox(wxString::Format(L("Во время выполнения тестов произошли ошибки.\nДополнительная информация в файле %s."),
+            Log::FileName().c_str().AsChar()), L("Ошибка"), wxOK | wxCENTRE | wxICON_ERROR);
     }
 
 #ifdef WIN32

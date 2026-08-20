@@ -77,13 +77,13 @@ void PanelErrors::OnEventButton(wxCommandEvent &event)
     if (collapse)
     {
         SetSize({ GetSize().x, 23 });
-        btnCollapse->SetLabel(wxT("Развернуть"));
+        btnCollapse->SetLabel(L("Развернуть"));
         timer.Start(500);
     }
     else
     {
         SetSize({ GetSize().x, 100 });
-        btnCollapse->SetLabel(wxT("Свернуть"));
+        btnCollapse->SetLabel(L("Свернуть"));
         timer.Stop();
     }
 

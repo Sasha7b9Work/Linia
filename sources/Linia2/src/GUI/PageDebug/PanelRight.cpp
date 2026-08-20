@@ -29,11 +29,11 @@ PanelRight::PanelRight(wxWindow *parent, PanelRight *&global) :
     {
         btnStart = new Button{ this, "Старт", size_button };
 
-        btnStart->SetToolTip(wxT("Запуск развёртки"));
+        btnStart->SetToolTip(L("Запуск развёртки"));
 
         txtPeriodScan = new TextCtrlNumber{ this, "1000", size_button,  10, 10000 };
 
-        txtPeriodScan->SetToolTip(wxT("Период запуска развёртки в миллисекундах"));
+        txtPeriodScan->SetToolTip(L("Период запуска развёртки в миллисекундах"));
 
         wxBoxSizer *hor_sizer = new wxBoxSizer(wxHORIZONTAL);
         hor_sizer->Add(btnStart, 0, wxALL, 5);
@@ -44,7 +44,7 @@ PanelRight::PanelRight(wxWindow *parent, PanelRight *&global) :
     {
         btnStop = new Button{ this, "Стоп", size_button };
 
-        btnStop->SetToolTip(wxT("Останов развёртки"));
+        btnStop->SetToolTip(L("Останов развёртки"));
 
         btnStop->Enable(false);
 

@@ -144,7 +144,7 @@ void ConsoleRS232::AddLine(const wxString &str)
     mutex.lock();
 
     text->WriteText(str);
-    text->WriteText(wxT("\n"));
+    text->WriteText(L("\n"));
 
     mutex.unlock();
 }
