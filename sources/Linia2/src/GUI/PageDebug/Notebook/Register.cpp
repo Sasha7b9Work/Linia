@@ -222,7 +222,44 @@ void Register::CreateControlMode(int i)
     combo_modes[i] = new CommandsCombo(painter, title_modes[i], 250, names, tooltips, title_modes[i]);
     combo_modes[i]->SetPosition({ x, y + 20 });
 
-    combo_modes[i]->Bind(wxEVT_COMBOBOX, &Register::OnEventComboMode, this);
+    combo_modes[i]->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
+        {
+            int id = event.GetId();
+
+            int num_mode = -1;
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (combo_modes[i])
+                {
+                    if (combo_modes[i]->GetId() == id)
+                    {
+                        num_mode = i;
+                        break;
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            if (num_mode == -1)
+            {
+                return;
+            }
+
+            ModeDescripion &mode = modes[num_mode][(uint)event.GetInt()];
+
+            for (uint i = 0; i < mode.state.size(); i++)
+            {
+                StateBit &state = mode.state[i];
+
+                chboxes[(uint)state.num]->SetValue(state.state);
+            }
+
+            UpdateComboCommandsAndModes();
+        });
 }
 
 
@@ -434,46 +471,6 @@ void Register::OnEventComboField(wxCommandEvent &event)
     UpdateDecFields();
 
     event.Skip();
-}
-
-
-void Register::OnEventComboMode(wxCommandEvent &event)
-{
-    int id = event.GetId();
-
-    int num_mode = -1;
-
-    for (int i = 0; i < 5; i++)
-    {
-        if (combo_modes[i])
-        {
-            if (combo_modes[i]->GetId() == id)
-            {
-                num_mode = i;
-                break;
-            }
-        }
-        else
-        {
-            break;
-        }
-    }
-
-    if (num_mode == -1)
-    {
-        return;
-    }
-
-    ModeDescripion &mode = modes[num_mode][(uint)event.GetInt()];
-
-    for (uint i = 0; i < mode.state.size(); i++)
-    {
-        StateBit &state = mode.state[i];
-
-        chboxes[(uint)state.num]->SetValue(state.state);
-    }
-
-    UpdateComboCommandsAndModes();
 }
 
 

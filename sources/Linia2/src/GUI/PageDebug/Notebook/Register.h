@@ -153,7 +153,6 @@ protected:
     // Управление состоянием групп битов
     void OnEventComboField(wxCommandEvent &);
     // Выбор режима
-    void OnEventComboMode(wxCommandEvent &);
     void OnEventToggleButton(wxCommandEvent &);
     void OnEventTimerAutoSend(wxTimerEvent &);
 
