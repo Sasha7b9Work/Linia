@@ -31,7 +31,6 @@
 wxBEGIN_EVENT_TABLE(FilePanel, wxPanel)
 EVT_COMBOBOX(ID_SOURCE_TYPE, FilePanel::OnSourceTypeChanged)
 EVT_TEXT(ID_PATH_CTRL, FilePanel::OnPathChanged)
-EVT_BUTTON(ID_BROWSE_BTN, FilePanel::OnBrowseButton)
 EVT_LIST_ITEM_ACTIVATED(ID_FILE_LIST, FilePanel::OnItemActivated)
 EVT_LIST_ITEM_SELECTED(ID_FILE_LIST, FilePanel::OnItemSelected)
 EVT_LIST_ITEM_RIGHT_CLICK(ID_FILE_LIST, FilePanel::OnItemRightClick)
@@ -262,13 +261,26 @@ void FilePanel::CreateControls()
         wxBitmap &dirBmp = Bitmap::Get("directory_open.bmp").GetBitmap();
         if (dirBmp.IsOk())
         {
-            browseBtn = new wxBitmapButton(this, ID_BROWSE_BTN, dirBmp, wxDefaultPosition);
+            browseBtn = new wxBitmapButton(this, wxID_ANY, dirBmp, wxDefaultPosition);
         }
         else
         {
-            browseBtn = new wxButton(this, ID_BROWSE_BTN, "...", wxDefaultPosition);
+            browseBtn = new wxButton(this, wxID_ANY, "...", wxDefaultPosition);
         }
+
         browseBtn->SetToolTip("Выбрать папку");
+
+        browseBtn->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
+            {
+                // Открываем диалог выбора директории
+                wxDirDialog dlg(this, L("Выберите папку"), controller->GetCurrentPath(), wxDD_DEFAULT_STYLE);
+
+                if (dlg.ShowModal() == wxID_OK)
+                {
+                    controller->SetPath(dlg.GetPath());
+                }
+
+            });
     }
 
     pathSizer->Add(pathCtrl, 1, wxEXPAND | wxALL, 5);
@@ -598,18 +610,6 @@ void FilePanel::OnPathChanged(wxCommandEvent &)
     }
 
     controller->OnPathChanged(newPath);
-}
-
-
-void FilePanel::OnBrowseButton(wxCommandEvent &)
-{
-    // Открываем диалог выбора директории
-    wxDirDialog dlg(this, "Выберите папку", controller->GetCurrentPath(), wxDD_DEFAULT_STYLE);
-
-    if (dlg.ShowModal() == wxID_OK)
-    {
-        controller->SetPath(dlg.GetPath());
-    }
 }
 
 

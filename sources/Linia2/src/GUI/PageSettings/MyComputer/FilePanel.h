@@ -64,7 +64,6 @@ public:
         ID_PASTE,
         ID_SOURCE_TYPE,
         ID_PATH_CTRL,
-        ID_BROWSE_BTN,
         ID_FILE_LIST
     };
 
@@ -182,7 +181,6 @@ public:
     // Обработчики событий
     void OnSourceTypeChanged(wxCommandEvent &);
     void OnPathChanged(wxCommandEvent &);
-    void OnBrowseButton(wxCommandEvent &);
     void OnItemActivated(wxListEvent &);
     void OnItemSelected(wxListEvent &);
     void OnItemRightClick(wxListEvent &);
