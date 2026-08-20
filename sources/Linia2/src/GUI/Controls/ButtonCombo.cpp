@@ -161,8 +161,77 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, int width,
 
     DrawingButton::SetName(parent->GetName() + "_" + name);
 
-    Bind(wxEVT_BUTTON, &ButtonsCombo::OnButtonClicked, this);
-    Bind(wxEVT_LEFT_DOWN, &ButtonsCombo::OnMouseDown, this);
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
+        {
+            if (labels.size() > 1)
+            {
+                if (left_part_clicked)
+                {
+                    int choice = current_choice + 1;
+
+                    if ((uint)choice >= labels.size())
+                    {
+                        choice = 0;
+                    }
+
+                    SetCurrentSelection(choice);
+                }
+                else
+                {
+                    ButtonPopup *popup = new ButtonPopup(this);
+
+                    wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
+
+                    wxSize size = popup->GetSize();
+
+                    pos.x -= size.x / 2;
+                    pos.y -= size.y / 2;
+
+                    if (GF::IsBoardOPi5Plus())
+                    {
+                        if (pos.x + size.x >= MainWindow::WIDTH)
+                        {
+                            int delta = pos.x + size.x - MainWindow::WIDTH;
+                            pos.x -= delta + 8;
+                        }
+                        else if (pos.x < 5)
+                        {
+                            pos.x = 5;
+                        }
+                    }
+                    else
+                    {
+                        int right_pop = pos.x + size.x;
+                        int right_win = TheMainWindow->GetPosition().x + TheMainWindow->GetSize().x; //-V807
+
+                        if (right_pop >= right_win)
+                        {
+                            int delta = right_pop - right_win;
+                            pos.x -= delta + 8;
+                        }
+                        else if (pos.x < TheMainWindow->GetPosition().x + 5)
+                        {
+                            pos.x = TheMainWindow->GetPosition().x + 5;
+                        }
+                    }
+
+                    popup->Position(pos, wxSize(0, 0));
+                    popup->Popup();
+                    popup->Refresh();
+                    popup->Update();
+                    popup->SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY);
+                } //-V773
+            }
+
+            event.Skip();
+        });
+
+    Bind(wxEVT_LEFT_DOWN, [this](wxMouseEvent &event)
+        {
+            left_part_clicked = event.GetPosition().x < GetSize().x / 2;
+
+            event.Skip();
+        });
 
     title = (type == Type::Text) ? _title : wxString();
 
@@ -171,80 +240,6 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, int width,
     SetCurrentSelection(0);
 
     buttons_in_row = _buttons_in_row;
-}
-
-
-void ButtonsCombo::OnButtonClicked(wxCommandEvent &event)
-{
-    if (labels.size() > 1)
-    {
-        if (left_part_clicked)
-        {
-            int choice = current_choice + 1;
-
-            if ((uint)choice >= labels.size())
-            {
-                choice = 0;
-            }
-
-            SetCurrentSelection(choice);
-        }
-        else
-        {
-            ButtonPopup *popup = new ButtonPopup(this);
-
-            wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
-
-            wxSize size = popup->GetSize();
-
-            pos.x -= size.x / 2;
-            pos.y -= size.y / 2;
-
-            if (GF::IsBoardOPi5Plus())
-            {
-                if (pos.x + size.x >= MainWindow::WIDTH)
-                {
-                    int delta = pos.x + size.x - MainWindow::WIDTH;
-                    pos.x -= delta + 8;
-                }
-                else if (pos.x < 5)
-                {
-                    pos.x = 5;
-                }
-            }
-            else
-            {
-                int right_pop = pos.x + size.x;
-                int right_win = TheMainWindow->GetPosition().x + TheMainWindow->GetSize().x; //-V807
-
-                if (right_pop >= right_win)
-                {
-                    int delta = right_pop - right_win;
-                    pos.x -= delta + 8;
-                }
-                else if (pos.x < TheMainWindow->GetPosition().x + 5)
-                {
-                    pos.x = TheMainWindow->GetPosition().x + 5;
-                }
-            }
-
-            popup->Position(pos, wxSize(0, 0));
-            popup->Popup();
-            popup->Refresh();
-            popup->Update();
-            popup->SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY);
-        } //-V773
-    }
-
-    event.Skip();
-}
-
-
-void ButtonsCombo::OnMouseDown(wxMouseEvent &event)
-{
-    left_part_clicked = event.GetPosition().x < GetSize().x / 2;
-
-    event.Skip();
 }
 
 

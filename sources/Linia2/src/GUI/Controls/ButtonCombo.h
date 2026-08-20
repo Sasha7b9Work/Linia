@@ -80,9 +80,6 @@ private:
     int buttons_in_row = 0;
     bool left_part_clicked = true;      // Если true, то кликнули мышкой в левой части кнопки
     int num_empties = 0;                // Столько добавлено пустых полей перед первым вариантом, чтобы выровнять столбцы по значениям
-
-    void OnButtonClicked(wxCommandEvent &);
-    void OnMouseDown(wxMouseEvent &);
 };
 
 
