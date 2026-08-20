@@ -30,7 +30,6 @@
 // Определение таблицы событий
 wxBEGIN_EVENT_TABLE(FilePanel, wxPanel)
 EVT_COMBOBOX(ID_SOURCE_TYPE, FilePanel::OnSourceTypeChanged)
-EVT_BUTTON(ID_BTN_FTP, FilePanel::OnFTPButtonClick)
 EVT_BUTTON(ID_BTN_BACK, FilePanel::OnBackButtonClick)
 EVT_TEXT(ID_PATH_CTRL, FilePanel::OnPathChanged)
 EVT_BUTTON(ID_BROWSE_BTN, FilePanel::OnBrowseButton)
@@ -1097,74 +1096,77 @@ void FilePanel::CreateSourceButtons()
             });
     }
 
-    if (bmpFTP.IsOk())
     {
-        btnFTP = new wxBitmapButton(this, ID_BTN_FTP, bmpFTP, wxDefaultPosition, wxSize(64, 64));
-    }
-    else
-    {
-        wxBitmap emptyBmp(64, 64);
+        if (bmpFTP.IsOk())
         {
-            wxMemoryDC dc(emptyBmp);
-            dc.SetBackground(*wxWHITE_BRUSH);
-            dc.Clear();
-            dc.SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
-            dc.DrawText("FTP", 18, 22);
-        }
-
-        btnFTP = new wxBitmapButton(this, ID_BTN_FTP, emptyBmp, wxDefaultPosition, wxSize(64, 64));
-    }
-    btnFTP->SetToolTip("FTP соединение");
-}
-
-
-void FilePanel::OnFTPButtonClick(wxCommandEvent &)
-{
-    // Показываем диалог подключения к FTP
-    FTPConnectionDialog dlg(this);
-    if (dlg.ShowModal() == wxID_OK)
-    {
-        wxString server = dlg.GetServer();
-        int port = dlg.GetPort();
-        wxString username = dlg.GetUsername();
-        wxString password = dlg.GetPassword();
-
-        // Создаем FTP контроллер если его еще нет
-        if (!ftpController)
-        {
-            ftpController = std::make_unique<FTPController>(this);
-        }
-
-        // Пытаемся подключиться
-        bool connected = ftpController->Connect(server, username, password, port);
-
-        // Очищаем пароль из памяти сразу после использования
-        dlg.ClearPassword();
-        for (size_t i = 0; i < password.length(); ++i)
-        {
-            password[i] = '\0';
-        }
-        password.Clear();
-
-        if (connected)
-        {
-            sourceType = SOURCE_FTP;
-            panelState = STATE_BROWSING;  // Переходим в режим просмотра каталога
-
-            // Формируем путь для отображения
-            wxString ftpPath = wxString::Format("ftp://%s:%d/", server, port);
-            pathCtrl->SetValue(ftpPath);
-
-            UpdateStatus(wxString::Format("Подключено к FTP: %s", server));
-            UpdatePanelState();
-            RefreshFileList();
+            btnFTP = new wxBitmapButton(this, wxID_ANY, bmpFTP, wxDefaultPosition, wxSize(64, 64));
         }
         else
         {
-            wxMessageBox("Не удалось подключиться к FTP серверу", "Ошибка подключения", wxOK | wxICON_ERROR, this);
+            wxBitmap emptyBmp(64, 64);
+            {
+                wxMemoryDC dc(emptyBmp);
+                dc.SetBackground(*wxWHITE_BRUSH);
+                dc.Clear();
+                dc.SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+                dc.DrawText("FTP", 18, 22);
+            }
+
+            btnFTP = new wxBitmapButton(this, wxID_ANY, emptyBmp, wxDefaultPosition, wxSize(64, 64));
         }
+
+        btnFTP->SetToolTip("FTP соединение");
+
+        btnFTP->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
+            {
+                // Показываем диалог подключения к FTP
+                FTPConnectionDialog dlg(this);
+                if (dlg.ShowModal() == wxID_OK)
+                {
+                    wxString server = dlg.GetServer();
+                    int port = dlg.GetPort();
+                    wxString username = dlg.GetUsername();
+                    wxString password = dlg.GetPassword();
+
+                    // Создаем FTP контроллер если его еще нет
+                    if (!ftpController)
+                    {
+                        ftpController = std::make_unique<FTPController>(this);
+                    }
+
+                    // Пытаемся подключиться
+                    bool connected = ftpController->Connect(server, username, password, port);
+
+                    // Очищаем пароль из памяти сразу после использования
+                    dlg.ClearPassword();
+                    for (size_t i = 0; i < password.length(); ++i)
+                    {
+                        password[i] = '\0';
+                    }
+                    password.Clear();
+
+                    if (connected)
+                    {
+                        sourceType = SOURCE_FTP;
+                        panelState = STATE_BROWSING;  // Переходим в режим просмотра каталога
+
+                        // Формируем путь для отображения
+                        wxString ftpPath = wxString::Format("ftp://%s:%d/", server, port);
+                        pathCtrl->SetValue(ftpPath);
+
+                        UpdateStatus(wxString::Format("Подключено к FTP: %s", server));
+                        UpdatePanelState();
+                        RefreshFileList();
+                    }
+                    else
+                    {
+                        wxMessageBox("Не удалось подключиться к FTP серверу", "Ошибка подключения", wxOK | wxICON_ERROR, this);
+                    }
+                }
+            });
     }
 }
+
 
 void FilePanel::OnBackButtonClick(wxCommandEvent &)
 {
