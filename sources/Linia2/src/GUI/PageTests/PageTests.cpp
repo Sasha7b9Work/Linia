@@ -13,6 +13,9 @@
 #include "GUI/Controls/Splitter.h"
 #include "GUI/Controls/Panel.h"
 #include "Settings/FileJSON.h"
+#pragma warning(push, 0)
+    #include <wx/sizer.h>
+#pragma warning(pop)
 
 
 PageTests *ThePageTests = nullptr;

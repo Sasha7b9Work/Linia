@@ -1,7 +1,7 @@
 ﻿# 2023/07/04 15:47:47 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (Linia2)
 
-set(CMAKE_UNITY_BUILD ON)
+set(CMAKE_UNITY_BUILD OFF)
 
 set(CMAKE_UNITY_BUILD_BATCH_SIZE 20)
 
@@ -91,6 +91,7 @@ file(GLOB GUI_MEAS_GRAPHICS             src/GUI/PageMeasures/Graphics/*.*)
 file(GLOB GUI_MEAS_GRID                 src/GUI/PageMeasures/Grid/*.*)
 file(GLOB GUI_REPORTS                   src/GUI/PageReports/*.*)
 file(GLOB GUI_SETTINGS                  src/GUI/PageSettings/*.*)
+file(GLOB GUI_SETTINGS_MYCOMPUTER       src/GUI/PageSettings/MyComputer/*.*)
 file(GLOB GUI_TABLES                    src/GUI/PageTables/*.*)
 file(GLOB GUI_TESTS                     src/GUI/PageTests/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
@@ -138,6 +139,7 @@ source_group(GUI/PageMeasures/Graphics        FILES ${GUI_MEAS_GRAPHICS})
 source_group(GUI/PageMeasures/Grid            FILES ${GUI_MEAS_GRID})
 source_group(GUI/PageReports                  FILES ${GUI_REPORTS})
 source_group(GUI/PageSettings                 FILES ${GUI_SETTINGS})
+source_group(GUI/PageSettings/MyComputer      FILES ${GUI_SETTINGS_MYCOMPUTER})
 source_group(GUI/PageTables                   FILES ${GUI_TABLES})
 source_group(GUI/PageTests                    FILES ${GUI_TESTS})
 source_group(Settings                         FILES ${SETTINGS})
@@ -175,6 +177,7 @@ add_executable(${PROJECT_NAME}
     ${GUI_MEAS_GRID}
     ${GUI_REPORTS}
     ${GUI_SETTINGS}
+    ${GUI_SETTINGS_MYCOMPUTER}
     ${GUI_TABLES}
     ${GUI_TESTS}
     ${SETTINGS}
