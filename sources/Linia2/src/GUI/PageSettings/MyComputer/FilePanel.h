@@ -175,8 +175,6 @@ public:
         HandleRefresh(event);
     }
 
-    // Обработчики событий
-    void OnPanelClick(wxMouseEvent &);
     void OnPanelFocus(wxFocusEvent &);
     void OnKeyDown(wxKeyEvent &);
 
