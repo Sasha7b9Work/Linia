@@ -8,7 +8,6 @@
     #include <wx/textctrl.h>
     #include <wx/listctrl.h>
     #include <wx/combobox.h>
-    #include <wx/bmpbuttn.h>
     #include <wx/sizer.h>
 #pragma warning(pop)
 
@@ -162,14 +161,14 @@ private:
     bool CopyFileBetweenSystems(const wxString &sourcePath, FileSystemType, const wxString &destPath, FileSystemType destType, wxWindow *parent = nullptr);
 
     DisplayMode displayMode;
-    PanelState panelState{ STATE_SELECTION };   // Текущее состояние панели
+    PanelState panelState{ STATE_SELECTION };       // Текущее состояние панели
     wxComboBox *comboTypeSource = nullptr;
     ButtonBitmap *btnLocal = nullptr;
     ButtonBitmap *btnFTP = nullptr;
     ButtonBitmap *btnBack = nullptr;                // Кнопка возврата
-    wxBoxSizer *buttonsSizer = nullptr;         // Сайзер для кнопок выбора источника
+    wxBoxSizer *buttonsSizer = nullptr;             // Сайзер для кнопок выбора источника
     wxTextCtrl *pathCtrl = nullptr;
-    wxButton *browseBtn = nullptr;
+    ButtonBitmap *browseBtn = nullptr;
     wxListCtrl *fileList = nullptr;
     // Удаляем указатели на кнопки
     std::unique_ptr<FilePanelController> controller;

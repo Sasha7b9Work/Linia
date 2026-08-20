@@ -387,15 +387,7 @@ void FilePanel::CreateControls()
     }
 
     {
-        wxBitmap &dirBmp = Bitmap::Get("directory_open.bmp").GetBitmap();
-        if (dirBmp.IsOk())
-        {
-            browseBtn = new wxBitmapButton(this, wxID_ANY, dirBmp, wxDefaultPosition);
-        }
-        else
-        {
-            browseBtn = new wxButton(this, wxID_ANY, "...", wxDefaultPosition);
-        }
+        browseBtn = new ButtonBitmap(this, wxDefaultSize, "directory_open.bmp", "");
 
         browseBtn->SetToolTip("Выбрать папку");
 
