@@ -30,12 +30,6 @@
 // Определение таблицы событий
 wxBEGIN_EVENT_TABLE(FilePanel, wxPanel)
 // ТОЛЬКО обработчики меню - удалить дублирующиеся EVT_BUTTON
-EVT_MENU(ID_COPY, FilePanel::OnCopy)
-EVT_MENU(ID_MOVE, FilePanel::OnMove)
-EVT_MENU(ID_PASTE, FilePanel::OnPaste)
-EVT_MENU(ID_DELETE, FilePanel::OnDelete)
-EVT_MENU(ID_CREATE_FOLDER, FilePanel::OnCreateFolder)
-EVT_MENU(ID_REFRESH, FilePanel::OnRefresh)
 EVT_CHAR_HOOK(FilePanel::OnKeyDown)
 wxEND_EVENT_TABLE()
 
@@ -346,26 +340,53 @@ void FilePanel::CreateControls()
             {
                 wxMenu menu;
 
-                auto appendWithIcon = [&](wxMenu &m, int id, const wxString &label, const wxString &iconFile)
+                auto appendWithIcon = [&](wxMenu &m, const wxString &label, const wxString &iconFile, std::function<void(wxCommandEvent &)> handler)
                     {
+                        int id = wxNewId();
+
                         wxMenuItem *item = new wxMenuItem(&m, id, label);
                         wxBitmap &bmp = Bitmap::Get(iconFile).GetBitmap();
+
                         if (bmp.IsOk())
                         {
                             wxImage img = bmp.ConvertToImage();
                             img.Rescale(16, 16, wxIMAGE_QUALITY_HIGH);
                             item->SetBitmap(wxBitmap(img));
                         }
+
                         m.Append(item);
+
+                        m.Bind(wxEVT_MENU, [handler](wxCommandEvent &event)
+                            {
+                                handler(event);
+                            }, id);
                     };
 
-                appendWithIcon(menu, ID_COPY, "Копировать (Ctrl+C)", "edit-copy.bmp");
-                appendWithIcon(menu, ID_MOVE, "Вырезать (Ctrl+X)", "edit-cut.bmp");
-                appendWithIcon(menu, ID_PASTE, "Вставить (Ctrl+V)", "edit-paste.bmp");
-                appendWithIcon(menu, ID_DELETE, "Удалить (Del)", "edit-delete.bmp");
+                appendWithIcon(menu, "Копировать (Ctrl+C)", "edit-copy.bmp", [this](wxCommandEvent &event)
+                    {
+                        HandleCopyOperation(event);
+                    });
+                appendWithIcon(menu, "Вырезать (Ctrl+X)", "edit-cut.bmp", [this](wxCommandEvent &event)
+                    {
+                        HandleMoveOperation(event);
+                    });
+                appendWithIcon(menu, "Вставить (Ctrl+V)", "edit-paste.bmp", [this](wxCommandEvent &event)
+                    {
+                        HandlePasteOperation(event);
+                    });
+                appendWithIcon(menu, "Удалить (Del)", "edit-delete.bmp", [this](wxCommandEvent &event)
+                    {
+                        HandleDeleteOperation(event);
+                    });
                 menu.AppendSeparator();
-                appendWithIcon(menu, ID_CREATE_FOLDER, "Создать папку", "folder-new.bmp");
-                appendWithIcon(menu, ID_REFRESH, "Обновить", "view-refresh.bmp");
+                appendWithIcon(menu, "Создать папку", "folder-new.bmp", [this](wxCommandEvent &event)
+                    {
+                        HandleCreateFolder(event);
+                    });
+                appendWithIcon(menu, "Обновить", "view-refresh.bmp", [this](wxCommandEvent &event)
+                    {
+                        HandleRefresh(event);
+                    });
 
                 PopupMenu(&menu);
             });

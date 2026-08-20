@@ -53,17 +53,6 @@ public:
     FilePanel(wxWindow *, DisplayMode mode = MODE_NONE);
     virtual ~FilePanel();
 
-    // Удаляем идентификаторы кнопок, оставляем только меню
-    enum
-    {
-        ID_COPY = wxID_HIGHEST + 1,
-        ID_MOVE,
-        ID_DELETE,
-        ID_CREATE_FOLDER,
-        ID_REFRESH,
-        ID_PASTE
-    };
-
     void RefreshFileList()
     {
         controller->RefreshFileList();
@@ -147,32 +136,6 @@ public:
     FilePanelOperations *GetOperations() const
     {
         return operations.get();
-    }
-
-    // Обработчики событий для контекстного меню
-    void OnCopy(wxCommandEvent &event)
-    {
-        HandleCopyOperation(event);
-    }
-    void OnMove(wxCommandEvent &event)
-    {
-        HandleMoveOperation(event);
-    }
-    void OnPaste(wxCommandEvent &event)
-    {
-        HandlePasteOperation(event);
-    }
-    void OnDelete(wxCommandEvent &event)
-    {
-        HandleDeleteOperation(event);
-    }
-    void OnCreateFolder(wxCommandEvent &event)
-    {
-        HandleCreateFolder(event);
-    }
-    void OnRefresh(wxCommandEvent &event)
-    {
-        HandleRefresh(event);
     }
 
     void OnKeyDown(wxKeyEvent &);
