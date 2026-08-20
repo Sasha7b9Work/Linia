@@ -38,5 +38,5 @@ private:
     FilePanel *view;
     wxString currentPath;
 
-    bool m_updatingPath = false;
+    bool updatingPath = false;
 };

@@ -147,7 +147,7 @@ void FilePanelController::PopulateFTPFileList()
 
 void FilePanelController::SetPath(const wxString &path)
 {
-    if (m_updatingPath) return;  // Предотвращаем рекурсию
+    if (updatingPath) return;  // Предотвращаем рекурсию
 
     // Для FTP обрабатываем путь отдельно
     if (view->GetSourceType() == FilePanel::SOURCE_FTP)
@@ -155,7 +155,7 @@ void FilePanelController::SetPath(const wxString &path)
         FTPController *ftpCtrl = view->GetFTPController();
         if (ftpCtrl && ftpCtrl->IsConnected())
         {
-            m_updatingPath = true;
+            updatingPath = true;
 
             // Извлекаем путь из FTP URL
             wxString ftpPath = path;
@@ -197,7 +197,7 @@ void FilePanelController::SetPath(const wxString &path)
                 PopulateFileList();
             }
 
-            m_updatingPath = false;
+            updatingPath = false;
         }
         return;
     }
@@ -212,7 +212,7 @@ void FilePanelController::SetPath(const wxString &path)
         return;  // Не пытаемся установить несуществующий путь
     }
 
-    m_updatingPath = true;
+    updatingPath = true;
     currentPath = safePath;
 
     wxTextCtrl *pathCtrl = view->GetPathCtrl();
@@ -222,7 +222,7 @@ void FilePanelController::SetPath(const wxString &path)
     }
 
     PopulateFileList();
-    m_updatingPath = false;
+    updatingPath = false;
 }
 
 void FilePanelController::AddDirectoryItem(const wxString &name, const wxString &displayName)
@@ -301,7 +301,7 @@ bool FilePanelController::HasSelectedFiles() const
 
 void FilePanelController::OnPathChanged(const wxString &newPath)
 {
-    if (m_updatingPath) return;  // Игнорируем, если уже обновляем
+    if (updatingPath) return;  // Игнорируем, если уже обновляем
     SetPath(newPath);
 }
 
