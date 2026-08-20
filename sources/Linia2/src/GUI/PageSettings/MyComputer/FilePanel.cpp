@@ -29,7 +29,6 @@
 
 // Определение таблицы событий
 wxBEGIN_EVENT_TABLE(FilePanel, wxPanel)
-EVT_TEXT(ID_PATH_CTRL, FilePanel::OnPathChanged)
 EVT_LIST_ITEM_ACTIVATED(ID_FILE_LIST, FilePanel::OnItemActivated)
 EVT_LIST_ITEM_SELECTED(ID_FILE_LIST, FilePanel::OnItemSelected)
 EVT_LIST_ITEM_RIGHT_CLICK(ID_FILE_LIST, FilePanel::OnItemRightClick)
@@ -265,7 +264,21 @@ void FilePanel::CreateControls()
         }
     }
 
-    pathCtrl = new wxTextCtrl(this, ID_PATH_CTRL, controller->GetCurrentPath(), wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+    {
+        pathCtrl = new wxTextCtrl(this, wxID_ANY, controller->GetCurrentPath(), wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+
+        pathCtrl->Bind(wxEVT_TEXT, [this](wxCommandEvent &)
+            {
+                wxString newPath = pathCtrl->GetValue();
+
+                if (newPath.IsEmpty())
+                {
+                    return;
+                }
+
+                controller->OnPathChanged(newPath);
+            });
+    }
 
     {
         wxBitmap &dirBmp = Bitmap::Get("directory_open.bmp").GetBitmap();
@@ -607,19 +620,6 @@ bool FilePanel::CopyFileBetweenSystems(const wxString &sourcePath, FileSystemTyp
     }
 
     return false;
-}
-
-
-void FilePanel::OnPathChanged(wxCommandEvent &)
-{
-    wxString newPath = pathCtrl->GetValue();
-
-    if (newPath.IsEmpty())
-    {
-        return;
-    }
-
-    controller->OnPathChanged(newPath);
 }
 
 

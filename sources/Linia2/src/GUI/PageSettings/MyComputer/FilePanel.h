@@ -62,7 +62,6 @@ public:
         ID_CREATE_FOLDER,
         ID_REFRESH,
         ID_PASTE,
-        ID_PATH_CTRL,
         ID_FILE_LIST
     };
 
@@ -178,7 +177,6 @@ public:
     }
 
     // Обработчики событий
-    void OnPathChanged(wxCommandEvent &);
     void OnItemActivated(wxListEvent &);
     void OnItemSelected(wxListEvent &);
     void OnItemRightClick(wxListEvent &);
