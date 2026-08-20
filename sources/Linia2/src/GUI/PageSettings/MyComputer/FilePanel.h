@@ -73,23 +73,23 @@ public:
 
     void RefreshFileList()
     {
-        m_controller->RefreshFileList();
+        controller->RefreshFileList();
     }
     void SetPath(const wxString &path)
     {
-        m_controller->SetPath(path);
+        controller->SetPath(path);
     }
     wxString GetCurrentPath() const
     {
-        return m_controller->GetCurrentPath();
+        return controller->GetCurrentPath();
     }
     wxArrayString GetSelectedFiles() const
     {
-        return m_controller->GetSelectedFiles();
+        return controller->GetSelectedFiles();
     }
     bool HasSelectedFiles() const
     {
-        return m_controller->HasSelectedFiles();
+        return controller->HasSelectedFiles();
     }
 
     void SetActive(bool active);
@@ -153,7 +153,7 @@ public:
     // Доступ к объекту операций
     FilePanelOperations *GetOperations() const
     {
-        return m_operations.get();
+        return operations.get();
     }
 
     // Обработчики событий для контекстного меню
@@ -231,8 +231,8 @@ private:
     wxButton *browseBtn = nullptr;
     wxListCtrl *fileList = nullptr;
     // Удаляем указатели на кнопки
-    std::unique_ptr<FilePanelController> m_controller;
-    std::unique_ptr<FilePanelOperations> m_operations;
+    std::unique_ptr<FilePanelController> controller;
+    std::unique_ptr<FilePanelOperations> operations;
     std::unique_ptr<FTPController> m_ftpController;  // Контроллер FTP
     wxString m_ftpInitialDirectory;  // Начальный каталог FTP для ограничения навигации
     bool m_isActive;

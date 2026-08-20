@@ -37,7 +37,7 @@ public:
     }
     bool CanRedo() const
     {
-        return m_currentIndex < m_operations.size();
+        return m_currentIndex < operations.size();
     }
 
     FileOperation Undo();
@@ -47,7 +47,7 @@ public:
 private:
     UndoManager() : m_currentIndex(0) { }
 
-    std::vector<FileOperation> m_operations;
+    std::vector<FileOperation> operations;
     size_t m_currentIndex;
     static const size_t MAX_OPERATIONS = 50;
 };

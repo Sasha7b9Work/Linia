@@ -55,8 +55,8 @@ wxEND_EVENT_TABLE()
 FilePanel::FilePanel(wxWindow *parent, DisplayMode mode)
     : wxPanel(parent, wxID_ANY),
     displayMode(mode),
-    m_controller(std::make_unique<FilePanelController>(this)),
-    m_operations(std::make_unique<FilePanelOperations>(this)),
+    controller(std::make_unique<FilePanelController>(this)),
+    operations(std::make_unique<FilePanelOperations>(this)),
     m_ftpController(nullptr),
     m_isActive(false),
     m_sourceType(SOURCE_LOCAL)
@@ -73,7 +73,7 @@ FilePanel::FilePanel(wxWindow *parent, DisplayMode mode)
     else
     {
         // Для других режимов инициализируем список файлов
-        m_controller->RefreshFileList();
+        controller->RefreshFileList();
     }
 }
 
@@ -84,7 +84,7 @@ FilePanel::~FilePanel()
     {
         m_ftpController->Disconnect();
     }
-    // Ресурсы (m_controller, m_ftpController) освобождаются автоматически через std::unique_ptr
+    // Ресурсы (controller, m_ftpController) освобождаются автоматически через std::unique_ptr
 }
 
 bool FilePanel::ConnectToFTP(const wxString &host, int port,
@@ -126,7 +126,7 @@ void FilePanel::DisconnectFTP()
         m_ftpController.reset();
         m_ftpInitialDirectory.Clear();
         m_sourceType = SOURCE_LOCAL;
-        m_controller->SetPath(wxGetCwd());
+        controller->SetPath(wxGetCwd());
         RefreshFileList();
         UpdateStatus("Отключено от FTP");
     }
@@ -142,9 +142,9 @@ void FilePanel::SetActive(bool active)
     m_isActive = active;
     UpdateVisualState();
     // Обновляем статус при активации панели
-    if (m_isActive && m_controller->HasSelectedFiles())
+    if (m_isActive && controller->HasSelectedFiles())
     {
-        m_controller->UpdateStatusForSelection();
+        controller->UpdateStatusForSelection();
     }
     else if (m_isActive)
     {
@@ -227,7 +227,7 @@ void FilePanel::CreateControls()
         pathSizer->Add(btnBack, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
     }
 
-    pathCtrl = new wxTextCtrl(this, ID_PATH_CTRL, m_controller->GetCurrentPath(),
+    pathCtrl = new wxTextCtrl(this, ID_PATH_CTRL, controller->GetCurrentPath(),
         wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
     {
         wxBitmap &dirBmp = Bitmap::Get("directory_open.bmp").GetBitmap();
@@ -318,7 +318,7 @@ wxString FilePanel::GetCurrentDirectoryInternal() const
     {
     case SOURCE_LOCAL:
     case SOURCE_USB:
-        return m_controller->GetCurrentPath();
+        return controller->GetCurrentPath();
 
     case SOURCE_FTP:
         if (m_ftpController)
@@ -327,7 +327,7 @@ wxString FilePanel::GetCurrentDirectoryInternal() const
         }
         return wxEmptyString;
     }
-    return m_controller->GetCurrentPath();
+    return controller->GetCurrentPath();
 }
 
 bool FilePanel::GetDirectoryContentsInternal(wxArrayString &files, wxArrayString &dirs)
@@ -339,7 +339,7 @@ bool FilePanel::GetDirectoryContentsInternal(wxArrayString &files, wxArrayString
     {
     case SOURCE_LOCAL:
     case SOURCE_USB: {
-        wxString currentPath = m_controller->GetCurrentPath();
+        wxString currentPath = controller->GetCurrentPath();
         wxDir dir(currentPath);
         if (!dir.IsOpened()) return false;
 
@@ -377,7 +377,7 @@ bool FilePanel::CreateDirectoryInternal(const wxString &name)
     {
     case SOURCE_LOCAL:
     case SOURCE_USB: {
-        wxString fullPath = wxFileName(m_controller->GetCurrentPath(), name).GetFullPath();
+        wxString fullPath = wxFileName(controller->GetCurrentPath(), name).GetFullPath();
         return wxMkdir(fullPath);
     }
 
@@ -532,23 +532,23 @@ void FilePanel::OnPathChanged(wxCommandEvent & /*event*/)
 {
     wxString newPath = pathCtrl->GetValue();
     if (newPath.IsEmpty()) return;  // Игнорируем пустой путь
-    m_controller->OnPathChanged(newPath);
+    controller->OnPathChanged(newPath);
 }
 
 void FilePanel::OnBrowseButton(wxCommandEvent & /*event*/)
 {
     // Открываем диалог выбора директории
-    wxDirDialog dlg(this, "Выберите папку", m_controller->GetCurrentPath(), wxDD_DEFAULT_STYLE);
+    wxDirDialog dlg(this, "Выберите папку", controller->GetCurrentPath(), wxDD_DEFAULT_STYLE);
     if (dlg.ShowModal() == wxID_OK)
     {
-        m_controller->SetPath(dlg.GetPath());
+        controller->SetPath(dlg.GetPath());
     }
 }
 
 void FilePanel::OnItemActivated(wxListEvent &event)
 {
     // Двойной клик по элементу списка (файл или папка)
-    m_controller->OnItemActivated(event.GetIndex());
+    controller->OnItemActivated(event.GetIndex());
 }
 
 void FilePanel::OnItemSelected(wxListEvent &event)
@@ -560,7 +560,7 @@ void FilePanel::OnItemSelected(wxListEvent &event)
         activateEvent->SetEventObject(this);
         GetParent()->GetEventHandler()->QueueEvent(activateEvent);
     }
-    m_controller->OnItemSelected(event.GetIndex());
+    controller->OnItemSelected(event.GetIndex());
 }
 
 void FilePanel::OnItemRightClick(wxListEvent & /*event*/)
@@ -595,48 +595,48 @@ void FilePanel::OnItemRightClick(wxListEvent & /*event*/)
 
 void FilePanel::HandleCopyOperation(wxCommandEvent &event)
 {
-    m_operations->HandleCopyOperation(event);
+    operations->HandleCopyOperation(event);
 }
 
 void FilePanel::HandleMoveOperation(wxCommandEvent &event)
 {
-    m_operations->HandleMoveOperation(event);
+    operations->HandleMoveOperation(event);
 }
 
 void FilePanel::HandlePasteOperation(wxCommandEvent &event)
 {
-    m_operations->HandlePasteOperation(event);
+    operations->HandlePasteOperation(event);
 }
 
 void FilePanel::HandlePasteOperationToTarget(FilePanel *targetPanel)
 {
-    m_operations->HandlePasteOperationToTarget(targetPanel);
+    operations->HandlePasteOperationToTarget(targetPanel);
 }
 
 void FilePanel::HandleDeleteOperation(wxCommandEvent &event)
 {
-    m_operations->HandleDeleteOperation(event);
+    operations->HandleDeleteOperation(event);
 }
 
 void FilePanel::HandleCreateFolder(wxCommandEvent &event)
 {
-    m_operations->HandleCreateFolder(event);
+    operations->HandleCreateFolder(event);
 }
 
 void FilePanel::HandleRefresh(wxCommandEvent &event)
 {
-    m_operations->HandleRefresh(event);
+    operations->HandleRefresh(event);
 }
 
 void FilePanel::OnBeginDrag(wxListEvent & /*event*/)
 {
     // Инициируем drag-and-drop для выбранных файлов
-    if (!m_controller->HasSelectedFiles())
+    if (!controller->HasSelectedFiles())
     {
         return; // Ничего не выбрано
     }
 
-    wxArrayString selectedFiles = m_controller->GetSelectedFiles();
+    wxArrayString selectedFiles = controller->GetSelectedFiles();
     if (selectedFiles.IsEmpty())
     {
         return;
@@ -648,7 +648,7 @@ void FilePanel::OnBeginDrag(wxListEvent & /*event*/)
     {
         if (file != "..")
         {
-            wxFileName fullPath(m_controller->GetCurrentPath(), file);
+            wxFileName fullPath(controller->GetCurrentPath(), file);
             data.AddFile(fullPath.GetFullPath());
         }
     }
@@ -741,7 +741,7 @@ void FilePanel::OnKeyDown(wxKeyEvent &event)
     else if (event.GetKeyCode() == WXK_F2)
     {
         // Переименование выделенного файла/папки
-        if (!fileList || !m_controller)
+        if (!fileList || !controller)
         {
             event.Skip(); return;
         }
@@ -764,7 +764,7 @@ void FilePanel::OnKeyDown(wxKeyEvent &event)
         wxString newName = dlg.GetValue().Trim().Trim(false);
         if (newName.IsEmpty() || newName == oldName) return;
 
-        wxString basePath = m_controller->GetCurrentPath();
+        wxString basePath = controller->GetCurrentPath();
         wxString sep = wxFileName::GetPathSeparator();
         if (m_sourceType == SOURCE_FTP) sep = "/";
 
@@ -773,7 +773,7 @@ void FilePanel::OnKeyDown(wxKeyEvent &event)
 
         if (RenameFileInternal(oldPath, newPath))
         {
-            m_controller->RefreshFileList();
+            controller->RefreshFileList();
             UpdateStatus("Переименовано: " + oldName + " → " + newName);
         }
         else
@@ -861,12 +861,12 @@ void FilePanel::OnColumnClick(wxListEvent &event)
 
 void FilePanel::HandleUndo()
 {
-    m_operations->HandleUndo();
+    operations->HandleUndo();
 }
 
 void FilePanel::HandleRedo()
 {
-    m_operations->HandleRedo();
+    operations->HandleRedo();
 }
 
 // Методы для работы с типом источника данных
