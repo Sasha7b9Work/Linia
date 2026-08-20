@@ -17,7 +17,7 @@ PageSettings::PageSettings(Notebook *board, PageSettings *&global) :
     BoxSizerHor *sizer1 = new BoxSizerHor();
 
     {
-        btnFileManager = new Button(this, "Total Commander");
+        btnFileManager = new Button(this, L("Мой компьютер"));
     }
 
     sizer_main->AddSizer(sizer1);

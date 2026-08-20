@@ -44,22 +44,22 @@ void FTPConnectionDialog::CreateControls()
     // Сервер
     wxBoxSizer *serverSizer = new wxBoxSizer(wxHORIZONTAL);
     serverSizer->Add(new wxStaticText(this, wxID_ANY, "Сервер:", wxDefaultPosition, wxSize(100, -1)), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
-    serverCtrl = new wxTextCtrl(this, wxID_ANY, "");
-    serverSizer->Add(serverCtrl, 1, wxEXPAND | wxALL, 5);
+    txtServer = new wxTextCtrl(this, wxID_ANY, "");
+    serverSizer->Add(txtServer, 1, wxEXPAND | wxALL, 5);
     mainSizer->Add(serverSizer, 0, wxEXPAND | wxALL, 5);
 
     // Порт (по умолчанию 22 для FTP)
     wxBoxSizer *portSizer = new wxBoxSizer(wxHORIZONTAL);
     portSizer->Add(new wxStaticText(this, wxID_ANY, "Порт:", wxDefaultPosition, wxSize(100, -1)), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
-    portCtrl = new wxTextCtrl(this, wxID_ANY, "22");
-    portSizer->Add(portCtrl, 1, wxEXPAND | wxALL, 5);
+    txtPort = new wxTextCtrl(this, wxID_ANY, "22");
+    portSizer->Add(txtPort, 1, wxEXPAND | wxALL, 5);
     mainSizer->Add(portSizer, 0, wxEXPAND | wxALL, 5);
 
     // Имя пользователя
     wxBoxSizer *userSizer = new wxBoxSizer(wxHORIZONTAL);
     userSizer->Add(new wxStaticText(this, wxID_ANY, "Пользователь:", wxDefaultPosition, wxSize(100, -1)), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
-    usernameCtrl = new wxTextCtrl(this, wxID_ANY, "");
-    userSizer->Add(usernameCtrl, 1, wxEXPAND | wxALL, 5);
+    txtUserName = new wxTextCtrl(this, wxID_ANY, "");
+    userSizer->Add(txtUserName, 1, wxEXPAND | wxALL, 5);
     mainSizer->Add(userSizer, 0, wxEXPAND | wxALL, 5);
 
     // Пароль
@@ -80,8 +80,8 @@ void FTPConnectionDialog::CreateControls()
         btnOK = new Button(this, L("Подключить"));
         btnOK->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
             {
-                server = serverCtrl->GetValue();
-                wxString portStr = portCtrl->GetValue();
+                server = txtServer->GetValue();
+                wxString portStr = txtPort->GetValue();
                 long portLong;
                 if (portStr.ToLong(&portLong) && portLong >= 1 && portLong <= 65535)
                 {
@@ -92,7 +92,7 @@ void FTPConnectionDialog::CreateControls()
                     wxMessageBox("Порт должен быть числом от 1 до 65535", "Ошибка", wxOK | wxICON_ERROR);
                     return;
                 }
-                username = usernameCtrl->GetValue();
+                username = txtUserName->GetValue();
                 password = passwordCtrl->GetValue();
 
                 if (server.IsEmpty())

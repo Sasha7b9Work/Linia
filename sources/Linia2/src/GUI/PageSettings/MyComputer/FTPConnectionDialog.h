@@ -39,9 +39,9 @@ private:
 
     void CreateControls();
 
-    wxTextCtrl *serverCtrl = nullptr;
-    wxTextCtrl *portCtrl = nullptr;
-    wxTextCtrl *usernameCtrl = nullptr;
+    wxTextCtrl *txtServer = nullptr;
+    wxTextCtrl *txtPort = nullptr;
+    wxTextCtrl *txtUserName = nullptr;
     wxTextCtrl *passwordCtrl = nullptr;
 
     Button *btnOK = nullptr;
