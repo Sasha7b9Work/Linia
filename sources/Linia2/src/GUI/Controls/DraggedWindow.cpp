@@ -274,9 +274,9 @@ DraggedDialog::DraggedDialog(const wxString &_title, const wxSize &_size) : Drag
 {
     SetWindowStyleFlag(wxFRAME_FLOAT_ON_PARENT | wxBORDER_SIMPLE);
 
-    m_parent = GetParent();
-    m_modalActive = false;
-    m_modalResult = wxID_CANCEL;
+    parent = GetParent();
+    modalActive = false;
+    modalResult = wxID_CANCEL;
 
     Bind(wxEVT_CLOSE_WINDOW, &DraggedDialog::OnEventClose, this);
 
@@ -294,20 +294,20 @@ int DraggedDialog::ShowModal()
 {
     TheAutoCursors->Ban();
 
-    m_modalActive = true;
-    m_modalResult = wxID_CANCEL;
+    modalActive = true;
+    modalResult = wxID_CANCEL;
 
     // Блокируем родителя
-    if (m_parent)
+    if (parent)
     {
-        m_parent->Disable();
+        parent->Disable();
     }
 
     // Показываем окно с XFCE фиксом
     ShowWithXFCEFix();
 
     // Простой цикл ожидания
-    while (m_modalActive)
+    while (modalActive)
     {
         wxYield();          // Обрабатываем события
         wxMilliSleep(10);   // Небольшая задержка чтобы не нагружать CPU
@@ -317,7 +317,7 @@ int DraggedDialog::ShowModal()
 
     position->Set(wxFrame::GetPosition());
 
-    return m_modalResult;
+    return modalResult;
 }
 
 
@@ -349,28 +349,28 @@ void DraggedDialog::OnEventClose(wxCloseEvent &)
 
 void DraggedDialog::OnOK(wxCommandEvent &)
 {
-    m_modalResult = wxID_OK;
+    modalResult = wxID_OK;
     CloseModal();
 }
 
 
 void DraggedDialog::OnCancel(wxCommandEvent &)
 {
-    m_modalResult = wxID_CANCEL;
+    modalResult = wxID_CANCEL;
     CloseModal();
 }
 
 
 void DraggedDialog::CloseModal()
 {
-    m_modalActive = false;
+    modalActive = false;
     Hide();
 
     // Разблокируем родителя
-    if (m_parent)
+    if (parent)
     {
-        m_parent->Enable();
-        m_parent->Raise();  // Поднимаем родительское окно
+        parent->Enable();
+        parent->Raise();  // Поднимаем родительское окно
     }
 }
 

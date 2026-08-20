@@ -17,23 +17,23 @@ Dialog::Dialog(const wxString &_title, const wxPoint &_pos, const wxSize &_size)
 }
 
 
-int Dialog::CreateLabelGroup(wxWindow *parent, int y, const wxString &label)
+int Dialog::CreateLabelGroup(wxWindow *_parent, int y, const wxString &label)
 {
     y += 15;
 
-    new wxStaticLine(parent, wxID_ANY, wxDefaultPosition, { 100, -1 }, wxLI_HORIZONTAL);
+    new wxStaticLine(_parent, wxID_ANY, wxDefaultPosition, { 100, -1 }, wxLI_HORIZONTAL);
 
     y += 7;
 
-    new wxStaticText(parent, wxID_ANY, label);
+    new wxStaticText(_parent, wxID_ANY, label);
 
     return y + 25;
 }
 
 
-int Dialog::CreateRadioButton(wxWindow *parent, int y, wxRadioButton **rb, const wxString &label)
+int Dialog::CreateRadioButton(wxWindow *_parent, int y, wxRadioButton **rb, const wxString &label)
 {
-    *rb = new wxRadioButton(parent, wxID_ANY, label);
+    *rb = new wxRadioButton(_parent, wxID_ANY, label);
 
     return y + 20;
 }

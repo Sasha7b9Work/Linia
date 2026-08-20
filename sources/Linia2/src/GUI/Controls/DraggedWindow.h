@@ -77,9 +77,9 @@ private:
 
     virtual bool Show(bool = true) override;
 
-    bool m_modalActive = false;
-    int m_modalResult = wxID_CANCEL;
-    wxWindow *m_parent = nullptr;
+    bool modalActive = false;
+    int modalResult = wxID_CANCEL;
+    wxWindow *parent = nullptr;
 
     void ShowWithXFCEFix();
 
