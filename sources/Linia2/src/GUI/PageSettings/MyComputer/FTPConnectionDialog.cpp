@@ -9,7 +9,6 @@
 
 
 wxBEGIN_EVENT_TABLE(FTPConnectionDialog, wxDialog)
-EVT_BUTTON(wxID_CANCEL, FTPConnectionDialog::OnCancel)
 wxEND_EVENT_TABLE()
 
 // Безопасная очистка строки — перезаписывает содержимое нулями
@@ -118,18 +117,20 @@ void FTPConnectionDialog::CreateControls()
         buttonSizer->Add(btnOK, 0, wxALL, 5);
     }
 
-    Button *btnCancel = new Button(this, L("Отмена"));
-    btnCancel->SetId(wxID_CANCEL);
-    buttonSizer->Add(btnCancel, 0, wxALL, 5);
+    {
+        btnCancel = new Button(this, L("Отмена"));
+
+        btnCancel->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
+            {
+                EndModal(wxID_CANCEL);
+            });
+        
+        buttonSizer->Add(btnCancel, 0, wxALL, 5);
+    }
 
     mainSizer->Add(buttonSizer, 0, wxEXPAND | wxALL, 10);
 
     SetSizer(mainSizer);
     mainSizer->Fit(this);
     mainSizer->SetSizeHints(this);
-}
-
-void FTPConnectionDialog::OnCancel(wxCommandEvent &)
-{
-    EndModal(wxID_CANCEL);
 }

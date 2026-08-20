@@ -9,6 +9,7 @@
 class FTPConnectionDialog : public wxDialog
 {
 public:
+
     FTPConnectionDialog(wxWindow *);
     ~FTPConnectionDialog();
 
@@ -35,8 +36,8 @@ public:
     void ClearPassword();
 
 private:
+
     void CreateControls();
-    void OnCancel(wxCommandEvent &);
 
     wxTextCtrl *serverCtrl = nullptr;
     wxTextCtrl *portCtrl = nullptr;
@@ -44,6 +45,7 @@ private:
     wxTextCtrl *passwordCtrl = nullptr;
 
     Button *btnOK = nullptr;
+    Button *btnCancel = nullptr;
 
     wxString server;
     int port = 22;
