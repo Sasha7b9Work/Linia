@@ -61,7 +61,23 @@ public:
                 EndModal(wxID_CANCEL);
             });
 
-        Bind(wxEVT_TIMER, &AutoRebootDialog::OnTimer, this);
+        Bind(wxEVT_TIMER, [this](wxTimerEvent &)
+            {
+                countdown--;
+
+                if (countdown <= 0)
+                {
+                    timer->Stop();
+                    // Выполняем действие по достижении нуля
+                    OnCountdownFinished();
+                }
+                else
+                {
+                    // Обновляем текст отсчета
+                    countdownText->SetLabel(wxString::Format(L("Перезагрузка через %d секунд"), countdown));
+                    Layout();
+                }
+            });
     }
 
     ~AutoRebootDialog()
@@ -73,23 +89,6 @@ public:
     }
 
 private:
-    void OnTimer(wxTimerEvent &)
-    {
-        countdown--;
-
-        if (countdown <= 0)
-        {
-            timer->Stop();
-            // Выполняем действие по достижении нуля
-            OnCountdownFinished();
-        }
-        else
-        {
-            // Обновляем текст отсчета
-            countdownText->SetLabel(wxString::Format(L("Перезагрузка через %d секунд"), countdown));
-            Layout();
-        }
-    }
 
     void OnCountdownFinished()
     {
