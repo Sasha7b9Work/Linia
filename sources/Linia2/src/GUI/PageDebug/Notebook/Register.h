@@ -155,7 +155,6 @@ protected:
     // Выбор режима
     void OnEventComboMode(wxCommandEvent &);
     void OnEventToggleButton(wxCommandEvent &);
-    void OnEventButton(wxCommandEvent &);
     void OnEventTimerAutoSend(wxTimerEvent &);
 
     // Все элементы кроме wnd будут установлены в состояние active

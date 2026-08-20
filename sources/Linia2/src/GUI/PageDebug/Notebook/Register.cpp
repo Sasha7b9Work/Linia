@@ -47,7 +47,11 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, const 
 
         btnSend = new Button(this, L("Записать"), size_button);
         btnSend->SetToolTip(L("Однократная засылка в регистр"));
-        btnSend->Bind(wxEVT_BUTTON, &Register::OnEventButton, this);
+        btnSend->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
+            {
+                WriteValue();
+                painter->animation->RunOnce();
+            });
 
         windows.push_back(btnSend);
 
@@ -282,18 +286,6 @@ void Register::OnEventToggleButton(wxCommandEvent &event)
     }
 
     event.Skip();
-}
-
-
-void Register::OnEventButton(wxCommandEvent &event)
-{
-    int id = event.GetId();
-
-    if (id == btnSend->GetId())
-    {
-        WriteValue();
-        painter->animation->RunOnce();
-    }
 }
 
 
