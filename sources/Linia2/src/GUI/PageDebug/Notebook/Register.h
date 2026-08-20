@@ -154,7 +154,6 @@ protected:
     void OnEventComboField(wxCommandEvent &);
     // Выбор режима
     void OnEventToggleButton(wxCommandEvent &);
-    void OnEventTimerAutoSend(wxTimerEvent &);
 
     // Все элементы кроме wnd будут установлены в состояние active
     void SetActiveAcross(bool active, wxWindow *wnd);

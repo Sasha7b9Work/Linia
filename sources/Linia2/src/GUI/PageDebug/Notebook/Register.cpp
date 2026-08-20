@@ -97,7 +97,12 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, const 
 
     SetNamesBits(names);
 
-    Bind(wxEVT_TIMER, &Register::OnEventTimerAutoSend, this);
+    Bind(wxEVT_TIMER, [this](wxTimerEvent &event)
+        {
+            WriteValue();
+
+            event.Skip();
+        });
 
     timerAutoSend.SetOwner(this, timerAutoSend.GetId());
 
@@ -329,14 +334,6 @@ void Register::OnEventToggleButton(wxCommandEvent &event)
 void Register::WriteValue()
 {
     chip->WriteValue(GetValue());
-}
-
-
-void Register::OnEventTimerAutoSend(wxTimerEvent &event)
-{
-    WriteValue();
-
-    event.Skip();
 }
 
 
