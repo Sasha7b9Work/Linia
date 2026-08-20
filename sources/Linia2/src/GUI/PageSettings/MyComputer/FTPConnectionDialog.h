@@ -42,7 +42,7 @@ private:
     wxTextCtrl *txtServer = nullptr;
     wxTextCtrl *txtPort = nullptr;
     wxTextCtrl *txtUserName = nullptr;
-    wxTextCtrl *passwordCtrl = nullptr;
+    wxTextCtrl *txtPassword = nullptr;
 
     Button *btnOK = nullptr;
     Button *btnCancel = nullptr;

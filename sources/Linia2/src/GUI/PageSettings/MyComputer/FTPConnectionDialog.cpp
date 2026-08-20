@@ -65,8 +65,8 @@ void FTPConnectionDialog::CreateControls()
     // Пароль
     wxBoxSizer *passSizer = new wxBoxSizer(wxHORIZONTAL);
     passSizer->Add(new wxStaticText(this, wxID_ANY, "Пароль:", wxDefaultPosition, wxSize(100, -1)), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
-    passwordCtrl = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxTE_PASSWORD);
-    passSizer->Add(passwordCtrl, 1, wxEXPAND | wxALL, 5);
+    txtPassword = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxTE_PASSWORD);
+    passSizer->Add(txtPassword, 1, wxEXPAND | wxALL, 5);
     mainSizer->Add(passSizer, 0, wxEXPAND | wxALL, 5);
 
     // Разделитель
@@ -93,7 +93,7 @@ void FTPConnectionDialog::CreateControls()
                     return;
                 }
                 username = txtUserName->GetValue();
-                password = passwordCtrl->GetValue();
+                password = txtPassword->GetValue();
 
                 if (server.IsEmpty())
                 {
