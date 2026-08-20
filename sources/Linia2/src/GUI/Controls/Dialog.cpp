@@ -2,10 +2,10 @@
 #include "defines.h"
 #include "GUI/Controls/Dialog.h"
 #include "Utils/SystemDepend.h"
+#include "GUI/Controls/StaticText.h"
 #pragma warning(push, 0)
-#include <wx/stattext.h>
-#include <wx/radiobut.h>
-#include <wx/statline.h>
+    #include <wx/radiobut.h>
+    #include <wx/statline.h>
 #pragma warning(pop)
 
 
@@ -25,7 +25,7 @@ int Dialog::CreateLabelGroup(wxWindow *_parent, int y, const wxString &label)
 
     y += 7;
 
-    new wxStaticText(_parent, wxID_ANY, label);
+    new StaticText(_parent, label);
 
     return y + 25;
 }

@@ -1,14 +1,14 @@
 ﻿// 2025/08/13 14:18:41 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/Controls/Panel.h"
+#include "GUI/Controls/StaticText.h"
 #pragma warning(push, 0)
-#include <wx/timer.h>
+    #include <wx/timer.h>
 #pragma warning(pop)
 
 
 class wxSlider;
 class Button;
-class wxStaticText;
 
 
 class SliderInt : public Panel
@@ -28,10 +28,10 @@ private:
     int min = 0;
     int max = 0;
 
-    wxStaticText *text = nullptr;
-    wxSlider     *slider = nullptr;
-    Button       *btnMore = nullptr;
-    Button       *btnLess = nullptr;
+    StaticText *text = nullptr;
+    wxSlider   *slider = nullptr;
+    Button     *btnMore = nullptr;
+    Button     *btnLess = nullptr;
 
     wxTimer timer_less;
     wxTimer timer_more;

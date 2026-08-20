@@ -3,11 +3,11 @@
 #include "Utils/GlobalFunctions.h"
 #include "MainWindow.h"
 #pragma warning(push, 0)
-#include <wx/stattext.h>
-#include <wx/filename.h>
-#include <wx/textctrl.h>
-#include <wx/msgdlg.h>
-#include <wx/stdpaths.h>
+    #include <wx/stattext.h>
+    #include <wx/filename.h>
+    #include <wx/textctrl.h>
+    #include <wx/msgdlg.h>
+    #include <wx/stdpaths.h>
 #pragma warning(pop)
 
 

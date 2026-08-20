@@ -4,9 +4,9 @@
 #include "Utils/GlobalFunctions.h"
 #include "Settings/Configurator.h"
 #pragma warning(push, 0)
-#include <wx/slider.h>
-#include <wx/stattext.h>
-#include <wx/sizer.h>
+    #include <wx/slider.h>
+    #include <wx/stattext.h>
+    #include <wx/sizer.h>
 #pragma warning(pop)
 
 
@@ -32,7 +32,8 @@ SliderInt::SliderInt(wxWindow *parent, int width, int _min, int _max, const wxSt
 
     slider->SetBackgroundColour(parent->GetBackgroundColour());
 
-    text = new wxStaticText(this, wxID_ANY, "0", wxDefaultPosition, { w1, TEXTCNTRL_HEIGHT }, wxALIGN_RIGHT);
+    text = new StaticText(this, "0", { w1, TEXTCNTRL_HEIGHT });
+    text->SetWindowStyleFlag(wxALIGN_RIGHT);
     text->SetMinSize({ w1, TEXTCNTRL_HEIGHT });
 
     wxSize size_button{ 15, 12 };

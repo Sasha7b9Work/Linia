@@ -12,7 +12,6 @@
 #include "GUI/Controls/Bitmap.h"
 #pragma warning(push, 0)
     #include <wx/log.h>
-    #include <wx/stattext.h>
     #include <wx/dir.h>
     #include <wx/dirdlg.h>
     #include <wx/menu.h>

@@ -11,9 +11,8 @@
 #include "GUI/PageDebug/Notebook/AnimatedImpulse.h"
 #include "GUI/Controls/Knob.h"
 #pragma warning(push, 0)
-#include <wx/stattext.h>
-#include <wx/graphics.h>
-#include <wx/sizer.h>
+    #include <wx/graphics.h>
+    #include <wx/sizer.h>
 #pragma warning(pop)
 
 
