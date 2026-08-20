@@ -152,8 +152,6 @@ protected:
     void OnEventCheckBoxBit(wxCommandEvent &);
     // Управление состоянием групп битов
     void OnEventComboField(wxCommandEvent &);
-    // Выбор режима
-    void OnEventToggleButton(wxCommandEvent &);
 
     // Все элементы кроме wnd будут установлены в состояние active
     void SetActiveAcross(bool active, wxWindow *wnd);

@@ -59,7 +59,25 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, const 
 
         btnAutoSend = new ToggleButton(this, L("Автозапись"), size_button);
         btnAutoSend->SetToolTip(L("Автоматическая засылка в регистр 1 раз в секунду"));
-        btnAutoSend->Bind(wxEVT_TOGGLEBUTTON, &Register::OnEventToggleButton, this);
+        btnAutoSend->Bind(wxEVT_TOGGLEBUTTON, [this](wxCommandEvent &event)
+            {
+                SetActiveAcross(event.GetInt() == 0, btnAutoSend);
+
+                if (event.GetInt())
+                {
+                    timerAutoSend.Start(1000);
+                    painter->animation->RunPeriodic();
+                }
+                else
+                {
+                    timerAutoSend.Stop();
+                    painter->animation->Stop();
+                }
+
+                WriteValue();
+
+                event.Skip();
+            });
 
         windows.push_back(btnAutoSend);
 
@@ -300,32 +318,6 @@ void Register::OnEventTextCtrl(wxCommandEvent &event)
     }
 
     UpdateComboCommandsAndModes();
-
-    event.Skip();
-}
-
-
-void Register::OnEventToggleButton(wxCommandEvent &event)
-{
-    int id = event.GetId();
-
-    if (btnAutoSend && id == btnAutoSend->GetId())
-    {
-        SetActiveAcross(event.GetInt() == 0, btnAutoSend);
-
-        if (event.GetInt())
-        {
-            timerAutoSend.Start(1000);
-            painter->animation->RunPeriodic();
-        }
-        else
-        {
-            timerAutoSend.Stop();
-            painter->animation->Stop();
-        }
-
-        WriteValue();
-    }
 
     event.Skip();
 }
