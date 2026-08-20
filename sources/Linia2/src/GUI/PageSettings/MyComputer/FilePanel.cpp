@@ -29,7 +29,6 @@
 
 // Определение таблицы событий
 wxBEGIN_EVENT_TABLE(FilePanel, wxPanel)
-EVT_SET_FOCUS(FilePanel::OnPanelFocus)
 // ТОЛЬКО обработчики меню - удалить дублирующиеся EVT_BUTTON
 EVT_MENU(ID_COPY, FilePanel::OnCopy)
 EVT_MENU(ID_MOVE, FilePanel::OnMove)
@@ -66,6 +65,14 @@ FilePanel::FilePanel(wxWindow *parent, DisplayMode mode):
         {
             SetFocus();
             // Отправляем событие активации асинхронно
+            wxCommandEvent *activateEvent = new wxCommandEvent(wxEVT_FILEPANEL_ACTIVATED, GetId());
+            activateEvent->SetEventObject(this);
+            GetParent()->GetEventHandler()->QueueEvent(activateEvent);
+            event.Skip();
+        });
+
+    Bind(wxEVT_SET_FOCUS, [this](wxFocusEvent &event)
+        {
             wxCommandEvent *activateEvent = new wxCommandEvent(wxEVT_FILEPANEL_ACTIVATED, GetId());
             activateEvent->SetEventObject(this);
             GetParent()->GetEventHandler()->QueueEvent(activateEvent);
@@ -817,15 +824,6 @@ void FilePanel::HandleCreateFolder(wxCommandEvent &event)
 void FilePanel::HandleRefresh(wxCommandEvent &event)
 {
     operations->HandleRefresh(event);
-}
-
-
-void FilePanel::OnPanelFocus(wxFocusEvent &event)
-{
-    wxCommandEvent *activateEvent = new wxCommandEvent(wxEVT_FILEPANEL_ACTIVATED, GetId());
-    activateEvent->SetEventObject(this);
-    GetParent()->GetEventHandler()->QueueEvent(activateEvent);
-    event.Skip();
 }
 
 

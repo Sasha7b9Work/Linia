@@ -175,7 +175,6 @@ public:
         HandleRefresh(event);
     }
 
-    void OnPanelFocus(wxFocusEvent &);
     void OnKeyDown(wxKeyEvent &);
 
 private:
