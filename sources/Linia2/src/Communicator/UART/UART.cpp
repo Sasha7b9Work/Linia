@@ -13,6 +13,15 @@
 #include <sys/ioctl.h>
 
 
+/*
+    Контакт
+    разъёма
+
+       8  UART6_TX_M1    GPIO1_A1
+      10  UART6_RX_M1    GPIO1_A0
+*/
+
+
 #ifdef WIN32
     #pragma warning(push)
     #pragma warning(disable:4365 4389 4996)
