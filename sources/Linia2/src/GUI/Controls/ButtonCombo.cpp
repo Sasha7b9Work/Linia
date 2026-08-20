@@ -17,18 +17,15 @@ DrawingButton::DrawingButton(wxWindow *parent, const wxString &label, const wxSi
 {
     Button::SetBackgroundStyle(wxBG_STYLE_PAINT); // Для избежания мерцания
 
-    Bind(wxEVT_PAINT, &DrawingButton::OnPaint, this);
+    Bind(wxEVT_PAINT, [this](wxPaintEvent &)
+        {
+            if (file_name[0])
+            {
+
+            }
+        });
 
     Button::SetBackgroundColour(GetBackgroundColour().ChangeLightness(LIGHTNESS));
-}
-
-
-void DrawingButton::OnPaint(wxPaintEvent &)
-{
-    if (file_name[0])
-    {
-
-    }
 }
 
 
@@ -82,7 +79,25 @@ public:
             {
                 btn->SetToolTip(GetCombo()->tooltips[i]);
             }
-            btn->Bind(wxEVT_BUTTON, &ButtonPopup::OnButtonClick, this);
+            btn->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
+                {
+                    wxString label = ((ButtonBitmap *)event.GetEventObject())->GetLabel();
+
+                    for (size_t i = 0; i < GetCombo()->labels.size(); i++)
+                    {
+                        if (label == GetCombo()->labels[i])
+                        {
+                            ButtonsCombo *combo = (ButtonsCombo *)GetParent();
+
+                            combo->SetCurrentSelection((int)i);
+
+                            Dismiss();
+
+                            break;
+                        }
+                    }
+
+                });
             gridSizer->Add(btn, 0, wxEXPAND | wxALL, 2);
         }
 
@@ -98,7 +113,15 @@ public:
 
         wxPopupTransientWindow::Fit(); // Автоподбор размера
 
-        GetParent()->Bind(wxEVT_KEY_DOWN, &ButtonPopup::OnKeyDown, this);
+        GetParent()->Bind(wxEVT_KEY_DOWN, [this](wxKeyEvent &event)
+            {
+                if (event.GetKeyCode() != WXK_SPACE)
+                {
+                    Dismiss();
+                }
+
+                event.Skip();
+            });
 
         wxPopupTransientWindow::Refresh();
         wxPopupTransientWindow::Update();
@@ -123,35 +146,6 @@ private:
     ButtonsCombo *GetCombo()
     {
         return (ButtonsCombo *)GetParent();
-    }
-
-    void OnButtonClick(wxCommandEvent &event)
-    {
-        wxString label = ((ButtonBitmap *)event.GetEventObject())->GetLabel();
-
-        for (size_t i = 0; i < GetCombo()->labels.size(); i++)
-        {
-            if (label == GetCombo()->labels[i])
-            {
-                ButtonsCombo *combo = (ButtonsCombo *)GetParent();
-
-                combo->SetCurrentSelection((int)i);
-
-                Dismiss();
-
-                break;
-            }
-        }
-    }
-
-    void OnKeyDown(wxKeyEvent &event)
-    {
-        if (event.GetKeyCode() != WXK_SPACE)
-        {
-            Dismiss();
-        }
-
-        event.Skip();
     }
 };
 

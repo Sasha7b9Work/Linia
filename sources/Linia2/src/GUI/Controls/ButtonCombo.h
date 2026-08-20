@@ -12,8 +12,6 @@ public:
 private:
 
     wxString file_name;
-
-    void OnPaint(wxPaintEvent &);
 };
 
 
