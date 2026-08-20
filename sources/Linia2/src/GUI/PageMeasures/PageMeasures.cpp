@@ -12,17 +12,17 @@
 #include "Settings/Settings.h"
 #include "Utils/Timer.h"
 #pragma warning(push, 0)
-#include <wx/msgdlg.h>
-#include <wx/dcclient.h>
+    #include <wx/msgdlg.h>
+    #include <wx/dcclient.h>
 #pragma warning(pop)
 
 
-PageMeasures *PageMeasures::self = nullptr;
+PageMeasures *ThePageMeasures = nullptr;
 
 
-PageMeasures::PageMeasures(Notebook *board) : PageNotebook(board, L("Измерения"))
+PageMeasures::PageMeasures(Notebook *board, PageMeasures *&global) : PageNotebook(board, L("Измерения"))
 {
-    self = this;
+    global = this;
 
     wxPanel::SetDoubleBuffered(true);
     Bind(wxEVT_PAINT, &PageMeasures::OnEventPaint, this);
@@ -281,33 +281,33 @@ void PageMeasures::OnEventPaint(wxPaintEvent &)
 
 void Point::Draw(int x, int y) const
 {
-    PageMeasures::self->gc->StrokeLine(x, y, x + 0.01, y);
+    ThePageMeasures->gc->StrokeLine(x, y, x + 0.01, y);
 }
 
 
 void Line::Draw() const
 {
-    PageMeasures::self->gc->StrokeLine(x1, y1, x2, y2);
+    ThePageMeasures->gc->StrokeLine(x1, y1, x2, y2);
 }
 
 
 void Line::Draw(const wxColor &color) const
 {
-    PageMeasures::self->SetColorPen(color);
-    PageMeasures::self->gc->StrokeLine(x1, y1, x2, y2);
+    ThePageMeasures->SetColorPen(color);
+    ThePageMeasures->gc->StrokeLine(x1, y1, x2, y2);
 }
 
 
 void Rect::Fill(int x, int y, const wxColor &color) const
 {
-    PageMeasures::self->SetColorBrush(color);
-    PageMeasures::self->gc->DrawRectangle(x, y, width, height);
+    ThePageMeasures->SetColorBrush(color);
+    ThePageMeasures->gc->DrawRectangle(x, y, width, height);
 }
 
 
 void Rect::Draw(int x, int y, const wxColor &color) const
 {
-    PageMeasures::self->SetColorPen(color);
+    ThePageMeasures->SetColorPen(color);
     Line(x, y, x + width, y).Draw();
     Line(x + width, y, x + width, y + height).Draw();
     Line(x, y + height, x + width, y + height).Draw();
@@ -323,32 +323,32 @@ Text::Text(const wxString &_text) : text(_text)
 
 void Text::SetFont()
 {
-    PageMeasures::self->gc->SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL), PageMeasures::self->color_pen);
+    ThePageMeasures->gc->SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL), ThePageMeasures->color_pen);
 }
 
 
 void Text::Draw(int x, int y) const
 {
-    PageMeasures::self->gc->DrawText(text, x, y);
+    ThePageMeasures->gc->DrawText(text, x, y);
 }
 
 
 void Text::DrawAboutCenterLeft(int x, int y, bool fillBackground) const
 {
     double width, height, descent, externalLeading;
-    PageMeasures::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+    ThePageMeasures->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
 
     x -= (int)(width + 0.5);
     y -= (int)(height / 2.0 + 0.5);
 
     if (fillBackground)
     {
-        PageMeasures::self->gc->SetPen(PageMeasures::self->color_brush);
-        PageMeasures::self->gc->DrawRectangle(x, y, width, height);
-        PageMeasures::self->gc->SetPen(PageMeasures::self->color_pen);
+        ThePageMeasures->gc->SetPen(ThePageMeasures->color_brush);
+        ThePageMeasures->gc->DrawRectangle(x, y, width, height);
+        ThePageMeasures->gc->SetPen(ThePageMeasures->color_pen);
     }
 
-    PageMeasures::self->gc->DrawText(text, x, y);
+    ThePageMeasures->gc->DrawText(text, x, y);
 }
 
 
@@ -362,78 +362,78 @@ void PageMeasures::FillRectangle(int x, int y, int width, int height, const wxCo
 void Text::DrawAboutCenterDown(int x, int y, bool fillBackground) const
 {
     double width, height, descent, externalLeading;
-    PageMeasures::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+    ThePageMeasures->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
 
     x -= (int)(width / 2.0 + 0.5);
 
     if (fillBackground)
     {
-        PageMeasures::self->gc->SetPen(PageMeasures::self->color_brush);
-        PageMeasures::self->gc->DrawRectangle(x, y, width, height);
-        PageMeasures::self->gc->SetPen(PageMeasures::self->color_pen);
+        ThePageMeasures->gc->SetPen(ThePageMeasures->color_brush);
+        ThePageMeasures->gc->DrawRectangle(x, y, width, height);
+        ThePageMeasures->gc->SetPen(ThePageMeasures->color_pen);
     }
 
-    PageMeasures::self->gc->DrawText(text, x, y);
+    ThePageMeasures->gc->DrawText(text, x, y);
 }
 
 
 void Text::DrawAboutCenterUp(int x, int y, bool fillBackground) const
 {
     double width, height, descent, externalLeading;
-    PageMeasures::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+    ThePageMeasures->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
 
     y -= (int)(height);
     x -= (int)(width / 2);
 
     if (fillBackground)
     {
-        PageMeasures::self->gc->SetPen(PageMeasures::self->color_brush);
-        PageMeasures::self->gc->DrawRectangle(x, y, width, height);
-        PageMeasures::self->gc->SetPen(PageMeasures::self->color_pen);
+        ThePageMeasures->gc->SetPen(ThePageMeasures->color_brush);
+        ThePageMeasures->gc->DrawRectangle(x, y, width, height);
+        ThePageMeasures->gc->SetPen(ThePageMeasures->color_pen);
     }
 
-    PageMeasures::self->gc->DrawText(text, x, y);
+    ThePageMeasures->gc->DrawText(text, x, y);
 }
 
 
 void Text::DrawAboutRightUp(int x, int y, bool fillBackground, bool frame) const
 {
     double width, height, descent, externalLeading;
-    PageMeasures::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+    ThePageMeasures->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
 
     y -= (int)(height);
 
     if (fillBackground)
     {
-        PageMeasures::self->gc->SetPen(PageMeasures::self->color_brush);
-        PageMeasures::self->gc->DrawRectangle(x, y, width, height);
-        PageMeasures::self->gc->SetPen(PageMeasures::self->color_pen);
+        ThePageMeasures->gc->SetPen(ThePageMeasures->color_brush);
+        ThePageMeasures->gc->DrawRectangle(x, y, width, height);
+        ThePageMeasures->gc->SetPen(ThePageMeasures->color_pen);
 
         if (frame)
         {
-            Rect((int)width, (int)height).Draw(x, y, PageMeasures::self->color_pen);
+            Rect((int)width, (int)height).Draw(x, y, ThePageMeasures->color_pen);
         }
     }
 
-    PageMeasures::self->gc->DrawText(text, x, y);
+    ThePageMeasures->gc->DrawText(text, x, y);
 }
 
 
 void Text::DrawAboutCenterRigth(int x, int y, bool fillBackground) const
 {
     double width, height, descent, externalLeading;
-    PageMeasures::self->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
+    ThePageMeasures->gc->GetTextExtent(text, &width, &height, &descent, &externalLeading);
 
     y -= (int)(height / 2.0 + 0.5);
 
     if (fillBackground)
     {
-        PageMeasures::self->gc->SetPen(PageMeasures::self->color_brush);
-        PageMeasures::self->gc->DrawRectangle(x, y, width, height);
-        PageMeasures::self->gc->SetPen(PageMeasures::self->color_pen);
+        ThePageMeasures->gc->SetPen(ThePageMeasures->color_brush);
+        ThePageMeasures->gc->DrawRectangle(x, y, width, height);
+        ThePageMeasures->gc->SetPen(ThePageMeasures->color_pen);
     }
 
-    PageMeasures::self->gc->DrawText(text, x, y);
+    ThePageMeasures->gc->DrawText(text, x, y);
 }
 
 
@@ -441,11 +441,11 @@ void Spline::Draw(const std::vector<wxPoint> &points, bool smooth, bool draw_poi
 {
     if (smooth)
     {
-        GraphicsSplineRenderer::DrawSplinePath(PageMeasures::self->gc, points, 1.0);
+        GraphicsSplineRenderer::DrawSplinePath(ThePageMeasures->gc, points, 1.0);
     }
     else
     {
-        wxGraphicsPath path = PageMeasures::self->gc->CreatePath();
+        wxGraphicsPath path = ThePageMeasures->gc->CreatePath();
 
         path.MoveToPoint(points[0].x, points[0].y);
 
@@ -454,19 +454,19 @@ void Spline::Draw(const std::vector<wxPoint> &points, bool smooth, bool draw_poi
             path.AddLineToPoint(points[i].x, points[i].y);
         }
 
-        PageMeasures::self->gc->StrokePath(path);
+        ThePageMeasures->gc->StrokePath(path);
     }
 
     if (draw_points)
     {
-        wxGraphicsPath path_circle = PageMeasures::self->gc->CreatePath();
+        wxGraphicsPath path_circle = ThePageMeasures->gc->CreatePath();
 
         for (const auto &pt : points)
         {
             path_circle.AddCircle(pt.x, pt.y, SET::GUI::size_point->Get());
         }
 
-        PageMeasures::self->gc->FillPath(path_circle);
+        ThePageMeasures->gc->FillPath(path_circle);
     }
 }
 
@@ -497,8 +497,8 @@ void PageMeasures::SetColorPen(const wxColor &_color)
 
 void PageMeasures::LoadColors()
 {
-    PageMeasures::self->gc->SetPen(color_pen);
-    PageMeasures::self->gc->SetBrush(color_brush);
+    ThePageMeasures->gc->SetPen(color_pen);
+    ThePageMeasures->gc->SetBrush(color_brush);
 }
 
 

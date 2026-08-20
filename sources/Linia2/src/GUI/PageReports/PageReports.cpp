@@ -3,11 +3,11 @@
 #include "GUI/PageReports/PageReports.h"
 
 
-PageReports *ThePanelReports = nullptr;
+PageReports *ThePageReports = nullptr;
 
 
-PageReports::PageReports(Notebook *board, PageReports *&self) :
+PageReports::PageReports(Notebook *board, PageReports *&global) :
     PageNotebook(board, L("Отчёты"))
 {
-    self = this;
+    global = this;
 }

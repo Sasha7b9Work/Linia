@@ -3,7 +3,7 @@
 #include "GUI/PageArchive/PageArchive.h"
 
 
-PageArchive *ThePanelArchive = nullptr;
+PageArchive *ThePageArchive = nullptr;
 
 
 PageArchive::PageArchive(Notebook *board, PageArchive *&global) : PageNotebook(board, L("Архив"))

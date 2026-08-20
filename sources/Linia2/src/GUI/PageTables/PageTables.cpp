@@ -3,7 +3,7 @@
 #include "GUI/PageTables/PageTables.h"
 
 
-PageTables *ThePanelTables = nullptr;
+PageTables *ThePageTables = nullptr;
 
 
 PageTables::PageTables(Notebook *board, PageTables *&self) :

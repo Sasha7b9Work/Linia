@@ -7,9 +7,7 @@ class PageDebug : public PageNotebook
 {
 public:
 
-    static PageDebug *self;
-
-    PageDebug(Notebook *);
+    PageDebug(Notebook *, PageDebug *&);
 
     virtual bool Show(bool) override;
 

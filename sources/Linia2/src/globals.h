@@ -30,11 +30,13 @@ class NotebookDebug;
 
 class PanelRight;
 
-extern PageReports   *ThePanelReports;
+extern PageReports   *ThePageReports;
 extern PageSettings  *ThePageSettings;
-extern PageTables    *ThePanelTables;
-extern PageArchive   *ThePanelArchive;
+extern PageTables    *ThePageTables;
+extern PageArchive   *ThePageArchive;
 extern PageTests     *ThePageTests;
+extern PageDebug     *ThePageDebug;
+extern PageMeasures  *ThePageMeasures;
 
 extern PanelCategory *ThePanelCategory;
 extern PanelLibrary  *ThePanelLibrary;
