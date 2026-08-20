@@ -1,6 +1,6 @@
 #pragma once
 #pragma warning(push, 0)
-    #include <wx/arrstr.h>
+#include <wx/arrstr.h>
 #pragma warning(pop)
 
 
@@ -40,21 +40,21 @@ public:
 
     static ClipboardManager &GetInstance();
 
-    void SetData(const ClipboardData &data)
+    void SetData(const ClipboardData &_data)
     {
-        m_data = data;
+        data = _data;
     }
     ClipboardData GetData() const
     {
-        return m_data;
+        return data;
     }
     bool HasData() const
     {
-        return !m_data.IsEmpty();
+        return !data.IsEmpty();
     }
     void Clear()
     {
-        m_data.Clear();
+        data.Clear();
     }
 
     wxString GetOperationDescription() const;
@@ -63,5 +63,5 @@ private:
     ClipboardManager() = default;
     ~ClipboardManager() = default;
 
-    ClipboardData m_data;
+    ClipboardData data;
 };

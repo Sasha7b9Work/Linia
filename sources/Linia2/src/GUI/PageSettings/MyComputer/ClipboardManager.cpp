@@ -13,18 +13,32 @@ ClipboardManager &ClipboardManager::GetInstance()
 
 wxString ClipboardManager::GetOperationDescription() const
 {
-    if (m_data.IsEmpty()) return "Буфер обмена пуст";
-
-    size_t fileCount = 0, dirCount = 0;
-    for (const wxString &filename : m_data.files)
+    if (data.IsEmpty())
     {
-        if (filename == "..") continue;
-        wxFileName fullPath(m_data.sourcePath, filename);
-        if (fullPath.IsDir()) dirCount++;
-        else fileCount++;
+        return "Буфер обмена пуст";
     }
 
-    wxString op = m_data.isCut ? wxString("Вырезано") : wxString("Скопировано");
+    size_t fileCount = 0, dirCount = 0;
+
+    for (const wxString &filename : data.files)
+    {
+        if (filename == "..")
+        {
+            continue;
+        }
+        wxFileName fullPath(data.sourcePath, filename);
+        if (fullPath.IsDir())
+        {
+            dirCount++;
+        }
+        else
+        {
+            fileCount++;
+        }
+    }
+
+    wxString op = data.isCut ? wxString("Вырезано") : wxString("Скопировано");
+
     if (fileCount > 0 && dirCount > 0)
     {
         return wxString::Format("%s: %d файлов и %d папок", op, (int)fileCount, (int)dirCount);
