@@ -342,15 +342,7 @@ void FilePanel::CreateControls()
         // Кнопка возврата (стрелка назад) - только для MODE_BUTTONS
         if (displayMode == MODE_BUTTONS)
         {
-            wxBitmap &undoBmp = Bitmap::Get("undo.bmp").GetBitmap();
-            if (undoBmp.IsOk())
-            {
-                btnBack = new wxBitmapButton(this, wxID_ANY, undoBmp, wxDefaultPosition);
-            }
-            else
-            {
-                btnBack = new wxButton(this, wxID_ANY, wxString::FromUTF8("\xe2\x86\x90"), wxDefaultPosition);
-            }
+            btnBack = new wxBitmapButton(this, wxID_ANY, Bitmap::Get("undo.bmp").GetBitmap(), wxDefaultPosition);
 
             btnBack->SetToolTip("Вернуться к выбору источника");
 

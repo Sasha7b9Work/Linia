@@ -165,7 +165,7 @@ private:
     wxComboBox *comboTypeSource = nullptr;
     wxBitmapButton *btnLocal = nullptr;
     wxBitmapButton *btnFTP = nullptr;
-    wxButton *btnBack = nullptr;                // Кнопка возврата
+    wxBitmapButton *btnBack = nullptr;                // Кнопка возврата
     wxBoxSizer *buttonsSizer = nullptr;         // Сайзер для кнопок выбора источника
     wxTextCtrl *pathCtrl = nullptr;
     wxButton *browseBtn = nullptr;
