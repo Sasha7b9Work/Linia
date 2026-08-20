@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "GUI/PageSettings/MyComputer/FTPConnectionDialog.h"
+#include "GUI/Controls/StaticText.h"
 #pragma warning(push, 0)
     #include <wx/sizer.h>
     #include <wx/msgdlg.h>
@@ -21,7 +22,7 @@ static void SecureClearString(wxString &str)
 }
 
 FTPConnectionDialog::FTPConnectionDialog(wxWindow *parent) :
-    wxDialog(parent, wxID_ANY, "Подключение к FTP серверу", wxDefaultPosition, wxSize(400, 300))
+    wxDialog(parent, wxID_ANY, L("Подключение к FTP серверу"), wxDefaultPosition, wxSize(400, 300))
 {
     CreateControls();
     Center();
@@ -43,28 +44,28 @@ void FTPConnectionDialog::CreateControls()
 
     // Сервер
     wxBoxSizer *serverSizer = new wxBoxSizer(wxHORIZONTAL);
-    serverSizer->Add(new wxStaticText(this, wxID_ANY, "Сервер:", wxDefaultPosition, wxSize(100, -1)), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+    serverSizer->Add(new StaticText(this, L("Сервер:"), { 100, -1 }), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
     txtServer = new wxTextCtrl(this, wxID_ANY, "");
     serverSizer->Add(txtServer, 1, wxEXPAND | wxALL, 5);
     mainSizer->Add(serverSizer, 0, wxEXPAND | wxALL, 5);
 
     // Порт (по умолчанию 22 для FTP)
     wxBoxSizer *portSizer = new wxBoxSizer(wxHORIZONTAL);
-    portSizer->Add(new wxStaticText(this, wxID_ANY, "Порт:", wxDefaultPosition, wxSize(100, -1)), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+    portSizer->Add(new StaticText(this, L("Порт:"), { 100, -1 }), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
     txtPort = new wxTextCtrl(this, wxID_ANY, "22");
     portSizer->Add(txtPort, 1, wxEXPAND | wxALL, 5);
     mainSizer->Add(portSizer, 0, wxEXPAND | wxALL, 5);
 
     // Имя пользователя
     wxBoxSizer *userSizer = new wxBoxSizer(wxHORIZONTAL);
-    userSizer->Add(new wxStaticText(this, wxID_ANY, "Пользователь:", wxDefaultPosition, wxSize(100, -1)), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+    userSizer->Add(new StaticText(this, L("Пользователь:"), { 100, -1 }), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
     txtUserName = new wxTextCtrl(this, wxID_ANY, "");
     userSizer->Add(txtUserName, 1, wxEXPAND | wxALL, 5);
     mainSizer->Add(userSizer, 0, wxEXPAND | wxALL, 5);
 
     // Пароль
     wxBoxSizer *passSizer = new wxBoxSizer(wxHORIZONTAL);
-    passSizer->Add(new wxStaticText(this, wxID_ANY, "Пароль:", wxDefaultPosition, wxSize(100, -1)), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+    passSizer->Add(new StaticText(this, L("Пароль:"), { 100, -1 }), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
     txtPassword = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxTE_PASSWORD);
     passSizer->Add(txtPassword, 1, wxEXPAND | wxALL, 5);
     mainSizer->Add(passSizer, 0, wxEXPAND | wxALL, 5);
@@ -89,7 +90,7 @@ void FTPConnectionDialog::CreateControls()
                 }
                 else
                 {
-                    wxMessageBox("Порт должен быть числом от 1 до 65535", "Ошибка", wxOK | wxICON_ERROR);
+                    wxMessageBox(L("Порт должен быть числом от 1 до 65535"), L("Ошибка"), wxOK | wxICON_ERROR);
                     return;
                 }
                 username = txtUserName->GetValue();
@@ -97,13 +98,13 @@ void FTPConnectionDialog::CreateControls()
 
                 if (server.IsEmpty())
                 {
-                    wxMessageBox("Введите адрес сервера", "Ошибка", wxOK | wxICON_ERROR);
+                    wxMessageBox(L("Введите адрес сервера"), L("Ошибка"), wxOK | wxICON_ERROR);
                     return;
                 }
 
                 if (username.IsEmpty())
                 {
-                    wxMessageBox("Введите имя пользователя", "Ошибка", wxOK | wxICON_ERROR);
+                    wxMessageBox(L("Введите имя пользователя"), L("Ошибка"), wxOK | wxICON_ERROR);
                     return;
                 }
 

@@ -10,6 +10,7 @@
 #include "GUI/PageSettings/MyComputer/FTPConnectionDialog.h"
 #include "GUI/PageSettings/MyComputer/FTPController.h"
 #include "GUI/Controls/Bitmap.h"
+#include "GUI/Controls/StaticText.h"
 #pragma warning(push, 0)
     #include <wx/log.h>
     #include <wx/dir.h>
