@@ -100,7 +100,7 @@ protected:
 
 private:
 
-    wxStaticText *textPercents = nullptr;
+    StaticText *textPercents = nullptr;
 };
 
 

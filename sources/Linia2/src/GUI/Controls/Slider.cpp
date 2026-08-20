@@ -412,5 +412,5 @@ SliderFloatPercents::SliderFloatPercents(wxWindow *parent, int width, int _min_p
     min_percents(_min_percents),
     max_percents(_max_percents)
 {
-    textPercents = new wxStaticText(this, wxID_ANY, "0", wxDefaultPosition, { 50, TEXTCNTRL_HEIGHT - 5 });
+    textPercents = new StaticText(this, "0", { 50, TEXTCNTRL_HEIGHT - 5 });
 }
