@@ -51,6 +51,4 @@ private:
     int port = 22;
     wxString username;
     wxString password;
-
-    wxDECLARE_EVENT_TABLE();
 };

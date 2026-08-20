@@ -8,9 +8,6 @@
 #pragma warning(pop)
 
 
-wxBEGIN_EVENT_TABLE(FTPConnectionDialog, wxDialog)
-wxEND_EVENT_TABLE()
-
 // Безопасная очистка строки — перезаписывает содержимое нулями
 static void SecureClearString(wxString &str)
 {
