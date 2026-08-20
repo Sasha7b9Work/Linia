@@ -25,5 +25,5 @@ public:
     void HandleRedo();
 
 private:
-    FilePanel *m_panel;
+    FilePanel *panel;
 };

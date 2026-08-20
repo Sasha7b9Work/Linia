@@ -7,9 +7,9 @@
 
 class FileDropTarget : public wxFileDropTarget {
 public:
-    FileDropTarget(FilePanel *panel);
+    FileDropTarget(FilePanel *);
     bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString &filenames) override;
 
 private:
-    FilePanel *m_panel;
+    FilePanel *panel;
 };

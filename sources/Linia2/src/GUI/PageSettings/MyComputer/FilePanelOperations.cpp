@@ -24,61 +24,62 @@ static FilePanelSourceType ConvertSourceType(FilePanel::SourceType type)
     }
 }
 
-FilePanelOperations::FilePanelOperations(FilePanel *panel)
-    : m_panel(panel)
-{}
+FilePanelOperations::FilePanelOperations(FilePanel *_panel) :
+    panel(_panel)
+{
+}
 
 void FilePanelOperations::HandleCopyOperation(wxCommandEvent &)
 {
-    if (!m_panel->HasSelectedFiles())
+    if (!panel->HasSelectedFiles())
     {
-        m_panel->UpdateStatus("Не выбраны файлы или папки");
+        panel->UpdateStatus("Не выбраны файлы или папки");
         return;
     }
 
-    wxArrayString selectedFiles = m_panel->GetSelectedFiles();
+    wxArrayString selectedFiles = panel->GetSelectedFiles();
     wxLogDebug("Копирование: выбрано %d элементов", (int)selectedFiles.size());
 
     for (const wxString &file : selectedFiles)
     {
-        if (m_panel->GetSourceType() == FilePanel::SOURCE_FTP)
+        if (panel->GetSourceType() == FilePanel::SOURCE_FTP)
         {
             wxLogDebug("  - %s (FTP файл/каталог)", file);
         }
         else
         {
-            wxString fullPath = m_panel->GetCurrentPath() + wxFileName::GetPathSeparator() + file;
+            wxString fullPath = panel->GetCurrentPath() + wxFileName::GetPathSeparator() + file;
             wxLogDebug("  - %s (директория: %d)", file, wxDirExists(fullPath));
         }
     }
 
     ClipboardManager::ClipboardData data;
     data.files = selectedFiles;
-    data.sourcePath = m_panel->GetCurrentPath();
+    data.sourcePath = panel->GetCurrentPath();
     data.isCut = false;
-    data.sourceType = ConvertSourceType(m_panel->GetSourceType());
+    data.sourceType = ConvertSourceType(panel->GetSourceType());
     ClipboardManager::GetInstance().SetData(data);
 
-    m_panel->UpdateStatus(ClipboardManager::GetInstance().GetOperationDescription());
+    panel->UpdateStatus(ClipboardManager::GetInstance().GetOperationDescription());
 }
 
 void FilePanelOperations::HandleMoveOperation(wxCommandEvent &)
 {
-    if (!m_panel->HasSelectedFiles())
+    if (!panel->HasSelectedFiles())
     {
-        m_panel->UpdateStatus("Не выбраны файлы или папки");
+        panel->UpdateStatus("Не выбраны файлы или папки");
         return;
     }
 
-    wxArrayString selectedFiles = m_panel->GetSelectedFiles();
+    wxArrayString selectedFiles = panel->GetSelectedFiles();
     ClipboardManager::ClipboardData data;
     data.files = selectedFiles;
-    data.sourcePath = m_panel->GetCurrentPath();
+    data.sourcePath = panel->GetCurrentPath();
     data.isCut = true;
-    data.sourceType = ConvertSourceType(m_panel->GetSourceType());
+    data.sourceType = ConvertSourceType(panel->GetSourceType());
     ClipboardManager::GetInstance().SetData(data);
 
-    m_panel->UpdateStatus(ClipboardManager::GetInstance().GetOperationDescription());
+    panel->UpdateStatus(ClipboardManager::GetInstance().GetOperationDescription());
 }
 
 void FilePanelOperations::HandlePasteOperation(wxCommandEvent &)
@@ -91,11 +92,11 @@ void FilePanelOperations::HandlePasteOperationToTarget(FilePanel *targetPanel)
     ClipboardManager::ClipboardData data = ClipboardManager::GetInstance().GetData();
     if (data.IsEmpty())
     {
-        m_panel->UpdateStatus("Буфер обмена пуст");
+        panel->UpdateStatus("Буфер обмена пуст");
         return;
     }
 
-    FilePanel *destPanel = targetPanel ? targetPanel : m_panel;
+    FilePanel *destPanel = targetPanel ? targetPanel : panel;
     wxString destPath = destPanel->GetCurrentPath();
     FilePanel::SourceType destType = destPanel->GetSourceType();
 
@@ -137,8 +138,8 @@ void FilePanelOperations::HandlePasteOperationToTarget(FilePanel *targetPanel)
         FileOperationResult result;
         if (isDirectory)
         {
-            result = data.isCut ? FileOperations::MoveDirectory(srcFullPath, destFullPath, m_panel)
-                : FileOperations::CopyDirectory(srcFullPath, destFullPath, m_panel);
+            result = data.isCut ? FileOperations::MoveDirectory(srcFullPath, destFullPath, panel)
+                : FileOperations::CopyDirectory(srcFullPath, destFullPath, panel);
         }
         else
         {
@@ -153,9 +154,9 @@ void FilePanelOperations::HandlePasteOperationToTarget(FilePanel *targetPanel)
         }
         else
         {
-            m_panel->UpdateStatus("Ошибка при вставке: " + result.errorMessage);
-            m_panel->RefreshFileList();
-            if (targetPanel && targetPanel != m_panel)
+            panel->UpdateStatus("Ошибка при вставке: " + result.errorMessage);
+            panel->RefreshFileList();
+            if (targetPanel && targetPanel != panel)
             {
                 targetPanel->RefreshFileList();
             }
@@ -188,9 +189,9 @@ void FilePanelOperations::HandlePasteOperationToTarget(FilePanel *targetPanel)
         resultMessage = "Нечего копировать";
     }
 
-    m_panel->UpdateStatus(resultMessage);
-    m_panel->RefreshFileList();
-    if (targetPanel && targetPanel != m_panel)
+    panel->UpdateStatus(resultMessage);
+    panel->RefreshFileList();
+    if (targetPanel && targetPanel != panel)
     {
         targetPanel->RefreshFileList();
     }
@@ -208,7 +209,7 @@ void FilePanelOperations::HandleFTPPasteOperation(const ClipboardManager::Clipbo
     wxLogDebug("  Dest path: %s", destPath);
     wxLogDebug("  Files: %d", (int)data.files.size());
 
-    FilePanel *sourcePanel = m_panel;
+    FilePanel *sourcePanel = panel;
 
     for (const wxString &filename : data.files)
     {
@@ -222,14 +223,14 @@ void FilePanelOperations::HandleFTPPasteOperation(const ClipboardManager::Clipbo
             FTPController *srcFTP = sourcePanel->GetFTPController();
             if (!srcFTP || !srcFTP->IsConnected())
             {
-                m_panel->UpdateStatus("Нет подключения к исходному FTP серверу");
+                panel->UpdateStatus("Нет подключения к исходному FTP серверу");
                 continue;
             }
 
             wxString remotePath = filename;
             wxString localPath = destPath + wxFileName::GetPathSeparator() + filename;
 
-            m_panel->UpdateStatus(wxString::Format("Скачивание: %s...", filename));
+            panel->UpdateStatus(wxString::Format("Скачивание: %s...", filename));
             success = srcFTP->DownloadFile(remotePath, localPath);
 
             if (success && data.isCut)
@@ -246,13 +247,13 @@ void FilePanelOperations::HandleFTPPasteOperation(const ClipboardManager::Clipbo
             if (!destFTP)
             {
                 wxLogDebug("    destFTP is NULL!");
-                m_panel->UpdateStatus("Нет FTP контроллера на целевой панели");
+                panel->UpdateStatus("Нет FTP контроллера на целевой панели");
                 continue;
             }
             if (!destFTP->IsConnected())
             {
                 wxLogDebug("    destFTP not connected!");
-                m_panel->UpdateStatus("Нет подключения к целевому FTP серверу");
+                panel->UpdateStatus("Нет подключения к целевому FTP серверу");
                 continue;
             }
 
@@ -265,16 +266,16 @@ void FilePanelOperations::HandleFTPPasteOperation(const ClipboardManager::Clipbo
             if (!wxFileExists(localPath) && !wxDirExists(localPath))
             {
                 wxLogDebug("    File does not exist!");
-                m_panel->UpdateStatus(wxString::Format("Файл не найден: %s", localPath));
+                panel->UpdateStatus(wxString::Format("Файл не найден: %s", localPath));
                 continue;
             }
 
-            m_panel->UpdateStatus(wxString::Format("Загрузка: %s...", filename));
+            panel->UpdateStatus(wxString::Format("Загрузка: %s...", filename));
 
             if (wxDirExists(localPath))
             {
                 wxLogDebug("    Is directory - skipping");
-                m_panel->UpdateStatus(wxString::Format("Пропуск директории: %s (пока не поддерживается)", filename));
+                panel->UpdateStatus(wxString::Format("Пропуск директории: %s (пока не поддерживается)", filename));
                 continue;
             }
 
@@ -285,7 +286,7 @@ void FilePanelOperations::HandleFTPPasteOperation(const ClipboardManager::Clipbo
             if (!success)
             {
                 wxLogDebug("    Upload failed: %s", destFTP->GetLastError());
-                m_panel->UpdateStatus(wxString::Format("Ошибка загрузки: %s", destFTP->GetLastError()));
+                panel->UpdateStatus(wxString::Format("Ошибка загрузки: %s", destFTP->GetLastError()));
             }
 
             if (success && data.isCut)
@@ -299,7 +300,7 @@ void FilePanelOperations::HandleFTPPasteOperation(const ClipboardManager::Clipbo
         else if (fromFTP && toFTP)
         {
             // FTP -> FTP
-            FTPController *srcFTP = m_panel->GetFTPController();
+            FTPController *srcFTP = panel->GetFTPController();
             FTPController *destFTP = destPanel->GetFTPController();
 
             if (srcFTP && srcFTP->IsConnected() && destFTP && destFTP->IsConnected())
@@ -308,7 +309,7 @@ void FilePanelOperations::HandleFTPPasteOperation(const ClipboardManager::Clipbo
                 wxString remoteSrc = filename;
                 wxString remoteDest = filename;
 
-                m_panel->UpdateStatus(wxString::Format("Копирование через временный файл: %s...", filename));
+                panel->UpdateStatus(wxString::Format("Копирование через временный файл: %s...", filename));
 
                 if (srcFTP->DownloadFile(remoteSrc, tempFile))
                 {
@@ -335,7 +336,7 @@ void FilePanelOperations::HandleFTPPasteOperation(const ClipboardManager::Clipbo
         }
         else
         {
-            m_panel->UpdateStatus(wxString::Format("Ошибка при обработке: %s", filename));
+            panel->UpdateStatus(wxString::Format("Ошибка при обработке: %s", filename));
         }
     }
 
@@ -347,15 +348,15 @@ void FilePanelOperations::HandleFTPPasteOperation(const ClipboardManager::Clipbo
     wxString resultMessage = wxString::Format("%s %d файлов",
         wxString(data.isCut ? "Перемещено" : "Скопировано"),
         totalFiles);
-    m_panel->UpdateStatus(resultMessage);
+    panel->UpdateStatus(resultMessage);
 
     wxLogDebug("HandleFTPPasteOperation completed: totalFiles=%d, destPanel=%p, this=%p",
-        totalFiles, destPanel, m_panel);
+        totalFiles, destPanel, panel);
 
     if (fromFTP)
     {
         wxLogDebug("  Refreshing source FTP panel (this)");
-        m_panel->RefreshFileList();
+        panel->RefreshFileList();
     }
     if (toFTP)
     {
@@ -367,8 +368,8 @@ void FilePanelOperations::HandleFTPPasteOperation(const ClipboardManager::Clipbo
     }
     if (!fromFTP && !toFTP)
     {
-        m_panel->RefreshFileList();
-        if (destPanel && destPanel != m_panel)
+        panel->RefreshFileList();
+        if (destPanel && destPanel != panel)
         {
             destPanel->RefreshFileList();
         }
@@ -377,18 +378,18 @@ void FilePanelOperations::HandleFTPPasteOperation(const ClipboardManager::Clipbo
 
 void FilePanelOperations::HandleDeleteOperation(wxCommandEvent &)
 {
-    if (!m_panel->HasSelectedFiles())
+    if (!panel->HasSelectedFiles())
     {
-        m_panel->UpdateStatus("Не выбраны файлы или папки");
+        panel->UpdateStatus("Не выбраны файлы или папки");
         return;
     }
 
-    wxArrayString selectedFiles = m_panel->GetSelectedFiles();
-    wxListCtrl *fileList = m_panel->GetFileList();
+    wxArrayString selectedFiles = panel->GetSelectedFiles();
+    wxListCtrl *fileList = panel->GetFileList();
 
     int fileCount = 0, dirCount = 0;
 
-    if (m_panel->GetSourceType() == FilePanel::SOURCE_FTP)
+    if (panel->GetSourceType() == FilePanel::SOURCE_FTP)
     {
         for (const wxString &filename : selectedFiles)
         {
@@ -405,7 +406,7 @@ void FilePanelOperations::HandleDeleteOperation(wxCommandEvent &)
         for (const wxString &filename : selectedFiles)
         {
             if (filename == "..") continue;
-            wxString fullPath = m_panel->GetCurrentPath() + wxFileName::GetPathSeparator() + filename;
+            wxString fullPath = panel->GetCurrentPath() + wxFileName::GetPathSeparator() + filename;
             if (wxDirExists(fullPath)) dirCount++;
             else fileCount++;
         }
@@ -426,18 +427,18 @@ void FilePanelOperations::HandleDeleteOperation(wxCommandEvent &)
     }
 
     if (wxMessageBox(message, "Подтверждение удаления",
-        wxYES_NO | wxICON_QUESTION, m_panel) != wxYES)
+        wxYES_NO | wxICON_QUESTION, panel) != wxYES)
     {
         return;
     }
 
     // FTP удаление
-    if (m_panel->GetSourceType() == FilePanel::SOURCE_FTP)
+    if (panel->GetSourceType() == FilePanel::SOURCE_FTP)
     {
-        FTPController *ftpCtrl = m_panel->GetFTPController();
+        FTPController *ftpCtrl = panel->GetFTPController();
         if (!ftpCtrl || !ftpCtrl->IsConnected())
         {
-            m_panel->UpdateStatus("Нет подключения к FTP");
+            panel->UpdateStatus("Нет подключения к FTP");
             return;
         }
 
@@ -466,13 +467,13 @@ void FilePanelOperations::HandleDeleteOperation(wxCommandEvent &)
             }
             else
             {
-                m_panel->UpdateStatus(wxString::Format("Ошибка удаления: %s - %s",
+                panel->UpdateStatus(wxString::Format("Ошибка удаления: %s - %s",
                     filename, ftpCtrl->GetLastError()));
             }
         }
 
-        m_panel->UpdateStatus(wxString::Format("Удалено элементов: %d", totalDeleted));
-        m_panel->RefreshFileList();
+        panel->UpdateStatus(wxString::Format("Удалено элементов: %d", totalDeleted));
+        panel->RefreshFileList();
         return;
     }
 
@@ -480,7 +481,7 @@ void FilePanelOperations::HandleDeleteOperation(wxCommandEvent &)
     FileOperation operation(
         OperationType::_DELETE,
         selectedFiles,
-        m_panel->GetCurrentPath()
+        panel->GetCurrentPath()
     );
 
     int totalFilesDeleted = 0;
@@ -490,13 +491,13 @@ void FilePanelOperations::HandleDeleteOperation(wxCommandEvent &)
     {
         if (filename == "..") continue;
 
-        wxString fullPath = m_panel->GetCurrentPath() + wxFileName::GetPathSeparator() + filename;
+        wxString fullPath = panel->GetCurrentPath() + wxFileName::GetPathSeparator() + filename;
 
         wxLogDebug("Удаление: %s", fullPath);
 
         if (wxDirExists(fullPath))
         {
-            FileOperationResult result = FileOperations::DeleteDirectory(fullPath, m_panel);
+            FileOperationResult result = FileOperations::DeleteDirectory(fullPath, panel);
             if (result.success)
             {
                 totalFilesDeleted += result.filesProcessed;
@@ -504,8 +505,8 @@ void FilePanelOperations::HandleDeleteOperation(wxCommandEvent &)
             }
             else
             {
-                m_panel->UpdateStatus("Ошибка удаления директории: " + result.errorMessage);
-                m_panel->RefreshFileList();
+                panel->UpdateStatus("Ошибка удаления директории: " + result.errorMessage);
+                panel->RefreshFileList();
                 return;
             }
         }
@@ -517,8 +518,8 @@ void FilePanelOperations::HandleDeleteOperation(wxCommandEvent &)
             }
             else
             {
-                m_panel->UpdateStatus("Не удалось удалить файл: " + filename);
-                m_panel->RefreshFileList();
+                panel->UpdateStatus("Не удалось удалить файл: " + filename);
+                panel->RefreshFileList();
                 return;
             }
         }
@@ -545,69 +546,69 @@ void FilePanelOperations::HandleDeleteOperation(wxCommandEvent &)
         resultMessage = "Ничего не удалено";
     }
 
-    m_panel->UpdateStatus(resultMessage);
-    m_panel->RefreshFileList();
+    panel->UpdateStatus(resultMessage);
+    panel->RefreshFileList();
 }
 
 void FilePanelOperations::HandleCreateFolder(wxCommandEvent &)
 {
     wxString folderName = wxGetTextFromUser("Введите имя папки:",
-        "Создание папки", "Новая папка", m_panel);
+        "Создание папки", "Новая папка", panel);
     if (folderName.IsEmpty()) return;
 
     // FTP создание папки
-    if (m_panel->GetSourceType() == FilePanel::SOURCE_FTP)
+    if (panel->GetSourceType() == FilePanel::SOURCE_FTP)
     {
-        FTPController *ftpCtrl = m_panel->GetFTPController();
+        FTPController *ftpCtrl = panel->GetFTPController();
         if (!ftpCtrl || !ftpCtrl->IsConnected())
         {
-            m_panel->UpdateStatus("Нет подключения к FTP");
+            panel->UpdateStatus("Нет подключения к FTP");
             return;
         }
 
         if (ftpCtrl->MakeDirectory(folderName))
         {
-            m_panel->UpdateStatus("Папка создана: " + folderName);
-            m_panel->RefreshFileList();
+            panel->UpdateStatus("Папка создана: " + folderName);
+            panel->RefreshFileList();
         }
         else
         {
-            m_panel->UpdateStatus("Ошибка создания папки: " + ftpCtrl->GetLastError());
+            panel->UpdateStatus("Ошибка создания папки: " + ftpCtrl->GetLastError());
         }
         return;
     }
 
     // Локальное создание папки
-    wxFileName newFolder(m_panel->GetCurrentPath(), folderName);
-    FileOperationResult result = FileOperations::CreateDirectory(newFolder.GetFullPath(), m_panel);
+    wxFileName newFolder(panel->GetCurrentPath(), folderName);
+    FileOperationResult result = FileOperations::CreateDirectory(newFolder.GetFullPath(), panel);
 
     if (result.success)
     {
         wxArrayString files;
         files.Add(folderName);
-        FileOperation operation(OperationType::CREATE_FOLDER, files, m_panel->GetCurrentPath());
+        FileOperation operation(OperationType::CREATE_FOLDER, files, panel->GetCurrentPath());
         UndoManager::GetInstance().AddOperation(operation);
 
-        m_panel->UpdateStatus("Папка создана: " + folderName);
-        m_panel->RefreshFileList();
+        panel->UpdateStatus("Папка создана: " + folderName);
+        panel->RefreshFileList();
     }
     else
     {
-        m_panel->UpdateStatus("Ошибка создания папки: " + result.errorMessage);
+        panel->UpdateStatus("Ошибка создания папки: " + result.errorMessage);
     }
 }
 
 void FilePanelOperations::HandleRefresh(wxCommandEvent &)
 {
-    m_panel->RefreshFileList();
-    m_panel->UpdateStatus("Список обновлен");
+    panel->RefreshFileList();
+    panel->UpdateStatus("Список обновлен");
 }
 
 void FilePanelOperations::HandleUndo()
 {
     if (!UndoManager::GetInstance().CanUndo())
     {
-        m_panel->UpdateStatus("Нечего отменять");
+        panel->UpdateStatus("Нечего отменять");
         return;
     }
 
@@ -624,7 +625,7 @@ void FilePanelOperations::HandleUndo()
                 wxString fullPath = op.destPath + wxFileName::GetPathSeparator() + filename;
                 if (wxDirExists(fullPath))
                 {
-                    FileOperations::DeleteDirectory(fullPath, m_panel);
+                    FileOperations::DeleteDirectory(fullPath, panel);
                 }
                 else if (wxFileExists(fullPath))
                 {
@@ -634,16 +635,16 @@ void FilePanelOperations::HandleUndo()
 
             if (op.type == OperationType::MOVE)
             {
-                m_panel->UpdateStatus("Отмена перемещения (частично реализовано)");
+                panel->UpdateStatus("Отмена перемещения (частично реализовано)");
             }
             else
             {
-                m_panel->UpdateStatus("Копирование отменено");
+                panel->UpdateStatus("Копирование отменено");
             }
             break;
         }
         case OperationType::_DELETE: {
-            m_panel->UpdateStatus("Отмена удаления не поддерживается");
+            panel->UpdateStatus("Отмена удаления не поддерживается");
             break;
         }
         case OperationType::CREATE_FOLDER: {
@@ -655,16 +656,16 @@ void FilePanelOperations::HandleUndo()
                     wxRmdir(fullPath);
                 }
             }
-            m_panel->UpdateStatus("Создание папки отменено");
+            panel->UpdateStatus("Создание папки отменено");
             break;
         }
         }
 
-        m_panel->RefreshFileList();
+        panel->RefreshFileList();
     }
     catch (const std::exception &e)
     {
-        m_panel->UpdateStatus(wxString::Format("Ошибка отмены: %s", wxString(e.what())));
+        panel->UpdateStatus(wxString::Format("Ошибка отмены: %s", wxString(e.what())));
     }
 }
 
@@ -672,7 +673,7 @@ void FilePanelOperations::HandleRedo()
 {
     if (!UndoManager::GetInstance().CanRedo())
     {
-        m_panel->UpdateStatus("Нечего повторять");
+        panel->UpdateStatus("Нечего повторять");
         return;
     }
 
@@ -689,14 +690,14 @@ void FilePanelOperations::HandleRedo()
                 wxString dstPath = op.destPath + wxFileName::GetPathSeparator() + filename;
                 if (wxDirExists(srcPath))
                 {
-                    FileOperations::CopyDirectory(srcPath, dstPath, m_panel);
+                    FileOperations::CopyDirectory(srcPath, dstPath, panel);
                 }
                 else if (wxFileExists(srcPath))
                 {
                     FileOperations::CopyFile(srcPath, dstPath, true);
                 }
             }
-            m_panel->UpdateStatus("Повтор: копирование выполнено");
+            panel->UpdateStatus("Повтор: копирование выполнено");
             break;
         }
         case OperationType::MOVE: {
@@ -706,14 +707,14 @@ void FilePanelOperations::HandleRedo()
                 wxString dstPath = op.destPath + wxFileName::GetPathSeparator() + filename;
                 if (wxDirExists(srcPath))
                 {
-                    FileOperations::MoveDirectory(srcPath, dstPath, m_panel);
+                    FileOperations::MoveDirectory(srcPath, dstPath, panel);
                 }
                 else if (wxFileExists(srcPath))
                 {
                     wxRenameFile(srcPath, dstPath, true);
                 }
             }
-            m_panel->UpdateStatus("Повтор: перемещение выполнено");
+            panel->UpdateStatus("Повтор: перемещение выполнено");
             break;
         }
         case OperationType::CREATE_FOLDER: {
@@ -725,19 +726,19 @@ void FilePanelOperations::HandleRedo()
                     wxMkdir(fullPath);
                 }
             }
-            m_panel->UpdateStatus("Повтор: папка создана");
+            panel->UpdateStatus("Повтор: папка создана");
             break;
         }
         case OperationType::_DELETE: {
-            m_panel->UpdateStatus("Повтор удаления не поддерживается (необратимая операция)");
+            panel->UpdateStatus("Повтор удаления не поддерживается (необратимая операция)");
             break;
         }
         }
 
-        m_panel->RefreshFileList();
+        panel->RefreshFileList();
     }
     catch (const std::exception &e)
     {
-        m_panel->UpdateStatus(wxString::Format("Ошибка повтора: %s", wxString(e.what())));
+        panel->UpdateStatus(wxString::Format("Ошибка повтора: %s", wxString(e.what())));
     }
 }

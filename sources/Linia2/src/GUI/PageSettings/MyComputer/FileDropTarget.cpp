@@ -5,9 +5,11 @@
 #include "GUI/PageSettings/MyComputer/ClipboardManager.h"
 
 
-FileDropTarget::FileDropTarget(FilePanel *panel)
-    : m_panel(panel)
-{}
+FileDropTarget::FileDropTarget(FilePanel *_panel) :
+    panel(_panel)
+{
+}
+
 
 bool FileDropTarget::OnDropFiles(wxCoord /*x*/, wxCoord /*y*/, const wxArrayString &filenames)
 {
@@ -34,7 +36,7 @@ bool FileDropTarget::OnDropFiles(wxCoord /*x*/, wxCoord /*y*/, const wxArrayStri
 
     // Временно помещаем в буфер и вставляем
     ClipboardManager::GetInstance().SetData(data);
-    m_panel->HandlePasteOperationToTarget(m_panel);
+    panel->HandlePasteOperationToTarget(panel);
 
     return true;
 }
