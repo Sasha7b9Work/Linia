@@ -27,8 +27,6 @@ private:
 
     std::vector<Category> categories;
 
-    void OnEventCheckBox(wxCommandEvent &);
-
     // Построить список тестов для категорий выбранных чекбоксами
     void BuildListTests();
 };

@@ -32,7 +32,12 @@ PanelCategory::PanelCategory(wxWindow *parent, PanelCategory *&global) : Scrolle
 
     ScrolledPanel::SetSizer(main_sizer);
 
-    Bind(wxEVT_CHECKBOX, &PanelCategory::OnEventCheckBox, this);
+    Bind(wxEVT_CHECKBOX, [this](wxCommandEvent &event)
+        {
+            BuildListTests();
+
+            event.Skip();
+        });
 }
 
 
@@ -69,14 +74,6 @@ void PanelCategory::UpdateState(const Library &lib)
     sizer->Layout();
 
     Layout();
-}
-
-
-void PanelCategory::OnEventCheckBox(wxCommandEvent &event)
-{
-    BuildListTests();
-
-    event.Skip();
 }
 
 
