@@ -186,7 +186,20 @@ bool Application::OnInit()
 
     TheMainWindow->Show();
 
-    Bind(wxEVT_TIMER, &Application::OnTimer, this, timer.GetId());
+    Bind(wxEVT_TIMER, [this](wxTimerEvent &)
+        {
+            static std::mutex mutex;
+
+            if (mutex.try_lock())
+            {
+                I_IPPP::GetInstance()->PeriodicTask();
+
+                TheMainWindow->PeriodicTask();
+
+                mutex.unlock();
+            };
+
+        }, timer.GetId());
 
     return true;
 }
@@ -197,21 +210,6 @@ void Application::Disable()
     timer.Stop();
 
     SET::Save();
-}
-
-
-void Application::OnTimer(wxTimerEvent &)
-{
-    static std::mutex mutex;
-
-    if (mutex.try_lock())
-    {
-        I_IPPP::GetInstance()->PeriodicTask();
-
-        TheMainWindow->PeriodicTask();
-
-        mutex.unlock();
-    };
 }
 
 

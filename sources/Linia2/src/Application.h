@@ -20,12 +20,9 @@ public:
 
 private:
 
-    wxTimer timer;
+    wxTimer timer;          // По этому таймеру работает главный цикл
 
     virtual int OnExit() wxOVERRIDE;
-
-    // Таймер главного цикла
-    void OnTimer(wxTimerEvent &);
 
 public:
 
