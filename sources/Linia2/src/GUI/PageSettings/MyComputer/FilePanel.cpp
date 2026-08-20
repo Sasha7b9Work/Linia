@@ -342,7 +342,7 @@ void FilePanel::CreateControls()
         // Кнопка возврата (стрелка назад) - только для MODE_BUTTONS
         if (displayMode == MODE_BUTTONS)
         {
-            btnBack = new wxBitmapButton(this, wxID_ANY, Bitmap::Get("undo.bmp").GetBitmap(), wxDefaultPosition);
+            btnBack = new ButtonBitmap(this, wxDefaultSize, "undo.bmp", "");
 
             btnBack->SetToolTip("Вернуться к выбору источника");
 
@@ -1083,28 +1083,8 @@ wxArrayString FilePanel::DetectUSBDrives()
 
 void FilePanel::CreateSourceButtons()
 {
-    // Загружаем иконки
-    wxBitmap &bmpLocal = Bitmap::Get("computer.bmp").GetBitmap();
-    wxBitmap &bmpFTP = Bitmap::Get("ftp.bmp").GetBitmap();
-
     {
-        if (bmpLocal.IsOk())
-        {
-            btnLocal = new wxBitmapButton(this, wxID_ANY, bmpLocal, wxDefaultPosition, wxSize(64, 64));
-        }
-        else
-        {
-            // Создаём пустой bitmap 64x64 вместо wxNullBitmap (wxNullBitmap может вызвать segfault на GTK)
-            wxBitmap emptyBmp(64, 64);
-            {
-                wxMemoryDC dc(emptyBmp);
-                dc.SetBackground(*wxWHITE_BRUSH);
-                dc.Clear();
-                dc.SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
-                dc.DrawText("Local", 10, 22);
-            }
-            btnLocal = new wxBitmapButton(this, wxID_ANY, emptyBmp, wxDefaultPosition, wxSize(64, 64));
-        }
+        btnLocal = new ButtonBitmap(this, { 64, 64 }, "computer.bmp", "");
 
         btnLocal->SetToolTip("Локальное хранилище");
 
@@ -1119,23 +1099,7 @@ void FilePanel::CreateSourceButtons()
     }
 
     {
-        if (bmpFTP.IsOk())
-        {
-            btnFTP = new wxBitmapButton(this, wxID_ANY, bmpFTP, wxDefaultPosition, wxSize(64, 64));
-        }
-        else
-        {
-            wxBitmap emptyBmp(64, 64);
-            {
-                wxMemoryDC dc(emptyBmp);
-                dc.SetBackground(*wxWHITE_BRUSH);
-                dc.Clear();
-                dc.SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
-                dc.DrawText("FTP", 18, 22);
-            }
-
-            btnFTP = new wxBitmapButton(this, wxID_ANY, emptyBmp, wxDefaultPosition, wxSize(64, 64));
-        }
+        btnFTP = new ButtonBitmap(this, { 64, 64 }, "ftp.bmp", "");
 
         btnFTP->SetToolTip("FTP соединение");
 

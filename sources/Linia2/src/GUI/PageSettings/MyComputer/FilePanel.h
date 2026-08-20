@@ -2,6 +2,7 @@
 #include "GUI/PageSettings/MyComputer/FilePanelController.h"
 #include "GUI/PageSettings/MyComputer/FilePanelEvents.h"
 #include "GUI/PageSettings/MyComputer/ClipboardManager.h"
+#include "GUI/Controls/Button.h"
 #pragma warning(push, 0)
     #include <wx/panel.h>
     #include <wx/textctrl.h>
@@ -163,9 +164,9 @@ private:
     DisplayMode displayMode;
     PanelState panelState{ STATE_SELECTION };   // Текущее состояние панели
     wxComboBox *comboTypeSource = nullptr;
-    wxBitmapButton *btnLocal = nullptr;
-    wxBitmapButton *btnFTP = nullptr;
-    wxBitmapButton *btnBack = nullptr;                // Кнопка возврата
+    ButtonBitmap *btnLocal = nullptr;
+    ButtonBitmap *btnFTP = nullptr;
+    ButtonBitmap *btnBack = nullptr;                // Кнопка возврата
     wxBoxSizer *buttonsSizer = nullptr;         // Сайзер для кнопок выбора источника
     wxTextCtrl *pathCtrl = nullptr;
     wxButton *browseBtn = nullptr;
