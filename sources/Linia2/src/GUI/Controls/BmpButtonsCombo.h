@@ -32,6 +32,4 @@ private:
     wxArrayString files;
     wxArrayString tooltips;
     int buttons_in_row;
-
-    void OnButtonClicked(wxCommandEvent &);
 };

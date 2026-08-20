@@ -171,26 +171,23 @@ BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxString &_title,
     files(_files),
     tooltips(_tooltips)
 {
-    Bind(wxEVT_BUTTON, &BmpButtonsCombo::OnButtonClicked, this);
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
+        {
+            BmpButtonPopup *popup = new BmpButtonPopup(this, title, files, tooltips, buttons_in_row);
+
+            wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
+            pos.x -= popup->GetSize().x / 2;
+            pos.y -= popup->GetSize().y / 2;
+
+            popup->Position(pos, wxSize(0, 0));
+            popup->Popup();
+            popup->SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY);
+        });
 
     ButtonBitmap::SetToolTip(_tooltips[(size_t)num_file]);
 
     buttons_in_row = _buttons_in_row;
 }
-
-
-void BmpButtonsCombo::OnButtonClicked(wxCommandEvent &)
-{
-    BmpButtonPopup *popup = new BmpButtonPopup(this, title, files, tooltips, buttons_in_row);
-
-    wxPoint pos = ClientToScreen(wxPoint(GetSize().x / 2, GetSize().y / 2));
-    pos.x -= popup->GetSize().x / 2;
-    pos.y -= popup->GetSize().y / 2;
-
-    popup->Position(pos, wxSize(0, 0));
-    popup->Popup();
-    popup->SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY);
-} //-V773
 
 
 void BmpButtonsCombo::SetCurrentChoice(int choice)
