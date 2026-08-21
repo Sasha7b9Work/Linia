@@ -44,7 +44,8 @@ namespace GPIO
         PinStorage::GetPinInfo(Pin::FIT_37, true)
     };
 
-    constexpr size_t PINS_COUNT = std::size(pins);
+//    constexpr size_t PINS_COUNT = std::size(pins);
+    const size_t PINS_COUNT = 1;
 
     // Вспомогательные функции для получения информации о пинах
     PinInfo *GetPinInfo(Pin::E type)
@@ -134,7 +135,6 @@ namespace GPIO
                 }
 
                 LOG_WRITE("GPIO output pin %s:%d initialized", info.hw.chip_name, info.hw.pin_number);
-
             }
         }
     }
