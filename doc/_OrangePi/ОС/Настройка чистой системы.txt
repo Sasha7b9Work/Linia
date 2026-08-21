@@ -1,4 +1,7 @@
--1. Для установки системы следует использовать файл Armbian_26.5.1_Orangepi5-plus_resolute_vendor_6.1.115_gnome_desktop.img
+!!! ВНИМАНИЕ !!!
+После любых изменений в системе всегда проверяйте функционирование UART6
+
+-1. Для установки системы следует использовать файл Armbian_25.8.1_Orangepi5-plus_noble_vendor_6.1.115_xfce_desktop
     После установки :
     apt-get update
     apt-get upgrade -y
@@ -29,6 +32,7 @@
 
 
  1. Установить XFCE
+    sudo apt install xfce4 xfce4-goodies
 
  2. Настроить автовход при загрузке:
      # Проверить наличие различных менеджеров входа
@@ -62,6 +66,23 @@
  
  8. Включить spi и uart :
     armbian-config
+    
+    boot/armbianEnv.txt:
+        verbosity=1
+        bootlogo=true
+        console=both
+        extraargs=cma=256M
+        overlay_prefix=rockchip-rk3588
+        fdtfile=rockchip/rk3588-orangepi-5-plus.dtb
+        rootdev=UUID=c80228b6-df38-4ce2-bb64-8ce362822ffe
+        rootfstype=ext4
+        overlays=rk3588-spi0-m2-cs0-spidev rk3588-uart6-m1 rk3588-uart6-m1-full
+        usbstoragequirks=0x2537:0x1066:u,0x2537:0x1068:u
+
+    
+    Проверка UART6:
+        echo "Hello UART6" | sudo tee /dev/ttyS6
+        на контактах 8, 10 должен быть сигнал
     
  9. Дать права на доступ к аппаратным ресурсам пользователю mnipi:
  
