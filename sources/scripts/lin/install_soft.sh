@@ -6,7 +6,7 @@ sudo apt-get -y install libssl-dev libx11-dev libxrandr-dev mesa-common-dev libg
 
 ARCH=$(uname -m)
 if [[ "$ARCH" == "aarch64" ]] || [[ "$ARCH" == "armv7l" ]] || [[ "$ARCH" == "arm64" ]]; then
-    echo -e "\033[33mОбнаружена архитектура ($ARCH). Устанавливаем libgpiod...\033[0m"
+    echo -e "\033[33mОбнаружена архитектура $ARCH. Устанавливаем libgpiod...\033[0m"
     sudo apt-get install libgpiod-dev gpiod -y
 else
     echo -e "\033[33mАрхитектура $ARCH не является ARM. Пропускаем установку libgpiod.\033[0m"
