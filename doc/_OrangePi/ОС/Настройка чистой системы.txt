@@ -56,6 +56,18 @@
     После установки можно зайти в .bashrc и удалить последние строки, где настраивается вид приглашения как в Windows
  
  4. Отформатировать и примонтировать nvme диск в /mnt/nvme
+    4.0 sudo mkdir -p /mnt/nvme
+    4.1 lsblk
+    4.2 sudo blkid /dev/nvme0n1
+        UUID="44fe5ae6-ad0d-44bb-bc8d-214ea83e23e6" BLOCK_SIZE="4096" TYPE="ext4"
+    4.3 sudo nano /etc/fstab :
+        в конце файла:
+        UUID=44fe5ae6-ad0d-44bb-bc8d-214ea83e23e6 /mnt/nvme ext4 defaults 0 2
+    4.4 sudo mount -a
+    4.5 sudo systemctl daemon-reload
+    4.6 Даём доступ к диску ВСЕМ:
+        sudo chmod -R 777 /mnt/nvme
+        
 
  5. Склонировать Linia2 в /mnt/nvme
 
