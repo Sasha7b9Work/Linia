@@ -21,16 +21,11 @@ RealDevice::~RealDevice()
 
 bool RealDevice::Init()
 {
+    UART::Init(SCPI::OnEventCallback);
+
     GPIO::Init();
 
     SPI::Init();
-
-    if(UART::Init(SCPI::OnEventCallback))
-    {
-        connected = true;
-        running = true;
-        return true;
-    }
 
     return false;
 }

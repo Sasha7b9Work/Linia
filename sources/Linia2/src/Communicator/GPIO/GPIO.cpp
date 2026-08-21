@@ -67,10 +67,6 @@ namespace GPIO
 {
     void Init()
     {
-        DeInit();
-
-        return;
-
         LOG_WRITE("Initializing GPIO...");
 
         for (size_t i = 0; i < PINS_COUNT; i++)
