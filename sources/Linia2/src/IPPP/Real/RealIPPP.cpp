@@ -34,10 +34,9 @@ void RealIPPP::PeriodicTask()
 
     if (ReadData(data))
     {
-        for (int i = 0; i < 5; i++)
-        {
-        }
     }
+
+    SPI::ReadFPGA((uint8 *)data, 100);
 }
 
 

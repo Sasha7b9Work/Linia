@@ -29,13 +29,13 @@ struct DAC : public Chip
 {
     enum E
     {
-        _0_ChannelC_Form,   // Формирователь развёртки
-        _1_ChannelC_Meas,   // Измеритель
-        _2_ChannelB_DAC1,   // База DAC1
-        _3_ChannelB_DAC2,   // База DAC2
-        _4_ChannelS_DAC1,
-        _5_ChannelS_DAC2,
-        _6_Source_50V,      // Источник 50 В
+        _0_ChannelC_Form,   // Формирователь развёртки       XP7 Записывается прямо из Orange Pi 5 Plus
+        _1_ChannelC_Meas,   // Измеритель                    XP7
+        _2_ChannelB_DAC1,   // База DAC1                     XP4
+        _3_ChannelB_DAC2,   // База DAC2                     XP4
+        _4_ChannelS_DAC1,   //                               XP5
+        _5_ChannelS_DAC2,   //                               XP5
+        _6_Source_50V,      // Источник 50 В                 XP10 Записывается прямо из Orange Pi 5 Plus
         Count
     };
 
@@ -65,12 +65,12 @@ struct REG : public Chip
 {
     enum E
     {
-        _0_Source3kV,
-        _1_Commutator,
-        _2_ChannelC,
-        _3_ChannelB,
-        _4_ChannelS,
-        _5_MeasCurrent,
+        _0_Source3kV,       // XP13
+        _1_Commutator,      // XP12
+        _2_ChannelC,        // XP7
+        _3_ChannelB,        // XP4
+        _4_ChannelS,        // XP5
+        _5_MeasCurrent,     // XP6
         Count
     };
 
