@@ -26,7 +26,7 @@ namespace GPIO
     {
 //        PinStorage::GetPinInfo(Pin::T13_03, true),
 //        PinStorage::GetPinInfo(Pin::T14_05, true),
-        PinStorage::GetPinInfo(Pin::T15_07, true),
+//        PinStorage::GetPinInfo(Pin::T15_07, true),
         PinStorage::GetPinInfo(Pin::ENC_A_11, true),
         PinStorage::GetPinInfo(Pin::T17_12, true),
 //        PinStorage::GetPinInfo(Pin::ENC_B_13, true),
