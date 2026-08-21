@@ -28,7 +28,7 @@ namespace GPIO
 //        PinStorage::GetPinInfo(Pin::T14_05, true),        // Этот пин, судя по gpio readall, не может использоваться в качестве GPIO. UART не работает, если его инициализировать
 //        PinStorage::GetPinInfo(Pin::T15_07, true),        // Этот пин, судя по gpio readall, не может использоваться в качестве GPIO. UART не работает, если его инициализировать
         PinStorage::GetPinInfo(Pin::ENC_A_11, true),
-        PinStorage::GetPinInfo(Pin::T17_12, true),
+        PinStorage::GetPinInfo(Pin::T17_12__________________FREE, true),
         PinStorage::GetPinInfo(Pin::ENC_B_13, true),
         PinStorage::GetPinInfo(Pin::KN_START_15, true),
         PinStorage::GetPinInfo(Pin::DDAC_MOSI_16_out, false),
