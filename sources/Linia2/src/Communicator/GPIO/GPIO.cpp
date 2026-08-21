@@ -77,7 +77,7 @@ namespace GPIO
                 info.hw.chip = gpiod_chip_open_by_name(info.hw.chip_name);
                 if (!info.hw.chip)
                 {
-                    LOG_ERROR("Cannot open GPIO chip %s", info.hw.chip_name);
+                    LOG_ERROR("Cannot open GPIO chip %s pin %d", info.hw.chip_name, (int)info.pin);
                     continue;
                 }
 
@@ -103,14 +103,14 @@ namespace GPIO
 
                 info.last_state = (gpiod_line_get_value(info.hw.line) == 1);
 
-                LOG_WRITE("GPIO input pin %s:%d initialized", info.hw.chip_name, info.hw.pin_number);
+                LOG_WRITE("GPIO input pin number %d %s:%d initialized", (int)info.pin, info.hw.chip_name, info.hw.pin_number);
             }
             else
             {
                 info.hw.chip = gpiod_chip_open_by_name(info.hw.chip_name);
                 if (!info.hw.chip)
                 {
-                    LOG_ERROR("Cannot open GPIO chip %s", info.hw.chip_name);
+                    LOG_ERROR("Cannot open GPIO chip %s pint %d", info.hw.chip_name, (int)info.pin);
                     continue;
                 }
 
