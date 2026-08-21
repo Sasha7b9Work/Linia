@@ -24,21 +24,21 @@ namespace GPIO
 {
     static PinInfo pins[] =
     {
-        PinStorage::GetPinInfo(Pin::T13_03, true),
-        PinStorage::GetPinInfo(Pin::T14_05, true),
+//        PinStorage::GetPinInfo(Pin::T13_03, true),
+//        PinStorage::GetPinInfo(Pin::T14_05, true),
         PinStorage::GetPinInfo(Pin::T15_07, true),
         PinStorage::GetPinInfo(Pin::ENC_A_11, true),
         PinStorage::GetPinInfo(Pin::T17_12, true),
-        PinStorage::GetPinInfo(Pin::ENC_B_13, true),
+//        PinStorage::GetPinInfo(Pin::ENC_B_13, true),
         PinStorage::GetPinInfo(Pin::KN_START_15, true),
-        PinStorage::GetPinInfo(Pin::DDAC_MOSI_16_out, false),
+//        PinStorage::GetPinInfo(Pin::DDAC_MOSI_16_out, false),
         PinStorage::GetPinInfo(Pin::DDAC_CLK_18_out, false),
         PinStorage::GetPinInfo(Pin::F_CON2_22, true),
         PinStorage::GetPinInfo(Pin::F_CON1_26, true),
         PinStorage::GetPinInfo(Pin::ENB_PC_27, true),
         PinStorage::GetPinInfo(Pin::DDAC_CS0_31_out, false),
         PinStorage::GetPinInfo(Pin::ST_EXT_32, true),
-        PinStorage::GetPinInfo(Pin::KN_STOP_33, true),
+//        PinStorage::GetPinInfo(Pin::KN_STOP_33, true),
         PinStorage::GetPinInfo(Pin::DDAC_CS1_35_out, false),
         PinStorage::GetPinInfo(Pin::FULL_36, true),
         PinStorage::GetPinInfo(Pin::FIT_37, true)
