@@ -166,8 +166,8 @@ class RegFPGA : public Register
 {
 public:
 
-    RegFPGA(wxWindow *_parent, Chip *_chip) :
-        Register(_parent, "", _chip, "")
+    RegFPGA(wxWindow *_parent, Chip *_chip, const wxString &_functional = "") :
+        Register(_parent, "", _chip, _functional)
     {
     }
 
