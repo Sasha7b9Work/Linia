@@ -22,7 +22,7 @@ RealDevice::~RealDevice()
 bool RealDevice::Init()
 {
 //    GPIO::Init();
-//    SPI::Init();
+    SPI::Init();
 
     if(UART::Init(SCPI::OnEventCallback))
     {
