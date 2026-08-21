@@ -7,10 +7,6 @@ set -e    # Stop script when an error occurs
 echo "Установка зависимостей для Orange Pi 5 Plus (ARM64)..."
 echo "Архитектура: $(uname -m)"
 
-# Обновление системы
-sudo apt-get update
-sudo apt-get -y upgrade
-
 # Основные инструменты разработки
 sudo apt-get -y install nginx htop openssh-server openssh-client iptables-persistent mc links
 sudo apt-get -y install cmake gcc g++ make python3 python3-pip python3-venv build-essential gdb
