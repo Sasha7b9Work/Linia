@@ -96,30 +96,20 @@
         echo "Hello UART6" | sudo tee /dev/ttyS6
         на контактах 8, 10 должен быть сигнал
     
- 9. Дать права на доступ к аппаратным ресурсам пользователю mnipi:
+ 9. Дать права на доступ к аппаратным ресурсам всем пользователям:
  
-        GPIO:
-    sudo groupadd gpio
-    sudo usermod -aG gpio mnipi
-    sudo nano /etc/udev/rules.d/99-gpio.rules
-        SUBSYSTEM=="gpio", GROUP="gpio", MODE="0660"
-        SUBSYSTEM=="gpio", KERNEL=="gpiochip*", GROUP="gpio", MODE="0660"
-    sudo udevadm control --reload-rules
-    sudo udevadm trigger
-        Проверяем права:
-    ls -l /dev/gpiochip*
-        crw-rw---- 1 root gpio 254, 0 ... /dev/gpiochip0
-        crw-rw---- 1 root gpio 254, 1 ... /dev/gpiochip1
+    sudo nano /etc/udev/rules.d/99-spi.rules:
+        SUBSYSTEM=="spidev", MODE="0666"
         
-        SPI:
-    sudo groupadd spi
-    sudo usermod -aG spi mnipi
-    sudo nano /etc/udev/rules.d/99-spi.rules
-        SUBSYSTEM=="spidev", GROUP="spi", MODE="0660"
-    sudo udevadm control --reload-rules
-    sudo udevadm trigger -s spidev
-    ls -l /dev/spidev*
-        crw-rw---- 1 root spi 153, 0 ... /dev/spidev0.0
+        SUBSYSTEM=="gpio", MODE="0666"
+        KERNEL=="gpiochip*", MODE="0666"
+        
+        SUBSYSTEM=="tty", KERNEL=="ttyS*", MODE="0666"
+        SUBSYSTEM=="tty", KERNEL=="ttyAMA*", MODE="0666"
+        SUBSYSTEM=="tty", KERNEL=="ttyUSB*", MODE="0666"
+        
+        sudo udevadm control --reload-rules
+        sudo udevadm trigger
     
     sudo reboot
     
