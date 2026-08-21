@@ -172,8 +172,6 @@ bool UART::SendByte(uint8 byte)
 
 bool UART::SendBuffer(const void *_buffer, int size)
 {
-    LOG_WRITE("1");
-
     if (!IsReady())
     {
         LOG_ERROR("UART not ready");
@@ -198,10 +196,6 @@ bool UART::SendBuffer(const void *_buffer, int size)
             return false;
         }
     }
-
-    LOG_WRITE("2");
-
-    LOG_WRITE("result write in uart = %d", (n == size) ? 1 : 0);
 
     return (n == size);
 }
