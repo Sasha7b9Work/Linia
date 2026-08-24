@@ -30,10 +30,10 @@ public:
     ~ClientHTTP();
 
     // Отправка сообщения (асинхронная)
-    void SendLog(const std::string &message);
+    void SendMessage(const std::string &message);
 
     // Отправка сообщения с уровнем логирования
-    void SendLog(const std::string &level, const std::string &message);
+    void SendLogMessage(const std::string &level, const std::string &message);
 
     // Отправка сообщения с дополнительными данными
     void SendLogWithData(const std::string &level, const std::string &message, const std::map<std::string, std::string> &additional_data);

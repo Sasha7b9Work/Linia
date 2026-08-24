@@ -71,12 +71,12 @@ void ClientHTTP::CleanupSockets()
 #endif
 }
 
-void ClientHTTP::SendLog(const std::string &message)
+void ClientHTTP::SendMessage(const std::string &message)
 {
-    SendLog("INFO", message);
+    SendLogMessage("INFO", message);
 }
 
-void ClientHTTP::SendLog(const std::string &level, const std::string &message)
+void ClientHTTP::SendLogMessage(const std::string &level, const std::string &message)
 {
     std::map<std::string, std::string> empty_data;
     SendLogWithData(level, message, empty_data);
