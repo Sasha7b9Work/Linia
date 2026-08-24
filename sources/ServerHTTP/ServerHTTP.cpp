@@ -1,13 +1,11 @@
 // 2026/08/24 15:00:53 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
+#include "ServerHTTP.h"
 #include <iostream>
-#include <string>
 #include <fstream>
 #include <sstream>
 #include <thread>
-#include <mutex>
 #include <chrono>
 #include <atomic>
-#include <vector>
 #include <algorithm>
 #include <iomanip>
 #include <cstring>
@@ -15,42 +13,8 @@
 #include <fcntl.h>
 #include <map>
 
-#ifdef _WIN32
-    #include <winsock2.h>
-    #include <ws2tcpip.h>
-    #include <windows.h>  // Добавлено для GetAsyncKeyState
-    #pragma comment(lib, "ws2_32.lib")
-    #define SHUT_RDWR SD_BOTH
-    typedef int socklen_t;
-#else
-    #include <sys/socket.h>
-    #include <netinet/in.h>
-    #include <arpa/inet.h>
-    #include <unistd.h>
-    #include <sys/time.h>
-#endif
 
-class HttpLogServer
-{
-private:
-#ifdef _WIN32
-    SOCKET server_socket;
-#else
-    int server_socket;
-#endif
-    int port;
-    std::string log_file;
-    std::mutex log_mutex;
-    std::atomic<bool> running{ false };
-    std::thread accept_thread;
-    std::vector<std::thread> client_threads;
-    std::mutex threads_mutex;
-    std::atomic<size_t> total_requests{ 0 };
-    std::atomic<size_t> successful_requests{ 0 };
-    std::atomic<size_t> failed_requests{ 0 };
-
-public:
-    HttpLogServer(int port, const std::string &log_file_path) :
+    HttpLogServer::HttpLogServer(int port, const std::string &log_file_path) :
         port(port),
         log_file(log_file_path)
     {
@@ -66,12 +30,12 @@ public:
 #endif
     }
 
-    ~HttpLogServer()
+    HttpLogServer::~HttpLogServer()
     {
-        stop();
+        Stop();
     }
 
-    bool start()
+    bool HttpLogServer::Start()
     {
 #ifdef _WIN32
         // Инициализация Winsock
@@ -100,7 +64,7 @@ public:
             (char *)&opt, sizeof(opt)) < 0)
         {
             std::cerr << "Failed to set socket options" << std::endl;
-            closeSocket(server_socket);
+            CloseSocket(server_socket);
             return false;
         }
 
@@ -113,19 +77,19 @@ public:
         if (bind(server_socket, (sockaddr *)&server_addr, sizeof(server_addr)) < 0)
         {
             std::cerr << "Failed to bind to port " << port << std::endl;
-            closeSocket(server_socket);
+            CloseSocket(server_socket);
             return false;
         }
 
         if (listen(server_socket, SOMAXCONN) < 0)
         {
             std::cerr << "Failed to listen" << std::endl;
-            closeSocket(server_socket);
+            CloseSocket(server_socket);
             return false;
         }
 
         running = true;
-        accept_thread = std::thread(&HttpLogServer::acceptLoop, this);
+        accept_thread = std::thread(&HttpLogServer::AcceptLoop, this);
 
         std::cout << "=== HTTP Log Server ===" << std::endl;
         std::cout << "Server started on port: " << port << std::endl;
@@ -136,7 +100,7 @@ public:
         return true;
         }
 
-    void stop()
+    void HttpLogServer::Stop()
     {
         if (running)
         {
@@ -149,7 +113,7 @@ public:
             {
 #endif
                 shutdown(server_socket, SHUT_RDWR);
-                closeSocket(server_socket);
+                CloseSocket(server_socket);
 #ifdef _WIN32
                 server_socket = INVALID_SOCKET;
 #else
@@ -182,22 +146,27 @@ public:
         }
 
     // Получение статистики
-    size_t getTotalRequests() const
+    size_t HttpLogServer::GetTotalRequests() const
     {
         return total_requests.load();
     }
-    size_t getSuccessfulRequests() const
+
+
+    size_t HttpLogServer::GetSuccessfulRequests() const
     {
         return successful_requests.load();
     }
-    size_t getFailedRequests() const
+
+
+    size_t  HttpLogServer::GetFailedRequests() const
     {
         return failed_requests.load();
     }
 
 private:
+
     // Вспомогательная функция для закрытия сокета
-    void closeSocket(
+    void HttpLogServer::CloseSocket(
 #ifdef _WIN32
         SOCKET sock
 #else
@@ -213,7 +182,7 @@ private:
     }
 
     // Функция для парсинга HTTP запроса
-    std::string getHttpMethod(const std::string &request)
+    std::string GetHttpMethod(const std::string &request)
     {
         size_t space_pos = request.find(' ');
         if (space_pos != std::string::npos)
@@ -223,7 +192,7 @@ private:
         return "";
     }
 
-    std::string getHttpPath(const std::string &request)
+    std::string GetHttpPath(const std::string &request)
     {
         size_t first_space = request.find(' ');
         if (first_space != std::string::npos)
@@ -237,7 +206,7 @@ private:
         return "";
     }
 
-    void acceptLoop()
+    void HttpLogServer::AcceptLoop()
     {
         while (running)
         {
@@ -249,18 +218,18 @@ private:
             if (client_socket == INVALID_SOCKET)
             {
 #else
-            int client_socket = accept(server_socket, (sockaddr *)&client_addr, &client_len);
-            if (client_socket < 0)
-            {
-#endif
-                if (running)
+                int client_socket = accept(server_socket, (sockaddr *)&client_addr, &client_len);
+                if (client_socket < 0)
                 {
-#ifdef _WIN32
-                    std::cerr << "Failed to accept connection: " << WSAGetLastError() << std::endl;
-#else
-                    std::cerr << "Failed to accept connection" << std::endl;
 #endif
-                }
+                    if (running)
+                    {
+#ifdef _WIN32
+                        std::cerr << "Failed to accept connection: " << WSAGetLastError() << std::endl;
+#else
+                        std::cerr << "Failed to accept connection" << std::endl;
+#endif
+                    }
                 continue;
             }
 
@@ -270,12 +239,11 @@ private:
 
             // Обработка каждого клиента в отдельном потоке
             std::lock_guard<std::mutex> lock(threads_mutex);
-            client_threads.emplace_back(&HttpLogServer::handleClient, this,
-                client_socket, std::string(client_ip));
-            }
+            client_threads.emplace_back(&HttpLogServer::HandleClient, this, client_socket, std::string(client_ip));
         }
+    }
 
-    void handleClient(
+    void HandleClient(
 #ifdef _WIN32
         SOCKET client_socket
 #else
@@ -303,18 +271,18 @@ private:
         if (bytes_received <= 0)
         {
             failed_requests++;
-            closeSocket(client_socket);
+            CloseSocket(client_socket);
             return;
         }
 
         std::string request(buffer);
 
-        std::string method = getHttpMethod(request);
-        std::string path = getHttpPath(request);
+        std::string method = GetHttpMethod(request);
+        std::string path = GetHttpPath(request);
 
         if (method == "POST" && path == "/log")
         {
-            if (handleLogRequest(client_socket, request, client_ip))
+            if (HandleLogRequest(client_socket, request, client_ip))
             {
                 successful_requests++;
             }
@@ -326,7 +294,7 @@ private:
         else if (method == "POST")
         {
             // Любой другой POST
-            if (handleLogRequest(client_socket, request, client_ip))
+            if (HandleLogRequest(client_socket, request, client_ip))
             {
                 successful_requests++;
             }
@@ -337,29 +305,29 @@ private:
         }
         else if (method == "GET" && path == "/stats")
         {
-            handleStatsRequest(client_socket);
+            HandleStatsRequest(client_socket);
             successful_requests++;
         }
         else if (method == "GET" && path == "/health")
         {
-            handleHealthRequest(client_socket);
+            HandleHealthRequest(client_socket);
             successful_requests++;
         }
         else if (method == "GET")
         {
-            handleGetRequest(client_socket);
+            HandleGetRequest(client_socket);
             successful_requests++;
         }
         else
         {
-            sendErrorResponse(client_socket, 405, "Method Not Allowed");
+            SendErrorResponse(client_socket, 405, "Method Not Allowed");
             failed_requests++;
         }
 
-        closeSocket(client_socket);
+        CloseSocket(client_socket);
     }
 
-    bool handleLogRequest(
+    bool HandleLogRequest(
 #ifdef _WIN32
         SOCKET client_socket
 #else
@@ -371,7 +339,7 @@ private:
         size_t body_pos = request.find("\r\n\r\n");
         if (body_pos == std::string::npos)
         {
-            sendErrorResponse(client_socket, 400, "Bad Request");
+            SendErrorResponse(client_socket, 400, "Bad Request");
             return false;
         }
 
@@ -380,23 +348,23 @@ private:
         // Проверка на пустое тело
         if (body.empty())
         {
-            sendErrorResponse(client_socket, 400, "Empty body");
+            SendErrorResponse(client_socket, 400, "Empty body");
             return false;
         }
 
         // Логирование сообщения
-        logMessage(body, client_ip);
+        LogMessage(body, client_ip);
 
         // Отправка ответа
         std::string response_json = "{\"status\":\"ok\",\"timestamp\":" +
             std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
                 std::chrono::system_clock::now().time_since_epoch()).count()) + "}";
 
-        sendJsonResponse(client_socket, 200, response_json);
+        SendJsonResponse(client_socket, 200, response_json);
         return true;
     }
 
-    void handleStatsRequest(
+    void HandleStatsRequest(
 #ifdef _WIN32
         SOCKET client_socket
 #else
@@ -413,10 +381,10 @@ private:
         stats << "\"failed_requests\":" << failed_requests.load();
         stats << "}";
 
-        sendJsonResponse(client_socket, 200, stats.str());
+        SendJsonResponse(client_socket, 200, stats.str());
     }
 
-    void handleHealthRequest(
+    void HandleHealthRequest(
 #ifdef _WIN32
         SOCKET client_socket
 #else
@@ -427,10 +395,10 @@ private:
         std::string health = "{\"status\":\"healthy\",\"timestamp\":" + 
             std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()) + "}";
 
-        sendJsonResponse(client_socket, 200, health);
+        SendJsonResponse(client_socket, 200, health);
     }
 
-    void handleGetRequest(
+    void HandleGetRequest(
 #ifdef _WIN32
         SOCKET client_socket
 #else
@@ -469,10 +437,10 @@ private:
 </html>
 )";
 
-        sendHtmlResponse(client_socket, html);
+        SendHtmlResponse(client_socket, html);
     }
 
-    void sendJsonResponse(
+    void SendJsonResponse(
 #ifdef _WIN32
         SOCKET client_socket
 #else
@@ -480,7 +448,7 @@ private:
 #endif
         , int status_code, const std::string & json_body)
     {
-        std::string response = "HTTP/1.1 " + std::to_string(status_code) + " " + getHttpStatusText(status_code) + "\r\n";
+        std::string response = "HTTP/1.1 " + std::to_string(status_code) + " " + GetHttpStatusText(status_code) + "\r\n";
         response += "Content-Type: application/json\r\n";
         response += "Content-Length: " + std::to_string(json_body.length()) + "\r\n";
         response += "Connection: close\r\n";
@@ -491,7 +459,7 @@ private:
         send(client_socket, response.c_str(), (int)response.length(), 0);
     }
 
-    void sendHtmlResponse(
+    void SendHtmlResponse(
 #ifdef _WIN32
         SOCKET client_socket
 #else
@@ -509,7 +477,7 @@ private:
         send(client_socket, response.c_str(), (int)response.length(), 0);
     }
 
-    void sendErrorResponse(
+    void SendErrorResponse(
 #ifdef _WIN32
         SOCKET client_socket
 #else
@@ -517,7 +485,7 @@ private:
 #endif
         , int error_code, const std::string & error_message)
     {
-        std::string response = "HTTP/1.1 " + std::to_string(error_code) + " " + getHttpStatusText(error_code) + "\r\n";
+        std::string response = "HTTP/1.1 " + std::to_string(error_code) + " " + GetHttpStatusText(error_code) + "\r\n";
         response += "Content-Type: text/plain\r\n";
         response += "Content-Length: " + std::to_string(error_message.length()) + "\r\n";
         response += "Connection: close\r\n";
@@ -527,7 +495,7 @@ private:
         send(client_socket, response.c_str(), (int)response.length(), 0);
     }
 
-    std::string getHttpStatusText(int code)
+    std::string GetHttpStatusText(int code)
     {
         switch (code)
         {
@@ -540,7 +508,7 @@ private:
         }
     }
 
-    void logMessage(const std::string & message, const std::string & client_ip)
+    void LogMessage(const std::string & message, const std::string & client_ip)
     {
         std::lock_guard<std::mutex> lock(log_mutex);
 
@@ -561,7 +529,7 @@ private:
         log_stream << "[IP: " << client_ip << "] ";
 
         // Очистка сообщения от непечатаемых символов
-        std::string clean_message = sanitizeString(message);
+        std::string clean_message = SanitizeString(message);
         log_stream << clean_message;
 
         std::string log_entry = log_stream.str();
@@ -579,7 +547,7 @@ private:
     }
 
     // Метод для очистки строки от непечатаемых символов
-    std::string sanitizeString(const std::string &input)
+    std::string SanitizeString(const std::string &input)
     {
         std::string output;
         output.reserve(input.length());
@@ -605,93 +573,3 @@ private:
 
         return output;
     }
-
-    };
-
-// Глобальный указатель на сервер для обработки сигналов
-HttpLogServer *global_server = nullptr;
-
-#ifndef _WIN32
-void signalHandler(int signal)
-{
-    if (global_server)
-    {
-        std::cout << "\nReceived signal " << signal << ", stopping server..." << std::endl;
-        global_server->stop();
-        exit(0);
-    }
-}
-#endif
-
-int main(int argc, char *argv[])
-{
-    int port = 8080;
-    std::string log_file = "cpp_app.log";  // Для Windows
-
-#ifdef __linux__
-    log_file = "/var/log/cpp_app.log";  // Для Linux по умолчанию
-#endif
-
-    // Обработка аргументов командной строки
-    for (int i = 1; i < argc; i++)
-    {
-        std::string arg = argv[i];
-        if (arg == "-p" && i + 1 < argc)
-        {
-            port = std::stoi(argv[i + 1]);
-            i++;
-        }
-        else if (arg == "-l" && i + 1 < argc)
-        {
-            log_file = argv[i + 1];
-            i++;
-        }
-        else if (arg == "-h" || arg == "--help")
-        {
-            std::cout << "Usage: " << argv[0] << " [options]" << std::endl;
-            std::cout << "Options:" << std::endl;
-            std::cout << "  -p <port>     Port number (default: 8080)" << std::endl;
-            std::cout << "  -l <file>     Log file path" << std::endl;
-            std::cout << "  -h, --help    Show this help" << std::endl;
-            return 0;
-        }
-    }
-
-    // Создание сервера
-    HttpLogServer server(port, log_file);
-    global_server = &server;
-
-#ifndef _WIN32
-    // Установка обработчиков сигналов (только для Linux)
-    signal(SIGINT, signalHandler);
-    signal(SIGTERM, signalHandler);
-#endif
-
-    // Запуск сервера
-    if (!server.start())
-    {
-        std::cerr << "Failed to start server" << std::endl;
-        return 1;
-    }
-
-    // Бесконечный цикл ожидания
-    while (true)
-    {
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-
-#ifdef _WIN32
-        // Проверка на Ctrl+C в Windows
-        if (GetAsyncKeyState(VK_CONTROL) & 0x8000)
-        {
-            if (GetAsyncKeyState('C') & 0x8000)
-            {
-                std::cout << "\nCtrl+C detected, stopping server..." << std::endl;
-                server.stop();
-                break;
-            }
-        }
-#endif
-    }
-
-    return 0;
-}

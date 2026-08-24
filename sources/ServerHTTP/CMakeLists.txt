@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(HttpLogServer)
 
+set(CMAKE_UNITY_BUILD OFF)
+
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -19,6 +21,8 @@ find_package(Threads REQUIRED)
 
 # Исполняемый файл сервера
 add_executable(log_server
+    main.cpp
+    ServerHTTP.h
     ServerHTTP.cpp
 )
 

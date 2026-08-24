@@ -57,7 +57,7 @@ endif()
 #add_subdirectory(Linia)
 add_subdirectory(Linia2)
 
-add_subdirectory(ServerHTTP)
+#add_subdirectory(ServerHTTP)
 
 if(WIN32)
     add_subdirectory(Device)

@@ -58,16 +58,16 @@ bool RealIPPP::ReadData(int data_out[NUMBER_ADC][POINTS_IN_SAMPLE_ADC])
 
     if (pinFIFO_FULL.GetState() && prev == false)
     {
-        uint8 data[POINTS_IN_SAMPLE_ADC * NUMBER_ADC];
-
-        SPI::ReadFPGA(data, sizeof(data));
-
-        int *pointer = (int *)data_out;
-
-        for (size_t i = 0; i < sizeof(data); i++)
+        for (int i = 0; i < POINTS_IN_SAMPLE_ADC; i++)
         {
-            *pointer = data[i];
-            pointer++;
+            uint16 data[5];
+
+            SPI::ReadFPGA((uint8 *)data, sizeof(uint16) * 5);
+
+            for (int num_dac = 0; num_dac < 4; num_dac++)
+            {
+                data_out[num_dac][i] = data[num_dac];
+            }
         }
 
         result = true;
