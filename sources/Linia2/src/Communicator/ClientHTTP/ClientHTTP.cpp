@@ -1,6 +1,7 @@
 ﻿// 2026/08/24 13:54:26 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Communicator/ClientHTTP/ClientHTTP.h"
+#include "Utils/SystemInfo.h"
 #include <iostream>
 #include <sstream>
 #include <chrono>
@@ -69,7 +70,8 @@ void ClientHTTP::CleanupSockets()
 
 void ClientHTTP::Connect()
 {
-    SendMessage("Connect");
+    SendMessage(std::string("Connect from ") + SystemInfoExtended::getComputerName() +
+        " : " + SystemInfoExtended::getLocalIPAddress());
 }
 
 
