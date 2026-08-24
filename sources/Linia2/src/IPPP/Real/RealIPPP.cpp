@@ -62,7 +62,7 @@ bool RealIPPP::ReadData(int data_out[NUMBER_ADC][POINTS_IN_SAMPLE_ADC])
         {
             uint16 data[5];
 
-            SPI::ReadFPGA((uint8 *)data, sizeof(uint16) * 5);
+            SPI::ReadFPGA((uint8 *)data, 2 * 4 + 1);
 
             for (int num_dac = 0; num_dac < 4; num_dac++)
             {
