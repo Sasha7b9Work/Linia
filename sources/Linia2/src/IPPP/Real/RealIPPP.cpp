@@ -36,7 +36,7 @@ void RealIPPP::PeriodicTask()
     {
     }
 
-    if (pinFIFO_FULL.GetState())
+//    if (pinFIFO_FULL.GetState())
     {
         SPI::ReadFPGA((uint8 *)data, 100);
     }
