@@ -70,14 +70,15 @@ void ClientHTTP::CleanupSockets()
 
 void ClientHTTP::Connect()
 {
-    SendMessage(std::string("Connect from ") + SystemInfoExtended::getComputerName() +
-        " : " + SystemInfoExtended::getLocalIPAddress());
+    SendMessage(std::string("Connect ") + SystemInfoExtended::getComputerName() +
+        ":" + SystemInfoExtended::getLocalIPAddress());
 }
 
 
 void ClientHTTP::Disconnect()
 {
-    SendMessage("Disconnect");
+    SendMessage(std::string("Disconnect ") + SystemInfoExtended::getComputerName() +
+        ":" + SystemInfoExtended::getLocalIPAddress());
 }
 
 
@@ -122,7 +123,6 @@ std::string ClientHTTP::CreateJsonMessage(const std::string &level, const std::s
     json_stream << "{";
     json_stream << "\"level\":\"" << EscapeJson(level) << "\",";
     json_stream << "\"message\":\"" << EscapeJson(message) << "\",";
-    json_stream << "\"timestamp\":" << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
     // Добавление дополнительных данных
     if (!additional_data.empty())
