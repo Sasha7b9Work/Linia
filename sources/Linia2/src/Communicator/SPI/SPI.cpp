@@ -140,9 +140,13 @@ bool SPI::WriteDynamicDAC(DAC::E dac, uint16 value)
     {
         pinMOSI.Set((value & 0x01) != 0);
 
+        delay_10us_busy();
+
         pinCLK.ToHi();
 
         value >>= 1;
+
+        delay_10us_busy();
 
         pinCLK.ToLow();
     }
