@@ -50,7 +50,7 @@ namespace SPI
     static bool SetSpeed(uint speedHz);
     static bool SetMode(uint8 mode);
 
-//    static bool Write(uint8 *data, size_t length);
+    static void delay_10us_busy(void);
 }
 
 void SPI::Init()
@@ -97,6 +97,33 @@ void SPI::DeInit()
     }
 
     LOG_WRITE("SPI deinitialized");
+}
+
+
+void SPI::delay_10us_busy(void)
+{
+#ifdef WIN32
+#else
+    struct timespec start, now;
+    // Получаем текущее время
+    clock_gettime(CLOCK_MONOTONIC, &start);
+
+    // Целевое время: старт + 10 мкс (10 000 наносекунд)
+    long target_ns = start.tv_nsec + 10000;
+
+    // Корректируем перенос секунд, если наносекунды перевалили за 1e9
+    if (target_ns >= 1000000000)
+    {
+        target_ns -= 1000000000;
+        start.tv_sec += 1;
+    }
+
+    // Активно ждем, пока не наступит нужный момент
+    do
+    {
+        clock_gettime(CLOCK_MONOTONIC, &now);
+    } while (now.tv_sec < start.tv_sec || (now.tv_sec == start.tv_sec && now.tv_nsec < target_ns));
+#endif
 }
 
 
