@@ -23,41 +23,43 @@
     #include <unistd.h>
 #endif
 
-class LogClient {
+class LogClient
+{
 public:
     LogClient(const std::string &server_host, int server_port);
     ~LogClient();
 
     // Отправка сообщения (асинхронная)
-    void sendLog(const std::string &message);
+    void SendLog(const std::string &message);
 
     // Отправка сообщения с уровнем логирования
-    void sendLog(const std::string &level, const std::string &message);
+    void SendLog(const std::string &level, const std::string &message);
 
     // Отправка сообщения с дополнительными данными
-    void sendLogWithData(const std::string &level, const std::string &message, const std::map<std::string, std::string> &additional_data);
+    void SendLogWithData(const std::string &level, const std::string &message, const std::map<std::string, std::string> &additional_data);
 
     // Включение/отключение логирования
-    void setEnabled(bool enabled);
+    void SetEnabled(bool enabled);
 
     // Проверка соединения
-    bool testConnection();
+    bool TestConnection();
 
     // Получение статистики
-    size_t getPendingMessagesCount();
-    size_t getSentMessagesCount();
-    size_t getFailedMessagesCount();
+    size_t GetPendingMessagesCount();
+    size_t GetSentMessagesCount();
+    size_t GetFailedMessagesCount();
 
     // Установка максимального размера очереди (0 - без ограничения)
-    void setMaxQueueSize(size_t max_size);
+    void SetMaxQueueSize(size_t max_size);
 
 private:
-    void workerThread();
-    bool sendHttpRequest(const std::string &body);
-    std::string createJsonMessage(const std::string &level, const std::string &message, const std::map<std::string, std::string> &additional_data);
-    void initializeSockets();
-    void cleanupSockets();
-    std::string escapeJson(const std::string &);
+
+    void WorkerThread();
+    bool SendHttpRequest(const std::string &body);
+    std::string CreateJsonMessage(const std::string &level, const std::string &message, const std::map<std::string, std::string> &additional_data);
+    void InitializeSockets();
+    void CleanupSockets();
+    std::string EscapeJson(const std::string &);
 
     std::string server_host;
     int server_port;

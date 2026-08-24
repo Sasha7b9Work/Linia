@@ -23,11 +23,10 @@ LogClient::LogClient(const std::string &server_host, int server_port)
     : server_host(server_host), server_port(server_port),
     enabled(true), running(true), sent_count(0), failed_count(0), max_queue_size(1000)
 {
-
-    initializeSockets();
+    InitializeSockets();
 
     // Запуск рабочего потока
-    worker = std::thread(&LogClient::workerThread, this);
+    worker = std::thread(&LogClient::WorkerThread, this);
 }
 
 LogClient::~LogClient()
@@ -40,7 +39,7 @@ LogClient::~LogClient()
     }
 }
 
-void LogClient::initializeSockets()
+void LogClient::InitializeSockets()
 {
 #ifdef _WIN32
     std::lock_guard<std::mutex> lock(winsock_mutex);
@@ -56,7 +55,7 @@ void LogClient::initializeSockets()
 #endif
 }
 
-void LogClient::cleanupSockets()
+void LogClient::CleanupSockets()
 {
 #ifdef _WIN32
     std::lock_guard<std::mutex> lock(winsock_mutex);
@@ -68,24 +67,24 @@ void LogClient::cleanupSockets()
 #endif
 }
 
-void LogClient::sendLog(const std::string &message)
+void LogClient::SendLog(const std::string &message)
 {
-    sendLog("INFO", message);
+    SendLog("INFO", message);
 }
 
-void LogClient::sendLog(const std::string &level, const std::string &message)
+void LogClient::SendLog(const std::string &level, const std::string &message)
 {
     std::map<std::string, std::string> empty_data;
-    sendLogWithData(level, message, empty_data);
+    SendLogWithData(level, message, empty_data);
 }
 
-void LogClient::sendLogWithData(const std::string &level, const std::string &message,
+void LogClient::SendLogWithData(const std::string &level, const std::string &message,
     const std::map<std::string, std::string> &additional_data)
 {
     if (!enabled) return;
 
     // Создание JSON-сообщения
-    std::string json_message = createJsonMessage(level, message, additional_data);
+    std::string json_message = CreateJsonMessage(level, message, additional_data);
 
     // Добавление в очередь
     std::lock_guard<std::mutex> lock(queue_mutex);
@@ -102,16 +101,15 @@ void LogClient::sendLogWithData(const std::string &level, const std::string &mes
     queue_cv.notify_one();
 }
 
-std::string LogClient::createJsonMessage(const std::string &level,
+std::string LogClient::CreateJsonMessage(const std::string &level,
     const std::string &message,
     const std::map<std::string, std::string> &additional_data)
 {
     std::stringstream json_stream;
     json_stream << "{";
-    json_stream << "\"level\":\"" << escapeJson(level) << "\",";
-    json_stream << "\"message\":\"" << escapeJson(message) << "\",";
-    json_stream << "\"timestamp\":" << std::chrono::duration_cast<std::chrono::milliseconds>(
-        std::chrono::system_clock::now().time_since_epoch()).count();
+    json_stream << "\"level\":\"" << EscapeJson(level) << "\",";
+    json_stream << "\"message\":\"" << EscapeJson(message) << "\",";
+    json_stream << "\"timestamp\":" << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
     // Добавление дополнительных данных
     if (!additional_data.empty())
@@ -121,8 +119,7 @@ std::string LogClient::createJsonMessage(const std::string &level,
         for (const auto &pair : additional_data)
         {
             if (!first) json_stream << ",";
-            json_stream << "\"" << escapeJson(pair.first) << "\":\""
-                << escapeJson(pair.second) << "\"";
+            json_stream << "\"" << EscapeJson(pair.first) << "\":\"" << EscapeJson(pair.second) << "\"";
             first = false;
         }
         json_stream << "}";
@@ -132,7 +129,7 @@ std::string LogClient::createJsonMessage(const std::string &level,
     return json_stream.str();
 }
 
-std::string LogClient::escapeJson(const std::string &input)
+std::string LogClient::EscapeJson(const std::string &input)
 {
     std::string output;
     output.reserve(input.length());
@@ -165,7 +162,7 @@ std::string LogClient::escapeJson(const std::string &input)
     return output;
 }
 
-void LogClient::setEnabled(bool _enabled)
+void LogClient::SetEnabled(bool _enabled)
 {
     enabled = _enabled;
 
@@ -175,28 +172,28 @@ void LogClient::setEnabled(bool _enabled)
     }
 }
 
-bool LogClient::testConnection()
+bool LogClient::TestConnection()
 {
-    return sendHttpRequest("{\"test\":\"connection\"}");
+    return SendHttpRequest("{\"test\":\"connection\"}");
 }
 
-size_t LogClient::getPendingMessagesCount()
+size_t LogClient::GetPendingMessagesCount()
 {
     std::lock_guard<std::mutex> lock(queue_mutex);
     return message_queue.size();
 }
 
-size_t LogClient::getSentMessagesCount()
+size_t LogClient::GetSentMessagesCount()
 {
     return sent_count.load();
 }
 
-size_t LogClient::getFailedMessagesCount()
+size_t LogClient::GetFailedMessagesCount()
 {
     return failed_count.load();
 }
 
-void LogClient::setMaxQueueSize(size_t max_size)
+void LogClient::SetMaxQueueSize(size_t max_size)
 {
     std::lock_guard<std::mutex> lock(queue_mutex);
     max_queue_size = max_size;
@@ -209,7 +206,7 @@ void LogClient::setMaxQueueSize(size_t max_size)
     }
 }
 
-void LogClient::workerThread()
+void LogClient::WorkerThread()
 {
     while (running)
     {
@@ -235,7 +232,7 @@ void LogClient::workerThread()
         // Отправка сообщения
         if (enabled)
         {
-            if (sendHttpRequest(message))
+            if (SendHttpRequest(message))
             {
                 sent_count++;
             }
@@ -257,7 +254,7 @@ void LogClient::workerThread()
     }
 }
 
-bool LogClient::sendHttpRequest(const std::string &body)
+bool LogClient::SendHttpRequest(const std::string &body)
 {
 #ifdef _WIN32
     SOCKET sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -364,42 +361,3 @@ bool LogClient::sendHttpRequest(const std::string &body)
 
     return recv_result > 0;
 }
-
-
-/*
-std::string LogClient::escapeJson(const std::string &input)
-{
-    std::string output;
-    output.reserve(input.length() * 2);  // Резервируем с запасом для экранирования
-
-    for (char c : input)
-    {
-        switch (c)
-        {
-        case '"':  output += "\\\""; break;  // Двойная кавычка
-        case '\\': output += "\\\\"; break;  // Обратный слеш
-        case '\b': output += "\\b"; break;   // Backspace
-        case '\f': output += "\\f"; break;   // Form feed
-        case '\n': output += "\\n"; break;   // Новая строка
-        case '\r': output += "\\r"; break;   // Возврат каретки
-        case '\t': output += "\\t"; break;   // Табуляция
-        default:
-            // Проверяем на управляющие символы (коды 0-31)
-            if (static_cast<unsigned char>(c) < 32)
-            {
-                // Для управляющих символов используем \uXXXX формат
-                char buffer[7];
-                snprintf(buffer, sizeof(buffer), "\\u%04x", static_cast<unsigned char>(c));
-                output += buffer;
-            }
-            else
-            {
-                // Обычный символ добавляем как есть
-                output += c;
-            }
-        }
-    }
-
-    return output;
-}
-*/

@@ -146,33 +146,16 @@ namespace GPIO
         {
             PinInfo &info = pins[i];
 
-            if (info.is_input)
+            if (info.hw.line)
             {
-                if (info.hw.line)
-                {
-                    gpiod_line_release(info.hw.line);
-                    info.hw.line = nullptr;
-                }
-
-                if (info.hw.chip)
-                {
-                    gpiod_chip_close(info.hw.chip);
-                    info.hw.chip = nullptr;
-                }
+                gpiod_line_release(info.hw.line);
+                info.hw.line = nullptr;
             }
-            else
-            {
-                if (info.hw.line)
-                {
-                    gpiod_line_release(info.hw.line);
-                    info.hw.line = nullptr;
-                }
 
-                if (info.hw.chip)
-                {
-                    gpiod_chip_close(info.hw.chip);
-                    info.hw.chip = nullptr;
-                }
+            if (info.hw.chip)
+            {
+                gpiod_chip_close(info.hw.chip);
+                info.hw.chip = nullptr;
             }
         }
 

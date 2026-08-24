@@ -204,7 +204,7 @@ bool Application::OnInit()
 
     LogClient logger("188.127.240.34", 8080);
 
-    if (logger.testConnection())
+    if (logger.TestConnection())
     {
         LOG_WRITE("Connection to log server successful");
     }
