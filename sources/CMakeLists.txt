@@ -28,7 +28,7 @@ else()
     add_definitions(
         -Wall
         -Werror
-        -fmax-errors=1
+        -fmax-errors=5
         -Wno-unknown-pragmas
         -Wno-write-strings
         -pipe
