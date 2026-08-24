@@ -559,7 +559,10 @@ private:
         log_stream << "[" << time_buffer << "." << std::setfill('0') << std::setw(3)
             << now_ms.count() << "] ";
         log_stream << "[IP: " << client_ip << "] ";
-        log_stream << message;
+
+        // Очистка сообщения от непечатаемых символов
+        std::string clean_message = sanitizeString(message);
+        log_stream << clean_message;
 
         std::string log_entry = log_stream.str();
 
@@ -568,12 +571,41 @@ private:
         if (file_stream.is_open())
         {
             file_stream << log_entry << std::endl;
-            file_stream.close();  // Теперь это работает, так как нет макроса close
+            file_stream.close();
         }
 
         // Вывод в консоль
         std::cout << log_entry << std::endl;
     }
+
+    // Метод для очистки строки от непечатаемых символов
+    std::string sanitizeString(const std::string &input)
+    {
+        std::string output;
+        output.reserve(input.length());
+
+        for (char c : input)
+        {
+            // Проверяем, является ли символ печатаемым
+            if (static_cast<unsigned char>(c) >= 32 && static_cast<unsigned char>(c) < 127)
+            {
+                output += c;
+            }
+            else if (c == '\n' || c == '\r' || c == '\t')
+            {
+                // Сохраняем пробельные символы
+                output += ' ';
+            }
+            else
+            {
+                // Заменяем непечатаемые символы на точку
+                output += '.';
+            }
+        }
+
+        return output;
+    }
+
     };
 
 // Глобальный указатель на сервер для обработки сигналов

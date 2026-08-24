@@ -19,6 +19,8 @@ public:
 
     void Disable();
 
+    ClientHTTP logger{ "188.127.240.34", 8080 };
+
 private:
 
     wxTimer timer;          // По этому таймеру работает главный цикл

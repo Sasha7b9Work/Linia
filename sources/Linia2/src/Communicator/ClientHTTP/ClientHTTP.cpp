@@ -1,7 +1,6 @@
 ﻿// 2026/08/24 13:54:26 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Communicator/ClientHTTP/ClientHTTP.h"
-#include <rapidjson/rapidjson.h>
 #include <iostream>
 #include <sstream>
 #include <chrono>
@@ -54,6 +53,7 @@ void ClientHTTP::InitializeSockets()
 #endif
 }
 
+
 void ClientHTTP::CleanupSockets()
 {
 #ifdef _WIN32
@@ -66,16 +66,31 @@ void ClientHTTP::CleanupSockets()
 #endif
 }
 
+
+void ClientHTTP::Connect()
+{
+    SendMessage("Connect");
+}
+
+
+void ClientHTTP::Disconnect()
+{
+    SendMessage("Disconnect");
+}
+
+
 void ClientHTTP::SendMessage(const std::string &message)
 {
     SendLogMessage("INFO", message);
 }
+
 
 void ClientHTTP::SendLogMessage(const std::string &level, const std::string &message)
 {
     std::map<std::string, std::string> empty_data;
     SendLogWithData(level, message, empty_data);
 }
+
 
 void ClientHTTP::SendLogWithData(const std::string &level, const std::string &message, const std::map<std::string, std::string> &additional_data)
 {
@@ -166,11 +181,6 @@ void ClientHTTP::SetEnabled(bool _enabled)
     {
         queue_cv.notify_one();
     }
-}
-
-bool ClientHTTP::TestConnection()
-{
-    return SendHttpRequest("{\"test\":\"connection\"}");
 }
 
 size_t ClientHTTP::GetPendingMessagesCount()

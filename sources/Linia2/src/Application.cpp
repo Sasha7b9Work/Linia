@@ -202,16 +202,8 @@ bool Application::OnInit()
 
         }, timer.GetId());
 
-    ClientHTTP logger("188.127.240.34", 8080);
 
-    if (logger.TestConnection())
-    {
-        LOG_WRITE("Connection to log server successful");
-    }
-    else
-    {
-        LOG_ERROR("Failed to connect to log server");
-    }
+    logger.Connect();
 
     return true;
 }
@@ -230,6 +222,8 @@ int Application::OnExit()
     Log::DeInit();
 
     Config::DeInit();
+
+    logger.Disconnect();
 
     return wxApp::OnExit();
 }

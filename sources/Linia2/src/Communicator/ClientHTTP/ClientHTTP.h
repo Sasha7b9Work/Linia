@@ -29,6 +29,10 @@ public:
     ClientHTTP(const std::string &server_host, int server_port);
     ~ClientHTTP();
 
+    void Connect();
+
+    void Disconnect();
+
     // Отправка сообщения (асинхронная)
     void SendMessage(const std::string &message);
 
@@ -40,9 +44,6 @@ public:
 
     // Включение/отключение логирования
     void SetEnabled(bool enabled);
-
-    // Проверка соединения
-    bool TestConnection();
 
     // Получение статистики
     size_t GetPendingMessagesCount();
