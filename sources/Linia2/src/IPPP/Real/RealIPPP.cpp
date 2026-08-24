@@ -36,10 +36,10 @@ void RealIPPP::PeriodicTask()
     {
     }
 
-    if (!pinFIFO_FULL.GetState())
-    {
-        SPI::WriteDynamicDAC(DAC::_0_ChannelC_Form, 16);
-    }
+//    if (!pinFIFO_FULL.GetState())
+//    {
+//        SPI::WriteDynamicDAC(DAC::_0_ChannelC_Form, 16);
+//    }
 
 //    if (pinFIFO_FULL.GetState())
 //    {
