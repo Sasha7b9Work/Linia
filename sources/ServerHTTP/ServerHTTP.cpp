@@ -162,13 +162,7 @@ size_t  HttpLogServer::GetFailedRequests() const
 }
 
 // Вспомогательная функция для закрытия сокета
-void HttpLogServer::CloseSocket(
-#ifdef _WIN32
-    SOCKET sock
-#else
-    int sock
-#endif
-)
+void HttpLogServer::CloseSocket(SOCKET sock)
 {
 #ifdef _WIN32
     closesocket(sock);
@@ -241,13 +235,7 @@ void HttpLogServer::AcceptLoop()
         }
 }
 
-void HttpLogServer::HandleClient(
-#ifdef _WIN32
-    SOCKET client_socket
-#else
-    int client_socket
-#endif
-    , const std::string & client_ip)
+void HttpLogServer::HandleClient(SOCKET client_socket, const std::string & client_ip)
 {
     total_requests++;
 
