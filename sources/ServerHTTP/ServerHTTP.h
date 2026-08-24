@@ -3,6 +3,7 @@
 #include <string>
 #include <mutex>
 #include <vector>
+#include <atomic>
 
 
 #ifdef _WIN32

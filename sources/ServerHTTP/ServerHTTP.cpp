@@ -5,7 +5,6 @@
 #include <sstream>
 #include <thread>
 #include <chrono>
-#include <atomic>
 #include <algorithm>
 #include <iomanip>
 #include <cstring>
