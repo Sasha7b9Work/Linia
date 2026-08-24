@@ -211,6 +211,31 @@ private:
 #endif
     }
 
+    // Функция для парсинга HTTP запроса
+    std::string getHttpMethod(const std::string &request)
+    {
+        size_t space_pos = request.find(' ');
+        if (space_pos != std::string::npos)
+        {
+            return request.substr(0, space_pos);
+        }
+        return "";
+    }
+
+    std::string getHttpPath(const std::string &request)
+    {
+        size_t first_space = request.find(' ');
+        if (first_space != std::string::npos)
+        {
+            size_t second_space = request.find(' ', first_space + 1);
+            if (second_space != std::string::npos)
+            {
+                return request.substr(first_space + 1, second_space - first_space - 1);
+            }
+        }
+        return "";
+    }
+
     void acceptLoop()
     {
         while (running)
@@ -283,9 +308,10 @@ private:
 
         std::string request(buffer);
 
-        // Обработка различных методов
-        if (request.find("POST /log") != std::string::npos ||
-            request.find("POST") != std::string::npos)
+        std::string method = getHttpMethod(request);
+        std::string path = getHttpPath(request);
+
+        if (method == "POST" && path == "/log")
         {
             if (handleLogRequest(client_socket, request, client_ip))
             {
@@ -296,17 +322,29 @@ private:
                 failed_requests++;
             }
         }
-        else if (request.find("GET /stats") != std::string::npos)
+        else if (method == "POST")
+        {
+            // Любой другой POST
+            if (handleLogRequest(client_socket, request, client_ip))
+            {
+                successful_requests++;
+            }
+            else
+            {
+                failed_requests++;
+            }
+        }
+        else if (method == "GET" && path == "/stats")
         {
             handleStatsRequest(client_socket);
             successful_requests++;
         }
-        else if (request.find("GET /health") != std::string::npos)
+        else if (method == "GET" && path == "/health")
         {
             handleHealthRequest(client_socket);
             successful_requests++;
         }
-        else if (request.find("GET") != std::string::npos)
+        else if (method == "GET")
         {
             handleGetRequest(client_socket);
             successful_requests++;
