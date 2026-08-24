@@ -41,7 +41,7 @@ private:
     int port;
     std::string log_file;
     std::mutex log_mutex;
-    std::atomic<bool> running = false;
+    std::atomic<bool> running{ false };
     std::thread accept_thread;
     std::vector<std::thread> client_threads;
     std::mutex threads_mutex;
