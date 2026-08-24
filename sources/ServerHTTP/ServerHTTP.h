@@ -4,6 +4,7 @@
 #include <mutex>
 #include <vector>
 #include <atomic>
+#include <thread>
 
 
 #ifdef _WIN32
