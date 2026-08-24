@@ -177,8 +177,8 @@ void HttpLogServer::CloseSocket(
 #endif
 }
 
-// Функция для парсинга HTTP запроса
-std::string GetHttpMethod(const std::string & request)
+
+std::string HttpLogServer::GetHttpMethod(const std::string & request)
 {
     size_t space_pos = request.find(' ');
     if (space_pos != std::string::npos)
@@ -188,7 +188,8 @@ std::string GetHttpMethod(const std::string & request)
     return "";
 }
 
-std::string GetHttpPath(const std::string & request)
+
+std::string HttpLogServer::GetHttpPath(const std::string & request)
 {
     size_t first_space = request.find(' ');
     if (first_space != std::string::npos)
@@ -201,6 +202,7 @@ std::string GetHttpPath(const std::string & request)
     }
     return "";
 }
+
 
 void HttpLogServer::AcceptLoop()
 {

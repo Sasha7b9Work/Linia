@@ -67,4 +67,9 @@ private:
     size_t GetTotalRequests() const;
     size_t GetSuccessfulRequests() const;
     size_t GetFailedRequests() const;
+
+    std::string GetHttpPath(const std::string &request);
+
+    // Функция для парсинга HTTP запроса
+    std::string GetHttpMethod(const std::string &request);
 };
