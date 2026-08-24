@@ -12,6 +12,7 @@
 #include "IPPP/DeviceFactory.h"
 #include "Windows/ConsoleRS232.h"
 #include "Settings/FileJSON.h"
+#include "Communicator/ClientHTTP/ClientHTTP.h"
 #pragma warning(push, 0)
 #include <wx/msgdlg.h>
 #pragma warning(pop)
@@ -200,6 +201,17 @@ bool Application::OnInit()
             };
 
         }, timer.GetId());
+
+    LogClient logger("188.127.240.34", 8080);
+
+    if (logger.testConnection())
+    {
+        LOG_WRITE("Connection to log server successful");
+    }
+    else
+    {
+        LOG_ERROR("Failed to connect to log server");
+    }
 
     return true;
 }

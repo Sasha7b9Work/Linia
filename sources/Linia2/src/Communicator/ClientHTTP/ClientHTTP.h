@@ -57,6 +57,7 @@ private:
     std::string createJsonMessage(const std::string &level, const std::string &message, const std::map<std::string, std::string> &additional_data);
     void initializeSockets();
     void cleanupSockets();
+    std::string escapeJson(const std::string &);
 
     std::string server_host;
     int server_port;
