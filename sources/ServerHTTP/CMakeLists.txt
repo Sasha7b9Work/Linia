@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(HttpLogServer)
 
-set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD ON)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
