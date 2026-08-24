@@ -2,6 +2,10 @@
 #include "ServerHTTP.h"
 #include <string>
 #include <iostream>
+#ifdef _WIN32
+#else
+    #include <csignal>
+#endif
 
 
 // Глобальный указатель на сервер для обработки сигналов
