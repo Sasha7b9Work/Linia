@@ -72,6 +72,7 @@ add_definitions(-DOPT_GENERIC)
 file(GLOB RESOURCES                     resources/*.*)
 file(GLOB SRC                           src/*.*)
 file(GLOB COMMUNICATOR                  src/Communicator/*.*)
+file(GLOB COMMUNICATOR_CLIENTHTTP       src/Communicator/ClientHTTP/*.*)
 file(GLOB COMMUNICATOR_COMPORT          src/Communicator/ComPort/*.*)
 file(GLOB COMMUNICATOR_GPIO             src/Communicator/GPIO/*.*)
 file(GLOB COMMUNICATOR_SPI              src/Communicator/SPI/*.*)
@@ -120,6 +121,7 @@ endif()
 source_group(Resources                        FILES ${RESOURCES})
 source_group(src                              FILES ${SRC})
 source_group(Communicator                     FILES ${COMMUNICATOR})
+source_group(Communicator/ClientHTTP          FILES ${COMMUNICATOR_CLIENTHTTP})
 source_group(Communicator/ComPort             FILES ${COMMUNICATOR_COMPORT})
 source_group(Communicator/GPIO                FILES ${COMMUNICATOR_GPIO})
 source_group(Communicator/SPI                 FILES ${COMMUNICATOR_SPI})
@@ -157,6 +159,7 @@ add_executable(${PROJECT_NAME}
     ${RESOURCES}
     ${SRC}
     ${COMMUNICATOR}
+    ${COMMUNICATOR_CLIENTHTTP}
     ${COMMUNICATOR_COMPORT}
     ${COMMUNICATOR_GPIO}
     ${COMMUNICATOR_SPI}

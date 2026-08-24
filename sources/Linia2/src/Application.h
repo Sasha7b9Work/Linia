@@ -1,8 +1,9 @@
 ﻿// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
+#include "Communicator/ClientHTTP/ClientHTTP.h"
 #pragma warning(push, 0)
-#include <wx/app.h>
-#include <wx/timer.h>
+    #include <wx/app.h>
+    #include <wx/timer.h>
 #pragma warning(pop)
 
 
