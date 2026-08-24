@@ -38,7 +38,7 @@ endif()
 
 # Исполняемый файл сервера
 add_executable(log_server
-    server.cpp
+    ServerHTTP.cpp
 )
 
 # Подключение библиотек
