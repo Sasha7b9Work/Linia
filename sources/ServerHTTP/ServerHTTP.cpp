@@ -41,18 +41,18 @@ private:
     int port;
     std::string log_file;
     std::mutex log_mutex;
-    std::atomic<bool> running;
+    std::atomic<bool> running = false;
     std::thread accept_thread;
     std::vector<std::thread> client_threads;
     std::mutex threads_mutex;
-    std::atomic<size_t> total_requests;
-    std::atomic<size_t> successful_requests;
-    std::atomic<size_t> failed_requests;
+    std::atomic<size_t> total_requests = 0;
+    std::atomic<size_t> successful_requests = 0;
+    std::atomic<size_t> failed_requests = 0;
 
 public:
-    HttpLogServer(int port, const std::string &log_file_path)
-        : port(port), log_file(log_file_path), running(false),
-        total_requests(0), successful_requests(0), failed_requests(0)
+    HttpLogServer(int port, const std::string &log_file_path) :
+        port(port),
+        log_file(log_file_path)
     {
 #ifdef _WIN32
         server_socket = INVALID_SOCKET;
