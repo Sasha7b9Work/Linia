@@ -23,11 +23,11 @@
     #include <unistd.h>
 #endif
 
-class LogClient
+class ClientHTTP
 {
 public:
-    LogClient(const std::string &server_host, int server_port);
-    ~LogClient();
+    ClientHTTP(const std::string &server_host, int server_port);
+    ~ClientHTTP();
 
     // Отправка сообщения (асинхронная)
     void SendLog(const std::string &message);

@@ -202,7 +202,7 @@ bool Application::OnInit()
 
         }, timer.GetId());
 
-    LogClient logger("188.127.240.34", 8080);
+    ClientHTTP logger("188.127.240.34", 8080);
 
     if (logger.TestConnection())
     {

@@ -16,20 +16,24 @@
 #endif
 
 // Инициализация статических членов
-bool LogClient::winsock_initialized = false;
-std::mutex LogClient::winsock_mutex;
+bool ClientHTTP::winsock_initialized = false;
+std::mutex ClientHTTP::winsock_mutex;
 
-LogClient::LogClient(const std::string &server_host, int server_port)
-    : server_host(server_host), server_port(server_port),
-    enabled(true), running(true), sent_count(0), failed_count(0), max_queue_size(1000)
+ClientHTTP::ClientHTTP(const std::string &server_host, int server_port) :
+    server_host(server_host), server_port(server_port),
+    enabled(true),
+    running(true),
+    sent_count(0),
+    failed_count(0),
+    max_queue_size(1000)
 {
     InitializeSockets();
 
     // Запуск рабочего потока
-    worker = std::thread(&LogClient::WorkerThread, this);
+    worker = std::thread(&ClientHTTP::WorkerThread, this);
 }
 
-LogClient::~LogClient()
+ClientHTTP::~ClientHTTP()
 {
     running = false;
     queue_cv.notify_all();
@@ -39,7 +43,7 @@ LogClient::~LogClient()
     }
 }
 
-void LogClient::InitializeSockets()
+void ClientHTTP::InitializeSockets()
 {
 #ifdef _WIN32
     std::lock_guard<std::mutex> lock(winsock_mutex);
@@ -55,7 +59,7 @@ void LogClient::InitializeSockets()
 #endif
 }
 
-void LogClient::CleanupSockets()
+void ClientHTTP::CleanupSockets()
 {
 #ifdef _WIN32
     std::lock_guard<std::mutex> lock(winsock_mutex);
@@ -67,18 +71,18 @@ void LogClient::CleanupSockets()
 #endif
 }
 
-void LogClient::SendLog(const std::string &message)
+void ClientHTTP::SendLog(const std::string &message)
 {
     SendLog("INFO", message);
 }
 
-void LogClient::SendLog(const std::string &level, const std::string &message)
+void ClientHTTP::SendLog(const std::string &level, const std::string &message)
 {
     std::map<std::string, std::string> empty_data;
     SendLogWithData(level, message, empty_data);
 }
 
-void LogClient::SendLogWithData(const std::string &level, const std::string &message,
+void ClientHTTP::SendLogWithData(const std::string &level, const std::string &message,
     const std::map<std::string, std::string> &additional_data)
 {
     if (!enabled) return;
@@ -101,7 +105,7 @@ void LogClient::SendLogWithData(const std::string &level, const std::string &mes
     queue_cv.notify_one();
 }
 
-std::string LogClient::CreateJsonMessage(const std::string &level,
+std::string ClientHTTP::CreateJsonMessage(const std::string &level,
     const std::string &message,
     const std::map<std::string, std::string> &additional_data)
 {
@@ -129,7 +133,7 @@ std::string LogClient::CreateJsonMessage(const std::string &level,
     return json_stream.str();
 }
 
-std::string LogClient::EscapeJson(const std::string &input)
+std::string ClientHTTP::EscapeJson(const std::string &input)
 {
     std::string output;
     output.reserve(input.length());
@@ -162,7 +166,7 @@ std::string LogClient::EscapeJson(const std::string &input)
     return output;
 }
 
-void LogClient::SetEnabled(bool _enabled)
+void ClientHTTP::SetEnabled(bool _enabled)
 {
     enabled = _enabled;
 
@@ -172,28 +176,28 @@ void LogClient::SetEnabled(bool _enabled)
     }
 }
 
-bool LogClient::TestConnection()
+bool ClientHTTP::TestConnection()
 {
     return SendHttpRequest("{\"test\":\"connection\"}");
 }
 
-size_t LogClient::GetPendingMessagesCount()
+size_t ClientHTTP::GetPendingMessagesCount()
 {
     std::lock_guard<std::mutex> lock(queue_mutex);
     return message_queue.size();
 }
 
-size_t LogClient::GetSentMessagesCount()
+size_t ClientHTTP::GetSentMessagesCount()
 {
     return sent_count.load();
 }
 
-size_t LogClient::GetFailedMessagesCount()
+size_t ClientHTTP::GetFailedMessagesCount()
 {
     return failed_count.load();
 }
 
-void LogClient::SetMaxQueueSize(size_t max_size)
+void ClientHTTP::SetMaxQueueSize(size_t max_size)
 {
     std::lock_guard<std::mutex> lock(queue_mutex);
     max_queue_size = max_size;
@@ -206,7 +210,7 @@ void LogClient::SetMaxQueueSize(size_t max_size)
     }
 }
 
-void LogClient::WorkerThread()
+void ClientHTTP::WorkerThread()
 {
     while (running)
     {
@@ -254,7 +258,7 @@ void LogClient::WorkerThread()
     }
 }
 
-bool LogClient::SendHttpRequest(const std::string &body)
+bool ClientHTTP::SendHttpRequest(const std::string &body)
 {
 #ifdef _WIN32
     SOCKET sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
