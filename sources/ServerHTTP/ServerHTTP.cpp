@@ -45,9 +45,9 @@ private:
     std::thread accept_thread;
     std::vector<std::thread> client_threads;
     std::mutex threads_mutex;
-    std::atomic<size_t> total_requests = 0;
-    std::atomic<size_t> successful_requests = 0;
-    std::atomic<size_t> failed_requests = 0;
+    std::atomic<size_t> total_requests{ 0 };
+    std::atomic<size_t> successful_requests{ 0 };
+    std::atomic<size_t> failed_requests{ 0 };
 
 public:
     HttpLogServer(int port, const std::string &log_file_path) :
