@@ -63,8 +63,8 @@ private:
 
     std::string server_host;
     int server_port;
-    std::atomic<bool> enabled;
-    std::atomic<bool> running;
+    std::atomic<bool> enabled = true;
+    std::atomic<bool> running = true;
 
     std::queue<std::string> message_queue;
     std::mutex queue_mutex;
@@ -72,9 +72,9 @@ private:
     std::thread worker;
 
     // Статистика
-    std::atomic<size_t> sent_count;
-    std::atomic<size_t> failed_count;
-    size_t max_queue_size;
+    std::atomic<size_t> sent_count = 0;
+    std::atomic<size_t> failed_count = 0;
+    size_t max_queue_size = 1000;
 
     // Для Windows - инициализация Winsock
     static bool winsock_initialized;

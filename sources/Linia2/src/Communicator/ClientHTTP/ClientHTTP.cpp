@@ -20,12 +20,7 @@ bool ClientHTTP::winsock_initialized = false;
 std::mutex ClientHTTP::winsock_mutex;
 
 ClientHTTP::ClientHTTP(const std::string &server_host, int server_port) :
-    server_host(server_host), server_port(server_port),
-    enabled(true),
-    running(true),
-    sent_count(0),
-    failed_count(0),
-    max_queue_size(1000)
+    server_host(server_host), server_port(server_port)
 {
     InitializeSockets();
 
@@ -82,8 +77,7 @@ void ClientHTTP::SendLogMessage(const std::string &level, const std::string &mes
     SendLogWithData(level, message, empty_data);
 }
 
-void ClientHTTP::SendLogWithData(const std::string &level, const std::string &message,
-    const std::map<std::string, std::string> &additional_data)
+void ClientHTTP::SendLogWithData(const std::string &level, const std::string &message, const std::map<std::string, std::string> &additional_data)
 {
     if (!enabled) return;
 
@@ -105,9 +99,7 @@ void ClientHTTP::SendLogWithData(const std::string &level, const std::string &me
     queue_cv.notify_one();
 }
 
-std::string ClientHTTP::CreateJsonMessage(const std::string &level,
-    const std::string &message,
-    const std::map<std::string, std::string> &additional_data)
+std::string ClientHTTP::CreateJsonMessage(const std::string &level, const std::string &message, const std::map<std::string, std::string> &additional_data)
 {
     std::stringstream json_stream;
     json_stream << "{";

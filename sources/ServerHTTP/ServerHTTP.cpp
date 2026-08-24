@@ -1,3 +1,4 @@
+// 2026/08/24 15:00:53 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -15,22 +16,22 @@
 #include <map>
 
 #ifdef _WIN32
-#include <winsock2.h>
-#include <ws2tcpip.h>
-#include <windows.h>  // Добавлено для GetAsyncKeyState
-#pragma comment(lib, "ws2_32.lib")
-// НЕ ИСПОЛЬЗУЕМ #define close closesocket
-#define SHUT_RDWR SD_BOTH
-typedef int socklen_t;
+    #include <winsock2.h>
+    #include <ws2tcpip.h>
+    #include <windows.h>  // Добавлено для GetAsyncKeyState
+    #pragma comment(lib, "ws2_32.lib")
+    #define SHUT_RDWR SD_BOTH
+    typedef int socklen_t;
 #else
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
-#include <sys/time.h>
+    #include <sys/socket.h>
+    #include <netinet/in.h>
+    #include <arpa/inet.h>
+    #include <unistd.h>
+    #include <sys/time.h>
 #endif
 
-class HttpLogServer {
+class HttpLogServer
+{
 private:
 #ifdef _WIN32
     SOCKET server_socket;
@@ -423,9 +424,8 @@ private:
 #endif
     )
     {
-        std::string health = "{\"status\":\"healthy\",\"timestamp\":" +
-            std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
-                std::chrono::system_clock::now().time_since_epoch()).count()) + "}";
+        std::string health = "{\"status\":\"healthy\",\"timestamp\":" + 
+            std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()) + "}";
 
         sendJsonResponse(client_socket, 200, health);
     }
@@ -480,8 +480,7 @@ private:
 #endif
         , int status_code, const std::string & json_body)
     {
-        std::string response = "HTTP/1.1 " + std::to_string(status_code) + " " +
-            getHttpStatusText(status_code) + "\r\n";
+        std::string response = "HTTP/1.1 " + std::to_string(status_code) + " " + getHttpStatusText(status_code) + "\r\n";
         response += "Content-Type: application/json\r\n";
         response += "Content-Length: " + std::to_string(json_body.length()) + "\r\n";
         response += "Connection: close\r\n";
@@ -518,8 +517,7 @@ private:
 #endif
         , int error_code, const std::string & error_message)
     {
-        std::string response = "HTTP/1.1 " + std::to_string(error_code) + " " +
-            getHttpStatusText(error_code) + "\r\n";
+        std::string response = "HTTP/1.1 " + std::to_string(error_code) + " " + getHttpStatusText(error_code) + "\r\n";
         response += "Content-Type: text/plain\r\n";
         response += "Content-Length: " + std::to_string(error_message.length()) + "\r\n";
         response += "Connection: close\r\n";
