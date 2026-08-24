@@ -15,8 +15,9 @@ PinInfo PinStorage::GetPinInfo(Pin::E pin_e, bool is_input)
         pchar G;
     };
 
-    static const Info pins[40] =
+    static const Info pins[41] =
     {
+        {  0, 0, ""   },
         {  1, 0, ""   },
         {  2, 0, ""   },
         {  3, 0, "C0" },

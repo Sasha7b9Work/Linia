@@ -103,7 +103,7 @@ namespace GPIO
 
                 info.last_state = (gpiod_line_get_value(info.hw.line) == 1);
 
-                LOG_WRITE("GPIO input pin number %d %s:%d initialized", (int)info.pin_phisical, info.hw.chip_name, info.hw.pin_logical);
+                LOG_WRITE("GPIO input pin_phisical %d, %s:%d initialized", (int)info.pin_phisical, info.hw.chip_name, info.hw.pin_logical);
             }
             else
             {
