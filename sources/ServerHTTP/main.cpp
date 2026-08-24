@@ -60,8 +60,8 @@ int main(int argc, char *argv[])
 
 #ifndef _WIN32
     // Установка обработчиков сигналов (только для Linux)
-    Signal(SIGINT, signalHandler);
-    Signal(SIGTERM, signalHandler);
+    signal(SIGINT, SignalHandler);
+    signal(SIGTERM, SignalHandler);
 #endif
 
     // Запуск сервера
