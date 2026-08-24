@@ -59,5 +59,7 @@ add_subdirectory(Linia2)
 
 if(WIN32)
     add_subdirectory(Device)
+else()
+    add_subdirectory(ServerHTTP)
 endif()
 
