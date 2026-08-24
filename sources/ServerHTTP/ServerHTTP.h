@@ -18,6 +18,7 @@
     #include <arpa/inet.h>
     #include <unistd.h>
     #include <sys/time.h>
+    typedef SOCKET int
 #endif
 
 
@@ -33,11 +34,8 @@ public:
 
 private:
 
-#ifdef _WIN32
     SOCKET server_socket;
-#else
-    int server_socket;
-#endif
+
     int port;
     std::string log_file;
     std::mutex log_mutex;
@@ -49,13 +47,18 @@ private:
     std::atomic<size_t> successful_requests{ 0 };
     std::atomic<size_t> failed_requests{ 0 };
 
-    void CloseSocket(
-#ifdef _WIN32
-        SOCKET sock
-#else
-        int sock
-#endif
-    );
+    void CloseSocket(SOCKET sock);
+    void HandleClient(SOCKET client_socket, const std::string &client_ip);
+    bool HandleLogRequest(SOCKET client_socket, const std::string &request, const std::string &client_ip);
+    void HandleStatsRequest(SOCKET client_socket);
+    void HandleHealthRequest(SOCKET client_socket);
+    void HandleGetRequest(SOCKET client_socket);
+    void SendErrorResponse(SOCKET client_socket, int error_code, const std::string &error_message);
+    void LogMessage(const std::string &message, const std::string &client_ip);
+    void SendJsonResponse(SOCKET client_socket, int status_code, const std::string &json_body);
+    void SendHtmlResponse(SOCKET client_socket, const std::string &html_body);
+    std::string GetHttpStatusText(int code);
+    std::string SanitizeString(const std::string &input);
 
     void AcceptLoop();
 
