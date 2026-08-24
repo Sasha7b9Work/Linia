@@ -66,7 +66,7 @@
     4.4 sudo mount -a
     4.5 sudo systemctl daemon-reload
     4.6 Даём доступ к диску ВСЕМ:
-        sudo chmod -R 777 /mnt/nvme
+        sudo chmod -R 666 /mnt/nvme
         
 
  5. Склонировать Linia2 в /mnt/nvme
@@ -100,16 +100,9 @@
  
     sudo nano /etc/udev/rules.d/99-spi.rules:
         SUBSYSTEM=="spidev", MODE="0666"
-        
-        KERNEL=="gpiochip*", MODE="0666"
-        
-        SUBSYSTEM=="tty", KERNEL=="ttyS*", MODE="0666"
-        
+       
     sudo udevadm control --reload-rules
     sudo udevadm trigger -s spidev
-    sudo udevadm trigger -s tty
-    # Для gpio — только gpiochip*
-    sudo udevadm trigger -s gpio -a KERNEL="gpiochip*"
     
     sudo reboot
     
