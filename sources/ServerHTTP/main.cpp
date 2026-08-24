@@ -13,7 +13,7 @@ void SignalHandler(int signal)
     if (global_server)
     {
         std::cout << "\nReceived signal " << signal << ", stopping server..." << std::endl;
-        global_server->stop();
+        global_server->Stop();
         exit(0);
     }
 }
