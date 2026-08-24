@@ -18,7 +18,7 @@
     #include <arpa/inet.h>
     #include <unistd.h>
     #include <sys/time.h>
-    typedef SOCKET int;
+    typedef int SOCKET;
 #endif
 
 
