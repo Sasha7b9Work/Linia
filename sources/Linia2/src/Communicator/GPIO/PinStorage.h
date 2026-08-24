@@ -52,6 +52,7 @@
 */
 
 
+// Физические пины на разъёме
 class Pin
 {
 public:
@@ -122,7 +123,7 @@ struct gpiod_line;
 
 struct HardwarePinInfo
 {
-    int pin_number;                     // Номер GPIO пина чипа
+    int pin_logical;                    // Номер GPIO пина чипа
     const char *chip_name = nullptr;    // Имя GPIO чипа
     gpiod_chip *chip = nullptr;         // Дескриптор чипа
     gpiod_line *line = nullptr;         // Дескриптор линии
@@ -131,9 +132,9 @@ struct HardwarePinInfo
 
 struct PinInfo
 {
-    PinInfo(Pin::E _pin, bool _is_input) : pin(_pin), is_input(_is_input) { }
+    PinInfo(Pin::E _pin, bool _is_input) : pin_phisical(_pin), is_input(_is_input) { }
     HardwarePinInfo hw;
-    Pin::E pin = Pin::Count;
+    Pin::E pin_phisical = Pin::Count;   // Номер пина на разъёме
     bool is_input = true;               // true, если это входной пин
     bool last_state = false;            // Последнее состояние
 };

@@ -47,11 +47,11 @@ namespace GPIO
     constexpr size_t PINS_COUNT = std::size(pins);
 
     // Вспомогательные функции для получения информации о пинах
-    PinInfo *GetPinInfo(Pin::E type)
+    PinInfo *GetPinInfo(Pin::E pin)
     {
         for (size_t i = 0; i < PINS_COUNT; i++)
         {
-            if (pins[i].pin == type)
+            if (pins[i].pin_phisical == pin)
             {
                 return &pins[i];
             }
@@ -77,14 +77,14 @@ namespace GPIO
                 info.hw.chip = gpiod_chip_open_by_name(info.hw.chip_name);
                 if (!info.hw.chip)
                 {
-                    LOG_ERROR("Cannot open GPIO chip %s pin %d", info.hw.chip_name, (int)info.pin);
+                    LOG_ERROR("Cannot open GPIO chip %s, pin_phisical %d, pin_logical %d", info.hw.chip_name, (int)info.pin_phisical, info.hw.pin_logical);
                     continue;
                 }
 
-                info.hw.line = gpiod_chip_get_line(info.hw.chip, (uint)info.hw.pin_number);
+                info.hw.line = gpiod_chip_get_line(info.hw.chip, (uint)info.hw.pin_logical);
                 if (!info.hw.line)
                 {
-                    LOG_ERROR("Cannot get GPIO line %d", info.hw.pin_number);
+                    LOG_ERROR("Cannot get GPIO line %d", info.hw.pin_logical);
                     gpiod_chip_close(info.hw.chip);
                     info.hw.chip = nullptr;
                     continue;
@@ -94,7 +94,7 @@ namespace GPIO
                     GPIOD_LINE_REQUEST_FLAG_BIAS_PULL_DOWN);
                 if (ret < 0)
                 {
-                    LOG_ERROR("Cannot request GPIO line %d as input", info.hw.pin_number);
+                    LOG_ERROR("Cannot request GPIO line %d as input", info.hw.pin_logical);
                     gpiod_chip_close(info.hw.chip);
                     info.hw.chip = nullptr;
                     info.hw.line = nullptr;
@@ -103,21 +103,21 @@ namespace GPIO
 
                 info.last_state = (gpiod_line_get_value(info.hw.line) == 1);
 
-                LOG_WRITE("GPIO input pin number %d %s:%d initialized", (int)info.pin, info.hw.chip_name, info.hw.pin_number);
+                LOG_WRITE("GPIO input pin number %d %s:%d initialized", (int)info.pin_phisical, info.hw.chip_name, info.hw.pin_logical);
             }
             else
             {
                 info.hw.chip = gpiod_chip_open_by_name(info.hw.chip_name);
                 if (!info.hw.chip)
                 {
-                    LOG_ERROR("Cannot open GPIO chip %s pint %d", info.hw.chip_name, (int)info.pin);
+                    LOG_ERROR("Cannot open GPIO chip %s pint %d", info.hw.chip_name, (int)info.pin_phisical);
                     continue;
                 }
 
-                info.hw.line = gpiod_chip_get_line(info.hw.chip, (uint)info.hw.pin_number);
+                info.hw.line = gpiod_chip_get_line(info.hw.chip, (uint)info.hw.pin_logical);
                 if (!info.hw.line)
                 {
-                    LOG_ERROR("Cannot get GPIO line for pin %d", info.hw.pin_number);
+                    LOG_ERROR("Cannot get GPIO line for pin %d", info.hw.pin_logical);
                     gpiod_chip_close(info.hw.chip);
                     info.hw.chip = nullptr;
                     continue;
@@ -126,14 +126,14 @@ namespace GPIO
                 int ret = gpiod_line_request_output(info.hw.line, nullptr, 0);
                 if (ret < 0)
                 {
-                    LOG_ERROR("Cannot request GPIO line for pin %d as output", info.hw.pin_number);
+                    LOG_ERROR("Cannot request GPIO line for pin %d as output", info.hw.pin_logical);
                     gpiod_chip_close(info.hw.chip);
                     info.hw.chip = nullptr;
                     info.hw.line = nullptr;
                     continue;
                 }
 
-                LOG_WRITE("GPIO output pin %s:%d initialized", info.hw.chip_name, info.hw.pin_number);
+                LOG_WRITE("GPIO output pin %s:%d initialized", info.hw.chip_name, info.hw.pin_logical);
             }
         }
     }
@@ -197,7 +197,7 @@ bool Pin::GetState() const
 
         if (val < 0)
         {
-            LOG_ERROR("Error: Cannot read GPIO pin number %d", info->hw.pin_number);
+            LOG_ERROR("Error: Cannot read GPIO pin number %d", info->hw.pin_logical);
             return false;
         }
 
@@ -224,7 +224,7 @@ void PinOut::Set(bool state)
 
             if (ret < 0)
             {
-                LOG_ERROR("Error: Cannot set GPIO pin %d to %s", info->hw.pin_number, state ? "HIGH" : "LOW");
+                LOG_ERROR("Error: Cannot set GPIO pin %d to %s", info->hw.pin_logical, state ? "HIGH" : "LOW");
             }
         }
     }

@@ -67,11 +67,11 @@ PinInfo PinStorage::GetPinInfo(Pin::E pin_e, bool is_input)
         "gpiochip3"
     };
 
-    const Info &pin = pins[info.pin];
+    const Info &pin = pins[info.pin_phisical];
 
-    if (std::strlen(pins[info.pin].G) == 2)
+    if (std::strlen(pins[info.pin_phisical].G) == 2)
     {
-        info.hw.pin_number = (pin.G[0] - 'A') * 8 + pin.G[1] - '0';
+        info.hw.pin_logical = (pin.G[0] - 'A') * 8 + pin.G[1] - '0';
 
         info.hw.chip_name = names_chips[pin.num_chip];
     }
