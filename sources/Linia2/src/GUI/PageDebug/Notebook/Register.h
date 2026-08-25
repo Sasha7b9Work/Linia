@@ -86,8 +86,9 @@ class Register : public Panel
 
 public:
 
-    Register(wxWindow *parent, const wxString &_title,  // Это написано на изображении
-        Chip *, const wxString &_functional);           // На  значение append_height нужно увеличить высоту
+    Register(wxWindow *parent,
+        const wxString &_title,                 // Это написано на изображении
+        Chip *, const wxString &_functional);
 
     void SetNamesBits(const wxArrayString &);
 

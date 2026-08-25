@@ -79,16 +79,16 @@ public:
         Set(default_value);
     }
 
+    wxString GetKey() const
+    {
+        return key;
+    }
+
 private:
 
     T GetDefault() const
     {
         return default_value;
-    }
-
-    wxString GetKey() const
-    {
-        return key;
     }
 
 protected:

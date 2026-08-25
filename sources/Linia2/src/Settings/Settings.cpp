@@ -109,6 +109,22 @@ void SET::AppendValue(ValueUInt *value)
 }
 
 
+ValueUInt *SET::ValueUIntByKey(pchar key)
+{
+    std::vector<ValueUInt *> &values = VectorUInt();
+
+    for (ValueUInt *val : values)
+    {
+        if (val->GetKey() == key)
+        {
+            return val;
+        }
+    }
+
+    return nullptr;
+}
+
+
 void SET::Load()
 {
     for (auto elem : VectorPoint())
