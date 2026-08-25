@@ -5,4 +5,4 @@
 ./build.sh
 kill $(pidof Linia2)
 
-./start_x.sh
+#./start_x.sh
