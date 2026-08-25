@@ -25,6 +25,11 @@ wxIMPLEMENT_APP(Application);
 
 Application *TheApp = nullptr;
 
+#ifdef _WIN32
+#else
+static void SignalHandler(int sig);  // <-- ДОБАВИТЬ ОБЪЯВЛЕНИЕ
+#endif
+
 
 #ifdef _WIN32
 #else
