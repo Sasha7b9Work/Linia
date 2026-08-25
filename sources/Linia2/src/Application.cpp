@@ -31,19 +31,6 @@ static void SignalHandler(int sig);  // <-- ДОБАВИТЬ ОБЪЯВЛЕНИ�
 #endif
 
 
-#ifdef _WIN32
-#else
-static void SignalHandler(int sig)
-{
-    if (TheApp)
-    {
-        // Вызываем завершение главного цикла
-        TheApp->ExitMainLoop();
-    }
-}
-#endif
-
-
 class NullLog : public wxLog
 {
 public:
@@ -282,3 +269,15 @@ void Application::ReInit()
 {
 
 }
+
+#ifdef _WIN32
+#else
+static void SignalHandler(int sig)
+{
+    if (TheApp)
+    {
+        // Вызываем завершение главного цикла
+        TheApp->ExitMainLoop();
+    }
+}
+#endif
