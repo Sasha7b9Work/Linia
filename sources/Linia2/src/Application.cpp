@@ -232,8 +232,6 @@ int Application::OnExit()
 
     if (TheMainWindow)
     {
-        SET::Save();
-
         TheMainWindow->Close(true);
     }
 

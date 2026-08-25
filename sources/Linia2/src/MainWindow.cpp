@@ -196,6 +196,8 @@ void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 
     position.Set(wxWindow::GetPosition());
 
+    SET::Save();
+
     TheMainWindow = nullptr;
 
     event.Skip();
