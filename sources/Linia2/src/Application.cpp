@@ -25,6 +25,25 @@ wxIMPLEMENT_APP(Application);
 
 Application *TheApp = nullptr;
 
+
+#ifndef _WIN32
+static void CloseApplication()
+{
+    if (TheApp)
+    {
+        if (TheMainWindow)
+        {
+            TheMainWindow->Close(true);
+        }
+
+        TheApp->Yield();
+
+        TheApp->ExitMainLoop();
+    }
+}
+#endif
+
+
 class NullLog : public wxLog
 {
 public:
@@ -208,41 +227,17 @@ bool Application::OnInit()
 #else
     signal(SIGTERM, [](int)
         {
-            if (TheApp)
-            {
-                if (TheMainWindow)
-                {
-                    TheMainWindow->Close(true);
-                }
-
-                TheApp->ExitMainLoop();
-            }
+            CloseApplication();
         });
 
     signal(SIGINT, [](int)
         {
-            if (TheApp)
-            {
-                if (TheMainWindow)
-                {
-                    TheMainWindow->Close(true);
-                }
-
-                TheApp->ExitMainLoop();
-            }
+            CloseApplication();
         });
 
     signal(SIGHUP, [](int)
         {
-            if (TheApp)
-            {
-                if (TheMainWindow)
-                {
-                    TheMainWindow->Close(true);
-                }
-
-                TheApp->ExitMainLoop();
-            }
+            CloseApplication();
         });
 #endif
 
