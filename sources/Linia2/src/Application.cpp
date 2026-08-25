@@ -25,12 +25,6 @@ wxIMPLEMENT_APP(Application);
 
 Application *TheApp = nullptr;
 
-#ifdef _WIN32
-#else
-static void SignalHandler(int sig);  // <-- ДОБАВИТЬ ОБЪЯВЛЕНИЕ
-#endif
-
-
 class NullLog : public wxLog
 {
 public:
@@ -212,9 +206,20 @@ bool Application::OnInit()
 
 #ifdef _WIN32
 #else
-    signal(SIGTERM, SignalHandler);
-    signal(SIGINT, SignalHandler);
-    signal(SIGHUP, SignalHandler);
+    signal(SIGTERM, [](int)
+        {
+            if (TheApp) TheApp->ExitMainLoop();
+        });
+
+    signal(SIGINT, [](int)
+        {
+            if (TheApp) TheApp->ExitMainLoop();
+        });
+
+    signal(SIGHUP, [](int)
+        {
+            if (TheApp) TheApp->ExitMainLoop();
+        });
 #endif
 
     return true;
@@ -269,15 +274,3 @@ void Application::ReInit()
 {
 
 }
-
-#ifdef _WIN32
-#else
-static void SignalHandler(int sig)
-{
-    if (TheApp)
-    {
-        // Вызываем завершение главного цикла
-        TheApp->ExitMainLoop();
-    }
-}
-#endif
