@@ -14,7 +14,7 @@
 #include "Settings/FileJSON.h"
 #include "Communicator/ClientHTTP/ClientHTTP.h"
 #pragma warning(push, 0)
-#include <wx/msgdlg.h>
+    #include <wx/msgdlg.h>
 #pragma warning(pop)
 #include <cstdlib>
 #include <locale>
@@ -24,6 +24,19 @@ wxIMPLEMENT_APP(Application);
 
 
 Application *TheApp = nullptr;
+
+
+#ifdef _WIN32
+#else
+static void SignalHandler(int sig)
+{
+    if (TheApp)
+    {
+        // Вызываем завершение главного цикла
+        TheApp->ExitMainLoop();
+    }
+}
+#endif
 
 
 class NullLog : public wxLog
@@ -204,6 +217,13 @@ bool Application::OnInit()
 
 
     logger.Connect();
+
+#ifdef _WIN32
+#else
+    signal(SIGTERM, SignalHandler);
+    signal(SIGINT, SignalHandler);
+    signal(SIGHUP, SignalHandler);
+#endif
 
     return true;
 }
