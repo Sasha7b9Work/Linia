@@ -43,7 +43,7 @@ void RealIPPP::PeriodicTask()
             ThePanelRight->data[i]->SetData(data_dac[i]);
         }
 
-        ThePanelRight->data[NUMBER_ADC + 1]->SetData(data_code);
+        ThePanelRight->data[NUMBER_ADC]->SetData(data_code);
     }
 }
 
