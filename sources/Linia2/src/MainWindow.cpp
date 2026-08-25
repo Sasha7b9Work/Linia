@@ -35,7 +35,6 @@ MainWindow::MainWindow(MainWindow *&self, const wxString &title)
 #endif
 
     Bind(wxEVT_MENU, &MainWindow::OnAbout, this, wxID_ABOUT);
-    Bind(wxEVT_MENU, &MainWindow::OnQuit, this, wxID_EXIT);
     Bind(wxEVT_MAXIMIZE, &MainWindow::OnEventMaximize, this);
     Bind(wxEVT_CLOSE_WINDOW, &MainWindow::OnEventCloseWindow, this);
 
@@ -177,12 +176,8 @@ void MainWindow::TuneFont()
 }
 
 
-void MainWindow::OnQuit(wxCommandEvent &WXUNUSED(event))
+void MainWindow::CallbackOnExit()
 {
-    LOG_WRITE("Frame::OnQuit()");
-
-    TheMainWindow = nullptr;
-
     Close(true);
 }
 
@@ -208,8 +203,6 @@ void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
     position.Set(wxWindow::GetPosition());
 
     TheMainWindow = nullptr;
-
-    TheApp->Disable();
 
     event.Skip();
 }

@@ -26,6 +26,9 @@
     #include <sys/utsname.h>
 #endif
 
+#pragma warning(push, 0)
+#pragma warning(disable:4996)
+
 
 std::string SystemInfoExtended::getComputerName()
 {
@@ -214,3 +217,5 @@ std::map<std::string, std::string> SystemInfoExtended::getAllSystemInfo()
     info["user"] = getCurrentUser();
     return info;
 }
+
+#pragma warning(pop)

@@ -17,8 +17,6 @@ public:
 
     virtual bool OnInit() wxOVERRIDE;
 
-    void Disable();
-
     ClientHTTP logger{ "188.127.240.34", 8080 };
 
 private:

@@ -226,23 +226,24 @@ bool Application::OnInit()
 }
 
 
-void Application::Disable()
+int Application::OnExit()
 {
     timer.Stop();
 
-    SET::Save();
-}
+    if (TheMainWindow)
+    {
+        SET::Save();
 
+        TheMainWindow->CallbackOnExit();
+    }
 
-int Application::OnExit()
-{
     LOG_WRITE("Exit");
-
-    Log::DeInit();
 
     Config::DeInit();
 
     logger.Disconnect();
+
+    Log::DeInit();
 
     return wxApp::OnExit();
 }
