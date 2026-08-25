@@ -176,12 +176,6 @@ void MainWindow::TuneFont()
 }
 
 
-void MainWindow::CallbackOnExit()
-{
-    Close(true);
-}
-
-
 void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 {
     LOG_WRITE("Exit");

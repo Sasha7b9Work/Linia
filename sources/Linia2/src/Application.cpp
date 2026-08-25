@@ -234,7 +234,7 @@ int Application::OnExit()
     {
         SET::Save();
 
-        TheMainWindow->CallbackOnExit();
+        TheMainWindow->Close(true);
     }
 
     LOG_WRITE("Exit");

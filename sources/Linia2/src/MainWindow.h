@@ -53,8 +53,6 @@ public:
 
     void OnEventCloseWindow(wxCloseEvent &);
 
-    void CallbackOnExit();
-
     void SetMode(ModeMainWindow::E);
 
     void PeriodicTask();
