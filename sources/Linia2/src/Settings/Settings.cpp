@@ -27,6 +27,11 @@ namespace SET
         ValueInt         *current_panel = nullptr;
     }
 
+    namespace _DEBUG
+    {
+        ValueUInt *period_send = nullptr;
+    }
+
 
     // \warn Такое хитрое обращение к векторам сделано потому, что порядок инициализации глобальных статических объектов неопределён,
     // из-за чего к моменту, когда в эти вектора кладутся значения, оин могут быть не готовы к работе. 
@@ -75,6 +80,8 @@ void SET::Init()
 
     GUI::size_point = new ValueInt("size_point", 2);
     GUI::current_panel = new ValueInt{ "current_panel", 0 };
+
+    _DEBUG::period_send = new ValueUInt("period_send", 100);
 }
 
 

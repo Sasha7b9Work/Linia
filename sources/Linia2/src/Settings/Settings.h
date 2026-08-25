@@ -37,4 +37,9 @@ namespace SET
         extern ValueInt         *size_point;            // Размер точки на графике
         extern ValueInt         *current_panel;
     }
+
+    namespace _DEBUG
+    {
+        extern ValueUInt *period_send;      // Время между засылками в прибор
+    }
 };

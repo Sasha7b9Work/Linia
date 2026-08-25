@@ -6,6 +6,7 @@
 #include "IPPP/IDevice.h"
 #include "GUI/PageDebug/Notebook/PageFPGA.h"
 #include "GUI/PageDebug/Notebook/PageChannelForm.h"
+#include "Settings/Settings.h"
 #include "GUI/Controls/TextControl.h"
 #include "Utils/Math.h"
 #include "Utils/Timer.h"
@@ -31,7 +32,7 @@ PanelRight::PanelRight(wxWindow *parent, PanelRight *&global) :
 
         btnStart->SetToolTip(L("Запуск развёртки"));
 
-        txtPeriodScan = new TextCtrlNumber{ this, "1000", size_button,  10, 10000 };
+        txtPeriodScan = new TextCtrlNumber{ this, wxString::Format("%u", SET::_DEBUG::period_send->Get()), size_button,  10, 10000};
 
         txtPeriodScan->SetToolTip(L("Период запуска развёртки в миллисекундах"));
 
@@ -115,20 +116,22 @@ void PanelRight::PeriodicTask()
 }
 
 
+PanelRight::~PanelRight()
+{
+    SavePeriodScan();
+}
+
+
 void PanelRight::OnEventButton(wxCommandEvent &event)
 {
     int id = event.GetId();
 
     if (id == btnStart->GetId())
     {
-        wxString str_value = txtPeriodScan->GetValue();
-        int int_value = 0;
-        str_value.ToInt(&int_value);
-
         PageFPGA::self->SendAllRegisters();
         PageChannelForm::self->SendAllRegisters();
 
-        IDevice::impl->SendCommand(wxString::Format(":SCAN:START %d", int_value));
+        IDevice::impl->SendCommand(wxString::Format(":SCAN:START %u", SavePeriodScan()));
 
         btnStart->Enable(false);
         btnStop->Enable(true);
@@ -142,4 +145,16 @@ void PanelRight::OnEventButton(wxCommandEvent &event)
         btnStop->Enable(false);
         txtPeriodScan->Enable(true);
     }
+}
+
+
+uint PanelRight::SavePeriodScan()
+{
+    wxString str_value = txtPeriodScan->GetValue();
+    uint uint_value = 0;
+    str_value.ToUInt(&uint_value);
+
+    SET::_DEBUG::period_send->Set(uint_value);
+
+    return uint_value;
 }

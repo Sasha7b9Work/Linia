@@ -20,10 +20,15 @@ public:
 
 private:
 
+    ~PanelRight();
+
     Button *btnStart = nullptr;       // Запуск развёртки
     Button *btnStop = nullptr;        // Останов развёртки
 
     TextCtrlNumber *txtPeriodScan = nullptr;    // Период запуска развёртки в миллисекундах
 
     void OnEventButton(wxCommandEvent &);
+
+    // Сохраняет в файле настроек установленный период засылок
+    uint SavePeriodScan();
 };
