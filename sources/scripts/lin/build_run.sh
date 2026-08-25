@@ -5,6 +5,4 @@
 ./build.sh
 kill $(pidof Linia2)
 
-#DISPLAY=:0.0 dex /home/mnipi/Desktop/Linia.desktop
-
-#./start_x.sh
+./start_x.sh
