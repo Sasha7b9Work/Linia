@@ -31,16 +31,19 @@ void RealIPPP::PeriodicTask()
 
     IDevice::impl->PeriodicTask();
 
-    int data[NUMBER_ADC][POINTS_IN_SAMPLE_ADC];
+    int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC];
+    int data_code[POINTS_IN_SAMPLE_ADC];
 
-    if (ReadData(data))
+    if (ReadData(data_dac, data_code))
     {
         LOG_WRITE("Data reading is ok");
 
         for (int i = 0; i < NUMBER_ADC; i++)
         {
-            ThePanelRight->data[i]->SetData(data[i]);
+            ThePanelRight->data[i]->SetData(data_dac[i]);
         }
+
+        ThePanelRight->data[NUMBER_ADC + 1]->SetData(data_code);
     }
 }
 
@@ -57,7 +60,7 @@ void RealIPPP::PressButtonStop()
 }
 
 
-bool RealIPPP::ReadData(int data_out[NUMBER_ADC][POINTS_IN_SAMPLE_ADC])
+bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data_code[POINTS_IN_SAMPLE_ADC])
 {
     bool result = false;
 
@@ -69,12 +72,14 @@ bool RealIPPP::ReadData(int data_out[NUMBER_ADC][POINTS_IN_SAMPLE_ADC])
         {
             uint16 data[5];
 
-            SPI::ReadFPGA((uint8 *)data, 2 * 4 + 1);
+            SPI::ReadFPGA((uint8 *)data, NUMBER_ADC * 2 + 1);
 
             for (int num_dac = 0; num_dac < 4; num_dac++)
             {
-                data_out[num_dac][i] = data[num_dac];
+                data_dac[num_dac][i] = data[num_dac];
             }
+
+            data_code[i] = (uint8)data[4];
         }
 
         result = true;
