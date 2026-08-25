@@ -8,6 +8,7 @@
 #include "IPPP/Real/RealDevice.h"
 #include "Utils/Timer.h"
 #include "Communicator/SPI/SPI.h"
+#include "GUI/PageDebug/PanelRight.h"
 
 
 bool RealIPPP::IsChanBS(const Chan &ch) const
@@ -34,6 +35,12 @@ void RealIPPP::PeriodicTask()
 
     if (ReadData(data))
     {
+        LOG_WRITE("Data reading is ok");
+
+        for (int i = 0; i < NUMBER_ADC; i++)
+        {
+            ThePanelRight->data[i]->SetData(data[i]);
+        }
     }
 }
 
