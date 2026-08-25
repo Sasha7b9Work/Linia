@@ -228,8 +228,8 @@ bool Application::OnInit()
                     TheMainWindow->Close(true);
                 }
 
-                TheApp->ExitMainLoop()
-            };
+                TheApp->ExitMainLoop();
+            }
         });
 
     signal(SIGHUP, [](int)
