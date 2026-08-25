@@ -208,17 +208,41 @@ bool Application::OnInit()
 #else
     signal(SIGTERM, [](int)
         {
-            if (TheApp) TheApp->ExitMainLoop();
+            if (TheApp)
+            {
+                if (TheMainWindow)
+                {
+                    TheMainWindow->Close(true);
+                }
+
+                TheApp->ExitMainLoop();
+            }
         });
 
     signal(SIGINT, [](int)
         {
-            if (TheApp) TheApp->ExitMainLoop();
+            if (TheApp)
+            {
+                if (TheMainWindow)
+                {
+                    TheMainWindow->Close(true);
+                }
+
+                TheApp->ExitMainLoop()
+            };
         });
 
     signal(SIGHUP, [](int)
         {
-            if (TheApp) TheApp->ExitMainLoop();
+            if (TheApp)
+            {
+                if (TheMainWindow)
+                {
+                    TheMainWindow->Close(true);
+                }
+
+                TheApp->ExitMainLoop();
+            }
         });
 #endif
 
