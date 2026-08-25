@@ -3,7 +3,7 @@
 #set -e
 
 ./build.sh
-kill -9 $(pidof Linia2)
+kill $(pidof Linia2)
 
 #DISPLAY=:0.0 dex /home/mnipi/Desktop/Linia.desktop
 
