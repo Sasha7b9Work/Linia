@@ -236,6 +236,8 @@ void Application::Disable()
 
 int Application::OnExit()
 {
+    LOG_WRITE("Exit");
+
     Log::DeInit();
 
     Config::DeInit();

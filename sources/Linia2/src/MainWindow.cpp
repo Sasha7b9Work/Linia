@@ -189,6 +189,8 @@ void MainWindow::OnQuit(wxCommandEvent &WXUNUSED(event))
 
 void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 {
+    LOG_WRITE("Exit");
+
     SET::GUI::current_panel->Set(main_panel->GetCurrentPanelIndex());
 
     if (ConsoleRS232::self)
