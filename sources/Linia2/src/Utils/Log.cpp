@@ -53,7 +53,7 @@ void Log::Init()
 
     mutex.unlock();
 
-    LOG_WRITE("Start application %s", wxDateTime::Now().Format("%Y-%m-%d").c_str().AsChar());
+    LOG_WRITE("Start application %s", wxDateTime::Now().Format("%Y-%m-%d %H:%M:%S").c_str().AsChar());
 }
 
 
