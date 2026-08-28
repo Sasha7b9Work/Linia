@@ -9,6 +9,7 @@
 #include "Utils/Timer.h"
 #include "Communicator/SPI/SPI.h"
 #include "GUI/PageDebug/PanelRight.h"
+#include <iomanip>
 
 
 bool need_write_data_to_file = false;
