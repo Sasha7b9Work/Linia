@@ -68,11 +68,27 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
 
     if (pinFIFO_FULL.GetState() && prev == false)
     {
+#ifndef _WIN32
+        OpenNewBinaryFile();
+        OpenNewTextFile();
+#endif
+
         for (int i = 0; i < POINTS_IN_SAMPLE_ADC; i++)
         {
             uint16 data[5];
 
             SPI::ReadFPGA((uint8 *)data, NUMBER_ADC * 2 + 1);
+
+#ifndef _WIN32
+            // Запись в бинарный файл
+            if (binaryFileOpened && binaryFile.is_open())
+            {
+                binaryFile.write((char *)data, NUMBER_ADC * 2 + 1);
+            }
+
+            // Запись в текстовый файл
+            WriteDataToTextFile(data);
+#endif
 
             for (int num_dac = 0; num_dac < 4; num_dac++)
             {
@@ -81,6 +97,11 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
 
             data_code[i] = (uint8)data[4];
         }
+
+#ifndef _WIN32
+        void CloseBinaryFile();
+        void CloseTextFile();
+#endif
 
         result = true;
     }
@@ -98,4 +119,88 @@ void RealIPPP::Pause()
     for (i = 0; i < 1000; i += 1)
     {
     }
+}
+
+
+void RealIPPP::OpenNewBinaryFile()
+{
+    if (binaryFileOpened && binaryFile.is_open())
+    {
+        binaryFile.close();
+        binaryFileOpened = false;
+    }
+
+    wxDateTime now = wxDateTime::Now();
+    wxString timestamp = now.Format("%Y%m%d_%H%M%S");
+
+    wxString basePath = "/mnt/nvme/data/";
+    currentBinaryFileName = basePath + timestamp + ".bin";
+
+    binaryFile.open(currentBinaryFileName.ToStdString(), std::ios::binary);
+    binaryFileOpened = binaryFile.is_open();
+
+    if (binaryFileOpened)
+    {
+        LOG_WRITE("Created binary file: %s", currentBinaryFileName.c_str().AsChar());
+    }
+}
+
+void RealIPPP::OpenNewTextFile()
+{
+    if (textFileOpened && textFile.is_open())
+    {
+        textFile.close();
+        textFileOpened = false;
+    }
+
+    wxDateTime now = wxDateTime::Now();
+    wxString timestamp = now.Format("%Y%m%d_%H%M%S");
+
+    wxString basePath = "/mnt/nvme/data/";
+    currentTextFileName = basePath + timestamp + ".txt";
+
+    textFile.open(currentTextFileName.ToStdString(), std::ios::out);
+    textFileOpened = textFile.is_open();
+
+    if (textFileOpened)
+    {
+        textFile << "# Timestamp, CH0, CH1, CH2, CH3, CODE\n";
+        LOG_WRITE("Created text file: %s", currentTextFileName.c_str().AsChar());
+    }
+}
+
+void RealIPPP::CloseBinaryFile()
+{
+    if (binaryFileOpened && binaryFile.is_open())
+    {
+        binaryFile.close();
+        binaryFileOpened = false;
+        LOG_WRITE("Closed binary file: %s", currentBinaryFileName.c_str().AsChar());
+    }
+}
+
+void RealIPPP::CloseTextFile()
+{
+    if (textFileOpened && textFile.is_open())
+    {
+        textFile.close();
+        textFileOpened = false;
+        LOG_WRITE("Closed text file: %s", currentTextFileName.c_str().AsChar());
+    }
+}
+
+void RealIPPP::WriteDataToTextFile(uint16 data[5])
+{
+    if (!textFileOpened || !textFile.is_open())
+        return;
+
+    auto now = std::chrono::system_clock::now();
+    auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(
+        now.time_since_epoch()).count();
+
+    textFile << std::setw(5) << std::right << data[0] << " "
+        << std::setw(5) << std::right << data[1] << " "
+        << std::setw(5) << std::right << data[2] << " "
+        << std::setw(5) << std::right << data[3] << " "
+        << std::setw(5) << std::right << (uint8)data[4] << "\n";
 }

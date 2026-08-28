@@ -2,6 +2,8 @@
 #pragma once
 #include "IPPP/I_IPPP.h"
 #include "Settings/Tests/SettingsTests.h"
+#include <iostream>
+#include <fstream>
 
 
 class RealIPPP : public I_IPPP
@@ -23,4 +25,21 @@ private:
     virtual bool ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data_code[POINTS_IN_SAMPLE_ADC]) override;
 
     void Pause();
+
+    // Бинарный файл
+    std::ofstream binaryFile;
+    bool binaryFileOpened = false;
+
+    // Текстовый файл
+    std::ofstream textFile;
+    bool textFileOpened = false;
+
+    wxString currentBinaryFileName;
+    wxString currentTextFileName;
+
+    void OpenNewBinaryFile();
+    void CloseBinaryFile();
+    void OpenNewTextFile();
+    void CloseTextFile();
+    void WriteDataToTextFile(uint16 data[5]);
 };
