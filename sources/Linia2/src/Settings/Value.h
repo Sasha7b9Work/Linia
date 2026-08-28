@@ -46,6 +46,8 @@ public:
 
     virtual void Load()
     {
+        LOG_WRITE("Load %s", key.c_str().AsChar());
+
         value = Config::Read(key, default_value);
     }
 
@@ -99,6 +101,8 @@ protected:
 
     void Init(const wxString &_key, const T &_default_value)
     {
+        LOG_WRITE("Init %s", _key.c_str().AsChar());
+
         key = _key;
         default_value = _default_value;
 

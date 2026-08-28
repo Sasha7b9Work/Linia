@@ -131,6 +131,8 @@ void SET::Init()
 template<typename T>
 void SET::AppendValue(T *value)
 {
+    LOG_WRITE("append value");
+
     if constexpr (std::is_same_v<T, ValueBool>)
     {
         vec_bool.Push(value);
