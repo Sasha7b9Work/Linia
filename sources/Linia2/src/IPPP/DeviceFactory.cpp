@@ -38,7 +38,7 @@ std::unique_ptr<I_IPPP> DeviceFactory::Create(Type type)
 
 std::unique_ptr<I_IPPP> DeviceFactory::CreateFromConfig()
 {
-    if (SET::emulate_mode->Get())
+    if (SET_DEBUG_EMULATE_MODE->GetBool())
     {
         return std::make_unique<EmulatorIPPP>();
     }

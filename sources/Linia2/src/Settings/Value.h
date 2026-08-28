@@ -19,7 +19,7 @@ public:
         serialiazed(_serialiazed)
     {}
 
-    T Get() const
+    T &Get()
     {
         return value;
     }

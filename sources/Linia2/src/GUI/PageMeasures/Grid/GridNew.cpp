@@ -91,7 +91,7 @@ void GridNew::Draw(const std::vector<GraphMeasure *> &entities)
 
     {
         // Горизонтальные линии
-        Line(x_left, y_top, RightX(), y_top).Draw(SET::GUI::color_grid->Get());
+        Line(x_left, y_top, RightX(), y_top).Draw(SET_GUI_COLOR_GRID->GetUInt());
 
         DrawHPointLineRight2(coord_zero, size.x, d);
         DrawHPointLineLeft2(coord_zero, 0, d);
@@ -171,12 +171,12 @@ void GridNew::Draw(const std::vector<GraphMeasure *> &entities)
         entity->Draw();
     }
 
-    ThePageMeasures->SetColorPen(SET::GUI::color_background->Get());
+    ThePageMeasures->SetColorPen(SET_GUI_COLOR_BACKGROUND->GetUInt());
 
-    ThePageMeasures->FillRectangle(0, 0, x_left - 1, ThePageMeasures->GetDrawingSize().y, SET::GUI::color_background->Get()); //-V807
-    ThePageMeasures->FillRectangle(x_left, 0, LengthAxisX(), y_top - 1, SET::GUI::color_background->Get());
-    ThePageMeasures->FillRectangle(x_right + 1, 0, ThePageMeasures->GetDrawingSize().x - x_right, ThePageMeasures->GetDrawingSize().y, SET::GUI::color_background->Get());
-    ThePageMeasures->FillRectangle(x_left, y_bottom + 1, LengthAxisX(), ThePageMeasures->GetDrawingSize().y - y_bottom, SET::GUI::color_background->Get());
+    ThePageMeasures->FillRectangle(0, 0, x_left - 1, ThePageMeasures->GetDrawingSize().y, SET_GUI_COLOR_BACKGROUND->GetUInt());
+    ThePageMeasures->FillRectangle(x_left, 0, LengthAxisX(), y_top - 1, SET_GUI_COLOR_BACKGROUND->GetUInt());
+    ThePageMeasures->FillRectangle(x_right + 1, 0, ThePageMeasures->GetDrawingSize().x - x_right, ThePageMeasures->GetDrawingSize().y, SET_GUI_COLOR_BACKGROUND->GetUInt());
+    ThePageMeasures->FillRectangle(x_left, y_bottom + 1, LengthAxisX(), ThePageMeasures->GetDrawingSize().y - y_bottom, SET_GUI_COLOR_BACKGROUND->GetUInt());
 
     if (!ThePageMeasures->mouse_is_pressed)
     {
@@ -198,7 +198,7 @@ void GridNew::Draw(const std::vector<GraphMeasure *> &entities)
 
 void GridNew::DrawLabelsOnAxis() const
 {
-    ThePageMeasures->SetColorPen(SET::GUI::color_font->Get());
+    ThePageMeasures->SetColorPen(SET_GUI_COLOR_FONT->GetUInt());
 
     Text::SetFont();
 

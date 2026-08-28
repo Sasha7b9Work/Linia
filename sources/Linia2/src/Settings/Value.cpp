@@ -6,7 +6,6 @@
 
 ValueBool::ValueBool(const wxString &_key, bool _def) : Value<bool>(_key, _def)
 {
-    SET::AppendValue(this);
 }
 
 
@@ -40,17 +39,14 @@ void ValueCheckBox::SetValue(bool val)
 
 ValueInt::ValueInt(const wxString &_key, int _def) : Value<int>(_key, _def)
 {
-    SET::AppendValue(this);
 }
 
 
 ValueUInt::ValueUInt(const wxString &_key, uint _def) : Value<uint>(_key, _def)
 {
-    SET::AppendValue(this);
 }
 
 
 ValuePoint::ValuePoint(const wxString &_key, const wxPoint &_def) : Value<wxPoint>(_key, _def)
 {
-    SET::AppendValue(this);
 }

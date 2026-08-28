@@ -180,16 +180,16 @@ void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 {
     LOG_WRITE("Exit");
 
-    SET::GUI::current_panel->Set(main_panel->GetCurrentPanelIndex());
+    SET_GUI_CURRENT_PANEL->Set(main_panel->GetCurrentPanelIndex());
 
     if (ConsoleRS232::self)
     {
-        SET::GUI::pos_console->Set(ConsoleRS232::self->GetPosition());
+        SET_GUI_POS_CONSOLE->Set(ConsoleRS232::self->GetPosition());
 
         wxSize size = ConsoleRS232::self->GetSize();
-        SET::GUI::size_console->Set({ size.x, size.y });
+        SET_GUI_SIZE_CONSOLE->Set({ size.x, size.y });
 
-        SET::GUI::maximized_console->Set(ConsoleRS232::self->IsMaximized());
+        SET_GUI_MAXIMIZED_CONSOLE->Set(ConsoleRS232::self->IsMaximized());
 
         ConsoleRS232::self->Destroy();
     }

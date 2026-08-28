@@ -18,7 +18,7 @@ void I_IPPP::SetInstance(std::unique_ptr<I_IPPP> device)
 {
     instance = std::move(device);
 
-    if (SET::emulate_mode->Get())
+    if (SET_DEBUG_EMULATE_MODE->GetBool())
     {
         IDevice::impl = new EmulatorDevice();
     }

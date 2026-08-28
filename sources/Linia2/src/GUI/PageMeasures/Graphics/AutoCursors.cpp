@@ -32,7 +32,7 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> & /*measures*/)
     wxRect rect = TheGrid->GetRect();
     (void)rect;
 
-    ThePageMeasures->SetColorPen(SET::GUI::color_curve->Get());
+    ThePageMeasures->SetColorPen(SET_GUI_COLOR_CURVE->GetUInt());
 
 //    if (TheWindowCursors->chbTrackY->IsChecked())
 //    {

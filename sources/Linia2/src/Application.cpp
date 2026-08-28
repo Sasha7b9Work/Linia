@@ -193,7 +193,7 @@ bool Application::OnInit()
 
 #endif
 
-    if (SET::debug_mode->Get())
+    if (SET_DEBUG_MODE->GetBool())
     {
         TheMainWindow->SetMode(ModeMainWindow::Debug);
     }

@@ -32,7 +32,7 @@ PanelRight::PanelRight(wxWindow *parent, PanelRight *&global) :
 
         btnStart->SetToolTip(L("Запуск развёртки"));
 
-        txtPeriodScan = new TextCtrlNumber{ this, wxString::Format("%u", SET::_DEBUG::period_send->Get()), size_button,  10, 10000};
+        txtPeriodScan = new TextCtrlNumber{ this, wxString::Format("%u", SET_DEBUG_PERIOD_SEND->GetUInt()), size_button,  10, 10000};
 
         txtPeriodScan->SetToolTip(L("Период запуска развёртки в миллисекундах"));
 
@@ -162,7 +162,7 @@ uint PanelRight::SavePeriodScan()
     uint uint_value = 0;
     str_value.ToUInt(&uint_value);
 
-    SET::_DEBUG::period_send->Set(uint_value);
+    SET_DEBUG_PERIOD_SEND->Set(uint_value);
 
     return uint_value;
 }

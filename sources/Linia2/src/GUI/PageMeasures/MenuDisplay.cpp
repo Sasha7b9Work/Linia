@@ -72,22 +72,22 @@ void MenuDisplay::AppendMenuFacade()
         wxMenuItem *item = nullptr;
         StructColor str_color;
 
-#define APPEND_COLOR(title, value_color, func)                          \
-        item = subColors->Append(wxID_ANY, title);                      \
-        Bind(wxEVT_MENU, &MenuDisplay::OnColor, this, item->GetId());   \
-        str_color = { value_color, func };                             \
+#define APPEND_COLOR(title, value_color, func)                                 \
+        item = subColors->Append(wxID_ANY, title);                             \
+        Bind(wxEVT_MENU, &MenuDisplay::OnColor, this, item->GetId());          \
+        str_color = { value_color->GetValueUInt(), func };                     \
         colors[item->GetId()] = str_color;
 
         wxMenu *subColors = new wxMenu();
 
-        APPEND_COLOR(L("Фон"), SET::GUI::color_background, nullptr);
-        APPEND_COLOR(L("Сетка"), SET::GUI::color_grid, nullptr);
-        APPEND_COLOR(L("Шрифт"), SET::GUI::color_font, nullptr);
-        APPEND_COLOR(L("Кривая"), SET::GUI::color_curve, OnColorCurve);
-        APPEND_COLOR(L("Ссылка"), SET::GUI::color_link, nullptr);
-        APPEND_COLOR(L("Секущая"), SET::GUI::color_secant, nullptr);
+        APPEND_COLOR(L("Фон"), SET_GUI_COLOR_BACKGROUND, nullptr);
+        APPEND_COLOR(L("Сетка"), SET_GUI_COLOR_GRID, nullptr);
+        APPEND_COLOR(L("Шрифт"), SET_GUI_COLOR_FONT, nullptr);
+        APPEND_COLOR(L("Кривая"), SET_GUI_COLOR_CURVE, OnColorCurve);
+        APPEND_COLOR(L("Ссылка"), SET_GUI_COLOR_LINK, nullptr);
+        APPEND_COLOR(L("Секущая"), SET_GUI_COLOR_SECANT, nullptr);
         subColors->AppendSeparator();
-        APPEND_COLOR(L("Сбросить"), nullptr, nullptr);
+//        APPEND_COLOR(L("Сбросить"), nullptr, nullptr);
 
         subFacade->AppendSubMenu(subColors, "Цвета");
     }
@@ -117,7 +117,7 @@ void MenuDisplay::AppendMenuFacade()
 
             item->GetItemLabelText().ToInt(&size);
 
-            if (size == SET::GUI::size_point->Get())
+            if (size == SET_GUI_SIZE_POINT->GetInt())
             {
                 item->Check(true);
             }
@@ -236,7 +236,7 @@ void MenuDisplay::OnSizePoint(wxCommandEvent &event)
 
         title.ToInt(&value, 10);
 
-        SET::GUI::size_point->Set(value);
+        SET_GUI_SIZE_POINT->Set(value);
 
         ThePageMeasures->Refresh();
     }
@@ -259,6 +259,6 @@ void MenuDisplay::OnColorCurve()
 {
     for (auto elem : ThePageMeasures->entities)
     {
-        elem->SetColor(SET::GUI::color_curve->Get());
+        elem->SetColor(SET_GUI_COLOR_CURVE->GetUInt());
     }
 }

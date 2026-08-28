@@ -1,164 +1,69 @@
-﻿// 2023/08/09 19:11:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
+﻿// 2026/08/28 15:06:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Settings/Settings.h"
-#include "Application.h"
-#include <iostream>
-
-
-template void SET::AppendValue<ValueBool>(ValueBool *);
-template void SET::AppendValue<ValuePoint>(ValuePoint *);
-template void SET::AppendValue<ValueInt>(ValueInt *);
-template void SET::AppendValue<ValueUInt>(ValueUInt *);
-
+#include <map>
 
 namespace SET
 {
-    ValueBool *debug_mode = nullptr;
-    ValueBool *emulate_mode = nullptr;
-
-    namespace GUI
+    static std::map<std::string, IValue *> &GetRegistry()
     {
-        ValuePoint       *pos_console = nullptr;
-        ValuePoint       *size_console = nullptr;
-        ValueBool        *maximized_console = nullptr;
-        ValueInt         *serial_port_num = nullptr;
-
-        ValueUInt        *color_background = nullptr;
-        ValueUInt        *color_grid = nullptr;
-        ValueUInt        *color_font = nullptr;
-        ValueUInt        *color_curve = nullptr;
-        ValueUInt        *color_link = nullptr;
-        ValueUInt        *color_secant = nullptr;
-
-        ValueInt         *size_point = nullptr;
-        ValueInt         *current_panel = nullptr;
+        static std::map<std::string, IValue *> registry;
+        return registry;
     }
 
-    namespace _DEBUG
+    void RegisterValue(const std::string &name, IValue *value)
     {
-        ValueUInt *period_send = nullptr;
+        GetRegistry()[name] = value;
     }
 
-
-    class IVector
+    IValue *GetValue(const std::string &name)
     {
-    public:
-
-        virtual ~IVector() = default;
-
-        virtual void Load() = 0;
-
-        virtual void Save() = 0;
-    };
-
-    template<class type>
-    class Vector : public IVector
-    {
-    public:
-
-        void Push(type *value)
+        auto it = GetRegistry().find(name);
+        if (it != GetRegistry().end())
         {
-            vec.push_back(value);
+            return it->second;
         }
+        return nullptr;
+    }
 
-        virtual void Load() override
+    void Init()
+    {
+#define REGISTER(type, name, key, def) \
+            auto* name##_ptr = new Value<type>(key, def); \
+            RegisterValue(#name, new ValueWrapper<type>(name##_ptr));
+
+        REGISTER(bool, debug_mode, "debug_mode", false);
+        REGISTER(bool, debug_emulate_mode, "debug_emulate_mode", false);
+        REGISTER(wxPoint, gui_pos_console, "gui_pos_console", wxPoint(10, 10));
+        REGISTER(wxPoint, gui_size_console, "gui_size_console", wxPoint(400, 400));
+        REGISTER(bool, gui_maximized_console, "gui_maximized_console", false);
+        REGISTER(int, gui_serial_port_num, "gui_serial_port_num", 0);
+        REGISTER(uint, gui_color_background, "gui_color_background", 0xFFFFFF);
+        REGISTER(uint, gui_color_grid, "gui_color_grid", 0);
+        REGISTER(uint, gui_color_font, "gui_color_font", 0);
+        REGISTER(uint, gui_color_curve, "gui_color_curve", 0);
+        REGISTER(uint, gui_color_link, "gui_color_link", 0);
+        REGISTER(uint, gui_color_secant, "gui_color_secant", 0);
+        REGISTER(int, gui_size_point, "gui_size_point", 2);
+        REGISTER(int, current_panel, "current_panel", 0);
+        REGISTER(uint, period_send, "period_send", 100);
+
+#undef REGISTER
+    }
+
+    void Load()
+    {
+        for (auto &[name, value] : GetRegistry())
         {
-            for (auto elem : vec)
-            {
-                elem->Load();
-            }
+            value->Load();
         }
+    }
 
-        virtual void Save() override
+    void Save()
+    {
+        for (auto &[name, value] : GetRegistry())
         {
-            for (auto elem : vec)
-            {
-                elem->Save();
-            }
+            value->Save();
         }
-
-    private:
-
-        std::vector<type *> vec;
-    };
-
-    static Vector<ValueBool> vec_bool;
-    static Vector<ValuePoint> vec_point;
-    static Vector<ValueInt> vec_int;
-    static Vector<ValueUInt> vec_uint;
-
-    static std::vector<IVector *> all_vectors;
-}
-
-
-void SET::Init()
-{
-    all_vectors.push_back(&vec_bool);
-    all_vectors.push_back(&vec_point);
-    all_vectors.push_back(&vec_int);
-    all_vectors.push_back(&vec_uint);
-
-    debug_mode = new ValueBool("debug_mode", false);
-    emulate_mode = new ValueBool("emulate_mode", false);
-
-    GUI::pos_console = new ValuePoint("gui_pos_console", { 10, 10 });
-    GUI::size_console = new ValuePoint("gui_size_console", { 400, 400 });
-    GUI::maximized_console = new ValueBool("gui_maximized_console", false);
-    GUI::serial_port_num = new ValueInt("serial_port_num", 0);
-
-    GUI::color_background = new ValueUInt("color_background", 0xFFFFFF);
-    GUI::color_grid = new ValueUInt("color_grid", 0);
-    GUI::color_font = new ValueUInt("color_font", 0);
-    GUI::color_curve = new ValueUInt("color_curve", 0);
-    GUI::color_link = new ValueUInt("color_link", 0);
-    GUI::color_secant = new ValueUInt("color_secant", 0);
-
-    GUI::size_point = new ValueInt("size_point", 2);
-    GUI::current_panel = new ValueInt{ "current_panel", 0 };
-
-    _DEBUG::period_send = new ValueUInt("period_send", 100);
-}
-
-
-template<typename T>
-void SET::AppendValue(T *value)
-{
-    if constexpr (std::is_same_v<T, ValueBool>)
-    {
-        vec_bool.Push(value);
-    }
-    else if constexpr (std::is_same_v<T, ValuePoint>)
-    {
-        vec_point.Push(value);
-    }
-    else if constexpr (std::is_same_v<T, ValueInt>)
-    {
-        vec_int.Push(value);
-    }
-    else if constexpr (std::is_same_v<T, ValueUInt>)
-    {
-        vec_uint.Push(value);
-    }
-    else
-    {
-        LOG_ERROR("Can not find type");
-    }
-}
-
-
-void SET::Load()
-{
-    for (auto *vec : all_vectors)
-    {
-        vec->Load();
-    }
-}
-
-
-void SET::Save()
-{
-    for (auto *vec : all_vectors)
-    {
-        vec->Save();
     }
 }
