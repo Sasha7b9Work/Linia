@@ -207,11 +207,13 @@ void RealIPPP::CloseTextFile()
 void RealIPPP::WriteDataToTextFile(uint16 data[5])
 {
     if (!textFileOpened || !textFile.is_open())
+    {
         return;
+    }
 
-    textFile << std::setw(5) << std::right << data[0] << " "
-        << std::setw(5) << std::right << data[1] << " "
-        << std::setw(5) << std::right << data[2] << " "
-        << std::setw(5) << std::right << data[3] << " "
-        << std::setw(5) << std::right << (uint8)data[4] << "\n";
+    textFile << std::setw(6) << std::right << wxString::Format("%u", data[0]) << " "
+        << std::setw(6) << std::right << wxString::Format("%u", data[1]) << " "
+        << std::setw(6) << std::right << wxString::Format("%u", data[2]) << " "
+        << std::setw(6) << std::right << wxString::Format("%u", data[3]) << " "
+        << std::setw(6) << std::right << wxString::Format("%u", (uint8)data[4]) << "\n";
 }
