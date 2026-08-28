@@ -122,27 +122,29 @@ void SET::Init()
 }
 
 
-void SET::AppendValue(ValuePoint *value)
+template<typename T>
+void SET::AppendValue(T *value)
 {
-    vec_point.Push(value);
-}
-
-
-void SET::AppendValue(ValueBool *value)
-{
-    vec_bool.Push(value);
-}
-
-
-void SET::AppendValue(ValueInt *value)
-{
-    vec_int.Push(value);
-}
-
-
-void SET::AppendValue(ValueUInt *value)
-{
-    vec_uint.Push(value);
+    if constexpr (std::is_same_v<T, ValueBool>)
+    {
+        vec_bool.Push(value);
+    }
+    else if constexpr (std::is_same_v<T, ValuePoint>)
+    {
+        vec_point.Push(value);
+    }
+    else if constexpr (std::is_same_v<T, ValueInt>)
+    {
+        vec_int.Push(value);
+    }
+    else if constexpr (std::is_same_v<T, ValueUInt>)
+    {
+        vec_uint.Push(value);
+    }
+    else
+    {
+        LOG_ERROR("Can not find type");
+    }
 }
 
 

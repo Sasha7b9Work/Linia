@@ -6,10 +6,8 @@
 // Настройки прибора
 namespace SET
 {
-    void AppendValue(ValuePoint *);
-    void AppendValue(ValueBool *);
-    void AppendValue(ValueInt *);
-    void AppendValue(ValueUInt *);
+    template<typename T>
+    void AppendValue(T *);
 
     void Init();
 
