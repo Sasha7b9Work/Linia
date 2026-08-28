@@ -34,6 +34,8 @@ PanelRight::PanelRight(wxWindow *parent, PanelRight *&global) :
 
         LOG_WRITE("Create txtPeriodScan");
 
+        LOG_WRITE("value period_send = %u", SET::_DEBUG::period_send->Get());
+
         txtPeriodScan = new TextCtrlNumber{ this, wxString::Format("%u", SET::_DEBUG::period_send->Get()), size_button,  10, 10000};
 
         txtPeriodScan->SetToolTip(L("Период запуска развёртки в миллисекундах"));
