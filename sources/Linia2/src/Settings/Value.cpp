@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "Settings/Value.h"
 #include "Settings/Settings.h"
-//#include "GUI/PageMeasures/PageMeasures.h"
 
 
 ValueBool::ValueBool(const wxString &_key, bool _def) : Value<bool>(_key, _def)

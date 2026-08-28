@@ -4,6 +4,12 @@
 #include "Application.h"
 
 
+template void SET::AppendValue<ValueBool>(ValueBool *);
+template void SET::AppendValue<ValuePoint>(ValuePoint *);
+template void SET::AppendValue<ValueInt>(ValueInt *);
+template void SET::AppendValue<ValueUInt>(ValueUInt *);
+
+
 namespace SET
 {
     ValueBool *debug_mode = nullptr;
