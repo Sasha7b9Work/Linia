@@ -46,3 +46,6 @@ extern PageChannelB  *ThePageChannelB;
 extern NotebookDebug *TheNotebookDebug;
 
 extern PanelRight    *ThePanelRight;
+
+
+extern bool need_write_data_to_file;            // Записать считанные с АЦП значения в файл

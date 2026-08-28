@@ -11,6 +11,9 @@
 #include "GUI/PageDebug/PanelRight.h"
 
 
+bool need_write_data_to_file = false;
+
+
 bool RealIPPP::IsChanBS(const Chan &ch) const
 {
     if (ch.IsBS())
@@ -69,8 +72,11 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
     if (pinFIFO_FULL.GetState() && prev == false)
     {
 #ifndef _WIN32
-        OpenNewBinaryFile();
-        OpenNewTextFile();
+        if (need_write_data_to_file)
+        {
+            OpenNewBinaryFile();
+            OpenNewTextFile();
+        }
 #endif
 
         for (int i = 0; i < POINTS_IN_SAMPLE_ADC; i++)
@@ -80,14 +86,17 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
             SPI::ReadFPGA((uint8 *)data, NUMBER_ADC * 2 + 1);
 
 #ifndef _WIN32
-            // Запись в бинарный файл
-            if (binaryFileOpened && binaryFile.is_open())
+            if (need_write_data_to_file)
             {
-                binaryFile.write((char *)data, NUMBER_ADC * 2 + 1);
-            }
+                // Запись в бинарный файл
+                if (binaryFileOpened && binaryFile.is_open())
+                {
+                    binaryFile.write((char *)data, NUMBER_ADC * 2 + 1);
+                }
 
-            // Запись в текстовый файл
-            WriteDataToTextFile(data);
+                // Запись в текстовый файл
+                WriteDataToTextFile(data);
+            }
 #endif
 
             for (int num_dac = 0; num_dac < 4; num_dac++)
@@ -99,8 +108,11 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
         }
 
 #ifndef _WIN32
-        void CloseBinaryFile();
-        void CloseTextFile();
+        if (need_write_data_to_file)
+        {
+            void CloseBinaryFile();
+            void CloseTextFile();
+        }
 #endif
 
         result = true;
@@ -193,10 +205,6 @@ void RealIPPP::WriteDataToTextFile(uint16 data[5])
 {
     if (!textFileOpened || !textFile.is_open())
         return;
-
-    auto now = std::chrono::system_clock::now();
-    auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(
-        now.time_since_epoch()).count();
 
     textFile << std::setw(5) << std::right << data[0] << " "
         << std::setw(5) << std::right << data[1] << " "
