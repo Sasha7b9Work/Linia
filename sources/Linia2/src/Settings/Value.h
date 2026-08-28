@@ -46,8 +46,6 @@ public:
 
     virtual void Load()
     {
-        LOG_WRITE("Load %s", key.c_str().AsChar());
-
         value = Config::Read(key, default_value);
     }
 
