@@ -33,8 +33,19 @@ namespace SET
     }
 
 
+    class IVector
+    {
+    public:
+
+        virtual ~IVector() = default;
+
+        virtual void Load() = 0;
+
+        virtual void Save() = 0;
+    };
+
     template<class type>
-    class Vector
+    class Vector : public IVector
     {
     public:
 
@@ -43,7 +54,7 @@ namespace SET
             vec.push_back(value);
         }
 
-        void Load()
+        virtual void Load() override
         {
             for (auto elem : vec)
             {
@@ -51,7 +62,7 @@ namespace SET
             }
         }
 
-        void Save()
+        virtual void Save() override
         {
             for (auto elem : vec)
             {
@@ -68,11 +79,26 @@ namespace SET
     static Vector<ValuePoint> vec_point;
     static Vector<ValueInt> vec_int;
     static Vector<ValueUInt> vec_uint;
+
+    static std::vector<IVector *> all_vectors;
 }
 
 
 void SET::Init()
 {
+    if (all_vectors.empty())
+    {
+        all_vectors.push_back(&vec_bool);
+        all_vectors.push_back(&vec_point);
+        all_vectors.push_back(&vec_int);
+        all_vectors.push_back(&vec_uint);
+    }
+    else
+    {
+        LOG_ERROR("Thhe vector is already initialized");
+    }
+
+
     debug_mode = new ValueBool("debug_mode", false);
     emulate_mode = new ValueBool("emulate_mode", false);
 
@@ -121,23 +147,17 @@ void SET::AppendValue(ValueUInt *value)
 
 void SET::Load()
 {
-    vec_point.Load();
-
-    vec_bool.Load();
-
-    vec_int.Load();
-
-    vec_uint.Load();
+    for (auto *vec : all_vectors)
+    {
+        vec->Load();
+    }
 }
 
 
 void SET::Save()
 {
-    vec_point.Save();
-
-    vec_bool.Save();
-
-    vec_int.Save();
-
-    vec_uint.Save();
+    for (auto *vec : all_vectors)
+    {
+        vec->Save();
+    }
 }
