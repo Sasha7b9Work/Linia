@@ -150,6 +150,8 @@ void SET::AppendValue(T *value)
 
 void SET::Load()
 {
+    LOG_WRITE("SET::Load()");
+
     for (auto *vec : all_vectors)
     {
         vec->Load();
