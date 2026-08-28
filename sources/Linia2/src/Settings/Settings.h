@@ -5,6 +5,13 @@
 #include <string>
 
 
+#define SETTING(name) SET::GetValue(name)
+
+#define REGISTER(type, name, def) \
+    auto* name##_ptr = new Value<type>(#name, def); \
+    RegisterValue(#name, new ValueWrapper<type>(name##_ptr));
+
+
 #define SET_DEBUG_MODE            SETTING("debug_mode")
 #define SET_DEBUG_PERIOD_SEND     SETTING("period_send")
 #define SET_DEBUG_EMULATE_MODE    SETTING("debug_emulate_mode")
@@ -189,9 +196,8 @@ namespace SET
     void RegisterValue(const std::string &name, IValue *value);
 }
 
-// Макросы для удобного доступа
 #define SETTING(name) SET::GetValue(name)
-#define SET_SETTING(name, value) SET::SetValue(name, value)
 
-
-
+#define REGISTER(type, name, def) \
+    auto* name##_ptr = new Value<type>(#name, def); \
+    RegisterValue(#name, new ValueWrapper<type>(name##_ptr));
