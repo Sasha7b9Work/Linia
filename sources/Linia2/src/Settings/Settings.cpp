@@ -65,8 +65,10 @@ namespace SET
 
         virtual void Load() override
         {
+            LOG_WRITE("Load()");
             for (auto elem : vec)
             {
+                LOG_WRITE("Load()");
                 elem->Load();
             }
         }
@@ -165,6 +167,8 @@ void SET::Load()
 
     for (auto *vec : all_vectors)
     {
+        LOG_WRITE("vec->Load()");
+
         vec->Load();
     }
 }
