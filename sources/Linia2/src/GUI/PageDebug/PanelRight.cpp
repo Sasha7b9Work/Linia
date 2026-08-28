@@ -43,16 +43,18 @@ PanelRight::PanelRight(wxWindow *parent, PanelRight *&global) :
     }
 
     {
-        btnStop = new Button{ this, "Стоп", size_button };
-
+        btnStop = new Button{ this, L("Стоп"), size_button };
         btnStop->SetToolTip(L("Останов развёртки"));
-
         btnStop->Enable(false);
+
+        btnWriteData = new Button{ this, L("Сохранить"), size_button };
+        btnWriteData->SetToolTip(L("Сохранить данные в файл /mnt/nvme/data"));
 
         Bind(wxEVT_BUTTON, &PanelRight::OnEventButton, this);
 
         wxBoxSizer *hor_sizer = new wxBoxSizer(wxHORIZONTAL);
         hor_sizer->Add(btnStop, 0, wxALL, 5);
+        hor_sizer->Add(btnWriteData, 0, wxALL, 5);
         hor_sizer->AddStretchSpacer();
         main_sizer->Add(hor_sizer, 0, wxEXPAND | wxBOTTOM, 10);
     }
@@ -145,6 +147,12 @@ void PanelRight::OnEventButton(wxCommandEvent &event)
         btnStop->Enable(false);
         txtPeriodScan->Enable(true);
     }
+    else if (id == btnWriteData->GetId())
+    {
+        need_write_data_to_file = true;
+    }
+
+    event.Skip();
 }
 
 

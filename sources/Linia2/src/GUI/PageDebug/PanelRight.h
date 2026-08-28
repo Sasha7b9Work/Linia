@@ -22,8 +22,9 @@ private:
 
     ~PanelRight();
 
-    Button *btnStart = nullptr;       // Запуск развёртки
-    Button *btnStop = nullptr;        // Останов развёртки
+    Button *btnStart = nullptr;         // Запуск развёртки
+    Button *btnStop = nullptr;          // Останов развёртки
+    Button *btnWriteData = nullptr;     // Сохранение данных в файл
 
     TextCtrlNumber *txtPeriodScan = nullptr;    // Период запуска развёртки в миллисекундах
 

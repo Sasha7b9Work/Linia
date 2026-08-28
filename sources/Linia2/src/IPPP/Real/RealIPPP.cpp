@@ -113,6 +113,8 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
         {
             void CloseBinaryFile();
             void CloseTextFile();
+
+            need_write_data_to_file = false;
         }
 #endif
 
