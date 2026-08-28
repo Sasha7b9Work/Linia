@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Settings/Settings.h"
 #include "Application.h"
+#include <iostream>
 
 
 template void SET::AppendValue<ValueBool>(ValueBool *);
@@ -99,6 +100,8 @@ namespace SET
 
     template<class type> Vector<type>::Vector()
     {
+        std::cout << "Vector::Vector()" << std::endl;
+
         GetAllVectors().push_back(this);
     }
 }
