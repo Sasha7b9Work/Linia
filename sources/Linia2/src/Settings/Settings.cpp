@@ -49,6 +49,8 @@ namespace SET
     {
     public:
 
+        Vector();
+
         void Push(type *value)
         {
             vec.push_back(value);
@@ -81,24 +83,23 @@ namespace SET
     static Vector<ValueUInt> vec_uint;
 
     static std::vector<IVector *> all_vectors;
+
+    // Этот метод нужен для того, чтобы порядок инициализации статических объектов всегда был правильным -
+    // all_vector создавался раньше, чем в него будет добавлен первый объект
+    static std::vector<IVector *> &GetAllVectors()
+    {
+        return all_vectors;
+    }
+
+    template<class type> Vector<type>::Vector()
+    {
+        GetAllVectors().push_back(this);
+    }
 }
 
 
 void SET::Init()
 {
-    if (all_vectors.empty())
-    {
-        all_vectors.push_back(&vec_bool);
-        all_vectors.push_back(&vec_point);
-        all_vectors.push_back(&vec_int);
-        all_vectors.push_back(&vec_uint);
-    }
-    else
-    {
-        LOG_ERROR("Thhe vector is already initialized");
-    }
-
-
     debug_mode = new ValueBool("debug_mode", false);
     emulate_mode = new ValueBool("emulate_mode", false);
 
