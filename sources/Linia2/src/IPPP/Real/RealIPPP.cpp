@@ -177,7 +177,7 @@ void RealIPPP::OpenNewTextFile()
 
     if (textFileOpened)
     {
-        textFile << "# Timestamp, CH0, CH1, CH2, CH3, CODE\n";
+        textFile << "    CH0      CH1      CH2      CH3     CODE\n";
         LOG_WRITE("Created text file: %s", currentTextFileName.c_str().AsChar());
     }
 }
@@ -209,9 +209,9 @@ void RealIPPP::WriteDataToTextFile(uint16 data[5])
         return;
     }
 
-    textFile << std::setw(6) << std::right << wxString::Format("%u", data[0]) << " "
-        << std::setw(6) << std::right << wxString::Format("%u", data[1]) << " "
-        << std::setw(6) << std::right << wxString::Format("%u", data[2]) << " "
-        << std::setw(6) << std::right << wxString::Format("%u", data[3]) << " "
-        << std::setw(6) << std::right << wxString::Format("%u", (uint8)data[4]) << "\n";
+    textFile << std::setw(7) << std::right << wxString::Format("%u", data[0]) << " "
+        << std::setw(7) << std::right << wxString::Format("%u", data[1]) << " "
+        << std::setw(7) << std::right << wxString::Format("%u", data[2]) << " "
+        << std::setw(7) << std::right << wxString::Format("%u", data[3]) << " "
+        << std::setw(7) << std::right << wxString::Format("%u", (uint8)data[4]) << "\n";
 }
