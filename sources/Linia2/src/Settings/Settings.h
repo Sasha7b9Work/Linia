@@ -16,9 +16,6 @@ namespace SET
     void Load();
     void Save();
 
-    // Эти переменные хранятся только в векторах
-    ValueUInt *ValueUIntByKey(pchar);
-
     extern ValueBool        *debug_mode;
     extern ValueBool        *emulate_mode;              // Режим эмуляции
 

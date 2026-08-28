@@ -6,8 +6,8 @@
 
 namespace SET
 {
-    ValueBool            *debug_mode = nullptr;
-    ValueBool            *emulate_mode = nullptr;
+    ValueBool *debug_mode = nullptr;
+    ValueBool *emulate_mode = nullptr;
 
     namespace GUI
     {
@@ -33,31 +33,41 @@ namespace SET
     }
 
 
-    // \warn Такое хитрое обращение к векторам сделано потому, что порядок инициализации глобальных статических объектов неопределён,
-    // из-за чего к моменту, когда в эти вектора кладутся значения, оин могут быть не готовы к работе. 
-    static std::vector<ValuePoint *> &VectorPoint()
+    template<class type>
+    class Vector
     {
-        static std::vector<ValuePoint *> vec;
-        return vec;
-    }
+    public:
 
-    static std::vector<ValueBool *> &VectorBool()
-    {
-        static std::vector<ValueBool *> vec;
-        return vec;
-    }
+        void Push(type *value)
+        {
+            vec.push_back(value);
+        }
 
-    static std::vector<ValueInt *> &VectorInt()
-    {
-        static std::vector<ValueInt *> vec;
-        return vec;
-    }
+        void Load()
+        {
+            for (auto elem : vec)
+            {
+                elem->Load();
+            }
+        }
 
-    static std::vector<ValueUInt *> &VectorUInt()
-    {
-        static std::vector<ValueUInt *> vec;
-        return vec;
-    }
+        void Save()
+        {
+            for (auto elem : vec)
+            {
+                elem->Save();
+            }
+        }
+
+    private:
+
+        std::vector<type *> vec;
+    };
+
+    static Vector<ValueBool> vec_bool;
+    static Vector<ValuePoint> vec_point;
+    static Vector<ValueInt> vec_int;
+    static Vector<ValueUInt> vec_uint;
 }
 
 
@@ -87,87 +97,47 @@ void SET::Init()
 
 void SET::AppendValue(ValuePoint *value)
 {
-    VectorPoint().push_back(value);
+    vec_point.Push(value);
 }
 
 
 void SET::AppendValue(ValueBool *value)
 {
-    VectorBool().push_back(value);
+    vec_bool.Push(value);
 }
 
 
 void SET::AppendValue(ValueInt *value)
 {
-    VectorInt().push_back(value);
+    vec_int.Push(value);
 }
 
 
 void SET::AppendValue(ValueUInt *value)
 {
-    VectorUInt().push_back(value);
-}
-
-
-ValueUInt *SET::ValueUIntByKey(pchar key)
-{
-    std::vector<ValueUInt *> &values = VectorUInt();
-
-    for (ValueUInt *val : values)
-    {
-        if (val->GetKey() == key)
-        {
-            return val;
-        }
-    }
-
-    return nullptr;
+    vec_uint.Push(value);
 }
 
 
 void SET::Load()
 {
-    for (auto elem : VectorPoint())
-    {
-        elem->Load();
-    }
+    vec_point.Load();
 
-    for (auto elem : VectorBool())
-    {
-        elem->Load();
-    }
+    vec_bool.Load();
 
-    for (auto elem : VectorInt())
-    {
-        elem->Load();
-    }
+    vec_int.Load();
 
-    for (auto elem : VectorUInt())
-    {
-        elem->Load();
-    }
+    vec_uint.Load();
 }
 
 
 void SET::Save()
 {
-    for (auto elem : VectorPoint())
-    {
-        elem->Save();
-    }
+    vec_point.Save();
 
-    for (auto elem : VectorBool())
-    {
-        elem->Save();
-    }
+    vec_bool.Save();
 
-    for (auto elem : VectorInt())
-    {
-        elem->Save();
-    }
+    vec_int.Save();
 
-    for (auto elem : VectorUInt())
-    {
-        elem->Save();
-    }
+    vec_uint.Save();
 }
