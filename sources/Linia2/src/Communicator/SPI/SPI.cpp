@@ -50,7 +50,7 @@ namespace SPI
     static bool SetSpeed(uint speedHz);
     static bool SetMode(uint8 mode);
 
-    static void delay_us_busy(uint timeUS);
+    static void DelayUS(uint timeUS);
 }
 
 void SPI::Init()
@@ -100,7 +100,7 @@ void SPI::DeInit()
 }
 
 
-void SPI::delay_us_busy(uint timeUS)
+void SPI::DelayUS(uint timeUS)
 {
     (void)timeUS;
 
@@ -142,20 +142,20 @@ bool SPI::WriteDynamicDAC(DAC::E dac, uint16 value)
 
     for (int i = 0; i < 16; i++)
     {
-        delay_us_busy(4);
+        DelayUS(4);
 
         pinCLK.ToHi();
 
-        delay_us_busy(4);
+        DelayUS(4);
 
         pinMOSI.Set((mask & value) != 0);
         mask >>= 1;
 
-        delay_us_busy(4);
+        DelayUS(4);
 
         pinCLK.ToLow();
 
-        delay_us_busy(4);
+        DelayUS(4);
     }
 
     (dac == DAC::_0_ChannelC_Form) ? pinCS0_SCAN.ToHi() : pinCS1_50V.ToHi();
