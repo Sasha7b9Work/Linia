@@ -158,6 +158,8 @@ bool SPI::WriteDynamicDAC(DAC::E dac, uint16 value)
         DelayUS(4);
     }
 
+    pinMOSI.ToLow();
+
     (dac == DAC::_0_ChannelC_Form) ? pinCS0_SCAN.ToHi() : pinCS1_50V.ToHi();
 
     return true;
