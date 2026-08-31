@@ -25,8 +25,6 @@ namespace SET
 
     IValue *GetValue(const std::string &name)
     {
-        LOG_WRITE("IValue::GetValue %s", name.c_str());
-
         auto it = GetRegistry().find(name);
 
         if (it != GetRegistry().end())
