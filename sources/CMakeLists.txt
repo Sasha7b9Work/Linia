@@ -41,7 +41,7 @@ else()
 #       -Ofast
 #       -flto   #  включает Link-Time Optimization (оптимизацию на этапе линковки). Уменьшает время компиляции
        -s
-       -g0
+#       -g0
        -fno-stack-protector   
     )
 endif()
