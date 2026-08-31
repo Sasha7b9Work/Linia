@@ -50,7 +50,7 @@ namespace SPI
     static bool SetSpeed(uint speedHz);
     static bool SetMode(uint8 mode);
 
-    static void delay_10us_busy(void);
+    static void delay_us_busy(uint timeUS);
 }
 
 void SPI::Init()
@@ -100,16 +100,18 @@ void SPI::DeInit()
 }
 
 
-void SPI::delay_10us_busy(void)
+void SPI::delay_us_busy(uint timeUS)
 {
+    (void)timeUS;
+
 #ifdef WIN32
 #else
     struct timespec start, now;
     // Получаем текущее время
     clock_gettime(CLOCK_MONOTONIC, &start);
 
-    // Целевое время: старт + 10 мкс (10 000 наносекунд)
-    long target_ns = start.tv_nsec + 10000;
+    // Целевое время: старт + timeUS микросекунд (timeUS * 1000 наносекунд)
+    long target_ns = start.tv_nsec + (timeUS * 1000);
 
     // Корректируем перенос секунд, если наносекунды перевалили за 1e9
     if (target_ns >= 1000000000)
@@ -136,19 +138,24 @@ bool SPI::WriteDynamicDAC(DAC::E dac, uint16 value)
 
     (dac == DAC::_0_ChannelC_Form) ? pinCS0_SCAN.ToLow() : pinCS1_50V.ToLow();
 
+    uint16 mask = 0x80;
+
     for (int i = 0; i < 16; i++)
     {
-        pinMOSI.Set((value & 0x01) != 0);
-
-        delay_10us_busy();
+        delay_us_busy(5);
 
         pinCLK.ToHi();
 
-        value >>= 1;
+        delay_us_busy(5);
 
-        delay_10us_busy();
+        pinMOSI.Set(mask != 0);
+        mask >>= 1;
+
+        delay_us_busy(5);
 
         pinCLK.ToLow();
+
+        delay_us_busy(5);
     }
 
     (dac == DAC::_0_ChannelC_Form) ? pinCS0_SCAN.ToHi() : pinCS1_50V.ToHi();
