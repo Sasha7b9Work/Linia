@@ -26,6 +26,7 @@ public:
     void DrawCircle(int x, int y, int r, const wxColor & = wxNullColour);
     void FillRectangle(int x, int y, int w, int h, const wxColor & = wxNullColour);
     void DrawRectangle(int x, int y, int w, int h, const wxColor & = wxNullColour);
+    void DrawPoint(int x, int y, const wxColor & = wxNullColour);
     void DrawBitmap(int x, int y, const wxBitmap &, const wxColor &alpha = wxNullColour);
 
     wxGraphicsContext *gc = nullptr;
