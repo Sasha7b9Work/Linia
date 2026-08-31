@@ -73,7 +73,7 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
             }
         };
 
-    auto WriteTofiles = [this](uint16 data[5])
+    auto WriteToFiles = [this](uint16 data[5])
         {
             if (need_write_data_to_file)
             {
@@ -116,7 +116,7 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
 
             SPI::ReadFPGA((uint8 *)data, NUMBER_ADC * 2 + 1);
 
-            WriteTofiles(data);
+            WriteToFiles(data);
 
             for (int num_dac = 0; num_dac < 4; num_dac++)
             {
