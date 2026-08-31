@@ -32,6 +32,7 @@ else()
         -Wno-unknown-pragmas
         -Wno-write-strings
         -pipe
+        -std=c++23
 
 #  Без оптимизации - лучше для отладки
       -g3                       # Без этого Code Blocks не останавливается на точках останова
@@ -42,7 +43,7 @@ else()
 #       -flto   #  включает Link-Time Optimization (оптимизацию на этапе линковки). Уменьшает время компиляции
        -s
 #       -g0
-       -fno-stack-protector   
+       -fno-stack-protector
     )
 endif()
 

@@ -10,6 +10,7 @@
 #include "Communicator/SPI/SPI.h"
 #include "GUI/PageDebug/PanelRight.h"
 #include <iomanip>
+#include <bit>
 
 
 bool need_write_data_to_file = false;
@@ -120,11 +121,7 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
 
             for (int num_dac = 0; num_dac < 4; num_dac++)
             {
-                uint16 value16 = data[num_dac];
-
-                uint16 value = (uint16)((value16 >> 8) | (value16 << 8));
-
-                data_dac[num_dac][i] = (int)((int16)value);
+                data_dac[num_dac][i] = std::byteswap(data[num_dac]);
             }
 
             data_code[i] = (uint8)data[4];
