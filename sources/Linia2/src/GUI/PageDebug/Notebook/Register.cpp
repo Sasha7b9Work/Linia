@@ -10,6 +10,7 @@
 #include "GUI/PageDebug/Notebook/PageChip.h"
 #include "GUI/PageDebug/Notebook/AnimatedImpulse.h"
 #include "GUI/Controls/Knob.h"
+#include "Settings/Settings.h"
 #pragma warning(push, 0)
     #include <wx/graphics.h>
     #include <wx/sizer.h>
@@ -27,6 +28,9 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, const 
     Panel(parent),
     chip(_chip)
 {
+    SET::RegisterValue(GetNameSettingValue(), new SET::ValueWrapper<uint>(new Value<uint>(GetNameSettingValue(), 0)));
+    SET::GetValue(GetNameSettingValue())->Load();
+
     wxSize size = GetMinSize();
 
     Panel::SetMinSize(size);
@@ -36,6 +40,17 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, const 
     wxWindowBase::SetBackgroundColour(parent->GetBackgroundColour().ChangeLightness(110));
 
     Panel::SetName("Register");
+
+    {
+        painter = new PainterRegister(this, this);
+
+        main_sizer->Add(painter);
+
+        for (uint i = 0; i < chboxes.size(); i++)
+        {
+            chboxes[i]->Bind(wxEVT_CHECKBOX, &Register::OnEventCheckBoxBit, this);
+        }
+    }
 
     {
         StaticText *txt_name = new StaticText(this, _title + " " + chip->GetNameDevice() + (_functional.IsEmpty() ? wxString("") : (wxString(" : ") + _functional)));
@@ -91,17 +106,6 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, const 
         main_sizer->Add(top_sizer, 0, wxEXPAND | wxTOP, 10);
     }
 
-    {
-        painter = new PainterRegister(this, this);
-
-        main_sizer->Add(painter);
-
-        for (auto box : chboxes)
-        {
-            box->Bind(wxEVT_CHECKBOX, &Register::OnEventCheckBoxBit, this);
-        }
-    }
-
     Bind(wxEVT_RIGHT_DOWN, [](wxMouseEvent &event)
         {
             event.Skip(); // Пропустить событие дальше (родителю)
@@ -125,6 +129,13 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, const 
     timerAutoSend.SetOwner(this, timerAutoSend.GetId());
 
     SetSizer(main_sizer);
+}
+
+
+Register::~Register()
+{
+    SET::GetValue(GetNameSettingValue())->Set(GetValue());
+    SET::GetValue(GetNameSettingValue())->Save();
 }
 
 
@@ -747,25 +758,6 @@ void CheckBoxBit::OnEventLeftClick(wxMouseEvent &)
 }
 
 
-void Register::Pack()
-{
-    Config::WriteUint(chip->GetNameDevice(), GetValue());
-}
-
-
-void Register::Unpack()
-{
-    SetValue(Config::ReadUint(chip->GetNameDevice()));
-}
-
-
-void RegDAC::Unpack()
-{
-    Register::Unpack();
-    SetValueToKnobAndSlider();
-}
-
-
 void RegDAC::SetValueToKnobAndSlider()
 {
     int max_value = (1 << NumBitsValue()) - 1;
@@ -804,4 +796,16 @@ void RegDAC::SetValueDAC(uint value)
     {
         SetValueToBits(value, FirstBitValue(), NumBitsValue());
     }
+}
+
+
+pchar Register::GetNameSettingValue() const
+{
+    return chip->GetNameDevice().c_str().AsChar();
+}
+
+
+void Register::LoadConfig()
+{
+    SetValue(SET::GetValue(GetNameSettingValue())->GetUInt());
 }

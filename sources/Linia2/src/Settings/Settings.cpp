@@ -13,16 +13,25 @@ namespace SET
 
     void RegisterValue(const std::string &name, IValue *value)
     {
-        GetRegistry()[name] = value;
+        if (GetValue(name) == nullptr)
+        {
+            GetRegistry()[name] = value;
+        }
+        else
+        {
+            LOG_ERROR("Value \"%s\" already exist", name.c_str());
+        }
     }
 
     IValue *GetValue(const std::string &name)
     {
         auto it = GetRegistry().find(name);
+
         if (it != GetRegistry().end())
         {
             return it->second;
         }
+
         return nullptr;
     }
 

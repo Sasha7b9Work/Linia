@@ -24,6 +24,8 @@ PageChip::PageChip(wxNotebook *notebook, const wxString &title) :
 
 void PageChip::AppendRegister(Register *reg)
 {
+    reg->LoadConfig();
+
     // Добавить в сайзер, а не позиционировать вручную
     GetSizer()->Add(reg, 0, wxEXPAND | wxALL, 5);
 
@@ -53,24 +55,6 @@ void PageChip::OnMenuEvent(wxCommandEvent &event)
     if (id == itemReturn->GetId())
     {
         TheMainWindow->SetMode(ModeMainWindow::Standard);
-    }
-}
-
-
-void PageChip::Pack()
-{
-    for (auto *reg : registers)
-    {
-        reg->Pack();
-    }
-}
-
-
-void PageChip::Unpack()
-{
-    for (auto *reg : registers)
-    {
-        reg->Unpack();
     }
 }
 

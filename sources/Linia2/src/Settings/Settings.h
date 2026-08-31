@@ -9,7 +9,7 @@
 
 #define REGISTER(type, name, def) \
     auto* name##_ptr = new Value<type>(#name, def); \
-    RegisterValue(#name, new ValueWrapper<type>(name##_ptr));
+    SET::RegisterValue(#name, new SET::ValueWrapper<type>(name##_ptr));
 
 #define SET_DEBUG_MODE            SETTING("debug_mode")
 #define SET_DEBUG_PERIOD_SEND     SETTING("period_send")
@@ -45,7 +45,7 @@ namespace SET
         virtual void Set(const wxPoint &val) = 0;
         virtual bool GetBool() const = 0;
         virtual int GetInt() const = 0;
-        virtual unsigned int GetUInt() const = 0;
+        virtual uint GetUInt() const = 0;
         virtual wxPoint GetPoint() const = 0;
         virtual void *GetRaw() const = 0;
         virtual bool IsBool() const = 0;

@@ -12,8 +12,4 @@ public:
     virtual bool Show(bool) override;
 
     void PeriodicTask();
-
-    void Unpack();
-
-    void Pack();
 };

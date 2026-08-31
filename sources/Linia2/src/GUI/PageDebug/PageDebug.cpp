@@ -25,8 +25,6 @@ PageDebug::PageDebug(Notebook *board, PageDebug *&global) : PageNotebook(board, 
     SetSizer(sizer);
 
     PageNotebook::Layout();
-
-    Unpack();
 }
 
 
@@ -41,18 +39,4 @@ bool PageDebug::Show(bool show)
 void PageDebug::PeriodicTask()
 {
     TheNotebookDebug->PeriodicTask();
-
-//    ThePanelRight->PeriodicTask();
-}
-
-
-void PageDebug::Unpack()
-{
-    TheNotebookDebug->Unpack();
-}
-
-
-void PageDebug::Pack()
-{
-    TheNotebookDebug->Pack();
 }

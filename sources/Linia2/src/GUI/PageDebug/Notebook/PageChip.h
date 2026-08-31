@@ -19,9 +19,6 @@ public:
 
     void AppendRegister(Register *);
 
-    void Pack();
-    void Unpack();
-
     // Заслать ве значения регистров в прибор
     void SendAllRegisters();
 

@@ -20,10 +20,6 @@ public:
 
     void DeInit();
 
-    void Unpack();
-
-    void Pack();
-
     void EnableSwitching(bool);
 
 private:

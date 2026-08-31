@@ -17,7 +17,8 @@ public:
         default_value(_default_value),
         stored_value(_default_value),
         serialiazed(_serialiazed)
-    {}
+    {
+    }
 
     T &Get()
     {

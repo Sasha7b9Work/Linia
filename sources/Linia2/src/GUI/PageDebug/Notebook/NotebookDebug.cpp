@@ -96,41 +96,10 @@ void NotebookDebug::PeriodicTask()
 }
 
 
-void NotebookDebug::Pack()
-{
-    PageFPGA::self->Pack();
-    PageCommutator::self->Pack();
-    PageSource3kV::self->Pack();
-    PageChannelForm::self->Pack();
-    ThePageChannelB->Pack();
-    PageChannelS::self->Pack();
-    PageMeasCurrent::self->Pack();
-    PageSource50V::self->Pack();
-
-    Config::WriteInt("pagedebug_page", GetSelection());
-}
-
-
-void NotebookDebug::Unpack()
-{
-    PageFPGA::self->Unpack();
-    PageCommutator::self->Unpack();
-    PageSource3kV::self->Unpack();
-    PageChannelForm::self->Unpack();
-    ThePageChannelB->Unpack();
-    PageChannelS::self->Unpack();
-    PageMeasCurrent::self->Unpack();
-    PageSource50V::self->Unpack();
-
-    SetSelection((size_t)Config::ReadInt("pagedebug_page", 0));
-}
-
-
 void NotebookDebug::OnEventPageChanged(wxBookCtrlEvent &event)
 {
     if (switching_allowed)
     {
-        Pack();
     }
     else
     {

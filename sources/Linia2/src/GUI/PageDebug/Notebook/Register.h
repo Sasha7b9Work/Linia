@@ -90,6 +90,8 @@ public:
         const wxString &_title,                 // Это написано на изображении
         Chip *, const wxString &_functional);
 
+    ~Register();
+
     void SetNamesBits(const wxArrayString &);
 
     void SetDescriptionBits(int index, const std::vector<StructDescription> &);
@@ -100,8 +102,6 @@ public:
     // Занести значения в определённые биты
     void SetValueToBits(uint, int first_bit, int num_bits);
     uint GetValueFromBits(int first_bit, int num_bits) const;
-    void Pack();
-    virtual void Unpack();
 
     // Записать значение в аппаратуру
     void WriteValue();
@@ -110,6 +110,9 @@ public:
     {
         return chip;
     }
+
+    // \todo загрузить настройки из файла конфигурации
+    void LoadConfig();
 
 protected:
 
@@ -132,7 +135,7 @@ protected:
     // А это элемент управления для выбора режимов
     CommandsCombo *combo_modes[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };
 
-    std::vector<CheckBoxBit *> chboxes;
+    std::vector<CheckBoxBit *> chboxes;                     // Здесь хранятся значения битов
 
     // Создать элемент управления для выбора режима
     void CreateControlMode(int i);
@@ -149,8 +152,10 @@ protected:
     void UpdateComboCommandsAndModes();
 
     void OnEventTextCtrl(wxCommandEvent &);
+
     // ЛКМ по состоянию бита CheckBoxBit
     void OnEventCheckBoxBit(wxCommandEvent &);
+
     // Управление состоянием групп битов
     void OnEventComboField(wxCommandEvent &);
 
@@ -160,6 +165,9 @@ protected:
     virtual void OnEventUpdateComboCommandsAndModes() = 0;
 
     wxSize GetMinSize() const;
+
+    // Возвращает имя переменной как оно хранится в файле конфигурации
+    pchar GetNameSettingValue() const;
 };
 
 
@@ -201,8 +209,6 @@ private:
 
     uint GetValueDAC();
     void SetValueDAC(uint);
-
-    virtual void Unpack() override;
 
     void SetValueToKnobAndSlider();
 
