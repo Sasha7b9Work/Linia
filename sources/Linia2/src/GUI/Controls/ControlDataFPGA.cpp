@@ -28,7 +28,7 @@ ControlDataFPGA::ControlDataFPGA(wxWindow *parent) :
 
     btnScale->SetToolTip(L("Изменение масштаба - автоматический или постоянный"));
 
-    SetMax((1 << 16) - 1);
+    SetMax(32767);
 
     btnScale->SetPosition({ size.x - btnScale->GetSize().x - 2, 1 });
 }
@@ -66,7 +66,7 @@ void ControlDataFPGA::Draw()
 
     painter->gc->SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL), *wxBLACK);
 
-    int min_value = 0;
+    int min_value = -max - 1;
     int max_value = max;
 
     if (btnScale->GetValue())
