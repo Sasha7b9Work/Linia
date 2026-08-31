@@ -100,7 +100,7 @@ void ControlDataFPGA::Draw()
     {
         int y = (int)((float)(data[i] - min_value) * scale_y) + 2;
 
-        painter->gc->DrawRectangle(i, painter->GetSize().y - y - 1, 1, 1);
+        painter->gc->DrawRectangle(i, painter->GetSize().y - y - 1, 0, 0);
     }
 
     painter->EndPaint();
