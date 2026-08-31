@@ -330,6 +330,8 @@ void Register::OnEventTextCtrl(wxCommandEvent &event)
 
     UpdateComboCommandsAndModes();
 
+    SaveValueToConfig();
+
     event.Skip();
 }
 
@@ -429,6 +431,8 @@ void Register::OnEventCheckBoxBit(wxCommandEvent &event)
 
     UpdateComboCommandsAndModes();
 
+    SaveValueToConfig();
+
     event.Skip();
 }
 
@@ -469,6 +473,8 @@ void Register::OnEventComboField(wxCommandEvent &event)
     }
 
     UpdateDecFields();
+
+    SaveValueToConfig();
 
     event.Skip();
 }
@@ -805,7 +811,14 @@ std::string Register::GetNameSettingValue() const
 }
 
 
-void Register::LoadConfig()
+void Register::LoadValueFromConfig()
 {
+    SET::GetValue(GetNameSettingValue())->Load();
     SetValue(SET::GetValue(GetNameSettingValue())->GetUInt());
+}
+
+
+void Register::SaveValueToConfig()
+{
+    SET::GetValue(GetNameSettingValue())->Save();
 }

@@ -139,6 +139,7 @@ void RealIPPP::OpenNewBinaryFile()
 {
     if (binaryFileOpened && binaryFile.is_open())
     {
+        textFile.flush();
         binaryFile.close();
         binaryFileOpened = false;
     }
@@ -162,6 +163,7 @@ void RealIPPP::OpenNewTextFile()
 {
     if (textFileOpened && textFile.is_open())
     {
+        textFile.flush();
         textFile.close();
         textFileOpened = false;
     }

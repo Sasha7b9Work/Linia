@@ -111,8 +111,9 @@ public:
         return chip;
     }
 
-    // \todo загрузить настройки из файла конфигурации
-    void LoadConfig();
+    void LoadValueFromConfig();
+
+    void SaveValueToConfig();
 
 protected:
 

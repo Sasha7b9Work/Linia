@@ -24,7 +24,7 @@ PageChip::PageChip(wxNotebook *notebook, const wxString &title) :
 
 void PageChip::AppendRegister(Register *reg)
 {
-    reg->LoadConfig();
+    reg->LoadValueFromConfig();
 
     // Добавить в сайзер, а не позиционировать вручную
     GetSizer()->Add(reg, 0, wxEXPAND | wxALL, 5);
