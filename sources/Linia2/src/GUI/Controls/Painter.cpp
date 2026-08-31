@@ -76,9 +76,8 @@ void Painter::DrawPoint(int x, int y, const wxColor &_color)
         color = _color;
     }
 
-    gc->SetPen(color);
-    gc->SetBrush(wxNullBrush);
-    gc->DrawRectangle(x, y, 1, 1);
+    dc.SetPen({ color });
+    dc.DrawPoint(x, y);
 }
 
 
