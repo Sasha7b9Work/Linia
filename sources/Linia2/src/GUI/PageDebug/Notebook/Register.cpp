@@ -799,9 +799,9 @@ void RegDAC::SetValueDAC(uint value)
 }
 
 
-pchar Register::GetNameSettingValue() const
+std::string Register::GetNameSettingValue() const
 {
-    return chip->GetNameDevice().c_str().AsChar();
+    return chip->GetNameDevice().ToStdString();
 }
 
 

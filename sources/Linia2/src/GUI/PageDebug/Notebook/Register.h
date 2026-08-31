@@ -167,7 +167,7 @@ protected:
     wxSize GetMinSize() const;
 
     // Возвращает имя переменной как оно хранится в файле конфигурации
-    pchar GetNameSettingValue() const;
+    std::string GetNameSettingValue() const;
 };
 
 
