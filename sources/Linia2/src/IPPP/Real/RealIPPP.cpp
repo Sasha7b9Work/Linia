@@ -70,13 +70,11 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
 
     if (pinFIFO_FULL.GetState() && prev == false)
     {
-#ifndef _WIN32
         if (need_write_data_to_file)
         {
             OpenNewBinaryFile();
             OpenNewTextFile();
         }
-#endif
 
         for (int i = 0; i < POINTS_IN_SAMPLE_ADC; i++)
         {
@@ -84,7 +82,6 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
 
             SPI::ReadFPGA((uint8 *)data, NUMBER_ADC * 2 + 1);
 
-#ifndef _WIN32
             if (need_write_data_to_file)
             {
                 // Запись в бинарный файл
@@ -96,7 +93,6 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
                 // Запись в текстовый файл
                 WriteDataToTextFile(data);
             }
-#endif
 
             for (int num_dac = 0; num_dac < 4; num_dac++)
             {
@@ -106,7 +102,6 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
             data_code[i] = (uint8)data[4];
         }
 
-#ifndef _WIN32
         if (need_write_data_to_file)
         {
             void CloseBinaryFile();
@@ -114,7 +109,6 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
 
             need_write_data_to_file = false;
         }
-#endif
 
         result = true;
     }
@@ -171,7 +165,12 @@ void RealIPPP::OpenNewTextFile()
     wxDateTime now = wxDateTime::Now();
     wxString timestamp = now.Format("%Y%m%d_%H%M%S");
 
+#ifdef _WIN32
+    wxString basePath = "D:\\";
+#else
     wxString basePath = "/mnt/nvme/data/";
+#endif
+
     currentTextFileName = basePath + timestamp + ".txt";
 
     textFile.open(currentTextFileName.ToStdString(), std::ios::out);
