@@ -142,6 +142,8 @@ bool SPI::WriteDynamicDAC(DAC::E dac, uint16 value)
 
     for (int i = 0; i < 16; i++)
     {
+        pinMOSI.ToLow();
+
         DelayUS(4);
 
         pinCLK.ToHi();
