@@ -148,7 +148,7 @@ bool SPI::WriteDynamicDAC(DAC::E dac, uint16 value)
 
         delay_us_busy(4);
 
-        pinMOSI.Set(mask != 0);
+        pinMOSI.Set((mask & value) != 0);
         mask >>= 1;
 
         delay_us_busy(4);
