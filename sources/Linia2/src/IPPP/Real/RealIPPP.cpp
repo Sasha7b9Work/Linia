@@ -188,6 +188,7 @@ void RealIPPP::CloseBinaryFile()
 {
     if (binaryFileOpened && binaryFile.is_open())
     {
+        binaryFile.flush();
         binaryFile.close();
         binaryFileOpened = false;
         LOG_WRITE("Closed binary file: %s", currentBinaryFileName.c_str().AsChar());
@@ -198,6 +199,7 @@ void RealIPPP::CloseTextFile()
 {
     if (textFileOpened && textFile.is_open())
     {
+        textFile.flush();
         textFile.close();
         textFileOpened = false;
         LOG_WRITE("Closed text file: %s", currentTextFileName.c_str().AsChar());
