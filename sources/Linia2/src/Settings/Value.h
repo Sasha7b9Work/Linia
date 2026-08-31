@@ -47,7 +47,6 @@ public:
 
     virtual void Load()
     {
-        LOG_WRITE("Value::Load()");
         value = Config::Read(key, default_value);
     }
 
