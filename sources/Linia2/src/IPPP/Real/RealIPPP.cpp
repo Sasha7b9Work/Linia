@@ -64,24 +64,17 @@ void RealIPPP::PressButtonStop()
 
 bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data_code[POINTS_IN_SAMPLE_ADC])
 {
-    bool result = false;
-
-    static bool prev = false;
-
-    if (pinFIFO_FULL.GetState() && prev == false)
-    {
-        if (need_write_data_to_file)
+    auto OpenFilesForWrite = [this]()
         {
-            OpenNewBinaryFile();
-            OpenNewTextFile();
-        }
+            if (need_write_data_to_file)
+            {
+                OpenNewBinaryFile();
+                OpenNewTextFile();
+            }
+        };
 
-        for (int i = 0; i < POINTS_IN_SAMPLE_ADC; i++)
+    auto WriteTofiles = [this](uint16 data[5])
         {
-            uint16 data[5];
-
-            SPI::ReadFPGA((uint8 *)data, NUMBER_ADC * 2 + 1);
-
             if (need_write_data_to_file)
             {
                 // Запись в бинарный файл
@@ -93,6 +86,37 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
                 // Запись в текстовый файл
                 WriteDataToTextFile(data);
             }
+        };
+
+    auto CloseFilesForWrite = [this]()
+    {
+        if (need_write_data_to_file)
+        {
+            void CloseBinaryFile();
+            void CloseTextFile();
+
+            need_write_data_to_file = false;
+        }
+    };
+
+
+
+
+    bool result = false;
+
+    static bool prev = false;
+
+    if (pinFIFO_FULL.GetState() && prev == false)
+    {
+        OpenFilesForWrite();
+
+        for (int i = 0; i < POINTS_IN_SAMPLE_ADC; i++)
+        {
+            uint16 data[5];
+
+            SPI::ReadFPGA((uint8 *)data, NUMBER_ADC * 2 + 1);
+
+            WriteTofiles(data);
 
             for (int num_dac = 0; num_dac < 4; num_dac++)
             {
@@ -102,13 +126,7 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
             data_code[i] = (uint8)data[4];
         }
 
-        if (need_write_data_to_file)
-        {
-            void CloseBinaryFile();
-            void CloseTextFile();
-
-            need_write_data_to_file = false;
-        }
+        CloseFilesForWrite();
 
         result = true;
     }
