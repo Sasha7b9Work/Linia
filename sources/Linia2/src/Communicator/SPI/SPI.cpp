@@ -138,7 +138,7 @@ bool SPI::WriteDynamicDAC(DAC::E dac, uint16 value)
 
     (dac == DAC::_0_ChannelC_Form) ? pinCS0_SCAN.ToLow() : pinCS1_50V.ToLow();
 
-    uint16 mask = 0x80;
+    uint16 mask = 0x8000;
 
     for (int i = 0; i < 16; i++)
     {
