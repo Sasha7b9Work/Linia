@@ -66,6 +66,7 @@ namespace SET
 
         virtual void Load() override
         {
+            LOG_WRITE("Load");
             value->Load();
         }
         virtual void Save() override
