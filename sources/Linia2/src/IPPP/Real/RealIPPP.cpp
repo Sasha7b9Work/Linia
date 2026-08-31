@@ -138,16 +138,6 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
 }
 
 
-void RealIPPP::Pause()
-{
-    volatile int i = 0;
-
-    for (i = 0; i < 1000; i += 1)
-    {
-    }
-}
-
-
 void RealIPPP::OpenNewBinaryFile()
 {
     if (binaryFileOpened && binaryFile.is_open())
