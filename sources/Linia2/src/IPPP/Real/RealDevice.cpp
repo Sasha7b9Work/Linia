@@ -9,6 +9,7 @@
 #include "IPPP/Real/RealDevice.h"
 #include "IPPP/Keyboard/Keyboard.h"
 #include "GUI/PageDebug/PageDebug.h"
+#include "Application.h"
 #include <cstdarg>
 #include <cstring>
 
@@ -86,26 +87,29 @@ void RealDevice::SendCommand(pchar format, ...) const
 
 void RealDevice::FuncOnKeyStart(bool state)
 {
-    LOG_WRITE("401");
-    ThePageDebug->labelButtonStart->SetLabel(state ? "Start ВКЛ" : "Start");
-    LOG_WRITE("402");
+    TheApp->CallAfter([state]()
+        {
+            ThePageDebug->labelButtonStart->SetLabel(state ? "Start ВКЛ" : "Start");
+        });
 }
 
 
 void RealDevice::FuncOnKeyStop(bool state)
 {
-    LOG_WRITE("403");
-    ThePageDebug->labelButtonStop->SetLabel(state ? "Stop ВКЛ" : "Stop");
-    LOG_WRITE("404");
+    TheApp->CallAfter([state]()
+        {
+            ThePageDebug->labelButtonStop->SetLabel(state ? "Stop ВКЛ" : "Stop");
+        });
 }
 
 
 void RealDevice::FuncOnEncoder(int delta)
 {
-    LOG_WRITE("405");
-    int value = 0;
-    ThePageDebug->labelEncoder->GetLabel().ToInt(&value);
+    TheApp->CallAfter([delta]()
+        {
+            int value = 0;
+            ThePageDebug->labelEncoder->GetLabel().ToInt(&value);
 
-    ThePageDebug->labelEncoder->SetLabel(wxString::Format("%d", value + delta));
-    LOG_WRITE("406");
+            ThePageDebug->labelEncoder->SetLabel(wxString::Format("%d", value + delta));
+        });
 }
