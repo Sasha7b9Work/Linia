@@ -91,7 +91,7 @@ void RealDevice::FuncOnKeyStart(bool state)
 
     TheApp->CallAfter([state]()
         {
-            ThePageDebug->labelButtonStart->SetLabel(state ? "Start ВКЛ" : "Start ОТКЛ");
+            ThePageDebug->labelButtonStart->SetLabel(state ? "ИЗМЕРЕНИЕ \"ВКЛ\"" : "ИЗМЕРЕНИЕ \"ОТКЛ\"");
         });
 }
 
@@ -102,7 +102,7 @@ void RealDevice::FuncOnKeyStop(bool state)
 
     TheApp->CallAfter([state]()
         {
-            ThePageDebug->labelButtonStop->SetLabel(state ? "Stop ВКЛ" : "Stop ОТКЛ");
+            ThePageDebug->labelButtonStop->SetLabel(state ? "СТОП \"ВКЛ\"" : "СТОП \"ОТКЛ\"");
         });
 }
 
