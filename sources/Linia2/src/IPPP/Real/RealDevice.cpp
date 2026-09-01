@@ -165,7 +165,7 @@ bool RealDevice::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int da
 {
     static int64 prev_time = Timer::CurrentTimeMS();
 
-    if (Timer::CurrentTimeMS() - prev_time < 10)
+    if (Timer::CurrentTimeMS() - prev_time < 100)
     {
         return false;
     }
