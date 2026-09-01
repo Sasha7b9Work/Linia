@@ -38,7 +38,7 @@ bool RealDevice::Init()
 
     Keyboard::Init(FuncOnKeyStart, FuncOnKeyStop, FuncOnEncoder);
 
-    return false;
+    return result;
 }
 
 
