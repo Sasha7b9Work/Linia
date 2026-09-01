@@ -34,9 +34,3 @@ bool PageDebug::Show(bool show)
 
     return wxPanel::Show(show);
 }
-
-
-void PageDebug::PeriodicTask()
-{
-    TheNotebookDebug->PeriodicTask();
-}

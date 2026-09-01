@@ -16,8 +16,6 @@ public:
 
     void Init();
 
-    void PeriodicTask();
-
     void DeInit();
 
     void EnableSwitching(bool);

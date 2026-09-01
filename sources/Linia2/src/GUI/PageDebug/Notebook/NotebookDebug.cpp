@@ -91,11 +91,6 @@ void NotebookDebug::DeInit()
 }
 
 
-void NotebookDebug::PeriodicTask()
-{
-}
-
-
 void NotebookDebug::OnEventPageChanged(wxBookCtrlEvent &event)
 {
     if (switching_allowed)

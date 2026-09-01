@@ -10,6 +10,4 @@ public:
     PageDebug(Notebook *, PageDebug *&);
 
     virtual bool Show(bool) override;
-
-    void PeriodicTask();
 };
