@@ -41,7 +41,7 @@ bool RealDevice::Init()
 
 void RealDevice::ApplicationTask()
 {
-    SCPI::PeriodicTask();
+    SCPI::ApplicationTask();
 }
 
 

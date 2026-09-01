@@ -36,7 +36,7 @@ bool SCPITests::RunAll()
 
         SCPI::OnEventCallback((uint8 *)command, 1);
 
-        if (!SCPI::PeriodicTask())
+        if (!SCPI::ApplicationTask())
         {
             break;
         }

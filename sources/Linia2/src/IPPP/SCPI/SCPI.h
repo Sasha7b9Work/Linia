@@ -12,5 +12,5 @@ namespace SCPI
 {
     void OnEventCallback(uint8 *, int);
 
-    bool PeriodicTask();
+    bool ApplicationTask();
 }
