@@ -1,7 +1,4 @@
 // 2026/09/01 16:36:09 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
-#ifndef WIN32_LEAN_AND_MEAN
-#error "WIN32_LEAN_AND_MEAN is not defined!"
-#endif
 #include "defines.h"
 #include "IPPP/IDevice.h"
 #include "Communicator/UART/UART.h"
