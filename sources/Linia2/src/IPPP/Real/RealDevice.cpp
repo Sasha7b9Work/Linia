@@ -27,14 +27,16 @@ bool RealDevice::Init()
 
     SPI::Init();
 
-    Keyboard::Init(FuncOnKeyStart, FuncOnKeyStop, FuncOnEncoder);
+    bool result = false;
 
     if (UART::Init(SCPI::OnEventCallback))
     {
         connected = true;
         running = true;
-        return true;
+        result = true;
     }
+
+    Keyboard::Init(FuncOnKeyStart, FuncOnKeyStop, FuncOnEncoder);
 
     return false;
 }
