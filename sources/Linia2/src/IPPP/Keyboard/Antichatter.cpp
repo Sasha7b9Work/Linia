@@ -25,6 +25,8 @@ bool Antichatter::InOut(bool state, int64 timeMS)
 
                 prev_time_change = timeMS;
                 prev_state = state;
+
+                funcOnChnage(state);
             }
         }
         else                        // Было срабатывание, ждём дребезг
@@ -36,6 +38,8 @@ bool Antichatter::InOut(bool state, int64 timeMS)
                 if (prev_state != state)
                 {
                     prev_time_change = timeMS;
+
+                    funcOnChnage(state);
                 }
                 else
                 {

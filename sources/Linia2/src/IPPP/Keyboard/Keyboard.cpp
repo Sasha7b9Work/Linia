@@ -10,7 +10,7 @@
 
 namespace Keyboard
 {
-    void PeriodicTask();
+    void BackgroundTask();
 
     static void EmptyFuncBool(bool)
     {
@@ -48,7 +48,7 @@ namespace Keyboard
 }
 
 
-void Keyboard::PeriodicTask()
+void Keyboard::BackgroundTask()
 {
     int64 time = Timer::CurrentTimeMS();
 
