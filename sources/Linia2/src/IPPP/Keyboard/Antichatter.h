@@ -12,8 +12,8 @@ public:
 
     // В конструктор передаётся значение ожидания завершения дребезга в миллисекундах
     Antichatter(int _timeAntichatterMS, void (* _funcOnChange)(bool)) :
-        timeAntichatterMS{ _timeAntichatterMS },
-        funcOnChnage(_funcOnChange)
+        funcOnChnage(_funcOnChange),
+        timeAntichatterMS{ _timeAntichatterMS }
     {
     }
 
@@ -24,6 +24,8 @@ public:
         return prev_state;
     }
 
+    void (*funcOnChnage)(bool);        // Эта функция вызывается при изменении состояния
+
 private:
 
     const int64 timeAntichatterMS = 0;  // Время антидребезга
@@ -31,5 +33,4 @@ private:
     bool prev_state = false;            // Предыдущее состояние
     int64 prev_time_change = 0;         // Время предыдущего изменения состояния
     int64 prev_time_input = 0;          // Время предудущего обращения
-    void (* funcOnChnage)(bool);        // Эта функция вызывается при изменении состояния
 };

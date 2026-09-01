@@ -25,8 +25,6 @@ namespace Keyboard
         LOG_ERROR("Function \"%s\" not initialized", __FUNCTION__);
     }
 
-    static void (*FuncOnKeyStart)(bool) = EmptyFuncBool;
-    static void (*FuncOnKeyStop)(bool) = EmptyFuncBool;
     static void (*FuncOnEncoder)(int) = EmptyFuncInt;
     static void FuncOnEncAB(bool);
 
@@ -43,11 +41,22 @@ namespace Keyboard
 
     static StructPin pins[4] =
     {
-        { &pinSTART, { 100, FuncOnKeyStart } },
-        { &pinSTOP, { 100, FuncOnKeyStop } },
+        { &pinSTART, { 100, EmptyFuncBool } },
+        { &pinSTOP, { 100, EmptyFuncBool } },
         { &pinEncA, { 3, FuncOnEncAB } },
         { &pinEncB, { 3, FuncOnEncAB } }
     };
+}
+
+
+void Keyboard::Init(void (*funcOnKeyStart)(bool), void (*funcOnKeyStop)(bool), void (*funcOnEncoder)(int))
+{
+    PIN_START.antichatter.funcOnChnage = funcOnKeyStart;
+    PIN_STOP.antichatter.funcOnChnage = funcOnKeyStop;
+
+    FuncOnEncoder = funcOnEncoder;
+
+    worker.Start();
 }
 
 
@@ -87,16 +96,6 @@ void Keyboard::FuncOnEncAB(bool)
             FuncOnEncoder(-1);
         }
     }
-}
-
-
-void Keyboard::Init(void (*funcOnKeyStart)(bool), void (*funcOnKeyStop)(bool), void (*funcOnEncoder)(int))
-{
-    FuncOnKeyStart = funcOnKeyStart;
-    FuncOnKeyStop = funcOnKeyStop;
-    FuncOnEncoder = funcOnEncoder;
-
-    worker.Start();
 }
 
 
