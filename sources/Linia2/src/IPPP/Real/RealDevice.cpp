@@ -161,15 +161,6 @@ void RealDevice::BackgroundTask()
 
 bool RealDevice::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data_code[POINTS_IN_SAMPLE_ADC])
 {
-    static int64 prev_time = Timer::CurrentTimeMS();
-
-    if (Timer::CurrentTimeMS() - prev_time < 10)
-    {
-        return false;
-    }
-
-    prev_time = Timer::CurrentTimeMS();
-
     auto OpenFilesForWrite = [this]()
         {
             if (need_write_data_to_file)
@@ -209,7 +200,7 @@ bool RealDevice::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int da
 
     static bool prev = false;
 
-    if (prev == false)
+    if (pinFIFO_FULL.GetState() == false)
     {
         OpenFilesForWrite();
 
@@ -243,7 +234,7 @@ bool RealDevice::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int da
         result = true;
     }
 
-    prev = false;
+    prev = pinFIFO_FULL.GetState();
 
     return result;
 }
