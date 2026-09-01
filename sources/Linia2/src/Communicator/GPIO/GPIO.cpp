@@ -47,11 +47,11 @@ namespace GPIO
     constexpr size_t PINS_COUNT = std::size(pins);
 
     // Вспомогательные функции для получения информации о пинах
-    PinInfo *GetPinInfo(Pin::E pin)
+    PinInfo *GetPinInfo(Pin::Num num)
     {
         for (size_t i = 0; i < PINS_COUNT; i++)
         {
-            if (pins[i].pin_phisical == pin)
+            if (pins[i].pin_num == num)
             {
                 return &pins[i];
             }
@@ -77,7 +77,7 @@ namespace GPIO
                 info.hw.chip = gpiod_chip_open_by_name(info.hw.chip_name);
                 if (!info.hw.chip)
                 {
-                    LOG_ERROR("Cannot open GPIO chip %s, pin_phisical %d, pin_logical %d", info.hw.chip_name, (int)info.pin_phisical, info.hw.pin_logical);
+                    LOG_ERROR("Cannot open GPIO chip %s, pin_num %d, pin_logical %d", info.hw.chip_name, (int)info.pin_num, info.hw.pin_logical);
                     continue;
                 }
 
@@ -103,14 +103,14 @@ namespace GPIO
 
                 info.last_state = (gpiod_line_get_value(info.hw.line) == 1);
 
-                LOG_WRITE("GPIO input pin_phisical %d, %s:%d initialized", (int)info.pin_phisical, info.hw.chip_name, info.hw.pin_logical);
+                LOG_WRITE("GPIO input pin_num %d, %s:%d initialized", (int)info.pin_num, info.hw.chip_name, info.hw.pin_logical);
             }
             else
             {
                 info.hw.chip = gpiod_chip_open_by_name(info.hw.chip_name);
                 if (!info.hw.chip)
                 {
-                    LOG_ERROR("Cannot open GPIO chip %s pint %d", info.hw.chip_name, (int)info.pin_phisical);
+                    LOG_ERROR("Cannot open GPIO chip %s pin_num %d", info.hw.chip_name, (int)info.pin_num);
                     continue;
                 }
 
@@ -172,7 +172,7 @@ bool PinIn::GetHardware(gpiod_line *line)
 
 bool Pin::GetState() const
 {
-    PinInfo *info = GPIO::GetPinInfo(type_);
+    PinInfo *info = GPIO::GetPinInfo(num);
 
     if (info && info->hw.line)
     {
@@ -193,7 +193,7 @@ bool Pin::GetState() const
 
 void PinOut::Set(bool state)
 {
-    PinInfo *info = GPIO::GetPinInfo(type_);
+    PinInfo *info = GPIO::GetPinInfo(num);
 
     if (info && info->hw.line)
     {

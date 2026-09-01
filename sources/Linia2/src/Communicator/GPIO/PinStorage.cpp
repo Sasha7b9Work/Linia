@@ -4,7 +4,7 @@
 #include <cstring>
 
 
-PinInfo PinStorage::GetPinInfo(Pin::E pin_e, bool is_input)
+PinInfo PinStorage::GetPinInfo(Pin::Num pin_e, bool is_input)
 {
     PinInfo info{ pin_e, is_input };
 
@@ -68,9 +68,9 @@ PinInfo PinStorage::GetPinInfo(Pin::E pin_e, bool is_input)
         "gpiochip3"
     };
 
-    const Info &pin = pins[info.pin_phisical];
+    const Info &pin = pins[info.pin_num];
 
-    if (std::strlen(pins[info.pin_phisical].G) == 2)
+    if (std::strlen(pins[info.pin_num].G) == 2)
     {
         info.hw.pin_logical = (pin.G[0] - 'A') * 8 + pin.G[1] - '0';
 

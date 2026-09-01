@@ -56,7 +56,9 @@
 class Pin
 {
 public:
-    enum E
+
+    // Номер пина на разъёме
+    enum Num
     {
         _00_none,
         _01_33V,
@@ -102,18 +104,13 @@ public:
         Count
     };
 
-    explicit Pin(E type) : type_(type) {}
-
-    E type() const
-    {
-        return type_;
-    }
+    explicit Pin(Num _num) : num(_num) {}
 
     bool GetState() const;
 
 protected:
 
-    E type_;
+    Num num;
 };
 
 
@@ -133,9 +130,9 @@ struct HardwarePinInfo
 
 struct PinInfo
 {
-    PinInfo(Pin::E _pin, bool _is_input) : pin_phisical(_pin), is_input(_is_input) { }
+    PinInfo(Pin::Num _num, bool _is_input) : pin_num(_num), is_input(_is_input) { }
     HardwarePinInfo hw;
-    Pin::E pin_phisical = Pin::Count;   // Номер пина на разъёме
+    Pin::Num pin_num = Pin::Count;      // Номер пина на разъёме
     bool is_input = true;               // true, если это входной пин
     bool last_state = false;            // Последнее состояние
 };
@@ -143,5 +140,5 @@ struct PinInfo
 
 namespace PinStorage
 {
-    PinInfo GetPinInfo(Pin::E, bool is_input);
+    PinInfo GetPinInfo(Pin::Num, bool is_input);
 }

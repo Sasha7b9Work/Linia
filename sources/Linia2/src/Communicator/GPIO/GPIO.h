@@ -40,7 +40,7 @@ namespace GPIO
     void Init();
     void DeInit();
 
-    PinInfo *GetPinInfo(Pin::E);
+    PinInfo *GetPinInfo(Pin::Num);
 }
 
 extern PinIn pinFIFO_FULL;      //   Значение "1" означает, что у ПЛИС на плате контроллера есть 
