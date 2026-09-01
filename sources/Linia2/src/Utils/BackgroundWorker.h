@@ -25,25 +25,18 @@ public:
 
     void Start()
     {
-        LOG_WRITE("1");
-
         if (running.exchange(true))
         {
             return; // Уже запущен
         }
 
-        LOG_WRITE("2");
-
         thread = std::thread([this]()
             {
                 while (running.load(std::memory_order_acquire))
                 {
-                    LOG_WRITE("3");
                     if (task)
                     {
-                        LOG_WRITE("4");
                         task();
-                        LOG_WRITE("5");
                     }
                     std::this_thread::sleep_for(std::chrono::milliseconds(intervalMs));
                 }
