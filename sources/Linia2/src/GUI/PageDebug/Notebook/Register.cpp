@@ -44,8 +44,6 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, const 
     {
         painter = new PainterRegister(this, this);
 
-        main_sizer->Add(painter);
-
         for (uint i = 0; i < chboxes.size(); i++)
         {
             chboxes[i]->Bind(wxEVT_CHECKBOX, &Register::OnEventCheckBoxBit, this);
@@ -104,6 +102,8 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, const 
         top_sizer->Add(btnSend, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 10);
 
         main_sizer->Add(top_sizer, 0, wxEXPAND | wxTOP, 10);
+
+        main_sizer->Add(painter);
     }
 
     Bind(wxEVT_RIGHT_DOWN, [](wxMouseEvent &event)
