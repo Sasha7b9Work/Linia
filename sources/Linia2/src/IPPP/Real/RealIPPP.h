@@ -12,7 +12,7 @@ public:
 
     virtual ~RealIPPP() override {}
 
-    void PeriodicTask() override;
+    void ApplicationTask() override;
 
 private:
 

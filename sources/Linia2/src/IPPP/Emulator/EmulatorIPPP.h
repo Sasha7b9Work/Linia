@@ -9,7 +9,7 @@ public:
 
     virtual ~EmulatorIPPP() override {}
 
-    void PeriodicTask() override;
+    void ApplicationTask() override;
 
 private:
 

@@ -30,7 +30,7 @@ bool RealIPPP::IsChanBS(const Chan &ch) const
 
 
 
-void RealIPPP::PeriodicTask()
+void RealIPPP::ApplicationTask()
 {
     IDevice::impl->PeriodicTask();
 

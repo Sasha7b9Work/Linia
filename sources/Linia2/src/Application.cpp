@@ -215,7 +215,7 @@ bool Application::OnInit()
 
             if (mutex.try_lock())
             {
-                I_IPPP::GetInstance()->PeriodicTask();
+                I_IPPP::GetInstance()->ApplicationTask();
 
                 TheMainWindow->PeriodicTask();
 

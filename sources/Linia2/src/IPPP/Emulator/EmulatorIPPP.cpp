@@ -4,7 +4,7 @@
 #include "Application.h"
 
 
-void EmulatorIPPP::PeriodicTask()
+void EmulatorIPPP::ApplicationTask()
 {
     if (in_process_measuring)
     {

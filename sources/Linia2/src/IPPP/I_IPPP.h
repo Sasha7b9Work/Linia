@@ -16,7 +16,7 @@ public:
     static I_IPPP *GetInstance();
 
     // Вызывается в главном цикле
-    virtual void PeriodicTask() = 0;
+    virtual void ApplicationTask() = 0;
 
 protected:
 
