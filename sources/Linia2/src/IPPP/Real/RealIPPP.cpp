@@ -49,18 +49,6 @@ void RealIPPP::PeriodicTask()
 }
 
 
-void RealIPPP::PressButtonStart()
-{
-
-}
-
-
-void RealIPPP::PressButtonStop()
-{
-
-}
-
-
 bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data_code[POINTS_IN_SAMPLE_ADC])
 {
     auto OpenFilesForWrite = [this]()

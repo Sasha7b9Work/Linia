@@ -18,12 +18,6 @@ public:
     // Вызывается в главном цикле
     virtual void PeriodicTask() = 0;
 
-    // Вызывается при нажатии кнопки СТАРТ
-    virtual void PressButtonStart() = 0;
-
-    // Вызывается при нажатии кнопки СТОП
-    virtual void PressButtonStop() = 0;
-
 protected:
 
     // Читает четыре массива значений из ПЛИС

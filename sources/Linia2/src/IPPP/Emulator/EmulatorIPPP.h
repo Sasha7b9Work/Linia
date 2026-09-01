@@ -11,10 +11,6 @@ public:
 
     void PeriodicTask() override;
 
-    void PressButtonStart() override;
-
-    void PressButtonStop() override;
-
 private:
 
     bool in_process_measuring = false;                  // Устанавливается при нажатии кнопки СТАРТ. Снимается при нажатии кнопки СТОП.

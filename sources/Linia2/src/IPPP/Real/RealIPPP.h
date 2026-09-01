@@ -14,10 +14,6 @@ public:
 
     void PeriodicTask() override;
 
-    void PressButtonStart() override;
-
-    void PressButtonStop() override;
-
 private:
 
     bool IsChanBS(const Chan &) const;

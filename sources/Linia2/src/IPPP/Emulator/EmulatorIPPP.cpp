@@ -18,18 +18,6 @@ void EmulatorIPPP::PeriodicTask()
 }
 
 
-void EmulatorIPPP::PressButtonStart()
-{
-    in_process_measuring = true;
-}
-
-
-void EmulatorIPPP::PressButtonStop()
-{
-    in_process_measuring = false;
-}
-
-
 bool EmulatorIPPP::ReadData(int [NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int [POINTS_IN_SAMPLE_ADC])
 {
     return false;
