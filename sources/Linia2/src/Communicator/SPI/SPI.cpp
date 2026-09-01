@@ -169,7 +169,7 @@ bool SPI::WriteDynamicDAC(DAC::E dac, uint16 value)
 
 bool SPI::ReadFPGA(uint8 *data, size_t length)
 {
-    for (int i = 0; i < length; i++)
+    for (size_t i = 0; i < length; i++)
     {
         data[i] = (uint8)std::rand();
     }
