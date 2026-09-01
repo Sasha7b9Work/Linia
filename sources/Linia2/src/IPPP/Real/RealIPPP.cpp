@@ -117,7 +117,9 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
 
             for (int num = 0; num < 4; num++)
             {
-                data[num] = std::byteswap(data[num]);
+                uint16 d = data[num];
+
+                data[num] = (uint16)((d >> 8) | (d << 8));
             }
 
             WriteToFiles(data);
