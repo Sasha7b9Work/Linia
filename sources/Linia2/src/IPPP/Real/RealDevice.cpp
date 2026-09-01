@@ -148,8 +148,6 @@ void RealDevice::BackgroundTask()
         {
             if (IDevice::impl->ReadData(data_dac, data_code))
             {
-                LOG_WRITE("read data");
-
                 for (int i = 0; i < NUMBER_ADC; i++)
                 {
                     ThePanelRight->data[i]->SetData(data_dac[i]);
@@ -165,7 +163,7 @@ bool RealDevice::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int da
 {
     static int64 prev_time = Timer::CurrentTimeMS();
 
-    if (Timer::CurrentTimeMS() - prev_time < 40)
+    if (Timer::CurrentTimeMS() - prev_time < 10)
     {
         return false;
     }
@@ -305,16 +303,6 @@ void RealDevice::OpenNewTextFile()
     }
 }
 
-void RealDevice::CloseBinaryFile()
-{
-    if (binaryFileOpened && binaryFile.is_open())
-    {
-        binaryFile.flush();
-        binaryFile.close();
-        binaryFileOpened = false;
-        LOG_WRITE("Closed binary file: %s", currentBinaryFileName.c_str().AsChar());
-    }
-}
 
 void RealDevice::CloseTextFile()
 {
@@ -326,6 +314,19 @@ void RealDevice::CloseTextFile()
         LOG_WRITE("Closed text file: %s", currentTextFileName.c_str().AsChar());
     }
 }
+
+
+void RealDevice::CloseBinaryFile()
+{
+    if (binaryFileOpened && binaryFile.is_open())
+    {
+        binaryFile.flush();
+        binaryFile.close();
+        binaryFileOpened = false;
+        LOG_WRITE("Closed binary file: %s", currentBinaryFileName.c_str().AsChar());
+    }
+}
+
 
 void RealDevice::WriteDataToTextFile(int16 data[5])
 {
