@@ -32,7 +32,7 @@ bool RealIPPP::IsChanBS(const Chan &ch) const
 
 void RealIPPP::ApplicationTask()
 {
-    IDevice::impl->PeriodicTask();
+    IDevice::impl->ApplicationTask();
 
     int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC];
     int data_code[POINTS_IN_SAMPLE_ADC];

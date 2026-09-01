@@ -14,7 +14,7 @@ public:
 
     virtual bool Init() override;
 
-    virtual void PeriodicTask() override;
+    virtual void ApplicationTask() override;
 
     virtual void Shutdown() override;
 

@@ -15,7 +15,7 @@ public:
 
     virtual bool Init() = 0;
 
-    virtual void PeriodicTask() = 0;
+    virtual void ApplicationTask() = 0;
 
     virtual void Shutdown() = 0;
 

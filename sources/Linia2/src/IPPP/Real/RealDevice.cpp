@@ -39,7 +39,7 @@ bool RealDevice::Init()
 }
 
 
-void RealDevice::PeriodicTask()
+void RealDevice::ApplicationTask()
 {
     SCPI::PeriodicTask();
 }
