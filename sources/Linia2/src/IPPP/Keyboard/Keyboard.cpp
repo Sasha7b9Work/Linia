@@ -4,6 +4,7 @@
 #include "Communicator/GPIO/GPIO.h"
 #include "Utils/Timer.h"
 #include "Application.h"
+#include <iterator> 
 
 
 namespace Keyboard
@@ -13,19 +14,18 @@ namespace Keyboard
 #define PIN_ENC_A pins[2]
 #define PIN_ENC_B pins[3]
 
-    static const int64 TIME_EVENT_BTN = 100;    // Столько мс состояние кнопки не должно меняться, чтобы действие свершилось (пропустить дребезг контактов)
-    static const int64 TIME_EVENT_GOV = 3;
-
     struct StructPin
     {
-        int64  event_time = 0;     // Время предыдущего изменения состояния. Если 0, то изменения не было
+        int64  event_time = 0;          // Время предыдущего изменения состояния. Если 0, то изменения не было
         PinIn *pin = nullptr;
-        bool   press = false;      // Предыдущее состояние. true - была нажата (переход из 0 в 1), false - была отпущена (переход из 1 в 0)
+        bool   prev = false;            // Предыдущее состояние. true - была нажата (переход из 0 в 1), false - была отпущена (переход из 1 в 0)
+        bool   current = false;         // Текущее состояние
+        int16  time_antichatter = 0;    // Время антидребезга
     };
 
     static StructPin pins[4];
 
-    static void PeriodicTask();
+    void PeriodicTask();
 
     static void EmptyFuncBool(bool)
     {
@@ -43,21 +43,41 @@ namespace Keyboard
 }
 
 
+void Keyboard::PeriodicTask()
+{
+    int64 time = Timer::CurrentTimeMS();
+
+    // PIN_START
+
+    StructPin &pin = pins[0];
+
+    if (pin.event_time)             // Ранее произошло событие, нужно проверить, истекло ли время переходных процессов
+    {
+        if (time - pin.event_time < pin.time_antichatter)
+        {
+            // Ничего не делаем - время защиты от антидребезга не истекло
+        }
+        else
+        {
+            if (pin.current != pin.prev)
+            {
+
+            }
+        }
+    }
+}
+
+
 void Keyboard::Init(void (*funcOnKeyStart)(bool), void (*funcOnKeyStop)(bool), void (*funcOnEncoder)(int))
 {
     FuncOnKeyStart = funcOnKeyStart;
     FuncOnKeyStop = funcOnKeyStop;
     FuncOnEncoder = funcOnEncoder;
 
-    for (int i = 0; i < 4; ++i)
-    {
-        pins[i] = StructPin{};
-    }
-
-    PIN_START.pin = &pinSTART;
-    PIN_STOP.pin = &pinSTOP;
-    PIN_ENC_A.pin = &pinEncA;
-    PIN_ENC_B.pin = &pinEncB;
+    pins[0] = { 0, &pinSTART, false, false, 100 };
+    pins[1] = { 0, &pinSTOP, false, false, 100 };
+    pins[2] = { 0, &pinEncA, false, false, 3 };
+    pins[3] = { 0, &pinEncB, false, false, 3 };
 }
 
 
@@ -67,6 +87,7 @@ void Keyboard::DeInit()
 }
 
 
+/*
 void Keyboard::PeriodicTask()
 {
     int64 time = Timer::CurrentTimeMS();
@@ -108,3 +129,4 @@ void Keyboard::PeriodicTask()
         }
     }
 }
+*/
