@@ -43,11 +43,9 @@ private:
 
     // Бинарный файл
     std::ofstream binaryFile;
-    bool binaryFileOpened = false;
 
     // Текстовый файл
     std::ofstream textFile;
-    bool textFileOpened = false;
 
     wxString currentBinaryFileName;
     wxString currentTextFileName;
