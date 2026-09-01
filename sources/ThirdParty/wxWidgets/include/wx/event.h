@@ -2995,7 +2995,16 @@ public:
           m_pos(other.m_pos),
           m_files(nullptr)
     {
-        m_files = new wxString[m_noFiles];
+        if (m_noFiles > 0)
+        {   
+            m_files = new wxString[m_noFiles];
+        }
+        else
+        {
+            m_files = nullptr;
+            m_noFiles = 0;
+        }
+        
         for ( int n = 0; n < m_noFiles; n++ )
         {
             m_files[n] = other.m_files[n];
