@@ -5,12 +5,15 @@
 #include "Utils/Timer.h"
 #include "IPPP/Keyboard/Antichatter.h"
 #include "Application.h"
+#include "Utils/BackgroundWorker.h"
 #include <iterator> 
 
 
 namespace Keyboard
 {
-    void BackgroundTask();
+    static void BackgroundTask();
+
+    BackgroundWorker worker{ BackgroundTask, 1 };
 
     static void EmptyFuncBool(bool)
     {
@@ -75,10 +78,12 @@ void Keyboard::Init(void (*funcOnKeyStart)(bool), void (*funcOnKeyStop)(bool), v
     FuncOnKeyStart = funcOnKeyStart;
     FuncOnKeyStop = funcOnKeyStop;
     FuncOnEncoder = funcOnEncoder;
+
+    worker.Start();
 }
 
 
 void Keyboard::DeInit()
 {
-
+    worker.Stop();
 }

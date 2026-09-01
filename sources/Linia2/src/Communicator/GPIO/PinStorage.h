@@ -112,6 +112,7 @@ public:
     bool GetState() const;
 
 protected:
+
     E type_;
 };
 
