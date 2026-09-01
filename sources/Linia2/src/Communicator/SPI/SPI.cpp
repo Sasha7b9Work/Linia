@@ -169,6 +169,13 @@ bool SPI::WriteDynamicDAC(DAC::E dac, uint16 value)
 
 bool SPI::ReadFPGA(uint8 *data, size_t length)
 {
+    for (int i = 0; i < length; i++)
+    {
+        data[i] = (uint8)std::rand();
+    }
+
+    return true;
+
     if (data == nullptr || length == 0)
     {
         LOG_ERROR("Invalid data or length");
