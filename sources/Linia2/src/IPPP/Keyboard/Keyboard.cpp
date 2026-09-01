@@ -68,7 +68,14 @@ void Keyboard::FuncOnEncAB(bool)
 {
     if (PIN_ENC_A.antichatter.GetState() != PIN_ENC_B.antichatter.GetState())
     {
-        FuncOnEncoder(PIN_ENC_A.antichatter.GetState() && !PIN_ENC_B.antichatter.GetState());
+        if (PIN_ENC_A.antichatter.GetState() && !PIN_ENC_B.antichatter.GetState())
+        {
+            FuncOnEncoder(1);
+        }
+        else if (!PIN_ENC_A.antichatter.GetState() && PIN_ENC_B.antichatter.GetState())
+        {
+            FuncOnEncoder(-1);
+        }
     }
 }
 

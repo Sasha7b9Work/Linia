@@ -14,7 +14,6 @@ public:
     // Конструктор принимает функцию, которая будет выполняться в потоке
     explicit BackgroundWorker(std::function<void()> _task, int _intervalMs = 1) :
         task(_task),
-        running(false),
         intervalMs(_intervalMs)
     {
     }
@@ -42,7 +41,9 @@ public:
                     LOG_WRITE("3");
                     if (task)
                     {
+                        LOG_WRITE("4");
                         task();
+                        LOG_WRITE("5");
                     }
                     std::this_thread::sleep_for(std::chrono::milliseconds(intervalMs));
                 }
@@ -77,6 +78,6 @@ public:
 private:
     std::function<void()> task;
     std::thread thread;
-    std::atomic<bool> running;
-    int intervalMs;
+    std::atomic<bool> running = false;
+    int intervalMs = 1;
 };
