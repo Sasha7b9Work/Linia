@@ -198,8 +198,8 @@ bool RealDevice::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int da
         {
             if (need_write_data_to_file)
             {
-                void CloseBinaryFile();
-                void CloseTextFile();
+                CloseBinaryFile();
+                CloseTextFile();
 
                 need_write_data_to_file = false;
             }
