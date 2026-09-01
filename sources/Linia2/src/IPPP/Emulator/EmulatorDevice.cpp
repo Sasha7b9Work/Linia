@@ -10,7 +10,7 @@
 
 EmulatorDevice::~EmulatorDevice()
 {
-    Shutdown();
+    DeInit();
 }
 
 
@@ -38,7 +38,7 @@ void EmulatorDevice::CallbackOnReceive(uint8 *, int)
 }
 
 
-void EmulatorDevice::EmulatorDevice::Shutdown()
+void EmulatorDevice::EmulatorDevice::DeInit()
 {
     LOG_ERROR("Not implemented");
 }
@@ -61,4 +61,10 @@ void EmulatorDevice::SendCommand(pchar format, ...) const
     va_end(args);
 
     std::strcat(message, "\0");
+}
+
+
+bool EmulatorDevice::ReadData(int /*data_dac*/ [NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int /*data_code*/ [POINTS_IN_SAMPLE_ADC])
+{
+    return false;
 }

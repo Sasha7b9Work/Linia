@@ -7,9 +7,7 @@
 #include "Communicator/SPI/SPI.h"
 #include "GUI/Controls/AutoRebootDialog.h"
 #include "SoftTests/SoftTests.h"
-#include "IPPP/I_IPPP.h"
 #include "IPPP/Real/Chips.h"
-#include "IPPP/DeviceFactory.h"
 #include "Windows/ConsoleRS232.h"
 #include "Settings/FileJSON.h"
 #include "Communicator/ClientHTTP/ClientHTTP.h"
@@ -146,9 +144,7 @@ bool Application::OnInit()
 
     Chip::Init();
 
-    auto device = DeviceFactory::CreateFromConfig();
-
-    I_IPPP::SetInstance(std::move(device));
+    IDevice::impl = IDevice::Create();
 
     // create and show the main application window
     new MainWindow(TheMainWindow, L("ИППП 4"));
@@ -215,7 +211,7 @@ bool Application::OnInit()
 
             if (mutex.try_lock())
             {
-                I_IPPP::GetInstance()->ApplicationTask();
+                IDevice::impl->ApplicationTask();
 
                 mutex.unlock();
             };
@@ -243,6 +239,8 @@ bool Application::OnInit()
         });
 #endif
 
+    IDevice::impl->Init();
+
     return true;
 }
 
@@ -251,7 +249,7 @@ int Application::OnExit()
 {
     timer.Stop();
 
-    IDevice::impl->Shutdown();
+    IDevice::impl->DeInit();
 
     if (TheMainWindow)
     {
