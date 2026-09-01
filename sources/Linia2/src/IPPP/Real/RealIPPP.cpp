@@ -115,11 +115,16 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
 
             SPI::ReadFPGA((uint8 *)data, NUMBER_ADC * 2 + 1);
 
+            for (int num = 0; num < 4; num++)
+            {
+                data[0] = std::byteswap(data[i]);
+            }
+
             WriteToFiles(data);
 
             for (int num_dac = 0; num_dac < 4; num_dac++)
             {
-                data_dac[num_dac][i] = std::byteswap(data[num_dac]);
+                data_dac[num_dac][i] = data[0];
             }
 
             data_code[i] = (uint8)data[4];
