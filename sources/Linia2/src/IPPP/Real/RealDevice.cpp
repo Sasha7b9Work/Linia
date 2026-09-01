@@ -1,3 +1,4 @@
+// 2026/09/01 16:36:09 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "IPPP/IDevice.h"
 #include "Communicator/UART/UART.h"
