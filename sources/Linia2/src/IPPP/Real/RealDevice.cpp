@@ -146,6 +146,8 @@ void RealDevice::BackgroundTask()
         {
             if (IDevice::impl->ReadData(data_dac, data_code))
             {
+                LOG_WRITE("read data");
+
                 for (int i = 0; i < NUMBER_ADC; i++)
                 {
                     ThePanelRight->data[i]->SetData(data_dac[i]);
