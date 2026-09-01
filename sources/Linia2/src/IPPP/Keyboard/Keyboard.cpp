@@ -41,8 +41,8 @@ namespace Keyboard
 
     static StructPin pins[4] =
     {
-        { &pinSTART, { 1000, EmptyFuncBool } },
-        { &pinSTOP, { 1000, EmptyFuncBool } },
+        { &pinSTART, { 200, EmptyFuncBool } },
+        { &pinSTOP, { 200, EmptyFuncBool } },
         { &pinEncA, { 3, FuncOnEncAB } },
         { &pinEncB, { 3, FuncOnEncAB } }
     };
