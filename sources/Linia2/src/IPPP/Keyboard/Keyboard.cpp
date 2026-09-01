@@ -53,13 +53,23 @@ namespace Keyboard
 
 void Keyboard::BackgroundTask()
 {
+    LOG_WRITE("6");
+
     int64 time = Timer::CurrentTimeMS();
+
+    LOG_WRITE("7");
 
     for (size_t i = 0; i < std::size(pins); i++)
     {
+        LOG_WRITE("8");
+
         StructPin &pin = pins[i];
 
+        LOG_WRITE("9");
+
         pin.antichatter.InOut(pin.pin->GetState(), time);
+
+        LOG_WRITE("10");
     }
 }
 
