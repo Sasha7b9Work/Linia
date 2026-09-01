@@ -3,7 +3,6 @@
 #include "IPPP/I_IPPP.h"
 #include "IPPP/IDevice.h"
 #include "IPPP/Real/RealDevice.h"
-#include "IPPP/Keyboard/Keyboard.h"
 #include "Communicator/GPIO/GPIO.h"
 #include "IPPP/Real/RealIPPP.h"
 #include "IPPP/Emulator/EmulatorDevice.h"
@@ -25,8 +24,6 @@ void I_IPPP::SetInstance(std::unique_ptr<I_IPPP> device)
     else
     {
         IDevice::impl = new RealDevice();
-
-        Keyboard::Init();
     }
 
     IDevice::impl->Init();

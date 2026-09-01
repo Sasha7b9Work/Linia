@@ -32,8 +32,6 @@ bool RealIPPP::IsChanBS(const Chan &ch) const
 
 void RealIPPP::PeriodicTask()
 {
-    Keyboard::PeriodicTask();
-
     IDevice::impl->PeriodicTask();
 
     int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC];

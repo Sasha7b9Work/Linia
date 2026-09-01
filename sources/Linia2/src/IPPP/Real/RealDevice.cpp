@@ -7,6 +7,7 @@
 #include "IPPP/SCPI/SCPI.h"
 #include "Communicator/ComPort/ComPort.h"
 #include "IPPP/Real/RealDevice.h"
+#include "IPPP/Keyboard/Keyboard.h"
 #include <cstdarg>
 #include <cstring>
 
@@ -24,6 +25,8 @@ bool RealDevice::Init()
     GPIO::Init();
 
     SPI::Init();
+
+    Keyboard::Init();
 
     if (UART::Init(SCPI::OnEventCallback))
     {
@@ -44,6 +47,8 @@ void RealDevice::PeriodicTask()
 
 void RealDevice::Shutdown()
 {
+    Keyboard::DeInit();
+
     running = false;
 
     UART::DeInit();

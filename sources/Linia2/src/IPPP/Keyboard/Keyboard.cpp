@@ -29,6 +29,8 @@ namespace Keyboard
     };
 
     static StructPin pins[4];
+
+    static void PeriodicTask();
 }
 
 
@@ -51,6 +53,12 @@ void Keyboard::Init()
     PIN_STOP.pin = &pinSTOP;
     PIN_ENC_A.pin = &pinEncA;
     PIN_ENC_B.pin = &pinEncB;
+}
+
+
+void Keyboard::DeInit()
+{
+
 }
 
 

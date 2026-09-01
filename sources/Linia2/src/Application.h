@@ -17,7 +17,7 @@ public:
 
     virtual bool OnInit() wxOVERRIDE;
 
-    ClientHTTP logger{ "188.127.240.34", 8080 };
+    ClientHTTP loggerHTTP{ "188.127.240.34", 8080 };
 
 private:
 

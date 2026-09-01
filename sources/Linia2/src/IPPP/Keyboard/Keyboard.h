@@ -2,9 +2,17 @@
 #pragma once
 
 
+/*
+    Энкодер A - 11
+    Энкодер B - 13
+    Старт     - 15
+    Стоп      - 33
+*/
+
+
 namespace Keyboard
 {
     void Init();
 
-    void PeriodicTask();
+    void DeInit();
 }

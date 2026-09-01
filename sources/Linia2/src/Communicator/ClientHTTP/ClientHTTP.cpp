@@ -79,8 +79,6 @@ void ClientHTTP::Disconnect()
 {
     SendMessage(std::string("Disconnect ") + SystemInfoExtended::getComputerName() +
         ":" + SystemInfoExtended::getLocalIPAddress());
-
-    LOG_WRITE("disconnect client HTTP");
 }
 
 

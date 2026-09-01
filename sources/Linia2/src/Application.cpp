@@ -13,6 +13,7 @@
 #include "Windows/ConsoleRS232.h"
 #include "Settings/FileJSON.h"
 #include "Communicator/ClientHTTP/ClientHTTP.h"
+#include "IPPP/IDevice.h"
 #pragma warning(push, 0)
     #include <wx/msgdlg.h>
 #pragma warning(pop)
@@ -224,7 +225,7 @@ bool Application::OnInit()
         }, timer.GetId());
 
 
-    logger.Connect();
+    loggerHTTP.Connect();
 
 #ifdef _WIN32
 #else
@@ -252,6 +253,8 @@ int Application::OnExit()
 {
     timer.Stop();
 
+    IDevice::impl->Shutdown();
+
     if (TheMainWindow)
     {
         TheMainWindow->Close(true);
@@ -261,7 +264,7 @@ int Application::OnExit()
 
     Config::DeInit();
 
-    logger.Disconnect();
+    loggerHTTP.Disconnect();
 
     Log::DeInit();
 
