@@ -87,18 +87,22 @@ void RealDevice::SendCommand(pchar format, ...) const
 
 void RealDevice::FuncOnKeyStart(bool state)
 {
+    state = !state;
+
     TheApp->CallAfter([state]()
         {
-            ThePageDebug->labelButtonStart->SetLabel(state ? "Start ВКЛ" : "Start");
+            ThePageDebug->labelButtonStart->SetLabel(state ? "Start ВКЛ" : "Start ОТКЛ");
         });
 }
 
 
 void RealDevice::FuncOnKeyStop(bool state)
 {
+    state = !state;
+
     TheApp->CallAfter([state]()
         {
-            ThePageDebug->labelButtonStop->SetLabel(state ? "Stop ВКЛ" : "Stop");
+            ThePageDebug->labelButtonStop->SetLabel(state ? "Stop ВКЛ" : "Stop ОТКЛ");
         });
 }
 
