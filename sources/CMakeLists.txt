@@ -46,7 +46,7 @@ else()
        -flto       #  включает Link-Time Optimization (оптимизацию на этапе линковки). Уменьшает время компиляции
        -s          # -strip-all удалить все таблицы символов из финального исполняемого файла
        -g0         # не создавать отладочную информацию (по умолчанию)
-       -flto       # link time optimization
+       -flto=8     # link time optimization
        
     )
 endif()
