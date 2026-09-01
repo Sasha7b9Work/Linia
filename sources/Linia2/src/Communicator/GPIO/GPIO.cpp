@@ -172,6 +172,8 @@ bool PinIn::GetHardware(gpiod_line *line)
 
 bool Pin::GetState() const
 {
+    LOG_WRITE("101");
+
     PinInfo *info = GPIO::GetPinInfo(type_);
 
     if (info && info->hw.line)
@@ -181,11 +183,15 @@ bool Pin::GetState() const
         if (val < 0)
         {
             LOG_ERROR("Error: Cannot read GPIO pin number %d", info->hw.pin_logical);
+            LOG_WRITE("102");
             return false;
         }
 
+        LOG_WRITE("103");
         return (val == 1);
     }
+
+    LOG_WRITE("104");
 
     return false;
 }
