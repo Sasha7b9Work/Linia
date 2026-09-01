@@ -26,11 +26,12 @@ set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded")         # Установка ф�
 if(WIN32)
 else()
     add_definitions(
-        -Wall
-        -Werror
+        -Wall                   # много стандартных предупреждений
+        -Wextra                 # дополнительные предупреждения
+        -pedantic               # строгое соотвествие стандарту C++
+        -Werror                 # все предупреждения считать ошибками
         -fmax-errors=5
         -Wno-unknown-pragmas
-#        -Wno-write-strings
         -pipe                   # увеличение скорости компляции вследствие избавления от промежуточных файлов  
         -std=c++23
         -march=native           # генерирует код, оптимизированный под процессор, на котором копилируется
