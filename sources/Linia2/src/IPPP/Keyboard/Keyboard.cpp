@@ -85,8 +85,10 @@ void Keyboard::BackgroundTask()
 
 void Keyboard::FuncOnEncAB(bool)
 {
+    LOG_WRITE("301");
     if (PIN_ENC_A.antichatter.GetState() != PIN_ENC_B.antichatter.GetState())
     {
+        LOG_WRITE("302");
         if (PIN_ENC_A.antichatter.GetState() && !PIN_ENC_B.antichatter.GetState())
         {
             FuncOnEncoder(1);
@@ -96,6 +98,7 @@ void Keyboard::FuncOnEncAB(bool)
             FuncOnEncoder(-1);
         }
     }
+    LOG_WRITE("302");
 }
 
 
