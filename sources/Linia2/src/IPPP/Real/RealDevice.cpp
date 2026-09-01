@@ -253,9 +253,7 @@ void RealDevice::OpenNewBinaryFile()
 {
     if (binaryFileOpened && binaryFile.is_open())
     {
-        textFile.flush();
-        binaryFile.close();
-        binaryFileOpened = false;
+        CloseBinaryFile();
     }
 
     wxDateTime now = wxDateTime::Now();
@@ -277,9 +275,7 @@ void RealDevice::OpenNewTextFile()
 {
     if (textFileOpened && textFile.is_open())
     {
-        textFile.flush();
-        textFile.close();
-        textFileOpened = false;
+        CloseTextFile();
     }
 
     wxDateTime now = wxDateTime::Now();
