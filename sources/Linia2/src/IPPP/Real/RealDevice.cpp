@@ -12,6 +12,7 @@
 #include "GUI/PageDebug/PageDebug.h"
 #include "Application.h"
 #include "GUI/PageDebug/PanelRight.h"
+#include "Utils/Timer.h"
 #include <cstdarg>
 #include <cstring>
 
@@ -162,6 +163,15 @@ void RealDevice::BackgroundTask()
 
 bool RealDevice::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data_code[POINTS_IN_SAMPLE_ADC])
 {
+    static int64 prev_time = Timer::CurrentTimeMS();
+
+    if (Timer::CurrentTimeMS() < prev_time < 1000)
+    {
+        return;
+    }
+
+    prev_time = Timer::CurrentTimeMS();
+
     auto OpenFilesForWrite = [this]()
         {
             if (need_write_data_to_file)
