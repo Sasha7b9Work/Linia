@@ -73,14 +73,12 @@ bool ComPort::Connect(int num_port)
 
         SET_GUI_SERIAL_PORT_NUM->Set(num_port + 1);
 
-//        PanelUpper::self->color_square->SetColor(*wxGREEN);
-
         return true;
     }
 
-//    PanelUpper::self->color_square->SetColor(*wxRED);
-
 #endif
+
+    (void)num_port;
 
     return false;
 }
