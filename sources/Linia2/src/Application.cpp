@@ -217,8 +217,6 @@ bool Application::OnInit()
             {
                 I_IPPP::GetInstance()->ApplicationTask();
 
-                TheMainWindow->PeriodicTask();
-
                 mutex.unlock();
             };
 

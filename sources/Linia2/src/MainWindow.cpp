@@ -79,12 +79,6 @@ MainWindow::MainWindow(MainWindow *&self, const wxString &title)
 }
 
 
-void MainWindow::PeriodicTask()
-{
-
-}
-
-
 void MainWindow::OnEventKeyHook(wxKeyEvent &event)
 {
     if (event.GetKeyCode() == 'K')
