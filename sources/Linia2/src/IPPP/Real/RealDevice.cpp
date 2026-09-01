@@ -200,7 +200,7 @@ bool RealDevice::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int da
 
     static bool prev = false;
 
-    if (pinFIFO_FULL.GetState() == false)
+    if (pinFIFO_FULL.GetState() && prev == false)
     {
         OpenFilesForWrite();
 
