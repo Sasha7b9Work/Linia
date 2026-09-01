@@ -55,7 +55,7 @@ struct StructDescription
         std::vector<CommandStruct> commands{};      // Сюда ложим нужные команды, чтобы потом создать combo
         TextCtrlNumber *text_ctrl_dec = nullptr;    // Здесь находятся десятичные значения. Если nullptr - его нету
         CommandsCombo *combo = nullptr;             // А здесь находятся команды
-    } field;
+    } field{ false, {}, nullptr, nullptr };
 
     // Рассчитать значение в соотвествие с чекбоксами
     uint CalculateValue(std::vector<CheckBoxBit *> &);
