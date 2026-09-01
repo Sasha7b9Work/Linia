@@ -121,7 +121,7 @@ struct gpiod_line;
 
 struct HardwarePinInfo
 {
-    int pin_logical;                    // Номер GPIO пина чипа
+    int pin_logical = -666;             // Номер GPIO пина чипа
     const char *chip_name = nullptr;    // Имя GPIO чипа
     gpiod_chip *chip = nullptr;         // Дескриптор чипа
     gpiod_line *line = nullptr;         // Дескриптор линии
