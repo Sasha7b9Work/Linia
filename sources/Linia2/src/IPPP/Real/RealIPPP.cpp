@@ -72,7 +72,7 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
             }
         };
 
-    auto WriteToFiles = [this](uint16 data[5])
+    auto WriteToFiles = [this](int16 data[5])
         {
             if (need_write_data_to_file)
             {
@@ -122,11 +122,13 @@ bool RealIPPP::ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data
                 data[num] = (uint16)((d >> 8) | (d << 8));
             }
 
-            WriteToFiles(data);
+            WriteToFiles((int16 *)data);
 
             for (int num_dac = 0; num_dac < 4; num_dac++)
             {
-                data_dac[num_dac][i] = data[num_dac];
+                int16 *pointer = (int16 *)&data[num_dac];
+
+                data_dac[num_dac][i] = *pointer;
             }
 
             data_code[i] = (uint8)data[4];
@@ -219,16 +221,16 @@ void RealIPPP::CloseTextFile()
     }
 }
 
-void RealIPPP::WriteDataToTextFile(uint16 data[5])
+void RealIPPP::WriteDataToTextFile(int16 data[5])
 {
     if (!textFileOpened || !textFile.is_open())
     {
         return;
     }
 
-    textFile << std::setw(7) << std::right << wxString::Format("%d", (int)data[0]) <<
-        std::setw(7) << std::right << wxString::Format("%d", (int)data[1]) <<
-        std::setw(7) << std::right << wxString::Format("%d", (int)data[2]) <<
-        std::setw(7) << std::right << wxString::Format("%d", (int)data[3]) <<
+    textFile << std::setw(7) << std::right << wxString::Format("%d", data[0]) <<
+        std::setw(7) << std::right << wxString::Format("%d", data[1]) <<
+        std::setw(7) << std::right << wxString::Format("%d", data[2]) <<
+        std::setw(7) << std::right << wxString::Format("%d", data[3]) <<
         std::setw(7) << std::right << wxString::Format("%u", (uint8)data[4]) << "\n";
 }

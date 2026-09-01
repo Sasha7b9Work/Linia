@@ -39,5 +39,5 @@ private:
     void CloseBinaryFile();
     void OpenNewTextFile();
     void CloseTextFile();
-    void WriteDataToTextFile(uint16 data[5]);
+    void WriteDataToTextFile(int16 data[5]);
 };
