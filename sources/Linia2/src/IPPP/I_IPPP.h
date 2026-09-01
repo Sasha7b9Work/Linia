@@ -18,8 +18,6 @@ public:
     // Вызывается в главном цикле
     virtual void ApplicationTask() = 0;
 
-protected:
-
     // Читает четыре массива значений из ПЛИС
     virtual bool ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data_code[POINTS_IN_SAMPLE_ADC]) = 0;
 

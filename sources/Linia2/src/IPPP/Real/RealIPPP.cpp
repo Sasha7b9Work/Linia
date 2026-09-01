@@ -9,43 +9,44 @@
 #include "Utils/Timer.h"
 #include "Communicator/SPI/SPI.h"
 #include "GUI/PageDebug/PanelRight.h"
+#include "Utils/BackgroundWorker.h"
+#include "Application.h"
 #include <iomanip>
 #include <bit>
 
 
 bool need_write_data_to_file = false;
 
-
-bool RealIPPP::IsChanBS(const Chan &ch) const
+namespace RealIPP_NS
 {
-    if (ch.IsBS())
-    {
-        return true;
-    }
-
-    LOG_ERROR("Channel must be B or S, not %s", ch.Name());
-
-    return false;
+    static void BackgroundTask();
+    static BackgroundWorker worker{ BackgroundTask, 1 };
 }
-
 
 
 void RealIPPP::ApplicationTask()
 {
     IDevice::impl->ApplicationTask();
+}
 
-    int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC];
-    int data_code[POINTS_IN_SAMPLE_ADC];
 
-    if (ReadData(data_dac, data_code))
-    {
-        for (int i = 0; i < NUMBER_ADC; i++)
+void RealIPP_NS::BackgroundTask()
+{
+    static int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC];
+    static int data_code[POINTS_IN_SAMPLE_ADC];
+
+    TheApp->CallAfter([]()
         {
-            ThePanelRight->data[i]->SetData(data_dac[i]);
-        }
+            if (I_IPPP::GetInstance()->ReadData(data_dac, data_code))
+            {
+                for (int i = 0; i < NUMBER_ADC; i++)
+                {
+                    ThePanelRight->data[i]->SetData(data_dac[i]);
+                }
 
-        ThePanelRight->data[NUMBER_ADC]->SetData(data_code);
-    }
+                ThePanelRight->data[NUMBER_ADC]->SetData(data_code);
+            }
+        });
 }
 
 

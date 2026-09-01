@@ -3,6 +3,7 @@
 #include "GUI/Controls/Painter.h"
 #include "GUI/Controls/Button.h"
 #include "GUI/Controls/Panel.h"
+#include <mutex>
 
 
 class PainterDataFPGA : public Painter

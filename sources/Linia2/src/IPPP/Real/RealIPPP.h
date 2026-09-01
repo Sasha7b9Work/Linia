@@ -16,8 +16,6 @@ public:
 
 private:
 
-    bool IsChanBS(const Chan &) const;
-
     virtual bool ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data_code[POINTS_IN_SAMPLE_ADC]) override;
 
     // Бинарный файл
