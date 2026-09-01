@@ -11,8 +11,13 @@
 namespace SPI
 {
     void Init();
+
     void DeInit();
+
+    // Доступно ли в системе
     bool IsAvailability();
+
+    // Готово к использованию
     bool IsReady();
 
     // Чтение из FPGA. Используется аппаратный SPI
