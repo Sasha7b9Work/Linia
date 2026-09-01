@@ -8,6 +8,7 @@
 #include "Communicator/ComPort/ComPort.h"
 #include "IPPP/Real/RealDevice.h"
 #include "IPPP/Keyboard/Keyboard.h"
+#include "GUI/PageDebug/PageDebug.h"
 #include <cstdarg>
 #include <cstring>
 
@@ -81,19 +82,22 @@ void RealDevice::SendCommand(pchar format, ...) const
 }
 
 
-void RealDevice::FuncOnKeyStart(bool)
+void RealDevice::FuncOnKeyStart(bool state)
 {
-
+    ThePageDebug->labelButtonStart->SetLabel(state ? "Start ВКЛ" : "Start");
 }
 
 
-void RealDevice::FuncOnKeyStop(bool)
+void RealDevice::FuncOnKeyStop(bool state)
 {
-
+    ThePageDebug->labelButtonStop->SetLabel(state ? "Stop ВКЛ" : "Stop");
 }
 
 
-void RealDevice::FuncOnEncoder(int)
+void RealDevice::FuncOnEncoder(int delta)
 {
+    int value = 0;
+    ThePageDebug->labelEncoder->GetLabel().ToInt(&value);
 
+    ThePageDebug->labelEncoder->SetLabel(wxString::Format("%d", value + delta));
 }
