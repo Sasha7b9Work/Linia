@@ -166,36 +166,6 @@ bool SPI::WriteDynamicDAC(DAC::E dac, uint16 value)
 }
 
 
-/*
-bool SPI::Write(uint8 *data, size_t length)
-{
-    if (data == nullptr || length == 0)
-    {
-        LOG_ERROR("Invalid data or length");
-        return false;
-    }
-
-    struct spi_ioc_transfer transfer = {};
-    transfer.tx_buf = (unsigned long long)data;
-    transfer.rx_buf = 0;
-    transfer.len = (uint)length;
-    transfer.speed_hz = speed;
-    transfer.delay_usecs = 0;
-    transfer.bits_per_word = bits_per_word;
-    transfer.cs_change = 0;                 // 0 - CS деактивируется после передачи
-
-    int result = ioctl(fd_cs0, SPI_IOC_MESSAGE(1), &transfer);
-    if (result < 0)
-    {
-        LOG_ERROR("SPI transfer failed");
-        return false;
-    }
-
-    return true;
-}
-*/
-
-
 bool SPI::ReadFPGA(uint8 *data, size_t length)
 {
     if (data == nullptr || length == 0)
