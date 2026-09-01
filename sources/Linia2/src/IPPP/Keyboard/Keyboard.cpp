@@ -16,11 +16,6 @@ namespace Keyboard
     static const int64 TIME_EVENT_BTN = 100;    // Столько мс состояние кнопки не должно меняться, чтобы действие свершилось (пропустить дребезг контактов)
     static const int64 TIME_EVENT_GOV = 3;
 
-//    static void CallbackOnSTART(bool);
-//    static void CallbackOnSTOP(bool);
-//    static void CallbackOnKA(bool);
-//    static void CallbackOnKB(bool);
-
     struct StructPin
     {
         int64  event_time = 0;     // Время предыдущего изменения состояния. Если 0, то изменения не было
@@ -31,18 +26,28 @@ namespace Keyboard
     static StructPin pins[4];
 
     static void PeriodicTask();
+
+    static void EmptyFuncBool(bool)
+    {
+        LOG_ERROR("Function \"%s\" not initialized", __FUNCTION__);
+    }
+
+    static void EmptyFuncInt(int)
+    {
+        LOG_ERROR("Function \"%s\" not initialized", __FUNCTION__);
+    }
+
+    static void (*FuncOnKeyStart)(bool) = EmptyFuncBool;
+    static void (*FuncOnKeyStop)(bool) = EmptyFuncBool;
+    static void (*FuncOnEncoder)(int) = EmptyFuncInt;
 }
 
 
-void Keyboard::Init()
+void Keyboard::Init(void (*funcOnKeyStart)(bool), void (*funcOnKeyStop)(bool), void (*funcOnEncoder)(int))
 {
-//    pinSTART.SetChangeCallback(CallbackOnSTART);
-//
-//    pinSTOP.SetChangeCallback(CallbackOnSTOP);
-//
-//    pinKA.SetChangeCallback(CallbackOnKA);
-//
-//    pinKB.SetChangeCallback(CallbackOnKB);
+    FuncOnKeyStart = funcOnKeyStart;
+    FuncOnKeyStop = funcOnKeyStop;
+    FuncOnEncoder = funcOnEncoder;
 
     for (int i = 0; i < 4; ++i)
     {
@@ -70,7 +75,7 @@ void Keyboard::PeriodicTask()
     {
         if (time - PIN_START.event_time > TIME_EVENT_BTN)         // Если после последнего события прошло достаточно времени
         {
-            TheApp->OnButtonStart(PIN_START.press);    // То считаем, что кнопка в устойчивом положении - обрабатываем нажатие
+//            TheApp->OnButtonStart(PIN_START.press);    // То считаем, что кнопка в устойчивом положении - обрабатываем нажатие
             PIN_START.event_time = 0;                             // И устанавливаем признак того, что событие произошло
         }
     }
@@ -79,7 +84,7 @@ void Keyboard::PeriodicTask()
     {
         if (time - PIN_STOP.event_time > TIME_EVENT_BTN)
         {
-            TheApp->OnButtonStop(PIN_STOP.press);
+//            TheApp->OnButtonStop(PIN_STOP.press);
             PIN_STOP.event_time = 0;
         }
     }
@@ -91,11 +96,11 @@ void Keyboard::PeriodicTask()
         {
             if (PIN_ENC_A.press && !PIN_ENC_B.press)
             {
-                TheApp->OnGovernor(PIN_ENC_A.event_time > PIN_ENC_B.event_time);
+//                TheApp->OnGovernor(PIN_ENC_A.event_time > PIN_ENC_B.event_time);
             }
             else if (!PIN_ENC_A.press && PIN_ENC_B.press)
             {
-                TheApp->OnGovernor(PIN_ENC_A.event_time > PIN_ENC_B.event_time);
+//                TheApp->OnGovernor(PIN_ENC_A.event_time > PIN_ENC_B.event_time);
             }
 
             PIN_ENC_A.event_time = 0;
@@ -103,31 +108,3 @@ void Keyboard::PeriodicTask()
         }
     }
 }
-
-
-//void Keyboard::CallbackOnSTART(bool press)
-//{
-//    PIN_START.press = press;
-//    PIN_START.event_time = Timer::CurrentTimeMS();
-//}
-
-
-//void Keyboard::CallbackOnSTOP(bool press)
-//{
-//    PIN_STOP.press = press;
-//    PIN_STOP.event_time = Timer::CurrentTimeMS();
-//}
-
-
-//void Keyboard::CallbackOnKA(bool press)
-//{
-//    PIN_KA.press = press;
-//    PIN_KA.event_time = Timer::CurrentTimeMS();
-//}
-
-
-//void Keyboard::CallbackOnKB(bool press)
-//{
-//    PIN_KB.press = press;
-//    PIN_KB.event_time = Timer::CurrentTimeMS();
-//}

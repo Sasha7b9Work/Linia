@@ -276,27 +276,3 @@ void Application::OnReceiveUART(uint8)
 {
 
 }
-
-
-void Application::OnGovernor(int)
-{
-
-}
-
-
-void Application::OnButtonStart(bool /*press*/)
-{
-
-}
-
-
-void Application::OnButtonStop(bool /*press*/)
-{
-
-}
-
-
-void Application::ReInit()
-{
-
-}

@@ -26,7 +26,7 @@ bool RealDevice::Init()
 
     SPI::Init();
 
-    Keyboard::Init();
+    Keyboard::Init(FuncOnKeyStart, FuncOnKeyStop, FuncOnEncoder);
 
     if (UART::Init(SCPI::OnEventCallback))
     {
@@ -78,4 +78,22 @@ void RealDevice::SendCommand(pchar format, ...) const
 #else
     UART::SendBuffer(message, (int)std::strlen(message) + 1);
 #endif
+}
+
+
+void RealDevice::FuncOnKeyStart(bool)
+{
+
+}
+
+
+void RealDevice::FuncOnKeyStop(bool)
+{
+
+}
+
+
+void RealDevice::FuncOnEncoder(int)
+{
+
 }

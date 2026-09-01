@@ -32,13 +32,4 @@ public:
     // Эти функции вызываются из Device -----------------------------------------
     // Приём байта от контроллера по UART
     void OnReceiveUART(uint8);
-
-    // Поворот ручки
-    void OnGovernor(int rotate);
-
-    // Нажатие/отпускание кнопки СТАРТ
-    void OnButtonStart(bool press);
-
-    // Нажатие/отпускание кнопки СТОП
-    void OnButtonStop(bool press);
 };

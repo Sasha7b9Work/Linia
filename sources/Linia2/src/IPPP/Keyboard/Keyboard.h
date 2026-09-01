@@ -12,7 +12,7 @@
 
 namespace Keyboard
 {
-    void Init();
+    void Init(void (*funcOnKeyStart)(bool), void (*funcOnKeyStop)(bool), void (*funcOnEncoder)(int));
 
     void DeInit();
 }

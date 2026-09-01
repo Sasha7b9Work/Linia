@@ -26,4 +26,10 @@ private:
 
     std::atomic<bool> running = false;
     std::atomic<bool> connected = false;
+
+    static void FuncOnKeyStart(bool);
+
+    static void FuncOnKeyStop(bool);
+
+    static void FuncOnEncoder(int);
 };
