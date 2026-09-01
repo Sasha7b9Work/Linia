@@ -226,9 +226,9 @@ void RealIPPP::WriteDataToTextFile(uint16 data[5])
         return;
     }
 
-    textFile << std::setw(7) << std::right << wxString::Format("%u", data[0]) <<
-        std::setw(7) << std::right << wxString::Format("%u", data[1]) <<
-        std::setw(7) << std::right << wxString::Format("%u", data[2]) <<
-        std::setw(7) << std::right << wxString::Format("%u", data[3]) <<
+    textFile << std::setw(7) << std::right << wxString::Format("%d", (int)data[0]) <<
+        std::setw(7) << std::right << wxString::Format("%d", (int)data[1]) <<
+        std::setw(7) << std::right << wxString::Format("%d", (int)data[2]) <<
+        std::setw(7) << std::right << wxString::Format("%d", (int)data[3]) <<
         std::setw(7) << std::right << wxString::Format("%u", (uint8)data[4]) << "\n";
 }

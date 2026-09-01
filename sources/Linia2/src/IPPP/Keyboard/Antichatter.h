@@ -3,6 +3,7 @@
 
 
 // Обработка антидребезга
+//
 
 class Antichatter
 {
@@ -11,7 +12,9 @@ public:
     // В конструктор передаётся значение ожидания завершения дребезга в миллисекундах
     Antichatter(int timeAntichatterMS);
 
+    void Input(bool, int64 timeMS);
 
+    bool Output(int16 timeMS);
 
 private:
 
