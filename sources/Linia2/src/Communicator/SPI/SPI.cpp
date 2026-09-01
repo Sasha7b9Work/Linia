@@ -1,4 +1,5 @@
-﻿#include "defines.h"
+﻿// 2026/09/01 16:45:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
+#include "defines.h"
 #include "Communicator/SPI/SPI.h"
 #include "Communicator/GPIO/GPIO.h"
 #include <filesystem>

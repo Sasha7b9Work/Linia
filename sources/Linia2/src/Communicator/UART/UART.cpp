@@ -1,3 +1,4 @@
+// 2026/09/01 16:45:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Communicator/UART/UART.h"
 #include <filesystem>

@@ -1,7 +1,7 @@
 ﻿# 2023/07/04 15:47:47 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (Linia2)
 
-set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD ON)
 
 set(CMAKE_UNITY_BUILD_BATCH_SIZE 20)
 
@@ -155,6 +155,11 @@ source_group(Windows                          FILES ${WINDOWS})
 source_group(Plugs/Arm64                      FILES ${PLUGS_ARM64})
 source_group(Plugs/linux                      FILES ${PLUGS_LINUX})
 
+set_source_files_properties(
+    src/IPPP/Real/RealDevice.cpp                    # Иначе не компилируется std::ofstream binaryFile;
+    PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON
+)
+
 add_executable(${PROJECT_NAME}
     ${RESOURCES}
     ${SRC}
@@ -214,6 +219,8 @@ if(WIN32)
         Setupapi
         Iphlpapi
     )
+
+    add_compile_definitions(WIN32_LEAN_AND_MEAN NOMINMAX)
 
     # Копируем в рабочий каталог
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND copy $(OutputPath)\\$(PROJECT_NAME) . /Y)
