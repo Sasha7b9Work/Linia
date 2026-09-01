@@ -27,8 +27,8 @@ PageDebug::PageDebug(Notebook *board, PageDebug *&global) : PageNotebook(board, 
     PageNotebook::Layout();
 
     labelButtonStart = new wxStaticText(this, wxID_ANY, "Start", { 10, 700 }, { 100, 20 });
-    labelButtonStop = new wxStaticText(this, wxID_ANY, "Stop", { 100, 700 }, { 100, 20 });
-    labelEncoder = new wxStaticText(this, wxID_ANY, "0", { 200, 700 }, { 100, 20 });
+    labelButtonStop = new wxStaticText(this, wxID_ANY, "Stop", { 210, 700 }, { 100, 20 });
+    labelEncoder = new wxStaticText(this, wxID_ANY, "0", { 410, 700 }, { 100, 20 });
 }
 
 
