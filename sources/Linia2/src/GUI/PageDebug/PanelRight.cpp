@@ -80,7 +80,7 @@ PanelRight::PanelRight(wxWindow *parent, PanelRight *&global) :
 }
 
 
-void PanelRight::PeriodicTask()
+void PanelRight::ApplicationTask()
 {
     static TimeMeterMS timer;
 

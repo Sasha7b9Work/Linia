@@ -16,7 +16,7 @@ public:
 
     ControlDataFPGA *data[NUMBER_ADC + 1];           // Отображение данных, считанных c платы контроллера
 
-    void PeriodicTask();
+    void ApplicationTask();
 
 private:
 
