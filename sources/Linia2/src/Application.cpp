@@ -92,9 +92,12 @@ bool Application::OnInit()
     // Устанавливаем переменные окружения для GTK (для Linux)
 #ifndef __WXMSW__
     g_log_set_handler(NULL, (GLogLevelFlags)(G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL),
-        [](const gchar *log_domain, GLogLevelFlags level,
-            const gchar *message, gpointer user_data)
+        [](const gchar *log_domain, GLogLevelFlags level, const gchar *message, gpointer user_data)
         {
+            (void)log_domain;
+            (void)level;
+            (void)message;
+            (void)user_data;
             // Игнорируем предупреждения
         }, NULL);
 
