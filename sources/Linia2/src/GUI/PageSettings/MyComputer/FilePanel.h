@@ -2,6 +2,7 @@
 #include "GUI/PageSettings/MyComputer/FilePanelController.h"
 #include "GUI/PageSettings/MyComputer/FilePanelEvents.h"
 #include "GUI/PageSettings/MyComputer/ClipboardManager.h"
+#include "GUI/PageSettings/MyComputer/FTPController.h"
 #include "GUI/Controls/Button.h"
 #pragma warning(push, 0)
     #include <wx/panel.h>
@@ -12,7 +13,6 @@
 #pragma warning(pop)
 
 
-class FTPController;
 class FilePanelOperations;
 
 
