@@ -118,7 +118,8 @@ void PanelTests::OnEventRightClickListItem(wxListEvent &event)
 
     wxMenu menu;
 
-    wxMenuItem *header = new wxMenuItem(&menu, wxID_ANY, test->lib->UGO + " : " + test->name);
+//    wxMenuItem *header = new wxMenuItem(&menu, wxID_ANY, test->lib->UGO + " : " + test->name);
+    wxMenuItem *header = new wxMenuItem(&menu, wxID_ANY, "sample");
     header->Enable(false);
     menu.Append(header);
 
