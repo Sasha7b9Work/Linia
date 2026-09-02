@@ -114,7 +114,7 @@ void PanelTests::OnEventRightClickListItem(wxListEvent &event)
 
     long index = event.GetIndex();
 
-    Test *test = (Test *)(list->GetUserData(index));
+//    Test *test = (Test *)(list->GetUserData(index));
 
     wxMenu menu;
 
