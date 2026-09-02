@@ -64,7 +64,7 @@ PanelRight::PanelRight(wxWindow *parent, PanelRight *&global) :
 
         for (int i = 0; i < 5; i++)
         {
-            data[i] = new ControlDataFPGA(this);
+            data[i] = new ControlDataFPGA(this, new wxStaticText(this, wxID_ANY, "value", { 0, 0 }, { 100, 0 }));
 
             ver_sizer->Add(data[i], 1, wxEXPAND | wxALL, 5);
         }

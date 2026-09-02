@@ -4,6 +4,12 @@
 #include "GUI/Controls/Button.h"
 #include "GUI/Controls/Panel.h"
 #include <mutex>
+#pragma warning(push, 0)
+    #include <wx/stattext.h>
+#pragma warning(pop)
+
+
+class wxStatictext;
 
 
 class PainterDataFPGA : public Painter
@@ -20,7 +26,8 @@ public:
 
     const wxSize SIZE{ 185, 85 };
 
-    ControlDataFPGA(wxWindow *);
+    // _for_value - сюда будет выводиться рассчитанное значение
+    ControlDataFPGA(wxWindow *, wxStaticText *_for_value);
 
     void SetMax(int);
 
@@ -34,6 +41,9 @@ private:
     ToggleButton *btnScale = nullptr;
     int max = (1 << 18) - 1;
     int data[POINTS_IN_SAMPLE_ADC];
+    wxStaticText *for_value = nullptr;
 
     void OnEventToggleButon(wxCommandEvent &);
+
+    void OnEventPaint(wxPaintEvent &);
 };

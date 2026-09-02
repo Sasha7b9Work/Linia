@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "GUI/Controls/ControlDataFPGA.h"
 #pragma warning(push, 0)
-#include <wx/graphics.h>
+    #include <wx/graphics.h>
 #pragma warning(pop)
 
 
@@ -12,8 +12,9 @@ PainterDataFPGA::PainterDataFPGA(wxWindow *parent, const wxSize &size) :
 }
 
 
-ControlDataFPGA::ControlDataFPGA(wxWindow *parent) :
-    Panel(parent)
+ControlDataFPGA::ControlDataFPGA(wxWindow *parent, wxStaticText *_for_value) :
+    Panel(parent),
+    for_value(_for_value)
 {
     SetSize(SIZE);
 
@@ -31,6 +32,8 @@ ControlDataFPGA::ControlDataFPGA(wxWindow *parent) :
     SetMax(32767);
 
     btnScale->SetPosition({ size.x - btnScale->GetSize().x - 2, 1 });
+
+    Bind(wxEVT_PAINT, &ControlDataFPGA::OnEventPaint, this);
 }
 
 
@@ -42,6 +45,13 @@ void ControlDataFPGA::OnEventToggleButon(wxCommandEvent &event)
     {
         Draw();
     }
+}
+
+
+void ControlDataFPGA::OnEventPaint(wxPaintEvent &event)
+{
+    Draw();
+    event.Skip();
 }
 
 
@@ -104,6 +114,16 @@ void ControlDataFPGA::Draw()
     }
 
     painter->EndPaint();
+
+    {
+        // Теперь выводим значение, вычисленное по функции
+
+        wxPoint position = GetPosition();
+        position.x += SIZE.x;
+
+        for_value->SetPosition(position);
+        for_value->SetLabel("Label");
+    }
 }
 
 
