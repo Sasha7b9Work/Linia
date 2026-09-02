@@ -70,15 +70,19 @@ void ClientHTTP::CleanupSockets()
 
 void ClientHTTP::Connect()
 {
+#ifndef WIN32
     SendMessage(std::string("Connect ") + SystemInfoExtended::getComputerName() +
         ":" + SystemInfoExtended::getLocalIPAddress());
+#endif
 }
 
 
 void ClientHTTP::Disconnect()
 {
+#ifndef WIN32
     SendMessage(std::string("Disconnect ") + SystemInfoExtended::getComputerName() +
         ":" + SystemInfoExtended::getLocalIPAddress());
+#endif
 }
 
 
