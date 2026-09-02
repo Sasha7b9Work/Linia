@@ -34,4 +34,5 @@ private:
     wxImageList *imageList = nullptr;
 
     void OnEventRightClickListItem(wxListEvent &);
+    void OnEventLeftClickListItem(wxMouseEvent &);
 };

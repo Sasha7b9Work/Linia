@@ -31,6 +31,7 @@ PanelTests::PanelTests(wxWindow *parent, PanelTests *&global) : Panel(parent, wx
     Panel::SetSizer(main_sizer);
 
     listView->Bind(wxEVT_LIST_ITEM_RIGHT_CLICK, &PanelTests::OnEventRightClickListItem, this);
+    listView->Bind(wxEVT_LEFT_DOWN, &PanelTests::OnEventLeftClickListItem, this);
 }
 
 
@@ -133,4 +134,39 @@ void PanelTests::OnEventRightClickListItem(wxListEvent &event)
 
     // Показываем меню в позиции курсора
     PopupMenu(&menu);
+}
+
+
+void PanelTests::OnEventLeftClickListItem(wxMouseEvent &event)
+{
+    wxPoint pos = event.GetPosition();
+    int flags = 0;
+    int index = listView->HitTest(pos, flags);
+
+    if (index == wxNOT_FOUND)
+    {
+        event.Skip();
+        return;
+    }
+
+    listView->Select(index);
+
+    wxMenu menu;
+    menu.Append(1001, L("Активировать"));
+
+    // Привязываем обработчики
+    menu.Bind(wxEVT_MENU, [this, index](wxCommandEvent &e)
+        {
+            switch (e.GetId())
+            {
+            case 1001:
+                wxMessageBox(wxString::Format("Действие 1 для элемента %d", index));
+                break;
+            }
+        });
+
+    // Показываем меню в позиции курсора
+    PopupMenu(&menu);
+
+    event.Skip();
 }
