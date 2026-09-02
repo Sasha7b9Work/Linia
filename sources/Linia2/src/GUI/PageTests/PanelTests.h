@@ -33,4 +33,5 @@ private:
 
     void OnEventRightClickListItem(wxListEvent &);
     void OnEventLeftClickListItem(wxMouseEvent &);
+    void OnEventMouseMove(wxMouseEvent &);
 };

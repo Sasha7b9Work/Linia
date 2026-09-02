@@ -32,6 +32,7 @@ PanelTests::PanelTests(wxWindow *parent, PanelTests *&global) : Panel(parent, wx
     Panel::SetSizer(main_sizer);
 
     listView->Bind(wxEVT_LIST_ITEM_RIGHT_CLICK, &PanelTests::OnEventRightClickListItem, this);
+    listView->Bind(wxEVT_MOTION, &PanelTests::OnEventMouseMove, this);
 //    listView->Bind(wxEVT_LEFT_DOWN, &PanelTests::OnEventLeftClickListItem, this);
 }
 
@@ -115,7 +116,7 @@ void PanelTests::OnEventRightClickListItem(wxListEvent &event)
 
     long index = event.GetIndex();
 
-    Test *test = (Test *)(list->GetUserData(index));
+    Test *test = (Test *)list->GetUserData(index);
 
     wxMenu menu;
 
@@ -138,6 +139,30 @@ void PanelTests::OnEventRightClickListItem(wxListEvent &event)
         });
 
     PopupMenu(&menu);
+}
+
+
+void PanelTests::OnEventMouseMove(wxMouseEvent &event)
+{
+    wxPoint pos = event.GetPosition();
+    int flags = 0;
+    int index = listView->HitTest(pos, flags);
+
+    if (index != wxNOT_FOUND)
+    {
+        ListView *list = (ListView *)event.GetEventObject();
+
+        Test *test = (Test *)list->GetUserData(index);
+
+        wxString tooltip = test->lib->UGO + " : " + test->UGO + " : " + test->name;
+        listView->SetToolTip(tooltip);
+    }
+    else
+    {
+        listView->SetToolTip(wxEmptyString);
+    }
+
+    event.Skip();
 }
 
 
