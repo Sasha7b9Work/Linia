@@ -7,10 +7,6 @@
 
 #define SETTING(name) SET::GetValue(name)
 
-#define REGISTER(type, name, def) \
-    auto* name##_ptr = new Value<type>(#name, def); \
-    SET::RegisterValue(#name, new SET::ValueWrapper<type>(name##_ptr));
-
 #define REGISTER_AND_LOAD(type, name, def) \
     SET::RegisterValue(name, new SET::ValueWrapper<type>(new Value<type>(name, def)));  \
     SET::GetValue(name)->Load();

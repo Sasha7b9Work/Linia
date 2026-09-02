@@ -28,8 +28,7 @@ Register::Register(wxWindow *parent, const wxString &_title, Chip *_chip, const 
     Panel(parent),
     chip(_chip)
 {
-    SET::RegisterValue(GetNameSettingValue(), new SET::ValueWrapper<uint>(new Value<uint>(GetNameSettingValue(), 0)));
-    SET::GetValue(GetNameSettingValue())->Load();
+    REGISTER_AND_LOAD(uint, GetNameSettingValue(), 0);
 
     wxSize size = GetMinSize();
 

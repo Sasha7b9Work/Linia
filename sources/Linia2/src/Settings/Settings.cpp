@@ -37,6 +37,10 @@ namespace SET
 
     void Init()
     {
+#define REGISTER(type, name, def) \
+    auto* name##_ptr = new Value<type>(#name, def); \
+    SET::RegisterValue(#name, new SET::ValueWrapper<type>(name##_ptr));
+
         REGISTER(bool, debug_mode, false);
         REGISTER(bool, debug_emulate_mode, false);
         REGISTER(wxPoint, gui_pos_console, wxPoint(10, 10));
