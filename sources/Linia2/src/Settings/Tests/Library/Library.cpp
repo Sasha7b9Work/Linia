@@ -63,7 +63,13 @@ bool Library::ParseCategory(LibraryCategory *library, const wxString &name_categ
         }
         else if (it_value->value.IsObject())
         {
-            if (!ParseTest(library, it_value->value))
+            Test *test = new Test{ library };
+
+            if (ParseTest(test, it_value->value))
+            {
+                library->tests.push_back(test);
+            }
+            else
             {
                 return false;
             }
@@ -82,18 +88,15 @@ bool Library::ParseNameCategory(LibraryCategory *library, const wxString &name_c
 }
 
 
-bool Library::ParseTest(LibraryCategory *library, const rapidjson::Value &value)
+bool Library::ParseTest(Test *test, const rapidjson::Value &value)
 {
-    Test test;
-    test.lib = library;
-
     for (auto it = value.MemberBegin(); it != value.MemberEnd(); ++it)
     {
         if (it->value.IsString())
         {
             if (wxString(it->name.GetString()) == "name")
             {
-                test.name = wxString::FromUTF8(it->value.GetString());
+                test->name = wxString::FromUTF8(it->value.GetString());
             }
         }
         else if (it->value.IsObject())
@@ -102,7 +105,5 @@ bool Library::ParseTest(LibraryCategory *library, const rapidjson::Value &value)
         }
     }
 
-    library->_tests.push_back(test);
-
-    return test.name[0] != '\0';
+    return test->name[0] != '\0';
 }

@@ -28,7 +28,7 @@ public:
 
     wxString name{ "" };
     wxString UGO{ "" };
-    std::vector<Test> _tests;
+    std::vector<Test *> tests;
 };
 
 
@@ -50,5 +50,5 @@ private:
 
     bool ParseNameCategory(LibraryCategory *, const wxString &name_category);
 
-    bool ParseTest(LibraryCategory *, const rapidjson::Value &);
+    bool ParseTest(Test *, const rapidjson::Value &);
 };

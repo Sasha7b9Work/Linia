@@ -95,9 +95,9 @@ void PanelTests::BuildListTests(std::vector<const LibraryCategory *> &libraries)
 
     for (auto lib : libraries)
     {
-        for (const Test &test : lib->_tests)
+        for (const Test *test : lib->tests)
         {
-            AddItem(lib->UGO + " : " + test.name, - 1, &test);
+            AddItem(lib->UGO + " : " + test->name, - 1, test);
         }
     }
 }
