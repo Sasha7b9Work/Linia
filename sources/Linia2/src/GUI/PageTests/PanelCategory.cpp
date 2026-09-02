@@ -75,15 +75,15 @@ void PanelCategory::UpdateState(const Library &lib)
 
 void PanelCategory::BuildListTests()
 {
-    std::vector<const LibraryCategory *> cats;
+    std::vector<const LibraryCategory *> libraries;
 
     for (const Category &cat : categories)
     {
         if (cat.checkbox->IsChecked())
         {
-            cats.push_back(&cat.category);
+            libraries.push_back(&cat.category);
         }
     }
 
-    ThePanelTests->BuildListTests(cats);
+    ThePanelTests->BuildListTests(libraries);
 }
