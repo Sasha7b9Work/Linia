@@ -4,7 +4,8 @@
 #include "Utils/StringUtils.h"
 #include "Utils/GlobalFunctions.h"
 #pragma warning(push, 0)
-#include <wx/file.h>
+    #include <wx/file.h>
+    #include "rapidjson/error/en.h"
 #pragma warning(pop)
 
 
@@ -48,14 +49,17 @@ bool FileJSON::Load(pchar rel_path)
     buffer[fileSize] = '\0';
 
     // Используем rapidjson
-    document.Parse(buffer);
+    document.Parse<rapidjson::kParseStopWhenDoneFlag>(buffer);
 
     delete[] buffer;  // освобождаем буфер сразу после парсинга
 
     if (document.HasParseError())
     {
-        LOG_ERROR("Can't parse configuration file \"%s\". Error %d, offset %u",
-            full_path.c_str(), document.GetParseError(), document.GetErrorOffset());
+        LOG_ERROR("Can't parse configuration file \"%s\". Error %d (%s), offset %zu",
+            full_path.c_str(),
+            document.GetParseError(),
+            rapidjson::GetParseError_En(document.GetParseError()),
+            document.GetErrorOffset());
 
         return false;
     }

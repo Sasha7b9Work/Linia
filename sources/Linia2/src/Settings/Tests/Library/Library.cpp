@@ -88,8 +88,10 @@ bool Library::ParseTest(LibraryCategory &category, const rapidjson::Value &value
     {
         if (it->value.IsString())
         {
-            // \todo надо правильно распарсить
-            test._name = it->name.GetString();
+            if (wxString(it->name.GetString()) == "name")
+            {
+                test._name = wxString::FromUTF8(it->value.GetString());
+            }
         }
         else if (it->value.IsObject())
         {
