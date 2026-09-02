@@ -114,13 +114,12 @@ void PanelTests::OnEventRightClickListItem(wxListEvent &event)
 
     long index = event.GetIndex();
 
-//    Test *test = (Test *)(list->GetUserData(index));
+    Test *test = (Test *)(list->GetUserData(index));
 
     wxMenu menu;
 
-//    wxMenuItem *header = new wxMenuItem(&menu, wxID_ANY, test->lib->UGO + " : " + test->name);
-    wxMenuItem *header = new wxMenuItem(&menu, wxID_ANY, "sample");
-    header->Enable(false);
+    wxMenuItem *header = new wxMenuItem(&menu, wxID_ANY, test->lib->UGO + " : " + test->name);
+//    header->Enable(false);
     menu.Append(header);
 
     menu.Append(1001, L("Активировать"));
