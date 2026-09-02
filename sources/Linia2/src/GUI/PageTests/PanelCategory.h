@@ -24,7 +24,7 @@ private:
     struct Category
     {
         CheckBox *checkbox;             // Чекбокс, которым выбирается данная категория
-        const LibraryCategory &category;
+        const LibraryCategory *category;
     };
 
     std::vector<Category> categories;

@@ -95,7 +95,7 @@ void PanelTests::BuildListTests(std::vector<const LibraryCategory *> &libraries)
 
     for (auto lib : libraries)
     {
-        for (const Test &test : lib->tests)
+        for (const Test &test : lib->_tests)
         {
             AddItem(lib->UGO + " : " + test.name, - 1, &test);
         }
@@ -118,7 +118,7 @@ void PanelTests::OnEventRightClickListItem(wxListEvent &event)
 
     wxMenu menu;
 
-    wxMenuItem *header = new wxMenuItem(&menu, wxID_ANY, test->name);
+    wxMenuItem *header = new wxMenuItem(&menu, wxID_ANY, test->lib->UGO + " : " + test->name);
     header->Enable(false);
     menu.Append(header);
 

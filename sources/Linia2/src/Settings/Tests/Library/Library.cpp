@@ -17,13 +17,13 @@ bool Library::Read(FileJSON *_file)
     {
         if (it->value.IsObject())
         {
-            LibraryCategory category;
+            LibraryCategory *library = new LibraryCategory();
 
             if (!wxString(it->name.GetString()).StartsWith("REM"))              // С последовательности "REM" начинаются комментарии. Пропускаем
             {
-                if (ParseCategory(category, it->name.GetString(), it->value))
+                if (ParseCategory(library, it->name.GetString(), it->value))
                 {
-                    categories.push_back(category);
+                    categories.push_back(library);
                 }
                 else
                 {
@@ -46,13 +46,13 @@ bool Library::Read(FileJSON *_file)
 }
 
 
-bool Library::ParseCategory(LibraryCategory &library, const wxString &name_category, const rapidjson::Value &value)
+bool Library::ParseCategory(LibraryCategory *library, const wxString &name_category, const rapidjson::Value &value)
 {
     for (auto it_value = value.MemberBegin(); it_value != value.MemberEnd(); ++it_value)
     {
         if (it_value->value.IsString())
         {
-            library.UGO = name_category;
+            library->UGO = name_category;
 
             if (!ParseNameCategory(library, name_category))
             {
@@ -74,17 +74,18 @@ bool Library::ParseCategory(LibraryCategory &library, const wxString &name_categ
 }
 
 
-bool Library::ParseNameCategory(LibraryCategory &library, const wxString &name_category)
+bool Library::ParseNameCategory(LibraryCategory *library, const wxString &name_category)
 {
-    library.name = wxString::FromUTF8(file->GetStringValue(name_category, "name"));
+    library->name = wxString::FromUTF8(file->GetStringValue(name_category, "name"));
 
-    return library.name.Length() != 0;
+    return library->name.Length() != 0;
 }
 
 
-bool Library::ParseTest(LibraryCategory &category, const rapidjson::Value &value)
+bool Library::ParseTest(LibraryCategory *library, const rapidjson::Value &value)
 {
     Test test;
+    test.lib = library;
 
     for (auto it = value.MemberBegin(); it != value.MemberEnd(); ++it)
     {
@@ -101,7 +102,7 @@ bool Library::ParseTest(LibraryCategory &category, const rapidjson::Value &value
         }
     }
 
-    category.tests.push_back(test);
+    library->_tests.push_back(test);
 
     return test.name[0] != '\0';
 }

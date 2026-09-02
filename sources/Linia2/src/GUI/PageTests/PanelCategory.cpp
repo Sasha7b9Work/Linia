@@ -58,9 +58,9 @@ void PanelCategory::UpdateState(const Library &lib)
 
     for (size_t i = 0; i < lib.categories.size(); i++)
     {
-        const LibraryCategory &cat = lib.categories[i];
+        const LibraryCategory *cat = lib.categories[i];
 
-        CheckBox *checkbox = new CheckBox(this, cat.name);
+        CheckBox *checkbox = new CheckBox(this, cat->name);
         sizer->Add(checkbox);
         categories.emplace_back(Category{ checkbox, cat });
     }
@@ -81,7 +81,7 @@ void PanelCategory::BuildListTests()
     {
         if (cat.checkbox->IsChecked())
         {
-            libraries.push_back(&cat.category);
+            libraries.push_back(cat.category);
         }
     }
 
