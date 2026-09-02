@@ -8,6 +8,8 @@ class wxListView;
 class wxImageList;
 
 
+// Здесь находятся тесты из выбранных категорий
+
 class PanelLibrary : public Panel
 {
 public:

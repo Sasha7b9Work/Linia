@@ -1,6 +1,6 @@
 ﻿// 2026/04/29 15:56:28 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
-#include "GUI/PageTests/PanelLibrary.h"
+#include "GUI/PageTests/PanelTests.h"
 #include "GUI/Controls/Sizers.h"
 #include "Settings/Tests/Library/Library.h"
 #pragma warning(push, 0)

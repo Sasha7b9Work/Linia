@@ -3,7 +3,7 @@
 #include "GUI/Controls/Notebook.h"
 #include "GUI/PageTests/PageTests.h"
 #include "GUI/PageTests/PanelCategory.h"
-#include "GUI/PageTests/PanelLibrary.h"
+#include "GUI/PageTests/PanelTests.h"
 #include "GUI/PageTests/PanelViewTest.h"
 #include "MainWindow.h"
 #include "Utils/SystemDepend.h"

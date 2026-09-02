@@ -8,6 +8,8 @@ class Library;
 class LibraryCategory;
 
 
+// Здесь можно выбрать нужные категории испытуемых приборов - транзистор, резистор, etc
+
 class PanelCategory : public ScrolledPanel
 {
 public:
