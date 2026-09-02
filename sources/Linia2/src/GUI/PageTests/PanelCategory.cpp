@@ -85,5 +85,5 @@ void PanelCategory::BuildListTests()
         }
     }
 
-    ThePanelLibrary->BuildListTests(cats);
+    ThePanelTests->BuildListTests(cats);
 }

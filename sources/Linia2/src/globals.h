@@ -22,7 +22,7 @@ class PageArchive;
 
 class PageTests;
 class PanelCategory;
-class PanelLibrary;
+class PanelTests;
 class PanelViewTest;
 class PageChannelB;
 
@@ -39,7 +39,7 @@ extern PageDebug     *ThePageDebug;
 extern PageMeasures  *ThePageMeasures;
 
 extern PanelCategory *ThePanelCategory;
-extern PanelLibrary  *ThePanelLibrary;
+extern PanelTests    *ThePanelTests;
 extern PanelViewTest *ThePanelViewTest;
 extern PageChannelB  *ThePageChannelB;
 

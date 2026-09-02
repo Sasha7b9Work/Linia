@@ -9,10 +9,10 @@
 #pragma warning(pop)
 
 
-PanelLibrary *ThePanelLibrary = nullptr;
+PanelTests *ThePanelTests = nullptr;
 
 
-PanelLibrary::PanelLibrary(wxWindow *parent, PanelLibrary *&global) : Panel(parent, wxSIMPLE_BORDER)
+PanelTests::PanelTests(wxWindow *parent, PanelTests *&global) : Panel(parent, wxSIMPLE_BORDER)
 {
     global = this;
 
@@ -30,7 +30,7 @@ PanelLibrary::PanelLibrary(wxWindow *parent, PanelLibrary *&global) : Panel(pare
 }
 
 
-PanelLibrary::~PanelLibrary()
+PanelTests::~PanelTests()
 {
     if (imageList)
     {
@@ -39,7 +39,7 @@ PanelLibrary::~PanelLibrary()
 }
 
 
-void PanelLibrary::ClearList()
+void PanelTests::ClearList()
 {
     if (listView)
     {
@@ -48,7 +48,7 @@ void PanelLibrary::ClearList()
 }
 
 
-void PanelLibrary::AddItem(const wxString &text, int iconIndex)
+void PanelTests::AddItem(const wxString &text, int iconIndex)
 {
     if (!listView) return;
 
@@ -56,13 +56,13 @@ void PanelLibrary::AddItem(const wxString &text, int iconIndex)
 }
 
 
-void PanelLibrary::AddItem(const wxString &text)
+void PanelTests::AddItem(const wxString &text)
 {
     AddItem(text, -1);
 }
 
 
-int PanelLibrary::AddIcon(const wxString &iconPath)
+int PanelTests::AddIcon(const wxString &iconPath)
 {
     if (!imageList) return -1;
 
@@ -76,7 +76,7 @@ int PanelLibrary::AddIcon(const wxString &iconPath)
 }
 
 
-void PanelLibrary::SetItemIcon(long itemIndex, int iconIndex)
+void PanelTests::SetItemIcon(long itemIndex, int iconIndex)
 {
     if (listView && itemIndex >= 0 && itemIndex < listView->GetItemCount())
     {
@@ -85,7 +85,7 @@ void PanelLibrary::SetItemIcon(long itemIndex, int iconIndex)
 }
 
 
-void PanelLibrary::BuildListTests(std::vector<const LibraryCategory *> &libraries)
+void PanelTests::BuildListTests(std::vector<const LibraryCategory *> &libraries)
 {
     ClearList();
 

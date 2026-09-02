@@ -10,12 +10,12 @@ class wxImageList;
 
 // Здесь находятся тесты из выбранных категорий
 
-class PanelLibrary : public Panel
+class PanelTests : public Panel
 {
 public:
 
-    PanelLibrary(wxWindow *, PanelLibrary *&);
-    ~PanelLibrary();
+    PanelTests(wxWindow *, PanelTests *&);
+    ~PanelTests();
 
     void BuildListTests(std::vector<const LibraryCategory *> &libraries);
 
