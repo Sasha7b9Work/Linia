@@ -9,4 +9,20 @@ PanelViewTest *ThePanelViewTest = nullptr;
 PanelViewTest::PanelViewTest(wxWindow *parent, PanelViewTest *&global) : Panel(parent, wxSIMPLE_BORDER)
 {
     global = this;
+
+    Bind(wxEVT_PAINT, &PanelViewTest::OnEventPaint, this);
+}
+
+
+void PanelViewTest::SetTest(Test *_test)
+{
+    test = _test;
+
+    Refresh();
+}
+
+
+void PanelViewTest::OnEventPaint(wxPaintEvent &event)
+{
+    event.Skip();
 }

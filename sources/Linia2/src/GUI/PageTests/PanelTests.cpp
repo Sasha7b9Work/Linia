@@ -3,6 +3,7 @@
 #include "GUI/PageTests/PanelTests.h"
 #include "GUI/Controls/Sizers.h"
 #include "Settings/Tests/Library/Library.h"
+#include "GUI/PageTests/PanelViewTest.h"
 #pragma warning(push, 0)
     #include <wx/checkbox.h>
     #include <wx/listctrl.h>
@@ -124,12 +125,14 @@ void PanelTests::OnEventRightClickListItem(wxListEvent &event)
 
     menu.Append(1001, L("Активировать"));
 
-    menu.Bind(wxEVT_MENU, [this, index](wxCommandEvent &e)
+    menu.Bind(wxEVT_MENU, [this, test](wxCommandEvent &e)
         {
             switch (e.GetId())
             {
             case 1001:
-                wxMessageBox(wxString::Format("Действие 1 для элемента %ld", index));
+
+                ThePanelViewTest->SetTest(test);
+
                 break;
             }
         });
