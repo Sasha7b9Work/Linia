@@ -119,10 +119,11 @@ void ControlDataFPGA::Draw()
         // Теперь выводим значение, вычисленное по функции
 
         wxPoint position = GetPosition();
-        position.x += SIZE.x;
+        position.x += SIZE.x + 5;
+        position.y += SIZE.y / 2 - 10;
 
         for_value->SetPosition(position);
-        for_value->SetLabel("Label");
+        for_value->SetLabel("value");
     }
 }
 
