@@ -76,7 +76,7 @@ static pString DIRECT_PROMT = "<- ";
 
 #define SAFE_DELETE(ptr)  do { delete ptr; ptr = nullptr; } while(0)
 
-#define L(x) wxT(x)
+#define L(x) wxString(wxT(x))
 
 // Яркость элементов управления
 #ifdef WIN32

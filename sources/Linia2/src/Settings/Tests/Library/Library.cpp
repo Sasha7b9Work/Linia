@@ -76,7 +76,7 @@ bool Library::ParseCategory(LibraryCategory &library, const wxString &name_categ
 
 bool Library::ParseNameCategory(LibraryCategory &library, const wxString &name_category)
 {
-    library.name = file->GetStringValue(name_category, "name");
+    library.name = wxString::FromUTF8(file->GetStringValue(name_category, "name"));
 
     return library.name.Length() != 0;
 }
@@ -92,7 +92,7 @@ bool Library::ParseTest(LibraryCategory &category, const rapidjson::Value &value
         {
             if (wxString(it->name.GetString()) == "name")
             {
-                test._name = wxString::FromUTF8(it->value.GetString());
+                test.name = wxString::FromUTF8(it->value.GetString());
             }
         }
         else if (it->value.IsObject())
@@ -103,5 +103,5 @@ bool Library::ParseTest(LibraryCategory &category, const rapidjson::Value &value
 
     category.tests.push_back(test);
 
-    return test._name[0] != '\0';
+    return test.name[0] != '\0';
 }

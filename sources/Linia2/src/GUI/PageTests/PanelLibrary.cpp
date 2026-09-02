@@ -93,7 +93,7 @@ void PanelLibrary::BuildListTests(std::vector<const LibraryCategory *> &librarie
     {
         for (auto test : lib->tests)
         {
-            AddItem(lib->UGO + " : " + test._name);
+            AddItem(lib->UGO + " : " + test.name);
         }
     }
 }

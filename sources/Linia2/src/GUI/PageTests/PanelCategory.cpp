@@ -6,7 +6,8 @@
 #include "GUI/Controls/CheckBox.h"
 #include "GUI/PageTests/PanelLibrary.h"
 #pragma warning(push, 0)
-#include <wx/checkbox.h>
+    #include <wx/checkbox.h>
+    #include <wx/statline.h>
 #pragma warning(pop)
 
 
@@ -19,11 +20,13 @@ PanelCategory::PanelCategory(wxWindow *parent, PanelCategory *&global) : Scrolle
 
     BoxSizerVert *main_sizer = new BoxSizerVert();
 
-    chbStandardTests = new CheckBox(this, L("Стандартные тесты"));
-    chbUserTests = new CheckBox(this, L("Пользовательские тесты"));
+    chbStandardTests = new CheckBox(this, L("* Стандартные тесты *"));
+    chbUserTests = new CheckBox(this, L("* Пользовательские тесты *"));
 
     main_sizer->Add(chbStandardTests);
     main_sizer->Add(chbUserTests);
+    wxStaticLine *line = new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL);
+    main_sizer->Add(line, 0, wxEXPAND | wxALL, 5);
 
     ScrolledPanel::SetSizer(main_sizer);
 
@@ -38,7 +41,6 @@ PanelCategory::PanelCategory(wxWindow *parent, PanelCategory *&global) : Scrolle
 
 void PanelCategory::UpdateState(const Library &lib)
 {
-    return;
     wxSizer *sizer = GetSizer();
 
     for (size_t i = 0; i < categories.size(); i++)
@@ -51,8 +53,6 @@ void PanelCategory::UpdateState(const Library &lib)
         sizer->Layout();
         Layout();
     }
-
-    sizer->Clear();
 
     categories.clear();
 

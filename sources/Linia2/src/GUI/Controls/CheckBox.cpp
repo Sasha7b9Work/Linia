@@ -4,7 +4,7 @@
 
 
 CheckBox::CheckBox(wxWindow *parent, const wxString &text) :
-    wxCheckBox(parent, wxID_ANY, wxString::FromUTF8(text))
+    wxCheckBox(parent, wxID_ANY, text)
 {
     wxCheckBox::SetCursor(wxCursor(wxCURSOR_HAND));
 }
