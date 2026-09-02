@@ -24,5 +24,12 @@ private:
     // Нарисовать испытуемый элемент
     void DrawElement(wxPaintDC &);
 
+    // type == "npn", "pnp"
+    void DrawBJT(wxPaintDC &, const wxString &type, const wxPoint &, int radius);
+    void DrawBJTS(wxPaintDC &, const wxString &type, const wxPoint &, int radius);
+
+    // Рисует линию длиной length под углом angleDeg
+    void DrawLineWithAngle(wxPaintDC &dc, const wxPoint &start, double length, double angleDeg);
+
     wxPoint GetCenter() const;
 };
