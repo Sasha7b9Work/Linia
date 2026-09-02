@@ -11,6 +11,10 @@
     auto* name##_ptr = new Value<type>(#name, def); \
     SET::RegisterValue(#name, new SET::ValueWrapper<type>(name##_ptr));
 
+#define REGISTER_AND_LOAD(type, name, def) \
+    SET::RegisterValue(name, new SET::ValueWrapper<type>(new Value<type>(name, def)));  \
+    SET::GetValue(name)->Load();
+
 #define SET_DEBUG_MODE            SETTING("debug_mode")
 #define SET_DEBUG_PERIOD_SEND     SETTING("period_send")
 #define SET_DEBUG_EMULATE_MODE    SETTING("debug_emulate_mode")

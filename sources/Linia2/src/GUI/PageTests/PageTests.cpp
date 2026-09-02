@@ -13,6 +13,7 @@
 #include "GUI/Controls/Splitter.h"
 #include "GUI/Controls/Panel.h"
 #include "Settings/FileJSON.h"
+#include "Settings/Settings.h"
 #pragma warning(push, 0)
     #include <wx/sizer.h>
 #pragma warning(pop)
@@ -24,6 +25,12 @@ PageTests *ThePageTests = nullptr;
 PageTests::PageTests(Notebook *board, PageTests *&global) :
     PageNotebook(board, L("Тесты"))
 {
+#define SASH_POSITION_VERTICAL "page_tests_sash_postion_vertical"
+#define SASH_POSITION_HORIZONTAL "page_tests_sash_postion_horizontal"
+
+    REGISTER_AND_LOAD(int, SASH_POSITION_VERTICAL, 200);
+    REGISTER_AND_LOAD(int, SASH_POSITION_HORIZONTAL, 100);
+
     global = this;
 
     wxPanel::SetName("PageTests");
@@ -40,9 +47,9 @@ PageTests::PageTests(Notebook *board, PageTests *&global) :
 
     panel_view_test = new PanelViewTest(hor_splitter, ThePanelViewTest);
 
-    vert_splitter->SplitHorizontally(panel_category, panel_library, 90);
+    vert_splitter->SplitHorizontally(panel_category, panel_library, SETTING(SASH_POSITION_VERTICAL)->GetInt());
 
-    hor_splitter->SplitVertically(vert_splitter, panel_view_test, 190);
+    hor_splitter->SplitVertically(vert_splitter, panel_view_test, SETTING(SASH_POSITION_HORIZONTAL)->GetInt());
 
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
     sizer->Add(hor_splitter, 1, wxEXPAND | wxALL);
@@ -56,8 +63,8 @@ PageTests::PageTests(Notebook *board, PageTests *&global) :
 
 PageTests::~PageTests()
 {
-    vert_splitter->GetSashPosition();
-    hor_splitter->GetSashPosition();
+    SETTING(SASH_POSITION_VERTICAL)->Set(vert_splitter->GetSashPosition());
+    SETTING(SASH_POSITION_HORIZONTAL)->Set(hor_splitter->GetSashPosition());
 }
 
 
