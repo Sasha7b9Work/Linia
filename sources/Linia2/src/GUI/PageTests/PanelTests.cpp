@@ -108,6 +108,12 @@ void PanelTests::BuildListTests(std::vector<const LibraryCategory *> &libraries)
 
 void PanelTests::OnEventRightClickListItem(wxListEvent &event)
 {
+    long selected = listView->GetFirstSelected();
+    if (selected == wxNOT_FOUND)
+    {
+        return;  // Нет выделенного элемента — меню не показываем
+    }
+
     // Получаем индекс элемента, на котором кликнули
     int index = event.GetIndex();
 
