@@ -16,6 +16,7 @@
 #include "Settings/Settings.h"
 #pragma warning(push, 0)
     #include <wx/sizer.h>
+    #include <wx/msgdlg.h>
 #pragma warning(pop)
 
 
@@ -57,7 +58,7 @@ PageTests::PageTests(Notebook *board, PageTests *&global) :
 
     Layout();
 
-    LoadMainLibrary();
+    LoadStandardLibrary();
 }
 
 
@@ -68,15 +69,19 @@ PageTests::~PageTests()
 }
 
 
-void PageTests::LoadMainLibrary()
+void PageTests::LoadStandardLibrary()
 {
     FileJSON file;
 
-    if (file.Load("library_main.json"))
+    if (file.Load("library_std.json"))
     {
         if (library.Read(&file))
         {
             panel_category->UpdateState(library);
         }
+    }
+    else
+    {
+        wxMessageBox(wxString::Format(L("Нет файла со стандартными тестами \"library_std.json\""), L("Ошибка"), wxOK | wxCENTRE | wxICON_WARNING));
     }
 }

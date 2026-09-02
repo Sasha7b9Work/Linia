@@ -34,6 +34,6 @@ private:
     Library library;                            // Здесь находятся тесты, которые можно загрузить
 
     // Загружает главную библиотеку из json-файла
-    void LoadMainLibrary();
+    void LoadStandardLibrary();
 };
  
