@@ -129,7 +129,7 @@ void PanelTests::OnEventRightClickListItem(wxListEvent &event)
             switch (e.GetId())
             {
             case 1001:
-                wxMessageBox(wxString::Format("Действие 1 для элемента %d", index));
+                wxMessageBox(wxString::Format("Действие 1 для элемента %ld", index));
                 break;
             }
         });
