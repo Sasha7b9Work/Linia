@@ -9,16 +9,19 @@
 
 class FileJSON;
 class PanelCategory;
+class LibraryCategory;
 
 
 class Test
 {
 public:
 
+    LibraryCategory *lib;
     wxString name{ "" };
 };
 
 
+// Здесь тесты, относящиеся к данной категории
 class LibraryCategory
 {
 public:

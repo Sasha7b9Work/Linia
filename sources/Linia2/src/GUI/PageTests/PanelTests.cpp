@@ -20,7 +20,7 @@ PanelTests::PanelTests(wxWindow *parent, PanelTests *&global) : Panel(parent, wx
 
     BoxSizerVert *main_sizer = new BoxSizerVert();
 
-    listView = new wxListView(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_LIST | wxLC_SINGLE_SEL);
+    listView = new ListView(this);
 
     imageList = new wxImageList(16, 16, true, 0);
 
@@ -53,20 +53,16 @@ void PanelTests::ClearList()
 }
 
 
-void PanelTests::AddItem(const wxString &text, int iconIndex)
+void PanelTests::AddItem(const wxString &text, int iconIndex, const Test *test)
 {
     if (!listView)
     {
         return;
     }
 
-    listView->InsertItem(listView->GetItemCount(), text, iconIndex);
-}
+    long index = listView->InsertItem(listView->GetItemCount(), text, iconIndex);
 
-
-void PanelTests::AddItem(const wxString &text)
-{
-    AddItem(text, -1);
+    listView->SetUserData(index, (void *)test);
 }
 
 
@@ -99,9 +95,9 @@ void PanelTests::BuildListTests(std::vector<const LibraryCategory *> &libraries)
 
     for (auto lib : libraries)
     {
-        for (auto test : lib->tests)
+        for (const Test &test : lib->tests)
         {
-            AddItem(lib->UGO + " : " + test.name);
+            AddItem(lib->UGO + " : " + test.name, - 1, &test);
         }
     }
 }
@@ -109,19 +105,25 @@ void PanelTests::BuildListTests(std::vector<const LibraryCategory *> &libraries)
 
 void PanelTests::OnEventRightClickListItem(wxListEvent &event)
 {
-    long selected = listView->GetFirstSelected();
-    if (selected == wxNOT_FOUND)
+    ListView *list = (ListView *)event.GetEventObject();
+
+    if (list->GetFirstSelected() == wxNOT_FOUND)
     {
-        return;  // Нет выделенного элемента — меню не показываем
+        return;
     }
 
-    // Получаем индекс элемента, на котором кликнули
-    int index = event.GetIndex();
+    long index = event.GetIndex();
+
+    Test *test = (Test *)(list->GetUserData(index));
 
     wxMenu menu;
+
+    wxMenuItem *header = new wxMenuItem(&menu, wxID_ANY, test->name);
+    header->Enable(false);
+    menu.Append(header);
+
     menu.Append(1001, L("Активировать"));
 
-    // Привязываем обработчики
     menu.Bind(wxEVT_MENU, [this, index](wxCommandEvent &e)
         {
             switch (e.GetId())
@@ -132,7 +134,6 @@ void PanelTests::OnEventRightClickListItem(wxListEvent &event)
             }
         });
 
-    // Показываем меню в позиции курсора
     PopupMenu(&menu);
 }
 

@@ -1,9 +1,8 @@
 ﻿// 2026/04/29 15:55:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/Controls/Panel.h"
-#pragma warning(push, 0)
-    #include <wx/listbase.h>
-#pragma warning(pop)
+#include "GUI/Controls/ListView.h"
+#include "Settings/Tests/Library/Library.h"
 
 
 class LibraryCategory;
@@ -22,15 +21,14 @@ public:
 
     void BuildListTests(std::vector<const LibraryCategory *> &libraries);
 
-    void ClearList();                                   // Очистить весь список
-    void AddItem(const wxString &);                     // Добавить элемент без иконки
-    void AddItem(const wxString &, int iconIndex);      // Добавить элемент с иконкой
-    int AddIcon(const wxString &iconPath);              // Загрузить иконку в imageList
-    void SetItemIcon(long itemIndex, int iconIndex);    // Установить иконку существующему элементу
+    void ClearList();                                       // Очистить весь список
+    void AddItem(const wxString &, int iconIndex, const Test *);  // Добавить элемент с иконкой
+    int AddIcon(const wxString &iconPath);                  // Загрузить иконку в imageList
+    void SetItemIcon(long itemIndex, int iconIndex);        // Установить иконку существующему элементу
 
 private:
 
-    wxListView *listView = nullptr;
+    ListView    *listView = nullptr;
     wxImageList *imageList = nullptr;
 
     void OnEventRightClickListItem(wxListEvent &);
