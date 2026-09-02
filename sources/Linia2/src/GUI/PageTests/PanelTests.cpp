@@ -119,8 +119,8 @@ void PanelTests::OnEventRightClickListItem(wxListEvent &event)
     wxMenu menu;
 
     wxMenuItem *header = new wxMenuItem(&menu, wxID_ANY, test->lib->UGO + " : " + test->name);
-//    header->Enable(false);
     menu.Append(header);
+    header->Enable(false);
 
     menu.Append(1001, L("Активировать"));
 
