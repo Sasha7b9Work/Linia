@@ -19,16 +19,11 @@ PanelCategory::PanelCategory(wxWindow *parent, PanelCategory *&global) : Scrolle
 
     BoxSizerVert *main_sizer = new BoxSizerVert();
 
-//    for (int i = 0; i < 30; i++)
-//    {
-//        CheckBox *check_box = new CheckBox(this, wxString::Format("Category %d", i + 1));
-//
-//        main_sizer->Add(check_box);
-//
-//        categories.push_back({ check_box });
-//    }
-//
-//    main_sizer->AddStretchSpacer();
+    chbStandardTests = new CheckBox(this, L("Стандартные тесты"));
+    chbUserTests = new CheckBox(this, L("Пользовательские тесты"));
+
+    main_sizer->Add(chbStandardTests);
+    main_sizer->Add(chbUserTests);
 
     ScrolledPanel::SetSizer(main_sizer);
 
@@ -43,6 +38,7 @@ PanelCategory::PanelCategory(wxWindow *parent, PanelCategory *&global) : Scrolle
 
 void PanelCategory::UpdateState(const Library &lib)
 {
+    return;
     wxSizer *sizer = GetSizer();
 
     for (size_t i = 0; i < categories.size(); i++)

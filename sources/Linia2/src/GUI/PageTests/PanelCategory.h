@@ -27,6 +27,10 @@ private:
 
     std::vector<Category> categories;
 
+    CheckBox *chbStandardTests = nullptr;
+    CheckBox *chbUserTests = nullptr;
+
+
     // Построить список тестов для категорий выбранных чекбоксами
     void BuildListTests();
 };
