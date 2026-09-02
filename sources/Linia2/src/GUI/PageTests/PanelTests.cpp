@@ -124,7 +124,7 @@ void PanelTests::OnEventRightClickListItem(wxListEvent &event)
     menu.Append(header);
     header->Enable(false);
 
-    menu.Append(1001, L("Активировать"));
+    menu.Append(1001, L("Применить"));
 
     menu.Bind(wxEVT_MENU, [this, test](wxCommandEvent &e)
         {
