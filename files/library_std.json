@@ -12,10 +12,30 @@
     
     "BJT" : {
         "name" : "Биполярный транзистор",
-        "DC Diode Fwd" : {
-            "name" : "База-Коллектор прямое",
+        "IcVC" : {
+            "name" : "Выходная характеристика",
             "settings" : {
-                "IntegTime" : [ "1", "2", "3" ]
+                "Param_in" : "Uc",
+                "Param_out" : "Ic",
+                "Ib_start" : "1uA",
+                "Ib_step" : "1uA",
+                "Ib_num_steps" : 10,
+                "Uc_start" : "1V",
+                "Uc_stop" : "10V",
+                "Ic_limit" : "75mA"
+            }
+        },
+        "IcVC" : {
+            "name" : "Выходная характеристика",
+            "settings" : {
+                "Param_in" : "Uc",
+                "Param_out" : "Ic",
+                "Ib_start" : "1uA",
+                "Ib_step" : "1uA",
+                "Ib_num_steps" : 10,
+                "Uc_start" : "1V",
+                "Uc_stop" : "10V",
+                "Ic_limit" : "75mA"
             }
         }
     },

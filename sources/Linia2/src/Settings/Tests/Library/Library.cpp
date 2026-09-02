@@ -65,6 +65,8 @@ bool Library::ParseCategory(LibraryCategory *library, const wxString &name_categ
         {
             Test *test = new Test{ library };
 
+            test->UGO = wxString::FromUTF8(it_value->name.GetString());
+
             if (ParseTest(test, it_value->value))
             {
                 library->tests.push_back(test);

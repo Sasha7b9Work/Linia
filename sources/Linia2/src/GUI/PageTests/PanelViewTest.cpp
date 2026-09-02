@@ -52,11 +52,11 @@ void PanelViewTest::DrawElement(wxPaintDC &dc)
 {
     if (test->lib->UGO == "BJT")
     {
-        DrawBJT(dc, "pnp", GetCenter(), 100);
+        DrawBJT(dc, "npn", GetCenter(), 100);
     }
     else if (test->lib->UGO == "BJTS")
     {
-        DrawBJTS(dc, "pnp", GetCenter(), 100);
+        DrawBJTS(dc, "npn", GetCenter(), 100);
     }
 }
 

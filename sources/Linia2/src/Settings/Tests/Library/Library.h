@@ -17,6 +17,7 @@ class Test
 public:
 
     LibraryCategory *lib;
+    wxString UGO{ "" };
     wxString name{ "" };
 };
 
