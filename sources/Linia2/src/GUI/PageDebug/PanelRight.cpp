@@ -27,6 +27,8 @@ PanelRight::PanelRight(wxWindow *parent, PanelRight *&global) :
 
     wxSize size_button{ 75, BUTTON_HEIGHT };
 
+    SetMinSize({ 250, -1 });
+
     {
         btnStart = new Button{ this, "Старт", size_button };
 
@@ -64,7 +66,7 @@ PanelRight::PanelRight(wxWindow *parent, PanelRight *&global) :
 
         for (int i = 0; i < 5; i++)
         {
-            data[i] = new ControlDataFPGA(this, new wxStaticText(this, wxID_ANY, "value", { 0, 0 }, { 100, 0 }));
+            data[i] = new ControlDataFPGA(this, new wxStaticText(this, wxID_ANY, "", { 0, 0 }, { 100, 0 }));
 
             ver_sizer->Add(data[i], 1, wxEXPAND | wxALL, 5);
         }
