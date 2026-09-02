@@ -54,6 +54,13 @@ PageTests::PageTests(Notebook *board, PageTests *&global) :
 }
 
 
+PageTests::~PageTests()
+{
+    vert_splitter->GetSashPosition();
+    hor_splitter->GetSashPosition();
+}
+
+
 void PageTests::LoadMainLibrary()
 {
     FileJSON file;

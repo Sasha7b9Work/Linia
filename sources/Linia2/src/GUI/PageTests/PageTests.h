@@ -20,6 +20,8 @@ public:
 
     PageTests(Notebook *, PageTests *&);
 
+    ~PageTests();
+
 private:
 
     Splitter *hor_splitter = nullptr;           // Этот сплиттер в горизонтальной плоскости

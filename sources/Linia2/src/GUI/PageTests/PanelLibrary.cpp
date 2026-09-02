@@ -27,11 +27,6 @@ PanelLibrary::PanelLibrary(wxWindow *parent, PanelLibrary *&global) : Panel(pare
     main_sizer->Add(listView, 1, wxEXPAND | wxALL, 0);
 
     Panel::SetSizer(main_sizer);
-
-    for (int i = 0; i < 10; i++)
-    {
-        AddItem(wxString::Format("Test %d", i));
-    }
 }
 
 
