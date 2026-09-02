@@ -31,7 +31,7 @@ PanelTests::PanelTests(wxWindow *parent, PanelTests *&global) : Panel(parent, wx
     Panel::SetSizer(main_sizer);
 
     listView->Bind(wxEVT_LIST_ITEM_RIGHT_CLICK, &PanelTests::OnEventRightClickListItem, this);
-    listView->Bind(wxEVT_LEFT_DOWN, &PanelTests::OnEventLeftClickListItem, this);
+//    listView->Bind(wxEVT_LEFT_DOWN, &PanelTests::OnEventLeftClickListItem, this);
 }
 
 
