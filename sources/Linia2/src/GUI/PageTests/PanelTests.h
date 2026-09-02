@@ -1,6 +1,9 @@
 ﻿// 2026/04/29 15:55:25 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/Controls/Panel.h"
+#pragma warning(push, 0)
+    #include <wx/listbase.h>
+#pragma warning(pop)
 
 
 class LibraryCategory;
@@ -29,4 +32,6 @@ private:
 
     wxListView *listView = nullptr;
     wxImageList *imageList = nullptr;
+
+    void OnEventRightClickListItem(wxListEvent &);
 };

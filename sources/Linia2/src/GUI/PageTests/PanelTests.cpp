@@ -4,8 +4,10 @@
 #include "GUI/Controls/Sizers.h"
 #include "Settings/Tests/Library/Library.h"
 #pragma warning(push, 0)
-#include <wx/checkbox.h>
-#include <wx/listctrl.h>
+    #include <wx/checkbox.h>
+    #include <wx/listctrl.h>
+    #include <wx/menu.h>
+    #include <wx/msgdlg.h>
 #pragma warning(pop)
 
 
@@ -27,6 +29,8 @@ PanelTests::PanelTests(wxWindow *parent, PanelTests *&global) : Panel(parent, wx
     main_sizer->Add(listView, 1, wxEXPAND | wxALL, 0);
 
     Panel::SetSizer(main_sizer);
+
+    listView->Bind(wxEVT_LIST_ITEM_RIGHT_CLICK, &PanelTests::OnEventRightClickListItem, this);
 }
 
 
@@ -50,7 +54,10 @@ void PanelTests::ClearList()
 
 void PanelTests::AddItem(const wxString &text, int iconIndex)
 {
-    if (!listView) return;
+    if (!listView)
+    {
+        return;
+    }
 
     listView->InsertItem(listView->GetItemCount(), text, iconIndex);
 }
@@ -96,4 +103,28 @@ void PanelTests::BuildListTests(std::vector<const LibraryCategory *> &libraries)
             AddItem(lib->UGO + " : " + test.name);
         }
     }
+}
+
+
+void PanelTests::OnEventRightClickListItem(wxListEvent &event)
+{
+    // Получаем индекс элемента, на котором кликнули
+    int index = event.GetIndex();
+
+    wxMenu menu;
+    menu.Append(1001, L("Активировать"));
+
+    // Привязываем обработчики
+    menu.Bind(wxEVT_MENU, [this, index](wxCommandEvent &e)
+        {
+            switch (e.GetId())
+            {
+            case 1001:
+                wxMessageBox(wxString::Format("Действие 1 для элемента %d", index));
+                break;
+            }
+        });
+
+    // Показываем меню в позиции курсора
+    PopupMenu(&menu);
 }
