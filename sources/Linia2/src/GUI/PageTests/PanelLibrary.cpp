@@ -90,15 +90,15 @@ void PanelLibrary::SetItemIcon(long itemIndex, int iconIndex)
 }
 
 
-void PanelLibrary::BuildListTests(std::vector<const LibraryCategory *> &categories)
+void PanelLibrary::BuildListTests(std::vector<const LibraryCategory *> &libraries)
 {
     ClearList();
 
-    for (auto cat : categories)
+    for (auto lib : libraries)
     {
-        for (auto test : cat->tests)
+        for (auto test : lib->tests)
         {
-            AddItem(test._name);
+            AddItem(lib->UGO + " : " + test._name);
         }
     }
 }

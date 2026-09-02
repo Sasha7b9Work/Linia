@@ -15,7 +15,7 @@ public:
     PanelLibrary(wxWindow *, PanelLibrary *&);
     ~PanelLibrary();
 
-    void BuildListTests(std::vector<const LibraryCategory *> &categories);
+    void BuildListTests(std::vector<const LibraryCategory *> &libraries);
 
     void ClearList();                                   // Очистить весь список
     void AddItem(const wxString &);                     // Добавить элемент без иконки

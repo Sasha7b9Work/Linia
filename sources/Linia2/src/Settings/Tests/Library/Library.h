@@ -24,6 +24,7 @@ class LibraryCategory
 public:
 
     wxString name{ "" };
+    wxString UGO{ "" };
     std::vector<Test> tests;
 };
 
@@ -40,9 +41,11 @@ private:
 
     FileJSON *file;
 
-    bool ParseCategory(LibraryCategory &, pchar name, const rapidjson::Value &);
+    // Заполняет library тестами из 
+    // name_category - имя категория - BJT (транзистор), etc
+    bool ParseCategory(LibraryCategory &library, const wxString &name_category, const rapidjson::Value &value);
 
-    bool ParseNameCategory(LibraryCategory &, pchar name_cat);
+    bool ParseNameCategory(LibraryCategory &, const wxString &name_category);
 
     bool ParseTest(LibraryCategory &, const rapidjson::Value &);
 };

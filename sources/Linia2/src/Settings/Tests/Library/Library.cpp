@@ -46,22 +46,24 @@ bool Library::Read(FileJSON *_file)
 }
 
 
-bool Library::ParseCategory(LibraryCategory &category, pchar name, const rapidjson::Value &value)
+bool Library::ParseCategory(LibraryCategory &library, const wxString &name_category, const rapidjson::Value &value)
 {
     for (auto it_value = value.MemberBegin(); it_value != value.MemberEnd(); ++it_value)
     {
         if (it_value->value.IsString())
         {
-            if (!ParseNameCategory(category, name))
+            library.UGO = name_category;
+
+            if (!ParseNameCategory(library, name_category))
             {
-                LOG_ERROR("Can not parse category %s", name);
+                LOG_ERROR("Can not parse category %s", name_category.c_str().AsChar());
 
                 return false;
             }
         }
         else if (it_value->value.IsObject())
         {
-            if (!ParseTest(category, it_value->value))
+            if (!ParseTest(library, it_value->value))
             {
                 return false;
             }
@@ -72,11 +74,11 @@ bool Library::ParseCategory(LibraryCategory &category, pchar name, const rapidjs
 }
 
 
-bool Library::ParseNameCategory(LibraryCategory &category, pchar name_cat)
+bool Library::ParseNameCategory(LibraryCategory &library, const wxString &name_category)
 {
-    category.name = file->GetStringValue(name_cat, "name");
+    library.name = file->GetStringValue(name_category, "name");
 
-    return category.name[0] != '\0';
+    return library.name.Length() != 0;
 }
 
 
