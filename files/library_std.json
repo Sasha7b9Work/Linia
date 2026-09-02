@@ -12,7 +12,7 @@
     
     "BJT" : {
         "name" : "Биполярный транзистор",
-        "IcVC" : {
+        "IcVc" : {
             "name" : "Выходная характеристика",
             "settings" : {
                 "Param_in" : "Uc",
@@ -25,19 +25,34 @@
                 "Ic_limit" : "75mA"
             }
         },
-        "IcVC" : {
-            "name" : "Выходная характеристика",
+        "Vce for" : {
+            "name" : "Пробивное напряжение коллектор-эмиттер в прямом включении",
             "settings" : {
                 "Param_in" : "Uc",
                 "Param_out" : "Ic",
-                "Ib_start" : "1uA",
-                "Ib_step" : "1uA",
+                "Ib_start" : "0",
                 "Ib_num_steps" : 10,
-                "Uc_start" : "1V",
-                "Uc_stop" : "10V",
-                "Ic_limit" : "75mA"
+                "Uc_start" : "0V",
+                "Uc_stop" : "50V",
+                "Ic_limit" : "30mA"
+            }
+        },
+        "Vce rev" : {
+            "name" : "Пробивное напряжение коллектор-эмиттер в прямом включении",
+            "settings" : {
+                "Param_in" : "Uc",
+                "Param_out" : "Ic",
+                "Ib_start" : "0",
+                "Ib_num_steps" : 10,
+                "Uc_start" : "0V",
+                "Uc_stop" : "-10V",
+                "Ic_limit" : "30mA",
+                "PNP" : {
+                    "Uc_stop" : "50V"
+                }
             }
         }
+
     },
 
     "BJTS" : {
