@@ -38,7 +38,7 @@ NotebookDebug::NotebookDebug(wxWindow *parent, NotebookDebug *&global) :
 
     Bind(wxEVT_SET_CURSOR, &NotebookDebug::OnEventSetCursor, this);
 
-    SetMaxSize({ 700, -1 });
+    SetMaxSize({ 750, -1 });
 }
 
 
