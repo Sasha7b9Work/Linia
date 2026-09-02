@@ -2,6 +2,9 @@
 #pragma once
 #include "GUI/Controls/Panel.h"
 #include "Settings/Tests/Library/Library.h"
+#pragma warning(push, 0)
+    #include <wx/dcclient.h>
+#pragma warning(pop)
 
 
 class PanelViewTest : public Panel
@@ -17,4 +20,9 @@ private:
     Test *test = nullptr;
 
     void OnEventPaint(wxPaintEvent &);
+
+    // Нарисовать испытуемый элемент
+    void DrawElement(wxPaintDC &);
+
+    wxPoint GetCenter() const;
 };
