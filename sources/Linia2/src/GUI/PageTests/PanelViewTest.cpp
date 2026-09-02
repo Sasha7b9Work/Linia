@@ -26,8 +26,6 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 {
     if (test)
     {
-        wxColor color_back = GetBackgroundColour();
-
         wxPaintDC dc(this);
 
         dc.SetBrush(*wxTRANSPARENT_BRUSH);
