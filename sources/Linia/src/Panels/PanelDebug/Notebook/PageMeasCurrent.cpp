@@ -19,11 +19,11 @@ PageMeasCurrent::PageMeasCurrent(wxNotebook *parent) :
 
     std::vector<StructDescription> desc5;
 
-    desc5.emplace_back(StructDescription{ 0, 3, "предел", "Установка предела 200нА/20мкА/2мА/200мА/20А/200А", { true }, });
-    desc5.emplace_back(StructDescription{ 3, 2, "к1", "Установка коэффициента 1/2/4/8", { true },});
-    desc5.emplace_back(StructDescription{ 5, 1, "к2", "Установка коэффициента 1/10" });
-    desc5.emplace_back(StructDescription{ 6, 1, "ё", "Дополнительная ёмкость в режиме DC" });
-    desc5.emplace_back(StructDescription{ 7, 1, "б", "Блокировка сигнала Limit I" });
+    desc5.emplace_back(StructDescription{ 0, 3, "предел", "Установка предела 200нА/20мкА/2мА/200мА/20А/200А", { true } });
+    desc5.emplace_back(StructDescription{ 3, 2, "к1", "Установка коэффициента 1/2/4/8", { true } });
+    desc5.emplace_back(StructDescription{ 5, 1, "к2", "Установка коэффициента 1/10", { false }});
+    desc5.emplace_back(StructDescription{ 6, 1, "ё", "Дополнительная ёмкость в режиме DC", { false } });
+    desc5.emplace_back(StructDescription{ 7, 1, "б", "Блокировка сигнала Limit I", {false} });
 
     reg5->SetDescriptionBits(0, desc5);
 
