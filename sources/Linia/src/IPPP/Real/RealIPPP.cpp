@@ -115,13 +115,3 @@ bool RealIPPP::ReadData(int data[5][MAX_NUMBER_POINTS])
 
     return result;
 }
-
-
-void RealIPPP::Pause()
-{
-    volatile int i = 0;
-
-    for (i = 0; i < 1000; i += 1)
-    {
-    }
-}
