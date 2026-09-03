@@ -152,7 +152,7 @@ void PanelViewTest::CreateControls()
 
         if (!bcModeControlBase)
         {
-            bcModeControlBase = new ButtonsCombo(this, L("Режим управления"), 220, titles, tooltips, 1, "bcModeControlBase", ButtonsCombo::Type::Text);
+            bcModeControlBase = new ButtonsCombo(this, L("Режим управления"), 250, titles, tooltips, 1, "bcModeControlBase", ButtonsCombo::Type::Text);
 
             Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxModeControlBase, this);
         }
