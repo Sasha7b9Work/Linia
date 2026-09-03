@@ -205,6 +205,8 @@ void PanelViewTest::CreateControls()
     int y_base = c.y - 40;
     int dy_base = 50;
 
+    const int width = 200;
+
     {
         wxArrayString titles;
         titles.push_back(L("Током"));
@@ -218,7 +220,7 @@ void PanelViewTest::CreateControls()
 
         if (!bcBaseModeControl)
         {
-            bcBaseModeControl = new ButtonsCombo(this, L("Режим управления"), 250, titles, tooltips, 1, "bcBaseModeControl", ButtonsCombo::Type::Text);
+            bcBaseModeControl = new ButtonsCombo(this, L("Управление"), width, titles, tooltips, 1, "bcBaseModeControl", ButtonsCombo::Type::Text);
 
             bcBaseModeControl->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseModeControl, this);
         }
@@ -246,7 +248,7 @@ void PanelViewTest::CreateControls()
 
         if (!bcBaseStartValue)
         {
-            bcBaseStartValue = new ButtonsComboRange(this, L("Начальное значение"), 250, titles, tooltips, "bcBaseStartValue");
+            bcBaseStartValue = new ButtonsComboRange(this, L("Начальное значение"), width, titles, tooltips, "bcBaseStartValue");
 
             bcBaseStartValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseStartValue, this);
         }
@@ -276,7 +278,7 @@ void PanelViewTest::CreateControls()
 
         if (!bcBaseDeltaValue)
         {
-            bcBaseDeltaValue = new ButtonsComboRange(this, L("Шаг"), 250, titles, tooltips, "bcBaseDeltaValue");
+            bcBaseDeltaValue = new ButtonsComboRange(this, L("Шаг"), width, titles, tooltips, "bcBaseDeltaValue");
 
             bcBaseDeltaValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseDeltaValue, this);
         }
@@ -308,7 +310,7 @@ void PanelViewTest::CreateControls()
 
         if (!bcBaseNumMeasures)
         {
-            bcBaseNumMeasures = new ButtonsCombo(this, L("Количество измерений"), 250, titles, tooltips, 3, "bcBaseNumMeasures", ButtonsCombo::Type::Text);
+            bcBaseNumMeasures = new ButtonsCombo(this, L("Кол-во измерений"), width, titles, tooltips, 3, "bcBaseNumMeasures", ButtonsCombo::Type::Text);
 
             bcBaseNumMeasures->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseNumMeasures, this);
         }
