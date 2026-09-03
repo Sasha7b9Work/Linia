@@ -208,7 +208,7 @@ void PanelViewTest::CreateControls()
     int dx_substrate = 320;
     int dy_substrate = 250;
 
-    const int width = 150;
+    int width = 150;
 
     {
         if (!bcModeScan)
@@ -572,7 +572,7 @@ void PanelViewTest::CreateControls()
             {
                 bcBaseRangeLimit = new ButtonsComboRange(this, L("Ограничение"), width, titles, tooltips, "bcBaseRangeLimit");
 
-                bcBaseRangeLimit->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEVentComboBoxBaseRangeLimit, this);
+                bcBaseRangeLimit->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseRangeLimit, this);
             }
             else
             {
@@ -602,7 +602,7 @@ void PanelViewTest::CreateControls()
             {
                 bcSubstrateRangeLimit = new ButtonsComboRange(this, L("Ограничение"), width, titles, tooltips, "bcSubstrateRangeLimit");
 
-                bcSubstrateRangeLimit->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEVentComboBoxBaseRangeLimit, this);
+                bcSubstrateRangeLimit->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseRangeLimit, this);
             }
             else
             {
@@ -610,6 +610,30 @@ void PanelViewTest::CreateControls()
             }
 
             bcSubstrateRangeLimit->SetPosition({ x_base + dx_substrate, y_base + dy_substrate });
+        }
+    }
+
+    int x = 400;
+    int y = 50;
+
+    width = 200;
+
+    {
+        if (!bcCollectorModeSource)
+        {
+            wxArrayString titles;
+            titles.push_back(L("Высокое напряжение"));
+            titles.push_back(L("Большой ток"));
+
+            wxArrayString tooltips;
+            tooltips.push_back(L("Uc <= 3000 В, Ic <= 1 А"));
+            tooltips.push_back(L("Uc <= 50 В, Ic <= 50 А"));
+
+            bcCollectorModeSource = new ButtonsCombo(this, L("Режим"), width, titles, tooltips, 1, "bcCollectorModeSource", ButtonsCombo::Type::Text);
+
+            bcCollectorModeSource->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxCollectorModeSource, this);
+
+            bcCollectorModeSource->SetPosition({ x, y });
         }
     }
 }
@@ -657,7 +681,13 @@ void PanelViewTest::OnEventComboBoxBaseRangeMeasure(wxCommandEvent &)
 }
 
 
-void PanelViewTest::OnEVentComboBoxBaseRangeLimit(wxCommandEvent &)
+void PanelViewTest::OnEventComboBoxBaseRangeLimit(wxCommandEvent &)
+{
+
+}
+
+
+void PanelViewTest::OnEventComboBoxCollectorModeSource(wxCommandEvent &)
 {
 
 }

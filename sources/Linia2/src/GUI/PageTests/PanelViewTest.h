@@ -39,6 +39,8 @@ private:
     ButtonsComboRange *bcSubstrateRangeMeasure = nullptr;
     ButtonsComboRange *bcSubstrateRangeLimit = nullptr;
 
+    ButtonsCombo *bcCollectorModeSource = nullptr;      // Режим работы источника в коллекторе - высокое напряжение или большой ток
+
     void OnEventPaint(wxPaintEvent &);
 
     void OnEventComboBoxModeScan(wxCommandEvent &);
@@ -48,7 +50,8 @@ private:
     void OnEventComboBoxBaseDeltaValue(wxCommandEvent &);
     void OnEventComboBoxBaseNumMeasures(wxCommandEvent &);
     void OnEventComboBoxBaseRangeMeasure(wxCommandEvent &);
-    void OnEVentComboBoxBaseRangeLimit(wxCommandEvent &);
+    void OnEventComboBoxBaseRangeLimit(wxCommandEvent &);
+    void OnEventComboBoxCollectorModeSource(wxCommandEvent &);
 
     // Нарисовать испытуемый элемент
     void DrawElement(wxPaintDC &);
