@@ -206,7 +206,7 @@ void PanelViewTest::CreateControls()
     int dy_base = 50;
 
     int dx_substrate = 320;
-    int dy_substrate = 150;
+    int dy_substrate = 250;
 
     const int width = 200;
 
