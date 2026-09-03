@@ -235,7 +235,7 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, int width,
 
     title = (type == Type::Text) ? _title : wxString();
 
-    SetChoices(_labels, _tooltips);
+    SetChoices(_labels, _tooltips, __FILE__, __LINE__);
 
     SetCurrentSelection(0, __FILE__, __LINE__);
 
@@ -260,16 +260,14 @@ void ButtonsCombo::SetCurrentSelection(int choice, pchar file, int line)
         label += title + " : ";
     }
 
-    LOG_WRITE("label = %s from %s:%d", label.c_str().AsChar(), file, line);
-
     uint index = (uint)current_choice;
 
     SetMyToolTip((tooltips[index] != labels[index]) ?     // Предполагается, что подсказка устанавливается только в том случае, если она не совпадает с надписью
         (tooltips[index]) : wxString());
 
-    LOG_WRITE("%s %s", label.c_str().AsChar(), labels[index].c_str().AsChar());
+    LOG_WRITE("from %s:%d", file, line);
 
-    SetExtendedLabel(label, labels[index]);
+    SetExtendedLabel(label, labels[index], __FILE__, __LINE__);
 
     if(need_event)
     {
@@ -323,7 +321,7 @@ void ButtonsCombo::Unpack()
 }
 
 
-void ButtonsCombo::SetChoices(const wxArrayString &choices, const wxArrayString &_tooltips)
+void ButtonsCombo::SetChoices(const wxArrayString &choices, const wxArrayString &_tooltips, pchar file, int line)
 {
     labels = choices;
     tooltips = _tooltips;
@@ -339,6 +337,8 @@ void ButtonsCombo::SetChoices(const wxArrayString &choices, const wxArrayString 
             num_empties = 2;
         }
     }
+
+    LOG_WRITE("%s:%d", file, line);
 
     SetCurrentSelection(GetCurrentSelection() >= NumChoices() ? 0 : GetCurrentSelection(), __FILE__, __LINE__);
 }
@@ -377,10 +377,11 @@ void ButtonsCombo::SetTitle(const wxString &_title)
 }
 
 
-void ButtonsCombo::SetExtendedLabel(const wxString &start, const wxString &end)
+void ButtonsCombo::SetExtendedLabel(const wxString &start, const wxString &end, pchar file, int line)
 {
     if (start.IsEmpty())
     {
+
         DrawingButton::SetLabel(end);
     }
     else
@@ -389,7 +390,9 @@ void ButtonsCombo::SetExtendedLabel(const wxString &start, const wxString &end)
 
         while (true)
         {
-            SetExtendedLabel(start, num_spaces, end);
+            LOG_WRITE("from %s:%d", file, line);
+
+            SetExtendedLabel(start, num_spaces, end, __FILE__, __LINE__);
 
             wxSize size = GetTextExtent(DrawingButton::GetLabel());
 
@@ -406,18 +409,19 @@ void ButtonsCombo::SetExtendedLabel(const wxString &start, const wxString &end)
             num_spaces++;
         }
 
-        SetExtendedLabel(start, num_spaces, end);
+        SetExtendedLabel(start, num_spaces, end, __FILE__, __LINE__);
     }
 }
 
 
-void ButtonsCombo::SetExtendedLabel(const wxString &start, int num_spaces, const wxString &end)
+void ButtonsCombo::SetExtendedLabel(const wxString &start, int num_spaces, const wxString &end, pchar file, int line)
 {
-    LOG_WRITE("%s %d %s", start.c_str().AsChar(), num_spaces, end.c_str().AsChar());
-
     wxString label{ start };
     label.Append(' ', (size_t)num_spaces);
     label.Append(end);
+
+    LOG_WRITE("%s from %s:%d", label.c_str().AsChar(), file, line);
+
     SetLabel(label);
 }
 
@@ -428,5 +432,5 @@ ButtonsComboRange::ButtonsComboRange(wxWindow *parent, const wxString &title, in
 {
     ButtonsCombo::insert_empty = true;
 
-    ButtonsCombo::SetChoices(labels, tooltips);
+    ButtonsCombo::SetChoices(labels, tooltips, __FILE__, __LINE__);
 }

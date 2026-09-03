@@ -10,8 +10,10 @@ CommandsCombo::CommandsCombo(wxWindow *parent, const wxString &title, int width,
 }
 
 
-void CommandsCombo::SetExtendedLabel(const wxString &, const wxString &)
+void CommandsCombo::SetExtendedLabel(const wxString &, const wxString &, pchar file, int line)
 {
+    LOG_WRITE("from %s:%d", file, line);
+
     SetLabel(GetMyToolTip());
 }
 

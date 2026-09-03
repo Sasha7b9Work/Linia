@@ -46,7 +46,7 @@ public:
 
     void SetLastSelection();
 
-    void SetChoices(const wxArrayString &labels, const wxArrayString &tooltips);
+    void SetChoices(const wxArrayString &labels, const wxArrayString &tooltips, pchar, int);
     const wxArrayString &GetChoices() const;
 
     void SetTitle(const wxString &);
@@ -68,8 +68,8 @@ protected:
     wxString title;
 
     // Между строками будут пробелы таким образом, что строки будут по краям кнопки
-    virtual void SetExtendedLabel(const wxString &, const wxString &);
-    void SetExtendedLabel(const wxString &, int num_spaces, const wxString &);
+    virtual void SetExtendedLabel(const wxString &, const wxString &, pchar, int);
+    void SetExtendedLabel(const wxString &, int num_spaces, const wxString &, pchar, int);
 
 private:
     wxColour colorBackground;

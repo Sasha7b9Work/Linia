@@ -141,6 +141,15 @@ wxPoint PanelViewTest::GetCenter() const
 
 void PanelViewTest::CreateControls()
 {
+    static Test *prev_test = nullptr;
+
+    if (test == prev_test)
+    {
+        return;
+    }
+
+    prev_test = test;
+
     {
         wxArrayString titles;
         titles.push_back(L("Током"));
@@ -158,7 +167,7 @@ void PanelViewTest::CreateControls()
         }
         else
         {
-            bcModeControlBase->SetChoices(titles, tooltips);
+            bcModeControlBase->SetChoices(titles, tooltips, __FILE__, __LINE__);
         }
 
         wxPoint c = GetCenter();
