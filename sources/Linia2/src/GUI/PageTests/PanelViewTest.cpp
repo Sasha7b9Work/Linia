@@ -328,7 +328,7 @@ void PanelViewTest::CreateControls()
         {
             bcBaseRangeMeasure = new ButtonsComboRange(this, L("Диапазон"), 150, titles, tooltips, "bcBaseRangeMeasure");
 
-            bcBaseRangeMeasure->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseNumMeasures, this);
+            bcBaseRangeMeasure->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseRangeMeasure, this);
         }
         else
         {
@@ -336,6 +336,38 @@ void PanelViewTest::CreateControls()
         }
 
         bcBaseRangeMeasure->SetPosition({ x_base, y_base });
+    }
+
+    y_base += dy_base;
+
+    {
+        wxArrayString titles;
+        titles.push_back("50 мВ");
+        titles.push_back("100 мВ");
+        titles.push_back("200 мВ");
+        titles.push_back("500 мВ");
+        titles.push_back("1 В");
+        titles.push_back("2 В");
+        titles.push_back("5 В");
+        titles.push_back("10 В");
+        titles.push_back("20 В");
+        titles.push_back("50 В");
+
+        wxArrayString tooltips;
+        tooltips.push_back(L(""));
+
+        if (!bcBaseRangeLimit)
+        {
+            bcBaseRangeLimit = new ButtonsComboRange(this, L("Ограничение"), 150, titles, tooltips, "bcBaseRangeLimit");
+
+            bcBaseRangeLimit->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEVentComboBoxBaseRangeLimit, this);
+        }
+        else
+        {
+            bcBaseRangeLimit->SetChoices(titles, tooltips);
+        }
+
+        bcBaseRangeLimit->SetPosition({ x_base, y_base });
     }
 }
 
@@ -364,7 +396,13 @@ void PanelViewTest::OnEventComboBoxBaseNumMeasures(wxCommandEvent &)
 }
 
 
-void PanelViewTest::OnEventComboBoxRangeMeasure(wxCommandEvent &)
+void PanelViewTest::OnEventComboBoxBaseRangeMeasure(wxCommandEvent &)
+{
+
+}
+
+
+void PanelViewTest::OnEVentComboBoxBaseRangeLimit(wxCommandEvent &)
 {
 
 }
