@@ -498,38 +498,102 @@ void PanelViewTest::CreateControls()
 
             bcBaseRangeMeasure->SetPosition({ x_base, y_base });
         }
+
+        dx_substrate -= 170;
+
+        {
+            wxArrayString titles;
+            titles.push_back("50 мВ");
+            titles.push_back("100 мВ");
+            titles.push_back("200 мВ");
+            titles.push_back("500 мВ");
+            titles.push_back("1 В");
+            titles.push_back("2 В");
+            titles.push_back("5 В");
+            titles.push_back("10 В");
+            titles.push_back("20 В");
+            titles.push_back("50 В");
+
+            wxArrayString tooltips;
+            tooltips.push_back(L("Диапазон измерения"));
+
+            if (!bcSubstrateRangeMeasure)
+            {
+                bcSubstrateRangeMeasure = new ButtonsComboRange(this, L("Диапазон"), 150, titles, tooltips, "bcSubstrateRangeMeasure");
+
+                bcSubstrateRangeMeasure->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseRangeMeasure, this);
+            }
+            else
+            {
+                bcSubstrateRangeMeasure->SetChoices(titles, tooltips);
+            }
+
+            bcSubstrateRangeMeasure->SetPosition({ x_base + dx_substrate, y_base });
+        }
     }
 
     y_base += dy_base;
 
     {
-        wxArrayString titles;
-        titles.push_back("50 мВ");
-        titles.push_back("100 мВ");
-        titles.push_back("200 мВ");
-        titles.push_back("500 мВ");
-        titles.push_back("1 В");
-        titles.push_back("2 В");
-        titles.push_back("5 В");
-        titles.push_back("10 В");
-        titles.push_back("20 В");
-        titles.push_back("50 В");
-
-        wxArrayString tooltips;
-        tooltips.push_back(L(""));
-
-        if (!bcBaseRangeLimit)
         {
-            bcBaseRangeLimit = new ButtonsComboRange(this, L("Ограничение"), 150, titles, tooltips, "bcBaseRangeLimit");
+            wxArrayString titles;
+            titles.push_back("50 мВ");
+            titles.push_back("100 мВ");
+            titles.push_back("200 мВ");
+            titles.push_back("500 мВ");
+            titles.push_back("1 В");
+            titles.push_back("2 В");
+            titles.push_back("5 В");
+            titles.push_back("10 В");
+            titles.push_back("20 В");
+            titles.push_back("50 В");
 
-            bcBaseRangeLimit->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEVentComboBoxBaseRangeLimit, this);
+            wxArrayString tooltips;
+            tooltips.push_back(L(""));
+
+            if (!bcBaseRangeLimit)
+            {
+                bcBaseRangeLimit = new ButtonsComboRange(this, L("Ограничение"), 150, titles, tooltips, "bcBaseRangeLimit");
+
+                bcBaseRangeLimit->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEVentComboBoxBaseRangeLimit, this);
+            }
+            else
+            {
+                bcBaseRangeLimit->SetChoices(titles, tooltips);
+            }
+
+            bcBaseRangeLimit->SetPosition({ x_base, y_base });
         }
-        else
+
         {
-            bcBaseRangeLimit->SetChoices(titles, tooltips);
-        }
+            wxArrayString titles;
+            titles.push_back("50 мВ");
+            titles.push_back("100 мВ");
+            titles.push_back("200 мВ");
+            titles.push_back("500 мВ");
+            titles.push_back("1 В");
+            titles.push_back("2 В");
+            titles.push_back("5 В");
+            titles.push_back("10 В");
+            titles.push_back("20 В");
+            titles.push_back("50 В");
 
-        bcBaseRangeLimit->SetPosition({ x_base, y_base });
+            wxArrayString tooltips;
+            tooltips.push_back(L(""));
+
+            if (!bcSubstrateRangeLimit)
+            {
+                bcSubstrateRangeLimit = new ButtonsComboRange(this, L("Ограничение"), 150, titles, tooltips, "bcSubstrateRangeLimit");
+
+                bcSubstrateRangeLimit->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEVentComboBoxBaseRangeLimit, this);
+            }
+            else
+            {
+                bcSubstrateRangeLimit->SetChoices(titles, tooltips);
+            }
+
+            bcSubstrateRangeLimit->SetPosition({ x_base + dx_substrate, y_base });
+        }
     }
 }
 
