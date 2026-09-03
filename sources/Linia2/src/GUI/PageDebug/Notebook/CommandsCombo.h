@@ -18,5 +18,5 @@ public:
 
 private:
 
-    virtual void SetExtendedLabel(const wxString &, const wxString &, pchar, int) override;
+    virtual void SetExtendedLabel(const wxString &, const wxString &) override;
 };

@@ -167,7 +167,7 @@ void PanelViewTest::CreateControls()
         }
         else
         {
-            bcModeControlBase->SetChoices(titles, tooltips, __FILE__, __LINE__);
+            bcModeControlBase->SetChoices(titles, tooltips);
         }
 
         wxPoint c = GetCenter();

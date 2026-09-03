@@ -6,14 +6,12 @@
 CommandsCombo::CommandsCombo(wxWindow *parent, const wxString &title, int width, const wxArrayString &labels, const wxArrayString &tooltips, const wxString &name) :
     ButtonsCombo(parent, title, width, labels, tooltips, 1, name, Type::Text)
 {
-    SetCurrentSelection(0, __FILE__, __LINE__);
+    SetCurrentSelection(0);
 }
 
 
-void CommandsCombo::SetExtendedLabel(const wxString &, const wxString &, pchar file, int line)
+void CommandsCombo::SetExtendedLabel(const wxString &, const wxString &)
 {
-    LOG_WRITE("from %s:%d", file, line);
-
     SetLabel(GetMyToolTip());
 }
 

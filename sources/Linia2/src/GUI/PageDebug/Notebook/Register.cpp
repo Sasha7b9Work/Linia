@@ -498,7 +498,7 @@ void Register::UpdateComboCommandsAndModes()
 
                 if (value == d.field.commands[i].value)
                 {
-                    d.field.combo->SetCurrentSelection((int)i, __FILE__, __LINE__);
+                    d.field.combo->SetCurrentSelection((int)i);
 
                     exist_value = true;
                 }
@@ -547,7 +547,7 @@ void ComboRange::UpdateState(std::vector<ModeDescripion> &mode_desc, const std::
 
         if (current_state)
         {
-            combo->SetCurrentSelection((int)num_desc, __FILE__, __LINE__);
+            combo->SetCurrentSelection((int)num_desc);
             return;
         }
     }
