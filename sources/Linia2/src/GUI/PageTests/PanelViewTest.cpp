@@ -205,6 +205,8 @@ void PanelViewTest::CreateControls()
     int y_base = c.y - 40;
     int dy_base = 50;
 
+    int dx_substrate = 360;
+
     const int width = 200;
 
     {
@@ -232,152 +234,270 @@ void PanelViewTest::CreateControls()
     }
 
     {
-        wxArrayString titles;
-        titles.push_back(L("Током"));
-        titles.push_back(L("Напряжением"));
-        titles.push_back(L("Земля"));
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("База управляется током"));
-        tooltips.push_back(L("База управляется напряжением"));
-        tooltips.push_back(L("База соединена с землёй"));
-
-        if (!bcBaseModeControl)
         {
-            bcBaseModeControl = new ButtonsCombo(this, L("Управление"), width, titles, tooltips, 1, "bcBaseModeControl", ButtonsCombo::Type::Text);
+            wxArrayString titles;
+            titles.push_back(L("Током"));
+            titles.push_back(L("Напряжением"));
+            titles.push_back(L("Земля"));
 
-            bcBaseModeControl->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseModeControl, this);
+            wxArrayString tooltips;
+            tooltips.push_back(L("База управляется током"));
+            tooltips.push_back(L("База управляется напряжением"));
+            tooltips.push_back(L("База соединена с землёй"));
+
+            if (!bcBaseModeControl)
+            {
+                bcBaseModeControl = new ButtonsCombo(this, L("Управление"), width, titles, tooltips, 1, "bcBaseModeControl", ButtonsCombo::Type::Text);
+
+                bcBaseModeControl->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseModeControl, this);
+            }
+            else
+            {
+                bcBaseModeControl->SetChoices(titles, tooltips);
+            }
+
+            bcBaseModeControl->SetPosition({ x_base, y_base });
         }
-        else
+
         {
-            bcBaseModeControl->SetChoices(titles, tooltips);
-        }
+            wxArrayString titles;
+            titles.push_back(L("Током"));
+            titles.push_back(L("Напряжением"));
+            titles.push_back(L("Земля"));
 
-        bcBaseModeControl->SetPosition({ x_base, y_base });
+            wxArrayString tooltips;
+            tooltips.push_back(L("Подложка управляется током"));
+            tooltips.push_back(L("Подложка управляется напряжением"));
+            tooltips.push_back(L("Подложка соединена с землёй"));
+
+            if (!bcSubstrateModeControl)
+            {
+                bcSubstrateModeControl = new ButtonsCombo(this, L("Управление"), width, titles, tooltips, 1, "bcSubstrateModeControl", ButtonsCombo::Type::Text);
+
+                bcSubstrateModeControl->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseModeControl, this);
+            }
+            else
+            {
+                bcSubstrateModeControl->SetChoices(titles, tooltips);
+            }
+
+            bcSubstrateModeControl->SetPosition({ x_base + dx_substrate, y_base });
+        }
     }
 
     y_base += dy_base;
 
     {
-        wxArrayString titles;
-        titles.push_back("2 мкА");
-        titles.push_back("5 мкA");
-        titles.push_back("10 мкА");
-        titles.push_back("20 мкА");
-        titles.push_back("50 мкА");
-        titles.push_back("100 мкА");
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Начальное значение тока базы"));
-
-        if (!bcBaseStartValue)
         {
-            bcBaseStartValue = new ButtonsComboRange(this, L("Начальное значение"), width, titles, tooltips, "bcBaseStartValue");
+            wxArrayString titles;
+            titles.push_back("2 мкА");
+            titles.push_back("5 мкA");
+            titles.push_back("10 мкА");
+            titles.push_back("20 мкА");
+            titles.push_back("50 мкА");
+            titles.push_back("100 мкА");
 
-            bcBaseStartValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseStartValue, this);
+            wxArrayString tooltips;
+            tooltips.push_back(L("Начальное значение тока базы"));
+
+            if (!bcBaseStartValue)
+            {
+                bcBaseStartValue = new ButtonsComboRange(this, L("Начальное значение"), width, titles, tooltips, "bcBaseStartValue");
+
+                bcBaseStartValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseStartValue, this);
+            }
+            else
+            {
+                bcBaseStartValue->SetChoices(titles, tooltips);
+            }
+
+            bcBaseStartValue->SetPosition({ x_base, y_base });
         }
-        else
+
         {
-            bcBaseStartValue->SetChoices(titles, tooltips);
-        }
+            wxArrayString titles;
+            titles.push_back("2 мкА");
+            titles.push_back("5 мкA");
+            titles.push_back("10 мкА");
+            titles.push_back("20 мкА");
+            titles.push_back("50 мкА");
+            titles.push_back("100 мкА");
 
-        bcBaseStartValue->SetPosition({ x_base, y_base });
+            wxArrayString tooltips;
+            tooltips.push_back(L("Начальное значение тока подложки"));
+
+            if (!bcSubstrateStartValue)
+            {
+                bcSubstrateStartValue = new ButtonsComboRange(this, L("Начальное значение"), width, titles, tooltips, "bcSubstrateStartValue");
+
+                bcSubstrateStartValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseStartValue, this);
+            }
+            else
+            {
+                bcSubstrateStartValue->SetChoices(titles, tooltips);
+            }
+
+            bcSubstrateStartValue->SetPosition({ x_base + dx_substrate, y_base });
+        }
     }
 
     dy_base = 35;
     y_base += dy_base;
 
     {
-        wxArrayString titles;
-        titles.push_back("2 мкА");
-        titles.push_back("5 мкA");
-        titles.push_back("10 мкА");
-        titles.push_back("20 мкА");
-        titles.push_back("50 мкА");
-        titles.push_back("100 мкА");
-        titles.push_back("200 мкА");
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Шаг изменения тока базы"));
-
-        if (!bcBaseDeltaValue)
         {
-            bcBaseDeltaValue = new ButtonsComboRange(this, L("Шаг"), width, titles, tooltips, "bcBaseDeltaValue");
+            wxArrayString titles;
+            titles.push_back("2 мкА");
+            titles.push_back("5 мкA");
+            titles.push_back("10 мкА");
+            titles.push_back("20 мкА");
+            titles.push_back("50 мкА");
+            titles.push_back("100 мкА");
+            titles.push_back("200 мкА");
 
-            bcBaseDeltaValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseDeltaValue, this);
+            wxArrayString tooltips;
+            tooltips.push_back(L("Шаг изменения тока базы"));
+
+            if (!bcBaseDeltaValue)
+            {
+                bcBaseDeltaValue = new ButtonsComboRange(this, L("Шаг"), width, titles, tooltips, "bcBaseDeltaValue");
+
+                bcBaseDeltaValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseDeltaValue, this);
+            }
+            else
+            {
+                bcBaseDeltaValue->SetChoices(titles, tooltips);
+            }
+
+            bcBaseDeltaValue->SetPosition({ x_base, y_base });
         }
-        else
+
         {
-            bcBaseDeltaValue->SetChoices(titles, tooltips);
-        }
+            wxArrayString titles;
+            titles.push_back("2 мкА");
+            titles.push_back("5 мкA");
+            titles.push_back("10 мкА");
+            titles.push_back("20 мкА");
+            titles.push_back("50 мкА");
+            titles.push_back("100 мкА");
+            titles.push_back("200 мкА");
 
-        bcBaseDeltaValue->SetPosition({ x_base, y_base });
+            wxArrayString tooltips;
+            tooltips.push_back(L("Шаг изменения тока подложки"));
+
+            if (!bcSubstrateDeltaValue)
+            {
+                bcSubstrateDeltaValue = new ButtonsComboRange(this, L("Шаг"), width, titles, tooltips, "bcSubstrateDeltaValue");
+
+                bcSubstrateDeltaValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseDeltaValue, this);
+            }
+            else
+            {
+                bcSubstrateDeltaValue->SetChoices(titles, tooltips);
+            }
+
+            bcSubstrateDeltaValue->SetPosition({ x_base + dx_substrate, y_base });
+        }
     }
 
     y_base += dy_base;
 
     {
-        wxArrayString titles;
-        titles.push_back("1");
-        titles.push_back("2");
-        titles.push_back("3");
-        titles.push_back("4");
-        titles.push_back("5");
-        titles.push_back("6");
-        titles.push_back("7");
-        titles.push_back("8");
-        titles.push_back("9");
-        titles.push_back("10");
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Количество измерений"));
-
-        if (!bcBaseNumMeasures)
         {
-            bcBaseNumMeasures = new ButtonsCombo(this, L("Кол-во измерений"), width, titles, tooltips, 3, "bcBaseNumMeasures", ButtonsCombo::Type::Text);
+            wxArrayString titles;
+            titles.push_back("1");
+            titles.push_back("2");
+            titles.push_back("3");
+            titles.push_back("4");
+            titles.push_back("5");
+            titles.push_back("6");
+            titles.push_back("7");
+            titles.push_back("8");
+            titles.push_back("9");
+            titles.push_back("10");
 
-            bcBaseNumMeasures->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseNumMeasures, this);
+            wxArrayString tooltips;
+            tooltips.push_back(L("Количество измерений"));
+
+            if (!bcBaseNumMeasures)
+            {
+                bcBaseNumMeasures = new ButtonsCombo(this, L("Кол-во измерений"), width, titles, tooltips, 3, "bcBaseNumMeasures", ButtonsCombo::Type::Text);
+
+                bcBaseNumMeasures->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseNumMeasures, this);
+            }
+            else
+            {
+                bcBaseNumMeasures->SetChoices(titles, tooltips);
+            }
+
+            bcBaseNumMeasures->SetPosition({ x_base, y_base });
         }
-        else
+
         {
-            bcBaseNumMeasures->SetChoices(titles, tooltips);
-        }
+            wxArrayString titles;
+            titles.push_back("1");
+            titles.push_back("2");
+            titles.push_back("3");
+            titles.push_back("4");
+            titles.push_back("5");
+            titles.push_back("6");
+            titles.push_back("7");
+            titles.push_back("8");
+            titles.push_back("9");
+            titles.push_back("10");
 
-        bcBaseNumMeasures->SetPosition({ x_base, y_base });
+            wxArrayString tooltips;
+            tooltips.push_back(L("Количество измерений"));
+
+            if (!bcSubstrateNumMeasures)
+            {
+                bcSubstrateNumMeasures = new ButtonsCombo(this, L("Кол-во измерений"), width, titles, tooltips, 3, "bcSubstrateNumMeasures", ButtonsCombo::Type::Text);
+
+                bcSubstrateNumMeasures->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseNumMeasures, this);
+            }
+            else
+            {
+                bcSubstrateNumMeasures->SetChoices(titles, tooltips);
+            }
+
+            bcSubstrateNumMeasures->SetPosition({ x_base + dx_substrate, y_base });
+        }
     }
 
-    x_base += 150;
+    x_base += 120;
     y_base += 50;
     y_base += dy_base;
 
     {
-        wxArrayString titles;
-        titles.push_back("50 мВ");
-        titles.push_back("100 мВ");
-        titles.push_back("200 мВ");
-        titles.push_back("500 мВ");
-        titles.push_back("1 В");
-        titles.push_back("2 В");
-        titles.push_back("5 В");
-        titles.push_back("10 В");
-        titles.push_back("20 В");
-        titles.push_back("50 В");
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Диапазон измерения"));
-
-        if (!bcBaseRangeMeasure)
         {
-            bcBaseRangeMeasure = new ButtonsComboRange(this, L("Диапазон"), 150, titles, tooltips, "bcBaseRangeMeasure");
+            wxArrayString titles;
+            titles.push_back("50 мВ");
+            titles.push_back("100 мВ");
+            titles.push_back("200 мВ");
+            titles.push_back("500 мВ");
+            titles.push_back("1 В");
+            titles.push_back("2 В");
+            titles.push_back("5 В");
+            titles.push_back("10 В");
+            titles.push_back("20 В");
+            titles.push_back("50 В");
 
-            bcBaseRangeMeasure->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseRangeMeasure, this);
-        }
-        else
-        {
-            bcBaseRangeMeasure->SetChoices(titles, tooltips);
-        }
+            wxArrayString tooltips;
+            tooltips.push_back(L("Диапазон измерения"));
 
-        bcBaseRangeMeasure->SetPosition({ x_base, y_base });
+            if (!bcBaseRangeMeasure)
+            {
+                bcBaseRangeMeasure = new ButtonsComboRange(this, L("Диапазон"), 150, titles, tooltips, "bcBaseRangeMeasure");
+
+                bcBaseRangeMeasure->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseRangeMeasure, this);
+            }
+            else
+            {
+                bcBaseRangeMeasure->SetChoices(titles, tooltips);
+            }
+
+            bcBaseRangeMeasure->SetPosition({ x_base, y_base });
+        }
     }
 
     y_base += dy_base;

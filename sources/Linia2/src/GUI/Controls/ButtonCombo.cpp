@@ -392,7 +392,6 @@ void ButtonsCombo::SetExtendedLabel(const wxString &start, const wxString &end)
 {
     if (start.IsEmpty())
     {
-
         DrawingButton::SetLabel(end);
     }
     else

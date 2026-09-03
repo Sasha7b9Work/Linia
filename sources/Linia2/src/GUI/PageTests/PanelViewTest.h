@@ -31,6 +31,13 @@ private:
     ButtonsComboRange *bcBaseRangeMeasure = nullptr;    // Диапазон - максимальное доступное значение
     ButtonsComboRange *bcBaseRangeLimit = nullptr;      // Максимальное значение, при котором происходит завершение измерения
 
+    ButtonsCombo *bcSubstrateModeControl = nullptr;
+    ButtonsComboRange *bcSubstrateStartValue = nullptr;
+    ButtonsComboRange *bcSubstrateDeltaValue = nullptr;
+    ButtonsCombo *bcSubstrateNumMeasures = nullptr;
+    ButtonsComboRange *bcSubstrateRangeMeasure = nullptr;
+    ButtonsComboRange *bcSubstrateRangeLimit = nullptr;
+
     void OnEventPaint(wxPaintEvent &);
 
     void OnEventComboBoxModeScan(wxCommandEvent &);
