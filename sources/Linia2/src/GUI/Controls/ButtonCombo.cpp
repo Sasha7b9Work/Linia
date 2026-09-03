@@ -89,7 +89,7 @@ public:
                         {
                             ButtonsCombo *combo = (ButtonsCombo *)GetParent();
 
-                            combo->SetCurrentSelection((int)i);
+                            combo->SetCurrentSelection((int)i, __FILE__, __LINE__);
 
                             Dismiss();
 
@@ -174,7 +174,7 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, int width,
                         choice = 0;
                     }
 
-                    SetCurrentSelection(choice);
+                    SetCurrentSelection(choice, __FILE__, __LINE__);
                 }
                 else
                 {
@@ -237,13 +237,13 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, int width,
 
     SetChoices(_labels, _tooltips);
 
-    SetCurrentSelection(0);
+    SetCurrentSelection(0, __FILE__, __LINE__);
 
     buttons_in_row = _buttons_in_row;
 }
 
 
-void ButtonsCombo::SetCurrentSelection(int choice)
+void ButtonsCombo::SetCurrentSelection(int choice, pchar file, int line)
 {
     DrawingButton::SetBackgroundColour(colorBackground);
     DrawingButton::SetForegroundColour(colorForeground);
@@ -260,12 +260,14 @@ void ButtonsCombo::SetCurrentSelection(int choice)
         label += title + " : ";
     }
 
-    LOG_WRITE("label = %s", label.c_str().AsChar());
+    LOG_WRITE("label = %s from %s:%d", label.c_str().AsChar(), file, line);
 
     uint index = (uint)current_choice;
 
     SetMyToolTip((tooltips[index] != labels[index]) ?     // Предполагается, что подсказка устанавливается только в том случае, если она не совпадает с надписью
         (tooltips[index]) : wxString());
+
+    LOG_WRITE("%s %s", label.c_str().AsChar(), labels[index].c_str().AsChar());
 
     SetExtendedLabel(label, labels[index]);
 
@@ -291,7 +293,7 @@ wxString ButtonsCombo::GetMyToolTip() const
 
 void ButtonsCombo::SetLastSelection()
 {
-    SetCurrentSelection((int)labels.GetCount() - 1);
+    SetCurrentSelection((int)labels.GetCount() - 1, __FILE__, __LINE__);
 }
 
 
@@ -338,7 +340,7 @@ void ButtonsCombo::SetChoices(const wxArrayString &choices, const wxArrayString 
         }
     }
 
-    SetCurrentSelection(GetCurrentSelection() >= NumChoices() ? 0 : GetCurrentSelection());
+    SetCurrentSelection(GetCurrentSelection() >= NumChoices() ? 0 : GetCurrentSelection(), __FILE__, __LINE__);
 }
 
 
@@ -360,7 +362,7 @@ void ButtonsCombo::SetCurrentString(const wxString &choice)
     {
         if (labels[i] == choice)
         {
-            SetCurrentSelection((int)i);
+            SetCurrentSelection((int)i, __FILE__, __LINE__);
             break;
         }
     }
@@ -371,7 +373,7 @@ void ButtonsCombo::SetTitle(const wxString &_title)
 {
     title = _title;
 
-    SetCurrentSelection(GetCurrentSelection());
+    SetCurrentSelection(GetCurrentSelection(), __FILE__, __LINE__);
 }
 
 

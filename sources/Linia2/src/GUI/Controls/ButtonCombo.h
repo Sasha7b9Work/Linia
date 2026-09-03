@@ -38,7 +38,7 @@ public:
         const wxString &name,
         Type::E type = Type::Text);
 
-    void SetCurrentSelection(int);
+    void SetCurrentSelection(int, pchar, int);
     int GetCurrentSelection() const;
 
     void SetCurrentString(const wxString &);
