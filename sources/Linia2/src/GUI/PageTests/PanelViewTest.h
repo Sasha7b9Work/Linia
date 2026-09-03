@@ -22,9 +22,11 @@ private:
 
     Test *test = nullptr;
 
-    ButtonsCombo *bcModeControlBase = &ButtonsCombo::null;          // Режим управления базой - током или напряжением
+    ButtonsCombo *bcModeControlBase = nullptr;          // Режим управления базой - током или напряжением
 
     void OnEventPaint(wxPaintEvent &);
+
+    void OnEventComboBoxModeControlBase(wxCommandEvent &);
 
     // Нарисовать испытуемый элемент
     void DrawElement(wxPaintDC &);
@@ -32,6 +34,9 @@ private:
     // type == "npn", "pnp"
     void DrawBJT(wxPaintDC &, const wxString &type, const wxPoint &);
     void DrawBJTS(wxPaintDC &, const wxString &type, const wxPoint &);
+
+    // Создать элементы управляения для данного теста
+    void CreateControls();
 
     // Рисует линию длиной length под углом angleDeg
     void DrawLineWithAngle(wxPaintDC &dc, const wxPoint &start, double length, double angleDeg);

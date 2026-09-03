@@ -58,6 +58,8 @@ void PanelViewTest::DrawElement(wxPaintDC &dc)
     {
         DrawBJTS(dc, "npn", GetCenter());
     }
+
+    CreateControls();
 }
 
 
@@ -134,4 +136,39 @@ void PanelViewTest::DrawLineWithAngle(wxPaintDC &dc, const wxPoint &start, doubl
 wxPoint PanelViewTest::GetCenter() const
 {
     return { 350, 350 };
+}
+
+
+void PanelViewTest::CreateControls()
+{
+    {
+        wxArrayString titles;
+        titles.push_back(L("Током"));
+        titles.push_back(L("Напряжением"));
+
+        wxArrayString tooltips;
+        tooltips.push_back(L("База управляется током"));
+        tooltips.push_back(L("База управляется напряжением"));
+
+        if (!bcModeControlBase)
+        {
+            bcModeControlBase = new ButtonsCombo(this, "Режим управления", 220, titles, tooltips, 1, "bcModeControlBase", ButtonsCombo::Type::Text);
+
+            Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxModeControlBase, this);
+        }
+        else
+        {
+            bcModeControlBase->SetChoices(titles, tooltips);
+        }
+
+        wxPoint c = GetCenter();
+
+        bcModeControlBase->SetPosition({ c.x - radius - 280, c.y - 40 });
+    }
+}
+
+
+void PanelViewTest::OnEventComboBoxModeControlBase(wxCommandEvent &)
+{
+
 }
