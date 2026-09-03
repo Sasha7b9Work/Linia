@@ -22,11 +22,13 @@ private:
 
     Test *test = nullptr;
 
-    ButtonsCombo *bcModeControlBase = nullptr;          // Режим управления базой - током или напряжением
+    ButtonsCombo *bcBaseModeControl = nullptr;          // Режим управления базой - током или напряжением
+    ButtonsCombo *bcBaseStartValue = nullptr;           // Стартовое значение измеряемой величины
 
     void OnEventPaint(wxPaintEvent &);
 
-    void OnEventComboBoxModeControlBase(wxCommandEvent &);
+    void OnEventComboBoxBaseModeControl(wxCommandEvent &);
+    void OnEventComboBoxBaseStartValue(wxCommandEvent &);
 
     // Нарисовать испытуемый элемент
     void DrawElement(wxPaintDC &);

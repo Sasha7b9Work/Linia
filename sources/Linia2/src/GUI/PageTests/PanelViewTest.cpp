@@ -150,6 +150,12 @@ void PanelViewTest::CreateControls()
 
     prev_test = test;
 
+    wxPoint c = GetCenter();
+
+    int x_base = c.x - radius - 280;
+    int y_base = c.y - 40;
+    int dy_base = 50;
+
     {
         wxArrayString titles;
         titles.push_back(L("Током"));
@@ -161,25 +167,55 @@ void PanelViewTest::CreateControls()
         tooltips.push_back(L("База управляется напряжением"));
         tooltips.push_back(L("База соединена с землёй"));
 
-        if (!bcModeControlBase)
+        if (!bcBaseModeControl)
         {
-            bcModeControlBase = new ButtonsCombo(this, L("Режим управления"), 250, titles, tooltips, 1, "bcModeControlBase", ButtonsCombo::Type::Text);
+            bcBaseModeControl = new ButtonsCombo(this, L("Режим управления"), 250, titles, tooltips, 1, "bcBaseModeControl", ButtonsCombo::Type::Text);
 
-            Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxModeControlBase, this);
+            bcBaseModeControl->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseModeControl, this);
         }
         else
         {
-            bcModeControlBase->SetChoices(titles, tooltips);
+            bcBaseModeControl->SetChoices(titles, tooltips);
         }
 
-        wxPoint c = GetCenter();
+        bcBaseModeControl->SetPosition({ x_base, y_base });
+    }
 
-        bcModeControlBase->SetPosition({ c.x - radius - 280, c.y - 40 });
+    y_base += dy_base;
+
+    {
+        wxArrayString titles;
+        titles.push_back("2 мкА");
+        titles.push_back("5 мкA");
+        titles.push_back("10 мкА");
+        titles.push_back("20 мкА");
+
+        wxArrayString tooltips;
+        tooltips.push_back(L("Начальное значение тока базы"));
+
+        if (!bcBaseStartValue)
+        {
+            bcBaseStartValue = new ButtonsCombo(this, L("Начальное значение"), 250, titles, tooltips, 3, "bcBaseStartValue", ButtonsCombo::Type::Text);
+
+            bcBaseStartValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseStartValue, this);
+        }
+        else
+        {
+            bcBaseStartValue->SetChoices(titles, tooltips);
+        }
+
+        bcBaseStartValue->SetPosition({ x_base, y_base });
     }
 }
 
 
-void PanelViewTest::OnEventComboBoxModeControlBase(wxCommandEvent &)
+void PanelViewTest::OnEventComboBoxBaseModeControl(wxCommandEvent &)
+{
+
+}
+
+
+void PanelViewTest::OnEventComboBoxBaseStartValue(wxCommandEvent &)
 {
 
 }

@@ -72,14 +72,18 @@ protected:
     void SetExtendedLabel(const wxString &, int num_spaces, const wxString &);
 
 private:
+
     wxColour colorBackground;
     wxColour colorForeground;
     int current_choice = -1;            // Номер реального выбора
     wxArrayString labels;
     wxArrayString tooltips;
+
     int buttons_in_row = 0;
     bool left_part_clicked = true;      // Если true, то кликнули мышкой в левой части кнопки
     int num_empties = 0;                // Столько добавлено пустых полей перед первым вариантом, чтобы выровнять столбцы по значениям
+
+    wxString GetHint(uint i) const;
 };
 
 

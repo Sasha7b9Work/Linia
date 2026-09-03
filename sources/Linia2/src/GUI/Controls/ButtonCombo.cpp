@@ -75,9 +75,9 @@ public:
             btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(LIGHTNESS));
             btn->SetBackgroundColour(btn->GetBackgroundColour().ChangeLightness(170));
             btn->SetMaxSize(wxSize(-1, 20));
-            if (labels[i] != GetCombo()->tooltips[i])
+            if (labels[i] != GetCombo()->GetHint(i))
             {
-                btn->SetToolTip(GetCombo()->tooltips[i]);
+                btn->SetToolTip(GetCombo()->GetHint(i));
             }
             btn->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
                 {
@@ -262,8 +262,8 @@ void ButtonsCombo::SetCurrentSelection(int choice)
 
     uint index = (uint)current_choice;
 
-    SetMyToolTip((tooltips[index] != labels[index]) ?     // Предполагается, что подсказка устанавливается только в том случае, если она не совпадает с надписью
-        (tooltips[index]) : wxString());
+    SetMyToolTip((GetHint(index) != labels[index]) ?     // Предполагается, что подсказка устанавливается только в том случае, если она не совпадает с надписью
+        (GetHint(index)) : wxString());
 
     SetExtendedLabel(label, labels[index]);
 
@@ -337,6 +337,17 @@ void ButtonsCombo::SetChoices(const wxArrayString &choices, const wxArrayString 
     }
 
     SetCurrentSelection(GetCurrentSelection() >= NumChoices() ? 0 : GetCurrentSelection());
+}
+
+
+wxString ButtonsCombo::GetHint(uint i) const
+{
+    if (tooltips.GetCount() == 1)
+    {
+        i = 0;
+    }
+
+    return tooltips[i];
 }
 
 
