@@ -208,7 +208,7 @@ void PanelViewTest::CreateControls()
     int dx_substrate = 320;
     int dy_substrate = 250;
 
-    const int width = 200;
+    const int width = 150;
 
     {
         if (!bcModeScan)
@@ -253,9 +253,9 @@ void PanelViewTest::CreateControls()
     {
         {
             wxArrayString titles;
-            titles.push_back(L("Током"));
-            titles.push_back(L("Напряжением"));
-            titles.push_back(L("Земля"));
+            titles.push_back(L("I"));
+            titles.push_back(L("U"));
+            titles.push_back(L("GND"));
 
             wxArrayString tooltips;
             tooltips.push_back(L("База управляется током"));
@@ -278,9 +278,9 @@ void PanelViewTest::CreateControls()
 
         {
             wxArrayString titles;
-            titles.push_back(L("Током"));
-            titles.push_back(L("Напряжением"));
-            titles.push_back(L("Земля"));
+            titles.push_back(L("I"));
+            titles.push_back(L("U"));
+            titles.push_back(L("GND"));
 
             wxArrayString tooltips;
             tooltips.push_back(L("Подложка управляется током"));
@@ -319,7 +319,7 @@ void PanelViewTest::CreateControls()
 
             if (!bcBaseStartValue)
             {
-                bcBaseStartValue = new ButtonsComboRange(this, L("Начальное значение"), width, titles, tooltips, "bcBaseStartValue");
+                bcBaseStartValue = new ButtonsComboRange(this, L("Ib start"), width, titles, tooltips, "bcBaseStartValue");
 
                 bcBaseStartValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseStartValue, this);
             }
@@ -345,7 +345,7 @@ void PanelViewTest::CreateControls()
 
             if (!bcSubstrateStartValue)
             {
-                bcSubstrateStartValue = new ButtonsComboRange(this, L("Начальное значение"), width, titles, tooltips, "bcSubstrateStartValue");
+                bcSubstrateStartValue = new ButtonsComboRange(this, L("Isub start"), width, titles, tooltips, "bcSubstrateStartValue");
 
                 bcSubstrateStartValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseStartValue, this);
             }
@@ -504,7 +504,7 @@ void PanelViewTest::CreateControls()
 
             if (!bcBaseRangeMeasure)
             {
-                bcBaseRangeMeasure = new ButtonsComboRange(this, L("Диапазон"), 150, titles, tooltips, "bcBaseRangeMeasure");
+                bcBaseRangeMeasure = new ButtonsComboRange(this, L("Диапазон"), width, titles, tooltips, "bcBaseRangeMeasure");
 
                 bcBaseRangeMeasure->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseRangeMeasure, this);
             }
@@ -536,7 +536,7 @@ void PanelViewTest::CreateControls()
 
             if (!bcSubstrateRangeMeasure)
             {
-                bcSubstrateRangeMeasure = new ButtonsComboRange(this, L("Диапазон"), 150, titles, tooltips, "bcSubstrateRangeMeasure");
+                bcSubstrateRangeMeasure = new ButtonsComboRange(this, L("Диапазон"), width, titles, tooltips, "bcSubstrateRangeMeasure");
 
                 bcSubstrateRangeMeasure->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseRangeMeasure, this);
             }
@@ -570,7 +570,7 @@ void PanelViewTest::CreateControls()
 
             if (!bcBaseRangeLimit)
             {
-                bcBaseRangeLimit = new ButtonsComboRange(this, L("Ограничение"), 150, titles, tooltips, "bcBaseRangeLimit");
+                bcBaseRangeLimit = new ButtonsComboRange(this, L("Ограничение"), width, titles, tooltips, "bcBaseRangeLimit");
 
                 bcBaseRangeLimit->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEVentComboBoxBaseRangeLimit, this);
             }
@@ -600,7 +600,7 @@ void PanelViewTest::CreateControls()
 
             if (!bcSubstrateRangeLimit)
             {
-                bcSubstrateRangeLimit = new ButtonsComboRange(this, L("Ограничение"), 150, titles, tooltips, "bcSubstrateRangeLimit");
+                bcSubstrateRangeLimit = new ButtonsComboRange(this, L("Ограничение"), width, titles, tooltips, "bcSubstrateRangeLimit");
 
                 bcSubstrateRangeLimit->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEVentComboBoxBaseRangeLimit, this);
             }
