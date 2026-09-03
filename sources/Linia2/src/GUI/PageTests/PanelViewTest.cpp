@@ -205,7 +205,8 @@ void PanelViewTest::CreateControls()
     int y_base = c.y - 40;
     int dy_base = 50;
 
-    int dx_substrate = 360;
+    int dx_substrate = 320;
+    int dy_substrate = 150;
 
     const int width = 200;
 
@@ -230,6 +231,22 @@ void PanelViewTest::CreateControls()
             bcModeScan->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxModeScan, this);
 
             bcModeScan->SetPosition({ x_base, 50 });
+        }
+
+        if (!bcTypeSemiconductor)
+        {
+            wxArrayString titles;
+            titles.push_back("npn");
+            titles.push_back("pnp");
+
+            wxArrayString tooltips;
+            tooltips.push_back("");
+
+            bcTypeSemiconductor = new ButtonsCombo(this, L(""), 40, titles, tooltips, 1, "bcTypeSemiconductor", ButtonsCombo::Type::Text);
+
+            bcTypeSemiconductor->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxTypeSemiconductor, this);
+
+            bcTypeSemiconductor->SetPosition({ c.x - 20, c.y - 10 });
         }
     }
 
@@ -281,7 +298,7 @@ void PanelViewTest::CreateControls()
                 bcSubstrateModeControl->SetChoices(titles, tooltips);
             }
 
-            bcSubstrateModeControl->SetPosition({ x_base + dx_substrate, y_base });
+            bcSubstrateModeControl->SetPosition({ x_base + dx_substrate, y_base + dy_substrate });
         }
     }
 
@@ -337,7 +354,7 @@ void PanelViewTest::CreateControls()
                 bcSubstrateStartValue->SetChoices(titles, tooltips);
             }
 
-            bcSubstrateStartValue->SetPosition({ x_base + dx_substrate, y_base });
+            bcSubstrateStartValue->SetPosition({ x_base + dx_substrate, y_base + dy_substrate });
         }
     }
 
@@ -396,7 +413,7 @@ void PanelViewTest::CreateControls()
                 bcSubstrateDeltaValue->SetChoices(titles, tooltips);
             }
 
-            bcSubstrateDeltaValue->SetPosition({ x_base + dx_substrate, y_base });
+            bcSubstrateDeltaValue->SetPosition({ x_base + dx_substrate, y_base + dy_substrate });
         }
     }
 
@@ -460,12 +477,12 @@ void PanelViewTest::CreateControls()
                 bcSubstrateNumMeasures->SetChoices(titles, tooltips);
             }
 
-            bcSubstrateNumMeasures->SetPosition({ x_base + dx_substrate, y_base });
+            bcSubstrateNumMeasures->SetPosition({ x_base + dx_substrate, y_base + dy_substrate });
         }
     }
 
     x_base += 120;
-    y_base += 50;
+    y_base += 30;
     y_base += dy_base;
 
     {
@@ -528,7 +545,7 @@ void PanelViewTest::CreateControls()
                 bcSubstrateRangeMeasure->SetChoices(titles, tooltips);
             }
 
-            bcSubstrateRangeMeasure->SetPosition({ x_base + dx_substrate, y_base });
+            bcSubstrateRangeMeasure->SetPosition({ x_base + dx_substrate, y_base + dy_substrate });
         }
     }
 
@@ -592,13 +609,19 @@ void PanelViewTest::CreateControls()
                 bcSubstrateRangeLimit->SetChoices(titles, tooltips);
             }
 
-            bcSubstrateRangeLimit->SetPosition({ x_base + dx_substrate, y_base });
+            bcSubstrateRangeLimit->SetPosition({ x_base + dx_substrate, y_base + dy_substrate });
         }
     }
 }
 
 
 void PanelViewTest::OnEventComboBoxModeScan(wxCommandEvent &)
+{
+
+}
+
+
+void PanelViewTest::OnEventComboBoxTypeSemiconductor(wxCommandEvent &)
 {
 
 }
