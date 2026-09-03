@@ -2,6 +2,7 @@
 #pragma once
 #include "GUI/Controls/Panel.h"
 #include "Settings/Tests/Library/Library.h"
+#include "GUI/Controls/ButtonCombo.h"
 #pragma warning(push, 0)
     #include <wx/dcclient.h>
 #pragma warning(pop)
@@ -17,7 +18,11 @@ public:
 
 private:
 
+    static const int radius = 50;       // От этого значения и Center() идёт всё построение изображения
+
     Test *test = nullptr;
+
+    ButtonsCombo *bcModeControlBase = &ButtonsCombo::null;          // Режим управления базой - током или напряжением
 
     void OnEventPaint(wxPaintEvent &);
 
@@ -25,8 +30,8 @@ private:
     void DrawElement(wxPaintDC &);
 
     // type == "npn", "pnp"
-    void DrawBJT(wxPaintDC &, const wxString &type, const wxPoint &, int radius);
-    void DrawBJTS(wxPaintDC &, const wxString &type, const wxPoint &, int radius);
+    void DrawBJT(wxPaintDC &, const wxString &type, const wxPoint &);
+    void DrawBJTS(wxPaintDC &, const wxString &type, const wxPoint &);
 
     // Рисует линию длиной length под углом angleDeg
     void DrawLineWithAngle(wxPaintDC &dc, const wxPoint &start, double length, double angleDeg);

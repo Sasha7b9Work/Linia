@@ -52,16 +52,16 @@ void PanelViewTest::DrawElement(wxPaintDC &dc)
 {
     if (test->lib->UGO == "BJT")
     {
-        DrawBJT(dc, "npn", GetCenter(), 100);
+        DrawBJT(dc, "npn", GetCenter());
     }
     else if (test->lib->UGO == "BJTS")
     {
-        DrawBJTS(dc, "npn", GetCenter(), 100);
+        DrawBJTS(dc, "npn", GetCenter());
     }
 }
 
 
-void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &c, int radius)
+void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &c)
 {
     dc.DrawLine(c.x + radius / 2, c.y - 2 * radius, c.x + radius / 2, c.y + 2 * radius);    // Эмиттер
 
@@ -114,9 +114,9 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
 }
 
 
-void PanelViewTest::DrawBJTS(wxPaintDC &dc, const wxString &type, const wxPoint &c, int radius)
+void PanelViewTest::DrawBJTS(wxPaintDC &dc, const wxString &type, const wxPoint &c)
 {
-    DrawBJT(dc, type, c, radius);
+    DrawBJT(dc, type, c);
 }
 
 

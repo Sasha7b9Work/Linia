@@ -11,6 +11,10 @@
 #pragma warning(pop)
 
 
+wxArrayString ButtonsCombo::nullArrayString;
+ButtonsCombo ButtonsCombo::null{ nullptr, "", 10, nullArrayString, nullArrayString, 0, "" };
+
+
 DrawingButton::DrawingButton(wxWindow *parent, const wxString &label, const wxSize &size, const wxString &_name_file) :
     Button(parent, label, size),
     file_name(_name_file)

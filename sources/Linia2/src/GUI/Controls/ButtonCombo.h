@@ -61,6 +61,14 @@ public:
 
     bool left_align = false;            // Если true - надписи на выборах будут выравниваться по левому краю
 
+    bool IsNull() const
+    {
+        return this == &null;
+    }
+
+    static ButtonsCombo null;
+    static wxArrayString nullArrayString;
+
 protected:
 
     wxString myToolTip;
