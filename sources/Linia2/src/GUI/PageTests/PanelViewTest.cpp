@@ -72,7 +72,7 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
 
     int x_vert = c.x - radius * 10 / 18;                    // Здесь заканчивается линия базы внутри окружности
 
-    wxPoint coord_base{ c.x - radius - 150, c.y };
+    wxPoint coord_base{ c.x - radius - 200, c.y };
 
     dc.DrawLine(coord_base, { x_vert, c.y });               // База
 
@@ -134,7 +134,7 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
 
         dc.DrawCircle(coord, r);                                        // Измеритель
 
-        dc.SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_LIGHT));
+        dc.SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
 
         GF::DrawTextInCenter(dc, "V", wxRect( wxPoint{ coord.x - r, coord.y - r }, wxPoint{ coord.x + r, coord.y + r } ));
 
@@ -303,6 +303,40 @@ void PanelViewTest::CreateControls()
 
         bcBaseNumMeasures->SetPosition({ x_base, y_base });
     }
+
+    x_base += 150;
+    y_base += 50;
+    y_base += dy_base;
+
+    {
+        wxArrayString titles;
+        titles.push_back("50 мВ");
+        titles.push_back("100 мВ");
+        titles.push_back("200 мВ");
+        titles.push_back("500 мВ");
+        titles.push_back("1 В");
+        titles.push_back("2 В");
+        titles.push_back("5 В");
+        titles.push_back("10 В");
+        titles.push_back("20 В");
+        titles.push_back("50 В");
+
+        wxArrayString tooltips;
+        tooltips.push_back(L("Диапазон измерения"));
+
+        if (!bcBaseRangeMeasure)
+        {
+            bcBaseRangeMeasure = new ButtonsComboRange(this, L("Диапазон"), 150, titles, tooltips, "bcBaseRangeMeasure");
+
+            bcBaseRangeMeasure->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseNumMeasures, this);
+        }
+        else
+        {
+            bcBaseRangeMeasure->SetChoices(titles, tooltips);
+        }
+
+        bcBaseRangeMeasure->SetPosition({ x_base, y_base });
+    }
 }
 
 
@@ -325,6 +359,12 @@ void PanelViewTest::OnEventComboBoxBaseDeltaValue(wxCommandEvent &)
 
 
 void PanelViewTest::OnEventComboBoxBaseNumMeasures(wxCommandEvent &)
+{
+
+}
+
+
+void PanelViewTest::OnEventComboBoxRangeMeasure(wxCommandEvent &)
 {
 
 }

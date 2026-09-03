@@ -23,9 +23,10 @@ private:
     Test *test = nullptr;
 
     ButtonsCombo *bcBaseModeControl = nullptr;          // Режим управления базой - током или напряжением
-    ButtonsComboRange *bcBaseStartValue = nullptr;           // Стартовое значение задаваемой величины
-    ButtonsComboRange *bcBaseDeltaValue = nullptr;           // Шаг изменения задаваемой величины
+    ButtonsComboRange *bcBaseStartValue = nullptr;      // Стартовое значение задаваемой величины
+    ButtonsComboRange *bcBaseDeltaValue = nullptr;      // Шаг изменения задаваемой величины
     ButtonsCombo *bcBaseNumMeasures = nullptr;          // Количество измерений
+    ButtonsComboRange *bcBaseRangeMeasure = nullptr;    // Диапазон - максимальное доступное значение
 
     void OnEventPaint(wxPaintEvent &);
 
@@ -33,6 +34,7 @@ private:
     void OnEventComboBoxBaseStartValue(wxCommandEvent &);
     void OnEventComboBoxBaseDeltaValue(wxCommandEvent &);
     void OnEventComboBoxBaseNumMeasures(wxCommandEvent &);
+    void OnEventComboBoxRangeMeasure(wxCommandEvent &);
 
     // Нарисовать испытуемый элемент
     void DrawElement(wxPaintDC &);
