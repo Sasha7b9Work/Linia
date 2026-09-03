@@ -59,6 +59,8 @@ void ComPort::GetComports(std::vector<bool> &ports)
 
 bool ComPort::Connect(int num_port)
 {
+    (void)num_port;
+
 #ifdef WIN32
 
     Disconnect();
