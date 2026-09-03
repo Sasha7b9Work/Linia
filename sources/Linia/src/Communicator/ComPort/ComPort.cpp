@@ -230,7 +230,7 @@ wxString ComPort::ExtractMessage(char *buffer)
                 return wxString(buffer);
             }
 
-            if (buffer[i] == -1)
+            if (buffer[i] == (char)-1)
             {
                 return "";
             }
