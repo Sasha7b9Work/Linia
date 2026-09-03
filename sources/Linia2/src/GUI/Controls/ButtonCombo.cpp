@@ -413,6 +413,8 @@ void ButtonsCombo::SetExtendedLabel(const wxString &start, const wxString &end)
 
 void ButtonsCombo::SetExtendedLabel(const wxString &start, int num_spaces, const wxString &end)
 {
+    LOG_WRITE("%s %s", start.c_str().AsChar(), end.c_str().AsChar());
+
     wxString label{ start };
     label.Append(' ', (size_t)num_spaces);
     label.Append(end);
