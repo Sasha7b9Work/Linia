@@ -22,6 +22,8 @@ private:
 
     Test *test = nullptr;
 
+    ButtonsCombo *bcModeScan = nullptr;                 // Режим развёртки
+
     ButtonsCombo *bcBaseModeControl = nullptr;          // Режим управления базой - током или напряжением
     ButtonsComboRange *bcBaseStartValue = nullptr;      // Стартовое значение задаваемой величины
     ButtonsComboRange *bcBaseDeltaValue = nullptr;      // Шаг изменения задаваемой величины
@@ -31,6 +33,7 @@ private:
 
     void OnEventPaint(wxPaintEvent &);
 
+    void OnEventComboBoxModeScan(wxCommandEvent &);
     void OnEventComboBoxBaseModeControl(wxCommandEvent &);
     void OnEventComboBoxBaseStartValue(wxCommandEvent &);
     void OnEventComboBoxBaseDeltaValue(wxCommandEvent &);

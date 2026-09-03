@@ -208,6 +208,30 @@ void PanelViewTest::CreateControls()
     const int width = 200;
 
     {
+        if (!bcModeScan)
+        {
+            wxArrayString titles;
+            titles.push_back("SIN+");
+            titles.push_back("SIN-");
+            titles.push_back("AC");
+            titles.push_back("DC-");
+            titles.push_back("DC+");
+            titles.push_back("IMP+");
+            titles.push_back("IMP-");
+            titles.push_back("IMP_CVC");
+
+            wxArrayString tooltips;
+            tooltips.push_back("");
+
+            bcModeScan = new ButtonsCombo(this, L("Развёртка"), width, titles, tooltips, 1, "bcModeScan", ButtonsCombo::Type::Text);
+
+            bcModeScan->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxModeScan, this);
+
+            bcModeScan->SetPosition({ 20, 40 });
+        }
+    }
+
+    {
         wxArrayString titles;
         titles.push_back(L("Током"));
         titles.push_back(L("Напряжением"));
@@ -387,6 +411,12 @@ void PanelViewTest::CreateControls()
 
         bcBaseRangeLimit->SetPosition({ x_base, y_base });
     }
+}
+
+
+void PanelViewTest::OnEventComboBoxModeScan(wxCommandEvent &)
+{
+
 }
 
 
