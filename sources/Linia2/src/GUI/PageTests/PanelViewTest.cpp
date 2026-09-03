@@ -113,38 +113,54 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
         }
 
         {
-            // Вертикальная линия
+            // Вертикальная линия базы
 
             int dy = radius * 4 / 9;
 
             dc.DrawLine(x_vert, c.y - dy, x_vert, c.y + dy);
+
+            {
+                // Рисуем измеритель базы
+
+                wxPoint coord{ coord_base.x, coord_base.y + 150 };
+
+                dc.DrawLine(coord_base, coord);
+
+                int r = 20;
+
+                coord.y += r;
+
+                dc.DrawCircle(coord, r);                                        // Измеритель
+
+                dc.SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
+
+                GF::DrawTextInCenter(dc, "V", wxRect(wxPoint{ coord.x - r, coord.y - r }, wxPoint{ coord.x + r, coord.y + r }));
+
+                coord.y += r;
+
+                wxPoint coord_end{ coord.x, coord.y + 50 };
+
+                dc.DrawLine(coord, coord_end);
+
+                dc.DrawLine({ coord_end.x - 10, coord_end.y }, { coord_end.x + 10, coord_end.y });
+            }
         }
-    }
 
-    {
-        // Рисуем измеритель базы
+        {
+            // Подложка
 
-        wxPoint coord{ coord_base.x, coord_base.y + 150 };
+            int dy = radius * 4 / 16;
 
-        dc.DrawLine(coord_base, coord);
+            int x = c.x + (c.x - x_vert) + radius / 10;
 
-        int r = 20;
+            dc.DrawLine(x, c.y - dy, x, c.y + dy);
 
-        coord.y += r;
+            {
+                // Измеритель подложки
 
-        dc.DrawCircle(coord, r);                                        // Измеритель
-
-        dc.SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
-
-        GF::DrawTextInCenter(dc, "V", wxRect( wxPoint{ coord.x - r, coord.y - r }, wxPoint{ coord.x + r, coord.y + r } ));
-
-        coord.y += r;
-
-        wxPoint coord_end{ coord.x, coord.y + 50 };
-
-        dc.DrawLine(coord, coord_end);
-
-        dc.DrawLine({ coord_end.x - 10, coord_end.y }, { coord_end.x + 10, coord_end.y });
+                dc.DrawLine(x, c.y, x + 100, c.y);
+            }
+        }
     }
 }
 
