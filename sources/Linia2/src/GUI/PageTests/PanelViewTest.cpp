@@ -72,7 +72,7 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
 
     int x_vert = c.x - radius * 10 / 18;                    // Здесь заканчивается линия базы внутри окружности
 
-    wxPoint coord_base{ c.x - radius - 200, c.y };
+    wxPoint coord_base{ 100, c.y };
 
     dc.DrawLine(coord_base, { x_vert, c.y });               // База
 
@@ -184,7 +184,7 @@ void PanelViewTest::DrawLineWithAngle(wxPaintDC &dc, const wxPoint &start, doubl
 
 wxPoint PanelViewTest::GetCenter() const
 {
-    return { 350, 200 };
+    return { 300, 200 };
 }
 
 
@@ -201,7 +201,7 @@ void PanelViewTest::CreateControls()
 
     wxPoint c = GetCenter();
 
-    int x_base = c.x - radius - 280;
+    int x_base = 20;
     int y_base = c.y - 40;
     int dy_base = 50;
 
@@ -227,7 +227,7 @@ void PanelViewTest::CreateControls()
 
             bcModeScan->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxModeScan, this);
 
-            bcModeScan->SetPosition({ 20, 40 });
+            bcModeScan->SetPosition({ x_base, 50 });
         }
     }
 
