@@ -154,10 +154,12 @@ void PanelViewTest::CreateControls()
         wxArrayString titles;
         titles.push_back(L("Током"));
         titles.push_back(L("Напряжением"));
+        titles.push_back(L("Земля"));
 
         wxArrayString tooltips;
         tooltips.push_back(L("База управляется током"));
         tooltips.push_back(L("База управляется напряжением"));
+        tooltips.push_back(L("База соединена с землёй"));
 
         if (!bcModeControlBase)
         {
