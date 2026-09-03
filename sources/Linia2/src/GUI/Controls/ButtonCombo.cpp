@@ -156,6 +156,8 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, int width,
     DrawingButton(parent, ((_labels.GetCount() != 0) ? _labels[0] : wxString("")), {width, TEXTCNTRL_HEIGHT + 3}, (type == Type::Bitmap) ? _title : wxString("")),
     current_choice(0)
 {
+    Hide();
+
     colorBackground = DrawingButton::GetBackgroundColour();
     colorForeground = DrawingButton::GetForegroundColour();
 
@@ -240,6 +242,8 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, int width,
     SetCurrentSelection(0);
 
     buttons_in_row = _buttons_in_row;
+
+    Show();
 }
 
 

@@ -1,6 +1,7 @@
 ﻿// 2026/04/29 16:03:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageTests/PanelViewTest.h"
+#include "Utils/GlobalFunctions.h"
 
 
 PanelViewTest *ThePanelViewTest = nullptr;
@@ -35,13 +36,13 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
         // Устанавливаем цвет текста
         dc.SetTextForeground(*wxBLACK);
 
+        DrawElement(dc);
+
         // Устанавливаем шрифт (опционально)
         dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
 
         // Рисуем текст в левом верхнем углу
         dc.DrawText(test->lib->name + " : " + test->name, 5, 5);
-
-        DrawElement(dc);
     }
 
     event.Skip();
@@ -50,6 +51,8 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 
 void PanelViewTest::DrawElement(wxPaintDC &dc)
 {
+    CreateControls();
+
     if (test->lib->UGO == "BJT")
     {
         DrawBJT(dc, "npn", GetCenter());
@@ -58,8 +61,6 @@ void PanelViewTest::DrawElement(wxPaintDC &dc)
     {
         DrawBJTS(dc, "npn", GetCenter());
     }
-
-    CreateControls();
 }
 
 
@@ -71,47 +72,79 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
 
     int x_vert = c.x - radius * 10 / 18;                    // Здесь заканчивается линия базы внутри окружности
 
-    dc.DrawLine(c.x - 2 * radius, c.y, x_vert, c.y);        // База
+    wxPoint coord_base{ c.x - radius - 150, c.y };
+
+    dc.DrawLine(coord_base, { x_vert, c.y });               // База
 
     {
-        // Наклонные линии
-
-        int dy = radius * 4 / 18;
-
-        int y_top = c.y - radius * 100 / 115;
-        int y_bottom = c.y + radius * 100 / 115;
-
-        int xx = c.x + radius * 10 / 20;
-
-        dc.DrawLine(x_vert, c.y - dy, xx, y_top);            // Верхняя наклонная линия (коллектор)
-        dc.DrawLine(x_vert, c.y + dy, xx, y_bottom);         // Нижняя наклонная линия (эмиттер)
+        // Рисуем транзистор
 
         {
-            double length = radius * 10 / 40;
+            // Наклонные линии
 
-            if (type == "npn")
+            int dy = radius * 4 / 18;
+
+            int y_top = c.y - radius * 100 / 115;
+            int y_bottom = c.y + radius * 100 / 115;
+
+            int xx = c.x + radius * 10 / 20;
+
+            dc.DrawLine(x_vert, c.y - dy, xx, y_top);            // Верхняя наклонная линия (коллектор)
+            dc.DrawLine(x_vert, c.y + dy, xx, y_bottom);         // Нижняя наклонная линия (эмиттер)
+
             {
-                DrawLineWithAngle(dc, { xx, y_bottom }, length, 125);
-                DrawLineWithAngle(dc, { xx, y_bottom }, length, 170);
+                double length = radius * 10 / 40;
+
+                if (type == "npn")
+                {
+                    DrawLineWithAngle(dc, { xx, y_bottom }, length, 125);
+                    DrawLineWithAngle(dc, { xx, y_bottom }, length, 170);
+                }
+                else if (type == "pnp")
+                {
+                    DrawLineWithAngle(dc, { x_vert, c.y + dy }, length, -8);
+                    DrawLineWithAngle(dc, { x_vert, c.y + dy }, length, -53);
+                }
+                else
+                {
+                    LOG_ERROR("Unknown type transistor");
+                }
             }
-            else if (type == "pnp")
-            {
-                DrawLineWithAngle(dc, { x_vert, c.y + dy }, length, -8);
-                DrawLineWithAngle(dc, { x_vert, c.y + dy }, length, -53);
-            }
-            else
-            {
-                LOG_ERROR("Unknown type transistor");
-            }
+        }
+
+        {
+            // Вертикальная линия
+
+            int dy = radius * 4 / 9;
+
+            dc.DrawLine(x_vert, c.y - dy, x_vert, c.y + dy);
         }
     }
 
     {
-        // Вертикальная линия
+        // Рисуем измеритель базы
 
-        int dy = radius * 4 / 9;
+        wxPoint coord{ coord_base.x, coord_base.y + 150 };
 
-        dc.DrawLine(x_vert, c.y - dy, x_vert, c.y + dy);
+        dc.DrawLine(coord_base, coord);
+
+        int r = 20;
+
+        coord.y += r;
+
+        dc.DrawCircle(coord, r);                                        // Измеритель
+
+        dc.SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_LIGHT));
+
+        GF::DrawTextInCenter(dc, "V", wxRect( wxPoint{ coord.x - r, coord.y - r }, wxPoint{ coord.x + r, coord.y + r } ));
+
+        coord.y += r;
+
+        wxPoint coord_end{ coord.x, coord.y + 50 };
+
+        dc.DrawLine(coord, coord_end);
+
+        dc.DrawLine({ coord_end.x - 10, coord_end.y }, { coord_end.x + 10, coord_end.y });
     }
 }
 
@@ -135,7 +168,7 @@ void PanelViewTest::DrawLineWithAngle(wxPaintDC &dc, const wxPoint &start, doubl
 
 wxPoint PanelViewTest::GetCenter() const
 {
-    return { 350, 350 };
+    return { 350, 200 };
 }
 
 
@@ -209,6 +242,7 @@ void PanelViewTest::CreateControls()
         bcBaseStartValue->SetPosition({ x_base, y_base });
     }
 
+    dy_base = 35;
     y_base += dy_base;
 
     {
