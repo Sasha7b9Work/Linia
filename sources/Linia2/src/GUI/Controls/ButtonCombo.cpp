@@ -260,6 +260,8 @@ void ButtonsCombo::SetCurrentSelection(int choice)
         label += title + " : ";
     }
 
+    LOG_WRITE("label = %s", label.c_str().AsChar());
+
     uint index = (uint)current_choice;
 
     SetMyToolTip((tooltips[index] != labels[index]) ?     // Предполагается, что подсказка устанавливается только в том случае, если она не совпадает с надписью
@@ -412,7 +414,6 @@ void ButtonsCombo::SetExtendedLabel(const wxString &start, int num_spaces, const
     wxString label{ start };
     label.Append(' ', (size_t)num_spaces);
     label.Append(end);
-    LOG_WRITE("Set label %s", label.c_str().AsChar());
     SetLabel(label);
 }
 
