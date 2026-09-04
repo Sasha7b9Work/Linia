@@ -210,6 +210,11 @@ void PanelViewTest::CreateControls()
 
     int width = 150;
 
+#define CREATE_BUTTONS_COMBO(name, title, num, func, _x, _y)  \
+    name = new ButtonsCombo(this, title, width, titles, tooltips, num, #name, ButtonsCombo::Type::Text);    \
+    name->Bind(wxEVT_COMBOBOX, &PanelViewTest::func, this); \
+    name->SetPosition( {_x, _y} );
+
     {
         if (!bcModeScan)
         {
@@ -226,11 +231,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back("");
 
-            bcModeScan = new ButtonsCombo(this, L("Развёртка"), width, titles, tooltips, 1, "bcModeScan", ButtonsCombo::Type::Text);
-
-            bcModeScan->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxModeScan, this);
-
-            bcModeScan->SetPosition({ x_base, 50 });
+            CREATE_BUTTONS_COMBO(bcModeScan, L("Развёртка"), 1, OnEventComboBoxModeScan, x_base, 50);
         }
 
         if (!bcTypeSemiconductor)
@@ -242,15 +243,15 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back("");
 
-            bcTypeSemiconductor = new ButtonsCombo(this, L(""), 40, titles, tooltips, 1, "bcTypeSemiconductor", ButtonsCombo::Type::Text);
-
-            bcTypeSemiconductor->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxTypeSemiconductor, this);
-
-            bcTypeSemiconductor->SetPosition({ c.x - 20, c.y - 10 });
+            int temp_width = width;
+            width = 40;
+            CREATE_BUTTONS_COMBO(bcTypeSemiconductor, L(""), 1, OnEventComboBoxTypeSemiconductor, c.x - 20, c.y - 10);
+            width = temp_width;
         }
     }
 
     {
+        if(!bcBaseModeControl)
         {
             wxArrayString titles;
             titles.push_back(L("I"));
@@ -262,20 +263,10 @@ void PanelViewTest::CreateControls()
             tooltips.push_back(L("База управляется напряжением"));
             tooltips.push_back(L("База соединена с землёй"));
 
-            if (!bcBaseModeControl)
-            {
-                bcBaseModeControl = new ButtonsCombo(this, L("Управление"), width, titles, tooltips, 1, "bcBaseModeControl", ButtonsCombo::Type::Text);
-
-                bcBaseModeControl->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseModeControl, this);
-            }
-            else
-            {
-                bcBaseModeControl->SetChoices(titles, tooltips);
-            }
-
-            bcBaseModeControl->SetPosition({ x_base, y_base });
+            CREATE_BUTTONS_COMBO(bcBaseModeControl, L("Управление"), 1, OnEventComboBoxBaseModeControl, x_base, y_base);
         }
 
+        if (!bcSubstrateModeControl)
         {
             wxArrayString titles;
             titles.push_back(L("I"));
@@ -287,18 +278,7 @@ void PanelViewTest::CreateControls()
             tooltips.push_back(L("Подложка управляется напряжением"));
             tooltips.push_back(L("Подложка соединена с землёй"));
 
-            if (!bcSubstrateModeControl)
-            {
-                bcSubstrateModeControl = new ButtonsCombo(this, L("Управление"), width, titles, tooltips, 1, "bcSubstrateModeControl", ButtonsCombo::Type::Text);
-
-                bcSubstrateModeControl->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseModeControl, this);
-            }
-            else
-            {
-                bcSubstrateModeControl->SetChoices(titles, tooltips);
-            }
-
-            bcSubstrateModeControl->SetPosition({ x_base + dx_substrate, y_base + dy_substrate });
+            CREATE_BUTTONS_COMBO(bcSubstrateModeControl, L("Управление"), 1, OnEventComboBoxBaseModeControl, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
@@ -616,7 +596,7 @@ void PanelViewTest::CreateControls()
     int x = 200;
     int y = 50;
 
-    width = 250;
+    width = 200;
 
     {
         if (!bcCollectorModeSource)
