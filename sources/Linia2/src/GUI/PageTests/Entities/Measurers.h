@@ -10,7 +10,19 @@ class MeasurerSourcer
 {
 public:
 
-    MeasurerSourcer(wxPaintDC &_dc, bool vertical, const wxString &_label) : label(_label), dc(_dc), is_vertical(vertical) { }
+    struct Type
+    {
+        enum E
+        {
+            MeasU,
+            MeasI,
+            SourceU,
+            SourceI,
+            Count
+        };
+    };
+
+    MeasurerSourcer(Type::E _type, wxPaintDC &_dc, bool vertical) : type(_type), dc(_dc), is_vertical(vertical) { }
 
     void Draw(const wxPoint &);
 
@@ -21,7 +33,7 @@ public:
 
 protected:
 
-    wxString label;
+    Type::E type;
     wxPaintDC &dc;
     bool is_vertical;
     const int radius = 20;
@@ -33,7 +45,7 @@ class Voltmeter : public MeasurerSourcer
 {
 public:
 
-    Voltmeter(wxPaintDC &dc, bool vertical) : MeasurerSourcer(dc, vertical, "V") { }
+    Voltmeter(wxPaintDC &dc, bool vertical) : MeasurerSourcer(MeasurerSourcer::Type::MeasU, dc, vertical) { }
 };
 
 
@@ -41,7 +53,7 @@ class Ampermeter : public MeasurerSourcer
 {
 public:
 
-    Ampermeter(wxPaintDC &dc, bool vertical) : MeasurerSourcer(dc, vertical, "A") { }
+    Ampermeter(wxPaintDC &dc, bool vertical) : MeasurerSourcer(MeasurerSourcer::Type::MeasI, dc, vertical) { }
 };
 
 
@@ -49,7 +61,7 @@ class SourceVoltage : public MeasurerSourcer
 {
 public:
 
-    SourceVoltage(wxPaintDC &dc, bool vertical) : MeasurerSourcer(dc, vertical, "E") { }
+    SourceVoltage(wxPaintDC &dc, bool vertical) : MeasurerSourcer(MeasurerSourcer::Type::SourceU, dc, vertical) { }
 };
 
 
@@ -57,5 +69,5 @@ class SourceCurrent : public MeasurerSourcer
 {
 public:
 
-    SourceCurrent(wxPaintDC &dc, bool vertical) : MeasurerSourcer(dc, vertical, "J") { }
+    SourceCurrent(wxPaintDC &dc, bool vertical) : MeasurerSourcer(MeasurerSourcer::Type::SourceI, dc, vertical) { }
 };

@@ -103,6 +103,9 @@ private:
         ComboInput **cbValueStart, const wxString &, void (PanelViewTest:: *)(wxCommandEvent &),
         ComboInput **cbValueFinish, const wxString &, void (PanelViewTest:: *)(wxCommandEvent &));
 
+    // Создаёт группу элементов управления источником базы или подложки
+    void CreateSourceBaseSubstrate(ComboInput **start, ComboInput **step, ComboInput **num_curves);
+
     // Нарисовать значок земли
     void DrawGround(int x, int y);
 

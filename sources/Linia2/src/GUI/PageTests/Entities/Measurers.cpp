@@ -12,5 +12,13 @@ void MeasurerSourcer::Draw(const wxPoint &_center)
 
     dc.SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
 
-    GF::DrawTextInCenter(dc, label, wxRect(wxPoint{ center.x - radius, center.y - radius }, wxPoint{ center.x + radius, center.y + radius }));
+    static const pchar labels[Type::Count] =
+    {
+        "V",
+        "I",
+        "E",
+        "J"
+    };
+
+    GF::DrawTextInCenter(dc, labels[type], wxRect(wxPoint{center.x - radius, center.y - radius}, wxPoint{center.x + radius, center.y + radius}));
 }
