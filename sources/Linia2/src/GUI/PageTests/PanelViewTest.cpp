@@ -72,7 +72,7 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
 
     int x_vert = c.x - radius * 10 / 18;                    // Здесь заканчивается линия базы внутри окружности
 
-    wxPoint coord_base{ 100, c.y };
+    wxPoint coord_base{ 50, c.y };
 
     dc.DrawLine(coord_base, { x_vert, c.y });               // База
 
@@ -481,7 +481,7 @@ void PanelViewTest::CreateControls()
         }
     }
 
-    x_base += 120;
+    x_base += 70;
     y_base += 30;
     y_base += dy_base;
 
@@ -516,7 +516,7 @@ void PanelViewTest::CreateControls()
             bcBaseRangeMeasure->SetPosition({ x_base, y_base });
         }
 
-        dx_substrate -= 170;
+        dx_substrate -= 150;
 
         {
             wxArrayString titles;
@@ -613,7 +613,7 @@ void PanelViewTest::CreateControls()
         }
     }
 
-    int x = 400;
+    int x = 200;
     int y = 50;
 
     width = 200;
