@@ -642,7 +642,7 @@ void PanelViewTest::CreateControls()
     y = 100;
 
     {
-        if (!bcCollectorStartValue)
+        if (!bcCollectorValueStart)
         {
             wxArrayString titles;
             titles.push_back(L("10 В"));
@@ -651,17 +651,17 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Начальное значение испытательного напряжения"));
 
-            bcCollectorStartValue = new ButtonsComboRange(this, L("Uc старт"), width, titles, tooltips, "bcCollectorStartValue");
+            bcCollectorValueStart = new ButtonsComboRange(this, L("Uc старт"), width, titles, tooltips, "bcCollectorValueStart");
 
-            bcCollectorStartValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxCollectorStartValue, this);
+            bcCollectorValueStart->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxCollectorValueStart, this);
 
-            bcCollectorStartValue->SetPosition({ x, y });
+            bcCollectorValueStart->SetPosition({ x, y });
         }
 
         y += dy_base;
 
         {
-            if (!bcCollectorFinishValue)
+            if (!bcCollectorValueFinish)
             {
                 wxArrayString titles;
                 titles.push_back(L("10 В"));
@@ -670,12 +670,48 @@ void PanelViewTest::CreateControls()
                 wxArrayString tooltips;
                 tooltips.push_back(L("Конечное значение испытательного напряжения"));
 
-                bcCollectorFinishValue = new ButtonsComboRange(this, L("Uc стоп"), width, titles, tooltips, "bcCollectorFinishValue");
+                bcCollectorValueFinish = new ButtonsComboRange(this, L("Uc стоп"), width, titles, tooltips, "bcCollectorValueFinish");
 
-                bcCollectorFinishValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxCollectorFinishValue, this);
+                bcCollectorValueFinish->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxCollectorValueFinish, this);
 
-                bcCollectorFinishValue->SetPosition({ x, y });
+                bcCollectorValueFinish->SetPosition({ x, y });
             }
+        }
+
+        y += dy_base * 3 / 2;
+
+        if (!bcCollectorMeasureRange)
+        {
+            wxArrayString titles;
+            titles.push_back(L("10 А"));
+            titles.push_back(L("20 А"));
+
+            wxArrayString tooltips;
+            tooltips.push_back(L("Диапазон измеряемого тока"));
+
+            bcCollectorMeasureRange = new ButtonsComboRange(this, L("Ic диап"), width, titles, tooltips, "bcCollectorMeasureRange");
+
+            bcCollectorMeasureRange->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxCollectorMeasureRange, this);
+
+            bcCollectorMeasureRange->SetPosition({ x, y });
+        }
+
+        y += dy_base;
+
+        if (!bcCollectorMeasureLimit)
+        {
+            wxArrayString titles;
+            titles.push_back(L("10 А"));
+            titles.push_back(L("20 А"));
+
+            wxArrayString tooltips;
+            tooltips.push_back(L("Предельное знанчение измеряемого тока"));
+
+            bcCollectorMeasureLimit = new ButtonsComboRange(this, L("Ic огр"), width, titles, tooltips, "bcCollectorMeasureLimit");
+
+            bcCollectorMeasureLimit->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxCollectorMeasureLimit, this);
+
+            bcCollectorMeasureLimit->SetPosition({ x, y });
         }
     }
 }
@@ -735,13 +771,25 @@ void PanelViewTest::OnEventComboBoxCollectorModeSource(wxCommandEvent &)
 }
 
 
-void PanelViewTest::OnEventComboBoxCollectorStartValue(wxCommandEvent &)
+void PanelViewTest::OnEventComboBoxCollectorValueStart(wxCommandEvent &)
 {
 
 }
 
 
-void PanelViewTest::OnEventComboBoxCollectorFinishValue(wxCommandEvent &)
+void PanelViewTest::OnEventComboBoxCollectorValueFinish(wxCommandEvent &)
+{
+
+}
+
+
+void PanelViewTest::OnEventComboBoxCollectorMeasureRange(wxCommandEvent &)
+{
+
+}
+
+
+void PanelViewTest::OnEventComboBoxCollectorMeasureLimit(wxCommandEvent &)
 {
 
 }
