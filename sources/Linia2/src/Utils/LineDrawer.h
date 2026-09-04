@@ -18,10 +18,10 @@ public:
         coord.y += dy;
     }
 
-    void LineTo(int x, int y);
-
     // Рисует линию вверх или вниз на величину dy
     int LineOnDY(int dy);
+
+    int LineToY(int y);
 
     int LineOnDX(int dx);
 
@@ -33,6 +33,11 @@ public:
     int GetY() const
     {
         return coord.y;
+    }
+
+    wxPoint GetCoord() const
+    {
+        return coord;
     }
 
 private:

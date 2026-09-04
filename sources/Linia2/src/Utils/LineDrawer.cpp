@@ -20,6 +20,18 @@ int LineDriwer::LineOnDY(int dy)
 }
 
 
+int LineDriwer::LineToY(int y)
+{
+    wxPoint coord_next{ coord.x, y };
+
+    dc.DrawLine(coord, coord_next);
+
+    coord = coord_next;
+
+    return coord.y;
+}
+
+
 int LineDriwer::LineOnDX(int dx)
 {
     wxPoint coord_next{ coord.x + dx, coord.y };

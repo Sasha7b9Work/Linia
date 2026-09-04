@@ -45,11 +45,17 @@ private:
     ButtonsCombo *bcTypeSemiconductor = nullptr;        // npn или pnp
 
     ButtonsCombo *bcBaseModeControl = nullptr;          // Режим управления базой - током или напряжением
-    ComboInput *bcBaseStartValueI = nullptr;            // Стартовое значение задаваемой величины
-    ComboInput *bcBaseDeltaValueI = nullptr;            // Шаг изменения задаваемой величины
     ComboInput *bcBaseNumMeasures = nullptr;            // Количество измерений
+
+    ComboInput *bcBaseSourceStartI = nullptr;            // Стартовое значение задаваемой величины
+    ComboInput *bcBaseSourceStepI = nullptr;            // Шаг изменения задаваемой величины
+    ComboInput *bcBaseSourceStartU = nullptr;
+    ComboInput *bcBaseSourceStepU = nullptr;
+
     ComboInput *bcBaseMeasureRangeU = nullptr;          // Диапазон - максимальное доступное значение
     ComboInput *bcBaseMeasureLimitU = nullptr;          // Максимальное значение, при котором происходит завершение измерения
+    ComboInput *bcBaseMeasureRangeI = nullptr;
+    ComboInput *bcBaseMeasureLimitI = nullptr;
 
     ButtonsCombo *bcSubstrateModeControl = nullptr;
     ComboInput *bcSubstrateStartValueI = nullptr;

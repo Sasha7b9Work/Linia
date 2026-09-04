@@ -140,18 +140,38 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 DrawGround(driwer.GetX(), driwer.GetY());
 
+                int y_ground = driwer.GetY();
+
                 driwer.MoveOnDY(-450);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::SourceI, Dir::Down,
-                    &bcBaseStartValueI, L("Ib старт"),
-                    &bcBaseDeltaValueI, L("Ib шаг"),
+                    &bcBaseSourceStartI, L("Ib старт"),
+                    &bcBaseSourceStepI, L("Ib шаг"),
                     &bcBaseNumMeasures, L("N кривых"));
 
-                driwer.MoveOnDY(350);
+                driwer.MoveOnDY(160);
+
+                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasI, Dir::Down,
+                    &bcBaseMeasureRangeI, L("Ib диап"),
+                    &bcBaseMeasureLimitI, L("Ib огр"));
+
+                driwer.MoveOnDY(180);
+
+                wxPoint coord_meas_u = driwer.GetCoord();
 
                 CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasU, Dir::Down,
                     &bcBaseMeasureRangeU, L("Ub диап"),
                     &bcBaseMeasureLimitU, L("Ub огр"));
+
+                driwer.MoveOnDY(-70);
+                driwer.LineOnDX(140);
+                driwer.LineToY(y_ground);
+
+                CreateSourceBaseSubstrate(driwer.GetX(), coord_meas_u.y, MeasurerSourcer::Type::SourceU, Dir::Down,
+                    &bcBaseSourceStartU, L("Ub старт"),
+                    &bcBaseSourceStepU, L("Ub огр"));
+
+                DrawGround(driwer.GetX(), driwer.GetY());
             }
         }
 
