@@ -29,8 +29,8 @@ private:
     ButtonsComboRange *bcBaseStartValue = nullptr;      // Стартовое значение задаваемой величины
     ButtonsComboRange *bcBaseDeltaValue = nullptr;      // Шаг изменения задаваемой величины
     ButtonsCombo *bcBaseNumMeasures = nullptr;          // Количество измерений
-    ButtonsComboRange *bcBaseRangeMeasure = nullptr;    // Диапазон - максимальное доступное значение
-    ButtonsComboRange *bcBaseRangeLimit = nullptr;      // Максимальное значение, при котором происходит завершение измерения
+    ButtonsComboRange *bcBaseMeasureRange = nullptr;    // Диапазон - максимальное доступное значение
+    ButtonsComboRange *bcBaseMeasureLimit = nullptr;      // Максимальное значение, при котором происходит завершение измерения
 
     ButtonsCombo *bcSubstrateModeControl = nullptr;
     ButtonsComboRange *bcSubstrateStartValue = nullptr;
@@ -42,6 +42,8 @@ private:
     ButtonsCombo *bcCollectorModeSource = nullptr;          // Режим работы источника в коллекторе - высокое напряжение или большой ток
     ButtonsComboRange *bcCollectorStartValue = nullptr;     // Начальное значение испытательного напряжения Uк
     ButtonsComboRange *bcCollectorFinishValue = nullptr;    // Конечное значение испытательного напряжения Uк
+    ButtonsComboRange *bcCollectorMeasureRange = nullptr;
+    ButtonsComboRange *bcCollectorMeasureLimit = nullptr;
 
     void OnEventPaint(wxPaintEvent &);
 
@@ -51,8 +53,8 @@ private:
     void OnEventComboBoxBaseStartValue(wxCommandEvent &);
     void OnEventComboBoxBaseDeltaValue(wxCommandEvent &);
     void OnEventComboBoxBaseNumMeasures(wxCommandEvent &);
-    void OnEventComboBoxBaseRangeMeasure(wxCommandEvent &);
-    void OnEventComboBoxBaseRangeLimit(wxCommandEvent &);
+    void OnEventComboBoxBaseMeasureRange(wxCommandEvent &);
+    void OnEventComboBoxBaseMeasureLimit(wxCommandEvent &);
     void OnEventComboBoxCollectorModeSource(wxCommandEvent &);
     void OnEventComboBoxCollectorStartValue(wxCommandEvent &);
     void OnEventComboBoxCollectorFinishValue(wxCommandEvent &);
