@@ -63,8 +63,10 @@ private:
     void OnEventComboBoxCollectorModeSource(wxCommandEvent &);
     void OnEventComboBoxCollectorValueStart(wxCommandEvent &);
     void OnEventComboBoxCollectorValueFinish(wxCommandEvent &);
-    void OnEventComboBoxCollectorMeasureRange(wxCommandEvent &);
-    void OnEventComboBoxCollectorMeasureLimit(wxCommandEvent &);
+    void OnEventComboBoxCollectorMeasureRangeI(wxCommandEvent &);
+    void OnEventComboBoxCollectorMeasureLimitI(wxCommandEvent &);
+    void OnEventComboBoxCollectorMeasureRangeU(wxCommandEvent &);
+    void OnEventComboBoxCollectorMeasureLimitU(wxCommandEvent &);
 
     // Нарисовать испытуемый элемент
     void DrawElement();
@@ -75,10 +77,17 @@ private:
 
     // Нарисовать блок измерителя тока коллектора
     // x, y - центр измерителя
-    void DrawMeasurerCollectorI(int x, int y, Dir::E, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit);
-    void DrawMeasurerCollectorU(int x, int y, Dir::E, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit);
+    void DrawMeasurerCollectorI(int x, int y, Dir::E,
+        ButtonsComboRange **cbRange, void (PanelViewTest::*)(wxCommandEvent &),
+        ButtonsComboRange **cbLimit, void (PanelViewTest::*)(wxCommandEvent &));
 
-    void DrawSourceCollectorU(int x, int y, Dir::E, ButtonsComboRange **cbValueStart, ButtonsComboRange **cbValueFinish);
+    void DrawMeasurerCollectorU(int x, int y, Dir::E,
+        ButtonsComboRange **cbRange, void (PanelViewTest:: *)(wxCommandEvent &),
+        ButtonsComboRange **cbLimit, void (PanelViewTest:: *)(wxCommandEvent &));
+
+    void DrawSourceCollectorU(int x, int y, Dir::E,
+        ButtonsComboRange **cbValueStart, void (PanelViewTest:: *)(wxCommandEvent &),
+        ButtonsComboRange **cbValueFinish, void (PanelViewTest:: *)(wxCommandEvent &));
 
     // Нарисовать значок земли
     void DrawGround(int x, int y);
