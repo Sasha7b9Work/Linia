@@ -23,6 +23,8 @@ private:
 
     Test *test = nullptr;
 
+    wxPaintDC *dc = nullptr;
+
     ButtonsCombo *bcModeScan = nullptr;                 // Режим развёртки
     ButtonsCombo *bcTypeSemiconductor = nullptr;        // npn или pnp
 
@@ -65,27 +67,30 @@ private:
     void OnEventComboBoxCollectorMeasureLimit(wxCommandEvent &);
 
     // Нарисовать испытуемый элемент
-    void DrawElement(wxPaintDC &);
+    void DrawElement();
 
     // type == "npn", "pnp"
-    void DrawBJT(wxPaintDC &, const wxString &type, const wxPoint &);
-    void DrawBJTS(wxPaintDC &, const wxString &type, const wxPoint &);
+    void DrawBJT(const wxString &type, const wxPoint &);
+    void DrawBJTS(const wxString &type, const wxPoint &);
 
     // Нарисовать блок измерителя тока коллектора
     // x, y - центр измерителя
-    void DrawMeasurerCollectorI(wxPaintDC &, int x, int y, Dir::E, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit);
-    void DrawMeasurerCollectorU(wxPaintDC &, int x, int y, Dir::E, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit);
+    void DrawMeasurerCollectorI(int x, int y, Dir::E, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit);
+    void DrawMeasurerCollectorU(int x, int y, Dir::E, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit);
 
-    void DrawSourceCollectorU(wxPaintDC &, int x, int y, Dir::E, ButtonsComboRange **cbValueStart, ButtonsComboRange **cbValueFinish);
+    void DrawSourceCollectorU(int x, int y, Dir::E, ButtonsComboRange **cbValueStart, ButtonsComboRange **cbValueFinish);
+
+    // Нарисовать значок земли
+    void DrawGround(int x, int y);
 
     // Нарисовать окантовку для измерителя или источника. x, y - центр измерителя
-    void DrawBorder(wxPaintDC &, int &x, int &y, int radius, Dir::E, int num_controls);
+    void DrawBorder(int &x, int &y, int radius, Dir::E, int num_controls);
 
     // Создать элементы управляения для данного теста
     void CreateControls();
 
     // Рисует линию длиной length под углом angleDeg
-    void DrawLineWithAngle(wxPaintDC &dc, const wxPoint &start, double length, double angleDeg);
+    void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg);
 
     wxPoint GetCenter() const;
 };

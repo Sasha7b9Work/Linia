@@ -30,59 +30,62 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 {
     if (test)
     {
-        wxPaintDC dc(this);
+        dc = new wxPaintDC(this);
 
-        dc.SetBrush(wxBrush(GetBackgroundColour()));
+        dc->SetBrush(wxBrush(GetBackgroundColour()));
 
-        dc.SetPen(wxPen(*wxBLACK, 1));
+        dc->SetPen(wxPen(*wxBLACK, 1));
 
         // Устанавливаем цвет текста
-        dc.SetTextForeground(*wxBLACK);
+        dc->SetTextForeground(*wxBLACK);
 
-        DrawElement(dc);
+        DrawElement();
 
         // Устанавливаем шрифт (опционально)
-        dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+        dc->SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
 
         // Рисуем текст в левом верхнем углу
-        dc.DrawText(test->lib->name + " : " + test->name, 5, 5);
+        dc->DrawText(test->lib->name + " : " + test->name, 5, 5);
+
+        delete dc;
+        dc = nullptr;
     }
 
     event.Skip();
 }
 
 
-void PanelViewTest::DrawElement(wxPaintDC &dc)
+void PanelViewTest::DrawElement()
 {
     CreateControls();
 
     if (test->lib->UGO == "BJT")
     {
-        DrawBJT(dc, "npn", GetCenter());
+        DrawBJT("npn", GetCenter());
     }
     else if (test->lib->UGO == "BJTS")
     {
-        DrawBJTS(dc, "npn", GetCenter());
+        DrawBJTS("npn", GetCenter());
     }
 }
 
 
-void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &c)
+void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 {
     int x_col = c.x + radius / 2;   // / Координаты точки коммутации
     int y_col = c.y - 2 * radius;   // / с коллектором
 
-    dc.DrawLine(x_col, y_col, c.x + radius / 2, c.y + 2 * radius);    // Вертикальная линия, которая выходит из коллектора и эмиттера
+    dc->DrawLine(x_col, y_col, c.x + radius / 2, c.y + 2 * radius);    // Вертикальная линия, которая выходит из коллектора и эмиттера
 
-    dc.DrawLine(c.x + radius / 2 - 10, c.y + 2 * radius, c.x + radius / 2 + 10, c.y + 2 * radius);      // Заземление эмиттера
+    dc->DrawLine(c.x + radius / 2 - 10, c.y + 2 * radius, c.x + radius / 2 + 10, c.y + 2 * radius);      // Заземление эмиттера
 
-    dc.DrawCircle(c, radius);
+    dc->DrawCircle(c, radius);
 
     int x_vert = c.x - radius * 10 / 18;                    // Здесь заканчивается линия базы внутри окружности
 
     wxPoint coord_base{ 50, c.y };
 
-    dc.DrawLine(coord_base, { x_vert, c.y });               // База
+    dc->DrawLine(coord_base, { x_vert, c.y });               // База
 
     {
         // Рисуем транзистор
@@ -97,8 +100,8 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
 
             int xx = c.x + radius * 10 / 20;                    // В этом иксе - пересечение коллектора и эмиттера с окружностью.
 
-            dc.DrawLine(x_vert, c.y - dy, xx, y_top);            // Верхняя наклонная линия (коллектор)
-            dc.DrawLine(x_vert, c.y + dy, xx, y_bottom);         // Нижняя наклонная линия (эмиттер)
+            dc->DrawLine(x_vert, c.y - dy, xx, y_top);            // Верхняя наклонная линия (коллектор)
+            dc->DrawLine(x_vert, c.y + dy, xx, y_bottom);         // Нижняя наклонная линия (эмиттер)
 
             {
                 // Стрелка эмиттера
@@ -107,13 +110,13 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
 
                 if (type == "npn")
                 {
-                    DrawLineWithAngle(dc, { xx, y_bottom }, length, 125);
-                    DrawLineWithAngle(dc, { xx, y_bottom }, length, 170);
+                    DrawLineWithAngle({ xx, y_bottom }, length, 125);
+                    DrawLineWithAngle({ xx, y_bottom }, length, 170);
                 }
                 else if (type == "pnp")
                 {
-                    DrawLineWithAngle(dc, { x_vert, c.y + dy }, length, -8);
-                    DrawLineWithAngle(dc, { x_vert, c.y + dy }, length, -53);
+                    DrawLineWithAngle({ x_vert, c.y + dy }, length, -8);
+                    DrawLineWithAngle({ x_vert, c.y + dy }, length, -53);
                 }
                 else
                 {
@@ -127,28 +130,28 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
 
             int dy = radius * 4 / 9;
 
-            dc.DrawLine(x_vert, c.y - dy, x_vert, c.y + dy);
+            dc->DrawLine(x_vert, c.y - dy, x_vert, c.y + dy);
 
             {
                 // Рисуем измеритель базы
 
                 wxPoint coord{ coord_base.x, coord_base.y + 150 };
 
-                dc.DrawLine(coord_base, coord);
+                dc->DrawLine(coord_base, coord);
 
                 int r = 20;
 
                 coord.y += r;
 
-                Voltmeter(dc, true).Draw(coord);
+                Voltmeter(*dc, true).Draw(coord);
 
                 coord.y += r;
 
                 wxPoint coord_end{ coord.x, coord.y + 50 };
 
-                dc.DrawLine(coord, coord_end);
+                dc->DrawLine(coord, coord_end);
 
-                dc.DrawLine({ coord_end.x - 10, coord_end.y }, { coord_end.x + 10, coord_end.y });
+                dc->DrawLine({ coord_end.x - 10, coord_end.y }, { coord_end.x + 10, coord_end.y });
             }
         }
 
@@ -159,7 +162,7 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
 
             int x = c.x + (c.x - x_vert) + radius / 10;
 
-            dc.DrawLine(x, c.y - dy, x, c.y + dy);
+            dc->DrawLine(x, c.y - dy, x, c.y + dy);
 
             {
                 // Измеритель подложки
@@ -167,11 +170,11 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
                 int dx = 50;
                 int y = c.y + 500;
 
-                dc.DrawLine(x, c.y, x + dx, c.y);
-                dc.DrawLine(x + dx, c.y, x + dx, y);
-                dc.DrawLine(x + dx - 10, y, x + dx + 10, y);
+                dc->DrawLine(x, c.y, x + dx, c.y);
+                dc->DrawLine(x + dx, c.y, x + dx, y);
+                dc->DrawLine(x + dx - 10, y, x + dx + 10, y);
 
-                Voltmeter(dc, true).Draw({ x + dx, y - 80 });
+                Voltmeter(*dc, true).Draw({ x + dx, y - 80 });
             }
         }
     }
@@ -179,46 +182,50 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
     {
         // Рисуем цепь коллектора
 
-        LineDriwer driwer{ dc, x_col, y_col };
+        LineDriwer driwer{ *dc, x_col, y_col };
 
         int x = driwer.LineOnDX(150);
         int y = driwer.GetY() + 50;
         driwer.LineOnDY(500);
 
-        DrawMeasurerCollectorI(dc, x, y, Dir::Down, &bcCollectorMeasureRangeI, &bcCollectorMeasureLimitI);
+        DrawMeasurerCollectorI(x, y, Dir::Down, &bcCollectorMeasureRangeI, &bcCollectorMeasureLimitI);
 
-        DrawSourceCollectorU(dc, x, y + 300, Dir::Down, &bcCollectorValueStart, &bcCollectorValueFinish);
+        DrawSourceCollectorU(x, y + 300, Dir::Down, &bcCollectorValueStart, &bcCollectorValueFinish);
 
-        y = driwer.GetY();
+        DrawGround(x, driwer.GetY());
 
-        dc.DrawLine(x - 10, y, x + 10, y);
-
-        driwer.MoveOnDY(-250);
-        driwer.LineOnDX(150);
-        y = driwer.LineOnDY(250);
+        driwer.MoveOnDY(-340);
+        driwer.LineOnDX(100);
+        y = driwer.LineOnDY(150);
         x = driwer.GetX();
 
-        dc.DrawLine(x - 10, y, x + 10, y);
+        DrawGround(x, y);
 
-        DrawMeasurerCollectorU(dc, x, y - 150, Dir::Down, &bcCollectorMeasureRangeU, &bcCollectorMeasureLimitU);
+        DrawMeasurerCollectorU(x, y - 105, Dir::Down, &bcCollectorMeasureRangeU, &bcCollectorMeasureLimitU);
     }
 }
 
 
-void PanelViewTest::DrawBJTS(wxPaintDC &dc, const wxString &type, const wxPoint &c)
+void PanelViewTest::DrawGround(int x, int y)
 {
-    DrawBJT(dc, type, c);
+    dc->DrawLine(x - 10, y, x + 10, y);
 }
 
 
-void PanelViewTest::DrawLineWithAngle(wxPaintDC &dc, const wxPoint &start, double length, double angleDeg)
+void PanelViewTest::DrawBJTS(const wxString &type, const wxPoint &c)
+{
+    DrawBJT(type, c);
+}
+
+
+void PanelViewTest::DrawLineWithAngle(const wxPoint &start, double length, double angleDeg)
 {
     double angleRad = angleDeg * M_PI / 180.0;
 
     int endX = start.x + (int)(length * cos(angleRad));
     int endY = start.y - (int)(length * sin(angleRad));  // минус, т.к. Y вниз
 
-    dc.DrawLine(start.x, start.y, endX, endY);
+    dc->DrawLine(start.x, start.y, endX, endY);
 }
 
 
@@ -641,27 +648,27 @@ void PanelViewTest::OnEventComboBoxCollectorMeasureLimit(wxCommandEvent &)
 }
 
 
-void PanelViewTest::DrawBorder(wxPaintDC &dc, int &x, int &y, int r, Dir::E dir, int /*num_controls*/)
+void PanelViewTest::DrawBorder(int &x, int &y, int r, Dir::E dir, int /*num_controls*/)
 {
     const int d = 5;
 
-    PaintDC paint(dc);
+    PaintDC paint(*dc);
 
     paint.StorePenBrush();
 
-    dc.SetPen({ *wxBLACK, 1, wxPENSTYLE_SHORT_DASH });
-    dc.SetBrush(*wxTRANSPARENT_BRUSH);
+    dc->SetPen({ *wxBLACK, 1, wxPENSTYLE_SHORT_DASH });
+    dc->SetBrush(*wxTRANSPARENT_BRUSH);
 
     if (dir == Dir::Right)
     {
-        dc.DrawRectangle(x - r - d, y - r - d - 15, WIDTH_CONTROL + 60, 80);
+        dc->DrawRectangle(x - r - d, y - r - d - 15, WIDTH_CONTROL + 60, 80);
 
         x += 30;
         y -= 30;
     }
     else if (dir == Dir::Down)
     {
-        dc.DrawRectangle(x - WIDTH_CONTROL / 2 - d, y - r - d, WIDTH_CONTROL + 2 * d, 120);
+        dc->DrawRectangle(x - WIDTH_CONTROL / 2 - d, y - r - d, WIDTH_CONTROL + 2 * d, 120);
 
         x -= WIDTH_CONTROL / 2;
         y += 30;
@@ -676,12 +683,12 @@ void PanelViewTest::DrawBorder(wxPaintDC &dc, int &x, int &y, int r, Dir::E dir,
     name->Bind(wxEVT_COMBOBOX, &PanelViewTest::func, this);
 
 
-void PanelViewTest::DrawMeasurerCollectorI(wxPaintDC &dc, int x, int y, Dir::E dir, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit)
+void PanelViewTest::DrawMeasurerCollectorI(int x, int y, Dir::E dir, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit)
 {
-    Ampermeter ampermeter(dc, true);
+    Ampermeter ampermeter(*dc, true);
     ampermeter.Draw({ x, y });
 
-    DrawBorder(dc, x, y, ampermeter.GetRadius(), dir, 2);
+    DrawBorder(x, y, ampermeter.GetRadius(), dir, 2);
 
     if (!(*cbRange))
     {
@@ -713,12 +720,12 @@ void PanelViewTest::DrawMeasurerCollectorI(wxPaintDC &dc, int x, int y, Dir::E d
 }
 
 
-void PanelViewTest::DrawMeasurerCollectorU(wxPaintDC &dc, int x, int y, Dir::E dir, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit)
+void PanelViewTest::DrawMeasurerCollectorU(int x, int y, Dir::E dir, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit)
 {
-    Voltmeter voltmeter(dc, true);
+    Voltmeter voltmeter(*dc, true);
     voltmeter.Draw({ x, y });
 
-    DrawBorder(dc, x, y, voltmeter.GetRadius(), dir, 2);
+    DrawBorder(x, y, voltmeter.GetRadius(), dir, 2);
 
     if (!(*cbRange))
     {
@@ -750,12 +757,12 @@ void PanelViewTest::DrawMeasurerCollectorU(wxPaintDC &dc, int x, int y, Dir::E d
 }
 
 
-void PanelViewTest::DrawSourceCollectorU(wxPaintDC &dc, int x, int y, Dir::E dir, ButtonsComboRange **cbValueStart, ButtonsComboRange **cbValueFinish)
+void PanelViewTest::DrawSourceCollectorU(int x, int y, Dir::E dir, ButtonsComboRange **cbValueStart, ButtonsComboRange **cbValueFinish)
 {
-    SourceVoltage sourceVoltage(dc, true);
+    SourceVoltage sourceVoltage(*dc, true);
     sourceVoltage.Draw({ x, y });
 
-    DrawBorder(dc, x, y, sourceVoltage.GetRadius(), dir, 2);
+    DrawBorder(x, y, sourceVoltage.GetRadius(), dir, 2);
 
     if (!(*cbValueStart))
     {
