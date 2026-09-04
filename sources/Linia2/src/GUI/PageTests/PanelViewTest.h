@@ -8,6 +8,20 @@
 #pragma warning(pop)
 
 
+// \todo Элемент предназначен для ввода числового значения.
+class ComboInput : public ButtonsComboRange
+{
+public:
+    ComboInput(wxWindow *parent, const wxString &title, int width,
+        const wxArrayString &labels,
+        const wxArrayString &tooltips,
+        const wxString &name) :
+        ButtonsComboRange(parent, title, width, labels, tooltips, name)
+    {
+    }
+};
+
+
 class PanelViewTest : public Panel
 {
 public:
@@ -29,26 +43,26 @@ private:
     ButtonsCombo *bcTypeSemiconductor = nullptr;         // npn или pnp
 
     ButtonsCombo *bcBaseModeControl = nullptr;           // Режим управления базой - током или напряжением
-    ButtonsComboRange *bcBaseStartValueI = nullptr;      // Стартовое значение задаваемой величины
-    ButtonsComboRange *bcBaseDeltaValueI = nullptr;      // Шаг изменения задаваемой величины
+    ComboInput *bcBaseStartValueI = nullptr;      // Стартовое значение задаваемой величины
+    ComboInput *bcBaseDeltaValueI = nullptr;      // Шаг изменения задаваемой величины
     ButtonsCombo *bcBaseNumMeasures = nullptr;           // Количество измерений
-    ButtonsComboRange *bcBaseMeasureRangeU = nullptr;    // Диапазон - максимальное доступное значение
-    ButtonsComboRange *bcBaseMeasureLimitU = nullptr;    // Максимальное значение, при котором происходит завершение измерения
+    ComboInput *bcBaseMeasureRangeU = nullptr;    // Диапазон - максимальное доступное значение
+    ComboInput *bcBaseMeasureLimitU = nullptr;    // Максимальное значение, при котором происходит завершение измерения
 
     ButtonsCombo *bcSubstrateModeControl = nullptr;
-    ButtonsComboRange *bcSubstrateStartValue = nullptr;
-    ButtonsComboRange *bcSubstrateDeltaValue = nullptr;
+    ComboInput *bcSubstrateStartValue = nullptr;
+    ComboInput *bcSubstrateDeltaValue = nullptr;
     ButtonsCombo *bcSubstrateNumMeasures = nullptr;
-    ButtonsComboRange *bcSubstrateRangeMeasure = nullptr;
-    ButtonsComboRange *bcSubstrateRangeLimit = nullptr;
+    ComboInput *bcSubstrateRangeMeasure = nullptr;
+    ComboInput *bcSubstrateRangeLimit = nullptr;
 
     ButtonsCombo *bcCollectorModeSource = nullptr;          // Режим работы источника в коллекторе - высокое напряжение или большой ток
-    ButtonsComboRange *bcCollectorValueStart = nullptr;     // Начальное значение испытательного напряжения Uк
-    ButtonsComboRange *bcCollectorValueFinish = nullptr;    // Конечное значение испытательного напряжения Uк
-    ButtonsComboRange *bcCollectorMeasureRangeI = nullptr;
-    ButtonsComboRange *bcCollectorMeasureLimitI = nullptr;
-    ButtonsComboRange *bcCollectorMeasureRangeU = nullptr;
-    ButtonsComboRange *bcCollectorMeasureLimitU = nullptr;
+    ComboInput *bcCollectorValueStart = nullptr;     // Начальное значение испытательного напряжения Uк
+    ComboInput *bcCollectorValueFinish = nullptr;    // Конечное значение испытательного напряжения Uк
+    ComboInput *bcCollectorMeasureRangeI = nullptr;
+    ComboInput *bcCollectorMeasureLimitI = nullptr;
+    ComboInput *bcCollectorMeasureRangeU = nullptr;
+    ComboInput *bcCollectorMeasureLimitU = nullptr;
 
     void OnEventPaint(wxPaintEvent &);
 
@@ -78,16 +92,16 @@ private:
     // Нарисовать блок измерителя тока коллектора
     // x, y - центр измерителя
     void DrawMeasurerCollectorI(int x, int y, Dir::E,
-        ButtonsComboRange **cbRange, void (PanelViewTest::*)(wxCommandEvent &),
-        ButtonsComboRange **cbLimit, void (PanelViewTest::*)(wxCommandEvent &));
+        ComboInput **cbRange, void (PanelViewTest:: *)(wxCommandEvent &),
+        ComboInput **cbLimit, void (PanelViewTest::*)(wxCommandEvent &));
 
     void DrawMeasurerCollectorU(int x, int y, Dir::E,
-        ButtonsComboRange **cbRange, void (PanelViewTest:: *)(wxCommandEvent &),
-        ButtonsComboRange **cbLimit, void (PanelViewTest:: *)(wxCommandEvent &));
+        ComboInput **cbRange, void (PanelViewTest:: *)(wxCommandEvent &),
+        ComboInput **cbLimit, void (PanelViewTest:: *)(wxCommandEvent &));
 
     void DrawSourceCollectorU(int x, int y, Dir::E,
-        ButtonsComboRange **cbValueStart, void (PanelViewTest:: *)(wxCommandEvent &),
-        ButtonsComboRange **cbValueFinish, void (PanelViewTest:: *)(wxCommandEvent &));
+        ComboInput **cbValueStart, void (PanelViewTest:: *)(wxCommandEvent &),
+        ComboInput **cbValueFinish, void (PanelViewTest:: *)(wxCommandEvent &));
 
     // Нарисовать значок земли
     void DrawGround(int x, int y);

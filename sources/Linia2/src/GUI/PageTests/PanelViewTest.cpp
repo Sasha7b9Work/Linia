@@ -269,7 +269,7 @@ void PanelViewTest::CreateControls()
     name->SetPosition( {_x, _y} );
 
 #define CREATE_BUTTONS_COMBO_RANGE(name, title, func, _x, _y)  \
-    name = new ButtonsComboRange(this, title, width, titles, tooltips, #name);    \
+    name = new ComboInput(this, title, width, titles, tooltips, #name);    \
     name->Bind(wxEVT_COMBOBOX, &PanelViewTest::func, this); \
     name->SetPosition( {_x, _y} );
 
@@ -697,13 +697,13 @@ void PanelViewTest::DrawBorder(int &x, int &y, int r, Dir::E dir, int /*num_cont
 }
 
 #define CREATE_BUTTONS_COMBO_RANGE(name, title, func, _x, _y)                               \
-    name = new ButtonsComboRange(this, title, WIDTH_CONTROL, titles, tooltips, #name);      \
+    name = new ComboInput(this, title, WIDTH_CONTROL, titles, tooltips, #name);      \
     name->Bind(wxEVT_COMBOBOX, func, this);
 
 
 void PanelViewTest::DrawMeasurerCollectorI(int x, int y, Dir::E dir,
-    ButtonsComboRange **cbRange, void (PanelViewTest::*onEventRange)(wxCommandEvent &),
-    ButtonsComboRange **cbLimit, void (PanelViewTest::*onEventLimit)(wxCommandEvent &))
+    ComboInput **cbRange, void (PanelViewTest:: *onEventRange)(wxCommandEvent &),
+    ComboInput **cbLimit, void (PanelViewTest::*onEventLimit)(wxCommandEvent &))
 {
     Ampermeter ampermeter(*dc, true);
     ampermeter.Draw({ x, y });
@@ -741,8 +741,8 @@ void PanelViewTest::DrawMeasurerCollectorI(int x, int y, Dir::E dir,
 
 
 void PanelViewTest::DrawMeasurerCollectorU(int x, int y, Dir::E dir,
-    ButtonsComboRange **cbRange, void (PanelViewTest::*onEventRange)(wxCommandEvent &),
-    ButtonsComboRange **cbLimit, void (PanelViewTest::*onEventLimit)(wxCommandEvent &))
+    ComboInput **cbRange, void (PanelViewTest::*onEventRange)(wxCommandEvent &),
+    ComboInput **cbLimit, void (PanelViewTest::*onEventLimit)(wxCommandEvent &))
 {
     Voltmeter voltmeter(*dc, true);
     voltmeter.Draw({ x, y });
@@ -780,8 +780,8 @@ void PanelViewTest::DrawMeasurerCollectorU(int x, int y, Dir::E dir,
 
 
 void PanelViewTest::DrawSourceCollectorU(int x, int y, Dir::E dir,
-    ButtonsComboRange **cbValueStart, void (PanelViewTest::*onEventStart)(wxCommandEvent &),
-    ButtonsComboRange **cbValueFinish, void (PanelViewTest::*onEventFinish)(wxCommandEvent &))
+    ComboInput **cbValueStart, void (PanelViewTest:: *onEventStart)(wxCommandEvent &),
+    ComboInput **cbValueFinish, void (PanelViewTest::*onEventFinish)(wxCommandEvent &))
 {
     SourceVoltage sourceVoltage(*dc, true);
     sourceVoltage.Draw({ x, y });
