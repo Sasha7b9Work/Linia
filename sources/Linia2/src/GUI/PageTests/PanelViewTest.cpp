@@ -182,7 +182,7 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
 
         LineDriwer driwer{ dc, x_col, y_col };
 
-        driwer.AppendX(200);
+        driwer.AppendX(300);
         driwer.AppendY(500);
     }
 }
