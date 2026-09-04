@@ -215,6 +215,11 @@ void PanelViewTest::CreateControls()
     name->Bind(wxEVT_COMBOBOX, &PanelViewTest::func, this); \
     name->SetPosition( {_x, _y} );
 
+#define CREATE_BUTTONS_COMBO_RANGE(name, title, func, _x, _y)  \
+    name = new ButtonsComboRange(this, title, width, titles, tooltips, #name);    \
+    name->Bind(wxEVT_COMBOBOX, &PanelViewTest::func, this); \
+    name->SetPosition( {_x, _y} );
+
     {
         if (!bcModeScan)
         {
@@ -285,6 +290,7 @@ void PanelViewTest::CreateControls()
     y_base += dy_base;
 
     {
+        if (!bcBaseStartValue)
         {
             wxArrayString titles;
             titles.push_back("2 мкА");
@@ -297,20 +303,10 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Начальное значение тока базы"));
 
-            if (!bcBaseStartValue)
-            {
-                bcBaseStartValue = new ButtonsComboRange(this, L("Ib старт"), width, titles, tooltips, "bcBaseStartValue");
-
-                bcBaseStartValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseStartValue, this);
-            }
-            else
-            {
-                bcBaseStartValue->SetChoices(titles, tooltips);
-            }
-
-            bcBaseStartValue->SetPosition({ x_base, y_base });
+            CREATE_BUTTONS_COMBO_RANGE(bcBaseStartValue, L("Ib старт"), OnEventComboBoxBaseStartValue, x_base, y_base);
         }
 
+        if (!bcSubstrateStartValue)
         {
             wxArrayString titles;
             titles.push_back("2 мкА");
@@ -323,18 +319,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Начальное значение тока подложки"));
 
-            if (!bcSubstrateStartValue)
-            {
-                bcSubstrateStartValue = new ButtonsComboRange(this, L("Isub старт"), width, titles, tooltips, "bcSubstrateStartValue");
-
-                bcSubstrateStartValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseStartValue, this);
-            }
-            else
-            {
-                bcSubstrateStartValue->SetChoices(titles, tooltips);
-            }
-
-            bcSubstrateStartValue->SetPosition({ x_base + dx_substrate, y_base + dy_substrate });
+            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateStartValue, L("Isub старт"), OnEventComboBoxBaseStartValue, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
@@ -342,6 +327,7 @@ void PanelViewTest::CreateControls()
     y_base += dy_base;
 
     {
+        if (!bcBaseDeltaValue)
         {
             wxArrayString titles;
             titles.push_back("2 мкА");
@@ -355,20 +341,10 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Шаг изменения тока базы"));
 
-            if (!bcBaseDeltaValue)
-            {
-                bcBaseDeltaValue = new ButtonsComboRange(this, L("Ib шаг"), width, titles, tooltips, "bcBaseDeltaValue");
-
-                bcBaseDeltaValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseDeltaValue, this);
-            }
-            else
-            {
-                bcBaseDeltaValue->SetChoices(titles, tooltips);
-            }
-
-            bcBaseDeltaValue->SetPosition({ x_base, y_base });
+            CREATE_BUTTONS_COMBO_RANGE(bcBaseDeltaValue, L("Ib шаг"), OnEventComboBoxBaseDeltaValue, x_base, y_base);
         }
 
+        if (!bcSubstrateDeltaValue)
         {
             wxArrayString titles;
             titles.push_back("2 мкА");
@@ -382,24 +358,14 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Шаг изменения тока подложки"));
 
-            if (!bcSubstrateDeltaValue)
-            {
-                bcSubstrateDeltaValue = new ButtonsComboRange(this, L("Isub шаг"), width, titles, tooltips, "bcSubstrateDeltaValue");
-
-                bcSubstrateDeltaValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseDeltaValue, this);
-            }
-            else
-            {
-                bcSubstrateDeltaValue->SetChoices(titles, tooltips);
-            }
-
-            bcSubstrateDeltaValue->SetPosition({ x_base + dx_substrate, y_base + dy_substrate });
+            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateDeltaValue, L("Isub шаг"), OnEventComboBoxBaseDeltaValue, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
     y_base += dy_base;
 
     {
+        if (!bcBaseNumMeasures)
         {
             wxArrayString titles;
             titles.push_back("1");
@@ -416,20 +382,10 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Количество измерений"));
 
-            if (!bcBaseNumMeasures)
-            {
-                bcBaseNumMeasures = new ButtonsCombo(this, L("Кол-во измерений"), width, titles, tooltips, 3, "bcBaseNumMeasures", ButtonsCombo::Type::Text);
-
-                bcBaseNumMeasures->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseNumMeasures, this);
-            }
-            else
-            {
-                bcBaseNumMeasures->SetChoices(titles, tooltips);
-            }
-
-            bcBaseNumMeasures->SetPosition({ x_base, y_base });
+            CREATE_BUTTONS_COMBO_RANGE(bcBaseNumMeasures, L("Кол-во измерений"), OnEventComboBoxBaseNumMeasures, x_base, y_base);
         }
 
+        if (!bcSubstrateNumMeasures)
         {
             wxArrayString titles;
             titles.push_back("1");
@@ -446,18 +402,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Количество измерений"));
 
-            if (!bcSubstrateNumMeasures)
-            {
-                bcSubstrateNumMeasures = new ButtonsCombo(this, L("Кол-во измерений"), width, titles, tooltips, 3, "bcSubstrateNumMeasures", ButtonsCombo::Type::Text);
-
-                bcSubstrateNumMeasures->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseNumMeasures, this);
-            }
-            else
-            {
-                bcSubstrateNumMeasures->SetChoices(titles, tooltips);
-            }
-
-            bcSubstrateNumMeasures->SetPosition({ x_base + dx_substrate, y_base + dy_substrate });
+            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateNumMeasures, L("Кол-во измерений"), OnEventComboBoxBaseNumMeasures, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
@@ -466,6 +411,7 @@ void PanelViewTest::CreateControls()
     y_base += dy_base;
 
     {
+        if (!bcBaseMeasureRange)
         {
             wxArrayString titles;
             titles.push_back("50 мВ");
@@ -482,22 +428,12 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Диапазон измерения"));
 
-            if (!bcBaseMeasureRange)
-            {
-                bcBaseMeasureRange = new ButtonsComboRange(this, L("Ub диап"), width, titles, tooltips, "bcBaseMeasureRange");
-
-                bcBaseMeasureRange->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseMeasureRange, this);
-            }
-            else
-            {
-                bcBaseMeasureRange->SetChoices(titles, tooltips);
-            }
-
-            bcBaseMeasureRange->SetPosition({ x_base, y_base });
+            CREATE_BUTTONS_COMBO_RANGE(bcBaseMeasureRange, L("Ub диап"), OnEventComboBoxBaseMeasureRange, x_base, y_base);
         }
 
         dx_substrate -= 150;
 
+        if (!bcSubstrateRangeMeasure)
         {
             wxArrayString titles;
             titles.push_back("50 мВ");
@@ -514,24 +450,14 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Диапазон измерения"));
 
-            if (!bcSubstrateRangeMeasure)
-            {
-                bcSubstrateRangeMeasure = new ButtonsComboRange(this, L("Usub диап"), width, titles, tooltips, "bcSubstrateRangeMeasure");
-
-                bcSubstrateRangeMeasure->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseMeasureRange, this);
-            }
-            else
-            {
-                bcSubstrateRangeMeasure->SetChoices(titles, tooltips);
-            }
-
-            bcSubstrateRangeMeasure->SetPosition({ x_base + dx_substrate, y_base + dy_substrate });
+            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateRangeMeasure, L("Usub диап"), OnEventComboBoxBaseMeasureRange, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
     y_base += dy_base;
 
     {
+        if (!bcBaseMeasureLimit)
         {
             wxArrayString titles;
             titles.push_back("50 мВ");
@@ -548,20 +474,10 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L(""));
 
-            if (!bcBaseMeasureLimit)
-            {
-                bcBaseMeasureLimit = new ButtonsComboRange(this, L("Ub огр"), width, titles, tooltips, "bcBaseMeasureLimit");
-
-                bcBaseMeasureLimit->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseMeasureLimit, this);
-            }
-            else
-            {
-                bcBaseMeasureLimit->SetChoices(titles, tooltips);
-            }
-
-            bcBaseMeasureLimit->SetPosition({ x_base, y_base });
+            CREATE_BUTTONS_COMBO_RANGE(bcBaseMeasureLimit, L("Ub огр"), OnEventComboBoxBaseMeasureLimit, x_base, y_base);
         }
 
+        if (!bcSubstrateRangeLimit)
         {
             wxArrayString titles;
             titles.push_back("50 мВ");
@@ -578,18 +494,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L(""));
 
-            if (!bcSubstrateRangeLimit)
-            {
-                bcSubstrateRangeLimit = new ButtonsComboRange(this, L("Usub огр"), width, titles, tooltips, "bcSubstrateRangeLimit");
-
-                bcSubstrateRangeLimit->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxBaseMeasureLimit, this);
-            }
-            else
-            {
-                bcSubstrateRangeLimit->SetChoices(titles, tooltips);
-            }
-
-            bcSubstrateRangeLimit->SetPosition({ x_base + dx_substrate, y_base + dy_substrate });
+            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateRangeLimit, L("Usub огр"), OnEventComboBoxBaseMeasureLimit, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
@@ -609,11 +514,7 @@ void PanelViewTest::CreateControls()
             tooltips.push_back(L("Uc <= 3000 В, Ic <= 1 А"));
             tooltips.push_back(L("Uc <= 50 В, Ic <= 50 А"));
 
-            bcCollectorModeSource = new ButtonsCombo(this, L("Режим"), width, titles, tooltips, 1, "bcCollectorModeSource", ButtonsCombo::Type::Text);
-
-            bcCollectorModeSource->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxCollectorModeSource, this);
-
-            bcCollectorModeSource->SetPosition({ x, y });
+            CREATE_BUTTONS_COMBO(bcCollectorModeSource, L("Режим"), 1, OnEventComboBoxCollectorModeSource, x, y);
         }
     }
 
@@ -631,11 +532,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Начальное значение испытательного напряжения"));
 
-            bcCollectorValueStart = new ButtonsComboRange(this, L("Uc старт"), width, titles, tooltips, "bcCollectorValueStart");
-
-            bcCollectorValueStart->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxCollectorValueStart, this);
-
-            bcCollectorValueStart->SetPosition({ x, y });
+            CREATE_BUTTONS_COMBO_RANGE(bcCollectorValueStart, L("Uc старт"), OnEventComboBoxCollectorValueStart, x, y);
         }
 
         y += dy_base;
@@ -650,11 +547,7 @@ void PanelViewTest::CreateControls()
                 wxArrayString tooltips;
                 tooltips.push_back(L("Конечное значение испытательного напряжения"));
 
-                bcCollectorValueFinish = new ButtonsComboRange(this, L("Uc стоп"), width, titles, tooltips, "bcCollectorValueFinish");
-
-                bcCollectorValueFinish->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxCollectorValueFinish, this);
-
-                bcCollectorValueFinish->SetPosition({ x, y });
+                CREATE_BUTTONS_COMBO_RANGE(bcCollectorValueFinish, L("Uc стоп"), OnEventComboBoxCollectorValueFinish, x, y);
             }
         }
 
@@ -669,11 +562,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Диапазон измеряемого тока"));
 
-            bcCollectorMeasureRange = new ButtonsComboRange(this, L("Ic диап"), width, titles, tooltips, "bcCollectorMeasureRange");
-
-            bcCollectorMeasureRange->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxCollectorMeasureRange, this);
-
-            bcCollectorMeasureRange->SetPosition({ x, y });
+            CREATE_BUTTONS_COMBO_RANGE(bcCollectorMeasureRange, L("Ic диап"), OnEventComboBoxCollectorMeasureRange, x, y);
         }
 
         y += dy_base;
@@ -687,11 +576,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Предельное знанчение измеряемого тока"));
 
-            bcCollectorMeasureLimit = new ButtonsComboRange(this, L("Ic огр"), width, titles, tooltips, "bcCollectorMeasureLimit");
-
-            bcCollectorMeasureLimit->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxCollectorMeasureLimit, this);
-
-            bcCollectorMeasureLimit->SetPosition({ x, y });
+            CREATE_BUTTONS_COMBO_RANGE(bcCollectorMeasureLimit, L("Ic огр"), OnEventComboBoxCollectorMeasureLimit, x, y);
         }
     }
 }
