@@ -616,7 +616,7 @@ void PanelViewTest::CreateControls()
     int x = 200;
     int y = 50;
 
-    width = 200;
+    width = 150;
 
     {
         if (!bcCollectorModeSource)
@@ -634,6 +634,47 @@ void PanelViewTest::CreateControls()
             bcCollectorModeSource->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxCollectorModeSource, this);
 
             bcCollectorModeSource->SetPosition({ x, y });
+        }
+    }
+
+    x = 500;
+    y = 100;
+
+    {
+        if (!bcCollectorStartValue)
+        {
+            wxArrayString titles;
+            titles.push_back(L("10 В"));
+            titles.push_back(L("20 В"));
+
+            wxArrayString tooltips;
+            tooltips.push_back(L("Начальное значение испытательного напряжения"));
+
+            bcCollectorStartValue = new ButtonsComboRange(this, L("Uk start"), width, titles, tooltips, "bcCollectorStartValue");
+
+            bcCollectorStartValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxCollectorStartValue, this);
+
+            bcCollectorStartValue->SetPosition({ x, y });
+        }
+
+        y += dy_base;
+
+        {
+            if (!bcCollectorFinishValue)
+            {
+                wxArrayString titles;
+                titles.push_back(L("10 В"));
+                titles.push_back(L("20 В"));
+
+                wxArrayString tooltips;
+                tooltips.push_back(L("Начальное значение испытательного напряжения"));
+
+                bcCollectorFinishValue = new ButtonsComboRange(this, L("Uk start"), width, titles, tooltips, "bcCollectorFinishValue");
+
+                bcCollectorFinishValue->Bind(wxEVT_COMBOBOX, &PanelViewTest::OnEventComboBoxCollectorFinishValue, this);
+
+                bcCollectorFinishValue->SetPosition({ x, y });
+            }
         }
     }
 }
@@ -688,6 +729,18 @@ void PanelViewTest::OnEventComboBoxBaseRangeLimit(wxCommandEvent &)
 
 
 void PanelViewTest::OnEventComboBoxCollectorModeSource(wxCommandEvent &)
+{
+
+}
+
+
+void PanelViewTest::OnEventComboBoxCollectorStartValue(wxCommandEvent &)
+{
+
+}
+
+
+void PanelViewTest::OnEventComboBoxCollectorFinishValue(wxCommandEvent &)
 {
 
 }

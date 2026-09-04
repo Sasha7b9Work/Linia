@@ -39,7 +39,9 @@ private:
     ButtonsComboRange *bcSubstrateRangeMeasure = nullptr;
     ButtonsComboRange *bcSubstrateRangeLimit = nullptr;
 
-    ButtonsCombo *bcCollectorModeSource = nullptr;      // Режим работы источника в коллекторе - высокое напряжение или большой ток
+    ButtonsCombo *bcCollectorModeSource = nullptr;          // Режим работы источника в коллекторе - высокое напряжение или большой ток
+    ButtonsComboRange *bcCollectorStartValue = nullptr;     // Начальное значение испытательного напряжения Uк
+    ButtonsComboRange *bcCollectorFinishValue = nullptr;    // Конечное значение испытательного напряжения Uк
 
     void OnEventPaint(wxPaintEvent &);
 
@@ -52,6 +54,8 @@ private:
     void OnEventComboBoxBaseRangeMeasure(wxCommandEvent &);
     void OnEventComboBoxBaseRangeLimit(wxCommandEvent &);
     void OnEventComboBoxCollectorModeSource(wxCommandEvent &);
+    void OnEventComboBoxCollectorStartValue(wxCommandEvent &);
+    void OnEventComboBoxCollectorFinishValue(wxCommandEvent &);
 
     // Нарисовать испытуемый элемент
     void DrawElement(wxPaintDC &);
