@@ -16,9 +16,19 @@ public:
     void LineTo(int x, int y);
 
     // Рисует линию вверх или вниз на величину dy
-    void AppendY(int dy);
+    int AppendY(int dy);
 
-    void AppendX(int dx);
+    int AppendX(int dx);
+
+    int GetX() const
+    {
+        return coord.x;
+    }
+
+    int GetY() const
+    {
+        return coord.y;
+    }
 
 private:
 

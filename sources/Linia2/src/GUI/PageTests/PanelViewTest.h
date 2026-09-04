@@ -19,6 +19,7 @@ public:
 private:
 
     static const int radius = 50;       // От этого значения и Center() идёт всё построение изображения
+    static const int WIDTH_CONTROL = 150;
 
     Test *test = nullptr;
 
@@ -67,6 +68,10 @@ private:
     // type == "npn", "pnp"
     void DrawBJT(wxPaintDC &, const wxString &type, const wxPoint &);
     void DrawBJTS(wxPaintDC &, const wxString &type, const wxPoint &);
+
+    // Нарисовать блок измерителя тока коллектора
+    // x, y - центр измерителя
+    void DrawMeasurerCollectorI(wxPaintDC &, int x, int y, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit);
 
     // Создать элементы управляения для данного теста
     void CreateControls();
