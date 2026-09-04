@@ -19,7 +19,7 @@ public:
 private:
 
     static const int radius = 50;       // От этого значения и Center() идёт всё построение изображения
-    static const int WIDTH_CONTROL = 150;
+    static const int WIDTH_CONTROL = 120;
 
     Test *test = nullptr;
 

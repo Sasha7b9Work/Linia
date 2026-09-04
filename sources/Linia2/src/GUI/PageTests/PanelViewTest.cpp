@@ -232,7 +232,7 @@ void PanelViewTest::CreateControls()
     int dx_substrate = 250;
     int dy_substrate = 250;
 
-    int width = 150;
+    int width = WIDTH_CONTROL;
 
 #define CREATE_BUTTONS_COMBO(name, title, num, func, _x, _y)  \
     name = new ButtonsCombo(this, title, width, titles, tooltips, num, #name, ButtonsCombo::Type::Text);    \
@@ -406,7 +406,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Количество измерений"));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcBaseNumMeasures, L("Кол-во измерений"), OnEventComboBoxBaseNumMeasures, x_base, y_base);
+            CREATE_BUTTONS_COMBO_RANGE(bcBaseNumMeasures, L("N кривых"), OnEventComboBoxBaseNumMeasures, x_base, y_base);
         }
 
         if (!bcSubstrateNumMeasures)
@@ -426,7 +426,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Количество измерений"));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateNumMeasures, L("Кол-во измерений"), OnEventComboBoxBaseNumMeasures, x_base + dx_substrate, y_base + dy_substrate);
+            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateNumMeasures, L("N кривых"), OnEventComboBoxBaseNumMeasures, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
@@ -542,7 +542,7 @@ void PanelViewTest::CreateControls()
         }
     }
 
-    width = 150;
+    width = WIDTH_CONTROL;
     x = 500;
     y = 370;
 
