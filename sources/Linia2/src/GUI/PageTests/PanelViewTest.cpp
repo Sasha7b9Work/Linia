@@ -615,7 +615,7 @@ void PanelViewTest::OnChangedCollectorMeasureLimitU(wxCommandEvent &)
 }
 
 
-void PanelViewTest::DrawBorder(int &x, int &y, int r, Dir::E dir, int num_controls)
+void PanelViewTest::DrawBorder(int &x, int &y, int /*r*/, Dir::E dir, int num_controls)
 {
     const int d = 5;
 
