@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "GUI/PageTests/PanelViewTest.h"
 #include "Utils/GlobalFunctions.h"
+#include "Utils/LineDrawer.h"
 
 
 PanelViewTest *ThePanelViewTest = nullptr;
@@ -66,9 +67,12 @@ void PanelViewTest::DrawElement(wxPaintDC &dc)
 
 void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &c)
 {
-    dc.DrawLine(c.x + radius / 2, c.y - 2 * radius, c.x + radius / 2, c.y + 2 * radius);    // Вертикальная линия, которая выходит из коллектора и эмиттера
+    int x_col = c.x + radius / 2;   // / Координаты точки коммутации
+    int y_col = c.y - 2 * radius;   // / с коллектором
 
-    dc.DrawLine(c.x + radius / 2 - 10, c.y + 2 * radius, c.x + radius / 2 + 10, c.y + 2 * radius);
+    dc.DrawLine(x_col, y_col, c.x + radius / 2, c.y + 2 * radius);    // Вертикальная линия, которая выходит из коллектора и эмиттера
+
+    dc.DrawLine(c.x + radius / 2 - 10, c.y + 2 * radius, c.x + radius / 2 + 10, c.y + 2 * radius);      // Заземление эмиттера
 
     dc.DrawCircle(c, radius);
 
@@ -176,6 +180,15 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
                 GF::DrawTextInCenter(dc, "V", wxRect(wxPoint{ x + dx - r, y - 80 - r }, wxPoint{ x + dx + r, y - 80 + r }));
             }
         }
+    }
+
+    {
+        // Рисуем цепь коллектора
+
+        LineDriwer driwer{ dc, x_col, y_col };
+
+        driwer.AppendX(200);
+        driwer.AppendY(200);
     }
 }
 
@@ -534,7 +547,7 @@ void PanelViewTest::CreateControls()
     }
 
     width = 150;
-    x = 500;
+    x = 400;
     y = 100;
 
     {

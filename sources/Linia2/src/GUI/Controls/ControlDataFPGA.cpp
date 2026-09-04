@@ -82,7 +82,7 @@ void ControlDataFPGA::Draw()
     if (btnScale->GetValue())
     {
         min_value = max;
-        max_value = 0;
+        max_value = -max - 1;
 
         for (int i = 0; i < POINTS_IN_SAMPLE_ADC; i++)
         {
@@ -123,7 +123,30 @@ void ControlDataFPGA::Draw()
         position.y += SIZE.y / 2 - 10;
 
         for_value->SetPosition(position);
-        for_value->SetLabel("value");
+
+        double one_lsb = 4.096 / 32768.0;
+        double out = 0.0;
+
+        for (int i = 0; i < POINTS_IN_SAMPLE_ADC; i++)
+        {
+            out += data[i];
+        }
+
+        out /= POINTS_IN_SAMPLE_ADC;
+
+        out *= one_lsb;
+
+        if (out > 0 && out < one_lsb)
+        {
+            out = 0;
+        }
+
+        if (out < 0 && out > -one_lsb)
+        {
+            out = 0;
+        }
+
+        for_value->SetLabel(wxString::Format("%f", out));
     }
 }
 
