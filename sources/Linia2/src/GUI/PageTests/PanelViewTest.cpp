@@ -124,6 +124,8 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
             }
         }
 
+        int y_ground = 0;
+
         {
             // Вертикальная линия базы
 
@@ -140,7 +142,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 DrawGround(driwer.GetX(), driwer.GetY());
 
-                int y_ground = driwer.GetY();
+                y_ground = driwer.GetY();
 
                 driwer.MoveOnDY(-450);
 
@@ -187,19 +189,22 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
             {
                 // Измеритель подложки
 
-                int dx = 50;
-                int y = c.y + 500;
+                LineDriwer driwer(*dc, x, c.y);
+                driwer.LineOnDX(80);
+                driwer.LineToY(y_ground);
 
-                dc->DrawLine(x, c.y, x + dx, c.y);
-                dc->DrawLine(x + dx, c.y, x + dx, y);
-                dc->DrawLine(x + dx - 10, y, x + dx + 10, y);
+                DrawGround(driwer.GetX(), driwer.GetY());
 
-                CreateSourceBaseSubstrate(x + dx, y - 400, MeasurerSourcer::Type::SourceI, Dir::Down,
+                driwer.MoveOnDY(-400);
+
+                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::SourceI, Dir::Down,
                     &bcSubstrateStartValueI, L("Isub старт"),
                     &bcSubstrateDeltaValueI, L("Isub шаг"),
                     &bcSubstrateNumMeasures, L("N кривых"));
 
-                CreateSourceBaseSubstrate(x + dx, y - 200, MeasurerSourcer::Type::MeasU, Dir::Down,
+                driwer.MoveOnDY(150);
+
+                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasU, Dir::Down,
                     &bcSubstrateRangeMeasureU, L("Usub диап"),
                     &bcSubstrateRangeLimitU, L("Usub огр"));
             }
@@ -211,7 +216,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
         LineDriwer driwer{ *dc, x_col, y_col };
 
-        int x = driwer.LineOnDX(150);
+        int x = driwer.LineOnDX(250);
         int y = driwer.GetY() + 50;
         driwer.LineOnDY(500);
 
@@ -264,7 +269,7 @@ void PanelViewTest::DrawLineWithAngle(const wxPoint &start, double length, doubl
 
 wxPoint PanelViewTest::GetCenter() const
 {
-    return { 260, 200 };
+    return { 230, 200 };
 }
 
 
