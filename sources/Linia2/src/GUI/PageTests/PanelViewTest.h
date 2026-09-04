@@ -52,21 +52,21 @@ private:
 
     void OnEventPaint(wxPaintEvent &);
 
-    void OnEventComboBoxModeScan(wxCommandEvent &);
-    void OnEventComboBoxTypeSemiconductor(wxCommandEvent &);
-    void OnEventComboBoxBaseModeControl(wxCommandEvent &);
-    void OnEventComboBoxBaseStartValueI(wxCommandEvent &);
-    void OnEventComboBoxBaseDeltaValueI(wxCommandEvent &);
-    void OnEventComboBoxBaseNumMeasures(wxCommandEvent &);
-    void OnEventComboBoxBaseMeasureRangeU(wxCommandEvent &);
-    void OnEventComboBoxBaseMeasureLimitU(wxCommandEvent &);
-    void OnEventComboBoxCollectorModeSource(wxCommandEvent &);
-    void OnEventComboBoxCollectorValueStart(wxCommandEvent &);
-    void OnEventComboBoxCollectorValueFinish(wxCommandEvent &);
-    void OnEventComboBoxCollectorMeasureRangeI(wxCommandEvent &);
-    void OnEventComboBoxCollectorMeasureLimitI(wxCommandEvent &);
-    void OnEventComboBoxCollectorMeasureRangeU(wxCommandEvent &);
-    void OnEventComboBoxCollectorMeasureLimitU(wxCommandEvent &);
+    void OnChangedModeScan(wxCommandEvent &);
+    void OnChangedTypeSemiconductor(wxCommandEvent &);
+    void OnChangedBaseModeControl(wxCommandEvent &);
+    void OnChangedBaseStartValueI(wxCommandEvent &);
+    void OnChangedBaseDeltaValueI(wxCommandEvent &);
+    void OnChangedBaseNumMeasures(wxCommandEvent &);
+    void OnChangedBaseMeasureRangeU(wxCommandEvent &);
+    void OnChangedBaseMeasureLimitU(wxCommandEvent &);
+    void OnChangedCollectorModeSource(wxCommandEvent &);
+    void OnChangedCollectorValueStart(wxCommandEvent &);
+    void OnChangedCollectorValueFinish(wxCommandEvent &);
+    void OnChangedCollectorMeasureRangeI(wxCommandEvent &);
+    void OnChangedCollectorMeasureLimitI(wxCommandEvent &);
+    void OnChangedCollectorMeasureRangeU(wxCommandEvent &);
+    void OnChangedCollectorMeasureLimitU(wxCommandEvent &);
 
     // Нарисовать испытуемый элемент
     void DrawElement();

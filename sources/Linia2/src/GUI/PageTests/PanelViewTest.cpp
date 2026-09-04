@@ -189,12 +189,12 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
         driwer.LineOnDY(500);
 
         DrawMeasurerCollectorI(x, y, Dir::Down,
-            &bcCollectorMeasureRangeI, &PanelViewTest::OnEventComboBoxCollectorMeasureRangeI,
-            &bcCollectorMeasureLimitI, &PanelViewTest::OnEventComboBoxCollectorMeasureLimitI);
+            &bcCollectorMeasureRangeI, &PanelViewTest::OnChangedCollectorMeasureRangeI,
+            &bcCollectorMeasureLimitI, &PanelViewTest::OnChangedCollectorMeasureLimitI);
 
         DrawSourceCollectorU(x, y + 300, Dir::Down,
-            &bcCollectorValueStart, &PanelViewTest::OnEventComboBoxCollectorValueStart,
-            &bcCollectorValueFinish, &PanelViewTest::OnEventComboBoxCollectorValueFinish);
+            &bcCollectorValueStart, &PanelViewTest::OnChangedCollectorValueStart,
+            &bcCollectorValueFinish, &PanelViewTest::OnChangedCollectorValueFinish);
 
         DrawGround(x, driwer.GetY());
 
@@ -206,8 +206,8 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
         DrawGround(x, y);
 
         DrawMeasurerCollectorU(x, y - 105, Dir::Down,
-            &bcCollectorMeasureRangeU, &PanelViewTest::OnEventComboBoxCollectorMeasureRangeU,
-            &bcCollectorMeasureLimitU, &PanelViewTest::OnEventComboBoxCollectorMeasureLimitU);
+            &bcCollectorMeasureRangeU, &PanelViewTest::OnChangedCollectorMeasureRangeU,
+            &bcCollectorMeasureLimitU, &PanelViewTest::OnChangedCollectorMeasureLimitU);
     }
 }
 
@@ -289,7 +289,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back("");
 
-            CREATE_BUTTONS_COMBO(bcModeScan, L("Развёртка"), 1, OnEventComboBoxModeScan, x_base, 50);
+            CREATE_BUTTONS_COMBO(bcModeScan, L("Развёртка"), 1, OnChangedModeScan, x_base, 50);
         }
 
         if (!bcTypeSemiconductor)
@@ -303,7 +303,7 @@ void PanelViewTest::CreateControls()
 
             int temp_width = width;
             width = 40;
-            CREATE_BUTTONS_COMBO(bcTypeSemiconductor, L(""), 1, OnEventComboBoxTypeSemiconductor, c.x - 20, c.y - 10);
+            CREATE_BUTTONS_COMBO(bcTypeSemiconductor, L(""), 1, OnChangedTypeSemiconductor, c.x - 20, c.y - 10);
             width = temp_width;
         }
     }
@@ -321,7 +321,7 @@ void PanelViewTest::CreateControls()
             tooltips.push_back(L("База управляется напряжением"));
             tooltips.push_back(L("База соединена с землёй"));
 
-            CREATE_BUTTONS_COMBO(bcBaseModeControl, L("Управление"), 1, OnEventComboBoxBaseModeControl, x_base, y_base);
+            CREATE_BUTTONS_COMBO(bcBaseModeControl, L("Управление"), 1, OnChangedBaseModeControl, x_base, y_base);
         }
 
         if (!bcSubstrateModeControl)
@@ -336,7 +336,7 @@ void PanelViewTest::CreateControls()
             tooltips.push_back(L("Подложка управляется напряжением"));
             tooltips.push_back(L("Подложка соединена с землёй"));
 
-            CREATE_BUTTONS_COMBO(bcSubstrateModeControl, L("Управление"), 1, OnEventComboBoxBaseModeControl, x_base + dx_substrate, y_base + dy_substrate);
+            CREATE_BUTTONS_COMBO(bcSubstrateModeControl, L("Управление"), 1, OnChangedBaseModeControl, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
@@ -356,7 +356,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Начальное значение тока базы"));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcBaseStartValueI, L("Ib старт"), OnEventComboBoxBaseStartValueI, x_base, y_base);
+            CREATE_BUTTONS_COMBO_RANGE(bcBaseStartValueI, L("Ib старт"), OnChangedBaseStartValueI, x_base, y_base);
         }
 
         if (!bcSubstrateStartValue)
@@ -372,7 +372,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Начальное значение тока подложки"));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateStartValue, L("Isub старт"), OnEventComboBoxBaseStartValueI, x_base + dx_substrate, y_base + dy_substrate);
+            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateStartValue, L("Isub старт"), OnChangedBaseStartValueI, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
@@ -394,7 +394,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Шаг изменения тока базы"));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcBaseDeltaValueI, L("Ib шаг"), OnEventComboBoxBaseDeltaValueI, x_base, y_base);
+            CREATE_BUTTONS_COMBO_RANGE(bcBaseDeltaValueI, L("Ib шаг"), OnChangedBaseDeltaValueI, x_base, y_base);
         }
 
         if (!bcSubstrateDeltaValue)
@@ -411,7 +411,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Шаг изменения тока подложки"));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateDeltaValue, L("Isub шаг"), OnEventComboBoxBaseDeltaValueI, x_base + dx_substrate, y_base + dy_substrate);
+            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateDeltaValue, L("Isub шаг"), OnChangedBaseDeltaValueI, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
@@ -435,7 +435,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Количество измерений"));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcBaseNumMeasures, L("N кривых"), OnEventComboBoxBaseNumMeasures, x_base, y_base);
+            CREATE_BUTTONS_COMBO_RANGE(bcBaseNumMeasures, L("N кривых"), OnChangedBaseNumMeasures, x_base, y_base);
         }
 
         if (!bcSubstrateNumMeasures)
@@ -455,7 +455,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Количество измерений"));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateNumMeasures, L("N кривых"), OnEventComboBoxBaseNumMeasures, x_base + dx_substrate, y_base + dy_substrate);
+            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateNumMeasures, L("N кривых"), OnChangedBaseNumMeasures, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
@@ -481,7 +481,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Диапазон измерения"));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcBaseMeasureRangeU, L("Ub диап"), OnEventComboBoxBaseMeasureRangeU, x_base, y_base);
+            CREATE_BUTTONS_COMBO_RANGE(bcBaseMeasureRangeU, L("Ub диап"), OnChangedBaseMeasureRangeU, x_base, y_base);
         }
 
         dx_substrate -= 150;
@@ -503,7 +503,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Диапазон измерения"));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateRangeMeasure, L("Usub диап"), OnEventComboBoxBaseMeasureRangeU, x_base + dx_substrate, y_base + dy_substrate);
+            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateRangeMeasure, L("Usub диап"), OnChangedBaseMeasureRangeU, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
@@ -527,7 +527,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L(""));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcBaseMeasureLimitU, L("Ub огр"), OnEventComboBoxBaseMeasureLimitU, x_base, y_base);
+            CREATE_BUTTONS_COMBO_RANGE(bcBaseMeasureLimitU, L("Ub огр"), OnChangedBaseMeasureLimitU, x_base, y_base);
         }
 
         if (!bcSubstrateRangeLimit)
@@ -547,7 +547,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L(""));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateRangeLimit, L("Usub огр"), OnEventComboBoxBaseMeasureLimitU, x_base + dx_substrate, y_base + dy_substrate);
+            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateRangeLimit, L("Usub огр"), OnChangedBaseMeasureLimitU, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
@@ -567,7 +567,7 @@ void PanelViewTest::CreateControls()
             tooltips.push_back(L("Uc <= 3000 В, Ic <= 1 А"));
             tooltips.push_back(L("Uc <= 50 В, Ic <= 50 А"));
 
-            CREATE_BUTTONS_COMBO(bcCollectorModeSource, L("Режим"), 1, OnEventComboBoxCollectorModeSource, x, y);
+            CREATE_BUTTONS_COMBO(bcCollectorModeSource, L("Режим"), 1, OnChangedCollectorModeSource, x, y);
         }
     }
 
@@ -576,91 +576,91 @@ void PanelViewTest::CreateControls()
 }
 
 
-void PanelViewTest::OnEventComboBoxModeScan(wxCommandEvent &)
+void PanelViewTest::OnChangedModeScan(wxCommandEvent &)
 {
 
 }
 
 
-void PanelViewTest::OnEventComboBoxTypeSemiconductor(wxCommandEvent &)
+void PanelViewTest::OnChangedTypeSemiconductor(wxCommandEvent &)
 {
 
 }
 
 
-void PanelViewTest::OnEventComboBoxBaseModeControl(wxCommandEvent &)
+void PanelViewTest::OnChangedBaseModeControl(wxCommandEvent &)
 {
 
 }
 
 
-void PanelViewTest::OnEventComboBoxBaseStartValueI(wxCommandEvent &)
+void PanelViewTest::OnChangedBaseStartValueI(wxCommandEvent &)
 {
 
 }
 
 
-void PanelViewTest::OnEventComboBoxBaseDeltaValueI(wxCommandEvent &)
+void PanelViewTest::OnChangedBaseDeltaValueI(wxCommandEvent &)
 {
 
 }
 
 
-void PanelViewTest::OnEventComboBoxBaseNumMeasures(wxCommandEvent &)
+void PanelViewTest::OnChangedBaseNumMeasures(wxCommandEvent &)
 {
 
 }
 
 
-void PanelViewTest::OnEventComboBoxBaseMeasureRangeU(wxCommandEvent &)
+void PanelViewTest::OnChangedBaseMeasureRangeU(wxCommandEvent &)
 {
 
 }
 
 
-void PanelViewTest::OnEventComboBoxBaseMeasureLimitU(wxCommandEvent &)
+void PanelViewTest::OnChangedBaseMeasureLimitU(wxCommandEvent &)
 {
 
 }
 
 
-void PanelViewTest::OnEventComboBoxCollectorModeSource(wxCommandEvent &)
+void PanelViewTest::OnChangedCollectorModeSource(wxCommandEvent &)
 {
 
 }
 
 
-void PanelViewTest::OnEventComboBoxCollectorValueStart(wxCommandEvent &)
+void PanelViewTest::OnChangedCollectorValueStart(wxCommandEvent &)
 {
 
 }
 
 
-void PanelViewTest::OnEventComboBoxCollectorValueFinish(wxCommandEvent &)
+void PanelViewTest::OnChangedCollectorValueFinish(wxCommandEvent &)
 {
 
 }
 
 
-void PanelViewTest::OnEventComboBoxCollectorMeasureRangeI(wxCommandEvent &)
+void PanelViewTest::OnChangedCollectorMeasureRangeI(wxCommandEvent &)
 {
 
 }
 
 
-void PanelViewTest::OnEventComboBoxCollectorMeasureLimitI(wxCommandEvent &)
+void PanelViewTest::OnChangedCollectorMeasureLimitI(wxCommandEvent &)
 {
 
 }
 
 
-void PanelViewTest::OnEventComboBoxCollectorMeasureRangeU(wxCommandEvent &)
+void PanelViewTest::OnChangedCollectorMeasureRangeU(wxCommandEvent &)
 {
 
 }
 
 
-void PanelViewTest::OnEventComboBoxCollectorMeasureLimitU(wxCommandEvent &)
+void PanelViewTest::OnChangedCollectorMeasureLimitU(wxCommandEvent &)
 {
 
 }
