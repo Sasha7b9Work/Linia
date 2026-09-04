@@ -10,7 +10,7 @@ void MeasurerSourcer::Draw(const wxPoint &_center)
 
     dc.DrawCircle(center, radius);
 
-    dc.SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
+    dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
 
     static const pchar labels[Type::Count] =
     {

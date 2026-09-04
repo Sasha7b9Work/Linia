@@ -36,7 +36,7 @@ protected:
     Type::E type;
     wxPaintDC &dc;
     bool is_vertical;
-    const int radius = 20;
+    const int radius = 12;
     wxPoint center;
 };
 
