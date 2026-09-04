@@ -73,6 +73,8 @@ private:
     // x, y - центр измерителя
     void DrawMeasurerCollectorI(wxPaintDC &, int x, int y, Dir::E, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit);
 
+    void DrawSourceCollectorU(wxPaintDC &, int x, int y, Dir::E, ButtonsComboRange **cbValueStart, ButtonsComboRange **cbValueFinish);
+
     // Создать элементы управляения для данного теста
     void CreateControls();
 

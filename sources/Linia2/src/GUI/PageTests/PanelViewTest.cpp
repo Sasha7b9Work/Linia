@@ -710,3 +710,52 @@ void PanelViewTest::DrawMeasurerCollectorI(wxPaintDC &dc, int x, int y, Dir::E d
 
     (*cbLimit)->SetPosition({ x, y + 35 });
 }
+
+
+void PanelViewTest::DrawSourceCollectorU(wxPaintDC &dc, int x, int y, Dir::E dir, ButtonsComboRange **cbValueStart, ButtonsComboRange **cbValueFinish)
+{
+    Voltmeter voltmeter(dc, true);
+    voltmeter.Draw({ x, y });
+
+    int d = 5;
+
+    if (dir == Dir::Right)
+    {
+        wxPen pen{ *wxBLACK, 1, wxPENSTYLE_SHORT_DASH };
+        dc.SetPen(pen);
+        dc.SetBrush(*wxTRANSPARENT_BRUSH);
+
+        dc.DrawRectangle(x - voltmeter.GetRadius() - d, y - voltmeter.GetRadius() - d - 15, WIDTH_CONTROL + 60, 80);
+
+        x += 30;
+        y -= 30;
+    }
+
+    if (!(*cbValueStart))
+    {
+        wxArrayString titles;
+        titles.push_back(L("10 В"));
+        titles.push_back(L("20 В"));
+
+        wxArrayString tooltips;
+        tooltips.push_back(L("Начальное значение испытательного напряжения"));
+
+        CREATE_BUTTONS_COMBO_RANGE((*cbValueStart), L("Uc старт"), OnEventComboBoxCollectorValueStart, x, y);
+    }
+
+    (*cbValueStart)->SetPosition({ x, y });
+
+    if (!(*cbValueFinish))
+    {
+        wxArrayString titles;
+        titles.push_back(L("10 В"));
+        titles.push_back(L("20 В"));
+
+        wxArrayString tooltips;
+        tooltips.push_back(L("Конечное значение испытательного напряжения"));
+
+        CREATE_BUTTONS_COMBO_RANGE((*cbValueFinish), L("Uc стоп"), OnEventComboBoxCollectorValueFinish, x, y);
+    }
+
+    (*cbValueFinish)->SetPosition({ x, y + 35 });
+}
