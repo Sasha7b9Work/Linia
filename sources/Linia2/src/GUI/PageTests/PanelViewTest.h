@@ -41,26 +41,26 @@ private:
 
     wxPaintDC *dc = nullptr;
 
-    ButtonsCombo *bcModeScan = nullptr;                  // Режим развёртки
-    ButtonsCombo *bcTypeSemiconductor = nullptr;         // npn или pnp
+    ButtonsCombo *bcModeScan = nullptr;                 // Режим развёртки
+    ButtonsCombo *bcTypeSemiconductor = nullptr;        // npn или pnp
 
-    ButtonsCombo *bcBaseModeControl = nullptr;           // Режим управления базой - током или напряжением
-    ComboInput *bcBaseStartValueI = nullptr;      // Стартовое значение задаваемой величины
-    ComboInput *bcBaseDeltaValueI = nullptr;      // Шаг изменения задаваемой величины
-    ComboInput *bcBaseNumMeasures = nullptr;           // Количество измерений
-    ComboInput *bcBaseMeasureRangeU = nullptr;    // Диапазон - максимальное доступное значение
-    ComboInput *bcBaseMeasureLimitU = nullptr;    // Максимальное значение, при котором происходит завершение измерения
+    ButtonsCombo *bcBaseModeControl = nullptr;          // Режим управления базой - током или напряжением
+    ComboInput *bcBaseStartValueI = nullptr;            // Стартовое значение задаваемой величины
+    ComboInput *bcBaseDeltaValueI = nullptr;            // Шаг изменения задаваемой величины
+    ComboInput *bcBaseNumMeasures = nullptr;            // Количество измерений
+    ComboInput *bcBaseMeasureRangeU = nullptr;          // Диапазон - максимальное доступное значение
+    ComboInput *bcBaseMeasureLimitU = nullptr;          // Максимальное значение, при котором происходит завершение измерения
 
     ButtonsCombo *bcSubstrateModeControl = nullptr;
-    ComboInput *bcSubstrateStartValue = nullptr;
-    ComboInput *bcSubstrateDeltaValue = nullptr;
+    ComboInput *bcSubstrateStartValueI = nullptr;
+    ComboInput *bcSubstrateDeltaValueI = nullptr;
     ComboInput *bcSubstrateNumMeasures = nullptr;
-    ComboInput *bcSubstrateRangeMeasure = nullptr;
-    ComboInput *bcSubstrateRangeLimit = nullptr;
+    ComboInput *bcSubstrateRangeMeasureU = nullptr;
+    ComboInput *bcSubstrateRangeLimitU = nullptr;
 
-    ButtonsCombo *bcCollectorModeSource = nullptr;          // Режим работы источника в коллекторе - высокое напряжение или большой ток
-    ComboInput *bcCollectorValueStart = nullptr;     // Начальное значение испытательного напряжения Uк
-    ComboInput *bcCollectorValueFinish = nullptr;    // Конечное значение испытательного напряжения Uк
+    ButtonsCombo *bcCollectorModeSource = nullptr;      // Режим работы источника в коллекторе - высокое напряжение или большой ток
+    ComboInput *bcCollectorValueStartU = nullptr;       // Начальное значение испытательного напряжения Uк
+    ComboInput *bcCollectorValueFinishU = nullptr;      // Конечное значение испытательного напряжения Uк
     ComboInput *bcCollectorMeasureRangeI = nullptr;
     ComboInput *bcCollectorMeasureLimitI = nullptr;
     ComboInput *bcCollectorMeasureRangeU = nullptr;

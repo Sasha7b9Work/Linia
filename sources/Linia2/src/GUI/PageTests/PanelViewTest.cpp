@@ -169,8 +169,8 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
                 dc->DrawLine(x + dx - 10, y, x + dx + 10, y);
 
                 CreateSourceBaseSubstrate(x + dx, y - 400, MeasurerSourcer::Type::SourceI, Dir::Down,
-                    &bcSubstrateStartValue, L("Isub старт"),
-                    &bcSubstrateDeltaValue, L("Isub шаг"),
+                    &bcSubstrateStartValueI, L("Isub старт"),
+                    &bcSubstrateDeltaValueI, L("Isub шаг"),
                     &bcSubstrateNumMeasures, L("N кривых"));
             }
         }
@@ -190,8 +190,8 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
             &bcCollectorMeasureLimitI, L("Ic огр"));
 
         CreateSourceBaseSubstrate(x, y + 300, MeasurerSourcer::Type::SourceU,  Dir::Down,
-            &bcCollectorValueStart, L("Uc старт"),
-            &bcCollectorValueFinish, L("Uc стоп"));
+            &bcCollectorValueStartU, L("Uc старт"),
+            &bcCollectorValueFinishU, L("Uc стоп"));
 
         DrawGround(x, driwer.GetY());
 
@@ -371,7 +371,7 @@ void PanelViewTest::CreateControls()
 
         dx_substrate -= 150;
 
-        if (!bcSubstrateRangeMeasure)
+        if (!bcSubstrateRangeMeasureU)
         {
             wxArrayString titles;
             titles.push_back("50 мВ");
@@ -388,7 +388,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Диапазон измерения"));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateRangeMeasure, L("Usub диап"), OnChangedBaseMeasureRangeU, x_base + dx_substrate, y_base + dy_substrate);
+            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateRangeMeasureU, L("Usub диап"), OnChangedBaseMeasureRangeU, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
@@ -415,7 +415,7 @@ void PanelViewTest::CreateControls()
             CREATE_BUTTONS_COMBO_RANGE(bcBaseMeasureLimitU, L("Ub огр"), OnChangedBaseMeasureLimitU, x_base, y_base);
         }
 
-        if (!bcSubstrateRangeLimit)
+        if (!bcSubstrateRangeLimitU)
         {
             wxArrayString titles;
             titles.push_back("50 мВ");
@@ -432,7 +432,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L(""));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateRangeLimit, L("Usub огр"), OnChangedBaseMeasureLimitU, x_base + dx_substrate, y_base + dy_substrate);
+            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateRangeLimitU, L("Usub огр"), OnChangedBaseMeasureLimitU, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
