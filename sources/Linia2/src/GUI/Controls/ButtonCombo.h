@@ -22,6 +22,8 @@ class ButtonsCombo : public DrawingButton
 
 public:
 
+    static const int HEIGHT = TEXTCNTRL_HEIGHT + 3;
+
     struct Type
     {
         enum E

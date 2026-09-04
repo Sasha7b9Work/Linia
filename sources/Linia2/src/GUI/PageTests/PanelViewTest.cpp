@@ -615,7 +615,7 @@ void PanelViewTest::OnChangedCollectorMeasureLimitU(wxCommandEvent &)
 }
 
 
-void PanelViewTest::DrawBorder(int &x, int &y, int r, Dir::E dir, int /*num_controls*/)
+void PanelViewTest::DrawBorder(int &x, int &y, int r, Dir::E dir, int num_controls)
 {
     const int d = 5;
 
@@ -626,19 +626,15 @@ void PanelViewTest::DrawBorder(int &x, int &y, int r, Dir::E dir, int /*num_cont
     dc->SetPen({ *wxBLACK, 1, wxPENSTYLE_SHORT_DASH });
     dc->SetBrush(*wxTRANSPARENT_BRUSH);
 
-    if (dir == Dir::Right)
-    {
-        dc->DrawRectangle(x - r - d, y - r - d - 15, WIDTH_CONTROL + 60, 80);
+    int width = WIDTH_CONTROL + d * 2;
+    int height = (num_controls * (ButtonsCombo::HEIGHT + d)) + d;
 
-        x += 30;
-        y -= 30;
-    }
-    else if (dir == Dir::Down)
+    if (dir == Dir::Down)
     {
-        dc->DrawRectangle(x - WIDTH_CONTROL / 2 - d, y - r - d, WIDTH_CONTROL + 2 * d, 120);
+        dc->DrawRectangle(x, y, width, height);
 
-        x -= WIDTH_CONTROL / 2;
-        y += 30;
+        x += d;
+        y += d;
     }
 
     paint.RestorePenBrush();
@@ -673,6 +669,8 @@ void PanelViewTest::DrawMeasurerCollectorI(int x, int y, Dir::E dir,
 
     (*cbRange)->SetPosition({ x, y });
 
+    y += d_combos;
+
     if (!(*cbLimit))
     {
         wxArrayString titles;
@@ -685,7 +683,7 @@ void PanelViewTest::DrawMeasurerCollectorI(int x, int y, Dir::E dir,
         CREATE_BUTTONS_COMBO_RANGE((*cbLimit), labelLimit, onEventLimit, x, y);
     }
 
-    (*cbLimit)->SetPosition({ x, y + 25 });
+    (*cbLimit)->SetPosition({ x, y });
 }
 
 
@@ -712,6 +710,8 @@ void PanelViewTest::DrawMeasurerCollectorU(int x, int y, Dir::E dir,
 
     (*cbRange)->SetPosition({ x, y });
 
+    y += d_combos;
+
     if (!(*cbLimit))
     {
         wxArrayString titles;
@@ -724,7 +724,7 @@ void PanelViewTest::DrawMeasurerCollectorU(int x, int y, Dir::E dir,
         CREATE_BUTTONS_COMBO_RANGE((*cbLimit), labelLimit, onEventLimit, x, y);
     }
 
-    (*cbLimit)->SetPosition({ x, y + 25 });
+    (*cbLimit)->SetPosition({ x, y });
 }
 
 
@@ -751,6 +751,8 @@ void PanelViewTest::DrawSourceCollectorU(int x, int y, Dir::E dir,
 
     (*cbValueStart)->SetPosition({ x, y });
 
+    y += d_combos;
+
     if (!(*cbValueFinish))
     {
         wxArrayString titles;
@@ -763,7 +765,7 @@ void PanelViewTest::DrawSourceCollectorU(int x, int y, Dir::E dir,
         CREATE_BUTTONS_COMBO_RANGE((*cbValueFinish), labelFinish, onEventFinish, x, y);
     }
 
-    (*cbValueFinish)->SetPosition({ x, y + 25 });
+    (*cbValueFinish)->SetPosition({ x, y });
 }
 
 

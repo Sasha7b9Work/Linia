@@ -153,7 +153,7 @@ private:
 
 ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, int width,
     const wxArrayString &_labels, const wxArrayString &_tooltips, int _buttons_in_row, const wxString &name, Type::E type) :
-    DrawingButton(parent, ((_labels.GetCount() != 0) ? _labels[0] : wxString("")), {width, TEXTCNTRL_HEIGHT + 3}, (type == Type::Bitmap) ? _title : wxString("")),
+    DrawingButton(parent, ((_labels.GetCount() != 0) ? _labels[0] : wxString("")), {width, HEIGHT}, (type == Type::Bitmap) ? _title : wxString("")),
     current_choice(0)
 {
     Hide();

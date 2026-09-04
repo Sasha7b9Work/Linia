@@ -35,7 +35,7 @@ private:
 
     static const int radius = 50;           // От этого значения и Center() идёт всё построение изображения
     static const int WIDTH_CONTROL = 120;
-    static const int d_combos = 30;         // Расстояние между элементами ввода по вертикали
+    static const int d_combos = ButtonsCombo::HEIGHT + 5;         // Расстояние между элементами ввода по вертикали
 
     Test *test = nullptr;
 
