@@ -66,7 +66,9 @@ void PanelViewTest::DrawElement(wxPaintDC &dc)
 
 void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &c)
 {
-    dc.DrawLine(c.x + radius / 2, c.y - 2 * radius, c.x + radius / 2, c.y + 2 * radius);    // Эмиттер
+    dc.DrawLine(c.x + radius / 2, c.y - 2 * radius, c.x + radius / 2, c.y + 2 * radius);    // Вертикальная линия, которая выходит из коллектора и эмиттера
+
+    dc.DrawLine(c.x + radius / 2 - 10, c.y + 2 * radius, c.x + radius / 2 + 10, c.y + 2 * radius);
 
     dc.DrawCircle(c, radius);
 
@@ -87,12 +89,14 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
             int y_top = c.y - radius * 100 / 115;
             int y_bottom = c.y + radius * 100 / 115;
 
-            int xx = c.x + radius * 10 / 20;
+            int xx = c.x + radius * 10 / 20;                    // В этом иксе - пересечение коллектора и эмиттера с окружностью.
 
             dc.DrawLine(x_vert, c.y - dy, xx, y_top);            // Верхняя наклонная линия (коллектор)
             dc.DrawLine(x_vert, c.y + dy, xx, y_bottom);         // Нижняя наклонная линия (эмиттер)
 
             {
+                // Стрелка эмиттера
+
                 double length = radius * 10 / 40;
 
                 if (type == "npn")
@@ -158,7 +162,18 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
             {
                 // Измеритель подложки
 
-                dc.DrawLine(x, c.y, x + 100, c.y);
+                int dx = 50;
+                int y = c.y + 500;
+
+                int r = 20;
+
+                dc.DrawLine(x, c.y, x + dx, c.y);
+                dc.DrawLine(x + dx, c.y, x + dx, y);
+                dc.DrawLine(x + dx - 10, y, x + dx + 10, y);
+                dc.DrawCircle(x + dx, y - 80, r);
+
+                dc.SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
+                GF::DrawTextInCenter(dc, "V", wxRect(wxPoint{ x + dx - r, y - 80 - r }, wxPoint{ x + dx + r, y - 80 + r }));
             }
         }
     }
@@ -205,7 +220,7 @@ void PanelViewTest::CreateControls()
     int y_base = c.y - 40;
     int dy_base = 50;
 
-    int dx_substrate = 320;
+    int dx_substrate = 250;
     int dy_substrate = 250;
 
     int width = 150;
