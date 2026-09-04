@@ -4,7 +4,7 @@
 #include "Utils/GlobalFunctions.h"
 
 
-void Voltmeter::Draw(const wxPoint &_center)
+void MeasurerSourcer::Draw(const wxPoint &_center, pchar label)
 {
     center = _center;
 
@@ -12,17 +12,17 @@ void Voltmeter::Draw(const wxPoint &_center)
 
     dc.SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
 
-    GF::DrawTextInCenter(dc, "V", wxRect(wxPoint{ center.x - radius, center.y - radius }, wxPoint{ center.x + radius, center.y + radius }));
+    GF::DrawTextInCenter(dc, label, wxRect(wxPoint{ center.x - radius, center.y - radius }, wxPoint{ center.x + radius, center.y + radius }));
+}
+
+
+void Voltmeter::Draw(const wxPoint &_center)
+{
+    MeasurerSourcer::Draw(_center, "V");
 }
 
 
 void Ampermeter::Draw(const wxPoint &_center)
 {
-    center = _center;
-
-    dc.DrawCircle(center, radius);
-
-    dc.SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
-
-    GF::DrawTextInCenter(dc, "A", wxRect(wxPoint{ center.x - radius, center.y - radius }, wxPoint{ center.x + radius, center.y + radius }));
+    MeasurerSourcer::Draw(_center, "A");
 }

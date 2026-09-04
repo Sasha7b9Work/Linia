@@ -5,13 +5,16 @@
 #pragma warning(pop)
 
 
-class Measurer
+// Общий класс для источника и измерителя
+class MeasurerSourcer
 {
 public:
 
-    Measurer(wxPaintDC &_dc, bool vertical) : dc(_dc), is_vertical(vertical) { }
+    MeasurerSourcer(wxPaintDC &_dc, bool vertical) : dc(_dc), is_vertical(vertical) { }
 
-    virtual void Draw(const wxPoint &center) = 0;
+    void Draw(const wxPoint &, pchar label);
+
+    virtual void Draw(const wxPoint &) = 0;
 
     int GetRadius() const
     {
@@ -21,27 +24,29 @@ public:
 protected:
 
     wxPaintDC &dc;
-    wxPoint center;
     bool is_vertical;
-    int radius = 20;
+    const int radius = 20;
+    wxPoint center;
 };
 
 
-class Voltmeter : public Measurer
+class Voltmeter : public MeasurerSourcer
 {
 public:
 
-    Voltmeter(wxPaintDC &dc, bool vertical) : Measurer(dc, vertical) { }
+    Voltmeter(wxPaintDC &dc, bool vertical) : MeasurerSourcer(dc, vertical) { }
 
     virtual void Draw(const wxPoint &) override;
 };
 
 
-class Ampermeter : public Measurer
+class Ampermeter : public MeasurerSourcer
 {
 public:
 
-    Ampermeter(wxPaintDC &dc, bool vertical) : Measurer(dc, vertical) { }
+    Ampermeter(wxPaintDC &dc, bool vertical) : MeasurerSourcer(dc, vertical) { }
 
     virtual void Draw(const wxPoint &) override;
 };
+
+
