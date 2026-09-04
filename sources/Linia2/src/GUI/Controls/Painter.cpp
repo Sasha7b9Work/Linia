@@ -239,3 +239,16 @@ void PainterAnimated::OnEventPaint(wxPaintEvent &)
     FuncDraw();
 }
 
+
+void PaintDC::StorePenBrush()
+{
+    stored_pen = dc.GetPen();
+    stored_brush = dc.GetBrush();
+}
+
+
+void PaintDC::RestorePenBrush()
+{
+    dc.SetPen(stored_pen);
+    dc.SetBrush(stored_brush);
+}

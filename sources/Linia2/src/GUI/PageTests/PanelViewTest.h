@@ -75,6 +75,9 @@ private:
 
     void DrawSourceCollectorU(wxPaintDC &, int x, int y, Dir::E, ButtonsComboRange **cbValueStart, ButtonsComboRange **cbValueFinish);
 
+    // Нарисовать окантовку для измерителя или источника. x, y - центр измерителя
+    void DrawBorder(wxPaintDC &, int &x, int &y, int radius, Dir::E, int num_controls);
+
     // Создать элементы управляения для данного теста
     void CreateControls();
 

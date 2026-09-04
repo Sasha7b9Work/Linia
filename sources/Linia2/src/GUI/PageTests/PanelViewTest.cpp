@@ -4,6 +4,7 @@
 #include "Utils/GlobalFunctions.h"
 #include "Utils/LineDrawer.h"
 #include "GUI/PageTests/Entities/Measurers.h"
+#include "GUI/Controls/Painter.h"
 
 
 PanelViewTest *ThePanelViewTest = nullptr;
@@ -180,11 +181,17 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
 
         LineDriwer driwer{ dc, x_col, y_col };
 
-        int x = driwer.AppendX(100);
+        int x = driwer.LineToX(150);
         int y = driwer.GetY() + 50;
-        driwer.AppendY(500);
+        driwer.LineToY(500);
 
-        DrawMeasurerCollectorI(dc, x, y, Dir::Right, &bcCollectorMeasureRange, &bcCollectorMeasureLimit);
+        DrawMeasurerCollectorI(dc, x, y, Dir::Down, &bcCollectorMeasureRange, &bcCollectorMeasureLimit);
+
+        DrawSourceCollectorU(dc, x, y + 300, Dir::Down, &bcCollectorValueStart, &bcCollectorValueFinish);
+
+        y = driwer.GetY();
+
+        dc.DrawLine(x - 10, y, x + 10, y);
     }
 }
 
@@ -542,40 +549,6 @@ void PanelViewTest::CreateControls()
         }
     }
 
-    width = WIDTH_CONTROL;
-    x = 500;
-    y = 370;
-
-    {
-        if (!bcCollectorValueStart)
-        {
-            wxArrayString titles;
-            titles.push_back(L("10 В"));
-            titles.push_back(L("20 В"));
-
-            wxArrayString tooltips;
-            tooltips.push_back(L("Начальное значение испытательного напряжения"));
-
-            CREATE_BUTTONS_COMBO_RANGE(bcCollectorValueStart, L("Uc старт"), OnEventComboBoxCollectorValueStart, x, y);
-        }
-
-        y += dy_base;
-
-        {
-            if (!bcCollectorValueFinish)
-            {
-                wxArrayString titles;
-                titles.push_back(L("10 В"));
-                titles.push_back(L("20 В"));
-
-                wxArrayString tooltips;
-                tooltips.push_back(L("Конечное значение испытательного напряжения"));
-
-                CREATE_BUTTONS_COMBO_RANGE(bcCollectorValueFinish, L("Uc стоп"), OnEventComboBoxCollectorValueFinish, x, y);
-            }
-        }
-    }
-
 #undef CREATE_BUTTONS_COMBO
 #undef CREATE_BUTTONS_COMBO_RANGE
 }
@@ -659,6 +632,37 @@ void PanelViewTest::OnEventComboBoxCollectorMeasureLimit(wxCommandEvent &)
 }
 
 
+void PanelViewTest::DrawBorder(wxPaintDC &dc, int &x, int &y, int r, Dir::E dir, int /*num_controls*/)
+{
+    const int d = 5;
+
+    PaintDC paint(dc);
+
+    paint.StorePenBrush();
+
+    dc.SetPen({ *wxBLACK, 1, wxPENSTYLE_SHORT_DASH });
+    dc.SetBrush(*wxTRANSPARENT_BRUSH);
+
+    if (dir == Dir::Right)
+    {
+        dc.DrawRectangle(x - r - d, y - r - d - 15, WIDTH_CONTROL + 60, 80);
+
+        x += 30;
+        y -= 30;
+    }
+    else if (dir == Dir::Down)
+    {
+        dc.DrawRectangle(x - WIDTH_CONTROL / 2 - d, y - r - d, WIDTH_CONTROL + 2 * d, 120);
+
+        x -= WIDTH_CONTROL / 2;
+        y += 30;
+    }
+
+    paint.RestorePenBrush();
+
+}
+
+
 void PanelViewTest::DrawMeasurerCollectorI(wxPaintDC &dc, int x, int y, Dir::E dir, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit)
 {
 #define CREATE_BUTTONS_COMBO_RANGE(name, title, func, _x, _y)                               \
@@ -668,19 +672,7 @@ void PanelViewTest::DrawMeasurerCollectorI(wxPaintDC &dc, int x, int y, Dir::E d
     Ampermeter ampermeter(dc, true);
     ampermeter.Draw({ x, y });
 
-    int d = 5;
-
-    if (dir == Dir::Right)
-    {
-        wxPen pen{ *wxBLACK, 1, wxPENSTYLE_SHORT_DASH };
-        dc.SetPen(pen);
-        dc.SetBrush(*wxTRANSPARENT_BRUSH);
-
-        dc.DrawRectangle(x - ampermeter.GetRadius() - d, y - ampermeter.GetRadius() - d - 15, WIDTH_CONTROL + 60, 80);
-
-        x += 30;
-        y -= 30;
-    }
+    DrawBorder(dc, x, y, ampermeter.GetRadius(), dir, 2);
 
     if (!(*cbRange))
     {
@@ -717,19 +709,7 @@ void PanelViewTest::DrawSourceCollectorU(wxPaintDC &dc, int x, int y, Dir::E dir
     Voltmeter voltmeter(dc, true);
     voltmeter.Draw({ x, y });
 
-    int d = 5;
-
-    if (dir == Dir::Right)
-    {
-        wxPen pen{ *wxBLACK, 1, wxPENSTYLE_SHORT_DASH };
-        dc.SetPen(pen);
-        dc.SetBrush(*wxTRANSPARENT_BRUSH);
-
-        dc.DrawRectangle(x - voltmeter.GetRadius() - d, y - voltmeter.GetRadius() - d - 15, WIDTH_CONTROL + 60, 80);
-
-        x += 30;
-        y -= 30;
-    }
+    DrawBorder(dc, x, y, voltmeter.GetRadius(), dir, 2);
 
     if (!(*cbValueStart))
     {

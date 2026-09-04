@@ -8,7 +8,7 @@ LineDriwer::LineDriwer(wxPaintDC &_dc, int _x, int _y) : dc(_dc), coord{ _x, _y 
 }
 
 
-int LineDriwer::AppendY(int dy)
+int LineDriwer::LineToY(int dy)
 {
     wxPoint coord_next{ coord.x, coord.y + dy };
 
@@ -20,7 +20,7 @@ int LineDriwer::AppendY(int dy)
 }
 
 
-int LineDriwer::AppendX(int dx)
+int LineDriwer::LineToX(int dx)
 {
     wxPoint coord_next{ coord.x + dx, coord.y };
 

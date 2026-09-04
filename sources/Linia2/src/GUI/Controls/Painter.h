@@ -3,13 +3,34 @@
 #include "GUI/Controls/Bitmap.h"
 #include "GUI/Controls/Panel.h"
 #pragma warning(push, 0)
-#include <wx/timer.h>
-#include <wx/dcmemory.h>
+    #include <wx/timer.h>
+    #include <wx/dcmemory.h>
+    #include <wx/dcclient.h>
 #pragma warning(pop)
 
 
 struct Color;
 class wxGraphicsContext;
+
+
+class PaintDC
+{
+public:
+
+    PaintDC(wxPaintDC &_dc) : dc(_dc) { }
+
+    void StorePenBrush();
+
+    void RestorePenBrush();
+
+    wxPaintDC &dc;
+
+private:
+
+    wxPen stored_pen;
+
+    wxBrush stored_brush;
+};
 
 
 class Painter : public Panel
