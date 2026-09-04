@@ -4,14 +4,25 @@
 #include "Utils/GlobalFunctions.h"
 
 
-void Voltmeter::Draw(const wxPoint &_center, bool vertical)
+void Voltmeter::Draw(const wxPoint &_center)
 {
     center = _center;
-    is_vertical = vertical;
 
-    dc.DrawCircle(_center, radius);
+    dc.DrawCircle(center, radius);
 
     dc.SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
 
     GF::DrawTextInCenter(dc, "V", wxRect(wxPoint{ center.x - radius, center.y - radius }, wxPoint{ center.x + radius, center.y + radius }));
+}
+
+
+void Ampermeter::Draw(const wxPoint &_center)
+{
+    center = _center;
+
+    dc.DrawCircle(center, radius);
+
+    dc.SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
+
+    GF::DrawTextInCenter(dc, "A", wxRect(wxPoint{ center.x - radius, center.y - radius }, wxPoint{ center.x + radius, center.y + radius }));
 }

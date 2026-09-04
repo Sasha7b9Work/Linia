@@ -9,9 +9,9 @@ class Measurer
 {
 public:
 
-    Measurer(wxPaintDC &_dc, int r) : dc(_dc), radius(r) { }
+    Measurer(wxPaintDC &_dc, int r, bool vertical) : dc(_dc), is_vertical(vertical), radius(r) { }
 
-    virtual void Draw(const wxPoint &center, bool vertical) = 0;
+    virtual void Draw(const wxPoint &center) = 0;
 
 protected:
 
@@ -26,7 +26,17 @@ class Voltmeter : public Measurer
 {
 public:
 
-    Voltmeter(wxPaintDC &dc, int r) : Measurer(dc, r) { }
+    Voltmeter(wxPaintDC &dc, int r, bool vertical) : Measurer(dc, r, vertical) { }
 
-    virtual void Draw(const wxPoint &, bool vertical) override;
+    virtual void Draw(const wxPoint &) override;
+};
+
+
+class Ampermeter : public Measurer
+{
+public:
+
+    Ampermeter(wxPaintDC &dc, int r, bool vertical) : Measurer(dc, r, vertical) { }
+
+    virtual void Draw(const wxPoint &) override;
 };

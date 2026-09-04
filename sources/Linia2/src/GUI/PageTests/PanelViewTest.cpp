@@ -139,7 +139,7 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
 
                 coord.y += r;
 
-                Voltmeter(dc, r).Draw(coord, true);
+                Voltmeter(dc, r, true).Draw(coord);
 
                 coord.y += r;
 
@@ -172,7 +172,7 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
                 dc.DrawLine(x + dx, c.y, x + dx, y);
                 dc.DrawLine(x + dx - 10, y, x + dx + 10, y);
 
-                Voltmeter(dc, r).Draw({ x + dx, y - 80 }, true);
+                Voltmeter(dc, r, true).Draw({ x + dx, y - 80 });
             }
         }
     }
