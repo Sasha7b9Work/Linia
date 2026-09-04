@@ -343,7 +343,7 @@ void PanelViewTest::CreateControls()
     y_base += dy_base;
 
     {
-        if (!bcBaseStartValue)
+        if (!bcBaseStartValueI)
         {
             wxArrayString titles;
             titles.push_back("2 мкА");
@@ -356,7 +356,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Начальное значение тока базы"));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcBaseStartValue, L("Ib старт"), OnEventComboBoxBaseStartValue, x_base, y_base);
+            CREATE_BUTTONS_COMBO_RANGE(bcBaseStartValueI, L("Ib старт"), OnEventComboBoxBaseStartValueI, x_base, y_base);
         }
 
         if (!bcSubstrateStartValue)
@@ -372,7 +372,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Начальное значение тока подложки"));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateStartValue, L("Isub старт"), OnEventComboBoxBaseStartValue, x_base + dx_substrate, y_base + dy_substrate);
+            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateStartValue, L("Isub старт"), OnEventComboBoxBaseStartValueI, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
@@ -380,7 +380,7 @@ void PanelViewTest::CreateControls()
     y_base += dy_base;
 
     {
-        if (!bcBaseDeltaValue)
+        if (!bcBaseDeltaValueI)
         {
             wxArrayString titles;
             titles.push_back("2 мкА");
@@ -394,7 +394,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Шаг изменения тока базы"));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcBaseDeltaValue, L("Ib шаг"), OnEventComboBoxBaseDeltaValue, x_base, y_base);
+            CREATE_BUTTONS_COMBO_RANGE(bcBaseDeltaValueI, L("Ib шаг"), OnEventComboBoxBaseDeltaValueI, x_base, y_base);
         }
 
         if (!bcSubstrateDeltaValue)
@@ -411,7 +411,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Шаг изменения тока подложки"));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateDeltaValue, L("Isub шаг"), OnEventComboBoxBaseDeltaValue, x_base + dx_substrate, y_base + dy_substrate);
+            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateDeltaValue, L("Isub шаг"), OnEventComboBoxBaseDeltaValueI, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
@@ -464,7 +464,7 @@ void PanelViewTest::CreateControls()
     y_base += dy_base;
 
     {
-        if (!bcBaseMeasureRange)
+        if (!bcBaseMeasureRangeU)
         {
             wxArrayString titles;
             titles.push_back("50 мВ");
@@ -481,7 +481,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Диапазон измерения"));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcBaseMeasureRange, L("Ub диап"), OnEventComboBoxBaseMeasureRange, x_base, y_base);
+            CREATE_BUTTONS_COMBO_RANGE(bcBaseMeasureRangeU, L("Ub диап"), OnEventComboBoxBaseMeasureRangeU, x_base, y_base);
         }
 
         dx_substrate -= 150;
@@ -503,14 +503,14 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L("Диапазон измерения"));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateRangeMeasure, L("Usub диап"), OnEventComboBoxBaseMeasureRange, x_base + dx_substrate, y_base + dy_substrate);
+            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateRangeMeasure, L("Usub диап"), OnEventComboBoxBaseMeasureRangeU, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
     y_base += dy_base;
 
     {
-        if (!bcBaseMeasureLimit)
+        if (!bcBaseMeasureLimitU)
         {
             wxArrayString titles;
             titles.push_back("50 мВ");
@@ -527,7 +527,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L(""));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcBaseMeasureLimit, L("Ub огр"), OnEventComboBoxBaseMeasureLimit, x_base, y_base);
+            CREATE_BUTTONS_COMBO_RANGE(bcBaseMeasureLimitU, L("Ub огр"), OnEventComboBoxBaseMeasureLimitU, x_base, y_base);
         }
 
         if (!bcSubstrateRangeLimit)
@@ -547,7 +547,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back(L(""));
 
-            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateRangeLimit, L("Usub огр"), OnEventComboBoxBaseMeasureLimit, x_base + dx_substrate, y_base + dy_substrate);
+            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateRangeLimit, L("Usub огр"), OnEventComboBoxBaseMeasureLimitU, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
@@ -594,13 +594,13 @@ void PanelViewTest::OnEventComboBoxBaseModeControl(wxCommandEvent &)
 }
 
 
-void PanelViewTest::OnEventComboBoxBaseStartValue(wxCommandEvent &)
+void PanelViewTest::OnEventComboBoxBaseStartValueI(wxCommandEvent &)
 {
 
 }
 
 
-void PanelViewTest::OnEventComboBoxBaseDeltaValue(wxCommandEvent &)
+void PanelViewTest::OnEventComboBoxBaseDeltaValueI(wxCommandEvent &)
 {
 
 }
@@ -612,13 +612,13 @@ void PanelViewTest::OnEventComboBoxBaseNumMeasures(wxCommandEvent &)
 }
 
 
-void PanelViewTest::OnEventComboBoxBaseMeasureRange(wxCommandEvent &)
+void PanelViewTest::OnEventComboBoxBaseMeasureRangeU(wxCommandEvent &)
 {
 
 }
 
 
-void PanelViewTest::OnEventComboBoxBaseMeasureLimit(wxCommandEvent &)
+void PanelViewTest::OnEventComboBoxBaseMeasureLimitU(wxCommandEvent &)
 {
 
 }
@@ -736,7 +736,7 @@ void PanelViewTest::DrawMeasurerCollectorI(int x, int y, Dir::E dir,
         CREATE_BUTTONS_COMBO_RANGE((*cbLimit), L("Ic огр"), onEventLimit, x, y);
     }
 
-    (*cbLimit)->SetPosition({ x, y + 35 });
+    (*cbLimit)->SetPosition({ x, y + 25 });
 }
 
 
@@ -775,7 +775,7 @@ void PanelViewTest::DrawMeasurerCollectorU(int x, int y, Dir::E dir,
         CREATE_BUTTONS_COMBO_RANGE((*cbLimit), L("Ic огр"), onEventLimit, x, y);
     }
 
-    (*cbLimit)->SetPosition({ x, y + 35 });
+    (*cbLimit)->SetPosition({ x, y + 25 });
 }
 
 
@@ -814,5 +814,5 @@ void PanelViewTest::DrawSourceCollectorU(int x, int y, Dir::E dir,
         CREATE_BUTTONS_COMBO_RANGE((*cbValueFinish), L("Uc стоп"), onEventFinish, x, y);
     }
 
-    (*cbValueFinish)->SetPosition({ x, y + 35 });
+    (*cbValueFinish)->SetPosition({ x, y + 25 });
 }

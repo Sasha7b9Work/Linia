@@ -25,15 +25,15 @@ private:
 
     wxPaintDC *dc = nullptr;
 
-    ButtonsCombo *bcModeScan = nullptr;                 // Режим развёртки
-    ButtonsCombo *bcTypeSemiconductor = nullptr;        // npn или pnp
+    ButtonsCombo *bcModeScan = nullptr;                  // Режим развёртки
+    ButtonsCombo *bcTypeSemiconductor = nullptr;         // npn или pnp
 
-    ButtonsCombo *bcBaseModeControl = nullptr;          // Режим управления базой - током или напряжением
-    ButtonsComboRange *bcBaseStartValue = nullptr;      // Стартовое значение задаваемой величины
-    ButtonsComboRange *bcBaseDeltaValue = nullptr;      // Шаг изменения задаваемой величины
-    ButtonsCombo *bcBaseNumMeasures = nullptr;          // Количество измерений
-    ButtonsComboRange *bcBaseMeasureRange = nullptr;    // Диапазон - максимальное доступное значение
-    ButtonsComboRange *bcBaseMeasureLimit = nullptr;      // Максимальное значение, при котором происходит завершение измерения
+    ButtonsCombo *bcBaseModeControl = nullptr;           // Режим управления базой - током или напряжением
+    ButtonsComboRange *bcBaseStartValueI = nullptr;      // Стартовое значение задаваемой величины
+    ButtonsComboRange *bcBaseDeltaValueI = nullptr;      // Шаг изменения задаваемой величины
+    ButtonsCombo *bcBaseNumMeasures = nullptr;           // Количество измерений
+    ButtonsComboRange *bcBaseMeasureRangeU = nullptr;    // Диапазон - максимальное доступное значение
+    ButtonsComboRange *bcBaseMeasureLimitU = nullptr;    // Максимальное значение, при котором происходит завершение измерения
 
     ButtonsCombo *bcSubstrateModeControl = nullptr;
     ButtonsComboRange *bcSubstrateStartValue = nullptr;
@@ -55,11 +55,11 @@ private:
     void OnEventComboBoxModeScan(wxCommandEvent &);
     void OnEventComboBoxTypeSemiconductor(wxCommandEvent &);
     void OnEventComboBoxBaseModeControl(wxCommandEvent &);
-    void OnEventComboBoxBaseStartValue(wxCommandEvent &);
-    void OnEventComboBoxBaseDeltaValue(wxCommandEvent &);
+    void OnEventComboBoxBaseStartValueI(wxCommandEvent &);
+    void OnEventComboBoxBaseDeltaValueI(wxCommandEvent &);
     void OnEventComboBoxBaseNumMeasures(wxCommandEvent &);
-    void OnEventComboBoxBaseMeasureRange(wxCommandEvent &);
-    void OnEventComboBoxBaseMeasureLimit(wxCommandEvent &);
+    void OnEventComboBoxBaseMeasureRangeU(wxCommandEvent &);
+    void OnEventComboBoxBaseMeasureLimitU(wxCommandEvent &);
     void OnEventComboBoxCollectorModeSource(wxCommandEvent &);
     void OnEventComboBoxCollectorValueStart(wxCommandEvent &);
     void OnEventComboBoxCollectorValueFinish(wxCommandEvent &);
