@@ -173,7 +173,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
                 dc->DrawLine(x + dx, c.y, x + dx, y);
                 dc->DrawLine(x + dx - 10, y, x + dx + 10, y);
 
-                CreateSourceBaseSubstrate(x, y, MeasurerSourcer::Type::SourceI, Dir::Left,
+                CreateSourceBaseSubstrate(x + dx, y - 300, MeasurerSourcer::Type::SourceI, Dir::Left,
                     &bcSubstrateStartValue, L("Isub старт"),
                     &bcSubstrateDeltaValue, L("Isub шаг"),
                     &bcSubstrateNumMeasures, L("N кривых"));
@@ -631,15 +631,20 @@ void PanelViewTest::DrawBorder(int &x, int &y, int r, Dir::E dir, int num_contro
 
     if (dir == Dir::Left)
     {
-
+        x -= WIDTH_CONTROL + 2 * d + r;
+        width += 2 * r + d;
+        y -= height / 2;
+        dc->DrawRectangle(x, y, width, height);
+        x += d;
+        y += d;
     }
     else if (dir == Dir::Up)
     {
-
+        dc->DrawRectangle(x, y, width, height);
     }
     else if (dir == Dir::Right)
     {
-
+        dc->DrawRectangle(x, y, width, height);
     }
     if (dir == Dir::Down)
     {
