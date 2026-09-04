@@ -147,7 +147,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
                     &bcBaseDeltaValueI, L("Ib шаг"),
                     &bcBaseNumMeasures, L("N кривых"));
 
-                driwer.MoveOnDY(150);
+                driwer.MoveOnDY(350);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasU, Dir::Down,
                     &bcBaseMeasureRangeU, L("Ub диап"),
@@ -178,6 +178,10 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
                     &bcSubstrateStartValueI, L("Isub старт"),
                     &bcSubstrateDeltaValueI, L("Isub шаг"),
                     &bcSubstrateNumMeasures, L("N кривых"));
+
+                CreateSourceBaseSubstrate(x + dx, y - 200, MeasurerSourcer::Type::MeasU, Dir::Down,
+                    &bcSubstrateRangeMeasureU, L("Usub диап"),
+                    &bcSubstrateRangeLimitU, L("Usub огр"));
             }
         }
     }
@@ -324,7 +328,7 @@ void PanelViewTest::CreateControls()
             tooltips.push_back(L("База управляется напряжением"));
             tooltips.push_back(L("База соединена с землёй"));
 
-            CREATE_BUTTONS_COMBO(bcBaseModeControl, L("Управление"), 1, OnChangedBaseModeControl, x_base, y_base);
+            CREATE_BUTTONS_COMBO(bcBaseModeControl, L("Управление"), 1, OnChangedBaseModeControl, x_base, 120);
         }
 
         if (!bcSubstrateModeControl)
@@ -339,7 +343,7 @@ void PanelViewTest::CreateControls()
             tooltips.push_back(L("Подложка управляется напряжением"));
             tooltips.push_back(L("Подложка соединена с землёй"));
 
-            CREATE_BUTTONS_COMBO(bcSubstrateModeControl, L("Управление"), 1, OnChangedBaseModeControl, x_base + dx_substrate, y_base + dy_substrate);
+            CREATE_BUTTONS_COMBO(bcSubstrateModeControl, L("Управление"), 1, OnChangedBaseModeControl, x_base + dx_substrate, 120);
         }
     }
 
@@ -356,51 +360,9 @@ void PanelViewTest::CreateControls()
 
     {
         dx_substrate -= 150;
-
-        if (!bcSubstrateRangeMeasureU)
-        {
-            wxArrayString titles;
-            titles.push_back("50 мВ");
-            titles.push_back("100 мВ");
-            titles.push_back("200 мВ");
-            titles.push_back("500 мВ");
-            titles.push_back("1 В");
-            titles.push_back("2 В");
-            titles.push_back("5 В");
-            titles.push_back("10 В");
-            titles.push_back("20 В");
-            titles.push_back("50 В");
-
-            wxArrayString tooltips;
-            tooltips.push_back(L("Диапазон измерения"));
-
-            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateRangeMeasureU, L("Usub диап"), OnChangedBaseMeasureRangeU, x_base + dx_substrate, y_base + dy_substrate);
-        }
     }
 
     y_base += dy_base;
-
-    {
-        if (!bcSubstrateRangeLimitU)
-        {
-            wxArrayString titles;
-            titles.push_back("50 мВ");
-            titles.push_back("100 мВ");
-            titles.push_back("200 мВ");
-            titles.push_back("500 мВ");
-            titles.push_back("1 В");
-            titles.push_back("2 В");
-            titles.push_back("5 В");
-            titles.push_back("10 В");
-            titles.push_back("20 В");
-            titles.push_back("50 В");
-
-            wxArrayString tooltips;
-            tooltips.push_back(L(""));
-
-            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateRangeLimitU, L("Usub огр"), OnChangedBaseMeasureLimitU, x_base + dx_substrate, y_base + dy_substrate);
-        }
-    }
 
     int x = 200;
     int y = 50;
