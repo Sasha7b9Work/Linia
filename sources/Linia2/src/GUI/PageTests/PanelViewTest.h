@@ -43,8 +43,10 @@ private:
     ButtonsCombo *bcCollectorModeSource = nullptr;          // Режим работы источника в коллекторе - высокое напряжение или большой ток
     ButtonsComboRange *bcCollectorValueStart = nullptr;     // Начальное значение испытательного напряжения Uк
     ButtonsComboRange *bcCollectorValueFinish = nullptr;    // Конечное значение испытательного напряжения Uк
-    ButtonsComboRange *bcCollectorMeasureRange = nullptr;
-    ButtonsComboRange *bcCollectorMeasureLimit = nullptr;
+    ButtonsComboRange *bcCollectorMeasureRangeI = nullptr;
+    ButtonsComboRange *bcCollectorMeasureLimitI = nullptr;
+    ButtonsComboRange *bcCollectorMeasureRangeU = nullptr;
+    ButtonsComboRange *bcCollectorMeasureLimitU = nullptr;
 
     void OnEventPaint(wxPaintEvent &);
 
@@ -72,6 +74,7 @@ private:
     // Нарисовать блок измерителя тока коллектора
     // x, y - центр измерителя
     void DrawMeasurerCollectorI(wxPaintDC &, int x, int y, Dir::E, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit);
+    void DrawMeasurerCollectorU(wxPaintDC &, int x, int y, Dir::E, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit);
 
     void DrawSourceCollectorU(wxPaintDC &, int x, int y, Dir::E, ButtonsComboRange **cbValueStart, ButtonsComboRange **cbValueFinish);
 

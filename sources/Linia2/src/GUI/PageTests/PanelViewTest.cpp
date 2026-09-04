@@ -185,7 +185,7 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
         int y = driwer.GetY() + 50;
         driwer.LineOnDY(500);
 
-        DrawMeasurerCollectorI(dc, x, y, Dir::Down, &bcCollectorMeasureRange, &bcCollectorMeasureLimit);
+        DrawMeasurerCollectorI(dc, x, y, Dir::Down, &bcCollectorMeasureRangeI, &bcCollectorMeasureLimitI);
 
         DrawSourceCollectorU(dc, x, y + 300, Dir::Down, &bcCollectorValueStart, &bcCollectorValueFinish);
 
@@ -199,6 +199,8 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
         x = driwer.GetX();
 
         dc.DrawLine(x - 10, y, x + 10, y);
+
+        DrawMeasurerCollectorU(dc, x, y - 150, Dir::Down, &bcCollectorMeasureRangeU, &bcCollectorMeasureLimitU);
     }
 }
 
@@ -669,17 +671,54 @@ void PanelViewTest::DrawBorder(wxPaintDC &dc, int &x, int &y, int r, Dir::E dir,
 
 }
 
-
-void PanelViewTest::DrawMeasurerCollectorI(wxPaintDC &dc, int x, int y, Dir::E dir, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit)
-{
 #define CREATE_BUTTONS_COMBO_RANGE(name, title, func, _x, _y)                               \
     name = new ButtonsComboRange(this, title, WIDTH_CONTROL, titles, tooltips, #name);      \
     name->Bind(wxEVT_COMBOBOX, &PanelViewTest::func, this);
 
+
+void PanelViewTest::DrawMeasurerCollectorI(wxPaintDC &dc, int x, int y, Dir::E dir, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit)
+{
     Ampermeter ampermeter(dc, true);
     ampermeter.Draw({ x, y });
 
     DrawBorder(dc, x, y, ampermeter.GetRadius(), dir, 2);
+
+    if (!(*cbRange))
+    {
+        wxArrayString titles;
+        titles.push_back(L("10 А"));
+        titles.push_back(L("20 А"));
+
+        wxArrayString tooltips;
+        tooltips.push_back(L("Диапазон измеряемого тока"));
+
+        CREATE_BUTTONS_COMBO_RANGE((*cbRange), L("Ic диап"), OnEventComboBoxCollectorMeasureRange, x, y);
+    }
+
+    (*cbRange)->SetPosition({ x, y });
+
+    if (!(*cbLimit))
+    {
+        wxArrayString titles;
+        titles.push_back(L("10 А"));
+        titles.push_back(L("20 А"));
+
+        wxArrayString tooltips;
+        tooltips.push_back(L("Предельное знанчение измеряемого тока"));
+
+        CREATE_BUTTONS_COMBO_RANGE((*cbLimit), L("Ic огр"), OnEventComboBoxCollectorMeasureLimit, x, y);
+    }
+
+    (*cbLimit)->SetPosition({ x, y + 35 });
+}
+
+
+void PanelViewTest::DrawMeasurerCollectorU(wxPaintDC &dc, int x, int y, Dir::E dir, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit)
+{
+    Voltmeter voltmeter(dc, true);
+    voltmeter.Draw({ x, y });
+
+    DrawBorder(dc, x, y, voltmeter.GetRadius(), dir, 2);
 
     if (!(*cbRange))
     {
