@@ -3,6 +3,7 @@
 #include "GUI/PageTests/PanelViewTest.h"
 #include "Utils/GlobalFunctions.h"
 #include "Utils/LineDrawer.h"
+#include "GUI/PageTests/Entities/Measurers.h"
 
 
 PanelViewTest *ThePanelViewTest = nullptr;
@@ -138,11 +139,7 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
 
                 coord.y += r;
 
-                dc.DrawCircle(coord, r);                                        // Измеритель
-
-                dc.SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
-
-                GF::DrawTextInCenter(dc, "V", wxRect(wxPoint{ coord.x - r, coord.y - r }, wxPoint{ coord.x + r, coord.y + r }));
+                Voltmeter(dc, r).Draw(coord, true);
 
                 coord.y += r;
 
@@ -174,10 +171,8 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
                 dc.DrawLine(x, c.y, x + dx, c.y);
                 dc.DrawLine(x + dx, c.y, x + dx, y);
                 dc.DrawLine(x + dx - 10, y, x + dx + 10, y);
-                dc.DrawCircle(x + dx, y - 80, r);
 
-                dc.SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
-                GF::DrawTextInCenter(dc, "V", wxRect(wxPoint{ x + dx - r, y - 80 - r }, wxPoint{ x + dx + r, y - 80 + r }));
+                Voltmeter(dc, r).Draw({ x + dx, y - 80 }, true);
             }
         }
     }
@@ -188,7 +183,7 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
         LineDriwer driwer{ dc, x_col, y_col };
 
         driwer.AppendX(200);
-        driwer.AppendY(200);
+        driwer.AppendY(500);
     }
 }
 
@@ -548,7 +543,7 @@ void PanelViewTest::CreateControls()
 
     width = 150;
     x = 400;
-    y = 100;
+    y = 120;
 
     {
         if (!bcCollectorValueStart)

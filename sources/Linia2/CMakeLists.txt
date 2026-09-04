@@ -37,6 +37,7 @@ if(WIN32)
         /wd5027    # move assignment operator was implicitly defined as deleted
         /wd5045    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
         /wd5039    # pointer or reference to potentially throwing function passed to extern C function under -EHc. Undefined behavor may occur if this function throws an exception
+        /wd5204    # 'xxx': class has virtual functions, but its trivial destructor is not virtual
         /wd5233    # xplicit lambda capture 'this' is not used
     )
 
@@ -95,6 +96,7 @@ file(GLOB GUI_SETTINGS                  src/GUI/PageSettings/*.*)
 file(GLOB GUI_SETTINGS_MYCOMPUTER       src/GUI/PageSettings/MyComputer/*.*)
 file(GLOB GUI_TABLES                    src/GUI/PageTables/*.*)
 file(GLOB GUI_TESTS                     src/GUI/PageTests/*.*)
+file(GLOB GUI_TESTS_ENTITIES            src/GUI/PageTests/Entities/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB SETTINGS_TESTS                src/Settings/Tests/*.*)
 file(GLOB SETTINGS_TESTS_LIBRARY        src/Settings/Tests/Library/*.*)
@@ -144,6 +146,7 @@ source_group(GUI/PageSettings                 FILES ${GUI_SETTINGS})
 source_group(GUI/PageSettings/MyComputer      FILES ${GUI_SETTINGS_MYCOMPUTER})
 source_group(GUI/PageTables                   FILES ${GUI_TABLES})
 source_group(GUI/PageTests                    FILES ${GUI_TESTS})
+source_group(GUI/PageTests/Entities           FILES ${GUI_TESTS_ENTITIES})
 source_group(Settings                         FILES ${SETTINGS})
 source_group(Settings/Tests                   FILES ${SETTINGS_TESTS})
 source_group(Settings/Tests/Library           FILES ${SETTINGS_TESTS_LIBRARY})
@@ -188,6 +191,7 @@ add_executable(${PROJECT_NAME}
     ${GUI_SETTINGS_MYCOMPUTER}
     ${GUI_TABLES}
     ${GUI_TESTS}
+    ${GUI_TESTS_ENTITIES}
     ${SETTINGS}
     ${SETTINGS_TESTS}
     ${SETTINGS_TESTS_LIBRARY}
@@ -265,4 +269,3 @@ else()
     target_compile_options(${PROJECT_NAME} PRIVATE ${GTK3_CFLAGS_OTHER})
 
 endif()
-
