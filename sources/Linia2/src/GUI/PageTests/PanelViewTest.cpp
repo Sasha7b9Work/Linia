@@ -266,7 +266,6 @@ void PanelViewTest::CreateControls()
     int dy_base = 50;
 
     int dx_substrate = 250;
-    int dy_substrate = 250;
 
     int width = WIDTH_CONTROL;
 
