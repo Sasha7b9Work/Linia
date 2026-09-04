@@ -3,7 +3,6 @@
 #include "GUI/PageTests/PanelViewTest.h"
 #include "Utils/GlobalFunctions.h"
 #include "Utils/LineDrawer.h"
-#include "GUI/PageTests/Entities/Measurers.h"
 #include "GUI/Controls/Painter.h"
 
 
@@ -174,7 +173,10 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
                 dc->DrawLine(x + dx, c.y, x + dx, y);
                 dc->DrawLine(x + dx - 10, y, x + dx + 10, y);
 
-                Voltmeter(*dc, true).Draw({ x + dx, y - 80 });
+                CreateSourceBaseSubstrate(x, y, MeasurerSourcer::Type::SourceI, Dir::Down,
+                    &bcSubstrateStartValue, L("Isub старт"),
+                    &bcSubstrateDeltaValue, L("Isub шаг"),
+                    &bcSubstrateNumMeasures, L("N кривых"));
             }
         }
     }
@@ -358,22 +360,6 @@ void PanelViewTest::CreateControls()
 
             CREATE_BUTTONS_COMBO_RANGE(bcBaseStartValueI, L("Ib старт"), OnChangedBaseStartValueI, x_base, y_base);
         }
-
-        if (!bcSubstrateStartValue)
-        {
-            wxArrayString titles;
-            titles.push_back("2 мкА");
-            titles.push_back("5 мкA");
-            titles.push_back("10 мкА");
-            titles.push_back("20 мкА");
-            titles.push_back("50 мкА");
-            titles.push_back("100 мкА");
-
-            wxArrayString tooltips;
-            tooltips.push_back(L("Начальное значение тока подложки"));
-
-            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateStartValue, L("Isub старт"), OnChangedBaseStartValueI, x_base + dx_substrate, y_base + dy_substrate);
-        }
     }
 
     dy_base = 35;
@@ -395,23 +381,6 @@ void PanelViewTest::CreateControls()
             tooltips.push_back(L("Шаг изменения тока базы"));
 
             CREATE_BUTTONS_COMBO_RANGE(bcBaseDeltaValueI, L("Ib шаг"), OnChangedBaseDeltaValueI, x_base, y_base);
-        }
-
-        if (!bcSubstrateDeltaValue)
-        {
-            wxArrayString titles;
-            titles.push_back("2 мкА");
-            titles.push_back("5 мкA");
-            titles.push_back("10 мкА");
-            titles.push_back("20 мкА");
-            titles.push_back("50 мкА");
-            titles.push_back("100 мкА");
-            titles.push_back("200 мкА");
-
-            wxArrayString tooltips;
-            tooltips.push_back(L("Шаг изменения тока подложки"));
-
-            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateDeltaValue, L("Isub шаг"), OnChangedBaseDeltaValueI, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
@@ -436,26 +405,6 @@ void PanelViewTest::CreateControls()
             tooltips.push_back(L("Количество измерений"));
 
             CREATE_BUTTONS_COMBO_RANGE(bcBaseNumMeasures, L("N кривых"), OnChangedBaseNumMeasures, x_base, y_base);
-        }
-
-        if (!bcSubstrateNumMeasures)
-        {
-            wxArrayString titles;
-            titles.push_back("1");
-            titles.push_back("2");
-            titles.push_back("3");
-            titles.push_back("4");
-            titles.push_back("5");
-            titles.push_back("6");
-            titles.push_back("7");
-            titles.push_back("8");
-            titles.push_back("9");
-            titles.push_back("10");
-
-            wxArrayString tooltips;
-            tooltips.push_back(L("Количество измерений"));
-
-            CREATE_BUTTONS_COMBO_RANGE(bcSubstrateNumMeasures, L("N кривых"), OnChangedBaseNumMeasures, x_base + dx_substrate, y_base + dy_substrate);
         }
     }
 
@@ -815,4 +764,108 @@ void PanelViewTest::DrawSourceCollectorU(int x, int y, Dir::E dir,
     }
 
     (*cbValueFinish)->SetPosition({ x, y + 25 });
+}
+
+
+#undef CREATE_BUTTONS_COMBO_RANGE
+
+
+#define CREATE_BUTTONS_COMBO_RANGE(name, title, _x, _y)             \
+    name = new ComboInput(this, title, WIDTH_CONTROL, titles, tooltips, #name); \
+    name->SetPosition({ _x, _y });
+
+
+void PanelViewTest::CreateSourceBaseSubstrate(
+    int x, int y, MeasurerSourcer::Type::E type, Dir::E dir,
+    ComboInput **start, const wxString &label_start,
+    ComboInput **step, const wxString &label_step,
+    ComboInput **num_curves, const wxString &label_num_curves)
+{
+    MeasurerSourcer *meas_sourc = new MeasurerSourcer(type, *dc, true);
+
+    meas_sourc->Draw({ x, y });
+
+    DrawBorder(x, y, meas_sourc->GetRadius(), dir, CalculateCombos(start, step, num_curves));
+
+    delete meas_sourc;
+
+    if (!(*start))
+    {
+        wxArrayString titles;
+        titles.push_back("2 мкА");
+        titles.push_back("5 мкA");
+        titles.push_back("10 мкА");
+        titles.push_back("20 мкА");
+        titles.push_back("50 мкА");
+        titles.push_back("100 мкА");
+
+        wxArrayString tooltips;
+        tooltips.push_back(L("Начальное значение тока подложки"));
+
+        CREATE_BUTTONS_COMBO_RANGE((*start), label_start, x, y);
+    }
+
+    y += d_combos;
+
+    if (!(*step))
+    {
+        wxArrayString titles;
+        titles.push_back("2 мкА");
+        titles.push_back("5 мкA");
+        titles.push_back("10 мкА");
+        titles.push_back("20 мкА");
+        titles.push_back("50 мкА");
+        titles.push_back("100 мкА");
+        titles.push_back("200 мкА");
+
+        wxArrayString tooltips;
+        tooltips.push_back(L("Шаг изменения тока подложки"));
+
+        CREATE_BUTTONS_COMBO_RANGE((*step), label_step, x, y);
+    }
+
+    y += d_combos;
+
+    if (!(*num_curves))
+    {
+        wxArrayString titles;
+        titles.push_back("1");
+        titles.push_back("2");
+        titles.push_back("3");
+        titles.push_back("4");
+        titles.push_back("5");
+        titles.push_back("6");
+        titles.push_back("7");
+        titles.push_back("8");
+        titles.push_back("9");
+        titles.push_back("10");
+
+        wxArrayString tooltips;
+        tooltips.push_back(L("Количество измерений"));
+
+        CREATE_BUTTONS_COMBO_RANGE((*num_curves), label_num_curves, x, y);
+    }
+}
+
+
+int PanelViewTest::CalculateCombos(ComboInput **c1, ComboInput **c2, ComboInput **c3, ComboInput **c4)
+{
+    if (c4)
+    {
+        return 4;
+    }
+    else if (c3)
+    {
+        return 3;
+    }
+    else if (c2)
+    {
+        return 2;
+    }
+    else if (c1)
+    {
+        return 1;
+    }
+
+    return 0;
 }

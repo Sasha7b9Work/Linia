@@ -3,6 +3,7 @@
 #include "GUI/Controls/Panel.h"
 #include "Settings/Tests/Library/Library.h"
 #include "GUI/Controls/ButtonCombo.h"
+#include "GUI/PageTests/Entities/Measurers.h"
 #pragma warning(push, 0)
     #include <wx/dcclient.h>
 #pragma warning(pop)
@@ -32,8 +33,9 @@ public:
 
 private:
 
-    static const int radius = 50;       // От этого значения и Center() идёт всё построение изображения
+    static const int radius = 50;           // От этого значения и Center() идёт всё построение изображения
     static const int WIDTH_CONTROL = 120;
+    static const int d_combos = 30;         // Расстояние между элементами ввода по вертикали
 
     Test *test = nullptr;
 
@@ -52,7 +54,7 @@ private:
     ButtonsCombo *bcSubstrateModeControl = nullptr;
     ComboInput *bcSubstrateStartValue = nullptr;
     ComboInput *bcSubstrateDeltaValue = nullptr;
-    ButtonsCombo *bcSubstrateNumMeasures = nullptr;
+    ComboInput *bcSubstrateNumMeasures = nullptr;
     ComboInput *bcSubstrateRangeMeasure = nullptr;
     ComboInput *bcSubstrateRangeLimit = nullptr;
 
@@ -104,7 +106,13 @@ private:
         ComboInput **cbValueFinish, const wxString &, void (PanelViewTest:: *)(wxCommandEvent &));
 
     // Создаёт группу элементов управления источником базы или подложки
-    void CreateSourceBaseSubstrate(ComboInput **start, ComboInput **step, ComboInput **num_curves);
+    void CreateSourceBaseSubstrate(
+        int x, int y, MeasurerSourcer::Type::E, Dir::E,
+        ComboInput **start, const wxString &,
+        ComboInput **step, const wxString &,
+        ComboInput **num_curves, const wxString &);
+
+    int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
 
     // Нарисовать значок земли
     void DrawGround(int x, int y);
