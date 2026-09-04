@@ -47,7 +47,7 @@ private:
     ButtonsCombo *bcBaseModeControl = nullptr;           // Режим управления базой - током или напряжением
     ComboInput *bcBaseStartValueI = nullptr;      // Стартовое значение задаваемой величины
     ComboInput *bcBaseDeltaValueI = nullptr;      // Шаг изменения задаваемой величины
-    ButtonsCombo *bcBaseNumMeasures = nullptr;           // Количество измерений
+    ComboInput *bcBaseNumMeasures = nullptr;           // Количество измерений
     ComboInput *bcBaseMeasureRangeU = nullptr;    // Диапазон - максимальное доступное значение
     ComboInput *bcBaseMeasureLimitU = nullptr;    // Максимальное значение, при котором происходит завершение измерения
 

@@ -80,9 +80,9 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
     dc->DrawCircle(c, radius);
 
-    int x_vert = c.x - radius * 10 / 18;                    // Здесь заканчивается линия базы внутри окружности
+    const int x_vert = c.x - radius * 10 / 18;                    // Здесь заканчивается линия базы внутри окружности
 
-    wxPoint coord_base{ 50, c.y };
+    const wxPoint coord_base{ 80, c.y };
 
     dc->DrawLine(coord_base, { x_vert, c.y });               // База
 
@@ -134,23 +134,18 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
             {
                 // Рисуем измеритель базы
 
-                wxPoint coord{ coord_base.x, coord_base.y + 150 };
+                LineDriwer driwer(*dc, coord_base.x, coord_base.y);
 
-                dc->DrawLine(coord_base, coord);
+                driwer.LineOnDY(500);
 
-                int r = 20;
+                DrawGround(driwer.GetX(), driwer.GetY());
 
-                coord.y += r;
+                driwer.MoveOnDY(-400);
 
-                Voltmeter(*dc, true).Draw(coord);
-
-                coord.y += r;
-
-                wxPoint coord_end{ coord.x, coord.y + 50 };
-
-                dc->DrawLine(coord, coord_end);
-
-                dc->DrawLine({ coord_end.x - 10, coord_end.y }, { coord_end.x + 10, coord_end.y });
+                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::SourceI, Dir::Down,
+                    &bcBaseStartValueI, L("Ib старт"),
+                    &bcBaseDeltaValueI, L("Ib шаг"),
+                    &bcBaseNumMeasures, L("N кривых"));
             }
         }
 
@@ -173,7 +168,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
                 dc->DrawLine(x + dx, c.y, x + dx, y);
                 dc->DrawLine(x + dx - 10, y, x + dx + 10, y);
 
-                CreateSourceBaseSubstrate(x + dx, y - 300, MeasurerSourcer::Type::SourceI, Dir::Left,
+                CreateSourceBaseSubstrate(x + dx, y - 400, MeasurerSourcer::Type::SourceI, Dir::Down,
                     &bcSubstrateStartValue, L("Isub старт"),
                     &bcSubstrateDeltaValue, L("Isub шаг"),
                     &bcSubstrateNumMeasures, L("N кривых"));
@@ -190,7 +185,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
         int y = driwer.GetY() + 50;
         driwer.LineOnDY(500);
 
-        CreateSourceBaseSubstrate(x, y, MeasurerSourcer::Type::MeasI, Dir::Up,
+        CreateSourceBaseSubstrate(x, y, MeasurerSourcer::Type::MeasI, Dir::Down,
             &bcCollectorMeasureRangeI, L("Ic диап"),
             &bcCollectorMeasureLimitI, L("Ic огр"));
 
@@ -207,7 +202,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
         DrawGround(x, y);
 
-        CreateSourceBaseSubstrate(x, y - 105, MeasurerSourcer::Type::MeasU, Dir::Right,
+        CreateSourceBaseSubstrate(x, y - 105, MeasurerSourcer::Type::MeasU, Dir::Down,
             &bcCollectorMeasureRangeU, L("Uc диап"),
             &bcCollectorMeasureLimitU, L("Uc огр"));
     }
@@ -344,69 +339,10 @@ void PanelViewTest::CreateControls()
 
     y_base += dy_base;
 
-    {
-        if (!bcBaseStartValueI)
-        {
-            wxArrayString titles;
-            titles.push_back("2 мкА");
-            titles.push_back("5 мкA");
-            titles.push_back("10 мкА");
-            titles.push_back("20 мкА");
-            titles.push_back("50 мкА");
-            titles.push_back("100 мкА");
-
-            wxArrayString tooltips;
-            tooltips.push_back(L("Начальное значение тока базы"));
-
-            CREATE_BUTTONS_COMBO_RANGE(bcBaseStartValueI, L("Ib старт"), OnChangedBaseStartValueI, x_base, y_base);
-        }
-    }
-
     dy_base = 35;
     y_base += dy_base;
 
-    {
-        if (!bcBaseDeltaValueI)
-        {
-            wxArrayString titles;
-            titles.push_back("2 мкА");
-            titles.push_back("5 мкA");
-            titles.push_back("10 мкА");
-            titles.push_back("20 мкА");
-            titles.push_back("50 мкА");
-            titles.push_back("100 мкА");
-            titles.push_back("200 мкА");
-
-            wxArrayString tooltips;
-            tooltips.push_back(L("Шаг изменения тока базы"));
-
-            CREATE_BUTTONS_COMBO_RANGE(bcBaseDeltaValueI, L("Ib шаг"), OnChangedBaseDeltaValueI, x_base, y_base);
-        }
-    }
-
     y_base += dy_base;
-
-    {
-        if (!bcBaseNumMeasures)
-        {
-            wxArrayString titles;
-            titles.push_back("1");
-            titles.push_back("2");
-            titles.push_back("3");
-            titles.push_back("4");
-            titles.push_back("5");
-            titles.push_back("6");
-            titles.push_back("7");
-            titles.push_back("8");
-            titles.push_back("9");
-            titles.push_back("10");
-
-            wxArrayString tooltips;
-            tooltips.push_back(L("Количество измерений"));
-
-            CREATE_BUTTONS_COMBO_RANGE(bcBaseNumMeasures, L("N кривых"), OnChangedBaseNumMeasures, x_base, y_base);
-        }
-    }
 
     x_base += 70;
     y_base += 30;
@@ -640,11 +576,25 @@ void PanelViewTest::DrawBorder(int &x, int &y, int r, Dir::E dir, int num_contro
     }
     else if (dir == Dir::Up)
     {
+        x = x - WIDTH_CONTROL / 2 - d;
+        y -= d + r + (ButtonsCombo::HEIGHT + d) * num_controls;
+        height += d + r * 2;
+
         dc->DrawRectangle(x, y, width, height);
+
+        x += d;
+        y += d;
     }
     else if (dir == Dir::Right)
     {
+        x -= r + d;
+        width += 2 * r + d;
+        y -= height / 2;
+
         dc->DrawRectangle(x, y, width, height);
+
+        y += d;
+        x += d * 2 + r * 2;
     }
     if (dir == Dir::Down)
     {
