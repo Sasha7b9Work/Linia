@@ -190,13 +190,13 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
         int y = driwer.GetY() + 50;
         driwer.LineOnDY(500);
 
-        DrawMeasurerCollectorI(x, y, Dir::Down,
-            &bcCollectorMeasureRangeI, L("Ic диап"), & PanelViewTest::OnChangedCollectorMeasureRangeI,
-            &bcCollectorMeasureLimitI, L("Ic огр"), &PanelViewTest::OnChangedCollectorMeasureLimitI);
+        CreateSourceBaseSubstrate(x, y, MeasurerSourcer::Type::MeasI, Dir::Down,
+            &bcCollectorMeasureRangeI, L("Ic диап"),
+            &bcCollectorMeasureLimitI, L("Ic огр"));
 
-        DrawSourceCollectorU(x, y + 300, Dir::Down,
-            &bcCollectorValueStart, L("Uc старт"), &PanelViewTest::OnChangedCollectorValueStart,
-            &bcCollectorValueFinish, L("Uc стоп"), &PanelViewTest::OnChangedCollectorValueFinish);
+        CreateSourceBaseSubstrate(x, y + 300, MeasurerSourcer::Type::SourceU,  Dir::Down,
+            &bcCollectorValueStart, L("Uc старт"),
+            &bcCollectorValueFinish, L("Uc стоп"));
 
         DrawGround(x, driwer.GetY());
 
@@ -207,9 +207,9 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
         DrawGround(x, y);
 
-        DrawMeasurerCollectorU(x, y - 105, Dir::Down,
-            &bcCollectorMeasureRangeU, L("Uc диап"), &PanelViewTest::OnChangedCollectorMeasureRangeU,
-            &bcCollectorMeasureLimitU, L("Uc огр"), &PanelViewTest::OnChangedCollectorMeasureLimitU);
+        CreateSourceBaseSubstrate(x, y - 105, MeasurerSourcer::Type::MeasU, Dir::Down,
+            &bcCollectorMeasureRangeU, L("Uc диап"),
+            &bcCollectorMeasureLimitU, L("Uc огр"));
     }
 }
 
@@ -641,137 +641,6 @@ void PanelViewTest::DrawBorder(int &x, int &y, int /*r*/, Dir::E dir, int num_co
 
 }
 
-#define CREATE_BUTTONS_COMBO_RANGE(name, title, func, _x, _y)                               \
-    name = new ComboInput(this, title, WIDTH_CONTROL, titles, tooltips, #name);      \
-    name->Bind(wxEVT_COMBOBOX, func, this);
-
-
-void PanelViewTest::DrawMeasurerCollectorI(int x, int y, Dir::E dir,
-    ComboInput **cbRange, const wxString &labelRange, void (PanelViewTest:: *onEventRange)(wxCommandEvent &),
-    ComboInput **cbLimit, const wxString &labelLimit, void (PanelViewTest::*onEventLimit)(wxCommandEvent &))
-{
-    Ampermeter ampermeter(*dc, true);
-    ampermeter.Draw({ x, y });
-
-    DrawBorder(x, y, ampermeter.GetRadius(), dir, 2);
-
-    if (!(*cbRange))
-    {
-        wxArrayString titles;
-        titles.push_back(L("10 А"));
-        titles.push_back(L("20 А"));
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Диапазон измеряемого тока"));
-
-        CREATE_BUTTONS_COMBO_RANGE((*cbRange), labelRange, onEventRange, x, y);
-    }
-
-    (*cbRange)->SetPosition({ x, y });
-
-    y += d_combos;
-
-    if (!(*cbLimit))
-    {
-        wxArrayString titles;
-        titles.push_back(L("10 А"));
-        titles.push_back(L("20 А"));
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Предельное знанчение измеряемого тока"));
-
-        CREATE_BUTTONS_COMBO_RANGE((*cbLimit), labelLimit, onEventLimit, x, y);
-    }
-
-    (*cbLimit)->SetPosition({ x, y });
-}
-
-
-void PanelViewTest::DrawMeasurerCollectorU(int x, int y, Dir::E dir,
-    ComboInput **cbRange, const wxString &labelRange, void (PanelViewTest::*onEventRange)(wxCommandEvent &),
-    ComboInput **cbLimit, const wxString &labelLimit, void (PanelViewTest::*onEventLimit)(wxCommandEvent &))
-{
-    Voltmeter voltmeter(*dc, true);
-    voltmeter.Draw({ x, y });
-
-    DrawBorder(x, y, voltmeter.GetRadius(), dir, 2);
-
-    if (!(*cbRange))
-    {
-        wxArrayString titles;
-        titles.push_back(L("10 А"));
-        titles.push_back(L("20 А"));
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Диапазон измеряемого тока"));
-
-        CREATE_BUTTONS_COMBO_RANGE((*cbRange), labelRange, onEventRange, x, y);
-    }
-
-    (*cbRange)->SetPosition({ x, y });
-
-    y += d_combos;
-
-    if (!(*cbLimit))
-    {
-        wxArrayString titles;
-        titles.push_back(L("10 А"));
-        titles.push_back(L("20 А"));
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Предельное знанчение измеряемого тока"));
-
-        CREATE_BUTTONS_COMBO_RANGE((*cbLimit), labelLimit, onEventLimit, x, y);
-    }
-
-    (*cbLimit)->SetPosition({ x, y });
-}
-
-
-void PanelViewTest::DrawSourceCollectorU(int x, int y, Dir::E dir,
-    ComboInput **cbValueStart, const wxString &labelStart, void (PanelViewTest:: *onEventStart)(wxCommandEvent &),
-    ComboInput **cbValueFinish, const wxString &labelFinish, void (PanelViewTest::*onEventFinish)(wxCommandEvent &))
-{
-    SourceVoltage sourceVoltage(*dc, true);
-    sourceVoltage.Draw({ x, y });
-
-    DrawBorder(x, y, sourceVoltage.GetRadius(), dir, 2);
-
-    if (!(*cbValueStart))
-    {
-        wxArrayString titles;
-        titles.push_back(L("10 В"));
-        titles.push_back(L("20 В"));
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Начальное значение испытательного напряжения"));
-
-        CREATE_BUTTONS_COMBO_RANGE((*cbValueStart), labelStart, onEventStart, x, y);
-    }
-
-    (*cbValueStart)->SetPosition({ x, y });
-
-    y += d_combos;
-
-    if (!(*cbValueFinish))
-    {
-        wxArrayString titles;
-        titles.push_back(L("10 В"));
-        titles.push_back(L("20 В"));
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Конечное значение испытательного напряжения"));
-
-        CREATE_BUTTONS_COMBO_RANGE((*cbValueFinish), labelFinish, onEventFinish, x, y);
-    }
-
-    (*cbValueFinish)->SetPosition({ x, y });
-}
-
-
-#undef CREATE_BUTTONS_COMBO_RANGE
-
-
 #define CREATE_BUTTONS_COMBO_RANGE(name, title, _x, _y)             \
     name = new ComboInput(this, title, WIDTH_CONTROL, titles, tooltips, #name); \
     name->SetPosition({ _x, _y });
@@ -828,7 +697,7 @@ void PanelViewTest::CreateSourceBaseSubstrate(
 
     y += d_combos;
 
-    if (!(*num_curves))
+    if (num_curves && !(*num_curves))
     {
         wxArrayString titles;
         titles.push_back("1");

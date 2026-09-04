@@ -91,26 +91,12 @@ private:
     void DrawBJT(const wxString &type, const wxPoint &);
     void DrawBJTS(const wxString &type, const wxPoint &);
 
-    // Нарисовать блок измерителя тока коллектора
-    // x, y - центр измерителя
-    void DrawMeasurerCollectorI(int x, int y, Dir::E,
-        ComboInput **cbRange, const wxString &, void (PanelViewTest:: *)(wxCommandEvent &),
-        ComboInput **cbLimit, const wxString &, void (PanelViewTest::*)(wxCommandEvent &));
-
-    void DrawMeasurerCollectorU(int x, int y, Dir::E,
-        ComboInput **cbRange, const wxString &, void (PanelViewTest:: *)(wxCommandEvent &),
-        ComboInput **cbLimit, const wxString &, void (PanelViewTest:: *)(wxCommandEvent &));
-
-    void DrawSourceCollectorU(int x, int y, Dir::E,
-        ComboInput **cbValueStart, const wxString &, void (PanelViewTest:: *)(wxCommandEvent &),
-        ComboInput **cbValueFinish, const wxString &, void (PanelViewTest:: *)(wxCommandEvent &));
-
     // Создаёт группу элементов управления источником базы или подложки
     void CreateSourceBaseSubstrate(
         int x, int y, MeasurerSourcer::Type::E, Dir::E,
-        ComboInput **start, const wxString &,
-        ComboInput **step, const wxString &,
-        ComboInput **num_curves, const wxString &);
+        ComboInput **, const wxString &,
+        ComboInput **, const wxString &,
+        ComboInput ** = nullptr, const wxString & = "");
 
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
 
