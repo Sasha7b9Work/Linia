@@ -140,12 +140,18 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 DrawGround(driwer.GetX(), driwer.GetY());
 
-                driwer.MoveOnDY(-400);
+                driwer.MoveOnDY(-450);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::SourceI, Dir::Down,
                     &bcBaseStartValueI, L("Ib старт"),
                     &bcBaseDeltaValueI, L("Ib шаг"),
                     &bcBaseNumMeasures, L("N кривых"));
+
+                driwer.MoveOnDY(150);
+
+                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasU, Dir::Down,
+                    &bcBaseMeasureRangeU, L("Ub диап"),
+                    &bcBaseMeasureLimitU, L("Ub огр"));
             }
         }
 
@@ -349,26 +355,6 @@ void PanelViewTest::CreateControls()
     y_base += dy_base;
 
     {
-        if (!bcBaseMeasureRangeU)
-        {
-            wxArrayString titles;
-            titles.push_back("50 мВ");
-            titles.push_back("100 мВ");
-            titles.push_back("200 мВ");
-            titles.push_back("500 мВ");
-            titles.push_back("1 В");
-            titles.push_back("2 В");
-            titles.push_back("5 В");
-            titles.push_back("10 В");
-            titles.push_back("20 В");
-            titles.push_back("50 В");
-
-            wxArrayString tooltips;
-            tooltips.push_back(L("Диапазон измерения"));
-
-            CREATE_BUTTONS_COMBO_RANGE(bcBaseMeasureRangeU, L("Ub диап"), OnChangedBaseMeasureRangeU, x_base, y_base);
-        }
-
         dx_substrate -= 150;
 
         if (!bcSubstrateRangeMeasureU)
@@ -395,26 +381,6 @@ void PanelViewTest::CreateControls()
     y_base += dy_base;
 
     {
-        if (!bcBaseMeasureLimitU)
-        {
-            wxArrayString titles;
-            titles.push_back("50 мВ");
-            titles.push_back("100 мВ");
-            titles.push_back("200 мВ");
-            titles.push_back("500 мВ");
-            titles.push_back("1 В");
-            titles.push_back("2 В");
-            titles.push_back("5 В");
-            titles.push_back("10 В");
-            titles.push_back("20 В");
-            titles.push_back("50 В");
-
-            wxArrayString tooltips;
-            tooltips.push_back(L(""));
-
-            CREATE_BUTTONS_COMBO_RANGE(bcBaseMeasureLimitU, L("Ub огр"), OnChangedBaseMeasureLimitU, x_base, y_base);
-        }
-
         if (!bcSubstrateRangeLimitU)
         {
             wxArrayString titles;
