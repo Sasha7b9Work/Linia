@@ -13,12 +13,17 @@ public:
 
     void MoveTo(int x, int y);
 
+    void MoveOnDY(int dy)
+    {
+        coord.y += dy;
+    }
+
     void LineTo(int x, int y);
 
     // Рисует линию вверх или вниз на величину dy
-    int LineToY(int dy);
+    int LineOnDY(int dy);
 
-    int LineToX(int dx);
+    int LineOnDX(int dx);
 
     int GetX() const
     {

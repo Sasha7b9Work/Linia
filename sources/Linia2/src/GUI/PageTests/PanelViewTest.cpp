@@ -181,15 +181,22 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
 
         LineDriwer driwer{ dc, x_col, y_col };
 
-        int x = driwer.LineToX(150);
+        int x = driwer.LineOnDX(150);
         int y = driwer.GetY() + 50;
-        driwer.LineToY(500);
+        driwer.LineOnDY(500);
 
         DrawMeasurerCollectorI(dc, x, y, Dir::Down, &bcCollectorMeasureRange, &bcCollectorMeasureLimit);
 
         DrawSourceCollectorU(dc, x, y + 300, Dir::Down, &bcCollectorValueStart, &bcCollectorValueFinish);
 
         y = driwer.GetY();
+
+        dc.DrawLine(x - 10, y, x + 10, y);
+
+        driwer.MoveOnDY(-250);
+        driwer.LineOnDX(150);
+        y = driwer.LineOnDY(250);
+        x = driwer.GetX();
 
         dc.DrawLine(x - 10, y, x + 10, y);
     }
@@ -706,10 +713,10 @@ void PanelViewTest::DrawMeasurerCollectorI(wxPaintDC &dc, int x, int y, Dir::E d
 
 void PanelViewTest::DrawSourceCollectorU(wxPaintDC &dc, int x, int y, Dir::E dir, ButtonsComboRange **cbValueStart, ButtonsComboRange **cbValueFinish)
 {
-    Voltmeter voltmeter(dc, true);
-    voltmeter.Draw({ x, y });
+    SourceVoltage sourceVoltage(dc, true);
+    sourceVoltage.Draw({ x, y });
 
-    DrawBorder(dc, x, y, voltmeter.GetRadius(), dir, 2);
+    DrawBorder(dc, x, y, sourceVoltage.GetRadius(), dir, 2);
 
     if (!(*cbValueStart))
     {
