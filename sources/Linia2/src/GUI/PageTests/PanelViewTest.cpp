@@ -189,12 +189,12 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
         driwer.LineOnDY(500);
 
         DrawMeasurerCollectorI(x, y, Dir::Down,
-            &bcCollectorMeasureRangeI, &PanelViewTest::OnChangedCollectorMeasureRangeI,
-            &bcCollectorMeasureLimitI, &PanelViewTest::OnChangedCollectorMeasureLimitI);
+            &bcCollectorMeasureRangeI, L("Ic диап"), & PanelViewTest::OnChangedCollectorMeasureRangeI,
+            &bcCollectorMeasureLimitI, L("Ic огр"), &PanelViewTest::OnChangedCollectorMeasureLimitI);
 
         DrawSourceCollectorU(x, y + 300, Dir::Down,
-            &bcCollectorValueStart, &PanelViewTest::OnChangedCollectorValueStart,
-            &bcCollectorValueFinish, &PanelViewTest::OnChangedCollectorValueFinish);
+            &bcCollectorValueStart, L("Uc старт"), &PanelViewTest::OnChangedCollectorValueStart,
+            &bcCollectorValueFinish, L("Uc стоп"), &PanelViewTest::OnChangedCollectorValueFinish);
 
         DrawGround(x, driwer.GetY());
 
@@ -206,8 +206,8 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
         DrawGround(x, y);
 
         DrawMeasurerCollectorU(x, y - 105, Dir::Down,
-            &bcCollectorMeasureRangeU, &PanelViewTest::OnChangedCollectorMeasureRangeU,
-            &bcCollectorMeasureLimitU, &PanelViewTest::OnChangedCollectorMeasureLimitU);
+            &bcCollectorMeasureRangeU, L("Uc диап"), &PanelViewTest::OnChangedCollectorMeasureRangeU,
+            &bcCollectorMeasureLimitU, L("Uc огр"), &PanelViewTest::OnChangedCollectorMeasureLimitU);
     }
 }
 
@@ -702,8 +702,8 @@ void PanelViewTest::DrawBorder(int &x, int &y, int r, Dir::E dir, int /*num_cont
 
 
 void PanelViewTest::DrawMeasurerCollectorI(int x, int y, Dir::E dir,
-    ComboInput **cbRange, void (PanelViewTest:: *onEventRange)(wxCommandEvent &),
-    ComboInput **cbLimit, void (PanelViewTest::*onEventLimit)(wxCommandEvent &))
+    ComboInput **cbRange, const wxString &labelRange, void (PanelViewTest:: *onEventRange)(wxCommandEvent &),
+    ComboInput **cbLimit, const wxString &labelLimit, void (PanelViewTest::*onEventLimit)(wxCommandEvent &))
 {
     Ampermeter ampermeter(*dc, true);
     ampermeter.Draw({ x, y });
@@ -719,7 +719,7 @@ void PanelViewTest::DrawMeasurerCollectorI(int x, int y, Dir::E dir,
         wxArrayString tooltips;
         tooltips.push_back(L("Диапазон измеряемого тока"));
 
-        CREATE_BUTTONS_COMBO_RANGE((*cbRange), L("Ic диап"), onEventRange, x, y);
+        CREATE_BUTTONS_COMBO_RANGE((*cbRange), labelRange, onEventRange, x, y);
     }
 
     (*cbRange)->SetPosition({ x, y });
@@ -733,7 +733,7 @@ void PanelViewTest::DrawMeasurerCollectorI(int x, int y, Dir::E dir,
         wxArrayString tooltips;
         tooltips.push_back(L("Предельное знанчение измеряемого тока"));
 
-        CREATE_BUTTONS_COMBO_RANGE((*cbLimit), L("Ic огр"), onEventLimit, x, y);
+        CREATE_BUTTONS_COMBO_RANGE((*cbLimit), labelLimit, onEventLimit, x, y);
     }
 
     (*cbLimit)->SetPosition({ x, y + 25 });
@@ -741,8 +741,8 @@ void PanelViewTest::DrawMeasurerCollectorI(int x, int y, Dir::E dir,
 
 
 void PanelViewTest::DrawMeasurerCollectorU(int x, int y, Dir::E dir,
-    ComboInput **cbRange, void (PanelViewTest::*onEventRange)(wxCommandEvent &),
-    ComboInput **cbLimit, void (PanelViewTest::*onEventLimit)(wxCommandEvent &))
+    ComboInput **cbRange, const wxString &labelRange, void (PanelViewTest::*onEventRange)(wxCommandEvent &),
+    ComboInput **cbLimit, const wxString &labelLimit, void (PanelViewTest::*onEventLimit)(wxCommandEvent &))
 {
     Voltmeter voltmeter(*dc, true);
     voltmeter.Draw({ x, y });
@@ -758,7 +758,7 @@ void PanelViewTest::DrawMeasurerCollectorU(int x, int y, Dir::E dir,
         wxArrayString tooltips;
         tooltips.push_back(L("Диапазон измеряемого тока"));
 
-        CREATE_BUTTONS_COMBO_RANGE((*cbRange), L("Ic диап"), onEventRange, x, y);
+        CREATE_BUTTONS_COMBO_RANGE((*cbRange), labelRange, onEventRange, x, y);
     }
 
     (*cbRange)->SetPosition({ x, y });
@@ -772,7 +772,7 @@ void PanelViewTest::DrawMeasurerCollectorU(int x, int y, Dir::E dir,
         wxArrayString tooltips;
         tooltips.push_back(L("Предельное знанчение измеряемого тока"));
 
-        CREATE_BUTTONS_COMBO_RANGE((*cbLimit), L("Ic огр"), onEventLimit, x, y);
+        CREATE_BUTTONS_COMBO_RANGE((*cbLimit), labelLimit, onEventLimit, x, y);
     }
 
     (*cbLimit)->SetPosition({ x, y + 25 });
@@ -780,8 +780,8 @@ void PanelViewTest::DrawMeasurerCollectorU(int x, int y, Dir::E dir,
 
 
 void PanelViewTest::DrawSourceCollectorU(int x, int y, Dir::E dir,
-    ComboInput **cbValueStart, void (PanelViewTest:: *onEventStart)(wxCommandEvent &),
-    ComboInput **cbValueFinish, void (PanelViewTest::*onEventFinish)(wxCommandEvent &))
+    ComboInput **cbValueStart, const wxString &labelStart, void (PanelViewTest:: *onEventStart)(wxCommandEvent &),
+    ComboInput **cbValueFinish, const wxString &labelFinish, void (PanelViewTest::*onEventFinish)(wxCommandEvent &))
 {
     SourceVoltage sourceVoltage(*dc, true);
     sourceVoltage.Draw({ x, y });
@@ -797,7 +797,7 @@ void PanelViewTest::DrawSourceCollectorU(int x, int y, Dir::E dir,
         wxArrayString tooltips;
         tooltips.push_back(L("Начальное значение испытательного напряжения"));
 
-        CREATE_BUTTONS_COMBO_RANGE((*cbValueStart), L("Uc старт"), onEventStart, x, y);
+        CREATE_BUTTONS_COMBO_RANGE((*cbValueStart), labelStart, onEventStart, x, y);
     }
 
     (*cbValueStart)->SetPosition({ x, y });
@@ -811,7 +811,7 @@ void PanelViewTest::DrawSourceCollectorU(int x, int y, Dir::E dir,
         wxArrayString tooltips;
         tooltips.push_back(L("Конечное значение испытательного напряжения"));
 
-        CREATE_BUTTONS_COMBO_RANGE((*cbValueFinish), L("Uc стоп"), onEventFinish, x, y);
+        CREATE_BUTTONS_COMBO_RANGE((*cbValueFinish), labelFinish, onEventFinish, x, y);
     }
 
     (*cbValueFinish)->SetPosition({ x, y + 25 });

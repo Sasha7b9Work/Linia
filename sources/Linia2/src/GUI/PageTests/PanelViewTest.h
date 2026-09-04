@@ -92,16 +92,16 @@ private:
     // Нарисовать блок измерителя тока коллектора
     // x, y - центр измерителя
     void DrawMeasurerCollectorI(int x, int y, Dir::E,
-        ComboInput **cbRange, void (PanelViewTest:: *)(wxCommandEvent &),
-        ComboInput **cbLimit, void (PanelViewTest::*)(wxCommandEvent &));
+        ComboInput **cbRange, const wxString &, void (PanelViewTest:: *)(wxCommandEvent &),
+        ComboInput **cbLimit, const wxString &, void (PanelViewTest::*)(wxCommandEvent &));
 
     void DrawMeasurerCollectorU(int x, int y, Dir::E,
-        ComboInput **cbRange, void (PanelViewTest:: *)(wxCommandEvent &),
-        ComboInput **cbLimit, void (PanelViewTest:: *)(wxCommandEvent &));
+        ComboInput **cbRange, const wxString &, void (PanelViewTest:: *)(wxCommandEvent &),
+        ComboInput **cbLimit, const wxString &, void (PanelViewTest:: *)(wxCommandEvent &));
 
     void DrawSourceCollectorU(int x, int y, Dir::E,
-        ComboInput **cbValueStart, void (PanelViewTest:: *)(wxCommandEvent &),
-        ComboInput **cbValueFinish, void (PanelViewTest:: *)(wxCommandEvent &));
+        ComboInput **cbValueStart, const wxString &, void (PanelViewTest:: *)(wxCommandEvent &),
+        ComboInput **cbValueFinish, const wxString &, void (PanelViewTest:: *)(wxCommandEvent &));
 
     // Нарисовать значок земли
     void DrawGround(int x, int y);
