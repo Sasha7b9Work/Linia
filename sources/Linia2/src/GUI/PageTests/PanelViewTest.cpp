@@ -216,7 +216,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
         LineDriwer driwer{ *dc, x_col, y_col };
 
-        int x = driwer.LineOnDX(250);
+        int x = driwer.LineOnDX(350);
         int y = driwer.GetY() + 50;
         driwer.LineOnDY(500);
 
