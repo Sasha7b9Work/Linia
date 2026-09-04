@@ -71,7 +71,7 @@ private:
 
     // Нарисовать блок измерителя тока коллектора
     // x, y - центр измерителя
-    void DrawMeasurerCollectorI(wxPaintDC &, int x, int y, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit);
+    void DrawMeasurerCollectorI(wxPaintDC &, int x, int y, Dir::E, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit);
 
     // Создать элементы управляения для данного теста
     void CreateControls();

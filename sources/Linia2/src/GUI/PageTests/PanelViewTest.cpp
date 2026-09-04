@@ -184,7 +184,7 @@ void PanelViewTest::DrawBJT(wxPaintDC &dc, const wxString &type, const wxPoint &
         int y = driwer.GetY() + 50;
         driwer.AppendY(500);
 
-        DrawMeasurerCollectorI(dc, x, y, &bcCollectorMeasureRange, &bcCollectorMeasureLimit);
+        DrawMeasurerCollectorI(dc, x, y, Dir::Right, &bcCollectorMeasureRange, &bcCollectorMeasureLimit);
     }
 }
 
@@ -659,16 +659,28 @@ void PanelViewTest::OnEventComboBoxCollectorMeasureLimit(wxCommandEvent &)
 }
 
 
-void PanelViewTest::DrawMeasurerCollectorI(wxPaintDC &dc, int x, int y, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit)
+void PanelViewTest::DrawMeasurerCollectorI(wxPaintDC &dc, int x, int y, Dir::E dir, ButtonsComboRange **cbRange, ButtonsComboRange **cbLimit)
 {
 #define CREATE_BUTTONS_COMBO_RANGE(name, title, func, _x, _y)                               \
     name = new ButtonsComboRange(this, title, WIDTH_CONTROL, titles, tooltips, #name);      \
     name->Bind(wxEVT_COMBOBOX, &PanelViewTest::func, this);
 
-    Ampermeter(dc, true).Draw({ x, y });
+    Ampermeter ampermeter(dc, true);
+    ampermeter.Draw({ x, y });
 
-    x += 30;
-    y -= 30;
+    int d = 5;
+
+    if (dir == Dir::Right)
+    {
+        wxPen pen{ *wxBLACK, 1, wxPENSTYLE_SHORT_DASH };
+        dc.SetPen(pen);
+        dc.SetBrush(*wxTRANSPARENT_BRUSH);
+
+        dc.DrawRectangle(x - ampermeter.GetRadius() - d, y - ampermeter.GetRadius() - d - 15, WIDTH_CONTROL + 60, 80);
+
+        x += 30;
+        y -= 30;
+    }
 
     if (!(*cbRange))
     {

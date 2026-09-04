@@ -13,6 +13,11 @@ public:
 
     virtual void Draw(const wxPoint &center) = 0;
 
+    int GetRadius() const
+    {
+        return radius;
+    }
+
 protected:
 
     wxPaintDC &dc;

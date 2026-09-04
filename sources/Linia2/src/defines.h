@@ -71,6 +71,18 @@ union BitSet16
     uint16 u16;
 };
 
+struct Dir
+{
+    enum E
+    {
+        Left,
+        Up,
+        Right,
+        Down,
+        Count
+    };
+};
+
 static pString REVERSE_PROMT = "-> ";
 static pString DIRECT_PROMT = "<- ";
 
