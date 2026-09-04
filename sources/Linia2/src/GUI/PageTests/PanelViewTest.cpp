@@ -173,7 +173,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
                 dc->DrawLine(x + dx, c.y, x + dx, y);
                 dc->DrawLine(x + dx - 10, y, x + dx + 10, y);
 
-                CreateSourceBaseSubstrate(x, y, MeasurerSourcer::Type::SourceI, Dir::Down,
+                CreateSourceBaseSubstrate(x, y, MeasurerSourcer::Type::SourceI, Dir::Left,
                     &bcSubstrateStartValue, L("Isub старт"),
                     &bcSubstrateDeltaValue, L("Isub шаг"),
                     &bcSubstrateNumMeasures, L("N кривых"));
@@ -190,7 +190,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
         int y = driwer.GetY() + 50;
         driwer.LineOnDY(500);
 
-        CreateSourceBaseSubstrate(x, y, MeasurerSourcer::Type::MeasI, Dir::Down,
+        CreateSourceBaseSubstrate(x, y, MeasurerSourcer::Type::MeasI, Dir::Up,
             &bcCollectorMeasureRangeI, L("Ic диап"),
             &bcCollectorMeasureLimitI, L("Ic огр"));
 
@@ -207,7 +207,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
         DrawGround(x, y);
 
-        CreateSourceBaseSubstrate(x, y - 105, MeasurerSourcer::Type::MeasU, Dir::Down,
+        CreateSourceBaseSubstrate(x, y - 105, MeasurerSourcer::Type::MeasU, Dir::Right,
             &bcCollectorMeasureRangeU, L("Uc диап"),
             &bcCollectorMeasureLimitU, L("Uc огр"));
     }
@@ -615,7 +615,7 @@ void PanelViewTest::OnChangedCollectorMeasureLimitU(wxCommandEvent &)
 }
 
 
-void PanelViewTest::DrawBorder(int &x, int &y, int /*r*/, Dir::E dir, int num_controls)
+void PanelViewTest::DrawBorder(int &x, int &y, int r, Dir::E dir, int num_controls)
 {
     const int d = 5;
 
@@ -629,12 +629,28 @@ void PanelViewTest::DrawBorder(int &x, int &y, int /*r*/, Dir::E dir, int num_co
     int width = WIDTH_CONTROL + d * 2;
     int height = (num_controls * (ButtonsCombo::HEIGHT + d)) + d;
 
+    if (dir == Dir::Left)
+    {
+
+    }
+    else if (dir == Dir::Up)
+    {
+
+    }
+    else if (dir == Dir::Right)
+    {
+
+    }
     if (dir == Dir::Down)
     {
+        x = x - WIDTH_CONTROL / 2 - d;
+        y = y - d - r;
+        height += d + r * 2;
+
         dc->DrawRectangle(x, y, width, height);
 
         x += d;
-        y += d;
+        y += d * 2 + r * 2;
     }
 
     paint.RestorePenBrush();
