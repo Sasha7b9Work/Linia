@@ -231,7 +231,7 @@ void PanelViewTest::DrawLineWithAngle(const wxPoint &start, double length, doubl
 
 wxPoint PanelViewTest::GetCenter() const
 {
-    return { 400, 200 };
+    return { 430, 200 };
 }
 
 
