@@ -190,7 +190,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
                 // Измеритель подложки
 
                 LineDriwer driwer(*dc, x, c.y);
-                driwer.LineOnDX(80);
+                driwer.LineOnDX(120);
                 driwer.LineToY(y_ground);
 
                 DrawGround(driwer.GetX(), driwer.GetY());
@@ -204,15 +204,28 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 driwer.MoveOnDY(140);
 
-                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasU, Dir::Down,
-                    &bcSubstrateMeasureRangeU, L("Usub диап"),
-                    &bcSubstrateMeasureLimitU, L("Usub огр"));
+                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasI, Dir::Down,
+                    &bcSubstrateMeasureRangeI, L("Isub диап"),
+                    &bcSubstrateMeasureLimitI, L("Isub огр"));
 
                 driwer.MoveOnDY(240);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetCoord().y, MeasurerSourcer::Type::SourceU, Dir::Down,
                     &bcSubstrateSourceStartU, L("Ub старт"),
                     &bcSubstrateSourceStepU, L("Ub огр"));
+
+                driwer.MoveTo(GetCenter().x + 70, coord_base.y);
+
+                driwer.LineToY(y_ground);
+
+                DrawGround(driwer.GetX(), driwer.GetY());
+
+                driwer.MoveOnDY(-200);
+
+                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasU, Dir::Down,
+                    &bcSubstrateMeasureRangeU, L("Usub диап"),
+                    &bcSubstrateMeasureLimitU, L("Usub огр"));
+
             }
         }
     }

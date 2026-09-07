@@ -61,6 +61,8 @@ private:
     ComboInput *bcSubstrateNumMeasures = nullptr;
     ComboInput *bcSubstrateMeasureRangeU = nullptr;
     ComboInput *bcSubstrateMeasureLimitU = nullptr;
+    ComboInput *bcSubstrateMeasureRangeI = nullptr;
+    ComboInput *bcSubstrateMeasureLimitI = nullptr;
     ComboInput *bcSubstrateSourceStartU = nullptr;
     ComboInput *bcSubstrateSourceStepU = nullptr;
 
