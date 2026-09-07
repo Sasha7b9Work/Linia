@@ -188,27 +188,27 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
                 // Измеритель подложки
 
                 LineDriwer driwer(*dc, x, c.y);
-                driwer.LineOnDX(120);
+                driwer.LineOnDX(190);
                 driwer.LineToY(y_ground);
 
                 DrawGround(driwer.GetX(), driwer.GetY());
 
                 driwer.MoveOnDY(-470);
 
-                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::SourceI, Dir::Down,
+                CreateSourceBaseSubstrate(driwer.GetX(), y_source_I, MeasurerSourcer::Type::SourceI, Dir::Left,
                     &bcSubstrateStartValueI, L("Isub старт"),
                     &bcSubstrateDeltaValueI, L("Isub шаг"),
                     &bcSubstrateNumMeasures, L("N кривых"));
 
                 driwer.MoveToY(y_meas_I);
 
-                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasI, Dir::Down,
+                CreateSourceBaseSubstrate(driwer.GetX(), y_meas_I, MeasurerSourcer::Type::MeasI, Dir::Left,
                     &bcSubstrateMeasureRangeI, L("Isub диап"),
                     &bcSubstrateMeasureLimitI, L("Isub огр"));
 
                 driwer.MoveToY(y_source_U);
 
-                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetCoord().y, MeasurerSourcer::Type::SourceU, Dir::Down,
+                CreateSourceBaseSubstrate(driwer.GetX(), y_source_U, MeasurerSourcer::Type::SourceU, Dir::Left,
                     &bcSubstrateSourceStartU, L("Ub старт"),
                     &bcSubstrateSourceStepU, L("Ub огр"));
 
@@ -220,7 +220,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 driwer.MoveToY(y_meas_U);
 
-                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasU, Dir::Down,
+                CreateSourceBaseSubstrate(driwer.GetX(), y_meas_U, MeasurerSourcer::Type::MeasU, Dir::Right,
                     &bcSubstrateMeasureRangeU, L("Usub диап"),
                     &bcSubstrateMeasureLimitU, L("Usub огр"));
 
