@@ -200,13 +200,9 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
                     &bcSubstrateDeltaValueI, L("Isub шаг"),
                     &bcSubstrateNumMeasures, L("N кривых"));
 
-                driwer.MoveToY(y_meas_I);
-
                 CreateSourceBaseSubstrate(driwer.GetX(), y_meas_I, MeasurerSourcer::Type::MeasI, Dir::Left,
                     &bcSubstrateMeasureRangeI, L("Isub диап"),
                     &bcSubstrateMeasureLimitI, L("Isub огр"));
-
-                driwer.MoveToY(y_source_U);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), y_source_U, MeasurerSourcer::Type::SourceU, Dir::Left,
                     &bcSubstrateSourceStartU, L("Ub старт"),
@@ -217,8 +213,6 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
                 driwer.LineToY(y_ground);
 
                 DrawGround(driwer.GetX(), driwer.GetY());
-
-                driwer.MoveToY(y_meas_U);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), y_meas_U, MeasurerSourcer::Type::MeasU, Dir::Right,
                     &bcSubstrateMeasureRangeU, L("Usub диап"),
@@ -239,7 +233,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
         driwer.LineToY(y_meas_I);
 
-        CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasI, Dir::Down,
+        CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasI, Dir::Left,
             &bcCollectorMeasureRangeI, L("Ic диап"),
             &bcCollectorMeasureLimitI, L("Ic огр"));
 
@@ -249,19 +243,17 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
         driwer.MoveToY(y_source_U);
 
-        CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::SourceU, Dir::Down,
+        CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::SourceU, Dir::Left,
             &bcCollectorValueStartU, L("Uc старт"),
             &bcCollectorValueFinishU, L("Uc стоп"));
 
-        driwer.MoveTo(x_col + dx - 80, y_col);
+        driwer.MoveTo(x_col + dx - 155, y_col);
 
         driwer.LineToY(y_ground);
 
         DrawGround(driwer.GetX(), driwer.GetY());
 
-        driwer.MoveToY(y_meas_U);
-
-        CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasU, Dir::Down,
+        CreateSourceBaseSubstrate(driwer.GetX(), y_meas_U, MeasurerSourcer::Type::MeasU, Dir::Right,
             &bcCollectorMeasureRangeU, L("Uc диап"),
             &bcCollectorMeasureLimitU, L("Uc огр"));
     }
