@@ -41,7 +41,7 @@ void MeasurerSourcer::Draw(const wxPoint &_center)
     }
     else if (type == Type::SourceU)
     {
-        dc.DrawLine(center.x, center.y - radius + dY, center.x, center.y + radius - dY);
+        dc.DrawLine(center.x, center.y - radius + dY, center.x + dY, center.y + dY);
         dc.DrawLine(center.x, center.y - radius + dY, center.x - dY, center.y + dY);
     }
 }
