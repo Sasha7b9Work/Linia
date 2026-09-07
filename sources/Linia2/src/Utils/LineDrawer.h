@@ -13,6 +13,11 @@ public:
 
     void MoveTo(int x, int y);
 
+    void MoveToY(int y)
+    {
+        coord.y = y;
+    }
+
     void MoveOnDY(int dy)
     {
         coord.y += dy;

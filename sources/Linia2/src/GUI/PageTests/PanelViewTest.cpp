@@ -86,6 +86,9 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
     dc->DrawLine(coord_base, { x_vert, c.y });               // База
 
+    int y_meas_U = 500;
+    int y_meas_I = 370;
+
     {
         // Рисуем транзистор
 
@@ -151,7 +154,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
                     &bcBaseSourceStepI, L("Ib шаг"),
                     &bcBaseNumMeasures, L("N кривых"));
 
-                driwer.MoveOnDY(140);
+                driwer.MoveToY(y_meas_I);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasI, Dir::Down,
                     &bcBaseMeasureRangeI, L("Ib диап"),
@@ -169,7 +172,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 DrawGround(driwer.GetX(), driwer.GetY());
 
-                driwer.MoveOnDY(-200);
+                driwer.MoveToY(y_meas_U);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasU, Dir::Down,
                     &bcBaseMeasureRangeU, L("Ub диап"),
@@ -202,7 +205,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
                     &bcSubstrateDeltaValueI, L("Isub шаг"),
                     &bcSubstrateNumMeasures, L("N кривых"));
 
-                driwer.MoveOnDY(140);
+                driwer.MoveToY(y_meas_I);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasI, Dir::Down,
                     &bcSubstrateMeasureRangeI, L("Isub диап"),
@@ -220,7 +223,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 DrawGround(driwer.GetX(), driwer.GetY());
 
-                driwer.MoveOnDY(-200);
+                driwer.MoveToY(y_meas_U);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasU, Dir::Down,
                     &bcSubstrateMeasureRangeU, L("Usub диап"),
@@ -239,7 +242,9 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
         int y = driwer.GetY() + 50;
         driwer.LineOnDY(500);
 
-        CreateSourceBaseSubstrate(x, y, MeasurerSourcer::Type::MeasI, Dir::Down,
+        driwer.MoveToY(y_meas_I);
+
+        CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasI, Dir::Down,
             &bcCollectorMeasureRangeI, L("Ic диап"),
             &bcCollectorMeasureLimitI, L("Ic огр"));
 
@@ -256,7 +261,9 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
         DrawGround(x, y);
 
-        CreateSourceBaseSubstrate(x, y - 105, MeasurerSourcer::Type::MeasU, Dir::Down,
+        driwer.MoveToY(y_meas_U);
+
+        CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasU, Dir::Down,
             &bcCollectorMeasureRangeU, L("Uc диап"),
             &bcCollectorMeasureLimitU, L("Uc огр"));
     }
