@@ -236,9 +236,11 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
     {
         // Рисуем цепь коллектора
 
+        int dx = 400;
+
         LineDriwer driwer{ *dc, x_col, y_col };
 
-        driwer.LineOnDX(350);
+        driwer.LineOnDX(dx);
 
         driwer.LineToY(y_meas_I);
 
@@ -256,7 +258,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
             &bcCollectorValueStartU, L("Uc старт"),
             &bcCollectorValueFinishU, L("Uc стоп"));
 
-        driwer.MoveTo(x_col + 270, y_col);
+        driwer.MoveTo(x_col + dx - 80, y_col);
 
         driwer.LineToY(y_ground);
 
@@ -296,7 +298,7 @@ void PanelViewTest::DrawLineWithAngle(const wxPoint &start, double length, doubl
 
 wxPoint PanelViewTest::GetCenter() const
 {
-    return { 250, 200 };
+    return { 270, 200 };
 }
 
 
