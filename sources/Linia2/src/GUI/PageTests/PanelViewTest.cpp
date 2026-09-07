@@ -238,7 +238,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
         LineDriwer driwer{ *dc, x_col, y_col };
 
-        driwer.LineOnDX(330);
+        driwer.LineOnDX(350);
 
         driwer.LineToY(y_meas_I);
 
@@ -256,7 +256,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
             &bcCollectorValueStartU, L("Uc старт"),
             &bcCollectorValueFinishU, L("Uc стоп"));
 
-        driwer.MoveTo(x_col + 250, y_col);
+        driwer.MoveTo(x_col + 270, y_col);
 
         driwer.LineToY(y_ground);
 
@@ -296,7 +296,7 @@ void PanelViewTest::DrawLineWithAngle(const wxPoint &start, double length, doubl
 
 wxPoint PanelViewTest::GetCenter() const
 {
-    return { 230, 200 };
+    return { 250, 200 };
 }
 
 
