@@ -16,9 +16,32 @@ void MeasurerSourcer::Draw(const wxPoint &_center)
     {
         "V",
         "I",
-        "E",
-        "J"
+        "",
+        ""
     };
 
     GF::DrawTextInCenter(dc, labels[type], wxRect(wxPoint{center.x - radius, center.y - radius}, wxPoint{center.x + radius, center.y + radius}));
+
+    const int dY = 3;
+
+    if (type == Type::SourceI)
+    {
+        const int ddY = 1;
+
+        dc.DrawLine(center.x, center.y - dY - ddY, center.x, center.y - radius);
+        dc.DrawLine(center.x, center.y + dY - ddY, center.x, center.y + radius);
+
+        const int l = 5;
+
+        dc.DrawLine(center.x, center.y - dY - ddY, center.x - l, center.y - dY + l - ddY);
+        dc.DrawLine(center.x, center.y - dY + dY - ddY, center.x - l, center.y - dY + l + dY - ddY);
+
+        dc.DrawLine(center.x, center.y - dY - ddY, center.x + l, center.y - dY + l - ddY);
+        dc.DrawLine(center.x, center.y - dY + dY - ddY, center.x + l, center.y - dY + l + dY - ddY);
+    }
+    else if (type == Type::SourceU)
+    {
+        dc.DrawLine(center.x, center.y - radius + dY, center.x, center.y + radius - dY);
+        dc.DrawLine(center.x, center.y - radius + dY, center.x - dY, center.y + dY);
+    }
 }
