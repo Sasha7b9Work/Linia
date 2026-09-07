@@ -89,6 +89,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
     int y_meas_U = 500;
     int y_meas_I = 370;
     int y_source_U = 610;
+    int y_source_I = 280;
     int y_ground = 0;
 
     {
@@ -147,26 +148,20 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 y_ground = driwer.GetY();
 
-                driwer.MoveOnDY(-470);
-
-                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::SourceI, Dir::Down,
+                CreateSourceBaseSubstrate(driwer.GetX(), y_source_I, MeasurerSourcer::Type::SourceI, Dir::Right,
                     &bcBaseSourceStartI, L("Ib старт"),
                     &bcBaseSourceStepI, L("Ib шаг"),
                     &bcBaseNumMeasures, L("N кривых"));
 
-                driwer.MoveToY(y_meas_I);
-
-                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasI, Dir::Down,
+                CreateSourceBaseSubstrate(driwer.GetX(), y_meas_I, MeasurerSourcer::Type::MeasI, Dir::Right,
                     &bcBaseMeasureRangeI, L("Ib диап"),
                     &bcBaseMeasureLimitI, L("Ib огр"));
 
-                driwer.MoveToY(y_source_U);
-
-                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetCoord().y, MeasurerSourcer::Type::SourceU, Dir::Down,
+                CreateSourceBaseSubstrate(driwer.GetX(), y_source_U, MeasurerSourcer::Type::SourceU, Dir::Right,
                     &bcBaseSourceStartU, L("Ub старт"),
                     &bcBaseSourceStepU, L("Ub огр"));
 
-                driwer.MoveTo(coord_base.x + 80, coord_base.y);
+                driwer.MoveTo(coord_base.x + 150, coord_base.y);
 
                 driwer.LineToY(y_ground);
 
@@ -174,7 +169,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 driwer.MoveToY(y_meas_U);
 
-                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasU, Dir::Down,
+                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasU, Dir::Left,
                     &bcBaseMeasureRangeU, L("Ub диап"),
                     &bcBaseMeasureLimitU, L("Ub огр"));
             }
@@ -298,7 +293,7 @@ void PanelViewTest::DrawLineWithAngle(const wxPoint &start, double length, doubl
 
 wxPoint PanelViewTest::GetCenter() const
 {
-    return { 270, 200 };
+    return { 300, 200 };
 }
 
 
