@@ -200,7 +200,7 @@ bool Application::OnInit()
 
     if (!GF::IsBoardOPi5Plus())
     {
-        TheMainWindow->Maximize(true);
+//        TheMainWindow->Maximize(true);
     }
 
     TheMainWindow->Show();

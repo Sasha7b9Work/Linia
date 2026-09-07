@@ -20,6 +20,12 @@ int LineDriwer::LineOnDY(int dy)
 }
 
 
+void LineDriwer::MoveTo(int x, int y)
+{
+    coord = { x, y };
+}
+
+
 int LineDriwer::LineToY(int y)
 {
     wxPoint coord_next{ coord.x, y };
