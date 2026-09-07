@@ -195,18 +195,24 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 DrawGround(driwer.GetX(), driwer.GetY());
 
-                driwer.MoveOnDY(-400);
+                driwer.MoveOnDY(-470);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::SourceI, Dir::Down,
                     &bcSubstrateStartValueI, L("Isub старт"),
                     &bcSubstrateDeltaValueI, L("Isub шаг"),
                     &bcSubstrateNumMeasures, L("N кривых"));
 
-                driwer.MoveOnDY(150);
+                driwer.MoveOnDY(140);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasU, Dir::Down,
-                    &bcSubstrateRangeMeasureU, L("Usub диап"),
-                    &bcSubstrateRangeLimitU, L("Usub огр"));
+                    &bcSubstrateMeasureRangeU, L("Usub диап"),
+                    &bcSubstrateMeasureLimitU, L("Usub огр"));
+
+                driwer.MoveOnDY(240);
+
+                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetCoord().y, MeasurerSourcer::Type::SourceU, Dir::Down,
+                    &bcSubstrateSourceStartU, L("Ub старт"),
+                    &bcSubstrateSourceStepU, L("Ub огр"));
             }
         }
     }

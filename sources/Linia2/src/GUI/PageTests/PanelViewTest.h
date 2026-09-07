@@ -46,12 +46,10 @@ private:
 
     ButtonsCombo *bcBaseModeControl = nullptr;          // Режим управления базой - током или напряжением
     ComboInput *bcBaseNumMeasures = nullptr;            // Количество измерений
-
     ComboInput *bcBaseSourceStartI = nullptr;            // Стартовое значение задаваемой величины
     ComboInput *bcBaseSourceStepI = nullptr;            // Шаг изменения задаваемой величины
     ComboInput *bcBaseSourceStartU = nullptr;
     ComboInput *bcBaseSourceStepU = nullptr;
-
     ComboInput *bcBaseMeasureRangeU = nullptr;          // Диапазон - максимальное доступное значение
     ComboInput *bcBaseMeasureLimitU = nullptr;          // Максимальное значение, при котором происходит завершение измерения
     ComboInput *bcBaseMeasureRangeI = nullptr;
@@ -61,8 +59,10 @@ private:
     ComboInput *bcSubstrateStartValueI = nullptr;
     ComboInput *bcSubstrateDeltaValueI = nullptr;
     ComboInput *bcSubstrateNumMeasures = nullptr;
-    ComboInput *bcSubstrateRangeMeasureU = nullptr;
-    ComboInput *bcSubstrateRangeLimitU = nullptr;
+    ComboInput *bcSubstrateMeasureRangeU = nullptr;
+    ComboInput *bcSubstrateMeasureLimitU = nullptr;
+    ComboInput *bcSubstrateSourceStartU = nullptr;
+    ComboInput *bcSubstrateSourceStepU = nullptr;
 
     ButtonsCombo *bcCollectorModeSource = nullptr;      // Режим работы источника в коллекторе - высокое напряжение или большой ток
     ComboInput *bcCollectorValueStartU = nullptr;       // Начальное значение испытательного напряжения Uк
