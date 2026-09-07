@@ -88,6 +88,8 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
     int y_meas_U = 500;
     int y_meas_I = 370;
+    int y_source_U = 610;
+    int y_ground = 0;
 
     {
         // Рисуем транзистор
@@ -127,8 +129,6 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
             }
         }
 
-        int y_ground = 0;
-
         {
             // Вертикальная линия базы
 
@@ -160,7 +160,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
                     &bcBaseMeasureRangeI, L("Ib диап"),
                     &bcBaseMeasureLimitI, L("Ib огр"));
 
-                driwer.MoveOnDY(240);
+                driwer.MoveToY(y_source_U);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetCoord().y, MeasurerSourcer::Type::SourceU, Dir::Down,
                     &bcBaseSourceStartU, L("Ub старт"),
@@ -211,7 +211,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
                     &bcSubstrateMeasureRangeI, L("Isub диап"),
                     &bcSubstrateMeasureLimitI, L("Isub огр"));
 
-                driwer.MoveOnDY(240);
+                driwer.MoveToY(y_source_U);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetCoord().y, MeasurerSourcer::Type::SourceU, Dir::Down,
                     &bcSubstrateSourceStartU, L("Ub старт"),
@@ -238,28 +238,29 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
         LineDriwer driwer{ *dc, x_col, y_col };
 
-        int x = driwer.LineOnDX(350);
-        int y = driwer.GetY() + 50;
-        driwer.LineOnDY(500);
+        driwer.LineOnDX(330);
 
-        driwer.MoveToY(y_meas_I);
+        driwer.LineToY(y_meas_I);
 
         CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasI, Dir::Down,
             &bcCollectorMeasureRangeI, L("Ic диап"),
             &bcCollectorMeasureLimitI, L("Ic огр"));
 
-        CreateSourceBaseSubstrate(x, y + 300, MeasurerSourcer::Type::SourceU, Dir::Down,
+        driwer.LineToY(y_ground);
+
+        DrawGround(driwer.GetX(), driwer.GetY());
+
+        driwer.MoveToY(y_source_U);
+
+        CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::SourceU, Dir::Down,
             &bcCollectorValueStartU, L("Uc старт"),
             &bcCollectorValueFinishU, L("Uc стоп"));
 
-        DrawGround(x, driwer.GetY());
+        driwer.MoveTo(x_col + 250, y_col);
 
-        driwer.MoveOnDY(-340);
-        driwer.LineOnDX(100);
-        y = driwer.LineOnDY(150);
-        x = driwer.GetX();
+        driwer.LineToY(y_ground);
 
-        DrawGround(x, y);
+        DrawGround(driwer.GetX(), driwer.GetY());
 
         driwer.MoveToY(y_meas_U);
 
