@@ -237,6 +237,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
             &bcCollectorMeasureRangeI, L("Ic диап"),
             &bcCollectorMeasureLimitI, L("Ic огр"));
 
+        driwer.MoveOnDY(10);
         driwer.LineToY(y_ground);
 
         DrawGround(driwer.GetX(), driwer.GetY());
