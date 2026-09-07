@@ -225,7 +225,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
     {
         // Рисуем цепь коллектора
 
-        int dx = 400;
+        int dx = 450;
 
         LineDriwer driwer{ *dc, x_col, y_col };
 
