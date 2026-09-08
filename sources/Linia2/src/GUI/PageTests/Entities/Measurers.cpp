@@ -4,10 +4,8 @@
 #include "Utils/GlobalFunctions.h"
 
 
-void MeasurerSourcer::Draw(const wxPoint &_center)
+void MeasurerSourcer::Draw()
 {
-    center = _center;
-
     dc.DrawCircle(center, radius);
 
     dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));

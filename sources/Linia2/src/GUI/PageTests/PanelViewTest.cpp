@@ -592,9 +592,16 @@ void PanelViewTest::CreateSourceBaseSubstrate(
     ComboInput **step, const wxString &label_step,
     ComboInput **num_curves, const wxString &label_num_curves)
 {
-    MeasurerSourcer *meas_sourc = new MeasurerSourcer(type, *dc);
+    std::vector<ComboInput *> inputs
+    {
+        *start,
+        *step,
+        *num_curves
+    };
 
-    meas_sourc->Draw({ x, y });
+    MeasurerSourcer *meas_sourc = new MeasurerSourcer(type, *dc, inputs, { x, y });
+
+    meas_sourc->Draw();
 
     DrawBorder(x, y, meas_sourc->GetRadius(), dir, CalculateCombos(start, step, num_curves));
 

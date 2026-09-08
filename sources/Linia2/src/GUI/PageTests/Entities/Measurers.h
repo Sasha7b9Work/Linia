@@ -5,6 +5,9 @@
 #pragma warning(pop)
 
 
+class ComboInput;
+
+
 // Общий класс для источника и измерителя
 class MeasurerSourcer
 {
@@ -22,9 +25,13 @@ public:
         };
     };
 
-    MeasurerSourcer(Type::E _type, wxPaintDC &_dc) : type(_type), dc(_dc) { }
+    MeasurerSourcer(Type::E _type, wxPaintDC &_dc, std::vector<ComboInput *> &_parameters, const wxPoint _center) :
+        type(_type), dc(_dc), center(_center), parameters(_parameters)
+    {
+        int i = 0;
+    }
 
-    void Draw(const wxPoint &);
+    void Draw();
 
     int GetRadius() const
     {
@@ -37,6 +44,7 @@ protected:
     wxPaintDC &dc;
     const int radius = 12;
     wxPoint center;
+    std::vector<ComboInput *> parameters;
 };
 
 
@@ -44,7 +52,10 @@ class Voltmeter : public MeasurerSourcer
 {
 public:
 
-    Voltmeter(wxPaintDC &dc) : MeasurerSourcer(MeasurerSourcer::Type::MeasU, dc) { }
+    Voltmeter(wxPaintDC &dc, std::vector<ComboInput *> _parameters, const wxPoint _center) :
+        MeasurerSourcer(MeasurerSourcer::Type::MeasU, dc, _parameters, _center)
+    {
+    }
 };
 
 
@@ -52,7 +63,10 @@ class Ampermeter : public MeasurerSourcer
 {
 public:
 
-    Ampermeter(wxPaintDC &dc) : MeasurerSourcer(MeasurerSourcer::Type::MeasI, dc) { }
+    Ampermeter(wxPaintDC &dc, std::vector<ComboInput *> _parameters, const wxPoint _center) :
+        MeasurerSourcer(MeasurerSourcer::Type::MeasI, dc, _parameters, _center)
+    {
+    }
 };
 
 
@@ -60,7 +74,10 @@ class SourceVoltage : public MeasurerSourcer
 {
 public:
 
-    SourceVoltage(wxPaintDC &dc) : MeasurerSourcer(MeasurerSourcer::Type::SourceU, dc) { }
+    SourceVoltage(wxPaintDC &dc, std::vector<ComboInput *> _parameters, const wxPoint _center) :
+        MeasurerSourcer(MeasurerSourcer::Type::SourceU, dc, _parameters, _center)
+    {
+    }
 };
 
 
@@ -68,5 +85,8 @@ class SourceCurrent : public MeasurerSourcer
 {
 public:
 
-    SourceCurrent(wxPaintDC &dc) : MeasurerSourcer(MeasurerSourcer::Type::SourceI, dc) { }
+    SourceCurrent(wxPaintDC &dc, std::vector<ComboInput *> _parameters, const wxPoint _center) :
+        MeasurerSourcer(MeasurerSourcer::Type::SourceI, dc, _parameters, _center)
+    {
+    }
 };
