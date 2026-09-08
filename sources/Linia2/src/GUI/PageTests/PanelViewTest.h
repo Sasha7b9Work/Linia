@@ -104,7 +104,12 @@ private:
         int x, int y, MeasurerSourcer::Type::E, Dir::E,
         ComboInput **, const wxString &,
         ComboInput **, const wxString &,
-        ComboInput ** = nullptr, const wxString & = "");
+        ComboInput **, const wxString &);
+
+    void CreateSourceBaseSubstrate(
+        int x, int y, MeasurerSourcer::Type::E, Dir::E,
+        ComboInput **, const wxString &,
+        ComboInput **, const wxString &);
 
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
 

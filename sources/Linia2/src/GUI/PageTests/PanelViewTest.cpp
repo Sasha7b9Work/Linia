@@ -589,6 +589,61 @@ void PanelViewTest::DrawBorder(int &x, int &y, int r, Dir::E dir, int num_contro
 void PanelViewTest::CreateSourceBaseSubstrate(
     int x, int y, MeasurerSourcer::Type::E type, Dir::E dir,
     ComboInput **start, const wxString &label_start,
+    ComboInput **step, const wxString &label_step)
+{
+    std::vector<ComboInput *> inputs
+    {
+        *start,
+        *step
+    };
+
+    MeasurerSourcer *meas_sourc = new MeasurerSourcer(type, *dc, inputs, { x, y });
+
+    meas_sourc->Draw();
+
+    DrawBorder(x, y, meas_sourc->GetRadius(), dir, 2);
+
+    delete meas_sourc;
+
+    if (!(*start))
+    {
+        wxArrayString titles;
+        titles.push_back("2 мкА");
+        titles.push_back("5 мкA");
+        titles.push_back("10 мкА");
+        titles.push_back("20 мкА");
+        titles.push_back("50 мкА");
+        titles.push_back("100 мкА");
+
+        wxArrayString tooltips;
+        tooltips.push_back(L("Начальное значение тока подложки"));
+
+        CREATE_BUTTONS_COMBO_RANGE((*start), label_start, x, y);
+    }
+
+    y += d_combos;
+
+    if (!(*step))
+    {
+        wxArrayString titles;
+        titles.push_back("2 мкА");
+        titles.push_back("5 мкA");
+        titles.push_back("10 мкА");
+        titles.push_back("20 мкА");
+        titles.push_back("50 мкА");
+        titles.push_back("100 мкА");
+        titles.push_back("200 мкА");
+
+        wxArrayString tooltips;
+        tooltips.push_back(L("Шаг изменения тока подложки"));
+
+        CREATE_BUTTONS_COMBO_RANGE((*step), label_step, x, y);
+    }
+}
+
+void PanelViewTest::CreateSourceBaseSubstrate(
+    int x, int y, MeasurerSourcer::Type::E type, Dir::E dir,
+    ComboInput **start, const wxString &label_start,
     ComboInput **step, const wxString &label_step,
     ComboInput **num_curves, const wxString &label_num_curves)
 {
@@ -603,7 +658,7 @@ void PanelViewTest::CreateSourceBaseSubstrate(
 
     meas_sourc->Draw();
 
-    DrawBorder(x, y, meas_sourc->GetRadius(), dir, CalculateCombos(start, step, num_curves));
+    DrawBorder(x, y, meas_sourc->GetRadius(), dir, 3);
 
     delete meas_sourc;
 

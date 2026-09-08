@@ -28,7 +28,6 @@ public:
     MeasurerSourcer(Type::E _type, wxPaintDC &_dc, std::vector<ComboInput *> &_parameters, const wxPoint _center) :
         type(_type), dc(_dc), center(_center), parameters(_parameters)
     {
-        int i = 0;
     }
 
     void Draw();
