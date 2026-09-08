@@ -4,6 +4,11 @@
 #include "Utils/GlobalFunctions.h"
 
 
+#define CREATE_BUTTONS_COMBO_RANGE(name, title, _x, _y)             \
+    name = new ComboInput(this, title, WIDTH_CONTROL, titles, tooltips, #name); \
+    name->SetPosition({ _x, _y });
+
+
 void MeasurerSourcer::Draw()
 {
     dc.DrawCircle(center, radius);

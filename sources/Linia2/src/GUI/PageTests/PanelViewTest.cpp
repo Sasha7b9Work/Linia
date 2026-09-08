@@ -148,18 +148,29 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 y_ground = driwer.GetY();
 
+                std::vector<std::vector<double>> values;
+
+                MeasurerSourcer::FillValues(values);
+
                 CreateSourceBaseSubstrate(driwer.GetX(), y_source_I, MeasurerSourcer::Type::SourceI, Dir::Right,
                     &bcBaseSourceStartI, L("Ib старт"),
                     &bcBaseSourceStepI, L("Ib шаг"),
-                    &bcBaseNumMeasures, L("N кривых"));
+                    &bcBaseNumMeasures, L("N кривых"),
+                    values);
+
+                MeasurerSourcer::FillValues(values);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), y_meas_I, MeasurerSourcer::Type::MeasI, Dir::Right,
                     &bcBaseMeasureRangeI, L("Ib диап"),
-                    &bcBaseMeasureLimitI, L("Ib огр"));
+                    &bcBaseMeasureLimitI, L("Ib огр"),
+                    values);
+
+                MeasurerSourcer::FillValues(values);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), y_source_U, MeasurerSourcer::Type::SourceU, Dir::Right,
                     &bcBaseSourceStartU, L("Ub старт"),
-                    &bcBaseSourceStepU, L("Ub огр"));
+                    &bcBaseSourceStepU, L("Ub огр"),
+                    values);
 
                 driwer.MoveTo(coord_base.x + 150, coord_base.y);
 
@@ -169,9 +180,12 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 driwer.MoveToY(y_meas_U);
 
+                MeasurerSourcer::FillValues(values);
+
                 CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasU, Dir::Left,
                     &bcBaseMeasureRangeU, L("Ub диап"),
-                    &bcBaseMeasureLimitU, L("Ub огр"));
+                    &bcBaseMeasureLimitU, L("Ub огр"),
+                    values);
             }
         }
 
@@ -195,18 +209,29 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 driwer.MoveOnDY(-470);
 
+                std::vector<std::vector<double>> values;
+
+                MeasurerSourcer::FillValues(values);
+
                 CreateSourceBaseSubstrate(driwer.GetX(), y_source_I, MeasurerSourcer::Type::SourceI, Dir::Left,
                     &bcSubstrateStartValueI, L("Isub старт"),
                     &bcSubstrateDeltaValueI, L("Isub шаг"),
-                    &bcSubstrateNumMeasures, L("N кривых"));
+                    &bcSubstrateNumMeasures, L("N кривых"),
+                    values);
+
+                MeasurerSourcer::FillValues(values);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), y_meas_I, MeasurerSourcer::Type::MeasI, Dir::Left,
                     &bcSubstrateMeasureRangeI, L("Isub диап"),
-                    &bcSubstrateMeasureLimitI, L("Isub огр"));
+                    &bcSubstrateMeasureLimitI, L("Isub огр"),
+                    values);
+
+                MeasurerSourcer::FillValues(values);
 
                 CreateSourceBaseSubstrate(driwer.GetX(), y_source_U, MeasurerSourcer::Type::SourceU, Dir::Left,
                     &bcSubstrateSourceStartU, L("Ub старт"),
-                    &bcSubstrateSourceStepU, L("Ub огр"));
+                    &bcSubstrateSourceStepU, L("Ub огр"),
+                    values);
 
                 driwer.MoveTo(GetCenter().x + 70, coord_base.y);
 
@@ -214,9 +239,12 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 DrawGround(driwer.GetX(), driwer.GetY());
 
+                MeasurerSourcer::FillValues(values);
+
                 CreateSourceBaseSubstrate(driwer.GetX(), y_meas_U, MeasurerSourcer::Type::MeasU, Dir::Right,
                     &bcSubstrateMeasureRangeU, L("Usub диап"),
-                    &bcSubstrateMeasureLimitU, L("Usub огр"));
+                    &bcSubstrateMeasureLimitU, L("Usub огр"),
+                    values);
 
             }
         }
@@ -233,9 +261,14 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
         driwer.LineToY(y_meas_I);
 
+        std::vector<std::vector<double>> values;
+
+        MeasurerSourcer::FillValues(values);
+
         CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasI, Dir::Left,
             &bcCollectorMeasureRangeI, L("Ic диап"),
-            &bcCollectorMeasureLimitI, L("Ic огр"));
+            &bcCollectorMeasureLimitI, L("Ic огр"),
+            values);
 
         driwer.MoveOnDY(10);
         driwer.LineToY(y_ground);
@@ -244,9 +277,12 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
         driwer.MoveToY(y_source_U);
 
+        MeasurerSourcer::FillValues(values);
+
         CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::SourceU, Dir::Left,
             &bcCollectorValueStartU, L("Uc старт"),
-            &bcCollectorValueFinishU, L("Uc стоп"));
+            &bcCollectorValueFinishU, L("Uc стоп"),
+            values);
 
         driwer.MoveTo(x_col + dx - 155, y_col);
 
@@ -254,9 +290,12 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
         DrawGround(driwer.GetX(), driwer.GetY());
 
+        MeasurerSourcer::FillValues(values);
+
         CreateSourceBaseSubstrate(driwer.GetX(), y_meas_U, MeasurerSourcer::Type::MeasU, Dir::Right,
             &bcCollectorMeasureRangeU, L("Uc диап"),
-            &bcCollectorMeasureLimitU, L("Uc огр"));
+            &bcCollectorMeasureLimitU, L("Uc огр"),
+            values);
     }
 }
 
@@ -581,15 +620,12 @@ void PanelViewTest::DrawBorder(int &x, int &y, int r, Dir::E dir, int num_contro
 
 }
 
-#define CREATE_BUTTONS_COMBO_RANGE(name, title, _x, _y)             \
-    name = new ComboInput(this, title, WIDTH_CONTROL, titles, tooltips, #name); \
-    name->SetPosition({ _x, _y });
 
-
-void PanelViewTest::CreateSourceBaseSubstrate(
+MeasurerSourcer *PanelViewTest::CreateSourceBaseSubstrate(
     int x, int y, MeasurerSourcer::Type::E type, Dir::E dir,
     ComboInput **start, const wxString &label_start,
-    ComboInput **step, const wxString &label_step)
+    ComboInput **step, const wxString &label_step,
+    std::vector<std::vector<double>> values)
 {
     std::vector<ComboInput *> inputs
     {
@@ -597,13 +633,11 @@ void PanelViewTest::CreateSourceBaseSubstrate(
         *step
     };
 
-    MeasurerSourcer *meas_sourc = new MeasurerSourcer(type, *dc, inputs, { x, y });
+    MeasurerSourcer *meas_sourc = new MeasurerSourcer(type, *dc, inputs, values, { x, y });
 
     meas_sourc->Draw();
 
     DrawBorder(x, y, meas_sourc->GetRadius(), dir, 2);
-
-    delete meas_sourc;
 
     if (!(*start))
     {
@@ -618,7 +652,9 @@ void PanelViewTest::CreateSourceBaseSubstrate(
         wxArrayString tooltips;
         tooltips.push_back(L("Начальное значение тока подложки"));
 
-        CREATE_BUTTONS_COMBO_RANGE((*start), label_start, x, y);
+//        CREATE_BUTTONS_COMBO_RANGE((*start), label_start, x, y);
+
+        MeasurerSourcer
     }
 
     y += d_combos;
@@ -639,6 +675,8 @@ void PanelViewTest::CreateSourceBaseSubstrate(
 
         CREATE_BUTTONS_COMBO_RANGE((*step), label_step, x, y);
     }
+
+    return meas_sourc;
 }
 
 void PanelViewTest::CreateSourceBaseSubstrate(

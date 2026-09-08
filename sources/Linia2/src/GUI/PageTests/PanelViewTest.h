@@ -46,6 +46,7 @@ private:
 
     ButtonsCombo *bcBaseModeControl = nullptr;          // Режим управления базой - током или напряжением
     ComboInput *bcBaseNumMeasures = nullptr;            // Количество измерений
+
     ComboInput *bcBaseSourceStartI = nullptr;            // Стартовое значение задаваемой величины
     ComboInput *bcBaseSourceStepI = nullptr;            // Шаг изменения задаваемой величины
     ComboInput *bcBaseSourceStartU = nullptr;
@@ -54,6 +55,7 @@ private:
     ComboInput *bcBaseMeasureLimitU = nullptr;          // Максимальное значение, при котором происходит завершение измерения
     ComboInput *bcBaseMeasureRangeI = nullptr;
     ComboInput *bcBaseMeasureLimitI = nullptr;
+    MeasurerSourcer *measureBase = nullptr;
 
     ButtonsCombo *bcSubstrateModeControl = nullptr;
     ComboInput *bcSubstrateStartValueI = nullptr;
@@ -104,12 +106,14 @@ private:
         int x, int y, MeasurerSourcer::Type::E, Dir::E,
         ComboInput **, const wxString &,
         ComboInput **, const wxString &,
-        ComboInput **, const wxString &);
+        ComboInput **, const wxString &,
+        std::vector<std::vector<double>> values);
 
-    void CreateSourceBaseSubstrate(
+    MeasurerSourcer *CreateSourceBaseSubstrate(
         int x, int y, MeasurerSourcer::Type::E, Dir::E,
         ComboInput **, const wxString &,
-        ComboInput **, const wxString &);
+        ComboInput **, const wxString &,
+        std::vector<std::vector<double>> values);
 
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
 
