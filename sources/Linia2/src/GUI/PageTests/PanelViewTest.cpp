@@ -592,7 +592,7 @@ void PanelViewTest::CreateSourceBaseSubstrate(
     ComboInput **step, const wxString &label_step,
     ComboInput **num_curves, const wxString &label_num_curves)
 {
-    MeasurerSourcer *meas_sourc = new MeasurerSourcer(type, *dc, true);
+    MeasurerSourcer *meas_sourc = new MeasurerSourcer(type, *dc);
 
     meas_sourc->Draw({ x, y });
 

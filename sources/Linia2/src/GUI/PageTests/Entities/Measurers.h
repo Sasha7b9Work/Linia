@@ -22,7 +22,7 @@ public:
         };
     };
 
-    MeasurerSourcer(Type::E _type, wxPaintDC &_dc, bool vertical) : type(_type), dc(_dc), is_vertical(vertical) { }
+    MeasurerSourcer(Type::E _type, wxPaintDC &_dc) : type(_type), dc(_dc) { }
 
     void Draw(const wxPoint &);
 
@@ -35,7 +35,6 @@ protected:
 
     Type::E type;
     wxPaintDC &dc;
-    bool is_vertical;
     const int radius = 12;
     wxPoint center;
 };
@@ -45,7 +44,7 @@ class Voltmeter : public MeasurerSourcer
 {
 public:
 
-    Voltmeter(wxPaintDC &dc, bool vertical) : MeasurerSourcer(MeasurerSourcer::Type::MeasU, dc, vertical) { }
+    Voltmeter(wxPaintDC &dc) : MeasurerSourcer(MeasurerSourcer::Type::MeasU, dc) { }
 };
 
 
@@ -53,7 +52,7 @@ class Ampermeter : public MeasurerSourcer
 {
 public:
 
-    Ampermeter(wxPaintDC &dc, bool vertical) : MeasurerSourcer(MeasurerSourcer::Type::MeasI, dc, vertical) { }
+    Ampermeter(wxPaintDC &dc) : MeasurerSourcer(MeasurerSourcer::Type::MeasI, dc) { }
 };
 
 
@@ -61,7 +60,7 @@ class SourceVoltage : public MeasurerSourcer
 {
 public:
 
-    SourceVoltage(wxPaintDC &dc, bool vertical) : MeasurerSourcer(MeasurerSourcer::Type::SourceU, dc, vertical) { }
+    SourceVoltage(wxPaintDC &dc) : MeasurerSourcer(MeasurerSourcer::Type::SourceU, dc) { }
 };
 
 
@@ -69,5 +68,5 @@ class SourceCurrent : public MeasurerSourcer
 {
 public:
 
-    SourceCurrent(wxPaintDC &dc, bool vertical) : MeasurerSourcer(MeasurerSourcer::Type::SourceI, dc, vertical) { }
+    SourceCurrent(wxPaintDC &dc) : MeasurerSourcer(MeasurerSourcer::Type::SourceI, dc) { }
 };
