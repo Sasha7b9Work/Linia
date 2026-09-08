@@ -26,7 +26,7 @@ void MeasurerSourcer::Draw(const wxPoint &_center)
 
     if (type == Type::SourceI)
     {
-        const int ddY = 1;
+        const int ddY = 3;
 
         dc.DrawLine(center.x, center.y - dY - ddY, center.x, center.y - radius);
         dc.DrawLine(center.x, center.y + dY - ddY, center.x, center.y + radius);
