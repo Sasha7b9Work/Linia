@@ -88,6 +88,8 @@ private:
 
     // Показать параметры в соотвествии с выбранным режимом - така или напряжения
     void ShowNeedParameters();
+
+    void DrawUGO(wxPaintDC &dc);
 };
 
 

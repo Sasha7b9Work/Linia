@@ -40,7 +40,11 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
     {
         btnModeUI->Enable(!disabled);
     }
+}
 
+
+void MeasurerSourcer::DrawUGO(wxPaintDC &dc)
+{
     if (!disabled)
     {
         dc.DrawCircle(center, radius);
