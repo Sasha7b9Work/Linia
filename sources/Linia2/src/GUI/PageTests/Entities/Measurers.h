@@ -57,6 +57,7 @@ protected:
     std::vector<ComboInput *> parametersU;
     std::vector<ComboInput *> parametersI;
     Button *btnDisable = nullptr;               // Кнопка отлючения измерителя/источника
+    bool disabled = false;
 
 private:
 

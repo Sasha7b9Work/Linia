@@ -76,6 +76,13 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
             btnDisable->SetToolTip(L("Включить/отключить блок источника"));
         }
 
+        btnDisable->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
+            {
+                disabled = !disabled;
+                ThePanelViewTest->Refresh();
+                event.Skip();
+            });
+
         if (dir == Dir::Left)
         {
             btnDisable->SetPosition({ rect.x + rect.width - btnDisable->GetSize().x - 1, rect.y + 1});
@@ -104,6 +111,16 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
 
             parametersI.push_back(combo);
         }
+    }
+
+    for (ComboInput *combo : parametersI)
+    {
+        combo->Enable(!disabled);
+    }
+
+    for (ComboInput *combo : parametersU)
+    {
+        combo->Enable(!disabled);
     }
 }
 
