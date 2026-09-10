@@ -72,6 +72,8 @@ private:
     void CreateControls(const wxRect &rect, int x, int y);
 
     void CreateButtonDisable(const wxRect &rect, const wxSize &size, wxPoint &pos);
+
+    void CreateButtonModeSourceUI(const wxSize &size, const wxPoint &pos);
 };
 
 

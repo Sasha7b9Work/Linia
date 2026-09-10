@@ -96,27 +96,7 @@ void MeasurerSourcer::CreateControls(const wxRect &rect, int x, int y)
 
         CreateButtonDisable(rect, size, pos);
 
-        if (type == Type::SourceUI)
-        {
-            btnModeSourceUI = new Button(ThePanelViewTest, "E", size);
-            btnModeSourceUI->SetPosition({ pos.x, pos.y + 25 });
-            btnModeSourceUI->SetToolTip(L("Включён блок источника напряжения"));
-            btnModeSourceUI->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
-                {
-                    if (btnModeSourceUI->GetLabel() == wxString("E"))
-                    {
-                        btnModeSourceUI->SetLabel("J");
-                        btnModeSourceUI->SetToolTip(L("Включён блок источника тока"));
-                    }
-                    else
-                    {
-                        btnModeSourceUI->SetLabel("E");
-                        btnModeSourceUI->SetToolTip(L("Включён блок источника напряжения"));
-                    }
-
-                    event.Skip();
-                });
-        }
+        CreateButtonModeSourceUI(size, pos);
 
         for (int i = 0; i < 5; i++)
         {
@@ -171,6 +151,32 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
     }
 
     btnDisable->SetPosition(pos);
+}
+
+
+void MeasurerSourcer::CreateButtonModeSourceUI(const wxSize &size, const wxPoint &pos)
+{
+    if (type == Type::SourceUI)
+    {
+        btnModeSourceUI = new Button(ThePanelViewTest, "E", size);
+        btnModeSourceUI->SetPosition({ pos.x, pos.y + 25 });
+        btnModeSourceUI->SetToolTip(L("Включён блок источника напряжения"));
+        btnModeSourceUI->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
+            {
+                if (btnModeSourceUI->GetLabel() == wxString("E"))
+                {
+                    btnModeSourceUI->SetLabel("J");
+                    btnModeSourceUI->SetToolTip(L("Включён блок источника тока"));
+                }
+                else
+                {
+                    btnModeSourceUI->SetLabel("E");
+                    btnModeSourceUI->SetToolTip(L("Включён блок источника напряжения"));
+                }
+
+                event.Skip();
+            });
+    }
 }
 
 
