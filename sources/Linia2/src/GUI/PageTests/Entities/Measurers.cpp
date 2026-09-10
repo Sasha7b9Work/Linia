@@ -81,7 +81,6 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
         combo->SetPosition({ x, y + i * (ButtonsCombo::HEIGHT + 5) });
 
         parametersI.push_back(combo);
-        parametersU.push_back(combo);
     }
 }
 
