@@ -203,11 +203,9 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
     {
         // Рисуем цепь коллектора
 
-        int dx = 420;
-
         LineDriwer driwer{ *dc, x_col, y_col };
 
-        driwer.LineOnDX(dx);
+        driwer.LineOnDX(380);
 
         driwer.LineToY(y_ground);
 
@@ -227,17 +225,9 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
         sourceVoltageCollector->Draw(*dc);
 
-        driwer.MoveToY(y_col);
-
-        driwer.MoveOnDX(-155);
-
-        driwer.LineToY(y_ground);
-
-        DrawGround(driwer.GetX(), driwer.GetY());
-
         if (!voltmeterCollector)
         {
-            voltmeterCollector = new Voltmeter(Chan::_C, { driwer.GetX(), y_meas_U }, Dir::Right);
+            voltmeterCollector = new Voltmeter(Chan::_C, { driwer.GetX(), y_meas_U }, Dir::Left);
         }
 
         voltmeterCollector->Draw(*dc);
