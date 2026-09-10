@@ -53,8 +53,8 @@ private:
     void CreateElement();
 
     // type == "npn", "pnp"
+    // Биполярный транзистор с подложкой и без
     void CreateBJT(const wxString &type, const wxPoint &);
-    void CreateBJTS(const wxString &type, const wxPoint &);
 
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
 

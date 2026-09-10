@@ -58,13 +58,10 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 
 void PanelViewTest::CreateElement()
 {
-    if (test->lib->UGO == "BJT")
+    if (test->lib->UGO == "BJT" ||
+        test->lib->UGO == "BJTS")
     {
         CreateBJT("npn", GetCenter());
-    }
-    else if (test->lib->UGO == "BJTS")
-    {
-        CreateBJTS("npn", GetCenter());
     }
 }
 
@@ -74,17 +71,19 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
     int x_col = c.x + radius_trans / 2;   // / Координаты точки коммутации
     int y_col = c.y - 2 * radius_trans;   // / с коллектором
 
-    dc->DrawLine(x_col, y_col, c.x + radius_trans / 2, c.y + 2 * radius_trans);    // Вертикальная линия, которая выходит из коллектора и эмиттера
+    LineDriwer driwer(*dc, x_col, y_col);
 
-    dc->DrawLine(c.x + radius_trans / 2 - 10, c.y + 2 * radius_trans, c.x + radius_trans / 2 + 10, c.y + 2 * radius_trans);      // Заземление эмиттера
+    driwer.LineTo(c.x + radius_trans / 2, c.y + 2 * radius_trans);                                                             // Вертикальная линия, которая выходит из коллектора и эмиттера
+
+    DrawGround(driwer.GetX(), driwer.GetY());
 
     dc->DrawCircle(c, radius_trans);
 
-    const int x_vert = c.x - radius_trans * 10 / 18;                    // Здесь заканчивается линия базы внутри окружности
+    const int x_vert = c.x - radius_trans * 10 / 18;                                                                            // Здесь заканчивается линия базы внутри окружности
 
     const wxPoint coord_base{ 90, c.y };
 
-    dc->DrawLine(coord_base, { x_vert, c.y });               // База
+    dc->DrawLine(coord_base, { x_vert, c.y });                                                                                  // База
 
     int y0 = 290;
     int y1 = 410;
@@ -102,10 +101,10 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
             int y_top = c.y - radius_trans * 100 / 115;
             int y_bottom = c.y + radius_trans * 100 / 115;
 
-            int xx = c.x + radius_trans * 10 / 20;                    // В этом иксе - пересечение коллектора и эмиттера с окружностью.
+            int xx = c.x + radius_trans * 10 / 20;                      // В этом иксе - пересечение коллектора и эмиттера с окружностью.
 
-            dc->DrawLine(x_vert, c.y - dy, xx, y_top);            // Верхняя наклонная линия (коллектор)
-            dc->DrawLine(x_vert, c.y + dy, xx, y_bottom);         // Нижняя наклонная линия (эмиттер)
+            dc->DrawLine(x_vert, c.y - dy, xx, y_top);                  // Верхняя наклонная линия (коллектор)
+            dc->DrawLine(x_vert, c.y + dy, xx, y_bottom);               // Нижняя наклонная линия (эмиттер)
 
             {
                 // Стрелка эмиттера
@@ -139,7 +138,7 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
             {
                 // Рисуем измеритель базы
 
-                LineDriwer driwer(*dc, coord_base.x, coord_base.y);
+                driwer.MoveTo(coord_base.x, coord_base.y);
 
                 driwer.LineToY(y_ground);
 
@@ -173,7 +172,7 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
             {
                 // Измеритель подложки
 
-                LineDriwer driwer(*dc, x, c.y);
+                driwer.MoveTo(x, c.y);
                 driwer.LineOnDX(150);
                 driwer.LineToY(y_ground);
 
@@ -201,7 +200,7 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
     {
         // Рисуем цепь коллектора
 
-        LineDriwer driwer{ *dc, x_col, y_col };
+        driwer.MoveTo(x_col, y_col);
 
         driwer.LineOnDX(355);
 
@@ -236,12 +235,6 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 void PanelViewTest::DrawGround(int x, int y)
 {
     dc->DrawLine(x - 10, y, x + 10, y);
-}
-
-
-void PanelViewTest::CreateBJTS(const wxString &type, const wxPoint &c)
-{
-    CreateBJT(type, c);
 }
 
 

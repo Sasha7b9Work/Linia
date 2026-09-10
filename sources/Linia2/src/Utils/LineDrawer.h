@@ -33,6 +33,8 @@ public:
 
     int LineToY(int y);
 
+    wxPoint LineTo(int x, int y);
+
     int LineOnDX(int dx);
 
     int GetX() const
