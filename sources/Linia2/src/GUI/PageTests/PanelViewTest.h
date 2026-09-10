@@ -34,7 +34,6 @@ public:
 private:
 
     static const int radius = 50;           // От этого значения и Center() идёт всё построение изображения
-    static const int WIDTH_CONTROL = 120;
     static const int d_combos = ButtonsCombo::HEIGHT + 5;         // Расстояние между элементами ввода по вертикали
 
     Test *test = nullptr;
@@ -105,10 +104,6 @@ private:
 
     // Нарисовать значок земли
     void DrawGround(int x, int y);
-
-    // Нарисовать окантовку для измерителя или источника. x, y - центр измерителя
-    // В x, y возвращаются координаты, с которых нужно выводить элементы управления
-    void DrawBorder(int &x, int &y, int radius, Dir::E, int num_controls);
 
     // Создать элементы управляения для данного теста
     void CreateControls();

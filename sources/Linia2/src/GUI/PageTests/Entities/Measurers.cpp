@@ -9,7 +9,14 @@
     name->SetPosition({ _x, _y });
 
 
-void MeasurerSourcer::Draw()
+MeasurerSourcer::MeasurerSourcer(Type::E _type, wxPaintDC &_dc, const wxPoint _center) :
+    type(_type), center(_center)
+{
+    Draw(_dc);
+}
+
+
+void MeasurerSourcer::Draw(wxPaintDC &dc)
 {
     dc.DrawCircle(center, radius);
 
@@ -49,4 +56,66 @@ void MeasurerSourcer::Draw()
 
         dc.DrawLine(center.x, center.y + radius - 5, center.x, center.y - radius + 6);
     }
+}
+
+
+void MeasurerSourcer::DrawBorder(wxPaintDC &dc, int &x, int &y, int r, Dir::E dir, int num_controls)
+{
+    const int d = 5;
+
+    PaintDC paint(dc);
+
+    paint.StorePenBrush();
+
+    dc.SetPen({ *wxBLACK, 1, wxPENSTYLE_SHORT_DASH });
+    dc.SetBrush(*wxTRANSPARENT_BRUSH);
+
+    int width = WIDTH_CONTROL + d * 2;
+    int height = (num_controls * (ButtonsCombo::HEIGHT + d)) + d;
+
+    if (dir == Dir::Left)
+    {
+        x -= WIDTH_CONTROL + 2 * d + r;
+        width += 2 * r + d;
+        y -= height / 2;
+        dc.DrawRectangle(x, y, width, height);
+        x += d;
+        y += d;
+    }
+    else if (dir == Dir::Up)
+    {
+        x = x - WIDTH_CONTROL / 2 - d;
+        y -= d + r + (ButtonsCombo::HEIGHT + d) * num_controls;
+        height += d + r * 2;
+
+        dc.DrawRectangle(x, y, width, height);
+
+        x += d;
+        y += d;
+    }
+    else if (dir == Dir::Right)
+    {
+        x -= r + d;
+        width += 2 * r + d;
+        y -= height / 2;
+
+        dc.DrawRectangle(x, y, width, height);
+
+        y += d;
+        x += d * 2 + r * 2;
+    }
+    if (dir == Dir::Down)
+    {
+        x = x - WIDTH_CONTROL / 2 - d;
+        y = y - d - r;
+        height += d + r * 2;
+
+        dc.DrawRectangle(x, y, width, height);
+
+        x += d;
+        y += d * 2 + r * 2;
+    }
+
+    paint.RestorePenBrush();
+
 }

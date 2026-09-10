@@ -148,23 +148,9 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 y_ground = driwer.GetY();
 
-//                CreateSourceBaseSubstrate(driwer.GetX(), y_source_I, MeasurerSourcer::Type::SourceI, Dir::Right,
-//                    &bcBaseSourceStartI, L("Ib старт"),
-//                    &bcBaseSourceStepI, L("Ib шаг"),
-//                    &bcBaseNumMeasures, L("N кривых"),
-//                    values);
+                amptermeterBase = new Ampermeter(*dc, { driwer.GetX(), y_meas_I });
 
-
-
-//                CreateSourceBaseSubstrate(driwer.GetX(), y_meas_I, MeasurerSourcer::Type::MeasI, Dir::Right,
-//                    &bcBaseMeasureRangeI, L("Ib диап"),
-//                    &bcBaseMeasureLimitI, L("Ib огр"),
-//                    values);
-
-//                CreateSourceBaseSubstrate(driwer.GetX(), y_source_U, MeasurerSourcer::Type::SourceU, Dir::Right,
-//                    &bcBaseSourceStartU, L("Ub старт"),
-//                    &bcBaseSourceStepU, L("Ub огр"),
-//                    values);
+                voltmeterBase = new Voltmeter(*dc, { driwer.GetX(), y_source_U });
 
                 driwer.MoveTo(coord_base.x + 150, coord_base.y);
 
@@ -174,10 +160,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 driwer.MoveToY(y_meas_U);
 
-//                CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasU, Dir::Left,
-//                    &bcBaseMeasureRangeU, L("Ub диап"),
-//                    &bcBaseMeasureLimitU, L("Ub огр"),
-//                    values);
+                sourceVoltageCurrentBase = new SourceVoltageCurrent(*dc, { driwer.GetX(), driwer.GetY() });
             }
         }
 
@@ -321,7 +304,7 @@ void PanelViewTest::CreateControls()
 
     int dx_substrate = 250;
 
-    int width = WIDTH_CONTROL;
+    int width = MeasurerSourcer::WIDTH_CONTROL;
 
 #define CREATE_BUTTONS_COMBO(name, title, num, func, _x, _y)  \
     name = new ButtonsCombo(this, title, width, titles, tooltips, num, #name, ButtonsCombo::Type::Text);    \
@@ -528,68 +511,6 @@ void PanelViewTest::OnChangedCollectorMeasureRangeU(wxCommandEvent &)
 
 void PanelViewTest::OnChangedCollectorMeasureLimitU(wxCommandEvent &)
 {
-
-}
-
-
-void PanelViewTest::DrawBorder(int &x, int &y, int r, Dir::E dir, int num_controls)
-{
-    const int d = 5;
-
-    PaintDC paint(*dc);
-
-    paint.StorePenBrush();
-
-    dc->SetPen({ *wxBLACK, 1, wxPENSTYLE_SHORT_DASH });
-    dc->SetBrush(*wxTRANSPARENT_BRUSH);
-
-    int width = WIDTH_CONTROL + d * 2;
-    int height = (num_controls * (ButtonsCombo::HEIGHT + d)) + d;
-
-    if (dir == Dir::Left)
-    {
-        x -= WIDTH_CONTROL + 2 * d + r;
-        width += 2 * r + d;
-        y -= height / 2;
-        dc->DrawRectangle(x, y, width, height);
-        x += d;
-        y += d;
-    }
-    else if (dir == Dir::Up)
-    {
-        x = x - WIDTH_CONTROL / 2 - d;
-        y -= d + r + (ButtonsCombo::HEIGHT + d) * num_controls;
-        height += d + r * 2;
-
-        dc->DrawRectangle(x, y, width, height);
-
-        x += d;
-        y += d;
-    }
-    else if (dir == Dir::Right)
-    {
-        x -= r + d;
-        width += 2 * r + d;
-        y -= height / 2;
-
-        dc->DrawRectangle(x, y, width, height);
-
-        y += d;
-        x += d * 2 + r * 2;
-    }
-    if (dir == Dir::Down)
-    {
-        x = x - WIDTH_CONTROL / 2 - d;
-        y = y - d - r;
-        height += d + r * 2;
-
-        dc->DrawRectangle(x, y, width, height);
-
-        x += d;
-        y += d * 2 + r * 2;
-    }
-
-    paint.RestorePenBrush();
 
 }
 

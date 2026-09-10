@@ -14,6 +14,8 @@ class MeasurerSourcer
 {
 public:
 
+    static const int WIDTH_CONTROL = 120;
+
     struct Type
     {
         enum E
@@ -27,12 +29,9 @@ public:
         };
     };
 
-    MeasurerSourcer(Type::E _type, wxPaintDC &_dc,
-        std::vector<ComboInput **> *_parametersU, std::vector<ComboInput **> *_parametersI, const wxPoint _center) :
-        type(_type), dc(_dc), center(_center), parametersU(_parametersU), parametersI(_parametersI)
-    {}
+    MeasurerSourcer(Type::E _type, wxPaintDC &_dc, const wxPoint _center);
 
-    void Draw();
+    void Draw(wxPaintDC &dc);
 
     int GetRadius() const
     {
@@ -42,11 +41,16 @@ public:
 protected:
 
     Type::E type;
-    wxPaintDC &dc;
     const int radius = 12;
     wxPoint center;
-    std::vector<ComboInput **> *parametersU;
-    std::vector<ComboInput **> *parametersI;
+    std::vector<ComboInput *> parametersU;
+    std::vector<ComboInput *> parametersI;
+
+private:
+
+    // Нарисовать окантовку для измерителя или источника. x, y - центр измерителя
+    // В x, y возвращаются координаты, с которых нужно выводить элементы управления
+    void DrawBorder(wxPaintDC &dc, int &x, int &y, int radius, Dir::E, int num_controls);
 };
 
 
@@ -55,8 +59,8 @@ class Voltmeter : public MeasurerSourcer
 {
 public:
 
-    Voltmeter(wxPaintDC &dc, std::vector<ComboInput **> *_parameters, const wxPoint _center) :
-        MeasurerSourcer(MeasurerSourcer::Type::MeasU, dc, _parameters, nullptr, _center)
+    Voltmeter(wxPaintDC &dc, const wxPoint _center) :
+        MeasurerSourcer(MeasurerSourcer::Type::MeasU, dc, _center)
     {}
 };
 
@@ -66,8 +70,8 @@ class Ampermeter : public MeasurerSourcer
 {
 public:
 
-    Ampermeter(wxPaintDC &dc, std::vector<ComboInput **> *_parameters, const wxPoint _center) :
-        MeasurerSourcer(MeasurerSourcer::Type::MeasI, dc, nullptr, _parameters, _center)
+    Ampermeter(wxPaintDC &dc, const wxPoint _center) :
+        MeasurerSourcer(MeasurerSourcer::Type::MeasI, dc, _center)
     {}
 };
 
@@ -77,8 +81,8 @@ class SourceVoltage : public MeasurerSourcer
 {
 public:
 
-    SourceVoltage(wxPaintDC &dc, std::vector<ComboInput **> *_parameters, const wxPoint _center) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceU, dc, _parameters, nullptr, _center)
+    SourceVoltage(wxPaintDC &dc, const wxPoint _center) :
+        MeasurerSourcer(MeasurerSourcer::Type::SourceU, dc, _center)
     {}
 };
 
@@ -88,8 +92,8 @@ class SourceCurrent : public MeasurerSourcer
 {
 public:
 
-    SourceCurrent(wxPaintDC &dc, std::vector<ComboInput **> *_parameters, const wxPoint _center) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceI, dc, nullptr, _parameters, _center)
+    SourceCurrent(wxPaintDC &dc, const wxPoint _center) :
+        MeasurerSourcer(MeasurerSourcer::Type::SourceI, dc, _center)
     {}
 };
 
@@ -98,7 +102,7 @@ class SourceVoltageCurrent : public MeasurerSourcer
 {
 public:
 
-    SourceVoltageCurrent(wxPaintDC &dc, std::vector<ComboInput **> *_parametersU, std::vector<ComboInput **> *_parametersI, const wxPoint _center) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceUI, dc, _parametersU, _parametersI, _center)
+    SourceVoltageCurrent(wxPaintDC &dc, const wxPoint _center) :
+        MeasurerSourcer(MeasurerSourcer::Type::SourceUI, dc, _center)
     {}
 };
