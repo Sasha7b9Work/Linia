@@ -69,11 +69,11 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
 
         if (dir == Dir::Left)
         {
-            btnDisable->SetPosition({ rect.x + rect.width - btnDisable->GetSize().x, rect.y });
+            btnDisable->SetPosition({ rect.x + rect.width - btnDisable->GetSize().x - 1, rect.y + 1});
         }
         else if (dir == Dir::Right)
         {
-            btnDisable->SetPosition({ rect.x, rect.y });
+            btnDisable->SetPosition({ rect.x + 1, rect.y +1 });
         }
 
         for (int i = 0; i < 5; i++)
