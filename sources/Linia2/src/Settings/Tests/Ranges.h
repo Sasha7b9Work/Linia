@@ -96,6 +96,7 @@ struct RangeI
         _40_50A,
         _100A,
         _200A,
+        _500A,
         Count
     };
 

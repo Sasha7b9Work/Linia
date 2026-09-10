@@ -140,22 +140,45 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
 
 void MeasurerSourcer::CreateParametersI()
 {
-    wxArrayString titles;
-    titles.push_back("2 мкА");
-    titles.push_back("5 мкA");
-    titles.push_back("10 мкА");
-    titles.push_back("20 мкА");
-    titles.push_back("50 мкА");
-    titles.push_back("100 мкА");
-    titles.push_back("200 мкА");
+    for (ComboInput *combo : parametersI)
+    {
+        combo->Destroy();
+    }
 
-    wxArrayString tooltips;
-    tooltips.push_back(L("Шаг изменения тока подложки"));
+    parametersI.clear();
 
-    ComboInput *combo = new ComboInput(ThePanelViewTest, L("Ток"), WIDTH_CONTROL, titles, tooltips, wxString::Format("combo"));
-    combo->SetPosition({ coord_controls.x, coord_controls.y });
+    if (chan == Chan::_B &&
+        (type == Type::MeasI || type == Type::MeasUI))
+    {
+        wxArrayString titles;
 
-    parametersI.push_back(combo);
+        for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+        {
+            titles.push_back(range.Name(RowRange::_125));
+        }
+
+        wxArrayString tooltips;
+        tooltips.push_back(L("Диапазон измерения тока базы"));
+
+        ComboInput *combo = new ComboInput(ThePanelViewTest, L("Предел"), WIDTH_CONTROL, titles, tooltips, wxString::Format("comboBaseMeasI"));
+
+        combo->SetPosition({ coord_controls.x, coord_controls.y });
+
+        parametersI.push_back(combo);
+    }
+    else
+    {
+        wxArrayString titles;
+        titles.push_back(" ");
+
+        wxArrayString tooltips;
+        tooltips.push_back(L("Шаг изменения тока подложки"));
+
+        ComboInput *combo = new ComboInput(ThePanelViewTest, L("Ток"), WIDTH_CONTROL, titles, tooltips, wxString::Format("combo"));
+        combo->SetPosition({ coord_controls.x, coord_controls.y });
+
+        parametersI.push_back(combo);
+    }
 }
 
 
