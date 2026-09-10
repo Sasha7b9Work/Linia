@@ -140,7 +140,7 @@ bool MeasurerSourcer::IsSetModeU() const
         LOG_ERROR("Not created button UI");
     }
 
-    return (btnModeUI->GetLabel() == wxString("U") ||
+    return (btnModeUI->GetLabel() == wxString("V") ||
         btnModeUI->GetLabel() == wxString("E"));
 }
 
@@ -206,19 +206,6 @@ void MeasurerSourcer::CreateParametersI()
 
         parametersI.push_back(combo);
     }
-    else
-    {
-        wxArrayString titles;
-        titles.push_back(" ");
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Шаг изменения тока подложки"));
-
-        ComboInput *combo = new ComboInput(ThePanelViewTest, L("I"), WIDTH_CONTROL, titles, tooltips, wxString::Format("combo"));
-        combo->SetPosition({ coord_controls.x, coord_controls.y });
-
-        parametersI.push_back(combo);
-    }
 }
 
 
@@ -249,19 +236,6 @@ void MeasurerSourcer::CreateParametersU()
         combo->SetPosition({ coord_controls.x, coord_controls.y });
 
         parametersU.push_back(combo);
-    }
-    else
-    {
-        wxArrayString titles;
-        titles.push_back(" ");
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Шаг изменения напряжение подложки"));
-
-        ComboInput *combo = new ComboInput(ThePanelViewTest, L("U"), WIDTH_CONTROL, titles, tooltips, wxString::Format("combo"));
-        combo->SetPosition({ coord_controls.x, coord_controls.y });
-
-        parametersI.push_back(combo);
     }
 }
 
