@@ -41,12 +41,6 @@ pchar Chan::Name() const
 }
 
 
-pchar ModeSource::Name(E mode)
-{
-    return mode == U ? "U" : "I";
-}
-
-
 pchar ModeMeas::Name(E mode)
 {
     return mode == U ? "U" : "I";

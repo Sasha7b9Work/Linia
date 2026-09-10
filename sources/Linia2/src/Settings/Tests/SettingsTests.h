@@ -77,20 +77,6 @@ struct TypeCommutation
 };
 
 
-// Режим источника
-struct ModeSource
-{
-    enum E
-    {
-        U,
-        I,
-        Count
-    };
-
-    static pchar Name(E);
-};
-
-
 // Режим измерителя
 struct ModeMeas
 {
