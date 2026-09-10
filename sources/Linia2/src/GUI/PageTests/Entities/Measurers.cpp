@@ -14,6 +14,8 @@
 MeasurerSourcer::MeasurerSourcer(Type::E _type, Chan::E _chan, const wxPoint _center, Dir::E _dir) :
     type(_type), chan(_chan), dir(_dir), center(_center)
 {
+    void CreateParametersI();
+    void CreateParametersU();
 }
 
 
@@ -96,27 +98,7 @@ void MeasurerSourcer::CreateControls(const wxRect &rect, int x, int y)
 
         CreateButtonDisable(rect, size, pos);
 
-        CreateButtonModeSourceUI(size, pos);
-
-        for (int i = 0; i < 5; i++)
-        {
-            wxArrayString titles;
-            titles.push_back("2 мкА");
-            titles.push_back("5 мкA");
-            titles.push_back("10 мкА");
-            titles.push_back("20 мкА");
-            titles.push_back("50 мкА");
-            titles.push_back("100 мкА");
-            titles.push_back("200 мкА");
-
-            wxArrayString tooltips;
-            tooltips.push_back(L("Шаг изменения тока подложки"));
-
-            ComboInput *combo = new ComboInput(ThePanelViewTest, L("Ток"), WIDTH_CONTROL, titles, tooltips, wxString::Format("combo%d", i));
-            combo->SetPosition({ x, y + i * (ButtonsCombo::HEIGHT + 5) });
-
-            parametersI.push_back(combo);
-        }
+        CreateButtonModeUI(size, pos);
     }
 }
 
@@ -154,7 +136,7 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
 }
 
 
-void MeasurerSourcer::CreateButtonModeSourceUI(const wxSize &size, const wxPoint &pos)
+void MeasurerSourcer::CreateButtonModeUI(const wxSize &size, const wxPoint &pos)
 {
     if (type == Type::SourceUI)
     {
@@ -172,6 +154,27 @@ void MeasurerSourcer::CreateButtonModeSourceUI(const wxSize &size, const wxPoint
                 {
                     btnModeUI->SetLabel("E");
                     btnModeUI->SetToolTip(L("Включён блок источника напряжения"));
+                }
+
+                event.Skip();
+            });
+    }
+    else if (type == Type::MeasUI)
+    {
+        btnModeUI = new Button(ThePanelViewTest, "V", size);
+        btnModeUI->SetPosition({ pos.x, pos.y + 25 });
+        btnModeUI->SetToolTip(L("Включён блок измерителя напряжения"));
+        btnModeUI->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
+            {
+                if (btnModeUI->GetLabel() == wxString("V"))
+                {
+                    btnModeUI->SetLabel("I");
+                    btnModeUI->SetToolTip(L("Включён блок измерителя тока"));
+                }
+                else
+                {
+                    btnModeUI->SetLabel("V");
+                    btnModeUI->SetToolTip(L("Включён блок измерителя напряжения"));
                 }
 
                 event.Skip();
