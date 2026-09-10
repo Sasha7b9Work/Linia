@@ -3,6 +3,7 @@
 #include "GUI/PageTests/Entities/Measurers.h"
 #include "Utils/GlobalFunctions.h"
 #include "GUI/Controls/ButtonCombo.h"
+#include "GUI/PageTests/PanelViewTest.h"
 
 
 #define CREATE_BUTTONS_COMBO_RANGE(name, title, _x, _y)             \
@@ -61,31 +62,45 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
     int x = center.x;
     int y = center.y;
 
-    DrawBorder(dc, x, y, radius, 5);
+    wxRect rect = DrawBorder(dc, x, y, radius, 5);
 
-    for (int i = 0; i < 5; i++)
+    if (parametersI.size() == 0)
     {
-        wxArrayString titles;
-        titles.push_back("2 мкА");
-        titles.push_back("5 мкA");
-        titles.push_back("10 мкА");
-        titles.push_back("20 мкА");
-        titles.push_back("50 мкА");
-        titles.push_back("100 мкА");
-        titles.push_back("200 мкА");
+        btnDisable = new Button(ThePanelViewTest, "x", { 20, 20 });
 
-        wxArrayString tooltips;
-        tooltips.push_back(L("Шаг изменения тока подложки"));
+        if (dir == Dir::Left)
+        {
+            btnDisable->SetPosition({ rect.x + rect.width - btnDisable->GetSize().x, rect.y });
+        }
+        else if (dir == Dir::Right)
+        {
+            btnDisable->SetPosition({ rect.x, rect.y });
+        }
 
-        ComboInput *combo = new ComboInput(ThePanelViewTest, L("Ток"), WIDTH_CONTROL, titles, tooltips, wxString::Format("combo%d", i));
-        combo->SetPosition({ x, y + i * (ButtonsCombo::HEIGHT + 5) });
+        for (int i = 0; i < 5; i++)
+        {
+            wxArrayString titles;
+            titles.push_back("2 мкА");
+            titles.push_back("5 мкA");
+            titles.push_back("10 мкА");
+            titles.push_back("20 мкА");
+            titles.push_back("50 мкА");
+            titles.push_back("100 мкА");
+            titles.push_back("200 мкА");
 
-        parametersI.push_back(combo);
+            wxArrayString tooltips;
+            tooltips.push_back(L("Шаг изменения тока подложки"));
+
+            ComboInput *combo = new ComboInput(ThePanelViewTest, L("Ток"), WIDTH_CONTROL, titles, tooltips, wxString::Format("combo%d", i));
+            combo->SetPosition({ x, y + i * (ButtonsCombo::HEIGHT + 5) });
+
+            parametersI.push_back(combo);
+        }
     }
 }
 
 
-void MeasurerSourcer::DrawBorder(wxPaintDC &dc, int &x, int &y, int r, int num_controls)
+wxRect MeasurerSourcer::DrawBorder(wxPaintDC &dc, int &x, int &y, int r, int num_controls)
 {
     const int d = 5;
 
@@ -99,44 +114,46 @@ void MeasurerSourcer::DrawBorder(wxPaintDC &dc, int &x, int &y, int r, int num_c
     int width = WIDTH_CONTROL + d * 2;
     int height = (num_controls * (ButtonsCombo::HEIGHT + d)) + d;
 
+    wxRect rect{ x, y, width, height };
+
     if (dir == Dir::Left)
     {
-        x -= WIDTH_CONTROL + 2 * d + r;
-        width += 2 * r + d;
-        y -= height / 2;
-        dc.DrawRectangle(x, y, width, height);
-        x += d;
-        y += d;
+        rect.x -= WIDTH_CONTROL + 2 * d + r;
+        rect.width += 2 * r + d;
+        rect.y -= height / 2;
+        dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
+        x = rect.x + d;
+        y = rect.y + d;
     }
     else if (dir == Dir::Up)
     {
-        x = x - WIDTH_CONTROL / 2 - d;
-        y -= d + r + (ButtonsCombo::HEIGHT + d) * num_controls;
-        height += d + r * 2;
+        rect.x = x - WIDTH_CONTROL / 2 - d;
+        rect.y -= d + r + (ButtonsCombo::HEIGHT + d) * num_controls;
+        rect.height += d + r * 2;
 
-        dc.DrawRectangle(x, y, width, height);
+        dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
 
         x += d;
         y += d;
     }
     else if (dir == Dir::Right)
     {
-        x -= r + d;
-        width += 2 * r + d;
-        y -= height / 2;
+        rect.x -= r + d;
+        rect.width += 2 * r + d;
+        rect.y -= height / 2;
 
-        dc.DrawRectangle(x, y, width, height);
+        dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
 
-        y += d;
-        x += d * 2 + r * 2;
+        y = rect.y + d;
+        x = rect.x + d * 2 + r * 2;
     }
     if (dir == Dir::Down)
     {
-        x = x - WIDTH_CONTROL / 2 - d;
-        y = y - d - r;
-        height += d + r * 2;
+        rect.x = x - WIDTH_CONTROL / 2 - d;
+        rect.y = y - d - r;
+        rect.height += d + r * 2;
 
-        dc.DrawRectangle(x, y, width, height);
+        dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
 
         x += d;
         y += d * 2 + r * 2;
@@ -144,4 +161,5 @@ void MeasurerSourcer::DrawBorder(wxPaintDC &dc, int &x, int &y, int r, int num_c
 
     paint.RestorePenBrush();
 
+    return rect;
 }

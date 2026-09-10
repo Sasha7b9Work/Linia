@@ -51,17 +51,19 @@ public:
 protected:
 
     Type::E type;
-    Dir::E dir;                             // Расположение органов управления относительно УГО измерителя/источника
+    Dir::E dir;                                 // Расположение органов управления относительно УГО измерителя/источника
     const int radius = 12;
     wxPoint center;
     std::vector<ComboInput *> parametersU;
     std::vector<ComboInput *> parametersI;
+    Button *btnDisable = nullptr;               // Кнопка отлючения измерителя/источника
 
 private:
 
     // Нарисовать окантовку для измерителя или источника. x, y - центр измерителя
     // В x, y возвращаются координаты, с которых нужно выводить элементы управления
-    void DrawBorder(wxPaintDC &dc, int &x, int &y, int radius, int num_controls);
+    // Возвращает прямоугльник окантовки
+    wxRect DrawBorder(wxPaintDC &dc, int &x, int &y, int radius, int num_controls);
 };
 
 
