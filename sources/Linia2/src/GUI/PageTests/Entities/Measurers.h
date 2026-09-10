@@ -62,6 +62,7 @@ protected:
     Button *btnDisable = nullptr;               // Кнопка отлючения измерителя/источника
     bool disabled = false;
     Button *btnModeUI = nullptr;                // В измерителе переключение между вольтметром и амперметров, в источнике - между источником тока и источником напряжения
+    wxPoint coord_controls;                     // Координаты комбобоксов
 
 private:
 
@@ -70,7 +71,7 @@ private:
     // Возвращает прямоугльник окантовки
     wxRect DrawBorder(wxPaintDC &dc, int &x, int &y, int radius, int num_controls);
 
-    void CreateControls(const wxRect &rect, int x, int y);
+    void CreateControls(const wxRect &rect);
 
     void CreateButtonDisable(const wxRect &rect, const wxSize &size, wxPoint &pos);
 

@@ -14,8 +14,6 @@
 MeasurerSourcer::MeasurerSourcer(Type::E _type, Chan::E _chan, const wxPoint _center, Dir::E _dir) :
     type(_type), chan(_chan), dir(_dir), center(_center)
 {
-    void CreateParametersI();
-    void CreateParametersU();
 }
 
 
@@ -64,12 +62,12 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
         }
     }
 
-    int x = center.x;
-    int y = center.y;
+    coord_controls.x = center.x;
+    coord_controls.y = center.y;
 
-    wxRect rect = DrawBorder(dc, x, y, radius, 5);
+    wxRect rect = DrawBorder(dc, coord_controls.x, coord_controls.y, radius, 5);
 
-    CreateControls(rect, x, y);
+    CreateControls(rect);
 
     for (ComboInput *combo : parametersI)
     {
@@ -88,11 +86,15 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
 }
 
 
-void MeasurerSourcer::CreateControls(const wxRect &rect, int x, int y)
+void MeasurerSourcer::CreateControls(const wxRect &rect)
 {
     if (parametersI.size() == 0 && parametersU.size() == 0)
     {
-        wxPoint pos{ x, y };
+        CreateParametersI();
+
+        CreateParametersU();
+
+        wxPoint pos{ coord_controls };
 
         wxSize size{ 20, 20 };
 
@@ -133,6 +135,33 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
     }
 
     btnDisable->SetPosition(pos);
+}
+
+
+void MeasurerSourcer::CreateParametersI()
+{
+    wxArrayString titles;
+    titles.push_back("2 мкА");
+    titles.push_back("5 мкA");
+    titles.push_back("10 мкА");
+    titles.push_back("20 мкА");
+    titles.push_back("50 мкА");
+    titles.push_back("100 мкА");
+    titles.push_back("200 мкА");
+
+    wxArrayString tooltips;
+    tooltips.push_back(L("Шаг изменения тока подложки"));
+
+    ComboInput *combo = new ComboInput(ThePanelViewTest, L("Ток"), WIDTH_CONTROL, titles, tooltips, wxString::Format("combo"));
+    combo->SetPosition({ coord_controls.x, coord_controls.y });
+
+    parametersI.push_back(combo);
+}
+
+
+void MeasurerSourcer::CreateParametersU()
+{
+
 }
 
 
