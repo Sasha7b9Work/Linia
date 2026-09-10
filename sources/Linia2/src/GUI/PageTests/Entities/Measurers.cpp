@@ -22,7 +22,7 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
     coord_controls.x = center.x;
     coord_controls.y = center.y;
 
-    wxRect rect = DrawBorder(dc, coord_controls.x, coord_controls.y, radius, 4);
+    wxRect rect = DrawBorder(dc, coord_controls.x, coord_controls.y, radius, CalculateNumControls());
 
     CreateControls(rect);
 
@@ -42,6 +42,17 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
     }
 
     DrawUGO(dc);
+}
+
+
+int MeasurerSourcer::CalculateNumControls() const
+{
+    if (type == Type::MeasI || type == Type::MeasU || type == Type::MeasUI)
+    {
+        return 2;
+    }
+
+    return 4;
 }
 
 
@@ -612,8 +623,8 @@ wxRect MeasurerSourcer::DrawBorder(wxPaintDC &dc, int &x, int &y, int r, int num
 
         dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
 
-        x += d;
-        y += d * 2 + r * 2;
+        x = rect.x + d;
+        y = rect.y + d * 2 + r * 2;
     }
 
     paint.RestorePenBrush();

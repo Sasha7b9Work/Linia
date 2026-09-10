@@ -93,6 +93,8 @@ private:
     void DrawUGO(wxPaintDC &dc);
 
     pchar SymbolUGO();
+
+    int CalculateNumControls() const;
 };
 
 
