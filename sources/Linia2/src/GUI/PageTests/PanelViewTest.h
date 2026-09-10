@@ -71,12 +71,10 @@ private:
 
     wxPoint GetCenter() const;
 
-    Ampermeter *amptermeterBase = nullptr;
-    Voltmeter *voltmeterBase = nullptr;
+    MeasurerVoltageCurrent *measurerBase = nullptr;
     SourceVoltageCurrent *sourceVoltageCurrentBase = nullptr;
 
-    Ampermeter *ampermeterSubstrate = nullptr;
-    Voltmeter *voltmeterSubstrate = nullptr;
+    MeasurerVoltageCurrent *measurerSubstrate = nullptr;
     SourceVoltageCurrent *sourceVoltateCurrentSubstrate = nullptr;
 
     Ampermeter *ampermeterCollector = nullptr;

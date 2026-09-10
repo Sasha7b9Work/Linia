@@ -36,6 +36,7 @@ public:
             SourceU,
             SourceI,
             SourceUI,
+            MeasUI,
             Count
         };
     };
@@ -95,6 +96,17 @@ public:
 
     Ampermeter(Chan::E _chan, const wxPoint _center, Dir::E _dir) :
         MeasurerSourcer(MeasurerSourcer::Type::MeasI, _chan, _center, _dir)
+    {}
+};
+
+
+// Измеритель и тока и напряжения
+class MeasurerVoltageCurrent : public MeasurerSourcer
+{
+public:
+
+    MeasurerVoltageCurrent(Chan::E _chan, const wxPoint _center, Dir::E dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::MeasUI, _chan, _center, dir)
     {}
 };
 

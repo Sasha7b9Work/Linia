@@ -82,7 +82,7 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
     const int x_vert = c.x - radius_trans * 10 / 18;                    // Здесь заканчивается линия базы внутри окружности
 
-    const wxPoint coord_base{ 80, c.y };
+    const wxPoint coord_base{ 40, c.y };
 
     dc->DrawLine(coord_base, { x_vert, c.y });               // База
 
@@ -147,12 +147,12 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
                 y_ground = driwer.GetY();
 
-                if (!amptermeterBase)
+                if (!measurerBase)
                 {
-                    amptermeterBase = new Ampermeter(Chan::_B, { driwer.GetX(), y_meas_I }, Dir::Right);
+                    measurerBase = new MeasurerVoltageCurrent(Chan::_B, { driwer.GetX(), y_meas_U }, Dir::Right);
                 }
 
-                amptermeterBase->Draw(*dc);
+                measurerBase->Draw(*dc);
 
                 if (!sourceVoltageCurrentBase)
                 {
@@ -160,21 +160,6 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
                 }
 
                 sourceVoltageCurrentBase->Draw(*dc);
-
-                driwer.MoveTo(coord_base.x + 150, coord_base.y);
-
-                driwer.LineToY(y_ground);
-
-                DrawGround(driwer.GetX(), driwer.GetY());
-
-                driwer.MoveToY(y_meas_U);
-
-                if (!voltmeterBase)
-                {
-                    voltmeterBase = new Voltmeter(Chan::_B, { driwer.GetX(), driwer.GetY() }, Dir::Left);
-                }
-
-                voltmeterBase->Draw(*dc);
             }
         }
 
@@ -185,25 +170,25 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
             int x = c.x + (c.x - x_vert) + radius_trans / 10;
 
-            dc->DrawLine(x, c.y - dy, x, c.y + dy);
+            dc->DrawLine(x, c.y - dy, x, c.y + dy);                 // Вертикальная линия подложки
 
             {
                 // Измеритель подложки
 
                 LineDriwer driwer(*dc, x, c.y);
-                driwer.LineOnDX(190);
+                driwer.LineOnDX(150);
                 driwer.LineToY(y_ground);
 
                 DrawGround(driwer.GetX(), driwer.GetY());
 
                 driwer.MoveOnDY(-470);
 
-                if (!ampermeterSubstrate)
+                if (!measurerSubstrate)
                 {
-                    ampermeterSubstrate = new Ampermeter(Chan::_S, { driwer.GetX(), y_meas_I }, Dir::Left);
+                    measurerSubstrate = new MeasurerVoltageCurrent(Chan::_S, { driwer.GetX(), y_meas_U }, Dir::Left);
                 }
 
-                ampermeterSubstrate->Draw(*dc);
+                measurerSubstrate->Draw(*dc);
 
                 if (!sourceVoltateCurrentSubstrate)
                 {
@@ -211,19 +196,6 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
                 }
 
                 sourceVoltateCurrentSubstrate->Draw(*dc);
-
-                driwer.MoveTo(GetCenter().x + 70, coord_base.y);
-
-                driwer.LineToY(y_ground);
-
-                DrawGround(driwer.GetX(), driwer.GetY());
-
-                if (!voltmeterSubstrate)
-                {
-                    voltmeterSubstrate = new Voltmeter(Chan::_S, { driwer.GetX(), y_meas_U }, Dir::Right);
-                }
-
-                voltmeterSubstrate->Draw(*dc);
             }
         }
     }
@@ -298,7 +270,7 @@ void PanelViewTest::DrawLineWithAngle(const wxPoint &start, double length, doubl
 
 wxPoint PanelViewTest::GetCenter() const
 {
-    return { 300, 200 };
+    return { 210, 200 };
 }
 
 
