@@ -11,22 +11,6 @@ const Chan ChB(Chan::_B);
 const Chan ChS(Chan::_S);
 
 
-bool TypeCategory::IsBCE()
-{
-    E v = Current();
-
-    return (v == BCE_N || v == BCE_P || v == BCSE_N || v == BCSE_P);
-}
-
-
-bool TypeCategory::IsGDS()
-{
-    E v = Current();
-
-    return (v == GDS_N || v == GDS_P || v == GDBS_N || v == GDBS_P);
-}
-
-
 pchar Chan::Name() const
 {
     static const pchar names[Count] =
@@ -105,40 +89,4 @@ pchar TypeScan::_NameGUI(E v)
     LOG_ERROR("Very big index");
 
     return "";
-}
-
-
-TypeCategory::E TypeCategory::Current()
-{
-    return TypeCategory::BCE_N;
-}
-
-
-bool Chan::IsVisible() const
-{
-    TypeCategory::E cat = TypeCategory::Current();
-
-    if (value == Chan::_B)
-    {
-        if (cat == TypeCategory::Diod || cat == TypeCategory::Resistor || cat == TypeCategory::Capacitor)
-        {
-            return false;
-        }
-    }
-
-    if (value == Chan::_S)
-    {
-        if (cat == TypeCategory::Diod ||
-            cat == TypeCategory::Resistor ||
-            cat == TypeCategory::Capacitor ||
-            cat == TypeCategory::BCE_N ||
-            cat == TypeCategory::BCE_P ||
-            cat == TypeCategory::GDS_N ||
-            cat == TypeCategory::GDS_P)
-        {
-            return false;
-        }
-    }
-
-    return true;
 }

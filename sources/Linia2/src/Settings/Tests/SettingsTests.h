@@ -10,25 +10,16 @@ struct TypeCategory
 {
     enum E
     {
-        BCE_N,          // Биполярный NPN-транзистор
-        BCE_P,          // Биполярный PNP-транзистор
-        GDS_N,          // Полевой NMOS-транзистор
-        GDS_P,          // Полевой PMOS-транзистор
-        BCSE_N,         // Биполярный NPN-транзистор четырёхполюсный
-        BCSE_P,         // Биполярный PNP-транзистор четырёхполюсный
-        GDBS_N,         // Полевой NMOS-транзистор четырёхполюсный
-        GDBS_P,         // Полевой PMOS-транзистор четырёхполюсный
-        Diod,
+        BJT,            // Биполярный транзистор
+        BJT4,           // Биполярный транзистор с четвёртым выводом
+        JFET,           // Полевой транзистор
+        JFET4,          // Полевой транзисото с четвёртым выводм
         Thyristor,
+        Diod,
         Resistor,
         Capacitor,
         Count
     };
-
-    static E Current();
-
-    static bool IsBCE();        // Биполярный транзистор
-    static bool IsGDS();        // Полевой транзистор
 };
 
 
@@ -46,8 +37,6 @@ struct Chan
     explicit Chan(E v) : value(v) { }
 
     E value;
-
-    bool IsVisible() const;
 
     pchar Name() const;
 
