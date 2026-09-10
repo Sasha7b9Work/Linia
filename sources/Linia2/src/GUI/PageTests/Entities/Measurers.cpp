@@ -26,14 +26,14 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
 
     CreateControls(rect);
 
-    for (ComboInput *combo : parametersI)
+    for (wxWindow *object : parametersI)
     {
-        combo->Enable(!disabled);
+        object->Enable(!disabled);
     }
 
-    for (ComboInput *combo : parametersU)
+    for (wxWindow *object : parametersU)
     {
-        combo->Enable(!disabled);
+        object->Enable(!disabled);
     }
 
     if (btnModeUI)
@@ -129,8 +129,8 @@ void MeasurerSourcer::ShowNeedParameters()
 {
     if (btnModeUI)
     {
-        std::vector<ComboInput *> *hidden = &parametersU;
-        std::vector<ComboInput *> *shownen = &parametersI;
+        std::vector<wxWindow *> *hidden = &parametersU;
+        std::vector<wxWindow *> *shownen = &parametersI;
 
         if (IsSetModeU())
         {
@@ -138,12 +138,12 @@ void MeasurerSourcer::ShowNeedParameters()
             shownen = &parametersU;
         }
 
-        for (ComboInput *combo : *hidden)
+        for (wxWindow *combo : *hidden)
         {
             combo->Hide();
         }
 
-        for (ComboInput *combo : *shownen)
+        for (wxWindow *combo : *shownen)
         {
             combo->Show();
         }
@@ -203,9 +203,9 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
 
 void MeasurerSourcer::CreateParametersI()
 {
-    for (ComboInput *combo : parametersI)
+    for (wxWindow *object : parametersI)
     {
-        combo->Destroy();
+        object->Destroy();
     }
 
     parametersI.clear();
@@ -224,7 +224,7 @@ void MeasurerSourcer::CreateParametersI()
 
             tooltips.push_back(L("Диапазон измерения тока базы"));
 
-            CREATE_COMBO(L("Предел"), "comboBaseMeasI", parametersI);
+            CREATE_COMBO(L("Ib макс"), "comboBaseMeasI", parametersI);
         }
         if (type == Type::SourceI || type == Type::SourceUI)
         {
@@ -233,7 +233,7 @@ void MeasurerSourcer::CreateParametersI()
 
             tooltips.push_back(L("Шаг"));
 
-            CREATE_COMBO(L("Шаг"), "comboBaseSourceI", parametersI);
+            CREATE_COMBO(L("Ib шаг"), "comboBaseSourceI", parametersI);
         }
     }
     else if (chan == Chan::_S)
@@ -278,9 +278,9 @@ void MeasurerSourcer::CreateParametersI()
 
 void MeasurerSourcer::CreateParametersU()
 {
-    for (ComboInput *combo : parametersU)
+    for (wxWindow *object : parametersU)
     {
-        combo->Destroy();
+        object->Destroy();
     }
 
     parametersU.clear();
@@ -299,7 +299,7 @@ void MeasurerSourcer::CreateParametersU()
 
             tooltips.push_back(L("Диапазон измерения напряжения базы"));
 
-            CREATE_COMBO(L("Предел"), "comboBaseMeasU", parametersU);
+            CREATE_COMBO(L("Ub макс"), "comboBaseMeasU", parametersU);
         }
         else if (type == Type::SourceU || type == Type::SourceUI)
         {
@@ -308,7 +308,7 @@ void MeasurerSourcer::CreateParametersU()
 
             tooltips.push_back(L("Шаг изменения испытательного напряжения"));
 
-            CREATE_COMBO(L("Шаг"), "comboBaseSourceU", parametersU);
+            CREATE_COMBO(L("Ub шаг"), "comboBaseSourceU", parametersU);
         }
     }
     else if (chan == Chan::_S)

@@ -57,8 +57,8 @@ protected:
     Dir::E dir;                                 // Расположение органов управления относительно УГО измерителя/источника
     const int radius = 12;
     wxPoint center;
-    std::vector<ComboInput *> parametersU;
-    std::vector<ComboInput *> parametersI;
+    std::vector<wxWindow *> parametersU;
+    std::vector<wxWindow *> parametersI;
     Button *btnDisable = nullptr;               // Кнопка отлючения измерителя/источника
     bool disabled = false;
     Button *btnModeUI = nullptr;                // В измерителе переключение между вольтметром и амперметров, в источнике - между источником тока и источником напряжения
