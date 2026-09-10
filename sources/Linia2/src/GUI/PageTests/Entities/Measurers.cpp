@@ -101,7 +101,47 @@ void MeasurerSourcer::CreateControls(const wxRect &rect)
         CreateButtonDisable(rect, size, pos);
 
         CreateButtonModeUI(size, pos);
+
+        ShowNeedParameters();
     }
+}
+
+
+void MeasurerSourcer::ShowNeedParameters()
+{
+    if (btnModeUI)
+    {
+        std::vector<ComboInput *> *hidden = &parametersU;
+        std::vector<ComboInput *> *shownen = &parametersI;
+
+        if (IsSetModeU())
+        {
+            hidden = &parametersI;
+            shownen = &parametersU;
+        }
+
+        for (ComboInput *combo : *hidden)
+        {
+            combo->Hide();
+        }
+
+        for (ComboInput *combo : *shownen)
+        {
+            combo->Show();
+        }
+    }
+}
+
+
+bool MeasurerSourcer::IsSetModeU() const
+{
+    if (!btnModeUI)
+    {
+        LOG_ERROR("Not created button UI");
+    }
+
+    return (btnModeUI->GetLabel() == wxString("U") ||
+        btnModeUI->GetLabel() == wxString("E"));
 }
 
 
@@ -174,7 +214,7 @@ void MeasurerSourcer::CreateParametersI()
         wxArrayString tooltips;
         tooltips.push_back(L("Шаг изменения тока подложки"));
 
-        ComboInput *combo = new ComboInput(ThePanelViewTest, L("Ток"), WIDTH_CONTROL, titles, tooltips, wxString::Format("combo"));
+        ComboInput *combo = new ComboInput(ThePanelViewTest, L("I"), WIDTH_CONTROL, titles, tooltips, wxString::Format("combo"));
         combo->SetPosition({ coord_controls.x, coord_controls.y });
 
         parametersI.push_back(combo);
@@ -184,7 +224,45 @@ void MeasurerSourcer::CreateParametersI()
 
 void MeasurerSourcer::CreateParametersU()
 {
+    for (ComboInput *combo : parametersU)
+    {
+        combo->Destroy();
+    }
 
+    parametersU.clear();
+
+    if (chan == Chan::_B &&
+        (type == Type::MeasU || type == Type::MeasUI))
+    {
+        wxArrayString titles;
+
+        for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+        {
+            titles.push_back(range.Name(RowRange::_124));
+        }
+
+        wxArrayString tooltips;
+        tooltips.push_back(L("Диапазон измерения напряжения базы"));
+
+        ComboInput *combo = new ComboInput(ThePanelViewTest, L("Предел"), WIDTH_CONTROL, titles, tooltips, wxString::Format("comboBaseMeasU"));
+
+        combo->SetPosition({ coord_controls.x, coord_controls.y });
+
+        parametersU.push_back(combo);
+    }
+    else
+    {
+        wxArrayString titles;
+        titles.push_back(" ");
+
+        wxArrayString tooltips;
+        tooltips.push_back(L("Шаг изменения напряжение подложки"));
+
+        ComboInput *combo = new ComboInput(ThePanelViewTest, L("U"), WIDTH_CONTROL, titles, tooltips, wxString::Format("combo"));
+        combo->SetPosition({ coord_controls.x, coord_controls.y });
+
+        parametersI.push_back(combo);
+    }
 }
 
 
@@ -208,6 +286,8 @@ void MeasurerSourcer::CreateButtonModeUI(const wxSize &size, const wxPoint &pos)
                     btnModeUI->SetToolTip(L("Включён блок источника напряжения"));
                 }
 
+                ShowNeedParameters();
+
                 event.Skip();
             });
     }
@@ -228,6 +308,8 @@ void MeasurerSourcer::CreateButtonModeUI(const wxSize &size, const wxPoint &pos)
                     btnModeUI->SetLabel("V");
                     btnModeUI->SetToolTip(L("Включён блок измерителя напряжения"));
                 }
+
+                ShowNeedParameters();
 
                 event.Skip();
             });
