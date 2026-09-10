@@ -67,6 +67,15 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
     {
         btnDisable = new Button(ThePanelViewTest, "x", { 20, 20 });
 
+        if (type == MeasurerSourcer::Type::MeasI || MeasurerSourcer::Type::MeasU)
+        {
+            btnDisable->SetToolTip(L("Включить/отключить блок измерителя"));
+        }
+        else
+        {
+            btnDisable->SetToolTip(L("Включить/отключить блок источника"));
+        }
+
         if (dir == Dir::Left)
         {
             btnDisable->SetPosition({ rect.x + rect.width - btnDisable->GetSize().x - 1, rect.y + 1});
