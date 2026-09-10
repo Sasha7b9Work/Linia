@@ -19,43 +19,47 @@ MeasurerSourcer::MeasurerSourcer(Type::E _type, const wxPoint _center, Dir::E _d
 
 void MeasurerSourcer::Draw(wxPaintDC &dc)
 {
-    dc.DrawCircle(center, radius);
-
-    dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
-
-    static const pchar labels[Type::Count] =
+    if (!disabled)
     {
-        "V",
-        "I",
-        "",
-        ""
-    };
+        dc.DrawCircle(center, radius);
 
-    GF::DrawTextInCenter(dc, labels[type], wxRect(wxPoint{center.x - radius, center.y - radius}, wxPoint{center.x + radius, center.y + radius}));
 
-    const int dY = 3;
+        dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
 
-    if (type == Type::SourceI)
-    {
-        const int ddY = 3;
+        static const pchar labels[Type::Count] =
+        {
+            "V",
+            "I",
+            "",
+            ""
+        };
 
-        dc.DrawLine(center.x, center.y - dY - ddY, center.x, center.y - radius);
-        dc.DrawLine(center.x, center.y + dY - ddY, center.x, center.y + radius);
+        GF::DrawTextInCenter(dc, labels[type], wxRect(wxPoint{ center.x - radius, center.y - radius }, wxPoint{ center.x + radius, center.y + radius }));
 
-        const int l = 5;
+        const int dY = 3;
 
-        dc.DrawLine(center.x, center.y - dY - ddY, center.x - l, center.y - dY + l - ddY);
-        dc.DrawLine(center.x, center.y - dY + dY - ddY, center.x - l, center.y - dY + l + dY - ddY);
+        if (type == Type::SourceI)
+        {
+            const int ddY = 3;
 
-        dc.DrawLine(center.x, center.y - dY - ddY, center.x + l, center.y - dY + l - ddY);
-        dc.DrawLine(center.x, center.y - dY + dY - ddY, center.x + l, center.y - dY + l + dY - ddY);
-    }
-    else if (type == Type::SourceU)
-    {
-        dc.DrawLine(center.x, center.y - radius + dY, center.x + dY, center.y + dY);
-        dc.DrawLine(center.x, center.y - radius + dY, center.x - dY, center.y + dY);
+            dc.DrawLine(center.x, center.y - dY - ddY, center.x, center.y - radius);
+            dc.DrawLine(center.x, center.y + dY - ddY, center.x, center.y + radius);
 
-        dc.DrawLine(center.x, center.y + radius - 5, center.x, center.y - radius + 6);
+            const int l = 5;
+
+            dc.DrawLine(center.x, center.y - dY - ddY, center.x - l, center.y - dY + l - ddY);
+            dc.DrawLine(center.x, center.y - dY + dY - ddY, center.x - l, center.y - dY + l + dY - ddY);
+
+            dc.DrawLine(center.x, center.y - dY - ddY, center.x + l, center.y - dY + l - ddY);
+            dc.DrawLine(center.x, center.y - dY + dY - ddY, center.x + l, center.y - dY + l + dY - ddY);
+        }
+        else if (type == Type::SourceU)
+        {
+            dc.DrawLine(center.x, center.y - radius + dY, center.x + dY, center.y + dY);
+            dc.DrawLine(center.x, center.y - radius + dY, center.x - dY, center.y + dY);
+
+            dc.DrawLine(center.x, center.y + radius - 5, center.x, center.y - radius + 6);
+        }
     }
 
     int x = center.x;
