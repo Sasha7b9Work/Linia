@@ -22,7 +22,7 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
     coord_controls.x = center.x;
     coord_controls.y = center.y;
 
-    wxRect rect = DrawBorder(dc, coord_controls.x, coord_controls.y, radius, 3);
+    wxRect rect = DrawBorder(dc, coord_controls.x, coord_controls.y, radius, 4);
 
     CreateControls(rect);
 
@@ -198,9 +198,11 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
 
 #define CREATE_COMBO(title, name, vec)                                                                  \
     ComboInput *combo = new ComboInput(ThePanelViewTest, title, WIDTH_CONTROL, titles, tooltips, name); \
-    combo->SetPosition({ coord_controls.x, y });                                         \
+    combo->SetPosition({ coord_controls.x, y });                                                        \
     vec.push_back(combo);                                                                               \
-    y += ButtonsCombo::HEIGHT + 5;
+    y += ButtonsCombo::HEIGHT + 5;                                                                      \
+    titles.clear();                                                                                     \
+    tooltips.clear();
 
 void MeasurerSourcer::CreateParametersI()
 {
@@ -248,6 +250,26 @@ void MeasurerSourcer::CreateParametersI()
                 parametersI.push_back(slider);
                 y += ButtonsCombo::HEIGHT + 5;
             }
+
+            {
+                titles.push_back(L("+"));
+                titles.push_back(L("-"));
+
+                tooltips.push_back(L("Полярность смещения"));
+
+                CREATE_COMBO(L("Полярность"), "comboBasePolarityI", parametersI);
+            }
+
+            {
+                for (int i = 1; i < 11; i++)
+                {
+                    titles.push_back(wxString::Format("%d", i));
+                }
+
+                tooltips.push_back(L("Количество ступенек"));
+
+                CREATE_COMBO(L("Количество ступенек"), "comboBaseNumSteps", parametersI);
+            }
         }
     }
     else if (chan == Chan::_S)
@@ -282,6 +304,26 @@ void MeasurerSourcer::CreateParametersI()
                 parametersI.push_back(slider);
                 y += ButtonsCombo::HEIGHT + 5;
             }
+
+            {
+                titles.push_back(L("+"));
+                titles.push_back(L("-"));
+
+                tooltips.push_back(L("Полярность смещения"));
+
+                CREATE_COMBO(L("Полярность"), "comboSubstratePolarityI", parametersI);
+            }
+
+            {
+                for (int i = 1; i < 11; i++)
+                {
+                    titles.push_back(wxString::Format("%d", i));
+                }
+
+                tooltips.push_back(L("Количество ступенек"));
+
+                CREATE_COMBO(L("Количество ступенек"), "comboSubstarteNumSteps", parametersI);
+            }
         }
     }
     else if (chan == Chan::_C)
@@ -293,9 +335,9 @@ void MeasurerSourcer::CreateParametersI()
                 titles.push_back(range.Name(RowRange::_125));
             }
 
-            tooltips.push_back(L("Диапазон измерения тока базы"));
+            tooltips.push_back(L("Диапазон измерения тока коллектора"));
 
-            CREATE_COMBO(L("Предел"), "comboBaseMeasI", parametersI);
+            CREATE_COMBO(L("Ic макс"), "comboBaseMeasI", parametersI);
         }
     }
 }
@@ -347,6 +389,26 @@ void MeasurerSourcer::CreateParametersU()
                 parametersU.push_back(slider);
                 y += ButtonsCombo::HEIGHT + 5;
             }
+
+            {
+                titles.push_back(L("+"));
+                titles.push_back(L("-"));
+
+                tooltips.push_back(L("Полярность смещения"));
+
+                CREATE_COMBO(L("Полярность"), "comboBasePolarityU", parametersU);
+            }
+
+            {
+                for (int i = 1; i < 11; i++)
+                {
+                    titles.push_back(wxString::Format("%d", i));
+                }
+
+                tooltips.push_back(L("Количество ступенек"));
+
+                CREATE_COMBO(L("Количество ступенек"), "comboBaseNumSteps", parametersU);
+            }
         }
     }
     else if (chan == Chan::_S)
@@ -358,9 +420,9 @@ void MeasurerSourcer::CreateParametersU()
                 titles.push_back(range.Name(RowRange::_124));
             }
 
-            tooltips.push_back(L("Диапазон измерения напряжения базы"));
+            tooltips.push_back(L("Диапазон измерения напряжения подложки"));
 
-            CREATE_COMBO(L("Предел"), "comboBaseMeasU", parametersU);
+            CREATE_COMBO(L("Us макс"), "comboBaseMeasU", parametersU);
         }
         else if (type == Type::SourceU || type == Type::SourceUI)
         {
@@ -370,7 +432,7 @@ void MeasurerSourcer::CreateParametersU()
 
                 tooltips.push_back(L("Шаг изменения испытательного напряжения"));
 
-                CREATE_COMBO(L("Шаг"), "comboBaseSourceU", parametersU);
+                CREATE_COMBO(L("Us шаг"), "comboBaseSourceU", parametersU);
             }
 
             {
@@ -380,6 +442,26 @@ void MeasurerSourcer::CreateParametersU()
                 slider->SetRange(0.0, 10.0, "mA", 2);
                 parametersU.push_back(slider);
                 y += ButtonsCombo::HEIGHT + 5;
+            }
+
+            {
+                titles.push_back(L("+"));
+                titles.push_back(L("-"));
+
+                tooltips.push_back(L("Полярность смещения"));
+
+                CREATE_COMBO(L("Полярность"), "comboSubstratePolarityU", parametersU);
+            }
+
+            {
+                for (int i = 1; i < 11; i++)
+                {
+                    titles.push_back(wxString::Format("%d", i));
+                }
+
+                tooltips.push_back(L("Количество ступенек"));
+
+                CREATE_COMBO(L("Количество ступенек"), "comboBaseNumSteps", parametersU);
             }
         }
     }
@@ -392,9 +474,9 @@ void MeasurerSourcer::CreateParametersU()
                 titles.push_back(range.Name(RowRange::_124));
             }
 
-            tooltips.push_back(L("Диапазон измерения напряжения базы"));
+            tooltips.push_back(L("Диапазон измерения напряжения коллектора"));
 
-            CREATE_COMBO(L("Предел"), "comboBaseMeasU", parametersU);
+            CREATE_COMBO(L("Uc макс"), "comboBaseMeasU", parametersU);
         }
         else if (type == Type::SourceU)
         {
@@ -404,7 +486,7 @@ void MeasurerSourcer::CreateParametersU()
 
                 tooltips.push_back(L("Шаг изменения испытательного напряжения"));
 
-                CREATE_COMBO(L("Шаг"), "comboBaseSourceU", parametersU);
+                CREATE_COMBO(L("Uc диапазон"), "comboBaseSourceU", parametersU);
             }
 
             {
