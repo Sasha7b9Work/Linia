@@ -330,38 +330,6 @@ void PanelViewTest::CreateControls()
         }
     }
 
-    {
-        if(!bcBaseModeControl)
-        {
-            wxArrayString titles;
-            titles.push_back(L("I"));
-            titles.push_back(L("U"));
-            titles.push_back(L("GND"));
-
-            wxArrayString tooltips;
-            tooltips.push_back(L("База управляется током"));
-            tooltips.push_back(L("База управляется напряжением"));
-            tooltips.push_back(L("База соединена с землёй"));
-
-            CREATE_BUTTONS_COMBO(bcBaseModeControl, L("Управление"), 1, OnChangedBaseModeControl, x_base, 120);
-        }
-
-        if (!bcSubstrateModeControl)
-        {
-            wxArrayString titles;
-            titles.push_back(L("I"));
-            titles.push_back(L("U"));
-            titles.push_back(L("GND"));
-
-            wxArrayString tooltips;
-            tooltips.push_back(L("Подложка управляется током"));
-            tooltips.push_back(L("Подложка управляется напряжением"));
-            tooltips.push_back(L("Подложка соединена с землёй"));
-
-            CREATE_BUTTONS_COMBO(bcSubstrateModeControl, L("Управление"), 1, OnChangedBaseModeControl, x_base + dx_substrate, 120);
-        }
-    }
-
     y_base += dy_base;
 
     dy_base = 35;
