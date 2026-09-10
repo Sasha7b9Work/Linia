@@ -86,10 +86,10 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
     dc->DrawLine(coord_base, { x_vert, c.y });               // База
 
-    int y0 = 150;
-    int y1 = 350;
-    int y2 = 550;
-    int y_ground = 700;
+    int y0 = 290;
+    int y1 = 410;
+    int y2 = 530;
+    int y_ground = 720;
 
     {
         // Рисуем транзистор
@@ -141,7 +141,7 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
                 LineDriwer driwer(*dc, coord_base.x, coord_base.y);
 
-                driwer.LineOnDY(500);
+                driwer.LineToY(y_ground);
 
                 DrawGround(driwer.GetX(), driwer.GetY());
 
@@ -258,7 +258,7 @@ void PanelViewTest::DrawLineWithAngle(const wxPoint &start, double length, doubl
 
 wxPoint PanelViewTest::GetCenter() const
 {
-    return { 210, 200 };
+    return { 210, 300 };
 }
 
 

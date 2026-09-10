@@ -52,7 +52,7 @@ int MeasurerSourcer::CalculateNumControls() const
         return 2;
     }
 
-    return 4;
+    return 5;
 }
 
 
@@ -201,6 +201,10 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
     else if (dir == Dir::Right)
     {
         pos = { rect.x + 1, rect.y + 1 };
+    }
+    else if (dir == Dir::Down)
+    {
+        pos = { rect.x + 1 + rect.width - 22, rect.y + 1 };
     }
 
     btnDisable->SetPosition(pos);
@@ -590,7 +594,7 @@ wxRect MeasurerSourcer::DrawBorder(wxPaintDC &dc, int &x, int &y, int r, int num
 
     paint.StorePenBrush();
 
-    dc.SetPen({ disabled ? wxColour(100, 100, 100) : (*wxBLACK), 1, wxPENSTYLE_SHORT_DASH});
+    dc.SetPen({ disabled ? wxColour(192, 192, 192) : (*wxBLACK), 1, wxPENSTYLE_SHORT_DASH});
     dc.SetBrush(*wxTRANSPARENT_BRUSH);
 
     int width = WIDTH_CONTROL + d * 2;
