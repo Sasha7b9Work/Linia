@@ -84,6 +84,7 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
     driwer.MoveOnDY(-20);
     point_emitter = driwer.GetCoord();
     dc->DrawCircle(point_emitter, r);
+    dc->DrawText("E", { point_emitter.x + 7, point_emitter.y - 7 });
     dc->DrawCircle(c, radius_trans);
     const int x_vert = c.x - radius_trans * 10 / 18;                        // Здесь заканчивается линия базы внутри окружности
     wxPoint coord_base{ 90, c.y };
@@ -92,6 +93,7 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
     driwer.MoveOnDX(-50);
     point_base = driwer.GetCoord();
     dc->DrawCircle(point_base, r);
+    dc->DrawText("B", { point_base.x - 3, point_base.y - 20 });
 
     int y0 = 290;
     int y1 = 410;
@@ -185,6 +187,7 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
                 driwer.MoveOnDX(-100);
                 point_substrate = driwer.GetCoord();
                 dc->DrawCircle(point_substrate, r);
+                dc->DrawText("Substr", { point_substrate.x - 20, point_substrate.y - 23 });
                 driwer.Restore();
 
                 driwer.LineToY(y_ground);
@@ -216,6 +219,7 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
         driwer.MoveOnDY(25);
         point_collector = driwer.GetCoord();
         dc->DrawCircle(point_collector, r);
+        dc->DrawText("C", { point_collector.x + 7, point_collector.y - 9});
         driwer.Restore();
         driwer.LineOnDX(355);
         driwer.LineToY(y_ground);
