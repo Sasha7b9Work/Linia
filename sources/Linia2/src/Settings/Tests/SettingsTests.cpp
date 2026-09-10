@@ -41,12 +41,6 @@ pchar Chan::Name() const
 }
 
 
-pchar ModeMeas::Name(E mode)
-{
-    return mode == U ? "U" : "I";
-}
-
-
 pchar TypeScan::NameShort(E v)
 {
     static const pchar names[Count] =

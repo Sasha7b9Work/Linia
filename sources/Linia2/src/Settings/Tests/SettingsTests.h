@@ -63,20 +63,6 @@ extern const Chan ChB;
 extern const Chan ChS;
 
 
-// Режим измерителя
-struct ModeMeas
-{
-    enum E
-    {
-        U,
-        I,
-        Count
-    };
-
-    static pchar Name(E);
-};
-
-
 // Тип развёртки
 struct TypeScan
 {
