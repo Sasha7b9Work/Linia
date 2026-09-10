@@ -39,7 +39,7 @@ public:
         };
     };
 
-    MeasurerSourcer(Type::E _type, wxPaintDC &_dc, const wxPoint _center, Dir::E);
+    MeasurerSourcer(Type::E _type, const wxPoint _center, Dir::E);
 
     void Draw(wxPaintDC &dc);
 
@@ -72,8 +72,8 @@ class Voltmeter : public MeasurerSourcer
 {
 public:
 
-    Voltmeter(wxPaintDC &dc, const wxPoint _center, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::MeasU, dc, _center, _dir)
+    Voltmeter(const wxPoint _center, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::MeasU, _center, _dir)
     {}
 };
 
@@ -83,8 +83,8 @@ class Ampermeter : public MeasurerSourcer
 {
 public:
 
-    Ampermeter(wxPaintDC &dc, const wxPoint _center, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::MeasI, dc, _center, _dir)
+    Ampermeter(const wxPoint _center, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::MeasI, _center, _dir)
     {}
 };
 
@@ -94,8 +94,8 @@ class SourceVoltage : public MeasurerSourcer
 {
 public:
 
-    SourceVoltage(wxPaintDC &dc, const wxPoint _center, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceU, dc, _center, _dir)
+    SourceVoltage(const wxPoint _center, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::SourceU, _center, _dir)
     {}
 };
 
@@ -105,8 +105,8 @@ class SourceCurrent : public MeasurerSourcer
 {
 public:
 
-    SourceCurrent(wxPaintDC &dc, const wxPoint _center, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceI, dc, _center, _dir)
+    SourceCurrent(const wxPoint _center, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::SourceI, _center, _dir)
     {}
 };
 
@@ -115,7 +115,7 @@ class SourceVoltageCurrent : public MeasurerSourcer
 {
 public:
 
-    SourceVoltageCurrent(wxPaintDC &dc, const wxPoint _center, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceUI, dc, _center, _dir)
+    SourceVoltageCurrent(const wxPoint _center, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::SourceUI, _center, _dir)
     {}
 };

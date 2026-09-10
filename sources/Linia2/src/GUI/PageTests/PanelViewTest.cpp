@@ -27,7 +27,7 @@ void PanelViewTest::SetTest(Test *_test)
 
 void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 {
-    if (test && !created)
+    if (test)
     {
         dc = new wxPaintDC(this);
 
@@ -50,8 +50,6 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 
         delete dc;
         dc = nullptr;
-
-        created = true;
     }
 
     event.Skip();
@@ -149,9 +147,19 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
                 y_ground = driwer.GetY();
 
-                amptermeterBase = new Ampermeter(*dc, { driwer.GetX(), y_meas_I }, Dir::Right);
+                if (!amptermeterBase)
+                {
+                    amptermeterBase = new Ampermeter({ driwer.GetX(), y_meas_I }, Dir::Right);
+                }
 
-                sourceVoltageCurrentBase = new SourceVoltageCurrent(*dc, { driwer.GetX(), y_source_U }, Dir::Right);
+                amptermeterBase->Draw(*dc);
+
+                if (!sourceVoltageCurrentBase)
+                {
+                    sourceVoltageCurrentBase = new SourceVoltageCurrent({ driwer.GetX(), y_source_U }, Dir::Right);
+                }
+
+                sourceVoltageCurrentBase->Draw(*dc);
 
                 driwer.MoveTo(coord_base.x + 150, coord_base.y);
 
@@ -161,7 +169,12 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
                 driwer.MoveToY(y_meas_U);
 
-                voltmeterBase = new Voltmeter(*dc, { driwer.GetX(), driwer.GetY() }, Dir::Left);
+                if (!voltmeterBase)
+                {
+                    voltmeterBase = new Voltmeter({ driwer.GetX(), driwer.GetY() }, Dir::Left);
+                }
+
+                voltmeterBase->Draw(*dc);
             }
         }
 
@@ -185,9 +198,19 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
                 driwer.MoveOnDY(-470);
 
-                ampermeterSubstrate = new Ampermeter(*dc, { driwer.GetX(), y_meas_I }, Dir::Left);
+                if (!ampermeterSubstrate)
+                {
+                    ampermeterSubstrate = new Ampermeter({ driwer.GetX(), y_meas_I }, Dir::Left);
+                }
 
-                sourceVoltateCurrentSubstrate = new SourceVoltageCurrent(*dc, { driwer.GetX(), y_source_U }, Dir::Left);
+                ampermeterSubstrate->Draw(*dc);
+
+                if (!sourceVoltateCurrentSubstrate)
+                {
+                    sourceVoltateCurrentSubstrate = new SourceVoltageCurrent({ driwer.GetX(), y_source_U }, Dir::Left);
+                }
+
+                sourceVoltateCurrentSubstrate->Draw(*dc);
 
                 driwer.MoveTo(GetCenter().x + 70, coord_base.y);
 
@@ -195,7 +218,12 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
                 DrawGround(driwer.GetX(), driwer.GetY());
 
-                voltmeterSubstrate = new Voltmeter(*dc, { driwer.GetX(), y_meas_U }, Dir::Right);
+                if (!voltmeterSubstrate)
+                {
+                    voltmeterSubstrate = new Voltmeter({ driwer.GetX(), y_meas_U }, Dir::Right);
+                }
+
+                voltmeterSubstrate->Draw(*dc);
             }
         }
     }
@@ -213,9 +241,19 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
         DrawGround(driwer.GetX(), driwer.GetY());
 
-        ampermeterCollector = new Ampermeter(*dc, { driwer.GetX(), y_meas_I }, Dir::Left);
+        if (!ampermeterCollector)
+        {
+            ampermeterCollector = new Ampermeter({ driwer.GetX(), y_meas_I }, Dir::Left);
+        }
 
-        sourceVoltageCollector = new SourceVoltage(*dc, { driwer.GetX(), y_source_U }, Dir::Left);
+        ampermeterCollector->Draw(*dc);
+
+        if (!sourceVoltageCollector)
+        {
+            sourceVoltageCollector = new SourceVoltage({ driwer.GetX(), y_source_U }, Dir::Left);
+        }
+
+        sourceVoltageCollector->Draw(*dc);
 
         driwer.MoveToY(y_col);
 
@@ -225,7 +263,12 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
         DrawGround(driwer.GetX(), driwer.GetY());
 
-        voltmeterCollector = new Voltmeter(*dc, { driwer.GetX(), y_meas_U }, Dir::Right);
+        if (!voltmeterCollector)
+        {
+            voltmeterCollector = new Voltmeter({ driwer.GetX(), y_meas_U }, Dir::Right);
+        }
+
+        voltmeterCollector->Draw(*dc);
     }
 }
 
@@ -487,148 +530,6 @@ void PanelViewTest::OnChangedCollectorMeasureLimitU(wxCommandEvent &)
 {
 
 }
-
-
-/*
-MeasurerSourcer *PanelViewTest::CreateSourceBaseSubstrate(
-    int x, int y, MeasurerSourcer::Type::E type, Dir::E dir,
-    ComboInput **start, const wxString &label_start,
-    ComboInput **step, const wxString &label_step,
-    std::vector<std::vector<double>> values)
-{
-    std::vector<ComboInput *> inputs
-    {
-        *start,
-        *step
-    };
-
-    MeasurerSourcer *meas_sourc = new MeasurerSourcer(type, *dc, inputs, { x, y });
-
-    meas_sourc->Draw();
-
-    DrawBorder(x, y, meas_sourc->GetRadius(), dir, 2);
-
-    if (!(*start))
-    {
-        wxArrayString titles;
-        titles.push_back("2 мкА");
-        titles.push_back("5 мкA");
-        titles.push_back("10 мкА");
-        titles.push_back("20 мкА");
-        titles.push_back("50 мкА");
-        titles.push_back("100 мкА");
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Начальное значение тока подложки"));
-
-//        CREATE_BUTTONS_COMBO_RANGE((*start), label_start, x, y);
-
-//        MeasurerSourcer
-    }
-
-    y += d_combos;
-
-    if (!(*step))
-    {
-        wxArrayString titles;
-        titles.push_back("2 мкА");
-        titles.push_back("5 мкA");
-        titles.push_back("10 мкА");
-        titles.push_back("20 мкА");
-        titles.push_back("50 мкА");
-        titles.push_back("100 мкА");
-        titles.push_back("200 мкА");
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Шаг изменения тока подложки"));
-
-        CREATE_BUTTONS_COMBO_RANGE((*step), label_step, x, y);
-    }
-
-    return meas_sourc;
-}
-*/
-
-/*
-void PanelViewTest::CreateSourceBaseSubstrate(
-    int x, int y, MeasurerSourcer::Type::E type, Dir::E dir,
-    ComboInput **start, const wxString &label_start,
-    ComboInput **step, const wxString &label_step,
-    ComboInput **num_curves, const wxString &label_num_curves)
-{
-    std::vector<ComboInput *> inputs
-    {
-        *start,
-        *step,
-        *num_curves
-    };
-
-    MeasurerSourcer *meas_sourc = new MeasurerSourcer(type, *dc, inputs, { x, y });
-
-    meas_sourc->Draw();
-
-    DrawBorder(x, y, meas_sourc->GetRadius(), dir, 3);
-
-    delete meas_sourc;
-
-    if (!(*start))
-    {
-        wxArrayString titles;
-        titles.push_back("2 мкА");
-        titles.push_back("5 мкA");
-        titles.push_back("10 мкА");
-        titles.push_back("20 мкА");
-        titles.push_back("50 мкА");
-        titles.push_back("100 мкА");
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Начальное значение тока подложки"));
-
-        CREATE_BUTTONS_COMBO_RANGE((*start), label_start, x, y);
-    }
-
-    y += d_combos;
-
-    if (!(*step))
-    {
-        wxArrayString titles;
-        titles.push_back("2 мкА");
-        titles.push_back("5 мкA");
-        titles.push_back("10 мкА");
-        titles.push_back("20 мкА");
-        titles.push_back("50 мкА");
-        titles.push_back("100 мкА");
-        titles.push_back("200 мкА");
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Шаг изменения тока подложки"));
-
-        CREATE_BUTTONS_COMBO_RANGE((*step), label_step, x, y);
-    }
-
-    y += d_combos;
-
-    if (num_curves && !(*num_curves))
-    {
-        wxArrayString titles;
-        titles.push_back("1");
-        titles.push_back("2");
-        titles.push_back("3");
-        titles.push_back("4");
-        titles.push_back("5");
-        titles.push_back("6");
-        titles.push_back("7");
-        titles.push_back("8");
-        titles.push_back("9");
-        titles.push_back("10");
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Количество измерений"));
-
-        CREATE_BUTTONS_COMBO_RANGE((*num_curves), label_num_curves, x, y);
-    }
-}
-*/
 
 
 int PanelViewTest::CalculateCombos(ComboInput **c1, ComboInput **c2, ComboInput **c3, ComboInput **c4)

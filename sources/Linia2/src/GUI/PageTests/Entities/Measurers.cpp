@@ -11,10 +11,9 @@
     name->SetPosition({ _x, _y });
 
 
-MeasurerSourcer::MeasurerSourcer(Type::E _type, wxPaintDC &_dc, const wxPoint _center, Dir::E _dir) :
+MeasurerSourcer::MeasurerSourcer(Type::E _type, const wxPoint _center, Dir::E _dir) :
     type(_type), dir(_dir), center(_center)
 {
-    Draw(_dc);
 }
 
 

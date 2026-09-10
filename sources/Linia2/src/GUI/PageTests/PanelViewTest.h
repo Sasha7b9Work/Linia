@@ -82,6 +82,4 @@ private:
     Ampermeter *ampermeterCollector = nullptr;
     Voltmeter *voltmeterCollector = nullptr;
     SourceVoltage *sourceVoltageCollector = nullptr;
-
-    bool created = false;
 };
