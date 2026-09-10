@@ -94,36 +94,7 @@ void MeasurerSourcer::CreateControls(const wxRect &rect, int x, int y)
 
         wxSize size{ 20, 20 };
 
-        {
-            btnDisable = new Button(ThePanelViewTest, "x", size);
-
-            if (type == MeasurerSourcer::Type::MeasI || MeasurerSourcer::Type::MeasU)
-            {
-                btnDisable->SetToolTip(L("Включить/отключить блок измерителя"));
-            }
-            else
-            {
-                btnDisable->SetToolTip(L("Включить/отключить блок источника"));
-            }
-
-            btnDisable->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
-                {
-                    disabled = !disabled;
-                    ThePanelViewTest->Refresh();
-                    event.Skip();
-                });
-
-            if (dir == Dir::Left)
-            {
-                pos = { rect.x + rect.width - btnDisable->GetSize().x - 1, rect.y + 1 };
-            }
-            else if (dir == Dir::Right)
-            {
-                pos = { rect.x + 1, rect.y + 1 };
-            }
-
-            btnDisable->SetPosition(pos);
-        }
+        CreateButtonDisable(rect, size, pos);
 
         if (type == Type::SourceUI)
         {
@@ -167,6 +138,39 @@ void MeasurerSourcer::CreateControls(const wxRect &rect, int x, int y)
             parametersI.push_back(combo);
         }
     }
+}
+
+
+void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size, wxPoint &pos)
+{
+    btnDisable = new Button(ThePanelViewTest, "x", size);
+
+    if (type == MeasurerSourcer::Type::MeasI || MeasurerSourcer::Type::MeasU)
+    {
+        btnDisable->SetToolTip(L("Включить/отключить блок измерителя"));
+    }
+    else
+    {
+        btnDisable->SetToolTip(L("Включить/отключить блок источника"));
+    }
+
+    btnDisable->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
+        {
+            disabled = !disabled;
+            ThePanelViewTest->Refresh();
+            event.Skip();
+        });
+
+    if (dir == Dir::Left)
+    {
+        pos = { rect.x + rect.width - btnDisable->GetSize().x - 1, rect.y + 1 };
+    }
+    else if (dir == Dir::Right)
+    {
+        pos = { rect.x + 1, rect.y + 1 };
+    }
+
+    btnDisable->SetPosition(pos);
 }
 
 

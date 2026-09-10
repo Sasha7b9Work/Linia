@@ -70,6 +70,8 @@ private:
     wxRect DrawBorder(wxPaintDC &dc, int &x, int &y, int radius, int num_controls);
 
     void CreateControls(const wxRect &rect, int x, int y);
+
+    void CreateButtonDisable(const wxRect &rect, const wxSize &size, wxPoint &pos);
 };
 
 
