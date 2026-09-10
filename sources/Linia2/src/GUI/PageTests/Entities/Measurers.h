@@ -2,6 +2,7 @@
 #pragma once
 #include "Settings/Tests/Ranges.h"
 #include "GUI/Controls/ButtonCombo.h"
+#include "GUI/Controls/Slider.h"
 #pragma warning(push, 0)
     #include <wx/dcclient.h>
 #pragma warning(pop)

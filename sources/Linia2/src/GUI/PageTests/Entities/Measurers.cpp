@@ -198,8 +198,9 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
 
 #define CREATE_COMBO(title, name, vec)                                                                  \
     ComboInput *combo = new ComboInput(ThePanelViewTest, title, WIDTH_CONTROL, titles, tooltips, name); \
-    combo->SetPosition({ coord_controls.x, coord_controls.y });                                         \
-    vec.push_back(combo);
+    combo->SetPosition({ coord_controls.x, y });                                         \
+    vec.push_back(combo);                                                                               \
+    y += ButtonsCombo::HEIGHT + 5;
 
 void MeasurerSourcer::CreateParametersI()
 {
@@ -212,6 +213,8 @@ void MeasurerSourcer::CreateParametersI()
 
     wxArrayString titles;
     wxArrayString tooltips;
+
+    int y = coord_controls.y;
 
     if (chan == Chan::_B)
     {
@@ -228,12 +231,22 @@ void MeasurerSourcer::CreateParametersI()
         }
         if (type == Type::SourceI || type == Type::SourceUI)
         {
-            titles.push_back("1 нА");
-            titles.push_back("2 нА");
+            {
+                titles.push_back("1 нА");
+                titles.push_back("2 нА");
 
-            tooltips.push_back(L("Шаг"));
+                tooltips.push_back(L("Шаг"));
 
-            CREATE_COMBO(L("Ib шаг"), "comboBaseSourceI", parametersI);
+                CREATE_COMBO(L("Ib шаг"), "comboBaseSourceI", parametersI);
+            }
+
+            {
+                SliderFloat *slider = new SliderFloat(ThePanelViewTest, 300, L("Смещение"));
+                slider->SetPosition({ coord_controls.x, y });
+                slider->SetRange(0.0, 11.0, "mA", 2);
+                parametersI.push_back(slider);
+                y += ButtonsCombo::HEIGHT + 5;
+            }
         }
     }
     else if (chan == Chan::_S)
@@ -287,6 +300,8 @@ void MeasurerSourcer::CreateParametersU()
 
     wxArrayString titles;
     wxArrayString tooltips;
+
+    int y = coord_controls.y;
 
     if (chan == Chan::_B)
     {
