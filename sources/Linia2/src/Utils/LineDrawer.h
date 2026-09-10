@@ -22,11 +22,15 @@ public:
 
     void MoveOnDY(int dy)
     {
+        Store();
+
         coord.y += dy;
     }
 
     void MoveOnDX(int dx)
     {
+        Store();
+
         coord.x += dx;
     }
 
@@ -54,8 +58,19 @@ public:
         return coord;
     }
 
+    void Restore()
+    {
+        coord = prev_coord;
+    }
+
+    void Store()
+    {
+        prev_coord = coord;
+    }
+
 private:
 
     wxPaintDC &dc;
     wxPoint coord;
+    wxPoint prev_coord;
 };

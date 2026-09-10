@@ -73,31 +73,24 @@ void PanelViewTest::CreateElement()
 
 void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &point_base, wxPoint &point_collector, wxPoint &point_substrate, wxPoint &point_emitter)
 {
+    int r = 5;
+
     int x_col = c.x + radius_trans / 2;   // / Координаты точки коммутации
     int y_col = c.y - 2 * radius_trans;   // / с коллектором
 
     LineDriwer driwer(*dc, x_col, y_col);
-
     driwer.LineTo(c.x + radius_trans / 2, c.y + 2 * radius_trans);          // Вертикальная линия, которая выходит из коллектора и эмиттера
-
     DrawGround(driwer.GetX(), driwer.GetY());
-
+    driwer.MoveOnDY(-20);
+    point_emitter = driwer.GetCoord();
+    dc->DrawCircle(point_emitter, r);
     dc->DrawCircle(c, radius_trans);
-
     const int x_vert = c.x - radius_trans * 10 / 18;                        // Здесь заканчивается линия базы внутри окружности
-
     wxPoint coord_base{ 90, c.y };
-
     driwer.MoveTo(90, c.y);
-
     driwer.LineTo(x_vert, c.y);                                             // База
-
     driwer.MoveOnDX(-50);
-
-    int r = 5;
-
     point_base = driwer.GetCoord();
-
     dc->DrawCircle(point_base, r);
 
     int y0 = 290;
@@ -179,18 +172,22 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
             // Подложка
 
             int dy = radius_trans * 4 / 16;
-
             int x = c.x + (c.x - x_vert) + radius_trans / 10;
-
-            dc->DrawLine(x, c.y - dy, x, c.y + dy);                 // Вертикальная линия подложки
+            driwer.MoveTo({ x, c.y - dy });
+            driwer.LineToY(c.y + dy);                                   // Вертикальная линия подложки
 
             {
                 // Измеритель подложки
 
                 driwer.MoveTo(x, c.y);
                 driwer.LineOnDX(150);
-                driwer.LineToY(y_ground);
 
+                driwer.MoveOnDX(-100);
+                point_substrate = driwer.GetCoord();
+                dc->DrawCircle(point_substrate, r);
+                driwer.Restore();
+
+                driwer.LineToY(y_ground);
                 DrawGround(driwer.GetX(), driwer.GetY());
 
                 driwer.MoveOnDY(-470);
@@ -216,19 +213,12 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
         // Рисуем цепь коллектора
 
         driwer.MoveTo(x_col, y_col);
-
         driwer.MoveOnDY(25);
-
         point_collector = driwer.GetCoord();
-
         dc->DrawCircle(point_collector, r);
-
-        driwer.MoveOnDY(-25);
-
+        driwer.Restore();
         driwer.LineOnDX(355);
-
         driwer.LineToY(y_ground);
-
         DrawGround(driwer.GetX(), driwer.GetY());
 
         if (!ampermeterCollector)
