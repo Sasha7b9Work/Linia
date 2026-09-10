@@ -75,6 +75,12 @@ private:
     void CreateButtonDisable(const wxRect &rect, const wxSize &size, wxPoint &pos);
 
     void CreateButtonModeSourceUI(const wxSize &size, const wxPoint &pos);
+
+    // Создаёт токовые параметры
+    void CreateParametersI();
+
+    // Создаёт напряжённые параметры
+    void CreateParametersU();
 };
 
 
