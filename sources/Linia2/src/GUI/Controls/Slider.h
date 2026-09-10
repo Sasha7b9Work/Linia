@@ -58,6 +58,8 @@ public:
     int GetIntValue() const;
     void SetIntValue(int);
 
+    void SetToolTip(const wxString &);
+
 protected:
 
     StaticText *text = nullptr;

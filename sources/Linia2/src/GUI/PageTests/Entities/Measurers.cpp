@@ -242,6 +242,7 @@ void MeasurerSourcer::CreateParametersI()
 
             {
                 SliderFloat *slider = new SliderFloat(ThePanelViewTest, WIDTH_CONTROL, L("Смещение"));
+                slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
                 slider->SetRange(0.0, 11.0, "mA", 2);
                 parametersI.push_back(slider);
@@ -329,6 +330,7 @@ void MeasurerSourcer::CreateParametersU()
 
             {
                 SliderFloat *slider = new SliderFloat(ThePanelViewTest, WIDTH_CONTROL, L("Смещение"));
+                slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
                 slider->SetRange(0.0, 11.0, "mA", 2);
                 parametersU.push_back(slider);

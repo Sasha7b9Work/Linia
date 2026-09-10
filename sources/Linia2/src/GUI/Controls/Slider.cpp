@@ -208,6 +208,8 @@ void SliderFloat::SetIntValue(int value)
 SliderFloat::SliderFloat(wxWindow *parent, int width, const wxString &name) :
     Panel(parent)
 {
+    SetCursor(wxCursor(wxCURSOR_HAND));
+
     Panel::SetSize({ width, TEXTCNTRL_HEIGHT + 5 + 5 });
     Panel::SetName(parent->GetName() + "_" + name);
 
@@ -217,6 +219,8 @@ SliderFloat::SliderFloat(wxWindow *parent, int width, const wxString &name) :
     slider = new wxSlider(this, wxID_ANY, num_steps / 2, 0, num_steps, { w1, 0 }, { width - w1 - w2, TEXTCNTRL_HEIGHT + 5 });
 
     slider->SetBackgroundColour(slider->GetBackgroundColour().ChangeLightness(LIGHTNESS));
+
+    slider->SetCursor(wxCursor(wxCURSOR_HAND));
 
     text = new StaticText(this, "0", { w1, TEXTCNTRL_HEIGHT - 5 });
     text->SetPosition({ 0, 5 });
@@ -238,6 +242,16 @@ SliderFloat::SliderFloat(wxWindow *parent, int width, const wxString &name) :
 
     Bind(wxEVT_TIMER, &SliderFloat::OnEventTimer, this);
     Bind(wxEVT_TIMER, &SliderFloat::OnEventTimer, this);
+}
+
+
+void SliderFloat::SetToolTip(const wxString &tooltip)
+{
+    wxWindowBase::SetToolTip(tooltip);
+    slider->SetToolTip(tooltip);
+    text->SetToolTip(tooltip);
+    btnMore->SetToolTip(tooltip);
+    btnLess->SetToolTip(tooltip);
 }
 
 
