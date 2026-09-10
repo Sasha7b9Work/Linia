@@ -23,6 +23,11 @@ public:
         coord.y += dy;
     }
 
+    void MoveOnDX(int dx)
+    {
+        coord.x += dx;
+    }
+
     // Рисует линию вверх или вниз на величину dy
     int LineOnDY(int dy);
 

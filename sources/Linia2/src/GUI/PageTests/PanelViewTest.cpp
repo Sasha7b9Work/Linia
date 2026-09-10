@@ -89,7 +89,6 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
     int y_meas_U = 500;
     int y_meas_I = 370;
     int y_source_U = 610;
-//    int y_source_I = 280;
     int y_ground = 0;
 
     {
@@ -150,7 +149,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 amptermeterBase = new Ampermeter(*dc, { driwer.GetX(), y_meas_I });
 
-                voltmeterBase = new Voltmeter(*dc, { driwer.GetX(), y_source_U });
+                sourceVoltageCurrentBase = new SourceVoltageCurrent(*dc, { driwer.GetX(), y_source_U });
 
                 driwer.MoveTo(coord_base.x + 150, coord_base.y);
 
@@ -160,7 +159,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 driwer.MoveToY(y_meas_U);
 
-                sourceVoltageCurrentBase = new SourceVoltageCurrent(*dc, { driwer.GetX(), driwer.GetY() });
+                voltmeterBase = new Voltmeter(*dc, { driwer.GetX(), driwer.GetY() });
             }
         }
 
@@ -184,21 +183,9 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 driwer.MoveOnDY(-470);
 
-//                CreateSourceBaseSubstrate(driwer.GetX(), y_source_I, MeasurerSourcer::Type::SourceI, Dir::Left,
-//                    &bcSubstrateStartValueI, L("Isub старт"),
-//                    &bcSubstrateDeltaValueI, L("Isub шаг"),
-//                    &bcSubstrateNumMeasures, L("N кривых"),
-//                    values);
+                ampermeterSubstrate = new Ampermeter(*dc, { driwer.GetX(), y_meas_I });
 
-//                CreateSourceBaseSubstrate(driwer.GetX(), y_meas_I, MeasurerSourcer::Type::MeasI, Dir::Left,
-//                    &bcSubstrateMeasureRangeI, L("Isub диап"),
-//                    &bcSubstrateMeasureLimitI, L("Isub огр"),
-//                    values);
-
-//                CreateSourceBaseSubstrate(driwer.GetX(), y_source_U, MeasurerSourcer::Type::SourceU, Dir::Left,
-//                    &bcSubstrateSourceStartU, L("Ub старт"),
-//                    &bcSubstrateSourceStepU, L("Ub огр"),
-//                    values);
+                sourceVoltateCurrentSubstrate = new SourceVoltageCurrent(*dc, { driwer.GetX(), y_source_U });
 
                 driwer.MoveTo(GetCenter().x + 70, coord_base.y);
 
@@ -206,10 +193,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 DrawGround(driwer.GetX(), driwer.GetY());
 
-//                CreateSourceBaseSubstrate(driwer.GetX(), y_meas_U, MeasurerSourcer::Type::MeasU, Dir::Right,
-//                    &bcSubstrateMeasureRangeU, L("Usub диап"),
-//                    &bcSubstrateMeasureLimitU, L("Usub огр"),
-//                    values);
+                voltmeterSubstrate = new Voltmeter(*dc, { driwer.GetX(), y_meas_U });
             }
         }
     }
@@ -217,41 +201,29 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
     {
         // Рисуем цепь коллектора
 
-        int dx = 450;
+        int dx = 420;
 
         LineDriwer driwer{ *dc, x_col, y_col };
 
         driwer.LineOnDX(dx);
 
-        driwer.LineToY(y_meas_I);
-
-//        CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::MeasI, Dir::Left,
-//            &bcCollectorMeasureRangeI, L("Ic диап"),
-//            &bcCollectorMeasureLimitI, L("Ic огр"),
-//            values);
-
-        driwer.MoveOnDY(10);
         driwer.LineToY(y_ground);
 
         DrawGround(driwer.GetX(), driwer.GetY());
 
-        driwer.MoveToY(y_source_U);
+        ampermeterCollector = new Ampermeter(*dc, { driwer.GetX(), y_meas_I });
 
-//        CreateSourceBaseSubstrate(driwer.GetX(), driwer.GetY(), MeasurerSourcer::Type::SourceU, Dir::Left,
-//            &bcCollectorValueStartU, L("Uc старт"),
-//            &bcCollectorValueFinishU, L("Uc стоп"),
-//            values);
+        sourceVoltageCollector = new SourceVoltage(*dc, { driwer.GetX(), y_source_U });
 
-        driwer.MoveTo(x_col + dx - 155, y_col);
+        driwer.MoveToY(y_col);
+
+        driwer.MoveOnDX(-100);
 
         driwer.LineToY(y_ground);
 
         DrawGround(driwer.GetX(), driwer.GetY());
 
-//        CreateSourceBaseSubstrate(driwer.GetX(), y_meas_U, MeasurerSourcer::Type::MeasU, Dir::Right,
-//            &bcCollectorMeasureRangeU, L("Uc диап"),
-//            &bcCollectorMeasureLimitU, L("Uc огр"),
-//            values);
+        voltmeterCollector = new Voltmeter(*dc, { driwer.GetX(), y_meas_U });
     }
 }
 
