@@ -268,7 +268,7 @@ void MeasurerSourcer::CreateParametersI()
 
                 tooltips.push_back(L("Количество ступенек"));
 
-                CREATE_COMBO(L("Количество ступенек"), "comboBaseNumSteps", parametersI);
+                CREATE_COMBO(L("Кол-во ступенек"), "comboBaseNumSteps", parametersI);
             }
         }
     }
@@ -322,7 +322,7 @@ void MeasurerSourcer::CreateParametersI()
 
                 tooltips.push_back(L("Количество ступенек"));
 
-                CREATE_COMBO(L("Количество ступенек"), "comboSubstarteNumSteps", parametersI);
+                CREATE_COMBO(L("Кол-во ступенек"), "comboSubstarteNumSteps", parametersI);
             }
         }
     }
@@ -407,7 +407,7 @@ void MeasurerSourcer::CreateParametersU()
 
                 tooltips.push_back(L("Количество ступенек"));
 
-                CREATE_COMBO(L("Количество ступенек"), "comboBaseNumSteps", parametersU);
+                CREATE_COMBO(L("Кол-во ступенек"), "comboBaseNumSteps", parametersU);
             }
         }
     }
@@ -461,7 +461,7 @@ void MeasurerSourcer::CreateParametersU()
 
                 tooltips.push_back(L("Количество ступенек"));
 
-                CREATE_COMBO(L("Количество ступенек"), "comboBaseNumSteps", parametersU);
+                CREATE_COMBO(L("Кол-во ступенек"), "comboBaseNumSteps", parametersU);
             }
         }
     }
