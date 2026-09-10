@@ -218,19 +218,19 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
         ampermeterCollector->Draw(*dc);
 
-        if (!sourceVoltageCollector)
-        {
-            sourceVoltageCollector = new SourceVoltage(Chan::_C, { driwer.GetX(), y1 }, Dir::Left);
-        }
-
-        sourceVoltageCollector->Draw(*dc);
-
         if (!voltmeterCollector)
         {
-            voltmeterCollector = new Voltmeter(Chan::_C, { driwer.GetX(), y2 }, Dir::Left);
+            voltmeterCollector = new Voltmeter(Chan::_C, { driwer.GetX(), y1 }, Dir::Left);
         }
 
         voltmeterCollector->Draw(*dc);
+
+        if (!sourceVoltageCollector)
+        {
+            sourceVoltageCollector = new SourceVoltage(Chan::_C, { driwer.GetX(), y2 }, Dir::Left);
+        }
+
+        sourceVoltageCollector->Draw(*dc);
     }
 }
 
