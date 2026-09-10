@@ -71,16 +71,16 @@ void PanelViewTest::DrawElement()
 
 void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 {
-    int x_col = c.x + radius / 2;   // / Координаты точки коммутации
-    int y_col = c.y - 2 * radius;   // / с коллектором
+    int x_col = c.x + radius_trans / 2;   // / Координаты точки коммутации
+    int y_col = c.y - 2 * radius_trans;   // / с коллектором
 
-    dc->DrawLine(x_col, y_col, c.x + radius / 2, c.y + 2 * radius);    // Вертикальная линия, которая выходит из коллектора и эмиттера
+    dc->DrawLine(x_col, y_col, c.x + radius_trans / 2, c.y + 2 * radius_trans);    // Вертикальная линия, которая выходит из коллектора и эмиттера
 
-    dc->DrawLine(c.x + radius / 2 - 10, c.y + 2 * radius, c.x + radius / 2 + 10, c.y + 2 * radius);      // Заземление эмиттера
+    dc->DrawLine(c.x + radius_trans / 2 - 10, c.y + 2 * radius_trans, c.x + radius_trans / 2 + 10, c.y + 2 * radius_trans);      // Заземление эмиттера
 
-    dc->DrawCircle(c, radius);
+    dc->DrawCircle(c, radius_trans);
 
-    const int x_vert = c.x - radius * 10 / 18;                    // Здесь заканчивается линия базы внутри окружности
+    const int x_vert = c.x - radius_trans * 10 / 18;                    // Здесь заканчивается линия базы внутри окружности
 
     const wxPoint coord_base{ 80, c.y };
 
@@ -98,12 +98,12 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
         {
             // Наклонные линии
 
-            int dy = radius * 4 / 18;
+            int dy = radius_trans * 4 / 18;
 
-            int y_top = c.y - radius * 100 / 115;
-            int y_bottom = c.y + radius * 100 / 115;
+            int y_top = c.y - radius_trans * 100 / 115;
+            int y_bottom = c.y + radius_trans * 100 / 115;
 
-            int xx = c.x + radius * 10 / 20;                    // В этом иксе - пересечение коллектора и эмиттера с окружностью.
+            int xx = c.x + radius_trans * 10 / 20;                    // В этом иксе - пересечение коллектора и эмиттера с окружностью.
 
             dc->DrawLine(x_vert, c.y - dy, xx, y_top);            // Верхняя наклонная линия (коллектор)
             dc->DrawLine(x_vert, c.y + dy, xx, y_bottom);         // Нижняя наклонная линия (эмиттер)
@@ -111,7 +111,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
             {
                 // Стрелка эмиттера
 
-                double length = radius * 10 / 40;
+                double length = radius_trans * 10 / 40;
 
                 if (type == "npn")
                 {
@@ -133,7 +133,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
         {
             // Вертикальная линия базы
 
-            int dy = radius * 4 / 9;
+            int dy = radius_trans * 4 / 9;
 
             dc->DrawLine(x_vert, c.y - dy, x_vert, c.y + dy);
 
@@ -167,9 +167,9 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
         {
             // Подложка
 
-            int dy = radius * 4 / 16;
+            int dy = radius_trans * 4 / 16;
 
-            int x = c.x + (c.x - x_vert) + radius / 10;
+            int x = c.x + (c.x - x_vert) + radius_trans / 10;
 
             dc->DrawLine(x, c.y - dy, x, c.y + dy);
 
