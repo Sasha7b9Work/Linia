@@ -22,7 +22,7 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
     coord_controls.x = center.x;
     coord_controls.y = center.y;
 
-    wxRect rect = DrawBorder(dc, coord_controls.x, coord_controls.y, radius, 5);
+    wxRect rect = DrawBorder(dc, coord_controls.x, coord_controls.y, radius, 3);
 
     CreateControls(rect);
 
