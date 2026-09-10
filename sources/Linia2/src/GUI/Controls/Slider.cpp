@@ -224,8 +224,10 @@ SliderFloat::SliderFloat(wxWindow *parent, int width, const wxString &name) :
     wxSize size_button{ 15, 12 };
 
     btnMore = new Button(this, "", size_button);
+    btnMore->SetPosition({ slider->GetPosition().x + slider->GetSize().x, 0 });
     btnMore->SetBackgroundColour(btnMore->GetBackgroundColour().ChangeLightness(LIGHTNESS));
     btnLess = new Button(this, "", size_button);
+    btnLess->SetPosition({ slider->GetPosition().x + slider->GetSize().x, slider->GetSize().y / 2 });
     btnLess->SetBackgroundColour(btnLess->GetBackgroundColour().ChangeLightness(LIGHTNESS));
 
     Bind(wxEVT_SLIDER, &SliderFloat::OnEventSlider, this);
