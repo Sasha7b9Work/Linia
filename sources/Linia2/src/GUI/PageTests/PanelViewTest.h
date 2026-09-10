@@ -9,20 +9,6 @@
 #pragma warning(pop)
 
 
-// \todo Элемент предназначен для ввода числового значения.
-class ComboInput : public ButtonsComboRange
-{
-public:
-    ComboInput(wxWindow *parent, const wxString &title, int width,
-        const wxArrayString &labels,
-        const wxArrayString &tooltips,
-        const wxString &name) :
-        ButtonsComboRange(parent, title, width, labels, tooltips, name)
-    {
-    }
-};
-
-
 class PanelViewTest : public Panel
 {
 public:

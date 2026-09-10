@@ -1,7 +1,8 @@
-// 2026/09/04 12:20:07 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
+﻿// 2026/09/04 12:20:07 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageTests/Entities/Measurers.h"
 #include "Utils/GlobalFunctions.h"
+#include "GUI/Controls/ButtonCombo.h"
 
 
 #define CREATE_BUTTONS_COMBO_RANGE(name, title, _x, _y)             \
@@ -61,6 +62,27 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
     int y = center.y;
 
     DrawBorder(dc, x, y, radius, 5);
+
+    for (int i = 0; i < 5; i++)
+    {
+        wxArrayString titles;
+        titles.push_back("2 мкА");
+        titles.push_back("5 мкA");
+        titles.push_back("10 мкА");
+        titles.push_back("20 мкА");
+        titles.push_back("50 мкА");
+        titles.push_back("100 мкА");
+        titles.push_back("200 мкА");
+
+        wxArrayString tooltips;
+        tooltips.push_back(L("Шаг изменения тока подложки"));
+
+        ComboInput *combo = new ComboInput(ThePanelViewTest, L("Ток"), WIDTH_CONTROL, titles, tooltips, wxString::Format("combo%d", i));
+        combo->SetPosition({ x, y + i * (ButtonsCombo::HEIGHT + 5) });
+
+        parametersI.push_back(combo);
+        parametersU.push_back(combo);
+    }
 }
 
 
