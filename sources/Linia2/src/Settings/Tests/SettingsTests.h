@@ -63,34 +63,6 @@ extern const Chan ChB;
 extern const Chan ChS;
 
 
-struct StateJack
-{
-    enum E
-    {
-        _C,
-        _B,
-        _S,
-        _E,
-        General,        // Общий
-        General_1k,     // Общий 1к
-        Break,          // Обрыв
-        Count
-    };
-
-    static void PrepareArray(wxArrayString &, E, E, E = Count, E = Count);
-
-    // Эти обозначения используются для сообщений в аппаратной части
-    static pchar NameHardware(E);
-
-    // Эти обозначения используются в ГИП
-    static pchar NameGUI(E);
-
-private:
-
-    static const pchar names[Count][2];
-};
-
-
 // Тип коммутации
 struct TypeCommutation
 {

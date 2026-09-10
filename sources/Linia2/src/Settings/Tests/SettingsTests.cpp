@@ -120,46 +120,6 @@ pchar TypeScan::_NameGUI(E v)
 }
 
 
-const pchar StateJack::names[StateJack::Count][2] =
-{
-    { "C",        "C" },
-    { "B",        "B" },
-    { "S",        "S" },
-    { "E",        "E" },
-    { "общий",    "GND" },
-    { "общий 1к", "GND_1K"},
-    { "обрыв",    "BREAK" }
-};
-
-
-pchar StateJack::NameHardware(E v)
-{
-    return names[v][1];
-}
-
-
-pchar StateJack::NameGUI(E v)
-{
-    return names[v][0];
-}
-
-
-void StateJack::PrepareArray(wxArrayString &arr, E v1, E v2, E v3, E v4)
-{
-    arr.Clear();
-    arr.push_back(NameGUI(v1));
-    arr.push_back(NameGUI(v2));
-    if (v3 != Count)
-    {
-        arr.push_back(NameGUI(v3));
-    }
-    if (v4 != Count)
-    {
-        arr.push_back(NameGUI(v4));
-    }
-}
-
-
 TypeCategory::E TypeCategory::Current()
 {
     return TypeCategory::BCE_N;
