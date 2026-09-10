@@ -241,7 +241,7 @@ void MeasurerSourcer::CreateParametersI()
             }
 
             {
-                SliderFloat *slider = new SliderFloat(ThePanelViewTest, 300, L("Смещение"));
+                SliderFloat *slider = new SliderFloat(ThePanelViewTest, WIDTH_CONTROL, L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
                 slider->SetRange(0.0, 11.0, "mA", 2);
                 parametersI.push_back(slider);
@@ -318,12 +318,22 @@ void MeasurerSourcer::CreateParametersU()
         }
         else if (type == Type::SourceU || type == Type::SourceUI)
         {
-            titles.push_back("1 мВ");
-            titles.push_back("2 мВ");
+            {
+                titles.push_back("1 мВ");
+                titles.push_back("2 мВ");
 
-            tooltips.push_back(L("Шаг изменения испытательного напряжения"));
+                tooltips.push_back(L("Шаг изменения испытательного напряжения"));
 
-            CREATE_COMBO(L("Ub шаг"), "comboBaseSourceU", parametersU);
+                CREATE_COMBO(L("Ub шаг"), "comboBaseSourceU", parametersU);
+            }
+
+            {
+                SliderFloat *slider = new SliderFloat(ThePanelViewTest, WIDTH_CONTROL, L("Смещение"));
+                slider->SetPosition({ coord_controls.x, y });
+                slider->SetRange(0.0, 11.0, "mA", 2);
+                parametersU.push_back(slider);
+                y += ButtonsCombo::HEIGHT + 5;
+            }
         }
     }
     else if (chan == Chan::_S)

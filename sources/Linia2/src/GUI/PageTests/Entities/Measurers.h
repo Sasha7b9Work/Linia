@@ -26,7 +26,7 @@ class MeasurerSourcer
 {
 public:
 
-    static const int WIDTH_CONTROL = 120;
+    static const int WIDTH_CONTROL = 150;
 
     struct Type
     {

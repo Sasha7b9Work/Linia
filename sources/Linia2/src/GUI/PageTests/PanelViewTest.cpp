@@ -205,7 +205,7 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
         LineDriwer driwer{ *dc, x_col, y_col };
 
-        driwer.LineOnDX(380);
+        driwer.LineOnDX(355);
 
         driwer.LineToY(y_ground);
 
