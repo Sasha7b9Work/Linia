@@ -19,36 +19,6 @@ MeasurerSourcer::MeasurerSourcer(Type::E _type, Chan::E _chan, const wxPoint _ce
 
 void MeasurerSourcer::Draw(wxPaintDC &dc)
 {
-    if (!disabled)
-    {
-        dc.DrawCircle(center, radius);
-
-        const int dY = 3;
-
-        if (type == Type::SourceI)
-        {
-            const int ddY = 3;
-
-            dc.DrawLine(center.x, center.y - dY - ddY, center.x, center.y - radius);
-            dc.DrawLine(center.x, center.y + dY - ddY, center.x, center.y + radius);
-
-            const int l = 5;
-
-            dc.DrawLine(center.x, center.y - dY - ddY, center.x - l, center.y - dY + l - ddY);
-            dc.DrawLine(center.x, center.y - dY + dY - ddY, center.x - l, center.y - dY + l + dY - ddY);
-
-            dc.DrawLine(center.x, center.y - dY - ddY, center.x + l, center.y - dY + l - ddY);
-            dc.DrawLine(center.x, center.y - dY + dY - ddY, center.x + l, center.y - dY + l + dY - ddY);
-        }
-        else if (type == Type::SourceU)
-        {
-            dc.DrawLine(center.x, center.y - radius + dY, center.x + dY, center.y + dY);
-            dc.DrawLine(center.x, center.y - radius + dY, center.x - dY, center.y + dY);
-
-            dc.DrawLine(center.x, center.y + radius - 5, center.x, center.y - radius + 6);
-        }
-    }
-
     coord_controls.x = center.x;
     coord_controls.y = center.y;
 
@@ -71,33 +41,65 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
         btnModeUI->Enable(!disabled);
     }
 
-    dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
-
-    static const pchar labels[Type::Count] =
+    if (!disabled)
     {
-        "V",
-        "I",
-        "",
-        "",
-        "",
-        ""
-    };
+        dc.DrawCircle(center, radius);
 
-    pchar label = labels[type];
+        const int dY = 3;
 
-    if (type == Type::MeasUI)
-    {
-        if (IsSetModeU())
+        if (type == Type::SourceI ||
+            (type == Type::SourceUI && !IsSetModeU()))
         {
-            label = "V";
+            const int ddY = 3;
+
+            dc.DrawLine(center.x, center.y - dY - ddY, center.x, center.y - radius);
+            dc.DrawLine(center.x, center.y + dY - ddY, center.x, center.y + radius);
+
+            const int l = 5;
+
+            dc.DrawLine(center.x, center.y - dY - ddY, center.x - l, center.y - dY + l - ddY);
+            dc.DrawLine(center.x, center.y - dY + dY - ddY, center.x - l, center.y - dY + l + dY - ddY);
+
+            dc.DrawLine(center.x, center.y - dY - ddY, center.x + l, center.y - dY + l - ddY);
+            dc.DrawLine(center.x, center.y - dY + dY - ddY, center.x + l, center.y - dY + l + dY - ddY);
         }
-        else
+        else if (type == Type::SourceU ||
+            (type == Type::SourceUI && IsSetModeU()))
         {
-            label = "I";
+            dc.DrawLine(center.x, center.y - radius + dY, center.x + dY, center.y + dY);
+            dc.DrawLine(center.x, center.y - radius + dY, center.x - dY, center.y + dY);
+
+            dc.DrawLine(center.x, center.y + radius - 5, center.x, center.y - radius + 6);
         }
+
+        dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
+
+        static const pchar labels[Type::Count] =
+        {
+            "V",
+            "I",
+            "",
+            "",
+            "",
+            ""
+        };
+
+        pchar label = labels[type];
+
+        if (type == Type::MeasUI)
+        {
+            if (IsSetModeU())
+            {
+                label = "V";
+            }
+            else
+            {
+                label = "I";
+            }
+        }
+
+        GF::DrawTextInCenter(dc, label, wxRect(wxPoint{ center.x - radius, center.y - radius }, wxPoint{ center.x + radius, center.y + radius }));
     }
-
-    GF::DrawTextInCenter(dc, label, wxRect(wxPoint{ center.x - radius, center.y - radius }, wxPoint{ center.x + radius, center.y + radius }));
 }
 
 
