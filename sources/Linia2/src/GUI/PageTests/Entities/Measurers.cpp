@@ -78,6 +78,11 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
     {
         combo->Enable(!disabled);
     }
+
+    if (btnModeSourceUI)
+    {
+        btnModeSourceUI->Enable(!disabled);
+    }
 }
 
 
@@ -85,31 +90,61 @@ void MeasurerSourcer::CreateControls(const wxRect &rect, int x, int y)
 {
     if (parametersI.size() == 0 && parametersU.size() == 0)
     {
-        btnDisable = new Button(ThePanelViewTest, "x", { 20, 20 });
+        wxPoint pos{ x, y };
 
-        if (type == MeasurerSourcer::Type::MeasI || MeasurerSourcer::Type::MeasU)
-        {
-            btnDisable->SetToolTip(L("Включить/отключить блок измерителя"));
-        }
-        else
-        {
-            btnDisable->SetToolTip(L("Включить/отключить блок источника"));
-        }
+        wxSize size{ 20, 20 };
 
-        btnDisable->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
+        {
+            btnDisable = new Button(ThePanelViewTest, "x", size);
+
+            if (type == MeasurerSourcer::Type::MeasI || MeasurerSourcer::Type::MeasU)
             {
-                disabled = !disabled;
-                ThePanelViewTest->Refresh();
-                event.Skip();
-            });
+                btnDisable->SetToolTip(L("Включить/отключить блок измерителя"));
+            }
+            else
+            {
+                btnDisable->SetToolTip(L("Включить/отключить блок источника"));
+            }
 
-        if (dir == Dir::Left)
-        {
-            btnDisable->SetPosition({ rect.x + rect.width - btnDisable->GetSize().x - 1, rect.y + 1 });
+            btnDisable->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
+                {
+                    disabled = !disabled;
+                    ThePanelViewTest->Refresh();
+                    event.Skip();
+                });
+
+            if (dir == Dir::Left)
+            {
+                pos = { rect.x + rect.width - btnDisable->GetSize().x - 1, rect.y + 1 };
+            }
+            else if (dir == Dir::Right)
+            {
+                pos = { rect.x + 1, rect.y + 1 };
+            }
+
+            btnDisable->SetPosition(pos);
         }
-        else if (dir == Dir::Right)
+
+        if (type == Type::SourceUI)
         {
-            btnDisable->SetPosition({ rect.x + 1, rect.y + 1 });
+            btnModeSourceUI = new Button(ThePanelViewTest, "E", size);
+            btnModeSourceUI->SetPosition({ pos.x, pos.y + 25 });
+            btnModeSourceUI->SetToolTip(L("Включён блок источника напряжения"));
+            btnModeSourceUI->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
+                {
+                    if (btnModeSourceUI->GetLabel() == wxString("E"))
+                    {
+                        btnModeSourceUI->SetLabel("J");
+                        btnModeSourceUI->SetToolTip(L("Включён блок источника тока"));
+                    }
+                    else
+                    {
+                        btnModeSourceUI->SetLabel("E");
+                        btnModeSourceUI->SetToolTip(L("Включён блок источника напряжения"));
+                    }
+
+                    event.Skip();
+                });
         }
 
         for (int i = 0; i < 5; i++)
