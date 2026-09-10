@@ -90,6 +90,8 @@ private:
     void ShowNeedParameters();
 
     void DrawUGO(wxPaintDC &dc);
+
+    pchar SymbolUGO();
 };
 
 

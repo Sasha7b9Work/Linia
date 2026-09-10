@@ -40,6 +40,8 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
     {
         btnModeUI->Enable(!disabled);
     }
+
+    DrawUGO(dc);
 }
 
 
@@ -78,32 +80,27 @@ void MeasurerSourcer::DrawUGO(wxPaintDC &dc)
 
         dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
 
-        static const pchar labels[Type::Count] =
-        {
-            "V",
-            "I",
-            "",
-            "",
-            "",
-            ""
-        };
-
-        pchar label = labels[type];
-
-        if (type == Type::MeasUI)
-        {
-            if (IsSetModeU())
-            {
-                label = "V";
-            }
-            else
-            {
-                label = "I";
-            }
-        }
-
-        GF::DrawTextInCenter(dc, label, wxRect(wxPoint{ center.x - radius, center.y - radius }, wxPoint{ center.x + radius, center.y + radius }));
+        GF::DrawTextInCenter(dc, SymbolUGO(), wxRect(wxPoint{ center.x - radius, center.y - radius }, wxPoint{ center.x + radius, center.y + radius }));
     }
+}
+
+
+pchar MeasurerSourcer::SymbolUGO()
+{
+    if (type == Type::MeasU)
+    {
+        return "V";
+    }
+    else if (type == Type::MeasI)
+    {
+        return "I";
+    }
+    else if (type == Type::MeasUI)
+    {
+        return IsSetModeU() ? "V" : "I";
+    }
+
+    return "";
 }
 
 
@@ -208,24 +205,39 @@ void MeasurerSourcer::CreateParametersI()
 
     parametersI.clear();
 
-    if (chan == Chan::_B &&
-        (type == Type::MeasI || type == Type::MeasUI))
+    wxArrayString titles;
+    wxArrayString tooltips;
+
+    if (chan == Chan::_B)
     {
-        wxArrayString titles;
-
-        for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+        if (type == Type::MeasI || type == Type::MeasUI)
         {
-            titles.push_back(range.Name(RowRange::_125));
+            for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+            {
+                titles.push_back(range.Name(RowRange::_125));
+            }
+
+            tooltips.push_back(L("Диапазон измерения тока базы"));
+
+            ComboInput *combo = new ComboInput(ThePanelViewTest, L("Предел"), WIDTH_CONTROL, titles, tooltips, wxString::Format("comboBaseMeasI"));
+
+            combo->SetPosition({ coord_controls.x, coord_controls.y });
+
+            parametersI.push_back(combo);
         }
+        if (type == Type::SourceI || type == Type::SourceUI)
+        {
+            titles.push_back("1 нА");
+            titles.push_back("2 нА");
 
-        wxArrayString tooltips;
-        tooltips.push_back(L("Диапазон измерения тока базы"));
+            tooltips.push_back(L("Шаг"));
 
-        ComboInput *combo = new ComboInput(ThePanelViewTest, L("Предел"), WIDTH_CONTROL, titles, tooltips, wxString::Format("comboBaseMeasI"));
+            ComboInput * combo = new ComboInput(ThePanelViewTest, L("Шаг"), WIDTH_CONTROL, titles, tooltips, wxString::Format("comboBaseSourceI"));
 
-        combo->SetPosition({ coord_controls.x, coord_controls.y });
+            combo->SetPosition({ coord_controls.x, coord_controls.y });
 
-        parametersI.push_back(combo);
+            parametersI.push_back(combo);
+        }
     }
 }
 
@@ -239,24 +251,26 @@ void MeasurerSourcer::CreateParametersU()
 
     parametersU.clear();
 
-    if (chan == Chan::_B &&
-        (type == Type::MeasU || type == Type::MeasUI))
+    wxArrayString titles;
+    wxArrayString tooltips;
+
+    if (chan == Chan::_B)
     {
-        wxArrayString titles;
-
-        for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+        if (type == Type::MeasU || type == Type::MeasUI)
         {
-            titles.push_back(range.Name(RowRange::_124));
+            for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+            {
+                titles.push_back(range.Name(RowRange::_124));
+            }
+
+            tooltips.push_back(L("Диапазон измерения напряжения базы"));
+
+            ComboInput *combo = new ComboInput(ThePanelViewTest, L("Предел"), WIDTH_CONTROL, titles, tooltips, wxString::Format("comboBaseMeasU"));
+
+            combo->SetPosition({ coord_controls.x, coord_controls.y });
+
+            parametersU.push_back(combo);
         }
-
-        wxArrayString tooltips;
-        tooltips.push_back(L("Диапазон измерения напряжения базы"));
-
-        ComboInput *combo = new ComboInput(ThePanelViewTest, L("Предел"), WIDTH_CONTROL, titles, tooltips, wxString::Format("comboBaseMeasU"));
-
-        combo->SetPosition({ coord_controls.x, coord_controls.y });
-
-        parametersU.push_back(combo);
     }
 }
 
@@ -265,7 +279,7 @@ void MeasurerSourcer::CreateButtonModeUI(const wxSize &size, const wxPoint &pos)
 {
     if (type == Type::SourceUI)
     {
-        btnModeUI = new Button(ThePanelViewTest, "E", size);
+        btnModeUI = new Button(ThePanelViewTest, L"E", size);
         btnModeUI->SetPosition({ pos.x, pos.y + 25 });
         btnModeUI->SetToolTip(L("Включён блок источника напряжения"));
         btnModeUI->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
@@ -277,7 +291,7 @@ void MeasurerSourcer::CreateButtonModeUI(const wxSize &size, const wxPoint &pos)
                 }
                 else
                 {
-                    btnModeUI->SetLabel("E");
+                    btnModeUI->SetLabel(wxString("E"));
                     btnModeUI->SetToolTip(L("Включён блок источника напряжения"));
                 }
 
