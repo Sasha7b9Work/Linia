@@ -63,20 +63,6 @@ extern const Chan ChB;
 extern const Chan ChS;
 
 
-// Тип коммутации
-struct TypeCommutation
-{
-    enum E
-    {
-        Int,            // Внутренняя
-        Ext,            // Внешняя
-        Count
-    };
-
-    static bool IsInternal();
-};
-
-
 // Режим измерителя
 struct ModeMeas
 {

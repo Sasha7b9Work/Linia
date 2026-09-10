@@ -150,12 +150,6 @@ bool Chan::IsVisible() const
 }
 
 
-bool TypeCommutation::IsInternal()
-{
-    return false;
-}
-
-
 pchar MicroChip::Name(E v)
 {
     static const pchar names[Count] =
