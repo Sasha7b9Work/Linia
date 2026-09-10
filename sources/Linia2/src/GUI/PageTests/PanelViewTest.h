@@ -101,20 +101,6 @@ private:
     void DrawBJT(const wxString &type, const wxPoint &);
     void DrawBJTS(const wxString &type, const wxPoint &);
 
-    // Создаёт группу элементов управления источником базы или подложки
-    void CreateSourceBaseSubstrate(
-        int x, int y, MeasurerSourcer::Type::E, Dir::E,
-        ComboInput **, const wxString &,
-        ComboInput **, const wxString &,
-        ComboInput **, const wxString &,
-        std::vector<std::vector<double>> values);
-
-    MeasurerSourcer *CreateSourceBaseSubstrate(
-        int x, int y, MeasurerSourcer::Type::E, Dir::E,
-        ComboInput **, const wxString &,
-        ComboInput **, const wxString &,
-        std::vector<std::vector<double>> values);
-
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
 
     // Нарисовать значок земли
@@ -131,4 +117,16 @@ private:
     void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg);
 
     wxPoint GetCenter() const;
+
+    Ampermeter *amptermeterBase = nullptr;
+    Voltmeter *voltmeterBase = nullptr;
+    SourceVoltageCurrent *sourceVoltageCurrentBase = nullptr;
+
+    Ampermeter *ampermeterSubstrate = nullptr;
+    Voltmeter *voltmeterSubstrate = nullptr;
+    SourceVoltageCurrent *sourceVoltateCurrentSubstrate = nullptr;
+
+    Ampermeter *ampermeterCollector = nullptr;
+    Voltmeter *voltmeterCollector = nullptr;
+    SourceVoltage *sourceVoltageCollector = nullptr;
 };
