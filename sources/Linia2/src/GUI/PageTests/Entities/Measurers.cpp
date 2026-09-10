@@ -56,6 +56,11 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
 
         dc.DrawLine(center.x, center.y + radius - 5, center.x, center.y - radius + 6);
     }
+
+    int x = center.x;
+    int y = center.y;
+
+    DrawBorder(dc, x, y, radius, 5);
 }
 
 
