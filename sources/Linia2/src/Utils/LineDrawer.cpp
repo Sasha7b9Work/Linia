@@ -26,6 +26,12 @@ void LineDriwer::MoveTo(int x, int y)
 }
 
 
+void LineDriwer::MoveTo(const wxPoint &new_coord)
+{
+    coord = new_coord;
+}
+
+
 int LineDriwer::LineToY(int y)
 {
     wxPoint coord_next{ coord.x, y };

@@ -61,29 +61,44 @@ void PanelViewTest::CreateElement()
     if (test->lib->UGO == "BJT" ||
         test->lib->UGO == "BJTS")
     {
-        CreateBJT("npn", GetCenter());
+        wxPoint point_base;
+        wxPoint point_collector;
+        wxPoint point_substrate;
+        wxPoint point_emitter;
+
+        CreateBJT("npn", GetCenter(), point_base, point_collector, point_substrate, point_emitter);
     }
 }
 
 
-void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
+void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &point_base, wxPoint &point_collector, wxPoint &point_substrate, wxPoint &point_emitter)
 {
     int x_col = c.x + radius_trans / 2;   // / Координаты точки коммутации
     int y_col = c.y - 2 * radius_trans;   // / с коллектором
 
     LineDriwer driwer(*dc, x_col, y_col);
 
-    driwer.LineTo(c.x + radius_trans / 2, c.y + 2 * radius_trans);                                                             // Вертикальная линия, которая выходит из коллектора и эмиттера
+    driwer.LineTo(c.x + radius_trans / 2, c.y + 2 * radius_trans);          // Вертикальная линия, которая выходит из коллектора и эмиттера
 
     DrawGround(driwer.GetX(), driwer.GetY());
 
     dc->DrawCircle(c, radius_trans);
 
-    const int x_vert = c.x - radius_trans * 10 / 18;                                                                            // Здесь заканчивается линия базы внутри окружности
+    const int x_vert = c.x - radius_trans * 10 / 18;                        // Здесь заканчивается линия базы внутри окружности
 
-    const wxPoint coord_base{ 90, c.y };
+    wxPoint coord_base{ 90, c.y };
 
-    dc->DrawLine(coord_base, { x_vert, c.y });                                                                                  // База
+    driwer.MoveTo(90, c.y);
+
+    driwer.LineTo(x_vert, c.y);                                             // База
+
+    driwer.MoveOnDX(-50);
+
+    int r = 5;
+
+    point_base = driwer.GetCoord();
+
+    dc->DrawCircle(point_base, r);
 
     int y0 = 290;
     int y1 = 410;
@@ -201,6 +216,14 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
         // Рисуем цепь коллектора
 
         driwer.MoveTo(x_col, y_col);
+
+        driwer.MoveOnDY(25);
+
+        point_collector = driwer.GetCoord();
+
+        dc->DrawCircle(point_collector, r);
+
+        driwer.MoveOnDY(-25);
 
         driwer.LineOnDX(355);
 

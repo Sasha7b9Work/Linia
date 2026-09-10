@@ -11,6 +11,8 @@ public:
 
     LineDriwer(wxPaintDC &, int x, int y);
 
+    void MoveTo(const wxPoint &);
+
     void MoveTo(int x, int y);
 
     void MoveToY(int y)
