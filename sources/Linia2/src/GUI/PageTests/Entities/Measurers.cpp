@@ -118,7 +118,7 @@ void MeasurerSourcer::CreateControls(const wxRect &rect)
 
         CreateButtonDisable(rect, size, pos);
 
-        CreateButtonModeUI(size, pos);
+        CreateButtonModeUI(rect, size, pos);
 
         ShowNeedParameters();
     }
@@ -420,12 +420,12 @@ void MeasurerSourcer::CreateParametersU()
 }
 
 
-void MeasurerSourcer::CreateButtonModeUI(const wxSize &size, const wxPoint &pos)
+void MeasurerSourcer::CreateButtonModeUI(const wxRect &rect, const wxSize &size, const wxPoint &pos)
 {
     if (type == Type::SourceUI)
     {
-        btnModeUI = new Button(ThePanelViewTest, L"E", size);
-        btnModeUI->SetPosition({ pos.x, pos.y + 25 });
+        btnModeUI = new Button(ThePanelViewTest, "E", size);
+        btnModeUI->SetPosition({ pos.x, pos.y + rect.height - 22 });
         btnModeUI->SetToolTip(L("Включён блок источника напряжения"));
         btnModeUI->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
             {
@@ -450,7 +450,7 @@ void MeasurerSourcer::CreateButtonModeUI(const wxSize &size, const wxPoint &pos)
     else if (type == Type::MeasUI)
     {
         btnModeUI = new Button(ThePanelViewTest, "V", size);
-        btnModeUI->SetPosition({ pos.x, pos.y + 25 });
+        btnModeUI->SetPosition({ pos.x, pos.y + rect.height - 22 });
         btnModeUI->SetToolTip(L("Включён блок измерителя напряжения"));
         btnModeUI->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
             {
