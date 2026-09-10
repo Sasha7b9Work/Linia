@@ -244,7 +244,7 @@ void MeasurerSourcer::CreateParametersI()
                 SliderFloat *slider = new SliderFloat(ThePanelViewTest, WIDTH_CONTROL, L("Смещение"));
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(0.0, 11.0, "mA", 2);
+                slider->SetRange(0.0, 10.0, "mA", 2);
                 parametersI.push_back(slider);
                 y += ButtonsCombo::HEIGHT + 5;
             }
@@ -265,12 +265,23 @@ void MeasurerSourcer::CreateParametersI()
         }
         if (type == Type::SourceI || type == Type::SourceUI)
         {
-            titles.push_back("1 нА");
-            titles.push_back("2 нА");
+            {
+                titles.push_back("1 нА");
+                titles.push_back("2 нА");
 
-            tooltips.push_back(L("Шаг"));
+                tooltips.push_back(L("Шаг"));
 
-            CREATE_COMBO(L("Шаг"), "comboBaseSourceI", parametersI);
+                CREATE_COMBO(L("Шаг"), "comboBaseSourceI", parametersI);
+            }
+
+            {
+                SliderFloat *slider = new SliderFloat(ThePanelViewTest, WIDTH_CONTROL, L("Смещение"));
+                slider->SetToolTip(L("Смещение"));
+                slider->SetPosition({ coord_controls.x, y });
+                slider->SetRange(0.0, 10.0, "mA", 2);
+                parametersI.push_back(slider);
+                y += ButtonsCombo::HEIGHT + 5;
+            }
         }
     }
     else if (chan == Chan::_C)
@@ -332,7 +343,7 @@ void MeasurerSourcer::CreateParametersU()
                 SliderFloat *slider = new SliderFloat(ThePanelViewTest, WIDTH_CONTROL, L("Смещение"));
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(0.0, 11.0, "mA", 2);
+                slider->SetRange(0.0, 10.0, "mA", 2);
                 parametersU.push_back(slider);
                 y += ButtonsCombo::HEIGHT + 5;
             }
@@ -353,12 +364,23 @@ void MeasurerSourcer::CreateParametersU()
         }
         else if (type == Type::SourceU || type == Type::SourceUI)
         {
-            titles.push_back("1 мВ");
-            titles.push_back("2 мВ");
+            {
+                titles.push_back("1 мВ");
+                titles.push_back("2 мВ");
 
-            tooltips.push_back(L("Шаг изменения испытательного напряжения"));
+                tooltips.push_back(L("Шаг изменения испытательного напряжения"));
 
-            CREATE_COMBO(L("Шаг"), "comboBaseSourceU", parametersU);
+                CREATE_COMBO(L("Шаг"), "comboBaseSourceU", parametersU);
+            }
+
+            {
+                SliderFloat *slider = new SliderFloat(ThePanelViewTest, WIDTH_CONTROL, L("Смещение"));
+                slider->SetToolTip(L("Смещение"));
+                slider->SetPosition({ coord_controls.x, y });
+                slider->SetRange(0.0, 10.0, "mA", 2);
+                parametersU.push_back(slider);
+                y += ButtonsCombo::HEIGHT + 5;
+            }
         }
     }
     else if (chan == Chan::_C)
@@ -376,12 +398,23 @@ void MeasurerSourcer::CreateParametersU()
         }
         else if (type == Type::SourceU)
         {
-            titles.push_back("1 мВ");
-            titles.push_back("2 мВ");
+            {
+                titles.push_back("1 мВ");
+                titles.push_back("2 мВ");
 
-            tooltips.push_back(L("Шаг изменения испытательного напряжения"));
+                tooltips.push_back(L("Шаг изменения испытательного напряжения"));
 
-            CREATE_COMBO(L("Шаг"), "comboBaseSourceU", parametersU);
+                CREATE_COMBO(L("Шаг"), "comboBaseSourceU", parametersU);
+            }
+
+            {
+                SliderFloat *slider = new SliderFloat(ThePanelViewTest, WIDTH_CONTROL, L("Смещение"));
+                slider->SetToolTip(L("Смещение"));
+                slider->SetPosition({ coord_controls.x, y });
+                slider->SetRange(0.0, 10.0, "mA", 2);
+                parametersU.push_back(slider);
+                y += ButtonsCombo::HEIGHT + 5;
+            }
         }
     }
 }
