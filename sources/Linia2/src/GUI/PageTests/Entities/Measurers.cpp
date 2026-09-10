@@ -518,7 +518,14 @@ void MeasurerSourcer::CreateButtonModeUI(const wxRect &rect, const wxSize &size,
     if (type == Type::SourceUI)
     {
         btnModeUI = new Button(ThePanelViewTest, "E", size);
-        btnModeUI->SetPosition({ pos.x, pos.y + rect.height - 22 });
+        if (dir == Dir::Left || dir == Dir::Right)
+        {
+            btnModeUI->SetPosition({ pos.x, pos.y + rect.height - 22 });
+        }
+        else if (dir == Dir::Down)
+        {
+            btnModeUI->SetPosition({ rect.x + 1, rect.y + 1 });
+        }
         btnModeUI->SetToolTip(L("Включён блок источника напряжения"));
         btnModeUI->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
             {
@@ -543,7 +550,14 @@ void MeasurerSourcer::CreateButtonModeUI(const wxRect &rect, const wxSize &size,
     else if (type == Type::MeasUI)
     {
         btnModeUI = new Button(ThePanelViewTest, "V", size);
-        btnModeUI->SetPosition({ pos.x, pos.y + rect.height - 22 });
+        if (dir == Dir::Left || dir == Dir::Right)
+        {
+            btnModeUI->SetPosition({ pos.x, pos.y + rect.height - 22 });
+        }
+        else if (dir == Dir::Down)
+        {
+            btnModeUI->SetPosition({ rect.x + 1, rect.y + 1});
+        }
         btnModeUI->SetToolTip(L("Включён блок измерителя напряжения"));
         btnModeUI->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
             {
