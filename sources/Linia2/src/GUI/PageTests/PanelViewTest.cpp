@@ -147,9 +147,9 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 y_ground = driwer.GetY();
 
-                amptermeterBase = new Ampermeter(*dc, { driwer.GetX(), y_meas_I });
+                amptermeterBase = new Ampermeter(*dc, { driwer.GetX(), y_meas_I }, Dir::Right);
 
-                sourceVoltageCurrentBase = new SourceVoltageCurrent(*dc, { driwer.GetX(), y_source_U });
+                sourceVoltageCurrentBase = new SourceVoltageCurrent(*dc, { driwer.GetX(), y_source_U }, Dir::Right);
 
                 driwer.MoveTo(coord_base.x + 150, coord_base.y);
 
@@ -159,7 +159,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 driwer.MoveToY(y_meas_U);
 
-                voltmeterBase = new Voltmeter(*dc, { driwer.GetX(), driwer.GetY() });
+                voltmeterBase = new Voltmeter(*dc, { driwer.GetX(), driwer.GetY() }, Dir::Left);
             }
         }
 
@@ -183,9 +183,9 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 driwer.MoveOnDY(-470);
 
-                ampermeterSubstrate = new Ampermeter(*dc, { driwer.GetX(), y_meas_I });
+                ampermeterSubstrate = new Ampermeter(*dc, { driwer.GetX(), y_meas_I }, Dir::Right);
 
-                sourceVoltateCurrentSubstrate = new SourceVoltageCurrent(*dc, { driwer.GetX(), y_source_U });
+                sourceVoltateCurrentSubstrate = new SourceVoltageCurrent(*dc, { driwer.GetX(), y_source_U }, Dir::Right);
 
                 driwer.MoveTo(GetCenter().x + 70, coord_base.y);
 
@@ -193,7 +193,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
                 DrawGround(driwer.GetX(), driwer.GetY());
 
-                voltmeterSubstrate = new Voltmeter(*dc, { driwer.GetX(), y_meas_U });
+                voltmeterSubstrate = new Voltmeter(*dc, { driwer.GetX(), y_meas_U }, Dir::Left);
             }
         }
     }
@@ -211,9 +211,9 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
         DrawGround(driwer.GetX(), driwer.GetY());
 
-        ampermeterCollector = new Ampermeter(*dc, { driwer.GetX(), y_meas_I });
+        ampermeterCollector = new Ampermeter(*dc, { driwer.GetX(), y_meas_I }, Dir::Right);
 
-        sourceVoltageCollector = new SourceVoltage(*dc, { driwer.GetX(), y_source_U });
+        sourceVoltageCollector = new SourceVoltage(*dc, { driwer.GetX(), y_source_U }, Dir::Right);
 
         driwer.MoveToY(y_col);
 
@@ -223,7 +223,7 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
         DrawGround(driwer.GetX(), driwer.GetY());
 
-        voltmeterCollector = new Voltmeter(*dc, { driwer.GetX(), y_meas_U });
+        voltmeterCollector = new Voltmeter(*dc, { driwer.GetX(), y_meas_U }, Dir::Left);
     }
 }
 

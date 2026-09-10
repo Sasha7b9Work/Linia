@@ -29,7 +29,7 @@ public:
         };
     };
 
-    MeasurerSourcer(Type::E _type, wxPaintDC &_dc, const wxPoint _center);
+    MeasurerSourcer(Type::E _type, wxPaintDC &_dc, const wxPoint _center, Dir::E);
 
     void Draw(wxPaintDC &dc);
 
@@ -41,6 +41,7 @@ public:
 protected:
 
     Type::E type;
+    Dir::E dir;                             // Расположение органов управления относительно УГО измерителя/источника
     const int radius = 12;
     wxPoint center;
     std::vector<ComboInput *> parametersU;
@@ -50,7 +51,7 @@ private:
 
     // Нарисовать окантовку для измерителя или источника. x, y - центр измерителя
     // В x, y возвращаются координаты, с которых нужно выводить элементы управления
-    void DrawBorder(wxPaintDC &dc, int &x, int &y, int radius, Dir::E, int num_controls);
+    void DrawBorder(wxPaintDC &dc, int &x, int &y, int radius, int num_controls);
 };
 
 
@@ -59,8 +60,8 @@ class Voltmeter : public MeasurerSourcer
 {
 public:
 
-    Voltmeter(wxPaintDC &dc, const wxPoint _center) :
-        MeasurerSourcer(MeasurerSourcer::Type::MeasU, dc, _center)
+    Voltmeter(wxPaintDC &dc, const wxPoint _center, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::MeasU, dc, _center, _dir)
     {}
 };
 
@@ -70,8 +71,8 @@ class Ampermeter : public MeasurerSourcer
 {
 public:
 
-    Ampermeter(wxPaintDC &dc, const wxPoint _center) :
-        MeasurerSourcer(MeasurerSourcer::Type::MeasI, dc, _center)
+    Ampermeter(wxPaintDC &dc, const wxPoint _center, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::MeasI, dc, _center, _dir)
     {}
 };
 
@@ -81,8 +82,8 @@ class SourceVoltage : public MeasurerSourcer
 {
 public:
 
-    SourceVoltage(wxPaintDC &dc, const wxPoint _center) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceU, dc, _center)
+    SourceVoltage(wxPaintDC &dc, const wxPoint _center, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::SourceU, dc, _center, _dir)
     {}
 };
 
@@ -92,8 +93,8 @@ class SourceCurrent : public MeasurerSourcer
 {
 public:
 
-    SourceCurrent(wxPaintDC &dc, const wxPoint _center) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceI, dc, _center)
+    SourceCurrent(wxPaintDC &dc, const wxPoint _center, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::SourceI, dc, _center, _dir)
     {}
 };
 
@@ -102,7 +103,7 @@ class SourceVoltageCurrent : public MeasurerSourcer
 {
 public:
 
-    SourceVoltageCurrent(wxPaintDC &dc, const wxPoint _center) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceUI, dc, _center)
+    SourceVoltageCurrent(wxPaintDC &dc, const wxPoint _center, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::SourceUI, dc, _center, _dir)
     {}
 };

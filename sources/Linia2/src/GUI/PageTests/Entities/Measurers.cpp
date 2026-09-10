@@ -9,8 +9,8 @@
     name->SetPosition({ _x, _y });
 
 
-MeasurerSourcer::MeasurerSourcer(Type::E _type, wxPaintDC &_dc, const wxPoint _center) :
-    type(_type), center(_center)
+MeasurerSourcer::MeasurerSourcer(Type::E _type, wxPaintDC &_dc, const wxPoint _center, Dir::E _dir) :
+    type(_type), dir(_dir), center(_center)
 {
     Draw(_dc);
 }
@@ -59,7 +59,7 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
 }
 
 
-void MeasurerSourcer::DrawBorder(wxPaintDC &dc, int &x, int &y, int r, Dir::E dir, int num_controls)
+void MeasurerSourcer::DrawBorder(wxPaintDC &dc, int &x, int &y, int r, int num_controls)
 {
     const int d = 5;
 
