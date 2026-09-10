@@ -196,6 +196,11 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
 }
 
 
+#define CREATE_COMBO(title, name, vec)                                                                  \
+    ComboInput *combo = new ComboInput(ThePanelViewTest, title, WIDTH_CONTROL, titles, tooltips, name); \
+    combo->SetPosition({ coord_controls.x, coord_controls.y });                                         \
+    vec.push_back(combo);
+
 void MeasurerSourcer::CreateParametersI()
 {
     for (ComboInput *combo : parametersI)
@@ -219,11 +224,7 @@ void MeasurerSourcer::CreateParametersI()
 
             tooltips.push_back(L("Диапазон измерения тока базы"));
 
-            ComboInput *combo = new ComboInput(ThePanelViewTest, L("Предел"), WIDTH_CONTROL, titles, tooltips, wxString::Format("comboBaseMeasI"));
-
-            combo->SetPosition({ coord_controls.x, coord_controls.y });
-
-            parametersI.push_back(combo);
+            CREATE_COMBO(L("Предел"), "comboBaseMeasI", parametersI);
         }
         if (type == Type::SourceI || type == Type::SourceUI)
         {
@@ -232,11 +233,7 @@ void MeasurerSourcer::CreateParametersI()
 
             tooltips.push_back(L("Шаг"));
 
-            ComboInput * combo = new ComboInput(ThePanelViewTest, L("Шаг"), WIDTH_CONTROL, titles, tooltips, wxString::Format("comboBaseSourceI"));
-
-            combo->SetPosition({ coord_controls.x, coord_controls.y });
-
-            parametersI.push_back(combo);
+            CREATE_COMBO(L("Шаг"), "comboBaseSourceI", parametersI);
         }
     }
 }
@@ -265,11 +262,16 @@ void MeasurerSourcer::CreateParametersU()
 
             tooltips.push_back(L("Диапазон измерения напряжения базы"));
 
-            ComboInput *combo = new ComboInput(ThePanelViewTest, L("Предел"), WIDTH_CONTROL, titles, tooltips, wxString::Format("comboBaseMeasU"));
+            CREATE_COMBO(L("Предел"), "comboBaseMeasU", parametersU);
+        }
+        else if (type == Type::SourceU || type == Type::SourceUI)
+        {
+            titles.push_back("1 мВ");
+            titles.push_back("2 мВ");
 
-            combo->SetPosition({ coord_controls.x, coord_controls.y });
+            tooltips.push_back(L("Шаг изменения испытательного напряжения"));
 
-            parametersU.push_back(combo);
+            CREATE_COMBO(L("Шаг"), "comboBaseSourceU", parametersU);
         }
     }
 }
