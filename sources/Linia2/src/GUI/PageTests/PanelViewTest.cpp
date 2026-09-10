@@ -71,6 +71,8 @@ void PanelViewTest::DrawElement()
 
 void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 {
+    Freeze();
+
     int x_col = c.x + radius_trans / 2;   // / Координаты точки коммутации
     int y_col = c.y - 2 * radius_trans;   // / с коллектором
 
@@ -225,6 +227,8 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
         voltmeterCollector = new Voltmeter(*dc, { driwer.GetX(), y_meas_U }, Dir::Right);
     }
+
+    Thaw();
 }
 
 
