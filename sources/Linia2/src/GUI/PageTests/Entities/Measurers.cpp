@@ -23,19 +23,6 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
     {
         dc.DrawCircle(center, radius);
 
-
-        dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
-
-        static const pchar labels[Type::Count] =
-        {
-            "V",
-            "I",
-            "",
-            ""
-        };
-
-        GF::DrawTextInCenter(dc, labels[type], wxRect(wxPoint{ center.x - radius, center.y - radius }, wxPoint{ center.x + radius, center.y + radius }));
-
         const int dY = 3;
 
         if (type == Type::SourceI)
@@ -83,6 +70,34 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
     {
         btnModeUI->Enable(!disabled);
     }
+
+    dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
+
+    static const pchar labels[Type::Count] =
+    {
+        "V",
+        "I",
+        "",
+        "",
+        "",
+        ""
+    };
+
+    pchar label = labels[type];
+
+    if (type == Type::MeasUI)
+    {
+        if (IsSetModeU())
+        {
+            label = "V";
+        }
+        else
+        {
+            label = "I";
+        }
+    }
+
+    GF::DrawTextInCenter(dc, label, wxRect(wxPoint{ center.x - radius, center.y - radius }, wxPoint{ center.x + radius, center.y + radius }));
 }
 
 
@@ -262,6 +277,8 @@ void MeasurerSourcer::CreateButtonModeUI(const wxSize &size, const wxPoint &pos)
 
                 ShowNeedParameters();
 
+                ThePanelViewTest->Refresh();
+
                 event.Skip();
             });
     }
@@ -284,6 +301,8 @@ void MeasurerSourcer::CreateButtonModeUI(const wxSize &size, const wxPoint &pos)
                 }
 
                 ShowNeedParameters();
+
+                ThePanelViewTest->Refresh();
 
                 event.Skip();
             });
