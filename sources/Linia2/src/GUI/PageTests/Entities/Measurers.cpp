@@ -11,8 +11,8 @@
     name->SetPosition({ _x, _y });
 
 
-MeasurerSourcer::MeasurerSourcer(Type::E _type, const wxPoint _center, Dir::E _dir) :
-    type(_type), dir(_dir), center(_center)
+MeasurerSourcer::MeasurerSourcer(Type::E _type, Chan::E _chan, const wxPoint _center, Dir::E _dir) :
+    type(_type), chan(_chan), dir(_dir), center(_center)
 {
 }
 
@@ -67,7 +67,23 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
 
     wxRect rect = DrawBorder(dc, x, y, radius, 5);
 
-    if (parametersI.size() == 0)
+    CreateControls(rect, x, y);
+
+    for (ComboInput *combo : parametersI)
+    {
+        combo->Enable(!disabled);
+    }
+
+    for (ComboInput *combo : parametersU)
+    {
+        combo->Enable(!disabled);
+    }
+}
+
+
+void MeasurerSourcer::CreateControls(const wxRect &rect, int x, int y)
+{
+    if (parametersI.size() == 0 && parametersU.size() == 0)
     {
         btnDisable = new Button(ThePanelViewTest, "x", { 20, 20 });
 
@@ -89,11 +105,11 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
 
         if (dir == Dir::Left)
         {
-            btnDisable->SetPosition({ rect.x + rect.width - btnDisable->GetSize().x - 1, rect.y + 1});
+            btnDisable->SetPosition({ rect.x + rect.width - btnDisable->GetSize().x - 1, rect.y + 1 });
         }
         else if (dir == Dir::Right)
         {
-            btnDisable->SetPosition({ rect.x + 1, rect.y +1 });
+            btnDisable->SetPosition({ rect.x + 1, rect.y + 1 });
         }
 
         for (int i = 0; i < 5; i++)
@@ -115,16 +131,6 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
 
             parametersI.push_back(combo);
         }
-    }
-
-    for (ComboInput *combo : parametersI)
-    {
-        combo->Enable(!disabled);
-    }
-
-    for (ComboInput *combo : parametersU)
-    {
-        combo->Enable(!disabled);
     }
 }
 

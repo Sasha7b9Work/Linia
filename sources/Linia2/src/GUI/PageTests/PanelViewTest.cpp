@@ -149,14 +149,14 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
                 if (!amptermeterBase)
                 {
-                    amptermeterBase = new Ampermeter({ driwer.GetX(), y_meas_I }, Dir::Right);
+                    amptermeterBase = new Ampermeter(Chan::_B, { driwer.GetX(), y_meas_I }, Dir::Right);
                 }
 
                 amptermeterBase->Draw(*dc);
 
                 if (!sourceVoltageCurrentBase)
                 {
-                    sourceVoltageCurrentBase = new SourceVoltageCurrent({ driwer.GetX(), y_source_U }, Dir::Right);
+                    sourceVoltageCurrentBase = new SourceVoltageCurrent(Chan::_B, { driwer.GetX(), y_source_U }, Dir::Right);
                 }
 
                 sourceVoltageCurrentBase->Draw(*dc);
@@ -171,7 +171,7 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
                 if (!voltmeterBase)
                 {
-                    voltmeterBase = new Voltmeter({ driwer.GetX(), driwer.GetY() }, Dir::Left);
+                    voltmeterBase = new Voltmeter(Chan::_B, { driwer.GetX(), driwer.GetY() }, Dir::Left);
                 }
 
                 voltmeterBase->Draw(*dc);
@@ -200,14 +200,14 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
                 if (!ampermeterSubstrate)
                 {
-                    ampermeterSubstrate = new Ampermeter({ driwer.GetX(), y_meas_I }, Dir::Left);
+                    ampermeterSubstrate = new Ampermeter(Chan::_S, { driwer.GetX(), y_meas_I }, Dir::Left);
                 }
 
                 ampermeterSubstrate->Draw(*dc);
 
                 if (!sourceVoltateCurrentSubstrate)
                 {
-                    sourceVoltateCurrentSubstrate = new SourceVoltageCurrent({ driwer.GetX(), y_source_U }, Dir::Left);
+                    sourceVoltateCurrentSubstrate = new SourceVoltageCurrent(Chan::_S, { driwer.GetX(), y_source_U }, Dir::Left);
                 }
 
                 sourceVoltateCurrentSubstrate->Draw(*dc);
@@ -220,7 +220,7 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
                 if (!voltmeterSubstrate)
                 {
-                    voltmeterSubstrate = new Voltmeter({ driwer.GetX(), y_meas_U }, Dir::Right);
+                    voltmeterSubstrate = new Voltmeter(Chan::_S, { driwer.GetX(), y_meas_U }, Dir::Right);
                 }
 
                 voltmeterSubstrate->Draw(*dc);
@@ -243,14 +243,14 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
         if (!ampermeterCollector)
         {
-            ampermeterCollector = new Ampermeter({ driwer.GetX(), y_meas_I }, Dir::Left);
+            ampermeterCollector = new Ampermeter(Chan::_C, { driwer.GetX(), y_meas_I }, Dir::Left);
         }
 
         ampermeterCollector->Draw(*dc);
 
         if (!sourceVoltageCollector)
         {
-            sourceVoltageCollector = new SourceVoltage({ driwer.GetX(), y_source_U }, Dir::Left);
+            sourceVoltageCollector = new SourceVoltage(Chan::_C, { driwer.GetX(), y_source_U }, Dir::Left);
         }
 
         sourceVoltageCollector->Draw(*dc);
@@ -265,7 +265,7 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 
         if (!voltmeterCollector)
         {
-            voltmeterCollector = new Voltmeter({ driwer.GetX(), y_meas_U }, Dir::Right);
+            voltmeterCollector = new Voltmeter(Chan::_C, { driwer.GetX(), y_meas_U }, Dir::Right);
         }
 
         voltmeterCollector->Draw(*dc);

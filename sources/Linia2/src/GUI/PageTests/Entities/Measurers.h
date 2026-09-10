@@ -1,6 +1,7 @@
 // 2026/09/04 12:17:30 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "Settings/Tests/Ranges.h"
+#include "GUI/Controls/ButtonCombo.h"
 #pragma warning(push, 0)
     #include <wx/dcclient.h>
 #pragma warning(pop)
@@ -39,7 +40,7 @@ public:
         };
     };
 
-    MeasurerSourcer(Type::E _type, const wxPoint _center, Dir::E);
+    MeasurerSourcer(Type::E, Chan::E, const wxPoint _center, Dir::E);
 
     void Draw(wxPaintDC &dc);
 
@@ -51,6 +52,7 @@ public:
 protected:
 
     Type::E type;
+    Chan::E chan;
     Dir::E dir;                                 // Расположение органов управления относительно УГО измерителя/источника
     const int radius = 12;
     wxPoint center;
@@ -58,6 +60,7 @@ protected:
     std::vector<ComboInput *> parametersI;
     Button *btnDisable = nullptr;               // Кнопка отлючения измерителя/источника
     bool disabled = false;
+    Button *btnModeSourceUI = nullptr;          // В каком режиме находится - источник тока или источник напряжения
 
 private:
 
@@ -65,6 +68,8 @@ private:
     // В x, y возвращаются координаты, с которых нужно выводить элементы управления
     // Возвращает прямоугльник окантовки
     wxRect DrawBorder(wxPaintDC &dc, int &x, int &y, int radius, int num_controls);
+
+    void CreateControls(const wxRect &rect, int x, int y);
 };
 
 
@@ -73,8 +78,8 @@ class Voltmeter : public MeasurerSourcer
 {
 public:
 
-    Voltmeter(const wxPoint _center, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::MeasU, _center, _dir)
+    Voltmeter(Chan::E _chan, const wxPoint _center, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::MeasU, _chan, _center, _dir)
     {}
 };
 
@@ -84,8 +89,8 @@ class Ampermeter : public MeasurerSourcer
 {
 public:
 
-    Ampermeter(const wxPoint _center, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::MeasI, _center, _dir)
+    Ampermeter(Chan::E _chan, const wxPoint _center, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::MeasI, _chan, _center, _dir)
     {}
 };
 
@@ -95,8 +100,8 @@ class SourceVoltage : public MeasurerSourcer
 {
 public:
 
-    SourceVoltage(const wxPoint _center, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceU, _center, _dir)
+    SourceVoltage(Chan::E _chan, const wxPoint _center, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::SourceU, _chan, _center, _dir)
     {}
 };
 
@@ -106,8 +111,8 @@ class SourceCurrent : public MeasurerSourcer
 {
 public:
 
-    SourceCurrent(const wxPoint _center, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceI, _center, _dir)
+    SourceCurrent(Chan::E _chan, const wxPoint _center, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::SourceI, _chan, _center, _dir)
     {}
 };
 
@@ -116,7 +121,7 @@ class SourceVoltageCurrent : public MeasurerSourcer
 {
 public:
 
-    SourceVoltageCurrent(const wxPoint _center, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceUI, _center, _dir)
+    SourceVoltageCurrent(Chan::E _chan, const wxPoint _center, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::SourceUI, _chan, _center, _dir)
     {}
 };
