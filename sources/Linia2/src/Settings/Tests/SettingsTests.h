@@ -98,18 +98,3 @@ struct TypeScan
 
     static pchar NameFileICO(E);
 };
-
-
-struct MicroChip
-{
-    enum E
-    {
-        DAC_5300_1,
-        DAC_5300_2,
-        DAC_5443,
-        DAC_5531,
-        Count
-    };
-
-    static pchar Name(E);
-};

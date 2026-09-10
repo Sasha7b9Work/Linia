@@ -148,17 +148,3 @@ bool Chan::IsVisible() const
 
     return true;
 }
-
-
-pchar MicroChip::Name(E v)
-{
-    static const pchar names[Count] =
-    {
-        "DAC_5300_1",
-        "DAC_5300_2",
-        "DAC_5443",
-        "DAC_5531"
-    };
-
-    return names[v];
-}
