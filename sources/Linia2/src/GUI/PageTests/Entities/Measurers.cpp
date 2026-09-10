@@ -259,6 +259,20 @@ void MeasurerSourcer::CreateParametersI()
             CREATE_COMBO(L("Шаг"), "comboBaseSourceI", parametersI);
         }
     }
+    else if (chan == Chan::_C)
+    {
+        if (type == Type::MeasI)
+        {
+            for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+            {
+                titles.push_back(range.Name(RowRange::_125));
+            }
+
+            tooltips.push_back(L("Диапазон измерения тока базы"));
+
+            CREATE_COMBO(L("Предел"), "comboBaseMeasI", parametersI);
+        }
+    }
 }
 
 
@@ -311,6 +325,29 @@ void MeasurerSourcer::CreateParametersU()
             CREATE_COMBO(L("Предел"), "comboBaseMeasU", parametersU);
         }
         else if (type == Type::SourceU || type == Type::SourceUI)
+        {
+            titles.push_back("1 мВ");
+            titles.push_back("2 мВ");
+
+            tooltips.push_back(L("Шаг изменения испытательного напряжения"));
+
+            CREATE_COMBO(L("Шаг"), "comboBaseSourceU", parametersU);
+        }
+    }
+    else if (chan == Chan::_C)
+    {
+        if (type == Type::MeasU)
+        {
+            for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+            {
+                titles.push_back(range.Name(RowRange::_124));
+            }
+
+            tooltips.push_back(L("Диапазон измерения напряжения базы"));
+
+            CREATE_COMBO(L("Предел"), "comboBaseMeasU", parametersU);
+        }
+        else if (type == Type::SourceU)
         {
             titles.push_back("1 мВ");
             titles.push_back("2 мВ");
