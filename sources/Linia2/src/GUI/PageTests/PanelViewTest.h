@@ -42,38 +42,10 @@ private:
 
     ButtonsCombo *bcModeScan = nullptr;                 // Режим развёртки
     ButtonsCombo *bcTypeSemiconductor = nullptr;        // npn или pnp
-
     ButtonsCombo *bcBaseModeControl = nullptr;          // Режим управления базой - током или напряжением
     ComboInput *bcBaseNumMeasures = nullptr;            // Количество измерений
-
-    ComboInput *bcBaseSourceStartI = nullptr;            // Стартовое значение задаваемой величины
-    ComboInput *bcBaseSourceStepI = nullptr;            // Шаг изменения задаваемой величины
-    ComboInput *bcBaseSourceStartU = nullptr;
-    ComboInput *bcBaseSourceStepU = nullptr;
-    ComboInput *bcBaseMeasureRangeU = nullptr;          // Диапазон - максимальное доступное значение
-    ComboInput *bcBaseMeasureLimitU = nullptr;          // Максимальное значение, при котором происходит завершение измерения
-    ComboInput *bcBaseMeasureRangeI = nullptr;
-    ComboInput *bcBaseMeasureLimitI = nullptr;
-    MeasurerSourcer *measureBase = nullptr;
-
     ButtonsCombo *bcSubstrateModeControl = nullptr;
-    ComboInput *bcSubstrateStartValueI = nullptr;
-    ComboInput *bcSubstrateDeltaValueI = nullptr;
-    ComboInput *bcSubstrateNumMeasures = nullptr;
-    ComboInput *bcSubstrateMeasureRangeU = nullptr;
-    ComboInput *bcSubstrateMeasureLimitU = nullptr;
-    ComboInput *bcSubstrateMeasureRangeI = nullptr;
-    ComboInput *bcSubstrateMeasureLimitI = nullptr;
-    ComboInput *bcSubstrateSourceStartU = nullptr;
-    ComboInput *bcSubstrateSourceStepU = nullptr;
-
     ButtonsCombo *bcCollectorModeSource = nullptr;      // Режим работы источника в коллекторе - высокое напряжение или большой ток
-    ComboInput *bcCollectorValueStartU = nullptr;       // Начальное значение испытательного напряжения Uк
-    ComboInput *bcCollectorValueFinishU = nullptr;      // Конечное значение испытательного напряжения Uк
-    ComboInput *bcCollectorMeasureRangeI = nullptr;
-    ComboInput *bcCollectorMeasureLimitI = nullptr;
-    ComboInput *bcCollectorMeasureRangeU = nullptr;
-    ComboInput *bcCollectorMeasureLimitU = nullptr;
 
     void OnEventPaint(wxPaintEvent &);
 
