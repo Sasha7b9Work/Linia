@@ -71,6 +71,8 @@ void PanelViewTest::DrawElement()
 
 void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 {
+    LOG_WRITE("Test");
+
     Freeze();
 
     int x_col = c.x + radius_trans / 2;   // / Координаты точки коммутации
