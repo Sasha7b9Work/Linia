@@ -61,7 +61,7 @@ protected:
     std::vector<ComboInput *> parametersI;
     Button *btnDisable = nullptr;               // Кнопка отлючения измерителя/источника
     bool disabled = false;
-    Button *btnModeSourceUI = nullptr;          // В каком режиме находится - источник тока или источник напряжения
+    Button *btnModeUI = nullptr;                // В измерителе переключение между вольтметром и амперметров, в источнике - между источником тока и источником напряжения
 
 private:
 

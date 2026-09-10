@@ -79,9 +79,9 @@ void MeasurerSourcer::Draw(wxPaintDC &dc)
         combo->Enable(!disabled);
     }
 
-    if (btnModeSourceUI)
+    if (btnModeUI)
     {
-        btnModeSourceUI->Enable(!disabled);
+        btnModeUI->Enable(!disabled);
     }
 }
 
@@ -158,20 +158,20 @@ void MeasurerSourcer::CreateButtonModeSourceUI(const wxSize &size, const wxPoint
 {
     if (type == Type::SourceUI)
     {
-        btnModeSourceUI = new Button(ThePanelViewTest, "E", size);
-        btnModeSourceUI->SetPosition({ pos.x, pos.y + 25 });
-        btnModeSourceUI->SetToolTip(L("Включён блок источника напряжения"));
-        btnModeSourceUI->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
+        btnModeUI = new Button(ThePanelViewTest, "E", size);
+        btnModeUI->SetPosition({ pos.x, pos.y + 25 });
+        btnModeUI->SetToolTip(L("Включён блок источника напряжения"));
+        btnModeUI->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
             {
-                if (btnModeSourceUI->GetLabel() == wxString("E"))
+                if (btnModeUI->GetLabel() == wxString("E"))
                 {
-                    btnModeSourceUI->SetLabel("J");
-                    btnModeSourceUI->SetToolTip(L("Включён блок источника тока"));
+                    btnModeUI->SetLabel("J");
+                    btnModeUI->SetToolTip(L("Включён блок источника тока"));
                 }
                 else
                 {
-                    btnModeSourceUI->SetLabel("E");
-                    btnModeSourceUI->SetToolTip(L("Включён блок источника напряжения"));
+                    btnModeUI->SetLabel("E");
+                    btnModeUI->SetToolTip(L("Включён блок источника напряжения"));
                 }
 
                 event.Skip();
