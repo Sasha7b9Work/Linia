@@ -52,11 +52,11 @@ private:
     void OnChangedCollectorMeasureLimitU(wxCommandEvent &);
 
     // Нарисовать испытуемый элемент
-    void DrawElement();
+    void CreateElement();
 
     // type == "npn", "pnp"
-    void DrawBJT(const wxString &type, const wxPoint &);
-    void DrawBJTS(const wxString &type, const wxPoint &);
+    void CreateBJT(const wxString &type, const wxPoint &);
+    void CreateBJTS(const wxString &type, const wxPoint &);
 
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
 
@@ -82,4 +82,6 @@ private:
     Ampermeter *ampermeterCollector = nullptr;
     Voltmeter *voltmeterCollector = nullptr;
     SourceVoltage *sourceVoltageCollector = nullptr;
+
+    bool created = false;
 };

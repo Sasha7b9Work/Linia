@@ -27,7 +27,7 @@ void PanelViewTest::SetTest(Test *_test)
 
 void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 {
-    if (test)
+    if (test && !created)
     {
         dc = new wxPaintDC(this);
 
@@ -38,7 +38,9 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
         // Устанавливаем цвет текста
         dc->SetTextForeground(*wxBLACK);
 
-        DrawElement();
+        CreateControls();
+
+        CreateElement();
 
         // Устанавливаем шрифт (опционально)
         dc->SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
@@ -48,33 +50,29 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 
         delete dc;
         dc = nullptr;
+
+        created = true;
     }
 
     event.Skip();
 }
 
 
-void PanelViewTest::DrawElement()
+void PanelViewTest::CreateElement()
 {
-    CreateControls();
-
     if (test->lib->UGO == "BJT")
     {
-        DrawBJT("npn", GetCenter());
+        CreateBJT("npn", GetCenter());
     }
     else if (test->lib->UGO == "BJTS")
     {
-        DrawBJTS("npn", GetCenter());
+        CreateBJTS("npn", GetCenter());
     }
 }
 
 
-void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
+void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c)
 {
-    LOG_WRITE("Test");
-
-    Freeze();
-
     int x_col = c.x + radius_trans / 2;   // / Координаты точки коммутации
     int y_col = c.y - 2 * radius_trans;   // / с коллектором
 
@@ -229,8 +227,6 @@ void PanelViewTest::DrawBJT(const wxString &type, const wxPoint &c)
 
         voltmeterCollector = new Voltmeter(*dc, { driwer.GetX(), y_meas_U }, Dir::Right);
     }
-
-    Thaw();
 }
 
 
@@ -240,9 +236,9 @@ void PanelViewTest::DrawGround(int x, int y)
 }
 
 
-void PanelViewTest::DrawBJTS(const wxString &type, const wxPoint &c)
+void PanelViewTest::CreateBJTS(const wxString &type, const wxPoint &c)
 {
-    DrawBJT(type, c);
+    CreateBJT(type, c);
 }
 
 
