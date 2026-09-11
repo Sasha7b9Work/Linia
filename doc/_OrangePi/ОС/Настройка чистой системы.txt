@@ -1,6 +1,18 @@
 !!! ВНИМАНИЕ !!!
 После любых изменений в системе всегда проверяйте функционирование UART6
 
+-2. Отключить обновления системы (apt-get update, apt-get upgrade)
+    nano /etc/apt/apt.conf.d/20auto-upgrades :
+        APT::Periodic::Update-Package-Lists "0";
+        APT::Periodic::Unattended-Upgrade "0";
+    
+    nano /etc/apt/apt.conf.d/10periodic :
+        APT::Periodic::Update-Package-Lists "0";
+        APT::Periodic::Download-Upgradeable-Packages "0";
+        APT::Periodic::AutocleanInterval "0";
+        
+    После этого apt-install продолжить работать, но иногда установка пакета может подтянуть более новую версию зависимости
+
 -1. Для установки системы следует использовать файл Armbian_25.8.1_Orangepi5-plus_noble_vendor_6.1.115_xfce_desktop
     После установки :
     apt-get update
@@ -60,6 +72,7 @@
     4.1 lsblk
     4.2 sudo blkid /dev/nvme0n1
         UUID="44fe5ae6-ad0d-44bb-bc8d-214ea83e23e6" BLOCK_SIZE="4096" TYPE="ext4"
+        UUID="31d867ac-3245-45f6-9f8e-1470040099c0" BLOCK_SIZE="4096" TYPE="ext4"
     4.3 sudo nano /etc/fstab :
         в конце файла:
         UUID=44fe5ae6-ad0d-44bb-bc8d-214ea83e23e6 /mnt/nvme ext4 defaults 0 2
