@@ -594,7 +594,7 @@ wxRect MeasurerSourcer::DrawBorder(wxPaintDC &dc, int &x, int &y, int r, int num
 
     paint.StorePenBrush();
 
-    dc.SetPen({ disabled ? wxColour(192, 192, 192) : (*wxBLACK), 1, wxPENSTYLE_SHORT_DASH});
+    dc.SetPen({ disabled ? wxColour(150, 150, 150) : (*wxBLACK), 1, wxPENSTYLE_SHORT_DASH});
     dc.SetBrush(*wxTRANSPARENT_BRUSH);
 
     int width = WIDTH_CONTROL + d * 2;
