@@ -4,6 +4,7 @@
 #include "Settings/Tests/Library/Library.h"
 #include "GUI/Controls/ButtonCombo.h"
 #include "GUI/PageTests/Entities/Measurers.h"
+#include "GUI/PageTests/Entities/Commutator.h"
 #pragma warning(push, 0)
     #include <wx/dcclient.h>
 #pragma warning(pop)
@@ -30,6 +31,7 @@ private:
     ButtonsCombo *bcScanNumberPoints = nullptr;         // Количество точек в одной ВАХ
     ButtonsCombo *bcTypeSemiconductor = nullptr;        // npn или pnp
     ComboInput *bcBaseNumMeasures = nullptr;            // Количество измерений
+    Commutator *commutator = nullptr;
 
     void OnEventPaint(wxPaintEvent &);
 

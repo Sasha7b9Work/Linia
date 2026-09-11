@@ -49,6 +49,8 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
         // Рисуем текст в левом верхнем углу
         dc->DrawText(test->lib->name + " : " + test->name, 5, 5);
 
+        commutator->Refresh();
+
         delete dc;
         dc = nullptr;
     }
@@ -281,6 +283,8 @@ void PanelViewTest::CreateControls()
     {
         return;
     }
+
+    commutator = new Commutator(this, { 200, 50 }, 101);
 
     prev_test = test;
 
