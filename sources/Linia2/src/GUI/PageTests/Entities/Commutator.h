@@ -12,6 +12,7 @@ class Commutator : public StaticBox
 {
 public:
 
+    // _width должен быть нечётным
     Commutator(wxWindow *_parent, const wxPoint &_pos, int _width) : StaticBox(_parent, L("Коммутатор"), {_width, _width + 14})
     {
         SetPosition(_pos);

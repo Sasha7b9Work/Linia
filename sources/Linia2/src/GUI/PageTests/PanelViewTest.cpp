@@ -284,7 +284,7 @@ void PanelViewTest::CreateControls()
         return;
     }
 
-    commutator = new Commutator(this, { 200, 50 }, 101);
+    commutator = new Commutator(this, { 10, 40 }, 171);
 
     prev_test = test;
 
@@ -300,7 +300,7 @@ void PanelViewTest::CreateControls()
     {
         StaticBox *box = new StaticBox(this, L("Развёртка"), { width + 20, 100 });
 
-        box->SetPosition({ 10, 50 });
+        box->SetPosition({ 200, 40 });
 
         if (!bcScanMode)
         {
