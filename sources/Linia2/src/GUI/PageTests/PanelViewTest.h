@@ -29,7 +29,6 @@ private:
     ButtonsCombo *bcModeScan = nullptr;                 // Режим развёртки
     ButtonsCombo *bcTypeSemiconductor = nullptr;        // npn или pnp
     ComboInput *bcBaseNumMeasures = nullptr;            // Количество измерений
-    ButtonsCombo *bcCollectorModeSource = nullptr;      // Режим работы источника в коллекторе - высокое напряжение или большой ток
 
     void OnEventPaint(wxPaintEvent &);
 

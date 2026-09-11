@@ -286,11 +286,6 @@ void PanelViewTest::CreateControls()
     wxPoint c = GetCenter();
 
     int x_base = 20;
-    int y_base = c.y - 40;
-    int dy_base = 50;
-
-    int dx_substrate = 250;
-
     int width = MeasurerSourcer::WIDTH_CONTROL;
 
 #define CREATE_BUTTONS_COMBO(name, title, num, func, _x, _y)  \
@@ -335,43 +330,6 @@ void PanelViewTest::CreateControls()
             width = 40;
             CREATE_BUTTONS_COMBO(bcTypeSemiconductor, L(""), 1, OnChangedTypeSemiconductor, c.x - 20, c.y - 10);
             width = temp_width;
-        }
-    }
-
-    y_base += dy_base;
-
-    dy_base = 35;
-    y_base += dy_base;
-
-    y_base += dy_base;
-
-    x_base += 70;
-    y_base += 30;
-    y_base += dy_base;
-
-    {
-        dx_substrate -= 150;
-    }
-
-    y_base += dy_base;
-
-    int x = 200;
-    int y = 50;
-
-    width = 200;
-
-    {
-        if (!bcCollectorModeSource)
-        {
-            wxArrayString titles;
-            titles.push_back(L("Высокое напряжение"));
-            titles.push_back(L("Большой ток"));
-
-            wxArrayString tooltips;
-            tooltips.push_back(L("Uc <= 3000 В, Ic <= 1 А"));
-            tooltips.push_back(L("Uc <= 50 В, Ic <= 50 А"));
-
-            CREATE_BUTTONS_COMBO(bcCollectorModeSource, L("Режим"), 1, OnChangedCollectorModeSource, x, y);
         }
     }
 
