@@ -26,13 +26,15 @@ private:
 
     wxPaintDC *dc = nullptr;
 
-    ButtonsCombo *bcModeScan = nullptr;                 // Режим развёртки
+    ButtonsCombo *bcScanMode = nullptr;                 // Режим развёртки
+    ButtonsCombo *bcScanNumberPoints = nullptr;         // Количество точек в одной ВАХ
     ButtonsCombo *bcTypeSemiconductor = nullptr;        // npn или pnp
     ComboInput *bcBaseNumMeasures = nullptr;            // Количество измерений
 
     void OnEventPaint(wxPaintEvent &);
 
-    void OnChangedModeScan(wxCommandEvent &);
+    void OnChangedScanMode(wxCommandEvent &);
+    void OnChangedScanNumberPoints(wxCommandEvent &);
     void OnChangedTypeSemiconductor(wxCommandEvent &);
     void OnChangedBaseModeControl(wxCommandEvent &);
     void OnChangedBaseStartValueI(wxCommandEvent &);

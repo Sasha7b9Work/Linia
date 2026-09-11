@@ -298,7 +298,7 @@ void PanelViewTest::CreateControls()
 
         box->SetPosition({ 10, 50 });
 
-        if (!bcModeScan)
+        if (!bcScanMode)
         {
             wxArrayString titles;
             titles.push_back("SIN+");
@@ -313,7 +313,25 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back("");
 
-            CREATE_BUTTONS_COMBO(bcModeScan, box, L("Развёртка"), 1, OnChangedModeScan, 10, 20);
+            CREATE_BUTTONS_COMBO(bcScanMode, box, L("Тип"), 1, OnChangedScanMode, 10, 20);
+        }
+
+        if (!bcScanNumberPoints)
+        {
+            wxArrayString titles =
+            {
+                "20",
+                "50",
+                "100",
+                "200"
+            };
+
+            wxArrayString tooltips =
+            {
+                ""
+            };
+
+            CREATE_BUTTONS_COMBO(bcScanNumberPoints, box, L("Кол-во точек"), 1, OnChangedScanNumberPoints, 10, 20 + 30);
         }
     }
 
@@ -338,7 +356,13 @@ void PanelViewTest::CreateControls()
 }
 
 
-void PanelViewTest::OnChangedModeScan(wxCommandEvent &)
+void PanelViewTest::OnChangedScanMode(wxCommandEvent &)
+{
+
+}
+
+
+void PanelViewTest::OnChangedScanNumberPoints(wxCommandEvent &)
 {
 
 }
