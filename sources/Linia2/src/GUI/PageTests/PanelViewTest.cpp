@@ -4,6 +4,7 @@
 #include "Utils/GlobalFunctions.h"
 #include "Utils/LineDrawer.h"
 #include "GUI/Controls/Painter.h"
+#include "GUI/Controls/StaticBox.h"
 
 
 PanelViewTest *ThePanelViewTest = nullptr;
@@ -285,20 +286,18 @@ void PanelViewTest::CreateControls()
 
     wxPoint c = GetCenter();
 
-    int x_base = 20;
     int width = MeasurerSourcer::WIDTH_CONTROL;
 
-#define CREATE_BUTTONS_COMBO(name, title, num, func, _x, _y)  \
-    name = new ButtonsCombo(this, title, width, titles, tooltips, num, #name, ButtonsCombo::Type::Text);    \
-    name->Bind(wxEVT_COMBOBOX, &PanelViewTest::func, this); \
-    name->SetPosition( {_x, _y} );
-
-#define CREATE_BUTTONS_COMBO_RANGE(name, title, func, _x, _y)  \
-    name = new ComboInput(this, title, width, titles, tooltips, #name);    \
-    name->Bind(wxEVT_COMBOBOX, &PanelViewTest::func, this); \
+#define CREATE_BUTTONS_COMBO(name, parent, title, num, func, _x, _y)                                        \
+    name = new ButtonsCombo(parent, title, width, titles, tooltips, num, #name, ButtonsCombo::Type::Text);  \
+    name->Bind(wxEVT_COMBOBOX, &PanelViewTest::func, this);                                                 \
     name->SetPosition( {_x, _y} );
 
     {
+        StaticBox *box = new StaticBox(this, L("Развёртка"), { width + 20, 100 });
+
+        box->SetPosition({ 10, 50 });
+
         if (!bcModeScan)
         {
             wxArrayString titles;
@@ -314,9 +313,11 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back("");
 
-            CREATE_BUTTONS_COMBO(bcModeScan, L("Развёртка"), 1, OnChangedModeScan, x_base, 50);
+            CREATE_BUTTONS_COMBO(bcModeScan, box, L("Развёртка"), 1, OnChangedModeScan, 10, 20);
         }
+    }
 
+    {
         if (!bcTypeSemiconductor)
         {
             wxArrayString titles;
@@ -328,13 +329,12 @@ void PanelViewTest::CreateControls()
 
             int temp_width = width;
             width = 40;
-            CREATE_BUTTONS_COMBO(bcTypeSemiconductor, L(""), 1, OnChangedTypeSemiconductor, c.x - 20, c.y - 10);
+            CREATE_BUTTONS_COMBO(bcTypeSemiconductor, this, L(""), 1, OnChangedTypeSemiconductor, c.x - 20, c.y - 10);
             width = temp_width;
         }
     }
 
 #undef CREATE_BUTTONS_COMBO
-#undef CREATE_BUTTONS_COMBO_RANGE
 }
 
 
