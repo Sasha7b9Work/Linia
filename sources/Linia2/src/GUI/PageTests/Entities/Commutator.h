@@ -26,10 +26,12 @@ public:
 
     void Enable()
     {
-        if (!timer.IsRunning())
+        if (timer.IsRunning())
         {
-            timer.Start(500);
+            return;
         }
+
+        timer.Start(500);
         visible = true;
 
         label->SetForegroundColour(ColorOne());
