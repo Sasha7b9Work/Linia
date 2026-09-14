@@ -11,22 +11,69 @@ public:
     StaticBox(wxWindow *parent, const wxString &title, const wxSize &size = wxDefaultSize) :
         wxStaticBox(parent, wxID_ANY, title, wxDefaultPosition, size, wxBORDER_NONE)
     {
-        wxStaticBox::SetName(parent->GetName());
+        wxStaticBox::SetName(parent->GetName() + wxString{ "_static_box" });
 
         if (font == wxNullFont)
         {
             font = GetFont();
             font.SetWeight(wxFONTWEIGHT_BOLD);
-//            font.SetPointSize(font.GetPointSize() + 1);
+            //            font.SetPointSize(font.GetPointSize() + 1);
         }
-    }
 
-    static wxFont &TitleFont()
-    {
-        return font;
+#ifdef __WXGTK__
+        // Своя отрисовка рамки и заголовка
+        SetBackgroundStyle(wxBG_STYLE_PAINT);
+        Bind(wxEVT_PAINT, &StaticBox::OnPaintGtk, this);
+        Bind(wxEVT_ERASE_BACKGROUND, [](wxEraseEvent &) { } );
+#endif
     }
 
 private:
+
+#ifdef __WXGTK__
+    void OnPaintGtk(wxPaintEvent &)
+    {
+        wxAutoBufferedPaintDC dc(this);
+
+        const wxSize sz = GetClientSize();
+        const int margin = FromDIP(2);
+        const int titleH = TitleFont().GetPixelSize().GetHeight() + FromDIP(4);
+        const int rectX = margin;
+        const int rectY = titleH / 2;
+        const int rectW = sz.x - 2 * margin;
+        const int rectH = sz.y - rectY - margin;
+
+        if (rectW <= 0 || rectH <= 0)
+            return;
+
+        // Рисуем только рамку и заголовок.
+        // Фон под дочерними контролами не затираем.
+        dc.SetPen(wxPen(wxColour(160, 160, 160), 1));
+        dc.SetBrush(*wxTRANSPARENT_BRUSH);
+        dc.DrawRectangle(rectX, rectY, rectW, rectH);
+
+        const wxString title = GetLabel();
+        if (!title.IsEmpty())
+        {
+            dc.SetFont(TitleFont());
+            dc.SetTextForeground(wxColour(80, 80, 80));
+            dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+
+            const wxSize textSz = dc.GetTextExtent(title);
+            const int padX = FromDIP(4);
+            const int textX = rectX + FromDIP(6);
+            const int textY = rectY - textSz.y / 2;
+
+            // Затираем линию рамки фоном панели — только под текстом
+            dc.SetPen(*wxTRANSPARENT_PEN);
+            dc.SetBrush(wxBrush(GetBackgroundColour()));
+            dc.DrawRectangle(textX - padX, textY,
+                textSz.x + 2 * padX, textSz.y);
+
+            dc.DrawText(title, textX, textY);
+        }
+    }
+#endif
 
     static wxFont font;
 };
