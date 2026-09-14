@@ -23,7 +23,7 @@ public:
 
         radius = w / 2;
 
-        canvas->Bind(wxEVT_PAINT, &Commutator::OnEventPaint, this);
+//        canvas->Bind(wxEVT_PAINT, &Commutator::OnEventPaint, this);
     }
 
 private:
