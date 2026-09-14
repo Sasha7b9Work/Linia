@@ -54,7 +54,7 @@ private:
 
         // Рисуем только рамку и заголовок.
         // Фон под дочерними контролами не затираем.
-        dc.SetPen(wxPen(wxColour(160, 160, 160), 1));
+        dc.SetPen(wxPen(wxColour(127, 127, 127), 1));
         dc.SetBrush(*wxTRANSPARENT_BRUSH);
         dc.DrawRectangle(rectX, rectY, rectW, rectH);
 
