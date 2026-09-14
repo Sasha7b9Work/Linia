@@ -25,7 +25,7 @@ private:
 
     Test *test = nullptr;
 
-    wxPaintDC *dc = nullptr;
+    wxBufferedPaintDC *dc = nullptr;
 
     ButtonsCombo *bcScanMode = nullptr;                 // Режим развёртки
     ButtonsCombo *bcScanNumberPoints = nullptr;         // Количество точек в одной ВАХ

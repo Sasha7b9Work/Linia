@@ -2,6 +2,9 @@
 #pragma once
 #include "GUI/Controls/Button.h"
 #include "GUI/Controls/ButtonCombo.h"
+#pragma warning(push, 0)
+    #include <wx/dcbuffer.h>
+#pragma warning(pop)
 
 
 class wxRadioButton;
@@ -12,7 +15,6 @@ class wxTextCtrl;
 class wxSpinCtrl;
 
 
-#define FIND_CHECKBUTTON(id)  GF::FindCheckButton(this, (id))
 #define FIND_ANY_BUTTON(id)   GF::FindAnyButton(this, (id))
 #define FIND_CHECKBOX(id)     GF::FindCheckBox(this, (id))
 #define FINC_COMBOBOX(id)     GF::FindComboBox(this, (id))
@@ -66,5 +68,5 @@ namespace GF
     // Получить ip-адрес устройства, на котором запущены
     wxString GetSelfIP();
 
-    void DrawTextInCenter(wxPaintDC &, const wxString &, const wxRect &);
+    void DrawTextInCenter(wxBufferedPaintDC &, const wxString &, const wxRect &);
 }

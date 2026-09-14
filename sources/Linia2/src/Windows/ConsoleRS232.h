@@ -2,7 +2,7 @@
 #pragma once 
 #include "Utils/String.h"
 #pragma warning(push, 0)
-#include <wx/frame.h>
+    #include <wx/frame.h>
 #pragma warning(pop)
 #include <mutex>
 

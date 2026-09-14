@@ -30,7 +30,7 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 {
     if (test)
     {
-        dc = new wxPaintDC(this);
+        dc = new wxBufferedPaintDC(this);
 
         dc->SetBrush(wxBrush(GetBackgroundColour()));
 
