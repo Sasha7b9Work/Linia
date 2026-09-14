@@ -24,7 +24,7 @@ public:
         radius = w / 2;
 
 #ifndef WIN32
-        radius -= 5;
+        radius -= 6;
 #endif
 
         canvas->Bind(wxEVT_PAINT, &Commutator::OnEventPaint, this);
