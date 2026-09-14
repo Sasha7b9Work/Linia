@@ -9,8 +9,14 @@
 class StaticBox : public wxStaticBox
 {
 public:
-    StaticBox(wxWindow *parent, const wxString &title, const wxSize &size = wxDefaultSize) :
-        wxStaticBox(parent, wxID_ANY, title, wxDefaultPosition, size, wxBORDER_NONE)
+    StaticBox(wxWindow *parent, const wxString &_title, const wxSize &size = wxDefaultSize) :
+        wxStaticBox(parent, wxID_ANY,
+#ifdef WIN32
+            _title,
+#else
+            "",
+#endif
+            wxDefaultPosition, size, wxBORDER_NONE), title(_title)
     {
         wxStaticBox::SetName(parent->GetName() + wxString{ "_static_box" });
 
@@ -58,7 +64,7 @@ private:
         dc.SetBrush(*wxTRANSPARENT_BRUSH);
         dc.DrawRectangle(rectX, rectY, rectW, rectH);
 
-        const wxString title{ test };
+        const wxString title = GetLabel();
         if (!title.IsEmpty())
         {
             dc.SetFont(TitleFont());
@@ -82,4 +88,5 @@ private:
 #endif
 
     static wxFont font;
+    wxString title;
 };
