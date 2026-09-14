@@ -44,5 +44,7 @@ private:
         dc.SetPen(wxPen(*wxBLACK, 1));
 
         dc.DrawCircle({ radius, radius }, radius);
+
+        event.Skip();
     }
 };
