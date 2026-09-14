@@ -9,7 +9,7 @@ class StaticBox : public wxStaticBox
 {
 public:
     StaticBox(wxWindow *parent, const wxString &title, const wxSize &size = wxDefaultSize) :
-        wxStaticBox(parent, wxID_ANY, title, wxDefaultPosition, size, wxBORDER_SUNKEN)
+        wxStaticBox(parent, wxID_ANY, title, wxDefaultPosition, size, wxBORDER_RAISED)
     {
         wxStaticBox::SetName(parent->GetName());
 
