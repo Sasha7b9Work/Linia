@@ -16,7 +16,7 @@ public:
 #else
             "",
 #endif
-            wxDefaultPosition, size, wxBORDER_NONE), title(_title)
+            wxDefaultPosition, size, wxBORDER_RAISED), title(_title)
     {
         wxStaticBox::SetName(parent->GetName() + wxString{ "_static_box" });
 
