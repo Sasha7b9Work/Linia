@@ -58,7 +58,7 @@ private:
         dc.SetBrush(*wxTRANSPARENT_BRUSH);
         dc.DrawRectangle(rectX, rectY, rectW, rectH);
 
-        const wxString title = GetLabel();
+        const wxString title{ test };
         if (!title.IsEmpty())
         {
             dc.SetFont(TitleFont());
