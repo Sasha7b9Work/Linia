@@ -22,6 +22,8 @@ PageMeasures *ThePageMeasures = nullptr;
 
 PageMeasures::PageMeasures(Notebook *board, PageMeasures *&global) : PageNotebook(board, L("Измерения"))
 {
+    SetBackgroundStyle(wxBG_STYLE_PAINT);
+
     global = this;
 
     wxPanel::SetDoubleBuffered(true);
@@ -273,7 +275,7 @@ void PageMeasures::OnEventPaint(wxPaintEvent &)
 
     EndPaint();
 
-    wxPaintDC paint_dc(this);
+    wxAutoBufferedPaintDC paint_dc(this);
 
     paint_dc.DrawBitmap(*bitmap, 0, 0);
 }
