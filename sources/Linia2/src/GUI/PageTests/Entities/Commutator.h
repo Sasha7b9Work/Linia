@@ -13,6 +13,17 @@ class Commutator : public StaticBox
 {
 public:
 
+    struct Value
+    {
+        enum E
+        {
+            _Minus50V,
+            _Plus50V,
+            _3kV,
+            Count
+        };
+    };
+
     // _width должен быть нечётным
     Commutator(wxWindow *_parent, const wxPoint &_pos, int _width) : StaticBox(_parent, L("Коммутатор"), {_width, _width + 14})
     {
@@ -40,6 +51,48 @@ public:
 
         btnMode3kV = new Button(canvas, L("3 кВ"), size);
         btnMode3kV->SetPosition({ radius - size.x / 2, 10 });
+
+        txtValue = new StaticText(canvas, "", { 100, 30 }, wxALIGN_CENTER_HORIZONTAL);
+        txtValue->SetPosition({ radius - txtValue->GetSize().x / 2, 90 });
+        wxFont font = txtValue->GetFont();
+        font.SetPointSize(25);
+        txtValue->SetFont(font);
+
+        Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
+            {
+                int id = event.GetId();
+                if (id == btnModePlus50V->GetId())
+                {
+                    SetValue(Value::_Plus50V);
+                }
+                else if (id == btnModeMinus50V->GetId())
+                {
+                    SetValue(Value::_Minus50V);
+                }
+                else if (id == btnMode3kV->GetId())
+                {
+                    SetValue(Value::_3kV);
+                }
+            });
+
+        SetValue(Value::_3kV);
+    }
+
+    void SetValue(Value::E new_value)
+    {
+        value = new_value;
+        if (value == Value::_Minus50V)
+        {
+            txtValue->SetLabel(L("- 50 В"));
+        }
+        else if (value == Value::_Plus50V)
+        {
+            txtValue->SetLabel(L("+ 50 В"));
+        }
+        else if (value == Value::_3kV)
+        {
+            txtValue->SetLabel(L("3 кВ"));
+        }
     }
 
 private:
@@ -49,6 +102,8 @@ private:
     Button *btnModePlus50V = nullptr;
     Button *btnModeMinus50V = nullptr;
     Button *btnMode3kV = nullptr;
+    StaticText *txtValue = nullptr;         // Здесь будет выбранное значение
+    Value::E value = Value::_3kV;
 
     void OnEventPaint(wxPaintEvent &event)
     {
