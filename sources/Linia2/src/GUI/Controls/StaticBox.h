@@ -45,6 +45,11 @@ private:
 #ifdef __WXGTK__
     void OnPaintGtk(wxPaintEvent &)
     {
+
+        fprintf(stderr, "StaticBox::OnPaintGtk: size=%dx%d, title='%s'\n",
+            GetClientSize().x, GetClientSize().y,
+            (const char *)title.utf8_str());
+
         wxAutoBufferedPaintDC dc(this);
 
         const wxSize sz = GetClientSize();
