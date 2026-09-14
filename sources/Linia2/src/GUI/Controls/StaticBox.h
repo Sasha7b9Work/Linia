@@ -29,6 +29,11 @@ public:
 #endif
     }
 
+    static wxFont &TitleFont()
+    {
+        return font;
+    }
+
 private:
 
 #ifdef __WXGTK__
