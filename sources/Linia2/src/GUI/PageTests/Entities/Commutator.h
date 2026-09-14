@@ -59,7 +59,7 @@ public:
         font.SetPointSize(25);
         txtValue->SetFont(font);
 
-        warning_label = new WarningLabel(txtValue, 1000);
+        warning_label = new WarningLabel(txtValue);
 
         Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
             {
@@ -129,12 +129,15 @@ private:
     struct WarningLabel
     {
     public:
-        WarningLabel(wxStaticText *_label, int intervalMs = 500)
-            : label(_label)
-            , visible(true)
+        WarningLabel(wxStaticText *_label) : label(_label)
         {
             timer.SetOwner(label);
             label->Bind(wxEVT_TIMER, &WarningLabel::OnEventTimer, this);
+        }
+
+        ~WarningLabel()
+        {
+            timer.Stop();
         }
 
         void Enable()
@@ -168,7 +171,7 @@ private:
     private:
         wxStaticText *label = nullptr;
         wxTimer timer;
-        bool visible = false;
+        bool visible = true;
 
         void OnEventTimer(wxTimerEvent &)
         {
