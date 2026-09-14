@@ -10,6 +10,85 @@
 #pragma warning(disable)
 
 
+struct WarningLabel
+{
+public:
+    WarningLabel(wxStaticText *_label) : label(_label)
+    {
+        timer.SetOwner(label);
+        label->Bind(wxEVT_TIMER, &WarningLabel::OnEventTimer, this);
+    }
+
+    ~WarningLabel()
+    {
+        timer.Stop();
+    }
+
+    void Enable()
+    {
+        if (!timer.IsRunning())
+        {
+            timer.Start(500);
+        }
+        visible = true;
+
+        label->SetForegroundColour(ColorOne());
+        label->SetBackgroundColour(ColorTwo());
+
+        label->Refresh();
+
+        label->Show(true);
+    }
+
+    void Disable()
+    {
+        timer.Stop();
+        visible = true;
+        label->Show(true);
+
+        label->SetForegroundColour(*wxBLACK);
+        label->SetBackgroundColour(label->GetParent()->GetBackgroundColour());
+
+        label->Refresh();
+    }
+
+    wxColor ColorOne()
+    {
+        return label->GetParent()->GetBackgroundColour();
+    }
+
+    wxColor ColorTwo()
+    {
+        return *wxRED;
+    }
+
+private:
+    wxStaticText *label = nullptr;
+    wxTimer timer;
+    bool visible = true;
+
+    void OnEventTimer(wxTimerEvent &)
+    {
+        visible = !visible;
+
+        if (visible)
+        {
+            label->SetForegroundColour(ColorOne());
+            label->SetBackgroundColour(ColorTwo());
+        }
+        else
+        {
+            label->SetForegroundColour(ColorTwo());
+            label->SetBackgroundColour(ColorOne());
+        }
+
+        label->Refresh();
+
+        label->GetParent()->Layout();
+    }
+};
+
+
 class Commutator : public StaticBox
 {
 public:
@@ -59,7 +138,7 @@ public:
         font.SetPointSize(25);
         txtValue->SetFont(font);
 
-        warning_label = new WarningLabel(txtValue);
+        warning_label = std::make_unique<WarningLabel>(txtValue);
 
         Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
             {
@@ -126,61 +205,6 @@ private:
         event.Skip();
     }
 
-    struct WarningLabel
-    {
-    public:
-        WarningLabel(wxStaticText *_label) : label(_label)
-        {
-            timer.SetOwner(label);
-            label->Bind(wxEVT_TIMER, &WarningLabel::OnEventTimer, this);
-        }
-
-        ~WarningLabel()
-        {
-            timer.Stop();
-        }
-
-        void Enable()
-        {
-            if (!timer.IsRunning())
-            {
-                timer.Start(500);
-            }
-            visible = true;
-
-            label->SetForegroundColour(*wxWHITE);
-            label->SetBackgroundColour(*wxRED);
-
-            label->Refresh();
-
-            label->Show(true);
-        }
-
-        void Disable()
-        {
-            timer.Stop();
-            visible = true;
-            label->Show(true);
-
-            label->SetForegroundColour(*wxBLACK);
-            label->SetBackgroundColour(label->GetParent()->GetBackgroundColour());
-
-            label->Refresh();
-        }
-
-    private:
-        wxStaticText *label = nullptr;
-        wxTimer timer;
-        bool visible = true;
-
-        void OnEventTimer(wxTimerEvent &)
-        {
-            visible = !visible;
-
-            label->Show(visible);
-            label->GetParent()->Layout();
-        }
-    };
-
-    WarningLabel *warning_label = nullptr;
+    std::unique_ptr<WarningLabel> warning_label = nullptr;
 };
+
