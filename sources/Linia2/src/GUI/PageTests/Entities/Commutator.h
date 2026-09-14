@@ -132,7 +132,7 @@ public:
         btnMode3kV = new Button(canvas, L("3 кВ"), size);
         btnMode3kV->SetPosition({ radius - size.x / 2, 10 });
 
-        txtValue = new StaticText(canvas, "", { 118, 25 }, wxALIGN_CENTER_HORIZONTAL);
+        txtValue = new StaticText(canvas, "", { 118, 20 }, wxALIGN_CENTER_HORIZONTAL);
         txtValue->SetPosition({ radius - txtValue->GetSize().x / 2, 90 });
         wxFont font = txtValue->GetFont();
         font.SetPointSize(25);
