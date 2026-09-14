@@ -6,6 +6,7 @@
     #include <wx/window.h>
     #include <wx/dcclient.h>
     #include <wx/panel.h>
+    #include <wx/timer.h>
 #pragma warning(disable)
 
 
@@ -52,11 +53,13 @@ public:
         btnMode3kV = new Button(canvas, L("3 кВ"), size);
         btnMode3kV->SetPosition({ radius - size.x / 2, 10 });
 
-        txtValue = new StaticText(canvas, "", { 150, 30 }, wxALIGN_CENTER_HORIZONTAL);
+        txtValue = new StaticText(canvas, "", { 120, 30 }, wxALIGN_CENTER_HORIZONTAL);
         txtValue->SetPosition({ radius - txtValue->GetSize().x / 2, 90 });
         wxFont font = txtValue->GetFont();
         font.SetPointSize(25);
         txtValue->SetFont(font);
+
+        warning_label = new WarningLabel(txtValue, 1000);
 
         Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
             {
@@ -64,14 +67,20 @@ public:
                 if (id == btnModePlus50V->GetId())
                 {
                     SetValue(Value::_Plus50V);
+
+                    warning_label->Enable();
                 }
                 else if (id == btnModeMinus50V->GetId())
                 {
                     SetValue(Value::_Minus50V);
+
+                    warning_label->Enable();
                 }
                 else if (id == btnMode3kV->GetId())
                 {
                     SetValue(Value::_3kV);
+
+                    warning_label->Disable();
                 }
             });
 
@@ -109,11 +118,6 @@ private:
     {
         wxPaintDC dc(canvas);
 
-//        dc.SetBrush(*wxBLACK_BRUSH);
-//        dc.SetPen(wxPen(*wxBLACK, 1));
-//
-//        dc.DrawRectangle({ 0, 0 }, { canvas->GetSize().x, canvas->GetSize().y });
-
         dc.SetBrush(*wxTRANSPARENT_BRUSH);
         dc.SetPen(wxPen(*wxBLACK, 1));
 
@@ -121,4 +125,59 @@ private:
 
         event.Skip();
     }
+
+    struct WarningLabel
+    {
+    public:
+        WarningLabel(wxStaticText *_label, int intervalMs = 500)
+            : label(_label)
+            , visible(true)
+        {
+            timer.SetOwner(label);
+            label->Bind(wxEVT_TIMER, &WarningLabel::OnEventTimer, this);
+        }
+
+        void Enable()
+        {
+            if (!timer.IsRunning())
+            {
+                timer.Start(500);
+            }
+            visible = true;
+
+            label->SetForegroundColour(*wxWHITE);
+            label->SetBackgroundColour(*wxRED);
+
+            label->Refresh();
+
+            label->Show(true);
+        }
+
+        void Disable()
+        {
+            timer.Stop();
+            visible = true;
+            label->Show(true);
+
+            label->SetForegroundColour(*wxBLACK);
+            label->SetBackgroundColour(label->GetParent()->GetBackgroundColour());
+
+            label->Refresh();
+        }
+
+    private:
+        wxStaticText *label = nullptr;
+        wxTimer timer;
+        bool visible = false;
+
+        void OnEventTimer(wxTimerEvent &)
+        {
+            visible = !visible;
+
+            label->Show(visible);
+            label->GetParent()->Layout();
+        }
+    };
+
+    WarningLabel *warning_label = nullptr;
 };
