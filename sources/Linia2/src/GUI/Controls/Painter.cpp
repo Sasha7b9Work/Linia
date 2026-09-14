@@ -210,7 +210,7 @@ void PainterBMP::OnEventPaint(wxPaintEvent &)
 {
     if (bitmap.GetBitmap().IsOk())
     {
-        wxPaintDC dc(this);
+        wxAutoBufferedPaintDC dc(this);
 
         dc.DrawBitmap(bitmap.GetBitmap(), 0, 0, true);
     }

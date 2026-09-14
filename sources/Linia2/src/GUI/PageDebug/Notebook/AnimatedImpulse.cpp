@@ -11,19 +11,21 @@ AnimatedImpulse::AnimatedImpulse(wxWindow *parent, const wxColor &background) :
     color_background(background)
 {
     wxWindow::Enable(false);
+
+    SetBackgroundStyle(wxBG_STYLE_PAINT);
 }
 
 
 void AnimatedImpulse::FuncDraw()
 {
-    wxPaintDC _dc(this);
+    wxAutoBufferedPaintDC _dc(this);
 
     _dc.SetBrush(wxBrush(color_background));
     _dc.SetPen(wxPen(color_background));
 
     if(!IsEnabled())
     {
-        _dc.DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
+        _dc.DrawRectangle(0, 0, GetSize().x, GetSize().y);
     }
     else
     {
@@ -42,7 +44,7 @@ void AnimatedImpulse::FuncDraw()
             meter.Reset();
         }
 
-        _dc.DrawRectangle(0, 0, GetSize().x - 1, GetSize().y - 1);
+        _dc.DrawRectangle(0, 0, GetSize().x, GetSize().y);
 
         _dc.SetPen(*wxBLACK_PEN);
 
