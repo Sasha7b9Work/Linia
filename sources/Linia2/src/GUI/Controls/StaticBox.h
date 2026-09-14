@@ -2,6 +2,7 @@
 #pragma once
 #pragma warning(push, 0)
     #include <wx/statbox.h>
+    #include <wx/dcbuffer.h>
 #pragma warning(pop)
 
 
