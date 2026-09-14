@@ -23,6 +23,10 @@ public:
 
         radius = w / 2;
 
+#ifndef WIN32
+        radius--;
+#endif
+
         canvas->Bind(wxEVT_PAINT, &Commutator::OnEventPaint, this);
     }
 
@@ -43,7 +47,7 @@ private:
         dc.SetBrush(*wxTRANSPARENT_BRUSH);
         dc.SetPen(wxPen(*wxBLACK, 1));
 
-        dc.DrawCircle({ radius, radius - 1 }, radius);
+        dc.DrawCircle({ radius, radius }, radius);
 
         event.Skip();
     }
