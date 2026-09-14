@@ -30,7 +30,7 @@ public:
 
         canvas->Bind(wxEVT_PAINT, &Commutator::OnEventPaint, this);
 
-        wxSize size{ 50, BUTTON_HEIGHT };
+        wxSize size{ 44, BUTTON_HEIGHT };
 
         btnModePlus50V = new Button(canvas, L("+50 В"), size);
         btnModePlus50V->SetPosition({ radius + size.x / 2, 50 });
