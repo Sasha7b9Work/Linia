@@ -4,7 +4,7 @@
 #include "GUI/Controls/ButtonCombo.h"
 #include "GUI/Controls/Slider.h"
 #pragma warning(push, 0)
-    #include <wx/dcclient.h>
+    #include <wx/dcbuffer.h>
 #pragma warning(pop)
 
 
@@ -44,7 +44,7 @@ public:
 
     MeasurerSourcer(Type::E, Chan::E, const wxPoint _center, Dir::E);
 
-    void Draw(wxPaintDC &dc);
+    void Draw(wxBufferedPaintDC &dc);
 
     int GetRadius() const
     {
@@ -70,7 +70,7 @@ private:
     // Нарисовать окантовку для измерителя или источника. x, y - центр измерителя
     // В x, y возвращаются координаты, с которых нужно выводить элементы управления
     // Возвращает прямоугльник окантовки
-    wxRect DrawBorder(wxPaintDC &dc, int &x, int &y, int radius, int num_controls);
+    wxRect DrawBorder(wxBufferedPaintDC &dc, int &x, int &y, int radius, int num_controls);
 
     void CreateControls(const wxRect &rect);
 
@@ -90,7 +90,7 @@ private:
     // Показать параметры в соотвествии с выбранным режимом - така или напряжения
     void ShowNeedParameters();
 
-    void DrawUGO(wxPaintDC &dc);
+    void DrawUGO(wxBufferedPaintDC &dc);
 
     pchar SymbolUGO();
 

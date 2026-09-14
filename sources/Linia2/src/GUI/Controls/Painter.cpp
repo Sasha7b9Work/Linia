@@ -3,8 +3,8 @@
 #include "GUI/Controls/Painter.h"
 #include "Settings/Color.h"
 #pragma warning(push, 0)
-#include <wx/graphics.h>
-#include <wx/dcclient.h>
+    #include <wx/graphics.h>
+    #include <wx/dcbuffer.h>
 #pragma warning(pop)
 
 
@@ -125,7 +125,7 @@ void Painter::DrawCircle(int x, int y, int r, const wxColor &_color)
 
 void Painter::OnPaint(wxPaintEvent &)
 {
-    wxPaintDC paint_dc(this);
+    wxBufferedPaintDC paint_dc(this);
 
     paint_dc.DrawBitmap(*bitmap, 0, 0);
 }
@@ -145,7 +145,7 @@ PainterRect::PainterRect(wxWindow *parent, const wxSize &size) :
 
 void PainterRect::OnPaint(wxPaintEvent &)
 {
-    wxPaintDC dc(this);
+    wxBufferedPaintDC dc(this);
 
     dc.SetPen(*wxBLACK_PEN);
     dc.SetBrush(wxBrush(color));
@@ -206,7 +206,7 @@ void PainterBMP::OnEventPaint(wxPaintEvent &)
 {
     if (bitmap.GetBitmap().IsOk())
     {
-        wxPaintDC dc(this);
+        wxBufferedPaintDC dc(this);
 
         dc.DrawBitmap(bitmap.GetBitmap(), 0, 0, true);
     }

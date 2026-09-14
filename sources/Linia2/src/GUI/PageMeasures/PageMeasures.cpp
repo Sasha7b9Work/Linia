@@ -13,7 +13,7 @@
 #include "Utils/Timer.h"
 #pragma warning(push, 0)
     #include <wx/msgdlg.h>
-    #include <wx/dcclient.h>
+    #include <wx/dcbuffer.h>
 #pragma warning(pop)
 
 
@@ -273,7 +273,7 @@ void PageMeasures::OnEventPaint(wxPaintEvent &)
 
     EndPaint();
 
-    wxPaintDC paint_dc(this);
+    wxBufferedPaintDC paint_dc(this);
 
     paint_dc.DrawBitmap(*bitmap, 0, 0);
 }

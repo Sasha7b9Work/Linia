@@ -3,7 +3,7 @@
 #include "GUI/Controls/StaticBox.h"
 #pragma warning(push, 0)
     #include <wx/window.h>
-    #include <wx/dcclient.h>
+    #include <wx/dcbuffer.h>
     #include <wx/panel.h>
 #pragma warning(disable)
 
@@ -33,7 +33,7 @@ private:
 
     void OnEventPaint(wxPaintEvent &event)
     {
-        wxPaintDC dc(canvas);
+        wxBufferedPaintDC dc(canvas);
 
 //        dc.SetBrush(*wxBLACK_BRUSH);
 //        dc.SetPen(wxPen(*wxBLACK, 1));

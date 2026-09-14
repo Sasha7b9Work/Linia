@@ -17,7 +17,7 @@ MeasurerSourcer::MeasurerSourcer(Type::E _type, Chan::E _chan, const wxPoint _ce
 }
 
 
-void MeasurerSourcer::Draw(wxPaintDC &dc)
+void MeasurerSourcer::Draw(wxBufferedPaintDC &dc)
 {
     coord_controls.x = center.x;
     coord_controls.y = center.y;
@@ -56,7 +56,7 @@ int MeasurerSourcer::CalculateNumControls() const
 }
 
 
-void MeasurerSourcer::DrawUGO(wxPaintDC &dc)
+void MeasurerSourcer::DrawUGO(wxBufferedPaintDC &dc)
 {
     if (!disabled)
     {
@@ -586,7 +586,7 @@ void MeasurerSourcer::CreateButtonModeUI(const wxRect &rect, const wxSize &size,
 }
 
 
-wxRect MeasurerSourcer::DrawBorder(wxPaintDC &dc, int &x, int &y, int r, int num_controls)
+wxRect MeasurerSourcer::DrawBorder(wxBufferedPaintDC &dc, int &x, int &y, int r, int num_controls)
 {
     const int d = 5;
 
