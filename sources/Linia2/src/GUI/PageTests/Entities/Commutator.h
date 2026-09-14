@@ -43,7 +43,7 @@ private:
         dc.SetBrush(*wxTRANSPARENT_BRUSH);
         dc.SetPen(wxPen(*wxBLACK, 1));
 
-        dc.DrawCircle({ radius, radius }, radius);
+        dc.DrawCircle({ radius, radius - 1 }, radius);
 
         event.Skip();
     }

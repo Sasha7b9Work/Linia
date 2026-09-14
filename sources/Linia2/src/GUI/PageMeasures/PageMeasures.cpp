@@ -277,6 +277,9 @@ void PageMeasures::OnEventPaint(wxPaintEvent &)
 
     wxAutoBufferedPaintDC paint_dc(this);
 
+    paint_dc.SetBackground(wxBrush(GetBackgroundColour()));
+    paint_dc.Clear();
+
     paint_dc.DrawBitmap(*bitmap, 0, 0);
 }
 
