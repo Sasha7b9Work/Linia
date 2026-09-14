@@ -5,7 +5,7 @@
 #include "MainWindow.h"
 #include "GUI/PageMeasures/Graphics/AutoCursors.h"
 #pragma warning(push, 0)
-    #include <wx/dcbuffer.h>
+    #include <wx/dcclient.h>
 #pragma warning(pop)
 
 
@@ -204,7 +204,7 @@ bool DraggedWindow::Show(bool show)
 
 void DraggedWindow::OnEventPaint(wxPaintEvent &)
 {
-    wxBufferedPaintDC dc(main_panel);
+    wxPaintDC dc(main_panel);
 
     int width, height;
     GetClientSize(&width, &height);

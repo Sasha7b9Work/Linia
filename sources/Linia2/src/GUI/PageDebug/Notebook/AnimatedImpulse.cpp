@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "GUI/PageDebug/Notebook/AnimatedImpulse.h"
 #pragma warning(push, 0)
-    #include <wx/dcbuffer.h>
+    #include <wx/dcclient.h>
 #pragma warning(pop)
 
 
@@ -16,7 +16,7 @@ AnimatedImpulse::AnimatedImpulse(wxWindow *parent, const wxColor &background) :
 
 void AnimatedImpulse::FuncDraw()
 {
-    wxBufferedPaintDC _dc(this);
+    wxPaintDC _dc(this);
 
     _dc.SetBrush(wxBrush(color_background));
     _dc.SetPen(wxPen(color_background));

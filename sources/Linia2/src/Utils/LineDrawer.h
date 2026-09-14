@@ -1,7 +1,7 @@
 // 2026/09/04 10:11:28 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #pragma warning(push, 0)
-    #include <wx/dcbuffer.h>
+    #include <wx/dcclient.h>
 #pragma warning(pop)
 
 
@@ -9,7 +9,7 @@ class LineDriwer
 {
 public:
 
-    LineDriwer(wxBufferedPaintDC &, int x, int y);
+    LineDriwer(wxPaintDC &, int x, int y);
 
     void MoveTo(const wxPoint &);
 
@@ -70,7 +70,7 @@ public:
 
 private:
 
-    wxBufferedPaintDC &dc;
+    wxPaintDC &dc;
     wxPoint coord;
     wxPoint prev_coord;
 };

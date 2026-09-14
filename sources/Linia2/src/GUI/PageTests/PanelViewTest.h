@@ -6,7 +6,7 @@
 #include "GUI/PageTests/Entities/Measurers.h"
 #include "GUI/PageTests/Entities/Commutator.h"
 #pragma warning(push, 0)
-    #include <wx/dcbuffer.h>
+    #include <wx/dcclient.h>
 #pragma warning(pop)
 
 
@@ -25,7 +25,7 @@ private:
 
     Test *test = nullptr;
 
-    wxBufferedPaintDC *dc = nullptr;
+    wxPaintDC *dc = nullptr;
 
     ButtonsCombo *bcScanMode = nullptr;                 // Режим развёртки
     ButtonsCombo *bcScanNumberPoints = nullptr;         // Количество точек в одной ВАХ

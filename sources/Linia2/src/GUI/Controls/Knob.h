@@ -1,7 +1,7 @@
 ﻿// 2026/03/09 10:24:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #pragma warning(push, 0)
-#include <wx/dcbuffer.h>
+#include <wx/dcclient.h>
 #include <wx/control.h>
 #pragma warning(pop)
 
@@ -126,7 +126,7 @@ private:
     {
         SetBackgroundColour(GetParent()->GetBackgroundColour());
 
-        wxAutoBufferedPaintDC dc(this);
+        wxPaintDC dc(this);
         dc.Clear();
 
         wxSize size = GetClientSize();

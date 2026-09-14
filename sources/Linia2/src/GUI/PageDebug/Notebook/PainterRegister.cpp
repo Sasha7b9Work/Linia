@@ -113,7 +113,7 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
         }
     }
 
-    wxBufferedPaintDC _dc(this);
+    wxPaintDC _dc(this);
 
     wxGraphicsContext *gc = wxGraphicsContext::Create(_dc);
 

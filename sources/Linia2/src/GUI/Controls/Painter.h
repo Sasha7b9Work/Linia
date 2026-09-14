@@ -5,7 +5,7 @@
 #pragma warning(push, 0)
     #include <wx/timer.h>
     #include <wx/dcmemory.h>
-    #include <wx/dcbuffer.h>
+    #include <wx/dcclient.h>
 #pragma warning(pop)
 
 
@@ -17,13 +17,13 @@ class PaintDC
 {
 public:
 
-    PaintDC(wxBufferedPaintDC &_dc) : dc(_dc) { }
+    PaintDC(wxPaintDC &_dc) : dc(_dc) { }
 
     void StorePenBrush();
 
     void RestorePenBrush();
 
-    wxBufferedPaintDC &dc;
+    wxPaintDC &dc;
 
 private:
 

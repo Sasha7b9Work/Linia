@@ -3,7 +3,7 @@
 #include "Utils/LineDrawer.h"
 
 
-LineDriwer::LineDriwer(wxBufferedPaintDC &_dc, int _x, int _y) : dc(_dc), coord{ _x, _y }
+LineDriwer::LineDriwer(wxPaintDC &_dc, int _x, int _y) : dc(_dc), coord{ _x, _y }
 {
 }
 
