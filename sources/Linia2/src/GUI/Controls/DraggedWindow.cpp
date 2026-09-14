@@ -37,6 +37,8 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
 
     position = new ValuePoint(_title + "_pos", { 100, 100 }),
     SetPosition();
+
+    SetBackgroundStyle(wxBG_STYLE_PAINT);
 }
 
 
@@ -204,7 +206,7 @@ bool DraggedWindow::Show(bool show)
 
 void DraggedWindow::OnEventPaint(wxPaintEvent &)
 {
-    wxPaintDC dc(main_panel);
+    wxAutoBufferedPaintDC dc(main_panel);
 
     int width, height;
     GetClientSize(&width, &height);

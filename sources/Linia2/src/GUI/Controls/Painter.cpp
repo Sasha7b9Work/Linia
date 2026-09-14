@@ -22,6 +22,8 @@ Painter::Painter(wxWindow *parent, const wxSize &_size) :
 
     Panel::Fit();
     Panel::Layout();
+
+    SetBackgroundStyle(wxBG_STYLE_PAINT);
 }
 
 
@@ -125,7 +127,7 @@ void Painter::DrawCircle(int x, int y, int r, const wxColor &_color)
 
 void Painter::OnPaint(wxPaintEvent &)
 {
-    wxPaintDC paint_dc(this);
+    wxAutoBufferedPaintDC paint_dc(this);
 
     paint_dc.DrawBitmap(*bitmap, 0, 0);
 }
@@ -140,12 +142,14 @@ PainterRect::PainterRect(wxWindow *parent, const wxSize &size) :
     Panel::Bind(wxEVT_PAINT, &PainterRect::OnPaint, this);
 
     color = wxColour(255U, 0, 0);
+
+    SetBackgroundStyle(wxBG_STYLE_PAINT);
 }
 
 
 void PainterRect::OnPaint(wxPaintEvent &)
 {
-    wxPaintDC dc(this);
+    wxAutoBufferedPaintDC dc(this);
 
     dc.SetPen(*wxBLACK_PEN);
     dc.SetBrush(wxBrush(color));
