@@ -161,6 +161,8 @@ public:
 
                     warning_label->Disable();
                 }
+
+                Refresh();
             });
 
         SetValue(Value::_3kV);
