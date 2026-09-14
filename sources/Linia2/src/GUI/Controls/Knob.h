@@ -1,8 +1,8 @@
 ﻿// 2026/03/09 10:24:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #pragma warning(push, 0)
-#include <wx/dcclient.h>
-#include <wx/control.h>
+    #include <wx/dcbuffer.h>
+    #include <wx/control.h>
 #pragma warning(pop)
 
 
@@ -30,6 +30,8 @@ public:
 
         // Включаем двойную буферизацию для устранения мерцания
         wxWindowBase::SetBackgroundStyle(wxBG_STYLE_PAINT);
+
+        SetBackgroundStyle(wxBG_STYLE_PAINT);
     }
 
     int GetValue() const
@@ -126,7 +128,8 @@ private:
     {
         SetBackgroundColour(GetParent()->GetBackgroundColour());
 
-        wxPaintDC dc(this);
+        wxAutoBufferedPaintDC dc(this);
+        dc.SetBackground(wxBrush(GetBackgroundColour()));
         dc.Clear();
 
         wxSize size = GetClientSize();

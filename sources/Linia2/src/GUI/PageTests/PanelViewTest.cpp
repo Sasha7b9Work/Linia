@@ -15,6 +15,8 @@ PanelViewTest::PanelViewTest(wxWindow *parent, PanelViewTest *&global) : Panel(p
     global = this;
 
     Bind(wxEVT_PAINT, &PanelViewTest::OnEventPaint, this);
+
+    SetBackgroundStyle(wxBG_STYLE_PAINT);
 }
 
 
@@ -30,8 +32,6 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 {
     if (test)
     {
-        SetBackgroundStyle(wxBG_STYLE_PAINT);
-
         wxAutoBufferedPaintDC dc{ this };
 
         dc.SetBackground(wxBrush(GetBackgroundColour()));
