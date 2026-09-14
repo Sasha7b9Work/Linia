@@ -68,5 +68,5 @@ namespace GF
     // Получить ip-адрес устройства, на котором запущены
     wxString GetSelfIP();
 
-    void DrawTextInCenter(wxBufferedPaintDC &, const wxString &, const wxRect &);
+    void DrawTextInCenter(wxAutoBufferedPaintDC &, const wxString &, const wxRect &);
 }

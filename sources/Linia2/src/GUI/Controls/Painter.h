@@ -17,13 +17,13 @@ class PaintDC
 {
 public:
 
-    PaintDC(wxBufferedPaintDC &_dc) : dc(_dc) { }
+    PaintDC(wxAutoBufferedPaintDC &_dc) : dc(_dc) { }
 
     void StorePenBrush();
 
     void RestorePenBrush();
 
-    wxBufferedPaintDC &dc;
+    wxAutoBufferedPaintDC &dc;
 
 private:
 

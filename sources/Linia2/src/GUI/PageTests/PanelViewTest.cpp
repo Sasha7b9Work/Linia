@@ -30,36 +30,38 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 {
     if (test)
     {
-        dc = new wxBufferedPaintDC(this);
+        SetBackgroundStyle(wxBG_STYLE_PAINT);
 
-        dc->SetBrush(wxBrush(GetBackgroundColour()));
+        wxAutoBufferedPaintDC dc{ this };
 
-        dc->SetPen(wxPen(*wxBLACK, 1));
+        dc.SetBackground(wxBrush(GetBackgroundColour()));
+        dc.Clear();
+
+        dc.SetBrush(wxBrush(GetBackgroundColour()));
+
+        dc.SetPen(wxPen(*wxBLACK, 1));
 
         // Устанавливаем цвет текста
-        dc->SetTextForeground(*wxBLACK);
+        dc.SetTextForeground(*wxBLACK);
 
         CreateControls();
 
-        CreateElement();
+        CreateElement(dc);
 
         // Устанавливаем шрифт (опционально)
-        dc->SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+        dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
 
         // Рисуем текст в левом верхнем углу
-        dc->DrawText(test->lib->name + " : " + test->name, 5, 5);
+        dc.DrawText(test->lib->name + " : " + test->name, 5, 5);
 
         commutator->Refresh();
-
-        delete dc;
-        dc = nullptr;
     }
 
     event.Skip();
 }
 
 
-void PanelViewTest::CreateElement()
+void PanelViewTest::CreateElement(wxAutoBufferedPaintDC &dc)
 {
     if (test->lib->UGO == "BJT" ||
         test->lib->UGO == "BJTS")
@@ -69,34 +71,34 @@ void PanelViewTest::CreateElement()
         wxPoint point_substrate;
         wxPoint point_emitter;
 
-        CreateBJT("npn", GetCenter(), point_base, point_collector, point_substrate, point_emitter);
+        CreateBJT("npn", GetCenter(), point_base, point_collector, point_substrate, point_emitter, dc);
     }
 }
 
 
-void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &point_base, wxPoint &point_collector, wxPoint &point_substrate, wxPoint &point_emitter)
+void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &point_base, wxPoint &point_collector, wxPoint &point_substrate, wxPoint &point_emitter, wxAutoBufferedPaintDC &dc)
 {
     int r = 5;
 
     int x_col = c.x + radius_trans / 2;   // / Координаты точки коммутации
     int y_col = c.y - 2 * radius_trans;   // / с коллектором
 
-    LineDriwer driwer(*dc, x_col, y_col);
+    LineDriwer driwer(dc, x_col, y_col);
     driwer.LineTo(c.x + radius_trans / 2, c.y + 2 * radius_trans);          // Вертикальная линия, которая выходит из коллектора и эмиттера
-    DrawGround(driwer.GetX(), driwer.GetY());
+    DrawGround(driwer.GetX(), driwer.GetY(), dc);
     driwer.MoveOnDY(-20);
     point_emitter = driwer.GetCoord();
-    dc->DrawCircle(point_emitter, r);
-    dc->DrawText("E", { point_emitter.x + 7, point_emitter.y - 7 });
-    dc->DrawCircle(c, radius_trans);
+    dc.DrawCircle(point_emitter, r);
+    dc.DrawText("E", { point_emitter.x + 7, point_emitter.y - 7 });
+    dc.DrawCircle(c, radius_trans);
     const int x_vert = c.x - radius_trans * 10 / 18;                        // Здесь заканчивается линия базы внутри окружности
     wxPoint coord_base{ 90, c.y };
     driwer.MoveTo(90, c.y);
     driwer.LineTo(x_vert, c.y);                                             // База
     driwer.MoveOnDX(-50);
     point_base = driwer.GetCoord();
-    dc->DrawCircle(point_base, r);
-    dc->DrawText("B", { point_base.x - 3, point_base.y - 20 });
+    dc.DrawCircle(point_base, r);
+    dc.DrawText("B", { point_base.x - 3, point_base.y - 20 });
 
     int y0 = 290;
     int y1 = 410;
@@ -116,8 +118,8 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
 
             int xx = c.x + radius_trans * 10 / 20;                      // В этом иксе - пересечение коллектора и эмиттера с окружностью.
 
-            dc->DrawLine(x_vert, c.y - dy, xx, y_top);                  // Верхняя наклонная линия (коллектор)
-            dc->DrawLine(x_vert, c.y + dy, xx, y_bottom);               // Нижняя наклонная линия (эмиттер)
+            dc.DrawLine(x_vert, c.y - dy, xx, y_top);                  // Верхняя наклонная линия (коллектор)
+            dc.DrawLine(x_vert, c.y + dy, xx, y_bottom);               // Нижняя наклонная линия (эмиттер)
 
             {
                 // Стрелка эмиттера
@@ -126,13 +128,13 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
 
                 if (type == "npn")
                 {
-                    DrawLineWithAngle({ xx, y_bottom }, length, 125);
-                    DrawLineWithAngle({ xx, y_bottom }, length, 170);
+                    DrawLineWithAngle({ xx, y_bottom }, length, 125, dc);
+                    DrawLineWithAngle({ xx, y_bottom }, length, 170, dc);
                 }
                 else if (type == "pnp")
                 {
-                    DrawLineWithAngle({ x_vert, c.y + dy }, length, -8);
-                    DrawLineWithAngle({ x_vert, c.y + dy }, length, -53);
+                    DrawLineWithAngle({ x_vert, c.y + dy }, length, -8, dc);
+                    DrawLineWithAngle({ x_vert, c.y + dy }, length, -53, dc);
                 }
                 else
                 {
@@ -146,7 +148,7 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
 
             int dy = radius_trans * 4 / 9;
 
-            dc->DrawLine(x_vert, c.y - dy, x_vert, c.y + dy);
+            dc.DrawLine(x_vert, c.y - dy, x_vert, c.y + dy);
 
             {
                 // Рисуем измеритель базы
@@ -155,21 +157,21 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
 
                 driwer.LineToY(y_ground);
 
-                DrawGround(driwer.GetX(), driwer.GetY());
+                DrawGround(driwer.GetX(), driwer.GetY(), dc);
 
                 if (!measurerBase)
                 {
                     measurerBase = new MeasurerVoltageCurrent(Chan::_B, { driwer.GetX(), y1 }, Dir::Down);
                 }
 
-                measurerBase->Draw(*dc);
+                measurerBase->Draw(dc);
 
                 if (!sourceVoltageCurrentBase)
                 {
                     sourceVoltageCurrentBase = new SourceVoltageCurrent(Chan::_B, { driwer.GetX(), y2 }, Dir::Down);
                 }
 
-                sourceVoltageCurrentBase->Draw(*dc);
+                sourceVoltageCurrentBase->Draw(dc);
             }
         }
 
@@ -189,12 +191,12 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
 
                 driwer.MoveOnDX(-100);
                 point_substrate = driwer.GetCoord();
-                dc->DrawCircle(point_substrate, r);
-                dc->DrawText("Substr", { point_substrate.x - 20, point_substrate.y - 23 });
+                dc.DrawCircle(point_substrate, r);
+                dc.DrawText("Substr", { point_substrate.x - 20, point_substrate.y - 23 });
                 driwer.Restore();
 
                 driwer.LineToY(y_ground);
-                DrawGround(driwer.GetX(), driwer.GetY());
+                DrawGround(driwer.GetX(), driwer.GetY(), dc);
 
                 driwer.MoveOnDY(-470);
 
@@ -203,14 +205,14 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
                     measurerSubstrate = new MeasurerVoltageCurrent(Chan::_S, { driwer.GetX(), y1 }, Dir::Down);
                 }
 
-                measurerSubstrate->Draw(*dc);
+                measurerSubstrate->Draw(dc);
 
                 if (!sourceVoltateCurrentSubstrate)
                 {
                     sourceVoltateCurrentSubstrate = new SourceVoltageCurrent(Chan::_S, { driwer.GetX(), y2 }, Dir::Down);
                 }
 
-                sourceVoltateCurrentSubstrate->Draw(*dc);
+                sourceVoltateCurrentSubstrate->Draw(dc);
             }
         }
     }
@@ -221,51 +223,51 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
         driwer.MoveTo(x_col, y_col);
         driwer.MoveOnDY(25);
         point_collector = driwer.GetCoord();
-        dc->DrawCircle(point_collector, r);
-        dc->DrawText("C", { point_collector.x + 7, point_collector.y - 9});
+        dc.DrawCircle(point_collector, r);
+        dc.DrawText("C", { point_collector.x + 7, point_collector.y - 9});
         driwer.Restore();
         driwer.LineOnDX(355);
         driwer.LineToY(y_ground);
-        DrawGround(driwer.GetX(), driwer.GetY());
+        DrawGround(driwer.GetX(), driwer.GetY(), dc);
 
         if (!ampermeterCollector)
         {
             ampermeterCollector = new Ampermeter(Chan::_C, { driwer.GetX(), y0 }, Dir::Down);
         }
 
-        ampermeterCollector->Draw(*dc);
+        ampermeterCollector->Draw(dc);
 
         if (!voltmeterCollector)
         {
             voltmeterCollector = new Voltmeter(Chan::_C, { driwer.GetX(), y1 }, Dir::Down);
         }
 
-        voltmeterCollector->Draw(*dc);
+        voltmeterCollector->Draw(dc);
 
         if (!sourceVoltageCollector)
         {
             sourceVoltageCollector = new SourceVoltage(Chan::_C, { driwer.GetX(), y2 }, Dir::Down);
         }
 
-        sourceVoltageCollector->Draw(*dc);
+        sourceVoltageCollector->Draw(dc);
     }
 }
 
 
-void PanelViewTest::DrawGround(int x, int y)
+void PanelViewTest::DrawGround(int x, int y, wxAutoBufferedPaintDC &dc)
 {
-    dc->DrawLine(x - 10, y, x + 10, y);
+    dc.DrawLine(x - 10, y, x + 10, y);
 }
 
 
-void PanelViewTest::DrawLineWithAngle(const wxPoint &start, double length, double angleDeg)
+void PanelViewTest::DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &dc)
 {
     double angleRad = angleDeg * M_PI / 180.0;
 
     int endX = start.x + (int)(length * cos(angleRad));
     int endY = start.y - (int)(length * sin(angleRad));  // минус, т.к. Y вниз
 
-    dc->DrawLine(start.x, start.y, endX, endY);
+    dc.DrawLine(start.x, start.y, endX, endY);
 }
 
 

@@ -25,8 +25,6 @@ private:
 
     Test *test = nullptr;
 
-    wxBufferedPaintDC *dc = nullptr;
-
     ButtonsCombo *bcScanMode = nullptr;                 // Режим развёртки
     ButtonsCombo *bcScanNumberPoints = nullptr;         // Количество точек в одной ВАХ
     ButtonsCombo *bcTypeSemiconductor = nullptr;        // npn или pnp
@@ -53,22 +51,22 @@ private:
     void OnChangedCollectorMeasureLimitU(wxCommandEvent &);
 
     // Нарисовать испытуемый элемент
-    void CreateElement();
+    void CreateElement(wxAutoBufferedPaintDC &dc);
 
     // type == "npn", "pnp"
     // Биполярный транзистор с подложкой и без
-    void CreateBJT(const wxString &type, const wxPoint &, wxPoint &point_base, wxPoint &point_collector, wxPoint &point_substrate, wxPoint &point_emitter);
+    void CreateBJT(const wxString &type, const wxPoint &, wxPoint &point_base, wxPoint &point_collector, wxPoint &point_substrate, wxPoint &point_emitter, wxAutoBufferedPaintDC &dc);
 
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
 
     // Нарисовать значок земли
-    void DrawGround(int x, int y);
+    void DrawGround(int x, int y, wxAutoBufferedPaintDC &dc);
 
     // Создать элементы управляения для данного теста
     void CreateControls();
 
     // Рисует линию длиной length под углом angleDeg
-    void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg);
+    void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &dc);
 
     wxPoint GetCenter() const;
 

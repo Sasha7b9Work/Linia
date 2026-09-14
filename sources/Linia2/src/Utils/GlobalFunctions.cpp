@@ -340,7 +340,7 @@ wxString GF::GetSelfIP()
 }
 
 
-void GF::DrawTextInCenter(wxBufferedPaintDC &dc, const wxString &text, const wxRect &rect)
+void GF::DrawTextInCenter(wxAutoBufferedPaintDC &dc, const wxString &text, const wxRect &rect)
 {
     wxCoord textWidth, textHeight;
     dc.GetTextExtent(text, &textWidth, &textHeight);
