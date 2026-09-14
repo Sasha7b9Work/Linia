@@ -13,6 +13,8 @@ PainterRegister::PainterRegister(wxWindow *parent, Register *_reg) :
     Panel(parent),
     reg(_reg)
 {
+    SetBackgroundStyle(wxBG_STYLE_PAINT);
+
     wxSize size = _reg->GetMinSize();
     size.x -= 50;
     size.y -= 45;
@@ -113,7 +115,7 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
         }
     }
 
-    wxPaintDC _dc(this);
+    wxAutoBufferedPaintDC _dc(this);
 
     wxGraphicsContext *gc = wxGraphicsContext::Create(_dc);
 
