@@ -82,7 +82,7 @@ struct ChipREG : public Chip
         CHAN_C,
         CHAN_B,
         CHAN_S,
-        MEAS_I,
+        MEAS_I,         // Имзмеритель тока (коллектор)
         Count
     };
 

@@ -30,7 +30,7 @@ struct DAC : public Chip
     enum E
     {
         _0_ChannelC_Form,   // Формирователь развёртки       XP7 Записывается прямо из Orange Pi 5 Plus
-        _1_ChannelC_Meas,   // Измеритель                    XP7
+        _1_ChannelC_Meas,   // Измеритель тока (коллектор)   XP7
         _2_ChannelB_DAC1,   // База DAC1                     XP4
         _3_ChannelB_DAC2,   // База DAC2                     XP4
         _4_ChannelS_DAC1,   //                               XP5

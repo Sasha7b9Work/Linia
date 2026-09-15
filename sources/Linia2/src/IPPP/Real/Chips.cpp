@@ -45,13 +45,13 @@ int DAC::BitDepth() const
 {
     static const int depth[Count] =
     {
-        16,
-        16,
-        14,
-        12,
-        16,
-        16,
-        16
+        16,   // _0_ChannelC_Form
+        16,   // _1_ChannelC_Meas
+        14,   // _2_ChannelB_DAC1
+        12,   // _3_ChannelB_DAC2
+        16,   // _4_ChannelS_DAC1
+        16,   // _5_ChannelS_DAC2
+        16    // _6_Source_50V
     };
 
     return depth[v];
@@ -74,12 +74,12 @@ int REG::BitDepth() const
 {
     static const int depth[Count] =
     {
-         8,
-        16,
-         8,
-        24,
-        32,
-        16,
+         8,     // _0_Source3kV
+        16,     // _1_Commutator
+         8,     // _2_ChannelC
+        24,     // _3_ChannelB
+        32,     // _4_ChannelS
+         8      // _5_MeasCurrent
     };
 
     return depth[v];

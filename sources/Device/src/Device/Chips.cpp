@@ -81,7 +81,7 @@ ChipREG ChipREG::regs[10] =
     { ChipREG::CHAN_C,      8, &ChanC::pinRAZV_ENRGF,   &pCLK2_DAC, &pDAT2_DAC, false },  // 2 Формирователь развёртки
     { ChipREG::CHAN_B,     32, &ChanB::pinENRGB,        &pCLK1_DAC, &pDAT1_DAC, false },  // 3 Канал B
     { ChipREG::CHAN_S,     32, &ChanS::pinENRGP,        &pCLK1_DAC, &pDAT1_DAC, false },  // 4 Канал S
-    { ChipREG::MEAS_I,     16, &ChanC::pinMEAS_I_ENRGI, &pCLK2_DAC, &pDAT2_DAC, false },  // 5 Измеритель тока
+    { ChipREG::MEAS_I,      8, &ChanC::pinMEAS_I_ENRGI, &pCLK2_DAC, &pDAT2_DAC, false },  // 5 Измеритель тока
     { ChipREG::Count,       0, nullptr,                 nullptr,    nullptr,    false },
     { ChipREG::Count,       0, nullptr,                 nullptr,    nullptr,    false },
     { ChipREG::Count,       0, nullptr,                 nullptr,    nullptr,    false },
