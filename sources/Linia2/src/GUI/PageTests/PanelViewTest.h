@@ -29,7 +29,9 @@ private:
     ButtonsCombo *bcScanNumberPoints = nullptr;         // Количество точек в одной ВАХ
     ButtonsCombo *bcTypeSemiconductor = nullptr;        // npn или pnp
     ComboInput *bcBaseNumMeasures = nullptr;            // Количество измерений
-    Commutator *commutator = nullptr;
+    Commutator *commutator = nullptr;                   // Управление коммутатором
+    StaticText *txtCover = nullptr;                     // Индикатор состояния крышки
+    bool cover_is_opened = false;
 
     void OnEventPaint(wxPaintEvent &);
 
@@ -49,6 +51,12 @@ private:
     void OnChangedCollectorMeasureLimitI(wxCommandEvent &);
     void OnChangedCollectorMeasureRangeU(wxCommandEvent &);
     void OnChangedCollectorMeasureLimitU(wxCommandEvent &);
+
+    // Открыта крышка
+    void OpenCover();
+
+    // Закрыта крышка
+    void CloseCover();
 
     // Нарисовать испытуемый элемент
     void CreateElement(wxAutoBufferedPaintDC &dc);

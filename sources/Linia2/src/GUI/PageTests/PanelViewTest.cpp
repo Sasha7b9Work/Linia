@@ -342,6 +342,22 @@ void PanelViewTest::CreateControls()
     }
 
     {
+        StaticBox *box = new StaticBox(this, L("Крышка"), { width + 20, 100 });
+
+        box->SetPosition({ 400, 40 });
+
+        txtCover = new StaticText(box, L(""), { box->GetSize().x - 20, box->GetSize().y - 30 }, wxALIGN_CENTER_VERTICAL | wxALIGN_CENTER_HORIZONTAL);
+
+        txtCover->SetPosition({ 10, 20 });
+
+        wxFont font = txtCover->GetFont();
+        font.SetPointSize(25);
+        txtCover->SetFont(font);
+
+        OpenCover();
+    }
+
+    {
         if (!bcTypeSemiconductor)
         {
             wxArrayString titles;
@@ -478,4 +494,28 @@ int PanelViewTest::CalculateCombos(ComboInput **c1, ComboInput **c2, ComboInput 
     }
 
     return 0;
+}
+
+
+void PanelViewTest::OpenCover()
+{
+    cover_is_opened = true;
+
+    txtCover->SetLabel(L("Открыта"));
+
+    txtCover->SetBackgroundColour(*wxRED);
+
+    txtCover->Refresh();
+}
+
+
+void PanelViewTest::CloseCover()
+{
+    cover_is_opened = false;
+
+    txtCover->SetLabel(L("Закрыта"));
+
+    txtCover->SetBackgroundColour(GetBackgroundColour());
+
+    txtCover->Refresh();
 }
