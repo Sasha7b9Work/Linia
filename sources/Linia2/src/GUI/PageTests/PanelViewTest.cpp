@@ -320,7 +320,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back("");
 
-            CREATE_BUTTONS_COMBO(bcScanMode, box, L("Тип"), 1, OnChangedScanMode, 10, 20);
+            CREATE_BUTTONS_COMBO(bcScanMode, box, L("Тип"), 1, OnChangedScanMode, 10, SD::Y_SB(20));
         }
 
         if (!bcScanNumberPoints)
@@ -338,7 +338,7 @@ void PanelViewTest::CreateControls()
                 ""
             };
 
-            CREATE_BUTTONS_COMBO(bcScanNumberPoints, box, L("Кол-во точек"), 1, OnChangedScanNumberPoints, 10, 20 + 30);
+            CREATE_BUTTONS_COMBO(bcScanNumberPoints, box, L("Кол-во точек"), 1, OnChangedScanNumberPoints, 10, SD::Y_SB(20 + 30));
         }
     }
 

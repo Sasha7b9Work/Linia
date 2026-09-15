@@ -2,11 +2,13 @@
 #pragma once
 #include "GUI/Controls/StaticBox.h"
 #include "GUI/Controls/Button.h"
+#include "Utils/SystemDepend.h"
 #pragma warning(push, 0)
     #include <wx/window.h>
     #include <wx/dcclient.h>
     #include <wx/panel.h>
     #include <wx/timer.h>
+    #include <wx/stattext.h>
 #pragma warning(disable)
 
 
@@ -113,7 +115,7 @@ public:
 
         int w = _width - 4;
 
-        canvas = new wxPanel(this, wxID_ANY, { 2, 15 }, { w, w });
+        canvas = new wxPanel(this, wxID_ANY, { 2, SD::Y_SB(15) }, { w, w });
 
         radius = w / 2;
 

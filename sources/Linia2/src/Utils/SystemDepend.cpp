@@ -118,7 +118,7 @@ int SD::Y_SB(int y)
 #ifdef WIN32
     return y;
 #else
-    return y - 20;
+    return y - 15;
 #endif
 }
 
