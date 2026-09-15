@@ -5,6 +5,7 @@
 #include "Utils/LineDrawer.h"
 #include "GUI/Controls/Painter.h"
 #include "GUI/Controls/StaticBox.h"
+#include "Utils/SystemDepend.h"
 
 
 PanelViewTest *ThePanelViewTest = nullptr;
@@ -348,10 +349,10 @@ void PanelViewTest::CreateControls()
 
         txtCover = new StaticText(box, L(""), { box->GetSize().x - 20, box->GetSize().y - 30 }, wxALIGN_CENTER_VERTICAL | wxALIGN_CENTER_HORIZONTAL);
 
-        txtCover->SetPosition({ 10, 20 });
+        txtCover->SetPosition({ 10, SD::Y_SB(20) });
 
         wxFont font = txtCover->GetFont();
-        font.SetPointSize(24);
+        font.SetPointSize(23);
         txtCover->SetFont(font);
 
         OpenCover();
