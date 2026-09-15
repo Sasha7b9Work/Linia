@@ -351,7 +351,7 @@ void PanelViewTest::CreateControls()
         txtCover->SetPosition({ 10, 20 });
 
         wxFont font = txtCover->GetFont();
-        font.SetPointSize(25);
+        font.SetPointSize(24);
         txtCover->SetFont(font);
 
         OpenCover();
