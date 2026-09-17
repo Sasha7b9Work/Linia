@@ -6,6 +6,7 @@
 #include "Device/Chips.h"
 #include "Hardware/HAL/HAL.h"
 #include "Device/Device.h"
+#include "Device/Sources.h"
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -29,6 +30,10 @@
     // Управление регистрами блоков
     :REG[0...9]:LENGTH [8...32]
     :REG[0...9]:WRITE [0...(uint)-1]
+
+    // Управление источником напряжения 50 В
+    :SOURCE50V:PLUS  [0...1]        XP10:50E+ Вкл/Откл
+    :SOURCE50V:MINUS [0...1]        XP10:50E- Вкл/Откл
 */
 
 
@@ -57,16 +62,18 @@ namespace OPi5Plus
         static bool Func_DAC(pchar);
         static bool Func_REG(pchar);
         static bool Func_SCAN(pchar);
+        static bool Func_Source50V(pchar);
 
         static StructParser head[] =
         {
-            { "PING",  Func_Ping, nullptr },
-            { "CHIP",  nullptr,   chip    },
-            { "FPGA",  Func_FPGA, nullptr },
-            { "DAC",   Func_DAC,  nullptr },
-            { "REG",   Func_REG,  nullptr },
-            { "SCAN",  Func_SCAN, nullptr },
-            { nullptr, nullptr,   nullptr }
+            { "PING",      Func_Ping,      nullptr },
+            { "CHIP",      nullptr,        chip    },
+            { "FPGA",      Func_FPGA,      nullptr },
+            { "DAC",       Func_DAC,       nullptr },
+            { "REG",       Func_REG,       nullptr },
+            { "SCAN",      Func_SCAN,      nullptr },
+            { "SOURCE50V", Func_Source50V, nullptr },
+            { nullptr,     nullptr,        nullptr }
         };
 
         static bool ProcessStructures(pchar, StructParser *);
@@ -95,7 +102,7 @@ bool OPi5Plus::SCPI::Func_Ping(pchar command)
 
 bool OPi5Plus::SCPI::ProcessStructures(pchar command, StructParser *handlers)
 {
-    if (command[0] == ':')
+    while (command[0] == ':')
     {
         command++;
     }
@@ -175,8 +182,6 @@ bool OPi5Plus::SCPI::Func_FPGA(pchar command)
 
         if (SU::CharIs(*pos, " :"))
         {
-//            LOG_WRITE("Write %08X to FPGA%d", value, num_reg);
-
             FPGA::Reg::Write(num_reg, value);
 
             return true;
@@ -217,6 +222,51 @@ bool OPi5Plus::SCPI::Func_SCAN(pchar command)
         FPGA::StopScan();
 
         return true;
+    }
+
+    return false;
+}
+
+
+bool OPi5Plus::SCPI::Func_Source50V(pchar command)
+{
+    if (SU::BeginWith(command, "PLUS "))
+    {
+        command += std::strlen("PLUS ");
+
+        char *pos = nullptr;
+
+        uint value = std::strtoul(command, &pos, 10);
+
+        if (value == 0)
+        {
+            Source50V::Enable50Plus(false);
+            return true;
+        }
+        else if (value == 1)
+        {
+            Source50V::Enable50Plus(true);
+            return true;
+        }
+    }
+    else if (SU::BeginWith(command, "MINUS "))
+    {
+        command += std::strlen("MINUS ");
+
+        char *pos = nullptr;
+
+        uint value = std::strtoul(command, &pos, 10);
+
+        if (value == 0)
+        {
+            Source50V::Enable50Minus(false);
+            return true;
+        }
+        else if (value == 1)
+        {
+            Source50V::Enable50Minus(true);
+            return true;
+        }
     }
 
     return false;

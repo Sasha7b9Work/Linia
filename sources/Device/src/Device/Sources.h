@@ -11,6 +11,12 @@ namespace Source50V
     static const ChipDAC::E DAC_1 = ChipDAC::SOURCE_50V_OPi5Plus;
 
     void Init();
+
+    // XP10:50E+
+    void Enable50Plus(bool);
+
+    // XP10:50E-
+    void Enable50Minus(bool);
 }
 
 

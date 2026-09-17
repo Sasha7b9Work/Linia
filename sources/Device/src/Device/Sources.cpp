@@ -25,7 +25,22 @@ namespace Source3kV
 void Source50V::Init()
 {
     pin50EP.Init();
+    pin50EP.ToLow();
+
     pin50EN.Init();
+    pin50EP.ToLow();
+}
+
+
+void Source50V::Enable50Plus(bool en)
+{
+    pin50EP.Set(en);
+}
+
+
+void Source50V::Enable50Minus(bool en)
+{
+    pin50EP.Set(en);
 }
 
 
