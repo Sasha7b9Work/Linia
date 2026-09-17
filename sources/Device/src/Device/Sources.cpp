@@ -6,8 +6,8 @@
 
 namespace Source50V
 {
-    static PinOut pin50EP(Port::_A, Pin::_6);   // pin42
-    static PinOut pin50EN(Port::_F, Pin::_11);  // pin49
+    static PinOut pin50EP(Port::_F, Pin::_12);   // pin50
+    static PinOut pin50EN(Port::_F, Pin::_11);   // pin49
 }
 
 
