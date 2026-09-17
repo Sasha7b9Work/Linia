@@ -10,4 +10,9 @@ public:
     PageSource50V(wxNotebook *);
 
     static PageSource50V *self;
+
+private:
+
+    ButtonsCombo *combo50Plus = nullptr;
+    ButtonsCombo *combo50Minus = nullptr;
 };
