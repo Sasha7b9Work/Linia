@@ -10,7 +10,6 @@ namespace ChanC
            PinOut pinRAZV_ENRGF(Port::_F, Pin::_0);     //  pin10 Разрешение регистра
 
            PinOut pinMEAS_I_ENRGI(Port::_F, Pin::_1);   //  pin11 Выбор регистра диапазона тока
-    static PinOut pinMEAS_I_SPEED(Port::_G, Pin::_11);  // pin126
 }
 
 
@@ -20,7 +19,6 @@ void ChanC::Init()
     pinRAZV_ENRGF.Init();
 
     pinMEAS_I_ENRGI.Init();
-    pinMEAS_I_SPEED.Init();
 }
 
 
