@@ -6,8 +6,8 @@
 
 namespace Source50V
 {
+    static PinOut pin50EM(Port::_F, Pin::_11);   // pin49
     static PinOut pin50EP(Port::_F, Pin::_12);   // pin50
-    static PinOut pin50EN(Port::_F, Pin::_11);   // pin49
 }
 
 
@@ -27,8 +27,8 @@ void Source50V::Init()
     pin50EP.Init();
     pin50EP.ToLow();
 
-    pin50EN.Init();
-    pin50EP.ToLow();
+    pin50EM.Init();
+    pin50EM.ToLow();
 }
 
 
@@ -40,7 +40,7 @@ void Source50V::Enable50Plus(bool en)
 
 void Source50V::Enable50Minus(bool en)
 {
-    pin50EP.Set(en);
+    pin50EM.Set(en);
 }
 
 

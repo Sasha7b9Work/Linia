@@ -50,7 +50,7 @@ PageSource50V::PageSource50V(wxNotebook *notebook) :
 
         combo50Minus->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
             {
-                IDevice::impl->SendCommand(wxString::Format(":SOURCE50V:MINUS %d", event.GetId()));
+                IDevice::impl->SendCommand(wxString::Format(":SOURCE50V:MINUS %d", event.GetInt()));
             });
     }
 }
