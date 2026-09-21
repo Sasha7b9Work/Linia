@@ -43,11 +43,11 @@ MainWindow::MainWindow(MainWindow *&self, const wxString &title)
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
     main_panel= new Notebook(this);
     main_panel->AddPanel(new PageSettings(main_panel, ThePageSettings));
-    main_panel->AddPanel(new PageMeasures(main_panel, ThePageMeasures));
+    main_panel->AddPanel(new PageMeasures(main_panel));
     main_panel->AddPanel(new PageTests(main_panel, ThePageTests));
     main_panel->AddPanel(new PageDebug(main_panel, ThePageDebug));
 
-    main_panel->SetCurrentPanel(ThePageMeasures);
+    main_panel->SetCurrentPanel(PageMeasures::self);
 
     sizer->Add(main_panel, 1, wxEXPAND | wxALL);
     SetSizer(sizer);
@@ -225,11 +225,11 @@ void MainWindow::SetMode(ModeMainWindow::E mode)
 {
     ModeMainWindow::current = mode;
 
-    if (ThePageMeasures)
+    if (PageMeasures::self)
     {
-        ThePageMeasures->Show(mode == ModeMainWindow::Standard || mode == ModeMainWindow::FullGraph);
+        PageMeasures::self ->Show(mode == ModeMainWindow::Standard || mode == ModeMainWindow::FullGraph);
 
-        ThePageMeasures->FullScreen(mode == ModeMainWindow::FullGraph);
+        PageMeasures::self->FullScreen(mode == ModeMainWindow::FullGraph);
     }
 
     wxFrame::Layout();

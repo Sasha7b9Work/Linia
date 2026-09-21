@@ -27,7 +27,10 @@ class PageMeasures : public PageNotebook
 
 public:
 
+    PageMeasures(Notebook *);
     ~PageMeasures();
+
+    static PageMeasures *self;
 
     void SetColorBrush(const wxColor &);
     void SetColorPen(const wxColor &);
@@ -53,8 +56,6 @@ public:
     std::vector<GraphMeasure *> entities;    // Сущности для отрисовки
 
 private:
-
-    PageMeasures(Notebook *, PageMeasures *&);
 
     Button *btnHelp = nullptr,
         *btnLessX = nullptr,

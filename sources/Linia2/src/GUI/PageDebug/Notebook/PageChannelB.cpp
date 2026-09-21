@@ -4,13 +4,13 @@
 #include "GUI/PageDebug/Notebook/Register.h"
 
 
-PageChannelB *ThePageChannelB = nullptr;
+PageChannelB *PageChannelB::self = nullptr;
 
 
-PageChannelB::PageChannelB(wxNotebook *notebook, PageChannelB *&global) :
+PageChannelB::PageChannelB(wxNotebook *notebook) :
     PageChip(notebook, "Канал B")
 {
-    global = this;
+    self = this;
 
     {
         RegAD5531 *dac2 = new RegAD5531(this, dacs[DAC::_2_ChannelB_DAC1], "");

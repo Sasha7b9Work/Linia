@@ -12,13 +12,13 @@
 #pragma warning(pop)
 
 
-PageSTM32 *ThePageSTM32 = nullptr;
+PageSTM32 *PageSTM32::self = nullptr;
 
 
-PageSTM32::PageSTM32(wxNotebook *notebook, PageSTM32 *&global) :
+PageSTM32::PageSTM32(wxNotebook *notebook) :
     PageChip(notebook, "stm32")
 {
-    global = this;
+    self = this;
 
     StaticBox *box = new StaticBox(this, L("Обновление прошивки"));
 

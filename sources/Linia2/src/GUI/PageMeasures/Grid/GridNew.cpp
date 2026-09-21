@@ -42,13 +42,13 @@ int GridNew::TopY() const
 
 int GridNew::CenterY() const
 {
-    return ThePageMeasures->GetDrawingSize().y / 2;
+    return PageMeasures::self->GetDrawingSize().y / 2;
 }
 
 
 int GridNew::CenterX() const
 {
-    return ThePageMeasures->GetDrawingSize().x / 2;
+    return PageMeasures::self->GetDrawingSize().x / 2;
 }
 
 
@@ -78,7 +78,7 @@ int GridNew::LengthAxisY() const
 
 void GridNew::Draw(const std::vector<GraphMeasure *> &entities)
 {
-    wxSize size = ThePageMeasures->GetDrawingSize();
+    wxSize size = PageMeasures::self->GetDrawingSize();
 
     const int x_left = LeftX();
     const int x_right = RightX();
@@ -171,14 +171,14 @@ void GridNew::Draw(const std::vector<GraphMeasure *> &entities)
         entity->Draw();
     }
 
-    ThePageMeasures->SetColorPen(SET_GUI_COLOR_BACKGROUND->GetUInt());
+    PageMeasures::self->SetColorPen(SET_GUI_COLOR_BACKGROUND->GetUInt());
 
-    ThePageMeasures->FillRectangle(0, 0, x_left - 1, ThePageMeasures->GetDrawingSize().y, SET_GUI_COLOR_BACKGROUND->GetUInt());
-    ThePageMeasures->FillRectangle(x_left, 0, LengthAxisX(), y_top - 1, SET_GUI_COLOR_BACKGROUND->GetUInt());
-    ThePageMeasures->FillRectangle(x_right + 1, 0, ThePageMeasures->GetDrawingSize().x - x_right, ThePageMeasures->GetDrawingSize().y, SET_GUI_COLOR_BACKGROUND->GetUInt());
-    ThePageMeasures->FillRectangle(x_left, y_bottom + 1, LengthAxisX(), ThePageMeasures->GetDrawingSize().y - y_bottom, SET_GUI_COLOR_BACKGROUND->GetUInt());
+    PageMeasures::self->FillRectangle(0, 0, x_left - 1, PageMeasures::self->GetDrawingSize().y, SET_GUI_COLOR_BACKGROUND->GetUInt());
+    PageMeasures::self->FillRectangle(x_left, 0, LengthAxisX(), y_top - 1, SET_GUI_COLOR_BACKGROUND->GetUInt());
+    PageMeasures::self->FillRectangle(x_right + 1, 0, PageMeasures::self->GetDrawingSize().x - x_right, PageMeasures::self->GetDrawingSize().y, SET_GUI_COLOR_BACKGROUND->GetUInt());
+    PageMeasures::self->FillRectangle(x_left, y_bottom + 1, LengthAxisX(), PageMeasures::self->GetDrawingSize().y - y_bottom, SET_GUI_COLOR_BACKGROUND->GetUInt());
 
-    if (!ThePageMeasures->mouse_is_pressed)
+    if (!PageMeasures::self->mouse_is_pressed)
     {
         if (pos_mouse.y > TopY() &&
             pos_mouse.y < BottomY() &&
@@ -198,13 +198,13 @@ void GridNew::Draw(const std::vector<GraphMeasure *> &entities)
 
 void GridNew::DrawLabelsOnAxis() const
 {
-    ThePageMeasures->SetColorPen(SET_GUI_COLOR_FONT->GetUInt());
+    PageMeasures::self->SetColorPen(SET_GUI_COLOR_FONT->GetUInt());
 
     Text::SetFont();
 
     int d = 2;
 
-    wxSize size = ThePageMeasures->GetDrawingSize();
+    wxSize size = PageMeasures::self->GetDrawingSize();
 
     {
         // Подписываем горизонтальную ось
@@ -335,7 +335,7 @@ void GridNew::RangeGridOnX(int delta)
         rangeX.Decrease();
     }
 
-    ThePageMeasures->Refresh();
+    PageMeasures::self->Refresh();
 }
 
 
@@ -350,7 +350,7 @@ void GridNew::RangeGridOnY(int delta)
         rangeY.Decrease();
     }
 
-    ThePageMeasures->Refresh();
+    PageMeasures::self->Refresh();
 }
 
 

@@ -7,7 +7,7 @@
 
 void Events::ChangingTheConnectionOfTheMeasuredElement()
 {
-    ThePageMeasures->OnEventCnangeMeasuredElement();
+    PageMeasures::self->OnEventCnangeMeasuredElement();
 }
 
 

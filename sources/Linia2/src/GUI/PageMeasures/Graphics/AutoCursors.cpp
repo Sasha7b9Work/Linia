@@ -32,7 +32,7 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> & /*measures*/)
     wxRect rect = TheGrid->GetRect();
     (void)rect;
 
-    ThePageMeasures->SetColorPen(SET_GUI_COLOR_CURVE->GetUInt());
+    PageMeasures::self->SetColorPen(SET_GUI_COLOR_CURVE->GetUInt());
 
 //    if (TheWindowCursors->chbTrackY->IsChecked())
 //    {
@@ -97,9 +97,9 @@ void AutoCursors::Ban()
 {
     is_allowed = false;
 
-    if (ThePageMeasures)
+    if (PageMeasures::self)
     {
-        ThePageMeasures->Refresh();
+        PageMeasures::self->Refresh();
     }
 }
 

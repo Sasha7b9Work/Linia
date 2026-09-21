@@ -25,12 +25,12 @@ NotebookDebug::NotebookDebug(wxWindow *parent, NotebookDebug *&global) :
     AppendNewPage(new PageFPGA(this));
     AppendNewPage(new PageChannelForm(this));
     AppendNewPage(new PageMeasCurrent(this));
-    AppendNewPage(new PageChannelB(this, ThePageChannelB));
+    AppendNewPage(new PageChannelB(this));
     AppendNewPage(new PageChannelS(this));
     AppendNewPage(new PageSource3kV(this));
     AppendNewPage(new PageSource50V(this));
     AppendNewPage(new PageCommutator(this));
-    AppendNewPage(new PageSTM32(this, ThePageSTM32));
+    AppendNewPage(new PageSTM32(this));
 
     wxWindowBase::Layout();
 

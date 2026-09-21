@@ -37,13 +37,10 @@ extern PageTables    *ThePageTables;
 extern PageArchive   *ThePageArchive;
 extern PageTests     *ThePageTests;
 extern PageDebug     *ThePageDebug;
-extern PageMeasures  *ThePageMeasures;
-extern PageSTM32     *ThePageSTM32;
 
 extern PanelCategory *ThePanelCategory;
 extern PanelTests    *ThePanelTests;
 extern PanelViewTest *ThePanelViewTest;
-extern PageChannelB  *ThePageChannelB;
 
 extern NotebookDebug *TheNotebookDebug;
 
