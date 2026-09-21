@@ -19,6 +19,7 @@ class PageReports;
 class PageSettings;
 class PageTables;
 class PageArchive;
+class PageSTM32;
 
 class PageTests;
 class PanelCategory;
@@ -37,6 +38,7 @@ extern PageArchive   *ThePageArchive;
 extern PageTests     *ThePageTests;
 extern PageDebug     *ThePageDebug;
 extern PageMeasures  *ThePageMeasures;
+extern PageSTM32     *ThePageSTM32;
 
 extern PanelCategory *ThePanelCategory;
 extern PanelTests    *ThePanelTests;

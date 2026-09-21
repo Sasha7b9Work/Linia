@@ -30,7 +30,7 @@ NotebookDebug::NotebookDebug(wxWindow *parent, NotebookDebug *&global) :
     AppendNewPage(new PageSource3kV(this));
     AppendNewPage(new PageSource50V(this));
     AppendNewPage(new PageCommutator(this));
-    AppendNewPage(new PageSTM32(this));
+    AppendNewPage(new PageSTM32(this, ThePageSTM32));
 
     wxWindowBase::Layout();
 

@@ -13,6 +13,7 @@ namespace SCPI
     static bool FuncError(pchar);
     static bool FuncLogMessage(pchar type, pchar message);
     static bool FuncPing(pchar);
+    static bool FuncUpgrade(pchar);
 
     StructSCPI head[] =
     {
@@ -21,6 +22,7 @@ namespace SCPI
         { "WARNING",  FuncWarning, nullptr },
         { "ERROR",    FuncError,   nullptr },
         { "PING",     FuncPing,    nullptr },
+        { "UPGRADE",  FuncUpgrade, nullptr },
         { nullptr,    nullptr,     nullptr }
     };
 }
@@ -86,4 +88,10 @@ bool SCPI::FuncPing(pchar)
     LOG_WRITE("Ping");
 
     return true;
+}
+
+
+bool SCPI::FuncUpgrade(pchar)
+{
+    return false;
 }

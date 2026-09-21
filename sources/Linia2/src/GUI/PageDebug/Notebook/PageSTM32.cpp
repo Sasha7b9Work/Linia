@@ -5,18 +5,20 @@
 #include "GUI/Controls/Button.h"
 #include "GUI/Controls/StaticText.h"
 #include "GUI/Controls/Sizers.h"
+#include "IPPP/IDevice.h"
 #pragma warning(push, 0)
     #include <wx/filedlg.h>
+    #include <wx/file.h>
 #pragma warning(pop)
 
 
-PageSTM32 *PageSTM32::self = nullptr;
+PageSTM32 *ThePageSTM32 = nullptr;
 
 
-PageSTM32::PageSTM32(wxNotebook *notebook) :
+PageSTM32::PageSTM32(wxNotebook *notebook, PageSTM32 *&global) :
     PageChip(notebook, "stm32")
 {
-    self = this;
+    global = this;
 
     StaticBox *box = new StaticBox(this, L("Обновление прошивки"));
 
@@ -79,7 +81,26 @@ PageSTM32::PageSTM32(wxNotebook *notebook) :
 
 void PageSTM32::ProcessUpdate(pchar file_name)
 {
-    (void)file_name;
+    wxFile file(file_name, wxFile::read);
+    if (!file.IsOpened())
+    {
+        LOG_ERROR("Can not open file %s", file_name);
 
+        return;
+    }
 
+    int size = (int)file.Length();
+
+    if (size != (int)wxInvalidOffset)
+    {
+        IDevice::impl->SendCommand(":UPGRADE:START %d", size);
+    }
+    else
+    {
+        LOG_ERROR("Can not get size file %s", file_name);
+    }
+
+//    static const int SIZE_CHUNK = 1024;
+//
+//    while()
 }

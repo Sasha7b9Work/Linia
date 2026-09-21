@@ -11,9 +11,7 @@ class PageSTM32 : public PageChip
 {
 public:
 
-    PageSTM32(wxNotebook *);
-
-    static PageSTM32 *self;
+    PageSTM32(wxNotebook *, PageSTM32 *&);
 
 private:
 
