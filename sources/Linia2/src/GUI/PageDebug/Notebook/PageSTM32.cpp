@@ -6,6 +6,7 @@
 #include "GUI/Controls/StaticText.h"
 #include "GUI/Controls/Sizers.h"
 #include "IPPP/IDevice.h"
+#include "Utils/GlobalFunctions.h"
 #pragma warning(push, 0)
     #include <wx/filedlg.h>
     #include <wx/file.h>
@@ -79,37 +80,69 @@ PageSTM32::PageSTM32(wxNotebook *notebook) :
 }
 
 
-void PageSTM32::StartUpgrade(pchar file_name)
+void PageSTM32::StartUpgrade(pchar _file_name)
 {
     if (is_running.exchange(true))
     {
         return;
     }
 
+    file_name = _file_name;
+
     wxFile file(file_name, wxFile::read);
     if (!file.IsOpened())
     {
-        LOG_ERROR("Can not open file %s", file_name);
+        LOG_ERROR("Can not open file %s", file_name.c_str().AsChar());
 
         return;
     }
 
     int size = (int)file.Length();
 
-    if (size != (int)wxInvalidOffset)
+    if (size == (int)wxInvalidOffset)
     {
-        IDevice::impl->SendCommand(":UPGRADE:START %d", size);
+        LOG_ERROR("Can not get size file %s", file_name.c_str().AsChar());
+
+        return;
     }
-    else
+
+    data.resize((uint64)size);
+
+    ssize_t bytes_read = file.Read(data.data(), data.size());
+
+    if (bytes_read != size)
     {
-        LOG_ERROR("Can not get size file %s", file_name);
+        LOG_ERROR("Readed %d bytes from %d", bytes_read, size);
+
+        return;
     }
+
+    IDevice::impl->SendCommand(":UPGRADE:START %d", size);
+
+    current_block = -1;
+    state = IDLE;
 
     thread = std::thread([this]()
         {
             while (is_running.load())
             {
+                switch (state)
+                {
+                case IDLE:
+                    break;
 
+                case START_UPGRADE:
+                    break;
+
+                case PROCESS_UPGRADE:
+                    break;
+
+                case END_UPGRADE:
+                    break;
+
+                case Count:
+                    break;
+                }
             }
 
             std::this_thread::sleep_for(std::chrono::microseconds(10));
@@ -128,4 +161,43 @@ void PageSTM32::StopUpgrade()
     {
         thread.join();
     }
+}
+
+
+void PageSTM32::OnUpgradeStart(int size, uint crc32, bool is_ok)
+{
+    if (!is_ok)
+    {
+        StopUpgrade();
+
+        StartUpgrade(file_name);
+    }
+
+    if (size != (int)data.size())
+    {
+        StopUpgrade();
+
+        StartUpgrade(file_name);
+    }
+
+    if (crc32 != GF::CalculateCRC32(data.data(), (int)data.size()))
+    {
+        StopUpgrade();
+
+        StartUpgrade(file_name);
+    }
+
+    state = START_UPGRADE;
+}
+
+
+void PageSTM32::OnUpgradeBlock(int num_block, int size, uint crc32)
+{
+
+}
+
+
+void PageSTM32::OnUpgradeEnd(int size, uint crc32)
+{
+
 }

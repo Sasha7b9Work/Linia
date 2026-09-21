@@ -31,6 +31,22 @@ private:
 
     void StopUpgrade();
 
+    static const int SIZE_BLOCK = 4 * 1024;
+
+    std::vector<uint8> data;                // Здесь файл для загрузки
     std::thread thread;
     std::atomic<bool> is_running;
+    std::atomic<int> current_block;         // Этот блок сейчас загружается
+    wxString file_name;
+
+    enum State
+    {
+        IDLE,
+        START_UPGRADE,      // Подтверждён старт обновления
+        PROCESS_UPGRADE,    // Находимся в процессе обновления
+        END_UPGRADE,        // Подтверждено завершение обновления
+        Count
+    };
+
+    std::atomic<State> state = IDLE;
 };
