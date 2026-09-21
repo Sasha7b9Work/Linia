@@ -1,6 +1,7 @@
 ﻿// 2026/08/19 10:59:39 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/PageDebug/Notebook/PageChip.h"
+#include <thread>
 
 /*
     Страница платы контроллера stm32
@@ -15,7 +16,21 @@ public:
 
     static PageSTM32 *self;
 
+    // :UPGRADE:START <size> <crc32> [0...1]
+    void OnUpgradeStart(int size, uint crc32, bool);
+
+    // :UPGRADE:BLOCK <num_block> <size> <crc32>
+    void OnUpgradeBlock(int num_block, int size, uint crc32);
+
+    // :UPGRADE:END <size> <crc32>
+    void OnUpgradeEnd(int size, uint crc32);
+
 private:
 
-    void ProcessUpdate(pchar);
+    void StartUpgrade(pchar);
+
+    void StopUpgrade();
+
+    std::thread thread;
+    std::atomic<bool> is_running;
 };

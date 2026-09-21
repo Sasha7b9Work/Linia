@@ -41,7 +41,7 @@ PageSTM32::PageSTM32(wxNotebook *notebook) :
 
     updateButton->Bind(wxEVT_BUTTON, [this, fileNameText](wxCommandEvent &)
         {
-            ProcessUpdate(fileNameText->GetLabel());
+            StartUpgrade(fileNameText->GetLabel());
         });
 
     BoxSizerHor *updateRowSizer = new BoxSizerHor();
@@ -79,8 +79,13 @@ PageSTM32::PageSTM32(wxNotebook *notebook) :
 }
 
 
-void PageSTM32::ProcessUpdate(pchar file_name)
+void PageSTM32::StartUpgrade(pchar file_name)
 {
+    if (is_running.exchange(true))
+    {
+        return;
+    }
+
     wxFile file(file_name, wxFile::read);
     if (!file.IsOpened())
     {
@@ -100,7 +105,27 @@ void PageSTM32::ProcessUpdate(pchar file_name)
         LOG_ERROR("Can not get size file %s", file_name);
     }
 
-//    static const int SIZE_CHUNK = 1024;
-//
-//    while()
+    thread = std::thread([this]()
+        {
+            while (is_running.load())
+            {
+
+            }
+
+            std::this_thread::sleep_for(std::chrono::microseconds(10));
+        });
+}
+
+
+void PageSTM32::StopUpgrade()
+{
+    if (!is_running.exchange(false))
+    {
+        return;
+    }
+
+    if (thread.joinable())
+    {
+        thread.join();
+    }
 }

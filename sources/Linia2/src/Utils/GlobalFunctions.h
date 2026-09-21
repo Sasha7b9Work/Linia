@@ -69,4 +69,6 @@ namespace GF
     wxString GetSelfIP();
 
     void DrawTextInCenter(wxAutoBufferedPaintDC &, const wxString &, const wxRect &);
+
+    uint CalculateCRC32(const void *buffer, int size);
 }
