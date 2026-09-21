@@ -1,6 +1,6 @@
 ﻿// 2026/08/19 11:02:33 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
-#include "GUI/PageDebug/Notebook/PageController.h"
+#include "GUI/PageDebug/Notebook/PageSTM32.h"
 #include "GUI/Controls/StaticBox.h"
 #include "GUI/Controls/Button.h"
 #include "GUI/Controls/StaticText.h"
@@ -10,20 +10,18 @@
 #pragma warning(pop)
 
 
-PageController *PageController::self = nullptr;
+PageSTM32 *PageSTM32::self = nullptr;
 
 
-PageController::PageController(wxNotebook *notebook) :
+PageSTM32::PageSTM32(wxNotebook *notebook) :
     PageChip(notebook, "stm32")
 {
     self = this;
 
     StaticBox *box = new StaticBox(this, L("Обновление прошивки"));
 
-    // Вертикальный сайзер для всего содержимого бокса
     StaticBoxSizer *boxSizer = new StaticBoxSizer(box, wxVERTICAL);
 
-    // --- Первая строка: кнопка "Выбрать файл" + название файла ---
     BoxSizerHor *fileRowSizer = new BoxSizerHor();
 
     Button *selectButton = new Button(box, L("Выбрать файл"));
@@ -34,11 +32,14 @@ PageController::PageController(wxNotebook *notebook) :
 
     boxSizer->Add(fileRowSizer, 0, wxEXPAND | wxALL, 5);
 
-    // --- Вторая строка: кнопка "Обновить" ---
     Button *updateButton = new Button(box, L("Обновить"));
-    updateButton->Enable(false);  // По умолчанию отключена, пока не выбран файл
+    updateButton->Enable(false);
 
-    // Центрируем кнопку по горизонтали
+    updateButton->Bind(wxEVT_BUTTON, [this, fileNameText](wxCommandEvent &)
+        {
+            ProcessUpdate(fileNameText->GetLabel());
+        });
+
     BoxSizerHor *updateRowSizer = new BoxSizerHor();
     updateRowSizer->AddStretchSpacer();
     updateRowSizer->Add(updateButton, 0, wxALL, 5);
@@ -46,8 +47,6 @@ PageController::PageController(wxNotebook *notebook) :
 
     boxSizer->Add(updateRowSizer, 0, wxEXPAND | wxBOTTOM, 5);
 
-    // Устанавливаем сайзер на панель PageController
-    // Предполагается, что PageChip уже имеет сайзер или его нужно создать
     BoxSizerVert *mainSizer = new BoxSizerVert();
     mainSizer->Add(boxSizer, 0, wxALL, 10);
     SetSizer(mainSizer);
@@ -56,11 +55,11 @@ PageController::PageController(wxNotebook *notebook) :
         selectButton->Bind(wxEVT_BUTTON, [this, fileNameText, updateButton](wxCommandEvent &)
             {
                 wxFileDialog dialog(this,
-                    L("Выберите файл прошивки"),          // Заголовок окна
-                    L("/media/mnipi"),                        // Начальная папка (пусто = текущая)
-                    wxEmptyString,                        // Начальное имя файла
-                    L("Файлы прошивок (*.bin;*.hex)|*.bin;*.hex|Все файлы (*.*)|*.*"),  // Фильтры
-                    wxFD_OPEN | wxFD_FILE_MUST_EXIST);    // Стили
+                    L("Выберите файл прошивки"),            // Заголовок окна
+                    L("/media/mnipi"),                      // Начальная папка (пусто = текущая)
+                    wxEmptyString,                          // Начальное имя файла
+                    L("Файлы прошивок (*.bin)|*.bin"),      // Фильтры
+                    wxFD_OPEN | wxFD_FILE_MUST_EXIST);      // Стили
 
                 // Показываем диалог и проверяем результат
                 if (dialog.ShowModal() == wxID_OK)
@@ -71,4 +70,10 @@ PageController::PageController(wxNotebook *notebook) :
                 }
             });
     }
+}
+
+
+void PageSTM32::ProcessUpdate(pchar file_name)
+{
+    (void)file_name;
 }

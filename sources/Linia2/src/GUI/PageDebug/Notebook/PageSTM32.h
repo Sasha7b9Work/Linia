@@ -7,11 +7,15 @@
 */
 
 
-class PageController : public PageChip
+class PageSTM32 : public PageChip
 {
 public:
 
-    PageController(wxNotebook *);
+    PageSTM32(wxNotebook *);
 
-    static PageController *self;
+    static PageSTM32 *self;
+
+private:
+
+    void ProcessUpdate(pchar);
 };
