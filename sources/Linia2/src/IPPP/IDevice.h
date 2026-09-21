@@ -29,11 +29,3 @@ public:
     // Читает четыре массива значений из ПЛИС
     virtual bool ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data_code[POINTS_IN_SAMPLE_ADC]) = 0;
 };
-
-
-/*
-    :FPGA[0...2]:LENGTH [1...32]    Установка длины регистра FPGA
-    :FPGA[0...2]:WRITE XXXXXh       Запись шестнадцатиричного значения в регистр FPGA
-    :SCAN:START  Xms                Запуск развёртки с периодом X ms
-    :SCAN:STOP                      Останов развёртки
-*/

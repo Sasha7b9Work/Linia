@@ -3,6 +3,7 @@
 #include "GUI/Controls/StaticBox.h"
 #include "GUI/Controls/Button.h"
 #include "Utils/SystemDepend.h"
+#include "GUI/Controls/StaticText.h"
 #pragma warning(push, 0)
     #include <wx/window.h>
     #include <wx/dcclient.h>

@@ -28,6 +28,8 @@ PageSTM32::PageSTM32(wxNotebook *notebook) :
     fileRowSizer->Add(selectButton, 0, wxALL, 5);
 
     StaticText *fileNameText = new StaticText(box, L("Файл не выбран"));
+    fileNameText->SetMinSize({ 300, TEXTCNTRL_HEIGHT + 5 });
+    fileNameText->SetSize({ 300, TEXTCNTRL_HEIGHT + 5 });
     fileRowSizer->Add(fileNameText, 1, wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
     boxSizer->Add(fileRowSizer, 0, wxEXPAND | wxALL, 5);
@@ -70,10 +72,14 @@ PageSTM32::PageSTM32(wxNotebook *notebook) :
                 }
             });
     }
+
+    box->Layout();
 }
 
 
 void PageSTM32::ProcessUpdate(pchar file_name)
 {
     (void)file_name;
+
+
 }
