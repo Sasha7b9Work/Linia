@@ -169,10 +169,14 @@ void PageSTM32::OnUpgradeStart(int size, uint crc32, bool is_ok)
         (size != (int)data.size()) ||
         (crc32 != GF::CalculateCRC32(data.data(), (int)data.size())))
     {
+        LOG_WRITE("");
+
         ResetUpgrade();
     }
     else
     {
+        LOG_WRITE("");
+
         current_block = -1;
 
         SendNextBlock();
@@ -186,10 +190,12 @@ void PageSTM32::OnUpgradeBlock(int _num_block, int _size, uint _crc32)
 {
     if (_num_block != current_block)
     {
+        LOG_WRITE("");
         ResetUpgrade();
     }
     else
     {
+        LOG_WRITE("");
         int offset = 0;
         int size = 0;
         uint crc32 = 0;
@@ -199,10 +205,12 @@ void PageSTM32::OnUpgradeBlock(int _num_block, int _size, uint _crc32)
         if ((size != _size) ||
             (crc32 != _crc32))
         {
+            LOG_WRITE("");
             ResetUpgrade();
         }
         else
         {
+            LOG_WRITE("");
             SendNextBlock();
         }
     }
@@ -214,10 +222,12 @@ void PageSTM32::OnUpgradeEnd(int size, uint crc32)
     if (size == (int)data.size() &&
         crc32 == GF::CalculateCRC32(data.data(), (int)data.size()))
     {
+        LOG_WRITE("");
         StopUpgrade();
     }
     else
     {
+        LOG_WRITE("");
         ResetUpgrade();
     }
 }
@@ -225,6 +235,7 @@ void PageSTM32::OnUpgradeEnd(int size, uint crc32)
 
 void PageSTM32::ResetUpgrade()
 {
+    LOG_WRITE("");
     StopUpgrade();
 
     StartUpgrade(file_name);
@@ -233,6 +244,7 @@ void PageSTM32::ResetUpgrade()
 
 void PageSTM32::SendNextBlock()
 {
+    LOG_WRITE("");
     ++current_block;
 
     int offset = 0;
@@ -241,12 +253,14 @@ void PageSTM32::SendNextBlock()
 
     if (CalculateParametersBlock(current_block, offset, size, crc32))
     {
+        LOG_WRITE("");
         IDevice::impl->SendCommand(":UPGRADE:BLOCK %d %d %u", current_block.load(), size, crc32);
 
         IDevice::impl->SendBinaryData(data.data() + offset, size);
     }
     else
     {
+        LOG_WRITE("");
         IDevice::impl->SendCommand(":UPGRADE:END %u %u", data.size(), GF::CalculateCRC32(data.data(), (int)data.size()));
     }
 }
@@ -254,6 +268,7 @@ void PageSTM32::SendNextBlock()
 
 bool PageSTM32::CalculateParametersBlock(int num_block, int &offset, int &size, uint &crc32)
 {
+    LOG_WRITE("");
     offset = -1;
     size = -1;
     crc32 = (uint)-1;
