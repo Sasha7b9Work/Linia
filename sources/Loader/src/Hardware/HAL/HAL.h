@@ -79,6 +79,8 @@ namespace HAL_USART1
 
     void GetData(BufferOSDP &);
 
+    int BytesInBuffer();
+
     void Transmit(const void *buffer, int size);
 
     void TransmitString(pchar);

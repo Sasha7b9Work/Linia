@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/RingBuffer.h"
+#include "Device/OPi5Plus/OPi5Plus.h"
 #include <cstring>
 #include <cctype>
 #include <stm32f4xx_hal.h>
@@ -84,10 +85,19 @@ void HAL_USART1::GetData(BufferOSDP &out_buffer)
     {
         char symbol = (char)in_buffer.Pop();
 
-        symbol = (char)std::toupper(symbol);
+        if (OPi5Plus::text_mode)
+        {
+            symbol = (char)std::toupper(symbol);
+        }
 
         out_buffer.Append(symbol);
     }
+}
+
+
+int HAL_USART1::BytesInBuffer()
+{
+    return in_buffer.Size();
 }
 
 

@@ -37,3 +37,14 @@ uint8 RingBuffer::Pop()
 
     return result;
 }
+
+
+int RingBuffer::Size() const
+{
+    if (out_index <= in_index)
+    {
+        return in_index - out_index;
+    }
+
+    return (in_index + (CAPACITY - out_index));
+}

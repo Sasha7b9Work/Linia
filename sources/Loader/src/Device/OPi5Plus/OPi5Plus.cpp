@@ -25,7 +25,10 @@ namespace OPi5Plus
 
 void OPi5Plus::PeriodicTask()
 {
-    UpdateInput();
+    if (text_mode)
+    {
+        UpdateInput();
+    }
 }
 
 

@@ -470,6 +470,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\structs.h</FilePath>
             </File>
+            <File>
+              <FileName>Upgrader.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Upgrader.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Upgrader.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Upgrader.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1122,6 +1132,16 @@
               <FileName>structs.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\structs.h</FilePath>
+            </File>
+            <File>
+              <FileName>Upgrader.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Upgrader.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Upgrader.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Upgrader.h</FilePath>
             </File>
           </Files>
         </Group>

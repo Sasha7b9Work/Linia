@@ -4,6 +4,7 @@
 #include "Utils/StringUtils.h"
 #include "Hardware/HAL/HAL.h"
 #include "Device/Device.h"
+#include "Upgrader.h"
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -96,7 +97,7 @@ bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
         int size = (int)std::strtoul(pos + 1, &pos, 10);
         uint crc32 = std::strtoul(pos + 1, &pos, 16);
 
-
+        Upgrader::ReceiveBlock(num_block, size, crc32);
     }
     else SU_BEGIN_WITH("END ")
     }
