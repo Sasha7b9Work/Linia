@@ -135,7 +135,7 @@ void PanelRight::OnEventButton(wxCommandEvent &event)
         PageFPGA::self->SendAllRegisters();
         PageChannelForm::self->SendAllRegisters();
 
-        IDevice::impl->SendCommand(wxString::Format(":SCAN:START %u", SavePeriodScan()));
+        IDevice::impl->SendCommand(":SCAN:START %u", SavePeriodScan());
 
         btnStart->Enable(false);
         btnStop->Enable(true);
