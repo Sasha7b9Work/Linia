@@ -52,7 +52,6 @@ void ControlDataFPGA::OnEventPaint(wxPaintEvent &event)
 {
     Draw();
     LOG_WRITE("");
-    event.Skip();
 }
 
 
