@@ -139,7 +139,7 @@ PainterRect::PainterRect(wxWindow *parent, const wxSize &size) :
     Panel::SetMinSize(size);
     Panel::SetMaxSize(size);
     Panel::SetDoubleBuffered(true);
-    Panel::Bind(wxEVT_PAINT, &PainterRect::OnPaint, this);
+    Panel::Bind(wxEVT_PAINT, &PainterRect::OnEventPaint, this);
 
     color = wxColour(255U, 0, 0);
 
