@@ -9,7 +9,7 @@
 
 int main()
 {
-    SCB->VTOR = 0x080E0000;
+    SCB->VTOR = 0x080C0000;
     
     __enable_irq();
     

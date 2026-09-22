@@ -17,7 +17,7 @@ namespace Bootloader
 
 void Bootloader::Run()
 {
-    const uint bootloaderAddr = 0x080E0000;       // Адрес загрузчика
+    const uint bootloaderAddr = 0x080C0000;       // Адрес загрузчика
     uint JumpAddress;
     pFunction Jump_To_Application;
 
