@@ -1133,6 +1133,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\VCP.h</FilePath>
             </File>
+            <File>
+              <FileName>Bootloader.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Bootloader.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Bootloader.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Bootloader.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2458,6 +2468,16 @@
               <FileName>VCP.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\VCP.h</FilePath>
+            </File>
+            <File>
+              <FileName>Bootloader.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Bootloader.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Bootloader.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Bootloader.h</FilePath>
             </File>
           </Files>
         </Group>

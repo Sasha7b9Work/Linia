@@ -7,6 +7,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Device/Device.h"
 #include "Device/Sources.h"
+#include "Hardware/Bootloader.h"
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -232,8 +233,22 @@ bool OPi5Plus::SCPI::Func_Source50V(pchar command)
 }
 
 
-bool OPi5Plus::SCPI::Func_Upgrade(pchar)
+bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
 {
+    SU_BEGIN_WITH("START ")
+        int size = std::strtoul(command, &pos, 10);
+        uint crc32 = std::strtoul(pos + 1, &pos, 32);
+
+        if (size > 1)
+        {
+            OPi5Plus::SCPI::Send(":UPGRADE:START %d %u", size, crc32);
+
+            Bootloader::Run();
+
+            // Здесь не надо ничего возвращать - переходим на загрузчик, из которого выход только на перезагрузку
+        }
+    }
+
     return false;
 }
 
@@ -273,8 +288,6 @@ bool OPi5Plus::SCPI::Func_DAC(pchar command)
 
         if (SU::CharIs(*pos, " :"))
         {
-//            LOG_WRITE("Write %08X to DAC%d", value, num_dac);
-
             ChipDAC::Get((ChipDAC::E)num_dac).WriteValue(value);
 
             return true;
