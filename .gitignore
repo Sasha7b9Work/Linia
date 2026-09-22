@@ -14,6 +14,15 @@ sources/Device/Objects/*
 sources/Device/Objects-Debug/*
 sources/Device/*.bin
 
+sources/Loader/*.bin
+sources/Loader/*guix.*
+sources/Loader/DebugConfig/*
+sources/Loader/Objects/*
+sources/Loader/Objects-Debug/*
+sources/Loader/RTE/*
+sources/Loader/Listings/*
+sources/Loader/Listings-Debug/*
+
 .vs/*
 
 sources/*uvgui*
