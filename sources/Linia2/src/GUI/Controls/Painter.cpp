@@ -16,7 +16,7 @@ Painter::Painter(wxWindow *parent, const wxSize &_size) :
     Panel::SetMaxSize(size);
     Panel::SetDoubleBuffered(true);
 
-    Panel::Bind(wxEVT_PAINT, &Painter::OnPaint, this);
+    Panel::Bind(wxEVT_PAINT, &Painter::OnEventPaint, this);
 
     bitmap = new wxBitmap(size);
 
@@ -125,7 +125,7 @@ void Painter::DrawCircle(int x, int y, int r, const wxColor &_color)
 }
 
 
-void Painter::OnPaint(wxPaintEvent &)
+void Painter::OnEventPaint(wxPaintEvent &)
 {
     wxAutoBufferedPaintDC paint_dc(this);
 
@@ -147,7 +147,7 @@ PainterRect::PainterRect(wxWindow *parent, const wxSize &size) :
 }
 
 
-void PainterRect::OnPaint(wxPaintEvent &)
+void PainterRect::OnEventPaint(wxPaintEvent &)
 {
     wxAutoBufferedPaintDC dc(this);
 

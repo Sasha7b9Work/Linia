@@ -124,7 +124,7 @@ private:
         event.Skip();
     }
 
-    void OnPaint(wxPaintEvent &)
+    void OnEventPaint(wxPaintEvent &)
     {
         SetBackgroundColour(GetParent()->GetBackgroundColour());
 

@@ -119,9 +119,20 @@ void RealDevice::FuncOnKeyStart(bool state)
 {
     state = !state;
 
+    static std::atomic<bool> pending{ false };
+
+    bool expected = false;
+
+    if (!pending.compare_exchange_strong(expected, true))
+    {
+        return;
+    }
+
     TheApp->CallAfter([state]()
         {
             ThePageDebug->labelButtonStart->SetLabel(state ? "ИЗМЕРЕНИЕ \"ВКЛ\"" : "ИЗМЕРЕНИЕ \"ОТКЛ\"");
+
+            pending.store(false);
         });
 }
 
@@ -130,21 +141,43 @@ void RealDevice::FuncOnKeyStop(bool state)
 {
     state = !state;
 
+    static std::atomic<bool> pending{ false };
+
+    bool expected = false;
+
+    if (!pending.compare_exchange_strong(expected, true))
+    {
+        return;
+    }
+
     TheApp->CallAfter([state]()
         {
             ThePageDebug->labelButtonStop->SetLabel(state ? "СТОП \"ВКЛ\"" : "СТОП \"ОТКЛ\"");
+
+            pending.store(false);
         });
 }
 
 
 void RealDevice::FuncOnEncoder(int delta)
 {
+    static std::atomic<bool> pending{ false };
+
+    bool expected = false;
+
+    if (!pending.compare_exchange_strong(expected, true))
+    {
+        return;
+    }
+
     TheApp->CallAfter([delta]()
         {
             int value = 0;
             ThePageDebug->labelEncoder->GetLabel().ToInt(&value);
 
             ThePageDebug->labelEncoder->SetLabel(wxString::Format("%d", value + delta));
+
+            pending.store(false);
         });
 }
 
@@ -153,6 +186,15 @@ void RealDevice::BackgroundTask()
 {
     static int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC];
     static int data_code[POINTS_IN_SAMPLE_ADC];
+
+    static std::atomic<bool> pending{ false };
+
+    bool expected = false;
+
+    if (!pending.compare_exchange_strong(expected, true))
+    {
+        return;
+    }
 
     TheApp->CallAfter([]()
         {
@@ -165,6 +207,8 @@ void RealDevice::BackgroundTask()
 
                 ThePanelRight->data[NUMBER_ADC]->SetData(data_code);
             }
+
+            pending.store(false);
         });
 }
 

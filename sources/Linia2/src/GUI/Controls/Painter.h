@@ -39,7 +39,7 @@ public:
 
     Painter(wxWindow *, const wxSize &);
 
-    virtual void OnPaint(wxPaintEvent &);
+    virtual void OnEventPaint(wxPaintEvent &);
 
     void BeginPaint(const wxColor &background = wxNullColour);
     void EndPaint();
@@ -68,7 +68,7 @@ public:
 
     PainterRect(wxWindow *parent, const wxSize &size);
 
-    virtual void OnPaint(wxPaintEvent &);
+    virtual void OnEventPaint(wxPaintEvent &);
 
     void SetColor(const Color &);
 

@@ -241,7 +241,6 @@ SliderFloat::SliderFloat(wxWindow *parent, int width, const wxString &name) :
     btnLess->Bind(wxEVT_LEFT_UP, &SliderFloat::OnEventMouseUp, this);
 
     Bind(wxEVT_TIMER, &SliderFloat::OnEventTimer, this);
-    Bind(wxEVT_TIMER, &SliderFloat::OnEventTimer, this);
 }
 
 
