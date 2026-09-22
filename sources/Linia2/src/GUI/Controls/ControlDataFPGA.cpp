@@ -50,7 +50,8 @@ void ControlDataFPGA::OnEventToggleButon(wxCommandEvent &event)
 
 void ControlDataFPGA::OnEventPaint(wxPaintEvent &event)
 {
-//    Draw();
+    Draw();
+    LOG_WRITE("");
     event.Skip();
 }
 
