@@ -46,9 +46,9 @@ bool OPi5Plus::ProcessInputBuffer()
         in_buffer.RemoveFirst(pos_begin);
     }
 
-    int pos_end = in_buffer.FirstPosition('\0');
+    int pos_end = in_buffer.FirstPosition('\0');            // Ищем завершающий ноль
 
-    if (pos_end < 0)
+    if (pos_end < 0)                                        // Если не нашли - нет команды в буфере
     {
         return false;
     }

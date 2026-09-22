@@ -78,9 +78,11 @@ namespace OPi5Plus
 }
 
 
-bool OPi5Plus::SCPI::Parse(pchar command)
+void OPi5Plus::SCPI::Parse(pchar command)
 {
-    return ProcessStructures(command, head);
+    bool result = ProcessStructures(command, head);
+
+    (void)result;
 }
 
 
