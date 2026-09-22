@@ -5,6 +5,13 @@
 #include "Device/OPi5Plus/SCPI.h"
 #include "Device/OPi5Plus/OPi5Plus.h"
 #include "Utils/GlobalFunctions.h"
+#include <stm32f4xx_hal.h>
+
+
+#ifdef WIN32
+    #pragma warning(push)
+    #pragma warning(disable : 4312)     // 'type cast': conversion from 'uint' to 'const void *' of greater size
+#endif
 
 
 namespace Upgrader
@@ -87,7 +94,7 @@ void Upgrader::End(int _size, uint _crc32)
     {
         ErrorUpgrade();
     }
-    else if (_crc32 != GF::CalculateCRC32((const void *)HAL_FLASH::Firmware::Address(), offset))
+    else if (_crc32 != GF::CalculateCRC32((const void *)HAL_FLASH::Firmware::Address(), (int)offset))
     {
         ErrorUpgrade();
     }
@@ -97,7 +104,7 @@ void Upgrader::End(int _size, uint _crc32)
 
         do
         {
-            crc32 = GF::CalculateCRC32((const void *)HAL_FLASH::Firmware::Address(), offset);
+            crc32 = GF::CalculateCRC32((const void *)HAL_FLASH::Firmware::Address(), (int)offset);
 
             HAL_FLASH::EraseSector(0x08000000);     // /
             HAL_FLASH::EraseSector(0x08004000);     // | Стираем первые пять секторов для записи основной прошивки
@@ -105,11 +112,13 @@ void Upgrader::End(int _size, uint _crc32)
             HAL_FLASH::EraseSector(0x0800C000);     // |
             HAL_FLASH::EraseSector(0x08010000);     // /
 
-            HAL_FLASH::WriteBuffer(0x08000000, (const void *)HAL_FLASH::Firmware::Address(), offset);
+            HAL_FLASH::WriteBuffer(0x08000000, (const void *)HAL_FLASH::Firmware::Address(), (int)offset);
 
-        } while (crc32 != GF::CalculateCRC32((const void *)0x08000000, offset));
+        } while (crc32 != GF::CalculateCRC32((const void *)0x08000000, (int)offset));
 
         OPi5Plus::SCPI::Send(":UPGRADE:END %d, %X", offset, _crc32);
+
+        HAL_NVIC_SystemReset();
     }
 }
 
@@ -123,3 +132,8 @@ void Upgrader::ErrorUpgrade()
 
     OPi5Plus::SCPI::Send(":UPGRADE:ERROR");
 }
+
+
+#ifdef WIN32
+    #pragma warning(pop)
+#endif
