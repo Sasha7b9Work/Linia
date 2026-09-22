@@ -430,6 +430,16 @@
               <FileType>1</FileType>
               <FilePath>..\Common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_hal_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_tim_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -473,6 +483,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Device</GroupName>
+          <Files>
+            <File>
+              <FileName>Device.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Device\Device.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Device.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Device\Device.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Device/OPi5Plus</GroupName>
           <Files>
             <File>
@@ -484,6 +509,16 @@
               <FileName>SCPI.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Device\OPi5Plus\SCPI.h</FilePath>
+            </File>
+            <File>
+              <FileName>OPi5Plus.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Device\OPi5Plus\OPi5Plus.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OPi5Plus.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Device\OPi5Plus\OPi5Plus.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -499,6 +534,16 @@
               <FileName>VCP.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\VCP.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -539,6 +584,36 @@
               <FileName>HAL_USART1.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_USART1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_IT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_IT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PINS.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_PINS.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PINS.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_PINS.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_TIM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_TIM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_TIM2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_TIM2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_TIM3.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_TIM3.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1063,6 +1138,16 @@
               <FileType>1</FileType>
               <FilePath>..\Common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_hal_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_tim_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1106,6 +1191,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Device</GroupName>
+          <Files>
+            <File>
+              <FileName>Device.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Device\Device.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Device.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Device\Device.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Device/OPi5Plus</GroupName>
           <Files>
             <File>
@@ -1117,6 +1217,16 @@
               <FileName>SCPI.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Device\OPi5Plus\SCPI.h</FilePath>
+            </File>
+            <File>
+              <FileName>OPi5Plus.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Device\OPi5Plus\OPi5Plus.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OPi5Plus.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Device\OPi5Plus\OPi5Plus.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1132,6 +1242,16 @@
               <FileName>VCP.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\VCP.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1172,6 +1292,36 @@
               <FileName>HAL_USART1.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_USART1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_IT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_IT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PINS.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_PINS.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PINS.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_PINS.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_TIM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_TIM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_TIM2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_TIM2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_TIM3.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_TIM3.cpp</FilePath>
             </File>
           </Files>
         </Group>
