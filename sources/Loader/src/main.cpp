@@ -4,10 +4,15 @@
 #include "Device/Device.h"
 #include "Upgrader.h"
 #include "Device/OPi5Plus/OPi5Plus.h"
+#include <stm32f4xx_hal.h>
 
 
 int main()
 {
+    SCB->VTOR = 0x080E0000;
+    
+    __enable_irq();
+    
     HAL::Init();
 
     HAL_TIM::Delay(500);
