@@ -59,9 +59,12 @@ namespace OPi5Plus
 }
 
 
-bool OPi5Plus::SCPI::Parse(pchar command)
+void OPi5Plus::SCPI::Parse(pchar command)
 {
-    return ProcessStructures(command, head);
+    if (!ProcessStructures(command, head))
+    {
+        LOG_ERROR("Error comand : %s", command);
+    }
 }
 
 
@@ -119,7 +122,7 @@ bool OPi5Plus::SCPI::ProcessStructures(pchar command, StructParser *handlers)
         handler++;
     }
 
-    return true;
+    return false;
 }
 
 
@@ -236,7 +239,7 @@ bool OPi5Plus::SCPI::Func_Source50V(pchar command)
 bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
 {
     SU_BEGIN_WITH("START ")
-        int size = std::strtoul(command, &pos, 10);
+        int size = (int)std::strtoul(command, &pos, 10);
         uint crc32 = std::strtoul(pos + 1, &pos, 32);
 
         if (size > 1)

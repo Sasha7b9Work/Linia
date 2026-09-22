@@ -39,7 +39,7 @@ void OPi5Plus::SCPI::Parse(pchar command)
 {
     if (!ProcessStructures(command, head))
     {
-        LOG_WRITE("Bad command : %s", command);
+        LOG_ERROR("Bad command : %s", command);
     }
 }
 
@@ -81,8 +81,10 @@ bool OPi5Plus::SCPI::ProcessStructures(pchar command, StructParser *handlers)
 }
 
 
-bool OPi5Plus::SCPI::Func_Upgrade(pchar)
+bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
 {
+
+
     return false;
 }
 

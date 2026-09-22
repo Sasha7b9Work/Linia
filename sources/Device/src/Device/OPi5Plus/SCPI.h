@@ -9,7 +9,7 @@ namespace OPi5Plus
 
     namespace SCPI
     {
-        bool Parse(pchar);
+        void Parse(pchar);
 
         void Send(pchar format, ...);
     }

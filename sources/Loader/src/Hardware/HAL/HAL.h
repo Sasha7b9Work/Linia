@@ -17,6 +17,18 @@ namespace HAL
 };
 
 
+namespace HAL_FLASH
+{
+    static const uint ADDRESS_FIRMWARE = 0x080E0000;    // јдрес последнего 128-килобайтного сектора. ¬ него сохраним прошивку перед обновлением
+
+    void EraseSector(uint address);
+
+    void WriteBuffer(uint address, const void *buffer, int size);
+
+    void ReadBuffer(uint address, void *buffer, int size);
+}
+
+
 namespace HAL_TIM
 {
     uint TimeMS();
