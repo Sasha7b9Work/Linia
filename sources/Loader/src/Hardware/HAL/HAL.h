@@ -19,13 +19,26 @@ namespace HAL
 
 namespace HAL_FLASH
 {
-    static const uint ADDRESS_FIRMWARE = 0x080E0000;    // јдрес последнего 128-килобайтного сектора. ¬ него сохраним прошивку перед обновлением
-
+    // —тереть сектор, в который будем сохран€ть прошивку перед обновлением
     void EraseSector(uint address);
 
+    // —юда передаЄтс€ смещение относительно начала сектора хранени€ прошивки
     void WriteBuffer(uint address, const void *buffer, int size);
 
+    // —юда передаЄтс€ смещение относительно начала сектора хранени€ прошивки
     void ReadBuffer(uint address, void *buffer, int size);
+
+    namespace Firmware
+    {
+        // —тереть сектор, в который будем сохран€ть прошивку перед обновлением
+        void EraseSector();
+
+        // —юда передаЄтс€ смещение относительно начала сектора хранени€ прошивки
+        void WriteBuffer(uint offset, const void *buffer, int size);
+
+        // —юда передаЄтс€ смещение относительно начала сектора хранени€ прошивки
+        void ReadBuffer(uint offset, void *buffer, int size);
+    }
 }
 
 

@@ -81,7 +81,7 @@ bool OPi5Plus::SCPI::ProcessStructures(pchar command, StructParser *handlers)
 }
 
 
-bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
+bool OPi5Plus::SCPI::Func_Upgrade(pchar /*command*/)
 {
 
 
