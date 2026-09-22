@@ -93,5 +93,7 @@ bool SCPI::FuncPing(pchar)
 
 bool SCPI::FuncUpgrade(pchar)
 {
+
+
     return false;
 }

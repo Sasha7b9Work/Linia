@@ -28,8 +28,4 @@ private:
 public:
 
     void ReInit();
-
-    // Эти функции вызываются из Device -----------------------------------------
-    // Приём байта от контроллера по UART
-    void OnReceiveUART(uint8);
 };

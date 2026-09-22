@@ -266,9 +266,3 @@ int Application::OnExit()
 
     return wxApp::OnExit();
 }
-
-
-void Application::OnReceiveUART(uint8)
-{
-
-}
