@@ -40,8 +40,6 @@ void Painter::BeginPaint(const wxColor &background)
 void Painter::EndPaint()
 {
     dc.SelectObject(wxNullBitmap);
-
-    Refresh();
 }
 
 
