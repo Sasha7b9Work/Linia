@@ -57,6 +57,7 @@ add_subdirectory(ServerHTTP)
 
 if(WIN32)
     add_subdirectory(Device)
+    add_subdirectory(Loader)
 else()
 endif()
 
