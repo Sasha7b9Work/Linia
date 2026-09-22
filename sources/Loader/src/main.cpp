@@ -3,7 +3,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Device/OPi5Plus/OPi5Plus.h"
 #include "Device/Device.h"
-#include "Hardware/VCP.h"
+#include "Device/OPi5Plus/SCPI.h"
 
 
 int main()
@@ -14,11 +14,14 @@ int main()
 
     Device::Init();
 
+    // Команда начала обновления уже получена, стираем сектор, где будет храниться прошивка
+    HAL_FLASH::Firmware::EraseSector();
+
+    OPi5Plus::SCPI::Send(":UPGRADE:START 1");
+
     while (true)
     {
         OPi5Plus::PeriodicTask();
-
-        VCP::PeriodicTask();
 
         Device::PeriodicTask();
     }

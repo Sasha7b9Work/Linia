@@ -53,7 +53,7 @@ bool OPi5Plus::ProcessInputBuffer()
         return false;
     }
 
-    SCPI::Parse(in_buffer.Data(pos_begin));
+    SCPI::_Parse(in_buffer.Data(pos_begin));
 
     in_buffer.RemoveFirst(pos_end + 1);
 

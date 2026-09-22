@@ -35,7 +35,7 @@ namespace OPi5Plus
 }
 
 
-void OPi5Plus::SCPI::Parse(pchar command)
+void OPi5Plus::SCPI::_Parse(pchar command)
 {
     if (!ProcessStructures(command, head))
     {
@@ -81,9 +81,25 @@ bool OPi5Plus::SCPI::ProcessStructures(pchar command, StructParser *handlers)
 }
 
 
-bool OPi5Plus::SCPI::Func_Upgrade(pchar /*command*/)
-{
+#define SU_BEGIN_WITH(string)               \
+    if(SU::BeginWith(command, string))      \
+    {                                       \
+        command += std::strlen(string);     \
+        char *pos = nullptr;                \
+        (void)pos;
 
+
+bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
+{
+    SU_BEGIN_WITH("BLOCK ")
+        int num_block = (int)std::strtoul(command, &pos, 10);
+        int size = (int)std::strtoul(pos + 1, &pos, 10);
+        uint crc32 = std::strtoul(pos + 1, &pos, 16);
+
+
+    }
+    else SU_BEGIN_WITH("END ")
+    }
 
     return false;
 }

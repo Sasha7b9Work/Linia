@@ -28,17 +28,9 @@ extern "C" {
     void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *)
     {
         TRACE_HANDLER;
-//        Console::AddInt((int)handle->ErrorCode);
     }
 
 
-    
-    void OTG_FS_IRQHandler()
-    {
-        HAL_PCD_IRQHandler(&hpcd);
-    }
-
-       
     void MemManage_Handler()
     {
         TRACE_HANDLER;

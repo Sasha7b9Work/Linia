@@ -244,8 +244,6 @@ bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
 
         if (size > 1)
         {
-            OPi5Plus::SCPI::Send(":UPGRADE:START %d %u", size, crc32);
-
             Bootloader::Run();
 
             // Здесь не надо ничего возвращать - переходим на загрузчик, из которого выход только на перезагрузку
