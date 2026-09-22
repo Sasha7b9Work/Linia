@@ -20,7 +20,7 @@ PageDebug::PageDebug(Notebook *board, PageDebug *&global) : PageNotebook(board, 
 
 //    sizer->Add(new NotebookDebug(this, TheNotebookDebug));
 
-//    sizer->Add(new PanelRight(this, ThePanelRight));
+    sizer->Add(new PanelRight(this, ThePanelRight));
 
     SetSizer(sizer);
 
