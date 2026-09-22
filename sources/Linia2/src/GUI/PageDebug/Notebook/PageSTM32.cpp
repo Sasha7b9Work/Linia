@@ -233,11 +233,13 @@ void PageSTM32::SendNextBlock()
 
     if (CalculateParametersBlock(current_block, offset, size, crc32))
     {
+        IDevice::impl->SendCommand(":UPGRADE:BLOCK %d %d %u", current_block.load(), size, crc32);
 
+        IDevice::impl->SendBinaryData(data.data() + offset, size);
     }
     else
     {
-
+        IDevice::impl->SendCommand(":UPGRADE:END %u %u", data.size(), GF::CalculateCRC32(data.data(), (int)data.size()));
     }
 }
 
