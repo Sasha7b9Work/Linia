@@ -30,6 +30,8 @@ namespace HAL_FLASH
 
     namespace Firmware
     {
+        uint Address();
+
         // Стереть сектор, в который будем сохранять прошивку перед обновлением
         void EraseSector();
 

@@ -665,6 +665,26 @@
               <FileType>5</FileType>
               <FilePath>.\src\Utils\StringUtils.h</FilePath>
             </File>
+            <File>
+              <FileName>Debug.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Debug.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Debug.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Debug.h</FilePath>
+            </File>
+            <File>
+              <FileName>GlobalFunctions.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\GlobalFunctions.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GlobalFunctions.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\GlobalFunctions.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -1327,6 +1347,26 @@
               <FileName>StringUtils.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\StringUtils.h</FilePath>
+            </File>
+            <File>
+              <FileName>Debug.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Debug.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Debug.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Debug.h</FilePath>
+            </File>
+            <File>
+              <FileName>GlobalFunctions.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\GlobalFunctions.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GlobalFunctions.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\GlobalFunctions.h</FilePath>
             </File>
           </Files>
         </Group>

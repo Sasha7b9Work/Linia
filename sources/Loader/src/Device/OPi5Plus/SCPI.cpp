@@ -92,7 +92,13 @@ bool OPi5Plus::SCPI::ProcessStructures(pchar command, StructParser *handlers)
 
 bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
 {
-    SU_BEGIN_WITH("BLOCK ")
+    SU_BEGIN_WITH("START ")
+        int size = (int)std::strtoul(pos + 1, &pos, 10);
+        uint crc32 = std::strtoul(pos + 1, &pos, 16);
+
+        Upgrader::Start(size, crc32);
+    }
+    else SU_BEGIN_WITH("BLOCK ")
         int num_block = (int)std::strtoul(command, &pos, 10);
         int size = (int)std::strtoul(pos + 1, &pos, 10);
         uint crc32 = std::strtoul(pos + 1, &pos, 16);
@@ -100,6 +106,10 @@ bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
         Upgrader::ReceiveBlock(num_block, size, crc32);
     }
     else SU_BEGIN_WITH("END ")
+        int size = (int)std::strtoul(pos + 1, &pos, 10);
+        uint crc32 = std::strtoul(pos + 1, &pos, 16);
+
+        Upgrader::End(size, crc32);
     }
 
     return false;

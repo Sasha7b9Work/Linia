@@ -13,8 +13,6 @@
 
 namespace HAL_FLASH
 {
-    static const uint ADDRESS_FIRMWARE = 0x080E0000;    // Адрес последнего 128-килобайтного сектора. В него сохраним прошивку перед обновлением
-
     struct FlashSector {
         uint startAddress;
         uint size;
@@ -51,21 +49,27 @@ namespace HAL_FLASH
 }
 
 
+uint HAL_FLASH::Firmware::Address()
+{
+    return 0x080E0000;
+}
+
+
 void HAL_FLASH::Firmware::EraseSector()
 {
-    HAL_FLASH::EraseSector(ADDRESS_FIRMWARE);
+    HAL_FLASH::EraseSector(Address());
 }
 
 
 void HAL_FLASH::Firmware::WriteBuffer(uint offset, const void *buffer, int size)
 {
-    HAL_FLASH::WriteBuffer(ADDRESS_FIRMWARE + offset, buffer, size);
+    HAL_FLASH::WriteBuffer(Address() + offset, buffer, size);
 }
 
 
 void HAL_FLASH::Firmware::ReadBuffer(uint offset, void *buffer, int size)
 {
-    HAL_FLASH::ReadBuffer(ADDRESS_FIRMWARE + offset, buffer, size);
+    HAL_FLASH::ReadBuffer(Address() + offset, buffer, size);
 }
 
 

@@ -4,6 +4,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Device/OPi5Plus/SCPI.h"
 #include "Device/OPi5Plus/OPi5Plus.h"
+#include "Utils/GlobalFunctions.h"
 
 
 namespace Upgrader
@@ -47,11 +48,19 @@ void Upgrader::PeriodicTask()
 
     HAL_USART1::GetData(buffer);
 
+
+
     HAL_FLASH::Firmware::WriteBuffer(offset, buffer.Data(0), size_block);
 
     offset += size_block;
 
     OPi5Plus::text_mode = true;
+}
+
+
+void Upgrader::Start(int /*size*/, uint /*crc32*/)
+{
+
 }
 
 
@@ -68,6 +77,39 @@ void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
         current_block = _num_block;
         size_block = _size_block;
         crc32_block = _crc32_block;
+    }
+}
+
+
+void Upgrader::End(int _size, uint _crc32)
+{
+    if (_size != (int)offset)
+    {
+        ErrorUpgrade();
+    }
+    else if (_crc32 != GF::CalculateCRC32((const void *)HAL_FLASH::Firmware::Address(), offset))
+    {
+        ErrorUpgrade();
+    }
+    else
+    {
+        uint crc32 = 0;
+
+        do
+        {
+            crc32 = GF::CalculateCRC32((const void *)HAL_FLASH::Firmware::Address(), offset);
+
+            HAL_FLASH::EraseSector(0x08000000);     // /
+            HAL_FLASH::EraseSector(0x08004000);     // | Стираем первые пять секторов для записи основной прошивки
+            HAL_FLASH::EraseSector(0x08008000);     // |
+            HAL_FLASH::EraseSector(0x0800C000);     // |
+            HAL_FLASH::EraseSector(0x08010000);     // /
+
+            HAL_FLASH::WriteBuffer(0x08000000, (const void *)HAL_FLASH::Firmware::Address(), offset);
+
+        } while (crc32 != GF::CalculateCRC32((const void *)0x08000000, offset));
+
+        OPi5Plus::SCPI::Send(":UPGRADE:END %d, %X", offset, _crc32);
     }
 }
 
