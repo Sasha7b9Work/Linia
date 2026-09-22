@@ -22,7 +22,7 @@ public:
         Bind(wxEVT_LEFT_UP, &KnobWidget::OnMouseLeftUp, this);
         Bind(wxEVT_MOTION, &KnobWidget::OnMouseMove, this);
         Bind(wxEVT_MOUSE_CAPTURE_LOST, &KnobWidget::OnMouseCaptureLost, this);
-        Bind(wxEVT_PAINT, &KnobWidget::OnPaint, this);
+        Bind(wxEVT_PAINT, &KnobWidget::OnEventPaint, this);
         Bind(wxEVT_SET_FOCUS, &KnobWidget::OnSetFocus, this);
         Bind(wxEVT_KILL_FOCUS, &KnobWidget::OnKillFocus, this);
 
