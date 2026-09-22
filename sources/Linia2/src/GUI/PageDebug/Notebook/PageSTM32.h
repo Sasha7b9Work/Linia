@@ -49,4 +49,12 @@ private:
     };
 
     std::atomic<State> state = IDLE;
+
+    // Если false, то нет данных - буфер слишком мал
+    bool CalculateParametersBlock(int num_block, int &offset, int &size, uint &crc32);
+
+    // Перезапустить процесс обновления прошивки
+    void ResetUpgrade();
+
+    void SendNextBlock();
 };

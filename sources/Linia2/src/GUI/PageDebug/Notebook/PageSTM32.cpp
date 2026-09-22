@@ -119,7 +119,6 @@ void PageSTM32::StartUpgrade(pchar _file_name)
 
     IDevice::impl->SendCommand(":UPGRADE:START %d", size);
 
-    current_block = -1;
     state = IDLE;
 
     thread = std::thread([this]()
@@ -166,38 +165,99 @@ void PageSTM32::StopUpgrade()
 
 void PageSTM32::OnUpgradeStart(int size, uint crc32, bool is_ok)
 {
-    if (!is_ok)
+    if (!is_ok ||
+        (size != (int)data.size()) ||
+        (crc32 != GF::CalculateCRC32(data.data(), (int)data.size())))
     {
-        StopUpgrade();
-
-        StartUpgrade(file_name);
+        ResetUpgrade();
     }
-
-    if (size != (int)data.size())
+    else
     {
-        StopUpgrade();
+        current_block = -1;
 
-        StartUpgrade(file_name);
+        SendNextBlock();
+
+        state = START_UPGRADE;
     }
-
-    if (crc32 != GF::CalculateCRC32(data.data(), (int)data.size()))
-    {
-        StopUpgrade();
-
-        StartUpgrade(file_name);
-    }
-
-    state = START_UPGRADE;
 }
 
 
-void PageSTM32::OnUpgradeBlock(int num_block, int size, uint crc32)
+void PageSTM32::OnUpgradeBlock(int _num_block, int _size, uint _crc32)
+{
+    if (_num_block != current_block)
+    {
+        ResetUpgrade();
+    }
+    else
+    {
+        int offset = 0;
+        int size = 0;
+        uint crc32 = 0;
+
+        CalculateParametersBlock(current_block, offset, size, crc32);
+
+        if ((size != _size) ||
+            (crc32 != _crc32))
+        {
+            ResetUpgrade();
+        }
+        else
+        {
+            SendNextBlock();
+        }
+    }
+}
+
+
+void PageSTM32::OnUpgradeEnd(int /*size*/, uint /*crc32*/)
 {
 
 }
 
 
-void PageSTM32::OnUpgradeEnd(int size, uint crc32)
+void PageSTM32::ResetUpgrade()
 {
+    StopUpgrade();
 
+    StartUpgrade(file_name);
+}
+
+
+void PageSTM32::SendNextBlock()
+{
+    ++current_block;
+
+    int offset = 0;
+    int size = 0;
+    uint crc32 = 0;
+
+    if (CalculateParametersBlock(current_block, offset, size, crc32))
+    {
+
+    }
+    else
+    {
+
+    }
+}
+
+
+bool PageSTM32::CalculateParametersBlock(int num_block, int &offset, int &size, uint &crc32)
+{
+    offset = -1;
+    size = -1;
+    crc32 = (uint)-1;
+
+    offset = num_block * SIZE_BLOCK;
+
+    if (offset >= (int)data.size())
+    {
+        return false;
+    }
+
+    size = std::min(static_cast<int>(data.size()) - offset, SIZE_BLOCK);
+
+    crc32 = GF::CalculateCRC32(data.data() + offset, size);
+
+    return true;
 }

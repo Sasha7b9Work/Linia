@@ -25,6 +25,8 @@ public:
 
     virtual void SendCommand(pchar format, ...) const override;
 
+    virtual void SendBinaryData(void *, int size) const override;
+
     virtual bool ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data_code[POINTS_IN_SAMPLE_ADC]) override;
 
 private:

@@ -105,6 +105,16 @@ void RealDevice::SendCommand(pchar format, ...) const
 }
 
 
+void RealDevice::SendBinaryData(void *buffer, int size) const
+{
+#ifdef WIN32
+    ComPort::Send(buffer, size);
+#else
+    UART::SendBuffer(buffer, size);
+#endif
+}
+
+
 void RealDevice::FuncOnKeyStart(bool state)
 {
     state = !state;

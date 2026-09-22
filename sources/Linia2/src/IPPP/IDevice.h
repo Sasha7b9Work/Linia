@@ -26,6 +26,9 @@ public:
     // Заслать команду и завершить нулём
     virtual void SendCommand(pchar format, ...) const = 0;
 
+    // Послать массив байт
+    virtual void SendBinaryData(void *, int size) const = 0;
+
     // Читает четыре массива значений из ПЛИС
     virtual bool ReadData(int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC], int data_code[POINTS_IN_SAMPLE_ADC]) = 0;
 };
