@@ -13,29 +13,6 @@
 #include <cstdlib>
 #include <cstdio>
 
-/*
-    :PING
-
-    // Просто показать, как работает обработка структур
-    :CHIP:REG[0...9]:LENGTH [1...32]
-
-    // Управление регистрами ПЛИС
-    :FPGA[0...9]:LENGHT [1...32]
-    :FPGA[0...9]:WRITE  [0....(uint)-1]
-
-    // Управление ЦАПами блоков
-    :DAC[0...9]:LENGTH [8...32]
-    :DAC[0...9]:WRITE [0...(uint)-1]
-
-    // Управление регистрами блоков
-    :REG[0...9]:LENGTH [8...32]
-    :REG[0...9]:WRITE [0...(uint)-1]
-
-    // Управление источником напряжения 50 В
-    :SOURCE50V:PLUS  [0...1]        XP10:50E+ Вкл/Откл
-    :SOURCE50V:MINUS [0...1]        XP10:50E- Вкл/Откл
-*/
-
 
 namespace OPi5Plus
 {
@@ -49,20 +26,19 @@ namespace OPi5Plus
         };
 
         static bool Func_Ping(pchar);
-
         static bool Func_CHIP_REG(pchar);
+        static bool Func_FPGA(pchar);
+        static bool Func_DAC(pchar);
+        static bool Func_REG(pchar);
+        static bool Func_SCAN(pchar);
+        static bool Func_Source50V(pchar);
+        static bool Func_Upgrade(pchar);
 
         static StructParser chip[] =
         {
             { "REG",   Func_CHIP_REG, nullptr },    // :CHIP:REG...
             { nullptr, nullptr,       nullptr }
         };
-
-        static bool Func_FPGA(pchar);
-        static bool Func_DAC(pchar);
-        static bool Func_REG(pchar);
-        static bool Func_SCAN(pchar);
-        static bool Func_Source50V(pchar);
 
         static StructParser head[] =
         {
@@ -73,6 +49,7 @@ namespace OPi5Plus
             { "REG",       Func_REG,       nullptr },
             { "SCAN",      Func_SCAN,      nullptr },
             { "SOURCE50V", Func_Source50V, nullptr },
+            { "UPGRADE",   Func_Upgrade,   nullptr },
             { nullptr,     nullptr,        nullptr }
         };
 
@@ -98,6 +75,14 @@ bool OPi5Plus::SCPI::Func_Ping(pchar command)
 
     return true;
 }
+
+
+#define SU_BEGIN_WITH(string)               \
+    if(SU::BeginWith(command, string))      \
+    {                                       \
+        command += std::strlen(string);     \
+        char *pos = nullptr;                \
+        (void)pos;
 
 
 bool OPi5Plus::SCPI::ProcessStructures(pchar command, StructParser *handlers)
@@ -155,12 +140,7 @@ bool OPi5Plus::SCPI::Func_FPGA(pchar command)
 
     command++;
 
-    if (SU::BeginWith(command, "LENGTH "))                              // :FPGA:REG:LENGTH
-    {
-        command += std::strlen("LENGTH ");
-
-        char *pos = nullptr;
-
+    SU_BEGIN_WITH("LENGTH ")                                    // :FPGA:REG:LENGTH
         uint length = std::strtoul(command, &pos, 16);
 
         if (SU::CharIs(*pos, " :"))
@@ -172,12 +152,7 @@ bool OPi5Plus::SCPI::Func_FPGA(pchar command)
 
         return false;
     }
-    else if (SU::BeginWith(command, "WRITE "))                          // :FPGA:REG:WRITE
-    {
-        command += std::strlen("WRITE ");
-
-        char *pos = nullptr;
-
+    else SU_BEGIN_WITH("WRITE ")                                // :FPGA:REG:WRITE
         uint value = std::strtoul(command, &pos, 16);
 
         if (SU::CharIs(*pos, " :"))
@@ -196,12 +171,7 @@ bool OPi5Plus::SCPI::Func_FPGA(pchar command)
 
 bool OPi5Plus::SCPI::Func_SCAN(pchar command)
 {
-    if (SU::BeginWith(command, "START "))
-    {
-        command += std::strlen("START ");
-
-        char *pos = nullptr;
-
+    SU_BEGIN_WITH("START ")
         uint period = std::strtoul(command, &pos, 10);
 
         if (SU::CharIs(*pos, " :"))
@@ -215,8 +185,7 @@ bool OPi5Plus::SCPI::Func_SCAN(pchar command)
 
         return false;
     }
-    else if (SU::BeginWith(command, "STOP"))
-    {
+    else SU_BEGIN_WITH("STOP")
         Device::EmergencyStop();
 
         FPGA::StopScan();
@@ -230,12 +199,7 @@ bool OPi5Plus::SCPI::Func_SCAN(pchar command)
 
 bool OPi5Plus::SCPI::Func_Source50V(pchar command)
 {
-    if (SU::BeginWith(command, "PLUS "))
-    {
-        command += std::strlen("PLUS ");
-
-        char *pos = nullptr;
-
+    SU_BEGIN_WITH("PLUS ")
         uint value = std::strtoul(command, &pos, 10);
 
         if (value == 0)
@@ -249,12 +213,7 @@ bool OPi5Plus::SCPI::Func_Source50V(pchar command)
             return true;
         }
     }
-    else if (SU::BeginWith(command, "MINUS "))
-    {
-        command += std::strlen("MINUS ");
-
-        char *pos = nullptr;
-
+    else SU_BEGIN_WITH("MINUS ")
         uint value = std::strtoul(command, &pos, 10);
 
         if (value == 0)
@@ -269,6 +228,12 @@ bool OPi5Plus::SCPI::Func_Source50V(pchar command)
         }
     }
 
+    return false;
+}
+
+
+bool OPi5Plus::SCPI::Func_Upgrade(pchar)
+{
     return false;
 }
 
@@ -291,12 +256,7 @@ bool OPi5Plus::SCPI::Func_DAC(pchar command)
 
     command++;
 
-    if (SU::BeginWith(command, "LENGTH "))                              // :DAC:LENGTH
-    {
-        command += std::strlen("LENGTH ");
-
-        char *pos = nullptr;
-
+    SU_BEGIN_WITH("LENGTH ")                              // :DAC:LENGTH
         uint length = std::strtoul(command, &pos, 10);
 
         if(SU::CharIs(*pos, " :"))
@@ -308,12 +268,7 @@ bool OPi5Plus::SCPI::Func_DAC(pchar command)
 
         return false;
     }
-    else if (SU::BeginWith(command, "WRITE "))                          // :DAC:WRITE
-    {
-        command += std::strlen("WRITE ");
-
-        char *pos = nullptr;
-
+    else SU_BEGIN_WITH("WRITE ")                          // :DAC:WRITE
         uint value = std::strtoul(command, &pos, 16);
 
         if (SU::CharIs(*pos, " :"))
@@ -350,12 +305,7 @@ bool OPi5Plus::SCPI::Func_REG(pchar command)
 
     command++;
 
-    if (SU::BeginWith(command, "LENGTH "))                              // :REG:LENGTH
-    {
-        command += std::strlen("LENGTH ");
-
-        char *pos = nullptr;
-
+    SU_BEGIN_WITH("LENGTH ")                              // :REG:LENGTH
         uint length = std::strtoul(command, &pos, 16);
 
         if (SU::CharIs(*pos, " :"))
@@ -367,18 +317,11 @@ bool OPi5Plus::SCPI::Func_REG(pchar command)
 
         return false;
     }
-    else if (SU::BeginWith(command, "WRITE "))                          // :REG:WRITE
-    {
-        command += std::strlen("WRITE ");
-
-        char *pos = nullptr;
-
+    else SU_BEGIN_WITH("WRITE ")                          // :REG:WRITE
         uint value = std::strtoul(command, &pos, 16);
 
         if (SU::CharIs(*pos, " :"))
         {
-//            LOG_WRITE("Write %08X to REG%d", value, num_reg);
-
             ChipREG::Get((ChipREG::E)num_reg).WriteValue(value);
 
             return true;
