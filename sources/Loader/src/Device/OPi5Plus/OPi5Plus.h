@@ -8,4 +8,6 @@
 namespace OPi5Plus
 {
     void PeriodicTask();
+
+    extern bool text_mode;      // Если false, то сейчас идёт работа с двоичными данными
 }

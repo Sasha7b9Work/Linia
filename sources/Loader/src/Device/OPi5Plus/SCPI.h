@@ -10,7 +10,7 @@ namespace OPi5Plus
     namespace SCPI
     {
         // Сюда подаётся строка, заканчивающаяся нулём
-        void _Parse(pchar);
+        void Parse(pchar);
 
         void Send(pchar format, ...);
     }

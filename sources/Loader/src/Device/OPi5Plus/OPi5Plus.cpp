@@ -18,6 +18,8 @@ namespace OPi5Plus
     static bool ProcessInputBuffer();
 
     static void UpdateInput();
+
+    bool text_mode = true;
 }
 
 
@@ -53,7 +55,7 @@ bool OPi5Plus::ProcessInputBuffer()
         return false;
     }
 
-    SCPI::_Parse(in_buffer.Data(pos_begin));
+    SCPI::Parse(in_buffer.Data(pos_begin));
 
     in_buffer.RemoveFirst(pos_end + 1);
 

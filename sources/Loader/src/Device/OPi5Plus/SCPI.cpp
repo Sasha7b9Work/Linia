@@ -35,7 +35,7 @@ namespace OPi5Plus
 }
 
 
-void OPi5Plus::SCPI::_Parse(pchar command)
+void OPi5Plus::SCPI::Parse(pchar command)
 {
     if (!ProcessStructures(command, head))
     {
