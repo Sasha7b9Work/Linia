@@ -209,9 +209,17 @@ void PageSTM32::OnUpgradeBlock(int _num_block, int _size, uint _crc32)
 }
 
 
-void PageSTM32::OnUpgradeEnd(int /*size*/, uint /*crc32*/)
+void PageSTM32::OnUpgradeEnd(int size, uint crc32)
 {
-
+    if (size == (int)data.size() &&
+        crc32 == GF::CalculateCRC32(data.data(), (int)data.size()))
+    {
+        StopUpgrade();
+    }
+    else
+    {
+        ResetUpgrade();
+    }
 }
 
 
