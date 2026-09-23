@@ -20,7 +20,7 @@ public:
     void OnUpgradeStart();
 
     // :UPGRADE:BLOCK <num_block> <size> <crc32>
-    void OnUpgradeBlock(int num_block, int size, uint crc32);
+    void OnConfirmUpgradeBlock(int num_block, int size, uint crc32);
 
     // :UPGRADE:END <size> <crc32>
     void OnUpgradeEnd(int size, uint crc32);
