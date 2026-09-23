@@ -26,7 +26,5 @@ int main()
         OPi5Plus::PeriodicTask();
 
         Device::PeriodicTask();
-
-        Upgrader::PeriodicTask();
     }
 }

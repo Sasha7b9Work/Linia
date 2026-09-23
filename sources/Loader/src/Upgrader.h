@@ -6,8 +6,6 @@ namespace Upgrader
 {
     void BeginUpgrade();
 
-    void PeriodicTask();
-
     void Start(int size, uint crc32);
 
     void ReceiveBlock(int num_block, int size_block, uint crc32_block);

@@ -18,9 +18,7 @@
 namespace Upgrader
 {
     static uint offset = 0;
-    static int current_block = -1;  // Текущий принимаемый блок
-    static int size_block = 0;      // Размер принимаемого блока
-    static uint crc32_block = 0;    // Контрольная сумма принимаемого блока
+    static int current_block = -1;
 
     // Действия, который нужно сделать при возникновении ошибки
     static void ErrorUpgrade();
@@ -42,22 +40,26 @@ void Upgrader::BeginUpgrade()
 }
 
 
-void Upgrader::PeriodicTask()
+void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
 {
-    if (current_block < 0)        // Признак того, что не идём приём очередного блока
+    if (_num_block - 1 != current_block)
     {
+        ErrorUpgrade();
+
         return;
     }
 
+    current_block = _num_block;
+
     OPi5Plus::_text_mode = false;
 
-    BufferOSDP buffer(size_block);
+    BufferOSDP buffer(_size_block);
 
-    OPi5Plus::SCPI::Send(":UPGRADE:HEAD %d %d %X", current_block, size_block, crc32_block);
+    OPi5Plus::SCPI::Send(":UPGRADE:HEAD %d %d %X", current_block, _size_block, _crc32_block);
 
     TimeMeterMS meter_full;
 
-    while (HAL_USART1::BytesInBuffer() < size_block)
+    while (HAL_USART1::BytesInBuffer() < _size_block)
     {
         static TimeMeterMS meter;
 
@@ -97,36 +99,21 @@ void Upgrader::PeriodicTask()
 
     OPi5Plus::_text_mode = true;
 
-    HAL_FLASH::Firmware::WriteBuffer(offset, buffer.Data(0), size_block);
+    HAL_FLASH::Firmware::WriteBuffer(offset, buffer.Data(0), _size_block);
 
-    uint crc32 = GF::CalculateCRC32(buffer.Data(0), size_block);
+    uint crc32 = GF::CalculateCRC32(buffer.Data(0), _size_block);
 
-    LOG_WRITE("Confirmation receive content : num_block=%d, size_block=%d, crc32=%X", current_block, size_block, crc32);
+    LOG_WRITE("Confirmation receive content : num_block=%d, size_block=%d, crc32=%X", current_block, _size_block, crc32);
 
-    OPi5Plus::SCPI::Send(":UPGRADE:CONTENT %d %d %X", current_block, size_block, crc32);
+    OPi5Plus::SCPI::Send(":UPGRADE:CONTENT %d %d %X", current_block, _size_block, crc32);
 
-    offset += size_block;
+    offset += _size_block;
 }
 
 
 void Upgrader::Start(int /*size*/, uint /*crc32*/)
 {
     BeginUpgrade();
-}
-
-
-void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
-{
-    if (_num_block - 1 != current_block)
-    {
-        ErrorUpgrade();
-    }
-    else
-    {
-        current_block = _num_block;
-        size_block = _size_block;
-        crc32_block = _crc32_block;
-    }
 }
 
 
