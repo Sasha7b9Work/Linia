@@ -56,8 +56,8 @@ void Dialog::ShowOnWindow(wxWindow *window)
         Fit();
         Layout();
 
-        int win_bottom = TheMainWindow->GetRect().GetBottom();
-        int win_left = TheMainWindow->GetRect().GetLeft();
+        int win_bottom = MainWindow::self->GetRect().GetBottom();
+        int win_left = MainWindow::self->GetRect().GetLeft();
 
         int bottom = pos.y + GetSize().y;
         int left = pos.x;

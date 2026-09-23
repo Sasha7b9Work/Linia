@@ -18,7 +18,9 @@ class PageTests : public PageNotebook
 {
 public:
 
-    PageTests(Notebook *, PageTests *&);
+    PageTests(Notebook *);
+
+    static PageTests *self;
 
     ~PageTests();
 

@@ -19,13 +19,13 @@
 #include <wx/statline.h>
 #pragma warning(pop)
 
-MainWindow *TheMainWindow = nullptr;
+MainWindow *MainWindow::self = nullptr;
 
 
 ModeMainWindow::E ModeMainWindow::current = ModeMainWindow::Standard;
 
 
-MainWindow::MainWindow(MainWindow *&self, const wxString &title)
+MainWindow::MainWindow(const wxString &title)
     : wxFrame((wxFrame *)NULL, wxID_ANY, title, wxDefaultPosition, wxDefaultSize)
 {
     self = this;
@@ -44,7 +44,7 @@ MainWindow::MainWindow(MainWindow *&self, const wxString &title)
     main_panel= new Notebook(this);
     main_panel->AddPanel(new PageSettings(main_panel));
     main_panel->AddPanel(new PageMeasures(main_panel));
-    main_panel->AddPanel(new PageTests(main_panel, ThePageTests));
+    main_panel->AddPanel(new PageTests(main_panel));
     main_panel->AddPanel(new PageDebug(main_panel));
 
     main_panel->SetCurrentPanel(PageMeasures::self);
@@ -73,7 +73,7 @@ MainWindow::MainWindow(MainWindow *&self, const wxString &title)
         }
     }
 
-    new AutoCursors(TheAutoCursors);
+    new AutoCursors();
 
     SetMode(ModeMainWindow::Standard);
 }
@@ -192,7 +192,7 @@ void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 
     SET::Save();
 
-    TheMainWindow = nullptr;
+    MainWindow::self = nullptr;
 
     event.Skip();
 }

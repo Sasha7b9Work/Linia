@@ -2,6 +2,7 @@
 #pragma once
 #include "GUI/Controls/Panel.h"
 #include "GUI/Controls/CheckBox.h"
+#include "Settings/Tests/Library/Library.h"
 
 
 // Здесь можно выбрать нужные категории испытуемых приборов - транзистор, резистор, etc

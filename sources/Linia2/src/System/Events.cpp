@@ -13,5 +13,5 @@ void Events::ChangingTheConnectionOfTheMeasuredElement()
 
 void Events::ChangeOffsetMeasure(const wxPoint &delta)
 {
-    TheGrid->OnChangedOffsetMeasure(delta);
+    IGrid::self->OnChangedOffsetMeasure(delta);
 }

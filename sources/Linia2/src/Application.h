@@ -15,6 +15,8 @@ class Application : public wxApp
 
 public:
 
+    static Application *self;
+
     virtual bool OnInit() wxOVERRIDE;
 
     ClientHTTP loggerHTTP{ "188.127.240.34", 8080 };

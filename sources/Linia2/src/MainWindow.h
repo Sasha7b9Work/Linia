@@ -39,6 +39,8 @@ class MainWindow : public wxFrame
 
 public:
 
+    static MainWindow *self;
+
     static const int WIDTH = 1024;     // Полная ширина - соотвествует разрешению экрана
     static const int HEIGHT = 768;     // Полная высота - соотвествует разрешению экрана
 
@@ -60,7 +62,7 @@ public:
 
 private:
 
-    MainWindow(MainWindow *&, const wxString &title);
+    MainWindow(const wxString &title);
 
     wxToolBar *toolBar = nullptr;
 

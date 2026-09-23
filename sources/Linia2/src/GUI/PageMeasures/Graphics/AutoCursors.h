@@ -11,6 +11,8 @@ class AutoCursors
 
 public:
 
+    static AutoCursors *self;
+
     void Draw(const std::vector<GraphMeasure *> &);
 
     // Открыто какое-то окно поверху. Не нужно отображать курсоры
@@ -23,5 +25,5 @@ private:
 
     bool is_allowed = true;
 
-    AutoCursors(AutoCursors *&);
+    AutoCursors();
 };

@@ -20,10 +20,10 @@
 #pragma warning(pop)
 
 
-PageTests *ThePageTests = nullptr;
+PageTests *PageTests::self = nullptr;
 
 
-PageTests::PageTests(Notebook *board, PageTests *&global) :
+PageTests::PageTests(Notebook *board) :
     PageNotebook(board, L("Тесты"))
 {
 #define SASH_POSITION_VERTICAL "page_tests_sash_postion_vertical"
@@ -32,7 +32,7 @@ PageTests::PageTests(Notebook *board, PageTests *&global) :
     REGISTER_AND_LOAD(int, SASH_POSITION_VERTICAL, 200);
     REGISTER_AND_LOAD(int, SASH_POSITION_HORIZONTAL, 100);
 
-    global = this;
+    self = this;
 
     wxPanel::SetName("PageTests");
 

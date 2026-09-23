@@ -15,7 +15,7 @@
 
 MenuDisplay::MenuDisplay() : wxMenu()
 {
-    TheAutoCursors->Ban();
+    AutoCursors::self->Ban();
 
     Bind(wxEVT_MENU, &MenuDisplay::OnResetZeroGrid, this, (Append(wxID_ANY, "Сброс"))->GetId());
 
@@ -38,7 +38,7 @@ MenuDisplay::MenuDisplay() : wxMenu()
 
 MenuDisplay::~MenuDisplay()
 {
-    TheAutoCursors->Allow();
+    AutoCursors::self->Allow();
 }
 
 
@@ -130,15 +130,15 @@ void MenuDisplay::AppendMenuFacade()
 
 void MenuDisplay::OnResetZeroGrid(wxCommandEvent &)
 {
-    TheGrid->Reset();
+    IGrid::self->Reset();
 }
 
 
 void MenuDisplay::OnFullScreen(wxCommandEvent &event)
 {
-    TheMainWindow->SetMode(event.IsChecked() ? ModeMainWindow::FullGraph : ModeMainWindow::Standard);
+    MainWindow::self->SetMode(event.IsChecked() ? ModeMainWindow::FullGraph : ModeMainWindow::Standard);
 
-    TheGrid->ResetCenter();
+    IGrid::self->ResetCenter();
 
     PageMeasures::self->Refresh();
 }

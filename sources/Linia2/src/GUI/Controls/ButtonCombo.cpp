@@ -204,16 +204,16 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, int width,
                     else
                     {
                         int right_pop = pos.x + size.x;
-                        int right_win = TheMainWindow->GetPosition().x + TheMainWindow->GetSize().x; //-V807
+                        int right_win = MainWindow::self->GetPosition().x + MainWindow::self->GetSize().x; //-V807
 
                         if (right_pop >= right_win)
                         {
                             int delta = right_pop - right_win;
                             pos.x -= delta + 8;
                         }
-                        else if (pos.x < TheMainWindow->GetPosition().x + 5)
+                        else if (pos.x < MainWindow::self->GetPosition().x + 5)
                         {
-                            pos.x = TheMainWindow->GetPosition().x + 5;
+                            pos.x = MainWindow::self->GetPosition().x + 5;
                         }
                     }
 

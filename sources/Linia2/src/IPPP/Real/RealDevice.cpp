@@ -119,7 +119,7 @@ void RealDevice::FuncOnKeyStart(bool state)
 {
     state = !state;
 
-    TheApp->CallAfter([state]()
+    Application::self->CallAfter([state]()
         {
             PageDebug::self->labelButtonStart->SetLabel(state ? "ИЗМЕРЕНИЕ \"ВКЛ\"" : "ИЗМЕРЕНИЕ \"ОТКЛ\"");
         });
@@ -130,7 +130,7 @@ void RealDevice::FuncOnKeyStop(bool state)
 {
     state = !state;
 
-    TheApp->CallAfter([state]()
+    Application::self->CallAfter([state]()
         {
             PageDebug::self->labelButtonStop->SetLabel(state ? "СТОП \"ВКЛ\"" : "СТОП \"ОТКЛ\"");
         });
@@ -141,7 +141,7 @@ void RealDevice::FuncOnEncoder(int delta)
 {
     static std::atomic<bool> pending{ false };
 
-    TheApp->CallAfter([delta]()
+    Application::self->CallAfter([delta]()
         {
             int value = 0;
             PageDebug::self->labelEncoder->GetLabel().ToInt(&value);
@@ -155,7 +155,7 @@ void RealDevice::BackgroundTask()
     static int data_dac[NUMBER_ADC][POINTS_IN_SAMPLE_ADC];
     static int data_code[POINTS_IN_SAMPLE_ADC];
 
-    TheApp->CallAfter([]()
+    Application::self->CallAfter([]()
         {
             if (IDevice::impl->ReadData(data_dac, data_code))
             {

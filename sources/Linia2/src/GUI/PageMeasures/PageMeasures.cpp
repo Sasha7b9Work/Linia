@@ -62,7 +62,7 @@ PageMeasures::PageMeasures(Notebook *board) : PageNotebook(board, L("Измер�
 PageMeasures::~PageMeasures()
 {
     SAFE_DELETE(bitmap);
-    SAFE_DELETE(TheGrid);
+    SAFE_DELETE(IGrid::self);
     SAFE_DELETE(panel_errors);
 }
 
@@ -91,7 +91,7 @@ void PageMeasures::Init()
 
     bitmap = new wxBitmap(Panel::GetSize().x, Panel::GetSize().y);
 
-    IGrid::Create(TheGrid);
+    IGrid::Create();
 
     int w = btnHelp->GetSize().x;
     int d = 10;
@@ -124,7 +124,7 @@ void PageMeasures::OnEventMouseDown(wxMouseEvent &event)
 
     SetCursor(wxCursor(wxCURSOR_HAND));
 
-    TheGrid->OnMouseDown();
+    IGrid::self->OnMouseDown();
 
     Refresh();
 }
@@ -143,7 +143,7 @@ void PageMeasures::OnEventLeaveWindow(wxMouseEvent &event)
         GetEventHandler()->ProcessEvent(upEvent);
     }
 
-    TheAutoCursors->Ban();
+    AutoCursors::self->Ban();
 
     event.Skip();
 }
@@ -151,7 +151,7 @@ void PageMeasures::OnEventLeaveWindow(wxMouseEvent &event)
 
 void PageMeasures::OnEventEnterWindow(wxMouseEvent &event)
 {
-    TheAutoCursors->Allow();
+    AutoCursors::self->Allow();
 
     event.Skip();
 }
@@ -163,7 +163,7 @@ void PageMeasures::OnEventMouseUp(wxMouseEvent &)
 
     SetCursor(wxCursor(wxCURSOR_ARROW));
 
-    TheGrid->OnMouseUp();
+    IGrid::self->OnMouseUp();
 
     Refresh();
 }
@@ -179,11 +179,11 @@ void PageMeasures::OnEventMouseMove(wxMouseEvent &event)
 
         if (event.GetModifiers() == wxMOD_CONTROL)
         {
-            TheGrid->MoveImageOn(delta);
+            IGrid::self->MoveImageOn(delta);
         }
         else
         {
-            TheGrid->MoveCenterOn(delta);
+            IGrid::self->MoveCenterOn(delta);
         }
 
         pos_mouse_down = position;
@@ -195,7 +195,7 @@ void PageMeasures::OnEventMouseMove(wxMouseEvent &event)
     }
     else                                            // Отслеживание координат
     {
-        TheGrid->SetNewMousePosition(position);
+        IGrid::self->SetNewMousePosition(position);
     }
 
     Refresh();
@@ -206,12 +206,12 @@ void PageMeasures::OnEventMouseWheel(wxMouseEvent &event)
 {
     if (event.GetModifiers() == wxMOD_CONTROL)
     {
-        TheGrid->ScaleGridOn(event.GetPosition(), event.GetWheelRotation());
+        IGrid::self->ScaleGridOn(event.GetPosition(), event.GetWheelRotation());
     }
     else
     {
-        TheGrid->RangeGridOnX(event.GetWheelRotation());
-        TheGrid->RangeGridOnY(event.GetWheelRotation());
+        IGrid::self->RangeGridOnX(event.GetWheelRotation());
+        IGrid::self->RangeGridOnY(event.GetWheelRotation());
     }
 
     Refresh();
@@ -229,19 +229,19 @@ void PageMeasures::OnEventButton(wxCommandEvent &event)
     }
     else if (id == btnLessX->GetId())
     {
-        TheGrid->RangeGridOnX(-1);
+        IGrid::self->RangeGridOnX(-1);
     }
     else if (id == btnMoreX->GetId())
     {
-        TheGrid->RangeGridOnX(+1);
+        IGrid::self->RangeGridOnX(+1);
     }
     else if (id == btnLessY->GetId())
     {
-        TheGrid->RangeGridOnY(-1);
+        IGrid::self->RangeGridOnY(-1);
     }
     else if (id == btnMoreY->GetId())
     {
-        TheGrid->RangeGridOnY(+1);
+        IGrid::self->RangeGridOnY(+1);
     }
 }
 
@@ -272,7 +272,7 @@ void PageMeasures::OnEventPaint(wxPaintEvent &)
 
     FillRectangle(0, 0, GetDrawingSize().x, GetDrawingSize().y, SET_GUI_COLOR_BACKGROUND->GetUInt());
 
-    TheGrid->Draw(entities);
+    IGrid::self->Draw(entities);
 
     EndPaint();
 

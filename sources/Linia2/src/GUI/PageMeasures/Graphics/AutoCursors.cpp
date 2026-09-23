@@ -8,10 +8,10 @@
 #include "Utils/FinderMinMax.h"
 
 
-AutoCursors *TheAutoCursors = nullptr;
+AutoCursors *AutoCursors::self = nullptr;
 
 
-AutoCursors::AutoCursors(AutoCursors *&self)
+AutoCursors::AutoCursors()
 {
     self = this;
 }
@@ -24,12 +24,12 @@ void AutoCursors::Draw(const std::vector<GraphMeasure *> & /*measures*/)
         return;
     }
 
-    wxPoint mouse_pos = TheGrid->GetMousePosition();
+    wxPoint mouse_pos = IGrid::self->GetMousePosition();
 
-    wxPoint2DDouble value = TheGrid->CoordToValues(mouse_pos);
+    wxPoint2DDouble value = IGrid::self->CoordToValues(mouse_pos);
     (void)value;
 
-    wxRect rect = TheGrid->GetRect();
+    wxRect rect = IGrid::self->GetRect();
     (void)rect;
 
     PageMeasures::self->SetColorPen(SET_GUI_COLOR_CURVE->GetUInt());

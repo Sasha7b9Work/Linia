@@ -9,9 +9,9 @@
 #include "Settings/Settings.h"
 
 
-GridNew::GridNew(IGrid *&self)
+GridNew::GridNew(IGrid *&_self)
 {
-    self = this;
+    _self = this;
 
     Reset();
 }
@@ -185,9 +185,9 @@ void GridNew::Draw(const std::vector<GraphMeasure *> &entities)
             pos_mouse.x > LeftX() &&
             pos_mouse.x < RightX())
         {
-            if (TheAutoCursors)
+            if (AutoCursors::self)
             {
-                TheAutoCursors->Draw(entities);
+                AutoCursors::self->Draw(entities);
             }
         }
     }

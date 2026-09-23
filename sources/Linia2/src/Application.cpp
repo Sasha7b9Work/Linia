@@ -23,22 +23,22 @@
 wxIMPLEMENT_APP(Application);
 
 
-Application *TheApp = nullptr;
+Application *Application::self = nullptr;
 
 
 #ifndef _WIN32
 static void CloseApplication()
 {
-    if (TheApp)
+    if (Application::self)
     {
-        if (TheMainWindow)
+        if (MainWindow::self)
         {
-            TheMainWindow->Close(true);
+            MainWindow::self->Close(true);
         }
 
-        TheApp->Yield();
+        Application::self->Yield();
 
-        TheApp->ExitMainLoop();
+        Application::self->ExitMainLoop();
     }
 }
 #endif
@@ -83,7 +83,7 @@ void glib_log_filter(const gchar *log_domain,
 
 bool Application::OnInit()
 {
-    TheApp = this;
+    Application::self = this;
 
     // Попытка отключить предупреждения вида "Gtk-WARNING"
     wxLog::SetActiveTarget(new NullLog());
@@ -148,7 +148,7 @@ bool Application::OnInit()
     IDevice::impl = IDevice::Create();
 
     // create and show the main application window
-    new MainWindow(TheMainWindow, L("ИППП 4"));
+    new MainWindow(L("ИППП 4"));
 
     timer.SetOwner(this, timer.GetId());
 
@@ -158,7 +158,7 @@ bool Application::OnInit()
 
         LOG_ERROR(message.c_str().AsChar());
 
-        AutoRebootDialog dialog(TheMainWindow, message, 10, []
+        AutoRebootDialog dialog(MainWindow::self, message, 10, []
             {
                 IGNORE_RESULT(std::system("shutdown -r now"));
             });
@@ -172,7 +172,7 @@ bool Application::OnInit()
 
         LOG_ERROR(message.c_str().AsChar());
 
-        AutoRebootDialog dialog(TheMainWindow, message, 10, []
+        AutoRebootDialog dialog(MainWindow::self, message, 10, []
             {
                 IGNORE_RESULT(std::system("shutdown -r now"));
             });
@@ -196,15 +196,15 @@ bool Application::OnInit()
 
     if (SET_DEBUG_MODE->GetBool())
     {
-        TheMainWindow->SetMode(ModeMainWindow::Debug);
+        MainWindow::self->SetMode(ModeMainWindow::Debug);
     }
 
     if (!GF::IsBoardOPi5Plus())
     {
-//        TheMainWindow->Maximize(true);
+//        MainWindow::self->Maximize(true);
     }
 
-    TheMainWindow->Show();
+    MainWindow::self->Show();
 
     Bind(wxEVT_TIMER, [this](wxTimerEvent &)
         {
@@ -252,9 +252,9 @@ int Application::OnExit()
 
     IDevice::impl->DeInit();
 
-    if (TheMainWindow)
+    if (MainWindow::self)
     {
-        TheMainWindow->Close(true);
+        MainWindow::self->Close(true);
     }
 
     LOG_WRITE("Exit");

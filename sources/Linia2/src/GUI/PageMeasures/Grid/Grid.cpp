@@ -10,21 +10,21 @@
 #include "Settings/Settings.h"
 
 
-IGrid *TheGrid = nullptr;
+IGrid *IGrid::self = nullptr;
 
 
-void IGrid::Create(IGrid *&global)
+void IGrid::Create()
 {
-    if (!global)
+    if (!self)
     {
-        global = new GridNew(global);
+        self = new GridNew(self);
     }
 }
 
 
-Grid::Grid(IGrid *&self)
+Grid::Grid(IGrid *&_self)
 {
-    self = this;
+    _self = this;
 
     Reset();
 }
@@ -245,7 +245,7 @@ void Grid::Draw(const std::vector<GraphMeasure *> &entities)
             pos_mouse.x > LeftX() &&
             pos_mouse.x < RightX())
         {
-            TheAutoCursors->Draw(entities);
+            AutoCursors::self->Draw(entities);
         }
     }
 
