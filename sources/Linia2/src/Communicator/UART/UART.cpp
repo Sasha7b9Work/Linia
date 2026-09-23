@@ -286,6 +286,12 @@ bool UART::ConfigurePort()
     port_settings.c_cc[VMIN] = 0;
     port_settings.c_cc[VTIME] = 0;
 
+    port_settings.c_cflag |= cpar;   // ← применить паритет
+    port_settings.c_cflag |= bstop;  // ← применить стоп-биты
+    port_settings.c_cflag |= CLOCAL | CREAD;  // ← игнорировать modem lines, разрешить приём
+
+    port_settings.c_cflag |= CLOCAL | CREAD;
+
     cfsetispeed(&port_settings, baudr);
     cfsetospeed(&port_settings, baudr);
 
