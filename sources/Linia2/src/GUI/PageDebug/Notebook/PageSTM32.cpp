@@ -291,7 +291,7 @@ void PageSTM32::SendContentBlock()
     {
         uint8 buffer[4096 * 8];
 
-        std::memset(buffer, 0, size);
+        std::memset(buffer, 66, size);
 
         IDevice::impl->SendBinaryData(buffer, size);
     }
