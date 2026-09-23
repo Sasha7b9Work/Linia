@@ -1,20 +1,19 @@
 ﻿// 2026/04/29 11:33:29 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/Controls/Panel.h"
-
-
-class CheckBox;
-class Library;
-class LibraryCategory;
+#include "GUI/Controls/CheckBox.h"
 
 
 // Здесь можно выбрать нужные категории испытуемых приборов - транзистор, резистор, etc
+
 
 class PanelCategory : public ScrolledPanel
 {
 public:
 
-    PanelCategory(wxWindow *, PanelCategory *&);
+    PanelCategory(wxWindow *);
+
+    static PanelCategory *self;
 
     // Обновить состояние в соответствии с библиотеками
     void UpdateState(const Library &);

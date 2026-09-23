@@ -11,12 +11,12 @@
 #pragma warning(pop)
 
 
-PanelCategory *ThePanelCategory = nullptr;
+PanelCategory *PanelCategory::self = nullptr;
 
 
-PanelCategory::PanelCategory(wxWindow *parent, PanelCategory *&global) : ScrolledPanel(parent)
+PanelCategory::PanelCategory(wxWindow *parent) : ScrolledPanel(parent)
 {
-    global = this;
+    self = this;
 
     BoxSizerVert *main_sizer = new BoxSizerVert();
 

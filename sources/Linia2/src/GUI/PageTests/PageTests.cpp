@@ -42,7 +42,7 @@ PageTests::PageTests(Notebook *board, PageTests *&global) :
     vert_splitter = new Splitter(hor_splitter, wxSP_3D | wxSP_LIVE_UPDATE);
     vert_splitter->SetMinimumPaneSize(50);
 
-    panel_category = new PanelCategory(vert_splitter, ThePanelCategory);
+    panel_category = new PanelCategory(vert_splitter);
 
     panel_library = new PanelTests(vert_splitter);
 
