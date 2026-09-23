@@ -35,7 +35,7 @@ void Upgrader::BeginUpgrade()
     // Команда начала обновления уже получена, стираем сектор, где будет храниться прошивка
     HAL_FLASH::Firmware::EraseSector();
 
-    OPi5Plus::SCPI::Send(":UPGRADE:START 1");
+    OPi5Plus::SCPI::Send(":UPGRADE:START");
 }
 
 

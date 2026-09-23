@@ -240,7 +240,6 @@ bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
 {
     SU_BEGIN_WITH("START ")
         int size = (int)std::strtoul(command, &pos, 10);
-//        uint crc32 = std::strtoul(pos + 1, &pos, 32);
 
         if (size > 1)
         {
