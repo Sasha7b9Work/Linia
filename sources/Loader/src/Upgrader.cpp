@@ -69,9 +69,9 @@ void Upgrader::PeriodicTask()
 
         if (meter_full.ElapsedMS() > 100)
         {
-            OPi5Plus::_text_mode = true;
-
             HAL_USART1::GetData(buffer);
+
+            OPi5Plus::_text_mode = true;
 
             ErrorUpgrade();
 
@@ -87,7 +87,7 @@ void Upgrader::PeriodicTask()
 
     HAL_FLASH::Firmware::WriteBuffer(offset, buffer.Data(0), size_block);
 
-    uint crc32 = GF::CalculateCRC32((const void *)(HAL_FLASH::Firmware::Address() + offset), size_block);
+    uint crc32 = GF::CalculateCRC32(buffer.Data(0), size_block);
 
     LOG_WRITE("Confirmation receive content : num_block=%d, size_block=%d, crc32=%X", current_block, size_block, crc32);
 

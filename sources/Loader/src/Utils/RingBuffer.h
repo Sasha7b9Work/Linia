@@ -20,8 +20,7 @@ private:
     static const int CAPACITY = 8 * 1024;
 
     uint8 buffer[CAPACITY];
-
     int in_index = 0;           // —юда будет записан следующий символ
-
     int out_index = 0;          // ќтсюда будет считан следующий символ
+    int count = 0;
 };

@@ -6,17 +6,14 @@
 void RingBuffer::Append(uint8 byte)
 {
     buffer[in_index] = byte;
-    in_index++;
-    if (in_index == CAPACITY)
-    {
-        in_index = 0;
-    }
+    in_index = (in_index + 1) % CAPACITY;
+    count++;
 }
 
 
 bool RingBuffer::IsEmpty() const
 {
-    return in_index == out_index;
+    return count == 0;
 }
 
 
@@ -28,23 +25,13 @@ uint8 RingBuffer::Pop()
     }
 
     uint8 result = buffer[out_index];
-
-    out_index++;
-    if (out_index == CAPACITY)
-    {
-        out_index = 0;
-    }
-
+    out_index = (out_index + 1) % CAPACITY;
+    count--;
     return result;
 }
 
 
 int RingBuffer::Size() const
 {
-    if (out_index <= in_index)
-    {
-        return in_index - out_index;
-    }
-
-    return (in_index + (CAPACITY - out_index));
+    return count;
 }
