@@ -15,13 +15,13 @@
 #pragma warning(pop)
 
 
-PanelRight *ThePanelRight = nullptr;
+PanelRight *PanelRight::self = nullptr;
 
 
-PanelRight::PanelRight(wxWindow *parent, PanelRight *&global) :
+PanelRight::PanelRight(wxWindow *parent) :
     Panel(parent)
 {
-    global = this;
+    self = this;
 
     wxBoxSizer *main_sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -79,44 +79,6 @@ PanelRight::PanelRight(wxWindow *parent, PanelRight *&global) :
     SetSizer(main_sizer);
 
     Layout();
-}
-
-
-void PanelRight::ApplicationTask()
-{
-    static TimeMeterMS timer;
-
-    if (timer.ElapsedMS() < 10)
-    {
-        return;
-    }
-
-    timer.Reset();
-
-    static int MAX = ((1 << 18) - 1);
-
-    int points[POINTS_IN_SAMPLE_ADC];
-
-    for (int d = 0; d < 4; d++)
-    {
-        points[0] = Math::Rand(0, MAX);
-
-        for (int i = 1; i < POINTS_IN_SAMPLE_ADC; i++)
-        {
-            int step = Math::Rand(-10000, 10000);
-
-            int new_value = points[i - 1] + step;
-
-            if (new_value < 0 || new_value > MAX)
-            {
-                new_value -= 2 * step;
-            }
-
-            points[i] = new_value;
-        }
-
-        data[d]->SetData(points);
-    }
 }
 
 

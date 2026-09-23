@@ -202,10 +202,10 @@ void RealDevice::BackgroundTask()
             {
                 for (int i = 0; i < NUMBER_ADC; i++)
                 {
-                    ThePanelRight->data[i]->SetData(data_dac[i]);
+                    PanelRight::self->data[i]->SetData(data_dac[i]);
                 }
 
-                ThePanelRight->data[NUMBER_ADC]->SetData(data_code);
+                PanelRight::self->data[NUMBER_ADC]->SetData(data_code);
             }
 
             pending.store(false);

@@ -12,11 +12,11 @@ class PanelRight : public Panel
 {
 public:
 
-    PanelRight(wxWindow *, PanelRight *&);
+    PanelRight(wxWindow *);
+
+    static PanelRight *self;
 
     ControlDataFPGA *data[NUMBER_ADC + 1];           // Отображение данных, считанных c платы контроллера
-
-    void ApplicationTask();
 
 private:
 
