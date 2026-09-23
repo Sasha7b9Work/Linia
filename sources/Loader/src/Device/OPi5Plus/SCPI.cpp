@@ -97,6 +97,8 @@ bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
         uint crc32 = std::strtoul(pos + 1, &pos, 16);
 
         Upgrader::Start(size, crc32);
+
+        return true;
     }
     else SU_BEGIN_WITH("BLOCK ")
         int num_block = (int)std::strtoul(command, &pos, 10);
@@ -106,12 +108,16 @@ bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
         LOG_WRITE("OPi5Plus::SCPI::Func_Upgrade(\"%s\") num_block = %d, size = %d, crc32 = %X", command, num_block, size, crc32);
 
         Upgrader::ReceiveBlock(num_block, size, crc32);
+
+        return true;
     }
     else SU_BEGIN_WITH("END ")
         int size = (int)std::strtoul(pos + 1, &pos, 10);
         uint crc32 = std::strtoul(pos + 1, &pos, 16);
 
         Upgrader::End(size, crc32);
+
+        return true;
     }
 
     return false;
