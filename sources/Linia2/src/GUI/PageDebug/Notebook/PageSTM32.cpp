@@ -257,6 +257,8 @@ void PageSTM32::SendNextBlock()
 
 bool PageSTM32::CalculateParametersBlock(int num_block, int &offset, int &size, uint &crc32)
 {
+    static const int SIZE_BLOCK = 4 * 1024;
+
     LOG_WRITE("");
     offset = -1;
     size = -1;

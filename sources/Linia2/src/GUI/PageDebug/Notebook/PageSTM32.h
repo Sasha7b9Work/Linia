@@ -25,8 +25,6 @@ public:
     // :UPGRADE:END <size> <crc32>
     void OnUpgradeEnd(int size, uint crc32);
 
-    static const int SIZE_BLOCK = 4 * 1024;
-
 private:
 
     void StartUpgrade(pchar);
