@@ -59,6 +59,8 @@ void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
 
     TimeMeterMS meter_full;
 
+    int prev_bytes = 0;
+
     while (HAL_USART1::BytesInBuffer() < _size_block)
     {
         static TimeMeterMS meter;
@@ -69,7 +71,7 @@ void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
             meter.Reset();
         }
 
-        if (meter_full.ElapsedMS() > 100)
+        if (prev_bytes != 0 && prev_bytes == HAL_USART1::BytesInBuffer())
         {
             HAL_USART1::GetData(buffer);
 
@@ -79,6 +81,8 @@ void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
 
             return;
         }
+
+        prev_bytes = HAL_USART1::BytesInBuffer();
     }
 
     LOG_WRITE("HAL_USART1::BytesInBuffer() = %d", HAL_USART1::BytesInBuffer());
