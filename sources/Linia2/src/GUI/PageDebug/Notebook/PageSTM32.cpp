@@ -289,11 +289,7 @@ void PageSTM32::SendContentBlock()
 
     if (CalculateParametersBlock(current_block, offset, size, crc32))
     {
-        uint8 buffer[4096 * 8];
-
-        std::memset(buffer, 66, size);
-
-        IDevice::impl->SendBinaryData(buffer, size);
+        IDevice::impl->SendBinaryData(data.data() + offset, size);
     }
     else
     {
@@ -304,7 +300,7 @@ void PageSTM32::SendContentBlock()
 
 bool PageSTM32::CalculateParametersBlock(int num_block, int &offset, int &size, uint &crc32)
 {
-    static const int SIZE_BLOCK = 128;
+    static const int SIZE_BLOCK = 1024;
 
     offset = -1;
     size = -1;
