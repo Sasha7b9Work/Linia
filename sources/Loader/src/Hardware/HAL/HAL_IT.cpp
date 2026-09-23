@@ -34,6 +34,9 @@ extern "C" {
     void MemManage_Handler()
     {
         TRACE_HANDLER;
+
+        LOG_ERROR("MemManage_Handler()");
+
         while (1)
         {
         }
@@ -52,6 +55,9 @@ extern "C" {
     void HardFault_Handler()
     {
         TRACE_HANDLER;
+
+        LOG_ERROR("HardFault_Handler()");
+
         while (1)
         {
         }
