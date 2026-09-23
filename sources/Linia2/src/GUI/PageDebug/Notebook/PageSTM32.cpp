@@ -163,26 +163,15 @@ void PageSTM32::StopUpgrade()
 }
 
 
-void PageSTM32::OnUpgradeStart(int size, uint crc32, bool is_ok)
+void PageSTM32::OnUpgradeStart()
 {
-    if (!is_ok ||
-        (size != (int)data.size()) ||
-        (crc32 != GF::CalculateCRC32(data.data(), (int)data.size())))
-    {
-        LOG_WRITE("");
+    LOG_WRITE("");
 
-        ResetUpgrade();
-    }
-    else
-    {
-        LOG_WRITE("");
+    current_block = -1;
 
-        current_block = -1;
+    SendNextBlock();
 
-        SendNextBlock();
-
-        state = START_UPGRADE;
-    }
+    state = START_UPGRADE;
 }
 
 

@@ -3,6 +3,7 @@
 #include "IPPP/SCPI/SCPI.h"
 #include "Utils/StringUtils.h"
 #include "IPPP/Real/PinsDevice.h"
+#include "GUI/PageDebug/Notebook/PageSTM32.h"
 
 
 namespace SCPI
@@ -91,9 +92,20 @@ bool SCPI::FuncPing(pchar)
 }
 
 
-bool SCPI::FuncUpgrade(pchar)
-{
+#define SU_BEGIN_WITH(string)               \
+    if(SU::BeginWith(command, string))      \
+    {                                       \
+        command += std::strlen(string);     \
+        char *pos = nullptr;                \
+        (void)pos;
 
+
+bool SCPI::FuncUpgrade(pchar command)
+{
+    SU_BEGIN_WITH("START")
+        PageSTM32::self->OnUpgradeStart();
+        return true;
+    }
 
     return false;
 }

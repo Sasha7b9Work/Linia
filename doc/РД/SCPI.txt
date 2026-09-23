@@ -45,7 +45,7 @@
 | Orange Pi                                | stm32                                    |
 +------------------------------------------+------------------------------------------+
 |:UPGRADE:START <size> <crc32>             |                                          |
-|                                          |:UPGRADE:START 1                          |
+|                                          |:UPGRADE:START                            |
 |:UPGRADE:BLOCK <num_block> <size> <crc32> |                                          |
 |<блок двоичных данных>                    |                                          |
 |                                          |:UPGRADE:BLOCK <num_block> <size> <crc32> |

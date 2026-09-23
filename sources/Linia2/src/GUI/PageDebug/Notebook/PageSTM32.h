@@ -16,8 +16,8 @@ public:
 
     static PageSTM32 *self;
 
-    // :UPGRADE:START <size> <crc32> [0...1]
-    void OnUpgradeStart(int size, uint crc32, bool);
+    // :UPGRADE:START
+    void OnUpgradeStart();
 
     // :UPGRADE:BLOCK <num_block> <size> <crc32>
     void OnUpgradeBlock(int num_block, int size, uint crc32);
