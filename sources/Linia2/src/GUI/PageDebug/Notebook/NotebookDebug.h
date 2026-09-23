@@ -12,7 +12,9 @@ class NotebookDebug : public wxNotebook
 {
 public:
 
-    NotebookDebug(wxWindow *, NotebookDebug *&);
+    NotebookDebug(wxWindow *);
+
+    static NotebookDebug *self;
 
     void Init();
 

@@ -351,7 +351,7 @@ void Register::SetActiveAcross(bool active, wxWindow *_wnd)
         }
     }
 
-    TheNotebookDebug->EnableSwitching(active);
+    NotebookDebug::self->EnableSwitching(active);
 }
 
 

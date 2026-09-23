@@ -18,7 +18,7 @@ PageDebug::PageDebug(Notebook *board, PageDebug *&global) : PageNotebook(board, 
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    sizer->Add(new NotebookDebug(this, TheNotebookDebug));
+    sizer->Add(new NotebookDebug(this));
 
     sizer->Add(new PanelRight(this));
 
@@ -34,7 +34,7 @@ PageDebug::PageDebug(Notebook *board, PageDebug *&global) : PageNotebook(board, 
 
 bool PageDebug::Show(bool show)
 {
-    show ? TheNotebookDebug->Init() : TheNotebookDebug->DeInit();
+    show ? NotebookDebug::self->Init() : NotebookDebug::self->DeInit();
 
     return wxPanel::Show(show);
 }

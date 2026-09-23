@@ -27,8 +27,6 @@ class PanelTests;
 class PanelViewTest;
 class PageChannelB;
 
-class NotebookDebug;
-
 extern PageReports   *ThePageReports;
 extern PageSettings  *ThePageSettings;
 extern PageTables    *ThePageTables;
@@ -39,7 +37,5 @@ extern PageDebug     *ThePageDebug;
 extern PanelCategory *ThePanelCategory;
 extern PanelTests    *ThePanelTests;
 extern PanelViewTest *ThePanelViewTest;
-
-extern NotebookDebug *TheNotebookDebug;
 
 extern bool need_write_data_to_file;            // Записать считанные с АЦП значения в файл
