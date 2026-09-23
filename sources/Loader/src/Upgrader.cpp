@@ -51,7 +51,11 @@ void Upgrader::PeriodicTask()
 
     OPi5Plus::_text_mode = false;
 
+    BufferOSDP buffer(size_block);
+
     OPi5Plus::SCPI::Send(":UPGRADE:HEAD %d %d %X", current_block, size_block, crc32_block);
+
+    TimeMeterMS meter_full;
 
     while (HAL_USART1::BytesInBuffer() < size_block)
     {
@@ -62,11 +66,20 @@ void Upgrader::PeriodicTask()
             LOG_WRITE("HAL_USART1::BytesInBuffer() = %d", HAL_USART1::BytesInBuffer());
             meter.Reset();
         }
+
+        if (meter_full.ElapsedMS() > 100)
+        {
+            OPi5Plus::_text_mode = true;
+
+            HAL_USART1::GetData(buffer);
+
+            ErrorUpgrade();
+
+            return;
+        }
     }
 
     LOG_WRITE("HAL_USART1::BytesInBuffer() = %d", HAL_USART1::BytesInBuffer());
-
-    BufferOSDP buffer(size_block);
 
     HAL_USART1::GetData(buffer);
 
