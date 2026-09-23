@@ -12,6 +12,7 @@
 #include "Settings/FileJSON.h"
 #include "Communicator/ClientHTTP/ClientHTTP.h"
 #include "IPPP/IDevice.h"
+#include "GUI/PageDebug/PanelRight.h"
 #pragma warning(push, 0)
     #include <wx/msgdlg.h>
 #pragma warning(pop)
@@ -212,6 +213,8 @@ bool Application::OnInit()
             if (mutex.try_lock())
             {
                 IDevice::impl->ApplicationTask();
+
+                ThePanelRight->ApplicationTask();
 
                 mutex.unlock();
             };
