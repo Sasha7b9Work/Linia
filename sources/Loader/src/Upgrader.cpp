@@ -28,6 +28,8 @@ namespace Upgrader
 
 void Upgrader::BeginUpgrade()
 {
+    LOG_WRITE("Upgrader::BeginUpgrade()");
+
     offset = 0;
 
     current_block = -1;

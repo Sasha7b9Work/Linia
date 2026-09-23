@@ -21,8 +21,6 @@ int main()
 
     Upgrader::BeginUpgrade();
 
-    LOG_WRITE("Start upgrade");
-
     while (true)
     {
         OPi5Plus::PeriodicTask();
