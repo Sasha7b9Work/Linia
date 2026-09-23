@@ -71,7 +71,8 @@ void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
             meter.Reset();
         }
 
-        if (prev_bytes != 0 && prev_bytes == HAL_USART1::BytesInBuffer())
+        if ((prev_bytes != 0) &&
+            (prev_bytes == HAL_USART1::BytesInBuffer()))
         {
             HAL_USART1::GetData(buffer);
 
