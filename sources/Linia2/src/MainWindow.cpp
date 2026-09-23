@@ -45,7 +45,7 @@ MainWindow::MainWindow(MainWindow *&self, const wxString &title)
     main_panel->AddPanel(new PageSettings(main_panel));
     main_panel->AddPanel(new PageMeasures(main_panel));
     main_panel->AddPanel(new PageTests(main_panel, ThePageTests));
-    main_panel->AddPanel(new PageDebug(main_panel, ThePageDebug));
+    main_panel->AddPanel(new PageDebug(main_panel));
 
     main_panel->SetCurrentPanel(PageMeasures::self);
 

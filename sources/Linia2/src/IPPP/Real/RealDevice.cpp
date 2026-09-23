@@ -121,7 +121,7 @@ void RealDevice::FuncOnKeyStart(bool state)
 
     TheApp->CallAfter([state]()
         {
-            ThePageDebug->labelButtonStart->SetLabel(state ? "ИЗМЕРЕНИЕ \"ВКЛ\"" : "ИЗМЕРЕНИЕ \"ОТКЛ\"");
+            PageDebug::self->labelButtonStart->SetLabel(state ? "ИЗМЕРЕНИЕ \"ВКЛ\"" : "ИЗМЕРЕНИЕ \"ОТКЛ\"");
         });
 }
 
@@ -132,7 +132,7 @@ void RealDevice::FuncOnKeyStop(bool state)
 
     TheApp->CallAfter([state]()
         {
-            ThePageDebug->labelButtonStop->SetLabel(state ? "СТОП \"ВКЛ\"" : "СТОП \"ОТКЛ\"");
+            PageDebug::self->labelButtonStop->SetLabel(state ? "СТОП \"ВКЛ\"" : "СТОП \"ОТКЛ\"");
         });
 }
 
@@ -144,8 +144,8 @@ void RealDevice::FuncOnEncoder(int delta)
     TheApp->CallAfter([delta]()
         {
             int value = 0;
-            ThePageDebug->labelEncoder->GetLabel().ToInt(&value);
-            ThePageDebug->labelEncoder->SetLabel(wxString::Format("%d", value + delta));
+            PageDebug::self->labelEncoder->GetLabel().ToInt(&value);
+            PageDebug::self->labelEncoder->SetLabel(wxString::Format("%d", value + delta));
         });
 }
 

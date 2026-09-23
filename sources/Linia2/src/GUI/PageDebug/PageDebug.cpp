@@ -9,12 +9,12 @@
 #pragma warning(pop)
 
 
-PageDebug *ThePageDebug = nullptr;
+PageDebug *PageDebug::self = nullptr;
 
 
-PageDebug::PageDebug(Notebook *board, PageDebug *&global) : PageNotebook(board, L("Отладка"))
+PageDebug::PageDebug(Notebook *board) : PageNotebook(board, L("Отладка"))
 {
-    global = this;
+    self = this;
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 

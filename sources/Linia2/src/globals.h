@@ -13,7 +13,6 @@ extern IGrid         *TheGrid;
 extern MainWindow    *TheMainWindow;
 
 class PageArchive;
-class PageDebug;
 class PageMeasures;
 class PageTables;
 class PageArchive;
@@ -25,6 +24,5 @@ class PageChannelB;
 extern PageTables    *ThePageTables;
 extern PageArchive   *ThePageArchive;
 extern PageTests     *ThePageTests;
-extern PageDebug     *ThePageDebug;
 
 extern bool need_write_data_to_file;            // Записать считанные с АЦП значения в файл
