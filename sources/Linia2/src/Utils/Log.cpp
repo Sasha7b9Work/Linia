@@ -183,11 +183,15 @@ void Log::Write(pchar file, int line, pchar format, ...)
 
 void Log::LogMCU(pchar type, pchar message)
 {
+    mutex.lock();
+
     char buffer[1024];
 
     std::sprintf(buffer, "%s %s", type, message);
 
     WriteLine(buffer);
+
+    mutex.unlock();
 }
 
 
