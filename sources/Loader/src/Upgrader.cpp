@@ -63,7 +63,7 @@ void Upgrader::PeriodicTask()
 
         if (meter.ElapsedMS() > 2)
         {
-            LOG_WRITE("HAL_USART1::BytesInBuffer() = %d", HAL_USART1::BytesInBuffer());
+            LOG_WRITE("HAL_USART1::BytesInBuffer() = %d, time %d ms", HAL_USART1::BytesInBuffer(), meter_full.ElapsedMS());
             meter.Reset();
         }
 
