@@ -247,9 +247,12 @@ bool UART::ConfigurePort()
     }
 
     int cbits = CS8;
-//    int cpar = 0;
-//    int ipar = IGNPAR;
-//    int bstop = 0;
+    int cpar = 0;
+    (void)cpar;
+    int ipar = IGNPAR;
+    (void)ipar;
+    int bstop = 0;
+    (void)bstop;
 
     switch (UART_MODE[0])
     {
