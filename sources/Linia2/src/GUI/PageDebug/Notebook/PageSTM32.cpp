@@ -183,7 +183,7 @@ void PageSTM32::OnConfirmHeadBlock(int _num_block, int _size, uint _crc32)
     }
     else
     {
-        LOG_WRITE("PageSTM32::OnConfirmUpgradeBlock()");
+        LOG_WRITE("PageSTM32::OnConfirmHeadBlock()");
 
         int offset = 0;
         int size = 0;
@@ -267,13 +267,13 @@ void PageSTM32::SendNextHeadBlock()
 
     if (CalculateParametersBlock(current_block, offset, size, crc32))
     {
-        LOG_WRITE("PageSTM32::SendNextBlock() :UPGRADE:HEAD %d %d %X", current_block.load(), size, crc32);
+        LOG_WRITE("PageSTM32::SendNextHeadBlock() :UPGRADE:HEAD %d %d %X", current_block.load(), size, crc32);
         IDevice::impl->SendCommand(":UPGRADE:HEAD %d %d %X", current_block.load(), size, crc32);
     }
     else
     {
         crc32 = GF::CalculateCRC32(data.data(), (int)data.size());
-        LOG_WRITE("PageSTM32::SendNextBlock() :UPGRADE:END %u %X", data.size(), crc32);
+        LOG_WRITE("PageSTM32::SendNextHeadBlock() :UPGRADE:END %u %X", data.size(), crc32);
         IDevice::impl->SendCommand(":UPGRADE:END %u %X", data.size(), crc32);
     }
 }
