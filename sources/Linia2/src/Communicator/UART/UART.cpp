@@ -275,10 +275,11 @@ bool UART::ConfigurePort()
     default: bstop = 0; break;
     }
 
-    port_settings.c_cflag = cbits | cpar | bstop | CLOCAL | CREAD;
-    port_settings.c_iflag = ipar;
-    port_settings.c_oflag = 0;
-    port_settings.c_lflag = 0;
+    port_settings.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP | INLCR | IGNCR | ICRNL | IXON);
+    port_settings.c_oflag &= ~OPOST;
+    port_settings.c_lflag &= ~(ECHO | ECHONL | ICANON | ISIG | IEXTEN);
+    port_settings.c_cflag &= ~(CSIZE | PARENB);
+    port_settings.c_cflag |= CS8 | CLOCAL | CREAD;
     port_settings.c_cc[VMIN] = 0;
     port_settings.c_cc[VTIME] = 0;
 
