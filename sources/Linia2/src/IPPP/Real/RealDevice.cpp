@@ -55,7 +55,7 @@ bool RealDevice::Init()
 
     Keyboard::Init(FuncOnKeyStart, FuncOnKeyStop, FuncOnEncoder);
 
-//    worker.Start();
+    worker.Start();
 
     return result;
 }
