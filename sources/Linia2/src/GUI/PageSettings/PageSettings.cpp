@@ -4,13 +4,13 @@
 #include "GUI/Controls/Sizers.h"
 
 
-PageSettings *ThePageSettings = nullptr;
+PageSettings *PageSettings::self = nullptr;
 
 
-PageSettings::PageSettings(Notebook *board, PageSettings *&global) :
+PageSettings::PageSettings(Notebook *board) :
     PageNotebook(board, L("Настройки"))
 {
-    global = this;
+    self = this;
 
     BoxSizerVert *sizer_main = new BoxSizerVert();
 

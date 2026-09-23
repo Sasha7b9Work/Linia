@@ -15,8 +15,6 @@ extern MainWindow    *TheMainWindow;
 class PageArchive;
 class PageDebug;
 class PageMeasures;
-class PageReports;
-class PageSettings;
 class PageTables;
 class PageArchive;
 class PageSTM32;
@@ -26,8 +24,6 @@ class PanelCategory;
 class PanelTests;
 class PageChannelB;
 
-extern PageReports   *ThePageReports;
-extern PageSettings  *ThePageSettings;
 extern PageTables    *ThePageTables;
 extern PageArchive   *ThePageArchive;
 extern PageTests     *ThePageTests;

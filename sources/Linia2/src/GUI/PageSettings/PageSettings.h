@@ -8,7 +8,9 @@ class PageSettings : public PageNotebook
 {
 public:
 
-    PageSettings(Notebook *, PageSettings *&);
+    PageSettings(Notebook *);
+
+    static PageSettings *self;
 
     Button *btnFileManager = nullptr;
 };
