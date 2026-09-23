@@ -210,8 +210,11 @@ void PageSTM32::OnConfirmContentBlock(int _num_block, int _size, uint _crc32)
     int size = 0;
     uint crc32 = 0;
 
+    CalculateParametersBlock(current_block, offset, size, crc32);
+
     if (current_block == _num_block &&
-        CalculateParametersBlock(current_block, offset, size, crc32))
+        size == _size &&
+        crc32 == _crc32)
     {
         SendNextHeadBlock();
     }
