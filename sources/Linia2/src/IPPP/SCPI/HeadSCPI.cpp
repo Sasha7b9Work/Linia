@@ -104,7 +104,13 @@ bool SCPI::FuncUpgrade(pchar command)
 {
     SU_BEGIN_WITH("START")
         PageSTM32::self->OnUpgradeStart();
-        return true;
+    return true;
+}
+    else SU_BEGIN_WITH("BLOCK ")
+        int num_block = (int)std::strtoul(command, &pos, 10);
+        int size = (int)std::strtoul(pos + 1, &pos, 10);
+        uint crc32 = std::strtoul(pos + 1, &pos, 16);
+        PageSTM32::self->OnUpgradeBlock(num_block, size, crc32);
     }
 
     return false;

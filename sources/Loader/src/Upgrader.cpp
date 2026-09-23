@@ -5,6 +5,7 @@
 #include "Device/OPi5Plus/SCPI.h"
 #include "Device/OPi5Plus/OPi5Plus.h"
 #include "Utils/GlobalFunctions.h"
+#include "Hardware/Timer.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -50,6 +51,15 @@ void Upgrader::PeriodicTask()
 
     if (HAL_USART1::BytesInBuffer() < size_block)
     {
+        TimeMeterMS meter;
+
+        if (meter.ElapsedMS() < 2)
+        {
+            return;
+        }
+
+        meter.Reset();
+
         LOG_WRITE("HAL_USART1::BytesInBuffer() = %d", HAL_USART1::BytesInBuffer());
 
         return;
@@ -61,12 +71,16 @@ void Upgrader::PeriodicTask()
 
     HAL_USART1::GetData(buffer);
 
-
     HAL_FLASH::Firmware::WriteBuffer(offset, buffer.Data(0), size_block);
 
-    offset += size_block;
-
     OPi5Plus::text_mode = true;
+
+    LOG_WRITE("Confirmation receive block %d", current_block);
+
+    OPi5Plus::SCPI::Send(":UPGRADE:BLOCK %d %d %X", current_block, size_block,
+        GF::CalculateCRC32((const void *)(HAL_FLASH::Firmware::Address() + offset), size_block));
+
+    offset += size_block;
 }
 
 
