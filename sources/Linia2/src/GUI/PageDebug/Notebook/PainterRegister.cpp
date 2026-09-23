@@ -168,7 +168,7 @@ void PainterRegister::OnEventPaint(wxPaintEvent &)
     gc->DrawText("DB0", W_B * reg->chip->BitDepth() + 45, y);
     gc->DrawText(wxString::Format("DB%d", reg->chip->BitDepth() - 1), 5, y);
 
-    delete gc;
+    SAFE_DELETE(gc);
 }
 
 
