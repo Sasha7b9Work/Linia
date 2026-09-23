@@ -1,7 +1,7 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (Loader)
 
-set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD ON)
 
 include_directories(
     ../Common/_VS_KEIL
