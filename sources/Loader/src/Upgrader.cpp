@@ -55,18 +55,13 @@ void Upgrader::PeriodicTask()
 
     while (HAL_USART1::BytesInBuffer() < size_block)
     {
-        TimeMeterMS meter;
+        static TimeMeterMS meter;
 
-        if (meter.ElapsedMS() < 2)
+        if (meter.ElapsedMS() > 2)
         {
-            return;
+            LOG_WRITE("HAL_USART1::BytesInBuffer() = %d", HAL_USART1::BytesInBuffer());
+            meter.Reset();
         }
-
-        meter.Reset();
-
-        LOG_WRITE("HAL_USART1::BytesInBuffer() = %d", HAL_USART1::BytesInBuffer());
-
-        return;
     }
 
     LOG_WRITE("HAL_USART1::BytesInBuffer() = %d", HAL_USART1::BytesInBuffer());
