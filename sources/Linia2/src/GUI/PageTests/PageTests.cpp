@@ -46,7 +46,7 @@ PageTests::PageTests(Notebook *board, PageTests *&global) :
 
     panel_library = new PanelTests(vert_splitter, ThePanelTests);
 
-    panel_view_test = new PanelViewTest(hor_splitter, ThePanelViewTest);
+    panel_view_test = new PanelViewTest(hor_splitter);
 
     vert_splitter->SplitHorizontally(panel_category, panel_library, SETTING(SASH_POSITION_VERTICAL)->GetInt());
 

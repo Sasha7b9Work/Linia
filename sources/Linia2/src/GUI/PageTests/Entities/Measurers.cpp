@@ -176,7 +176,7 @@ bool MeasurerSourcer::IsSetModeU() const
 
 void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size, wxPoint &pos)
 {
-    btnDisable = new Button(ThePanelViewTest, "x", size);
+    btnDisable = new Button(PanelViewTest::self, "x", size);
 
     if (type == MeasurerSourcer::Type::MeasI || MeasurerSourcer::Type::MeasU)
     {
@@ -190,7 +190,7 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
     btnDisable->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
         {
             disabled = !disabled;
-            ThePanelViewTest->Refresh();
+            PanelViewTest::self->Refresh();
             event.Skip();
         });
 
@@ -212,7 +212,7 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
 
 
 #define CREATE_COMBO(title, name, vec)                                                                  \
-    ComboInput *combo = new ComboInput(ThePanelViewTest, title, WIDTH_CONTROL, titles, tooltips, name); \
+    ComboInput *combo = new ComboInput(PanelViewTest::self, title, WIDTH_CONTROL, titles, tooltips, name); \
     combo->SetPosition({ coord_controls.x, y });                                                        \
     vec.push_back(combo);                                                                               \
     y += ButtonsCombo::HEIGHT + 5;                                                                      \
@@ -258,7 +258,7 @@ void MeasurerSourcer::CreateParametersI()
             }
 
             {
-                SliderFloat *slider = new SliderFloat(ThePanelViewTest, WIDTH_CONTROL, L("Смещение"));
+                SliderFloat *slider = new SliderFloat(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
                 slider->SetRange(0.0, 10.0, "mA", 2);
@@ -312,7 +312,7 @@ void MeasurerSourcer::CreateParametersI()
             }
 
             {
-                SliderFloat *slider = new SliderFloat(ThePanelViewTest, WIDTH_CONTROL, L("Смещение"));
+                SliderFloat *slider = new SliderFloat(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
                 slider->SetRange(0.0, 10.0, "mA", 2);
@@ -397,7 +397,7 @@ void MeasurerSourcer::CreateParametersU()
             }
 
             {
-                SliderFloat *slider = new SliderFloat(ThePanelViewTest, WIDTH_CONTROL, L("Смещение"));
+                SliderFloat *slider = new SliderFloat(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
                 slider->SetRange(0.0, 10.0, "mA", 2);
@@ -451,7 +451,7 @@ void MeasurerSourcer::CreateParametersU()
             }
 
             {
-                SliderFloat *slider = new SliderFloat(ThePanelViewTest, WIDTH_CONTROL, L("Смещение"));
+                SliderFloat *slider = new SliderFloat(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
                 slider->SetRange(0.0, 10.0, "mA", 2);
@@ -505,7 +505,7 @@ void MeasurerSourcer::CreateParametersU()
             }
 
             {
-                SliderFloat *slider = new SliderFloat(ThePanelViewTest, WIDTH_CONTROL, L("Смещение"));
+                SliderFloat *slider = new SliderFloat(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
                 slider->SetRange(0.0, 10.0, "mA", 2);
@@ -521,7 +521,7 @@ void MeasurerSourcer::CreateButtonModeUI(const wxRect &rect, const wxSize &size,
 {
     if (type == Type::SourceUI)
     {
-        btnModeUI = new Button(ThePanelViewTest, "E", size);
+        btnModeUI = new Button(PanelViewTest::self, "E", size);
         if (dir == Dir::Left || dir == Dir::Right)
         {
             btnModeUI->SetPosition({ pos.x, pos.y + rect.height - 22 });
@@ -546,14 +546,14 @@ void MeasurerSourcer::CreateButtonModeUI(const wxRect &rect, const wxSize &size,
 
                 ShowNeedParameters();
 
-                ThePanelViewTest->Refresh();
+                PanelViewTest::self->Refresh();
 
                 event.Skip();
             });
     }
     else if (type == Type::MeasUI)
     {
-        btnModeUI = new Button(ThePanelViewTest, "V", size);
+        btnModeUI = new Button(PanelViewTest::self, "V", size);
         if (dir == Dir::Left || dir == Dir::Right)
         {
             btnModeUI->SetPosition({ pos.x, pos.y + rect.height - 22 });
@@ -578,7 +578,7 @@ void MeasurerSourcer::CreateButtonModeUI(const wxRect &rect, const wxSize &size,
 
                 ShowNeedParameters();
 
-                ThePanelViewTest->Refresh();
+                PanelViewTest::self->Refresh();
 
                 event.Skip();
             });

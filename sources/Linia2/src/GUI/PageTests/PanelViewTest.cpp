@@ -8,12 +8,12 @@
 #include "Utils/SystemDepend.h"
 
 
-PanelViewTest *ThePanelViewTest = nullptr;
+PanelViewTest *PanelViewTest::self = nullptr;
 
 
-PanelViewTest::PanelViewTest(wxWindow *parent, PanelViewTest *&global) : Panel(parent, wxSIMPLE_BORDER)
+PanelViewTest::PanelViewTest(wxWindow *parent) : Panel(parent, wxSIMPLE_BORDER)
 {
-    global = this;
+    self = this;
 
     Bind(wxEVT_PAINT, &PanelViewTest::OnEventPaint, this);
 

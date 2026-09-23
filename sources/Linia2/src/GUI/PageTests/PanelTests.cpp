@@ -132,7 +132,7 @@ void PanelTests::OnEventRightClickListItem(wxListEvent &event)
             {
             case 1001:
 
-                ThePanelViewTest->SetTest(test);
+                PanelViewTest::self->SetTest(test);
 
                 break;
             }

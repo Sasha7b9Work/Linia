@@ -24,7 +24,6 @@ class PageSTM32;
 class PageTests;
 class PanelCategory;
 class PanelTests;
-class PanelViewTest;
 class PageChannelB;
 
 extern PageReports   *ThePageReports;
@@ -36,6 +35,5 @@ extern PageDebug     *ThePageDebug;
 
 extern PanelCategory *ThePanelCategory;
 extern PanelTests    *ThePanelTests;
-extern PanelViewTest *ThePanelViewTest;
 
 extern bool need_write_data_to_file;            // Записать считанные с АЦП значения в файл

@@ -14,7 +14,9 @@ class PanelViewTest : public Panel
 {
 public:
 
-    PanelViewTest(wxWindow *, PanelViewTest *&);
+    PanelViewTest(wxWindow *);
+
+    static PanelViewTest *self;
 
     void SetTest(Test *);
 
