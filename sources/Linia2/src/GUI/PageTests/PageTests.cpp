@@ -44,7 +44,7 @@ PageTests::PageTests(Notebook *board, PageTests *&global) :
 
     panel_category = new PanelCategory(vert_splitter, ThePanelCategory);
 
-    panel_library = new PanelTests(vert_splitter, ThePanelTests);
+    panel_library = new PanelTests(vert_splitter);
 
     panel_view_test = new PanelViewTest(hor_splitter);
 

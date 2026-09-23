@@ -12,12 +12,12 @@
 #pragma warning(pop)
 
 
-PanelTests *ThePanelTests = nullptr;
+PanelTests *PanelTests::self = nullptr;
 
 
-PanelTests::PanelTests(wxWindow *parent, PanelTests *&global) : Panel(parent, wxSIMPLE_BORDER)
+PanelTests::PanelTests(wxWindow *parent) : Panel(parent, wxSIMPLE_BORDER)
 {
-    global = this;
+    self = this;
 
     BoxSizerVert *main_sizer = new BoxSizerVert();
 

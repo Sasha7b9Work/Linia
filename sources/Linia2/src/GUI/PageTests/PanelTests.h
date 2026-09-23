@@ -16,8 +16,10 @@ class PanelTests : public Panel
 {
 public:
 
-    PanelTests(wxWindow *, PanelTests *&);
+    PanelTests(wxWindow *);
     ~PanelTests();
+
+    static PanelTests *self;
 
     void BuildListTests(std::vector<const LibraryCategory *> &libraries);
 
