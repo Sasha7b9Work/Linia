@@ -19,13 +19,13 @@ namespace OPi5Plus
 
     static void UpdateInput();
 
-    bool text_mode = true;
+    bool _text_mode = true;
 }
 
 
 void OPi5Plus::PeriodicTask()
 {
-    if (text_mode)
+    if (_text_mode)
     {
         UpdateInput();
     }

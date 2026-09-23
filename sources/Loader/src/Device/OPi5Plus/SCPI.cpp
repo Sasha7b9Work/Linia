@@ -100,7 +100,7 @@ bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
 
         return true;
     }
-    else SU_BEGIN_WITH("BLOCK ")
+    else SU_BEGIN_WITH("HEAD ")
         int num_block = (int)std::strtoul(command, &pos, 10);
         int size = (int)std::strtoul(pos + 1, &pos, 10);
         uint crc32 = std::strtoul(pos + 1, &pos, 16);

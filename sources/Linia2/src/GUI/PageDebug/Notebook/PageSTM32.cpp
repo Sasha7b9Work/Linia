@@ -169,7 +169,7 @@ void PageSTM32::OnConfirmUpgradeStart()
 
     current_block = -1;
 
-    SendNextBlock();
+    SendNextHeadBlock();
 
     state = START_UPGRADE;
 }
@@ -179,12 +179,12 @@ void PageSTM32::OnConfirmHeadBlock(int _num_block, int _size, uint _crc32)
 {
     if (_num_block != current_block)
     {
-        LOG_WRITE("");
         ResetUpgrade();
     }
     else
     {
         LOG_WRITE("PageSTM32::OnConfirmUpgradeBlock()");
+
         int offset = 0;
         int size = 0;
         uint crc32 = 0;
@@ -198,15 +198,27 @@ void PageSTM32::OnConfirmHeadBlock(int _num_block, int _size, uint _crc32)
         }
         else
         {
-            SendNextBlock();
+            SendContentBlock();
         }
     }
 }
 
 
-void PageSTM32::OnConfirmContentBlock(int /*num_block*/, int /*size*/, uint /*crc32*/)
+void PageSTM32::OnConfirmContentBlock(int _num_block, int _size, uint _crc32)
 {
+    int offset = 0;
+    int size = 0;
+    uint crc32 = 0;
 
+    if (current_block == _num_block &&
+        CalculateParametersBlock(current_block, offset, size, crc32))
+    {
+        SendNextHeadBlock();
+    }
+    else
+    {
+        ResetUpgrade();
+    }
 }
 
 
@@ -242,7 +254,7 @@ void PageSTM32::ResetUpgrade()
 }
 
 
-void PageSTM32::SendNextBlock()
+void PageSTM32::SendNextHeadBlock()
 {
     ++current_block;
 
@@ -252,16 +264,33 @@ void PageSTM32::SendNextBlock()
 
     if (CalculateParametersBlock(current_block, offset, size, crc32))
     {
-        LOG_WRITE("PageSTM32::SendNextBlock() :UPGRADE:BLOCK %d %d %X", current_block.load(), size, crc32);
-        IDevice::impl->SendCommand(":UPGRADE:BLOCK %d %d %X", current_block.load(), size, crc32);
-
-        IDevice::impl->SendBinaryData(data.data() + offset, size);
+        LOG_WRITE("PageSTM32::SendNextBlock() :UPGRADE:HEAD %d %d %X", current_block.load(), size, crc32);
+        IDevice::impl->SendCommand(":UPGRADE:HEAD %d %d %X", current_block.load(), size, crc32);
     }
     else
     {
         crc32 = GF::CalculateCRC32(data.data(), (int)data.size());
         LOG_WRITE("PageSTM32::SendNextBlock() :UPGRADE:END %u %X", data.size(), crc32);
         IDevice::impl->SendCommand(":UPGRADE:END %u %X", data.size(), crc32);
+    }
+}
+
+
+void PageSTM32::SendContentBlock()
+{
+    LOG_WRITE("PageSTM32::SendContentBlock()");
+
+    int offset = 0;
+    int size = 0;
+    uint crc32 = 0;
+
+    if (CalculateParametersBlock(current_block, offset, size, crc32))
+    {
+        IDevice::impl->SendBinaryData(data.data() + offset, size);
+    }
+    else
+    {
+        ResetUpgrade();
     }
 }
 

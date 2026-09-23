@@ -85,7 +85,7 @@ void HAL_USART1::GetData(BufferOSDP &out_buffer)
     {
         char symbol = (char)in_buffer.Pop();
 
-        if (OPi5Plus::text_mode)
+        if (OPi5Plus::_text_mode)
         {
             symbol = (char)std::toupper(symbol);
         }

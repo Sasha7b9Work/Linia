@@ -54,11 +54,15 @@ private:
 
     std::atomic<State> state = IDLE;
 
-    // Если false, то нет данных - буфер слишком мал
+    // Если false, то данные закончились - всё передали
     bool CalculateParametersBlock(int num_block, int &offset, int &size, uint &crc32);
 
     // Перезапустить процесс обновления прошивки
     void ResetUpgrade();
 
-    void SendNextBlock();
+    // Послать следующий заголовок блока
+    void SendNextHeadBlock();
+
+    // Послать содержимое блока, заголовок которого был послан перед этим блоком
+    void SendContentBlock();
 };

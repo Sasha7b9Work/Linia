@@ -49,7 +49,11 @@ void Upgrader::PeriodicTask()
         return;
     }
 
-    if (HAL_USART1::BytesInBuffer() < size_block)
+    OPi5Plus::_text_mode = false;
+
+    OPi5Plus::SCPI::Send(":UPGRADE:HEAD %d %d %X", current_block, size_block, crc32_block);
+
+    while (HAL_USART1::BytesInBuffer() < size_block)
     {
         TimeMeterMS meter;
 
@@ -71,13 +75,13 @@ void Upgrader::PeriodicTask()
 
     HAL_USART1::GetData(buffer);
 
-    HAL_FLASH::Firmware::WriteBuffer(offset, buffer.Data(0), size_block);
+    OPi5Plus::_text_mode = true;
 
-    OPi5Plus::text_mode = true;
+    HAL_FLASH::Firmware::WriteBuffer(offset, buffer.Data(0), size_block);
 
     LOG_WRITE("Confirmation receive head %d", current_block);
 
-    OPi5Plus::SCPI::Send(":UPGRADE:HEAD %d %d %X", current_block, size_block,
+    OPi5Plus::SCPI::Send(":UPGRADE:CONTENT %d %d %X", current_block, size_block,
         GF::CalculateCRC32((const void *)(HAL_FLASH::Firmware::Address() + offset), size_block));
 
     offset += size_block;
@@ -86,14 +90,12 @@ void Upgrader::PeriodicTask()
 
 void Upgrader::Start(int /*size*/, uint /*crc32*/)
 {
-
+    BeginUpgrade();
 }
 
 
 void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
 {
-    OPi5Plus::text_mode = false;
-
     if (_num_block - 1 != current_block)
     {
         ErrorUpgrade();
@@ -144,7 +146,7 @@ void Upgrader::End(int _size, uint _crc32)
 
 void Upgrader::ErrorUpgrade()
 {
-    OPi5Plus::text_mode = true;
+    OPi5Plus::_text_mode = true;
     current_block = -1;
 
     LOG_ERROR("Error upgrader");
