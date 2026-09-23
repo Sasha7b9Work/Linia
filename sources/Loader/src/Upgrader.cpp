@@ -87,10 +87,11 @@ void Upgrader::PeriodicTask()
 
     HAL_FLASH::Firmware::WriteBuffer(offset, buffer.Data(0), size_block);
 
-    LOG_WRITE("Confirmation receive head %d", current_block);
+    uint crc32 = GF::CalculateCRC32((const void *)(HAL_FLASH::Firmware::Address() + offset), size_block);
 
-    OPi5Plus::SCPI::Send(":UPGRADE:CONTENT %d %d %X", current_block, size_block,
-        GF::CalculateCRC32((const void *)(HAL_FLASH::Firmware::Address() + offset), size_block));
+    LOG_WRITE("Confirmation receive content : num_block=%d, size_block=%d, crc32=%X", current_block, size_block, crc32);
+
+    OPi5Plus::SCPI::Send(":UPGRADE:CONTENT %d %d %X", current_block, size_block, crc32);
 
     offset += size_block;
 }

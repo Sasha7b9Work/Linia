@@ -115,10 +115,10 @@ bool SCPI::FuncUpgrade(pchar command)
         return true;
     }
     else SU_BEGIN_WITH("CONTENT ")
-        LOG_WRITE(":UPGRADE:CONTENT");
         int num_block = (int)std::strtoul(command, &pos, 10);
         int size = (int)std::strtoul(pos + 1, &pos, 10);
         uint crc32 = std::strtoul(pos + 1, &pos, 16);
+        LOG_WRITE(":UPGRADE:CONTENT %d %d %X", num_block, size, crc32);
         PageSTM32::self->OnConfirmContentBlock(num_block, size, crc32);
         return true;
     }
