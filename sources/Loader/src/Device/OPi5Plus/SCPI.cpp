@@ -103,6 +103,8 @@ bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
         int size = (int)std::strtoul(pos + 1, &pos, 10);
         uint crc32 = std::strtoul(pos + 1, &pos, 16);
 
+        LOG_WRITE("OPi5Plus::SCPI::Func_Upgrade(\"%s\") num_block = %d, size = %d, crc32 = %X", command, num_block, size, crc32);
+
         Upgrader::ReceiveBlock(num_block, size, crc32);
     }
     else SU_BEGIN_WITH("END ")

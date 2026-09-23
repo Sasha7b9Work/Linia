@@ -274,7 +274,7 @@ bool PageSTM32::CalculateParametersBlock(int num_block, int &offset, int &size, 
 
     crc32 = GF::CalculateCRC32(data.data() + offset, size);
 
-    LOG_WRITE("PageSTM32::CalculateParametersBlock() num_block = %d, offset = %d, size = %d, crc32 = %u", num_block, offset, size, crc32);
+    LOG_WRITE("PageSTM32::CalculateParametersBlock() num_block = %d, offset = %d, size = %d, crc32 = %X", num_block, offset, size, crc32);
 
     return true;
 }
