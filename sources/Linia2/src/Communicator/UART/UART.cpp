@@ -279,7 +279,7 @@ bool UART::ConfigurePort()
     port_settings.c_oflag &= ~OPOST;
     port_settings.c_lflag &= ~(ECHO | ECHONL | ICANON | ISIG | IEXTEN);
     port_settings.c_cflag &= ~(CSIZE | PARENB);
-    port_settings.c_cflag |= CS8 | CLOCAL | CREAD;
+    port_settings.c_cflag |= cbits;
     port_settings.c_cc[VMIN] = 0;
     port_settings.c_cc[VTIME] = 0;
 
