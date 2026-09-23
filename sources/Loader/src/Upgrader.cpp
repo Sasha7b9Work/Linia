@@ -75,9 +75,9 @@ void Upgrader::PeriodicTask()
 
     OPi5Plus::text_mode = true;
 
-    LOG_WRITE("Confirmation receive block %d", current_block);
+    LOG_WRITE("Confirmation receive head %d", current_block);
 
-    OPi5Plus::SCPI::Send(":UPGRADE:BLOCK %d %d %X", current_block, size_block,
+    OPi5Plus::SCPI::Send(":UPGRADE:HEAD %d %d %X", current_block, size_block,
         GF::CalculateCRC32((const void *)(HAL_FLASH::Firmware::Address() + offset), size_block));
 
     offset += size_block;

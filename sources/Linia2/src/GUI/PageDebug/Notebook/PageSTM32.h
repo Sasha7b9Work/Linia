@@ -16,14 +16,20 @@ public:
 
     static PageSTM32 *self;
 
-    // :UPGRADE:START
-    void OnUpgradeStart();
+    // Подтверждение начала обновления :UPGRADE:START
+    void OnConfirmUpgradeStart();
 
-    // :UPGRADE:BLOCK <num_block> <size> <crc32>
-    void OnConfirmUpgradeBlock(int num_block, int size, uint crc32);
+    // Подтверждение заголовка блока :UPGRADE:HEAD <num_block> <size> <crc32>
+    void OnConfirmHeadBlock(int num_block, int size, uint crc32);
 
-    // :UPGRADE:END <size> <crc32>
-    void OnUpgradeEnd(int size, uint crc32);
+    // Подтерждение содержимого блока :UPGRADE:CONTENT
+    void OnConfirmContentBlock(int num_block, int size, uint crc32);
+
+    // Подтверждение завершения обновления :UPGRADE:END <size> <crc32>
+    void OnConfirmUpgradeEnd(int size, uint crc32);
+
+    // Ошибка :UPGRADE:ERRROR
+    void OnError();
 
 private:
 

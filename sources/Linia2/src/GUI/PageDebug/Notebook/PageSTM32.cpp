@@ -163,7 +163,7 @@ void PageSTM32::StopUpgrade()
 }
 
 
-void PageSTM32::OnUpgradeStart()
+void PageSTM32::OnConfirmUpgradeStart()
 {
     LOG_WRITE("PageSTM32::OnUpgradeStart()");
 
@@ -175,7 +175,7 @@ void PageSTM32::OnUpgradeStart()
 }
 
 
-void PageSTM32::OnConfirmUpgradeBlock(int _num_block, int _size, uint _crc32)
+void PageSTM32::OnConfirmHeadBlock(int _num_block, int _size, uint _crc32)
 {
     if (_num_block != current_block)
     {
@@ -204,7 +204,13 @@ void PageSTM32::OnConfirmUpgradeBlock(int _num_block, int _size, uint _crc32)
 }
 
 
-void PageSTM32::OnUpgradeEnd(int size, uint crc32)
+void PageSTM32::OnConfirmContentBlock(int /*num_block*/, int /*size*/, uint /*crc32*/)
+{
+
+}
+
+
+void PageSTM32::OnConfirmUpgradeEnd(int size, uint crc32)
 {
     LOG_WRITE("PageSTM32::OnUpgradeEnd()");
 
@@ -220,9 +226,16 @@ void PageSTM32::OnUpgradeEnd(int size, uint crc32)
 }
 
 
+void PageSTM32::OnError()
+{
+    ResetUpgrade();
+}
+
+
 void PageSTM32::ResetUpgrade()
 {
     LOG_WRITE("PageSTM32::ResetUpgrade()");
+
     StopUpgrade();
 
     StartUpgrade(file_name);
@@ -246,7 +259,7 @@ void PageSTM32::SendNextBlock()
     }
     else
     {
-        uint crc32 = GF::CalculateCRC32(data.data(), (int)data.size());
+        crc32 = GF::CalculateCRC32(data.data(), (int)data.size());
         LOG_WRITE("PageSTM32::SendNextBlock() :UPGRADE:END %u %X", data.size(), crc32);
         IDevice::impl->SendCommand(":UPGRADE:END %u %X", data.size(), crc32);
     }
