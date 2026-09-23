@@ -289,7 +289,16 @@ void PageSTM32::SendContentBlock()
 
     if (CalculateParametersBlock(current_block, offset, size, crc32))
     {
-        IDevice::impl->SendBinaryData(data.data() + offset, size);
+        uint8 buffer[4096 * 8];
+
+        std::memcpy(buffer, data.data() + offset, (uint)size);
+
+        for (int i = 0; i < 10; i++)
+        {
+            buffer[i] = (uint8)i;
+        }
+
+        IDevice::impl->SendBinaryData(buffer, size);
     }
     else
     {

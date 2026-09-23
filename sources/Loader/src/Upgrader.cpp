@@ -83,6 +83,18 @@ void Upgrader::PeriodicTask()
 
     HAL_USART1::GetData(buffer);
 
+    LOG_WRITE("%d, %d, %d, %d, %d, %d, %d, %d, %d, %d",
+        *buffer.Data(0),
+        *buffer.Data(1),
+        *buffer.Data(2),
+        *buffer.Data(3),
+        *buffer.Data(4),
+        *buffer.Data(5),
+        *buffer.Data(6),
+        *buffer.Data(7),
+        *buffer.Data(8),
+        *buffer.Data(9));
+
     OPi5Plus::_text_mode = true;
 
     HAL_FLASH::Firmware::WriteBuffer(offset, buffer.Data(0), size_block);
