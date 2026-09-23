@@ -214,7 +214,7 @@ bool Application::OnInit()
             {
                 IDevice::impl->ApplicationTask();
 
-//                ThePanelRight->ApplicationTask();
+                ThePanelRight->ApplicationTask();
 
                 mutex.unlock();
             };

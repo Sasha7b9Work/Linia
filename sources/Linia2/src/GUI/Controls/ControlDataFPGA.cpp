@@ -155,6 +155,4 @@ void ControlDataFPGA::SetData(int _data[POINTS_IN_SAMPLE_ADC])
     std::memcpy(data, _data, sizeof(data[0]) * POINTS_IN_SAMPLE_ADC);
 
     Draw();
-
-    Refresh();
 }
