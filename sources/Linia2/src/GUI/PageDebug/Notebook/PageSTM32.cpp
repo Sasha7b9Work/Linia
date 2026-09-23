@@ -242,7 +242,7 @@ void PageSTM32::SendNextBlock()
 
     if (CalculateParametersBlock(current_block, offset, size, crc32))
     {
-        LOG_WRITE("");
+        LOG_WRITE("PageSTM32::SendNextBlock() :UPGRADE:BLOCK %d %d %u", current_block.load(), size, crc32);
         IDevice::impl->SendCommand(":UPGRADE:BLOCK %d %d %u", current_block.load(), size, crc32);
 
         IDevice::impl->SendBinaryData(data.data() + offset, size);
