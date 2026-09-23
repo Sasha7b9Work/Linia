@@ -242,15 +242,15 @@ void PageSTM32::SendNextBlock()
 
     if (CalculateParametersBlock(current_block, offset, size, crc32))
     {
-        LOG_WRITE("PageSTM32::SendNextBlock() :UPGRADE:BLOCK %d %d %u", current_block.load(), size, crc32);
-        IDevice::impl->SendCommand(":UPGRADE:BLOCK %d %d %u", current_block.load(), size, crc32);
+        LOG_WRITE("PageSTM32::SendNextBlock() :UPGRADE:BLOCK %d %d %X", current_block.load(), size, crc32);
+        IDevice::impl->SendCommand(":UPGRADE:BLOCK %d %d %X", current_block.load(), size, crc32);
 
         IDevice::impl->SendBinaryData(data.data() + offset, size);
     }
     else
     {
         LOG_WRITE("");
-        IDevice::impl->SendCommand(":UPGRADE:END %u %u", data.size(), GF::CalculateCRC32(data.data(), (int)data.size()));
+        IDevice::impl->SendCommand(":UPGRADE:END %u %X", data.size(), GF::CalculateCRC32(data.data(), (int)data.size()));
     }
 }
 
@@ -259,7 +259,6 @@ bool PageSTM32::CalculateParametersBlock(int num_block, int &offset, int &size, 
 {
     static const int SIZE_BLOCK = 4 * 1024;
 
-    LOG_WRITE("");
     offset = -1;
     size = -1;
     crc32 = (uint)-1;
@@ -274,6 +273,8 @@ bool PageSTM32::CalculateParametersBlock(int num_block, int &offset, int &size, 
     size = std::min(static_cast<int>(data.size()) - offset, SIZE_BLOCK);
 
     crc32 = GF::CalculateCRC32(data.data() + offset, size);
+
+    LOG_WRITE("PageSTM32::CalculateParametersBlock() num_block = %d, offset = %d, size = %d, crc32 = %u", num_block, offset, size, crc32);
 
     return true;
 }
