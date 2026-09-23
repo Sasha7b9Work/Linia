@@ -257,6 +257,7 @@ void PageMeasures::BeginPaint()
 void PageMeasures::EndPaint()
 {
     dc.SelectObject(wxNullBitmap);
+    SAFE_DELETE(gc);
 }
 
 
