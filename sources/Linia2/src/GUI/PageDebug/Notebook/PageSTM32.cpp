@@ -165,7 +165,7 @@ void PageSTM32::StopUpgrade()
 
 void PageSTM32::OnUpgradeStart()
 {
-    LOG_WRITE("");
+    LOG_WRITE("PageSTM32::OnUpgradeStart()");
 
     current_block = -1;
 
@@ -233,7 +233,6 @@ void PageSTM32::ResetUpgrade()
 
 void PageSTM32::SendNextBlock()
 {
-    LOG_WRITE("");
     ++current_block;
 
     int offset = 0;
@@ -249,8 +248,9 @@ void PageSTM32::SendNextBlock()
     }
     else
     {
-        LOG_WRITE("");
-        IDevice::impl->SendCommand(":UPGRADE:END %u %X", data.size(), GF::CalculateCRC32(data.data(), (int)data.size()));
+        uint crc32 = GF::CalculateCRC32(data.data(), (int)data.size());
+        LOG_WRITE("PageSTM32::SendNextBlock() :UPGRADE:END %u %X", data.size(), crc32);
+        IDevice::impl->SendCommand(":UPGRADE:END %u %X", data.size(), crc32);
     }
 }
 

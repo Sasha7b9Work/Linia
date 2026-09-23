@@ -41,20 +41,23 @@ void Upgrader::BeginUpgrade()
 
 void Upgrader::PeriodicTask()
 {
-    if (current_block == -1)        // Признак того, что не идём приём очередного блока
+    if (current_block < 0)        // Признак того, что не идём приём очередного блока
     {
         return;
     }
 
     if (HAL_USART1::BytesInBuffer() < size_block)
     {
+        LOG_WRITE("HAL_USART1::BytesInBuffer() = %d", HAL_USART1::BytesInBuffer());
+
         return;
     }
+
+    LOG_WRITE("HAL_USART1::BytesInBuffer() = %d", HAL_USART1::BytesInBuffer());
 
     BufferOSDP buffer(size_block);
 
     HAL_USART1::GetData(buffer);
-
 
 
     HAL_FLASH::Firmware::WriteBuffer(offset, buffer.Data(0), size_block);
