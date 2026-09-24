@@ -50,6 +50,7 @@ PageSTM32::PageSTM32(wxNotebook *notebook) :
             else
             {
                 btnUpgrade->Enable(false);
+                fileNameText->SetLabel("");
             }
         });
 
