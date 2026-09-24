@@ -70,19 +70,28 @@ void ClientHTTP::CleanupSockets()
 
 void ClientHTTP::Connect()
 {
-#ifndef WIN32
-    SendMessage(std::string("Connect ") + SystemInfoExtended::getComputerName() +
-        ":" + SystemInfoExtended::getLocalIPAddress());
-#endif
+    addressIP = SystemInfoExtended::getLocalIPAddress();
+
+    SendMessage(std::string("Connect ") + SystemInfoExtended::getComputerName() + ":" + addressIP);
+}
+
+
+void ClientHTTP::ChangedAddressIP()
+{
+    std::string old_address = addressIP;
+
+    addressIP = SystemInfoExtended::getLocalIPAddress();
+
+    if (old_address != addressIP)
+    {
+        SendMessage(std::string("Change address ") + SystemInfoExtended::getComputerName() + " from " + old_address + " to " + addressIP);
+    }
 }
 
 
 void ClientHTTP::Disconnect()
 {
-#ifndef WIN32
-    SendMessage(std::string("Disconnect ") + SystemInfoExtended::getComputerName() +
-        ":" + SystemInfoExtended::getLocalIPAddress());
-#endif
+    SendMessage(std::string("Disconnect ") + SystemInfoExtended::getComputerName() + ":" + SystemInfoExtended::getLocalIPAddress());
 }
 
 

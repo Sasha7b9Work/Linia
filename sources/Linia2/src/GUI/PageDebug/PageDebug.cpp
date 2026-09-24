@@ -5,6 +5,7 @@
 #include "GUI/PageDebug/Notebook/NotebookDebug.h"
 #include "GUI/PageDebug/PanelRight.h"
 #include "Utils/Timer.h"
+#include "Application.h"
 #pragma warning(push, 0)
     #include <wx/sizer.h>
 #pragma warning(pop)
@@ -38,13 +39,14 @@ PageDebug::PageDebug(Notebook *board) : PageNotebook(board, L("Отладка"))
 
 void PageDebug::PeriodicTask()
 {
-    static TimeMeterMS meter;
+    static wxString prev_address{ "" };
 
-    if (meter.ElapsedMS() > 1000)
+    wxString address = GF::GetSelfIP();
+
+    if (address != prev_address)
     {
         labelIP->SetLabel(wxString{ "IP : " } + GF::GetSelfIP());
-
-        meter.Reset();
+        Application::self->loggerHTTP.ChangedAddressIP();
     }
 }
 

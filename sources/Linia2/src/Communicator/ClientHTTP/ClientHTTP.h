@@ -31,6 +31,8 @@ public:
 
     void Connect();
 
+    void ChangedAddressIP();
+
     void Disconnect();
 
     // Отправка сообщения (асинхронная)
@@ -80,4 +82,6 @@ private:
     // Для Windows - инициализация Winsock
     static bool winsock_initialized;
     static std::mutex winsock_mutex;
+
+    std::string addressIP{""};
 };
