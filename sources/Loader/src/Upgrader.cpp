@@ -29,7 +29,7 @@ namespace Upgrader
 
 void Upgrader::BeginUpgrade()
 {
-    LOG_WRITE("*** Begin upgrade ***");
+    LOG_WRITE("Begin upgrade");
 
     offset = 0;
 
@@ -122,7 +122,7 @@ void Upgrader::End(int _size, uint _crc32)
     }
     else
     {
-        LOG_WRITE("*** Firmware received. Burning ... ***");
+        LOG_WRITE("Firmware received. Burning ...");
 
         uint crc32 = 0;
 
@@ -130,6 +130,11 @@ void Upgrader::End(int _size, uint _crc32)
 
         do
         {
+            if (counter > 1)
+            {
+                LOG_ERROR("Burning fail %d", counter);
+            }
+
             crc32 = GF::CalculateCRC32((const void *)HAL_FLASH::Firmware::Address(), (int)offset);
 
             HAL_FLASH::EraseSector(0x08000000);     // /
@@ -151,7 +156,7 @@ void Upgrader::End(int _size, uint _crc32)
 
         OPi5Plus::SCPI::Send(":UPGRADE:END %d, %X", offset, _crc32);
 
-        LOG_WRITE("*** time upgrade %u ms ***", timer_duration.ElapsedMS());
+        LOG_WRITE("Time upgrade %u ms", timer_duration.ElapsedMS());
 
         HAL_NVIC_SystemReset();
     }
