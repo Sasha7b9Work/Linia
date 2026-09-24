@@ -126,6 +126,8 @@ void PageSTM32::StopUpgrade()
     btnUpgrade->SetLabel(L("Обновить"));
     btnUpgrade->Refresh();
     btnUpgrade->Update();
+
+    IDevice::impl->SendCommand(":INFO");
 }
 
 

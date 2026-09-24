@@ -30,7 +30,7 @@ PageDebug::PageDebug(Notebook *board) : PageNotebook(board, L("Отладка"))
     labelButtonStop = new wxStaticText(this, wxID_ANY, "Stop", { 210, 700 }, { 100, 20 });
     labelEncoder = new wxStaticText(this, wxID_ANY, "0", { 410, 700 }, { 100, 20 });
 
-    labelIP = new wxStaticText(this, wxID_ANY, GF::GetSelfIP(), { 10, 670 }, { 100, 20 });
+    labelIP = new wxStaticText(this, wxID_ANY, wxString{ "IP : " } + GF::GetSelfIP(), { 10, 670 }, { 100, 20 });
     labelSTM32 = new wxStaticText(this, wxID_ANY, "", { 200, 670 }, { 100, 20 });
 }
 
