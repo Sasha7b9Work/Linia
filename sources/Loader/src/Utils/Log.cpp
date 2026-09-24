@@ -27,7 +27,7 @@ void Log::Write(pchar file, int line, pchar format, ...) //-V2560
 
     char full_message[2048];
 
-    std::sprintf(full_message, ":LOG:%3d : %s:%3d : - %s", counter++, SU::LeaveTheLastOnes(file, 27), line, message);
+    std::sprintf(full_message, ":LOG:Log%4d : %s:%3d : - %s", counter++, SU::LeaveTheLastOnes(file, 27), line, message);
 
     WriteLine(full_message);
 }
@@ -44,7 +44,7 @@ void Log::Warning(pchar file, int line, pchar format, ...) //-V2560
 
     char full_message[2048];
 
-    std::sprintf(full_message, ":WARNING:%3d : %s:%3d : - %s", counter++, SU::LeaveTheLastOnes(file, 27), line, message);
+    std::sprintf(full_message, ":LOG:WARN%4d : %s:%3d : - %s", counter++, SU::LeaveTheLastOnes(file, 26), line, message);
 
     WriteLine(full_message);
 }
@@ -61,7 +61,7 @@ void Log::Error(pchar file, int line, pchar format, ...) //-V2560
 
     char full_message[2048];
 
-    std::sprintf(full_message, ":ERROR:%3d : %s:%3d : - %s", counter++, SU::LeaveTheLastOnes(file, 27), line, message);
+    std::sprintf(full_message, ":LOG:!!!ERROR!!!%4d : %s:%3d : - %s", counter++, SU::LeaveTheLastOnes(file, 19), line, message);
 
     WriteLine(full_message);
 }
