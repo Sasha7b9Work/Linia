@@ -126,9 +126,11 @@ void Upgrader::End(int _size, uint _crc32)
     }
     else
     {
-        LOG_WRITE("******************* time upgrade = %u ms ************************", timer_duration.ElapsedMS());
+        LOG_WRITE("Firmware received. Burning ...");
 
         uint crc32 = 0;
+
+        int counter = 0;
 
         do
         {
@@ -142,11 +144,18 @@ void Upgrader::End(int _size, uint _crc32)
 
             HAL_FLASH::WriteBuffer(0x08000000, (const void *)HAL_FLASH::Firmware::Address(), (int)offset);
 
+            if (++counter > 10)
+            {
+                ErrorUpgrade();
+
+                return;
+            }
+
         } while (crc32 != GF::CalculateCRC32((const void *)0x08000000, (int)offset));
 
-        LOG_WRITE("******** UPGRADE END *******************");
-
         OPi5Plus::SCPI::Send(":UPGRADE:END %d, %X", offset, _crc32);
+
+        LOG_WRITE("******************* time upgrade = %u ms ************************", timer_duration.ElapsedMS());
 
         HAL_NVIC_SystemReset();
     }
@@ -158,7 +167,7 @@ void Upgrader::ErrorUpgrade()
     OPi5Plus::_text_mode = true;
     current_block = -1;
 
-    LOG_ERROR("Error upgrader");
+    LOG_ERROR("Error upgrade");
 
     OPi5Plus::SCPI::Send(":UPGRADE:ERROR");
 }
