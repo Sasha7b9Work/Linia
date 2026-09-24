@@ -90,8 +90,6 @@ void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
         prev_bytes = HAL_USART1::BytesInBuffer();
     }
 
-    LOG_WRITE("HAL_USART1::BytesInBuffer() = %d, time_upgrade = %u ms", HAL_USART1::BytesInBuffer(), timer_duration.ElapsedMS());
-
     HAL_USART1::GetData(buffer);
 
     OPi5Plus::_text_mode = true;
@@ -99,8 +97,6 @@ void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
     HAL_FLASH::Firmware::WriteBuffer(offset, buffer.Data(0), _size_block);
 
     uint crc32 = GF::CalculateCRC32(buffer.Data(0), _size_block);
-
-    LOG_WRITE("Confirmation receive content : num_block=%d, size_block=%d, crc32=%X", current_block, _size_block, crc32);
 
     OPi5Plus::SCPI::Send(":UPGRADE:CONTENT %d %d %X", current_block, _size_block, crc32);
 
