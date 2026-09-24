@@ -1,6 +1,8 @@
 ﻿// 2026/08/19 10:59:39 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/PageDebug/Notebook/PageChip.h"
+#include "Utils/BackgroundWorker.h"
+#include "Utils/Timer.h"
 #include <thread>
 
 /*
@@ -31,9 +33,10 @@ public:
     // Ошибка :UPGRADE:ERRROR
     void OnError();
 
-private:
-
     Button *btnUpgrade = nullptr;
+    TimeMeterMS meter_upgrader;
+
+private:
 
     void StartUpgrade(pchar);
 
@@ -43,7 +46,7 @@ private:
     std::atomic<int> current_block;         // Этот блок сейчас загружается
     wxString file_name;
 
-    TimeMeterMS duration_upgrade;
+    BackgroundWorker worker_upgrader{ UpgradeTask };       // Будет выполняться во время обновления
 
     // Если false, то данные закончились - всё передали
     bool CalculateParametersBlock(int num_block, int &offset, int &size, uint &crc32);
@@ -56,4 +59,6 @@ private:
 
     // Послать содержимое блока, заголовок которого был послан перед этим блоком
     void SendContentBlock();
+
+    static void UpgradeTask();
 };
