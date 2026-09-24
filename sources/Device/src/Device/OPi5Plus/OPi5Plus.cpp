@@ -23,6 +23,7 @@ namespace OPi5Plus
 
 void OPi5Plus::PeriodicTask()
 {
+    LOG_WRITE("Periodic task");
     UpdateInput();
 }
 

@@ -50,6 +50,8 @@ namespace HAL_TIM3
 // Взаимодействие с Orange Pi
 namespace HAL_USART1
 {
+    extern int error;
+
     void Init();
 
     void GetData(BufferOSDP &);

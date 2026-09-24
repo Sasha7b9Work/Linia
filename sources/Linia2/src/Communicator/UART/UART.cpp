@@ -322,7 +322,7 @@ bool UART::ConfigurePort()
 
 void *UART::ReaderThreadFunc(void *)
 {
-    uint8 buffer[1024];
+    uint8 buffer[4096];
     fd_set read_fds;
     struct timeval timeout;
 

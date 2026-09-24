@@ -60,6 +60,19 @@ void HAL_USART1::Init()
 
 void HAL_USART1::Transmit(const void *_buffer, int size)
 {
+    while ((h.Instance->SR & USART_SR_TC) == 0)
+    {
+
+    }
+
+    static uint prev_time = 0;
+
+    while (HAL_GetTick() < prev_time + 5)
+    {
+    }
+
+    prev_time = HAL_GetTick();
+
     HAL_UART_Transmit(&h, (const uint8 *)_buffer, (uint16)size, 100);
 }
 
@@ -91,6 +104,12 @@ void HAL_USART1::GetData(BufferOSDP &out_buffer)
 }
 
 
+namespace HAL_USART1
+{
+    int error = 0;
+}
+
+
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *_handle)
 {
     // 1. Сохраняем информацию об ошибке (для диагностики)
@@ -109,15 +128,20 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *_handle)
     if(errors & HAL_UART_ERROR_ORE) {
         // Overrun Error - данные теряются, слишком высокая скорость обработки
         // Нужно оптимизировать код или использовать DMA
+
+        HAL_USART1::error = 1;
     }
     if(errors & HAL_UART_ERROR_NE) {
         // Noise Error - помехи на линии
+        HAL_USART1::error = 2;
     }
     if(errors & HAL_UART_ERROR_FE) {
         // Framing Error - неверный стоп-бит, проблема синхронизации
+        HAL_USART1::error = 3;
     }
     if(errors & HAL_UART_ERROR_PE) {
         // Parity Error - ошибка четности
+        HAL_USART1::error = 4;
     }
     
     // 5. Переинициализируем UART

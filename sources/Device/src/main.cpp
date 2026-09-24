@@ -28,5 +28,12 @@ int main()
         VCP::PeriodicTask();
 
         Device::PeriodicTask();
+
+        if (HAL_USART1::error)
+        {
+            LOG_ERROR("USART error %d", HAL_USART1::error);
+
+            HAL_USART1::error = 0;
+        }
     }
 }
