@@ -187,8 +187,6 @@ void PageSTM32::OnConfirmHeadBlock(int _num_block, int _size, uint _crc32)
     }
     else
     {
-        LOG_WRITE("PageSTM32::OnConfirmHeadBlock()");
-
         int offset = 0;
         int size = 0;
         uint crc32 = 0;
@@ -281,8 +279,6 @@ void PageSTM32::SendNextHeadBlock()
 
 void PageSTM32::SendContentBlock()
 {
-    LOG_WRITE("PageSTM32::SendContentBlock()");
-
     int offset = 0;
     int size = 0;
     uint crc32 = 0;
