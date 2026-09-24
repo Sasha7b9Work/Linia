@@ -17,6 +17,8 @@ namespace Log
 
     void DeInit();
 
+    void PeriodicTask();
+
     void FromDevice(char *);
 
     void ToDevice(char *);

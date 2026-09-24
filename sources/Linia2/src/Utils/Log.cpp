@@ -81,6 +81,12 @@ void Log::WriteLine(pchar line)
     log_file.AddLine(line);
 
     std::cerr << line << std::endl;
+}
+
+
+void Log::PeriodicTask()
+{
+    std::lock_guard<std::mutex> lock(mutex);
 
     static TimeMeterMS meter;
 

@@ -67,7 +67,7 @@ void HAL_USART1::Transmit(const void *_buffer, int size)
 
     static uint prev_time = 0;
 
-    while (HAL_GetTick() < prev_time + 5)
+    while (HAL_GetTick() < prev_time + 2)
     {
     }
 
