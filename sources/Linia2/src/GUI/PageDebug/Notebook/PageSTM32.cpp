@@ -116,69 +116,12 @@ void PageSTM32::StartUpgrade(pchar _file_name)
     }
 
     IDevice::impl->SendCommand(":UPGRADE:START %d", size);
-
-    state = IDLE;
-
-    if (is_running.exchange(true))
-    {
-        return;
-    }
-
-    thread = std::thread([this]()
-        {
-            static TimeMeterMS meter;
-
-            meter.Reset();
-
-            while (is_running.load())
-            {
-                switch (state)
-                {
-                case IDLE:
-                    break;
-
-                case START_UPGRADE:
-                    break;
-
-                case PROCESS_UPGRADE:
-                    break;
-
-                case END_UPGRADE:
-                    break;
-
-                case Count:
-                    break;
-                }
-
-                float time = meter.ElapsedMS();
-
-                CallAfter([this, time]()
-                    {
-                        btnUpgrade->SetLabel(wxString::Format("%.1f ms", time / 1000.0f));
-                        btnUpgrade->Refresh();
-                        btnUpgrade->Update();
-                    });
-
-                std::this_thread::sleep_for(std::chrono::microseconds(10));
-            }
-        });
 }
 
 
 void PageSTM32::StopUpgrade()
 {
-    if (!is_running.exchange(false))
-    {
-        return;
-    }
-
-    if (thread.joinable())
-    {
-        thread.join();
-    }
-
     btnUpgrade->Enable(true);
-
     btnUpgrade->SetLabel(L("Обновить"));
     btnUpgrade->Refresh();
     btnUpgrade->Update();
@@ -190,8 +133,6 @@ void PageSTM32::OnConfirmUpgradeStart()
     current_block = -1;
 
     SendNextHeadBlock();
-
-    state = START_UPGRADE;
 }
 
 
