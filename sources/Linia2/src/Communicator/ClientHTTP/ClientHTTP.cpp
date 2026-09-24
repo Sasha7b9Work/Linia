@@ -72,7 +72,7 @@ void ClientHTTP::Connect()
 {
     addressIP = SystemInfoExtended::getLocalIPAddress();
 
-    SendMessage(std::string("Connect ") + SystemInfoExtended::getComputerName() + ":" + addressIP);
+    SendMessage(SystemInfoExtended::getComputerName() + " : " + std::string("Connect ") + ":" + addressIP);
 }
 
 
@@ -84,14 +84,14 @@ void ClientHTTP::ChangedAddressIP()
 
     if (old_address != addressIP)
     {
-        SendMessage(std::string("Change address ") + SystemInfoExtended::getComputerName() + " from " + old_address + " to " + addressIP);
+        SendMessage(SystemInfoExtended::getComputerName() + " : " + std::string("Change address ") + " from " + old_address + " to " + addressIP);
     }
 }
 
 
 void ClientHTTP::Disconnect()
 {
-    SendMessage(std::string("Disconnect ") + SystemInfoExtended::getComputerName() + ":" + SystemInfoExtended::getLocalIPAddress());
+    SendMessage(SystemInfoExtended::getComputerName() + " : " + std::string("Disconnect ") + ":" + SystemInfoExtended::getLocalIPAddress());
 }
 
 
