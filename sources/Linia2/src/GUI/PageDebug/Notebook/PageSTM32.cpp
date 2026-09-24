@@ -231,19 +231,13 @@ void PageSTM32::OnConfirmContentBlock(int _num_block, int _size, uint _crc32)
 
 void PageSTM32::OnConfirmUpgradeEnd(int size, uint crc32)
 {
-    LOG_WRITE("PageSTM32::OnUpgradeEnd()");
-
     if (size == (int)data.size() &&
         crc32 == GF::CalculateCRC32(data.data(), (int)data.size()))
     {
-        LOG_WRITE("StopUpgrade()");
-
         StopUpgrade();
     }
     else
     {
-        LOG_WRITE("ResetUpgrade()");
-
         ResetUpgrade();
     }
 }
