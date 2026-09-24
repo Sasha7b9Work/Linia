@@ -43,7 +43,14 @@ PageSTM32::PageSTM32(wxNotebook *notebook) :
 
     btnUpgrade->Bind(wxEVT_BUTTON, [this, fileNameText](wxCommandEvent &)
         {
-            StartUpgrade(fileNameText->GetLabel());
+            if (wxFile::Exists(fileNameText->GetLabel()))
+            {
+                StartUpgrade(fileNameText->GetLabel());
+            }
+            else
+            {
+                btnUpgrade->Enable(false);
+            }
         });
 
     BoxSizerHor *updateRowSizer = new BoxSizerHor();
