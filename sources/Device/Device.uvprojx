@@ -1289,16 +1289,6 @@
               <FilePath>.\src\Utils\Memory.h</FilePath>
             </File>
             <File>
-              <FileName>String.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\String.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>String.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\String.h</FilePath>
-            </File>
-            <File>
               <FileName>Log.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Log.cpp</FilePath>
@@ -2623,16 +2613,6 @@
               <FileName>Memory.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Memory.h</FilePath>
-            </File>
-            <File>
-              <FileName>String.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\String.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>String.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\String.h</FilePath>
             </File>
             <File>
               <FileName>Log.cpp</FileName>

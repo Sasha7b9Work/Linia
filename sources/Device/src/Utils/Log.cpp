@@ -1,7 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Utils/Log.h"
-#include "Utils/String.h"
 #include "Utils/StringUtils.h"
 #include "Device/OPi5Plus/SCPI.h"
 #include <cstdarg>
@@ -43,9 +42,11 @@ void Log::Warning(pchar file, int line, pchar format, ...) //-V2560
     std::vsprintf(message, format, args);
     va_end(args);
 
-    String text_string(":WARNING:%3d : %s:%3d : ----- %s -----", counter++, SU::LeaveTheLastOnes(file, 27), line, message);
+    char full_message[2048];
 
-    WriteLine(text_string.c_str());
+    std::sprintf(full_message, ":WARNING:%3d : %s:%3d : ----- %s -----", counter++, SU::LeaveTheLastOnes(file, 27), line, message);
+
+    WriteLine(full_message);
 }
 
 
@@ -58,9 +59,11 @@ void Log::Error(pchar file, int line, pchar format, ...) //-V2560
     std::vsprintf(message, format, args);
     va_end(args);
 
-    String text_string(":ERROR:%3d : %s:%3d : ----- %s -----", counter++, SU::LeaveTheLastOnes(file, 27), line, message);
+    char full_message[2048];
 
-    WriteLine(text_string.c_str());
+    std::sprintf(full_message, ":ERROR:%3d : %s:%3d : ----- %s -----", counter++, SU::LeaveTheLastOnes(file, 27), line, message);
+
+    WriteLine(full_message);
 }
 
 

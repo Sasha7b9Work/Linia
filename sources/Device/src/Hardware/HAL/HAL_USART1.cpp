@@ -60,9 +60,6 @@ void HAL_USART1::Init()
 
 void HAL_USART1::Transmit(const void *_buffer, int size)
 {
-    while (HAL_UART_GetState(&h) != HAL_UART_STATE_READY)
-    {
-    }
     HAL_UART_Transmit(&h, (const uint8 *)_buffer, (uint16)size, 100);
 }
 
