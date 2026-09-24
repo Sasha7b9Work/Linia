@@ -37,17 +37,17 @@ PageSTM32::PageSTM32(wxNotebook *notebook) :
 
     boxSizer->Add(fileRowSizer, 0, wxEXPAND | wxALL, 5);
 
-    Button *updateButton = new Button(box, L("Обновить"));
-    updateButton->Enable(false);
+    btnUpgrade = new Button(box, L("Обновить"));
+    btnUpgrade->Enable(false);
 
-    updateButton->Bind(wxEVT_BUTTON, [this, fileNameText](wxCommandEvent &)
+    btnUpgrade->Bind(wxEVT_BUTTON, [this, fileNameText](wxCommandEvent &)
         {
             StartUpgrade(fileNameText->GetLabel());
         });
 
     BoxSizerHor *updateRowSizer = new BoxSizerHor();
     updateRowSizer->AddStretchSpacer();
-    updateRowSizer->Add(updateButton, 0, wxALL, 5);
+    updateRowSizer->Add(btnUpgrade, 0, wxALL, 5);
     updateRowSizer->AddStretchSpacer();
 
     boxSizer->Add(updateRowSizer, 0, wxEXPAND | wxBOTTOM, 5);
@@ -57,7 +57,7 @@ PageSTM32::PageSTM32(wxNotebook *notebook) :
     SetSizer(mainSizer);
 
     {
-        selectButton->Bind(wxEVT_BUTTON, [this, fileNameText, updateButton](wxCommandEvent &)
+        selectButton->Bind(wxEVT_BUTTON, [this, fileNameText](wxCommandEvent &)
             {
                 wxFileDialog dialog(this,
                     L("Выберите файл прошивки"),            // Заголовок окна
@@ -71,7 +71,7 @@ PageSTM32::PageSTM32(wxNotebook *notebook) :
                 {
                     wxString path = dialog.GetPath();                    // Полный путь к файлу
                     fileNameText->SetLabel(path);                        // Отображаем путь
-                    updateButton->Enable(true);                          // Активируем кнопку "Обновить"
+                    this->btnUpgrade->Enable(true);                      // Активируем кнопку "Обновить"
                 }
             });
     }
@@ -160,6 +160,8 @@ void PageSTM32::StopUpgrade()
     {
         thread.join();
     }
+
+    btnUpgrade->Enable(true);
 }
 
 
@@ -172,6 +174,8 @@ void PageSTM32::OnConfirmUpgradeStart()
     SendNextHeadBlock();
 
     state = START_UPGRADE;
+
+    btnUpgrade->Enable(false);
 }
 
 

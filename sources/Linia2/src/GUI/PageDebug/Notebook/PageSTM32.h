@@ -33,6 +33,8 @@ public:
 
 private:
 
+    Button *btnUpgrade = nullptr;
+
     void StartUpgrade(pchar);
 
     void StopUpgrade();
