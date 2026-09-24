@@ -47,6 +47,7 @@ void PageDebug::PeriodicTask()
     {
         labelIP->SetLabel(wxString{ "IP : " } + GF::GetSelfIP());
         Application::self->loggerHTTP.ChangedAddressIP();
+        prev_address = address;
     }
 }
 
