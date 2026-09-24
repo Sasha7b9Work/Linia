@@ -5,6 +5,7 @@
 #include "Windows/ConsoleRS232.h"
 #include "Utils/GlobalFunctions.h"
 #include "Utils/Timer.h"
+#include "IPPP/IDevice.h"
 #pragma warning(push, 0)
     #include <wx/textfile.h>
     #include <wx/filename.h>
@@ -59,6 +60,8 @@ void Log::Init()
     }
 
     LOG_WRITE("Start application %s", wxDateTime::Now().Format("%Y-%m-%d %H:%M:%S").c_str().AsChar());
+
+    IDevice::impl->SendCommand(":INFO");
 }
 
 

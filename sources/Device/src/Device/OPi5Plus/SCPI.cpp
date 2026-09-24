@@ -34,6 +34,7 @@ namespace OPi5Plus
         static bool Func_SCAN(pchar);
         static bool Func_Source50V(pchar);
         static bool Func_Upgrade(pchar);
+        static bool Func_Info(pchar);
 
         static StructParser chip[] =
         {
@@ -51,6 +52,7 @@ namespace OPi5Plus
             { "SCAN",      Func_SCAN,      nullptr },
             { "SOURCE50V", Func_Source50V, nullptr },
             { "UPGRADE",   Func_Upgrade,   nullptr },
+            { "INFO",      Func_Info,      nullptr },
             { nullptr,     nullptr,        nullptr }
         };
 
@@ -250,6 +252,14 @@ bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
     }
 
     return false;
+}
+
+
+bool OPi5Plus::SCPI::Func_Info(pchar)
+{
+    LOG_WRITE("STM32 : Version : %d, Data build : %s", VERSION_BUILD, DATE_BUILD);
+
+    return true;
 }
 
 
