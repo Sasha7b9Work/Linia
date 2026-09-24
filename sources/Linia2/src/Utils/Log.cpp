@@ -53,9 +53,9 @@ void Log::Init()
             }
 
             CutSize();
-        }
 
-        WriteLine("");
+            WriteLine("");
+        }
     }
 
     LOG_WRITE("Start application %s", wxDateTime::Now().Format("%Y-%m-%d %H:%M:%S").c_str().AsChar());
@@ -90,8 +90,6 @@ void Log::WriteLine(pchar line)
 
 void Log::PeriodicTask()
 {
-    std::lock_guard<std::mutex> lock(mutex);
-
     static TimeMeterMS meter;
 
     if (meter.ElapsedMS() > 1000)
@@ -100,6 +98,8 @@ void Log::PeriodicTask()
 
         if (!writted)
         {
+            std::lock_guard<std::mutex> lock(mutex);
+
             log_file.Write();
 
             writted = true;
