@@ -7,6 +7,7 @@
 #include "GUI/Controls/Sizers.h"
 #include "IPPP/IDevice.h"
 #include "Utils/GlobalFunctions.h"
+#include "Utils/Timer.h"
 #pragma warning(push, 0)
     #include <wx/filedlg.h>
     #include <wx/file.h>
@@ -83,7 +84,7 @@ PageSTM32::PageSTM32(wxNotebook *notebook) :
 void PageSTM32::StartUpgrade(pchar _file_name)
 {
     btnUpgrade->Enable(false);
-    worker_upgrader.Start();
+    duration_upgrade.Reset();
 
     file_name = _file_name;
 
@@ -121,7 +122,6 @@ void PageSTM32::StartUpgrade(pchar _file_name)
 
 void PageSTM32::StopUpgrade()
 {
-    worker_upgrader.Stop();
     btnUpgrade->Enable(true);
     btnUpgrade->SetLabel(L("Обновить"));
     btnUpgrade->Refresh();
@@ -139,6 +139,8 @@ void PageSTM32::OnConfirmUpgradeStart()
 
 void PageSTM32::OnConfirmHeadBlock(int _num_block, int _size, uint _crc32)
 {
+    btnUpgrade->SetLabel(wxString::Format("%.1f", duration_upgrade.ElapsedMS() / 1e3f));
+
     if (_num_block != current_block)
     {
         ResetUpgrade();
@@ -272,10 +274,4 @@ bool PageSTM32::CalculateParametersBlock(int num_block, int &offset, int &size, 
     crc32 = GF::CalculateCRC32(data.data() + offset, size);
 
     return true;
-}
-
-
-void PageSTM32::UpgradeTask()
-{
-//    PageSTM32::self->btnUpgrade->SetLabel(wxString::Format("%.1f", PageSTM32::self->meter_upgrader.ElapsedMS() / 1e3f));
 }
