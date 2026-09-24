@@ -79,5 +79,5 @@ void Log::WriteLine(char *line)
         pointer++;
     }
 
-    OPi5Plus::SCPI::Send(line);
+    OPi5Plus::SCPI::SendString(line);
 }

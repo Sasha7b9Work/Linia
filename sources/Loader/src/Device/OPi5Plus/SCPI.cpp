@@ -122,7 +122,7 @@ bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
 }
 
 
-void OPi5Plus::SCPI::Send(pchar format, ...)
+void OPi5Plus::SCPI::SendFormat(pchar format, ...)
 {
     char message[1024];
     std::va_list args;
@@ -131,4 +131,10 @@ void OPi5Plus::SCPI::Send(pchar format, ...)
     va_end(args);
 
     HAL_USART1::TransmitString(message);
+}
+
+
+void OPi5Plus::SCPI::SendString(pchar line)
+{
+    HAL_USART1::TransmitString(line);
 }

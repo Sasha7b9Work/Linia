@@ -10,6 +10,8 @@ namespace OPi5Plus
     {
         void Parse(pchar);
 
-        void Send(pchar format, ...);
+        void SendFormat(pchar format, ...);
+
+        void SendString(pchar);
     }
 }

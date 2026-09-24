@@ -11,6 +11,8 @@ namespace OPi5Plus
         // Сюда подаётся строка, заканчивающаяся нулём
         void Parse(pchar);
 
-        void Send(pchar format, ...);
+        void SendFormat(pchar format, ...);
+
+        void SendString(pchar);
     }
 }

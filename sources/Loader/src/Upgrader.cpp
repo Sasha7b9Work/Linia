@@ -38,7 +38,7 @@ void Upgrader::BeginUpgrade()
     // Команда начала обновления уже получена, стираем сектор, где будет храниться прошивка
     HAL_FLASH::Firmware::EraseSector();
 
-    OPi5Plus::SCPI::Send(":UPGRADE:START");
+    OPi5Plus::SCPI::SendString(":UPGRADE:START");
 
     timer_duration.Reset();
 }
@@ -59,7 +59,7 @@ void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
 
     BufferOSDP buffer(_size_block);
 
-    OPi5Plus::SCPI::Send(":UPGRADE:HEAD %d %d %X", current_block, _size_block, _crc32_block);
+    OPi5Plus::SCPI::SendFormat(":UPGRADE:HEAD %d %d %X", current_block, _size_block, _crc32_block);
 
     TimeMeterMS meter_full;
 
@@ -98,7 +98,7 @@ void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
 
     uint crc32 = GF::CalculateCRC32(buffer.Data(0), _size_block);
 
-    OPi5Plus::SCPI::Send(":UPGRADE:CONTENT %d %d %X", current_block, _size_block, crc32);
+    OPi5Plus::SCPI::SendFormat(":UPGRADE:CONTENT %d %d %X", current_block, _size_block, crc32);
 
     offset += _size_block;
 }
@@ -161,7 +161,7 @@ void Upgrader::End(int _size, uint _crc32)
         */
 
         {
-            OPi5Plus::SCPI::Send(":UPGRADE:END %d, %X", offset, _crc32);
+            OPi5Plus::SCPI::SendFormat(":UPGRADE:END %d, %X", offset, _crc32);
         }
 
         HAL_NVIC_SystemReset();
@@ -176,7 +176,7 @@ void Upgrader::ErrorUpgrade()
 
     LOG_ERROR("Error upgrade");
 
-    OPi5Plus::SCPI::Send(":UPGRADE:ERROR");
+    OPi5Plus::SCPI::SendString(":UPGRADE:ERROR");
 }
 
 

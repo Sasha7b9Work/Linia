@@ -75,7 +75,7 @@ bool OPi5Plus::SCPI::Func_Ping(pchar command)
         return false;
     }
 
-    SCPI::Send(":PING");
+    SCPI::SendString(":PING");
 
     return true;
 }
@@ -353,7 +353,7 @@ bool OPi5Plus::SCPI::Func_CHIP_REG(pchar)
 }
 
 
-void OPi5Plus::SCPI::Send(pchar format, ...)
+void OPi5Plus::SCPI::SendFormat(pchar format, ...)
 {
     char message[1024];
     std::va_list args;
@@ -362,4 +362,10 @@ void OPi5Plus::SCPI::Send(pchar format, ...)
     va_end(args);
 
     HAL_USART1::TransmitString(message);
+}
+
+
+void OPi5Plus::SCPI::SendString(pchar line)
+{
+    HAL_USART1::TransmitString(line);
 }

@@ -51,7 +51,7 @@ void Commutator::PeriodicTask()
 
         if (prev_state != state)
         {
-            OPi5Plus::SCPI::Send("PININ:%s:STATE %d", pin->name, state ? "1" : "0");
+            OPi5Plus::SCPI::SendFormat("PININ:%s:STATE %d", pin->name, state ? "1" : "0");
         }
         
         pin++;
