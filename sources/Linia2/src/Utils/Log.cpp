@@ -167,7 +167,7 @@ void Log::LogMCU(pchar type, pchar message)
 
     char buffer[1024];
 
-    std::sprintf(buffer, "%s %s", type, message);
+    std::sprintf(buffer, "%s ----- %s -----", type, message);
 
     WriteLine(buffer);
 }
