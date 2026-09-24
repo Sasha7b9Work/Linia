@@ -22,6 +22,21 @@
 
 #define IGNPAR 0000004
 #define PARENB 0000400
+#define IGNBRK 0
+#define BRKINT 0
+#define PARMRK 0
+#define ISTRIP 0
+#define INLCR 0
+#define IGNCR 0
+#define ICRNL 0
+#define IXON 0
+#define OPOST 0
+#define ECHO 0
+#define CSIZE 0
+#define ECHONL 0
+#define ICANON 0
+#define ISIG 0
+#define IEXTEN 0
 #define INPCK  0000020
 #define PARODD 0001000
 #define CSTOPB 0000100

@@ -20,6 +20,8 @@ namespace Upgrader
     static uint offset = 0;
     static int current_block = -1;
 
+    static TimeMeterMS timer_duration;          // Таймер длительности обновления
+
     // Действия, который нужно сделать при возникновении ошибки
     static void ErrorUpgrade();
 }
@@ -37,6 +39,8 @@ void Upgrader::BeginUpgrade()
     HAL_FLASH::Firmware::EraseSector();
 
     OPi5Plus::SCPI::Send(":UPGRADE:START");
+
+    timer_duration.Reset();
 }
 
 
@@ -68,15 +72,13 @@ void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
 
         if (meter.ElapsedMS() > 2)
         {
-//            LOG_WRITE("HAL_USART1::BytesInBuffer() = %d, time %d ms", HAL_USART1::BytesInBuffer(), meter_full.ElapsedMS());
+            LOG_WRITE("HAL_USART1::BytesInBuffer() = %d, time %d ms", HAL_USART1::BytesInBuffer(), meter_full.ElapsedMS());
             meter.Reset();
         }
 
         if ((prev_bytes != 0) &&
             (prev_bytes == HAL_USART1::BytesInBuffer()))
         {
-//            LOG_WRITE("HAL_USART1::BytesInBuffer() = %d, time %d ms", HAL_USART1::BytesInBuffer(), meter_full.ElapsedMS());
-
             HAL_USART1::GetData(buffer);
 
             OPi5Plus::_text_mode = true;
@@ -92,30 +94,6 @@ void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
     LOG_WRITE("HAL_USART1::BytesInBuffer() = %d", HAL_USART1::BytesInBuffer());
 
     HAL_USART1::GetData(buffer);
-
-    LOG_WRITE("                      %d, %d, %d, %d, %d, %d, %d, %d, %d, %d",
-        *buffer.Data(0),
-        *buffer.Data(1),
-        *buffer.Data(2),
-        *buffer.Data(3),
-        *buffer.Data(4),
-        *buffer.Data(5),
-        *buffer.Data(6),
-        *buffer.Data(7),
-        *buffer.Data(8),
-        *buffer.Data(9));
-
-    LOG_WRITE("                      %c, %c, %c, %c, %c, %c, %c, %c, %c, %c",
-        (char)*buffer.Data(0),
-        (char)*buffer.Data(1),
-        (char)*buffer.Data(2),
-        (char)*buffer.Data(3),
-        (char)*buffer.Data(4),
-        (char)*buffer.Data(5),
-        (char)*buffer.Data(6),
-        (char)*buffer.Data(7),
-        (char)*buffer.Data(8),
-        (char)*buffer.Data(9));
 
     OPi5Plus::_text_mode = true;
 
@@ -149,6 +127,8 @@ void Upgrader::End(int _size, uint _crc32)
     }
     else
     {
+        LOG_WRITE("******************* time upgrade = %u s ************************", timer_duration.ElapsedMS() / 1000);
+
         uint crc32 = 0;
 
         do
