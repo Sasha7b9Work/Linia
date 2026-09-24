@@ -148,20 +148,19 @@ void PageSTM32::StartUpgrade(pchar _file_name)
 
                 case Count:
                     break;
-
-                    float time = meter.ElapsedMS();
-
-                    CallAfter([this, time]()
-                        {
-                            btnUpgrade->SetLabel(wxString::Format("%.1f ms", time / 1000.0f));
-                            btnUpgrade->Refresh();
-                            btnUpgrade->Update();
-                        });
-
                 }
-            }
 
-            std::this_thread::sleep_for(std::chrono::microseconds(10));
+                float time = meter.ElapsedMS();
+
+                CallAfter([this, time]()
+                    {
+                        btnUpgrade->SetLabel(wxString::Format("%.1f ms", time / 1000.0f));
+                        btnUpgrade->Refresh();
+                        btnUpgrade->Update();
+                    });
+
+                std::this_thread::sleep_for(std::chrono::microseconds(10));
+            }
         });
 }
 
