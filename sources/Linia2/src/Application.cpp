@@ -244,6 +244,8 @@ bool Application::OnInit()
 
     IDevice::impl->Init();
 
+    IDevice::impl->SendCommand(":INFO");
+
     return true;
 }
 

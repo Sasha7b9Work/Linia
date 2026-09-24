@@ -60,8 +60,6 @@ void Log::Init()
     }
 
     LOG_WRITE("Start application %s", wxDateTime::Now().Format("%Y-%m-%d %H:%M:%S").c_str().AsChar());
-
-    IDevice::impl->SendCommand(":INFO");
 }
 
 
