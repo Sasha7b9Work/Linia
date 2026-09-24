@@ -277,5 +277,5 @@ bool PageSTM32::CalculateParametersBlock(int num_block, int &offset, int &size, 
 
 void PageSTM32::UpgradeTask()
 {
-    PageSTM32::self->btnUpgrade->SetLabel(wxString::Format("%.1f", PageSTM32::self->meter_upgrader.ElapsedMS() / 1e3f));
+//    PageSTM32::self->btnUpgrade->SetLabel(wxString::Format("%.1f", PageSTM32::self->meter_upgrader.ElapsedMS() / 1e3f));
 }
