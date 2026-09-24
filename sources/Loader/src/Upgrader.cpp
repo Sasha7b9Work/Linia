@@ -29,7 +29,7 @@ namespace Upgrader
 
 void Upgrader::BeginUpgrade()
 {
-    LOG_WRITE("Upgrader::BeginUpgrade()");
+    LOG_WRITE("*** Begin upgrade ***");
 
     offset = 0;
 
@@ -122,7 +122,7 @@ void Upgrader::End(int _size, uint _crc32)
     }
     else
     {
-        LOG_WRITE("Firmware received. Burning ...");
+        LOG_WRITE("*** Firmware received. Burning ... ***");
 
         uint crc32 = 0;
 
@@ -151,7 +151,7 @@ void Upgrader::End(int _size, uint _crc32)
 
         OPi5Plus::SCPI::Send(":UPGRADE:END %d, %X", offset, _crc32);
 
-        LOG_WRITE("******************* time upgrade = %u ms ************************", timer_duration.ElapsedMS());
+        LOG_WRITE("*** time upgrade %u ms ***", timer_duration.ElapsedMS());
 
         HAL_NVIC_SystemReset();
     }
@@ -163,7 +163,7 @@ void Upgrader::ErrorUpgrade()
     OPi5Plus::_text_mode = true;
     current_block = -1;
 
-    LOG_ERROR("Error upgrade");
+    LOG_ERROR("*** Error upgrade ***");
 
     OPi5Plus::SCPI::Send(":UPGRADE:ERROR");
 }

@@ -169,8 +169,6 @@ void PageSTM32::StopUpgrade()
 
 void PageSTM32::OnConfirmUpgradeStart()
 {
-    LOG_WRITE("PageSTM32::OnUpgradeStart()");
-
     current_block = -1;
 
     SendNextHeadBlock();
