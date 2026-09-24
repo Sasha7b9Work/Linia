@@ -161,13 +161,13 @@ void Log::Write(pchar file, int line, pchar format, ...)
 }
 
 
-void Log::LogMCU(pchar type, pchar message)
+void Log::LogMCU(pchar message)
 {
     std::lock_guard<std::mutex> lock(mutex);
 
     char buffer[1024];
 
-    std::sprintf(buffer, "%s %s", type, message);
+    std::sprintf(buffer, "%s : %s", GetTime().c_str().AsChar(), message);
 
     WriteLine(buffer);
 }

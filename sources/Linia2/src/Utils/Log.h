@@ -30,5 +30,5 @@ namespace Log
     void ErrorTrace(pchar file, int line, pchar function, pchar format, ...);
 
     // Вывод сообщения от stm32
-    void LogMCU(pchar type, pchar message);
+    void LogMCU(pchar message);
 }
