@@ -158,6 +158,8 @@ void PageSTM32::StartUpgrade(pchar _file_name)
             CallAfter([this, time]()
             {
                 btnUpgrade->SetLabel(wxString::Format("%.1f ms", time / 1000.0f));
+                btnUpgrade->Refresh();
+                btnUpgrade->Update();
             });
         });
 }
@@ -178,6 +180,8 @@ void PageSTM32::StopUpgrade()
     btnUpgrade->Enable(true);
 
     btnUpgrade->SetLabel(L("Обновить"));
+    btnUpgrade->Refresh();
+    btnUpgrade->Update();
 }
 
 
