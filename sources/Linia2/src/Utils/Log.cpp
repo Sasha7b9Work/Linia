@@ -79,8 +79,6 @@ void Log::WriteLine(pchar line)
 {
     log_file.AddLine(line);
 
-    log_file.Write();
-
     std::cerr << line << std::endl;
 }
 
