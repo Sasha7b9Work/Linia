@@ -84,6 +84,7 @@ PageSTM32::PageSTM32(wxNotebook *notebook) :
 void PageSTM32::StartUpgrade(pchar _file_name)
 {
     btnUpgrade->Enable(false);
+    duration_upgrade.Reset();
 
     file_name = _file_name;
 
