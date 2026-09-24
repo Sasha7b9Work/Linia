@@ -72,7 +72,6 @@ void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
 
         if (meter.ElapsedMS() > 2)
         {
-            LOG_WRITE("HAL_USART1::BytesInBuffer() = %d, time %d ms", HAL_USART1::BytesInBuffer(), meter_full.ElapsedMS());
             meter.Reset();
         }
 
@@ -91,7 +90,7 @@ void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
         prev_bytes = HAL_USART1::BytesInBuffer();
     }
 
-    LOG_WRITE("HAL_USART1::BytesInBuffer() = %d", HAL_USART1::BytesInBuffer());
+    LOG_WRITE("HAL_USART1::BytesInBuffer() = %d, time_upgrade = %u s", HAL_USART1::BytesInBuffer(), timer_duration.ElapsedMS() / 1000);
 
     HAL_USART1::GetData(buffer);
 
@@ -144,6 +143,8 @@ void Upgrader::End(int _size, uint _crc32)
             HAL_FLASH::WriteBuffer(0x08000000, (const void *)HAL_FLASH::Firmware::Address(), (int)offset);
 
         } while (crc32 != GF::CalculateCRC32((const void *)0x08000000, (int)offset));
+
+        LOG_WRITE("******** UPGRADE END *******************");
 
         OPi5Plus::SCPI::Send(":UPGRADE:END %d, %X", offset, _crc32);
 

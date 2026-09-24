@@ -93,7 +93,7 @@ bool OPi5Plus::SCPI::ProcessStructures(pchar command, StructParser *handlers)
 bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
 {
     SU_BEGIN_WITH("START ")
-        int size = (int)std::strtoul(pos + 1, &pos, 10);
+        int size = (int)std::strtoul(command, &pos, 10);
         uint crc32 = std::strtoul(pos + 1, &pos, 16);
 
         Upgrader::Start(size, crc32);
@@ -112,7 +112,7 @@ bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
         return true;
     }
     else SU_BEGIN_WITH("END ")
-        int size = (int)std::strtoul(pos + 1, &pos, 10);
+        int size = (int)std::strtoul(command, &pos, 10);
         uint crc32 = std::strtoul(pos + 1, &pos, 16);
 
         Upgrader::End(size, crc32);
