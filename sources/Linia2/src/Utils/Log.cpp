@@ -28,6 +28,8 @@ namespace Log
     static void CutSize();
 
     static void WriteLine(pchar);
+
+    static bool writted = false;
 }
 
 
@@ -41,14 +43,14 @@ void Log::Init()
 
             log_file.Create(file_name);
 
-//            if (wxFile::Exists(file_name))
-//            {
-//                log_file.Open(file_name);
-//            }
-//            else
-//            {
-//                log_file.Create(file_name);
-//            }
+            if (wxFile::Exists(file_name))
+            {
+                log_file.Open(file_name);
+            }
+            else
+            {
+                log_file.Create(file_name);
+            }
 
             CutSize();
         }
@@ -78,6 +80,8 @@ void Log::DeInit()
 
 void Log::WriteLine(pchar line)
 {
+    writted = false;
+
     log_file.AddLine(line);
 
     std::cerr << line << std::endl;
@@ -93,7 +97,13 @@ void Log::PeriodicTask()
     if (meter.ElapsedMS() > 1000)
     {
         meter.Reset();
-        log_file.Write();
+
+        if (!writted)
+        {
+            log_file.Write();
+
+            writted = true;
+        }
     }
 }
 
