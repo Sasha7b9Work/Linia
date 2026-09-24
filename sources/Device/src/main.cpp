@@ -14,8 +14,6 @@ int main()
 
     Device::Init();
 
-    LOG_WRITE("Start STM32 : Version : %d, Date build %s", VERSION_BUILD, DATE_BUILD);
-
     while (true)
     {
         OPi5Plus::PeriodicTask();

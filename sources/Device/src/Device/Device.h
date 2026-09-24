@@ -14,4 +14,6 @@ namespace Device
 
     // По этой команде в регистры записываются значения, соотвествующие установленным настройкам
     void EmergencyStart();
+
+    void SendVersion();
 }

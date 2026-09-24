@@ -7,6 +7,7 @@
 #include "Device/Channels.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
+#include "Device/OPi5Plus/SCPI.h"
 
 
 void Device::Init()
@@ -38,6 +39,8 @@ void Device::Init()
     ChanS::Init();
 
     ChanC::Init();
+
+    SendVersion();
 }
 
 
@@ -60,4 +63,12 @@ void Device::EmergencyStop()
 void Device::EmergencyStart()
 {
     ChanC::EmergencyStart();
+}
+
+
+void Device::SendVersion()
+{
+    LOG_WRITE("STM32 : Version : %d, Date build : %s", VERSION_BUILD, DATE_BUILD);
+
+    OPi5Plus::SCPI::SendFormat(":INFO:STM32 : VER : %d, DATE : %s", VERSION_BUILD, DATE_BUILD);
 }
