@@ -90,7 +90,7 @@ void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
         prev_bytes = HAL_USART1::BytesInBuffer();
     }
 
-    LOG_WRITE("HAL_USART1::BytesInBuffer() = %d, time_upgrade = %u s", HAL_USART1::BytesInBuffer(), timer_duration.ElapsedMS() / 1000);
+    LOG_WRITE("HAL_USART1::BytesInBuffer() = %d, time_upgrade = %u ms", HAL_USART1::BytesInBuffer(), timer_duration.ElapsedMS());
 
     HAL_USART1::GetData(buffer);
 
@@ -126,7 +126,7 @@ void Upgrader::End(int _size, uint _crc32)
     }
     else
     {
-        LOG_WRITE("******************* time upgrade = %u s ************************", timer_duration.ElapsedMS() / 1000);
+        LOG_WRITE("******************* time upgrade = %u ms ************************", timer_duration.ElapsedMS());
 
         uint crc32 = 0;
 
