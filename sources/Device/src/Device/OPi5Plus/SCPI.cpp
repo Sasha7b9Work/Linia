@@ -257,7 +257,7 @@ bool OPi5Plus::SCPI::Func_Upgrade(pchar command)
 
 bool OPi5Plus::SCPI::Func_Info(pchar)
 {
-    LOG_WRITE("STM32 : Version : %d, Data build : %s", VERSION_BUILD, DATE_BUILD);
+    LOG_WRITE("STM32 : Version : %d, Date build : %s", VERSION_BUILD, DATE_BUILD);
 
     return true;
 }
