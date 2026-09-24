@@ -35,20 +35,33 @@ std::string SystemInfoExtended::getComputerName()
     char buffer[256];
     memset(buffer, 0, sizeof(buffer));
 
+    std::string result = "Unknown";
+
 #ifdef _WIN32
     DWORD size = sizeof(buffer);
     if (GetComputerNameA(buffer, &size))
     {
-        return std::string(buffer);
+        result = std::string(buffer);
     }
 #else
     if (gethostname(buffer, sizeof(buffer)) == 0)
     {
-        return std::string(buffer);
+        result = std::string(buffer);
     }
 #endif
 
-    return "Unknown";
+    char last_symbol = result.c_str()[result.size() - 1];
+
+    int num = (int)(last_symbol & 0x0F);
+
+    result.append(" ");
+
+    for (int i = 0; i < num; i++)
+    {
+        result.append("*");
+    }
+
+    return result;
 }
 
 std::string SystemInfoExtended::getLocalIPAddress()
