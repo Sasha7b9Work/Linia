@@ -4,6 +4,7 @@
 #include "Utils/StringUtils.h"
 #include "Windows/ConsoleRS232.h"
 #include "Utils/GlobalFunctions.h"
+#include "Utils/Timer.h"
 #pragma warning(push, 0)
     #include <wx/textfile.h>
     #include <wx/filename.h>
@@ -80,6 +81,14 @@ void Log::WriteLine(pchar line)
     log_file.AddLine(line);
 
     std::cerr << line << std::endl;
+
+    static TimeMeterMS meter;
+
+    if (meter.ElapsedMS() > 1000)
+    {
+        meter.Reset();
+        log_file.Write();
+    }
 }
 
 
