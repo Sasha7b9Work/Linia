@@ -118,6 +118,8 @@ bool SCPI::FuncUpgrade(pchar command)
 bool SCPI::FuncInfo(pchar command)
 {
     PageDebug::self->labelSTM32->SetLabel(command);
+    PageDebug::self->labelSTM32->Refresh();
+    PageDebug::self->labelSTM32->Update();
 
     return true;
 }
