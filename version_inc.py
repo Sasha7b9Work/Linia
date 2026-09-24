@@ -38,3 +38,4 @@ def ProcessFile(name_file):
             file.close()
 
 ProcessFile("sources/Linia2/src/version.cpp")
+ProcessFile("sources/Device/src/version.cpp")

@@ -1008,6 +1008,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\main.cpp</FilePath>
             </File>
+            <File>
+              <FileName>version.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\version.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2333,6 +2338,11 @@
               <FileName>main.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\main.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>version.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\version.cpp</FilePath>
             </File>
           </Files>
         </Group>
