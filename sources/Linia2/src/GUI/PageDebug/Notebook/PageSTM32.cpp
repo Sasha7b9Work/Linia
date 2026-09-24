@@ -138,6 +138,8 @@ void PageSTM32::OnConfirmUpgradeStart()
 
 void PageSTM32::OnConfirmHeadBlock(int _num_block, int _size, uint _crc32)
 {
+    btnUpgrade->SetLabel(wxString::Format("%.1f", duration_upgrade.ElapsedMS() / 1e3f));
+
     if (_num_block != current_block)
     {
         ResetUpgrade();

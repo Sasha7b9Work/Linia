@@ -43,6 +43,8 @@ private:
     std::atomic<int> current_block;         // Этот блок сейчас загружается
     wxString file_name;
 
+    TimeMeterMS duration_upgrade;
+
     // Если false, то данные закончились - всё передали
     bool CalculateParametersBlock(int num_block, int &offset, int &size, uint &crc32);
 
