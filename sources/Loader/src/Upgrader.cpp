@@ -29,7 +29,7 @@ namespace Upgrader
 
 void Upgrader::BeginUpgrade()
 {
-    LOG_WRITE("Upgrader::BeginUpgrade()");
+    timer_duration.Reset();
 
     offset = 0;
 
@@ -39,8 +39,6 @@ void Upgrader::BeginUpgrade()
     HAL_FLASH::Firmware::EraseSector();
 
     OPi5Plus::SCPI::Send(":UPGRADE:START");
-
-    timer_duration.Reset();
 }
 
 
@@ -68,12 +66,6 @@ void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
     while (HAL_USART1::BytesInBuffer() < _size_block)
     {
         Timer::DelayMS(1);
-        static TimeMeterMS meter;
-
-        if (meter.ElapsedMS() > 2)
-        {
-            meter.Reset();
-        }
 
         if ((prev_bytes != 0) &&
             (prev_bytes == HAL_USART1::BytesInBuffer()))
@@ -89,8 +81,6 @@ void Upgrader::ReceiveBlock(int _num_block, int _size_block, uint _crc32_block)
 
         prev_bytes = HAL_USART1::BytesInBuffer();
     }
-
-    LOG_WRITE("HAL_USART1::BytesInBuffer() = %d, time_upgrade = %u ms", HAL_USART1::BytesInBuffer(), timer_duration.ElapsedMS());
 
     HAL_USART1::GetData(buffer);
 
