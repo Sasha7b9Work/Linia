@@ -14,7 +14,7 @@ int main()
 
     Device::Init();
 
-    for (int i = 0; i < 15; i++)
+    for (int i = 0; i < 2; i++)
     {
         LOG_WRITE("Start STM32");
         LOG_WARNING("Start STM32");
