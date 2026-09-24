@@ -322,6 +322,11 @@ bool UART::ConfigurePort()
 
 void *UART::ReaderThreadFunc(void *)
 {
+    {
+        struct sched_param param;
+        param.sched_priority = 50;
+        pthread_setschedparam(pthread_self(), SCHED_FIFO, &param);
+    }
     uint8 buffer[4096];
     fd_set read_fds;
     struct timeval timeout;
