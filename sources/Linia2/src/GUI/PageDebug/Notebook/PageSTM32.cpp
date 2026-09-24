@@ -187,6 +187,8 @@ void PageSTM32::OnConfirmHeadBlock(int _num_block, int _size, uint _crc32)
     }
     else
     {
+        LOG_WRITE("PageSTM32::OnConfirmHeadBlock()");
+
         int offset = 0;
         int size = 0;
         uint crc32 = 0;
@@ -322,6 +324,8 @@ bool PageSTM32::CalculateParametersBlock(int num_block, int &offset, int &size, 
     size = std::min(static_cast<int>(data.size()) - offset, SIZE_BLOCK);
 
     crc32 = GF::CalculateCRC32(data.data() + offset, size);
+
+    LOG_WRITE("PageSTM32::CalculateParametersBlock() num_block = %d, offset = %d, size = %d, crc32 = %X", num_block, offset, size, crc32);
 
     return true;
 }
