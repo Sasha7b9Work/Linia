@@ -7,6 +7,7 @@
 #include "GUI/Controls/Sizers.h"
 #include "IPPP/IDevice.h"
 #include "Utils/GlobalFunctions.h"
+#include "Utils/Timer.h"
 #pragma warning(push, 0)
     #include <wx/filedlg.h>
     #include <wx/file.h>
@@ -125,6 +126,10 @@ void PageSTM32::StartUpgrade(pchar _file_name)
 
     thread = std::thread([this]()
         {
+            static TimeMeterMS meter;
+
+            meter.Reset();
+
             while (is_running.load())
             {
                 switch (state)
@@ -147,6 +152,13 @@ void PageSTM32::StartUpgrade(pchar _file_name)
             }
 
             std::this_thread::sleep_for(std::chrono::microseconds(10));
+
+            float time = meter.ElapsedMS();
+
+            CallAfter([this, time]()
+            {
+                btnUpgrade->SetLabel(wxString::Format("%.1f ms", time / 1000.0f));
+            });
         });
 }
 
@@ -164,6 +176,8 @@ void PageSTM32::StopUpgrade()
     }
 
     btnUpgrade->Enable(true);
+
+    btnUpgrade->SetLabel(L("Обновить"));
 }
 
 

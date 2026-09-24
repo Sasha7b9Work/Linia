@@ -14,7 +14,7 @@ int main()
 
     Device::Init();
 
-    LOG_WRITE("Start STM32");
+    LOG_WRITE("+++++ Start STM32 +++++");
 
     while (true)
     {
