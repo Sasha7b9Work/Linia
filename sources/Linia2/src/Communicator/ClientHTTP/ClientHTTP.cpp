@@ -72,7 +72,7 @@ void ClientHTTP::Connect()
 {
     addressIP = SystemInfoExtended::getLocalIPAddress();
 
-    SendMessage(SystemInfoExtended::getComputerName() + " : " + std::string("Connect ") + ":" + addressIP);
+    SendMessage(SystemInfoExtended::getComputerName() + ":" + addressIP + " : " + std::string("Connect "));
 }
 
 
@@ -91,7 +91,7 @@ void ClientHTTP::ChangedAddressIP()
 
 void ClientHTTP::Disconnect()
 {
-    SendMessage(SystemInfoExtended::getComputerName() + " : " + std::string("Disconnect ") + ":" + SystemInfoExtended::getLocalIPAddress());
+    SendMessage(SystemInfoExtended::getComputerName() + ":" + SystemInfoExtended::getLocalIPAddress() + " : " + std::string("Disconnect "));
 }
 
 
