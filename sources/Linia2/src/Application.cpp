@@ -13,6 +13,7 @@
 #include "Communicator/ClientHTTP/ClientHTTP.h"
 #include "IPPP/IDevice.h"
 #include "GUI/PageDebug/PanelRight.h"
+#include "GUI/PageDebug/PageDebug.h"
 #pragma warning(push, 0)
     #include <wx/msgdlg.h>
 #pragma warning(pop)
@@ -215,6 +216,8 @@ bool Application::OnInit()
                 IDevice::impl->ApplicationTask();
 
                 Log::PeriodicTask();
+
+                PageDebug::self->PeriodicTask();
 
                 mutex.unlock();
             };

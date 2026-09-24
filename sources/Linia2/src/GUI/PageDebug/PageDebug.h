@@ -14,6 +14,8 @@ public:
 
     static PageDebug *self;
 
+    void PeriodicTask();
+
     virtual bool Show(bool) override;
 
     wxStaticText *labelButtonStart = nullptr;

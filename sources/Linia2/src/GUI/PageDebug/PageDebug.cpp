@@ -4,8 +4,9 @@
 #include "MainWindow.h"
 #include "GUI/PageDebug/Notebook/NotebookDebug.h"
 #include "GUI/PageDebug/PanelRight.h"
+#include "Utils/Timer.h"
 #pragma warning(push, 0)
-#include <wx/sizer.h>
+    #include <wx/sizer.h>
 #pragma warning(pop)
 
 
@@ -32,6 +33,19 @@ PageDebug::PageDebug(Notebook *board) : PageNotebook(board, L("Отладка"))
 
     labelIP = new wxStaticText(this, wxID_ANY, wxString{ "IP : " } + GF::GetSelfIP(), { 10, 670 }, { 150, 20 });
     labelSTM32 = new wxStaticText(this, wxID_ANY, "", { 200, 670 }, { 150, 20 });
+}
+
+
+void PageDebug::PeriodicTask()
+{
+    static TimeMeterMS meter;
+
+    if (meter.ElapsedMS() > 1000)
+    {
+        labelIP->SetLabel(wxString{ "IP : " } + GF::GetSelfIP());
+
+        meter.Reset();
+    }
 }
 
 
