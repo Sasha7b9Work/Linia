@@ -124,6 +124,7 @@ void Upgrader::End(int _size, uint _crc32)
     {
         LOG_WRITE("Firmware received. Burning ...");
 
+        /*
         uint crc32 = 0;
 
         int counter = 0;
@@ -157,6 +158,11 @@ void Upgrader::End(int _size, uint _crc32)
         OPi5Plus::SCPI::Send(":UPGRADE:END %d, %X", offset, _crc32);
 
         LOG_WRITE("Time upgrade %u ms", timer_duration.ElapsedMS());
+        */
+
+        {
+            OPi5Plus::SCPI::Send(":UPGRADE:END %d, %X", offset, _crc32);
+        }
 
         HAL_NVIC_SystemReset();
     }
@@ -168,7 +174,7 @@ void Upgrader::ErrorUpgrade()
     OPi5Plus::_text_mode = true;
     current_block = -1;
 
-    LOG_ERROR("*** Error upgrade ***");
+    LOG_ERROR("Error upgrade");
 
     OPi5Plus::SCPI::Send(":UPGRADE:ERROR");
 }
