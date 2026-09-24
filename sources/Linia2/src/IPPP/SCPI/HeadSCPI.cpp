@@ -107,7 +107,6 @@ bool SCPI::FuncUpgrade(pchar command)
     return true;
 }
     else SU_BEGIN_WITH("HEAD ")
-        LOG_WRITE(":UPGRADE:HEAD");
         int num_block = (int)std::strtoul(command, &pos, 10);
         int size = (int)std::strtoul(pos + 1, &pos, 10);
         uint crc32 = std::strtoul(pos + 1, &pos, 16);
@@ -118,19 +117,16 @@ bool SCPI::FuncUpgrade(pchar command)
         int num_block = (int)std::strtoul(command, &pos, 10);
         int size = (int)std::strtoul(pos + 1, &pos, 10);
         uint crc32 = std::strtoul(pos + 1, &pos, 16);
-        LOG_WRITE(":UPGRADE:CONTENT %d %d %X", num_block, size, crc32);
         PageSTM32::self->OnConfirmContentBlock(num_block, size, crc32);
         return true;
     }
     else SU_BEGIN_WITH("END ")
-        LOG_WRITE(":UPGRADE:END");
         int size = (int)std::strtoul(command, &pos, 10);
         uint crc32 = std::strtoul(pos + 1, &pos, 16);
         PageSTM32::self->OnConfirmUpgradeEnd(size, crc32);
         return true;
     }
     else SU_BEGIN_WITH("ERROR")
-        LOG_WRITE(":UPGRADE:ERROR");
         PageSTM32::self->OnError();
         return true;
     }
