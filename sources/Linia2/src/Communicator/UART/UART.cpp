@@ -338,25 +338,33 @@ void *UART::ReaderThreadFunc(void *)
     #pragma warning(pop)
 #endif
         timeout.tv_sec = 0;
-        timeout.tv_usec = 10000;
+        timeout.tv_usec = 1000;
 
         // select блокируется до появления данных или таймаута
         int result = select(fd + 1, &read_fds, nullptr, nullptr, &timeout);
 
         if (result > 0 && FD_ISSET(fd, &read_fds)) //-V201
         {
-            int bytes_read = read(fd, buffer, sizeof(buffer));
+            while (true)
+            {
+                int bytes_read = read(fd, buffer, sizeof(buffer));
 
-            if (bytes_read > 0)
-            {
-                recv_callback(buffer, bytes_read);
-            }
-            else if (bytes_read < 0)
-            {
-                if (errno != EAGAIN && errno != EWOULDBLOCK)
+                if (bytes_read > 0)
                 {
-                    LOG_ERROR("Read failed");
+                    recv_callback(buffer, bytes_read);
+                }
+                else if (bytes_read == 0)
+                {
                     break;
+                }
+                else if (bytes_read < 0)
+                {
+                    if (errno == EAGAIN || errno == EWOULDBLOCK)
+                    {
+                        break;  // Данных больше нет
+                    }
+                    LOG_ERROR("Read failed: %s", strerror(errno));
+                    return nullptr;
                 }
             }
         }
@@ -364,8 +372,8 @@ void *UART::ReaderThreadFunc(void *)
         {
             if (errno != EINTR)
             {
-                LOG_ERROR("Select failed");
-                break;
+                LOG_ERROR("Select failed : %s", strerror(errno));
+                return nullptr;
             }
         }
 
