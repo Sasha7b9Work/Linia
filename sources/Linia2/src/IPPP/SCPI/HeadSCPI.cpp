@@ -4,6 +4,7 @@
 #include "Utils/StringUtils.h"
 #include "IPPP/Real/PinsDevice.h"
 #include "GUI/PageDebug/Notebook/PageSTM32.h"
+#include "GUI/PageDebug/PageDebug.h"
 
 
 namespace SCPI
@@ -12,6 +13,7 @@ namespace SCPI
     static bool FuncLog(pchar);
     static bool FuncPing(pchar);
     static bool FuncUpgrade(pchar);
+    static bool FuncInfo(pchar);
 
     StructSCPI head[] =
     {
@@ -19,6 +21,7 @@ namespace SCPI
         { "LOG",      FuncLog,     nullptr },
         { "PING",     FuncPing,    nullptr },
         { "UPGRADE",  FuncUpgrade, nullptr },
+        { "INFO",     FuncInfo,    nullptr },
         { nullptr,    nullptr,     nullptr }
     };
 }
@@ -109,4 +112,12 @@ bool SCPI::FuncUpgrade(pchar command)
     }
 
     return false;
+}
+
+
+bool SCPI::FuncInfo(pchar command)
+{
+    PageDebug::self->labelSTM32->SetLabel(command);
+
+    return true;
 }

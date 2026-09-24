@@ -19,4 +19,7 @@ public:
     wxStaticText *labelButtonStart = nullptr;
     wxStaticText *labelButtonStop = nullptr;
     wxStaticText *labelEncoder = nullptr;
+
+    wxStaticText *labelIP = nullptr;                // Здесь выводим собственный сетевой адрес
+    wxStaticText *labelSTM32 = nullptr;             // Здесь выводим информацию о прошивке STM32
 };
