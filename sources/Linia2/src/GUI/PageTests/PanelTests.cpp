@@ -116,7 +116,7 @@ void PanelTests::OnEventRightClickListItem(wxListEvent &event)
 
     long index = event.GetIndex();
 
-    Test *test = (Test *)list->GetUserData(index);
+    test = (Test *)list->GetUserData(index);
 
     wxMenu menu;
 
@@ -124,21 +124,30 @@ void PanelTests::OnEventRightClickListItem(wxListEvent &event)
     menu.Append(header);
     header->Enable(false);
 
-    menu.Append(1001, L("Применить"));
+    menu.Append(MENU_APPLY, L("Применить"));
+    menu.Append(MENU_DELETE, L("Удалить"));
+    menu.Append(MENU_EDIT, L("Редактировать"));
 
-    menu.Bind(wxEVT_MENU, [this, test](wxCommandEvent &e)
-        {
-            switch (e.GetId())
-            {
-            case 1001:
-
-                PanelViewTest::self->SetTest(test);
-
-                break;
-            }
-        });
+    menu.Bind(wxEVT_MENU, &PanelTests::OnEventMenu, this);
 
     PopupMenu(&menu);
+}
+
+
+void PanelTests::OnEventMenu(wxCommandEvent &event)
+{
+    switch (event.GetId())
+    {
+    case MENU_APPLY:
+            PanelViewTest::self->SetTest(test);
+        break;
+
+    case MENU_DELETE:
+        break;
+
+    case MENU_EDIT:
+        break;
+    }
 }
 
 

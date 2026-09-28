@@ -36,4 +36,14 @@ private:
     void OnEventRightClickListItem(wxListEvent &);
     void OnEventLeftClickListItem(wxMouseEvent &);
     void OnEventMouseMove(wxMouseEvent &);
+    void OnEventMenu(wxCommandEvent &);
+
+    Test *test = nullptr;
+
+    enum
+    {
+        MENU_APPLY = 10001,    // "Применить"
+        MENU_DELETE,            // "Удалить"
+        MENU_EDIT               // "Редактирование"
+    };
 };

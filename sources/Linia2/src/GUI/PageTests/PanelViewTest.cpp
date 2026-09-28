@@ -359,25 +359,10 @@ void PanelViewTest::CreateControls()
     }
 
     {
-        CreateButton(&btnEditEnter, this, L("Редактировать"), { 600, 40 }, bcScanNumberPoints->GetSize(), [this](wxCommandEvent &)
+        CreateButton(&btnEditSave, this, L("Сохранить"), { 600, 40 }, bcScanNumberPoints->GetSize(), [this](wxCommandEvent &)
             {
                 if (InModeEdit())
                 {
-
-                }
-                else
-                {
-                    btnEditEnter->Hide();
-                    btnEditSave->Show();
-                    btnEditExit->Show();
-                }
-            });
-
-        CreateButton(&btnEditSave, this, L("Сохранить"), { btnEditEnter->GetPosition().x, 80 }, btnEditEnter->GetSize(), [this](wxCommandEvent &)
-            {
-                if (InModeEdit())
-                {
-                    btnEditEnter->Show();
                     btnEditSave->Hide();
                     btnEditExit->Hide();
                 }
@@ -389,11 +374,10 @@ void PanelViewTest::CreateControls()
 
         btnEditSave->Hide();
 
-        CreateButton(&btnEditExit, this, L("Выход"), { btnEditEnter->GetPosition().x, 120 }, btnEditEnter->GetSize(), [this](wxCommandEvent &)
+        CreateButton(&btnEditExit, this, L("Выход"), { btnEditSave->GetPosition().x, 80 }, btnEditSave->GetSize(), [this](wxCommandEvent &)
             {
                 if (InModeEdit())
                 {
-                    btnEditEnter->Show();
                     btnEditSave->Hide();
                     btnEditExit->Hide();
                 }
@@ -585,5 +569,5 @@ void PanelViewTest::CloseCover()
 
 bool PanelViewTest::InModeEdit() const
 {
-    return !btnEditEnter->IsShown();
+    return !btnEditSave->IsShown();
 }

@@ -34,7 +34,6 @@ private:
     Commutator *commutator = nullptr;                   // Управление коммутатором
     StaticText *txtCover = nullptr;                     // Индикатор состояния крышки
     bool cover_is_opened = false;
-    Button *btnEditEnter = nullptr;                     // Войти в режим редактирования
     Button *btnEditSave = nullptr;                      // Сохранить результат редактирования
     Button *btnEditExit = nullptr;                      // Выйти из режима редактирования
 
