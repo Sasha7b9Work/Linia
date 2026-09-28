@@ -17,7 +17,21 @@ PageSettings::PageSettings(Notebook *board) :
     BoxSizerHor *sizer1 = new BoxSizerHor();
 
     {
-        btnFileManager = new Button(this, L("Мой компьютер"));
+        Button *btn = new Button(this, L("Мой компьютер"));
+        sizer1->AddWidget(btn);
+        btn->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
+            {
+
+            });
+    }
+
+    {
+        Button *btn = new Button(this, L("Калибровка"));
+        sizer1->AddWidget(btn);
+        btn->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
+            {
+
+            });
     }
 
     sizer_main->AddSizer(sizer1);

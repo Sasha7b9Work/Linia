@@ -85,6 +85,26 @@
         }
     },
     
+    "DARL" : {
+        "name" : "Транзистор Дарлингтона",
+        "DC Diode Fwd" : {
+            "name" : "База-Коллектор прямое",
+            "settings" : {
+                "IntegTime" : [ "1", "2", "3" ]
+            }
+        }
+    },
+
+    "THYR" : {
+        "name" : "Тиристор",
+        "DC Diode Fwd" : {
+            "name" : "База-Коллектор прямое",
+            "settings" : {
+                "IntegTime" : [ "1", "2", "3" ]
+            }
+        }
+    },
+    
     "DIOD" : {
         "name" : "Диод",
         "DC Diode Fwd" : {

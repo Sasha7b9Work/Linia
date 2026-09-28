@@ -12,6 +12,9 @@ public:
 
     static PageSettings *self;
 
-    Button *btnFileManager = nullptr;
+private:
+
+    void OnEventButtonFileManager(wxCommandEvent &);
+    void OnEventButtonCalibrate(wxCommandEvent &);
 };
 
