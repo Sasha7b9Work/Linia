@@ -1,6 +1,8 @@
 ﻿// 2026/08/19 10:59:39 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/PageDebug/Notebook/PageChip.h"
+#include "GUI/Controls/Button.h"
+#include "Utils/Timer.h"
 #include <thread>
 
 /*

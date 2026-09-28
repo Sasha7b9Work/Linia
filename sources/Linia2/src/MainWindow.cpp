@@ -12,11 +12,10 @@
 #include "GUI/PageReports/PageReports.h"
 #include "GUI/PageSettings/PageSettings.h"
 #include "GUI/PageTables/PageTables.h"
-#include "GUI/Controls/Dialog.h"
 #include "GUI/Controls/Notebook.h"
 #pragma warning(push, 0)
-#include <wx/sizer.h>
-#include <wx/statline.h>
+    #include <wx/sizer.h>
+    #include <wx/statline.h>
 #pragma warning(pop)
 
 MainWindow *MainWindow::self = nullptr;

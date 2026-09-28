@@ -1,6 +1,6 @@
 ﻿// 2026/3/16 21:10:11 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
-#include "GUI/Controls/DraggedWindow.h"
+#include "GUI/Dialogs/DraggedWindow.h"
 #include "Settings/Settings.h"
 #include "MainWindow.h"
 #include "GUI/PageMeasures/Graphics/AutoCursors.h"

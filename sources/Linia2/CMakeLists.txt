@@ -1,7 +1,7 @@
 ﻿# 2023/07/04 15:47:47 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (Linia2)
 
-set(CMAKE_UNITY_BUILD ON)
+set(CMAKE_UNITY_BUILD OFF)
 
 set(CMAKE_UNITY_BUILD_BATCH_SIZE 20)
 
@@ -85,6 +85,7 @@ file(GLOB IPPP_KEYBOARD                 src/IPPP/Keyboard/*.*)
 file(GLOB IPPP_REAL                     src/IPPP/Real/*.*)
 file(GLOB IPPP_SCPI                     src/IPPP/SCPI/*.*)
 file(GLOB GUI_CONTROLS                  src/GUI/Controls/*.*)
+file(GLOB GUI_DIALOGS                   src/GUI/Dialogs/*.*)
 file(GLOB GUI_ARCHIVE                   src/GUI/PageArchive/*.*)
 file(GLOB GUI_DEBUG                     src/GUI/PageDebug/*.*)
 file(GLOB GUI_DEBUG_NOTEBOOK            src/GUI/PageDebug/Notebook/*.*)
@@ -135,6 +136,7 @@ source_group(IPPP/Keyboard                    FILES ${IPPP_KEYBOARD})
 source_group(IPPP/Real                        FILES ${IPPP_REAL})
 source_group(IPPP/SCPI                        FILES ${IPPP_SCPI})
 source_group(GUI/Controls                     FILES ${GUI_CONTROLS})
+source_group(GUI/Dialogs                      FILES ${GUI_DIALOGS})
 source_group(GUI/PageArchive                  FILES ${GUI_ARCHIVE})
 source_group(GUI/PageDebug                    FILES ${GUI_DEBUG})
 source_group(GUI/PageDebug/Notebook           FILES ${GUI_DEBUG_NOTEBOOK})
@@ -180,6 +182,7 @@ add_executable(${PROJECT_NAME}
     ${IPPP_SCPI}
     ${MAIN_PANEL}
     ${GUI_CONTROLS}
+    ${GUI_DIALOGS}
     ${GUI_ARCHIVE}
     ${GUI_DEBUG}
     ${GUI_DEBUG_NOTEBOOK}
