@@ -34,6 +34,19 @@ private:
     Commutator *commutator = nullptr;                   // Управление коммутатором
     StaticText *txtCover = nullptr;                     // Индикатор состояния крышки
     bool cover_is_opened = false;
+    Button *btnEditEnter = nullptr;                     // Войти в режим редактирования
+    Button *btnEditSave = nullptr;                      // Сохранить результат редактирования
+    Button *btnEditExit = nullptr;                      // Выйти из режима редактирования
+
+    MeasurerVoltageCurrent *measurerBase = nullptr;
+    SourceVoltageCurrent *sourceVoltageCurrentBase = nullptr;
+
+    MeasurerVoltageCurrent *measurerSubstrate = nullptr;
+    SourceVoltageCurrent *sourceVoltateCurrentSubstrate = nullptr;
+
+    Ampermeter *ampermeterCollector = nullptr;
+    Voltmeter *voltmeterCollector = nullptr;
+    SourceVoltage *sourceVoltageCollector = nullptr;
 
     void OnEventPaint(wxPaintEvent &);
 
@@ -78,15 +91,10 @@ private:
     // Рисует линию длиной length под углом angleDeg
     void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &dc);
 
+    void CreateButton(Button **, wxWindow *parent, const wxString &, const wxPoint &, const wxSize &, std::function<void(wxCommandEvent &)> onClick);
+
     wxPoint GetCenter() const;
 
-    MeasurerVoltageCurrent *measurerBase = nullptr;
-    SourceVoltageCurrent *sourceVoltageCurrentBase = nullptr;
-
-    MeasurerVoltageCurrent *measurerSubstrate = nullptr;
-    SourceVoltageCurrent *sourceVoltateCurrentSubstrate = nullptr;
-
-    Ampermeter *ampermeterCollector = nullptr;
-    Voltmeter *voltmeterCollector = nullptr;
-    SourceVoltage *sourceVoltageCollector = nullptr;
+    // Если true - находимся в режиме редактирования теста
+    bool InModeEdit() const;
 };

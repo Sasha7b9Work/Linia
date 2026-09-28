@@ -359,6 +359,54 @@ void PanelViewTest::CreateControls()
     }
 
     {
+        CreateButton(&btnEditEnter, this, L("Редактировать"), { 600, 40 }, bcScanNumberPoints->GetSize(), [this](wxCommandEvent &)
+            {
+                if (InModeEdit())
+                {
+
+                }
+                else
+                {
+                    btnEditEnter->Hide();
+                    btnEditSave->Show();
+                    btnEditExit->Show();
+                }
+            });
+
+        CreateButton(&btnEditSave, this, L("Сохранить"), { btnEditEnter->GetPosition().x, 80 }, btnEditEnter->GetSize(), [this](wxCommandEvent &)
+            {
+                if (InModeEdit())
+                {
+                    btnEditEnter->Show();
+                    btnEditSave->Hide();
+                    btnEditExit->Hide();
+                }
+                else
+                {
+
+                }
+            });
+
+        btnEditSave->Hide();
+
+        CreateButton(&btnEditExit, this, L("Выход"), { btnEditEnter->GetPosition().x, 120 }, btnEditEnter->GetSize(), [this](wxCommandEvent &)
+            {
+                if (InModeEdit())
+                {
+                    btnEditEnter->Show();
+                    btnEditSave->Hide();
+                    btnEditExit->Hide();
+                }
+                else
+                {
+
+                }
+            });
+
+        btnEditExit->Hide();
+    }
+
+    {
         if (!bcTypeSemiconductor)
         {
             wxArrayString titles;
@@ -376,6 +424,19 @@ void PanelViewTest::CreateControls()
     }
 
 #undef CREATE_BUTTONS_COMBO
+}
+
+
+void PanelViewTest::CreateButton(Button **btn, wxWindow *parent,
+    const wxString &label, const wxPoint &pos,
+    const wxSize &size, std::function<void(wxCommandEvent &)> onClick)
+{
+    *btn = new Button(parent, label, size);
+    (*btn)->SetPosition(pos);
+    (*btn)->Bind(wxEVT_BUTTON, [onClick](wxCommandEvent &event)
+        {
+            onClick(event);
+        });
 }
 
 
@@ -519,4 +580,10 @@ void PanelViewTest::CloseCover()
     txtCover->SetBackgroundColour(GetBackgroundColour());
 
     txtCover->Refresh();
+}
+
+
+bool PanelViewTest::InModeEdit() const
+{
+    return !btnEditEnter->IsShown();
 }
