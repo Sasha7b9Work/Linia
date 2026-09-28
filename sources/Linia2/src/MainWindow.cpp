@@ -13,6 +13,7 @@
 #include "GUI/PageSettings/PageSettings.h"
 #include "GUI/PageTables/PageTables.h"
 #include "GUI/Controls/Notebook.h"
+#include "GUI/Dialogs/Dialog.h"
 #pragma warning(push, 0)
     #include <wx/sizer.h>
     #include <wx/statline.h>
