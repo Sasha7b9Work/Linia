@@ -30,13 +30,14 @@ private:
 
     ButtonsCombo *bcScanMode = nullptr;                 // Режим развёртки
     ButtonsCombo *bcScanNumberPoints = nullptr;         // Количество точек в одной ВАХ
-    ButtonsCombo *bcTypeSemiconductor = nullptr;        // npn или pnp
     ComboInput *bcBaseNumMeasures = nullptr;            // Количество измерений
     Commutator *commutator = nullptr;                   // Управление коммутатором
     StaticText *txtCover = nullptr;                     // Индикатор состояния крышки
     bool cover_is_opened = false;
     Button *btnEditSave = nullptr;                      // Сохранить результат редактирования
     Button *btnEditExit = nullptr;                      // Выйти из режима редактирования
+    StaticBox *boxScan = nullptr;                       // "Развёртка"
+    StaticBox *boxCover = nullptr;                      // "Крышка"
 
     MeasurerVoltageCurrent *measurerBase = nullptr;
     SourceVoltageCurrent *sourceVoltageCurrentBase = nullptr;
@@ -86,6 +87,8 @@ private:
 
     // Создать элементы управляения для данного теста
     void CreateControls();
+    void ShowControls();
+    void HideControls();
 
     void CreateButton(Button **, wxWindow *parent, const wxString &, const wxPoint &, const wxSize &, std::function<void(wxCommandEvent &)> onClick);
 
