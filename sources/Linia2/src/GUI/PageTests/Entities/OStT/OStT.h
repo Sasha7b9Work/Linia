@@ -82,6 +82,12 @@ protected:
     // Повернуть точку p1 вокруг точки p2 на угол angleDeg (в градусах)
     wxPoint RotatePoint(const wxPoint &p1, const wxPoint &p2, double angleDeg);
 
+    // p1, p2 — точки, задающие направление
+    // length — длина стрелки (перьев)
+    // angleDeg — угол отклонения от направления p1->p2 (в градусах)
+    // Возвращает точку на расстоянии length от p2, повёрнутую на angleDeg
+    wxPoint PointAtAngle(const wxPoint &p1, const wxPoint &p2, double length, double angleDeg);
+
 private:
 
     Test *test = nullptr;

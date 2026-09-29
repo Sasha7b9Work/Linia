@@ -35,14 +35,18 @@ void OStT::DrawAnchorPoint(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
 void OStT::DrawArrow(wxAutoBufferedPaintDC &dc, const wxPoint &p1, const wxPoint &p2)
 {
-    wxPoint p = RotatePoint(p1, p2, 30.0);
+    double length = 15.0;
+    double angle = 20.0;
+
+    wxPoint p = PointAtAngle(p1, p2, length, angle);
 
     dc.DrawLine(p, p2);
 
-    p = RotatePoint(p1, p2, -30.0);
+    p = PointAtAngle(p1, p2, length, -angle);
 
     dc.DrawLine(p, p2);
 }
+
 
 wxPoint OStT::RotatePoint(const wxPoint &p1, const wxPoint &p2, double angleDeg)
 {
@@ -61,8 +65,39 @@ wxPoint OStT::RotatePoint(const wxPoint &p1, const wxPoint &p2, double angleDeg)
     double newDy = dx * sinA + dy * cosA;
 
     // Новая точка
-    return wxPoint(
+    return wxPoint{
         p2.x + static_cast<int>(newDx + 0.5),
         p2.y + static_cast<int>(newDy + 0.5)
+    };
+}
+
+
+wxPoint OStT::PointAtAngle(const wxPoint &p1, const wxPoint &p2, double length, double angleDeg)
+{
+    // Вектор от p1 к p2 (направление стрелки)
+    double dx = p1.x - p2.x;
+    double dy = p1.y - p2.y;
+
+    // Длина вектора
+    double len = std::sqrt(dx * dx + dy * dy);
+    if (len < 1e-6) return p2;  // защита от нулевой длины
+
+    // Нормализуем
+    dx /= len;
+    dy /= len;
+
+    // Угол в радианах
+    double angleRad = angleDeg * M_PI / 180.0;
+    double cosA = std::cos(angleRad);
+    double sinA = std::sin(angleRad);
+
+    // Поворачиваем единичный вектор
+    double newDx = dx * cosA - dy * sinA;
+    double newDy = dx * sinA + dy * cosA;
+
+    // Точка на расстоянии length от p2
+    return wxPoint(
+        p2.x + static_cast<int>(newDx * length + 0.5),
+        p2.y + static_cast<int>(newDy * length + 0.5)
     );
 }
