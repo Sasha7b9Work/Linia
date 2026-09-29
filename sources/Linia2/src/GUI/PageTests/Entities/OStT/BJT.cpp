@@ -30,9 +30,10 @@ void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self, in
     self.point_emitter = driwer.GetCoord();
     dc.DrawCircle(self.point_emitter, r);
 
-
     dc.DrawText("E", { self.point_emitter.x + 7, self.point_emitter.y - 7 });
-    dc.DrawCircle(c, RADIUS);
+
+    self.DrawCase(dc, c);
+
     x_vert = c.x - RADIUS * 10 / 18;
     wxPoint coord_base{ 90, c.y };
     driwer.MoveTo(90, c.y);

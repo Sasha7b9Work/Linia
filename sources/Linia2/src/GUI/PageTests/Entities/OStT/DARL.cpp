@@ -9,7 +9,7 @@ DARL::DARL(Test *test) : OStT3(test)
 }
 
 
-void DARL::Draw(wxAutoBufferedPaintDC &, const wxPoint &)
+void DARL::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-
+    DrawCase(dc, c);
 }

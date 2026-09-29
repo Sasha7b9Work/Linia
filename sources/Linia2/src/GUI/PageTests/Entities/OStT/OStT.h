@@ -70,7 +70,8 @@ protected:
     // Рисует линию длиной length под углом angleDeg
     void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &);
 
-    void DrawCircle(wxAutoBufferedPaintDC &, const wxPoint &c, int &x_col, int &y_col);
+    // Нарисовать "корпус" транзистора
+    void DrawCase(wxAutoBufferedPaintDC &, const wxPoint &c);
 
 private:
 

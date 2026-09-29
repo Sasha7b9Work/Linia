@@ -17,8 +17,5 @@ void FET::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
 void FET::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self)
 {
-    int x_col = 0;
-    int y_col = 0;
-
-    self.DrawCircle(dc, c, x_col, y_col);
+    self.DrawCase(dc, c);
 }
