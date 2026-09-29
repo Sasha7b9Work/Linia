@@ -13,4 +13,6 @@ FETS::FETS(Test *test) : FET(test)
 void FETS::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
     FET::DrawCommon(dc, c);
+
+    FuncAfterDraw(dc);
 }

@@ -156,3 +156,33 @@ std::vector<wxPoint> OStT::IntersectLineCircle(const wxPoint &p1, const wxPoint 
 
     return result;
 }
+
+
+void OStT::FuncAfterDraw(wxAutoBufferedPaintDC &dc)
+{
+    DrawAnchorPoints(dc);
+}
+
+
+void OStT::DrawAnchorPoints(wxAutoBufferedPaintDC &dc)
+{
+    DrawAnchorPoint(dc, GetPointCollector());
+
+    bool receive = false;
+
+    wxPoint point = GetPointBase(receive);
+
+    if (receive)
+    {
+        DrawAnchorPoint(dc, point);
+    }
+
+    point = GetPointSubstrate(receive);
+
+    if (receive)
+    {
+        DrawAnchorPoint(dc, point);
+    }
+
+    DrawAnchorPoint(dc, GetPointGround());
+}

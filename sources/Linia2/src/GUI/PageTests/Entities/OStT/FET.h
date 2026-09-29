@@ -19,7 +19,7 @@ public:
 
 private:
 
-    TypeFET::E type = TypeFET::ChannelN;
+    TypeFET::E type = TypeFET::ChannelP;
 
     // Нарисовать затвор
     void DrawGate(wxAutoBufferedPaintDC &, const wxPoint &);
@@ -34,4 +34,11 @@ private:
     int GateDY();
 
     int DrainDY();
+
+    virtual wxPoint GetPointBase(bool &result) const
+    {
+        result = true;
+
+        return point_base;
+    }
 };

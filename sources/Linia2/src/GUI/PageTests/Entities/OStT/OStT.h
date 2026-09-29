@@ -44,7 +44,7 @@ public:
     }
 
     // Точка привязки земли/эмиттера
-    wxPoint GEtPointGround() const              // Это земля или эмиттер
+    wxPoint GetPointGround() const              // Это земля или эмиттер
     {
         return point_emitter;
     }
@@ -64,6 +64,8 @@ protected:
     static const int y_ground = 720;        // Координата y отрисовки земли
     static const int DR = 40;               // На столько пикселей выступает точка привязки за окружность корпуса
 
+    void FuncAfterDraw(wxAutoBufferedPaintDC &);
+
     // Нарисовать значок земли
     void DrawGround(int x, int y, wxAutoBufferedPaintDC &);
 
@@ -73,7 +75,10 @@ protected:
     // Нарисовать "корпус" транзистора
     void DrawCase(wxAutoBufferedPaintDC &, const wxPoint &c);
 
+    // Нарисовать точку привязки
     void DrawAnchorPoint(wxAutoBufferedPaintDC &, const wxPoint &);
+
+    void DrawAnchorPoints(wxAutoBufferedPaintDC &);
 
     // Нарисовать стрелку из точки 1 в точку 2
     void DrawArrow(wxAutoBufferedPaintDC &, const wxPoint &p1, const wxPoint &p2);

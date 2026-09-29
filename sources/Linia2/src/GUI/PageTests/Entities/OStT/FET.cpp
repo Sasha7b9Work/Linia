@@ -12,6 +12,8 @@ FET::FET(Test *test) : OStT(test)
 void FET::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
     DrawCommon(dc, c);
+
+    FuncAfterDraw(dc);
 }
 
 
@@ -37,6 +39,8 @@ void FET::DrawGate(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
     dc.DrawLine(p1, p2);
 
+    point_base = p2;
+
     if (type == TypeFET::ChannelN)
     {
         DrawArrow(dc, p2, p1);
@@ -59,10 +63,14 @@ void FET::DrawSourceDrain(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
     dc.DrawLine(p1, p2);
 
+    point_collector = p2;
+
     p1.y = c.y + DrainDY();
     p2.y = p1.y;
 
     dc.DrawLine(p1, p2);
+
+    point_emitter = p2;
 }
 
 
