@@ -54,9 +54,14 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
         // Устанавливаем цвет текста
         dc.SetTextForeground(*wxBLACK);
 
-        ostt = CreateOStT();
+        if (!ostt)
+        {
+            ostt = CreateOStT();
+        }
 
         CreateControls();
+
+        ostt->Draw(dc, GetCenter());
 
         // Устанавливаем шрифт (опционально)
         dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));

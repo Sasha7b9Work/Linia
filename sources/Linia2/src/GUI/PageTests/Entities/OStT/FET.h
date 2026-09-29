@@ -12,7 +12,7 @@ public:
 
     FET(Test *);
 
-    virtual void Draw(wxAutoBufferedPaintDC &) override;
+    virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
 
 private:
 };

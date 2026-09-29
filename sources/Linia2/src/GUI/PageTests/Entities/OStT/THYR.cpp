@@ -9,7 +9,7 @@ THYR::THYR(Test *test) : OStT3(test)
 }
 
 
-void THYR::Draw(wxAutoBufferedPaintDC &)
+void THYR::Draw(wxAutoBufferedPaintDC &, const wxPoint &)
 {
 
 }

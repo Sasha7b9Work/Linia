@@ -9,7 +9,7 @@ BJTS::BJTS(Test *test) : OStT4(test)
 }
 
 
-void BJTS::Draw(wxAutoBufferedPaintDC &)
+void BJTS::Draw(wxAutoBufferedPaintDC &, const wxPoint &)
 {
 
 }

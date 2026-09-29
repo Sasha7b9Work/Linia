@@ -9,7 +9,7 @@ BJT::BJT(Test *test) : OStT3(test)
 }
 
 
-void BJT::Draw(wxAutoBufferedPaintDC &)
+void BJT::Draw(wxAutoBufferedPaintDC &, const wxPoint &)
 {
 
 }

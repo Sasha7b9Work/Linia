@@ -9,7 +9,7 @@ DIOD::DIOD(Test *test) : OStT2(test)
 }
 
 
-void DIOD::Draw(wxAutoBufferedPaintDC &)
+void DIOD::Draw(wxAutoBufferedPaintDC &, const wxPoint &)
 {
 
 }

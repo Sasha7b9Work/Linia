@@ -15,7 +15,12 @@ class OStT
 {
 public:
 
-    virtual void Draw(wxAutoBufferedPaintDC &) = 0;
+    virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) = 0;
+
+    wxPoint GetPointBase() const;
+    wxPoint GetPointCollector() const;
+    wxPoint GetPointSubstrate() const;
+    wxPoint GEtPointGround() const;             // Это земля или эмиттер
 
 protected:
 
