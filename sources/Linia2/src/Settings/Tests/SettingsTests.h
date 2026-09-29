@@ -14,6 +14,7 @@ struct TypeCategory
         BJT4,           // Биполярный транзистор с четвёртым выводом
         JFET,           // Полевой транзистор
         JFET4,          // Полевой транзисото с четвёртым выводм
+        Darlington,
         Thyristor,
         Diod,
         Resistor,
