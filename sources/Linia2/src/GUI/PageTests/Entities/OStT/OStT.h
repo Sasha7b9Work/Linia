@@ -63,6 +63,7 @@ protected:
 
     static const int y_ground = 720;        // Координата y отрисовки земли
     static const int r = 5;
+    static const int DR = 40;               // На столько пикселей выступает точка привязки за окружность корпуса
 
     // Нарисовать значок земли
     void DrawGround(int x, int y, wxAutoBufferedPaintDC &);
@@ -72,6 +73,8 @@ protected:
 
     // Нарисовать "корпус" транзистора
     void DrawCase(wxAutoBufferedPaintDC &, const wxPoint &c);
+
+    void DrawAnchorPoint(wxAutoBufferedPaintDC &, const wxPoint &);
 
 private:
 

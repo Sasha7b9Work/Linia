@@ -15,4 +15,20 @@ public:
     virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
 
     static void DrawCommon(wxAutoBufferedPaintDC &, const wxPoint &, OStT &self);
+
+private:
+
+    // Нарисовать затвор
+    static void DrawGate(wxAutoBufferedPaintDC &, const wxPoint &, OStT &self);
+
+    // Нарисовать исток и сток
+    static void DrawSourceDrain(wxAutoBufferedPaintDC &, const wxPoint &, OStT &self);
+
+    // Смещение линии затвора относительно центра по X
+    static int GateDX();
+
+    // Смещение линии затвора относительно центра по Y
+    static int GateDY();
+
+    static int DrainDY();
 };

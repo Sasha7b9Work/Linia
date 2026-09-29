@@ -25,3 +25,9 @@ void OStT::DrawCase(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
     dc.DrawCircle(c, RADIUS);
 }
+
+
+void OStT::DrawAnchorPoint(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+{
+    dc.DrawCircle(c, r);
+}
