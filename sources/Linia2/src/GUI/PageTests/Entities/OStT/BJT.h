@@ -15,7 +15,7 @@ public:
     virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
 
     // Нарисовать общую часть для BJT и BJTS
-    static void DrawCommon(wxAutoBufferedPaintDC &, const wxPoint &, OStT &self);
+    static void DrawCommon(wxAutoBufferedPaintDC &, const wxPoint &, OStT &self, int &x_vert, int &y_ground);
 
 private:
 };
