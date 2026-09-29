@@ -37,6 +37,15 @@ void FET::DrawGate(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
     dc.DrawLine(p1, p2);
 
+    if (type == TypeFET::ChannelN)
+    {
+        DrawArrow(dc, p2, p1);
+    }
+    else if (type == TypeFET::ChannelP)
+    {
+        DrawArrow(dc, p1, { c.x - RADIUS, c.y + DrainDY() });
+    }
+
     DrawAnchorPoint(dc, p2);
 }
 

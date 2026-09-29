@@ -1,4 +1,4 @@
 // 2025/10/03 21:36:38 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 
-unsigned int VERSION_BUILD = 2752 ;
-const char *DATE_BUILD = "2026-09-29 16:31:39" ;
+unsigned int VERSION_BUILD = 2753 ;
+const char *DATE_BUILD = "2026-09-29 16:37:56" ;
