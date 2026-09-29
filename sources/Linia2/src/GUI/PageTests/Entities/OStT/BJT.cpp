@@ -21,22 +21,18 @@ void BJT::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
 void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self, int &x_vert, int &y_ground)
 {
+    int x_col = 0;
+    int y_col = 0;
+
+    self.DrawCircle(dc, c, x_col, y_col);
+
     int r = 5;
 
-    int x_col = c.x + RADIUS / 2;   // / Координаты точки коммутации
-    int y_col = c.y - 2 * RADIUS;   // / с коллектором
-
-    LineDriwer driwer(dc, x_col, y_col);
-    driwer.LineTo(c.x + RADIUS / 2, c.y + 2 * RADIUS);                  // Вертикальная линия, которая выходит из коллектора и эмиттера
-    self.DrawGround(driwer.GetX(), driwer.GetY(), dc);
-    driwer.MoveOnDY(-20);
-    self.point_emitter = driwer.GetCoord();
-    dc.DrawCircle(self.point_emitter, r);
     dc.DrawText("E", { self.point_emitter.x + 7, self.point_emitter.y - 7 });
     dc.DrawCircle(c, RADIUS);
     x_vert = c.x - RADIUS * 10 / 18;                          // Здесь заканчивается линия базы внутри окружности
     wxPoint coord_base{ 90, c.y };
-    driwer.MoveTo(90, c.y);
+    LineDriwer driwer(dc, 90, c.y);
     driwer.LineTo(x_vert, c.y);                                         // База
     driwer.MoveOnDX(-50);
     self.point_base = driwer.GetCoord();

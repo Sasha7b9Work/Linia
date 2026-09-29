@@ -61,14 +61,16 @@ protected:
     wxPoint point_substrate;
 
     // Нарисовать значок земли
-    void DrawGround(int x, int y, wxAutoBufferedPaintDC &dc);
+    void DrawGround(int x, int y, wxAutoBufferedPaintDC &);
 
     // Рисует линию длиной length под углом angleDeg
-    void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &dc);
+    void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &);
 
 private:
 
     Test *test = nullptr;
+
+    void DrawCircle(wxAutoBufferedPaintDC &, const wxPoint &c, int &x_col, int &y_col);
 };
 
 
