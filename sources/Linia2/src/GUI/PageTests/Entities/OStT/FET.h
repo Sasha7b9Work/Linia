@@ -10,7 +10,7 @@ class FET : public OStT3
 {
 public:
 
-    FET();
+    FET(Test *);
 
     virtual void Draw(wxAutoBufferedPaintDC &) override;
 

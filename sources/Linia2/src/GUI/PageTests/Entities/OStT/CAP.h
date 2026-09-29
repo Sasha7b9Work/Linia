@@ -10,7 +10,7 @@ class CAP : public OStT2
 {
 public:
 
-    CAP();
+    CAP(Test *);
 
     virtual void Draw(wxAutoBufferedPaintDC &) override;
 

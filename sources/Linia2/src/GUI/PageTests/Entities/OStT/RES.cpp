@@ -3,7 +3,7 @@
 #include "GUI/PageTests/Entities/OStT/RES.h"
 
 
-RES::RES() : OStT2()
+RES::RES(Test *test) : OStT2(test)
 {
 
 }

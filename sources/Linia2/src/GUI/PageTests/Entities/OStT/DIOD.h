@@ -10,7 +10,7 @@ class DIOD : public OStT2
 {
 public:
 
-    DIOD();
+    DIOD(Test *);
 
     virtual void Draw(wxAutoBufferedPaintDC &) override;
 

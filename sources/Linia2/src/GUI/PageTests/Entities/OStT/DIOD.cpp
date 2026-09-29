@@ -3,7 +3,7 @@
 #include "GUI/PageTests/Entities/OStT/DIOD.h"
 
 
-DIOD::DIOD() : OStT2()
+DIOD::DIOD(Test *test) : OStT2(test)
 {
 
 }

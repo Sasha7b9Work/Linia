@@ -3,7 +3,7 @@
 #include "GUI/PageTests/Entities/OStT/DARL.h"
 
 
-DARL::DARL() : OStT3()
+DARL::DARL(Test *test) : OStT3(test)
 {
 
 }

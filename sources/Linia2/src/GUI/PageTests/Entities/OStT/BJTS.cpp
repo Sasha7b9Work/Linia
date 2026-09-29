@@ -3,7 +3,7 @@
 #include "GUI/PageTests/Entities/OStT/BJTS.h"
 
 
-BJTS::BJTS() : OStT4()
+BJTS::BJTS(Test *test) : OStT4(test)
 {
 
 }

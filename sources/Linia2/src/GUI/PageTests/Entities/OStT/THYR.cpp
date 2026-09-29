@@ -3,7 +3,7 @@
 #include "GUI/PageTests/Entities/OStT/THYR.h"
 
 
-THYR::THYR() : OStT3()
+THYR::THYR(Test *test) : OStT3(test)
 {
 
 }

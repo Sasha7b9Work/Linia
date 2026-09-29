@@ -8,6 +8,9 @@
 // Object Subject to Testing - ОПИ - объект, подлежащий исследованию
 
 
+class Test;
+
+
 class OStT
 {
 public:
@@ -16,7 +19,11 @@ public:
 
 protected:
 
-    OStT();
+    OStT(Test *_test) : test(_test) { }
+
+private:
+
+    Test *test = nullptr;
 };
 
 
@@ -26,6 +33,9 @@ protected:
 class OStT2 : public OStT
 {
 public:
+
+    OStT2(Test *test) : OStT(test) { }
+
 private:
 };
 
@@ -36,7 +46,9 @@ private:
 class OStT3 : public OStT
 {
 public:
-    OStT3();
+
+    OStT3(Test *test) : OStT(test) { }
+
 private:
 };
 
@@ -47,5 +59,8 @@ private:
 class OStT4 : public OStT
 {
 public:
+
+    OStT4(Test *test) : OStT(test) { }
+
 private:
 };

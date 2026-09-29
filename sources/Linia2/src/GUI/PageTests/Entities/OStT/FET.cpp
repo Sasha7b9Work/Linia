@@ -3,7 +3,7 @@
 #include "GUI/PageTests/Entities/OStT/FET.h"
 
 
-FET::FET() : OStT3()
+FET::FET(Test *test) : OStT3(test)
 {
 
 }

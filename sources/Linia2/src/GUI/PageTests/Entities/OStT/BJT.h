@@ -10,7 +10,7 @@ class BJT : public OStT3
 {
 public:
 
-    BJT();
+    BJT(Test *);
 
     virtual void Draw(wxAutoBufferedPaintDC &) override;
 

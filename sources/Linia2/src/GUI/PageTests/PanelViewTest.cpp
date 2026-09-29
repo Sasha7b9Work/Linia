@@ -75,39 +75,39 @@ OStT *PanelViewTest::CreateOStT()
 {
     if (test->IsBJT())
     {
-        return new BJT();
+        return new BJT(test);
     }
     else if (test->IsBJTS())
     {
-        return new BJTS();
+        return new BJTS(test);
     }
     else if (test->IsFET())
     {
-        return new FET();
+        return new FET(test);
     }
     else if (test->IsFETS())
     {
-        return new FETS();
+        return new FETS(test);
     }
     else if (test->IsDARL())
     {
-        return new DARL();
+        return new DARL(test);
     }
     else if (test->IsTHYR())
     {
-        return new THYR();
+        return new THYR(test);
     }
     else if (test->IsDIOD())
     {
-        return new DIOD();
+        return new DIOD(test);
     }
     else if (test->IsRES())
     {
-        return new RES();
+        return new RES(test);
     }
     else if (test->IsCAP())
     {
-        return new CAP();
+        return new CAP(test);
     }
 
     LOG_ERROR("Incorrect type OStT");

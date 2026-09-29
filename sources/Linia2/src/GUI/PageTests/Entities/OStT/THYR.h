@@ -10,7 +10,7 @@ class THYR : public OStT3
 {
 public:
 
-    THYR();
+    THYR(Test *);
 
     virtual void Draw(wxAutoBufferedPaintDC &) override;
 

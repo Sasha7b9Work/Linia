@@ -10,7 +10,7 @@ class RES : public OStT2
 {
 public:
 
-    RES();
+    RES(Test *);
 
     virtual void Draw(wxAutoBufferedPaintDC &) override;
 
