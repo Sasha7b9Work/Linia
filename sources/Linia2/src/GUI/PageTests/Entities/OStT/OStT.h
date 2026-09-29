@@ -62,7 +62,6 @@ protected:
     wxPoint point_substrate;
 
     static const int y_ground = 720;        // Координата y отрисовки земли
-    static const int r = 5;
     static const int DR = 40;               // На столько пикселей выступает точка привязки за окружность корпуса
 
     // Нарисовать значок земли

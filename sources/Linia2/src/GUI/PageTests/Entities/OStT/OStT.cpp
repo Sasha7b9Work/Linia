@@ -29,7 +29,7 @@ void OStT::DrawCase(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
 void OStT::DrawAnchorPoint(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    dc.DrawCircle(c, r);
+    dc.DrawCircle(c, 5);
 }
 
 

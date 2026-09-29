@@ -28,7 +28,6 @@ void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, int &x_vert)
     DrawGround(driwer.GetX(), driwer.GetY(), dc);
     driwer.MoveOnDY(-20);
     point_emitter = driwer.GetCoord();
-    dc.DrawCircle(point_emitter, r);
 
     dc.DrawText("E", { point_emitter.x + 7, point_emitter.y - 7 });
 
@@ -40,7 +39,6 @@ void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, int &x_vert)
     driwer.LineTo(x_vert, c.y);                     // База
     driwer.MoveOnDX(-50);
     point_base = driwer.GetCoord();
-    dc.DrawCircle(point_base, r);
     dc.DrawText("B", { point_base.x - 3, point_base.y - 20 });
 
     {
@@ -99,7 +97,6 @@ void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, int &x_vert)
         driwer.MoveTo(x_col, y_col);
         driwer.MoveOnDY(25);
         point_collector = driwer.GetCoord();
-        dc.DrawCircle(point_collector, r);
         dc.DrawText("C", { point_collector.x + 7, point_collector.y - 9 });
         driwer.Restore();
         driwer.LineOnDX(355);

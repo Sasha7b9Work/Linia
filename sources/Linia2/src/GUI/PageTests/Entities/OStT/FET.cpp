@@ -43,10 +43,10 @@ void FET::DrawGate(wxAutoBufferedPaintDC &dc, const wxPoint &c)
     }
     else if (type == TypeFET::ChannelP)
     {
-        DrawArrow(dc, p1, { c.x - RADIUS, c.y + DrainDY() });
-    }
+        std::vector<wxPoint> points = IntersectLineCircle(p2, p1, c, RADIUS);
 
-    DrawAnchorPoint(dc, p2);
+        DrawArrow(dc, p1, points[0]);
+    }
 }
 
 
@@ -59,14 +59,10 @@ void FET::DrawSourceDrain(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
     dc.DrawLine(p1, p2);
 
-    DrawAnchorPoint(dc, p2);
-
     p1.y = c.y + DrainDY();
     p2.y = p1.y;
 
     dc.DrawLine(p1, p2);
-
-    DrawAnchorPoint(dc, p2);
 }
 
 
