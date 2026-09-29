@@ -289,8 +289,6 @@ void PanelViewTest::CreateControls()
 {
     commutator = new Commutator(this, { 10, 40 }, 171);
 
-    wxPoint c = GetCenter();
-
     int width = MeasurerSourcer::WIDTH_CONTROL;
 
 #define CREATE_BUTTONS_COMBO(name, parent, title, num, func, _x, _y)                                        \
