@@ -93,10 +93,4 @@ private:
 
     // Если true - находимся в режиме редактирования теста
     bool InModeEdit() const;
-
-    // Нарисовать значок земли
-    void DrawGround(int x, int y, wxAutoBufferedPaintDC &dc);
-
-    // Рисует линию длиной length под углом angleDeg
-    void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &dc);
 };

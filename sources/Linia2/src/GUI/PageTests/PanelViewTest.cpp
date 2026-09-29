@@ -130,7 +130,6 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
 
     LineDriwer driwer(dc, x_col, y_col);
     driwer.LineTo(c.x + radius_trans / 2, c.y + 2 * radius_trans);          // Вертикальная линия, которая выходит из коллектора и эмиттера
-    DrawGround(driwer.GetX(), driwer.GetY(), dc);
     driwer.MoveOnDY(-20);
     point_emitter = driwer.GetCoord();
     dc.DrawCircle(point_emitter, r);
@@ -165,27 +164,6 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
 
             dc.DrawLine(x_vert, c.y - dy, xx, y_top);                  // Верхняя наклонная линия (коллектор)
             dc.DrawLine(x_vert, c.y + dy, xx, y_bottom);               // Нижняя наклонная линия (эмиттер)
-
-            {
-                // Стрелка эмиттера
-
-                double length = radius_trans * 10 / 40;
-
-                if (type == "npn")
-                {
-                    DrawLineWithAngle({ xx, y_bottom }, length, 125, dc);
-                    DrawLineWithAngle({ xx, y_bottom }, length, 170, dc);
-                }
-                else if (type == "pnp")
-                {
-                    DrawLineWithAngle({ x_vert, c.y + dy }, length, -8, dc);
-                    DrawLineWithAngle({ x_vert, c.y + dy }, length, -53, dc);
-                }
-                else
-                {
-                    LOG_ERROR("Unknown type transistor");
-                }
-            }
         }
 
         {
@@ -201,8 +179,6 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
                 driwer.MoveTo(coord_base.x, coord_base.y);
 
                 driwer.LineToY(y_ground);
-
-                DrawGround(driwer.GetX(), driwer.GetY(), dc);
 
                 if (!measurerBase)
                 {
@@ -241,7 +217,6 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
                 driwer.Restore();
 
                 driwer.LineToY(y_ground);
-                DrawGround(driwer.GetX(), driwer.GetY(), dc);
 
                 driwer.MoveOnDY(-470);
 
@@ -273,7 +248,6 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
         driwer.Restore();
         driwer.LineOnDX(355);
         driwer.LineToY(y_ground);
-        DrawGround(driwer.GetX(), driwer.GetY(), dc);
 
         if (!ampermeterCollector)
         {
@@ -296,23 +270,6 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
 
         sourceVoltageCollector->Draw(dc);
     }
-}
-
-
-void PanelViewTest::DrawGround(int x, int y, wxAutoBufferedPaintDC &dc)
-{
-    dc.DrawLine(x - 10, y, x + 10, y);
-}
-
-
-void PanelViewTest::DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &dc)
-{
-    double angleRad = angleDeg * M_PI / 180.0;
-
-    int endX = start.x + (int)(length * cos(angleRad));
-    int endY = start.y - (int)(length * sin(angleRad));  // минус, т.к. Y вниз
-
-    dc.DrawLine(start.x, start.y, endX, endY);
 }
 
 
