@@ -84,14 +84,8 @@ private:
 
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
 
-    // Нарисовать значок земли
-    void DrawGround(int x, int y, wxAutoBufferedPaintDC &dc);
-
     // Создать элементы управляения для данного теста
     void CreateControls();
-
-    // Рисует линию длиной length под углом angleDeg
-    void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &dc);
 
     void CreateButton(Button **, wxWindow *parent, const wxString &, const wxPoint &, const wxSize &, std::function<void(wxCommandEvent &)> onClick);
 
@@ -99,4 +93,10 @@ private:
 
     // Если true - находимся в режиме редактирования теста
     bool InModeEdit() const;
+
+    // Нарисовать значок земли
+    void DrawGround(int x, int y, wxAutoBufferedPaintDC &dc);
+
+    // Рисует линию длиной length под углом angleDeg
+    void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &dc);
 };

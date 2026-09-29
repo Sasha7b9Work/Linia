@@ -15,16 +15,52 @@ class OStT
 {
 public:
 
+    static const int RADIUS = 50;
+
     virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) = 0;
 
-    wxPoint GetPointBase() const;
-    wxPoint GetPointCollector() const;
-    wxPoint GetPointSubstrate() const;
-    wxPoint GEtPointGround() const;             // Это земля или эмиттер
+    // Точка привязки базы
+    virtual wxPoint GetPointBase(bool &result) const
+    {
+        result = false;
+
+        return point_base;
+    }
+
+    // Точка привязки коллектора
+    wxPoint GetPointCollector() const
+    {
+        return point_collector;
+    }
+
+    // Точка привязки подложки
+    virtual wxPoint GetPointSubstrate(bool &result) const
+    {
+        result = false;
+
+        return point_substrate;
+    }
+
+    // Точка привязки земли/эмиттера
+    wxPoint GEtPointGround() const              // Это земля или эмиттер
+    {
+        return point_emitter;
+    }
 
 protected:
 
     OStT(Test *_test) : test(_test) { }
+
+    wxPoint point_emitter;
+    wxPoint point_collector;
+    wxPoint point_base;
+    wxPoint point_substrate;
+
+    // Нарисовать значок земли
+    void DrawGround(int x, int y, wxAutoBufferedPaintDC &dc);
+
+    // Рисует линию длиной length под углом angleDeg
+    void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &dc);
 
 private:
 
@@ -54,6 +90,13 @@ public:
 
     OStT3(Test *test) : OStT(test) { }
 
+    virtual wxPoint GetPointBase(bool &result) const override
+    {
+        result = true;
+
+        return point_base;
+    }
+
 private:
 };
 
@@ -66,6 +109,20 @@ class OStT4 : public OStT
 public:
 
     OStT4(Test *test) : OStT(test) { }
+
+    virtual wxPoint GetPointBase(bool &result) const override
+    {
+        result = true;
+
+        return point_base;
+    }
+
+    virtual wxPoint GetPointSubstrate(bool &result) const override
+    {
+        result = true;
+
+        return point_substrate;
+    }
 
 private:
 };
