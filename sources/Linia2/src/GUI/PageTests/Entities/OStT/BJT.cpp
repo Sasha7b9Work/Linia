@@ -34,8 +34,6 @@ void BJT::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
     dc.DrawCircle(point_base, r);
     dc.DrawText("B", { point_base.x - 3, point_base.y - 20 });
 
-    int y1 = 410;
-    int y2 = 530;
     int y_ground = 720;
 
     {
