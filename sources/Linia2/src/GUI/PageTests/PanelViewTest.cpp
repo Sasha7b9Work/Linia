@@ -27,12 +27,21 @@ PanelViewTest::PanelViewTest(wxWindow *parent) : Panel(parent, wxSIMPLE_BORDER)
     Bind(wxEVT_PAINT, &PanelViewTest::OnEventPaint, this);
 
     SetBackgroundStyle(wxBG_STYLE_PAINT);
+
+    CreateControls();
 }
 
 
 void PanelViewTest::SetTest(Test *_test)
 {
     test = _test;
+
+    if (ostt)
+    {
+        delete ostt;
+    }
+
+    ostt = CreateOStT();
 
     Refresh();
 }
@@ -53,13 +62,6 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 
         // Устанавливаем цвет текста
         dc.SetTextForeground(*wxBLACK);
-
-        if (!ostt)
-        {
-            ostt = CreateOStT();
-        }
-
-        CreateControls();
 
         ostt->Draw(dc, GetCenter());
 
@@ -281,16 +283,7 @@ wxPoint PanelViewTest::GetCenter() const
 
 void PanelViewTest::CreateControls()
 {
-    static Test *prev_test = nullptr;
-
-    if (test == prev_test)
-    {
-        return;
-    }
-
     commutator = new Commutator(this, { 10, 40 }, 171);
-
-    prev_test = test;
 
     wxPoint c = GetCenter();
 
