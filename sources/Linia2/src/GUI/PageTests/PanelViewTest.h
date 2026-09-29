@@ -5,6 +5,7 @@
 #include "GUI/Controls/ButtonCombo.h"
 #include "GUI/PageTests/Entities/Measurers.h"
 #include "GUI/PageTests/Entities/Commutator.h"
+#include "GUI/PageTests/Entities/OStT/OStT.h"
 #pragma warning(push, 0)
     #include <wx/dcclient.h>
 #pragma warning(pop)
@@ -47,6 +48,8 @@ private:
     Voltmeter *voltmeterCollector = nullptr;
     SourceVoltage *sourceVoltageCollector = nullptr;
 
+    OStT *ostt = nullptr;
+
     void OnEventPaint(wxPaintEvent &);
 
     void OnChangedScanMode(wxCommandEvent &);
@@ -73,7 +76,7 @@ private:
     void CloseCover();
 
     // Нарисовать испытуемый элемент
-    void CreateElement(wxAutoBufferedPaintDC &dc);
+    OStT *CreateOStT();
 
     // type == "npn", "pnp"
     // Биполярный транзистор с подложкой и без

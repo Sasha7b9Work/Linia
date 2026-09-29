@@ -9,5 +9,10 @@
 class DARL : public OStT3
 {
 public:
+
+    DARL();
+
+    virtual void Draw(wxAutoBufferedPaintDC &) override;
+
 private:
 };

@@ -6,6 +6,15 @@
 #include "GUI/Controls/Painter.h"
 #include "GUI/Controls/StaticBox.h"
 #include "Utils/SystemDepend.h"
+#include "GUI/PageTests/Entities/OStT/BJT.h"
+#include "GUI/PageTests/Entities/OStT/BJTS.h"
+#include "GUI/PageTests/Entities/OStT/FET.h"
+#include "GUI/PageTests/Entities/OStT/FETS.h"
+#include "GUI/PageTests/Entities/OStT/DARL.h"
+#include "GUI/PageTests/Entities/OStT/THYR.h"
+#include "GUI/PageTests/Entities/OStT/DIOD.h"
+#include "GUI/PageTests/Entities/OStT/RES.h"
+#include "GUI/PageTests/Entities/OStT/CAP.h"
 
 
 PanelViewTest *PanelViewTest::self = nullptr;
@@ -45,9 +54,9 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
         // Устанавливаем цвет текста
         dc.SetTextForeground(*wxBLACK);
 
-        CreateControls();
+        ostt = CreateOStT();
 
-        CreateElement(dc);
+        CreateControls();
 
         // Устанавливаем шрифт (опционально)
         dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
@@ -62,18 +71,48 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 }
 
 
-void PanelViewTest::CreateElement(wxAutoBufferedPaintDC &dc)
+OStT *PanelViewTest::CreateOStT()
 {
-    if(test->IsBJT() ||
-        test->IsBJTS())
+    if (test->IsBJT())
     {
-        wxPoint point_base;
-        wxPoint point_collector;
-        wxPoint point_substrate;
-        wxPoint point_emitter;
-
-        CreateBJT("npn", GetCenter(), point_base, point_collector, point_substrate, point_emitter, dc);
+        return new BJT();
     }
+    else if (test->IsBJTS())
+    {
+        return new BJTS();
+    }
+    else if (test->IsFET())
+    {
+        return new FET();
+    }
+    else if (test->IsFETS())
+    {
+        return new FETS();
+    }
+    else if (test->IsDARL())
+    {
+        return new DARL();
+    }
+    else if (test->IsTHYR())
+    {
+        return new THYR();
+    }
+    else if (test->IsDIOD())
+    {
+        return new DIOD();
+    }
+    else if (test->IsRES())
+    {
+        return new RES();
+    }
+    else if (test->IsCAP())
+    {
+        return new CAP();
+    }
+
+    LOG_ERROR("Incorrect type OStT");
+
+    return nullptr;
 }
 
 

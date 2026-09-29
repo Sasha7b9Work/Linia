@@ -1,5 +1,8 @@
 // 2026/09/29 11:03:29 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
+#pragma warning(push, 0)
+    #include <wx/dcbuffer.h>
+#pragma warning(pop)
 
 
 // Object Subject to Testing - ОПИ - объект, подлежащий исследованию
@@ -7,7 +10,12 @@
 
 class OStT
 {
-private:
+public:
+
+    virtual void Draw(wxAutoBufferedPaintDC &) = 0;
+
+protected:
+
     OStT();
 };
 
@@ -28,6 +36,7 @@ private:
 class OStT3 : public OStT
 {
 public:
+    OStT3();
 private:
 };
 

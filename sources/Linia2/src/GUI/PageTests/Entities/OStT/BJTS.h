@@ -9,5 +9,10 @@
 class BJTS : public OStT4
 {
 public:
+
+    BJTS();
+
+    virtual void Draw(wxAutoBufferedPaintDC &) override;;
+
 private:
 };

@@ -9,5 +9,10 @@
 class FETS : public OStT4
 {
 public:
+
+    FETS();
+
+    virtual void Draw(wxAutoBufferedPaintDC &) override;
+
 private:
 };
