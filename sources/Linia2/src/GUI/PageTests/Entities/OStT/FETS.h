@@ -15,4 +15,6 @@ public:
     virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
 
 private:
+
+    TypeFET::E type = TypeFET::ChannelN;
 };

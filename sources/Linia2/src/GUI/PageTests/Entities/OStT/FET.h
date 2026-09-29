@@ -18,6 +18,8 @@ public:
 
 private:
 
+    TypeFET::E type = TypeFET::ChannelP;
+
     // Нарисовать затвор
     static void DrawGate(wxAutoBufferedPaintDC &, const wxPoint &, OStT &self);
 

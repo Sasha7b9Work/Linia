@@ -24,6 +24,30 @@ struct TypeCategory
 };
 
 
+// Тип биполярного транзистора и транзистора Дарлингтона
+struct TypeBJT
+{
+    enum E
+    {
+        NPN,
+        PNP,
+        count
+    };
+};
+
+
+// Тип полевого транзистора
+struct TypeFET
+{
+    enum E
+    {
+        ChannelP,
+        ChannelN,
+        Count
+    };
+};
+
+
 struct Chan
 {
     enum E
@@ -70,7 +94,7 @@ struct TypeScan
 
     static pchar NameShort(E);
 
-    static pchar _NameGUI(E);
+    static pchar NameGUI(E);
 
     static pchar NameFileICO(E);
 };
