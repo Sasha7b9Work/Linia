@@ -31,3 +31,38 @@ void OStT::DrawAnchorPoint(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
     dc.DrawCircle(c, r);
 }
+
+
+void OStT::DrawArrow(wxAutoBufferedPaintDC &dc, const wxPoint &p1, const wxPoint &p2)
+{
+    wxPoint p = RotatePoint(p1, p2, 30.0);
+
+    dc.DrawLine(p, p2);
+
+    p = RotatePoint(p1, p2, -30.0);
+
+    dc.DrawLine(p, p2);
+}
+
+wxPoint OStT::RotatePoint(const wxPoint &p1, const wxPoint &p2, double angleDeg)
+{
+    // Вектор от p2 к p1
+    double dx = p1.x - p2.x;
+    double dy = p1.y - p2.y;
+
+    // Угол в радианах
+    double angleRad = angleDeg * M_PI / 180.0;
+
+    double cosA = std::cos(angleRad);
+    double sinA = std::sin(angleRad);
+
+    // Повёрнутый вектор
+    double newDx = dx * cosA - dy * sinA;
+    double newDy = dx * sinA + dy * cosA;
+
+    // Новая точка
+    return wxPoint(
+        p2.x + static_cast<int>(newDx + 0.5),
+        p2.y + static_cast<int>(newDy + 0.5)
+    );
+}

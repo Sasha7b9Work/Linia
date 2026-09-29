@@ -54,19 +54,12 @@ void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self, in
             int y_top = c.y - RADIUS * 100 / 115;
             int y_bottom = c.y + RADIUS * 100 / 115;
 
-            int xx = c.x + RADIUS * 10 / 20;                      // В этом иксе - пересечение коллектора и эмиттера с окружностью.
+            int xx = c.x + RADIUS * 10 / 20;                    // В этом иксе - пересечение коллектора и эмиттера с окружностью.
 
-            dc.DrawLine(x_vert, c.y - dy, xx, y_top);                  // Верхняя наклонная линия (коллектор)
-            dc.DrawLine(x_vert, c.y + dy, xx, y_bottom);               // Нижняя наклонная линия (эмиттер)
+            dc.DrawLine(x_vert, c.y - dy, xx, y_top);           // Верхняя наклонная линия (коллектор)
+            dc.DrawLine(x_vert, c.y + dy, xx, y_bottom);        // Нижняя наклонная линия (эмиттер)
 
-            {
-                // Стрелка эмиттера
-
-                double length = RADIUS * 10 / 40;
-
-                self.DrawLineWithAngle({ xx, y_bottom }, length, 125, dc);
-                self.DrawLineWithAngle({ xx, y_bottom }, length, 170, dc);
-            }
+            self.DrawArrow(dc, { x_vert, c.y + dy }, { xx, y_bottom });
         }
 
         {

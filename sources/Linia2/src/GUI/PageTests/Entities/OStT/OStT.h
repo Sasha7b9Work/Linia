@@ -76,6 +76,12 @@ protected:
 
     void DrawAnchorPoint(wxAutoBufferedPaintDC &, const wxPoint &);
 
+    // Нарисовать стрелку из точки 1 в точку 2
+    void DrawArrow(wxAutoBufferedPaintDC &, const wxPoint &p1, const wxPoint &p2);
+
+    // Повернуть точку p1 вокруг точки p2 на угол angleDeg (в градусах)
+    wxPoint RotatePoint(const wxPoint &p1, const wxPoint &p2, double angleDeg);
+
 private:
 
     Test *test = nullptr;
