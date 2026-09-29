@@ -60,6 +60,8 @@ protected:
     wxPoint point_base;
     wxPoint point_substrate;
 
+    static const int y_ground = 720;        // Координата y отрисовки земли
+
     // Нарисовать значок земли
     void DrawGround(int x, int y, wxAutoBufferedPaintDC &);
 

@@ -11,5 +11,4 @@ FET::FET(Test *test) : OStT3(test)
 
 void FET::Draw(wxAutoBufferedPaintDC &, const wxPoint &)
 {
-
 }

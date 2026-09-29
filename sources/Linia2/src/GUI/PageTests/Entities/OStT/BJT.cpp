@@ -13,13 +13,12 @@ BJT::BJT(Test *test) : OStT3(test)
 void BJT::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
     int x_vert = 0;
-    int y_ground = 0;
 
-    DrawCommon(dc, c, *this, x_vert, y_ground);
+    DrawCommon(dc, c, *this, x_vert);
 }
 
 
-void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self, int &x_vert, int &y_ground)
+void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self, int &x_vert)
 {
     int x_col = 0;
     int y_col = 0;
@@ -38,8 +37,6 @@ void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self, in
     self.point_base = driwer.GetCoord();
     dc.DrawCircle(self.point_base, r);
     dc.DrawText("B", { self.point_base.x - 3, self.point_base.y - 20 });
-
-    y_ground = 720;
 
     {
         // Рисуем транзистор

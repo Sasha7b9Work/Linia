@@ -14,9 +14,8 @@ BJTS::BJTS(Test *test) : OStT4(test)
 void BJTS::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
     int x_vert = 0;
-    int y_ground = 0;
 
-    BJT::DrawCommon(dc, c, *this, x_vert, y_ground);
+    BJT::DrawCommon(dc, c, *this, x_vert);
 
     // Подложка
 
