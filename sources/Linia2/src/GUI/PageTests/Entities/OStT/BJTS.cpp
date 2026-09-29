@@ -41,4 +41,6 @@ void BJTS::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
         driwer.MoveOnDY(-470);
     }
+
+    FuncAfterDraw(dc);
 }

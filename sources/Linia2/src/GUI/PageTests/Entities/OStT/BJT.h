@@ -22,4 +22,8 @@ public:
 private:
 
     TypeBJT::E type = TypeBJT::PNP;
+
+    void DrawBase(wxAutoBufferedPaintDC &dc, const wxPoint &c);
+
+    wxPoint DeltaBase() const;
 };
