@@ -19,6 +19,9 @@ public:
     LibraryCategory *lib;
     wxString UGO{ "" };
     wxString name{ "" };
+
+    bool IsBJT() const;         // Биполярный транзистор
+    bool IsBJTS() const;        // Биполярный транзистор с подложкой
 };
 
 

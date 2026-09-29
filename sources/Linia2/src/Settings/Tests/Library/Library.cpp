@@ -109,3 +109,15 @@ bool Library::ParseTest(Test *test, const rapidjson::Value &value)
 
     return test->name[0] != '\0';
 }
+
+
+bool Test::IsBJT() const
+{
+    return lib->UGO == "BJT";
+}
+
+
+bool Test::IsBJTS() const
+{
+    return lib->UGO == "BJTS";
+}

@@ -64,8 +64,8 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 
 void PanelViewTest::CreateElement(wxAutoBufferedPaintDC &dc)
 {
-    if (test->lib->UGO == "BJT" ||
-        test->lib->UGO == "BJTS")
+    if(test->IsBJT() ||
+        test->IsBJTS())
     {
         wxPoint point_base;
         wxPoint point_collector;
