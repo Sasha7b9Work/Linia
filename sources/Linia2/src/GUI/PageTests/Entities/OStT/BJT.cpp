@@ -25,6 +25,10 @@ void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, int &x_vert)
     DrawCase(dc, c);
 
     DrawBase(dc, c);
+
+    DrawCollector(dc, c);
+
+    FuncAfterDraw(dc);
 }
 
 
@@ -36,6 +40,19 @@ void BJT::DrawBase(wxAutoBufferedPaintDC &dc, const wxPoint &c)
     wxPoint p2{ c.x - d.x, c.y + d.y };
 
     dc.DrawLine(p1, p2);
+
+    p1 = { c.x - d.x, c.y };
+    p2 = { c.x - RADIUS - DR, c.y };
+
+    point_base = p2;
+
+    dc.DrawLine(p1, p2);
+}
+
+
+void BJT::DrawCollector(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+{
+
 }
 
 

@@ -25,5 +25,14 @@ private:
 
     void DrawBase(wxAutoBufferedPaintDC &dc, const wxPoint &c);
 
+    void DrawCollector(wxAutoBufferedPaintDC &dc, const wxPoint &c);
+
     wxPoint DeltaBase() const;
+
+    virtual wxPoint GetPointBase(bool &result) const
+    {
+        result = true;
+
+        return point_base;
+    }
 };
