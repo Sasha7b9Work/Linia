@@ -3,7 +3,7 @@
 #include "GUI/PageTests/Entities/OStT/CAP.h"
 
 
-CAP::CAP(Test *test) : OStT2(test)
+CAP::CAP(Test *test) : OStT(test)
 {
 
 }

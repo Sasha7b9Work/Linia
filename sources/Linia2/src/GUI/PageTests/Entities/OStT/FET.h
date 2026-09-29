@@ -1,12 +1,13 @@
 // 2026/09/29 11:15:33 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/PageTests/Entities/OStT/OStT.h"
+#include "Settings/Tests/SettingsTests.h"
 
 
 // Полевой транзистор
 
 
-class FET : public OStT3
+class FET : public OStT
 {
 public:
 
@@ -14,23 +15,23 @@ public:
 
     virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
 
-    static void DrawCommon(wxAutoBufferedPaintDC &, const wxPoint &, OStT &self);
+    void DrawCommon(wxAutoBufferedPaintDC &, const wxPoint &);
 
 private:
 
     TypeFET::E type = TypeFET::ChannelP;
 
     // Нарисовать затвор
-    static void DrawGate(wxAutoBufferedPaintDC &, const wxPoint &, OStT &self);
+    void DrawGate(wxAutoBufferedPaintDC &, const wxPoint &);
 
     // Нарисовать исток и сток
-    static void DrawSourceDrain(wxAutoBufferedPaintDC &, const wxPoint &, OStT &self);
+    void DrawSourceDrain(wxAutoBufferedPaintDC &, const wxPoint &);
 
     // Смещение линии затвора относительно центра по X
-    static int GateDX();
+    int GateDX();
 
     // Смещение линии затвора относительно центра по Y
-    static int GateDY();
+    int GateDY();
 
-    static int DrainDY();
+    int DrainDY();
 };

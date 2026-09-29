@@ -4,7 +4,7 @@
 #include "Utils/LineDrawer.h"
 
 
-BJT::BJT(Test *test) : OStT3(test)
+BJT::BJT(Test *test) : OStT(test)
 {
 
 }
@@ -14,34 +14,34 @@ void BJT::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
     int x_vert = 0;
 
-    DrawCommon(dc, c, *this, x_vert);
+    DrawCommon(dc, c, x_vert);
 }
 
 
-void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self, int &x_vert)
+void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, int &x_vert)
 {
     int x_col = c.x + RADIUS / 2;   // / Координаты точки коммутации
     int y_col = c.y - 2 * RADIUS;   // / с коллектором
 
     LineDriwer driwer(dc, x_col, y_col);
     driwer.LineTo(c.x + RADIUS / 2, c.y + 2 * RADIUS);                  // Вертикальная линия, которая выходит из коллектора и эмиттера
-    self.DrawGround(driwer.GetX(), driwer.GetY(), dc);
+    DrawGround(driwer.GetX(), driwer.GetY(), dc);
     driwer.MoveOnDY(-20);
-    self.point_emitter = driwer.GetCoord();
-    dc.DrawCircle(self.point_emitter, r);
+    point_emitter = driwer.GetCoord();
+    dc.DrawCircle(point_emitter, r);
 
-    dc.DrawText("E", { self.point_emitter.x + 7, self.point_emitter.y - 7 });
+    dc.DrawText("E", { point_emitter.x + 7, point_emitter.y - 7 });
 
-    self.DrawCase(dc, c);
+    DrawCase(dc, c);
 
     x_vert = c.x - RADIUS * 10 / 18;
     wxPoint coord_base{ 90, c.y };
     driwer.MoveTo(90, c.y);
     driwer.LineTo(x_vert, c.y);                     // База
     driwer.MoveOnDX(-50);
-    self.point_base = driwer.GetCoord();
-    dc.DrawCircle(self.point_base, r);
-    dc.DrawText("B", { self.point_base.x - 3, self.point_base.y - 20 });
+    point_base = driwer.GetCoord();
+    dc.DrawCircle(point_base, r);
+    dc.DrawText("B", { point_base.x - 3, point_base.y - 20 });
 
     {
         // Рисуем транзистор
@@ -57,9 +57,21 @@ void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self, in
             int xx = c.x + RADIUS * 10 / 20;                    // В этом иксе - пересечение коллектора и эмиттера с окружностью.
 
             dc.DrawLine(x_vert, c.y - dy, xx, y_top);           // Верхняя наклонная линия (коллектор)
-            dc.DrawLine(x_vert, c.y + dy, xx, y_bottom);        // Нижняя наклонная линия (эмиттер)
 
-            self.DrawArrow(dc, { x_vert, c.y + dy }, { xx, y_bottom });
+            {
+                // Нижняя наклонная линия (эмиттер)
+
+                dc.DrawLine(x_vert, c.y + dy, xx, y_bottom);
+
+                if (type == TypeBJT::NPN)
+                {
+                    DrawArrow(dc, { x_vert, c.y + dy }, { xx, y_bottom });
+                }
+                else if (type == TypeBJT::PNP)
+                {
+                    DrawArrow(dc, { xx, y_bottom }, { x_vert, c.y + dy });
+                }
+            }
         }
 
         {
@@ -76,7 +88,7 @@ void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self, in
 
                 driwer.LineToY(y_ground);
 
-                self.DrawGround(driwer.GetX(), driwer.GetY(), dc);
+                DrawGround(driwer.GetX(), driwer.GetY(), dc);
             }
         }
     }
@@ -86,12 +98,12 @@ void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self, in
 
         driwer.MoveTo(x_col, y_col);
         driwer.MoveOnDY(25);
-        self.point_collector = driwer.GetCoord();
-        dc.DrawCircle(self.point_collector, r);
-        dc.DrawText("C", { self.point_collector.x + 7, self.point_collector.y - 9 });
+        point_collector = driwer.GetCoord();
+        dc.DrawCircle(point_collector, r);
+        dc.DrawText("C", { point_collector.x + 7, point_collector.y - 9 });
         driwer.Restore();
         driwer.LineOnDX(355);
         driwer.LineToY(y_ground);
-        self.DrawGround(driwer.GetX(), driwer.GetY(), dc);
+        DrawGround(driwer.GetX(), driwer.GetY(), dc);
     }
 }

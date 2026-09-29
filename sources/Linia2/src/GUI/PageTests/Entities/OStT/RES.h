@@ -6,7 +6,7 @@
 // Резистор
 
 
-class RES : public OStT2
+class RES : public OStT
 {
 public:
 

@@ -6,7 +6,7 @@
 // Конденсатор
 
 
-class CAP : public OStT2
+class CAP : public OStT
 {
 public:
 

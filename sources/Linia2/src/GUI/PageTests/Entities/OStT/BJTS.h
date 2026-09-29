@@ -6,15 +6,11 @@
 // Биполярный транзистор с подложкой
 
 
-class BJTS : public OStT4
+class BJTS : public BJT
 {
 public:
 
     BJTS(Test *);
 
     virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
-
-private:
-
-    TypeBJT::E type = TypeBJT::PNP;
 };

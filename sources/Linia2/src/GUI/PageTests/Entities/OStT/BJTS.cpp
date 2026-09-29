@@ -5,7 +5,7 @@
 #include "Utils/LineDrawer.h"
 
 
-BJTS::BJTS(Test *test) : OStT4(test)
+BJTS::BJTS(Test *test) : BJT(test)
 {
 
 }
@@ -15,7 +15,7 @@ void BJTS::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
     int x_vert = 0;
 
-    BJT::DrawCommon(dc, c, *this, x_vert);
+    BJT::DrawCommon(dc, c, x_vert);
 
     // Подложка
 

@@ -6,7 +6,7 @@
 // Транзистор Дарлингтона
 
 
-class DARL : public OStT3
+class DARL : public OStT
 {
 public:
 

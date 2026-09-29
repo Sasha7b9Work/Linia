@@ -6,7 +6,7 @@
 // Тиристор
 
 
-class THYR : public OStT3
+class THYR : public OStT
 {
 public:
 

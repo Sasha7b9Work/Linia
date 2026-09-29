@@ -3,7 +3,7 @@
 #include "GUI/PageTests/Entities/OStT/FET.h"
 
 
-FET::FET(Test *test) : OStT3(test)
+FET::FET(Test *test) : OStT(test)
 {
 
 }
@@ -11,21 +11,21 @@ FET::FET(Test *test) : OStT3(test)
 
 void FET::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    DrawCommon(dc, c, *this);
+    DrawCommon(dc, c);
 }
 
 
-void FET::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self)
+void FET::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    self.DrawCase(dc, c);
+    DrawCase(dc, c);
 
-    DrawGate(dc, c, self);
+    DrawGate(dc, c);
 
-    DrawSourceDrain(dc, c, self);
+    DrawSourceDrain(dc, c);
 }
 
 
-void FET::DrawGate(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self)
+void FET::DrawGate(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
     wxPoint p1{ c.x - GateDX(), c.y - GateDY() };
     wxPoint p2{ c.x - GateDX(), c.y + GateDY() };
@@ -37,11 +37,11 @@ void FET::DrawGate(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self)
 
     dc.DrawLine(p1, p2);
 
-    self.DrawAnchorPoint(dc, p2);
+    DrawAnchorPoint(dc, p2);
 }
 
 
-void FET::DrawSourceDrain(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self)
+void FET::DrawSourceDrain(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
     int dx = (int)std::sqrt(RADIUS * RADIUS - DrainDY() * DrainDY());
 
@@ -50,14 +50,14 @@ void FET::DrawSourceDrain(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &sel
 
     dc.DrawLine(p1, p2);
 
-    self.DrawAnchorPoint(dc, p2);
+    DrawAnchorPoint(dc, p2);
 
     p1.y = c.y + DrainDY();
     p2.y = p1.y;
 
     dc.DrawLine(p1, p2);
 
-    self.DrawAnchorPoint(dc, p2);
+    DrawAnchorPoint(dc, p2);
 }
 
 

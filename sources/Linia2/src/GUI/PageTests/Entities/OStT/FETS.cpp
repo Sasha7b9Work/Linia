@@ -4,7 +4,7 @@
 #include "GUI/PageTests/Entities/OStT/FET.h"
 
 
-FETS::FETS(Test *test) : OStT4(test)
+FETS::FETS(Test *test) : FET(test)
 {
 
 }
@@ -12,5 +12,5 @@ FETS::FETS(Test *test) : OStT4(test)
 
 void FETS::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    FET::DrawCommon(dc, c, *this);
+    FET::DrawCommon(dc, c);
 }

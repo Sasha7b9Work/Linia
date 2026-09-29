@@ -7,7 +7,7 @@
 // Биполярный транзистор
 
 
-class BJT : public OStT3
+class BJT : public OStT
 {
 public:
 
@@ -17,9 +17,9 @@ public:
 
     // Нарисовать общую часть для BJT и BJTS
     // x_vert - заканчивается линия базы внутри окружности
-    static void DrawCommon(wxAutoBufferedPaintDC &, const wxPoint &, OStT &self, int &x_vert);
+    void DrawCommon(wxAutoBufferedPaintDC &, const wxPoint &, int &x_vert);
 
 private:
 
-    TypeBJT::E type = TypeBJT::NPN;
+    TypeBJT::E type = TypeBJT::PNP;
 };

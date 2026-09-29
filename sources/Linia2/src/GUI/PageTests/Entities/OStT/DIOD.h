@@ -6,7 +6,7 @@
 // Диод
 
 
-class DIOD : public OStT2
+class DIOD : public OStT
 {
 public:
 
