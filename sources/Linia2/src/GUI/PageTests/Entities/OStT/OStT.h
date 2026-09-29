@@ -51,6 +51,8 @@ public:
 
 protected:
 
+    friend class BJT;
+
     OStT(Test *_test) : test(_test) { }
 
     wxPoint point_emitter;
