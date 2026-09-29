@@ -52,6 +52,7 @@ public:
 protected:
 
     friend class BJT;
+    friend class FET;
 
     OStT(Test *_test) : test(_test) { }
 
@@ -61,6 +62,7 @@ protected:
     wxPoint point_substrate;
 
     static const int y_ground = 720;        // Координата y отрисовки земли
+    static const int r = 5;
 
     // Нарисовать значок земли
     void DrawGround(int x, int y, wxAutoBufferedPaintDC &);
@@ -68,11 +70,11 @@ protected:
     // Рисует линию длиной length под углом angleDeg
     void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &);
 
+    void DrawCircle(wxAutoBufferedPaintDC &, const wxPoint &c, int &x_col, int &y_col);
+
 private:
 
     Test *test = nullptr;
-
-    void DrawCircle(wxAutoBufferedPaintDC &, const wxPoint &c, int &x_col, int &y_col);
 };
 
 

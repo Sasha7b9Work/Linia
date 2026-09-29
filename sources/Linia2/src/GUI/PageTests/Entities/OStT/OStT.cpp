@@ -23,15 +23,4 @@ void OStT::DrawLineWithAngle(const wxPoint &start, double length, double angleDe
 
 void OStT::DrawCircle(wxAutoBufferedPaintDC &dc, const wxPoint &c, int &x_col, int &y_col)
 {
-    int r = 5;
-
-    x_col = c.x + RADIUS / 2;   // / Координаты точки коммутации
-    y_col = c.y - 2 * RADIUS;   // / с коллектором
-
-    LineDriwer driwer(dc, x_col, y_col);
-    driwer.LineTo(c.x + RADIUS / 2, c.y + 2 * RADIUS);                  // Вертикальная линия, которая выходит из коллектора и эмиттера
-    DrawGround(driwer.GetX(), driwer.GetY(), dc);
-    driwer.MoveOnDY(-20);
-    point_emitter = driwer.GetCoord();
-    dc.DrawCircle(point_emitter, r);
 }

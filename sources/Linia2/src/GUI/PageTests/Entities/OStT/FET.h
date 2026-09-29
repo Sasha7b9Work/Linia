@@ -14,5 +14,5 @@ public:
 
     virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
 
-private:
+    static void DrawCommon(wxAutoBufferedPaintDC &, const wxPoint &, OStT &self);
 };
