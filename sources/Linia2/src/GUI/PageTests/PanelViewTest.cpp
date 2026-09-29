@@ -121,7 +121,7 @@ OStT *PanelViewTest::CreateOStT()
 }
 
 
-void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &point_base, wxPoint &point_collector, wxPoint &point_substrate, wxPoint &point_emitter, wxAutoBufferedPaintDC &dc)
+void PanelViewTest::CreateBJT(const wxPoint &c, wxPoint &point_base, wxPoint &point_collector, wxPoint &point_substrate, wxPoint &point_emitter, wxAutoBufferedPaintDC &dc)
 {
     int r = 5;
 
