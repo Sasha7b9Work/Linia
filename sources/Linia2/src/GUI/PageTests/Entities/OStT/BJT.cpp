@@ -12,15 +12,13 @@ BJT::BJT(Test *test) : OStT(test)
 
 void BJT::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    int x_vert = 0;
-
-    DrawCommon(dc, c, x_vert);
+    DrawCommon(dc, c);
 
     FuncAfterDraw(dc);
 }
 
 
-void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, int &x_vert)
+void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
     DrawCase(dc, c);
 

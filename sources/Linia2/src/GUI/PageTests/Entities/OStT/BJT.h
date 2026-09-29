@@ -17,7 +17,7 @@ public:
 
     // Нарисовать общую часть для BJT и BJTS
     // x_vert - заканчивается линия базы внутри окружности
-    void DrawCommon(wxAutoBufferedPaintDC &, const wxPoint &, int &x_vert);
+    void DrawCommon(wxAutoBufferedPaintDC &, const wxPoint &);
 
 private:
 
