@@ -15,6 +15,8 @@ class OStT
 {
 public:
 
+    virtual ~OStT() { }
+
     static const int RADIUS = 50;
 
     virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) = 0;
