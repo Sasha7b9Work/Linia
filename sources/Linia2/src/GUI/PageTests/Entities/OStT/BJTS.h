@@ -12,7 +12,7 @@ public:
 
     BJTS();
 
-    virtual void Draw(wxAutoBufferedPaintDC &) override;;
+    virtual void Draw(wxAutoBufferedPaintDC &) override;
 
 private:
 };
