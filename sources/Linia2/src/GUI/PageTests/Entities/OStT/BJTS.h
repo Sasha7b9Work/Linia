@@ -20,4 +20,8 @@ public:
 
         return true;
     }
+
+private:
+
+    void DrawSubstrate(wxAutoBufferedPaintDC &, const wxPoint &center);
 };

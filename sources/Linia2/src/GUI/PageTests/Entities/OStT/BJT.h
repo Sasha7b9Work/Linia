@@ -23,7 +23,7 @@ private:
 
     TypeBJT::E type = TypeBJT::PNP;
 
-    void DrawBase(wxAutoBufferedPaintDC &dc, const wxPoint &c);
+    void DrawBase(wxAutoBufferedPaintDC &, const wxPoint &center);
 
     void DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c);
 

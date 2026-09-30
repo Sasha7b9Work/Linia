@@ -83,5 +83,14 @@ void BJT::DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c)
         driwer.LineTo(points[1]);
         driwer.LineOnDY(DR);
         point_E = driwer.GetCoord();
+
+        if (type == TypeBJT::NPN)
+        {
+            DrawArrow(dc, p1, points[1]);
+        }
+        else if (type == TypeBJT::PNP)
+        {
+            DrawArrow(dc, points[1], p1);
+        }
     }
 }
