@@ -39,6 +39,8 @@ public:
 
     int LineToY(int y);
 
+    int LineToX(int x);
+
     wxPoint LineTo(const wxPoint &);
 
     int LineOnDX(int dx);

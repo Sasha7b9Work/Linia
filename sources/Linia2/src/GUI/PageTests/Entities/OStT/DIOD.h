@@ -14,5 +14,10 @@ public:
 
     virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
 
-private:
+protected:
+
+    void DrawCommon(wxAutoBufferedPaintDC &, const wxPoint &center);
+
+    // Смещение угла треугольника относительно центра
+    wxPoint Delta() const;
 };

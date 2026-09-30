@@ -44,6 +44,18 @@ int LineDriwer::LineToY(int y)
 }
 
 
+int LineDriwer::LineToX(int x)
+{
+    wxPoint coord_next{ x, coord.y };
+
+    dc.DrawLine(coord, coord_next);
+
+    coord = coord_next;
+
+    return coord.y;
+}
+
+
 wxPoint LineDriwer::LineTo(const wxPoint &_point)
 {
     dc.DrawLine(coord, _point);
