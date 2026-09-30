@@ -25,6 +25,7 @@ private:
 
     static const int radius_trans = 50;                     // От этого значения и Center() идёт всё построение изображения
     static const int d_combos = ButtonsCombo::HEIGHT + 5;   // Расстояние между элементами ввода по вертикали
+    static const int Y_GROUND = 700;
 
     Test *test = nullptr;
 
@@ -100,5 +101,5 @@ private:
     void DrawScheme(AutoBufferedPaintDC &);
 
     // Нарисовать значок земли
-    void DrawGround(AutoBufferedPaintDC &, const wxPoint &);
+    void DrawGround(AutoBufferedPaintDC &);
 };

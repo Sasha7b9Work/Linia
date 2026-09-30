@@ -94,15 +94,59 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 
         dc.LineOnDY(50);
 
-        DrawGround(dc, dc.GetCoord());
+        DrawGround(dc);
     }
 
     {
         // Рисуем от коллектора
+
+        wxPoint point = ostt->GetPoint_C();
+
+        dc.MoveTo(point);
+
+        dc.LineOnDY(-50);
+
+        dc.LineOnDX(300);
+
+        dc.LineToY(Y_GROUND);
+
+        DrawGround(dc);
     }
 
     {
         // Рисуем от базы
+
+        wxPoint point;
+
+        if (ostt->GetPoint_B(point))
+        {
+            const int X0 = 50;
+
+            dc.MoveTo(point);
+
+            dc.LineToX(X0);
+
+            dc.LineToY(Y_GROUND);
+
+            DrawGround(dc);
+        }
+    }
+
+    {
+        // Рисуем от подложки
+
+        wxPoint point;
+
+        if (ostt->GetPoint_S(point))
+        {
+            dc.MoveTo(point);
+
+            dc.LineOnDX(50);
+
+            dc.LineToY(Y_GROUND);
+
+            DrawGround(dc);
+        }
     }
 
     ostt->FuncAfterDraw(dc);
@@ -593,7 +637,9 @@ bool PanelViewTest::InModeEdit() const
 }
 
 
-void PanelViewTest::DrawGround(AutoBufferedPaintDC &dc, const wxPoint &p)
+void PanelViewTest::DrawGround(AutoBufferedPaintDC &dc)
 {
+    const wxPoint p{ dc.GetCoord() };
+
     dc.DrawLine(p.x - 10, p.y, p.x + 10, p.y);
 }

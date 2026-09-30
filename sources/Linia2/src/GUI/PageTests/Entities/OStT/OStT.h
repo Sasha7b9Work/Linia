@@ -119,8 +119,6 @@ protected:
     StoredValue dr{ 40 };                   // На столько пикселей выступает точка привязки за окружность корпуса
     StoredValue length_arrow{ 15 };         // Длина стрелки на эмиттере
 
-    static const int y_ground = 720;        // Координата y отрисовки земли
-
     // Рисует линию длиной length под углом angleDeg
     void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, AutoBufferedPaintDC &);
 
