@@ -47,17 +47,19 @@ void DIOD::DrawCommon(AutoBufferedPaintDC &dc, const wxPoint &c)
 
 void DIOD::DrawAnode(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
+    const wxPoint d = Delta();
+
     if (type == TypeDIOD::Common_Anode_P)
     {
-        wxPoint d = Delta();
-
         dc.MoveTo({ c.x - d.x, c.y + d.y });
         dc.LineTo({ c.x, c.y - d.y });
         dc.LineTo({ c.x + d.x, c.y + d.y });
     }
     else if (type == TypeDIOD::Common_Catode_N)
     {
-
+        dc.MoveTo({ c.x - d.x, c.y - d.y });
+        dc.LineTo({ c.x, c.y + d.y });
+        dc.LineTo({ c.x + d.x, c.y - d.y });
     }
 }
 
