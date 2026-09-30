@@ -159,6 +159,8 @@ std::vector<wxPoint> OStT::IntersectLineCircle(const wxPoint &p1, const wxPoint 
 void OStT::FuncAfterDraw(AutoBufferedPaintDC &dc)
 {
     DrawAnchorPoints(dc);
+
+    DrawNamesPoints(dc);
 }
 
 
@@ -177,5 +179,55 @@ void OStT::DrawAnchorPoints(AutoBufferedPaintDC &dc)
     if (GetPoint_S(point))
     {
         DrawAnchorPoint(dc, point);
+    }
+}
+
+
+void OStT::DrawNamesPoints(AutoBufferedPaintDC &dc)
+{
+    wxString name;
+
+    wxPoint pos;
+
+    {
+        // Коллектор
+
+        pos = GetPoint_C();
+
+        name = GetName_C();
+
+        dc.DrawText(name, pos + wxPoint{ 8, -8 });
+    }
+
+    {
+        // Эмиттер
+
+        pos = GetPoint_E();
+
+        name = GetName_E();
+
+        dc.DrawText(name, pos + wxPoint{ 8, -5 });
+    }
+
+    {
+        // База
+
+        if (GetPoint_B(pos))
+        {
+            name = GetName_B();
+
+            dc.DrawText(name, pos + wxPoint{ -5, -20 });
+        }
+    }
+
+    {
+        // Подложка
+
+        if (GetPoint_S(pos))
+        {
+            name = GetName_S();
+
+            dc.DrawText(name, pos + wxPoint{ -5, -20 });
+        }
     }
 }

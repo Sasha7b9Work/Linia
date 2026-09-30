@@ -81,6 +81,26 @@ public:
         return point_E;
     }
 
+    virtual wxString GetName_B() const
+    {
+        return "B";
+    }
+
+    virtual wxString GetName_C() const
+    {
+        return "C";
+    }
+
+    virtual wxString GetName_E() const
+    {
+        return "E";
+    }
+
+    virtual wxString GetName_S() const
+    {
+        return "Substr";
+    }
+
 protected:
 
     friend class BJT;
@@ -114,6 +134,8 @@ protected:
     void DrawAnchorPoint(AutoBufferedPaintDC &, const wxPoint &);
 
     void DrawAnchorPoints(AutoBufferedPaintDC &);
+
+    void DrawNamesPoints(AutoBufferedPaintDC &);
 
     // Нарисовать стрелку из точки 1 в точку 2
     void DrawArrow(AutoBufferedPaintDC &, const wxPoint &p1, const wxPoint &p2);
