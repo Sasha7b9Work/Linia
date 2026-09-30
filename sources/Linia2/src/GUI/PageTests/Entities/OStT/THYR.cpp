@@ -19,19 +19,23 @@ void THYR::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
 }
 
 
-void THYR::DrawControlElectrode(AutoBufferedPaintDC &dc, const wxPoint &c) const
+void THYR::DrawControlElectrode(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
     const wxPoint d = Delta();
-
-    const int delta = radius / 10;
 
     if (DIOD::type == TypeDIOD::Common_Anode_P)
     {
         if (type == TypeTHYR::Control_Anode)
         {
-            dc.MoveTo({ c.x - d.x, c.y + d.y });
+            dc.MoveTo({ c.x, c.y - d.y });
 
-            dc.LineOn({ -delta, delta });
+            std::vector<wxPoint> points = IntersectLineCircle(dc.GetCoord(), { c.x - d.x, c.y + d.y }, c, (double)radius);
+
+            dc.LineTo(points[1]);
+
+            dc.LineOnDX(-dr);
+
+            point_B = dc.GetCoord();
         }
         else if (type == TypeTHYR::Control_Catode)
         {

@@ -129,7 +129,7 @@ protected:
 
     // Находит точки пересечения прямой (p1, p2) с окружностью (center, radius)
     // Возвращает вектор точек пересечения (0, 1 или 2 точки)
-    std::vector<wxPoint> IntersectLineCircle(const wxPoint &p1, const wxPoint &p2, const wxPoint &center, double radius);
+    std::vector<wxPoint> IntersectLineCircle(const wxPoint &p1, const wxPoint &p2, const wxPoint &center, double radius) const;
 
 private:
 

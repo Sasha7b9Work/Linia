@@ -25,5 +25,5 @@ private:
         return true;
     }
 
-    void DrawControlElectrode(AutoBufferedPaintDC &, const wxPoint &center) const;
+    void DrawControlElectrode(AutoBufferedPaintDC &, const wxPoint &center);
 };

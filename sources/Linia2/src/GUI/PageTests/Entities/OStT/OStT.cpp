@@ -101,7 +101,7 @@ wxPoint OStT::PointAtAngle(const wxPoint &p1, const wxPoint &p2, double length, 
 }
 
 
-std::vector<wxPoint> OStT::IntersectLineCircle(const wxPoint &p1, const wxPoint &p2, const wxPoint &center, double r)
+std::vector<wxPoint> OStT::IntersectLineCircle(const wxPoint &p1, const wxPoint &p2, const wxPoint &center, double r) const
 {
     std::vector<wxPoint> result;
 
