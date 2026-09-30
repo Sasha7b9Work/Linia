@@ -75,10 +75,10 @@ void MeasurerSourcer::DrawUGO(wxAutoBufferedPaintDC &dc)
             const int l = 5;
 
             dc.DrawLine(center.x, center.y - dY - ddY, center.x - l, center.y - dY + l - ddY);
-            dc.DrawLine(center.x, center.y - dY + dY - ddY, center.x - l, center.y - dY + l + dY - ddY);
+            dc.DrawLine(center.x, center.y - ddY, center.x - l, center.y - l - ddY);
 
             dc.DrawLine(center.x, center.y - dY - ddY, center.x + l, center.y - dY + l - ddY);
-            dc.DrawLine(center.x, center.y - dY + dY - ddY, center.x + l, center.y - dY + l + dY - ddY);
+            dc.DrawLine(center.x, center.y - ddY, center.x + l, center.y - l - ddY);
         }
         else if (type == Type::SourceU ||
             (type == Type::SourceUI && IsSetModeU()))
@@ -178,7 +178,8 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
 {
     btnDisable = new Button(PanelViewTest::self, "x", size);
 
-    if (type == MeasurerSourcer::Type::MeasI || MeasurerSourcer::Type::MeasU)
+    if (type == MeasurerSourcer::Type::MeasI ||
+        type == MeasurerSourcer::Type::MeasU)
     {
         btnDisable->SetToolTip(L("Включить/отключить блок измерителя"));
     }

@@ -139,7 +139,7 @@ std::vector<wxPoint> OStT::IntersectLineCircle(const wxPoint &p1, const wxPoint 
 
     // Первая точка
     double t1 = (-b - sqrtD) / (2.0 * a);
-    result.push_back(wxPoint(
+    result.emplace_back(wxPoint(
         static_cast<int>(p1.x + t1 * dx + 0.5),
         static_cast<int>(p1.y + t1 * dy + 0.5)
     ));
@@ -148,7 +148,7 @@ std::vector<wxPoint> OStT::IntersectLineCircle(const wxPoint &p1, const wxPoint 
     if (discriminant > 1e-9)
     {
         double t2 = (-b + sqrtD) / (2.0 * a);
-        result.push_back(wxPoint(
+        result.emplace_back(wxPoint(
             static_cast<int>(p1.x + t2 * dx + 0.5),
             static_cast<int>(p1.y + t2 * dy + 0.5)
         ));
