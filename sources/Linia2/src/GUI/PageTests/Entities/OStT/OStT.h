@@ -26,8 +26,6 @@ public:
 
     virtual ~OStT() { }
 
-    static const int RADIUS = 50;
-
     virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) = 0;
 
     // Точка привязки базы
@@ -70,6 +68,31 @@ protected:
     wxPoint point_B;
     wxPoint point_S;
 
+    struct Radius
+    {
+        int r = 50;
+
+        void Store()
+        {
+            stored = r;
+        }
+
+        void Restore()
+        {
+            r = stored;
+        }
+
+        operator int() const
+        {
+            return r;
+        }
+
+    private:
+
+        int stored = 0;
+
+    } radius;                               // Радиус корпуса. Может изменяться
+
     static const int y_ground = 720;        // Координата y отрисовки земли
     static const int DR = 40;               // На столько пикселей выступает точка привязки за окружность корпуса
 
@@ -82,7 +105,7 @@ protected:
     void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &);
 
     // Нарисовать "корпус" транзистора
-    void DrawCase(wxAutoBufferedPaintDC &, const wxPoint &c, int radius);
+    void DrawCase(wxAutoBufferedPaintDC &, const wxPoint &c);
 
     // Нарисовать точку привязки
     void DrawAnchorPoint(wxAutoBufferedPaintDC &, const wxPoint &);

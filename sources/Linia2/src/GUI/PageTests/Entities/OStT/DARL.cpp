@@ -11,14 +11,18 @@ DARL::DARL(Test *test) : BJT(test)
 
 void DARL::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    DrawCase(dc, c, RADIUS);
+    DrawCase(dc, c);
 
-    int dx = (int)(RADIUS * 0.3);
-    int dy = (int)(RADIUS * 0.3);
+    int dx = (int)(radius * 0.3);
+    int dy = (int)(radius * 0.3);
 
-    int r = RADIUS / 4;
+    radius.Store();
 
-    DrawCommon(dc, { c.x - dx, c.y - dy }, false, r);
+    radius.r /= 4;
 
-    DrawCommon(dc, { c.x + dx, c.y + dy }, false, r);
+    DrawCommon(dc, { c.x - dx, c.y - dy }, false);
+
+    DrawCommon(dc, { c.x + dx, c.y + dy }, false);
+
+    radius.Restore();
 }

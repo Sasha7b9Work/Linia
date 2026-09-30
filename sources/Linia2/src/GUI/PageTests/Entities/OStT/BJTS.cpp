@@ -13,7 +13,7 @@ BJTS::BJTS(Test *test) : BJT(test)
 
 void BJTS::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    BJT::DrawCommon(dc, c, true, RADIUS);
+    BJT::DrawCommon(dc, c, true);
 
     DrawSubstrate(dc, c);
 
@@ -23,12 +23,12 @@ void BJTS::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
 void BJTS::DrawSubstrate(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    const wxPoint d{ (int)(RADIUS * 0.7), (int)(RADIUS * 0.3) };
+    const wxPoint d{ (int)(radius * 0.7), (int)(radius * 0.3) };
 
     LineDriwer driwer{ dc, {c.x + d.x, c.y - d.y} };
     driwer.LineOnDY(2 * d.y);
     driwer.MoveTo(c.x + d.x, c.y);
-    driwer.LineTo({ c.x + RADIUS, c.y });
+    driwer.LineTo({ c.x + radius, c.y });
     driwer.LineOnDX(DR);
     point_S = driwer.GetCoord();
 }

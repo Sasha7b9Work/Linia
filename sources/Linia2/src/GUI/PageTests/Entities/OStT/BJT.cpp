@@ -12,28 +12,28 @@ BJT::BJT(Test *test) : OStT(test)
 
 void BJT::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    DrawCommon(dc, c, true, RADIUS);
+    DrawCommon(dc, c, true);
 
     FuncAfterDraw(dc);
 }
 
 
-void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, bool draw_case, int radius)
+void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, bool draw_case)
 {
     if (draw_case)
     {
-        DrawCase(dc, c, radius);
+        DrawCase(dc, c);
     }
 
-    DrawBase(dc, c, radius);
+    DrawBase(dc, c);
 
-    DrawCollectorEmitter(dc, c, radius);
+    DrawCollectorEmitter(dc, c);
 }
 
 
-void BJT::DrawBase(wxAutoBufferedPaintDC &dc, const wxPoint &c, int radius)
+void BJT::DrawBase(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    const wxPoint d = DeltaBase(radius);
+    const wxPoint d = DeltaBase();
 
     wxPoint p1{ c.x - d.x, c.y - d.y };
     wxPoint p2{ c.x - d.x, c.y + d.y };
@@ -49,12 +49,12 @@ void BJT::DrawBase(wxAutoBufferedPaintDC &dc, const wxPoint &c, int radius)
 }
 
 
-void BJT::DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c, int radius)
+void BJT::DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
     const int dyb = (int)(radius * 0.3);    // Смещение по базе
     const int dyc = (int)(radius * 1.2);    // Смещение по коллектору
 
-    const wxPoint d = DeltaBase(radius);
+    const wxPoint d = DeltaBase();
 
     wxPoint p1{ c.x - d.x, c.y - dyb };
     wxPoint p2{ c.x + radius, c.y - dyc };

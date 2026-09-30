@@ -20,7 +20,7 @@ void FET::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
 void FET::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    DrawCase(dc, c, RADIUS);
+    DrawCase(dc, c);
 
     DrawGate(dc, c);
 
@@ -36,7 +36,7 @@ void FET::DrawGate(wxAutoBufferedPaintDC &dc, const wxPoint &c)
     dc.DrawLine(p1, p2);
 
     p1 = wxPoint{ c.x - GateDX(), c.y + DrainDY() };
-    p2 = wxPoint{ c.x - RADIUS - DR, c.y + DrainDY() };
+    p2 = wxPoint{ c.x - radius - DR, c.y + DrainDY() };
 
     dc.DrawLine(p1, p2);
 
@@ -48,7 +48,7 @@ void FET::DrawGate(wxAutoBufferedPaintDC &dc, const wxPoint &c)
     }
     else if (type == TypeFET::ChannelP)
     {
-        std::vector<wxPoint> points = IntersectLineCircle(p2, p1, c, RADIUS);
+        std::vector<wxPoint> points = IntersectLineCircle(p2, p1, c, radius);
 
         DrawArrow(dc, p1, points[0]);
     }
@@ -57,7 +57,7 @@ void FET::DrawGate(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
 void FET::DrawSourceDrain(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    int dx = (int)std::sqrt(RADIUS * RADIUS - DrainDY() * DrainDY());
+    int dx = (int)std::sqrt(radius * radius - DrainDY() * DrainDY());
 
     wxPoint p1{ c.x, c.y - DrainDY() };
     wxPoint p2{ c.x + dx, p1.y };
@@ -94,11 +94,11 @@ int FET::GateDX()
 
 int FET::GateDY()
 {
-    return (int)(RADIUS * 0.8f);
+    return (int)(radius * 0.8f);
 }
 
 
 int FET::DrainDY()
 {
-    return (int)(RADIUS * 0.55f);
+    return (int)(radius * 0.55f);
 }
