@@ -21,17 +21,17 @@ void DARL::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
     dr.Store();
     length_arrow.Store();
 
-    radius.value /= 4;
-    dr.value = 10;
-    length_arrow.value = 8;
+    radius.value = 19;
+    dr.value = 1;
+    length_arrow.value = 10;
 
-    DrawCommon(dc, { c.x - dx, c.y - dy }, false);          // Рисуем первый транзистор
+    DrawCommon(dc, { c.x - dx, c.y - dy + 5 }, false);          // Рисуем первый транзистор
 
     wxPoint pb1 = point_B;
     wxPoint pc1 = point_C;
     wxPoint pe1 = point_E;
 
-    DrawCommon(dc, { c.x + dx, c.y + dy }, false);          // Рисуем второй транзистор
+    DrawCommon(dc, { c.x + dx, c.y + dy + 5 }, false);          // Рисуем второй транзистор
 
     wxPoint pb2 = point_B;
     wxPoint pc2 = point_C;

@@ -20,7 +20,7 @@ public:
 
 private:
 
-    TypeBJT::E type = TypeBJT::PNP;
+    TypeBJT::E type = TypeBJT::NPN;
 
     void DrawBase(wxAutoBufferedPaintDC &, const wxPoint &center);
 
