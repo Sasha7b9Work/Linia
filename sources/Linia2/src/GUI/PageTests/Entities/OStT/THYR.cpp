@@ -20,15 +20,19 @@ void THYR::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 }
 
 
-void THYR::DrawControlElectrode(wxAutoBufferedPaintDC &dc, const wxPoint &center) const
+void THYR::DrawControlElectrode(wxAutoBufferedPaintDC &dc, const wxPoint &c) const
 {
     const wxPoint d = Delta();
+
+    const int delta = radius / 10;
 
     if (DIOD::type == TypeDIOD::Common_Anode_P)
     {
         if (type == TypeTHYR::Control_Anode)
         {
+            LineDriwer driwer{ dc, {c.x - d.x, c.y + d.y} };
 
+            driwer.LineOn({ -delta, delta });
         }
         else if (type == TypeTHYR::Control_Catode)
         {

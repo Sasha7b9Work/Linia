@@ -76,3 +76,12 @@ int LineDriwer::LineOnDX(int dx)
 
     return coord.x;
 }
+
+
+wxPoint LineDriwer::LineOn(const wxPoint &delta)
+{
+    wxPoint coord_next{ coord.x + delta.x, coord.y + delta.y };
+    dc.DrawLine(coord, coord_next);
+    coord = coord_next;
+    return coord;
+}

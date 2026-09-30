@@ -45,6 +45,8 @@ public:
 
     int LineOnDX(int dx);
 
+    wxPoint LineOn(const wxPoint &delta);
+
     int GetX() const
     {
         return coord.x;
