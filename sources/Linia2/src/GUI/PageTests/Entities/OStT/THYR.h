@@ -16,10 +16,14 @@ public:
 
 private:
 
+    TypeTHYR::E type = TypeTHYR::Control_Anode;
+
     virtual bool GetPoint_B(wxPoint &result) const override
     {
         result = point_B;
 
         return true;
     }
+
+    void DrawControlElectrode(wxAutoBufferedPaintDC &, const wxPoint &center) const;
 };

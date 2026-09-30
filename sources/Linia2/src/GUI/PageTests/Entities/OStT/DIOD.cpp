@@ -12,8 +12,6 @@ DIOD::DIOD(Test *test) : OStT(test)
 
 void DIOD::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    DrawCase(dc, c);
-
     DrawCommon(dc, c);
 
     FuncAfterDraw(dc);
@@ -48,6 +46,25 @@ void DIOD::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c)
         driwer.MoveToY(c.y + d.y);
 
         driwer.LineToX(c.x - d.x);
+    }
+
+    DrawAnode(dc, c);
+}
+
+
+void DIOD::DrawAnode(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+{
+    if (type == TypeDIOD::Common_Anode_P)
+    {
+        wxPoint d = Delta();
+
+        LineDriwer driwer{ dc, {c.x - d.x, c.y + d.y } };
+        driwer.LineTo({ c.x, c.y - d.y });
+        driwer.LineTo({ c.x + d.x, c.y + d.y });
+    }
+    else if (type == TypeDIOD::Common_Catode_N)
+    {
+
     }
 }
 

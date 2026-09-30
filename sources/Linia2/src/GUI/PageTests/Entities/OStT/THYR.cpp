@@ -12,9 +12,31 @@ THYR::THYR(Test *test) : DIOD(test)
 
 void THYR::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    DrawCase(dc, c);
-
     DIOD::DrawCommon(dc, c);
 
+    DrawControlElectrode(dc, c);
+
     FuncAfterDraw(dc);
+}
+
+
+void THYR::DrawControlElectrode(wxAutoBufferedPaintDC &dc, const wxPoint &center) const
+{
+    const wxPoint d = Delta();
+
+    if (DIOD::type == TypeDIOD::Common_Anode_P)
+    {
+        if (type == TypeTHYR::Control_Anode)
+        {
+
+        }
+        else if (type == TypeTHYR::Control_Catode)
+        {
+
+        }
+    }
+    else if (DIOD::type == TypeDIOD::Common_Catode_N)
+    {
+
+    }
 }
