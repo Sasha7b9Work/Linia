@@ -65,3 +65,18 @@ wxPoint AutoBufferedPaintDC::GetCoord() const
 {
     return coord;
 }
+
+void AutoBufferedPaintDC::MoveOnDX(int dx)
+{
+    DrawLine(coord, { coord.x + dx, coord.y });
+
+    coord.x += dx;
+}
+
+
+void AutoBufferedPaintDC::LineToY(int y)
+{
+    DrawLine(coord, { coord.x, y });
+
+    coord.y = y;
+}

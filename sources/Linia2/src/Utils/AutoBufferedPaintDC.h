@@ -17,9 +17,13 @@ public:
 
     void MoveOnDY(int);
 
+    void MoveOnDX(int);
+
     void LineTo(const wxPoint &);
 
     void LineToX(int);
+
+    void LineToY(int);
 
     void LineOnDY(int);
 

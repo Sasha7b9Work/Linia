@@ -51,9 +51,9 @@ void DIOD::DrawAnode(AutoBufferedPaintDC &dc, const wxPoint &c)
     {
         wxPoint d = Delta();
 
-        LineDriwer driwer{ dc, {c.x - d.x, c.y + d.y } };
-        driwer.LineTo({ c.x, c.y - d.y });
-        driwer.LineTo({ c.x + d.x, c.y + d.y });
+        dc.MoveTo({ c.x - d.x, c.y + d.y });
+        dc.LineTo({ c.x, c.y - d.y });
+        dc.LineTo({ c.x + d.x, c.y + d.y });
     }
     else if (type == TypeDIOD::Common_Catode_N)
     {
