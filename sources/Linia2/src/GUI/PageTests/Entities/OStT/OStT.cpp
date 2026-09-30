@@ -168,21 +168,16 @@ void OStT::DrawAnchorPoints(wxAutoBufferedPaintDC &dc)
 {
     DrawAnchorPoint(dc, GetPoint_C());
 
-    bool receive = false;
-
-    wxPoint point = GetPoint_B(receive);
-
-    if (receive)
-    {
-        DrawAnchorPoint(dc, point);
-    }
-
-    point = GetPoint_S(receive);
-
-    if (receive)
-    {
-        DrawAnchorPoint(dc, point);
-    }
-
     DrawAnchorPoint(dc, GetPoint_E());
+
+    wxPoint point;
+
+    if (GetPoint_B(point))
+    {
+        DrawAnchorPoint(dc, point);
+    }
+    if (GetPoint_S(point))
+    {
+        DrawAnchorPoint(dc, point);
+    }
 }

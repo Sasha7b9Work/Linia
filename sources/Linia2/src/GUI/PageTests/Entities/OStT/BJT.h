@@ -27,11 +27,11 @@ private:
 
     void DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c);
 
-    virtual wxPoint GetPointBase(bool &result) const
+    virtual bool GetPoint_B(wxPoint &result) const override
     {
-        result = true;
+        result = point_B;
 
-        return point_B;
+        return true;
     }
 
     // x - смещение вертикальной линии базы относительно центра по горизонтали

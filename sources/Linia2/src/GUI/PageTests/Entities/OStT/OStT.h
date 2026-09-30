@@ -31,11 +31,11 @@ public:
     virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) = 0;
 
     // Точка привязки базы
-    virtual wxPoint GetPoint_B(bool &result) const
+    virtual bool GetPoint_B(wxPoint &result) const
     {
-        result = false;
+        result = point_B;
 
-        return point_B;
+        return false;
     }
 
     // Точка привязки коллектора
@@ -45,11 +45,11 @@ public:
     }
 
     // Точка привязки подложки
-    virtual wxPoint GetPoint_S(bool &result) const
+    virtual bool GetPoint_S(wxPoint &result) const
     {
-        result = false;
+        result = point_S;
 
-        return point_S;
+        return false;
     }
 
     // Точка привязки земли/эмиттера

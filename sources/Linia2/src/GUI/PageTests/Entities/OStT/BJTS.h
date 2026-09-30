@@ -13,4 +13,11 @@ public:
     BJTS(Test *);
 
     virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
+
+    virtual bool GetPoint_S(wxPoint &result) const override
+    {
+        result = point_S;
+
+        return true;
+    }
 };
