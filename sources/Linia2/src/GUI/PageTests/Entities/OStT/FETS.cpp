@@ -15,8 +15,6 @@ void FETS::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
     FET::DrawCommon(dc, c);
 
     DrawSubstrate(dc, c);
-
-    FuncAfterDraw(dc);
 }
 
 

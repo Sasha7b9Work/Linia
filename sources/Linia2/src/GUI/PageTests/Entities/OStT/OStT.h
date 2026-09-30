@@ -101,6 +101,8 @@ public:
         return "Substr";
     }
 
+    void FuncAfterDraw(AutoBufferedPaintDC &);
+
 protected:
 
     friend class BJT;
@@ -118,11 +120,6 @@ protected:
     StoredValue length_arrow{ 15 };         // Длина стрелки на эмиттере
 
     static const int y_ground = 720;        // Координата y отрисовки земли
-
-    void FuncAfterDraw(AutoBufferedPaintDC &);
-
-    // Нарисовать значок земли
-    void DrawGround(int x, int y, AutoBufferedPaintDC &);
 
     // Рисует линию длиной length под углом angleDeg
     void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, AutoBufferedPaintDC &);

@@ -12,8 +12,6 @@ FET::FET(Test *test) : OStT(test)
 void FET::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
     DrawCommon(dc, c);
-
-    FuncAfterDraw(dc);
 }
 
 

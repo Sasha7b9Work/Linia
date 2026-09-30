@@ -15,8 +15,6 @@ void BJTS::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
     BJT::DrawCommon(dc, c, true);
 
     DrawSubstrate(dc, c);
-
-    FuncAfterDraw(dc);
 }
 
 

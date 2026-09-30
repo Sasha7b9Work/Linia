@@ -12,8 +12,6 @@ BJT::BJT(Test *test) : OStT(test)
 void BJT::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
     DrawCommon(dc, c, true);
-
-    FuncAfterDraw(dc);
 }
 
 

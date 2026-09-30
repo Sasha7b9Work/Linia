@@ -12,8 +12,6 @@ DIOD::DIOD(Test *test) : OStT(test)
 void DIOD::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
     DrawCommon(dc, c);
-
-    FuncAfterDraw(dc);
 }
 
 

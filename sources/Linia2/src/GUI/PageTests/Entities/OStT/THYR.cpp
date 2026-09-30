@@ -14,8 +14,6 @@ void THYR::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
     DIOD::DrawCommon(dc, c);
 
     DrawControlElectrode(dc, c);
-
-    FuncAfterDraw(dc);
 }
 
 

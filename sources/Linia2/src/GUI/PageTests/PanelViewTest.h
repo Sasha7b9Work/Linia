@@ -96,4 +96,9 @@ private:
 
     // Если true - находимся в режиме редактирования теста
     bool InModeEdit() const;
+
+    void DrawScheme(AutoBufferedPaintDC &);
+
+    // Нарисовать значок земли
+    void DrawGround(AutoBufferedPaintDC &, const wxPoint &);
 };

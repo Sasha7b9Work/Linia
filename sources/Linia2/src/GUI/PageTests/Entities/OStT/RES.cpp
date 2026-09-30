@@ -42,6 +42,4 @@ void RES::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
 
         point_E = dc.GetCoord();
     }
-
-    FuncAfterDraw(dc);
 }

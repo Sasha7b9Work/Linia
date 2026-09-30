@@ -3,12 +3,6 @@
 #include "GUI/PageTests/Entities/OStT/OStT.h"
 
 
-void OStT::DrawGround(int x, int y, AutoBufferedPaintDC &dc)
-{
-    dc.DrawLine(x - 10, y, x + 10, y);
-}
-
-
 void OStT::DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, AutoBufferedPaintDC &dc)
 {
     double angleRad = angleDeg * M_PI / 180.0;

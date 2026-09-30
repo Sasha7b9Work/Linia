@@ -63,10 +63,10 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 
         dc.SetPen(wxPen(*wxBLACK, 1));
 
+        DrawScheme(dc);
+
         // Устанавливаем цвет текста
         dc.SetTextForeground(*wxBLACK);
-
-        ostt->Draw(dc, GetCenter());
 
         // Устанавливаем шрифт (опционально)
         dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
@@ -78,6 +78,34 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
     }
 
     event.Skip();
+}
+
+
+void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
+{
+    ostt->Draw(dc, GetCenter());
+
+    {
+        // Рисуем от эмиттера
+
+        wxPoint point = ostt->GetPoint_E();
+
+        dc.MoveTo(point);
+
+        dc.LineOnDY(50);
+
+        DrawGround(dc, dc.GetCoord());
+    }
+
+    {
+        // Рисуем от коллектора
+    }
+
+    {
+        // Рисуем от базы
+    }
+
+    ostt->FuncAfterDraw(dc);
 }
 
 
@@ -562,4 +590,10 @@ void PanelViewTest::CloseCover()
 bool PanelViewTest::InModeEdit() const
 {
     return !btnEditSave->IsShown();
+}
+
+
+void PanelViewTest::DrawGround(AutoBufferedPaintDC &dc, const wxPoint &p)
+{
+    dc.DrawLine(p.x - 10, p.y, p.x + 10, p.y);
 }
