@@ -85,6 +85,12 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 {
     ostt->Draw(dc, GetCenter());
 
+    const int DX = 250;
+    const int X_B = 100;
+    const int X_S = X_B + DX;
+    const int X_C = X_S + DX;
+    const int Y_C = 170;
+
     {
         // Рисуем от эмиттера
 
@@ -104,9 +110,9 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 
         dc.MoveTo(point);
 
-        dc.LineOnDY(-50);
+        dc.LineToY(Y_C);
 
-        dc.LineOnDX(300);
+        dc.LineToX(X_C);
 
         dc.LineToY(Y_GROUND);
 
@@ -120,11 +126,9 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 
         if (ostt->GetPoint_B(point))
         {
-            const int X0 = 50;
-
             dc.MoveTo(point);
 
-            dc.LineToX(X0);
+            dc.LineToX(X_B);
 
             dc.LineToY(Y_GROUND);
 
@@ -141,7 +145,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
         {
             dc.MoveTo(point);
 
-            dc.LineOnDX(50);
+            dc.LineToX(X_S);
 
             dc.LineToY(Y_GROUND);
 
