@@ -19,21 +19,20 @@ void DIOD::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
 
 void DIOD::DrawCommon(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
+    const wxPoint d = Delta();
+
     {
         // Рисуем вертикальную линию
 
-        dc.MoveTo(c);
-        dc.MoveOnDY(-radius - dr);
+        dc.MoveTo({ c.x, c.y - d.y - dr });
         point_C = dc.GetCoord();
 
-        dc.LineOnDY(dr * 2 + radius * 2);
+        dc.LineTo({ c.x, c.y + d.y + dr });
         point_E = dc.GetCoord();
     }
 
     {
         // Рисуем перпендикулярные линии
-
-        wxPoint d = Delta();
 
         dc.MoveTo({ c.x - d.x, c.y - d.y });
         dc.LineToX(c.x + d.x);

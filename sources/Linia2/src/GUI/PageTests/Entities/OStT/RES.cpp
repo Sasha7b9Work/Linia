@@ -28,8 +28,6 @@ void RES::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
 
         dc.MoveTo({ c.x, c.y - d.y });
 
-        dc.LineToY(c.y - radius);
-
         dc.LineOnDY(-dr);
 
         point_C = dc.GetCoord();
@@ -39,8 +37,6 @@ void RES::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
         // Вывод эмиттера
 
         dc.MoveTo({ c.x, c.y + d.y });
-
-        dc.LineToY(c.y + radius);
 
         dc.LineOnDY(dr);
 
