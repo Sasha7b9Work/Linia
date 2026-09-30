@@ -55,7 +55,7 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 {
     if (test)
     {
-        wxAutoBufferedPaintDC dc{ this };
+        AutoBufferedPaintDC dc{ this };
 
         dc.SetBackground(wxBrush(GetBackgroundColour()));
         dc.Clear();

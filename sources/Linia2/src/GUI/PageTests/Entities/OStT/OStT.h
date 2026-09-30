@@ -1,8 +1,6 @@
 // 2026/09/29 11:03:29 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
-#pragma warning(push, 0)
-    #include <wx/dcbuffer.h>
-#pragma warning(pop)
+#include "Utils/AutoBufferedPaintDC.h"
 
 
 // Object Subject to Testing - ОПИ - объект, подлежащий исследованию
@@ -53,7 +51,7 @@ public:
 
     virtual ~OStT() { }
 
-    virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) = 0;
+    virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) = 0;
 
     // Точка привязки базы
     virtual bool GetPoint_B(wxPoint &result) const
@@ -101,24 +99,24 @@ protected:
 
     static const int y_ground = 720;        // Координата y отрисовки земли
 
-    void FuncAfterDraw(wxAutoBufferedPaintDC &);
+    void FuncAfterDraw(AutoBufferedPaintDC &);
 
     // Нарисовать значок земли
-    void DrawGround(int x, int y, wxAutoBufferedPaintDC &);
+    void DrawGround(int x, int y, AutoBufferedPaintDC &);
 
     // Рисует линию длиной length под углом angleDeg
-    void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &);
+    void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, AutoBufferedPaintDC &);
 
     // Нарисовать "корпус" транзистора
-    void DrawCase(wxAutoBufferedPaintDC &, const wxPoint &c);
+    void DrawCase(AutoBufferedPaintDC &, const wxPoint &c);
 
     // Нарисовать точку привязки
-    void DrawAnchorPoint(wxAutoBufferedPaintDC &, const wxPoint &);
+    void DrawAnchorPoint(AutoBufferedPaintDC &, const wxPoint &);
 
-    void DrawAnchorPoints(wxAutoBufferedPaintDC &);
+    void DrawAnchorPoints(AutoBufferedPaintDC &);
 
     // Нарисовать стрелку из точки 1 в точку 2
-    void DrawArrow(wxAutoBufferedPaintDC &, const wxPoint &p1, const wxPoint &p2);
+    void DrawArrow(AutoBufferedPaintDC &, const wxPoint &p1, const wxPoint &p2);
 
     // Повернуть точку p1 вокруг точки p2 на угол angleDeg (в градусах)
     wxPoint RotatePoint(const wxPoint &p1, const wxPoint &p2, double angleDeg);

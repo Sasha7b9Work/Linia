@@ -12,7 +12,7 @@ public:
 
     THYR(Test *);
 
-    virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &center) override;
+    virtual void Draw(AutoBufferedPaintDC &, const wxPoint &center) override;
 
 private:
 
@@ -25,5 +25,5 @@ private:
         return true;
     }
 
-    void DrawControlElectrode(wxAutoBufferedPaintDC &, const wxPoint &center) const;
+    void DrawControlElectrode(AutoBufferedPaintDC &, const wxPoint &center) const;
 };

@@ -1,7 +1,6 @@
 // 2026/09/29 11:10:33 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageTests/Entities/OStT/DARL.h"
-#include "Utils/LineDrawer.h"
 
 
 DARL::DARL(Test *test) : BJT(test)
@@ -10,7 +9,7 @@ DARL::DARL(Test *test) : BJT(test)
 }
 
 
-void DARL::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+void DARL::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
     DrawCase(dc, c);
 
@@ -48,46 +47,46 @@ void DARL::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
         dc.DrawLine(pb1, points[1]);
 
-        LineDriwer driwer{ dc, points[1] };
-        driwer.LineOnDX(-dr);
+        dc.MoveTo(points[1]);
+        dc.LineOnDX(-dr);
 
-        point_B = driwer.GetCoord();
+        point_B = dc.GetCoord();
     }
 
     {
         // Соединение между транзисторами
 
-        LineDriwer driwer{ dc, pe1 };
-        driwer.LineOnDY(pb2.y - pe1.y);
-        driwer.LineOnDX(pb2.x - pe1.x);
+        dc.MoveTo(pe1);
+        dc.LineOnDY(pb2.y - pe1.y);
+        dc.LineOnDX(pb2.x - pe1.x);
     }
 
     {
         // Коллектор
 
-        LineDriwer driwer{ dc, pc1 };
-        driwer.LineOnDX(pc2.x - pc1.x);
+        dc.MoveTo(pc1);
+        dc.LineOnDX(pc2.x - pc1.x);
 
-        std::vector<wxPoint> points = IntersectLineCircle(pc2, driwer.GetCoord(), c, (double)radius);
+        std::vector<wxPoint> points = IntersectLineCircle(pc2, dc.GetCoord(), c, (double)radius);
 
-        driwer.MoveTo(pc2);
-        driwer.LineTo(points[1]);
-        driwer.LineOnDY(-dr);
+        dc.MoveTo(pc2);
+        dc.LineTo(points[1]);
+        dc.LineOnDY(-dr);
 
-        point_C = driwer.GetCoord();
+        point_C = dc.GetCoord();
     }
 
     {
         // Эмиттер
 
-        LineDriwer driwer{ dc, pe2 };
+        dc.MoveTo(pe2);
 
         std::vector<wxPoint> points = IntersectLineCircle(pe2, { pe2.x, pe2.y + 10 }, c, (double)radius);
 
-        driwer.LineTo(points[1]);
-        driwer.LineOnDY(dr);
+        dc.LineTo(points[1]);
+        dc.LineOnDY(dr);
 
-        point_E = driwer.GetCoord();
+        point_E = dc.GetCoord();
     }
 
     FuncAfterDraw(dc);

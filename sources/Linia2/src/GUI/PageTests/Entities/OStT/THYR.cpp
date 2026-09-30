@@ -1,7 +1,6 @@
 // 2026/09/29 11:23:32 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageTests/Entities/OStT/THYR.h"
-#include "Utils/LineDrawer.h"
 
 
 THYR::THYR(Test *test) : DIOD(test)
@@ -10,7 +9,7 @@ THYR::THYR(Test *test) : DIOD(test)
 }
 
 
-void THYR::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+void THYR::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
     DIOD::DrawCommon(dc, c);
 
@@ -20,7 +19,7 @@ void THYR::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 }
 
 
-void THYR::DrawControlElectrode(wxAutoBufferedPaintDC &dc, const wxPoint &c) const
+void THYR::DrawControlElectrode(AutoBufferedPaintDC &dc, const wxPoint &c) const
 {
     const wxPoint d = Delta();
 
@@ -30,9 +29,9 @@ void THYR::DrawControlElectrode(wxAutoBufferedPaintDC &dc, const wxPoint &c) con
     {
         if (type == TypeTHYR::Control_Anode)
         {
-            LineDriwer driwer{ dc, {c.x - d.x, c.y + d.y} };
+            dc.MoveTo({ c.x - d.x, c.y + d.y });
 
-            driwer.LineOn({ -delta, delta });
+            dc.LineOn({ -delta, delta });
         }
         else if (type == TypeTHYR::Control_Catode)
         {

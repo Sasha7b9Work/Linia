@@ -13,18 +13,18 @@ public:
 
     BJT(Test *);
 
-    virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
+    virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) override;
 
     // Нарисовать общую часть для BJT и BJTS
-    void DrawCommon(wxAutoBufferedPaintDC &, const wxPoint &center, bool draw_case);
+    void DrawCommon(AutoBufferedPaintDC &, const wxPoint &center, bool draw_case);
 
 private:
 
     TypeBJT::E type = TypeBJT::NPN;
 
-    void DrawBase(wxAutoBufferedPaintDC &, const wxPoint &center);
+    void DrawBase(AutoBufferedPaintDC &, const wxPoint &center);
 
-    void DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c);
+    void DrawCollectorEmitter(AutoBufferedPaintDC &dc, const wxPoint &c);
 
     virtual bool GetPoint_B(wxPoint &result) const override
     {

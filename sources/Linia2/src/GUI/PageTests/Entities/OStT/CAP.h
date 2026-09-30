@@ -12,7 +12,7 @@ public:
 
     CAP(Test *);
 
-    virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
+    virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) override;
 
 private:
 };

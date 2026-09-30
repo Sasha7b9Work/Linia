@@ -9,7 +9,7 @@ CAP::CAP(Test *test) : OStT(test)
 }
 
 
-void CAP::Draw(wxAutoBufferedPaintDC &, const wxPoint &)
+void CAP::Draw(AutoBufferedPaintDC &, const wxPoint &)
 {
 
 }

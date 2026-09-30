@@ -2,6 +2,7 @@
 #pragma once
 #include "GUI/PageTests/Entities/OStT/OStT.h"
 #include "Settings/Tests/SettingsTests.h"
+#include "Utils/AutoBufferedPaintDC.h"
 
 
 // Диод
@@ -13,14 +14,14 @@ public:
 
     DIOD(Test *);
 
-    virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
+    virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) override;
 
 protected:
 
-    void DrawCommon(wxAutoBufferedPaintDC &, const wxPoint &center);
+    void DrawCommon(AutoBufferedPaintDC &, const wxPoint &center);
 
     // Рисуем анод, потому что он треугольник, катод рисовать уже не нужно
-    void DrawAnode(wxAutoBufferedPaintDC &, const wxPoint &center);
+    void DrawAnode(AutoBufferedPaintDC &, const wxPoint &center);
 
     // Смещение угла треугольника относительно центра
     wxPoint Delta() const;

@@ -8,5 +8,28 @@
 class AutoBufferedPaintDC : public wxAutoBufferedPaintDC
 {
 public:
+
+    AutoBufferedPaintDC(wxWindow *wnd) : wxAutoBufferedPaintDC(wnd) { }
+
+    void MoveTo(const wxPoint &);
+
+    void MoveToY(int);
+
+    void MoveOnDY(int);
+
+    void LineTo(const wxPoint &);
+
+    void LineToX(int);
+
+    void LineOnDY(int);
+
+    void LineOnDX(int);
+
+    void LineOn(const wxPoint &);
+
+    wxPoint GetCoord() const;
+
 private:
+
+    wxPoint coord{ 0, 0 };
 };

@@ -1,7 +1,6 @@
 // 2026/09/29 11:15:14 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageTests/Entities/OStT/FET.h"
-#include "Utils/LineDrawer.h"
 
 
 FET::FET(Test *test) : OStT(test)
@@ -10,7 +9,7 @@ FET::FET(Test *test) : OStT(test)
 }
 
 
-void FET::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+void FET::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
     DrawCommon(dc, c);
 
@@ -18,7 +17,7 @@ void FET::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 }
 
 
-void FET::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+void FET::DrawCommon(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
     DrawCase(dc, c);
 
@@ -28,7 +27,7 @@ void FET::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 }
 
 
-void FET::DrawGate(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+void FET::DrawGate(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
     wxPoint p1{ c.x - GateDX(), c.y - GateDY() };
     wxPoint p2{ c.x - GateDX(), c.y + GateDY() };
@@ -55,7 +54,7 @@ void FET::DrawGate(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 }
 
 
-void FET::DrawSourceDrain(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+void FET::DrawSourceDrain(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
     int dx = (int)std::sqrt(radius * radius - DrainDY() * DrainDY());
 
@@ -65,11 +64,11 @@ void FET::DrawSourceDrain(wxAutoBufferedPaintDC &dc, const wxPoint &c)
     {
         // Сток
 
-        LineDriwer driwer(dc, p1);
-        driwer.LineTo(p2);
-        driwer.LineOnDY(-dr);
+        dc.MoveTo(p1);
+        dc.LineTo(p2);
+        dc.LineOnDY(-dr);
 
-        point_C = driwer.GetCoord();
+        point_C = dc.GetCoord();
     }
 
     {
@@ -77,11 +76,11 @@ void FET::DrawSourceDrain(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
         p1.y = c.y + DrainDY();
         p2.y = p1.y;
-        LineDriwer driwer(dc, p1);
-        driwer.LineTo(p2);
-        driwer.LineOnDY(dr);
+        dc.MoveTo(p1);
+        dc.LineTo(p2);
+        dc.LineOnDY(dr);
 
-        point_E = driwer.GetCoord();
+        point_E = dc.GetCoord();
     }
 }
 
@@ -94,11 +93,11 @@ int FET::GateDX()
 
 int FET::GateDY()
 {
-    return (int)(radius * 0.8f);
+    return (int)(radius * 0.8);
 }
 
 
 int FET::DrainDY()
 {
-    return (int)(radius * 0.55f);
+    return (int)(radius * 0.55);
 }

@@ -13,19 +13,19 @@ public:
 
     FET(Test *);
 
-    virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
+    virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) override;
 
-    void DrawCommon(wxAutoBufferedPaintDC &, const wxPoint &);
+    void DrawCommon(AutoBufferedPaintDC &, const wxPoint &);
 
 private:
 
     TypeFET::E type = TypeFET::ChannelP;
 
     // Нарисовать затвор
-    void DrawGate(wxAutoBufferedPaintDC &, const wxPoint &);
+    void DrawGate(AutoBufferedPaintDC &, const wxPoint &);
 
     // Нарисовать исток и сток
-    void DrawSourceDrain(wxAutoBufferedPaintDC &, const wxPoint &);
+    void DrawSourceDrain(AutoBufferedPaintDC &, const wxPoint &);
 
     // Смещение линии затвора относительно центра по X
     int GateDX();

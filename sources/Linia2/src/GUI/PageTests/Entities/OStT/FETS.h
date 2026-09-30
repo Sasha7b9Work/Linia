@@ -12,7 +12,7 @@ public:
 
     FETS(Test *);
 
-    virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &center) override;
+    virtual void Draw(AutoBufferedPaintDC &, const wxPoint &center) override;
 
     virtual bool GetPoint_S(wxPoint &result) const override
     {
@@ -23,5 +23,5 @@ public:
 
 private:
 
-    void DrawSubstrate(wxAutoBufferedPaintDC &, const wxPoint &center);
+    void DrawSubstrate(AutoBufferedPaintDC &, const wxPoint &center);
 };

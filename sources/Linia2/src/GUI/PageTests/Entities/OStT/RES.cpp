@@ -9,7 +9,7 @@ RES::RES(Test *test) : OStT(test)
 }
 
 
-void RES::Draw(wxAutoBufferedPaintDC &, const wxPoint &)
+void RES::Draw(AutoBufferedPaintDC &, const wxPoint &)
 {
 
 }

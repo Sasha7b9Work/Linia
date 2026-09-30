@@ -1,7 +1,6 @@
 // 2026/09/29 10:57:20 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageTests/Entities/OStT/BJT.h"
-#include "Utils/LineDrawer.h"
 
 
 BJT::BJT(Test *test) : OStT(test)
@@ -10,7 +9,7 @@ BJT::BJT(Test *test) : OStT(test)
 }
 
 
-void BJT::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+void BJT::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
     DrawCommon(dc, c, true);
 
@@ -18,7 +17,7 @@ void BJT::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 }
 
 
-void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, bool draw_case)
+void BJT::DrawCommon(AutoBufferedPaintDC &dc, const wxPoint &c, bool draw_case)
 {
     if (draw_case)
     {
@@ -31,7 +30,7 @@ void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, bool draw_case
 }
 
 
-void BJT::DrawBase(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+void BJT::DrawBase(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
     const wxPoint d = DeltaBase();
 
@@ -49,7 +48,7 @@ void BJT::DrawBase(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 }
 
 
-void BJT::DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+void BJT::DrawCollectorEmitter(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
     const int dyb = (int)(radius * 0.3);    // Смещение по базе
     const int dyc = (int)(radius * 1.2);    // Смещение по коллектору
@@ -66,10 +65,10 @@ void BJT::DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
         points = OStT::IntersectLineCircle(p1, p2, c, radius);
 
-        LineDriwer driwer{ dc, p1 };
-        driwer.LineTo(points[1]);
-        driwer.LineOnDY(-dr);
-        point_C = driwer.GetCoord();
+        dc.MoveTo(p1);
+        dc.LineTo(points[1]);
+        dc.LineOnDY(-dr);
+        point_C = dc.GetCoord();
     }
 
     {
@@ -80,10 +79,10 @@ void BJT::DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
         points = OStT::IntersectLineCircle(p1, p2, c, radius);
 
-        LineDriwer driwer{ dc, p1 };
-        driwer.LineTo(points[1]);
-        driwer.LineOnDY(dr);
-        point_E = driwer.GetCoord();
+        dc.MoveTo(p1);
+        dc.LineTo(points[1]);
+        dc.LineOnDY(dr);
+        point_E = dc.GetCoord();
 
         if (type == TypeBJT::NPN)
         {
