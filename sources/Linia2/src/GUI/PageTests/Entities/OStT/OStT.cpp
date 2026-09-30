@@ -35,14 +35,13 @@ void OStT::DrawAnchorPoint(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
 void OStT::DrawArrow(wxAutoBufferedPaintDC &dc, const wxPoint &p1, const wxPoint &p2)
 {
-    double length = 15.0;
     double angle = 20.0;
 
-    wxPoint p = PointAtAngle(p1, p2, length, angle);
+    wxPoint p = PointAtAngle(p1, p2, (double)length_arrow, angle);
 
     dc.DrawLine(p, p2);
 
-    p = PointAtAngle(p1, p2, length, -angle);
+    p = PointAtAngle(p1, p2, (double)length_arrow, -angle);
 
     dc.DrawLine(p, p2);
 }

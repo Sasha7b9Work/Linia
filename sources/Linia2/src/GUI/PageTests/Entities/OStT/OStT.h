@@ -97,6 +97,7 @@ protected:
 
     StoredValue radius{ 50 };               // Радиус корпуса. Может изменяться
     StoredValue dr{ 40 };                   // На столько пикселей выступает точка привязки за окружность корпуса
+    StoredValue length_arrow{ 15 };         // Длина стрелки на эмиттере
 
     static const int y_ground = 720;        // Координата y отрисовки земли
 

@@ -15,4 +15,11 @@ public:
     virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
 
 private:
+
+    virtual bool GetPoint_B(wxPoint &result) const override
+    {
+        result = point_B;
+
+        return true;
+    }
 };
