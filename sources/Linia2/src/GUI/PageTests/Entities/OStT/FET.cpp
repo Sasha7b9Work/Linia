@@ -20,7 +20,7 @@ void FET::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
 void FET::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    DrawCase(dc, c);
+    DrawCase(dc, c, RADIUS);
 
     DrawGate(dc, c);
 

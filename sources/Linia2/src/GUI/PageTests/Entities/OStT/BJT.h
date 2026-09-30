@@ -16,16 +16,15 @@ public:
     virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
 
     // Нарисовать общую часть для BJT и BJTS
-    // x_vert - заканчивается линия базы внутри окружности
-    void DrawCommon(wxAutoBufferedPaintDC &, const wxPoint &);
+    void DrawCommon(wxAutoBufferedPaintDC &, const wxPoint &center, bool draw_case, int radius);
 
 private:
 
     TypeBJT::E type = TypeBJT::PNP;
 
-    void DrawBase(wxAutoBufferedPaintDC &, const wxPoint &center);
+    void DrawBase(wxAutoBufferedPaintDC &, const wxPoint &center, int radius);
 
-    void DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c);
+    void DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c, int radius);
 
     virtual bool GetPoint_B(wxPoint &result) const override
     {
@@ -36,8 +35,8 @@ private:
 
     // x - смещение вертикальной линии базы относительно центра по горизонтали
     // y - верхняя точка вертикальной линии базы относительно центра
-    wxPoint DeltaBase() const
+    wxPoint DeltaBase(int radius) const
     {
-        return wxPoint{ (int)(RADIUS * 0.5), (int)(RADIUS * 0.5) };
+        return wxPoint{ (int)(radius * 0.5), (int)(radius * 0.5) };
     }
 };

@@ -1,12 +1,12 @@
 // 2026/09/29 11:10:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
-#include "GUI/PageTests/Entities/OStT/OStT.h"
+#include "GUI/PageTests/Entities/OStT/BJT.h"
 
 
 // Транзистор Дарлингтона
 
 
-class DARL : public OStT
+class DARL : public BJT
 {
 public:
 

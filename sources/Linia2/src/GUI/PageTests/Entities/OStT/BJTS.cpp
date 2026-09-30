@@ -13,7 +13,7 @@ BJTS::BJTS(Test *test) : BJT(test)
 
 void BJTS::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    BJT::DrawCommon(dc, c);
+    BJT::DrawCommon(dc, c, true, RADIUS);
 
     DrawSubstrate(dc, c);
 

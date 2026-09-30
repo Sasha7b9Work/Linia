@@ -21,9 +21,9 @@ void OStT::DrawLineWithAngle(const wxPoint &start, double length, double angleDe
 }
 
 
-void OStT::DrawCase(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+void OStT::DrawCase(wxAutoBufferedPaintDC &dc, const wxPoint &c, int radius)
 {
-    dc.DrawCircle(c, RADIUS);
+    dc.DrawCircle(c, radius);
 }
 
 

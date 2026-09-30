@@ -12,27 +12,28 @@ BJT::BJT(Test *test) : OStT(test)
 
 void BJT::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    DrawCommon(dc, c);
+    DrawCommon(dc, c, true, RADIUS);
 
     FuncAfterDraw(dc);
 }
 
 
-void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, bool draw_case, int radius)
 {
-    DrawCase(dc, c);
+    if (draw_case)
+    {
+        DrawCase(dc, c, radius);
+    }
 
-    DrawBase(dc, c);
+    DrawBase(dc, c, radius);
 
-    DrawCollectorEmitter(dc, c);
-
-    FuncAfterDraw(dc);
+    DrawCollectorEmitter(dc, c, radius);
 }
 
 
-void BJT::DrawBase(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+void BJT::DrawBase(wxAutoBufferedPaintDC &dc, const wxPoint &c, int radius)
 {
-    const wxPoint d = DeltaBase();
+    const wxPoint d = DeltaBase(radius);
 
     wxPoint p1{ c.x - d.x, c.y - d.y };
     wxPoint p2{ c.x - d.x, c.y + d.y };
@@ -40,7 +41,7 @@ void BJT::DrawBase(wxAutoBufferedPaintDC &dc, const wxPoint &c)
     dc.DrawLine(p1, p2);
 
     p1 = { c.x - d.x, c.y };
-    p2 = { c.x - RADIUS - DR, c.y };
+    p2 = { c.x - radius - DR, c.y };
 
     point_B = p2;
 
@@ -48,22 +49,22 @@ void BJT::DrawBase(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 }
 
 
-void BJT::DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+void BJT::DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c, int radius)
 {
-    const int dyb = (int)(RADIUS * 0.3);    // Смещение по базе
-    const int dyc = (int)(RADIUS * 1.2);    // Смещение по коллектору
+    const int dyb = (int)(radius * 0.3);    // Смещение по базе
+    const int dyc = (int)(radius * 1.2);    // Смещение по коллектору
 
-    const wxPoint d = DeltaBase();
+    const wxPoint d = DeltaBase(radius);
 
     wxPoint p1{ c.x - d.x, c.y - dyb };
-    wxPoint p2{ c.x + RADIUS, c.y - dyc };
+    wxPoint p2{ c.x + radius, c.y - dyc };
 
     std::vector<wxPoint> points;
 
     {
         // Коллектор
 
-        points = OStT::IntersectLineCircle(p1, p2, c, RADIUS);
+        points = OStT::IntersectLineCircle(p1, p2, c, radius);
 
         LineDriwer driwer{ dc, p1 };
         driwer.LineTo(points[1]);
@@ -77,7 +78,7 @@ void BJT::DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c)
         p1.y = c.y + dyb;
         p2.y = c.y + dyc;
 
-        points = OStT::IntersectLineCircle(p1, p2, c, RADIUS);
+        points = OStT::IntersectLineCircle(p1, p2, c, radius);
 
         LineDriwer driwer{ dc, p1 };
         driwer.LineTo(points[1]);

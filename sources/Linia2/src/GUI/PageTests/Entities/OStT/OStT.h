@@ -82,7 +82,7 @@ protected:
     void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &);
 
     // Нарисовать "корпус" транзистора
-    void DrawCase(wxAutoBufferedPaintDC &, const wxPoint &c);
+    void DrawCase(wxAutoBufferedPaintDC &, const wxPoint &c, int radius);
 
     // Нарисовать точку привязки
     void DrawAnchorPoint(wxAutoBufferedPaintDC &, const wxPoint &);
