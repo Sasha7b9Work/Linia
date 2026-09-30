@@ -39,7 +39,7 @@ void FET::DrawGate(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
     dc.DrawLine(p1, p2);
 
-    point_base = p2;
+    point_B = p2;
 
     if (type == TypeFET::ChannelN)
     {
@@ -63,14 +63,14 @@ void FET::DrawSourceDrain(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
     dc.DrawLine(p1, p2);
 
-    point_collector = p2;
+    point_C = p2;
 
     p1.y = c.y + DrainDY();
     p2.y = p1.y;
 
     dc.DrawLine(p1, p2);
 
-    point_emitter = p2;
+    point_E = p2;
 }
 
 

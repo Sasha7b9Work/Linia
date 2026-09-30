@@ -9,7 +9,7 @@ class LineDriwer
 {
 public:
 
-    LineDriwer(wxAutoBufferedPaintDC &, int x, int y);
+    LineDriwer(wxAutoBufferedPaintDC &, const wxPoint &);
 
     void MoveTo(const wxPoint &);
 
@@ -39,7 +39,7 @@ public:
 
     int LineToY(int y);
 
-    wxPoint LineTo(int x, int y);
+    wxPoint LineTo(const wxPoint &);
 
     int LineOnDX(int dx);
 

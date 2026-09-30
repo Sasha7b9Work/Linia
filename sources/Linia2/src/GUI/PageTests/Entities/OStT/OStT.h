@@ -11,6 +11,15 @@
 class Test;
 
 
+/*
+*   Точки подключения: 
+*   База (B) - база, затвор
+*   Коллектор (C) - коллектор, сток
+*   Эмиттер (E) - эмиттер, исток
+*   Подложка (S)
+*/
+
+
 class OStT
 {
 public:
@@ -22,31 +31,31 @@ public:
     virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) = 0;
 
     // Точка привязки базы
-    virtual wxPoint GetPointBase(bool &result) const
+    virtual wxPoint GetPoint_B(bool &result) const
     {
         result = false;
 
-        return point_base;
+        return point_B;
     }
 
     // Точка привязки коллектора
-    wxPoint GetPointCollector() const
+    wxPoint GetPoint_C() const
     {
-        return point_collector;
+        return point_C;
     }
 
     // Точка привязки подложки
-    virtual wxPoint GetPointSubstrate(bool &result) const
+    virtual wxPoint GetPoint_S(bool &result) const
     {
         result = false;
 
-        return point_substrate;
+        return point_S;
     }
 
     // Точка привязки земли/эмиттера
-    wxPoint GetPointGround() const              // Это земля или эмиттер
+    wxPoint GetPoint_E() const              // Это земля или эмиттер
     {
-        return point_emitter;
+        return point_E;
     }
 
 protected:
@@ -56,10 +65,10 @@ protected:
 
     OStT(Test *_test) : test(_test) { }
 
-    wxPoint point_emitter;
-    wxPoint point_collector;
-    wxPoint point_base;
-    wxPoint point_substrate;
+    wxPoint point_E;
+    wxPoint point_C;
+    wxPoint point_B;
+    wxPoint point_S;
 
     static const int y_ground = 720;        // Координата y отрисовки земли
     static const int DR = 40;               // На столько пикселей выступает точка привязки за окружность корпуса

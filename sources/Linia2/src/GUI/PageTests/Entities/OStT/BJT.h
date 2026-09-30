@@ -25,14 +25,19 @@ private:
 
     void DrawBase(wxAutoBufferedPaintDC &dc, const wxPoint &c);
 
-    void DrawCollector(wxAutoBufferedPaintDC &dc, const wxPoint &c);
-
-    wxPoint DeltaBase() const;
+    void DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c);
 
     virtual wxPoint GetPointBase(bool &result) const
     {
         result = true;
 
-        return point_base;
+        return point_B;
+    }
+
+    // x - смещение вертикальной линии базы относительно центра по горизонтали
+    // y - верхняя точка вертикальной линии базы относительно центра
+    wxPoint DeltaBase() const
+    {
+        return wxPoint{ (int)(RADIUS * 0.5), (int)(RADIUS * 0.5) };
     }
 };

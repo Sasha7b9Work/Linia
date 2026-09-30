@@ -39,6 +39,6 @@ private:
     {
         result = true;
 
-        return point_base;
+        return point_B;
     }
 };

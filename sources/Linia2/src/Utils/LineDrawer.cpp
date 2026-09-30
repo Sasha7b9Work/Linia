@@ -3,7 +3,7 @@
 #include "Utils/LineDrawer.h"
 
 
-LineDriwer::LineDriwer(wxAutoBufferedPaintDC &_dc, int _x, int _y) : dc(_dc), coord{ _x, _y }
+LineDriwer::LineDriwer(wxAutoBufferedPaintDC &_dc, const wxPoint &_point) : dc(_dc), coord{ _point }
 {
 }
 
@@ -44,11 +44,11 @@ int LineDriwer::LineToY(int y)
 }
 
 
-wxPoint LineDriwer::LineTo(int x, int y)
+wxPoint LineDriwer::LineTo(const wxPoint &_point)
 {
-    dc.DrawLine(coord, { x, y });
+    dc.DrawLine(coord, _point);
 
-    coord = { x, y };
+    coord = _point;
 
     return coord;
 }

@@ -24,7 +24,7 @@ void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
     DrawBase(dc, c);
 
-    DrawCollector(dc, c);
+    DrawCollectorEmitter(dc, c);
 
     FuncAfterDraw(dc);
 }
@@ -32,7 +32,7 @@ void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
 void BJT::DrawBase(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    wxPoint d = DeltaBase();
+    const wxPoint d = DeltaBase();
 
     wxPoint p1{ c.x - d.x, c.y - d.y };
     wxPoint p2{ c.x - d.x, c.y + d.y };
@@ -42,19 +42,46 @@ void BJT::DrawBase(wxAutoBufferedPaintDC &dc, const wxPoint &c)
     p1 = { c.x - d.x, c.y };
     p2 = { c.x - RADIUS - DR, c.y };
 
-    point_base = p2;
+    point_B = p2;
 
     dc.DrawLine(p1, p2);
 }
 
 
-void BJT::DrawCollector(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+void BJT::DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
+    const int dyb = (int)(RADIUS * 0.3);    // Смещение по базе
+    const int dyc = (int)(RADIUS * 1.2);    // Смещение по коллектору
 
-}
+    const wxPoint d = DeltaBase();
 
+    wxPoint p1{ c.x - d.x, c.y - dyb };
+    wxPoint p2{ c.x + RADIUS, c.y - dyc };
 
-wxPoint BJT::DeltaBase() const
-{
-    return { (int)(RADIUS * 0.5), (int)(RADIUS * 0.5) };
+    std::vector<wxPoint> points;
+
+    {
+        // Коллектор
+
+        points = OStT::IntersectLineCircle(p1, p2, c, RADIUS);
+
+        LineDriwer driwer{ dc, p1 };
+        driwer.LineTo(points[1]);
+        driwer.LineOnDY(-DR);
+        point_C = driwer.GetCoord();
+    }
+
+    {
+        // Эмиттер
+
+        p1.y = c.y + dyb;
+        p2.y = c.y + dyc;
+
+        points = OStT::IntersectLineCircle(p1, p2, c, RADIUS);
+
+        LineDriwer driwer{ dc, p1 };
+        driwer.LineTo(points[1]);
+        driwer.LineOnDY(DR);
+        point_E = driwer.GetCoord();
+    }
 }

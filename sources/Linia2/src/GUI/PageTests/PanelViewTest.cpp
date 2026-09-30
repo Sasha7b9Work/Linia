@@ -134,8 +134,8 @@ void PanelViewTest::CreateBJT(const wxPoint &c, wxPoint &point_base, wxPoint &po
     int x_col = c.x + radius_trans / 2;   // / Координаты точки коммутации
     int y_col = c.y - 2 * radius_trans;   // / с коллектором
 
-    LineDriwer driwer(dc, x_col, y_col);
-    driwer.LineTo(c.x + radius_trans / 2, c.y + 2 * radius_trans);          // Вертикальная линия, которая выходит из коллектора и эмиттера
+    LineDriwer driwer(dc, { x_col, y_col });
+    driwer.LineTo({ c.x + radius_trans / 2, c.y + 2 * radius_trans });      // Вертикальная линия, которая выходит из коллектора и эмиттера
     driwer.MoveOnDY(-20);
     point_emitter = driwer.GetCoord();
     dc.DrawCircle(point_emitter, r);
@@ -144,7 +144,7 @@ void PanelViewTest::CreateBJT(const wxPoint &c, wxPoint &point_base, wxPoint &po
     const int x_vert = c.x - radius_trans * 10 / 18;                        // Здесь заканчивается линия базы внутри окружности
     wxPoint coord_base{ 90, c.y };
     driwer.MoveTo(90, c.y);
-    driwer.LineTo(x_vert, c.y);                                             // База
+    driwer.LineTo({ x_vert, c.y });                                         // База
     driwer.MoveOnDX(-50);
     point_base = driwer.GetCoord();
     dc.DrawCircle(point_base, r);
