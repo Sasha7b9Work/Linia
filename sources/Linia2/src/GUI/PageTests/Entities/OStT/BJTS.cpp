@@ -29,6 +29,6 @@ void BJTS::DrawSubstrate(wxAutoBufferedPaintDC &dc, const wxPoint &c)
     driwer.LineOnDY(2 * d.y);
     driwer.MoveTo(c.x + d.x, c.y);
     driwer.LineTo({ c.x + radius, c.y });
-    driwer.LineOnDX(DR);
+    driwer.LineOnDX(dr);
     point_S = driwer.GetCoord();
 }

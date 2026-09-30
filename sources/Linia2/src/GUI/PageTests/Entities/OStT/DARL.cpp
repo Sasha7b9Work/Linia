@@ -18,7 +18,7 @@ void DARL::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
     radius.Store();
 
-    radius.r /= 4;
+    radius.value /= 4;
 
     DrawCommon(dc, { c.x - dx, c.y - dy }, false);
 

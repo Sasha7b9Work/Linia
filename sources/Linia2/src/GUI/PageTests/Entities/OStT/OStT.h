@@ -20,6 +20,33 @@ class Test;
 */
 
 
+struct StoredValue
+{
+    StoredValue(int def) : value{ def } { }
+
+    int value = 0;
+
+    void Store()
+    {
+        stored = value;
+    }
+
+    void Restore()
+    {
+        value = stored;
+    }
+
+    operator int() const
+    {
+        return value;
+    }
+
+private:
+
+    int stored = 0;
+};
+
+
 class OStT
 {
 public:
@@ -68,33 +95,10 @@ protected:
     wxPoint point_B;
     wxPoint point_S;
 
-    struct Radius
-    {
-        int r = 50;
-
-        void Store()
-        {
-            stored = r;
-        }
-
-        void Restore()
-        {
-            r = stored;
-        }
-
-        operator int() const
-        {
-            return r;
-        }
-
-    private:
-
-        int stored = 0;
-
-    } radius;                               // Радиус корпуса. Может изменяться
+    StoredValue radius{ 50 };               // Радиус корпуса. Может изменяться
+    StoredValue dr{ 40 };                   // На столько пикселей выступает точка привязки за окружность корпуса
 
     static const int y_ground = 720;        // Координата y отрисовки земли
-    static const int DR = 40;               // На столько пикселей выступает точка привязки за окружность корпуса
 
     void FuncAfterDraw(wxAutoBufferedPaintDC &);
 

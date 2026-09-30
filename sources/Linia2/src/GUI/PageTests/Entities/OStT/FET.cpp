@@ -36,7 +36,7 @@ void FET::DrawGate(wxAutoBufferedPaintDC &dc, const wxPoint &c)
     dc.DrawLine(p1, p2);
 
     p1 = wxPoint{ c.x - GateDX(), c.y + DrainDY() };
-    p2 = wxPoint{ c.x - radius - DR, c.y + DrainDY() };
+    p2 = wxPoint{ c.x - radius - dr, c.y + DrainDY() };
 
     dc.DrawLine(p1, p2);
 
@@ -67,7 +67,7 @@ void FET::DrawSourceDrain(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
         LineDriwer driwer(dc, p1);
         driwer.LineTo(p2);
-        driwer.LineOnDY(-DR);
+        driwer.LineOnDY(-dr);
 
         point_C = driwer.GetCoord();
     }
@@ -79,7 +79,7 @@ void FET::DrawSourceDrain(wxAutoBufferedPaintDC &dc, const wxPoint &c)
         p2.y = p1.y;
         LineDriwer driwer(dc, p1);
         driwer.LineTo(p2);
-        driwer.LineOnDY(DR);
+        driwer.LineOnDY(dr);
 
         point_E = driwer.GetCoord();
     }

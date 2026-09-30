@@ -41,7 +41,7 @@ void BJT::DrawBase(wxAutoBufferedPaintDC &dc, const wxPoint &c)
     dc.DrawLine(p1, p2);
 
     p1 = { c.x - d.x, c.y };
-    p2 = { c.x - radius - DR, c.y };
+    p2 = { c.x - radius - dr, c.y };
 
     point_B = p2;
 
@@ -68,7 +68,7 @@ void BJT::DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
         LineDriwer driwer{ dc, p1 };
         driwer.LineTo(points[1]);
-        driwer.LineOnDY(-DR);
+        driwer.LineOnDY(-dr);
         point_C = driwer.GetCoord();
     }
 
@@ -82,7 +82,7 @@ void BJT::DrawCollectorEmitter(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
         LineDriwer driwer{ dc, p1 };
         driwer.LineTo(points[1]);
-        driwer.LineOnDY(DR);
+        driwer.LineOnDY(dr);
         point_E = driwer.GetCoord();
 
         if (type == TypeBJT::NPN)
