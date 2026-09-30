@@ -1,6 +1,7 @@
 // 2026/09/29 11:15:14 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageTests/Entities/OStT/FET.h"
+#include "Utils/LineDrawer.h"
 
 
 FET::FET(Test *test) : OStT(test)
@@ -59,18 +60,29 @@ void FET::DrawSourceDrain(wxAutoBufferedPaintDC &dc, const wxPoint &c)
     int dx = (int)std::sqrt(RADIUS * RADIUS - DrainDY() * DrainDY());
 
     wxPoint p1{ c.x, c.y - DrainDY() };
-    wxPoint p2{ c.x + dx + DR, c.y - DrainDY() };
+    wxPoint p2{ c.x + dx, p1.y };
 
-    dc.DrawLine(p1, p2);
+    {
+        // Сток
 
-    point_C = p2;
+        LineDriwer driwer(dc, p1);
+        driwer.LineTo(p2);
+        driwer.LineOnDY(-DR);
 
-    p1.y = c.y + DrainDY();
-    p2.y = p1.y;
+        point_C = driwer.GetCoord();
+    }
 
-    dc.DrawLine(p1, p2);
+    {
+        // Исток
 
-    point_E = p2;
+        p1.y = c.y + DrainDY();
+        p2.y = p1.y;
+        LineDriwer driwer(dc, p1);
+        driwer.LineTo(p2);
+        driwer.LineOnDY(DR);
+
+        point_E = driwer.GetCoord();
+    }
 }
 
 

@@ -35,10 +35,10 @@ private:
 
     int DrainDY();
 
-    virtual wxPoint GetPointBase(bool &result) const
+    virtual bool GetPoint_B(wxPoint &result) const override
     {
-        result = true;
+        result = point_B;
 
-        return point_B;
+        return true;
     }
 };

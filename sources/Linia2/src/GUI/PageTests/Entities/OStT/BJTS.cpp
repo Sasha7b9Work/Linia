@@ -23,7 +23,7 @@ void BJTS::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
 void BJTS::DrawSubstrate(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    const wxPoint d{ (int)(RADIUS * 0.5), (int)(RADIUS * 0.3) };
+    const wxPoint d{ (int)(RADIUS * 0.7), (int)(RADIUS * 0.3) };
 
     LineDriwer driwer{ dc, {c.x + d.x, c.y - d.y} };
     driwer.LineOnDY(2 * d.y);
