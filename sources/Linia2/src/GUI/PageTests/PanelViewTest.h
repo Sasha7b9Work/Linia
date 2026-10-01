@@ -80,10 +80,6 @@ private:
     // Нарисовать испытуемый элемент
     OStT *CreateOStT();
 
-    // type == "npn", "pnp"
-    // Биполярный транзистор с подложкой и без
-    void CreateBJT(const wxPoint &, wxPoint &point_base, wxPoint &point_collector, wxPoint &point_substrate, wxPoint &point_emitter, AutoBufferedPaintDC &dc);
-
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
 
     // Создать элементы управляения для данного теста
