@@ -33,6 +33,27 @@ struct TypeBJT
         PNP,
         count
     };
+
+    TypeBJT(E e) : type{ e } { }
+
+    bool IsNPN() const
+    {
+        return type == NPN;
+    }
+
+    bool IsPNP() const
+    {
+        return type == PNP;
+    }
+
+    void Set(E e)
+    {
+        type = e;
+    }
+
+private:
+
+    E type;
 };
 
 

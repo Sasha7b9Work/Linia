@@ -82,11 +82,11 @@ void BJT::DrawCollectorEmitter(AutoBufferedPaintDC &dc, const wxPoint &c)
         dc.LineOnDY(dr);
         point_E = dc.GetCoord();
 
-        if (type == TypeBJT::NPN)
+        if (type.IsNPN())
         {
             DrawArrow(dc, p1, points[1]);
         }
-        else if (type == TypeBJT::PNP)
+        else if (type.IsPNP())
         {
             DrawArrow(dc, points[1], p1);
         }

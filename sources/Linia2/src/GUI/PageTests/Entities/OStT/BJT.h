@@ -27,7 +27,7 @@ public:
 
 private:
 
-    TypeBJT::E type = TypeBJT::NPN;
+    TypeBJT type{ TypeBJT::NPN };
 
     void DrawBase(AutoBufferedPaintDC &, const wxPoint &center);
 
