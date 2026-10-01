@@ -57,6 +57,22 @@ struct CommonElectrode
         Catode_N,    // К земле (эмиттеру) подключён катод (чёрточка)
         Count
     };
+
+    CommonElectrode(E e) : type{ e } { }
+
+    bool IsAnode() const
+    {
+        return type == Anode_P;
+    }
+
+    bool IsCatode() const
+    {
+        return type == Catode_N;
+    }
+
+private:
+
+    E type;
 };
 
 
