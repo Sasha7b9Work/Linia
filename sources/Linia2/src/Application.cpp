@@ -19,6 +19,9 @@
 #pragma warning(pop)
 #include <cstdlib>
 #include <locale>
+#ifndef _WIN32
+    #include <csignal>
+#endif
 
 
 wxIMPLEMENT_APP(Application);
@@ -28,6 +31,13 @@ Application *Application::self = nullptr;
 
 
 #ifndef _WIN32
+
+void SignalHandler(int sig)
+{
+    // Устанавливаем флаг, а не делаем что-то сложное
+    g_signal_received = sig;
+}
+
 static void CloseApplication()
 {
     LOG_WRITE("CloseApplication()");
@@ -44,6 +54,7 @@ static void CloseApplication()
         Application::self->ExitMainLoop();
     }
 }
+
 #endif
 
 
@@ -221,8 +232,6 @@ bool Application::OnInit()
 
                 PageDebug::self->PeriodicTask();
 
-                SET::Save();
-
                 mutex.unlock();
             };
 
@@ -233,6 +242,15 @@ bool Application::OnInit()
 
 #ifdef _WIN32
 #else
+    struct sigaction sa;
+    sa.sa_handler = SignalHandler;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;  // не SA_RESTART — чтобы прервать блокирующие вызовы
+
+    sigaction(SIGTERM, &sa, nullptr);
+    sigaction(SIGINT, &sa, nullptr);
+    sigaction(SIGHUP, &sa, nullptr);
+
     signal(SIGTERM, [](int)
         {
             CloseApplication();
