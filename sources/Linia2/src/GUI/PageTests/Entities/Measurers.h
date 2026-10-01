@@ -3,9 +3,7 @@
 #include "Settings/Tests/Ranges.h"
 #include "GUI/Controls/ButtonCombo.h"
 #include "GUI/Controls/Slider.h"
-#pragma warning(push, 0)
-    #include <wx/dcbuffer.h>
-#pragma warning(pop)
+#include "Utils/AutoBufferedPaintDC.h"
 
 
 // \todo Элемент предназначен для ввода числового значения.
@@ -44,11 +42,21 @@ public:
 
     MeasurerSourcer(Type::E, Chan::E, Dir::E);
 
-    void Draw(wxAutoBufferedPaintDC &dc);
+    void Draw(AutoBufferedPaintDC &);
 
     int GetRadius() const
     {
         return radius;
+    }
+
+    void Show()
+    {
+        is_showing = true;
+    }
+
+    void Hide()
+    {
+        is_showing = false;
     }
 
 protected:
@@ -61,7 +69,8 @@ protected:
     std::vector<wxWindow *> parametersU;
     std::vector<wxWindow *> parametersI;
     Button *btnDisable = nullptr;               // Кнопка отлючения измерителя/источника
-    bool disabled = false;
+    bool is_enabled = true;
+    bool is_showing = false;
     Button *btnModeUI = nullptr;                // В измерителе переключение между вольтметром и амперметров, в источнике - между источником тока и источником напряжения
     wxPoint coord_controls;                     // Координаты комбобоксов
 
@@ -70,7 +79,7 @@ private:
     // Нарисовать окантовку для измерителя или источника. x, y - центр измерителя
     // В x, y возвращаются координаты, с которых нужно выводить элементы управления
     // Возвращает прямоугльник окантовки
-    wxRect DrawBorder(wxAutoBufferedPaintDC &dc, int &x, int &y, int radius, int num_controls);
+    wxRect DrawBorder(AutoBufferedPaintDC &, int &x, int &y, int radius, int num_controls);
 
     void CreateControls(const wxRect &rect);
 
@@ -90,7 +99,7 @@ private:
     // Показать параметры в соотвествии с выбранным режимом - така или напряжения
     void ShowNeedParameters();
 
-    void DrawUGO(wxAutoBufferedPaintDC &dc);
+    void DrawUGO(AutoBufferedPaintDC &);
 
     pchar SymbolUGO();
 
