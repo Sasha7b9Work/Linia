@@ -395,6 +395,23 @@ void PanelViewTest::CreateSpecificControls()
             });
     }
 
+    {
+        wxArrayString labels
+        {
+            L("Анод"),
+            L("Катод")
+        };
+
+        wxArrayString tooltips{ L("Общий электрод") };
+
+        bcCommonElectrodeDIOD = new ButtonsCombo(this, L("Общий электрод"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Общий электрод"));
+        bcCommonElectrodeDIOD->SetPosition({ CoordinateCollector().x - 250, CoordinateCollector().y + 30 });
+        bcCommonElectrodeDIOD->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
+            {
+                ostt->ToDIOD()->SetCommonElectrode((CommonElectrode::E)event.GetInt());
+            });
+    }
+
     HideSpecificControls();
 }
 

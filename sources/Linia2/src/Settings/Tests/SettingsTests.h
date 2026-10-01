@@ -112,6 +112,11 @@ struct CommonElectrode
         return type == Catode_N;
     }
 
+    void Set(E e)
+    {
+        type = e;
+    }
+
 private:
 
     E type;

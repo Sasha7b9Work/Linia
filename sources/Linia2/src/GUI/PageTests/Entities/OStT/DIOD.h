@@ -16,6 +16,13 @@ public:
 
     virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) override;
 
+    void SetCommonElectrode(CommonElectrode::E e)
+    {
+        commonElectrode.Set(e);
+
+        PanelViewTest::self->Refresh();
+    }
+
 protected:
 
     void DrawCommon(AutoBufferedPaintDC &, const wxPoint &center);
@@ -26,5 +33,5 @@ protected:
     // Смещение угла треугольника относительно центра
     wxPoint Delta() const;
 
-    CommonElectrode commonElectrode{ CommonElectrode::Catode_N };
+    CommonElectrode commonElectrode{ CommonElectrode::Anode_P };
 };

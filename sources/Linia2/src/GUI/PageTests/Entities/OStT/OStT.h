@@ -9,6 +9,7 @@
 class BJT;
 class FET;
 class Test;
+class DIOD;
 
 
 /*
@@ -107,12 +108,17 @@ public:
 
     BJT *ToBJT()
     {
-        return (BJT *)this;
+        return (test->IsBJT() || test->IsBJTS()) ? (BJT *)this : nullptr;
     }
 
     FET *ToFET()
     {
-        return (FET *)this;
+        return (test->IsFET() || test->IsFETS()) ? (FET *)this : nullptr;
+    }
+
+    DIOD *ToDIOD()
+    {
+        return (test->IsDIOD() || test->IsTHYR()) ? (DIOD *)this : nullptr;
     }
 
 protected:

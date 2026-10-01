@@ -52,6 +52,7 @@ private:
 
     ButtonsCombo *bcTypeBJT = nullptr;                  // Тип биполярного транзистора
     ButtonsCombo *bcTypeFET = nullptr;                  // Тип полевого транзистора
+    ButtonsCombo *bcCommonElectrodeDIOD = nullptr;      // Для диода - общий электрод
 
     OStT *ostt = nullptr;
 
