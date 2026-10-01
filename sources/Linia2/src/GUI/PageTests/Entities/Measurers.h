@@ -51,6 +51,26 @@ public:
 
     void Show(AutoBufferedPaintDC &dc, const wxPoint &pos)
     {
+        if (btnDisable)
+        {
+            btnDisable->Show();
+        }
+
+        if (btnModeUI)
+        {
+            btnModeUI->Show();
+        }
+
+        for (auto wnd : parametersU)
+        {
+            wnd->Show();
+        }
+
+        for (auto wnd : parametersI)
+        {
+            wnd->Show();
+        }
+
         SetPosition(pos);
 
         is_showing = true;
@@ -61,6 +81,26 @@ public:
     void Hide()
     {
         is_showing = false;
+
+        if (btnDisable)
+        {
+            btnDisable->Hide();
+        }
+
+        if (btnModeUI)
+        {
+            btnModeUI->Hide();
+        }
+
+        for (auto wnd : parametersU)
+        {
+            wnd->Hide();
+        }
+
+        for (auto wnd : parametersI)
+        {
+            wnd->Hide();
+        }
     }
 
     void SetPosition(const wxPoint &pos)
