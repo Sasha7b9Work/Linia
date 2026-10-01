@@ -30,6 +30,8 @@ Application *Application::self = nullptr;
 #ifndef _WIN32
 static void CloseApplication()
 {
+    LOG_WRITE("CloseApplication()");
+
     if (Application::self)
     {
         if (MainWindow::self)
@@ -218,6 +220,8 @@ bool Application::OnInit()
                 Log::PeriodicTask();
 
                 PageDebug::self->PeriodicTask();
+
+                SET::Save();
 
                 mutex.unlock();
             };

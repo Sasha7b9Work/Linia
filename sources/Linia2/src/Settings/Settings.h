@@ -193,4 +193,6 @@ namespace SET
     void Load();
     void Save();
     void RegisterValue(const std::string &name, IValue *value);
+
+    extern bool is_saved;
 }
