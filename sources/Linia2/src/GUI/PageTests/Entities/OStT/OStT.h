@@ -112,7 +112,7 @@ public:
 
     BJT *ToBJT()
     {
-        return (Test::current->IsBJT() || Test::current->IsBJTS()) ? (BJT *)this : nullptr;
+        return (Test::current->IsBJT() || Test::current->IsBJTS() || Test::current->IsDARL()) ? (BJT *)this : nullptr;
     }
 
     FET *ToFET()
