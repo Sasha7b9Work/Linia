@@ -42,7 +42,7 @@ public:
         };
     };
 
-    MeasurerSourcer(Type::E, Chan::E, const wxPoint _center, Dir::E);
+    MeasurerSourcer(Type::E, Chan::E, Dir::E);
 
     void Draw(wxAutoBufferedPaintDC &dc);
 
@@ -57,7 +57,7 @@ protected:
     Chan::E chan;
     Dir::E dir;                                 // Расположение органов управления относительно УГО измерителя/источника
     const int radius = 12;
-    wxPoint center;
+    wxPoint center{ 0, 0 };
     std::vector<wxWindow *> parametersU;
     std::vector<wxWindow *> parametersI;
     Button *btnDisable = nullptr;               // Кнопка отлючения измерителя/источника
@@ -103,8 +103,8 @@ class Voltmeter : public MeasurerSourcer
 {
 public:
 
-    Voltmeter(Chan::E _chan, const wxPoint _center, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::MeasU, _chan, _center, _dir)
+    Voltmeter(Chan::E _chan, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::MeasU, _chan, _dir)
     {}
 };
 
@@ -114,8 +114,8 @@ class Ampermeter : public MeasurerSourcer
 {
 public:
 
-    Ampermeter(Chan::E _chan, const wxPoint _center, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::MeasI, _chan, _center, _dir)
+    Ampermeter(Chan::E _chan, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::MeasI, _chan, _dir)
     {}
 };
 
@@ -125,8 +125,8 @@ class MeasurerVoltageCurrent : public MeasurerSourcer
 {
 public:
 
-    MeasurerVoltageCurrent(Chan::E _chan, const wxPoint _center, Dir::E dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::MeasUI, _chan, _center, dir)
+    MeasurerVoltageCurrent(Chan::E _chan, Dir::E dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::MeasUI, _chan, dir)
     {}
 };
 
@@ -136,8 +136,8 @@ class SourceVoltage : public MeasurerSourcer
 {
 public:
 
-    SourceVoltage(Chan::E _chan, const wxPoint _center, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceU, _chan, _center, _dir)
+    SourceVoltage(Chan::E _chan, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::SourceU, _chan, _dir)
     {}
 };
 
@@ -147,8 +147,8 @@ class SourceCurrent : public MeasurerSourcer
 {
 public:
 
-    SourceCurrent(Chan::E _chan, const wxPoint _center, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceI, _chan, _center, _dir)
+    SourceCurrent(Chan::E _chan, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::SourceI, _chan, _dir)
     {}
 };
 
@@ -157,7 +157,7 @@ class SourceVoltageCurrent : public MeasurerSourcer
 {
 public:
 
-    SourceVoltageCurrent(Chan::E _chan, const wxPoint _center, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceUI, _chan, _center, _dir)
+    SourceVoltageCurrent(Chan::E _chan, Dir::E _dir) :
+        MeasurerSourcer(MeasurerSourcer::Type::SourceUI, _chan, _dir)
     {}
 };

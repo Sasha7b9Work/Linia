@@ -11,8 +11,8 @@
     name->SetPosition({ _x, _y });
 
 
-MeasurerSourcer::MeasurerSourcer(Type::E _type, Chan::E _chan, const wxPoint _center, Dir::E _dir) :
-    type(_type), chan(_chan), dir(_dir), center(_center)
+MeasurerSourcer::MeasurerSourcer(Type::E _type, Chan::E _chan, Dir::E _dir) :
+    type(_type), chan(_chan), dir(_dir)
 {
 }
 

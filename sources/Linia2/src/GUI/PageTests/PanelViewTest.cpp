@@ -30,6 +30,8 @@ PanelViewTest::PanelViewTest(wxWindow *parent) : Panel(parent, wxSIMPLE_BORDER)
     CreateControls();
 
     HideControls();
+
+    CreateMeasurersSourcers();
 }
 
 
@@ -260,20 +262,6 @@ void PanelViewTest::CreateBJT(const wxPoint &c, wxPoint &point_base, wxPoint &po
                 dc.MoveTo({ coord_base.x, coord_base.y });
 
                 dc.LineToY(y_ground);
-
-                if (!measurerBase)
-                {
-                    measurerBase = new MeasurerVoltageCurrent(Chan::_B, { dc.GetCoord().x, y1 }, Dir::Down);
-                }
-
-                measurerBase->Draw(dc);
-
-                if (!sourceVoltageCurrentBase)
-                {
-                    sourceVoltageCurrentBase = new SourceVoltageCurrent(Chan::_B, { dc.GetCoord().x, y2 }, Dir::Down);
-                }
-
-                sourceVoltageCurrentBase->Draw(dc);
             }
         }
 
@@ -299,20 +287,6 @@ void PanelViewTest::CreateBJT(const wxPoint &c, wxPoint &point_base, wxPoint &po
                 dc.LineToY(y_ground);
 
                 dc.MoveOnDY(-470);
-
-                if (!measurerSubstrate)
-                {
-                    measurerSubstrate = new MeasurerVoltageCurrent(Chan::_S, { dc.GetCoord().x, y1 }, Dir::Down);
-                }
-
-                measurerSubstrate->Draw(dc);
-
-                if (!sourceVoltateCurrentSubstrate)
-                {
-                    sourceVoltateCurrentSubstrate = new SourceVoltageCurrent(Chan::_S, { dc.GetCoord().x, y2 }, Dir::Down);
-                }
-
-                sourceVoltateCurrentSubstrate->Draw(dc);
             }
         }
     }
@@ -327,30 +301,26 @@ void PanelViewTest::CreateBJT(const wxPoint &c, wxPoint &point_base, wxPoint &po
         dc.DrawText("C", { point_collector.x + 7, point_collector.y - 9});
         dc.LineOnDX(355);
         dc.LineToY(y_ground);
-
-        if (!ampermeterCollector)
-        {
-            ampermeterCollector = new Ampermeter(Chan::_C, { dc.GetCoord().x, y0 }, Dir::Down);
-        }
-
-        ampermeterCollector->Draw(dc);
-
-        if (!voltmeterCollector)
-        {
-            voltmeterCollector = new Voltmeter(Chan::_C, { dc.GetCoord().x, y1 }, Dir::Down);
-        }
-
-        voltmeterCollector->Draw(dc);
-
-        if (!sourceVoltageCollector)
-        {
-            sourceVoltageCollector = new SourceVoltage(Chan::_C, { dc.GetCoord().x, y2 }, Dir::Down);
-        }
-
-        sourceVoltageCollector->Draw(dc);
     }
 }
 
+
+void PanelViewTest::CreateMeasurersSourcers()
+{
+    measBase = new MeasurerVoltageCurrent(Chan::_B, Dir::Down);
+
+    srcVoltageCurrentBase = new SourceVoltageCurrent(Chan::_B, Dir::Down);
+
+    measSubstrate = new MeasurerVoltageCurrent(Chan::_S, Dir::Down);
+
+    srcVoltateCurrentSubstrate = new SourceVoltageCurrent(Chan::_S, Dir::Down);
+
+    ampCollector = new Ampermeter(Chan::_C, Dir::Down);
+
+    voltCollector = new Voltmeter(Chan::_C, Dir::Down);
+
+    srcVoltageCollector = new SourceVoltage(Chan::_C, Dir::Down);
+}
 
 wxPoint PanelViewTest::GetCenter() const
 {

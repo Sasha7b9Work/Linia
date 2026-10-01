@@ -40,15 +40,15 @@ private:
     StaticBox *boxScan = nullptr;                       // "Развёртка"
     StaticBox *boxCover = nullptr;                      // "Крышка"
 
-    MeasurerVoltageCurrent *measurerBase = nullptr;
-    SourceVoltageCurrent *sourceVoltageCurrentBase = nullptr;
+    MeasurerVoltageCurrent *measBase = nullptr;
+    SourceVoltageCurrent *srcVoltageCurrentBase = nullptr;
 
-    MeasurerVoltageCurrent *measurerSubstrate = nullptr;
-    SourceVoltageCurrent *sourceVoltateCurrentSubstrate = nullptr;
+    MeasurerVoltageCurrent *measSubstrate = nullptr;
+    SourceVoltageCurrent *srcVoltateCurrentSubstrate = nullptr;
 
-    Ampermeter *ampermeterCollector = nullptr;
-    Voltmeter *voltmeterCollector = nullptr;
-    SourceVoltage *sourceVoltageCollector = nullptr;
+    Ampermeter *ampCollector = nullptr;
+    Voltmeter *voltCollector = nullptr;
+    SourceVoltage *srcVoltageCollector = nullptr;
 
     OStT *ostt = nullptr;
 
@@ -102,4 +102,7 @@ private:
 
     // Нарисовать значок земли
     void DrawGround(AutoBufferedPaintDC &);
+
+    // Создать измерители и источники
+    void CreateMeasurersSourcers();
 };
