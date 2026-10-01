@@ -49,14 +49,23 @@ public:
         return radius;
     }
 
-    void Show()
+    void Show(AutoBufferedPaintDC &dc, const wxPoint &pos)
     {
+        SetPosition(pos);
+
         is_showing = true;
+
+        Draw(dc);
     }
 
     void Hide()
     {
         is_showing = false;
+    }
+
+    void SetPosition(const wxPoint &pos)
+    {
+        center = pos;
     }
 
 protected:

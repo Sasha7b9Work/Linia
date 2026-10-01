@@ -99,6 +99,12 @@ private:
     // Нарисовать значок земли
     void DrawGround(AutoBufferedPaintDC &);
 
-    // Создать измерители и источники
+    // Создать источники и измерители
     void CreateMeasurersSourcers();
+
+    // Спрятать источники и измерители
+    void HideMeasurersSourcers();
+
+    // Возвращает позицию по Y источника либо измерителя
+    int PosMeasurerSourcerY(int);
 };
