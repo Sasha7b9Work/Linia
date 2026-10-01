@@ -79,13 +79,13 @@ private:
     // Нарисовать окантовку для измерителя или источника. x, y - центр измерителя
     // В x, y возвращаются координаты, с которых нужно выводить элементы управления
     // Возвращает прямоугльник окантовки
-    wxRect DrawBorder(AutoBufferedPaintDC &, int &x, int &y, int radius, int num_controls);
+    wxRect DrawBorder(AutoBufferedPaintDC &, int &x, int &y, int radius);
 
-    void CreateControls(const wxRect &rect);
+    void CreateControls(const wxRect &);
 
-    void CreateButtonDisable(const wxRect &rect, const wxSize &size, wxPoint &pos);
+    void CreateButtonDisable(const wxRect &, const wxSize &, wxPoint &pos);
 
-    void CreateButtonModeUI(const wxRect &rect, const wxSize &size, const wxPoint &pos);
+    void CreateButtonModeUI(const wxRect &, const wxSize &, const wxPoint &pos);
 
     // Создаёт токовые параметры
     void CreateParametersI();
@@ -104,6 +104,8 @@ private:
     pchar SymbolUGO();
 
     int CalculateNumControls() const;
+
+    wxRect CalculateBoundingBox(int &x, int &y) const;
 };
 
 
