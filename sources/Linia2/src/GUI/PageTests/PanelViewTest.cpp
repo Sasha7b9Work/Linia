@@ -27,7 +27,9 @@ PanelViewTest::PanelViewTest(wxWindow *parent) : Panel(parent, wxSIMPLE_BORDER)
 
     SetBackgroundStyle(wxBG_STYLE_PAINT);
 
-    CreateControls();
+    CreateCommonControls();
+
+    CreateSpecificControls();
 
     HideControls();
 
@@ -247,7 +249,7 @@ wxPoint PanelViewTest::GetCenter() const
 }
 
 
-void PanelViewTest::CreateControls()
+void PanelViewTest::CreateCommonControls()
 {
     commutator = new Commutator(this, { 10, 40 }, 171);
 
@@ -348,6 +350,12 @@ void PanelViewTest::CreateControls()
         btnEditExit->Hide();
     }
 
+#undef CREATE_BUTTONS_COMBO
+}
+
+
+void PanelViewTest::CreateSpecificControls()
+{
     {
         wxArrayString labels
         {
@@ -359,9 +367,8 @@ void PanelViewTest::CreateControls()
 
         bcTypeBJT = new ButtonsCombo(this, L("Тип"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Проводимость транзистора"));
         bcTypeBJT->SetPosition({ CoordinateCollector().x - 250, CoordinateCollector().y + 30 });
+        bcTypeBJT->Hide();
     }
-
-#undef CREATE_BUTTONS_COMBO
 }
 
 

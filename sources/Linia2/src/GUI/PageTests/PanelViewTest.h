@@ -84,8 +84,11 @@ private:
 
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
 
-    // Создать элементы управляения для данного теста
-    void CreateControls();
+    // Общие для всех типов элементов органы управления
+    void CreateCommonControls();
+
+    void CreateSpecificControls();
+
     void ShowControls();
     void HideControls();
 
