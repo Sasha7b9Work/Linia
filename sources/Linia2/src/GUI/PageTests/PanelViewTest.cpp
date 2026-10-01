@@ -380,7 +380,8 @@ void PanelViewTest::CreateSpecificControls()
 
 void PanelViewTest::TuneSpecificControls()
 {
-    if (test->IsBJT() || test->IsBJTS())
+    if (test->IsBJT() ||
+        test->IsBJTS())
     {
         bcTypeBJT->Show();
     }
