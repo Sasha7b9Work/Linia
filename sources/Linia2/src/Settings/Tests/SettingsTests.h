@@ -66,6 +66,27 @@ struct TypeFET
         ChannelN,
         Count
     };
+
+    TypeFET(E e) : type{ e } { }
+
+    bool IsChannelP() const
+    {
+        return type == ChannelP;
+    }
+
+    bool IsChannelN() const
+    {
+        return type == ChannelN;
+    }
+
+    void Set(E e)
+    {
+        type = e;
+    }
+
+private:
+
+    E type;
 };
 
 

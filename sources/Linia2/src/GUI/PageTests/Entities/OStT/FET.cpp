@@ -39,11 +39,11 @@ void FET::DrawGate(AutoBufferedPaintDC &dc, const wxPoint &c)
 
     point_B = p2;
 
-    if (type == TypeFET::ChannelN)
+    if (type.IsChannelN())
     {
         DrawArrow(dc, p2, p1);
     }
-    else if (type == TypeFET::ChannelP)
+    else if (type.IsChannelP())
     {
         std::vector<wxPoint> points = IntersectLineCircle(p2, p1, c, radius);
 

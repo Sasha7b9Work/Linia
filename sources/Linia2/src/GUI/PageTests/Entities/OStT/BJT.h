@@ -20,7 +20,7 @@ public:
 
     void SetType(TypeBJT::E t)
     {
-        type = t;
+        type.Set(t);
 
         PanelViewTest::self->Refresh();
     }

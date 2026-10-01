@@ -19,14 +19,14 @@ public:
 
     void SetType(TypeFET::E t)
     {
-        type = t;
+        type.Set(t);
 
         PanelViewTest::self->Refresh();
     }
 
 private:
 
-    TypeFET::E type = TypeFET::ChannelP;
+    TypeFET type{ TypeFET::ChannelP };
 
     // Нарисовать затвор
     void DrawGate(AutoBufferedPaintDC &, const wxPoint &);
