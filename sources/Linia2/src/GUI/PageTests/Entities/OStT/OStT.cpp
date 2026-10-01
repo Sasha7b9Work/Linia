@@ -183,6 +183,8 @@ void OStT::DrawNamesPoints(AutoBufferedPaintDC &dc)
 
     wxPoint pos;
 
+    dc.SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+
     {
         // Коллектор
 
