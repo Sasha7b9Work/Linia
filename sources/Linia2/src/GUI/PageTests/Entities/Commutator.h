@@ -140,7 +140,7 @@ public:
         txtValue = new StaticText(canvas, "", { 118, 30 }, wxALIGN_CENTER_HORIZONTAL);
         txtValue->SetPosition({ radius - txtValue->GetSize().x / 2, 90 });
         wxFont font = txtValue->GetFont();
-        txtValue->SetFont(wxFont(30, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_HEAVY));
+        txtValue->SetFont(wxFont(22, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_HEAVY));
 
         warning_label = std::make_unique<WarningLabel>(txtValue);
 
