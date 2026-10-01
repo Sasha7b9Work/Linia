@@ -255,7 +255,7 @@ bool Application::OnInit()
 #ifdef _WIN32
 #else
     struct sigaction sa;
-    sa.sa_handler = SignalHandler;
+    sa.sa_handler = &Application::SignalHandler;
     sigemptyset(&sa.sa_mask);
     sa.sa_flags = 0;  // не SA_RESTART — чтобы прервать блокирующие вызовы
 
