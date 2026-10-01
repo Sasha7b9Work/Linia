@@ -70,16 +70,11 @@ namespace SET
 
     void Save()
     {
-        if (!is_saved)
+        LOG_WRITE("Save settings");
+
+        for (auto &[name, value] : GetRegistry())
         {
-            is_saved = true;
-
-            LOG_WRITE("Save settings");
-
-            for (auto &[name, value] : GetRegistry())
-            {
-                value->Save();
-            }
+            value->Save();
         }
     }
 }
