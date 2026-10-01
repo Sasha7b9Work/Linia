@@ -19,7 +19,7 @@
 #pragma warning(pop)
 #include <cstdlib>
 #include <locale>
-#ifndef _WIN32
+#ifndef WIN32
     #include <csignal>
 #endif
 
@@ -242,7 +242,7 @@ bool Application::OnInit()
 
     loggerHTTP.Connect();
 
-#ifdef _WIN32
+#ifdef WIN32
 #else
     struct sigaction sa;
     sa.sa_handler = SignalHandler;
