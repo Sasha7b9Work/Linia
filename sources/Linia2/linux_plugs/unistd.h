@@ -1,7 +1,7 @@
 #pragma once
 
 
-#ifdef WIN32
+#ifdef _WIN32
 
 int usleep(int usec);
 

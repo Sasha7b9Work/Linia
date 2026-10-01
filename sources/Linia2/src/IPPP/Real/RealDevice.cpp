@@ -97,7 +97,7 @@ void RealDevice::SendCommand(pchar format, ...) const
 
     std::strcat(message, "\0");
 
-#ifdef WIN32
+#ifdef _WIN32
     ComPort::Send(message, (int)std::strlen(message) + 1);
 #else
     UART::SendBuffer(message, (int)std::strlen(message) + 1);
@@ -107,7 +107,7 @@ void RealDevice::SendCommand(pchar format, ...) const
 
 void RealDevice::SendBinaryData(void *buffer, int size) const
 {
-#ifdef WIN32
+#ifdef _WIN32
     ComPort::Send(buffer, size);
 #else
     UART::SendBuffer(buffer, size);

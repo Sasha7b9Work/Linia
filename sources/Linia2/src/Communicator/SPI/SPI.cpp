@@ -28,7 +28,7 @@
 */
 
 
-#ifdef WIN32
+#ifdef _WIN32
 #pragma warning(push)
 #pragma warning(disable:4365 4996)
 #endif
@@ -105,7 +105,7 @@ void SPI::DelayUS(uint timeUS)
 {
     (void)timeUS;
 
-#ifdef WIN32
+#ifdef _WIN32
 #else
     struct timespec start, now;
     // Получаем текущее время
@@ -269,6 +269,6 @@ bool SPI::IsAvailability()
 }
 
 
-#ifdef WIN32
+#ifdef _WIN32
 #pragma warning(pop)
 #endif

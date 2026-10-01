@@ -16,7 +16,7 @@ DraggedWindow::DraggedWindow(const wxString &_title, const wxSize &_size)
 
     main_panel = new wxPanel(this, wxID_ANY, { 0, 0 }, _size, wxNO_BORDER | wxEXPAND | wxSTAY_ON_TOP);
 
-#ifdef WIN32
+#ifdef _WIN32
     SetupDragging(main_panel);
 #else
     SetupDragging(main_panel);

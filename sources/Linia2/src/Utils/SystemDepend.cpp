@@ -5,7 +5,7 @@
 
 wxSize SD::D::ChooseSound::SizeSpin()
 {
-#ifdef WIN32
+#ifdef _WIN32
     return { 40, TEXTCNTRL_HEIGHT };
 #else
     return { 116, TEXTCNTRL_HEIGHT + 13 };       // Высоту меньше некоторого значения (на всех системах разного) нельзя
@@ -15,7 +15,7 @@ wxSize SD::D::ChooseSound::SizeSpin()
 
 wxPoint SD::D::ChooseSound::PosSpin(int x, int y)
 {
-#ifdef WIN32
+#ifdef _WIN32
     return { x + 200, y };
 #else
     return { x + 220, y };
@@ -25,7 +25,7 @@ wxPoint SD::D::ChooseSound::PosSpin(int x, int y)
 
 wxSize SD::D::ChooseSound::SizeCombo()
 {
-#ifdef WIN32
+#ifdef _WIN32
     return { 50, TEXTCNTRL_HEIGHT };
 #else
     return { 80, TEXTCNTRL_HEIGHT + 13 };
@@ -35,7 +35,7 @@ wxSize SD::D::ChooseSound::SizeCombo()
 
 wxPoint SD::D::ChooseSound::PosCombo(int x, int y)
 {
-#ifdef WIN32
+#ifdef _WIN32
     return { x + 100, y };
 #else
     return { x + 120, y };
@@ -45,7 +45,7 @@ wxPoint SD::D::ChooseSound::PosCombo(int x, int y)
 
 int SD::D::ChooseSound::d()
 {
-#ifdef WIN32
+#ifdef _WIN32
     return 30;
 #else
     return 40;
@@ -55,7 +55,7 @@ int SD::D::ChooseSound::d()
 
 int SD::D::ChooseSound::y()
 {
-#ifdef WIN32
+#ifdef _WIN32
     return 130;
 #else
     return 160;
@@ -65,7 +65,7 @@ int SD::D::ChooseSound::y()
 
 wxSize SD::D::ChooseSound::Size()
 {
-#ifdef WIN32
+#ifdef _WIN32
     return { 300, 210 };
 #else
     return { 450, 250 };
@@ -75,7 +75,7 @@ wxSize SD::D::ChooseSound::Size()
 
 int SD::D::CommonPanel::Delta()
 {
-#ifdef WIN32
+#ifdef _WIN32
     return 10;
 #else
     return -20;
@@ -85,7 +85,7 @@ int SD::D::CommonPanel::Delta()
 
 wxSize SD::D::ColorDialog::SizeSlider()
 {
-#ifdef WIN32
+#ifdef _WIN32
     return { 250, 20 };
 #else
     return { 250, 40 };
@@ -95,7 +95,7 @@ wxSize SD::D::ColorDialog::SizeSlider()
 
 int SD::D::ColorDialog::Spacer()
 {
-#ifdef WIN32
+#ifdef _WIN32
     return 20;
 #else
     return 10;
@@ -105,7 +105,7 @@ int SD::D::ColorDialog::Spacer()
 
 wxSize SD::D::ColorDialog::Size()
 {
-#ifdef WIN32
+#ifdef _WIN32
     return { 500, 300 };
 #else
     return { 500, 450 };
@@ -115,7 +115,7 @@ wxSize SD::D::ColorDialog::Size()
 
 int SD::Y_SB(int y)
 {
-#ifdef WIN32
+#ifdef _WIN32
     return y;
 #else
     return y - 15;
@@ -125,7 +125,7 @@ int SD::Y_SB(int y)
 
 wxPoint SD::XY0()
 {
-#ifdef WIN32
+#ifdef _WIN32
     return { 5, 20 };
 #else
     return { 5 ,5 };

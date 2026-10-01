@@ -120,7 +120,7 @@ public:
 
         radius = w / 2;
 
-#ifndef WIN32
+#ifndef _WIN32
         radius -= 6;
 #endif
 

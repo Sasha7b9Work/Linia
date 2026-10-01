@@ -209,7 +209,7 @@ bool GF::ApproxEqual(double a, double b)
 
 wxString GF::GetSelfIP()
 {
-#ifdef WIN32
+#ifdef _WIN32
 
     // Windows implementation
     PIP_ADAPTER_ADDRESSES adapter_addresses = nullptr;

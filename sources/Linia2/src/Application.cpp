@@ -19,7 +19,7 @@
 #pragma warning(pop)
 #include <cstdlib>
 #include <locale>
-#ifndef WIN32
+#ifndef _WIN32
     #include <csignal>
 #endif
 
@@ -30,7 +30,7 @@ wxIMPLEMENT_APP(Application);
 Application *Application::self = nullptr;
 
 
-#ifndef WIN32
+#ifndef _WIN32
 
 static std::atomic<int> g_signal_received{ 0 };
 
@@ -72,7 +72,7 @@ public:
 };
 
 
-#ifndef WIN32
+#ifndef _WIN32
 // Функция-фильтр для логов
 void glib_log_filter(const gchar *log_domain,
     GLogLevelFlags log_level,
@@ -204,7 +204,7 @@ bool Application::OnInit()
             Log::FileName().c_str().AsChar()), L("Ошибка"), wxOK | wxCENTRE | wxICON_ERROR);
     }
 
-#ifdef WIN32
+#ifdef _WIN32
 
 //    ComPort::Connect(PanelUpper::self->GetNumPort());
 
@@ -242,7 +242,7 @@ bool Application::OnInit()
 
     loggerHTTP.Connect();
 
-#ifdef WIN32
+#ifdef _WIN32
 #else
     struct sigaction sa;
     sa.sa_handler = SignalHandler;

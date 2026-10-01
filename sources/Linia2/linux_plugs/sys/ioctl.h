@@ -1,7 +1,7 @@
 #pragma once
 
 
-#ifdef WIN32
+#ifdef _WIN32
 
 #define TIOCMGET  0
 #define TIOCM_DTR 0

@@ -23,7 +23,7 @@
 */
 
 
-#ifdef WIN32
+#ifdef _WIN32
     #pragma warning(push)
     #pragma warning(disable:4365 4389 4996)
     #define O_NOCTTY  0x00000400
@@ -330,11 +330,11 @@ void *UART::ReaderThreadFunc(void *)
     {
         // Настраиваем select для ожидания данных
         FD_ZERO(&read_fds);
-#ifdef WIN32
+#ifdef _WIN32
     #pragma warning(push, 0)
 #endif
         FD_SET(fd, &read_fds); //-V101
-#ifdef WIN32
+#ifdef _WIN32
     #pragma warning(pop)
 #endif
         timeout.tv_sec = 0;
@@ -393,6 +393,6 @@ bool UART::IsAvailability()
 }
 
 
-#ifdef WIN32
+#ifdef _WIN32
     #pragma warning(pop)
 #endif

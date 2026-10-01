@@ -1,7 +1,7 @@
 #include "file.h"
 
 
-#ifdef WIN32
+#ifdef _WIN32
 
 int flock(int /*fd*/, int /*operation*/)
 {
