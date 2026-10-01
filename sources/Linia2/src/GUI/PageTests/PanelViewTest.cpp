@@ -371,7 +371,28 @@ void PanelViewTest::CreateSpecificControls()
 
         bcTypeBJT = new ButtonsCombo(this, L("Тип"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Проводимость транзистора"));
         bcTypeBJT->SetPosition({ CoordinateCollector().x - 250, CoordinateCollector().y + 30 });
+        bcTypeBJT->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
+            {
+                ostt->ToBJT()->SetType((TypeBJT::E)event.GetInt());
+            });
         bcTypeBJT->Hide();
+    }
+
+    {
+        wxArrayString labels
+        {
+            "p",
+            "n"
+        };
+
+        wxArrayString tooltips{ L("Проводимость канала") };
+
+        bcTypeFET = new ButtonsCombo(this, L("Канал"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Проводимость канала"));
+        bcTypeFET->SetPosition({ CoordinateCollector().x - 250, CoordinateCollector().y + 30 });
+        bcTypeFET->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
+            {
+                ostt->ToFET()->SetType((TypeFET::E)event.GetInt());
+            });
     }
 
     HideSpecificControls();
@@ -385,12 +406,18 @@ void PanelViewTest::TuneSpecificControls()
     {
         bcTypeBJT->Show();
     }
+    else if (test->IsFET() ||
+        test->IsFETS())
+    {
+        bcTypeFET->Show();
+    }
 }
 
 
 void PanelViewTest::HideSpecificControls()
 {
     bcTypeBJT->Hide();
+    bcTypeFET->Hide();
 }
 
 

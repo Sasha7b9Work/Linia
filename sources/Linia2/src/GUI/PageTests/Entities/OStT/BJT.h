@@ -18,6 +18,13 @@ public:
     // Нарисовать общую часть для BJT и BJTS
     void DrawCommon(AutoBufferedPaintDC &, const wxPoint &center, bool draw_case);
 
+    void SetType(TypeBJT::E t)
+    {
+        type = t;
+
+        PanelViewTest::self->Refresh();
+    }
+
 private:
 
     TypeBJT::E type = TypeBJT::NPN;

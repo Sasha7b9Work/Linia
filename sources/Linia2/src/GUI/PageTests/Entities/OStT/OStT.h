@@ -6,6 +6,8 @@
 // Object Subject to Testing - ОПИ - объект, подлежащий исследованию
 
 
+class BJT;
+class FET;
 class Test;
 
 
@@ -102,6 +104,16 @@ public:
     }
 
     void FuncAfterDraw(AutoBufferedPaintDC &);
+
+    BJT *ToBJT()
+    {
+        return (BJT *)this;
+    }
+
+    FET *ToFET()
+    {
+        return (FET *)this;
+    }
 
 protected:
 

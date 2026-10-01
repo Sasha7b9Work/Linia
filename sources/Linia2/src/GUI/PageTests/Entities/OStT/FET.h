@@ -17,6 +17,13 @@ public:
 
     void DrawCommon(AutoBufferedPaintDC &, const wxPoint &);
 
+    void SetType(TypeFET::E t)
+    {
+        type = t;
+
+        PanelViewTest::self->Refresh();
+    }
+
 private:
 
     TypeFET::E type = TypeFET::ChannelP;

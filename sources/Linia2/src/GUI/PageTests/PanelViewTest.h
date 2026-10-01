@@ -51,6 +51,7 @@ private:
     SourceVoltage *srcVoltageCollector = nullptr;
 
     ButtonsCombo *bcTypeBJT = nullptr;                  // Тип биполярного транзистора
+    ButtonsCombo *bcTypeFET = nullptr;                  // Тип полевого транзистора
 
     OStT *ostt = nullptr;
 
