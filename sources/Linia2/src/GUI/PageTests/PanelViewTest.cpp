@@ -31,7 +31,7 @@ PanelViewTest::PanelViewTest(wxWindow *parent) : Panel(parent, wxSIMPLE_BORDER)
 
     CreateSpecificControls();
 
-    HideControls();
+    HideCommonControls();
 
     CreateMeasurersSourcers();
 }
@@ -46,11 +46,15 @@ void PanelViewTest::SetTest(Test *_test)
         delete ostt;
 
         HideMeasurersSourcers();
+
+        HideSpecificControls();
     }
 
     ostt = CreateOStT();
 
-    ShowControls();
+    ShowCommonControls();
+
+    TuneSpecificControls();
 
     Refresh();
 }
@@ -369,10 +373,27 @@ void PanelViewTest::CreateSpecificControls()
         bcTypeBJT->SetPosition({ CoordinateCollector().x - 250, CoordinateCollector().y + 30 });
         bcTypeBJT->Hide();
     }
+
+    HideSpecificControls();
 }
 
 
-void PanelViewTest::HideControls()
+void PanelViewTest::TuneSpecificControls()
+{
+    if (test->IsBJT() || test->IsBJT())
+    {
+        bcTypeBJT->Show();
+    }
+}
+
+
+void PanelViewTest::HideSpecificControls()
+{
+    bcTypeBJT->Hide();
+}
+
+
+void PanelViewTest::HideCommonControls()
 {
     commutator->Hide();
     boxScan->Hide();
@@ -380,7 +401,7 @@ void PanelViewTest::HideControls()
 }
 
 
-void PanelViewTest::ShowControls()
+void PanelViewTest::ShowCommonControls()
 {
     commutator->Show();
     boxScan->Show();

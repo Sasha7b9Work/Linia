@@ -86,11 +86,13 @@ private:
 
     // Общие для всех типов элементов органы управления
     void CreateCommonControls();
+    void ShowCommonControls();
+    void HideCommonControls();
 
+    // Специфичные органы управления для разных типов элементов
     void CreateSpecificControls();
-
-    void ShowControls();
-    void HideControls();
+    void HideSpecificControls();
+    void TuneSpecificControls();
 
     void CreateButton(Button **, wxWindow *parent, const wxString &, const wxPoint &, const wxSize &, std::function<void(wxCommandEvent &)> onClick);
 
