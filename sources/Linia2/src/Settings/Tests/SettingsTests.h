@@ -48,25 +48,25 @@ struct TypeFET
 };
 
 
-// Подключение - с общим катодом или анодом
-struct TypeDIOD
+// Подключение - с общим анодом или катодом
+struct CommonElectrode
 {
     enum E
     {
-        Common_Anode_P,     // К земле (эмиттеру) подключён анод (треугольник)
-        Common_Catode_N,    // К земле (эмиттеру) подключён катод (чёрточка)
+        Anode_P,     // К земле (эмиттеру) подключён анод (треугольник)
+        Catode_N,    // К земле (эмиттеру) подключён катод (чёрточка)
         Count
     };
 };
 
 
 // Управляющий электрод - катод или анод
-struct TypeTHYR
+struct ControlElectrode
 {
     enum E
     {
-        Control_Anode,
-        Control_Catode,
+        Anode_P,
+        Catode_N,
         Count
     };
 };

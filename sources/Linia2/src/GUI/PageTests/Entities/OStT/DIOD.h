@@ -26,5 +26,5 @@ protected:
     // Смещение угла треугольника относительно центра
     wxPoint Delta() const;
 
-    TypeDIOD::E type = TypeDIOD::Common_Catode_N;
+    CommonElectrode::E type = CommonElectrode::Catode_N;
 };

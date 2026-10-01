@@ -402,7 +402,8 @@ void PanelViewTest::CreateSpecificControls()
 void PanelViewTest::TuneSpecificControls()
 {
     if (test->IsBJT() ||
-        test->IsBJTS())
+        test->IsBJTS() ||
+        test->IsDARL())
     {
         bcTypeBJT->Show();
     }
