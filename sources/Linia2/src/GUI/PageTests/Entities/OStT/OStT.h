@@ -53,6 +53,9 @@ class OStT
 {
 public:
 
+    // Текущий объект измерения
+    static OStT *current;
+
     virtual ~OStT() { }
 
     virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) = 0;

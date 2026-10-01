@@ -3,6 +3,9 @@
 #include "GUI/PageTests/Entities/OStT/OStT.h"
 
 
+OStT *OStT::current = nullptr;
+
+
 void OStT::DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, AutoBufferedPaintDC &dc)
 {
     double angleRad = angleDeg * M_PI / 180.0;

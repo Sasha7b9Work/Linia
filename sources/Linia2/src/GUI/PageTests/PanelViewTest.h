@@ -21,9 +21,6 @@ public:
 
     void SetTest(Test *);
 
-    // Текущий объект измерения
-    OStT *ostt = nullptr;
-
 private:
 
     static const int radius_trans = 50;                     // От этого значения и Center() идёт всё построение изображения

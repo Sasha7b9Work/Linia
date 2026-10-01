@@ -41,16 +41,16 @@ void PanelViewTest::SetTest(Test *_test)
 {
     Test::current = _test;
 
-    if (ostt)
+    if (OStT::current)
     {
-        delete ostt;
+        delete OStT::current;
 
         HideMeasurersSourcers();
 
         HideSpecificControls();
     }
 
-    ostt = CreateOStT();
+    OStT::current = CreateOStT();
 
     ShowCommonControls();
 
@@ -101,7 +101,7 @@ wxPoint PanelViewTest::CoordinateCollector() const
 
 void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 {
-    ostt->Draw(dc, GetCenter());
+    OStT::current->Draw(dc, GetCenter());
 
     const int DX = 300;
     const int X_B = 100;
@@ -112,7 +112,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
     {
         // Рисуем от эмиттера
 
-        wxPoint point = ostt->GetPoint_E();
+        wxPoint point = OStT::current->GetPoint_E();
 
         dc.MoveTo(point);
 
@@ -124,7 +124,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
     {
         // Рисуем от коллектора
 
-        wxPoint point = ostt->GetPoint_C();
+        wxPoint point = OStT::current->GetPoint_C();
 
         dc.MoveTo(point);
 
@@ -146,7 +146,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 
         wxPoint point;
 
-        if (ostt->GetPoint_B(point))
+        if (OStT::current->GetPoint_B(point))
         {
             dc.MoveTo(point);
 
@@ -166,7 +166,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 
         wxPoint point;
 
-        if (ostt->GetPoint_S(point))
+        if (OStT::current->GetPoint_S(point))
         {
             dc.MoveTo(point);
 
@@ -181,7 +181,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
         }
     }
 
-    ostt->FuncAfterDraw(dc);
+    OStT::current->FuncAfterDraw(dc);
 }
 
 
@@ -379,7 +379,7 @@ void PanelViewTest::CreateSpecificControls()
         bcTypeBJT->SetPosition(CoordinateSpecificControl());
         bcTypeBJT->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
             {
-                ostt->ToBJT()->SetType((TypeBJT::E)event.GetInt());
+                OStT::current->ToBJT()->SetType((TypeBJT::E)event.GetInt());
             });
         bcTypeBJT->Hide();
     }
@@ -397,7 +397,7 @@ void PanelViewTest::CreateSpecificControls()
         bcTypeFET->SetPosition(CoordinateSpecificControl());
         bcTypeFET->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
             {
-                ostt->ToFET()->SetType((TypeFET::E)event.GetInt());
+                OStT::current->ToFET()->SetType((TypeFET::E)event.GetInt());
             });
     }
 
@@ -414,7 +414,7 @@ void PanelViewTest::CreateSpecificControls()
         bcCommonElectrodeDIOD->SetPosition(CoordinateSpecificControl());
         bcCommonElectrodeDIOD->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
             {
-                ostt->ToDIOD()->SetCommonElectrode((CommonElectrode::E)event.GetInt());
+                OStT::current->ToDIOD()->SetCommonElectrode((CommonElectrode::E)event.GetInt());
             });
     }
 
@@ -432,7 +432,7 @@ void PanelViewTest::CreateSpecificControls()
         bcControlElectrodeTHYR->SetPosition({ coord.x, coord.y + 30 });
         bcControlElectrodeTHYR->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
             {
-                ostt->ToTHYR()->SetControlElectrode((ControlElectrode::E)event.GetInt());
+                OStT::current->ToTHYR()->SetControlElectrode((ControlElectrode::E)event.GetInt());
             });
     }
 
