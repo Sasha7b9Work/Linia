@@ -50,6 +50,8 @@ private:
     Voltmeter *voltCollector = nullptr;
     SourceVoltage *srcVoltageCollector = nullptr;
 
+    ButtonsCombo *bcTypeBJT = nullptr;                  // Тип биполярного транзистора
+
     OStT *ostt = nullptr;
 
     void OnEventPaint(wxPaintEvent &);
@@ -107,4 +109,7 @@ private:
 
     // Возвращает позицию по Y источника либо измерителя
     int PosMeasurerSourcerY(int);
+
+    // Возвращает координаты точки, из которой выходит вертикальная линия коллектора
+    wxPoint CoordinateCollector() const;
 };

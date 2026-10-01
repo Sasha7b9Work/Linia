@@ -87,6 +87,12 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 }
 
 
+wxPoint PanelViewTest::CoordinateCollector() const
+{
+    return { 570, 170 };
+}
+
+
 void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 {
     ostt->Draw(dc, GetCenter());
@@ -94,8 +100,8 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
     const int DX = 300;
     const int X_B = 100;
     const int X_S = X_B + DX;
-    const int X_C = X_S + DX - 110;
-    const int Y_C = 170;
+    const int X_C = CoordinateCollector().x;
+    const int Y_C = CoordinateCollector().y;
 
     {
         // Рисуем от эмиттера
@@ -340,6 +346,19 @@ void PanelViewTest::CreateControls()
             });
 
         btnEditExit->Hide();
+    }
+
+    {
+        wxArrayString labels
+        {
+            "npn",
+            "pnp"
+        };
+
+        wxArrayString tooltips{ L("Проводимость транзистора") };
+
+        bcTypeBJT = new ButtonsCombo(this, L("Тип"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Проводимость транзистора"));
+        bcTypeBJT->SetPosition({ CoordinateCollector().x - 250, CoordinateCollector().y + 30 });
     }
 
 #undef CREATE_BUTTONS_COMBO
