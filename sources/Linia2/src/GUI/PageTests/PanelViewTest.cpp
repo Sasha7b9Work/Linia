@@ -94,7 +94,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
     const int DX = 300;
     const int X_B = 100;
     const int X_S = X_B + DX;
-    const int X_C = X_S + DX;
+    const int X_C = X_S + DX - 110;
     const int Y_C = 170;
 
     {
@@ -237,7 +237,7 @@ void PanelViewTest::CreateMeasurersSourcers()
 
 wxPoint PanelViewTest::GetCenter() const
 {
-    return { 210, 300 };
+    return { 230, 300 };
 }
 
 
