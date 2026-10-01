@@ -1,6 +1,7 @@
 // 2026/09/29 11:03:29 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "Utils/AutoBufferedPaintDC.h"
+#include "Settings/Tests/Library/Library.h"
 
 
 // Object Subject to Testing - ОПИ - объект, подлежащий исследованию
@@ -8,7 +9,6 @@
 
 class BJT;
 class FET;
-class Test;
 class DIOD;
 class THYR;
 
@@ -109,22 +109,22 @@ public:
 
     BJT *ToBJT()
     {
-        return (test->IsBJT() || test->IsBJTS()) ? (BJT *)this : nullptr;
+        return (Test::current->IsBJT() || Test::current->IsBJTS()) ? (BJT *)this : nullptr;
     }
 
     FET *ToFET()
     {
-        return (test->IsFET() || test->IsFETS()) ? (FET *)this : nullptr;
+        return (Test::current->IsFET() || Test::current->IsFETS()) ? (FET *)this : nullptr;
     }
 
     DIOD *ToDIOD()
     {
-        return (test->IsDIOD() || test->IsTHYR()) ? (DIOD *)this : nullptr;
+        return (Test::current->IsDIOD() || Test::current->IsTHYR()) ? (DIOD *)this : nullptr;
     }
 
     THYR *ToTHYR()
     {
-        return test->IsTHYR() ? (THYR *)this : nullptr;
+        return Test::current->IsTHYR() ? (THYR *)this : nullptr;
     }
 
 protected:
@@ -132,7 +132,7 @@ protected:
     friend class BJT;
     friend class FET;
 
-    OStT(Test *_test) : test(_test) { }
+    OStT() { }
 
     wxPoint point_E;
     wxPoint point_C;
@@ -171,8 +171,4 @@ protected:
     // Находит точки пересечения прямой (p1, p2) с окружностью (center, radius)
     // Возвращает вектор точек пересечения (0, 1 или 2 точки)
     std::vector<wxPoint> IntersectLineCircle(const wxPoint &p1, const wxPoint &p2, const wxPoint &center, double radius) const;
-
-private:
-
-    Test *test = nullptr;
 };

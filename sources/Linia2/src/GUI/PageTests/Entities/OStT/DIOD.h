@@ -3,6 +3,7 @@
 #include "GUI/PageTests/Entities/OStT/OStT.h"
 #include "Settings/Tests/SettingsTests.h"
 #include "Utils/AutoBufferedPaintDC.h"
+#include "GUI/PageTests/PanelViewTest.h"
 
 
 // Диод
@@ -12,7 +13,7 @@ class DIOD : public OStT
 {
 public:
 
-    DIOD(Test *);
+    DIOD();
 
     virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) override;
 

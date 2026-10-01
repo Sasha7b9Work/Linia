@@ -3,7 +3,7 @@
 #include "GUI/PageTests/Entities/OStT/BJT.h"
 
 
-BJT::BJT(Test *test) : OStT(test)
+BJT::BJT() : OStT()
 {
 
 }

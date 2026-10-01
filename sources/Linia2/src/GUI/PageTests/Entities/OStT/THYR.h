@@ -10,7 +10,7 @@ class THYR : public DIOD
 {
 public:
 
-    THYR(Test *);
+    THYR();
 
     virtual void Draw(AutoBufferedPaintDC &, const wxPoint &center) override;
 

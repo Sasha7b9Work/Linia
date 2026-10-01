@@ -21,13 +21,14 @@ public:
 
     void SetTest(Test *);
 
+    // Текущий объект измерения
+    OStT *ostt = nullptr;
+
 private:
 
     static const int radius_trans = 50;                     // От этого значения и Center() идёт всё построение изображения
     static const int d_combos = ButtonsCombo::HEIGHT + 5;   // Расстояние между элементами ввода по вертикали
     static const int Y_GROUND = 700;
-
-    Test *test = nullptr;
 
     ButtonsCombo *bcScanMode = nullptr;                 // Режим развёртки
     ButtonsCombo *bcScanNumberPoints = nullptr;         // Количество точек в одной ВАХ
@@ -54,8 +55,6 @@ private:
     ButtonsCombo *bcTypeFET = nullptr;                  // Тип полевого транзистора
     ButtonsCombo *bcCommonElectrodeDIOD = nullptr;      // Для диода - общий электрод
     ButtonsCombo *bcControlElectrodeTHYR = nullptr;     // Дли тиристора - управляющий электрод
-
-    OStT *ostt = nullptr;
 
     void OnEventPaint(wxPaintEvent &);
 

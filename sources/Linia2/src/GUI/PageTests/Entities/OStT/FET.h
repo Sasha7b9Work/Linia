@@ -2,6 +2,7 @@
 #pragma once
 #include "GUI/PageTests/Entities/OStT/OStT.h"
 #include "Settings/Tests/SettingsTests.h"
+#include "GUI/PageTests/PanelViewTest.h"
 
 
 // Полевой транзистор
@@ -11,7 +12,7 @@ class FET : public OStT
 {
 public:
 
-    FET(Test *);
+    FET();
 
     virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) override;
 

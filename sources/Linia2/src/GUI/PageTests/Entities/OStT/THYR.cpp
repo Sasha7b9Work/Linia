@@ -3,7 +3,7 @@
 #include "GUI/PageTests/Entities/OStT/THYR.h"
 
 
-THYR::THYR(Test *test) : DIOD(test)
+THYR::THYR() : DIOD()
 {
 
 }

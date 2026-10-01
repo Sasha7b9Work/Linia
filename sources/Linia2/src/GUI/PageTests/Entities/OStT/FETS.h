@@ -10,7 +10,7 @@ class FETS : public FET
 {
 public:
 
-    FETS(Test *);
+    FETS();
 
     virtual void Draw(AutoBufferedPaintDC &, const wxPoint &center) override;
 

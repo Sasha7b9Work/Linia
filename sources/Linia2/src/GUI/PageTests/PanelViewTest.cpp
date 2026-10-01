@@ -39,7 +39,7 @@ PanelViewTest::PanelViewTest(wxWindow *parent) : Panel(parent, wxSIMPLE_BORDER)
 
 void PanelViewTest::SetTest(Test *_test)
 {
-    test = _test;
+    Test::current = _test;
 
     if (ostt)
     {
@@ -62,7 +62,7 @@ void PanelViewTest::SetTest(Test *_test)
 
 void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 {
-    if (test)
+    if (Test::current)
     {
         AutoBufferedPaintDC dc{ this };
 
@@ -84,7 +84,7 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
         dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
 
         // Рисуем текст в левом верхнем углу
-        dc.DrawText(test->lib->name + " : " + test->name, 5, 5);
+        dc.DrawText(Test::current->lib->name + " : " + Test::current->name, 5, 5);
 
         commutator->Refresh();
     }
@@ -187,41 +187,41 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 
 OStT *PanelViewTest::CreateOStT()
 {
-    if (test->IsBJT())
+    if (Test::current->IsBJT())
     {
-        return new BJT(test);
+        return new BJT();
     }
-    else if (test->IsBJTS())
+    else if (Test::current->IsBJTS())
     {
-        return new BJTS(test);
+        return new BJTS();
     }
-    else if (test->IsFET())
+    else if (Test::current->IsFET())
     {
-        return new FET(test);
+        return new FET();
     }
-    else if (test->IsFETS())
+    else if (Test::current->IsFETS())
     {
-        return new FETS(test);
+        return new FETS();
     }
-    else if (test->IsDARL())
+    else if (Test::current->IsDARL())
     {
-        return new DARL(test);
+        return new DARL();
     }
-    else if (test->IsTHYR())
+    else if (Test::current->IsTHYR())
     {
-        return new THYR(test);
+        return new THYR();
     }
-    else if (test->IsDIOD())
+    else if (Test::current->IsDIOD())
     {
-        return new DIOD(test);
+        return new DIOD();
     }
-    else if (test->IsRES())
+    else if (Test::current->IsRES())
     {
-        return new RES(test);
+        return new RES();
     }
-    else if (test->IsCAP())
+    else if (Test::current->IsCAP())
     {
-        return new CAP(test);
+        return new CAP();
     }
 
     LOG_ERROR("Incorrect type OStT");
@@ -442,24 +442,24 @@ void PanelViewTest::CreateSpecificControls()
 
 void PanelViewTest::TuneSpecificControls()
 {
-    if (test->IsBJT() ||
-        test->IsBJTS() ||
-        test->IsDARL())
+    if (Test::current->IsBJT() ||
+        Test::current->IsBJTS() ||
+        Test::current->IsDARL())
     {
         bcTypeBJT->Show();
     }
-    else if (test->IsFET() ||
-        test->IsFETS())
+    else if (Test::current->IsFET() ||
+        Test::current->IsFETS())
     {
         bcTypeFET->Show();
     }
-    else if (test->IsDIOD() ||
-        test->IsTHYR())
+    else if (Test::current->IsDIOD() ||
+        Test::current->IsTHYR())
     {
         bcCommonElectrodeDIOD->Show();
     }
     
-    if (test->IsTHYR())
+    if (Test::current->IsTHYR())
     {
         bcControlElectrodeTHYR->Show();
     }

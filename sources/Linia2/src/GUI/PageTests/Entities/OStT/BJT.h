@@ -2,6 +2,7 @@
 #pragma once
 #include "GUI/PageTests/Entities/OStT/OStT.h"
 #include "Settings/Tests/SettingsTests.h"
+#include "GUI/PageTests/PanelViewTest.h"
 
 
 // Биполярный транзистор
@@ -11,7 +12,7 @@ class BJT : public OStT
 {
 public:
 
-    BJT(Test *);
+    BJT();
 
     virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) override;
 

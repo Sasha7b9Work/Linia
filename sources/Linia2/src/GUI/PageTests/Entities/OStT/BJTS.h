@@ -10,7 +10,7 @@ class BJTS : public BJT
 {
 public:
 
-    BJTS(Test *);
+    BJTS();
 
     virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) override;
 

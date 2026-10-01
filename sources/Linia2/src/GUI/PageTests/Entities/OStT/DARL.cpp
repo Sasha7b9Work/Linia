@@ -3,7 +3,7 @@
 #include "GUI/PageTests/Entities/OStT/DARL.h"
 
 
-DARL::DARL(Test *test) : BJT(test)
+DARL::DARL() : BJT()
 {
 
 }
