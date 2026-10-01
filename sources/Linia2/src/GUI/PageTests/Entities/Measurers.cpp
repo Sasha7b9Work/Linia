@@ -65,10 +65,10 @@ void MeasurerSourcer::DrawUGO(AutoBufferedPaintDC &dc)
             const int l = 5;
 
             dc.DrawLine(center.x, center.y - dY - ddY, center.x - l, center.y - dY + l - ddY);
-            dc.DrawLine(center.x, center.y - ddY, center.x - l, center.y - l - ddY);
+            dc.DrawLine(center.x, center.y - ddY, center.x - l, center.y + l - ddY);
 
             dc.DrawLine(center.x, center.y - dY - ddY, center.x + l, center.y - dY + l - ddY);
-            dc.DrawLine(center.x, center.y - ddY, center.x + l, center.y - l - ddY);
+            dc.DrawLine(center.x, center.y - ddY, center.x + l, center.y + l - ddY);
         }
         else if (type == Type::SourceU ||
             (type == Type::SourceUI && IsSetModeU()))
