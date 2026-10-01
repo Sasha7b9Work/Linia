@@ -14,6 +14,13 @@ public:
 
     virtual void Draw(AutoBufferedPaintDC &, const wxPoint &center) override;
 
+    void SetControlElectrode(ControlElectrode::E e)
+    {
+        controlElectrode.Set(e);
+
+        PanelViewTest::self->Refresh();
+    }
+
 private:
 
     ControlElectrode controlElectrode{ ControlElectrode::Anode_P };

@@ -53,6 +53,7 @@ private:
     ButtonsCombo *bcTypeBJT = nullptr;                  // Тип биполярного транзистора
     ButtonsCombo *bcTypeFET = nullptr;                  // Тип полевого транзистора
     ButtonsCombo *bcCommonElectrodeDIOD = nullptr;      // Для диода - общий электрод
+    ButtonsCombo *bcControlElectrodeTHYR = nullptr;     // Дли тиристора - управляющий электрод
 
     OStT *ostt = nullptr;
 
@@ -119,4 +120,6 @@ private:
 
     // Возвращает координаты точки, из которой выходит вертикальная линия коллектора
     wxPoint CoordinateCollector() const;
+
+    wxPoint CoordinateSpecificControl() const;
 };

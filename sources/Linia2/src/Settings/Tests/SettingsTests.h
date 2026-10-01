@@ -145,6 +145,11 @@ struct ControlElectrode
         return type == Catode_N;
     }
 
+    void Set(E e)
+    {
+        type = e;
+    }
+
 private:
 
     E type;

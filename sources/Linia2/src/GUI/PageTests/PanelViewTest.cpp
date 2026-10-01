@@ -358,6 +358,12 @@ void PanelViewTest::CreateCommonControls()
 }
 
 
+wxPoint PanelViewTest::CoordinateSpecificControl() const
+{
+    return { CoordinateCollector().x - 280, CoordinateCollector().y + 20 };
+}
+
+
 void PanelViewTest::CreateSpecificControls()
 {
     {
@@ -370,7 +376,7 @@ void PanelViewTest::CreateSpecificControls()
         wxArrayString tooltips{ L("Проводимость транзистора") };
 
         bcTypeBJT = new ButtonsCombo(this, L("Тип"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Проводимость транзистора"));
-        bcTypeBJT->SetPosition({ CoordinateCollector().x - 250, CoordinateCollector().y + 30 });
+        bcTypeBJT->SetPosition(CoordinateSpecificControl());
         bcTypeBJT->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
             {
                 ostt->ToBJT()->SetType((TypeBJT::E)event.GetInt());
@@ -388,7 +394,7 @@ void PanelViewTest::CreateSpecificControls()
         wxArrayString tooltips{ L("Проводимость канала") };
 
         bcTypeFET = new ButtonsCombo(this, L("Канал"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Проводимость канала"));
-        bcTypeFET->SetPosition({ CoordinateCollector().x - 250, CoordinateCollector().y + 30 });
+        bcTypeFET->SetPosition(CoordinateSpecificControl());
         bcTypeFET->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
             {
                 ostt->ToFET()->SetType((TypeFET::E)event.GetInt());
@@ -405,10 +411,28 @@ void PanelViewTest::CreateSpecificControls()
         wxArrayString tooltips{ L("Общий электрод") };
 
         bcCommonElectrodeDIOD = new ButtonsCombo(this, L("Общий электрод"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Общий электрод"));
-        bcCommonElectrodeDIOD->SetPosition({ CoordinateCollector().x - 250, CoordinateCollector().y + 30 });
+        bcCommonElectrodeDIOD->SetPosition(CoordinateSpecificControl());
         bcCommonElectrodeDIOD->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
             {
                 ostt->ToDIOD()->SetCommonElectrode((CommonElectrode::E)event.GetInt());
+            });
+    }
+
+    {
+        wxArrayString labels
+        {
+            L("Анод"),
+            L("Катод")
+        };
+
+        wxArrayString tooltips{ L("Управляющий электрод") };
+
+        bcControlElectrodeTHYR = new ButtonsCombo(this, L("Управление"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Управляющий электрод"));
+        wxPoint coord = CoordinateSpecificControl();
+        bcControlElectrodeTHYR->SetPosition({ coord.x, coord.y + 30 });
+        bcControlElectrodeTHYR->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
+            {
+                ostt->ToTHYR()->SetControlElectrode((ControlElectrode::E)event.GetInt());
             });
     }
 
@@ -429,6 +453,16 @@ void PanelViewTest::TuneSpecificControls()
     {
         bcTypeFET->Show();
     }
+    else if (test->IsDIOD() ||
+        test->IsTHYR())
+    {
+        bcCommonElectrodeDIOD->Show();
+    }
+    
+    if (test->IsTHYR())
+    {
+        bcControlElectrodeTHYR->Show();
+    }
 }
 
 
@@ -436,6 +470,8 @@ void PanelViewTest::HideSpecificControls()
 {
     bcTypeBJT->Hide();
     bcTypeFET->Hide();
+    bcCommonElectrodeDIOD->Hide();
+    bcControlElectrodeTHYR->Hide();
 }
 
 

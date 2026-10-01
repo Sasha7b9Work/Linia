@@ -10,6 +10,7 @@ class BJT;
 class FET;
 class Test;
 class DIOD;
+class THYR;
 
 
 /*
@@ -119,6 +120,11 @@ public:
     DIOD *ToDIOD()
     {
         return (test->IsDIOD() || test->IsTHYR()) ? (DIOD *)this : nullptr;
+    }
+
+    THYR *ToTHYR()
+    {
+        return test->IsTHYR() ? (THYR *)this : nullptr;
     }
 
 protected:
