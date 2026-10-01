@@ -91,7 +91,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 {
     ostt->Draw(dc, GetCenter());
 
-    const int DX = 250;
+    const int DX = 270;
     const int X_B = 100;
     const int X_S = X_B + DX;
     const int X_C = X_S + DX;
