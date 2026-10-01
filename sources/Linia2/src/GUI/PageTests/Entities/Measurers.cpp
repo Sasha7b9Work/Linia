@@ -589,19 +589,6 @@ void MeasurerSourcer::CreateButtonModeUI(const wxRect &rect, const wxSize &size,
 }
 
 
-wxRect MeasurerSourcer::CalculateBoundingBox(int &x, int &y) const
-{
-    const int d = 5;
-
-    int width = WIDTH_CONTROL + d * 2;
-    int height = (CalculateNumControls() * (ButtonsCombo::HEIGHT + d)) + d;
-
-    wxRect rect{ x, y, width, height };
-
-    return rect;
-}
-
-
 wxRect MeasurerSourcer::DrawBorder(AutoBufferedPaintDC &dc, int &x, int &y, int r)
 {
     const int d = 5;
@@ -613,7 +600,13 @@ wxRect MeasurerSourcer::DrawBorder(AutoBufferedPaintDC &dc, int &x, int &y, int 
     dc.SetPen({ is_enabled ? (*wxBLACK) : wxColour(150, 150, 150), 1, wxPENSTYLE_SHORT_DASH });
     dc.SetBrush(*wxTRANSPARENT_BRUSH);
 
-    wxRect rect = CalculateBoundingBox(x, y);
+    wxRect rect
+    {
+        x,
+        y,
+        WIDTH_CONTROL + d * 2,
+        (CalculateNumControls() * (ButtonsCombo::HEIGHT + d)) + d
+    };
 
     if (dir == Dir::Left)
     {

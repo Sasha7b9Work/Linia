@@ -156,8 +156,6 @@ private:
     pchar SymbolUGO();
 
     int CalculateNumControls() const;
-
-    wxRect CalculateBoundingBox(int &x, int &y) const;
 };
 
 
