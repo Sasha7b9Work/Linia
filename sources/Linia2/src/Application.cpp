@@ -32,6 +32,8 @@ Application *Application::self = nullptr;
 
 #ifndef _WIN32
 
+static std::atomic<int> g_signal_received{ 0 };
+
 void SignalHandler(int sig)
 {
     // Устанавливаем флаг, а не делаем что-то сложное
