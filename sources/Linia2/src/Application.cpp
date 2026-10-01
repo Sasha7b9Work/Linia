@@ -34,7 +34,7 @@ Application *Application::self = nullptr;
 
 static std::atomic<int> g_signal_received{ 0 };
 
-void SignalHandler(int sig)
+void Application::SignalHandler(int sig)
 {
     // Устанавливаем флаг, а не делаем что-то сложное
     g_signal_received = sig;
