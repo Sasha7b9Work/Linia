@@ -125,8 +125,6 @@ void PanelTests::OnEventRightClickListItem(wxListEvent &event)
     header->Enable(false);
 
     menu.Append(MENU_APPLY, L("Применить"));
-    menu.Append(MENU_DELETE, L("Удалить"));
-    menu.Append(MENU_EDIT, L("Редактировать"));
 
     menu.Bind(wxEVT_MENU, &PanelTests::OnEventMenu, this);
 
@@ -140,12 +138,6 @@ void PanelTests::OnEventMenu(wxCommandEvent &event)
     {
     case MENU_APPLY:
             PanelViewTest::self->SetTest(test);
-        break;
-
-    case MENU_DELETE:
-        break;
-
-    case MENU_EDIT:
         break;
     }
 }
