@@ -85,6 +85,22 @@ struct ControlElectrode
         Catode_N,
         Count
     };
+
+    ControlElectrode(E e) : type {e} { }
+
+    bool IsAnode() const
+    {
+        return type == Anode_P;
+    }
+
+    bool IsCatode() const
+    {
+        return type == Catode_N;
+    }
+
+private:
+
+    E type;
 };
 
 

@@ -16,7 +16,7 @@ public:
 
 private:
 
-    ControlElectrode::E type = ControlElectrode::Anode_P;
+    ControlElectrode controlElectrode{ ControlElectrode::Anode_P };
 
     virtual bool GetPoint_B(wxPoint &result) const override
     {
