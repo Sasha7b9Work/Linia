@@ -30,11 +30,9 @@ wxIMPLEMENT_APP(Application);
 Application *Application::self = nullptr;
 
 
-#ifndef _WIN32
+#ifndef WIN32
 
 static std::atomic<int> g_signal_received{ 0 };
-
-static void SignalHandler(int sig);
 
 static void SignalHandler(int sig)
 {
