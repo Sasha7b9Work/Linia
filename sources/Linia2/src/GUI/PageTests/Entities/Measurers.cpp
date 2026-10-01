@@ -31,21 +31,6 @@ void MeasurerSourcer::Draw(AutoBufferedPaintDC &dc)
 
     CreateControls(rect);
 
-    for (wxWindow *object : parametersI)
-    {
-        object->Enable(is_enabled);
-    }
-
-    for (wxWindow *object : parametersU)
-    {
-        object->Enable(is_enabled);
-    }
-
-    if (btnModeUI)
-    {
-        btnModeUI->Enable(is_enabled);
-    }
-
     DrawUGO(dc);
 }
 
@@ -196,6 +181,18 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
     btnDisable->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
         {
             is_enabled = !is_enabled;
+            for (auto wnd : parametersI)
+            {
+                wnd->Show(is_enabled);
+            }
+            for (auto wnd : parametersU)
+            {
+                wnd->Show(is_enabled);
+            }
+            if (btnModeUI)
+            {
+                btnModeUI->Enable(is_enabled);
+            }
             PanelViewTest::self->Refresh();
             event.Skip();
         });
