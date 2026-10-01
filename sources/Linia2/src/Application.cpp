@@ -253,20 +253,20 @@ bool Application::OnInit()
     sigaction(SIGINT, &sa, nullptr);
     sigaction(SIGHUP, &sa, nullptr);
 
-    signal(SIGTERM, [](int)
-        {
-            CloseApplication();
-        });
-
-    signal(SIGINT, [](int)
-        {
-            CloseApplication();
-        });
-
-    signal(SIGHUP, [](int)
-        {
-            CloseApplication();
-        });
+//    signal(SIGTERM, [](int)
+//        {
+//            CloseApplication();
+//        });
+//
+//    signal(SIGINT, [](int)
+//        {
+//            CloseApplication();
+//        });
+//
+//    signal(SIGHUP, [](int)
+//        {
+//            CloseApplication();
+//        });
 #endif
 
     IDevice::impl->Init();
