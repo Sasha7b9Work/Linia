@@ -207,7 +207,7 @@ bool Application::OnInit()
 
     MainWindow::self->Show();
 
-    Bind(wxEVT_TIMER, [this](wxTimerEvent &)
+    Bind(wxEVT_TIMER, [](wxTimerEvent &)
         {
             static std::mutex mutex;
 

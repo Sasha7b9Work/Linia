@@ -109,3 +109,57 @@ bool Library::ParseTest(Test *test, const rapidjson::Value &value)
 
     return test->name[0] != '\0';
 }
+
+
+bool Test::IsBJT() const
+{
+    return lib->UGO == "BJT";
+}
+
+
+bool Test::IsBJTS() const
+{
+    return lib->UGO == "BJTS";
+}
+
+
+bool Test::IsFET() const
+{
+    return lib->UGO == "FET";
+}
+
+
+bool Test::IsFETS() const
+{
+    return lib->UGO == "FETS";
+}
+
+
+bool Test::IsDARL() const
+{
+    return lib->UGO == "DARL";
+}
+
+
+bool Test::IsTHYR() const
+{
+    return lib->UGO == "THYR";
+}
+
+
+bool Test::IsDIOD() const
+{
+    return lib->UGO == "DIOD";
+}
+
+
+bool Test::IsRES() const
+{
+    return lib->UGO == "RES";
+}
+
+
+bool Test::IsCAP() const
+{
+    return lib->UGO == "CAP";
+}

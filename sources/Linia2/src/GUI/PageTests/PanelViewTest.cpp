@@ -6,6 +6,15 @@
 #include "GUI/Controls/Painter.h"
 #include "GUI/Controls/StaticBox.h"
 #include "Utils/SystemDepend.h"
+#include "GUI/PageTests/Entities/OStT/BJT.h"
+#include "GUI/PageTests/Entities/OStT/BJTS.h"
+#include "GUI/PageTests/Entities/OStT/FET.h"
+#include "GUI/PageTests/Entities/OStT/FETS.h"
+#include "GUI/PageTests/Entities/OStT/DARL.h"
+#include "GUI/PageTests/Entities/OStT/THYR.h"
+#include "GUI/PageTests/Entities/OStT/DIOD.h"
+#include "GUI/PageTests/Entities/OStT/RES.h"
+#include "GUI/PageTests/Entities/OStT/CAP.h"
 
 
 PanelViewTest *PanelViewTest::self = nullptr;
@@ -45,9 +54,14 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
         // Устанавливаем цвет текста
         dc.SetTextForeground(*wxBLACK);
 
+        if (!ostt)
+        {
+            ostt = CreateOStT();
+        }
+
         CreateControls();
 
-        CreateElement(dc);
+        ostt->Draw(dc, GetCenter());
 
         // Устанавливаем шрифт (опционально)
         dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
@@ -62,22 +76,52 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 }
 
 
-void PanelViewTest::CreateElement(wxAutoBufferedPaintDC &dc)
+OStT *PanelViewTest::CreateOStT()
 {
-    if (test->lib->UGO == "BJT" ||
-        test->lib->UGO == "BJTS")
+    if (test->IsBJT())
     {
-        wxPoint point_base;
-        wxPoint point_collector;
-        wxPoint point_substrate;
-        wxPoint point_emitter;
-
-        CreateBJT("npn", GetCenter(), point_base, point_collector, point_substrate, point_emitter, dc);
+        return new BJT(test);
     }
+    else if (test->IsBJTS())
+    {
+        return new BJTS(test);
+    }
+    else if (test->IsFET())
+    {
+        return new FET(test);
+    }
+    else if (test->IsFETS())
+    {
+        return new FETS(test);
+    }
+    else if (test->IsDARL())
+    {
+        return new DARL(test);
+    }
+    else if (test->IsTHYR())
+    {
+        return new THYR(test);
+    }
+    else if (test->IsDIOD())
+    {
+        return new DIOD(test);
+    }
+    else if (test->IsRES())
+    {
+        return new RES(test);
+    }
+    else if (test->IsCAP())
+    {
+        return new CAP(test);
+    }
+
+    LOG_ERROR("Incorrect type OStT");
+
+    return nullptr;
 }
 
 
-void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &point_base, wxPoint &point_collector, wxPoint &point_substrate, wxPoint &point_emitter, wxAutoBufferedPaintDC &dc)
+void PanelViewTest::CreateBJT(const wxPoint &c, wxPoint &point_base, wxPoint &point_collector, wxPoint &point_substrate, wxPoint &point_emitter, wxAutoBufferedPaintDC &dc)
 {
     int r = 5;
 
@@ -86,7 +130,6 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
 
     LineDriwer driwer(dc, x_col, y_col);
     driwer.LineTo(c.x + radius_trans / 2, c.y + 2 * radius_trans);          // Вертикальная линия, которая выходит из коллектора и эмиттера
-    DrawGround(driwer.GetX(), driwer.GetY(), dc);
     driwer.MoveOnDY(-20);
     point_emitter = driwer.GetCoord();
     dc.DrawCircle(point_emitter, r);
@@ -121,27 +164,6 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
 
             dc.DrawLine(x_vert, c.y - dy, xx, y_top);                  // Верхняя наклонная линия (коллектор)
             dc.DrawLine(x_vert, c.y + dy, xx, y_bottom);               // Нижняя наклонная линия (эмиттер)
-
-            {
-                // Стрелка эмиттера
-
-                double length = radius_trans * 10 / 40;
-
-                if (type == "npn")
-                {
-                    DrawLineWithAngle({ xx, y_bottom }, length, 125, dc);
-                    DrawLineWithAngle({ xx, y_bottom }, length, 170, dc);
-                }
-                else if (type == "pnp")
-                {
-                    DrawLineWithAngle({ x_vert, c.y + dy }, length, -8, dc);
-                    DrawLineWithAngle({ x_vert, c.y + dy }, length, -53, dc);
-                }
-                else
-                {
-                    LOG_ERROR("Unknown type transistor");
-                }
-            }
         }
 
         {
@@ -157,8 +179,6 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
                 driwer.MoveTo(coord_base.x, coord_base.y);
 
                 driwer.LineToY(y_ground);
-
-                DrawGround(driwer.GetX(), driwer.GetY(), dc);
 
                 if (!measurerBase)
                 {
@@ -197,7 +217,6 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
                 driwer.Restore();
 
                 driwer.LineToY(y_ground);
-                DrawGround(driwer.GetX(), driwer.GetY(), dc);
 
                 driwer.MoveOnDY(-470);
 
@@ -229,7 +248,6 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
         driwer.Restore();
         driwer.LineOnDX(355);
         driwer.LineToY(y_ground);
-        DrawGround(driwer.GetX(), driwer.GetY(), dc);
 
         if (!ampermeterCollector)
         {
@@ -252,23 +270,6 @@ void PanelViewTest::CreateBJT(const wxString &type, const wxPoint &c, wxPoint &p
 
         sourceVoltageCollector->Draw(dc);
     }
-}
-
-
-void PanelViewTest::DrawGround(int x, int y, wxAutoBufferedPaintDC &dc)
-{
-    dc.DrawLine(x - 10, y, x + 10, y);
-}
-
-
-void PanelViewTest::DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &dc)
-{
-    double angleRad = angleDeg * M_PI / 180.0;
-
-    int endX = start.x + (int)(length * cos(angleRad));
-    int endY = start.y - (int)(length * sin(angleRad));  // минус, т.к. Y вниз
-
-    dc.DrawLine(start.x, start.y, endX, endY);
 }
 
 

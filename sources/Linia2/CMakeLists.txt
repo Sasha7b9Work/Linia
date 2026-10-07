@@ -29,7 +29,6 @@ if(WIN32)
         /wd4625    # copy constructor was implicitly defined as deleted
         /wd4623    # default constructor was implicitly defined as deleted
         /wd4626    # assignment operator was implicitly defined as deleted
-        /wd4710    # function not inlined
         /wd4711    # function xxx selected for automatic inline expansion
         /wd4820    # 'N' bytes padding added after data member
         /wd4865    # '<unnamed-enum-XXX>': the underlying type will change from 'int' to '__int64' when '/Zc:enumTypes' is specified on the command line
@@ -38,7 +37,7 @@ if(WIN32)
         /wd5045    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
         /wd5039    # pointer or reference to potentially throwing function passed to extern C function under -EHc. Undefined behavor may occur if this function throws an exception
         /wd5204    # 'xxx': class has virtual functions, but its trivial destructor is not virtual
-        /wd5233    # xplicit lambda capture 'this' is not used
+#        /wd5233    # xplicit lambda capture 'this' is not used
     )
 
 else()
@@ -98,6 +97,7 @@ file(GLOB GUI_SETTINGS_MYCOMPUTER       src/GUI/PageSettings/MyComputer/*.*)
 file(GLOB GUI_TABLES                    src/GUI/PageTables/*.*)
 file(GLOB GUI_TESTS                     src/GUI/PageTests/*.*)
 file(GLOB GUI_TESTS_ENTITIES            src/GUI/PageTests/Entities/*.*)
+file(GLOB GUI_TESTS_ENTITIES_OSTT       src/GUI/PageTests/Entities/OStT/*.*)
 file(GLOB SETTINGS                      src/Settings/*.*)
 file(GLOB SETTINGS_TESTS                src/Settings/Tests/*.*)
 file(GLOB SETTINGS_TESTS_LIBRARY        src/Settings/Tests/Library/*.*)
@@ -149,6 +149,7 @@ source_group(GUI/PageSettings/MyComputer      FILES ${GUI_SETTINGS_MYCOMPUTER})
 source_group(GUI/PageTables                   FILES ${GUI_TABLES})
 source_group(GUI/PageTests                    FILES ${GUI_TESTS})
 source_group(GUI/PageTests/Entities           FILES ${GUI_TESTS_ENTITIES})
+source_group(GUI/PageTests/Entities/OStT      FILES ${GUI_TESTS_ENTITIES_OSTT})
 source_group(Settings                         FILES ${SETTINGS})
 source_group(Settings/Tests                   FILES ${SETTINGS_TESTS})
 source_group(Settings/Tests/Library           FILES ${SETTINGS_TESTS_LIBRARY})
@@ -195,6 +196,7 @@ add_executable(${PROJECT_NAME}
     ${GUI_TABLES}
     ${GUI_TESTS}
     ${GUI_TESTS_ENTITIES}
+    ${GUI_TESTS_ENTITIES_OSTT}
     ${SETTINGS}
     ${SETTINGS_TESTS}
     ${SETTINGS_TESTS_LIBRARY}
@@ -272,5 +274,4 @@ else()
     target_compile_options(${PROJECT_NAME} PRIVATE ${GTK3_CFLAGS_OTHER})
 
 endif()
-
 
