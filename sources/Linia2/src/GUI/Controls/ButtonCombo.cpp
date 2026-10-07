@@ -22,6 +22,16 @@ DrawingButton::DrawingButton(wxWindow *parent, const wxString &label, const wxSi
 }
 
 
+bool DrawingButton::Show(bool show)
+{
+    bool result = Button::Show(show);
+
+    LOG_WRITE("Button %s shown is %d", GetName().c_str().AsChar(), IsShown() ? 1 : 0);
+
+    return result;
+}
+
+
 class ButtonPopup : public wxPopupTransientWindow
 {
 public:

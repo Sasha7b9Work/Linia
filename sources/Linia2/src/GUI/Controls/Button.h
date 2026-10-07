@@ -13,7 +13,7 @@ class Button : public wxButton
 {
 public:
 
-    Button(wxWindow *, const wxString &, const wxSize & = wxDefaultSize, int flags = 0);
+    Button(wxWindow *, const wxString &label, const wxSize & = wxDefaultSize, int flags = 0);
 };
 
 

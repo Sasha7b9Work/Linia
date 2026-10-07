@@ -75,8 +75,6 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 
         DrawScheme(dc);
 
-        measBase->Draw(dc);
-
         // Устанавливаем цвет текста
         dc.SetTextForeground(*wxBLACK);
 

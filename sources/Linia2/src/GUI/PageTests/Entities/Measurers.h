@@ -61,16 +61,6 @@ public:
             {
                 btnModeUI->Show();
             }
-
-            for (auto wnd : parametersU)
-            {
-                wnd->Show();
-            }
-
-            for (auto wnd : parametersI)
-            {
-                wnd->Show();
-            }
         }
 
         SetPosition(pos);
