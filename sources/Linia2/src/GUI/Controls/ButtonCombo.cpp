@@ -22,6 +22,16 @@ DrawingButton::DrawingButton(wxWindow *parent, const wxString &label, const wxSi
 }
 
 
+void DrawingButton::SetExtendedLabel(const wxString &start, int num_spaces, const wxString &end)
+{
+    wxString label{ start };
+    label.Append(' ', (size_t)num_spaces);
+    label.Append(end);
+
+    SetLabel(label);
+}
+
+
 class ButtonPopup : public wxPopupTransientWindow
 {
 public:
@@ -398,7 +408,7 @@ void ButtonsCombo::SetExtendedLabel(const wxString &start, const wxString &end)
 
         while (true)
         {
-            SetExtendedLabel(start, num_spaces, end);
+            DrawingButton::SetExtendedLabel(start, num_spaces, end);
 
             wxSize size = GetTextExtent(DrawingButton::GetLabel());
 
@@ -415,18 +425,8 @@ void ButtonsCombo::SetExtendedLabel(const wxString &start, const wxString &end)
             num_spaces++;
         }
 
-        SetExtendedLabel(start, num_spaces, end);
+        DrawingButton::SetExtendedLabel(start, num_spaces, end);
     }
-}
-
-
-void ButtonsCombo::SetExtendedLabel(const wxString &start, int num_spaces, const wxString &end)
-{
-    wxString label{ start };
-    label.Append(' ', (size_t)num_spaces);
-    label.Append(end);
-
-    SetLabel(label);
 }
 
 

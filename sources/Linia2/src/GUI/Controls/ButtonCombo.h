@@ -9,6 +9,10 @@ class DrawingButton : public Button
 public:
 
     DrawingButton(wxWindow *, const wxString &, const wxSize &, const wxString &name);
+
+protected:
+
+    void SetExtendedLabel(const wxString &, int num_spaces, const wxString &);
 };
 
 
@@ -68,7 +72,6 @@ protected:
 
     // Между строками будут пробелы таким образом, что строки будут по краям кнопки
     virtual void SetExtendedLabel(const wxString &, const wxString &);
-    void SetExtendedLabel(const wxString &, int num_spaces, const wxString &);
 
 private:
 
