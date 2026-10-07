@@ -136,9 +136,9 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 
         DrawGround(dc);
 
-//        ampCollector->Show(dc, {X_C, PosMeasurerSourcerY(0)});
-//        voltCollector->Show(dc, { X_C, PosMeasurerSourcerY(1) });
-//        srcVoltageCollector->Show(dc, { X_C, PosMeasurerSourcerY(2) });
+        ampCollector->Show(dc, {X_C, PosMeasurerSourcerY(0)});
+        voltCollector->Show(dc, { X_C, PosMeasurerSourcerY(1) });
+        srcVoltageCollector->Show(dc, { X_C, PosMeasurerSourcerY(2) });
     }
 
     {
@@ -240,11 +240,11 @@ void PanelViewTest::CreateMeasurersSourcers()
 
     srcVoltateCurrentSubstrate = new SourceVoltageCurrent(Chan::_S, Dir::Down);
 
-//    ampCollector = new Ampermeter(Chan::_C, Dir::Down);
-//
-//    voltCollector = new Voltmeter(Chan::_C, Dir::Down);
-//
-//    srcVoltageCollector = new SourceVoltage(Chan::_C, Dir::Down);
+    ampCollector = new Ampermeter(Chan::_C, Dir::Down);
+
+    voltCollector = new Voltmeter(Chan::_C, Dir::Down);
+
+    srcVoltageCollector = new SourceVoltage(Chan::_C, Dir::Down);
 }
 
 wxPoint PanelViewTest::GetCenter() const
@@ -669,9 +669,9 @@ void PanelViewTest::HideMeasurersSourcers()
     measSubstrate->Hide();
     srcVoltateCurrentSubstrate->Hide();
 
-//    ampCollector->Hide();
-//    voltCollector->Hide();
-//    srcVoltageCollector->Hide();
+    ampCollector->Hide();
+    voltCollector->Hide();
+    srcVoltageCollector->Hide();
 }
 
 
