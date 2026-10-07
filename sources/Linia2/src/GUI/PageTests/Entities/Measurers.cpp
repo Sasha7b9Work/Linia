@@ -4,7 +4,6 @@
 #include "Utils/GlobalFunctions.h"
 #include "GUI/Controls/ButtonCombo.h"
 #include "GUI/PageTests/PanelViewTest.h"
-#include "GUI/Controls/SliderHidden.h"
 
 
 #define CREATE_BUTTONS_COMBO_RANGE(name, title, _x, _y)             \
@@ -262,12 +261,21 @@ void MeasurerSourcer::CreateParametersI()
             }
 
             {
-                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
+                SliderFloat *slider = new SliderFloat(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(-10e-3, 10e-3);
+                slider->SetRange(0.0, 10.0, "mA", 2);
                 parametersI.push_back(slider);
                 y += ButtonsCombo::HEIGHT + 5;
+            }
+
+            {
+                titles.push_back(L("+"));
+                titles.push_back(L("-"));
+
+                tooltips.push_back(L("Полярность смещения"));
+
+                CREATE_COMBO(L("Полярность"), "comboBasePolarityI", parametersI);
             }
 
             {
@@ -307,12 +315,21 @@ void MeasurerSourcer::CreateParametersI()
             }
 
             {
-                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
+                SliderFloat *slider = new SliderFloat(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(-10e-3, 10e-3);
+                slider->SetRange(0.0, 10.0, "mA", 2);
                 parametersI.push_back(slider);
                 y += ButtonsCombo::HEIGHT + 5;
+            }
+
+            {
+                titles.push_back(L("+"));
+                titles.push_back(L("-"));
+
+                tooltips.push_back(L("Полярность смещения"));
+
+                CREATE_COMBO(L("Полярность"), "comboSubstratePolarityI", parametersI);
             }
 
             {
@@ -383,12 +400,21 @@ void MeasurerSourcer::CreateParametersU()
             }
 
             {
-                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
+                SliderFloat *slider = new SliderFloat(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(-10e-3, 10e-3);
+                slider->SetRange(0.0, 10.0, "mA", 2);
                 parametersU.push_back(slider);
                 y += ButtonsCombo::HEIGHT + 5;
+            }
+
+            {
+                titles.push_back(L("+"));
+                titles.push_back(L("-"));
+
+                tooltips.push_back(L("Полярность смещения"));
+
+                CREATE_COMBO(L("Полярность"), "comboBasePolarityU", parametersU);
             }
 
             {
@@ -428,12 +454,21 @@ void MeasurerSourcer::CreateParametersU()
             }
 
             {
-                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
+                SliderFloat *slider = new SliderFloat(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(-10e-3, 10e-3);
+                slider->SetRange(0.0, 10.0, "mA", 2);
                 parametersU.push_back(slider);
                 y += ButtonsCombo::HEIGHT + 5;
+            }
+
+            {
+                titles.push_back(L("+"));
+                titles.push_back(L("-"));
+
+                tooltips.push_back(L("Полярность смещения"));
+
+                CREATE_COMBO(L("Полярность"), "comboSubstratePolarityU", parametersU);
             }
 
             {
@@ -473,10 +508,10 @@ void MeasurerSourcer::CreateParametersU()
             }
 
             {
-                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
+                SliderFloat *slider = new SliderFloat(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(-10e-3, 10e-3);
+                slider->SetRange(0.0, 10.0, "mA", 2);
                 parametersU.push_back(slider);
                 y += ButtonsCombo::HEIGHT + 5;
             }
