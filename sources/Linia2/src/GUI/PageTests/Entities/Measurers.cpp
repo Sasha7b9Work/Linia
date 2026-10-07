@@ -383,15 +383,6 @@ void MeasurerSourcer::CreateParametersU()
             }
 
             {
-                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
-                slider->SetToolTip(L("Смещение"));
-                slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(-10e-3, 10e-3);
-                parametersU.push_back(slider);
-                y += ButtonsCombo::HEIGHT + 5;
-            }
-
-            {
                 for (int i = 1; i < 11; i++)
                 {
                     titles.push_back(wxString::Format("%d", i));
@@ -400,6 +391,15 @@ void MeasurerSourcer::CreateParametersU()
                 tooltips.push_back(L("Количество ступенек"));
 
                 CREATE_COMBO(L("Кол-во ступенек"), "comboBaseNumSteps", parametersU);
+            }
+
+            {
+                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
+                slider->SetToolTip(L("Смещение"));
+                slider->SetPosition({ coord_controls.x, y });
+                slider->SetRange(-10e-3, 10e-3);
+                parametersU.push_back(slider);
+                y += ButtonsCombo::HEIGHT + 5;
             }
         }
     }
@@ -464,21 +464,21 @@ void MeasurerSourcer::CreateParametersU()
         else if (type == Type::SourceU)
         {
             {
-                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
-                slider->SetToolTip(L("Смещение"));
-                slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(-10e-3, 10e-3);
-                parametersU.push_back(slider);
-                y += ButtonsCombo::HEIGHT + 5;
-            }
-
-            {
                 titles.push_back("1 мВ");
                 titles.push_back("2 мВ");
 
                 tooltips.push_back(L("Шаг изменения испытательного напряжения"));
 
                 CREATE_COMBO(L("Uc диапазон"), "comboBaseSourceU", parametersU);
+            }
+
+            {
+                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
+                slider->SetToolTip(L("Смещение"));
+                slider->SetPosition({ coord_controls.x, y });
+                slider->SetRange(-10e-3, 10e-3);
+                parametersU.push_back(slider);
+                y += ButtonsCombo::HEIGHT + 5;
             }
         }
     }
