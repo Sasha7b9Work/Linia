@@ -1,29 +1,18 @@
 // 2026/09/29 11:23:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
-#include "GUI/PageTests/Entities/OStT/DIOD.h"
+#include "GUI/PageTests/Entities/OStT/OStT.h"
 
 
 // Тиристор
 
 
-class THYR : public DIOD
+class THYR : public OStT
 {
 public:
 
     THYR(Test *);
 
-    virtual void Draw(AutoBufferedPaintDC &, const wxPoint &center) override;
+    virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
 
 private:
-
-    TypeTHYR::E type = TypeTHYR::Control_Anode;
-
-    virtual bool GetPoint_B(wxPoint &result) const override
-    {
-        result = point_B;
-
-        return true;
-    }
-
-    void DrawControlElectrode(AutoBufferedPaintDC &, const wxPoint &center);
 };

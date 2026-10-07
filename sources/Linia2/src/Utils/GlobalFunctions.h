@@ -2,6 +2,9 @@
 #pragma once
 #include "GUI/Controls/Button.h"
 #include "GUI/Controls/ButtonCombo.h"
+#pragma warning(push, 0)
+    #include <wx/dcbuffer.h>
+#pragma warning(pop)
 
 
 class wxRadioButton;
@@ -65,7 +68,7 @@ namespace GF
     // Получить ip-адрес устройства, на котором запущены
     wxString GetSelfIP();
 
-    void DrawTextInCenter(AutoBufferedPaintDC &, const wxString &, const wxRect &);
+    void DrawTextInCenter(wxAutoBufferedPaintDC &, const wxString &, const wxRect &);
 
     uint CalculateCRC32(const void *buffer, int size);
 }

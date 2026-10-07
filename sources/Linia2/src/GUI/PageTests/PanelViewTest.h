@@ -25,7 +25,6 @@ private:
 
     static const int radius_trans = 50;                     // От этого значения и Center() идёт всё построение изображения
     static const int d_combos = ButtonsCombo::HEIGHT + 5;   // Расстояние между элементами ввода по вертикали
-    static const int Y_GROUND = 700;
 
     Test *test = nullptr;
 
@@ -40,15 +39,15 @@ private:
     StaticBox *boxScan = nullptr;                       // "Развёртка"
     StaticBox *boxCover = nullptr;                      // "Крышка"
 
-    MeasurerVoltageCurrent *measBase = nullptr;
-    SourceVoltageCurrent *srcVoltageCurrentBase = nullptr;
+    MeasurerVoltageCurrent *measurerBase = nullptr;
+    SourceVoltageCurrent *sourceVoltageCurrentBase = nullptr;
 
-    MeasurerVoltageCurrent *measSubstrate = nullptr;
-    SourceVoltageCurrent *srcVoltateCurrentSubstrate = nullptr;
+    MeasurerVoltageCurrent *measurerSubstrate = nullptr;
+    SourceVoltageCurrent *sourceVoltateCurrentSubstrate = nullptr;
 
-    Ampermeter *ampCollector = nullptr;
-    Voltmeter *voltCollector = nullptr;
-    SourceVoltage *srcVoltageCollector = nullptr;
+    Ampermeter *ampermeterCollector = nullptr;
+    Voltmeter *voltmeterCollector = nullptr;
+    SourceVoltage *sourceVoltageCollector = nullptr;
 
     OStT *ostt = nullptr;
 
@@ -80,6 +79,10 @@ private:
     // Нарисовать испытуемый элемент
     OStT *CreateOStT();
 
+    // type == "npn", "pnp"
+    // Биполярный транзистор с подложкой и без
+    void CreateBJT(const wxPoint &, wxPoint &point_base, wxPoint &point_collector, wxPoint &point_substrate, wxPoint &point_emitter, wxAutoBufferedPaintDC &dc);
+
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
 
     // Создать элементы управляения для данного теста
@@ -93,18 +96,4 @@ private:
 
     // Если true - находимся в режиме редактирования теста
     bool InModeEdit() const;
-
-    void DrawScheme(AutoBufferedPaintDC &);
-
-    // Нарисовать значок земли
-    void DrawGround(AutoBufferedPaintDC &);
-
-    // Создать источники и измерители
-    void CreateMeasurersSourcers();
-
-    // Спрятать источники и измерители
-    void HideMeasurersSourcers();
-
-    // Возвращает позицию по Y источника либо измерителя
-    int PosMeasurerSourcerY(int);
 };

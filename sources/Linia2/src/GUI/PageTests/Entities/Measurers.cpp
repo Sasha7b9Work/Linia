@@ -11,39 +11,34 @@
     name->SetPosition({ _x, _y });
 
 
-MeasurerSourcer::MeasurerSourcer(Type::E _type, Chan::E _chan, Dir::E _dir) :
-    type(_type), chan(_chan), dir(_dir)
+MeasurerSourcer::MeasurerSourcer(Type::E _type, Chan::E _chan, const wxPoint _center, Dir::E _dir) :
+    type(_type), chan(_chan), dir(_dir), center(_center)
 {
 }
 
 
-void MeasurerSourcer::Draw(AutoBufferedPaintDC &dc)
+void MeasurerSourcer::Draw(wxAutoBufferedPaintDC &dc)
 {
-    if (!is_showing)
-    {
-        return;
-    }
-
     coord_controls.x = center.x;
     coord_controls.y = center.y;
 
-    wxRect rect = DrawBorder(dc, coord_controls.x, coord_controls.y, radius);
+    wxRect rect = DrawBorder(dc, coord_controls.x, coord_controls.y, radius, CalculateNumControls());
 
     CreateControls(rect);
 
     for (wxWindow *object : parametersI)
     {
-        object->Enable(is_enabled);
+        object->Enable(!disabled);
     }
 
     for (wxWindow *object : parametersU)
     {
-        object->Enable(is_enabled);
+        object->Enable(!disabled);
     }
 
     if (btnModeUI)
     {
-        btnModeUI->Enable(is_enabled);
+        btnModeUI->Enable(!disabled);
     }
 
     DrawUGO(dc);
@@ -61,9 +56,9 @@ int MeasurerSourcer::CalculateNumControls() const
 }
 
 
-void MeasurerSourcer::DrawUGO(AutoBufferedPaintDC &dc)
+void MeasurerSourcer::DrawUGO(wxAutoBufferedPaintDC &dc)
 {
-    if (is_enabled)
+    if (!disabled)
     {
         dc.DrawCircle(center, radius);
 
@@ -195,7 +190,7 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
 
     btnDisable->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
         {
-            is_enabled = !is_enabled;
+            disabled = !disabled;
             PanelViewTest::self->Refresh();
             event.Skip();
         });
@@ -592,20 +587,7 @@ void MeasurerSourcer::CreateButtonModeUI(const wxRect &rect, const wxSize &size,
 }
 
 
-wxRect MeasurerSourcer::CalculateBoundingBox(int &x, int &y) const
-{
-    const int d = 5;
-
-    int width = WIDTH_CONTROL + d * 2;
-    int height = (CalculateNumControls() * (ButtonsCombo::HEIGHT + d)) + d;
-
-    wxRect rect{ x, y, width, height };
-
-    return rect;
-}
-
-
-wxRect MeasurerSourcer::DrawBorder(AutoBufferedPaintDC &dc, int &x, int &y, int r)
+wxRect MeasurerSourcer::DrawBorder(wxAutoBufferedPaintDC &dc, int &x, int &y, int r, int num_controls)
 {
     const int d = 5;
 
@@ -613,16 +595,19 @@ wxRect MeasurerSourcer::DrawBorder(AutoBufferedPaintDC &dc, int &x, int &y, int 
 
     paint.StorePenBrush();
 
-    dc.SetPen({ is_enabled ? (*wxBLACK) : wxColour(150, 150, 150), 1, wxPENSTYLE_SHORT_DASH });
+    dc.SetPen({ disabled ? wxColour(150, 150, 150) : (*wxBLACK), 1, wxPENSTYLE_SHORT_DASH});
     dc.SetBrush(*wxTRANSPARENT_BRUSH);
 
-    wxRect rect = CalculateBoundingBox(x, y);
+    int width = WIDTH_CONTROL + d * 2;
+    int height = (num_controls * (ButtonsCombo::HEIGHT + d)) + d;
+
+    wxRect rect{ x, y, width, height };
 
     if (dir == Dir::Left)
     {
         rect.x -= WIDTH_CONTROL + 2 * d + r;
         rect.width += 2 * r + d;
-        rect.y -= rect.height / 2;
+        rect.y -= height / 2;
         dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
         x = rect.x + d;
         y = rect.y + d;
@@ -630,7 +615,7 @@ wxRect MeasurerSourcer::DrawBorder(AutoBufferedPaintDC &dc, int &x, int &y, int 
     else if (dir == Dir::Up)
     {
         rect.x = x - WIDTH_CONTROL / 2 - d;
-        rect.y -= d + r + (ButtonsCombo::HEIGHT + d) * CalculateNumControls();
+        rect.y -= d + r + (ButtonsCombo::HEIGHT + d) * num_controls;
         rect.height += d + r * 2;
 
         dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
@@ -642,7 +627,7 @@ wxRect MeasurerSourcer::DrawBorder(AutoBufferedPaintDC &dc, int &x, int &y, int 
     {
         rect.x -= r + d;
         rect.width += 2 * r + d;
-        rect.y -= rect.height / 2;
+        rect.y -= height / 2;
 
         dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
 

@@ -1,9 +1,16 @@
 // 2026/09/29 11:03:12 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageTests/Entities/OStT/OStT.h"
+#include "Utils/LineDrawer.h"
 
 
-void OStT::DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, AutoBufferedPaintDC &dc)
+void OStT::DrawGround(int x, int y, wxAutoBufferedPaintDC &dc)
+{
+    dc.DrawLine(x - 10, y, x + 10, y);
+}
+
+
+void OStT::DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &dc)
 {
     double angleRad = angleDeg * M_PI / 180.0;
 
@@ -14,27 +21,28 @@ void OStT::DrawLineWithAngle(const wxPoint &start, double length, double angleDe
 }
 
 
-void OStT::DrawCase(AutoBufferedPaintDC &dc, const wxPoint &c)
+void OStT::DrawCase(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    dc.DrawCircle(c, radius);
+    dc.DrawCircle(c, RADIUS);
 }
 
 
-void OStT::DrawAnchorPoint(AutoBufferedPaintDC &dc, const wxPoint &c)
+void OStT::DrawAnchorPoint(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
     dc.DrawCircle(c, 5);
 }
 
 
-void OStT::DrawArrow(AutoBufferedPaintDC &dc, const wxPoint &p1, const wxPoint &p2)
+void OStT::DrawArrow(wxAutoBufferedPaintDC &dc, const wxPoint &p1, const wxPoint &p2)
 {
+    double length = 15.0;
     double angle = 20.0;
 
-    wxPoint p = PointAtAngle(p1, p2, (double)length_arrow, angle);
+    wxPoint p = PointAtAngle(p1, p2, length, angle);
 
     dc.DrawLine(p, p2);
 
-    p = PointAtAngle(p1, p2, (double)length_arrow, -angle);
+    p = PointAtAngle(p1, p2, length, -angle);
 
     dc.DrawLine(p, p2);
 }
@@ -95,7 +103,7 @@ wxPoint OStT::PointAtAngle(const wxPoint &p1, const wxPoint &p2, double length, 
 }
 
 
-std::vector<wxPoint> OStT::IntersectLineCircle(const wxPoint &p1, const wxPoint &p2, const wxPoint &center, double r) const
+std::vector<wxPoint> OStT::IntersectLineCircle(const wxPoint &p1, const wxPoint &p2, const wxPoint &center, double radius)
 {
     std::vector<wxPoint> result;
 
@@ -116,7 +124,7 @@ std::vector<wxPoint> OStT::IntersectLineCircle(const wxPoint &p1, const wxPoint 
     }
 
     double b = 2.0 * (fx * dx + fy * dy);
-    double c = fx * fx + fy * fy - r * r;
+    double c = fx * fx + fy * fy - radius * radius;
 
     // Дискриминант
     double discriminant = b * b - 4.0 * a * c;
@@ -150,78 +158,31 @@ std::vector<wxPoint> OStT::IntersectLineCircle(const wxPoint &p1, const wxPoint 
 }
 
 
-void OStT::FuncAfterDraw(AutoBufferedPaintDC &dc)
+void OStT::FuncAfterDraw(wxAutoBufferedPaintDC &dc)
 {
     DrawAnchorPoints(dc);
-
-    DrawNamesPoints(dc);
 }
 
 
-void OStT::DrawAnchorPoints(AutoBufferedPaintDC &dc)
+void OStT::DrawAnchorPoints(wxAutoBufferedPaintDC &dc)
 {
-    DrawAnchorPoint(dc, GetPoint_C());
+    DrawAnchorPoint(dc, GetPointCollector());
 
-    DrawAnchorPoint(dc, GetPoint_E());
+    bool receive = false;
 
-    wxPoint point;
+    wxPoint point = GetPointBase(receive);
 
-    if (GetPoint_B(point))
+    if (receive)
     {
         DrawAnchorPoint(dc, point);
     }
-    if (GetPoint_S(point))
+
+    point = GetPointSubstrate(receive);
+
+    if (receive)
     {
         DrawAnchorPoint(dc, point);
     }
-}
 
-
-void OStT::DrawNamesPoints(AutoBufferedPaintDC &dc)
-{
-    wxString name;
-
-    wxPoint pos;
-
-    {
-        // Коллектор
-
-        pos = GetPoint_C();
-
-        name = GetName_C();
-
-        dc.DrawText(name, pos + wxPoint{ 8, -8 });
-    }
-
-    {
-        // Эмиттер
-
-        pos = GetPoint_E();
-
-        name = GetName_E();
-
-        dc.DrawText(name, pos + wxPoint{ 8, -5 });
-    }
-
-    {
-        // База
-
-        if (GetPoint_B(pos))
-        {
-            name = GetName_B();
-
-            dc.DrawText(name, pos + wxPoint{ -5, -20 });
-        }
-    }
-
-    {
-        // Подложка
-
-        if (GetPoint_S(pos))
-        {
-            name = GetName_S();
-
-            dc.DrawText(name, pos + wxPoint{ -5, -20 });
-        }
-    }
+    DrawAnchorPoint(dc, GetPointGround());
 }

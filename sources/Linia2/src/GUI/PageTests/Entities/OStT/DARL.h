@@ -1,25 +1,18 @@
 // 2026/09/29 11:10:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
-#include "GUI/PageTests/Entities/OStT/BJT.h"
+#include "GUI/PageTests/Entities/OStT/OStT.h"
 
 
 // Транзистор Дарлингтона
 
 
-class DARL : public BJT
+class DARL : public OStT
 {
 public:
 
     DARL(Test *);
 
-    virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) override;
+    virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
 
 private:
-
-    virtual bool GetPoint_B(wxPoint &result) const override
-    {
-        result = point_B;
-
-        return true;
-    }
 };

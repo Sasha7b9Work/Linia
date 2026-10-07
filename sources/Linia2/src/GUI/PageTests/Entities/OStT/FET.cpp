@@ -9,13 +9,15 @@ FET::FET(Test *test) : OStT(test)
 }
 
 
-void FET::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
+void FET::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
     DrawCommon(dc, c);
+
+    FuncAfterDraw(dc);
 }
 
 
-void FET::DrawCommon(AutoBufferedPaintDC &dc, const wxPoint &c)
+void FET::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
     DrawCase(dc, c);
 
@@ -25,7 +27,7 @@ void FET::DrawCommon(AutoBufferedPaintDC &dc, const wxPoint &c)
 }
 
 
-void FET::DrawGate(AutoBufferedPaintDC &dc, const wxPoint &c)
+void FET::DrawGate(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
     wxPoint p1{ c.x - GateDX(), c.y - GateDY() };
     wxPoint p2{ c.x - GateDX(), c.y + GateDY() };
@@ -33,11 +35,11 @@ void FET::DrawGate(AutoBufferedPaintDC &dc, const wxPoint &c)
     dc.DrawLine(p1, p2);
 
     p1 = wxPoint{ c.x - GateDX(), c.y + DrainDY() };
-    p2 = wxPoint{ c.x - radius - dr, c.y + DrainDY() };
+    p2 = wxPoint{ c.x - RADIUS - DR, c.y + DrainDY() };
 
     dc.DrawLine(p1, p2);
 
-    point_B = p2;
+    point_base = p2;
 
     if (type == TypeFET::ChannelN)
     {
@@ -45,41 +47,30 @@ void FET::DrawGate(AutoBufferedPaintDC &dc, const wxPoint &c)
     }
     else if (type == TypeFET::ChannelP)
     {
-        std::vector<wxPoint> points = IntersectLineCircle(p2, p1, c, radius);
+        std::vector<wxPoint> points = IntersectLineCircle(p2, p1, c, RADIUS);
 
         DrawArrow(dc, p1, points[0]);
     }
 }
 
 
-void FET::DrawSourceDrain(AutoBufferedPaintDC &dc, const wxPoint &c)
+void FET::DrawSourceDrain(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    int dx = (int)std::sqrt(radius * radius - DrainDY() * DrainDY());
+    int dx = (int)std::sqrt(RADIUS * RADIUS - DrainDY() * DrainDY());
 
     wxPoint p1{ c.x, c.y - DrainDY() };
-    wxPoint p2{ c.x + dx, p1.y };
+    wxPoint p2{ c.x + dx + DR, c.y - DrainDY() };
 
-    {
-        // Сток
+    dc.DrawLine(p1, p2);
 
-        dc.MoveTo(p1);
-        dc.LineTo(p2);
-        dc.LineOnDY(-dr);
+    point_collector = p2;
 
-        point_C = dc.GetCoord();
-    }
+    p1.y = c.y + DrainDY();
+    p2.y = p1.y;
 
-    {
-        // Исток
+    dc.DrawLine(p1, p2);
 
-        p1.y = c.y + DrainDY();
-        p2.y = p1.y;
-        dc.MoveTo(p1);
-        dc.LineTo(p2);
-        dc.LineOnDY(dr);
-
-        point_E = dc.GetCoord();
-    }
+    point_emitter = p2;
 }
 
 
@@ -91,11 +82,11 @@ int FET::GateDX()
 
 int FET::GateDY()
 {
-    return (int)(radius * 0.8);
+    return (int)(RADIUS * 0.8f);
 }
 
 
 int FET::DrainDY()
 {
-    return (int)(radius * 0.55);
+    return (int)(RADIUS * 0.55f);
 }

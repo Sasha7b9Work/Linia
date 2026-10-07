@@ -9,31 +9,7 @@ CAP::CAP(Test *test) : OStT(test)
 }
 
 
-void CAP::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
+void CAP::Draw(wxAutoBufferedPaintDC &, const wxPoint &)
 {
-    const wxPoint d{ (int)(radius * 0.8), (int)(radius * 0.15) };
 
-    dc.DrawLine({ c.x - d.x, c.y - d.y }, { c.x + d.x, c.y - d.y });
-
-    dc.DrawLine({ c.x - d.x,c.y + d.y }, { c.x + d.x, c.y + d.y });
-
-    {
-        // Вывод коллектора
-
-        dc.MoveTo({ c.x, c.y - d.y });
-
-        dc.LineOnDY(-dr);
-
-        point_C = dc.GetCoord();
-    }
-
-    {
-        // Вывод эмиттера
-
-        dc.MoveTo({ c.x, c.y + d.y });
-
-        dc.LineOnDY(dr);
-
-        point_E = dc.GetCoord();
-    }
 }

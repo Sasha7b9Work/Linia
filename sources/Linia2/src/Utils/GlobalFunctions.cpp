@@ -8,6 +8,7 @@
     #include <wx/textctrl.h>
     #include <wx/msgdlg.h>
     #include <wx/stdpaths.h>
+    #include <wx/dcclient.h>
 #pragma warning(pop)
 
 
@@ -345,7 +346,7 @@ wxString GF::GetSelfIP()
 }
 
 
-void GF::DrawTextInCenter(AutoBufferedPaintDC &dc, const wxString &text, const wxRect &rect)
+void GF::DrawTextInCenter(wxAutoBufferedPaintDC &dc, const wxString &text, const wxRect &rect)
 {
     wxCoord textWidth, textHeight;
     dc.GetTextExtent(text, &textWidth, &textHeight);
