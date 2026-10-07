@@ -262,7 +262,7 @@ void MeasurerSourcer::CreateParametersI()
             }
 
             {
-                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
+                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"), "sliderOffsetSourceChannelB");
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
                 slider->SetRange(-10e-3, 10e-3);
@@ -307,7 +307,7 @@ void MeasurerSourcer::CreateParametersI()
             }
 
             {
-                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
+                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"), "sliderOffsetSourceChannelS");
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
                 slider->SetRange(-10e-3, 10e-3);
@@ -383,7 +383,7 @@ void MeasurerSourcer::CreateParametersU()
             }
 
             {
-                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
+                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"), "sliderOffsetSourceChannelB");
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
                 slider->SetRange(-10e-3, 10e-3);
@@ -428,7 +428,7 @@ void MeasurerSourcer::CreateParametersU()
             }
 
             {
-                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
+                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"), "sliderOffsetSourceChannelS");
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
                 slider->SetRange(-10e-3, 10e-3);
@@ -473,7 +473,7 @@ void MeasurerSourcer::CreateParametersU()
             }
 
             {
-                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
+                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"), "sliderOffsetSourceChannelC");
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
                 slider->SetRange(-10e-3, 10e-3);

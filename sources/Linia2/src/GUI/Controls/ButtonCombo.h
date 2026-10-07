@@ -7,9 +7,9 @@
 class DrawingButton : public Button
 {
 public:
-    DrawingButton(wxWindow *, const wxString &, const wxSize &, const wxString &name_file = "");
+    DrawingButton(wxWindow *, const wxString &, const wxSize &, const wxString &name_file);
 
-private:
+protected:
 
     wxString file_name;
 };
@@ -37,7 +37,7 @@ public:
         const wxArrayString &labels,
         const wxArrayString &tooltips,
         int buttons_in_row,                     // В каждом ряду будет расположено столько кнопок
-        const wxString &name,
+        const wxString &name_file,
         Type::E type = Type::Text);
 
     void SetCurrentSelection(int);
@@ -97,5 +97,5 @@ public:
     ButtonsComboRange(wxWindow *parent, const wxString &title, int width,
         const wxArrayString &labels,
         const wxArrayString &tooltips,
-        const wxString &name);
+        const wxString &name_file);
 };

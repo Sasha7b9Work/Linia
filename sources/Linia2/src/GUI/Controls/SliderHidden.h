@@ -10,7 +10,7 @@ class SliderHidden : public DrawingButton
 {
 public:
 
-    SliderHidden(wxWindow *, int width, const wxString &title);
+    SliderHidden(wxWindow *, int width, const wxString &title, const wxString &name_file);
 
     void SetRange(double, double);
 

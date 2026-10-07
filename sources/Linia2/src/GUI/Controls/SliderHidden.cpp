@@ -3,8 +3,8 @@
 #include "GUI/Controls/SliderHidden.h"
 
 
-SliderHidden::SliderHidden(wxWindow *parent, int width, const wxString &title) :
-    DrawingButton(parent, title, { width, ButtonsCombo::HEIGHT })
+SliderHidden::SliderHidden(wxWindow *parent, int width, const wxString &title, const wxString &name_file) :
+    DrawingButton(parent, title, { width, ButtonsCombo::HEIGHT }, name_file)
 {
 
 }
