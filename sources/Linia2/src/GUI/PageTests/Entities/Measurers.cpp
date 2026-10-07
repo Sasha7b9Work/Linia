@@ -146,7 +146,7 @@ void MeasurerSourcer::ShowNeedParameters()
             wnd->Refresh();
         }
 
-        for (wxWindow *combo : *shownen)
+        for (wxWindow *wnd : *shownen)
         {
             wnd->Show();
             wnd->Refresh();
