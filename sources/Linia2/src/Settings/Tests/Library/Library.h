@@ -16,8 +16,6 @@ class Test
 {
 public:
 
-    static Test *current;       // Текущий тест
-
     LibraryCategory *lib;
     wxString UGO{ "" };
     wxString name{ "" };

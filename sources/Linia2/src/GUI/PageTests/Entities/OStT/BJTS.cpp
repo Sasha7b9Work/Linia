@@ -4,7 +4,7 @@
 #include "GUI/PageTests/Entities/OStT/BJT.h"
 
 
-BJTS::BJTS() : BJT()
+BJTS::BJTS(Test *test) : BJT(test)
 {
 
 }

@@ -1,7 +1,7 @@
 #include "termios.h"
 
 
-#ifdef _WIN32
+#ifdef WIN32
 
 int tcflush(int /*fd*/, int /*queue_selector*/)
 {

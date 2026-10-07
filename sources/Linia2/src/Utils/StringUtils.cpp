@@ -65,7 +65,7 @@ int BCD2Int(uint bcd)
 #define  SYMBOL(x) (*(*(x)))
 
 
-#ifndef _WIN32
+#ifndef WIN32
 
 int strcpy_s(char *dest, uint dest_size, pchar src)
 {

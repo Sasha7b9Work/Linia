@@ -1,7 +1,7 @@
 #include "unistd.h"
 
 
-#ifdef _WIN32
+#ifdef WIN32
 
 int usleep(int /*usec*/)
 {

@@ -8,7 +8,7 @@
 #pragma warning(pop)
 
 
-#ifdef _WIN32
+#ifdef WIN32
 #define S_IRUSR 0000400  /* Read permission, owner */
 #define S_IWUSR 0000200  /* Write permission, owner */
 #define S_IXUSR 0000100  /* Execute permission, owner */

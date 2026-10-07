@@ -10,20 +10,13 @@ class THYR : public DIOD
 {
 public:
 
-    THYR();
+    THYR(Test *);
 
     virtual void Draw(AutoBufferedPaintDC &, const wxPoint &center) override;
 
-    void SetControlElectrode(ControlElectrode::E e)
-    {
-        controlElectrode.Set(e);
-
-        PanelViewTest::self->Refresh();
-    }
-
 private:
 
-    ControlElectrode controlElectrode{ ControlElectrode::Anode_P };
+    TypeTHYR::E type = TypeTHYR::Control_Anode;
 
     virtual bool GetPoint_B(wxPoint &result) const override
     {

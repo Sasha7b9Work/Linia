@@ -10,7 +10,7 @@ class RES : public OStT
 {
 public:
 
-    RES();
+    RES(Test *);
 
     virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) override;
 

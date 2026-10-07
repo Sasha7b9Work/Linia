@@ -3,7 +3,7 @@
 #include "GUI/PageTests/Entities/OStT/THYR.h"
 
 
-THYR::THYR() : DIOD()
+THYR::THYR(Test *test) : DIOD(test)
 {
 
 }
@@ -21,8 +21,8 @@ void THYR::DrawControlElectrode(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
     const wxPoint d = Delta();
 
-    if ((commonElectrode.IsAnode() && controlElectrode.IsAnode()) ||
-        (commonElectrode.IsCatode() && controlElectrode.IsCatode()))
+    if ((DIOD::type == TypeDIOD::Common_Anode_P && type == TypeTHYR::Control_Anode) ||
+        (DIOD::type == TypeDIOD::Common_Catode_N && type == TypeTHYR::Control_Catode))
     {
             std::vector<wxPoint> points = IntersectLineCircle({ c.x, c.y - d.y }, { c.x - d.x, c.y + d.y }, c, radius);
 
@@ -30,8 +30,8 @@ void THYR::DrawControlElectrode(AutoBufferedPaintDC &dc, const wxPoint &c)
 
             dc.LineTo(points[1]);
     }
-    else if ((commonElectrode.IsAnode() && controlElectrode.IsCatode()) ||
-        (commonElectrode.IsCatode() && controlElectrode.IsAnode()))
+    else if ((DIOD::type == TypeDIOD::Common_Anode_P && type == TypeTHYR::Control_Catode) ||
+        (DIOD::type == TypeDIOD::Common_Catode_N && type == TypeTHYR::Control_Anode))
     {
         std::vector<wxPoint> points = IntersectLineCircle({ c.x, c.y + d.y }, { c.x - d.x, c.y - d.y }, c, radius);
 

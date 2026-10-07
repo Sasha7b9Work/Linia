@@ -3,7 +3,6 @@
 #include "GUI/PageTests/Entities/OStT/OStT.h"
 #include "Settings/Tests/SettingsTests.h"
 #include "Utils/AutoBufferedPaintDC.h"
-#include "GUI/PageTests/PanelViewTest.h"
 
 
 // Диод
@@ -13,16 +12,9 @@ class DIOD : public OStT
 {
 public:
 
-    DIOD();
+    DIOD(Test *);
 
     virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) override;
-
-    void SetCommonElectrode(CommonElectrode::E e)
-    {
-        commonElectrode.Set(e);
-
-        PanelViewTest::self->Refresh();
-    }
 
 protected:
 
@@ -34,5 +26,5 @@ protected:
     // Смещение угла треугольника относительно центра
     wxPoint Delta() const;
 
-    CommonElectrode commonElectrode{ CommonElectrode::Anode_P };
+    TypeDIOD::E type = TypeDIOD::Common_Catode_N;
 };

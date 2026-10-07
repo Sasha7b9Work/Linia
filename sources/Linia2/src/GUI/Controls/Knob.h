@@ -1,7 +1,7 @@
 ﻿// 2026/03/09 10:24:13 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
-#include "Utils/AutoBufferedPaintDC.h"
 #pragma warning(push, 0)
+    #include <wx/dcbuffer.h>
     #include <wx/control.h>
 #pragma warning(pop)
 
@@ -128,7 +128,7 @@ private:
     {
         SetBackgroundColour(GetParent()->GetBackgroundColour());
 
-        AutoBufferedPaintDC dc(this);
+        wxAutoBufferedPaintDC dc(this);
         dc.SetBackground(wxBrush(GetBackgroundColour()));
         dc.Clear();
 

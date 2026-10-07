@@ -4,7 +4,7 @@
 #include "GUI/PageTests/Entities/OStT/FET.h"
 
 
-FETS::FETS() : FET()
+FETS::FETS(Test *test) : FET(test)
 {
 
 }

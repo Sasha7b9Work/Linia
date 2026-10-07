@@ -2,10 +2,10 @@
 #pragma once
 #include "GUI/Controls/Bitmap.h"
 #include "GUI/Controls/Panel.h"
-#include "Utils/AutoBufferedPaintDC.h"
 #pragma warning(push, 0)
     #include <wx/timer.h>
     #include <wx/dcmemory.h>
+    #include <wx/dcbuffer.h>
 #pragma warning(pop)
 
 
@@ -17,13 +17,13 @@ class PaintDC
 {
 public:
 
-    PaintDC(AutoBufferedPaintDC &_dc) : dc(_dc) { }
+    PaintDC(wxAutoBufferedPaintDC &_dc) : dc(_dc) { }
 
     void StorePenBrush();
 
     void RestorePenBrush();
 
-    AutoBufferedPaintDC &dc;
+    wxAutoBufferedPaintDC &dc;
 
 private:
 

@@ -56,7 +56,7 @@ public:
     StaticBoxSizer(int type, wxWindow *parent, const wxString &title) :
         wxStaticBoxSizer(type, parent, title)
     {
-#ifdef _WIN32
+#ifdef WIN32
 #else
         m_staticBox->SetWindowStyle(wxBORDER_RAISED);
 #endif

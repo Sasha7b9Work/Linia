@@ -3,7 +3,7 @@
 #include "GUI/PageTests/Entities/OStT/BJT.h"
 
 
-BJT::BJT() : OStT()
+BJT::BJT(Test *test) : OStT(test)
 {
 
 }
@@ -82,11 +82,11 @@ void BJT::DrawCollectorEmitter(AutoBufferedPaintDC &dc, const wxPoint &c)
         dc.LineOnDY(dr);
         point_E = dc.GetCoord();
 
-        if (type.IsNPN())
+        if (type == TypeBJT::NPN)
         {
             DrawArrow(dc, p1, points[1]);
         }
-        else if (type.IsPNP())
+        else if (type == TypeBJT::PNP)
         {
             DrawArrow(dc, points[1], p1);
         }

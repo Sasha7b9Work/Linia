@@ -2,7 +2,6 @@
 #pragma once
 #include "GUI/PageTests/Entities/OStT/OStT.h"
 #include "Settings/Tests/SettingsTests.h"
-#include "GUI/PageTests/PanelViewTest.h"
 
 
 // Полевой транзистор
@@ -12,22 +11,15 @@ class FET : public OStT
 {
 public:
 
-    FET();
+    FET(Test *);
 
     virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) override;
 
     void DrawCommon(AutoBufferedPaintDC &, const wxPoint &);
 
-    void SetType(TypeFET::E t)
-    {
-        type.Set(t);
-
-        PanelViewTest::self->Refresh();
-    }
-
 private:
 
-    TypeFET type{ TypeFET::ChannelP };
+    TypeFET::E type = TypeFET::ChannelP;
 
     // Нарисовать затвор
     void DrawGate(AutoBufferedPaintDC &, const wxPoint &);

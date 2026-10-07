@@ -1,7 +1,7 @@
 #include "ioctl.h"
 
 
-#ifdef _WIN32
+#ifdef WIN32
 
 int ioctl(int /*fd*/, unsigned long /*request*/, ...)
 {

@@ -10,7 +10,7 @@ class DARL : public BJT
 {
 public:
 
-    DARL();
+    DARL(Test *);
 
     virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) override;
 

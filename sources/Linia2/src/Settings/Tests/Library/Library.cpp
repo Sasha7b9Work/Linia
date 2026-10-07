@@ -3,9 +3,6 @@
 #include "Settings/Tests/Library/Library.h"
 
 
-Test *Test::current = nullptr;
-
-
 bool Library::Read(FileJSON *_file)
 {
     bool exist_errors = false;

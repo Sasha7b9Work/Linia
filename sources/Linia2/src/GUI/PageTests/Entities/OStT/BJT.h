@@ -2,7 +2,6 @@
 #pragma once
 #include "GUI/PageTests/Entities/OStT/OStT.h"
 #include "Settings/Tests/SettingsTests.h"
-#include "GUI/PageTests/PanelViewTest.h"
 
 
 // Биполярный транзистор
@@ -12,23 +11,16 @@ class BJT : public OStT
 {
 public:
 
-    BJT();
+    BJT(Test *);
 
     virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) override;
 
     // Нарисовать общую часть для BJT и BJTS
     void DrawCommon(AutoBufferedPaintDC &, const wxPoint &center, bool draw_case);
 
-    void SetType(TypeBJT::E t)
-    {
-        type.Set(t);
-
-        PanelViewTest::self->Refresh();
-    }
-
 private:
 
-    TypeBJT type{ TypeBJT::NPN };
+    TypeBJT::E type = TypeBJT::NPN;
 
     void DrawBase(AutoBufferedPaintDC &, const wxPoint &center);
 

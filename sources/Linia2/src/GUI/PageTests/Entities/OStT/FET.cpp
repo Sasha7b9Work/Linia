@@ -3,7 +3,7 @@
 #include "GUI/PageTests/Entities/OStT/FET.h"
 
 
-FET::FET() : OStT()
+FET::FET(Test *test) : OStT(test)
 {
 
 }
@@ -39,11 +39,11 @@ void FET::DrawGate(AutoBufferedPaintDC &dc, const wxPoint &c)
 
     point_B = p2;
 
-    if (type.IsChannelN())
+    if (type == TypeFET::ChannelN)
     {
         DrawArrow(dc, p2, p1);
     }
-    else if (type.IsChannelP())
+    else if (type == TypeFET::ChannelP)
     {
         std::vector<wxPoint> points = IntersectLineCircle(p2, p1, c, radius);
 

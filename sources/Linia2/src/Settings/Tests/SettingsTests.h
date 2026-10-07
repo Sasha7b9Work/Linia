@@ -11,9 +11,9 @@ struct TypeCategory
     enum E
     {
         BJT,            // Биполярный транзистор
-        BJTS,           // Биполярный транзистор с четвёртым выводом
-        FET,            // Полевой транзистор
-        FETS,           // Полевой транзисото с четвёртым выводм
+        BJT4,           // Биполярный транзистор с четвёртым выводом
+        JFET,           // Полевой транзистор
+        JFET4,          // Полевой транзисото с четвёртым выводм
         Darlington,
         Thyristor,
         Diod,
@@ -33,27 +33,6 @@ struct TypeBJT
         PNP,
         count
     };
-
-    TypeBJT(E e) : type{ e } { }
-
-    bool IsNPN() const
-    {
-        return type == NPN;
-    }
-
-    bool IsPNP() const
-    {
-        return type == PNP;
-    }
-
-    void Set(E e)
-    {
-        type = e;
-    }
-
-private:
-
-    E type;
 };
 
 
@@ -66,93 +45,30 @@ struct TypeFET
         ChannelN,
         Count
     };
-
-    TypeFET(E e) : type{ e } { }
-
-    bool IsChannelP() const
-    {
-        return type == ChannelP;
-    }
-
-    bool IsChannelN() const
-    {
-        return type == ChannelN;
-    }
-
-    void Set(E e)
-    {
-        type = e;
-    }
-
-private:
-
-    E type;
 };
 
 
-// Подключение - с общим анодом или катодом
-struct CommonElectrode
+// Подключение - с общим катодом или анодом
+struct TypeDIOD
 {
     enum E
     {
-        Anode_P,     // К земле (эмиттеру) подключён анод (треугольник)
-        Catode_N,    // К земле (эмиттеру) подключён катод (чёрточка)
+        Common_Anode_P,     // К земле (эмиттеру) подключён анод (треугольник)
+        Common_Catode_N,    // К земле (эмиттеру) подключён катод (чёрточка)
         Count
     };
-
-    CommonElectrode(E e) : type{ e } { }
-
-    bool IsAnode() const
-    {
-        return type == Anode_P;
-    }
-
-    bool IsCatode() const
-    {
-        return type == Catode_N;
-    }
-
-    void Set(E e)
-    {
-        type = e;
-    }
-
-private:
-
-    E type;
 };
 
 
 // Управляющий электрод - катод или анод
-struct ControlElectrode
+struct TypeTHYR
 {
     enum E
     {
-        Anode_P,
-        Catode_N,
+        Control_Anode,
+        Control_Catode,
         Count
     };
-
-    ControlElectrode(E e) : type {e} { }
-
-    bool IsAnode() const
-    {
-        return type == Anode_P;
-    }
-
-    bool IsCatode() const
-    {
-        return type == Catode_N;
-    }
-
-    void Set(E e)
-    {
-        type = e;
-    }
-
-private:
-
-    E type;
 };
 
 

@@ -4,6 +4,7 @@
 #include "Settings/Color.h"
 #pragma warning(push, 0)
     #include <wx/graphics.h>
+    #include <wx/dcclient.h>
 #pragma warning(pop)
 
 
@@ -126,7 +127,7 @@ void Painter::DrawCircle(int x, int y, int r, const wxColor &_color)
 
 void Painter::OnEventPaint(wxPaintEvent &)
 {
-    AutoBufferedPaintDC paint_dc(this);
+    wxAutoBufferedPaintDC paint_dc(this);
 
     paint_dc.DrawBitmap(*bitmap, 0, 0);
 }
@@ -148,7 +149,7 @@ PainterRect::PainterRect(wxWindow *parent, const wxSize &size) :
 
 void PainterRect::OnEventPaint(wxPaintEvent &)
 {
-    AutoBufferedPaintDC dc(this);
+    wxAutoBufferedPaintDC dc(this);
 
     dc.SetPen(*wxBLACK_PEN);
     dc.SetBrush(wxBrush(color));
@@ -209,7 +210,7 @@ void PainterBMP::OnEventPaint(wxPaintEvent &)
 {
     if (bitmap.GetBitmap().IsOk())
     {
-        AutoBufferedPaintDC dc(this);
+        wxAutoBufferedPaintDC dc(this);
 
         dc.DrawBitmap(bitmap.GetBitmap(), 0, 0, true);
     }

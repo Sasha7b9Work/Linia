@@ -3,9 +3,6 @@
 #include "GUI/PageTests/Entities/OStT/OStT.h"
 
 
-OStT *OStT::current = nullptr;
-
-
 void OStT::DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, AutoBufferedPaintDC &dc)
 {
     double angleRad = angleDeg * M_PI / 180.0;
@@ -185,8 +182,6 @@ void OStT::DrawNamesPoints(AutoBufferedPaintDC &dc)
     wxString name;
 
     wxPoint pos;
-
-    dc.SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
 
     {
         // Коллектор

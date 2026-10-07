@@ -27,6 +27,8 @@ private:
     static const int d_combos = ButtonsCombo::HEIGHT + 5;   // Расстояние между элементами ввода по вертикали
     static const int Y_GROUND = 700;
 
+    Test *test = nullptr;
+
     ButtonsCombo *bcScanMode = nullptr;                 // Режим развёртки
     ButtonsCombo *bcScanNumberPoints = nullptr;         // Количество точек в одной ВАХ
     ComboInput *bcBaseNumMeasures = nullptr;            // Количество измерений
@@ -48,10 +50,7 @@ private:
     Voltmeter *voltCollector = nullptr;
     SourceVoltage *srcVoltageCollector = nullptr;
 
-    ButtonsCombo *bcTypeBJT = nullptr;                  // Тип биполярного транзистора
-    ButtonsCombo *bcTypeFET = nullptr;                  // Тип полевого транзистора
-    ButtonsCombo *bcCommonElectrodeDIOD = nullptr;      // Для диода - общий электрод
-    ButtonsCombo *bcControlElectrodeTHYR = nullptr;     // Дли тиристора - управляющий электрод
+    OStT *ostt = nullptr;
 
     void OnEventPaint(wxPaintEvent &);
 
@@ -81,17 +80,16 @@ private:
     // Нарисовать испытуемый элемент
     OStT *CreateOStT();
 
+    // type == "npn", "pnp"
+    // Биполярный транзистор с подложкой и без
+    void CreateBJT(const wxPoint &, wxPoint &point_base, wxPoint &point_collector, wxPoint &point_substrate, wxPoint &point_emitter, AutoBufferedPaintDC &dc);
+
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
 
-    // Общие для всех типов элементов органы управления
-    void CreateCommonControls();
-    void ShowCommonControls();
-    void HideCommonControls();
-
-    // Специфичные органы управления для разных типов элементов
-    void CreateSpecificControls();
-    void HideSpecificControls();
-    void TuneSpecificControls();
+    // Создать элементы управляения для данного теста
+    void CreateControls();
+    void ShowControls();
+    void HideControls();
 
     void CreateButton(Button **, wxWindow *parent, const wxString &, const wxPoint &, const wxSize &, std::function<void(wxCommandEvent &)> onClick);
 
@@ -105,17 +103,6 @@ private:
     // Нарисовать значок земли
     void DrawGround(AutoBufferedPaintDC &);
 
-    // Создать источники и измерители
+    // Создать измерители и источники
     void CreateMeasurersSourcers();
-
-    // Спрятать источники и измерители
-    void HideMeasurersSourcers();
-
-    // Возвращает позицию по Y источника либо измерителя
-    int PosMeasurerSourcerY(int);
-
-    // Возвращает координаты точки, из которой выходит вертикальная линия коллектора
-    wxPoint CoordinateCollector() const;
-
-    wxPoint CoordinateSpecificControl() const;
 };
