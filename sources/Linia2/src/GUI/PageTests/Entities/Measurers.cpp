@@ -140,14 +140,16 @@ void MeasurerSourcer::ShowNeedParameters()
             shownen = &parametersU;
         }
 
-        for (wxWindow *combo : *hidden)
+        for (wxWindow *wnd : *hidden)
         {
-            combo->Hide();
+            wnd->Hide();
+            wnd->Refresh();
         }
 
         for (wxWindow *combo : *shownen)
         {
-            combo->Show();
+            wnd->Show();
+            wnd->Refresh();
         }
     }
 }

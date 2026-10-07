@@ -228,8 +228,6 @@ ButtonsCombo::ButtonsCombo(wxWindow *parent, const wxString &_title, int width,
 
     Bind(wxEVT_LEFT_DOWN, [this](wxMouseEvent &event)
         {
-            LOG_WRITE("Button %s mouse left down", GetName().c_str().AsChar());
-
             left_part_clicked = event.GetPosition().x < GetSize().x / 2;
 
             event.Skip();
