@@ -9,8 +9,6 @@ class DrawingButton : public Button
 public:
 
     DrawingButton(wxWindow *, const wxString &, const wxSize &, const wxString &name);
-
-    virtual bool Show(bool show = true) override;
 };
 
 
