@@ -224,7 +224,6 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
 #define CREATE_COMBO(title, name, vec)                                                                          \
     ComboInput *combo = new ComboInput(PanelViewTest::self, title, WIDTH_CONTROL, titles, tooltips, name);      \
     combo->SetPosition({ coord_controls.x, y });                                                                \
-    combo->Hide();                                                                                              \
     vec.push_back(combo);                                                                                       \
     y += ButtonsCombo::HEIGHT + 5;                                                                              \
     titles.clear();                                                                                             \
