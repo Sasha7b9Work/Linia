@@ -6,14 +6,9 @@
 // Конденсатор
 
 
-class CAP : public OStT
+class CAP : public OStT2
 {
 public:
-
-    CAP(Test *);
-
-    virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
-
 private:
 };
 

@@ -29,6 +29,7 @@ if(WIN32)
         /wd4625    # copy constructor was implicitly defined as deleted
         /wd4623    # default constructor was implicitly defined as deleted
         /wd4626    # assignment operator was implicitly defined as deleted
+        /wd4710    # function not inlined
         /wd4711    # function xxx selected for automatic inline expansion
         /wd4820    # 'N' bytes padding added after data member
         /wd4865    # '<unnamed-enum-XXX>': the underlying type will change from 'int' to '__int64' when '/Zc:enumTypes' is specified on the command line
@@ -37,7 +38,7 @@ if(WIN32)
         /wd5045    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
         /wd5039    # pointer or reference to potentially throwing function passed to extern C function under -EHc. Undefined behavor may occur if this function throws an exception
         /wd5204    # 'xxx': class has virtual functions, but its trivial destructor is not virtual
-#        /wd5233    # xplicit lambda capture 'this' is not used
+        /wd5233    # xplicit lambda capture 'this' is not used
     )
 
 else()

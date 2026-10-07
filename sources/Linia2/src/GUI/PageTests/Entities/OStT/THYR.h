@@ -6,13 +6,8 @@
 // Тиристор
 
 
-class THYR : public OStT
+class THYR : public OStT3
 {
 public:
-
-    THYR(Test *);
-
-    virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
-
 private:
 };

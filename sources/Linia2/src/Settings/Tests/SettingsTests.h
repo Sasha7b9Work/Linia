@@ -14,35 +14,10 @@ struct TypeCategory
         BJT4,           // Биполярный транзистор с четвёртым выводом
         JFET,           // Полевой транзистор
         JFET4,          // Полевой транзисото с четвёртым выводм
-        Darlington,
         Thyristor,
         Diod,
         Resistor,
         Capacitor,
-        Count
-    };
-};
-
-
-// Тип биполярного транзистора и транзистора Дарлингтона
-struct TypeBJT
-{
-    enum E
-    {
-        NPN,
-        PNP,
-        count
-    };
-};
-
-
-// Тип полевого транзистора
-struct TypeFET
-{
-    enum E
-    {
-        ChannelP,
-        ChannelN,
         Count
     };
 };
@@ -94,7 +69,7 @@ struct TypeScan
 
     static pchar NameShort(E);
 
-    static pchar NameGUI(E);
+    static pchar _NameGUI(E);
 
     static pchar NameFileICO(E);
 };

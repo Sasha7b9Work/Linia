@@ -6,13 +6,8 @@
 // Диод
 
 
-class DIOD : public OStT
+class DIOD : public OStT2
 {
 public:
-
-    DIOD(Test *);
-
-    virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
-
 private:
 };

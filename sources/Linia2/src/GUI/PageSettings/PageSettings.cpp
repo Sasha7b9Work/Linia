@@ -19,7 +19,7 @@ PageSettings::PageSettings(Notebook *board) :
     {
         Button *btn = new Button(this, L("Мой компьютер"));
         sizer1->AddWidget(btn);
-        btn->Bind(wxEVT_BUTTON, [](wxCommandEvent &)
+        btn->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
             {
 
             });
@@ -28,7 +28,7 @@ PageSettings::PageSettings(Notebook *board) :
     {
         Button *btn = new Button(this, L("Калибровка"));
         sizer1->AddWidget(btn);
-        btn->Bind(wxEVT_BUTTON, [](wxCommandEvent &)
+        btn->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
             {
 
             });

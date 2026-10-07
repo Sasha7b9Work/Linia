@@ -6,13 +6,8 @@
 // Транзистор Дарлингтона
 
 
-class DARL : public OStT
+class DARL : public OStT3
 {
 public:
-
-    DARL(Test *);
-
-    virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
-
 private:
 };

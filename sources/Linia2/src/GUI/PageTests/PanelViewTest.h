@@ -5,7 +5,6 @@
 #include "GUI/Controls/ButtonCombo.h"
 #include "GUI/PageTests/Entities/Measurers.h"
 #include "GUI/PageTests/Entities/Commutator.h"
-#include "GUI/PageTests/Entities/OStT/OStT.h"
 #pragma warning(push, 0)
     #include <wx/dcclient.h>
 #pragma warning(pop)
@@ -30,14 +29,13 @@ private:
 
     ButtonsCombo *bcScanMode = nullptr;                 // Режим развёртки
     ButtonsCombo *bcScanNumberPoints = nullptr;         // Количество точек в одной ВАХ
+    ButtonsCombo *bcTypeSemiconductor = nullptr;        // npn или pnp
     ComboInput *bcBaseNumMeasures = nullptr;            // Количество измерений
     Commutator *commutator = nullptr;                   // Управление коммутатором
     StaticText *txtCover = nullptr;                     // Индикатор состояния крышки
     bool cover_is_opened = false;
     Button *btnEditSave = nullptr;                      // Сохранить результат редактирования
     Button *btnEditExit = nullptr;                      // Выйти из режима редактирования
-    StaticBox *boxScan = nullptr;                       // "Развёртка"
-    StaticBox *boxCover = nullptr;                      // "Крышка"
 
     MeasurerVoltageCurrent *measurerBase = nullptr;
     SourceVoltageCurrent *sourceVoltageCurrentBase = nullptr;
@@ -48,8 +46,6 @@ private:
     Ampermeter *ampermeterCollector = nullptr;
     Voltmeter *voltmeterCollector = nullptr;
     SourceVoltage *sourceVoltageCollector = nullptr;
-
-    OStT *ostt = nullptr;
 
     void OnEventPaint(wxPaintEvent &);
 
@@ -77,18 +73,22 @@ private:
     void CloseCover();
 
     // Нарисовать испытуемый элемент
-    OStT *CreateOStT();
+    void CreateElement(wxAutoBufferedPaintDC &dc);
 
     // type == "npn", "pnp"
     // Биполярный транзистор с подложкой и без
-    void CreateBJT(const wxPoint &, wxPoint &point_base, wxPoint &point_collector, wxPoint &point_substrate, wxPoint &point_emitter, wxAutoBufferedPaintDC &dc);
+    void CreateBJT(const wxString &type, const wxPoint &, wxPoint &point_base, wxPoint &point_collector, wxPoint &point_substrate, wxPoint &point_emitter, wxAutoBufferedPaintDC &dc);
 
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
 
+    // Нарисовать значок земли
+    void DrawGround(int x, int y, wxAutoBufferedPaintDC &dc);
+
     // Создать элементы управляения для данного теста
     void CreateControls();
-    void ShowControls();
-    void HideControls();
+
+    // Рисует линию длиной length под углом angleDeg
+    void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &dc);
 
     void CreateButton(Button **, wxWindow *parent, const wxString &, const wxPoint &, const wxSize &, std::function<void(wxCommandEvent &)> onClick);
 
