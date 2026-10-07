@@ -2,7 +2,6 @@
 #pragma once
 #include "Settings/Tests/Ranges.h"
 #include "GUI/Controls/ButtonCombo.h"
-#include "GUI/Controls/Slider.h"
 #include "Utils/AutoBufferedPaintDC.h"
 
 
