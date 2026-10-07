@@ -136,20 +136,27 @@ void MeasurerSourcer::ShowNeedParameters()
 
         if (IsSetModeU())
         {
-            hidden = &parametersI;
-            shownen = &parametersU;
-        }
+            for (auto wnd : parametersI)
+            {
+                wnd->Hide();
+            }
 
-        for (wxWindow *wnd : *hidden)
-        {
-            wnd->Hide();
-            wnd->Refresh();
+            for (auto wnd : parametersU)
+            {
+                wnd->Show();
+            }
         }
-
-        for (wxWindow *wnd : *shownen)
+        else
         {
-            wnd->Show();
-            wnd->Refresh();
+            for (auto wnd : parametersU)
+            {
+                wnd->Hide();
+            }
+
+            for (auto wnd : parametersI)
+            {
+                wnd->Show();
+            }
         }
     }
 }
