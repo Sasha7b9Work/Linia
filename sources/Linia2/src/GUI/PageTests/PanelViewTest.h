@@ -25,8 +25,7 @@ private:
 
     static const int radius_trans = 50;                     // От этого значения и Center() идёт всё построение изображения
     static const int d_combos = ButtonsCombo::HEIGHT + 5;   // Расстояние между элементами ввода по вертикали
-
-    Test *test = nullptr;
+    static const int Y_GROUND = 700;
 
     ButtonsCombo *bcScanMode = nullptr;                 // Режим развёртки
     ButtonsCombo *bcScanNumberPoints = nullptr;         // Количество точек в одной ВАХ
@@ -39,17 +38,20 @@ private:
     StaticBox *boxScan = nullptr;                       // "Развёртка"
     StaticBox *boxCover = nullptr;                      // "Крышка"
 
-    MeasurerVoltageCurrent *measurerBase = nullptr;
-    SourceVoltageCurrent *sourceVoltageCurrentBase = nullptr;
+    MeasurerVoltageCurrent *measBase = nullptr;
+    SourceVoltageCurrent *srcVoltageCurrentBase = nullptr;
 
-    MeasurerVoltageCurrent *measurerSubstrate = nullptr;
-    SourceVoltageCurrent *sourceVoltateCurrentSubstrate = nullptr;
+    MeasurerVoltageCurrent *measSubstrate = nullptr;
+    SourceVoltageCurrent *srcVoltateCurrentSubstrate = nullptr;
 
-    Ampermeter *ampermeterCollector = nullptr;
-    Voltmeter *voltmeterCollector = nullptr;
-    SourceVoltage *sourceVoltageCollector = nullptr;
+    Ampermeter *ampCollector = nullptr;
+    Voltmeter *voltCollector = nullptr;
+    SourceVoltage *srcVoltageCollector = nullptr;
 
-    OStT *ostt = nullptr;
+    ButtonsCombo *bcTypeBJT = nullptr;                  // Тип биполярного транзистора
+    ButtonsCombo *bcTypeFET = nullptr;                  // Тип полевого транзистора
+    ButtonsCombo *bcCommonElectrodeDIOD = nullptr;      // Для диода - общий электрод
+    ButtonsCombo *bcControlElectrodeTHYR = nullptr;     // Дли тиристора - управляющий электрод
 
     void OnEventPaint(wxPaintEvent &);
 
@@ -79,16 +81,17 @@ private:
     // Нарисовать испытуемый элемент
     OStT *CreateOStT();
 
-    // type == "npn", "pnp"
-    // Биполярный транзистор с подложкой и без
-    void CreateBJT(const wxPoint &, wxPoint &point_base, wxPoint &point_collector, wxPoint &point_substrate, wxPoint &point_emitter, wxAutoBufferedPaintDC &dc);
-
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
 
-    // Создать элементы управляения для данного теста
-    void CreateControls();
-    void ShowControls();
-    void HideControls();
+    // Общие для всех типов элементов органы управления
+    void CreateCommonControls();
+    void ShowCommonControls();
+    void HideCommonControls();
+
+    // Специфичные органы управления для разных типов элементов
+    void CreateSpecificControls();
+    void HideSpecificControls();
+    void TuneSpecificControls();
 
     void CreateButton(Button **, wxWindow *parent, const wxString &, const wxPoint &, const wxSize &, std::function<void(wxCommandEvent &)> onClick);
 
@@ -96,4 +99,23 @@ private:
 
     // Если true - находимся в режиме редактирования теста
     bool InModeEdit() const;
+
+    void DrawScheme(AutoBufferedPaintDC &);
+
+    // Нарисовать значок земли
+    void DrawGround(AutoBufferedPaintDC &);
+
+    // Создать источники и измерители
+    void CreateMeasurersSourcers();
+
+    // Спрятать источники и измерители
+    void HideMeasurersSourcers();
+
+    // Возвращает позицию по Y источника либо измерителя
+    int PosMeasurerSourcerY(int);
+
+    // Возвращает координаты точки, из которой выходит вертикальная линия коллектора
+    wxPoint CoordinateCollector() const;
+
+    wxPoint CoordinateSpecificControl() const;
 };

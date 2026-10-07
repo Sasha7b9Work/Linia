@@ -42,8 +42,6 @@ private:
 
     enum
     {
-        MENU_APPLY = 10001,    // "Применить"
-        MENU_DELETE,            // "Удалить"
-        MENU_EDIT               // "Редактирование"
+        MENU_APPLY = 10001    // "Применить"
     };
 };

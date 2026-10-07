@@ -1,7 +1,7 @@
 #pragma once
 
 
-#ifdef WIN32
+#ifdef _WIN32
 
 typedef unsigned long pthread_t;
 typedef struct pthread_attr pthread_attr_t;

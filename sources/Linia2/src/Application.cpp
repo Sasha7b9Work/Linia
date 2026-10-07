@@ -19,6 +19,9 @@
 #pragma warning(pop)
 #include <cstdlib>
 #include <locale>
+#ifndef _WIN32
+    #include <csignal>
+#endif
 
 
 wxIMPLEMENT_APP(Application);
@@ -28,8 +31,19 @@ Application *Application::self = nullptr;
 
 
 #ifndef _WIN32
+
+static std::atomic<int> g_signal_received{ 0 };
+
+void Application::SignalHandler(int sig)
+{
+    // Устанавливаем флаг, а не делаем что-то сложное
+    g_signal_received = sig;
+}
+
 static void CloseApplication()
 {
+    LOG_WRITE("CloseApplication()");
+
     if (Application::self)
     {
         if (MainWindow::self)
@@ -42,6 +56,7 @@ static void CloseApplication()
         Application::self->ExitMainLoop();
     }
 }
+
 #endif
 
 
@@ -57,7 +72,7 @@ public:
 };
 
 
-#ifndef WIN32
+#ifndef _WIN32
 // Функция-фильтр для логов
 void glib_log_filter(const gchar *log_domain,
     GLogLevelFlags log_level,
@@ -189,7 +204,7 @@ bool Application::OnInit()
             Log::FileName().c_str().AsChar()), L("Ошибка"), wxOK | wxCENTRE | wxICON_ERROR);
     }
 
-#ifdef WIN32
+#ifdef _WIN32
 
 //    ComPort::Connect(PanelUpper::self->GetNumPort());
 
@@ -213,6 +228,16 @@ bool Application::OnInit()
 
             if (mutex.try_lock())
             {
+#ifndef _WIN32
+                int sig = g_signal_received.load();
+                if (sig != 0)
+                {
+                    g_signal_received.store(0);
+                    LOG_WRITE("Received signal %d, closing", sig);
+                    CloseApplication();   // ← безопасно: в главном потоке
+                }
+#endif
+
                 IDevice::impl->ApplicationTask();
 
                 Log::PeriodicTask();
@@ -229,20 +254,29 @@ bool Application::OnInit()
 
 #ifdef _WIN32
 #else
-    signal(SIGTERM, [](int)
-        {
-            CloseApplication();
-        });
+    struct sigaction sa;
+    sa.sa_handler = &Application::SignalHandler;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;  // не SA_RESTART — чтобы прервать блокирующие вызовы
 
-    signal(SIGINT, [](int)
-        {
-            CloseApplication();
-        });
+    sigaction(SIGTERM, &sa, nullptr);
+    sigaction(SIGINT, &sa, nullptr);
+    sigaction(SIGHUP, &sa, nullptr);
 
-    signal(SIGHUP, [](int)
-        {
-            CloseApplication();
-        });
+//    signal(SIGTERM, [](int)
+//        {
+//            CloseApplication();
+//        });
+//
+//    signal(SIGINT, [](int)
+//        {
+//            CloseApplication();
+//        });
+//
+//    signal(SIGHUP, [](int)
+//        {
+//            CloseApplication();
+//        });
 #endif
 
     IDevice::impl->Init();

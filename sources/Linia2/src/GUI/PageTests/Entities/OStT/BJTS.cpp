@@ -2,43 +2,30 @@
 #include "defines.h"
 #include "GUI/PageTests/Entities/OStT/BJTS.h"
 #include "GUI/PageTests/Entities/OStT/BJT.h"
-#include "Utils/LineDrawer.h"
 
 
-BJTS::BJTS(Test *test) : OStT4(test)
+BJTS::BJTS() : BJT()
 {
 
 }
 
 
-void BJTS::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+void BJTS::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    int x_vert = 0;
+    BJT::DrawCommon(dc, c, true);
 
-    BJT::DrawCommon(dc, c, *this, x_vert);
+    DrawSubstrate(dc, c);
+}
 
-    // Подложка
 
-    int dy = RADIUS * 4 / 16;
-    int x = c.x + (c.x - x_vert) + RADIUS / 10;
-    LineDriwer driwer( dc, x, c.y - dy );
-    driwer.LineToY(c.y + dy);                                   // Вертикальная линия подложки
+void BJTS::DrawSubstrate(AutoBufferedPaintDC &dc, const wxPoint &c)
+{
+    const wxPoint d{ (int)(radius * 0.7), (int)(radius * 0.3) };
 
-    {
-        // Измеритель подложки
-
-        driwer.MoveTo(x, c.y);
-        driwer.LineOnDX(150);
-
-        driwer.MoveOnDX(-100);
-        point_substrate = driwer.GetCoord();
-        dc.DrawCircle(point_substrate, 5);
-        dc.DrawText("Substr", { point_substrate.x - 20, point_substrate.y - 23 });
-        driwer.Restore();
-
-        driwer.LineToY(y_ground);
-        DrawGround(driwer.GetX(), driwer.GetY(), dc);
-
-        driwer.MoveOnDY(-470);
-    }
+    dc.MoveTo({ c.x + d.x, c.y - d.y });
+    dc.LineOnDY(2 * d.y);
+    dc.MoveTo({ c.x + d.x, c.y });
+    dc.LineTo({ c.x + radius, c.y });
+    dc.LineOnDX(dr);
+    point_S = dc.GetCoord();
 }

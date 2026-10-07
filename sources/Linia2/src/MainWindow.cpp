@@ -30,7 +30,7 @@ MainWindow::MainWindow(const wxString &title)
 {
     self = this;
 
-#ifdef WIN32
+#ifdef _WIN32
     SetIcon(wxICON(MAIN_ICON));
 #endif
 
@@ -67,7 +67,7 @@ MainWindow::MainWindow(const wxString &title)
         {
             SetClientSize({ WIDTH, HEIGHT });
 
-#ifndef WIN32
+#ifndef _WIN32
             SetWindowStyle(GetWindowStyle() & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX));
 #endif
         }

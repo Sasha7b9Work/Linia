@@ -6,13 +6,13 @@
 // Резистор
 
 
-class RES : public OStT2
+class RES : public OStT
 {
 public:
 
-    RES(Test *);
+    RES();
 
-    virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
+    virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) override;
 
 private:
 };

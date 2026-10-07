@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "GUI/PageTests/PanelViewTest.h"
 #include "Utils/GlobalFunctions.h"
-#include "Utils/LineDrawer.h"
 #include "GUI/Controls/Painter.h"
 #include "GUI/Controls/StaticBox.h"
 #include "Utils/SystemDepend.h"
@@ -28,24 +27,34 @@ PanelViewTest::PanelViewTest(wxWindow *parent) : Panel(parent, wxSIMPLE_BORDER)
 
     SetBackgroundStyle(wxBG_STYLE_PAINT);
 
-    CreateControls();
+    CreateCommonControls();
 
-    HideControls();
+    CreateSpecificControls();
+
+    HideCommonControls();
+
+    CreateMeasurersSourcers();
 }
 
 
 void PanelViewTest::SetTest(Test *_test)
 {
-    test = _test;
+    Test::current = _test;
 
-    if (ostt)
+    if (OStT::current)
     {
-        delete ostt;
+        delete OStT::current;
+
+        HideMeasurersSourcers();
+
+        HideSpecificControls();
     }
 
-    ostt = CreateOStT();
+    OStT::current = CreateOStT();
 
-    ShowControls();
+    ShowCommonControls();
+
+    TuneSpecificControls();
 
     Refresh();
 }
@@ -53,9 +62,9 @@ void PanelViewTest::SetTest(Test *_test)
 
 void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 {
-    if (test)
+    if (Test::current)
     {
-        wxAutoBufferedPaintDC dc{ this };
+        AutoBufferedPaintDC dc{ this };
 
         dc.SetBackground(wxBrush(GetBackgroundColour()));
         dc.Clear();
@@ -64,16 +73,18 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 
         dc.SetPen(wxPen(*wxBLACK, 1));
 
+        DrawScheme(dc);
+
+        measBase->Draw(dc);
+
         // Устанавливаем цвет текста
         dc.SetTextForeground(*wxBLACK);
-
-        ostt->Draw(dc, GetCenter());
 
         // Устанавливаем шрифт (опционально)
         dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
 
         // Рисуем текст в левом верхнем углу
-        dc.DrawText(test->lib->name + " : " + test->name, 5, 5);
+        dc.DrawText(Test::current->lib->name + " : " + Test::current->name, 5, 5);
 
         commutator->Refresh();
     }
@@ -82,43 +93,135 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 }
 
 
+wxPoint PanelViewTest::CoordinateCollector() const
+{
+    return { 570, 170 };
+}
+
+
+void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
+{
+    OStT::current->Draw(dc, GetCenter());
+
+    const int DX = 300;
+    const int X_B = 100;
+    const int X_S = X_B + DX;
+    const int X_C = CoordinateCollector().x;
+    const int Y_C = CoordinateCollector().y;
+
+    {
+        // Рисуем от эмиттера
+
+        wxPoint point = OStT::current->GetPoint_E();
+
+        dc.MoveTo(point);
+
+        dc.LineOnDY(50);
+
+        DrawGround(dc);
+    }
+
+    {
+        // Рисуем от коллектора
+
+        wxPoint point = OStT::current->GetPoint_C();
+
+        dc.MoveTo(point);
+
+        dc.LineToY(Y_C);
+
+        dc.LineToX(X_C);
+
+        dc.LineToY(Y_GROUND);
+
+        DrawGround(dc);
+
+        ampCollector->Show(dc, {X_C, PosMeasurerSourcerY(0)});
+        voltCollector->Show(dc, { X_C, PosMeasurerSourcerY(1) });
+        srcVoltageCollector->Show(dc, { X_C, PosMeasurerSourcerY(2) });
+    }
+
+    {
+        // Рисуем от базы
+
+        wxPoint point;
+
+        if (OStT::current->GetPoint_B(point))
+        {
+            dc.MoveTo(point);
+
+            dc.LineToX(X_B);
+
+            dc.LineToY(Y_GROUND);
+
+            DrawGround(dc);
+
+            measBase->Show(dc, { X_B, PosMeasurerSourcerY(1) });
+            srcVoltageCurrentBase->Show(dc, { X_B, PosMeasurerSourcerY(2) });
+        }
+    }
+
+    {
+        // Рисуем от подложки
+
+        wxPoint point;
+
+        if (OStT::current->GetPoint_S(point))
+        {
+            dc.MoveTo(point);
+
+            dc.LineToX(X_S);
+
+            dc.LineToY(Y_GROUND);
+
+            DrawGround(dc);
+
+            measSubstrate->Show(dc, { X_S, PosMeasurerSourcerY(1) });
+            srcVoltateCurrentSubstrate->Show(dc, { X_S, PosMeasurerSourcerY(2) });
+        }
+    }
+
+    OStT::current->FuncAfterDraw(dc);
+}
+
+
 OStT *PanelViewTest::CreateOStT()
 {
-    if (test->IsBJT())
+    if (Test::current->IsBJT())
     {
-        return new BJT(test);
+        return new BJT();
     }
-    else if (test->IsBJTS())
+    else if (Test::current->IsBJTS())
     {
-        return new BJTS(test);
+        return new BJTS();
     }
-    else if (test->IsFET())
+    else if (Test::current->IsFET())
     {
-        return new FET(test);
+        return new FET();
     }
-    else if (test->IsFETS())
+    else if (Test::current->IsFETS())
     {
-        return new FETS(test);
+        return new FETS();
     }
-    else if (test->IsDARL())
+    else if (Test::current->IsDARL())
     {
-        return new DARL(test);
+        return new DARL();
     }
-    else if (test->IsTHYR())
+    else if (Test::current->IsTHYR())
     {
-        return new THYR(test);
+        return new THYR();
     }
-    else if (test->IsDIOD())
+    else if (Test::current->IsDIOD())
     {
-        return new DIOD(test);
+        return new DIOD();
     }
-    else if (test->IsRES())
+    else if (Test::current->IsRES())
     {
-        return new RES(test);
+        return new RES();
     }
-    else if (test->IsCAP())
+    else if (Test::current->IsCAP())
     {
-        return new CAP(test);
+        return new CAP();
     }
 
     LOG_ERROR("Incorrect type OStT");
@@ -127,165 +230,30 @@ OStT *PanelViewTest::CreateOStT()
 }
 
 
-void PanelViewTest::CreateBJT(const wxPoint &c, wxPoint &point_base, wxPoint &point_collector, wxPoint &point_substrate, wxPoint &point_emitter, wxAutoBufferedPaintDC &dc)
+void PanelViewTest::CreateMeasurersSourcers()
 {
-    int r = 5;
+    measBase = new MeasurerVoltageCurrent(Chan::_B, Dir::Down);
 
-    int x_col = c.x + radius_trans / 2;   // / Координаты точки коммутации
-    int y_col = c.y - 2 * radius_trans;   // / с коллектором
+    srcVoltageCurrentBase = new SourceVoltageCurrent(Chan::_B, Dir::Down);
 
-    LineDriwer driwer(dc, x_col, y_col);
-    driwer.LineTo(c.x + radius_trans / 2, c.y + 2 * radius_trans);          // Вертикальная линия, которая выходит из коллектора и эмиттера
-    driwer.MoveOnDY(-20);
-    point_emitter = driwer.GetCoord();
-    dc.DrawCircle(point_emitter, r);
-    dc.DrawText("E", { point_emitter.x + 7, point_emitter.y - 7 });
-    dc.DrawCircle(c, radius_trans);
-    const int x_vert = c.x - radius_trans * 10 / 18;                        // Здесь заканчивается линия базы внутри окружности
-    wxPoint coord_base{ 90, c.y };
-    driwer.MoveTo(90, c.y);
-    driwer.LineTo(x_vert, c.y);                                             // База
-    driwer.MoveOnDX(-50);
-    point_base = driwer.GetCoord();
-    dc.DrawCircle(point_base, r);
-    dc.DrawText("B", { point_base.x - 3, point_base.y - 20 });
+    measSubstrate = new MeasurerVoltageCurrent(Chan::_S, Dir::Down);
 
-    int y0 = 290;
-    int y1 = 410;
-    int y2 = 530;
-    int y_ground = 720;
+    srcVoltateCurrentSubstrate = new SourceVoltageCurrent(Chan::_S, Dir::Down);
 
-    {
-        // Рисуем транзистор
+    ampCollector = new Ampermeter(Chan::_C, Dir::Down);
 
-        {
-            // Наклонные линии
+    voltCollector = new Voltmeter(Chan::_C, Dir::Down);
 
-            int dy = radius_trans * 4 / 18;
-
-            int y_top = c.y - radius_trans * 100 / 115;
-            int y_bottom = c.y + radius_trans * 100 / 115;
-
-            int xx = c.x + radius_trans * 10 / 20;                      // В этом иксе - пересечение коллектора и эмиттера с окружностью.
-
-            dc.DrawLine(x_vert, c.y - dy, xx, y_top);                  // Верхняя наклонная линия (коллектор)
-            dc.DrawLine(x_vert, c.y + dy, xx, y_bottom);               // Нижняя наклонная линия (эмиттер)
-        }
-
-        {
-            // Вертикальная линия базы
-
-            int dy = radius_trans * 4 / 9;
-
-            dc.DrawLine(x_vert, c.y - dy, x_vert, c.y + dy);
-
-            {
-                // Рисуем измеритель базы
-
-                driwer.MoveTo(coord_base.x, coord_base.y);
-
-                driwer.LineToY(y_ground);
-
-                if (!measurerBase)
-                {
-                    measurerBase = new MeasurerVoltageCurrent(Chan::_B, { driwer.GetX(), y1 }, Dir::Down);
-                }
-
-                measurerBase->Draw(dc);
-
-                if (!sourceVoltageCurrentBase)
-                {
-                    sourceVoltageCurrentBase = new SourceVoltageCurrent(Chan::_B, { driwer.GetX(), y2 }, Dir::Down);
-                }
-
-                sourceVoltageCurrentBase->Draw(dc);
-            }
-        }
-
-        {
-            // Подложка
-
-            int dy = radius_trans * 4 / 16;
-            int x = c.x + (c.x - x_vert) + radius_trans / 10;
-            driwer.MoveTo({ x, c.y - dy });
-            driwer.LineToY(c.y + dy);                                   // Вертикальная линия подложки
-
-            {
-                // Измеритель подложки
-
-                driwer.MoveTo(x, c.y);
-                driwer.LineOnDX(150);
-
-                driwer.MoveOnDX(-100);
-                point_substrate = driwer.GetCoord();
-                dc.DrawCircle(point_substrate, r);
-                dc.DrawText("Substr", { point_substrate.x - 20, point_substrate.y - 23 });
-                driwer.Restore();
-
-                driwer.LineToY(y_ground);
-
-                driwer.MoveOnDY(-470);
-
-                if (!measurerSubstrate)
-                {
-                    measurerSubstrate = new MeasurerVoltageCurrent(Chan::_S, { driwer.GetX(), y1 }, Dir::Down);
-                }
-
-                measurerSubstrate->Draw(dc);
-
-                if (!sourceVoltateCurrentSubstrate)
-                {
-                    sourceVoltateCurrentSubstrate = new SourceVoltageCurrent(Chan::_S, { driwer.GetX(), y2 }, Dir::Down);
-                }
-
-                sourceVoltateCurrentSubstrate->Draw(dc);
-            }
-        }
-    }
-
-    {
-        // Рисуем цепь коллектора
-
-        driwer.MoveTo(x_col, y_col);
-        driwer.MoveOnDY(25);
-        point_collector = driwer.GetCoord();
-        dc.DrawCircle(point_collector, r);
-        dc.DrawText("C", { point_collector.x + 7, point_collector.y - 9});
-        driwer.Restore();
-        driwer.LineOnDX(355);
-        driwer.LineToY(y_ground);
-
-        if (!ampermeterCollector)
-        {
-            ampermeterCollector = new Ampermeter(Chan::_C, { driwer.GetX(), y0 }, Dir::Down);
-        }
-
-        ampermeterCollector->Draw(dc);
-
-        if (!voltmeterCollector)
-        {
-            voltmeterCollector = new Voltmeter(Chan::_C, { driwer.GetX(), y1 }, Dir::Down);
-        }
-
-        voltmeterCollector->Draw(dc);
-
-        if (!sourceVoltageCollector)
-        {
-            sourceVoltageCollector = new SourceVoltage(Chan::_C, { driwer.GetX(), y2 }, Dir::Down);
-        }
-
-        sourceVoltageCollector->Draw(dc);
-    }
+    srcVoltageCollector = new SourceVoltage(Chan::_C, Dir::Down);
 }
-
 
 wxPoint PanelViewTest::GetCenter() const
 {
-    return { 210, 300 };
+    return { 230, 300 };
 }
 
 
-void PanelViewTest::CreateControls()
+void PanelViewTest::CreateCommonControls()
 {
     commutator = new Commutator(this, { 10, 40 }, 171);
 
@@ -390,7 +358,124 @@ void PanelViewTest::CreateControls()
 }
 
 
-void PanelViewTest::HideControls()
+wxPoint PanelViewTest::CoordinateSpecificControl() const
+{
+    return { CoordinateCollector().x - 280, CoordinateCollector().y + 20 };
+}
+
+
+void PanelViewTest::CreateSpecificControls()
+{
+    {
+        wxArrayString labels
+        {
+            "npn",
+            "pnp"
+        };
+
+        wxArrayString tooltips{ L("Проводимость транзистора") };
+
+        bcTypeBJT = new ButtonsCombo(this, L("Тип"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Проводимость транзистора"));
+        bcTypeBJT->SetPosition(CoordinateSpecificControl());
+        bcTypeBJT->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
+            {
+                OStT::current->ToBJT()->SetType((TypeBJT::E)event.GetInt());
+            });
+        bcTypeBJT->Hide();
+    }
+
+    {
+        wxArrayString labels
+        {
+            "p",
+            "n"
+        };
+
+        wxArrayString tooltips{ L("Проводимость канала") };
+
+        bcTypeFET = new ButtonsCombo(this, L("Канал"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Проводимость канала"));
+        bcTypeFET->SetPosition(CoordinateSpecificControl());
+        bcTypeFET->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
+            {
+                OStT::current->ToFET()->SetType((TypeFET::E)event.GetInt());
+            });
+    }
+
+    {
+        wxArrayString labels
+        {
+            L("Анод"),
+            L("Катод")
+        };
+
+        wxArrayString tooltips{ L("Общий электрод") };
+
+        bcCommonElectrodeDIOD = new ButtonsCombo(this, L("Общий электрод"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Общий электрод"));
+        bcCommonElectrodeDIOD->SetPosition(CoordinateSpecificControl());
+        bcCommonElectrodeDIOD->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
+            {
+                OStT::current->ToDIOD()->SetCommonElectrode((CommonElectrode::E)event.GetInt());
+            });
+    }
+
+    {
+        wxArrayString labels
+        {
+            L("Анод"),
+            L("Катод")
+        };
+
+        wxArrayString tooltips{ L("Управляющий электрод") };
+
+        bcControlElectrodeTHYR = new ButtonsCombo(this, L("Управление"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Управляющий электрод"));
+        wxPoint coord = CoordinateSpecificControl();
+        bcControlElectrodeTHYR->SetPosition({ coord.x, coord.y + 30 });
+        bcControlElectrodeTHYR->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
+            {
+                OStT::current->ToTHYR()->SetControlElectrode((ControlElectrode::E)event.GetInt());
+            });
+    }
+
+    HideSpecificControls();
+}
+
+
+void PanelViewTest::TuneSpecificControls()
+{
+    if (Test::current->IsBJT() ||
+        Test::current->IsBJTS() ||
+        Test::current->IsDARL())
+    {
+        bcTypeBJT->Show();
+    }
+    else if (Test::current->IsFET() ||
+        Test::current->IsFETS())
+    {
+        bcTypeFET->Show();
+    }
+    else if (Test::current->IsDIOD() ||
+        Test::current->IsTHYR())
+    {
+        bcCommonElectrodeDIOD->Show();
+    }
+    
+    if (Test::current->IsTHYR())
+    {
+        bcControlElectrodeTHYR->Show();
+    }
+}
+
+
+void PanelViewTest::HideSpecificControls()
+{
+    bcTypeBJT->Hide();
+    bcTypeFET->Hide();
+    bcCommonElectrodeDIOD->Hide();
+    bcControlElectrodeTHYR->Hide();
+}
+
+
+void PanelViewTest::HideCommonControls()
 {
     commutator->Hide();
     boxScan->Hide();
@@ -398,7 +483,7 @@ void PanelViewTest::HideControls()
 }
 
 
-void PanelViewTest::ShowControls()
+void PanelViewTest::ShowCommonControls()
 {
     commutator->Show();
     boxScan->Show();
@@ -565,4 +650,45 @@ void PanelViewTest::CloseCover()
 bool PanelViewTest::InModeEdit() const
 {
     return !btnEditSave->IsShown();
+}
+
+
+void PanelViewTest::DrawGround(AutoBufferedPaintDC &dc)
+{
+    const wxPoint p{ dc.GetCoord() };
+
+    dc.DrawLine(p.x - 10, p.y, p.x + 10, p.y);
+}
+
+
+void PanelViewTest::HideMeasurersSourcers()
+{
+    measBase->Hide();
+    srcVoltageCurrentBase->Hide();
+
+    measSubstrate->Hide();
+    srcVoltateCurrentSubstrate->Hide();
+
+    ampCollector->Hide();
+    voltCollector->Hide();
+    srcVoltageCollector->Hide();
+}
+
+
+int PanelViewTest::PosMeasurerSourcerY(int num)
+{
+    if (num == 0)
+    {
+        return 250;
+    }
+    else if (num == 1)
+    {
+        return 380;
+    }
+    else if (num == 2)
+    {
+        return 510;
+    }
+
+    return 100;
 }

@@ -8,7 +8,7 @@
 #include <wx/string.h>
 
 
-#ifdef WIN32
+#ifdef _WIN32
     #define NDIS_MINIPORT_MAJOR_VERSION 0
     #include <winsock2.h>
     #include <ws2tcpip.h>
@@ -91,7 +91,7 @@ static pString DIRECT_PROMT = "<- ";
 #define L(x) wxString(wxT(x))
 
 // Яркость элементов управления
-#ifdef WIN32
+#ifdef _WIN32
     #define LIGHTNESS 300
 #else
     #define LIGHTNESS 140

@@ -1,7 +1,7 @@
 #pragma once
 
 
-#ifdef WIN32
+#ifdef _WIN32
 
 #define TCIOFLUSH   2
 #define B9600       0000015

@@ -1,52 +1,133 @@
 // 2026/09/29 11:03:29 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
-#pragma warning(push, 0)
-    #include <wx/dcbuffer.h>
-#pragma warning(pop)
+#include "Utils/AutoBufferedPaintDC.h"
+#include "Settings/Tests/Library/Library.h"
 
 
 // Object Subject to Testing - ОПИ - объект, подлежащий исследованию
 
 
-class Test;
+class BJT;
+class FET;
+class DIOD;
+class THYR;
+
+
+/*
+*   Точки подключения: 
+*   База (B) - база, затвор
+*   Коллектор (C) - коллектор, сток
+*   Эмиттер (E) - эмиттер, исток
+*   Подложка (S)
+*/
+
+
+struct StoredValue
+{
+    StoredValue(int def) : value{ def } { }
+
+    int value = 0;
+
+    void Store()
+    {
+        stored = value;
+    }
+
+    void Restore()
+    {
+        value = stored;
+    }
+
+    operator int() const
+    {
+        return value;
+    }
+
+private:
+
+    int stored = 0;
+};
 
 
 class OStT
 {
 public:
 
+    // Текущий объект измерения
+    static OStT *current;
+
     virtual ~OStT() { }
 
-    static const int RADIUS = 50;
-
-    virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) = 0;
+    virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) = 0;
 
     // Точка привязки базы
-    virtual wxPoint GetPointBase(bool &result) const
+    virtual bool GetPoint_B(wxPoint &result) const
     {
-        result = false;
+        result = point_B;
 
-        return point_base;
+        return false;
     }
 
     // Точка привязки коллектора
-    wxPoint GetPointCollector() const
+    wxPoint GetPoint_C() const
     {
-        return point_collector;
+        return point_C;
     }
 
     // Точка привязки подложки
-    virtual wxPoint GetPointSubstrate(bool &result) const
+    virtual bool GetPoint_S(wxPoint &result) const
     {
-        result = false;
+        result = point_S;
 
-        return point_substrate;
+        return false;
     }
 
     // Точка привязки земли/эмиттера
-    wxPoint GEtPointGround() const              // Это земля или эмиттер
+    wxPoint GetPoint_E() const              // Это земля или эмиттер
     {
-        return point_emitter;
+        return point_E;
+    }
+
+    virtual wxString GetName_B() const
+    {
+        return "B";
+    }
+
+    virtual wxString GetName_C() const
+    {
+        return "C";
+    }
+
+    virtual wxString GetName_E() const
+    {
+        return "E";
+    }
+
+    virtual wxString GetName_S() const
+    {
+        return "Substr";
+    }
+
+    void FuncAfterDraw(AutoBufferedPaintDC &);
+
+    BJT *ToBJT()
+    {
+        return (Test::current->IsBJT() || Test::current->IsBJTS() || Test::current->IsDARL()) ? (BJT *)this : nullptr;
+    }
+
+    FET *ToFET()
+    {
+        return (Test::current->IsFET() || Test::current->IsFETS()) ? (FET *)this : nullptr;
+    }
+
+    DIOD *ToDIOD()
+    {
+        return (Test::current->IsDIOD() || Test::current->IsTHYR()) ? (DIOD *)this : nullptr;
+    }
+
+    THYR *ToTHYR()
+    {
+        return Test::current->IsTHYR() ? (THYR *)this : nullptr;
     }
 
 protected:
@@ -54,85 +135,43 @@ protected:
     friend class BJT;
     friend class FET;
 
-    OStT(Test *_test) : test(_test) { }
+    OStT() { }
 
-    wxPoint point_emitter;
-    wxPoint point_collector;
-    wxPoint point_base;
-    wxPoint point_substrate;
+    wxPoint point_E;
+    wxPoint point_C;
+    wxPoint point_B;
+    wxPoint point_S;
 
-    static const int y_ground = 720;        // Координата y отрисовки земли
-    static const int r = 5;
-
-    // Нарисовать значок земли
-    void DrawGround(int x, int y, wxAutoBufferedPaintDC &);
+    StoredValue radius{ 50 };               // Радиус корпуса. Может изменяться
+    StoredValue dr{ 30 };                   // На столько пикселей выступает точка привязки за окружность корпуса
+    StoredValue length_arrow{ 15 };         // Длина стрелки на эмиттере
 
     // Рисует линию длиной length под углом angleDeg
-    void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &);
+    void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, AutoBufferedPaintDC &);
 
-    void DrawCircle(wxAutoBufferedPaintDC &, const wxPoint &c, int &x_col, int &y_col);
+    // Нарисовать "корпус" транзистора
+    void DrawCase(AutoBufferedPaintDC &, const wxPoint &c);
 
-private:
+    // Нарисовать точку привязки
+    void DrawAnchorPoint(AutoBufferedPaintDC &, const wxPoint &);
 
-    Test *test = nullptr;
-};
+    void DrawAnchorPoints(AutoBufferedPaintDC &);
 
+    void DrawNamesPoints(AutoBufferedPaintDC &);
 
-// ОПИ с двумя выводами
+    // Нарисовать стрелку из точки 1 в точку 2
+    void DrawArrow(AutoBufferedPaintDC &, const wxPoint &p1, const wxPoint &p2);
 
+    // Повернуть точку p1 вокруг точки p2 на угол angleDeg (в градусах)
+    wxPoint RotatePoint(const wxPoint &p1, const wxPoint &p2, double angleDeg);
 
-class OStT2 : public OStT
-{
-public:
+    // p1, p2 — точки, задающие направление
+    // length — длина стрелки (перьев)
+    // angleDeg — угол отклонения от направления p1->p2 (в градусах)
+    // Возвращает точку на расстоянии length от p2, повёрнутую на angleDeg
+    wxPoint PointAtAngle(const wxPoint &p1, const wxPoint &p2, double length, double angleDeg);
 
-    OStT2(Test *test) : OStT(test) { }
-
-private:
-};
-
-
-// ОПИ с тремя выводами
-
-
-class OStT3 : public OStT
-{
-public:
-
-    OStT3(Test *test) : OStT(test) { }
-
-    virtual wxPoint GetPointBase(bool &result) const override
-    {
-        result = true;
-
-        return point_base;
-    }
-
-private:
-};
-
-
-// ОПИ с четырьмя выводами
-
-
-class OStT4 : public OStT
-{
-public:
-
-    OStT4(Test *test) : OStT(test) { }
-
-    virtual wxPoint GetPointBase(bool &result) const override
-    {
-        result = true;
-
-        return point_base;
-    }
-
-    virtual wxPoint GetPointSubstrate(bool &result) const override
-    {
-        result = true;
-
-        return point_substrate;
-    }
-
-private:
+    // Находит точки пересечения прямой (p1, p2) с окружностью (center, radius)
+    // Возвращает вектор точек пересечения (0, 1 или 2 точки)
+    std::vector<wxPoint> IntersectLineCircle(const wxPoint &p1, const wxPoint &p2, const wxPoint &center, double radius) const;
 };

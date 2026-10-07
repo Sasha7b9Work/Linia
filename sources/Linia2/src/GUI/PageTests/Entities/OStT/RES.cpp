@@ -3,13 +3,43 @@
 #include "GUI/PageTests/Entities/OStT/RES.h"
 
 
-RES::RES(Test *test) : OStT2(test)
+RES::RES() : OStT()
 {
 
 }
 
 
-void RES::Draw(wxAutoBufferedPaintDC &, const wxPoint &)
+void RES::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
+    const wxPoint d{ (int)(radius * 0.3), (int)(radius * 0.7) };
 
+    dc.MoveTo({ c.x - d.x, c.y - d.y });
+
+    dc.LineTo({ c.x + d.x, c.y - d.y });
+
+    dc.LineTo({ c.x + d.x, c.y + d.y });
+
+    dc.LineTo({ c.x - d.x, c.y + d.y });
+
+    dc.LineTo({ c.x - d.x, c.y - d.y });
+
+    {
+        // Вывод коллектора
+
+        dc.MoveTo({ c.x, c.y - d.y });
+
+        dc.LineOnDY(-dr);
+
+        point_C = dc.GetCoord();
+    }
+
+    {
+        // Вывод эмиттера
+
+        dc.MoveTo({ c.x, c.y + d.y });
+
+        dc.LineOnDY(dr);
+
+        point_E = dc.GetCoord();
+    }
 }

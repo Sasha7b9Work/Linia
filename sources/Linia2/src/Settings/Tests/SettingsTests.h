@@ -11,15 +11,148 @@ struct TypeCategory
     enum E
     {
         BJT,            // Биполярный транзистор
-        BJT4,           // Биполярный транзистор с четвёртым выводом
-        JFET,           // Полевой транзистор
-        JFET4,          // Полевой транзисото с четвёртым выводм
+        BJTS,           // Биполярный транзистор с четвёртым выводом
+        FET,            // Полевой транзистор
+        FETS,           // Полевой транзисото с четвёртым выводм
+        Darlington,
         Thyristor,
         Diod,
         Resistor,
         Capacitor,
         Count
     };
+};
+
+
+// Тип биполярного транзистора и транзистора Дарлингтона
+struct TypeBJT
+{
+    enum E
+    {
+        NPN,
+        PNP,
+        count
+    };
+
+    TypeBJT(E e) : type{ e } { }
+
+    bool IsNPN() const
+    {
+        return type == NPN;
+    }
+
+    bool IsPNP() const
+    {
+        return type == PNP;
+    }
+
+    void Set(E e)
+    {
+        type = e;
+    }
+
+private:
+
+    E type;
+};
+
+
+// Тип полевого транзистора
+struct TypeFET
+{
+    enum E
+    {
+        ChannelP,
+        ChannelN,
+        Count
+    };
+
+    TypeFET(E e) : type{ e } { }
+
+    bool IsChannelP() const
+    {
+        return type == ChannelP;
+    }
+
+    bool IsChannelN() const
+    {
+        return type == ChannelN;
+    }
+
+    void Set(E e)
+    {
+        type = e;
+    }
+
+private:
+
+    E type;
+};
+
+
+// Подключение - с общим анодом или катодом
+struct CommonElectrode
+{
+    enum E
+    {
+        Anode_P,     // К земле (эмиттеру) подключён анод (треугольник)
+        Catode_N,    // К земле (эмиттеру) подключён катод (чёрточка)
+        Count
+    };
+
+    CommonElectrode(E e) : type{ e } { }
+
+    bool IsAnode() const
+    {
+        return type == Anode_P;
+    }
+
+    bool IsCatode() const
+    {
+        return type == Catode_N;
+    }
+
+    void Set(E e)
+    {
+        type = e;
+    }
+
+private:
+
+    E type;
+};
+
+
+// Управляющий электрод - катод или анод
+struct ControlElectrode
+{
+    enum E
+    {
+        Anode_P,
+        Catode_N,
+        Count
+    };
+
+    ControlElectrode(E e) : type {e} { }
+
+    bool IsAnode() const
+    {
+        return type == Anode_P;
+    }
+
+    bool IsCatode() const
+    {
+        return type == Catode_N;
+    }
+
+    void Set(E e)
+    {
+        type = e;
+    }
+
+private:
+
+    E type;
 };
 
 
@@ -69,7 +202,7 @@ struct TypeScan
 
     static pchar NameShort(E);
 
-    static pchar _NameGUI(E);
+    static pchar NameGUI(E);
 
     static pchar NameFileICO(E);
 };

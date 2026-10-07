@@ -4,6 +4,7 @@
 #include "Utils/GlobalFunctions.h"
 #include "GUI/Controls/ButtonCombo.h"
 #include "GUI/PageTests/PanelViewTest.h"
+#include "GUI/Controls/SliderHidden.h"
 
 
 #define CREATE_BUTTONS_COMBO_RANGE(name, title, _x, _y)             \
@@ -11,35 +12,25 @@
     name->SetPosition({ _x, _y });
 
 
-MeasurerSourcer::MeasurerSourcer(Type::E _type, Chan::E _chan, const wxPoint _center, Dir::E _dir) :
-    type(_type), chan(_chan), dir(_dir), center(_center)
+MeasurerSourcer::MeasurerSourcer(Type::E _type, Chan::E _chan, Dir::E _dir) :
+    type(_type), chan(_chan), dir(_dir)
 {
 }
 
 
-void MeasurerSourcer::Draw(wxAutoBufferedPaintDC &dc)
+void MeasurerSourcer::Draw(AutoBufferedPaintDC &dc)
 {
+    if (!is_showing)
+    {
+        return;
+    }
+
     coord_controls.x = center.x;
     coord_controls.y = center.y;
 
-    wxRect rect = DrawBorder(dc, coord_controls.x, coord_controls.y, radius, CalculateNumControls());
+    wxRect rect = DrawBorder(dc, coord_controls.x, coord_controls.y, radius);
 
     CreateControls(rect);
-
-    for (wxWindow *object : parametersI)
-    {
-        object->Enable(!disabled);
-    }
-
-    for (wxWindow *object : parametersU)
-    {
-        object->Enable(!disabled);
-    }
-
-    if (btnModeUI)
-    {
-        btnModeUI->Enable(!disabled);
-    }
 
     DrawUGO(dc);
 }
@@ -56,9 +47,9 @@ int MeasurerSourcer::CalculateNumControls() const
 }
 
 
-void MeasurerSourcer::DrawUGO(wxAutoBufferedPaintDC &dc)
+void MeasurerSourcer::DrawUGO(AutoBufferedPaintDC &dc)
 {
-    if (!disabled)
+    if (is_enabled)
     {
         dc.DrawCircle(center, radius);
 
@@ -75,10 +66,10 @@ void MeasurerSourcer::DrawUGO(wxAutoBufferedPaintDC &dc)
             const int l = 5;
 
             dc.DrawLine(center.x, center.y - dY - ddY, center.x - l, center.y - dY + l - ddY);
-            dc.DrawLine(center.x, center.y - dY + dY - ddY, center.x - l, center.y - dY + l + dY - ddY);
+            dc.DrawLine(center.x, center.y - ddY, center.x - l, center.y + l - ddY);
 
             dc.DrawLine(center.x, center.y - dY - ddY, center.x + l, center.y - dY + l - ddY);
-            dc.DrawLine(center.x, center.y - dY + dY - ddY, center.x + l, center.y - dY + l + dY - ddY);
+            dc.DrawLine(center.x, center.y - ddY, center.x + l, center.y + l - ddY);
         }
         else if (type == Type::SourceU ||
             (type == Type::SourceUI && IsSetModeU()))
@@ -178,7 +169,8 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
 {
     btnDisable = new Button(PanelViewTest::self, "x", size);
 
-    if (type == MeasurerSourcer::Type::MeasI || MeasurerSourcer::Type::MeasU)
+    if (type == MeasurerSourcer::Type::MeasI ||
+        type == MeasurerSourcer::Type::MeasU)
     {
         btnDisable->SetToolTip(L("Включить/отключить блок измерителя"));
     }
@@ -189,7 +181,19 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
 
     btnDisable->Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
         {
-            disabled = !disabled;
+            is_enabled = !is_enabled;
+            for (auto wnd : parametersI)
+            {
+                wnd->Show(is_enabled);
+            }
+            for (auto wnd : parametersU)
+            {
+                wnd->Show(is_enabled);
+            }
+            if (btnModeUI)
+            {
+                btnModeUI->Enable(is_enabled);
+            }
             PanelViewTest::self->Refresh();
             event.Skip();
         });
@@ -258,21 +262,12 @@ void MeasurerSourcer::CreateParametersI()
             }
 
             {
-                SliderFloat *slider = new SliderFloat(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
+                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(0.0, 10.0, "mA", 2);
+                slider->SetRange(-10e-3, 10e-3);
                 parametersI.push_back(slider);
                 y += ButtonsCombo::HEIGHT + 5;
-            }
-
-            {
-                titles.push_back(L("+"));
-                titles.push_back(L("-"));
-
-                tooltips.push_back(L("Полярность смещения"));
-
-                CREATE_COMBO(L("Полярность"), "comboBasePolarityI", parametersI);
             }
 
             {
@@ -312,21 +307,12 @@ void MeasurerSourcer::CreateParametersI()
             }
 
             {
-                SliderFloat *slider = new SliderFloat(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
+                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(0.0, 10.0, "mA", 2);
+                slider->SetRange(-10e-3, 10e-3);
                 parametersI.push_back(slider);
                 y += ButtonsCombo::HEIGHT + 5;
-            }
-
-            {
-                titles.push_back(L("+"));
-                titles.push_back(L("-"));
-
-                tooltips.push_back(L("Полярность смещения"));
-
-                CREATE_COMBO(L("Полярность"), "comboSubstratePolarityI", parametersI);
             }
 
             {
@@ -397,21 +383,12 @@ void MeasurerSourcer::CreateParametersU()
             }
 
             {
-                SliderFloat *slider = new SliderFloat(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
+                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(0.0, 10.0, "mA", 2);
+                slider->SetRange(-10e-3, 10e-3);
                 parametersU.push_back(slider);
                 y += ButtonsCombo::HEIGHT + 5;
-            }
-
-            {
-                titles.push_back(L("+"));
-                titles.push_back(L("-"));
-
-                tooltips.push_back(L("Полярность смещения"));
-
-                CREATE_COMBO(L("Полярность"), "comboBasePolarityU", parametersU);
             }
 
             {
@@ -451,21 +428,12 @@ void MeasurerSourcer::CreateParametersU()
             }
 
             {
-                SliderFloat *slider = new SliderFloat(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
+                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(0.0, 10.0, "mA", 2);
+                slider->SetRange(-10e-3, 10e-3);
                 parametersU.push_back(slider);
                 y += ButtonsCombo::HEIGHT + 5;
-            }
-
-            {
-                titles.push_back(L("+"));
-                titles.push_back(L("-"));
-
-                tooltips.push_back(L("Полярность смещения"));
-
-                CREATE_COMBO(L("Полярность"), "comboSubstratePolarityU", parametersU);
             }
 
             {
@@ -505,10 +473,10 @@ void MeasurerSourcer::CreateParametersU()
             }
 
             {
-                SliderFloat *slider = new SliderFloat(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
+                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"));
                 slider->SetToolTip(L("Смещение"));
                 slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(0.0, 10.0, "mA", 2);
+                slider->SetRange(-10e-3, 10e-3);
                 parametersU.push_back(slider);
                 y += ButtonsCombo::HEIGHT + 5;
             }
@@ -586,7 +554,7 @@ void MeasurerSourcer::CreateButtonModeUI(const wxRect &rect, const wxSize &size,
 }
 
 
-wxRect MeasurerSourcer::DrawBorder(wxAutoBufferedPaintDC &dc, int &x, int &y, int r, int num_controls)
+wxRect MeasurerSourcer::DrawBorder(AutoBufferedPaintDC &dc, int &x, int &y, int r)
 {
     const int d = 5;
 
@@ -594,19 +562,22 @@ wxRect MeasurerSourcer::DrawBorder(wxAutoBufferedPaintDC &dc, int &x, int &y, in
 
     paint.StorePenBrush();
 
-    dc.SetPen({ disabled ? wxColour(150, 150, 150) : (*wxBLACK), 1, wxPENSTYLE_SHORT_DASH});
+    dc.SetPen({ is_enabled ? (*wxBLACK) : wxColour(150, 150, 150), 1, wxPENSTYLE_SHORT_DASH });
     dc.SetBrush(*wxTRANSPARENT_BRUSH);
 
-    int width = WIDTH_CONTROL + d * 2;
-    int height = (num_controls * (ButtonsCombo::HEIGHT + d)) + d;
-
-    wxRect rect{ x, y, width, height };
+    wxRect rect
+    {
+        x,
+        y,
+        WIDTH_CONTROL + d * 2,
+        (CalculateNumControls() * (ButtonsCombo::HEIGHT + d)) + d
+    };
 
     if (dir == Dir::Left)
     {
         rect.x -= WIDTH_CONTROL + 2 * d + r;
         rect.width += 2 * r + d;
-        rect.y -= height / 2;
+        rect.y -= rect.height / 2;
         dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
         x = rect.x + d;
         y = rect.y + d;
@@ -614,7 +585,7 @@ wxRect MeasurerSourcer::DrawBorder(wxAutoBufferedPaintDC &dc, int &x, int &y, in
     else if (dir == Dir::Up)
     {
         rect.x = x - WIDTH_CONTROL / 2 - d;
-        rect.y -= d + r + (ButtonsCombo::HEIGHT + d) * num_controls;
+        rect.y -= d + r + (ButtonsCombo::HEIGHT + d) * CalculateNumControls();
         rect.height += d + r * 2;
 
         dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
@@ -626,7 +597,7 @@ wxRect MeasurerSourcer::DrawBorder(wxAutoBufferedPaintDC &dc, int &x, int &y, in
     {
         rect.x -= r + d;
         rect.width += 2 * r + d;
-        rect.y -= height / 2;
+        rect.y -= rect.height / 2;
 
         dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
 

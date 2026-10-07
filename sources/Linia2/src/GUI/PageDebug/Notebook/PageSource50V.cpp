@@ -37,7 +37,7 @@ PageSource50V::PageSource50V(wxNotebook *notebook) :
 
         combo50Plus->SetPosition({ 10, 200 });
 
-        combo50Plus->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
+        combo50Plus->Bind(wxEVT_COMBOBOX, [](wxCommandEvent &event)
             {
                 IDevice::impl->SendCommand(wxString::Format(":SOURCE50V:PLUS %d", event.GetInt()));
             });
@@ -48,7 +48,7 @@ PageSource50V::PageSource50V(wxNotebook *notebook) :
 
         combo50Minus->SetPosition({ 10, 230 });
 
-        combo50Minus->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
+        combo50Minus->Bind(wxEVT_COMBOBOX, [](wxCommandEvent &event)
             {
                 IDevice::impl->SendCommand(wxString::Format(":SOURCE50V:MINUS %d", event.GetInt()));
             });

@@ -3,13 +3,65 @@
 #include "GUI/PageTests/Entities/OStT/DIOD.h"
 
 
-DIOD::DIOD(Test *test) : OStT2(test)
+DIOD::DIOD() : OStT()
 {
 
 }
 
 
-void DIOD::Draw(wxAutoBufferedPaintDC &, const wxPoint &)
+void DIOD::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
+    DrawCommon(dc, c);
+}
 
+
+void DIOD::DrawCommon(AutoBufferedPaintDC &dc, const wxPoint &c)
+{
+    const wxPoint d = Delta();
+
+    {
+        // Рисуем вертикальную линию
+
+        dc.MoveTo({ c.x, c.y - d.y - dr });
+        point_C = dc.GetCoord();
+
+        dc.LineTo({ c.x, c.y + d.y + dr });
+        point_E = dc.GetCoord();
+    }
+
+    {
+        // Рисуем перпендикулярные линии
+
+        dc.MoveTo({ c.x - d.x, c.y - d.y });
+        dc.LineToX(c.x + d.x);
+        dc.MoveToY(c.y + d.y);
+        dc.LineToX(c.x - d.x);
+    }
+
+    DrawAnode(dc, c);
+}
+
+
+void DIOD::DrawAnode(AutoBufferedPaintDC &dc, const wxPoint &c)
+{
+    const wxPoint d = Delta();
+
+    if (commonElectrode.IsAnode())
+    {
+        dc.MoveTo({ c.x - d.x, c.y + d.y });
+        dc.LineTo({ c.x, c.y - d.y });
+        dc.LineTo({ c.x + d.x, c.y + d.y });
+    }
+    else if (commonElectrode.IsCatode())
+    {
+        dc.MoveTo({ c.x - d.x, c.y - d.y });
+        dc.LineTo({ c.x, c.y + d.y });
+        dc.LineTo({ c.x + d.x, c.y - d.y });
+    }
+}
+
+
+wxPoint DIOD::Delta() const
+{
+    return { (int)(radius * 0.5), (int)(radius * 0.5) };
 }

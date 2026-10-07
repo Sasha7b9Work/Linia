@@ -8,7 +8,6 @@
     #include <wx/textctrl.h>
     #include <wx/msgdlg.h>
     #include <wx/stdpaths.h>
-    #include <wx/dcclient.h>
 #pragma warning(pop)
 
 
@@ -210,7 +209,7 @@ bool GF::ApproxEqual(double a, double b)
 
 wxString GF::GetSelfIP()
 {
-#ifdef WIN32
+#ifdef _WIN32
 
     // Windows implementation
     PIP_ADAPTER_ADDRESSES adapter_addresses = nullptr;
@@ -346,7 +345,7 @@ wxString GF::GetSelfIP()
 }
 
 
-void GF::DrawTextInCenter(wxAutoBufferedPaintDC &dc, const wxString &text, const wxRect &rect)
+void GF::DrawTextInCenter(AutoBufferedPaintDC &dc, const wxString &text, const wxRect &rect)
 {
     wxCoord textWidth, textHeight;
     dc.GetTextExtent(text, &textWidth, &textHeight);

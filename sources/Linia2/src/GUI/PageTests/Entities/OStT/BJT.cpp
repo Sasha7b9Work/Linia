@@ -1,103 +1,94 @@
 // 2026/09/29 10:57:20 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageTests/Entities/OStT/BJT.h"
-#include "Utils/LineDrawer.h"
 
 
-BJT::BJT(Test *test) : OStT3(test)
+BJT::BJT() : OStT()
 {
 
 }
 
 
-void BJT::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
+void BJT::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    int x_vert = 0;
-
-    DrawCommon(dc, c, *this, x_vert);
+    DrawCommon(dc, c, true);
 }
 
 
-void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self, int &x_vert)
+void BJT::DrawCommon(AutoBufferedPaintDC &dc, const wxPoint &c, bool draw_case)
 {
-    int x_col = c.x + RADIUS / 2;   // / Координаты точки коммутации
-    int y_col = c.y - 2 * RADIUS;   // / с коллектором
+    if (draw_case)
+    {
+        DrawCase(dc, c);
+    }
 
-    LineDriwer driwer(dc, x_col, y_col);
-    driwer.LineTo(c.x + RADIUS / 2, c.y + 2 * RADIUS);                  // Вертикальная линия, которая выходит из коллектора и эмиттера
-    self.DrawGround(driwer.GetX(), driwer.GetY(), dc);
-    driwer.MoveOnDY(-20);
-    self.point_emitter = driwer.GetCoord();
-    dc.DrawCircle(self.point_emitter, r);
+    DrawBase(dc, c);
+
+    DrawCollectorEmitter(dc, c);
+}
 
 
-    dc.DrawText("E", { self.point_emitter.x + 7, self.point_emitter.y - 7 });
-    dc.DrawCircle(c, RADIUS);
-    x_vert = c.x - RADIUS * 10 / 18;
-    wxPoint coord_base{ 90, c.y };
-    driwer.MoveTo(90, c.y);
-    driwer.LineTo(x_vert, c.y);                     // База
-    driwer.MoveOnDX(-50);
-    self.point_base = driwer.GetCoord();
-    dc.DrawCircle(self.point_base, r);
-    dc.DrawText("B", { self.point_base.x - 3, self.point_base.y - 20 });
+void BJT::DrawBase(AutoBufferedPaintDC &dc, const wxPoint &c)
+{
+    const wxPoint d = DeltaBase();
+
+    wxPoint p1{ c.x - d.x, c.y - d.y };
+    wxPoint p2{ c.x - d.x, c.y + d.y };
+
+    dc.DrawLine(p1, p2);
+
+    p1 = { c.x - d.x, c.y };
+    p2 = { c.x - radius - dr, c.y };
+
+    point_B = p2;
+
+    dc.DrawLine(p1, p2);
+}
+
+
+void BJT::DrawCollectorEmitter(AutoBufferedPaintDC &dc, const wxPoint &c)
+{
+    const int dyb = (int)(radius * 0.3);    // Смещение по базе
+    const int dyc = (int)(radius * 1.2);    // Смещение по коллектору
+
+    const wxPoint d = DeltaBase();
+
+    wxPoint p1{ c.x - d.x, c.y - dyb };
+    wxPoint p2{ c.x + radius, c.y - dyc };
+
+    std::vector<wxPoint> points;
 
     {
-        // Рисуем транзистор
+        // Коллектор
 
-        {
-            // Наклонные линии
+        points = OStT::IntersectLineCircle(p1, p2, c, radius);
 
-            int dy = RADIUS * 4 / 18;
-
-            int y_top = c.y - RADIUS * 100 / 115;
-            int y_bottom = c.y + RADIUS * 100 / 115;
-
-            int xx = c.x + RADIUS * 10 / 20;                      // В этом иксе - пересечение коллектора и эмиттера с окружностью.
-
-            dc.DrawLine(x_vert, c.y - dy, xx, y_top);                  // Верхняя наклонная линия (коллектор)
-            dc.DrawLine(x_vert, c.y + dy, xx, y_bottom);               // Нижняя наклонная линия (эмиттер)
-
-            {
-                // Стрелка эмиттера
-
-                double length = RADIUS * 10 / 40;
-
-                self.DrawLineWithAngle({ xx, y_bottom }, length, 125, dc);
-                self.DrawLineWithAngle({ xx, y_bottom }, length, 170, dc);
-            }
-        }
-
-        {
-            // Вертикальная линия базы
-
-            int dy = RADIUS * 4 / 9;
-
-            dc.DrawLine(x_vert, c.y - dy, x_vert, c.y + dy);
-
-            {
-                // Рисуем измеритель базы
-
-                driwer.MoveTo(coord_base.x, coord_base.y);
-
-                driwer.LineToY(y_ground);
-
-                self.DrawGround(driwer.GetX(), driwer.GetY(), dc);
-            }
-        }
+        dc.MoveTo(p1);
+        dc.LineTo(points[1]);
+        dc.LineOnDY(-dr);
+        point_C = dc.GetCoord();
     }
 
     {
-        // Рисуем цепь коллектора
+        // Эмиттер
 
-        driwer.MoveTo(x_col, y_col);
-        driwer.MoveOnDY(25);
-        self.point_collector = driwer.GetCoord();
-        dc.DrawCircle(self.point_collector, r);
-        dc.DrawText("C", { self.point_collector.x + 7, self.point_collector.y - 9 });
-        driwer.Restore();
-        driwer.LineOnDX(355);
-        driwer.LineToY(y_ground);
-        self.DrawGround(driwer.GetX(), driwer.GetY(), dc);
+        p1.y = c.y + dyb;
+        p2.y = c.y + dyc;
+
+        points = OStT::IntersectLineCircle(p1, p2, c, radius);
+
+        dc.MoveTo(p1);
+        dc.LineTo(points[1]);
+        dc.LineOnDY(dr);
+        point_E = dc.GetCoord();
+
+        if (type.IsNPN())
+        {
+            DrawArrow(dc, p1, points[1]);
+        }
+        else if (type.IsPNP())
+        {
+            DrawArrow(dc, points[1], p1);
+        }
     }
 }
