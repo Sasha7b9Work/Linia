@@ -44,9 +44,9 @@ private:
     MeasurerVoltageCurrent *measSubstrate = nullptr;
     SourceVoltageCurrent *srcVoltateCurrentSubstrate = nullptr;
 
-    Ampermeter *ampCollector = nullptr;
-    Voltmeter *voltCollector = nullptr;
-    SourceVoltage *srcVoltageCollector = nullptr;
+//    Ampermeter *ampCollector = nullptr;
+//    Voltmeter *voltCollector = nullptr;
+//    SourceVoltage *srcVoltageCollector = nullptr;
 
     ButtonsCombo *bcTypeBJT = nullptr;                  // Тип биполярного транзистора
     ButtonsCombo *bcTypeFET = nullptr;                  // Тип полевого транзистора
