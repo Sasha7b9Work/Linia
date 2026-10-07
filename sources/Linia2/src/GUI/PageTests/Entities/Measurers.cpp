@@ -131,9 +131,6 @@ void MeasurerSourcer::ShowNeedParameters()
 {
     if (btnModeUI)
     {
-        std::vector<wxWindow *> *hidden = &parametersU;
-        std::vector<wxWindow *> *shownen = &parametersI;
-
         if (IsSetModeU())
         {
             for (auto wnd : parametersI)
