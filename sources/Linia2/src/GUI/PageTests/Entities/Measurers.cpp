@@ -196,6 +196,7 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
             {
                 wnd->Show(is_enabled);
             }
+            ShowNeedParameters();
             if (btnModeUI)
             {
                 btnModeUI->Enable(is_enabled);
