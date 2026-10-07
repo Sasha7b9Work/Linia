@@ -14,5 +14,9 @@ public:
 
     virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) override;
 
+    // Нарисовать общую часть для BJT и BJTS
+    // x_vert - заканчивается линия базы внутри окружности
+    static void DrawCommon(wxAutoBufferedPaintDC &, const wxPoint &, OStT &self, int &x_vert);
+
 private:
 };

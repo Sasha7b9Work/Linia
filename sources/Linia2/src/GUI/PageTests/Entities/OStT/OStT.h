@@ -15,6 +15,8 @@ class OStT
 {
 public:
 
+    virtual ~OStT() { }
+
     static const int RADIUS = 50;
 
     virtual void Draw(wxAutoBufferedPaintDC &, const wxPoint &) = 0;
@@ -49,6 +51,9 @@ public:
 
 protected:
 
+    friend class BJT;
+    friend class FET;
+
     OStT(Test *_test) : test(_test) { }
 
     wxPoint point_emitter;
@@ -56,11 +61,16 @@ protected:
     wxPoint point_base;
     wxPoint point_substrate;
 
+    static const int y_ground = 720;        // Координата y отрисовки земли
+    static const int r = 5;
+
     // Нарисовать значок земли
-    void DrawGround(int x, int y, wxAutoBufferedPaintDC &dc);
+    void DrawGround(int x, int y, wxAutoBufferedPaintDC &);
 
     // Рисует линию длиной length под углом angleDeg
-    void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &dc);
+    void DrawLineWithAngle(const wxPoint &start, double length, double angleDeg, wxAutoBufferedPaintDC &);
+
+    void DrawCircle(wxAutoBufferedPaintDC &, const wxPoint &c, int &x_col, int &y_col);
 
 private:
 

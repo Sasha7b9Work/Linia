@@ -12,31 +12,35 @@ BJT::BJT(Test *test) : OStT3(test)
 
 void BJT::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
-    int r = 5;
+    int x_vert = 0;
 
+    DrawCommon(dc, c, *this, x_vert);
+}
+
+
+void BJT::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self, int &x_vert)
+{
     int x_col = c.x + RADIUS / 2;   // / Координаты точки коммутации
     int y_col = c.y - 2 * RADIUS;   // / с коллектором
 
     LineDriwer driwer(dc, x_col, y_col);
-    driwer.LineTo(c.x + RADIUS / 2, c.y + 2 * RADIUS);          // Вертикальная линия, которая выходит из коллектора и эмиттера
-    DrawGround(driwer.GetX(), driwer.GetY(), dc);
+    driwer.LineTo(c.x + RADIUS / 2, c.y + 2 * RADIUS);                  // Вертикальная линия, которая выходит из коллектора и эмиттера
+    self.DrawGround(driwer.GetX(), driwer.GetY(), dc);
     driwer.MoveOnDY(-20);
-    point_emitter = driwer.GetCoord();
-    dc.DrawCircle(point_emitter, r);
-    dc.DrawText("E", { point_emitter.x + 7, point_emitter.y - 7 });
+    self.point_emitter = driwer.GetCoord();
+    dc.DrawCircle(self.point_emitter, r);
+
+
+    dc.DrawText("E", { self.point_emitter.x + 7, self.point_emitter.y - 7 });
     dc.DrawCircle(c, RADIUS);
-    const int x_vert = c.x - RADIUS * 10 / 18;                        // Здесь заканчивается линия базы внутри окружности
+    x_vert = c.x - RADIUS * 10 / 18;
     wxPoint coord_base{ 90, c.y };
     driwer.MoveTo(90, c.y);
-    driwer.LineTo(x_vert, c.y);                                             // База
+    driwer.LineTo(x_vert, c.y);                     // База
     driwer.MoveOnDX(-50);
-    point_base = driwer.GetCoord();
-    dc.DrawCircle(point_base, r);
-    dc.DrawText("B", { point_base.x - 3, point_base.y - 20 });
-
-    int y1 = 410;
-    int y2 = 530;
-    int y_ground = 720;
+    self.point_base = driwer.GetCoord();
+    dc.DrawCircle(self.point_base, r);
+    dc.DrawText("B", { self.point_base.x - 3, self.point_base.y - 20 });
 
     {
         // Рисуем транзистор
@@ -59,8 +63,8 @@ void BJT::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
                 double length = RADIUS * 10 / 40;
 
-                DrawLineWithAngle({ xx, y_bottom }, length, 125, dc);
-                DrawLineWithAngle({ xx, y_bottom }, length, 170, dc);
+                self.DrawLineWithAngle({ xx, y_bottom }, length, 125, dc);
+                self.DrawLineWithAngle({ xx, y_bottom }, length, 170, dc);
             }
         }
 
@@ -78,34 +82,7 @@ void BJT::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
                 driwer.LineToY(y_ground);
 
-                DrawGround(driwer.GetX(), driwer.GetY(), dc);
-            }
-        }
-
-        {
-            // Подложка
-
-            int dy = RADIUS * 4 / 16;
-            int x = c.x + (c.x - x_vert) + RADIUS / 10;
-            driwer.MoveTo({ x, c.y - dy });
-            driwer.LineToY(c.y + dy);                                   // Вертикальная линия подложки
-
-            {
-                // Измеритель подложки
-
-                driwer.MoveTo(x, c.y);
-                driwer.LineOnDX(150);
-
-                driwer.MoveOnDX(-100);
-                point_substrate = driwer.GetCoord();
-                dc.DrawCircle(point_substrate, r);
-                dc.DrawText("Substr", { point_substrate.x - 20, point_substrate.y - 23 });
-                driwer.Restore();
-
-                driwer.LineToY(y_ground);
-                DrawGround(driwer.GetX(), driwer.GetY(), dc);
-
-                driwer.MoveOnDY(-470);
+                self.DrawGround(driwer.GetX(), driwer.GetY(), dc);
             }
         }
     }
@@ -115,12 +92,12 @@ void BJT::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 
         driwer.MoveTo(x_col, y_col);
         driwer.MoveOnDY(25);
-        point_collector = driwer.GetCoord();
-        dc.DrawCircle(point_collector, r);
-        dc.DrawText("C", { point_collector.x + 7, point_collector.y - 9 });
+        self.point_collector = driwer.GetCoord();
+        dc.DrawCircle(self.point_collector, r);
+        dc.DrawText("C", { self.point_collector.x + 7, self.point_collector.y - 9 });
         driwer.Restore();
         driwer.LineOnDX(355);
         driwer.LineToY(y_ground);
-        DrawGround(driwer.GetX(), driwer.GetY(), dc);
+        self.DrawGround(driwer.GetX(), driwer.GetY(), dc);
     }
 }

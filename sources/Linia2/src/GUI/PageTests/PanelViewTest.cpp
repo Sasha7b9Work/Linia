@@ -27,12 +27,25 @@ PanelViewTest::PanelViewTest(wxWindow *parent) : Panel(parent, wxSIMPLE_BORDER)
     Bind(wxEVT_PAINT, &PanelViewTest::OnEventPaint, this);
 
     SetBackgroundStyle(wxBG_STYLE_PAINT);
+
+    CreateControls();
+
+    HideControls();
 }
 
 
 void PanelViewTest::SetTest(Test *_test)
 {
     test = _test;
+
+    if (ostt)
+    {
+        delete ostt;
+    }
+
+    ostt = CreateOStT();
+
+    ShowControls();
 
     Refresh();
 }
@@ -53,13 +66,6 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 
         // Устанавливаем цвет текста
         dc.SetTextForeground(*wxBLACK);
-
-        if (!ostt)
-        {
-            ostt = CreateOStT();
-        }
-
-        CreateControls();
 
         ostt->Draw(dc, GetCenter());
 
@@ -281,18 +287,7 @@ wxPoint PanelViewTest::GetCenter() const
 
 void PanelViewTest::CreateControls()
 {
-    static Test *prev_test = nullptr;
-
-    if (test == prev_test)
-    {
-        return;
-    }
-
     commutator = new Commutator(this, { 10, 40 }, 171);
-
-    prev_test = test;
-
-    wxPoint c = GetCenter();
 
     int width = MeasurerSourcer::WIDTH_CONTROL;
 
@@ -302,9 +297,9 @@ void PanelViewTest::CreateControls()
     name->SetPosition( {_x, _y} );
 
     {
-        StaticBox *box = new StaticBox(this, L("Развёртка"), { width + 20, 100 });
+        boxScan = new StaticBox(this, L("Развёртка"), { width + 20, 100 });
 
-        box->SetPosition({ 200, 40 });
+        boxScan->SetPosition({ 200, 40 });
 
         if (!bcScanMode)
         {
@@ -321,7 +316,7 @@ void PanelViewTest::CreateControls()
             wxArrayString tooltips;
             tooltips.push_back("");
 
-            CREATE_BUTTONS_COMBO(bcScanMode, box, L("Тип"), 1, OnChangedScanMode, 10, SD::Y_SB(20));
+            CREATE_BUTTONS_COMBO(bcScanMode, boxScan, L("Тип"), 1, OnChangedScanMode, 10, SD::Y_SB(20));
         }
 
         if (!bcScanNumberPoints)
@@ -339,16 +334,16 @@ void PanelViewTest::CreateControls()
                 ""
             };
 
-            CREATE_BUTTONS_COMBO(bcScanNumberPoints, box, L("Кол-во точек"), 1, OnChangedScanNumberPoints, 10, SD::Y_SB(20 + 30));
+            CREATE_BUTTONS_COMBO(bcScanNumberPoints, boxScan, L("Кол-во точек"), 1, OnChangedScanNumberPoints, 10, SD::Y_SB(20 + 30));
         }
     }
 
     {
-        StaticBox *box = new StaticBox(this, L("Крышка"), { width + 20, 100 });
+        boxCover = new StaticBox(this, L("Крышка"), { width + 20, 100 });
 
-        box->SetPosition({ 400, 40 });
+        boxCover->SetPosition({ 400, 40 });
 
-        txtCover = new StaticText(box, L(""), { box->GetSize().x - 20, box->GetSize().y - 30 }, wxALIGN_CENTER_VERTICAL | wxALIGN_CENTER_HORIZONTAL);
+        txtCover = new StaticText(boxCover, L(""), { boxCover->GetSize().x - 20, boxCover->GetSize().y - 30 }, wxALIGN_CENTER_VERTICAL | wxALIGN_CENTER_HORIZONTAL);
 
         txtCover->SetPosition({ 10, SD::Y_SB(20) });
 
@@ -391,24 +386,23 @@ void PanelViewTest::CreateControls()
         btnEditExit->Hide();
     }
 
-    {
-        if (!bcTypeSemiconductor)
-        {
-            wxArrayString titles;
-            titles.push_back("npn");
-            titles.push_back("pnp");
-
-            wxArrayString tooltips;
-            tooltips.push_back("");
-
-            int temp_width = width;
-            width = 40;
-            CREATE_BUTTONS_COMBO(bcTypeSemiconductor, this, L(""), 1, OnChangedTypeSemiconductor, c.x - 20, c.y - 10);
-            width = temp_width;
-        }
-    }
-
 #undef CREATE_BUTTONS_COMBO
+}
+
+
+void PanelViewTest::HideControls()
+{
+    commutator->Hide();
+    boxScan->Hide();
+    boxCover->Hide();
+}
+
+
+void PanelViewTest::ShowControls()
+{
+    commutator->Show();
+    boxScan->Show();
+    boxCover->Show();
 }
 
 

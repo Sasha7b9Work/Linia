@@ -9,7 +9,16 @@ FET::FET(Test *test) : OStT3(test)
 }
 
 
-void FET::Draw(wxAutoBufferedPaintDC &, const wxPoint &)
+void FET::Draw(wxAutoBufferedPaintDC &dc, const wxPoint &c)
 {
+    DrawCommon(dc, c, *this);
+}
 
+
+void FET::DrawCommon(wxAutoBufferedPaintDC &dc, const wxPoint &c, OStT &self)
+{
+    int x_col = 0;
+    int y_col = 0;
+
+    self.DrawCircle(dc, c, x_col, y_col);
 }

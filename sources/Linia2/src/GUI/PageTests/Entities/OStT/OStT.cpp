@@ -1,6 +1,7 @@
 // 2026/09/29 11:03:12 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageTests/Entities/OStT/OStT.h"
+#include "Utils/LineDrawer.h"
 
 
 void OStT::DrawGround(int x, int y, wxAutoBufferedPaintDC &dc)
@@ -17,4 +18,9 @@ void OStT::DrawLineWithAngle(const wxPoint &start, double length, double angleDe
     int endY = start.y - (int)(length * sin(angleRad));  // минус, т.к. Y вниз
 
     dc.DrawLine(start.x, start.y, endX, endY);
+}
+
+
+void OStT::DrawCircle(wxAutoBufferedPaintDC &dc, const wxPoint &c, int &x_col, int &y_col)
+{
 }
