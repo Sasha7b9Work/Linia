@@ -68,6 +68,13 @@ public:
 
         wxPopupTransientWindow::SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
 
+        // Чтобы окно закрывалось при потере фокуса
+        Bind(wxEVT_KILL_FOCUS, [this](wxFocusEvent &event)
+            {
+                Dismiss();
+                event.Skip();
+            });
+
         wxPopupTransientWindow::Show();
     }
 private:
