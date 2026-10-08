@@ -40,7 +40,6 @@ private:
     void OnEventMouseDown(wxMouseEvent &);
     void OnEventMouseUp(wxMouseEvent &);
     void OnEventTimer(wxTimerEvent &);
-    void OnEventEnterWindow(wxMouseEvent &);
 };
 
 

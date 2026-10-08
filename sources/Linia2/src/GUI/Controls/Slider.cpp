@@ -47,7 +47,15 @@ SliderInt::SliderInt(wxWindow *parent, int width, int _min, int _max, const wxSt
     btnLess->SetCursor(wxCursor(wxCURSOR_HAND));
     slider->SetCursor(wxCursor(wxCURSOR_HAND));
 
-    slider->Bind(wxEVT_ENTER_WINDOW, &SliderInt::OnEventEnterWindow, this);
+    slider->Bind(wxEVT_ENTER_WINDOW, [this](wxMouseEvent &event)
+        {
+            if (event.GetId() == slider->GetId())
+            {
+                slider->SetCursor(wxCursor(wxCURSOR_HAND));
+            }
+
+            event.Skip();
+        });
 
     // Устанавливать курсор будем так, потому что на Linux обычная установка не работает
     slider->Bind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
@@ -111,17 +119,6 @@ void SliderInt::OnEventSlider(wxCommandEvent &event)
 {
     text->SetLabel(wxString::Format("%d", event.GetInt()));
     GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
-
-    event.Skip();
-}
-
-
-void SliderInt::OnEventEnterWindow(wxMouseEvent &event)
-{
-    if (event.GetId() == slider->GetId())
-    {
-        slider->SetCursor(wxCursor(wxCURSOR_HAND));
-    }
 
     event.Skip();
 }
@@ -208,8 +205,6 @@ void SliderFloat::SetIntValue(int value)
 SliderFloat::SliderFloat(wxWindow *parent, int width, const wxString &name) :
     Panel(parent)
 {
-    SetCursor(wxCursor(wxCURSOR_HAND));
-
     wxSize size{ width, TEXTCNTRL_HEIGHT + 5 + 5 };
 
     Panel::SetMinSize(size);
@@ -245,6 +240,16 @@ SliderFloat::SliderFloat(wxWindow *parent, int width, const wxString &name) :
     btnLess->Bind(wxEVT_LEFT_UP, &SliderFloat::OnEventMouseUp, this);
 
     Bind(wxEVT_TIMER, &SliderFloat::OnEventTimer, this);
+
+    slider->Bind(wxEVT_ENTER_WINDOW, [this](wxMouseEvent &event)
+        {
+            if (event.GetId() == slider->GetId())
+            {
+                slider->SetCursor(wxCursor(wxCURSOR_HAND));
+            }
+
+            event.Skip();
+        });
 }
 
 
