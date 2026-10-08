@@ -48,7 +48,7 @@ public:
         return radius;
     }
 
-    void Show(AutoBufferedPaintDC &dc, const wxPoint &pos)
+    void Draw(AutoBufferedPaintDC &dc, const wxPoint &pos)
     {
         if (btnDisable)
         {

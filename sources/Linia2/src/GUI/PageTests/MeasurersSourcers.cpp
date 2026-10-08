@@ -58,23 +58,23 @@ void MeasurersSourcers::Tune()
 }
 
 
-void MeasurersSourcers::Show(AutoBufferedPaintDC &dc, const Chan &ch, int x)
+void MeasurersSourcers::Draw(AutoBufferedPaintDC &dc, const Chan &ch, int x)
 {
     if (ch.IsBase())
     {
-        measBase->Show(dc, { x, PosY(1) });
-        srcVoltageCurrentBase->Show(dc, { x, PosY(2) });
+        measBase->Draw(dc, { x, PosY(1) });
+        srcVoltageCurrentBase->Draw(dc, { x, PosY(2) });
     }
     else if (ch.IsSubstrate())
     {
-        measSubstrate->Show(dc, { x, PosY(1) });
-        srcVoltageCurrentSubstrate->Show(dc, { x, PosY(2) });
+        measSubstrate->Draw(dc, { x, PosY(1) });
+        srcVoltageCurrentSubstrate->Draw(dc, { x, PosY(2) });
     }
     else if (ch.IsCollector())
     {
-        ampCollector->Show(dc, { x, PosY(0) });
-        voltCollector->Show(dc, { x, PosY(1) });
-        srcVoltageCollector->Show(dc, { x, PosY(2) });
+        ampCollector->Draw(dc, { x, PosY(0) });
+        voltCollector->Draw(dc, { x, PosY(1) });
+        srcVoltageCollector->Draw(dc, { x, PosY(2) });
     }
 }
 
