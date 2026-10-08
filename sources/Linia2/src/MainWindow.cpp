@@ -14,9 +14,11 @@
 #include "GUI/PageTables/PageTables.h"
 #include "GUI/Controls/Notebook.h"
 #include "GUI/Dialogs/Dialog.h"
+#include "GUI/Controls/Windows.h"
 #pragma warning(push, 0)
     #include <wx/sizer.h>
     #include <wx/statline.h>
+    #include <wx/popupwin.h>
 #pragma warning(pop)
 
 MainWindow *MainWindow::self = nullptr;
@@ -73,6 +75,23 @@ MainWindow::MainWindow(const wxString &title)
     }
 
     new AutoCursors();
+
+    Bind(wxEVT_LEFT_DOWN, [](wxMouseEvent &event)
+        {
+            // Проверяем, есть ли активный попап
+            if (PopupTransientWindow *popup =  PopupTransientWindow::GetActivePoup())
+            {
+                // Проверяем, клик вне попапа?
+                wxPoint mousePos = wxGetMousePosition();
+                wxRect popupRect(popup->GetScreenPosition(), popup->GetSize());
+
+                if (!popupRect.Contains(mousePos))
+                {
+                    popup->Dismiss();
+                }
+            }
+            event.Skip();
+        });
 
     SetMode(ModeMainWindow::Standard);
 }

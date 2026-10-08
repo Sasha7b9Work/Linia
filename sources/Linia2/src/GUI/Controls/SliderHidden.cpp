@@ -3,17 +3,15 @@
 #include "GUI/Controls/SliderHidden.h"
 #include "GUI/Controls/Slider.h"
 #include "GUI/Controls/Sizers.h"
-#pragma warning(push, 0)
-    #include <wx/popupwin.h>
-#pragma warning(pop)
+#include "GUI/Controls/Windows.h"
 
 
-class WindowSlider : public wxPopupTransientWindow
+class WindowSlider : public PopupTransientWindow
 {
 public:
-    WindowSlider(SliderHidden *parent) : wxPopupTransientWindow(parent)
+    WindowSlider(SliderHidden *parent) : PopupTransientWindow(parent)
     {
-        wxPopupTransientWindow::Hide();
+        PopupTransientWindow::Hide();
 
         wxPanel *mainPanel = new wxPanel(this);
 
@@ -39,9 +37,9 @@ public:
         outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 3);
         SetSizer(outerSizer);
 
-        wxPopupTransientWindow::Layout();
+        PopupTransientWindow::Layout();
 
-        wxPopupTransientWindow::Fit();
+        PopupTransientWindow::Fit();
 
         GetParent()->Bind(wxEVT_KEY_DOWN, [this](wxKeyEvent &event)
             {
@@ -53,10 +51,10 @@ public:
                 event.Skip();
             });
 
-        wxPopupTransientWindow::Refresh();
-        wxPopupTransientWindow::Update();
+        PopupTransientWindow::Refresh();
+        PopupTransientWindow::Update();
 
-        wxPopupTransientWindow::SetBackgroundColour(GetBackgroundColour().ChangeLightness(50));
+        PopupTransientWindow::SetBackgroundColour(GetBackgroundColour().ChangeLightness(50));
 
         // Отключаем изменение фона для всех детей
         for (auto child : GetChildren())
@@ -66,16 +64,27 @@ public:
             child->Refresh(); // Обновляем внешний вид
         }
 
-        wxPopupTransientWindow::SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
+        PopupTransientWindow::SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
 
-        // Чтобы окно закрывалось при потере фокуса
-        Bind(wxEVT_KILL_FOCUS, [this](wxFocusEvent &event)
+        // Чтобы окно закрывалось деактивации окна
+        Bind(wxEVT_ACTIVATE, [this](wxActivateEvent &event)
             {
-                Dismiss();
+                if (!event.GetActive())
+                {
+                    // Проверяем, не внутри ли попапа новый фокус
+                    wxWindow *focused = wxWindow::FindFocus();
+                    if (focused && IsDescendant(focused))
+                    {
+                        event.Skip();
+                        return;
+                    }
+
+                    Dismiss();
+                }
                 event.Skip();
             });
 
-        wxPopupTransientWindow::Show();
+        PopupTransientWindow::Show();
     }
 private:
 };

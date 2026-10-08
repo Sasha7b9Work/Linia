@@ -5,10 +5,7 @@
 #include "Utils/GlobalFunctions.h"
 #include "GUI/Controls/StaticBox.h"
 #include "GUI/Controls/Sizers.h"
-#pragma warning(push, 0)
-    #include <wx/popupwin.h>
-    #include <wx/settings.h>
-#pragma warning(pop)
+#include "GUI/Controls/Windows.h"
 
 
 DrawingButton::DrawingButton(wxWindow *parent, const wxString &label, const wxSize &size, const wxString &name) :
@@ -32,12 +29,12 @@ void DrawingButton::SetExtendedLabel(const wxString &start, int num_spaces, cons
 }
 
 
-class ButtonPopup : public wxPopupTransientWindow
+class ButtonPopup : public PopupTransientWindow
 {
 public:
-    ButtonPopup(wxWindow *parent) : wxPopupTransientWindow(parent)
+    ButtonPopup(wxWindow *parent) : PopupTransientWindow(parent)
     {
-        wxPopupTransientWindow::Hide();
+        PopupTransientWindow::Hide();
 
         wxArrayString &labels = GetCombo()->labels;
 
@@ -112,9 +109,9 @@ public:
         outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 3);
         SetSizer(outerSizer);
 
-        wxPopupTransientWindow::Layout();
+        PopupTransientWindow::Layout();
 
-        wxPopupTransientWindow::Fit(); // Автоподбор размера
+        PopupTransientWindow::Fit(); // Автоподбор размера
 
         GetParent()->Bind(wxEVT_KEY_DOWN, [this](wxKeyEvent &event)
             {
@@ -126,10 +123,10 @@ public:
                 event.Skip();
             });
 
-        wxPopupTransientWindow::Refresh();
-        wxPopupTransientWindow::Update();
+        PopupTransientWindow::Refresh();
+        PopupTransientWindow::Update();
 
-        wxPopupTransientWindow::SetBackgroundColour(GetBackgroundColour().ChangeLightness(50));
+        PopupTransientWindow::SetBackgroundColour(GetBackgroundColour().ChangeLightness(50));
 
         // Отключаем изменение фона для всех детей
         for (auto child : GetChildren())
@@ -139,9 +136,9 @@ public:
             child->Refresh(); // Обновляем внешний вид
         }
 
-        wxPopupTransientWindow::SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
+        PopupTransientWindow::SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
 
-        wxPopupTransientWindow::Show();
+        PopupTransientWindow::Show();
     }
 
 private:

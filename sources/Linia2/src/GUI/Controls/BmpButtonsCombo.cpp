@@ -5,19 +5,16 @@
 #include "GUI/Controls/StaticBox.h"
 #include "GUI/Controls/Sizers.h"
 #include "Settings/Settings.h"
-#pragma warning(push, 0)
-#include <wx/settings.h>
-#include <wx/popupwin.h>
-#pragma warning(pop)
+#include "GUI/Controls/Windows.h"
 
 
-class BmpButtonPopup : public wxPopupTransientWindow
+class BmpButtonPopup : public PopupTransientWindow
 {
 public:
     BmpButtonPopup(wxWindow *parent, const wxString &title, const wxArrayString &files, const wxArrayString &tooltips, int buttons_in_row) :
-        wxPopupTransientWindow(parent)
+        PopupTransientWindow(parent)
     {
-        wxPopupTransientWindow::Hide();
+        PopupTransientWindow::Hide();
 
         // Основной контейнер с отступами по краям
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
@@ -74,7 +71,7 @@ public:
         outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 3);
         SetSizer(outerSizer);
 
-        wxPopupTransientWindow::Fit();
+        PopupTransientWindow::Fit();
 
         GetParent()->Bind(wxEVT_KEY_DOWN, [this](wxKeyEvent &event)
             {
@@ -86,7 +83,7 @@ public:
                 event.Skip();
             });
 
-        wxPopupTransientWindow::SetBackgroundColour(GetBackgroundColour().ChangeLightness(70));
+        PopupTransientWindow::SetBackgroundColour(GetBackgroundColour().ChangeLightness(70));
 
         // Отключаем изменение фона для всех детей
         for (auto child : GetChildren())
@@ -96,9 +93,9 @@ public:
             child->Refresh(); // Обновляем внешний вид
         }
 
-        wxPopupTransientWindow::SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
+        PopupTransientWindow::SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
 
-        wxPopupTransientWindow::Show();
+        PopupTransientWindow::Show();
 
         SetupDragging(mainPanel);
         SetupDragging(this);

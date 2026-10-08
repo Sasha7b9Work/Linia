@@ -415,6 +415,9 @@ void SliderFloat::OnEventMouseUp(wxMouseEvent &event)
     timer_more.Stop();
     timer_less.Stop();
 
+    wxWindow *top = GetParent();
+    if (top) top->SetFocus();
+
     event.Skip();
 }
 
