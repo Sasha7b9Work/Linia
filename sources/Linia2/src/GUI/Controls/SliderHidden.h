@@ -19,8 +19,6 @@ public:
 
 private:
 
-    WindowSlider *wndSlider = nullptr;      // Окошко, которое будет открываться по нажатию кнопки
-
     double min = 0.0;
     double max = 0.0;
 };

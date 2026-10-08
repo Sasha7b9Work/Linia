@@ -210,7 +210,11 @@ SliderFloat::SliderFloat(wxWindow *parent, int width, const wxString &name) :
 {
     SetCursor(wxCursor(wxCURSOR_HAND));
 
-    Panel::SetSize({ width, TEXTCNTRL_HEIGHT + 5 + 5 });
+    wxSize size{ width, TEXTCNTRL_HEIGHT + 5 + 5 };
+
+    Panel::SetMinSize(size);
+    Panel::SetMaxSize(size);
+
     Panel::SetName(parent->GetName() + "_" + name);
 
     int w1 = 50;
