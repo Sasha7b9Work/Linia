@@ -83,15 +83,19 @@ private:
 
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
 
-    // Общие для всех типов элементов органы управления
+    // Общие для всех типов элементов органы управления (тип развёртки, например)
     void CreateCommonControls();
     void ShowCommonControls();
     void HideCommonControls();
 
-    // Специфичные органы управления для разных типов элементов
+    // Специфичные органы управления для разных типов элементов (тип проводимости для биполярного транзистора, например)
     void CreateSpecificControls();
     void HideSpecificControls();
     void TuneSpecificControls();
+
+    // Источники и измерители
+    void CreateMeasurersSourcers();
+    void HideMeasurersSourcers();
 
     void CreateButton(Button **, wxWindow *parent, const wxString &, const wxPoint &, const wxSize &, std::function<void(wxCommandEvent &)> onClick);
 
@@ -104,12 +108,6 @@ private:
 
     // Нарисовать значок земли
     void DrawGround(AutoBufferedPaintDC &);
-
-    // Создать источники и измерители
-    void CreateMeasurersSourcers();
-
-    // Спрятать источники и измерители
-    void HideMeasurersSourcers();
 
     // Возвращает позицию по Y источника либо измерителя
     int PosMeasurerSourcerY(int);

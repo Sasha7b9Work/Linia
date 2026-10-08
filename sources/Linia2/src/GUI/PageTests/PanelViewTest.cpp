@@ -245,6 +245,21 @@ void PanelViewTest::CreateMeasurersSourcers()
     srcVoltageCollector = new SourceVoltage(Chan::_C, Dir::Down);
 }
 
+
+void PanelViewTest::HideMeasurersSourcers()
+{
+    measBase->Hide();
+    srcVoltageCurrentBase->Hide();
+
+    measSubstrate->Hide();
+    srcVoltateCurrentSubstrate->Hide();
+
+    ampCollector->Hide();
+    voltCollector->Hide();
+    srcVoltageCollector->Hide();
+}
+
+
 wxPoint PanelViewTest::GetCenter() const
 {
     return { 230, 300 };
@@ -356,6 +371,22 @@ void PanelViewTest::CreateCommonControls()
 }
 
 
+void PanelViewTest::ShowCommonControls()
+{
+    commutator->Show();
+    boxScan->Show();
+    boxCover->Show();
+}
+
+
+void PanelViewTest::HideCommonControls()
+{
+    commutator->Hide();
+    boxScan->Hide();
+    boxCover->Hide();
+}
+
+
 wxPoint PanelViewTest::CoordinateSpecificControl() const
 {
     return { CoordinateCollector().x - 280, CoordinateCollector().y + 20 };
@@ -438,6 +469,15 @@ void PanelViewTest::CreateSpecificControls()
 }
 
 
+void PanelViewTest::HideSpecificControls()
+{
+    bcTypeBJT->Hide();
+    bcTypeFET->Hide();
+    bcCommonElectrodeDIOD->Hide();
+    bcControlElectrodeTHYR->Hide();
+}
+
+
 void PanelViewTest::TuneSpecificControls()
 {
     if (Test::current->IsBJT() ||
@@ -461,31 +501,6 @@ void PanelViewTest::TuneSpecificControls()
     {
         bcControlElectrodeTHYR->Show();
     }
-}
-
-
-void PanelViewTest::HideSpecificControls()
-{
-    bcTypeBJT->Hide();
-    bcTypeFET->Hide();
-    bcCommonElectrodeDIOD->Hide();
-    bcControlElectrodeTHYR->Hide();
-}
-
-
-void PanelViewTest::HideCommonControls()
-{
-    commutator->Hide();
-    boxScan->Hide();
-    boxCover->Hide();
-}
-
-
-void PanelViewTest::ShowCommonControls()
-{
-    commutator->Show();
-    boxScan->Show();
-    boxCover->Show();
 }
 
 
@@ -656,20 +671,6 @@ void PanelViewTest::DrawGround(AutoBufferedPaintDC &dc)
     const wxPoint p{ dc.GetCoord() };
 
     dc.DrawLine(p.x - 10, p.y, p.x + 10, p.y);
-}
-
-
-void PanelViewTest::HideMeasurersSourcers()
-{
-    measBase->Hide();
-    srcVoltageCurrentBase->Hide();
-
-    measSubstrate->Hide();
-    srcVoltateCurrentSubstrate->Hide();
-
-    ampCollector->Hide();
-    voltCollector->Hide();
-    srcVoltageCollector->Hide();
 }
 
 
