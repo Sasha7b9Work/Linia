@@ -37,7 +37,6 @@ if(WIN32)
         /wd5045    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
         /wd5039    # pointer or reference to potentially throwing function passed to extern C function under -EHc. Undefined behavor may occur if this function throws an exception
         /wd5204    # 'xxx': class has virtual functions, but its trivial destructor is not virtual
-#        /wd5233    # xplicit lambda capture 'this' is not used
     )
 
 else()
@@ -274,5 +273,3 @@ else()
     target_compile_options(${PROJECT_NAME} PRIVATE ${GTK3_CFLAGS_OTHER})
 
 endif()
-
-

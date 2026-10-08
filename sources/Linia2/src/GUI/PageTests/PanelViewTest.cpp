@@ -29,7 +29,7 @@ PanelViewTest::PanelViewTest(wxWindow *parent) : Panel(parent, wxSIMPLE_BORDER)
 
     com_controls.Create(this);
 
-    CreateSpecificControls();
+    spec_controls.Create(this);
 
     com_controls.Hide();
 
@@ -47,14 +47,14 @@ void PanelViewTest::SetTest(Test *_test)
 
         meas_src.HideAll();
 
-        HideSpecificControls();
+        spec_controls.Hide();
     }
 
     OStT::current = CreateOStT();
 
     com_controls.Show();
 
-    TuneSpecificControls();
+    spec_controls.Tune();
 
     meas_src.Tune();
 
@@ -229,207 +229,6 @@ OStT *PanelViewTest::CreateOStT()
 wxPoint PanelViewTest::GetCenter() const
 {
     return { 230, 300 };
-}
-
-
-wxPoint PanelViewTest::CoordinateSpecificControl() const
-{
-    return { CoordinateCollector().x - 280, CoordinateCollector().y + 20 };
-}
-
-
-void PanelViewTest::CreateSpecificControls()
-{
-    {
-        wxArrayString labels
-        {
-            "npn",
-            "pnp"
-        };
-
-        wxArrayString tooltips{ L("Проводимость транзистора") };
-
-        bcTypeBJT = new ButtonsCombo(this, L("Тип"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Проводимость транзистора"));
-        bcTypeBJT->SetPosition(CoordinateSpecificControl());
-        bcTypeBJT->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
-            {
-                OStT::current->ToBJT()->SetType((TypeBJT::E)event.GetInt());
-            });
-        bcTypeBJT->Hide();
-    }
-
-    {
-        wxArrayString labels
-        {
-            "p",
-            "n"
-        };
-
-        wxArrayString tooltips{ L("Проводимость канала") };
-
-        bcTypeFET = new ButtonsCombo(this, L("Канал"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Проводимость канала"));
-        bcTypeFET->SetPosition(CoordinateSpecificControl());
-        bcTypeFET->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
-            {
-                OStT::current->ToFET()->SetType((TypeFET::E)event.GetInt());
-            });
-    }
-
-    {
-        wxArrayString labels
-        {
-            L("Анод"),
-            L("Катод")
-        };
-
-        wxArrayString tooltips{ L("Общий электрод") };
-
-        bcCommonElectrodeDIOD = new ButtonsCombo(this, L("Общий электрод"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Общий электрод"));
-        bcCommonElectrodeDIOD->SetPosition(CoordinateSpecificControl());
-        bcCommonElectrodeDIOD->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
-            {
-                OStT::current->ToDIOD()->SetCommonElectrode((CommonElectrode::E)event.GetInt());
-            });
-    }
-
-    {
-        wxArrayString labels
-        {
-            L("Анод"),
-            L("Катод")
-        };
-
-        wxArrayString tooltips{ L("Управляющий электрод") };
-
-        bcControlElectrodeTHYR = new ButtonsCombo(this, L("Управление"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Управляющий электрод"));
-        wxPoint coord = CoordinateSpecificControl();
-        bcControlElectrodeTHYR->SetPosition({ coord.x, coord.y + 30 });
-        bcControlElectrodeTHYR->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
-            {
-                OStT::current->ToTHYR()->SetControlElectrode((ControlElectrode::E)event.GetInt());
-            });
-    }
-
-    HideSpecificControls();
-}
-
-
-void PanelViewTest::HideSpecificControls()
-{
-    bcTypeBJT->Hide();
-    bcTypeFET->Hide();
-    bcCommonElectrodeDIOD->Hide();
-    bcControlElectrodeTHYR->Hide();
-}
-
-
-void PanelViewTest::TuneSpecificControls()
-{
-    if (Test::current->IsBJT() ||
-        Test::current->IsBJTS() ||
-        Test::current->IsDARL())
-    {
-        bcTypeBJT->Show();
-    }
-    else if (Test::current->IsFET() ||
-        Test::current->IsFETS())
-    {
-        bcTypeFET->Show();
-    }
-    else if (Test::current->IsDIOD() ||
-        Test::current->IsTHYR())
-    {
-        bcCommonElectrodeDIOD->Show();
-    }
-    
-    if (Test::current->IsTHYR())
-    {
-        bcControlElectrodeTHYR->Show();
-    }
-}
-
-
-void PanelViewTest::OnChangedTypeSemiconductor(wxCommandEvent &)
-{
-
-}
-
-
-void PanelViewTest::OnChangedBaseModeControl(wxCommandEvent &)
-{
-
-}
-
-
-void PanelViewTest::OnChangedBaseStartValueI(wxCommandEvent &)
-{
-
-}
-
-
-void PanelViewTest::OnChangedBaseDeltaValueI(wxCommandEvent &)
-{
-
-}
-
-
-void PanelViewTest::OnChangedBaseNumMeasures(wxCommandEvent &)
-{
-
-}
-
-
-void PanelViewTest::OnChangedBaseMeasureRangeU(wxCommandEvent &)
-{
-
-}
-
-
-void PanelViewTest::OnChangedBaseMeasureLimitU(wxCommandEvent &)
-{
-
-}
-
-
-void PanelViewTest::OnChangedCollectorModeSource(wxCommandEvent &)
-{
-
-}
-
-
-void PanelViewTest::OnChangedCollectorValueStart(wxCommandEvent &)
-{
-
-}
-
-
-void PanelViewTest::OnChangedCollectorValueFinish(wxCommandEvent &)
-{
-
-}
-
-
-void PanelViewTest::OnChangedCollectorMeasureRangeI(wxCommandEvent &)
-{
-
-}
-
-
-void PanelViewTest::OnChangedCollectorMeasureLimitI(wxCommandEvent &)
-{
-
-}
-
-
-void PanelViewTest::OnChangedCollectorMeasureRangeU(wxCommandEvent &)
-{
-
-}
-
-
-void PanelViewTest::OnChangedCollectorMeasureLimitU(wxCommandEvent &)
-{
-
 }
 
 

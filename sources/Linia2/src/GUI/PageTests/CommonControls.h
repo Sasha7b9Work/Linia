@@ -4,9 +4,6 @@
 #include "GUI/Controls/ButtonCombo.h"
 
 
-class wxWindow;
-
-
 // Общие для всех типов элементов органы управления (тип развёртки, например)
 struct CommonControls
 {

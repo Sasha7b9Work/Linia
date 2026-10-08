@@ -5,13 +5,14 @@
 #include "GUI/Controls/ButtonCombo.h"
 #include "GUI/PageTests/Entities/OStT/OStT.h"
 #include "GUI/PageTests/MeasurersSourcers.h"
-#include "GUI/Controls/StaticText.h"
-#include "GUI/Controls/StaticBox.h"
 #include "GUI/PageTests/CommonControls.h"
+#include "GUI/PageTests/SpecificControls.h"
 
 
 class PanelViewTest : public Panel
 {
+    friend class SpecificControls;
+
 public:
 
     PanelViewTest(wxWindow *);
@@ -28,40 +29,16 @@ private:
 
     ComboInput *bcBaseNumMeasures = nullptr;            // Количество измерений
 
-    ButtonsCombo *bcTypeBJT = nullptr;                  // Тип биполярного транзистора
-    ButtonsCombo *bcTypeFET = nullptr;                  // Тип полевого транзистора
-    ButtonsCombo *bcCommonElectrodeDIOD = nullptr;      // Для диода - общий электрод
-    ButtonsCombo *bcControlElectrodeTHYR = nullptr;     // Дли тиристора - управляющий электрод
-
     MeasurersSourcers meas_src;
     CommonControls com_controls;
+    SpecificControls spec_controls;
 
     void OnEventPaint(wxPaintEvent &);
-
-    void OnChangedTypeSemiconductor(wxCommandEvent &);
-    void OnChangedBaseModeControl(wxCommandEvent &);
-    void OnChangedBaseStartValueI(wxCommandEvent &);
-    void OnChangedBaseDeltaValueI(wxCommandEvent &);
-    void OnChangedBaseNumMeasures(wxCommandEvent &);
-    void OnChangedBaseMeasureRangeU(wxCommandEvent &);
-    void OnChangedBaseMeasureLimitU(wxCommandEvent &);
-    void OnChangedCollectorModeSource(wxCommandEvent &);
-    void OnChangedCollectorValueStart(wxCommandEvent &);
-    void OnChangedCollectorValueFinish(wxCommandEvent &);
-    void OnChangedCollectorMeasureRangeI(wxCommandEvent &);
-    void OnChangedCollectorMeasureLimitI(wxCommandEvent &);
-    void OnChangedCollectorMeasureRangeU(wxCommandEvent &);
-    void OnChangedCollectorMeasureLimitU(wxCommandEvent &);
 
     // Нарисовать испытуемый элемент
     OStT *CreateOStT();
 
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
-
-    // Специфичные органы управления для разных типов элементов (тип проводимости для биполярного транзистора, например)
-    void CreateSpecificControls();
-    void HideSpecificControls();
-    void TuneSpecificControls();
 
     wxPoint GetCenter() const;
 
@@ -72,6 +49,4 @@ private:
 
     // Возвращает координаты точки, из которой выходит вертикальная линия коллектора
     wxPoint CoordinateCollector() const;
-
-    wxPoint CoordinateSpecificControl() const;
 };
