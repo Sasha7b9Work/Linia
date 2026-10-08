@@ -1,4 +1,4 @@
-// 2026/10/08 11:47:33 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
+﻿// 2026/10/08 11:47:33 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageTests/MeasurersSourcers.h"
 #include "GUI/PageTests/Entities/OStT/OStT.h"

@@ -129,7 +129,19 @@ void MeasurerSourcer::CreateControls(const wxRect &rect)
 
 void MeasurerSourcer::ShowNeedParameters()
 {
-    if (btnModeUI)
+    if (chan.IsCollector())
+    {
+        for (auto wnd : parametersI)
+        {
+            wnd->Show();
+        }
+
+        for (auto wnd : parametersU)
+        {
+            wnd->Show();
+        }
+    }
+    else if (btnModeUI)
     {
         if (IsSetModeU())
         {

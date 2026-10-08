@@ -1,4 +1,4 @@
-// 2026/10/08 13:09:54 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
+﻿// 2026/10/08 13:09:54 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageTests/SpecificControls.h"
 #include "GUI/PageTests/Entities/MeasurerSourcer.h"

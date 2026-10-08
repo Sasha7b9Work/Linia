@@ -1,4 +1,4 @@
-// 2026/10/08 11:47:22 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
+﻿// 2026/10/08 11:47:22 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "Utils/AutoBufferedPaintDC.h"
 #include "Settings/Tests/SettingsTests.h"

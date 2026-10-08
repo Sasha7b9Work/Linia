@@ -1,4 +1,4 @@
-// 2026/10/08 12:25:06 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
+﻿// 2026/10/08 12:25:06 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/PageTests/Entities/Commutator.h"
 #include "GUI/Controls/ButtonCombo.h"
