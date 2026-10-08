@@ -51,8 +51,6 @@ public:
     static const int HEIGHT_HI = 75;
     static const int HEIGHT_DRAW = HEIGHT - HEIGHT_HI;
 
-    void OnAbout(wxCommandEvent &);
-
     void OnEventCloseWindow(wxCloseEvent &);
 
     void SetMode(ModeMainWindow::E);

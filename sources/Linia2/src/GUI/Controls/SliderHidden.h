@@ -6,6 +6,9 @@
 // Представляет собой слайдер, спрятанный под кнопкой
 
 
+class WindowSlider;
+
+
 class SliderHidden : public DrawingButton
 {
 public:
@@ -15,6 +18,8 @@ public:
     void SetRange(double, double);
 
 private:
+
+    WindowSlider *wndSlider = nullptr;      // Окошко, которое будет открываться по нажатию кнопки
 
     double min = 0.0;
     double max = 0.0;

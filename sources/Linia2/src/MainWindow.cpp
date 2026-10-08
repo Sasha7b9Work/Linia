@@ -34,7 +34,6 @@ MainWindow::MainWindow(const wxString &title)
     SetIcon(wxICON(MAIN_ICON));
 #endif
 
-    Bind(wxEVT_MENU, &MainWindow::OnAbout, this, wxID_ABOUT);
     Bind(wxEVT_MAXIMIZE, &MainWindow::OnEventMaximize, this);
     Bind(wxEVT_CLOSE_WINDOW, &MainWindow::OnEventCloseWindow, this);
 
@@ -195,29 +194,6 @@ void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
     MainWindow::self = nullptr;
 
     event.Skip();
-}
-
-
-void MainWindow::OnAbout(wxCommandEvent &WXUNUSED(event))
-{
-    wxBoxSizer *topsizer;
-    Dialog dlg(wxString(L("About")));
-
-    topsizer = new wxBoxSizer(wxVERTICAL);
-
-#if wxUSE_STATLINE
-    topsizer->Add(new wxStaticLine(&dlg, wxID_ANY), 0, wxEXPAND | wxLEFT | wxRIGHT, 10);
-#endif // wxUSE_STATLINE
-
-    Button *bu1 = new Button(&dlg, L("OK"));
-    bu1->SetDefault();
-
-    topsizer->Add(bu1, 0, wxALL | wxALIGN_RIGHT, 15);
-
-    dlg.SetSizer(topsizer);
-    topsizer->Fit(&dlg);
-
-    dlg.ShowModal();
 }
 
 
