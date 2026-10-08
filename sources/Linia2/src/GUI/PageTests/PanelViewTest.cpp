@@ -45,7 +45,7 @@ void PanelViewTest::SetTest(Test *_test)
     {
         delete OStT::current;
 
-        meas_src.Hide();
+        meas_src.HideAll();
 
         HideSpecificControls();
     }

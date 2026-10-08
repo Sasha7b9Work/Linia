@@ -1,6 +1,7 @@
 // 2026/10/08 11:47:33 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageTests/MeasurersSourcers.h"
+#include "GUI/PageTests/Entities/OStT/OStT.h"
 
 
 void MeasurersSourcers::Create()
@@ -21,7 +22,7 @@ void MeasurersSourcers::Create()
 }
 
 
-void MeasurersSourcers::Hide()
+void MeasurersSourcers::HideAll()
 {
     measBase->Hide();
     srcVoltageCurrentBase->Hide();
@@ -37,11 +38,19 @@ void MeasurersSourcers::Hide()
 
 void MeasurersSourcers::Tune()
 {
-    measBase->ShowNeedParameters();
-    srcVoltageCurrentBase->ShowNeedParameters();
+    wxPoint point;
 
-    measSubstrate->ShowNeedParameters();
-    srcVoltageCurrentSubstrate->ShowNeedParameters();
+    if (OStT::current->GetPoint_B(point))
+    {
+        measBase->ShowNeedParameters();
+        srcVoltageCurrentBase->ShowNeedParameters();
+    }
+
+    if (OStT::current->GetPoint_S(point))
+    {
+        measSubstrate->ShowNeedParameters();
+        srcVoltageCurrentSubstrate->ShowNeedParameters();
+    }
 
     ampCollector->ShowNeedParameters();
     voltCollector->ShowNeedParameters();

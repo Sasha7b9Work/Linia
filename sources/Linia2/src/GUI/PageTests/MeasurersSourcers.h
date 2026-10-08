@@ -10,7 +10,7 @@ struct MeasurersSourcers
 {
     void Show(AutoBufferedPaintDC &, const Chan &, int x);
     void Create();
-    void Hide();
+    void HideAll();
     void Tune();
 
 private:
