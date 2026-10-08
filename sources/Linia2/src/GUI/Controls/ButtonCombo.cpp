@@ -108,7 +108,7 @@ public:
         mainPanel->SetSizer(boxSizer);
 
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
-        // Внешние отступы 15px
+        // Внешние отступы
         outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 3);
         SetSizer(outerSizer);
 

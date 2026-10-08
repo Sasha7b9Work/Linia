@@ -6,11 +6,10 @@
 // Представляет собой слайдер, спрятанный под кнопкой
 
 
-class WindowSlider;
-
-
 class SliderHidden : public DrawingButton
 {
+    friend class WindowSlider;
+
 public:
 
     SliderHidden(wxWindow *, int width, const wxString &title, const wxString &name_file);

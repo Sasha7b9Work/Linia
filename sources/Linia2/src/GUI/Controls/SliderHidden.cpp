@@ -23,14 +23,19 @@ public:
         StaticBoxSizer *boxSizer = new StaticBoxSizer(wxVERTICAL, mainPanel, L("Смещение"));
         boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 0);
 
-        SliderInt *slider = new SliderInt(mainPanel, 200, 0, 100, L("Смещение"));
+        {
+            SliderFloat *slider = new SliderFloat(mainPanel, 200, L("Смещение"));
+            slider->SetRange(parent->min, parent->max, "A", 1);
+            slider->SetBackgroundColour(slider->GetBackgroundColour().ChangeLightness(LIGHTNESS));
+            slider->SetBackgroundColour(slider->GetBackgroundColour().ChangeLightness(170));
 
-        gridSizer->Add(slider, 0, wxEXPAND | wxALL, 2);
+            gridSizer->Add(slider, 0, wxEXPAND | wxALL, 2);
+        }
 
         mainPanel->SetSizer(boxSizer);
 
         wxBoxSizer *outerSizer = new wxBoxSizer(wxVERTICAL);
-        // Внешние отступы 15px
+        // Внешние отступы
         outerSizer->Add(mainPanel, 1, wxEXPAND | wxALL, 3);
         SetSizer(outerSizer);
 
@@ -38,10 +43,28 @@ public:
 
         wxPopupTransientWindow::Fit();
 
+        GetParent()->Bind(wxEVT_KEY_DOWN, [this](wxKeyEvent &event)
+            {
+                if (event.GetKeyCode() != WXK_SPACE)
+                {
+                    Dismiss();
+                }
+
+                event.Skip();
+            });
+
         wxPopupTransientWindow::Refresh();
         wxPopupTransientWindow::Update();
 
         wxPopupTransientWindow::SetBackgroundColour(GetBackgroundColour().ChangeLightness(50));
+
+        // Отключаем изменение фона для всех детей
+        for (auto child : GetChildren())
+        {
+            child->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
+            child->SetBackgroundStyle(wxBG_STYLE_ERASE);
+            child->Refresh(); // Обновляем внешний вид
+        }
 
         wxPopupTransientWindow::SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
 
