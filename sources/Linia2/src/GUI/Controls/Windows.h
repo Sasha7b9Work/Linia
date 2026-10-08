@@ -4,6 +4,7 @@
     #include <wx/popupwin.h>
 #pragma warning(pop)
 
+
 class PopupTransientWindow : public wxPopupTransientWindow
 {
 public:
@@ -24,7 +25,18 @@ protected:
     virtual void OnDismiss() override
     {
         active_popup = nullptr;
+
+        if (HasCapture())
+        {
+            ReleaseMouse();
+        }
+
         wxPopupTransientWindow::OnDismiss();
+
+        CallAfter([this]()
+            {
+                Destroy();
+            });
     }
 
     static PopupTransientWindow *active_popup;

@@ -234,10 +234,10 @@ SliderFloat::SliderFloat(wxWindow *parent, int width, const wxString &name) :
     btnLess->SetBackgroundColour(btnLess->GetBackgroundColour().ChangeLightness(LIGHTNESS));
 
     Bind(wxEVT_SLIDER, &SliderFloat::OnEventSlider, this);
-    btnMore->Bind(wxEVT_LEFT_DOWN, &SliderFloat::OnEventMouseDown, this);
-    btnLess->Bind(wxEVT_LEFT_DOWN, &SliderFloat::OnEventMouseDown, this);
-    btnMore->Bind(wxEVT_LEFT_UP, &SliderFloat::OnEventMouseUp, this);
-    btnLess->Bind(wxEVT_LEFT_UP, &SliderFloat::OnEventMouseUp, this);
+//    btnMore->Bind(wxEVT_LEFT_DOWN, &SliderFloat::OnEventMouseDown, this);
+//    btnLess->Bind(wxEVT_LEFT_DOWN, &SliderFloat::OnEventMouseDown, this);
+//    btnMore->Bind(wxEVT_LEFT_UP, &SliderFloat::OnEventMouseUp, this);
+//    btnLess->Bind(wxEVT_LEFT_UP, &SliderFloat::OnEventMouseUp, this);
 
     Bind(wxEVT_TIMER, &SliderFloat::OnEventTimer, this);
 
@@ -393,18 +393,18 @@ void SliderFloat::OnEventSlider(wxCommandEvent &event)
 
 void SliderFloat::OnEventMouseDown(wxMouseEvent &event)
 {
-    if (event.GetId() == btnMore->GetId())
-    {
-        slider->SetValue(slider->GetValue() + 1);
-        timer_more.Start(400);
-    }
-    else if (event.GetId() == btnLess->GetId())
-    {
-        slider->SetValue(slider->GetValue() - 1);
-        timer_less.Start(400);
-    }
-
-    GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
+//    if (event.GetId() == btnMore->GetId())
+//    {
+//        slider->SetValue(slider->GetValue() + 1);
+//        timer_more.Start(400);
+//    }
+//    else if (event.GetId() == btnLess->GetId())
+//    {
+//        slider->SetValue(slider->GetValue() - 1);
+//        timer_less.Start(400);
+//    }
+//
+//    GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
 
     event.Skip();
 }
@@ -412,11 +412,17 @@ void SliderFloat::OnEventMouseDown(wxMouseEvent &event)
 
 void SliderFloat::OnEventMouseUp(wxMouseEvent &event)
 {
-    timer_more.Stop();
-    timer_less.Stop();
-
-    wxWindow *top = GetParent();
-    if (top) top->SetFocus();
+//    timer_more.Stop();
+//    timer_less.Stop();
+//
+//    // ← Освобождаем мышь, если она была захвачена
+//    if (HasCapture())
+//    {
+//        ReleaseMouse();
+//    }
+//
+//    wxWindow *top = GetParent();
+//    if (top) top->SetFocus();
 
     event.Skip();
 }

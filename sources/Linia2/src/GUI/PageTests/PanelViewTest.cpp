@@ -14,6 +14,7 @@
 #include "GUI/PageTests/Entities/OStT/DIOD.h"
 #include "GUI/PageTests/Entities/OStT/RES.h"
 #include "GUI/PageTests/Entities/OStT/CAP.h"
+#include "GUI/Controls/Windows.h"
 
 
 PanelViewTest *PanelViewTest::self = nullptr;
@@ -34,6 +35,23 @@ PanelViewTest::PanelViewTest(wxWindow *parent) : Panel(parent, wxSIMPLE_BORDER)
     com_controls.Hide();
 
     meas_src.Create();
+
+    Bind(wxEVT_LEFT_DOWN, [](wxMouseEvent &event)
+        {
+            // Проверяем, есть ли активный попап
+            if (PopupTransientWindow *popup = PopupTransientWindow::GetActivePoup())
+            {
+                // Проверяем, клик вне попапа?
+                wxPoint mousePos = wxGetMousePosition();
+                wxRect popupRect(popup->GetScreenPosition(), popup->GetSize());
+
+                if (!popupRect.Contains(mousePos))
+                {
+                    popup->Dismiss();
+                }
+            }
+            event.Skip();
+        });
 }
 
 

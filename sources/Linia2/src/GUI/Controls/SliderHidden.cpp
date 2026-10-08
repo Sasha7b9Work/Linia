@@ -66,23 +66,23 @@ public:
 
         PopupTransientWindow::SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY | wxWS_EX_PROCESS_UI_UPDATES);
 
-        // Чтобы окно закрывалось деактивации окна
-        Bind(wxEVT_ACTIVATE, [this](wxActivateEvent &event)
-            {
-                if (!event.GetActive())
-                {
-                    // Проверяем, не внутри ли попапа новый фокус
-                    wxWindow *focused = wxWindow::FindFocus();
-                    if (focused && IsDescendant(focused))
-                    {
-                        event.Skip();
-                        return;
-                    }
-
-                    Dismiss();
-                }
-                event.Skip();
-            });
+//        // Чтобы окно закрывалось деактивации окна
+//        Bind(wxEVT_ACTIVATE, [this](wxActivateEvent &event)
+//            {
+//                if (!event.GetActive())
+//                {
+//                    // Проверяем, не внутри ли попапа новый фокус
+//                    wxWindow *focused = wxWindow::FindFocus();
+//                    if (focused && IsDescendant(focused))
+//                    {
+//                        event.Skip();
+//                        return;
+//                    }
+//
+//                    Dismiss();
+//                }
+//                event.Skip();
+//            });
 
         PopupTransientWindow::Show();
     }
