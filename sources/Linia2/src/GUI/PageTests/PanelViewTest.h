@@ -3,9 +3,11 @@
 #include "GUI/Controls/Panel.h"
 #include "Settings/Tests/Library/Library.h"
 #include "GUI/Controls/ButtonCombo.h"
-#include "GUI/PageTests/Entities/Commutator.h"
 #include "GUI/PageTests/Entities/OStT/OStT.h"
 #include "GUI/PageTests/MeasurersSourcers.h"
+#include "GUI/Controls/StaticText.h"
+#include "GUI/Controls/StaticBox.h"
+#include "GUI/PageTests/CommonControls.h"
 
 
 class PanelViewTest : public Panel
@@ -24,16 +26,7 @@ private:
     static const int d_combos = ButtonsCombo::HEIGHT + 5;   // Расстояние между элементами ввода по вертикали
     static const int Y_GROUND = 700;
 
-    ButtonsCombo *bcScanMode = nullptr;                 // Режим развёртки
-    ButtonsCombo *bcScanNumberPoints = nullptr;         // Количество точек в одной ВАХ
     ComboInput *bcBaseNumMeasures = nullptr;            // Количество измерений
-    Commutator *commutator = nullptr;                   // Управление коммутатором
-    StaticText *txtCover = nullptr;                     // Индикатор состояния крышки
-    bool cover_is_opened = false;
-    Button *btnEditSave = nullptr;                      // Сохранить результат редактирования
-    Button *btnEditExit = nullptr;                      // Выйти из режима редактирования
-    StaticBox *boxScan = nullptr;                       // "Развёртка"
-    StaticBox *boxCover = nullptr;                      // "Крышка"
 
     ButtonsCombo *bcTypeBJT = nullptr;                  // Тип биполярного транзистора
     ButtonsCombo *bcTypeFET = nullptr;                  // Тип полевого транзистора
@@ -41,11 +34,10 @@ private:
     ButtonsCombo *bcControlElectrodeTHYR = nullptr;     // Дли тиристора - управляющий электрод
 
     MeasurersSourcers meas_src;
+    CommonControls com_controls;
 
     void OnEventPaint(wxPaintEvent &);
 
-    void OnChangedScanMode(wxCommandEvent &);
-    void OnChangedScanNumberPoints(wxCommandEvent &);
     void OnChangedTypeSemiconductor(wxCommandEvent &);
     void OnChangedBaseModeControl(wxCommandEvent &);
     void OnChangedBaseStartValueI(wxCommandEvent &);
@@ -61,33 +53,17 @@ private:
     void OnChangedCollectorMeasureRangeU(wxCommandEvent &);
     void OnChangedCollectorMeasureLimitU(wxCommandEvent &);
 
-    // Открыта крышка
-    void OpenCover();
-
-    // Закрыта крышка
-    void CloseCover();
-
     // Нарисовать испытуемый элемент
     OStT *CreateOStT();
 
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
-
-    // Общие для всех типов элементов органы управления (тип развёртки, например)
-    void CreateCommonControls();
-    void ShowCommonControls();
-    void HideCommonControls();
 
     // Специфичные органы управления для разных типов элементов (тип проводимости для биполярного транзистора, например)
     void CreateSpecificControls();
     void HideSpecificControls();
     void TuneSpecificControls();
 
-    void CreateButton(Button **, wxWindow *parent, const wxString &, const wxPoint &, const wxSize &, std::function<void(wxCommandEvent &)> onClick);
-
     wxPoint GetCenter() const;
-
-    // Если true - находимся в режиме редактирования теста
-    bool InModeEdit() const;
 
     void DrawScheme(AutoBufferedPaintDC &);
 
