@@ -1,6 +1,6 @@
 ﻿// 2026/09/04 12:20:07 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
-#include "GUI/PageTests/Entities/Measurers.h"
+#include "GUI/PageTests/Entities/MeasurerSourcer.h"
 #include "Utils/GlobalFunctions.h"
 #include "GUI/Controls/ButtonCombo.h"
 #include "GUI/PageTests/PanelViewTest.h"

@@ -3,12 +3,9 @@
 #include "GUI/Controls/Panel.h"
 #include "Settings/Tests/Library/Library.h"
 #include "GUI/Controls/ButtonCombo.h"
-#include "GUI/PageTests/Entities/Measurers.h"
 #include "GUI/PageTests/Entities/Commutator.h"
 #include "GUI/PageTests/Entities/OStT/OStT.h"
-#pragma warning(push, 0)
-    #include <wx/dcclient.h>
-#pragma warning(pop)
+#include "GUI/PageTests/MeasurersSourcers.h"
 
 
 class PanelViewTest : public Panel
@@ -42,6 +39,8 @@ private:
     ButtonsCombo *bcTypeFET = nullptr;                  // Тип полевого транзистора
     ButtonsCombo *bcCommonElectrodeDIOD = nullptr;      // Для диода - общий электрод
     ButtonsCombo *bcControlElectrodeTHYR = nullptr;     // Дли тиристора - управляющий электрод
+
+    MeasurersSourcers meas_src;
 
     void OnEventPaint(wxPaintEvent &);
 
@@ -99,28 +98,4 @@ private:
     wxPoint CoordinateCollector() const;
 
     wxPoint CoordinateSpecificControl() const;
-
-    // Источники и измерители для всех каналов
-    struct MeasurersSourcers
-    {
-        void Show(AutoBufferedPaintDC &, const Chan &, int x);
-        void Create();
-        void Hide();
-        void Tune();
-
-    private:
-
-        MeasurerVoltageCurrent *measBase = nullptr;
-        SourceVoltageCurrent *srcVoltageCurrentBase = nullptr;
-
-        MeasurerVoltageCurrent *measSubstrate = nullptr;
-        SourceVoltageCurrent *srcVoltageCurrentSubstrate = nullptr;
-
-        Ampermeter *ampCollector = nullptr;
-        Voltmeter *voltCollector = nullptr;
-        SourceVoltage *srcVoltageCollector = nullptr;
-
-        // Возвращает позицию по Y источника либо измерителя
-        int PosY(int);
-    } measures_sources;
 };
