@@ -247,7 +247,7 @@ void MeasurerSourcer::CreateParametersI()
 
     int y = coord_controls.y;
 
-    if (chan == Chan::_B)
+    if (chan == Chan::B)
     {
         if (type == Type::MeasI || type == Type::MeasUI)
         {
@@ -292,7 +292,7 @@ void MeasurerSourcer::CreateParametersI()
             }
         }
     }
-    else if (chan == Chan::_S)
+    else if (chan == Chan::S)
     {
         if (type == Type::MeasI || type == Type::MeasUI)
         {
@@ -337,7 +337,7 @@ void MeasurerSourcer::CreateParametersI()
             }
         }
     }
-    else if (chan == Chan::_C)
+    else if (chan == Chan::C)
     {
         if (type == Type::MeasI)
         {
@@ -368,7 +368,7 @@ void MeasurerSourcer::CreateParametersU()
 
     int y = coord_controls.y;
 
-    if (chan == Chan::_B)
+    if (chan == Chan::B)
     {
         if (type == Type::MeasU || type == Type::MeasUI)
         {
@@ -413,7 +413,7 @@ void MeasurerSourcer::CreateParametersU()
             }
         }
     }
-    else if (chan == Chan::_S)
+    else if (chan == Chan::S)
     {
         if (type == Type::MeasU || type == Type::MeasUI)
         {
@@ -458,7 +458,7 @@ void MeasurerSourcer::CreateParametersU()
             }
         }
     }
-    else if (chan == Chan::_C)
+    else if (chan == Chan::C)
     {
         if (type == Type::MeasU)
         {

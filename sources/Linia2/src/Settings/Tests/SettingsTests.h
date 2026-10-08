@@ -160,10 +160,10 @@ struct Chan
 {
     enum E
     {
-        _C,      // Коллектор
-        _B,      // База
-        _S,      // Подложка
-        _E,      // Эмиттер - общий
+        C,      // Коллектор
+        B,      // База
+        S,      // Подложка
+        Em,     // Эмиттер - общий
         Count
     };
 
@@ -175,22 +175,22 @@ struct Chan
 
     bool IsBS() const
     {
-        return value == _B || value == _S;
+        return value == B || value == S;
     }
 
     bool IsBase() const
     {
-        return value == _B;
+        return value == B;
     }
 
     bool IsSubstrate() const
     {
-        return value == _S;
+        return value == S;
     }
 
     bool IsCollector() const
     {
-        return value == _C;
+        return value == C;
     }
 };
 

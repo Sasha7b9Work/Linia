@@ -136,7 +136,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 
         DrawGround(dc);
 
-        meas_src.Show(dc, Chan::_C, X_C);
+        meas_src.Show(dc, Chan::C, X_C);
     }
 
     {
@@ -154,7 +154,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 
             DrawGround(dc);
 
-            meas_src.Show(dc, Chan::_B, X_B);
+            meas_src.Show(dc, Chan::B, X_B);
         }
     }
 
@@ -173,7 +173,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 
             DrawGround(dc);
 
-            meas_src.Show(dc, Chan::_S, X_S);
+            meas_src.Show(dc, Chan::S, X_S);
         }
     }
 

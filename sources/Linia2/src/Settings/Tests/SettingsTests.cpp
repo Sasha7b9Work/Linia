@@ -6,9 +6,9 @@
 #pragma warning(pop)
 
 
-const Chan ChC(Chan::_C);
-const Chan ChB(Chan::_B);
-const Chan ChS(Chan::_S);
+const Chan ChC(Chan::C);
+const Chan ChB(Chan::B);
+const Chan ChS(Chan::S);
 
 
 pchar Chan::Name() const
