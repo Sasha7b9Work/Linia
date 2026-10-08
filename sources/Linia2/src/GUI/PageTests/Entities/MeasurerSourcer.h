@@ -106,7 +106,7 @@ public:
 protected:
 
     Type::E type;
-    Chan::E chan;
+    Chan chan;
     Dir::E dir;                                 // Расположение органов управления относительно УГО измерителя/источника
     const int radius = 12;
     wxPoint center{ 0, 0 };

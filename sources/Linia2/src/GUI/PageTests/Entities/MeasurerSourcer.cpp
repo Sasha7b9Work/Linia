@@ -247,7 +247,7 @@ void MeasurerSourcer::CreateParametersI()
 
     int y = coord_controls.y;
 
-    if (chan == Chan::B)
+    if (chan.IsBase())
     {
         if (type == Type::MeasI || type == Type::MeasUI)
         {
@@ -292,7 +292,7 @@ void MeasurerSourcer::CreateParametersI()
             }
         }
     }
-    else if (chan == Chan::S)
+    else if (chan.IsSubstrate())
     {
         if (type == Type::MeasI || type == Type::MeasUI)
         {
@@ -337,7 +337,7 @@ void MeasurerSourcer::CreateParametersI()
             }
         }
     }
-    else if (chan == Chan::C)
+    else if (chan.IsCollector())
     {
         if (type == Type::MeasI)
         {
@@ -368,7 +368,7 @@ void MeasurerSourcer::CreateParametersU()
 
     int y = coord_controls.y;
 
-    if (chan == Chan::B)
+    if (chan.IsBase())
     {
         if (type == Type::MeasU || type == Type::MeasUI)
         {
@@ -413,7 +413,7 @@ void MeasurerSourcer::CreateParametersU()
             }
         }
     }
-    else if (chan == Chan::S)
+    else if (chan.IsSubstrate())
     {
         if (type == Type::MeasU || type == Type::MeasUI)
         {
@@ -458,7 +458,7 @@ void MeasurerSourcer::CreateParametersU()
             }
         }
     }
-    else if (chan == Chan::C)
+    else if (chan.IsCollector())
     {
         if (type == Type::MeasU)
         {
