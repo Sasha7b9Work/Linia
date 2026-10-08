@@ -167,7 +167,7 @@ struct Chan
         Count
     };
 
-    explicit Chan(E v) : value(v) { }
+    Chan(E v) : value(v) { }
 
     E value;
 
@@ -176,6 +176,21 @@ struct Chan
     bool IsBS() const
     {
         return value == _B || value == _S;
+    }
+
+    bool IsBase() const
+    {
+        return value == _B;
+    }
+
+    bool IsSubstrate() const
+    {
+        return value == _S;
+    }
+
+    bool IsCollector() const
+    {
+        return value == _C;
     }
 };
 
