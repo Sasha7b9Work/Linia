@@ -100,6 +100,9 @@ public:
         center = pos;
     }
 
+    // Показать параметры в соотвествии с выбранным режимом - така или напряжения
+    void ShowNeedParameters();
+
 protected:
 
     Type::E type;
@@ -136,9 +139,6 @@ private:
 
     // Возвращает true, если выбран режим источника или измерителя напряжения
     bool IsSetModeU() const;
-
-    // Показать параметры в соотвествии с выбранным режимом - така или напряжения
-    void ShowNeedParameters();
 
     void DrawUGO(AutoBufferedPaintDC &);
 

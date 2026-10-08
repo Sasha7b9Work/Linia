@@ -56,6 +56,8 @@ void PanelViewTest::SetTest(Test *_test)
 
     TuneSpecificControls();
 
+    TuneMeasurersSourcers();
+
     Refresh();
 }
 
@@ -175,7 +177,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
             DrawGround(dc);
 
             measSubstrate->Show(dc, { X_S, PosMeasurerSourcerY(1) });
-            srcVoltateCurrentSubstrate->Show(dc, { X_S, PosMeasurerSourcerY(2) });
+            srcVoltageCurrentSubstrate->Show(dc, { X_S, PosMeasurerSourcerY(2) });
         }
     }
 
@@ -236,7 +238,7 @@ void PanelViewTest::CreateMeasurersSourcers()
 
     measSubstrate = new MeasurerVoltageCurrent(Chan::_S, Dir::Down);
 
-    srcVoltateCurrentSubstrate = new SourceVoltageCurrent(Chan::_S, Dir::Down);
+    srcVoltageCurrentSubstrate = new SourceVoltageCurrent(Chan::_S, Dir::Down);
 
     ampCollector = new Ampermeter(Chan::_C, Dir::Down);
 
@@ -252,11 +254,25 @@ void PanelViewTest::HideMeasurersSourcers()
     srcVoltageCurrentBase->Hide();
 
     measSubstrate->Hide();
-    srcVoltateCurrentSubstrate->Hide();
+    srcVoltageCurrentSubstrate->Hide();
 
     ampCollector->Hide();
     voltCollector->Hide();
     srcVoltageCollector->Hide();
+}
+
+
+void PanelViewTest::TuneMeasurersSourcers()
+{
+    measBase->ShowNeedParameters();
+    srcVoltageCurrentBase->ShowNeedParameters();
+
+    measSubstrate->ShowNeedParameters();
+    srcVoltageCurrentSubstrate->ShowNeedParameters();
+
+    ampCollector->ShowNeedParameters();
+    voltCollector->ShowNeedParameters();
+    srcVoltageCollector->ShowNeedParameters();
 }
 
 

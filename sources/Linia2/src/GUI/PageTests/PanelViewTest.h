@@ -42,7 +42,7 @@ private:
     SourceVoltageCurrent *srcVoltageCurrentBase = nullptr;
 
     MeasurerVoltageCurrent *measSubstrate = nullptr;
-    SourceVoltageCurrent *srcVoltateCurrentSubstrate = nullptr;
+    SourceVoltageCurrent *srcVoltageCurrentSubstrate = nullptr;
 
     Ampermeter *ampCollector = nullptr;
     Voltmeter *voltCollector = nullptr;
@@ -96,6 +96,7 @@ private:
     // Источники и измерители
     void CreateMeasurersSourcers();
     void HideMeasurersSourcers();
+    void TuneMeasurersSourcers();
 
     void CreateButton(Button **, wxWindow *parent, const wxString &, const wxPoint &, const wxSize &, std::function<void(wxCommandEvent &)> onClick);
 
