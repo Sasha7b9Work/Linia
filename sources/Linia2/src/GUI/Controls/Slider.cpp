@@ -243,10 +243,7 @@ SliderFloat::SliderFloat(wxWindow *parent, int width, const wxString &name) :
 
     slider->Bind(wxEVT_ENTER_WINDOW, [this](wxMouseEvent &event)
         {
-            if (event.GetId() == slider->GetId())
-            {
-                slider->SetCursor(wxCursor(wxCURSOR_HAND));
-            }
+            slider->SetCursor(wxCursor(wxCURSOR_HAND));
 
             event.Skip();
         });
