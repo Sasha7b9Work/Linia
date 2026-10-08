@@ -37,6 +37,38 @@ public:
             MeasUI,
             Count
         };
+
+        E value;
+
+        bool IsMeasU() const
+        {
+            return value == MeasU;
+        }
+
+        bool IsMeasI() const
+        {
+            return value == MeasI;
+        }
+
+        bool IsMeasUandI() const
+        {
+            return value == MeasUI;
+        }
+
+        bool IsSourceU() const
+        {
+            return value == SourceU;
+        }
+
+        bool IsSourceI() const
+        {
+            return value == SourceI;
+        }
+
+        bool IsSourceUandI() const
+        {
+            return value == SourceUI;
+        }
     };
 
     MeasurerSourcer(Type::E, Chan::E, Dir::E);
@@ -105,7 +137,7 @@ public:
 
 protected:
 
-    Type::E type;
+    Type type;
     Chan chan;
     Dir::E dir;                                 // Расположение органов управления относительно УГО измерителя/источника
     const int radius = 12;

@@ -38,7 +38,7 @@ void MeasurerSourcer::Draw(AutoBufferedPaintDC &dc)
 
 int MeasurerSourcer::CalculateNumControls() const
 {
-    if (type == Type::MeasI || type == Type::MeasU || type == Type::MeasUI)
+    if (type.IsMeasI() || type.IsMeasU() || type.IsMeasUandI())
     {
         return 2;
     }
@@ -55,8 +55,8 @@ void MeasurerSourcer::DrawUGO(AutoBufferedPaintDC &dc)
 
         const int dY = 3;
 
-        if (type == Type::SourceI ||
-            (type == Type::SourceUI && !IsSetModeU()))
+        if (type.IsSourceI() ||
+            (type.IsSourceUandI() && !IsSetModeU()))
         {
             const int ddY = 3;
 
@@ -71,8 +71,8 @@ void MeasurerSourcer::DrawUGO(AutoBufferedPaintDC &dc)
             dc.DrawLine(center.x, center.y - dY - ddY, center.x + l, center.y - dY + l - ddY);
             dc.DrawLine(center.x, center.y - ddY, center.x + l, center.y + l - ddY);
         }
-        else if (type == Type::SourceU ||
-            (type == Type::SourceUI && IsSetModeU()))
+        else if (type.IsSourceU() ||
+            (type.IsSourceUandI() && IsSetModeU()))
         {
             dc.DrawLine(center.x, center.y - radius + dY, center.x + dY, center.y + dY);
             dc.DrawLine(center.x, center.y - radius + dY, center.x - dY, center.y + dY);
@@ -89,15 +89,15 @@ void MeasurerSourcer::DrawUGO(AutoBufferedPaintDC &dc)
 
 pchar MeasurerSourcer::SymbolUGO()
 {
-    if (type == Type::MeasU)
+    if (type.IsMeasU())
     {
         return "V";
     }
-    else if (type == Type::MeasI)
+    else if (type.IsMeasI())
     {
         return "I";
     }
-    else if (type == Type::MeasUI)
+    else if (type.IsMeasUandI())
     {
         return IsSetModeU() ? "V" : "I";
     }
@@ -175,8 +175,7 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
 {
     btnDisable = new Button(PanelViewTest::self, "x", size);
 
-    if (type == MeasurerSourcer::Type::MeasI ||
-        type == MeasurerSourcer::Type::MeasU)
+    if (type.IsMeasI() || type.IsMeasU())
     {
         btnDisable->SetToolTip(L("Включить/отключить блок измерителя"));
     }
@@ -249,7 +248,7 @@ void MeasurerSourcer::CreateParametersI()
 
     if (chan.IsBase())
     {
-        if (type == Type::MeasI || type == Type::MeasUI)
+        if (type.IsMeasI() || type.IsMeasUandI())
         {
             for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
             {
@@ -260,7 +259,7 @@ void MeasurerSourcer::CreateParametersI()
 
             CREATE_COMBO(L("Ib макс"), "comboBaseMeasI", parametersI);
         }
-        if (type == Type::SourceI || type == Type::SourceUI)
+        if (type.IsSourceI() || type.IsSourceUandI())
         {
             {
                 titles.push_back("1 нА");
@@ -294,7 +293,7 @@ void MeasurerSourcer::CreateParametersI()
     }
     else if (chan.IsSubstrate())
     {
-        if (type == Type::MeasI || type == Type::MeasUI)
+        if (type.IsMeasI() || type.IsMeasUandI())
         {
             for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
             {
@@ -305,7 +304,7 @@ void MeasurerSourcer::CreateParametersI()
 
             CREATE_COMBO(L("Предел"), "comboBaseMeasI", parametersI);
         }
-        if (type == Type::SourceI || type == Type::SourceUI)
+        if (type.IsSourceI() || type.IsSourceUandI())
         {
             {
                 titles.push_back("1 нА");
@@ -339,7 +338,7 @@ void MeasurerSourcer::CreateParametersI()
     }
     else if (chan.IsCollector())
     {
-        if (type == Type::MeasI)
+        if (type.IsMeasI())
         {
             for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
             {
@@ -370,7 +369,7 @@ void MeasurerSourcer::CreateParametersU()
 
     if (chan.IsBase())
     {
-        if (type == Type::MeasU || type == Type::MeasUI)
+        if (type.IsMeasU() || type.IsMeasUandI())
         {
             for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
             {
@@ -381,7 +380,7 @@ void MeasurerSourcer::CreateParametersU()
 
             CREATE_COMBO(L("Ub макс"), "comboBaseMeasU", parametersU);
         }
-        else if (type == Type::SourceU || type == Type::SourceUI)
+        else if (type.IsSourceU() || type.IsSourceUandI())
         {
             {
                 titles.push_back("1 мВ");
@@ -415,7 +414,7 @@ void MeasurerSourcer::CreateParametersU()
     }
     else if (chan.IsSubstrate())
     {
-        if (type == Type::MeasU || type == Type::MeasUI)
+        if (type.IsMeasU() || type.IsMeasUandI())
         {
             for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
             {
@@ -426,7 +425,7 @@ void MeasurerSourcer::CreateParametersU()
 
             CREATE_COMBO(L("Us макс"), "comboBaseMeasU", parametersU);
         }
-        else if (type == Type::SourceU || type == Type::SourceUI)
+        else if (type.IsSourceU() || type.IsSourceUandI())
         {
             {
                 titles.push_back("1 мВ");
@@ -460,7 +459,7 @@ void MeasurerSourcer::CreateParametersU()
     }
     else if (chan.IsCollector())
     {
-        if (type == Type::MeasU)
+        if (type.IsMeasU())
         {
             for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
             {
@@ -471,7 +470,7 @@ void MeasurerSourcer::CreateParametersU()
 
             CREATE_COMBO(L("Uc макс"), "comboBaseMeasU", parametersU);
         }
-        else if (type == Type::SourceU)
+        else if (type.IsSourceU())
         {
             {
                 titles.push_back("1 мВ");
@@ -497,7 +496,7 @@ void MeasurerSourcer::CreateParametersU()
 
 void MeasurerSourcer::CreateButtonModeUI(const wxRect &rect, const wxSize &size, const wxPoint &pos)
 {
-    if (type == Type::SourceUI)
+    if (type.IsSourceUandI())
     {
         btnModeUI = new Button(PanelViewTest::self, "E", size);
         if (dir == Dir::Left || dir == Dir::Right)
@@ -529,7 +528,7 @@ void MeasurerSourcer::CreateButtonModeUI(const wxRect &rect, const wxSize &size,
                 event.Skip();
             });
     }
-    else if (type == Type::MeasUI)
+    else if (type.IsMeasUandI())
     {
         btnModeUI = new Button(PanelViewTest::self, "V", size);
         if (dir == Dir::Left || dir == Dir::Right)
