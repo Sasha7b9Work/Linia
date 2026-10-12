@@ -425,35 +425,45 @@ void GroupParameters::CreateParametersI()
                 CREATE_COMBO(L("Is огр"), "comboSubstrateLimitI", parametersI);
             }
         }
-        if (type.IsSourceI() || type.IsSourceUandI())
+        if (type.IsSourceUandI())
         {
             {
-                titles.push_back("1 нА");
-                titles.push_back("2 нА");
+                for (RangeI range{ RangeI::_1nA }; range.value < RangeI::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_124));
+                }
 
-                tooltips.push_back(L("Шаг"));
+                tooltips.push_back(L("Начальное значение источника тока подложки"));
 
-                CREATE_COMBO(L("Шаг"), "comboBaseSourceI", parametersI);
+                CREATE_COMBO(L("Js старт"), "comboSubsrtateStartI", parametersI);
             }
 
             {
-                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"), "sliderOffsetSourceChannelS");
-                slider->SetToolTip(L("Смещение"));
-                slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(-10e-3, 10e-3);
-                parametersI.push_back(slider);
-                y += ButtonsCombo::HEIGHT + 5;
+                titles.Clear();
+                tooltips.Clear();
+
+                for (RangeI range{ RangeI::_1nA }; range.value < RangeI::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_124));
+                }
+
+                tooltips.push_back(L("Разница тока между сосденими ступеньками источника тока подложки"));
+
+                CREATE_COMBO(L("Js шаг"), "comboSubsrtateStepI", parametersI);
             }
 
             {
+                titles.Clear();
+                tooltips.Clear();
+
                 for (int i = 1; i < 11; i++)
                 {
                     titles.push_back(wxString::Format("%d", i));
                 }
 
-                tooltips.push_back(L("Количество ступенек"));
+                tooltips.push_back(L(""));
 
-                CREATE_COMBO(L("Кол-во ступенек"), "comboSubstarteNumSteps", parametersI);
+                CREATE_COMBO(L("Кол-во ступенек"), "comboSubsrtateStepI", parametersI);
             }
         }
     }
