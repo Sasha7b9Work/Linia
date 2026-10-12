@@ -37,7 +37,7 @@ void GroupParameters::Draw(AutoBufferedPaintDC &dc)
         dc.StorePenAndSetNew(dc.GetBackground().GetColour());
         dc.DrawRectangle({ rect.x + 1, rect.y + 1, rect.width - 2, rect.height - 2 });
         dc.RestorePen();
-        dc.DrawTextInCenter(SymbolUGO(), {rect.x, rect.y, rect.width, 20});
+        dc.DrawTextInCenter(SymbolUGO(), {rect.x, rect.y, rect.width, 30});
     }
     else
     {
@@ -57,7 +57,7 @@ int GroupParameters::CalculateNumControls() const
     }
     else if (chan.IsCollector())
     {
-        if (type.IsSourceU())
+        if (type.IsSourceU() || type.IsScanner())
         {
             return 2;
         }

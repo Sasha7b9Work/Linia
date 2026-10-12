@@ -86,7 +86,7 @@ int MeasurersSourcers::PosY(int num)
 {
     if (num == -1)              // Развёртка
     {
-        return 300;
+        return 270;
     }
     else if (num == 0)          // Верхний измеритель
     {
