@@ -38,12 +38,22 @@ void MeasurerSourcer::Draw(AutoBufferedPaintDC &dc)
 
 int MeasurerSourcer::CalculateNumControls() const
 {
-    if (type.IsMeasI() || type.IsMeasU() || type.IsMeasUandI())
+    if (chan.IsBS())
     {
-        return 2;
+        if (type.IsSourceUandI())
+        {
+            return 3;
+        }
+    }
+    else if (chan.IsCollector())
+    {
+        if (type.IsSourceU())
+        {
+            return 2;
+        }
     }
 
-    return 5;
+    return 1;
 }
 
 
