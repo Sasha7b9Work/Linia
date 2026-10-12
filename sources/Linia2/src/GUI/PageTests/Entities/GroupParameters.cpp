@@ -50,6 +50,10 @@ int GroupParameters::CalculateNumControls() const
 {
     if (chan.IsBS())
     {
+        if (type.IsMeasU() || type.IsMeasI() || type.IsMeasUandI())
+        {
+            return 2;
+        }
         if (type.IsSourceUandI())
         {
             return 3;
@@ -438,14 +442,30 @@ void GroupParameters::CreateParametersU()
     {
         if (type.IsMeasU() || type.IsMeasUandI())
         {
-            for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
             {
-                titles.push_back(range.Name(RowRange::_124));
+                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_124));
+                }
+
+                tooltips.push_back(L("Начальное значенпие измеряемоого напряжения"));
+
+                CREATE_COMBO(L("Ub старт"), "comboBaseStartU", parametersU);
             }
 
-            tooltips.push_back(L("Диапазон измерения напряжения базы"));
+            {
+                titles.Clear();
+                tooltips.Clear();
 
-            CREATE_COMBO(L("Ub макс"), "comboBaseMeasU", parametersU);
+                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_124));
+                }
+
+                tooltips.push_back(L("Диапазон измерения напряжения базы"));
+
+                CREATE_COMBO(L("Ub разм"), "comboBaseRangeU", parametersU);
+            }
         }
         else if (type.IsSourceU() || type.IsSourceUandI())
         {
