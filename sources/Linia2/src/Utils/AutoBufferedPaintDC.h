@@ -47,6 +47,8 @@ public:
 
     void RestorePenBrush();
 
+    void DrawTextInCenter(const wxString &, const wxRect &);
+
 private:
 
     wxPoint coord{ 0, 0 };

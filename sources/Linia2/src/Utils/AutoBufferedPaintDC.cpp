@@ -122,3 +122,15 @@ void AutoBufferedPaintDC::RestorePen()
 {
     SetPen(stored_pen);
 }
+
+
+void AutoBufferedPaintDC::DrawTextInCenter(const wxString &text, const wxRect &rect)
+{
+    wxCoord textWidth, textHeight;
+    GetTextExtent(text, &textWidth, &textHeight);
+
+    int x = rect.x + (rect.width - textWidth) / 2;
+    int y = rect.y + (rect.height - textHeight) / 2;
+
+    DrawText(text, x, y);
+}

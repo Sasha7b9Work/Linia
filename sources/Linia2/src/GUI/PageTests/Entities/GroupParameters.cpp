@@ -37,6 +37,7 @@ void GroupParameters::Draw(AutoBufferedPaintDC &dc)
         dc.StorePenAndSetNew(dc.GetBackground().GetColour());
         dc.DrawRectangle({ rect.x + 1, rect.y + 1, rect.width - 2, rect.height - 2 });
         dc.RestorePen();
+        dc.DrawTextInCenter(SymbolUGO(), rect);
     }
 
     DrawUGO(dc);
@@ -102,7 +103,10 @@ void GroupParameters::DrawUGO(AutoBufferedPaintDC &dc)
 
         dc.SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRALIGHT));
 
-        GF::DrawTextInCenter(dc, SymbolUGO(), wxRect(wxPoint{ center.x - radius, center.y - radius }, wxPoint{ center.x + radius, center.y + radius }));
+        if(!type.IsScanner())
+        {
+            dc.DrawTextInCenter(SymbolUGO(), wxRect(wxPoint{ center.x - radius, center.y - radius }, wxPoint{ center.x + radius, center.y + radius }));
+        }
     }
 }
 
