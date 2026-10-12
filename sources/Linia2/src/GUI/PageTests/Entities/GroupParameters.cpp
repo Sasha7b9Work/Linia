@@ -50,11 +50,7 @@ int GroupParameters::CalculateNumControls() const
 {
     if (chan.IsBS())
     {
-        if (type.IsMeasUandI())
-        {
-            return 2;
-        }
-        if (type.IsSourceUandI())
+        if (type.IsMeasUandI() || type.IsSourceUandI())
         {
             return 3;
         }
@@ -329,6 +325,20 @@ void GroupParameters::CreateParametersI()
 
                 CREATE_COMBO(L("Ib размах"), "comboBaseRangeI", parametersI);
             }
+
+            {
+                titles.Clear();
+                tooltips.Clear();
+
+                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_125));
+                }
+
+                tooltips.push_back(L("Ограничение по току базы"));
+
+                CREATE_COMBO(L("Ib ограничение"), "comboBaseLimitI", parametersI);
+            }
         }
         else if (type.IsSourceUandI())
         {
@@ -481,6 +491,20 @@ void GroupParameters::CreateParametersU()
                 tooltips.push_back(L("Диапазон измерения напряжения базы"));
 
                 CREATE_COMBO(L("Ub размах"), "comboBaseRangeU", parametersU);
+            }
+
+            {
+                titles.Clear();
+                tooltips.Clear();
+
+                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_124));
+                }
+
+                tooltips.push_back(L("Ограничеие на превышение напряжения"));
+
+                CREATE_COMBO(L("Ub ограничение"), "comboBaseLimitU", parametersU);
             }
         }
         else if (type.IsSourceU() || type.IsSourceUandI())

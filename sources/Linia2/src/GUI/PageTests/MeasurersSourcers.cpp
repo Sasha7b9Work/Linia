@@ -98,7 +98,7 @@ int MeasurersSourcers::PosY(int num)
     }
     else if (num == 2)          // Нижний (источник)
     {
-        return 570;
+        return 630;
     }
 
     return 100;
