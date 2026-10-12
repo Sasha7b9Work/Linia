@@ -176,7 +176,7 @@ private:
     // Создаёт напряжённые параметры
     void CreateParametersU();
 
-    void CreateParametersScanner(const wxRect &);
+    void CreateParametersScanner();
 
     // Возвращает true, если выбран режим источника или измерителя напряжения
     bool IsSetModeU() const;

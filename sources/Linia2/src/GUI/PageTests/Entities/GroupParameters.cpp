@@ -146,7 +146,7 @@ void GroupParameters::CreateControls(const wxRect &rect)
 
         CreateParametersU();
 
-        CreateParametersScanner(rect);
+        CreateParametersScanner();
 
         wxPoint pos{ coord_controls };
 
@@ -545,7 +545,7 @@ void GroupParameters::CreateParametersU()
 }
 
 
-void GroupParameters::CreateParametersScanner(const wxRect &rect)
+void GroupParameters::CreateParametersScanner()
 {
     if (!type.IsScanner())
     {
