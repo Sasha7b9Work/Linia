@@ -18,8 +18,8 @@ public:
 };
 
 
-// Общий класс для источника и измерителя
-class MeasurerSourcer
+// Группа параметров - это может быть источник, измеритель или сканнер (формирователь развёртки)
+class GroupParameters
 {
 public:
 
@@ -35,6 +35,7 @@ public:
             SourceI,
             SourceUI,
             MeasUI,
+            Scanner,
             Count
         };
 
@@ -71,7 +72,7 @@ public:
         }
     };
 
-    MeasurerSourcer(Type::E, Chan::E, Dir::E);
+    GroupParameters(Type::E, Chan::E, Dir::E);
 
     void Draw(AutoBufferedPaintDC &);
 
@@ -181,65 +182,73 @@ private:
 
 
 // Измеритель напряжения
-class Voltmeter : public MeasurerSourcer
+class Voltmeter : public GroupParameters
 {
 public:
 
     Voltmeter(Chan::E _chan, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::MeasU, _chan, _dir)
+        GroupParameters(GroupParameters::Type::MeasU, _chan, _dir)
     {}
 };
 
 
 // Имзеритель тока
-class Ampermeter : public MeasurerSourcer
+class Ampermeter : public GroupParameters
 {
 public:
 
     Ampermeter(Chan::E _chan, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::MeasI, _chan, _dir)
+        GroupParameters(GroupParameters::Type::MeasI, _chan, _dir)
     {}
 };
 
 
 // Измеритель и тока и напряжения
-class MeasurerVoltageCurrent : public MeasurerSourcer
+class MeasurerVoltageCurrent : public GroupParameters
 {
 public:
 
     MeasurerVoltageCurrent(Chan::E _chan, Dir::E dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::MeasUI, _chan, dir)
+        GroupParameters(GroupParameters::Type::MeasUI, _chan, dir)
     {}
 };
 
 
 // Источник напряжения
-class SourceVoltage : public MeasurerSourcer
+class SourceVoltage : public GroupParameters
 {
 public:
 
     SourceVoltage(Chan::E _chan, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceU, _chan, _dir)
+        GroupParameters(GroupParameters::Type::SourceU, _chan, _dir)
     {}
 };
 
 
 // Источник тока
-class SourceCurrent : public MeasurerSourcer
+class SourceCurrent : public GroupParameters
 {
 public:
 
     SourceCurrent(Chan::E _chan, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceI, _chan, _dir)
+        GroupParameters(GroupParameters::Type::SourceI, _chan, _dir)
     {}
 };
 
 
-class SourceVoltageCurrent : public MeasurerSourcer
+class SourceVoltageCurrent : public GroupParameters
 {
 public:
 
     SourceVoltageCurrent(Chan::E _chan, Dir::E _dir) :
-        MeasurerSourcer(MeasurerSourcer::Type::SourceUI, _chan, _dir)
+        GroupParameters(GroupParameters::Type::SourceUI, _chan, _dir)
     {}
+};
+
+
+class Scanner : public GroupParameters
+{
+public:
+
+    Scanner(Chan::E _chan, Dir::E _dir) : GroupParameters(GroupParameters::Type::Scanner, _chan, _dir) { }
 };

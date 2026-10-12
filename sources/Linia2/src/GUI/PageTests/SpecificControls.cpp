@@ -1,7 +1,7 @@
 ﻿// 2026/10/08 13:09:54 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageTests/SpecificControls.h"
-#include "GUI/PageTests/Entities/MeasurerSourcer.h"
+#include "GUI/PageTests/Entities/GroupParameters.h"
 #include "GUI/PageTests/Entities/OStT/OStT.h"
 #include "GUI/PageTests/Entities/OStT/BJT.h"
 #include "GUI/PageTests/Entities/OStT/FET.h"
@@ -20,7 +20,7 @@ void SpecificControls::Create(wxWindow *parent)
 
         wxArrayString tooltips{ L("Проводимость транзистора") };
 
-        bcTypeBJT = new ButtonsCombo(parent, L("Тип"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Проводимость транзистора"));
+        bcTypeBJT = new ButtonsCombo(parent, L("Тип"), GroupParameters::WIDTH_CONTROL, labels, tooltips, 1, L("Проводимость транзистора"));
         bcTypeBJT->SetPosition(Coordinate());
         bcTypeBJT->Bind(wxEVT_COMBOBOX, [](wxCommandEvent &event)
             {
@@ -38,7 +38,7 @@ void SpecificControls::Create(wxWindow *parent)
 
         wxArrayString tooltips{ L("Проводимость канала") };
 
-        bcTypeFET = new ButtonsCombo(parent, L("Канал"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Проводимость канала"));
+        bcTypeFET = new ButtonsCombo(parent, L("Канал"), GroupParameters::WIDTH_CONTROL, labels, tooltips, 1, L("Проводимость канала"));
         bcTypeFET->SetPosition(Coordinate());
         bcTypeFET->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
             {
@@ -55,7 +55,7 @@ void SpecificControls::Create(wxWindow *parent)
 
         wxArrayString tooltips{ L("Общий электрод") };
 
-        bcCommonElectrodeDIOD = new ButtonsCombo(parent, L("Общий электрод"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Общий электрод"));
+        bcCommonElectrodeDIOD = new ButtonsCombo(parent, L("Общий электрод"), GroupParameters::WIDTH_CONTROL, labels, tooltips, 1, L("Общий электрод"));
         bcCommonElectrodeDIOD->SetPosition(Coordinate());
         bcCommonElectrodeDIOD->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
             {
@@ -72,7 +72,7 @@ void SpecificControls::Create(wxWindow *parent)
 
         wxArrayString tooltips{ L("Управляющий электрод") };
 
-        bcControlElectrodeTHYR = new ButtonsCombo(parent, L("Управление"), MeasurerSourcer::WIDTH_CONTROL, labels, tooltips, 1, L("Управляющий электрод"));
+        bcControlElectrodeTHYR = new ButtonsCombo(parent, L("Управление"), GroupParameters::WIDTH_CONTROL, labels, tooltips, 1, L("Управляющий электрод"));
         wxPoint coord = Coordinate();
         bcControlElectrodeTHYR->SetPosition({ coord.x, coord.y + 30 });
         bcControlElectrodeTHYR->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)

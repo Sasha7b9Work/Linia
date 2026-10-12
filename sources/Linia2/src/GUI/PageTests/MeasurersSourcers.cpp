@@ -19,6 +19,8 @@ void MeasurersSourcers::Create()
     voltCollector = new Voltmeter(Chan::C, Dir::Down);
 
     srcVoltageCollector = new SourceVoltage(Chan::C, Dir::Down);
+
+    scannerCollector = new Scanner(Chan::C, Dir::Down);
 }
 
 
@@ -75,21 +77,26 @@ void MeasurersSourcers::Draw(AutoBufferedPaintDC &dc, const Chan &ch, int x)
         ampCollector->Draw(dc, { x, PosY(0) });
         voltCollector->Draw(dc, { x, PosY(1) });
         srcVoltageCollector->Draw(dc, { x, PosY(2) });
+        scannerCollector->Draw(dc, { x, PosY(-1) });
     }
 }
 
 
 int MeasurersSourcers::PosY(int num)
 {
-    if (num == 0)               // Верхний
+    if (num == -1)              // Развёртка
+    {
+        return 200;
+    }
+    else if (num == 0)          // Верхний измеритель
     {
         return 390;
     }
-    else if (num == 1)          // Средний
+    else if (num == 1)          // Средний измеритель
     {
         return 480;
     }
-    else if (num == 2)          // Нижний
+    else if (num == 2)          // Нижний (источник)
     {
         return 570;
     }

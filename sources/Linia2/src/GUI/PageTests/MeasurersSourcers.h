@@ -2,7 +2,7 @@
 #pragma once
 #include "Utils/AutoBufferedPaintDC.h"
 #include "Settings/Tests/SettingsTests.h"
-#include "GUI/PageTests/Entities/MeasurerSourcer.h"
+#include "GUI/PageTests/Entities/GroupParameters.h"
 
 
 // Источники и измерители для всех каналов
@@ -24,6 +24,8 @@ private:
     Ampermeter *ampCollector = nullptr;
     Voltmeter *voltCollector = nullptr;
     SourceVoltage *srcVoltageCollector = nullptr;
+
+    Scanner *scannerCollector = nullptr;
 
     // Возвращает позицию по Y источника либо измерителя
     int PosY(int);

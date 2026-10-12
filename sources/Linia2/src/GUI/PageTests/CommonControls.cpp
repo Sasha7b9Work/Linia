@@ -1,7 +1,7 @@
 ﻿// 2026/10/08 12:24:50 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageTests/CommonControls.h"
-#include "GUI/PageTests/Entities/MeasurerSourcer.h"
+#include "GUI/PageTests/Entities/GroupParameters.h"
 #include "GUI/PageTests/PanelViewTest.h"
 
 
@@ -9,7 +9,7 @@ void CommonControls::Create(wxWindow *parent)
 {
     commutator = new Commutator(parent, { 10, 40 }, 171);
 
-    int width = MeasurerSourcer::WIDTH_CONTROL;
+    int width = GroupParameters::WIDTH_CONTROL;
 
 #define CREATE_BUTTONS_COMBO(name, parent, title, num, func, _x, _y)                                        \
     name = new ButtonsCombo(parent, title, width, titles, tooltips, num, #name, ButtonsCombo::Type::Text);  \

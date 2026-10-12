@@ -1,6 +1,6 @@
 ﻿// 2026/09/04 12:20:07 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
-#include "GUI/PageTests/Entities/MeasurerSourcer.h"
+#include "GUI/PageTests/Entities/GroupParameters.h"
 #include "Utils/GlobalFunctions.h"
 #include "GUI/Controls/ButtonCombo.h"
 #include "GUI/PageTests/PanelViewTest.h"
@@ -12,13 +12,13 @@
     name->SetPosition({ _x, _y });
 
 
-MeasurerSourcer::MeasurerSourcer(Type::E _type, Chan::E _chan, Dir::E _dir) :
+GroupParameters::GroupParameters(Type::E _type, Chan::E _chan, Dir::E _dir) :
     type(_type), chan(_chan), dir(_dir)
 {
 }
 
 
-void MeasurerSourcer::Draw(AutoBufferedPaintDC &dc)
+void GroupParameters::Draw(AutoBufferedPaintDC &dc)
 {
     if (!is_showing)
     {
@@ -36,7 +36,7 @@ void MeasurerSourcer::Draw(AutoBufferedPaintDC &dc)
 }
 
 
-int MeasurerSourcer::CalculateNumControls() const
+int GroupParameters::CalculateNumControls() const
 {
     if (chan.IsBS())
     {
@@ -57,7 +57,7 @@ int MeasurerSourcer::CalculateNumControls() const
 }
 
 
-void MeasurerSourcer::DrawUGO(AutoBufferedPaintDC &dc)
+void GroupParameters::DrawUGO(AutoBufferedPaintDC &dc)
 {
     if (is_enabled)
     {
@@ -97,7 +97,7 @@ void MeasurerSourcer::DrawUGO(AutoBufferedPaintDC &dc)
 }
 
 
-pchar MeasurerSourcer::SymbolUGO()
+pchar GroupParameters::SymbolUGO()
 {
     if (type.IsMeasU())
     {
@@ -116,7 +116,7 @@ pchar MeasurerSourcer::SymbolUGO()
 }
 
 
-void MeasurerSourcer::CreateControls(const wxRect &rect)
+void GroupParameters::CreateControls(const wxRect &rect)
 {
     if (parametersI.size() == 0 && parametersU.size() == 0)
     {
@@ -137,7 +137,7 @@ void MeasurerSourcer::CreateControls(const wxRect &rect)
 }
 
 
-void MeasurerSourcer::ShowNeedParameters()
+void GroupParameters::ShowNeedParameters()
 {
     if (chan.IsCollector())
     {
@@ -181,7 +181,7 @@ void MeasurerSourcer::ShowNeedParameters()
 }
 
 
-bool MeasurerSourcer::IsSetModeU() const
+bool GroupParameters::IsSetModeU() const
 {
     if (!btnModeUI)
     {
@@ -193,7 +193,7 @@ bool MeasurerSourcer::IsSetModeU() const
 }
 
 
-void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size, wxPoint &pos)
+void GroupParameters::CreateButtonDisable(const wxRect &rect, const wxSize &size, wxPoint &pos)
 {
     btnDisable = new Button(PanelViewTest::self, "x", size);
 
@@ -254,7 +254,7 @@ void MeasurerSourcer::CreateButtonDisable(const wxRect &rect, const wxSize &size
     titles.clear();                                                                                             \
     tooltips.clear();
 
-void MeasurerSourcer::CreateParametersI()
+void GroupParameters::CreateParametersI()
 {
     for (wxWindow *object : parametersI)
     {
@@ -375,7 +375,7 @@ void MeasurerSourcer::CreateParametersI()
 }
 
 
-void MeasurerSourcer::CreateParametersU()
+void GroupParameters::CreateParametersU()
 {
     for (wxWindow *object : parametersU)
     {
@@ -516,7 +516,7 @@ void MeasurerSourcer::CreateParametersU()
 }
 
 
-void MeasurerSourcer::CreateButtonModeUI(const wxRect &rect, const wxSize &size, const wxPoint &pos)
+void GroupParameters::CreateButtonModeUI(const wxRect &rect, const wxSize &size, const wxPoint &pos)
 {
     if (type.IsSourceUandI())
     {
@@ -585,7 +585,7 @@ void MeasurerSourcer::CreateButtonModeUI(const wxRect &rect, const wxSize &size,
 }
 
 
-wxRect MeasurerSourcer::DrawBorder(AutoBufferedPaintDC &dc, int &x, int &y, int r)
+wxRect GroupParameters::DrawBorder(AutoBufferedPaintDC &dc, int &x, int &y, int r)
 {
     const int d = 5;
 
