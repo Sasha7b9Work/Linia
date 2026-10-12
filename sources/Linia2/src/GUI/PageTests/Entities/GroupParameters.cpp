@@ -50,7 +50,7 @@ int GroupParameters::CalculateNumControls() const
 {
     if (chan.IsBS())
     {
-        if (type.IsMeasU() || type.IsMeasI() || type.IsMeasUandI())
+        if (type.IsMeasUandI())
         {
             return 2;
         }
@@ -303,18 +303,34 @@ void GroupParameters::CreateParametersI()
 
     if (chan.IsBase())
     {
-        if (type.IsMeasI() || type.IsMeasUandI())
+        if (type.IsMeasUandI())
         {
-            for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
             {
-                titles.push_back(range.Name(RowRange::_125));
+                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_125));
+                }
+
+                tooltips.push_back(L("Начальное измерения тока базы"));
+
+                CREATE_COMBO(L("Ib старт"), "comboBaseStartI", parametersI);
             }
 
-            tooltips.push_back(L("Диапазон измерения тока базы"));
+            {
+                titles.Clear();
+                tooltips.Clear();
 
-            CREATE_COMBO(L("Ib макс"), "comboBaseMeasI", parametersI);
+                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_125));
+                }
+
+                tooltips.push_back(L("Диапазон измерения тока базы"));
+
+                CREATE_COMBO(L("Ib размах"), "comboBaseRangeI", parametersI);
+            }
         }
-        if (type.IsSourceI() || type.IsSourceUandI())
+        else if (type.IsSourceUandI())
         {
             {
                 titles.push_back("1 нА");
@@ -440,7 +456,7 @@ void GroupParameters::CreateParametersU()
 
     if (chan.IsBase())
     {
-        if (type.IsMeasU() || type.IsMeasUandI())
+        if (type.IsMeasUandI())
         {
             {
                 for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
@@ -464,7 +480,7 @@ void GroupParameters::CreateParametersU()
 
                 tooltips.push_back(L("Диапазон измерения напряжения базы"));
 
-                CREATE_COMBO(L("Ub разм"), "comboBaseRangeU", parametersU);
+                CREATE_COMBO(L("Ub размах"), "comboBaseRangeU", parametersU);
             }
         }
         else if (type.IsSourceU() || type.IsSourceUandI())
