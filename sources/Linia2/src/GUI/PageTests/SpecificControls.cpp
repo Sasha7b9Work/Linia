@@ -122,5 +122,5 @@ void SpecificControls::Tune()
 
 wxPoint SpecificControls::Coordinate() const
 {
-    return { PanelViewTest::self->CoordinateCollector().x - 280, PanelViewTest::self->CoordinateCollector().y + 20 };
+    return { PanelViewTest::self->GetCenter().x + 50, PanelViewTest::self->CoordinateCollector().y + 20};
 }

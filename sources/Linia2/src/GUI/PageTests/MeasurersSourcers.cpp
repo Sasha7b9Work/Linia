@@ -6,21 +6,21 @@
 
 void MeasurersSourcers::Create()
 {
-    measBase = new MeasurerVoltageCurrent(Chan::B, Dir::Down);
+    measBase = new MeasurerVoltageCurrent(Chan::B, Dir::Right);
 
-    srcVoltageCurrentBase = new SourceVoltageCurrent(Chan::B, Dir::Down);
+    srcVoltageCurrentBase = new SourceVoltageCurrent(Chan::B, Dir::Right);
 
-    measSubstrate = new MeasurerVoltageCurrent(Chan::S, Dir::Down);
+    measSubstrate = new MeasurerVoltageCurrent(Chan::S, Dir::Left);
 
-    srcVoltageCurrentSubstrate = new SourceVoltageCurrent(Chan::S, Dir::Down);
+    srcVoltageCurrentSubstrate = new SourceVoltageCurrent(Chan::S, Dir::Left);
 
-    ampCollector = new Ampermeter(Chan::C, Dir::Down);
+    ampCollector = new Ampermeter(Chan::C, Dir::Right);
 
-    voltCollector = new Voltmeter(Chan::C, Dir::Down);
+    voltCollector = new Voltmeter(Chan::C, Dir::Right);
 
-    srcVoltageCollector = new SourceVoltage(Chan::C, Dir::Down);
+    srcVoltageCollector = new SourceVoltage(Chan::C, Dir::Right);
 
-    scannerCollector = new Scanner(Chan::C, Dir::Down);
+    scannerCollector = new Scanner(Chan::C, Dir::Right);
 }
 
 
