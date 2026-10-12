@@ -559,6 +559,8 @@ void GroupParameters::CreateParametersScanner()
 
     int width = GroupParameters::WIDTH_CONTROL;
 
+    int y = coord_controls.y;
+
     {
         ButtonsCombo *bcScanMode;
 
@@ -577,7 +579,9 @@ void GroupParameters::CreateParametersScanner()
 
         CREATE_BUTTONS_COMBO(bcScanMode, L("Тип"), 1, OnChangedScanMode, 10, SD::Y_SB(20));
 
-        bcScanMode->SetPosition(coord_controls);
+        y += ButtonsCombo::HEIGHT + 5;
+
+        bcScanMode->SetPosition({ coord_controls.x, y });
 
         parametersScanner.push_back(bcScanMode);
     }
@@ -600,7 +604,7 @@ void GroupParameters::CreateParametersScanner()
 
         CREATE_BUTTONS_COMBO(bcScanNumberPoints, L("Кол-во точек"), 1, OnChangedScanNumberPoints, 10, SD::Y_SB(20 + 30));
 
-        int y = coord_controls.y + ButtonsCombo::HEIGHT + 5;
+        y += ButtonsCombo::HEIGHT + 5;
 
         bcScanNumberPoints->SetPosition({ coord_controls.x, y });
 
@@ -717,9 +721,18 @@ wxRect GroupParameters::DrawBorder(AutoBufferedPaintDC &dc, int &x, int &y, int 
     }
     else if (dir == Dir::Right)
     {
-        rect.x -= r + d;
-        rect.width += 2 * r + d;
-        rect.y -= rect.height / 2;
+        if (type.IsScanner())
+        {
+            rect.x -= r + d;
+            rect.width += 2 * r + d;
+            rect.height += d + ButtonsCombo::HEIGHT;
+        }
+        else
+        {
+            rect.x -= r + d;
+            rect.width += 2 * r + d;
+            rect.y -= rect.height / 2;
+        }
 
         dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
 
