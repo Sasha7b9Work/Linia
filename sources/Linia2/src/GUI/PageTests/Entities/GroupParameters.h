@@ -162,7 +162,7 @@ private:
     // Нарисовать окантовку для измерителя или источника. x, y - центр измерителя
     // В x, y возвращаются координаты, с которых нужно выводить элементы управления
     // Возвращает прямоугльник окантовки
-    wxRect DrawBorder(AutoBufferedPaintDC &, int &x, int &y, int radius);
+    wxRect DrawBorder(AutoBufferedPaintDC &, int radius);
 
     void CreateControls(const wxRect &);
 

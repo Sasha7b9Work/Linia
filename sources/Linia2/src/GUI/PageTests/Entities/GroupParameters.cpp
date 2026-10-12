@@ -28,7 +28,7 @@ void GroupParameters::Draw(AutoBufferedPaintDC &dc)
     coord_controls.x = center.x;
     coord_controls.y = center.y;
 
-    wxRect rect = DrawBorder(dc, coord_controls.x, coord_controls.y, radius);
+    wxRect rect = DrawBorder(dc, radius);
 
     CreateControls(rect);
 
@@ -682,7 +682,7 @@ void GroupParameters::CreateButtonModeUI(const wxRect &rect, const wxSize &size,
 }
 
 
-wxRect GroupParameters::DrawBorder(AutoBufferedPaintDC &dc, int &x, int &y, int r)
+wxRect GroupParameters::DrawBorder(AutoBufferedPaintDC &dc, int r)
 {
     const int d = 5;
 
@@ -693,8 +693,8 @@ wxRect GroupParameters::DrawBorder(AutoBufferedPaintDC &dc, int &x, int &y, int 
 
     wxRect rect
     {
-        x,
-        y,
+        coord_controls.x,
+        coord_controls.y,
         WIDTH_CONTROL + d * 2,
         (CalculateNumControls() * (ButtonsCombo::HEIGHT + d)) + d
     };
@@ -705,19 +705,19 @@ wxRect GroupParameters::DrawBorder(AutoBufferedPaintDC &dc, int &x, int &y, int 
         rect.width += 2 * r + d;
         rect.y -= rect.height / 2;
         dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
-        x = rect.x + d;
-        y = rect.y + d;
+        coord_controls.x = rect.x + d;
+        coord_controls.y = rect.y + d;
     }
     else if (dir == Dir::Up)
     {
-        rect.x = x - WIDTH_CONTROL / 2 - d;
+        rect.x = coord_controls.x - WIDTH_CONTROL / 2 - d;
         rect.y -= d + r + (ButtonsCombo::HEIGHT + d) * CalculateNumControls();
         rect.height += d + r * 2;
 
         dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
 
-        x += d;
-        y += d;
+        coord_controls.x += d;
+        coord_controls.y += d;
     }
     else if (dir == Dir::Right)
     {
@@ -736,19 +736,19 @@ wxRect GroupParameters::DrawBorder(AutoBufferedPaintDC &dc, int &x, int &y, int 
 
         dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
 
-        y = rect.y + d;
-        x = rect.x + d * 2 + r * 2;
+        coord_controls.y = rect.y + d;
+        coord_controls.x = rect.x + d * 2 + r * 2;
     }
     if (dir == Dir::Down)
     {
-        rect.x = x - WIDTH_CONTROL / 2 - d;
-        rect.y = y - d - r;
+        rect.x = coord_controls.x - WIDTH_CONTROL / 2 - d;
+        rect.y = coord_controls.y - d - r;
         rect.height += d + r * 2;
 
         dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
 
-        x = rect.x + d;
-        y = rect.y + d * 2 + r * 2;
+        coord_controls.x = rect.x + d;
+        coord_controls.y = rect.y + d * 2 + r * 2;
     }
 
     dc.RestorePenBrush();
