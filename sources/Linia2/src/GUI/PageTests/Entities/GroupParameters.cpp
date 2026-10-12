@@ -39,8 +39,10 @@ void GroupParameters::Draw(AutoBufferedPaintDC &dc)
         dc.RestorePen();
         dc.DrawTextInCenter(SymbolUGO(), rect);
     }
-
-    DrawUGO(dc);
+    else
+    {
+        DrawUGO(dc);
+    }
 }
 
 
