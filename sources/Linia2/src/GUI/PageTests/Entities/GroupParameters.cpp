@@ -384,16 +384,46 @@ void GroupParameters::CreateParametersI()
     }
     else if (chan.IsSubstrate())
     {
-        if (type.IsMeasI() || type.IsMeasUandI())
+        if (type.IsMeasUandI())
         {
-            for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
             {
-                titles.push_back(range.Name(RowRange::_125));
+                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_125));
+                }
+
+                tooltips.push_back(L("Начальное значение измеряемого тока подложки"));
+
+                CREATE_COMBO(L("Is старт"), "comboSubstrateStartI", parametersI);
             }
 
-            tooltips.push_back(L("Диапазон измерения тока базы"));
+            {
+                titles.Clear();
+                tooltips.Clear();
 
-            CREATE_COMBO(L("Предел"), "comboBaseMeasI", parametersI);
+                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_125));
+                }
+
+                tooltips.push_back(L("Диапазон измерения тока подложки"));
+
+                CREATE_COMBO(L("Is диап"), "comboSubstrateRangeI", parametersI);
+            }
+
+            {
+                titles.Clear();
+                tooltips.Clear();
+
+                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_125));
+                }
+
+                tooltips.push_back(L("Напряжение ограничения тока подложки"));
+
+                CREATE_COMBO(L("Is огр"), "comboSubstrateLimitI", parametersI);
+            }
         }
         if (type.IsSourceI() || type.IsSourceUandI())
         {
@@ -599,38 +629,48 @@ void GroupParameters::CreateParametersU()
 
                 tooltips.push_back(L("Величина ограничения напряжения подложки"));
 
-                CREATE_COMBO(L("Us ограничение"), "comboSubsrtateLimitU", parametersU);
+                CREATE_COMBO(L("Us огр"), "comboSubsrtateLimitU", parametersU);
             }
         }
-        else if (type.IsSourceU() || type.IsSourceUandI())
+        else if (type.IsSourceUandI())
         {
             {
-                titles.push_back("1 мВ");
-                titles.push_back("2 мВ");
-
-                tooltips.push_back(L("Шаг изменения испытательного напряжения"));
-
-                CREATE_COMBO(L("Us шаг"), "comboBaseSourceU", parametersU);
-            }
-
-            {
-                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"), "sliderOffsetSourceChannelS");
-                slider->SetToolTip(L("Смещение"));
-                slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(-10e-3, 10e-3);
-                parametersU.push_back(slider);
-                y += ButtonsCombo::HEIGHT + 5;
-            }
-
-            {
-                for (int i = 1; i < 11; i++)
+                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
                 {
-                    titles.push_back(wxString::Format("%d", i));
+                    titles.push_back(range.Name(RowRange::_124));
                 }
 
-                tooltips.push_back(L("Количество ступенек"));
+                tooltips.push_back(L("Начальное значение источника напряжения подложки"));
 
-                CREATE_COMBO(L("Кол-во ступенек"), "comboBaseNumSteps", parametersU);
+                CREATE_COMBO(L("Es старт"), "comboSubsrtateStartU", parametersU);
+            }
+
+            {
+                titles.Clear();
+                tooltips.Clear();
+
+                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_124));
+                }
+
+                tooltips.push_back(L("Разница напряжения между сосденими ступеньками источника напряжения подложки"));
+
+                CREATE_COMBO(L("Es шаг"), "comboSubsrtateStepU", parametersU);
+            }
+
+            {
+                titles.Clear();
+                tooltips.Clear();
+
+                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_124));
+                }
+
+                tooltips.push_back(L("Разница напряжения между сосденими ступеньками источника напряжения подложки"));
+
+                CREATE_COMBO(L("Es шаг"), "comboSubsrtateStepU", parametersU);
             }
         }
     }
