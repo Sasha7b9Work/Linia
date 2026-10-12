@@ -663,14 +663,14 @@ void GroupParameters::CreateParametersU()
                 titles.Clear();
                 tooltips.Clear();
 
-                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+                for (int i = 1; i < 11; i++)
                 {
-                    titles.push_back(range.Name(RowRange::_124));
+                    titles.push_back(wxString::Format("%d", i));
                 }
 
-                tooltips.push_back(L("Разница напряжения между сосденими ступеньками источника напряжения подложки"));
+                tooltips.push_back(L(""));
 
-                CREATE_COMBO(L("Es шаг"), "comboSubsrtateStepU", parametersU);
+                CREATE_COMBO(L("Кол-во ступенек"), "comboSubsrtateStepU", parametersU);
             }
         }
     }
