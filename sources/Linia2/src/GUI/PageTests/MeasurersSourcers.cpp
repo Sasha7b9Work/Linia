@@ -94,7 +94,7 @@ int MeasurersSourcers::PosY(int num)
     }
     else if (num == 1)          // Средний измеритель
     {
-        return 480;
+        return 500;
     }
     else if (num == 2)          // Нижний (источник)
     {
