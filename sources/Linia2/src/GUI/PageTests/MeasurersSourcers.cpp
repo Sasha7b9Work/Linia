@@ -81,17 +81,17 @@ void MeasurersSourcers::Draw(AutoBufferedPaintDC &dc, const Chan &ch, int x)
 
 int MeasurersSourcers::PosY(int num)
 {
-    if (num == 0)
+    if (num == 0)               // Верхний
     {
-        return 250;
+        return 390;
     }
-    else if (num == 1)
+    else if (num == 1)          // Средний
     {
-        return 380;
+        return 480;
     }
-    else if (num == 2)
+    else if (num == 2)          // Нижний
     {
-        return 510;
+        return 570;
     }
 
     return 100;
