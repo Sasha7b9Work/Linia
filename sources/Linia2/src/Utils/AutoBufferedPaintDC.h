@@ -33,7 +33,19 @@ public:
 
     wxPoint GetCoord() const;
 
+    // Сохранить текущее значение карандаша и установить новое
+    void StoreBrushAndSetNew(const wxBrush &);
+
+    // Восстановить ранее сохранённое значение карандаша
+    void RestoreBrush();
+
+    void StorePenAndSetNew(const wxPen &);
+
+    void RestorePen();
+
 private:
 
     wxPoint coord{ 0, 0 };
+    wxBrush stored_brush;
+    wxPen stored_pen;
 };

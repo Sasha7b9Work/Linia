@@ -32,6 +32,13 @@ void GroupParameters::Draw(AutoBufferedPaintDC &dc)
 
     CreateControls(rect);
 
+    if (type.IsScanner())
+    {
+        dc.StorePenAndSetNew(dc.GetBackground().GetColour());
+        dc.DrawRectangle({ rect.x + 1, rect.y + 1, rect.width - 2, rect.height - 2 });
+        dc.RestorePen();
+    }
+
     DrawUGO(dc);
 }
 
@@ -61,7 +68,10 @@ void GroupParameters::DrawUGO(AutoBufferedPaintDC &dc)
 {
     if (is_enabled)
     {
-        dc.DrawCircle(center, radius);
+        if (!type.IsScanner())
+        {
+            dc.DrawCircle(center, radius);
+        }
 
         const int dY = 3;
 
@@ -110,6 +120,10 @@ pchar GroupParameters::SymbolUGO()
     else if (type.IsMeasUandI())
     {
         return IsSetModeU() ? "V" : "I";
+    }
+    else if (type.IsScanner())
+    {
+        return L("Развёртка");
     }
 
     return "";
@@ -195,6 +209,11 @@ bool GroupParameters::IsSetModeU() const
 
 void GroupParameters::CreateButtonDisable(const wxRect &rect, const wxSize &size, wxPoint &pos)
 {
+    if (type.IsScanner())
+    {
+        return;
+    }
+
     btnDisable = new Button(PanelViewTest::self, "x", size);
 
     if (type.IsMeasI() || type.IsMeasU())

@@ -80,3 +80,31 @@ void AutoBufferedPaintDC::LineToY(int y)
 
     coord.y = y;
 }
+
+
+void AutoBufferedPaintDC::StoreBrushAndSetNew(const wxBrush &brush)
+{
+    stored_brush = GetBrush();
+
+    SetBrush(brush);
+}
+
+
+void AutoBufferedPaintDC::RestoreBrush()
+{
+    SetBrush(stored_brush);
+}
+
+
+void AutoBufferedPaintDC::StorePenAndSetNew(const wxPen &pen)
+{
+    stored_pen = GetPen();
+
+    SetPen(pen);
+}
+
+
+void AutoBufferedPaintDC::RestorePen()
+{
+    SetPen(stored_pen);
+}

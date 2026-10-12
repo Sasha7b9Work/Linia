@@ -70,6 +70,11 @@ public:
         {
             return value == SourceUI;
         }
+
+        bool IsScanner() const
+        {
+            return value == Scanner;
+        }
     };
 
     GroupParameters(Type::E, Chan::E, Dir::E);
