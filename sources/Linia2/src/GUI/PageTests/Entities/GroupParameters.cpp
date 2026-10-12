@@ -57,7 +57,7 @@ int GroupParameters::CalculateNumControls() const
     }
     else if (chan.IsCollector())
     {
-        if (type.IsSourceU() || type.IsScanner() || type.IsMeasI())
+        if (type.IsSourceU() || type.IsScanner() || type.IsMeasI() || type.IsMeasU())
         {
             return 2;
         }
@@ -413,7 +413,7 @@ void GroupParameters::CreateParametersI()
 
                 tooltips.push_back(L("Диапазон измерения тока коллектора"));
 
-                CREATE_COMBO(L("Ic размах"), "comboBaseMeasI", parametersI);
+                CREATE_COMBO(L("Ic размах"), "comboBaseDeltaI", parametersI);
             }
         }
     }
@@ -528,33 +528,56 @@ void GroupParameters::CreateParametersU()
     {
         if (type.IsMeasU())
         {
-            for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
             {
-                titles.push_back(range.Name(RowRange::_124));
+                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+                {
+                    titles.push_back(range.NameStep(RowRange::_124));
+                }
+
+                tooltips.push_back(L("Начальное значение напряжения коллектора"));
+
+                CREATE_COMBO(L("Uc старт"), "comboBaseStartU", parametersU);
             }
 
-            tooltips.push_back(L("Диапазон измерения напряжения коллектора"));
+            {
+                titles.Clear();
+                tooltips.Clear();
 
-            CREATE_COMBO(L("Uc макс"), "comboBaseMeasU", parametersU);
+                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_124));
+                }
+
+                tooltips.push_back(L("Диапазон измерения напряжения коллектора"));
+
+                CREATE_COMBO(L("Uc размах"), "comboBaseDeltaU", parametersU);
+            }
         }
         else if (type.IsSourceU())
         {
             {
-                titles.push_back("1 мВ");
-                titles.push_back("2 мВ");
+                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+                {
+                    titles.push_back(range.NameStep(RowRange::_124));
+                }
 
-                tooltips.push_back(L("Шаг изменения испытательного напряжения"));
+                tooltips.push_back(L("Начальное значние испытательного напряжения"));
 
-                CREATE_COMBO(L("Uc диапазон"), "comboBaseSourceU", parametersU);
+                CREATE_COMBO(L("Ec старт"), "comboBaseStartU", parametersU);
             }
 
             {
-                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"), "sliderOffsetSourceChannelC");
-                slider->SetToolTip(L("Смещение"));
-                slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(-10e-3, 10e-3);
-                parametersU.push_back(slider);
-                y += ButtonsCombo::HEIGHT + 5;
+                titles.Clear();
+                tooltips.Clear();
+
+                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_124));
+                }
+
+                tooltips.push_back(L("Диапазон изменения испытательного напряжения"));
+
+                CREATE_COMBO(L("Ec размах"), "comboBaseRangeU", parametersU);
             }
         }
     }
