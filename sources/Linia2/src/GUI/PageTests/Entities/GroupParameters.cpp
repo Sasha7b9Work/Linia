@@ -337,30 +337,40 @@ void GroupParameters::CreateParametersI()
 
                 tooltips.push_back(L("Ограничение по току базы"));
 
-                CREATE_COMBO(L("Ib ограничение"), "comboBaseLimitI", parametersI);
+                CREATE_COMBO(L("Ib огр"), "comboBaseLimitI", parametersI);
             }
         }
         else if (type.IsSourceUandI())
         {
             {
-                titles.push_back("1 нА");
-                titles.push_back("2 нА");
+                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_125));
+                }
 
-                tooltips.push_back(L("Шаг"));
+                tooltips.push_back(L("Начальное значение тока базы"));
 
-                CREATE_COMBO(L("Ib шаг"), "comboBaseSourceI", parametersI);
+                CREATE_COMBO(L("Jb старт"), "comboBaseStartI", parametersI);
             }
 
             {
-                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"), "sliderOffsetSourceChannelB");
-                slider->SetToolTip(L("Смещение"));
-                slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(-10e-3, 10e-3);
-                parametersI.push_back(slider);
-                y += ButtonsCombo::HEIGHT + 5;
+                titles.Clear();
+                tooltips.Clear();
+
+                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_125));
+                }
+
+                tooltips.push_back(L("Напряжение между ступеньками"));
+
+                CREATE_COMBO(L("Jb шаг"), "comboBaseStepI", parametersI);
             }
 
             {
+                titles.Clear();
+                tooltips.Clear();
+
                 for (int i = 1; i < 11; i++)
                 {
                     titles.push_back(wxString::Format("%d", i));
@@ -504,7 +514,7 @@ void GroupParameters::CreateParametersU()
 
                 tooltips.push_back(L("Ограничеие на превышение напряжения"));
 
-                CREATE_COMBO(L("Ub ограничение"), "comboBaseLimitU", parametersU);
+                CREATE_COMBO(L("Ub огр"), "comboBaseLimitU", parametersU);
             }
         }
         else if (type.IsSourceU() || type.IsSourceUandI())
