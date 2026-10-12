@@ -180,7 +180,7 @@ private:
 
     void DrawUGO(AutoBufferedPaintDC &);
 
-    pchar SymbolUGO();
+    wxString SymbolUGO();
 
     int CalculateNumControls() const;
 };

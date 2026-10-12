@@ -114,7 +114,7 @@ void GroupParameters::DrawUGO(AutoBufferedPaintDC &dc)
 }
 
 
-pchar GroupParameters::SymbolUGO()
+wxString GroupParameters::SymbolUGO()
 {
     if (type.IsMeasU())
     {
