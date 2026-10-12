@@ -37,6 +37,7 @@ void GroupParameters::Draw(AutoBufferedPaintDC &dc)
         dc.StorePenAndSetNew(dc.GetBackground().GetColour());
         dc.DrawRectangle({ rect.x + 1, rect.y + 1, rect.width - 2, rect.height - 2 });
         dc.RestorePen();
+        dc.SetPen(*wxBLACK);
         dc.DrawTextInCenter(SymbolUGO(), rect);
     }
     else
