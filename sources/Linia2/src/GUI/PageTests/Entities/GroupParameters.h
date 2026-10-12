@@ -1,4 +1,4 @@
-// 2026/09/04 12:17:30 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
+﻿// 2026/09/04 12:17:30 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "Settings/Tests/Ranges.h"
 #include "GUI/Controls/ButtonCombo.h"
