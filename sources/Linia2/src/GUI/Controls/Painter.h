@@ -13,26 +13,6 @@ struct Color;
 class wxGraphicsContext;
 
 
-class PaintDC
-{
-public:
-
-    PaintDC(AutoBufferedPaintDC &_dc) : dc(_dc) { }
-
-    void StorePenBrush();
-
-    void RestorePenBrush();
-
-    AutoBufferedPaintDC &dc;
-
-private:
-
-    wxPen stored_pen;
-
-    wxBrush stored_brush;
-};
-
-
 class Painter : public Panel
 {
 public:

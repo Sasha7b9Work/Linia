@@ -43,6 +43,10 @@ public:
 
     void RestorePen();
 
+    void StorePenBrush();
+
+    void RestorePenBrush();
+
 private:
 
     wxPoint coord{ 0, 0 };

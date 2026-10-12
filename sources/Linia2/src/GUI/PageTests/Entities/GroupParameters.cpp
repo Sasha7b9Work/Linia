@@ -608,9 +608,7 @@ wxRect GroupParameters::DrawBorder(AutoBufferedPaintDC &dc, int &x, int &y, int 
 {
     const int d = 5;
 
-    PaintDC paint(dc);
-
-    paint.StorePenBrush();
+    dc.StorePenBrush();
 
     dc.SetPen({ is_enabled ? (*wxBLACK) : wxColour(150, 150, 150), 1, wxPENSTYLE_SHORT_DASH });
     dc.SetBrush(*wxTRANSPARENT_BRUSH);
@@ -666,7 +664,7 @@ wxRect GroupParameters::DrawBorder(AutoBufferedPaintDC &dc, int &x, int &y, int 
         y = rect.y + d * 2 + r * 2;
     }
 
-    paint.RestorePenBrush();
+    dc.RestorePenBrush();
 
     return rect;
 }
