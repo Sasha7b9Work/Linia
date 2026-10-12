@@ -58,7 +58,7 @@ void MeasurersSourcers::Tune()
 }
 
 
-void MeasurersSourcers::_Draw(AutoBufferedPaintDC &dc, const Chan &ch, int x)
+void MeasurersSourcers::Draw(AutoBufferedPaintDC &dc, const Chan &ch, int x)
 {
     if (ch.IsBase())
     {
