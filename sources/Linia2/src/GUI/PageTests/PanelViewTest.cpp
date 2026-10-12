@@ -113,7 +113,7 @@ void PanelViewTest::OnEventPaint(wxPaintEvent &event)
 
 wxPoint PanelViewTest::CoordinateCollector() const
 {
-    return { 530, 170 };
+    return { 550, 170 };
 }
 
 
@@ -122,7 +122,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
     OStT::current->Draw(dc, GetCenter());
 
     const int X_B = 40;
-    const int X_S = 440;
+    const int X_S = 450;
     const int X_C = CoordinateCollector().x;
     const int Y_C = CoordinateCollector().y;
 
