@@ -121,7 +121,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 {
     OStT::current->Draw(dc, GetCenter());
 
-    const int DX = 300;
+    const int DX = 250;
     const int X_B = 100;
     const int X_S = X_B + DX;
     const int X_C = CoordinateCollector().x;
@@ -154,7 +154,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 
         DrawGround(dc);
 
-        meas_src.Draw(dc, Chan::C, X_C);
+        meas_src._Draw(dc, Chan::C, X_C);
     }
 
     {
@@ -172,7 +172,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 
             DrawGround(dc);
 
-            meas_src.Draw(dc, Chan::B, X_B);
+            meas_src._Draw(dc, Chan::B, X_B);
         }
     }
 
@@ -191,7 +191,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 
             DrawGround(dc);
 
-            meas_src.Draw(dc, Chan::S, X_S);
+            meas_src._Draw(dc, Chan::S, X_S);
         }
     }
 

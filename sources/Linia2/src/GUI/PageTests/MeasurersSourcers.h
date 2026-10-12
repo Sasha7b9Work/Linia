@@ -8,7 +8,7 @@
 // Источники и измерители для всех каналов
 struct MeasurersSourcers
 {
-    void Draw(AutoBufferedPaintDC &, const Chan &, int x);
+    void _Draw(AutoBufferedPaintDC &, const Chan &, int x);
     void Create();
     void HideAll();
     void Tune();
