@@ -150,6 +150,7 @@ protected:
     wxPoint center{ 0, 0 };
     std::vector<wxWindow *> parametersU;
     std::vector<wxWindow *> parametersI;
+    std::vector<wxWindow *> parametersScanner;
     Button *btnDisable = nullptr;               // Кнопка отлючения измерителя/источника
     bool is_enabled = true;
     bool is_showing = false;
@@ -175,6 +176,8 @@ private:
     // Создаёт напряжённые параметры
     void CreateParametersU();
 
+    void CreateParametersScanner(const wxRect &);
+
     // Возвращает true, если выбран режим источника или измерителя напряжения
     bool IsSetModeU() const;
 
@@ -183,6 +186,10 @@ private:
     wxString SymbolUGO();
 
     int CalculateNumControls() const;
+
+    void OnChangedScanMode(wxCommandEvent &);
+
+    void OnChangedScanNumberPoints(wxCommandEvent &);
 };
 
 

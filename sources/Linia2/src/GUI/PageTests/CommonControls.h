@@ -25,17 +25,11 @@ struct CommonControls
 private:
 
     Commutator *commutator = nullptr;                   // Управление коммутатором
-    StaticBox *boxScan = nullptr;                       // "Развёртка"
-    ButtonsCombo *bcScanMode = nullptr;                 // Режим развёртки
-    ButtonsCombo *bcScanNumberPoints = nullptr;         // Количество точек в одной ВАХ
     StaticBox *boxCover = nullptr;                      // "Крышка"
     StaticText *txtCover = nullptr;                     // Индикатор состояния крышки
     Button *btnEditSave = nullptr;                      // Сохранить результат редактирования
     Button *btnEditExit = nullptr;                      // Выйти из режима редактирования
     bool cover_is_opened = false;
-
-    void OnChangedScanMode(wxCommandEvent &);
-    void OnChangedScanNumberPoints(wxCommandEvent &);
 
     void CreateButton(Button **, wxWindow *parent, const wxString &, const wxPoint &, const wxSize &, std::function<void(wxCommandEvent &)> onClick);
 };

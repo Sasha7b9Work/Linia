@@ -138,11 +138,15 @@ wxString GroupParameters::SymbolUGO()
 
 void GroupParameters::CreateControls(const wxRect &rect)
 {
-    if (parametersI.size() == 0 && parametersU.size() == 0)
+    if (parametersI.size() == 0 &&
+        parametersU.size() == 0 &&
+        parametersScanner.size() == 0)
     {
         CreateParametersI();
 
         CreateParametersU();
+
+        CreateParametersScanner(rect);
 
         wxPoint pos{ coord_controls };
 
@@ -541,6 +545,70 @@ void GroupParameters::CreateParametersU()
 }
 
 
+void GroupParameters::CreateParametersScanner(const wxRect &rect)
+{
+    if (!type.IsScanner())
+    {
+        return;
+    }
+
+#define CREATE_BUTTONS_COMBO(name, title, num, func, _x, _y)                                        \
+    name = new ButtonsCombo(PanelViewTest::self, title, width, titles, tooltips, num, #name, ButtonsCombo::Type::Text);  \
+    name->Bind(wxEVT_COMBOBOX, &GroupParameters::func, this);                                                 \
+    name->SetPosition( {_x, _y} );
+
+    int width = GroupParameters::WIDTH_CONTROL;
+
+    {
+        ButtonsCombo *bcScanMode;
+
+        wxArrayString titles;
+        titles.push_back("SIN+");
+        titles.push_back("SIN-");
+        titles.push_back("AC");
+        titles.push_back("DC-");
+        titles.push_back("DC+");
+        titles.push_back("IMP+");
+        titles.push_back("IMP-");
+        titles.push_back("IMP_CVC");
+
+        wxArrayString tooltips;
+        tooltips.push_back("");
+
+        CREATE_BUTTONS_COMBO(bcScanMode, L("Тип"), 1, OnChangedScanMode, 10, SD::Y_SB(20));
+
+        bcScanMode->SetPosition(coord_controls);
+
+        parametersScanner.push_back(bcScanMode);
+    }
+
+    {
+        ButtonsCombo *bcScanNumberPoints;
+
+        wxArrayString titles =
+        {
+            "20",
+            "50",
+            "100",
+            "200"
+        };
+
+        wxArrayString tooltips =
+        {
+            ""
+        };
+
+        CREATE_BUTTONS_COMBO(bcScanNumberPoints, L("Кол-во точек"), 1, OnChangedScanNumberPoints, 10, SD::Y_SB(20 + 30));
+
+        int y = coord_controls.y + ButtonsCombo::HEIGHT + 5;
+
+        bcScanNumberPoints->SetPosition({ coord_controls.x, y });
+
+        parametersScanner.push_back(bcScanNumberPoints);
+    }
+}
+
+
 void GroupParameters::CreateButtonModeUI(const wxRect &rect, const wxSize &size, const wxPoint &pos)
 {
     if (type.IsSourceUandI())
@@ -673,4 +741,16 @@ wxRect GroupParameters::DrawBorder(AutoBufferedPaintDC &dc, int &x, int &y, int 
     dc.RestorePenBrush();
 
     return rect;
+}
+
+
+void GroupParameters::OnChangedScanMode(wxCommandEvent &)
+{
+
+}
+
+
+void GroupParameters::OnChangedScanNumberPoints(wxCommandEvent &)
+{
+
 }
