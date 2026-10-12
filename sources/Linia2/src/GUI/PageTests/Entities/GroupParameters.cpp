@@ -57,7 +57,7 @@ int GroupParameters::CalculateNumControls() const
     }
     else if (chan.IsCollector())
     {
-        if (type.IsSourceU() || type.IsScanner())
+        if (type.IsSourceU() || type.IsScanner() || type.IsMeasI())
         {
             return 2;
         }
@@ -391,14 +391,30 @@ void GroupParameters::CreateParametersI()
     {
         if (type.IsMeasI())
         {
-            for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
             {
-                titles.push_back(range.Name(RowRange::_125));
+                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_125));
+                }
+
+                tooltips.push_back(L("Минимальное измеряемое значение тока коллектора"));
+
+                CREATE_COMBO(L("Ic старт"), "comboBaseStartI", parametersI);
             }
 
-            tooltips.push_back(L("Диапазон измерения тока коллектора"));
+            {
+                titles.Clear();
+                tooltips.Clear();
 
-            CREATE_COMBO(L("Ic макс"), "comboBaseMeasI", parametersI);
+                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_125));
+                }
+
+                tooltips.push_back(L("Диапазон измерения тока коллектора"));
+
+                CREATE_COMBO(L("Ic размах"), "comboBaseMeasI", parametersI);
+            }
         }
     }
 }
