@@ -362,7 +362,7 @@ void GroupParameters::CreateParametersI()
                     titles.push_back(range.Name(RowRange::_125));
                 }
 
-                tooltips.push_back(L("Напряжение между ступеньками"));
+                tooltips.push_back(L("Изменение между ступеньками"));
 
                 CREATE_COMBO(L("Jb шаг"), "comboBaseStepI", parametersI);
             }
@@ -520,24 +520,34 @@ void GroupParameters::CreateParametersU()
         else if (type.IsSourceU() || type.IsSourceUandI())
         {
             {
-                titles.push_back("1 мВ");
-                titles.push_back("2 мВ");
+                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_124));
+                }
 
-                tooltips.push_back(L("Шаг изменения испытательного напряжения"));
+                tooltips.push_back(L("Значение первой ступеньги испытательного напряжения"));
 
-                CREATE_COMBO(L("Ub шаг"), "comboBaseSourceU", parametersU);
+                CREATE_COMBO(L("Eb старт"), "comboBaseStartU", parametersU);
             }
 
             {
-                SliderHidden *slider = new SliderHidden(PanelViewTest::self, WIDTH_CONTROL, L("Смещение"), "sliderOffsetSourceChannelB");
-                slider->SetToolTip(L("Смещение"));
-                slider->SetPosition({ coord_controls.x, y });
-                slider->SetRange(-10e-3, 10e-3);
-                parametersU.push_back(slider);
-                y += ButtonsCombo::HEIGHT + 5;
+                titles.Clear();
+                tooltips.Clear();
+
+                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_124));
+                }
+
+                tooltips.push_back(L("Напряжение между ступеньками испытательного напряжения"));
+
+                CREATE_COMBO(L("Eb шаг"), "comboBaseStepU", parametersU);
             }
 
             {
+                titles.Clear();
+                tooltips.Clear();
+
                 for (int i = 1; i < 11; i++)
                 {
                     titles.push_back(wxString::Format("%d", i));
@@ -551,16 +561,46 @@ void GroupParameters::CreateParametersU()
     }
     else if (chan.IsSubstrate())
     {
-        if (type.IsMeasU() || type.IsMeasUandI())
+        if (type.IsMeasUandI())
         {
-            for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
             {
-                titles.push_back(range.Name(RowRange::_124));
+                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_124));
+                }
+
+                tooltips.push_back(L("Начальное значение измерения напряжения подложки"));
+
+                CREATE_COMBO(L("Us старт"), "comboSubsrtateStartU", parametersU);
             }
 
-            tooltips.push_back(L("Диапазон измерения напряжения подложки"));
+            {
+                titles.Clear();
+                tooltips.Clear();
 
-            CREATE_COMBO(L("Us макс"), "comboBaseMeasU", parametersU);
+                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_124));
+                }
+
+                tooltips.push_back(L("Диапазон измерения напряжения подложки"));
+
+                CREATE_COMBO(L("Us диап"), "comboSubsrtateRangeU", parametersU);
+            }
+
+            {
+                titles.Clear();
+                tooltips.Clear();
+
+                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+                {
+                    titles.push_back(range.Name(RowRange::_124));
+                }
+
+                tooltips.push_back(L("Величина ограничения напряжения подложки"));
+
+                CREATE_COMBO(L("Us ограничение"), "comboSubsrtateLimitU", parametersU);
+            }
         }
         else if (type.IsSourceU() || type.IsSourceUandI())
         {
