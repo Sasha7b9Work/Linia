@@ -408,7 +408,7 @@ void GroupParameters::CreateParametersI()
 
                 tooltips.push_back(L("Диапазон измерения тока подложки"));
 
-                CREATE_COMBO(L("Is диап"), "comboSubstrateRangeI", parametersI);
+                CREATE_COMBO(L("Is размах"), "comboSubstrateRangeI", parametersI);
             }
 
             {
@@ -625,7 +625,7 @@ void GroupParameters::CreateParametersU()
 
                 tooltips.push_back(L("Диапазон измерения напряжения подложки"));
 
-                CREATE_COMBO(L("Us диап"), "comboSubsrtateRangeU", parametersU);
+                CREATE_COMBO(L("Us размах"), "comboSubsrtateRangeU", parametersU);
             }
 
             {
