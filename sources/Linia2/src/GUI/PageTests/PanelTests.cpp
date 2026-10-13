@@ -55,7 +55,7 @@ void PanelTests::ClearList()
 }
 
 
-void PanelTests::AddItem(const wxString &text, int iconIndex, const Test *test)
+void PanelTests::AddItem(const wxString &text, int iconIndex, const Test *_test)
 {
     if (!listView)
     {
@@ -64,7 +64,7 @@ void PanelTests::AddItem(const wxString &text, int iconIndex, const Test *test)
 
     long index = listView->InsertItem(listView->GetItemCount(), text, iconIndex);
 
-    listView->SetUserData(index, (void *)test);
+    listView->SetUserData(index, (void *)_test);
 }
 
 
@@ -97,9 +97,9 @@ void PanelTests::BuildListTests(std::vector<const LibraryCategory *> &libraries)
 
     for (auto lib : libraries)
     {
-        for (const Test *test : lib->tests)
+        for (const Test *t : lib->tests)
         {
-            AddItem(lib->UGO + " : " + test->UGO + " : " + test->name, -1, test);
+            AddItem(lib->UGO + " : " + t->UGO + " : " + t->name, -1, t);
         }
     }
 }
@@ -153,9 +153,9 @@ void PanelTests::OnEventMouseMove(wxMouseEvent &event)
     {
         ListView *list = (ListView *)event.GetEventObject();
 
-        Test *test = (Test *)list->GetUserData(index);
+        Test *t = (Test *)list->GetUserData(index);
 
-        wxString tooltip = test->lib->UGO + " : " + test->UGO + " : " + test->name;
+        wxString tooltip = t->lib->UGO + " : " + t->UGO + " : " + t->name;
         listView->SetToolTip(tooltip);
     }
     else
@@ -185,7 +185,7 @@ void PanelTests::OnEventLeftClickListItem(wxMouseEvent &event)
     menu.Append(1001, L("Активировать"));
 
     // Привязываем обработчики
-    menu.Bind(wxEVT_MENU, [this, index](wxCommandEvent &e)
+    menu.Bind(wxEVT_MENU, [index](wxCommandEvent &e)
         {
             switch (e.GetId())
             {

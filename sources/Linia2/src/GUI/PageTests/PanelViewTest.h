@@ -11,7 +11,7 @@
 
 class PanelViewTest : public Panel
 {
-    friend class SpecificControls;
+    friend struct SpecificControls;
 
 public:
 
@@ -20,6 +20,9 @@ public:
     static PanelViewTest *self;
 
     void SetTest(Test *);
+
+    // Нужно вызывать при изменении положения переключателя коммутатора
+    void OnEventChangeCommutator();
 
 private:
 

@@ -4,13 +4,6 @@
 #include "GUI/Controls/Button.h"
 #include "Utils/SystemDepend.h"
 #include "GUI/Controls/StaticText.h"
-#pragma warning(push, 0)
-    #include <wx/window.h>
-    #include <wx/dcclient.h>
-    #include <wx/panel.h>
-    #include <wx/timer.h>
-    #include <wx/stattext.h>
-#pragma warning(disable)
 
 
 struct WarningLabel
@@ -139,35 +132,11 @@ public:
 
         txtValue = new StaticText(canvas, "", { 118, 30 }, wxALIGN_CENTER_HORIZONTAL);
         txtValue->SetPosition({ radius - txtValue->GetSize().x / 2, 90 });
-        wxFont font = txtValue->GetFont();
         txtValue->SetFont(wxFont(22, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_HEAVY));
 
         warning_label = std::make_unique<WarningLabel>(txtValue);
 
-        Bind(wxEVT_BUTTON, [this](wxCommandEvent &event)
-            {
-                int id = event.GetId();
-                if (id == btnModePlus50V->GetId())
-                {
-                    SetValue(Value::_Plus50V);
-
-                    warning_label->Enable();
-                }
-                else if (id == btnModeMinus50V->GetId())
-                {
-                    SetValue(Value::_Minus50V);
-
-                    warning_label->Enable();
-                }
-                else if (id == btnMode3kV->GetId())
-                {
-                    SetValue(Value::_3kV);
-
-                    warning_label->Disable();
-                }
-
-                Refresh();
-            });
+        Bind(wxEVT_BUTTON, &Commutator::OnEventButton, this);
 
         SetValue(Value::_3kV);
     }
@@ -212,5 +181,7 @@ private:
     }
 
     std::unique_ptr<WarningLabel> warning_label = nullptr;
+
+    void OnEventButton(wxCommandEvent &);
 };
 

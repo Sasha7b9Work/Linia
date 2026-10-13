@@ -283,3 +283,9 @@ void PanelViewTest::DrawGround(AutoBufferedPaintDC &dc)
 
     dc.DrawLine(p.x - 10, p.y, p.x + 10, p.y);
 }
+
+
+void PanelViewTest::OnEventChangeCommutator()
+{
+
+}

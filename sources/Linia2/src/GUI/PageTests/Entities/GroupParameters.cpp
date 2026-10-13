@@ -57,9 +57,13 @@ int GroupParameters::CalculateNumControls() const
     }
     else if (chan.IsCollector())
     {
-        if (type.IsSourceU() || type.IsScanner() || type.IsMeasI() || type.IsMeasU())
+        if (type.IsSourceU() || type.IsMeasI() || type.IsMeasU())
         {
             return 2;
+        }
+        else if (type.IsScanner())
+        {
+            return 3;
         }
     }
 

@@ -40,7 +40,7 @@ void SpecificControls::Create(wxWindow *parent)
 
         bcTypeFET = new ButtonsCombo(parent, L("Канал"), GroupParameters::WIDTH_CONTROL, labels, tooltips, 1, L("Проводимость канала"));
         bcTypeFET->SetPosition(Coordinate());
-        bcTypeFET->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
+        bcTypeFET->Bind(wxEVT_COMBOBOX, [](wxCommandEvent &event)
             {
                 OStT::current->ToFET()->SetType((TypeFET::E)event.GetInt());
             });
@@ -57,7 +57,7 @@ void SpecificControls::Create(wxWindow *parent)
 
         bcCommonElectrodeDIOD = new ButtonsCombo(parent, L("Общий электрод"), GroupParameters::WIDTH_CONTROL, labels, tooltips, 1, L("Общий электрод"));
         bcCommonElectrodeDIOD->SetPosition(Coordinate());
-        bcCommonElectrodeDIOD->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
+        bcCommonElectrodeDIOD->Bind(wxEVT_COMBOBOX, [](wxCommandEvent &event)
             {
                 OStT::current->ToDIOD()->SetCommonElectrode((CommonElectrode::E)event.GetInt());
             });
@@ -75,7 +75,7 @@ void SpecificControls::Create(wxWindow *parent)
         bcControlElectrodeTHYR = new ButtonsCombo(parent, L("Управление"), GroupParameters::WIDTH_CONTROL, labels, tooltips, 1, L("Управляющий электрод"));
         wxPoint coord = Coordinate();
         bcControlElectrodeTHYR->SetPosition({ coord.x, coord.y + 30 });
-        bcControlElectrodeTHYR->Bind(wxEVT_COMBOBOX, [this](wxCommandEvent &event)
+        bcControlElectrodeTHYR->Bind(wxEVT_COMBOBOX, [](wxCommandEvent &event)
             {
                 OStT::current->ToTHYR()->SetControlElectrode((ControlElectrode::E)event.GetInt());
             });
