@@ -55,11 +55,7 @@ int GroupParameters::CalculateNumControls() const
     }
     else if (chan.IsCollector())
     {
-        if (type.IsSourceU())
-        {
-            return 2;
-        }
-        else if (type.IsScanner())
+        if (type.IsSourceU() || type.IsScanner())
         {
             return 3;
         }
@@ -476,22 +472,9 @@ void GroupParameters::CreateParametersI()
                     choices.push_back(range.Name(RowRange::_125));
                 }
 
-                wxArrayString tooltips{ L("Минимальное измеряемое значение тока коллектора") };
+                wxArrayString tooltips{ L("Диапазон измерения тока в блоке коллектора") };
 
-                CREATE_COMBO(comboBaseStartI, L("Ic старт"), parametersI);
-            }
-
-            {
-                wxArrayString choices;
-
-                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_125));
-                }
-
-                wxArrayString tooltips{ L("Диапазон измерения тока коллектора") };
-
-                CREATE_COMBO(comboBaseDeltaI, L("Ic размах"), parametersI);
+                CREATE_COMBO(comboBaseStartI, L("Ic диап"), parametersI);
             }
         }
     }
@@ -691,39 +674,13 @@ void GroupParameters::CreateParametersU()
                     choices.push_back(range.NameStep(RowRange::_124));
                 }
 
-                wxArrayString tooltips{ L("Начальное значение напряжения коллектора") };
+                wxArrayString tooltips{ L("Диапазон измерения напряжения в блоке коллектора") };
 
-                CREATE_COMBO(comboBaseStartU, L("Uc старт"), parametersU);
-            }
-
-            {
-                wxArrayString choices;
-
-                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_124));
-                }
-
-                wxArrayString tooltips{ L("Диапазон измерения напряжения коллектора") };
-
-                CREATE_COMBO(comboBaseDeltaU, L("Uc размах"), parametersU);
+                CREATE_COMBO(comboBaseStartU, L("Uc диап"), parametersU);
             }
         }
         else if (type.IsSourceU())
         {
-            {
-                wxArrayString choices;
-
-                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
-                {
-                    choices.push_back(range.NameStep(RowRange::_124));
-                }
-
-                wxArrayString tooltips{ L("Начальное значние испытательного напряжения") };
-
-                CREATE_COMBO(comboBaseStartU, L("Ec старт"), parametersU);
-            }
-
             {
                 wxArrayString choices;
 
@@ -734,7 +691,7 @@ void GroupParameters::CreateParametersU()
 
                 wxArrayString tooltips{ L("Диапазон изменения испытательного напряжения") };
 
-                CREATE_COMBO(comboBaseRangeU, L("Ec размах"), parametersU);
+                CREATE_COMBO(comboBaseRangeU, L("Ec диап"), parametersU);
             }
         }
     }

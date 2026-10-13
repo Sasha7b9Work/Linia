@@ -24,7 +24,6 @@ private:
     Ampermeter *ampCollector = nullptr;
     Voltmeter *voltCollector = nullptr;
     SourceVoltage *srcVoltageCollector = nullptr;
-
     Scanner *scannerCollector = nullptr;
 
     // Возвращает позицию по Y источника либо измерителя
