@@ -7,11 +7,6 @@
 #include "GUI/Controls/SliderHidden.h"
 
 
-#define CREATE_BUTTONS_COMBO_RANGE(name, title, _x, _y)             \
-    name = new ComboInput(this, title, WIDTH_CONTROL, titles, tooltips, #name); \
-    name->SetPosition({ _x, _y });
-
-
 GroupParameters::GroupParameters(Type::E _type, Chan::E _chan, Dir::E _dir) :
     type(_type), chan(_chan), dir(_dir)
 {
@@ -34,9 +29,12 @@ void GroupParameters::Draw(AutoBufferedPaintDC &dc)
 
     if (type.IsScanner())
     {
-        dc.StorePenAndSetNew(dc.GetBackground().GetColour());
-        dc.DrawRectangle({ rect.x + 1, rect.y + 1, rect.width - 2, rect.height - 2 });
-        dc.RestorePen();
+        if (dir != Dir::Right)
+        {
+            dc.StorePenAndSetNew(dc.GetBackground().GetColour());
+            dc.DrawRectangle({ rect.x + 1, rect.y + 1, rect.width - 2, rect.height - 2 });
+            dc.RestorePen();
+        }
         dc.DrawTextInCenter(SymbolUGO(), {rect.x, rect.y, rect.width, 30});
     }
     else
@@ -57,7 +55,7 @@ int GroupParameters::CalculateNumControls() const
     }
     else if (chan.IsCollector())
     {
-        if (type.IsSourceU() || type.IsMeasI() || type.IsMeasU())
+        if (type.IsSourceU())
         {
             return 2;
         }
@@ -279,10 +277,10 @@ void GroupParameters::CreateButtonDisable(const wxRect &rect, const wxSize &size
 }
 
 
-#define CREATE_COMBO(title, name, vec)                                                                          \
-    ComboInput *combo = new ComboInput(PanelViewTest::self, title, WIDTH_CONTROL, choices, tooltips, name);      \
-    combo->SetPosition({ coord_controls.x, y });                                                                \
-    vec.push_back(combo);                                                                                       \
+#define CREATE_COMBO(name, title, vec)                                                                         \
+    ComboInput *name = new ComboInput(PanelViewTest::self, title, WIDTH_CONTROL, choices, tooltips, #name);    \
+    name->SetPosition({ coord_controls.x, y });                                                                \
+    vec.push_back(name);                                                                                       \
     y += ButtonsCombo::HEIGHT + 5;
 
 void GroupParameters::CreateParametersI()
@@ -310,7 +308,7 @@ void GroupParameters::CreateParametersI()
 
                 wxArrayString tooltips{ L("Начальное измерения тока базы") };
 
-                CREATE_COMBO(L("Ib старт"), "comboBaseStartI", parametersI);
+                CREATE_COMBO(comboBaseStartI, L("Ib старт"), parametersI);
             }
 
             {
@@ -323,7 +321,7 @@ void GroupParameters::CreateParametersI()
 
                 wxArrayString tooltips{ L("Диапазон измерения тока базы") };
 
-                CREATE_COMBO(L("Ib размах"), "comboBaseRangeI", parametersI);
+                CREATE_COMBO(comboBaseRangeI, L("Ib размах"), parametersI);
             }
 
             {
@@ -336,7 +334,7 @@ void GroupParameters::CreateParametersI()
 
                 wxArrayString tooltips{ L("Ограничение по току базы") };
 
-                CREATE_COMBO(L("Ib огр"), "comboBaseLimitI", parametersI);
+                CREATE_COMBO(comboBaseLimitI, L("Ib огр"), parametersI);
             }
         }
         else if (type.IsSourceUandI())
@@ -351,7 +349,7 @@ void GroupParameters::CreateParametersI()
 
                 wxArrayString tooltips{ L("Начальное значение тока базы") };
 
-                CREATE_COMBO(L("Jb старт"), "comboBaseStartI", parametersI);
+                CREATE_COMBO(comboBaseStartI, L("Jb старт"), parametersI);
             }
 
             {
@@ -364,7 +362,7 @@ void GroupParameters::CreateParametersI()
 
                 wxArrayString tooltips{ L("Изменение между ступеньками") };
 
-                CREATE_COMBO(L("Jb шаг"), "comboBaseStepI", parametersI);
+                CREATE_COMBO(comboBaseStepI, L("Jb шаг"), parametersI);
             }
 
             {
@@ -377,7 +375,7 @@ void GroupParameters::CreateParametersI()
 
                 wxArrayString tooltips{ L("Количество ступенек") };
 
-                CREATE_COMBO(L("Кол-во ступенек"), "comboBaseNumSteps", parametersI);
+                CREATE_COMBO(comboBaseNumSteps, L("Кол-во ступенек"), parametersI);
             }
         }
     }
@@ -395,7 +393,7 @@ void GroupParameters::CreateParametersI()
 
                 wxArrayString tooltips{ L("Начальное значение измеряемого тока подложки") };
 
-                CREATE_COMBO(L("Is старт"), "comboSubstrateStartI", parametersI);
+                CREATE_COMBO(comboSubstrateStartI, L("Is старт"), parametersI);
             }
 
             {
@@ -408,7 +406,7 @@ void GroupParameters::CreateParametersI()
 
                 wxArrayString tooltips{ L("Диапазон измерения тока подложки") };
 
-                CREATE_COMBO(L("Is размах"), "comboSubstrateRangeI", parametersI);
+                CREATE_COMBO(comboSubstrateRangeI, L("Is размах"), parametersI);
             }
 
             {
@@ -421,7 +419,7 @@ void GroupParameters::CreateParametersI()
 
                 wxArrayString tooltips{ L("Напряжение ограничения тока подложки") };
 
-                CREATE_COMBO(L("Is огр"), "comboSubstrateLimitI", parametersI);
+                CREATE_COMBO(comboSubstrateLimitI, L("Is огр"), parametersI);
             }
         }
         if (type.IsSourceUandI())
@@ -436,7 +434,7 @@ void GroupParameters::CreateParametersI()
 
                 wxArrayString tooltips{ L("Начальное значение источника тока подложки") };
 
-                CREATE_COMBO(L("Js старт"), "comboSubsrtateStartI", parametersI);
+                CREATE_COMBO(comboSubsrtateStartI, L("Js старт"), parametersI);
             }
 
             {
@@ -449,7 +447,7 @@ void GroupParameters::CreateParametersI()
 
                 wxArrayString tooltips{ L("Разница тока между сосденими ступеньками источника тока подложки") };
 
-                CREATE_COMBO(L("Js шаг"), "comboSubsrtateStepI", parametersI);
+                CREATE_COMBO(comboSubsrtateStepI, L("Js шаг"), parametersI);
             }
 
             {
@@ -462,7 +460,7 @@ void GroupParameters::CreateParametersI()
 
                 wxArrayString tooltips{ L("") };
 
-                CREATE_COMBO(L("Кол-во ступенек"), "comboSubsrtateStepI", parametersI);
+                CREATE_COMBO(comboSubsrtateStepI, L("Кол-во ступенек"), parametersI);
             }
         }
     }
@@ -480,7 +478,7 @@ void GroupParameters::CreateParametersI()
 
                 wxArrayString tooltips{ L("Минимальное измеряемое значение тока коллектора") };
 
-                CREATE_COMBO(L("Ic старт"), "comboBaseStartI", parametersI);
+                CREATE_COMBO(comboBaseStartI, L("Ic старт"), parametersI);
             }
 
             {
@@ -493,7 +491,7 @@ void GroupParameters::CreateParametersI()
 
                 wxArrayString tooltips{ L("Диапазон измерения тока коллектора") };
 
-                CREATE_COMBO(L("Ic размах"), "comboBaseDeltaI", parametersI);
+                CREATE_COMBO(comboBaseDeltaI, L("Ic размах"), parametersI);
             }
         }
     }
@@ -525,7 +523,7 @@ void GroupParameters::CreateParametersU()
 
                 wxArrayString tooltips{ L("Начальное значенпие измеряемоого напряжения") };
 
-                CREATE_COMBO(L("Ub старт"), "comboBaseStartU", parametersU);
+                CREATE_COMBO(comboBaseStartU, L("Ub старт"), parametersU);
             }
 
             {
@@ -538,7 +536,7 @@ void GroupParameters::CreateParametersU()
 
                 wxArrayString tooltips{ L("Диапазон измерения напряжения базы") };
 
-                CREATE_COMBO(L("Ub размах"), "comboBaseRangeU", parametersU);
+                CREATE_COMBO(comboBaseRangeU, L("Ub размах"), parametersU);
             }
 
             {
@@ -551,7 +549,7 @@ void GroupParameters::CreateParametersU()
 
                 wxArrayString tooltips{ L("Ограничеие на превышение напряжения") };
 
-                CREATE_COMBO(L("Ub огр"), "comboBaseLimitU", parametersU);
+                CREATE_COMBO(comboBaseLimitU, L("Ub огр"), parametersU);
             }
         }
         else if (type.IsSourceU() || type.IsSourceUandI())
@@ -566,7 +564,7 @@ void GroupParameters::CreateParametersU()
 
                 wxArrayString tooltips{ L("Значение первой ступеньги испытательного напряжения") };
 
-                CREATE_COMBO(L("Eb старт"), "comboBaseStartU", parametersU);
+                CREATE_COMBO(comboBaseStartU, L("Eb старт"), parametersU);
             }
 
             {
@@ -579,7 +577,7 @@ void GroupParameters::CreateParametersU()
 
                 wxArrayString tooltips{ L("Напряжение между ступеньками испытательного напряжения") };
 
-                CREATE_COMBO(L("Eb шаг"), "comboBaseStepU", parametersU);
+                CREATE_COMBO(comboBaseStepU, L("Eb шаг"), parametersU);
             }
 
             {
@@ -592,7 +590,7 @@ void GroupParameters::CreateParametersU()
 
                 wxArrayString tooltips{ L("Количество ступенек") };
 
-                CREATE_COMBO(L("Кол-во ступенек"), "comboBaseNumSteps", parametersU);
+                CREATE_COMBO(comboBaseNumSteps, L("Кол-во ступенек"), parametersU);
             }
         }
     }
@@ -610,7 +608,7 @@ void GroupParameters::CreateParametersU()
 
                 wxArrayString tooltips{ L("Начальное значение измерения напряжения подложки") };
 
-                CREATE_COMBO(L("Us старт"), "comboSubsrtateStartU", parametersU);
+                CREATE_COMBO(comboSubsrtateStartU, L("Us старт"), parametersU);
             }
 
             {
@@ -623,7 +621,7 @@ void GroupParameters::CreateParametersU()
 
                 wxArrayString tooltips{ L("Диапазон измерения напряжения подложки") };
 
-                CREATE_COMBO(L("Us размах"), "comboSubsrtateRangeU", parametersU);
+                CREATE_COMBO(comboSubsrtateRangeU, L("Us размах"), parametersU);
             }
 
             {
@@ -636,7 +634,7 @@ void GroupParameters::CreateParametersU()
 
                 wxArrayString tooltips{ L("Величина ограничения напряжения подложки") };
 
-                CREATE_COMBO(L("Us огр"), "comboSubsrtateLimitU", parametersU);
+                CREATE_COMBO(comboSubsrtateLimitU, L("Us огр"), parametersU);
             }
         }
         else if (type.IsSourceUandI())
@@ -651,7 +649,7 @@ void GroupParameters::CreateParametersU()
 
                 wxArrayString tooltips{ L("Начальное значение источника напряжения подложки") };
 
-                CREATE_COMBO(L("Es старт"), "comboSubsrtateStartU", parametersU);
+                CREATE_COMBO(comboSubsrtateStartU, L("Es старт"), parametersU);
             }
 
             {
@@ -664,7 +662,7 @@ void GroupParameters::CreateParametersU()
 
                 wxArrayString tooltips{ L("Разница напряжения между сосденими ступеньками источника напряжения подложки") };
 
-                CREATE_COMBO(L("Es шаг"), "comboSubsrtateStepU", parametersU);
+                CREATE_COMBO(comboSubsrtateStepU, L("Es шаг"), parametersU);
             }
 
             {
@@ -677,7 +675,7 @@ void GroupParameters::CreateParametersU()
 
                 wxArrayString tooltips{ L("") };
 
-                CREATE_COMBO(L("Кол-во ступенек"), "comboSubsrtateStepU", parametersU);
+                CREATE_COMBO(comboSubsrtateStepU, L("Кол-во ступенек"), parametersU);
             }
         }
     }
@@ -695,7 +693,7 @@ void GroupParameters::CreateParametersU()
 
                 wxArrayString tooltips{ L("Начальное значение напряжения коллектора") };
 
-                CREATE_COMBO(L("Uc старт"), "comboBaseStartU", parametersU);
+                CREATE_COMBO(comboBaseStartU, L("Uc старт"), parametersU);
             }
 
             {
@@ -708,7 +706,7 @@ void GroupParameters::CreateParametersU()
 
                 wxArrayString tooltips{ L("Диапазон измерения напряжения коллектора") };
 
-                CREATE_COMBO(L("Uc размах"), "comboBaseDeltaU", parametersU);
+                CREATE_COMBO(comboBaseDeltaU, L("Uc размах"), parametersU);
             }
         }
         else if (type.IsSourceU())
@@ -723,7 +721,7 @@ void GroupParameters::CreateParametersU()
 
                 wxArrayString tooltips{ L("Начальное значние испытательного напряжения") };
 
-                CREATE_COMBO(L("Ec старт"), "comboBaseStartU", parametersU);
+                CREATE_COMBO(comboBaseStartU, L("Ec старт"), parametersU);
             }
 
             {
@@ -736,7 +734,7 @@ void GroupParameters::CreateParametersU()
 
                 wxArrayString tooltips{ L("Диапазон изменения испытательного напряжения") };
 
-                CREATE_COMBO(L("Ec размах"), "comboBaseRangeU", parametersU);
+                CREATE_COMBO(comboBaseRangeU, L("Ec размах"), parametersU);
             }
         }
     }
