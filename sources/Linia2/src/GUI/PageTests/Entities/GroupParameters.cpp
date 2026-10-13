@@ -767,18 +767,18 @@ void GroupParameters::CreateParametersScanner()
     {
         ButtonsCombo *bcScanMode;
 
-        wxArrayString titles;
-        titles.push_back("SIN+");
-        titles.push_back("SIN-");
-        titles.push_back("AC");
-        titles.push_back("DC-");
-        titles.push_back("DC+");
-        titles.push_back("IMP+");
-        titles.push_back("IMP-");
-        titles.push_back("IMP_CVC");
+        wxArrayString titles
+        {
+            "SIN+",
+            "SIN-",
+            "AC",
+            "DC+",
+            "DC-",
+            "IMP+",
+            "IMP-"
+        };
 
-        wxArrayString tooltips;
-        tooltips.push_back("");
+        wxArrayString tooltips { "" };
 
         CREATE_BUTTONS_COMBO(bcScanMode, L("Тип"), 1, OnChangedScanMode, 10, SD::Y_SB(20));
 
@@ -792,7 +792,7 @@ void GroupParameters::CreateParametersScanner()
     {
         ButtonsCombo *bcScanNumberPoints;
 
-        wxArrayString titles =
+        wxArrayString titles
         {
             "20",
             "50",
@@ -800,10 +800,7 @@ void GroupParameters::CreateParametersScanner()
             "200"
         };
 
-        wxArrayString tooltips =
-        {
-            ""
-        };
+        wxArrayString tooltips{ "" };
 
         CREATE_BUTTONS_COMBO(bcScanNumberPoints, L("Кол-во точек"), 1, OnChangedScanNumberPoints, 10, SD::Y_SB(20 + 30));
 
@@ -812,6 +809,27 @@ void GroupParameters::CreateParametersScanner()
         bcScanNumberPoints->SetPosition({ coord_controls.x, y });
 
         parametersScanner.push_back(bcScanNumberPoints);
+    }
+
+    {
+        ButtonsCombo *bcScanDurationImpulse;
+
+        wxArrayString titles
+        {
+            "20",
+            "50",
+            "100"
+        };
+
+        wxArrayString tooltips { L("Длительность испытательных импульсов") };
+
+        CREATE_BUTTONS_COMBO(bcScanDurationImpulse, L("Длит. имп."), 1, OnChangedScanDurationImpulse, 10, SD::Y_SB(20 + 30));
+
+        y += ButtonsCombo::HEIGHT + 5;
+
+        bcScanDurationImpulse->SetPosition({ coord_controls.x, y });
+
+        parametersScanner.push_back(bcScanDurationImpulse);
     }
 }
 
@@ -967,6 +985,12 @@ void GroupParameters::OnChangedScanMode(wxCommandEvent &)
 
 
 void GroupParameters::OnChangedScanNumberPoints(wxCommandEvent &)
+{
+
+}
+
+
+void GroupParameters::OnChangedScanDurationImpulse(wxCommandEvent &)
 {
 
 }

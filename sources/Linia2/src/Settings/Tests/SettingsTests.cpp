@@ -29,13 +29,13 @@ pchar TypeScan::NameShort(E v)
 {
     static const pchar names[Count] =
     {
-        "IMP_P",
-        "IMP_N",
-        "DC_P",
-        "DC_N",
         "SYN_P",
         "SYN_N",
-        "AC"
+        "AC",
+        "DC_P",
+        "DC_N",
+        "IMP_P",
+        "IMP_N"
     };
 
     return names[v];
@@ -46,15 +46,13 @@ pchar TypeScan::NameFileICO(E v)
 {
     static pchar names[Count] =
     {
-        "icons/graphs/imp_up.ico",
-        "icons/graphs/imp_down.ico",
-        "icons/graphs/triang_up.ico",
-        "icons/graphs/triang_down.ico",
         "icons/graphs/sin_hi.ico",
         "icons/graphs/sin_lo.ico",
-        "icons/graphs/sin.ico"
-//        "icons/graphs/imp_hi_osc.ico",
-//        "icons/graphs/imp_hi_IVC.ico"
+        "icons/graphs/sin.ico",
+        "icons/graphs/triang_up.ico",
+        "icons/graphs/triang_down.ico",
+        "icons/graphs/imp_up.ico",
+        "icons/graphs/imp_down.ico"
     };
 
     if (v < Count)
@@ -72,13 +70,13 @@ pchar TypeScan::NameGUI(E v)
 {
     static pchar names[Count] =
     {
-        "Положительные импульсы",
-        "Отрицательные импульсы",
-        "Положительное постоянное",
-        "Отрицательное постоянное",
         "Положительные полуволны",
         "Отрицательные полуволны",
-        "Синусоидальное"
+        "Синусоидальное",
+        "Положительное постоянное",
+        "Отрицательное постоянное",
+        "Положительные импульсы",
+        "Отрицательные импульсы"
     };
 
     if (v < Count)

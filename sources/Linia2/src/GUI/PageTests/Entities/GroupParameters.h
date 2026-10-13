@@ -188,8 +188,8 @@ private:
     int CalculateNumControls() const;
 
     void OnChangedScanMode(wxCommandEvent &);
-
     void OnChangedScanNumberPoints(wxCommandEvent &);
+    void OnChangedScanDurationImpulse(wxCommandEvent &);
 };
 
 

@@ -25,11 +25,10 @@ PageFPGA::PageFPGA(wxNotebook *notebook) :
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0001, "SIN+" });
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0010, "SIN-" });
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0011, "AC" });
-        commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0100, "DC-" });
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0101, "DC+" });
+        commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0100, "DC-" });
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0110, "IMP+" });
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0111, "IMP-" });
-        commandsScan.emplace_back(StructDescription::CommandStruct{ 0b1000, "IMP-CVC" });
         desc0.emplace_back(StructDescription{ 0, 4, L("разв"), L("развёртка"), { true, commandsScan } });
 
         std::vector<StructDescription::CommandStruct> commandsTypeElem; //-V826
