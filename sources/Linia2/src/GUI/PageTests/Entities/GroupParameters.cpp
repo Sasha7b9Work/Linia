@@ -669,9 +669,9 @@ void GroupParameters::CreateParametersU()
             {
                 wxArrayString choices;
 
-                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+                for (RangeU range{ RangeU::_400_500mV }; range.value <= RangeU::_4_5kV; ++range)
                 {
-                    choices.push_back(range.NameStep(RowRange::_124));
+                    choices.push_back(range.Name(RowRange::_125));
                 }
 
                 wxArrayString tooltips{ L("Диапазон измерения напряжения в блоке коллектора") };

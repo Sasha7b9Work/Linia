@@ -110,14 +110,45 @@ const RangeU::Desc RangeU::desc[RangeU::Count] =
 };
 
 
-pchar RangeU::Name(RowRange::E row, bool space) const
+wxString RangeU::Name(RowRange::E row, bool space, bool lang_ru) const
 {
+    wxString result;
+
     if (space)
     {
-        return desc[value].name_spaces[row];
+        result = desc[value].name_spaces[row];
+    }
+    else
+    {
+        result = desc[value].name[row];
     }
 
-    return desc[value].name[row];
+    if (lang_ru)
+    {
+        size_t length = result.Length();
+
+        if (result.EndsWith("nV"))
+        {
+            result[length - 1] = 'В';
+            result[length - 2] = 'н';
+        }
+        else if (result.EndsWith("mV"))
+        {
+            result[length - 1] = 'В';
+            result[length - 2] = 'м';
+        }
+        else if (result.EndsWith("kV"))
+        {
+            result[length - 1] = 'В';
+            result[length - 2] = 'к';
+        }
+        else if (result.EndsWith("V"))
+        {
+            result[length - 1] = 'В';
+        }
+    }
+
+    return result;
 }
 
 

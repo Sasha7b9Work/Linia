@@ -187,7 +187,7 @@ struct RangeU
     RangeU(E v) : value(v) { }
 
     // Если space, то между значением и единицами измерения пробел
-    pchar Name(RowRange::E, bool space = true) const;
+    wxString Name(RowRange::E, bool space = true, bool land_ru = true) const;
 
     wxString NameStep(RowRange::E) const;
 
@@ -208,9 +208,9 @@ private:
 
     struct Desc
     {
-        pchar name_spaces[RowRange::Count];
-        pchar name[RowRange::Count];
-        double max_abs[RowRange::Count];
+        pchar name_spaces[RowRange::Count];     // Между значениями и единицами измерения - пробел
+        pchar name[RowRange::Count];            // Между значениями и единицами измерения нету пробела
+        double max_abs[RowRange::Count];        // Значение в абсолютном виде
     };
 
     static const Desc desc[Count];
