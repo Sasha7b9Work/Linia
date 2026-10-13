@@ -156,6 +156,12 @@ bool Test::IsDIOD() const
 }
 
 
+bool Test::IsZENER() const
+{
+    return lib->UGO == "ZENER";
+}
+
+
 bool Test::IsRES() const
 {
     return lib->UGO == "RES";

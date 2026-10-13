@@ -122,7 +122,7 @@ public:
 
     DIOD *ToDIOD()
     {
-        return (Test::current->IsDIOD() || Test::current->IsTHYR()) ? (DIOD *)this : nullptr;
+        return (Test::current->IsDIOD() || Test::current->IsTHYR() || Test::current->IsZENER()) ? (DIOD *)this : nullptr;
     }
 
     THYR *ToTHYR()

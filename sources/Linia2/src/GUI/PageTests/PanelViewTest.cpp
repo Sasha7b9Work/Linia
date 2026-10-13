@@ -14,6 +14,7 @@
 #include "GUI/PageTests/Entities/OStT/DIOD.h"
 #include "GUI/PageTests/Entities/OStT/RES.h"
 #include "GUI/PageTests/Entities/OStT/CAP.h"
+#include "GUI/PageTests/Entities/OStT/ZENER.h"
 #include "GUI/Controls/Windows.h"
 
 
@@ -227,6 +228,10 @@ OStT *PanelViewTest::CreateOStT()
     else if (Test::current->IsDIOD())
     {
         return new DIOD();
+    }
+    else if (Test::current->IsZENER())
+    {
+        return new ZENER();
     }
     else if (Test::current->IsRES())
     {

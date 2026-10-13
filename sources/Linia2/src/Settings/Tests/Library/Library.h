@@ -29,6 +29,7 @@ public:
     bool IsDARL() const;
     bool IsTHYR() const;
     bool IsDIOD() const;
+    bool IsZENER() const;
     bool IsRES() const;
     bool IsCAP() const;
 };

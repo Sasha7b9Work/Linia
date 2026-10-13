@@ -3,12 +3,6 @@
 #include "GUI/PageTests/Entities/OStT/THYR.h"
 
 
-THYR::THYR() : DIOD()
-{
-
-}
-
-
 void THYR::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
     DIOD::DrawCommon(dc, c);

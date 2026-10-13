@@ -13,7 +13,7 @@ class DIOD : public OStT
 {
 public:
 
-    DIOD();
+    DIOD() : OStT() { }
 
     virtual void Draw(AutoBufferedPaintDC &, const wxPoint &) override;
 

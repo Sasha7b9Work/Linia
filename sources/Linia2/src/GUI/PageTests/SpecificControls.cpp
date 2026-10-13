@@ -108,7 +108,8 @@ void SpecificControls::Tune()
         bcTypeFET->Show();
     }
     else if (Test::current->IsDIOD() ||
-        Test::current->IsTHYR())
+        Test::current->IsTHYR() ||
+        Test::current->IsZENER())
     {
         bcCommonElectrodeDIOD->Show();
     }

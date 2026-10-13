@@ -3,12 +3,6 @@
 #include "GUI/PageTests/Entities/OStT/DIOD.h"
 
 
-DIOD::DIOD() : OStT()
-{
-
-}
-
-
 void DIOD::Draw(AutoBufferedPaintDC &dc, const wxPoint &c)
 {
     DrawCommon(dc, c);
