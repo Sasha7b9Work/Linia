@@ -794,9 +794,6 @@ void GroupParameters::CreateParametersScanner()
 
         wxArrayString titles
         {
-            "20",
-            "50",
-            "100",
             "200"
         };
 
@@ -978,9 +975,57 @@ wxRect GroupParameters::DrawBorder(AutoBufferedPaintDC &dc, int r)
 }
 
 
-void GroupParameters::OnChangedScanMode(wxCommandEvent &)
+ButtonsCombo *GroupParameters::FindComboBoxByName(const wxString &name)
 {
+    for (auto wnd : parametersI)
+    {
+        if (wnd->GetName().EndsWith(name))
+        {
+            return (ButtonsCombo *)wnd;
+        }
+    }
 
+    for (auto wnd : parametersU)
+    {
+        if (wnd->GetName().EndsWith(name))
+        {
+            return (ButtonsCombo *)wnd;
+        }
+    }
+
+    for (auto wnd : parametersScanner)
+    {
+        if (wnd->GetName().EndsWith(name))
+        {
+            return (ButtonsCombo *)wnd;
+        }
+    }
+
+    return nullptr;
+}
+
+
+void GroupParameters::OnChangedScanMode(wxCommandEvent &event)
+{
+    int num = event.GetInt();
+
+    if (num <= TypeScan::AC)
+    {
+        wxArrayString choices{ "200" };
+
+        FindComboBoxByName("bcScanNumberPoints")->SetChoices(choices);
+    }
+    else
+    {
+        wxArrayString choices
+        {
+            "20",
+            "50",
+            "100"
+        };
+
+        FindComboBoxByName("bcScanNumberPoints")->SetChoices(choices);
+    }
 }
 
 

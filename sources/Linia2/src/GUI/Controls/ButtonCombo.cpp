@@ -330,8 +330,15 @@ void ButtonsCombo::Unpack()
 
 void ButtonsCombo::SetChoices(const wxArrayString &choices, const wxArrayString &_tooltips)
 {
-    labels = choices;
     tooltips = _tooltips;
+
+    SetChoices(choices);
+}
+
+
+void ButtonsCombo::SetChoices(const wxArrayString &choices)
+{
+    labels = choices;
 
     if (insert_empty)
     {
@@ -346,6 +353,7 @@ void ButtonsCombo::SetChoices(const wxArrayString &choices, const wxArrayString 
     }
 
     SetCurrentSelection(GetCurrentSelection() >= NumChoices() ? 0 : GetCurrentSelection());
+
 }
 
 
