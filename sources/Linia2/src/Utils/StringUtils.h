@@ -95,4 +95,7 @@ namespace SU
     pchar LeaveTheLastOnes(pchar in, int number);
 
     double ASCIItoFloat(pchar);
+
+    // Заменить единицы измерения напряжения на русские
+    wxString ReplaceVoltageUnitsToRU(const wxString &);
 };

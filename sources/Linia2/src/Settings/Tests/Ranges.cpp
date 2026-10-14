@@ -1,8 +1,9 @@
 ﻿// 2025/7/27 22:27:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Settings/Tests/Ranges.h"
+#include "Utils/StringUtils.h"
 #pragma warning(push, 0)
-#include <wx/arrstr.h>
+    #include <wx/arrstr.h>
 #pragma warning(pop)
 
 
@@ -67,86 +68,59 @@ double RangeI::MaxValueAbs(RowRange::E row) const
 
 const RangeU::Desc RangeU::desc[RangeU::Count] =
 {
-    { { "1 nV",   "1 nV" },   { "1nV",   "1nV" },   { 1e-9, 1e-9 } },
-    { { "2 nV",   "2 nV" },   { "2nV",   "2nV" },   { 2e-9, 2e-9 } },
-    { { "4 nV",   "5 nV" },   { "4nV",   "5nV" },   { 4e-9, 5e-9 } },
-    { { "10 nV",  "10 nV" },  { "10nV",  "10nV" },  { 1e-8, 1e-8 } },
-    { { "20 nV",  "20 nV" },  { "20nV",  "20nV" },  { 2e-8, 2e-8 } },
-    { { "40 nV",  "50 nV" },  { "40nV",  "50nV" },  { 4e-8, 5e-8 } },
-    { { "100 nV", "100 nV" }, { "100nV", "100nV" }, { 1e-7, 1e-7 } },
-    { { "200 nV", "200 nV" }, { "200nV", "200nV" }, { 2e-7, 2e-7 } },
-    { { "400 nV", "500 nV" }, { "400nV", "500nV" }, { 4e-7, 5e-7 } },
-    { { "1 uV",   "1 uV" },   { "1uV",   "1uV" },   { 1e-6, 1e-6 } },
-    { { "2 uV",   "2 uV" },   { "2uV",   "2uV" },   { 2e-6, 2e-6 } },
-    { { "4 uV",   "5 uV" },   { "4uV",   "5uV" },   { 4e-6, 5e-6 } },
-    { { "10 uV",  "10 uV" },  { "10uV",  "10uV" },  { 1e-5, 1e-5 } },
-    { { "20 uV",  "20 uV" },  { "20uV",  "20uV" },  { 2e-5, 2e-5 } },
-    { { "40 uV",  "50 uV" },  { "40uV",  "50uV" },  { 4e-5, 5e-5 } },
-    { { "100 uV", "100 uV" }, { "100uV", "100uV" }, { 1e-4, 1e-4 } },
-    { { "200 uV", "200 uV" }, { "200uV", "200uV" }, { 2e-4, 2e-4 } },
-    { { "400 uV", "500 uV" }, { "400uV", "500uV" }, { 4e-4, 5e-4 } },
-    { { "1 mV",   "1 mV" },   { "1mV",   "1mV" },   { 1e-3, 1e-3 } },
-    { { "2 mV",   "2 mV" },   { "2mV",   "2mV" },   { 2e-3, 2e-3 } },
-    { { "4 mV",   "5 mV" },   { "4mV",   "5mV" },   { 4e-3, 5e-3 } },
-    { { "10 mV",  "10 mV" },  { "10mV",  "10mV" },  { 1e-2, 1e-2 } },
-    { { "20 mV",  "20 mV" },  { "20mV",  "20mV" },  { 2e-2, 2e-2 } },
-    { { "40 mV",  "50 mV" },  { "40mV",  "50mV" },  { 4e-2, 5e-2 } },
-    { { "100 mV", "100 mV" }, { "100mV", "100mV" }, { 1e-1, 1e-1 } },
-    { { "200 mV", "200 mV" }, { "200mV", "200mV" }, { 2e-1, 2e-1 } },
-    { { "400 mV", "500 mV" }, { "400mV", "500mV" }, { 4e-1, 5e-1 } },
-    { { "1 V",    "1 V" },    { "1V",    "1V" },    { 1e0,  1e0  } },
-    { { "2 V",    "2 V" },    { "2V",    "2V" },    { 2e0,  2e0  } },
-    { { "4 V",    "5 V" },    { "4V",    "5V" },    { 4e0,  5e0  } },
-    { { "10 V",   "10 V" },   { "10V",   "10V" },   { 1e1,  1e1  } },
-    { { "20 V",   "20 V" },   { "20V",   "20V" },   { 2e1,  2e1  } },
-    { { "40 V",   "50 V" },   { "40V",   "50V" },   { 4e1,  5e1  } },
-    { { "100 V",  "100 V" },  { "100V",  "100V" },  { 1e2,  1e2  } },
-    { { "200 V",  "200 V" },  { "200V",  "200V" },  { 2e2,  2e2  } },
-    { { "400 V",  "500 V" },  { "400V",  "500V" },  { 4e2,  5e2  } },
-    { { "1 kV",   "1 kV" },   { "1kV",   "1kV" },   { 1e3,  1e3  } },
-    { { "2 kV",   "2 kV" },   { "2kV",   "2kV" },   { 2e3,  2e3  } },
-    { { "4 kV",   "5 kV" },   { "4kV",   "5kV" },   { 4e3,  5e3  } },
-    { { "10 kV",  "10 kV" },  { "10kV",  "10kV" },  { 1e4,  1e4  } }
+    { { "1",   "1" },   { "nV", "нВ" },  { 1e-9, 1e-9 } },
+    { { "2",   "2" },   { "nV", "нВ" },  { 2e-9, 2e-9 } },
+    { { "4",   "5" },   { "nV", "нВ" },  { 4e-9, 5e-9 } },
+    { { "10",  "10" },  { "nV", "нВ" },  { 1e-8, 1e-8 } },
+    { { "20",  "20" },  { "nV", "нВ" },  { 2e-8, 2e-8 } },
+    { { "40",  "50" },  { "nV", "нВ" },  { 4e-8, 5e-8 } },
+    { { "100", "100" }, { "nV", "нВ" },  { 1e-7, 1e-7 } },
+    { { "200", "200" }, { "nV", "нВ" },  { 2e-7, 2e-7 } },
+    { { "400", "500" }, { "nV", "нВ" },  { 4e-7, 5e-7 } },
+    { { "1",   "1" },   { "uV", "мкВ" }, { 1e-6, 1e-6 } },
+    { { "2",   "2" },   { "uV", "мкВ" }, { 2e-6, 2e-6 } },
+    { { "4",   "5" },   { "uV", "мкВ" }, { 4e-6, 5e-6 } },
+    { { "10",  "10" },  { "uV", "мкВ" }, { 1e-5, 1e-5 } },
+    { { "20",  "20" },  { "uV", "мкВ" }, { 2e-5, 2e-5 } },
+    { { "40",  "50" },  { "uV", "мкВ" }, { 4e-5, 5e-5 } },
+    { { "100", "100" }, { "uV", "мкВ" }, { 1e-4, 1e-4 } },
+    { { "200", "200" }, { "uV", "мкВ" }, { 2e-4, 2e-4 } },
+    { { "400", "500" }, { "uV", "мкВ" }, { 4e-4, 5e-4 } },
+    { { "1",   "1" },   { "mV", "мВ" },  { 1e-3, 1e-3 } },
+    { { "2",   "2" },   { "mV", "мВ" },  { 2e-3, 2e-3 } },
+    { { "4",   "5" },   { "mV", "мВ" },  { 4e-3, 5e-3 } },
+    { { "10",  "10" },  { "mV", "мВ" },  { 1e-2, 1e-2 } },
+    { { "20",  "20" },  { "mV", "мВ" },  { 2e-2, 2e-2 } },
+    { { "40",  "50" },  { "mV", "мВ" },  { 4e-2, 5e-2 } },
+    { { "100", "100" }, { "mV", "мВ" },  { 1e-1, 1e-1 } },
+    { { "200", "200" }, { "mV", "мВ" },  { 2e-1, 2e-1 } },
+    { { "400", "500" }, { "mV", "мВ" },  { 4e-1, 5e-1 } },
+    { { "1",    "1" },    { "V",  "В" }, { 1e0,  1e0  } },
+    { { "2",    "2" },    { "V",  "В" }, { 2e0,  2e0  } },
+    { { "4",    "5" },    { "V",  "В" }, { 4e0,  5e0  } },
+    { { "10",   "10" },   { "V",  "В" }, { 1e1,  1e1  } },
+    { { "20",   "20" },   { "V",  "В" }, { 2e1,  2e1  } },
+    { { "40",   "50" },   { "V",  "В" }, { 4e1,  5e1  } },
+    { { "100",  "100" },  { "V",  "В" }, { 1e2,  1e2  } },
+    { { "200",  "200" },  { "V",  "В" }, { 2e2,  2e2  } },
+    { { "400",  "500" },  { "V",  "В" }, { 4e2,  5e2  } },
+    { { "1",   "1" },   { "V",  "кВ" },  { 1e3,  1e3  } },
+    { { "2",   "2" },   { "V",  "кВ" },  { 2e3,  2e3  } },
+    { { "4",   "5" },   { "V",  "кВ" },  { 4e3,  5e3  } },
+    { { "10",  "10" },  { "V",  "кВ" },  { 1e4,  1e4  } }
 };
 
 
 wxString RangeU::Name(RowRange::E row, bool space, bool lang_ru) const
 {
-    wxString result;
+    wxString result{ desc[value].values[row] };
 
     if (space)
     {
-        result = desc[value].name_spaces[row];
-    }
-    else
-    {
-        result = desc[value].name[row];
+        result.Append(" ");
     }
 
-    if (lang_ru)
-    {
-        size_t length = result.Length();
-
-        if (result.EndsWith("nV"))
-        {
-            result[length - 1] = 'В';
-            result[length - 2] = 'н';
-        }
-        else if (result.EndsWith("mV"))
-        {
-            result[length - 1] = 'В';
-            result[length - 2] = 'м';
-        }
-        else if (result.EndsWith("kV"))
-        {
-            result[length - 1] = 'В';
-            result[length - 2] = 'к';
-        }
-        else if (result.EndsWith("V"))
-        {
-            result[length - 1] = 'В';
-        }
-    }
+    result.Append(desc[value].units[lang_ru ? 1 : 0]);
 
     return result;
 }
@@ -192,9 +166,9 @@ wxString RangeI::NameStep(RowRange::E row) const
 }
 
 
-wxString RangeU::NameStep(RowRange::E row) const
+wxString RangeU::NameStep(RowRange::E row, bool lang_ru) const
 {
-    wxString name = Name(row);
+    wxString name = Name(row, false);
 
     wxString val = name.BeforeFirst(' ');
 
@@ -221,6 +195,11 @@ wxString RangeU::NameStep(RowRange::E row) const
         else if (units[0] == 'm')   units = "uV";
         else if (units[0] == 'u')   units = "nV";
         else if (units[0] == 'n')   units = "pV";
+    }
+
+    if (lang_ru)
+    {
+        units = SU::ReplaceVoltageUnitsToRU(units);
     }
 
     return val + " " + units;

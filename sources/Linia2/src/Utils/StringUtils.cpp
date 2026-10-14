@@ -313,3 +313,34 @@ double SU::ASCIItoFloat(pchar str)
 {
     return std::atof(str);
 }
+
+
+wxString SU::ReplaceVoltageUnitsToRU(const wxString &value)
+{
+    if (value.EndsWith("pV"))
+    {
+        return value.Left(value.Length() - 2) + "пВ";
+    }
+    else if (value.EndsWith("nV"))
+    {
+        return value.Left(value.Length() - 2) + "нВ";
+    }
+    else if (value.EndsWith("uV"))
+    {
+        return value.Left(value.Length() - 2) + "мкВ";
+    }
+    else if (value.EndsWith("mV"))
+    {
+        return value.Left(value.Length() - 2) + "мВ";
+    }
+    else if (value.EndsWith("kV"))
+    {
+        return value.Left(value.Length() - 1) + "кВ";
+    }
+    else if (value.EndsWith("V"))
+    {
+        return value.Left(value.Length() - 2) + "В";
+    }
+
+    return value;
+}
