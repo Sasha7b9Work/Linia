@@ -142,6 +142,16 @@ void SliderInt::SetValue(int value, bool send_event)
 }
 
 
+void SliderInt::SetToolTip(const wxString &tooltip)
+{
+    Panel::SetToolTip(tooltip);
+    text->SetToolTip(tooltip);
+    slider->SetToolTip(tooltip);
+    btnMore->SetToolTip(tooltip);
+    btnLess->SetToolTip(tooltip);
+}
+
+
 void SliderInt::OnEventTimer(wxTimerEvent &event)
 {
     int delta = (event.GetId() == timer_more.GetId()) ? 1 : -1;

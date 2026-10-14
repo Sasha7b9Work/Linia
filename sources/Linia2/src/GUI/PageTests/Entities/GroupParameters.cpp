@@ -5,6 +5,7 @@
 #include "GUI/Controls/ButtonCombo.h"
 #include "GUI/PageTests/PanelViewTest.h"
 #include "GUI/Controls/SliderHidden.h"
+#include "GUI/Controls/Slider.h"
 
 
 GroupParameters::GroupParameters(Type::E _type, Chan::E _chan, Dir::E _dir) :
@@ -694,6 +695,24 @@ void GroupParameters::CreateParametersU()
                 ComboInput *comboBaseRangeU = new ComboInput(PanelViewTest::self, L("Ec диап"), WIDTH_CONTROL, choices, tooltips, "comboBaseRangeU", 1);
                 comboBaseRangeU->SetPosition({ coord_controls.x, y });
                 parametersU.push_back(comboBaseRangeU);
+                y += ButtonsCombo::HEIGHT + 5;
+            }
+
+            {
+                SliderInt *sliderStartSourceU = new SliderInt(PanelViewTest::self, WIDTH_CONTROL, 0, 100, "sliderStartSourceU");
+                sliderStartSourceU->SetPosition({ coord_controls.x, y });
+                sliderStartSourceU->SetToolTip(L("Старт ограничения в процентах"));
+                parametersU.push_back(sliderStartSourceU);
+                y += ButtonsCombo::HEIGHT + 2;
+            }
+
+            {
+                SliderInt *sliderStopSourceU = new SliderInt(PanelViewTest::self, WIDTH_CONTROL, 0, 100, "sliderStopSourceU");
+                sliderStopSourceU->SetPosition({ coord_controls.x, y });
+                sliderStopSourceU->SetToolTip(L("Стоп ограничения в процентах"));
+                sliderStopSourceU->SetValue(100, false);
+                parametersU.push_back(sliderStopSourceU);
+                y += ButtonsCombo::HEIGHT + 5;
             }
         }
     }

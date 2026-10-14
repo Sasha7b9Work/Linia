@@ -23,6 +23,8 @@ public:
     int GetValue() const;
     void SetValue(int, bool send_event = true);
 
+    void SetToolTip(const wxString &);
+
 private:
 
     int min = 0;
