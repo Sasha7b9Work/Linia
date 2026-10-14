@@ -98,4 +98,7 @@ namespace SU
 
     // Заменить единицы измерения напряжения на русские
     wxString ReplaceVoltageUnitsToRU(const wxString &);
+
+    // Заменить единицы измерения тока на русские
+    wxString ReplaceCurrentUnitsToRU(const wxString &);
 };

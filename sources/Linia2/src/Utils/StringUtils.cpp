@@ -335,11 +335,38 @@ wxString SU::ReplaceVoltageUnitsToRU(const wxString &value)
     }
     else if (value.EndsWith("kV"))
     {
-        return value.Left(value.Length() - 1) + "кВ";
+        return value.Left(value.Length() - 2) + "кВ";
     }
     else if (value.EndsWith("V"))
     {
-        return value.Left(value.Length() - 2) + "В";
+        return value.Left(value.Length() - 1) + "В";
+    }
+
+    return value;
+}
+
+
+wxString SU::ReplaceCurrentUnitsToRU(const wxString &value)
+{
+    if (value.EndsWith("pA"))
+    {
+        return value.Left(value.Length() - 2) + "пА";
+    }
+    else if (value.EndsWith("nA"))
+    {
+        return value.Left(value.Length() - 2) + "нА";
+    }
+    else if (value.EndsWith("uA"))
+    {
+        return value.Left(value.Length() - 2) + "мкА";
+    }
+    else if (value.EndsWith("mA"))
+    {
+        return value.Left(value.Length() - 2) + "мА";
+    }
+    else if (value.EndsWith("A"))
+    {
+        return value.Left(value.Length() - 1) + "А";
     }
 
     return value;
