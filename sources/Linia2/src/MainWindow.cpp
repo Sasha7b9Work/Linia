@@ -42,16 +42,17 @@ MainWindow::MainWindow(const wxString &title)
     TuneFont();
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
-    main_panel= new Notebook(this);
-    main_panel->AddPanel(new PageSettings(main_panel));
-    main_panel->AddPanel(new PageMeasures(main_panel));
-    main_panel->AddPanel(new PageTests(main_panel));
-    main_panel->AddPanel(new PageDebug(main_panel));
+    notebook = new Notebook(this);
+    notebook->AddPanel(new PageSettings(notebook));
+    notebook->AddPanel(new PageMeasures(notebook));
+    notebook->AddPanel(new PageTests(notebook));
+    notebook->AddPanel(new PageDebug(notebook));
 
-    main_panel->SetCurrentPanel(PageMeasures::self);
-
-    sizer->Add(main_panel, 1, wxEXPAND | wxALL);
+    sizer->Add(notebook, 1, wxEXPAND | wxALL);
     SetSizer(sizer);
+
+    notebook->SetCurrentPanel(1);       // \todo Если этого не сделать, то артефакты в отображении страниц
+    notebook->SetCurrentPanel(2);
 
     SetPosition();
 
@@ -192,7 +193,7 @@ void MainWindow::OnEventCloseWindow(wxCloseEvent &event)
 {
     LOG_WRITE("Exit");
 
-    SET_GUI_CURRENT_PANEL->Set(main_panel->GetCurrentPanelIndex());
+    SET_GUI_CURRENT_PANEL->Set(notebook->GetCurrentPanelIndex());
 
     if (ConsoleRS232::self)
     {

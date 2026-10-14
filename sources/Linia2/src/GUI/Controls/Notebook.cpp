@@ -2,8 +2,9 @@
 #include "defines.h"
 #include "GUI/Controls/Notebook.h"
 #include "GUI/Controls/Button.h"
+#include "Utils/GlobalFunctions.h"
 #pragma warning(push, 0)
-#include <wx/sizer.h>
+    #include <wx/sizer.h>
 #pragma warning(pop)
 
 
@@ -44,6 +45,19 @@ Notebook::Notebook(wxWindow *parent) :
     sizer_main->Add(container, 1, wxEXPAND | wxALL);
 
     SetSizer(sizer_main);
+}
+
+
+void Notebook::SetCurrentPanel(int num_panel)
+{
+    if (num_panel > (int)(buttons.size() - 1))
+    {
+        num_panel = (int)(buttons.size() - 1);
+    }
+
+    ToggleButton *btn = buttons[num_panel];
+
+    GF::SendCommandEvent(btn, wxEVT_TOGGLEBUTTON, 1);
 }
 
 

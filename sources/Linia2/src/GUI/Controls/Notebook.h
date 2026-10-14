@@ -40,8 +40,8 @@ public:
 
     int GetCurrentPanelIndex() const;
 
-    // Переключиться на панель по указателю
-    void SetCurrentPanel(PageNotebook *);
+    // Установить панель по номеру
+    void SetCurrentPanel(int);
 
 private:
 
@@ -60,4 +60,7 @@ private:
     void OnEventButtonToggle(wxCommandEvent &);
 
     int GetPanelIndex(PageNotebook *) const;
+
+    // Переключиться на панель по указателю
+    void SetCurrentPanel(PageNotebook *);
 };
