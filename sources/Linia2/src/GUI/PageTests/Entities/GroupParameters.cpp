@@ -682,16 +682,18 @@ void GroupParameters::CreateParametersU()
         else if (type.IsSourceU())
         {
             {
-                wxArrayString choices;
-
-                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+                wxArrayString choices
                 {
-                    choices.push_back(range.Name(RowRange::_124));
-                }
+                    L("30 В"),
+                    L("300 В"),
+                    L("3000 В")
+                };
 
                 wxArrayString tooltips{ L("Диапазон изменения испытательного напряжения") };
 
-                CREATE_COMBO(comboBaseRangeU, L("Ec диап"), parametersU);
+                ComboInput *comboBaseRangeU = new ComboInput(PanelViewTest::self, L("Ec диап"), WIDTH_CONTROL, choices, tooltips, "comboBaseRangeU", 1);
+                comboBaseRangeU->SetPosition({ coord_controls.x, y });
+                parametersU.push_back(comboBaseRangeU);
             }
         }
     }

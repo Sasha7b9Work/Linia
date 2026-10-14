@@ -1,6 +1,7 @@
 ﻿// 2025/7/27 22:17:39 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "Settings/Tests/SettingsTests.h"
+#include "Utils/BigIntValue.h"
 
 
 // Вид источника/измерения
@@ -203,6 +204,9 @@ struct RangeU
     static E Max(TypeValue::E);
 
     static void FillArrayStrings(wxArrayString &, TypeValue::E, bool step);
+
+    // Собрать строку диапазона
+    static wxString ValueToString(int abs_value, int order, bool space = true, bool lang_ru = true);
 
 private:
 

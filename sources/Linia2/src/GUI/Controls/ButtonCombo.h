@@ -98,5 +98,6 @@ public:
     ButtonsComboRange(wxWindow *parent, const wxString &title, int width,
         const wxArrayString &labels,
         const wxArrayString &tooltips,
-        const wxString &name);
+        const wxString &name,
+        int buttons_in_row = 3);     // В каждом ряду будет расположено столько кнопок
 };

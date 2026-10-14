@@ -382,3 +382,31 @@ RowRange::RowRange(Chan::E ch)
 
     value = r[ch];
 }
+
+
+wxString RangeU::ValueToString(int abs_value, int order, bool /*space*/, bool /*lang_ru*/)
+{
+    bool is_neg = abs_value < 0;
+
+    if (is_neg)
+    {
+        abs_value = -abs_value;
+    }
+
+    if (order >= 0)                     // Больше единицы
+    {
+        while (abs_value > 999)
+        {
+            abs_value /= 10;
+            order++;
+        }
+
+
+    }
+    else                                // Меньше единицы
+    {
+
+    }
+
+    return wxString{ "" };
+}

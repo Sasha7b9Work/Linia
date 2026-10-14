@@ -436,8 +436,8 @@ void ButtonsCombo::SetExtendedLabel(const wxString &start, const wxString &end)
 
 
 ButtonsComboRange::ButtonsComboRange(wxWindow *parent, const wxString &title, int width, const wxArrayString &labels,
-    const wxArrayString &tooltips, const wxString &name) :
-    ButtonsCombo(parent, title, width, labels, tooltips, 3, name, ButtonsCombo::Type::Text)
+    const wxArrayString &tooltips, const wxString &name, int buttons_in_row) :
+    ButtonsCombo(parent, title, width, labels, tooltips, buttons_in_row, name, ButtonsCombo::Type::Text)
 {
     ButtonsCombo::insert_empty = true;
 

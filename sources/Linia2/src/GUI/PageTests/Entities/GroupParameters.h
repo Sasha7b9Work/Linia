@@ -12,8 +12,9 @@ public:
     ComboInput(wxWindow *parent, const wxString &title, int width,
         const wxArrayString &labels,
         const wxArrayString &tooltips,
-        const wxString &name) :
-        ButtonsComboRange(parent, title, width, labels, tooltips, name)
+        const wxString &name,
+        int buttons_in_row = 3) :
+        ButtonsComboRange(parent, title, width, labels, tooltips, name, buttons_in_row)
     {}
 };
 
@@ -29,13 +30,13 @@ public:
     {
         enum E
         {
-            MeasU,
-            MeasI,
-            SourceU,
-            SourceI,
-            SourceUI,
-            MeasUI,
-            Scanner,
+            MeasU,      // Измеритель напряжения
+            MeasI,      // Измеритель тока
+            SourceU,    // Источник напряжения
+            SourceI,    // Источник тока
+            SourceUI,   // Источник напряжения и тока
+            MeasUI,     // Измеритель напряжения и тока
+            Scanner,    // Развёртка
             Count
         };
 
