@@ -48,11 +48,11 @@ Notebook::Notebook(wxWindow *parent) :
 }
 
 
-void Notebook::SetCurrentPanel(int num_panel)
+void Notebook::SetCurrentPanel(size_t num_panel)
 {
-    if (num_panel > (int)(buttons.size() - 1))
+    if (num_panel > buttons.size() - 1)
     {
-        num_panel = (int)(buttons.size() - 1);
+        num_panel = buttons.size() - 1;
     }
 
     ToggleButton *btn = buttons[num_panel];

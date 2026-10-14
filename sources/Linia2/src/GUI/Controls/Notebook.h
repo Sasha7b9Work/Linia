@@ -41,7 +41,7 @@ public:
     int GetCurrentPanelIndex() const;
 
     // Установить панель по номеру
-    void SetCurrentPanel(int);
+    void SetCurrentPanel(size_t);
 
 private:
 
