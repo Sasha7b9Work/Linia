@@ -46,8 +46,13 @@ SliderInt::SliderInt(wxWindow *parent, int width, int _min, int _max, const wxSt
 
             event.Skip();
         });
+    
+    slider->Bind(wxEVT_MOUSE_CAPTURE_CHANGED, [](wxMouseCaptureChangedEvent &)
+        {
 
-    slider->Bind(wxEVT_LEFT_DOWN, [this](wxMouseEvent &event)
+        });
+
+    slider->Bind(wxEVT_LEFT_DOWN, [](wxMouseEvent &)
         {
 //            int new_value = slider->GetValue() + 1;
 //            if (new_value <= slider->GetMax())
@@ -56,7 +61,7 @@ SliderInt::SliderInt(wxWindow *parent, int width, int _min, int _max, const wxSt
 //            }
         });
 
-    slider->Bind(wxEVT_RIGHT_DOWN, [this](wxMouseEvent &event)
+    slider->Bind(wxEVT_RIGHT_DOWN, [](wxMouseEvent &)
         {
 //            int new_value = slider->GetValue() - 1;
 //            if (new_value >= slider->GetMin())
