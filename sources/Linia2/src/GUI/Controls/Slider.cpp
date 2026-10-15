@@ -70,8 +70,7 @@ SliderInt::SliderInt(wxWindow *parent, int width, int _min, int _max, const wxSt
 //            }
         });
 
-    // Устанавливать курсор будем так, потому что на Linux обычная установка не работает
-    slider->Bind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
+//    slider->Bind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
 
     wxBoxSizer *ver_sizer = new wxBoxSizer(wxVERTICAL);
     main_sizer->Add(ver_sizer, 0, wxEXPAND | wxTOP, 2);
@@ -84,31 +83,31 @@ SliderInt::SliderInt(wxWindow *parent, int width, int _min, int _max, const wxSt
 }
 
 
-void SliderInt::OnEventMouseUp(wxMouseEvent &event)
-{
-    timer_more.Stop();
-    timer_less.Stop();
+//void SliderInt::OnEventMouseUp(wxMouseEvent &event)
+//{
+//    timer_more.Stop();
+//    timer_less.Stop();
+//
+//    event.Skip();
+//}
 
-    event.Skip();
-}
 
-
-void SliderInt::OnEventSlider(wxCommandEvent &event)
-{
-    text->SetLabel(wxString::Format("%d", event.GetInt()));
-    GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
-
-    event.Skip();
-}
+//void SliderInt::OnEventSlider(wxCommandEvent &event)
+//{
+//    text->SetLabel(wxString::Format("%d", event.GetInt()));
+//    GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
+//
+//    event.Skip();
+//}
 
 
 void SliderInt::SetValue(int value, bool send_event)
 {
     if (value != GetValue())
     {
-        slider->Unbind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
+//        slider->Unbind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
         slider->SetValue(value);
-        slider->Bind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
+//        slider->Bind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
 
         text->SetLabel(wxString::Format("%d", slider->GetValue()));
 
@@ -128,18 +127,18 @@ void SliderInt::SetToolTip(const wxString &tooltip)
 }
 
 
-void SliderInt::OnEventTimer(wxTimerEvent &event)
-{
-    int delta = (event.GetId() == timer_more.GetId()) ? 1 : -1;
-
-    slider->SetValue(slider->GetValue() + delta);
-
-    text->SetLabel(wxString::Format("%d", slider->GetValue()));
-
-    GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
-
-    event.Skip();
-}
+//void SliderInt::OnEventTimer(wxTimerEvent &event)
+//{
+//    int delta = (event.GetId() == timer_more.GetId()) ? 1 : -1;
+//
+//    slider->SetValue(slider->GetValue() + delta);
+//
+//    text->SetLabel(wxString::Format("%d", slider->GetValue()));
+//
+//    GF::SendCommandEvent(this, wxEVT_SLIDER, slider->GetValue());
+//
+//    event.Skip();
+//}
 
 
 void SliderInt::Pack()

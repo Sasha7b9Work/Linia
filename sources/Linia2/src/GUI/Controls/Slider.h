@@ -36,9 +36,9 @@ private:
     wxTimer timer_less;
     wxTimer timer_more;
 
-    void OnEventSlider(wxCommandEvent &);
-    void OnEventMouseUp(wxMouseEvent &);
-    void OnEventTimer(wxTimerEvent &);
+//    void OnEventSlider(wxCommandEvent &);
+//    void OnEventMouseUp(wxMouseEvent &);
+//    void OnEventTimer(wxTimerEvent &);
 };
 
 
