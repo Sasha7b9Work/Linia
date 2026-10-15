@@ -219,6 +219,13 @@ public:
     Ampermeter(Chan::E _chan, Dir::E _dir) :
         GroupParameters(GroupParameters::Type::MeasI, _chan, _dir)
     {}
+
+private:
+
+    friend struct MeasurersSourcers;
+
+    // Нужно вызывать при изменении положения переключателя коммутатора
+    void OnEventChangeCommutator();
 };
 
 

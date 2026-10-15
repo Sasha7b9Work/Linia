@@ -103,3 +103,9 @@ int MeasurersSourcers::PosY(int num)
 
     return 100;
 }
+
+
+void MeasurersSourcers::OnEventChangeCommutator()
+{
+    ampCollector->OnEventChangeCommutator();
+}

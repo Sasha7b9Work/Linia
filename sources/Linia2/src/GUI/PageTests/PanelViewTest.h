@@ -32,9 +32,9 @@ private:
 
     ComboInput *bcBaseNumMeasures = nullptr;            // Количество измерений
 
-    MeasurersSourcers meas_src;     // Источники и измерители для всех каналов
-    CommonControls com_controls;    // Общие для всех типов элементов органы управления (тип развёртки, например)
-    SpecificControls spec_controls; // Специфичные органы управления для разных типов элементов (тип проводимости для биполярного транзистора, например)
+    MeasurersSourcers meas_sourcers;    // Источники и измерители для всех каналов
+    CommonControls com_controls;        // Общие для всех типов элементов органы управления (тип развёртки, например)
+    SpecificControls spec_controls;     // Специфичные органы управления для разных типов элементов (тип проводимости для биполярного транзистора, например)
 
 
     void OnEventPaint(wxPaintEvent &);

@@ -35,7 +35,7 @@ PanelViewTest::PanelViewTest(wxWindow *parent) : Panel(parent, wxSIMPLE_BORDER)
 
     com_controls.Hide();
 
-    meas_src.Create();
+    meas_sourcers.Create();
 
     Bind(wxEVT_LEFT_DOWN, [](wxMouseEvent &event)
         {
@@ -64,7 +64,7 @@ void PanelViewTest::SetTest(Test *_test)
     {
         delete OStT::current;
 
-        meas_src.HideAll();
+        meas_sourcers.HideAll();
 
         spec_controls.Hide();
     }
@@ -75,7 +75,7 @@ void PanelViewTest::SetTest(Test *_test)
 
     spec_controls.Tune();
 
-    meas_src.Tune();
+    meas_sourcers.Tune();
 
     Refresh();
 }
@@ -154,7 +154,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 
         DrawGround(dc);
 
-        meas_src.Draw(dc, Chan::C, X_C);
+        meas_sourcers.Draw(dc, Chan::C, X_C);
     }
 
     {
@@ -172,7 +172,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 
             DrawGround(dc);
 
-            meas_src.Draw(dc, Chan::B, X_B);
+            meas_sourcers.Draw(dc, Chan::B, X_B);
         }
     }
 
@@ -191,7 +191,7 @@ void PanelViewTest::DrawScheme(AutoBufferedPaintDC &dc)
 
             DrawGround(dc);
 
-            meas_src.Draw(dc, Chan::S, X_S);
+            meas_sourcers.Draw(dc, Chan::S, X_S);
         }
     }
 
@@ -287,5 +287,5 @@ void PanelViewTest::DrawGround(AutoBufferedPaintDC &dc)
 
 void PanelViewTest::OnEventChangeCommutator()
 {
-
+    meas_sourcers.OnEventChangeCommutator();
 }

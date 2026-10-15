@@ -1053,3 +1053,9 @@ void GroupParameters::OnChangedScanDurationImpulse(wxCommandEvent &)
 {
 
 }
+
+
+void Ampermeter::OnEventChangeCommutator()
+{
+
+}
