@@ -1,4 +1,4 @@
-﻿// 2026/09/04 12:20:07 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
+﻿ // 2026/09/04 12:20:07 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "GUI/PageTests/Entities/GroupParameters.h"
 #include "Utils/GlobalFunctions.h"
@@ -665,55 +665,63 @@ void GroupParameters::CreateParametersU()
     }
     else if (chan.IsCollector())
     {
-        if (type.IsMeasU())
+        CreateParametersCollectorU();
+    }
+}
+
+
+void GroupParameters::CreateParametersCollectorU()
+{
+    int y = coord_controls.y;
+
+    if (type.IsMeasU())
+    {
         {
+            wxArrayString choices;
+
+            for (RangeU range{ RangeU::_400_500mV }; range.value <= RangeU::_4_5kV; ++range)
             {
-                wxArrayString choices;
-
-                for (RangeU range{ RangeU::_400_500mV }; range.value <= RangeU::_4_5kV; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_125));
-                }
-
-                wxArrayString tooltips{ L("Диапазон измерения напряжения в блоке коллектора") };
-
-                CREATE_COMBO(comboBaseStartU, L("Uc диап"), parametersU);
+                choices.push_back(range.Name(RowRange::_125));
             }
+
+            wxArrayString tooltips{ L("Диапазон измерения напряжения в блоке коллектора") };
+
+            CREATE_COMBO(comboBaseStartU, L("Uc диап"), parametersU);
         }
-        else if (type.IsSourceU())
+    }
+    else if (type.IsSourceU())
+    {
         {
+            wxArrayString choices
             {
-                wxArrayString choices
-                {
-                    L("30 В"),
-                    L("300 В"),
-                    L("3000 В")
-                };
+                L("30 В"),
+                L("300 В"),
+                L("3000 В")
+            };
 
-                wxArrayString tooltips{ L("Диапазон изменения испытательного напряжения") };
+            wxArrayString tooltips{ L("Диапазон изменения испытательного напряжения") };
 
-                ComboInput *comboBaseRangeU = new ComboInput(PanelViewTest::self, L("Ec диап"), WIDTH_CONTROL, choices, tooltips, "comboBaseRangeU", 1);
-                comboBaseRangeU->SetPosition({ coord_controls.x, y });
-                parametersU.push_back(comboBaseRangeU);
-                y += ButtonsCombo::HEIGHT + 5;
-            }
+            ComboInput *comboBaseRangeU = new ComboInput(PanelViewTest::self, L("Ec диап"), WIDTH_CONTROL, choices, tooltips, "comboBaseRangeU", 1);
+            comboBaseRangeU->SetPosition({ coord_controls.x, y });
+            parametersU.push_back(comboBaseRangeU);
+            y += ButtonsCombo::HEIGHT + 5;
+        }
 
-            {
-                SliderInt *sliderStartSourceU = new SliderInt(PanelViewTest::self, WIDTH_CONTROL, 0, 100, "sliderStartSourceU");
-                sliderStartSourceU->SetPosition({ coord_controls.x, y });
-                sliderStartSourceU->SetToolTip(L("Старт ограничения в процентах"));
-                parametersU.push_back(sliderStartSourceU);
-                y += ButtonsCombo::HEIGHT + 2;
-            }
+        {
+            SliderInt *sliderStartSourceU = new SliderInt(PanelViewTest::self, WIDTH_CONTROL, 0, 100, "sliderStartSourceU");
+            sliderStartSourceU->SetPosition({ coord_controls.x, y });
+            sliderStartSourceU->SetToolTip(L("Старт ограничения в процентах"));
+            parametersU.push_back(sliderStartSourceU);
+            y += ButtonsCombo::HEIGHT + 2;
+        }
 
-            {
-                SliderInt *sliderStopSourceU = new SliderInt(PanelViewTest::self, WIDTH_CONTROL, 0, 100, "sliderStopSourceU");
-                sliderStopSourceU->SetPosition({ coord_controls.x, y });
-                sliderStopSourceU->SetToolTip(L("Стоп ограничения в процентах"));
-                sliderStopSourceU->SetValue(100, false);
-                parametersU.push_back(sliderStopSourceU);
-                y += ButtonsCombo::HEIGHT + 5;
-            }
+        {
+            SliderInt *sliderStopSourceU = new SliderInt(PanelViewTest::self, WIDTH_CONTROL, 0, 100, "sliderStopSourceU");
+            sliderStopSourceU->SetPosition({ coord_controls.x, y });
+            sliderStopSourceU->SetToolTip(L("Стоп ограничения в процентах"));
+            sliderStopSourceU->SetValue(100, false);
+            parametersU.push_back(sliderStopSourceU);
+            y += ButtonsCombo::HEIGHT + 5;
         }
     }
 }
