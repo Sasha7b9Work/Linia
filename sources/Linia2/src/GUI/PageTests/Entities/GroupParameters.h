@@ -189,7 +189,9 @@ private:
 
     int CalculateNumControls() const;
 
-    ButtonsCombo *FindComboBoxByName(const wxString &);
+    template<class T>
+    T *FindByName(const wxString &);
+    wxWindow *FindWindowByName(const wxString &);
 
     void OnChangedScanMode(wxCommandEvent &);
     void OnChangedScanNumberPoints(wxCommandEvent &);

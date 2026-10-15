@@ -713,6 +713,9 @@ void GroupParameters::CreateParametersCollectorU()
             sliderStartSourceU->SetToolTip(L("Старт ограничения в процентах"));
             parametersU.push_back(sliderStartSourceU);
             y += ButtonsCombo::HEIGHT + 2;
+
+
+            
         }
 
         {
@@ -954,13 +957,13 @@ wxRect GroupParameters::DrawBorder(AutoBufferedPaintDC &dc, int r)
 }
 
 
-ButtonsCombo *GroupParameters::FindComboBoxByName(const wxString &name)
+wxWindow *GroupParameters::FindWindowByName(const wxString &name)
 {
     for (auto wnd : parametersI)
     {
         if (wnd->GetName().EndsWith(name))
         {
-            return (ButtonsCombo *)wnd;
+            return wnd;
         }
     }
 
@@ -968,7 +971,7 @@ ButtonsCombo *GroupParameters::FindComboBoxByName(const wxString &name)
     {
         if (wnd->GetName().EndsWith(name))
         {
-            return (ButtonsCombo *)wnd;
+            return wnd;
         }
     }
 
@@ -976,11 +979,18 @@ ButtonsCombo *GroupParameters::FindComboBoxByName(const wxString &name)
     {
         if (wnd->GetName().EndsWith(name))
         {
-            return (ButtonsCombo *)wnd;
+            return wnd;
         }
     }
 
     return nullptr;
+}
+
+
+template<class T>
+T *GroupParameters::FindByName(const wxString &name)
+{
+    return (T *)FindWindowByName(name);
 }
 
 
@@ -992,7 +1002,7 @@ void GroupParameters::OnChangedScanMode(wxCommandEvent &event)
     {
         wxArrayString choices{ "200" };
 
-        FindComboBoxByName("bcScanNumberPoints")->SetChoices(choices);
+        FindByName<ButtonsCombo>("bcScanNumberPoints")->SetChoices(choices);
     }
     else
     {
@@ -1003,7 +1013,7 @@ void GroupParameters::OnChangedScanMode(wxCommandEvent &event)
             "100"
         };
 
-        FindComboBoxByName("bcScanNumberPoints")->SetChoices(choices);
+        FindByName<ButtonsCombo>("bcScanNumberPoints")->SetChoices(choices);
     }
 }
 
