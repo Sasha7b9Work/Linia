@@ -463,20 +463,28 @@ void GroupParameters::CreateParametersI()
     }
     else if (chan.IsCollector())
     {
-        if (type.IsMeasI())
+        CreateParametersCollectorI();
+    }
+}
+
+
+void GroupParameters::CreateParametersCollectorI()
+{
+    int y = coord_controls.y;
+
+    if (type.IsMeasI())
+    {
         {
+            wxArrayString choices;
+
+            for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
             {
-                wxArrayString choices;
-
-                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_125));
-                }
-
-                wxArrayString tooltips{ L("Диапазон измерения тока в блоке коллектора") };
-
-                CREATE_COMBO(comboBaseStartI, L("Ic диап"), parametersI);
+                choices.push_back(range.Name(RowRange::_125));
             }
+
+            wxArrayString tooltips{ L("Диапазон измерения тока в блоке коллектора") };
+
+            CREATE_COMBO(comboBaseStartI, L("Ic диап"), parametersI);
         }
     }
 }
