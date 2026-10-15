@@ -714,8 +714,15 @@ void GroupParameters::CreateParametersCollectorU()
             parametersU.push_back(sliderStartSourceU);
             y += ButtonsCombo::HEIGHT + 2;
 
-
-            
+            sliderStartSourceU->Bind(wxEVT_SLIDER, [this](wxCommandEvent &event)
+                {
+                    SliderInt *sliderStop = FindByName<SliderInt>("sliderStopSourceU");
+                    if (event.GetInt() > sliderStop->GetValue())
+                    {
+                        FindByName<SliderInt>("sliderStartSourceU")->SetValue(sliderStop->GetValue());
+                    }
+                    event.Skip();
+                });
         }
 
         {
@@ -725,6 +732,16 @@ void GroupParameters::CreateParametersCollectorU()
             sliderStopSourceU->SetValue(100, false);
             parametersU.push_back(sliderStopSourceU);
             y += ButtonsCombo::HEIGHT + 5;
+
+            sliderStopSourceU->Bind(wxEVT_SLIDER, [this](wxCommandEvent &event)
+                {
+                    SliderInt *sliderStart = FindByName<SliderInt>("sliderStartSourceU");
+                    if (event.GetInt() < sliderStart->GetValue())
+                    {
+                        FindByName<SliderInt>("sliderStopSourceU")->SetValue(sliderStart->GetValue());
+                    }
+                    event.Skip();
+                });
         }
     }
 }
