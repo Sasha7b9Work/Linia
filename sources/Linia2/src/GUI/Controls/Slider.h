@@ -32,14 +32,11 @@ private:
 
     StaticText *text = nullptr;
     wxSlider   *slider = nullptr;
-    Button     *btnMore = nullptr;
-    Button     *btnLess = nullptr;
 
     wxTimer timer_less;
     wxTimer timer_more;
 
     void OnEventSlider(wxCommandEvent &);
-    void OnEventMouseDown(wxMouseEvent &);
     void OnEventMouseUp(wxMouseEvent &);
     void OnEventTimer(wxTimerEvent &);
 };
@@ -65,8 +62,6 @@ protected:
 
     StaticText *text = nullptr;
     wxSlider   *slider = nullptr;
-    Button     *btnMore = nullptr;
-    Button     *btnLess = nullptr;
 
     wxTimer timer_less;
     wxTimer timer_more;

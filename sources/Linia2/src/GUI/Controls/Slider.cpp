@@ -22,9 +22,8 @@ SliderInt::SliderInt(wxWindow *parent, int width, int _min, int _max, const wxSt
     Panel::SetName(parent->GetName() + "_" + _name);
 
     int w1 = 20;
-    int w2 = 17;
 
-    wxSize s{ width - w1 - w2, TEXTCNTRL_HEIGHT + 5 };
+    wxSize s{ width, TEXTCNTRL_HEIGHT + 5 };
 
     slider = new wxSlider(this, wxID_ANY, min, min, max);
 
@@ -38,13 +37,6 @@ SliderInt::SliderInt(wxWindow *parent, int width, int _min, int _max, const wxSt
 
     wxSize size_button{ 15, 12 };
 
-    btnMore = new Button(this, "", size_button);
-    btnMore->SetBackgroundColour(btnMore->GetBackgroundColour().ChangeLightness(LIGHTNESS));
-    btnLess = new Button(this, "", size_button);
-    btnLess->SetBackgroundColour(btnLess->GetBackgroundColour().ChangeLightness(LIGHTNESS));
-
-    btnMore->SetCursor(wxCursor(wxCURSOR_HAND));
-    btnLess->SetCursor(wxCursor(wxCURSOR_HAND));
     slider->SetCursor(wxCursor(wxCURSOR_HAND));
 
     slider->Bind(wxEVT_ENTER_WINDOW, [this](wxMouseEvent &event)
@@ -57,18 +49,30 @@ SliderInt::SliderInt(wxWindow *parent, int width, int _min, int _max, const wxSt
             event.Skip();
         });
 
+    slider->Bind(wxEVT_LEFT_DOWN, [this](wxMouseEvent &event)
+        {
+            int new_value = slider->GetValue() + 1;
+            if (new_value <= slider->GetMax())
+            {
+                SetValue(new_value);
+            }
+            event.Skip();
+        });
+
+    slider->Bind(wxEVT_RIGHT_DOWN, [this](wxMouseEvent &event)
+        {
+            int new_value = slider->GetValue() - 1;
+            if (new_value >= slider->GetMin())
+            {
+                SetValue(new_value);
+            }
+            event.Skip();
+        });
+
     // Устанавливать курсор будем так, потому что на Linux обычная установка не работает
     slider->Bind(wxEVT_SLIDER, &SliderInt::OnEventSlider, this);
 
-    btnMore->Bind(wxEVT_LEFT_DOWN, &SliderInt::OnEventMouseDown, this);
-    btnLess->Bind(wxEVT_LEFT_DOWN, &SliderInt::OnEventMouseDown, this);
-//    btnMore->Bind(wxEVT_LEFT_UP, &SliderInt::OnEventMouseUp, this);
-//    btnLess->Bind(wxEVT_LEFT_UP, &SliderInt::OnEventMouseUp, this);
-
     wxBoxSizer *ver_sizer = new wxBoxSizer(wxVERTICAL);
-    ver_sizer->Add(btnMore, 0, wxALL | wxTOP, 0);
-    ver_sizer->Add(btnLess, 0, wxALL | wxTOP, 0);
-
     main_sizer->Add(ver_sizer, 0, wxEXPAND | wxTOP, 2);
     main_sizer->Add(text, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL | wxFIXED_MINSIZE, 0);
     main_sizer->Add(slider, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, 0);
@@ -76,33 +80,6 @@ SliderInt::SliderInt(wxWindow *parent, int width, int _min, int _max, const wxSt
     SetSizer(main_sizer);
 
     Layout();
-}
-
-
-void SliderInt::OnEventMouseDown(wxMouseEvent &event)
-{
-    if (event.GetId() == btnMore->GetId())
-    {
-        int new_value = slider->GetValue() + 1;
-        if (new_value <= slider->GetMax())
-        {
-            text->SetLabel(wxString::Format("%d", new_value));
-            slider->SetValue(new_value);
-            GF::SendCommandEvent(this, wxEVT_SLIDER, new_value);
-        }
-    }
-    else if (event.GetId() == btnLess->GetId())
-    {
-        int new_value = slider->GetValue() - 1;
-        if (new_value >= slider->GetMin())
-        {
-            text->SetLabel(wxString::Format("%d", new_value));
-            slider->SetValue(new_value);
-            GF::SendCommandEvent(this, wxEVT_SLIDER, new_value);
-        }
-    }
-
-    event.Skip();
 }
 
 
@@ -147,8 +124,6 @@ void SliderInt::SetToolTip(const wxString &tooltip)
     Panel::SetToolTip(tooltip);
     text->SetToolTip(tooltip);
     slider->SetToolTip(tooltip);
-    btnMore->SetToolTip(tooltip);
-    btnLess->SetToolTip(tooltip);
 }
 
 
@@ -236,18 +211,8 @@ SliderFloat::SliderFloat(wxWindow *parent, int width, const wxString &name) :
 
     wxSize size_button{ 15, 12 };
 
-    btnMore = new Button(this, "", size_button);
-    btnMore->SetPosition({ slider->GetPosition().x + slider->GetSize().x, 0 });
-    btnMore->SetBackgroundColour(btnMore->GetBackgroundColour().ChangeLightness(LIGHTNESS));
-    btnLess = new Button(this, "", size_button);
-    btnLess->SetPosition({ slider->GetPosition().x + slider->GetSize().x, slider->GetSize().y / 2 });
-    btnLess->SetBackgroundColour(btnLess->GetBackgroundColour().ChangeLightness(LIGHTNESS));
 
     Bind(wxEVT_SLIDER, &SliderFloat::OnEventSlider, this);
-//    btnMore->Bind(wxEVT_LEFT_DOWN, &SliderFloat::OnEventMouseDown, this);
-//    btnLess->Bind(wxEVT_LEFT_DOWN, &SliderFloat::OnEventMouseDown, this);
-//    btnMore->Bind(wxEVT_LEFT_UP, &SliderFloat::OnEventMouseUp, this);
-//    btnLess->Bind(wxEVT_LEFT_UP, &SliderFloat::OnEventMouseUp, this);
 
     Bind(wxEVT_TIMER, &SliderFloat::OnEventTimer, this);
 
@@ -265,8 +230,6 @@ void SliderFloat::SetToolTip(const wxString &tooltip)
     wxWindowBase::SetToolTip(tooltip);
     slider->SetToolTip(tooltip);
     text->SetToolTip(tooltip);
-    btnMore->SetToolTip(tooltip);
-    btnLess->SetToolTip(tooltip);
 }
 
 

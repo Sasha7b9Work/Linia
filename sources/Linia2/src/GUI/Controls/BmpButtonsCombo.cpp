@@ -104,6 +104,13 @@ public:
         SetupDragging(this);
     }
 
+protected:
+    virtual void OnDismiss() override
+    {
+        wxPopupTransientWindow::OnDismiss();
+        Destroy();
+    }
+
 private:
 
     bool     dragging = false;
