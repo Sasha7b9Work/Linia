@@ -35,8 +35,6 @@ SliderInt::SliderInt(wxWindow *parent, int width, int _min, int _max, const wxSt
     text->SetWindowStyleFlag(wxALIGN_RIGHT);
     text->SetMinSize({ w1, TEXTCNTRL_HEIGHT });
 
-    wxSize size_button{ 15, 12 };
-
     slider->SetCursor(wxCursor(wxCURSOR_HAND));
 
     slider->Bind(wxEVT_ENTER_WINDOW, [this](wxMouseEvent &event)
@@ -208,9 +206,6 @@ SliderFloat::SliderFloat(wxWindow *parent, int width, const wxString &name) :
 
     text = new StaticText(this, "0", { w1, TEXTCNTRL_HEIGHT - 5 });
     text->SetPosition({ 0, 5 });
-
-    wxSize size_button{ 15, 12 };
-
 
     Bind(wxEVT_SLIDER, &SliderFloat::OnEventSlider, this);
 
