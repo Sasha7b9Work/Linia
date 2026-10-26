@@ -7,7 +7,6 @@
 // Общие для всех типов элементов органы управления (тип развёртки, например)
 struct CommonControls
 {
-    friend class Ampermeter;
     friend class GroupParameters;
     friend class Scanner;
 
@@ -29,9 +28,10 @@ struct CommonControls
     // Вызывать при изменении состояния коммутатора
     void OnEventChangeCommutator();
 
+    Commutator *commutator = nullptr;                   // Управление коммутатором
+
 private:
 
-    Commutator *commutator = nullptr;                   // Управление коммутатором
     StaticBox *boxCover = nullptr;                      // "Крышка"
     StaticText *txtCover = nullptr;                     // Индикатор состояния крышки
     Button *btnEditSave = nullptr;                      // Сохранить результат редактирования
