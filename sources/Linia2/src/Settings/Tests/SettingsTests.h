@@ -206,13 +206,13 @@ struct TypeScan
 {
     enum E
     {
-        SINPos,
-        SINNeg,
+        SinPos,
+        SinNeg,
         AC,
         DCPos,
         DCNeg,
-        ImpulsePos,
-        ImpulseNeg,
+        ImpPos,
+        ImpNeg,
         Count
     };
 

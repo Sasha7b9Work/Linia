@@ -22,13 +22,13 @@ PageFPGA::PageFPGA(wxNotebook *notebook) :
 
         std::vector<StructDescription::CommandStruct> commandsScan; //-V827 //-V826
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0000, L("Выключена")});
-        commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0001, TypeScan(TypeScan::SINPos).NameShort() });
-        commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0010, TypeScan(TypeScan::SINNeg).NameShort() });
+        commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0001, TypeScan(TypeScan::SinPos).NameShort() });
+        commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0010, TypeScan(TypeScan::SinNeg).NameShort() });
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0011, TypeScan(TypeScan::AC).NameShort() });
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0101, TypeScan(TypeScan::DCPos).NameShort() });
         commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0100, TypeScan(TypeScan::DCNeg).NameShort() });
-        commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0110, TypeScan(TypeScan::ImpulsePos).NameShort() });
-        commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0111, TypeScan(TypeScan::ImpulseNeg).NameShort() });
+        commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0110, TypeScan(TypeScan::ImpPos).NameShort() });
+        commandsScan.emplace_back(StructDescription::CommandStruct{ 0b0111, TypeScan(TypeScan::ImpNeg).NameShort() });
         desc0.emplace_back(StructDescription{ 0, 4, L("разв"), L("развёртка"), { true, commandsScan } });
 
         std::vector<StructDescription::CommandStruct> commandsTypeElem; //-V826

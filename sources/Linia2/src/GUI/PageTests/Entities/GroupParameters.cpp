@@ -806,13 +806,13 @@ void GroupParameters::CreateParametersScanner()
         ButtonsCombo *bcScanMode;
 
         wxArrayString choices;
-        choices.Add(TypeScan(TypeScan::SINPos).NameShort());
-        choices.Add(TypeScan(TypeScan::SINNeg).NameShort());
+        choices.Add(TypeScan(TypeScan::SinPos).NameShort());
+        choices.Add(TypeScan(TypeScan::SinNeg).NameShort());
         choices.Add(TypeScan(TypeScan::AC).NameShort());
         choices.Add(TypeScan(TypeScan::DCPos).NameShort());
         choices.Add(TypeScan(TypeScan::DCNeg).NameShort());
-        choices.Add(TypeScan(TypeScan::ImpulsePos).NameShort());
-        choices.Add(TypeScan(TypeScan::ImpulseNeg).NameShort());
+        choices.Add(TypeScan(TypeScan::ImpPos).NameShort());
+        choices.Add(TypeScan(TypeScan::ImpNeg).NameShort());
 
         wxArrayString tooltips { "" };
 
@@ -1059,15 +1059,12 @@ T *GroupParameters::FindByName(const wxString &name)
 
 void GroupParameters::OnChangedScanMode(wxCommandEvent &event)
 {
-    int num = event.GetInt();
+    TypeScan::E type_scan = PanelViewTest::self->meas_sourcers.scannerCollector->GetTypeScan();
 
-    if (num <= TypeScan::AC)
-    {
-        wxArrayString choices{ "200" };
-
-        FindByName<ButtonsCombo>("bcScanNumberPoints")->SetChoices(choices);
-    }
-    else
+    if (type_scan == TypeScan::DCPos ||
+        type_scan == TypeScan::DCNeg ||
+        type_scan == TypeScan::ImpPos ||
+        type_scan == TypeScan::ImpNeg)
     {
         wxArrayString choices
         {
@@ -1078,6 +1075,14 @@ void GroupParameters::OnChangedScanMode(wxCommandEvent &event)
 
         FindByName<ButtonsCombo>("bcScanNumberPoints")->SetChoices(choices);
     }
+    else
+    {
+        wxArrayString choices{ "200" };
+
+        FindByName<ButtonsCombo>("bcScanNumberPoints")->SetChoices(choices);
+    }
+
+    event.Skip();
 }
 
 
@@ -1189,8 +1194,8 @@ std::pair<RangeI::E, RangeI::E> Ampermeter::GetMinMaxCurrentMeasCollector()
             return std::make_pair(RangeI::_4_5nA, RangeI::_2mA);
         }
         else if (type_scan == TypeScan::AC ||
-            type_scan == TypeScan::SINPos ||
-            type_scan == TypeScan::SINNeg)
+            type_scan == TypeScan::SinPos ||
+            type_scan == TypeScan::SinNeg)
         {
             return std::make_pair(RangeI::_400_500nA, RangeI::_10A);
         }
@@ -1216,18 +1221,18 @@ void Scanner::OnEventChangeCommutator()
 
         if (PanelViewTest::self->com_controls.commutator->Is3kV())
         {
-            choices.push_back(TypeScan(TypeScan::SINPos).NameShort());
-            choices.push_back(TypeScan(TypeScan::SINNeg).NameShort());
+            choices.push_back(TypeScan(TypeScan::SinPos).NameShort());
+            choices.push_back(TypeScan(TypeScan::SinNeg).NameShort());
             choices.push_back(TypeScan(TypeScan::AC).NameShort());
             choices.push_back(TypeScan(TypeScan::DCPos).NameShort());
             choices.push_back(TypeScan(TypeScan::DCNeg).NameShort());
-            choices.push_back(TypeScan(TypeScan::ImpulsePos).NameShort());
-            choices.push_back(TypeScan(TypeScan::ImpulseNeg).NameShort());
+            choices.push_back(TypeScan(TypeScan::ImpPos).NameShort());
+            choices.push_back(TypeScan(TypeScan::ImpNeg).NameShort());
         }
         else
         {
-            choices.push_back(TypeScan(TypeScan::ImpulsePos).NameShort());
-            choices.push_back(TypeScan(TypeScan::ImpulseNeg).NameShort());
+            choices.push_back(TypeScan(TypeScan::ImpPos).NameShort());
+            choices.push_back(TypeScan(TypeScan::ImpNeg).NameShort());
         }
 
         combo->SetChoices(choices);
