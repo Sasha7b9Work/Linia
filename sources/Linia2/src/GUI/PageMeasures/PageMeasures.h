@@ -16,7 +16,6 @@ class wxGraphicsContext;
 
 class PageMeasures : public PageNotebook
 {
-    friend class Text;
     friend class Spline;
     friend class Line;
     friend class Rect;
@@ -54,6 +53,8 @@ public:
 
     std::vector<GraphMeasure *> entities;       // Сущности для отрисовки
     wxGraphicsContext *gc = nullptr;            // Используется для рисования
+    wxColor color_pen;
+    wxColor color_brush;
 
 private:
 
@@ -67,8 +68,6 @@ private:
 
     wxBitmap *bitmap = nullptr;
     wxMemoryDC dc;                          // А здесь хранится то, что нарисовано, пока не будет вызвано событие wxEVT_PAINT
-    wxColor color_pen;
-    wxColor color_brush;
 
     // Координаты мыши при нажатии кнопки
     wxPoint pos_mouse_down;
