@@ -10,7 +10,6 @@
 
 class Application : public wxApp
 {
-    friend class Deivce;
     friend class EmulatorIPPP;
 
 public:
