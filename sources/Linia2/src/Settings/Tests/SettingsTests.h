@@ -216,9 +216,7 @@ struct TypeScan
         Count
     };
 
-    static pchar NameShort(E);
-
-    static pchar NameGUI(E);
+    static wxString NameShort(E);
 
     static pchar NameFileICO(E);
 };

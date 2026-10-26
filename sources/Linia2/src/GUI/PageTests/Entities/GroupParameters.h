@@ -295,4 +295,6 @@ public:
 
     // Нужно вызывать при изменении положения переключателя коммутатора
     virtual void OnEventChangeCommutator() override;
+
+    TypeScan::E GetTypeScan();
 };

@@ -1142,18 +1142,18 @@ void Ampermeter::OnEventChangeScanner()
 
 std::pair<RangeI::E, RangeI::E> Ampermeter::GetMinMaxCurrentMeasCollector()
 {
-    wxString scan_mode = PanelViewTest::self->meas_sourcers.scannerCollector->FindByName<ButtonsCombo>("bcScanMode")->GetCurrentString();
+    TypeScan::E type_scan = PanelViewTest::self->meas_sourcers.scannerCollector->GetTypeScan();
 
     if (PanelViewTest::self->com_controls.commutator->Is3kV())
     {
-        if (scan_mode == "DC+" ||
-            scan_mode == "DC-")
+        if (type_scan == TypeScan::DCPos ||
+            type_scan == TypeScan::DCNeg)
         {
             return std::make_pair(RangeI::_4_5nA, RangeI::_2mA);
         }
-        else if (scan_mode == "AC" ||
-            scan_mode == "SIN+" ||
-            scan_mode == "SIN-")
+        else if (type_scan == TypeScan::AC ||
+            type_scan == TypeScan::SYNPos ||
+            type_scan == TypeScan::SYNNeg)
         {
             return std::make_pair(RangeI::_400_500nA, RangeI::_10A);
         }
@@ -1195,4 +1195,24 @@ void Scanner::OnEventChangeCommutator()
 
         combo->SetChoices(choices);
     }
+}
+
+
+TypeScan::E Scanner::GetTypeScan()
+{
+    wxString type_scan = FindByName<ButtonsCombo>("bcScanMode")->GetCurrentString();
+
+    for (int i = 0; i < TypeScan::Count; i++)
+    {
+        TypeScan::E t = (TypeScan::E)i;
+
+        if (type_scan == TypeScan::NameShort(t))
+        {
+            return t;
+        }
+    }
+
+    LOG_ERROR("Нет названия для типа развёртки \"%s\"", type_scan.c_str().AsChar());
+
+    return TypeScan::Count;
 }

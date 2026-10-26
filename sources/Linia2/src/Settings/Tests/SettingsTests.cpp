@@ -25,17 +25,17 @@ pchar Chan::Name() const
 }
 
 
-pchar TypeScan::NameShort(E v)
+wxString TypeScan::NameShort(E v)
 {
-    static const pchar names[Count] =
+    static const wxString names[Count] =
     {
-        "SYN_P",
-        "SYN_N",
+        "SYN+",
+        "SYN-",
         "AC",
-        "DC_P",
-        "DC_N",
-        "IMP_P",
-        "IMP_N"
+        "DC+",
+        "DC-",
+        "IMP+",
+        "IMP-"
     };
 
     return names[v];
@@ -53,30 +53,6 @@ pchar TypeScan::NameFileICO(E v)
         "icons/graphs/triang_down.ico",
         "icons/graphs/imp_up.ico",
         "icons/graphs/imp_down.ico"
-    };
-
-    if (v < Count)
-    {
-        return names[v];
-    }
-
-    LOG_ERROR("Very big index");
-
-    return "";
-}
-
-
-pchar TypeScan::NameGUI(E v)
-{
-    static pchar names[Count] =
-    {
-        "Положительные полуволны",
-        "Отрицательные полуволны",
-        "Синусоидальное",
-        "Положительное постоянное",
-        "Отрицательное постоянное",
-        "Положительные импульсы",
-        "Отрицательные импульсы"
     };
 
     if (v < Count)
