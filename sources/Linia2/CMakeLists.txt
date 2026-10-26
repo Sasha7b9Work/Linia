@@ -32,6 +32,7 @@ if(WIN32)
         /wd4711    # function xxx selected for automatic inline expansion
         /wd4820    # 'N' bytes padding added after data member
         /wd4865    # '<unnamed-enum-XXX>': the underlying type will change from 'int' to '__int64' when '/Zc:enumTypes' is specified on the command line
+        /wd4868    # compiler may not enforce left-to-right evaluation order in a brace enclosed initializer list
         /wd5026    # move constructor was implicitly defined as deleted
         /wd5027    # move assignment operator was implicitly defined as deleted
         /wd5045    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
@@ -69,7 +70,7 @@ endif()
 add_definitions(-DOPT_GENERIC)
 
 file(GLOB RESOURCES                     resources/*.*)
-file(GLOB SRC                           src/*.*)
+file(GLOB SRC                           src/*.h src/*.cpp)
 file(GLOB COMMUNICATOR                  src/Communicator/*.*)
 file(GLOB COMMUNICATOR_CLIENTHTTP       src/Communicator/ClientHTTP/*.*)
 file(GLOB COMMUNICATOR_COMPORT          src/Communicator/ComPort/*.*)

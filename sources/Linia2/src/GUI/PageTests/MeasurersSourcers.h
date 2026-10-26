@@ -13,6 +13,9 @@ struct MeasurersSourcers
     void HideAll();
     void Tune();
 
+    // Нужно вызывать при изменении положения переключателя коммутатора
+    void OnEventChangeCommutator();
+
 private:
 
     MeasurerVoltageCurrent *measBase = nullptr;
@@ -28,9 +31,4 @@ private:
 
     // Возвращает позицию по Y источника либо измерителя
     int PosY(int);
-
-    friend class PanelViewTest;
-
-    // Нужно вызывать при изменении положения переключателя коммутатора
-    void OnEventChangeCommutator();
 };

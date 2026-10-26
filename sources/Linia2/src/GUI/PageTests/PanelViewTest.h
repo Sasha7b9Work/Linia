@@ -11,9 +11,6 @@
 
 class PanelViewTest : public Panel
 {
-    friend class GroupParameters;
-    friend class Scanner;
-
 public:
 
     PanelViewTest(wxWindow *);
