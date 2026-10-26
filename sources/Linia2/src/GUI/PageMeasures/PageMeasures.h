@@ -16,7 +16,6 @@ class wxGraphicsContext;
 
 class PageMeasures : public PageNotebook
 {
-    friend class Point;
     friend class Text;
     friend class Spline;
     friend class Line;
@@ -53,7 +52,8 @@ public:
     // Возврщает полнлный размер виджета
     wxSize GetFullSize() const;
 
-    std::vector<GraphMeasure *> entities;    // Сущности для отрисовки
+    std::vector<GraphMeasure *> entities;       // Сущности для отрисовки
+    wxGraphicsContext *gc = nullptr;            // Используется для рисования
 
 private:
 
@@ -63,10 +63,9 @@ private:
         *btnLessY = nullptr,
         *btnMoreY = nullptr;
 
-    std::vector<Button *> buttons;        // Здесь все кнопки, у которых нужно менять цвета
+    std::vector<Button *> buttons;          // Здесь все кнопки, у которых нужно менять цвета
 
     wxBitmap *bitmap = nullptr;
-    wxGraphicsContext *gc = nullptr;        // Используется для рисования
     wxMemoryDC dc;                          // А здесь хранится то, что нарисовано, пока не будет вызвано событие wxEVT_PAINT
     wxColor color_pen;
     wxColor color_brush;
