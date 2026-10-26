@@ -36,16 +36,16 @@ public:
     {
         PopupTransientWindow::Hide();
 
-        wxArrayString &labels = GetCombo()->labels;
+        const wxArrayString &labels = GetCombo()->GetLabels();
 
         // Основной контейнер с отступами по краям
         wxPanel *mainPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
 
-        int num_cells = (int)labels.size() + GetCombo()->num_empties;                // Ячеек может быть больше, чем вариантов выбора - если нам нужно выравниивание по столбцам
+        int num_cells = (int)labels.size() + GetCombo()->GetNumEmpties();        // Ячеек может быть больше, чем вариантов выбора - если нам нужно выравниивание по столбцам
 
-        int num_rows = (int)(num_cells / GetCombo()->buttons_in_row);
+        int num_rows = (int)(num_cells / GetCombo()->GetNumButtonsInRow());
 
-        if (num_rows * GetCombo()->buttons_in_row < num_cells)
+        if (num_rows * GetCombo()->GetNumButtonsInRow() < num_cells)
         {
             num_rows++;
         }
@@ -60,10 +60,10 @@ public:
         wxGridSizer *gridSizer = new wxGridSizer(num_rows, num_cols, 2, 2);
 
         // Добавляем рамку вокруг сетки кнопок
-        StaticBoxSizer *boxSizer = new StaticBoxSizer(wxVERTICAL, mainPanel, GetCombo()->title);
+        StaticBoxSizer *boxSizer = new StaticBoxSizer(wxVERTICAL, mainPanel, GetCombo()->GetTitle());
         boxSizer->Add(gridSizer, 1, wxEXPAND | wxALL, 0); // 10px отступ внутри рамки
 
-        for (int i = 0; i < GetCombo()->num_empties; i++)
+        for (int i = 0; i < GetCombo()->GetNumEmpties(); i++)
         {
             wxPanel *panel = new wxPanel(mainPanel);
             gridSizer->Add(panel, 0, wxEXPAND | wxALL, 2);
@@ -83,9 +83,9 @@ public:
                 {
                     wxString label = ((ButtonBitmap *)event.GetEventObject())->GetLabel();
 
-                    for (size_t i = 0; i < GetCombo()->labels.size(); i++)
+                    for (size_t i = 0; i < GetCombo()->GetLabels().size(); i++)
                     {
-                        if (label == GetCombo()->labels[i])
+                        if (label == GetCombo()->GetLabels()[i])
                         {
                             ButtonsCombo *combo = (ButtonsCombo *)GetParent();
 
@@ -357,7 +357,7 @@ void ButtonsCombo::SetChoices(const wxArrayString &choices)
 }
 
 
-wxString ButtonsCombo::GetHint(uint i) const
+const wxString &ButtonsCombo::GetHint(uint i) const
 {
     if (tooltips.GetCount() == 1)
     {

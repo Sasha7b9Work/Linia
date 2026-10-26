@@ -19,8 +19,6 @@ protected:
 // Кнопка с рисунком, по нажатию на которую открывается окно с другими выборами
 class ButtonsCombo : public DrawingButton
 {
-    friend class ButtonPopup;
-
 public:
 
     static const int HEIGHT = TEXTCNTRL_HEIGHT + 3;
@@ -65,6 +63,28 @@ public:
 
     bool left_align = false;            // Если true - надписи на выборах будут выравниваться по левому краю
 
+    const wxArrayString &GetLabels() const
+    {
+        return labels;
+    }
+
+    int GetNumEmpties() const
+    {
+        return num_empties;
+    }
+
+    int GetNumButtonsInRow() const
+    {
+        return buttons_in_row;
+    }
+
+    const wxString &GetTitle() const
+    {
+        return title;
+    }
+
+    const wxString &GetHint(uint i) const;
+
 protected:
 
     wxString myToolTip;
@@ -85,8 +105,6 @@ private:
     int buttons_in_row = 0;
     bool left_part_clicked = true;      // Если true, то кликнули мышкой в левой части кнопки
     int num_empties = 0;                // Столько добавлено пустых полей перед первым вариантом, чтобы выровнять столбцы по значениям
-
-    wxString GetHint(uint i) const;
 };
 
 
