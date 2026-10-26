@@ -865,6 +865,8 @@ void GroupParameters::CreateParametersScanner()
 
         parametersScanner.push_back(bcScanDurationImpulse);
     }
+
+    OnEventChangeCommutator();
 }
 
 
@@ -1117,13 +1119,26 @@ void Scanner::OnEventChangeCommutator()
 {
     if (chan.IsCollector())
     {
+        ButtonsCombo *combo = FindByName<ButtonsCombo>("bcScanMode");
+
+        wxArrayString choices;
+
         if (PanelViewTest::self->com_controls.commutator->Is3kV())
         {
-
+            choices.push_back("SIN+");
+            choices.push_back("SIN-");
+            choices.push_back("AC");
+            choices.push_back("DC+");
+            choices.push_back("DC-");
+            choices.push_back("IMP+");
+            choices.push_back("IMP-");
         }
         else
         {
-
+            choices.push_back("IMP+");
+            choices.push_back("IMP-");
         }
+
+        combo->SetChoices(choices);
     }
 }
