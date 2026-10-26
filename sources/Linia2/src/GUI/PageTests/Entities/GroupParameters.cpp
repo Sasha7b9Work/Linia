@@ -289,96 +289,13 @@ void GroupParameters::CreateParametersI()
 
     parametersI.clear();
 
-    int y = coord_controls.y;
-
     if (chan.IsBase())
     {
-        CreateParametersBaseUandI();
+        CreateParametersBaseI();
     }
     else if (chan.IsSubstrate())
     {
-        if (type.IsMeasUandI())
-        {
-            {
-                wxArrayString choices;
-
-                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_125));
-                }
-
-                wxArrayString tooltips{ L("Начальное значение измеряемого тока подложки") };
-
-                CREATE_COMBO(comboSubstrateStartI, L("Is старт"), parametersI);
-            }
-
-            {
-                wxArrayString choices;
-
-                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_125));
-                }
-
-                wxArrayString tooltips{ L("Диапазон измерения тока подложки") };
-
-                CREATE_COMBO(comboSubstrateRangeI, L("Is размах"), parametersI);
-            }
-
-            {
-                wxArrayString choices;
-
-                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_125));
-                }
-
-                wxArrayString tooltips{ L("Напряжение ограничения тока подложки") };
-
-                CREATE_COMBO(comboSubstrateLimitI, L("Is огр"), parametersI);
-            }
-        }
-        if (type.IsSourceUandI())
-        {
-            {
-                wxArrayString choices;
-
-                for (RangeI range{ RangeI::_1nA }; range.value < RangeI::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_124));
-                }
-
-                wxArrayString tooltips{ L("Начальное значение источника тока подложки") };
-
-                CREATE_COMBO(comboSubsrtateStartI, L("Js старт"), parametersI);
-            }
-
-            {
-                wxArrayString choices;
-
-                for (RangeI range{ RangeI::_1nA }; range.value < RangeI::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_124));
-                }
-
-                wxArrayString tooltips{ L("Разница тока между сосденими ступеньками источника тока подложки") };
-
-                CREATE_COMBO(comboSubsrtateStepI, L("Js шаг"), parametersI);
-            }
-
-            {
-                wxArrayString choices;
-
-                for (int i = 1; i < 11; i++)
-                {
-                    choices.push_back(wxString::Format("%d", i));
-                }
-
-                wxArrayString tooltips{ L("") };
-
-                CREATE_COMBO(comboSubsrtateStepI, L("Кол-во ступенек"), parametersI);
-            }
-        }
+        CreateParametersSubstrateI();
     }
     else if (chan.IsCollector())
     {
@@ -387,7 +304,7 @@ void GroupParameters::CreateParametersI()
 }
 
 
-void GroupParameters::CreateParametersBaseUandI()
+void GroupParameters::CreateParametersBaseI()
 {
     int y = coord_controls.y;
 
@@ -476,6 +393,95 @@ void GroupParameters::CreateParametersBaseUandI()
 }
 
 
+void GroupParameters::CreateParametersSubstrateI()
+{
+    int y = coord_controls.y;
+
+    if (type.IsMeasUandI())
+    {
+        {
+            wxArrayString choices;
+
+            for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+            {
+                choices.push_back(range.Name(RowRange::_125));
+            }
+
+            wxArrayString tooltips{ L("Начальное значение измеряемого тока подложки") };
+
+            CREATE_COMBO(comboSubstrateStartI, L("Is старт"), parametersI);
+        }
+
+        {
+            wxArrayString choices;
+
+            for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+            {
+                choices.push_back(range.Name(RowRange::_125));
+            }
+
+            wxArrayString tooltips{ L("Диапазон измерения тока подложки") };
+
+            CREATE_COMBO(comboSubstrateRangeI, L("Is размах"), parametersI);
+        }
+
+        {
+            wxArrayString choices;
+
+            for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+            {
+                choices.push_back(range.Name(RowRange::_125));
+            }
+
+            wxArrayString tooltips{ L("Напряжение ограничения тока подложки") };
+
+            CREATE_COMBO(comboSubstrateLimitI, L("Is огр"), parametersI);
+        }
+    }
+    if (type.IsSourceUandI())
+    {
+        {
+            wxArrayString choices;
+
+            for (RangeI range{ RangeI::_1nA }; range.value < RangeI::Count; ++range)
+            {
+                choices.push_back(range.Name(RowRange::_124));
+            }
+
+            wxArrayString tooltips{ L("Начальное значение источника тока подложки") };
+
+            CREATE_COMBO(comboSubsrtateStartI, L("Js старт"), parametersI);
+        }
+
+        {
+            wxArrayString choices;
+
+            for (RangeI range{ RangeI::_1nA }; range.value < RangeI::Count; ++range)
+            {
+                choices.push_back(range.Name(RowRange::_124));
+            }
+
+            wxArrayString tooltips{ L("Разница тока между сосденими ступеньками источника тока подложки") };
+
+            CREATE_COMBO(comboSubsrtateStepI, L("Js шаг"), parametersI);
+        }
+
+        {
+            wxArrayString choices;
+
+            for (int i = 1; i < 11; i++)
+            {
+                choices.push_back(wxString::Format("%d", i));
+            }
+
+            wxArrayString tooltips{ L("") };
+
+            CREATE_COMBO(comboSubsrtateStepI, L("Кол-во ступенек"), parametersI);
+        }
+    }
+}
+
+
 void GroupParameters::CreateParametersCollectorI()
 {
     int y = coord_controls.y;
@@ -523,7 +529,7 @@ void GroupParameters::CreateParametersU()
                     choices.push_back(range.Name(RowRange::_124));
                 }
 
-                wxArrayString tooltips{ L("Начальное значенпие измеряемоого напряжения") };
+                wxArrayString tooltips{ L("Начальное значение измеряемоого напряжения") };
 
                 CREATE_COMBO(comboBaseStartU, L("Ub старт"), parametersU);
             }
