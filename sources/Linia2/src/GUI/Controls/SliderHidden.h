@@ -8,13 +8,21 @@
 
 class SliderHidden : public DrawingButton
 {
-    friend class WindowSlider;
-
 public:
 
     SliderHidden(wxWindow *, int width, const wxString &title, const wxString &name_file);
 
     void SetRange(double, double);
+
+    double GetMin() const
+    {
+        return min;
+    }
+
+    double GetMax() const
+    {
+        return max;
+    }
 
 private:
 

@@ -23,7 +23,7 @@ public:
 
         {
             SliderFloat *slider = new SliderFloat(mainPanel, 200, L("Смещение"));
-            slider->SetRange(parent->min, parent->max, "A", 1);
+            slider->SetRange(parent->GetMin(), parent->GetMax(), "A", 1);
             slider->SetBackgroundColour(slider->GetBackgroundColour().ChangeLightness(LIGHTNESS));
             slider->SetBackgroundColour(slider->GetBackgroundColour().ChangeLightness(170));
 
