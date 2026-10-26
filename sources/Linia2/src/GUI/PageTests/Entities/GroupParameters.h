@@ -181,6 +181,7 @@ private:
     // Создаёт токовые параметры
     void CreateParametersI();
     void CreateParametersCollectorI();
+    void CreateParametersBaseUandI();
 
     // Создаёт напряжённые параметры
     void CreateParametersU();

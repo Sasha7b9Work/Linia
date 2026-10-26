@@ -293,88 +293,7 @@ void GroupParameters::CreateParametersI()
 
     if (chan.IsBase())
     {
-        if (type.IsMeasUandI())
-        {
-            {
-                wxArrayString choices;
-
-                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_125));
-                }
-
-                wxArrayString tooltips{ L("Начальное измерения тока базы") };
-
-                CREATE_COMBO(comboBaseStartI, L("Ib старт"), parametersI);
-            }
-
-            {
-                wxArrayString choices;
-
-                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_125));
-                }
-
-                wxArrayString tooltips{ L("Диапазон измерения тока базы") };
-
-                CREATE_COMBO(comboBaseRangeI, L("Ib размах"), parametersI);
-            }
-
-            {
-                wxArrayString choices;
-
-                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_125));
-                }
-
-                wxArrayString tooltips{ L("Ограничение по току базы") };
-
-                CREATE_COMBO(comboBaseLimitI, L("Ib огр"), parametersI);
-            }
-        }
-        else if (type.IsSourceUandI())
-        {
-            {
-                wxArrayString choices;
-
-                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_125));
-                }
-
-                wxArrayString tooltips{ L("Начальное значение тока базы") };
-
-                CREATE_COMBO(comboBaseStartI, L("Jb старт"), parametersI);
-            }
-
-            {
-                wxArrayString choices;
-
-                for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_125));
-                }
-
-                wxArrayString tooltips{ L("Изменение между ступеньками") };
-
-                CREATE_COMBO(comboBaseStepI, L("Jb шаг"), parametersI);
-            }
-
-            {
-                wxArrayString choices;
-
-                for (int i = 1; i < 11; i++)
-                {
-                    choices.push_back(wxString::Format("%d", i));
-                }
-
-                wxArrayString tooltips{ L("Количество ступенек") };
-
-                CREATE_COMBO(comboBaseNumSteps, L("Кол-во ступенек"), parametersI);
-            }
-        }
+        CreateParametersBaseUandI();
     }
     else if (chan.IsSubstrate())
     {
@@ -464,6 +383,95 @@ void GroupParameters::CreateParametersI()
     else if (chan.IsCollector())
     {
         CreateParametersCollectorI();
+    }
+}
+
+
+void GroupParameters::CreateParametersBaseUandI()
+{
+    int y = coord_controls.y;
+
+    if (type.IsMeasUandI())
+    {
+        {
+            wxArrayString choices;
+
+            for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+            {
+                choices.push_back(range.Name(RowRange::_125));
+            }
+
+            wxArrayString tooltips{ L("Начальное измерения тока базы") };
+
+            CREATE_COMBO(comboBaseStartI, L("Ib старт"), parametersI);
+        }
+
+        {
+            wxArrayString choices;
+
+            for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+            {
+                choices.push_back(range.Name(RowRange::_125));
+            }
+
+            wxArrayString tooltips{ L("Диапазон измерения тока базы") };
+
+            CREATE_COMBO(comboBaseRangeI, L("Ib размах"), parametersI);
+        }
+
+        {
+            wxArrayString choices;
+
+            for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+            {
+                choices.push_back(range.Name(RowRange::_125));
+            }
+
+            wxArrayString tooltips{ L("Ограничение по току базы") };
+
+            CREATE_COMBO(comboBaseLimitI, L("Ib огр"), parametersI);
+        }
+    }
+    else if (type.IsSourceUandI())
+    {
+        {
+            wxArrayString choices;
+
+            for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+            {
+                choices.push_back(range.Name(RowRange::_125));
+            }
+
+            wxArrayString tooltips{ L("Начальное значение тока базы") };
+
+            CREATE_COMBO(comboBaseStartI, L("Jb старт"), parametersI);
+        }
+
+        {
+            wxArrayString choices;
+
+            for (RangeI range{ RangeI::_4_5nA }; range.value < RangeI::Count; ++range)
+            {
+                choices.push_back(range.Name(RowRange::_125));
+            }
+
+            wxArrayString tooltips{ L("Изменение между ступеньками") };
+
+            CREATE_COMBO(comboBaseStepI, L("Jb шаг"), parametersI);
+        }
+
+        {
+            wxArrayString choices;
+
+            for (int i = 1; i < 11; i++)
+            {
+                choices.push_back(wxString::Format("%d", i));
+            }
+
+            wxArrayString tooltips{ L("Количество ступенек") };
+
+            CREATE_COMBO(comboBaseNumSteps, L("Кол-во ступенек"), parametersI);
+        }
     }
 }
 
