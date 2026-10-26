@@ -35,9 +35,9 @@ private:
 
 class MainWindow : public wxFrame
 {
-    friend class Application;
-
 public:
+
+    MainWindow(const wxString &title);
 
     static MainWindow *self;
 
@@ -59,8 +59,6 @@ public:
     void HideSystemPanel();
 
 private:
-
-    MainWindow(const wxString &title);
 
     wxToolBar *toolBar = nullptr;
 
