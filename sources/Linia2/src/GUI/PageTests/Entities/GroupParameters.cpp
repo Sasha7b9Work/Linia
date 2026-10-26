@@ -1104,11 +1104,11 @@ void Ampermeter::OnEventChangeCommutator()
 
             if (PanelViewTest::self->com_controls.commutator->Is3kV())
             {
-                FillChoices(choices, RangeI::_4_5A, RangeI::_400_500A, RowRange::_125);
+                FillChoices(choices, RangeI::_4_5nA, RangeI::_10A, RowRange::_125);
             }
             else
             {
-                FillChoices(choices, RangeI::_4_5nA, RangeI::_10A, RowRange::_125);
+                FillChoices(choices, RangeI::_4_5A, RangeI::_400_500A, RowRange::_125);
             }
 
             FindByName<ComboInput>("comboCollectroRangeMeasI")->SetChoices(choices);
