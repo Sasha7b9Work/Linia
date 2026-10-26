@@ -1135,14 +1135,14 @@ void Ampermeter::OnEventChangeScanner()
 
         FillChoices(choices, min_max.first, min_max.second, RowRange::_125);
 
-        FindByName<ButtonsCombo>("bcScanMode")->SetChoices(choices);
+        FindByName<ButtonsCombo>("comboCollectorStartI")->SetChoices(choices);
     }
 }
 
 
 std::pair<RangeI::E, RangeI::E> Ampermeter::GetMinMaxCurrentMeasCollector()
 {
-    wxString scan_mode = FindByName<ButtonsCombo>("bcScanMode")->GetCurrentString();
+    wxString scan_mode = PanelViewTest::self->meas_sourcers.scannerCollector->FindByName<ButtonsCombo>("bcScanMode")->GetCurrentString();
 
     if (PanelViewTest::self->com_controls.commutator->Is3kV())
     {

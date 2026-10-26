@@ -31,6 +31,7 @@ public:
     wxPoint CoordinateCollector() const;
 
     CommonControls com_controls;        // Общие для всех типов элементов органы управления (тип развёртки, например)
+    MeasurersSourcers meas_sourcers;    // Источники и измерители для всех каналов
 
 private:
 
@@ -40,7 +41,6 @@ private:
 
     ComboInput *bcBaseNumMeasures = nullptr;            // Количество измерений
 
-    MeasurersSourcers meas_sourcers;    // Источники и измерители для всех каналов
     SpecificControls spec_controls;     // Специфичные органы управления для разных типов элементов (тип проводимости для биполярного транзистора, например)
 
 

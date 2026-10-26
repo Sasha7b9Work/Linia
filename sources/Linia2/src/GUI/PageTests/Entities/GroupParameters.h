@@ -142,6 +142,10 @@ public:
     // Показать параметры в соотвествии с выбранным режимом - така или напряжения
     void ShowNeedParameters();
 
+    template<class T>
+    T *FindByName(const wxString &);
+    wxWindow *FindWindowByName(const wxString &);
+
 protected:
 
     Type type;
@@ -157,10 +161,6 @@ protected:
     bool is_showing = false;
     Button *btnModeUI = nullptr;                // В измерителе переключение между вольтметром и амперметров, в источнике - между источником тока и источником напряжения
     wxPoint coord_controls;                     // Координаты комбобоксов
-
-    template<class T>
-    T *FindByName(const wxString &);
-    wxWindow *FindWindowByName(const wxString &);
 
     // Нужно вызывать при изменении положения переключателя коммутатора
     virtual void OnEventChangeCommutator() { }
