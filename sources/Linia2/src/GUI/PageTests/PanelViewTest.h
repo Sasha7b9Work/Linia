@@ -11,7 +11,6 @@
 
 class PanelViewTest : public Panel
 {
-    friend class Ampermeter;
     friend class GroupParameters;
     friend class Scanner;
 
@@ -31,6 +30,8 @@ public:
     // Возвращает координаты точки, из которой выходит вертикальная линия коллектора
     wxPoint CoordinateCollector() const;
 
+    CommonControls com_controls;        // Общие для всех типов элементов органы управления (тип развёртки, например)
+
 private:
 
     static const int radius_trans = 50;                     // От этого значения и Center() идёт всё построение изображения
@@ -40,7 +41,6 @@ private:
     ComboInput *bcBaseNumMeasures = nullptr;            // Количество измерений
 
     MeasurersSourcers meas_sourcers;    // Источники и измерители для всех каналов
-    CommonControls com_controls;        // Общие для всех типов элементов органы управления (тип развёртки, например)
     SpecificControls spec_controls;     // Специфичные органы управления для разных типов элементов (тип проводимости для биполярного транзистора, например)
 
 
