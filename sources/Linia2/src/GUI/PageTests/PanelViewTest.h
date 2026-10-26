@@ -11,7 +11,6 @@
 
 class PanelViewTest : public Panel
 {
-    friend struct SpecificControls;
     friend class Ampermeter;
     friend class GroupParameters;
     friend class Scanner;
@@ -26,6 +25,11 @@ public:
 
     // Нужно вызывать при изменении положения переключателя коммутатора
     void OnEventChangeCommutator();
+
+    wxPoint GetCenter() const;
+
+    // Возвращает координаты точки, из которой выходит вертикальная линия коллектора
+    wxPoint CoordinateCollector() const;
 
 private:
 
@@ -47,13 +51,8 @@ private:
 
     int CalculateCombos(ComboInput **, ComboInput **, ComboInput ** = nullptr, ComboInput ** = nullptr);
 
-    wxPoint GetCenter() const;
-
     void DrawScheme(AutoBufferedPaintDC &);
 
     // Нарисовать значок земли
     void DrawGround(AutoBufferedPaintDC &);
-
-    // Возвращает координаты точки, из которой выходит вертикальная линия коллектора
-    wxPoint CoordinateCollector() const;
 };
