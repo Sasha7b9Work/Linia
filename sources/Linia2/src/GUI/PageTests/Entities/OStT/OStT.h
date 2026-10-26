@@ -132,9 +132,6 @@ public:
 
 protected:
 
-    friend class BJT;
-    friend class FET;
-
     OStT() { }
 
     wxPoint point_E;
