@@ -29,8 +29,8 @@ wxString TypeScan::NameShort()
 {
     static const wxString names[Count] =
     {
-        "SYN+",
-        "SYN-",
+        "SIN+",
+        "SIN-",
         "AC",
         "DC+",
         "DC-",

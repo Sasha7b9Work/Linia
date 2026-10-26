@@ -206,8 +206,8 @@ struct TypeScan
 {
     enum E
     {
-        SYNPos,
-        SYNNeg,
+        SINPos,
+        SINNeg,
         AC,
         DCPos,
         DCNeg,

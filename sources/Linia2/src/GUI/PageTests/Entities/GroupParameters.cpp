@@ -6,6 +6,7 @@
 #include "GUI/PageTests/PanelViewTest.h"
 #include "GUI/Controls/SliderHidden.h"
 #include "GUI/Controls/Slider.h"
+#include "Settings/Tests/SettingsTests.h"
 
 
 GroupParameters::GroupParameters(Type::E _type, Chan::E _chan, Dir::E _dir) :
@@ -804,16 +805,14 @@ void GroupParameters::CreateParametersScanner()
     {
         ButtonsCombo *bcScanMode;
 
-        wxArrayString choices
-        {
-            "SIN+",
-            "SIN-",
-            "AC",
-            "DC+",
-            "DC-",
-            "IMP+",
-            "IMP-"
-        };
+        wxArrayString choices;
+        choices.Add(TypeScan(TypeScan::SINPos).NameShort());
+        choices.Add(TypeScan(TypeScan::SINNeg).NameShort());
+        choices.Add(TypeScan(TypeScan::AC).NameShort());
+        choices.Add(TypeScan(TypeScan::DCPos).NameShort());
+        choices.Add(TypeScan(TypeScan::DCNeg).NameShort());
+        choices.Add(TypeScan(TypeScan::ImpulsePos).NameShort());
+        choices.Add(TypeScan(TypeScan::ImpulseNeg).NameShort());
 
         wxArrayString tooltips { "" };
 
@@ -1152,8 +1151,8 @@ std::pair<RangeI::E, RangeI::E> Ampermeter::GetMinMaxCurrentMeasCollector()
             return std::make_pair(RangeI::_4_5nA, RangeI::_2mA);
         }
         else if (type_scan == TypeScan::AC ||
-            type_scan == TypeScan::SYNPos ||
-            type_scan == TypeScan::SYNNeg)
+            type_scan == TypeScan::SINPos ||
+            type_scan == TypeScan::SINNeg)
         {
             return std::make_pair(RangeI::_400_500nA, RangeI::_10A);
         }
@@ -1179,18 +1178,18 @@ void Scanner::OnEventChangeCommutator()
 
         if (PanelViewTest::self->com_controls.commutator->Is3kV())
         {
-            choices.push_back("SIN+");
-            choices.push_back("SIN-");
-            choices.push_back("AC");
-            choices.push_back("DC+");
-            choices.push_back("DC-");
-            choices.push_back("IMP+");
-            choices.push_back("IMP-");
+            choices.push_back(TypeScan(TypeScan::SINPos).NameShort());
+            choices.push_back(TypeScan(TypeScan::SINNeg).NameShort());
+            choices.push_back(TypeScan(TypeScan::AC).NameShort());
+            choices.push_back(TypeScan(TypeScan::DCPos).NameShort());
+            choices.push_back(TypeScan(TypeScan::DCNeg).NameShort());
+            choices.push_back(TypeScan(TypeScan::ImpulsePos).NameShort());
+            choices.push_back(TypeScan(TypeScan::ImpulseNeg).NameShort());
         }
         else
         {
-            choices.push_back("IMP+");
-            choices.push_back("IMP-");
+            choices.push_back(TypeScan(TypeScan::ImpulsePos).NameShort());
+            choices.push_back(TypeScan(TypeScan::ImpulseNeg).NameShort());
         }
 
         combo->SetChoices(choices);
