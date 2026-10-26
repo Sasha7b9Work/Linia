@@ -278,8 +278,6 @@ public:
 // Настройки развёрток
 class Scanner : public GroupParameters
 {
-    friend struct MeasurersSourcers;
-
 public:
 
     Scanner(Chan::E _chan, Dir::E _dir) : GroupParameters(GroupParameters::Type::Scanner, _chan, _dir) { }
