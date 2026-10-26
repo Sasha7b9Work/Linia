@@ -237,6 +237,9 @@ public:
 private:
 
     void FillChoices(wxArrayString &choices, RangeI::E begin, RangeI::E end, RowRange::E);
+
+    // Рассчитывает минимальный и максимальный ток, измеряемый в коллекторе, для текущих установленных настроек
+    std::pair<RangeI::E, RangeI::E> GetMinMaxCurrentMeasCollector();
 };
 
 

@@ -1129,29 +1129,35 @@ void Ampermeter::OnEventChangeScanner()
 {
     if (chan.IsCollector())
     {
-        ButtonsCombo *combo = FindByName<ButtonsCombo>("bcScanMode");
+        auto min_max = GetMinMaxCurrentMeasCollector();
 
         wxArrayString choices;
 
-        wxString scan_mode = combo->GetCurrentString();
+        FillChoices(choices, min_max.first, min_max.second, RowRange::_125);
 
-        if (scan_mode == "DC+" ||
-            scan_mode == "DC-")
-        {
-            FillChoices(choices, RangeI::_4_5nA, RangeI::_2mA, RowRange::_125);
-        }
-        else if (scan_mode == "AC" ||
-            scan_mode == "SIN+" ||
-            scan_mode == "SIN-")
-        {
-            FillChoices(choices, RangeI::_400_500nA, RangeI::_10A, RowRange::_125);
-        }
-        else
-        {
-            FillChoices(choices, RangeI::_40_50uA, RangeI::_10A, RowRange::_125);
-        }
+        FindByName<ButtonsCombo>("bcScanMode")->SetChoices(choices);
+    }
+}
 
-        combo->SetChoices(choices);
+
+std::pair<RangeI::E, RangeI::E> Ampermeter::GetMinMaxCurrentMeasCollector()
+{
+    wxString scan_mode = FindByName<ButtonsCombo>("bcScanMode")->GetCurrentString();
+
+    if (scan_mode == "DC+" ||
+        scan_mode == "DC-")
+    {
+        return std::make_pair(RangeI::_4_5nA, RangeI::_2mA);
+    }
+    else if (scan_mode == "AC" ||
+        scan_mode == "SIN+" ||
+        scan_mode == "SIN-")
+    {
+        return std::make_pair(RangeI::_400_500nA, RangeI::_10A);
+    }
+    else
+    {
+        return std::make_pair(RangeI::_40_50uA, RangeI::_10A);
     }
 }
 
