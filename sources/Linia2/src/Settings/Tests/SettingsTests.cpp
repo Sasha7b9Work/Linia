@@ -25,7 +25,7 @@ pchar Chan::Name() const
 }
 
 
-wxString TypeScan::NameShort(E v)
+wxString TypeScan::NameShort()
 {
     static const wxString names[Count] =
     {
@@ -38,11 +38,11 @@ wxString TypeScan::NameShort(E v)
         "IMP-"
     };
 
-    return names[v];
+    return names[value];
 }
 
 
-pchar TypeScan::NameFileICO(E v)
+pchar TypeScan::NameFileICO()
 {
     static pchar names[Count] =
     {
@@ -55,9 +55,9 @@ pchar TypeScan::NameFileICO(E v)
         "icons/graphs/imp_down.ico"
     };
 
-    if (v < Count)
+    if (value < Count)
     {
-        return names[v];
+        return names[value];
     }
 
     LOG_ERROR("Very big index");

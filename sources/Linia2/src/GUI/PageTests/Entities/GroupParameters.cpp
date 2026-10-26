@@ -1204,11 +1204,11 @@ TypeScan::E Scanner::GetTypeScan()
 
     for (int i = 0; i < TypeScan::Count; i++)
     {
-        TypeScan::E t = (TypeScan::E)i;
+        TypeScan t{(TypeScan::E)i };
 
-        if (type_scan == TypeScan::NameShort(t))
+        if (type_scan == t.NameShort())
         {
-            return t;
+            return t.value;
         }
     }
 
