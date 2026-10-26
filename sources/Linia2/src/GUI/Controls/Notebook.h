@@ -11,8 +11,6 @@ class wxBoxSizer;
 // Это панель - со своей кнопкой выбора, с возможностью открепляться от PanelBoard
 class PageNotebook : public Panel
 {
-    friend class Notebook;
-
 public:
 
     PageNotebook(Notebook *, const wxString &);
