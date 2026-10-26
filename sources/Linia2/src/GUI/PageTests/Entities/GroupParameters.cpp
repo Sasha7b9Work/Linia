@@ -1085,7 +1085,7 @@ void GroupParameters::OnChangedScanDurationImpulse(wxCommandEvent &)
 }
 
 
-void GroupParameters::OnEventChangeCommutator()
+void Ampermeter::OnEventChangeCommutator()
 {
     if (chan.IsCollector())
     {
@@ -1109,5 +1109,21 @@ void GroupParameters::OnEventChangeCommutator()
         }
 
         combo->SetChoices(choices);
+    }
+}
+
+
+void Scanner::OnEventChangeCommutator()
+{
+    if (chan.IsCollector())
+    {
+        if (PanelViewTest::self->com_controls.commutator->Is3kV())
+        {
+
+        }
+        else
+        {
+
+        }
     }
 }

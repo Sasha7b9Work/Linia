@@ -9,6 +9,7 @@ struct CommonControls
 {
     friend class Ampermeter;
     friend class GroupParameters;
+    friend class Scanner;
 
     void Create(wxWindow *);
     void Show();
@@ -24,6 +25,9 @@ struct CommonControls
 
     // Если true - находимся в режиме редактирования теста
     bool InModeEdit() const;
+
+    // Вызывать при изменении состояния коммутатора
+    void OnEventChangeCommutator();
 
 private:
 

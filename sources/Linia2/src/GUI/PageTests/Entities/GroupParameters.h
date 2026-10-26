@@ -163,7 +163,7 @@ protected:
     wxWindow *FindWindowByName(const wxString &);
 
     // Нужно вызывать при изменении положения переключателя коммутатора
-    void OnEventChangeCommutator();
+    virtual void OnEventChangeCommutator() { }
 
 private:
 
@@ -221,15 +221,16 @@ public:
 // Имзеритель тока
 class Ampermeter : public GroupParameters
 {
+    friend struct MeasurersSourcers;
+
 public:
 
     Ampermeter(Chan::E _chan, Dir::E _dir) :
         GroupParameters(GroupParameters::Type::MeasI, _chan, _dir)
     {}
 
-private:
-
-    friend struct MeasurersSourcers;
+    // Нужно вызывать при изменении положения переключателя коммутатора
+    virtual void OnEventChangeCommutator() override;
 };
 
 
@@ -276,9 +277,15 @@ public:
 };
 
 
+// Настройки развёрток
 class Scanner : public GroupParameters
 {
+    friend struct MeasurersSourcers;
+
 public:
 
     Scanner(Chan::E _chan, Dir::E _dir) : GroupParameters(GroupParameters::Type::Scanner, _chan, _dir) { }
+
+    // Нужно вызывать при изменении положения переключателя коммутатора
+    virtual void OnEventChangeCommutator() override;
 };

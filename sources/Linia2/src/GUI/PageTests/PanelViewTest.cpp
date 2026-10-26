@@ -287,5 +287,6 @@ void PanelViewTest::DrawGround(AutoBufferedPaintDC &dc)
 
 void PanelViewTest::OnEventChangeCommutator()
 {
+    com_controls.OnEventChangeCommutator();
     meas_sourcers.OnEventChangeCommutator();
 }

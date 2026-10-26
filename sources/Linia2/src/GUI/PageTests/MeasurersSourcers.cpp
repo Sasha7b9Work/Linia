@@ -108,4 +108,5 @@ int MeasurersSourcers::PosY(int num)
 void MeasurersSourcers::OnEventChangeCommutator()
 {
     ampCollector->OnEventChangeCommutator();
+    scannerCollector->OnEventChangeCommutator();
 }

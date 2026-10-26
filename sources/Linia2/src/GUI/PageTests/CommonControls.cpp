@@ -122,3 +122,9 @@ bool CommonControls::InModeEdit() const
 {
     return !btnEditSave->IsShown();
 }
+
+
+void CommonControls::OnEventChangeCommutator()
+{
+
+}
