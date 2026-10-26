@@ -1124,6 +1124,8 @@ void SourceVoltage::OnEventChangeCommutator()
         // Заполняем диапазоны источника напряжения
 
         {
+            ComboInput *combo = FindByName<ComboInput>("comboCollectorSourceU");
+
             wxArrayString choices;
 
             if (PanelViewTest::self->com_controls.commutator->Is3kV())
@@ -1131,13 +1133,17 @@ void SourceVoltage::OnEventChangeCommutator()
                 choices.push_back("30 В");
                 choices.push_back("300 В");
                 choices.push_back("3000 В");
+
+                combo->SetButtonsInRow(1);
             }
             else
             {
                 FillChoices(choices, RangeU::_1V, RangeU::_40_50V, RowRange::_124);
+
+                combo->SetButtonsInRow(3);
             }
 
-            FindByName<ComboInput>("comboCollectorSourceU")->SetChoices(choices);
+            combo->SetChoices(choices);
         }
 
     }

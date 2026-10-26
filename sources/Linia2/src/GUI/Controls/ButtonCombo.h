@@ -85,6 +85,11 @@ public:
 
     const wxString &GetHint(uint i) const;
 
+    void SetButtonsInRow(int n)
+    {
+        buttons_in_row = n;
+    }
+
 protected:
 
     wxString myToolTip;
