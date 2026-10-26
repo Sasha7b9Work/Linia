@@ -2,7 +2,7 @@
 #pragma once
 #include "Settings/Value.h"
 #pragma warning(push, 0)
-#include <wx/frame.h>
+    #include <wx/frame.h>
 #pragma warning(pop)
 
 
@@ -11,8 +11,6 @@ class Notebook;
 
 struct ModeMainWindow
 {
-    friend class MainWindow;
-
     enum E
     {
         Standard,           // Стартовый вид окна
@@ -26,8 +24,6 @@ struct ModeMainWindow
     {
         return current;
     }
-
-private:
 
     static E current;
 };
