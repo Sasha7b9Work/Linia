@@ -7,9 +7,9 @@ class GraphMeasure;
 
 class AutoCursors
 {
-    friend class MainWindow;
-
 public:
+
+    AutoCursors();
 
     static AutoCursors *self;
 
@@ -24,6 +24,4 @@ public:
 private:
 
     bool is_allowed = true;
-
-    AutoCursors();
 };
