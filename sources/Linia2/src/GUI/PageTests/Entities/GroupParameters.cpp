@@ -1144,20 +1144,27 @@ std::pair<RangeI::E, RangeI::E> Ampermeter::GetMinMaxCurrentMeasCollector()
 {
     wxString scan_mode = FindByName<ButtonsCombo>("bcScanMode")->GetCurrentString();
 
-    if (scan_mode == "DC+" ||
-        scan_mode == "DC-")
+    if (PanelViewTest::self->com_controls.commutator->Is3kV())
     {
-        return std::make_pair(RangeI::_4_5nA, RangeI::_2mA);
-    }
-    else if (scan_mode == "AC" ||
-        scan_mode == "SIN+" ||
-        scan_mode == "SIN-")
-    {
-        return std::make_pair(RangeI::_400_500nA, RangeI::_10A);
+        if (scan_mode == "DC+" ||
+            scan_mode == "DC-")
+        {
+            return std::make_pair(RangeI::_4_5nA, RangeI::_2mA);
+        }
+        else if (scan_mode == "AC" ||
+            scan_mode == "SIN+" ||
+            scan_mode == "SIN-")
+        {
+            return std::make_pair(RangeI::_400_500nA, RangeI::_10A);
+        }
+        else            // IMP+, IMP-
+        {
+            return std::make_pair(RangeI::_40_50uA, RangeI::_10A);
+        }
     }
     else
     {
-        return std::make_pair(RangeI::_40_50uA, RangeI::_10A);
+        return std::make_pair(RangeI::_4_5A, RangeI::_400_500A);
     }
 }
 
