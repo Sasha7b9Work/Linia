@@ -12,6 +12,8 @@
 class PanelViewTest : public Panel
 {
     friend struct SpecificControls;
+    friend class Ampermeter;
+    friend class GroupParameters;
 
 public:
 

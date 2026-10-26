@@ -158,6 +158,13 @@ protected:
     Button *btnModeUI = nullptr;                // В измерителе переключение между вольтметром и амперметров, в источнике - между источником тока и источником напряжения
     wxPoint coord_controls;                     // Координаты комбобоксов
 
+    template<class T>
+    T *FindByName(const wxString &);
+    wxWindow *FindWindowByName(const wxString &);
+
+    // Нужно вызывать при изменении положения переключателя коммутатора
+    void OnEventChangeCommutator();
+
 private:
 
     // Нарисовать окантовку для измерителя или источника. x, y - центр измерителя
@@ -190,10 +197,6 @@ private:
 
     int CalculateNumControls() const;
 
-    template<class T>
-    T *FindByName(const wxString &);
-    wxWindow *FindWindowByName(const wxString &);
-
     void OnChangedScanMode(wxCommandEvent &);
     void OnChangedScanNumberPoints(wxCommandEvent &);
     void OnChangedScanDurationImpulse(wxCommandEvent &);
@@ -223,9 +226,6 @@ public:
 private:
 
     friend struct MeasurersSourcers;
-
-    // Нужно вызывать при изменении положения переключателя коммутатора
-    void OnEventChangeCommutator();
 };
 
 

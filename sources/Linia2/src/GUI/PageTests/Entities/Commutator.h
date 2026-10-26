@@ -158,6 +158,21 @@ public:
         }
     }
 
+    bool IsMinus50V() const
+    {
+        return (value == Value::_Minus50V);
+    }
+
+    bool IsPlus50V() const
+    {
+        return (value == Value::_Plus50V);
+    }
+
+    bool Is3kV() const
+    {
+        return (value == Value::_3kV);
+    }
+
 private:
 
     int radius = 0;

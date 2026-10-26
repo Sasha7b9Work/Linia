@@ -484,7 +484,9 @@ void GroupParameters::CreateParametersCollectorI()
 
             wxArrayString tooltips{ L("Диапазон измерения тока в блоке коллектора") };
 
-            CREATE_COMBO(comboBaseStartI, L("Ic диап"), parametersI);
+            CREATE_COMBO(comboCollectorStartI, L("Ic диап"), parametersI);
+
+            OnEventChangeCommutator();
         }
     }
 }
@@ -1055,7 +1057,29 @@ void GroupParameters::OnChangedScanDurationImpulse(wxCommandEvent &)
 }
 
 
-void Ampermeter::OnEventChangeCommutator()
+void GroupParameters::OnEventChangeCommutator()
 {
+    if (chan.IsCollector())
+    {
+        ComboInput *combo = FindByName<ComboInput>("comboCollectorStartI");
 
+        wxArrayString choices;
+
+        if (PanelViewTest::self->com_controls.commutator->Is3kV())
+        {
+            for (RangeI range{ RangeI::_4_5A }; range.value <= RangeI::_400_500A; ++range)
+            {
+                choices.push_back(range.Name(RowRange::_125));
+            }
+        }
+        else
+        {
+            for (RangeI range{ RangeI::_4_5nA }; range.value <= RangeI::_10A; ++range)
+            {
+                choices.push_back(range.Name(RowRange::_125));
+            }
+        }
+
+        combo->SetChoices(choices);
+    }
 }

@@ -7,6 +7,9 @@
 // Общие для всех типов элементов органы управления (тип развёртки, например)
 struct CommonControls
 {
+    friend class Ampermeter;
+    friend class GroupParameters;
+
     void Create(wxWindow *);
     void Show();
     void Hide();

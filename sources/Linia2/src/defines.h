@@ -1,6 +1,7 @@
 ﻿// 2023/07/04 17:46:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 
+#define NTDDI_WIN10_GE 0
 #include "option.h"
 #include "description.h"
 
