@@ -10,8 +10,6 @@
 
 class Application : public wxApp
 {
-    friend class EmulatorIPPP;
-
 public:
 
     static Application *self;
