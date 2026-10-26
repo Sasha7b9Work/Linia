@@ -16,13 +16,6 @@ class wxGraphicsContext;
 
 class PageMeasures : public PageNotebook
 {
-    friend class Spline;
-    friend class Line;
-    friend class Rect;
-    friend class MenuDisplay;
-    friend class GraphMeasure;
-    friend class MainWindow;
-
 public:
 
     PageMeasures(Notebook *);
