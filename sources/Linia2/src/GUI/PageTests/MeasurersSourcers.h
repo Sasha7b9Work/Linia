@@ -16,7 +16,7 @@ struct MeasurersSourcers
     // Нужно вызывать при изменении положения переключателя коммутатора
     void OnEventChangeCommutator();
 
-    void OnEventChangeScanner();
+    void OnEventChangeScanMode();
 
     Scanner *scannerCollector = nullptr;
 

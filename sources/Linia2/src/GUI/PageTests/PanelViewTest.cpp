@@ -292,7 +292,7 @@ void PanelViewTest::OnEventChangeCommutator()
 }
 
 
-void PanelViewTest::OnEventChangeScanner()
+void PanelViewTest::OnEventChangeScanMode()
 {
-    meas_sourcers.OnEventChangeScanner();
+    meas_sourcers.OnEventChangeScanMode();
 }

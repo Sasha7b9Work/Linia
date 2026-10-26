@@ -23,7 +23,7 @@ public:
     void OnEventChangeCommutator();
 
     // Вызывается при изменении типа развёртки
-    void OnEventChangeScanner();
+    void OnEventChangeScanMode();
 
     wxPoint GetCenter() const;
 

@@ -165,7 +165,7 @@ protected:
     // Нужно вызывать при изменении положения переключателя коммутатора
     virtual void OnEventChangeCommutator() { }
 
-    virtual void OnEventChangeScanner() { }
+    virtual void OnEventChangeScanMode() { }
 
 private:
 
@@ -232,7 +232,7 @@ public:
     // Нужно вызывать при изменении положения переключателя коммутатора
     virtual void OnEventChangeCommutator() override;
 
-    virtual void OnEventChangeScanner() override;
+    virtual void OnEventChangeScanMode() override;
 
 private:
 

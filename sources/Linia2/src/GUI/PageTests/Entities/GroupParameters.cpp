@@ -823,13 +823,6 @@ void GroupParameters::CreateParametersScanner()
         bcScanMode->SetPosition({ coord_controls.x, y });
 
         parametersScanner.push_back(bcScanMode);
-
-        bcScanMode->Bind(wxEVT_COMBOBOX, [](wxCommandEvent &event)
-            {
-                event.Skip();
-
-                PanelViewTest::self->OnEventChangeScanner();
-            });
     }
 
     {
@@ -1082,6 +1075,8 @@ void GroupParameters::OnChangedScanMode(wxCommandEvent &event)
         FindByName<ButtonsCombo>("bcScanNumberPoints")->SetChoices(choices);
     }
 
+    PanelViewTest::self->OnEventChangeScanMode();
+
     event.Skip();
 }
 
@@ -1167,7 +1162,7 @@ void SourceVoltage::FillChoices(wxArrayString &choices, RangeU::E begin, RangeU:
 }
 
 
-void Ampermeter::OnEventChangeScanner()
+void Ampermeter::OnEventChangeScanMode()
 {
     if (chan.IsCollector())
     {
