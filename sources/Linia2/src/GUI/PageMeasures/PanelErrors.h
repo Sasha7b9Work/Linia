@@ -25,9 +25,9 @@ struct Error
 
 class PanelErrors : public Panel
 {
-    friend class PageMeasures;
-
 public:
+
+    PanelErrors(wxWindow *);
 
     void ReInit();
 
@@ -35,8 +35,6 @@ public:
     void RemoveError(Error::E, const wxString &);
 
 private:
-
-    PanelErrors(wxWindow *);
 
     Button *btnCollapse = nullptr;
 
