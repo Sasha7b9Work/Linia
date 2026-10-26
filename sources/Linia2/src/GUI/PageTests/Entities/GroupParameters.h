@@ -262,6 +262,12 @@ public:
     SourceVoltage(Chan::E _chan, Dir::E _dir) :
         GroupParameters(GroupParameters::Type::SourceU, _chan, _dir)
     {}
+
+    virtual void OnEventChangeCommutator() override;
+
+private:
+
+    void FillChoices(wxArrayString &choices, RangeU::E begin, RangeU::E end, RowRange::E);
 };
 
 

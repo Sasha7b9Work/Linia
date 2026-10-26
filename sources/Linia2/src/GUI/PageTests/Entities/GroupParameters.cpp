@@ -499,7 +499,7 @@ void GroupParameters::CreateParametersCollectorI()
 
             wxArrayString tooltips{ L("Диапазон измерения тока в блоке коллектора") };
 
-            CREATE_COMBO(comboCollectorStartI, L("Ic диап"), parametersI);
+            CREATE_COMBO(comboCollectroRangeMeasI, L("Ic диап"), parametersI);
 
             OnEventChangeCommutator();
         }
@@ -740,9 +740,9 @@ void GroupParameters::CreateParametersCollectorU()
 
             wxArrayString tooltips{ L("Диапазон изменения испытательного напряжения") };
 
-            ComboInput *comboBaseRangeU = new ComboInput(PanelViewTest::self, L("Ec диап"), WIDTH_CONTROL, choices, tooltips, "comboBaseRangeU", 1);
-            comboBaseRangeU->SetPosition({ coord_controls.x, y });
-            parametersU.push_back(comboBaseRangeU);
+            ComboInput *comboCollectorSourceU = new ComboInput(PanelViewTest::self, L("Ec диап"), WIDTH_CONTROL, choices, tooltips, "comboCollectorSourceU", 1);
+            comboCollectorSourceU->SetPosition({ coord_controls.x, y });
+            parametersU.push_back(comboCollectorSourceU);
             y += ButtonsCombo::HEIGHT + 5;
         }
 
@@ -1097,20 +1097,49 @@ void Ampermeter::OnEventChangeCommutator()
 {
     if (chan.IsCollector())
     {
-        ComboInput *combo = FindByName<ComboInput>("comboCollectorStartI");
+        // Заполняем диапазоны измерителя тока
 
-        wxArrayString choices;
-
-        if (PanelViewTest::self->com_controls.commutator->Is3kV())
         {
-            FillChoices(choices, RangeI::_4_5A, RangeI::_400_500A, RowRange::_125);
+            wxArrayString choices;
+
+            if (PanelViewTest::self->com_controls.commutator->Is3kV())
+            {
+                FillChoices(choices, RangeI::_4_5A, RangeI::_400_500A, RowRange::_125);
+            }
+            else
+            {
+                FillChoices(choices, RangeI::_4_5nA, RangeI::_10A, RowRange::_125);
+            }
+
+            FindByName<ComboInput>("comboCollectroRangeMeasI")->SetChoices(choices);
         }
-        else
+    }
+}
+
+
+void SourceVoltage::OnEventChangeCommutator()
+{
+    if (chan.IsCollector())
+    {
+        // Заполняем диапазоны источника напряжения
+
         {
-            FillChoices(choices, RangeI::_4_5nA, RangeI::_10A, RowRange::_125);
+            wxArrayString choices;
+
+            if (PanelViewTest::self->com_controls.commutator->Is3kV())
+            {
+                choices.push_back("30 В");
+                choices.push_back("300 В");
+                choices.push_back("3000 В");
+            }
+            else
+            {
+                FillChoices(choices, RangeU::_1V, RangeU::_40_50V, RowRange::_124);
+            }
+
+            FindByName<ComboInput>("comboCollectorSourceU")->SetChoices(choices);
         }
 
-        combo->SetChoices(choices);
     }
 }
 
@@ -1118,6 +1147,15 @@ void Ampermeter::OnEventChangeCommutator()
 void Ampermeter::FillChoices(wxArrayString &choices, RangeI::E begin, RangeI::E end, RowRange::E row_range)
 {
     for (RangeI range{ begin }; range.value <= end; ++range)
+    {
+        choices.push_back(range.Name(row_range));
+    }
+}
+
+
+void SourceVoltage::FillChoices(wxArrayString &choices, RangeU::E begin, RangeU::E end, RowRange::E row_range)
+{
+    for (RangeU range{ begin }; range.value <= end; ++range)
     {
         choices.push_back(range.Name(row_range));
     }
@@ -1134,7 +1172,7 @@ void Ampermeter::OnEventChangeScanner()
 
         FillChoices(choices, min_max.first, min_max.second, RowRange::_125);
 
-        FindByName<ButtonsCombo>("comboCollectorStartI")->SetChoices(choices);
+        FindByName<ButtonsCombo>("comboCollectroRangeMeasI")->SetChoices(choices);
     }
 }
 
