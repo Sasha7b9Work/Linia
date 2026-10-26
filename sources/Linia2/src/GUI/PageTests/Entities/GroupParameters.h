@@ -146,6 +146,9 @@ public:
     T *FindByName(const wxString &);
     wxWindow *FindWindowByName(const wxString &);
 
+    // Заполнить все элементы управления в соответствии с текущими настройками
+    virtual void FillAllControls() { }
+
 protected:
 
     Type type;
@@ -161,11 +164,6 @@ protected:
     bool is_showing = false;
     Button *btnModeUI = nullptr;                // В измерителе переключение между вольтметром и амперметров, в источнике - между источником тока и источником напряжения
     wxPoint coord_controls;                     // Координаты комбобоксов
-
-    // Нужно вызывать при изменении положения переключателя коммутатора
-    virtual void OnEventChangeCommutator() { }
-
-    virtual void OnEventChangeScanMode() { }
 
 private:
 
@@ -229,10 +227,7 @@ public:
         GroupParameters(GroupParameters::Type::MeasI, _chan, _dir)
     {}
 
-    // Нужно вызывать при изменении положения переключателя коммутатора
-    virtual void OnEventChangeCommutator() override;
-
-    virtual void OnEventChangeScanMode() override;
+    virtual void FillAllControls() override;
 
 private:
 
@@ -263,7 +258,7 @@ public:
         GroupParameters(GroupParameters::Type::SourceU, _chan, _dir)
     {}
 
-    virtual void OnEventChangeCommutator() override;
+    virtual void FillAllControls() override;
 
 private:
 
@@ -299,8 +294,7 @@ public:
 
     Scanner(Chan::E _chan, Dir::E _dir) : GroupParameters(GroupParameters::Type::Scanner, _chan, _dir) { }
 
-    // Нужно вызывать при изменении положения переключателя коммутатора
-    virtual void OnEventChangeCommutator() override;
+    virtual void FillAllControls() override;
 
     TypeScan::E GetTypeScan();
 };

@@ -501,7 +501,7 @@ void GroupParameters::CreateParametersCollectorI()
 
             CREATE_COMBO(comboCollectroRangeMeasI, L("Ic диап"), parametersI);
 
-            OnEventChangeCommutator();
+            FillAllControls();
         }
     }
 }
@@ -865,7 +865,7 @@ void GroupParameters::CreateParametersScanner()
         parametersScanner.push_back(bcScanDurationImpulse);
     }
 
-    OnEventChangeCommutator();
+    FillAllControls();
 }
 
 
@@ -1093,31 +1093,51 @@ void GroupParameters::OnChangedScanDurationImpulse(wxCommandEvent &)
 }
 
 
-void Ampermeter::OnEventChangeCommutator()
+void Ampermeter::FillAllControls()
 {
     if (chan.IsCollector())
     {
-        // Заполняем диапазоны измерителя тока
+        auto min_max = GetMinMaxCurrentMeasCollector();
 
-        {
-            wxArrayString choices;
+        wxArrayString choices;
 
-            if (PanelViewTest::self->com_controls.commutator->Is3kV())
-            {
-                FillChoices(choices, RangeI::_4_5nA, RangeI::_10A, RowRange::_125);
-            }
-            else
-            {
-                FillChoices(choices, RangeI::_4_5A, RangeI::_400_500A, RowRange::_125);
-            }
+        FillChoices(choices, min_max.first, min_max.second, RowRange::_125);
 
-            FindByName<ComboInput>("comboCollectroRangeMeasI")->SetChoices(choices);
-        }
+        FindByName<ButtonsCombo>("comboCollectroRangeMeasI")->SetChoices(choices);
     }
 }
 
 
-void SourceVoltage::OnEventChangeCommutator()
+std::pair<RangeI::E, RangeI::E> Ampermeter::GetMinMaxCurrentMeasCollector()
+{
+    TypeScan::E type_scan = PanelViewTest::self->meas_sourcers.scannerCollector->GetTypeScan();
+
+    if (PanelViewTest::self->com_controls.commutator->Is3kV())
+    {
+        if (type_scan == TypeScan::DCPos ||
+            type_scan == TypeScan::DCNeg)
+        {
+            return std::make_pair(RangeI::_4_5nA, RangeI::_2mA);
+        }
+        else if (type_scan == TypeScan::AC ||
+            type_scan == TypeScan::SinPos ||
+            type_scan == TypeScan::SinNeg)
+        {
+            return std::make_pair(RangeI::_400_500nA, RangeI::_10A);
+        }
+        else            // IMP+, IMP-
+        {
+            return std::make_pair(RangeI::_40_50uA, RangeI::_10A);
+        }
+    }
+    else
+    {
+        return std::make_pair(RangeI::_4_5A, RangeI::_400_500A);
+    }
+}
+
+
+void SourceVoltage::FillAllControls()
 {
     if (chan.IsCollector())
     {
@@ -1168,51 +1188,7 @@ void SourceVoltage::FillChoices(wxArrayString &choices, RangeU::E begin, RangeU:
 }
 
 
-void Ampermeter::OnEventChangeScanMode()
-{
-    if (chan.IsCollector())
-    {
-        auto min_max = GetMinMaxCurrentMeasCollector();
-
-        wxArrayString choices;
-
-        FillChoices(choices, min_max.first, min_max.second, RowRange::_125);
-
-        FindByName<ButtonsCombo>("comboCollectroRangeMeasI")->SetChoices(choices);
-    }
-}
-
-
-std::pair<RangeI::E, RangeI::E> Ampermeter::GetMinMaxCurrentMeasCollector()
-{
-    TypeScan::E type_scan = PanelViewTest::self->meas_sourcers.scannerCollector->GetTypeScan();
-
-    if (PanelViewTest::self->com_controls.commutator->Is3kV())
-    {
-        if (type_scan == TypeScan::DCPos ||
-            type_scan == TypeScan::DCNeg)
-        {
-            return std::make_pair(RangeI::_4_5nA, RangeI::_2mA);
-        }
-        else if (type_scan == TypeScan::AC ||
-            type_scan == TypeScan::SinPos ||
-            type_scan == TypeScan::SinNeg)
-        {
-            return std::make_pair(RangeI::_400_500nA, RangeI::_10A);
-        }
-        else            // IMP+, IMP-
-        {
-            return std::make_pair(RangeI::_40_50uA, RangeI::_10A);
-        }
-    }
-    else
-    {
-        return std::make_pair(RangeI::_4_5A, RangeI::_400_500A);
-    }
-}
-
-
-void Scanner::OnEventChangeCommutator()
+void Scanner::FillAllControls()
 {
     if (chan.IsCollector())
     {
