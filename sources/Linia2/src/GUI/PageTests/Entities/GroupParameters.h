@@ -221,8 +221,6 @@ public:
 // Имзеритель тока
 class Ampermeter : public GroupParameters
 {
-    friend struct MeasurersSourcers;
-
 public:
 
     Ampermeter(Chan::E _chan, Dir::E _dir) :
