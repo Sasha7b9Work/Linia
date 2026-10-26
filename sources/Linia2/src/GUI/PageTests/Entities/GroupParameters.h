@@ -187,6 +187,7 @@ private:
     // Создаёт напряжённые параметры
     void CreateParametersU();
     void CreateParametersBaseU();
+    void CreateParametersSubstrateU();
     void CreateParametersCollectorU();
 
     void CreateParametersScanner();

@@ -515,96 +515,13 @@ void GroupParameters::CreateParametersU()
 
     parametersU.clear();
 
-    int y = coord_controls.y;
-
     if (chan.IsBase())
     {
         CreateParametersBaseU();
     }
     else if (chan.IsSubstrate())
     {
-        if (type.IsMeasUandI())
-        {
-            {
-                wxArrayString choices;
-
-                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_124));
-                }
-
-                wxArrayString tooltips{ L("Начальное значение измерения напряжения подложки") };
-
-                CREATE_COMBO(comboSubsrtateStartU, L("Us старт"), parametersU);
-            }
-
-            {
-                wxArrayString choices;
-
-                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_124));
-                }
-
-                wxArrayString tooltips{ L("Диапазон измерения напряжения подложки") };
-
-                CREATE_COMBO(comboSubsrtateRangeU, L("Us размах"), parametersU);
-            }
-
-            {
-                wxArrayString choices;
-
-                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_124));
-                }
-
-                wxArrayString tooltips{ L("Величина ограничения напряжения подложки") };
-
-                CREATE_COMBO(comboSubsrtateLimitU, L("Us огр"), parametersU);
-            }
-        }
-        else if (type.IsSourceUandI())
-        {
-            {
-                wxArrayString choices;
-
-                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_124));
-                }
-
-                wxArrayString tooltips{ L("Начальное значение источника напряжения подложки") };
-
-                CREATE_COMBO(comboSubsrtateStartU, L("Es старт"), parametersU);
-            }
-
-            {
-                wxArrayString choices;
-
-                for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
-                {
-                    choices.push_back(range.Name(RowRange::_124));
-                }
-
-                wxArrayString tooltips{ L("Разница напряжения между сосденими ступеньками источника напряжения подложки") };
-
-                CREATE_COMBO(comboSubsrtateStepU, L("Es шаг"), parametersU);
-            }
-
-            {
-                wxArrayString choices;
-
-                for (int i = 1; i < 11; i++)
-                {
-                    choices.push_back(wxString::Format("%d", i));
-                }
-
-                wxArrayString tooltips{ L("") };
-
-                CREATE_COMBO(comboSubsrtateStepU, L("Кол-во ступенек"), parametersU);
-            }
-        }
+        CreateParametersSubstrateU();
     }
     else if (chan.IsCollector())
     {
@@ -697,6 +614,95 @@ void GroupParameters::CreateParametersBaseU()
             wxArrayString tooltips{ L("Количество ступенек") };
 
             CREATE_COMBO(comboBaseNumSteps, L("Кол-во ступенек"), parametersU);
+        }
+    }
+}
+
+
+void GroupParameters::CreateParametersSubstrateU()
+{
+    int y = coord_controls.y;
+
+    if (type.IsMeasUandI())
+    {
+        {
+            wxArrayString choices;
+
+            for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+            {
+                choices.push_back(range.Name(RowRange::_124));
+            }
+
+            wxArrayString tooltips{ L("Начальное значение измерения напряжения подложки") };
+
+            CREATE_COMBO(comboSubsrtateStartU, L("Us старт"), parametersU);
+        }
+
+        {
+            wxArrayString choices;
+
+            for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+            {
+                choices.push_back(range.Name(RowRange::_124));
+            }
+
+            wxArrayString tooltips{ L("Диапазон измерения напряжения подложки") };
+
+            CREATE_COMBO(comboSubsrtateRangeU, L("Us размах"), parametersU);
+        }
+
+        {
+            wxArrayString choices;
+
+            for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+            {
+                choices.push_back(range.Name(RowRange::_124));
+            }
+
+            wxArrayString tooltips{ L("Величина ограничения напряжения подложки") };
+
+            CREATE_COMBO(comboSubsrtateLimitU, L("Us огр"), parametersU);
+        }
+    }
+    else if (type.IsSourceUandI())
+    {
+        {
+            wxArrayString choices;
+
+            for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+            {
+                choices.push_back(range.Name(RowRange::_124));
+            }
+
+            wxArrayString tooltips{ L("Начальное значение источника напряжения подложки") };
+
+            CREATE_COMBO(comboSubsrtateStartU, L("Es старт"), parametersU);
+        }
+
+        {
+            wxArrayString choices;
+
+            for (RangeU range{ RangeU::_1nV }; range.value < RangeU::Count; ++range)
+            {
+                choices.push_back(range.Name(RowRange::_124));
+            }
+
+            wxArrayString tooltips{ L("Разница напряжения между сосденими ступеньками источника напряжения подложки") };
+
+            CREATE_COMBO(comboSubsrtateStepU, L("Es шаг"), parametersU);
+        }
+
+        {
+            wxArrayString choices;
+
+            for (int i = 1; i < 11; i++)
+            {
+                choices.push_back(wxString::Format("%d", i));
+            }
+
+            wxArrayString tooltips{ L("") };
+
+            CREATE_COMBO(comboSubsrtateStepU, L("Кол-во ступенек"), parametersU);
         }
     }
 }
