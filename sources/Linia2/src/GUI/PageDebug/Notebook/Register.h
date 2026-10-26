@@ -82,8 +82,6 @@ struct ModeDescripion
 
 class Register : public Panel
 {
-    friend class PainterRegister;
-
 public:
 
     Register(wxWindow *parent,
@@ -114,6 +112,33 @@ public:
     void LoadValueFromConfig();
 
     void SaveValueToConfig();
+
+    wxSize GetMinSize() const;
+
+    std::vector<CheckBoxBit *> &GetCheckBoxes()
+    {
+        return chboxes;
+    }
+
+    Chip &_GetChip()
+    {
+        return *chip;
+    }
+
+    const wxArrayString &GetNamesBits() const
+    {
+        return names_bits;
+    }
+
+    int GetBitDepth() const
+    {
+        return chip->BitDepth();
+    }
+
+    const std::vector<StructDescription> &GetStructDescription(int index) const
+    {
+        return desc[index];
+    }
 
 protected:
 
@@ -164,8 +189,6 @@ protected:
     void SetActiveAcross(bool active, wxWindow *wnd);
 
     virtual void OnEventUpdateComboCommandsAndModes() = 0;
-
-    wxSize GetMinSize() const;
 
     // Возвращает имя переменной как оно хранится в файле конфигурации
     std::string GetNameSettingValue() const;

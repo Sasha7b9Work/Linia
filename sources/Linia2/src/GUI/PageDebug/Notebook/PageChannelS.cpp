@@ -24,7 +24,7 @@ PageChannelS::PageChannelS(wxNotebook *notebook) :
         RegAD5531 *dac4 = new RegAD5531(this, dacs[DAC::_4_ChannelS_DAC1], "");
 
         std::vector<StructDescription> desc4;
-        desc4.emplace_back(StructDescription{ 0, dac4->GetChip()->BitDepth(), "", "", { true } });
+        desc4.emplace_back(StructDescription{ 0, dac4->GetBitDepth(), "", "", { true } });
         dac4->SetDescriptionBits(0, desc4);
 
         AppendRegister(dac4);
@@ -34,7 +34,7 @@ PageChannelS::PageChannelS(wxNotebook *notebook) :
         RegAD5531 *dac5 = new RegAD5531(this, dacs[DAC::_5_ChannelS_DAC2], "");
 
         std::vector<StructDescription> desc5;
-        desc5.emplace_back(StructDescription{ 0, dac5->GetChip()->BitDepth(), "", "", { true } });
+        desc5.emplace_back(StructDescription{ 0, dac5->GetBitDepth(), "", "", { true } });
         dac5->SetDescriptionBits(0, desc5);
 
         AppendRegister(dac5);
