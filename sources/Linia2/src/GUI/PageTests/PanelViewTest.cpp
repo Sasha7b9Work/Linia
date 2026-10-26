@@ -290,3 +290,9 @@ void PanelViewTest::OnEventChangeCommutator()
     com_controls.OnEventChangeCommutator();
     meas_sourcers.OnEventChangeCommutator();
 }
+
+
+void PanelViewTest::OnEventChangeScanner()
+{
+    meas_sourcers.OnEventChangeScanner();
+}

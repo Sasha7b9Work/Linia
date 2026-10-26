@@ -165,6 +165,8 @@ protected:
     // Нужно вызывать при изменении положения переключателя коммутатора
     virtual void OnEventChangeCommutator() { }
 
+    virtual void OnEventChangeScanner() { }
+
 private:
 
     // Нарисовать окантовку для измерителя или источника. x, y - центр измерителя
@@ -229,6 +231,12 @@ public:
 
     // Нужно вызывать при изменении положения переключателя коммутатора
     virtual void OnEventChangeCommutator() override;
+
+    virtual void OnEventChangeScanner() override;
+
+private:
+
+    void FillChoices(wxArrayString &choices, RangeI::E begin, RangeI::E end, RowRange::E);
 };
 
 

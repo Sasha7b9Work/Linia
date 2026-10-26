@@ -110,3 +110,9 @@ void MeasurersSourcers::OnEventChangeCommutator()
     ampCollector->OnEventChangeCommutator();
     scannerCollector->OnEventChangeCommutator();
 }
+
+
+void MeasurersSourcers::OnEventChangeScanner()
+{
+    ampCollector->OnEventChangeScanner();
+}

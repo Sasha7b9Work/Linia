@@ -16,6 +16,8 @@ struct MeasurersSourcers
     // Нужно вызывать при изменении положения переключателя коммутатора
     void OnEventChangeCommutator();
 
+    void OnEventChangeScanner();
+
 private:
 
     MeasurerVoltageCurrent *measBase = nullptr;

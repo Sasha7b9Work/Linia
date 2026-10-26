@@ -824,6 +824,13 @@ void GroupParameters::CreateParametersScanner()
         bcScanMode->SetPosition({ coord_controls.x, y });
 
         parametersScanner.push_back(bcScanMode);
+
+        bcScanMode->Bind(wxEVT_COMBOBOX, [](wxCommandEvent &event)
+            {
+                event.Skip();
+
+                PanelViewTest::self->OnEventChangeScanner();
+            });
     }
 
     {
@@ -1097,17 +1104,51 @@ void Ampermeter::OnEventChangeCommutator()
 
         if (PanelViewTest::self->com_controls.commutator->Is3kV())
         {
-            for (RangeI range{ RangeI::_4_5A }; range.value <= RangeI::_400_500A; ++range)
-            {
-                choices.push_back(range.Name(RowRange::_125));
-            }
+            FillChoices(choices, RangeI::_4_5A, RangeI::_400_500A, RowRange::_125);
         }
         else
         {
-            for (RangeI range{ RangeI::_4_5nA }; range.value <= RangeI::_10A; ++range)
-            {
-                choices.push_back(range.Name(RowRange::_125));
-            }
+            FillChoices(choices, RangeI::_4_5nA, RangeI::_10A, RowRange::_125);
+        }
+
+        combo->SetChoices(choices);
+    }
+}
+
+
+void Ampermeter::FillChoices(wxArrayString &choices, RangeI::E begin, RangeI::E end, RowRange::E row_range)
+{
+    for (RangeI range{ begin }; range.value <= end; ++range)
+    {
+        choices.push_back(range.Name(row_range));
+    }
+}
+
+
+void Ampermeter::OnEventChangeScanner()
+{
+    if (chan.IsCollector())
+    {
+        ButtonsCombo *combo = FindByName<ButtonsCombo>("bcScanMode");
+
+        wxArrayString choices;
+
+        wxString scan_mode = combo->GetCurrentString();
+
+        if (scan_mode == "DC+" ||
+            scan_mode == "DC-")
+        {
+            FillChoices(choices, RangeI::_4_5nA, RangeI::_2mA, RowRange::_125);
+        }
+        else if (scan_mode == "AC" ||
+            scan_mode == "SIN+" ||
+            scan_mode == "SIN-")
+        {
+            FillChoices(choices, RangeI::_400_500nA, RangeI::_10A, RowRange::_125);
+        }
+        else
+        {
+            FillChoices(choices, RangeI::_40_50uA, RangeI::_10A, RowRange::_125);
         }
 
         combo->SetChoices(choices);
