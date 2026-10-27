@@ -53,6 +53,8 @@ PanelViewTest::PanelViewTest(wxWindow *parent) : Panel(parent, wxSIMPLE_BORDER)
             }
             event.Skip();
         });
+
+    LoadSettings();
 }
 
 
@@ -78,6 +80,8 @@ void PanelViewTest::SetTest(Test *_test)
     meas_sourcers.Tune();
 
     Refresh();
+
+    SaveSettings();
 }
 
 
@@ -295,4 +299,16 @@ void PanelViewTest::OnEventChangeCommutator()
 void PanelViewTest::OnEventChangeScanMode()
 {
     meas_sourcers.OnEventChangeScanMode();
+}
+
+
+void PanelViewTest::LoadSettings()
+{
+
+}
+
+
+void PanelViewTest::SaveSettings()
+{
+
 }

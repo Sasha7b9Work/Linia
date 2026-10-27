@@ -33,6 +33,12 @@ public:
     CommonControls com_controls;        // Общие для всех типов элементов органы управления (тип развёртки, например)
     MeasurersSourcers meas_sourcers;    // Источники и измерители для всех каналов
 
+    // Сохраняем текущий тест
+    void SaveSettings();
+
+    // Восстанавливаем тест, активный на момент выхода из приложения
+    void LoadSettings();
+
 private:
 
     static const int radius_trans = 50;                     // От этого значения и Center() идёт всё построение изображения

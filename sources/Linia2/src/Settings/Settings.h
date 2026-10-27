@@ -62,7 +62,8 @@ namespace SET
     {
     public:
         ValueWrapper(Value<T> *val) : value(val)
-        {}
+        {
+        }
 
         virtual void Load() override
         {
