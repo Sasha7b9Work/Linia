@@ -16,20 +16,20 @@ public:
 
     static Test *current;       // Текущий тест
 
-    LibraryCategory *lib;
-    wxString UGO{ "" };
-    wxString name{ "" };
+    LibraryCategory *lib;       // В состав данной категории входит данный тест
+    wxString UGO{ "" };         // УГО теста
+    wxString name{ "" };        // Имя теста
 
     bool IsBJT() const;         // Биполярный транзистор
     bool IsBJTS() const;        // Биполярный транзистор с подложкой
-    bool IsFET() const;
-    bool IsFETS() const;
+    bool IsFET() const;         // Полевой транзистор
+    bool IsFETS() const;        // Полевой транзистор с подложкой
     bool IsDARL() const;
-    bool IsTHYR() const;
+    bool IsTHYR() const;        // Тиристор
     bool IsDIOD() const;
-    bool IsZENER() const;
+    bool IsZENER() const;       // Стабилитрон
     bool IsRES() const;
-    bool IsCAP() const;
+    bool IsCAP() const;         // Конденсатор
 };
 
 
