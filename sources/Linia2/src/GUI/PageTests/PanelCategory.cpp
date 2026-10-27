@@ -98,11 +98,18 @@ void PanelCategory::LoadSettings()
     {
         std::string name = cat.category->UGO.ToStdString();
 
-        SET::RegisterValue(name, new SET::ValueWrapper<bool>(new Value<bool>(name, false)));
+        Value<bool> *value = new Value<bool>(name, false);
+        SET::ValueWrapper<bool> *wrapper = new SET::ValueWrapper<bool>(value);
+        wrapper->Load();
+        SET::RegisterValue(name, wrapper);
 
         if (SET::GetValue(name)->GetBool())
         {
             cat.checkbox->SetValue(true);
+        }
+        else
+        {
+            cat.checkbox->SetValue(false);
         }
     }
 

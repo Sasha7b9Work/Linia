@@ -186,6 +186,7 @@ namespace SET
         if (val)
         {
             val->Set(value);
+            val->Save();
         }
     }
 
