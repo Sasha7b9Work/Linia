@@ -4,6 +4,7 @@
 #include "GUI/Controls/StaticText.h"
 #pragma warning(push, 0)
     #include <wx/timer.h>
+    #include <wx/slider.h>
 #pragma warning(pop)
 
 
