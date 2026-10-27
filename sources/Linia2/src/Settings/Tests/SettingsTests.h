@@ -2,9 +2,6 @@
 #pragma once
 
 
-class wxArrayString;
-
-
 // Категория испытуемого прибора
 //struct TypeCategory
 //{

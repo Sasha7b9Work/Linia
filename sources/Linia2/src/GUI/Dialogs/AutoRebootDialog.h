@@ -8,9 +8,6 @@
 #pragma warning(pop)
 
 
-class Button;
-
-
 class AutoRebootDialog : public wxDialog
 {
 public:

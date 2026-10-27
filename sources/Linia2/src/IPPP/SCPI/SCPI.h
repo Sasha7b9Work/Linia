@@ -1,5 +1,7 @@
 ﻿// 2025/10/23 11:43:02 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
+
+
 struct StructSCPI
 {
     pchar begin;            // С этим сравниваем начало передаваемой строки

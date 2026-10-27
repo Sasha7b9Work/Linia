@@ -3,15 +3,12 @@
 #include "GUI/Controls/ButtonCombo.h"
 #include "GUI/Controls/BmpButtonsCombo.h"
 #include "GUI/Controls/Notebook.h"
+#include "GUI/Controls/Splitter.h"
 #include "Settings/Tests/SettingsTests.h"
 #include "Settings/Tests/Library/Library.h"
-
-
-class Splitter;
-class Panel;
-class PanelCategory;
-class PanelTests;
-class PanelViewTest;
+#include "GUI/PageTests/PanelTests.h"
+#include "GUI/PageTests/PanelViewTest.h"
+#include "GUI/PageTests/PanelCategory.h"
 
 
 class PageTests : public PageNotebook

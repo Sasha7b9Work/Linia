@@ -5,7 +5,7 @@
 #include "GUI/PageMeasures/Grid/Grid.h"
 #include "Settings/Settings.h"
 #pragma warning(push, 0)
-#include <wx/graphics.h>
+    #include <wx/graphics.h>
 #pragma warning(pop)
 
 

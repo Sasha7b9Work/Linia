@@ -4,9 +4,6 @@
 #include "GUI/PageMeasures/Grid/Grid.h"
 
 
-class GraphMeasure;
-
-
 class GridNew : public IGrid
 {
     struct Offset

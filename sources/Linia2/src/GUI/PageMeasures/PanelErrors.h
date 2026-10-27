@@ -1,13 +1,11 @@
 // 2025/09/01 23:00:10 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/Controls/Panel.h"
+#include "GUI/Controls/Button.h"
 #pragma warning(push, 0)
-#include <wx/timer.h>
+    #include <wx/timer.h>
+    #include <wx/textctrl.h>
 #pragma warning(pop)
-
-
-class Button;
-class wxTextCtrl;
 
 
 struct Error

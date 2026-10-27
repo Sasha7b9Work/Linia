@@ -7,10 +7,8 @@
 #include "GUI/Controls/Knob.h"
 #include "GUI/Controls/Slider.h"
 #include "GUI/Controls/Panel.h"
-
-
-class CommandsCombo;
-class PainterRegister;
+#include "GUI/PageDebug/Notebook/CommandsCombo.h"
+#include "GUI/PageDebug/Notebook/PainterRegister.h"
 
 
 // Квадратик с 0 или 1, на который щёлкают ЛКМ и он изменяет своё состояние

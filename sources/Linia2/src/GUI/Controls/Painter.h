@@ -10,7 +10,6 @@
 
 
 struct Color;
-class wxGraphicsContext;
 
 
 class Painter : public Panel

@@ -5,11 +5,6 @@
 #include "Settings/Tests/Library/Library.h"
 
 
-class LibraryCategory;
-class wxListView;
-class wxImageList;
-
-
 // Здесь находятся тесты из выбранных категорий
 
 class PanelTests : public Panel

@@ -1,15 +1,15 @@
 ﻿// 2025/7/23 14:18:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/Controls/Panel.h"
+#include "GUI/Controls/Button.h"
+#pragma warning(push, 0)
+    #include <wx/textctrl.h>
+#pragma warning(pop)
 
 
 /*
 *   Собственный спинбокс. Разработанн ввиду того, что стандартный на Linux очень большой
 */
-
-
-class Button;
-class wxTextCtrl;
 
 
 class SpinBox : public Panel

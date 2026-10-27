@@ -1,11 +1,13 @@
 // 2026/04/08 15:30:46 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/Controls/Panel.h"
+#include "GUI/Controls/Button.h"
+#pragma warning(push, 0)
+    #include <wx/sizer.h>
+#pragma warning(pop)
 
 
-class ToggleButton;
 class Notebook;
-class wxBoxSizer;
 
 
 // Это панель - со своей кнопкой выбора, с возможностью открепляться от PanelBoard

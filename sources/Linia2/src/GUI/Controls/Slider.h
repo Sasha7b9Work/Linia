@@ -7,10 +7,6 @@
 #pragma warning(pop)
 
 
-class wxSlider;
-class Button;
-
-
 class SliderInt : public Panel
 {
 public:

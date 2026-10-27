@@ -2,6 +2,9 @@
 #pragma once
 #include "Settings/Tests/SettingsTests.h"
 #include "Utils/BigIntValue.h"
+#pragma warning(push, 0)
+    #include <wx/arrstr.h>
+#pragma warning(pop)
 
 
 // Вид источника/измерения

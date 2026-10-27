@@ -9,9 +9,6 @@
 #pragma warning(pop)
 
 
-class wxStatictext;
-
-
 class PainterDataFPGA : public Painter
 {
 public:

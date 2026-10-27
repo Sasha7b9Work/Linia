@@ -1,8 +1,6 @@
 ﻿// 2026/3/15 19:48:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
-
-
-class GraphMeasure;
+#include "GUI/PageMeasures/Graphics/GraphMeasure.h"
 
 
 class AutoCursors

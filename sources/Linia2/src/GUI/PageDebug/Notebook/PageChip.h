@@ -1,12 +1,10 @@
 ﻿// 2025/6/3 14:02:10 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/Controls/Panel.h"
+#include "GUI/PageDebug/Notebook/Register.h"
 #pragma warning(push, 0)
-#include <wx/notebook.h>
+    #include <wx/notebook.h>
 #pragma warning(pop)
-
-
-class Register;
 
 
 // Это панель для засылки данных в регистры микросхем типа AD

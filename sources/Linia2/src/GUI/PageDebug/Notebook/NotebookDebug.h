@@ -1,11 +1,9 @@
 ﻿// 2025/6/3 14:06:45 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #pragma warning(push, 0)
-#include <wx/notebook.h>
+    #include <wx/notebook.h>
+    #include <wx/panel.h>
 #pragma warning(pop)
-
-
-class wxPanel;
 
 
 class NotebookDebug : public wxNotebook

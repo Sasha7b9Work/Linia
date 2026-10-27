@@ -3,9 +3,6 @@
 #include "GUI/Controls/Painter.h"
 
 
-class ButtonColor;
-
-
 struct Color
 {
     Color(uint8 r, uint8 g, uint8 b, uint8 brightness = 255)

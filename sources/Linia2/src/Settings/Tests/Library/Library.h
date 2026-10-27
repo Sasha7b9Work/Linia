@@ -4,12 +4,10 @@
 #include "Settings/FileJSON.h"
 
 
-// Класс для хранения набора тестов
-
-
-class FileJSON;
-class PanelCategory;
 class LibraryCategory;
+
+
+// Класс для хранения набора тестов
 
 
 class Test

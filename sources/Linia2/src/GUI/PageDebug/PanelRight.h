@@ -3,9 +3,7 @@
 #include "GUI/Controls/ControlDataFPGA.h"
 #include "GUI/Controls/Button.h"
 #include "GUI/Controls/Panel.h"
-
-
-class TextCtrlNumber;
+#include "GUI/Controls/TextControl.h"
 
 
 class PanelRight : public Panel

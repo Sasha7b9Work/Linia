@@ -1,18 +1,15 @@
 ﻿// 2022/10/28 23:17:02 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "GUI/Controls/Notebook.h"
+#include "GUI/PageMeasures/PanelErrors.h"
+#include "GUI/PageMeasures/Graphics/GraphMeasure.h"
 #pragma warning(push, 0)
-#include <wx/dcmemory.h>
+    #include <wx/dcmemory.h>
 #pragma warning(pop)
 
 
-class PanelErrors;
-class GraphMeasure;
-class Button;
-class wxGraphicsContext;
-
-
 // Здесь отрисовывается график ну и кнопки разные
+
 
 class PageMeasures : public PageNotebook
 {

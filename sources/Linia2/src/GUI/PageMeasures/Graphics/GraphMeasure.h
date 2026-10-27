@@ -1,12 +1,10 @@
 ﻿// 2025/7/14 17:22:55 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #pragma warning(push, 0)
-#include <wx/gdicmn.h>
-#include <wx/colour.h>
+    #include <wx/gdicmn.h>
+    #include <wx/colour.h>
+    #include <wx/geometry.h>
 #pragma warning(pop)
-
-
-class wxPoint2DDouble;
 
 
 class GraphMeasure

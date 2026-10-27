@@ -1,7 +1,7 @@
 // 2026/04/03 11:48:14 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #pragma warning(push, 0)
-#include <wx/radiobut.h>
+    #include <wx/radiobut.h>
 #pragma warning(pop)
 
 

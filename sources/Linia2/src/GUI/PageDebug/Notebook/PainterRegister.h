@@ -2,10 +2,10 @@
 #pragma once
 #include "GUI/Controls/Painter.h"
 #include "GUI/Controls/Panel.h"
+#include "GUI/PageDebug/Notebook/AnimatedImpulse.h"
 
 
 class Register;
-class AnimatedImpulse;
 
 
 class PainterRegister : public Panel
