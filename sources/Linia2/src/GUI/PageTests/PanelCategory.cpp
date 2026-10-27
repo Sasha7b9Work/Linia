@@ -40,7 +40,7 @@ PanelCategory::PanelCategory(wxWindow *parent) : ScrolledPanel(parent)
 }
 
 
-void PanelCategory::UpdateState(const Library &lib)
+void PanelCategory::SetLibrary(const Library &lib)
 {
     wxSizer *sizer = GetSizer();
 

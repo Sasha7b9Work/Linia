@@ -77,7 +77,7 @@ void PageTests::LoadStandardLibrary()
     {
         if (library.Read(&file))
         {
-            panel_category->UpdateState(library);
+            panel_category->SetLibrary(library);
         }
     }
     else

@@ -17,10 +17,12 @@ public:
     static PanelCategory *self;
 
     // Обновить состояние в соответствии с библиотеками
-    void UpdateState(const Library &);
+    void SetLibrary(const Library &);
 
+    // Перед закрытием приложения вызвать эту функцию - для сохранения настроек
     void SaveSettings();
 
+    // После загрузки файла с тестами вызвать эту функцию - для восстановления настроек
     void LoadSettings();
 
 private:
@@ -35,7 +37,6 @@ private:
 
     CheckBox *chbStandardTests = nullptr;
     CheckBox *chbUserTests = nullptr;
-
 
     // Построить список тестов для категорий выбранных чекбоксами
     void BuildListTests();
