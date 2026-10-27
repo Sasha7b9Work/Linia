@@ -1,6 +1,7 @@
 ﻿// 2026/08/28 15:06:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "Settings/Settings.h"
+#include "GUI/PageTests/PanelCategory.h"
 #include <map>
 
 namespace SET
@@ -76,5 +77,7 @@ namespace SET
         {
             value->Save();
         }
+
+        PanelCategory::self->SaveSettings();
     }
 }

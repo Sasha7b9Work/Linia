@@ -5,6 +5,7 @@
 #include "GUI/Controls/Sizers.h"
 #include "GUI/Controls/CheckBox.h"
 #include "GUI/PageTests/PanelTests.h"
+#include "Settings/Settings.h"
 #pragma warning(push, 0)
     #include <wx/checkbox.h>
     #include <wx/statline.h>
@@ -70,6 +71,8 @@ void PanelCategory::UpdateState(const Library &lib)
     sizer->Layout();
 
     Layout();
+
+    LoadSettings();
 }
 
 
@@ -86,4 +89,31 @@ void PanelCategory::BuildListTests()
     }
 
     PanelTests::self->BuildListTests(libraries);
+}
+
+
+void PanelCategory::LoadSettings()
+{
+    for (const Category &cat : categories)
+    {
+        std::string name = cat.category->UGO.ToStdString();
+
+        SET::RegisterValue(name, new SET::ValueWrapper<bool>(new Value<bool>(name, false)));
+
+        if (SET::GetValue(name)->GetBool())
+        {
+            cat.checkbox->SetValue(true);
+        }
+    }
+
+    BuildListTests();
+}
+
+
+void PanelCategory::SaveSettings()
+{
+    for (const Category &cat : categories)
+    {
+        SET::SetValue(cat.category->UGO.ToStdString(), cat.checkbox->GetValue());
+    }
 }

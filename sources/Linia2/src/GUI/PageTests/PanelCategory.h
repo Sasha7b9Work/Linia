@@ -19,6 +19,10 @@ public:
     // Обновить состояние в соответствии с библиотеками
     void UpdateState(const Library &);
 
+    void SaveSettings();
+
+    void LoadSettings();
+
 private:
 
     struct Category
