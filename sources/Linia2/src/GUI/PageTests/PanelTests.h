@@ -23,10 +23,18 @@ public:
 
     void BuildListTests(std::vector<const LibraryCategory *> &libraries);
 
-    void ClearList();                                       // Очистить весь список
-    void AddItem(const wxString &, int iconIndex, const Test *);  // Добавить элемент с иконкой
-    int AddIcon(const wxString &iconPath);                  // Загрузить иконку в imageList
-    void SetItemIcon(long itemIndex, int iconIndex);        // Установить иконку существующему элементу
+    // Очистить весь список
+    void ClearList();
+
+    // Добавить элемент с иконкой
+    // Через эту функцию добавляются тесты по галочке категории
+    void AddItem(const wxString &, int iconIndex, const Test *);
+
+    // Загрузить иконку в imageList
+    int AddIcon(const wxString &iconPath);
+
+    // Установить иконку существующему элементу
+    void SetItemIcon(long itemIndex, int iconIndex);
 
 private:
 

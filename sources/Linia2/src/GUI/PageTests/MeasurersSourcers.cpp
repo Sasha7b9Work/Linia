@@ -74,10 +74,10 @@ void MeasurersSourcers::Draw(AutoBufferedPaintDC &dc, const Chan &ch, int x)
     }
     else if (ch.IsCollector())
     {
+        scannerCollector->Draw(dc, { x, PosY(-1) });
         ampCollector->Draw(dc, { x, PosY(0) });
         voltCollector->Draw(dc, { x, PosY(1) });
         srcVoltageCollector->Draw(dc, { x, PosY(2) });
-        scannerCollector->Draw(dc, { x, PosY(-1) });
     }
 }
 

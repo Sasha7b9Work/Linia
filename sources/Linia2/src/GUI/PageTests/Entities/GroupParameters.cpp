@@ -142,11 +142,11 @@ void GroupParameters::CreateControls(const wxRect &rect)
         parametersU.size() == 0 &&
         parametersScanner.size() == 0)
     {
+        CreateParametersScanner();              // Это должно идти первым, потом что от этого зависят параметры измерителей и источников
+
         CreateParametersI();
 
         CreateParametersU();
-
-        CreateParametersScanner();
 
         wxPoint pos{ coord_controls };
 
@@ -1219,19 +1219,30 @@ void Scanner::FillAllControls()
 
 TypeScan::E Scanner::GetTypeScan()
 {
-    wxString type_scan = FindByName<ButtonsCombo>("bcScanMode")->GetCurrentString();
+    ButtonsCombo *combo = FindByName<ButtonsCombo>("bcScanMode");
 
-    for (int i = 0; i < TypeScan::Count; i++)
+    if (combo)
     {
-        TypeScan t{(TypeScan::E)i };
+        wxString type_scan = combo->GetCurrentString();
 
-        if (type_scan == t.NameShort())
+        for (int i = 0; i < TypeScan::Count; i++)
         {
-            return t.value;
+            TypeScan t{ (TypeScan::E)i };
+
+            if (type_scan == t.NameShort())
+            {
+                return t.value;
+            }
         }
+
+        LOG_ERROR("Нет названия для типа развёртки \"%s\"", type_scan.c_str().AsChar());
+
+        return TypeScan::Count;
     }
+    else
+    {
+        LOG_ERROR("Нет элемента управления \"bcScanMode\"");
 
-    LOG_ERROR("Нет названия для типа развёртки \"%s\"", type_scan.c_str().AsChar());
-
-    return TypeScan::Count;
+        return TypeScan::Count;
+    }
 }
