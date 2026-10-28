@@ -1054,6 +1054,8 @@ void GroupParameters::OnChangedScanMode(wxCommandEvent &event)
 {
     TypeScan::E type_scan = PanelViewTest::self->meas_sourcers.scannerCollector->GetTypeScan();
 
+    ButtonsCombo *combo = FindByName<ButtonsCombo>("bcScanNumberPoints");
+
     if (type_scan == TypeScan::DCPos ||
         type_scan == TypeScan::DCNeg ||
         type_scan == TypeScan::ImpPos ||
@@ -1066,13 +1068,13 @@ void GroupParameters::OnChangedScanMode(wxCommandEvent &event)
             "100"
         };
 
-        FindByName<ButtonsCombo>("bcScanNumberPoints")->SetChoices(choices);
+        combo->SetChoices(choices);
     }
     else
     {
         wxArrayString choices{ "200" };
 
-        FindByName<ButtonsCombo>("bcScanNumberPoints")->SetChoices(choices);
+        combo->SetChoices(choices);
     }
 
     PanelViewTest::self->OnEventChangeScanMode();
