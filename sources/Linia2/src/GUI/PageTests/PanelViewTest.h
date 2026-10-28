@@ -30,7 +30,7 @@ public:
     // Возвращает координаты точки, из которой выходит вертикальная линия коллектора
     wxPoint CoordinateCollector() const;
 
-    CommonControls com_controls;        // Общие для всех типов элементов органы управления (тип развёртки, например)
+    CommonControls com_controls;        // Общие для всех типов элементов органы управления
     MeasurersSourcers meas_sourcers;    // Источники и измерители для всех каналов
 
     // Сохраняем текущий тест
