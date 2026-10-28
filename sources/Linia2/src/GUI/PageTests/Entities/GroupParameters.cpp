@@ -793,9 +793,9 @@ void GroupParameters::CreateParametersScanner()
         return;
     }
 
-#define CREATE_BUTTONS_COMBO(name, title, num, func, _x, _y)                                                                \
-    name = new ButtonsCombo(PanelViewTest::self, title, width, choices, tooltips, num, #name, ButtonsCombo::Type::Text);    \
-    name->Bind(wxEVT_COMBOBOX, &GroupParameters::func, this);                                                               \
+#define CREATE_BUTTONS_COMBO(name, title, num, func, _x, _y)                                                                              \
+    ButtonsCombo *name = new ButtonsCombo(PanelViewTest::self, title, width, choices, tooltips, num, #name, ButtonsCombo::Type::Text);    \
+    name->Bind(wxEVT_COMBOBOX, &GroupParameters::func, this);                                                                             \
     name->SetPosition( {_x, _y} );
 
     int width = GroupParameters::WIDTH_CONTROL;
@@ -803,8 +803,6 @@ void GroupParameters::CreateParametersScanner()
     int y = coord_controls.y;
 
     {
-        ButtonsCombo *bcScanMode;
-
         wxArrayString choices;
         choices.Add(TypeScan(TypeScan::SinPos).NameShort());
         choices.Add(TypeScan(TypeScan::SinNeg).NameShort());
@@ -826,8 +824,6 @@ void GroupParameters::CreateParametersScanner()
     }
 
     {
-        ButtonsCombo *bcScanNumberPoints;
-
         wxArrayString choices
         {
             "200"
@@ -845,8 +841,6 @@ void GroupParameters::CreateParametersScanner()
     }
 
     {
-        ButtonsCombo *bcScanDurationImpulse;
-
         wxArrayString choices
         {
             "20",
