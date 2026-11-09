@@ -91,7 +91,7 @@ SliderHidden::SliderHidden(wxWindow *parent, int width, const wxString &title, c
             wndSlider->Refresh();
             wndSlider->Update();;
             wndSlider->SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY);
-        });
+        }); //-V773
 }
 
 

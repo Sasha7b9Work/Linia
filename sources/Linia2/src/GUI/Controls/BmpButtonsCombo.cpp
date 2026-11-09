@@ -189,7 +189,7 @@ BmpButtonsCombo::BmpButtonsCombo(wxWindow *parent, const wxString &_title,
             popup->Position(pos, wxSize(0, 0));
             popup->Popup();
             popup->SetExtraStyle(wxWS_EX_VALIDATE_RECURSIVELY);
-        });
+        }); //-V773
 
     ButtonBitmap::SetToolTip(_tooltips[(size_t)num_file]);
 
