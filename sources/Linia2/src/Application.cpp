@@ -256,7 +256,7 @@ bool Application::OnInit()
 
         LOG_ERROR("%s", message.ToUTF8().data());
 
-        AutoRebootDialog dialog(MainWindow::self, message, 10, []
+        AutoRebootDialog dialog(MainWindow::self, message, 60, []
             {
                 IGNORE_RESULT(std::system("shutdown -r now"));
             });
@@ -270,7 +270,7 @@ bool Application::OnInit()
 
         LOG_ERROR("%s", message.ToUTF8().data());
 
-        AutoRebootDialog dialog(MainWindow::self, message, 10, []
+        AutoRebootDialog dialog(MainWindow::self, message, 60, []
             {
                 IGNORE_RESULT(std::system("shutdown -r now"));
             });
@@ -284,7 +284,7 @@ bool Application::OnInit()
 
         LOG_ERROR("%s", message.ToUTF8().data());
 
-        AutoRebootDialog dialog(MainWindow::self, message, 10, []
+        AutoRebootDialog dialog(MainWindow::self, message, 60, []
             {
                 IGNORE_RESULT(std::system("shutdown -r now"));
             });
