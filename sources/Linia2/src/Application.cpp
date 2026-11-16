@@ -102,9 +102,6 @@ bool Application::OnInit()
     Application::self = this;
 
     // Попытка отключить предупреждения вида "Gtk-WARNING"
-    wxLog::SetActiveTarget(new NullLog());
-
-    // Попытка отключить предупреждения вида "Gtk-WARNING"
     // Устанавливаем переменные окружения для GTK (для Linux)
 #ifndef __WXMSW__
     g_log_set_handler(NULL, (GLogLevelFlags)(G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL),
@@ -132,7 +129,15 @@ bool Application::OnInit()
     setenv("NO_AT_BRIDGE", "1", 1);
 #endif
 
-    std::locale::global(std::locale(""));  // Установка системной локали
+    try
+    {
+        std::locale::global(std::locale(""));  // Установка системной локали
+    }
+    catch (const std::exception &)
+    {
+        // fallback: остаёмся на классической локали
+    }
+
     setlocale(LC_ALL, "");
 
     if (!wxApp::OnInit())
@@ -174,7 +179,10 @@ bool Application::OnInit()
     // create and show the main application window
     new MainWindow(L("ИППП 4"));
 
-    timer.SetOwner(this, timer.GetId());
+    enum {
+        ID_APP_TIMER = wxID_HIGHEST + 1
+    };
+    timer.SetOwner(this, ID_APP_TIMER);
 
     if (!UART::IsAvailability())
     {
@@ -234,28 +242,32 @@ bool Application::OnInit()
         {
             static std::mutex mutex;
 
-            if (mutex.try_lock())
+            std::unique_lock<std::mutex> lock(mutex, std::try_to_lock);
+
+            if (!lock.owns_lock())
             {
+                return;
+            }
+
 #ifndef _WIN32
-                int sig = g_signal_received;
-                if (sig != 0)
-                {
-                    g_signal_received = 0;
-                    LOG_WRITE("Received signal %d, closing", sig);
-                    CloseApplication();   // ← безопасно: в главном потоке
-                }
+            int sig = g_signal_received;
+            if (sig != 0)
+            {
+                g_signal_received = 0;
+                LOG_WRITE("Received signal %d, closing", sig);
+                CloseApplication();   // ← безопасно: в главном потоке
+            }
 #endif
 
-                IDevice::impl->ApplicationTask();
+            IDevice::impl->ApplicationTask();
 
-                Log::PeriodicTask();
+            Log::PeriodicTask();
 
-                PageDebug::self->PeriodicTask();
+            PageDebug::self->PeriodicTask();
 
-                mutex.unlock();
-            };
+            mutex.unlock();
 
-        }, timer.GetId());
+        }, ID_APP_TIMER);
 
 
     loggerHTTP.Connect();
