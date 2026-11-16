@@ -60,18 +60,6 @@ static void CloseApplication()
 #endif
 
 
-class NullLog : public wxLog
-{
-public:
-    virtual void DoLogRecord(wxLogLevel,
-        const wxString &,
-        const wxLogRecordInfo &) override
-    {
-        // Ничего не делаем - просто игнорируем все логи
-    }
-};
-
-
 #ifndef _WIN32
 // Функция-фильтр для логов
 void glib_log_filter(const gchar *log_domain,
@@ -188,7 +176,7 @@ bool Application::OnInit()
     {
         wxString message = wxString::Format(L("Устройство UART %s не обнаружено."), wxString(UART_DEVICE).c_str());
 
-        LOG_ERROR(message.ToUTF8().data());
+        LOG_ERROR("%s", message.ToUTF8().data());
 
         AutoRebootDialog dialog(MainWindow::self, message, 10, []
             {
@@ -263,9 +251,10 @@ bool Application::OnInit()
 
             Log::PeriodicTask();
 
-            PageDebug::self->PeriodicTask();
-
-            mutex.unlock();
+            if (PageDebug::self)
+            {
+                PageDebug::self->PeriodicTask();
+            }
 
         }, ID_APP_TIMER);
 
