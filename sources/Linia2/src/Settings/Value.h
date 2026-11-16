@@ -100,7 +100,7 @@ protected:
 
     void Init(const wxString &_key, const T &_default_value)
     {
-        LOG_WRITE("Init %s", _key.AsChar());
+        LOG_WRITE("Init %s", _key.ToUTF8().data());
 
         key = _key;
         default_value = _default_value;
