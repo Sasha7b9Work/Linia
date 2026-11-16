@@ -158,34 +158,6 @@ bool Application::OnInit()
     };
     timer.SetOwner(this, ID_APP_TIMER);
 
-    if (!UART::IsReady())
-    {
-        wxString message = wxString::Format(L("Устройство UART %s не обнаружено."), wxString(UART_DEVICE).c_str());
-
-        LOG_ERROR("%s", message.ToUTF8().data());
-
-        AutoRebootDialog dialog(MainWindow::self, message, 10, []
-            {
-                IGNORE_RESULT(std::system("shutdown -r now"));
-            });
-
-        dialog.ShowModal();
-    }
-
-    if (!SPI::IsReady())
-    {
-        wxString message = wxString::Format(L("Устройство SPI %s не обнаружено."), wxString(SPI_DEVICE).c_str());
-
-        LOG_ERROR("%s", message.ToUTF8().data());
-
-        AutoRebootDialog dialog(MainWindow::self, message, 10, []
-            {
-                IGNORE_RESULT(std::system("shutdown -r now"));
-            });
-
-        dialog.ShowModal();
-    }
-
     timer.Start(10);
 
     if (!SoftTests::RunAll())
@@ -276,6 +248,34 @@ bool Application::OnInit()
 #endif
 
     IDevice::impl->Init();
+
+    if (!UART::IsReady())
+    {
+        wxString message = wxString::Format(L("Устройство UART %s не обнаружено."), wxString(UART_DEVICE).c_str());
+
+        LOG_ERROR("%s", message.ToUTF8().data());
+
+        AutoRebootDialog dialog(MainWindow::self, message, 10, []
+            {
+                IGNORE_RESULT(std::system("shutdown -r now"));
+            });
+
+        dialog.ShowModal();
+    }
+
+    if (!SPI::IsReady())
+    {
+        wxString message = wxString::Format(L("Устройство SPI %s не обнаружено."), wxString(SPI_DEVICE).c_str());
+
+        LOG_ERROR("%s", message.ToUTF8().data());
+
+        AutoRebootDialog dialog(MainWindow::self, message, 10, []
+            {
+                IGNORE_RESULT(std::system("shutdown -r now"));
+            });
+
+        dialog.ShowModal();
+    }
 
     IDevice::impl->SendCommand(":INFO");
 
