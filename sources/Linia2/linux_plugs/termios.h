@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 
 
 #ifdef _WIN32
@@ -54,11 +54,11 @@ typedef unsigned int speed_t;
 
 struct termios
 {
-    tcflag_t c_iflag;  // Input modes (флаги ввода)
-    tcflag_t c_oflag;  // Output modes (флаги вывода)
-    tcflag_t c_cflag;  // Control modes (управляющие флаги)
-    tcflag_t c_lflag;  // Local modes (локальные флаги)
-    cc_t     c_cc[NCCS]; // Control characters (управляющие символы)
+    tcflag_t c_iflag;  // Input modes (С„Р»Р°РіРё РІРІРѕРґР°)
+    tcflag_t c_oflag;  // Output modes (С„Р»Р°РіРё РІС‹РІРѕРґР°)
+    tcflag_t c_cflag;  // Control modes (СѓРїСЂР°РІР»СЏСЋС‰РёРµ С„Р»Р°РіРё)
+    tcflag_t c_lflag;  // Local modes (Р»РѕРєР°Р»СЊРЅС‹Рµ С„Р»Р°РіРё)
+    cc_t     c_cc[NCCS]; // Control characters (СѓРїСЂР°РІР»СЏСЋС‰РёРµ СЃРёРјРІРѕР»С‹)
 };
 
 int tcflush(int fd, int queue_selector);

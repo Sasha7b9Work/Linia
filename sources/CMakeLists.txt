@@ -50,13 +50,15 @@ else()
 endif()
 
 
-#add_subdirectory(Linia)
-add_subdirectory(Linia2)
-add_subdirectory(ServerHTTP)
-
 if(WIN32)
     add_subdirectory(Device)
     add_subdirectory(Loader)
 else()
 endif()
 
+if(WIN32)
+    add_compile_options(/utf-8)
+endif()
+
+add_subdirectory(Linia2)
+add_subdirectory(ServerHTTP)

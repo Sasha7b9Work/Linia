@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 
 
 #ifndef ARM64
@@ -11,16 +11,16 @@
 
 struct spi_ioc_transfer
 {
-    unsigned long long tx_buf;              // Указатель на данные для передачи
-    unsigned long long rx_buf;              // Указатель на буфер для приёма
-    unsigned int len;                 // Длина данных в байтах
-    unsigned int speed_hz;            // Скорость передачи (можно переопределить)
-    unsigned short delay_usecs;         // Задержка после передачи
-    unsigned char bits_per_word;        // Битов на слово (можно переопределить)
-    unsigned char cs_change;            // Изменение состояния chip select
-//    __u8 tx_nbits;             // Количество линий для передачи (для dual/quad SPI)
-//    __u8 rx_nbits;             // Количество линий для приёма (для dual/quad SPI)
-//    __u8 pad;                  // Выравнивание
+    unsigned long long tx_buf;        // РЈРєР°Р·Р°С‚РµР»СЊ РЅР° РґР°РЅРЅС‹Рµ РґР»СЏ РїРµСЂРµРґР°С‡Рё
+    unsigned long long rx_buf;        // РЈРєР°Р·Р°С‚РµР»СЊ РЅР° Р±СѓС„РµСЂ РґР»СЏ РїСЂРёС‘РјР°
+    unsigned int len;                 // Р”Р»РёРЅР° РґР°РЅРЅС‹С… РІ Р±Р°Р№С‚Р°С…
+    unsigned int speed_hz;            // РЎРєРѕСЂРѕСЃС‚СЊ РїРµСЂРµРґР°С‡Рё (РјРѕР¶РЅРѕ РїРµСЂРµРѕРїСЂРµРґРµР»РёС‚СЊ)
+    unsigned short delay_usecs;       // Р—Р°РґРµСЂР¶РєР° РїРѕСЃР»Рµ РїРµСЂРµРґР°С‡Рё
+    unsigned char bits_per_word;      // Р‘РёС‚РѕРІ РЅР° СЃР»РѕРІРѕ (РјРѕР¶РЅРѕ РїРµСЂРµРѕРїСЂРµРґРµР»РёС‚СЊ)
+    unsigned char cs_change;          // РР·РјРµРЅРµРЅРёРµ СЃРѕСЃС‚РѕСЏРЅРёСЏ chip select
+//    __u8 tx_nbits;             // РљРѕР»РёС‡РµСЃС‚РІРѕ Р»РёРЅРёР№ РґР»СЏ РїРµСЂРµРґР°С‡Рё (РґР»СЏ dual/quad SPI)
+//    __u8 rx_nbits;             // РљРѕР»РёС‡РµСЃС‚РІРѕ Р»РёРЅРёР№ РґР»СЏ РїСЂРёС‘РјР° (РґР»СЏ dual/quad SPI)
+//    __u8 pad;                  // Р’С‹СЂР°РІРЅРёРІР°РЅРёРµ
 };
 
 #endif
