@@ -62,26 +62,34 @@ static void CloseApplication()
 
 #ifndef _WIN32
 // Функция подавления определённых сообщений
-static void GtkSpecificLogFilter(const gchar *log_domain,
-    GLogLevelFlags log_level,
-    const gchar *message,
+static GLogWriterOutput MyLogWriter(GLogLevelFlags log_level,
+    const GLogField *fields,
+    gsize n_fields,
     gpointer user_data)
 {
-    // Проверяем, является ли сообщение тем самым "критическим" из GtkCheckButton
-    if (log_domain && g_strcmp0(log_domain, "Gtk") == 0 &&
-        (log_level & G_LOG_LEVEL_CRITICAL))
+    const gchar *message = nullptr;
+    const gchar *domain = nullptr;
+
+    // Извлекаем поля из структуры
+    for (gsize i = 0; i < n_fields; ++i)
     {
-        if (message &&
-            strstr(message, "gtk_box_gadget_distribute:") != nullptr &&
-            strstr(message, "GtkCheckButton") != nullptr)
-        {
-            return;     // Подавляем сообщения, где есть и gtk_box_gadget_distribute и GtkCheckButton
-        }
+        if (g_strcmp0(fields[i].key, "MESSAGE") == 0)
+            message = (const gchar *)fields[i].value;
+        else if (g_strcmp0(fields[i].key, "GLIB_DOMAIN") == 0)
+            domain = (const gchar *)fields[i].value;
     }
 
-    // Все остальные сообщения (включая другие CRITICAL из Gtk) передаем
-    // стандартному обработчику для вывода.
-    g_log_default_handler(log_domain, log_level, message, user_data);
+    // Ваш фильтр: подавляем конкретное сообщение
+    if (domain && g_strcmp0(domain, "Gtk") == 0 &&
+        message &&
+        strstr(message, "gtk_box_gadget_distribute:") != nullptr &&
+        strstr(message, "GtkCheckButton") != nullptr)
+    {
+        return G_LOG_WRITER_HANDLED; // Сообщение обработано (проигнорировано)
+    }
+
+    // Все остальные сообщения передаем стандартному обработчику
+    return g_log_writer_default(log_level, fields, n_fields, user_data);
 }
 #endif
 
@@ -91,10 +99,7 @@ bool Application::OnInit()
     Application::self = this;
 
 #ifndef __WXMSW__
-    g_log_set_handler("Gtk",
-        (GLogLevelFlags)(G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION),
-        (GLogFunc)GtkSpecificLogFilter,
-        NULL);
+    g_log_set_writer_func(MyLogWriter, NULL, NULL);
 #endif
 
     try
