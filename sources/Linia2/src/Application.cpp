@@ -142,8 +142,10 @@ bool Application::OnInit()
 
 #ifndef __WXMSW__
     // Включаем отображение иконок в контекстных меню GTK3
-    GtkSettings *settings = gtk_settings_get_default();
-    g_object_set(settings, "gtk-menu-images", TRUE, NULL);
+    if (GtkSettings *settings = gtk_settings_get_default())
+    {
+        g_object_set(settings, "gtk-menu-images", TRUE, NULL);
+    }
 #endif
 
     SET::Init();
@@ -162,6 +164,12 @@ bool Application::OnInit()
     Chip::Init();
 
     IDevice::impl = IDevice::Create();
+
+    if (!IDevice::impl)
+    {
+        wxMessageBox(L("Не удалось создать устройство"), L("Ошибка"), wxOK | wxICON_ERROR);
+        return false;
+    }
 
     // create and show the main application window
     new MainWindow(L("ИППП 4"));
@@ -291,7 +299,10 @@ int Application::OnExit()
 {
     timer.Stop();
 
-    IDevice::impl->DeInit();
+    if (IDevice::impl)
+    {
+        IDevice::impl->DeInit();
+    }
 
     if (MainWindow::self)
     {
