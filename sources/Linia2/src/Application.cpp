@@ -303,6 +303,7 @@ int Application::OnExit()
     if (IDevice::impl)
     {
         IDevice::impl->DeInit();
+        IDevice::impl = nullptr;
     }
 
     if (MainWindow::self)

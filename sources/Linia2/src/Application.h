@@ -24,9 +24,9 @@ private:
 
     virtual int OnExit() wxOVERRIDE;
 
+#ifndef _WIN32
+
     static void SignalHandler(int sig);
 
-public:
-
-    void ReInit();
+#endif
 };
