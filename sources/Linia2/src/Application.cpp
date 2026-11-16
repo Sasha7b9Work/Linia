@@ -61,25 +61,25 @@ static void CloseApplication()
 
 
 #ifndef _WIN32
-// Функция-фильтр для логов
-void glib_log_filter(const gchar *log_domain,
+static void GtkSpecificLogFilter(const gchar *log_domain,
     GLogLevelFlags log_level,
     const gchar *message,
     gpointer user_data)
 {
-    // Игнорируем всё, что содержит "Gtk" или является предупреждением/критикой
-    if (log_domain && (g_strcmp0(log_domain, "Gtk") == 0 ||
-        g_strcmp0(log_domain, "Gtk-WARNING") == 0))
+    // Проверяем, является ли сообщение тем самым "критическим" из GtkCheckButton
+    if (log_domain && g_strcmp0(log_domain, "Gtk") == 0 &&
+        (log_level & G_LOG_LEVEL_CRITICAL))
     {
-        return; // Полностью подавляем
+        if (message &&
+            strstr(message, "gtk_box_gadget_distribute") != nullptr &&
+            strstr(message, "GtkCheckButton") != nullptr)
+        {
+            return;     // Подавляем сообщения, где есть и gtk_box_gadget_distribute и GtkCheckButton
+        }
     }
 
-    // Если нужно подавить только WARNING и CRITICAL, раскомментируйте следующее:
-    // if (log_level & (G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL)) {
-    //     return;
-    // }
-
-    // Для всех остальных сообщений — стандартный вывод
+    // Все остальные сообщения (включая другие CRITICAL из Gtk) передаем
+    // стандартному обработчику для вывода.
     g_log_default_handler(log_domain, log_level, message, user_data);
 }
 #endif
@@ -90,31 +90,10 @@ bool Application::OnInit()
     Application::self = this;
 
 #ifndef __WXMSW__
-//    // Попытка отключить предупреждения вида "Gtk-WARNING"
-//    // Устанавливаем переменные окружения для GTK (для Linux)
-//    g_log_set_handler(NULL, (GLogLevelFlags)(G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL),
-//        [](const gchar *log_domain, GLogLevelFlags level, const gchar *message, gpointer user_data)
-//        {
-//            (void)log_domain;
-//            (void)level;
-//            (void)message;
-//            (void)user_data;
-//            // Игнорируем предупреждения
-//        }, NULL);
-//
-//    // Устанавливаем обработчик для доменов Gtk и GLib-GObject
-//    g_log_set_handler("Gtk",
-//        (GLogLevelFlags)(G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION),
-//        (GLogFunc)glib_log_filter,
-//        NULL);
-//    g_log_set_handler("GLib-GObject",
-//        (GLogLevelFlags)(G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION),
-//        (GLogFunc)glib_log_filter,
-//        NULL);
-//
-//    setenv("G_MESSAGES_DEBUG", "0", 1);
-//    setenv("GTK_DEBUG", "0", 1);
-//    setenv("NO_AT_BRIDGE", "1", 1);
+    g_log_set_handler("Gtk",
+        (GLogLevelFlags)(G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION),
+        (GLogFunc)GtkSpecificLogFilter,
+        NULL);
 #endif
 
     try
