@@ -61,6 +61,7 @@ static void CloseApplication()
 
 
 #ifndef _WIN32
+// Функция подавления определённых сообщений
 static void GtkSpecificLogFilter(const gchar *log_domain,
     GLogLevelFlags log_level,
     const gchar *message,
@@ -71,7 +72,7 @@ static void GtkSpecificLogFilter(const gchar *log_domain,
         (log_level & G_LOG_LEVEL_CRITICAL))
     {
         if (message &&
-            strstr(message, "gtk_box_gadget_distribute") != nullptr &&
+            strstr(message, "gtk_box_gadget_distribute:") != nullptr &&
             strstr(message, "GtkCheckButton") != nullptr)
         {
             return;     // Подавляем сообщения, где есть и gtk_box_gadget_distribute и GtkCheckButton
