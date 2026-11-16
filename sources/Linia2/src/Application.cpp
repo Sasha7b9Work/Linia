@@ -178,7 +178,7 @@ bool Application::OnInit()
 
     if (!UART::IsAvailability())
     {
-        wxString message = wxString::Format(L("Устройство UART %s не обнаружено."), UART_DEVICE);
+        wxString message = wxString::Format(L("Устройство UART %s не обнаружено."), wxString(UART_DEVICE).c_str());
 
         LOG_ERROR(message.mb_str());
 
