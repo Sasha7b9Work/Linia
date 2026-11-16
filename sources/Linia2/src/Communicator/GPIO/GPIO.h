@@ -38,6 +38,9 @@ public:
 namespace GPIO
 {
     void Init();
+
+    bool IsReady();
+
     void DeInit();
 
     PinInfo *GetPinInfo(Pin::Num);

@@ -64,9 +64,13 @@ namespace GPIO
 
 namespace GPIO
 {
+    static bool is_ready = false;
+
     void Init()
     {
         LOG_WRITE("Initializing GPIO...");
+
+        is_ready = true;
 
         for (size_t i = 0; i < PINS_COUNT; i++)
         {
@@ -78,6 +82,7 @@ namespace GPIO
                 if (!info.hw.chip)
                 {
                     LOG_ERROR("Cannot open GPIO chip %s, pin_num %d, pin_logical %d", info.hw.chip_name, (int)info.pin_num, info.hw.pin_logical);
+                    is_ready = false;
                     continue;
                 }
 
@@ -87,6 +92,7 @@ namespace GPIO
                     LOG_ERROR("Cannot get GPIO line %d", info.hw.pin_logical);
                     gpiod_chip_close(info.hw.chip);
                     info.hw.chip = nullptr;
+                    is_ready = false;
                     continue;
                 }
 
@@ -98,6 +104,7 @@ namespace GPIO
                     gpiod_chip_close(info.hw.chip);
                     info.hw.chip = nullptr;
                     info.hw.line = nullptr;
+                    is_ready = false;
                     continue;
                 }
 
@@ -111,6 +118,7 @@ namespace GPIO
                 if (!info.hw.chip)
                 {
                     LOG_ERROR("Cannot open GPIO chip %s pin_num %d", info.hw.chip_name, (int)info.pin_num);
+                    is_ready = false;
                     continue;
                 }
 
@@ -120,6 +128,7 @@ namespace GPIO
                     LOG_ERROR("Cannot get GPIO line for pin %d", info.hw.pin_logical);
                     gpiod_chip_close(info.hw.chip);
                     info.hw.chip = nullptr;
+                    is_ready = false;
                     continue;
                 }
 
@@ -130,6 +139,7 @@ namespace GPIO
                     gpiod_chip_close(info.hw.chip);
                     info.hw.chip = nullptr;
                     info.hw.line = nullptr;
+                    is_ready = false;
                     continue;
                 }
 
@@ -137,6 +147,13 @@ namespace GPIO
             }
         }
     }
+
+
+    bool IsReady()
+    {
+        return is_ready;
+    }
+
 
     void DeInit()
     {

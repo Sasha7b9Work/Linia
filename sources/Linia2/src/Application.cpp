@@ -5,6 +5,7 @@
 #include "MainWindow.h"
 #include "Communicator/UART/UART.h"
 #include "Communicator/SPI/SPI.h"
+#include "Communicator/GPIO/GPIO.h"
 #include "GUI/Dialogs/AutoRebootDialog.h"
 #include "SoftTests/SoftTests.h"
 #include "IPPP/Real/Chips.h"
@@ -248,6 +249,20 @@ bool Application::OnInit()
 #endif
 
     IDevice::impl->Init();
+
+    if (!GPIO::IsReady())
+    {
+        wxString message = wxString::Format(L("GPIO не инициализированы."), wxString(SPI_DEVICE).c_str());
+
+        LOG_ERROR("%s", message.ToUTF8().data());
+
+        AutoRebootDialog dialog(MainWindow::self, message, 10, []
+            {
+                IGNORE_RESULT(std::system("shutdown -r now"));
+            });
+
+        dialog.ShowModal();
+    }
 
     if (!UART::IsReady())
     {
