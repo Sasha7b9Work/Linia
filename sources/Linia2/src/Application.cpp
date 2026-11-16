@@ -79,13 +79,12 @@ static GLogWriterOutput MyLogWriter(GLogLevelFlags log_level,
             domain = (const gchar *)fields[i].value;
     }
 
-    // Ваш фильтр: подавляем конкретное сообщение
     if (domain && g_strcmp0(domain, "Gtk") == 0 &&
         message &&
         strstr(message, "gtk_box_gadget_distribute:") != nullptr &&
         strstr(message, "GtkCheckButton") != nullptr)
     {
-        return G_LOG_WRITER_HANDLED; // Сообщение обработано (проигнорировано)
+        return G_LOG_WRITER_HANDLED;        // Подавляются сообщения, где содержатся gtk_box_gadget_distribute: и GtkCheckButton
     }
 
     // Все остальные сообщения передаем стандартному обработчику
