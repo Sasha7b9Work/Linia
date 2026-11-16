@@ -17,28 +17,6 @@ Dialog::Dialog(const wxString &_title, const wxPoint &_pos, const wxSize &_size)
 }
 
 
-int Dialog::CreateLabelGroup(wxWindow *_parent, int y, const wxString &label)
-{
-    y += 15;
-
-    new wxStaticLine(_parent, wxID_ANY, wxDefaultPosition, { 100, -1 }, wxLI_HORIZONTAL);
-
-    y += 7;
-
-    new StaticText(_parent, label);
-
-    return y + 25;
-}
-
-
-int Dialog::CreateRadioButton(wxWindow *_parent, int y, wxRadioButton **rb, const wxString &label)
-{
-    *rb = new wxRadioButton(_parent, wxID_ANY, label);
-
-    return y + 20;
-}
-
-
 void Dialog::ShowOnWindow(wxWindow *window)
 {
     wxSize size = window->GetSize();
@@ -47,15 +25,14 @@ void Dialog::ShowOnWindow(wxWindow *window)
 
     pos -= GetSize() / 2;
 
+    Fit();
+    Layout();
+
     if (GF::IsBoardOPi5Plus())
     {
-
     }
     else
     {
-        Fit();
-        Layout();
-
         int win_bottom = MainWindow::self->GetRect().GetBottom();
         int win_left = MainWindow::self->GetRect().GetLeft();
 

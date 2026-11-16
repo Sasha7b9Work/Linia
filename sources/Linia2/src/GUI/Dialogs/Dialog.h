@@ -13,12 +13,6 @@ public:
 
     void ShowOnWindow(wxWindow *window);
 
-protected:
-
-    int CreateRadioButton(wxWindow *, int y, wxRadioButton **, const wxString &);
-
-    int CreateLabelGroup(wxWindow *, int y, const wxString &);
-
 private:
 
     void OnKeyDown(wxKeyEvent &);
