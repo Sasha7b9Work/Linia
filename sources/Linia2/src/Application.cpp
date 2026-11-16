@@ -32,7 +32,7 @@ Application *Application::self = nullptr;
 
 #ifndef _WIN32
 
-static std::atomic<int> g_signal_received{ 0 };
+static volatile sig_atomic_t g_signal_received = 0;
 
 void Application::SignalHandler(int sig)
 {
@@ -254,7 +254,7 @@ bool Application::OnInit()
 
 #ifdef _WIN32
 #else
-    struct sigaction sa;
+    struct sigaction sa = {};
     sa.sa_handler = &Application::SignalHandler;
     sigemptyset(&sa.sa_mask);
     sa.sa_flags = 0;  // не SA_RESTART — чтобы прервать блокирующие вызовы
