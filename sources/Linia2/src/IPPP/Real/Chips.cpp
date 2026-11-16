@@ -123,11 +123,11 @@ void Chip::WriteValue(uint value) const
         }
     }
 
-    IDevice::impl->SendCommand(":%s:WRITE %X", GetNameDevice().c_str().AsChar(), value); //-V111
+    IDevice::impl->SendCommand(":%s:WRITE %X", GetNameDevice().ToUTF8().data(), value); //-V111
 }
 
 
 void Chip::WriteWidthToDevice() const
 {
-    IDevice::impl->SendCommand(":%s:LENGTH %d", GetNameDevice().c_str().AsChar(), BitDepth()); //-V111
+    IDevice::impl->SendCommand(":%s:LENGTH %d", GetNameDevice().ToUTF8().data(), BitDepth()); //-V111
 }

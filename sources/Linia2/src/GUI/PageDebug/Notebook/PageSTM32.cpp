@@ -99,7 +99,7 @@ void PageSTM32::StartUpgrade(pchar _file_name)
     wxFile file(file_name, wxFile::read);
     if (!file.IsOpened())
     {
-        LOG_ERROR("Can not open file %s", file_name.c_str().AsChar());
+        LOG_ERROR("Can not open file %s", file_name.ToUTF8().data());
 
         return;
     }
@@ -108,7 +108,7 @@ void PageSTM32::StartUpgrade(pchar _file_name)
 
     if (size == (int)wxInvalidOffset)
     {
-        LOG_ERROR("Can not get size file %s", file_name.c_str().AsChar());
+        LOG_ERROR("Can not get size file %s", file_name.ToUTF8().data());
 
         return;
     }

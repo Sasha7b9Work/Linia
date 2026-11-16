@@ -28,7 +28,7 @@ Bitmap::Bitmap(const wxString &file_bitmap)
         }
         else
         {
-            LOG_ERROR(_("Не удалось загрузить файл изображения %s"), file_bitmap.c_str().AsChar());
+            LOG_ERROR("Не удалось загрузить файл изображения %s", file_bitmap.ToUTF8().data());
         }
     }
     else
@@ -41,7 +41,7 @@ Bitmap::Bitmap(const wxString &file_bitmap)
         }
         else
         {
-            LOG_ERROR(_("Не удалось загрузить файл изображения %s"), file_bitmap.c_str().AsChar());
+            LOG_ERROR(_("Не удалось загрузить файл изображения %s"), file_bitmap.ToUTF8().data());
         }
     }
 }
@@ -58,7 +58,7 @@ Bitmap &Bitmap::Get(const wxString &file_name)
 
     if (!result.GetBitmap().IsOk())
     {
-        LOG_ERROR("Can not load image %s", file_name.c_str().AsChar());
+        LOG_ERROR("Can not load image %s", file_name.ToUTF8().data());
     }
 
     return result;

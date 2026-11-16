@@ -1231,7 +1231,7 @@ TypeScan::E Scanner::GetTypeScan()
             }
         }
 
-        LOG_ERROR("Нет названия для типа развёртки \"%s\"", type_scan.c_str().AsChar());
+        LOG_ERROR("Нет названия для типа развёртки \"%s\"", type_scan.ToUTF8().data());
 
         return TypeScan::Count;
     }

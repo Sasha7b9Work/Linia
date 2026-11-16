@@ -326,7 +326,7 @@ void SliderFloat::CalculateValue()
     char format_string[32];
     std::sprintf(format_string, "%%.%df %%s", digitts_after_points);
 
-    text->SetLabel(wxString::Format(format_string, value, units.c_str().AsChar()));
+    text->SetLabel(wxString::Format(format_string, value, units.ToUTF8().data()));
 }
 
 

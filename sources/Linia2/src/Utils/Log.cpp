@@ -59,7 +59,7 @@ void Log::Init()
         }
     }
 
-    LOG_WRITE("Start application %s", wxDateTime::Now().Format("%Y-%m-%d %H:%M:%S").c_str().AsChar());
+    LOG_WRITE("Start application %s", wxDateTime::Now().Format("%Y-%m-%d %H:%M:%S").ToUTF8().data());
 }
 
 
@@ -71,7 +71,7 @@ wxString Log::FileName()
 
 void Log::DeInit()
 {
-    LOG_WRITE("Exit application %s", wxDateTime::Now().Format("%Y-%m-%d %H:%M:%S").c_str().AsChar());
+    LOG_WRITE("Exit application %s", wxDateTime::Now().Format("%Y-%m-%d %H:%M:%S").ToUTF8().data());
 
     std::lock_guard<std::mutex> lock(mutex);
 
@@ -113,7 +113,7 @@ void Log::FromDevice(char *line)
 {
     std::lock_guard<std::mutex> lock(mutex);
 
-    WriteLine((wxString(REVERSE_PROMT) + line).c_str().AsChar());
+    WriteLine((wxString(REVERSE_PROMT) + line).ToUTF8().data());
 }
 
 
@@ -121,7 +121,7 @@ void Log::ToDevice(char *line)
 {
     std::lock_guard<std::mutex> lock(mutex);
 
-    WriteLine((wxString(DIRECT_PROMT) + line).c_str().AsChar());
+    WriteLine((wxString(DIRECT_PROMT) + line).ToUTF8().data());
 }
 
 
@@ -191,7 +191,7 @@ void Log::LogMCU(pchar message)
 
     char buffer[1024];
 
-    std::sprintf(buffer, "%s : %s", GetTime().c_str().AsChar(), message);
+    std::sprintf(buffer, "%s : %s", GetTime().ToUTF8().data(), message);
 
     WriteLine(buffer);
 }

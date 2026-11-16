@@ -268,7 +268,7 @@ void RealDevice::OpenNewBinaryFile()
 
     if (binaryFile.is_open())
     {
-        LOG_WRITE("Created binary file: %s", currentBinaryFileName.c_str().AsChar());
+        LOG_WRITE("Created binary file: %s", currentBinaryFileName.ToUTF8().data());
     }
 }
 
@@ -295,7 +295,7 @@ void RealDevice::OpenNewTextFile()
     if (textFile.is_open())
     {
         textFile << "    CH0    CH1    CH2    CH3   CODE\n";
-        LOG_WRITE("Created text file: %s", currentTextFileName.c_str().AsChar());
+        LOG_WRITE("Created text file: %s", currentTextFileName.ToUTF8().data());
     }
 }
 
@@ -306,7 +306,7 @@ void RealDevice::CloseTextFile()
     {
         textFile.flush();
         textFile.close();
-        LOG_WRITE("Closed text file: %s", currentTextFileName.c_str().AsChar());
+        LOG_WRITE("Closed text file: %s", currentTextFileName.ToUTF8().data());
     }
 }
 
@@ -317,7 +317,7 @@ void RealDevice::CloseBinaryFile()
     {
         binaryFile.flush();
         binaryFile.close();
-        LOG_WRITE("Closed binary file: %s", currentBinaryFileName.c_str().AsChar());
+        LOG_WRITE("Closed binary file: %s", currentBinaryFileName.ToUTF8().data());
     }
 }
 

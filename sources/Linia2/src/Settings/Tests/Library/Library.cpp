@@ -59,7 +59,7 @@ bool Library::ParseCategory(LibraryCategory *library, const wxString &name_categ
 
             if (!ParseNameCategory(library, name_category))
             {
-                LOG_ERROR("Can not parse category %s", name_category.c_str().AsChar());
+                LOG_ERROR("Can not parse category %s", name_category.ToUTF8().data());
 
                 return false;
             }
