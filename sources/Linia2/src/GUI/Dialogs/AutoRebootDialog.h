@@ -5,6 +5,7 @@
 #pragma warning(push, 0)
     #include <wx/sizer.h>
     #include <wx/dialog.h>
+    #include <wx/app.h>
 #pragma warning(pop)
 
 
@@ -49,7 +50,7 @@ public:
                 timer.Stop();
                 Hide();
                 EndModal(wxID_OK);
-                CallAfter(func_on_finish);
+                wxTheApp->CallAfter(func_on_finish);
             });
 
         cancelButton->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
@@ -111,7 +112,7 @@ private:
     {
         Hide();
         EndModal(wxID_OK);
-        CallAfter(func_on_finish);
+        wxTheApp->CallAfter(func_on_finish);
     }
 
 private:
