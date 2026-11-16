@@ -241,7 +241,7 @@ std::string Words::At(int i) const
 {
     if (i < Size())
     {
-        return std::string(words[(uint)i].mb_str());
+        return std::string(words[(uint)i].ToUTF8().data());
     }
 
     static const std::string null;

@@ -180,7 +180,7 @@ bool Application::OnInit()
     {
         wxString message = wxString::Format(L("Устройство UART %s не обнаружено."), wxString(UART_DEVICE).c_str());
 
-        LOG_ERROR(message.mb_str());
+        LOG_ERROR(message.ToUTF8().data());
 
         AutoRebootDialog dialog(MainWindow::self, message, 10, []
             {
@@ -192,7 +192,7 @@ bool Application::OnInit()
 
     if (!SPI::IsAvailability())
     {
-        wxString message = wxString::Format(L("Устройство SPI %s не обнаружено."), SPI_DEVICE);
+        wxString message = wxString::Format(L("Устройство SPI %s не обнаружено."), wxString(SPI_DEVICE).c_str());
 
         LOG_ERROR(message.ToUTF8().data());
 
