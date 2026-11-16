@@ -229,10 +229,10 @@ bool Application::OnInit()
             if (mutex.try_lock())
             {
 #ifndef _WIN32
-                int sig = g_signal_received.load();
+                int sig = g_signal_received;
                 if (sig != 0)
                 {
-                    g_signal_received.store(0);
+                    g_signal_received = 0;
                     LOG_WRITE("Received signal %d, closing", sig);
                     CloseApplication();   // ← безопасно: в главном потоке
                 }
