@@ -14,9 +14,10 @@ public:
     AutoRebootDialog(wxWindow *parent, const wxString &message, int countdownSeconds, void (*_func_on_finish)()) :
         wxDialog(parent, wxID_ANY, "Ошибка", wxDefaultPosition, wxSize(350, 170), wxCAPTION | wxCLOSE_BOX | wxRESIZE_BORDER),
         countdown(countdownSeconds),
-        initialCountdown(countdownSeconds),
         func_on_finish(_func_on_finish)
     {
+        wxASSERT_MSG(func_on_finish, "AutoRebootDialog: callback is required");
+
         wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
 
         // Текст сообщения
@@ -35,36 +36,36 @@ public:
         buttonSizer->Add(okButton, 0, wxALL, 5);
         buttonSizer->Add(cancelButton, 0, wxALL, 5);
 
-        mainSizer->Add(buttonSizer, 10, wxALIGN_CENTER | wxBOTTOM, 20);
+        mainSizer->Add(buttonSizer, 0, wxALIGN_CENTER | wxBOTTOM, 20);
 
         SetSizer(mainSizer);
-        wxWindowBase::Centre();
+        CentreOnParent();
 
-        // Настройка таймера
-        timer = new wxTimer(this, wxID_ANY);
-        timer->Start(1000); // Таймер срабатывает каждую секунду
+        timer.Start(1000); // Таймер срабатывает каждую секунду
 
         // Привязка событий кнопок
         okButton->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
             {
-                timer->Stop();
+                timer.Stop();
+                Hide();
                 EndModal(wxID_OK);
-                func_on_finish();
+                CallAfter(func_on_finish);
             });
 
         cancelButton->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
             {
-                timer->Stop();
+                timer.Stop();
+                Hide();
                 EndModal(wxID_CANCEL);
             });
 
-        Bind(wxEVT_TIMER, [this](wxTimerEvent &)
+        timer.Bind(wxEVT_TIMER, [this](wxTimerEvent &)
             {
                 countdown--;
 
                 if (countdown <= 0)
                 {
-                    timer->Stop();
+                    timer.Stop();
                     // Выполняем действие по достижении нуля
                     OnCountdownFinished();
                 }
@@ -75,24 +76,42 @@ public:
                     Layout();
                 }
             });
+
+        Bind(wxEVT_CLOSE_WINDOW, [this](wxCloseEvent &e)
+            {
+                timer.Stop();
+                Hide();
+                e.Skip();
+            });
+
+        // Закрытие по кнопке Esc
+        Bind(wxEVT_CHAR_HOOK, [this](wxKeyEvent &e)
+            {
+                if (e.GetKeyCode() == WXK_ESCAPE)
+                {
+                    timer.Stop();
+                    Hide();
+                    EndModal(wxID_CANCEL);
+                }
+                else
+                {
+                    e.Skip();
+                }
+            });
     }
 
     ~AutoRebootDialog()
     {
-        if (timer && timer->IsRunning())
-        {
-            timer->Stop();
-        }
+        timer.Stop();
     }
 
 private:
 
     void OnCountdownFinished()
     {
-        // Закрываем диалог с кодом OK
+        Hide();
         EndModal(wxID_OK);
-
-        func_on_finish();
+        CallAfter(func_on_finish);
     }
 
 private:
@@ -100,8 +119,7 @@ private:
     StaticText   *countdownText;
     Button       *okButton;
     Button       *cancelButton;
-    wxTimer      *timer;
+    wxTimer timer{ this, wxID_ANY };
     int           countdown;
-    int           initialCountdown;
     void (*func_on_finish)() = nullptr;
 };
