@@ -259,16 +259,6 @@ bool SPI::IsReady()
 }
 
 
-bool SPI::IsAvailability()
-{
-#ifdef ARM64
-    return std::filesystem::exists(SPI_DEVICE);
-#else
-    return true;
-#endif
-}
-
-
 #ifdef _WIN32
 #pragma warning(pop)
 #endif

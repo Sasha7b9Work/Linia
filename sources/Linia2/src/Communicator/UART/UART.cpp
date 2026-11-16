@@ -44,7 +44,6 @@ namespace UART
     static bool ConfigurePort();
     static bool Open();
     static void Close();
-    static bool IsReady();
 
     // Функция потока чтения UART
     // Читает данные из UART и вызывает recv_callback для каждого принятого байта
@@ -380,16 +379,6 @@ void *UART::ReaderThreadFunc(void *)
     }
 
     return nullptr;
-}
-
-
-bool UART::IsAvailability()
-{
-#ifdef ARM64
-    return std::filesystem::exists(UART_DEVICE);
-#else
-    return true;
-#endif
 }
 
 

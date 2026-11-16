@@ -158,7 +158,7 @@ bool Application::OnInit()
     };
     timer.SetOwner(this, ID_APP_TIMER);
 
-    if (!UART::IsAvailability())
+    if (!UART::IsReady())
     {
         wxString message = wxString::Format(L("Устройство UART %s не обнаружено."), wxString(UART_DEVICE).c_str());
 
@@ -172,7 +172,7 @@ bool Application::OnInit()
         dialog.ShowModal();
     }
 
-    if (!SPI::IsAvailability())
+    if (!SPI::IsReady())
     {
         wxString message = wxString::Format(L("Устройство SPI %s не обнаружено."), wxString(SPI_DEVICE).c_str());
 
