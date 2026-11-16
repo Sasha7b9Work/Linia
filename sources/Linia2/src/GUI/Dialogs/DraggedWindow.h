@@ -16,6 +16,9 @@ public:
     virtual bool Show(bool = true) override;
 
     void SetSize(const wxSize &);
+    void SetSize(int x, int y, int width, int height, int sizeFlags = wxSIZE_AUTO) = delete;
+    void SetSize(const wxRect &) = delete;
+    void SetInitialSize(const wxSize & = wxDefaultSize) = delete;
 
 protected:
 
@@ -33,6 +36,8 @@ protected:
     {
         return main_panel;
     }
+
+    virtual void DoSetSize(int x, int y, int width, int height, int sizeFlags) override;
 
 private:
 

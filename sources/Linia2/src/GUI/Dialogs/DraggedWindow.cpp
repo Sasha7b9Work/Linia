@@ -73,6 +73,38 @@ void DraggedWindow::SetSize(const wxSize &_size)
 }
 
 
+void DraggedWindow::DoSetSize(int x, int y, int width, int height, int sizeFlags)
+{
+    // 1. Вызываем базовую реализацию, чтобы фрейм изменил свой размер.
+    //    Передаём туда height БЕЗ высоты заголовка — фрейм должен стать ровно таким,
+    //    каким его просят, а панель мы подгоним сами.
+    wxFrame::DoSetSize(x, y, width, height, sizeFlags);
+
+    // 2. Синхронизируем панель с учётом заголовка.
+    //    Используем GetClientSize(), чтобы узнать актуальную клиентскую область фрейма
+    //    (она может отличаться от запрошенной height из-за рамок/бордюров).
+    int clientWidth, clientHeight;
+    GetClientSize(&clientWidth, &clientHeight);
+
+    // Панель должна занимать всю клиентскую область, кроме полосы заголовка сверху.
+    const int panelHeight = clientHeight - titleHeight;
+
+    // 3. Устанавливаем размеры панели.
+    //    Важно: используем wxWindow::SetSize (или main_panel->SetSize), а НЕ this->SetSize,
+    //    чтобы не вызвать рекурсию.
+    if (panelHeight > 0 && clientWidth > 0)
+    {
+        main_panel->SetSize(0, titleHeight, clientWidth, panelHeight);
+    }
+    else
+    {
+        // Защита от «схлопывания» окна до нуля или отрицательных значений.
+        // Можно просто не трогать панель или задать минимально разумные размеры.
+        main_panel->SetSize(0, titleHeight, std::max(clientWidth, 1), 1);
+    }
+}
+
+
 void DraggedWindow::SetupDragging(wxWindow *window)
 {
     window->Bind(wxEVT_LEFT_DOWN, &DraggedWindow::OnEventMouseLeftDown, this);
@@ -105,9 +137,7 @@ void DraggedWindow::OnEventClose(wxCloseEvent &event)
 {
     position->Set(wxFrame::GetPosition());
 
-    Destroy();
-
-    event.Skip();
+    event.Skip();       // Destroy() вызывается автоматически
 }
 
 
