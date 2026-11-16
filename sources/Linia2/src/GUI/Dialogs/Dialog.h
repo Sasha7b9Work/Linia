@@ -11,8 +11,6 @@ public:
 
     Dialog(const wxString &, const wxPoint & = wxDefaultPosition, const wxSize &size = wxDefaultSize);
 
-    void ShowOnWindow(wxWindow *window);
-
 private:
 
     void OnKeyDown(wxKeyEvent &);
