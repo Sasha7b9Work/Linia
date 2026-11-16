@@ -190,7 +190,7 @@ bool Application::OnInit()
     {
         wxString message = wxString::Format(L("Устройство SPI %s не обнаружено."), wxString(SPI_DEVICE).c_str());
 
-        LOG_ERROR(message.ToUTF8().data());
+        LOG_ERROR("%s", message.ToUTF8().data());
 
         AutoRebootDialog dialog(MainWindow::self, message, 10, []
             {
@@ -205,7 +205,7 @@ bool Application::OnInit()
     if (!SoftTests::RunAll())
     {
         wxMessageBox(wxString::Format(L("Во время выполнения тестов произошли ошибки.\nДополнительная информация в файле %s."),
-            Log::FileName().ToUTF8().data()), L("Ошибка"), wxOK | wxCENTRE | wxICON_ERROR);
+            Log::FileName().wc_str()), L("Ошибка"), wxOK | wxCENTRE | wxICON_ERROR);
     }
 
 #ifdef _WIN32
