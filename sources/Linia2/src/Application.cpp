@@ -89,32 +89,32 @@ bool Application::OnInit()
 {
     Application::self = this;
 
-    // Попытка отключить предупреждения вида "Gtk-WARNING"
-    // Устанавливаем переменные окружения для GTK (для Linux)
 #ifndef __WXMSW__
-    g_log_set_handler(NULL, (GLogLevelFlags)(G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL),
-        [](const gchar *log_domain, GLogLevelFlags level, const gchar *message, gpointer user_data)
-        {
-            (void)log_domain;
-            (void)level;
-            (void)message;
-            (void)user_data;
-            // Игнорируем предупреждения
-        }, NULL);
-
-    // Устанавливаем обработчик для доменов Gtk и GLib-GObject
-    g_log_set_handler("Gtk",
-        (GLogLevelFlags)(G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION),
-        (GLogFunc)glib_log_filter,
-        NULL);
-    g_log_set_handler("GLib-GObject",
-        (GLogLevelFlags)(G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION),
-        (GLogFunc)glib_log_filter,
-        NULL);
-
-    setenv("G_MESSAGES_DEBUG", "0", 1);
-    setenv("GTK_DEBUG", "0", 1);
-    setenv("NO_AT_BRIDGE", "1", 1);
+//    // Попытка отключить предупреждения вида "Gtk-WARNING"
+//    // Устанавливаем переменные окружения для GTK (для Linux)
+//    g_log_set_handler(NULL, (GLogLevelFlags)(G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL),
+//        [](const gchar *log_domain, GLogLevelFlags level, const gchar *message, gpointer user_data)
+//        {
+//            (void)log_domain;
+//            (void)level;
+//            (void)message;
+//            (void)user_data;
+//            // Игнорируем предупреждения
+//        }, NULL);
+//
+//    // Устанавливаем обработчик для доменов Gtk и GLib-GObject
+//    g_log_set_handler("Gtk",
+//        (GLogLevelFlags)(G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION),
+//        (GLogFunc)glib_log_filter,
+//        NULL);
+//    g_log_set_handler("GLib-GObject",
+//        (GLogLevelFlags)(G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION),
+//        (GLogFunc)glib_log_filter,
+//        NULL);
+//
+//    setenv("G_MESSAGES_DEBUG", "0", 1);
+//    setenv("GTK_DEBUG", "0", 1);
+//    setenv("NO_AT_BRIDGE", "1", 1);
 #endif
 
     try
@@ -161,6 +161,8 @@ bool Application::OnInit()
     if (!IDevice::impl)
     {
         wxMessageBox(L("Не удалось создать устройство"), L("Ошибка"), wxOK | wxICON_ERROR);
+        Log::DeInit();
+        Config::DeInit();
         return false;
     }
 
@@ -243,7 +245,8 @@ bool Application::OnInit()
             {
                 g_signal_received = 0;
                 LOG_WRITE("Received signal %d, closing", sig);
-                CloseApplication();   // ← безопасно: в главном потоке
+                CloseApplication();   // безопасно: в главном потоке
+                return;
             }
 #endif
 
