@@ -48,7 +48,6 @@ public:
         okButton->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
             {
                 timer.Stop();
-                Hide();
                 EndModal(wxID_OK);
                 wxTheApp->CallAfter(func_on_finish);
             });
@@ -56,7 +55,6 @@ public:
         cancelButton->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
             {
                 timer.Stop();
-                Hide();
                 EndModal(wxID_CANCEL);
             });
 
@@ -81,7 +79,6 @@ public:
         Bind(wxEVT_CLOSE_WINDOW, [this](wxCloseEvent &e)
             {
                 timer.Stop();
-                Hide();
                 e.Skip();
             });
 
@@ -91,7 +88,6 @@ public:
                 if (e.GetKeyCode() == WXK_ESCAPE)
                 {
                     timer.Stop();
-                    Hide();
                     EndModal(wxID_CANCEL);
                 }
                 else
@@ -110,7 +106,6 @@ private:
 
     void OnCountdownFinished()
     {
-        Hide();
         EndModal(wxID_OK);
         wxTheApp->CallAfter(func_on_finish);
     }
