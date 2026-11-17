@@ -60,7 +60,7 @@ PageTests::PageTests(Notebook *board) :
 
     LoadStandardLibrary();
 
-    panel_tests->LoadTest(1);
+    panel_tests->LoadTest(0);
 }
 
 
