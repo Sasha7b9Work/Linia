@@ -250,6 +250,20 @@ bool Application::OnInit()
 
     IDevice::impl->Init();
 
+#ifndef _WIN32
+
+    CheckHardwareResourcesAndRebootIfNeed();
+
+#endif
+
+    IDevice::impl->SendCommand(":INFO");
+
+    return true;
+}
+
+
+void Application::CheckHardwareResourcesAndRebootIfNeed()
+{
     if (!GPIO::IsReady())
     {
         wxString message = wxString::Format(L("GPIO не инициализированы."), wxString(SPI_DEVICE).c_str());
@@ -291,10 +305,6 @@ bool Application::OnInit()
 
         dialog.ShowModal();
     }
-
-    IDevice::impl->SendCommand(":INFO");
-
-    return true;
 }
 
 

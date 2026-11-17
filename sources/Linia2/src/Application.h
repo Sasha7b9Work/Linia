@@ -24,6 +24,9 @@ private:
 
     virtual int OnExit() wxOVERRIDE;
 
+    // Проверить доступность аппаратных ресурсов и перезагрузить, если недоступны
+    void CheckHardwareResourcesAndRebootIfNeed();
+
 #ifndef _WIN32
 
     static void SignalHandler(int sig);
