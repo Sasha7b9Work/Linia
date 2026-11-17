@@ -59,6 +59,8 @@ PageTests::PageTests(Notebook *board) :
     Layout();
 
     LoadStandardLibrary();
+
+    panel_library->LoadTest(1);
 }
 
 

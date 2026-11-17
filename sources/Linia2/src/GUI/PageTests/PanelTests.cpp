@@ -4,6 +4,7 @@
 #include "GUI/Controls/Sizers.h"
 #include "Settings/Tests/Library/Library.h"
 #include "GUI/PageTests/PanelViewTest.h"
+#include "Utils/GlobalFunctions.h"
 #pragma warning(push, 0)
     #include <wx/checkbox.h>
     #include <wx/listctrl.h>
@@ -199,4 +200,13 @@ void PanelTests::OnEventLeftClickListItem(wxMouseEvent &event)
     PopupMenu(&menu);
 
     event.Skip();
+}
+
+
+void PanelTests::LoadTest(int number)
+{
+    if (number < listView->GetItemCount())
+    {
+        GF::SendCommandEvent(this, listView->GetId(), wxEVT_LIST_ITEM_RIGHT_CLICK, number);
+    }
 }
