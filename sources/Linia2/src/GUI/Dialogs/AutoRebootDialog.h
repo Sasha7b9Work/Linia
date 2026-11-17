@@ -58,7 +58,7 @@ public:
                 EndModal(wxID_CANCEL);
             });
 
-        timer.Bind(wxEVT_TIMER, [this](wxTimerEvent &)
+        Bind(wxEVT_TIMER, [this](wxTimerEvent &)
             {
                 countdown--;
 
@@ -74,7 +74,7 @@ public:
                     countdownText->SetLabel(wxString::Format(L("Перезагрузка через %d секунд"), countdown));
                     Layout();
                 }
-            });
+            }, timer.GetId());
 
         Bind(wxEVT_CLOSE_WINDOW, [this](wxCloseEvent &e)
             {
