@@ -42,8 +42,6 @@ public:
         SetSizer(mainSizer);
         CentreOnParent();
 
-        timer.Start(1000); // Таймер срабатывает каждую секунду
-
         // Привязка событий кнопок
         okButton->Bind(wxEVT_BUTTON, [this](wxCommandEvent &)
             {
@@ -95,6 +93,8 @@ public:
                     e.Skip();
                 }
             });
+
+        timer.Start(1000);
     }
 
     ~AutoRebootDialog()
