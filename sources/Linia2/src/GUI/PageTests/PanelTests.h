@@ -31,8 +31,8 @@ public:
     // Установить иконку существующему элементу
     void SetItemIcon(long itemIndex, int iconIndex);
 
-    // Загрузить тест с порядковым номером 1, если считать сверху
-    void LoadTest(int number);
+    // Загрузить тест с порядковым номером index, если считать сверху
+    void LoadTest(long index);
 
 private:
 

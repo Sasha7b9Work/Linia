@@ -106,6 +106,19 @@ void PanelTests::BuildListTests(std::vector<const LibraryCategory *> &libraries)
 }
 
 
+void PanelTests::LoadTest(long index)
+{
+    if (index < listView->GetItemCount())
+    {
+        listView->Select(index);
+
+        test = (Test *)listView->GetUserData(index);
+
+        PanelViewTest::self->SetTest(test);
+    }
+}
+
+
 void PanelTests::OnEventRightClickListItem(wxListEvent &event)
 {
     ListView *list = (ListView *)event.GetEventObject();
@@ -200,13 +213,4 @@ void PanelTests::OnEventLeftClickListItem(wxMouseEvent &event)
     PopupMenu(&menu);
 
     event.Skip();
-}
-
-
-void PanelTests::LoadTest(int number)
-{
-    if (number < listView->GetItemCount())
-    {
-        GF::SendCommandEvent(this, listView->GetId(), wxEVT_LIST_ITEM_RIGHT_CLICK, number);
-    }
 }

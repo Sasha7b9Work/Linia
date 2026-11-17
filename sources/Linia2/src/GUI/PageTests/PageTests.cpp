@@ -44,11 +44,11 @@ PageTests::PageTests(Notebook *board) :
 
     panel_category = new PanelCategory(vert_splitter);
 
-    panel_library = new PanelTests(vert_splitter);
+    panel_tests = new PanelTests(vert_splitter);
 
     panel_view_test = new PanelViewTest(hor_splitter);
 
-    vert_splitter->SplitHorizontally(panel_category, panel_library, SETTING(SASH_POSITION_VERTICAL)->GetInt());
+    vert_splitter->SplitHorizontally(panel_category, panel_tests, SETTING(SASH_POSITION_VERTICAL)->GetInt());
 
     hor_splitter->SplitVertically(vert_splitter, panel_view_test, SETTING(SASH_POSITION_HORIZONTAL)->GetInt());
 
@@ -60,7 +60,7 @@ PageTests::PageTests(Notebook *board) :
 
     LoadStandardLibrary();
 
-    panel_library->LoadTest(1);
+    panel_tests->LoadTest(1);
 }
 
 

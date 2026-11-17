@@ -27,7 +27,7 @@ private:
     Splitter *vert_splitter = nullptr;          // Левый сплиттер (верх/низ)
 
     PanelCategory *panel_category = nullptr;
-    PanelTests  *panel_library = nullptr;
+    PanelTests  *panel_tests = nullptr;
     PanelViewTest *panel_view_test = nullptr;
 
     Library library;                            // Здесь находятся тесты, которые можно загрузить
